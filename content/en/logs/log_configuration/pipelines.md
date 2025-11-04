@@ -35,7 +35,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to cloud-based logging environments. To aggregate, process, and route on-premises logs, see <a href="https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/">Observability Pipelines</a>.</div>
+<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to cloud-based logging environments. To aggregate, process, and route on-premises logs, see <a href="https://docs.datadoghq.com/observability_pipelines/configuration/set_up_pipelines/">Observability Pipelines</a>.</div>
 
 Datadog automatically [parses][1] JSON-formatted logs. You can then add value to all your logs (raw and JSON) by sending them through a processing pipeline. Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog. Implementing a log pipelines and processing strategy is beneficial as it introduces an [attribute naming convention][2] for your organization.
 
@@ -58,7 +58,7 @@ For each pipeline, administrators can choose the following edit scopes:
 
 <div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant  the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
 
-You can manage these permissions programmatically through **API and Terraform**.
+You can manage these permissions programmatically through [**API**][14] and **Terraform**.
 
 ## Preprocessing
 
@@ -304,3 +304,4 @@ Estimated usage metrics are displayed for each pipeline. This shows the volume a
 [11]: /integrations/#cat-log-collection
 [12]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [13]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
+[14]: /api/latest/restriction-policies/

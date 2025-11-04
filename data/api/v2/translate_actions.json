@@ -107,17 +107,17 @@
   },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
-    "summary": "List AWS Scan Options"
+    "summary": "List AWS scan options"
   },
   "CreateAwsScanOptions": {
     "description": "Activate Agentless scan options for an AWS account.",
-    "summary": "Post AWS Scan Options",
+    "summary": "Create AWS scan options",
     "request_description": "The definition of the new scan options.",
     "request_schema_description": "Request object that includes the scan options to create."
   },
   "DeleteAwsScanOptions": {
     "description": "Delete Agentless scan options for an AWS account.",
-    "summary": "Delete AWS Scan Options"
+    "summary": "Delete AWS scan options"
   },
   "GetAwsScanOptions": {
     "description": "Fetches the Agentless scan options for an activated account.",
@@ -125,23 +125,23 @@
   },
   "UpdateAwsScanOptions": {
     "description": "Update the Agentless scan options for an activated account.",
-    "summary": "Patch AWS Scan Options",
+    "summary": "Update AWS scan options",
     "request_description": "New definition of the scan options.",
     "request_schema_description": "Request object that includes the scan options to update."
   },
   "ListAzureScanOptions": {
     "description": "Fetches the scan options configured for Azure accounts.",
-    "summary": "List azure scan options"
+    "summary": "List Azure scan options"
   },
   "CreateAzureScanOptions": {
     "description": "Activate Agentless scan options for an Azure subscription.",
-    "summary": "Create azure scan options",
+    "summary": "Create Azure scan options",
     "request_description": "",
     "request_schema_description": "Response object containing Azure scan options for a single subscription."
   },
   "DeleteAzureScanOptions": {
     "description": "Delete Agentless scan options for an Azure subscription.",
-    "summary": "Delete azure scan options"
+    "summary": "Delete Azure scan options"
   },
   "GetAzureScanOptions": {
     "description": "Fetches the Agentless scan options for an activated subscription.",
@@ -149,23 +149,23 @@
   },
   "UpdateAzureScanOptions": {
     "description": "Update the Agentless scan options for an activated subscription.",
-    "summary": "Update azure scan options",
+    "summary": "Update Azure scan options",
     "request_description": "",
     "request_schema_description": "Request object for updating Azure scan options."
   },
   "ListGcpScanOptions": {
     "description": "Fetches the scan options configured for all GCP projects.",
-    "summary": "List GCP Scan Options"
+    "summary": "List GCP scan options"
   },
   "CreateGcpScanOptions": {
     "description": "Activate Agentless scan options for a GCP project.",
-    "summary": "Post GCP Scan Options",
+    "summary": "Create GCP scan options",
     "request_description": "The definition of the new scan options.",
     "request_schema_description": "Response object containing GCP scan options for a single project."
   },
   "DeleteGcpScanOptions": {
     "description": "Delete Agentless scan options for a GCP project.",
-    "summary": "Delete GCP Scan Options"
+    "summary": "Delete GCP scan options"
   },
   "GetGcpScanOptions": {
     "description": "Fetches the Agentless scan options for an activated GCP project.",
@@ -173,23 +173,23 @@
   },
   "UpdateGcpScanOptions": {
     "description": "Update the Agentless scan options for an activated GCP project.",
-    "summary": "Patch GCP Scan Options",
+    "summary": "Update GCP scan options",
     "request_description": "New definition of the scan options.",
     "request_schema_description": "Request object for updating GCP scan options."
   },
   "ListAwsOnDemandTasks": {
     "description": "Fetches the most recent 1000 AWS on demand tasks.",
-    "summary": "Get AWS On Demand tasks"
+    "summary": "List AWS on demand tasks"
   },
   "CreateAwsOnDemandTask": {
     "description": "Trigger the scan of an AWS resource with a high priority. Agentless scanning must be activated for the AWS account containing the resource to scan.",
-    "summary": "Post an AWS on demand task",
+    "summary": "Create AWS on demand task",
     "request_description": "The definition of the on demand task.",
     "request_schema_description": "Request object that includes the on demand task to submit."
   },
   "GetAwsOnDemandTask": {
     "description": "Fetch the data of a specific on demand task.",
-    "summary": "Get AWS On Demand task by id"
+    "summary": "Get AWS on demand task"
   },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
@@ -530,6 +530,9 @@
     "summary": "Create or update entities",
     "request_description": "Entity YAML or JSON.",
     "request_schema_description": "Create or update entity request."
+  },
+  "PreviewCatalogEntities": {
+    "summary": "Preview catalog entities"
   },
   "DeleteCatalogEntity": {
     "description": "Delete a single entity in Software Catalog.",
@@ -976,7 +979,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.",
     "summary": "Post an event",
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
@@ -1190,6 +1193,22 @@
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
     "summary": "List available namespaces"
+  },
+  "DeleteAWSEventBridgeSource": {
+    "description": "Delete an Amazon EventBridge source.",
+    "summary": "Delete an Amazon EventBridge source",
+    "request_description": "Delete the Amazon EventBridge source with the given name, region, and associated AWS account.",
+    "request_schema_description": "Amazon EventBridge delete request body."
+  },
+  "ListAWSEventBridgeSources": {
+    "description": "Get all Amazon EventBridge sources.",
+    "summary": "Get all Amazon EventBridge sources"
+  },
+  "CreateAWSEventBridgeSource": {
+    "description": "Create an Amazon EventBridge source.",
+    "summary": "Create an Amazon EventBridge source",
+    "request_description": "Create an Amazon EventBridge source for an AWS account with a given name and region.",
+    "request_schema_description": "Amazon EventBridge create request body."
   },
   "CreateNewAWSExternalID": {
     "description": "Generate a new external ID for AWS role-based authentication.",
@@ -1973,6 +1992,60 @@
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"
   },
+  "GetAccountFacetInfo": {
+    "description": "Get facet information for account attributes including possible values and counts",
+    "summary": "Get account facet info",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryAccounts": {
+    "description": "Query accounts with flexible filtering by account properties",
+    "summary": "Query accounts",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryEventFilteredUsers": {
+    "description": "Query users filtered by both user properties and event platform data",
+    "summary": "Query event filtered users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetUserFacetInfo": {
+    "description": "Get facet information for user attributes including possible values and counts",
+    "summary": "Get user facet info",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryUsers": {
+    "description": "Query users with flexible filtering by user properties, with optional wildcard search",
+    "summary": "Query users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetMapping": {
+    "description": "Get entity mapping configuration including all available attributes and their properties",
+    "summary": "Get mapping"
+  },
+  "CreateConnection": {
+    "description": "Create a new data connection and its fields for an entity",
+    "summary": "Create connection",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "UpdateConnection": {
+    "description": "Update an existing data connection by adding, updating, or deleting fields",
+    "summary": "Update connection",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteConnection": {
+    "description": "Delete an existing data connection for an entity",
+    "summary": "Delete connection"
+  },
+  "ListConnections": {
+    "description": "List all data connections for an entity",
+    "summary": "List connections"
+  },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
     "summary": "Query scalar data across multiple products",
@@ -2158,7 +2231,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -2815,33 +2888,33 @@
     "description": "Get a hist signal's details.",
     "summary": "Get a hist signal's details"
   },
-  "ListHistoricalJobs": {
-    "description": "List historical jobs.",
-    "summary": "List historical jobs"
+  "ListThreatHuntingJobs": {
+    "description": "List threat hunting jobs.",
+    "summary": "List threat hunting jobs"
   },
-  "RunHistoricalJob": {
-    "description": "Run a historical job.",
-    "summary": "Run a historical job",
+  "RunThreatHuntingJob": {
+    "description": "Run a threat hunting job.",
+    "summary": "Run a threat hunting job",
     "request_description": "",
-    "request_schema_description": "Run a historical job request."
+    "request_schema_description": "Run a threat hunting job request."
   },
   "ConvertJobResultToSignal": {
     "description": "Convert a job result to a signal.",
     "summary": "Convert a job result to a signal",
     "request_description": "",
-    "request_schema_description": "Request for converting historical job results to signals."
+    "request_schema_description": "Request for converting threat hunting job results to signals."
   },
-  "DeleteHistoricalJob": {
+  "DeleteThreatHuntingJob": {
     "description": "Delete an existing job.",
     "summary": "Delete an existing job"
   },
-  "GetHistoricalJob": {
+  "GetThreatHuntingJob": {
     "description": "Get a job's details.",
     "summary": "Get a job's details"
   },
-  "CancelHistoricalJob": {
-    "description": "Cancel a historical job.",
-    "summary": "Cancel a historical job"
+  "CancelThreatHuntingJob": {
+    "description": "Cancel a threat hunting job.",
+    "summary": "Cancel a threat hunting job"
   },
   "GetSecurityMonitoringHistsignalsByJobId": {
     "description": "Get a job's hist signals.",
@@ -2890,6 +2963,16 @@
     "summary": "POST request to resolve vulnerable symbols",
     "request_description": "",
     "request_schema_description": ""
+  },
+  "ListMultipleRulesets": {
+    "description": "Get rules for multiple rulesets in batch.",
+    "summary": "Ruleset get multiple",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetSecretsRules": {
+    "description": "Returns list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID",
+    "summary": "Returns list of Secrets rules"
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",

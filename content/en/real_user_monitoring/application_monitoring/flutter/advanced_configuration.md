@@ -473,7 +473,7 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [6]: https://github.com/openzipkin/b3-propagation#single-headers
 [7]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [8]: https://www.w3.org/TR/trace-context/#tracestate-header
-[9]: /real_user_monitoring/browser/frustration_signals/
+[9]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
 [10]: https://pub.dev/packages/datadog_tracking_http_client
 [11]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [12]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
