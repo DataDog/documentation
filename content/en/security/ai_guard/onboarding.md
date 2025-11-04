@@ -17,7 +17,7 @@ AI Guard helps secure your AI apps and agents in real time against prompt inject
 ### Prerequisites
 
 Before you set up AI Guard, ensure you have everything you need:
-- While AI Guard is in Preview, Datadog needs to enable a backend feature flag for each organization in the Preview. Contact [Datadog support][1] with one or more Datadog organization IDs (or organization tenant names) to enable it.
+- While AI Guard is in Preview, Datadog needs to enable a backend feature flag for each organization in the Preview. Contact [Datadog support][1] with one or more Datadog organization names and regions to enable it.
 - Certain setup steps require specific Datadog permissions. An admin may need to create a new role with the required permissions and assign it to you.
   - To create an application key, you need the **AI Guard Evaluate** permission.
   - To make a restricted dataset that [limits access to AI Guard spans](#limit-access), you need the **User Access Manage** permission.
