@@ -20,9 +20,9 @@ further_reading:
 - link: "/logs/explorer/saved_views/"
   tag: "Documentation"
   text: "Learn about Saved Views"
-- link: "/logs/explorer/calculated_fields/expression_language"
+- link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
-  text: "Learn more about Calculated Fields Expression Language"
+  text: "Learn more about Calculated Fields Formulas"
 ---
 
 ## Overview

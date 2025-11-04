@@ -1,11 +1,17 @@
 ---
-title: Calculated Fields Expression Language
+title: Formulas
 disable_toc: false
+aliases:
+- /logs/explorer/calculated_fields/expression_language
 further_reading:
 - link: "/logs/explorer/calculated_fields/"
   tag: "Documentation"
   text: "Calculated Fields"
 ---
+
+## Overview
+
+The formula (or expression) defines the value of the value of the calculated field for each log event. You can reference log attributes, other calculated fields, and supported functions and operators. As you write or edit a formula, the editor automatically suggests relevant fields, functions, and operators.
 
 ## Basic syntax and language constructs
 

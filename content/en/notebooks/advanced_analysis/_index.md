@@ -100,7 +100,7 @@ After adding the transformation cell, you can add any number of transformation o
 | Group | Select what you want to group the data by in the dropdown menus. |
 | Join | Select the type of join, the dataset to join against, and the fields to join on. |
 | Filter | Add a filter query for the dataset. |
-| Calculate | Add a name for the field and the function formula, using the [calculated field expression language][3]. |
+| Calculate | Add a name for the field and the function formula, using the [calculated field formulas][3]. |
 | Limit | Enter the number of rows of the dataset you want to display. |
 | Sort | Select the sort order and column to sort on. |
 | Convert | Allows you to convert a column into a different type. Select the column and the column type to be converted. |
@@ -157,6 +157,6 @@ To download your dataset as a CSV file:
 
 [1]: https://app.datadoghq.com/logs
 [2]: /logs/log_configuration/parsing/
-[3]: /logs/explorer/calculated_fields/expression_language/
+[3]: /logs/explorer/calculated_fields/formulas/
 [4]: /ddsql_reference/
 [5]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/
