@@ -8,23 +8,24 @@ further_reading:
 
 ## Overview
 
-In May 2026, Datadog will update SSL certificates to use a new certificate authority (Sectigo Root CA). **If you are running Datadog Agent v5 (especially versions below 5.32.7)**, your agents may lose connectivity with Datadog after this change due to SSL certificate verification failures.
+In May 2026, Datadog will deploy SSL certificates signed by a new certificate authority (Sectigo Root CA). **If you are running Datadog Agent v5 (especially versions below 5.32.7)**, your agents may lose connectivity with Datadog due to SSL certificate verification failures.
 
 ## What will stop working
 
-Agent v5 hosts that do not have the Datadog embedded certificate bundle and fall back to the Tornado certificate store will be unable to send metrics, logs, traces, and other monitoring data to Datadog. The agent will fail with SSL/TLS certificate verification errors when attempting to connect to Datadog intake endpoints.
+Agent v5 hosts without the Datadog embedded certificate bundle will be unable to send metrics, logs, traces, and other monitoring data to Datadog. These hosts fall back to the Tornado certificate store, which will fail SSL/TLS certificate verification when attempting to connect to Datadog intake endpoints.
 
 **Note**: If your agent uses the Datadog-provided certificate bundle (typically Agent v5.32.7+) or is configured to use your operating system's certificate store, you are not affected.
 
 ## Why this happens
 
-When Agent v5's embedded certificate bundle is missing or incomplete, it falls back to using the Tornado (Python web framework) certificate store. This Tornado certificate store is outdated and does not include the new Sectigo Root CA that will be used to sign Datadog's certificates after May 2026. When the agent attempts to verify the new certificates using the Tornado fallback, it will fail because the certificate authority is not in its trust store.
+When Agent v5's embedded certificate bundle is missing or incomplete, it falls back to the Tornado (Python web framework) certificate store. This outdated Tornado certificate store does not include the new Sectigo Root CA that will sign Datadog's certificates after May 2026, causing certificate verification to fail.
 
 ## Who is affected
 
-You are affected if you are running:
-- **Datadog Agent v5**, particularly **versions below 5.32.7**
-- You are not using Datadog embedded certificate by default
+You are affected if:
+- You are running **Datadog Agent v5**, particularly **versions below 5.32.7**
+- Your agent installation does not include the Datadog embedded certificate bundle
+- Your agent is not configured to use the operating system's certificate store (via `use_curl_http_client: true`)
 
 ## Solution
 
@@ -58,7 +59,7 @@ sudo ./linux.sh
 **Requirement**:
 - Have `wget` installed
 
-**Note**: On Windows the Agent is able to resolve the OS certificate only from v5.37.3, this fallback won't be available in the versions bellow.
+**Note**: Windows Agent versions below v5.37.3 cannot use the OS certificate store fallback. If you are running a version below v5.37.3, upgrading to Agent v7 is recommended.
 
 ```powershell
 # Download the script (run as Administrator)
@@ -87,13 +88,13 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/dd-agent/maste
 
 ### Operating system support
 
-The fallback mechanism relies on your operating system's certificate store. **If your operating system is end-of-life and no longer receives security updates**, the OS certificate store may not contain the necessary certificates, and connectivity issues may persist. In this case, upgrading your OS or migrating to Agent v7 is recommended.
+The `use_curl_http_client` fallback mechanism uses your operating system's certificate store. **If your operating system is end-of-life and no longer receives security updates**, the OS certificate store may not contain the necessary certificates, and connectivity issues may persist. In this case, upgrade your OS or migrate to Agent v7.
 
 ### Timeline
 
-- **June 2025 - April 2026**: Grace period to run runbooks or upgrade agents
-- **May 2026**: New certificates will be rolled out with the new Sectigo Root CA
-  - Customers who have not taken action may lose agent connectivity
+- **June 2025 - April 2026**: Grace period to run the provided runbooks or upgrade to Agent v7
+- **May 2026**: Datadog will deploy new certificates signed with the new Sectigo Root CA
+  - Agents that have not been updated will lose connectivity
 
 ## Long-term recommendation
 
