@@ -132,7 +132,8 @@
         <!-- for accessing v1/v2 resources from latest -->
         {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" $baseDir "") }}
 
-        {{ range $tag := (first 1 (where $adat.tags ".name" "==" $ParamTitleEn)) }}
+        {{ $tags := $adat.tags | default (slice) }}
+        {{ range $tag := (first 1 (where $tags ".name" "==" $ParamTitleEn)) }}
           <!-- get action strings from params, why? because they are translated here -->
           {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
 

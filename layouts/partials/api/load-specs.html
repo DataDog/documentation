@@ -1,36 +1,47 @@
-{{/* Shared partial for loading API specs with caching */}}
-{{ $version := .version | default "v1" }}
+{{- /* layouts/partials/api/load-specs.html
+     Loads the prebuilt compact OpenAPI view produced by Option A:
+       assets/api/<version>/view.json
+     Returns a map:
+       {
+         "version": <string>,
+         "path": <string>,
+         "view": <entire JSON>,
+         "schemas": <map[string]schema>,
+         "parameters": <map[string]param>,
+         "requestBodies": <map[string]rb>,
+         "headers": <map[string]header>
+       }
+     Usage:
+       {{ $api := partial "api/load-specs.html" (dict "version" "v1") }}
+       {{ with $api.schemas.Widget }} ... {{ end }}
+*/ -}}
 
-{{ $specKey := printf "%s_spec" $version }}
-{{ if not (hugo.Store.Get $specKey) }}
-  {{ $specPath := printf "api/%s/full_spec.yaml" $version }}
-  {{ $specResource := resources.Get $specPath }}
-  {{ if $specResource }}
-    <!-- normal version -->
-    {{/* $spec := $specResource | transform.Unmarshal */}}
+{{- $ver  := .version | default "v1" -}}
+{{- $path := printf "/api/%s/view.json" $ver -}}
+{{- $res  := resources.Get $path -}}
 
-    <!-- openapi -->
-    {{ $spec := $specResource | openapi3.Unmarshal }}
-    {{/* if we use openapi lets normalize for easier switching */}}
-    {{ $normalizedSpec := dict }}
+{{- if not $res -}}
+  {{- errorf "OpenAPI(view): version=%q resource %q not found. Did you generate it? (node assets/scripts/build-oas-view.mjs assets/api/%s/full_spec.yaml assets/api/%s/view.json)" $ver $path $ver $ver -}}
+{{- end -}}
 
-    {{/* Copy all existing fields */}}
-    {{ range $key, $value := $spec }}
-      {{ $normalizedSpec = $normalizedSpec | merge (dict $key $value) }}
-    {{ end }}
+{{- $view := $res | transform.Unmarshal -}}
 
-    {{/* Add lowercase aliases for common fields */}}
-    {{ $fieldsToNormalize := slice "Tags" "Info" "Paths" "Components" "Servers" }}
-    {{ range $fieldsToNormalize }}
-      {{ $capitalizedField := . }}
-      {{ $lowercaseField := lower . }}
-      {{ if index $spec $capitalizedField }}
-        {{ $normalizedSpec = $normalizedSpec | merge (dict $lowercaseField (index $spec $capitalizedField)) }}
-      {{ end }}
-    {{ end }}
+{{- if not (index $view "x-hugo-preprocessed") -}}
+  {{- warnf "OpenAPI(view): %q missing x-hugo-preprocessed=true; proceeding anyway." $path -}}
+{{- end -}}
 
-    {{ hugo.Store.Set $specKey $normalizedSpec }}
-  {{ end }}
-{{ end }}
+{{- $schemas       := index $view "schemas" | default dict -}}
+{{- $parameters    := index $view "parameters" | default dict -}}
+{{- $requestBodies := index $view "requestBodies" | default dict -}}
+{{- $headers       := index $view "headers" | default dict -}}
 
-{{ return (hugo.Store.Get $specKey) }}
+{{- return (dict
+  "version"       $ver
+  "path"          $path
+  "view"          $view
+  "schemas"       $schemas
+  "parameters"    $parameters
+  "requestBodies" $requestBodies
+  "headers"       $headers
+  "tags"          (slice)
+) -}}
