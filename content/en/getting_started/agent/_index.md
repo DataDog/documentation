@@ -150,7 +150,7 @@ Datadog agent (v. 7.XX.X) started on <Hostname>
 The Agent is set up to provide the following service checks:
 
   - `datadog.agent.up`: Returns `OK` if the Agent connects to Datadog.
-    <div class="alert alert-warning">AIX Agents do not report the <code>datadog.agent.up</code> service check. You can use the metric <code>datadog.agent.running</code> to monitor the uptime of an AIX Agent. The metric emits a value of <code>1</code> if the Agent is reporting to Datadog.</div>
+    <div class="alert alert-danger">AIX Agents do not report the <code>datadog.agent.up</code> service check. You can use the metric <code>datadog.agent.running</code> to monitor the uptime of an AIX Agent. The metric emits a value of <code>1</code> if the Agent is reporting to Datadog.</div>
   - `datadog.agent.check_status`: Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
 
@@ -180,7 +180,7 @@ Tags add an additional layer of metadata to your metrics and events. They allow 
 
 For example, let's say you have data that is collected from different teams and you are only interested in seeing the metrics from team alpha, tagging those specific hosts with either the `team:alpha` or `team:bravo` tag gives you the ability to filter down to the metrics that are tagged with `team:alpha`. See [Getting Started with Tags][24] to learn more about tagging your data.
 
-1. Locate your Agent's [main configuration file][25]. For Ubuntu, the file locations is `/etc/datadog-agent/datadog.yaml`.
+1. Locate your Agent's [main configuration file][25]. For Ubuntu, the file location is `/etc/datadog-agent/datadog.yaml`.
 
 2. In the `datadog.yaml` file, locate the `tags` parameter. Host-level tags can be set in the `datadog.yaml` configuration to apply tags on all metrics, traces and logs forwarded from this host.
 

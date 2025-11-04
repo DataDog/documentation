@@ -6,6 +6,9 @@ aliases:
   - /notebooks_new/
   - /notebooks_legacy/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"
@@ -180,7 +183,7 @@ At the top of the notebook, you can see avatar images of all of the users curren
 
 Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
 
-<div class="alert alert-warning">Some Analysis features have limited or no support for template variables. For more information, see <a href="/notebooks/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a>.</div>
+<div class="alert alert-danger">Some Analysis features have limited or no support for template variables. For more information, see <a href="/notebooks/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a>.</div>
 
 ### Time controls
 

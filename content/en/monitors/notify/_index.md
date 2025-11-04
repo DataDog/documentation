@@ -111,7 +111,7 @@ When an incident is created from a monitor, the incident's [field values][13] ar
 
 Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors.
 
-<div class="alert alert-warning">Distribution metrics with percentile aggregators (such as `p50`, `p75`, `p95`, or `p99`) do not generate a snapshot graph in notifications. </div>
+<div class="alert alert-danger">Distribution metrics with percentile aggregators (such as `p50`, `p75`, `p95`, or `p99`) do not generate a snapshot graph in notifications. </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:70%;" >}}
 

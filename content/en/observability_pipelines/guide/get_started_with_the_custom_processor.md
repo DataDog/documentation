@@ -2,10 +2,10 @@
 title: Get Started with the Custom Processor
 disable_toc: false
 further_reading:
-- link: "observability_pipelines/processors/custom_processor/"
+- link: "/observability_pipelines/processors/custom_processor/"
   tag: "Documentation"
   text: "Learn more about the Custom Processor"
-- link: "observability_pipelines/set_up_pipelines/"
+- link: "/observability_pipelines/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
 - link: "https://www.datadoghq.com/blog/migrate-historical-logs/"

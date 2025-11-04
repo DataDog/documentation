@@ -36,12 +36,18 @@ Once the integration is created, enable the toggle for Cloud Cost Management.
 
 {{< img src="cloud_cost/oci/oci_ccm_enablement.png" alt="Toggle for enabling Cloud Cost Management" style="width:100%;" >}}
 
+### Getting historical data
+
+Oracle Cloud Infrastructure retains cost reports for 1 year. When you enable Cloud Cost Management, Datadog automatically ingests up to 15 months of available historical cost data from these retained reports (up to 1 year based on Oracle's retention).
+
+Oracle does not provide a process for backfilling additional historical data beyond what is already retained in the cost reports.
+
 ## Cost types
 You can visualize your ingested data using the following cost types:
 
 | Cost Type                                       | Description |
 |-------------------------------------------------| ----------------------------------|
-| `oci.cost.amortized`                            | Total cost of resources allocated at the time of usage over an interval. Costs include all applicable discounts |
+| `oci.cost.amortized`                            | Total cost of resources allocated at the time of usage over an interval. Costs include all applicable discounts. |
 | `oci.cost.ondemand`                             | Total public, on-demand cost of resources before public and private discounts are applied over an interval. |
 
 ### Out-of-the-box tags
@@ -83,7 +89,7 @@ The following out-of-the-box tags are available for filtering and grouping data:
 
 #### Cost and observability correlation
 
-Viewing costs in the context of observability data is important for understanding how infrastructure changes impact costs, identifying why costs change, and optimizing infrastructure for both costs and performance. 
+Viewing costs in the context of observability data is important for understanding how infrastructure changes impact costs, identifying why costs change, and optimizing infrastructure for both costs and performance.
 
 Datadog updates resource identifying tags on cost data for top OCI products to simplify correlating observability and cost metrics. For example, to view cost and utilization for each Compute instance, you can make a table with `oci.cost.amortized`, `oci.computeagent.cpu_utilization`, and `oci.computeagent.memory_utilization` (or any other Compute metric) and group by `host`. To see Object Storage usage and costs side by side, you can graph `oci.objectstorage.stored_bytes` and `oci.cost.amortized` grouped by `name`.
 
@@ -93,14 +99,25 @@ The following out-of-the-box tags are available:
 | Compute            | `host`                        |
 | Object Storage     | `name`                        |
 
+Additionally, Datadog provides the following tags that can be used with many observability metrics. For example, to view cost and execution duration of OCI Functions for each compartment, you can make a table with `oci.cost.amortized`, `oci.faas.function_execution_duration`, and group by `compartment_id`.
+| Tag Name                         | Tag Description       |
+| ---------------------------- | ----------------- |
+| `compartment_id`             | The identifier (OCID) for the compartment.|
+| `compartment_name`           | The name for the compartment.|
+| `tenancy_ocid`          | The identifier (OCID) for the OCI tenant.|
+| `tenancy_name`            | The name for the OCI tenant.|
+| `resource_id`              | An identifier assigned to a resource by the provider.|
+| `resource_type`                | Describes the kind of resource the charge applies to.|
+| `dd_resource_key`  | The Canonical Cloud Resource Identifier (CCRID) for the resource. Same as OCID for OCI.|
+
 ### Container cost allocation
 Container cost allocation is not available for OCI. See [Container Cost Allocation][5] for more details.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:  https://docs.datadoghq.com/integrations/oracle-cloud-infrastructure/
-[2]:  https://app.datadoghq.com/cost/setup?cloud=oracle
-[3]:  https://docs.datadoghq.com/integrations/oracle-cloud-infrastructure/?tab=createvcnrecommended#oci-integration-manual-to-quickstart-migration
+[1]: /integrations/oracle-cloud-infrastructure/
+[2]: https://app.datadoghq.com/cost/setup?cloud=oracle
+[3]: /integrations/oracle-cloud-infrastructure/?tab=createvcnrecommended#oci-integration-manual-to-quickstart-migration
 [4]: https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costusagereportsoverview.htm
-[5]: https://docs-staging.datadoghq.com/jahanzeb.hassan/oci-docs-yo/cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws
+[5]: /cloud_cost_management/allocation/container_cost_allocation/

@@ -56,19 +56,19 @@ A continuación, se muestra un ejemplo JSON de un bloque de EC2:
 - **type: ec2**: el tipo de componente.
 - **id: string**: un identificador único para el componente en el formato `uuid`.
 - **region: string**: la región de AWS en la que se despliega la instancia de EC2. Se admiten todas las regiones globales excepto las regiones `cn-`.
-- **mapPos: [number, number]**: la posición del componente en el proyecto, expresada como un par de coordenadas x e y.
+- **mapPos: [número, número]**: la posición del componente en el proyecto, expresada como un par de coordenadas x e y.
 - **transparent: boolean**: si es `true`, el componente es semitransparente en la vista 3D. No tiene efecto en la vista 2D.
 - **platform: string**: la plataforma utilizada para la instancia. Consulta [Valores aceptados para la plataforma](#accepted-values-for-the-platform) para obtener más información.
 - **instanceType: string**: el tipo de la instancia. Consulta [Valores aceptados para instanceType](#accepted-values-for-instancetype) para obtener más información.
 - **instanceSize: string**: el tamaño utilizado para la instancia. Consulta [Valores aceptados para instanceSize](#accepted-values-for-instancesize) para obtener más información.
-- **billingOptions: object**: el modelo de precios utilizado para la instancia en AWS. Consulta [Valores aceptados para billingOptions](#accepted-values-for-billingoptions) para obtener más información.
-- **color: object**: el color de relleno para el cuerpo del componente.
-  - **isometric: string**: el color de relleno para el componente en la vista 3D. Debe ser un color hexadecimal.
-  - **2d: string**: el color de relleno para el componente en la vista 2D. Debe ser un color hexadecimal.
-- **accentColor: object**: el color de énfasis que se usa para mostrar el logotipo del componente sobre el bloque.
-  - **isometric: string**: el color de énfasis del componente en la vista 3D. Debe ser un color hexadecimal.
-  - **2d: string**: el color de énfasis del componente en la vista 2D. Debe ser un color hexadecimal.
-- **Enlace: uri**: enlaza el componente a otro diagrama utilizando el formato `blueprint://ID` o a un sitio web externo utilizando el formato `https://LINK`.
+- **billingOptions: objeto**: el modelo de precios utilizado para la instancia en AWS. Consulta [Valores aceptados para billingOptions](#accepted-values-for-billingoptions) para obtener más información.
+- **color: objeto**: el color de relleno para el cuerpo del componente.
+  - **isometric: cadena**: el color de relleno para el componente en la vista 3D. Debe ser un color hexadecimal.
+  - **2d: cadena**: el color de relleno para el componente en la vista 2D. Debe ser un color hexadecimal.
+- **accentColor: objeto**: el color de énfasis que se usa para mostrar el logotipo del componente sobre el bloque.
+  - **isometric: cadena**: el color de énfasis del componente en la vista 3D. Debe ser un color hexadecimal.
+  - **2d: cadena**: el color de énfasis del componente en la vista 2D. Debe ser un color hexadecimal.
+- **link: uri**: vincula el componente a otro diagrama utilizando el formato `blueprint://ID` o a un sitio web externo utilizando el formato `https://LINK`.
 - **locked: boolean**: si es `true`, los cambios realizados en el componente mediante la aplicación se desactivan hasta que se desbloquean.
 
 El componente de EC2 puede añadirse a [VPCs][2], [grupos de seguridad][3], [grupos de autoescalado][4] y [subredes][5].
@@ -135,7 +135,7 @@ Cada opción se representa de forma diferente en el objeto `billingOptions`.
 ```
 
 - **type: ri**: el valor de la opción de facturación para una instancia reservada es siempre `ri`.
-- **leaseContractLength: number**: el tiempo por el que se reserva la instancia. Los valores aceptados son 12 o 36.
+- **leaseContractLength: number**: la duración de la reserva de la instancia. Los valores aceptados son 12 o 36.
 - **purchaseOption: string**: la opción de compra de la instancia. Los valores aceptados son `No Upfront`, `Partial Upfront` y `All Upfront`.
 - **offeringClass: string**: la clase de oferta para la instancia. Los valores aceptados son `standard` y `convertible`.
 

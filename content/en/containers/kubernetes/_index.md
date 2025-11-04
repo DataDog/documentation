@@ -13,6 +13,9 @@ aliases:
     - /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
     - /agent/kubernetes/
 further_reading:
+    - link: "https://learn.datadoghq.com/courses/getting-started-k8s"
+      tag: "Learning Center"
+      text: "Getting Started with Kubernetes Observability"
     - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
       tag: "Release Notes"
       text: "Check out the latest Datadog Containers releases (App login required)."

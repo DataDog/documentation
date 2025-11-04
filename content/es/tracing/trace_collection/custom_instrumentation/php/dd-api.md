@@ -56,7 +56,7 @@ Puedes proporcionar los siguientes argumentos:
 - `$recurse`: si se rastrearán las llamadas recursivas.
 - `$run_if_limited`: si la función debe ser rastreada en el modo limitado. (Por ejemplo, cuando se supera el límite del tramo).
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si el espacio de nombres está presente, <strong>debes</strong> utilizar el nombre completo del atributo <code>#[\DDTrace\Trace]</code>. Alternativamente, puedes importar el espacio de nombres con <code>use DDTrace\Trace;</code> y usar <code>#[Trace]</code>.
 </div>
 
@@ -197,7 +197,7 @@ if (!extension_loaded('ddtrace')) {
 );
    {{< /code-block >}}
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
    When you set tags, to avoid overwriting existing tags automatically added by the Datadog core instrumentation, <strong>do write <code>$span->meta['mytag'] = 'value'</code></strong>. Do not write <code>$span->meta = ['mytag' => 'value']</code>.
    </div>
 
@@ -346,7 +346,7 @@ if ($span) {
 
 ## Adding tags
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Cuando configures etiquetas, para evitar sobrescribir etiquetas existentes añadidas automáticamente por la instrumentación central de Datadog, <strong>escribe <code>$span->meta['mytag'] = 'value'</code></strong>. No escribas <code>$span->meta = ['mytag' => 'value']</code>.
 </div>
 

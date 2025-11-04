@@ -9,7 +9,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">This feature is not supported for the US1-FED site.</div>
+<div class="alert alert-danger">This feature is not supported for the US1-FED site.</div>
 {{% /site-region %}}
 
 Historical Jobs allows you to backtest detections by running them against historical logs stored in Datadog Cloud SIEM.

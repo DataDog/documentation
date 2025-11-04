@@ -23,7 +23,7 @@ title: C++ アプリケーションのトレース
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>注:</strong> C++ は自動インスツルメンテーションのインテグレーションを提供していませんが、<a href="/tracing/setup/envoy/">Envoy</a> や <a href="/tracing/setup/nginx/">Nginx</a> などの Proxy トレースで使用されています。
 </div>
 

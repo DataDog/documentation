@@ -25,7 +25,7 @@ Code Analysis is in Preview.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Analysis は {{< region-param key="dd_site_name" >}} サイトでは利用できません。
 </div>
 {{% /site-region %}}

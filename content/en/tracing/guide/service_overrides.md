@@ -83,7 +83,7 @@ DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
 
 This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example,`*-postgres`, `*-http-client`).
 
-<div class="alert alert-danger">Removing service overrides is a <b>breaking change</b>. Metrics, monitors, or dashboard queries based on the overridden service name will stop matching.</div>
+<div class="alert alert-warning">Removing service overrides is a <b>breaking change</b>. Metrics, monitors, or dashboard queries based on the overridden service name will stop matching.</div>
 
 It is recommended to remove service overrides progressively, proceeding service by service, to ensure that no critical assets (such as dashboards, monitors, retention filters, and so on) are affected by the change. Follow the [detailed instructions](#remove-service-overrides-progressively) to ensure a smooth transition to the new model.
 

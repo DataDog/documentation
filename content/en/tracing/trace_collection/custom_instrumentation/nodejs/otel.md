@@ -3,7 +3,7 @@ title: Node.js Custom Instrumentation using the OpenTelemetry API
 description: 'Instrument your Node.js application with the OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
-code_lang_weight: 2
+code_lang_weight: 1
 aliases:
 - /tracing/trace_collection/otel_instrumentation/nodejs/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs
@@ -21,47 +21,42 @@ further_reading:
 
 ## Setup
 
-To configure OpenTelemetry to use the Datadog trace provider:
+To instrument your application, initialize the Datadog tracer (`dd-trace`) and explicitly register its `TracerProvider` with the OpenTelemetry API. This ensures all OpenTelemetry calls are routed through Datadog.
 
-1. Add your desired manual OpenTelemetry instrumentation to your Node.js code following the [OpenTelemetry Node.js Manual Instrumentation documentation][1]. **Note**: Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+1. **Add the dependencies**
+Install the required packages to your project:
+  ```sh
+  npm install dd-trace @opentelemetry/api
+  ```
+2. **Initialize and register the tracer**
+In your application's entry file (for example, `index.js`), before any other imports, add the setup code. This involves importing `dd-trace`, initializing it, creating a `TracerProvider` from the main module, and registering it.
 
-2. Add the `dd-trace` module to your package.json:
+### Complete example
 
-    ```sh
-    npm install dd-trace
-    ```
+This complete example shows the required setup in your application's entry file.
 
-3. Initialize the `dd-trace` module in your application:
+```javascript
+// 1. Import the dd-trace library (do not initialize it yet)
+const ddtrace = require('dd-trace');
 
-    ```js
-    const tracer = require('dd-trace').init({
-      // ...
-    })
-    ```
+// 2. Initialize the Datadog tracer. This must be the first operation.
+const tracer = ddtrace.init({
+  // service: 'my-nodejs-app'
+  // ... other Datadog configurations
+});
 
-4. Get `TracerProvider` from `tracer`:
+// 3. Create and register Datadog's TracerProvider.
+const provider = new tracer.TracerProvider();
+provider.register(); // This wires the @opentelemetry/api to Datadog
 
-    ```js
-    const { TracerProvider } = tracer
-    ```
+// 4. Import and use the OpenTelemetry API
+const otel = require('@opentelemetry/api');
+const otelTracer = otel.trace.getTracer(
+  'my-custom-instrumentation' // A name for your specific instrumentation
+);
 
-5. Construct and register a `TracerProvider`:
-
-    ```js
-    const provider = new TracerProvider()
-    provider.register()
-    ```
-
-6. Import the OpenTelemetry API and create an OpenTelemetry tracer instance:
-
-    ```js
-    const ot = require('@opentelemetry/api')
-    const otelTracer = ot.trace.getTracer(
-      'my-service'
-    )
-    ```
-
-7. Run your application.
+// You can now use 'otelTracer' to create spans throughout your application.
+```
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [integration instrumentation][2] and [OpenTelemetry automatic instrumentation][3].
 

@@ -59,7 +59,7 @@ If your Agent runs in a container, add the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`
 - [APM traces port][31], defaults to `8126/tcp`
 - [logs collection port][29], defaults to `10518/tcp`
 
-<div class="alert alert-info"><strong>Note</strong>: Sending CI Visibility traces through UNIX domain sockets is not supported.</div>
+<div class="alert alert-info">Sending CI Visibility traces through UNIX domain sockets is not supported.</div>
 
 ## Install the Datadog Jenkins plugin
 
