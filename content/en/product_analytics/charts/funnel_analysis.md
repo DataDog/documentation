@@ -67,7 +67,16 @@ Use the Group by dropdown to group the data by a specific attribute.
 
 You can further analyze the information on the funnel page to understand the conversion rate. Conversion rate is a crucial metric that measures the effectiveness of your site or application.
 
-You can analyze conversion by **session**, **users** or **accounts**, which means you can understand conversion across all sessions, or by distinct users/accounts. This can be useful if you suspect, for instance, that a minority of your user base converts at a high rate.
+You can analyze conversion by **session**, **users** or **accounts**, which means you can understand conversion across all sessions, or by distinct users or accounts. This can be useful if you suspect, for instance, that a minority of your user base converts at a high rate.
+
+<div class="alert alert-info"> 
+If you select <code>User</code>, the funnel requires the same individual user (@user.id) to complete every step for the conversion to count 
+
+If you select <code>Account</code>, the funnel is tied to the <code>@account.id</code> facet which maps to org IDs in Datadog. In this case, different users within the same account can complete different steps and the conversion still counts. 
+
+If you select <code>Session</code>, all steps must be completed within the same <code>@session.id</code> to count as a conversion.
+
+</div>
 
 You can measure conversion by the following attributes:
 
