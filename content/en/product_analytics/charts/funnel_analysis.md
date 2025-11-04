@@ -78,7 +78,7 @@ If you select <code>Session</code>, all steps must be completed within the same 
 
 If you select <code>User</code>, the funnel requires the same individual user (<code>@user.id</code>) to complete every step for the conversion to count.
 
-If you select <code>Account</code>, the funnel is tied to the <code>@account.id</code> facet which maps to org IDs in Datadog. In this case, different users within the same account can complete different steps and the conversion still counts. 
+If you select <code>Account</code>, different users within the same account can complete different steps and the conversion still counts. In this case, the funnel is tied to the <code>@account.id</code> facet which maps to org IDs in Datadog.  
 
 </div>
 
