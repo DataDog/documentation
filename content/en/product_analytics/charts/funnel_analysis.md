@@ -108,7 +108,12 @@ A, A, A, B, C, C
 ```
 
 If a user performs the actions as in the example above, Datadog counts it as one conversion. This is because the conversion calculations only look at the first element **A** matched and the first element **C** matched. 
-**`(WHY? confirming that it only look for the first and last actions?)`**
+
+<div class="alert alert-info">
+If the user performs the event steps <code>A, A, A, B, C, C, A,...</code>, it would count as two conversion. The first conversion ends at <code>A, A, A, B, C, C</code> and the second conversion begins with <code>A,...</code>
+
+</div>
+
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_conversion.png" alt="Select a conversion measure, whether Unique or Total, to determine how your session conversions are counted." style="width:80%;" >}}
 
