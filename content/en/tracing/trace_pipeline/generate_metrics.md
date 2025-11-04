@@ -56,7 +56,7 @@ Use **custom metrics from traces** when you:
 
 4. **Choose the value to aggregate:**
      - Select `*` to count all spans or traces matching your query. 
-     - Enter an attribute (for example, `@cassandra_row_count`) to aggregate a numeric value and create its corresponding count, minimum, maximum, sum, and average aggregated metrics. If the attribute type is a measure, the value of the metric is the value of the span attribute.
+     - Enter an attribute (for example, `@cassandra_row_count`) to aggregate a numeric value and track its corresponding count, min, max, sum or any percentile.
 
    **Note**: Span attributes that are not numerical values cannot be used for aggregation. To generate a metric that counts the distinct values of a span attribute (for instance count the number of user IDs hitting a specific endpoint), add this dimension to the `group by` selector, and use the `count_nonzero` function to count the number of tag values.
 
