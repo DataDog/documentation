@@ -1,5 +1,5 @@
 ---
-title: Generate custom Metrics from Spans and Traces
+title: Generate Custom Metrics from Spans and Traces
 description: 'Generate custom metrics from ingested spans and complete traces.'
 aliases:
 - /tracing/span_to_metrics/
