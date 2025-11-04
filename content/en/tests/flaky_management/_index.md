@@ -60,6 +60,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
 Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
 
 - `repository_id`
+- `test_service`
 - `branch`
 - `flaky_status`
 - `test_codeowners`
@@ -86,10 +87,24 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
-   - Retries any tests you're attempting to fix 20 times.
-   - Runs tests even if they are marked as `Disabled`.
-   - If all retries pass, updates the test's status to `Fixed`.
-   - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
+    - Retries any tests you're attempting to fix 20 times.
+    - Runs tests even if they are marked as `Disabled`.
+    - If all retries pass, updates the test's status to `Fixed`.
+    - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
+
+## AI-powered flaky test fixes
+
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
+Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
+
+Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
+
+{{< img src="tests/bits_ai_flaky_test_fixes.png" alt="Bits AI Dev Agent displaying a proposed fix for a flaky test" style="width:100%;" >}}
+
+### Setup
+
+To enable AI-powered flaky test fixes, enable Bits AI Dev Agent for Test Optimization by following the setup instructions in the [Bits AI Dev Agent documentation][16]. Bits AI Dev Agent automatically create fixes for flaky tests detected by Test Optimization.
 
 ## AI-powered flaky test categorization
 
@@ -155,3 +170,4 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [11]: /tests/setup/ruby/
 [12]: /tests/setup/swift/
 [13]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
+[16]: /bits_ai/bits_ai_dev_agent/

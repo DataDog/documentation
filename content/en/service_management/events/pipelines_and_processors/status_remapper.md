@@ -1,6 +1,6 @@
 ---
 title: Status Remapper
-
+description: Assign attributes as the official status to events to add severity levels based on Syslog standards
 ---
 
 Use the status remapper processor to assign attributes as an official status to your events. For example, add an event severity level to your events with the status remapper.
@@ -23,6 +23,6 @@ Each incoming status value is mapped as follows:
 
 **Note**: If multiple event status remapper processors are applied to a given event within a pipeline, only the first one in the pipeline's order is considered. Additionally, for all pipelines that match the event, only the first status remapper encountered (from all applicable pipelines) is applied.
 
-Example status remapper 
+Example status remapper
 
 {{< img src="logs/log_configuration/processor/severity_remapper.png" alt="Log severity remapping" style="width:60%;" >}}

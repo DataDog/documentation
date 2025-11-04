@@ -202,8 +202,6 @@ Instrumentation is done using a sidecar container. This sidecar container collec
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-#### Using the Datadog CLI
-
 #### Locally
 
 Install the [Datadog CLI][601] and [Azure CLI][602], and login to your Azure account using the Azure CLI by running `az login`.
@@ -293,13 +291,11 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Linux Web App module][4] only deploys the Web App resource, so you need to [deploy your code][5] separately.
+The [Datadog Linux Web App module][1] only deploys the Web App resource, so you need to build and push your container separately.
 
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
 [2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
 [3]: https://developer.hashicorp.com/terraform/install
-[4]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
-[5]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
 
 {{% /tab %}}
 {{% tab "Manual" %}}

@@ -23,6 +23,8 @@ LLM Observability associates evaluations with individual spans so you can view t
 
 LLM Observability managed evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
 
+Learn more about the [compatibility requirements][22].
+
 ## Connect your LLM provider account
 
 Configure the LLM provider you would like to use for bring-your-own-key (BYOK) evaluations. You only have to complete this step once.
@@ -46,7 +48,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 {{% /tab %}}
 {{% tab "Azure OpenAI" %}}
 
-<div class="alert alert-info">Azure OpenAI is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
 
 Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8].
 
@@ -63,7 +65,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 {{% /tab %}}
 {{% tab "Anthropic" %}}
 
-<div class="alert alert-info">Anthropic is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
 
 Connect your Anthropic account to LLM Observability with your Anthropic API key. LLM Observability uses the `Haiku` model for evaluations.
 
@@ -78,7 +80,7 @@ Connect your Anthropic account to LLM Observability with your Anthropic API key.
 {{% /tab %}}
 {{% tab "Amazon Bedrock" %}}
 
-<div class="alert alert-info">Bedrock is not supported for HIPAA organizations with a Business Associate Agreement (BAA) with Datadog.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
 
 Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for evaluations.
 
@@ -217,8 +219,6 @@ Hallucination detection makes a distinction between two types of hallucinations,
 
 Contradictions are always detected, while Unsupported Claims can be optionally included. For sensitive use cases, we recommend including Unsupported Claims.
 
-Hallucination detection is only available for OpenAI.
-
 #### Failure to Answer
 
 This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
@@ -352,3 +352,4 @@ This check ensures that sensitive information is handled appropriately and secur
 [19]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-selection
 [20]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-argument-correctness
 [21]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#goal-completeness
+[22]: /llm_observability/evaluations/evaluation_compatibility

@@ -142,6 +142,13 @@ To set a rate limit:
 
 {{< img src="bits_ai/rate_limits.png" alt="Options to set a rate limit" style="width:60%;" >}}
 
+### Audit Trail
+You can monitor user-initiated actions with [Audit Trail][16]. Events are sent when:
+- A user manually starts an investigation and when the investigation completes
+- A tool call is executed in a manual investigation
+- A user enables or disables automatic investigations for a monitor
+- A user modifies the monitor rate limit  
+
 ## How Bits AI SRE investigates
 
 Investigations happen in two phases:
@@ -203,3 +210,6 @@ Every piece of feedback you give generates a **memory**. Bits uses these memorie
 [13]: https://app.datadoghq.com/integrations/confluence
 [14]: /service_management/case_management/notifications_integrations/#third-party-tickets
 [15]: /account_management/rbac/permissions/#bits-ai
+[16]: /account_management/audit_trail/events/#bits-ai-sre
+
+

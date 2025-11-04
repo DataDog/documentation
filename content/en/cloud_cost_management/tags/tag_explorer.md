@@ -31,7 +31,7 @@ Use the [Tag Explorer][2] to understand the sources and view descriptions for ea
 
 ## Setup
 
-To use the Tag Explorer, you must configure [Cloud Cost Management][1] for AWS, Azure, or Google Cloud.
+To use the Tag Explorer, you must configure [Cloud Cost Management][1] for AWS, Azure, Google Cloud, or Oracle Cloud.
 
 See the respective documentation for your cloud provider:
 
@@ -168,5 +168,5 @@ You can choose preferred tags from any of your existing cost data tags, includin
 [5]: /cloud_cost_management/datadog_costs
 [6]: /cloud_cost_management/setup/saas_costs
 [7]: https://app.datadoghq.com/cost/explorer
-[8]: /cloud_cost_management/reports
-[9]: /cloud_cost_management/custom_allocation_rules
+[8]: /cloud_cost_management/reporting
+[9]: /cloud_cost_management/allocation/custom_allocation_rules

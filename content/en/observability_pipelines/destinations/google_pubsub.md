@@ -166,4 +166,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [5]: https://cloud.google.com/pubsub/docs/reference/service_apis_overview#pubsub_endpoints
 [6]: /observability_pipelines/destinations/#event-batching
 [7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
-[8]: /observability_pipelines/monitoring/metrics/
+[8]: /observability_pipelines/monitoring_and_maintenance/pipeline_usage_metrics/
