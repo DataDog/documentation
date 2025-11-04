@@ -265,6 +265,7 @@ jobs:
         with:
           service: my-service
           env: production
+          identifier: default
 
       - name: Deploy
         if: success()
