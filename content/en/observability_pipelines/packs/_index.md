@@ -40,8 +40,8 @@ To set up packs:
     - If you clicked **Add to Existing Pipeline**:
         1. Select the pipeline you want to add the pack to.
         1. Click **Add to Existing Pipeline**.
-            - The pack is added to the last processor group in your pipeline.
-            - Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
+            1. The pack is added to the last processor group in your pipeline.
+            1. Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
 
 ## Packs
 
