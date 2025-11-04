@@ -44,8 +44,7 @@ Replays collected through the [force collection][1] mechanism are kept by the de
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-session-filter.png" alt="When force collection is enabled, it is positioned first in the list of retention filters." style="width:90%" >}}
 
-**Note**: Though our mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by our browser SDK are kept by default.
-
+**Note**: Though Datadog's mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by the Browser SDK are kept by default.
 
 ## Creating a retention filter
 
@@ -95,6 +94,20 @@ Use the toggle to the right of the filter to disable or enable it.
 ### Reorder filters
 
 Drag and drop filters to reorder filters to their new position.
+
+## Excluding sessions using retention filters
+
+RUM without Limits uses retention filters to specify which sessions to keep, rather than which to exclude. You cannot set a retention percentage to 0% (the default is 1%). Additionally, setting low retention percentages is not an effective exclusion strategy because sessions may still be retained by other filters in your configuration.
+
+To ensure sessions from a particular environment, application version, device type, or other criteria are not retained, explicitly add exclusions **inside the query of ALL OF YOUR FILTERS**. For example:
+
+- Adding `-version:(1* OR 2*)` to all retention filters ensures you never keep events from older versions 1 and 2 of your application.
+- Adding `-@device.type:Bot` to all retention filters excludes search engine crawlers and other self-declared bots.
+- Adding `-@geo.country:"South Korea"` to all retention filters excludes all sessions from South Korea.
+
+For example, to exclude sessions from South Korea while retaining all other sessions, create a filter with the query `-@geo.country:"South Korea"` and set the retention rate to 100%.
+
+**Note**: There is no way to prevent a specific event from being retained. You can use negative queries (for instance, adding `-@error.message:"Script error."` to a retention filter targeting RUM Errors) to minimize the volume of undesired events, but other retention filters may still make a positive retention decision about a session that contains the event you tried to filter out.
 
 ## Best practices
 

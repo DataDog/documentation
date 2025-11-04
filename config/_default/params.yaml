@@ -266,6 +266,7 @@ unsupported_sites:
   app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
+  backstage: [gov]
   bits_ai: [gov]
   bits_ai_sre: [gov, ap2]
   case_management: [gov]
