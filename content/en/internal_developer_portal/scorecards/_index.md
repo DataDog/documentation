@@ -34,7 +34,7 @@ Scorecards help your team measure and continuously improve the health and perfor
 
 You have full control over how scorecards are defined. In addition to the three sets of core Scorecards that the Datadog platform provides around Production Readiness, Observability Best Practices, and Documentation & Ownership, you can customize default rules or create new ones to match your team's priorities and reflect your own operational standards. This flexibility lets you tailor Scorecards to your organization's engineering culture and maturity.
 
-The default Scorecards are evaluated every 24 hours for all registered entities in the Software Catalog against a set of Datadog-recommended pass-fail criteria. You can turn off these default evaluations any time. The data input, evaluation criteria, and evaluation cadence for any customized rules can be configured via [Scorecards API][10] or [Datadog Workflow Automation][9].  
+Datadog evaluates the default Scorecards every 24 hours for all registered entities in the Software Catalog against a set of pass-fail criteria. You can turn off these default evaluations any time. You can configure the data input, evaluation criteria, and evaluation cadence for any customized rules using the [Scorecards API][10] or [Datadog Workflow Automation][9].  
 
 Scorecard results can be summarized into automated reports that are delivered directly to Slack, helping teams stay aligned, track improvements, and quickly address gaps over time.
 
