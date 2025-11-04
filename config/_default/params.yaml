@@ -137,6 +137,9 @@ code_language_ids:
     historical_job: "Historical Job"
     kubernetes_daemonset: "Kubernetes (DaemonSet)"
     kubernetes_gateway: "Kubernetes (Gateway)"
+    traces: "Traces"
+    metrics: "Metrics"
+    logs: "Logs"    
 branch: ""
 
 signupclass: sign-up-trigger
