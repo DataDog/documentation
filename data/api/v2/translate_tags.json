@@ -247,6 +247,10 @@
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
   },
+  "rum-audience-management": {
+    "name": "Rum Audience Management",
+    "description": "Auto-generated tag Rum Audience Management"
+  },
   "rum-metrics": {
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."

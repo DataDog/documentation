@@ -80,19 +80,27 @@ echo ""
 ## Install the CloudPrem Helm chart
 
 1. Add and update the Datadog Helm repository:
-
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
    ```
 
-2. Create a Kubernetes namespace for the chart:
-
+1. Create a Kubernetes namespace for the chart:
    ```shell
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-3. Store your Datadog API key as a Kubernetes secret:
+   For example, to create a `cloudprem` namespace:
+   ```shell
+   kubectl create namespace cloudprem
+   ```
+
+   **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
+   ```shell
+   kubectl config set-context --current --namespace=cloudprem
+   ```
+
+1. Store your Datadog API key as a Kubernetes secret:
 
    ```shell
    kubectl create secret generic datadog-secret \
@@ -100,15 +108,14 @@ echo ""
    --from-literal api-key="<DD_API_KEY>"
    ```
 
-4. Store the PostgreSQL database connection string and your Datadog API key as a Kubernetes secret:
-
+1. Store the PostgreSQL database connection string as a Kubernetes secret:
    ```shell
    kubectl create secret generic cloudprem-metastore-uri \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>"
    ```
 
-4. Customize the Helm chart
+1. Customize the Helm chart
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the image tag, AWS account ID, service account, ingress setup, resource requests and limits, and more.
 
@@ -226,7 +233,7 @@ echo ""
          memory: "16Gi"
    ```
 
-5. Install or upgrade the Helm chart
+1. Install or upgrade the Helm chart
 
    ```shell
    helm upgrade --install <RELEASE_NAME> datadog/cloudprem \
