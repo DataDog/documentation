@@ -1,10 +1,8 @@
 ---
-title: Instrumenting a PHP Cloud Run Container In-Container
+title: Instrumenting a PHP Container App with Sidecar
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 70
-aliases:
-  - /serverless/google_cloud_run/containers/in_process/php
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/php/'
     tag: 'Documentation'
@@ -15,8 +13,6 @@ further_reading:
 ---
 
 ## Setup
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/php">available on GitHub</a>.</div>
 
 1. **Install the Datadog PHP tracer** in your Dockerfile.
 
@@ -35,33 +31,50 @@ apk add libgcc
 
    For more information, see [Tracing PHP applications][1].
 
-2. **Install serverless-init**.
+2. **Install serverless-init as a sidecar**.
 
-   {{% serverless-init-install cmd="\"apache2-foreground\"" %}}
+   {{< tabs >}}
+
+   {{% tab "Terraform" %}}
+   {{% aca-install-sidecar-terraform %}}
+   {{% /tab %}}
+
+   {{% tab "Manual" %}}
+   {{% aca-install-sidecar-manual %}}
+   {{% /tab %}}
+
+   {{< /tabs >}}
 
 3. **Set up logs**.
 
-   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
+   In the previous step, you created a shared volume. In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. For example:
 
-   Datadog also recommends setting the environment variable `DD_LOGS_INJECTION=true` and `DD_SOURCE=php` to enable advanced Datadog log parsing.
+   {{< code-block lang="php" disable_copy="false" >}}
+const LOG_FILE = "/LogFiles/app.log";
+
+function logInfo($message) {
+    Log::build([
+        'driver' => 'single',
+        'path' => LOG_FILE,
+    ])->info($message);
+}
+
+logInfo('Hello World!');
+{{< /code-block >}}
+
+   Datadog recommends setting the environment variable `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=php` (in your sidecar container) to enable advanced Datadog log parsing.
 
    For more information, see [Correlating PHP Logs and Traces][2].
 
-4. **Configure your application**.
-
-{{% serverless-init-configure cloudrun="true" %}}
-
-5. {{% gcr-service-label %}}
-
-6. **Send custom metrics**.
+4. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
-{{% serverless-init-env-vars-in-container language="php" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-sidecar language="php" defaultSource="containerapp" %}}
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 
@@ -71,4 +84,3 @@ apk add libgcc
 [2]: /tracing/other_telemetry/connect_logs_and_traces/php/
 [3]: /developers/dogstatsd/?tab=php#install-the-dogstatsd-client
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=php#code-examples-5
-

@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Python Cloud Run Container with Sidecar
+title: Instrumenting a Python Container App with Sidecar
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
@@ -11,8 +11,6 @@ further_reading:
     tag: 'Documentation'
     text: 'Correlating Python Logs and Traces'
 ---
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/python">available on GitHub</a>.</div>
 
 ## Setup
 
@@ -39,36 +37,26 @@ CMD ["ddtrace-run", "python", "app.py"]
 
    {{< tabs >}}
 
-   {{% tab "Datadog CLI" %}}
-   {{% gcr-install-sidecar-datadog-ci %}}
-   {{% /tab %}}
-
    {{% tab "Terraform" %}}
-   {{% gcr-install-sidecar-terraform %}}
+   {{% aca-install-sidecar-terraform %}}
    {{% /tab %}}
 
-   {{% tab "YAML Deploy" %}}
-   {{% gcr-install-sidecar-yaml language="python" %}}
-   {{% /tab %}}
-
-   {{% tab "Other" %}}
-   {{% gcr-install-sidecar-other %}}
+   {{% tab "Manual" %}}
+   {{% aca-install-sidecar-manual %}}
    {{% /tab %}}
 
    {{< /tabs >}}
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
-
-   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the following environment variables:
+   In the previous step, you created a shared volume. In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the following environment variables:
    - `ENV PYTHONUNBUFFERED=1`: In your main container. Ensure Python outputs appear immediately in container logs instead of being buffered.
    - `ENV DD_LOGS_INJECTION=true`: In your main container. Enable log/trace correlation for supported loggers.
    - `DD_SOURCE=python`: In your sidecar container. Enable advanced Datadog log parsing.
 
    Then, update your logging library. For example, you can use Python's native `logging` library:
    {{< code-block lang="python" disable_copy="false" >}}
-LOG_FILE = "/shared-logs/logs/app.log"
+LOG_FILE = "/LogFiles/app.log"
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
@@ -91,17 +79,15 @@ logger.info('Hello world!')
 
    For more information, see [Correlating Python Logs and Traces][3].
 
-4. {{% gcr-service-label %}}
-
-5. **Send custom metrics**.
+4. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% serverless-init-env-vars-sidecar language="python" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-sidecar language="python" defaultSource="containerapp" %}}
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 

@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Ruby Cloud Run Container with Sidecar
+title: Instrumenting a Ruby Container App In-Container
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 60
@@ -11,8 +11,6 @@ further_reading:
     tag: 'Documentation'
     text: 'Correlating Ruby Logs and Traces'
 ---
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/ruby">available on GitHub</a>.</div>
 
 ## Setup
 
@@ -26,60 +24,41 @@ gem 'datadog'
 
    See [Tracing Ruby applications][1] for additional information on how to configure the tracer and enable auto instrumentation.
 
-2. **Install serverless-init as a sidecar**.
+2. **Install serverless-init**.
 
-   {{< tabs >}}
-
-   {{% tab "Datadog CLI" %}}
-   {{% gcr-install-sidecar-datadog-ci %}}
-   {{% /tab %}}
-
-   {{% tab "Terraform" %}}
-   {{% gcr-install-sidecar-terraform %}}
-   {{% /tab %}}
-
-   {{% tab "YAML Deploy" %}}
-   {{% gcr-install-sidecar-yaml language="ruby" %}}
-   {{% /tab %}}
-
-   {{% tab "Other" %}}
-   {{% gcr-install-sidecar-other %}}
-   {{% /tab %}}
-
-   {{< /tabs >}}
+   {{% serverless-init-install cmd="\"rails\", \"server\", \"-b\", \"0.0.0.0\"" %}}
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
+   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
 
-   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. You can also set a custom format for log/trace correlation and other features. Datadog recommends setting the environment variable `DD_SOURCE=ruby` in your sidecar container to enable advanced Datadog log parsing.
+   Datadog also recommends setting the environment variable `DD_SOURCE=ruby` to enable advanced Datadog log parsing.
 
-   Then, update your logging library. For example, you can use Ruby's native `logger` library:
+   To enable log-trace correlation, you need to include `Datadog::Tracing.log_correlation` in your log format. For example:
    {{< code-block lang="ruby" disable_copy="false" >}}
-LOG_FILE = "/shared-logs/logs/app.log"
-FileUtils.mkdir_p(File.dirname(LOG_FILE))
-
-logger = Logger.new(LOG_FILE)
+logger = Logger.new(STDOUT)
 logger.formatter = proc do |severity, datetime, progname, msg|
   "[#{datetime}] #{severity}: [#{Datadog::Tracing.log_correlation}] #{msg}\n"
 end
 
-logger.info "Hello World!"
+logger.info "Hello world!"
 {{< /code-block >}}
 
    For more information, see [Correlating Ruby Logs and Traces][2].
 
-4. {{% gcr-service-label %}}
+4. **Configure your application**.
+
+{{% serverless-init-configure %}}
 
 5. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
-{{% serverless-init-env-vars-sidecar language="ruby" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-in-container language="ruby" defaultSource="containerapp" %}}
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 

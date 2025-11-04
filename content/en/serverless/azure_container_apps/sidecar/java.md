@@ -1,10 +1,8 @@
 ---
-title: Instrumenting a Java Cloud Run Container In-Container
+title: Instrumenting a Java Container App with Sidecar
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 40
-aliases:
-  - /serverless/google_cloud_run/containers/in_process/java
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/'
     tag: 'Documentation'
@@ -15,8 +13,6 @@ further_reading:
 ---
 
 ## Setup
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/java">available on GitHub</a>.</div>
 
 1. **Install the Datadog Java tracer**.
 
@@ -52,17 +48,23 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
 
    For more information, see [Tracing Java Applications][2].
 
-2. **Install serverless-init**.
+2. **Install serverless-init as a sidecar**.
 
-   {{% serverless-init-install cmd="\"./mvnw\", \"spring-boot:run\"" %}}
+   {{< tabs >}}
+
+   {{% tab "Terraform" %}}
+   {{% aca-install-sidecar-terraform %}}
+   {{% /tab %}}
+
+   {{% tab "Manual" %}}
+   {{% aca-install-sidecar-manual %}}
+   {{% /tab %}}
+
+   {{< /tabs >}}
 
 3. **Set up logs**.
 
-   To enable logging, set the environment variable `DD_LOGS_ENABLED=true`. This allows `serverless-init` to read logs from stdout and stderr.
-
-   Datadog also recommends setting the environment variable `DD_LOGS_INJECTION=true` and `DD_SOURCE=java` to enable advanced Datadog log parsing.
-
-   If you want multiline logs to be preserved in a single log message, Datadog recommends writing your logs in *compact* JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
+   In the previous step, you created a shared volume. In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Java, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Log4j 2`:
 
    {{< code-block lang="java" disable_copy="false" >}}
 private static final Logger logger = LogManager.getLogger(App.class);
@@ -73,28 +75,27 @@ logger.info("Hello World!");
 <Configuration>
   <Appenders>
     <Console name="Console"><JsonLayout compact="true" eventEol="true" properties="true"/></Console>
+    <File name="FileAppender" fileName="/LogFiles/app.log">
+      <JsonLayout compact="true" eventEol="true" properties="true"/>
+    </File>
   </Appenders>
-  <Loggers><Root level="info"><AppenderRef ref="Console"/></Root></Loggers>
+  <Loggers><Root level="info"><AppenderRef ref="FileAppender"/></Root></Loggers>
 </Configuration>
 {{< /code-block >}}
 
+   Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=java` (in your sidecar container) to enable advanced Datadog log parsing.
+
    For more information, see [Correlating Java Logs and Traces][3].
 
-4. **Configure your application**.
-
-{{% serverless-init-configure cloudrun="true" %}}
-
-5. {{% gcr-service-label %}}
-
-6. **Send custom metrics**.
+4. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% serverless-init-env-vars-in-container language="java" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-sidecar language="java" defaultSource="containerapp" %}}
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 
@@ -105,4 +106,3 @@ logger.info("Hello World!");
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples-5
-

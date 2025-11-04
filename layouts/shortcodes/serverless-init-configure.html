@@ -3,7 +3,7 @@
    - `DD_API_KEY`: Your [Datadog API key][1001], used to send data to your Datadog account. For privacy and safety, configure this API key as a Google Cloud Secret.
    - `DD_SITE`: Your [Datadog site][1002]. For example, `datadoghq.com`.
 
-   For more environment variables, see the [Environment variables](#environment-variables) section on this page.
+   For more environment variables, see the [Environment variables](#environment-variables) section on this page.{{ if eq (.Get "cloudrun") "true" }}
 
    The following command deploys the service and allows any external connection to reach it. In this example, your service listening is set to port 8080. Ensure that this port number matches the exposed port inside of your Dockerfile.
 
@@ -13,6 +13,6 @@
      --port=8080 \
      --update-env-vars=DD_API_KEY=$DD_API_KEY \
      --update-env-vars=DD_SITE=$DD_SITE \
-   ```
+   ```{{ end }}
 
 [1001]: https://app.datadoghq.com/organization-settings/api-keys

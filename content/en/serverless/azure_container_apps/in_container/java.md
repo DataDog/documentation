@@ -1,10 +1,8 @@
 ---
-title: Instrumenting a Java Cloud Run Container In-Container
+title: Instrumenting a Java Container App In-Container
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 40
-aliases:
-  - /serverless/google_cloud_run/containers/in_process/java
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/'
     tag: 'Documentation'
@@ -15,8 +13,6 @@ further_reading:
 ---
 
 ## Setup
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/java">available on GitHub</a>.</div>
 
 1. **Install the Datadog Java tracer**.
 
@@ -82,19 +78,17 @@ logger.info("Hello World!");
 
 4. **Configure your application**.
 
-{{% serverless-init-configure cloudrun="true" %}}
+{{% serverless-init-configure %}}
 
-5. {{% gcr-service-label %}}
-
-6. **Send custom metrics**.
+5. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% serverless-init-env-vars-in-container language="java" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-in-container language="java" defaultSource="containerapp" %}}
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 
@@ -105,4 +99,3 @@ logger.info("Hello World!");
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples-5
-

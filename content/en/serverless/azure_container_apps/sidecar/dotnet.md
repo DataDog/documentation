@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a .NET Cloud Run Container with Sidecar
+title: Instrumenting a .NET Container App with Sidecar
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 50
@@ -11,8 +11,6 @@ further_reading:
     tag: 'Documentation'
     text: 'Correlating .NET Logs and Traces'
 ---
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/sidecar/dotnet">available on GitHub</a>.</div>
 
 ## Setup
 
@@ -46,33 +44,23 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
 
    {{< tabs >}}
 
-   {{% tab "Datadog CLI" %}}
-   {{% gcr-install-sidecar-datadog-ci %}}
-   {{% /tab %}}
-
    {{% tab "Terraform" %}}
-   {{% gcr-install-sidecar-terraform %}}
+   {{% aca-install-sidecar-terraform %}}
    {{% /tab %}}
 
-   {{% tab "YAML Deploy" %}}
-   {{% gcr-install-sidecar-yaml language="csharp" %}}
-   {{% /tab %}}
-
-   {{% tab "Other" %}}
-   {{% gcr-install-sidecar-other %}}
+   {{% tab "Manual" %}}
+   {{% aca-install-sidecar-manual %}}
    {{% /tab %}}
 
    {{< /tabs >}}
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
-
-   In this step, configure your logging library to write logs to that file set in `DD_SERVERLESS_LOG_PATH`. In .NET, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Serilog`:
+   In the previous step, you created a shared volume. In this step, configure your logging library to write logs to that file set in `DD_SERVERLESS_LOG_PATH`. In .NET, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `Serilog`:
    {{< code-block lang="csharp" disable_copy="false" >}}
 using Serilog;
 
-const string LOG_FILE = "/shared-volume/logs/app.log";
+const string LOG_FILE = "/LogFiles/app.log";
 
 builder.Host.UseSerilog((context, config) =>
 {
@@ -90,17 +78,15 @@ logger.LogInformation("Hello World!");
 
    For more information, see [Correlating .NET Logs and Traces][3].
 
-4. {{% gcr-service-label %}}
-
-5. **Send custom metrics**.
+4. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% serverless-init-env-vars-sidecar language="csharp" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-sidecar language="csharp" defaultSource="containerapp" %}}
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 

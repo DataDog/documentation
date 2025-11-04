@@ -1,10 +1,8 @@
 ---
-title: Instrumenting a Python Cloud Run Container In-Container
+title: Instrumenting a Python Container App In-Container
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
-aliases:
-  - /serverless/google_cloud_run/containers/in_process/python
 further_reading:
   - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/'
     tag: 'Documentation'
@@ -15,8 +13,6 @@ further_reading:
 ---
 
 ## Setup
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/python">available on GitHub</a>.</div>
 
 1. **Install the Datadog Python tracer**.
 
@@ -76,19 +72,17 @@ logger.info("Hello world!")
 
 4. **Configure your application**.
 
-{{% serverless-init-configure cloudrun="true" %}}
+{{% serverless-init-configure %}}
 
-5. {{% gcr-service-label %}}
-
-6. **Send custom metrics**.
+5. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% serverless-init-env-vars-in-container language="python" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-in-container language="python" defaultSource="containerapp" %}}
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 

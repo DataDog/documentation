@@ -1,5 +1,5 @@
 ---
-title: Instrumenting a Go Cloud Run Function
+title: Instrumenting a Go Container App with Sidecar
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
@@ -11,8 +11,6 @@ further_reading:
     tag: 'Documentation'
     text: 'Correlating Go Logs and Traces'
 ---
-
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-functions/go">available on GitHub</a>.</div>
 
 ## Setup
 
@@ -45,27 +43,21 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
    {{< tabs >}}
 
-   {{% tab "Datadog CLI" %}}
-   {{% gcr-install-sidecar-datadog-ci %}}
-   {{% /tab %}}
-
    {{% tab "Terraform" %}}
-   {{% gcr-install-sidecar-terraform function="true" %}}
+   {{% aca-install-sidecar-terraform %}}
    {{% /tab %}}
 
-   {{% tab "Other" %}}
-   {{% gcr-install-sidecar-other function="true" %}}
+   {{% tab "Manual" %}}
+   {{% aca-install-sidecar-manual %}}
    {{% /tab %}}
 
    {{< /tabs >}}
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
-
-   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Go, Datadog recommends writing logs in JSON format. For example, you can use a third-party logging library such as `logrus`:
+   In the previous step, you created a shared volume. In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Go, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `logrus`:
    {{< code-block lang="go" disable_copy="false" >}}
-const LOG_FILE = "/shared-volume/logs/app.log"
+const LOG_FILE = "/LogFiles/app.log"
 
 os.MkdirAll(filepath.Dir(LOG_FILE), 0755)
 logFile, err := os.OpenFile(LOG_FILE, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
@@ -82,17 +74,15 @@ logrus.WithContext(ctx).Info("Hello World!")
 
    For more information, see [Correlating Go Logs and Traces][3].
 
-4. {{% gcr-service-label %}}
+4. **Send custom metrics**.
 
-5. **Send custom metrics**.
+   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-   To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
-
-{{% serverless-init-env-vars-sidecar language="go" function="true" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-sidecar language="go" defaultSource="containerapp" %}}
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 
