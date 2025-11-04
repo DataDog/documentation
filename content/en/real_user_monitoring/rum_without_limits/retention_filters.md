@@ -97,7 +97,7 @@ Drag and drop filters to reorder filters to their new position.
 
 ## Excluding sessions using retention filters
 
-RUM without Limits provides retention filters that define the sessions you **want to keep**, not the ones you want to exclude. Setting a retention percentage to 0% for a given filter isn't allowed (it defaults to 1%), but it also isn't the right approach. Sessions you're attempting to exclude might still be retained by another filter in your list.
+RUM without Limits uses retention filters to specify which sessions to keep, rather than which to exclude. You cannot set a retention percentage to 0% (the default is 1%). Additionally, setting low retention percentages is not an effective exclusion strategy because sessions may still be retained by other filters in your configuration.
 
 To ensure sessions from a particular environment, application version, device type, or other criteria are not retained, explicitly add exclusions **inside the query of ALL OF YOUR FILTERS**. For example:
 
