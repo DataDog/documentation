@@ -108,7 +108,7 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 
 ##### Instrumentation
 
-This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. The complete code and packages required to run this evaluation are located [here][4].  
+This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][4]** to run this evaluation.  
 
 ### How to use
 <div class="alert alert-info">Tool argument correctness is only available for OpenAI and Azure OpenAI.</div>
