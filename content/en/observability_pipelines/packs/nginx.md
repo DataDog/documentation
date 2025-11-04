@@ -11,4 +11,4 @@ What this pack does:
 
 - Exports request and error metrics
 - Drops health checks, static assets, and internal traffic
-- Parses logs and standardize key fields
+- Parses logs and standardizes key fields

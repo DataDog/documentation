@@ -11,4 +11,4 @@ What this pack does:
 
 - Normalizes fields and adds threat context
 - Drops routine and low-signal traffic
-- Keeps risky, blocked, unknown traffic
+- Keeps risky, blocked, and unknown traffic

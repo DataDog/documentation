@@ -9,6 +9,6 @@ Zscaler Internet Access (ZIA) Tunnel logs show tunnel health, traffic, and key e
 
 What this pack does:
 
-- Reduces log volume of routine heartbeat logs
+- Reduces volume of routine heartbeat logs
 - Consolidates repeated failure alerts
 - Standardizes fields for metrics and alerts

@@ -17,9 +17,9 @@ When you set up a pipeline to send logs from a specific source to Observability 
 - Should logs be sampled?
 - Should quotas be added?
 
-Oftentimes, you need to consult with different teams to answer these questions.
+Often, you need to consult with different teams to answer these questions.
 
-Use Observability Pipelines Packs to help you set up and optimize Observability Pipelines without extensive manual configuration. Each pack contains predefined configurations that are specific to a source and identifies:
+Use Observability Pipelines Packs to help you set up and optimize Observability Pipelines without extensive manual configuration. Packs contain predefined configurations that are specific to a source and identify:
 
 - Log fields that can safely be removed
 - Logs that can be dropped, such as duplicated logs
@@ -28,7 +28,7 @@ Use Observability Pipelines Packs to help you set up and optimize Observability 
 
 ## Packs
 
-These are the available packs:
+These packs are available:
 
 - [Akamai CDN][4]
 - [Amazon VPC Flow Logs][5]
