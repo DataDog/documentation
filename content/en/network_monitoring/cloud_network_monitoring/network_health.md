@@ -1,6 +1,8 @@
 ---
 title: Network Health
 description: Explore your Network data between each source and destination across your stack.
+aliases:
+- /network_monitoring/cloud_network_monitoring/overview_page
 further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
