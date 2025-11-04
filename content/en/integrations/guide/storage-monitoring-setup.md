@@ -359,7 +359,7 @@ For each bucket you want to monitor:
 
 {{% tab "Existing S3 Inventory" %}}
 
-  If you have already configured S3 Inventory for the buckets you want to monitor, enable buckets for Storage Monitoring from the Datadog UI:
+  If you have already configured S3 Inventory for the buckets you want to monitor, enable buckets for Storage Monitoring from the Datadog UI. Note: Storage Management only supports CSV format for inventories.
       - Navigate to **Storage Management** → [Enable Buckets][603]
   - In Step 2: **Enable S3 Inventory to get prefix level monitoring**, select _I enabled it myself_
       - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**
