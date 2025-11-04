@@ -110,7 +110,7 @@ A, A, A, B, C, C
 If a user performs the actions as in the example above, Datadog counts it as one conversion. This is because the conversion calculations only look at the first element **A** matched and the first element **C** matched. 
 
 <div class="alert alert-info">
-If the user performs the event steps <code>A, A, A, B, C, C, A,...</code>, it would count as two conversion. The first conversion ends at <code>A, A, A, B, C, C</code> and the second conversion begins with <code>A,...</code>
+If the user performs the event steps <code>A, A, A, B, C, C, A,...</code>, it would count as two conversions. The first conversion ends at <code>A, A, A, B, C, C</code>, and the second conversion begins with <code>A,...</code>
 
 </div>
 
@@ -123,8 +123,7 @@ If the user performs the event steps <code>A, A, A, B, C, C, A,...</code>, it wo
 **Total**: This means that your conversion (session, user, or account) is each time the user completes the defined funnel. For example, if the user performs the actions A → B → C → A → B → C during the session or time frame, it counts as 2 conversions.
 
 
-If you analyze your funnel by `user` or by `account`, you can define your conversion timeframe `(**SHOULD WE LIST THE 1 DAY AS A MINIMUM?**)`. The default timeframe for conversions is 1 day meaning that Datadog uses a 24-hour window (not calendar dates) to determine if a conversion happened or not.
-
+If you analyze your funnel by `user` or by `account`, you can define your conversion timeframe in hours or days of the first event. The default timeframe for conversions is 1 day (a 24-hour window not calendar dates) to determine if a conversion happened or not.
  
 The average time between steps is calculated by looking at the average duration between each conversion and takes all conversions into account, no matter if `unique` or `total` is selected for the counts.
 
