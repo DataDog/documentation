@@ -119,8 +119,11 @@ App Builder provides the following permissions for each app:
 Viewer
 : Run and view the app
 
-Editor
+Contributor
 : Edit, run, and view the app
+
+Editor
+: Edit, run, view, publish, and delete the app.
 
 To restrict access to the app, perform the following steps in the app canvas:
 1. Navigate to the detailed editing view for the app you want to restrict access to.

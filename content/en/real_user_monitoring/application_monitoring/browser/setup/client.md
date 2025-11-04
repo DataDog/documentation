@@ -45,9 +45,13 @@ Choose the installation method for the Browser SDK.
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Installing through Node Package Manager (npm) is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
+Installing through Node Package Manager (npm) registry is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
 
 Add [`@datadog/browser-rum`][2] to your `package.json` file, example if you use npm cli:
+
+```
+npm install --save @datadog/browser-rum
+```
 
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
 
@@ -254,6 +258,16 @@ datadogRum.init({
   //  version: '1.0.0',
 });
 
+```
+
+<div class="alert alert-info"><strong>Note</strong>: Types are compatible with TypeScript >= 3.8.2. For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
+
+```javascript
+import '@datadog/browser-rum/bundle/datadog-rum'
+
+window.DD_RUM.init({
+  ...
+})
 ```
 
 {{% /tab %}}

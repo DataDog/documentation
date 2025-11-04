@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags to a pipeline trace or a job span, in addition to adding measures to a pipeline trace or a job span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags). 
+Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags to a pipeline trace or a job span, in addition to adding measures to a pipeline trace or a job span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags).
 
 You can use facets and measures to filter, create visualizations, or create monitors for your pipelines in the [CI Visibility Explorer][10].
 
@@ -67,7 +67,7 @@ Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/do
 
 ## Add tags to pipeline traces
 
-Tags can be added to the pipeline span or to the job span. 
+Tags can be added to the pipeline span or to the job span.
 
 To do this, run the `tag` command:
 
@@ -119,9 +119,14 @@ To create a measure, click the gear icon next to a measures name on the [Pipelin
 
 ## Add tags and measures to GitHub jobs
 
-To add tags and measures to GitHub jobs, `datadog-ci CLI` version `2.29.0` or higher is required.
-If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][7]),
-the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
+Starting with `datadog-ci` version `4.1.1`, no additional action is required, even when using custom names or matrix strategies.
+
+<details>
+<summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
+
+If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][7]), the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
 1. If the job name is changed using the [name property][8]:
     ```yaml
     jobs:
@@ -146,7 +151,8 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci tag ...
     ```
-   
+</details>
+
 ## Limitations
 
 - The maximum amount of tags that can be added to a pipeline or job is 100.

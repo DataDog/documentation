@@ -12488,6 +12488,89 @@ components:
       required:
       - type
       type: object
+    CreateConnectionRequest:
+      example:
+        data:
+          attributes:
+            fields:
+            - description: Customer subscription tier from `CRM`
+              display_name: Customer Tier
+              id: customer_tier
+              source_name: subscription_tier
+              type: string
+            - description: Customer lifetime value in `USD`
+              display_name: Lifetime Value
+              id: lifetime_value
+              source_name: ltv
+              type: number
+            join_attribute: user_email
+            join_type: email
+            type: ref_table
+          id: crm-integration
+          type: connection_id
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateConnectionRequestData'
+      type: object
+    CreateConnectionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateConnectionRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateConnectionRequestDataType'
+      required:
+      - type
+      type: object
+    CreateConnectionRequestDataAttributes:
+      properties:
+        fields:
+          items:
+            $ref: '#/components/schemas/CreateConnectionRequestDataAttributesFieldsItems'
+          type: array
+        join_attribute:
+          example: ''
+          type: string
+        join_type:
+          example: ''
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        type:
+          example: ''
+          type: string
+      required:
+      - join_attribute
+      - join_type
+      - type
+      type: object
+    CreateConnectionRequestDataAttributesFieldsItems:
+      properties:
+        description:
+          type: string
+        display_name:
+          type: string
+        groups:
+          items:
+            type: string
+          type: array
+        id:
+          example: ''
+          type: string
+        source_name:
+          example: ''
+          type: string
+        type:
+          example: ''
+          type: string
+      required:
+      - id
+      - source_name
+      - type
+      type: object
     CreateCustomFrameworkRequest:
       description: Request object to create a custom framework.
       properties:
@@ -17093,11 +17176,201 @@ components:
         schema:
           $ref: '#/components/schemas/EntityToSchema'
       type: object
+    EntityResponseArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PreviewEntityResponseData'
+          type: array
+      required:
+      - data
+      type: object
     EntityResponseData:
       description: List of entity data.
       items:
         $ref: '#/components/schemas/EntityData'
       type: array
+    EntityResponseDataAttributes:
+      properties:
+        apiVersion:
+          type: string
+        description:
+          type: string
+        displayName:
+          type: string
+        kind:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        owner:
+          type: string
+        properties:
+          additionalProperties: {}
+          type: object
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    EntityResponseDataRelationships:
+      properties:
+        incidents:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsIncidents'
+        oncalls:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsOncalls'
+        rawSchema:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRawSchema'
+        relatedEntities:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRelatedEntities'
+        schema:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsSchema'
+      type: object
+    EntityResponseDataRelationshipsIncidents:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EntityResponseDataRelationshipsIncidentsDataItems'
+          type: array
+      type: object
+    EntityResponseDataRelationshipsIncidentsDataItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsIncidentsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsIncidentsDataItemsType:
+      default: incident
+      description: Incident resource type.
+      enum:
+      - incident
+      example: incident
+      type: string
+      x-enum-varnames:
+      - INCIDENT
+    EntityResponseDataRelationshipsOncalls:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EntityResponseDataRelationshipsOncallsDataItems'
+          type: array
+      type: object
+    EntityResponseDataRelationshipsOncallsDataItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsOncallsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsOncallsDataItemsType:
+      default: oncall
+      description: Oncall resource type.
+      enum:
+      - oncall
+      example: oncall
+      type: string
+      x-enum-varnames:
+      - ONCALL
+    EntityResponseDataRelationshipsRawSchema:
+      properties:
+        data:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRawSchemaData'
+      required:
+      - data
+      type: object
+    EntityResponseDataRelationshipsRawSchemaData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRawSchemaDataType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsRawSchemaDataType:
+      default: rawSchema
+      description: Raw schema resource type.
+      enum:
+      - rawSchema
+      example: rawSchema
+      type: string
+      x-enum-varnames:
+      - RAWSCHEMA
+    EntityResponseDataRelationshipsRelatedEntities:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EntityResponseDataRelationshipsRelatedEntitiesDataItems'
+          type: array
+      type: object
+    EntityResponseDataRelationshipsRelatedEntitiesDataItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRelatedEntitiesDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsRelatedEntitiesDataItemsType:
+      default: relatedEntity
+      description: Related entity resource type.
+      enum:
+      - relatedEntity
+      example: relatedEntity
+      type: string
+      x-enum-varnames:
+      - RELATEDENTITY
+    EntityResponseDataRelationshipsSchema:
+      properties:
+        data:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsSchemaData'
+      required:
+      - data
+      type: object
+    EntityResponseDataRelationshipsSchemaData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsSchemaDataType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsSchemaDataType:
+      default: schema
+      description: Schema resource type.
+      enum:
+      - schema
+      example: schema
+      type: string
+      x-enum-varnames:
+      - SCHEMA
+    EntityResponseDataType:
+      default: entity
+      description: Entity resource type.
+      enum:
+      - entity
+      example: entity
+      type: string
+      x-enum-varnames:
+      - ENTITY
     EntityResponseIncludedIncident:
       description: Included incident.
       properties:
@@ -19535,6 +19808,140 @@ components:
       x-enum-varnames:
       - ADD
       - REPLACE
+    FacetInfoRequest:
+      example:
+        data:
+          attributes:
+            facet_id: first_browser_name
+            limit: 10
+            search:
+              query: user_org_id:5001 AND first_country_code:US
+            term_search:
+              value: Chrome
+          id: facet_info_request
+          type: users_facet_info_request
+      properties:
+        data:
+          $ref: '#/components/schemas/FacetInfoRequestData'
+      type: object
+    FacetInfoRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FacetInfoRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FacetInfoRequestDataType'
+      required:
+      - type
+      type: object
+    FacetInfoRequestDataAttributes:
+      properties:
+        facet_id:
+          example: ''
+          type: string
+        limit:
+          example: 0
+          format: int64
+          type: integer
+        search:
+          $ref: '#/components/schemas/FacetInfoRequestDataAttributesSearch'
+        term_search:
+          $ref: '#/components/schemas/FacetInfoRequestDataAttributesTermSearch'
+      required:
+      - facet_id
+      - limit
+      type: object
+    FacetInfoRequestDataAttributesSearch:
+      properties:
+        query:
+          type: string
+      type: object
+    FacetInfoRequestDataAttributesTermSearch:
+      properties:
+        value:
+          type: string
+      type: object
+    FacetInfoRequestDataType:
+      default: users_facet_info_request
+      description: Users facet info request resource type.
+      enum:
+      - users_facet_info_request
+      example: users_facet_info_request
+      type: string
+      x-enum-varnames:
+      - USERS_FACET_INFO_REQUEST
+    FacetInfoResponse:
+      example:
+        data:
+          attributes:
+            result:
+              values:
+              - count: 4892
+                value: Chrome
+              - count: 2341
+                value: Safari
+              - count: 1567
+                value: Firefox
+              - count: 892
+                value: Edge
+              - count: 234
+                value: Opera
+          id: facet_info_response
+          type: users_facet_info
+      properties:
+        data:
+          $ref: '#/components/schemas/FacetInfoResponseData'
+      type: object
+    FacetInfoResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FacetInfoResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FacetInfoResponseDataType'
+      required:
+      - type
+      type: object
+    FacetInfoResponseDataAttributes:
+      properties:
+        result:
+          $ref: '#/components/schemas/FacetInfoResponseDataAttributesResult'
+      type: object
+    FacetInfoResponseDataAttributesResult:
+      properties:
+        range:
+          $ref: '#/components/schemas/FacetInfoResponseDataAttributesResultRange'
+        values:
+          items:
+            $ref: '#/components/schemas/FacetInfoResponseDataAttributesResultValuesItems'
+          type: array
+      type: object
+    FacetInfoResponseDataAttributesResultRange:
+      properties:
+        max:
+          type: object
+        min:
+          type: object
+      type: object
+    FacetInfoResponseDataAttributesResultValuesItems:
+      properties:
+        count:
+          format: int64
+          type: integer
+        value:
+          type: string
+      type: object
+    FacetInfoResponseDataType:
+      default: users_facet_info
+      description: Users facet info resource type.
+      enum:
+      - users_facet_info
+      example: users_facet_info
+      type: string
+      x-enum-varnames:
+      - USERS_FACET_INFO
     FastlyAPIKey:
       description: The definition of the `FastlyAPIKey` object.
       properties:
@@ -21912,6 +22319,90 @@ components:
       - ASSIGNEE
       - CASE
       - TEAM_OWNERS
+    GetMappingResponse:
+      example:
+        data:
+          attributes:
+            attributes:
+            - attribute: user_id
+              description: Unique user identifier
+              display_name: User ID
+              groups:
+              - Identity
+              is_custom: false
+              type: string
+            - attribute: user_email
+              description: User email address
+              display_name: Email Address
+              groups:
+              - Identity
+              - Contact
+              is_custom: false
+              type: string
+            - attribute: first_country_code
+              description: The ISO code of the country for the user's first session
+              display_name: First Country Code
+              groups:
+              - Geography
+              is_custom: false
+              type: string
+            - attribute: '@customer_tier'
+              description: Customer subscription tier
+              display_name: Customer Tier
+              groups:
+              - Business
+              is_custom: true
+              type: string
+          id: get_mappings_response
+          type: get_mappings_response
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMappingResponseData'
+      type: object
+    GetMappingResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMappingResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMappingResponseDataType'
+      required:
+      - type
+      type: object
+    GetMappingResponseDataAttributes:
+      properties:
+        attributes:
+          items:
+            $ref: '#/components/schemas/GetMappingResponseDataAttributesAttributesItems'
+          type: array
+      type: object
+    GetMappingResponseDataAttributesAttributesItems:
+      properties:
+        attribute:
+          type: string
+        description:
+          type: string
+        display_name:
+          type: string
+        groups:
+          items:
+            type: string
+          type: array
+        is_custom:
+          type: boolean
+        type:
+          type: string
+      type: object
+    GetMappingResponseDataType:
+      default: get_mappings_response
+      description: Get mappings response resource type.
+      enum:
+      - get_mappings_response
+      example: get_mappings_response
+      type: string
+      x-enum-varnames:
+      - GET_MAPPINGS_RESPONSE
     GetMultipleRulesetsRequest:
       properties:
         data:
@@ -27560,6 +28051,104 @@ components:
       required:
       - data
       type: object
+    ListConnectionsResponse:
+      example:
+        data:
+          attributes:
+            connections:
+            - created_at: '0001-01-01T00:00:00Z'
+              created_by: 00000000-0000-0000-0000-000000000000
+              fields:
+              - description: Customer subscription tier
+                display_name: Customer Tier
+                groups:
+                - Business
+                - Subscription
+                id: customer_tier
+                source_name: subscription_tier
+                type: string
+              - description: Channel through which user signed up
+                display_name: Signup Source
+                groups:
+                - Marketing
+                - Attribution
+                id: signup_source
+                source_name: acquisition_channel
+                type: string
+              id: user-profiles-connection
+              join:
+                attribute: user_email
+                type: email
+              type: ref_table
+              updated_at: '0001-01-01T00:00:00Z'
+              updated_by: 00000000-0000-0000-0000-000000000000
+          id: list_connections_response
+          type: list_connections_response
+      properties:
+        data:
+          $ref: '#/components/schemas/ListConnectionsResponseData'
+      type: object
+    ListConnectionsResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListConnectionsResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ListConnectionsResponseDataType'
+      required:
+      - type
+      type: object
+    ListConnectionsResponseDataAttributes:
+      properties:
+        connections:
+          items:
+            $ref: '#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItems'
+          type: array
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItems:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        fields:
+          items:
+            $ref: '#/components/schemas/CreateConnectionRequestDataAttributesFieldsItems'
+          type: array
+        id:
+          type: string
+        join:
+          $ref: '#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsJoin'
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        type:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        updated_by:
+          type: string
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsJoin:
+      properties:
+        attribute:
+          type: string
+        type:
+          type: string
+      type: object
+    ListConnectionsResponseDataType:
+      default: list_connections_response
+      description: List connections response resource type.
+      enum:
+      - list_connections_response
+      example: list_connections_response
+      type: string
+      x-enum-varnames:
+      - LIST_CONNECTIONS_RESPONSE
     ListDevicesResponse:
       description: List devices response.
       properties:
@@ -37945,6 +38534,19 @@ components:
           description: Offset type.
           type: string
       type: object
+    PreviewEntityResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseDataAttributes'
+        id:
+          type: string
+        relationships:
+          $ref: '#/components/schemas/EntityResponseDataRelationships'
+        type:
+          $ref: '#/components/schemas/EntityResponseDataType'
+      required:
+      - type
+      type: object
     ProcessSummariesMeta:
       description: Response metadata object.
       properties:
@@ -38257,6 +38859,153 @@ components:
       - $ref: '#/components/schemas/ActionQuery'
       - $ref: '#/components/schemas/DataTransform'
       - $ref: '#/components/schemas/StateVariable'
+    QueryAccountRequest:
+      example:
+        data:
+          attributes:
+            limit: 20
+            query: plan_type:enterprise AND user_count:>100 AND subscription_status:active
+            select_columns:
+            - account_id
+            - account_name
+            - user_count
+            - plan_type
+            - subscription_status
+            - created_at
+            - mrr
+            - industry
+            sort:
+              field: user_count
+              order: DESC
+            wildcard_search_term: tech
+          id: query_account_request
+          type: query_account_request
+      properties:
+        data:
+          $ref: '#/components/schemas/QueryAccountRequestData'
+      type: object
+    QueryAccountRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/QueryAccountRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/QueryAccountRequestDataType'
+      required:
+      - type
+      type: object
+    QueryAccountRequestDataAttributes:
+      properties:
+        limit:
+          format: int64
+          type: integer
+        query:
+          type: string
+        select_columns:
+          items:
+            type: string
+          type: array
+        sort:
+          $ref: '#/components/schemas/QueryAccountRequestDataAttributesSort'
+        wildcard_search_term:
+          type: string
+      type: object
+    QueryAccountRequestDataAttributesSort:
+      properties:
+        field:
+          type: string
+        order:
+          type: string
+      type: object
+    QueryAccountRequestDataType:
+      default: query_account_request
+      description: Query account request resource type.
+      enum:
+      - query_account_request
+      example: query_account_request
+      type: string
+      x-enum-varnames:
+      - QUERY_ACCOUNT_REQUEST
+    QueryEventFilteredUsersRequest:
+      example:
+        data:
+          attributes:
+            event_query:
+              query: '@type:view AND @view.loading_time:>3000 AND @application.name:ecommerce-platform'
+              time_frame:
+                end: 1761309676
+                start: 1760100076
+            include_row_count: true
+            limit: 25
+            query: user_org_id:5001 AND first_country_code:US AND first_browser_name:Chrome
+            select_columns:
+            - user_id
+            - user_email
+            - first_country_code
+            - first_browser_name
+            - events_count
+            - session_count
+            - error_count
+            - avg_loading_time
+          id: query_event_filtered_users_request
+          type: query_event_filtered_users_request
+      properties:
+        data:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestData'
+      type: object
+    QueryEventFilteredUsersRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataType'
+      required:
+      - type
+      type: object
+    QueryEventFilteredUsersRequestDataAttributes:
+      properties:
+        event_query:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataAttributesEventQuery'
+        include_row_count:
+          type: boolean
+        limit:
+          format: int64
+          type: integer
+        query:
+          type: string
+        select_columns:
+          items:
+            type: string
+          type: array
+      type: object
+    QueryEventFilteredUsersRequestDataAttributesEventQuery:
+      properties:
+        query:
+          type: string
+        time_frame:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataAttributesEventQueryTimeFrame'
+      type: object
+    QueryEventFilteredUsersRequestDataAttributesEventQueryTimeFrame:
+      properties:
+        end:
+          format: int64
+          type: integer
+        start:
+          format: int64
+          type: integer
+      type: object
+    QueryEventFilteredUsersRequestDataType:
+      default: query_event_filtered_users_request
+      description: Query event filtered users request resource type.
+      enum:
+      - query_event_filtered_users_request
+      example: query_event_filtered_users_request
+      type: string
+      x-enum-varnames:
+      - QUERY_EVENT_FILTERED_USERS_REQUEST
     QueryFormula:
       description: A formula for calculation based on one or more queries.
       properties:
@@ -38270,6 +39019,81 @@ components:
       required:
       - formula
       type: object
+    QueryResponse:
+      example:
+        data:
+          attributes:
+            hits:
+            - first_browser_name: Chrome
+              first_city: San Francisco
+              first_country_code: US
+              first_device_type: Desktop
+              last_seen: '2025-08-14T06:45:12.142Z'
+              session_count: 47
+              user_created: '2024-12-15T08:42:33.287Z'
+              user_email: john.smith@techcorp.com
+              user_id: '150847'
+              user_name: John Smith
+              user_org_id: '5001'
+            - first_browser_name: Chrome
+              first_city: Austin
+              first_country_code: US
+              first_device_type: Desktop
+              last_seen: '2025-08-14T05:22:08.951Z'
+              session_count: 89
+              user_created: '2024-11-28T14:17:45.634Z'
+              user_email: john.williams@techcorp.com
+              user_id: '150848'
+              user_name: John Williams
+              user_org_id: '5001'
+            - first_browser_name: Chrome
+              first_city: Seattle
+              first_country_code: US
+              first_device_type: Desktop
+              last_seen: '2025-08-14T04:18:34.726Z'
+              session_count: 23
+              user_created: '2025-01-03T16:33:21.445Z'
+              user_email: john.jones@techcorp.com
+              user_id: '150849'
+              user_name: John Jones
+              user_org_id: '5001'
+            total: 147
+          id: query_response
+          type: query_response
+      properties:
+        data:
+          $ref: '#/components/schemas/QueryResponseData'
+      type: object
+    QueryResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/QueryResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/QueryResponseDataType'
+      required:
+      - type
+      type: object
+    QueryResponseDataAttributes:
+      properties:
+        hits:
+          items:
+            additionalProperties: {}
+          type: array
+        total:
+          format: int64
+          type: integer
+      type: object
+    QueryResponseDataType:
+      default: query_response
+      description: Query response resource type.
+      enum:
+      - query_response
+      example: query_response
+      type: string
+      x-enum-varnames:
+      - QUERY_RESPONSE
     QuerySortOrder:
       default: desc
       description: Direction of sort.
@@ -38280,6 +39104,74 @@ components:
       x-enum-varnames:
       - ASC
       - DESC
+    QueryUsersRequest:
+      example:
+        data:
+          attributes:
+            limit: 25
+            query: user_email:*@techcorp.com AND first_country_code:US AND first_browser_name:Chrome
+            select_columns:
+            - user_id
+            - user_email
+            - user_name
+            - user_org_id
+            - first_country_code
+            - first_browser_name
+            - first_device_type
+            - last_seen
+            sort:
+              field: first_seen
+              order: DESC
+            wildcard_search_term: john
+          id: query_users_request
+          type: query_users_request
+      properties:
+        data:
+          $ref: '#/components/schemas/QueryUsersRequestData'
+      type: object
+    QueryUsersRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/QueryUsersRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/QueryUsersRequestDataType'
+      required:
+      - type
+      type: object
+    QueryUsersRequestDataAttributes:
+      properties:
+        limit:
+          format: int64
+          type: integer
+        query:
+          type: string
+        select_columns:
+          items:
+            type: string
+          type: array
+        sort:
+          $ref: '#/components/schemas/QueryUsersRequestDataAttributesSort'
+        wildcard_search_term:
+          type: string
+      type: object
+    QueryUsersRequestDataAttributesSort:
+      properties:
+        field:
+          type: string
+        order:
+          type: string
+      type: object
+    QueryUsersRequestDataType:
+      default: query_users_request
+      description: Query users request resource type.
+      enum:
+      - query_users_request
+      example: query_users_request
+      type: string
+      x-enum-varnames:
+      - QUERY_USERS_REQUEST
     RUMAggregateBucketValue:
       description: A bucket value, can be either a timeseries or a single value.
       oneOf:
@@ -52313,6 +53205,88 @@ components:
           description: The display name of the datastore.
           type: string
       type: object
+    UpdateConnectionRequest:
+      example:
+        data:
+          attributes:
+            fields_to_add:
+            - description: Net Promoter Score from customer surveys
+              display_name: NPS Score
+              groups:
+              - Satisfaction
+              - Metrics
+              id: nps_score
+              source_name: net_promoter_score
+              type: number
+            fields_to_delete:
+            - old_revenue_field
+            fields_to_update:
+            - field_id: lifetime_value
+              updated_display_name: Customer Lifetime Value (`USD`)
+              updated_groups:
+              - Financial
+              - Metrics
+          id: crm-integration
+          type: connection_id
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateConnectionRequestData'
+      type: object
+    UpdateConnectionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateConnectionRequestDataAttributes'
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateConnectionRequestDataType'
+      required:
+      - type
+      - id
+      type: object
+    UpdateConnectionRequestDataAttributes:
+      properties:
+        fields_to_add:
+          items:
+            $ref: '#/components/schemas/CreateConnectionRequestDataAttributesFieldsItems'
+          type: array
+        fields_to_delete:
+          items:
+            type: string
+          type: array
+        fields_to_update:
+          items:
+            $ref: '#/components/schemas/UpdateConnectionRequestDataAttributesFieldsToUpdateItems'
+          type: array
+      type: object
+    UpdateConnectionRequestDataAttributesFieldsToUpdateItems:
+      properties:
+        field_id:
+          example: ''
+          type: string
+        updated_description:
+          type: string
+        updated_display_name:
+          type: string
+        updated_field_id:
+          type: string
+        updated_groups:
+          items:
+            type: string
+          type: array
+      required:
+      - field_id
+      type: object
+    UpdateConnectionRequestDataType:
+      default: connection_id
+      description: Connection id resource type.
+      enum:
+      - connection_id
+      example: connection_id
+      type: string
+      x-enum-varnames:
+      - CONNECTION_ID
     UpdateCustomFrameworkRequest:
       description: Request object to update a custom framework.
       properties:
@@ -58963,6 +59937,27 @@ paths:
       - Software Catalog
       x-codegen-request-body-name: body
       x-menu-order: 2
+  /api/v2/catalog/entity/preview:
+    post:
+      operationId: PreviewCatalogEntities
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityResponseArray'
+          description: Accepted
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Preview catalog entities
+      tags:
+      - Software Catalog
+      x-menu-order: 3.5
   /api/v2/catalog/entity/{entity_id}:
     delete:
       description: Delete a single entity in Software Catalog.
@@ -71804,6 +72799,308 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
+  /api/v2/product-analytics/accounts/facet_info:
+    post:
+      description: Get facet information for account attributes including possible
+        values and counts
+      operationId: GetAccountFacetInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FacetInfoRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacetInfoResponse'
+          description: Successful response with facet information
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get account facet info
+      tags:
+      - Rum Audience Management
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/accounts/query:
+    post:
+      description: Query accounts with flexible filtering by account properties
+      operationId: QueryAccounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryAccountRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+          description: Successful response with account data
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Query accounts
+      tags:
+      - Rum Audience Management
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/users/event_filtered_query:
+    post:
+      description: Query users filtered by both user properties and event platform
+        data
+      operationId: QueryEventFilteredUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryEventFilteredUsersRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+          description: Successful response with filtered user data
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Query event filtered users
+      tags:
+      - Rum Audience Management
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/users/facet_info:
+    post:
+      description: Get facet information for user attributes including possible values
+        and counts
+      operationId: GetUserFacetInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FacetInfoRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacetInfoResponse'
+          description: Successful response with facet information
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get user facet info
+      tags:
+      - Rum Audience Management
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/users/query:
+    post:
+      description: Query users with flexible filtering by user properties, with optional
+        wildcard search
+      operationId: QueryUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryUsersRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+          description: Successful response with user data
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Query users
+      tags:
+      - Rum Audience Management
+      x-menu-order: 8
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/{entity}/mapping:
+    get:
+      description: Get entity mapping configuration including all available attributes
+        and their properties
+      operationId: GetMapping
+      parameters:
+      - description: The entity for which to get the mapping
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMappingResponse'
+          description: Successful response with entity mapping configuration
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get mapping
+      tags:
+      - Rum Audience Management
+      x-menu-order: 10
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/{entity}/mapping/connection:
+    post:
+      description: Create a new data connection and its fields for an entity
+      operationId: CreateConnection
+      parameters:
+      - description: The entity for which to create the connection
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectionRequest'
+        required: true
+      responses:
+        '201':
+          description: Connection created successfully
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create connection
+      tags:
+      - Rum Audience Management
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+    put:
+      description: Update an existing data connection by adding, updating, or deleting
+        fields
+      operationId: UpdateConnection
+      parameters:
+      - description: The entity for which to update the connection
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectionRequest'
+        required: true
+      responses:
+        '200':
+          description: Connection updated successfully
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update connection
+      tags:
+      - Rum Audience Management
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/{entity}/mapping/connection/{id}:
+    delete:
+      description: Delete an existing data connection for an entity
+      operationId: DeleteConnection
+      parameters:
+      - description: The connection ID to delete
+        in: path
+        name: id
+        required: true
+        schema:
+          example: connection-id-123
+          type: string
+      - description: The entity for which to delete the connection
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      responses:
+        '204':
+          description: Connection deleted successfully
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete connection
+      tags:
+      - Rum Audience Management
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/{entity}/mapping/connections:
+    get:
+      description: List all data connections for an entity
+      operationId: ListConnections
+      parameters:
+      - description: The entity for which to list connections
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConnectionsResponse'
+          description: Successful response with list of connections
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List connections
+      tags:
+      - Rum Audience Management
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/query/scalar:
     post:
       description: 'Query scalar values (as seen on Query Value, Table, and Toplist
@@ -71897,7 +73194,7 @@ paths:
       - description: Number of tables to return.
         example: 15
         in: query
-        name: limit
+        name: page[limit]
         required: false
         schema:
           default: 15
@@ -71908,7 +73205,7 @@ paths:
       - description: Number of tables to skip for pagination.
         example: 0
         in: query
-        name: offset
+        name: page[offset]
         required: false
         schema:
           default: 0
@@ -81850,8 +83147,8 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
-          `cloud_siem`,
+          `application_security`, `audit_trail`, `bits_ai`, `serverless`, `ci_app`,
+          `cloud_cost_management`, `cloud_siem`,
 
           `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
           `cws`, `dbm`, `error_tracking`,
@@ -83476,6 +84773,8 @@ tags:
 
     [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
   name: Roles
+- description: Auto-generated tag Rum Audience Management
+  name: Rum Audience Management
 - description: Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics)
     for your organization.
   externalDocs:

@@ -2,7 +2,6 @@
 title: Search Syntax
 description: Learn the new filter query search syntax for your Observability Pipelines processors.
 disable_toc: false
-private: true
 ---
 ## Overview
 

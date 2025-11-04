@@ -726,7 +726,7 @@
     "summary": "Query timeseries points"
   },
   "ListMetrics": {
-    "description": "Search for metrics from the last 24 hours in Datadog.",
+    "description": "**Note**: This endpoint is deprecated. Use `/api/v2/metrics` instead.\n\nSearch for metrics from the last 24 hours in Datadog.",
     "summary": "Search metrics"
   },
   "AddSecurityMonitoringSignalToIncident": {

@@ -531,6 +531,9 @@
     "request_description": "Entity YAML or JSON.",
     "request_schema_description": "Create or update entity request."
   },
+  "PreviewCatalogEntities": {
+    "summary": "Preview catalog entities"
+  },
   "DeleteCatalogEntity": {
     "description": "Delete a single entity in Software Catalog.",
     "summary": "Delete a single entity"
@@ -1988,6 +1991,60 @@
   "ListProcesses": {
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"
+  },
+  "GetAccountFacetInfo": {
+    "description": "Get facet information for account attributes including possible values and counts",
+    "summary": "Get account facet info",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryAccounts": {
+    "description": "Query accounts with flexible filtering by account properties",
+    "summary": "Query accounts",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryEventFilteredUsers": {
+    "description": "Query users filtered by both user properties and event platform data",
+    "summary": "Query event filtered users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetUserFacetInfo": {
+    "description": "Get facet information for user attributes including possible values and counts",
+    "summary": "Get user facet info",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryUsers": {
+    "description": "Query users with flexible filtering by user properties, with optional wildcard search",
+    "summary": "Query users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetMapping": {
+    "description": "Get entity mapping configuration including all available attributes and their properties",
+    "summary": "Get mapping"
+  },
+  "CreateConnection": {
+    "description": "Create a new data connection and its fields for an entity",
+    "summary": "Create connection",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "UpdateConnection": {
+    "description": "Update an existing data connection by adding, updating, or deleting fields",
+    "summary": "Update connection",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteConnection": {
+    "description": "Delete an existing data connection for an entity",
+    "summary": "Delete connection"
+  },
+  "ListConnections": {
+    "description": "List all data connections for an entity",
+    "summary": "List connections"
   },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
