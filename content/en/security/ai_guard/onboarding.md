@@ -302,7 +302,6 @@ Beginning with [dd-trace-py v3.14.0rc1][1], a new Python SDK has been introduced
 from ddtrace.appsec.ai_guard import new_ai_guard_client, Prompt, ToolCall
 
 client = new_ai_guard_client(
-    endpoint="https://app.datadoghq.com/api/v2/ai-guard",
     api_key="<YOUR_API_KEY>",
     app_key="<YOUR_APPLICATION_KEY>"
 )
@@ -356,7 +355,6 @@ To use the SDK, ensure the following environment variables are configured:
 | Variable               | Value                                                         |
 |:-----------------------|:--------------------------------------------------------------|
 | `DD_AI_GUARD_ENABLED`  | `true`                                                        |
-| `DD_AI_GUARD_ENDPOINT` | {{< region-param key=dd_api code="true" >}}`/api/v2/ai-guard` |
 | `DD_API_KEY`           | `<YOUR_API_KEY>`                                              |
 | `DD_APP_KEY`           | `<YOUR_APPLICATION_KEY>`                                      |
 | `DD_TRACE_ENABLED`     | `true`                                                        |
@@ -419,7 +417,6 @@ Before using the SDK, make sure the following environment variables are properly
 | Variable               | Value                                                         |
 |:-----------------------|:--------------------------------------------------------------|
 | `DD_AI_GUARD_ENABLED`  | `true`                                                        |
-| `DD_AI_GUARD_ENDPOINT` | {{< region-param key=dd_api code="true" >}}`/api/v2/ai-guard` |
 | `DD_API_KEY`           | `<YOUR_API_KEY>`                                              |
 | `DD_APP_KEY`           | `<YOUR_APPLICATION_KEY>`                                      |
 | `DD_TRACE_ENABLED`     | `true`                                                        |
@@ -441,7 +438,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
 ```
 
 The evaluate method receives the following parameters:
-- `messages` (required): list of messages (prompts or tool calls) that will be evaluated by AI Guard.
+- `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
 - `options` (optional): object with a block flag; if set to `true`, the SDK throws an `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
 
 The method returns an Evaluation object containing:
@@ -478,44 +475,18 @@ After AI Guard is enabled in your Datadog org and you've instrumented your code 
 
 <div class="alert alert-info">You can't see data in Datadog for evaluations performed directly using the REST API.</div>
 
-## Monitoring {#monitoring}
-
-AI Guard includes a built-in dashboard designed to monitor tool evaluations. Datadog can share a dashboard JSON file that you can [import][8] into your dashboards as required.
-
-To ensure that evaluations triggered using the API are displayed on the dashboard, you must manually instrument custom spans using the `ddtrace` library. This setup allows for detailed evaluation tracking and analysis, helping you better understand tool behavior and performance through the AI Guard dashboard. Here's an example implementation:
-
-```py
-with tracer.trace("ai_guard") as span:
-    result = _call_rest_api()  # REST API call
-
-    attributes = result["data"]["attributes"]
-    span.set_tag("ai_guard.target", "tool")  # Use "prompt" if evaluating a prompt
-    span.set_tag("ai_guard.tool_name", "tool_name")  # Specify the tool name if applicable
-    span.set_tag("ai_guard.action", attributes["action"])
-
-    if "reason" in attributes:
-        span.set_tag("ai_guard.reason", attributes["reason"])
-
-    # Optional metadata: tags starting with ai_guard.meta will appear in the outcome table (e.g. input prompt, tool arguments, etc.)
-    span.set_tag("ai_guard.meta.prompt", "the prompt that triggered the tool execution")
-```
-
-The Python SDK handles this process automatically, eliminating the need to manually create the span.
-
-You can use the `datadog.ai_guard.evaluations` metric to count the evaluations AI Guard performed. This metric is tagged by `action`, `blocking_enabled`, `service`, and `env`.
-
-### Set up Datadog Monitors for alerting {#set-up-datadog-monitors}
+## Set up Datadog Monitors for alerting {#set-up-datadog-monitors}
 
 To create monitors for alerting at certain thresholds, you can use [Datadog Monitors][9]. You can monitor AI Guard evaluations with either APM traces or with metrics. For both types of monitor, you should set your alert conditions, name for the alert, and define notifications; Datadog recommends using Slack.
 
-#### APM monitor
+### APM monitor
 
 Follow the instructions to create a new [APM monitor][10], with its scope set to **Trace Analytics**.
 
 - To monitor evaluation traffic, use the query `@ai_guard.action: (DENY OR ABORT)`.
 - To monitor blocked traffic, use the query `@ai_guard.blocked:true`.
 
-#### Metric monitor
+### Metric monitor
 
 Follow the instructions to create a new [metric monitor][11].
 
