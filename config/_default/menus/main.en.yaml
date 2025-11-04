@@ -6888,31 +6888,36 @@ menu:
       url: /security/code_security/static_analysis/generic_ci_providers/
       parent: sec_static_analysis
       weight: 3
-    - name: Static Code Analysis (SAST) rules
-      identifier: sec_static_analysis_rules
-      url: /security/code_security/static_analysis/static_analysis_rules/
-      parent: sec_static_analysis
-      weight: 5
-    - name: SAST Custom Rules
-      identifier: sec_static_analysis_custom_rules
-      url: /security/code_security/static_analysis/custom_rules/
-      parent: sec_static_analysis
-      weight: 5
-    - name: SAST Custom Rule Creation Tutorial
-      identifier: sec_static_analysis_custom_rules_tutorial
-      url: /security/code_security/static_analysis/custom_rules/tutorial/
-      parent: sec_static_analysis
-      weight: 5
-    - name: SAST Custom Rules Guide
-      identifier: sec_static_analysis_custom_rules_guide
-      url: /security/code_security/static_analysis/custom_rules/guide/
-      parent: sec_static_analysis
-      weight: 5
     - name: Malicious PR Protection
       identifier: sec_static_analysis_malicious_pr_protection
       url: /security/code_security/static_analysis/malicious_pr_protection
       parent: sec_static_analysis
       weight: 4
+    - name: AI-Enhanced Static Code Analysis
+      identifier: sec_static_analysis_ai
+      url: /security/code_security/static_analysis/ai_enhanced_sast/
+      parent: sec_static_analysis
+      weight: 5     
+    - name: SAST Custom Rule Creation Tutorial
+      identifier: sec_static_analysis_custom_rules_tutorial
+      url: /security/code_security/static_analysis/custom_rules/tutorial/
+      parent: sec_static_analysis
+      weight: 6
+    - name: SAST Custom Rules
+      identifier: sec_static_analysis_custom_rules
+      url: /security/code_security/static_analysis/custom_rules/
+      parent: sec_static_analysis
+      weight: 7
+    - name: SAST Custom Rules Guide
+      identifier: sec_static_analysis_custom_rules_guide
+      url: /security/code_security/static_analysis/custom_rules/guide/
+      parent: sec_static_analysis
+      weight: 8
+    - name: Static Code Analysis (SAST) rules
+      identifier: sec_static_analysis_rules
+      url: /security/code_security/static_analysis/static_analysis_rules/
+      parent: sec_static_analysis
+      weight: 9
     - name: Software Composition Analysis (SCA)
       identifier: software_composition_analysis
       url: /security/code_security/software_composition_analysis/
