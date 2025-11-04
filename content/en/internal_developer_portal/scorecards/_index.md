@@ -36,7 +36,7 @@ You have full control over how scorecards are defined. In addition to the three 
 
 Datadog evaluates the default Scorecards every 24 hours for all registered entities in the Software Catalog against a set of pass-fail criteria. You can turn off these default evaluations any time. You can configure the data input, evaluation criteria, and evaluation cadence for any customized rules using the [Scorecards API][10] or [Datadog Workflow Automation][9].  
 
-Scorecard results can be summarized into automated reports that are delivered directly to Slack, helping teams stay aligned, track improvements, and quickly address gaps over time.
+Datadog can summarize Scorecard results into automated reports and deliver them directly through Slack, helping your team stay aligned, track improvements, and efficiently address gaps.
 
 {{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Sign up for early access to our upcoming features!" >}}
 {{< /callout >}}
