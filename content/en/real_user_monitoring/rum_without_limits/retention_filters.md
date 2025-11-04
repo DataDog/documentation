@@ -103,7 +103,7 @@ To ensure sessions from a particular environment, application version, device ty
 
 - Adding `-version:(1* OR 2*)` to all retention filters ensures you never keep events from older versions 1 and 2 of your application.
 - Adding `-@device.type:Bot` to all retention filters excludes search engine crawlers and other self-declared bots.
-- Adding `-@geo.country:"South Korea"` to all retention filters excludes all sessions from South Korea
+- Adding `-@geo.country:"South Korea"` to all retention filters excludes all sessions from South Korea.
 
 For example, to exclude sessions from South Korea while retaining all other sessions, create a filter with the query `-@geo.country:"South Korea"` and set the retention rate to 100%.
 
