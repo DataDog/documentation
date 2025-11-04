@@ -30,9 +30,13 @@ further_reading:
 
 ## Overview
 
-Scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your software's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All entities with defined metadata in the Software Catalog are automatically evaluated against a set of pass-fail criteria.
+Scorecards help teams measure and continuously improve the health and performance of their software. As Platform Engineers, you can create Scorecards to automatically evaluate entities in your Software Catalog against defined criteria to surface areas that need attention.
 
-You can select the rules used to populate the Scorecards, and you can generate reports, which are sent directly to your team's Slack channel, to regularly report on scorecard results.
+You have full control over how scorecards are defined. Beyond the three sets of core Scorecards that Datadog platform provides around Production Readiness, Observability Best Practices, and Documentation & Ownership, you can customize default rules or create new ones to match your team’s priorities and reflect your own operational standards. This flexibility lets you tailor Scorecards to your organization’s engineering culture and maturity.
+
+The default Scorecards are evaluated every 24 hours for all registered entities in the Software Catalog against a set of Datadog-recommended pass-fail criteria. You can turn off these default evaluations any time. The data input, evaluation criteria, and evaluation cadence for any customized rules can be configured via [Scorecards API][10] or [Datadog Workflow Automation][9].  
+
+Scorecard results can be summarized into automated reports that are delivered directly to Slack, helping teams stay aligned, track improvements, and quickly address gaps over time.
 
 {{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Sign up for early access to our upcoming features!" >}}
 {{< /callout >}}
