@@ -4,12 +4,12 @@
   "attributes": {
     "frontmatter": {
       "title": {
-        "ast-str-ccbaa22a-5868-4366-8acf-f9786fe5cc64": {
+        "ast-str-b62f1162-1bff-4465-a001-a5e6a114c8c7": {
           "string": "モバイルセッションリプレイのプライバシーオプション"
         }
       },
       "description": {
-        "ast-str-cf658844-2097-43a1-a48c-fc3c6fd3f68f": {
+        "ast-str-1075f136-3c58-4b63-9ab3-e7e9d7c33f4f": {
           "string": "モバイルセッションリプレイのプライバシーオプションの構成"
         }
       },
@@ -18,12 +18,12 @@
           "0": {
             "link": "/real_user_monitoring/session_replay/mobile",
             "text": {
-              "ast-str-40943a1a-edde-4589-8972-16cfd2af6d15": {
+              "ast-str-554c7c0f-2ec8-4333-92d7-98380b943dfd": {
                 "string": "Mobile Session Replay"
               }
             },
             "tag": {
-              "ast-str-d805da84-5bb4-41ee-8d1c-5dcaf2f57da4": {
+              "ast-str-b68dc5d4-e923-4037-b1bb-9235db0dcf67": {
                 "string": "ドキュメント"
               }
             }
@@ -31,12 +31,12 @@
           "1": {
             "link": "/real_user_monitoring/session_replay/mobile/app_performance",
             "text": {
-              "ast-str-acf142d0-cd75-453a-8fe2-eb485b9f213e": {
+              "ast-str-0ca51e64-ea05-4c21-8c45-d06646c6346f": {
                 "string": "モバイルセッションリプレイがアプリのパフォーマンスに与える影響"
               }
             },
             "tag": {
-              "ast-str-4ac7c19e-67ac-44e9-aaa5-28780431795f": {
+              "ast-str-7d320255-ecda-4fd0-aee6-723b15f023ea": {
                 "string": "ドキュメント"
               }
             }
@@ -44,12 +44,12 @@
           "2": {
             "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
             "text": {
-              "ast-str-76195321-3f00-4b5a-a106-51ed78a73882": {
+              "ast-str-a09b4acf-a362-42ce-9eab-b0dc82050248": {
                 "string": "モバイルセッションリプレイの設定と構成"
               }
             },
             "tag": {
-              "ast-str-6d14bdaf-653b-4949-a988-bd72160b6cd8": {
+              "ast-str-9a557a23-7752-4cce-9f1d-a6f9ac923741": {
                 "string": "ドキュメント"
               }
             }
@@ -57,12 +57,12 @@
           "3": {
             "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
             "text": {
-              "ast-str-85754c8c-58a4-448d-ae08-472723af4b84": {
+              "ast-str-bb966d34-8c5f-4826-905c-c6d71db4d2f7": {
                 "string": "モバイルセッションリプレイのトラブルシューティング"
               }
             },
             "tag": {
-              "ast-str-d6a0ce74-4536-4173-a168-d57916978c0a": {
+              "ast-str-7bd87fc2-1907-41bc-945b-146121ac07f3": {
                 "string": "ドキュメント"
               }
             }
@@ -70,12 +70,12 @@
           "4": {
             "link": "/real_user_monitoring/session_replay",
             "text": {
-              "ast-str-a635174d-ef8d-4ab6-9834-e3507bcf410b": {
+              "ast-str-d0da3c02-16da-4d40-91e4-f08cbea2faa5": {
                 "string": "Session Replay"
               }
             },
             "tag": {
-              "ast-str-310cb21b-701c-4684-afb1-d449f8e564c7": {
+              "ast-str-b8ce4c09-28a9-4b98-a446-b15620b73544": {
                 "string": "ドキュメント"
               }
             }
