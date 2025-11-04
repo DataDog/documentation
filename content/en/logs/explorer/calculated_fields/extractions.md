@@ -6,7 +6,7 @@ further_reading:
   text: "Learn more about Calculated Fields"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/1NeGfv6XbysiDXwI3X54ECkOQXbQhq8M73Qzpu_D2W30/edit" btn_hidden="false" header="Calculated Fields Extractions is in Preview">}}
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSffBg9ph2zl-jTGzvgBUcXSifOjvPdRh8vJjzTMIclSB2ZLIw/viewform" btn_hidden="false" header="Calculated Fields Extractions is in Preview">}}
 Use Calculated Fields Extractions to extract values from your logs in the Log Explorer at query time using Grok patterns.
 {{< /callout >}}
 
