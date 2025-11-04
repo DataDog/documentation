@@ -1,6 +1,6 @@
 ---
 title: Anomaly
-description: One line description
+description: Learn about how the anomaly detection method works.
 disable_toc: false
 ---
 
