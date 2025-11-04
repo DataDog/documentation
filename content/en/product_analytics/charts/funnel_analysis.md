@@ -61,7 +61,7 @@ To combine an event, click the three dots next to an event and select **+ Combin
 
 Use the Group by dropdown to group the data by a specific attribute.
 
-**Note**: Group by does not work with the funnel steps visualization, your visualization will automatically change to a top list.
+**Note**: `Group by` does not work with the funnel steps visualization, your visualization automatically changes to a top list.
 
 ## Refine conversion
 
@@ -82,7 +82,7 @@ You can measure these attributes **across all steps** or between **specific step
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_conversion.png" alt="Measure attributes across all steps or specific steps." style="width:60%;" >}}
 
-Use the **filter** selector to filter by various criteria that you define. These filters will be applied to all steps of the funnel.
+Use the **filter** selector to filter by various criteria that you define. These filters are applied to all steps of the funnel.
 
 Next, click a datapoint to **investigate the specific attributes** that might have affected conversion rates, such as page load speed, ease of navigation, or checkout experience.
 
@@ -100,9 +100,9 @@ If a user performs the actions as in the example above, Datadog counts it as one
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_conversion.png" alt="Select a conversion measure, whether Unique or Total, to determine how your session conversions are counted." style="width:80%;" >}}
 
 
-**Unique**: This means that your conversion (session, user, or account) is counted only once per session, user or account. So, if the user performs the actions A → B → C → A → B → C during the session or timeframe, it counts as 1 conversion.
+**Unique**: This means that your conversion (session, user, or account) is counted only once per session, user or account. So, if the user performs the actions A → B → C → A → B → C during the session or time frame, it counts as 1 conversion.
 
-**Total**: This means that your conversion (session, user, or account) is each time the user completes the defined funnel. For example, if the user performs the actions A → B → C → A → B → C during the session or timeframe, it counts as 2 conversions.
+**Total**: This means that your conversion (session, user, or account) is each time the user completes the defined funnel. For example, if the user performs the actions A → B → C → A → B → C during the session or time frame, it counts as 2 conversions.
 
 
 If you analyze your funnel by `user` or by `account`, you can define your conversion timeframe `(**SHOULD WE LIST THE 1 DAY AS A MINIMUM?**)`. The default timeframe for conversions is 1 day meaning that Datadog uses a 24-hour window (not calendar dates) to determine if a conversion happened or not.
