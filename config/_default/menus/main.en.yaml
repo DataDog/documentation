@@ -4576,21 +4576,26 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
       weight: 306
+    - name: Supabase
+      url: database_monitoring/setup_postgres/supabase
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_supabase
+      weight: 307
     - name: Heroku
       url: database_monitoring/setup_postgres/heroku
       parent: dbm_setup_postgres
       identifier: dbm_postgres_heroku
-      weight: 307
+      weight: 308
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 308
+      weight: 309
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 309
+      weight: 310
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
@@ -4797,16 +4802,11 @@ menu:
       identifier: data_streams_dead_letter_queues
       parent: data_streams
       weight: 4
-    - name: Data Pipeline Lineage
-      url: data_streams/data_pipeline_lineage
-      identifier: data_streams_pipeline_lineage
-      parent: data_streams
-      weight: 5
     - name: Metrics and Tags
       url: data_streams/metrics_and_tags
       identifier: data_streams_metrics_and_tags
       parent: data_streams
-      weight: 6
+      weight: 5
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -6383,6 +6383,11 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_impossible_travel_rule
       weight: 2026
+    - name: Sequence
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/sequence
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_sequence_rule
+      weight: 2029
     - name: Version History
       url: security/cloud_siem/detect_and_monitor/version_history
       parent: cloud_siem_detect_and_monitor

@@ -531,6 +531,9 @@
     "request_description": "Entity YAML or JSON.",
     "request_schema_description": "Create or update entity request."
   },
+  "PreviewCatalogEntities": {
+    "summary": "Preview catalog entities"
+  },
   "DeleteCatalogEntity": {
     "description": "Delete a single entity in Software Catalog.",
     "summary": "Delete a single entity"
