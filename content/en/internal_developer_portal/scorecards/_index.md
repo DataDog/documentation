@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-Scorecards help teams measure and continuously improve the health and performance of their software. As Platform Engineers, you can create Scorecards to automatically evaluate entities in your Software Catalog against defined criteria to surface areas that need attention.
+Scorecards help your team measure and continuously improve the health and performance of your software. As Platform Engineers, you can create Scorecards to automatically evaluate entities in your Software Catalog against defined criteria to surface areas that need attention.
 
 You have full control over how scorecards are defined. Beyond the three sets of core Scorecards that Datadog platform provides around Production Readiness, Observability Best Practices, and Documentation & Ownership, you can customize default rules or create new ones to match your team’s priorities and reflect your own operational standards. This flexibility lets you tailor Scorecards to your organization’s engineering culture and maturity.
 
