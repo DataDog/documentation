@@ -33398,7 +33398,11 @@ paths:
         - timeseries_query
   /api/v1/search:
     get:
-      description: Search for metrics from the last 24 hours in Datadog.
+      deprecated: true
+      description: '**Note**: This endpoint is deprecated. Use `/api/v2/metrics` instead.
+
+
+        Search for metrics from the last 24 hours in Datadog.'
       operationId: ListMetrics
       parameters:
       - description: Query string to search metrics upon. Can optionally be prefixed
