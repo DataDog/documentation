@@ -30,7 +30,7 @@ This evaluation checks whether the agent successfully selected the appropriate t
 
 ### Example
 
-{{< img src="llm_observability/evaluations/tool_selection_failure.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_selection_1.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
 ### How to use
 1. Ensure you are running `dd-trace` v3.12+.
@@ -102,7 +102,7 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 
 ### Example
 
-{{< img src="llm_observability/evaluations/tool_argument_correctness_error.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_argument_correctness_1.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
 ##### Instrumentation
 
@@ -212,7 +212,7 @@ An agent can call tools correctly but still fail to achieve the user’s intende
 | Evaluated on LLLM spans | Evaluated using LLM | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
 
 ### Example
-{{< img src="llm_observability/evaluations/goal_completeness.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/goal_completeness_1.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 
 ##### How to Use
