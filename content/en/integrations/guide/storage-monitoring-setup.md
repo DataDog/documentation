@@ -275,10 +275,10 @@ resource "aws_s3_bucket_inventory" "daily_inventory" {
 
   After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, enable buckets for Storage Management from the Datadog UI:
   - Navigate to **Storage Management** → [Enable Buckets][405]
-  - In Step 2: **Enable S3 Inventory to get prefix level monitoring**, select _I enabled it myself_
+  - In Step 2, under **Enable S3 Inventory to get prefix level monitoring**, select **I enabled it myself**
   - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**
 
-   **Note**: If you don't see a list of your existing destination buckets under _I enabled it myself_, it means you haven't provided required S3 permissions as part of [AWS Resource Collection][604]
+   **Note**: If you don't see a list of your existing destination buckets under **I enabled it myself**, you need to provide required S3 permissions as part of [AWS Resource Collection][604].
 
 {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
@@ -342,10 +342,10 @@ For each bucket you want to monitor:
 
   After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, enable buckets for Storage Management from the Datadog UI:
   - Navigate to **Storage Management** → [Enable Buckets][205]
-  - In Step 2: **Enable S3 Inventory to get prefix level monitoring**, select _I enabled it myself_
+  - In Step 2: Under **Enable S3 Inventory to get prefix level monitoring**, select **I enabled it myself**
   - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**
 
-   **Note**: If you don't see a list of your existing destination buckets under _I enabled it myself_, it means you haven't provided required S3 permissions as part of [AWS Resource Collection][604]
+   **Note**: If you don't see a list of your existing destination buckets under **I enabled it myself**, you need to provide required S3 permissions as part of [AWS Resource Collection][604].
 
 {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
@@ -359,12 +359,15 @@ For each bucket you want to monitor:
 
 {{% tab "Existing S3 Inventory" %}}
 
-  If you have already configured S3 Inventory for the buckets you want to monitor, enable buckets for Storage Monitoring from the Datadog UI. Note: Storage Management only supports CSV format for inventories.
-      - Navigate to **Storage Management** → [Enable Buckets][603]
-  - In Step 2: **Enable S3 Inventory to get prefix level monitoring**, select _I enabled it myself_
-      - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**
+  If you have already configured S3 Inventory for the buckets you want to monitor, enable buckets for Storage Monitoring from the Datadog UI. 
+  
+  **Note**: Storage Management only supports CSV format for inventories.
 
- **Note**: If you don't see a list of your existing destination buckets under _I enabled it myself_, it means you haven't provided required S3 permissions as part of [AWS Resource Collection][604]
+      1. Navigate to **Storage Management** > [**Enable Buckets**][603].
+      2. In Step 2, under **Enable S3 Inventory to get prefix level monitoring**, select **I enabled it myself**.
+      3. Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**.
+
+ **Note**: If you don't see a list of your existing destination buckets under **I enabled it myself**, you need to provide required S3 permissions as part of [AWS Resource Collection][604].
 
 {{< img src="integrations/guide/storage_monitoring/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
