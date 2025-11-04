@@ -26,23 +26,6 @@ Use Observability Pipelines Packs to help you set up and optimize Observability 
 - Logs that need to be parsed
 - Logs that need to be formatted for the destination
 
-## Setup
-
-To set up packs:
-
-1. Navigate to the [Pipelines][1] page.
-1. Click **Packs**.
-1. Click the pack you want to set up.
-1. You can either create a new pipeline from the pack or add the pack to an existing pipelines.
-    - If you clicked **Add to New Pipeline**, in the new pipeline that was created:
-        - Click the processor group that was added to see the individual processors that the pack added and edit them as needed. See [Processors][2] for more information.
-        - See [Set Up Pipelines][3] for information on setting up the rest of the pipeline.
-    - If you clicked **Add to Existing Pipeline**:
-        1. Select the pipeline you want to add the pack to.
-        1. Click **Add to Existing Pipeline**.
-            1. The pack is added to the last processor group in your pipeline.
-            1. Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
-
 ## Packs
 
 These are the available packs:
@@ -67,6 +50,23 @@ These are the available packs:
 - [Zscaler ZIA Firewall][21]
 - [Zscaler ZIA Tunnel][22]
 - [Zscaler ZIA Web Logs][23]
+
+## Setup
+
+To set up packs:
+
+1. Navigate to the [Pipelines][1] page.
+1. Click **Packs**.
+1. Click the pack you want to set up.
+1. You can either create a new pipeline from the pack or add the pack to an existing pipelines.
+    - If you clicked **Add to New Pipeline**, in the new pipeline that was created:
+        - Click the processor group that was added to see the individual processors that the pack added and edit them as needed. See [Processors][2] for more information.
+        - See [Set Up Pipelines][3] for information on setting up the rest of the pipeline.
+    - If you clicked **Add to Existing Pipeline**:
+        1. Select the pipeline you want to add the pack to.
+        1. Click **Add to Existing Pipeline**.
+            1. The pack is added to the last processor group in your pipeline.
+            1. Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/processors/
