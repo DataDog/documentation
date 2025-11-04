@@ -69,23 +69,27 @@ You can further analyze the information on the funnel page to understand the con
 
 You can analyze conversion by **session**, **users** or **accounts**, which means you can understand conversion across all sessions, or by distinct users or accounts. This can be useful if you suspect, for instance, that a minority of your user base converts at a high rate.
 
-<div class="alert alert-info"> 
-If you select <code>User</code>, the funnel requires the same individual user (@user.id) to complete every step for the conversion to count 
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_refine_conversion.png" alt="Specify which facet you'd like to use to refine your conversion. The available options are Session, User, and Account." style="width:50%;" >}}
 
-If you select <code>Account</code>, the funnel is tied to the <code>@account.id</code> facet which maps to org IDs in Datadog. In this case, different users within the same account can complete different steps and the conversion still counts. 
+
+<div class="alert alert-info"> 
 
 If you select <code>Session</code>, all steps must be completed within the same <code>@session.id</code> to count as a conversion.
+
+If you select <code>User</code>, the funnel requires the same individual user (<code>@user.id</code>) to complete every step for the conversion to count.
+
+If you select <code>Account</code>, the funnel is tied to the <code>@account.id</code> facet which maps to org IDs in Datadog. In this case, different users within the same account can complete different steps and the conversion still counts. 
 
 </div>
 
 You can measure conversion by the following attributes:
 
-- **Conversion count** - A count of users who went through the funnel you've defined.
-- **Conversion rate** - A conversion refers to the moment when a user responds to a call to action. This rate is the percentage of users who have entered the funnel and converted.
+- **Conversion count**: A count of users who went through the funnel you've defined.
+- **Conversion rate**: A conversion refers to the moment when a user responds to a call to action. This rate is the percentage of users who have entered the funnel and converted.
 
   **Note**: Only completed RUM sessions contribute to conversion rates.
 
-- **Time to convert** - The time it took for the user to complete the step events.
+- **Time to convert**: The time it took for the user to complete the step events.
 
 You can measure these attributes **across all steps** or between **specific steps**.
 
