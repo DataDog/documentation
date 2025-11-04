@@ -268,7 +268,6 @@ jobs:
           identifier: default
 
       - name: Deploy
-        if: success()
         run: |
           echo "Deployment Gate passed, proceeding with deployment"
           # Your deployment commands here
