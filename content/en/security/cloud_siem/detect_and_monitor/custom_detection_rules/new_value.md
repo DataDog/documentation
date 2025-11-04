@@ -13,10 +13,10 @@ See [Create Rule][1] for instructions on how to configure a new value rule.
 
 A new value detection rule:
 
-- Learns about the fields you have selected, such as `@userIdentity.arn`.
+- Learns the values of the fields you have selected, such as `@userIdentity.arn`.
 - Learns by recording values over a learning period or uses a threshold method that needs no warmup.
-- Triggers a signal when a value appears that had not been observed for the current scope.
-- Forgets a learned value if the value has not observed for the number of days set in the [Forget value][2] option. If the value has been forgotten, the rule alerts when the value appears.
+- Triggers a signal when a value appears that has not been observed within the current scope.
+- Forgets a learned value if the value has not been observed for the number of days set in the [Forget value][2] option. If the value has been forgotten, the rule alerts when the value appears.
 
 ### Configuration options
 
@@ -34,13 +34,13 @@ The `group by` field defines the scope within which new values are evaluated, su
 
 #### Learning duration
 
-{{< img src="security/security_monitoring/detection_rules/new_value/learning_duration.png" alt="A new value rule's query with the leaning duration setting highlighted" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/new_value/learning_duration.png" alt="A new value rule's query with the learning duration setting highlighted" style="width:100%;" >}}
 
 The learning duration defines the length of time the rule learns values for the selected fields. The maximum learning duration is 30 days. No signals are generated during this phase.
 
 #### Forget value
 
-{{< img src="security/security_monitoring/detection_rules/new_value/forget_after.png" alt="A new value rule's other parameter section showing the forget after option" style="width:40%;" >}}
+{{< img src="security/security_monitoring/detection_rules/new_value/forget_after.png" alt="A new value rule's other parameters section showing the forget after option" style="width:40%;" >}}
 
 The [Forget value][2] option determines how long the rule keeps a value known. After this period has passed, the value is forgotten and the rule alerts on the value again. The maximum number of days for **Forget value** is 30 days.
 
