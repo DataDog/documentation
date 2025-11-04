@@ -1,5 +1,6 @@
 ---
 title: Aggregation Key Processor
+description: Generate custom aggregation keys based on event attributes or tags to enable effective deduplication and improve event correlations
 ---
 
 Use the aggregation key processor to generate a custom aggregation key (`@aggregation_key`) based on event attributes or tags. For example, you can use the aggregation key processor to create a custom aggregation key based on an event's title and source tag. Events with matching values share the same key, enabling more effective deduplication and improving the quality of [Event Correlations][1].

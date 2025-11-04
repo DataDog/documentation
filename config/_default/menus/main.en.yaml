@@ -4581,21 +4581,26 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
       weight: 306
+    - name: Supabase
+      url: database_monitoring/setup_postgres/supabase
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_supabase
+      weight: 307
     - name: Heroku
       url: database_monitoring/setup_postgres/heroku
       parent: dbm_setup_postgres
       identifier: dbm_postgres_heroku
-      weight: 307
+      weight: 308
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 308
+      weight: 309
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 309
+      weight: 310
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
@@ -4802,16 +4807,11 @@ menu:
       identifier: data_streams_dead_letter_queues
       parent: data_streams
       weight: 4
-    - name: Data Pipeline Lineage
-      url: data_streams/data_pipeline_lineage
-      identifier: data_streams_pipeline_lineage
-      parent: data_streams
-      weight: 5
     - name: Metrics and Tags
       url: data_streams/metrics_and_tags
       identifier: data_streams_metrics_and_tags
       parent: data_streams
-      weight: 6
+      weight: 5
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -6388,6 +6388,11 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_impossible_travel_rule
       weight: 2026
+    - name: Sequence
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/sequence
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_sequence_rule
+      weight: 2029
     - name: Version History
       url: security/cloud_siem/detect_and_monitor/version_history
       parent: cloud_siem_detect_and_monitor
@@ -7104,41 +7109,46 @@ menu:
       url: synthetics/browser_tests/app-that-requires-login
       parent: synthetics_browser_tests
       weight: 304
+    - name: Network Path Testing
+      url: synthetics/network_path_tests/
+      parent: synthetics
+      identifier: synthetics_network_path_tests
+      weight: 4
     - name: Mobile Application Testing
       url: synthetics/mobile_app_testing/
       parent: synthetics
       identifier: synthetics_mobile_app_testing
-      weight: 4
+      weight: 5
     - name: Testing Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/steps
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_steps
-      weight: 401
+      weight: 501
     - name: Testing Results
       url: synthetics/mobile_app_testing/mobile_app_tests/results
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_results
-      weight: 402
+      weight: 502
     - name: Advanced Options for Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/advanced_options
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
-      weight: 403
+      weight: 503
     - name: Supported Devices
       url: synthetics/mobile_app_testing/devices/
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_devices
-      weight: 404
+      weight: 504
     - name: Restricted Networks
       url: synthetics/mobile_app_testing/mobile_app_tests/restricted_networks
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_restricted_networks
-      weight: 405
+      weight: 505
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
-      weight: 406
+      weight: 506
     - name: Test Suites
       url: synthetics/test_suites/
       parent: synthetics
@@ -7253,42 +7263,42 @@ menu:
       url: synthetics/guide/
       parent: synthetics
       identifier: synthetics_guides
-      weight: 8
+      weight: 9
     - name: Notifications
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
-      weight: 9
+      weight: 10  
     - name: Template Variables
       url: synthetics/notifications/template_variables
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables
-      weight: 901
+      weight: 1001
     - name: Conditional Alerting
       url: synthetics/notifications/conditional_alerting
       parent: synthetics_notifications
       identifier: synthetics_notifications_conditional_alerting
-      weight: 902
+      weight: 1002
     - name: Advanced Notifications
       url: synthetics/notifications/advanced_notifications
       parent: synthetics_notifications
       identifier: synthetics_notifications_advanced_notifications
-      weight: 903
+      weight: 1003
     - name: Integrate with Statuspage
       url: synthetics/notifications/statuspage
       parent: synthetics_notifications
       identifier: synthetics_notifications_statuspage
-      weight: 904
+      weight: 1004
     - name: Troubleshooting
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 10
+      weight: 11
     - name: Data Security
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
-      weight: 11
+      weight: 12
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing

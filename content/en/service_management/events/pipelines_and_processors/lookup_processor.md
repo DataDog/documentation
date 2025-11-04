@@ -1,6 +1,6 @@
 ---
 title: Lookup Processor
-
+description: Map event attributes to human-readable values using Reference Tables or manual mapping tables for event enrichment
 ---
 
 Use the lookup processor to define a mapping between an event attribute and a human readable value saved in a [Reference Table][1] or the processors mapping table.

@@ -1,6 +1,6 @@
 ---
 title: Arithmetic Processor
-
+description: Add a new attribute to an event with the result of a formula to remap time attributes or compute operations on event attributes
 ---
 
 Use the arithmetic processor to add a new attribute (without spaces or special characters in the new attribute name) to an event with the result of the provided formula. This remaps different time attributes with different units into a single attribute, or compute operations on attributes within the same event.
