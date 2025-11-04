@@ -29,7 +29,7 @@ The GitHub integration must be granted the following permissions to enable basic
 
 #### Additional permissions for CI integration
 
-To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the Auto-commit feature. This requires additional permissions:  
+To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
 
 - **Repository permissions**  
   - `Checks: Read`  
@@ -52,14 +52,14 @@ To configure telemetry tagging, see [Tag your telemetry with Git information][7]
 
 You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][11] > **Service Repository Mapping**.
 
-### Enable Auto-push
+### Enable auto-push
 
-Enabling Auto-Push allows the Dev Agent to push commits directly to a branch. With Auto-Push, the Dev Agent can:  
+Enabling auto-push allows the Dev Agent to push commits directly to a branch. With auto-push, the Dev Agent can:  
 - Open merge-ready pull requests that fix errors, vulnerabilities, and other issues.  
 - Update pull requests in response to your comments in GitHub.  
 - Resolve CI failures automatically.  
 
-If Auto-Push is disabled, you must review and approve code in Datadog before it is pushed. 
+If auto-push is disabled, you must review and approve code in Datadog before it is pushed. 
 
 ### Configure custom instructions
 
@@ -89,7 +89,7 @@ To configure a repository environment:
 
 When you launch the Dev Agent, it runs the setup command at startup and can use any tools installed in your environment. 
 
-**Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `CLAUDE.md`) to your repository with instructions on how to build and test your code.
+**Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
 ## Further reading
 

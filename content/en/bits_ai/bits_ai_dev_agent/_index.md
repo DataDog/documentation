@@ -25,7 +25,7 @@ Bits AI Dev Agent is available for the following Datadog products:
 | [Error Tracking][1]       | Preview              | Diagnoses issues and generates code fixes on-demand or autonomously|
 | [Trace Explorer][11]      | Preview              | Analyzes traces and provides remediations for errors and latency bottlenecks |
 | [Code Security][2]        | Preview              | Remediates code vulnerabilities individually or in bulk    |
-| [Test Optimization][4]    | Preview              | Provides code fixes for flaky tests and verifies that tests won't flake again.                                                         |
+| [Test Optimization][4]    | Preview              | Provides code fixes for flaky tests and verifies that tests remain stable                                                         |
 | [Continuous Profiler][3]  | Preview              | Provides code changes for [Automated Analysis][10] insights                  |
 | [Containers][12  ]        | Preview              | Provides code changes for Container Recommendations                  |
 
@@ -33,11 +33,11 @@ Bits AI Dev Agent is available for the following Datadog products:
 
 ## Key capabilities 
 
-The following details how Bits AI Dev Agent integrates with Datadog products to generate contextual code fixes.
+The following sections detail how Bits AI Dev Agent integrates with Datadog products to generate contextual code fixes.
 
 ### Error tracking
 
-Bits AI Dev Agent diagnoses and remediates code issues with context and unit-tested fixes:
+In [Error Tracking][1], Bits AI Dev Agent diagnoses and remediates code issues with context and unit-tested fixes:
 - Determines whether an error can be fixed through code and generates a fix with unit tests.
 - Provides links within the chat to relevant files and methods for streamlined navigation.
 - Analyzes errors asynchronously as they arrive.
@@ -47,13 +47,13 @@ Bits AI Dev Agent diagnoses and remediates code issues with context and unit-tes
 
 ### Flaky test management 
 
-Bits AI Dev Agent fixes flaky tests that are detected through Flaky Test Management in [Test Optimization][4] and attempts to verifies that tests remain stable.
+Bits AI Dev Agent fixes flaky tests that are detected through Flaky Test Management in [Test Optimization][4] and attempts to verify that tests remain stable.
 
 [Auto-push](#auto-push) is available for this feature. 
 
 ### Trace investigation
 
-Bits AI Dev Agent debugs errors and latency directly from traces using natural language queries:
+Bits AI Dev Agent debugs errors and latency directly from [traces][11] using natural language queries:
 - Analyzes and summarizes large traces.
 - Determines likely root causes for errors and latency.
 - Generates code fixes when prompted.
@@ -75,7 +75,7 @@ Bits AI Dev Agent integrates with GitHub to create pull requests, respond to com
 - Generates PR titles and descriptions based on your PR template.
 - Opens PRs as drafts, iterates using CI logs, and marks them ready for review when checks pass.
 - Continues iterating in response to chat messages and review feedback.
-  **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev will never auto-merge PRs.
+  **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
 
 Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
 
