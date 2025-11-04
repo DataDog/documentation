@@ -302,6 +302,7 @@ local/bin/py/submit_github_status_check.py
 layouts/partials/markdoc-assets.html
 static/cdocs
 content/en/**/*.ast.json
+layouts/shortcodes/mdoc/en/**/*.ast.json
 *.tempAst.json
 
 # Cursor editor configuration
