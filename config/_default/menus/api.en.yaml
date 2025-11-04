@@ -7663,6 +7663,84 @@ menu:
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
       generated: true
+    - name: Trigger a schedule deployment
+      url: '#trigger-a-schedule-deployment'
+      identifier: fleet-automation-trigger-a-schedule-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerFleetSchedule
+        unstable:
+          - v2
+        order: 5
+    - name: Update a schedule
+      url: '#update-a-schedule'
+      identifier: fleet-automation-update-a-schedule
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFleetSchedule
+        unstable:
+          - v2
+        order: 3
+    - name: Get a schedule by ID
+      url: '#get-a-schedule-by-id'
+      identifier: fleet-automation-get-a-schedule-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetSchedule
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a schedule
+      url: '#delete-a-schedule'
+      identifier: fleet-automation-delete-a-schedule
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteFleetSchedule
+        unstable:
+          - v2
+        order: 4
+    - name: Create a schedule
+      url: '#create-a-schedule'
+      identifier: fleet-automation-create-a-schedule
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetSchedule
+        unstable:
+          - v2
+        order: 1
+    - name: List all schedules
+      url: '#list-all-schedules'
+      identifier: fleet-automation-list-all-schedules
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetSchedules
+        unstable:
+          - v2
+        order: 0
     - name: Cancel a deployment
       url: '#cancel-a-deployment'
       identifier: fleet-automation-cancel-a-deployment
@@ -7676,9 +7754,9 @@ menu:
         unstable:
           - v2
         order: 4
-    - name: Get a deployment by ID
-      url: '#get-a-deployment-by-id'
-      identifier: fleet-automation-get-a-deployment-by-id
+    - name: Get a configuration deployment by ID
+      url: '#get-a-configuration-deployment-by-id'
+      identifier: fleet-automation-get-a-configuration-deployment-by-id
       parent: fleet-automation
       generated: true
       params:
@@ -7689,9 +7767,22 @@ menu:
         unstable:
           - v2
         order: 3
-    - name: Create a deployment
-      url: '#create-a-deployment'
-      identifier: fleet-automation-create-a-deployment
+    - name: Upgrade hosts
+      url: '#upgrade-hosts'
+      identifier: fleet-automation-upgrade-hosts
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentUpgrade
+        unstable:
+          - v2
+        order: 2
+    - name: Create a configuration deployment
+      url: '#create-a-configuration-deployment'
+      identifier: fleet-automation-create-a-configuration-deployment
       parent: fleet-automation
       generated: true
       params:
@@ -7712,6 +7803,19 @@ menu:
           - v2
         operationids:
           - ListFleetDeployments
+        unstable:
+          - v2
+        order: 0
+    - name: List all available Agent versions
+      url: '#list-all-available-agent-versions'
+      identifier: fleet-automation-list-all-available-agent-versions
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentVersions
         unstable:
           - v2
         order: 0
