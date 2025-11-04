@@ -6,6 +6,9 @@ further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
   text: "Single Sign-On With SAML"
+- link: "account_management/saml/mapping/"
+  tag: "Documentation"
+  text: "SAML Group Mapping"
 algolia:
   tags: ['saml']
 ---
@@ -55,23 +58,22 @@ This page covers how to enable single sign-on (SSO) with SAML in Datadog, as wel
 
 ## Configuring multiple SAML providers
 
-Enterprise customers can have multiple SAML configurations per organization. This feature simplifies identity management across complex environments, such as during IdP changes, mergers, or contractor onboarding.
-
-Considerations for using multiple SAML providers:
-
-- You can configure up to three (3) IdPs at the same time. If you no longer need a configuration, you should delete it, as there is no way to pause a configuration.
-- All configured IdPs are treated equally; there is no way to set a default or prioritized configuration.
-- All users can see and access all configured IdPs; there is no way to assign specific user groups to specific configurations. Setting clear and descriptive names for each provider helps users select the appropriate IdP during login.
-- If you use SAML role mapping and want to use the same role mappings in any additional providers you add, make sure the attributes in the new IdP(s) match what is defined in your mappings. If you add a new IdP, make sure to either use the same attribute names as your existing IdP, or add new mappings that align with the new IdP's attributes to ensure roles are assigned correctly when users log in with different IdPs.
+Enterprise customers can have multiple SAML configurations per organization (up to three at the same time). This feature simplifies identity management across complex environments, such as during IdP changes, mergers, or contractor onboarding.
 
 To configure additional SAML providers:
 
 1. Navigate to **Organization Settings > Login Methods**. Under **SAML**, click **Update**, then **Add SAML**.
 2. In the configuration modal, create a user-friendly name for this SAML provider. The name appears to end users when they choose a login method.
+    <br>
+    <div class="alert alert-info">All users can see and access all configured IdPs; there is no way to assign specific user groups to specific configurations. Setting clear and descriptive names for each provider helps users select the appropriate IdP during login. Also note that there is no way to set a default configuration.</a></div>
 3. Upload the IdP metadata from your SAML identity provider by clicking **browse files** or dragging and dropping the XML metadata file onto the modal.
     <br>
     <div class="alert alert-info">The IdP metadata must contain ASCII characters only.</a></div>
 4. Click **Save**.
+
+### Role mapping with multiple SAML providers
+
+If you use SAML role mapping and want to use the same role mappings in any additional providers you add, make sure the attributes in the new IdP(s) match what is defined in your mappings. If you add a new IdP, make sure to either use the same attribute names as your existing IdP, or add new mappings that align with the new IdP's attributes to ensure roles are assigned correctly when users log in with different IdPs.
 
 [1]: /help/
 [2]: https://learn.microsoft.com/en-us/entra/architecture/auth-saml
