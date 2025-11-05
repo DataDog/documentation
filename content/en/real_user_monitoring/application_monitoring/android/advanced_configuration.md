@@ -238,7 +238,7 @@ Adding user information to your RUM sessions makes it possible to:
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
+{{< img src="real_user_monitoring/application_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -638,7 +638,7 @@ To modify some attributes in your RUM events, or to drop some of the events enti
    |               | `view.url`           | URL of the view.                                 |
    |               | `view.name`          | Name of the view.                                |
    
-   **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
+   **Note**: If you return null from the `EventMapper<T>` implementation, the event is kept and sent as-is.
 
 ## Retrieve the RUM session ID
 

@@ -12,6 +12,10 @@ aliases:
 - /integrations/faq/azure-vm-status-is-not-reporting
 - /integrations/faq/azure-status-metric
 - /integrations/faq/azure-count-metric
+- /integrations/faq/azure-troubleshooting
+- /integrations/faq/azure-vms-are-showing-up-in-the-app-but-not-reporting-metrics
+- /integrations/faq/my-Azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list
+- /integrations/faq/powershell-command-to-install-azure-datadog-extension
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
   tag: "Documentation"

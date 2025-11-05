@@ -143,5 +143,6 @@ Learn more about how [forecasting][3] works and data requirements.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
-[2]: /cloud_cost_management/monitors/
+[2]: /cloud_cost_management/cost_changes/monitors/
 [3]: /cloud_cost_management/planning/forecasting
+

@@ -32,6 +32,12 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
+### Security
+
+{{< learning-center-callout header="Get real-time security guardrails for your AI apps and agents" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
+  AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
+{{< /learning-center-callout >}}
+
 ### Permissions
 
 [`LLM Observability Write` permissions][7] are necessary to configure evaluations.

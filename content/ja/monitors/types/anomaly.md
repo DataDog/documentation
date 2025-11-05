@@ -168,8 +168,6 @@ Robust
 
 Enterprise プランの顧客は、[create-monitor API エンドポイント][11] を使用して、異常検知モニターを作成できます。Datadog は API 用のクエリを作成する際に [monitor の JSON のエクスポート][12] を**強く推奨**します。Datadog の [モニター作成ページ][1] を使用すると、プレビュー グラフとパラメーターの自動調整を利用でき、不適切に構成されたモニターの回避に役立ちます。
 
-**注**: 異常検知モニターは Enterprise プランの顧客のみが利用できます。Pro プランで異常検知モニターに関心がある場合は、Customer Success の担当者に連絡するか、[Datadog Billing チーム][13] にメールしてください。
-
 異常モニターは、他のモニターと[同じ API][14] を使用して管理されます。これらのフィールドは、異常モニターに固有です。
 
 ### `query`
@@ -243,13 +241,13 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 }
 ```
 
-## トラブルシューティング
+## トラブル シューティング
 
 * [異常検知モニターに関する FAQ][15]
 * [異常モニターのタイムゾーンを更新する][16]
 * [Datadog サポートへのお問い合わせ][17]
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

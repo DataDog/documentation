@@ -25,6 +25,10 @@ Cloud Security Vulnerabilities supports vulnerability scanning for hosts and con
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg                  | {{< X >}}         | {{< X >}}         |
 | Windows                  | Windows Server 2016/2019/2022, Windows 10 and later | Windows OS                | {{< X >}}         | {{< X >}}         |
 
+<div class="alert alert-info">
+Datadog supports official OS packages from vendors listed above. Third-party or self-compiled packages are not supported.
+</div>
+
 {{% collapse-content title="Windows limitations" level="h4" %}}
 - Datadog detects vulnerabilities in Windows by identifying the Windows version and installed security knowledge base (KB) updates to address vulnerabilities associated with that version. However, some KB updates are cumulative and contain other KB updates, which might cause Datadog to misidentify which updates have been installed.
 - Datadog can't track vulnerability fixes that Windows applies outside of KB updates.

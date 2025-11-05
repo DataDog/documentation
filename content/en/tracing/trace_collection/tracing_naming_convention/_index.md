@@ -4,7 +4,7 @@ further_reading:
     - link: 'logs/log_configuration/attributes_naming_convention'
       tag: 'Documentation'
       text: 'Learn more about standard attributes for Log Management'
-    - link: '/real_user_monitoring/browser/data_collected'
+    - link: '/real_user_monitoring/application_monitoring/browser/data_collected'
       tag: 'Documentation'
       text: 'Data collected for RUM Browser'
     - link: '/tracing/trace_explorer/query_syntax/'

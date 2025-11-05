@@ -56,6 +56,7 @@ The following AI clients are compatible with the Datadog MCP Server.
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
 | [Q CLI][10] | Amazon | For remote authentication, add `"oauthScopes": []` to the server [configuration](?tab=remoteauthentication#example-configurations). |
+| [Kiro][22] | Amazon | |
 | [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
@@ -428,3 +429,4 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [19]: /account_management/rbac/permissions/#case-and-incident-management
 [20]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
 [21]: /synthetics/
+[22]: https://kiro.dev/

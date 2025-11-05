@@ -308,7 +308,9 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
-          "score_value": 3
+          "score_value": 3,
+          "assessment": "fail",
+          "reasoning": "The response provided incorrect information about the weather forecast."
         }
       ]
     }
@@ -364,7 +366,9 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
-          "score_value": 3
+          "score_value": 3,
+          "assessment": "fail",
+          "reasoning": "The response provided incorrect information about the weather forecast."
         }
       ]
     }
@@ -395,6 +399,8 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | label [*required*]      | string | The unique name or label for the provided evaluation . |
 | categorical_value [*required if the metric_type is "categorical"*]    | string | A string representing the category that the evaluation belongs to. |
 | score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
+| assessment | string | An assessment of this evaluation. Accepted values are `pass` and `fail`. |
+| reasoning | string | A text explanation of the evaluation result. |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular evaluation metric.       |
 
 #### JoinOn

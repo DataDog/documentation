@@ -262,11 +262,24 @@ This allows Datadog to identify the JSON as a structured log and allows its attr
 
 You can disable JSON aggregation with:
 
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
 ```yaml
 logs_config:
   auto_multi_line:
     enable_json_aggregation: false
 ```
+
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+```shell
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_JSON_AGGREGATION=false
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 
 ## Advanced customization
