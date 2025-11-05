@@ -54,13 +54,13 @@ Auto-push allows the Agent to create branches, push code, and open PRs when it d
 - Update PRs in response to your comments in GitHub
 - Update PRs to address CI failures
 
-When auto-push is disabled, you must review code in Datadog before it gets pushed.
+Auto-push only opens PRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
 
 Auto-push is available for Error Tracking and Test Optimization. 
 
 #### Security considerations
 
-Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Agent, but it is not foolproof. By enabling this feature, you acknowledge that you understand the inherent risks involved. 
+Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Agent, but it is not foolproof. 
 
 ### Error tracking
 

@@ -46,12 +46,11 @@ You can also configure service-to-repository mapping manually in the Bits AI Dev
 
 ### Enable auto-push
 
-Enabling auto-push allows the Dev Agent to push commits directly to a branch. With auto-push, the Dev Agent can:  
-- Open merge-ready pull requests that fix errors, vulnerabilities, and other issues.  
-- Update pull requests in response to your comments in GitHub.  
-- Resolve CI failures automatically.  
+Enable auto-push to allow the Dev Agent to push commits directly to a branch:
 
-If auto-push is disabled, you must review and approve code in Datadog before it is pushed. 
+1. Navigate to **Bits AI Dev** > [**Settings**][12] and use the toggle to enable auto-push.
+
+**Note**: If auto-push is disabled, you must review and approve code in Datadog before it is pushed. 
 
 ### Configure custom instructions
 
