@@ -26,7 +26,7 @@ Engineering Reports provide you with out-of-the-box, executive-level reports on 
 
 Managers and directors who oversee multiple teams can filter reports by [team hierarchies][1] to view aggregated metrics for their organization or focus on specific subteams.
 
-{{< img src="tracing/internal_developer_portal/team-hierarchy-filter.png" alt="A filter dropdown showing a hierarchical team structure with a subset of subteams selected" style="width:50%;" >}}
+{{< img src="tracing/internal_developer_portal/team-hierarchy-filter-with-report.png" alt="The DORA report with a filter dropdown showing a hierarchical team structure and a subset of subteams selected" style="width:100%;" >}}
 
 {{< whatsnext desc="Explore the following reports:" >}}
     {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
