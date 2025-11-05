@@ -1,21 +1,59 @@
 {
+  "ListFleetAgentVersions": {
+    "description": "Retrieve a list of all available Datadog Agent versions.\n\nThis endpoint returns the available Agent versions that can be deployed to your fleet.\nThese versions are used when creating deployments or configuring schedules for\nautomated Agent upgrades.",
+    "summary": "List all available Agent versions"
+  },
   "ListFleetDeployments": {
     "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
     "summary": "List all deployments"
   },
   "CreateFleetDeploymentConfigure": {
-    "description": "Create a new deployment to apply configuration changes\nto a fleet of hosts matching the specified filter query.",
-    "summary": "Create a deployment",
+    "description": "Create a new deployment to apply configuration changes\nto a fleet of hosts matching the specified filter query.\n\nThis endpoint supports two types of configuration operations:\n- `merge-patch`: Merges the provided patch data with the existing configuration file,\n  creating the file if it doesn't exist\n- `delete`: Removes the specified configuration file from the target hosts\n\nThe deployment is created and started automatically. You can specify multiple configuration\noperations that will be executed in order on each target host. Use the filter query to target\nspecific hosts using the Datadog query syntax.",
+    "summary": "Create a configuration deployment",
     "request_description": "Request payload containing the deployment details.",
-    "request_schema_description": "Request payload for creating a new deployment."
+    "request_schema_description": "Request payload for creating a new configuration deployment."
+  },
+  "CreateFleetDeploymentUpgrade": {
+    "description": "Create and immediately start a new package upgrade\non hosts matching the specified filter query.\n\nThis endpoint allows you to upgrade the Datadog Agent to a specific version\non hosts matching the specified filter query.\n\nThe deployment is created and started automatically. The system will:\n1. Identify all hosts matching the filter query\n2. Validate that the specified version is available\n3. Begin rolling out the package upgrade to the target hosts",
+    "summary": "Upgrade hosts",
+    "request_description": "Request payload containing the package upgrade details.",
+    "request_schema_description": "Request payload for creating a new package upgrade deployment."
   },
   "GetFleetDeployment": {
-    "description": "Retrieve the details of a specific deployment using its unique identifier.",
-    "summary": "Get a deployment by ID"
+    "description": "Retrieve detailed information about a specific deployment using its unique identifier.\nThis endpoint returns comprehensive information about a deployment, including:\n- Deployment metadata (ID, type, filter query)\n- Total number of target hosts\n- Current high-level status (pending, running, succeeded, failed)\n- Estimated completion time\n- Configuration operations that were or are being applied\n- Detailed host list: A paginated array of hosts included in this deployment with individual\n  host status, current package versions, and any errors\n\nThe host list provides visibility into the per-host execution status, allowing you to:\n- Monitor which hosts have completed successfully\n- Identify hosts that are still in progress\n- Investigate failures on specific hosts\n- View current package versions installed on each host (including initial, target, and current\n  versions for each package)\n\nPagination: Use the `limit` and `page` query parameters to paginate through hosts. The response\nincludes pagination metadata in the `meta.hosts` field with information about the current page,\ntotal pages, and total host count. The default page size is 50 hosts, with a maximum of 100.",
+    "summary": "Get a configuration deployment by ID"
   },
   "CancelFleetDeployment": {
-    "description": "Cancel this deployment and stop all associated operations.\nIf a workflow is currently running for this deployment, it is canceled immediately.\nChanges already applied to hosts are not rolled back.",
+    "description": "Cancel an active deployment and stop all pending operations.\nWhen you cancel a deployment:\n- All pending operations on hosts that haven't started yet are stopped\n- Operations currently in progress on hosts may complete or be interrupted, depending on their current state\n- Configuration changes or package upgrades already applied to hosts are not rolled back\n\nAfter cancellation, you can view the final state of the deployment using the GET endpoint to see which hosts\nwere successfully updated before the cancellation.",
     "summary": "Cancel a deployment"
+  },
+  "ListFleetSchedules": {
+    "description": "Retrieve a list of all schedules for automated fleet deployments.\n\nSchedules allow you to automate package upgrades by defining maintenance windows\nand recurrence rules. Each schedule automatically creates deployments based on its\nconfiguration.",
+    "summary": "List all schedules"
+  },
+  "CreateFleetSchedule": {
+    "description": "Create a new schedule for automated package upgrades.\n\nSchedules define when and how often to automatically deploy package upgrades to a fleet\nof hosts. Each schedule includes:\n- A filter query to select target hosts\n- A recurrence rule defining maintenance windows\n- A version strategy (e.g., always latest, or N versions behind latest)\n\nWhen the schedule triggers during a maintenance window, it automatically creates a\ndeployment that upgrades the Datadog Agent to the specified version on all matching hosts.",
+    "summary": "Create a schedule",
+    "request_description": "Request payload containing the schedule details.",
+    "request_schema_description": "Request payload for creating a new schedule."
+  },
+  "DeleteFleetSchedule": {
+    "description": "Delete a schedule permanently.\n\nWhen you delete a schedule:\n- The schedule is permanently removed and will no longer create deployments\n- Any deployments already created by this schedule are not affected\n- This action cannot be undone\n\nIf you want to temporarily stop a schedule from creating deployments, consider\nupdating its status to \"inactive\" instead of deleting it.",
+    "summary": "Delete a schedule"
+  },
+  "GetFleetSchedule": {
+    "description": "Retrieve detailed information about a specific schedule using its unique identifier.\n\nThis endpoint returns comprehensive information about a schedule, including:\n- Schedule metadata (ID, name, creation/update timestamps)\n- Filter query for selecting target hosts\n- Recurrence rule defining when deployments are triggered\n- Version strategy for package upgrades\n- Current status (active or inactive)",
+    "summary": "Get a schedule by ID"
+  },
+  "UpdateFleetSchedule": {
+    "description": "Partially update a schedule by providing only the fields you want to change.\n\nThis endpoint allows you to modify specific attributes of a schedule without\naffecting other fields. Common use cases include:\n- Changing the schedule status between active and inactive\n- Updating the maintenance window times\n- Modifying the filter query to target different hosts\n- Adjusting the version strategy\n\nOnly include the fields you want to update in the request body. All fields\nare optional in a PATCH request.",
+    "summary": "Update a schedule",
+    "request_description": "Request payload containing the fields to update.",
+    "request_schema_description": "Request payload for partially updating a schedule."
+  },
+  "TriggerFleetSchedule": {
+    "description": "Manually trigger a schedule to immediately create and start a deployment.\n\nThis endpoint allows you to manually initiate a deployment using the schedule's\nconfiguration, without waiting for the next scheduled maintenance window. This is\nuseful for:\n- Testing a schedule before it runs automatically\n- Performing an emergency update outside the regular maintenance window\n- Creating an ad-hoc deployment with the same settings as a schedule\n\nThe deployment is created immediately with:\n- The same filter query as the schedule\n- The package version determined by the schedule's version strategy\n- All matching hosts as targets\n\nThe manually triggered deployment is independent of the schedule and does not\naffect the schedule's normal recurrence pattern.",
+    "summary": "Trigger a schedule deployment"
   },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",
