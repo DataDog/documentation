@@ -16,7 +16,7 @@ further_reading:
 ## Prerequisites
 
 - **Datadog SDK**: `dd-trace-js` version [x.y.z] or later.
-- **OpenTelemetry Logs API**: The `@opentelemetry/api-logs` package must be installed.
+- **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
 
 ## Setup
 

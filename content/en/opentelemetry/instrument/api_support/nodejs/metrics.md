@@ -17,6 +17,7 @@ further_reading:
 
 - **Datadog SDK**: dd-trace version [x.y.z] or later.
 - **OpenTelemetry API**: `@opentelemetry/api` version [x.y.z] or later. (The Datadog SDK provides the implementation for this API).
+- **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
 
 ## Setup
 
