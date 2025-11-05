@@ -17,7 +17,7 @@ further_reading:
 
 Plugins let developers build, deploy, and manage fully custom applications natively within Datadog using local development workflows and the Datadog CLI.  
 
-Plugins introduces a local, code-first development model within Datadog, building on [App Builder][1] concepts to support platform engineers and developers who prefer working with code instead of visual editors.
+Plugins introduce a local, code-first development model within Datadog, building on [App Builder][1] concepts to support platform engineers and developers who prefer working with code instead of visual editors.
 
 A plugin combines a React-based frontend, serverless backend functions, and Datadog-managed infrastructure, including Datastore, secret management, and telemetry.
 
