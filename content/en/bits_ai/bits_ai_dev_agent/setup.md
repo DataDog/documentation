@@ -11,7 +11,7 @@ Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull re
 
 1. Install the [GitHub integration][5]. For full installation and configuration steps, see the [GitHub integration guide][6].
 
-1. Configure GitHub permissions.
+1. Configure GitHub permissions:
 
    1. To enable basic Dev Agent functionality, configure the GitHub integration with the following permissions:
 
@@ -48,7 +48,7 @@ You can also configure service-to-repository mapping manually in the Bits AI Dev
 
 Enable auto-push to allow the Dev Agent to push commits directly to a branch:
 
-1. Navigate to **Bits AI Dev** > [**Settings**][12] and use the toggle to enable auto-push.
+1. Navigate to **Bits AI Dev** > [**Settings**][12], and use the toggle to enable auto-push.
 
 **Note**: If auto-push is disabled, you must review and approve code in Datadog before it is pushed. 
 
