@@ -22,12 +22,12 @@ This page covers how to enable single sign-on (SSO) with SAML in Datadog, as wel
 {{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 - If you don't have SAML enabled on your Datadog account, reach out to [support][1] to enable it.
 - This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][9], [Auth0][3], [Google][4], [LastPass][5], [Microsoft Entra ID][2], [Okta][6], and [SafeNet][7].
-- SAML configuration requires [Datadog Administrator][8] access.
+- SAML configuration requires [Datadog Administrator][8] access, or the `Org Management` permission if you're using custom roles.
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
 - This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][9], [Auth0][3], [Google][4], [LastPass][5], [Microsoft Entra ID][2], [Okta][6], and [SafeNet][7].
-- SAML configuration requires [Datadog Administrator][8] access.
+- SAML configuration requires [Datadog Administrator][8] access, or the `Org Management` permission if you're using custom roles.
 {{% /site-region %}}
 
 ## Configuring SAML
