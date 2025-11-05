@@ -23,7 +23,7 @@ You can configure PR comments at the organization or repository level in [Reposi
 - Setting severity thresholds for each scan type
 - Excluding findings from test files or dev/test dependencies
 
-Learn more about PR comments across Datadog [here][11].
+Learn more about [PR comments across Datadog][11].
 
 **Note**: PR comments are not PR checks. To set up checks, see [PR Gates][10].
 
