@@ -127,7 +127,6 @@ For full installation and configuration instructions, see [Setup][6].
 [6]: /bits_ai/bits_ai_dev_agent/setup/
 [7]: https://app.datadoghq.com/code?tab=my-sessions
 [8]: /bits_ai/bits_ai_sre/
-[9]: /bits_ai/bits_ai_dev_agent/pr_automation_and_ci_repair/
 [10]: /profiler/automated_analysis/
 [11]: /tracing/trace_explorer/
 [12]: /containers/
