@@ -32,7 +32,7 @@ Learn more about [PR comments across Datadog][11].
 - Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** Settings page][4].
 
 <div class="alert alert-info">
-  PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+  PR comments are not supported for pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
 </div>
 
 ## Set up pull request comments
