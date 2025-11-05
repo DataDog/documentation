@@ -60,7 +60,10 @@ Datadog recommends using the [instance profile method][1006] of retrieving secre
 
 ##### Configuration example
 
-Configure the DataDog Agent to use AWS Secrets to resolve secrets using the following configuration:
+{{< tabs >}}
+{{% tab "Agent YAML file" %}}
+
+Configure the Datadog Agent to use AWS Secrets to resolve secrets using the following configuration:
 
 ```yaml
 # datadog.yaml
@@ -68,6 +71,13 @@ secret_backend_type: aws.secrets
 secret_backend_config:
   aws_session:
     aws_region: {regionName}
+```
+
+When using environment variables, convert the configuration to JSON like so:
+
+```yaml
+DD_SECRET_BACKEND_TYPE="aws.secrets"
+DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<regionName>"}}'
 ```
 
 After configuring the Agent to use AWS Secrets, you can reference any secrets in your configurations with `ENC[secretId;secretKey]`. 
@@ -112,6 +122,42 @@ secret_backend_config:
 [1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+Configure the Datadog Agent to use AWS Secrets to resolve secrets in Helm using the following configuration:
+
+```sh
+datadog: 
+  env:
+   - name: DD_SECRET_BACKEND_TYPE
+     value: "aws.secrets"
+   - name: DD_SECRET_BACKEND_CONFIG
+     value: '{"aws_session":{"aws_region":"<regionName>"}}' 
+```
+
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+
+Configure the Datadog Agent to use AWS Secrets to resolve secrets with the Datadog Operator using the following configuration:
+
+```sh
+spec:
+  override:
+    nodeAgent:
+      env:
+       - name: DD_SECRET_BACKEND_TYPE
+         value: "aws.secrets"
+       - name: DD_SECRET_BACKEND_CONFIG
+         value: '{"aws_session":{"aws_region":"<regionName>"}}'
+
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 {{% /collapse-content %}} 
 
 {{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-ssm" %}}
