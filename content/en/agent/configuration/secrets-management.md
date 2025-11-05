@@ -155,13 +155,19 @@ Configure the Datadog Agent to use AWS Secrets to resolve secrets with the Datad
 
 ```sh
 spec:
+  global:
+    credentials:
+      apiKey: ENC[mrmcpat/secrets;datadog-api-key]
   override:
     nodeAgent:
       env:
        - name: DD_SECRET_BACKEND_TYPE
          value: "aws.secrets"
        - name: DD_SECRET_BACKEND_CONFIG
-         value: '{"aws_session":{"aws_region":"<regionName>"}}'
+         value: '{"aws_session":{"aws_region":"us-west-2"}}'
+      # IAM role ARN required to grant the Agent permissions to access the AWS secret
+      serviceAccountAnnotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::<ARN>:policy/MrMcPatSecretsAccessPolicy
 ```
 
 {{% /tab %}}
