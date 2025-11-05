@@ -8,10 +8,10 @@ aliases:
 ---
 
 ## Overview
-Code Security can post comments directly on pull requests in your source code management (SCM) system when vulnerabilities are detected. This help you see and fix issues in context before merging code. The comments are diff-aware, meaning they only flag new issues introduced on lines modified lines in the pull request.
+Code Security posts comments directly on pull requests (PRs) in your source code management (SCM) system when vulnerabilities are detected on enabled repositories. This help you see and fix issues in context before merging code. Thee comments are diff-aware, meaning they only flag new issues introduced on lines modified in the PR.
 
-There are two types of pull request comments:
-- **Inline comment**: Flags an individual Code Security finding on specific lines of code and suggests a remediation (if available) . 
+There are two types of PR comments:
+- **Inline comment**: Flags an individual Code Security finding on specific lines of code and suggests a remediation (if available).
         
     {{< img src="/code_security/github_inline_pr_comment_light.png" alt="A Datadog bot has posted an inline comment on a GitHub pull request flagging a \"Critical: Code Vulnerability\". The comment suggests replacing the code os.system(command) with os.system(shlex.quote(command)) to sanitize the process call." style="width:100%;" >}}
 - **Summary comment**: Combines all findings from Datadog into a single comment. 
@@ -23,11 +23,17 @@ You can configure PR comments at the organization or repository level in [Reposi
 - Setting severity thresholds for each scan type
 - Excluding findings from test files or dev/test dependencies
 
-**Note**: PR comments are not PR checks. To set up checks, see [Quality Gates][10].
+Learn more about PR comments across Datadog [here][11].
+
+**Note**: PR comments are not PR checks. To set up checks, see [PR Gates][10].
 
 ## Prerequisites
 - You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and [Azure DevOps][9] repositories.  
-- Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** Settings page][4].  
+- Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [**Code Security** Settings page][4].
+
+<div class="alert alert-info">
+  PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+</div>
 
 ## Set up pull request comments
 Follow the steps below based on your source code management provider.
@@ -137,5 +143,5 @@ When configuring PR comments, you can:
 [8]: /integrations/gitlab-source-code/
 [9]: https://docs.datadoghq.com/integrations/azure-devops-source-code/#source-code-functionality
 [10]: /quality_gates/?tab=staticanalysis#setup
-
+[11]: /integrations/guide/source-code-integration/?tab=codesecurity#pr-comments
 
