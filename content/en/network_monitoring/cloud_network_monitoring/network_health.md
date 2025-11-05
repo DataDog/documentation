@@ -1,62 +1,134 @@
 ---
 title: Network Health
-description: Explore your Network data between each source and destination across your stack.
+description: Identify network issues and resolve them with actionable insights.
 aliases:
 - /network_monitoring/cloud_network_monitoring/overview_page
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
+    - link: 'https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/'
       tag: 'Blog'
-      text: 'Cloud Network Monitoring'
+      text: 'Monitor your cloud architecture and app dependencies with Datadog CNM'
+    - link: '/network_monitoring/cloud_network_monitoring/network_analytics'
+      tag: 'Documentation'
+      text: 'Learn more about Network Analytics'
 ---
+<div class="alert alert-info">Network Health is in Preview. Contact your Datadog representative to sign up.
+</div>
 
 ## Overview
 
-The CNM [Network Health][3] page provides a high-level overview of your network, from costly network traffic to DNS health to service top talkers. Use the Overview page to filter network traffic by environment or team with tags, adjust the time frame for your network data and investigate your most expensive traffic. 
+Network Health helps you identify and resolve network issues without requiring deep networking expertise. Instead of manually analyzing data across multiple views, Network Health surfaces known network problems with deterministic root causes and provides straightforward remediation paths.
 
-{{< img src="/network_performance_monitoring/overview_page/cnm_overview_page_2.png" alt="The network overview page in Datadog" style="width:110%;">}}
+Network Health answers three critical questions:
+- Is the network the problem?
+- If yes, where is the problem?
+- How can it be fixed?
 
-Recommended Actions
-Watchdog Insights
-TLS Certificates
-DNS Failures
-Security Groups
+The page prioritizes issues based on their impact to your services, ensuring you focus on problems affecting your most important traffic flows.
 
-## External network traffic
+**PLACEHOLDER SCREENSHOT FROM ORG2**
 
-Use the **External Network Traffic** section to get an overview of costly network traffic. Egress traffic that leaves your network is a common cost source, so determining which external endpoints have the most traffic reaching them is helpful to ensure that traffic volume remains within an expected range. For example, **Top AWS gateway users** shows top endpoints communicating to an AWS Internet Gateway or AWS NAT Gateway. **AWS PrivateLink eligible traffic** shows traffic that could leverage AWS PrivateLink to reduce the overall cost of traffic.  
+{{< img src="network_performance_monitoring/network_health/network_health_overview.png" alt="The Network Health page showing recommended actions and root causes" style="width:100%;">}}
 
-To dig deeper into any of these areas, click the **View in Analytics** button at the bottom right of each section of the overview page. The Analytics page opens with the query pre-populated so you can continue your investigation.
+## Prerequisites
 
-{{< img src="/network_performance_monitoring/overview_page/external_network_traffic.png" alt="The external network traffic section of the overview page with the option to View in Analytics highlighted" style="width:90%;">}}
+- [Cloud Network Monitoring][1] enabled
+- Agent version 7.33 or later
 
-## Application and dependency top talkers
+## Key sections
 
-**Application and Dependency Top Talkers** allow you to select a specific endpoint in your network and look at top traffic sources upstream and downstream of the endpoint. Select **See all Dependencies** to see the highest traffic dependencies both upstream and downstream of the endpoint, and toggle between the graph ([timeseries][1]) view and [top list][2] view for the selected time frame.
+### Recommended actions
 
-{{< img src="/network_performance_monitoring/overview_page/application_dependency_top_talkers.png" alt="The Application and Dependency Top Talkers section of the overview page" style="width:90%;">}}
+The **Recommended Actions** section appears at the top of the page and highlights the most critical issues detected in your network. These are prioritized based on two factors:
 
-## DNS health
+1. **Severity**: Problems that are actively blocking traffic
+2. **Impact**: Issues affecting services that are important to your infrastructure
 
-The **DNS Health** section provides a high-level overview of the top DNS callers by queried domain, client, or both. See the most queried domains, the top clients making DNS queries, or a combination of the two, and check the change icons to see if there have been any unexpected changes in the selected time frame. 
+Each recommended action displays:
+- The specific problem detected (for example, "TLS certificate expired 5 days ago")
+- **Impacted client service**: The service making requests
+- **Impacted server service**: The service receiving requests
+- A direct path to remediation
 
-You can also view the top callers for common DNS errors, such as NXDOMAIN, timeouts, and SERVFAIL. Find the top client-to-DNS query combinations resulting in any given error type, and see how that error rate has changed over the selected time frame. This helps to identify unusual DNS errors that may need investigation, especially while troubleshooting an incident.
+Click on a service name to pivot to APM for additional context about the affected service.
 
-{{< img src="/network_performance_monitoring/overview_page/dns_health.png" alt="The DNS Health section of the overview page" style="width:90%;">}}
+### Watchdog Insights
 
-## Identify top traffic sources
+The **Watchdog Insights** section displays anomalous network behavior detected by Watchdog, specifically focusing on TCP retransmits. A spike in TCP retransmits compared to your baseline (typically the previous week) often indicates an underlying network issue.
 
-The **Identify Top Traffic Sources** section shows traffic across different sources such as availability zone, team, cloud provider, or region, depending on how you tag your data. Seeing the top availability zone (AZ) traffic, for example, can help start an investigation into cloud cost reduction, as cross-AZ traffic is a common expense. Continue investigating by clicking the **View in Analytics** button to discover which services make up most of the cross-AZ traffic. You can use this section for similar exploration of top cross-team, cross-cloud provider, or cross-region traffic.
+While Watchdog Insights provide less definitive root cause identification than other sections, they help you:
+- Detect potential problems early
+- Correlate anomalies with specific root causes listed below
+- Investigate performance degradation before it impacts users
 
-{{< img src="/network_performance_monitoring/overview_page/top_traffic_sources.png" alt="The Identify Top Traffic Sources section of the overview page" style="width:90%;">}}
+### Root causes
+
+Network Health detects three types of root causes that commonly disrupt network connectivity:
+
+#### TLS certificates
+
+TLS certificates that have expired or are about to expire prevent secure connections between services, resulting in dropped traffic. This section lists:
+
+- **Expired certificates**: Certificates that are invalid and blocking traffic
+- **Expiring certificates**: Certificates about to expire, allowing you to take preventative action
+- **Impacted services**: The client and server services affected by each certificate issue
+
+**Resolution**: Click **Renew Certificate** to initiate the certificate renewal process directly from the Network Health page.
+
+#### Security groups
+
+Security groups control traffic flow in cloud environments (such as AWS) through allow and deny rules. Since security groups deny traffic by default, accidental rule deletions or modifications can immediately block legitimate traffic between services.
+
+This section identifies:
+- Security group misconfigurations blocking traffic
+- The specific services unable to communicate
+- Recent changes to security group rules
+
+**Resolution**: 
+1. Click on a security group issue to open the side panel.
+2. Select **View in AWS** to navigate to the AWS console.
+3. Review and modify the inbound and outbound rules.
+4. Use Infrastructure Change Tracking data in the side panel to identify when the problematic change occurred, making it easier to revert specific modifications.
+
+#### DNS failures
+
+DNS server misconfigurations can route traffic to incorrect destinations, preventing services from communicating. DNS failures typically result from changes made to DNS server routing configurations.
+
+This section shows:
+- DNS servers experiencing elevated failure rates
+- Services impacted by DNS resolution issues
+- The timing of DNS failure spikes
+
+**Resolution**:
+1. Click on a DNS failure to view details in the side panel.
+2. Navigate to your DNS server configuration.
+3. Review recent routing changes.
+4. Correlate DNS failure timing with Infrastructure Change Tracking to identify and revert problematic changes.
+
+## Filtering
+
+Use the filters at the top of the page to narrow the scope of displayed issues. Available filters include:
+
+- **Data center**: Focus on issues within a specific data center
+- **Service**: View problems affecting a particular service
+- **Team**: Filter issues by team ownership
+- **Environment**: Isolate production, staging, or other environment issues
+
+Filtering is especially useful for large organizations where viewing all network issues at once may be overwhelming.
+
+## Investigating issues
+
+To investigate an issue in detail:
+
+1. Click on any row in the Recommended Actions or root cause sections.
+2. A side panel opens with:
+   - Additional context about the problem
+   - Detailed impact analysis
+   - Multiple remediation options
+   - Links to related telemetry and logs
+3. Take action directly from the side panel or pivot to related tools (APM, AWS console, Infrastructure Change Tracking).
 
 ## Further Reading
-{{< partial name="whats-next/whats-next.html" >}}
-
-
-[1]: /dashboards/widgets/timeseries/
-[2]: /dashboards/widgets/top_list/
-[3]: https://app.datadoghq.com/network/overview
-
-## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /network_monitoring/cloud_network_monitoring/setup
