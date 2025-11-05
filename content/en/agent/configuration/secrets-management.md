@@ -76,8 +76,18 @@ secret_backend_config:
 When using environment variables, convert the configuration to JSON like so:
 
 ```yaml
-DD_SECRET_BACKEND_TYPE="aws.secrets"
-DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<regionName>"}}'
+datadog: 
+  [...]
+  env:
+   - name: DD_SECRET_BACKEND_TYPE
+     value: "aws.secrets"
+   - name: DD_SECRET_BACKEND_CONFIG
+     value: '{"aws_session":{"aws_region":"us-west-2"}}'
+agents:
+  rbac:
+    # IAM role ARN required to grant the Agent permissions to access the AWS secret
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::<ARN>:policy/MrMcPatSecretsAccessPolicy
 ```
 
 After configuring the Agent to use AWS Secrets, you can reference any secrets in your configurations with `ENC[secretId;secretKey]`. 
