@@ -157,7 +157,7 @@ service:
 ```
 
 <div class="alert alert-tip">
-Always configure <code>otelAgentGateway.affinity</code> or <code>otelAgentGateway.nodeSelector</code> to control the nodes where the gateway pods are scheduled.<br>Adjust <code>otelAgentGateway.replicas</code> (default is 1) to scale the number of gateway pods based on your needs.</div>
+Always configure <code>otelAgentGateway.affinity</code> or <code>otelAgentGateway.nodeSelector</code> to control the nodes where the gateway pods are scheduled.<br>Adjust <code>otelAgentGateway.replicas</code> (default is 1) to scale the number of gateway pods based on your needs.<br>The example configurations use insecure TLS for simplicity. Follow the [OTel configtls instructions][7] if you want to enable TLS.</div>
 
 ### Deploying a standalone gateway
 
@@ -512,3 +512,4 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
 [4]: https://kubernetes.io/docs/tasks/tools/#kubectl
 [5]: /opentelemetry/setup/ddot_collector/custom_components
 [6]: https://opentelemetry.io/docs/collector/deployment/gateway/
+[7]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/config/configtls
