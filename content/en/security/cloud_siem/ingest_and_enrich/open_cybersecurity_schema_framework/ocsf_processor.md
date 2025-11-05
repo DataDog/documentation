@@ -76,7 +76,9 @@ See [Processors][4] for more information on the processors you can use to reform
 1. Select the OCSF schema version and class you want to use in the dropdown menus.
 1. (Optional) Select the profile in the dropdown menu.
 
-#### Define mapping (class attribute)
+#### Define mapping
+
+##### Class attribute configuration
 
 The OCSF Processor remaps attributes, including [enumerated (ENUM) attributes][5]. After you select the OCSF schema version and class, the **Define Mapping (OCSF Schema Class Attributes)** section shows attributes that you can configure. You can filter and search for specific attributes or choose to see only required, recommended, or optional attributes. If you do not see an attribute that you want to configure, you can manually add it.
 
@@ -97,7 +99,7 @@ ENUM attributes are configured in the [ENUM attribute configuration](#enum-attri
     - If you see the error `Invalid OCSF attribute`, check the [OCSF documentation][6] to make sure you have the correct path.
     - If you see the error `ENUM attribute`, you have to enter the attribute in the [ENUM attribute configuration](#enum-attribute-configuration) section.
 
-#### ENUM attribute configuration
+##### ENUM attribute configuration
 
 [Enumeration (ENUM) attributes][5] are defined as specific numerical values. For example, the `severity_id` in the [Authentication [3002]][7] class is an enum attribute where numbers from `0` to `6`, and `99` each represent a severity level. The values of a source log's severity field must be mapped to the OCSF `severity_id`'s values listed in [Authentication [3002]][7].
 
@@ -135,7 +137,7 @@ If you see the error `This value has already been added`, the attribute you are 
 
 ##### Unrecognized ENUM attribute, add as class attribute
 
-If you see the error `Unrecognized ENUM attribute, add as a class attribute`, you are trying to add a class attribute in the ENUM attribute configuration section. To resolve the issue, add the class attribute in the [Define mapping (class attribute)](#define-mapping-class-attribute) section.
+If you see the error `Unrecognized ENUM attribute, add as a class attribute`, you are trying to add a class attribute in the ENUM attribute configuration section. To resolve the issue, add the class attribute in the [Define mapping (class attribute)](#class-attribute-configuration) section.
 
 ##### Unrecognized class attribute, add as ENUM attribute
 
