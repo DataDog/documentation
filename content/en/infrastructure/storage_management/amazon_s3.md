@@ -20,14 +20,16 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
 
 {{< img src="infrastructure/storage_management/add-bucket.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
-1. **Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.** Ensure all S3 related permissions are granted for [Resource Collection][509].
+### 1. **Enable Amazon S3 Integration and Resource collection for all the AWS accounts you want to monitor.** 
 
-2. **Enable S3 Inventory to get prefix level monitoring.**
+Ensure all S3-related permissions are granted for [Resource Collection][509].
 
-     <div class="alert alert-info">
-      - Source bucket: The S3 bucket you want to monitor with Storage Management <br>
-      - Destination bucket: Used to store inventory reports (one per AWS region, can be reused cross-account)
-      </div>
+### 2. **Enable S3 Inventory to get prefix level monitoring.**
+
+  <div class="alert alert-info">
+    - Source bucket: The S3 bucket you want to monitor with Storage Management <br>
+    - Destination bucket: Used to store inventory reports (one per AWS region, can be reused cross-account)
+  </div>
 
 
    1. Add the following permissions to your [Datadog IAM policy][508] so Datadog can enable S3 inventory on your source buckets and read the generated reports from the destination buckets:
@@ -65,17 +67,18 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
               }
         ```
 
-    2. On the **Enable it for me** tab, select the regions or accounts you want to enable and assign a destination bucket per region or per account to store S3 Inventory reports. You can either use an existing bucket or create one in AWS.
+   2. On the **Enable it for me** tab, select the regions or accounts you want to enable and assign a destination bucket per region or per account to store S3 Inventory reports. You can either use an existing bucket or create one in AWS.
 
-        <div class="alert alert-info">The destination buckets must allow the source buckets to write inventory data. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy">Creating a destination bucket policy.</a> in the AWS documentation for details.</div>
+      <div class="alert alert-info">The destination buckets must allow the source buckets to write inventory data. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-destination-bucket-policy">Creating a destination bucket policy.</a> in the AWS documentation for details.</div>
 
-        {{< img src="infrastructure/storage_management/enable-inventory.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
+      {{< img src="infrastructure/storage_management/enable-inventory.png" alt="Select buckets for enabling Storage Monitoring" responsive="true">}}
 
-    3. Complete the inventory configuration. The first inventory report may take up to 24 hours to generate.
+   3. Complete the inventory configuration. The first inventory report may take up to 24 hours to generate.
 
 
+### 3. **Enable S3 Access Logs for prefix-level request and latency metrics:** 
 
-3. **Enable S3 Access Logs for prefix-level request and latency metrics:** To get prefix-level access metrics including request counts, server-side latency, and cold data identification for cost optimization, follow these additional steps:
+To get prefix-level access metrics including request counts, server-side latency, and cold data identification for cost optimization, follow these additional steps:
 
    1. **Set up the Datadog Lambda Forwarder** (if not already configured):
       - Follow the [Datadog Forwarder installation instructions][503] to deploy the Datadog Lambda function in your AWS account
@@ -103,7 +106,9 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
 
        <div class="alert alert-info"> After sending, S3 Access Logs are also available in <a href="/logs/#explore">Datadog Log Management.</a>. </div>
 
-4. Return to **Infrastructure > Storage Management** to see any new buckets. The inventory generation process starts in AWS within 24 hours of the first report. Data from your buckets is visible after this period.
+### 4. Return to **Infrastructure > Storage Management** to see any new buckets. 
+
+The inventory generation process starts in AWS within 24 hours of the first report. Data from your buckets is visible after this period.
 
 [501]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
 [503]: /logs/guide/forwarder/?tab=cloudformation
