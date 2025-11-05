@@ -40,6 +40,7 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 The following sections describe ways to configure SCA for your repositories.
 
 ## Select where to run static SCA scans
+By default, scans are automatically run upon each commit to a lockfile within an enabled repository. Default branch results are updated every hour to detect new vulnerabilities on existing packages.
 
 ### Scan with Datadog-hosted scanning
 
@@ -51,9 +52,8 @@ You can run Datadog Static SCA scans directly on Datadog infrastructure. Support
 To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
-Datadog-hosted SCA scanning is not supported for repositories that:<br>
-- Contain file names longer than 255 characters<br>
-For these cases, use CI Pipelines.
+Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. <br>
+For these cases, scan via CI Pipelines.
 </div>
 
 ### Scan in CI pipelines
@@ -61,7 +61,9 @@ Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` C
 
 Configure your Datadog API and application keys by adding `DD_APP_KEY` and `DD_API_KEY` as secrets. Make sure the application key has the `code_analysis_read` scope.
 
-**Note**: You must scan your default branch at least once before results appear in **Code Security**.
+<div class="alert alert-info">
+You must scan your default branch at least once before results appear in **Code Security**.
+</div>
 
 ## Select your source code management provider
 Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
