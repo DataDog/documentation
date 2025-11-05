@@ -112,9 +112,7 @@ An example of mapping severity values:
 | `WARN`    | 3                | `Medium`       |
 | `ERROR`   | 4                | `High`         |
 
-In the **ENUM Attribute Configuration** section of the processor, you define the source log attribute that corresponds to the different attribute IDs. Some attributes are pre-populated based on the class selected. For example, in the image below, the `ocsf.metadata.version` target class has the source attribute automatically assigned.
-
-{{< img src="security/security_monitoring/ocsf/source_attribute_auto_assigned.png" alt="" style="width:100%;" >}}
+In the **ENUM Attribute Configuration** section of the processor, you define the source log attribute that corresponds to the different attribute IDs. Some attributes are pre-populated based on the class selected.
 
 1. Click the down arrow next to the enum attribute that you want to configure.
 1. In the **Matching query** field, enter the log attribute that corresponds to this OSCF attribute, such as `severity:info`.
