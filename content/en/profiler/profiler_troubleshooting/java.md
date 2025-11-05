@@ -166,10 +166,10 @@ Override templates let you specify profiling properties to override. However, th
 
 ## PODs are getting evicted due to disk usage
 
-The profiler uses ephemeral storage (usually /tmp) to save captured profiling data.
+The profiler uses ephemeral storage (usually `/tmp`) to save captured profiling data.
 If the node is under disk pressure and the pod hasn't requested ephemeral storage, it may be evicted.
 
-Fix: Request a small amount of ephemeral storage (e.g., 100MB) in the pod spec.
+Fix: Add a small ephemeral storage request (such as 100MB) in the pod spec to prevent eviction.
 
 ## Managing issues related to the tmp folder
 
