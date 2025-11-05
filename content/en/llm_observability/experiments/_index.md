@@ -18,35 +18,32 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 - Run and manage experiments
 - Compare results to evaluate impact
 
-## Installation
+## Setup
 
-Install Datadog's LLM Observability Python SDK:
+1. Install Datadog's LLM Observability Python SDK:
 
-```shell
-pip install ddtrace>=3.15.0
-```
+   ```shell
+   pip install ddtrace>=3.15.0
+   ```
 
-### Setup
+2. Enable LLM Observability:
 
-Enable LLM Observability:
+   ```python
+   from ddtrace.llmobs import LLMObs
 
-```python
-from ddtrace.llmobs import LLMObs
+   LLMObs.enable(
+       api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
+       app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
+       site="datadoghq.com",      # defaults to DD_SITE environment variable
+       project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
+   )
+   ```
 
-LLMObs.enable(
-    api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
-    app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
-    site="datadoghq.com",      # defaults to DD_SITE environment variable
-    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
-)
-```
-
-**Notes**:
-- You need *both* an API key and an application key
+   <div class="alert alert-warning">You must supply both an <code>api_key</code> and <code>app_key</code>.</div>
 
 ## Projects
 _Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
-You can create a project manually in the Datadog console, API, and SDK by specifying a project name that does not already exist in `LLMObs.enable`.
+You can create a project manually in the Datadog console, API, or SDK by specifying a project name that does not already exist in `LLMObs.enable`.
 
 ```python
 LLMObs.enable(
@@ -58,12 +55,14 @@ LLMObs.enable(
 ## Datasets
 
 A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.  
-- The _input_ (required) represents all the information that the agent will have access to in the Task of the Experiment.  
-- The _expected output_ (also called Ground Truth, optional) represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you'd like to assess.  
-- _metadata_ (optional) contains any useful information to categorize the record and leverage for further analysis: topics, tags, descriptions, notes,...  
-You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
+
+- **input** (required): Represents all the information that the agent can access in a [task](#task).
+- **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assesss. 
+- **metadata** (optional): Contains any useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, notes.
 
 ### Creating a dataset
+
+You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK:
 
 {{< tabs >}}
 
@@ -235,22 +234,27 @@ dataset.delete(1)  # Deletes the second record
 dataset.push()
 ```
 
-
 ## Experiments
-Experiments let you systematically test your LLM application by running your agent across a set of scenarios from your dataset and measure performance against the expected outputs using evaluators. You can then compare how different app configurations perform side by side.
+Experiments let you systematically test your LLM application by running your agent across a set of scenarios from your dataset and measuring performance against the expected outputs using evaluators. You can then compare how different app configurations perform, side by side.
 
 ### Task
 The task defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
 
 ### Evaluators
 Evaluators are functions executed on each record that measure how well the model or agent performs. It allows you to compare the output to either the expected_output or the original input.  
+
 Datadog supports the following evaluator types:  
-- Boolean: returns true or false
-- score: returns a numeric value (float)
-- categorical: returns a labeled category (string)
+- **Boolean**: returns true or false
+- **score**: returns a numeric value (float)
+- **categorical**: returns a labeled category (string)
 
 ### Summary Evaluators
-Summary Evaluators are optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). It allows you to compute more advanced metrics like precision, recall, accuracy across your dataset. The supported evaluator types are the same as above.
+Summary Evaluators are optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). Summary Evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset. 
+
+Datadog supports the following Summary Evaluator types:
+- **Boolean**: returns true or false
+- **score**: returns a numeric value (float)
+- **categorical**: returns a labeled category (string)
 
 ### Creating an experiment
 
@@ -357,11 +361,11 @@ Summary Evaluators are optional functions executed against all the data of the E
    print(f"View experiment: {experiment.url}")
    ```
 
-## Setting up an automated experiment in CI/CD
+### Setting up an automated experiment in CI/CD
 You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
-### GitHub Actions
-This section assumes you have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections successfully. You can use the following Python Script and GitHub Actions workflow as templates to run an experiment automatically whenever code is pushed to your repository.
+#### GitHub Actions
+This section assumes you have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections successfully. You can use the following Python script and GitHub Actions workflow as templates to run an experiment automatically whenever code is pushed to your repository.
 
 **Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
 
@@ -478,7 +482,7 @@ jobs:
 
 ## Cookbooks
 
-To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks][10]
+For in-depth examples of what you can do with LLM Experiments, see Datadog's provided [Jupyter notebooks][10].
 
 ## HTTP API
 
