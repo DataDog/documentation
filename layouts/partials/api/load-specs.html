@@ -1,4 +1,8 @@
-{{/* Shared partial for loading API specs with caching */}}
+{{/*
+  Shared partial for loading API specs with caching
+  Prefer .Site.Data.api.v1.full_spec_deref, else fallback to full_spec.
+  Usage: {{ partial "api/load-specs.html" (dict "version" "v1") }}
+*/}}
 {{- $version  := .version | default "v1" -}}
 {{- $cacheKey := printf "api:%s:full_spec" $version -}}
 {{- $spec := "" -}}
@@ -16,9 +20,15 @@
     {{- errorf "API data for version %q not found. Expected /data/api/%s/..." $version $version -}}
   {{- end -}}
 
-  {{- $spec := index $verData "full_spec" -}}
+  {{- $hasDeref := isset $verData "full_spec_deref" -}}
+  {{- $spec := cond $hasDeref (index $verData "full_spec_deref") (index $verData "full_spec") -}}
+
   {{- if not $spec -}}
-    {{- errorf "full_spec not found in .Site.Data.api.%s. Place full_spec.yaml|json at /data/api/%s/full_spec.(yaml|yml|json)" $version $version -}}
+    {{- errorf "Neither full_spec_deref nor full_spec found in .Site.Data.api.%s. Place one at /data/api/%s/." $version $version -}}
+  {{- end -}}
+
+  {{- if not $hasDeref -}}
+    {{- warnf "OpenAPI: version=%q using fallback .Site.Data.api.%s.full_spec (full_spec_deref not present)" $version $version -}}
   {{- end -}}
 
   {{- /* Cache and return */ -}}
