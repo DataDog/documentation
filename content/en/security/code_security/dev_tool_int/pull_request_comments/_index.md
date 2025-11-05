@@ -8,7 +8,7 @@ aliases:
 ---
 
 ## Overview
-Code Security posts comments directly on pull requests (PRs) in your source code management (SCM) system when vulnerabilities are detected on enabled repositories. This help you see and fix issues in context before merging code. Thee comments are diff-aware, meaning they only flag new issues introduced on lines modified in the PR.
+Code Security posts comments directly on pull requests (PRs) in your source code management (SCM) system when vulnerabilities are detected on enabled repositories. This help you see and fix issues in context before merging code. The comments are diff-aware, meaning they only flag new issues introduced on lines modified in the PR.
 
 There are two types of PR comments:
 - **Inline comment**: Flags an individual Code Security finding on specific lines of code and suggests a remediation (if available).
