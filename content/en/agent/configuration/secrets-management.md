@@ -152,12 +152,12 @@ spec:
          value: "aws.secrets"
        - name: DD_SECRET_BACKEND_CONFIG
          value: '{"aws_session":{"aws_region":"<regionName>"}}'
-
 ```
 
 {{% /tab %}}
-
 {{< /tabs >}}
+
+
 {{% /collapse-content %}} 
 
 {{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-ssm" %}}
