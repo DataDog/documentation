@@ -144,6 +144,8 @@ Signal-specific variables (like `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) always ta
 
 ### Metrics-Specific OTLP Configuration
 
+For more details on the official specification for these variables, see the [OpenTelemetry OTLP Metrics Exporter documentation][15].
+
 `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`
 : **Description**: Specifies the OTLP transport protocol to use for metrics data. Takes precedence over the general `OTEL_EXPORTER_OTLP_PROTOCOL`. <br>
 **Accepted values**: `grpc`, `http/protobuf`, `http/json`. <br>
@@ -156,7 +158,7 @@ Signal-specific variables (like `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) always ta
 **Notes**: For HTTP protocols, the SDK will automatically append `/v1/metrics` if the general `OTEL_EXPORTER_OTLP_ENDPOINT` is used as a fallback.
 
 `OTEL_EXPORTER_OTLP_METRICS_HEADERS`
-: **Description**: Specifies a comma-separated list of key-value pairs to be used as headers on outgoing OTLP metrics requests (e.g., `api-key=key,other-config=value`). Takes precedence over the general `OTEL_EXPORTER_OTLP_HEADERS`.
+: **Description**: Specifies a comma-separated list of key-value pairs to be used as headers on outgoing OTLP metrics requests (for example, `api-key=key,other-config=value`). Takes precedence over the general `OTEL_EXPORTER_OTLP_HEADERS`.
 
 `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT`
 : **Description**: Specifies the timeout (in milliseconds) for a single outgoing OTLP metrics request. Takes precedence over the general `OTEL_EXPORTER_OTLP_TIMEOUT`. <br>
@@ -286,3 +288,4 @@ A comma-separated list of paths to extension jar files, or folders containing ja
 [12]: /tracing/trace_collection/library_config/_index
 [13]: https://opentelemetry.io/docs/specs/otel/protocol/exporter/
 [14]: /opentelemetry/instrument/api_support/
+[15]: https://opentelemetry.io/docs/specs/otel/metrics/sdk_exporters/otlp/#additional-environment-variable-configuration
