@@ -41,7 +41,6 @@ no_proxy:
 
 Additionally, you need to set `DD_NO_PROXY_NONEXACT_MATCH` to true. For more details, see [Datadog Agent Proxy Configuration][2].
 
-
 ## Send Kubernetes logs with the Datadog Operator
 
 To deploy the Agent on Kubernetes using the Datadog Operator, follow the [Getting Started with Datadog Operator][1] guide. When you reach Step 3, use the following `datadog-agent.yaml` configuration instead of the example provided in the guide.

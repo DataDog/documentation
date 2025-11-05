@@ -40,3 +40,7 @@ To configure CloudPrem to use a forward proxy such as Squid, set the environment
 environment:
   HTTPS_PROXY: <your HTTP proxy>
 ```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
