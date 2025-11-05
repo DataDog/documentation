@@ -8,13 +8,13 @@ further_reading:
 
 ## Overview
 
-In May 2026, Datadog will deploy SSL certificates signed by a new certificate authority (Sectigo Root CA). **If you are running Datadog Agent v5 (especially versions below 5.32.7)**, your agents may lose connectivity with Datadog due to SSL certificate verification failures.
+In May 2026, Datadog will deploy SSL certificates signed by a new certificate authority (Sectigo Root CA). **If you are running Datadog Agent v5 (especially versions below 5.32.7)**, your Agents may lose connectivity with Datadog due to SSL certificate verification failures.
 
 ## What will stop working
 
 Agent v5 hosts without the Datadog embedded certificate bundle will be unable to send metrics, logs, traces, and other monitoring data to Datadog. These hosts fall back to the Tornado certificate store, which will fail SSL/TLS certificate verification when attempting to connect to Datadog intake endpoints.
 
-**Note**: If your agent uses the Datadog-provided certificate bundle (typically Agent v5.32.7+) or is configured to use your operating system's certificate store, you are not affected.
+**Note**: If your Agent uses the Datadog-provided certificate bundle (typically Agent v5.32.7+) or is configured to use your operating system's certificate store, you are not affected.
 
 ## Why this happens
 
@@ -24,17 +24,33 @@ When Agent v5's embedded certificate bundle is missing or incomplete, it falls b
 
 You are affected if:
 - You are running **Datadog Agent v5**, particularly **versions below 5.32.7**
-- Your agent installation does not include the Datadog embedded certificate bundle
-- Your agent is not configured to use the operating system's certificate store (using `use_curl_http_client: true`)
+- Your Agent installation does not include the Datadog embedded certificate bundle
+- Your Agent is not configured to use the operating system's certificate store (using `use_curl_http_client: true`)
 
-## Solution
+## Timeline
+
+- **June 2025 - April 2026**: Grace period to upgrade to Agent v7 or run the provided runbooks
+- **May 2026**: Datadog will deploy new certificates signed with the new Sectigo Root CA
+  - Agents that have not been updated will lose connectivity
+
+## Recommended solution: Upgrade to Agent v7
+
+**Datadog strongly recommends upgrading to Agent v7** as the best long-term solution. Agent v7 provides:
+- Automatic certificate management (no manual intervention needed)
+- Ongoing security updates and bug fixes
+- Improved performance and new features
+- Long-term support
+
+Agent v5 has reached end-of-life and no longer receives updates. See the [Agent upgrade documentation][1] for migration guidance.
+
+## Alternative solution: Update certificates
 
 ### Automated solution
 
 Both scripts perform the following steps automatically:
 1. Download the updated Datadog certificate bundle.
 2. Install the certificate in the correct location for your Agent installation.
-3. Update your `datadog.conf` to enable `use_curl_http_client: true` (allows the agent to use OS-provided certificates).
+3. Update your `datadog.conf` to enable `use_curl_http_client: true` (allows the Agent to use OS-provided certificates).
 4. Restart the Datadog Agent to apply changes.
 5. Verify connectivity and check logs for any certificate errors.
 
@@ -92,22 +108,6 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/dd-agent/maste
 ### Operating system support
 
 The `use_curl_http_client` fallback mechanism uses your operating system's certificate store. **If your operating system is end-of-life and no longer receives security updates**, the OS certificate store may not contain the necessary certificates, and connectivity issues may persist. In this case, upgrade your OS or migrate to Agent v7.
-
-### Timeline
-
-- **June 2025 - April 2026**: Grace period to run the provided runbooks or upgrade to Agent v7
-- **May 2026**: Datadog will deploy new certificates signed with the new Sectigo Root CA
-  - Agents that have not been updated will lose connectivity
-
-## Long-term recommendation
-
-**Datadog strongly recommends upgrading to Agent v7** for:
-- Automatic certificate management (no manual intervention needed)
-- Ongoing security updates and bug fixes
-- Improved performance and new features
-- Long-term support
-
-Agent v5 has reached end-of-life and no longer receives updates. See the [Agent upgrade documentation][1] for migration guidance.
 
 ## Troubleshooting
 
