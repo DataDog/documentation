@@ -32,7 +32,8 @@ Follow these steps to enable OTel Metrics API support in your Node.js applicatio
    ```
 4. Instrument your application:
    ```javascript
-   [Code example]
+   // On application start
+   require('dd-trace').init();
    ```
    
 ## Examples
@@ -44,7 +45,16 @@ You can use the standard OpenTelemetry API packages to create custom metrics.
 This example uses the OTel Metrics API to create a counter that increments every time an item is processed:
 
 ```javascript
-[Code example]
+const { metrics } = require('@opentelemetry/api');
+
+const meter = metrics.getMeter('my-service', '1.0.0');
+
+// Counter - monotonically increasing values
+const requestCounter = meter.createCounter('http.requests', {
+  description: 'Total HTTP requests',
+  unit: 'requests'
+});
+requestCounter.add(1, { method: 'GET', status: 200 });
 ```
 
 ### Create a histogram
@@ -52,7 +62,16 @@ This example uses the OTel Metrics API to create a counter that increments every
 This example uses the OTel Metrics API to create a histogram to track request durations:
 
 ```javascript
-[Code example]
+const { metrics } = require('@opentelemetry/api');
+
+const meter = metrics.getMeter('my-service', '1.0.0');
+
+// Histogram - distribution of values
+const durationHistogram = meter.createHistogram('http.duration', {
+  description: 'HTTP request duration',
+  unit: 'ms'
+});
+durationHistogram.record(145, { route: '/api/users' });
 ```
 
 ## Supported configuration
@@ -80,10 +99,13 @@ If you are already using the OpenTelemetry SDK with a manual OTLP exporter confi
 
 ### Existing DogStatsD setup
 
-If you are currently using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code. The main difference is that OTel metrics are configured using environment variables rather than code, and you create `Instrument` objects first.
+If you are using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code. The main difference is that OTel metrics are configured using environment variables rather than code, and you create `Instrument` objects first.
+
+For more details, see the [OpenTelemetry Node.js onboarding docs][2].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/config/environment_variable_support
+[2]: https://github.com/open-telemetry/opentelemetry-js/blob/4dded45ec67f90998d75e3ddbde9872b6b466183/doc/metrics.md#getting-started
