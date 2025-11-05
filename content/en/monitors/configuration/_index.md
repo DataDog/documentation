@@ -43,9 +43,10 @@ As you build or modify your query, the preview graph at the top of the configura
 The Evaluation Data graph shows how your monitor would have evaluated the data using your current query and thresholds. With Evaluation Preview, you can
 - See historical state transitions (for example, `OK` → `ALERT`).
 - Understand how your monitor would have behaved.
+- Preview who would be notified
 - Quickly spot misconfigurations before saving.
 
-This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability, Deployment, and Cloud Network monitors.
+This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability, and Deployment monitors.
 
 {{% /tab %}}
 
