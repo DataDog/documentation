@@ -5,5 +5,3 @@
 You can instrument your {{ $lang }} application using the standard OpenTelemetry (OTel) {{ if eq $signal "metrics" }}Metrics{{ else }}Logs{{ end }} API, and the Datadog SDK (`{{ $sdk }}`) automatically configures the OTel SDK to export that data to Datadog.
 
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send {{ $signal }} to the Datadog Agent.
-
-<div class="alert alert-info">You must have the OpenTelemetry SDK and the <code>opentelemetry-exporter-otlp</code> package for {{ $lang }} installed in your environment for this feature to work</div>
