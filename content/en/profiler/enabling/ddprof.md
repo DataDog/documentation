@@ -42,7 +42,7 @@ Debugging information
 : Symbols should be available. The profiler cannot provide human-readable function names if the symbol table is stripped.
 
 Temporary Folder
-: A temporary folder must be available when the library is not present in ../lib (relative to the ddprof executable).
+: A temporary folder must be available when the library is not present in `../lib` (relative to the ddprof executable).
 
 ## Installation
 
