@@ -219,7 +219,7 @@ final datadogConfig = DatadogConfiguration(
 ## Dio
 
 <div class="alert alert-info">
-For most Dio setups, use Datadog Tracking Http Client instead of the specialized Dio interceptor. Only use the Dio interceptor if you're using a non-standard Dio `HttpClientAdapter` that cannot be tracked by Datadog Tracking Http Client.
+For most Dio setups, use Datadog Tracking Http Client instead of the specialized Dio interceptor. Only use the Dio interceptor if you're using a non-standard Dio <code>HttpClientAdapter</code> that cannot be tracked by Datadog Tracking Http Client.
 </div>
 
 Datadog provides [`datadog_dio`][6] for use with the [Dio Flutter package][7]. The Dio interceptor automatically tracks requests from a given Dio client as RUM Resources and enables distributed tracing with APM.
