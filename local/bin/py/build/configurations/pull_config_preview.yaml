@@ -438,7 +438,7 @@
       - repo_name: datadog-operator
         contents:
           - action: pull-and-push-file
-            branch: eokye/public_config_doc
+            branch: main
             globs:
               - 'docs/configuration_public.md'
             options:
