@@ -4,12 +4,12 @@
   "attributes": {
     "frontmatter": {
       "title": {
-        "ast-str-b62f1162-1bff-4465-a001-a5e6a114c8c7": {
+        "ast-str-8700af84-15ee-439c-b5b3-31574510aca1": {
           "string": "Opciones de privacidad de Mobile Session Replay"
         }
       },
       "description": {
-        "ast-str-1075f136-3c58-4b63-9ab3-e7e9d7c33f4f": {
+        "ast-str-b062edc8-50c8-40ec-a0d0-27a38edccb92": {
           "string": "Configura opciones de privacidad para Mobile Session Replay."
         }
       },
@@ -18,12 +18,12 @@
           "0": {
             "link": "/real_user_monitoring/session_replay/mobile",
             "text": {
-              "ast-str-554c7c0f-2ec8-4333-92d7-98380b943dfd": {
+              "ast-str-68a5f9a7-212f-43c1-9456-0d2f819c2f64": {
                 "string": "Session Replay para móviles"
               }
             },
             "tag": {
-              "ast-str-b68dc5d4-e923-4037-b1bb-9235db0dcf67": {
+              "ast-str-c1c14660-0d32-4826-b203-8f27d221f176": {
                 "string": "Documentación"
               }
             }
@@ -31,12 +31,12 @@
           "1": {
             "link": "/real_user_monitoring/session_replay/mobile/app_performance",
             "text": {
-              "ast-str-0ca51e64-ea05-4c21-8c45-d06646c6346f": {
+              "ast-str-fbd4eb0d-0092-412a-bd33-669c0e65ef06": {
                 "string": "Cómo afecta Mobile Session Replay al rendimiento de las aplicaciones"
               }
             },
             "tag": {
-              "ast-str-7d320255-ecda-4fd0-aee6-723b15f023ea": {
+              "ast-str-bf25cefc-8cb2-4983-ac4a-15c478e776e6": {
                 "string": "Documentación"
               }
             }
@@ -44,12 +44,12 @@
           "2": {
             "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
             "text": {
-              "ast-str-a09b4acf-a362-42ce-9eab-b0dc82050248": {
+              "ast-str-d4c18282-33a4-4d74-8bdd-32708dab32a3": {
                 "string": "Configuración de Mobile Session Replay"
               }
             },
             "tag": {
-              "ast-str-9a557a23-7752-4cce-9f1d-a6f9ac923741": {
+              "ast-str-dd3c9a56-82f4-4b54-8fe6-138aa1014628": {
                 "string": "Documentación"
               }
             }
@@ -57,12 +57,12 @@
           "3": {
             "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
             "text": {
-              "ast-str-bb966d34-8c5f-4826-905c-c6d71db4d2f7": {
+              "ast-str-2672d49c-fce4-4c8a-97cc-53c964192652": {
                 "string": "Solución de problemas de Mobile Session Replay"
               }
             },
             "tag": {
-              "ast-str-7bd87fc2-1907-41bc-945b-146121ac07f3": {
+              "ast-str-2b56cdf4-4bd0-4e69-9584-5988afc65e3b": {
                 "string": "Documentación"
               }
             }
@@ -70,12 +70,12 @@
           "4": {
             "link": "/real_user_monitoring/session_replay",
             "text": {
-              "ast-str-d0da3c02-16da-4d40-91e4-f08cbea2faa5": {
+              "ast-str-e6fae3c1-30e5-4d5c-8597-ea6708dd63cd": {
                 "string": "Session Replay"
               }
             },
             "tag": {
-              "ast-str-b8ce4c09-28a9-4b98-a446-b15620b73544": {
+              "ast-str-4ea03fb7-ee5d-4814-89b3-8a6148301ee4": {
                 "string": "Documentación"
               }
             }
