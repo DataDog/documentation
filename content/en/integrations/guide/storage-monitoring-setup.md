@@ -50,36 +50,47 @@ As an alternative, you can set up S3 inventory manually or with Terraform and en
       </div>
 
 
-   1. **Storage Management relies on AWS Integration and Resource Collection** to bring together bucket details. Add all S3 permissions from the [Integration IAM policy and Resource Collection IAM policy][502] to your Datadog IAM policy in addition to the permissions below.
-   Add the following permissions so Datadog can enable S3 inventory on your source buckets and read the generated reports from the destination buckets:
+   1. Add all S3 permissions required for Storage Management to your Datadog IAM policy. Storage Management relies on permissions in [AWS Integration IAM policy and Resource Collection IAM policy][508] to bring together bucket details. In addition, the following 3 permissions allows Datadog to enable S3 inventory on your source buckets and read the generated reports from the destination buckets.
       - `s3:PutInventoryConfiguration`
       - `s3:GetObject` (scoped to the destination bucket(s))
       - `s3:ListBucket` (scoped to the destination bucket(s))
 
-      Example IAM policy:
+      Example IAM policy with all required permissions for Storage Management:
         ```json
               {
                 "Version": "2012-10-17",
                 "Statement": [
-
                   {
-                    "Sid": "AllowDatadogToEnableInventory",
+                    "Sid": "DatadogS3BucketInfo",
                     "Effect": "Allow",
                     "Action": [
-                      "s3:PutInventoryConfiguration" // If you want Datadog to enable S3 inventory through Datadog UI
+                      "s3:ListAllMyBuckets",
+                      "s3:GetAccelerateConfiguration",
+                      "s3:GetAnalyticsConfiguration",
+                      "s3:GetBucket*",
+                      "s3:GetEncryptionConfiguration",
+                      "s3:GetInventoryConfiguration",
+                      "s3:GetLifecycleConfiguration",
+                      "s3:GetMetricsConfiguration",
+                      "s3:GetReplicationConfiguration",
+                      "s3:ListBucket",
+                      "s3:GetBucketLocation",
+                      "s3:GetBucketLogging",
+                      "s3:GetBucketTagging",
+                      "s3:PutInventoryConfiguration"
                     ],
-                    "Resource": "arn:aws:s3:::storage-management-source-bucket" // source bucket(s)
+                    "Resource": "*"
                   },
-                  { // destination bucket
-                    "Sid": "AllowDatadogToReadInventoryFiles",
+                  {
+                    "Sid": "DatadogReadInventoryFromDestinationBucket",
                     "Effect": "Allow",
                     "Action": [
-                      "s3:GetObject",
-                      "s3:ListBucket"
+                      "s3:ListBucket",
+                      "s3:GetObject"
                     ],
                     "Resource": [
                       "arn:aws:s3:::storage-management-inventory-destination",
-                      "arn:aws:s3:::storage-management-inventory-destination/*" // destination bucket(s)/prefix
+                      "arn:aws:s3:::storage-management-inventory-destination/*"
                     ]
                   }
                 ]
