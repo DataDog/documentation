@@ -9,7 +9,9 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM provides out-of-the-box [Open Cybersecurity Framework (OCSF) support][1] for certain integrations, but you can edit an existing OOTB pipeline's OCSF settings and also add custom mappings with the OCSF processor to normalize your security logs according to the OCSF framework. The OCSF processor is configured in [Log Management pipelines][2].
+Cloud SIEM provides out-of-the-box [Open Cybersecurity Framework (OCSF) support][1] (with editable settings) for certain integrations. You can also add custom mappings with the OCSF processor to normalize your security logs according to the OCSF framework.
+
+This document explains how to set up the OCSF processor, which is configured in [Log Management pipelines][2].
 
 To use the OCSF processor, you need to:
 
@@ -18,7 +20,7 @@ To use the OCSF processor, you need to:
 1. [Add processors for pre-processing](#add-processors-for-pre-processing-logs), if needed.
 1. [Add and configure the OCSF processor](#configure-the-ocsf-processor) in that log pipeline.
 
-## Set up an OCSF processor
+## Use an OCSF processor
 
 ### Create a log pipeline
 
@@ -133,15 +135,15 @@ In the **ENUM Attribute Configuration** section of the processor, you define the
 
 If you see the error `This value has already been added`, the attribute you are trying to add has already been added.
 
-##### Unrecognized ENUM Attribute, add as Class Attribute
+##### Unrecognized ENUM attribute, add as class attribute
 
 If you see the error `Unrecognized ENUM attribute, add as a class attribute`, you are trying to add a class attribute in the ENUM attribute configuration section. To resolve the issue, add the class attribute in the [Define mapping (class attribute)](#define-mapping-class-attribute) section.
 
-##### Unrecognized Class Attribute, add as ENUM Attribute
+##### Unrecognized class attribute, add as ENUM attribute
 
 If you see the error `Unrecognized class attribute, add as an ENUM attribute`, you are trying to add an ENUM attribute in the class attribute configuration section. To resolve the issue, add the ENUM attribute in the [ENUM attribute configuration](#enum-attribute-configuration) section.
 
-##### Invalid OCSF Attribute
+##### Invalid OCSF attribute
 
 If you see the error `Invalid OCSF attribute`, check the [OCSF Schema][6] to ensure that you are adding an attribute in the schema.
 
