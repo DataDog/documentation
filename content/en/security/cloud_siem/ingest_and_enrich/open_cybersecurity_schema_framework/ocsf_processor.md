@@ -105,7 +105,7 @@ ENUM attributes are configured in the [ENUM attribute configuration](#enum-attri
 
 Some enum attributes have a sibling string attribute associated with the enum attribute. For example, `severity_id:1` has the sibling string attribute `severity:Informational`. The sibling string attribute is automatically populated for the target attribute when the enum value is selected.
 
-{{< img src="security/security_monitoring/ocsf/sibling_string_attribute.png" alt="" style="width:100%;" >}}
+{{< img src="security/security_monitoring/ocsf/sibling_string_attribute.png" alt="The ocsf.severity_id attribute showing the sibling string Informational already populated" style="width:100%;" >}}
 
 An example of mapping severity values:
 | Log value | OCSF severity ID | OCSF severity  |
