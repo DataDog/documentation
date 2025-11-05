@@ -31,9 +31,17 @@ This is useful for:
 
 For detailed implementation examples and usage patterns, see the [Span Processing section in the SDK Reference][2].
 
+### Sensitive Data Scanner integration
+
+LLM Observability integrates with [Sensitive Data Scanner][3], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
+
+By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/data_access
 [2]: /llm_observability/instrumentation/sdk/#span-processing
+[3]: /security/sensitive_data_scanner/
+
