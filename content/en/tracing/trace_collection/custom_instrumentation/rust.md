@@ -1,5 +1,5 @@
 ---
-title: Custom Instrumentation for Rust
+title: Rust Custom Instrumentation using the OpenTelemetry API
 description: 'Instrument your Rust application with the OpenTelemetry API to send traces to Datadog.'
 further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-rust-otel/'
@@ -13,11 +13,9 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-{{% otel-custom-instrumentation-lang %}}
-
 Datadog provides support for custom instrumentation in Rust applications through the `datadog-opentelemetry` crate. This library is built on the OpenTelemetry (OTel) API and SDK, providing a tracer that includes Datadog-specific features and an exporter.
 
-Because this library is built on OpenTelemetry, you will use the standard OpenTelemetry API to create traces and spans.
+Because this library is built on OpenTelemetry, you use the standard OpenTelemetry API to create traces and spans.
 
 ## Setup
 
@@ -30,10 +28,10 @@ Add `datadog-opentelemetry` and the core `opentelemetry` crate to your `Cargo.to
 ```toml
 [dependencies]
 # The main Datadog OTel library
-datadog-opentelemetry = { version = "0.1" }
+datadog-opentelemetry = { version = "0.1" } # Note: Update to latest.
 
 # The OpenTelemetry API for creating spans
-opentelemetry = { version = "0.30" }
+opentelemetry = { version = "0.30" } # Note: Update to latest.
 ```
 
 ### 2. Initialize the Tracer

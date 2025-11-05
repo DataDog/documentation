@@ -69,10 +69,11 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 
 `DD_TRACE_PROPAGATION_STYLE`
 : **Default**: `(none)`<br>
-: A comma-separated list of propagation styles to use. Supported values are `datadog` and `tracecontext`.
+: A comma-separated list of propagation styles to use. Supported values are `datadog` and `tracecontext`. See [Propagating Rust Trace Context][18] for more information.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/custom_instrumentation/rust
+[2]: /tracing/trace_collection/trace_context_propagation

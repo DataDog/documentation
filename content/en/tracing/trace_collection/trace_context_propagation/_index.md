@@ -650,7 +650,7 @@ export DD_TRACE_PROPAGATION_STYLE="tracecontext,datadog"
 
 Because there is no automatic instrumentation in Rust, you must manually propagate context when making or receiving remote calls (like HTTP requests).
 
-You do this by using the global OTel T`extMapPropagator`. This requires a `Carrier` that can read and write HTTP headers. Most Rust web frameworks (like `axum`, `hyper`, and `reqwest`) use the `http::HeaderMap` type.
+You do this by using the global OTel `TextMapPropagator`. This requires a `Carrier` that can read and write HTTP headers. Most Rust web frameworks (like `axum`, `hyper`, and `reqwest`) use the `http::HeaderMap` type.
 
 You can use the following wrapper structs to make `http::HeaderMap` compatible with the OTel propagator API.
 
@@ -713,7 +713,7 @@ async fn make_http_request() {
 }
 ```
 
-#### Extracting context (server side)
+### Extracting context (server side)
 
 When receiving an HTTP request (for example, with `axum`), extract the trace context from the headers to parent your new span.
 
