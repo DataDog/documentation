@@ -53,7 +53,7 @@ Hover over a service name to pivot to APM for additional context, or click on a 
 
 The **Watchdog Insights** section displays anomalous network behavior detected by Watchdog, specifically focusing on TCP retransmits. A spike in TCP retransmits compared to your baseline (typically the previous week) often indicates an underlying network issue.
 
-While Watchdog Insights help you:
+Watchdog Insights help you:
 - Detect potential problems early.
 - Correlate anomalies with specific root causes listed below.
 - Investigate performance degradation before it impacts users.
