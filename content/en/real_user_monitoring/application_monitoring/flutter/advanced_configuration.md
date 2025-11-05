@@ -203,7 +203,7 @@ In order to enable Datadog [Distributed Tracing][13], you must set the `DatadogC
 
 ### Track resources from other packages
 
-While `Datadog Tracking HTTP Client` can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL and Dio. More information about these libraries is documented under [Integrated Libraries][22].
+While `Datadog Tracking HTTP Client` can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL and Dio. For more information about these libraries, see [Integrated Libraries][22].
 
 ## Enrich user sessions
 

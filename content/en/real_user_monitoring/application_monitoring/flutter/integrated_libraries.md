@@ -218,9 +218,9 @@ final datadogConfig = DatadogConfiguration(
 
 ## Dio
 
-{% alert level="info" %}
-Most common setups using Dio can use Datadog Tracking Http Client instead of the specialized Dio inteceptor.  Only use the Dio interceptor if you are using a non-standard Dio `HttpClientAdapter` that cannot be tracked by Datadog Tracking Http Client.
-{% /alert %}
+<div class="alert alert-info">
+For most Dio setups, use Datadog Tracking Http Client instead of the specialized Dio interceptor. Only use the Dio interceptor if you're using a non-standard Dio `HttpClientAdapter` that cannot be tracked by Datadog Tracking Http Client.
+</div>
 
 Datadog provides [`datadog_dio`][6] for use with the [Dio Flutter package][7]. The Dio interceptor automatically tracks requests from a given Dio client as RUM Resources and enables distributed tracing with APM.
 
@@ -252,13 +252,13 @@ final dio = Dio()
   ..addDatadogInterceptor(DatadogSdk.instance);
 ```
 
-Calling `addDatadogInterceptor` adds the Datadog interceptor as the first interceptor in your list of interceptors, which is important to ensure that all network requests from Dio are sent to Datadog, as other interceptors may decide not to forward information down the interceptor chain. For this reason, it is important to make sure you call addDatadogInterceptor after any other configuration of Dio is complete.
+Calling `addDatadogInterceptor` adds the Datadog interceptor as the first interceptor in your list. This ensures all network requests from Dio are sent to Datadog, since other interceptors may not forward information down the chain. Call `addDatadogInterceptor` after completing all other Dio configuration.
 
 ### Use with other Datadog Network Tracking
 
-Clients that want to track all network requests, including those made by `dart:io` and widgets like `NetworkImage` can continue to use `datadog_tracking_http_client` to capture these requests. However, depending on your setup, the global overide method used in `enableHttpTracking` may cause resources to be double reported (once by the global override and once by the Dio interceptor).
+To track all network requests, including those made by `dart:io` and widgets like `NetworkImage`, use `datadog_tracking_http_client` to capture these requests. However, depending on your setup, the global override method used in `enableHttpTracking` may cause resources to be double reported (once by the global override and once by the Dio interceptor)
 
-To avoid this, we recommend using ignoreUrlPatterns parameter when calling `enableHttpTracking` to ignore requests made by your Dio client.
+To avoid this, use the `ignoreUrlPatterns` parameter when calling `enableHttpTracking` to ignore requests made by your Dio client.
 
 ## Further Reading
 
