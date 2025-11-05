@@ -334,7 +334,7 @@ For each bucket you want to monitor:
   - **Server-side encryption**: Don't specify an encryption key
   - Select all the available **Additional metadata fields**. Minimally, the following fields are required:
 
-  {{< img src="integrations/guide/storage_monitoring/metadata.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
+  {{< img src="integrations/guide/storage_monitoring/metadata.png" alt="Additional metadata fields. Size, Last modified, Multipart upload, Replication status, Encryption, Object ACL, Storage class, Intelligent-Tiering: Access tier, ETag, and Checksum function are all selected. Bucket key status, Object owner, and All Object Lock configurations are unselected." responsive="true">}}
 
 **Note**: Review [Amazon S3 pricing][204] for costs related to inventory generation.
 
