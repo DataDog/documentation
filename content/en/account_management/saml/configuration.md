@@ -38,7 +38,7 @@ This page covers how to enable single sign-on (SSO) with SAML in Datadog, as wel
     * [Auth0][10]
     * [Google][12]
     * [Microsoft Entra ID][11]
-    * [NoPassword][13]
+    * [LastPass][13]
     * [Okta][14]
     * [SafeNet][15]
 
@@ -73,7 +73,7 @@ To configure additional SAML providers:
 
 ### Role mapping with multiple SAML providers
 
-If you use SAML role mapping and want to use the same role mappings in any additional providers you add, make sure the attributes in the new IdP(s) match what is defined in your mappings. If you add a new IdP, make sure to either use the same attribute names as your existing IdP, or add new mappings that align with the new IdP's attributes to ensure roles are assigned correctly when users log in with different IdPs.
+If you use [SAML role mapping][19] and want to use the same role mappings in any additional providers you add, make sure the attributes in the new IdP(s) match what is defined in your mappings. If you add a new IdP, make sure to either use the same attribute names as your existing IdP, or add new mappings that align with the new IdP's attributes to ensure roles are assigned correctly when users log in with different IdPs.
 
 [1]: /help/
 [2]: https://learn.microsoft.com/en-us/entra/architecture/auth-saml
@@ -87,9 +87,10 @@ If you use SAML role mapping and want to use the same role mappings in any addit
 [10]: /account_management/saml/auth0/
 [11]: /account_management/saml/entra/
 [12]: /account_management/saml/google/
-[13]: /account_management/saml/nopassword/
+[13]: /account_management/saml/lastpass/
 [14]: /account_management/saml/okta/
 [15]: /account_management/saml/safenet/
 [16]: /account_management/login_methods/
 [17]: https://app.datadoghq.com/account/saml/metadata.xml
 [18]: /account_management/multi_organization/#setting-up-saml
+[19]: /account_management/saml/mapping/#map-saml-attributes-to-datadog-roles
