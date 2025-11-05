@@ -27,7 +27,7 @@ Code Security helps teams implement DevSecOps throughout the organization:
 - **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.
 
 The following vulnerability management capabilities are available across Code Security:
-- [Developer tool integrations][16] to flag vulnerabilities in IDE, pull request comments, and block vulnerabilities from being merged to your production codebase
+- [Developer tool integrations][16] to flag vulnerabilities in IDE and pull request comments, and block vulnerabilities from being merged to your production codebase
 - [Ticketing integrations][13] with Jira and Datadog Case Management, with bidirectional syncing
 - [Notifications][14]
 - [Automation pipelines][15] for automatically muting vulnerabilities and assigning due dates by severity
