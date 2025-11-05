@@ -121,7 +121,7 @@ The **Auto-grouped traffic** option can help you identify the source of your tag
 
 Neutral tags are tags that are not specific to a client or server, and instead apply to an entire flow. You can search for and filter on traffic with these neutral tags. For example, you can use these tags to filter for traffic that is TLS encrypted.
 
-{{< img src="network_performance_monitoring/network_analytics/cnm_using_neutral_tags.png" alt="Screenshot showing how to search for neutral tags, with an example on searching for 'tls_encrypted' traffic" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_using_neutral_tags_2.png" alt="Screenshot showing how to search for neutral tags, with an example on searching for 'tls_encrypted' traffic" style="width:90%;">}}
 
 The following is the list of neutral tags available for use:
 
@@ -338,7 +338,7 @@ If you have [setup][9] enhanced resolution for AWS or Azure, CNM can filter and 
 
 Starting with Agent 7.17+, the Agent resolves IPs to human-readable domain names for external and internal traffic. Domain allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and APIs. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. `domain` **is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
-{{< img src="network_performance_monitoring/network_analytics/domain_aggregation_3.png" alt="Domain aggregation" >}}
+{{< img src="network_performance_monitoring/network_analytics/domain_aggregation_2.png" alt="Domain aggregation" >}}
 
 **Note**: DNS resolution is supported for hosts where the system probe is running on the root network namespace, which is usually caused by running the system-probe in a container without using the host network.
 
