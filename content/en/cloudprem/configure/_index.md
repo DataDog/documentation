@@ -3,8 +3,8 @@ title: Configure CloudPrem
 description: Learn how to configure and customize your CloudPrem deployment for optimal performance and security
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
