@@ -85,17 +85,13 @@ When you launch the Dev Agent, it runs the setup command at startup and can use 
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /error_tracking
 [2]: /security/code_security  
 [3]: /profiler/
 [4]: /tests/
 [5]: https://app.datadoghq.com/integrations/github
 [6]: /integrations/github/
-[7]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
+[7]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
 [8]: https://app.datadoghq.com/metric/summary
 [9]: /integrations/github/#troubleshooting
 [10]: /help/

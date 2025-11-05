@@ -35,6 +35,34 @@ Bits AI Dev Agent is available for the following Datadog products:
 
 The following sections detail how Bits AI Dev Agent integrates with Datadog products to generate contextual code fixes.
 
+### Pull request assistance
+
+Bits AI Dev Agent integrates with GitHub to create pull requests, respond to comments, update commits, and fix CI failures. 
+
+- Generates PR titles and descriptions based on your PR template.
+- Opens PRs as drafts, iterates using CI logs, and marks them ready for review when checks pass.
+- Continues iterating in response to chat messages and review feedback.
+  **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
+
+Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
+
+Learn more about [PR automation and CI iteration][9].
+
+### Auto-push
+
+Auto-push allows the Agent to create branches, push code, and open PRs when it detects something it can help you with. For example, the Agent can:
+- Auto-create PRs for high impact errors (such as 500s or crashes)
+- Update PRs in response to your comments in GitHub
+- Update PRs to address CI failures
+
+When auto-push is disabled, you must review code in Datadog before it gets pushed.
+
+Auto-push is available for Error Tracking and Test Optimization. 
+
+#### Security considerations
+
+Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Agent, but it is not foolproof. By enabling this feature, you acknowledge that you understand the inherent risks involved. 
+
 ### Error tracking
 
 In [Error Tracking][1], Bits AI Dev Agent diagnoses and remediates code issues with context and unit-tested fixes:
@@ -68,47 +96,13 @@ Bits AI Dev Agent remediates vulnerabilities at scale, from single issues to lar
 - Create PR batches to fix multiple vulnerabilities at once.
 - Use the Campaign tool to push PRs incrementally and manage review workload across teams.
 
-### Pull request assistance
-
-Bits AI Dev Agent integrates with GitHub to create pull requests, respond to comments, update commits, and fix CI failures. 
-
-- Generates PR titles and descriptions based on your PR template.
-- Opens PRs as drafts, iterates using CI logs, and marks them ready for review when checks pass.
-- Continues iterating in response to chat messages and review feedback.
-  **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
-
-Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
-
-Learn more about [PR automation and CI iteration][9].
-
-### Auto-push
-
-Auto-push allows the Agent to create branches, push code, and open PRs when it detects something it can help you with. For example, the Agent can:
-- Auto-create PRs for high impact errors (such as 500s or crashes)
-- Update PRs in response to your comments in GitHub
-- Update PRs to address CI failures
-
-When auto-push is disabled, you must review code in Datadog before it gets pushed.
-
-Auto-push is available for Error Tracking and Test Optimization. 
-
-#### Security considerations
-
-Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the agent, but it is not foolproof. By enabling this feature, you understand the inherent risks involved. 
-
 ### Bits AI SRE integration 
 
 Bits AI Dev Agent generates fixes from SRE-led investigations. Learn more about [Bits AI SRE][8].
 
 ## Get started
 
-To enable Bits AI Dev Agent:
-
-1. Install the [GitHub integration][5].  
-2. Grant the required permissions.  
-3. Send CI logs to Datadog if you want the Dev Agent to iterate on PRs using build feedback.  
-
-For full installation and configuration instructions, see [Setup][6].
+To enable Bits AI Dev Agent, see [Setup][6].
 
 ## Limitations
 
