@@ -80,7 +80,6 @@ Bits AI Dev Agent integrates with GitHub to create pull requests, respond to com
 
 Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
 
-Learn more about [PR automation and CI iteration][9].
 
 ### Auto-push
 
