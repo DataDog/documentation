@@ -9,10 +9,6 @@ further_reading:
       text: "Reduce cloud storage costs and improve operational efficiency with Datadog Storage Monitoring"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/storage-monitoring/" >}}
-  Storage Management is in Preview. Request access to start monitoring your object storage.
-{{< /callout >}}
-
 ## Setup
 
 {{< tabs >}}

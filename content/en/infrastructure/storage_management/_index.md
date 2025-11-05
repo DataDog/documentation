@@ -11,11 +11,6 @@ aliases:
     - /integrations/guide/storage-monitoring-setup
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/storage-monitoring/" >}}
-  Storage Management is in Preview. Request access to start monitoring your object storage.
-{{< /callout >}}
-
-
 ## Overview
 
 Storage Management for Amazon S3, Google Cloud Storage, and Azure Blob Storage provides deep, prefix-level analytics to help you understand exactly how your storage is being used. With Storage Management you can:
