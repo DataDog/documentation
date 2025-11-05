@@ -53,7 +53,7 @@ To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. <br>
-For these cases, scan via CI Pipelines.
+For these cases, scan using CI Pipelines.
 </div>
 
 ### Scan in CI pipelines
