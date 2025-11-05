@@ -7,38 +7,30 @@ disable_toc: false
 
 Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog.  
 
-<div class="alert alert-info">Bits AI Dev Agent supports GitHub only.</div>
-
 ## Setup
 
-The following steps are required to get started with Bits AI Dev Agent. 
+1. Install the [GitHub integration][5]. For full installation and configuration steps, see the [GitHub integration guide][6].
 
-### Step 1: Enable the GitHub integration
+1. Configure GitHub permissions.
 
-Install the [GitHub integration][5]. For full installation and configuration steps, see the [GitHub integration guide][6].
+   1. To enable basic Dev Agent functionality, configure the GitHub integration with the following permissions:
 
-### Step 2: Configure GitHub permissions
+      - **Repository Permissions**
+        - `Contents: Read & Write`
+        - `Pull Requests: Read & Write`
+      - **Subscribe to Events**
+        - `Push`
 
-The GitHub integration must be granted the following permissions to enable basic Dev Agent functionality:
+    1. (Optional) To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
 
-- **Repository Permissions**
-  - `Contents: Read & Write`
-  - `Pull Requests: Read & Write`
-- **Subscribe to Events**
-  - `Push`
-
-#### Additional permissions for CI integration
-
-To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
-
-- **Repository permissions**  
-  - `Checks: Read`  
-  - `Commit statuses: Read only`  
-- **Subscribe to events**  
-  - `Check run`  
-  - `Check suite`  
-  - `Issue comment`  
-  - `Status` 
+        - **Repository permissions**  
+          - `Checks: Read`  
+          - `Commit statuses: Read only`  
+        - **Subscribe to events**  
+          - `Check run`  
+          - `Check suite`  
+          - `Issue comment`  
+          - `Status` 
 
 ## Additional configuration  
 
@@ -48,7 +40,7 @@ These optional configurations help you get the most out of Bits AI Dev Agent.
 
 Bits AI Dev Agent uses the `service` and `version` telemetry tags to match detected issues (such as errors or vulnerabilities) to the version of code that was running at the time.  
 
-To configure telemetry tagging, see [Tag your telemetry with Git information][7]. 
+To configure telemetry tagging, see [Tag your APM telemetry with Git information][7]. 
 
 You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][11] > **Service Repository Mapping**.
 
@@ -74,13 +66,15 @@ The Dev Agent ingests custom instruction files from your repository, including:
 
 You can also define global custom instructions in **Bits AI** > **Dev Agent** > [**Settings**][12], which apply to all Dev Agent sessions.  
 
+You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI** > **Dev Agent** > [**Settings**][12], in the **Agent Instructions** section. 
+
 ### Configure repository environment
 
-Configure a custom environment for the Dev Agent to install dependencies, formatters, linters, and build tools that are needed for your codebase. The setup command runs with network access to download dependencies, then network access is disabled during agent execution for security.
+Configure a custom environment for the Dev Agent to install dependencies, formatters, linters, and build tools that are needed for your codebase. The setup command runs with network access to download dependencies, then network access is disabled during Agent execution for security.
 
 To configure a repository environment:
 
-1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][11], and find the **Environments** Section.
+1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][11], and find the **Environments** section.
 1. Click **Add Environment** to create a repository configuration.
    1. Define any required environment variables or secrets.
    1. Add setup commands to the shell script (for example: `pip install -r requirements.txt`).
