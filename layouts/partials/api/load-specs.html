@@ -1,47 +1,28 @@
-{{- /* layouts/partials/api/load-specs.html
-     Loads the prebuilt compact OpenAPI view produced by Option A:
-       assets/api/<version>/view.json
-     Returns a map:
-       {
-         "version": <string>,
-         "path": <string>,
-         "view": <entire JSON>,
-         "schemas": <map[string]schema>,
-         "parameters": <map[string]param>,
-         "requestBodies": <map[string]rb>,
-         "headers": <map[string]header>
-       }
-     Usage:
-       {{ $api := partial "api/load-specs.html" (dict "version" "v1") }}
-       {{ with $api.schemas.Widget }} ... {{ end }}
-*/ -}}
+{{/* Shared partial for loading API specs with caching */}}
+{{- $version  := .version | default "v1" -}}
+{{- $cacheKey := printf "api:%s:full_spec" $version -}}
+{{- $spec := "" -}}
+{{- with (hugo.Store.Get $cacheKey) -}}
+  {{- /* return cached */ -}}
+  {{- $spec = . -}}
+{{- else -}}
+  {{- $apiData := index site.Data "api" -}}
+  {{- if not $apiData -}}
+    {{- errorf "Data namespace 'api' not found under /data. Expected /data/api/%s/full_spec.(yaml|yml|json)" $version -}}
+  {{- end -}}
 
-{{- $ver  := .version | default "v1" -}}
-{{- $path := printf "/api/%s/view.json" $ver -}}
-{{- $res  := resources.Get $path -}}
+  {{- $verData := index $apiData $version -}}
+  {{- if not $verData -}}
+    {{- errorf "API data for version %q not found. Expected /data/api/%s/..." $version $version -}}
+  {{- end -}}
 
-{{- if not $res -}}
-  {{- errorf "OpenAPI(view): version=%q resource %q not found. Did you generate it? (node assets/scripts/build-oas-view.mjs assets/api/%s/full_spec.yaml assets/api/%s/view.json)" $ver $path $ver $ver -}}
+  {{- $spec := index $verData "full_spec" -}}
+  {{- if not $spec -}}
+    {{- errorf "full_spec not found in .Site.Data.api.%s. Place full_spec.yaml|json at /data/api/%s/full_spec.(yaml|yml|json)" $version $version -}}
+  {{- end -}}
+
+  {{- /* Cache and return */ -}}
+  {{- hugo.Store.Set $cacheKey $spec -}}
 {{- end -}}
 
-{{- $view := $res | transform.Unmarshal -}}
-
-{{- if not (index $view "x-hugo-preprocessed") -}}
-  {{- warnf "OpenAPI(view): %q missing x-hugo-preprocessed=true; proceeding anyway." $path -}}
-{{- end -}}
-
-{{- $schemas       := index $view "schemas" | default dict -}}
-{{- $parameters    := index $view "parameters" | default dict -}}
-{{- $requestBodies := index $view "requestBodies" | default dict -}}
-{{- $headers       := index $view "headers" | default dict -}}
-
-{{- return (dict
-  "version"       $ver
-  "path"          $path
-  "view"          $view
-  "schemas"       $schemas
-  "parameters"    $parameters
-  "requestBodies" $requestBodies
-  "headers"       $headers
-  "tags"          (slice)
-) -}}
+{{- return $spec -}}
