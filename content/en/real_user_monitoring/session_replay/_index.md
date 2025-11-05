@@ -25,19 +25,19 @@ further_reading:
 
 Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing or mobile app experience of your users. Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your application's usage patterns and design pitfalls.
 
-## Browser Session Replay
+## Start monitoring with Session Replay
 
-Browser Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users. Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application's usage patterns and design pitfalls.
+{{< whatsnext desc="Choose your platform to get started with Session Replay:" >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/browser">}}<u>Browser Session Replay</u>: Capture and visually replay web browsing experiences using the RUM Browser SDK with the open source rrweb project.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/mobile">}}<u>Mobile Session Replay</u>: Visually replay user interactions in native Android and iOS apps, including taps, swipes, and scrolls.{{< /nextlink >}}
+{{< /whatsnext >}}
 
-The RUM Browser SDK is [open source][1] and leverages the open source [rrweb][2] project.
+## Additional features
 
-Learn more about the [Session Replay for Browsers][3].
-
-## Mobile Session Replay
-
-Mobile Session Replay expands visibility into your mobile applications by visually replaying each user interaction, such as taps, swipes, and scrolls. It is available for native apps on both Android and iOS. Visually replaying user interactions on your applications makes it easier to reproduce crashes and errors, as well as understand the user journey for making UI improvements.
-
-Learn more about the [Session Replay for Mobile][4].
+{{< whatsnext desc="Explore additional Session Replay capabilities:" >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/playlists">}}<u>Playlists</u>: Organize and save session replays into playlists for easy access and sharing.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/heatmaps">}}<u>Heatmaps</u>: Visualize user interaction patterns with clickmaps and scrollmaps to identify engagement hotspots.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Extend data retention
 
@@ -67,18 +67,10 @@ The history includes only playbacks that occurred in the player page or in an em
 
 To view your own playback history, check out the [My Watch History][7] playlist.
 
-## Playlists
-
-You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][8].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/browser-sdk
-[2]: https://www.rrweb.io/
-[3]: /real_user_monitoring/session_replay/browser/
-[4]: /real_user_monitoring/session_replay/mobile/
 [5]: https://docs.datadoghq.com/notebooks/
 [6]: https://docs.datadoghq.com/account_management/audit_trail/
 [7]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history

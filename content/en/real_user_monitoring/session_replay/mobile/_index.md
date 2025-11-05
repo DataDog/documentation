@@ -79,29 +79,17 @@ Below are examples showing how incremental snapshots only send updates for impac
 
 In summary, the Session Replay recorder breaks your app's screen into simple rectangles called wireframes. It only tracks and sends updates for the parts that change, making replays efficient and accurate.
 
-## Setup
+## Start monitoring Mobile Session Replay
 
-Learn how to [set up and configure Mobile Session Replay][2].
-## Privacy options
-
-See [Privacy Options][3].
-
-## How Mobile Session Replay impacts app performance
-
-See [how Mobile Session Replay impacts app performance][4].
-
-## Troubleshooting
-
-Learn how to [troubleshoot Mobile Session Replay][5].
+{{< whatsnext desc="This section includes the following topics:" >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/mobile/setup_and_configuration">}}<u>Setup and Configuration</u>: Learn how to set up and configure Mobile Session Replay including enabling recording, sampling configuration, and privacy controls.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/mobile/privacy_options">}}<u>Privacy Options</u>: Control and mask sensitive data in Session Replay recordings with privacy configuration options.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/mobile/app_performance">}}<u>Impact on App Performance</u>: Understand how Mobile Session Replay impacts app performance and resource usage.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/mobile/troubleshooting">}}<u>Troubleshooting</u>: Resolve common Mobile Session Replay issues and errors.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 <div class="alert alert-info">For Session Replay, Datadog supports RUM for native iOS and Android mobile apps, but not for smart TVs or wearables.</div>
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/session_replay/browser/#how-it-works
-[2]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
-[3]: /real_user_monitoring/session_replay/mobile/privacy_options
-[4]: /real_user_monitoring/session_replay/mobile/app_performance
-[5]: /real_user_monitoring/session_replay/mobile/troubleshooting
