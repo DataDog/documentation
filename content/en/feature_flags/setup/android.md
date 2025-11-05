@@ -27,6 +27,9 @@ Declare `dd-sdk-android-flags` as a dependency in your project. Add the library 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
     implementation "com.datadoghq:dd-sdk-android-flags:<latest-version>"
+
+    // Recommended: RUM integration drives analysis and enriches RUM session data
+    implementation "com.datadoghq:dd-sdk-android-rum:<latest-version>"
 }
 {{< /code-block >}}
 
