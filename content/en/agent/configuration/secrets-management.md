@@ -134,7 +134,7 @@ Configure the Datadog Agent to use AWS Secrets to resolve secrets in Helm using 
 
 ```sh
 datadog: 
-  [...]
+  apiKey: ENC[mrmcpat/secrets;datadog-api-key]
   env:
    - name: DD_SECRET_BACKEND_TYPE
      value: "aws.secrets"
