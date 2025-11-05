@@ -15,7 +15,7 @@ aliases:
 ---
 ### Prerequisites
 
-* [Datadog Agent v7.34.0 or later][1]
+* [Datadog Agent v7.34.0 or later][10]
 
 ### Supported libraries
 
@@ -28,6 +28,9 @@ aliases:
 | Amazon Kinesis  | [client-kinesis](https://www.npmjs.com/package/@aws-sdk/client-kinesis)                  | {{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="minimal" >}}             | {{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="recommended" >}}             |
 | Amazon SNS      | [client-sns](https://www.npmjs.com/package/@aws-sdk/client-sns)                          | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="minimal" >}}                 | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="recommended" >}}                 |
 | Google Pub/Sub  | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub)                | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="minimal" >}}        | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="recommended" >}}        |
+
+#### Support for Amazon SQS with AWS Lambda
+To monitor data streams for Node.js Lambda functions calling Amazon SQS, SNS, or Kinesis, use Datadog's Node.js Lambda tracer, [`datadog-lambda-js` v.12.128.0][8] or later.
 
 ### Installation
 
@@ -62,9 +65,10 @@ Data Streams Monitoring propagates context through message headers. If you are u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
+[10]: /agent
 [2]: /tracing/trace_collection/dd_libraries/nodejs
 [3]: https://pypi.org/project/confluent-kafka/
 [5]: https://www.npmjs.com/package/amqplib
 [6]: https://www.npmjs.com/package/rhea
 [7]: /data_streams/manual_instrumentation/?tab=nodejs
+[8]: https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.128.0

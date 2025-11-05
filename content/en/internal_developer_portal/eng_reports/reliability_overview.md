@@ -14,9 +14,6 @@ further_reading:
   text: "Datadog Dashboards"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/engineering-reports/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Engineering Reports!" >}}
-{{< /callout >}}
-
 ## Overview
 
 The Reliability Overview report supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. With this report, you can:

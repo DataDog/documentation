@@ -69,7 +69,7 @@ end
 ```
 
 Informa a nuestro equipo si encuentras o sospechas de alguna incompatibilidad. Para ello, [abre un ticket de asistencia][2].
-De este modo, Datadog podrá añadirlas a la lista de detección automática y trabajar con los autores del gem o de la biblioteca para solucionar el problema.
+De este modo, Datadog podrá añadirlas a la lista de detección automática y trabajar con los autores del gem o de la librería para solucionar el problema.
 
 ## Fallos de segmentación en `gc_finalize_deferred` en las versiones de Ruby 2.6 a 3.2
 

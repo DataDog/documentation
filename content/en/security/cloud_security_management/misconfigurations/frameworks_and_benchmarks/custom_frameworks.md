@@ -29,7 +29,7 @@ With custom frameworks, you can define and measure compliance against your own c
 
 Next, add requirements to the framework:
 
-<div class="alert alert-warning">You must add at least one requirement, control, and rule before saving the custom framework.</div>
+<div class="alert alert-danger">You must add at least one requirement, control, and rule before saving the custom framework.</div>
 
 1. Click **Add Requirement**.
 1. Enter the following details:

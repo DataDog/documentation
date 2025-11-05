@@ -86,7 +86,7 @@ Sigue las siguientes instrucciones para instalar y configurar este check para un
 
 A partir del Agent versión 7.47.0, el check de TorchServe está incluido en el paquete del [Datadog Agent][3]. No es necesaria ninguna instalación adicional en tu servidor.
 
-<div class="alert alert-warning">Este check utiliza <a href="https://docs.datadoghq.com/integrations/openmetrics/">OpenMetrics</a> para recopilar métricas desde el endepoint de OpenMetrics que TorchServe puede exponer, lo que requiere Python 3.</div>
+<div class="alert alert-danger">Este check utiliza <a href="https://docs.datadoghq.com/integrations/openmetrics/">OpenMetrics</a> para recopilar métricas desde el endepoint de OpenMetrics que TorchServe puede exponer, lo que requiere Python 3.</div>
 
 ### Requisitos previos
 
@@ -215,7 +215,7 @@ Esta configuración recopila métricas por cada nombre de modelo que no coincida
 
 En forma predeterminada, la integración recupera la lista completa de los modelos cada vez que se ejecuta el check. Puedes almacenar en caché este lista utilizando la opción `interval` para aumentar el rendimiento de este check. 
 
-<div class="alert alert-warning">El uso de la opción `interval` también puede retrasar algunas métricas y eventos.</div>
+<div class="alert alert-danger">El uso de la opción `interval` también puede retrasar algunas métricas y eventos.</div>
 
 [1]: https://pytorch.org/serve/management_api.html
 [2]: https://github.com/DataDog/integrations-core/blob/master/torchserve/datadog_checks/torchserve/data/conf.yaml.example
@@ -366,7 +366,7 @@ Consulta [el ejemplo de archivo de configuración ][8] para saber cómo recopila
 
 Para obtener más información sobre el registro de configuración con TorchServe, consulta la [documentación oficial de TorchServe][10].
 
-<div class="alert alert-warning">También puedes recopilar logs del archivo `access_log.log`. Sin embargo, estos logs están incluidos en el archivo `ts_log.log`, lo que te lleva a duplicar logs en Datadog si configuras ambos archivos.</div>
+<div class="alert alert-danger">También puedes recopilar logs del archivo `access_log.log`. Sin embargo, estos logs están incluidos en el archivo `ts_log.log`, lo que te lleva a duplicar logs en Datadog si configuras ambos archivos.</div>
 
 ## Solucionar problemas
 

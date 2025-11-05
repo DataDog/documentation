@@ -108,7 +108,7 @@ docker run -d \
   your-nodejs-app-image
 ```
 
-{{% aap/aap_and_api_protection_nodejs_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 

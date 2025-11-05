@@ -9,13 +9,15 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
+<div class="alert alert-warning"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
 &bull; If you require a FedRAMP or FIPS-compliant data collection pipeline, use the <a href="/agent/configuration/fips-compliance/?tab=linux">FIPS-enabled Datadog Agent</a>.<br>
 &bull; If you are a GovCloud customer whose only requirement is data residency in the GovCloud (US1-FED) data center, you <strong>may</strong> use the DDOT Collector.</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/ddot-for-linux-based-hosts-or-vms/" btn_hidden="false" >}}
-Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To join the Preview, click <strong>Request Access</strong> and complete the form.
+{{< callout btn_hidden="true" >}}
+The DDOT Collector for Kubernetes is <strong>Generally Available</strong>. You can get started by following the <a href="#get-started">instructions below</a>.
+<br><br>
+Deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is <strong>in Preview</strong>. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
 {{< /callout >}}
 
 ## Overview
@@ -61,7 +63,7 @@ Datadog provides different levels of support depending on the type of component:
 
 - **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][44], [Datadog Exporter][38], and [Infra Attribute Processor][50]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements within OpenTelemetry community guidelines.
 
-- **Community Supported Components**: [OpenTelemetry components](#opentelemetry-collector-components) included with the Agent by default. Datadog ensures these components are secure, stable, and compatible with the Agent. 
+- **Community Supported Components**: [OpenTelemetry components](#opentelemetry-collector-components) included with the Agent by default. Datadog ensures these components are secure, stable, and compatible with the Agent.
 
 - **Custom Components**: OpenTelemetry components that are not included with the Agent by default and are added through the [custom components process][2]. Datadog provides guidance on the integration process but does not provide direct support for these components' functionality. For issues with custom components, Datadog recommends engaging with the OpenTelemetry community or the component maintainers.
 
@@ -95,7 +97,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 - [probabilisticsamplerprocessor][32]
 - [resourcedetectionprocessor][33]
 - [resourceprocessor][34]
-- [routingprocessor][35]
+- routingprocessor (deprecated and removed in v7.71.0; use the [routingconnector][56] instead)
 - [tailsamplingprocessor][36]
 - [transformprocessor][37]
 
@@ -158,7 +160,7 @@ The default Datadog Agent package includes a DDOT Collector with a [curated set 
 - (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to extend the Datadog Agent's capabilities.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Quick start with the default Agent package{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/kubernetes" >}}Quick start with the default Agent package{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Migrate from OpenTelemetry Collector to Datadog Agent
@@ -204,7 +206,6 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [32]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [33]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
 [34]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourceprocessor/README.md
-[35]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/routingprocessor
 [36]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [37]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/transformprocessor/README.md
 [38]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/README.md

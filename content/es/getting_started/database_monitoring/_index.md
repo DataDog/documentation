@@ -17,7 +17,7 @@ title: Empezando con la monitorización de bases de datos
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">La monitorización de bases de datos no está disponible para el sitio de Datadog que has seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">La monitorización de bases de datos no está disponible para el sitio de Datadog que has seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 ## Información general

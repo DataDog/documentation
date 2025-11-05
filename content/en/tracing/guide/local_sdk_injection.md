@@ -18,7 +18,7 @@ Use this guide if:
 
 - Kubernetes v1.14+
 - [Datadog Cluster Agent][3]:
-  - v7.40+ for Java, Python, NodeJS
+  - v7.40+ for Java, Python, and Node.js
   - v7.44+ for .NET and Ruby
 - Datadog Admission Controller enabled (enabled by default in Helm chart v2.35.0+)
 
@@ -64,12 +64,12 @@ Use the following pod annotations to specify which language SDK to inject and wh
 | Language    | Pod annotation |
 | ----------- | -------------- |
 | Java | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"` |
-| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Node.js | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"` |
 | Python | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 | .NET | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` | 
 | Ruby | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` | 
 
-Replace `<CONTAINER IMAGE TAG>` with the appropriate value. For musl-based .NET containers, use tags with the `-musl` suffix (for example, `v2.29.0-musl`).
+Replace `<CONTAINER IMAGE TAG>` with the appropriate value.
 
 For example:
 
@@ -93,7 +93,7 @@ spec:
 
 To view available library versions, see the tracer repositories for each language:
 - [Java][4]
-- [JavaScript][5]
+- [Node.js][5]
 - [Python][6]
 - [.NET][7]
 - [Ruby][8]

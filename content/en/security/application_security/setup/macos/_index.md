@@ -30,8 +30,8 @@ Learn how to set up App and API Protection (AAP) on your macOS services by selec
   {{< appsec-integration name="Python" avatar="python" link="/security/application_security/setup/python/macos" >}}
   {{< appsec-integration name="Node.js" avatar="node" link="/security/application_security/setup/nodejs/macos" >}}
   {{< appsec-integration name="Java" avatar="java" link="/security/application_security/setup/java/macos" >}}
-  {{< appsec-integration name="Go" avatar="go" link="/security/application_security/setup/go" >}}
-  {{< appsec-integration name="Ruby" avatar="ruby" link="/security/application_security/setup/ruby" >}}
+  {{< appsec-integration name="Go" avatar="go" link="/security/application_security/setup/go/" >}}
+  {{< appsec-integration name="Ruby" avatar="ruby" link="/security/application_security/setup/ruby/macos" >}}
   {{< appsec-integration name=".NET" avatar="dotnet" link="/security/application_security/setup/dotnet" >}}
   {{< appsec-integration name="PHP" avatar="php" link="/security/application_security/setup/php" >}}
 {{< /appsec-integrations >}}

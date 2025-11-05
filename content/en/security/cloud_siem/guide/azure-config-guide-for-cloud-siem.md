@@ -4,10 +4,10 @@ further_reading:
 - link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"
   text: "Explore Cloud SIEM default detection rules"
-- link: "/security/cloud_siem/investigate_security_signals"
+- link: "/security/cloud_siem/triage_and_investigate/investigate_security_signals"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security/cloud_siem/detection_rules/"
+- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/"
   tag: "Documentation"
   text: "Create new detection rules"
 ---
@@ -18,7 +18,7 @@ Cloud SIEM applies detection rules to all processed logs in Datadog to detect th
 
 This guide walks you through configuring Microsoft Azure to send logs to Datadog so that you can start detecting threats on your Azure Platform logs.
 
-<div class="alert alert-info">The Azure Native integration (available for customers on Datadog's US3 site) has different log collection setup instructions. If you are using the Azure Native integration, select <strong>US3</strong> in the Datadog Site dropdown menu and follow the instructions in <a href="https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/">Microsoft Azure log collection</a>. </div>
+<div class="alert alert-info">The Azure Native integration (available for customers on Datadog's US3 site) has different log collection setup instructions. If you are using the Azure Native integration, select <strong>US3</strong> in the Datadog Site dropdown menu and follow the instructions in <a href="https://docs.datadoghq.com/integrations/guide/azure-native-integration/#log-collection">Microsoft Azure log collection</a>. </div>
 
 {{< tabs >}}
 {{% tab "Automated Installation" %}}
@@ -31,14 +31,14 @@ Click the button below and fill in the form on Azure portal. After completing th
 1. Select a region.
 1. Select **true** for **Send Activity Logs**.
 1. Enter your Datadog API key.
-1. Enter names for your resources. See [Optional Parameters][1] for more information.
+1. Enter names for your resources.
 1. Click **Create + review**.
 1. After the validation passes, click **Create**.
 
-After the deployment is completed successfully, go to [Log Explorer][2] and enter `service:azure` in the search query to view your Azure logs.
+After the deployment is completed successfully, go to [Log Explorer][1] and enter `service:azure` in the search query to view your Azure logs.
 
-[1]: /logs/guide/azure-logging-guide/?tab=automatedinstallation#optional-parameters
-[2]: https://app.datadoghq.com/logs
+
+[1]: https://app.datadoghq.com/logs
 
 {{% /tab %}}
 

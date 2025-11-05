@@ -12,13 +12,13 @@ code_lang_weight: 20
 further_reading:
 - link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: Código fuente
-  text: Código fuente de la biblioteca del rastreador
+  text: Código fuente de la librería del rastreador
 - link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
   tag: Sitio externo
-  text: Documentación de la API de la biblioteca del rastreador
+  text: Documentación de la API de la librería del rastreador
 - link: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
   tag: Sitio externo
-  text: Documentación de la API de la biblioteca del rastreador para v2
+  text: Documentación de la API de la librería del rastreador para v2
 - link: https://github.com/DataDog/orchestrion
   tag: Código fuente
   text: Código fuente de Orchestrion
@@ -64,7 +64,7 @@ Consulta a continuación las instrucciones de la sección correspondiente a tu p
 [Orchestrion][6] añade automáticamente Instrumentación a las aplicaciones Go durante la compilación, eliminando la necesidad de realizar cambios en el código. Proporciona una amplia cobertura de rastreo y habilita funciones de seguridad exclusivas:
 
 - Amplia cobertura de rastreo:
-   - Instrumenta tu código y todas las dependencias, incluida la biblioteca estándar de Go
+   - Instrumenta tu código y todas las dependencias, incluida la librería estándar de Go
    - Instrumenta el código durante la compilación, lo que evita lagunas en la cobertura de rastreo debidas a errores manuales pasados por alto en la instrumentación manual.
 - Función **Exploit Prevention** (Prevención de exploits) exclusiva de [Application Security Management][7]. La [Prevención de exploits][15] es una implementación de Runtime Application Self-Protection (RASP) e incluye métodos RASP como la inclusión de archivos locales (LFI).
 
@@ -139,7 +139,7 @@ Para más información, consulta la [documentación del etiquetado unificado de 
 
 #### Configuración del rastreador
 
-Consulta [Configuración de biblioteca][16] para obtener instrucciones sobre la configuración.
+Consulta [Configuración de librería][16] para obtener instrucciones sobre la configuración.
 
 #### Crear tramos de trazas personalizadas
 
@@ -208,7 +208,7 @@ import "database/sql"
 
 // La instrumentación del lado de quien llama normalmente ocurre dentro de esta función...
 func normal() {
-  // La siguiente asignación NO será modificada para añadir ninguna instrumentación del lado de quien llama 
+  // La siguiente asignación NO será modificada para añadir ninguna instrumentación del lado de quien llama
   // ya que está excluida por la directiva orchestrion:ignore:
   //orchestrion:ignore
   db, err := sql.Open("driver-name", "database=example")
@@ -227,9 +227,9 @@ func excluded() {
 }
 {{</code-block>}}
 
-Parte de la instrumentación realizada por `orchestrion` se lleva a cabo del lado del receptor de la llamada (o del lado de biblioteca), lo que significa que la integración se añade directamente dentro de la propia dependencia. En estos casos, no es posible excluir localmente este tipo de integraciones.
+Parte de la instrumentación realizada por `orchestrion` se lleva a cabo del lado del receptor de la llamada (o del lado de librería), lo que significa que la integración se añade directamente dentro de la propia dependencia. En estos casos, no es posible excluir localmente este tipo de integraciones.
 
-#### Utilizar la biblioteca de rastreo
+#### Utilizar la librería de rastreo
 
 Puedes utilizar la [biblioteca de rastreo][4] en tu aplicación creada con Orchestrion. Esto es útil para instrumentar marcos aún no compatibles por Orchestrion. Sin embargo, ten en cuenta que esto puede resultar en tramos de traza duplicados en el futuro a medida que se amplíe la compatibilidad de Orchestrion. Revisa las [notas de la versión][11] cuando actualices tu dependencia de `orchestrion` para mantenerte informado sobre las nuevas características y ajusta tu instrumentación manual según sea necesario.
 
@@ -259,13 +259,13 @@ Para solucionar los problemas de compilación que gestiona `orchestrion`, consul
 
 {{% tab "Instrumentación manual" %}}
 
-### Añadir la biblioteca del rastreador a tu aplicación
+### Añadir la librería del rastreador a tu aplicación
 
-En primer lugar, importa e inicia el rastreador en tu código siguiendo la documentación de [Configuración de la biblioteca][3]. Consulta la [documentación de la API][4] (o la [documentación de la API v2][6]) para obtener instrucciones y detalles de configuración sobre el uso de la API.
+En primer lugar, importa e inicia el rastreador en tu código siguiendo la documentación de [Configuración de la librería][3]. Consulta la [documentación de la API][4] (o la [documentación de la API v2][6]) para obtener instrucciones y detalles de configuración sobre el uso de la API.
 
 ### Integraciones activas de Go para crear tramos
 
-Activa las [integraciones de Go][1] para generar tramos. Datadog tiene una serie de paquetes conectables que proporcionan soporte "predefinido" para instrumentar una serie de bibliotecas y marcos. En la página [Requisitos de compatibilidad][1] se puede encontrar una lista de estos paquetes. Importa estos paquetes a tu aplicación y sigue las instrucciones de configuración que aparecen junto a cada integración.
+Activa las [integraciones de Go][1] para generar tramos. Datadog tiene una serie de paquetes conectables que proporcionan soporte "predefinido" para instrumentar una serie de librerías y marcos. En la página [Requisitos de compatibilidad][1] se puede encontrar una lista de estos paquetes. Importa estos paquetes a tu aplicación y sigue las instrucciones de configuración que aparecen junto a cada integración.
 
 [1]: /es/tracing/compatibility_requirements/go
 [3]: /es/tracing/trace_collection/library_config/go/

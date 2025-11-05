@@ -59,7 +59,7 @@ instances:
 
 ### Configuración
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los nombres de los archivos de configuración y check deben coincidir. Si tu check se llama <code>micheck.py</code> tu archivo de configuración <em>debe</em> llamarse <code>micheck.yaml</code>.
 </div>
 

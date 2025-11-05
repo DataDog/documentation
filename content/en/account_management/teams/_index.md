@@ -1,5 +1,6 @@
 ---
 title: Teams
+description: Organize team assets, filter Datadog experiences, and manage team membership with team handles, notifications, and resource associations.
 ---
 
 ## Overview

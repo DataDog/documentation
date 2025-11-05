@@ -16,10 +16,13 @@ cascade:
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/clone-test" >}}Clone your Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/otp-email-synthetics-test" >}}Extract a one-time passcode from an email body using Synthetic Browser Tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/version_history" >}}Version History for Synthetic Monitoring{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/kerberos-authentication/" >}}Kerberos authentication for Synthetic Monitoring{{< /nextlink >}}
+     {{< nextlink href="synthetics/guide/step-duration/" >}}How step duration is determined in Browser Tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Alerting:" >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Use monitors in Synthetic tests{{< /nextlink >}}
+    {{< nextlink href="monitors/types/synthetic_monitoring/" >}}Use Synthetic Test Monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-retries-monitor-status/" >}}Understand how Synthetic test retries determine monitor status{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}Monitor website uptime with SLOs{{< /nextlink >}}
 {{< /whatsnext >}}

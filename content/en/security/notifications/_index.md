@@ -22,6 +22,9 @@ products:
 - name: App and API Protection
   url: /security/application_security/
   icon: app-sec
+- name: Code Security
+  url: /security/code_security/
+  icon: security-code-security
 ---
 
 {{< product-availability >}}

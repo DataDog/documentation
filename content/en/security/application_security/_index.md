@@ -8,6 +8,7 @@ aliases:
   - /security/application_security/enabling
   - /security/application_security/getting_started
   - /security/application_security/threats
+  - /security/application_security/setup/standalone
 further_reading:
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
@@ -34,6 +35,10 @@ algolia:
   tags: ["asm", "App and API Protection"]
 ---
 
+{{< learning-center-callout header="Get real-time security guardrails for your AI apps and agents" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
+  AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
+{{< /learning-center-callout >}}
+
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
 **App & API Protection (AAP)** provides unified visibility and security for your applications and APIs, helping you detect, investigate, and prevent threats across modern workloads.
@@ -41,7 +46,6 @@ algolia:
 Whether you're defending public-facing APIs, internal services, or user-facing applications, AAP equips your teams with realtime OOTB threat detection, posture assessment, and in-app protections.
 
 <div class="alert alert-info">Formerly known as Application Security Monitoring (ASM), AAP now goes beyond runtime threat detection to include API discovery, posture management, and protection capabilities.</div>
-
 
 ## Key capabilities
 

@@ -66,8 +66,6 @@ Datadog ログ管理 (Datadog Logs または Logging とも呼ばれる) は、�
 
 Logging without Limits\* は、[ログエクスプローラー][1]でトラブルシューティングを合理化し、インフラストラクチャーの問題を迅速に評価および修正する力を提供します。また、直感的なアーカイブ機能により、監査や評価時にセキュリティチームや IT チームをサポートします。[Datadog Cloud SIEM][2] は、ログのインデックスを作成することなく、環境内のセキュリティ脅威を検出します。
 
-**注**: PCI 準拠の Datadog 組織のセットアップに関する情報については、[PCI DSS 準拠][3]を参照してください。
-
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
 </br>
@@ -110,7 +108,7 @@ Logging without Limits\* は、[ログエクスプローラー][1]でトラブ�
   実際のクラウドコンピュートキャパシティと Datadog のトライアルアカウントを使用して、コストをかけずに学ぶことができます。今すぐ登録して、ログの収集、クエリ、分析、メトリクス、監視、処理、ストレージ、アクセス制御を学習しましょう。
 {{< /learning-center-callout >}}
 
-## その他の参考資料
+## 参考情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
@@ -118,7 +116,6 @@ Logging without Limits\* は、[ログエクスプローラー][1]でトラブ�
 
 [1]: /ja/logs/explorer/
 [2]: /ja/security/cloud_siem/
-[3]: /ja/data_security/pci_compliance/
 [4]: /ja/logs/log_collection/
 [5]: /ja/logs/log_configuration/
 [6]: /ja/tracing/other_telemetry/connect_logs_and_traces/

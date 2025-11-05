@@ -775,8 +775,8 @@ Two release branches are supported:
 
 | Release    | Support level                              | Minimum Datadog Agent |
 |------------|--------------------------------------------|-----------------------|
-| `>=3.0,<4` | General Availability   7.28                |
-| `>=2.0,<3` | Maintenance (End of Life October 31, 2025) | 7.28                  |
+| `>=3.0,<4` | General Availability                       | 7.28                  |
+| `>=2.0,<3` | End of Life                                | 7.28                  |
 |    `<2`    | End of Life                                |                       |
 
 And the library supports the following runtimes:
@@ -801,10 +801,11 @@ And the library supports the following runtimes:
 
 #### Supported frameworks
 
-| Framework                | Versions    | Runtime Code Analysis (IAST)                |
-| ------------------------ | ----------- | ------------------------------------------- |
-| Django                   | 1.8         |  <i class="icon-check-bold"></i>            |
-| Flask                    | 0.10        |  <i class="icon-check-bold"></i>            |
+| Framework   | Versions     | Runtime Code Analysis (IAST)    |
+|-------------|--------------|---------------------------------|
+| Django      | 1.8          | <i class="icon-check-bold"></i> |
+| FastAPI     | 0.86         | <i class="icon-check-bold"></i> |
+| Flask       | 0.10         | <i class="icon-check-bold"></i> |
 
 Support for query strings is not available for Flask.
 

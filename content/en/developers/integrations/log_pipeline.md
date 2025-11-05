@@ -20,219 +20,157 @@ description: Learn how to create a Datadog Log Integration Pipeline.
 ---
 ## Overview
 
-This page walks Technology Partners through creating a log pipeline. A log pipeline is required if your integration sends logs to Datadog.
+Log pipelines parse, filter, and enrich incoming logs to make them searchable and actionable within Datadog. For Technology Partners, pipelines ensure that their logs are delivered in a structured, meaningful format right out of the box. For end users, prebuilt pipelines reduce the need to create custom parsing rules, allowing them to focus on troubleshooting and monitoring. Log pipelines are required for integrations that submit logs to Datadog.
 
+{{< img src="developers/integrations/pipeline_library.png" alt="Browse the integration pipeline library" style="width:100%;" >}}
 
-When developing your integration to send logs to Datadog follow these guidelines to ensure the best experience for your users.
+This guide explains how to create a log pipeline, including best practices and requirements. For a hands-on learning experience, check out related courses in the Datadog Learning Center:
+   - [Process Logs Out of the Box with Integration Pipelines][1]
+   - [Build and Manage Log Pipelines][2] 
 
-## Best practices
+### Core concepts
 
-Before creating a log pipeline, consider the following guidelines and best practices:
+Below are important concepts to understand before building your pipeline. See [Log Pipelines][3] to learn more.
 
-The integration must use supported Datadog logs endpoints
-: Your integration must use one of the [supported endpoints][23] exposed by Datadog for log ingestion. You can otherwise use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
+- **Processors**: The building blocks that transform or enrich logs. See [Processors][4] to learn more.
 
-The integration must support all Datadog sites
-: Users must be able to choose between the different Datadog sites whenever applicable. See [Getting Started with Datadog Sites][2] for more information about site differences. </br></br> Your Datadog site endpoint is `http-intake.logs`.{{< region-param key="dd_site" code="true" >}}.
+- **Facets**: Provide a straightforward filtering interface for logs and improve readability by exposing clear, human-friendly labels for important attributes. See [Facets][5] to learn more.
 
-Allow users to attach custom tags while setting up your integration
-: Tags can be set as key-value attributes in the JSON body of your integration's log payload. Datadog recommends allowing users to set custom tags for an integration. If the integration [sends logs through the API][1], tags can optionally be set using the `ddtags=<TAGS>` query parameter.
+- **Nested pipelines**: Pipelines within a pipeline that allow you to split processing into separate paths for different log types or conditions.
 
-Set the integration's logs `source` tag to the integration name
-: Datadog recommends setting the `source` tag to `<integration_name>` (`source:okta`) for an application. `source` must be set before sending logs to Datadog's endpoints as it cannot be remapped in the Datadog UI. </br></br> The `source` tag must be in lowercase and must not be editable by users as it is used to enable integration pipelines and dashboards.
+- **Order matters**: Pipelines run from top to bottom, so the sequence of processors matters for achieving the desired log transformation.
 
-Avoid sending logs that contain arrays in the JSON body whenever possible 
-: While it's possible to send array data in your logs, Datadog recommends avoiding arrays as they cannot be [faceted][24].
+## Building an integration log pipeline
 
-Do not log Datadog API Keys
-: Datadog API Keys can either be passed in the Header or as part of the HTTP Path of your API requests. For examples, see [Send Logs API documentation][1]. Avoid logging the API Key in your setup.
+To get started, make sure you're a registered Technology Partner with access to a Datadog developer instance. If you haven't joined yet, see [Join the Datadog Partner Network][6].
 
-Do not use Datadog Application Keys
-: Datadog Application Keys are not required to send logs using the HTTP endpoint. 
+1. [Create a pipeline that filters by your integration's log source](#create-a-pipeline).
+2. [Add processors to normalize and enrich logs](#add-processors).
+3. [Create custom facets to improve user filtering and exploration](#define-custom-facets).
+4. [Validate and test the pipeline](#validate-and-test-your-log-pipeline).
+5. [Review log pipeline requirements](#review-requirements-checklist).
+6. [Export the pipeline and include it in your integration submission](#export-and-add-your-pipeline-to-the-integration-submission).
 
-## Create log integration assets
+### Create a pipeline
 
-You can create and design your log integration assets directly within your Datadog partner account.
-
-Log integrations consist of two sets of assets: [pipelines][13] and associated [facets][12]. Centralizing logs from various technologies and applications can produce many unique attributes. To use out-of-the-box dashboards, Technology Partner Integrations should rely on Datadog's [standard naming convention][17] when creating integrations.
-
-After finalizing your Datadog Integration design and successfully sending logs to Datadog's log endpoint(s), define your log pipelines and facets to enrich and structure your integration's Logs.
-
-For information about becoming a Datadog Technology Partner, and gaining access to an integration development sandbox, read [Build an Integration][18].
-
-<div class="alert alert-warning">To be reviewed by Datadog's integration team, log integrations must include assets and have pipeline processors or facets.</div>
-
-### Pipelines overview
-
-Logs sent to Datadog are processed in [log pipelines][13] using pipeline processors. These processors allow users to parse, remap, and extract attribute information, enriching and standardizing logs for use across the platform.
-
-#### Create a pipeline
-
-Create a log pipeline to process specified logs with pipeline processors.
-
-
-1. From the [**Pipelines**][3] page, click **+ New Pipeline**.
-2. In the **Filter** field, enter the unique `source` tag that defines the log source for the Technology Partner's logs. For example, `source:okta` for the Okta integration. 
-**Note**: Make sure that logs sent through the integration are tagged with the correct source tags before they are sent to Datadog.
-3. Optionally, add tags and a description.
+1. Navigate to the [**Pipelines**][7] page and select **New Pipeline**.
+2. In the **Filter** field, filter by your integration's logs source (`source:<logs_source>`). Your logs source can be found in the **Data** tab when viewing your integration in the Developer Platform.
+3. (Optional) Add tags and a description.
 4. Click **Create**.
 
-After you set-up a pipeline, add processors to enrich and structure the logs further.
-#### Add pipeline processors
+### Add processors
 
-Before defining your pipeline processors, review [Datadog's Standard Attributes][6].
+To add a processor, open your newly created pipeline and select **Add Processor**. Use the following guidance to determine which processors to configure:
 
-Use processors within your pipelines to enrich and restructure your data, and generate log attributes. For a list of all log processors, see the [Processors][10] documentation.
+1. Parse raw logs (if needed). 
+   - If your logs are not in JSON format, add a [Grok Parser][8] to extract attributes before remapping or enrichment.
+      - To maintain optimal grok parsing performance, avoid wildcard matchers.
+   - Skip this step if logs are already sent to Datadog in JSON format.
+2. Normalize logs with Datadog Standard Attributes in mind.
+   - Map incoming attributes to [Datadog Standard Attributes][9] so logs are consistent across the platform. For example, an attribute for a client IP value should be remapped to `network.client.ip`.
+   - For reserved attributes (`date`, `message`, `status`, `service`), use the dedicated processors: [Date Remapper][10], [Message Remapper][11], [Status Remapper][12], [Service Remapper][13].
+      - **Important**: Remappers must be explicitly added for these attributes, even if the incoming value matches Datadog defaults. Organization-level overrides can change default behavior.
+   - At a minimum, add a Date Remapper to map the log timestamp to the reserved `date` attribute.
+   - For non-reserved standard attributes, use the general [Remapper][14].
+      - Unless updating an existing integration log pipeline, disable **Preserve source attribute** to prevent duplicate values.
+3. Enrich logs as needed. 
+   - For a list of all log processors, see the [Processors][4] documentation.
+   - Consider adding processors that provide context or derived attributes, such as:
+      - [Geo IP Parser][15] to add geolocation data based on an IP address field.
+      - [Category Processor][16] to group logs by predefined rules.
+      - [Arithmetic Processor][17] to compute numeric values from existing attributes.
+      - [String Builder Processor][18] to concatenate multiple attributes into a single field.
 
-##### Requirements
+### Define custom facets
 
-Map the application's logs attributes to Datadog's Standard Attributes
-: Use the [Attribute Remapper][5] to map attribute keys to [Datadog Standard Attributes][6] where possible. For example, an attribute for a network service client IP value should be remapped to `network.client.ip`.
+After logs are normalized and enriched, the next step is to create custom facets, which map individual attributes to user-friendly fields in Datadog.
 
-Map the log `service` tag to the name of the service producing telemetry
-: Use the [Service Remapper][7] to remap the `service` attribute. When source and [service][26] share the same value, remap the `service` tag to the `source` tag. `service` tags must be lowercase. 
+Custom facets provide users with a consistent interface for filtering logs and power autocomplete in the Logs Explorer, making it easier to discover and aggregate important information. They also allow attributes with low readability to be renamed with clear, user-friendly labels. For example, transforming `@deviceCPUper` into `Device CPU Utilization Percentage`.
 
-Map the log's internal timestamp to its official Datadog timestamp
-: Use the [Date Remapper][4] to define the official timestamp for logs. If a log's timestamp does not map to a [standard date attribute][28], Datadog sets its timestamp to the time of ingestion.
+Facets can be qualitative (for basic filtering and grouping) or quantitative, known as measures (for aggregation operations, such as averaging or range filtering). Create facets for attributes that users are most likely to filter, search, or group by in the Logs Explorer. See [Facets][5] to learn more.
 
-Map the custom status attributes of the logs to the official Datadog `status` attribute
-: Use a [Status Remapper][25] to remap the `status` of a log, or a [Category Processor][19] for statuses mapped to a range (as with HTTP status codes).
+**Note**: You do not need to create facets for [Datadog Standard Attributes][9]. These attributes are mapped to predefined facets, which Datadog automatically generates when a pipeline is published.
 
-Map the custom message attribute of the logs to the official Datadog `message` attribute
-: Use the [message remapper][9] to define the official message of the log if application logs do not map to the standard message attribute. This allows users to search for logs using free text.
+After you've identified the attributes that can benefit from facets, follow these steps for each:
 
-Set a namespace for custom attributes within your logs
-: Generic log attributes that do not map to a [Datadog Standard Attribute][6] must be namespaced if they are mapped to [Facets][14]. For example, `file` would be remapped to `integration_name.file`.
-Use the [Attribute Remapper][5] to set attribute keys to a new namespaced attribute. 
+1. Navigate to the [Logs Explorer][19].
+2. Click **Add** in the facets panel.
+3. Choose whether to create a **Facet** or **Measure**, then expand **Advanced options**.
+4. Define the **Path**.
+   - Custom facets must include a prefix matching your logs source.
+   - For example, a facet on `project_name` should use the path `@<logs_source>.project_name`.
+5. Edit the **Display Name** to be user-friendly.
+   - For example, the facet path `@<logs_source>.project_name` should have the display name `Project Name`.
+6. Select the correct **Type** (and **Unit** if defining a Measure).
+7. Add a **Group**, which should match your integration name. 
+   - Use this same group for all additional custom facets in the integration.
+8. Add a **Description** explaining the facet.
+9. Click **Add** to save.
+10. Navigate back to the pipeline definition and add a [Remapper][14] to align the raw attribute with the prefixed path used by the facet.
 
-1. Expand the newly created pipeline and click **Add Processor** to begin building your pipeline using processors.
-2. If the integration's logs aren't in JSON format, add the [Grok Processor][8] to extract attribute information. Grok processors parse out attributes and enrich logs prior to remapping or further processing.
-3. After extracting log attributes, remap them to [Datadog's Standard Attributes][6] where possible using [Attribute Remappers][5].
-4. Set the timestamp of an integration's logs to be its official Datadog timestamp using the [Date Remapper][4].
-5. For more advanced processing and data transformations, make use of additional [processors][10].  
-For example, the `Arithmetic Processor` can be used to calculate information based off of attributes, or the `String Builder Processor` can concatenate multiple string attributes. 
+### Review requirements checklist
 
-**Tips**
-* Remove original attributes when remapping log attributes by using `preserveSource:false`. This helps avoid confusion and removes duplicates.
-* To maintain optimal grok parsing performance, avoid wildcard matchers such as `%{data:}` and `%{regex(".*"):}`. Make your parsing statements as specific as possible.
-* Take the free course [Going Deeper with Logs Processing][20] for an overview on writing processors and leveraging standard attributes. 
+Prior to testing your pipeline, review the following requirements to avoid common mistakes.
 
-### Facets overview
+- **Log pipelines must not be empty**: Every pipeline must contain at least one processor. At a minimum, include a Date Remapper.
+- **Add dedicated remappers for `date`, `message`, `status`, and `service`**: Remappers must be explicitly added for these attributes, even if the incoming value matches Datadog defaults. Organization-level overrides can change default behavior.
+- **Disable `Preserve source attribute` when using a general [Remapper][14]**: Enable this option only if the attribute is required for downstream processing, or if you are updating an existing pipeline and need to maintain backward compatibility.
+- **Do not duplicate existing Datadog facets**: To avoid confusion with existing out-of-the-box Datadog facets, do not create custom facets that overlap with [Datadog Standard Attributes][9].
+- **Use a custom prefix for custom facets**: Attributes that do not map to a [Datadog Standard Attribute][9] must include a unique prefix when being mapped to a custom facet. Use the general [Remapper][14] to add a prefix.
+- **Group custom facets**: Assign all custom facets to a group that matches your integration's name.
+- **Match facet data types**: Ensure the facet's data type (String, Boolean, Double, or Integer) matches the type of the attribute it maps to. Mismatched types can prevent the facet from working correctly.
+- **Protect Datadog API and application keys**: Never log API keys. Keys should only be passed in request headers, not in log messages.
 
-Facets are specific qualitative or quantitative attributes that can be used to filter and narrow down search results. While facets are not strictly necessary for filtering search results, they play a crucial role in helping users understand the available dimensions for refining their search. 
+### Validate and test your log pipeline
 
-Facets for standard attributes are automatically added by Datadog when a pipeline is published. Review if the attribute should be remapped to a [Datadog Standard Attribute][6]. 
+Test your pipeline to confirm that logs are being parsed, normalized, and enriched correctly. For more complex pipelines, the [Pipeline Scanner][20] may be helpful.
 
-Not all attributes are meant to be used as a facet. The need for facets in integrations is focused on two things:
-* Facets provide a straightforward interface for filtering logs. They are leveraged in Log Management autocomplete features, allowing users to find and aggregate key information found in their logs.
-* Facets allow for attributes with low readability to be renamed with a label that is easier to understand. For example: `@deviceCPUper` → `Device CPU Utilization Percentage`.
+1. Generate new logs that flow through the pipeline.
+   - Pipelines are automatically triggered if Datadog ingests a log matching the filter query.
+   - If the pipeline is not triggered, ensure it is enabled with the toggle.
+2. Verify custom facets in the [Logs Explorer][19] by checking that they appear and filter results as expected.
+3. Inspect individual logs in the Log Details panel to ensure:
+   - `service`, `source`, and `message` attributes are set correctly.
+	- Tags are applied as expected.
 
-You can create [facets][12] in the [Log Explorer][16].
+### Export and add your pipeline to the integration submission
 
-#### Create facets
+The final step is to export the pipeline and upload the files to the Developer Platform.
 
-Correctly defining facets is important as they improve the usability of indexed logs in analytics, monitors, and aggregation features across Datadog's Log Management product. 
-
-They allow for better findability of application logs by populating autocomplete features across Log Management.
-
-<div class="alert alert-info">Quantitative facets, called "Measures", allow users to filter logs over a range of numeric values using relational operators.  
-For example, a measure for a latency attribute allows users to search for all logs greater-than a certain duration. </div>
-
-##### Requirements
-
-Attributes mapped to custom facets must be namespaced first
-: Generic custom attributes that do not map to [Datadog Standard Attribute][6] must be namespaced when used with custom [facets][14]. An [Attribute Remapper][5] can be used to namespace an attribute with the integration's name.  
-For example, remapping `attribute_name` to `integration_name.attribute_name`.
-
-Custom facets must not duplicate an existing Datadog Facet
-: To avoid confusion with existing out-of-the-box Datadog facets, do not create custom facets that duplicate any existing facets already mapped to [Datadog Standard Attributes][6].
-
-Custom facets must be grouped under the `source` name
-: When creating a custom facet a group should be assigned. Set the `Group` value to the `source`, same as the integration's name.
-
-Custom facets must have the same data type as the mapped attribute
-: Set the facet data type (String, Boolean, Double, or Integer) to the same type as the Attribute mapped to it. Mismatched types prevent the facet from being used as intended and can cause it to populate incorrectly.
-
-**Add a facet or measure**
-
-1. Click on a log that contains the attribute you want to add a facet or measure for. 
-2. In the log panel, click the Cog icon next to the attribute.
-3. Select **Create facet/measure for @attribute**.
-4. For a measure, to define the unit, click **Advanced options**. Select the unit based on what the attribute represents.
-**Note**: Define the [unit][11] of a measure based on what the attribute represents.
-5. Specify a facet **Group** to help navigate the Facet List. If the facet group does not exist, select **New group**, enter the name of the group matching the source tag, and add a description for the new group.
-6. To create the facet, click **Add**.
-
-#### Configure and edit facets
-
-1. In the log panel, click the Cog icon next to the attribute that you want to configure or group.
-2. Select **Edit facet/measure for @attribute**. If there isn't a facet for the attribute yet, select **Create facet/measure for @attribute**.
-3. Click **Add** or **Update** when done.
-
-**Tips**
-* Measures should have a unit where possible. Measures can be assigned a [unit][27]. Two families of units are available, `TIME` and `BYTES`, with units such as `millisecond` or `gibibyte`.
-* Facets can be assigned a description. A clear description of the facet can help users understand how to best use it.
-* If you remap an attribute and keep the original using the `preserveSource:true` option, define a facet on only a single one.
-* When manually configuring facets in a pipeline's `.yaml` configuration files, note they are assigned a `source`. This refers to where the attribute is captured from and can be `log` for attributes or `tag` for tags.
-
-## Review and deploy the integration
-
-Datadog reviews the log integration based on the guidelines and requirements documented on this page and provides feedback to the Technology Partner through GitHub. In turn, the Technology Partner reviews and makes changes accordingly.
-
-To start a review process, export your log pipeline and relevant custom facets using the **Export** icon on the [Logs Configuration page][3]. 
-
-{{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="50%">}}
-
-Include sample raw logs with **all** the attributes you expect to be sent into Datadog by your integration. Raw logs comprise of the raw messages generated directly from the source application **before** they are sent to Datadog.
-
-Exporting your log pipeline includes two YAML files:
-
-* One with the log pipeline, which includes custom facets, attribute remappers, and grok parsers. The exported file is named `pipeline-name.yaml`.
-* One with the raw sample logs provided and an empty `result` section. The exported file is named `pipeline-name_test.yaml`.
-
-**Note**: Depending on your browser, you may need to adjust your settings to allow file downloads.
-
-After you've downloaded these files, navigate to your [integration's pull request][22] on GitHub and add them in the **Assets** > **Logs** directory. If a Logs folder does not exist yet, you can create one.
-
-Validations are run automatically in your pull request, and validate your pipelines against the raw samples provided. These will produce a result that you can set as the `result` section of your `pipeline-name_test.yaml` file.
-Once the validations runs again, if no issues are detected, the logs validation should succeed.
-
-Three common validation errors are:
-1. The `id` field in both YAML files: Ensure that the `id` field matches the `app_id` field in your integration's `manifest.json` file to connect your pipeline to your integration. 
-2. Not providing the `result` of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
-3. If you send `service` as a parameter, instead of sending it in the log payload, you must include the `service` field below your log samples within the yaml file.
-
-After validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. Datadog team members respond within 2-3 business days.
+1. Hover over your pipeline and select the **Export Pipeline** icon.
+   {{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="50%">}}
+2. Review the pipeline and click **Select Facets**.
+3. Select only the custom facets created for this integration and click **Add Sample Logs**.
+   - Facets for [Datadog Standard Attributes][9] are automatically created by Datadog.
+4. Add sample logs.
+   - These samples must be in the format in which logs are sent to the Datadog Logs API or ingested with the Datadog Agent.
+   - Ensure samples have coverage for variations of remappers. For example, if you've defined a category processor, add samples that trigger different category values.
+5. Click **Export**.
+   - Two YAML files are generated: one for the pipeline definition and one that Datadog uses internally for testing. 
+6. Upload the two YAML files to the Developer Platform, under **Data** > **Submitted Data** > **Logs**.
+   {{< img src="developers/integrations/data_tab.png" alt="The Data tab in the Integration Developer Platform" style="width:100%;" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/latest/logs/#send-logs
-[2]: https://docs.datadoghq.com/getting_started/site/
-[3]: https://app.datadoghq.com/logs/pipelines
-[4]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-date-remapper
-[5]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
-[6]: https://docs.datadoghq.com/standard-attributes?product=log+management
-[7]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
-[8]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#grok-parser
-[9]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-message-remapper
-[10]: https://docs.datadoghq.com/logs/log_configuration/processors/
-[11]: https://docs.datadoghq.com/logs/explorer/facets/#units
-[12]: https://docs.datadoghq.com/logs/explorer/facets/
-[13]: https://docs.datadoghq.com/logs/log_configuration/pipelines/
-[14]: https://docs.datadoghq.com/glossary/#facet
-[15]: https://docs.datadoghq.com/glossary/#measure
-[16]: https://docs.datadoghq.com/logs/explorer/
-[17]: https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#standard-attributes
-[18]: https://docs.datadoghq.com/developers/integrations/?tab=integrations
-[19]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#category-processor
-[20]: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
-[21]: https://partners.datadoghq.com/
-[22]: https://docs.datadoghq.com/developers/integrations/create_a_tile/?tab=buildatileontheintegrationspage#open-a-pull-request
-[23]: https://docs.datadoghq.com/logs/log_collection/?tab=http#additional-configuration-options
-[24]: https://docs.datadoghq.com/logs/explorer/search_syntax/#arrays
-[25]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-status-remapper
-[26]: https://docs.datadoghq.com/getting_started/tagging/#overview
-[27]: https://docs.datadoghq.com/logs/explorer/facets/#units
-[28]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=date#date-attribute
+[1]: https://learn.datadoghq.com/courses/integration-pipelines
+[2]: https://learn.datadoghq.com/courses/log-pipelines
+[3]: /logs/log_configuration/pipelines/
+[4]: /logs/log_configuration/processors/
+[5]: /logs/explorer/facets/
+[6]: /developers/integrations/?tab=integrations#join-the-datadog-partner-network
+[7]: https://app.datadoghq.com/logs/pipelines
+[8]: /logs/log_configuration/processors/?tab=ui#grok-parser
+[9]: /standard-attributes/?product=log
+[10]: /logs/log_configuration/processors/?tab=ui#log-date-remapper
+[11]: /logs/log_configuration/processors/?tab=ui#log-message-remapper
+[12]: /logs/log_configuration/processors/?tab=ui#log-status-remapper
+[13]: /logs/log_configuration/processors/?tab=ui#service-remapper
+[14]: /logs/log_configuration/processors/?tab=ui#remapper
+[15]: /logs/log_configuration/processors/?tab=ui#geoip-parser
+[16]: /logs/log_configuration/processors/?tab=ui#category-processor
+[17]: /logs/log_configuration/processors/?tab=ui#arithmetic-processor
+[18]: /logs/log_configuration/processors/?tab=ui#string-builder-processor
+[19]: https://app.datadoghq.com/logs
+[20]: /logs/log_configuration/pipeline_scanner/

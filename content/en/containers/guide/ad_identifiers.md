@@ -1,5 +1,6 @@
 ---
 title: Autodiscovery Container Identifiers
+description: Configure Autodiscovery templates to target specific containers using container identifiers and image names
 aliases:
  - /agent/autodiscovery/ad_identifiers
  - /agent/guide/ad_identifiers

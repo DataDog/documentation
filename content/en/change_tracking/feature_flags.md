@@ -116,9 +116,10 @@ For example:
 ```python
 # Trace feature flag evaluation to enable auto-detection
 with tracer.trace("experiments.IsEnabled") as span:
-    span.set_tag("experiment_id", "fallback_payments_test")
+    span.set_tag("experiment_id", "fallback_payments_test") # adds the flag name as a span tag
     # Your existing feature flag evaluation code
     flag_value = evaluate_flag("fallback_payments_test")
+    span.set_tag("experiment_value", flag_value) # adds the evaluated flag value as a span tag
 ```
 
 ## Remediate feature flag changes with Workflow Automation

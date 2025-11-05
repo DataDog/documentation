@@ -16,7 +16,7 @@ aliases:
 
 ### Prerequisites
 
-* [Datadog Agent v7.34.0 or later][1]
+* [Datadog Agent v7.34.0 or later][10]
 
 ### Supported libraries
 
@@ -90,9 +90,9 @@ To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you mu
      - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
      - DD_TRACE_SQS_BODY_PROPAGATION_ENABLED: "true"
    ```
-- Ensure that you are using [Java tracer v1.44.0+][1].
+- Ensure that you are using [Java tracer v1.44.0+][11].
 
-[1]: https://github.com/DataDog/dd-trace-java/releases
+[11]: https://github.com/DataDog/dd-trace-java/releases
 {{% /tab %}}
 {{% tab "SQS v2" %}}
 Enable [Amazon SNS raw message delivery][1].
@@ -130,7 +130,7 @@ Data Streams Monitoring can collect information from your self-hosted Kafka conn
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
+[10]: /agent
 [2]: /tracing/trace_collection/dd_libraries/java/
 [4]: /remote_configuration
 [5]: /data_streams/manual_instrumentation/?tab=java

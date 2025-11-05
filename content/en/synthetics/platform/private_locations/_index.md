@@ -16,9 +16,6 @@ further_reading:
     - link: '/synthetics/private_locations/dimensioning'
       tag: 'Documentation'
       text: 'Dimension your Private Locations'
-    - link: '/synthetics/api_tests'
-      tag: 'Documentation'
-      text: 'Configure an API Test'
     - link: "https://www.datadoghq.com/architecture/protect-sensitive-data-with-synthetics-private-location-runners/"
       tag: "Architecture Center"
       text: "Protect Sensitive Data with Synthetics Private Location Runners"
@@ -34,6 +31,7 @@ Private locations allow you to **monitor internal-facing applications or any pri
 * **Create custom Synthetic locations** in areas that are mission-critical to your business.
 * **Verify application performance in your internal CI environment** before you release new features to production with [Continuous Testing and CI/CD][28].
 * **Compare application performance** from both inside and outside your internal network.
+* **[Authenticate Synthetic Monitoring tests using Kerberos SSO][33]** for internal Windows-based sites and APIs.
 
 {{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
 
@@ -56,7 +54,7 @@ Private locations are Docker containers that you can install anywhere inside you
 
 If you require FIPS support, use the [FIPS compliant image][26] on Docker hub.
 
-[26]: https://hub.docker.com/repository/docker/datadog/synthetics-private-location-worker-fips/general
+[26]: https://hub.docker.com/r/datadog/synthetics-private-location-worker-fips
 
 {{< /site-region >}}
 
@@ -97,7 +95,7 @@ You must install .NET version 4.7.2 or later on your computer before using the M
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-danger">FIPS compliance is not supported for private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
+<div class="alert alert-warning">FIPS compliance is not supported for Windows private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
 
 {{< /site-region >}}
 
@@ -116,7 +114,6 @@ To pull test configurations and push test results, the private location worker n
 | Port | Endpoint                               | Description                                                   |
 | ---- | -------------------------------------- | ------------------------------------------------------------- |
 | 443  | `intake.synthetics.datadoghq.com`      | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-| 443  | `intake-v2.synthetics.datadoghq.com` for versions >=0.2.0 and <=1.4.0   | Used by the private location to push browser test artifacts such as screenshots, errors, and resources.       |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -630,7 +627,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 Once the process is complete, click **Finish** on the installation completion page.
 
-<div class="alert alert-warning">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
+<div class="alert alert-danger">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
@@ -679,9 +676,9 @@ You can upload custom root certificates to your private locations to have your A
 {{< tabs >}}
 {{% tab "Linux container" %}}
 
-When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. 
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
 
-<div class="alert alert-info"><strong>Note</strong>: If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
+<div class="alert alert-info">If you combine all your <code>.pem</code> files into one file, the sequence of the certificates within the file is important. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.</div>
 
 {{% /tab %}}
 
@@ -693,7 +690,7 @@ To install root certificates for private locations on a Windows service, use the
 2. Navigate to the entry `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\synthetics-private-location`.
 3. Create a Registry key named `Environment` with the `Multi-string` value type.
 
-<div class="alert alert-info"><strong>Note</strong>: Your certificate needs to be in the same folder as the your Synthetic Monitoring Service:
+<div class="alert alert-info">Your certificate needs to be in the same folder as the your Synthetic Monitoring Service:
 default: <code>C:\Program Files\Datadog-Synthetics\Synthetics</code>.</div>
 
 4. Set the value `NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem`
@@ -842,7 +839,7 @@ readinessProbe:
 
 #### Additional health check configurations
 
-<div class="alert alert-danger">This method of adding private location health checks is no longer supported. Datadog recommends using liveness and readiness probes.</div>
+<div class="alert alert-warning">This method of adding private location health checks is no longer supported. Datadog recommends using liveness and readiness probes.</div>
 
 The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (2s by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
 
@@ -1008,7 +1005,7 @@ Users with the [Datadog Admin and Datadog Standard roles][20] can view private l
 
 If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions.
 
-<div class="alert alert-danger"><strong>Note</strong>: If a test includes restricted private locations, updating the test removes those locations from the test.</div>
+<div class="alert alert-warning">If a test includes restricted private locations, updating the test removes those locations from the test.</div>
 
 ## Restrict access
 
@@ -1023,7 +1020,7 @@ Use [granular access control][24] to limit who has access to your test based on 
 6. Select the level of access you want to associate with each of them.
 7. Click **Done**.
 
-<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
 
 | Access level | View PL instructions | View PL metrics | Use PL in test | Edit PL configuration  |
 | ------------ | ---------------------| --------------- | -------------- | ---------------------- |
@@ -1062,4 +1059,5 @@ Use [granular access control][24] to limit who has access to your test based on 
 [30]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
 [31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 [32]: /synthetics/platform/private_locations/configuration
+[33]: /synthetics/guide/kerberos-authentication/
 

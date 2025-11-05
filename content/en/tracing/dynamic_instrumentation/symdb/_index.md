@@ -1,5 +1,6 @@
 ---
 title: Autocomplete and Search
+description: Enable IDE-like autocomplete and search functionality for Dynamic Instrumentation to improve developer experience.
 is_beta: true
 private: false
 aliases:
@@ -28,7 +29,7 @@ To provide autocomplete and search, nonsensitive symbols and metadata are upload
 Autocomplete and search require the following:
 
 - [Dynamic Instrumentation][1] is enabled for your service.
-- [Datadog Agent][2] 7.45.0 or higher is installed alongside your service.
+- [Datadog Agent][2] 7.49.0 or higher is installed alongside your service.
 - [Remote Configuration][3] is enabled in the Agent.
 - The [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
 
@@ -60,4 +61,3 @@ Dynamic Instrumentation also provides autocomplete for log templates and other t
 [3]: /tracing/guide/remote_config
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /dynamic_instrumentation/expression-language
-

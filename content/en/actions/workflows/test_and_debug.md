@@ -1,5 +1,6 @@
 ---
 title: Test and debug
+description: Test monitor triggers, individual workflow steps, and debug failed steps using run history and error messages.
 disable_toc: false
 aliases:
 - /service_management/workflows/test_and_debug

@@ -34,6 +34,8 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
 | [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
+| [MCP](#mcp)                                     | >= 1.10.0          | >= 3.11.0      |
+| [Google ADK](#google-adk)                       | >= 1.0.0           | >= 3.15.0      |
 
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
@@ -102,6 +104,16 @@ The LangChain integration instruments the following methods:
 - [Retrieval][25]
   - `langchain_community.<vectorstore>.similarity_search()`
   - `langchain_pinecone.similarity_search()`
+- [Prompt Templating][64]
+  - `BasePromptTemplate.invoke()`, `BasePromptTemplate.ainvoke()`
+
+  **Note**: For best results, assign templates to variables with meaningful names, as auto-instrumentation uses these names to identify prompts.
+
+  ```python
+  # "translation_template" will be used to identify the template in Datadog
+  translation_template = PromptTemplate.from_template("Translate {text} to {language}")
+  chain = translation_template | llm
+  ```
 
 ## Amazon Bedrock
 
@@ -281,6 +293,34 @@ The Pydantic AI integration instruments the following methods:
   - `agent.Agent.iter` (also traces `agent.Agent.run` and `agent.Agent.run_sync`)
   - `agent.Agent.run_stream`
 
+## MCP
+
+The Model Context Protocol (MCP) integration instruments client and server tool calls in the [MCP][57] SDK.
+
+### Traced methods
+
+The MCP integration instruments the following methods:
+
+- [Client Tool Calls][58]:
+  - `mcp.client.session.ClientSession.call_tool`
+
+- [Server Tool Calls][59]:
+  - `mcp.server.fastmcp.tools.tool_manager.ToolManager.call_tool`
+
+
+## Google ADK
+
+The Google ADK integration provides automatic tracing for agent runs, tool calls, and code executions made through [Google's ADK Python SDK][60].
+
+### Traced methods
+
+The Google ADK integration instruments the following methods:
+
+- [Agent Runs][61]
+- [Tool Calls][62]
+- [Code Executions][63]
+
+Both the `run_live` and `run_async` methods are supported.
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
@@ -338,6 +378,14 @@ The Pydantic AI integration instruments the following methods:
 [54]: https://api-docs.deepseek.com/
 [55]: https://ai.pydantic.dev/
 [56]: https://ai.pydantic.dev/agents/
+[57]: https://modelcontextprotocol.io/docs/getting-started/intro
+[58]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#writing-mcp-clients
+[59]: https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#tools
+[60]: https://google.github.io/adk-docs/#python
+[61]: https://google.github.io/adk-docs/agents/
+[62]: https://google.github.io/adk-docs/tools
+[63]: https://google.github.io/adk-docs/agents/llm-agents/#code-execution
+[64]: https://docs.langchain.com/langsmith/manage-prompts-programmatically#pull-a-prompt
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -347,12 +395,14 @@ The Pydantic AI integration instruments the following methods:
 Datadog's [LLM Observability Node.js SDK][4] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
 
-| Framework                               | Supported Versions | Tracer Version                              |
-|-----------------------------------------|--------------------|---------------------------------------------|
-| [OpenAI](#openai)                       | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
-| [LangChain](#langchain)                 | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
-| [Amazon Bedrock](#amazon-bedrock)       | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
-| [VertexAI](#vertex-ai)                  | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
+| Framework                                  | Supported Versions | Tracer Version                              |
+|--------------------------------------------|--------------------|---------------------------------------------|
+| [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
+| [LangChain](#langchain)                    | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
+| [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
+| [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
+| [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
+| [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -396,19 +446,20 @@ A comma-separated string of library names that are not patched when the tracer i
 
 ## OpenAI
 
-The OpenAI integration provides automatic tracing for the [OpenAI Node.js SDK's][1] completion, chat completion, and embeddings endpoints.
+The OpenAI integration provides automatic tracing for the [OpenAI Node.js SDK's][1] completion, chat completion, and embeddings endpoints to OpenAI and [Azure OpenAI][28].
 
 ### Traced methods
 
 The OpenAI integration instruments the following methods, including streamed calls:
 
 - [Completions][2]:
-  - `openai.completions.create()`
+  - `openai.completions.create()` and `azureopenai.completions.create()`
 - [Chat completions][3]:
-  - `openai.chat.completions.create()`
+  - `openai.chat.completions.create()` and `azureopenai.chat.completions.create()`
 - [Embeddings][5]:
-  - `openai.embeddings.create()`
+  - `openai.embeddings.create()` and `azureopenai.embeddings.create()`
 - [Calls made to DeepSeek through the OpenAI Node.js SDK][21] (as of `dd-trace@5.42.0`)
+- [Responses][32] (as of `dd-trace@5.76.0`)
 
 ## LangChain
 
@@ -455,7 +506,70 @@ The Vertex AI integration instruments the following methods:
   - `chat.sendMessage()`
   - `chat.sendMessageStream()`
 
-### ESM support
+## Vercel AI SDK
+
+The [Vercel AI SDK][22] integration automatically traces text and object generation, embeddings, and tool calls by intercepting the OpenTelemetry spans created by the underlying core Vercel AI SDK and converting them into Datadog LLM Observability spans.
+
+### Traced methods
+- [Text generation][24]:
+  - `generateText`
+  - `streamText`
+- [Object generation][25]:
+  - `generateObject`
+  - `streamObject`
+- [Embedding][26]:
+  - `embed`
+  - `embedMany`
+- [Tool calling][27]:
+  - `tool.execute`
+
+### Vercel AI Core SDK telemetry
+
+This integration automatically patches the tracer passed into each of the traced methods under the [`experimental_telemetry` option][23]. If no `experimental_telemetry` configuration is passed in, the integration enables it to still send LLM Observability spans.
+
+```javascript
+require('dd-trace').init({
+  llmobs: {
+    mlApp: 'my-ml-app',
+  }
+});
+
+const { generateText } = require('ai');
+const { openai } = require('@ai-sdk/openai');
+
+async function main () {
+  let result = await generateText({
+    model: openai('gpt-4o'),
+    ...
+    experimental_telemetry: {
+      isEnabled: true,
+      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog LLM Observability
+    }
+  });
+
+  result = await generateText({
+    model: openai('gpt-4o'),
+    ...
+  }); // since no tracer is passed in, the integration will enable it to still send LLM Observability spans
+}
+```
+
+**Note**: If `experimental_telemetry.isEnabled` is set to `false`, the integration does not turn it on, and does not send spans to LLM Observability.
+
+## Anthropic
+
+The Anthropic integration provides automatic tracing for the [Anthropic Python SDK's][29] chat message calls.
+
+### Traced methods
+
+The Anthropic integration instruments the following methods:
+
+- [Chat messages][30] (including streamed calls):
+  - `anthropic.messages.create()`
+- [Streamed chat messages][31]:
+  - `anthropic.messages.stream()`
+
+## ESM support
 
 Auto-instrumentation for ECMAScript Module projects is supported starting from `dd-trace@>=5.38.0`. To enable auto-instrumentation in your ESM projects, run your application with the following Node option:
 
@@ -553,6 +667,17 @@ module.exports = {
 [19]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-multiturn-chat-requests
 [20]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
 [21]: https://api-docs.deepseek.com/
+[22]: https://ai-sdk.dev/docs/introduction
+[23]: https://ai-sdk.dev/docs/ai-sdk-core/telemetry
+[24]: https://ai-sdk.dev/docs/ai-sdk-core/generating-text
+[25]: https://ai-sdk.dev/docs/ai-sdk-core/generating-structured-data
+[26]: https://ai-sdk.dev/docs/ai-sdk-core/embeddings
+[27]: https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling
+[28]: https://www.npmjs.com/package/openai#microsoft-azure-openai
+[29]: https://docs.claude.com/en/api/client-sdks#typescript
+[30]: https://docs.anthropic.com/en/api/messages
+[31]: https://docs.anthropic.com/en/api/messages-streaming
+[32]: https://platform.openai.com/docs/api-reference/responses/create
 {{% /tab %}}
 {{< /tabs >}}
 

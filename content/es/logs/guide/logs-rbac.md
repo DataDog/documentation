@@ -81,7 +81,7 @@ Esta sección te guiará a través de la creación de dos roles, `ACME Admin` y 
 ### Creación de un rol
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 1. Ve a la sección [Roles][1] en Parámetros de organización de Datadog.
 1. Haz clic en **New Role** (Nuevo rol) para crear los roles `ACME Admin` y `ACME User`.
@@ -116,12 +116,13 @@ Para obtener más información sobre la creación de roles, consulta [Control de
 [2]: /es/api/v2/roles/#list-roles
 [3]: /es/api/v2/roles/#grant-permission-to-a-role
 [4]: /es/api/v2/roles/#revoke-permission
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Asignación de roles a usuarios
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 1. En la [sección de usuarios][1] de Datadog, selecciona un usuario y asígnale el rol `ACME Admin` o `ACME User`.
 
@@ -136,7 +137,8 @@ Para obtener más información sobre la creación de roles, consulta [Control de
 
 [1]: /es/api/v2/users/#list-all-users
 [2]: /es/api/v2/roles/#add-a-user-to-a-role
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Restringir el acceso a logs
 
@@ -154,7 +156,7 @@ En esta sección se explica cómo:
 ### Definición de una consulta de restricción
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 1. Ve a la página [Acceso a datos][1].
 1. Crea una consulta de restricción `team:acme` y aplícala a los roles ACME.
@@ -178,7 +180,8 @@ En esta sección se explica cómo:
 [3]: /es/api/v2/roles/#grant-permission-to-a-role
 [4]: /es/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
 [5]: /es/api/v2/logs-restriction-queries/#get-restriction-query-for-a-given-role
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Restringir el acceso a recursos de logs
 

@@ -22,7 +22,7 @@ Datadog collects metrics from supported OpenTelemetry receivers at no extra cost
 
 For example, the [`dockerstatsreceiver`][15] `metadata.yaml` file lists metrics that you can collect at no extra cost.
 
-<div class="alert alert-warning">Ensure that you configure receivers according to OpenTelemetry receiver documentation. Incorrectly configured receivers may cause metrics to be classified as custom, resulting in additional charges.</div>
+<div class="alert alert-danger">Ensure that you configure receivers according to OpenTelemetry receiver documentation. Incorrectly configured receivers may cause metrics to be classified as custom, resulting in additional charges.</div>
 
 ## Datadog-supported OpenTelemetry integrations
 
@@ -48,6 +48,7 @@ Gain insights into your containerized environments and host systems:
 
 - [Docker Metrics][5] - Monitor Docker container performance
 - [Host Metrics][6] - Track system metrics such as CPU, disk, and memory usage
+- [Kubernetes Metrics][18] - Monitor Kubernetes cluster health and performance
 - [Podman Metrics][16] - Monitor Podman container performance
 
 ### Web servers and proxies
@@ -93,3 +94,5 @@ Monitor big data processing frameworks:
 [15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/dockerstatsreceiver/metadata.yaml
 [16]: /opentelemetry/integrations/podman_metrics/
 [17]: /opentelemetry/integrations/datadog_extension/
+[18]: /opentelemetry/integrations/kubernetes_metrics/
+

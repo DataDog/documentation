@@ -1,5 +1,6 @@
 ---
 title: Monitor History and Evaluation Graphs
+description: "Understand the difference between History and Evaluation graphs on monitor status pages and how to troubleshoot evaluation values."
 disable_toc: false
 further_reading:
 - link: "monitors/manage/status/"

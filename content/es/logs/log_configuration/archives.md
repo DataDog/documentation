@@ -26,7 +26,7 @@ Configura tu cuenta de Datadog para reenviar todos los logs ingestados (ya sea q
 
 {{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Pestaña de Archivos en la página Reenvío de logs" style="width:100%;">}}
 
-Ve a la página [**Log Forwarding**][3] (Reenvío de log) para configurar un archivo para el reenvío de logs ingeridos a tu propio bucket de almacenamiento alojado en la nube.
+Ve a la [page (página) **Log Archiving & Forwarding** (Archivo y reenvío de logs)][3] para configurar un archivo para reenviar loga su propio bucket de almacenamiento alojado en la nube.
 
 1. Si aún no lo has hecho, configura una [integración] de Datadog (#set-up-an-integration) para tu proveedor de nube.
 2. Crea un [bucket de almacenamiento](#create-a-storage-bucket).
@@ -36,6 +36,12 @@ Ve a la página [**Log Forwarding**][3] (Reenvío de log) para configurar un arc
 6. [Valida](#validation) tu configuración y busca posibles errores de configuración que Datadog podría detectar por ti.
 
 Consulta cómo [archivar tus logs con Pipelines de observabilidad][4] si deseas dirigir tus logs a un archivo optimizado para el almacenamiento directamente desde tu entorno.
+
+Las siguientes métricas informan sobre los logs que se han archivado correctamente, incluidos los logs que se enviaron correctamente tras reintentos.
+
+- datadog.archives.logs.bytes
+- datadog.archives.logs.count
+
 
 ## Configurar un archivo
 
@@ -72,7 +78,7 @@ Configura la [integración de Google Cloud][1] para el proyecto que contiene tu 
 ### Crear un bucket de almacenamiento
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">El envío de logs a un archivo queda fuera del entorno GovCloud de Datadog, que está fuera del control de Datadog. Datadog no será responsable de ningún log que haya salido del entorno GovCloud de Datadog, incluidas, entre otras, las obligaciones o requisitos que el usuario pueda tener en relación con FedRAMP, DoD Impact Levels, ITAR, cumplimiento de las normas de exportación, residencia de datos o normativas similares aplicables a dicho log.</div>
+<div class="alert alert-danger">El envío de logs a un archivo queda fuera del entorno de Datadog GovCloud, que está fuera del control de Datadog. Datadog no será responsable de ningún log que haya salido del entorno de Datadog GovCloud, incluidas, entre otras, las obligaciones o requisitos que el usuario pueda tener en relación con FedRAMP, DoD Impact Levels, ITAR, cumplimiento de las normas de exportación, residencia de datos o normativas similares aplicables a dichos logs.</div>
 {{< /site-region >}}
 
 {{< tabs >}}
@@ -81,7 +87,7 @@ Configura la [integración de Google Cloud][1] para el proyecto que contiene tu 
 Entra en tu [consola de AWS][1] y [crea un bucket de S3][2] al que enviar tus archivos.
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"> Datadog Archives no admiten nombres de bucket con puntos (.) cuando se integran con un endpoint FIPS de S3 que se basa en el direccionamiento de estilo virtual-host. Obtén más información en la documentación de AWS. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> y <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+<div class="alert alert-danger"> Los archivos de Datadog no admiten nombres de bucket con puntos (.) cuando se integran con un endpoint de FIPS de S3 que se basa en el direccionamiento de estilo de host virtual. Obtén más información en la documentación de AWS. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> y <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
 **Notas:**
@@ -194,13 +200,13 @@ Solo los usuarios de Datadog con el [permiso`logs_write_archive`][5] pueden crea
 
 ### Dirige tus logs a un bucket
 
-Ve a la página de [Reenvío de log][6] y selecciona **Add a new archive** (Añadir un nuevo archivo) en la pestaña **Archives** (Archivos).
+Ve a la [page (pagina) Archivo y reenvío de logs][6] y selecciona **Add new archive** (Añadir nuevo archivo) en la pestaña **Archives** (Archivos).
 
 **Notas:**
 * Solo los usuarios de Datadog con el [permiso `logs_write_archive`][5] pueden completar este paso y el siguiente.
 * Para archivar logs en Azure Blob Storage es necesario registrarse en la aplicación. Consulta las instrucciones [en la página de integración de Azure][7], y establece el "sitio" en la parte derecha de la página de documentación en "US". Los Registros de aplicación creados con fines de archivado solo necesitan el rol "Storage Blob Data Contributor". Si tu bucket de almacenamiento se encuentra en una suscripción que está siendo supervisada a través de un recurso de Datadog, se mostrará una advertencia acerca de que el Registro de aplicación es redundante. Puedes ignorar esta advertencia.
 * Si tu bucket restringe el acceso de red a las IP especificadas, añade las IP de los webhooks de {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} a la lista de permitidos.
-* Para el sitio **US1-FED**, puedes configurar Datadog para enviar logs a un destino fuera del entorno Datadog GovCloud. Datadog no se hace responsable de ningún log que abandone el entorno Datadog GovCloud. Además, Datatdog no se hace responsable de ninguna obligación o requisito que puedas tener en relación con FedRAMP, DoD Impact Levels, ITAR, conformidad de las exportaciones, residencia de datos o normativas similares aplicables a estos Logs una vez que abandonen el entorno Datadog GovCloud.
+* Para el **sitio US1-FED**, puedes configurar Datadog para que envíe los logs a un destino fuera del entorno de GovCloud de Datadog. Datadog no es responsable de ningún log que salga del entorno de GovCloud de Datadog. Además, Datadog no es responsable de ninguna obligación o requisito que puedas tener en relación con FedRAMP, DoD Impact Levels, ITAR, cumplimiento de las normas de exportación, residencia de datos o normativas similares aplicables a estos logs una vez que abandonan el entorno de GovCloud.
 
 | Servicio                  | Pasos                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -309,15 +315,15 @@ Para configurar o comprobar la configuración del cifrado de tu bucket S3:
 {{% /tab %}}
 {{% tab "Amazon S3 managed keys" %}}
 
-Esta opción garantiza que todos los objetos de archivo se carguen con [SSE_S3][1], utilizando claves gestionadas de Amazon S3. Esto anula cualquier configuración de cifrado predeterminada en el bucket de S3. 
+Esta opción garantiza que todos los objetos de archivo se carguen con [SSE_S3][1], mediante claves administradas de Amazon S3. Esto sustituye cualquier configuración de cifrado predeterminada en el bucket de S3.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 {{% /tab %}}
 {{% tab "AWS Key Management Service" %}}
 
-Esta opción garantiza que todos los objetos de archivo se carguen utilizando una clave gestionada por el cliente (CMK) de [AWS KMS][1]. Esto anula cualquier configuración de cifrado predeterminada en el bucket de S3. 
+Esta opción garantiza que todos los objetos de archivo se carguen mediante una clave gestionada por el cliente (CMK) de [AWS KMS][1]. Esto sustituye cualquier configuración de cifrado predeterminada en el bucket de S3.
 
-Asegúrate de haber completado los siguientes pasos para crear una CMK válida y una política de CMK. Deberás proporcionar el ARN de CMK para configurar correctamente este tipo de cifrado. 
+Asegúrate de haber completado los siguientes pasos para crear una CMK y una política de CMK válidas. A continuación, proporciona el ARN de CMK para configurar correctamente este tipo de cifrado.
 
 1. Crea tu CMK.
 2. Adjunta una política de CMK a tu CMK con el siguiente contenido, sustituyendo según corresponda el número de cuenta de AWS y el nombre de rol de Datadog IAM:
@@ -426,11 +432,14 @@ Dentro del archivo JSON comprimido, el contenido de cada evento tiene el siguien
 }
 ```
 
+**Nota**: Los logs se almacenan como JSON delimitado por nuevas líneas (NDJSON), lo que significa que cada línea del archivo es un objeto JSON válido que representa un evento de log.
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits es una marca registrada de Datadog, Inc.
 
 [1]: /es/logs/indexes/#exclusion-filters

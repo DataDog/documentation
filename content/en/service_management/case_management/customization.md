@@ -18,7 +18,7 @@ Datadog Case Management allows customization to align with your team's unique wo
 
 ## Custom Case Types
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   You must have Case Shared Settings Write (<code>cases_shared_settings_write</code>) permissions. For more information, see
   <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#case_management">Datadog Role Permissions</a>.
 </div>
@@ -35,7 +35,7 @@ Datadog provides five [built-in case types][1], each designed for common workflo
 2. Click **+ Create Case Type**.
 3. Provide a **Name** and an optional **Description**.
 4. Save your new case type.
-5. (Optional) Add [custom attributes](#custom-attributes).
+5. (Optional) See the [custom attributes section](#custom-attributes) of this page to add custom attributes.
 
 ##### Enable a custom case type
 

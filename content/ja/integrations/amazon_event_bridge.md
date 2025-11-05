@@ -23,7 +23,7 @@ version: '1.0'
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog for Government サイトは、Amazon EventBridge をサポートしていません。</div>
+<div class="alert alert-danger">Datadog for Government サイトは、Amazon EventBridge をサポートしていません。</div>
 {{< /site-region >}}
 
 ## 概要

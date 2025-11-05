@@ -1,0 +1,119 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "ast-str-f8c5d393-394e-4e82-9d13-afa8378d19fa": {
+          "string": "Opciones de privacidad de Mobile Session Replay"
+        }
+      },
+      "description": {
+        "ast-str-b0c0bc49-d780-4152-9f06-44648d7ceede": {
+          "string": "Configura opciones de privacidad para Mobile Session Replay."
+        }
+      },
+      "further_reading": {
+        "translationListData": {
+          "0": {
+            "link": "/real_user_monitoring/session_replay/mobile",
+            "text": {
+              "ast-str-862737f9-361a-4904-acd2-a48b72731779": {
+                "string": "Session Replay para móviles"
+              }
+            },
+            "tag": {
+              "ast-str-3e3e3cab-3f58-4488-bd1c-8caae871b73b": {
+                "string": "Documentación"
+              }
+            }
+          },
+          "1": {
+            "link": "/real_user_monitoring/session_replay/mobile/app_performance",
+            "text": {
+              "ast-str-814c1ff4-9f19-4d4d-b283-6cb639647f24": {
+                "string": "Cómo afecta Mobile Session Replay al rendimiento de las aplicaciones"
+              }
+            },
+            "tag": {
+              "ast-str-d8729b75-7332-4c27-a13d-499e6f1cf2d0": {
+                "string": "Documentación"
+              }
+            }
+          },
+          "2": {
+            "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
+            "text": {
+              "ast-str-5dd7d456-1da1-4560-9cbf-94abacb4a33b": {
+                "string": "Configuración de Mobile Session Replay"
+              }
+            },
+            "tag": {
+              "ast-str-53799091-cb4c-46d9-9d64-c4c26379dd73": {
+                "string": "Documentación"
+              }
+            }
+          },
+          "3": {
+            "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
+            "text": {
+              "ast-str-d9496031-87b9-4c5a-b4be-bdabe1a4ba08": {
+                "string": "Solución de problemas de Mobile Session Replay"
+              }
+            },
+            "tag": {
+              "ast-str-4049d30a-fe69-4bd9-9614-fcbd0b1511ea": {
+                "string": "Documentación"
+              }
+            }
+          },
+          "4": {
+            "link": "/real_user_monitoring/session_replay",
+            "text": {
+              "ast-str-5c4aa497-66e7-49cf-b85b-2d1ac6ad1375": {
+                "string": "Session Replay"
+              }
+            },
+            "tag": {
+              "ast-str-0d737133-ad41-47a9-9678-835ac74f1406": {
+                "string": "Documentación"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "children": {
+    "translationListData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "attributes": {
+          "file": "real_user_monitoring/session_replay/mobile/privacy_options.mdoc.md"
+        },
+        "children": {
+          "translationListData": {}
+        },
+        "type": "tag",
+        "tag": "partial",
+        "annotations": {
+          "translationListData": {
+            "0": {
+              "type": "attribute",
+              "name": "file",
+              "value": "real_user_monitoring/session_replay/mobile/privacy_options.mdoc.md"
+            }
+          }
+        },
+        "slots": {},
+        "location": "line 25-26"
+      }
+    }
+  },
+  "type": "document",
+  "annotations": {
+    "translationListData": {}
+  },
+  "slots": {}
+}

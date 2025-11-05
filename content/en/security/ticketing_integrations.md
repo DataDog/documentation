@@ -36,10 +36,6 @@ Open any signal in these products and use the **Create Case** button to create a
 
 ## Bidirectional ticket syncing with Jira
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-Jira Bidirectional Syncing is in Preview. Contact your Customer Success Manager to get access.
-{{< /callout >}}
-
 Bidirectional syncing enables you to update Jira tickets automatically when changes occur in Datadog, and update some Datadog information when changes occur in Jira.
 
 ### Supported products

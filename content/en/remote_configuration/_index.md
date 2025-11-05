@@ -1,5 +1,6 @@
 ---
 title: Remote Configuration
+description: "Remotely configure and change behavior of Datadog components like Agents, tracing libraries, and Observability Pipelines Workers deployed in your infrastructure."
 aliases:
 - /agent/guide/how_rc_works
 - /agent/guide/how_remote_config_works
@@ -11,7 +12,7 @@ further_reading:
 - link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
-- link: "/security/threats/setup"
+- link: "/security/workload_protection/"
   tag: "Documentation"
   text: "Setting Up Workload Protection"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
@@ -79,9 +80,6 @@ Workload Protection
 Observability Pipelines
 : - Remotely deploy and update [Observability Pipelines Workers][4] (OPW): Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
-Sensitive Data Scanner (SDS) through the Datadog Agent
-: - Redact sensitive information in your logs within your premises (Preview): Remotely configure and deploy OOTB Sensitive Data Scanning rules to the Datadog Agent in your environment. See [Sensitive Data Scanner][28] for more information.
-
 Private action runner
 : - Run Datadog workflows and apps that interact with services hosted on your private network without exposing your services to the public internet. For more information, see [Private Actions][30].
 
@@ -113,7 +111,7 @@ Consult the documentation below for instructions specific to the product you're 
 | Fleet Automation | [Setup Fleet Automation][31] |
 | APM | [Configuration at runtime](/tracing/guide/remote_config/) |
 | Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started) |
-| Workload Protection | [Workload Protection](/security/threats/) |
+| Workload Protection | [Workload Protection][3] |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
 | Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
@@ -137,7 +135,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[3]: /security/threats/setup
+[3]: /security/workload_protection/
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
 [6]: /security/application_security/threats/setup/compatibility/

@@ -11,7 +11,7 @@
 	{{ partial "translate_status_banner/translate_status_banner.html" . }}
 
   {{- with .Params.is_beta -}}
-  <div class="alert alert-warning">This rule is part of a beta feature. To learn more, <a href="{{ "help/" | absLangURL }}">contact Support</a>.</div>
+  <div class="alert alert-danger">This rule is part of a beta feature. To learn more, <a href="{{ "help/" | absLangURL }}">contact Support</a>.</div>
   {{- end -}}
 
 	<div class="rule-specification row align-items-center mb-3">

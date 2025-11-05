@@ -1,5 +1,6 @@
 ---
 title: Monitor Best Practices
+description: "Learn best practices for creating effective monitors including clear titles, multi-alerts, context, and using Monitor Quality for optimization."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
@@ -54,9 +55,9 @@ To confirm if your monitors are well-configured, use [Monitor Quality][5]. It id
 
 For more information, see the [Monitor Quality][6] documentation.
 
-##  Monitor templates
+## Monitor templates
 
-If you are unsure where to start when creating a monitor, use Datadog's pre-built [Recommended Monitors][7]. They provide guidelines on titles, notifications, metrics and thresholds.
+If you are unsure where to start when creating a monitor, use Datadog's pre-built [Monitor Templates][7]. They provide guidelines on titles, notifications, metrics and thresholds.
 
 For more information, see the [Monitor templates][8] documentation.
 
@@ -70,5 +71,5 @@ For more information, see the [Monitor templates][8] documentation.
 [4]: /monitors/notify/variables/?tab=is_alert
 [5]: https://app.datadoghq.com/monitors/quality
 [6]: /monitors/quality/
-[7]: https://app.datadoghq.com/monitors/recommended
+[7]: https://app.datadoghq.com/monitors/templates
 [8]: /monitors/templates/

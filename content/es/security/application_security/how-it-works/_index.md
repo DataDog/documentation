@@ -12,7 +12,7 @@ title: Cómo funciona la protección de aplicaciones y API en Datadog
 La protección de aplicaciones y API (AAP) de Datadog proporciona observabilidad de los ataques a nivel de aplicaciones y API que pretenden explotar vulnerabilidades y abusar de la lógica de negocio de las aplicaciones, así como la observabilidad de cualquier malhechor que se dirija a tus sistemas. La AAP realiza acciones como las siguientes:
 
 - Detecta y monitoriza los ataques a nivel de aplicaciones y API
-- Marca las traces (trazas) que contienen intentos de ataque utilizando los datos de APM 
+- Marca las traces (trazas) que contienen intentos de ataque utilizando los datos de APM
 - Destaca los servicios expuestos en las vistas de seguridad (Software Catalog, page (página) Servicio, Traces (Trazas))
 - Identifica a los malhechores recopilando las IP de los clientes y la información de los usuarios.
 - Proporciona actualizaciones automáticas de patrones de amenazas y señales de seguridad
@@ -22,18 +22,18 @@ La protección de aplicaciones y API (AAP) de Datadog proporciona observabilidad
 
 ### Identifica los servicios expuestos a ataques de aplicaciones
 
-La gestión de amenazas de la protección de aplicaciones y API de Datadog utiliza la información que APM ya está recopilando para marcar las traces (trazas) que contienen intentos de ataque. Aunque APM recopila una muestra del tráfico de tus aplicaciones, es necesario activar la protección de aplicaciones y API en la biblioteca de rastreo para monitorizar y proteger eficazmente tus servicios.
+La gestión de amenazas de la protección de aplicaciones y API de Datadog utiliza la información que APM ya está recopilando para marcar las traces (trazas) que contienen intentos de ataque. Aunque APM recopila una muestra del tráfico de tus aplicaciones, es necesario activar la protección de aplicaciones y API en la librería de rastreo para monitorizar y proteger eficazmente tus servicios.
 
 Los servicios expuestos a ataques de aplicaciones se destacan directamente en las vistas de seguridad integradas en APM ([Software Catalog][2], [Page (página) de servicio][3], [Traces (Trazas)][4]).
 
 La monitorización y detección de amenazas de Datadog identifica a los malhechores recopilando las direcciones IP de los clientes, la información de la cuenta de inicio de sesión (por ejemplo, cuenta/ID de usuario) y las tags (etiquetas) de usuario añadidas manualmente en todas las solicitudes.
 
 <div class="alert alert-info"><strong>Habilitación con 1 clic</strong><br>
-Si tu servicio se ejecuta en <a href="/agent/remote_config/#enabling-remote-configuration"> un Agent con la configuración remota activada y una versión de la biblioteca de rastreo compatible</a>, puedes <a href="https://app.datadoghq.com/security/configuration/asm/setup">activar la protección de aplicaciones y API</a> desde la interfaz de usuario de Datadog sin necesidad de configurar el Agent ni las bibliotecas de rastreo.</div>
+Si tu servicio se ejecuta en <a href="/agent/remote_config/#enabling-remote-configuration"> un Agent con la configuración remota activada y una versión de la librería de rastreo compatible</a>, puedes <a href="https://app.datadoghq.com/security/configuration/asm/setup">activar la protección de aplicaciones y API</a> desde la interfaz de usuario de Datadog sin necesidad de configurar el Agent ni las bibliotecas de rastreo.</div>
 
 ## Compatibilidad
 
-Para que la protección de aplicaciones y API de Datadog sea compatible con tu configuración de Datadog, debes tener APM activado y [enviar traces (trazas) a Datadog][6]. La protección de aplicaciones y API utiliza las mismas bibliotecas que APM, por lo que no es necesario desplegar ni mantener otra biblioteca. 
+Para que la protección de aplicaciones y API de Datadog sea compatible con tu configuración de Datadog, debes tener APM activado y [enviar traces (trazas) a Datadog][6]. La protección de aplicaciones y API utiliza las mismas bibliotecas que APM, por lo que no es necesario desplegar ni mantener otra biblioteca.
 
 Los steps (UI) / pasos (generic) para activar la protección de aplicaciones y API de Datadog son específicos de cada lenguaje de ejecución. Check si tu lenguaje es compatible con los requisitos previos de protección de aplicaciones y API de cada producto.
 
@@ -45,15 +45,15 @@ Lee [Activar la protección de aplicaciones y API para Serverless][8] para obten
 
 ## Rendimiento
 
-La protección de aplicaciones y API de Datadog utiliza procesos ya contenidos en el Agent y APM, por lo que las implicaciones de rendimiento al utilizarlo son insignificantes. 
+La protección de aplicaciones y API de Datadog utiliza procesos ya contenidos en el Agent y APM, por lo que las implicaciones de rendimiento al utilizarlo son insignificantes.
 
-Cuando APM está activado, la biblioteca de Datadog genera traces (trazas) distribuidas. La protección de aplicaciones y API de Datadog marca la actividad de seguridad en las traces (trazas) utilizando patrones de ataque conocidos. La correlación entre los patrones de ataque y el contexto de ejecución proporcionado por la trace (traza) distribuida activa señales de seguridad basadas en reglas de detección.
+Cuando APM está activado, la librería de Datadog genera traces (trazas) distribuidas. La protección de aplicaciones y API de Datadog marca la actividad de seguridad en las traces (trazas) utilizando patrones de ataque conocidos. La correlación entre los patrones de ataque y el contexto de ejecución proporcionado por la trace (traza) distribuida activa señales de seguridad basadas en reglas de detección.
 
-{{< img src="security/application_security/How_Appsec_Works_June2023.png" alt="Diagrama que muestra que la biblioteca del rastreador Datadog funciona a nivel de servicio de aplicación y envía trazas al backend de Datadog. El backend de Datadog marca las señales de seguridad procesables y envía una notificación a la aplicación correspondiente, como PagerDuty, Jira o Slack." >}}
+{{< img src="security/application_security/How_Appsec_Works_June2023.png" alt="Diagrama que muestra que la librería del rastreador Datadog funciona a nivel de servicio de aplicación y envía trazas al backend de Datadog. El backend de Datadog marca las señales de seguridad procesables y envía una notificación a la aplicación correspondiente, como PagerDuty, Jira o Slack." >}}
 
 ## Muestreo y conservación de datos
 
-En la biblioteca de traces (trazas), la protección de aplicaciones y API de Datadog recopila todas las traces (trazas) que incluyen datos de seguridad. Un valor predeterminado [retention filter (filtro de retención)][9] garantiza la retención de todas las traces (trazas) relacionadas con la seguridad en la plataforma de Datadog.
+En la librería de traces (trazas), la protección de aplicaciones y API de Datadog recopila todas las traces (trazas) que incluyen datos de seguridad. Un valor predeterminado [retention filter (filtro de retención)][9] garantiza la retención de todas las traces (trazas) relacionadas con la seguridad en la plataforma de Datadog.
 
 Los datos de las trazas de seguridad se conservan durante 90 días. Los datos de rastreo subyacentes se conservan durante 15 días.
 
@@ -79,7 +79,7 @@ Para configurar la información redactada por la protección de aplicaciones y A
 
 Datadog utiliza varias fuentes de patrones, incluido el [Conjunto de reglas básicas de OWASP ModSecurity][12] para detectar amenazas y vulnerabilidades conocidas en solicitudes HTTP. Cuando una solicitud HTTP coincide con una de [las reglas de detección predefinidas][13], se genera una señal de seguridad en Datadog.
 
-**Actualizaciones automáticas de patrones de amenazas**: Si tu servicio se ejecuta con [un Agent con la configuración remota habilitada y una versión de biblioteca de rastreo compatible][26], los patrones de amenazas que se utilizan para monitorizar tu servicio se actualizan automáticamente cada vez que Datadog publica actualizaciones.
+**Actualizaciones automáticas de patrones de amenazas**: Si tu servicio se ejecuta con [un Agent con la configuración remota habilitada y una versión de librería de rastreo compatible][26], los patrones de amenazas que se utilizan para monitorizar tu servicio se actualizan automáticamente cada vez que Datadog publica actualizaciones.
 
 Las señales de seguridad se crean automáticamente cuando Datadog detecta ataques significativos dirigidos a tus servicios de producción. Te proporcionan una visibilidad de los atacantes y de los servicios comprometidos. Puedes establecer reglas de detección personalizadas con umbrales para determinar de qué ataques quieres recibir notificaciones.
 

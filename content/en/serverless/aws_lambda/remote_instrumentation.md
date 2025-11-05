@@ -2,6 +2,8 @@
 title: Remote instrumentation for AWS Lambda
 ---
 
+{{< img src="serverless/lambda/svl_lambda_remote.png" alt="AWS Remote Instrumentation page in Datadog, showing a 'Scope functions to instrument using tags' box and functions available for remote instrumentation." style="width:100%;" >}}
+
 _Supported runtimes_: Node.js, Python
 
 You can use remote instrumentation to quickly add instrumentation to your AWS Lambda functions and keep them instrumented securely.

@@ -520,7 +520,7 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 ### Configure Logback
 
 {{< site-region region="us3,us5,ap1,ap2,gov" >}}
-  <div class="alert alert-warning">The TCP endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). For a list of logging endpoints, see <a href="/logs/log_collection/?tab=tcp#additional-configuration-options"> Log Collection and Integrations</a>.</div>
+  <div class="alert alert-danger">The TCP endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). For a list of logging endpoints, see <a href="/logs/log_collection/?tab=tcp#additional-configuration-options"> Log Collection and Integrations</a>.</div>
 {{< /site-region >}}
 
 

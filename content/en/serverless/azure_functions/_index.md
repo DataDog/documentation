@@ -1,11 +1,20 @@
 ---
 title: Install Serverless Monitoring for Azure Functions
+further_reading:
+  - link: "/serverless/guide/disable_serverless"
+    tag: "Documentation"
+    text: "Disable Serverless Monitoring"
+  - link: 'http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/'
+    tag: 'Blog'
+    text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
 ---
 
 ## Overview
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Azure Functions. To collect additional metrics, install the [Datadog Azure integration][5].
 
 ## Setup
+
+If you haven't already, install the [Datadog-Azure integration][5] to collect metrics and logs. Then instrument your application with the following steps:
 
 {{< programming-lang-wrapper langs="nodejs,python,java,dotnet" >}}
 {{< programming-lang lang="nodejs" >}}
@@ -22,7 +31,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    ```js
    require('@datadog/serverless-compat').start();
 
-   // This line must come before importing any instrumented module. 
+   // This line must come before importing any instrumented module.
    const tracer = require('dd-trace').init()
    ```
 
@@ -85,7 +94,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 {{< programming-lang lang="dotnet" >}}
 1. **Install dependencies**. Run the following commands:
    ```shell
-   dotnet package add Datadog.Azure.Functions
+   dotnet package add Datadog.AzureFunctions
    ```
 
    Datadog recommends regularly upgrading to the latest version of `Datadog.AzureFunctions` to ensure you have access to enhancements and bug fixes.
@@ -97,7 +106,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    Datadog.Serverless.CompatibilityLayer.Start();
    ```
 
-   If your Azure Function app uses the In-Process model, add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
+   If your Azure Function app uses the In-Container model, add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
    ```shell
    dotnet package add Microsoft.Azure.Functions.Extensions
    ```
@@ -170,6 +179,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    | ---- | ----- |
    | `DD_API_KEY` | Your [Datadog API key][1]. |
    | `DD_SITE` | Your [Datadog site][2]. For example, {{< region-param key=dd_site code="true" >}}. |
+   | `DD_AZURE_RESOURCE_GROUP` | Your Azure resource group. Only required for Azure Functions on the [Flex Consumption plan][8]. |
 
 7. **Configure Unified Service Tagging**. You can collect metrics from your Azure Functions by installing the [Datadog Azure integration][5]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables.
 
@@ -193,7 +203,7 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 `DD_TRACE_DEBUG`
 : Enables (`true`) or disables (`false`) debug logging for the Datadog Tracing Library. Defaults to `false`.
 
-  **Values**: `true`, `false` 
+  **Values**: `true`, `false`
 
 `DD_LOG_LEVEL`
 : Sets logging level for the Datadog Serverless Compatibility Layer. Defaults to `info`.
@@ -207,3 +217,4 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 [5]: /integrations/azure/
 [6]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [7]: /getting_started/tagging/unified_service_tagging/
+[8]: https://learn.microsoft.com/en-us/azure/azure-functions/flex-consumption-plan

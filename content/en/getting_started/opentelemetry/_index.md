@@ -1,5 +1,6 @@
 ---
 title: Getting Started with OpenTelemetry at Datadog
+description: Configure OpenTelemetry SDK with Datadog Exporter to send standardized observability data including metrics, traces, and logs.
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
   tag: 'External Site'
@@ -48,17 +49,17 @@ To complete this guide, you need the following:
 
 1. [Create a Datadog account][1] if you haven't yet.
 2. Set up your Datadog API key:
-   a. Find or create your [Datadog API key][2].
-   b. Export your Datadog API key to an environment variable:
+   1. Find or create your [Datadog API key][2].
+   2. Export your Datadog API key to an environment variable:
     {{< code-block lang="sh" >}}
 export DD_API_KEY=<Your API Key>
 {{< /code-block >}}
 3. Get the sample [Calendar][12] application.
-   a. Clone the `opentelemetry-examples` repository to your device:
+   1. Clone the `opentelemetry-examples` repository to your device:
     {{< code-block lang="sh" >}}
 git clone https://github.com/DataDog/opentelemetry-examples.git
 {{< /code-block >}}
-   b. Navigate to the `/calendar` directory:
+   2. Navigate to the `/calendar` directory:
     {{< code-block lang="sh" >}}
 cd opentelemetry-examples/apps/rest-services/java/calendar
 {{< /code-block >}}

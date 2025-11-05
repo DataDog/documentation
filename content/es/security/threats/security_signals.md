@@ -41,7 +41,7 @@ Puedes clasificar una señal asignándola a un usuario para que la investigue. E
 ## Crear un caso
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La gestión de casos no es compatible para tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">La gestión de casos no es compatible para tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Utiliza [Gestión de casos][6] para rastrear, clasificar e investigar las señales de seguridad.

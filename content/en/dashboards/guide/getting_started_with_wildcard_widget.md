@@ -1,5 +1,6 @@
 ---
 title: Getting Started with the Wildcard Widget
+description: Learn to build custom visualizations using the Wildcard widget with Vega-Lite grammar and imported queries.
 further_reading:
 - link: "/dashboards/widgets/wildcard/"
   tag: "Documentation"
@@ -62,13 +63,12 @@ At the top of the query editor:
 
 Datadog automatically creates a visualization based on your query.
 
-<div class="alert alert-info">
-<strong>Tip:</strong> Use the Command Palette (<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) to auto-select a chart type based on your query, add or edit encodings, or rotate axes/switch chart types.
+<div class="alert alert-tip">
+Use the Command Palette (<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) to auto-select a chart type based on your query, add or edit encodings, or rotate axes/switch chart types.
 </div>
 
 {{% collapse-content title="Guided example of Auto-generate" level="h4" expanded=false %}}
 1. In a new Wildcard widget, click the JSON tab of the query editor and paste the following query:
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
     ```json
     {
       "response_format": "scalar",

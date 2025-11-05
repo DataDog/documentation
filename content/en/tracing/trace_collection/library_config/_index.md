@@ -1,5 +1,6 @@
 ---
 title: Configure the Datadog Tracing Library
+description: Configure Datadog tracing libraries with environment variables, runtime settings, and language-specific options for optimal APM performance.
 type: multi-code-lang
 ---
 
@@ -88,10 +89,10 @@ The following configuration options behave consistently across the latest versio
 **Description**: Enables or disables sending traces from the application.
 
 `DD_LOGS_INJECTION`
-: **Default**: `false` <br>
+: **Default**: `true` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
-**Caveats**: Not supported in C++ or Go. The default value in Ruby is `true`.<br>
-**Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into application logs. This allows for correlation between traces and logs.
+**Caveats**: Not supported in C++ or Go.<br>
+**Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into JSON/structured application logs. This allows for correlation between traces and logs.
 
 `DD_TRACE_RATE_LIMIT`
 : **Default**: `100` <br>
@@ -176,7 +177,7 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_EXPERIMENTAL_FEATURES_ENABLED`
 : **Default**: `null` <br>
 **Supported Input**: A comma-separated list of configuration options that support experimental features.<br>
-**Supported Values**: `all`, `DD_TAGS` (Java, .NET), `DD_LOGS_INJECTION` (Java) <br>
+**Supported Values**: `all`, `DD_TAGS` (Java, .NET)<br>
 **Caveats**: Only supported in Java and .NET <br>
 **Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. You can enable all experimental features using the keyword `all`, or list individual features explicitly.
 

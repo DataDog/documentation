@@ -6,10 +6,10 @@ further_reading:
   tag: Blog
   text: Correlacionar sin problemas los datos de telemetría de DBM y APM para comprender
     el rendimiento de las consultas integrales
-title: Correlacionar Database Monitoring y trazas
+title: Correlacionar Database Monitoring y trazas (traces)
 ---
 
-En esta guía se considera que has configurado [Database Monitoring][1] y usas [APM][2]. La conexión de APM y DBM inyecta identificadores de traza (trace) de APM en la recopilación de datos de DBM, lo que permite la correlación de estas dos fuentes de datos. Esto permite que las funciones del producto muestren información sobre la base de datos en el producto de APM, y datos de APM en el producto de DBM.
+En esta guía se considera que has configurado [Database Monitoring][1] y usas [APM][2]. La conexión de APM y DBM inyecta identificadores de trazas de APM en la recopilación de datos de DBM, lo que permite la correlación de estas dos fuentes de datos. Esto permite que las funciones del producto muestren información sobre la base de datos en el producto de APM, y datos de APM en el producto de DBM.
 
 ## Antes de empezar
 
@@ -77,7 +77,7 @@ Las integraciones del rastreador de APM admiten un *Modo de propagación*, que c
 
 \*\* Modo completo de SQL Server para Java/.NET:
 
-<div class="alert alert-warning">Si tu aplicación utiliza <code>context_info</code> para la instrumentación, el rastreador de APM lo sobrescribe.</div>
+<div class="alert alert-danger">Si tu aplicación utiliza <code>context_info</code> para la instrumentación, el rastreador de APM lo sobrescribe.</div>
 
   - La instrumentación ejecuta un comando `SET context_info` cuando el cliente emite una consulta, lo que realiza un recorrido completo adicional a la base de datos.
   - Requisitos previos:
@@ -112,7 +112,7 @@ Datadog recomienda establecer el modo de enmascaramiento en `obfuscate_and_norma
   sql_obfuscation_mode: "obfuscate_and_normalize"
 ```
 
-<div class="alert alert-danger">Cambiar el modo de ofuscación puede alterar el texto SQL normalizado. Si tienes monitores basados en texto SQL en trazas (trace) APM, es posible que tengas que actualizarlos.</div>
+<div class="alert alert-warning">Cambiar el modo de ofuscación puede alterar el texto SQL normalizado. Si tienes monitores basados en texto SQL en trazas de APM, es posible que tengas que actualizarlos.</div>
 
 {{< tabs >}}
 {{% tab "Go" %}}
@@ -225,7 +225,7 @@ Habilita el rastreo de sentencias preparadas para Postgres mediante **uno** de l
 
 **Nota**: La instrumentación de sentencias preparadas sobrescribe la propiedad `Application` con el texto `_DD_overwritten_by_tracer`, y provocan un viaje de ida y vuelta adicional a la base de datos. Este viaje de ida y vuelta adicional normalmente tiene un impacto insignificante en el tiempo de ejecución de la sentencia SQL.
 
-<div class="alert alert-warning">La activación del rastreo de sentencias preparadas puede provocar un aumento de la asignación de pines a connection (conexión) al utilizar Amazon RDS Proxy, lo que reduce la eficacia de la agrupación de connection (conexión). Para obtener más información, consulte <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-pinning.html">connection (conexión) pinning on RDS</a> Proxy.</div>
+<div class="alert alert-danger">La activación del rastreo de sentencias preparadas puede generar un aumento del pinning de conexión cuando se utiliza Amazon RDS Proxy, lo que reduce la eficacia de la agrupación de conexiones. Para obtener más información, consulta <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-pinning.html">Pinning de conexión en RDS Proxy</a>.</div>
 
 **Versiones del rastreador inferiores a 1.44**:
 Las sentencias preparadas no son compatibles con el modo `full` para Postgres y MySQL, y todas las llamadas a la API de JDBC que utilizan sentencias preparadas se degradan automáticamente al modo `service`. Dado que la mayoría de las bibliotecas SQL de Java utilizan sentencias preparadas por defecto, esto significa que **la mayoría** de las aplicaciones Java sólo pueden utilizar el modo `service`.
@@ -348,7 +348,7 @@ for doc in results:
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Esta función requiere que la instrumentación automática se encuentre habilitada para tu servicio de .NET.
 </div>
 
@@ -368,7 +368,7 @@ Habilita la función de propagación de la monitorización de base de datos al e
 
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Esta función requiere que la extensión del rastreador se encuentre habilitada para tu servicio de PHP.
 </div>
 

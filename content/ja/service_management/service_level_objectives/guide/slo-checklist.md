@@ -10,14 +10,17 @@ further_reading:
   text: サービスレベル目標入門
 - link: /service_management/service_level_objectives/guide/slo_types_comparison/
   tag: ドキュメント
-  text: Comparison of Datadog SLO Types
+  text: Datadog SLO タイプの比較
+- link: https://www.datadoghq.com/blog/define-and-manage-slos/
+  tag: ブログ
+  text: Datadog で SLO を管理するためのベストプラクティス
 title: SLO チェックリスト
 ---
 
 
 ## はじめに
 
-1. Navigate to the [SLO Manage page][1].
+1. [SLO Manage ページ][1] に移動します。
 
 2. ユーザーの目線から考えてみてください:
 
@@ -32,7 +35,7 @@ title: SLO チェックリスト
 
 #### 応答 / リクエスト
 
-|  Type of SLI |  説明                                                   |
+|  SLI の種類 |  説明                                                   |
 | ------------ | -------------------------------------------------------------- |
 | 可用性 | サーバーはリクエストに正常に応答しましたか？          |
 | レイテンシー      | サーバーがリクエストに応答するまでにどれぐらい時間がかかりましたか？ |
@@ -40,7 +43,7 @@ title: SLO チェックリスト
 
 #### Storage
 
-|  Type of SLI |  説明                                 |
+|  SLI の種類 |  説明                                 |
 | ------------ | -------------------------------------------- |
 | 可用性 | データにオンデマンドでアクセスできますか？          |
 | レイテンシー      | データの読み書きにどれぐらい時間がかかりますか？ |
@@ -48,44 +51,52 @@ title: SLO チェックリスト
 
 #### パイプライン
 
-| Type of SLI |   説明                                                      |
+| SLI の種類 |   説明                                                      |
 | ----------- | ------------------------------------------------------------------ |
 | 正確性 | 正しいデータが返されましたか？                                       |
 | 鮮度   | 新しいデータまたは処理された結果が表示されるまでにどれぐらい時間がかかりますか？ |
 
 ### ステップ 2
 
-**Do you require an SLI calculation that is time-based or count-based?**
+#### SLO タイプを選択する際のベスト プラクティス
 
-The following SLO types are available in Datadog: 
+- 可能な限り、メトリクス ベースの SLO を使用してください。エラー バジェットが SLO 違反までに残された不良イベント数を反映する SLO にするのがベスト プラクティスです。また、SLO の計算はイベント数に基づいてボリューム加重されます。
+- 代わりに、アップタイムを追跡し時間 ベースの SLI 計算を使用する SLO が必要な場合は、タイム スライス SLO を使用してください。モニター ベースの SLO と異なり、タイム スライス SLO では SLO 用の基盤モニターを維持する必要がありません。
+- 最後に、タイム スライス SLO でカバーできないユース ケース—ノン メトリクス モニターや複数モニターに基づく SLO など—では、モニター ベースの SLO を検討してください。
 
-**Metric-based SLOs**
+SLO タイプの詳細な比較については、[SLO タイプ比較][8] ガイドを参照してください。
+
+**SLI 計算は時間 ベースですか、それともカウント ベースですか?**
+
+Datadog では、次の SLO タイプを利用できます:
+
+**メトリクス ベース SLO**
 
 _例: リクエストの 99% は、30 日間で 250 ms 未満で完了する必要があります。_
 
-- Count-based SLI calculation
-- SLI is calculated as the sum of good events divided by the sum of total events
+- カウント ベースの SLI 計算
+- SLI は正常イベントの合計を総イベント数の合計で割って計算します
 
-**Monitor-based SLOs**
+**モニター ベース SLO**
 
 _例: すべてのユーザーリクエストのタイムレイテンシーの 99% は、いずれの 30 日の範囲内でも250 ms 未満で
 ある必要があります。_
 
-- Time-based SLI calculation
-- SLI calculated based on the underlying Monitor’s uptime
-- You can select a single monitor, multiple monitors (up to 20), or a single multi alert monitor with groups
+- 時間 ベースの SLI 計算
+- SLI は基盤モニターのアップタイムに基づいて計算されます
+- 1 つのモニター、複数モニター (最大 20)、またはグループ化されたマルチ アラート モニターを選択できます
 
 新しいモニターの作成が必要な場合は [Monitor create][2] ページを開きます。
 
-**Time Slice SLOs**
+**タイム スライス SLO**
 
 _例: すべてのユーザーリクエストのタイムレイテンシーの 99% は、いずれの 30 日の範囲内でも250 ms 未満で
 ある必要があります。_
 
-- Time-based SLI calculation
-- SLI calculated based on your custom uptime definition using a metric query
+- 時間 ベースの SLI 計算
+- SLI はメトリクス クエリを用いて定義したカスタム アップタイムに基づいて計算されます
 
-## Implement your SLIs
+## SLI を実装する
 
 1. [カスタムメトリクス][3] (例: カウンター)
 2. [インテグレーションメトリクス][4] (例: ロードバランサー、HTTP リクエスト)
@@ -94,8 +105,8 @@ _例: すべてのユーザーリクエストのタイムレイテンシーの 9
 
 ## ターゲット目標および時間枠の設定
 
-1. Select your target: `99%`, `99.5%`, `99.9%`, `99.95%`, or any other target value that makes sense for your requirements.
-2. Select your time window: over the last rolling `7`, `30`, or `90 days`
+1. ターゲットを選択します: `99%`、`99.5%`、`99.9%`、`99.95%`、または要件に適したその他の値。
+2. 時間 ウィンドウを選択します: 直近のローリング `7`、`30`、または `90 days`
 
 ## SLO の名前、説明、タグの追加
 
@@ -112,9 +123,10 @@ _例: すべてのユーザーリクエストのタイムレイテンシーの 9
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo/manage
-[2]: https://app.datadoghq.com/monitors#create/metric
+[2]: https://app.datadoghq.com/monitors/create/metric
 [3]: /ja/metrics
 [4]: /ja/integrations
 [5]: /ja/tracing/trace_pipeline/generate_metrics/
 [6]: /ja/logs/logs_to_metrics/
 [7]: /ja/service_management/service_level_objectives/#searching-and-viewing-slos
+[8]: /ja/service_management/service_level_objectives/guide/slo_types_comparison

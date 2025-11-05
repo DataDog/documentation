@@ -13,7 +13,7 @@ further_reading:
     text: 'Working with Flaky Tests'
 
 ---
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview

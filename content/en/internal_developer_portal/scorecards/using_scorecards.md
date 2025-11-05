@@ -23,10 +23,6 @@ further_reading:
   text: "Track DORA Metrics with Datadog" 
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Scorecards are in Preview.
-{{< /callout >}}
-
 After configuring your Scorecards, you can view entity-level scores, track scores over time, and generate Scorecard reports to automatically update your team with Scorecard information.
 
 ## View entity-level details and scores
@@ -45,7 +41,7 @@ You can visualize how teams' scores progress over time as they make changes and 
 
 You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how entities and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][2], which runs at a scheduled time. 
 
-<div class="alert alert-warning">Running this Workflow may impact your billing. Read the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">pricing page</a> for more information</div>
+<div class="alert alert-danger">Running this Workflow may impact your billing. Read the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">pricing page</a> for more information</div>
 
 To create a Report:
 

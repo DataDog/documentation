@@ -137,8 +137,8 @@ You can customize the Account Profiles page to include additional attributes, gi
 
 ## Use custom attributes to enrich profiles
 
-{{< callout header="Join the Preview!" btn_hidden="true">}}
-  Custom Attributes is in Preview!
+{{< callout url="#" header="Join the Preview!" btn_hidden="true">}}
+  Custom Attributes for User & Account Profiles is in Preview.
 {{< /callout >}} 
 
 
@@ -186,8 +186,8 @@ You can filter these custom attributes throughout the product analytics platform
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-user-session
-[3]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-account
+[2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#identify-user-session
+[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#identify-account
 [4]: https://app.datadoghq.com/product-analytics/integrations
 [5]: https://app.datadoghq.com/product-analytics/integrations/custom-attributes
 [6]: https://app.datadoghq.com/product-analytics/segments

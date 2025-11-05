@@ -5,12 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"
   tag: "Blog"
   text: "Monitor your workflows with Datadog multistep API tests"
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
-  tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
-- link: "/getting_started/synthetics/api_test"
-  tag: "Documentation"
-  text: "Get started with API tests"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run Multistep API tests on internal endpoints"
@@ -266,7 +263,7 @@ You can restrict access to a multistep API test based on the roles in your organ
 [9]: /monitors/notify/?tab=is_alert#configure-notifications-and-automations
 [10]: http://daringfireball.net/projects/markdown/syntax
 [11]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[12]: /synthetics/guide/synthetic-test-monitors
+[12]: /monitors/types/synthetic_monitoring/
 [13]: /synthetics/settings/#global-variables
 [14]: /synthetics/api_tests/http_tests?tab=requestoptions#test-failure
 [15]: /synthetics/api_tests/grpc_tests?tab=unarycall#test-failure

@@ -100,7 +100,7 @@ There's no need to add the tracing library because it's automatically injected. 
 1. From the `k8s` subdirectory, use the following command to install the Datadog Cluster Agent, specifying the `values-with-lib-inj.yaml` config file and your [Datadog API key](/account_management/api-app-keys/):
    {{< code-block lang="shell" >}}
 helm install datadog-agent -f values-with-lib-inj.yaml --set datadog.site='datadoghq.com' --set datadog.apiKey=$DD_API_KEY datadog/datadog{{< /code-block >}}
-    <div class="alert alert-warning">For more detailed information, read <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Installing the Datadog Agent on Kubernetes with Helm</a></div>
+    <div class="alert alert-danger">For more detailed information, read <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Installing the Datadog Agent on Kubernetes with Helm</a></div>
 
 2. You can check the Datadog Cluster Agent is running with the following command:
    {{< code-block lang="shell" >}}
@@ -129,7 +129,7 @@ annotations:
 
     Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Java source repository][14]
    
-    <div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
+    <div class="alert alert-danger">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
     
     The final pod definition should look like the excerpt below. See also the full [YAML file][10] in the sample repo. The instructions you added to instrument the app are highlighted:
 

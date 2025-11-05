@@ -52,7 +52,9 @@ By default, when you navigate to the Resource Catalog, you are able to see Datad
 
 {{< img src="/infrastructure/resource_catalog/resource_catalog_settings.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
-**Note**: Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
+<div class="alert alert-warning">Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
+
+{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
 ## Browse the Resource Catalog
 

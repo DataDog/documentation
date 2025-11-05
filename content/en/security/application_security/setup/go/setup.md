@@ -1,5 +1,5 @@
 ---
-title: Enabling App and API Protection for Go
+title: Getting started for App and API Protection for Go
 aliases:
   - /security_platform/application_security/getting_started/go
   - /security/application_security/getting_started/go
@@ -26,16 +26,14 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-## Enabling App and API Protection
+## Prerequisite
 
-### Prerequisite
-
-- The [Datadog Agent][101] is installed and configured for your application's operating system or container, cloud, or virtual environment. 
+- The [Datadog Agent][16] is installed and configured for your application's operating system or container, cloud, or virtual environment. 
 - Your service framework and tools are [compatible][2] with Datadog [Application and API Protection][1].
 - Your deployment environment is [supported][5].
 - You have one of the latest two versions of [Go][4] installed (following the [Official Release Policy][5]).
 
-### Get started
+## Get started
 
 1. Install [Orchestrion][10]:
    ```console
@@ -149,7 +147,7 @@ If you are building your Go application without [CGO][9], you can still enable A
    $ CGO_ENABLED=0 orchestrion go build -tags appsec my-program
    ```
 
-  <div class="alert alert-info">Using `CGO_ENABLED=0` usually guarantees a statically-linked binary. This is will not be the case here.</div>
+  <div class="alert alert-danger">Disabling CGO usually guarantees a statically-linked binary. This is will not be the case here.</div>
 
 2. Install `libc.so.6`, `libpthread.so.0` and `libdl.so.2` on your system, as these libraries are required by the Datadog WAF:
    This installation can be done by installing the `glibc` package on your system with your package manager. See [Creating a Dockerfile for App and API Protection for Go][3].
@@ -191,6 +189,7 @@ For more details, see [Standalone App and API Protection][8].
 
 [1]: /security/application_security/setup/compatibility/go/?tab=v2#web-framework-compatibility
 [2]: /security/application_security/setup/compatibility/go/
+[3]: /security/application_security/setup/go/dockerfile
 [4]: https://go.dev/
 [5]: https://go.dev/doc/devel/release#policy
 [6]: /security/application_security/setup/go#building-without-cgo
@@ -203,3 +202,4 @@ For more details, see [Standalone App and API Protection][8].
 [13]: https://github.com/ebitengine/purego
 [14]: https://app.datadoghq.com/security/appsec
 [15]: /security/default_rules/security-scan-detected/
+[16]: https://app.datadoghq.com/account/settings#agent

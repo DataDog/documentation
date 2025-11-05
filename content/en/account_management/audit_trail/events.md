@@ -1,5 +1,6 @@
 ---
 title: Audit Trail Events
+description: Comprehensive reference of over 100 audit event types across Datadog platform products with detailed categorization and examples.
 aliases:
     - /account_management/audit_trail_events/
 disable_edit: true

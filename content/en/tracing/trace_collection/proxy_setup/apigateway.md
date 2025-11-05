@@ -23,7 +23,7 @@ This feature is in Preview.
 
 Datadog APM can create **inferred spans** for requests that pass through Amazon API Gateway to container- or EC2-hosted services. The spans power end-to-end traces, service maps, and sampling based on the gateway itself.
 
-<div class="alert alert-danger">If your API Gateway integrates with AWS Lambda, do <b>not</b> follow the instructions on this page. <a href="https://docs.datadoghq.com/serverless/aws_lambda/installation/">Datadog Lambda layers</a> already emit inferred API Gateway spans; adding the proxy headers described here can create duplicate or conflicting traces.</div>
+<div class="alert alert-warning">If your API Gateway integrates with AWS Lambda, do <b>not</b> follow the instructions on this page. <a href="https://docs.datadoghq.com/serverless/aws_lambda/installation/">Datadog Lambda layers</a> already emit inferred API Gateway spans; adding the proxy headers described here can create duplicate or conflicting traces.</div>
 
 
 ### Prerequisites

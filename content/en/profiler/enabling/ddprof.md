@@ -15,7 +15,7 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>ddprof</code> is in beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 

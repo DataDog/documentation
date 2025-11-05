@@ -1,67 +1,95 @@
 ---
 title: Messages
+aliases:
+  - data_streams/live_messages
 ---
 
-Use the Messages feature to view Kafka messages directly and troubleshoot your data streams efficiently. You can view messages at specific offsets within Kafka. Inspecting these messages can be crucial when troubleshooting issues related to specific services or data streams.
+Messages feature allows identifying the root cause of poison pill messages and to better understand data streams by inspecting message content.
+It allows viewing Kafka messages at specific partitions and offsets.
 
-## Setup
-Before diving into detailed configuration steps, here's an overview of what's involved in setting up the Messages feature:
+<div class="alert alert-info">
+   Messages is in Preview. Contact your Customer Success Manager for access.
+</div>
 
-| Step               | Description                                                                                                                                       | Setup Guide              |
-|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
-| Agent setup        | An agent needs Kafka consumer integration enabled, be on at least version 7.69.0, and have remote configuration enabled                           | [Agent Setup][1]          |
-| Verify permissions | You need a few log access permissions, which usually come standard as well as `Data Streams Monitoring Capture Messages` enabled in Datadog     | [Required Permissions][2] |
+## Supported data formats
 
+Avro, Protobuf, and JSON are supported.
 
-### Agent setup
+## Prerequisites
 
-#### Selecting an agent
-Any Datadog agent having access to Kafka can be used for setup.
+### Kafka Consumer integration
 
-If you self-host Kafka, Datadog recommends setting up Messages on one of your Kafka brokers' agents. Otherwise, choose any one agent your producer or consumer services communicate with that has access to your Kafka cluster.
+[Kafka Consumer][6] integration needs to be set up on any consumer consuming from the topic you want to retrieve messages from.
+If a topic has more than one consumer group, setting up the integration on one of these consumer groups is enough to use the feature.
 
-#### Step-by-step guide
+#### Validation
 
-Complete the following steps on the same Datadog agent:
+Ensure that the Kafka Consumer check is running correctly by following [these instructions][11]
 
-##### 1. Verify agent version
+### Agent version
 
-Ensure your agent is running version `7.69.0` or later.
+Ensure the agent version you are running is 7.70 or later.
 
-To check your agent version, run `datadog-agent version` on your host.
+#### Validation
 
-##### 2. Enable [remote configuration][3]
+1. [Run the Agent's status subcommand][10] and check the agent version.
+2. In Datadog, under [integrations, View agents][12], find the agent running the Kafka Consumer integration, and check its version.
 
-Confirm that Remote Configuration is enabled for your agent (it is typically enabled by default). Verify this setting on the [Fleet Automation page][4] and also confirm it at the organizational level from the [Remote Configuration settings page][5].
+### Remote configuration
 
-##### 3. Configure Kafka consumer integration
+Ensure [remote configuration][3] is set up for the agent running the Kafka Consumer integration.
 
-Follow the steps detailed at [Kafka consumer integration documentation][6] to configure a Datadog agent for the Kafka consumer integration.
+#### Validation
 
-##### 4. Verify setup
+1. In Datadog, under [Remote Configuration][13], check that remote configuration is enabled at the organization level.
+2. In Datadog, under [Remote Configuration][13], check that the agent running the Kafka Consumer integration has remote configuration enabled, and is using an API key with remote configuration enabled.
 
-* Review agent logs for `kafka_consumer` entries to confirm successful configuration.
-* Verify data ingestion by inspecting the `kafka.broker_offset` metric in Datadog's Metrics Explorer, filtering by the relevant Kafka topics.
+## Required permissions
 
-
-### Required permissions
-
-You must have the following permissions enabled:
-
-* `Data Streams Monitoring Capture Messages`
+You must have the `Data Streams Monitoring Capture Messages` permission, and these logs permissions that are part of the Datadog Standard role:
 * `Logs Read Index Data`
 * `Logs Read Data`
 * `Logs Live Tail`
 
 You can verify your current permissions on your [Profile page][7].
+To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you do not have permission to modify roles, contact your organization's administrator.
 
-To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you don't have adequate access to modify roles, contact your organization's administrator.
+### 1. Create a new role
+
+1. Navigate to the [Roles page][8] in Datadog.
+2. Click **+ New Role** in the top-right corner.
+   <div class="alert alert-info">
+   If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
+   </div>
+3. Enter a descriptive name for your new role (for example, "Data Streams Messages Access").
+4. In the **Search Permissions** field, type `Data Streams Monitoring Capture Messages`.
+5. Select the permission from the search results to enable it for this role.
+6. Click **Save**.
+7. Confirm your role was created successfully by searching for it in the roles list.
+
+### 2. Assign the role to users
+
+1. Go to the [Users page][9] in Datadog.
+2. Find and click on the user you want to assign the role to.
+3. In the user details panel, click **Edit** next to their name.
+   <div class="alert alert-info">
+   If you don't see an "Edit" button, you need administrator privileges to modify user roles. Contact your Datadog administrator.
+   </div>
+4. In the modal that opens, locate the **Roles** section.
+5. Add your newly created role to the user.
+6. Click **Save**.
+7. Look for a "User updated" confirmation message to verify the change was successful.
 
 [1]: #agent-setup
 [2]: #required-permissions
 [3]: /agent/remote_config
 [4]: https://app.datadoghq.com/fleet
 [5]: https://app.datadoghq.com/organization-settings/remote-config
-[6]: /integrations/kafka-consumer/?tab=host#setup
+[6]: /integrations/kafka-consumer
 [7]: https://app.datadoghq.com/personal-settings/profile
 [8]: https://app.datadoghq.com/organization-settings/roles
+[9]: https://app.datadoghq.com/organization-settings/users
+[10]: /agent/configuration/agent-commands/#agent-information
+[11]: /integrations/kafka-consumer/?tab=host#validation
+[12]: https://app.datadoghq.com/fleet
+[13]: https://app.datadoghq.com/organization-settings/remote-config

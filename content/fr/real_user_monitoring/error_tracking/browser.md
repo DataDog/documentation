@@ -2,7 +2,7 @@
 aliases:
 - /fr/real_user_monitoring/error_tracking/browser_errors
 further_reading:
-- link: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
   tag: GitHub
   text: Code source datadog-ci
 - link: /real_user_monitoring/guide/upload-javascript-source-maps
@@ -36,7 +36,7 @@ Le suivi des erreurs et la solution RUM peuvent utiliser ces informations pour c
 
 {{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.mp4" alt="Associer le frame d'une stack trace au code source" video=true >}}
 
-<div class="alert alert-info">L'association des frames de stack trace au code source est prise en charge par la version <code>0.12.0</code> et les versions ultérieurs de l'<a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">interface de ligne de commande Datadog</a>.</div>
+<div class="alert alert-info">L'association des frames de stack trace au code source est prise en charge par la version <code>0.12.0</code> et les versions ultérieurs de l'<a href="https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command">interface de ligne de commande Datadog</a>.</div>
 
 Pour en savoir plus, consultez la section [Datadog Source Code Integration][13] (en anglais).
 
@@ -52,7 +52,7 @@ Pour en savoir plus, consultez la section [Datadog Source Code Integration][13] 
 [6]: https://www.npmjs.com/package/@datadog/browser-rum
 [7]: /fr/real_user_monitoring/browser/#initialization-parameters
 [8]: /fr/real_user_monitoring/guide/upload-javascript-source-maps
-[9]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command
+[9]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
 [10]: https://github.com
 [11]: https://about.gitlab.com
 [12]: https://bitbucket.org/product

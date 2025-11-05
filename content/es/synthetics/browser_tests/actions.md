@@ -19,7 +19,7 @@ El tiempo de espera predeterminado para cada paso es de 60 segundos. Puedes anul
 
 ## Pasos grabados automáticamente
 
-Una vez que hagas clic en **Iniciar grabación**, la [extensión del grabador de tests de navegador Datadog][3], detecta y graba automáticamente los pasos en tu sitio web.
+Una vez que hagas clic en **Start Recording** (Iniciar grabación), la [extensión del grabador de tests de navegador Datadog][3], detecta y graba automáticamente los pasos en tu sitio web.
 
 ### Clic
 
@@ -132,7 +132,7 @@ La función de aserción de JavaScript contiene los siguientes parámetros y req
 
 * `vars` (opcional): Una cadena que contiene las [variables][2] de tu test de navegador. Utiliza `vars.<YOUR_VARIABLE>` para hacer referencia a una variable de test del navegador en el snippet de JavaScript. Por ejemplo, si tu test de navegador contiene una variable `USERNAME`, invócala en tu snippet de JavaScript usando `vars.USERNAME`.
 
-* `element` (opcional): El localizador del elemento en la página. Para configurarlo utiliza los botones **Seleccionar** y **Actualizar** elemento de destino. El elemento seleccionado aprovecha automáticamente el algoritmo de multilocalización de test de navegador de Datadog.
+* `element` (opcional): El localizador del elemento en la página. Para configurarlo utiliza los botones **Select** (Seleccionar) y **Update** (Actualizar) del elemento de destino. El elemento seleccionado aprovecha automáticamente el algoritmo de multilocalización de test de navegador de Datadog.
 
 {{< img src="synthetics/browser_tests/assertion_java.mp4" alt="Aserción de JavaScript de test de navegador" video="true" width="100%" >}}
 
@@ -175,35 +175,25 @@ Crea este paso de aserción para realizar tests de la cantidad de solicitudes HT
 
 </br>
 
-### Navegación
+### Interacción
 
-{{< img src="synthetics/browser_tests/navigation_step.png" alt="Elige entre tres tipos de navegación en una grabación de test de navegador" style="width:60%;" >}}
+Además de registrar pasos basados en las aserciones de tu navegador, también puedes crear pasos manualmente haciendo clic en **Interaction** (Interacción). Luego, puedes elegir un tipo de acción para añadir una interacción.
 
-#### Actualizar una página
+{{< img src="mobile_app_testing/test_steps/mobile_app_interaction_2.png" alt="Elegir un tipo de acción para añadir un paso de interacción" style="width:60%;" >}}
+
+#### Actualizar página
 
 Crea este paso de navegación para que tu test de navegador actualice la página actual de la grabación.
 
-#### Ir a un correo electrónico y hacer clic en un enlace
+#### Hacer clic en el enlace de correo electrónico
 
-Una vez que hayas [creado una variable de correo electrónico][4], crea este paso de navegación para que tu test de navegador tenga acceso a buzones de correo únicos de Synthetic.
+Después de [crear una variable de correo electrónico][4], crea este paso de navegación para que tu navegador pruebe el acceso a buzones de correo únicos de Synthetic.
 
 Selecciona el correo electrónico y los enlaces en los que quieres que haga clic el test de navegador. Este paso te lleva a la página correspondiente y te permite seguir adelante con el resto del recorrido desde esa página específica.
 
-#### Seguir un enlace específico
+#### Ir al enlace
 
 Crea este paso de navegación para que tu test de navegador vaya a una página específica. Debes anteponer `http` o `https` en tus URLs en la casilla **Enter link URL** (Ingresar enlace de URL).
-
-### Acciones especiales
-
-Puedes usar la [extensión de grabador de test de navegador de Datadog][3], para grabar y monitorizar la mayoría de los pasos asociados a los recorridos de los usuarios. Sin embargo, la extensión no graba de manera automática algunos pasos tales como **Hover** (Pasar el cursor), **Press Key** (Pulsar tecla), **Scroll** (Desplazarse) y **Wait** (Esperar).
-
-Crea este paso de aserción de manera manual al hacer clic en **Special Actions** (Acciones especiales) y seleccionar un tipo de acción.
-
-#### Pasar el cursor
-
-En este paso se usa un clic específico, no un mecanismo de pasar el cursor, para evitar que se genere un paso distinto cada vez que un usuario pase el cursor por encima de un elemento durante la grabación.
-
-Selecciona **Hover** (Pasar el cursor) y haz clic en un elemento para añadir un paso.
 
 #### Pulsar tecla
 
@@ -220,6 +210,12 @@ Para pulsar teclas que no se graban de manera automática, especifica los valore
  Selecciona los modificadores `Alt`, `Control`, `Meta` y `Shift` para añadirlos al valor introducido.
 
 {{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Paso de Pulsar tecla en una grabación de test de navegador" style="width:50%;" >}}
+
+#### Pasar el ratón sobre un elemento
+
+En este paso se usa un clic específico, no un mecanismo de pasar el cursor, para evitar que se genere un paso distinto cada vez que un usuario pase el cursor por encima de un elemento durante la grabación.
+
+Selecciona **Hover** (Pasar el cursor) y haz clic en un elemento para añadir un paso.
 
 #### Desplazarse
 
@@ -240,6 +236,114 @@ Si sabes que una página o elemento de página tarda más de 60 segundos en car
 {{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="Paso de Esperar en una grabación de test de navegador" style="width:50%;" >}}
 
 Este tiempo adicional se añade de manera sistemática a **cada ejecución** de la grabación de tu test de navegador.
+
+#### Ejecutar test HTTP
+
+Puedes ejecutar solicitudes HTTP, añadir [aserciones](#add-assertions) y [extraer variables](#extract-a-variable-from-the-response) como parte de tus tests de navegador.
+
+{{< img src="synthetics/browser_tests/http_request_3.png" alt="Paso Solicitud HTTP" style="width:70%;" >}}
+
+Para definir tu solicitud HTTP:
+
+1. Introduce la URL que quieres probar.
+2. De manera opcional, especifica **Advanced Options** (Opciones Avanzadas):
+
+   {{< tabs >}}
+
+   {{% tab "Opciones de solicitud" %}}
+
+   * **Seguir redirecciones**: Selecciona esta opción para que tu test HTTP siga hasta diez redirecciones al realizar la solicitud.
+   * **Ignorar error de certificado del servidor**: Selecciona esta opción para que tu test HTTP continúe con la conexión aunque se produzcan errores al validar el certificado SSL.
+   * **Request headers** (Encabezados de la solicitud): define encabezados para añadir a tu solicitud HTTP. También puedes anular los encabezados predeterminados (por ejemplo, el encabezado `user-agent`).
+   * **Cookies**: define cookies para añadir a tu solicitud HTTP. Define varias cookies con el formato `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+
+   {{% /tab %}}
+
+   {{% tab "Autenticación" %}}
+
+   * **Client certificate** (Certificado de cliente): autentícate a través de mTLS al cargar tu certificado de cliente y la clave privada asociada.
+   * **HTTP Basic Auth** (Autenticación básica de HTTP): añade credenciales de autenticación básica de HTTP.
+   * **Autenticación Digest** (Autenticación implícita): añade credenciales de autenticación implícita. 
+   * **Firma AWS**: Añade el ID de la clave de acceso y la clave de acceso secreta de AWS.
+   * **NTLM**: Añade credenciales de autenticación NTLM. Admite tanto NTLMv2 como NTLMv1.
+   * **OAuth 2.0**: Selecciona un tipo de concesión (credenciales del cliente o contraseña del propietario del recurso).
+
+   {{% /tab %}}
+
+   {{% tab "Parámetros de consulta" %}}
+
+   * **Codificar parámetros**: Añade los nombres y los valores de los parámetros de consulta que requieren codificación.
+
+   {{% /tab %}}
+
+   {{% tab "Cuerpo de la solicitud" %}}
+
+   * **Tipo de cuerpo**: Selecciona el tipo de cuerpo de solicitud (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `application/octet-stream`, `multipart/form-data`, `GraphQL` o `None`) que quieres añadir a tu solicitud HTTP.
+   * **Cuerpo de la solicitud**: Añade el contenido del cuerpo de tu solicitud HTTP. Para cargar archivos en los pasos HTTP del navegador, el tamaño del cuerpo está limitado a 3 MB, mientras que el cuerpo de la solicitud tiene un límite de tamaño máximo de 50 KB.
+
+   {{% /tab %}}
+
+   {{% tab "Proxy" %}}
+
+   * **Proxy URL** (URL del proxy): especifica la URL del proxy por la que debe pasar la solicitud HTTP (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * **Proxy Header** (Encabezado del proxy): añade encabezados para incluir en la solicitud HTTP al proxy.
+
+   {{% /tab %}}
+
+   {{% tab "Privacidad" %}}
+
+   * **Do not save response body** (No guardar el cuerpo de la respuesta): selecciona esta opción para evitar que se guarde el cuerpo de la respuesta durante la ejecución. Esto ayuda a garantizar que no se muestren datos confidenciales en los resultados del test, pero puede dificultar la resolución de problemas. Para conocer todas las recomendaciones de seguridad, consulta la [Seguridad de los datos de la monitorización Synthetic][1].
+
+[1]: /es/data_security/synthetics
+   {{% /tab %}}
+
+   {{< /tabs >}}
+   </br>
+
+3. Haz clic en **Send** (Enviar) para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta.
+
+{{< img src="mobile_app_testing/test_steps/http_mobile_request.png" alt="Realizar una solicitud HTTP" style="width:80%;" >}}
+
+##### Añadir aserciones
+
+Las aserciones definen cuál es el resultado esperado de un test. Después de hacer clic en **Send** (Enviar), se añaden aserciones básicas en `status code`, `response time` y `header` `content-type`, en función de la respuesta del test. En tests de navegador, las aserciones son opcionales para los pasos HTTP.
+
+| Tipo            | Operación                                                                                                               | Tipo de valor                                               |
+|-----------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `body`          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _Cadena_ <br> _[Expresión regular][13]_ <br> _Cadena_, _[Expresión regular][13]_ |
+| `header`        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                                       | _Cadena_ <br> _[Expresión regular][13]_                              |
+| `response time` | `is less than`                                                                                                         | _Entero (ms)_                                           |
+| `status code`   | `is`, `is not`                                                                                                         | _Entero_                                                |
+
+Las solicitudes HTTP pueden descomprimir cuerpos con los siguientes encabezados `content-encoding`: `br`, `deflate`, `gzip` y `identity`.
+
+- Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud dentro del límite de tiempo de espera establecido por el worker de Synthetics.
+
+- Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparecerá el error `Assertions on the body/response cannot be run beyond this limit`.
+
+Puedes crear hasta 20 aserciones por paso al hacer clic en **New Assertion** (Aserción nueva) o hacer clic directamente en la vista previa de la respuesta.
+
+{{< img src="synthetics/browser_tests/assertions.png" alt="Define aserciones para que tu test de navegador tenga éxito o falle" style="width:80%;" >}}
+
+##### Extraer una variable de la respuesta
+
+También puedes extraer una variable de la respuesta de tu solicitud HTTP analizando las cabeceras o el cuerpo de la respuesta. El valor de la variable se actualiza cada vez que se ejecuta el paso de solicitud HTTP. A continuación, puedes utilizar la variable en [pasos posteriores](#use-variables) de tu test de navegador.
+
+Para empezar a analizar una variable, haz clic en **Extract a variable from response content** (Extraer una variable del contenido de la respuesta). A continuación, define la variable:
+
+1. Ingresa un **Variable Name** (Nombre de variable). El nombre de tu variable debe tener al menos tres caracteres, y solo puede contener mayúsculas, números y guiones bajos.
+2. Decide si quieres extraer tu variable de los encabezados o del cuerpo de la respuesta.
+
+   * Extrae el valor de la **cabecera de la respuesta**: utiliza la cabecera de la respuesta completa de tu solicitud HTTP como valor de la variable o analízala con [`regex`][13].
+   * Extrae el valor del **cuerpo de la respuesta**: utiliza el cuerpo de la respuesta completo de tu solicitud HTTP como valor de la variable o analízalo con [`regex`][13], [`JSONPath`][11] o [`XPath`][12].
+
+{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Variable extraída de la respuesta" style="width:80%;" >}}
+
+### Acciones especiales
+
+Puedes usar la [extensión de grabador de test de navegador de Datadog][3], para grabar y monitorizar la mayoría de los pasos asociados a los recorridos de los usuarios. Sin embargo, la extensión no graba de manera automática algunos pasos tales como **Hover** (Pasar el cursor), **Press Key** (Pulsar tecla), **Scroll** (Desplazarse) y **Wait** (Esperar).
+
+Crea este paso de aserción de manera manual al hacer clic en **Special Actions** (Acciones especiales) y seleccionar un tipo de acción.
 
 ### Variables
 
@@ -312,7 +416,7 @@ document.head.appendChild(script)
 
 await promise
 
-// El script ya se ha cargado
+// Script is now loaded
 
 return jQuery().jquery.startsWith('3.5.1')
 ```
@@ -329,7 +433,7 @@ Este tipo de variable global almacena claves secretas de contraseñas de un solo
 
 #### Correo electrónico
 
-Crea una dirección de correo electrónico de Datadog Synthetics que puedes usar en pasos de test para [confirmar si un correo electrónico se ha enviado correctamente][7] o [navegar a un enlace en el correo electrónico][8], por ejemplo, para hacer clic en un enlace de confirmación.
+Crea una dirección de correo electrónico de Datadog Synthetics que puedes usar en pasos de test para [confirmar si un correo electrónico se ha enviado correctamente][7] o [ir a un enlace en el correo electrónico][8], por ejemplo, para hacer clic en un enlace de confirmación.
 
 Se genera un buzón de correo electrónico único en cada ejecución de test para evitar conflictos entre ejecuciones de test.
 
@@ -348,108 +452,6 @@ Para anular las variables de los subtests en los tests principales, asegúrate d
 A fin de obtener más información sobre opciones avanzadas para subtests, consulta [Opciones avanzadas para pasos de test de navegador][9].
 
 Si para ti no tiene sentido ejecutar un subtest de forma independiente, puedes detenerlo. El test se continúa invocando como parte de tu test principal y no se ejecuta de manera individual. Para obtener más información, consulta [Reutilización de los recorridos de tests de navegador en tu conjunto de tests][10].
-
-### Solicitudes HTTP
-
-Puedes ejecutar solicitudes HTTP como parte de tus tests de navegador.
-
-{{< img src="synthetics/browser_tests/http_request_2.png" alt="Paso de solicitud HTTP" style="width:70%;" >}}
-
-#### Configuración
-
-Para definir tu solicitud HTTP:
-
-1. Selecciona un **Method** (Método) y una **URL** para consultar. Elige entre `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` y `OPTIONS`.
-2. De manera opcional, especifica **Advanced Options** (Opciones Avanzadas):
-
-   {{< tabs >}}
-
-   {{% tab "Opciones de solicitud" %}}
-
-   * **Follow redirects** (Seguir redirecciones): marca esta opción para que tu test de HTTP pueda acceder a un máximo de diez redirecciones al realizar la solicitud.
-   * **Ignore server certificate error** (Ignorar error de certificado del servidor): marca esta opción para que tu test de HTTP continúe con la conexión aunque se produzcan errores al validar el certificado SSL.
-   * **Request headers** (Encabezados de la solicitud): define encabezados para añadir a tu solicitud HTTP. También puedes anular los encabezados predeterminados (por ejemplo, el encabezado `user-agent`).
-   * **Cookies**: define cookies para añadir a tu solicitud HTTP. Define varias cookies con el formato `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-
-   {{% /tab %}}
-
-   {{% tab "Autenticación" %}}
-
-   * **Client certificate** (Certificado de cliente): autentícate a través de mTLS al cargar tu certificado de cliente y la clave privada asociada.
-   * **HTTP Basic Auth** (Autenticación básica de HTTP): añade credenciales de autenticación básica de HTTP.
-   * **Autenticación Digest** (Autenticación implícita): añade credenciales de autenticación implícita. 
-   * **NTLM**: añade credenciales de autenticación NTLM. Es compatible con NTLMv2 y NTLMv1.
-
-   {{% /tab %}}
-
-   {{% tab "Parámetros de consulta" %}}
-
-   * **Encode parameters** (Codificar parámetros): añade el nombre y el valor de los parámetros de consulta que requieren codificación. 
-
-   {{% /tab %}}
-
-   {{% tab "Cuerpo de la solicitud" %}}
-
-   * **Body type** (Tipo de cuerpo): selecciona el tipo de cuerpo de la solicitud (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL` o `None`) que quieres añadir a tu solicitud HTTP.
-   * **Request body** (Cuerpo de la solicitud): añade el contenido del cuerpo de tu solicitud HTTP. El cuerpo de la solicitud está limitado a un tamaño máximo de 50 kilobytes.
-
-   {{% /tab %}}
-
-   {{% tab "Proxy" %}}
-
-   * **Proxy URL** (URL del proxy): especifica la URL del proxy por la que debe pasar la solicitud HTTP (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-   * **Proxy Header** (Encabezado del proxy): añade encabezados para incluir en la solicitud HTTP al proxy.
-
-   {{% /tab %}}
-
-   {{% tab "Privacidad" %}}
-
-   * **Do not save response body** (No guardar el cuerpo de la respuesta): selecciona esta opción para evitar que se guarde el cuerpo de la respuesta durante la ejecución. Esto ayuda a garantizar que no se muestren datos confidenciales en los resultados del test, pero puede dificultar la resolución de problemas. Para conocer todas las recomendaciones de seguridad, consulta la [Seguridad de los datos de la monitorización Synthetic][1].
-
-[1]: /es/data_security/synthetics
-   {{% /tab %}}
-
-   {{< /tabs >}}
-   </br>
-3. Haz clic en **Test URL** (Realizar test de la URL) para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta.
-
-{{< img src="synthetics/browser_tests/http_request2.png" alt="Realizar solicitud HTTP" style="width:80%;" >}}
-
-#### Añadir aserciones
-
-Las aserciones definen el resultado esperado de un test. Después de hacer clic en **Test URL** (Realizar test de la URL), se añaden aserciones básicas en `status code`, `response time` y `header` `content-type` basadas en la respuesta del test. Las aserciones son opcionales para los pasos de HTTP en los tests de navegador.
-
-| Tipo          | Operador                                                                                               | Tipo de valor                                                      |
-|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| cuerpo          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _Cadena_ <br> _[Expresión regular][13]_ <br> _Cadena_, _[Expresión regular][13]_ |
-| encabezado        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Cadena_ <br> _[Expresión regular][13]_                                      |
-| tiempo de respuesta | `is less than`                                                                                         | _Entero (ms)_                                                  |
-| código de estado   | `is`, `is not`                                                                                         | _Entero_                                                      |
-
-Las solicitudes HTTP pueden descomprimir cuerpos con los siguientes encabezados `content-encoding`: `br`, `deflate`, `gzip` y `identity`.
-
-- Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud dentro del límite de tiempo de espera establecido por el worker de Synthetics.
-
-- Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparecerá el error `Assertions on the body/response cannot be run beyond this limit`.
-
-{{< img src="synthetics/browser_tests/assertions.png" alt="Define aserciones para que tu test de navegador tenga éxito o falle" style="width:80%;" >}}
-
-Puedes crear hasta 20 aserciones por paso al hacer clic en **New Assertion** (Aserción nueva) o hacer clic directamente en la vista previa de la respuesta.
-
-#### Extraer una variable de la respuesta
-
-De manera opcional, puedes extraer una variable de la respuesta de tu solicitud HTTP mediante el parseo de los encabezados o del cuerpo de la respuesta. El valor de la variable se actualiza cada vez que se ejecuta el paso de solicitud HTTP. Una vez creada, esta variable se puede usar en los [pasos siguientes](#use-variables) del test de navegador.
-
-Para iniciar el parseo de una variable, haz clic en **Extract a variable from response content** (Extraer una variable del contenido de la respuesta):
-
-1. Ingresa un **Variable Name** (Nombre de variable). El nombre de tu variable debe tener al menos tres caracteres, y solo puede contener mayúsculas, números y guiones bajos.
-2. Decide si quieres extraer tu variable de los encabezados o del cuerpo de la respuesta.
-
-   * Extraer el valor del **encabezado de la respuesta**: usa el encabezado completo de la respuesta de tu solicitud HTTP como valor de la variable o parséalo con un comando [`regex`][13].
-   * Extraer el valor del **cuerpo de la respuesta**: usa el cuerpo completo de la respuesta de tu solicitud HTTP como valor de la variable o parséalo con un comando [`regex`][13], [`JSONPath`][11] o [`XPath`][12].
-
-{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Variable extraída de la respuesta" style="width:80%;" >}}
-
 
 ## Gestionar el orden de los pasos
 
@@ -489,9 +491,9 @@ En el registro de tu test de navegador, añade un registro por pasos y haz clic 
 
 Para editar una grabación del navegador después de guardarla:
 
-- Ve a [Synthetics > Tests][14].
+- Ve a [Synthetic Monitoring > Tests (Monitorización Synthetic > Tests)][14].
 - Haz clic en un test de navegador guardado previamente.
-- Haz clic en el icono de engranaje de la esquina superior derecha y, a continuación, en «Edit recording» (Editar grabación).
+- Haz clic en el icono de engranaje de la esquina superior derecha y, a continuación, en "Edit recording" (Editar grabación).
 - Selecciona uno o varios pasos para eliminarlos o reproducirlos y, a continuación, haz clic en **Save & Quit** (Guardar y salir).
 
 {{< img src="synthetics/browser_tests/edit_a_recording.png" alt="Editar una grabación del navegador y usar la función de selección múltiple"="70%" >}}

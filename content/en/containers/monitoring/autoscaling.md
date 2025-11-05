@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Autoscaling
+description: Automatically scale Kubernetes workloads using Datadog metrics and intelligent scaling recommendations
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
   tag: "Blog"
@@ -43,13 +44,14 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 - [Remote Configuration][1] must be enabled both at the organization level and on the Agents in your target cluster. See [Enabling Remote Configuration][2] for setup instructions.
 - [Helm][3], for updating your Datadog Agent.
 - (For Datadog Operator users) [`kubectl` CLI][4], for updating the Datadog Agent.
-- Scaling recommendations are available for workloads monitored with Datadog Agent v7.50+. Datadog recommends upgrading to the latest Datadog Agent version to deploy live Kubernetes Autoscaling.
+- Scaling recommendations are available for workloads monitored with Datadog Agent v7.50+, with the [Kubernetes State Core][9] integration enabled. Datadog recommends upgrading to the latest Datadog Agent version to deploy live Kubernetes Autoscaling.
 - The following user permissions:
    - Org Management (required for Remote Configuration)
    - API Keys Write (required for Remote Configuration)
    - Workload Scaling Read
    - Workload Scaling Write
    - Autoscaling Manage
+- (Recommended) Linux kernel v5.19+ and cgroup v2
 
 ## Setup
 
@@ -248,3 +250,4 @@ As an alternative to Autoscaling, you can also deploy Datadog's scaling recommen
 [6]: https://app.datadoghq.com/orchestration/scaling/summary
 [7]: https://app.datadoghq.com/orchestration/scaling/cluster
 [8]: https://app.datadoghq.com/orchestration/scaling/workload
+[9]: /integrations/kubernetes_state_core/

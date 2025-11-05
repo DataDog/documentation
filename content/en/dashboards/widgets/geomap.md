@@ -1,5 +1,6 @@
 ---
 title: Geomap Widget
+description: Visualize geographic data with shaded regions or points to display location-based metrics and patterns.
 widget_type: geomap
 aliases:
 - /graphing/widgets/geomap/
@@ -18,7 +19,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
 - View user sessions filtered by employee.
 - Monitor performance metrics like load time, core web vitals, and percent of views with errors.
 
-{{< img src="/dashboards/widgets/geomap/geomap-points.png" alt="Geomap visualization with the points overlay" >}}
+{{< img src="/dashboards/widgets/geomap/geomap_zoom_region.mp4" alt="Zooming to a region in the Geomap widget" video=true >}}
 
 ## Setup
 
@@ -33,7 +34,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   **Note**: Support for data sources varies based on the visualization layer you select.
   {{< tabs >}}
   {{% tab "Regions" %}}
-  |  Data source    | Notes    | 
+  |  Data source    | Notes    |
   | --------------  | -------- |
   |Log Events   | The group by tag must include a country ISO Code (alpha-2 ISO format) or a country subdivision ISO Code (ISO-3166-2 format). You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query.|
   |Metric   | The group by tag must include a country ISO Code (alpha-2 ISO format) or a country subdivision ISO Code (ISO-3166-2 format). You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying documentation][5] to configure a metric query.|
@@ -52,10 +53,12 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
 
   {{% tab "Points" %}}
   |  Data source | Notes |
-  | -----------  | ----- | 
+  | -----------  | ----- |
   |Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query. |
   |RUM   | See the [RUM documentation][4] to configure a RUM query. |
 
+  **Note**: The Points layer shows a maximum of 100,000 events at a time.
+  
   [1]: /logs/log_configuration/processors/#geoip-parser
   [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
@@ -63,7 +66,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   {{% /tab %}}
   {{< /tabs >}}
 
-3. Optional: Configure your view box to specify where you want to focus the map initially.
+3. (Optional) Under **Visual Options**, use the **Set widget default view** dropdown to select where to initially focus the map. Select **Custom** to define a custom region, or search for the name of a country, state, or province.
 
 ### Options
 

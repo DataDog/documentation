@@ -1,4 +1,4 @@
-<div class="alert alert-warning">The rsyslog and syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format. </div>
+<div class="alert alert-danger">The rsyslog and syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format. </div>
 
 The rsyslog and syslog-ng destinations match these log fields to the following Syslog fields:
 
@@ -20,6 +20,8 @@ The following destination settings are optional:
     - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
     - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 1. Enter the number of seconds to wait before sending TCP keepalive probes on an idle connection.
-1. Optionally, toggle the switch to enable **Buffering Options**. If left disabled, the maximum size for buffering is 500 events. If enabled:
-	1. Select the buffer type you want to set (**Memory** or **Disk**).
-	1. Enter the buffer size and select the unit.
+1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
+	- If left disabled, the maximum size for buffering is 500 events.
+	- If enabled:
+		1. Select the buffer type you want to set (**Memory** or **Disk**).
+		1. Enter the buffer size and select the unit.

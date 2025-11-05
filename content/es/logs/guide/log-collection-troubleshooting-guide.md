@@ -223,6 +223,11 @@ Cuando recopiles logs de Journald, asegúrate de que el usuario del Datadog Agen
 
 **Nota**: Journald envía una carga útil vacía si los permisos del archivo son incorrectos. Por lo tanto, no es posible lanzar o enviar un mensaje de error explícito en este caso.
 
+## Limitación de lotes en Kinesis Firehose
+
+Datadog tiene un límite de admisión de 65.536 eventos por lote y recomienda establecer el tamaño del búfer de Kinesis en 2 MiB. Si tu sistema supera este límite, es posible que se omitan algunos logs. Para reducir el número de eventos por lote, considera la posibilidad de reducir el tamaño del búfer.
+
+
 ## Problemas de configuración
 
 Estos son algunos de los problemas de configuración frecuentes que deberías controlar más de dos veces al configurar el `datadog-agent`:
@@ -263,7 +268,7 @@ Si no aparecen en Live Tail,, es posible que se hayan perdido, si su marca de ti
 Los logs de más de 1 MB se truncan. Puedes consultar qué `service` y `source` se ven afectados con las métricas `datadog.estimated_usage.logs.truncated_count` y `datadog.estimated_usage.logs.truncated_bytes`.
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

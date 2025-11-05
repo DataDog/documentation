@@ -1,5 +1,6 @@
 ---
 title: Correlate RUM and Profiling
+description: "Use browser profiling with RUM to understand JavaScript execution and rendering performance issues affecting user experience."
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
@@ -26,9 +27,12 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
 ## Usage
 
 ### Setup RUM
+
+<div class="alert alert-info">Browser SDK version 6.12 or later is required.</div>
+
 1. Set up [RUM Browser Monitoring][2].
 
-2. Initialize the RUM SDK and configure `profilingSampleRate`, which sets the percentage of page navigations that are profiled.
+2. Initialize the RUM SDK and configure `profilingSampleRate`, which sets the percentage of sessions that are profiled.
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -39,7 +43,7 @@ To get started, ensure browser profiling is enabled in your RUM SDK configuratio
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      profilingSampleRate: 100,
+      profilingSampleRate: 25,
       trackLongTasks: true,
       trackUserInteractions: true,
     })
@@ -114,5 +118,5 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
-[2]: /real_user_monitoring/browser/setup/
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API

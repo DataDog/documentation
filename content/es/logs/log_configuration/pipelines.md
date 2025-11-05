@@ -55,7 +55,7 @@ El preprocesamiento de logs JSON viene con una configuración predeterminada que
 2. Cambia la asignación por defecto en función del atributo reservado:
 
 {{< tabs >}}
-{{% tab "Source" %}}
+{{% tab "Source (Origen)" %}}
 
 #### Atributo de origen
 
@@ -78,7 +78,7 @@ El uso de Datadog Agent o del formato RFC5424 configura automáticamente el valo
 * `syslog.hostname`
 
 {{% /tab %}}
-{{% tab "Date" %}}
+{{% tab "Date (Fecha)" %}}
 
 #### Atributo de fecha
 
@@ -97,14 +97,14 @@ Especifica los atributos alternativos que se utilizarán como origen de la fecha
 
 **Nota**: Datadog rechaza una entrada de log si su fecha oficial es anterior a las 18 horas pasadas.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los formatos de fecha reconocidos son: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (el formato EPOCH en milisegundos)</a> y <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
 
 [1]: /es/logs/log_configuration/processors/#log-date-remapper
 {{% /tab %}}
-{{% tab "Message" %}}
+{{% tab "Message (Mensaje)" %}}
 
 #### Atributo de mensaje
 
@@ -117,7 +117,7 @@ Especifica los atributos alternativos que se utilizarán como origen del mensaje
 [2]: /es/logs/explorer/#filters-logs
 [3]: /es/logs/log_configuration/processors/#log-message-remapper
 {{% /tab %}}
-{{% tab "Status" %}}
+{{% tab "Status (Estado)" %}}
 
 #### Atributo de estado
 
@@ -132,7 +132,7 @@ Especifica los atributos alternativos que se utilizarán como origen del estado 
 
 [1]: /es/logs/log_configuration/processors/#log-status-remapper
 {{% /tab %}}
-{{% tab "Service" %}}
+{{% tab "Service (Servicio)" %}}
 
 #### Atributo de servicio
 
@@ -146,7 +146,7 @@ Especifica los atributos alternativos que se utilizarán como origen del servici
 
 [1]: /es/logs/log_configuration/processors/#service-remapper
 {{% /tab %}}
-{{% tab "Trace ID" %}}
+{{% tab "Trace ID (ID de rastreo)" %}}
 
 #### Atributo de ID de rastreo
 
@@ -185,9 +185,8 @@ En forma predeterminada, los rastreadores de Datadog pueden [insertar automátic
     **Nota**: El filtrado del pipeline se aplica antes que cualquier procesador del pipeline. Por esta razón, no se puede filtrar con un atributo que se extrae del propio pipeline.
 
 4. Ponle un nombre a tu pipeline.
-5. (Opcional) Concede acceso de edición a los procesadores en el pipeline. Si asignas un rol a un pipeline, el rol recibe [permisos][12] `logs_write_processor` específicamente asignados a ese pipeline. Los roles con permisos `logs_write_processor` asignados globalmente (por rol de edición), no se pueden seleccionar, ya que tienen acceso a todos los pipelines.
-6. (Opcional) Añade una descripción y etiquetas (tags) al pipeline para indicar su propósito y propiedad. Las etiquetas (tags) de pipeline no afectan a logs, pero pueden utilizarse para filtrar y buscar en la [Page (página) de pipelines][5].
-7. Pulsa **Create** (Crear).
+5. (Opcional) Añade una descripción y etiquetas (tags) al pipeline para indicar su propósito y propiedad. Las etiquetas (tags) de pipeline no afectan a logs, pero pueden utilizarse para filtrar y buscar en la [Page (página) de pipelines][5].
+6. Pulsa **Create** (Crear).
 
 Ejemplo de log transformado por un pipeline:
 
@@ -213,7 +212,7 @@ Consulta el siguiente ejemplo de logs de ELB:
 
 ### Biblioteca de pipelines de integración
 
-Para ver la lista completa de pipelines de integración que ofrece Datadog, consulta la [biblioteca de pipelines de integración][7]. La biblioteca de pipelines muestra cómo Datadog procesa diferentes formatos de logs por defecto.
+Para ver la lista completa de pipelines de integración que ofrece Datadog, consulta la [biblioteca de pipelines de integración][7]. La librería de pipelines muestra cómo Datadog procesa diferentes formatos de logs por defecto.
 
 {{< img src="logs/processing/pipelines/integration-pipeline-library.mp4" alt="Biblioteca de pipelines de integración" video=true style="width:80%;">}}
 
@@ -221,7 +220,7 @@ Para utilizar un pipeline de integración, Datadog recomienda instalar la integr
 
 También es posible copiar un pipeline de integración utilizando el botón de clonación.
 
-{{< img src="logs/processing/pipelines/clone-pipeline-from-library.mp4" alt="Clonación de pipelines a partir de la biblioteca" video=true style="width:80%;">}}
+{{< img src="logs/processing/pipelines/clone-pipeline-from-library.mp4" alt="Clonación de pipelines a partir de la librería" video=true style="width:80%;">}}
 
 ## Añadir un procesador o un pipeline anidado
 
@@ -231,7 +230,7 @@ También es posible copiar un pipeline de integración utilizando el botón de c
 
 ### Procesadores
 
-Un procesador se ejecuta en un pipeline para completar una acción de estructuración de datos. Consulta la [sección Procesadores][3] para aprender a añadir y configurar un procesador por tipo de procesador, en la aplicación o con la API. 
+Un procesador se ejecuta en un pipeline para completar una acción de estructuración de datos. Consulta la [sección Procesadores][3] para aprender a añadir y configurar un procesador por tipo de procesador, en la aplicación o con la API.
 
 Consulta [Análisis de fechas][10] para obtener más información sobre el análisis de una fecha personalizada, sobre un formato de hora y sobre el parámetro `timezone`, necesario si tus marcas de tiempo no están en el formato UTC.
 

@@ -1,5 +1,6 @@
 ---
 title: Datadog Audit Trail
+description: Monitor Datadog user activity, API requests, and resource changes with comprehensive audit logging for compliance, security, and governance.
 aliases:
     - /account_management/audit_logs/
 further_reading:
@@ -11,7 +12,7 @@ further_reading:
   text: "Learn about organization settings"
 - link: "/data_security/pci_compliance/"
   tag: "Documentation"
-  text: "Set up a PCI-compliant Datadog organization"
+  text: "PCI DSS Compliance"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
@@ -44,7 +45,7 @@ For security admins or InfoSec teams, audit trail events help with compliance ch
 
 You can also analyze Audit Trail events with [Cloud SIEM][15] to detect threats and generate security signals. See [Getting Started with Cloud SIEM][16] for more information.
 
-**Note**: See [PCI DSS Compliance][2] for information on setting up a PCI-compliant Datadog organization.
+**Note**: Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][2].
 
 ## Setup
 
@@ -156,7 +157,7 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 ## Filter audit events based on Reference Tables
 
-<div class="alert alert-warning">Reference Tables containing over 1,000,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
+<div class="alert alert-danger">Reference Tables containing over 1,000,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
 
 Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
 

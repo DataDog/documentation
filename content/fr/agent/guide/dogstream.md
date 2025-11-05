@@ -5,7 +5,7 @@ private: true
 title: Dogstream
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Dogstream est une fonctionnalité de l'Agent 5 dorénavant obsolète. Elle ne fait plus l'objet d'aucune mise à jour.
 <br>
 L'Agent v6 est disponible ! <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">Passez à la nouvelle version</a> pour bénéficier des nouvelles fonctionnalités.
@@ -60,7 +60,7 @@ Si votre parser de logs personnalisé ne fonctionne pas, vérifiez tout d'abord 
 
 * Si tout fonctionne comme prévu, vous devriez voir `dogstream: parsing {nom du fichier} with {nom de la fonction} (requested {texte option de configuration})`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Pour vérifier que les dogstreams fonctionnent, ajoutez une ligne (ne modifiez pas une ligne existante) à n'importe quel fichier de log surveillé par l'Agent. L'Agent effectue uniquement un <a href="/glossary/#tail">suivi</a> de la fin de chaque fichier de log et ne remarque donc pas les modifications effectuées ailleurs dans le fichier.
 </div>
 

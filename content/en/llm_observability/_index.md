@@ -21,7 +21,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
   tag: "Blog"
   text: "Identify common security risks in MCP servers"
+- link: "https://www.datadoghq.com/blog/detect-abuse-ai-infrastructure/"
+  tag: "Blog"
+  text: "Abusing AI infrastructure: How mismanaged credentials and resources expose LLM applications"
 ---
+
+{{< learning-center-callout header="Try Getting Started with LLM Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
+  Learn how to monitor your LLM application's performance, costs, traces, token usage, and errors to identify and resolve issues.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -100,5 +107,5 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
-[9]: /llm_observability/evaluations/ootb_evaluations
+[9]: /llm_observability/evaluations/managed_evaluations
 [10]: /llm_observability/monitoring/cluster_map

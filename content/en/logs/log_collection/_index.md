@@ -109,7 +109,7 @@ Datadog integrations and log collection are tied together. You can use an integr
 
 ## Reduce data transfer fees
 
-Use Datadog's [Cloud Network Monitoring][7] to identify your organization's highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog’s [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
+Use Datadog's [Cloud Network Monitoring][7] to identify your organization's highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog's [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
 
 For more information, see [How to send logs to Datadog while reducing data transfer fees][9].
 
@@ -122,8 +122,17 @@ For more information, see [How to send logs to Datadog while reducing data trans
 [7]: /network_monitoring/cloud_network_monitoring/
 [8]: /cloud_cost_management/
 [9]: /logs/guide/reduce_data_transfer_fees/
- 
- 
+
+
+{{% /tab %}}
+
+{{% tab "Agent Check" %}}
+
+If you are developing a custom Agent integration, you can submit logs programmatically from within your Agent check using the `send_log` method. This allows your custom integration to emit logs alongside metrics, events, and service checks.
+
+To learn how to submit logs from your custom Agent check, see [Agent Integration Log Collection][15].
+
+[15]: /logs/log_collection/agent_checks/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -142,7 +151,6 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | Site | Type        | Endpoint                                                                  | Port         | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1].                                                    |
-| US   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Used by the Agent to send logs over HTTPS to an org with PCI DSS compliance enabled. See [PCI DSS compliance for Log Management][3] for more information.                 |
 | US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].                                                             |
 | US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
 | US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                                                                             |
@@ -154,7 +162,6 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
-[3]: /data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
@@ -337,7 +344,7 @@ The TCP endpoint is not supported for this site.
 
 **Notes**:
 
-* The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 256kB (256000 bytes).
+* The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 900kB (900000 bytes).
 * A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
 * A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 20 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * Log events can be submitted with a [timestamp][14] that is up to 18h in the past.

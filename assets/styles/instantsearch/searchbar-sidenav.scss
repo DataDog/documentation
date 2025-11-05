@@ -3,7 +3,13 @@
 
     #searchbox {
         z-index: 2;
-        max-width: 250px;
+        max-width: 280px;
+    }
+
+    .ais-SearchBox {
+        &::after {
+            right: 10px;
+        }
     }
 
     .hits-container {

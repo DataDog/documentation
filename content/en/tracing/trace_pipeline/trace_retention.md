@@ -57,7 +57,7 @@ Enabled toggle
 
 The `Spans Indexed` column for each retention filter is powered by the `datadog.estimated_usage.apm.indexed_spans` metric, which you can use to track your indexed span usage. For more information, read [Usage Metrics][2], or explore the [out-of-the-box usage dashboard][4] available in your account.
 
-<div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). To control ingestion, use dedicated <a href="/tracing/trace_pipeline/ingestion_controls/">ingestion controls</a>.</div>
+<div class="alert alert-info">Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). To control ingestion, use dedicated <a href="/tracing/trace_pipeline/ingestion_controls/">ingestion controls</a>.</div>
 
 
 ### Retention filter types
@@ -73,11 +73,13 @@ There are two types of retention filters:
 | **What is indexed** | Only spans targeted by the query | All spans belonging to traces that contain spans matching the query |
 | **Where it is queryable** | Span Explorer | Span Explorer and Trace Queries |
 
+**Note**: Indirectly indexed spans retained by trace-level retention filters (that is, spans that don't match the query directly but belong to traces that do) are not evaluated by [trace analytics monitors][19].
+
 ### Default retention filters
 
 The following retention filters are enabled by default: 
 - The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query are configurable. For example, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
-- The `App and API Protection Monitoring Default` retention filter is enabled if you are using [App and API Protection][16]. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
+- The `App and API Protection Default` retention filter is enabled if you are using [App and API Protection][16]. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
 - The `Synthetics Default` retention filter is enabled if you are using Synthetic Monitoring. It ensures that traces generated from synthetic API and browser tests remain available by default. See [Synthetic APM][15] for more information, including how to correlate traces with synthetic tests.
 - The `Dynamic Instrumentation Default` retention filter is enabled if you are using [Dynamic Instrumentation][17]. It ensures spans created dynamically with Dynamic instrumentation remain available in the long term by default.
 
@@ -138,7 +140,7 @@ To create a retention filter:
 1. Set a name for the filter.
 1. Click **Add Filter** to save the filter.
 
-<div class="alert alert-danger">Configuring a trace rate can significantly increase your indexed spans usage.</div>
+<div class="alert alert-warning">Configuring a trace rate can significantly increase your indexed spans usage.</div>
 
 For example, if you configure a retention filter to index spans from `service:my-service`:
 - Configuring a span rate of `100%` ensures that all spans matching `service:my-service` are indexed.
@@ -189,3 +191,4 @@ Spans indexed by the intelligent retention filter are **excluded** from APM trac
 [16]: /security/application_security/
 [17]: /dynamic_instrumentation/
 [18]: https://app.datadoghq.com/apm/traces/retention-filters
+[19]: /monitors/types/apm/?tab=traceanalytics

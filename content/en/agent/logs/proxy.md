@@ -1,5 +1,6 @@
 ---
 title: TCP Agent proxy for logs
+description: Configure the Datadog Agent to send logs through TCP and SOCKS5 proxies, with detailed HAProxy and NGINX configuration examples.
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -13,7 +14,7 @@ further_reading:
 ---
 
 {{% site-region region="us3,eu,us5,gov,ap1,ap2" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     TCP is not available for the {{< region-param key="dd_site_name" >}} site. Contact <a href="/help/">support</a> for more information.
 </div>
 {{% /site-region %}}

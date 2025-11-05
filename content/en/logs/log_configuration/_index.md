@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/data_security/pci_compliance/"
   tag: "Documentation"
-  text: "Set up a PCI-compliant Datadog organization"
+  text: "PCI DSS Compliance"
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
   text: Learn more about Logging without Limits*
@@ -24,8 +24,6 @@ further_reading:
 ## Overview
 
 Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the log configuration page at [**Logs > Pipelines**][1].
-
-**Note**: See [PCI DSS Compliance][2] for information on setting up a PCI-compliant Datadog organization.
 
 ## Configuration options
 

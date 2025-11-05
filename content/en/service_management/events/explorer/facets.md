@@ -18,7 +18,7 @@ A facet displays the distinct members of an attribute or a tag and provides basi
 
 To add a facet, use the **+ Add** in the left side panel.
 
-After you add the facet, the value of this attribute is stored for all new views, and you can use it in the search bar and facet side panels. You can also use it to group by in event monitors and graph widgets.
+After you add the facet, the value of this attribute is stored for all new views, and you can use it in facet side panels. You can also use it to group by in [pattern-based correlations][1], event monitors, and graph widgets.
 
 ### Reserved attributes
 **Host**, **Service** and **Status** are part of the core Event Attributes. You can not create new facet on service, host and status tag. 
@@ -28,3 +28,5 @@ For Datadog monitor events, the first event tag in alphabetic order is used to s
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /service_management/events/correlation/patterns/

@@ -39,7 +39,7 @@ This utility is available on the software repositories of most Linux distributio
 - The `pkgconf` package is available for [Arch][21]- and [Alpine][22]-based Linux
 - The `pkgconf-pkg-config` package is available for [Fedora][23]- and [Red-Hat][24]-based Linux
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda. Additionally, [Single Step APM Instrumentation][25] cannot be used to set up the Ruby Profiler.
 
 ## Installation
 
@@ -129,7 +129,7 @@ You can configure the profiler using the following environment variables:
 | `DD_VERSION`                                  | String  | The [version][10] of your service.                                                                                                      |
 | `DD_TAGS`                                     | String  | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.          |
 
-Alternatively, you can set profiler parameters in code with these functions, inside a `Datadog.configure` block:
+Alternatively, you can set profiler parameters in code with these functions, inside a `Datadog.configure` block. Note that parameters provided in code take precedence over those provided as environment variables.
 
 | Environment variable                                  | Type    | Description                                                                                                                             |
 | ----------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -173,3 +173,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [22]: https://pkgs.alpinelinux.org/packages?name=pkgconf
 [23]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config
 [24]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config
+[25]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/

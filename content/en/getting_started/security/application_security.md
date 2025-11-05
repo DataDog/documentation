@@ -1,5 +1,6 @@
 ---
 title: Getting Started with App and API Protection
+description: Set up Datadog App and API Protection to secure web applications and APIs. Enable threat detection, code security, and vulnerability scanning for production.
 aliases:
 - /security/security_monitoring/getting_started/
 - /getting_started/application_security

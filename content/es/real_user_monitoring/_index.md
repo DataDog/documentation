@@ -64,8 +64,8 @@ title: RUM y Session Replay
 ---
 
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
-Descubre cómo crear acciones de usuarios personalizadas que se adapten a necesidades empresariales específicas, lo que permite un seguimiento preciso del comportamiento de los usuarios.
+{{< learning-center-callout header="Únete a una sesión de capacitación web" hide_image="true" btn_title="Inscríbete" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
+  Descubre cómo crear acciones de usuarios personalizadas que se adapten a necesidades empresariales específicas, lo que permite un seguimiento preciso del comportamiento de los usuarios.
 {{< /learning-center-callout >}}
 
 ## ¿Qué es Real User Monitoring?
@@ -149,7 +149,7 @@ Selecciona una aplicación en la barra de navegación superior o sigue las instr
 
 La página [Resumen de monitorización del rendimiento de RUM][1] proporciona información relevante y procesable para aplicaciones web y móviles. Obtén una experiencia personalizada para cada plataforma que te ayudará a:
 
-- **Centrarse en datos clave** por plataforma, como la latencia de la interfaz de usuario para web o móvil.
+- **Centrarte en datos clave** por plataforma, como la latencia de la interfaz de usuario para fallos web o móviles.
 - **Monitorizar el estado de las aplicaciones** a través de KPIs conocidos, como Core Web Vitals para aplicaciones web o la tasa de cuelgues para iOS, para evaluar la fiabilidad de las aplicaciones.
 - **Analizar en detalle las investigaciones directamente** desde los widgets interactivos sin salir de la página
 

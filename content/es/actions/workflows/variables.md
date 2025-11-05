@@ -15,10 +15,6 @@ further_reading:
 title: Variables y parámetros
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Las siguientes variables y parámetros están disponibles en los flujos de trabajo:
 - [Variables de contexto](#context-variables): las variables de contexto son una amplia categoría de variables inmutables que almacenan información contextual sobre un flujo de trabajo, o contienen datos que se pasan al flujo de trabajo por un evento desencadenante o por un paso en el flujo de trabajo.
 - [Parámetros de entrada](#input-parameters): los parámetros de entrada son pares clave-valor inmutables que puedes utilizar para pasar datos a un flujo de trabajo en tiempo de ejecución.

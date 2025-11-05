@@ -28,7 +28,7 @@ if (Datadog.isInitialized()) {
 ```
 
 ## Depuración
-Al escribir tu aplicación, puedes habilitar los logs de desarrollo llamando al método `setVerbosity`. Todos los mensajes internos en la biblioteca con una prioridad igual o superior al nivel proporcionado se registran en Logcat de Android o en la consola del depurador en Xcode:
+Al escribir tu aplicación, puedes habilitar los logs de desarrollo llamando al método `setVerbosity`. Todos los mensajes internos en la librería con una prioridad igual o superior al nivel proporcionado se registran en Logcat de Android o en la consola del depurador en Xcode:
 
 ```kotlin
 Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
@@ -54,7 +54,7 @@ Para actualizar el consentimiento de rastreo después de inicializar el SDK, lla
 
 ### Enlace binario de iOS
 
-#### Faltan los símbolos `PLCrashReporter` 
+#### Faltan los símbolos `PLCrashReporter`
 
 Si durante el paso de vinculación se produce un error debido a que faltan símbolos `PLCrashReporter` en las rutas de búsqueda del enlazador, como el siguiente:
 
@@ -92,7 +92,7 @@ targets.withType(KotlinNativeTarget::class.java) {
 
 ```
 
-#### Faltan los símbolos `swiftCompatibility` 
+#### Faltan los símbolos `swiftCompatibility`
 
 Si durante el paso de vinculación se produce un error debido a que faltan símbolos `swiftCompatibility` en las rutas de búsqueda del enlazador, como el siguiente:
 

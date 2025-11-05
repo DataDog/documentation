@@ -12,31 +12,33 @@ further_reading:
 title: DogStatsD en socket de dominio Unix
 ---
 
-A partir de la versión 6.0, el Agent puede consumir métricas con un socket de dominio Unix (UDS) como alternativa al transporte UDP.
+A partir de la versión 6.0, el Agent puede consumir métricas con un socket de dominio Unix (UDS) como alternativa al transporte mediante el protocolo de datagramas de usuario (UDP).
 
-Mientras que UDP funciona muy bien en `localhost`, configurarlo en entornos contenedorizados puede resultar un desafío. Los sockets de dominio Unix te permiten establecer la conexión con un archivo socket, independientemente de la IP del contenedor del Datadog Agent. También incluye las siguientes ventajas:
+Mientras que el UDP funciona muy bien en `localhost`, configurarlo en entornos contenedorizados puede resultar un desafío. Los sockets de dominio Unix te permiten establecer la conexión con un archivo de socket, independientemente de la IP del contenedor del Datadog Agent. También incluye las siguientes ventajas:
 
 - Evitar la pila de red supone una mejora significativa del rendimiento en caso de tráfico elevado.
-- Mientras que UDP no incluye la gestión de errores, UDS permite al Agent detectar paquetes perdidos y errores de conexión, mientras permite un uso no bloqueante.
+- Mientras que el UDP no incluye la gestión de errores, el UDS permite al Agent detectar paquetes perdidos y errores de conexión, mientras permite un uso no bloqueante.
 - DogStatsD puede detectar el contenedor del que proceden las métricas y etiquetarlas en consecuencia.
 
 ## Cómo funciona
 
-En lugar de utilizar un par `IP:port` para establecer conexiones, los sockets de dominio Unix utilizan un archivo de socket de parámetro. Una vez abierta la conexión, los datos se transmiten en el mismo [formato de datagrama][1] que para el transporte UDP. Cuando se reinicia el Agent, el socket existente se elimina y se sustituye por uno nuevo. Las bibliotecas cliente detectan este cambio y se conectan al nuevo socket sin problemas.
+En lugar de utilizar un par `IP:port` para establecer conexiones, los sockets de dominio Unix utilizan un archivo de socket de parámetro. Una vez abierta la conexión, los datos se transmiten en el mismo [formato de datagrama][1] que para el transporte mediante el UDP. Cuando se reinicia el Agent, el socket existente se elimina y se sustituye por uno nuevo. Las bibliotecas cliente detectan este cambio y se conectan al nuevo socket sin problemas.
 
-**Notas**
+**Notas:**
 
-* Por diseño, el tráfico UDS al host es local, lo que significa que el Datadog Agent debe ejecutarse en cada host desde el que envías métricas.
-* UDS no es compatible con Windows.
+* Por diseño, el tráfico por UDS al host es local, lo que significa que el Datadog Agent debe ejecutarse en cada host desde el que envías métricas.
+* El UDS no es compatible con Windows.
 
 ## Configuración
 
 Para configurar DogStatsD con el socket de dominio Unix, habilita el servidor DogStatsD utilizando el parámetro `dogstatsd_socket`. A continuación, configura el [cliente de DogStatsD](#dogstatsd-client-configuration) en tu código.
 
-Para activar el UDS DogStatsD del Agent:
+Para habilitar el UDS del DogStatsD del Agent:
 
 {{< tabs >}}
 {{% tab "Host" %}}
+
+<div class="alert alert-warning">El script de instalación del Agent crea automáticamente el archivo de socket con los permisos correctos, y <code>use_dogstatsd: true</code> y <code>dogstatsd_socket: "/var/run/datadog/dsd.socket"</code> están configurados por defecto.</div>
 
 1. Crea un archivo de socket para que DogStatsD lo utilice como socket de escucha. Por ejemplo:
    ```shell
@@ -55,10 +57,9 @@ Para activar el UDS DogStatsD del Agent:
       ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
       ## Set to a valid and existing filesystem path to enable.
       #
-      dogstatsd_socket: '/var/run/datadog/dsd.socket'
+      dogstatsd_socket: "/var/run/datadog/dsd.socket"
       ```
 1. [Reinicia tu Agent][2].
-
 
 [1]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /es/agent/configuration/agent-commands/
@@ -73,13 +74,56 @@ Para activar el UDS DogStatsD del Agent:
     - Iniciar tus contenedores de aplicaciones con `-v /var/run/datadog:/var/run/datadog:ro`
 
 {{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. En la definición de la tarea, establece la ruta del socket con la variable de entorno `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` en la definición de contenedor del Agent (ejemplo: `/var/run/datadog/dsd.socket`).
+
+2. Haz que el archivo del socket sea accesible para los contenedores de aplicaciones montando un volumen compartido en ambos lados. Esto hace posible que los contenedores de aplicaciones accedan al socket desde el contenedor del Datadog Agent.
+
+    1. Monta la carpeta vacía en la sección `volumes` de la definición de la tarea:
+
+        ```json
+        "volumes": [
+            {
+                "name": "dsdsocket",
+                "host": {}
+            }
+        ],
+        ```
+
+    1. En la sección `mountPoints` de tu contenedor del Agent, monta la carpeta del socket:
+
+        ```json
+        "mountPoints": [
+            {
+            "containerPath": "/var/run/datadog",
+            "sourceVolume": "dsdsocket"
+            }
+        ],
+        ```
+
+    1. En la sección `mountPoints` de tus contenedores de aplicación, expone la misma carpeta en tus contenedores de aplicación:
+
+        <div class="alert alert-info">Elimina <code>"readOnly": true</code> si los contenedores de tu aplicación necesitan acceso de escritura al socket.</div> 
+
+        ```json
+        "mountPoints": [
+            {
+            "containerPath": "/var/run/datadog",
+            "sourceVolume": "dsdsocket",
+            "readOnly": true
+            }
+        ],
+        ```
+
+{{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-1. Configura la ruta del socket con la variable de entorno`DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` en el contenedor del Agent (ejemplo: `/var/run/datadog/dsd.socket`).
+1. Configura la ruta del socket con la variable de entorno `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` en tu contenedor del Agent (ejemplo: `/var/run/datadog/dsd.socket`).
 
 2. Haz que el archivo de socket sea accesible para los contenedores de aplicaciones montando un directorio host en ambos lados (sólo lectura, en tus contenedores de aplicaciones, y lectura-escritura, en el contenedor del Agent). Montar la carpeta principal en lugar del socket individual permite que la comunicación del socket persista durante los reinicios de DogStatsD:
 
-    - Monta la carpeta de socket en tu contenedor del `datadog-agent` 
+    1. Monta la carpeta del socket en tu contenedor del `datadog-agent`:
 
         ```yaml
         volumeMounts:
@@ -92,7 +136,9 @@ Para activar el UDS DogStatsD del Agent:
               name: dsdsocket
         ```
 
-    - Expón la misma carpeta en tus contenedores de aplicaciones:
+    1. Expón la misma carpeta en tus contenedores de aplicaciones:
+
+       <div class="alert alert-info">Elimina <code>"readOnly": true</code> si los contenedores de tu aplicación necesitan acceso de escritura al socket.</div>
 
         ```yaml
         volumeMounts:
@@ -106,8 +152,6 @@ Para activar el UDS DogStatsD del Agent:
               name: dsdsocket
         ```
 
-      **Nota**: Elimina `readOnly: true` si tus contenedores de aplicaciones necesitan acceso de escritura al socket.
-
 {{% /tab %}}
 {{% tab "EKS Fargate" %}}
 
@@ -115,7 +159,7 @@ Para activar el UDS DogStatsD del Agent:
 
 2. Haz que el archivo de socket sea accesible para los contenedores de aplicaciones montando un directorio host vacío en ambos lados (sólo lectura, en tus contenedores de aplicaciones, y lectura-escritura, en el contenedor del Agent). Montar la carpeta principal en lugar del socket individual permite que la comunicación del socket persista durante los reinicios de DogStatsD:
 
-    - Monta la carpeta vacía en las especificaciones de tu pod:
+    1. Monta la carpeta vacía en las especificaciones de tu pod:
 
         ```yaml
         volumes:
@@ -123,7 +167,7 @@ Para activar el UDS DogStatsD del Agent:
               name: dsdsocket
         ```
 
-    - Monta la carpeta de socket en tu contenedor del `datadog-agent`:
+    1. Monta la carpeta del socket en tu contenedor del `datadog-agent`:
 
         ```yaml
         volumeMounts:
@@ -131,7 +175,9 @@ Para activar el UDS DogStatsD del Agent:
               mountPath: /var/run/datadog
         ```
 
-    - Expón la misma carpeta en tus contenedores de aplicaciones:
+    1. Expón la misma carpeta en tus contenedores de aplicaciones:
+
+       <div class="alert alert-info">Elimina <code>"readOnly": true</code> si los contenedores de tu aplicación necesitan acceso de escritura al socket.</div>
 
         ```yaml
         volumeMounts:
@@ -140,10 +186,7 @@ Para activar el UDS DogStatsD del Agent:
               readOnly: true
         ```
 
-      **Nota**: Elimina `readOnly: true` si tus contenedores de aplicaciones necesitan acceso de escritura al socket.
-
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab %}}{{< /tabs >}}
 
 ### Tests con netcat
 
@@ -155,7 +198,7 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 
 ### Detección del origen
 
-La detección del origen permite a DogStatsD detectar de dónde proceden las métricas de contenedor y etiquetar métricas automáticamente. Cuando este modo está habilitado, todas las métricas recibidas por UDS se etiquetan con las mismas etiquetas de contenedor que las métricas de Autodiscovery.
+La detección del origen permite a DogStatsD detectar de dónde proceden las métricas de contenedor y etiquetar métricas automáticamente. Cuando este modo está habilitado, todas las métricas recibidas por el UDS se etiquetan con las mismas etiquetas de contenedor que las métricas de Autodiscovery.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -171,7 +214,7 @@ La detección del origen permite a DogStatsD detectar de dónde proceden las mé
     dogstatsd_origin_detection: true
     ```
 
-2. Opcional - Para configurar la [cardinalidad de etiquetas][2] en las métricas recopiladas mediante la detección del origen, configura el parámetro `dogstatsd_tag_cardinality` como `low` (por defecto), `orchestrator` o `high`:
+2. Opcional - Para configurar la [cardinalidad de etiquetas (tags)][2] en las métricas recopiladas mediante la detección del origen, configura el parámetro `dogstatsd_tag_cardinality` como `low` (por defecto), `orchestrator` o `high`:
 
     ```yaml
     ## @param dogstatsd_tag_cardinality - string - optional - default: low
@@ -200,15 +243,44 @@ La detección del origen permite a DogStatsD detectar de dónde proceden las mé
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-1. Configura la variable de entorno `DD_DogStatsD_ORIGIN_DETECTION=true` para el contenedor del Agent.
+1. Configura la variable de entorno `DD_DOGSTATSD_ORIGIN_DETECTION=true` para el contenedor del Agent.
 
-2. Opcional - Para configurar la [cardinalidad de etiquetas][2] en las métricas recopiladas mediante la detección del origen, configura la variable de entorno `DD_DOGSTATSD_TAG_CARDINALITY` como `low` (por defecto): `orchestrator` o `high`:
+2. Opcional - Para configurar la [cardinalidad de etiquetas][1] en las métricas recopiladas mediante la detección del origen, configura la variable de entorno `DD_DOGSTATSD_TAG_CARDINALITY` como `low` (por defecto): `orchestrator` o `high`:
 
-Cuando se ejecuta dentro de un contenedor, DogStatsD necesita ejecutarse en el espacio de nombres del PID del host para que la detección del origen funcione de forma fiable. Habilita esta opción en Docker con el marcador `--pid=host`. Esta función es compatible con ECS con el parámetro `"pidMode": "host"` en la definición de tarea del contenedor. Esta función no es compatible con Fargate. Para obtener más información, consulta la documentación de AWS sobre el [modo de PID][2].
+Cuando se ejecuta dentro de un contenedor, DogStatsD necesita ejecutarse en el espacio de nombres del PID del host para que la detección del origen funcione de forma fiable. Habilita esta opción en Docker con el marcador `--pid=host` flag. This is supported by ECS with the parameter `"pidMode": "host"` en la definición de tarea del contenedor. Esta función no es compatible con Fargate. Para obtener más información, consulta la documentación de AWS sobre el [modo de PID][2].
 
 
 [1]: /es/getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+1. En la definición de la tarea, establece la variable de entorno `DD_DOGSTATSD_ORIGIN_DETECTION` en true para la definición del contenedor del Agent:
+
+    ```json
+    {
+        "name": "DD_DOGSTATSD_ORIGIN_DETECTION",
+        "value": "true"
+    },
+    ```
+
+2. Añade el [parámetro PidMode][2] en la definición de la tarea y establécelo en `task` de la siguiente manera:
+
+    ```json
+    "pidMode": "task"
+    ```
+
+3. Opcional - Para configurar la [cardinalidad de etiquetas][1] en las métricas recopiladas mediante la detección del origen, configura la variable de entorno `DD_DOGSTATSD_TAG_CARDINALITY` como `low` (por defecto): `orchestrator` o `high`:
+
+    ```json
+    {
+        "name": "DD_DOGSTATSD_TAG_CARDINALITY",
+        "value": "low"
+    },
+    ```
+
+[1]: /es/getting_started/tagging/assigning_tags/#environment-variables
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -231,7 +303,7 @@ Cuando se ejecuta dentro de un contenedor, DogStatsD necesita ejecutarse en el e
         hostPID: true
     ```
 
-3. Opcional - Para configurar la [cardinalidad de etiquetas][2] en las métricas recopiladas mediante la detección del origen, configura la variable de entorno `DD_DOGSTATSD_TAG_CARDINALITY` como `low` (por defecto): `orchestrator` o `high`:
+3. Opcional - Para configurar la [cardinalidad de etiquetas][1] en las métricas recopiladas mediante la detección del origen, configura la variable de entorno `DD_DOGSTATSD_TAG_CARDINALITY` como `low` (por defecto): `orchestrator` o `high`:
 
     ```yaml
     # (...)
@@ -264,7 +336,7 @@ Cuando se ejecuta dentro de un contenedor, DogStatsD necesita ejecutarse en el e
         shareProcessNamespace: true
     ```
 
-3. Opcional - Para configurar la [cardinalidad de etiquetas][2] en las métricas recopiladas mediante la detección del origen, configura la variable de entorno `DD_DOGSTATSD_TAG_CARDINALITY` como `low` (por defecto): `orchestrator` o `high`:
+3. Opcional - Para configurar la [cardinalidad de etiquetas][1] en las métricas recopiladas mediante la detección del origen, configura la variable de entorno `DD_DOGSTATSD_TAG_CARDINALITY` como `low` (por defecto): `orchestrator` o `high`:
 
     ```yaml
     # (...)
@@ -275,8 +347,7 @@ Cuando se ejecuta dentro de un contenedor, DogStatsD necesita ejecutarse en el e
     ```
 
 [1]: /es/getting_started/tagging/assigning_tags/#environment-variables
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab %}}{{< /tabs >}}
 
 **Nota:** Las etiquetas `container_id`, `container_name` y `pod_name` no se añaden por defecto para evitar crear demasiadas [métricas personalizadas][2].
 
@@ -284,7 +355,7 @@ Cuando se ejecuta dentro de un contenedor, DogStatsD necesita ejecutarse en el e
 
 ### Bibliotecas cliente
 
-Las siguientes bibliotecas cliente oficiales de DogStatsD admiten de forma nativa el tráfico UDS. Consulta la documentación de las bibliotecas para saber cómo habilitar el tráfico UDS. **Nota**: Al igual que con UDP, se recomienda habilitar el almacenamiento en buffer del lado del cliente para mejorar el rendimiento durante el tráfico pesado:
+Las siguientes bibliotecas cliente oficiales de DogStatsD admiten de forma nativa el tráfico por UDS. Consulta la documentación de las bibliotecas para saber cómo habilitar el tráfico mediante el UDS. **Nota**: Al igual que con UDP, se recomienda habilitar el almacenamiento en buffer del lado del cliente para mejorar el rendimiento durante el tráfico pesado:
 
 | Lenguaje | Biblioteca                              |
 | -------- | ------------------------------------ |
@@ -297,7 +368,7 @@ Las siguientes bibliotecas cliente oficiales de DogStatsD admiten de forma nativ
 
 ### Proxy socat
 
-Si una aplicación o una biblioteca cliente no admite el tráfico UDS, ejecuta `socat` para escuchar en el puerto UDP `8125` y representar las solicitudes al socket:
+Si una aplicación o una biblioteca cliente no admite el tráfico por UDS, ejecuta `socat` para escuchar en el puerto del UDP `8125` y representar las solicitudes al socket:
 
 ```shell
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
@@ -305,7 +376,7 @@ socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 
 Para obtener directrices sobre la creación de opciones de implementación adicionales, consulta el [wiki de GitHub del Datadog-Agent][9].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

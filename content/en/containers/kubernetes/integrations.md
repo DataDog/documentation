@@ -1,5 +1,6 @@
 ---
 title: Kubernetes and Integrations
+description: Configure monitoring integrations for applications running in Kubernetes using Autodiscovery templates
 aliases:
   - /agent/autodiscovery/integrations
   - /guides/servicediscovery/
@@ -417,7 +418,7 @@ metadata:
   annotations:
     ad.datadoghq.com/postgres.checks: |
       {
-        "postgresql": {
+        "postgres": {
           "instances": [
             {
               "host": "%%host%%",
@@ -450,7 +451,7 @@ kind: Pod
 metadata:
   name: postgres
   annotations:
-    ad.datadoghq.com/postgres.check_names: '["postgresql"]'
+    ad.datadoghq.com/postgres.check_names: '["postgres"]'
     ad.datadoghq.com/postgres.init_configs: '[{}]'
     ad.datadoghq.com/postgres.instances: |
       [
@@ -575,7 +576,7 @@ The following etcd commands create a Postgres integration template with a custom
 
 ```conf
 etcdctl mkdir /datadog/check_configs/postgres
-etcdctl set /datadog/check_configs/postgres/check_names '["postgresql"]'
+etcdctl set /datadog/check_configs/postgres/check_names '["postgres"]'
 etcdctl set /datadog/check_configs/postgres/init_configs '[{}]'
 etcdctl set /datadog/check_configs/postgres/instances '[{"host": "%%host%%","port":"5432","username":"datadog","password":"%%env_PG_PASSWORD%%"}]'
 ```

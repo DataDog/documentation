@@ -79,20 +79,23 @@ En el menú de tres puntos se puede acceder a otras opciones de configuración d
 
 Los notebooks admiten funciones de texto enriquecido de uso común como negrita, cursiva, código en línea y cabeceras. Los notebooks también admite diversos tipos de listas como viñetas, numeradas o de verificación. 
 
-| Función       | Descripción                                                                                                      |
-|---------------|------------------------------------------------------------------------------------------------------------------|
-| **Negrita**      | Para poner un texto en negrita, selecciónalo y pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                 |
-| *Cursiva*     | Para poner un texto en cursiva, selecciónalo y pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.                            |
-| `Inline code` | Para el código en línea, escribe <code>`</code> al principio y al final del texto.                                |
-| Bloques de código    | Inserta un bloque de código escribiendo <code>```</code> y pulsando <kbd>Intro</kbd> o utilizando el menú de comandos de barra. |
-| Comillas        | Inserta un bloque de comillas escribiendo `>` o utilizando el menú de comandos de barra.                                          |
-| Tablas de texto   | Inserta una tabla escribiendo `/table` o utilizando el menú **Añadir celda**.                                                |
+| Función       | Descripción                                                                                                                |
+|---------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Negrita**      | Para poner un texto en negrita, selecciónalo y pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                           |
+| *Cursiva*     | Para poner un texto en cursiva, selecciónalo y pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.                                      |
+| `Inline code` | Para el código en línea, escribe <code>`</code> al principio y al final del texto.                                          |
+| Bloques de código    | Inserta un bloque de código escribiendo <code>```</code> y pulsando <kbd>Intro</kbd> o utilizando el menú de comandos de barra.           |
+| Comillas        | Inserta un bloque de comillas escribiendo `>` o utilizando el menú de comandos de barra.                                                    |
+| Tablas de texto   | Inserta una tabla escribiendo `/table` o utilizando el menú **Añadir celda**.                                                          |
+| Llamadas      | Inserta una llamada escribiendo `/table` o escribiendo `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT` o `!CAUTION` y pulsando <kbd>la barra espaciadora</kbd>.   |
 
 ### Fichas inteligentes
 
 | Función    | Descripción                                                                |
 |------------|----------------------------------------------------------------------------|
 | `@Mention` | Para mencionar a otro usuario, escribe `@` seguido de su nombre o dirección de correo electrónico. |
+| `$TemplateVariable` | Escribe `$` seguido del nombre de tu variable de plantilla existente. |
+| `/date` | Añade una ficha de fecha escribiendo `/date`. Puedes editar la fecha o la hora en la ventana emergente cada vez que hagas clic en la ficha. Haz la prueba `/today` y `/now`. |
 
 ### Comandos de barra
 

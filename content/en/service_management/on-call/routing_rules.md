@@ -37,13 +37,13 @@ When you route Pages to Slack or Microsoft Teams, Datadog sends a notification t
 
 {{< img src="service_management/oncall/page_representation_in_slack.png" alt="A sample Page rendered in Slack." style="width:70%;" >}}
 
-When a Page is acknowledged or resolved in Slack or Microsoft Teams, Datadog updates the original notification in place, without sending additional messages. This keeps responders focused by reducing noise and showing the current Page status directly in the original thread.
+When a Page is acknowledged or resolved in Slack, Datadog updates the original notification in place, without sending additional messages. This keeps responders focused by reducing noise and showing the current Page status directly in the original thread.
 
 ## Routing rule syntax
 
 Routing rules use [Datadog query syntax][3] and support multiple `if/else` conditions. Rules are evaluated from top to bottom, and the final rule must act as a fallback that routes all unmatched alerts to an escalation policy.
 
-<div class="alert alert-warning">Routing rule syntax is case-sensitive. For example, `tags.env:Prod` will not match `tags.env:prod`.</div>
+<div class="alert alert-danger">Routing rule syntax is case-sensitive. For example, `tags.env:Prod` will not match `tags.env:prod`.</div>
 
 **Supported attributes:**
 

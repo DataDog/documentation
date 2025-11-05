@@ -89,7 +89,7 @@ tile:
 
 ## 概要
 
-<div class="alert alert-warning">このページでは、ECS Fargate インテグレーションについて説明します。EKS Fargate については、Datadog の <a href="http://docs.datadoghq.com/integrations/eks_fargate">EKS Fargate インテグレーション</a>に関するドキュメントをご覧ください。
+<div class="alert alert-danger">このページでは、ECS Fargate インテグレーションについて説明します。EKS Fargate については、Datadog の <a href="http://docs.datadoghq.com/integrations/eks_fargate">EKS Fargate インテグレーション</a>に関するドキュメントをご覧ください。
 </div>
 
 ECS Fargate で実行されているすべてのコンテナからメトリクスを取得します。
@@ -859,7 +859,7 @@ CloudFormation のテンプレートと統語法に関する詳細は、[AWS Clo
 
 ### プロセスの収集
 
-<div class="alert alert-warning">Datadog で ECS Fargate プロセスを表示できます。ECS Fargate コンテナとの関係を確認するには、Datadog Agent v7.50.0 以降を使用します。</div>
+<div class="alert alert-danger">Datadog で ECS Fargate プロセスを表示できます。ECS Fargate コンテナとの関係を確認するには、Datadog Agent v7.50.0 以降を使用します。</div>
 
 [Live Processes ページ][41]を使用することで、ECS Fargate のプロセスを Datadog で監視することができます。プロセス収集を有効にするには、タスク定義に [`PidMode` パラメーター][42]を追加し、以下のように `task` に設定します。
 

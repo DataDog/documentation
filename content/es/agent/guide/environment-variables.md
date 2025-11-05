@@ -15,8 +15,8 @@ further_reading:
 title: Variables de entorno del Agent
 ---
 
-<div class="alert alert-warning">
-En el Agent v5, consulta el <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">repositorio GitHub del Docker Agent</a>.
+<div class="alert alert-danger">
+En el Agent v5, consulta el <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">repositorio GitHub del Docker Agent</a>.
 </div>
 
 ## Información general
@@ -25,7 +25,7 @@ En el Agent v6, la mayoría de las opciones de configuración del [archivo de c
 
 ## Recomendaciones
 
-Datadog recomienda utilizar el etiquetado de servicios unificado al asignar etiquetas. Este sistema asocia toda la telemetría de Datadog mediante el uso de tres etiquetas estándar: `env`, `service` y `version`. Para saber cómo configurar tu entorno con el etiquetado unificado, consulta la [documentación sobre el etiquetado de servicios unificado][2].
+Datadog recomienda utilizar el etiquetado de servicios unificado al asignar etiquetas (tags). Este sistema asocia toda la telemetría de Datadog mediante el uso de tres etiquetas estándar: `env`, `service` y `version`. Para saber cómo configurar tu entorno con el etiquetado unificado, consulta la [documentación sobre el etiquetado de servicios unificado][2].
 
 ## Uso general
 
@@ -55,7 +55,10 @@ En general, puedes utilizar las siguientes reglas:
       # DD_CONTAINER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**Nota**: Especificar una opción anidada con una variable de entorno anula _todas_ las opciones anidadas que se hayan definido en la opción "config". La excepción a esta regla es la opción "config" del proxy. Para obtener más información, consulta la [documentación sobre el proxy del Agent][3].
+### Prioridad de definición de la propiedad
+
+- Si una propiedad está definida en el archivo de configuración global (`datadog.yaml`) y también en una variable de entorno, la variable de entorno tiene prioridad.
+- La especificación de una opción anidada con una variable de entorno anula _todas_ las opciones anidadas especificadas bajo la opción de configuración. La excepción a esta regla es la opción de configuración `proxy`. Para ver más detalles, consulta la [documentación del proxy del Agent][3].
 
 ### Excepciones
 
@@ -67,7 +70,7 @@ En general, puedes utilizar las siguientes reglas:
 
       - [Variables de entorno del APM Agent en Docker][5]
       - [trace-agent config/apm.go][6]
-      - Por ejemplo:
+      - ejemplo
 
           ```yaml
              apm_config:
@@ -80,7 +83,7 @@ En general, puedes utilizar las siguientes reglas:
   - **Agent del Live Process**
 
       - [process-agent config/process.go][7]
-      - Por ejemplo:
+      - ejemplo
 
           ```yaml
              process_config:
@@ -95,18 +98,18 @@ En general, puedes utilizar las siguientes reglas:
 
 En los sistemas operativos que utilizan systemd para gestionar servicios, las variables de entorno globales (por ejemplo, `/etc/environment`) o basadas en sesiones (por ejemplo, `export VAR=value`) no suelen estar disponibles para servicios, a menos que se configuren para ello. Consulta la [página de ejecución manual de systemd][8] para obtener más información.
 
-A partir de Datadog Agent v7.45, la (unidad`datadog-agent.service` ) de servicio de Datadog Agent puede cargar opcionalmente asignaciones de variables de entorno desde un archivo (`<ETC_DIR>/environment`).
+A partir del Agent v7.45, el servicio del Agent de Datadog (unidad`datadog-agent.service` ) puede cargar opcionalmente asignaciones de variables de entorno desde un archivo (`<ETC_DIR>/environment`).
 
-1. Crea `/etc/datadog-agent/environment`, si no existe.
+1. Crea `/etc/datadog-agent/environment` si no existe.
 2. Define asignaciones de variables de entorno separadas por nuevas líneas. Por ejemplo:
   ```
   GODEBUG=x509ignoreCN=0,x509sha1=1
   DD_HOSTNAME=myhost.local
-  DD_TAGS=env:dev service:foo
+  DD_TAGS=env:dev,service:foo
   ```
-3. Reinicia el servicio para que los cambios surtan efecto.
+3. Reinicia el servicio para que se apliquen los cambios
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

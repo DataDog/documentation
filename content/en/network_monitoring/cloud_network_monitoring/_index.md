@@ -51,7 +51,7 @@ Additionally, [Network path][5], a feature of CNM, is available in Preview, whic
     {{< nextlink href="network_monitoring/cloud_network_monitoring/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
-    {{< nextlink href="monitors/types/cloud_network_monitoring/" >}}<u>Recommended Monitors</u>: Configure recommended CNM monitors.{{< /nextlink >}}
+    {{< nextlink href="monitors/types/cloud_network_monitoring/#common-monitors" >}}<u>Common Monitors</u>: Configure Common CNM monitors.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

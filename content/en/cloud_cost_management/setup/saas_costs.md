@@ -18,6 +18,9 @@ further_reading:
 - link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
+- link: "/cloud_cost_management/setup/oracle"
+  tag: "Documentation"
+  text: "Gain insights into your Oracle bill"
 - link: "/cloud_cost_management/setup/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
@@ -38,11 +41,11 @@ SaaS Cost Integrations allow you to send cost data **directly from your provider
 
 </br>
 
-If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services.
+If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services. Only SaaS costs in USD are supported at this time.
 
 ## Setup
 
-To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, or Google Cloud.
+To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, Google Cloud, or Oracle Cloud.
 
 See the respective documentation for your cloud provider:
 
@@ -60,53 +63,21 @@ Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then cli
 
 {{% tab "Snowflake" %}}
 
-1. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
-2. Enter your Snowflake account URL, for example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
-3. Under the **Connect your Snowflake account** section, click the toggle to enable Snowflake in Cloud Cost Management.
-4. Enter your Snowflake user name in the `User Name` field.
-5. Create a Datadog-specific role and user to monitor Snowflake.
-
-   Run the following in Snowflake to create a custom role:
-
-   ```shell
-   -- Create a new role intended to monitor Snowflake usage.
-   create role DATADOG;
-
-   -- Grant privileges on the SNOWFLAKE database to the new role.
-   grant imported privileges on database SNOWFLAKE to role DATADOG;
-
-   -- Grant usage to your default warehouse to the role DATADOG.
-   grant usage on warehouse <WAREHOUSE> to role DATADOG;
-
-   -- If you have cost usage collection enabled, ensure that your credentials have permission to view the ORGANIZATION_USAGE schema.
-   grant database role SNOWFLAKE.ORGANIZATION_USAGE_VIEWER to role DATADOG;
-
-   -- Note that the account in which you are creating the Datadog role and user must have OrgAdmin enabled. If the account does not have OrgAdmin, the Datadog role will be unable to access organization usage data used to calculate costs.
-
-   -- Create a user.
-   create user DATADOG_USER
-   LOGIN_NAME = DATADOG_USER
-   password = <PASSWORD>
-   default_warehouse = <WAREHOUSE>
-   default_role = DATADOG
-
-   -- Grant the monitor role to the user.
-   grant role DATADOG to user <USER>
-   ```
-
-4. Configure the key-value pair authentication:
-
-   - Generate a private key by following the [official Snowflake documentation][102] and upload the private key file by clicking **Upload Key**.
-   - Generate a public key by following the [official Snowflake documentation][103].
-   - Assign the public key to the user created in Step 5 by following the [official Snowflake documentation][104].
-
-5. Click **Save**.
+1. Find your [Snowflake account URL][102].
+   {{< img src="integrations/snowflake/snowflake_account_url.png" alt="The account menu with the copy account URL option selected in the Snowflake UI" style="width:100%;" >}}
+2. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
+3. Enter your Snowflake account URL in the `Account URL` field. For example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
+4. Under the **Connect your Snowflake account** section, click the toggle to enable Snowflake in Cloud Cost Management.
+5. Enter your Snowflake user name in the `User Name` field.
+6. Follow step 4 of the [Snowflake integration][103] page to create a Datadog-specific role and user to monitor Snowflake.
+7. Follow step 5 of the [Snowflake integration][103] page to configure the key-value pair authentication.
+8. Click **Save**.
 
 Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 **Snowflake query tags**
 
-[Snowflake's query tags][106] are powerful metadata strings that can be associated with queries. The [Snowflake Cost Management integration][101] ingests [JSON parsable][107] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
+[Snowflake's query tags][105] are powerful metadata strings that can be associated with queries. The [Snowflake Cost Management integration][101] ingests [JSON parsable][106] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
 
 For example, if an organization wishes to group its Snowflake compute costs by the `team` and `application` dimensions, it may choose to tag its Snowflake queries for a specific team's application in the following manner:
 ```
@@ -128,7 +99,7 @@ To use query tags within cost management, ensure the following:
 
 Object tags are user-defined strings that you can attach to Snowflake objects for enhanced auditability and cost analysis. For example, to track costs by team, tag your warehouses with the respective teams that use them.
 
-All object tag configuration is done within [Snowflake][105].
+All object tag configuration is done within [Snowflake][104].
 
 Notes:
 - **Tag Inheritance**: Snowflake objects adhere to a hierarchical structure, and the CCM integration considers inherited tags when submitting cost data.
@@ -136,22 +107,28 @@ Notes:
 {{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Integrate with Snowflake to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/snowflake-web
-[102]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
-[103]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-a-public-key
-[104]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
-[105]: https://docs.snowflake.com/en/user-guide/object-tagging
-[106]: https://docs.snowflake.com/en/sql-reference/parameters#query-tag
-[107]: https://docs.snowflake.com/en/sql-reference/functions/parse_json
+[102]: https://docs.snowflake.com/en/user-guide/organizations-connect
+[103]: /integrations/snowflake-web/#cloud-cost-management
+[104]: https://docs.snowflake.com/en/user-guide/object-tagging
+[105]: https://docs.snowflake.com/en/sql-reference/parameters#query-tag
+[106]: https://docs.snowflake.com/en/sql-reference/functions/parse_json
 
 {{% /tab %}}
 
 {{% tab "Databricks" %}}
 
 1. Navigate to the [Databricks integration tile][101] in Datadog and click **Configure**.
-2. Enter the workspace name, url, and access token corresponding to your Databricks account.
+2. Enter the workspace name, url, client ID, and client secret corresponding to your Databricks service principal.
 3. Under the **Select products to set up integration** section, click the toggle for each account to enable Databricks `Cloud Cost Management`.
 4. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
 5. Click **Save Databricks Workspace**.
+
+Your service principal requires read access to the [system tables](https://docs.databricks.com/aws/en/admin/system-tables/) within Unity Catalog.
+```sql
+GRANT USE CATALOG ON CATALOG system TO <service_principal>;
+GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
+GRANT SELECT ON CATALOG system TO <service_principal>;
+```
 
 Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -180,9 +157,28 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 {{% /tab %}}
 
+{{% tab "Anthropic" %}}
+
+### 1. Generate an Admin API key
+
+Begin by getting an [Admin API key](https://docs.anthropic.com/en/api/administration-api) from Anthropic. This key allows access to usage and cost reports across your organization.
+
+1. Navigate to your organization's settings or reach out to your Anthropic account admin to create a new Admin API key.
+2. Copy the API key to a secure location.
+
+### 2. Configure the Datadog integration
+
+1. In Datadog, go to [**Integrations > Anthropic Usage and Costs**](https://app.datadoghq.com/integrations?integrationId=anthropic-usage-and-costs).
+2. On the **Configure** tab, under **Account details**, paste in the **Admin API Key** from Anthropic.
+3. Click **Save**.
+
+After you save your configuration, Datadog begins polling Anthropic usage and cost endpoints using this key, and populates metrics in your environment.
+
+{{% /tab %}}
+
 {{% tab "GitHub" %}}
 
-1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `repo` scopes on the [Personal Access Tokens][109] page in GitHub.
+1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `read:org` scopes on the [Personal Access Tokens][109] page in GitHub.
 2. Navigate to the Datadog [GitHub Costs tile][108].
 3. Click **Add New**.
 4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags.
@@ -257,7 +253,7 @@ Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cos
 1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
 2. Navigate to the [Fastly cost management integration tile][102] in Datadog and click **Add New**.
 3. Enter your Fastly account name and API token.
-5. Click **Save**.
+4. Click **Save**.
 
 Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -285,12 +281,12 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 ## Data Collected
 
-You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
+You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other [cloud cost metrics][2] or observability metrics.
 
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
 {{< tabs >}}
-{{% tab "Snowflake" %}} 
+{{% tab "Snowflake" %}}
 
 <table>
   <thead>
@@ -541,6 +537,25 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% /tab %}}
 
+{{% tab "Anthropic" %}}
+
+| Tag Name | Tag Description |
+|---|---|
+| `workspace_id` | The unique identifier of the Anthropic workspace. |
+| `workspace_name` | A tag-normalized version of the workspace name. |
+| `display_workspace_name` | The unaltered name of the workspace. |
+| `org_id` | The unique identifier of the Anthropic organization. |
+| `org_name` | A tag-normalized version of the Anthropic organization's name. |
+| `display_org_name` | The unaltered name of the organization. |
+| `model_id` | The canonical Anthropic model identifier (for example, `claude-3-opus-20240229`). |
+| `model` | An alias for `model_id`, provided for compatibility and consistency with usage and metrics. |
+| `model_name` | The friendly name of the model (for example, `Claude 3 Opus`). |
+| `service_tier` | The Anthropic service plan or tier associated with the usage (for example, `standard`, `pro`, `enterprise`). |
+| `token_type` | The category of tokens consumed.|
+| `context_window` | The context window size for the tokens (for example, `tier_0-200k`). |
+
+{{% /tab %}}
+
 {{% tab "GitHub" %}}
 
 **Note**: The GitHub cost integration estimates costs based on list prices and usage data, and includes discount values when available. It does not account for any negotiated rates.
@@ -597,8 +612,9 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 {{% /tab %}}
 
 {{% tab "Elastic Cloud" %}}
+
 | Tag Name | Tag Description |
-|---|---
+|---|---|
 | `charge_description` | The SKU of a charge. |
 | `kind` | The type of resource. |
 | `name` | The unique identifier of the Elastic Cloud resource. |

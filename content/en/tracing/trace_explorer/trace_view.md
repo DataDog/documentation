@@ -1,5 +1,6 @@
 ---
 title: Trace View
+description: Visualize and analyze individual traces using flame graphs, span lists, waterfalls, and maps with detailed span information.
 aliases:
 - /tracing/visualization/trace/
 further_reading:

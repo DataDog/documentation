@@ -85,6 +85,6 @@ This example monitor warns when the LCP takes 2 seconds to load and alerts when 
 [3]: /real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-attributes
 [4]: /real_user_monitoring/explorer/export/
 [5]: /monitors/notify/
-[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
+[6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [8]: /real_user_monitoring/android/mobile_vitals/

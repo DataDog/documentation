@@ -335,20 +335,22 @@ For more information, see [Enabling AAP for Java][19].
 
 ### Errors
 
-`dd.http.client.tag.query-string`
-: **Environment Variable**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
-**Default**: `false`<br>
-When set to `true` query string parameters and fragment get added to web client spans
+`dd.trace.http.client.tag.query-string`
+: **System Property (Deprecated)**: `dd.http.client.tag.query-string`<br>
+**Environment Variable**: `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+**Environment Variable (Deprecated)**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+**Default**: `true`<br>
+By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data. 
 
-`dd.http.client.error.statuses`
-: **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
+`dd.trace.http.client.error.statuses`
+: **Environment Variable**: `DD_TRACE_HTTP_CLIENT_ERROR_STATUSES`<br>
 **Default**: `400-499`<br>
-A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-403,405,410-499`
+A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.trace.http.client.error.statuses=400-403,405,410-499`
 
-`dd.http.server.error.statuses`
-: **Environment Variable**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
+`dd.trace.http.server.error.statuses`
+: **Environment Variable**: `DD_TRACE_HTTP_SERVER_ERROR_STATUSES`<br>
 **Default**: `500-599`<br>
-A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
+A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.trace.http.server.error.statuses=500,502-599`
 
 `dd.grpc.client.error.statuses`
 : **Environment Variable**: `DD_GRPC_CLIENT_ERROR_STATUSES`<br>

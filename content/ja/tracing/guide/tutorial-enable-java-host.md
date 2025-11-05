@@ -160,7 +160,7 @@ If your operating system does not support curl, you can go directly to `'https:/
 
 トレースの生成と収集を開始するには、Datadog にトレースデータを送信させるフラグを追加してサンプルアプリケーションを再起動します。
 
-<div class="alert alert-warning"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
+<div class="alert alert-danger"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
 
 
 {{< tabs >}}

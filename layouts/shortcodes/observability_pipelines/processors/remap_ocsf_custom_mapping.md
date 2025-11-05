@@ -14,7 +14,7 @@ To set up a custom mapping:
     - You can add multiple fields for **Source Log Fields**. For example, Okta's `user.system.start` logs have either the `eventType` or `legacyEventType` field. You can map both fields to the same OCSF field.
     - If you have your own OCSF mappings in JSON or saved a previous mapping that you want to use, click **Import Configuration File**.
 1. Click **Continue**.
-1. Some log source values must be mapped to OCSF values. For example, the values of a source log's severity field that is mapped to the OCSF's `severity_id` field, must be mapped to the OCSF `severity_id`'s values. See `severity_id` in [Authentication [3002]][10182] for a list of OCSF values. An example of mapping severity values:
+1. Some log source values must be mapped to OCSF values. For example, the values of a source log's severity field that is mapped to the OCSF's `severity_id` field, must be mapped to the OCSF `severity_id`'s values. See `severity_id` in [Authentication][10182] for a list of OCSF values. An example of mapping severity values:
     | Log source value | OCSF value      |
     | ---------------- | --------------- |
     | `INFO`           | `Informational` |

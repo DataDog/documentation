@@ -13,7 +13,7 @@ assets:
     metrics:
       check: exchange.processor.cpu_user
       metadata_path: metadata.csv
-      prefix: exchange.
+      prefix: intercambio.
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10023
@@ -24,8 +24,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- log collection
-- windows
+- recopilación de logs
+- Windows
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/exchange_server/README.md
@@ -34,24 +34,24 @@ draft: false
 git_integration_title: exchange_server
 integration_id: exchange-server
 integration_title: Microsoft Exchange Server
-integration_version: 4.1.0
+integration_version: 4.2.0
 is_public: true
 manifest_version: 2.0.0
 name: exchange_server
 public_title: Microsoft Exchange Server
-short_description: Recopilación y representación gráfica de métricas de Microsoft
+short_description: Recopilar y representar gráficamente las métricas de Microsoft
   Exchange Server
 supported_os:
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Recopilación de logs
+  - Category::Log Collection
   - Category::Windows
   - Supported OS::Windows
-  - Offering::Integración
-  configuration: README.md#Configuración
-  description: Recopilación y representación gráfica de métricas de Microsoft Exchange
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Recopilar y representar gráficamente las métricas de Microsoft Exchange
     Server
   media: []
   overview: README.md#Información general
@@ -59,7 +59,7 @@ tile:
   title: Microsoft Exchange Server
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -82,7 +82,7 @@ El check de Exchange está incluido en el paquete del [Datadog Agent][1], por lo
 
 **Nota**: Las versiones 1.11.0 o posteriores de este check utilizan una nueva implementación para la recopilación de métricas, que requiere Python 3. Para los hosts que no pueden utilizar Python 3, o si quieres utilizar una versión legacy de este check, consulta la siguiente [configuración][4].
 
-### Colección de logs
+### Recopilación de logs
 
 1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent; debes habilitarla en el archivo `datadog.yaml`:
 
@@ -119,7 +119,7 @@ El check de Exchange está incluido en el paquete del [Datadog Agent][1], por lo
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "exchange-server" >}}
+{{< get-metrics-from-git "exchange_server" >}}
 
 
 ### Eventos

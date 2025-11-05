@@ -16,7 +16,7 @@ algolia:
   tags: ['online archives']
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Online Archives is in limited availability. To request access, contact <a href="/help/">Datadog Support</a>.
 </div>
 

@@ -1,5 +1,6 @@
 ---
 title: Automatic Instrumentation
+description: Learn about automatic instrumentation using Datadog tracing libraries, Single Step Instrumentation, or remote configuration.
 algolia:
   tags: ['apm automatic instrumentation']
 further_reading:

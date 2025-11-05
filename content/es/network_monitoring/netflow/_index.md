@@ -225,7 +225,7 @@ Para visualizar los bytes/paquetes sin procesar (muestreados) enviados por tus d
 
 Los datos de NetFlow se conservan durante 30 días por defecto, con opciones de conservación de 15, 30, 60 y 90 días.
 
-<div class="alert alert-danger">Para conservar los datos de NetFlow durante más tiempo, ponte en contacto con tu representante de cuenta.</div>
+<div class="alert alert-warning">Para conservar los datos de NetFlow durante más tiempo, ponte en contacto con el representante de tu cuenta.</div>
 
 ## Solucionar problemas
 

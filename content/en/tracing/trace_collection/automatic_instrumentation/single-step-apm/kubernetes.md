@@ -46,31 +46,57 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 ## Configure Unified Service Tags
 
-Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data.
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through label extraction (recommended) or in deployment manifests.
 
-### Recommended: Configure USTs with ddTraceConfigs as part of [workload targeting](#advanced-options).
+### (Recommended) Configure USTs through label extraction
 
-With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments:
-To use the recommended ddTraceConfigs approach, ensure you have the following software components:
+With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments. To do this, configure `kubernetesResourcesLabelsAsTags` to map your existing Kubernetes labels to Datadog service tags.
 
-| Component | Minimum Version | Notes |
-|-----------|-----------------|-------|
-| datadog-agent | 7.66+ | Required for valueFrom support |
-| datadog-operator | 1.16.0+ | 1.13.0+ works with Agent version override |
-| datadog-helm-chart | 3.120.0+ | Added valueFrom support |
+#### Prerequisites
 
-**Note**: Replace `app-name` with any label that contains your service name (e.g., `service`, `app`, `component`). You can configure multiple labels this way.
+| Component | Minimum version  |
+|-----------|------------------|
+| `datadog-agent` | 7.69        |
+| `datadog-operator` | 1.16.0   |
+| `datadog-helm-chart` | 3.120.0 |
+
+#### Automatic configuration
+
+Replace `app.kubernetes.io/name` in the following example with any label that contains your service name (for example, `service.kubernetes.io/name` or `component`). You can configure multiple labels this way.
 
 ```yaml
 datadog:
-  # Make pod labels available as tags in Datadog
+  # Automatically extract service names from Kubernetes labels
   kubernetesResourcesLabelsAsTags:
     pods:
-      app-name: service
+      app.kubernetes.io/name: service     # Modern Kubernetes label
     deployments.apps:
-      app-name: service
+      app.kubernetes.io/name: service
     replicasets.apps:
-      app-name: service
+      app.kubernetes.io/name: service
+
+  # Set environment globally for the entire cluster
+  tags:
+    - "env:production"
+
+  apm:
+    instrumentation:
+      enabled: true
+```
+
+With this configuration, Datadog automatically sets the `service` tag using the value of the `app.kubernetes.io/name` label for any instrumented workload that includes this label.
+
+#### Explicit control with ddTraceConfigs
+
+In most cases, automatic configuration is sufficient. However, if you need granular control over settings for specific workloads, use `ddTraceConfigs` to explicitly map labels to service configurations:
+
+```yaml
+datadog:
+  kubernetesResourcesLabelsAsTags:
+    pods:
+      app.kubernetes.io/name: service
+    deployments.apps:
+      app.kubernetes.io/name: service
 
   # Set environment globally for the entire cluster
   tags:
@@ -80,19 +106,19 @@ datadog:
     instrumentation:
       enabled: true
       targets:
-        - name: my-services
+        - name: frontend-services
           podSelector:
-            matchExpressions:
-            - key: app-name           # Target pods with this label
-              operator: Exists
+            matchLabels:
+              tier: frontend
           ddTraceConfigs:
-            - name: DD_SERVICE      # Extract service name from pod label
+            - name: DD_SERVICE       # Explicitly override service name
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.labels['app-name']
-            # DD_VERSION automatically extracted from image tags
+                  fieldPath: metadata.labels['app.kubernetes.io/name']
             # DD_ENV inherited from cluster-level tags above
+            # DD_VERSION automatically extracted from image tags
 ```
+
 
 ### Configure USTs in deployment manifests
 
@@ -390,7 +416,7 @@ Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available vers
 - [Ruby][38]
 - [PHP][39]
 
-<div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
+<div class="alert alert-danger">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
 
 For example, to automatically instrument Java applications:
 
@@ -533,6 +559,22 @@ To use SSI with a private container registry:
 
 For more details on changing your container registry, see [Changing Your Container Registry][33].
 
+### Using a Container Network Interface on EKS
+
+When using a CNI like Calico, the control plane nodes are not able to initiate network connections to Datadog's Admission Controller and report an "Address is not allowed" error.
+To use Single Step instrumentation, modify Datadog's Cluster Agent with the `useHostNetwork: true` parameter.
+
+```
+datadog:
+  ...
+
+clusterAgent:
+  useHostNetwork: true
+
+  admissionController:
+    ...
+```
+
 ## Remove Single Step APM instrumentation from your Agent
 
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
@@ -549,7 +591,7 @@ With workload selection (available for Agent v7.64+), you can enable and disable
 
 As an alternative, or for a version of the agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
 
-<div class="alert alert-warning">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
+<div class="alert alert-danger">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
    ```yaml

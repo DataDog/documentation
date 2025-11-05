@@ -1,4 +1,6 @@
 ---
+description: Aprende a configurar APM y el rastreo distribuido para aplicaciones C++
+  utilizando bibliotecas de rastreo e instrumentación de Datadog.
 further_reading:
 - link: /tracing/trace_collection/dd_libraries/cpp/
   tag: Documentación
@@ -139,7 +141,7 @@ Haz clic en el servicio para ver tus trazas.
 
 {{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="Interfaz de usuario de trazas de APM" >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -29,7 +29,7 @@ type: multi-code-lang
 
 Le traceur PHP prend en charge les loggers conformes au standard PSR-3, tels que [Monolog][4] ou [Laminas Log][5].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Remarque</strong> : configurez votre bibliothèque de journalisation de façon à ce que vos logs soient générés au format JSON. De cette façon :
   <ul>
     <li>Vous n'aurez pas besoin de définir des <a href="/logs/log_configuration/parsing">règles de parsing personnalisées</a>.</li>
@@ -95,7 +95,7 @@ Le traceur PHP remplace les placeholders par les valeurs correspondantes. Le mes
 
 ## Injection manuelle
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Remarque :</strong> la fonction <code>\DDTrace\current_context()</code>, ajoutée dans la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>, renvoie les identifiants des traces en tant que nombre décimal.
 </div>
 

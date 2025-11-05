@@ -3,7 +3,7 @@
 
     <!-- From imported files -->
     {{ $list := sort .Pages }}
-    
+
 
     <div class="row">
         <div class="col-12 order-1">
@@ -13,7 +13,7 @@
             {{ partial "breadcrumbs.html" . }}
         </div>
     </div>
-     
+
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
     {{ .Content }}
 
@@ -29,7 +29,7 @@
     {{ end }}
 
     {{ $valid_langs := $pad.Get "languages" }}
-    <div 
+    <div
     class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
     x-data="{
         filterTypes: {
@@ -65,7 +65,7 @@
         shouldShowRule (ruleEl) {
             // Determines rule display
             // Compares search values and filter values against ruleInfo
-            
+
             const ruleInfo = ruleEl.dataset.info.split(';')
             const ruleFilterInfo = ruleInfo[0].toLowerCase().split(',')
             const ruleSearchInfo = ruleInfo.slice(1).join(' ').toLowerCase()
@@ -86,12 +86,12 @@
             const containsFilteredValue = filterValues.every(t => t.length ? t.some(f => ruleFilterInfo.includes(f.split(',')[0].toLowerCase())) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type.
             const containsSearchValues = searchValues.every(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
 
-            this.shouldShowRuleSet(ruleEl.closest('.ruleset'), containsSearchValues && containsFilteredValue)
+            this.shouldShowRuleSet(ruleEl.closest('.set'), containsSearchValues && containsFilteredValue)
 
             if(containsSearchValues && containsFilteredValue){
                 ruleEl.classList.add('show')
             }else{
-                ruleEl.classList.remove('show')    
+                ruleEl.classList.remove('show')
             }
 
             return containsSearchValues && containsFilteredValue
@@ -124,16 +124,16 @@
         },
         updateWithURLParams (validLangs) {
             // Updates x-data properties with url param values
-            
+
             const validLangsArr = validLangs.replaceAll(/[\[\]]/g, '').split(' ')
             const url = new URL(window.location.href)
             const langAliasMap = validLangsArr.reduce((acc,l) => {
-                // map to appropriate language display name 
+                // map to appropriate language display name
                 const [lang, displayName] = l.split(';')
                 acc[lang.toLowerCase()] = displayName
                 return acc
             }, {})
-            
+
             Array.from(url.searchParams.entries()).forEach(([key, value]) => {
                 if (key === 'search'){
                     this.searchValue = value
@@ -218,32 +218,32 @@
                 {{ $ruleset_description := index (index $ruleset_params.rulesets .Key) "description"}}
                 <div
                 data-group-id="{{ $group_id }}" 
-                class="ruleset d-flex flex-column"
+                class="set d-flex flex-column"
                 id="{{ $group_id }}"
                 >
-                    <div class="ruleset-body mb-3 order-1">
+                    <div class="set-body mb-3 order-1">
                         <div class="d-flex flex-column">
                             <span class="m-0">{{printf "Ruleset ID: %s" .Key}}</span>
-                            <span class="ruleset-description m-0">{{$ruleset_description | markdownify}}</span>
+                            <span class="set-description m-0">{{$ruleset_description | markdownify}}</span>
                         </div>
                         <div class="ps-0 mt-1">
                             {{ range .Pages }}
                             {{ $rule_language_with_alias := ( cond (.Params.meta.language_alias | not) .Params.meta.language (printf "%s;%s" .Params.meta.language_alias .Params.meta.language) ) }}
                             {{ $rule_language := (index (split $rule_language_with_alias ";") 0) }}
-                            {{/*  
+                            {{/*
                                 build a string with rule's lookup info for filtering and searching against
                             */}}
                             {{ $rule_id := index (split .Params.meta.id "/") 1}}
                             {{ $filter_info := (printf "%s,%s,%s%s" .Params.meta.language .Params.meta.category .Params.meta.severity (cond (.Params.meta.language_alias | not) "" (printf ",%s" .Params.meta.language_alias))) }}
                             {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
                             <div 
-                            class="rule d-flex justify-content-between border p-1 position-relative"
+                            class="item d-flex justify-content-between border p-1 position-relative"
                             data-info="{{ $rule_info }}"
                             data-name="{{ .Title }}"
                             x-cloak x-show.important="shouldShowRule($el)"
                             >
-                                <div class="rule-name-container d-flex align-items-center">
-                                    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $rule_language "variant" "avatar") }}
+                                <div class="item-name-container d-flex align-items-center">
+                                    {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $rule_language "variant" "avatar") $rule_language "avatar" }}
                                     {{ if $int_logo }}
                                     <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
                                     {{ end }}
@@ -251,11 +251,11 @@
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="d-none d-md-block">{{ $rule_id }}</span>
-                                    <div class="ruleset-header__arrow fw-semibold ms-1">></div>
+                                    <div class="set-header__arrow fw-semibold ms-1">></div>
                                 </div>
                             </div>
-                            
-                            {{/*  
+
+                            {{/*
                                 build object with unique values for filter dropdowns (.filter-selection-container)
                                 e.g:
                                 filters: {
@@ -268,11 +268,11 @@
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
                             {{ $pad.SetInMap "filters" "Severities" (merge (index ($pad.Get "filters") "Severities") (dict (string .Params.meta.severity_rank) .Params.meta.severity)) }}
                             {{/*  
-                                build object of arrays with unique languages for each ruleset header (.ruleset-header )
+                                build object of arrays with unique languages for each ruleset header (.set-header )
                                 languagesByRuleset: {
                                     rulesetID: [<languages>],
                                     ...
-                                }    
+                                }
                             */}}
                             {{ $pad.SetInMap "languageByRuleSet" $group_id (union (index ($pad.Get "languageByRuleSet") $group_id) (slice $rule_language)) }}
                             {{ end }}
@@ -282,25 +282,25 @@
                     {{/* RULESET-HEADER - Keep here. scratch pad for languageByRuleSet needs to build first */}}
                     <button
                     data-header-id="{{ $group_id }}" 
-                    class="ruleset-header w-100 border mb-1 d-flex align-items-center justify-content-between"
+                    class="set-header w-100 border mb-1 d-flex align-items-center justify-content-between"
                     @click="toggleRuleSet($el)"
                     >
                         <div class="d-flex align-items-center h-100">
                             {{$ruleset_languages := index ($pad.Get "languageByRuleSet") $group_id}}
                             <div class="d-flex align-items-center h-100">
-                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_languages 0) "variant" "avatar") }}
+                                {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_languages 0) "variant" "avatar") (index $ruleset_languages 0) "avatar" }}
                                 {{ if $int_logo }}
-                                <img class="ruleset-header__logo" src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                <img class="set-header__logo" src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
                                 {{ if gt (len $ruleset_languages) 1 }}
-                                <span class="ruleset-header__plus fw-semibold">+{{sub (len $ruleset_languages) 1}}</span>
+                                <span class="set-header__plus fw-semibold">+{{sub (len $ruleset_languages) 1}}</span>
                                 {{ end }}
                                 {{ end }}
                             </div>
-                            <span class="ruleset-header__text fw-semibold">{{$ruleset_title}}</span>
+                            <span class="set-header__text fw-semibold">{{$ruleset_title}}</span>
                             <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $ruleset_title) ) }}</span>
                             <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
                         </div>
-                        <div class="ruleset-header__arrow fw-semibold">></div>
+                        <div class="set-header__arrow fw-semibold">></div>
                     </button>
                 </div>
                 {{ end }}
@@ -322,7 +322,7 @@
                     <p class="filter-type-name fw-semibold">{{ . }}</p>
                     <div class="filter-component position-relative">
                         {{/*  FILTER TOGGLER  */}}
-                        <button 
+                        <button
                         data-id="{{$filter_type}}"
                         class="toggler w-100 rounded position-relative"
                         @click.stop="toggleFilterForm($el)">
@@ -333,15 +333,15 @@
                                 </template>
                                 {{/*  Show filter selections from `filterTypes` data */}}
                                 <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
-                                    <div 
-                                    :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')" 
+                                    <div
+                                    :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')"
                                     class="selection-container rounded d-flex align-items-center">
                                         <template x-if="filter.split(',')[1]">
                                             <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
                                         </template>
                                         <span class="selection-name" x-text="filter.split(',')[0]"></span>
-                                        <div 
-                                        :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')" 
+                                        <div
+                                        :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')"
                                         class="close-light-wrapper" @click.stop="resetFilteredRulesets; deleteOneSelection('{{ $filter_type }}', filter )">
                                             {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
                                         </div>
@@ -360,7 +360,7 @@
                             </div>
                         </button>
                         {{/*  FILTER FORM  */}}
-                        <form 
+                        <form
                         data-id="{{$filter_type}}"
                         class="d-flex flex-column bg-white rounded position-absolute w-100"
                         x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
@@ -374,18 +374,18 @@
 
                                 {{ $lang_lookup_name := index (split . ";") 0 }}
                                 {{ $display_name := (index (split . ";") 1) | default . }}
-                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $lang_lookup_name "variant" "avatar") }}
+                                {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $lang_lookup_name "variant" "avatar") $lang_lookup_name "avatar" }}
                                 {{/*  store $int_logo and $lang_lookup_name with filter value if $int_logo is present. e.g. "Javascript,int_logo url,<alias name>" */}}
                                 {{ $value := (printf "%s,%s%s" $display_name $int_logo (cond (eq ((split . ";") | len) 2) (printf ",%s" $lang_lookup_name) ""))}}
-                                <input 
-                                id="{{ $lang_lookup_name | anchorize }}" 
-                                type="checkbox" 
-                                value='{{ cond ($int_logo | not ) . $value }}' 
+                                <input
+                                id="{{ $lang_lookup_name | anchorize }}"
+                                type="checkbox"
+                                value='{{ cond ($int_logo | not ) . $value }}'
                                 x-model="filterTypes['{{$filter_type}}']"
                                 @change="resetFilteredRulesets"
                                 @change.debounce="pushState('{{ $filter_type }}', '{{ $lang_lookup_name }}')"
-                                >  
-                                
+                                >
+
                                 <label for="{{ $lang_lookup_name | anchorize }}" class="d-flex align-items-center">
                                     {{ if $int_logo }}
                                     <img src="{{ $int_logo }}" height="16" alt="{{ $lang_lookup_name }}"/>
@@ -395,8 +395,8 @@
                             </div>
                             {{ end }}
                         </form>
-                    </div>                      
-                   
+                    </div>
+
                 </div>
                 {{ end }}
             </div>

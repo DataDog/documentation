@@ -1,5 +1,6 @@
 ---
 title: Setting up Universal Service Monitoring
+description: "Configure Universal Service Monitoring with Datadog Agent across different platforms including Kubernetes, Docker, ECS, and Windows environments."
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"

@@ -5,8 +5,8 @@ app_id: agentil-software-sap-businessobjects
 app_uuid: cac9d777-3bd1-40a1-aef3-28a8141804f1
 assets:
   dashboards:
-    SAP BusinessObjects overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
-    SAP BusinessObjects system dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
+    SAP BusinessObjects dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
+    SAP BusinessObjects global overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
   integration:
     auto_install: false
     configuration: {}
@@ -29,6 +29,7 @@ author:
 categories:
 - marketplace
 - sap
+custom_kind: 통합
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -37,7 +38,6 @@ integration_id: agentil-software-sap-businessobjects
 integration_title: SAP BusinessObjects
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -110,4 +110,4 @@ SAP BusinessObjects 통합에서는 SAP **BusinessObjects** 시스템을 모니�
 
 
 ---
-이 애플리케이션은 Marketplace에서 사용할 수 있고 Datadog Technology Partner에서 지원됩니다. 이 애플리케이션을 구입하려면 <a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-businessobjects" target="_blank">여기를 클릭</a>하세요.
+이 애플리케이션은 Datadog Marketplace를 통해 제공되며 Datadog 기술 파트너의 지원을 받습니다. 사용하려면 <a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-businessobjects" target="_blank">Marketplace에서 구매하세요</a>.
