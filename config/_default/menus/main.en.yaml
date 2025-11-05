@@ -3577,25 +3577,25 @@ menu:
       parent: ndm_setup
       identifier: ndm_snmp_metrics
       weight: 30002
-    - name: Ping
-      url: network_monitoring/devices/ping
-      parent: ndm_setup
-      identifier: ndm_snmp_ping
-      weight: 30003
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
       parent: ndm_setup
       identifier: ndm_snmptraps
-      weight: 30004
-    - name: VPN Monitoring
-      url: network_monitoring/devices/vpn_monitoring
+      weight: 30003
+    - name: Ping
+      url: network_monitoring/devices/ping
       parent: ndm_setup
-      identifier: ndm_vpn_monitoring
-      weight: 30005
+      identifier: ndm_snmp_ping
+      weight: 30004
     - name: Syslog
       url: network_monitoring/devices/syslog
       parent: ndm_setup
       identifier: ndm_syslog
+      weight: 30005
+    - name: VPN Monitoring
+      url: network_monitoring/devices/vpn_monitoring
+      parent: ndm_setup
+      identifier: ndm_vpn_monitoring
       weight: 30006
     - name: Integrations
       url: network_monitoring/devices/integrations
