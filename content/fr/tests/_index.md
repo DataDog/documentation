@@ -5,6 +5,7 @@ aliases:
 - /fr/continuous_integration/integrate_tests/
 - /fr/continuous_integration/tests/
 cascade:
+  site_support_id: test_optimization
   algolia:
     rank: 70
     tags:
@@ -24,7 +25,7 @@ further_reading:
   text: Surveiller vos pipelines CI et vos tests avec Datadog CI Visibility
 - link: https://www.datadoghq.com/blog/ci-test-visibility-with-rum/
   tag: Blog
-  text: Dépannage de tests de bout en bout avec CI Visibility et RUM
+  text: Dépannage de tests de bout en bout avec CI Visibility et RUM
 - link: /monitors/types/ci/
   tag: Documentation
   text: En savoir plus sur les monitors de test CI
@@ -36,13 +37,9 @@ further_reading:
   text: Découvrez comment instrumenter vos tests Browser avec RUM
 - link: /tests/troubleshooting/
   tag: Documentation
-  text: Découvrez comment dépanner Test Visibility
-title: Test Visibility dans Datadog
+  text: Découvrez comment dépanner Test Visibility
+title: Test Visibility dans Datadog
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Test Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Section Overview
 

@@ -15,7 +15,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
   text: "Tracer library source code"
-- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
   tag: "External Site"
   text: "Tracer library API documentation"
 - link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
@@ -29,14 +29,11 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-<div class="alert alert-info">
-The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">the migration guide</a> to upgrade.
-</div>
-
-
 ## Compatibility requirements
 
 The Go Tracer requires Go `1.18+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+
+{{% tracing-go-v2 %}}
 
 ## Getting started
 
@@ -82,7 +79,7 @@ To install and set up Orchestrion:
    ```sh
    go install github.com/DataDog/orchestrion@latest
    ```
-   <div class="alert alert-info"><strong>Note</strong>: Ensure that <code>$(go env GOBIN)</code> or <code>$(go env GOPATH)/bin</code> is in your <code>$PATH</code>.</div>
+   <div class="alert alert-info">Ensure that <code>$(go env GOBIN)</code> or <code>$(go env GOPATH)/bin</code> is in your <code>$PATH</code>.</div>
 
 1. Register Orchestrion in your project's `go.mod`:
    ```sh
@@ -238,11 +235,24 @@ You can use the [tracing library][4] in your Orchestrion-built application. This
 Your Orchestrion-built application includes [continuous profiler][12] instrumentation.
 To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true` at runtime.
 
+#### Remove integrations
+
+You can remove integrations by modifying the imports in the `orchestrion.tool.go` file.
+You can also create your own `orchestrion.tool.go` file before you run `orchestrion`.
+You might do this if you don't want an integration,
+or if you want to reduce the number of transitive dependencies for integrations your program doesn't use.
+By default, Orchestrion imports `github.com/DataDog/dd-trace-go/orchestrion/all/v2`,
+which imports every library for which there is an Orchestrion integration.
+You can replace this import with imports of only the integrations you want to use.
+See [the tracer source code][17] for the list of supported integrations.
+
+**Note**: If you choose to import specific integrations, you must manually update `orchestrion.tool.go` each time you want to add a new integration.
+
 ### Troubleshooting
 
 To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compile-Time Instrumentation][13].
 
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy
@@ -253,6 +263,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 [14]: /getting_started/tagging/unified_service_tagging/
 [15]: /security/application_security/exploit-prevention/
 [16]: /tracing/trace_collection/library_config/go/#traces
+[17]: https://github.com/DataDog/dd-trace-go/blob/main/orchestrion/all/orchestrion.tool.go
 
 
 {{% /tab %}}
@@ -261,7 +272,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 
 ### Add the tracer library to your application
 
-First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][4] (or the [API documentation v2][6]) for configuration instructions and details about using the API.
+First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][6] (or the [API documentation v1][4]) for configuration instructions and details about using the API.
 
 ### Activate Go integrations to create spans
 

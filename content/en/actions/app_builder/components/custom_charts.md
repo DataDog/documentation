@@ -1,5 +1,6 @@
 ---
 title: Custom Charts
+description: Create custom charts in apps using Vega-Lite specifications to visualize data from queries with various chart types and styles.
 disable_toc: false
 aliases:
 - /service_management/app_builder/custom_charts/
@@ -12,10 +13,6 @@ further_reading:
   tag: "Documentation"
   text: "Build Apps"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 This page provides an example of how to use the custom chart component in your App Builder apps.
 

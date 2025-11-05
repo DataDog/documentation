@@ -15,14 +15,14 @@ further_reading:
   text: "Learn about Static Analysis"
 - link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
   tag: "External Site"
-  text: "Visual Studio Marketplace"  
+  text: "Visual Studio Marketplace"
 - link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
   tag: "Blog"
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     The Datadog extension for Visual Studio is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
@@ -81,14 +81,11 @@ When you start editing a source file supported by Static Analysis, the extension
 
 ### Setup and installation
 
-1. Download and install the extension from the official [Visual Studio Marketplace][17].
-2. In Visual Studio, go to **Tools > Options > Datadog**.
-3. Sign in with your Datadog account, or [sign up for a free trial][14].
-4. Open a solution in Visual Studio.
-5. Go to **Extensions > Datadog > Linked Services**.
-6. Add services, and save your solution.
-7. Go to **Tools > Options > Datadog** and enable **Code Insights**.
-8. Sign in to Datadog by clicking the plus (**+**) icon. Changes do not affect existing connections to Datadog.
+1. Download and install the extension from the [Visual Studio Marketplace][17].
+1. In Visual Studio, go to **Tools > Options > Datadog** to configure the extension.
+1. Sign in to Datadog by clicking the plus (**+**) icon. Changes do not affect existing connections to Datadog.
+
+After you set up this extension, open a solution in Visual Studio. You can go to **Extensions > Datadog > Code Insights** to view the Code Insights for the current solution and git repository. To filter insights by service, go to **Extensions > Datadog > Filter by Service** and select one or more services from your runtime environments.
 
 ### Custom subdomains
 

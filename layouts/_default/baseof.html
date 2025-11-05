@@ -86,8 +86,8 @@
   <!--- integrations carousel modal --->
   {{ $dir := "" }}
   {{ with .File }}{{ $dir = .Dir }}{{ end }}
-  {{ if and (eq $dir "integrations/") (.Params.tile) (.Params.tile.media | len) }}
-  {{ partial "integrations-carousel/integrations-carousel-modal.html" . }}
+  {{ if and (eq $dir "integrations/") (ne .Params.media nil)  }}
+    {{ partial "integrations-carousel/integrations-carousel-modal.html" . }}
   {{ end }}
 </body>
 

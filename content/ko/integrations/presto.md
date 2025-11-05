@@ -30,9 +30,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 데이터 스토어
+- 데이터 저장소
 - 로그 수집
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/presto/README.md
 display_on_public_website: true
@@ -47,18 +47,18 @@ name: presto
 public_title: Presto
 short_description: PrestoSQL 클러스터의 성능 및 사용 통계를 수집하고 그 외 여러 기능을 제공합니다.
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - 카테고리::데이터 저장
+  - Category::Data Stores
   - Category::Log Collection
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: PrestoSQL 클러스터의 성능 및 사용 통계를 수집하고 그 외 여러 기능을 제공합니다.
   media: []
@@ -79,20 +79,20 @@ tile:
 
 ## 설정
 
-아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [오토파일럿 통합 템플릿][3]을 참조하세요.
+아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [자동탐지 통합 템플릿][2]을 참조하세요.
 
 ### 설치
 
 Presto 점검은 [Datadog Agent][3] 패키지에 포함되어 있습니다.
 서버에 추가 설치가 필요하지 않습니다. 사용 및 성능 메트릭을 수집하려는 각 Coordinator 및 Worker 노드에 Agent 를 설치합니다.
 
-### 구성
+### 설정
 
 1. Agent의 구성 디렉토리 루트에 있는 `conf.d/` 폴더에서 `presto.d/conf.yaml` 파일을 편집하여 Presto 성능 데이터 수집을 시작합니다. 사용 가능한 모든 구성 옵션은 [샘플 presto.d/conf.yaml][4]을 참조하세요.
 
     이 점검에는 인스턴스당 350개의 메트릭이 제한됩니다. 반환된 메트릭의 수는 [상태 페이지][5]에 표시됩니다. 아래 구성을 편집하여 관심 있는 메트릭을 지정할 수 있습니다. 수집할 메트릭을 커스터마이징하려면 [JMX 점검 설명서][6]에서 자세한 지침을 확인해 보세요. 더 많은 메트릭을 모니터링해야 하는 경우 [Datadog 지원팀][7]에 문의하세요.
 
-2. [Agent를 재시작합니다][8].
+2. [에이전트를 재시작합니다][8].
 
 #### 메트릭 수집
 
@@ -100,7 +100,7 @@ Presto 메트릭 수집을 활성화하려면 `presto.d/conf.yaml` 파일의 기
 
 #### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
 1. Datadog Agent에서 로그 수집은 기본적으로 비활성화되어 있으므로 `datadog.yaml` 파일에서 활성화합니다.
 
@@ -120,7 +120,7 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
     `path` 및 `service` 파라미터 값을 변경하고 환경에 맞게 구성합니다. 사용 가능한 모든 구성 옵션은 샘플 [presto.d/conf.yaml][4]을 참조하세요.
 
-3. [Agent를 재시작합니다][8].
+3. [에이전트를 재시작합니다][8].
 
 ### 검증
 

@@ -1,11 +1,40 @@
 ---
-null
-...
+description: Habilita y recopila logs de depuración de trazas de APM para solucionar
+  problemas de configuración y conectividad.
+further_reading:
+- link: /tracing/troubleshooting/connection_errors/
+  tag: Documentación
+  text: Solucionar problemas de errores de conexión de APM
+title: Logs de depuración de rastreador
 ---
+
+## Recopilación de logs de depuración automatizada
+<div class="alert alert-danger">La depuración automatizada de logs solo es compatible con Java, Python, Node.js y .NET. Para otros lenguajes, utiliza <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">la recopilación manual de depuración de logs</a>.</div>
+
+Un flare te permite enviar la información necesaria para solucionar problemas al equipo de soporte de Datadog, incluyendo el logs del rastreador, con los datos confidenciales eliminados. Los flares son útiles para solucionar problemas como el uso elevado de la CPU, el uso elevado de la memoria y tramos (spans) faltantes.
+
+### Requisitos previos
+- La [configuración remota][3] debe estar activada.
+- Tu clave de API debe estar configurada para la Configuración remota.
+- Debes tener una versión del rastreador compatible:
+  - Java: `1.26.0` o posterior
+  - Python: `3.12.0` o posterior
+  - Node.js: `5.15.0` o posterior, o `4.39.0` o posterior
+  - .NET: `2.46.0` o posterior
+
+### Enviar un flare
+Para enviar un flare desde el sitio de Datadog, asegúrate de haber habilitado [Fleet Automation][3] en el Agent.
+{{% remote-flare %}}
+
+<div class="alert alert-danger">Si no ves la opción para tu servicio, es probable que haya un error en la conexión entre la aplicación y el Datadog Agent y deberías optar por la opción manual de proporcionar los logs del rastreador de depuración.</div>
+
+Por ejemplo:
+
+{{< img src="agent/fleet_automation/fleet-automation-flare-agent-and-tracer-debuglevel.png" alt="El botón Enviar ticket inicia un formulario para enviar una bengala sobre un nuevo ticket de asistencia o uno existente" style="width:60%;" >}}
 
 ## Activar el modo de depuración
 
-Utiliza la configuración de depuración de Datadog para diagnosticar problemas o auditar datos de traza. Datadog no recomienda activar el modo de depuración en sistemas de producción porque aumenta el número de eventos que se envían a los registradores. Utiliza el modo de depuración solo con fines de depuración.
+Utiliza la configuración de depuración de Datadog para diagnosticar problemas o auditar datos de rastreo. Datadog no recomienda activar el modo de depuración en sistemas de producción porque aumenta el número de eventos que se envían a los registradores. Utiliza el modo de depuración solo con fines de depuración.
 
 El modo de depuración está desactivado por defecto. Para activarlo, sigue las instrucciones del rastreador de lenguaje correspondiente:
 
@@ -15,9 +44,14 @@ El modo de depuración está desactivado por defecto. Para activarlo, sigue las 
 
 Para habilitar el modo de depuración para el rastreador de Datadog Java, establece el indicador `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` como variable de entorno.
 
-**Nota**: El rastreador de Datadog Java implementa SL4J SimpleLogger, por lo que [se pueden aplicar todos sus ajustes][1], por ejemplo, el registro en un archivo de log dedicado:
+**Notas**:
+- Datadog Java Tracer implementa SLF4J SimpleLogger, para que [se puedan aplicar todas sus configuraciones][1]. Por ejemplo, puedes configurarlo para generar logs en un archivo de log exclusivo:
 ```
 -Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>
+```
+- Para generar logs de Datadog Java Tracer en un formato JSON compatible con la interfaz de usuario de Datadog Logs, utiliza:
+```
+-Ddatadog.slf4j.simpleLogger.jsonEnabled=true
 ```
 
 
@@ -40,11 +74,11 @@ Los pasos para activar el modo de depuración en el rastreador de Datadog Python
 ```
 import logging
 
-# configuración del registrador raíz
+# root logger configuration
 root_logger = logging.getLogger()
 root_logger.setLevel(logging.DEBUG)
 
-# anular la configuración ddtrace al nivel de log WARNING
+# override the ddtrace configuration to WARNING log level
 logging.getLogger("ddtrace").setLevel(logging.WARNING)
 ```
 
@@ -59,7 +93,7 @@ logging.getLogger("ddtrace").setLevel(logging.WARNING)
 3. Para dirigir logs a la consola, para aplicaciones **Python 2**, configura `logging.basicConfig()` o similar. Los logs se envían automáticamente a la consola para aplicaciones **Python 3**.
 
 
-### Escenario 3: ddtrace versión 1.0.x a 1.2.x
+### Escenario 2: ddtrace versión 1.3.2 a <2.x
 
 1. Para activar el modo de depuración: `DD_TRACE_DEBUG=true`
 
@@ -71,9 +105,9 @@ logging.getLogger("ddtrace").setLevel(logging.WARNING)
 
 2. Para dirigir logs a la consola, para aplicaciones **Python 2 o Python 3**, configura `logging.basicConfig()` o utiliza `DD_CALL_BASIC_CONFIG=true`.
 
-### Escenario 5: Configuración del registro de depuración en el código de la aplicación con la biblioteca de registro estándar
+### Escenario 5: Configuración de la generación de logs de depuración en el código de la aplicación con la biblioteca de registro estándar
 
-Para cualquier versión de ddtrace, en lugar de establecer la variable de entorno del rastreador `DD_TRACE_DEBUG`, puedes habilitar el registro de depuración en el código de la aplicación utilizando directamente la biblioteca estándar de `logging`:
+Para cualquier versión de ddtrace, en lugar de establecer la variable de entorno del rastreador `DD_TRACE_DEBUG`, puedes habilitar la generación de logs de depuración en el código de la aplicación utilizando directamente la biblioteca estándar de `logging`:
 
 ```
 log = logging.getLogger("ddtrace.tracer")
@@ -90,7 +124,7 @@ Para activar el modo de depuración del rastreador de Datadog Ruby, configura la
 
 Por defecto, todos los logs son procesados por el registrador por defecto de Ruby. Cuando uses Rails, deberías ver los mensajes en tu archivo de log de aplicación.
 
-Los mensajes de logs de cliente de Datadog se marcan con `[ddtrace]`, para que puedas aislarlos de otros mensajes.
+Los mensajes de log de cliente de Datadog se marcan con `[ddtrace]`, para que puedas aislarlos de otros mensajes.
 
 Puedes anular el registrador predeterminado y sustituirlo por uno personalizado con el atributo `log` del rastreador:
 
@@ -111,13 +145,17 @@ Consulta [la documentación de la API][1] para obtener más detalles.
 
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 Para habilitar el modo de depuración para el rastreador de Datadog Go, establece la variable de entorno `DD_TRACE_DEBUG=true`,
 o habilita el modo de depuración durante la configuración de `Start`:
 
 ```go
 package main
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import (
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+)
 
 func main() {
     tracer.Start(tracer.WithDebugMode(true))
@@ -127,7 +165,7 @@ func main() {
 
 #### Logs de tramo abandonados
 
-El rastreador de Datadog Go también admite el registro para tramos (spans) potencialmente abandonados. Para habilitar este modo de depuración en Go, establece la variable de entorno `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. Para cambiar la duración después de la cual los tramos se consideran abandonados (por defecto=`10m`), establece la variable de entorno `DD_TRACE_ABANDONED_SPAN_TIMEOUT` al tiempo de duración deseado. Los logs de tramos abandonados aparecen en el nivel de información.
+El rastreador de Datadog Go también admite la generación de logs para tramos (spans) potencialmente abandonados. Para habilitar este modo de depuración en Go, establece la variable de entorno `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. Para cambiar la duración después de la cual los tramos se consideran abandonados (por defecto=`10m`), establece la variable de entorno `DD_TRACE_ABANDONED_SPAN_TIMEOUT` al tiempo de duración deseado. Los logs de tramos abandonados aparecen en el nivel de información.
 
 También puedes activar la depuración de tramos abandonados durante la configuración de `Start`:
 
@@ -137,7 +175,7 @@ package main
 import (
   "time"
 
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -199,7 +237,7 @@ Para activar el modo de depuración para el rastreador de Datadog .NET, establec
 ```csharp
 using Datadog.Trace;
 
-// habilitar modo de depuración
+// enable debug mode
 GlobalSettings.SetDebugEnabled(true);
 
 ```
@@ -215,7 +253,7 @@ Los logs se guardan por defecto en los siguientes directorios. Utiliza la config
 
 **Nota:**: En Linux, debes crear el directorio de logs antes de activar el modo de depuración.
 
-Desde la versión `2.19.0`, puedes utilizar el ajuste `DD_TRACE_LOGFILE_RETENTION_DAYS` para configurar el rastreador para borrar archivos de log del directorio de registro actual al iniciarse. El rastreador borra archivos de log de la misma antigüedad y más antiguos que el número de días dado, con un valor por defecto de `31`.
+A partir de la versión `2.19.0`, puedes utilizar el ajuste `DD_TRACE_LOGFILE_RETENTION_DAYS` para configurar el rastreador para borrar archivos de log del directorio de generación de logs actual al iniciarse. El rastreador elimina archivos de log de la misma antigüedad y más antiguos que el número de días dado, con un valor por defecto de `32`.
 
 Para más detalles sobre cómo configurar el rastreador de .NET, consulta la sección [Configuración][2].
 
@@ -275,7 +313,8 @@ cmake --install .build
 
 ## Revisar logs de depuración
 
-Cuando el modo de depuración para tu rastreador está habilitado, los mensajes de log específicos del rastreador informan cómo se inicializó el rastreador y si las trazas fueron enviadas al Agent. **Estos logs no son enviados al Datadog Agent en el flare y son almacenados en una ruta separada según tu configuración de registro**. Los siguientes ejemplos de log muestran lo que podría aparecer en tu archivo de log.
+
+Cuando el modo de depuración de tu rastreador está habilitado, los mensajes de log específicos del rastreador informan cómo se inicializó el rastreador y si se enviaron trazas (traces) al Agent. Los logs de depuración se almacenan en una ruta separada dependiendo de tu configuración de generación de logs. Si habilitas la información del rastreador a nivel de aplicación, también se envían logs de depuración en la bengala para los [lenguajes compatibles](##prerequisites). Los siguientes ejemplos de logs muestran lo que puede aparecer en tu archivo de log.
 
 Si hay errores que no entiendes, o si se informan trazas como descartadas en Datadog, pero no puedes verlas en la interfaz de usuario de Datadog, [ponte en contacto con el soporte de Datadog][1] y proporciona las entradas de log pertinentes con [un flare][2].
 
@@ -307,7 +346,7 @@ Si hay errores que no entiendes, o si se informan trazas como descartadas en Dat
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Los logs generados por el rastreador de Python tienen el nombre de gestor de registro `ddtrace`.
+Los logs generados por el rastreador de Python tienen la `ddtrace` del nombre del gestor de generación de logs.
 
 **Se generaron trazas:**
 
@@ -473,9 +512,11 @@ Disponible a partir de 0.98.0:
 
 {{< /programming-lang-wrapper >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/help/
 [2]: /es/agent/troubleshooting/#send-a-flare
+[3]: /es/tracing/guide/remote_config
+[5]: /es/remote_configuration#enabling-remote-configuration

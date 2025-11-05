@@ -9,10 +9,6 @@ further_reading:
   text: "Workflow Automation"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Automations allow you to trigger actions based on events in On-Call. There are two types:
@@ -26,7 +22,7 @@ Handover automations run automatically at the start or end of an on-call shift. 
 By using built-in automations instead of maintaining cron jobs or custom tools, you can streamline operations, eliminate manual steps, and ensure the right actions always run when a shift changes.
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If you need a specific action that isn't listed, contact your account representative or <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.
 </div>
 

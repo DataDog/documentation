@@ -17,15 +17,24 @@ further_reading:
 
 ## Setup
 
-To send OpenTelemetry metrics to Datadog, you have two options: the Datadog Agent, or the OpenTelemetry Collector. Using the Datadog Agent enables you to keep using all [Agent functionalities][3]. For a more vendor-agnostic setup, use the OpenTelemetry Collector.
+To send OpenTelemetry metrics to Datadog, you have three main options:
 
-If your applications and services are instrumented with [OpenTelemetry][4] libraries, you can choose between two paths for getting the metrics data to the Datadog backend:
+- [OpenTelemetry Collector][11]
+- [Datadog Agent][12]
+- [Direct OTLP Ingest][13]
 
-1. [Send metrics to the OpenTelemetry collector, and use the Datadog exporter to forward them to Datadog][5], or
+For more information about which setup is right for you, see [Send OpenTelemetry Data to Datadog][10].
 
-2. [Ingest metrics with the Datadog Agent, which collects them for Datadog][6].
+## Query across Datadog and OpenTelemetry metrics 
 
-Read [OpenTelemetry][7] for more information.
+Because OTel and Datadog metrics often use different naming conventions and semantic definitions, creating a unified view of your infrastructure in these environments can be challenging.
+
+Datadog helps you bridge this gap by enabling you to:
+
+- Query OTel and Datadog metrics together.
+- Understand how OTel and Datadog metrics map to each other.
+
+For more information, read [Query Across Datadog and OpenTelemetry Metrics][14]
 
 ## Out-of-the-box dashboards
 
@@ -48,3 +57,8 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 [7]: /opentelemetry/
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[10]: /opentelemetry/setup/
+[11]: /opentelemetry/setup/collector_exporter/
+[12]: /opentelemetry/setup/agent
+[13]: /opentelemetry/setup/agentless
+[14]: /metrics/open_telemetry/query_metrics

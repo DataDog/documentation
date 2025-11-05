@@ -9,10 +9,6 @@ further_reading:
     text: "Read more about Cloud Security Vulnerabilities"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Agentless Scanning for Cloud Security is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
@@ -99,7 +95,7 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/setup/agentless_scanning#setup
-[2]: /agent/remote_config/?tab=configurationyamlfile
+[2]: /remote_configuration
 [3]: https://cyclonedx.org/
 [4]: /security/cloud_security_management/setup/agentless_scanning/enable#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
@@ -107,6 +103,6 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 [7]: mailto:success@datadoghq.com
 [8]: /security/sensitive_data_scanner
 [9]: /security/cloud_security_management
-[10]: /agent/remote_config
+[10]: /remote_configuration
 [11]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#recommended-configuration

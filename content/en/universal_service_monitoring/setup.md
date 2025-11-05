@@ -1,5 +1,6 @@
 ---
 title: Setting up Universal Service Monitoring
+description: "Configure Universal Service Monitoring with Datadog Agent across different platforms including Kubernetes, Docker, ECS, and Windows environments."
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"
@@ -792,7 +793,7 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 
 {{< collapse-content title="Go TLS Monitoring" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor TLS encrypted traffic from services implemented in Golang.
+Universal Service Monitoring is in Preview to monitor TLS encrypted traffic from services implemented in Golang.
 </div>
 
 <strong>Note</strong>:
@@ -841,7 +842,7 @@ agents:
 {{< collapse-content title="Node.js TLS Monitoring" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
+Universal Service Monitoring is in Preview to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
 </div>
 
 Requires Agent version 7.54 or greater.

@@ -1,8 +1,9 @@
 ---
 categories:
-- cloud
+- 클라우드
 - aws
 - 로그 수집
+custom_kind: 통합
 dependencies: []
 description: 핵심 Amazon Lex 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_lex/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Amazon Lex
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_lex
 public_title: Datadog-Amazon Lex 통합
@@ -32,7 +32,7 @@ Amazon Lex는 음성과 문자를 사용해 애플리케이션에 대화 인터�
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 메트릭 수집
 
@@ -45,15 +45,15 @@ Amazon Lex는 음성과 문자를 사용해 애플리케이션에 대화 인터�
 
 Amazon Lex를 설정해 S3 버킷이나 클라우드와치(CloudWatch) 중 하나로 로그를 전송하세요.
 
-**참고**: S3 버킷에 로깅하면 `amazon_lex`가 _대상 접두어_를 확인하세요.
+**참고**: S3 버킷에 로깅하면 `amazon_lex`가 _대상 접두어_로 설정되어 있는지 확인하세요.
 
-#### Datadog에 로그 전송
+#### Datadog로 로그 전송
 
-1. 이미 하지 않은 경우 [Datadog 포워더 람다 함수][4]를 설정하세요.
+1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][4]를 설정하세요.
 2. 람다 함수가 설치되면 AWS 콘솔에서 Amazon Lex 로그를 포함하는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 대한 트리거를 수동으로 추가할 수 있습니다.
 
-    - [S3 버킷에서 직접 트리거 추가][5]
-    - [클라우드와치(CloudWatch) 로그 그룹에 수동 트리거 추가][6]
+    - [S3 버킷에서 수동 트리거 추가][5]
+    - [CloudWatch 로그 그룹에 수동으로 트리거 추가][6]
 
 ## 수집한 데이터
 
@@ -77,7 +77,7 @@ Amazon Lex 통합에는 서비스 점검이 포함되어 있지 않습니다.
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-lex
 [4]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lex/amazon_lex_metadata.csv
 [8]: https://docs.datadoghq.com/ko/help/

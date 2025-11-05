@@ -15,10 +15,6 @@ further_reading:
 title: Configurar el rastreo en un pipeline de Buildkite
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 [Buildkite][1] es una plataforma de integración y despliegue continuos que te permite ejecutar compilaciones en tu propia infraestructura, lo que te da la habilidad de tener un control total sobre la seguridad y personalizar tu entorno de compilación mientras gestionas la orquestación en la nube.

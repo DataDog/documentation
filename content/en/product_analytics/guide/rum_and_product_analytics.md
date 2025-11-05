@@ -84,5 +84,4 @@ See the full feature comparison table below.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
-[2]: /product_analytics/journeys/#conversion
 [3]: https://app.datadoghq.com/rum/list?

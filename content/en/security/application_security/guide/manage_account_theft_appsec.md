@@ -140,7 +140,7 @@ To use custom In-App WAF rules, do the following:
 
 6. Select a specific user parameter as an input, either in the body or the query.   
 7. Set the `Tag` field to the name of the tag where you want to save the value captured using `usr.login`.
-   {{<img src="security/ato/guide_waf_instrumentation_tag.png" alt="Custom WAF rule creation form, with a complete condition selecting a parameter named login and storing it in a tag called usr.login" style="width:100%;" >}}
+   {{<img src="security/ato/guide_waf_instrumentation_tagged.png" alt="Custom WAF rule creation form, with a complete condition selecting a parameter named login and storing it in a tag called usr.login" style="width:100%;" >}}
 
 8. Click **Save**. The rule is automatically sent to every instance of the service and then begins capturing login failures. 
 
@@ -311,7 +311,7 @@ If the false positive was caused by a unique setting in your service, you can ad
 
 If the attack is ongoing, you might want to disrupt the attacker as you investigate further. Disrupting the attacker slows down the attack and reduce the number of compromised accounts. 
 
-<div class="alert alert-info"> <strong>Note</strong>: This is a common step, although you might want to skip this step in the following circumstances:
+<div class="alert alert-info">This is a common step, although you might want to skip this step in the following circumstances:
 
 * The accounts have little immediate value. You can block these post-compromise without causing harm.  
 * You want to maintain maximum visibility into the attack by avoiding any action that alerts the attacker to the investigation and causes them to change tactics.
@@ -706,14 +706,14 @@ This is general guidance. Depending on your applications and environments, there
 [1]: /security/account_takeover_protection/
 [2]: https://app.datadoghq.com/services?query=service%3Auser-auth&env=%2A&fromUser=false&hostGroup=%2A&lens=Security&sort=-fave%2C-team&start=1735636008863&end=1735639608863
 [3]: /security/application_security/setup/compatibility/
-[4]: /agent/remote_config/?tab=configurationyamlfile
+[4]: /remote_configuration
 [5]: https://app.datadoghq.com/security/appsec/onboarding
 [6]: https://app.datadoghq.com/security/appsec/traces?query=&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036043639&end=1735640843639&paused=false
 [7]: /security/application_security/setup/threat_detection/
 [8]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036164646&end=1735640964646&paused=false
 [9]: /security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-user-activity-event-tracking
 [10]: /security/application_security/how-it-works/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[11]: /agent/remote_config/?tab=configurationyamlfile
+[11]: /tracing/guide/remote_config/
 [12]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
 [13]: /security/application_security/how-it-works/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
 [14]: https://app.datadoghq.com/security/appsec/threat

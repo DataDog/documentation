@@ -87,7 +87,7 @@ Consulta la [documentación][1] de la integración de Agora Analytics para obten
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "agora_analytics" >}}
+{{< get-metrics-from-git "agora-analytics" >}}
 
 
 ### Eventos

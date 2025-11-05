@@ -13,7 +13,7 @@ Cloudcraft で SSO を使用するための一般的な情報については、[
 
 ## SAML/SSO のセットアップ
 
-<div class="alert alert-info">Only the account owner can configure the SAML SSO feature. If the account owner is unable to configure SSO, <a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">contact the Cloudcraft support team</a> to enable this feature.
+<div class="alert alert-info">アカウントオーナーのみが SAML SSO 機能を設定できます。アカウントオーナーが SSO を設定できない場合は、<a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">Cloudcraft サポートチームに連絡</a>してこの機能を有効にしてください。
 </div>
 
 1. Cloudcraft で、**User** > **Security & SSO** に移動します。
@@ -27,7 +27,7 @@ Cloudcraft で SSO を使用するための一般的な情報については、[
 6. **New application** をクリックし、**Non-gallery application** を選択します。
 7. アプリケーション名として **Cloudcraft** を入力し、**Add** をクリックします。
 
-Next, configure the SAML integration using the details provided by Cloudcraft.
+次に、Cloudcraft から提供された詳細を使用して SAML インテグレーションを構成します。
 
 1. **Getting started** セクションで、**Set up single sign on** を選択し、**SAML** をクリックします。
 2. **Basic SAML Configuration** セクションで、**Edit** をクリックします。

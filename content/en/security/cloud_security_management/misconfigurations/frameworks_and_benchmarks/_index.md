@@ -31,7 +31,7 @@ View a high-level overview of your compliance posture for each framework on the 
 - **Explore Resources**: A filtered view of the **Misconfigurations** page that shows resources with misconfigurations for the selected framework.
 - **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the compliance rules for each framework.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_4.png" alt="The compliance reports section of the Cloud Security Misconfigurations Compliance page provides a high-level overview of your compliance posture" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_5.png" alt="The compliance reports section of the Cloud Security Misconfigurations Compliance page provides a high-level overview of your compliance posture" style="width:100%;">}}
 
 ## Explore compliance framework reports
 
@@ -43,11 +43,19 @@ Below the summary is a complete listing of all rules associated with the framewo
 
 Search for a rule name to filter the list, or group by requirement, control, severity, resource type, or resource category to organize the list. You can also click a table column header to sort by that column within the group.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/cis_aws_compliance_report_4.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/cis_aws_compliance_report_5.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
 
 Select a rule to view details about the misconfigured resources, the rule description, its framework or industry benchmark mapping, and suggested remediation steps. Then, you can click a specific resource to get more details.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/failed-finding3.png" alt="The compliance rule side panel includes information about the rule and resources with failed misconfigurations" style="width:75%;">}}
+
+## Show or hide compliance frameworks
+
+You can hide frameworks from the list on the [Compliance][20] page, so you can focus on the ones that are most relevant to your organization.
+
+To hide a framework, either on the Compliance page or on a page for a specific framework, click the **Options** button {{< img src="icons/kebab.png" alt="Options button" inline="true" style="height:1em">}}, then click **Hide framework**.
+
+Then, on the Compliance page, you can use the **Show hidden frameworks** toggle to show hidden frameworks at the bottom of the list, or hide them completely. When the toggle is on, you can click **Show** next to any hidden framework to add it back to the list.
 
 ## Further reading
 
@@ -65,10 +73,9 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [17]: /integrations/servicenow/
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
-[20]: https://app.datadoghq.com/security/compliance/homepage
+[20]: https://app.datadoghq.com/security/compliance
 [21]: /security/cloud_security_management/misconfigurations/detection_rules
 [26]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
-[27]: https://app.datadoghq.com/security/compliance
 [28]: /dashboards/template_variables/
 [29]: /api/latest/security-monitoring/#update-an-existing-rule
 [30]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/custom_frameworks

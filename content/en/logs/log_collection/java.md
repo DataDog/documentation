@@ -152,7 +152,62 @@ Log4j 2 includes a JSON layout.
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-2. Add the JSON layout dependencies to your `pom.xml`. For example:
+2. Add the JSON layout template file (such as `MyLayout.json`) in the `src/main/resources` directory of your Java project. For example:
+    ```json
+    {
+       "timestamp":{
+          "$resolver":"timestamp",
+          "pattern":{
+             "format":"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+             "timeZone":"UTC"
+          }
+       },
+       "status":{
+          "$resolver":"level",
+          "field":"name"
+       },
+       "thread_name":{
+          "$resolver":"thread",
+          "field":"name"
+       },
+       "logger_name":{
+          "$resolver":"logger",
+          "field":"name"
+       },
+       "message":{
+          "$resolver":"message",
+          "stringified":true
+       },
+       "exception_class":{
+          "$resolver":"exception",
+          "field":"className"
+       },
+       "exception_message":{
+          "$resolver":"exception",
+          "field":"message"
+       },
+       "stack_trace":{
+          "$resolver":"exception",
+          "field":"stackTrace",
+          "stackTrace":{
+             "stringified":true
+          }
+       },
+       "host":"${hostName}",
+       "service":"${env:DD_SERVICE}",
+       "version":"${env:DD_VERSION}",
+       "dd.trace_id":{
+          "$resolver":"mdc",
+          "key":"dd.trace_id"
+       },
+       "dd.span_id":{
+          "$resolver":"mdc",
+          "key":"dd.span_id"
+       }
+    }
+    ```
+
+3. Add the JSON layout dependencies to your `pom.xml`. For example:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -240,10 +295,6 @@ writer.field.dd.env        = {context: dd.env}
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Inject trace IDs into your logs
-
-If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3] for more information.
-
 ### Raw format
 
 {{< tabs >}}
@@ -261,7 +312,7 @@ Configure a file appender in `log4j.xml`. For example:
     <param name="Append" value="true"/>
 
     <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </layout>
   </appender>
 
@@ -283,7 +334,7 @@ Configure a file appender in `log4j2.xml`. For example:
 <Configuration>
   <Appenders>
     <File name="FILE" fileName="logs/app.log">
-      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </File>
   </Appenders>
 
@@ -308,7 +359,7 @@ Configure a file appender in `logback.xml`. For example:
     <immediateFlush>true</immediateFlush>
 
     <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
     </encoder>
   </appender>
 
@@ -341,7 +392,20 @@ writer.file     = log.txt
 
 If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3].
 
-If you are _not_ correlating logs and traces, you can remove the MDC placeholders (`%X{dd.trace_id} %X{dd.span_id}`) from the log patterns included in the above configuration examples.
+If you are _not_ correlating logs and traces, remove the MDC placeholders (`%X{dd.trace_id} %X{dd.span_id}`) from the log patterns included in the previous configuration examples.
+
+For example, if you are using Log4j 2 but not correlating logs and traces, remove the following block from the example log layout template, `MyLayout.json`:
+
+```json
+"dd.trace_id":{
+   "$resolver":"mdc",
+   "key":"dd.trace_id"
+},
+"dd.span_id":{
+   "$resolver":"mdc",
+   "key":"dd.span_id"
+}
+```
 
 
 ## Configure the Datadog Agent
@@ -455,8 +519,8 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 
 ### Configure Logback
 
-{{< site-region region="us3,us5,ap1,gov" >}}
-  <div class="alert alert-warning">The TCP endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). For a list of logging endpoints, see <a href="/logs/log_collection/?tab=tcp#additional-configuration-options"> Log Collection and Integrations</a>.</div>
+{{< site-region region="us3,us5,ap1,ap2,gov" >}}
+  <div class="alert alert-danger">The TCP endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). For a list of logging endpoints, see <a href="/logs/log_collection/?tab=tcp#additional-configuration-options"> Log Collection and Integrations</a>.</div>
 {{< /site-region >}}
 
 

@@ -68,7 +68,7 @@ AWS Step Functions の分散型トレーシングを有効にするには、[Dat
 #### AWS X-Ray によるトレースの有効化
 
 
-<div class="alert alert-warning">このオプションは、<a href="https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics">AWS Step Functions の拡張メトリクス</a> を収集しません。これらのメトリクスを収集するには、<a href="https://docs.datadoghq.com/serverless/step_functions">Datadog APM for AWS Step Functions</a> を利用してトレースを有効にする必要があります。</div>
+<div class="alert alert-danger">このオプションは、<a href="https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics">AWS Step Functions の拡張メトリクス</a> を収集しません。これらのメトリクスを収集するには、<a href="https://docs.datadoghq.com/serverless/step_functions">Datadog APM for AWS Step Functions</a> を利用してトレースを有効にする必要があります。</div>
 
 AWS X-Ray を利用して AWS Step Functions のトレースを収集するには
 

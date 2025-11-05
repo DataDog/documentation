@@ -28,7 +28,7 @@ categories:
 - gestión de costes
 - notificaciones
 - orquestación
-- suministro
+- aprovisionamiento
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sedai/README.md
@@ -42,35 +42,35 @@ is_public: true
 manifest_version: 2.0.0
 name: sedai
 public_title: Sedai
-short_description: Plataforma autónoma para la gestión inteligente tus aplicaciones
-  en la nube
+short_description: Una plataforma autónoma para gestionar de forma inteligente tus
+  aplicaciones en la nube
 supported_os:
-- Linux
-- Windows
+- linux
+- windows
 - macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Automatización
-  - Categoría::Nube
-  - Categoría::Gestión de costes
-  - Categoría::Notificaciones
-  - Categoría::Orquestación
-  - Categoría::Suministro
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
+  - Category::Automation
+  - Category::Cloud
+  - Category::Cost Management
+  - Category::Notifications
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Configuración
-  description: Plataforma autónoma para la gestión inteligente tus aplicaciones en
-    la nube
+  description: Una plataforma autónoma para gestionar de forma inteligente tus aplicaciones
+    en la nube
   media: []
   overview: README.md#Información general
   support: README.md#Soporte
   title: Sedai
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 ## Información general
 
 Sedai es una plataforma de nube autónoma que gestiona proactivamente entornos de producción para prevenir problemas y mejorar la disponibilidad, el rendimiento y los costes de la nube. Como piloto automático inteligente para las ingenierías de fiabilidad de sitios (SRE), Sedai detecta, prioriza y analiza de forma independiente los datos de monitorización para actuar de forma segura y autónoma en la producción sin umbrales.
@@ -79,9 +79,9 @@ Habilita esta integración para recibir notificaciones en Datadog sobre las acci
 
 ### Funcionamiento
 
-* **Sin Agent:** Se conecta sin problemas a tus cuentas en la nube y detecta y comprende automáticamente los entornos de producción.
+* **Agentless:** Se conecta sin problemas a tus cuentas en la nube y detecta y comprende automáticamente entornos de producción.
 
-* **Sin configuración:** Se conecta fácilmente a la API Datadog e identifica, prioriza y aprende de forma inteligente el comportamiento de las métricas.
+* **No necesita configuración:** Se conecta fácilmente a la API Datadog e identifica, prioriza y aprende de forma inteligente el comportamiento de las métricas.
 
 * **Acciones proactivas:** Actúa de forma segura en la producción en tu nombre para garantizar que los recursos eviten problemas de disponibilidad y funcionen de forma óptima en todo momento.
 
@@ -109,7 +109,7 @@ En Sedai:
 
 Esta integración envía eventos a Datadog.
 
-## Compatibilidad
+## Soporte
 
 Si necesitas ayuda con esta integración, ponte en contacto con el [servicio de asistencia de Datadog][6].
 

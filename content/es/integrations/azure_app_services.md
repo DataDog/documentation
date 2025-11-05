@@ -57,7 +57,7 @@ Para conocer opciones de monitorización adicionales, incluyendo los logs y la i
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_app_services" >}}
+{{< get-metrics-from-git "azure-app-services" >}}
 
 
 ### Eventos

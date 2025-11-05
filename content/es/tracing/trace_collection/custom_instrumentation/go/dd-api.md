@@ -27,9 +27,9 @@ En esta página, se detallan casos de uso comunes para añadir y personalizar la
 
 ## Añadir etiquetas
 
-Añade [etiquetas (tags) de tramo (span)][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación dentro de Datadog. Las etiquetas de tramo se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información a nivel de código, como el nivel de comerciante, el importe del pago o el ID de usuario.
+Añade [etiquetas (tags) de tramo (span)][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación dentro de Datadog. Las span tags se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información a nivel de código, como el nivel de comerciante, el importe del pago o el ID de usuario.
 
-### Añadir etiquetas de tramo personalizadas
+### Añadir span tags personalizadas
 
 Añade [etiquetas][1] directamente a una interfaz `Span` llamando a `SetTag`:
 
@@ -62,7 +62,7 @@ func main() {
 ```
 
 Las integraciones de Datadog hacen uso del tipo `Context` para propagar el [tramo][2] activo actual.
-Si deseas añadir etiquetas de tramo adjuntas a un `Context`, llama a la función `SpanFromContext`:
+Si deseas añadir span tags adjuntas a un `Context`, llama a la función `SpanFromContext`:
 
 ```go
 package main
@@ -111,10 +111,10 @@ span.Finish(tracer.WithError(err))
 
 ## Añadir tramos
 
-Si no utilizas la instrumentación de biblioteca compatible (consulta [Compatibilidad de bibliotecas][3]), puede que desees instrumentar manualmente tu código.
+Si no utilizas la instrumentación de librería compatible (consulta [Compatibilidad de librerías][3]), puede que desees instrumentar manualmente tu código.
 
 <div class="alert alert-info">
-A diferencia de otras bibliotecas de rastreo de Datadog, al rastrear aplicaciones de Go, es recomendado que gestiones y pases explícitamente el contexto de Go de tus tramos. Este enfoque asegura relaciones de tramo precisas y un rastreo con sentido. Para más información, consulta la <a href="https://pkg.go.dev/context">documentación de la biblioteca de contexto de Go</a> o la documentación de cualquier biblioteca de terceros integrada con tu aplicación.
+A diferencia de otras bibliotecas de rastreo de Datadog, al rastrear aplicaciones de Go, es recomendado que gestiones y pases explícitamente el contexto de Go de tus tramos. Este enfoque asegura relaciones de tramo precisas y un rastreo con sentido. Para más información, consulta la <a href="https://pkg.go.dev/context">documentación de la librería de contexto de Go</a> o la documentación de cualquier biblioteca de terceros integrada con tu aplicación.
 </div>
 
 ### Creación manual de un nuevo tramo

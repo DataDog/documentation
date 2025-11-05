@@ -26,14 +26,9 @@ further_reading:
   text: "Check out the latest Software Delivery releases! (App login required)"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-
 ## Overview
 
-Failure events are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore). 
+Failure events are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore).
 
 ## Selecting and configuring a failure data source
 
@@ -70,11 +65,11 @@ You can retroactively include incidents from the past two years by selecting **B
 {{% tab "PagerDuty" %}}
 [PagerDuty][104] is an incident management platform that equips IT teams with immediate incident visibility, enabling proactive and effective responses to maintain operational stability and resilience.
 
-To integrate your PagerDuty account with DORA Metrics: 
+To integrate your PagerDuty account with DORA Metrics:
 
-1. Enable **PagerDuty** as a **Failures** event data source in [DORA settings][111]. 
+1. Enable **PagerDuty** as a **Failures** event data source in [DORA settings][111].
 
-1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**. 
+1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**.
 
 1. Click **+ New Webhook** and enter the following details:
 
@@ -92,7 +87,7 @@ To integrate your PagerDuty account with DORA Metrics:
         </tr>
         <tr>
           <td>Scope Type</td>
-          <td>Select <strong>Account</strong> to send incidents for all PagerDuty services in your account. Alternatively, you can send incidents for specific services or teams by selecting a different scope type.</td>
+          <td>Select the scope of which incidents you want to send. You can send incidents for a specific <strong>Service</strong> or <strong>Team</strong>, or all PagerDuty services in your <strong>Account</strong>. Depending on your environment and access level, some scope types may not be available.</td>
         </tr>
         <tr>
           <td>Description</td>
@@ -127,7 +122,7 @@ The matching algorithm works in the following steps:
      - `env`: If the monitor has a single `env` tag, the incident metrics and events are emitted with the environment.
      - `service`: If the monitor has one or more `service` tags, the incident metrics and events are emitted with the provided services.
      - `team`: If the monitor has a single `team` tag, the incident metrics and events are emitted with the team.
-     
+
 2. If the service URL of the incident matches the PagerDuty service URL for any services in the Software Catalog:
    - If a single Datadog service matches, the incident metrics and events are emitted with the service and team.
    - If multiple Datadog services match, the incident metrics and events are emitted with the team.
@@ -138,6 +133,10 @@ The matching algorithm works in the following steps:
 4. If the PagerDuty team name of the incident matches a team name in the Software Catalog, the incident metrics and events are emitted with the team.
 5. If the PagerDuty service name of the incident matches a team name in the Software Catalog, the incident metrics and events are emitted with the team.
 6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
+
+<div class="alert alert-danger">
+If an incident is resolved manually in PagerDuty instead of from a monitor notification, the incident resolution event does not contain monitor information and the first step of the matching algorithm is skipped.
+</div>
 
 [101]: https://support.pagerduty.com/docs/services-and-integrations
 [102]: /software_catalog/
@@ -174,6 +173,7 @@ You can optionally add the following attributes to the failure events:
 - `repository_url`
 - `commit_sha`
 - `version`
+- `custom_tags`: Tags in the form `key:value` that can be used to filter events on the [**DORA Metrics** page][14].
 
 See the [DORA Metrics API reference documentation][13] for the full spec and additional code samples.
 
@@ -182,7 +182,7 @@ See the [DORA Metrics API reference documentation][13] for the full spec and add
 For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 
 ```shell
-curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
+curl -X POST "https://api.<DD_SITE>/api/v2/dora/failure" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -201,14 +201,15 @@ curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
         "env": "prod",
         "name": "Web server is down failing all requests",
         "severity": "High",
-        "version": "v1.12.07"
+        "version": "v1.12.07",
+        "custom_tags": ["department:engineering", "app_type:backend"]
       }
     }
   }
 EOF
 ```
 
-[13]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
+[13]: /api/latest/dora-metrics/#send-a-failure-event-for-dora-metrics
 [14]: https://app.datadoghq.com/ci/dora
 [15]: https://app.datadoghq.com/ci/settings/dora
 
@@ -216,15 +217,21 @@ EOF
 {{% /tab %}}
 {{< /tabs >}}
 
-## Calculating change failure rate 
+## Calculating change failure rate
 Change failure rate requires both [deployment data][7] and [failure data](#selecting-and-configuring-a-failure-data-source).
 
-Change failure rate is calculated as the percentage of failure events out of the total number of deployments. Datadog divides `Count of Failures` over `Count of Deployments` for the same services and/or teams associated to both a failure and a deployment event. 
+Change failure rate is calculated as the percentage of failure events out of the total number of deployments. Datadog divides `Count of Failures` over `Count of Deployments` for the same services and/or teams associated to both a failure and a deployment event.
 
-## Calculating time to restore 
+## Calculating time to restore
 Time to restore is calculated as the duration distribution for *resolved failure* events.
 
-DORA Metrics generates the `Time to Restore` metric by recording the start and end times of each failure event. It calculates the time to restore as the median of these `Time to Restore` data points over a selected time frame. 
+DORA Metrics generates the `Time to Restore` metric by recording the start and end times of each failure event. It calculates the time to restore as the median of these `Time to Restore` data points over a selected time frame.
+
+## Custom tags
+If the services associated with the failure are registered in the [Software Catalog][1] with metadata set up (see [Adding Metadata][2]), the `languages` of the services and any `tags` are automatically retrieved and associated with the failure event.
+
+[1]: /tracing/software_catalog
+[2]: /tracing/software_catalog/adding_metadata
 
 ## Further Reading
 

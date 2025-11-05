@@ -95,7 +95,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
@@ -175,7 +175,7 @@ spec:
           env:
             - name: DD_IAST_ENABLED
               value: "true"
-``` 
+```
 
 #### AWS ECS
 
@@ -211,7 +211,7 @@ If you need additional assistance, contact [Datadog support][5].
 [4]: /security/code_security/iast/setup/
 [5]: /help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
@@ -287,7 +287,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 [5]: https://app.datadoghq.com/security/appsec/vm/code
 [6]: /help
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
@@ -380,7 +380,7 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 [5]: /help
 [6]: /agent/versions/upgrade_between_agent_minor_versions/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 ### Finishing setup
 
@@ -514,10 +514,10 @@ Versions 22 and above are supported as in Preview.
 
 
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /remote_configuration
 [3]: /security/code_security/software_composition_analysis/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title=".NET" level="h4" %}}
 
@@ -609,10 +609,10 @@ These are supported on the following architectures:
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /agent/remote_config/#enabling-remote-configuration
+[3]: /remote_configuration#enabling-remote-configuration
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Node.js" level="h4" %}}
 
@@ -669,6 +669,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | Framework | Versions | Runtime Code Analysis (IAST)     |
 |-----------|----------|----------------------------------|
 | express   | >=4      | <i class="icon-check-bold"></i>  |
+| fastify   | >=2      | <i class="icon-check-bold"></i>  |
 | nextjs    | >=11.1   |                                  |
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities or for your Node.js framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -719,7 +720,7 @@ Datastore tracing provides:
 | [sequelize][42]          | `>=4`     | <i class="icon-check-bold"></i>        |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver
@@ -741,7 +742,7 @@ Datastore tracing provides:
 [44]: https://www.npmjs.com/package/apollo-server-core
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Python" level="h4" %}}
 
@@ -750,9 +751,9 @@ Datastore tracing provides:
 The following code security capabilities are supported in the Python library, for the specified tracer version:
 
 | Code Security capability                    | Minimum Python tracer version |
-| ------------------------------------------- | ----------------------------- |
+| ------------------------------------------- |-------------------------------|
 | Runtime Software Composition Analysis (SCA) | 1.5.0                         |
-| Runtime Code Analysis (IAST)                | Preview (2.9.3)               |
+| Runtime Code Analysis (IAST)                | Preview (2.21.0)              |
 
 #### Supported deployment types
 | Type        | Runtime Code Analysis (IAST)      |
@@ -772,18 +773,25 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level         |
-|------------|---------------------- |
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability  |
+| Release    | Support level                              | Minimum Datadog Agent |
+|------------|--------------------------------------------|-----------------------|
+| `>=3.0,<4` | General Availability                       | 7.28                  |
+| `>=2.0,<3` | End of Life                                | 7.28                  |
+|    `<2`    | End of Life                                |                       |
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions |
+|---------|-----------------------|---------|-----------------|----------------------------|
+| Linux   | x86-64, i686, AArch64 | CPython | 3.8+            | `>=3,<4`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.8+            | `>=3,<4`                   |
+| Windows | 64bit, 32bit          | CPython | 3.8+            | `>=3,<4`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
 
 
 #### Web framework compatibility
@@ -793,10 +801,11 @@ And the library supports the following runtimes:
 
 #### Supported frameworks
 
-| Framework                | Versions    | Runtime Code Analysis (IAST)                |
-| ------------------------ | ----------- | ------------------------------------------- |
-| Django                   | 1.8         |  <i class="icon-check-bold"></i>            |
-| Flask                    | 0.10        |  <i class="icon-check-bold"></i>            |
+| Framework   | Versions     | Runtime Code Analysis (IAST)    |
+|-------------|--------------|---------------------------------|
+| Django      | 1.8          | <i class="icon-check-bold"></i> |
+| FastAPI     | 0.86         | <i class="icon-check-bold"></i> |
+| Flask       | 0.10         | <i class="icon-check-bold"></i> |
 
 Support for query strings is not available for Flask.
 
@@ -816,9 +825,9 @@ Datastore tracing provides:
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
 
 [1]: /tracing/trace_collection/compatibility/python/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}

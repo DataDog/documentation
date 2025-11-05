@@ -1,10 +1,18 @@
 ---
 title: Visualize relationships with Security Graph
+further_reading:
+  - link: "https://www.datadoghq.com/blog/datadog-security-graph/"
+    tag: "Blog"
+    text: "Visualize cloud security relationships with Datadog Security Graph"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/security-graph" header="Join the Preview!">}}
   Security Graph is in Limited Availability.
 {{< /callout >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Security Graph is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 One of the most persistent challenges in cloud security is understanding how compute, storage, identity, and networking components interact with each other. With Security Graph, you can model your cloud environment as a relationship graph. Visualize and query the connections between your cloud resources, such as EC2 instances, IAM roles, S3 buckets, and security groups, combining data from your Agentless and Agent-based cloud scans. Investigate these relationships so you can surface indirect access paths, assess identity risks, and respond more effectively to emerging threats.
 
@@ -42,3 +50,7 @@ As you modify the query, Security Graph automatically updates to show relevant r
   - View more details about the resource.
   - View security findings associated with the resource.
 - When you're viewing resources in a table, you can click a resource to view additional information in the side panel.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

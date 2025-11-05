@@ -37,7 +37,7 @@ Datadog Azure 통합을 사용해 Azure Relay 메트릭을 수집할 수 있습�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_relay" >}}
+{{< get-metrics-from-git "azure-relay" >}}
 
 
 ### 이벤트

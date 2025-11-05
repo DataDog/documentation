@@ -1,14 +1,15 @@
 ---
 categories:
 - aws
-- cloud
+- 클라우드
 - 로그 수집
 - 네트워크
 - 추적
 creates_events: false
+custom_kind: 통합
 dependencies: []
 description: AWS App Mesh는 오픈 소스 엣지이자 서비스 프록시입니다.
-display_name: AWS  App Mesh
+display_name: AWS App Mesh
 draft: false
 further_reading:
 - link: https://docs.datadoghq.com/integrations/envoy/
@@ -20,7 +21,6 @@ integration_id: amazon-app-mesh
 integration_title: AWS App Mesh
 integration_version: ''
 is_public: true
-custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: envoy.
@@ -32,13 +32,13 @@ support: 코어
 supported_os:
 - linux
 - mac_os
-- windows
+- 윈도우즈(Windows)
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
-[AWS App Mesh][1]는 Amazon ECS Fargate나 AWS EKS 클러스터에서 실행 중인 마이크로 서비스에 애플리케이션 수준 네트워킹을 제공하는 서비스 메시입니다.
+[AWS App Mesh][1]는 Amazon ECS Fargate나 Amazon EKS 클러스터에서 실행 중인 마이크로 서비스에 애플리케이션 수준 네트워킹을 제공하는 서비스 메시입니다.
 
 
 ## 설정
@@ -112,15 +112,15 @@ supported_os:
 
 `datadog-agent`와 서비스를 배포하려면 네임스페이스를 선택하세요(예: `monitoring`). appmesh-injector를 다음으로 배포하는 옵션에 이를 사용하세요.
 
-    ```shell
-      helm upgrade -i appmesh-controller eks/appmesh-controller \
-      --namespace appmesh-system \
-      --set sidecar.logLevel=debug \
-      --set tracing.enabled=true \
-      --set tracing.provider=datadog \
-      --set tracing.address=ref:status.hostIP \
-      --set tracing.port=8126
-    ```
+```shell
+  helm upgrade -i appmesh-controller eks/appmesh-controller \
+  --namespace appmesh-system \
+  --set sidecar.logLevel=debug \
+  --set tracing.enabled=true \
+  --set tracing.provider=datadog \
+  --set tracing.address=ref:status.hostIP \
+  --set tracing.port=8126
+```
 
 
 또는 [EKS와 App Mesh][2] 설명서에 따라 `enable-datadog-tracing=true` 옵션이나 환경 변수 `ENABLE_DATADOG_TRACING=true`를 사용해 앱메시 인젝터를 배포할 수도 있습니다.
@@ -183,7 +183,7 @@ ECS Fargate 작업 정의에서 AWS App Mesh 파라미터인 `ENABLE_ENVOY_DATAD
 
 1. App Mesh에는 제한 사항이 있어 ECS 작업에서 Datadog로 메트릭을 전송할 때 Egress 필터를 `Allow External Traffic`로 설정해야 합니다.
 
-2. Envoy 사이드카와 다음 Docker 레이블이 있는 Datadog 에이전트를 포함한 모든 작업 정의를 업데이트합니다. 자세한 내용은 [ECS Fargate 통합 설정][2]을 참고하세요.
+2. Envoy 사이드카와 다음 Docker 레이블이 있는 Datadog 에이전트를 포함한 모든 작업 정의를 업데이트하세요. 자세한 내용은 [ECS Fargate 통합 설정][2]을 참고하세요.
 
     ```text
         "dockerLabels": {
@@ -223,7 +223,7 @@ ECS Fargate 작업 정의에서 AWS App Mesh 파라미터인 `ENABLE_ENVOY_DATAD
 {{% /tab %}}
 {{< /tabs >}}
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 
@@ -231,11 +231,11 @@ ECS Fargate 작업 정의에서 AWS App Mesh 파라미터인 `ENABLE_ENVOY_DATAD
 
 ### 이벤트
 
-AWS App Mesh 통합에는 이벤트가 포함되지 않습니다.
+AWS App Mesh 통합은 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
-AWS App Mesh 통합에는 서비스 점검이 포함되지 않습니다.
+AWS App Mesh 통합은 서비스 점검을 포함하지 않습니다.
 
 ## 트러블슈팅
 

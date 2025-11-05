@@ -94,7 +94,7 @@ cert_manager 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "cert_manager" >}}
+{{< get-metrics-from-git "cert-manager" >}}
 
 
 ### 이벤트
@@ -102,7 +102,7 @@ cert_manager 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 cert_manager 통합은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "cert_manager" >}}
+{{< get-service-checks-from-git "cert-manager" >}}
 
 
 ## 트러블슈팅

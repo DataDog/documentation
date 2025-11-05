@@ -1,5 +1,6 @@
 ---
 title: Trace View
+description: Visualize and analyze individual traces using flame graphs, span lists, waterfalls, and maps with detailed span information.
 aliases:
 - /tracing/visualization/trace/
 further_reading:
@@ -46,7 +47,7 @@ To navigate the graph, scroll to zoom, click and drag to move around, and use th
 
 The legend details the color coding of the flame graph. Group spans by either **Service** (default), **[Base service][1]** (service from which the span is emitted), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 Spans from [inferred services][2] are represented with a dashed outline.
 
 [2]: /tracing/services/inferred_services
@@ -85,7 +86,7 @@ Each row (span) indicates the following:
 - **Statuses**: When applicable, an HTTP status code is displayed.
 - **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 Spans from [inferred services][1] are represented with a dashed underline.
 
 [1]: /tracing/services/inferred_services
@@ -112,6 +113,18 @@ To view additional information about the service entry spans for each node, hove
 [2]: /tracing/services/inferred_services
 {{% /tab %}}
 {{< /tabs >}}
+
+### Trace preview
+When a trace size exceeds 100MB, it cannot be fully visualized using the default trace side panel. In such cases, Trace Preview mode is enabled. This mode returns only the most critical spans to help you continue your investigation. These include:
+
+- Service entry level spans
+- Error spans
+- Long-running spans
+- Spans linked to other spans or traces
+
+The available visualization options for large traces are limited to the Waterfall and Map views. In Preview mode, the Waterfall view provides additional an option to fetch spans that are not included by default. These spans are grouped and represented using numbered pills. Each pill displays the total number of spans available in that group. You can click on a number pill to expand and view all spans within that group.
+
+{{< img src="tracing/visualization/trace/trace-preview.png" alt="Trace preview" style="width:100%;">}}
 
 ## Span search
 
@@ -148,7 +161,7 @@ The span header contains service, operation, and resource names of the selected 
 
 {{< img src="tracing/trace_view/span_header.png" alt="Span header" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 When the span represents a client call from an instrumented service to a database, a queue, or a third-party service, the span header shows the service and the inferred entity.
 
 {{< img src="tracing/trace_view/span_header_inferred.png" alt="Span header inferred" style="width:90%;">}}
@@ -168,7 +181,7 @@ Other information may be displayed under various conditions:
 
 {{< img src="tracing/trace_view/info_tab.png" alt="Span Info tab" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 When the service name is an override from the base service name, the top of the info section shows the:
 - **[Base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
 - **[Service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.

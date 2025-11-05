@@ -9,10 +9,6 @@ algolia:
   tags: ["fips", "compliance", "fedramp", "govcloud"]
 ---
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-warning">The Datadog FIPS Agent is available only in the US1-FED region.</a></div>
-{{< /site-region >}}
-
 ## Overview
 
 As part of the FedRAMP High effort, several integrations have been verified for **FIPS 140-2** compliance. Integrations that are not mentioned below may function in compliance with FIPS 140-2 but have not been tested internally.
@@ -53,7 +49,7 @@ Integrations marked out of the box ("OOTB") require no further configuration.
 | Zookeeper               | The `use_tls` option must be enabled through the integration configuration.                                                                                  |
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Configuring the <strong>IIS integration<strong> to query remote systems is discouraged. It relies on a Windows API for cryptography, which Datadog cannot control.
 </div>
 

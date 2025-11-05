@@ -12,10 +12,6 @@ title: (레거시) Observability Pipeline을 설정하여 Datadog 재수화 가�
   전송하기
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipeline은 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 ## 개요

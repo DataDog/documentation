@@ -5,6 +5,7 @@ aliases:
 - /ja/continuous_integration/integrate_tests/
 - /ja/continuous_integration/tests/
 cascade:
+  site_support_id: test_optimization
   algolia:
     rank: 70
     tags:
@@ -39,10 +40,6 @@ further_reading:
   text: Test Optimization のトラブルシューティング方法
 title: Datadog の Test Optimization
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 Test Optimization は利用できません。</div>
-{{< /site-region >}}
 
 ## 概要
 

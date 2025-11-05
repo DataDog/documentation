@@ -13,31 +13,38 @@ disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring
   tag: Notas de la versión
-  text: Echa un vistazo a las últimas versiones de la Monitorización Synthetic en
+  text: Echa un vistazo a las últimas versiones de la monitorización Synthetic en
     Datadog. (Es necesario iniciar sesión en la aplicación)
-- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-  tag: Blog
-  text: Introducción a la Monitorización Synthetic en Datadog
-- link: https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/
-  tag: Blog
-  text: Monitorizar el rendimiento de la CDN en tus tests Synthetic
-- link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
-  tag: Blog
-  text: Prácticas recomendadas para la monitorización de aplicaciones web estáticas
-- link: https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/
-  tag: Blog
-  text: Mejorar la cobertura de tus tests de API con la Monitorización Synthetic en
-    Datadog
 - link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
   tag: Centro de aprendizaje
-  text: 'Centro de aprendizaje de Datadog: Empezando con los tests del Navegador Synthetic'
+  text: 'Centro de aprendizaje de Datadog: Empezando con los tests de navegador Synthetic'
 - link: /synthetics/guide/
   tag: Documentación
-  text: Guía de Synthetic Monitoring
+  text: Guías para la monitorización Synthetic
 - link: https://dtdg.co/fe
-  tag: Habilitar los fundamentos
+  tag: Habilitación de los fundamentos
   text: Participa en una sesión interactiva para mejorar tus capacidades de ejecutar
     tests synthetic
+- link: https://www.datadoghq.com/blog/http-security-headers-synthetic-tests/
+  tag: Blog
+  text: Proteger las cabeceras HTTP con tests Synthetic
+- link: https://www.datadoghq.com/blog/synthetic-monitoring-updates/
+  tag: Blog
+  text: Obtener información clave sobre las experiencias de los usuarios más rápidamente
+    con la monitorización Synthetic en Datadog
+- link: https://www.datadoghq.com/blog/smoke-testing-synthetic-monitoring/
+  tag: Blog
+  text: Crear tests de humo UX eficaces con la monitorización Synthetic
+- link: https://www.datadoghq.com/blog/slo-synthetic-monitoring/
+  tag: Blog
+  text: Mejorar la precisión y el rendimiento de los SLOs con la monitorización Synthetic
+    en Datadog
+- link: https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/
+  tag: Blog
+  text: Creación de tests Synthetic fiables y precisos para tus aplicaciones móviles
+- link: https://www.datadoghq.com/blog/ambassador-browser-tests/
+  tag: Blog
+  text: Cómo ayudé a mi cliente a ampliar sus tests de navegador con Datadog
 title: Tests y monitorización Synthetic
 ---
 
@@ -90,9 +97,9 @@ Utiliza la [integración entre tests sintéticos y trazas de APM][16] para encon
 
 Analiza la información de rendimiento de tus tests de API, tests de API multipaso, tests de navegador y localizaciones privadas, así como los eventos de Datadog, con [dashboards sintéticos listos para usar][17].
 
-{{< img src="synthetics/dashboards/test_dashboard.png" alt="Dashboard de Monitorización Synthetic y del Resumen de tests continuos" style="width:100%;">}}
+{{< img src="synthetics/dashboards/test_dashboard.png" alt="Dashboard de monitorización Synthetic y del resumen de tests continuos" style="width:100%;">}}
 
-## Utiliza la Monitorización Synthetic y el Explorador de resultados de tests
+## Utiliza la monitorización Synthetic y el Explorador de resultados de tests
 
 Crea [buscar consultas y visualizaciones][20] para tus ejecuciones de test sintético o lotes de tests que se ejecutan en pipelines CI/CD.
 
@@ -104,11 +111,33 @@ Optimiza tu conjunto de tests [asegurándote de que se prueban los flujos de tra
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Explorador de tests continuos" style="width:100%;">}}
 
+## Notificaciones de la monitorización Synthetic
+
+Utiliza y enriquece los monitores de monitorización Synthetic para enviar notificaciones cuando un test de monitorización Synthetic está fallando. Están disponibles las siguientes funciones:
+
+Mensajes de monitor pre-rellenados 
+: Los mensajes de monitor pre-rellenados constituyen un punto de partida estructurado para las alertas de tests de monitorización Synthetic. Cada mensaje incluye un título estandarizado, un resumen y un pie de página con metadatos de test, lo que facilita y agiliza la comprensión de la alerta.
+
+Variables de plantilla
+: Las variables de plantilla permiten inyectar datos específicos de test en las notificaciones de monitor de forma dinámica. Estas variables se extraen del objeto `synthetics.attributes`.
+
+Uso avanzado
+: El uso avanzado incluye técnicas para revelar informaciones de test profundas o estructurar mensajes complejos utilizando plantillas de Handlebars.
+
+Alertas condicionales
+: Las alertas condicionales te permiten cambiar el contenido de una notificación de monitor en función de resultados específicos o de condiciones de fallo de tests.
+
+Para obtener más información, consulta las [notificaciones de monitorización Synthetic][24].
+
+## Historial de versiones
+
+Utiliza el [historial de versiones en la monitorización Synthetic][23] para ejecutar una versión anterior de un test, restaurar tu test a cualquier versión guardada o clonar una versión para crear un nuevo test de Synthetic Monitoring.
+
 ## ¿Estás listo para comenzar?
 
-Consulta el apartado [Empezando con Monitorización Synthetic][18] para obtener instrucciones sobre cómo crear tu primer test sintético y la monitorización tus aplicaciones web. A continuación, explora [Empezando con localizaciones privadas][19] para obtener instrucciones sobre cómo crear tu localización privada y ejecutar tests sintéticos con tu localización privada.
+Consulta el apartado [Empezando con la monitorización Synthetic][18] para obtener instrucciones sobre cómo crear tu primer test Synthetic y la monitorización tus aplicaciones web. A continuación, explora [Empezando con localizaciones privadas][19] para obtener instrucciones sobre cómo crear tu localización privada y ejecutar tests Synthetic con tu localización privada.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -135,3 +164,5 @@ Consulta el apartado [Empezando con Monitorización Synthetic][18] para obtener 
 [20]: /es/continuous_testing/explorer/
 [21]: /es/mobile_testing
 [22]: /es/synthetics/test_coverage
+[23]: /es/synthetics/guide/version_history/
+[24]: /es/synthetics/notifications/

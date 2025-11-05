@@ -102,7 +102,7 @@ Configura Amazon MSK para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_msk_cloud" >}}
+{{< get-metrics-from-git "amazon-msk" >}}
 
 
 ### Eventos

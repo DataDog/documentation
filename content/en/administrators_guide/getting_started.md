@@ -19,7 +19,7 @@ As you go along in this guide, you can refer to the following self-service resou
 
 * [Datadog training](#learn-datadog-basics) courses.
 * The Datadog [documentation][16], especially the [Getting started][17] pages, to familiarize yourself with the platform further.  
-* The [Datadog UI][18], which provides in-context help, information on specific configuration fields, release notes, and other resources, click the `"?"` icon throughout the app, or the bottom of the product navigation.
+* The [Datadog UI][18], which provides in-context help, information on specific configuration fields, release notes, and other resources, click the <kbd>?</kbd> icon throughout the app, or the bottom of the product navigation.
 
 {{< img src="/administrators_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}} 
 
@@ -82,11 +82,11 @@ The [Datadog UI][18] is the best place to start building out your testing enviro
 
 A few examples are:
 
-* Create a [Synthetic test][14] to start testing critical business transactions on your applications.
+* Create a [Synthetic Monitoring test][14] to start testing critical business transactions on your applications.
 * Create a few [Service Level Objectives][15] (SLOs) to define targets for application performance.
 * Review the [APM Service Setup][9] page, and follow the step-by-step instructions to begin instrumenting your services.
-* Configure and test [Log Pipelines][8] to figure out how you would like to ingest different sets of logs coming from infrastructure and applications.
-* Review the [Monitor Templates][10] page to begin adding some alerts on your test environment.
+* Configure and test [Log Pipelines][8] to determine how you would like to ingest different sets of logs coming from infrastructure and applications.
+* Review the [Monitor Templates][10] page to begin adding alerts on your test environment.
 
 #### Host Agent Config Templates
 

@@ -57,7 +57,7 @@ Configurez Amazon AppStream de façon à ce que ses logs soient envoyés vers un
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_appstream" >}}
+{{< get-metrics-from-git "amazon-appstream" >}}
 
 
 ### Événements

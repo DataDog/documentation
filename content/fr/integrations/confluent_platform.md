@@ -147,7 +147,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "confluent_platform" >}}
+{{< get-metrics-from-git "confluent-platform" >}}
 
 
 ### Événements
@@ -155,7 +155,7 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 Le check Confluent Platform n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "confluent_platform" >}}
+{{< get-service-checks-from-git "confluent-platform" >}}
 
 
 ## Dépannage

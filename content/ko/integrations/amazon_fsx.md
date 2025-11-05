@@ -1,9 +1,10 @@
 ---
 categories:
 - aws
-- cloud
-- 데이터 스토어
+- 클라우드
+- 데이터 저장소
 - 로그 수집
+custom_kind: 통합
 dependencies: []
 description: 핵심 Amazon FSx 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_fsx/
@@ -14,7 +15,6 @@ integration_id: ''
 integration_title: Amazon FSx
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_fsx
 public_title: Datadog-Amazon FSx 통합
@@ -33,14 +33,14 @@ Amazon FSx는 완전 관리형 서비스로, NetApp ONTAP, OpenZFS, Windows File
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 메트릭 수집
 
 1. [AWS 통합 페이지][2]에서 `FSx`가 `Metric Collection` 탭 아래 활성화되어 있는지 확인하세요.
 2. Amazon FSx 메트릭을 수집하려면 [Datadog IAM 정책][3]에 해당 권한을 추가합니다. 
 
-    | AWS 권한                          | 설명                                                                                                                                                                                                                                             |
+    | AWS 권한                          | 설명                                                                                                                                                                                                                                             |
     | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `fsx:ListTagsForResource`               | FSx 커스텀 태그를 추가하는 데 사용됩니다.                                                                                                                                                                                                                   |
     | `fsx:DescribeFileSystems`               | 저장소와 처리 용량을 제공하는 데 사용됩니다.                                                                                                                                                                                    |

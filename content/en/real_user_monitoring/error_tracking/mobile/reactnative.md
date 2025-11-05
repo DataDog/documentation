@@ -68,6 +68,28 @@ To set your project up to send the symbolication files automatically, run `npx d
 
 See the wizard [official documentation][13] for options.
 
+### Use Datadog Metro Configuration
+
+Starting from `@datadog/mobile-react-native@2.10.0` and `@datadog/datadog-ci@v3.13.0`, the SDK exports a Datadog Metro Plugin, which attaches a unique Debug ID to your application bundle and sourcemap.
+
+Add it to your `metro.config.js` to allow for accurate symbolication of stacktraces on Datadog:
+
+```js
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+const {withDatadogMetroConfig} = require('@datadog/mobile-react-native/metro');
+
+// Your configuration
+const config = mergeConfig(getDefaultConfig(__dirname), {});
+
+module.exports = withDatadogMetroConfig(config);
+```
+
+### Use the `datadog-ci react-native inject-debug-id` command
+
+As an alternative to the Metro Configuration, starting from `@datadog/mobile-react-native@2.10.0` and `@datadog/datadog-ci@v3.13.0`, you can use the `datadog-ci react-native inject-debug-id` command to manually attach a unique Debug ID to your application bundle and sourcemap.
+
+Usage instructions are available on the [command documentation page][17].
+
 ### Passing options for your uploads
 
 #### Using the `datadog-sourcemaps.gradle` script
@@ -477,8 +499,9 @@ Inside the loop, add the following snippet:
 [9]: https://fastlane.tools/
 [10]: https://appcenter.ms/
 [11]: https://www.bitrise.io/
-[12]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
+[12]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/react-native#xcode
 [13]: https://github.com/DataDog/datadog-react-native-wizard
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/source-code/setup/rum
+[17]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id

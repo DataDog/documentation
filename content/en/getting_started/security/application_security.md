@@ -1,5 +1,6 @@
 ---
 title: Getting Started with App and API Protection
+description: Set up Datadog App and API Protection to secure web applications and APIs. Enable threat detection, code security, and vulnerability scanning for production.
 aliases:
 - /security/security_monitoring/getting_started/
 - /getting_started/application_security
@@ -71,7 +72,7 @@ These security insights are detected from data reported by APM. The insights hel
   2. Add Remote Configuration capability to an existing API key, or create a new one.
   3. Update your Datadog Agent configuration to use the API key with Remote Configuration capability.
 
-  See [Setting up Remote Configuration][21] for more information.
+  See [Setting up Remote Configuration][15] for more information.
 
 ### Test AAP
 Once enabled, AAP immediately identifies application vulnerabilities and detects attacks and attackers targeting your services.
@@ -100,6 +101,8 @@ For information on disabling AAP or its related capabilities, see the following:
 
 ## Reports and notifications
 
+{{% sec-hipaa-limits %}}
+
 1. Set up [notification rules][23] to receive alerts using Slack, Jira, email, and more.
 2. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days. 
 
@@ -121,11 +124,10 @@ For information on disabling AAP or its related capabilities, see the following:
 [12]: /security/notifications/rules/
 [13]: /security/application_security/risk_management
 [14]: https://app.datadoghq.com/security/appsec/vm?&group=vulnerability
-[15]: https://docs.datadoghq.com/agent/guide/how_remote_config_works/?tab=configurationyamlfile#overview
+[15]: /tracing/guide/remote_config
 [17]: https://app.datadoghq.com/organization-settings/remote-config
 [18]: https://app.datadoghq.com/security/appsec/landing
 [20]: /getting_started/application_security/#setup-asm
-[21]: /agent/remote_config?tab=configurationyamlfile#setup
 [22]: https://app.datadoghq.com/security/configuration/reports
 [23]: https://app.datadoghq.com/security/configuration/notification-rules
 [24]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection

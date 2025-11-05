@@ -23,10 +23,6 @@ title: Automatizar los flujos de trabajo de seguridad con Workflow Automation
 
 {{< product-availability >}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 [Datadog Workflow Automation][1] te permite orquestar y automatizar tus procesos de extremo a extremo mediante la creación de flujos de trabajo compuestos por acciones que se conectan a tu infraestructura y herramientas.
 
 Utiliza Workflow con [Cloud Security Management (CSM)][2] para automatizar tus flujos de trabajo relacionados con la seguridad. Por ejemplo, puedes crear flujos de trabajo que te permitan [bloquear el acceso a un bucket público de Amazon S3 a través de un mensaje interactivo de Slack] (#block-access-to-aws-s3-bucket-via-slack), o [crear automáticamente un problema de Jira y asignarlo a un equipo] (#automatically-create-and-assign-a-jira-issue).

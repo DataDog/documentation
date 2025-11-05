@@ -10,12 +10,22 @@ further_reading:
 - link: /developers/community/libraries/
   tag: Documentación
   text: API oficial y creada por la comunidad y bibliotecas cliente DogStatsD
+- link: https://www.datadoghq.com/blog/historical-metrics/
+  tag: Blog
+  text: Monitorización del rendimiento del sistema durante periodos de tiempo más
+    prolongados con métricas históricas
 title: Consumo de métricas históricas
 ---
 
+{{< jqmath-vanilla >}}
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">La ingesta de métricas históricas no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+{{% /site-region %}}
+
 ## Información general
 
-La habilitación del consumo de métricas históricas te permite recopilar valores de métrica con marcas de tiempo anteriores a una hora desde el momento del envío, pero no anteriores a tu periodo de conservación total de métricas (por defecto, 15 meses).
+La habilitación de la ingesta de métricas históricas te permite recopilar valores de **métricas personalizadas** con marcas de tiempo anteriores a una hora desde el momento del envío, pero no anteriores a tu periodo de conservación total de métricas (por defecto, 15 meses).
 
 Tener habilitado el consumo de métricas históricas para tus métricas puede ser útil para una variedad de casos de uso, como la recuperación luego de una interrupción, la corrección de valores erróneos y la gestión de retrasos de IoT.
 
@@ -25,13 +35,13 @@ Tener habilitado el consumo de métricas históricas para tus métricas puede se
 
 Datadog clasifica las *métricas históricas* como puntos de métricas con marcas de tiempo que tienen más de una hora de antigüedad con respecto al momento del envío. Si el consumo de métricas históricas no está habilitado, no se consumen valores de métricas de más de una hora de antigüedad.
 
-Por ejemplo, tu métrica (`exampleMetricA`) emite un valor a Datadog a la 1:00 PM EST y la marca de tiempo de ese valor es 10:00 AM EST. Este valor de métrica se clasifica como histórico porque tiene una marca de tiempo 3 horas más antigua en relación con la hora del envío.
+Por ejemplo, tu métrica (`exampleMetricA`) emite un valor a Datadog a la 1:00 PM EST y la marca de tiempo de ese valor es 10:00 AM EST. Este valor de métrica se clasifica como histórico porque tiene una marca de tiempo 3 horas más antigua con respecto a la hora del envío.
 
 Con el consumo de métricas históricas habilitado, si envías varios valores con la misma marca de tiempo y la misma combinación de valor-etiqueta (tag) a Datadog, Datadog conserva el valor enviado más recientemente. Es decir, si dentro de la misma marca de tiempo, envías una métrica con un valor de X, y también envías esa métrica con un valor de Y, se conservará el valor que se haya enviado más recientemente.
 
-Puedes empezar a consumir valores de métricas históricas habilitando el consumo de métricas históricas en la página [Resumen de métricas][1] para los tipos de métricas *Recuento, Tasa e Indicador*.
+Puedes empezar a consumir valores de métricas históricas habilitando el consumo de métricas históricas en la página [Resumen de métricas][1] para los tipos de métricas *Count, Rate y Gauge*.
 
-**Nota**: El consumo de métricas históricas no está disponible para tus métricas de distribución.
+**Nota**: La ingesta de métricas históricas no está disponible para las métricas de distribución ni para las métricas personalizadas generadas a partir de otros tipos de datos de Datadog (como los logs).
 
 ## Configuración
 
@@ -45,13 +55,14 @@ Para permitir el consumo de métricas históricas para una métrica específica:
 
 ### Configuración masiva de múltiples métricas
 
-Puedes habilitar el consumo de métricas históricas para varias métricas a la vez, en lugar de tener que configurar cada una individualmente.
+Puedes habilitar la ingesta de métricas históricas para varias métricas a la vez, en lugar de tener que configurar cada una individualmente.
 
-1.  Ve a la [página Resumen de métricas][1] y haz clic en el menú desplegable **Configure Metrics** (Configurar métricas).
+1. Ve a la [página Resumen de métricas][1] y haz clic en el menú desplegable **Configure Metrics** (Configurar métricas).
 1. Selecciona **Enable historical metrics** (Habilitar métricas históricas).
-1. Especifica un prefijo en el espacio de nombres de la métrica para habilitar el consumo de métricas históricas en todas las métricas que coinciden con ese espacio de nombres.
+1. Especifica un prefijo de espacio de nombres de métrica para seleccionar todas las métricas que coinciden con ese espacio de nombres.
+1. (Opcional) Para deshabilitar la ingesta de métricas históricas para todas las métricas del espacio de nombres, haz clic en el conmutador **Historical metrics** (Métricas históricas).
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_bulk_historical_metrics.mp4" alt="Guía de la habilitación masiva del consumo de métricas históricas" video=true >}}
+{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Conmutador de ingesta de métricas históricas" >}}
 
 ## Envío de métricas históricas
 
@@ -66,7 +77,7 @@ Con la API, puedes enviar valores de métricas con marcas de tiempo históricas 
 {{< programming-lang lang="Python">}}
 ```python
 """
-El envío de métricas devuelve la respuesta "Payload accepted"
+Submit metrics returns "Payload accepted" response
 """
 
 from datetime import datetime
@@ -86,7 +97,7 @@ body = MetricPayload(
             points=[
                 MetricPoint(
 
-                    """ Añadir marca de tiempo histórica aquí """
+                    """ Add historical timestamp here """
                     timestamp=int(datetime.now().timestamp()),
                     """ *********************** """
 
@@ -114,7 +125,7 @@ with ApiClient(configuration) as api_client:
 
 {{< programming-lang lang="java" >}}
 ```java
-// El envío de métricas devuelve la respuesta "Payload accepted"
+// Submit metrics returns "Payload accepted" response
 import com.datadog.api.client.ApiClient;
 import com.datadog.api.client.ApiException;
 import com.datadog.api.client.v2.api.MetricsApi;
@@ -143,7 +154,7 @@ public class Example {
                             Collections.singletonList(
                                 new MetricPoint()
 
-                                    //Añadir marca de tiempo histórica aquí
+                                    //Add historical timestamp here
                                     .timestamp(OffsetDateTime.now().toInstant().getEpochSecond())
                                     //***********************
 
@@ -169,7 +180,7 @@ public class Example {
 
 {{< programming-lang lang="go" >}}
 ```go
-// El envío de métricas devuelve la respuesta "Payload accepted"
+// Submit metrics returns "Payload accepted" response
 
 package main
 
@@ -192,7 +203,7 @@ func main() {
                 Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
                 Points: []datadogV2.MetricPoint{
                     {   
-                        //Añadir marca de tiempo histórica aquí
+                        //Add historical timestamp here
                         Timestamp: datadog.PtrInt64(time.Now().Unix()),
                         //***********************
 
@@ -227,7 +238,7 @@ func main() {
 
 {{< programming-lang lang="ruby" >}}
 ```ruby
-# El envío de métricas devuelve la respuesta "Payload accepted"
+# Submit metrics returns "Payload accepted" response
 
 require "datadog_api_client"
 api_instance = DatadogAPIClient::V2::MetricsAPI.new
@@ -240,7 +251,7 @@ body = DatadogAPIClient::V2::MetricPayload.new({
       points: [
         DatadogAPIClient::V2::MetricPoint.new({
 
-          #Añadir marca de tiempo histórica aquí 
+          #Add historical timestamp here  
           timestamp: Time.now.to_i,
           #***********************  
 
@@ -263,7 +274,7 @@ p api_instance.submit_metrics(body)
 {{< programming-lang lang="typescript" >}}
 ```typescript
 /**
- * El envío de métricas devuelve la respuesta "Payload accepted"
+ * Submit metrics returns "Payload accepted" response
  */
 
 import { client, v2 } from "@datadog/datadog-api-client";
@@ -279,7 +290,7 @@ const params: v2.MetricsApiSubmitMetricsRequest = {
         type: 0,
         points: [
           {
-            //Añadir marca de tiempo histórica aquí
+            //Add historical timestamp here
             timestamp: Math.round(new Date().getTime() / 1000),
             //***********************
 
@@ -310,11 +321,11 @@ apiInstance
 
 {{< programming-lang lang="curl" >}}
 ```shell
-## Puntos dinámicos
-# Datos posteriores a las series temporales que pueden representarse gráficamente en dashboards Datadog.
-# Variables de plantilla
+## Dynamic Points
+# Post time-series data that can be graphed on Datadog’s dashboards.
+# Template variables
 export NOW="$(date +%s)"
-# Comando Curl 
+# Curl command
 curl -X POST "https://api.datadoghq.com/api/v2/series" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -327,7 +338,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/series" \
       "type": 0,
       "points": [
         {
-            # Añadir marca de tiempo histórica aquí
+            # Add historical timestamp here
           "timestamp": 1636629071,
             # ***********************
 
@@ -351,7 +362,7 @@ EOF
 
 ### Agent
 
-Para enviar métricas históricas con el Agent, asegúrate de tener instalada la versión del Agent 7.40.0 o posterior. Esta versión incluye una interfaz DogStatsD actualizada, compatible con **Java**, **GoLang** y **.NET**. Esto te permite enviar puntos de métricas retrasados a través del Agent.
+Para enviar métricas históricas con el Agent, asegúrate de tener instalada la versión 7.40.0 o posterior. Esta versión incluye una interfaz DogStatsD actualizada, compatible con **Java**, **GoLang** y **.NET**. Esto te permite enviar puntos de métricas retrasados a través del Agent.
 
 {{< programming-lang-wrapper langs="java,go,.NET" >}}
 
@@ -430,30 +441,40 @@ public class DogStatsdClient
 
 {{< /programming-lang-wrapper >}}
 
-## Latencia de consumo de métricas históricas 
+## Latencia del consumo de métricas históricas 
 
-El consumo de métricas históricas tiene una latencia variable dependiendo de lo lejos en el pasado que estén tus métricas.
+El consumo de métricas históricas tiene una latencia variable, dependiendo de la antigüedad de tus métricas.
 
-| Métrica retrasada por:   | Latencia de consumo                     |
-|----------------------|---------------------------------------|
-| 1 a 12 horas           | Consumo casi en tiempo real (1 hora como máximo) |
-| 12 horas a 30 días   | Latencia de hasta 14 horas                 |
-| Más de 30 días             | Más de 14 horas de latencia                     |
-
+| Métrica retrasada por:   | Latencia del consumo                         |
+|----------------------|-------------------------------------------|
+| 1 a 12 horas           | Ingesta casi en tiempo real (1 hora como máximo) |
+| 12 horas a 30 días   | Hasta 14 horas de latencia                    |
+| Más de 30 días         | Más de 14 horas de latencia                     |
 
 ## Facturación del consumo de métricas históricas
 
-Las métricas históricas se contabilizan y facturan como métricas personalizadas indexadas. Las métricas personalizadas facturables se determinan por la **marca de tiempo de las métricas enviadas", independientemente de si tienen una marca de tiempo de hoy o de 15 meses en el pasado. Mientras la combinación de nombre de métrica y valor de etiqueta esté informando activamente de CUALQUIER valor (independientemente de la marca de tiempo), se considerará activa en la hora en que se envió. Para obtener más información, consulte la documentación [Facturación de métricas personalizadas][3].
+Las métricas históricas se contabilizan y facturan como métricas personalizadas indexadas. Las métricas personalizadas facturables se determinan por la **marca de tiempo de las métricas enviadas**, independientemente de si tienen una fecha de hoy o de hace 15 meses. Siempre que esa combinación de nombre de métrica y valor de etiqueta informe activamente de **cualquier** valor (independientemente de la marca de tiempo), se considerará activa en la hora en que se envió. 
+
+El siguiente ejemplo supone:
+- 3000 combinaciones únicas de etiqueta y valor
+- 1500 métricas en tiempo real
+- 1500 métricas históricas 
+- 720 horas en el mes (30 días)
+- Coste de métrica personalizada de 5 $ por cada 100 métricas
+
+$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21$
 
 Realiza un seguimiento de tus métricas históricas indexadas en la sección Resumen de uso, de la página [Plan y uso][4].
 
 {{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Sección Resumen de uso de la página Plan y uso, que muestra tanto métricas personalizadas indexadas como métricas históricas indexadas" style="width:100%;" >}}
 
-## Leer más
+Para obtener más información, consulta la documentación [Facturación de métricas personalizadas][3].
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/metrics/summary/
+[1]: https://app.datadoghq.com/metric/summary
 [2]: /es/metrics/#submit-metrics
 [3]: /es/account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage

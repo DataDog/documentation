@@ -1,5 +1,6 @@
 ---
 title: Bits AI
+description: "Learn about Bits AI, your agentic teammate in Datadog that automates development, security, and operational workflows."
 disable_toc: false
 is_beta: true
 aliases:
@@ -8,63 +9,33 @@ further_reading:
     - link: "https://www.datadoghq.com/product/platform/bits-ai/"
       tag: "Product page"
       text: "Bits AI"
-    - link: "https://www.datadoghq.com/blog/datadog-bits-generative-ai/"
+    - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
       tag: "Blog"
-      text: "Introducing Bits AI, Your New DevOps Copilot"
-    - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
+      text: "Introducing Bits AI SRE, your AI on-call teammate"
+    - link: "https://www.datadoghq.com/blog/bits-ai-security-analyst/"
       tag: "Blog"
-      text: "Stay up to date on the latest incidents with Bits AI"
-    - link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-bits-an-ai-assistant-to-help-engineers-quickly-resolve-application-issues/"
-      tag: "Press release"
-      text: "Bits AI announcement"
-    - link: "https://www.datadoghq.com/blog/bits-ai-autonomous-investigations/"
+      text: "Automate Cloud SIEM investigations with Bits AI Security Analyst"
+    - link: "https://www.datadoghq.com/blog/how-to-use-ai-more-effectively/"
       tag: "Blog"
-      text: "Reimagining the way you run operations with autonomous investigations"
+      text: "How to use AI tools more effectively: Tips from Datadog Engineers"
 ---
 
-{{< site-region region="gov" >}}
-Bits AI is not available for the selected site ({{< region-param key="dd_site_name" >}}).
-{{< /site-region >}}
-
-Bits AI is a platform-wide copilot that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
-
-For detailed setup and usage instructions, see the [Getting Started][1] documentation.
+Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
 
 ## Features
 
-### Query data in natural language
-
-Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
-
-You can ask Bits AI questions such as:
-- `Who is on call for example-service?`
-- `Find me the example-service dashboard.`
-- `What is going on with example-service?`
-- `Are there any issues with example-service's dependencies?`
-
-When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
-
-### Streamline incident management
-
-Within [Datadog Incident Management][3], Bits AI can help you 
-
-- **Stay informed:** Get an up-to-date summary of the incident when you join an incident Slack channel.
-- **Engage responders:** Page on-call teams with PagerDuty with Slack queries like "`@DataDog` Page the team that owns example-service."
-- **Update incidents:** Update the severity level and status of an incident.
-- **Find related incidents**: Search through your entire incident history and find similar incidents to the one you're currently in.
-- **Generate a postmortem:** Get a head start with a first draft, which you can then review and revise.
-
-See [Managing Incidents][4] for details.
-
-## Feedback
-
-Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager.
-
+{{< whatsnext desc="Learn about how you can use Bits AI:" >}}
+   {{< nextlink href="bits_ai/bits_ai_sre" >}}Investigate alerts and coordinate incidents proactively with Bits AI SRE{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_dev_agent" >}}Automate code fixes with Bits AI Dev Agent{{< /nextlink >}}
+   <!-- {{< nextlink href="link" >}}Automate Cloud SIEM investigations with Bits AI Security Analyst{{< /nextlink >}} -->
+   {{< nextlink href="actions/action_interface" >}}Take action on your systems with Action Interface{{< /nextlink >}}
+   {{< nextlink href="bits_ai/chat_with_bits_ai" >}}Chat with Bits about your observability data{{< /nextlink >}}
+   {{< nextlink href="bits_ai/mcp_server" >}}Get observability insights from AI agents with the Datadog MCP server{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/getting_started/
 [3]: /service_management/incident_management
-[4]: /bits_ai/managing_incidents/
+[4]: /bits_ai/bits_ai_sre/coordinate_incidents/

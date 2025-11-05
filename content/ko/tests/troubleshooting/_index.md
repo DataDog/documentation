@@ -6,10 +6,6 @@ further_reading:
 title: 테스트 가시성 트러블슈팅
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility는 현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 이 페이지는 테스트 가시성 관련 문제를 트러블슈팅하기 위한 정보를 제공합니다. 추가 지원이 필요한 경우 [Datadog 지원팀][2]에 문의하세요.

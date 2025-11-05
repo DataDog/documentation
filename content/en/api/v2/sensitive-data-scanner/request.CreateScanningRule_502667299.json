@@ -1,0 +1,28 @@
+{
+  "meta": {},
+  "data": {
+    "type": "sensitive_data_scanner_rule",
+    "attributes": {
+      "name": "Example-Sensitive-Data-Scanner",
+      "pattern": "pattern",
+      "text_replacement": {
+        "type": "replacement_string",
+        "replacement_string": "REDACTED",
+        "should_save_match": true
+      },
+      "tags": [
+        "sensitive_data:true"
+      ],
+      "is_enabled": true,
+      "priority": 1
+    },
+    "relationships": {
+      "group": {
+        "data": {
+          "type": "sensitive_data_scanner_group",
+          "id": "string"
+        }
+      }
+    }
+  }
+}

@@ -15,10 +15,6 @@ title: Atribución de uso
 
 ## Información general
 
-<div class="alert alert-warning">L
-Atribución de uso es una prestación incluida en el plan empresarial. Si quieres usarla en otros planes, ponte en contacto con la persona encargada de tu cuenta o escribe a <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> para solicitarla.
-</div>
-
 Los administradores o usuarios con permiso de Lectura de uso pueden acceder a la Atribución de uso pestaña desde la sección Plan y uso en Datadog. La página de Atribución de uso proporciona la siguiente información y funcionalidad:
 
 - Consultar una lista del reparto de uso en función de las diferentes claves de etiquetas y añadir o modificar claves nuevas (hasta un máximo de tres).
@@ -99,7 +95,7 @@ Se puede ver una serie temporal de los datos de Atribución de uso al hacer clic
 
 Para los clientes de facturación directa, los informes de atribución de costes de fin de mes se generan al final de cada ciclo de facturación para permitir la devolución mensual de gastos y los procesos de atribución de costes.
 - Los datos de costes del mes anterior están disponibles a más tardar el día 19 del mes en curso.
-- Los datos de atribución de costes no están disponibles actualmente en los centros de datos de GovCloud
+- Para los clientes de GovCloud, debe aprobarse un descargo de responsabilidad antes de habilitar la función.
 - Los datos mensuales de Atribución de costes están [disponibles con la API][4]
 
 {{< img src="account_management/billing/usage_attribution/Cost-Attribution-Monthly.png" alt="Informe de Atribución de costes" style="width:100%;" >}}

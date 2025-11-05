@@ -1,5 +1,6 @@
 ---
 title: Datadog Operator
+description: Deploy and manage the Datadog Agent on Kubernetes using the Datadog Operator
 aliases:
   - /agent/kubernetes/operator_configuration
   - /containers/kubernetes/operator_configuration

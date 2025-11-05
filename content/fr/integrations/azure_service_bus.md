@@ -1,26 +1,58 @@
 ---
+app_id: azure-service-bus
+app_uuid: 9db052dc-1cb1-405a-833d-dfb77a2db9df
+assets:
+  dashboards:
+    azure_service_bus: assets/dashboards/azure_service_bus.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.servicebus_namespaces.count
+      metadata_path: metadata.csv
+      prefix: azure.servicebus_namespaces
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 227
+    source_type_name: Azure Service Bus
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - azure
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés d'Azure Service Bus.
-doc_link: https://docs.datadoghq.com/integrations/azure_service_bus/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_service_bus
-has_logo: true
 integration_id: azure-service-bus
-integration_title: Microsoft Azure Service Bus
+integration_title: Azure Service Bus
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_service_bus
-public_title: Intégration Datadog/Microsoft Azure Service Bus
+public_title: Azure Service Bus
 short_description: Surveillez des métriques clés d'Azure Service Bus.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés d'Azure Service Bus.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Service Bus
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Microsoft Azure Service Bus est un courtier de messages d'intégration d'entreprise entièrement géré.
@@ -39,7 +71,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_service_bus" >}}
+{{< get-metrics-from-git "azure-service-bus" >}}
 
 
 ### Événements

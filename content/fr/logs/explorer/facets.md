@@ -218,7 +218,7 @@ Ce type d'alias s'avère particulièrement utile pour gérer les logs transmis p
 
 ## Supprimer une facette
 
-<div class="alert alert-danger">Toute suppression d'une facette actuellement utilisée dans des index, monitors, dashboards ou requêtes de restriction ou par d'autres équipes peut entraîner des erreurs de configuration.</div>
+<div class="alert alert-warning">Toute suppression d'une facette actuellement utilisée dans des index, monitors, dashboards ou requêtes de restriction ou par d'autres équipes peut entraîner des erreurs de configuration.</div>
 
 Pour supprimer une facette, procédez comme suit :
 

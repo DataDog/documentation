@@ -4,6 +4,7 @@ aliases:
   - /tracing/software_catalog/scorecards/using_scorecards
   - /tracing/service_catalog/scorecards/using_scorecards
   - /service_catalog/scorecards/using_scorecards
+  - /software_catalog/scorecards/using_scorecards
 further_reading:
 - link: "/tracing/software_catalog/"
   tag: "Documentation"
@@ -22,17 +23,13 @@ further_reading:
   text: "Track DORA Metrics with Datadog" 
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Scorecards are in Preview.
-{{< /callout >}}
+After configuring your Scorecards, you can view entity-level scores, track scores over time, and generate Scorecard reports to automatically update your team with Scorecard information.
 
-After configuring your Scorecards, you can view service-level scores, track scores over time, and generate Scorecard reports to automatically update your team with Scorecard information.
+## View entity-level details and scores
 
-## View service-level details and scores
+The Scorecard summary is accessible on the [**Explore** page][1] in the Software Catalog under the **Scorecards** column in the **Ownership** tab. You can see what level your specific entity or subset of entities has reached and the number of rules passed within each level.  
 
-The Scorecard summary is accessible on the [**Explore** page][1] in the Software Catalog under the **Scorecards** column in the **Ownership** tab. You can see how your specific service or subset of services is doing for each scorecard, and the rules within each. 
-
-Click **View Details** from the Scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the Scorecards, the rules, and that service's pass-fail score for each rule.
+Click **View Details** from the Scorecard, or open the entity details side panel and navigate to the Scorecards tab. Both views lists all levels, the rules applied within each level, and the entity’s state---`pass`, `fail`, or `no data`---for each rule.
 
 ## Track scores over time
 
@@ -42,19 +39,19 @@ You can visualize how teams' scores progress over time as they make changes and 
 
 ## Generate Scorecard reports
 
-You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how services and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][2], which runs at a scheduled time. 
+You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how entities and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][2], which runs at a scheduled time. 
 
-<div class="alert alert-warning">Running this Workflow may impact your billing. Read the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">pricing page</a> for more information</div>
+<div class="alert alert-danger">Running this Workflow may impact your billing. Read the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">pricing page</a> for more information</div>
 
 To create a Report:
 
 1. Click **Create Report** on the Scorecards page. 
-2. Choose whether to include all defined services across your organization or a specific team's services. 
+2. Choose whether to include all defined entities across your organization or a specific team's entities. 
 3. Set the date, time, and frequency at which you want to receive these reports.
 4. Set the Slack workspace and channel where the reports should be sent. The selected channel must be public and have the Datadog Slack app installed. 
 5. Click **Enable this Workflow**.
 
-Using this information, Datadog sends you reports on the highest and lowest scoring rules, services, and teams. 
+Using this information, Datadog sends you reports on the highest and lowest scoring rules, entities, and teams. 
 
 {{< img src="/tracing/software_catalog/scorecard-reports.png" alt="Scorecard reports creation modal showing how to create report for all services" style="width:90%;" >}}
 

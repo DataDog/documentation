@@ -7,10 +7,6 @@ further_reading:
 title: 파이프라인 데이터 모델과 실행 유형
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility는 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 이 가이드에서는 CI Visibility에서 파이프라인 실행을 프로그래밍 방식으로 설정하는 방법과 CI Visibility가 지원하는 파이프라인 실행 유형을 정의합니다.

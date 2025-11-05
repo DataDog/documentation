@@ -23,10 +23,6 @@ further_reading:
 
 ## Overview
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 [Test Optimization][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
 
 - [Enable test summaries in GitHub pull request comments](#test-summaries-in-github-pull-requests)
@@ -38,7 +34,7 @@ These features are available for all Test Optimization customers, and they do no
 
 ## Test summaries in GitHub pull requests
 
-Datadog integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information, error messages for failed tests, performance regressions, and code coverage changes.
+Test Optimization integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information, and error messages for failed tests.
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
@@ -59,7 +55,7 @@ You can enable test summaries in pull requests with the following steps:
 
 {{< img src="ci/enable-settings-github-comments.png" alt="The Test Optimization Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
 
-Comments only appear on pull requests that were opened before the test run and that have run at least one test for an enabled repository.
+Comments only appear on pull requests that have run at least one test for an enabled repository.
 
 ## Create and open GitHub issues
 

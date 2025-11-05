@@ -1,5 +1,6 @@
 ---
 title: DDSQL Expressions and Operators (Preview)
+private: true
 aliases:
 - /dashboards/ddsql_editor/reference/expressions_and_operators/
 - /ddsql_editor/reference/expressions_and_operators/

@@ -6,7 +6,7 @@ aliases:
 title: App Analytics
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 このページは、レガシー版 App Analytics に関するコンフィギュレーション情報を伴う非推奨機能について説明します。トラブルシューティングまたは古い設定の修正に利用可能です。トレース全体を完全に制御するには、<a href="/tracing/trace_pipeline">取り込みコントロールおよび保持フィルター</a>を使用してください。
 </div>
 
@@ -35,7 +35,7 @@ App Analytics は、Java トレースクライアントのバージョン 0.25.0
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-App Analytics は、Python トレースクライアントのバージョン 0.19.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての **web** インテグレーションに対して App Analytics をグローバルに有効にできます。
+App Analytics は Python トレーシング クライアント バージョン 0.19.0 以降で利用できます。この構成は ddtrace バージョン 3.x 以前でのみ利用可能です。Tracing Client の 1 つの構成パラメーターで、すべての **web** 統合に対して App Analytics をグローバルに有効化できます:
 
 * トレーサー構成: `ddtrace.config.analytics_enabled = True`
 * <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
@@ -59,7 +59,7 @@ Datadog.configure { |c| c.tracing.analytics.enabled = true }
 
 App Analyticsは、Go トレースクライアントのバージョン 1.11.0 以降で使用できます。以下を使用することで、すべての **web** インテグレーションにグローバルに有効化できます:
 
-* [`WithAnalytics`][1] トレーサー開始オプション。例:
+* [`WithAnalytics`][2] ([v1 ドキュメント][1]) トレーサー起動オプション。例:
 
   ```go
   tracer.Start(tracer.WithAnalytics(true))
@@ -68,6 +68,7 @@ App Analyticsは、Go トレースクライアントのバージョン 1.11.0 �
 * バージョン 1.26.0 以降は、環境変数 `DD_TRACE_ANALYTICS_ENABLED=true` を使用
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -185,14 +186,16 @@ Datadog.configure { |c| c.tracing.instrument :integration, analytics_enabled: tr
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 グローバル設定に加えて、各インテグレーションで App Analytics を個別に有効または無効にできます。たとえば、標準ライブラリの `net/http` パッケージを構成する場合は、以下のようにします。
 
-<mrk mid="87" mtype="seg">```go
+```go
 package main
 
 import (
-    httptrace &quot;gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http&quot;
-    &quot;gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer&quot;
+    httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -200,9 +203,9 @@ func main() {
     defer tracer.Stop()
 
     mux := httptrace.NewServeMux(httptrace.WithAnalytics(true))
-    // ...</mrk>
-<mrk mid="88" mtype="seg">}
-```</mrk>
+    // ...
+}
+```
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
@@ -475,7 +478,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ### Datadog Agent で
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 このセクションでは、レガシー App Analytics に関連する構成情報とともに、非推奨の機能について説明します。
 </div>
 

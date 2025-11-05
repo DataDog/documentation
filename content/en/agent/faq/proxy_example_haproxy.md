@@ -11,11 +11,11 @@ private: true
 
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog discourages forwarding traffic using software like HAProxy or NGINX because it requires you to manually configure and maintain the list of specific Datadog endpoints the Agent needs to reach. This list can change, leading to potential data loss if not kept up-to-date. The only exception is if you need Deep Packet Inspection (DPI) capabilities, in which case you might consider using HAProxy or NGINX as they allow you to disable TLS or use your own TLS certificates and inspect the traffic.
 </div>
 
-While [HAProxy][3] is usually used as a load balancer to distribute incoming requests to pool servers, it also offers proxying for TCP and HTTP applications, so you can use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity. 
+While [HAProxy][3] is usually used as a load balancer to distribute incoming requests to pool servers, it also offers proxying for TCP and HTTP applications, so you can use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
 
 `agent ---> haproxy ---> Datadog`
 
@@ -201,6 +201,14 @@ frontend network_path_frontend
     option tcplog
     default_backend datadog-network-path
 
+# This declares the endpoint where your Agents connect to
+# retrieve agent packages for Remote Agent Management.
+frontend install-forwarder
+    bind *:3848
+    mode http
+    option tcplog
+    default_backend datadog-install
+
 # This is the Datadog server. In effect, any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -321,6 +329,15 @@ backend datadog-network-path
     server-template mothership 5 netpath-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership netpath-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+
+backend datadog-install
+    balance roundrobin
+    mode http
+    http-request set-header Host install.datadoghq.com
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 install.datadoghq.com:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> sni str(install.datadoghq.com) check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership install.datadoghq.com:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> sni install.datadoghq.com
 ```
 
 ##### HTTPS
@@ -484,6 +501,14 @@ frontend network_path_frontend
     option tcplog
     default_backend datadog-network-path
 
+# This declares the endpoint where your Agents connect to
+# retrieve agent packages for Remote Agent Management.
+frontend install-forwarder
+    bind *:3848 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
+    mode http
+    option tcplog
+    default_backend datadog-install
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -604,6 +629,15 @@ backend datadog-network-path
     server-template mothership 5 netpath-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership netpath-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
+
+backend datadog-install
+    balance roundrobin
+    mode http
+    http-request set-header Host install.datadoghq.com
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 install.datadoghq.com:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> sni str(install.datadoghq.com) check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership install.datadoghq.com:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> sni install.datadoghq.com
 ```
 
 **Note**: You can use `verify none` instead of `verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>` if you are unable to get the certificates on the proxy host, but be aware that HAProxy will not be able to verify Datadog's intake certificate in that case.
@@ -672,6 +706,10 @@ remote_configuration:
     rc_dd_url: haproxy.example.com:3846
     # Comment the line below to use encryption between the Agent and HAProxy
     no_tls: true
+
+installer:
+  registry:
+    url: haproxy.example.com:3847
 ```
 
 When using encryption between the Agent and HAProxy, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.

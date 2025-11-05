@@ -168,7 +168,7 @@ Después de configurar la integración [Oracle Cloud Infrastructure][7], asegúr
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oci_database" >}}
+{{< get-metrics-from-git "oci-database" >}}
 
 
 ### Eventos

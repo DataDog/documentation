@@ -28,10 +28,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 Supported test frameworks:
@@ -46,7 +42,7 @@ Supported test frameworks:
 | Karate | >= 1.0.0 |
 | Scalatest | >= 3.0.8 |
 | Scala MUnit | >= 0.7.28 |
-| Scala Weaver | >= 0.8.4 |
+| Scala Weaver | >= 0.8.4 (Only when using SBT as build system) |
 
 If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
 

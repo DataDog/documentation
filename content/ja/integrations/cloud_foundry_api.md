@@ -26,7 +26,7 @@ custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: cloud_foundry_api
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
@@ -86,7 +86,7 @@ Cloud Foundry API チェックは [Datadog Agent][3] パッケージに含まれ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "cloud_foundry_api" >}}
+{{< get-metrics-from-git "cloud-foundry-api" >}}
 
 
 ### イベント
@@ -94,7 +94,7 @@ Cloud Foundry API チェックは [Datadog Agent][3] パッケージに含まれ
 Cloud Foundry API インテグレーションは、構成された監査イベントを収集します。
 
 ### サービスチェック
-{{< get-service-checks-from-git "cloud_foundry_api" >}}
+{{< get-service-checks-from-git "cloud-foundry-api" >}}
 
 
 ## トラブルシューティング

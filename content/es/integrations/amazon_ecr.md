@@ -20,7 +20,7 @@ short_description: Rastrea las métricas clave de Amazon ECR.
 version: '1.0'
 ---
 
-<!--  FUENTE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Amazon Elastic Container Registry (Amazon ECR) es un registro de contenedores de Docker totalmente gestionado que facilita a los desarrolladores el almacenamiento, la administración y el despliegue de imágenes de contenedor de Docker.

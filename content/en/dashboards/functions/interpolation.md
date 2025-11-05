@@ -1,5 +1,6 @@
 ---
 title: Interpolation
+description: Fill missing metric values using linear, last value, zero, or null interpolation methods in timeseries data.
 aliases:
     - /graphing/functions/interpolation/
 further_reading:

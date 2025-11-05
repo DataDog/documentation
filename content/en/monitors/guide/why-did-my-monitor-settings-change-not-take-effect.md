@@ -1,5 +1,6 @@
 ---
 title: Monitor settings changes not taking effect
+description: "Understand why monitor group changes may not take immediate effect due to group persistence and aging behavior."
 aliases:
 - /monitors/faq/why-did-my-monitor-settings-change-not-take-effect
 ---

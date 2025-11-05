@@ -1,5 +1,6 @@
 ---
 title: Test and debug
+description: Test monitor triggers, individual workflow steps, and debug failed steps using run history and error messages.
 disable_toc: false
 aliases:
 - /service_management/workflows/test_and_debug
@@ -16,10 +17,6 @@ further_reading:
   tag: "Documentation"
   text: "Trigger workflows"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Test a monitor trigger
 

@@ -21,7 +21,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Exception Replay for APM Error Tracking is generally available for Python, and in Preview for Java, .NET, and PHP.
+Exception Replay for APM Error Tracking is generally available for Python, Java, .NET, and PHP.
 </div>
 
 ## Overview
@@ -45,12 +45,12 @@ Exception Replay is only available in APM Error Tracking. It is not available fo
 
 ## Setup
 
-1. Upgrade the Datadog Agent to version `7.44.0` or higher.
+1. Upgrade the Datadog Agent to version `7.49.0` or higher.
 1. Upgrade the APM tracer library to the minimum required version or higher:
-   * `ddtrace` version `1.16.0+`
-   * `dd-trace-java` version `1.47.0+`
-   * `dd-trace-dotnet` version `2.53.0+`
-   * `dd-trace-php` version `1.5.0+`
+   * `ddtrace` version `2.21.9+`
+   * `dd-trace-java` version `1.49.0+`
+   * `dd-trace-dotnet` version `3.18.0+`
+   * `dd-trace-php` version `1.12.1+`
 1. Run your service with the `DD_EXCEPTION_REPLAY_ENABLED` environment variable set to `true`.
 1. [Create a logs index][9] and configure it to the desired retention with no sampling.
    * Set the filter to match on the `source:dd_debugger` tag.

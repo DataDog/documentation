@@ -1,5 +1,6 @@
 ---
 title: Database Monitoring Monitor
+description: "Create Database Monitoring monitors to alert on query performance, waiting queries, and significant changes in explain-plan cost."
 ---
 
 
@@ -18,7 +19,7 @@ For step-by-step instructions, see [Example monitors](#example-monitors).
 
 To create a new DBM monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Database Monitoring**][2] in the UI.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 DBM monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#multi-alert">multi alerts</a>, or <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info">There is a default limit of 1000 DBM monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#multi-alert">multi alerts</a>, or <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
 ## Define the search query
 
@@ -46,7 +47,7 @@ Any feedback on these existing monitor types and other ones you would like to se
 
 Note: The monitor you configure alerts over the **unique value count** of the facets.
 
-3. You also have the option to group DBM events by multiple dimensions. All DBM events matching the query are grouped together based on the values of up to **five facets**. With the group by functionality, you also have the ability to configure the **alerting grouping strategy**:
+3. You also have the option to group DBM events by multiple dimensions. All DBM events matching the query are grouped together based on the values of up to **four facets**. With the group by functionality, you also have the ability to configure the **alerting grouping strategy**:
     * **Simple Alert**: Simple Alerts aggregate over all reporting sources, so one alert triggers when one or multiple groups values breach the threshold. You may use this strategy to reduce notification noise.
     * **Multi Alert**: Multi Alerts apply the alert to each source according to your group parameters, meaning that an alerting event is generated for each group that meets the set conditions. For example, you can group a query by `@db.user` and select the Multi Alert Aggregation type to receive a separate alert for each database user that triggers the alert as you've defined it.
 

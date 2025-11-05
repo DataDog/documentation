@@ -15,10 +15,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 You can send custom pipelines through HTTP using the [public API endpoint][1]. For more information about how pipeline executions are modeled, see [Pipeline Data Model and Execution Types][2].
@@ -59,7 +55,7 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
    | Status | The final status of the pipeline. Allowed enum values: `success`, `error`, `canceled`, `skipped`, `blocked`, or `running`. | `success` |
    | Partial Retry | Whether or not the pipeline was a partial retry of a previous attempt. This field expects a boolean value (`true` or `false`). A partial retry is one which only runs a subset of the original jobs. | `false` |
    | Start | Time when the pipeline run started (it should not include any [queue time][12]). The time format must be RFC3339. | `2024-08-22T11:36:29-07:00` |
-   | End | Time when the pipeline run finished. The time format must be RFC3339. | `2024-08-22T14:36:00-07:00` |
+   | End | Time when the pipeline run finished. The time format must be RFC3339. The end time cannot be longer than 1 year after the start time. | `2024-08-22T14:36:00-07:00` |
    | URL | The URL to look at the pipeline in the CI provider UI. | `http://your-ci-provider.com/pipeline/{pipeline-id}` |
 
    For example, this payload sends a CI pipeline event to Datadog:

@@ -22,11 +22,11 @@ El widget puede mostrar el último valor informado o un agregado calculado a par
 
 ### Configuración
 
-1. Elige los datos a graficar:
+1. Elige los datos para los que crear gráficas:
     * Métrica: consulta la [Documentación de consulta][1] para configurar una consulta de métrica.
     * Tramos indexados: consulta la [Documentación de búsqueda de trazas][2] para configurar una consulta de tramo (span)  indexado.
     * Eventos de log: consulta la [Documentación de búsqueda de log][3] para configurar una consulta de evento de log.
-2. Reduce los valores de la consulta a un único valor, calculado como el valor `avg`, `min`, `sum`, `max`, o `last` de todos los puntos de datos en el marco temporal especificado.
+2. Reduce los valores de la consulta a un único valor, calculado como el valor `avg`, `min`, `sum`, `max` o `last` de todos los puntos de datos del periodo de tiempo especificado. También pueden utilizarse valores percentiles como `p75` o `p90`, cuando sea posible.
 3. Elige las unidades y el formato. El autoformato ajusta la escala del dashboard en función de las unidades.
 4. Opcionalmente, configura un formato condicional según el valor mostrado. Consulta [Reglas de formato visual](#visual-formatting-rules) para más ejemplos.
 5. Opcionalmente, superpone un fondo de series temporales:
@@ -40,7 +40,7 @@ El widget puede mostrar el último valor informado o un agregado calculado a par
 
 <div class="alert alert-info">Las reglas de formato visual deben basarse en el valor bruto de métrica. Si la unidad base de la métrica está en nanosegundos, pero el valor de consulta tiene el formato automático en segundos, las reglas condicionales deben basarse en nanosegundos.</div>
 
-Personaliza el fondo de tu widget de valor de consulta con reglas condicionales. Tienes la opción de añadir un color de fondo, un color de fuente o una imagen personalizada. Con imágenes personalizadas, los servidores internos deben actualizarse para admitir solicitudes de distintos orígenes que hagan referencia a imágenes internas.
+Personaliza el fondo del widget de tu valor de consulta con reglas condicionales. Tienes la opción de añadir un color de fondo, un color de fuente o una imagen personalizada. Con las imágenes personalizadas, puedes cargar una imagen desde tu ordenador local o hacer referencia a imágenes de la Internet pública. Los servidores internos deben actualizarse para admitir solicitudes de origen cruzado para hacer referencia a imágenes internas.
 
 {{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Reglas de formato visual del widget de valor de consulta con fondo de imagen personalizado" style="width:90%;" >}}
 
@@ -50,15 +50,18 @@ Los [enlaces contextuales][4] están activados por defecto y pueden activarse o 
 
 #### Hora mundial
 
-Elige si tu widget tiene un marco temporal personalizado o el marco temporal global del dashboard.
+Elige si tu widget tiene un periodo de tiempo personalizado o el periodo de tiempo global del dashboard.
 
-## Python
+## API
 
 Este widget se puede utilizar con la **[API de dashboards][5]**. Consulta la siguiente tabla para obtener la [definición del esquema JSON del widget)][6]:
 
 {{< dashboards-widgets-api >}}
 
-## Leer más
+### Solucionar problemas
+ - Si la consulta utiliza un valor de percentil para agregar puntos de datos subyacentes, es posible que el valor devuelto en el widget siga siendo el mismo en distintos intervalos de tiempo. Este comportamiento es esperable con un gran tamaño de muestra de puntos de datos subyacentes. Este tipo de cambios en los valores suele ser más fácil de encontrar en intervalos de tiempo más reducidos. Para obtener más información sobre este concepto, consulta la [Ley de los grandes números][7].
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -68,3 +71,4 @@ Este widget se puede utilizar con la **[API de dashboards][5]**. Consulta la sig
 [4]: /es/dashboards/guide/context-links/
 [5]: /es/api/latest/dashboards/
 [6]: /es/dashboards/graphing_json/widget_json/
+[7]: https://en.wikipedia.org/wiki/Law_of_large_numbers

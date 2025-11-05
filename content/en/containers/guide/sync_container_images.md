@@ -1,5 +1,6 @@
 ---
 title: Synchronize Datadog's images with a private registry
+description: Synchronize Datadog container images from public registries to your private registry using Crane or similar tools
 aliases:
  - /agent/guide/sync_container_images
 ---

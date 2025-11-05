@@ -7,10 +7,6 @@ aliases:
   - /security/guide/how-appsec-works/
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Datadog App and API Protection (AAP) provides observability into application and API-level attacks that aim to exploit vulnerabilities and abuse app business logic, and observability into any bad actors targeting your systems. AAP performs actions such as the following:
@@ -37,9 +33,7 @@ If your service is running with <a href="/agent/remote_config/#enabling-remote-c
 
 ## Compatibility
 
-For Datadog App and API Protection to be compatible with your Datadog configuration, you must have APM enabled and [sending traces to Datadog][6]. App and API Protection uses the same libraries used by APM, so you don't need to deploy and maintain another library. 
-
-Steps to enable Datadog App and API Protectionon are specific to each runtime language. Check to see if your language is supported in the App and API Protection prerequisites for each product.
+App and API Protection uses the same libraries as APM, so you don't need to deploy and maintain another library. Steps to enable Datadog App and API Protection are specific to each runtime language. See the [App and API Protection setup guides][6] to check if your language is supported.
 
 ## Serverless monitoring
 
@@ -128,7 +122,7 @@ Datadog App and API Protection identifies Log4j Log4Shell attack payloads and pr
 [3]: /tracing/services/service_page/#security
 [4]: /tracing/trace_explorer/trace_view/?tab=security#more-information
 [5]: /security/code_security/software_composition_analysis/
-[6]: /tracing/trace_collection/
+[6]: /security/application_security/setup/
 [8]: /security/application_security/serverless/
 [9]: /tracing/trace_pipeline/trace_retention/
 [10]: /tracing/configure_data_security/?tab=http

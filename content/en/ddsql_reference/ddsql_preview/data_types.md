@@ -1,5 +1,6 @@
 ---
 title: DDSQL Editor Data Types (Preview)
+private: true
 aliases:
 - /dashboards/ddsql_editor/reference/data_types/
 - /ddsql_editor/reference/data_types/

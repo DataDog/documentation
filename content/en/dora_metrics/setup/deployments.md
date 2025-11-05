@@ -22,11 +22,6 @@ further_reading:
   text: "Learn about Deployment Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-
 ## Overview
 
 Deployment events are used to compute [deployment frequency](#calculating-deployment-frequency), [change lead time](#calculating-change-lead-time), and [change failure rate](#calculating-change-failure-rate).
@@ -74,6 +69,7 @@ You can optionally add the following attributes to the deployment events:
 - `env`: Filter your DORA metrics by environment on the [DORA Metrics][25] page.
 - `id`: Identify a deployment. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
 - `version`: The deployment version.
+- `custom_tags`: Tags in the form `key:value` that can be used to filter events on the [DORA Metrics][25] page.
 
 
 ### API (cURL) Example
@@ -99,7 +95,8 @@ For the following example, replace `<DD_SITE>` in the URL with {{< region-param 
         },
         "env": "prod",
         "team": "backend",
-        "version": "v1.12.07"
+        "version": "v1.12.07",
+        "custom_tags": ["department:engineering", "app_type:backend"]
       }
     }
   }
@@ -112,7 +109,6 @@ The [`datadog-ci`][22] CLI tool provides a shortcut to send deployment events wi
 
 For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} and set the `DD_API_KEY` environment variable to your [Datadog API Key][27]:
 ```shell
-export DD_BETA_COMMANDS_ENABLED=1
 export DD_SITE="<DD_SITE>"
 export DD_API_KEY="<DD_API_KEY>"
 
@@ -120,6 +116,8 @@ export deploy_start=`date +%s`
 ./your-deploy-script.sh
 datadog-ci dora deployment --service shopist --env prod \
     --started-at $deploy_start --finished-at `date +%s` \
+    --version v1.12.07 --custom-tags department:engineering \
+    --custom-tags app_type:backend \
     --git-repository-url "https://github.com/organization/example-repository" \
     --git-commit-sha 66adc9350f2cc9b250b69abddab733dd55e1a588
 ```
@@ -195,7 +193,7 @@ https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githu
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 GitHub workflows running on <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"> <code>pull_request</code> trigger </a> are not currently supported by the GitHub integration.
 If you are using the <code>pull_request</code> trigger, use the alternative method.
 </div>
@@ -213,13 +211,34 @@ To confirm that the setup is valid, select your GitHub application in the [GitHu
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
-<div class="alert alert-warning">Datadog's GitLab integration is in Preview. To request access to Datadog's GitLab integration for your organization, reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a>.</div>
+If the [GitLab integration][1] is not already installed, install it on the [GitHub integration tile][2].
 
-After your organization has access, follow the [GitLab installation guide][1].
+[1]: https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=gitlabsaasonprem#source-code-management-providers
+[2]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 
 **Note**: The scope of the service account's personal access token needs to be at least `read_api`.
 
-[1]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
+#### Handling GitLab groups and subgroups
+
+If your repositories are organized under [**GitLab groups or subgroups**][1] (for example,
+`https://gitlab.com/my-org/group(/subgroup)/repo`),
+the automatic service path detection may not resolve correctly due to GitLab's nested group structure.
+
+To ensure that DORA metrics handle your service's source code paths correctly,
+you can use the following configuration in your service definition:
+
+```yaml
+extensions:
+  datadoghq.com/dora-metrics:
+    source_patterns:
+      # All paths relative to the repository URL provided with the deployment
+      - **
+      # or specific paths related to this service (for monorepos)
+      - src/apps/shopist/**
+      - src/libs/utils/**
+```
+[1]: https://docs.gitlab.com/user/group/
+
 {{% /tab %}}
 
 {{% tab "Other Git Providers" %}}
@@ -229,7 +248,7 @@ When this command is executed, Datadog receives the repository URL, the commit S
 
 Run this command in CI for every new commit. If a deployment is executed for a specific commit SHA, ensure that the `datadog-ci git-metadata upload` command is run for that commit **before** the deployment event is sent.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Do not provide the <code>--no-gitsync</code> option to the <code>datadog-ci git-metadata upload</code> command.
 When that option is included, the commit information is not sent to Datadog and the change lead time metric is not calculated.
 </div>
@@ -241,7 +260,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 ✅  Handled in 0.077 seconds.
 ```
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -307,6 +326,13 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 ## Calculating change failure rate
 
 Change failure rate is calculated by dividing the number of failure events over the number of deployment events for the same services and/or teams associated to both a failure and a deployment event.
+
+## Custom tags
+
+If the service associated with the deployment is registered in the [Software Catalog][1] with metadata set up (see [Adding Metadata][2]), the `languages` of the service and any `tags` are automatically retrieved and associated with the deployment event.
+
+[1]: /tracing/software_catalog
+[2]: /tracing/software_catalog/adding_metadata
 
 ## Further Reading
 

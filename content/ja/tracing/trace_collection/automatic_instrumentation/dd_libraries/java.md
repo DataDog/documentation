@@ -67,7 +67,7 @@ Datadog Agent をインストールして構成したら、次はアプリケー
     ```
     イメージのサイズを削減し、モジュールを省略する必要性が強い場合は、[jdeps][19] コマンドを使って依存関係を特定することができます。しかし、必要なモジュールは時間の経過とともに変更される可能性がありますので、自己責任で行ってください。
 
-   <div class="alert alert-danger">プロファイリングを有効にすると、APM バンドルによっては料金に影響が出る場合があります。詳しくは<a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">料金ページ</a>をご覧ください。</div>
+   <div class="alert alert-warning">プロファイリングを有効にすると、APM バンドルによっては料金に影響が出る場合があります。詳しくは<a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">料金ページ</a>をご覧ください。</div>
 
 | 環境変数      | システムプロパティ                     | 説明|
 | --------- | --------------------------------- | ------------ |

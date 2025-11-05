@@ -135,7 +135,7 @@ Datadog の IP プレフィックスを含める方法
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "elastic_cloud" >}}
+{{< get-metrics-from-git "elastic-cloud" >}}
 
 
 ### Logs

@@ -42,7 +42,7 @@ Azure Database for MySQL からメトリクスを取得すると、以下のこ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_db_for_mysql" >}}
+{{< get-metrics-from-git "azure-db-for-mysql" >}}
 
 
 ### イベント

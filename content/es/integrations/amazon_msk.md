@@ -1,70 +1,113 @@
 ---
+app_id: amazon-kafka
+app_uuid: e6dc171a-911d-4440-a409-7951eaadf69f
+assets:
+  dashboards:
+    Amazon MSK Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: aws.msk.go.threads
+      metadata_path: metadata.csv
+      prefix: aws.msk.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10080
+    source_type_name: Amazon Kafka
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- nube
 - aws
-- recopilación de logs
 custom_kind: integración
-dependencies: []
-description: Rastrea las métricas clave de Amazon Managed Streaming para Apache Kafka
-  (MSK).
-doc_link: https://docs.datadoghq.com/integrations/amazon_msk/
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/amazon_msk/README.md
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-amazon-msk/
-  tag: Blog
-  text: Monitoriza Amazon Managed Streaming para Apache Kafka con Datadog
 git_integration_title: amazon_msk
-has_logo: true
-integration_id: ''
-integration_title: Amazon Managed Streaming para Apache Kafka (MSK)
-integration_version: ''
+integration_id: amazon-kafka
+integration_title: Amazon MSK (Agent)
+integration_version: 6.7.0
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: amazon_msk
-public_title: Integración de Datadog y Amazon Managed Streaming para Apache Kafka
-  (MSK)
-short_description: Rastrea las métricas clave de Amazon MSK.
-version: '1.0'
+public_title: Amazon MSK (Agent)
+short_description: Monitoriza el estado y el rendimiento de tus clústeres Amazon MSK.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  - Product::Data Streams Monitoring
+  configuration: README.md#Configuración
+  description: Monitoriza el estado y el rendimiento de tus clústeres Amazon MSK.
+  media: []
+  overview: README.md#Información general
+  resources:
+  - resource_type: Blog
+    url: https://www.datadoghq.com/blog/monitor-amazon-msk/
+  support: README.md#Soporte
+  title: Amazon MSK (Agent)
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
+
+
 ## Información general
 
 Amazon Managed Streaming para Apache Kafka (MSK) es un servicio totalmente gestionado que facilita la creación y ejecución de aplicaciones que utilizan Apache Kafka para procesar datos de streaming.
 
-Esta integración utiliza un rastreador que recopila métricas de CloudWatch. Lee la página de [Amazon MSK (Agent)][1] para obtener información sobre la monitorización de MSK a través del Datadog Agent.
+Puedes recopilar métricas de esta integración de dos formas: con el [Datadog Agent](#setup) o con un [rastreador][1] que recopile métricas de CloudWatch. 
+
+Considera [Data Streams Monitoring][2] para mejorar tu integración MSK. Esta solución permite la visualización de los flujos y el seguimiento de los retrasos, ayudándote a identificar y resolver los cuellos de botella.
 
 ## Configuración
 
-Habilita el rastreador de Amazon MSK para ver las métricas de MSK desde CloudWatch en Datadog.
+El check del Agent monitoriza Amazon Managed Streaming for Apache Kafka ([Amazon MSK][3]) a través del Datadog Agent.
+
+Sigue las instrucciones a continuación para instalar y configurar este check para un Agent que se ejecuta en un host. Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][4] para obtener orientación sobre la aplicación de estas instrucciones.
+
+Esta integración basada en OpenMetrics tiene un modo más reciente (`use_openmetrics`: true) y un modo legacy (`use_openmetrics`: false). Para obtener todas las funciones más actualizadas, Datadog recomienda activar el modo más reciente. Para obtener más información, consulta [Versiones más recientes y legacy de integraciones basadas en OpenMetrics][5].
 
 ### Instalación
 
-Si aún no lo has hecho, configura primero la [integración de Amazon Web Services][2].
+1. [Crea una máquina cliente][6], si aún no existe.
+2. Asegúrate de que la máquina cliente tiene [concedida][7] la política de permisos [arn:aws:iam::aws:policy/AmazonMSKReadOnlyAccess][8] o que dispones de [credenciales][9] equivalentes.
+3. Activa la [monitorización abierta con Prometheus][10] en el lado de MSK para activar el JmxExporter y el NodeExporter.
+4. Instala el [Datadog Agent][11] en la máquina cliente que acabas de crear.
 
-### Recopilación de métricas
+### Configuración
 
-1. En la [página de la integración de AWS][3], asegúrate de que `Kafka` está activada en la pestaña `Metric Collection`.
+1. Edita el archivo `amazon_msk.d/conf.yaml`, en la carpeta `conf.d/` de la raíz del directorio de configuración de tu Agent para comenzar a recopilar datos de rendimiento de Amazon MSK. 
 
-2. Instala la [integración de Amazon MSK][4].
+   Incluye [etiquetas (tags)][12] personalizadas que se adjunten a cada métrica y check de servicio proporcionados por esta integración.
 
-### APM
+   ```
+   tags:
+     - <KEY_1>:<VALUE_1>
+     - <KEY_2>:<VALUE_2>
+   ```
 
-#### Activar logging
+   Para ver todas las opciones de configuración disponibles del modo más reciente, consulta el [ejemplo amazon_msk.d/conf.yaml][13]. Para ver el modo legacy de esta integración, consulta el [ejemplo legacy][14].
 
-Configura Amazon MSK para enviar logs a un bucket de S3 o a CloudWatch.
+2. [Reinicia el Agent][15].
 
-**Notas**: 
-- Si vas a loguear en un bucket de S3, asegúrate de que `amazon_msk` está configurado como _Target prefix_ (Prefijo de destino).
-- Si vas a loguear en un grupo de logs de CloudWatch, asegúrate de que tu nombre contiene la subcadena `msk`.
+### Validación
 
-#### Enviar logs a Datadog
-
-1. Si aún no lo has hecho, configura la [función de Lambda de Datadog Forwarder][5].
-2. Una vez instalada la función de Lambda, añade manualmente un activador en el bucket de S3 o grupo de logs de CloudWatch que contenga tus logs de Amazon MSK en la consola de AWS:
-
-    - [Añadir un activador manual en el bucket de S3][6]
-    - [Añadir un activador manual en el grupo de logs de CloudWatch][7]
+[Ejecuta el subcomando de estado del Agent][16] y busca `amazon_msk` en la sección Checks.
 
 ## Datos recopilados
 
@@ -74,26 +117,39 @@ Configura Amazon MSK para enviar logs a un bucket de S3 o a CloudWatch.
 
 ### Eventos
 
-El rastreador de Amazon MSK no incluye ningún evento.
+El check de Amazon MSK no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
+{{< get-service-checks-from-git "amazon_msk" >}}
 
-La integración de Amazon MSK no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? [Consulta el servicio de asistencia de Datadog][9].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][19].
 
-## Leer más
+## Referencias adicionales
 
-{{< partial name="whats-next/whats-next.html" >}}
+Documentación útil adicional, enlaces y artículos:
 
-[1]: https://docs.datadoghq.com/es/integrations/amazon_kafka/
-[2]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
-[3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: https://app.datadoghq.com/integrations/amazon-msk
-[5]: https://docs.datadoghq.com/es/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_msk/amazon_msk_metadata.csv
-[9]: https://docs.datadoghq.com/es/help/
+- [Monitorizar Amazon Managed Streaming para Apache Kafka con Datadog][20]
+
+[1]: https://docs.datadoghq.com/es/integrations/amazon_msk
+[2]: https://docs.datadoghq.com/es/data_streams/
+[3]: https://aws.amazon.com/msk
+[4]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
+[5]: https://docs.datadoghq.com/es/integrations/guide/versions-for-openmetrics-based-integrations
+[6]: https://docs.aws.amazon.com/msk/latest/developerguide/create-client-machine.html
+[7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role
+[8]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AmazonMSKReadOnlyAccess
+[9]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#configuring-credentials
+[10]: https://docs.aws.amazon.com/msk/latest/developerguide/open-monitoring.html
+[11]: https://docs.datadoghq.com/es/agent/
+[12]: https://docs.datadoghq.com/es/getting_started/tagging/
+[13]: https://github.com/DataDog/integrations-core/blob/master/amazon_msk/datadog_checks/amazon_msk/data/conf.yaml.example
+[14]: https://github.com/DataDog/integrations-core/blob/7.31.x/amazon_msk/datadog_checks/amazon_msk/data/conf.yaml.example
+[15]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[16]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
+[17]: https://github.com/DataDog/integrations-core/blob/master/amazon_msk/metadata.csv
+[18]: https://github.com/DataDog/integrations-core/blob/master/amazon_msk/assets/service_checks.json
+[19]: https://docs.datadoghq.com/es/help/
+[20]: https://www.datadoghq.com/blog/monitor-amazon-msk/

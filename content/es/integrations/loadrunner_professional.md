@@ -122,7 +122,7 @@ Una vez que el controlador se ha configurado para enviar datos a Datadog, los da
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "loadrunner_professional" >}}
+{{< get-metrics-from-git "loadrunner-professional" >}}
 
 
 ### Checks de servicio

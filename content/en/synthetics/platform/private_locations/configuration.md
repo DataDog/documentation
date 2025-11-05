@@ -109,7 +109,7 @@ The following parameters can be used to configure a default proxy to use for Syn
 `proxyTestRequests`
 : **Type**: String <br>
 **Default**: `none`<br>
-Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
+Proxy URL used by the private location to send test requests to the endpoint. This supports HTTP(S), SOCKS, and PAC files with the following syntax: `pac+http://...`, `pac+https://...`, `pac+file://...`, or `pac+data:...`.
 
 `proxyTestRequestsBypassList`
 : **Type**: Array of Strings <br>

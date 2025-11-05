@@ -39,7 +39,7 @@ Para más información, consulta la documentación relevante para tu método de 
 {{< tabs >}}
 {{% tab "Datadog API" %}}
 
-Utiliza la API Datadog para añadir una instrumentación personalizada que te permita crear, modificar o eliminar mediante programación trazas para enviar a Datadog. Esto es útil para rastrear el código interno no capturado por la instrumentación automática, eliminar tramos no deseados de trazas y para proporcionar una visibilidad y un contexto más profundos en tramos, incluido añadir etiquetas de tramos.
+Utiliza la API Datadog para añadir una instrumentación personalizada que te permita crear, modificar o eliminar mediante programación trazas para enviar a Datadog. Esto es útil para rastrear el código interno no capturado por la instrumentación automática, eliminar tramos no deseados de trazas y para proporcionar una visibilidad y un contexto más profundos en tramos, incluido añadir span tagss.
 
 {{< partial name="apm/apm-manual-instrumentation-custom.html" >}}
 
@@ -49,7 +49,7 @@ Utiliza la API Datadog para añadir una instrumentación personalizada que te pe
 
 {{% tab "OpenTelemetry API" %}}
 
-Las bibliotecas de rastreo de Datadog proporcionan una implementación de la API OpenTelemetry para instrumentar tu código. Esto significa que puedes mantener una instrumentación independiente del proveedor de todos tus servicios, sin dejar de aprovechar la implementación nativa, las funciones y los productos de Datadog. Puedes configurarla para generar tramos y trazas del estilo de Datadog que han de ser procesados por la biblioteca de rastreo de Datadog para tu lenguaje y enviar estos a Datadog.
+Las bibliotecas de rastreo de Datadog proporcionan una implementación de la API OpenTelemetry para instrumentar tu código. Esto significa que puedes mantener una instrumentación independiente del proveedor de todos tus servicios, sin dejar de aprovechar la implementación nativa, las funciones y los productos de Datadog. Puedes configurarla para generar tramos y trazas del estilo de Datadog que han de ser procesados por la librería de rastreo de Datadog para tu lenguaje y enviar estos a Datadog.
 
 {{< partial name="apm/apm-otel-instrumentation-custom.html" >}}
 
@@ -59,7 +59,7 @@ Las bibliotecas de rastreo de Datadog proporcionan una implementación de la API
 
 {{% tab "OpenTracing (legacy)" %}}
 
-Si la instrumentación personalizada de [OpenTelemetry][1] o [`ddtrace`][2] no funciona para ti, cada uno de los lenguajes compatibles también tiene soporte técnico para enviar datos de [OpenTracing][3] a Datadog. OpenTracing está archivado y el proyecto no tiene soporte técnico. 
+Si la instrumentación personalizada de [OpenTelemetry][1] o [`ddtrace`][2] no funciona para ti, cada uno de los lenguajes compatibles también tiene soporte técnico para enviar datos de [OpenTracing][3] a Datadog. OpenTracing está archivado y el proyecto no tiene soporte técnico.
 
 {{< partial name="apm/apm-opentracing-custom.html" >}}
 

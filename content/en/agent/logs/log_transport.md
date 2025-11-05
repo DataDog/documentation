@@ -67,7 +67,7 @@ By default, the Datadog Agent uses the port `443` to send its logs to Datadog ov
 Using HTTP, the Agent sends log batches with the following limits:
 
 * Maximum batch size: 1MB
-* Maximum size for a single log: 256kB
+* Maximum size for a single log: 900kB
 * Maximum number of logs in a batch: 1,000
 
 ### Log compression
@@ -109,7 +109,7 @@ When logs are sent through HTTPS, use the same [set of proxy settings][3] as the
 {{% /tab %}}
 
 {{% tab "TCP" %}}
-{{< site-region region="us,eu,us3,us5,ap1" >}}
+{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
 
 To enforce TCP transport, update the Agent's [main configuration file][1] (`datadog.yaml`) with:
 

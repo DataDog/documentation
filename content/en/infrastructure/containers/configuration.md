@@ -85,25 +85,27 @@ The following table presents the list of collected resources and the minimal Age
 |---|---|---|---|---|
 | ClusterRoleBindings | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | ClusterRoles | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
-| Clusters | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
-| CronJobs | 7.33.0 | 7.40.0 | 2.15.5 | 1.16.0 |
-| DaemonSets | 7.33.0 | 1.18.0 | 2.16.3 | 1.16.0 |
-| Deployments | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
+| Clusters | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| CronJobs | 7.33.0 | 7.40.0 | 2.15.5 | 1.16.0 |
+| CustomResourceDefinitions | 7.51.0 | 7.51.0 | 3.39.2 | v1.16.0 |
+| CustomResources | 7.51.0 | 7.51.0 | 3.39.2 | v1.16.0 |
+| DaemonSets | 7.33.0 | 1.18.0 | 2.16.3 | 1.16.0 |
+| Deployments | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
 | HorizontalPodAutoscalers | 7.33.0 | 7.51.0 | 2.10.0 | 1.1.1 |
 | Ingresses | 7.33.0 | 1.22.0 | 2.30.7 | 1.21.0 |
 | Jobs | 7.33.0 | 1.18.0 | 2.15.5 | 1.16.0 |
 | Namespaces | 7.33.0 | 7.41.0 | 2.30.9 | 1.17.0 |
 | Network Policies | 7.33.0 | 7.56.0 | 3.57.2 | 1.14.0 |
-| Nodes | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
-| PersistentVolumes | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
-| PersistentVolumeClaims | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| Nodes | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| PersistentVolumeClaims | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| PersistentVolumes | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
 | Pods | 7.33.0 | 1.18.0 | 3.9.0 | 1.17.0 |
-| ReplicaSets | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
+| ReplicaSets | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
 | RoleBindings | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | Roles | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | ServiceAccounts | 7.33.0 | 1.19.0 | 2.30.9 | 1.17.0 |
-| Services | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
-| Statefulsets | 7.33.0 | 1.15.0 | 2.20.1 | 1.16.0 |
+| Services | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| Statefulsets | 7.33.0 | 1.15.0 | 2.20.1 | 1.16.0 |
 | VerticalPodAutoscalers | 7.33.0 | 7.46.0 | 3.6.8 | 1.16.0 |
 
 **Note**: After version 1.22, Cluster Agent version numbering follows Agent release numbering, starting with version 7.39.0.
@@ -192,32 +194,53 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 
 ### Collect custom resources
 
-The [Kubernetes Explorer][3] automatically collects CustomResourceDefinitions (CRDs) by default. 
+The [Kubernetes Explorer][3] automatically collects Custom Resource Definitions (CRDs) by default.
 
-Follow these steps to collect the custom resources that these CRDs define:
+#### Automatic custom resource collection compatibility matrix
+
+When the following CRDs are present in your cluster, the Agent automatically collects their Custom Resources (CRs). If a CRD you use is **not** listed here—or your Agent version is older—follow the **manual configuration** steps below.
+
+| CRD group          | CRD kind             | CRD versions | Minimal Agent version |
+| ------------------ | -------------------- | ------------ | --------------------- |
+| datadoghq.com      | datadogslo           | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogdashboard     | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogagentprofile  | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmonitor       | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmetric        | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogpodautoscaler | v1alpha2     | 7.71.0                |
+| datadoghq.com      | datadogagent         | v2alpha1     | 7.71.0                |
+| argoproj.io        | rollout              | v1alpha1     | 7.71.0                |
+| karpenter.sh       | *                    | v1           | 7.71.0                |
+| karpenter.k8s.aws  | *                    | v1           | 7.71.0                |
+| azure.karpenter.sh | *                    | v1beta1      | 7.71.0                |
+
+
+#### Manual Configuration
+
+For the other CRDs, follow these steps to collect the custom resources that these CRDs define:
 
 1. In Datadog, open [Kubernetes Explorer][3]. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
 
-1. Locate the CRD that defines the custom resource you want to visualize in the explorer. Under the **Indexing** column, click **ENABLED** or **DISABLED**.
+1. Locate the CRD that defines the custom resource you want to visualize in the explorer. Under the **Versions** column, click the `version` tag you want to configure indexing for.
 
-   <div class="alert alert-info">If your CRD has multiple versions, you are prompted to select which version you want to configure indexing for.</div>
-
-   {{< img src="infrastructure/containers_view/CRD_indexing_1.mp4" alt="A video of Kubernetes Explorer with the Custom Resources dropdown expanded and Resource Definitions selected. The cursor moves down to one of the rows of the table and, under the 'Indexing' column, clicks on 'ENABLED'. Because this CRD has two versions, a tooltip appears. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
+   {{< img src="infrastructure/containers_view/CRD_indexing_access_1.mp4" alt="A video of Kubernetes Explorer with the Custom Resources dropdown expanded and Resource Definitions selected. The cursor moves down to one of the rows of the table and, under the 'Versions' column, clicks on one of the versions. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
 
    A modal appears:
-   {{< img src="infrastructure/containers_view/indexing_modal.png" alt="The Collecting and Indexing modal. Contains two sections: Agent Setup, with copyable snippets for updating an Agent configuration, and Indexing Configuration, with checkboxes for fields to index.">}}
+   {{< img src="infrastructure/containers_view/indexing_modal_1.png" alt="The Collecting and Indexing modal. Contains two sections: Set up Datadog Agent, with copyable snippets for updating an Agent configuration, and Select indexed fields for filtering/sorting, with checkboxes for fields to index and a preview.">}}
 
-1. Follow the instructions in the modal's **Agent Setup** section to update your Datadog Agent configuration:
+1. Follow the instructions in the modal's **Set up Datadog Agent** section to update the Agent configuration for clusters that are not collecting custom resources. The modal lists all such clusters, either because the Agent is not configured to collect custom resources, or because none are available in that cluster. If the Agent is configured and no custom resources exist, no action is required.
 
    {{< tabs >}}
    {{% tab "Helm Chart" %}}
 
    1. Add the following configuration to `datadog-values.yaml`:
 
-      ```
-      orchestratorExplorer:
+      ```yaml
+      datadog:
+        #(...)
+        orchestratorExplorer:
           customResources:
-              - <CUSTOM_RESOURCE_NAME>
+            - <CUSTOM_RESOURCE_NAME>
       ```
 
    1. Upgrade your Helm chart:
@@ -225,6 +248,7 @@ Follow these steps to collect the custom resources that these CRDs define:
       ```
       helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
       ```
+
    {{% /tab %}}
    {{% tab "Datadog Operator" %}}
 
@@ -236,11 +260,17 @@ Follow these steps to collect the custom resources that these CRDs define:
 
    1. Add the following configuration to your `DatadogAgent` manifest, `datadog-agent.yaml`:
 
-      ```
-      features:
-        orchestratorExplorer:
-          customResources:
-            - <CUSTOM_RESOURCE_NAME>
+      ```yaml
+      apiVersion: datadoghq.com/v2alpha1
+      kind: DatadogAgent
+      metadata:
+        name: datadog
+      spec:
+        #(...)
+        features:
+          orchestratorExplorer:
+            customResources:
+              - <CUSTOM_RESOURCE_NAME>
       ```
 
    1. Apply your new configuration:
@@ -254,15 +284,133 @@ Follow these steps to collect the custom resources that these CRDs define:
 
    Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
 
-1. On the modal, under **Indexing Configuration**, select the fields you want to index from the custom resource.
+1. In the modal, under **Select indexed fields for filtering/sorting**, select the fields you want to index from the custom resource for filtering and sorting. For some CRDs, Datadog provides a default configuration. You can select additional fields if needed.
 
-   {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Enable Indexing. A success message displays." video="true">}}
-     
-   Select **Enable Indexing** to save.
+    <div class="alert alert-info">After the Datadog Agent is set up, it collects available custom resources automatically. Indexing fields is optional.</div>
 
-   <div class="alert alert-info">You can select a maximum of 50 fields for each resource.</div>
 
-After the fields are indexed, you can add them as columns in the explorer or as part of Saved Views. 
+    {{< img src="infrastructure/containers_view/CRD_indexing_modal_1.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Update Fields. A success message displays." video="true">}}
+
+    For arrays of objects, see the [Indexing complex types](#indexing-complex-types) section.
+
+1.  Select **Update Fields** to save.
+
+After the fields are indexed, you can add them as columns in the explorer and sort them, or include them in Saved Views. You can also filter on indexed fields using the prefix `field#`.
+
+### Indexing complex types
+
+{{< img src="containers/explorer/crd_groupby_1.png" alt="Indexing Configuration: A targets object[] array, with 'Group by' drop down options: no field, containerResource.container, containerResource.name, containerResource.value.type, etc." style="width:100%;" >}}
+
+For arrays of objects, two group-by strategies are available:
+
+-   `No field`: Object's nested fields are indexed solely on nested field name.
+-   **Field** (for example: `type`, `status`, etc.): Object's nested fields are indexed based on each unique field value.
+
+##### Example: Filtering on DatadogPodAutoscaler custom resources
+
+Consider these two custom resources:
+
+**Custom Resource 1 (CR1)**:
+
+```yaml
+status:
+    conditions:
+        - type: HorizontalAbleToScale
+          status: 'True'
+        - type: VerticalAbleToApply
+          status: 'False'
+```
+
+**Custom Resource 2 (CR2)**:
+
+```yaml
+status:
+    conditions:
+        - type: VerticalAbleToApply
+          status: 'True'
+        - type: HorizontalAbleToScale
+          status: 'False'
+```
+
+You have the filtering possibilities on `status.conditions` based on the two indexing strategies:
+
+{{< tabs >}}
+{{% tab "Grouping by no field" %}}
+
+**Indexed fields for CR1:**
+
+```yaml
+status:
+    conditions:
+        type: [HorizontalAbleToScale, VerticalAbleToApply]
+        status: ['True', 'False']
+```
+
+**Indexed fields for CR2:**
+
+```yaml
+status:
+    conditions:
+        type: [VerticalAbleToApply, HorizontalAbleToScale]
+        status: ['True', 'False']
+```
+
+**Example queries:**
+
+**Query 1:**
+
+```text
+field#status.conditions.status:"False"
+```
+
+**Result:** Returns CR1 and CR2. Both CRs have at least one object with `status:"False"`
+
+**Query 2:**
+
+```text
+field#status.conditions.status:"False" AND field#status.conditions.type:VerticalAbleToApply
+```
+
+**Result:** Returns CR1 and CR2. At least one `status.condition` object in each custom resource matches one of the filters—even if it's not the same object that matches both filters.
+
+{{% /tab %}}
+{{% tab "Grouping by type" %}}
+
+**Indexed fields for CR1:**
+
+```yaml
+status:
+    conditions:
+        - HorizontalAbleToScale:
+              status: 'True'
+        - VerticalAbleToApply:
+              status: 'False'
+```
+
+**Indexed fields for CR2:**
+
+```yaml
+status:
+    conditions:
+        - VerticalAbleToApply:
+              status: 'True'
+        - HorizontalAbleToScale:
+              status: 'False'
+```
+
+**Example query:**
+
+```text
+field#status.conditions.HorizontalAbleToScale.status:"False"
+```
+
+**Result:** Returns CR2. Only a `status.condition` object whose `type:"HorizontalAbleToScale"` and `status:"False"` is returned.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">You can select up to 50 fields per resource. You can use the preview to validate your indexing choices.</div>
+
 
 ## Further reading
 

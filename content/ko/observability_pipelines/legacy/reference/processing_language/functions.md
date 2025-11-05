@@ -4,10 +4,6 @@ aliases:
 title: (레거시) 함수
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">옵저버빌리티 파이프라인은 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 Datadog 처리 언어(DPL) 또는 벡터 리매핑 언어(VRL)에는 데이터 변환을 위한 함수 기능이 내장되어 있습니다.
 
 {{< whatsnext desc="함수는 다음 카테고리로 분류됩니다." >}}

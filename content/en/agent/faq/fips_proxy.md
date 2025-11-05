@@ -8,17 +8,13 @@ further_reading:
   text: "FIPS Compliance"
 ---
 
-<div class="alert alert-danger">The Datadog FIPS Proxy is no longer the recommended solution for FIPS-compliant encryption of the Datadog Agent. Use the <a href="/agent/configuration/fips-compliance">Datadog FIPS Agent</a> instead.</div>
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-warning">The Datadog Agent FIPS Proxy is available only in the US1-FED region.</a></div>
-{{< /site-region >}}
+<div class="alert alert-warning">The Datadog FIPS Proxy is no longer the recommended solution for FIPS-compliant encryption of the Datadog Agent. Use the <a href="/agent/configuration/fips-compliance">Datadog FIPS Agent</a> instead.</div>
 
 The Datadog Agent FIPS Proxy ensures that communication between the Datadog Agent and Datadog uses FIPS-compliant encryption.
 
 The Datadog Agent FIPS Proxy is a separately distributed component that you deploy on the same host as the Datadog Agent. The proxy acts as an intermediary between the Agent and Datadog intake. The Agent communicates with the Datadog Agent FIPS Proxy, which encrypts payloads using a FIPS 140-2 validated cryptography and relays the payloads to Datadog. The Datadog Agent and the Agent FIPS Proxy must be configured in tandem to communicate with one another.
 
-<div class="alert alert-warning">FIPS compliance is not retained if the Datadog Agent FIPS Proxy and the Datadog Agent are not on the same host.
+<div class="alert alert-danger">FIPS compliance is not retained if the Datadog Agent FIPS Proxy and the Datadog Agent are not on the same host.
 <br>Similarly, FIPS compliance is not retained if the <code>fips.enabled</code> option is not set to <code>true</code> in <code>datadog.yaml</code>.</div>
 
 ## Supported platforms and limitations
@@ -124,7 +120,7 @@ The `https` option is set to `false` because the Agent uses HTTP to communicate 
 
 **Host security and hardening are your responsibilities.**
 
-<div class="alert alert-warning">The <code>fips.enabled</code> setting defaults to <code>false</code> in the Agent. It must be set to <code>true</code> to ensure all communications are forwarded through the Datadog Agent FIPS Proxy.<br><br><strong>If <code>fips.enabled</code> is not set to <code>true</code>, the Agent is not FIPS Compliant</strong>.</div>
+<div class="alert alert-danger">The <code>fips.enabled</code> setting defaults to <code>false</code> in the Agent. It must be set to <code>true</code> to ensure all communications are forwarded through the Datadog Agent FIPS Proxy.<br><br><strong>If <code>fips.enabled</code> is not set to <code>true</code>, the Agent is not FIPS Compliant</strong>.</div>
 
 ### Verify your installation
 
@@ -186,16 +182,138 @@ The `use_https` option is set to `false` because the Agent uses HTTP to communic
 
 **Host security and hardening are your responsibilities.**
 
-<div class="alert alert-warning">The <code>fips.enabled</code> setting defaults to <code>false</code> in the Agent. It must be set to <code>true</code> to ensure all communications are forwarded through the Datadog Agent FIPS Proxy.<br><br><strong>If <code>fips.enabled</code> is not set to <code>true</code>, the Agent is not FIPS Compliant</strong>.</div>
+<div class="alert alert-danger">The <code>fips.enabled</code> setting defaults to <code>false</code> in the Agent. It must be set to <code>true</code> to ensure all communications are forwarded through the Datadog Agent FIPS Proxy.<br><br><strong>If <code>fips.enabled</code> is not set to <code>true</code>, the Agent is not FIPS Compliant</strong>.</div>
 
 
 {{% /tab %}}
 
 {{% tab "Amazon ECS" %}}
+To install the FIPS proxy on Amazon ECS, follow the [Datadog Agent ECS Integrations guide](/containers/amazon_ecs/#fips-proxy-for-govcloud-environments). 
 
-For instructions on installing the FIPS proxy on Amazon ECS, see [FIPS proxy for GOVCLOUD environments][1].
+Ensure you add the `fips-proxy` sidecar container to your ECS task definition and open the required container ports (9803–9818) to enable communication for all [supported features](#supported-platforms-and-limitations).
 
-[1]: /containers/amazon_ecs/#fips-proxy-for-govcloud-environments
+**Note**: You must also ensure that the sidecar container is configured with applicable network settings and IAM permissions.
+
+```json
+ {
+   "containerDefinitions": [
+     (...)
+          {
+            "name": "fips-proxy",
+            "image": "datadog/fips-proxy:1.1.17",
+            "portMappings": [
+                {
+                    "containerPort": 9803,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9804,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9805,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9806,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9807,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9808,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9809,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9810,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9811,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9812,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9813,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9814,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9815,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9816,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9817,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9818,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_LOCAL_ADDRESS",
+                    "value": "127.0.0.1"
+                }
+            ]
+        }
+   ],
+   "family": "datadog-agent-task"
+}
+```
+
+You must also update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            (...)
+            "environment": [
+              (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_HTTPS",
+                    "value": "false"
+                },
+             ],
+        },
+    ],
+   "family": "datadog-agent-task"
+}
+```
+[1]: https://docs.datadoghq.com/agent/configuration/fips-compliance/?tab=helmonamazoneks#supported-platforms-and-limitations
 {{% /tab %}}
 
 {{< /tabs >}}

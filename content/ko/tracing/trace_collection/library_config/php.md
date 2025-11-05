@@ -58,7 +58,7 @@ php_value datadog.service my-app
 
 ## NGINX 및 PHP-FPM
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>참고:</strong> PHP-FPM은 <code>env[...]</code> 지시어에서 <code>false</code> 값을 지원하지 않습니다. <code>true</code> 대신 <code>1을</code> 사용하고 <code>false</code> 대신 <code>0을</code> 사용하세요.
 </div>
 
@@ -604,7 +604,7 @@ OpenAI 메트릭 수집을 활성화합니다.<br>
 
 ## 리소스 이름을 정규화된 URI에 매핑
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 다음 중 하나를 설정하세요. <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code> 및 <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code>을 설정하면 새로운 리소스 정규화 방식을 선택하게 되며 <code>DD_TRACE_RESOURCE_URI_MAPPING의</code> 모든 값은 무시됩니다.
 </div>
 

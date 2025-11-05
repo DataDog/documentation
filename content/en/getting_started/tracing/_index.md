@@ -1,5 +1,6 @@
 ---
 title: Getting Started with APM Tracing
+description: Set up Application Performance Monitoring (APM) to identify bottlenecks, troubleshoot issues, and send traces to Datadog.
 aliases:
     - /getting_started/tracing/distributed-tracing
 further_reading:

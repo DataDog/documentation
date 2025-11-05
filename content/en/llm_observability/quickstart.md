@@ -1,57 +1,126 @@
 ---
-title: Trace An LLM Application
+title: Quickstart
 aliases:
     - /tracing/llm_observability/quickstart
 further_reading:
-    - link: '/llm_observability'
-      tag: 'Documentation'
-      text: 'Learn about LLM Observability'
+    - link: '/llm_observability/evaluations'
+      tag: 'Evaluations'
+      text: 'Configure Evaluations on your application'
+    - link: '/llm_observability/instrumentation/custom_instrumentation'
+      tag: 'Custom Instrumentation'
+      text: 'Instrument your application with custom spans'
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
-## Overview
-
-This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If your application is written in another language, you can create traces by calling the [API][8] instead.
-
-## Setup
-
-### Jupyter notebooks
-
-To better understand LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time.
-
-## Trace an LLM application
-
-To generate an LLM Observability trace, you can run a Python or Node.js script.
+This page demonstrates using Datadog's LLM Observability SDK to instrument a Python, Node.js, or Java LLM application.
 
 ### Prerequisites
 
-- LLM Observability requires a Datadog API key. For more information, see [the instructions for creating an API key][7].
-- The following example script uses OpenAI, but you can modify it to use a different provider. To run the script as written, you need:
-    - An OpenAI API key stored in your environment as `OPENAI_API_KEY`. To create one, see [Account Setup][4] and [Set up your API key][6] in the official OpenAI documentation.
-    - The OpenAI Python library installed. See [Setting up Python][5] in the official OpenAI documentation for instructions.
+LLM Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
+
+### Setup
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-1. Install the SDK and OpenAI packages:
+1. Install the SDK:
 
    ```shell
    pip install ddtrace
-   pip install openai
    ```
 
-2. Create a script, which makes a single OpenAI call.
+2. Prefix your Python start command with `ddtrace-run`:
+
+   ```shell
+   DD_LLMOBS_ENABLED=1 \
+   DD_LLMOBS_ML_APP=quickstart-app \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
+   ddtrace-run <your application command>
+   ```
+
+   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
+
+
+[1]: /llm_observability/setup/sdk/python/#command-line-setup
+[2]: /getting_started/site/
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+1. Install the SDK:
+
+   ```shell
+   npm install dd-trace
+   ```
+
+2. Add `NODE_OPTIONS` to your Node.js start command:
+   ```shell
+   DD_LLMOBS_ENABLED=1 \
+   DD_LLMOBS_ML_APP=quickstart-app \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
+   NODE_OPTIONS="--import dd-trace/initialize.mjs" <your application command>
+   ```
+
+   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
+
+[1]: /llm_observability/setup/sdk/nodejs/#command-line-setup
+[2]: /getting_started/site/
+
+{{% /tab %}}
+{{% tab "Java" %}}
+1. Install the SDK:
+
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+
+2. Add the `-javaagent` JVM argument to your Java start command:
+   ```shell
+   java -javaagent:/path/to/dd-java-agent.jar \
+   -Ddd.llmobs.enabled=true \
+   -Ddd.llmobs.ml.app=quickstart-app \
+   -Ddd.api.key=<YOUR_DATADOG_API_KEY> \
+   -jar path/to/your/app.jar
+   ```
+
+   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
+
+[1]: /llm_observability/setup/sdk/java/#command-line-setup
+[2]: /getting_started/site/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### View traces
+
+Make requests to your application triggering LLM calls and then view traces in the **Traces** tab [of the **LLM Observability** page][3] in Datadog. If you don't see any traces, make sure you are using a supported library. Otherwise, you may need to instrument your application's LLM calls manually.
+
+
+### Next steps
+
+After traces are being submitted from your application, you can:
+
+- [Configure evaluations][4] that you can use to assess the effectiveness of your LLM application.
+- Add [custom instrumentation][5] to your application and extract data that automatic instrumentation cannot.
+
+
+## Example "Hello World" application
+
+See below for a simple application that can be used to begin exploring the LLM Observability product.
+
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+1. Install OpenAI with `pip install openai`.
+
+2. Save example script `app.py`:
 
    ```python
    import os
    from openai import OpenAI
 
    oai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-
    completion = oai_client.chat.completions.create(
-       model="gpt-3.5-turbo",
+       model="gpt-4o-mini",
        messages=[
         {"role": "system", "content": "You are a helpful customer assistant for a furniture store."},
         {"role": "user", "content": "I'd like to buy a chair for my living room."},
@@ -59,144 +128,49 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    )
    ```
 
-3. Run the script with the following shell command. This sends a trace of the OpenAI call to Datadog.
+3. Run the application:
 
    ```shell
-   DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
-   DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DD_SITE> \
-   DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
+   DD_LLMOBS_ENABLED=1 \
+   DD_LLMOBS_ML_APP=quickstart-app \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
+   ddtrace-run app.py
    ```
-
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key, and replace `<YOUR_DD_SITE>` with your [Datadog site][2].
-
-   For more information about required environment variables, see [the SDK documentation][1].
-
-[1]: /llm_observability/setup/sdk/python/#command-line-setup
-[2]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-1. Install the SDK and OpenAI packages:
+1. Install OpenAI with `npm install openai`.
 
-   ```shell
-   npm install dd-trace
-   npm install openai
-   ```
-2. Create a script, which makes a single OpenAI call.
+2. Save example script `app.js`:
 
-   ```javascript
+   ```js
    const { OpenAI } = require('openai');
-
    const oaiClient = new OpenAI(process.env.OPENAI_API_KEY);
 
-   function main () {
-      const completion = await oaiClient.chat.completions.create({
-         model: 'gpt-3.5-turbo',
-         messages: [
-            { role: 'system', content: 'You are a helpful customer assistant for a furniture store.' },
-            { role: 'user', content: 'I\'d like to buy a chair for my living room.' },
-         ]
-      });
+   async function main () {
+       const completion = await oaiClient.chat.completions.create({
+          model: 'gpt-4o-mini',
+          messages: [
+             { role: 'system', content: 'You are a helpful customer assistant for a furniture store.' },
+             { role: 'user', content: 'I\'d like to buy a chair for my living room.' },
+          ]
+       });
+       return completion;
    }
 
-   main();
+   main().then(console.log)
+
+3. Run the application:
+   ```
+   DD_LLMOBS_ENABLED=1 \
+   DD_LLMOBS_ML_APP=quickstart-app \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
+   NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
    ```
 
-3. Run the script with the following shell command. This sends a trace of the OpenAI call to Datadog.
-   ```shell
-   DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
-   DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DD_SITE> \
-   DD_LLMOBS_AGENTLESS_ENABLED=1 NODE_OPTIONS="--import dd-trace/initialize.mjs" node quickstart.js
-   ```
-
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key, and replace `<YOUR_DD_SITE>` with your [Datadog site][2].
-
-   For more information about required environment variables, see [the SDK documentation][1].
-
-[1]: /llm_observability/setup/sdk/nodejs/#command-line-setup
-[2]: /getting_started/site/
-
 {{% /tab %}}
 {{< /tabs >}}
 
-   **Note**: `DD_LLMOBS_AGENTLESS_ENABLED` is only required if you do not have the Datadog Agent running. If the Agent is running in your production environment, make sure this environment variable is unset.
-
-4. View the trace of your LLM call on the **Traces** tab [of the **LLM Observability** page][3] in Datadog.
-
-   {{< img src="llm_observability/quickstart_trace_1.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
-
-The trace you see is composed of a single LLM span. The `ddtrace-run` or `NODE_OPTIONS="--import dd-trace/initialize.mjs"` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
-
-If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [Setup documentation][11] and the [SDK documentation][1].
-
-## Trace an LLM application in AWS Lambda
-The following steps generate an LLM Observability trace in an AWS Lambda environment and create an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
-
-1. Create a [Lambda function chatbot using Amazon Bedrock][13].
-2. Instrument your Lambda function:
-    1. Open a Cloudshell
-    2. Install the Datadog CLI client
-    ```shell
-    npm install -g @datadog/datadog-ci
-    ```
-    3. Set the Datadog API key and site
-    ```shell
-    export DD_SITE=<YOUR_DD_SITE>
-    export DD_API_KEY=<YOUR_DATADOG_API_KEY>
-    ```
-    If you already have or prefer to use a secret in Secrets Manager, you can set the API key by using the secret ARN:
-    ```shell
-    export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
-    ```
-    4. Instrument your Lambda function with LLM Observability (this requires at least version 77 of the Datadog Extension layer).
-{{< tabs >}}
-{{% tab "Python" %}}
-```shell
-datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
-```
-{{% /tab %}}
-{{% tab "Node.js" %}}
-```shell
-datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
-```
-{{% /tab %}}
-{{< /tabs >}}
-3. Verify that your function was instrumented.
-    1. In the Datadog UI, navigate to `Infrastructure > Serverless`
-    2. Search for the name of your function.
-    3. Click on it to open the details panel.
-    4. Under the `Configuration` tab are the details of the Lambda function, attached layers, and a list of `DD_` Datadog-related environment variables under the `Datadog Environment Variables` section.
-4. Invoke your Lambda function and verify that LLM Observability traces are visible in the Datadog UI.
-
-### Force flushing traces
-
-For either serverless environments other than AWS Lambda or issues seeing traces from AWS Lambdas, use the `flush` method to ensure traces are flushed before the process exits.
-
-{{< tabs >}}
-{{% tab "Python" %}}
-
-```python
-from ddtrace.llmobs import LLMObs
-def handler():
-  # function body
-  LLMObs.flush()
-```
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
-
-```javascript
-import tracer from 'dd-trace';
-const llmobs = tracer.llmobs;
-
-export const handler = async (event) => {
-  // your function body
-  llmobs.flush();
-};
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 
@@ -205,12 +179,5 @@ export const handler = async (event) => {
 [1]: /llm_observability/setup/sdk/python
 [2]: /llm_observability/setup/sdk/nodejs
 [3]: https://app.datadoghq.com/llm/traces
-[4]: https://platform.openai.com/docs/quickstart/account-setup
-[5]: https://platform.openai.com/docs/quickstart/step-1-setting-up-python
-[6]: https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key
-[7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
-[8]: /llm_observability/setup/api
-[10]: /llm_observability/setup/auto_instrumentation/
-[11]: /llm_observability/setup/
-[12]: https://github.com/DataDog/llm-observability
-[13]: https://repost.aws/articles/ARixmsXALpSWuxI02zHgv1YA/bedrock-unveiled-a-quick-lambda-example
+[4]: /llm_observability/evaluations
+[5]: /llm_observability/instrumentation/custom_instrumentation

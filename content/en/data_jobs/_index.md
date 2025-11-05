@@ -1,15 +1,15 @@
 ---
 title: Data Jobs Monitoring
+description: "Monitor performance, reliability, and cost efficiency of data processing jobs across platforms like EMR, Databricks, Dataproc, and Kubernetes."
 further_reading:
-    - link: '/data_streams'
-      tag: 'Documentation'
-      text: 'Data Streams Monitoring'
-
+  - link: '/data_streams'
+    tag: 'Documentation'
+    text: 'Data Streams Monitoring'
+  - link: "https://www.datadoghq.com/blog/data-observability/"
+    tag: "Blog"
+    text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog Data Jobs Monitoring is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 {{< img src="data_jobs/overview_062024.png" alt="Datadog Data Jobs Monitoring overview page" style="width:100%;" >}}
 
 Data Jobs Monitoring provides visibility into the performance, reliability, and cost efficiency of your data processing jobs, along with the underlying infrastructure. Data Jobs Monitoring enables you to:

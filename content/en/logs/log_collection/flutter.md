@@ -153,7 +153,7 @@ final datadogLogger = DatadogSdk.instance.logs?.createLogger(
 
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup
+[2]: /real_user_monitoring/application_monitoring/flutter/setup
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogLoggerConfiguration-class.html
 [4]: /getting_started/tagging/
 [5]: https://api.flutter.dev/flutter/services/StandardMessageCodec-class.html

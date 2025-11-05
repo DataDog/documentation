@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Apache Airflow
+description: "Monitor Apache Airflow DAG workflows with Data Jobs Monitoring using OpenLineage provider across Kubernetes, Amazon MWAA, and other platforms."
 is_beta: true
 private: true
 further_reading:
@@ -22,16 +23,16 @@ To try the preview for Airflow monitoring, follow the setup instructions below.
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
-## Requirements
+### Requirements
 
 * [Apache Airflow 2.5.0][1] or later
 * [apache-airflow-providers-openlineage][2] or [openlineage-airflow][5] depending on your Airflow version
 
-## Setup
+### Setup
 
 To get started, follow the instructions below.
 
-1. Install `openlineage` provider for **both Airflow schedulers and Airflow workers** by adding the following into your `requirements.txt` file or wherever your Airflow depedencies are managed:
+1. Install `openlineage` provider for **both Airflow schedulers and Airflow workers** by adding the following into your `requirements.txt` file or wherever your Airflow dependencies are managed:
 
     For **Airflow 2.7 or later**:
 
@@ -50,8 +51,8 @@ To get started, follow the instructions below.
    ```shell
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
-   # AIRFLOW__OPENLINEAGE__NAMESPACE sets the 'env' tag value in Datadog. You can hardcode this to a different value
-   export AIRFLOW__OPENLINEAGE__NAMESPACE=${AIRFLOW_ENV_NAME}
+   # OPENLINEAGE_NAMESPACE sets the 'env' tag value in Datadog. You can hardcode this to a different value
+   export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
@@ -75,6 +76,10 @@ To get started, follow the instructions below.
    ```
 
    Adding `"source": "airflow"` enables the extraction of the correlation-required attributes by the [Airflow integration][8] logs pipeline.
+   
+   These file paths are relative to the Agent container. Mount the directory containing the log file into both the application and Agent containers so the Agent can access it. For details, see [Collect logs from a container local log file][10].
+
+   **Note**: Log collection requires the Datadog agent to already be installed on your Kubernetes cluster. If you haven't installed it yet, see the [Kubernetes installation documentation][9].
 
    For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][7].
    
@@ -87,25 +92,27 @@ To get started, follow the instructions below.
 [6]: https://airflow.apache.org/docs/apache-airflow/2.9.3/configurations-ref.html#log-filename-template
 [7]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
 [8]: https://docs.datadoghq.com/integrations/airflow/?tab=containerized
+[9]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=datadogoperator#installation
+[10]: https://docs.datadoghq.com/containers/kubernetes/log/?tab=datadogoperator#from-a-container-local-log-file
 
 
-## Validation
+### Validation
 
 In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
 
-## Troubleshooting
+### Troubleshooting
 
 Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment variables set previously for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
 
 {{% /tab %}}
 
 {{% tab "Amazon MWAA" %}}
-## Requirements
+### Requirements
 
 * [Apache Airflow 2.5.0][1] or later
 * [apache-airflow-providers-openlineage][2] or [openlineage-airflow][8] depending on your Airflow version
 
-## Setup
+### Setup
 
 To get started, follow the instructions below.
 
@@ -162,11 +169,11 @@ To get started, follow the instructions below.
 [9]: https://docs.aws.amazon.com/mwaa/latest/userguide/monitoring-airflow.html#monitoring-airflow-enable
 [10]: /integrations/amazon_web_services/?tab=roledelegation#log-collection
 
-## Validation
+### Validation
 
 In Datadog, view the [Data Jobs Monitoring][7] page to see a list of your Airflow job runs after the setup.
 
-## Troubleshooting
+### Troubleshooting
 
 Ensure your Execution role configured for your Amazon MWAA Environment has the right permissions to the `requirements.txt` and [Amazon MWAA start script][3]. This is required if you are managing your own Execution role and it's the first time you are adding those supporting files. See official guide [Amazon MWAA execution role][6] for details if needed.
 
@@ -177,17 +184,17 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the [Amazon MWAA start script][3]
 
 {{% tab "Astronomer" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. Data Jobs Monitoring depends on the same OpenLineage provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport.
 </div>
 
-## Requirements
+### Requirements
 
 * [Astro Runtime 12.1.0+][1]
 * [`apache-airflow-providers-openlineage` 1.11.0+][2]
 * [`openlineage-python` 1.23.0+][8]
 
-## Setup
+### Setup
 
 1. To set up the OpenLineage provider, define the following environment variables. You can configure these variables in your Astronomer deployment using either of the following methods:
 
@@ -226,17 +233,80 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 [10]: https://www.astronomer.io/docs/astro/environment-variables/#management-options
 [11]: https://www.astronomer.io/docs/astro/manage-env-vars#using-your-dockerfile
 
-## Validation
+### Validation
 
 In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
 
 
-## Troubleshooting
+### Troubleshooting
 Check that the OpenLineage environment variables are correctly set on the Astronomer deployment.
 
 **Note**: Using the `.env` file to add the environment variables does not work because the variables are only applied to the local Airflow environment.
 {{% /tab %}}
+{{% tab "Google Cloud Composer" %}}
+<div class="alert alert-danger">
+Data Jobs Monitoring for Airflow is not yet compatible with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration>Dataplex</a> data lineage. Setting up OpenLineage for Data Jobs Monitoring overrides your existing Dataplex transport configuration.
+</div>
 
+### Requirements
+
+* [Cloud Composer 2][1] or later
+* [apache-airflow-providers-openlineage][2]
+
+### Setup
+
+To get started, follow the instructions below.
+
+
+1. In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
+
+   - In Section 1, enter `openlineage`.
+   - In Key 1, enter `disabled`.
+   - In Value 1, enter `False` to make sure OpenLineage is activated.
+
+   - In Section 2, enter `openlineage`.
+   - In Key 2, enter `transport`.
+   - In Value 2, enter the following:
+
+     ```text
+     {
+      "type": "http", 
+      "url": "<DD_DATA_OBSERVABILITY_INTAKE>", 
+      "auth": {
+         "type": "api_key", 
+         "api_key": "<DD_API_KEY>"
+      }
+     }
+     ```
+
+   * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
+   * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
+   
+
+   Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of the `openlineage` provider in Google Cloud Composer.
+
+2. After starting the Composer environment, install the `openlineage` provider by adding the following package in the Pypi packages tab of your environment page:
+      ```text
+      apache-airflow-providers-openlineage
+      ```
+
+
+[1]: https://cloud.google.com/composer/docs/composer-versioning-overview
+[2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
+[3]: https://cloud.google.com/composer/docs/airflow-configurations
+[4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
+[5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[7]: https://app.datadoghq.com/data-jobs/
+
+### Validation
+
+In Datadog, view the [Data Jobs Monitoring][7] page to see a list of your Airflow job runs after the setup.
+
+### Troubleshooting
+
+Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the Environment variables tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting as you configure the `openlineage` provider.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Advanced Configuration
@@ -250,7 +320,7 @@ To see the link between Airflow tasks and dbt jobs, follow those steps:
 1. Install `openlineage-dbt`. Reference [Using dbt with Amazon MWAA][7] to setup dbt in the virtual environment.
 
 ```shell
-pip3 install openlineage-dbt>=1.33.0
+pip3 install openlineage-dbt>=1.36.0
 ```
 
 2. Change the dbt invocation to `dbt-ol` (OpenLineage wrapper for dbt).
@@ -276,33 +346,23 @@ dbt_run = BashOperator(
 ```
 
 ### Link your Spark jobs with Airflow tasks
-You can troubleshoot Airflow tasks that run Spark jobs more efficiently by connecting the Spark job run info and telemetry with the respective Airflow task.
 
-**Prerequisites**: your Spark jobs are currently monitored through [Data Jobs Monitoring][2] and are submitted through [SparkSubmitOperator][5]s from your Airflow jobs.
+OpenLineage integration can automatically inject Airflow's parent job information (namespace, job name, run id) into Spark application properties. This creates a parent-child relationship between Airflow tasks and Spark jobs, enabling you to troubleshoot both systems in one place.
 
-To see the link between Airflow task and the Spark application it submitted, follow these steps:
+**Note**: This feature requires `apache-airflow-providers-openlineage` version 2.1.0 or later (supported from Airflow 2.9+).
 
-1. Configure Airflow to turn off lazy loading of Airflow plugins by setting [lazy_load_plugins config][3] to `False` in your `airflow.cfg` or exporting the following environment variable where your Airflow schedulers and Airflow workers run:
+1. **Verify operator compatibility**: Check the [Apache Airflow OpenLineage documentation][8] to confirm your Spark operators are supported. This feature only works with specific operators like SparkSubmitOperator and LivyOperator.
 
-   ```shell
-   export AIRFLOW__CORE__LAZY_LOAD_PLUGINS='False'
-   ```
+2. Make sure your Spark jobs are actively monitored through [Data Jobs Monitoring][2].
 
-2. Update your Airflow job's DAG file by adding the following Spark configurations to your [SparkSubmitOperator][5] where you submit your Spark Application:
+3. Enable automatic parent job information injection by setting the following configuration:
 
-   ```python
-     SparkSubmitOperator(
-       conf={
-         "spark.openlineage.parentJobNamespace": "{{ macros.OpenLineageProviderPlugin.lineage_job_namespace() }}",
-         "spark.openlineage.parentJobName": "{{ macros.OpenLineageProviderPlugin.lineage_job_name(task_instance) }}",
-         "spark.openlineage.parentRunId": "{{ macros.OpenLineageProviderPlugin.lineage_run_id(task_instance) }}",
-       },
-     )
-   ```
+```shell
+AIRFLOW__OPENLINEAGE__SPARK_INJECT_PARENT_JOB_INFO=true
+```
 
-   See [Lineage job & run macros][4] for the definitions of referenced macros.
+This automatically injects parent job properties for all supported Spark Operators. To disable for specific operators, set `openlineage_inject_parent_job_info=False` on the operator.
 
-3. Once you have re-deployed your Airflow environment with the updated [lazy_load_plugins config][3] and the updated DAG file, and your Airflow DAG as been re-run, go to [Data Jobs Monitoring][2] page. You can then find your latest Airflow job run and see a SpanLink in the Airflow Job Run trace to the trace of the launched Spark Application. This makes it possible to debug issues in Airflow or Spark all in one place.
 
 ## Further Reading
 
@@ -315,3 +375,4 @@ To see the link between Airflow task and the Spark application it submitted, fol
 [5]: https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/_api/airflow/providers/apache/spark/operators/spark_submit/index.html#airflow.providers.apache.spark.operators.spark_submit.SparkSubmitOperator
 [6]: https://openlineage.io/docs/integrations/dbt/
 [7]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
+[8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html#passing-parent-job-information-to-spark-jobs

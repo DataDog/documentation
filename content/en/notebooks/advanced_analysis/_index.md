@@ -1,5 +1,9 @@
 ---
 title: Analysis Features
+description: "Perform advanced data analysis in Notebooks with SQL queries, data transformations, joins, and visualizations across multiple datasets."
+aliases:
+- /logs/workspaces/
+- /logs/workspaces/export/
 further_reading:
 - link: "/notebooks"
   tag: "Documentation"
@@ -9,9 +13,11 @@ further_reading:
   text: "Getting Started with Analysis Features"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}} 
-  Advanced Analysis is in Preview. To enable, reach out to your Customer Success Manager.
-{{< /callout >}}
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+Notebooks Advanced Analysis is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
 
 ## Overview
 
@@ -19,46 +25,47 @@ The analysis feature in Notebooks allows you to perform advanced analysis on you
 
 Notebooks are collaborative text editors that allow you to embed Datadog graphs directly into your documents. While this is ideal for exploration and storytelling, deeper investigations might require more advanced control over data queries. The analysis features enable you to run queries that help you:
 
-* Chain queries such as aggregating existing aggregated data or joining two sets of aggregating data. 
+* Chain queries such as aggregating existing aggregated data or joining two sets of aggregating data.
 * Join data across multiple log sources and other datasets.
-* Perform advanced parsing, extract data, and add calculated fields at query time.  
+* Perform advanced parsing, extract data, and add calculated fields at query time.
 * Visualize transformed datasets with graphs.
 
 ## Adding data to your notebook
 
-To run complex queries in a notebook, first add a **Data Source** cell. There are two ways to do this: 
+To run complex queries in a notebook, first add a **Data Source** cell. There are two ways to do this:
 
 **From a notebook**:
-1. Type `/datasource` and press <kbd>Enter</kbd>, or click the **Data Source** tile at the bottom of the page.  
-2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.  
+1. Type `/datasource` and press <kbd>Enter</kbd>, or click the **Data Source** tile at the bottom of the page.
+2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.<br/>
+**Note**: if there is a data source you want that is not available, request it [here][5].
 3. Enter your query. Reserved attributes from the filtered logs are automatically added as columns.
 
 **From the [Log Explorer][1]**:
 
-1. Enter your query in the Log Explorer.  
-2. Click **Analyze in Notebooks**.  
-3. Check the **Use as a computational data source** box and select the notebook you want to use.   
+1. Enter your query in the Log Explorer.
+2. Click **Analyze in Notebooks**.
+3. Check the **Use as a computational data source** box and select the notebook you want to use.
 4. A data source cell is added to the selected notebook with the same query you entered in the Log Explorer. By default, the columns shown in the Log Explorer are included in the data source cell.
 
 ## Configuring a data source cell
 
-After adding a data source cell to a notebook, you can continue modifying it to structure the data to suit your analysis needs. 
+After adding a data source cell to a notebook, you can continue modifying it to structure the data to suit your analysis needs.
 
 ### Change the time frame for the data
 
 By default, data source cells created from Notebooks use the notebook's global time frame. Data source cells created from the Log Explorer use a local time fixed to the time frame at the time of export.
 
-You can switch any data source cell between a local or global time frame using the toggle button in the top right corner of the cell. 
+You can switch any data source cell between a local or global time frame using the toggle button in the top right corner of the cell.
 
 ### Filter the data source
 
-Regardless of how you create the data source cell, you can modify the query using the search bar. Any changes to the query automatically re-run the data source cell and any downstream cells, updating the preview of the data. 
+Regardless of how you create the data source cell, you can modify the query using the search bar. Any changes to the query automatically re-run the data source cell and any downstream cells, updating the preview of the data.
 
 ### Add or modify a column
 
 You can add or modify columns in your data source cell. There are two ways to adjust the columns:
 
-- In the preview section, click **columns** to search through available attributes for your data source.   
+- In the preview section, click **columns** to search through available attributes for your data source.
 - In the preview, click on a row to open the detail side panel. Click the attribute you want to add as a column, and from the pop up option, select Add "@your_column" to your "@your_datasource" dataset.
 
 {{< img src="/notebooks/analysis_features/add_column_to_dataset.png" alt="Opened detail side panel with the option to add an attribute column to the data source cell" style="width:100%;" >}}
@@ -83,7 +90,7 @@ You can add various cell types to enhance your analysis capabilities. These cell
 
 Add a transformation cell to filter, group, join, or extract data defined in a data source cell.
 
-1. Type `/transformation` and press <kbd>Enter</kbd>, or click on the transform dataset tile at the bottom of the page.   
+1. Type `/transformation` and press <kbd>Enter</kbd>, or click on the transform dataset tile at the bottom of the page.
 2. Select the data source you want to transform in the source dataset dropdown menu.
 
 After adding the transformation cell, you can add any number of transformation operations inside the cell. Choose an operation from the list of supported transformations:
@@ -93,7 +100,7 @@ After adding the transformation cell, you can add any number of transformation o
 | Group | Select what you want to group the data by in the dropdown menus. |
 | Join | Select the type of join, the dataset to join against, and the fields to join on. |
 | Filter | Add a filter query for the dataset. |
-| Calculate | Add a name for the field and the function formula, using the [calculated field expression language][3]. |
+| Calculate | Add a name for the field and the function formula, using the [calculated field formulas][3]. |
 | Limit | Enter the number of rows of the dataset you want to display. |
 | Sort | Select the sort order and column to sort on. |
 | Convert | Allows you to convert a column into a different type. Select the column and the column type to be converted. |
@@ -102,9 +109,9 @@ After adding the transformation cell, you can add any number of transformation o
 
 You can also transform your data using SQL by adding an analysis cell to your notebook.
 
-1. Type `/sql` or `/analysis` and press <kbd>Enter</kbd>, or click the **SQL Query** tile at the bottom of the page.   
-2. In the source dataset dropdown, select the data source you want to transform.  
-3. Write your SQL query. For supported SQL syntax, see the [DDSQL Reference][4].  
+1. Type `/sql` or `/analysis` and press <kbd>Enter</kbd>, or click the **SQL Query** tile at the bottom of the page.
+2. In the source dataset dropdown, select the data source you want to transform.
+3. Write your SQL query. For supported SQL syntax, see the [DDSQL Reference][4].
 4. Click **Run** in the top-right corner of the analysis cell to execute your query.
 
 {{< img src="/notebooks/analysis_features/analysis_cell_example.png" alt="Example of an analysis cell with SQL query transforming data in a notebook" style="width:100%;" >}}
@@ -115,8 +122,8 @@ You can graph the data you've transformed using analysis cells inside a notebook
 
 To graph your data:
 
-1. Type `/graph` and press <kbd>Enter</kbd>, or click the **graph dataset** tile at the bottom of the page.  
-2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.  
+1. Type `/graph` and press <kbd>Enter</kbd>, or click the **graph dataset** tile at the bottom of the page.
+2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.
 3. Select your visualization type from the graph menu and press <kbd>Enter</kbd>.
 
 ## Viewing and exporting data
@@ -125,7 +132,7 @@ For any analysis cell that includes a dataset preview, you can view the full 100
 
 ### Export your query to a dashboard
 
-You can save the results of any analysis cell to a dashboard by clicking **Save to Dashboard** and selecting an existing dashboard, or create a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard. 
+You can save the results of any analysis cell to a dashboard by clicking **Save to Dashboard** and selecting an existing dashboard, or create a new one. Although this creates a sync between your notebook cell and the exported dashboard graph, changes to the query in your notebook do not automatically update the dashboard.
 
 {{< img src="/notebooks/analysis_features/analysis_cell_save_to_dashboard.png" alt="Example of saving an analysis cell to a dashboard from a notebook" style="width:100%;" >}}
 
@@ -150,5 +157,6 @@ To download your dataset as a CSV file:
 
 [1]: https://app.datadoghq.com/logs
 [2]: /logs/log_configuration/parsing/
-[3]: /logs/explorer/calculated_fields/expression_language/
+[3]: /logs/explorer/calculated_fields/formulas/
 [4]: /ddsql_reference/
+[5]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/

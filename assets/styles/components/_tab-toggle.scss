@@ -106,6 +106,22 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
   }
 }
 
+// Fix for dashboard nav-tabs being affected by .main ul li:before rule
+.nav-tabs.response-toggle {
+  .nav-item {
+    &::before {
+      content: none !important;
+      display: none !important;
+    }
+  }
+
+  // Align Widget Model tab buttons with content in main pages
+  .main & {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
 // Common tab styles
 .code-tabs {
   position: relative;
@@ -159,7 +175,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     background: #FFFFFF;
     border: 1px solid $tab-border-color;
     padding: 24px;
-    z-index: 1;
+    z-index: 0;
     position: relative;
     margin: -1px 0 32px 0;
     box-shadow: $tab-shadow;
@@ -192,7 +208,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 
     .card-body img {
       border: 0px solid $ddgray;
-    }
+    } 
   }
 
   // Horizontal tab navigation container
@@ -457,4 +473,11 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 .code-tabs.tabs-wrap-layout .nav-tabs::after,
 .code-tabs.tabs-wrap-layout .code-lang-list-container::after {
   display: none;
+}
+
+// API pages specific to keep tabs under left nav search window
+.code-tabs.api-reference {
+  .nav-tabs {
+    z-index: 1;
+  }
 }

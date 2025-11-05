@@ -128,7 +128,7 @@ Cribl Stream 대시보드 설정에서 [대시보드 삭제][10] 옵션을 사�
 
 ## 수집한 데이터
 ### 메트릭
-{{< get-metrics-from-git "cribl_stream" >}}
+{{< get-metrics-from-git "cribl-stream" >}}
 
 ### 이벤트
 Cribl Stream 통합에는 이벤트가 포함되지 않습니다.

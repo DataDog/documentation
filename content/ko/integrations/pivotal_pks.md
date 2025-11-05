@@ -18,7 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 컨테이너
-- 쿠버네티스(Kubernetes)
+- Kubernetes
 - 로그 수집
 - 네트워크
 - 오케스트레이션

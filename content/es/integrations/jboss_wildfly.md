@@ -14,6 +14,8 @@ assets:
       check: jboss.jdbc_connections.count
       metadata_path: metadata.csv
       prefix: jboss.
+    process_signatures:
+    - java jboss-modules.jar
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10060
@@ -25,7 +27,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
 display_on_public_website: true
@@ -33,33 +35,33 @@ draft: false
 git_integration_title: jboss_wildfly
 integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
-integration_version: 2.2.0
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: jboss_wildfly
 public_title: JBoss/WildFly
 short_description: Recopila varias métricas de JMX de aplicaciones JBoss y WildFly
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Log Collection
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
+  - Categoría::Recopilación de logs
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
+  configuration: README.md#Configuración
   description: Recopila varias métricas de JMX de aplicaciones JBoss y WildFly
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: JBoss/WildFly
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -100,9 +102,9 @@ Para configurar este check para un Agent que se ejecuta en un host:
 
 ##### Recopilación de logs
 
-_Disponible para el Agent versiones >6.0_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
-1. La recopilación de logs está desactivada por defecto en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -124,19 +126,19 @@ _Disponible para el Agent versiones >6.0_
 [2]: https://docs.jboss.org/author/display/WFLY9/JMX%20subsystem%20configuration.html
 [3]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+{{% tab "Contenedores" %}}
 
 #### Contenedores
 
 ##### Recopilación de métricas
 
-Para obtener información sobre entornos en contenedores, consulta la guía de [Autodiscovery con JMX][1].
+Para obtener información sobre entornos en contenedores, consulta la guía [Autodiscovery con JMX][1].
 
 ##### Recopilación de logs
 
-_Disponible para el Agent versiones >6.0_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
-La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta [Recopilación de logs de Kubernetes][2].
+La recopilación de logs está desactivada por defecto en el Datadog Agent. Para activarla, consulta [Recopilación de logs de Kubernetes][2].
 
 | Parámetro      | Valor                                                      |
 | -------------- | ---------------------------------------------------------- |
@@ -161,7 +163,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 
 La integración JBoss/WildFly no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "jboss_wildfly" >}}
 
 

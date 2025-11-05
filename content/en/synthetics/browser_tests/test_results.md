@@ -36,7 +36,7 @@ In the **Properties** section, you can see the test ID, test creation and edit d
 
 In the **History** section, you can see three graphs:
 
-- The **Global Uptime** graph displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][20] configured for a test.
+- The **Global Uptime** graph displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][20] configured for a test are triggered in the given time interval.
 - The **Time-to-interactive by location and device** graph displays the amount of time until a page can be interacted with in seconds. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
 - The **Test duration by location and device** graph displays the amount of time in minutes each location and device takes to complete in a given time interval. 
 
@@ -79,7 +79,7 @@ Run type
 
 ### RUM sessions
 
-To view related sessions and available replays in the [RUM Explorer][22], click **View Session in RUM**. To access a user session for a particular action or step in [Session Replay][23], click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetics][16].
+To view related sessions and available replays in the [RUM Explorer][22], click **View Session in RUM**. To access a user session for a particular action or step in [Session Replay][23], click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetic Monitoring][16].
 
 ### Screenshots and actions
 
@@ -112,7 +112,7 @@ You can filter resources by type and search by name in the search bar. The maxim
 {{< img src="synthetics/browser_tests/resources_panel.png" alt="Resources Panel" style="width:100%" >}}
 
 Relative Time 
-: The resource duration over the total interaction time.
+: The point in time when the resource began to load during the test step.
 
 CDN
 : The CDN provider that served the resource. Hover over a CDN provider's icon to see the raw cache status.  
@@ -187,7 +187,7 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [3]: https://web.dev/cls/
 [4]: https://web.dev/fid/
 [5]: /real_user_monitoring/
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [7]: /tracing/trace_explorer/trace_view/
 [8]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
 [9]: /synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator
@@ -196,7 +196,7 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [12]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [13]: /synthetics/guide/synthetic-test-monitors/
 [14]: /synthetics/guide/uptime-percentage-widget/
-[15]: /real_user_monitoring/browser/data_collected/#long-task-timing-metrics
+[15]: /real_user_monitoring/application_monitoring/browser/data_collected/#long-task-timing-metrics
 [16]: /synthetics/guide/explore-rum-through-synthetics/
 [17]: /tracing/services/resource_page/
 [18]: https://app.datadoghq.com/event/explorer

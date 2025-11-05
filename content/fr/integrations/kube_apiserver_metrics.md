@@ -77,7 +77,7 @@ Enfin, si vous exécutez l'Agent Datadog sur les nœuds principaux, vous pouvez 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+{{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
 
 ### Checks de service

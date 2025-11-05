@@ -21,7 +21,7 @@ assets:
     source_type_id: 10430
     source_type_name: RapDev Apache IoTDB
   monitors:
-    Connection to Prometheus Metrics Endpoint is failing: assets/monitors/failed_prometheus_health.json
+    Apache IoTDB Prometheus Connection Failing: assets/monitors/failed_prometheus_health.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -32,7 +32,7 @@ categories:
 - マーケットプレイス
 - 開発ツール
 - iot
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -122,4 +122,4 @@ Apache IoTDB (Internet of Things Database) は、時系列データ用に設計�
 [4]: https://www.rapdev.io/#Get-in-touch
 [5]: mailto:support@rapdev.io
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-apache-iotdb" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-apache-iotdb" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

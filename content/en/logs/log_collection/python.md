@@ -130,7 +130,7 @@ If logs are in JSON format, trace values are automatically extracted if the valu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/
-[2]: https://github.com/madzak/python-json-logger
+[2]: https://github.com/nhairs/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python
 [5]: /agent/configuration/agent-commands/

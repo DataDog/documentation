@@ -38,8 +38,10 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< nextlink href="/universal_service_monitoring/guide" >}}<i class="icon-usm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Universal Service Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Continuous Integration:">}}
+{{< whatsnext desc="Software Delivery:">}}
 {{< nextlink href="/continuous_integration/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;CI Visibility{{< /nextlink >}}
+{{< nextlink href="/tests/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Test Optimization{{< /nextlink >}}
+{{< nextlink href="/feature_flags/guide" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Feature Flags{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Security:">}}
@@ -50,6 +52,7 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 
 {{< whatsnext desc="Digital Experience:">}}
 {{< nextlink href="/synthetics/guide" >}}<i class="icon-synthetics" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Synthetic Monitoring{{< /nextlink >}}
+{{< nextlink href="/continuous_testing/guide" >}}<i class="icon-continuous-testing" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Continuous Testing{{< /nextlink >}}
 {{< nextlink href="/real_user_monitoring/guide" >}}<i class="icon-rum" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Real User Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 

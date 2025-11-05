@@ -14,7 +14,7 @@ title: リストウィジェット
 widget_type: list_stream
 ---
 
-The list widget displays a list of events and issues, which can come from a variety of sources such as Logs, RUM, or Events. Search and query across sources to narrow down the events you want the widget to highlight and display.
+このリストウィジェットは、Logs、RUM、Events など、さまざまなソースから取得したイベントやインシデントを一覧表示します。ソースを検索およびクエリを実行して、ウィジェットでハイライト表示したいイベントを絞り込めます。
 
 _エラー追跡問題を表示するリストウィジェット_
 
@@ -26,7 +26,7 @@ _エラー追跡問題を表示するリストウィジェット_
 
 ### 構成
 
-1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, Watchdog Alerts, or Events depending on which products are available for your organization.
+1. グラフ化するデータの種類を選択してください。組織で利用可能な製品に応じて、Issues、Logs、Audit Trail、Watchdog Alerts、Events からリストウィジェットを作成できます。
 
 2. ディスプレイの環境設定を行います。スクリーンボードとノートブックの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、グローバルタイムフレームを使用するかを選択します。
 
@@ -87,11 +87,43 @@ RUM については、以下でソートすることができます。
 
 #### ソート方法
 
-For incidents, you can sort by:
+インシデントの場合、以下の項目でソートが可能です。
 
-* Created time
+* 作成時間
 * 重大度
 * ステータス
+
+昇順または降順
+
+### CD デプロイ
+
+#### ソート方法
+
+CD デプロイの場合、以下の項目でソートが可能です。
+
+* デプロイステータス
+* サービス
+* デプロイ名
+* 環境
+* Duration
+* リビジョン値
+* Repository URL
+* タイムスタンプ
+
+昇順または降順
+
+### CI パイプライン
+
+#### ソート方法
+
+CI パイプラインの場合、以下の項目でソートが可能です。
+
+* CI Status
+* Pipeline Name
+* Duration
+* Pipeline ID
+* Branch
+* タイムスタンプ
 
 昇順または降順
 

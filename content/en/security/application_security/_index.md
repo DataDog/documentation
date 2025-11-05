@@ -8,6 +8,7 @@ aliases:
   - /security/application_security/enabling
   - /security/application_security/getting_started
   - /security/application_security/threats
+  - /security/application_security/setup/standalone
 further_reading:
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
@@ -34,9 +35,9 @@ algolia:
   tags: ["asm", "App and API Protection"]
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App and API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{< learning-center-callout header="Get real-time security guardrails for your AI apps and agents" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
+  AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
+{{< /learning-center-callout >}}
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
@@ -45,7 +46,6 @@ algolia:
 Whether you're defending public-facing APIs, internal services, or user-facing applications, AAP equips your teams with realtime OOTB threat detection, posture assessment, and in-app protections.
 
 <div class="alert alert-info">Formerly known as Application Security Monitoring (ASM), AAP now goes beyond runtime threat detection to include API discovery, posture management, and protection capabilities.</div>
-
 
 ## Key capabilities
 
@@ -83,6 +83,25 @@ To start configuring your environment to detect and protect threats with AAP, fo
 
 In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
+## Exploit Prevention vs. In-App WAF
+
+This section provides a summary of Exploit Prevention and how it differs from In-App Web Application Firewall (WAF) rules.
+
+Datadog AAP includes the [Exploit Prevention][14] and [In-App WAF][15] features to protect your applications against exploits. Exploit Prevention is an extension of In-App WAF. Exploit Prevention leverages In-App WAF as the first line of defense and then blocks attacks missed by the WAF.
+
+Exploit Prevention leverages Runtime Application Self-Protection (RASP) technology to determine if an application request interacts with a vulnerable code path, and then protects it from specific vulnerability types:
+
+- SQL injection (SQLi)
+- Server-Side Request Forgery (SSRF)
+- Local File Inclusion (LFI)
+- Command Injection
+
+For library compatibility, see [Exploit Prevention][13].
+
+In addition to detecting malicious patterns in the request, Exploit Prevention differs from In-App WAF by tracking the actions performed by the application (SQL query executed, files accessed, and so on). Exploit Prevention is able to determine if user input modified the SQL query or restricted a file detrimentally, and block it. 
+
+For example, in a SQL injection attack, the goal of the attacker is to take control of the SQL query and change its meaning. Exploit Prevention parses the SQL query before execution and checks for any user parameter in the query. If one is present, Exploit Prevention checks if the SQL parser interpreted the parameter as multiple SQL tokens (changing the meaning of the SQL query). In that case, Exploit Prevention flags the query as injected.
+
 ## Disable AAP
 
 For information on disabling AAP or its features, see the following:
@@ -104,3 +123,7 @@ For information on disabling AAP or its features, see the following:
 [10]: /security/application_security/troubleshooting/#disabling-aap
 [11]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
 [12]: /security/application_security/troubleshooting/#disabling-code-security
+[13]: /security/application_security/exploit-prevention/#library-compatibility
+[14]: /security/application_security/exploit-prevention/
+[15]: /security/application_security/waf-integration/
+

@@ -1,5 +1,6 @@
 ---
 title: Service Page
+description: Comprehensive service overview with health metrics, dependencies, deployments, error tracking, and security insights.
 aliases:
 - /tracing/visualization/service/
 further_reading:
@@ -37,7 +38,7 @@ Consult on this page:
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 * [Dependencies](#dependencies)
 {{< /site-region >}}
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
@@ -77,7 +78,7 @@ Datadog also proposes a list of monitors depending on your service type:
 
 Enable them directly or create your own [APM monitors][3].
 
-**Note**: Tag any monitor or Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
+**Note**: Monitors are attached to an APM service if `service:<SERVICE_NAME>` is tagged in the metadata, included in the monitor query, or if the query is grouped-by service. You can also tag any Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
 
 ## Watchdog Insights
 
@@ -138,7 +139,7 @@ Choose what to display in your resources list:
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 ## Dependencies
 
 Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1] to surface accurate request counts, error rates, and latency numbers. The map automatically groups dependencies by operation name. For instance, if a service calls two downstream services using gRPC, these services are grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.

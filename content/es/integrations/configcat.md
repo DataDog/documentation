@@ -23,7 +23,7 @@ author:
 categories:
 - configuración y despliegue
 - notificaciones
-- aprovisionamiento
+- suministro
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md
@@ -39,19 +39,19 @@ name: configcat
 public_title: ConfigCat
 short_description: Eventos de cambio de configuración rastreados por Datadog
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Configuration & Deployment
-  - Category::Notifications
-  - Category::Provisioning
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
+  - Categoría::Configuración y despliegue
+  - Categoría::Notificaciones
+  - Categoría::Suministro
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Eventos de cambio de configuración rastreados por Datadog
   media: []
@@ -101,7 +101,7 @@ Por ejemplo, aquí se muestra cómo buscar eventos que ocurrieron en el entorno 
 
 ![Filtering][9]
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de ConfigCat no incluye checks de servicios.
 

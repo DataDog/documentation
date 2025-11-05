@@ -6,8 +6,8 @@ description: Descubre cómo capturar y reproducir visualmente la experiencia de 
 further_reading:
 - link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: Blog
-  text: Utiliza Session Replay de Datadog para ver en tiempo real los recorridos de
-    los usuarios
+  text: Uso de Datadog Session Replay para ver los recorridos de los usuarios en tiempo
+    real
 - link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: Blog
   text: Utilizar el análisis del embudo para comprender y optimizar los flujos de
@@ -18,8 +18,8 @@ further_reading:
     Session Replay
 - link: /integrations/content_security_policy_logs
   tag: Documentación
-  text: Detectar y agregar infracciones de CSP con Datadog
-title: Session Replay
+  text: Detectar y agregar las infracciones de la CSP con Datadog
+title: Reproducción de la actividad del usuario
 ---
 
 
@@ -35,7 +35,7 @@ El SDK del navegador RUM es de [código abierto][1] y aprovecha el proyecto de c
 
 Más información sobre [Session Replay para navegadores][3].
 
-## Session Replay para móvil
+## Session Replay para móviles
 
 Session Replay para móviles amplía la visibilidad de tus aplicaciones móviles reproduciendo visualmente cada interacción del usuario, como toques, deslizamientos y desplazamientos. Está disponible para aplicaciones nativas, tanto en Android como en iOS. La reproducción visual de las interacciones del usuario en tus aplicaciones facilita la reproducción de fallos y errores, así como la comprensión del recorrido del usuario para introducir mejoras en la interfaz de usuario.
 
@@ -55,15 +55,15 @@ Para ver tu propio historial de reproducción, consulta la lista de reproducció
 
 Puedes crear una lista de reproducción de Session Replays para organizarlas según los patrones que observes. Para obtener más información, consulta [Listas de reproducción de Session Replay][8].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
-[3]: /es/real_user_monitoring/session_replay/browser/
-[4]: /es/real_user_monitoring/session_replay/mobile/
+[3]: /es/product_analytics/session_replay/browser/
+[4]: /es/product_analytics/session_replay/mobile/
 [5]: https://docs.datadoghq.com/es/notebooks/
 [6]: https://docs.datadoghq.com/es/account_management/audit_trail/
 [7]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
-[8]: /es/real_user_monitoring/session_replay/playlists
+[8]: /es/product_analytics/session_replay/playlists

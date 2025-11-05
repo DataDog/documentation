@@ -35,21 +35,20 @@ The .NET Tracer supports the following logging libraries:
 
 Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][15] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If the `source` is set to a value other than `csharp`, you may need to add a [trace remapper][8] to the appropriate log processing pipeline for the correlation to work correctly.
 
-<div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
+<div class="alert alert-danger">Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
 
 ## Configure injection in logs
 
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
 
 <div class="alert alert-info">
-  <div class="alert-info">See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.</div>
-  </div>
+  See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.
 </div>
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the Serilog logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 
@@ -66,7 +65,7 @@ To automatically inject correlation identifiers into your log messages:
 {{% /tab %}}
 {{% tab "log4net" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note: </strong>Starting with .NET Tracer version 1.29.0, automatic injection for the log4net logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 
@@ -111,7 +110,7 @@ For additional examples, see [the log4net automatic trace ID injection project][
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the NLog logging library requires the application to be instrumented with automatic instrumentation.
 </div>
 
@@ -210,15 +209,17 @@ Next, complete the setup for either automatic or manual injection.
 
 ## Automatic injection
 
-The final step to enable automatic correlation identifier injection is to:
+To enable automatic correlation identifier injection, ensure `DD_LOGS_INJECTION` is enabled.
 
-1. Enable `DD_LOGS_INJECTION=true` in the .NET Tracer's environment variables. To configure the .NET Tracer with a different method, see [Configuring the .NET Tracer][6].
+Starting in version 3.24.0, `DD_LOGS_INJECTION` is enabled by default. For older versions, set `DD_LOGS_INJECTION=true` in the .NET Tracer's environment variables.
+
+To configure the .NET Tracer with a different method, see [Configuring the .NET Tracer][6].
 
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
 **Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
 
-<div class="alert alert-info">Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
 
 ## Manual injection
 

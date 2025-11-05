@@ -124,16 +124,13 @@ See the **Datadog Agent and tracing library versions** your service is using. Co
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent and tracing library versions" >}}
 
-**Note**: You need to upgrade the Agent to v6.34 or v7.34 for the version information to be reported.
+### Managing services' sampling rates
 
-### Configure the service ingestion rates by resource
-
-When configuring sampling rates for a service by resource name, you can use two main strategies:
-
+To control sampling rates for a service, you might want to use:
 - **Adaptive sampling**: Automatically adjust sampling rates to match a configured monthly ingested volume budget.
-- **Custom sampling**: Manually set explicit sampling rates by resource.
+- **Resource-based sampling**: Manually set explicit sampling rates by resource.
 
-Configurations for these strategies can be applied **Remotely** through the Datadog UI. This method allows changes to take effect immediately without redeploying your service. For **Custom Sampling**, you also have the option to apply configurations **Locally** by updating your service's configuration files and redeploying.
+Configurations for these strategies can be applied **Remotely** through the Datadog UI. This method allows changes to take effect immediately without redeploying your service. For **Resource-based Sampling**, you also have the option to apply configurations **locally** by updating your service's configuration files and redeploying.
 
 Using **Remote Configuration** for service ingestion rates has specific requirements.
 
@@ -158,9 +155,9 @@ Find below the minimum tracing library version required for the feature:
 
 {{% /collapse-content %}}
 
-#### Adaptive sampling (Recommended)
+#### Adaptive sampling
 
-Specify a target monthly ingestion volume for one or multiple services while keeping visibility over all services and endpoints.
+Use Adaptive sampling to let Datadog manage services' sampling rates on your behalf. Specify a target monthly ingestion volume for one or multiple services while keeping visibility over all services and endpoints.
 
 To configure adaptive sampling:
 
@@ -174,7 +171,8 @@ To configure adaptive sampling:
 
 For more information, see [Adaptive Sampling][17].
 
-#### Custom sampling
+
+#### Resource-based sampling
 
 To configure custom sampling rates for the service by resource name: 
 1. Navigate to the [Ingestion Control][2] page.
@@ -227,7 +225,7 @@ With remote configuration, you don't have to restart the Agent to update these p
 
 **Note**: Remotely configured parameters take precedence over local configurations such as environment variables and `datadog.yaml` configuration.
 
-### Sampling precedence rules
+## Sampling rules' precedence
 
 If sampling rules are set in multiple locations, the following precedence rules apply in order, where rules that appear first on the list can override lower precedence rules:
 
@@ -249,7 +247,7 @@ To phrase it another way, Datadog uses the following precedence rules:
 
 [1]: /tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control
-[3]: /agent/remote_config/#enabling-remote-configuration
+[3]: /tracing/guide/remote_config
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
@@ -260,7 +258,7 @@ To phrase it another way, Datadog uses the following precedence rules:
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[14]: /agent/remote_config/#enabling-remote-configuration
+[14]: /remote_configuration#enabling-remote-configuration
 [15]: /tracing/trace_pipeline/metrics#what-is-the-sampling-service
 [17]: /tracing/trace_pipeline/adaptive_sampling/
 [18]: /tracing/guide/trace_ingestion_volume_control/#globally-configure-the-ingestion-sampling-rate-at-the-agent-level

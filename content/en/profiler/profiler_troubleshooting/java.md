@@ -163,7 +163,7 @@ Override templates let you specify profiling properties to override. However, th
     ```
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
-    
+
 ## PODs are getting evicted due to disk usage
 
 The profiler uses ephemeral storage (usually /tmp) to save captured profiling data.
@@ -171,6 +171,40 @@ If the node is under disk pressure and the pod hasn't requested ephemeral storag
 
 Fix: Request a small amount of ephemeral storage (e.g., 100MB) in the pod spec.
 
+## Managing issues related to the tmp folder
+
+The Continuous Profiler may encounter errors related to the use of the system `/tmp` directory, particularly in environments with strict security or limited execution permissions (for example, Docker, Kubernetes, or SELinux-enabled systems). These issues can lead to:
+
+- Profiling startup failures
+- Inability to load native `.so` libraries
+- Accumulation of stale temp files across JVM restarts or crashes
+
+Below are basic troubleshooting steps for resolving those issues:
+
+- Use dd-trace-java Version 1.47.0 or later
+  Starting with v1.47.0, the profiler uses PID-specific subdirectories inside the configured temp directory. This reduces clutter and potential conflicts from orphaned files when JVM processes exit unexpectedly.
+   
+- Specify a custom executable temp directory
+  To ensure proper operation across environments, explicitly configure a writable, executable temp directory using the following JVM option:
+   ```
+   -Ddd.profiling.tempdir=<path_to_writable_exec_enabled_directory>
+   ```
+  Directory Requirements:
+  -  Must be writable by the JVM process
+  -  Must have execute permissions on all levels of the path
+  -  Must comply with SELinux policies, if enforced
+
+   Example:
+    ```
+    mkdir -p /opt/datadog-profiler-tmp
+    chmod 755 /opt/datadog-profiler-tmp
+    java -Ddd.profiling.tempdir=/opt/datadog-profiler-tmp -javaagent:/path/to/dd-java-agent.jar ...
+    ```
+- If you enable profiling using SSI, you can include the below environment variable in the `application_monitoring.yaml`.
+  
+    ```
+    DD_PROFILING_TEMPDIR: <path_to_writable_exec_enabled_directory>
+    ```
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

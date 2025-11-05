@@ -8,10 +8,6 @@ further_reading:
 title: 파이프라인 트레이스에 커스텀 명령 추가
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 CI Visibility를 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 커스텀 명령은 CI 파이프라인의 개별 명령을 트레이스할 수 있는 방법을 제공하므로 작업에서 수행할 수 있는 설정 또는 해체 작업 (예: 도커(Docker) 이미지 다운로드 또는 쿠버네티스(Kubernetes) 기반 인프라스트럭처에서 사용 가능한 노드 대기)을 고려하지 않고 명령에 걸리는 시간을 측정할 수 있습니다. 이러한 스팬은 파이프라인 트레이스의 일부로 나타납니다.
 
 {{< img src="ci/ci-custom-spans.png" alt="Details for a single pipeline with custom commands" style="width:100%;">}}
@@ -52,7 +48,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">CI Visibility는 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
+<div class="alert alert-danger">CI Visibility는 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
 ## 구성 설정

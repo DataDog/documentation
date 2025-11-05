@@ -15,17 +15,21 @@ The following instrumentation types are available:
 
 ### Prerequisites
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
+To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries.
 
 * [Datadog Agent v7.34.0 or later][1]
 * [dd-trace-go v1.56.1 or later][2]
 
+{{% tracing-go-v2 %}}
+
+Data Streams Monitoring has not been changed between v1 and v2 of the tracer.
+
 ### Supported libraries
 
-| Technology | Library                                                                  | Minimal tracer version | Recommended tracer version |
-|------------|--------------------------------------------------------------------------|------------------------|----------------------------|
-| Kafka      | [confluent-kafka-go][8]                                                  | 1.56.1                | 1.66.0 or later            |
-| Kafka      | [Sarama][9]                                                             | 1.56.1                 | 1.66.0 or later            |
+| Technology | Library                 | Minimal tracer version                                                       | Recommended tracer version                                                       |
+|------------|-------------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| Kafka      | [confluent-kafka-go][8] | {{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="minimal" >}} | {{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="recommended" >}} |
+| Kafka      | [Sarama][9]             | {{< dsm-tracer-version lang="go" lib="sarama" type="minimal" >}}             | {{< dsm-tracer-version lang="go" lib="sarama" type="recommended" >}}             |
 
 ### Installation
 
@@ -52,8 +56,7 @@ To manually instrument the Sarama Kafka client with Data Streams Monitoring:
 
 ```go
 import (
-  ddsarama "gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama" // 1.x
-  // ddsarama "github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2" // 2.x
+  ddsarama "github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2"
 )
 
 2. Wrap the producer with `ddsarama.WrapAsyncProducer`
@@ -74,8 +77,7 @@ To manually instrument Confluent Kafka with Data Streams Monitoring:
 
 ```go
 import (
-  ddkafka "gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go/kafka.v2" // 1.x
-  // ddkafka "github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/kafka.v2/v2" // 2.x
+  ddkafka "github.com/DataDog/dd-trace-go/contrib/confluentinc/confluent-kafka-go/kafka.v2/v2"
 )
 ```
 

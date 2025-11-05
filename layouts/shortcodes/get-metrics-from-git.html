@@ -1,112 +1,69 @@
-{{ $params := .Params }}
+{{- $int_name := (.Get 0 ) -}}
+{{- $metric_namespaces := (.Get 1 ) -}}
+{{- if and $metric_namespaces (not (reflect.IsSlice $metric_namespaces)) -}}
+  {{- $metric_namespaces = split $metric_namespaces " " -}}
+{{- end -}}
 
-{{ $integration_name := .Page.Params.git_integration_title }}
+{{- if $int_name -}}
+  <!-- Some edge cases the metadata is from a non-integration source, we get the JSON from websites-sources -->
+   <!-- The datafile in sources needs to follow the convention to match: appid_metadata.json -->
+  {{- $exceptions := slice "synthetics" "cloud-foundry" "system" -}}
+  {{- if in $exceptions $int_name -}}
+    {{- $data := index .Site.Data (print $int_name "_metadata") -}}
+    {{- if $data -}}
+      <table>
+        {{- range $data -}}
+          {{- $metric := . -}}
+          {{- $shouldRender := false -}}
+          {{- if not $metric_namespaces -}}
+            {{- $shouldRender = true -}}
+          {{- else -}}
+            {{- range $metric_namespaces -}}
+              {{- if hasPrefix $metric.metric_name . -}}
+                {{- $shouldRender = true -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
 
-{{ if (.Get 0 ) }}
+          {{- if $shouldRender -}}
+            <tr>
+              <td><strong>{{ .metric_name }}</strong> <br>({{ .metric_type }})</td>
+              <td>{{ .description }} {{ with .unit_name }}<br><em>Shown as {{ . }}{{ end }}</em></td>
+            </tr>
+          {{- end -}}
+        {{- end -}}
+      </table>
+    {{- else -}}
+      {{ warnf "%s_metadata.json datafile not found for %s integration." $int_name $int_name }}
+    {{- end -}}
+  {{- else -}}
 
-  {{ $.Scratch.Set "integration" (.Get 0) }}
-
-{{ else }}
-
-  {{ $.Scratch.Set "integration" $integration_name }}
-
-{{ end }}
-
-{{ $integration := $.Scratch.Get "integration" }}
-
-{{ if or (not (eq $.Page.Site.Params.environment "development")) ($.Page.Site.Data.integrations) }}
-
-  <!-- get lang specific data file -->
-  {{ $.Scratch.Set "data" "" }}
-  {{ if ne $.Page.Lang "en"}}
-      {{ if (fileExists (print "data/integrations/" $integration "." $.Page.Lang ".yaml")) }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations (print $integration "." $.Page.Lang)) }}
-      {{ else }}
-        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
-      {{ end }}
-  {{ else }}
-      {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
-  {{ end }}
-  {{ $data := ($.Scratch.Get "data") }}
-
-  {{ if $data }}
-  <div class="table-wrapper">
-    {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
-
-        {{ $name_space := (index $params 1) }}
-
-        {{ $data_metrics := (index $data $integration) }}
-
-        {{ $metric_namespaces := (split $name_space " ") }}
-
-<table class="table table-vertical-mobile table-metrics">
-  <tbody>
-
-    {{ range $i, $m := $metric_namespaces }}
-
-      {{ range $v := $data_metrics }}
-
-        {{ if (hasPrefix $v.metric_name $m) }}
-
-          {{ if not (hasPrefix $v.metric_name "aws.stream") }}
-            {{ $description := replace $v.description "<error_type>" "&#60;error_type&#62;" }}
-              <tr>
-                <td>
-                  <strong>{{ $v.metric_name }}</strong>
-                  <br>
-                  ({{ $v.metric_type }})
-                </td>
-                <td>
-                  {{ $description | safeHTML }}
-                  {{ with $v.unit_name }}
-                    <br>
-                    <em>Shown as {{ . }}</em>
-                  {{ end }}
-                </td>
-              </tr>
-          {{ end }}
-
-        {{ end }}
-
-      {{ end }}
-
-    {{ end }}
-  </tbody>
-</table>
-
-    {{ else }} {{/* No param set load default integration from front matter */}}
-
-      {{ if $integration }}
-
-<table class="table table-vertical-mobile table-metrics">
-  <tbody>
-  {{ range $int_name, $obj := $data }}
-    {{ range $k, $v := $obj }}
-      {{ if not (hasPrefix $v.metric_name "aws.stream") }}
-        {{ $description := replace $v.description "<error_type>" "&#60;error_type&#62;" }}
-          <tr>
-            <td>
-              <strong>{{ $v.metric_name }}</strong>
-              <br>
-              ({{ $v.metric_type }})
-            </td>
-            <td>
-              {{ $description | safeHTML }}
-              {{ with $v.unit_name }}
-                <br>
-                <em>Shown as {{ . }}</em>
-              {{ end }}
-            </td>
-          </tr>
+  <!-- For Integrations -->
+  <!-- if the page is a draft we can skip -->
+  {{- if not .Page.Draft -}}
+    <!-- if non english page load from english integration -->
+    {{- $page := "" -}}
+    {{ with where .Site.Sites "Language.Lang" "eq" "en" }}
+      {{ with index . 0 }}
+        {{ $page = .GetPage (print "/integrations/" $int_name ".md") }}
       {{ end }}
     {{ end }}
-  {{ end }}
-  </tbody>
-</table>
-      {{ end }}
-
-    {{ end }}
-  </div>
-  {{ end }}
-
-{{ end }}
+    {{- if not $page -}}
+      {{ warnf "Integration page for '%s' not found in get-metrics-from-git shortcode." $int_name }}
+    {{- else -}}
+      <!-- We find and use the metrics from the integration page markdown -->
+      {{- $pattern := `(?s)### Metrics\n(.*?)(#{2,3}\s)` -}}
+      {{- $matches := findRE $pattern $page.RawContent 1 -}}
+      {{- if not $matches -}}
+        {{ warnf "No ### Metrics section found in '%s' integration documentation (get-metrics-from-git shortcode)." $int_name }}
+      {{- else -}}
+        {{- range $matches -}}
+          {{- $content := strings.TrimPrefix "### Metrics\n" . | strings.TrimSuffix (index (findRE "(#{2,3}\\s)$" . 1) 0) -}}
+          {{- $content := replaceRE `\{\{<[^>]+>\}\}` "" $content -}}
+          {{- $content | markdownify -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- end -}}
+{{- end -}}

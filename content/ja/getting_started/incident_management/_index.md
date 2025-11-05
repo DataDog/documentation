@@ -4,13 +4,13 @@ further_reading:
   tag: ラーニングセンター
   text: Incident Management の紹介
 - link: /service_management/incident_management/datadog_clipboard
-  tag: Documentation
+  tag: ドキュメント
   text: Datadog クリップボード
 - link: https://www.youtube.com/watch?v=QIambwILy_M
   tag: ビデオ
   text: Datadog Incident Management について
 - link: /monitors/incident_management
-  tag: Documentation
+  tag: ドキュメント
   text: インシデント管理
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
@@ -19,10 +19,10 @@ further_reading:
   tag: ブログ
   text: Datadog でのインシデント管理
 - link: /service_management/incident_management/incident_settings
-  tag: Documentation
+  tag: ドキュメント
   text: 通知ルール
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
-  tag: Documentation
+  tag: ドキュメント
   text: インシデントと Slack のインテグレーション
 - link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
   tag: ブログ
@@ -37,7 +37,7 @@ title: Incident Management の概要
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では Incident Management は利用できません。</div>
+<div class="alert alert-danger">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では Incident Management は利用できません。</div>
 {{% /site-region %}}
 
 ## 概要
@@ -104,7 +104,7 @@ _Overview_ セクションで、調査が進むにつれてインシデントの
 3. descriptions フィールドに値を追加します: `TEST: Some customers seeing pages loading slowly.`　
 4. **Save** をクリックしてフィールドを更新します。_Impact_ セクションが更新され、顧客への影響がどのくらい継続しているかが表示されます。_Overview_ ページで行われたすべての変更が _Timeline_ に追加されます。
 
-#### 沿革
+#### タイムライン
 
 _Timeline_ には、インシデントのフィールドや情報の追加・変更が時系列で表示されます。
 
@@ -166,7 +166,7 @@ _Notifications_ セクションで、インシデントのステータス更新�
 8. タイムラインセクションで **Marked as Important** (重要としてマーク) を選択すると、_重要な_イベントのみが事後分析に追加されます。
 9. **Generate** をクリックします。
 
-事後分析は Datadog ノートブックとして生成され、調査と修復の際に参照されたタイムラインイベントとリソースが含まれます。これにより、問題の原因や今後の予防方法を簡単に確認し、さらに文書化することができます。Datadog ノートブックはライブコラボレーションをサポートしているため、リアルタイムでチームメンバーと共同編集を行うことができます。
+ポストモーテムは Datadog Notebook または Confluence ページとして生成され、調査および修復の過程で参照されたタイムライン イベントやリソースが含まれます。これにより、問題の原因と将来の再発防止策を確認・文書化しやすくなります。
 
 問題の再発を防ぐためにあなたおよびチームが完了しなければならないフォローアップタスクがある場合は、それらを追加して、Remediation の _Incident Tasks_ セクションで追跡します。
 
@@ -185,7 +185,7 @@ Incident Management をカスタマイズするには、[インシデント設�
 
 また、インシデントの宣言と編集、Slack や Zoom などとのインテグレーションにより、チームへの迅速なコミュニケーションも可能です。
 
-{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのモニター">}}
+{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Datadog モバイル アプリの 2 つのビュー: 1 つは各インシデントの概要を示すインシデント リスト、もう 1 つは単一インシデントの詳細パネル" >}}
 
 ## その他の参考資料
 

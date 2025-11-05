@@ -12,25 +12,26 @@ aliases:
 further_reading:
 - link: "/data_security/pci_compliance/"
   tag: "Documentation"
-  text: "Set up a PCI-compliant Datadog organization"
+  text: "PCI DSS Compliance"
 ---
 ## Overview
 
-Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog.
+Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog. Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][14].
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
 ### Personal information in trace data
 
-Datadog's APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users. 
+Datadog's APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users.
 
-The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries, with some common examples listed. 
+The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries, with some common examples listed.
 
 | Category            | Description                                                                                                            |
 |:--------------------|:-----------------------------------------------------------------------------------------------------------------------|
 | Name                | The full name of an internal user (your employee) or end-user.                                                         |
 | Email               | The email address of an internal user (your employee) or end-user.                                                     |
 | Client IP           | The IP address of your end-user associated with an incoming request or the external IP address of an outgoing request. |
+| Credit card numbers | A Primary Account Number (PAN) used for financial transactions.                                                        |
 | Database statements | The literal, sequence of literals, or bind variables used in an executed database statement.                           |
 | Geographic location | Longitude and latitude coordinates that can be used to identify an individual or household.                            |
 | URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                            |
@@ -43,11 +44,14 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab ".NET" %}}
 
+**Note**: Credit card numbers are obfuscated by the Datadog Agent by default.
+
 | Category            | Collected                       | Obfuscated                      |
 |:--------------------|:-------------------------------:|:-------------------------------:|
 | Name                | <i class="icon-check-bold"></i> |                                 |
 | Email               | <i class="icon-check-bold"></i> |                                 |
 | Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Credit card numbers | <i class="icon-check-bold"></i> |                                 |
 | Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> |                                 |
@@ -58,13 +62,14 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Java" %}}
 
-**Note:** Database statements are not collected by default and must be enabled.
+**Note**: Database statements are not collected by default and must be enabled. Credit card numbers are obfuscated by the Datadog Agent by default.
 
 | Category            | Collected                       | Obfuscated                      |
 |:--------------------|:-------------------------------:|:-------------------------------:|
 | Name                | <i class="icon-check-bold"></i> |                                 |
 | Email               | <i class="icon-check-bold"></i> |                                 |
 | Client IP           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Credit card numbers | <i class="icon-check-bold"></i> |                                 |
 | Database statements | <i class="icon-check-bold"></i> |                                 |
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
@@ -75,13 +80,14 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Node.js" %}}
 
-**Note:** URI parameters are not collected by default and must be enabled.
+**Note**: URI parameters are not collected by default and must be enabled. Credit card numbers are obfuscated by the Datadog Agent by default.
 
 | Category            | Collected                       | Obfuscated                      |
 |:--------------------|:-------------------------------:|:-------------------------------:|
 | Name                | <i class="icon-check-bold"></i> |                                 |
 | Email               | <i class="icon-check-bold"></i> |                                 |
 | Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Credit card numbers | <i class="icon-check-bold"></i> |                                 |
 | Database statements | <i class="icon-check-bold"></i> |                                 |
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
@@ -92,13 +98,14 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "PHP" %}}
 
-**Note:** Name and email are not collected by default and must be enabled.
+**Note**: Name and email are not collected by default and must be enabled. Credit card numbers are obfuscated by the Datadog Agent by default.
 
 | Category            |            Collected            |           Obfuscated            |
 |:--------------------|:-------------------------------:|:-------------------------------:|
 | Name                | <i class="icon-check-bold"></i> |                                 |
 | Email               | <i class="icon-check-bold"></i> |                                 |
 | Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Credit card numbers | <i class="icon-check-bold"></i> |                                 |
 | Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
@@ -109,13 +116,14 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Python" %}}
 
-**Note:** Client IP, geographic location, and URI parameters are not collected by default and must be enabled.
+**Note**: Client IP, geographic location, and URI parameters are not collected by default and must be enabled. Credit card numbers are obfuscated by the Datadog Agent by default.
 
 | Category            | Collected                       | Obfuscated                      |
 |:--------------------|:-------------------------------:|:-------------------------------:|
 | Name                | <i class="icon-check-bold"></i> |                                 |
 | Email               | <i class="icon-check-bold"></i> |                                 |
 | Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Credit card numbers | <i class="icon-check-bold"></i> |                                 |
 | Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | Geographic location | <i class="icon-check-bold"></i> |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
@@ -127,13 +135,14 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Ruby" %}}
 
-**Note:** Client IPs are not collected by default and must be enabled.
+**Note**: Client IPs are not collected by default and must be enabled. Credit card numbers are obfuscated by the Datadog Agent by default.
 
 | Category            | Collected                       | Obfuscated                      |
 |:--------------------|:-------------------------------:|:-------------------------------:|
 | Name                | <i class="icon-check-bold"></i> |                                 |
 | Email               | <i class="icon-check-bold"></i> |                                 |
 | Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Credit card numbers | <i class="icon-check-bold"></i> |                                 |
 | Database statements | <i class="icon-check-bold"></i> |                                 |
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
@@ -144,13 +153,14 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Go" %}}
 
-**Note:** Client IPs are not collected by default and must be enabled. Database statements are obfuscated by the Datadog Agent.
+**Note**: Client IPs are not collected by default and must be enabled. Database statements are obfuscated by the Datadog Agent. Credit card numbers are obfuscated by the Datadog Agent by default.
 
-| Category                | Collected                       | Obfuscated                      |
+| Category                |            Collected            |           Obfuscated            |
 |:------------------------|:-------------------------------:|:-------------------------------:|
 | Name                    |                                 |                                 |
 | Email                   |                                 |                                 |
 | Client IP               | <i class="icon-check-bold"></i> |                                 |
+| Credit card numbers     | <i class="icon-check-bold"></i> |                                 |
 | Database statements     | <i class="icon-check-bold"></i> |                                 |
 | Geographic location     |                                 |                                 |
 | Client URI path         | <i class="icon-check-bold"></i> |                                 |
@@ -166,61 +176,70 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Nginx" %}}
 
-| Category                | Collected                       | Obfuscated |
-|:------------------------|:-------------------------------:|:----------:|
-| Name                    |                                 |            |
-| Email                   |                                 |            |
-| Client IP               | <i class="icon-check-bold"></i> |            |
-| Database statements     |                                 |            |
-| Geographic location     |                                 |            |
-| Client URI path         | <i class="icon-check-bold"></i> |            |
-| Client URI query string | <i class="icon-check-bold"></i> |            |
-| Server URI path         |                                 |            |
-| Server URI query string |                                 |            |
-| HTTP body               |                                 |            |
-| HTTP cookies            |                                 |            |
-| HTTP headers            |                                 |            |
-| Login ID                | <i class="icon-check-bold"></i> |            |
+**Note**: Credit card numbers are obfuscated by the Datadog Agent by default.
+
+| Category                |            Collected            |           Obfuscated            |
+|:------------------------|:-------------------------------:|:-------------------------------:|
+| Name                    |                                 |                                 |
+| Email                   |                                 |                                 |
+| Client IP               | <i class="icon-check-bold"></i> |                                 |
+| Credit card numbers     | <i class="icon-check-bold"></i> |                                 |
+| Database statements     |                                 |                                 |
+| Geographic location     |                                 |                                 |
+| Client URI path         | <i class="icon-check-bold"></i> |                                 |
+| Client URI query string | <i class="icon-check-bold"></i> |                                 |
+| Server URI path         |                                 |                                 |
+| Server URI query string |                                 |                                 |
+| HTTP body               |                                 |                                 |
+| HTTP cookies            |                                 |                                 |
+| HTTP headers            |                                 |                                 |
+| Login ID                | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
 {{% tab "Kong" %}}
 
-| Category                | Collected                       | Obfuscated |
-|:------------------------|:-------------------------------:|:----------:|
-| Name                    |                                 |            |
-| Email                   |                                 |            |
-| Client IP               | <i class="icon-check-bold"></i> |            |
-| Database statements     |                                 |            |
-| Geographic location     |                                 |            |
-| Client URI path         | <i class="icon-check-bold"></i> |            |
-| Client URI query string |                                 |            |
-| Server URI path         |                                 |            |
-| Server URI query string |                                 |            |
-| HTTP body               |                                 |            |
-| HTTP cookies            |                                 |            |
-| HTTP headers            |                                 |            |
-| Login ID                | <i class="icon-check-bold"></i> |            |
+**Note**: Credit card numbers are obfuscated by the Datadog Agent by default.
+
+| Category                |            Collected            |           Obfuscated            |
+|:------------------------|:-------------------------------:|:-------------------------------:|
+| Name                    |                                 |                                 |
+| Email                   |                                 |                                 |
+| Client IP               | <i class="icon-check-bold"></i> |                                 |
+| Credit card numbers     | <i class="icon-check-bold"></i> |                                 |
+| Database statements     |                                 |                                 |
+| Geographic location     |                                 |                                 |
+| Client URI path         | <i class="icon-check-bold"></i> |                                 |
+| Client URI query string |                                 |                                 |
+| Server URI path         |                                 |                                 |
+| Server URI query string |                                 |                                 |
+| HTTP body               |                                 |                                 |
+| HTTP cookies            |                                 |                                 |
+| HTTP headers            |                                 |                                 |
+| Login ID                | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
 {{% tab "Envoy" %}}
 
-| Category                | Collected                       | Obfuscated |
-|:------------------------|:-------------------------------:|:----------:|
-| Name                    |                                 |            |
-| Email                   |                                 |            |
-| Client IP               | <i class="icon-check-bold"></i> |            |
-| Database statements     |                                 |            |
-| Geographic location     |                                 |            |
-| Client URI path         |                                 |            |
-| Client URI query string |                                 |            |
-| Server URI path         |                                 |            |
-| Server URI query string |                                 |            |
-| HTTP body               |                                 |            |
-| HTTP cookies            |                                 |            |
-| HTTP headers            |                                 |            |
-| Login ID                | <i class="icon-check-bold"></i> |            |
+**Note**: Credit card numbers are obfuscated by the Datadog Agent by default.
+
+| Category                |            Collected            |           Obfuscated            |
+|:------------------------|:-------------------------------:|:-------------------------------:|
+| Name                    |                                 |                                 |
+| Email                   |                                 |                                 |
+| Client IP               | <i class="icon-check-bold"></i> |                                 |
+| Credit card numbers     | <i class="icon-check-bold"></i> |                                 |
+| Database statements     |                                 |                                 |
+| Geographic location     |                                 |                                 |
+| Client URI path         |                                 |                                 |
+| Client URI query string |                                 |                                 |
+| Server URI path         |                                 |                                 |
+| Server URI query string |                                 |                                 |
+| HTTP body               |                                 |                                 |
+| HTTP cookies            |                                 |                                 |
+| HTTP headers            |                                 |                                 |
+| Login ID                | <i class="icon-check-bold"></i> |                                 |
 
 {{% /tab %}}
 
@@ -250,6 +269,7 @@ The following metadata can be obfuscated:
 * MemCached commands
 * HTTP URLs
 * Stack traces
+* Credit card numbers
 
 **Note:** Obfuscation can have a performance impact on your system, or could redact important information that is not sensitive. Consider what obfuscation you need for your setup, and customize your configuration appropriately.
 
@@ -397,6 +417,36 @@ apm_config:
 ```
 
 This can also be enabled with the environment variable `DD_APM_OBFUSCATION_REMOVE_STACK_TRACES=true`.
+
+{{% /tab %}}
+{{% tab "Credit Card" %}}
+
+Scans all span metadata for numbers that appear to be credit card numbers. Any values that match are replaced with `?`. This check affects all span types and is enabled by default. Because this initial scan is based on patterns, it can sometimes cause false positives by redacting other long numbers. To improve accuracy, you can enable the `credit_cards.luhn` option described below.
+
+**Note**: Scanning looks for values that are exactly credit card numbers (allowing for internal whitespace). If a metavalue has additional string data, this obfuscator determines that value is not a credit card number. For example:
+
+- A metavalue of `4111 1111 1111 1111` is redacted to `?`.
+- A metavalue of `CC-4111 1111 1111 1111` is **not** redacted.
+
+```yaml
+apm_config:
+  enabled: true
+
+  ## (...)
+
+  obfuscation:
+    credit_cards:
+      ## Enable obfuscation of suspected credit card values in meta fields.
+      ## Enabled by default.
+      enabled: true
+      ## Enables a Luhn checksum check to reduce false positives.
+      ## This option increases CPU usage.
+      luhn: false
+```
+- `credit_cards.enabled`: Set to false to disable this obfuscator.
+  - Environment Variable: `DD_APM_OBFUSCATION_CREDIT_CARDS_ENABLED`
+- `credit_cards.luhn`: Set to true to enable a Luhn checksum check that validates numbers to eliminate false positives. This increases CPU usage and the performance cost of this check.
+  - Environment Variable: `DD_APM_OBFUSCATION_CREDIT_CARDS_LUHN`
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -582,7 +632,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 ### HTTP
 
 Datadog is standardizing [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries have the following configuration options to control sensitive data collected in HTTP spans.
-    
+
 #### Redact query strings
 
 The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex finds a suspicious key-value pair, it replaces it with `<redacted>`.
@@ -597,7 +647,7 @@ To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variabl
 DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
 ```
 
-### Processing 
+### Processing
 
 Some tracing libraries provide an interface for processing spans to manually modify or remove sensitive data collected in traces:
 
@@ -609,7 +659,7 @@ Some tracing libraries provide an interface for processing spans to manually mod
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Instrumentation telemetry is not available for the {{< region-param key="dd_site_name" >}} site, but is enabled by default. To avoid errors, {{< region-param key="dd_site_name" >}} users should disable this capability by setting <code>DD_INSTRUMENTATION_TELEMETRY_ENABLED=false</code> on their application and <code>DD_APM_TELEMETRY_ENABLED=false</code> on their Agent.
 </div>
 
@@ -638,29 +688,6 @@ export DD_APM_TELEMETRY_ENABLED=false
 {{% /tab %}}
 {{< /tabs >}}
 
-## PCI DSS compliance for compliance for APM
-
-{{< site-region region="us" >}}
-
-<div class="alert alert-warning">
-PCI compliance for APM is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
-</div>
-
-To set up a PCI-compliant Datadog org, follow these steps:
-
-{{% pci-apm %}}
-
-See [PCI DSS Compliance][1] for more information. To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][2].
-
-[1]: /data_security/pci_compliance/
-[2]: /data_security/pci_compliance/?tab=logmanagement
-
-{{< /site-region >}}
-
-{{< site-region region="us2,us3,us5,eu,gov" >}}
-PCI compliance for APM is not available for the {{< region-param key="dd_site_name" >}} site.
-{{< /site-region >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -678,3 +705,4 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
 [12]: /security/sensitive_data_scanner/
 [13]: /security/application_security/how-it-works/#data-privacy
+[14]: /data_security/pci_compliance/

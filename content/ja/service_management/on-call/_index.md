@@ -12,19 +12,15 @@ further_reading:
 title: オンコール
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では On-Call はサポートされていません。</div>
-{{< /site-region >}}
-
 Datadog On-Call は、モニタリング、ページング、インシデント対応を 1 つのプラットフォームに統合しています。
 
-{{< img src="service_management/oncall/oncall_overview.png" alt="ページのルーティングの概要。モニター、インシデント、セキュリティシグナル、または API 呼び出しからページがチーム (例: 「payments-team」) に送信され、その後、(例えば優先度に基づく) 処理ルールに送られ、エスカレーションポリシーに従って処理されます。そこからスケジュールに送られるか、または直接ユーザーに送信されます。" style="width:100%;" >}}
+{{< img src="service_management/oncall/oncall_overview.png" alt="ページのルーティングの概要。モニター、インシデント、セキュリティシグナル、または API 呼び出しからページがチーム (例: 「payments-team」) に送信され、その後、(例えば優先度に基づく) ルーティングルールに送られ、エスカレーションポリシーに従って処理されます。そこからスケジュールに送られるか、または直接ユーザーに送信されます。" style="width:100%;" >}}
 
 ## 概念
 
 - **ページ**とは、モニター、インシデント、セキュリティシグナルなど、アラートを受ける対象のことを指します。ページのステータスには `Triggered` (トリガー済み)、`Acknowledged` (確認済み)、`Resolved` (解決済み) があります。
 - **チーム**は、専門知識や業務の役割に基づき、特定の種類のページを処理するために Datadog 内で構成されたグループです。
-- **処理ルール**により、チームは特定の種類の受信イベントに対する対応を細かく調整できます。これらのルールでは、イベントのメタデータに基づき、ページの緊急度を設定し、異なるエスカレーションポリシーにページをルーティングすることができます。
+- **ルーティングルール**により、チームは特定の種類の受信イベントに対する対応を細かく調整できます。これらのルールでは、イベントのメタデータに基づき、ページの緊急度を設定し、異なるエスカレーションポリシーにページをルーティングすることができます。
 - **エスカレーションポリシー**は、チーム内またはチーム間でページがどのようにエスカレーションされるかを決定します。
 - **スケジュール**は、特定のチームメンバーがオンコールでページに対応するための時間帯を設定します。
 
@@ -34,7 +30,7 @@ Datadog On-Call は、モニタリング、ページング、インシデント�
 
 {{< img src="service_management/oncall/notification_page.png" alt="オンコールチームに言及する通知。" style="width:80%;" >}}
 
-各チームは**エスカレーションポリシー**と**スケジュール**を所有しており、エスカレーションポリシーは、ページがさまざまなスケジュールに送信される方法を定義します (例: 以下のスクリーンショットの _Checkout Operations - Interrupt Handler_、_Primary_、_Secondary_)。また、各チームはページを異なるエスカレーションポリシーにルーティングするための**処理ルール**も構成できます。
+各チームは**エスカレーションポリシー**と**スケジュール**を所有しており、エスカレーションポリシーは、ページがさまざまなスケジュールに送信される方法を定義します (例: 以下のスクリーンショットの _Checkout Operations - Interrupt Handler_、_Primary_、_Secondary_)。また、各チームはページを異なるエスカレーションポリシーにルーティングするための**ルーティングルール**も構成できます。
 
 {{< img src="service_management/oncall/escalation_policy.png" alt="エスカレーションポリシーのサンプル。" style="width:80%;" >}}
 
@@ -48,7 +44,7 @@ On-Call を開始するには、[オンコールチームを編成][1]し、通�
 
 {{< whatsnext desc="このセクションでは、次のトピックについて説明します。">}}
 {{< nextlink href="/service_management/on-call/teams">}}<u>チームを編成</u>: 新しいオンコールチームを作成し、既存の Datadog チームをオンコールに追加するか、PagerDuty または Opsgenie からチームをインポートします。{{< /nextlink >}}
-{{< nextlink href="/service_management/on-call/pages">}}<u>ページを送信</u>: チームに対して、モニター、インシデント、セキュリティシグナルなどを通じてページを送るか、Datadog、Slack、Microsoft Teams、または Datadog API を介して手動でページを送ります。 {{< /nextlink >}}
+{{< nextlink href="/service_management/on-call/triggering_pages">}}<u>ページを送信</u>: チームに対して、モニター、インシデント、セキュリティシグナルなどを通じてページを送るか、Datadog、Slack、Microsoft Teams、または Datadog API を介して手動でページを送ります。 {{< /nextlink >}}
 {{< nextlink href="/service_management/on-call/escalation_policies">}}<u>エスカレーションポリシー</u>: 異なるスケジュールにページを送信するためのステップを定義します。 {{< /nextlink >}}
 {{< nextlink href="/service_management/on-call/schedules">}}<u>スケジュール</u>: チームメンバーのオンコールローテーションのスケジュールを設定します。{{< /nextlink >}}
 {{< nextlink href="/service_management/on-call/profile_settings">}}<u>プロファイル設定</u>: 連絡方法や通知の優先設定を構成し、タイムリーかつ効果的にページを受け取れるようにします。{{< /nextlink >}}

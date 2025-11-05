@@ -6,34 +6,47 @@ aliases:
     - /llm_observability/configuration/
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
-LLM Observability offers several ways to support evaluations:
+LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Settings > Evaluations**][8].
 
-### Out-of-the-Box Evaluations
+### Custom LLM-as-a-judge evaluations
 
-Datadog builds and supports [Out-of-the-Box Evaluations][1] to support common use cases. You can enable and configure them within the LLM Observability application.
+[Custom LLM-as-a-judge evaluations][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluations to assess subjective or objective criteria (like tone, helpfulness, or factuality) and run them at scale across your traces and spans.
 
-### Submit Custom Evaluations
+### Managed evaluations
 
-You can also [Submit Custom Evaluations][2] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+Datadog builds and supports [managed evaluations][2] to support common use cases. You can enable and configure them within the LLM Observability application.
 
-### Evaluation Integrations
+### Submit external evaluations
 
-Datadog also supports integrations with some 3rd party evaluation frameworks, such as [Ragas][3] and [NeMo][4].
+You can also submit [external evaluations][3] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
+
+### Evaluation integrations
+
+Datadog also supports integrations with some 3rd party evaluation frameworks, such as [Ragas][4] and [NeMo][5].
 
 ### Sensitive Data Scanner integration
 
-In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][5], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application. 
+In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
 
 By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
-[1]: /llm_observability/evaluations/ootb_evaluations
-[2]: /llm_observability/evaluations/submit_evaluations
-[3]: /llm_observability/evaluations/ragas_evaluations
-[4]: /llm_observability/evaluations/submit_nemo_evaluations
-[5]: /security/sensitive_data_scanner/
+### Security
+
+{{< learning-center-callout header="Get real-time security guardrails for your AI apps and agents" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
+  AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
+{{< /learning-center-callout >}}
+
+### Permissions
+
+[`LLM Observability Write` permissions][7] are necessary to configure evaluations.
+
+[1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
+[2]: /llm_observability/evaluations/managed_evaluations
+[3]: /llm_observability/evaluations/external_evaluations
+[4]: /llm_observability/evaluations/ragas_evaluations
+[5]: /llm_observability/evaluations/submit_nemo_evaluations
+[6]: /security/sensitive_data_scanner/
+[7]: /account_management/rbac/permissions/#llm-observability
+[8]: https://app.datadoghq.com/llm/settings/evaluations

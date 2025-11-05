@@ -4,6 +4,7 @@ aliases:
   - /tracing/software_catalog/scorecards/custom_rules
   - /tracing/service_catalog/scorecards/custom_rules
   - /service_catalog/scorecards/custom_rules
+  - /software_catalog/scorecards/custom_rules
 further_reading:
 - link: "/tracing/software_catalog/"
   tag: "Documentation"
@@ -22,18 +23,15 @@ further_reading:
   text: "Track DORA Metrics with Datadog" 
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Scorecards are in Preview.
-{{< /callout >}}
+Custom rules allow you to codify your organizations' expectations about your software components, teams, and more. You decide the evaluation criteria, freqeuency, and data input. You can create custom rules through the [Scorecards API][2] or through [Datadog Workflow Automation][9]. If you are not familiar with the Workflow Automation product, you can start [building your first custom Scorecards rule with AI][10].
 
-Datadog provides [default rules][1] so you can get started quickly with Scorecards, but you can also create custom rules.
 
 ## Create custom rules
 
 To add and evaluate custom rules using the [Scorecards API][2]: 
 
 1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
-2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
+2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, entity}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
 3. View an overview of outcomes and remarks in the Scorecards dashboard.
 
 After initial setup, rules can also be enabled or disabled through the API. 
@@ -42,8 +40,8 @@ After initial setup, rules can also be enabled or disabled through the API.
 To evaluate and add custom rules in the Scorecards UI: 
 
 1. Click **Create Rule** on the Scorecards page.
-2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team.
-3. Navigate to the rule you created and select **Edit Outcome** next to the service that you want to evaluate.
+2. Specify the name of the rule, the scorecard it belongs to, a rule description, the owning team, which level the rule belongs to, and a scope, if necessary.
+3. Navigate to the rule you created and select **Edit Outcome** next to the entity that you want to evaluate.
 4. Select the relevant outcome of `pass`, `fail`, or `skip` and add an optional remark describing the reason for the outcome. 
 5. View an overview of outcomes and remarks in the Scorecards dashboard.
 
@@ -68,17 +66,17 @@ After creating your custom rule, choose the **Add Workflow** option when prompte
 
 {{% collapse-content title="From scratch" level="h4" expanded=false id="workflow-from-scratch" %}}
 
-{{< img src="/tracing/software_catalog/scorecards_workflow_example.png" alt="Workflow evaluating whether a service has a tier defined in Software Catalog" style="width:90%;" >}}
+{{< img src="/tracing/software_catalog/scorecards_workflow_example.png" alt="Workflow evaluating whether an entity has a tier defined in Software Catalog" style="width:90%;" >}}
 
 To create a workflow from scratch: 
 
 1. Set a schedule for your workflow to run on.
 1. Click the plus (+) icon to add a step.
-1. Select the [**List service definitions** action][6] to fetch all defined services from Software Catalog.
+1. Select the [**List entity definitions** action][6] to fetch all defined entities from Software Catalog.
 1. Click the plus (+) icon to add a step.
-1. Select the [For loop][7] to iterate over each service one-by-one.
+1. Select the [For loop][7] to iterate over each entity one-by-one.
 1. Select the action needed to fetch your evaluation data (for example: "List monitors" or "Get repository content" from GitHub). 
-1. Transform the returned data using a custom JavaScript function to generate pass/fail outcomes for each service.
+1. Transform the returned data using a custom JavaScript function to generate pass/fail outcomes for each entity.
 1. Use the [**Update scorecard rule outcome** action][3] to send results to Scorecards.
 1. Run the workflow to see your evaluations appear in Scorecards for your custom rule.
 1. Publish the workflow; unpublished workflows do not run automatically. 
@@ -130,6 +128,8 @@ You can also link an existing workflow to any custom rule that already generates
 [3]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.software_catalog/com.datadoghq.dd.software_catalog.updateScorecardRuleOutcome
 [4]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
 [5]: /service_management/workflows/build/
-[6]: https://app.datadoghq.com/workflow/action-catalog#com.datadoghq.dd/com.datadoghq.dd.software_catalog/com.datadoghq.dd.software_catalog.listServiceDefinitions
+[6]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.dd.softwarecatalog.listCatalogEntity
 [7]: https://app.datadoghq.com/workflow/action-catalog#//com.datadoghq.core.forLoop
 [8]: /api/latest/service-scorecards/
+[9]: /actions/workflows/
+[10]: /actions/workflows/build/#create-a-workflow-with-ai

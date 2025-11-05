@@ -155,6 +155,10 @@ nav_sections:
       icon: llm-observability
       link: llm_observability/
       title: LLM 관찰 가능성
+    - desc: 원격 측정, 메타데이터, 워크플로를 통합하여 신속하게 전달하세요
+      icon: internal-developer-portal-wui
+      link: internal_developer_portal
+      title: 내부 개발자 포털
 - nav_section:
   - name: 구성
   - navtiles:

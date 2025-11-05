@@ -26,7 +26,7 @@ Para obtener información específica sobre Squid, consulta la sección [Squid](
 
 El Agent es compatible de forma nativa con los proxies web tradicionales. Si necesitas conectarte a Internet mediante un proxy, edita el archivo de configuración del Agent.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El <code>&ltHOST&gt;:&ltPORT&gt;</code> que se utiliza para redirigir mediante proxy las métricas NO se utilizará para redirigir los logs. Consulta la página <a href="/agent/logs/proxy">Proxy para logs</a>.
 </div>
 

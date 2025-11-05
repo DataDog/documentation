@@ -12,6 +12,8 @@ Use this processor with Vector Remap Language (VRL) to modify and enrich your lo
 
 See [Custom functions][10191] for the full list of available functions.
 
+See [Remap Reserved Attributes][10193] on how to use the Custom Processor to manually and dynamically remap attributes.
+
 To set up this processor:
 
 - If you have not created any functions yet, click **Add custom processor** and follow the instructions in [Add a function](#add-a-function) to create a function.
@@ -20,10 +22,12 @@ To set up this processor:
 ##### Add a function
 
 1. Enter a name for your custom processor.
-1. Add your script to modify your logs using [custom functions][10191]. You can also click **Autofill with Example** and select one of the common use cases to get started. Click the copy icon for the example script and paste it into your script.
+1. Add your script to modify your logs using [custom functions][10191]. You can also click **Autofill with Example** and select one of the common use cases to get started. Click the copy icon for the example script and paste it into your script. See [Get Started with the Custom Processor][10192] for more information.
 1. Optionally, check **Drop events on error** if you want to drop events that encounter an error during processing.
 1. Enter a sample log event.
 1. Click **Run** to preview how the functions process the log. After the script has run, you can see the output for the log.
 1. Click **Save**.
 
 [10191]: /observability_pipelines/processors/custom_processor#custom-functions
+[10192]: /observability_pipelines/guide/get_started_with_the_custom_processor
+[10193]: /observability_pipelines/guide/remap_reserved_attributes

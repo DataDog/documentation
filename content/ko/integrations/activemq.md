@@ -285,7 +285,7 @@ ActiveMQ XML 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "activemq_xml" >}}
+{{< get-metrics-from-git "activemq-xml" >}}
 
 
 ### 이벤트

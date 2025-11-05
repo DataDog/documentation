@@ -1,11 +1,11 @@
 ---
-title: 모바일 세션 리플레이
+aliases: null
 description: 모바일 디바이스에 대한 세션 리플레이 설정하기
-aliases:
 further_reading:
-    - link: /real_user_monitoring/session_replay
-      tag: 설명서
-      text: 세션 리플레이
+- link: /real_user_monitoring/session_replay
+  tag: 설명서
+  text: 세션 리플레이
+title: 모바일 세션 리플레이
 ---
 ## 개요
 
@@ -34,7 +34,7 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
-[2]: /real_user_monitoring/session_replay/mobile/privacy_options
-[3]: /real_user_monitoring/session_replay/mobile/app_performance
-[4]: /real_user_monitoring/session_replay/mobile/troubleshooting
+[1]: /ko/real_user_monitoring/session_replay/mobile/setup_and_configuration
+[2]: /ko/real_user_monitoring/session_replay/mobile/privacy_options
+[3]: /ko/real_user_monitoring/session_replay/mobile/app_performance
+[4]: /ko/real_user_monitoring/session_replay/mobile/troubleshooting

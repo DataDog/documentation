@@ -111,4 +111,4 @@ Spacelift は、Infrastructure as Code ワークフローを自動化し、状�
 [5]: https://www.rapdev.io/#Get-in-touch
 [6]: mailto:support@rapdev.io
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-spacelift" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-spacelift" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

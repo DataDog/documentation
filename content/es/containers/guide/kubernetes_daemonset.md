@@ -6,6 +6,10 @@ further_reading:
 title: Instalar manualmente y configurar el Datadog Agent en Kubernetes con DaemonSet
 ---
 
+<div class="alert alert-danger">
+  Datadog desaconseja el uso de DaemonSets para desplegar el Datadog Agent, ya que el proceso manual es propenso a errores. Datadog recomienda <a href="/containers/kubernetes/installation">utilizar Datadog Operator o Helm</a> para instalar el Agent en Kubernetes.
+</div>
+
 ## Instalación
 Puedes utilizar DaemonSets para desplegar Datadog Agent en todos tus nodos (o en nodos específicos [utilizando nodeSelectors][1]).
 
@@ -35,7 +39,7 @@ Para instalar Datadog Agent en tu clúster de Kubernetes:
     |                                 |                                 |                                 |                                 | <i class="icon-check-bold"></i> |                                 | [Plantilla de manifiesto][10] | sin plantilla                          |
     | <i class="icon-check-bold"></i> |                                 |                                 |                                 |                                 |                                 | [Plantilla de manifiesto][11] | [Plantilla de manifiesto][12]              |
 
-     Para habilitar completamente la recopilación de trazas (traces), [se requieren pasos adicionales en tu configuración del pod de la aplicación][13]. Consulta también las páginas de documentación de [logs][14], [APM][15], [procesos][16], y [Monitorización del rendimiento de red][17], y [Seguridad][18] para aprender a habilitar cada característica individualmente.
+     Para habilitar globalmente la recopilación de trazas (traces), [se requieren pasos adicionales en la configuración del pod de tu aplicación][13]. Para aprender a habilitar cada característica individualmente, consulta también los [logs][14], [APM][15], los [procesos][16] y [Cloud Network Monitoring][17], y las páginas con documentación sobre [Seguridad][18].
 
      **Nota**: Estos manifiestos están configurados para el espacio de nombres `default`. Si estás en un espacio de nombres personalizado, actualiza el parámetro `metadata.namespace` antes de aplicarlos.
 
@@ -257,27 +261,27 @@ A continuación, se muestra la lista de variables de entorno disponibles para el
 
 ### Opciones globales
 
-| Variable de Ent         | Descripción                                                                                                                                                                                                                                                                                                                                      |
+| Variable de entorno         | Descripción                                                                                                                                                                                                                                                                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`         | Tu clave API de Datadog (**obligatorio**)                                                                                                                                                                                                                                                                                                              |
 | `DD_ENV`             | Configura la etiqueta (tag) global `env` para todos los datos emitidos.                                                                                                                                                                                                                                                                                                  |
 | `DD_HOSTNAME`        | El nombre de host que hay que usar para las métricas (si falla la detección automática).                                                                                                                                                                                                                                                                                             |
 | `DD_TAGS`            | Etiquetas de host separadas por espacios. Por ejemplo: `simple-tag-0 tag-key-1:tag-value-1`.                                                                                                                                                                                                                                                                 |
 | `DD_SITE`            | Lugar de destino para tus métricas, trazas y logs. Tu `DD_SITE` es {{< region-param key="dd_site" code="true">}}. Por defecto es `datadoghq.com`.                                                                                                                                                                                               |
-| `DD_DD_URL`          | Configuración opcional para sobreescribir la URL para enviar métricas.                                                                                                                                                                                                                                                                                      |
-| `DD_URL` (6.36+/7.36+)            | Alias para `DD_DD_URL`. Se ignora si `DD_DD_URL` ya está configurada.                                                                                                                                                                                                                                                                                    |
+| `DD_DD_URL`          | Un parámetro opcional para sobrescribir la URL para enviar métricas.                                                                                                                                                                                                                                                                                      |
+| `DD_URL` (6.36+/7.36+)            | El alias para `DD_DD_URL`. Se ignora si `DD_DD_URL` ya está configurada.                                                                                                                                                                                                                                                                                    |
 | `DD_CHECK_RUNNERS`   | El Agent ejecuta todos los checks de forma simultánea por defecto (valor por defecto = `4` ejecutadores). Para ejecutar checks de forma secuencial, establece el valor en `1`. Si necesitas ejecutar un número elevado de checks (o checks lentos), el componente `collector-queue` podría retrasarse y el check de estado falla. Puedes aumentar el número de ejecutadores para ejecutar checks en paralelo. |
 | `DD_LEADER_ELECTION` | Si se están ejecutando varias instancias de Agent en tu clúster, establece esta variable en `true` para evitar la duplicación de la recopilación de eventos.                                                                                                                                                                                                                         |
 
-### Configuraciones de proxy
+### Parámetros del proxy
 
 A partir del Agent v6.4.0 (y v6.5.0 para el Trace Agent), se pueden sobreescribir los valores de configuración de proxy del Agent con las siguientes variables de entorno:
 
-| Variable de Ent             | Descripción                                                            |
+| Variable de entorno             | Descripción                                                            |
 |--------------------------|------------------------------------------------------------------------|
-| `DD_PROXY_HTTP`          | Una URL de HTTP para usar como proxy para solicitudes de `http`.                     |
-| `DD_PROXY_HTTPS`         | Una URL de HTTP para usar como proxy para solicitudes de `https`.                   |
-| `DD_PROXY_NO_PROXY`      | Una lista separada por espacios de URLs para las que no se debe utilizar ningún proxy.      |
+| `DD_PROXY_HTTP`          | Una URL HTTP para usar como proxy para las solicitudes `http`.                     |
+| `DD_PROXY_HTTPS`         | Una URL HTTPS para usar como proxy para las solicitudes `https`.                   |
+| `DD_PROXY_NO_PROXY`      | Una lista separada por espacios de las URL para las que no se debe usar ningún proxy.      |
 | `DD_SKIP_SSL_VALIDATION` | Una opción para comprobar si el Agent tiene problemas para conectarse a Datadog. |
 
 Para obtener más información sobre la configuración de proxy, consulta la [documentación de proxy del Agent v6][23].
@@ -288,13 +292,13 @@ Para obtener más información sobre la configuración de proxy, consulta la [do
 
 Enviar métricas personalizadas con [el protocolo StatsD][24]:
 
-| Variable de Ent                     | Descripción                                                                                                                                                |
+| Variable de entorno                     | Descripción                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | Escucha los paquetes de DogStatsD de otros contenedores (obligatorio para enviar métricas personalizadas).                                                                       |
 | `DD_HISTOGRAM_PERCENTILES`       | Los percentiles de histogramas para calcular (separados por espacios). Por defecto es `0.95`.                                                                         |
-| `DD_HISTOGRAM_AGGREGATES`        | Las agregaciones de histograma que hay que calcular (separadas por espacios). El valor por defecto es `"max median avg count"`.                                                          |
-| `DD_DOGSTATSD_SOCKET`            | La ruta al socket Unix que hay que escuchar. Debe estar en un volumen montado `rw`.                                                                                    |
-| `DD_DOGSTATSD_ORIGIN_DETECTION`  | Activa la detección de contenedores y el etiquetado para métricas de socket Unix.                                                                                            |
+| `DD_HISTOGRAM_AGGREGATES`        | Los agregados del histograma a calcular (separados por espacios). El valor por defecto es `"max median avg count"`.                                                          |
+| `DD_DOGSTATSD_SOCKET`            | La ruta al socket Unix que se va a escuchar. Debe estar en un volumen montado en `rw`.                                                                                    |
+| `DD_DOGSTATSD_ORIGIN_DETECTION`  | Habilita la detección y el etiquetado de contenedores para las métricas del socket Unix.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Etiquetas adicionales para anexar a todas las métricas, los eventos y los checks de servicios recibidos por este servidor de DogStatsD, por ejemplo: `"env:golden group:retrievers"`. |
 
 Obtén más información sobre [DogStatsD en Unix Domain Sockets][25].
@@ -303,18 +307,18 @@ Obtén más información sobre [DogStatsD en Unix Domain Sockets][25].
 
 Datadog recopila automáticamente etiquetas comunes de Kubernetes. Para extraer aún más etiquetas, utiliza las siguientes opciones:
 
-| Variable de Ent                            | Descripción             |
+| Variable de entorno                            | Descripción             |
 |-----------------------------------------|-------------------------|
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extrae etiquetas del pod      |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extracción de etiquetas (labels) del pod      |
 | `DD_Kubernetes_POD_ANNOTATIONS_AS_TAGS` | Extrae anotaciones del pod |
 
 Consulta la documentación de [Extracción de etiquetas de Kubernetes][26] para aprender más.
 
 ### Ignora los contenedores
 
-Excluye contenedores de la recopilación de logs, la recopilación de métricas y Autodiscovery. Datadog excluye los contenedores `pause` de Kubernetes y OpenShift por defecto. Estas listas de permisos y bloqueos se aplican únicamente a Autodiscovery; trazas y DogStatsD no se ven afectados. Estas variables de entorno admiten expresiones regulares en sus valores.
+Excluye contenedores de la recopilación de logs, métricas y Autodiscovery. Datadog excluye los contenedores `pause` de Kubernetes y OpenShift por defecto. Estas listas de permisos y denegaciones se aplican únicamente a Autodiscovery; las trazas y DogStatsD no se ven afectados. Estas variables de entorno admiten expresiones regulares en sus valores.
 
-| Variable de Ent                   | Descripción                                                                                                                                                                                                                        |
+| Variable de entorno                   | Descripción                                                                                                                                                                                                                        |
 |--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_CONTAINER_INCLUDE`         | Lista de contenedores permitidos a incluir (separados por espacios). Utiliza `.*` para incluirlos todos. Por ejemplo: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                                              |
 | `DD_CONTAINER_EXCLUDE`         | Lista de contenedores a excluir (separados por espacios). Utiliza `.*` para excluir todo. Por ejemplo: `"image:image_name_3 image:image_name_4"`, `image:.*`                                                                              |
@@ -331,7 +335,7 @@ Encontrarás más ejemplos en la página [Gestió de Container Discovery][27].
 
 ### Autodiscovery
 
-| Variable de Ent                 | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Variable de entorno                 | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_LISTENERS`               | Oyentes de Autodiscovery para ejecutar.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `DD_EXTRA_LISTENERS`         | Oyentes de Autodiscovery adicionales para ejecutar. Se añaden además de las variables definidas en la sección `listeners` del archivo de configuración `datadog.yaml`.                                                                                                                                                                                                                                                                                                                                    |
@@ -340,7 +344,7 @@ Encontrarás más ejemplos en la página [Gestió de Container Discovery][27].
 
 ### Varios
 
-| Variable de Ent                        | Descripción                                                                                                                                                                                                                                                         |
+| Variable de entorno                        | Descripción                                                                                                                                                                                                                                                         |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Sobreescribe la detección automática del origen del contenedor para forzar un único origen. Por ejemplo: `"docker"`, `"ecs_fargate"`, `"kubelet"`. Esto ya no es necesario a partir de Agent v7.35.0.                                                                                                     |
 | `DD_HEALTH_PORT`                    | Configura esto como `5555` para exponer el check de estado del Agent en el puerto `5555`.                                                                                                                                                                                                 |
@@ -363,7 +367,7 @@ Encontrarás más ejemplos en la página [Gestió de Container Discovery][27].
 [14]: /es/agent/kubernetes/log/
 [15]: /es/agent/kubernetes/apm/
 [16]: /es/infrastructure/process/?tab=kubernetes#installation
-[17]: /es/network_monitoring/performance/setup/
+[17]: /es/network_monitoring/cloud_network_monitoring/setup/
 [18]: /es/data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /es/getting_started/site/

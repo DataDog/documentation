@@ -45,7 +45,7 @@ Traces Queries がアカウントで有効になった瞬間から (イベント
 
 {{< img src="tracing/trace_queries/intelligent_retention_filter_change.png" style="width:90%; background:none; border:none; box-shadow:none;" alt="イベントオーバーレイインテリジェント保持フィルター" >}}
 
-Spans indexed by the Intelligent retention filter are excluded from APM queries in [Trace Analytics monitor][5] evaluations. Therefore, monitors are **not impacted** by this change.
+Intelligent retention フィルターでインデックス化された Span は、[Trace Analytics モニター][5] の評価における APM クエリから除外されます。そのため、モニターには **影響はありません**。
 
 ## 参考資料
 

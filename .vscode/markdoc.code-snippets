@@ -1,11 +1,13 @@
 {
     "Alert box": {
-        "prefix": ";;alert",
+        "scope": "markdoc",
+        "prefix": [";;alert", ";;admonition", ";;note"],
         "body": ["{% alert level=\"${1|info,warning,danger|}\" %}", "${2:This is an alert message.}", "{% /alert %}"],
         "description": "Markdoc alert block with a level attribute (info, warning, danger)"
     },
 
     "Callout": {
+        "scope": "markdoc",
         "prefix": ";;callout",
         "body": [
             "{% callout src=\"${1:https://www.example.com}\" header=\"${2:Join the Preview!}\" btn_hidden=${3|false,true|} %}",
@@ -16,6 +18,7 @@
     },
 
     "Code block": {
+        "scope": "markdoc",
         "prefix": ";;code",
         "body": [
             "```${1:javascript} {% filename=\"${2:example.js}\" collapsible=${3|true,false|} disable_copy=${4|false,true|} wrap=${5|false,true|} %}",
@@ -26,6 +29,7 @@
     },
 
     "Definition list": {
+        "scope": "markdoc",
         "prefix": ";;list",
         "body": [
             "Service",
@@ -45,6 +49,7 @@
     },
 
     "If": {
+        "scope": "markdoc",
         "prefix": ";;if",
         "body": [
             "{% if equals($${1:trait_id}, \"${2:option_id}\") %}",
@@ -55,6 +60,7 @@
     },
 
     "Image": {
+        "scope": "markdoc",
         "prefix": ";;image",
         "body": [
             "{% img src=\"${1:path/to/image.png}\" alt=\"${2:Descriptive alt text}\" style=\"${3:width:80%;}\" /%}"
@@ -63,12 +69,14 @@
     },
 
     "Video": {
+        "scope": "markdoc",
         "prefix": ";;;video",
         "body": ["{% img src=\"${1:path/to/video.mp4}\" alt=\"${2:Descriptive video alt text}\" video=\"true\" /%}"],
         "description": "Markdoc video tag using img with video attribute"
     },
 
     "Region site address": {
+        "scope": "markdoc",
         "prefix": ";;region-param",
         "body": [
             "{% region-param key=\"${1:dd_site}\" code=${2|false,true|} link=${3|false,true|} text=\"${4:Custom link text}\" /%}"
@@ -77,6 +85,7 @@
     },
 
     "Region selector": {
+        "scope": "markdoc",
         "prefix": ";;region",
         "body": [
             "{% site-region region=\"${1|us,us3,us5,eu,ap1,gov|}\" %}",
@@ -87,6 +96,7 @@
     },
 
     "Table": {
+        "scope": "markdoc",
         "prefix": ";;table",
         "body": [
             "{% table %}",
@@ -104,6 +114,7 @@
     },
 
     "Tabs": {
+        "scope": "markdoc",
         "prefix": ";;tabs",
         "body": [
             "{% tabs %}",
@@ -122,6 +133,7 @@
     },
 
     "Check mark": {
+        "scope": "markdoc",
         "prefix": ";;check",
         "body": "{% x/ %}",
         "description": "X tag (self-closing) for checkmark"

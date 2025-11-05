@@ -24,7 +24,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- コンテナ
+- incident-teams
 - ログの収集
 custom_kind: インテグレーション
 dependencies:

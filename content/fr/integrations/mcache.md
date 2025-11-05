@@ -161,7 +161,7 @@ Lancez la |sous-commande `status` de l'Agent][2] et cherchez `mcache` dans la se
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "mcache" >}}
+{{< get-metrics-from-git "memcached" >}}
 
 
 Le check recueille uniquement les métriques `memcache.slabs.*` si vous définissez `options.slabs: true` dans le fichier `mcache.d/conf.yaml`. De même, il ne recueille les métriques `memcache.items.*` que si vous définissez `options.items: true`.
@@ -171,7 +171,7 @@ Le check recueille uniquement les métriques `memcache.slabs.*` si vous définis
 Le check Mcache n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "mcache" >}}
+{{< get-service-checks-from-git "memcached" >}}
 
 
 ## Dépannage

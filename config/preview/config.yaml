@@ -4,15 +4,6 @@ builddrafts: true
 enableGitInfo: true
 
 deployment:
-    order:
-      - ".woff2$"
-      - ".woff$"
-      - ".css$"
-      - ".js$"
-      - ".jpg$"
-      - ".png$"
-      - ".gif$"
-      - ".mp4$"
 
     targets:
     - name: "preview"
@@ -22,33 +13,3 @@ deployment:
     - name: "previewAssets"
       URL: "s3://dd-staging-static-assets?region=us-east-1&prefix=documentation/"
       include: "**.{jpg,jpeg,png,gif,mp4,mov,svg,json}"
-
-    matchers:
-      # temporarily lets nocache this sh file
-      - pattern: "^resources/sh/rpm_check.sh$"
-        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
-      # dont cache rum/logs config
-      - pattern: "^static/dd-browser-logs-rum.js$"
-        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
-        gzip: true
-      - pattern: "^.+\\.(js|css|svg)$"
-        cacheControl: "max-age=31536000, no-transform, public"
-        gzip: true
-      - pattern: "^.+\\.(eot|ttf|woff|woff2|ico)$"
-        cacheControl: "max-age=31536000, no-transform, public"
-        gzip: false
-      - pattern: "^.+\\.(png|jpg|jpeg|gif|mp4|zip|pdf|txt|csv)$"
-        cacheControl: "max-age=31536000, no-transform, public"
-        gzip: false
-      - pattern: "^.+\\.html$"
-        gzip: true
-        contentType: "text/html; charset=utf-8"
-        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
-      - pattern: "^.+\\.xml$"
-        gzip: true
-        contentType: "text/xml; charset=utf-8"
-        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
-      - pattern: "^.+\\.json$"
-        gzip: true
-        contentType: "application/json; charset=utf-8"
-        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"

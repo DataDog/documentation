@@ -142,7 +142,7 @@ spec:
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "tcp_queue_length" >}}
+{{< get-metrics-from-git "tcp-queue-length" >}}
 
 
 ### サービスチェック

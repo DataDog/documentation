@@ -104,7 +104,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックを
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "nn_sdwan" >}}
+{{< get-metrics-from-git "nn-sdwan" >}}
 
 
 ### イベント
@@ -112,7 +112,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックを
 Netnology Cisco SD-WAN インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "nn_sdwan" >}}
+{{< get-service-checks-from-git "nn-sdwan" >}}
 
 
 ## トラブルシューティング

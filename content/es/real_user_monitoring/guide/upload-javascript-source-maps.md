@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentación
   text: Visualización de tus datos de rastreo de errores en el Explorer
-- link: https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
   tag: Código fuente
   text: Referencia del comando Sourcemaps
 title: Carga de mapas de fuente de JavaScript
@@ -22,7 +22,7 @@ Si el código fuente de tu frontend JavaScript está minificado, carga tus mapas
 
 Configura tu empaquetador de JavaScript para que, al minificar tu código fuente, genere mapas de fuente que incluyan directamente el código fuente relacionado en el atributo `sourcesContent`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Asegúrate de que el tamaño de cada mapa fuente aumentado con el tamaño del archivo minificado relacionado no supere el límite de **500 MB**.
 </div>
 
@@ -81,7 +81,7 @@ Consulta el siguiente ejemplo:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si la suma del tamaño de los archivos <code>javascript.364758.min.js</code> y <code>javascript.364758.js.map</code> supera el límite de <b>500 MB</b>, redúcelo configurando el empaquetador para dividir el código fuente en varios fragmentos más pequeños. Para obtener más información, consulta <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
 </div>
 
@@ -96,25 +96,25 @@ La mejor manera de cargar mapas de fuente es añadir un paso adicional en tu pip
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,ap1" >}}
+{{< site-region region="eu,us3,us5,gov,ap1,ap2" >}}
 1. Añade `@datadog/datadog-ci` a tu archivo `package.json` (asegúrate de estar utilizando la última versión).
 2. [Crea una clave de API dedicada de Datadog][1] y expórtala como una variable de entorno denominada `DATADOG_API_KEY`.
 3. Configura la CLI para cargar archivos al sitio {{<region-param key="dd_site_name">}} exportando dos variables de entorno: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} y `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
 4. Ejecuta el siguiente comando una vez por servicio en tu aplicación:
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
@@ -157,7 +157,7 @@ Por otro lado, un stack trace sin minificar te proporciona todo el contexto que 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/es/real_user_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/es/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code

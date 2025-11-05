@@ -1,6 +1,9 @@
 ---
-description: Utilisez l'Agent Datadog pour recueillir vos logs et envoyez-les à Datadog
+description: Utiliser l'Agent Datadog pour recueillir vos logs et les envoyer à Datadog
 further_reading:
+- link: agent/logs/agent_tags/
+  tag: Documentation
+  text: Tags de l'Agent ajoutés automatiquement aux logs
 - link: agent/logs/advanced_log_collection/#filtrer-les-logs
   tag: Documentation
   text: Filtrer les logs envoyés à Datadog
@@ -75,6 +78,11 @@ Sous **Windows**, utilisez le chemin `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FIL
 
 {{% tab "TCP/UDP" %}}
 
+Pour collecter l'adresse IP de l'expéditeur et l'associer à la charge utile du message de log, ajoutez la configuration suivante à votre fichier `datadog.yaml` :
+```yaml
+ logs_config:
+   use_sourcehost_tag: true
+```
 Pour recueillir les logs de votre application `<NOM_APP>` qui transfert ses logs via TCP sur le port **10518**, créez un fichier `<NOM_APP>.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][1] avec le contenu suivant :
 
 ```yaml
@@ -150,6 +158,43 @@ Pour terminer, [redémarrez l'Agent][2].
 
 [1]: /fr/logs/log_configuration/pipelines/#integration-pipelines
 [2]: /fr/agent/basic_agent_usage/windows/
+{{% /tab %}}
+{{% tab "Windows Private Location" %}}
+Suivez les étapes décrites dans ces sections pour envoyer les logs de l'emplacement privé Windows à Datadog :
+
+### Configurer l'Agent 
+
+1. Activez la collecte de logs par l'Agent en définissant `logs_enabled: true` dans le fichier de configuration de l'Agent.
+2. Accédez au répertoire `C:\ProgramData\Datadog\conf.d` et créez un dossier nommé `synthetics_worker.d`.
+3. Dans le dossier `synthetics_worker.d`, créez un fichier nommé `conf.yaml` en utilisant l'exemple suivant comme modèle :
+```yaml
+logs:
+  - type: file
+    path: "C:\\Program Files\\Datadog-Synthetics\\Synthetics\\private-location-service.out.log"
+    service: <YOUR_SERVICE>
+    source: synthetics
+    tags: # Defined per user preference
+      - env:<YOUR_ENV>
+      - private_location:<YOUR_PRIVATE_LOCATION>
+```
+
+### Vérifier l'utilisateur qui exécute l'Agent
+
+Étant donné que le dossier d'installation de l'emplacement privé est restreint aux administrateurs, l'Agent Datadog doit disposer des autorisations nécessaires pour accéder au fichier de log. Suivez les étapes ci-dessous pour vérifier l'utilisateur qui exécute l'Agent Datadog :
+
+1. Appuyez sur la touche Windows et sur `R`, puis recherchez `Run`.
+2. Recherchez l'Agent Datadog, faites un clic droit dessus, puis sélectionnez `Properties`.
+3. Dans l'onglet `log On`, vérifiez le compte (la valeur par défaut est `ddagentuser`).
+4. Fermez la fenêtre.
+
+### Accorder l'autorisation à l'utilisateur qui exécute l'Agent
+
+1. Accédez à `C:\Program Files` et recherchez le dossier `synthetics_worker.d`.
+2. Effectuez un clic droit sur le dossier `synthetics_worker.d` et sélectionnez `Properties`.
+3. Accédez à l'onglet `Security`. 
+4. Cliquez sur `Edit` et ajoutez `ddagentuser`.
+5. Accordez les autorisations nécessaires.
+6. Redémarrez l'Agent Datadog via l'écran Services ou en ligne de commande pour appliquer les modifications et commencer à envoyer les logs à Datadog.
 {{% /tab %}}
 {{< /tabs >}}
 

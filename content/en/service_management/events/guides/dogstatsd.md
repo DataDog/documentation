@@ -106,7 +106,7 @@ public class DogStatsdClient {
     public static void main(String[] args) throws Exception {
 
         StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
-            .prefix("statsd").
+            .prefix("statsd")
             .hostname("localhost")
             .port(8125)
             .build();
@@ -115,6 +115,7 @@ public class DogStatsdClient {
           .withTitle("An error occurred")
           .withText("Error message")
           .withAlertType(Event.AlertType.ERROR)
+          .withTags("env:prod", "tagkey:value")
           .build();
 
         Statsd.recordEvent(event);

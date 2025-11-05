@@ -1,5 +1,6 @@
 ---
 title: User Provisioning with SCIM
+description: Automate user provisioning and deprovisioning in Datadog using SCIM integration with Microsoft Entra ID and Okta identity providers.
 further_reading:
     - link: '/account_management/scim/azure/'
       tag: 'Documentation'
@@ -17,7 +18,7 @@ SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plan
 
 ## Overview
 
-The System for Cross-domain Identity Management, or SCIM, is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in sync with your organization's identity provider (IdP).
+The System for Cross-domain Identity Management, or [SCIM][9], is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in-sync with your organization's identity provider (IdP).
 
 ### Supported capabilities
 
@@ -27,7 +28,9 @@ The System for Cross-domain Identity Management, or SCIM, is an open standard th
 - Single sign-on to Datadog (recommended)
 - Managed Teams: Create Datadog Teams from identity provider groups and keep membership of the Datadog Teams synchronized with group membership in the identity provider.
 
-Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. To configure SCIM, see the documentation for your IdP:
+Datadog implements the SCIM server protocol. Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. Other identity providers may work, but are not explicitly supported.
+
+To configure SCIM for supported identity providers, see the documentation for your IdP:
 - [Microsoft Entra ID][2]
 - [Okta][3]
 
@@ -65,3 +68,4 @@ Creating a new user with SCIM triggers an email to the user. For first time acce
 [6]: /account_management/org_settings/service_accounts
 [7]: https://app.datadoghq.com/organization-settings/users
 [8]: /help/
+[9]: https://scim.cloud/

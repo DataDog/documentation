@@ -22,8 +22,8 @@ The [Logs Explorer][5] lets you search and view individual logs as a list. Howev
 ## Natural language queries
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
-Natural Language Queries is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}) site.
+<div class="alert alert-danger">
+Natural Language Queries is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
