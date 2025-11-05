@@ -60,7 +60,7 @@ Auto-push is available for Error Tracking and Test Optimization.
 
 #### Security considerations
 
-Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Agent, but it is not foolproof. By enabling this feature, you acknowledge that you understand the inherent risks involved. 
+Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Agent, but it is not foolproof. By enabling this feature, you acknowledge you understand the inherent risks involved. 
 
 ### Error tracking
 
