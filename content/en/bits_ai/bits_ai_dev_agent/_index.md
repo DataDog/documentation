@@ -27,7 +27,7 @@ Bits AI Dev Agent is available for the following Datadog products:
 | [Code Security][2]        | Preview              | Remediates code vulnerabilities individually or in bulk    |
 | [Test Optimization][4]    | Preview              | Provides code fixes for flaky tests and verifies that tests remain stable                                                         |
 | [Continuous Profiler][3]  | Preview              | Provides code changes for [Automated Analysis][10] insights                  |
-| [Containers][12  ]        | Preview              | Provides code changes for Container Recommendations                  |
+| [Containers][12]          | Preview              | Provides code changes for Container Recommendations                  |
 
 **Note**: Enabling Bits AI Dev Agent is product-specific. Even if it's active for one Datadog product, it must be separately enabled for each additional product you use.
 
@@ -42,11 +42,10 @@ Bits AI Dev Agent integrates with GitHub to create pull requests, respond to com
 - Generates PR titles and descriptions based on your PR template.
 - Opens PRs as drafts, iterates using CI logs, and marks them ready for review when checks pass.
 - Continues iterating in response to chat messages and review feedback.
+  
   **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
 
 Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
-
-Learn more about [PR automation and CI iteration][9].
 
 ### Auto-push
 
@@ -118,10 +117,9 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [3]: /profiler/
 [4]: /tests/
 [5]: https://app.datadoghq.com/integrations/github
-[6]: /bits_ai_dev_agent/setup/
+[6]: /bits_ai/bits_ai_dev_agent/setup/
 [7]: https://app.datadoghq.com/code?tab=my-sessions
 [8]: /bits_ai/bits_ai_sre/
-[9]: /bits_ai/bits_ai_dev_agent/pr_automation_and_ci_repair/
 [10]: /profiler/automated_analysis/
 [11]: /tracing/trace_explorer/
 [12]: /containers/
