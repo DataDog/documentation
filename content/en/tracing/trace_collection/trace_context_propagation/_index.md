@@ -622,6 +622,126 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 
 {{% /tab %}}
 
+{{% tab "Rust" %}}
+
+The Datadog Rust SDK is built on the OpenTelemetry (OTel) SDK.
+
+Trace context propagation is handled by the OTel SDK, which is configured by `datadog-opentelemetry` to support both `datadog` and `tracecontext` (W3C) formats.
+
+### Supported formats
+
+| Format | Configuration Value |
+|---|---|
+| [Datadog][1] | `datadog` |
+| [W3C Trace Context][2] | `tracecontext` |
+
+### Configuration
+
+You can control which propagation formats are used by setting the `DD_TRACE_PROPAGATION_STYLE` environment variable. You can provide a comma-separated list.
+
+For example:
+
+```bash
+# To support both W3C and Datadog
+export DD_TRACE_PROPAGATION_STYLE="tracecontext,datadog"
+```
+
+### Manual injections and extractions
+
+Because there is no automatic instrumentation in Rust, you must manually propagate context when making or receiving remote calls (like HTTP requests).
+
+You do this by using the global OTel T`extMapPropagator`. This requires a `Carrier` that can read and write HTTP headers. Most Rust web frameworks (like `axum`, `hyper`, and `reqwest`) use the `http::HeaderMap` type.
+
+You can use the following wrapper structs to make `http::HeaderMap` compatible with the OTel propagator API.
+
+```rust
+use opentelemetry::propagation::{Extractor, Injector};
+use http::HeaderMap;
+
+// Carrier for injecting context into a HeaderMap
+struct HeaderMapCarrier<'a>(&'a mut HeaderMap);
+
+impl<'a> Injector for HeaderMapCarrier<'a> {
+    fn set(&mut self, key: &str, value: String) {
+        if let Ok(header_name) = http::HeaderName::from_bytes(key.as_bytes()) {
+            if let Ok(header_value) = http::HeaderValue::from_str(&value) {
+                self.0.insert(header_name, header_value);
+            }
+        }
+    }
+}
+
+// Carrier for extracting context from a HeaderMap
+struct HeaderMapExtractor<'a>(&'a HeaderMap);
+
+impl<'a> Extractor for HeaderMapExtractor<'a> {
+    fn get(&self, key: &str) -> Option<&str> {
+        self.0.get(key).and_then(|v| v.to_str().ok())
+    }
+
+    fn keys(&self) -> Vec<&str> {
+        self.0.keys().map(|k| k.as_str()).collect()
+    }
+}
+```
+
+### Injecting context (client side)
+
+When making an HTTP request (for example, with `reqwest`), inject the current span context into the request headers.
+
+```rust
+use opentelemetry::{global, Context};
+use http::HeaderMap;
+// (Assumes HeaderMapCarrier from the example above is present)
+
+async fn make_http_request() {
+    let propagator = global::get_text_map_propagator(|propagator| propagator.clone());
+    let context = Context::current();
+    let client = reqwest::Client::new();
+
+    // Create a mutable HeaderMap
+    let mut headers = HeaderMap::new();
+    
+    // Inject the context into the headers using the carrier
+    propagator.inject_with_context(&context, &mut HeaderMapCarrier(&mut headers));
+
+    // 'headers' now contains 'traceparent', 'x-datadog-trace-id', etc.
+    let res = client.get("[http://example.com](http://example.com)")
+        .headers(headers)
+        .send()
+        .await;
+}
+```
+
+#### Extracting context (server side)
+
+When receiving an HTTP request (for example, with `axum`), extract the trace context from the headers to parent your new span.
+
+```rust
+use opentelemetry::{global, trace::Tracer, Context};
+use axum::{extract::Request, http::HeaderMap, routing::get, Router};
+// (Assumes HeaderMapExtractor from the example above is present)
+
+async fn axum_handler(headers: HeaderMap) {
+    let propagator = global::get_text_map_propagator(|propagator| propagator.clone());
+
+    // Extract the parent context from the incoming headers
+    let parent_context = propagator.extract(&HeaderMapExtractor(&headers));
+
+    let tracer = global::tracer("my-server-component");
+
+    // Start the server span as a child of the extracted context
+    tracer.in_span_with_context("http.server.request", &parent_context, |span| {
+        // ... your handler logic ...
+        // This span is now correctly linked to the client's trace.
+    });
+}
+```
+[1]: #datadog-format
+[2]: https://www.w3.org/TR/trace-context/
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Custom header formats
