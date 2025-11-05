@@ -57,12 +57,48 @@ LLMObs.enable(
 
 ## Datasets
 
-A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_. Each dataset is associated with a _project_.
+A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.  
+- The _input_ (required) represents all the information that the agent will have access to in the Task of the Experiment.  
+- The _expected output_ (also called Ground Truth, optional) represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you'd like to assess.  
+- _metadata_ (optional) contains any useful information to categorize the record and leverage for further analysis: topics, tags, descriptions, notes,...  
 You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
 
 ### Creating a dataset
 
 {{< tabs >}}
+
+{{% tab "CSV" %}}
+
+To create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
+
+```python
+# Create dataset from CSV
+dataset = LLMObs.create_dataset_from_csv(
+    csv_path="questions.csv",
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project",              # Optional: defaults to the project name from LLMObs.enable
+    description="Geography quiz dataset",         # Optional: Dataset description
+    input_data_columns=["question", "category"],  # Columns to use as input
+    expected_output_columns=["answer"],           # Optional: Columns to use as expected output
+    metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
+    csv_delimiter=","                             # Optional: Defaults to comma
+)
+
+# Example "questions.csv":
+# question,category,answer,difficulty
+# What is the capital of Japan?,geography,Tokyo,medium
+# What is the capital of Brazil?,geography,Brasília,medium
+
+```
+
+**Notes**:
+- CSV files must have a header row
+- Maximum field size is 10MB
+- All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
+- The dataset is automatically pushed to Datadog after creation
+
+{{% /tab %}}
+
 {{% tab "Manual" %}}
 
 To manually create a dataset, use `LLMObs.create_dataset()`:
@@ -92,65 +128,45 @@ dataset = LLMObs.create_dataset(
 print(f"View dataset: {dataset.url}")
 ```
 {{% /tab %}}
-
-{{% tab "CSV" %}}
-
-To create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
-
-```python
-# Create dataset from CSV
-dataset = LLMObs.create_dataset_from_csv(
-    csv_path="questions.csv",
-    dataset_name="geography-quiz",
-    input_data_columns=["question", "category"],  # Columns to use as input
-    expected_output_columns=["answer"],           # Columns to use as expected output
-    metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
-    csv_delimiter=",",                           # Optional: Defaults to comma
-    description="Geography quiz dataset",          # Optional: Dataset description
-    project_name="quizzes-project"          # Optional: defaults to the project name from LLMObs.enable
-)
-
-# Example CSV format:
-# question,category,answer,difficulty
-# What is the capital of Japan?,geography,Tokyo,medium
-# What is the capital of Brazil?,geography,Brasília,medium
-
-```
-
-**Notes**:
-- CSV files must have a header row
-- Maximum field size is 10MB
-- All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
-- The dataset is automatically pushed to Datadog after creation
-
-{{% /tab %}}
 {{< /tabs >}}
 
-### Managing dataset records
+### Retrieving a dataset
 
-The Dataset class provides methods to manage records: `append()`, `update()`, `delete()`. You need to `push()` changes to save the changes in Datadog.
+To retrieve a project's existing dataset from Datadog:
 
 ```python
-# Add a new record
-dataset.append({
-    "input_data": {"question": "What is the capital of Switzerland?"},
-    "expected_output": "Bern",
-    "metadata": {"difficulty": "easy"}
-})
+dataset = LLMObs.pull_dataset(
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project" # optional, defaults to the project name from LLMObs.enable
+)
 
-# Update an existing record
-dataset.update(0, {
-    "input_data": {"question": "What is the capital of China?"},
-    "expected_output": "Beijing",
-    "metadata": {"difficulty": "medium"}
-})
-
-# Delete a record
-dataset.delete(1)  # Deletes the second record
-
-# Save changes to Datadog
-dataset.push()
+# Get dataset length
+print(len(dataset))
 ```
+
+#### Exporting a dataset to pandas
+
+The Dataset class also provides the method `as_dataframe()`, which allows you to transform a dataset as a [pandas DataFrame][11].
+
+<div class="alert alert-info"><a href="https://pandas.pydata.org/docs/index.html">Pandas</a> is required for this operation. To install pandas, <code>pip install pandas</code>.</div>
+
+```python
+# Convert dataset to pandas DataFrame
+df = dataset.as_dataframe()
+print(df.head())
+
+# DataFrame output with MultiIndex columns:
+#                                   input_data     expected_output  metadata
+#    question                       category       answer           difficulty
+# 0  What is the capital of Japan?  geography      Tokyo            medium
+# 1  What is the capital of Brazil? geography      Brasília         medium
+```
+
+The DataFrame has a MultiIndex structure with the following columns:
+- `input_data`: Contains all input fields from `input_data_columns`
+- `expected_output`: Contains all output fields from `expected_output_columns`
+- `metadata`: Contains any additional fields from `metadata_columns`
+
 
 ### Dataset versioning
 
@@ -179,7 +195,7 @@ Dataset versions are **NOT** created for changes to `metadata` fields, or when u
 
 After you publish `12`, `11` becomes a previous version with a 90-day window. After 25 days, you run an experiment with version `11`, which causes the 90-day window to **restart**. After another 90 days, during which you have not used version `11`, version `11` may be deleted.
 
-### Accessing dataset records
+### Accessing and managing dataset records
 
 You can access dataset records using standard Python indexing:
 
@@ -194,58 +210,47 @@ records = dataset[1:3]
 for record in dataset:
     print(record["input_data"])
 ```
-
-### Exporting a dataset to pandas
-
-The Dataset class also provides the method `as_dataframe()`, which allows you to export a dataset as a [pandas DataFrame][11].
-
-<div class="alert alert-info"><a href="https://pandas.pydata.org/docs/index.html">Pandas</a> is required for this operation. To install pandas, <code>pip install pandas</code>.</div>
+  
+The Dataset class provides methods to manage records: `append()`, `update()`, `delete()`. You need to `push()` changes to save the changes in Datadog.
 
 ```python
-# Convert dataset to pandas DataFrame
-df = dataset.as_dataframe()
-print(df.head())
+# Add a new record
+dataset.append({
+    "input_data": {"question": "What is the capital of Switzerland?"},
+    "expected_output": "Bern",
+    "metadata": {"difficulty": "easy"}
+})
 
-# DataFrame output with MultiIndex columns:
-#                                    input_data          expected_output  metadata
-#                                    question category         answer    difficulty
-# 0  What is the capital of Japan?  geography         Tokyo      medium
-# 1  What is the capital of Brazil? geography      Brasília      medium
+# Update an existing record
+dataset.update(0, {
+    "input_data": {"question": "What is the capital of China?"},
+    "expected_output": "Beijing",
+    "metadata": {"difficulty": "medium"}
+})
+
+# Delete a record
+dataset.delete(1)  # Deletes the second record
+
+# Save changes to Datadog
+dataset.push()
 ```
 
-The DataFrame has a MultiIndex structure with the following columns:
-- `input_data`: Contains all input fields from `input_data_columns`
-- `expected_output`: Contains all output fields from `expected_output_columns`
-- `metadata`: Contains any additional fields from `metadata_columns`
-
-### Retrieving a dataset
-
-To retrieve a project's existing dataset from Datadog:
-
-```python
-dataset = LLMObs.pull_dataset(
-    dataset_name="capitals-of-the-world",
-    project_name="capitals-project" # optional, defaults to the project name from LLMObs.enable
-)
-
-# Get dataset length
-print(len(dataset))
-```
 
 ## Experiments
-An _experiment_ is a collection of traces used to test the behavior of an LLM application or agent against a dataset. The dataset provides the input data, and the outputs are the final generations produced by the application under test.
+Experiments let you systematically test your LLM application by running your agent across a set of scenarios from your dataset and measure performance against the expected outputs using evaluators. You can then compare how different app configurations perform side by side.
 
 ### Task
 The task defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
 
 ### Evaluators
-Evaluators are functions that measure how well the model or agent performs by comparing the output to either the expected_output or the original input. Datadog supports the following evaluator types:
+Evaluators are functions executed on each record that measure how well the model or agent performs. It allows you to compare the output to either the expected_output or the original input.  
+Datadog supports the following evaluator types:  
 - Boolean: returns true or false
 - score: returns a numeric value (float)
 - categorical: returns a labeled category (string)
 
 ### Summary Evaluators
-Summary Evaluators are optionally defined functions that measure how well the model or agent performs, by providing an aggregated score against the entire dataset, outputs, and evaluation results. The supported evaluator types are the same as above.
+Summary Evaluators are optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). It allows you to compute more advanced metrics like precision, recall, accuracy across your dataset. The supported evaluator types are the same as above.
 
 ### Creating an experiment
 
@@ -394,45 +399,6 @@ dataset = LLMObs.create_dataset(
     ],
 )
 
-# View dataset in Datadog UI
-print(f"View dataset: {dataset.url}")
-
-# Add a new record
-dataset.append(
-    {
-        "input_data": {"question": "What is the capital of Switzerland?"},
-        "expected_output": "Bern",
-        "metadata": {"difficulty": "easy"},
-    }
-)
-
-# Update an existing record
-dataset.update(
-    0,
-    {
-        "input_data": {"question": "What is the capital of China?"},
-        "expected_output": "Beijing",
-        "metadata": {"difficulty": "medium"},
-    },
-)
-
-# Delete a record
-dataset.delete(1)  # Deletes the second record
-
-# Save changes to Datadog
-dataset.push()
-
-# Get a single record
-record = dataset[0]
-
-# Get multiple records
-records = dataset[1:3]
-
-# Iterate through records
-for record in dataset:
-    print(record["input_data"])
-
-
 def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
     question = input_data["question"]
     # Your LLM or processing logic here
@@ -477,19 +443,6 @@ experiment = LLMObs.experiment(
     description="Testing capital cities knowledge",
     config={"model_name": "gpt-4", "version": "1.0"},
 )
-
-# Run the experiment
-results = experiment.run()  # Run on all dataset records
-
-# Process results
-for result in results.get("rows", []):
-    print(result)
-    print(f"Record {result['idx']}")
-    print(f"Input: {result['input']}")
-    print(f"Output: {result['output']}")
-    # print(f"Score: {result['evaluations']['evaluator_name']['value']}")
-    if result["error"]["message"]:
-        print(f"Error: {result['error']['message']}")
 
 results = experiment.run(jobs=4, raise_errors=True)
 
