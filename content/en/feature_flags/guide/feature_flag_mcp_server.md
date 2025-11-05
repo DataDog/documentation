@@ -1,6 +1,13 @@
 ---
 title: Feature Flag MCP Server
 description: Learn how to use the feature flag MCP server
+further_reading:
+- link: "getting_started/feature_flags"
+  tag: "Documentation"
+  text: "Getting Started with Feature Flags"
+- link: "bits_ai/mcp_server"
+  tag: "Documentation"
+  text: "Datadog MCP Server"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
@@ -9,105 +16,100 @@ Feature Flags are in Preview. Complete the form to request access.
 
 ## Overview
 
-This MCP (Model Context Protocol) server provides AI agents with access to Datadog Feature Flag management capabilities, including flag creation, configuration, and React/JavaScript integration guidance.
+The Datadog MCP Server uses the Model Context Protocol (MCP) to provide AI agents with access to [Feature Flags][1] management capabilities, including flag creation, configuration, and React/JavaScript integration guidance.
 
-The following will give your AI agent access to our MCP. You will have to restart your agent after doing this setup.
+## Setup
+
+The following configurations give your AI agent access to the Feature Flags toolset in the Datadog MCP Server. You must restart your agent after performing this setup.
+
+For all clients, install the MCP Server binary:
 
 ```bash
 curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
 ```
 
-### Claude
+Then follow the instructions below to add the MCP Server to your specific client.
 
-```
+### Claude Code
+
+```bash
 claude mcp add datadog -- ~/.local/bin/datadog_mcp_cli --endpoint-path /api/unstable/mcp-server/mcp?toolsets=feature-flags
 ```
 
 ### Cursor
-In `~/.cursor/mcp.json`, add this to the ` "mcpServers"` dict (and save)
+Add this to `~/.cursor/mcp.json` (remember to save the file):
 
-```javascript
+```json
+{
+  "mcpServers": {
     "datadog-ff": {
       "type": "stdio",
       "command": "~/.local/bin/datadog_mcp_cli --endpoint-path /api/unstable/mcp-server/mcp?toolsets=feature-flags",
       "args": [],
       "env": {}
-    },
+    }
+  }
+}
 ```
 
-## Use Cases in React Apps
+## Use cases
 
-Note that we currently only support React apps.
+The MCP Server includes tools to help you manage feature flags in your codebase. The following use cases provide sample prompts for using the tools.
 
-### Creating Feature Flags
+<div class="alert alert-info">
+  The MCP Server only supports React applications.
+</div>
 
-The server has tooling to create feature flags. You can use the `create-feature-flag` tool to create a new feature flag. You do not need to specify the tool name in the prompt, but if you do you will get more consistent results.
-Your AI will know to read our documentation to resource and how to implement the flag in your codebase.
+### Create feature flags
 
-It's also best if you do not yet have Datadog feature flagging implemented to tell it in the prompt that you want to implement Datadog feature flagging.
+Use the `create-feature-flag` tool to create feature flags. You do not need to specify the tool name in the prompt, but it can provide more consistent results.
+The MCP Server has access to Datadog's documentation and uses it to implement the flag in your codebase.
 
-Examples:
-```text
-Use the `create-feature-flag` tool to create a flag to control the title on the main page.
-```
+If you do not yet have feature flags implemented, mention in the prompt that you want to implement Datadog feature flags.
 
-```text
-I want to show a confirmation modal when <SOME_EVENT> happens.  Use a feature flag to control whether the confirmation modal is shown.
-```
+Example prompts:
+- Use the `create-feature-flag` tool to create a flag to control the title on the main page.
+- I want to show a confirmation modal when `<SOME_EVENT>` happens. Use a Datadog feature flag to control whether the confirmation modal is shown.
 
-### Checking Feature Flag Implementation
+### Check feature flag implementation
 
-The server has tooling to check if a feature flag is implemented correctly. You can use the `check-flag-implementation` tool to check if a feature flag is implemented correctly.
+Use the `check-flag-implementation` tool to check if a feature flag is implemented correctly.
 
-It will check the flag is being referenced as the correct value type, passing the correct subject attributes, and providing the correct default value agreeing with default in production environments.
+The tool checks that the flag is being referenced as the correct value type, is passing the correct subject attributes, and is providing the correct default value that agrees with the default in production environments.
 
-Examples:
-```text
-Check if the `show-confirmation-modal` flag is implemented correctly.
-```
+Example prompts:
+- Check if the `show-confirmation-modal` flag is implemented correctly.
+- Check if all feature flags in `/some/directory` are implemented correctly.
 
-```text
-Check if all feature flags in /some/directory are implemented correctly.
-```
+**Note**: This may not find all issues. Checking flags individually is more reliable.
 
-NOTE: This may not find all issues. Checking flags individually is more reliable.
+This tool can also be used to add feature flags created in the UI to your codebase. For example:
 
-This tool can also be used to add feature flags created in the UI to your codebase.
+- Use the `show-confirmation-modal` flag to control whether the confirmation modal is shown when `<SOME_EVENT>` happens.
 
-```text
-Use the `show-confirmation-modal` flag to control whether the confirmation modal is shown when <SOME_EVENT> happens.
-```
+### List feature flags
 
-### Listing Feature Flags
+Use the `list-feature-flags` tool to list all feature flags. For example:
 
-The server has tooling to list feature flags. You can use the `list-feature-flags` tool to list all feature flags.
+- List all feature flags.
 
-Examples:
+### List environments
 
-```text
-List all feature flags.
-```
+Use the `list-environments` tool to list all environments. For example:
 
-### Listing Environments
+- List my flagging environments.
 
-The server has tooling to list environments. You can use the `list-environments` tool to list all environments.
+### Update feature flag environments
+Use the `update-feature-flag-environment` tool to update a feature flag environment. This tool can control the default variants, and enable or disable the flag.
+It cannot modify flags in production environments.
 
-Examples:
+Example prompts:
 
-```text
-List my flagging environments.
-```
+- I want `show-confirmation-modal` to serve true in development.
+- Disable `show-confirmation-modal` in staging.
 
-### Updating Feature Flag Environments
-The server has tooling to update feature flag environments. You can use the `update-feature-flag-environment` tool to update a feature flag environment. It can control the default variants, and enable/disable the flag.
-It currently cannot modify flags in production environments.
+## Further reading
 
-Examples:
+{{< partial name="whats-next/whats-next.html" >}}
 
-```text
-I want `show-confirmation-modal` to serve true in development.
-```
-
-Disable `show-confirmation-modal` in staging.
-```
-### Allocations
+[1]: /feature_flags/
