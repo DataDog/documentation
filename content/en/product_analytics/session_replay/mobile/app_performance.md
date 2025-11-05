@@ -9,7 +9,7 @@ further_reading:
     - link: '/product_analytics/session_replay/mobile/privacy_options'
       tag: Documentation
       text: Mobile Session Replay Privacy Options
-    - link: '/product_analytics/session_replay/mobile/setup_and_configuration'
+    - link: '/product_analytics/session_replay/setup_and_configuration'
       tag: Documentation
       text: Setup and Configure Mobile Session Replay
     - link: '/product_analytics/session_replay/mobile/troubleshooting'
