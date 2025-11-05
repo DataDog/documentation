@@ -55,6 +55,7 @@ The Datadog Agent is software that runs on your hosts. It collects events and me
 Datadog recommends you update Datadog Agent with every minor and patch release, or, at a minimum, monthly. </p>
 <p>
 Upgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes.</p>
+<p> **It is recommended to fully install the Agent.** However, a standalone DogStatsD package is available for Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE, and Ubuntu. This package is used in containerized environments where DogStatsD runs as a sidecar or environments running a DogStatsD server without full Agent functionality.</p>
 </div>
 
 ## Managing the Agent
