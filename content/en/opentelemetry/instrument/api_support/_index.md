@@ -33,13 +33,6 @@ By [instrumenting your code with OpenTelemetry APIs][2], your code:
 - Remains free of vendor-specific API calls.
 - Does not depend on Datadog SDKs at compile time (only runtime).
 
-## Setup
-
-The setup for OpenTelemetry metrics and logs support depends on your language, specifically whether you need to install a separate OpenTelemetry Exporter.
-
-- **Node.js** and **.NET** (Direct implementation): The Datadog SDKs handles OTLP export automatically. You do not need to install a separate OpenTelemetry Exporter.
-- **Python** (Exporter-based): The Datadog SDKs require you to also install and configure the standard OpenTelemetry OTLP Exporter package to send data.
-
 To learn more, follow the link for your language:
 
 {{< partial name="apm/otel-instrumentation.html" >}}
