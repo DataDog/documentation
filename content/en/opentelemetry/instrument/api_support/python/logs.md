@@ -98,7 +98,7 @@ The Datadog SDK will programmatically configure the OTel SDK for you.
 
 ### Existing Datadog log injection
 
-If you are currently using `DD_LOGS_INJECTION=true` and an Agent to tail log files:
+If you are using `DD_LOGS_INJECTION=true` and an Agent to tail log files:
 
 1.  Set `DD_LOGS_OTEL_ENABLED=true`.
 2.  The Datadog SDK will automatically disable the old injection style (`DD_LOGS_INJECTION`) to avoid duplication.
@@ -106,12 +106,14 @@ If you are currently using `DD_LOGS_INJECTION=true` and an Agent to tail log fil
 
 ## Troubleshooting
 
-- **Logs aren't being exported.**
-    - Ensure `DD_LOGS_OTEL_ENABLED` is set to `true`.
-    - Verify that `opentelemetry-sdk` and `opentelemetry-exporter-otlp` are installed in your environment. The Datadog SDK treats these as optional runtime dependencies; if they are not found, log export cannot be configured.
+**Logs aren't being exported.**
+  - Ensure `DD_LOGS_OTEL_ENABLED` is set to `true`.
+  - Verify that `opentelemetry-sdk` and `opentelemetry-exporter-otlp` are installed in your environment. The Datadog SDK treats these  as optional runtime dependencies; if they are not found, log export cannot be configured.
+ -  Verify that logs collection is enabled on the Datadog Agent and that the OTLP receiver is configured. See [Enabling OTLP Ingestion on the Datadog Agent][2] for details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/config/environment_variable_support
+[2]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent

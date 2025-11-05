@@ -76,9 +76,11 @@ If you are currently using Datadog's traditional log injection (where `DD_LOGS_I
 
 **Logs aren't being exported.**
     - Ensure `DD_LOGS_OTEL_ENABLED` is set to `true`.
+    - Verify that logs collection is enabled on the Datadog Agent and that the OTLP receiver is configured. See [Enabling OTLP Ingestion on the Datadog Agent][2] for details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/config/environment_variable_support
+[2]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent

@@ -128,13 +128,16 @@ If you are using Datadog's traditional log injection (`DD_LOGS_INJECTION=true`):
 3.  Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required).
 
 ## Troubleshooting
-Logs aren't being exported.
+
+**Logs aren't being exported.**
 - Ensure `DD_LOGS_OTEL_ENABLED` is set to true.
 - Ensure `dd-trace` is initialized at the top of your application, before any other modules are imported.
 - Ensure the `@opentelemetry/api-logs` package is installed.
+- Verify that logs collection is enabled on the Datadog Agent and that the OTLP receiver is configured. See [Enabling OTLP Ingestion on the Datadog Agent][2] for details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/config/environment_variable_support
+[2]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
