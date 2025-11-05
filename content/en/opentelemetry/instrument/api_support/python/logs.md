@@ -15,11 +15,84 @@ further_reading:
 
 ## Prerequisites
 
+- **Datadog SDK**: `dd-trace-py` version [x.y.z] or later.
+- **OpenTelemetry SDK**: The standard `opentelemetry-sdk` package for Python.
+- **OTLP Exporter**: The standard `opentelemetry-exporter-otlp` package for Python.
+
 ## Setup
+
+Follow these steps to enable OTel Logs API support in your Python application.
+
+1.  Install the Datadog SDK:
+    ```sh
+    pip install ddtrace
+    ```
+2.  Install the OTel SDK and Exporter:
+    ```sh
+    pip install opentelemetry-sdk opentelemetry-exporter-otlp
+    ```
+3.  Enable OTel logs export by setting the following environment variable:
+    ```sh
+    export DD_LOGS_OTEL_ENABLED=true
+    ```
+4.  Run your application using `ddtrace-run`:
+    ```sh
+    ddtrace-run python my_app.py
+    ```
+    When enabled, `ddtrace` automatically detects the OTel packages and configures the `OTLPLogExporter` to send logs to the Datadog Agent.
 
 ## Examples
 
+The Datadog SDK supports the OpenTelemetry Logs API for Python's built-in `logging` module. You do not need to change your existing logging code.
+
+### Standard logging
+
+This example shows a standard log message. With `DD_LOGS_OTEL_ENABLED=true`, this log is automatically captured, formatted as OTLP, and exported.
+
+```python
+import logging
+import time
+
+# Get a logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Add a handler to see logs in the console (optional)
+handler = logging.StreamHandler()
+logger.addHandler(handler)
+
+# This log will be exported via OTLP
+logger.info("This is a standard log message.")
+```
+
+### Trace and log correlation
+
+This example shows how logs emitted within an active Datadog span are automatically correlated.
+
+```python
+```
+
 ## Supported configuration
+
+To enable OTel Logs support, you must set `DD_LOGS_OTEL_ENABLED=true`.
+
+While Datadog supports many OpenTelemetry variables, these are the most common ones needed for a basic setup.
+
+`DD_LOGS_OTEL_ENABLED`
+: **Description**: Enables the Datadog SDK to intercept standard logs and export them in OTLP format.
+: **Default**: `false`
+
+`OTEL_EXPORTER_OTLP_LOGS_PROTOCOL`
+: **Description**: Specifies the OTLP transport protocol. Takes precedence over `OTEL_EXPORTER_OTLP_PROTOCOL`.
+: **Accepted values**: `grpc`, `http/protobuf`, `http/json`
+: **Default**: (SDK-dependent)
+
+`OTEL_EXPORTER_OTLP_LOGS_ENDPOINT`
+: **Description**: Specifies the URL for sending OTLP logs. Takes precedence over `OTEL_EXPORTER_OTLP_ENDPOINT`.
+: **Default (gRPC)**: `http://localhost:4317`
+: **Default (HTTP)**: `http://localhost:4318/v1/logs`
+
+For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][1].
 
 ### Tag and resource attribute precedence
 
@@ -27,6 +100,32 @@ further_reading:
 
 ## Migrate from other setups
 
+### Existing OTel setup (manual configuration)
+
+If you are already using the OTel SDK and manually configuring an `OTLPLogExporter` in your code:
+
+1.  Remove your manual setup code (for example, `LoggerProvider`, `BatchLogRecordProcessor`, and `OTLPLogExporter` instantiation).
+2.  Enable `ddtrace-run` auto-instrumentation for your application.
+3.  Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+
+The Datadog SDK will programmatically configure the OTel SDK for you.
+
+### Existing Datadog log injection
+
+If you are currently using `DD_LOGS_INJECTION=true` and an Agent to tail log files:
+
+1.  Set `DD_LOGS_OTEL_ENABLED=true`.
+2.  The Datadog SDK will automatically disable the old injection style (`DD_LOGS_INJECTION`) to avoid duplication.
+3.  Ensure your Datadog Agent is version 7.48.0 or greater and is configured to receive OTLP logs.
+
+## Troubleshooting
+
+- **Logs aren't being exported.**
+    - Ensure `DD_LOGS_OTEL_ENABLED` is set to `true`.
+    - Verify that `opentelemetry-sdk` and `opentelemetry-exporter-otlp` are installed in your environment. The Datadog SDK treats these as optional runtime dependencies; if they are not found, log export cannot be configured.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /opentelemetry/config/environment_variable_support

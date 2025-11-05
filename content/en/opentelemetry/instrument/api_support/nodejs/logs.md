@@ -11,7 +11,13 @@ further_reading:
 
 ## Overview
 
-{{% otel-overview-native lang="Node.js" signal="Logs" sdk_name="dd-trace-js" %}}
+You can export OTLP-formatted logs from your Node.js application using the Datadog SDK (`dd-trace-js`).
+
+This feature works by automatically intercepting records from popular Node.js logging libraries (such as `Winston` or `Pino`) and exporting them as structured OTLP data. This allows you to get OTLP logs without changing your existing logging code.
+
+<div class="alert alert-info">
+This implementation does not use or support the OpenTelemetry Logs API. It is not compatible with the <code>@opentelemetry/sdk-logs</code> or <code>@opentelemetry/exporter-otlp-logs</code> packages. You must remove them from your application to use this feature.
+</div>
 
 ## Prerequisites
 
