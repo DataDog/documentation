@@ -1,7 +1,10 @@
 ---
 title: Custom Instrumentation for Rust
-description: 'Manually instrument your Rust applications to send custom traces to Datadog.'
+description: 'Instrument your Rust application with the OpenTelemetry API to send traces to Datadog.'
 further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-rust-otel/'
+      tag: 'Blog'
+      text: 'How to Monitor Your Rust Applications with OpenTelemetry'
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect your Logs and Traces together'
@@ -10,12 +13,224 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-Datadog supports custom instrumentation for Rust applications when you use the [OpenTelemetry SDK][1].
-For more information on setting this up, see [How to Monitor Your Rust Applications with OpenTelemetry][2] on the blog.
+{{% otel-custom-instrumentation-lang %}}
+
+Datadog provides support for custom instrumentation in Rust applications through the `datadog-opentelemetry` crate. This library is built on the OpenTelemetry (OTel) API and SDK, providing a tracer that includes Datadog-specific features and an exporter.
+
+Because this library is built on OpenTelemetry, you will use the standard OpenTelemetry API to create traces and spans.
+
+## Setup
+
+To configure your Rust application to send OpenTelemetry traces to Datadog, you need to add the correct dependencies and initialize the tracer provider with the Datadog exporter.
+
+### 1. Add dependencies
+
+Add `datadog-opentelemetry` and the core `opentelemetry` crate to your `Cargo.toml`.
+
+```toml
+[dependencies]
+# The main Datadog OTel library
+datadog-opentelemetry = { version = "0.1" }
+
+# The OpenTelemetry API for creating spans
+opentelemetry = { version = "0.30" }
+```
+
+### 2. Initialize the Tracer
+
+In your application's main function, initialize the Datadog tracer provider. The `tracing().init()` function automatically configures the tracer from environment variables.
+
+<div class="alert alert-info">You must shut down the provider before your application exits to ensure all pending traces are flushed.
+</div>
+
+
+```rust
+
+use datadog_opentelemetry;
+use opentelemetry::{global, trace::Tracer};
+use std::time::Duration;
+
+fn main() {
+    // This picks up env var configuration (like DD_SERVICE)
+    // and initializes the global tracer provider
+    let tracer_provider = datadog_opentelemetry::tracing()
+        .init();
+
+    // --- Your application code starts here ---
+    // You can now use the standard OpenTelemetry API
+    
+    let tracer = global::tracer("my-component");
+    
+    tracer.in_span("my-operation", |cx| {
+        // ... do work ...
+    });
+
+    println!("Doing work...");
+
+    // --- Your application code ends here ---
+
+    // Shut down the tracer provider to flush remaining spans
+    tracer_provider.shutdown_with_timeout(Duration::from_secs(5)).expect("tracer shutdown error");
+}
+```
+
+### 3. Ensure Agent is running
+
+The Datadog exporter sends traces to the Datadog Agent, which must be running and accessible.
+
+## Configuration
+
+The Datadog Rust SDK is configured using environment variables. For a complete list of options, see the [Configuration documentation][1].
+
+## Examples
+
+After initialization, you use the standard OpenTelemetry API to instrument your code.
+
+### Get a Tracer
+
+Get an instance of a `Tracer` from the global provider.
+
+```rust
+use opentelemetry::global;
+
+let tracer = global::tracer("my-component");
+```
+
+### Create a span
+
+Use `tracer.in_span` (from `opentelemetry::trace::Tracer`) to create a new span that is active for the duration of a closure.
+
+```rust
+use opentelemetry::{global, trace::Tracer};
+
+fn do_work() {
+    let tracer = global::tracer("my-component");
+    
+    tracer.in_span("operation_name", |span| {
+        // The span is active within this closure
+        println!("Doing work...");
+        
+        // Spans are automatically ended when the closure finishes
+    });
+}
+```
+
+### Create a child span
+
+To create a child span, nest `in_span` calls. The inner span automatically becomes a child of the span active in the current context.
+
+```rust
+use opentelemetry::{global, trace::Tracer};
+
+fn parent_operation() {
+    let tracer = global::tracer("my-component");
+
+    tracer.in_span("parent_operation", |parent_span| {
+        // parent_span is active
+        
+        tracer.in_span("child_operation", |child_span| {
+            // child_span is active and is a child of parent_span
+            println!("Doing child work...");
+        });
+
+        println!("Doing parent work...");
+    });
+}
+```
+
+### Access the active span
+
+To get the currently active span from the context, use `Span::current()`.
+
+```rust
+use opentelemetry::trace::{Span, Tracer};
+
+fn do_work_with_active_span() {
+    let tracer = opentelemetry::global::tracer("my-component");
+
+    tracer.in_span("my-operation", |span| {
+        // 'span' is the active span here.
+        // You can also get it from the context at any point
+        // inside this closure:
+        let current_span = opentelemetry::trace::Span::current();
+
+        // You can now add attributes or events to it
+        current_span.set_attribute(
+            opentelemetry::KeyValue::new("accessed.from.context", true)
+        );
+    });
+}
+```
+
+### Add span tags
+
+Add attributes to a span using the `set_attribute` method. In OpenTelemetry, tags are called attributes.
+
+```rust
+use opentelemetry::trace::{Span, Tracer};
+use opentelemetry::KeyValue;
+
+fn add_tags_to_span() {
+    let tracer = opentelemetry::global::tracer("my-component");
+
+    tracer.in_span("operation.with.tags", |span| {
+        // Set attributes (tags) on the active span
+        span.set_attribute(KeyValue::new("customer.id", "12345"));
+        span.set_attribute(KeyValue::new("http.method", "GET"));
+        span.set_attribute(KeyValue::new("is.test", true));
+        span.set_attribute(KeyValue::new("team.name", "backend"));
+
+        // You can also set multiple attributes at once
+        span.set_attributes(vec![
+            KeyValue::new("resource.name", "/users/list"),
+            KeyValue::new("db.system", "postgres"),
+        ]);
+    });
+}
+```
+
+### Add span events
+
+Add time-stamped log messages to a span using the `add_event` method.
+
+```rust
+use opentelemetry::trace::{Span, Tracer};
+use opentelemetry::KeyValue;
+
+fn add_events_to_span() {
+    let tracer = opentelemetry::global::tracer("my-component");
+
+    tracer.in_span("operation.with.events", |span| {
+        // Add a simple event
+        span.add_event("Data received", vec![]);
+
+        // ... some work happens ...
+
+        // Add an event with its own attributes
+        span.add_event(
+            "Processing data",
+            vec![
+                KeyValue::new("data.size_bytes", 1024),
+                KeyValue::new("data.format", "json"),
+            ],
+        );
+
+        // ... more work ...
+
+        span.add_event("Processing complete", vec![]);
+    });
+}
+```
+
+## Context propagation
+
+Because Rust does not have automatic instrumentation, you must manually propagate the trace context when making or receiving remote calls (like HTTP requests) to connect traces across services.
+
+For more information, see [Trace Context Propagation][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/instrumentation/
-[2]: https://www.datadoghq.com/blog/monitor-rust-otel/
+[1]: /tracing/trace_collection/library_config/rust
+[2]: //tracing/trace_collection/trace_context_propagation
