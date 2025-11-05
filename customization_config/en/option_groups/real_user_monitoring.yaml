@@ -18,6 +18,7 @@ rum_session_replay_sdk_options:
   - id: kotlin_multiplatform
   - id: react_native
   - id: flutter
+  - id: browser
 
 rum_mobile_proxy_protocol_options:
   - id: http_https
