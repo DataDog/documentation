@@ -129,8 +129,8 @@ datadog:
 
 #### Detecting file usage patterns
 
-Datadog detects file usage in additional products such as Error Tracking and associate
-files with the runtime service. For example, if a service called `foo` has
+Datadog detects file usage in additional products such as Error Tracking and
+files associated with the runtime service. For example, if a service called `foo` has
 a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
 it associates files `/modules/foo/bar.py` to service `foo`.
 
