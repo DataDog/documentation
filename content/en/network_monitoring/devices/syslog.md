@@ -13,12 +13,12 @@ further_reading:
 
 Network Device Monitoring (NDM) uses Syslog to provide visibility into the health and performance of your network infrastructure. By integrating your network devices with Datadog through Syslog, you can collect and analyze log data, monitor device behavior, troubleshoot issues, and maintain network stability.
 
-{{< img src="network_device_monitoring/syslog/ndm_syslog.png" alt="Network Device Monitoring side panel, highlighting the Syslog tab." style="width:100%;" >}}
+{{< img src="network_device_monitoring/syslog/ndm_syslog.png" alt="Network Device Monitoring side panel, highlighting the Syslogs tab." style="width:100%;" >}}
 
 ## Prerequisites
 
 * Datadog Agent version 7.57 or later installed and running on a host that can receive Syslog messages from your network devices.
-* Network devices configured to send [Syslog messages][1] either directly to the Datadog Agent or through a proxy that forwards messages to the Datadog Agent.
+* Network devices configured to send [Syslog messages][1] either directly to the Datadog Agent, or through a proxy that forwards messages to the Datadog Agent.
 
 ## Configuration
 
@@ -36,21 +36,21 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 2. Create a Syslog listener configuration:
 
    - In `/etc/datadog-agent/conf.d/`, create a directory called `syslog.d/`.
-   - Inside `syslog.d/`, create a file named `conf.yaml` with the following:
+   - In `syslog.d/`, create a file named `conf.yaml` with the following:
 
-   ```yaml
-   logs:
-     - type: syslog
-       port: 514
-       protocol: udp
-       source: syslog
-       service: <service> # optional tag
-   ```
+      ```yaml
+      logs:
+        - type: syslog
+          port: 514
+          protocol: udp
+          source: syslog
+          service: <service> # optional tag
+      ```
 
-   * **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
-   * **`protocol`**: Set to `udp` or `tcp` based on your device configuration.
-   * **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
-   * **`service`**: Optional service name for unified service tagging.
+      - **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
+      - **`protocol`**: Set to `udp` or `tcp` based on your device configuration.
+      - **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
+      - **`service`**: Optional service name for unified service tagging.
 
 3. [Restart the Datadog Agent][101] to apply the changes.
 
@@ -74,7 +74,7 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 2. Create a Syslog listener configuration:
 
    - In `C:\ProgramData\Datadog\conf.d\`, create a directory called `syslog.d/`.
-   - Inside `syslog.d/`, create a file named `conf.yaml` with the following:
+   - In `syslog.d/`, create a file named `conf.yaml` with the following:
 
    ```yaml
    logs:
@@ -108,7 +108,7 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 2. Create a Syslog listener configuration:
 
    - Mount a volume to `/etc/datadog-agent/conf.d/` and create a directory called `syslog.d/`.
-   - Inside `syslog.d/`, create a file named `conf.yaml` with the following:
+   - In `syslog.d/`, create a file named `conf.yaml` with the following:
 
    ```yaml
    logs:
@@ -133,7 +133,7 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 
 ### Log parsing
 
-The above steps send your Syslog data to Datadog. To ensure NDM correctly associates these logs with your monitored network devices, set up a custom log parsing pipeline that populates the `syslog_ip` tag with each device's source IP address.
+After you complete the above steps, Syslog can start sending log data to Datadog. To ensure NDM correctly associates these logs with your monitored network devices, set up a custom log parsing pipeline that populates the `syslog_ip` tag with each device's source IP address.
 
 **Note**: NDM queries for logs where `source:syslog` **AND** the `syslog_ip` tag matches one of the IPs of the device.
 
@@ -168,7 +168,7 @@ To create the `syslog_ip` tag:
       * **Target tag:** `syslog_ip`
       * **Preserve source attribute:** Uncheck this option to remove the temporary attribute
 
-For detailed instructions, see the [Datadog Log Pipelines documentation][2].
+For more information, see the [Datadog Log Pipelines documentation][2].
 
 ## Verify Syslog messages
 
