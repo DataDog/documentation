@@ -1,6 +1,9 @@
 ---
 title: Onboard with Internal Developer Portal
 further_reading:
+  - link: 'https://app.datadoghq.com/idp/get-started'
+    tag: 'App'
+    text: 'Exploring IDP in Datadog'
   - link: '/getting_started/internal_developer_portal/'
     tag: 'Documentation'
     text: 'Getting started with Internal Developer Portal'
@@ -82,7 +85,7 @@ Recommendations:
 [2]: /internal_developer_portal/software_catalog/entity_model/entity_types/
 [3]: /internal_developer_portal/scorecards/
 [4]: /internal_developer_portal/self_service_actions/
-[5]: /account_management/teams/
+[5]: /internal_developer_portal/software_catalog/set_up/ownership
 [6]: /internal_developer_portal/software_catalog/entity_model/
 [7]: /internal_developer_portal/software_catalog/
 [8]: /api/latest/software-catalog/
