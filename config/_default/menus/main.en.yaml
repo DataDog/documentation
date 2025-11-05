@@ -3466,6 +3466,16 @@ menu:
       parent: serverless
       identifier: serverless_container_apps
       weight: 5
+    - name: In-Container
+      url: serverless/azure_container_apps/in_container
+      parent: serverless_container_apps
+      weight: 501
+      identifier: serverless_container_apps_in_container
+    - name: Sidecar
+      url: serverless/azure_container_apps/sidecar
+      parent: serverless_container_apps
+      weight: 502
+      identifier: serverless_container_apps_sidecar
     - name: Azure Functions
       url: serverless/azure_functions
       parent: serverless
@@ -3577,21 +3587,26 @@ menu:
       parent: ndm_setup
       identifier: ndm_snmp_metrics
       weight: 30002
-    - name: Ping
-      url: network_monitoring/devices/ping
-      parent: ndm_setup
-      identifier: ndm_snmp_ping
-      weight: 30003
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
       parent: ndm_setup
       identifier: ndm_snmptraps
+      weight: 30003
+    - name: Ping
+      url: network_monitoring/devices/ping
+      parent: ndm_setup
+      identifier: ndm_snmp_ping
       weight: 30004
+    - name: Syslog
+      url: network_monitoring/devices/syslog
+      parent: ndm_setup
+      identifier: ndm_syslog
+      weight: 30005
     - name: VPN Monitoring
       url: network_monitoring/devices/vpn_monitoring
       parent: ndm_setup
       identifier: ndm_vpn_monitoring
-      weight: 30005
+      weight: 30006
     - name: Integrations
       url: network_monitoring/devices/integrations
       parent: ndm
@@ -5764,51 +5779,56 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
       weight: 421
+    - name: Search Syntax
+      url: observability_pipelines/search_syntax/
+      parent: observability_pipelines
+      identifier: observability_pipelines_search_syntax
+      weight: 5
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
-      weight: 5
+      weight: 6
     - name: Handling Load and Backpressure
       url: observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_handling_load_and_backpressure
-      weight: 501
+      weight: 601
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 502
+      weight: 602
     - name: Monitoring and Troubleshooting
       url: observability_pipelines/monitoring_and_troubleshooting/
       parent: observability_pipelines
       identifier: observability_pipelines_monitoring_and_troubleshooting
-      weight: 6
+      weight: 7
     - name: Worker CLI Commands
       url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_worker_cli_commands
-      weight: 601
+      weight: 701
     - name: Monitoring Pipelines
       url: observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_monitoring_pipelines
-      weight: 602
+      weight: 702
     - name: Pipeline Usage Metrics
       url: observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_pipeline_usage_metrics
-      weight: 603
+      weight: 703
     - name: Troubleshooting
       url: observability_pipelines/monitoring_and_troubleshooting/troubleshooting/
       identifier: observability_pipelines_troubleshooting
       parent: observability_pipelines_monitoring_and_troubleshooting
-      weight: 604
+      weight: 704
     - name: Guides
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 7
+      weight: 8
     - name: Log Management
       url: logs/
       pre: log
@@ -6221,6 +6241,11 @@ menu:
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_processing
       weight: 406
+    - name: Reverse Connection
+      url: /cloudprem/configure/reverse_connection
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_reverse_connection
+      weight: 407
     - name: Management
       url: /cloudprem/manage/
       parent: cloudprem
