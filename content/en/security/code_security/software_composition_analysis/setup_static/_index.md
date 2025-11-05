@@ -62,7 +62,7 @@ Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` C
 Configure your Datadog API and application keys by adding `DD_APP_KEY` and `DD_API_KEY` as secrets. Make sure the application key has the `code_analysis_read` scope.
 
 <div class="alert alert-info">
-You must scan your default branch at least once before results appear in **Code Security**.
+You must scan your default branch at least once before results appear in <b>Code Security</b>.
 </div>
 
 ## Select your source code management provider
