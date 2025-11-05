@@ -37,32 +37,17 @@
       {{ $baseDir = path.Base .Dir }}
     {{ end }}
 
-    <!-- get lang specific data file with caching -->
+    <!-- get lang specific data file -->
     {{ $tagSlug := $baseDir }}
     {{ $.Scratch.Set "translate_tags" (dict) }}
     {{ $.Scratch.Set "translate_actions" (dict) }}
     {{ if ne $.Page.Lang "en"}}
-        {{ $translateTagsKey := printf "translate_tags_%s_%s" $apiVersion $.Page.Lang }}
-        {{ if not (hugo.Store.Get $translateTagsKey) }}
-          {{ $translateTagsPath := printf "data/api/%s/translate_tags.%s.json" $apiVersion $.Page.Lang }}
-          {{ if fileExists $translateTagsPath }}
-            {{ $translateTagsContent := readFile $translateTagsPath }}
-            {{ $translateTags := $translateTagsContent | transform.Unmarshal }}
-            {{ hugo.Store.Set $translateTagsKey $translateTags }}
-          {{ end }}
+        {{ if (fileExists (print "data/api/" $apiVersion "/translate_tags." $.Page.Lang ".json")) }}
+          {{ $.Scratch.Set "translate_tags" (index (index $.Site.Data.api $apiVersion) (print "translate_tags." $.Page.Lang)) }}
         {{ end }}
-        {{ $.Scratch.Set "translate_tags" (hugo.Store.Get $translateTagsKey | default dict) }}
-
-        {{ $translateActionsKey := printf "translate_actions_%s_%s" $apiVersion $.Page.Lang }}
-        {{ if not (hugo.Store.Get $translateActionsKey) }}
-          {{ $translateActionsPath := printf "data/api/%s/translate_actions.%s.json" $apiVersion $.Page.Lang }}
-          {{ if fileExists $translateActionsPath }}
-            {{ $translateActionsContent := readFile $translateActionsPath }}
-            {{ $translateActions := $translateActionsContent | transform.Unmarshal }}
-            {{ hugo.Store.Set $translateActionsKey $translateActions }}
-          {{ end }}
+        {{ if (fileExists (print "data/api/" $apiVersion "/translate_actions." $.Page.Lang ".json")) }}
+          {{ $.Scratch.Set "translate_actions" (index (index $.Site.Data.api $apiVersion) (print "translate_actions." $.Page.Lang)) }}
         {{ end }}
-        {{ $.Scratch.Set "translate_actions" (hugo.Store.Get $translateActionsKey | default dict) }}
     {{ end }}
     {{ $translate_tags := ($.Scratch.Get "translate_tags") }}
     {{ $translate_actions := ($.Scratch.Get "translate_actions") }}
@@ -99,15 +84,13 @@
       <div class="col-12 col-md-6">
           <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
             {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
-              {{ $adat := partial "api/load-specs.html" (dict "version" $versionNum) }}
-              {{ if $adat }}
-                {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
-                {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
-                {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
-                <li class="nav-item">
-                  <a class="nav-link me-1 {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-bs-toggle="collapse"{{- else -}}data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
-                </li>
-              {{ end }}
+              {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
+              {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+              {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
+              {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
+              <li class="nav-item">
+                <a class="nav-link me-1 {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-bs-toggle="collapse"{{- else -}}data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
+              </li>
             {{ end }}
           </ul>
       </div>
