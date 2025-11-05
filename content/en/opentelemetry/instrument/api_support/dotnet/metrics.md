@@ -66,7 +66,7 @@ To enable OTel Metrics support, you must set `DD_METRICS_OTEL_ENABLED=true`. The
 `OTEL_EXPORTER_OTLP_ENDPOINT`
 : **Description**: Specifies the URL for sending OTLP data. <br>
 **Default (gRPC)**: `http://localhost:4317`. <br>
-**Default (HTTP)**: `http://localhost:4318/v1/metrics`. <br>
+**Default (HTTP)**: `http://localhost:4318`. <br>
 
 `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE`
 : **Description**: Specifies the aggregation `temporality` to use for each instrument kind. <br>

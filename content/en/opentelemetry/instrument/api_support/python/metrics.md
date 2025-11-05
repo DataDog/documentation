@@ -15,7 +15,7 @@ further_reading:
 
 ## Prerequisites
 
-- **Datadog SDK**: dd-trace-py version [x.y.z] or later.
+- **Datadog SDK**: dd-trace-py version 3.18.0 or later.
 - **OpenTelemetry SDK**: The standard opentelemetry-sdk package for Python.
 - **OTLP Exporter**: The standard `opentelemetry-exporter-otlp` package for Python.
 

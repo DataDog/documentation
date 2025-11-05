@@ -119,7 +119,7 @@ Datadog SDKs support the following [OpenTelemetry OTLP Exporter][13] options.
 `OTEL_EXPORTER_OTLP_ENDPOINT`
 : **Description**: Specifies the URL for sending OTLP data. <br>
 **Default (gRPC)**: `http://localhost:4317`. <br>
-**Default (HTTP)**: `http://localhost:4318/v1/metrics`.
+**Default (HTTP)**: `http://localhost:4318`.
 
 `OTEL_EXPORTER_OTLP_HEADERS`
 : **Description**: Specifies a comma-separated list of key-value pairs to be used as headers on all outgoing OTLP requests (for example, `api-key=key,other-config=value`). Signal-specific headers (like `OTEL_EXPORTER_OTLP_METRICS_HEADERS`) take precedence.
