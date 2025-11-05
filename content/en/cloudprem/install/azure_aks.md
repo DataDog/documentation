@@ -4,8 +4,8 @@ description: Learn how to install and configure CloudPrem on Azure AKS
 ---
 
 ## Overview
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 This document walks you through the process of installing CloudPrem on Azure AKS.
@@ -51,7 +51,7 @@ Before installing CloudPrem on AKS, ensure your Azure environment is properly co
    kubectl create namespace cloudprem
    ```
 
-   **Note**: You can set a default namespace for your current context to avoid typing `-n <NAMESPACE_NAME>` with every command:
+   **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
    ```shell
    kubectl config set-context --current --namespace=cloudprem
    ```
@@ -64,7 +64,7 @@ Before installing CloudPrem on AKS, ensure your Azure environment is properly co
    --from-literal api-key="<DD_API_KEY>"
    ```
 
-2. Store the PostgreSQL database connection string as a Kubernetes secret:
+1. Store the PostgreSQL database connection string as a Kubernetes secret:
    To retrieve your PostgreSQL connection details, go the Azure Portal, navigate to **All resources**, then click on your _Azure Database for PostgreSQL flexible server_ instance. Finally, in the **Getting started** tab, click on the _View connection strings_ link in the **Connect card**.
 
    ```shell
@@ -85,14 +85,14 @@ Before installing CloudPrem on AKS, ensure your Azure environment is properly co
      --from-literal QW_METASTORE_URI="postgres://$USERNAME:$PASSWORD@$HOST:$PORT/$DATABASE"
    ```
 
-3. Store the client secret or storage account access key as a Kubernetes secret:
+1. Store the client secret or storage account access key as a Kubernetes secret:
    ```shell
    kubectl create secret generic <SECRET_NAME> \
      -n <NAMESPACE_NAME> \
      --from-literal <SECRET_KEY>=<SECRET_VALUE>
    ```
 
-4. Customize the Helm chart:
+1. Customize the Helm chart:
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the image tag, Azure tenant ID, service account, ingress setup, resource requests and limits, and more.
 

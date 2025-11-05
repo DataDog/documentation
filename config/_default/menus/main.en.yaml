@@ -3466,6 +3466,16 @@ menu:
       parent: serverless
       identifier: serverless_container_apps
       weight: 5
+    - name: In-Container
+      url: serverless/azure_container_apps/in_container
+      parent: serverless_container_apps
+      weight: 501
+      identifier: serverless_container_apps_in_container
+    - name: Sidecar
+      url: serverless/azure_container_apps/sidecar
+      parent: serverless_container_apps
+      weight: 502
+      identifier: serverless_container_apps_sidecar
     - name: Azure Functions
       url: serverless/azure_functions
       parent: serverless
@@ -3663,11 +3673,16 @@ menu:
       pre: cloud-cost-management
       parent: cloud_cost_heading
       weight: 10000
+    - name: Datadog Costs
+      url: cloud_cost_management/datadog_costs
+      parent: cloud_cost
+      identifier: cloud_cost_datadog_costs
+      weight: 1
     - name: Setup
       url: cloud_cost_management/setup/
       parent: cloud_cost
       identifier: cloud_cost_setup
-      weight: 1
+      weight: 2
     - name: AWS
       url: cloud_cost_management/setup/aws/
       parent: cloud_cost_setup
@@ -3742,47 +3757,12 @@ menu:
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
       identifier: cloud_cost_custom
-      weight: 105
+      weight: 110
     - name: Datadog Costs
       url: cloud_cost_management/datadog_costs
       parent: cloud_cost
       identifier: cloud_cost_datadog_costs
       weight: 2
-    - name: Cost Allocation
-      url: cloud_cost_management/cost_allocation
-      parent: cloud_cost
-      identifier: cloud_cost_cost_allocation
-      weight: 3
-    - name: Container Costs
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/
-      parent: cloud_cost_cost_allocation
-      identifier: cloud_cost_container_cost_allocation
-      weight: 301
-    - name: AWS
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws#prerequisites
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_aws
-      weight: 101
-    - name: Azure
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=azure#prerequisites
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_azure
-      weight: 102
-    - name: Google Cloud
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=google#prerequisites
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_google
-      weight: 103
-    - name: BigQuery Costs
-      url: cloud_cost_management/cost_allocation/bigquery/
-      parent: cloud_cost_cost_allocation
-      identifier: cloud_cost_cost_allocationbigquery
-      weight: 302
-    - name: Custom Allocation Rules
-      url: cloud_cost_management/custom_allocation_rules
-      parent: cloud_cost
-      identifier: cloud_cost_custom_allocation_rules
-      weight: 4
     - name: Planning
       url: cloud_cost_management/planning
       parent: cloud_cost
@@ -3802,62 +3782,122 @@ menu:
       url: cloud_cost_management/tags
       parent: cloud_cost
       identifier: cloud_cost_tags
-      weight: 6
+      weight: 3
     - name: Tag Explorer
       url: cloud_cost_management/tags/tag_explorer
       parent: cloud_cost_tags
       identifier: cloud_cost_tag_explorer
-      weight: 601
+      weight: 301
     - name: Tag Pipelines
       url: cloud_cost_management/tags/tag_pipelines
       parent: cloud_cost_tags
       identifier: cloud_cost_tag_pipelines
-      weight: 602
+      weight: 302
     - name: Multisource Querying
-      url: cloud_cost_management/multisource_querying
-      parent: cloud_cost
+      url: cloud_cost_management/tags/multisource_querying
+      parent: cloud_cost_tags
       identifier: cloud_cost_multisource_querying
-      weight: 7
-    - name: Reports
-      url: /cloud_cost_management/reports
+      weight: 303
+    - name: Allocation
+      url: cloud_cost_management/allocation
       parent: cloud_cost
-      identifier: cloud_cost_reports
-      weight: 9
-    - name: Scheduled Cost Reports
-      url: /cloud_cost_management/reports/scheduled_reports
-      parent: cloud_cost_reports
+      identifier: cloud_cost_cost_allocation
+      weight: 4
+    - name: Container Cost Allocation
+      url: cloud_cost_management/allocation/container_cost_allocation
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_container_cost_allocation
+      weight: 401
+    - name: AWS
+      url: cloud_cost_management/allocation/container_cost_allocation/?tab=aws/
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_aws
+      weight: 101
+    - name: Azure
+      url: cloud_cost_management/allocation/container_cost_allocation/?tab=azure
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_azure
+      weight: 102
+    - name: Google Cloud
+      url: cloud_cost_management/allocation/container_cost_allocation/?tab=google
+      parent: cloud_cost_container_cost_allocation
+      identifier: cloud_cost_container_cost_allocation_google
+      weight: 103
+    - name: BigQuery Costs
+      url: cloud_cost_management/allocation/bigquery
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_cost_allocationbigquery
+      weight: 402
+    - name: Custom Allocation Rules
+      url: cloud_cost_management/allocation/custom_allocation_rules
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_custom_allocation_rules
+      weight: 403
+    - name: Reporting
+      url: cloud_cost_management/reporting
+      parent: cloud_cost
+      identifier: cloud_cost_reporting
+      weight: 5
+    - name: Explorer
+      url: cloud_cost_management/reporting/explorer
+      parent: cloud_cost_reporting
+      identifier: cloud_cost_explorer
+      weight: 501
+    - name: Scheduled Reports
+      url: cloud_cost_management/reporting/scheduled_reports
+      parent: cloud_cost_reporting
       identifier: cloud_cost_scheduled_reports
-      weight: 901
+      weight: 502
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 9
+      weight: 6
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
-      weight: 901
+      weight: 601
     - name: Savings
       url: cloud_cost_management/recommendations/savings
       parent: cloud_cost_recommendations
       identifier: cloud_cost_savings
-      weight: 902
+      weight: 602
+    - name: Planning
+      url: cloud_cost_management/planning
+      parent: cloud_cost
+      identifier: cloud_cost_planning
+      weight: 7
+    - name: Budgets
+      url: cloud_cost_management/planning/budgets
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_budgets
+      weight: 701
+    - name: Commitment Programs
+      url: cloud_cost_management/planning/commitment_programs
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_commitment_programs
+      weight: 702
+    - name: Cost Changes
+      url: cloud_cost_management/cost_changes
+      parent: cloud_cost
+      identifier: cloud_cost_cost_changes
+      weight: 8
     - name: Monitors
-      url: /cloud_cost_management/monitors
-      parent: cloud_cost
-      identifier: cloud_cost_monitors
-      weight: 10
+      url: cloud_cost_management/cost_changes/monitors
+      parent: cloud_cost_cost_changes
+      identifier: cloud_cost_cost_changes_monitors
+      weight: 801
     - name: Anomalies
-      url: /cloud_cost_management/anomalies
-      parent: cloud_cost
-      identifier: cloud_cost_anomalies
-      weight: 11
+      url: cloud_cost_management/cost_changes/anomalies
+      parent: cloud_cost_cost_changes
+      identifier: cloud_cost_cost_changes_anomalies
+      weight: 802
     - name: Real-Time Costs
-      url: cloud_cost_management/real_time_costs
-      parent: cloud_cost
+      url: cloud_cost_management/cost_changes/real_time_costs
+      parent: cloud_cost_cost_changes
       identifier: cloud_cost_real_time_costs
-      weight: 12
+      weight: 803
     - name: APM
       url: tracing/
       pre: apm
@@ -4546,21 +4586,26 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
       weight: 306
+    - name: Supabase
+      url: database_monitoring/setup_postgres/supabase
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_supabase
+      weight: 307
     - name: Heroku
       url: database_monitoring/setup_postgres/heroku
       parent: dbm_setup_postgres
       identifier: dbm_postgres_heroku
-      weight: 307
+      weight: 308
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 308
+      weight: 309
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 309
+      weight: 310
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
@@ -4767,16 +4812,11 @@ menu:
       identifier: data_streams_dead_letter_queues
       parent: data_streams
       weight: 4
-    - name: Data Pipeline Lineage
-      url: data_streams/data_pipeline_lineage
-      identifier: data_streams_pipeline_lineage
-      parent: data_streams
-      weight: 5
     - name: Metrics and Tags
       url: data_streams/metrics_and_tags
       identifier: data_streams_metrics_and_tags
       parent: data_streams
-      weight: 6
+      weight: 5
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -4890,6 +4930,11 @@ menu:
       parent: llm_obs_external_evaluations
       identifier: llm_obs_submit_nemo_evaluations
       weight: 40202
+    - name: Compatibility
+      url: llm_observability/evaluations/evaluation_compatibility
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_compatibility
+      weight: 403
     - name: Experiments
       url: llm_observability/experiments
       parent: llm_obs
@@ -5729,51 +5774,56 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
       weight: 421
+    - name: Search Syntax
+      url: observability_pipelines/search_syntax/
+      parent: observability_pipelines
+      identifier: observability_pipelines_search_syntax
+      weight: 5
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
-      weight: 5
+      weight: 6
     - name: Handling Load and Backpressure
       url: observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_handling_load_and_backpressure
-      weight: 501
+      weight: 601
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 502
+      weight: 602
     - name: Monitoring and Troubleshooting
       url: observability_pipelines/monitoring_and_troubleshooting/
       parent: observability_pipelines
       identifier: observability_pipelines_monitoring_and_troubleshooting
-      weight: 6
+      weight: 7
     - name: Worker CLI Commands
       url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_worker_cli_commands
-      weight: 601
+      weight: 701
     - name: Monitoring Pipelines
       url: observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_monitoring_pipelines
-      weight: 602
+      weight: 702
     - name: Pipeline Usage Metrics
       url: observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_pipeline_usage_metrics
-      weight: 603
+      weight: 703
     - name: Troubleshooting
       url: observability_pipelines/monitoring_and_troubleshooting/troubleshooting/
       identifier: observability_pipelines_troubleshooting
       parent: observability_pipelines_monitoring_and_troubleshooting
-      weight: 604
+      weight: 704
     - name: Guides
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 7
+      weight: 8
     - name: Log Management
       url: logs/
       pre: log
@@ -5970,11 +6020,16 @@ menu:
       url: logs/explorer/calculated_fields/
       parent: log_explorer
       weight: 506
-    - name: Expression Language
-      identifier: log_explorer_calculated_fields_expression_language
-      url: logs/explorer/calculated_fields/expression_language/
+    - name: Formulas
+      identifier: log_explorer_calculated_fields_formulas
+      url: logs/explorer/calculated_fields/formulas/
       parent: log_explorer_calculated_fields
       weight: 5061
+    - name: Extractions
+      identifier: log_explorer_calculated_fields_extractions
+      url: logs/explorer/calculated_fields/extractions/
+      parent: log_explorer_calculated_fields
+      weight: 5062
     - name: Analytics
       identifier: log_explorer_analytics
       url: logs/explorer/analytics/
@@ -6181,6 +6236,11 @@ menu:
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_processing
       weight: 406
+    - name: Reverse Connection
+      url: /cloudprem/configure/reverse_connection
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_reverse_connection
+      weight: 407
     - name: Management
       url: /cloudprem/manage/
       parent: cloudprem
@@ -6348,6 +6408,11 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_impossible_travel_rule
       weight: 2026
+    - name: Sequence
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/sequence
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_sequence_rule
+      weight: 2029
     - name: Version History
       url: security/cloud_siem/detect_and_monitor/version_history
       parent: cloud_siem_detect_and_monitor
@@ -7064,41 +7129,46 @@ menu:
       url: synthetics/browser_tests/app-that-requires-login
       parent: synthetics_browser_tests
       weight: 304
+    - name: Network Path Testing
+      url: synthetics/network_path_tests/
+      parent: synthetics
+      identifier: synthetics_network_path_tests
+      weight: 4
     - name: Mobile Application Testing
       url: synthetics/mobile_app_testing/
       parent: synthetics
       identifier: synthetics_mobile_app_testing
-      weight: 4
+      weight: 5
     - name: Testing Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/steps
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_steps
-      weight: 401
+      weight: 501
     - name: Testing Results
       url: synthetics/mobile_app_testing/mobile_app_tests/results
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_results
-      weight: 402
+      weight: 502
     - name: Advanced Options for Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/advanced_options
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
-      weight: 403
+      weight: 503
     - name: Supported Devices
       url: synthetics/mobile_app_testing/devices/
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_devices
-      weight: 404
+      weight: 504
     - name: Restricted Networks
       url: synthetics/mobile_app_testing/mobile_app_tests/restricted_networks
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_restricted_networks
-      weight: 405
+      weight: 505
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
-      weight: 406
+      weight: 506
     - name: Test Suites
       url: synthetics/test_suites/
       parent: synthetics
@@ -7213,42 +7283,42 @@ menu:
       url: synthetics/guide/
       parent: synthetics
       identifier: synthetics_guides
-      weight: 8
+      weight: 9
     - name: Notifications
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
-      weight: 9
+      weight: 10  
     - name: Template Variables
       url: synthetics/notifications/template_variables
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables
-      weight: 901
+      weight: 1001
     - name: Conditional Alerting
       url: synthetics/notifications/conditional_alerting
       parent: synthetics_notifications
       identifier: synthetics_notifications_conditional_alerting
-      weight: 902
+      weight: 1002
     - name: Advanced Notifications
       url: synthetics/notifications/advanced_notifications
       parent: synthetics_notifications
       identifier: synthetics_notifications_advanced_notifications
-      weight: 903
+      weight: 1003
     - name: Integrate with Statuspage
       url: synthetics/notifications/statuspage
       parent: synthetics_notifications
       identifier: synthetics_notifications_statuspage
-      weight: 904
+      weight: 1004
     - name: Troubleshooting
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 10
+      weight: 11
     - name: Data Security
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
-      weight: 11
+      weight: 12
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing
