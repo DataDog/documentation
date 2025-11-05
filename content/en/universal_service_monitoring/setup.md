@@ -44,6 +44,55 @@ Additional protocols and traffic encryption methods are in <a href="/universal_s
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
+## How USM detects service names
+
+<div class="alert alert-warning">
+<strong>Important:</strong> Universal Service Monitoring detects service names from environment variables that exist when a process starts. USM reads these values from the operating system (from <code>/proc/PID/environ</code> on Linux or via system APIs on Windows).
+</div>
+
+**Environment variables USM recognizes:**
+- `DD_SERVICE` - Explicitly sets the service name
+- `DD_TAGS` - Can include `service:name` tag
+- `DD_ENV` - Sets the environment tag
+- `DD_VERSION` - Sets the version tag
+
+**Key limitation:**
+
+Setting environment variables programmatically **inside your application code** (such as `System.setProperty("dd.service", "my-service")` in Java or `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` in .NET) will **not** be detected by USM, even though these values work for APM tracing instrumentation.
+
+**Why this happens:**
+
+- **APM instrumentation libraries** run inside your application process and can read runtime environment changes
+- **USM runs in the Datadog Agent** as a separate process and only sees the environment variables that were set when your process started
+
+**To ensure USM detection, set environment variables before the application starts:**
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+```yaml
+environment:
+  - DD_SERVICE=my-service
+  - DD_ENV=production
+```
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+```yaml
+env:
+  - name: DD_SERVICE
+    value: "my-service"
+  - name: DD_ENV
+    value: "production"
+```
+{{% /tab %}}
+{{% tab "Shell" %}}
+```bash
+export DD_SERVICE=my-service
+export DD_ENV=production
+java -jar myapp.jar
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Enabling Universal Service Monitoring
 
 Enable Universal Service Monitoring in your Agent by using one of the following methods depending on how your service is deployed and your Agent configured:
