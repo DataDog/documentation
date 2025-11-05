@@ -7,8 +7,8 @@ further_reading:
   text: "Store and search logs at petabyte scale in your own infrastructure with Datadog CloudPrem"
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 {{< img src="/cloudprem/overview_diagram_cloudprem.png" alt="CloudPrem architecture overview showing how logs flow from sources through CloudPrem to the Datadog platform" style="width:100%;" >}}

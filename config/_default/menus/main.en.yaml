@@ -3587,21 +3587,26 @@ menu:
       parent: ndm_setup
       identifier: ndm_snmp_metrics
       weight: 30002
-    - name: Ping
-      url: network_monitoring/devices/ping
-      parent: ndm_setup
-      identifier: ndm_snmp_ping
-      weight: 30003
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
       parent: ndm_setup
       identifier: ndm_snmptraps
+      weight: 30003
+    - name: Ping
+      url: network_monitoring/devices/ping
+      parent: ndm_setup
+      identifier: ndm_snmp_ping
       weight: 30004
+    - name: Syslog
+      url: network_monitoring/devices/syslog
+      parent: ndm_setup
+      identifier: ndm_syslog
+      weight: 30005
     - name: VPN Monitoring
       url: network_monitoring/devices/vpn_monitoring
       parent: ndm_setup
       identifier: ndm_vpn_monitoring
-      weight: 30005
+      weight: 30006
     - name: Integrations
       url: network_monitoring/devices/integrations
       parent: ndm
@@ -6236,6 +6241,11 @@ menu:
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_processing
       weight: 406
+    - name: Reverse Connection
+      url: /cloudprem/configure/reverse_connection
+      parent: cloudprem_advanced_configuration
+      identifier: cloudprem_reverse_connection
+      weight: 407
     - name: Management
       url: /cloudprem/manage/
       parent: cloudprem
