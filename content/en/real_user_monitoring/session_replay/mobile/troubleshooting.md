@@ -6,7 +6,7 @@ further_reading:
     - link: '/real_user_monitoring/session_replay/mobile'
       tag: Documentation
       text: Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay/mobile/setup_and_configuration'
+    - link: '/real_user_monitoring/session_replay/setup_and_configuration'
       tag: Documentation
       text: Setup and Configure Mobile Session Replay
     - link: '/real_user_monitoring/session_replay/mobile/app_performance'

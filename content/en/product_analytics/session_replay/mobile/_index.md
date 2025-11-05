@@ -36,7 +36,7 @@ Learn how to [Troubleshoot Mobile Session Replay][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/session_replay/mobile/setup_and_configuration
+[1]: /product_analytics/session_replay/setup_and_configuration
 [2]: /product_analytics/session_replay/mobile/privacy_options
 [3]: /product_analytics/session_replay/mobile/app_performance
 [4]: /product_analytics/session_replay/mobile/troubleshooting
