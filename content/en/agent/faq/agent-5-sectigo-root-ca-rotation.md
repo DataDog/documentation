@@ -25,22 +25,22 @@ When Agent v5's embedded certificate bundle is missing or incomplete, it falls b
 You are affected if:
 - You are running **Datadog Agent v5**, particularly **versions below 5.32.7**
 - Your agent installation does not include the Datadog embedded certificate bundle
-- Your agent is not configured to use the operating system's certificate store (via `use_curl_http_client: true`)
+- Your agent is not configured to use the operating system's certificate store (using `use_curl_http_client: true`)
 
 ## Solution
 
-### Automated Solution
+### Automated solution
 
 Both scripts perform the following steps automatically:
-1. Download the updated Datadog certificate bundle
-2. Install the certificate in the correct location for your Agent installation
-3. Update your `datadog.conf` to enable `use_curl_http_client: true` (allows the agent to use OS-provided certificates)
-4. Restart the Datadog Agent to apply changes
-5. Verify connectivity and check logs for any certificate errors
+1. Download the updated Datadog certificate bundle.
+2. Install the certificate in the correct location for your Agent installation.
+3. Update your `datadog.conf` to enable `use_curl_http_client: true` (allows the agent to use OS-provided certificates).
+4. Restart the Datadog Agent to apply changes.
+5. Verify connectivity and check logs for any certificate errors.
 
-#### Linux
-
-**Requirement**:
+{{< tabs >}}
+{{% tab "Linux" %}}
+#### Requirement
 - Have `curl` installed
 
 ```bash
@@ -54,12 +54,13 @@ chmod +x linux.sh
 sudo ./linux.sh
 ```
 
-#### Windows
+{{% /tab %}}
 
-**Requirement**:
+{{% tab "Windows" %}}
+#### Requirement
 - Have `wget` installed
 
-**Note**: Windows Agent versions below v5.37.3 cannot use the OS certificate store fallback. If you are running a version below v5.37.3, upgrading to Agent v7 is recommended.
+**Note**: Windows Agent versions below v5.37.3 cannot use the OS certificate store fallback. If you are running a version below v5.37.3, Datadog recommends upgrading to Agent v7.
 
 ```powershell
 # Download the script (run as Administrator)
@@ -68,21 +69,23 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/dd-agent/maste
 # Run the script
 .\windows.ps1
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
-### Manual Solution
+### Manual solution
 
-1. Download the updated Datadog certificate bundle at `https://github.com/DataDog/dd-agent/blob/master/datadog-cert.pem`
-2. Install the certificate in the correct location for your Agent installation
+1. Download the [updated Datadog certificate bundle][3].
+2. Install the certificate in the correct location for your Agent installation.
     - **Linux**: `/opt/datadog-agent/agent/datadog-cert.pem`
     - **Windows**:
         - v5.12+: `C:\Program Files\Datadog\Datadog Agent\agent\datadog-cert.pem`
         - v5.11 and below (64-bit OS): `C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem`
         - v5.11 and below (32-bit OS): `C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem`
-3. Update your `datadog.conf` to enable `use_curl_http_client: true` (allows the agent to use OS-provided certificates)
+3. Update your `datadog.conf` to enable `use_curl_http_client: true` (allows the Agent to use OS-provided certificates).
     - **Linux**: `/etc/dd-agent/datadog.conf`
     - **Windows**: `C:\ProgramData\Datadog\datadog.conf`
-4. Restart the Datadog Agent to apply changes
-5. Verify connectivity and check logs for any certificate errors
+4. Restart the Datadog Agent to apply changes.
+5. Verify connectivity and check logs for any certificate errors.
 
 ## Important considerations
 
@@ -133,4 +136,5 @@ If certificate errors persist after running the script:
 
 [1]: /agent/guide/upgrade_agent_fleet_automation
 [2]: /help
+[3]: https://github.com/DataDog/dd-agent/blob/master/datadog-cert.pem
 
