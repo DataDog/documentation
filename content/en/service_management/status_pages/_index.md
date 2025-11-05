@@ -22,12 +22,13 @@ further_reading:
 
 {{< img src="service_management/status_pages/shopist_status_page.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
-Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability** and **incidents** with customers or internal stakeholders through a shareable web page.
+Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability**, **incidents**, and **planned maintenance** with customers or internal stakeholders through a shareable web page.
 
 Use Status Pages to:
 
 * Share the availability of critical systems and features
 * Communicate service disruptions clearly during incidents
+* Announce scheduled maintenance and planned downtime in advance
 * Reduce inbound support volume with proactive email notifications
 
 ## Configure permissions
@@ -129,6 +130,28 @@ After a notice is published, the notice:
 - Is visible in the notice history timeline.
 
 You can post **updates** over time to keep users informed, and then mark the notice as **Resolved**.
+
+## Schedule maintenance windows
+<!-- Image placeholder
+{{< img src="#" alt="Status page showing a scheduled maintenance window for upcoming infrastructure work" style="width:100%;" >}}-->
+
+Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike [notices](#add-a-notice) which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. Proactively communicate scheduled downtime so you can keep your customers informed and lessen the load on the support team.
+
+### Publish a maintenance window
+
+1. From a status page, click **Schedule Maintenance** to open the maintenance window modal.
+1. Under **Notice type**, select the "Scheduled Maintenance" tab and provide:
+   | Field | Description |
+   | ---- | ---- |
+   | **Title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
+   | **Maintenance window** | Scheduled time range for the maintenance window, including start and end times |
+   | **Message** | Set the message that you want to automatically publish for each status update |
+   | **Components impacted** | One or more components that will be affected during maintenance |
+   | **Impact** | Expected level of impact per component during the window: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
+   | **Notify Subscribers** | Toggle to send advance notification to subscribers |
+1. Click **Review Notice** and click **Publish Notice**.
+
+After scheduling, the maintenance window appears on the status page with the scheduled time range. When the window begins, component status automatically updates to "Under Maintenance" and returns to "Operational" when it ends (unless manually overridden). You can post updates if plans change, reschedule the window, or cancel it if no longer needed.
 
 ## Email subscriptions
 
