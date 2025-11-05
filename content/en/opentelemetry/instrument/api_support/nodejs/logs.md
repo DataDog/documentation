@@ -25,7 +25,11 @@ This implementation does not use or support the OpenTelemetry Logs API. It is no
 
 ## Examples
 
-## Supported configuration
+To enable this feature, you must set `DD_LOGS_OTEL_ENABLED=true`.
+
+All OTLP exporter settings (such as endpoints, protocols, and timeouts), resource attributes, and batch processor settings are configured using a shared set of OpenTelemetry environment variables.
+
+For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][1].
 
 ### Tag and resource attribute precedence
 

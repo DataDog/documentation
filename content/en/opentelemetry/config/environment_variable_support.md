@@ -49,13 +49,16 @@ These environment variables enable the Datadog SDK to ingest OpenTelemetry Metri
 ## General SDK configuration
 Datadog SDKs support the following general OpenTelemetry SDK options. For more information, see the related [OpenTelemetry documentation][9].
 
-`OTEL_SERVICE_NAME`
-: ****Datadog convention****: `DD_SERVICE`<br>
-Sets the service name<br>
-**Notes**: If `service.name` is also provided in `OTEL_RESOURCE_ATTRIBUTES`, then `OTEL_SERVICE_NAME` takes precedence<br>
+`service.name` (Resource Attribute)
+: **Description**: Sets the service name. This is resolved as a resource attribute, not from `OTEL_SERVICE_NAME`. <br>
+**Notes**: The service name is determined with the following precedence: <br>
+    1.  Value of `DD_SERVICE` configuration <br>
+    2.  Value of `service` key in `DD_TAGS` configuration <br>
+    3.  Value of `service.name` key in `OTEL_RESOURCE_ATTRIBUTES` configuration <br>
+    4.  If none exist, a service name MUST be automatically derived by the SDK.
 
 `OTEL_LOG_LEVEL`
-: ****Datadog convention****: `DD_LOG_LEVEL`<br>
+: **Datadog convention**: `DD_LOG_LEVEL`<br>
 Log level used by the SDK logger<br>
 **Notes**: A log level of debug also maps to `DD_TRACE_DEBUG=true`<br>
 In the Node.js & PHP SDKs this maps to `DD_TRACE_LOG_LEVEL` <br>
@@ -65,13 +68,13 @@ In the Go SDK only mapped values between `OTEL_LOG_LEVEL` & `DD_TRACE_DEBUG` are
 **Not Supported In**: Python, .NET, Ruby, and Go SDKs<br>
 
 `OTEL_PROPAGATORS`
-: ****Datadog convention****: `DD_TRACE_PROPAGATION_STYLE`<br>
+: **Datadog convention**: `DD_TRACE_PROPAGATION_STYLE`<br>
 Propagators to be used as a comma-separated list<br>
 **Notes**: The only supported values for most Datadog SDKs are `tracecontext`, `b3`, `b3multi`, `none`, `datadog`. `xray` is also supported for the Java SDK<br>
-Values MUST be deduplicated in order to register a `Propagator` only once<br>
+Values must be deduplicated to register a `Propagator` only once<br>
 
 `OTEL_TRACES_SAMPLER & OTEL_TRACES_SAMPLER_ARG`
-: ****Datadog convention****: `DD_TRACE_SAMPLE_RATE`<br>
+: **Datadog convention**: `DD_TRACE_SAMPLE_RATE`<br>
 `OTEL_TRACES_SAMPLER`: Sampler to be used for traces & `OTEL_TRACES_SAMPLER_ARG`: String value to be used as the sampler argument<br>
 **Notes**: The specified value is only used if `OTEL_TRACES_SAMPLER` is set. Each Sampler type defines its own expected input, if any. Invalid or unrecognized input MUST be logged and MUST be otherwise ignored. In such cases, the implementation MUST behave as if `OTEL_TRACES_SAMPLER_ARG` is not set<br>
 Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
@@ -83,7 +86,7 @@ Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
   - `traceidratio`|`${OTEL_TRACES_SAMPLER_ARG}`
 
 `OTEL_TRACES_EXPORTER`
-: ****Datadog convention****: `DD_TRACE_ENABLED=false` <br>
+: **Datadog convention**: `DD_TRACE_ENABLED=false` <br>
 Trace exporter to be used<br>
 **Notes**: Only a value of `none` is accepted<br>
 
@@ -93,15 +96,22 @@ Trace exporter to be used<br>
 **Default**: `otlp`
 
 `OTEL_RESOURCE_ATTRIBUTES`
-: ****Datadog convention****: `DD_TAGS` <br>
-Key-value pairs to be used as resource attributes. See [Resource semantic conventions][11] for details<br>
-**Notes**: Only the first 10 key-value pairs are used; the subsequent values are dropped<br>
-`deployment.environment` and `deployment.environment.name` map to the `DD_ENV` environment variable<br>
-`service.name` maps to the `DD_SERVICE` environment variable<br>
-`service.version` maps to the `DD_VERSION` environment variable<br>
+: **Datadog convention**: `DD_TAGS` <br>
+**Description**: Key-value pairs to be used as resource attributes. <br>
+**Notes**: Datadog-defined configurations take precedence.
+    - `deployment.environment.name` (maps to `DD_ENV`): Resolved with the following precedence: <br>
+        1. Value of `DD_ENV` <br>
+        2. Value of `env` key in `DD_TAGS` <br>
+        3. Value of `deployment.environment.name` key in `OTEL_RESOURCE_ATTRIBUTES` <br>
+        4. Value of `deployment.environment` in `OTEL_RESOURCE_ATTRIBUTES`
+    - `service.version` (maps to `DD_VERSION`): Resolved with the following precedence: <br>
+        1. Value of `DD_VERSION` <br>
+        2. Value of `version` key in `DD_TAGS` <br>
+        3. Value of `service.version` key in `OTEL_RESOURCE_ATTRIBUTES`
+    - **Additional Attributes**: May be added through the `DD_TAGS` configuration, or `OTEL_RESOURCE_ATTRIBUTES` if `DD_TAGS` is not set.
 
 `OTEL_SDK_DISABLED`
-: ****Datadog convention****: `!DD_TRACE_OTEL_ENABLED` <br>
+: **Datadog convention**: `!DD_TRACE_OTEL_ENABLED` <br>
 Disable the SDK for all signals<br>
 **Notes**: Mapped values between `OTEL_SDK_DISABLED` & `DD_TRACE_OTEL_ENABLED`:<br>
   - `true`|`false`
@@ -111,21 +121,64 @@ Disable the SDK for all signals<br>
 ## OTLP Exporter configuration
 Datadog SDKs support the following [OpenTelemetry OTLP Exporter][13] options.
 
+Signal-specific variables (like `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) always take precedence over their general counterparts (like `OTEL_EXPORTER_OTLP_PROTOCOL`).
+
+### General OTLP Configuration
+
 `OTEL_EXPORTER_OTLP_PROTOCOL`
-: **Description**: Specifies the transport protocol to use. Signal-specific variables (like `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) are also supported. <br>
+: **Description**: Specifies the transport protocol to use for all signals unless overridden. <br>
 **Accepted values**: `grpc`, `http/protobuf`, `http/json`. <br>
 **Default**: SDK-dependent, either `http/protobuf` or `grpc`.
 
 `OTEL_EXPORTER_OTLP_ENDPOINT`
-: **Description**: Specifies the URL for sending OTLP data. <br>
+: **Description**: Specifies the base URL for sending OTLP data for all signals unless overridden. <br>
 **Default (gRPC)**: `http://localhost:4317`. <br>
 **Default (HTTP)**: `http://localhost:4318`.
 
 `OTEL_EXPORTER_OTLP_HEADERS`
-: **Description**: Specifies a comma-separated list of key-value pairs to be used as headers on all outgoing OTLP requests (for example, `api-key=key,other-config=value`). Signal-specific headers (like `OTEL_EXPORTER_OTLP_METRICS_HEADERS`) take precedence.
+: **Description**: Specifies a comma-separated list of key-value pairs to be used as headers on all outgoing OTLP requests (for example, `api-key=key,other-config=value`).
 
 `OTEL_EXPORTER_OTLP_TIMEOUT`
-: **Description**: Specifies the timeout (in milliseconds) for a single outgoing OTLP request. <br>
+: **Description**: Specifies the timeout (in milliseconds) for all outgoing OTLP requests unless overridden. <br>
+**Default**: `10000` (10s).
+
+### Metrics-Specific OTLP Configuration
+
+`OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`
+: **Description**: Specifies the OTLP transport protocol to use for metrics data. Takes precedence over the general `OTEL_EXPORTER_OTLP_PROTOCOL`. <br>
+**Accepted values**: `grpc`, `http/protobuf`, `http/json`. <br>
+**Default**: SDK-dependent, either `http/protobuf` or `grpc`.
+
+`OTEL_EXPORTER_OTLP_METRICS_ENDPOINT`
+: **Description**: Specifies the URL for sending OTLP metrics data. Takes precedence over the general `OTEL_EXPORTER_OTLP_ENDPOINT`. <br>
+**Default (gRPC)**: `"http://localhost:4317"`. <br>
+**Default (HTTP)**: `"http://localhost:4318/v1/metrics"`. <br>
+**Notes**: For HTTP protocols, the SDK will automatically append `/v1/metrics` if the general `OTEL_EXPORTER_OTLP_ENDPOINT` is used as a fallback.
+
+`OTEL_EXPORTER_OTLP_METRICS_HEADERS`
+: **Description**: Specifies a comma-separated list of key-value pairs to be used as headers on outgoing OTLP metrics requests (e.g., `api-key=key,other-config=value`). Takes precedence over the general `OTEL_EXPORTER_OTLP_HEADERS`.
+
+`OTEL_EXPORTER_OTLP_METRICS_TIMEOUT`
+: **Description**: Specifies the timeout (in milliseconds) for a single outgoing OTLP metrics request. Takes precedence over the general `OTEL_EXPORTER_OTLP_TIMEOUT`. <br>
+**Default**: `10000` (10s).
+
+### Logs-Specific OTLP Configuration
+
+`OTEL_EXPORTER_OTLP_LOGS_PROTOCOL`
+: **Description**: Specifies the OTLP transport protocol for logs. Takes precedence over `OTEL_EXPORTER_OTLP_PROTOCOL`.
+: **Accepted values**: `grpc`, `http/protobuf`, `http/json`
+: **Default**: (SDK-dependent)
+
+`OTEL_EXPORTER_OTLP_LOGS_ENDPOINT`
+: **Description**: Specifies the URL for sending OTLP logs. Takes precedence over `OTEL_EXPORTER_OTLP_ENDPOINT`.
+: **Default (gRPC)**: `http://localhost:4317`
+: **Default (HTTP)**: `http://localhost:4318/v1/logs`
+
+`OTEL_EXPORTER_OTLP_LOGS_HEADERS`
+: **Description**: Specifies a comma-separated list of key-value pairs to be used as headers on outgoing OTLP logs requests. Takes precedence over the general `OTEL_EXPORTER_OTLP_HEADERS`.
+
+`OTEL_EXPORTER_OTLP_LOGS_TIMEOUT`
+: **Description**: Specifies the timeout (in milliseconds) for a single outgoing OTLP logs request. Takes precedence over the general `OTEL_EXPORTER_OTLP_TIMEOUT`. <br>
 **Default**: `10000` (10s).
 
 ## OpenTelemetry Metrics SDK configuration
@@ -148,12 +201,36 @@ Datadog SDKs support the following OpenTelemetry Metrics SDK options.
 **Default**: `7500` (7.5s) <br>
 **Notes**: This default value is Datadog's recommended configuration and differs from the OpenTelemetry specification's default of 30000ms.
 
+## OpenTelemetry Logs SDK configuration
+
+Datadog SDKs support the following OpenTelemetry Logs SDK options.
+
+`OTEL_LOGS_EXPORTER`
+: **Description**: Specifies the logs exporter to be used. <br>
+**Accepted values**: `otlp`, `none`. A value of `none` disables the emission of OTel logs. <br>
+**Default**: The reference documents do not specify a default value.
+
+`OTEL_BLRP_MAX_QUEUE_SIZE`
+: **Description**: The maximum number of log records to hold in memory. New records are dropped when the limit is reached. <br>
+**Default**: `2048`
+
+`OTEL_BLRP_SCHEDULE_DELAY`
+: **Description**: The time interval (in milliseconds) between two consecutive export operations. <br>
+**Default**: `1000` (1s)
+
+`OTEL_BLRP_EXPORT_TIMEOUT`
+: **Description**: The maximum duration (in milliseconds) allowed for a single export before cancellation. <br>
+**Default**: `30000` (30s)
+
+`OTEL_BLRP_MAX_EXPORT_BATCH_SIZE`
+: **Description**: The maximum number of log records in a single OTLP payload. <br>
+**Default**: `512`
+
 ## Java-specific configuration
 Datadog SDKs support the following Java-specific OpenTelemetry configuration options. For more information, see the [OpenTelemetry documentation on Java agent configuration][10].
 
-
 `OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED`
-: ****Datadog convention****: `!DD_INTEGRATIONS_ENABLED` <br>
+: **Datadog convention**: `!DD_INTEGRATIONS_ENABLED` <br>
 Set to `false` to disable all instrumentation in the agent<br>
 **Notes**: Mapped values between `OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED` & `DD_INTEGRATIONS_ENABLED`:<br>
   - `true`|`false`
@@ -163,32 +240,32 @@ Set to `false` to disable all instrumentation in the agent<br>
 : **Description**: Enables/disables the named OTel drop-in instrumentation<br>
 
 `OTEL_JAVAAGENT_CONFIGURATION_FILE`
-: ****Datadog convention****: `DD_TRACE_CONFIG` <br>
+: **Datadog convention**: `DD_TRACE_CONFIG` <br>
 Path to valid Java properties file which contains the agent configuration<br>
 **Notes**: When OTEL_JAVAAGENT_CONFIGURATION_FILE and DD_TRACE_CONFIG are both set we apply the configuration from both files. This is an exception to the usual rule where the Datadog setting overrides the OTel one<br>
 
 `OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_REQUEST_HEADERS`
-: ****Datadog convention****: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
+: **Datadog convention**: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
 A comma-separated list of HTTP header names. HTTP client instrumentations capture HTTP request header values for all configured header names<br>
 **Notes**: Header tagging configured using OTel environment variables follows the OTel tag name convention of `http.request.header.<header-name>` rather than the Datadog convention of `http.request.headers.<header-name>`<br>
 
 `OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_RESPONSE_HEADERS`
-: ****Datadog convention****: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
+: **Datadog convention**: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
 A comma-separated list of HTTP header names. HTTP client instrumentations capture HTTP response header values for all configured header names<br>
 **Notes**: Header tagging configured using OTel environment variables follows the OTel tag name convention of `http.response.header.<header-name>` rather than the Datadog convention of `http.response.headers.<header-name>`<br>
 
 `OTEL_INSTRUMENTATION_HTTP_SERVER_CAPTURE_REQUEST_HEADERS`
-: ****Datadog convention****: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
+: **Datadog convention**: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
 A comma-separated list of HTTP header names. HTTP server instrumentations capture HTTP request header values for all configured header names<br>
 **Notes**: Header tagging configured using OTel environment variables follows the OTel tag name convention of `http.request.header.<header-name>` rather than the Datadog convention of `http.request.headers.<header-name>`<br>
 
 `OTEL_INSTRUMENTATION_HTTP_SERVER_CAPTURE_RESPONSE_HEADERS`
-: ****Datadog convention****: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
+: **Datadog convention**: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
 A comma-separated list of HTTP header names. HTTP server instrumentations capture HTTP response header values for all configured header names<br>
 **Notes**: Header tagging configured using OTel environment variables follows the OTel tag name convention of `http.response.header.<header-name>` rather than the Datadog convention of `http.response.headers.<header-name>`<br>
 
 `OTEL_JAVAAGENT_EXTENSIONS`
-: ****Datadog convention****: `DD_TRACE_EXTENSIONS_PATH` <br>
+: **Datadog convention**: `DD_TRACE_EXTENSIONS_PATH` <br>
 A comma-separated list of paths to extension jar files, or folders containing jar files. If pointing to a folder, every jar file in that folder is treated as a separate, independent extension. <br>
 
 ## Further Reading

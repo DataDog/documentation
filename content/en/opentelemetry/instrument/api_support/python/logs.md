@@ -74,23 +74,9 @@ This example shows how logs emitted within an active Datadog span are automatica
 
 ## Supported configuration
 
-To enable OTel Logs support, you must set `DD_LOGS_OTEL_ENABLED=true`.
+To enable this feature, you must set `DD_LOGS_OTEL_ENABLED=true`.
 
-While Datadog supports many OpenTelemetry variables, these are the most common ones needed for a basic setup.
-
-`DD_LOGS_OTEL_ENABLED`
-: **Description**: Enables the Datadog SDK to intercept standard logs and export them in OTLP format.
-: **Default**: `false`
-
-`OTEL_EXPORTER_OTLP_LOGS_PROTOCOL`
-: **Description**: Specifies the OTLP transport protocol. Takes precedence over `OTEL_EXPORTER_OTLP_PROTOCOL`.
-: **Accepted values**: `grpc`, `http/protobuf`, `http/json`
-: **Default**: (SDK-dependent)
-
-`OTEL_EXPORTER_OTLP_LOGS_ENDPOINT`
-: **Description**: Specifies the URL for sending OTLP logs. Takes precedence over `OTEL_EXPORTER_OTLP_ENDPOINT`.
-: **Default (gRPC)**: `http://localhost:4317`
-: **Default (HTTP)**: `http://localhost:4318/v1/logs`
+All OTLP exporter settings (such as endpoints, protocols, and timeouts), resource attributes, and batch processor settings are configured using a shared set of OpenTelemetry environment variables.
 
 For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][1].
 
