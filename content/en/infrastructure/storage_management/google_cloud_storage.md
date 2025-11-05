@@ -7,8 +7,6 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/storage-monitoring-recommendations/"
       tag: "Blog"
       text: "Reduce cloud storage costs and improve operational efficiency with Datadog Storage Monitoring"
-aliases:
-    - /integrations/guide/storage-monitoring-setup/#setup-for-google-cloud-storage
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/storage-monitoring/" >}}
