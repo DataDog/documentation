@@ -18,4 +18,5 @@ After installing CloudPrem, you can configure your deployment to meet your envir
    {{< nextlink href="/cloudprem/configure/cluster_sizing/" >}}Size your cluster{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/ingress/" >}}Configure Ingress{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/processing/" >}}Configure processing{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/configure/reverse_connection/" >}}Set up Reverse Connection{{< /nextlink >}}
 {{< /whatsnext >}}
