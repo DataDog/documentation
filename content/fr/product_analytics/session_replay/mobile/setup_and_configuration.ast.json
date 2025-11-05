@@ -4,12 +4,12 @@
   "attributes": {
     "frontmatter": {
       "title": {
-        "ast-str-4f857e73-ae15-42b3-9e7b-31087637b4bc": {
+        "ast-str-3647355b-4188-4043-9a6a-c3added117f1": {
           "string": "Installer et configurer Mobile Session Replay"
         }
       },
       "description": {
-        "ast-str-7e11007d-f14a-4450-98fe-9763270d3e7b": {
+        "ast-str-73a99ccf-fe26-4b1e-9ff8-b2ae72956b4c": {
           "string": "Installer et configurer Mobile Session Replay."
         }
       },
@@ -18,12 +18,12 @@
           "0": {
             "link": "/product_analytics/session_replay/mobile",
             "text": {
-              "ast-str-790f56ae-4e81-4b45-acd5-2b352c659749": {
+              "ast-str-8364faa9-fc74-4774-bc67-df95cf4ca9c9": {
                 "string": "Session Replay sur mobile"
               }
             },
             "tag": {
-              "ast-str-d2e6b437-83dc-48c1-9796-12e08548001a": {
+              "ast-str-539ee6bd-da82-4fa3-8c1e-3bb0467fb5c0": {
                 "string": "Documentation"
               }
             }
@@ -31,12 +31,12 @@
           "1": {
             "link": "/product_analytics/session_replay/mobile/app_performance",
             "text": {
-              "ast-str-f3058efb-d6ac-45ef-b27d-4dc67f11b1cd": {
+              "ast-str-bf345329-1642-4fa5-a335-b7dec73e2347": {
                 "string": "Impact de Mobile Session Replay sur les performances des applications"
               }
             },
             "tag": {
-              "ast-str-d6e67600-fcef-4ce6-a052-fca3a8e73de9": {
+              "ast-str-98f23821-01dd-4c1e-8fe1-2169784b10fb": {
                 "string": "Documentation"
               }
             }
@@ -44,12 +44,12 @@
           "2": {
             "link": "/product_analytics/session_replay/mobile/privacy_options",
             "text": {
-              "ast-str-43c9372c-6e6f-408a-a750-7b7277f37019": {
+              "ast-str-5aebb7a7-fb2d-4901-8125-4ef5e68fa288": {
                 "string": "Options de confidentialité de Mobile Session Replay"
               }
             },
             "tag": {
-              "ast-str-f1d815ba-94c7-4424-b2df-e419b623e6f4": {
+              "ast-str-78062ec2-a7da-4ca8-92d5-d0559b5f74f9": {
                 "string": "Documentation"
               }
             }
@@ -57,12 +57,12 @@
           "3": {
             "link": "/product_analytics/session_replay/mobile/troubleshooting",
             "text": {
-              "ast-str-4fc4e601-b25e-4de4-a819-39c2032514fa": {
+              "ast-str-c0a8cf7a-e1bc-411e-9f66-157e69309787": {
                 "string": "Dépanner Mobile Session Replay"
               }
             },
             "tag": {
-              "ast-str-1e0089b1-683c-498c-a315-08696318f9ba": {
+              "ast-str-e7a47ba2-c77f-4bda-9244-3cf7ac4d22a0": {
                 "string": "Documentation"
               }
             }
@@ -70,12 +70,12 @@
           "4": {
             "link": "/product_analytics/session_replay",
             "text": {
-              "ast-str-cd97afe5-1c96-4aeb-a225-602e23af7c1b": {
+              "ast-str-af8d0e26-354b-41fb-bd03-192697e7ed1c": {
                 "string": "Session Replay"
               }
             },
             "tag": {
-              "ast-str-36b704fe-26d0-4329-87fc-3083c1dbd812": {
+              "ast-str-005829f7-55d4-4c9e-aa3a-03140fe32a0f": {
                 "string": "Documentation"
               }
             }
