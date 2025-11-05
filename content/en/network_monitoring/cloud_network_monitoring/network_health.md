@@ -29,15 +29,6 @@ The Network Health page prioritizes issues based on their impact to your service
 - [Cloud Network Monitoring][1] enabled
 - Agent version 7.33 or later ??
 
-## Filtering
-
-Use the filters at the top of the page to narrow the scope of displayed issues. Available filters include:
-
-- **Data center**: Focus on issues within a specific data center.
-- **Service**: View problems affecting a particular service.
-- **Team**: Filter issues by team ownership.
-- **Environment**: Isolate production, staging, or other environment issues.
-
 ## Recommended actions
 
 The **Recommended Actions** section highlights the most critical issues detected in your network. These are prioritized based on two factors:
@@ -47,10 +38,10 @@ The **Recommended Actions** section highlights the most critical issues detected
 
 Each recommended action displays:
 
-- The specific problem detected (for example, "TLS certificate expired 5 days ago")
-- **Impacted client service**: The service making requests
-- **Impacted server service**: The service receiving requests
-- A direct path to remediation
+- The specific problem detected (for example, "TLS certificate expired 5 days ago").
+- **Impacted client service**: The service making requests.
+- **Impacted server service**: The service receiving requests.
+- A direct path to remediation.
 
 Hover over a service name to pivot to APM for additional context, or click on a recommended action to open a side panel with remediation steps and links to related resources.
 
@@ -62,16 +53,12 @@ Hover over a service name to pivot to APM for additional context, or click on a 
 
 The **Watchdog Insights** section displays anomalous network behavior detected by Watchdog, specifically focusing on TCP retransmits. A spike in TCP retransmits compared to your baseline (typically the previous week) often indicates an underlying network issue.
 
-While Watchdog Insights provide less definitive root cause identification than other sections, they help you:
+While Watchdog Insights help you:
 - Detect potential problems early.
 - Correlate anomalies with specific root causes listed below.
 - Investigate performance degradation before it impacts users.
 
-## Root causes
-
-Network Health detects three types of root causes that commonly disrupt network connectivity:
-
-### TLS certificates
+## TLS certificates
 
 TLS certificates that have expired or are about to expire prevent secure connections between services, resulting in dropped traffic. This section lists:
 
@@ -81,7 +68,18 @@ TLS certificates that have expired or are about to expire prevent secure connect
 
 Click **Renew Certificate** to initiate the certificate renewal process directly from the Network Health page.
 
-### Security groups
+## DNS failures
+
+DNS server misconfigurations can route traffic to incorrect destinations, preventing services from communicating. DNS failures typically result from changes made to DNS server routing configurations.
+
+This section shows:
+- DNS servers experiencing elevated failure rates.
+- Services impacted by DNS resolution issues.
+- The timing of DNS failure spikes.
+
+Hover over a service name to pivot to APM for additional context, or click on DNS Failure to open a side panel with remediation steps and links to related resources.
+
+## Security groups
 
 Security groups control traffic flow in cloud environments (such as AWS) through allow and deny rules. Since security groups deny traffic by default, accidental rule deletions or modifications can immediately block legitimate traffic between services.
 
@@ -96,21 +94,16 @@ This section identifies:
 3. Review and modify the inbound and outbound rules.
 4. Use **Infrastructure Change Tracking** data in the side panel to identify when the problematic change occurred, making it easier to revert specific modifications.
 
-### DNS failures
+## Filtering
 
-DNS server misconfigurations can route traffic to incorrect destinations, preventing services from communicating. DNS failures typically result from changes made to DNS server routing configurations.
+_I don't currently see this in Org2 so am verifying expected behavior_
 
-This section shows:
-- DNS servers experiencing elevated failure rates.
-- Services impacted by DNS resolution issues.
-- The timing of DNS failure spikes.
+Use the filters at the top of the page to narrow the scope of displayed issues. Available filters include:
 
-**Resolution**:
-1. Click on a DNS failure to view details in the side panel.
-2. Navigate to your DNS server configuration.
-3. Review recent routing changes.
-4. Correlate DNS failure timing with Infrastructure Change Tracking to identify and revert problematic changes.
-
+- **Data center**: Focus on issues within a specific data center.
+- **Service**: View problems affecting a particular service.
+- **Team**: Filter issues by team ownership.
+- **Environment**: Isolate production, staging, or other environment issues.
 
 ## Further Reading
 
