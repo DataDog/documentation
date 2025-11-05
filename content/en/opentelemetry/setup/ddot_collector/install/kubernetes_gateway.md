@@ -157,7 +157,7 @@ service:
 ```
 
 <div class="alert alert-tip">
-Always configure <code>otelAgentGateway.affinity</code> or <code>otelAgentGateway.nodeSelector</code> to control the nodes where the gateway pods are scheduled.<br>Adjust <code>otelAgentGateway.replicas</code> (default is 1) to scale the number of gateway pods based on your needs.<br>The example configurations use insecure TLS for simplicity. Follow the [OTel configtls instructions][7] if you want to enable TLS.</div>
+Always configure <code>otelAgentGateway.affinity</code> or <code>otelAgentGateway.nodeSelector</code> to control the nodes where the gateway pods are scheduled.<br>Adjust <code>otelAgentGateway.replicas</code> (default is 1) to scale the number of gateway pods based on your needs.</div>
 
 ### Deploying a standalone gateway
 
@@ -257,6 +257,8 @@ otelAgentGateway:
 <div class="alert alert-info">
 If you set <code>fullnameOverride</code>, the gateway's Kubernetes service name becomes <code><fullnameOverride>-otel-agent-gateway</code>. The ports defined in <code>otelAgentGateway.ports</code> are exposed on this service. Ensure these ports match the OTLP receiver configuration in the gateway and the OTLP exporter configuration in the DaemonSet.
 </div>
+
+The example configurations use insecure TLS for simplicity. Follow the [OTel configtls instructions][7] if you want to enable TLS.
 
 ## Advanced use cases
 
