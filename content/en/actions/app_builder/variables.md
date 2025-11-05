@@ -1,5 +1,6 @@
 ---
 title: State Variables
+description: Encapsulate logic within apps using state variables to store and manipulate data across different app components.
 aliases:
 - /app_builder/variables
 - /service_management/app_builder/variables

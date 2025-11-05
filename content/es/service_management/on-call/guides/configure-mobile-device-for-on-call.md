@@ -92,7 +92,7 @@ Puedes anular el volumen de sistema de tu dispositivo y el modo No molestar tant
 
 7. Prueba la configuración de tu notificación push crítica tocando **Test push notifications** (Probar notificaciones push).
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 En Android, la aplicación móvil de Datadog no puede omitir los ajustes de volumen de sistema o de No molestar cuando se utiliza dentro de un perfil de trabajo. Como solución, instala la aplicación móvil de Datadog en tu perfil personal.
 </div>
 

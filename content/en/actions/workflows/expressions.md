@@ -1,5 +1,6 @@
 ---
 title: JavaScript Expressions
+description: Use inline JavaScript expressions and dedicated function/expression actions for custom data transformations in workflows.
 disable_toc: false
 aliases:
 - /service_management/workflows/actions/data_transformation/

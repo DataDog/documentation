@@ -101,10 +101,10 @@ Si tus etiquetas no siguen las [prácticas recomendadas de etiquetas][2], no uti
 
 `tags:<MY_TAG>`
 
-Por ejemplo, esta etiqueta no sigue las prácticas recomendadas:  
+Por ejemplo, esta etiqueta no sigue las prácticas recomendadas:
 `auto-discovery.cluster-autoscaler.k8s.io/daffy`
 
-Para buscar en esta etiqueta, utiliza la siguiente consulta:  
+Para buscar en esta etiqueta, utiliza la siguiente consulta:
 `tags:"auto-discovery.cluster-autoscaler.k8s.io/daffy"`
 
 ### Comodines
@@ -150,7 +150,7 @@ No pierdas tiempo creando las mismas vistas todos los días. Las búsquedas guar
 
 Para eliminar una búsqueda guardada, haz clic en el icono de la papelera situado bajo el menú desplegable Buscar traza.
 
-### Buscar servicios y entidades 
+### Buscar servicios y entidades
 
 {{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 Para buscar un servicio, utiliza el atributo `service`. Para buscar otro [tipo de entidad][20] (por ejemplo, una base de datos, una cola o un proveedor externo), recurre a otros [atributos de pares][21] que Datadog utiliza para describir dependencias que no están instrumentadas con APM. Por ejemplo, para encontrar spans (tramos) que representen llamadas a una tabla `users` desde una base de datos postgres, utiliza la siguiente consulta: `@peer.db.name:users @peer.db.system:postgres`
@@ -205,7 +205,7 @@ Haz clic en cualquier tramo para ver los detalles sobre la traza asociada:
 
 ### Columnas
 
-Para añadir otras [etiquetas de tramo o atributos][23] como columnas a la lista, pulsa el botón **Options** (Opciones) y selecciona cualquier dimensión que desees añadir:
+Para añadir otras [span tags o atributos][23] como columnas a la lista, pulsa el botón **Options** (Opciones) y selecciona cualquier dimensión que desees añadir:
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Lista de trazas con columnas" style="width:80%;">}}
 
@@ -217,7 +217,7 @@ Agrupa la consulta por cualquier etiqueta o atributo de tramo para observar los 
 
 #### Consultas 'Agrupar por' avanzadas
 
-Después de seleccionar una dimensión para la agrupación, puedes especificar de dónde obtener los valores de la dimensión utilizando el desplegable **desde**: 
+Después de seleccionar una dimensión para la agrupación, puedes especificar de dónde obtener los valores de la dimensión utilizando el desplegable **desde**:
 - **Tramo**: Agrupa utilizando la dimensión del tramo consultado (por defecto). Por ejemplo, `a`.
 - **Tramo principal**: Agrupa utilizando la dimensión especificada del tramo principal de los tramos que coinciden con la consulta. Por ejemplo, para visualizar el rendimiento de un endpoint de API en función del servicio que lo llama, agrupa por `service` desde `parent(a)`.
 - **Tramo raíz**: Agrupa utilizando la dimensión especificada del tramo raíz de la traza. Por ejemplo, para analizar patrones de solicitudes de backend en función de las páginas de frontend desde las que se originan las solicitudes, agrupa por `@view.name` desde `root`.
@@ -263,8 +263,8 @@ Las medidas vienen con un valor entero (largo) o doble, para capacidades equival
 **Unidades**
 
 Las medidas admiten unidades (tiempo en segundos o tamaño en bytes) para manejar órdenes de magnitud en el tiempo de consulta y el tiempo de visualización. La unidad es una propiedad de la propia medida, no del campo. Por ejemplo, considera una medida de duración en nanosegundos: tiene una etiqueta de tramo de `service:A` donde `duration:1000` representa `1000 milliseconds`, y otra etiqueta de tramo de `service:B` donde `duration:500` representa `500 microseconds`:
-Escala la duración en nanosegundos para todas las etiquetas de tramo que fluyen con el procesador aritmético. Utiliza un multiplicador `*1000000` en las etiquetas de tramo desde `service:A`, y un multiplicador `*1000` en etiquetas de tramo desde `service:B`.
-Utiliza `duration:>20ms` (consulta la sintaxis de búsqueda como referencia) para consultar sistemáticamente etiquetas de tramo desde ambos servicios a la vez, y ve un resultado agregado de un minuto como máximo.
+Escala la duración en nanosegundos para todas las span tags que fluyen con el procesador aritmético. Utiliza un multiplicador `*1000000` en las span tags desde `service:A`, y un multiplicador `*1000` en span tags desde `service:B`.
+Utiliza `duration:>20ms` (consulta la sintaxis de búsqueda como referencia) para consultar sistemáticamente span tags desde ambos servicios a la vez, y ve un resultado agregado de un minuto como máximo.
 
 ### Crear una faceta
 

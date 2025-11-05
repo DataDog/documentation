@@ -1,5 +1,6 @@
 ---
 title: Configure the Datadog Operator
+description: Configure Datadog Agent deployment options using DatadogAgent custom resource specifications and example manifests
 ---
 
 You can configure the Datadog Operator by adding parameters to the spec of your `DatadogAgent` deployment.

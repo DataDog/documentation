@@ -47,7 +47,7 @@ There are two main use cases supported with this [integration][1]:
    2. Drill down and view individual AWS WAF logs (requires you to [ingest AWS WAF logs into Datadog][2]).
    3. How AWS WAF inspected the request: rules that were applied and the decision made (allow, block, or count). 
    
-   <div class="alert alert-info">Note that AAP converts AWS WAF logs into AAP Traces, enabling you to view application activity (traces) and AWS WAF activity (logs converted to AAP traces) in the AAP Trace Explorer.</div>
+   <div class="alert alert-info">AAP converts AWS WAF logs into AAP Traces, enabling you to view application activity (traces) and AWS WAF activity (logs converted to AAP traces) in the AAP Trace Explorer.</div>
 
    <!-- {{< img src="security/application_security/threats/aws-waf-int-asm.png" alt="AWS WAF integration details in Datadog UI" style="width:100%;" >}} -->
    

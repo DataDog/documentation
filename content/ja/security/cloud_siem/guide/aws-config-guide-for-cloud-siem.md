@@ -6,10 +6,10 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: ドキュメント
   text: Cloud SIEM のデフォルト検出ルールの確認
-- link: /security/cloud_siem/investigate_security_signals
+- link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
   tag: ドキュメント
   text: セキュリティシグナルエクスプローラーについて学ぶ
-- link: /security/cloud_siem/log_detection_rules/
+- link: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
   tag: ドキュメント
   text: 新しい検出ルールの作成
 - link: /getting_started/integrations/aws/
@@ -64,7 +64,7 @@ Cloud SIEM は処理されたすべてのログに検出ルールを適用する
 
 [1]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Log%20Detection%22
 [9]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
-[10]: /ja/security/cloud_siem/investigate_security_signals
+[10]: /ja/security/cloud_siem/triage_and_investigate/investigate_security_signals
 [11]: https://app.datadoghq.com/dash/integration/30459/aws-cloudtrail
 [12]: https://docs.datadoghq.com/ja/security/default_rules/#cat-cloud-siem
 [13]: https://docs.datadoghq.com/ja/security/detection_rules/

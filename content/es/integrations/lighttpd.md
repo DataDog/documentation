@@ -1,75 +1,23 @@
 ---
-"app_id": "lighttpd"
-"app_uuid": "3d7ace6a-9efd-4d21-b4e6-a9956512a875"
-"assets":
-  "dashboards":
-    "lighttpd": "assets/dashboards/lighttpd_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check": "lighttpd.performance.uptime"
-      "metadata_path": "metadata.csv"
-      "prefix": "lighttpd."
-    "process_signatures":
-    - "lighttpd"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "58"
-    "source_type_name": "Lighttpd"
-  "saved_views":
-    "lighttpd_processes": "assets/saved_views/lighttpd_processes.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-"custom_kind": "integración"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "lighttpd"
-"integration_id": "lighttpd"
-"integration_title": "Lighttpd"
-"integration_version": "5.1.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "lighttpd"
-"public_title": "Lighttpd"
-"short_description": "Realiza un seguimiento del tiempo de actividad, de los bytes utilizados, de las solicitudes por segundo, de los códigos de respuesta y mucho más."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Recopilación de logs"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
-  "description": "Realiza un seguimiento del tiempo de actividad, de los bytes utilizados, de las solicitudes por segundo, de los códigos de respuesta y mucho más."
-  "media": []
-  "overview": "README.md#Información general"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics"
-  "support": "README.md#Soporte"
-  "title": "Lighttpd"
+app_id: lighttpd
+categories:
+- log collection
+custom_kind: integración
+description: Seguimiento del tiempo de actividad, de los bytes utilizados, de las
+  solicitudes por segundo, de los códigos de respuesta y mucho más more.
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics
+  tag: blog
+  text: Monitorizar métricas del servidor web Lighttpd con Datadog
+integration_version: 5.1.0
+media: []
+supported_os:
+- linux
+- windows
+- macos
+title: Lighttpd
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
-![Dashboard de Lighttpd][1]
+![Dashboard de Lighttpd](https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard_2.png)
 
 ## Información general
 
@@ -79,20 +27,21 @@ El check de Lighttpd del Agent realiza un seguimiento del tiempo de actividad, d
 
 ### Instalación
 
-El check de Lighttpd está incluido en el paquete del [Datadog Agent][2], por lo que no necesitas instalar nada más en tus servidores de Lighttpd.
+El check de Lighttpd está incluido en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest), por lo que no necesitas instalar nada más en tus servidores Lighttpd.
 
 Además, instala `mod_status` en tus servidores de Lighttpd.
 
 ### Configuración
 
 {{< tabs >}}
+
 {{% tab "Host" %}}
 
-#### Host
+#### host
 
 Para configurar este check para un Agent que se ejecuta en un host:
 
-1. Edita el archivo `lighttpd.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent][1]. Para ver todas las opciones de configuración disponibles, consulta el [ejemplo marathon.d/conf.yaml][2]:
+1. Edita el archivo `lighttpd.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory). Consulta el [ejemplo de lighttpd.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles:
 
    ```yaml
    init_config:
@@ -104,17 +53,15 @@ Para configurar este check para un Agent que se ejecuta en un host:
      - lighttpd_status_url: http://localhost/server-status?auto
    ```
 
-2. [Reinicia el Agent][3].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
+
 {{% tab "Contenedorizado" %}}
 
-#### Contenedores
+#### En contenedores
 
-Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
+Para los entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/) para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 | Parámetro            | Valor                                                           |
 | -------------------- | --------------------------------------------------------------- |
@@ -122,8 +69,8 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 | `<INIT_CONFIG>`      | en blanco o `{}`                                                   |
 | `<INSTANCE_CONFIG>`  | `{"lighttpd_status_url": "http://%%host%%/server-status?auto"}` |
 
-[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
+
 {{< /tabs >}}
 
 #### Recopilación de logs
@@ -134,7 +81,7 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
    logs_enabled: true
    ```
 
-2. Añade este bloque de configuración a tu archivo `lighttpd.d/conf.yaml` para empezar a recopilar logs de Lighttpd:
+1. Añade este bloque de configuración a tu archivo `lighttpd.d/conf.yaml` para empezar a recopilar logs de Lighttpd:
 
    ```yaml
    logs:
@@ -144,42 +91,67 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
    ```
 
    Cambia el valor del parámetro `path` y configúralo para tu entorno.
-   Para ver todas las opciones de configuración disponibles, consulta el [ejemplo lighttpd.d/conf.yaml][3].
+   Consulta el [ejemplo de lighttpd.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
-3. [Reinicia el Agent][4].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando `status` del Agent][5] y busca `lighttpd` en la sección Checks.
+[Ejecuta el subcomando del Agent `status` ](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `lighttpd` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "lighttpd" >}}
 
+| | |
+| --- | --- |
+| **lighttpd.connections.state_handle_request** <br>(gauge) | \[Sólo Lighttpd 2\] Número de conexiones activas en el estado de manejo interno de la solicitud.<br>_Se muestra como conexión_ |
+| **lighttpd.connections.state_keep_alive** <br>(gauge) | \[Sólo Lighttpd 2\] Número de conexiones inactivas.<br>_Se muestra como conexión_ |
+| **lighttpd.connections.state_read_header** <br>(gauge) | \[Sólo Lighttpd 2\] Número de conexiones activas en el estado de lectura de la cabecera de la solicitud http.<br>_Se muestra como conexión_ |
+| **lighttpd.connections.state_start** <br>(gauge) | \[Sólo Lighttpd 2\] Número de conexiones activas en el estado de inicialización del temporizador de inactividad.<br>_Se muestra como conexión_ |
+| **lighttpd.connections.state_write_response** <br>(gauge) | \[Sólo Lighttpd 2\] Número de conexiones activas en el estado de escritura de la respuesta a la red.<br>_Se muestra como conexión_ |
+| **lighttpd.net.bytes** <br>(gauge) | \[Sólo Lighttpd 1\] Número de bytes enviados y recibidos desde el inicio.<br>_Se muestra como byte_ |
+| **lighttpd.net.bytes_in** <br>(rate) | \[Sólo Lighttpd 2\] Número de bytes recibidos por segundo.<br>_Se muestra como byte_ |
+| **lighttpd.net.bytes_in_avg** <br>(gauge) | \[Sólo Lighttpd 2\] Número medio de bytes recibidos por segundo desde el inicio.<br>_Se muestra como byte_ |
+| **lighttpd.net.bytes_in_avg_5sec** <br>(gauge) | \[Sólo Lighttpd 2\] Número medio de bytes recibidos por segundo durante los últimos 5 segundos.<br>_Se muestra como byte_ |
+| **lighttpd.net.bytes_out** <br>(rate) | \[Sólo Lighttpd 2\] Número de bytes enviados por segundo.<br>_Se muestra como byte_ |
+| **lighttpd.net.bytes_out_avg** <br>(gauge) | \[Sólo Lighttpd 2\] Número medio de bytes enviados por segundo desde el inicio.<br>_Se muestra como byte_ |
+| **lighttpd.net.bytes_out_avg_5sec** <br>(gauge) | \[Sólo Lighttpd 2\] Número medio de bytes enviados por segundo durante los últimos 5 segundos.<br>_Se muestra como byte_ |
+| **lighttpd.net.bytes_per_s** <br>(gauge) | \[Sólo Lighttpd 1\] Número de bytes enviados y recibidos por segundo.<br>_Se muestra como byte_ |
+| **lighttpd.net.connections_avg** <br>(gauge) | \[Sólo Lighttpd 2\] Número medio de conexiones por segundo desde el inicio.<br>_Se muestra como conexión_ |
+| **lighttpd.net.connections_avg_5sec** <br>(gauge) | \[Sólo Lighttpd 2\] Número medio de conexiones por segundo durante los últimos 5 segundos.<br>_Se muestra como conexión_ |
+| **lighttpd.net.connections_total** <br>(rate) | \[Sólo Lighttpd 2\] Número total de conexiones por segundo.<br>_Se muestra como conexión_ |
+| **lighttpd.net.hits** <br>(gauge) | \[Sólo Lighttpd 1\] Número de aciertos desde el inicio.<br>_Se muestra como acierto_ |
+| **lighttpd.net.request_per_s** <br>(gauge) | \[Sólo Lighttpd 1\] Número de solicitudes por segundo.<br>_Se muestra como solicitud_ |
+| **lighttpd.net.requests_avg** <br>(gauge) | \[Sólo Lighttpd 2\] Número medio de solicitudes por segundo desde el inicio.<br>_Se muestra como solicitud_ |
+| **lighttpd.net.requests_avg_5sec** <br>(gauge) | \[Sólo Lighttpd 2\] Número medio de solicitudes por segundo durante los últimos 5 segundos.<br>_Se muestra como solicitud_ |
+| **lighttpd.net.requests_total** <br>(rate) | \[Sólo Lighttpd 2\] Número de solicitudes por segundo.<br>_Se muestra como solicitud_ |
+| **lighttpd.performance.busy_servers** <br>(gauge) | \[Sólo Lighttpd 1\] Número de conexiones inactivas.<br>_Se muestra como conexión_ |
+| **lighttpd.performance.idle_server** <br>(gauge) | \[Sólo Lighttpd 1\] Número de conexiones inactivas.<br>_Se muestra como conexión_ |
+| **lighttpd.performance.memory_usage** <br>(gauge) | \[Sólo Lighttpd 2\] Cantidad de memoria utilizada por el servidor.<br>_Se muestra como byte_ |
+| **lighttpd.performance.uptime** <br>(gauge) | \[Sólo Lighttpd 1\] Cantidad de tiempo que el servidor ha estado activo.<br>_Se muestra como segundo_ |
+| **lighttpd.response.status_1xx** <br>(rate) | \[Sólo Lighttpd 2\] Número de códigos de estado 1xx generados por segundo.<br>_Se muestra como respuesta_ |
+| **lighttpd.response.status_2xx** <br>(rate) | \[Sólo Lighttpd 2\] Número de códigos de estado 2xx generados por segundo.<br>_Se muestra como respuesta_ |
+| **lighttpd.response.status_3xx** <br>(rate) | \[Sólo Lighttpd 2\] Número de códigos de estado 3xx generados por segundo.<br>_Se muestra como respuesta_ |
+| **lighttpd.response.status_4xx** <br>(rate) | \[Sólo Lighttpd 2\] Número de códigos de estado 4xx generados por segundo.<br>_Se muestra como respuesta_ |
+| **lighttpd.response.status_5xx** <br>(rate) | \[Sólo Lighttpd 2\] Número de códigos de estado 5xx generados por segundo.<br>_Se muestra como respuesta_ |
 
 ### Eventos
 
 El check de Lighttpd no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "lighttpd" >}}
 
+**lighttpd.can_connect**
+
+Devuelve `CRITICAL` si el Agent no puede conectarse y recopilar métricas de la instancia de Lighttpd monitorizada, si no devuelve `OK`.
+
+_Estados: ok, crítico_
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][6].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).
 
 ## Referencias adicionales
 
-- [Monitoriza métricas del servidor web Lighttpd con Datadog][7].
-
-
-
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard_2.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/help/
-[7]: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics
+- [Monitorizar métricas del servidor web Lighttpd con Datadog](https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics).

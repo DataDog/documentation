@@ -1,5 +1,6 @@
 ---
 title: Container Discovery Management
+description: Control which containers the Datadog Agent monitors by configuring discovery rules and inclusion/exclusion patterns
 aliases:
  - /agent/autodiscovery/management
  - /agent/kubernetes/management
@@ -38,7 +39,7 @@ Use the environment variables in the table below to configure container filterin
 - container image name (`image`)
 - Kubernetes namespace (`kube_namespace`)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 
 The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
 
@@ -308,6 +309,48 @@ metadata:
     ad.datadoghq.com/tolerate-unready: "true"
   ...
 ```
+
+## Security configuration
+
+In **Agent v7.70+**, you can restrict security monitoring for specific containers, so you only get billed for the containers you want to have monitored. This functionality is not supported for the Datadog Operator.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+| Feature                               | Include container                                   | Exclude container                                   |
+|---------------------------------------|-----------------------------------------------------|-----------------------------------------------------|
+| [Cloud Security Misconfigurations][1] | `datadog.securityAgent.compliance.containerInclude` | `datadog.securityAgent.compliance.containerExclude` |
+| [Cloud Security Vulnerabilities][2]   | `datadog.sbom.containerImage.containerInclude`      | `datadog.sbom.containerImage.containerExclude`      |
+| [Workload Protection][3]              | `datadog.securityAgent.runtime.containerInclude`    | `datadog.securityAgent.runtime.containerExclude`    |
+
+[1]: /security/cloud_security_management/misconfigurations/
+[2]: /security/cloud_security_management/vulnerabilities
+[3]: /security/workload_protection/
+{{% /tab %}}
+{{% tab "Config file" %}}
+For [Cloud Security Vulnerabilities][1], you can use the following format in your config file to include or exclude containers:
+```
+---
+sbom:
+  container_image:
+    container_include: ...
+    container_exclude: ...
+```
+[1]: /security/cloud_security_management/vulnerabilities
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+
+| Feature                               | Include container                              | Exclude container                              |
+|---------------------------------------|------------------------------------------------|------------------------------------------------|
+| [Cloud Security Misconfigurations][1] | `DD_COMPLIANCE_CONFIG_CONTAINER_INCLUDE`       | `DD_COMPLIANCE_CONFIG_CONTAINER_EXCLUDE`       |
+| [Cloud Security Vulnerabilities][2]   | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_INCLUDE`    | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_EXCLUDE`    |
+| [Workload Protection][3]              | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_INCLUDE` | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_EXCLUDE` |
+
+[1]: /security/cloud_security_management/misconfigurations/
+[2]: /security/cloud_security_management/vulnerabilities
+[3]: /security/workload_protection/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

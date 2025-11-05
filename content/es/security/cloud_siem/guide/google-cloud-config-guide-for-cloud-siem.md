@@ -32,7 +32,7 @@ Utilice [Google Cloud Dataflow][2] y la [plantilla de Datadog][3] para reenviar 
 1. [Crear y ejecutar el trabajo de Dataflow](#create-and-run-the-dataflow-job)
 1. [Usar Cloud SIEM para clasificar señales de seguridad](#use-cloud-siem-to-triage-security-signals)
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">La recopilación de logs de Google Cloud con una suscripción Push Pub/Sub</a> está en proceso de ser obsoleta por las siguientes razones:
 

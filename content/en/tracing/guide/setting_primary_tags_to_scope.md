@@ -1,5 +1,6 @@
 ---
 title: Set Primary Tags to Scope
+description: Learn how to set primary tags to scope and filter APM data across different environments, services, and versions for better organization.
 aliases:
   - /tracing/advanced/setting_primary_tags_to_scope/
 further_reading:

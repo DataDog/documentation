@@ -329,7 +329,7 @@ iOS SDK は、SDK の初期化時に指定したオプションに応じてユ�
 
 ### RUM セッションのサンプリング
 
-<div class="alert alert-warning">セッションのサンプルレートの設定はError Tracking には適用されません。</div>
+<div class="alert alert-danger">セッションのサンプルレートの設定はError Tracking には適用されません。</div>
 
 アプリケーションが Datadog RUM に送信するデータを制御するには、[RUM iOS SDK の初期化][7] 時に RUM セッションのサンプリング レートを指定できます。レートは 0 から 100 の間のパーセンテージです。既定では、`sessionSamplingRate` は 100 (すべてのセッションを保持) に設定されています。
 

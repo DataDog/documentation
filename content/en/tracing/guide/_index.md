@@ -1,5 +1,6 @@
 ---
 title: Tracing Guides
+description: Step-by-step guides for getting started with APM, enabling tracing tutorials, configuration guides, and advanced tracing techniques.
 
 private: true
 disable_toc: true

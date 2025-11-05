@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-disaster-recovery/" header="Join the Preview!">}}
-Datadog Disaster Recovery is in Preview, but you can request access! Use this form to submit your request.
+Datadog Disaster Recovery is in Limited Availability. Use this form to request access!
 {{< /callout >}}
 
 ## Overview 
@@ -72,7 +72,7 @@ Email your new org name to your [Customer Success Manager](mailto:success@datado
 
 {{% collapse-content title="Retrieve the public IDs and link your DDR and primary orgs " level="h5" %}}
 
-<div class="alert alert-warning"> For security reasons, Datadog is unable to link the orgs on your behalf. </div>
+<div class="alert alert-danger"> For security reasons, Datadog is unable to link the orgs on your behalf. </div>
 
 After the Datadog team has set your DDR org, use the Datadog [public API endpoint][8] to retrieve the public IDs of the primary and DDR org. 
 
@@ -167,7 +167,7 @@ Here's an example of a datadog-sync-cli command for syncing log configurations:
 datadog-sync migrate –config config –resources="users,roles,logs_pipelines,logs_pipelines_order,logs_indexes,logs_indexes_order,logs_metrics,logs_restriction_queries" –cleanup=Force
 ```
 
-<div class="alert alert-warning"> <strong>datadog-sync-cli limitation for log standard attributes </strong><br> The datadog-sync-cli is regularly being updated with new resources. At this time, syncing log standard attributes is not supported for private beta. If you use standard attributes with your log pipelines and are remapping your logs, attributes are a dependency that you need to manually re-configure in your DDR org. See the Datadog <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#overview">standard attribute documentation</a> for support.
+<div class="alert alert-danger"> <strong>datadog-sync-cli limitation for log standard attributes </strong><br> The datadog-sync-cli is regularly being updated with new resources. At this time, syncing log standard attributes is not supported for private beta. If you use standard attributes with your log pipelines and are remapping your logs, attributes are a dependency that you need to manually re-configure in your DDR org. See the Datadog <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#overview">standard attribute documentation</a> for support.
 </div>
 
 #### Verify availability at the DDR site
@@ -216,7 +216,7 @@ Then, follow the prompt to scope the hosts and telemetry (metrics, logs, traces)
 {{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="Scope the hosts and telemetry required to failover" style="width:80%;" >}}
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Note</strong>: Cloud Integrations can only run in either your primary or DDR Datadog site, but not both at the same time, so failing them over will cease Cloud Integration data in your primary site. <strong>During an integration failover, integrations run only in the DDR data center</strong>. When no longer in failover, disable the failover policy to return integration data collection to the primary org. 
 </div>
 
@@ -334,7 +334,7 @@ You can test failover for your cloud integrations from your DDR organization's l
 
 On the failover landing page, you can check the status of your DDR org, or click **Fail over your integrations** to test your cloud integration failover.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 When no longer in failover, <strong>disable the failover policy</strong> in the DDR org to return integration data collection to the primary org. 
 </div>
 

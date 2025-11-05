@@ -69,7 +69,7 @@ Para consultar datos de costes estimados a través de la API, consulta [Obtener 
 
 ### Resumen de costes (suborganización)
 
-<div class="alert alert-warning">Esta función tiene una disponibilidad limitada. Para solicitar acceso y confirmar que tu organización cumple los criterios de la función, ponte en contacto con tu representante de cuenta o con el <a href="https://docs.datadoghq.com/help/">servicio de atención al cliente</a>.</div>
+<div class="alert alert-danger">Esta función tiene una disponibilidad limitada. Para solicitar acceso y confirmar que tu organización cumple los criterios de la función, ponte en contacto con tu representante de cuenta o con el <a href="https://docs.datadoghq.com/help/">servicio de atención al cliente</a>.</div>
 
 Como suborganización, sólo puedes ver los costes de tu organización. Esta restricción permite una propiedad más distribuida y elimina la necesidad de conceder permisos de administrador más amplios a la organización principal.
 

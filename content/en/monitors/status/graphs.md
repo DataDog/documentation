@@ -1,5 +1,6 @@
 ---
 title: Status Graphs
+description: "Understand monitor status page graphs including evaluated data, source data, and transitions to analyze monitor behavior."
 further_reading:
 - link: "monitors/configuration/?tab=thresholdalert"
   tag: "Documentation"

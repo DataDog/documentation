@@ -59,8 +59,8 @@ To configure the tracer using environment variables, set the variables before la
 
 To configure the Tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before calling `Tracer.Configure()`. For example:
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
+<div class="alert alert-danger">
+  Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
 </div>
 
 ```csharp
@@ -147,11 +147,6 @@ The following configuration variables are available for both automatic and custo
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
 The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
 **Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
-
-`DD_SPAN_SAMPLING_RULES`
-: **Default**: `null`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][3].<br>
-**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]`
 
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>

@@ -13,7 +13,7 @@ further_reading:
       text: "Meilleures pratiques pour la gestion des organisations Datadog à grande échelle (en anglais)"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La plateforme Datadog for Government prend uniquement en charge l'authentification SAML ou l'authentification de base avec nom d'utilisateur/adresse e-mail et mot de passe. Avant de configurer l'authentification SAML, assurez-vous qu'au moins un compte avec nom d'utilisateur ou adresse e-mail et mot de passe est disponible afin de maintenir l'accès pendant le processus de configuration. Datadog recommande d'activer l'authentification multifacteur (MFA) pour les comptes avec mot de passe.
+<div class="alert alert-danger">La plateforme Datadog for Government prend uniquement en charge l'authentification SAML ou l'authentification de base avec nom d'utilisateur/adresse e-mail et mot de passe. Avant de configurer l'authentification SAML, assurez-vous qu'au moins un compte avec nom d'utilisateur ou adresse e-mail et mot de passe est disponible afin de maintenir l'accès pendant le processus de configuration. Datadog recommande d'activer l'authentification multifacteur (MFA) pour les comptes avec mot de passe.
 
 Si vous avez besoin d'activer SAML pour un compte d'essai, contactez <a href="https://docs.datadoghq.com/getting_started/support/">l'assistance Datadog</a>.</div>
 
@@ -39,7 +39,7 @@ Vous pouvez gérer votre fuseau horaire, vos préférences d'accessibilité visu
 #### Abonnements aux services de messagerie
 
 Dans la section des abonnements par e-mail, vous avez accès aux rapports suivants :{{< site-region region="us3,us5,gov,ap1,ap2" >}}
-<div class="alert alert-warning">Les résumés par e-mail ne sont pas disponibles dans le site sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Les résumés par e-mail ne sont pas disponibles dans le site sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 * Daily Digest (Synthèse quotidienne)

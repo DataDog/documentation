@@ -26,14 +26,14 @@ title: Empezando con Code Analysis
 
 ## Información general
 
-[Datadog Code Analysis][1] te permite identificar y solucionar problemas de calidad del código y vulnerabilidades de seguridad antes de desplegarlo en producción, garantizando un código seguro y limpio durante todo el ciclo de vida de desarrollo del software. 
+[Datadog Code Analysis][1] te permite identificar y solucionar problemas de calidad del código y vulnerabilidades de seguridad antes de desplegarlo en producción, garantizando un código seguro y limpio durante todo el ciclo de vida de desarrollo del software.
 
 {{< img src="/code_analysis/repositories.png" alt="Botón de disponibilidad de Session Replay y opciones de visualización" style="width:100%" >}}
 
 Code Analysis ofrece un completo conjunto de herramientas, entre ellas [Static Analysis][2] y [Software Composition Analysis][3], para mejorar la entrega global de software.
 
 * Static Analysis (SAST) analiza tus repositorios en busca de problemas de calidad y seguridad en el código de origen y sugiere correcciones para evitar que estos problemas afecten a la producción.
-* Software Composition Analysis (SCA) analiza tu código base en busca de bibliotecas de código abierto importadas, ayudándote a gestionar tus dependencias y a proteger tus aplicaciones frente a amenazas externas.
+* Software Composition Analysis (SCA) analiza tu código base en busca de librerías de código abierto importadas, ayudándote a gestionar tus dependencias y a proteger tus aplicaciones frente a amenazas externas.
 
 Al utilizar [`datadog-ci`][5], puedes integrar los análisis de otros proveedores en tu flujo de trabajo de desarrollo, lo que te permite enviar resultados de Static Analysis y SCA directamente a Datadog. Puedes acceder a los últimos resultados de análisis de cada repositorio en la página [**Repositorios**][6] para monitorizar de forma efectiva y mejorar el estado del código en todas las ramas.
 
@@ -66,7 +66,7 @@ Selecciona entre los siguientes tipos de análisis que quieres ejecutar en tu re
 * [Static Analysis][101]: Examina tu código en busca de malas prácticas y vulnerabilidades.
 * [Software Composition Analysis][102]: Analiza tus bibliotecas de terceros en busca de vulnerabilidades.
 
-Selecciona un proveedor de gestión de código fuente (SCM) como [GitHub](#github) u [otro proveedor](#other-providers). 
+Selecciona un proveedor de gestión de código fuente (SCM) como [GitHub](#github) u [otro proveedor](#other-providers).
 
 ### GitHub
 
@@ -92,7 +92,7 @@ Debes [ejecutar un análisis de tu repositorio](#run-code-analysis-in-your-ci-pr
 
 Para cargar resultados en Datadog, asegúrate de que dispones de [una clave de API y una clave de aplicación Datadog][110].
 
-Especifica un nombre para el servicio o la biblioteca en el campo `dd_service`, como por ejemplo, `shopist`.
+Especifica un nombre para el servicio o la librería en el campo `dd_service`, como por ejemplo, `shopist`.
 
 ### Acción de GitHub
 
@@ -164,7 +164,7 @@ Añade el siguiente contenido a la configuración de tu pipeline CI:
 export DD_SITE="datadoghq.com"
 
 # Install dependencies
-npm install -g @datadog/datadog-ci 
+npm install -g @datadog/datadog-ci
 
 # Download the latest Datadog static analyzer:
 # https://github.com/DataDog/datadog-static-analyzer/releases
@@ -230,7 +230,7 @@ Una vez que hayas configurado estos scripts, ejecuta un análisis de tu reposito
 
 ## Ejecutar Static Analysis en un IDE
 
-Instala los [complementos IDE Datadog][7] para ejecutar análisis de Static Analysis localmente y ver los resultados directamente en su editor de código. Puedes detectar y solucionar problemas como problemas de mantenimiento, errores o vulnerabilidades de seguridad en el código antes de confirmar los cambios. 
+Instala los [complementos IDE Datadog][7] para ejecutar análisis de Static Analysis localmente y ver los resultados directamente en su editor de código. Puedes detectar y solucionar problemas como problemas de mantenimiento, errores o vulnerabilidades de seguridad en el código antes de confirmar los cambios.
 
 Para empezar a ejecutar análisis de Static Analysis en tu IDE, consulta la documentación correspondiente al editor de código elegido.
 
@@ -245,7 +245,7 @@ Puedes integrar Code Analysis con las solicitudes pull de GitHub para señalar a
 
 {{< img src="/getting_started/code_analysis/github_suggestion.png" alt="Sugerencia de Code Analysis en una solicitud pull de GitHub" style="width:100%" >}}
 
-Una vez configurado, Code Analysis comenta directamente la solicitud pull, indicando las infracciones con detalles como el nombre, el ID, la gravedad y las correcciones sugeridas, que puedes aplicar directamente desde la interfaz de usuario de GitHub. 
+Una vez configurado, Code Analysis comenta directamente la solicitud pull, indicando las infracciones con detalles como el nombre, el ID, la gravedad y las correcciones sugeridas, que puedes aplicar directamente desde la interfaz de usuario de GitHub.
 
 Después de añadir los [archivos de configuración apropiados][10] a tu repositorio, crea una [aplicación GitHub][11] en Datadog (una nueva aplicación o la actualización de una existente). Asegúrate de que tienes acceso de lectura y escritura a las solicitudes pull.
 
@@ -257,9 +257,9 @@ Para obtener más información, consulta [Solicitudes pull de GitHub][12].
 
 ## Buscar y gestionar repositorios
 
-Haz clic en un repositorio en la página [**Repositorios**][6] para acceder a una vista más detallada, donde puedes personalizar la consulta de búsqueda por rama (aparece primero la rama por defecto) y por confirmación (empieza por la más reciente). 
+Haz clic en un repositorio en la página [**Repositorios**][6] para acceder a una vista más detallada, donde puedes personalizar la consulta de búsqueda por rama (aparece primero la rama por defecto) y por confirmación (empieza por la más reciente).
 
-{{< img src="/getting_started/code_analysis/sca_vulnerabilities.png" alt="Vista de Vulnerabilidades de bibliotecas en los resultados de Code Analysis de la rama por defecto del repositorio y la confirmación más reciente" style="width:100%" >}}
+{{< img src="/getting_started/code_analysis/sca_vulnerabilities.png" alt="Vista de Vulnerabilidades de librerías en los resultados de Code Analysis de la rama por defecto del repositorio y la confirmación más reciente" style="width:100%" >}}
 
 {{< tabs >}}
 {{% tab "Static Analysis" %}}
@@ -285,12 +285,12 @@ Puedes acceder a las correcciones sugeridas directamente desde los resultados pa
 {{% /tab %}}
 {{% tab "Software Composition Analysis" %}}
 
-Puedes utilizar las siguientes facetas predefinidas para crear una consulta de búsqueda a fin de identificar y tratar los riesgos de seguridad en bibliotecas de terceros en la pestaña **Vulnerabilidades de bibliotecas** o revisar tu inventario de bibliotecas en la pestaña **Catálogo de bibliotecas**.
+Puedes utilizar las siguientes facetas predefinidas para crear una consulta de búsqueda a fin de identificar y tratar los riesgos de seguridad en bibliotecas de terceros en la pestaña **Vulnerabilidades de librerías** o revisar tu inventario de librerías en la pestaña **Catálogo de librerías**.
 
 | Nombre de la faceta         | Descripción                                                    |
 |--------------------|----------------------------------------------------------------|
 | Nombre de la dependencia    | Identifica las bibliotecas por sus nombres.                              |
-| Versión de la dependencia | Filtros por versiones específicas de bibliotecas.                     |
+| Versión de la dependencia | Filtros por versiones específicas de librerías.                     |
 | Lenguaje           | Ordena bibliotecas por el lenguaje de programación.                   |
 | Puntuación              | Ordena la puntuación de riesgo o calidad de las dependencias.           |
 | Gravedad           | Filtra las vulnerabilidades en función de su gravedad.        |
@@ -305,7 +305,7 @@ Puedes acceder a los informes sobre vulnerabilidades y localizar los archivos fu
 
 ## Explorar resultados en el Catálogo de servicios
 
-Investiga las infracciones de código asociadas a tus servicios y las infracciones de código identificadas en Static Analysis para solucionar ralentizaciones y fallos. Ve a [**Gestión de servicios** > **Servicios** > **Catálogo de servicios**][13] y haz clic en la vista **Delivery** (Entrega) para analizar el estado de preproducción de tus servicios. 
+Investiga las infracciones de código asociadas a tus servicios y las infracciones de código identificadas en Static Analysis para solucionar ralentizaciones y fallos. Ve a [**Gestión de servicios** > **Servicios** > **Catálogo de servicios**][13] y haz clic en la vista **Delivery** (Entrega) para analizar el estado de preproducción de tus servicios.
 
 {{< img src="/getting_started/code_analysis/catalog_view.png" alt="Enlace al código fuente en GitHub desde una vulnerabilidad detectada en una biblioteca" style="width:100%" >}}
 
@@ -370,7 +370,7 @@ está asociado a `myservice`, entonces el equipo `myservice` se asociará a cual
 detectada en este archivo.
 
 Si no se encuentra ningún servicio o equipo, Datadog utiliza el [archivo][15] `CODEOWNERS`
-de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un archivo en tu proveedor Git. 
+de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un archivo en tu proveedor Git.
 
 **Nota**: Para que esta característica funcione correctamente, debes asignar con precisión tus equipos de proveedores Git a tus [equipos de Datadog][16].
 
@@ -389,7 +389,7 @@ de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un 
 [10]: /es/code_analysis/static_analysis/github_actions/
 [11]: /es/code_analysis/github_pull_requests/#update-an-existing-github-app
 [12]: /es/code_analysis/github_pull_requests
-[13]: https://app.datadoghq.com/services 
+[13]: https://app.datadoghq.com/services
 [14]: https://en.wikipedia.org/wiki/Glob_(programming)
 [15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 [16]: /es/account_management/teams/

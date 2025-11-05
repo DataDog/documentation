@@ -15,7 +15,7 @@ further_reading:
     text: "Monitor all your CI pipelines with Datadog"
 ---
 
-<div class="alert alert-warning"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
+<div class="alert alert-danger"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
 
 ## Overview
 

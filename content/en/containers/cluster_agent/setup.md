@@ -1,5 +1,6 @@
 ---
 title: Set Up the Datadog Cluster Agent
+description: Install and configure the Datadog Cluster Agent for Kubernetes cluster monitoring and autoscaling
 aliases:
 - /agent/cluster_agent/setup
 - /agent/cluster_agent/event_collection

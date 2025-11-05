@@ -166,7 +166,7 @@ Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][9].
 
 La Monitorización de base de datos admite consultas personalizadas para bases de datos Oracle. Para obtener más información sobre las opciones de configuración disponibles, consulta [conf.yaml.example][4].
 
-<div class="alert alert-warning">La ejecución de consultas personalizadas puede dar lugar a costes o tasas adicionales evaluados por Oracle.</div>
+<div class="alert alert-danger">La ejecución de consultas personalizadas puede dar lugar a costes o tasas adicionales evaluados por Oracle.</div>
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview

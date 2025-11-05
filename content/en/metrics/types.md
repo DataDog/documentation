@@ -224,8 +224,7 @@ That is, for a distribution metric with added percentile aggregations during a g
 
 This functionality allows you to control tagging for metrics where host-level granularity is not necessary. Learn more about [Metrics without Limits™][1].
 
-**Note**: The exclusion of tags with `!` is not accepted with this feature.
-
+**Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
 [1]: /metrics/metrics-without-limits/
 {{% /tab %}}

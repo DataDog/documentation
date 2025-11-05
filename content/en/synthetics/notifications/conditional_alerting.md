@@ -15,7 +15,7 @@ further_reading:
 
 Use conditional templating to change messages, set notification handles, or override alert priority based on test results. This is especially useful when routing alerts to specific teams.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 
 To ensure notifications are delivered properly, always include a notification handle in your conditional logic. Notifications are dropped if no handle is provided. Make sure to:
 

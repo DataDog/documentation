@@ -28,7 +28,7 @@ title: 속도 제한 메트릭에서 생성된 이벤트
 
 Datadog이 카디널리티 증가를 감지하면 속도 제한이 적용되기 전에 경고 [이벤트][2]가 생성됩니다. 메트릭 카디널리티가 계속 증가하면 속도 제한이 적용될 수 있습니다. 메트릭에 속도 제한이 적용된 경우, 속도 제한이 적용되었음을 알리는 두 번째 이벤트가 생성됩니다. [Event Explorer][3]에서 해당 이벤트를 확인할 수 있습니다.
 
-<div class="alert alert-warning">Datadog은 이후의 모든 속도 제한 이벤트에 관한 알림을 전송하지 않습니다. 메트릭의 속도 제한이 발생할 때 경고을 전송하는 Event Monitor를 구축하는 것이 가장 좋습니다.</div>
+<div class="alert alert-danger">Datadog은 이후의 모든 속도 제한 이벤트에 관한 알림을 전송하지 않습니다. 메트릭의 속도 제한이 발생할 때 경고을 전송하는 Event Monitor를 구축하는 것이 가장 좋습니다.</div>
 
 ## 속도 제한 이벤트 모니터링
 
@@ -51,7 +51,7 @@ Datadog이 카디널리티 증가를 감지하면 속도 제한이 적용되기 
 
 ## 속도 제한 해제 요청 제출하기
 
-<div class="alert alert-warning">Datadog Admin만 메트릭 속도 제한 해제를 요청할 수 있습니다. Admin이 아니라면 지원 티켓에 Admin을 포함하여 요청을 확인하도록 합니다.</div>
+<div class="alert alert-danger">Datadog Admin만 메트릭 속도 제한 해제를 요청할 수 있습니다. Admin이 아니라면 지원 티켓에 Admin을 포함하여 요청을 확인하도록 합니다.</div>
 
 무제한 태그를 제거하는 변경 작업 후 [Datadog Support][5]에 요청하여 속도 제한을 해제합니다. 요청 시 다음 정보를 포함하세요.
 - 속도 제한 메트릭 이름

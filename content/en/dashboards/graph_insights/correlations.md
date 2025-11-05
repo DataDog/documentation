@@ -1,5 +1,6 @@
 ---
 title: Metric Correlations
+description: Find potential root causes by discovering metrics with irregular behavior that correlate with observed issues.
 aliases:
     - /graphing/correlations/
     - /dashboards/correlations/

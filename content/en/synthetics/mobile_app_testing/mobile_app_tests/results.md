@@ -74,17 +74,21 @@ Records
 
 ### Screenshots and actions
 
-Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration.
+Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration. 
 
-{{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width=80%" >}}
+{{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width:100%" >}}
+
+Screenshots can be disabled by checking "Do not capture screenshot for this step" in the **Advanced Options** section.
+
+{{< img src="mobile_app_testing/do_not_capture_screenshot.png" alt="Advanced options for a Mobile app test, highlighting Do not capture screenshot for this step" style="width:60%" >}}
 
 ### Video replay
 
-Use video replay to diagnose test failures by showing unexpected UI behavior or pop-ups that may have caused the issue.
+Use video replay to diagnose test failures by showing unexpected UI behavior or pop-ups that may have caused the issue. Video replay requires [screenshots to be enabled](#screenshots-and-actions). Disabling screenshots for a step prevents video replay for all test runs.
 
-Click on an individual test run from the [Mobile Application test details page][11] to view detailed information in the side panel, including step duration, pass/fail status, and screenshots. Use the **Video Replay** tab to watch the complete test execution.
+Click the video icon ▶️ for a failed test run on the [Mobile Application test details page][11] to watch the complete test execution. You can also access video replay for all test runs using the **Video Replay** tab in the test run side panel, which provides detailed test run information.
 
-{{< img src="mobile_app_testing/mobile_app_video_replay.mp4" alt="Video Replay of a test run in Mobile App testing" video=true >}}
+{{< img src="mobile_app_testing/video_replay_2.mp4" alt="Video Replay of a test run in Mobile App testing" video=true >}}
 
 **Note**: Mobile Application test session replays are not available in RUM.
 
@@ -99,30 +103,16 @@ Click an element to view additional attributes:
 
 View and download crash reports for your iOS and Android devices in the [Results Explorer][12].
 
-{{< tabs >}}
-{{% tab "iOS" %}}
+To find specific crash reports, use the following queries in the search bar:
+- **iOS**: `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:ios`
+- **Android**: `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:android`
 
-In the Results Explorer, filter and search for crash reports with the query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:ios` to identify, view, and download crash reports for your iOS devices:
 
-{{< img src="mobile_app_testing/ios_search.png" alt="Screenshot the Results Explorer using filter and search to locate iOS crash results" style="width=80%" >}}
+{{< img src="mobile_app_testing/ios_search_2.png" alt="Screenshot the Results Explorer using filter and search to locate iOS crash results" style="width=80%" >}}
 
-Select a failed test and download the crash report:
+Click on a failed test to open the side panel and download the crash report in the **Run Details** tab:
 
-{{< img src="mobile_app_testing/ios_crash_report.png" alt="Screenshot of a test result highlighting the ability to download the iOS crash report" style="width=80%" >}}
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-In the Results Explorer, filter and search for crash reports with the query `@checkType:mobile @result.result.error:"Your application has crashed during the test." @result.result.device.platform.name:android` to identify, view, and download crash reports for your Android devices.
-
-{{< img src="mobile_app_testing/android_search.png" alt="Screenshot the Results Explorer using filter and search to locate Android crash results" style="width=80%" >}}
-
-Select a failed test and download the crash report:
-
-{{< img src="mobile_app_testing/andriod_crash_report.png" alt="Screenshot of a test result highlighting the ability to download the Android crash report" style="width=80%" >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< img src="mobile_app_testing/ios_crash_report_2.png" alt="Screenshot of a test result highlighting the ability to download the iOS crash report" style="width=80%" >}}
 
 ## Failed results
 
@@ -144,7 +134,7 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/guide/synthetic-test-monitors/
+[1]: /monitors/types/synthetic_monitoring/
 [2]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [3]: /continuous_testing/cicd_integrations
 [4]: /mobile_app_testing/mobile_app_tests/#scheduling-and-alert

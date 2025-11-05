@@ -248,7 +248,7 @@
     "summary": "Desactivar el silenciamiento de un host"
   },
   "ListHosts": {
-    "description": "Este endpoint permite buscar hosts por nombre, alias o etiqueta.\nLos hosts activos durante las últimas 3 horas se incluyen por defecto.\nEl periodo de conservación es de 7 días.\nLos resultados se paginan con un máximo de 1000 resultados a la vez.",
+    "description": "Este endpoint permite buscar hosts por nombre, alias o etiqueta.\nPor defecto, se incluyen los hosts activos en las últimas 3 horas.\nLa retención es de 7 días.\nLos resultados se paginan con un máximo de 1000 resultados a la vez.\n**Nota:** Si el host es una instancia de Amazon EC2, `id` se sustituye por `aws_id` en la respuesta.\n**Nota**: Para enriquecer los datos devueltos por este endpoint con escaneos de seguridad, consulta el nuevo endpoint [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata).",
     "summary": "Obtener todos los hosts para tu organización"
   },
   "GetHostTotals": {
@@ -736,13 +736,13 @@
     "request_schema_description": "Atributos que describen a qué incidente añadir la señal."
   },
   "EditSecurityMonitoringSignalAssignee": {
-    "description": "Modifica el usuario que tiene asignada la evaluación de una señal de seguridad.",
+    "description": "Este endpoint está obsoleto - Modifica el asignatario de triaje de una señal de seguridad.",
     "summary": "Modificar el usuario que tiene asignada la evaluación de una señal de seguridad.",
     "request_description": "Atributos que describen la modificación de la señal.",
     "request_schema_description": "Atributos que describen una operación de actualización de asignatario a través de una señal de seguridad."
   },
   "EditSecurityMonitoringSignalState": {
-    "description": "Cambia el estado que tiene la evaluación de una señal de seguridad.",
+    "description": "Este endpoint está obsoleto - Cambia el estado de triaje de una señal de seguridad.",
     "summary": "Cambiar el estado que tiene la evaluación de una señal de seguridad",
     "request_description": "Atributos que describen la modificación de la señal.",
     "request_schema_description": "Atributos que describen el cambio de estado de un estado determinado."
@@ -934,6 +934,10 @@
     "summary": "Editar un test móvil",
     "request_description": "Nueva información detallada del test que se va a guardar.",
     "request_schema_description": "Objeto que contiene información detallada de un test móvil Synthetic."
+  },
+  "SearchTests": {
+    "description": "Busca los Synthetic tests.",
+    "summary": "Buscar Synthetic test"
   },
   "TriggerTests": {
     "description": "Activa un conjunto de tests Synthetic.",

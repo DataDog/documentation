@@ -5,11 +5,11 @@ disable_toc: false
 title: Políticas
 ---
 
-Si tu servicio está ejecutando [un Agent con la configuración remota habilitada y una versión de biblioteca de rastreo compatible][2], puedes bloquear ataques y atacantes desde la interfaz de usuario de Datadog sin una configuración adicional del Agent o bibliotecas de rastreo.
+Si tu servicio está ejecutando [un Agent con la configuración remota habilitada y una versión de librería de rastreo compatible][2], puedes bloquear ataques y atacantes desde la interfaz de usuario de Datadog sin una configuración adicional del Agent o bibliotecas de rastreo.
 
 La protección de aplicaciones y API (AAP) Protect permite ralentizar los ataques y a los atacantes _bloqueándolos_. Las traces (trazas) de seguridad se bloquean en tiempo real por las bibliotecas de traces (trazas) de Datadog. Los bloqueos se guardan en la plataforma de Datadog, se recuperan de forma automática y segura por el Datadog Agent, se despliegan en tu infraestructura y se aplican a tus servicios.
 
-## Requisitos previos 
+## Requisitos previos
 
 Para utilizar las funciones de protección con tu servicio:
 
@@ -27,7 +27,7 @@ A partir de ahí, todos los servicios protegidos por la AAP bloquean las solicit
 
 ## Responder a las amenazas en tiempo real automatizando el bloqueo de atacantes
 
-Además de bloquear manualmente a los atacantes, puedes configurar reglas de automatización para que la AAP bloquee automáticamente a los atacantes marcados en las señales de seguridad. 
+Además de bloquear manualmente a los atacantes, puedes configurar reglas de automatización para que la AAP bloquee automáticamente a los atacantes marcados en las señales de seguridad.
 
 Para empezar, ve a **Seguridad > Protección de aplicaciones y API > Protección > [Reglas de detección][14]**. Puedes crear una nueva regla o editar una existente con el tipo _Protección de aplicaciones y API_. Por ejemplo, puedes crear una regla para activar señales de gravedad `Critical` cuando se detecten ataques de Relleno de Credenciales y bloquear automáticamente las direcciones IP de los atacantes asociados durante 30 minutos.
 
@@ -50,15 +50,15 @@ Puedes utilizar la _Lista de aprobados_ para permitir permanentemente el acceso 
 
 El WAF (cortafuegos de aplicaciones web) en la aplicación de la AAP combina las técnicas de detección de los WAF basados en perímetro con el contexto enriquecido que proporciona Datadog, ayudando a tu equipos a proteger sus sistemas con confianza.
 
-Dado que la AAP conoce las rutas de una aplicación, la protección puede aplicarse de forma granular a servicios específicos y no necesariamente a todas las aplicaciones y el tráfico. Esta eficacia contextual reduce el esfuerzo de inspección y la tasa de falsos positivos en comparación con un WAF perimetral. No hay periodo de aprendizaje, porque la mayoría de los marcos web proporcionan un mapa estructurado de rutas. La AAP puede ayudar a tu equipo a desplegar protecciones contra vulnerabilidades de día cero automáticamente poco después de que se divulgue la vulnerabilidad, al tiempo que se dirige a las aplicaciones vulnerables, limitando el riesgo de falsos positivos.
+Dado que la AAP conoce las rutas de una aplicación, la protección puede aplicarse de forma granular a servicios específicos y no necesariamente a todas las aplicaciones y el tráfico. Esta eficacia contextual reduce el esfuerzo de inspección y la tasa de falsos positivos en comparación con un WAF perimetral. No hay periodo de aprendizaje, porque la mayoría de los web frameworks proporcionan un mapa estructurado de rutas. La AAP puede ayudar a tu equipo a desplegar protecciones contra vulnerabilidades de día cero automáticamente poco después de que se divulgue la vulnerabilidad, al tiempo que se dirige a las aplicaciones vulnerables, limitando el riesgo de falsos positivos.
 
 ### Cómo WAF en la aplicación bloquea las de trazas seguridad
 
-Además de los modos `monitoring` y `disabled` ofrecidos para cada una de las más de 130 reglas WAF en la aplicación, las reglas también tienen el modo `blocking`. Cada regla especifica condiciones sobre la solicitud entrante para definir lo que la biblioteca considera sospechoso. Cuando un patrón de regla determinado coincide con una solicitud HTTP en curso, la solicitud es bloqueada por la biblioteca.
+Además de los modos `monitoring` y `disabled` ofrecidos para cada una de las más de 130 reglas WAF en la aplicación, las reglas también tienen el modo `blocking`. Cada regla especifica condiciones sobre la solicitud entrante para definir lo que la librería considera sospechoso. Cuando un patrón de regla determinado coincide con una solicitud HTTP en curso, la solicitud es bloqueada por la librería.
 
-Las políticas gestionadas definen el modo en que cada una de las reglas de WAF en la aplicación se comporta en coincidencia: `monitoring`, `blocking`, o `disabled`. Dado que dispone del contexto completo de tus aplicaciones, la AAP sabe qué reglas aplicar para proteger tus aplicaciones al tiempo que limita el número de falsos positivos. 
+Las políticas gestionadas definen el modo en que cada una de las reglas de WAF en la aplicación se comporta en coincidencia: `monitoring`, `blocking`, o `disabled`. Dado que dispone del contexto completo de tus aplicaciones, la AAP sabe qué reglas aplicar para proteger tus aplicaciones al tiempo que limita el número de falsos positivos.
 
-Para un control más preciso, puedes clonar una política gestionada por Datadog o crear una política personalizada y establecer el modo que mejor se adapte a tus necesidades. Si estableces la política en `auto-updating`, tus aplicaciones estarán protegidas por las últimas detecciones desplegadas por Datadog. También tienes la opción de fijar una política a una versión específica del conjunto de reglas. 
+Para un control más preciso, puedes clonar una política gestionada por Datadog o crear una política personalizada y establecer el modo que mejor se adapte a tus necesidades. Si estableces la política en `auto-updating`, tus aplicaciones estarán protegidas por las últimas detecciones desplegadas por Datadog. También tienes la opción de fijar una política a una versión específica del conjunto de reglas.
 
 A medida que las reglas de WAF dentro de la aplicación cambian de modo, los cambios se reflejan casi en tiempo real para servicios con la [configuración remota activada][2]. Para otros servicios, puedes actualizar la política en la [página WAF dentro de la aplicación][9] y luego [definir reglas WAF dentro de la aplicación][10] para que se aplique el cambio de comportamiento.
 
@@ -70,7 +70,7 @@ Ve las trazas de seguridad bloqueadas en el [Trace Explorer][11] filtrando por l
 
 ### Configurar WAF dentro de la aplicación
 
-1. [Habilita la configuración remota**][2] para que tus servicios habilitados para la AAP aparezcan en el WAF en la aplicación. Esto es necesario para enviar de forma segura la configuración de WAF en la aplicación desde tu backend Datadog a la biblioteca de rastreo de tu infraestructura. 
+1. [Habilita la configuración remota**][2] para que tus servicios habilitados para la AAP aparezcan en el WAF en la aplicación. Esto es necesario para enviar de forma segura la configuración de WAF en la aplicación desde tu backend Datadog a la librería de rastreo de tu infraestructura.
 
 2. **Asocia tus servicios habilitados para AAP/Configuración remota con una política**. Una vez activada la configuración remota en un servicio, ve a **Seguridad > Protección de aplicaciones y API > Protección > [WAF en la aplicación][9]**. El servicio aparece en la política _Sólo monitorización de Datadog_ en forma predeterminada. Sólo monitorización de Datadog es una política gestionada y es de sólo lectura, lo que significa que no puedes modificar el estado (monitorización, bloqueo o desactivación) de reglas individuales.
 

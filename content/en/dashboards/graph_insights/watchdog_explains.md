@@ -1,5 +1,6 @@
 ---
 title: Watchdog Explains
+description: Automatically detect anomalies in timeseries graphs and identify contributing tags for faster root cause analysis.
 aliases:
     - /graphing/correlations/
     - /dashboards/correlations/

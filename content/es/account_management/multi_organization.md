@@ -4,6 +4,9 @@ aliases:
 - /es/account_management/mult_account
 - /es/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
 - /es/account_management/multi_organisations
+description: Gestiona varias organizaciones secundarias desde una cuenta principal
+  con facturación independiente, rastreo del uso y control de acceso para proveedores
+  de servicios gestionados.
 further_reading:
 - link: https://docs.datadoghq.com/account_management/multi_organization/
   tag: Blog

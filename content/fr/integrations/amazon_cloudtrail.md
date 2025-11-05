@@ -30,7 +30,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Consultez le <a href="https://docs.datadoghq.com/security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem/">guide de configuration d'AWS pour Cloud SIEM</a> si vous configurez AWS CloudTrail pour Cloud SIEM.
 </div>
 

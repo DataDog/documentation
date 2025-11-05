@@ -274,5 +274,5 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
-[15]: /real_user_monitoring/mobile_and_tv_monitoring/
+[15]: /real_user_monitoring/application_monitoring/
 [16]: /synthetics/mobile_app_testing/devices

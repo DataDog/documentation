@@ -104,7 +104,7 @@ Disk space is low @ops-team@company.com
 
 モニター通知には、モニターのクエリ、使用された @メンション、メトリクススナップショット (メトリクスモニターの場合)、Datadog の関連ページへのリンクなどが含まれます。個々のモニターの通知に含める、または除外するコンテンツを選択することができます。
 
-<div class="alert alert-warning">パーセンタイルアグリゲーターを持つディストリビューションメトリクス (`p50`、`p75`、`p95`、`p99` など) は、通知でスナップショットグラフを生成しません。 </div>
+<div class="alert alert-danger">パーセンタイルアグリゲーターを持つディストリビューションメトリクス (`p50`、`p75`、`p95`、`p99` など) は、通知でスナップショットグラフを生成しません。 </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="モニタープリセットを設定する" style="width:70%;" >}}
 

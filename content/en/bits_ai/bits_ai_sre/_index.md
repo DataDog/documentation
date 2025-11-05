@@ -1,5 +1,6 @@
 ---
 title: Bits AI SRE
+description: "Learn how Bits AI SRE autonomously investigates alerts and coordinates incident response to improve on-call operations."
 further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
     tag: "Blog"

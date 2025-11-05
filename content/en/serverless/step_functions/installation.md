@@ -107,7 +107,7 @@ Then, to send your Step Functions logs to Datadog:
 [1]: /serverless/libraries_integrations/cli/
 [2]: /logs/guide/forwarder
 [3]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
-[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/stepfunctions#readme
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-stepfunctions#readme
 {{% /tab %}}
 {{% tab "Serverless Plugin" %}}
 

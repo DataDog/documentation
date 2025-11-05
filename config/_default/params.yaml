@@ -132,6 +132,11 @@ code_language_ids:
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
     apigateway: "Amazon API Gateway"
+    real_time_rule: "Real-Time Rule"
+    scheduled_rule: "Scheduled Rule"
+    historical_job: "Historical Job"
+    kubernetes_daemonset: "Kubernetes (DaemonSet)"
+    kubernetes_gateway: "Kubernetes (Gateway)"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -257,9 +262,11 @@ unsupported_sites:
   agent_flare: [gov]
   agentless_scanning: [gov]
   amazon_event_bridge: [gov]
+  apm_recommendations: [gov]
   app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
+  backstage: [gov]
   bits_ai: [gov]
   bits_ai_sre: [gov, ap2]
   case_management: [gov]
@@ -271,11 +278,13 @@ unsupported_sites:
   correlation: [gov] #Event management correlation
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
+  ddot_collector: [gov]
   dora_metrics: [gov]
   dynamic_instrumentation: [gov]
   dynamic_quotas: [gov]
   eng_reports: [gov]
   events_from_sns_emails: [gov]
+  feature_flags: [gov]
   getting_started_feature_flags: [gov]
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
@@ -283,20 +292,22 @@ unsupported_sites:
   fleet_automation: [gov]
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
+  internal_developer_portal: [gov]
+  live_debugger: [gov]
   llm_observability: [gov]
   mobile_app_testing: [gov]
-  network_path: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
   otlp_agentless: [gov]
   overview_pages: [gov]
-  quality_gates: [gov]
+  pr_gates: [gov]
   remote_config: [gov]
   remote_configuration: [gov]
   resource_catalog: [gov]
   roku_error_tracking: [gov]
   roku_log_collection: [gov]
   rum_roku: [gov]
+  safety_center: [gov]
   scorecards: [gov]
   self_service_actions: [gov]
   snmp_profile_manager: [gov]

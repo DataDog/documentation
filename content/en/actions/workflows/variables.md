@@ -1,5 +1,6 @@
 ---
 title: Variables and parameters
+description: Use context variables, input parameters, output parameters, and custom variables to pass data between workflow steps.
 disable_toc: false
 aliases:
   - /service_management/workflows/actions/set_variables/

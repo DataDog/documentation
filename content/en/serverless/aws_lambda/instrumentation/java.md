@@ -166,77 +166,11 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+
 {{% tab "AWS CDK" %}}
-
-<div class="alert alert-info">Instrumenting Java functions through the Datadog CDK construct is only available for AWS CDK apps written in Node.js and Python.</div>
-
-The [Datadog CDK construct][1] automatically installs Datadog on your functions using Lambda layers. It configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
-
-1. Install the Datadog CDK constructs library
-
-    **Node.js**:
-    ```sh
-    # For AWS CDK v1
-    npm install datadog-cdk-constructs --save-dev
-
-    # For AWS CDK v2
-    npm install datadog-cdk-constructs-v2 --save-dev
-    ```
-
-    **Python**:
-    ```sh
-    # For AWS CDK v1
-    pip install datadog-cdk-constructs
-
-    # For AWS CDK v2
-    pip install datadog-cdk-constructs-v2
-    ```
-
-2. Instrument your Lambda functions
-
-    **Node.js**:
-    ```javascript
-    // For AWS CDK v1
-    import { Datadog } from "datadog-cdk-constructs";
-
-    // For AWS CDK v2
-    import { Datadog } from "datadog-cdk-constructs-v2";
-
-    const datadog = new Datadog(this, "Datadog", {
-        javaLayerVersion: {{< latest-lambda-layer-version layer="dd-trace-java" >}},
-        extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}},
-        site: "<DATADOG_SITE>",
-        apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
-    });
-    datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
-    ```
-
-    **Python**:
-    ```python
-    # For AWS CDK v1
-    from datadog_cdk_constructs import Datadog
-
-    # For AWS CDK v2
-    from datadog_cdk_constructs_v2 import Datadog
-
-    datadog = Datadog(self, "Datadog",
-        java_layer_version={{< latest-lambda-layer-version layer="dd-trace-java" >}},
-        extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
-        site="<DATADOG_SITE>",
-        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
-      )
-    datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
-    ```
-
-    To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda execution role has the `secretsmanager:GetSecretValue` IAM permission in order to read the secret value. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
-
-    More information and additional parameters can be found on the [Datadog CDK documentation][1].
-
-[1]: https://github.com/DataDog/datadog-cdk-constructs
-[2]: https://app.datadoghq.com/organization-settings/api-keys
+{{< lambda-install-cdk language="java" layer="dd-trace-java" layerParamTypescript="javaLayerVersion" layerParamPython="java_layer_version">}}
 {{% /tab %}}
+
 {{% tab "Container image" %}}
 
 1. Install the Datadog Lambda Extension
@@ -274,7 +208,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "3.2.1"
+  version = "4.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"

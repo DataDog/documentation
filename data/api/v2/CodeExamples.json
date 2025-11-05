@@ -63,6 +63,13 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "BulkDeleteDatastoreItems": [
+    {
+      "group": "actions_datastores",
+      "suffix": "",
+      "description": "Bulk delete datastore items returns \"OK\" response"
+    }
+  ],
   "BulkWriteDatastoreItems": [
     {
       "group": "actions_datastores",
@@ -98,18 +105,39 @@
       "description": "Update datastore returns \"OK\" response"
     }
   ],
-  "UpdateAwsScanOptions": [
-    {
-      "group": "agentless_scanning",
-      "suffix": "",
-      "description": "Patch AWS Scan Options returns \"No Content\" response"
-    }
-  ],
   "CreateAwsOnDemandTask": [
     {
       "group": "agentless_scanning",
       "suffix": "",
-      "description": "Post an AWS on demand task returns \"AWS on demand task created successfully.\" response"
+      "description": "Create AWS on demand task returns \"AWS on demand task created successfully.\" response"
+    }
+  ],
+  "CreateAzureScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Create Azure scan options returns \"Created\" response"
+    }
+  ],
+  "CreateGcpScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Create GCP scan options returns \"Agentless scan options enabled successfully.\" response"
+    }
+  ],
+  "UpdateAwsScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Update AWS scan options returns \"No Content\" response"
+    }
+  ],
+  "UpdateGcpScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Update GCP scan options returns \"OK\" response"
     }
   ],
   "CreateApp": [
@@ -257,6 +285,11 @@
       "group": "csm_threats",
       "suffix": "_1295653933",
       "description": "Create a Workload Protection agent rule with set action returns \"OK\" response"
+    },
+    {
+      "group": "csm_threats",
+      "suffix": "_1363354233",
+      "description": "Create a Workload Protection agent rule with set action with expression returns \"OK\" response"
     }
   ],
   "CreateCSMThreatsAgentPolicy": [
@@ -294,6 +327,13 @@
       "description": "Assign case returns \"OK\" response"
     }
   ],
+  "CommentCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Comment case returns \"OK\" response"
+    }
+  ],
   "CreateCase": [
     {
       "group": "case_management",
@@ -322,6 +362,13 @@
       "description": "Update case attributes returns \"OK\" response"
     }
   ],
+  "UpdateCaseDescription": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case description returns \"OK\" response"
+    }
+  ],
   "UpdatePriority": [
     {
       "group": "case_management",
@@ -334,6 +381,27 @@
       "group": "case_management",
       "suffix": "",
       "description": "Update case status returns \"OK\" response"
+    }
+  ],
+  "UpdateCaseTitle": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case title returns \"OK\" response"
+    }
+  ],
+  "CreateCustomAttributeConfig": [
+    {
+      "group": "case_management_attribute",
+      "suffix": "",
+      "description": "Create custom attribute config for a case type returns \"CREATED\" response"
+    }
+  ],
+  "CreateCaseType": [
+    {
+      "group": "case_management_type",
+      "suffix": "",
+      "description": "Create a case type returns \"CREATED\" response"
     }
   ],
   "CreateCostAWSCURConfig": [
@@ -354,7 +422,21 @@
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Create Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+      "description": "Create Google Cloud Usage Cost config returns \"OK\" response"
+    }
+  ],
+  "CreateCustomAllocationRule": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create custom allocation rule returns \"OK\" response"
+    }
+  ],
+  "CreateTagPipelinesRuleset": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create tag pipeline ruleset returns \"OK\" response"
     }
   ],
   "UpdateCostAWSCURConfig": [
@@ -375,7 +457,21 @@
     {
       "group": "cloud_cost_management",
       "suffix": "",
-      "description": "Update Cloud Cost Management GCP Usage Cost config returns \"OK\" response"
+      "description": "Update Google Cloud Usage Cost config returns \"OK\" response"
+    }
+  ],
+  "UpdateCustomAllocationRule": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update custom allocation rule returns \"OK\" response"
+    }
+  ],
+  "UpdateTagPipelinesRuleset": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update tag pipeline ruleset returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -383,6 +479,13 @@
       "group": "cloud_cost_management",
       "suffix": "_4125168396",
       "description": "Upload Custom Costs File returns \"Accepted\" response"
+    }
+  ],
+  "ValidateQuery": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Validate query returns \"OK\" response"
     }
   ],
   "CreateCloudflareAccount": [
@@ -417,14 +520,14 @@
     {
       "group": "dora_metrics",
       "suffix": "",
-      "description": "Send a deployment event for DORA Metrics returns \"OK\" response"
+      "description": "Send a deployment event returns \"OK\" response"
     }
   ],
   "CreateDORAIncident": [
     {
       "group": "dora_metrics",
-      "suffix": "_1768887482",
-      "description": "Send a failure event for DORA Metrics returns \"OK\" response"
+      "suffix": "_1101664022",
+      "description": "Send a failure event returns \"OK\" response"
     }
   ],
   "CreateDashboardListItems": [
@@ -972,6 +1075,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor notification rule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1181818787",
+      "description": "Create a monitor notification rule with conditional recipients returns \"OK\" response"
     }
   ],
   "CreateMonitorUserTemplate": [
@@ -993,6 +1101,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Update a monitor notification rule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1400905713",
+      "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
     }
   ],
   "UpdateMonitorUserTemplate": [
@@ -1303,6 +1416,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_2899714190",
+      "description": "Create a detection rule with detection method 'sequence_detection' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_3367706049",
       "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
     },
@@ -1414,11 +1532,11 @@
       "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
-  "RunHistoricalJob": [
+  "RunThreatHuntingJob": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Run a historical job returns \"Status created\" response"
+      "description": "Run a threat hunting job returns \"Status created\" response"
     }
   ],
   "TestSecurityMonitoringRule": [
@@ -1473,6 +1591,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_4152369508",
+      "description": "Validate a detection rule with detection method 'sequence_detection' returns \"OK\" response"
     }
   ],
   "ValidateSecurityMonitoringSuppression": [

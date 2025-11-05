@@ -1,5 +1,6 @@
 ---
 title: Kubernetes
+description: Install and configure the Datadog Agent on Kubernetes 
 aliases:
     - /guides/basic_agent_usage/kubernetes
     - /agent/basic_agent_usage/kubernetes
@@ -12,6 +13,9 @@ aliases:
     - /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
     - /agent/kubernetes/
 further_reading:
+    - link: "https://learn.datadoghq.com/courses/getting-started-k8s"
+      tag: "Learning Center"
+      text: "Getting Started with Kubernetes Observability"
     - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
       tag: "Release Notes"
       text: "Check out the latest Datadog Containers releases (App login required)."
@@ -34,15 +38,137 @@ further_reading:
   This foundation enablement session will focus on how Datadog can monitor Kubernetes. Learn how to configure Datadog for Kubernetes and how to get started. Explore the various views and tools Datadog offers to visualize and analyze your cluster and application metrics, traces, and logs.
 {{< /learning-center-callout >}}
 
-## Overview
+## Agent installation
 
-Run the Datadog Agent in your Kubernetes cluster to start collecting your cluster and applications metrics, traces, and logs.
+You can install the Agent using either the [Datadog Operator][4] or Helm chart by following the [in-app installation guide in Fleet Automation][5]. This guided interface allows you to:
+- Select your Kubernetes distribution (for example EKS, AKS, or GKE)
+- Generate helm and kubectl commands with your API key prefilled
+- Enable features such as APM, Log Management, tagging and other telemetry through UI-based configuration
 
-**Note**: Agent v6.0+ only supports Kubernetes v1.7.6+. For prior versions of Kubernetes, see [Legacy Kubernetes versions][1].
 
-For Agent commands, see the [Agent Commands guides][2].
+{{< img src="agent/basic_agent_usage/agent_install_k8.png" alt="In-app installation steps for the Datadog Agent on Kubernetes." style="width:90%;">}}
 
-For information pertaining to the Datadog Cluster Agent, which provides a streamlined approach to collecting cluster level monitoring data, see [Cluster Agent for Kubernetes][3].
+
+The Datadog Operator flow installs the Datadog Operator and uses Custom Resources to configure observability coverage.
+
+The Helm Chart flow installs the Agent using DaemonSet and offers similar toggles for observability features.
+
+See [Supported Versions][6] for the full list of Kubernetes versions supported by the Datadog Agent.
+
+
+### Manual installation
+
+For manually install your Agent on Kubernetes, follow the [Manually install and configure the Datadog Agent with a DaemonSet][7]
+
+
+For Agent commands, see the Agent Commands guides. For information on the Datadog Cluster Agent, see Cluster Agent for Kubernetes.
+
+<div class="alert alert-info">
+
+<code>&lt;CLUSTER_NAME&gt;</code> allows you to scope hosts and Cluster Checks. This unique name must be dot-separated tokens and abide by the following restrictions:
+<ul>
+  <li/>Must only contain lowercase letters, numbers, and hyphens
+  <li/>Must start with a letter
+  <li/>Must end with a number or a letter
+  <li/>Must be less than or equal to 80 characters
+</ul>
+</div>
+
+<br>
+
+## Additional configuration
+### Unprivileged installation
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+To run an unprivileged installation, add the following to `datadog-agent.yaml`:
+
+{{< highlight yaml "hl_lines=13-18" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: <DATADOG_SITE>
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+agent:
+  config:
+    securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <GROUP_ID>
+{{< /highlight >}}
+
+- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends [setting this value to 100 since Datadog Agent v7.48+][1].
+- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+
+[1]: /data_security/kubernetes/#running-container-as-root-user
+
+Then, deploy the Agent:
+
+```shell
+kubectl apply -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+To run an unprivileged installation, add the following to your `datadog-values.yaml` file:
+
+{{< highlight yaml "hl_lines=4-7" >}}
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  site: <DATADOG_SITE>
+  securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <GROUP_ID>
+{{< /highlight >}}
+
+- Replace `<USER_ID>` with the UID to run the Datadog Agent.
+- Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+
+Then, deploy the Agent:
+
+```shell
+helm install datadog-agent -f datadog-values.yaml datadog/datadog
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### Select container registries
+
+The in-app UI lets you select the container image registry, defaulting to gcr.io/datadoghq. If Artifact Registry is not accessible in your deployment region, use another registry such as:
+
+- `public.ecr.aws/datadog` (recommended for deploying the Agent in an AWS environment)
+- `datadoghq.azurecr.io`
+- `docker.io/datadog` (can be subject to rate limits unless a Docker Hub customer)
+
+
+### Uninstall
+
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+```shell
+kubectl delete datadogagent datadog
+helm delete datadog-operator
+```
+
+This command deletes all Kubernetes resources created by installing Datadog Operator and deploying the Datadog Agent.
+{{% /tab %}}
+{{% tab "Helm" %}}
+```shell
+helm uninstall datadog-agent
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/agent/kubernetes/installation">}}<u>Installation</u>: Install the Datadog Agent in a Kubernetes environment.{{< /nextlink >}}
@@ -65,3 +191,7 @@ For information pertaining to the Datadog Cluster Agent, which provides a stream
 [1]: /agent/faq/kubernetes-legacy/
 [2]: /agent/configuration/agent-commands/
 [3]: /containers/cluster_agent/
+[4]: https://docs.datadoghq.com/containers/datadog_operator/
+[5]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
+[6]: https://docs.datadoghq.com/agent/supported_platforms/?tab=cloudandcontainers
+[7]: https://docs.datadoghq.com/containers/guide/kubernetes_daemonset/

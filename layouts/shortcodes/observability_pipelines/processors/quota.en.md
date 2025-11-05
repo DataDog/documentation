@@ -2,10 +2,16 @@ The quota processor measures the logging traffic for logs that match the filter 
 
 You can also use field-based partitioning, such as `service`, `env`, `status`. Each unique fields uses a separate quota bucket with its own daily quota limit. See [Partition example](#partition-example) for more information.
 
-**Notes**:
-- Each pipeline can have up to 1000 buckets. If you need to increase the bucket limit, contact your account manager.
-- The pipeline uses the name of the quota to identify the quota across multiple Remote Configuration deployments of the Worker.
+**Note**: The pipeline uses the name of the quota to identify the same quota across multiple Remote Configuration deployments of the Worker.
 
+### Limits
+
+- Each pipeline can have up to 1000 buckets. If you need to increase the bucket limit, [contact support][5005].
+- The quota processor is synchronized across all Workers in a Datadog organization. For the synchronization, there is a default rate limit of 50 Workers per organization. When there are more than 50 Workers for an organization:
+    - The processor continues to run, but does not sync correctly with the other Workers, which can result in logs being sent after the quota limit has been reached.
+    - The Worker prints `Failed to sync quota state` errors.
+    - [Contact support][5005] if you want to increase the default number of Workers per organization.
+- The quota processor periodically synchronizes counts across Workers a few times per minute. The limit set on the processor can therefore be overshot, depending on the number of Workers and the logs throughput. Datadog recommends setting a limit that is at least one order of magnitude higher than the volume of logs that the processor is expected to receive per minute. You can use a throttle processor with the quota processor to control these short bursts by limiting the number of logs allowed per minute.
 
 To set up the quota processor:
 1. Enter a name for the quota processor.
@@ -65,3 +71,4 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 [5002]: /observability_pipelines/destinations/amazon_s3/
 [5003]: /observability_pipelines/destinations/azure_storage/
 [5004]: /observability_pipelines/destinations/google_cloud_storage/
+[5005]: /help/

@@ -1,0 +1,47 @@
+{{ $root := . }}
+{{ $sd_wan_integrations := slice
+  (dict "name" "meraki" "href" "/integrations/meraki/" "src" "integrations_logos/meraki.png")
+  (dict "name" "cisco-sdwan" "href" "/integrations/cisco-sdwan/" "src" "integrations_logos/cisco-sdwan_small.svg")
+  (dict "name" "velocloud" "href" "/integrations/velocloud-sd-wan/" "src" "integrations_logos/velocloud-sd-wan_small.svg")
+  (dict "name" "fortinet fortimanager" "href" "/integrations/fortinet-fortimanager/" "src" "integrations_logos/fortinet-fortimanager_small.svg")
+  (dict "name" "versa" "href" "/integrations/versa/" "src" "integrations_logos/versa-networks-logo-small.svg")
+}}
+<div class="sd-wan-integrations">
+  <div class="container cards-dd">
+    <div class="row row-cols-4 g-2 g-xl-3">
+      {{ range first 4 $sd_wan_integrations }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <br>
+    <div class="row row-cols-4 g-2 g-xl-3">
+      {{ range first 4 (after 4 $sd_wan_integrations) }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <br>
+    <div class="row row-cols-4 g-2 g-xl-3">
+      {{ range after 8 $sd_wan_integrations }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>

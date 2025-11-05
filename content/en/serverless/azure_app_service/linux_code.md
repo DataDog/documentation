@@ -31,8 +31,8 @@ Install the tracing library for your language:
 Java supports adding instrumentation code through the use of a command line argument, `javaagent`.
 
 1. Download the [latest version of Datadog's Java tracing library][101].
-1. Place the tracing library inside your project. It must be included with your deployment. 
-   If you are using the `azure-webapp-maven` plugin, you can add the Java tracing library as a resource entry with type `lib`. 
+1. Place the tracing library inside your project. It must be included with your deployment.
+   If you are using the `azure-webapp-maven` plugin, you can add the Java tracing library as a resource entry with type `lib`.
 1. Set the environment variable `JAVA_OPTS` with `--javaagent:/home/site/lib/dd-java-agent.jar`. When your application is deployed, the Java tracer is copied to `/home/site/lib/dd-java-agent.jar`.
 
 Instrumentation starts when the application is launched.
@@ -64,7 +64,7 @@ dotnet add package Datadog.Trace.Bundle --version 3.21.0
 
 [102]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
 
-{{% /tab %}} 
+{{% /tab %}}
 {{% tab "PHP" %}}
 
 Run the following script to install Datadog's PHP tracing library:
@@ -90,7 +90,7 @@ fi
 service nginx reload
 ```
 
-This bash script is intended to run as the startup command, which installs the tracing module into PHP and then restarts the NGINX service. 
+This bash script is intended to run as the startup command, which installs the tracing module into PHP and then restarts the NGINX service.
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -111,34 +111,42 @@ This bash script is intended to run as the startup command, which installs the t
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-First, install the [Datadog CLI][201] and [Azure CLI][202].
+#### Locally
 
-Login to your Azure account using the Azure CLI:
-
-{{< code-block lang="shell" >}}
-az login
-{{< /code-block >}}
+Install the [Datadog CLI][201] and [Azure CLI][202], and login to your Azure account using the Azure CLI by running `az login`.
 
 Then, run the following command to set up the sidecar container:
 
-{{< code-block lang="shell" >}}
+```shell
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
 datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
-{{< /code-block >}}
+```
 
 Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
+#### Azure Cloud Shell
+
+To use the Datadog CLI in [Azure Cloud Shell][203], open cloud shell and use `npx` to run the CLI directly. Set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the CLI:
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
+
 
 [201]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 [202]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+[203]: https://portal.azure.com/#cloudshell/
 
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
+The [Datadog Terraform module for Linux Web Apps][1] wraps the [azurerm_linux_web_app][2] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
+
+If you don't already have Terraform set up, [install Terraform][3], create a new directory, and make a file called `main.tf`.
 
 Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
 
@@ -164,7 +172,7 @@ resource "azurerm_service_plan" "my_asp" {
 
 module "my_web_app" {
   source  = "DataDog/web-app-datadog/azurerm//modules/linux"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   name                = "my-web-app"        // Replace with your web app name
   resource_group_name = "my-resource-group" // Replace with your resource group name
@@ -189,17 +197,19 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Linux Web App module][251] only deploys the Web App resource, so you need to [deploy your code][252] separately.
+The [Datadog Linux Web App module][4] only deploys the Web App resource, so you need to [deploy your code][5] separately.
 
-[250]: https://developer.hashicorp.com/terraform/install
-[251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
-[252]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
+[1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
+[2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
+[3]: https://developer.hashicorp.com/terraform/install
+[4]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
+[5]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
 
 {{% /tab %}}
 {{% tab "Manual" %}}
 
 1. **Configure environment variables**.
-   In Azure, add the following key-value pairs in **Settings** > **Configuration** > **Application settings**:
+   In Azure, add the following key-value pairs in **Settings** > **Environment Variables** > **App Settings**:
 
 `DD_API_KEY`
 : **Value**: Your Datadog API key.<br>
@@ -233,6 +243,10 @@ Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFile
 : **Value**: false <br>
 When `true`, log collection is automatically configured for the additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
 
+`DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`
+: **Value**: An optional file descriptor used for more precise log tailing.<br>
+Recommended for scenarios with frequent log rotation. For example, setting `_default_docker` configures the log tailer to ignore rotated files and focus only on Azure's active log file.<br>
+
 <div class="alert alert-info">If your application has multiple instances, make sure your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicate logs from multiple instances that are reading the same file. Enabling this feature variable also prevents <code>DD_SERVERLESS_LOG_PATH</code> from being set. This is to prevent ingesting duplicate logs.</div>
 
 `WEBSITES_ENABLE_APP_SERVICE_STORAGE`
@@ -240,7 +254,7 @@ When `true`, log collection is automatically configured for the additional file 
 Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
 
-    
+
 {{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
 
 For .NET applications, the following environment variables are **required**. See the `Datadog.Tracer.Bundle` [Nuget package README file][1] for more details.
@@ -280,11 +294,12 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
       - **Registry server URL**: `index.docker.io`
       - **Image and tag**: `datadog/serverless-init:latest`
       - **Port**: 8126
+      - **Environment Variables**: Include all previously configured Datadog environment variables.
    1. Select **Apply**.
 
 3. **Restart your application**.
 
-   If you modified a startup command, restart your application. Azure automatically restarts the application when new Application Settings are saved. 
+   If you modified a startup command, restart your application. Azure automatically restarts the application when new Application Settings are saved.
 
 [301]: https://app.datadoghq.com/organization-settings/api-keys
 [302]: /getting_started/site/
@@ -295,7 +310,7 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 
 ### View traces in Datadog
 
-After your application restarts, go to Datadog's [APM Service page][1] and search for the service name you set for your application (`DD_SERVICE`).
+After your application restarts, go to Datadog's [APM Service page][2] and search for the service name you set for your application (`DD_SERVICE`).
 
 ### Custom metrics
 
@@ -322,7 +337,7 @@ If you are not receiving traces or custom metric data as expected, enable agent 
 Be sure to enable **App Service logs** to receive debugging logs.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
- 
+
 Share the content of the **Log stream** with [Datadog Support][9].
 
 ## Further reading

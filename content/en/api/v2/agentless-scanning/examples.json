@@ -274,6 +274,468 @@
       "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Object for the scan options of a single AWS account.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for the AWS scan options to update.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">lambda</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning of Lambda functions is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">sensitive_data</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for sensitive data is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The ID of the AWS account.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The type of the resource. The value should always be <code>aws_scan_options</code>. \nAllowed enum values: <code>aws_scan_options</code></p><p>default: <code>aws_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
     }
   },
+  "ListAzureScanOptions": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": [
+            {
+              "attributes": {
+                "vuln_containers_os": true,
+                "vuln_host_os": true
+              },
+              "id": "12345678-90ab-cdef-1234-567890abcdef",
+              "type": "azure_scan_options"
+            }
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>A list of Azure scan options.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for Azure scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Azure subscription ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The type of the resource. The value should always be <code>azure_scan_options</code>. \nAllowed enum values: <code>azure_scan_options</code></p><p>default: <code>azure_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "CreateAzureScanOptions": {
+    "responses": {
+      "201": {
+        "json": {
+          "data": {
+            "attributes": {
+              "vuln_containers_os": true,
+              "vuln_host_os": true
+            },
+            "id": "12345678-90ab-cdef-1234-567890abcdef",
+            "type": "azure_scan_options"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Single Azure scan options entry.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for Azure scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Azure subscription ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The type of the resource. The value should always be <code>azure_scan_options</code>. \nAllowed enum values: <code>azure_scan_options</code></p><p>default: <code>azure_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "data": {
+          "id": "",
+          "type": "azure_scan_options"
+        }
+      },
+      "json": {
+        "data": {
+          "attributes": {
+            "vuln_containers_os": false,
+            "vuln_host_os": false
+          },
+          "id": "",
+          "type": "azure_scan_options"
+        }
+      },
+      "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Single Azure scan options entry.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for Azure scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Azure subscription ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The type of the resource. The value should always be <code>azure_scan_options</code>. \nAllowed enum values: <code>azure_scan_options</code></p><p>default: <code>azure_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+    }
+  },
+  "DeleteAzureScanOptions": {
+    "responses": {
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "GetAzureScanOptions": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "vuln_containers_os": true,
+              "vuln_host_os": true
+            },
+            "id": "12345678-90ab-cdef-1234-567890abcdef",
+            "type": "azure_scan_options"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Single Azure scan options entry.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for Azure scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Azure subscription ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The type of the resource. The value should always be <code>azure_scan_options</code>. \nAllowed enum values: <code>azure_scan_options</code></p><p>default: <code>azure_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "UpdateAzureScanOptions": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "vuln_containers_os": true,
+              "vuln_host_os": true
+            },
+            "id": "12345678-90ab-cdef-1234-567890abcdef",
+            "type": "azure_scan_options"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Single Azure scan options entry.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for Azure scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Azure subscription ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The type of the resource. The value should always be <code>azure_scan_options</code>. \nAllowed enum values: <code>azure_scan_options</code></p><p>default: <code>azure_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "data": {
+          "id": "12345678-90ab-cdef-1234-567890abcdef",
+          "type": "azure_scan_options"
+        }
+      },
+      "json": {
+        "data": {
+          "attributes": {
+            "vuln_containers_os": false,
+            "vuln_host_os": false
+          },
+          "id": "12345678-90ab-cdef-1234-567890abcdef",
+          "type": "azure_scan_options"
+        }
+      },
+      "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Data object for updating the scan options of a single Azure subscription.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for updating Azure scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The Azure subscription ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Azure scan options resource type. \nAllowed enum values: <code>azure_scan_options</code></p><p>default: <code>azure_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+    }
+  },
+  "ListGcpScanOptions": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": [
+            {
+              "attributes": {
+                "vuln_containers_os": true,
+                "vuln_host_os": true
+              },
+              "id": "company-project-id",
+              "type": "gcp_scan_options"
+            }
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>A list of GCP scan options.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for GCP scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The GCP project ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>GCP scan options resource type. \nAllowed enum values: <code>gcp_scan_options</code></p><p>default: <code>gcp_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "CreateGcpScanOptions": {
+    "responses": {
+      "201": {
+        "json": {
+          "data": {
+            "attributes": {
+              "vuln_containers_os": true,
+              "vuln_host_os": true
+            },
+            "id": "company-project-id",
+            "type": "gcp_scan_options"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Single GCP scan options entry.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for GCP scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The GCP project ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>GCP scan options resource type. \nAllowed enum values: <code>gcp_scan_options</code></p><p>default: <code>gcp_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "409": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "data": {
+          "id": "",
+          "type": "gcp_scan_options"
+        }
+      },
+      "json": {
+        "data": {
+          "attributes": {
+            "vuln_containers_os": false,
+            "vuln_host_os": false
+          },
+          "id": "",
+          "type": "gcp_scan_options"
+        }
+      },
+      "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Single GCP scan options entry.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for GCP scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The GCP project ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>GCP scan options resource type. \nAllowed enum values: <code>gcp_scan_options</code></p><p>default: <code>gcp_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+    }
+  },
+  "DeleteGcpScanOptions": {
+    "responses": {
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "GetGcpScanOptions": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "vuln_containers_os": true,
+              "vuln_host_os": true
+            },
+            "id": "company-project-id",
+            "type": "gcp_scan_options"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Single GCP scan options entry.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for GCP scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The GCP project ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>GCP scan options resource type. \nAllowed enum values: <code>gcp_scan_options</code></p><p>default: <code>gcp_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "UpdateGcpScanOptions": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "vuln_containers_os": true,
+              "vuln_host_os": true
+            },
+            "id": "company-project-id",
+            "type": "gcp_scan_options"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Single GCP scan options entry.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for GCP scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The GCP project ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>GCP scan options resource type. \nAllowed enum values: <code>gcp_scan_options</code></p><p>default: <code>gcp_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "data": {
+          "id": "",
+          "type": "gcp_scan_options"
+        }
+      },
+      "json": {
+        "data": {
+          "attributes": {
+            "vuln_containers_os": false,
+            "vuln_host_os": false
+          },
+          "id": "",
+          "type": "gcp_scan_options"
+        }
+      },
+      "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Data object for updating the scan options of a single GCP project.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Attributes for updating GCP scan options configuration.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_containers_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in containers is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">vuln_host_os</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Indicates if scanning for vulnerabilities in hosts is enabled.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The GCP project ID.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>GCP scan options resource type. \nAllowed enum values: <code>gcp_scan_options</code></p><p>default: <code>gcp_scan_options</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+    }
+  },
   "ListAwsOnDemandTasks": {
     "responses": {
       "200": {

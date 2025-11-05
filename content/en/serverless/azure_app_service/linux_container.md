@@ -38,7 +38,7 @@ Instrument your main application with the `dd-trace-js` library. See [Tracing No
 Custom metrics are also collected through the tracer. See the [code examples][102].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -57,7 +57,7 @@ Instrument your main application with the `dd-trace-py` library. See [Tracing Py
 Custom metrics are also collected through the tracer. See the [code examples][202].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -76,7 +76,7 @@ Instrument your main application with the `dd-trace-java` library. See [Tracing 
 Custom metrics are also collected through the tracer. See the [code examples][302].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -143,7 +143,7 @@ For more information, see [Tracing .NET Applications][401].
 Custom metrics are also collected through the tracer. See the [code examples][402].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -163,7 +163,7 @@ Instrument your main application with the `dd-trace-go` library. See [Tracing Go
 Custom metrics are also collected through the tracer. See the [code examples][502].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -182,7 +182,7 @@ Instrument your main application with the `dd-trace-php` library. See [Tracing P
 Custom metrics are also collected through the tracer. See the [code examples][602].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -202,39 +202,44 @@ Instrumentation is done using a sidecar container. This sidecar container collec
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-#### Using the Datadog CLI
+#### Locally
 
-First, install the [Datadog CLI][601] and [Azure CLI][602].
-
-Login to your Azure account using the Azure CLI:
-
-{{< code-block lang="shell" >}}
-az login
-{{< /code-block >}}
+Install the [Datadog CLI][601] and [Azure CLI][602], and login to your Azure account using the Azure CLI by running `az login`.
 
 Then, run the following command to set up the sidecar container:
 
-{{< code-block lang="shell" >}}
+```shell
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
-datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
-{{< /code-block >}}
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
 
 Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
-**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
+**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer, and additionally the `--musl` flag if your container is using dotnet on a musl libc image (such as Alpine Linux).
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
+#### Azure Cloud Shell
+
+To use the Datadog CLI in [Azure Cloud Shell][603], open cloud shell and use `npx` to run the CLI directly. Set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the CLI:
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
 
 [601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 [602]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+[603]: https://portal.azure.com/#cloudshell/
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-<div class="alert alert-warning">Because the Azure Web App for Containers resource does not directly support sitecontainers, you should expect drift in your configuration.</div>
+<div class="alert alert-danger">Because the Azure Web App for Containers resource does not directly support sitecontainers, you should expect drift in your configuration.</div>
 
-If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
+The [Datadog Terraform module for Linux Web Apps][1] wraps the [azurerm_linux_web_app][2] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
+
+If you don't already have Terraform set up, [install Terraform][3], create a new directory, and make a file called `main.tf`.
 
 Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
 
@@ -260,7 +265,7 @@ resource "azurerm_service_plan" "my_asp" {
 
 module "my_web_app" {
   source  = "DataDog/web-app-datadog/azurerm//modules/linux"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   name                = "my-web-app"        // Replace with your web app name
   resource_group_name = "my-resource-group" // Replace with your resource group name
@@ -286,11 +291,11 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Linux Web App module][251] only deploys the Web App resource, so you need to [deploy your code][252] separately.
+The [Datadog Linux Web App module][1] only deploys the Web App resource, so you need to build and push your container separately.
 
-[250]: https://developer.hashicorp.com/terraform/install
-[251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
-[252]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
+[1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
+[2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
+[3]: https://developer.hashicorp.com/terraform/install
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -317,6 +322,8 @@ In your **App settings** in Azure, set the following environment variables on bo
 - `DD_ENV`: How you want to tag your env. For example, `prod`
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
 - `DD_AAS_INSTANCE_LOGGING_ENABLED`: When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
+- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: An optional file descriptor used for more precise file tailing. Recommended for scenarios with frequent log rotation. For example, setting `_default_docker` configures the log tailer to ignore rotated files and focus only on Azure's active log file.
+
 
    <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
 

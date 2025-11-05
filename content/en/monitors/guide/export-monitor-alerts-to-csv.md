@@ -1,5 +1,6 @@
 ---
 title: Export Monitor Alerts to CSV
+description: "Download monitor alert history as CSV files through hourly monitor data for the past 6 months (Datadog US site only)."
 aliases:
 - /monitors/faq/how-can-i-export-alert-history
 ---

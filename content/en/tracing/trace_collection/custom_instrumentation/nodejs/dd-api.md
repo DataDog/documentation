@@ -9,7 +9,7 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/nodejs
 description: 'Manually instrument your Node.js application to send custom traces to Datadog.'
 code_lang: dd-api
-code_lang_weight: 1
+code_lang_weight: 2
 type: multi-code-lang
 further_reading:
     - link: "/tracing/trace_collection/trace_context_propagation/"
@@ -67,7 +67,7 @@ span.addTags({
 ```
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Scope.html
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/Scope.html
 {{% /tab %}}
 
 {{% tab "Globally" %}}
@@ -107,7 +107,7 @@ tracer.use('express', {
 To learn more, read [API details for individual plugins][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/modules/export_.plugins.html
+[1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
 {{% /tab %}}
 
 {{% tab "Errors" %}}
@@ -158,7 +158,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Promises" %}}
@@ -187,7 +187,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Async/await" %}}
@@ -213,7 +213,7 @@ app.get('/make-sandwich', async (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Wrapper" %}}
@@ -242,7 +242,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#wrap
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#wrap
 {{% /tab %}}
 {{< /tabs >}}
 

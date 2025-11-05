@@ -75,7 +75,7 @@ if (user.isAuthenticated) {
 
 Para detener la grabación de Session Replay, llama a `stopSessionReplayRecording()`.
 
-<div class="alert alert-warning">Cuando se utiliza una versión del SDK del Navegador RUM anterior a v5.0.0, la grabación de Session Replay no comienza automáticamente. Para iniciar la grabación, llama a <code>startSessionReplayRecording()</code>.</div>
+<div class="alert alert-danger">Cuando se utiliza una versión del SDK del Navegador RUM anterior a v5.0.0, la grabación de Session Replay no comienza automáticamente. Para iniciar la grabación, llama a <code>startSessionReplayRecording()</code>.</div>
 
 ## Forzar Session Replay
 
@@ -85,13 +85,13 @@ Para forzar la grabación de Session Replay para el resto de la sesión actual, 
 
 Cuando se utiliza la opción de forzar, la sesión se actualiza a una sesión reproducida durante el resto de su duración, independientemente de su decisión de muestreo inicial.
 
-<div class="alert alert-warning">La opción forzar sólo convierte una sesión existente en una repetición si ya se está muestreando. En otras palabras, si aún no se ha iniciado el muestreo, el uso de la opción forzar no lo inicia y no se graba ninguna repetición.</div>
+<div class="alert alert-danger">La opción forzar sólo convierte una sesión existente en una repetición si ya se está muestreando. En otras palabras, si aún no se ha iniciado el muestreo, el uso de la opción forzar no lo inicia y no se graba ninguna repetición.</div>
 
 ## Desactivar Session Replay
 
 Para detener las grabaciones de sesión, establece `sessionReplaySampleRate` en `0`. Esto detiene la recopilación de datos para el [plan de navegador RUM y Session Replay][6].
 
-<div class="alert alert-warning">Si estás utilizando una versión del SDK del navegador RUM anterior a v5.0.0, define <code>replaySampleRate</code> en <code>0</code>.</div>
+<div class="alert alert-danger">Si estás utilizando una versión del SDK del navegador RUM anterior a v5.0.0, define <code>replaySampleRate</code> en <code>0</code>.</div>
 
 ## Conservación
 

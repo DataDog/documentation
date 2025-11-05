@@ -19,7 +19,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 14, 15
+: 14, 15, 16, 17
 
 Supported Agent versions
 : 7.36.1+
@@ -331,7 +331,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Instead of mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 #### Autodiscovery annotations v2
 

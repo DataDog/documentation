@@ -142,7 +142,7 @@ datadog-ci sbom upload /path/to/sbom-file.json
 ### Los servicios o equipos de las bibliotecas de SCA no se actualizan
 
 Los resultados de los servicios y equipos en SCA se basan en los archivos `entity.datadog.yml` o `CODEOWNERS` de la rama predeterminada de tu repositorio.
-Si realizaste cambios en estos archivos en una rama de funciones, esas actualizaciones no se reflejan en los datos de vulnerabilidades o de bibliotecas de esa rama.
+Si realizaste cambios en estos archivos en una rama de funciones, esas actualizaciones no se reflejan en los datos de vulnerabilidades o de librerías de esa rama.
 
 Después de actualizar cualquiera de estos archivos en tu rama predeterminada, los cambios pueden tardar hasta seis horas en aparecer en los resultados de los análisis posteriores.
 
@@ -172,11 +172,11 @@ Si alguna de estas condiciones se aplica a tu repositorio y no puedes actualizar
 
 Para garantizar la calidad de los datos, Datadog aplica reglas de validación durante el procesamiento de SBOM. Se excluyen las bibliotecas que cumplen alguno de los siguientes criterios:
 
-- **Versión faltante**: La biblioteca no especifica una versión.
-- **Nombre no ASCII**: El nombre de la biblioteca contiene caracteres fuera del conjunto de caracteres ASCII.
+- **Versión faltante**: La librería no especifica una versión.
+- **Nombre no ASCII**: El nombre de la librería contiene caracteres fuera del conjunto de caracteres ASCII.
 - **pURL vacía**: El campo URL del paquete (purl) falta o está en blanco.
 - **URL no válida**: La URL del paquete está presente pero no en un formato purl válido.
-- **Lenguaje no compatible**: La biblioteca está asociada a un lenguaje de programación que Datadog no admite.
+- **Lenguaje no compatible**: La librería está asociada a un lenguaje de programación que Datadog no admite.
 
 ## El Análisis de composición del software no ha detectado vulnerabilidades
 
@@ -196,7 +196,7 @@ Los datos de seguridad de aplicaciones de tiempo de ejecución se envían con tr
 
 ### Confirmar que las versiones del rastreador están actualizadas
 
-Consulte la documentación de configuración del producto Application Security para validar que está utilizando la versión correcta del rastreador. Estas versiones mínimas son necesarias para comenzar a enviar datos de telemetría que incluyan información de biblioteca.
+Consulte la documentación de configuración del producto Application Security para validar que está utilizando la versión correcta del rastreador. Estas versiones mínimas son necesarias para comenzar a enviar datos de telemetría que incluyan información de librería.
 
 ### Garantizar la comunicación de los datos de telemetría
 

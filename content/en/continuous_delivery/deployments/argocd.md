@@ -219,7 +219,7 @@ If the command has been correctly run, deployments contain Git metadata from the
 
 If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Automatic service discovery is not supported when <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#server-side-apply">Server-Side Apply</a> is used.
 </div>
 
@@ -271,7 +271,7 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
 [13]: /tracing/software_catalog
-[14]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
+[14]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#correlate
 [15]: /containers/kubernetes
 [16]: https://app.datadoghq.com/orchestration/explorer
 [17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories

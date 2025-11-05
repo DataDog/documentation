@@ -7,7 +7,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Resource Changes is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Resource Changes is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
@@ -38,7 +38,7 @@ For a comprehensive list of supported resources, see the [Supported resources](#
 
 To view configuration changes for your resources, ensure that resource collection is enabled for your cloud resources so they are visible within the Resource Catalog. You can manage this setting from the [Resource Catalog settings page][2] or the relevant [cloud provider integration tile][3]. This step automatically enables [Snapshot Changes](#snapshot-changes) for your resources.
 
-<div class="alert alert-warning"><strong>Note</strong>: Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
+<div class="alert alert-warning">Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
 
 {{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}</div>
 
@@ -101,124 +101,190 @@ Resource Changes supports a wide array of resources across [AWS](#aws-resources)
 
 AWS resource types:
 
-- `ec2 instance`
-- `docdb cluster`
-- `dynamodb table`
-- `ebs volume`
-- `eks cluster`
-- `elasticache cluster`
-- `elb load balancer`
-- `elbv2 load balancer`
-- `iam account settings`
-- `iam policy`
-- `iam role`
-- `iam user`
-- `lambda function`
-- `mq broker`
-- `rds instance`
-- `redshift cluster`
-- `s3 bucket`
-- `sqs queue`
-- `acm certificate`
-- `ami image`
-- `cloudfront distribution`
-- `cloudtrail trail`
-- `ebs snapshot`
-- `elasticsearch domain`
-- `iam server certificate`
-- `kms key`
-- `network acl`
-- `rds db snapshot`
-- `s3 account public access block`
-- `security group`
-- `sns topic`
-- `vpc endpoint`
-- `eni`
-- `vpc nat gateway`
-- `vpc`
+- `aws_acm_certificate`
+- `aws_ami_image`
+- `aws_autoscaling_group`
+- `aws_autoscaling_launch_configuration`
+- `aws_autoscaling_policy`
+- `aws_autoscaling_scheduled_action`
+- `aws_cloudformation_generatedtemplate`
+- `aws_cloudformation_resourcescan`
+- `aws_cloudformation_stack`
+- `aws_cloudformation_stackset`
+- `aws_cloudformation_type`
+- `aws_cloudfront_anycast_ip_list`
+- `aws_cloudfront_cache_policy`
+- `aws_cloudfront_continuous_deployment_policy`
+- `aws_cloudfront_distribution`
+- `aws_cloudfront_field_level_encryption_config`
+- `aws_cloudfront_field_level_encryption_profile`
+- `aws_cloudfront_function`
+- `aws_cloudfront_key_group`
+- `aws_cloudfront_managed_cache_policy`
+- `aws_cloudfront_managed_origin_request_policy`
+- `aws_cloudfront_managed_response_headers_policy`
+- `aws_cloudfront_origin_access_control`
+- `aws_cloudfront_origin_request_policy`
+- `aws_cloudfront_public_key`
+- `aws_cloudfront_realtime_log_config`
+- `aws_cloudfront_response_headers_policy`
+- `aws_cloudfront_streaming_distribution`
+- `aws_cloudfront_vpc_origin`
+- `aws_cloudtrail_trail`
+- `aws_docdb_cluster`
+- `aws_dynamodb_table`
+- `aws_ebs_snapshot`
+- `aws_ebs_volume`
+- `aws_ec2_instance`
+- `aws_ec2_vpcendpoint_service`
+- `aws_eks_cluster`
+- `aws_elasticache_cluster`
+- `aws_elastic_ip`
+- `aws_elasticsearch_domain`
+- `aws_elb_load_balancer`
+- `aws_elbv2_load_balancer`
+- `aws_eni`
+- `aws_iam_account_settings`
+- `aws_iam_policy`
+- `aws_iam_role`
+- `aws_iam_server_certificate`
+- `aws_iam_user`
+- `aws_kms_key`
+- `aws_lambda_codesigningconfig`
+- `aws_lambda_event_source_mapping`
+- `aws_lambda_function`
+- `aws_lambda_layer`
+- `aws_lambda_policy_statement`
+- `aws_mq_broker`
+- `aws_network_acl`
+- `aws_rds_blue_green_deployment`
+- `aws_rds_cluster`
+- `aws_rds_cluster_endpoint`
+- `aws_rds_cluster_parameter_group`
+- `aws_rds_cluster_snapshot`
+- `aws_rds_db_cluster_automated_backup`
+- `aws_rds_db_shard_group`
+- `aws_rds_db_snapshot`
+- `aws_rds_event_subscription`
+- `aws_rds_export_task`
+- `aws_rds_globalcluster`
+- `aws_rds_instance`
+- `aws_rds_instance_automated_backup`
+- `aws_rds_instance_parameter_group`
+- `aws_rds_integration`
+- `aws_rds_option_group`
+- `aws_rds_option_group_to_security_group`
+- `aws_rds_proxy`
+- `aws_rds_proxy_endpoint`
+- `aws_rds_proxy_target_group`
+- `aws_rds_reserved_instance`
+- `aws_rds_security_group`
+- `aws_rds_security_group_ip_range`
+- `aws_rds_snapshot_tenant_database`
+- `aws_rds_subnet_group`
+- `aws_rds_tenant_database`
+- `aws_redshift_cluster`
+- `aws_s3_account_public_access_block`
+- `aws_s3_bucket`
+- `aws_security_group`
+- `aws_sns_topic`
+- `aws_sqs_queue`
+- `aws_vpc`
+- `aws_vpc_endpoint`
+- `aws_vpc_nat_gateway`
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Azure" level="h4" expanded=false id="azure-resources" %}}
 
 Azure resource types:
-- `virtual machine instance`
-- `aks cluster`
-- `app service plan` / `app service`
-- `function app`
-- `managed disk`
-- `mysql server`
-- `policy assignment`
-- `postgresql server`
-- `sql server`
-- `sql server database`
-- `storage account`
-- `storage blob container`
-- `activity log alert`
-- `automation account`
-- `container apps`
-- `container registry`
-- `diagnostic setting`
-- `key vault key`
-- `key vault secret`
-- `key vault`
-- `load balancer probe`
-- `log analytics storage insight`
-- `log analytics workspace`
-- `network interface`
-- `network public ip address`
-- `network subnet`
-- `network vnet peering`
-- `network vnet`
-- `network watcher`
-- `postgresql firewall rule`
-- `role assignment`
-- `role definition`
-- `security center auto provisioning`
-- `security contact`
-- `security group`
-- `sql firewall rule`
-- `subscription`
+
+- `azure_activity_log_alert`
+- `azure_aks_cluster`
+- `azure_app_service`
+- `azure_app_service_plan`
+- `azure_automation_account`
+- `azure_container_apps`
+- `azure_container_registry`
+- `azure_diagnostic_setting`
+- `azure_function_app`
+- `azure_key_vault`
+- `azure_key_vault_key`
+- `azure_key_vault_secret`
+- `azure_load_balancer_probe`
+- `azure_log_analytics_storage_insight`
+- `azure_log_analytics_workspace`
+- `azure_managed_disk`
+- `azure_mysql_server`
+- `azure_network_application_gateway`
+- `azure_network_interface`
+- `azure_network_public_ip_address`
+- `azure_network_subnet`
+- `azure_network_vnet`
+- `azure_network_vnet_peering`
+- `azure_network_watcher`
+- `azure_policy_assignment`
+- `azure_postgresql_firewall_rule`
+- `azure_postgresql_server`
+- `azure_role_assignment`
+- `azure_role_definition`
+- `azure_security_center_auto_provisioning`
+- `azure_security_contact`
+- `azure_security_group`
+- `azure_sql_firewall_rule`
+- `azure_sql_server`
+- `azure_sql_server_database`
+- `azure_storage_account`
+- `azure_storage_blob_container`
+- `azure_subscription`
+- `azure_virtual_machine_instance`
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Google Cloud Platform" level="h4" expanded=false id="gcp-resources" %}}
 
 Google Cloud Platform resource types:
 
-- `bigquery table`
-- `cloudfunctions function`
-- `compute disk`
-- `sql database instance`
-- `storage bucket`
-- `compute instance`
-- `bigquery dataset`
-- `compute external vpn gateway`
-- `compute firewall`
-- `compute network`
-- `compute project metadata`
-- `compute route`
-- `compute router`
-- `compute ssl policy`
-- `compute subnetwork`
-- `compute target http proxy`
-- `compute target https proxy`
-- `compute target ssl proxy`
-- `compute target vpn gateway`
-- `compute vpn gateway`
-- `compute vpn tunnel`
-- `dataproc cluster`
-- `dns managed zone`
-- `dns policy`
-- `folder`
-- `iam policy`
-- `iam service account key`
-- `iam service account`
-- `kms crypto key`
-- `logging log bucket`
-- `logging log metric`
-- `logging log sink`
-- `monitoring alert policy`
-- `organization`
-- `project`
+- `gcp_bigquery_dataset`
+- `gcp_bigquery_table`
+- `gcp_cloudfunctions_function`
+- `gcp_compute_disk`
+- `gcp_compute_external_vpn_gateway`
+- `gcp_compute_firewall`
+- `gcp_compute_instance`
+- `gcp_compute_network`
+- `gcp_compute_project_metadata`
+- `gcp_compute_route`
+- `gcp_compute_router`
+- `gcp_compute_ssl_policy`
+- `gcp_compute_subnetwork`
+- `gcp_compute_target_http_proxy`
+- `gcp_compute_target_https_proxy`
+- `gcp_compute_target_ssl_proxy`
+- `gcp_compute_target_vpn_gateway`
+- `gcp_compute_vpn_gateway`
+- `gcp_compute_vpn_tunnel`
+- `gcp_dataproc_cluster`
+- `gcp_dns_managed_zone`
+- `gcp_dns_policy`
+- `gcp_folder`
+- `gcp_gke_worker_node`
+- `gcp_iam_policy`
+- `gcp_iam_role`
+- `gcp_iam_service_account`
+- `gcp_iam_service_account_key`
+- `gcp_kms_crypto_key`
+- `gcp_kubernetes_engine_cluster`
+- `gcp_kubernetes_engine_node_pool`
+- `gcp_logging_log_bucket`
+- `gcp_logging_log_metric`
+- `gcp_logging_log_sink`
+- `gcp_monitoring_alert_policy`
+- `gcp_organization`
+- `gcp_project`
+- `gcp_run_revision`
+- `gcp_sql_database_instance`
+- `gcp_storage_bucket`
 {{% /collapse-content %}}
 
 If you have a request for an additional resource type, contact [Datadog Support][7].

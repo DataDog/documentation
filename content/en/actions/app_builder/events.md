@@ -1,5 +1,6 @@
 ---
 title: Events
+description: Configure UI component event triggers and reactions, including state functions for dynamic app interactions and behaviors.
 aliases:
 - /app_builder/events
 - /service_management/app_builder/events

@@ -31,9 +31,9 @@ Para configurar los servicios para que utilicen el muestreo adaptativo, sigue la
 - [Permiso][4] `APM Remote Configuration Write`.
    **Nota**: Si no tienes este permiso, pide a tu administrador de Datadog que actualice tus permisos desde la configuración de tu organización.
 
-### Versiones de bibliotecas de rastreo
+### Versiones de librerías de rastreo
 
-La siguiente tabla enumera las versiones mínimas de la biblioteca de rastreo necesarias para el muestreo adaptativo:
+La siguiente tabla enumera las versiones mínimas de la librería de rastreo necesarias para el muestreo adaptativo:
 
 | Lenguaje    | Versión mínima requerida |
 |-------------|--------------------------|
@@ -86,7 +86,7 @@ Ese volumen objetivo mensual se vuelve a calcular cada 30 minutos.
 
 {{< img src="/tracing/guide/adaptive_sampling/volume_based_target_setting.png" alt="Configuración de objetivo según el volumen" style="width:100%;">}}
 
-Si estás configurando el primer servicio para el muestreo adaptativo, asegúrate de que el destino del volumen de ingesta es `>0`. Para los servicios posteriores, debes aumentar el presupuesto asignado después de que el nuevo servicio se incorpore para tener en cuenta el nuevo volumen.  
+Si estás configurando el primer servicio para el muestreo adaptativo, asegúrate de que el destino del volumen de ingesta es `>0`. Para los servicios posteriores, debes aumentar el presupuesto asignado después de que el nuevo servicio se incorpore para tener en cuenta el nuevo volumen.
   <div class="alert alert-info">El presupuesto configurado solo se asigna a los servicios inscritos en el muestreo adaptativo. No incluye el volumen ingerido de los servicios que no están inscritos en el muestreo adaptativo, las reglas de muestreo local u otros <a href="/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent">mecanismos de muestreo</a> configurados de forma local en el Agent o bibliotecas de rastreo.</div>
 
 ## Configurar el muestreo adaptativo para un servicio
@@ -108,7 +108,7 @@ La tabla incluye:
 - **Bytes descendentes**: bytes ingeridos de tramos en los que la decisión de muestreo parte de ese servicio y recurso, incluidos los servicios descendentes.
 - **Configuración**: fuente de la tasa de muestreo de recursos:
   - `AUTOMATIC`: [Mecanismo de muestreo predeterminado basado en el inicio de la traza][8] del Agent.
-  - `CONFIGURED LOCAL`: [regla de muestreo][7] establecida localmente en la biblioteca de rastreo.
+  - `CONFIGURED LOCAL`: [regla de muestreo][7] establecida localmente en la librería de rastreo.
   - `CONFIGURED REMOTE`: regla de muestreo remoto establecida desde la interfaz de usuario de Datadog.
   - `ADAPTIVE REMOTE`: Reglas de muestreo adaptativas definidas por Datadog.
 

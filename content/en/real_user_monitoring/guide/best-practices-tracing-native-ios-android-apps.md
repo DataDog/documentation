@@ -85,9 +85,27 @@ See [more iOS examples][1].
 {{% /tab %}}
 {{% tab "Android" %}}
 
+{{% android-otel-note %}}
+
+OpenTelemetry approach (recommended):
 ```kotlin
+import io.opentelemetry.api.GlobalOpenTelemetry
+import io.opentelemetry.api.trace.Tracer
+
+val tracer: Tracer = GlobalOpenTelemetry.get().getTracer("<tracer_name>")
+val span = tracer.spanBuilder("<span_name>").startSpan()
+
+span.end()
+```
+
+Datadog API approach:
+```kotlin
+import com.datadog.android.trace.GlobalDatadogTracer
+import com.datadog.android.trace.api.tracer.DatadogTracer
+
+val tracer: DatadogTracer = GlobalDatadogTracer.get()
 val span = tracer.buildSpan("<span_name>").start()
-// ... code to measure ...
+
 span.finish()
 ```
 See [more Android examples][1].
@@ -115,7 +133,7 @@ Sampling rates are applied independently. The most restrictive rate determines w
 - If you set a low RUM session sample rate (for example, 1%), only 1% of user sessions are recorded for RUM, but you can still trace all network requests within those sessions by setting the network tracing sample rate to 100%.
 - If you set a high trace sample rate but a low RUM sample rate, you may see traces without corresponding RUM data.
 
-**Example scenario:**  
+**Example scenario:**
 To sample 1% of all app sessions and trace all API network requests within those sessions:
 - Set `RUM.sessionSampleRate = 1` (controls RUM session sampling only)
 - Set `urlSessionTracking.firstPartyHostsTracing.sampleRate = 100` (controls trace sampling for network requests)
@@ -129,20 +147,21 @@ The following sampling rate parameters control different aspects of data collect
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-| Parameter                                   | Description                                                      | Example |
-|---------------------------------------------|------------------------------------------------------------------|---------|
-| `Trace.Configuration.sampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer. | `50` = 50% of spans |
-| `urlSessionTracking.firstPartyHostsTracing.sampleRate` | Controls the percentage of network requests traced for first-party hosts. | `100` = 100% of requests |
+| Parameter                                              | Description                                                                     | Example                  |
+|--------------------------------------------------------|---------------------------------------------------------------------------------|--------------------------|
+| `Trace.Configuration.sampleRate`                       | Controls the percentage of manually instrumented spans collected by the tracer. | `50` = 50% of spans      |
+| `urlSessionTracking.firstPartyHostsTracing.sampleRate` | Controls the percentage of network requests traced for first-party hosts.       | `100` = 100% of requests |
 
 **Note**: `RUM.sessionSampleRate` controls RUM session sampling and does not affect trace sampling rates. When using the Trace SDK independently of RUM, trace sampling is controlled only by the parameters listed above.
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-| Parameter                                   | Description                                                      | Example |
-|---------------------------------------------|------------------------------------------------------------------|---------|
-| `AndroidTracer.Builder.setSampleRate`                          | Controls the percentage of manually instrumented spans collected by the tracer. | `50` = 50% of spans |
-| `DatadogInterceptor.Builder.setTraceSampler` | Controls the percentage of network requests traced for first-party hosts. | `100` = 100% of requests |
+| Parameter                                    | Description                                                                                                               | Example                  |
+|----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|--------------------------|
+| `OtelTracerProvider.Builder.setSampleRate()` | OpenTelemetry approach (**recommended**). Controls the percentage of manually instrumented spans collected by the tracer. | `50` = 50% of spans      |
+| `DatadogTracerBuilder.withSampleRate`        | Datadog API approach. Controls the percentage of manually instrumented spans collected by the tracer.                     | `50` = 50% of spans      |
+| `DatadogInterceptor.Builder.setTraceSampler` | Controls the percentage of network requests traced for first-party hosts.                                                 | `100` = 100% of requests |
 
 **Note**: `RUM.sessionSampleRate` controls RUM session sampling and does not affect trace sampling rates. When using the Trace SDK independently of RUM, trace sampling is controlled only by the parameters listed above.
 

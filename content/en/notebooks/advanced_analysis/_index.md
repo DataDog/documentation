@@ -1,5 +1,6 @@
 ---
 title: Analysis Features
+description: "Perform advanced data analysis in Notebooks with SQL queries, data transformations, joins, and visualizations across multiple datasets."
 aliases:
 - /logs/workspaces/
 - /logs/workspaces/export/
@@ -13,7 +14,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Notebooks Advanced Analysis is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
@@ -35,7 +36,8 @@ To run complex queries in a notebook, first add a **Data Source** cell. There ar
 
 **From a notebook**:
 1. Type `/datasource` and press <kbd>Enter</kbd>, or click the **Data Source** tile at the bottom of the page.
-2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.
+2. Type or select your desired data source from the drop down menu and press <kbd>Enter</kbd>.<br/>
+**Note**: if there is a data source you want that is not available, request it [here][5].
 3. Enter your query. Reserved attributes from the filtered logs are automatically added as columns.
 
 **From the [Log Explorer][1]**:
@@ -98,7 +100,7 @@ After adding the transformation cell, you can add any number of transformation o
 | Group | Select what you want to group the data by in the dropdown menus. |
 | Join | Select the type of join, the dataset to join against, and the fields to join on. |
 | Filter | Add a filter query for the dataset. |
-| Calculate | Add a name for the field and the function formula, using the [calculated field expression language][3]. |
+| Calculate | Add a name for the field and the function formula, using the [calculated field formulas][3]. |
 | Limit | Enter the number of rows of the dataset you want to display. |
 | Sort | Select the sort order and column to sort on. |
 | Convert | Allows you to convert a column into a different type. Select the column and the column type to be converted. |
@@ -155,5 +157,6 @@ To download your dataset as a CSV file:
 
 [1]: https://app.datadoghq.com/logs
 [2]: /logs/log_configuration/parsing/
-[3]: /logs/explorer/calculated_fields/expression_language/
+[3]: /logs/explorer/calculated_fields/formulas/
 [4]: /ddsql_reference/
+[5]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/

@@ -218,7 +218,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # dbname: '<DB_NAME>'
    ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
 2. [Restart the Agent][2].
 
@@ -439,7 +439,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 #### Autodiscovery annotations v2
 
@@ -452,7 +452,7 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+    ad.datadoghq.com/service.checks: |
       {
         "postgres": {
           "init_config": <INIT_CONFIG>,

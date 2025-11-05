@@ -62,7 +62,14 @@ Information about the Datadog data types helps users understand what your integr
 
 If your integration sends in metrics:
 1. Set the metric check - a metric emitted on every run to inform users the integration is running.
-1. Upload a list of your metrics by filling in the `metadata.csv` file. 
+1. Upload a list of your metrics by filling in the `metadata.csv` file.
+
+Example: 
+| metric_name                             | metric_type      | interval                       | unit_name        | per_unit_name     | description                      | orientation            | integration    | short_name                                                  | curated_metric            | sample_tags          |
+|-----------------------------------------|------------------|--------------------------------|------------------|-------------------|----------------------------------|------------------------|----------------|-------------------------------------------------------------|---------------------------|----------------------|
+| <partner_name>.\<category>.\<measurement> | Select from the following [list][12]  | Collection interval in seconds | Select from following [list][13] | Unit sub-division | Short description                | Value indicating trend | integration ID | human-readable abbreviated version without integration name | internal use, leave blank | list of example tags |
+| datadog.system.cpu.usage                | gauge            | 60                             | percent          |                   | The percentage of total CPU used | 0                      | datadog        | sys cpu usage                                               |                           | "host_name,region"   |
+
 
 If your integration sends in logs, a log pipeline is required. 
 1. Follow the instructions to [create a log pipeline][8]. 
@@ -107,3 +114,5 @@ For the initial launch, leave it as is. For future updates, specify feature addi
 [9]: /developers/integrations/create-an-integration-dashboard/
 [10]: /developers/integrations/create-an-integration-monitor-template/
 [11]: /developers/integrations/create-a-cloud-siem-detection-rule/
+[12]: /metrics/types/#metric-types
+[13]: /metrics/units/#unit-list

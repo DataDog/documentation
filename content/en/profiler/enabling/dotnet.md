@@ -45,9 +45,10 @@ Supported .NET runtimes (64-bit applications)
 .NET 6<br/>
 .NET 7<br/>
 .NET 8<br/>
-.NET 9
+.NET 9<br/>
+.NET 10
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> For containers, <strong>more than one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
 </div>
 
@@ -62,20 +63,20 @@ The following profiling features are available in the following minimum versions
 | CPU profiling              | 2.15.0+                            | All supported runtime versions.                                                          |
 | GC CPU consumption         | 3.19.0+                            | .NET 5+                                                          |
 | Exceptions profiling       | 2.31.0+                            | All supported runtime versions.                                                          |
-| Allocations profiling beta | 3.12.0+ / 2.18.0+                  | .NET Framework (requires Datadog Agent 7.51+ and 3.12.0+) / .NET 6+ (requires 2.18.0+)   |
+| Allocations profiling      | 3.12.0+ / 3.28.0+                  | .NET Framework (requires Datadog Agent 7.51+ and 3.12.0+) / .NET 6+ (requires 2.18.0+ but Datadog recommends .NET10 with 3.28+).   |
 | Lock Contention profiling  | 2.49.0+                            | .NET Framework (requires Datadog Agent 7.51+) and .NET 5+                                |
-| Live heap profiling beta   | 2.22.0+                            | .NET 7+                                                                                  |
+| Live heap profiling        | 3.28.0+                            | .NET 7+ but Datadog recommends .NET 10+.                                                                                  |
 | [Trace to Profiling integration][12]         | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+ (and 3.19.0+ for outgoing HTTP requests longer than 50 ms in beta and thread start/end events)     | All supported runtime versions (except .NET 5+ required for garbage collection details and .NET 7+ required for outgoing HTTP requests). |
 
 - Allocations and Lock Contention profiling for .NET Framework requires that the Datadog Agent and the profiled applications are running on the same machine.
 - Due to a limitation of the .NET Framework, Allocations profiling does not show the size of the allocations. Instead, it only shows the count.
-- Allocations and Live Heap profiling are in beta until .NET 10 ships with the required changes for better statistical allocations sampling.
+- Allocations and Live Heap profiling are available in .NET 10. For other previous versions of .NET, the statistical distribution of allocations sampling might not be accurate, so expect larger objects to be represented more often
 - Continuous Profiler is not supported for AWS Lambda.
 - Continuous Profiler does not support ARM64.
  
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Unlike APM, Continuous Profiler is not activated by default when the APM package is installed. You must explicitly enable it for the applications you want to profile.
 </div>
 
@@ -85,7 +86,7 @@ Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Dat
 
 Otherwise, install the profiler using the following steps, depending on your operating system.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. Since this API allows only one subscriber, run only one APM solution in your application environment.
 </div>
 
@@ -97,7 +98,7 @@ You can install the Datadog .NET Profiler machine-wide so that any services on t
 {{% tab "Linux with Single Step APM Instrumentation" %}}
 1. With [Single Step APM Instrumentation][1], there is nothing else to install. Go to [Enabling the Profiler](#enabling-the-profiler) to see how to activate the profiler for an application.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> If APM was already manually installed, you must uninstall it by removing the following environment variables:<br /> 
   - <code>CORECLR_ENABLE_PROFILING</code><br />
   - <code>CORECLR_PROFILER</code><br />
@@ -147,7 +148,7 @@ To install the .NET Profiler machine-wide:
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> This installation does not instrument applications running in IIS. For applications running in IIS, follow the Windows machine-wide installation process.
 </div>
 
@@ -160,7 +161,7 @@ To install the .NET Profiler per-application:
 
 {{% tab "Azure App Service" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Only Web Apps are supported. Functions are not supported.
 </div>
 
@@ -177,7 +178,7 @@ To install the .NET Profiler per-webapp:
 
 ## Enabling the Profiler
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you do have enabled it machine-wide, read the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#avoid-enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead that is associated with enabling the profiler for all system applications.
 </div>
 
@@ -277,7 +278,7 @@ To install the .NET Profiler per-webapp:
    net start w3svc
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
@@ -471,7 +472,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_HTTP_ENABLED` | Boolean        | If set to `true`, enables outgoing HTTP request profiling used in Timeline user interface. Defaults to `false`.  |
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Note</strong>: For IIS applications, you must set environment variables in the Registry (under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes) as shown in the <a href="?tab=windowsservices#installation">Windows Service tab, above</a>. The environment variables are applied for <em>all</em> IIS applications.
 Starting with IIS 10, you can set environment variables for each IIS application in the <a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> file</a>. Read the <a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft documentation</a> for more details.
 </div>

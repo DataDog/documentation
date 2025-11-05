@@ -23,7 +23,7 @@ El [Log Explorer][5] te permite buscar y ver logs individualmente como una lista
 ## Consultas en lenguaje natural
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Las consultas en lenguaje natural no está disponible en el <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}

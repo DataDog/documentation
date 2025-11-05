@@ -149,6 +149,8 @@ If you see a permission denied error while port binding in agent logs, the port 
 
 If SNMP traps or NetFlow traffic are missing, a common cause is firewall rules blocking UDP packets before they reach the Agent. Both SNMP traps and NetFlow rely on UDP and use the ports defined in your [datadog.yaml][9] configuration.
 
+<div class="alert alert-info">Local firewalls like Uncomplicated Firewall (UFW) may block traffic even when configured with permissive settings. Check system logs for blocked packet entries, which typically indicate that traffic reached the network interface but was blocked before reaching the operating system.</div>
+
 Use the following platform-specific commands to check for firewall rules that may be blocking the traffic from reaching the Agent.
 
 {{< tabs >}}

@@ -27,7 +27,7 @@ title: Conectarse a Datadog a través de AWS PrivateLink
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
-<div class="alert alert-warning">Datadog PrivateLink no es compatible con el sitio Datadog seleccionado.</div>
+<div class="alert alert-danger">Datadog PrivateLink no es compatible con el sitio Datadog seleccionado.</div>
 {{% /site-region %}}
 
 {{% site-region region="us,ap1,ap2" %}}

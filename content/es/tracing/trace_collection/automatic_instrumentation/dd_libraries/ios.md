@@ -16,7 +16,7 @@ further_reading:
 title: Rastreo de aplicaciones iOS
 type: lenguaje de código múltiple
 ---
-Envía [trazas][1] a Datadog desde tus aplicaciones iOS con [la biblioteca de rastreo del cliente `dd-sdk-ios` de Datadog][2] y aprovecha las siguientes características:
+Envía [trazas][1] a Datadog desde tus aplicaciones iOS con [la librería de rastreo del cliente `dd-sdk-ios` de Datadog][2] y aprovecha las siguientes características:
 
 * Crea [tramos (spans)][3] personalizados para las operaciones de tu aplicación.
 * Envía logs para cada tramo individualmente.
@@ -27,7 +27,7 @@ Envía [trazas][1] a Datadog desde tus aplicaciones iOS con [la biblioteca de ra
 
 ## Configuración
 
-1. Declara la biblioteca como una dependencia, en función de tu gestor de paquetes. Se recomienda Swift paquete Manager (SPM).
+1. Declara la librería como una dependencia, en función de tu gestor de paquetes. Se recomienda Swift paquete Manager (SPM).
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -74,7 +74,7 @@ DatadogTrace.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Inicializa la biblioteca con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la biblioteca `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
+2. Inicializa la librería con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la librería `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
 
 Para obtener más información sobre cómo configurar un token de cliente, consulta la [documentación sobre el token de cliente][2].
 

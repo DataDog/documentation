@@ -84,7 +84,7 @@ with dsd:
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 기본값으로 파이썬(Python) DogStatsD 클라이언트 예시(<code>statsd</code> 글로벌 예시 포함)는 프로세스 간에 공유할 수 없지만 스레드 안전 상태입니다. 따라서 상위 프로세스와 각 하위 프로세스는 클라이언트의 고유한 예시를 생성하거나 <code>disable_buffering</code>을 <code>True</code>로 설정하여 버퍼링을 명시적으로 해제해야 합니다. 자세한 내용은 <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a>의 설명서를 참조하세요.
 </div>
 
@@ -371,7 +371,7 @@ DogStatsD 클라이언트가 `dogstatsd_buffer_size` 크기의 패킷을 전송�
 
 최대 메모리 사용량을 제한하기 하기 위한 또 다른 방법은 버퍼링을 줄이는 것입니다. 에이전트 내 DogStatsD 서버의 기본 버퍼는 `dogstatsd_queue_size` 필드를 사용하여 설정할 수 있으며 (Datadog 에이전트 6.1.0부터 가능), 기본값 `1024`는 대략적인 최대 메모리 사용량인 768MB를 유도합니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>참고</strong>: 버퍼 크기를 줄이면 패킷 드롭 횟수가 증가할 수 있습니다.
 </div>
 
@@ -388,7 +388,7 @@ dogstatsd_queue_size: 512
 
 DogStatsD에는 가장 많이 처리된 메트릭을 확인할 수 있는 통계 모드가 있습니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong> 참고 </strong>: 메트릭 통계 모드를 활성화하면 DogStatsD 성능이 저하될 수 있습니다.
 </div>
 

@@ -31,7 +31,7 @@ title: Instrumentación dinámica
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  Dynamic Instrumentation no es compatible con el <a href="/getting_started/site">sitioDatadog </a> seleccionado ({{< region-param key="dd_site_name" >}}), ya que requiere que <a href="/agent/remote_config/">la configuración remota</a> esté activada.
 </div>
 {{% /site-region %}}
@@ -48,10 +48,10 @@ Si estás interesado en probar las últimas mejoras de la experiencia de usuario
 
 Dynamic Instrumentation requiere lo siguiente:
 
-- [Datadog Agent][1] 7.45.0 o superior esté instalado junto a su servicio.
+- [Datadog Agent][1] 7.49.0 o superior esté instalado junto a su servicio.
 - [Configuración remota][2] esté habilitada en ese Agent.
-- Para aplicaciones Java, la biblioteca de seguimiento [`dd-trace (traza)-java`][3] 1.34.0 o superior.
-- Para aplicaciones Python, la biblioteca de seguimiento [`dd-trace (traza)-py`][4] 2.2.0 o superior.
+- Para aplicaciones Java, la librería de seguimiento [`dd-trace (traza)-java`][3] 1.34.0 o superior.
+- Para aplicaciones Python, la librería de seguimiento [`dd-trace (traza)-py`][4] 2.2.0 o superior.
 - Para aplicaciones .NET, biblioteca de seguimiento [`dd-trace (traza)-dotnet`][5] 2.54.0 o superior.
 - (Vista previa limitada) Para aplicaciones Node.js, biblioteca de seguimiento [`dd-trace (traza)-js`][18] 5.39.0 o superior.
 - (Vista previa limitada) Para aplicaciones Ruby, biblioteca de seguimiento [`dd-trace (traza)-rb`][19] 2.9.0 o superior.
@@ -89,7 +89,7 @@ Para obtener instrucciones más detalladas, seleccione su tiempo de ejecución a
 - Dynamic Instrumentation aún no es compatible con Azure App Services o entornos sin servidor.
 - La compatibilidad total solo está disponible para aplicaciones creadas con Python, Java y .NET.
 - Existen vistas previas limitadas para aplicaciones creadas con Node.js, Ruby y PHP.
-- La biblioteca de seguimiento de Java no es compatible con las coroutines de Kotlin.
+- La librería de seguimiento de Java no es compatible con las coroutines de Kotlin.
 
 ## Explorar Dynamic Instrumentation
 
@@ -123,7 +123,7 @@ Error Tracking
 : En una pila trace (traza), sitúe el ratón sobre un marco de pila y haga clic en **Instrumentar**. Esto rellena previamente el formulario de creación de sonda con el contexto de la Emisión.
 
 
-### Creación de sondas log 
+### Creación de sondas log
 
 Una * sondalog * emite un log cuando se ejecuta.
 

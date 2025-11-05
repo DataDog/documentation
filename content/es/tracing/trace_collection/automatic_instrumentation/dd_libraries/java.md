@@ -65,9 +65,11 @@ Para empezar a rastrear tus aplicaciones:
     ```text
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
-   Si tienes mucha necesidad de reducir el tamaño de tu imagen y omitir módulos, puedes utilizar el comando [jdeps][19] para identificar dependencias. Sin embargo, los módulos necesarios pueden cambiar con el tiempo, así que hazlo bajo tu propia responsabilidad.
+    **Nota**: Si tienes una gran necesidad de reducir el tamaño de tu imagen y omitir módulos, puedes utilizar el comando [`jdeps`][19] para identificar dependencias. Sin embargo, los módulos necesarios pueden cambiar con el tiempo, así que hazlo bajo tu propia responsabilidad.
 
-    <div class="alert alert-danger">Habilitar la creación de perfiles puede afectar a tu factura en función de tu paquete APM. Para obtener más información, consulta la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">página de tarifas</a>.</div>
+    **Nota**: Al activar el rastreador para Java 24+, es posible que aparezcan advertencias relacionadas con el acceso nativo JNI o el acceso a memoria `sun.misc.Unsafe`. Suprime estas advertencias añadiendo las variables de entorno `--illegal-native-access=allow` y `--sun-misc-unsafe-memory-access=allow` justo antes del argumento `-javaagent:/path/to/dd-java-agent.jar`. Consulta [JEP 472][23] y [JEP 498][24] para más información.
+
+    <div class="alert alert-warning">La activación de la creación de perfiles puede afectar tu factura según tu paquete de APM. Consulta la <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">página de precios</a> para obtener más información.</div>
 
 | Variable de entorno      | Propiedad del sistema                     | Descripción|
 | --------- | --------------------------------- | ------------ |
@@ -216,6 +218,20 @@ La instrumentación puede venir de la instrumentación automática, de la API Op
 
 Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][9].
 
+### Configuración remota
+
+La configuración remota permite a Datadog Agent configurar dinámicamente los ajustes de rastreo sin necesidad de reiniciar la aplicación. Por defecto, la configuración remota está activada. Para desactivarla, establece la variable de entorno:
+
+```
+DD_REMOTE_CONFIG_ENABLED=false
+```
+
+O añade la propiedad del sistema de JVM:
+
+```
+-Ddd.remote_config.enabled=false
+```
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -232,10 +248,12 @@ Si es necesario, configura la biblioteca de rastreo para que envíe datos de tel
 [9]: /es/tracing/trace_collection/library_config/java/
 [10]: /es/tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
 [11]: /es/tracing/trace_collection/library_injection_local/
-[16]: /es/agent/remote_config/
+[16]: /es/tracing/guide/remote_config
 [17]: https://app.datadoghq.com/services
 [18]: /es/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [19]: https://docs.oracle.com/en/java/javase/11/tools/jdeps.html
 [20]: https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/managing-subscriptions-for-activity-on-github/viewing-your-subscriptions
 [21]: https://github.com/DataDog/dd-trace-java/releases
 [22]: https://docs.datadoghq.com/es/getting_started/support/
+[23]: https://openjdk.org/jeps/472
+[24]: https://openjdk.org/jeps/498

@@ -1,5 +1,6 @@
 ---
 title: Set Up Your Mobile Device for the First Time
+description: "Complete guide to setting up the Datadog mobile app including installation, push notifications, home screen customization, and widgets."
 further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-app-getting-started/"
   tag: "Blog"

@@ -63,7 +63,7 @@ instances:
     ping:
       enabled: true            # (default false) enable the ping check
       linux:                   # (optional) Linux specific configuration
-      use_raw_socket: true     # (optional, default false) send pings using a raw socket 
+        use_raw_socket: true     # (optional, default false) send pings using a raw socket 
 
 {{< /highlight >}}
 

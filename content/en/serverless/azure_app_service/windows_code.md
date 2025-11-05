@@ -4,9 +4,9 @@ aliases:
   - /infrastructure/serverless/azure_app_services/
   - /serverless/azure_app_services/azure_app_services_windows
 further_reading:
-- link: "/integrations/guide/azure-portal/"
+- link: "/integrations/guide/azure-native-integration/"
   tag: "Documentation"
-  text: "Azure Portal Integration Guide"
+  text: "Azure Native Integration Guide"
 - link: "https://www.datadoghq.com/blog/azure-app-service-extension/"
   tag: "Blog"
   text: "Monitor .NET web apps with the Datadog extension for Azure App Service"
@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-The Datadog extension for Azure App Service provides monitoring capabilities in addition to the [Datadog-Azure integration][11], which provides metrics and logs.
+The Datadog extension for Azure App Service provides monitoring capabilities in addition to the [Datadog-Azure integration][7], which provides metrics and logs.
 
 - Full distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
@@ -50,10 +50,10 @@ The Datadog .NET, Java, and Node.js APM extensions support the following runtime
 {{% tab ".NET" %}}
 Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution within your application environment.
 
-Additionally, if you are using the Azure Native integration, you can use the Datadog resource in Azure to add the extension to your .NET apps. For instructions, see the [App Service extension section][1] of Datadog's [Azure Portal guide][2].
+Additionally, if you are using the Azure Native integration, you can use the Datadog resource in Azure to add the extension to your .NET apps. For instructions, see the [App Service extension section][1] of Datadog's [Azure Native integration guide][2].
 
-[1]: /integrations/guide/azure-portal/?tab=vmextension#app-service-extension
-[2]: /integrations/guide/azure-portal/
+[1]: /integrations/guide/azure-native-integration/#app-service-extension
+[2]: /integrations/guide/azure-native-integration/
 {{% /tab %}}
 {{% tab "Java" %}}
 Support for Java Web Apps is in Preview for extension v2.4+.
@@ -65,7 +65,7 @@ There are no billing implications for tracing Java Web Apps during this period.
 ## Installation
 Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
-If you haven't already, set up the [Datadog-Azure integration][9]. You can verify that your Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog. 
+If you haven't already, set up the [Datadog-Azure integration][5]. You can verify that your Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog.
 
 <div class="alert alert-info">This step is critical for metric/trace correlation and functional trace panel views and improves the overall experience of using Datadog with Azure App Services.
 </div>
@@ -73,8 +73,9 @@ If you haven't already, set up the [Datadog-Azure integration][9]. You can verif
 {{< tabs >}}
 {{% tab "Terraform" %}}
 
+The [Datadog Terraform module for Windows Web Apps][4] wraps the [azurerm_windows_web_app][5] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the Windows Web App extension for your runtime.
 
-If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
+If you don't already have Terraform set up, [install Terraform][1], create a new directory, and make a file called `main.tf`.
 
 Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
 
@@ -100,7 +101,7 @@ resource "azurerm_service_plan" "my_asp" {
 
 module "my_web_app" {
   source  = "DataDog/web-app-datadog/azurerm//modules/windows"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   name                = "my-web-app"        // Replace with your web app name
   resource_group_name = "my-resource-group" // Replace with your resource group
@@ -125,17 +126,18 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Windows Web App module][251] only deploys the Web App resource and extension, so you need to [deploy your code][252] separately.
+The [Datadog Windows Web App module][2] only deploys the Web App resource and extension, so you need to [deploy your code][3] separately.
 
-[250]: https://developer.hashicorp.com/terraform/install
-[251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
-[252]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
-
+[1]: https://developer.hashicorp.com/terraform/install
+[2]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
+[3]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
+[4]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
+[5]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_web_app
 
 {{% /tab %}}
 {{% tab "Manual" %}}
 
-1. In your [Azure Portal][3], navigate to the dashboard for the Azure app you wish to instrument with Datadog.
+1. In your [Azure Portal][1], navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
 2. Configure the following Application Settings:
 
@@ -143,15 +145,15 @@ The [Datadog Windows Web App module][251] only deploys the Web App resource and 
 
    `DD_API_KEY`
    : **Value**: Your Datadog API key.<br>
-   See [Organization Settings > API Keys][4] in Datadog.<br>
+   See [Organization Settings > API Keys][2] in Datadog.<br>
 
    `DD_SITE`
    : **Value**: Your Datadog site<br>
-   Your [Datadog site][5]. Defaults to `datadoghq.com`.<br>
+   Your [Datadog site][3]. Defaults to `datadoghq.com`.<br>
 
    **Unified Service Tagging**
 
-   Datadog recommends tagging your application with the `env`, `service`, and `version` tags for [unified service tagging][6].
+   Datadog recommends tagging your application with the `env`, `service`, and `version` tags for [unified service tagging][4].
 
    `DD_SERVICE`
    : **Value**: Your application's service name.<br>
@@ -174,14 +176,14 @@ The [Datadog Windows Web App module][251] only deploys the Web App resource and 
 3. Click **Save**. This restarts your application.
 
 4. Stop your application by clicking **Stop**.
-   <div class="alert alert-warning">You <u>must</u> stop your application to successfully install Datadog.</div>
+   <div class="alert alert-danger">You <u>must</u> stop your application to successfully install Datadog.</div>
 
 5. In your Azure Portal, navigate to the **Extensions** page and select the Datadog APM extension.
 
    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Example of Extensions page in Azure portal, showing .NET Datadog APM extension." style="width:100%;" >}}
 
 6. Accept the legal terms, click **OK**, and wait for the installation to complete. 
-   <div class="alert alert-warning">This step requires that your application be in a stopped state.</div>
+   <div class="alert alert-danger">This step requires that your application be in a stopped state.</div>
 
 7.  Start the main application, click **Start**:
 
@@ -191,15 +193,20 @@ The [Datadog Windows Web App module][251] only deploys the Web App resource and 
 
 <div class="alert alert-info">To avoid downtime, use <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices#use-deployment-slots">deployment slots</a>. You can create a workflow that uses the <a href="https://github.com/marketplace/actions/azure-cli-action">GitHub Action for Azure CLI</a>. See the sample <a href="/resources/yaml/serverless/aas-workflow-windows.yaml">GitHub workflow</a>.</div>
 
+[1]: https://portal.azure.com/
+[2]: /account_management/api-app-keys/
+[3]: /getting_started/site/
+[4]: /getting_started/tagging/unified_service_tagging
+
 {{% /tab %}}
 {{< /tabs >}}
 
 
 ## Custom metrics
 
-The Azure App Service extension includes an instance of [DogStatsD][7], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
+The Azure App Service extension includes an instance of [DogStatsD][3], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
 
-Writing custom metrics and checks in Azure App Service is similar to the process for doing so with an application on a host running the Datadog Agent. **Unlike** the [standard DogStatsD config process][7], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
+Writing custom metrics and checks in Azure App Service is similar to the process for doing so with an application on a host running the Datadog Agent. **Unlike** the [standard DogStatsD config process][3], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
 
 To submit custom metrics to Datadog from Azure App Service using the extension:
 
@@ -275,7 +282,7 @@ tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' }
   - Set `DD_TRACE_ENABLED` to `false`.
   - Set `DD_AAS_ENABLE_CUSTOM_METRICS` to `true`.
 
-Learn more about [custom metrics][8]. 
+Learn more about [custom metrics][4].
 
 ## Logging
 
@@ -512,7 +519,7 @@ Many organizations use [Azure Resource Management (ARM) templates](https://docs.
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-warning">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
+<div class="alert alert-danger">Support for Java Web Apps is in Preview for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
     Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 {{% /tab %}}
@@ -530,7 +537,7 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 1. Go to the Azure integration tile.
 
-2. Ensure you have installed the [Azure integration][9] for the Azure subscription where your application is running.
+2. Ensure you have installed the [Azure integration][5] for the Azure subscription where your application is running.
 
 3. Ensure that any App Service plan filtering rules you have applied include the App Service plan where the app is running. If an App Service plan is not included, all apps and functions hosted on it are also not included. Tags on the app itself are not used for filtering by Datadog.
 
@@ -544,7 +551,7 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
-Still need help? Contact [Datadog support][10].
+Still need help? Contact [Datadog support][6].
 
 ### Further Reading
 
@@ -552,12 +559,8 @@ Still need help? Contact [Datadog support][10].
 
 [1]: /developers/dogstatsd
 [2]: /tracing/setup/dotnet/
-[3]: https://portal.azure.com/
-[4]: /account_management/api-app-keys/
-[5]: /getting_started/site/
-[6]: /getting_started/tagging/unified_service_tagging
-[7]: /developers/dogstatsd
-[8]: /metrics/
-[9]: /integrations/azure/
-[10]: /help
-[11]: https://app.datadoghq.com/integrations/azure
+[3]: /developers/dogstatsd
+[4]: /metrics/
+[5]: /integrations/azure/
+[6]: /help
+[7]: https://app.datadoghq.com/integrations/azure

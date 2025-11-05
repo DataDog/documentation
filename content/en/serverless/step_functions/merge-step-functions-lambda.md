@@ -126,7 +126,7 @@ Your State Machine definition is using `JSONPath`. If your definition's top-leve
 [10]: /serverless/libraries_integrations/cli/
 [11]: /logs/guide/forwarder/
 [12]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
-[13]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/stepfunctions#readme
+[13]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-stepfunctions#readme
 
 {{% /tab %}}
 {{% tab "AWS CDK" %}}

@@ -1,5 +1,6 @@
 ---
 title: Datadog Admission Controller
+description: Automatically inject environment variables and standard tags into Kubernetes pods using the Datadog Admission Controller
 aliases:
 - /agent/cluster_agent/admission_controller
 further_reading:

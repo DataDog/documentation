@@ -17,9 +17,9 @@ type: multi-code-lang
 
 ## Compatibilidad
 
-La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
+La librería de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
 
-### Intérpretes compatibles de Ruby 
+### Intérpretes compatibles de Ruby
 
 | Tipo  | Documentación              | Versión   | Tipo de soporte técnico              | Compatibilidad con versiones de Gem |
 |-------|----------------------------|-----------|---------------------------|---------------------|
@@ -67,7 +67,7 @@ La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el reposi
 
 ¿Necesitas soporte de linux para una arquitectura de CPU que no aparece en la lista? [Ponte en contacto con nuestro equipo de atención al cliente para solicitudes especiales][49].
 
-### Versiones compatibles de Datadog Agent 
+### Versiones compatibles de Datadog Agent
 
 | Versión de Datadog Agent | Tipo de compatibilidad              | Versión del paquete |
 |-----------------------|---------------------------|-----------------|
@@ -159,11 +159,11 @@ Como esto se refiere a la reducción de soporte de tiempo de ejecución, implica
   de [Beta](#support-prerelease)/[Última](#support-latest) a [Mantenimiento](#support-maintenance).
 - **Las actualizaciones de versiones de parches** (por ejemplo, de `1.0.0` a `1.0.1`) no modificarán la compatibilidad con ningún tiempo de ejecución.
 
-#### Soporte técnico de versiones de la biblioteca
+#### Soporte técnico de versiones de la librería
 
 Datadog para Ruby proporcionará soporte de GA para la última versión principal y soporte de mantenimiento para la versión principal anterior
-de la biblioteca. Este soporte se proporcionará a través de la última versión secundaria o de parche de la versión principal.
-Por ejemplo, si 1.21.0 es la última versión de la biblioteca con soporte de mantenimiento, las correcciones de errores se proporcionarán a través de una
+de la librería. Este soporte se proporcionará a través de la última versión secundaria o de parche de la versión principal.
+Por ejemplo, si 1.21.0 es la última versión de la librería con soporte de mantenimiento, las correcciones de errores se proporcionarán a través de una
 nueva versión 1.21.0 (o 1.20.1). Estas correcciones no se trasladarán como parches a versiones secundarias anteriores de 1.x.
 
 | Versión principal de Gem | Tipo de compatibilidad                        |

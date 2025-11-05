@@ -434,7 +434,7 @@ monolog:
 {{% /tab %}}
 {{% tab "Laravel" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>\DDTrace\current_context()</code> 함수는 <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> 버전에 도입되었습니다.
 </div>
 

@@ -23,7 +23,7 @@ is_beta: true
 title: Cómo configurar datos de despliegue para métricas de DORA
 ---
 
-<div class="alert alert-warning">Las métricas de DORA están en vista previa.</div>
+<div class="alert alert-danger">Las métricas de DORA están en vista previa.</div>
 
 ## Información general
 
@@ -172,7 +172,7 @@ https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githu
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los flujos de trabajo de GitHub que se ejecutan con <a href="https://docs.github.com/en/actions/using-workflows/eventos-that-trigger-workflows#pull_request"> el activador <code>pull_request</code> </a> no son compatibles actualmente con la integración de GitHub.
 Si utilizas el activador <code>pull_request</code>, utiliza el método alternativo.
 </div>
@@ -196,7 +196,7 @@ Cuando se ejecuta este comando, Datadog recibe la URL del repositorio, el SHA de
 
 Ejecuta este comando en CI para cada nueva confirmación. Si se ejecuta un despliegue para un SHA de confirmación específico, asegúrate de que el comando `datadog-ci git-metadata upload` se ejecute para esa confirmación **antes** de que se envíe el evento del despliegue.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 No proporciones la opción <code>--no-gitsync</code> al comando de <code>metadatos de Datadog-ci git</code>.
 Cuando se incluye esa opción, la información de la confirmación no se envía a Datadog ni se calcula la métrica del tiempo de espera de cambio.
 </div>

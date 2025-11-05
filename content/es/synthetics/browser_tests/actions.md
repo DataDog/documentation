@@ -19,7 +19,7 @@ El tiempo de espera predeterminado para cada paso es de 60 segundos. Puedes anul
 
 ## Pasos grabados automáticamente
 
-Una vez que hagas clic en **Iniciar grabación**, la [extensión del grabador de tests de navegador Datadog][3], detecta y graba automáticamente los pasos en tu sitio web.
+Una vez que hagas clic en **Start Recording** (Iniciar grabación), la [extensión del grabador de tests de navegador Datadog][3], detecta y graba automáticamente los pasos en tu sitio web.
 
 ### Clic
 
@@ -132,7 +132,7 @@ La función de aserción de JavaScript contiene los siguientes parámetros y req
 
 * `vars` (opcional): Una cadena que contiene las [variables][2] de tu test de navegador. Utiliza `vars.<YOUR_VARIABLE>` para hacer referencia a una variable de test del navegador en el snippet de JavaScript. Por ejemplo, si tu test de navegador contiene una variable `USERNAME`, invócala en tu snippet de JavaScript usando `vars.USERNAME`.
 
-* `element` (opcional): El localizador del elemento en la página. Para configurarlo utiliza los botones **Seleccionar** y **Actualizar** elemento de destino. El elemento seleccionado aprovecha automáticamente el algoritmo de multilocalización de test de navegador de Datadog.
+* `element` (opcional): El localizador del elemento en la página. Para configurarlo utiliza los botones **Select** (Seleccionar) y **Update** (Actualizar) del elemento de destino. El elemento seleccionado aprovecha automáticamente el algoritmo de multilocalización de test de navegador de Datadog.
 
 {{< img src="synthetics/browser_tests/assertion_java.mp4" alt="Aserción de JavaScript de test de navegador" video="true" width="100%" >}}
 
@@ -433,7 +433,7 @@ Este tipo de variable global almacena claves secretas de contraseñas de un solo
 
 #### Correo electrónico
 
-Crea una dirección de correo electrónico de Datadog Synthetics que puedes usar en pasos de test para [confirmar si un correo electrónico se ha enviado correctamente][7] o [navegar a un enlace en el correo electrónico][8], por ejemplo, para hacer clic en un enlace de confirmación.
+Crea una dirección de correo electrónico de Datadog Synthetics que puedes usar en pasos de test para [confirmar si un correo electrónico se ha enviado correctamente][7] o [ir a un enlace en el correo electrónico][8], por ejemplo, para hacer clic en un enlace de confirmación.
 
 Se genera un buzón de correo electrónico único en cada ejecución de test para evitar conflictos entre ejecuciones de test.
 
@@ -491,7 +491,7 @@ En el registro de tu test de navegador, añade un registro por pasos y haz clic 
 
 Para editar una grabación del navegador después de guardarla:
 
-- Ve a [Synthetic Monitoring > Tests][14].
+- Ve a [Synthetic Monitoring > Tests (Monitorización Synthetic > Tests)][14].
 - Haz clic en un test de navegador guardado previamente.
 - Haz clic en el icono de engranaje de la esquina superior derecha y, a continuación, en "Edit recording" (Editar grabación).
 - Selecciona uno o varios pasos para eliminarlos o reproducirlos y, a continuación, haz clic en **Save & Quit** (Guardar y salir).

@@ -825,7 +825,7 @@ Read more about sampling controls in the [.NET tracing library documentation][2]
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"> The <a href="/tracing/legacy_app_analytics/">App Analytics</a> mechanism is fully deprecated. To ingest single spans without the complete trace, use the <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a> configuration. To ingest complete traces, use <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a> configurations.</div>
+<div class="alert alert-danger"> The <a href="/tracing/legacy_app_analytics/">App Analytics</a> mechanism is fully deprecated. To ingest single spans without the complete trace, use the <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a> configuration. To ingest complete traces, use <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a> configurations.</div>
 
 ## Product ingested spans
 
@@ -893,5 +893,5 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: tracing/guide/remote_config
+[21]: /tracing/guide/remote_config/
 [22]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry

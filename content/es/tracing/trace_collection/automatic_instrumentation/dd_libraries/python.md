@@ -34,9 +34,9 @@ Antes de empezar, asegúrate de haber [instalado y configurado el Agent][13].
 
 ### Instrumentación de tu aplicación
 
-Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la biblioteca de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
+Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la librería de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
 
-Para empezar a rastrear aplicaciones escritas en Python, instala la biblioteca de rastreo de Datadog, `ddtrace`, utilizando pip:
+Para empezar a rastrear aplicaciones escritas en Python, instala la librería de rastreo de Datadog, `ddtrace`, utilizando pip:
 
 ```python
 pip install ddtrace
@@ -60,7 +60,7 @@ Una vez que hayas terminado la configuración y estés ejecutando el rastreador 
 
 ## Configuración
 
-Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][3].
+Si es necesario, configura la librería de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de librerías][3].
 
 La conexión para trazas también puede configurarse en código:
 
@@ -98,7 +98,7 @@ tracer.configure(
 
 ### Actualización a v1
 
-Si estás actualizando a ddtrace v1, revisa la [guía de actualización][4] y las [notas de la versión][5] en la documentación de biblioteca para ver todos los detalles.
+Si estás actualizando a ddtrace v1, revisa la [guía de actualización][4] y las [notas de la versión][5] en la documentación de librería para ver todos los detalles.
 
 ## Leer más
 

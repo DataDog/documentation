@@ -38,7 +38,14 @@ Datadog provides out-of-the-box (OOTB) [detection rules][1] to flag attacker tec
 
 <div class="alert alert-info">Datadog's Security Research team continuously adds new OOTB security detection rules. While the aim is to deliver high-quality detections with the release of integrations or other new features, the performance of these detections at scale often needs to be observed before making the rule generally available. These rules contain a Beta tag. This gives Datadog's Security Research team time to either refine or deprecate detection opportunities that do not meet Datadog's standards.</div>
 
-Click the following buttons to filter the detection rules. Security detection rules are available for [App and API Protection][5], [Cloud SIEM][2] (log detection and signal correlation), [CSM Misconfigurations][3] (cloud and infrastructure), [Workload Protection][4], [CSM Identity Risks][6], and [Attack Paths][7].
+Click the following buttons to filter the detection rules. Security detection rules are available for:
+- [App and API Protection][5]
+- [Cloud SIEM][2] (log detection and signal correlation)
+- [Cloud Security Misconfigurations][3] (cloud and infrastructure)
+  {{% cloud-sec-cloud-infra %}}
+- [Workload Protection][4]
+- [Cloud Security Identity Risks][6]
+- [Attack Paths][7]
 
 [1]: /security/detection_rules/
 [2]: /security/cloud_siem/

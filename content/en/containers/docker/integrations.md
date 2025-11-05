@@ -1,5 +1,6 @@
 ---
 title: Docker and Integrations
+description: Configure monitoring integrations for applications running in Docker containers using Autodiscovery
 aliases:
 - /agent/docker/integrations
 further_reading:

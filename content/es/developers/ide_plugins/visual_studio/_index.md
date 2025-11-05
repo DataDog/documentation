@@ -23,7 +23,7 @@ title: Extensión de Datadog para Visual Studio
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     La extensión de Datadog para Visual Studio no es compatible con tu <a href="/getting_started/site">sitio de Datadog seleccionado</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}

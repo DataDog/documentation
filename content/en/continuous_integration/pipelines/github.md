@@ -71,7 +71,7 @@ After the GitHub App is created and installed, enable CI Visibility on the accou
 
 Pipelines appear immediately after enabling CI Visibility for any account or repository.
 
-### Disable CI Visiblity for GitHub Actions
+### Disable CI Visibility for GitHub Actions
 
 To disable the CI Visibility GitHub Actions integration:
 

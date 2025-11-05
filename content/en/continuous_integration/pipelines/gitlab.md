@@ -168,7 +168,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 Then, configure the integration on a [project][103] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
 
-<div class="alert alert-danger">Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI.</div>
+<div class="alert alert-warning">Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI.</div>
 
 
 Fill in the integration configuration settings:
@@ -212,7 +212,7 @@ You can test the integration with the **Test settings** button (only available w
 
 {{% tab "GitLab &lt; 13.7" %}}
 
-<div class="alert alert-warning">Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
+<div class="alert alert-danger">Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
 
 For older versions of GitLab, you can use [webhooks][101] to send pipeline data to Datadog.
 
@@ -369,7 +369,7 @@ To enable collection of job logs:
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 15.3" %}}
-<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+<div class="alert alert-danger">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
 This means that for Datadog servers to access the storage, the storage must not have network restrictions
 The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 
@@ -379,7 +379,7 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 14.8" %}}
-<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+<div class="alert alert-danger">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
 This means that for Datadog servers to access the storage, the storage must not have network restrictions
 The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 

@@ -159,6 +159,11 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="dotnet" layer="dd-trace-dotnet" layerParamTypescript="dotnetLayerVersion" layerParamPython="dotnet_layer_version">}}
+{{% /tab %}}
+
 {{% tab "Container image" %}}
 
 1. Install the Datadog Lambda Extension
@@ -201,7 +206,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "3.2.1"
+  version = "4.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -304,9 +309,7 @@ module "lambda-datadog" {
 When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second version of the .NET tracer is not also packaged with your application code. Add the `ExcludeAssets` instruction to ensure this extra tracer is excluded.
 
 ```xml
-<PackageReference Include="Datadog.Trace" Version="2.38.0">
-    <ExcludeAssets>runtime</ExcludeAssets>
-</PackageReference>
+<PackageReference Include="Datadog.Trace" Version="3.26.3"/>
 ```
 
 You can then add custom spans and span tags using the .NET tracer. For instructions on how to add spans, see [.NET custom instrumentation][10].
