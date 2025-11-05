@@ -22,33 +22,35 @@ further_reading:
       text: "Monitor DNS logs for network and security analysis"
 ---
 
-{{< img src="network_performance_monitoring/dns_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
+## Overview
 
-<div class="alert alert-info">
-Upgrade to Agent version 7.33 or later to enable DNS monitoring.
+DNS Monitoring gives you visibility into DNS server performance, helping you pinpoint both server-side and client-side DNS issues. With flow-level DNS metrics at your fingertips, you can quickly identify:
+
+* Which pods or services are making DNS requests and which servers are handling them.
+* Top requesters and their query rates.
+* DNS servers experiencing gradual or sudden response time spikes.
+* High error rates and specific error types from DNS servers.
+* Domain resolution patterns across your infrastructure.
+
+{{< img src="network_performance_monitoring/dns_monitoring/dns_overview_2.png" alt="The CNM Analytics page with the DNS toggle enabled." >}}
+
+## Prerequisites
+
+- Agent version 7.33 or later
+- Enable [Cloud Network Monitoring][1] (CNM)
+
+<div class="alert alert-info"> This documentation applies to DNS Monitoring in CNM. For information on Network Device Monitroring (NDM), see the <a href="/network_monitoring/devices/setup/">NDM setup instructions</a>.
 </div>
-
-DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
-
-* The pods or services making DNS requests and the servers receiving those requests.
-* The endpoints making the most requests or making requests at the highest rate.
-* If a DNS server's response time to requests has gradually or suddenly increased.
-* The DNS servers with a high error rate and the type of errors being emitted.
-* Which domains are being resolved.
-
-## Setup
-
-Before you can begin to use DNS Monitoring, [set up Cloud Network Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a **DNS** tab is accessible in the Cloud Network Monitoring product.
-
-Are you looking for Network Device Monitoring instead? See the [NDM setup instructions][2].
 
 ## Queries
 
-Use the search bar at the top of the page to query for dependencies between a client (which makes the DNS request) and a DNS server (which responds to the DNS request). The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format.
+Navigate to [**CNM > Analytics**][5], and click on the **DNS** toggle.
+
+Use the search bar at the top of the page to query for dependencies between a client (which makes the DNS request) and a DNS server (which responds to the DNS request). The destination port is automatically scoped to DNS port `53` so that all resulting dependencies match this (**client → DNS server**) format.
 
 To refine your search to a particular client, aggregate and filter DNS traffic using client tags in the search bar. In the default view, the client is automatically grouped by the most common tags. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
 
-{{< img src="network_performance_monitoring/dns_monitoring/dns_client_search.png" alt="The DNS monitoring page with client_service:ad-server entered into the search bar, pod_name entered for View clients as, and network.dns_query entered for View servers as" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_client_search_2.png" alt="The DNS monitoring page with client_service:web-store entered into the search bar and `network.dns_query` entered for View servers as" style="width:100%;">}}
 
 To refine your search to a particular DNS server, filter the search bar by using server tags. Configure your server display with one of the following options from the **Group by** dropdown menu:
 
@@ -113,7 +115,8 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/cloud_network_monitoring/
+[1]: /network_monitoring/cloud_network_monitoring/setup
 [2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
 [3]: /network_monitoring/cloud_network_monitoring/network_analytics#table
 [4]: /network_monitoring/cloud_network_monitoring/network_analytics/#recommended-queries
+[5]: https://app.datadoghq.com/network/
