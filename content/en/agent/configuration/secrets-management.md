@@ -144,8 +144,10 @@ agents:
   rbac:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
     serviceAccountAnnotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::<ARN>:policy/MrMcPatSecretsAccessPolicy
+      eks.amazonaws.com/role-arn:<IAM ROLE ARN>
 ```
+
+<div class="alert alert-info"> Include service account annotations for the Agent to have permissions to access the secret. </div>
 
 {{% /tab %}}
 
@@ -165,9 +167,9 @@ spec:
          value: "aws.secrets"
        - name: DD_SECRET_BACKEND_CONFIG
          value: '{"aws_session":{"aws_region":"us-west-2"}}'
-      # IAM role ARN required to grant the Agent permissions to access the AWS secret
+      # IAM role ARN is required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::<ARN>:policy/MrMcPatSecretsAccessPolicy
+        eks.amazonaws.com/role-arn:<IAM_ROLE_ARN>
 ```
 
 {{% /tab %}}
