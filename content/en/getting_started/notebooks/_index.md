@@ -11,12 +11,7 @@ further_reading:
 
 ## Overview
 
-Datadog Notebooks combines live graphs, metrics, logs, monitors, and [Analysis Features][1] to create a collaborative environment using your data in real-time. Teams use notebooks to isolate and investigate issues, document incident details, create interactive guides, and build special reports to enhance their proactive workflows.
-
-This guide introduces Datadog Notebooks and demonstrates how notebook types enhance team collaboration and investigation workflows.
-- When to create notebooks
-- How to choose the right notebook type
-- How teams isolate issues and collaborate through an investigation
+Datadog Notebooks combines live graphs, metrics, logs, monitors, and [Analysis Features][1] to create a collaborative environment using your data in real-time. Teams use notebooks to isolate and investigate issues, document incident details, create interactive guides, and build special reports to enhance their proactive workflows. This guide introduces Datadog Notebooks and demonstrates how notebook types enhance team collaboration and investigation workflows.
 
 ### Key benefits
 
