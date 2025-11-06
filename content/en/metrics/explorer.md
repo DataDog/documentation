@@ -27,12 +27,13 @@ Natural Language Querying (NLQ) on the Metrics Explorer is in Preview. If you're
 {{< /callout >}}
 
 
-Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, making it easier to explore metrics without needing to write complex syntax. To access this feature, click Ask in the search field.
+Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, understanding context such as your services, attributes, and tags. This makes it easier to explore metrics without needing to write complex syntax.
+
+To access this feature, click **Ask** in the search field and type your query.
 
 {{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Natural language query in Metrics Explorer showing how to search for metrics using plain English phrases" video=true >}}
 
-The system translates natural language input into Datadog queries and understands context such as services, attributes, and tags.
-To disable NLQ, you must have [org_management permissions][8]. Navigate to Organization Settings > Preferences and toggle off the Natural Language Queries feature.
+To disable NLQ for your organization, you must have [org_management permissions][8]. Navigate to **Organization Settings > Preferences** and toggle off the Natural Language Queries feature.
 
 ## Graphing
 
