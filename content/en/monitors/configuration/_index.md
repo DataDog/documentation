@@ -38,7 +38,7 @@ As you build or modify your query, the preview graph at the top of the configura
 {{< tabs >}}
 {{% tab "Evaluated Data" %}}
 
-{{< img src="/monitors/configuration/evaluated_data_preview_graph.png" alt="Evaluated Data Preview Graph" style="width:100%;" >}}
+{{< img src="/monitors/configuration/evaluated_data_preview_high_error_rate.png" alt="Evaluated Data Preview Graph" style="width:100%;" >}}
 
 The Evaluation Data graph shows how your monitor would have evaluated the data using your current query and thresholds. With Evaluation Preview, you can
 - See historical state transitions (for example, `OK` → `ALERT`).
@@ -52,7 +52,7 @@ This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, 
 
 {{% tab "Source Data" %}}
 
-{{< img src="/monitors/configuration/source_data_graph.png" alt="Source Data Preview Graph" style="width:100%;" >}}
+{{< img src="/monitors/configuration/source_data_graph_high_error_rate.png" alt="Source Data Preview Graph" style="width:100%;" >}}
 
 The Source Data graph displays the raw timeseries or query output for your monitor, without any threshold evaluation or alert logic applied. This allows you to:
 
