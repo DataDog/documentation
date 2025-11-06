@@ -130,9 +130,9 @@ secret_backend_config:
 
 {{% tab "Helm" %}}
 
-#### Integration check
-
 Configure the Datadog Agent to use AWS Secrets to resolve secrets in Helm using the following configuration:
+
+##### Integration check
 
 ```sh
 datadog: 
@@ -153,8 +153,8 @@ agents:
 
 <br>
 
-#### Cluster check
-##### Without cluster check runners enabled
+
+##### Cluster check: without cluster check runners enabled
 ```sh
 datadog: 
   apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
@@ -178,7 +178,7 @@ clusterAgent:
           password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
 ```
 
-##### With cluster check runners enabled
+##### Cluster check: with cluster check runners enabled
 ```sh
 datadog: 
   apiKey: ENC[My-Secrets;datadog-api-key]
@@ -212,9 +212,10 @@ clusterChecksRunner:
 
 {{% tab "Operator" %}}
 
-#### Integration check
-
 Configure the Datadog Agent to use AWS Secrets to resolve secrets with the Datadog Operator using the following configuration:
+
+##### Integration check
+
 
 ```sh
 spec:
@@ -237,8 +238,8 @@ spec:
 
 <br>
 
-#### Cluster check
-##### Without cluster check runners enabled
+
+##### Cluster check: without cluster check runners enabled
 
 ```sh
 apiVersion: datadoghq.com/v2alpha1
@@ -270,7 +271,9 @@ spec:
                 password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
 ```
 
-##### With cluster check runners enabled
+<br>
+
+##### Cluster check: with cluster check runners enabled
 
 ```sh
 spec:
