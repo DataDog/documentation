@@ -28,7 +28,7 @@ Follow these steps to enable OTel Logs API support in your Python application.
     ```
 2.  Install the OTel SDK and Exporter:
     ```sh
-    pip install opentelemetry-sdk opentelemetry-exporter-otlp
+    pip install opentelemetry-sdk opentelemetry-exporter-otlp>=1.15.0
     ```
 3.  Enable OTel logs export by setting the following environment variable:
     ```sh

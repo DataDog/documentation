@@ -61,7 +61,7 @@ For a complete list of all shared OTLP environment variables, see [OpenTelemetry
 
 ## Migrate from other setups
 
-### Existing OTel Setup (Manual Configuration)
+### Existing OTel setup (manual configuration)
 
 This Datadog feature is not compatible with applications already using the OpenTelemetry Logs API or OpenTelemetry SDK for logs.
 
