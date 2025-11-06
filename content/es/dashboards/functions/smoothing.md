@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/graphing/functions/smoothing/
+description: Reduce el ruido en los datos métricos utilizando autosmooth, medias móviles
+  ponderadas exponencialmente, filtros de mediana y funciones ponderadas.
 title: Suavizado
 ---
 
@@ -28,9 +30,9 @@ La función `autosmooth()` no puede utilizarse en monitores. Dado que el tramo s
 | :----      | :-------                                                            | :---------                 |
 | `ewma_3()` | Calcula la media móvil ponderada exponencialmente en un tramo de 3. | `ewma_3(<METRIC_NAME>{*})` |
 
-Nota: El valor del tramo es el número de puntos de datos. Así que `ewma_3()` utiliza los 3 últimos puntos de datos para calcular la media.
+Nota: El valor del tramo (span) es el doble de la antigüedad media ponderada de la serie. Por tanto, `ewma_3()` es comparable a una media móvil de 3 días.
 
-Por ejemplo:
+Ejemplo:
 
 Si una métrica `10 + x%10 {*}` se incrementa en 1 empezando por 10 hasta que vuelve a caer a 10 después de 10 puntos de datos, entonces `ewma3(10 + x%10 {*})` tiene la siguiente forma:
 
@@ -42,9 +44,9 @@ Si una métrica `10 + x%10 {*}` se incrementa en 1 empezando por 10 hasta que vu
 | :----      | :-------                                                            | :---------                 |
 | `ewma_5()` | Calcula la media móvil ponderada exponencialmente en un tramo de 5. | `ewma_5(<METRIC_NAME>{*})` |
 
-Nota: El valor tramo (span) es el número de puntos de datos. Así que `ewma_5()` utiliza los últimos 5 puntos de datos para calcular la media.
+Nota: El valor del tramo es el doble de la antigüedad media ponderada de la serie. Por tanto, `ewma_5()` es comparable a una media móvil de 5 días.
 
-Por ejemplo:
+Ejemplo:
 
 Si una métrica `10 + x%10 {*}` se incrementa en 1 empezando por 10 hasta que vuelve a caer a 10 después de 10 puntos de datos, entonces `ewma5(10 + x%10 {*})` tiene la siguiente forma:
 
@@ -56,7 +58,7 @@ Si una métrica `10 + x%10 {*}` se incrementa en 1 empezando por 10 hasta que vu
 | :----      | :-------                                                            | :---------                 |
 | `ewma_7()` | Calcula la media móvil ponderada exponencialmente en un tramo de 7. | `ewma_7(<METRIC_NAME>{*})` |
 
-Nota: El valor del tramo es el número de puntos de datos. Así que `ewma_7()` utiliza los 7 últimos puntos de datos para calcular la media.
+Nota: El valor del tramo es el doble de la antigüedad media ponderada de la serie. Por tanto, `ewma_7()` es comparable a una media móvil de 7 días.
 
 ### Ewma 10
 
@@ -64,9 +66,9 @@ Nota: El valor del tramo es el número de puntos de datos. Así que `ewma_7()` u
 | :----       | :-------                                                             | :---------                  |
 | `ewma_10()` | Calcula la media móvil ponderada exponencialmente en un tramo de 10. | `ewma_10(<METRIC_NAME>{*})` |
 
-Nota: El valor del tramo es el número de puntos de datos. Así que `ewma_10()` utiliza los 10 últimos puntos de datos para calcular la media.
+Nota: El valor del tramo es el doble de la antigüedad media ponderada de la serie. Por tanto, `ewma_10()` es comparable a una media móvil de 10 días.
 
-Por ejemplo:
+Ejemplo:
 
 Si una métrica `10 + x%10 {*}` se incrementa en 1 empezando por 10 hasta que vuelve a caer a 10 después de 10 puntos de datos, entonces `ewma10(10 + x%10 {*})` tiene la siguiente forma:
 
@@ -78,9 +80,9 @@ Si una métrica `10 + x%10 {*}` se incrementa en 1 empezando por 10 hasta que vu
 | :----       | :-------                                                             | :---------                  |
 | `ewma_20()` | Calcula la media móvil ponderada exponencialmente en un tramo de 20. | `ewma_20(<METRIC_NAME>{*})` |
 
-Nota: El valor del tramo es el número de puntos de datos. Así que `ewma_20()` utiliza los últimos 20 puntos de datos para calcular la media.
+Nota: El valor del tramo es el doble de la antigüedad media ponderada de la serie. Por tanto, `ewma_20()` es comparable a una media móvil de 20 días.
 
-Por ejemplo:
+Ejemplo:
 
 Si una métrica `10 + x%10 {*}` se incrementa en 1 empezando por 10 hasta que vuelve a caer a 10 después de 10 puntos de datos, entonces `ewma20(10 + x%10 {*})` tiene la siguiente forma:
 
@@ -139,7 +141,7 @@ Aquí puedes ver un gráfico de ejemplo de la consulta original con picos inexac
 
 Para obtener más información sobre el modificador weighted(), consulta [¿Cómo funciona weighted()?][3].
 
-## Otras funciones
+## Otros funciones
 
 {{< whatsnext desc="Consult the other available functions:" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}

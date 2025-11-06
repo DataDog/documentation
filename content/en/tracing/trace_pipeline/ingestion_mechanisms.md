@@ -45,7 +45,7 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 
 #### Remote configuration
 
-Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. To get started, set up [Remote Configuration][23] and then configure the `ingestion_reason` parameter from the [Ingestion Control page][5]. Remote Configuration allows you to change the parameter without having to restart the Agent. Remotely set configuration takes precedence over local configurations, including environment variables and settings from `datadog.yaml`.
+Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. To get started, set up [Remote Configuration][21] and then configure the `ingestion_reason` parameter from the [Ingestion Control page][5]. Remote Configuration allows you to change the parameter without having to restart the Agent. Remotely set configuration takes precedence over local configurations, including environment variables and settings from `datadog.yaml`.
 
 #### Local configuration
 
@@ -90,7 +90,7 @@ For example, to capture 100% of traces for the resource `GET /checkout` from the
 
 ```
 # using system property
-java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\":1},{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules='[{"service": "my-service", "resource": "GET /checkout", "sample_rate":1},{"service": "my-service", "sample_rate":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
@@ -281,11 +281,18 @@ For .NET applications, set a global sampling rate for the library using the `DD_
 For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
-export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+#using powershell
+$env:DD_TRACE_SAMPLE_RATE=0.1
+$env:DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+
+#using JSON file   
+{
+    "DD_TRACE_SAMPLE_RATE": "0.1",
+    "DD_TRACE_SAMPLING_RULES": "[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\": 0.5}]"
+}
 ```
 
-<div class="alert alert-info">Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
@@ -802,7 +809,13 @@ Starting from version [v2.18.0][1], for .NET applications, set by-service and by
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+#using powershell
+$env:DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+
+#using JSON file   
+{
+    "DD_SPAN_SAMPLING_RULES": "[{\"service\": \"my-service\", \"name\": \"http.request\", \"sample_rate\": 1.0, \"max_per_second\": 50}]"
+}
 ```
 
 Read more about sampling controls in the [.NET tracing library documentation][2].
@@ -812,7 +825,7 @@ Read more about sampling controls in the [.NET tracing library documentation][2]
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"> The <a href="/tracing/legacy_app_analytics/">App Analytics</a> mechanism is fully deprecated. To ingest single spans without the complete trace, use the <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a> configuration. To ingest complete traces, use <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a> configurations.</div>
+<div class="alert alert-danger"> The <a href="/tracing/legacy_app_analytics/">App Analytics</a> mechanism is fully deprecated. To ingest single spans without the complete trace, use the <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a> configuration. To ingest complete traces, use <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a> configurations.</div>
 
 ## Product ingested spans
 
@@ -880,6 +893,5 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: /agent/remote_config/#enabling-remote-configuration
+[21]: /tracing/guide/remote_config/
 [22]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry
-[23]: /agent/remote_config/

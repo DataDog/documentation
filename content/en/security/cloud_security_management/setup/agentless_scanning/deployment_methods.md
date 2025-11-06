@@ -31,7 +31,7 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 {{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%" >}}
 
 [3]: https://app.datadoghq.com/security/csm/vm
-[4]: /agent/remote_config/?tab=configurationyamlfile#setup
+[4]: /remote_configuration
 
 {{% /tab %}}
 {{< /tabs >}}

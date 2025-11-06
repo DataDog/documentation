@@ -29,6 +29,10 @@ Supported languages
   - `dd-trace-py` version `3.8.0` or higher for Python
   - `dd-trace-rb` version `2.16.0` or higher for Ruby
 
+<div class="alert alert-info">
+Handled errors contain the span attribute <code>error.handling:handled</code>. For more details, see <a href="/error_tracking/explorer/#facets">Facets</a>.
+</div>
+
 Capturing handled errors is only available in APM Error Tracking or Standalone Backend Error Tracking. Error Tracking for Logs and RUM is not supported.
 
 ## Setup

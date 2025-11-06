@@ -137,6 +137,8 @@ Define variables for your HTTP API tests with JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
 
+<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+
    {{% /tab %}}
 
    {{< /tabs >}}

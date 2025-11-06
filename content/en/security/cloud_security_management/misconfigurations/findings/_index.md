@@ -30,15 +30,16 @@ A misconfiguration is the primary primitive for a rule evaluation against a reso
 
 ## Explore your cloud misconfigurations
 
-Misconfigurations are displayed on the [Misconfigurations Findings page][1]. Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed. You can also group misconfigurations by resources or teams, so you can find the resources or teams that have the most failed misconfigurations, and prioritize your remediation efforts accordingly. Select a misconfiguration to view up to five resources that have been evaluated by the rule.
+Misconfigurations are displayed on the [Misconfigurations Findings page][1].
+- Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed.
+  - Group misconfigurations by any facet, custom property, or tag (or **None** to view misconfigurations individually), so you can find patterns of failed misconfigurations and prioritize your remediation efforts accordingly.
+- Hover over **Views**, then select an existing view to apply, or click **Save as new view** to use your explorer settings again in the future.
 
-{{< img src="security/csm/findings_page_1.png" alt="Cloud Security Misconfigurations Findings page" style="width:100%;">}}
+{{< img src="security/csm/findings_page_2.png" alt="Cloud Security Misconfigurations Findings page" style="width:100%;">}}
 
-You can click **View All** to view a complete list of resources, or click a resource to view additional information about the misconfiguration and suggested remediation steps.
+You can click **View All** to view a complete list of resources affected by a misconfiguration, or click a resource to view additional information about the misconfiguration and suggested remediation steps.
 
-{{< img src="security/cspm/misconfigurations_explorer_3.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
-
-Additionally, you can group findings by **Resources** or **Teams** and select an associated misconfiguration to view additional information.
+{{< img src="security/cspm/misconfigurations_explorer_4.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
 
 ## Further reading
 

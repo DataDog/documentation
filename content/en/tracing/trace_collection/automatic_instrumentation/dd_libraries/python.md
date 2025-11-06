@@ -158,7 +158,7 @@ The following methods, attributes, and behaviors have been removed or changed.
 - Test names for class-based tests include the class name (for example, `TestClass::test_method`).
 - Test skipping is performed at the suite level.
 
-#### Step 3: Upgrade the library
+### Step 3: Upgrade the library
 
 After you have updated your code to address the breaking changes, you can upgrade to the latest v3 release.
 

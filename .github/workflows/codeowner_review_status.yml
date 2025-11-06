@@ -2,7 +2,7 @@ name: Documentation Team Approval Check
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, review_requested]
   pull_request_review:
     types: [submitted, dismissed]
 
@@ -49,8 +49,9 @@ jobs:
               return;
             }
 
-            // Define the documentation team slug
+            // Define the documentation team slug (also check for webops-platform)
             const DOCUMENTATION_TEAM = 'documentation';
+            const WEBOPSTEAM = 'webops-platform';
             
             // Get all reviews
             const { data: reviews } = await github.rest.pulls.listReviews({
@@ -68,8 +69,8 @@ jobs:
               }
             });
 
-            // Get current approvals
-            const approvals = new Set(
+            // Get current approvals (will be filtered by team membership later)
+            const allApprovals = new Set(
               Array.from(latestReviews.values())
                 .filter(review => review.state === 'APPROVED')
                 .map(review => review.user.login)
@@ -87,16 +88,23 @@ jobs:
                 pull_number: number,
               });
               
-              // Check if documentation team is currently in requested reviewers
+              // Check if documentation or webops-platform teams are currently in requested reviewers
               const currentlyRequested = reviewers.teams.some(team => 
-                team.slug === DOCUMENTATION_TEAM
+                team.slug === DOCUMENTATION_TEAM || team.slug === WEBOPSTEAM
               );
               
-              // Also check if any documentation team member has reviewed (indicating they were requested)
-              const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
+              // Also check if any documentation or webops-platform team member has reviewed (indicating they were requested)
+              const { data: docTeamMembers } = await github.rest.teams.listMembersInOrg({
                 org: owner,
                 team_slug: DOCUMENTATION_TEAM,
               });
+              
+              const { data: webopsTeamMembers } = await github.rest.teams.listMembersInOrg({
+                org: owner,
+                team_slug: WEBOPSTEAM,
+              });
+              
+              const teamMembers = [...docTeamMembers, ...webopsTeamMembers];
               
               const teamMemberLogins = new Set(teamMembers.map(member => member.login));
               const hasTeamMemberReview = reviews.some(review => 
@@ -113,11 +121,13 @@ jobs:
               console.log(`Documentation team considered requested: ${isDocumentationTeamRequested}`);
               
               if (isDocumentationTeamRequested) {
-                // Check for approval from documentation team members
-                hasDocumentationApproval = teamMembers.some(member => 
-                  approvals.has(member.login)
+                // Check for approval from documentation team members only
+                const docsTeamApprovals = teamMembers.filter(member => 
+                  allApprovals.has(member.login)
                 );
+                hasDocumentationApproval = docsTeamApprovals.length > 0;
                 
+                console.log(`Documentation team members who approved: ${docsTeamApprovals.map(m => m.login).join(', ')}`);
                 console.log(`Documentation team approval status: ${hasDocumentationApproval}`);
               } else {
                 // If documentation team is not requested, no approval needed
@@ -137,7 +147,7 @@ jobs:
 
             // Set final status
             if (isDocumentationTeamRequested && !hasDocumentationApproval) {
-              core.setFailed(`Documentation team approval required from @${owner}/${DOCUMENTATION_TEAM}`);
+              core.setFailed(`Team approval required from @${owner}/${DOCUMENTATION_TEAM} or @${owner}/${WEBOPSTEAM}`);
             } else if (!isDocumentationTeamRequested) {
               console.log('Documentation team review not required for this PR.');
             } else {
@@ -153,7 +163,7 @@ jobs:
       contents: read
       statuses: write
     steps:
-      - name: Update PR Comment and Status
+      - name: Update PR status
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea #v7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -191,44 +201,3 @@ jobs:
               context: 'Documentation Team Approval'
             });
             console.log(`Created commit status: ${statusState} - ${statusDescription}`);
-            
-            // Get existing comments from this workflow
-            const { data: comments } = await github.rest.issues.listComments({
-              owner,
-              repo,
-              issue_number: number,
-            });
-
-            const botComment = comments.find(comment => 
-              comment.user.type === 'Bot' && 
-              comment.body.includes('Documentation Team Review')
-            );
-
-            // Prepare comment content
-            let commentBody;
-            if (!teamRequested) {
-              commentBody = `## ℹ️ Documentation Team Review\n\nNo documentation team review is required for this pull request.`;
-            } else if (approvalStatus) {
-              commentBody = `## ✅ Documentation Team Review\n\nThe documentation team has approved this pull request. Thank you for your contribution!\n`;
-            } else {
-              commentBody = `## 📝 Documentation Team Review Required\n\nThis pull request requires approval from the **@DataDog/documentation** team before it can be merged.\n\nPlease ensure your changes follow our documentation guidelines and wait for a team member to review and approve your changes.`;
-            }
-
-            // Update or create comment
-            if (botComment) {
-              await github.rest.issues.updateComment({
-                owner,
-                repo,
-                comment_id: botComment.id,
-                body: commentBody
-              });
-              console.log('Updated existing PR comment with documentation review status.');
-            } else {
-              await github.rest.issues.createComment({
-                owner,
-                repo,
-                issue_number: number,
-                body: commentBody
-              });
-              console.log('Created new PR comment with documentation review status.');
-            }

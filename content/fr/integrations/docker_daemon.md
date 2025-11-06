@@ -43,7 +43,7 @@ supported_os:
 ---
 **Remarque** : le check Docker Daemon est toujours tenu à jour, mais fonctionne uniquement avec la **version 5 de l'Agent**.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>Pour utiliser l'intégration Docker avec la version 6 de l'Agent, consultez la <a href="#agent-v6">section sur l'Agent v6</a> ci-dessous.</b>
 </div>
 

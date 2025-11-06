@@ -1,5 +1,6 @@
 ---
 title: Datadog Admission Controller
+description: Automatically inject environment variables and standard tags into Kubernetes pods using the Datadog Admission Controller
 aliases:
 - /agent/cluster_agent/admission_controller
 further_reading:
@@ -12,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"
   text: "Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM"
+- link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+  tag: "Blog"
+  text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
 - link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
   tag: "Architecture Center"
   text: "Instrument your app using the Datadog Operator and Admission Controller"
@@ -163,7 +167,7 @@ If `mutateUnlabelled` is set to `false`, the Pod label must be set to `admission
 Possible options:
 
 | mutateUnlabelled | Pod label                               | Injection |
-|------------------|-----------------------------------------|-----------|
+| ---------------- | --------------------------------------- | --------- |
 | `true`           | No label                                | Yes       |
 | `true`           | `admission.datadoghq.com/enabled=true`  | Yes       |
 | `true`           | `admission.datadoghq.com/enabled=false` | No        |
@@ -188,11 +192,12 @@ This feature can be configured by setting `admission_controller.inject_config.mo
 Starting from Helm chart v3.22.0 and Datadog Operator v1.1.0, the communication mode is automatically set to `socket` if either APM socket or DSD socket is enabled.
 
 Possible options:
-| Mode               | Description                                                                                                       |
-|--------------------|-------------------------------------------------------------------------------------------------------------------|
-| `hostip` (Default) | Inject the host IP in `DD_AGENT_HOST` environment variable                                                        |
-| `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable (available with Kubernetes v1.22+)|
-| `socket`           | Inject Unix Domain Socket path in `DD_TRACE_AGENT_URL` environment variable and the volume definition to access the corresponding path. Inject URL to use to connect the Datadog Agent for DogStatsD metrics in `DD_DOGSTATSD_URL`.  |
+| Mode               | Description                                                                                                                                                                                                                         |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hostip` (Default) | Inject the host IP in `DD_AGENT_HOST` environment variable                                                                                                                                                                          |
+| `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable (available with Kubernetes v1.22+)                                                                                                                  |
+| `socket`           | Inject Unix Domain Socket path in `DD_TRACE_AGENT_URL` environment variable and the volume definition to access the corresponding path. Inject URL to use to connect the Datadog Agent for DogStatsD metrics in `DD_DOGSTATSD_URL`. |
+| `csi`              | Inject Unix Domain Socket paths in `DD_TRACE_AGENT_URL` and `DD_DOGSTATSD_URL` environment variables and the Datadog CSI volume definition to access the corresponding paths. This mode is available for Datadog Cluster Agent v7.67+.                                                    |
 
 **Note**: Pod-specific mode takes precedence over the global mode defined at the Admission Controller level.
 

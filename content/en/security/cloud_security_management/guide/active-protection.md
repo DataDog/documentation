@@ -6,7 +6,7 @@ further_reading:
   text: "Workload Protection Detection Rules"
 ---
 
-<div class="alert alert-warning">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
+<div class="alert alert-danger">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
 
 <div class="alert alert-info">Workload Protection Active Protection is in Preview.</div>
 

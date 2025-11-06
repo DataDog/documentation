@@ -20,7 +20,7 @@ aliases:
   - /service_catalog/service_definitions/v3-0
   - /software_catalog/service_definitions/v3-0
   - /software_catalog/apis   ## aliases for definitions/apis page
-  - /tracing/faq/service_definition_api/    
+  - /tracing/faq/service_definition_api/
   - /tracing/software_catalog/service_definition_api
   - /software_catalog/service_definition_api
   - /tracing/service_catalog/service_definition_api
@@ -29,35 +29,36 @@ aliases:
   - /api_catalog/api_catalog_api
   - /service_catalog/apis
 further_reading:
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "External Site"
-  text: "Create and manage definitions with Terraform"
-- link: "/api/latest/service-definition/"
-  tag: "API"
-  text: "Learn about the Definition API"
-- link: "/integrations/github"
-  tag: "Documentation"
-  text: "Learn about the GitHub Integration"
-- link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
-  tag: "Blog"
-  text: "Import Backstage YAML files into Datadog"
-- link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
-  tag: "Blog"
-  text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+  - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
+    tag: "External Site"
+    text: "Create and manage definitions with Terraform"
+  - link: "/api/latest/service-definition/"
+    tag: "API"
+    text: "Learn about the Definition API"
+  - link: "/integrations/github"
+    tag: "Documentation"
+    text: "Learn about the GitHub Integration"
+  - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+    tag: "Blog"
+    text: "Import Backstage YAML files into Datadog"
+  - link: "https://www.datadoghq.com/blog/service-catalog-schema-v3/"
+    tag: "Blog"
+    text: "Improve developer experience and collaboration with Service Catalog schema version 3.0"
+  - link: "https://www.datadoghq.com/blog/software-catalog-custom-entities/"
+    tag: "Blog"
+    text: "Model your architecture with custom entities in the Datadog Software Catalog"
+algolia:
+  tags: [ "codeLocations" ]
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Entity Model schema v3.0 is not available in the selected site at this time.</div>
+<div class="alert alert-danger">Entity Model schema v3.0 is not available in the selected site at this time.</div>
 
 {{< /site-region >}}
 
 ## Overview
 
-Software Catalog uses definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services. 
-
-{{< callout url="https://forms.gle/fwzarcSww6By7tn39" btn_hidden="true" header="false" >}}
-<a href="https://forms.gle/fwzarcSww6By7tn39">Share feedback</a> on new and upcoming Software Catalog features!
-{{< /callout >}}
+Software Catalog uses definition schemas to store and display relevant metadata about your entities. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services.
 
 ## Supported versions
 
@@ -98,15 +99,16 @@ For detailed information about each version, including full schemas and example 
 - **Expanded data model**: v3.0 supports multiple kinds of entities. You can organize your systems using various components such as systems, services, queues, and datastores.
 - **Multi-ownership**: You can assign multiple owners to any objects defined through the v3.0 schema to specify multiple points of contact.
 - **Enhanced relationship mapping**: With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected system topology to ensure a complete overview of how components interact within your systems.
-- **Inheritance of system metadata**: Components within a system automatically inherit the system's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
+- **Inheritance of system metadata**: Components within a system automatically inherit the system's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2.
 - **Precise code location**: Add the mapping of your code location for your service. The `codeLocations` section in v3.0 specifies the locations of the code with the repository that contains the code and its associated `paths`. The `paths` attribute is a list of [globs][4] that should match paths in the repository.
+- **Filtered logs & events**: Declare saved logs and event queries for a `system` through the `logs` and `events` sections and view results on the System page.
 - **Custom entities**: Define custom entity types beyond Service, System, Datastore, Queue, and API. Scope scorecards and actions to specific entity types.
 - **(Upcoming) Integrations**: Integrate with third-party tools to dynamically source information related to your components (for example, GitHub pull requests, PagerDuty incidents, and GitLab pipelines). Report on and write scorecard rules against any third-party source.
 - **(Upcoming) Group by product or domain**: Organize components by product, enabling multiple layers of hierarchical grouping.
 
 ### Schema structure
 
-You can see the [full schema definitions on Github][1]. 
+You can see the [full schema definitions on Github][1].
 
 V3.0 contains the following changes from v2.2:
 - `schema_version` is now `apiVersion`
@@ -287,9 +289,9 @@ V3.0 contains the following changes from v2.2:
   {{< /code-block >}}
 {{% /collapse-content %}}
 
-### Explicit and implicit metadata inheritance 
+### Explicit and implicit metadata inheritance
 
-#### Explicit inheritance 
+#### Explicit inheritance
 
 The `inheritFrom` field instructs the ingestion pipeline to inherit metadata from the entity's metadata referenced by `<entity_kind>:<name>`.
 
@@ -297,13 +299,13 @@ The `inheritFrom` field instructs the ingestion pipeline to inherit metadata fro
 inheritFrom:<entity_kind>:<name>
 {{< /code-block >}}
 
-#### Implicit inheritance 
+#### Implicit inheritance
 Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit all metadata from the system that they belong to under the following conditions:
 - There is only one system defined in the YAML file.
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
 ### Migrating to v3.0
-v3.0 supports the same methods of creating metadata as previous versions, including Github, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform module][6] for v3.0.
+v3.0 supports the same methods of creating metadata as previous versions, including Github, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform resource][6] for v3.0.
 
 ### API reference documentation
 To create, get, and delete definitions for all entity types like endpoints, systems, datastores, and queues, see the [Software Catalog API reference][8].
@@ -521,15 +523,38 @@ integrations:
 
 ## Build custom extensions
 
-<div class="alert alert-info">Custom extensions are in Limited Availability.</div>
+<div class="alert alert-info">Custom extensions are in Limited Availability for all schema versions.</div>
 
-The `extensions` field is supported in all versions. You can incorporate this custom field into deployment processes to standardize and codify best practices.
+Custom extensions allow you to attach organization-specific metadata to entities, enabling support for custom tooling and workflows. For example, use the `extensions` field to include release notes, compliance tags, or ownership models in your entity definitions.
 
+Datadog also supports specific extension keys for certain features. These include:
+- `datadoghq.com/dora-metrics`: Define source code path patterns for filtering Git commits when calculating [DORA metrics][21].
+- `datadoghq.com/cd-visibility`: Control which commits are considered as part of a deployment in [CD Visibility][22].
+
+The following example defines a custom extension used to manage release scheduling across environments:
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
-schema-version: v2.2
-dd-service: web-store
-team: shopist
-...
+apiVersion: v3
+kind: system
+metadata:
+  name: payment-platform
+  displayName: "Payment Platform"
+  links:
+    - name: Runbook
+      type: runbook
+      url: https://runbook/payment-platform
+  contacts:
+    - name: Payment Team
+      type: team
+      contact: https://www.slack.com/archives/payments
+  owner: payments-team
+  additionalOwners:
+    - name: finance-team
+      type: stakeholder
+spec:
+  components:
+    - service:payment-api
+    - queue:payment-requests
+    - datastore:payment-db
 extensions:
   shopist.com/release-scheduler:
     release-manager:
@@ -543,7 +568,7 @@ extensions:
 {{< /code-block >}}
 
 
-## Schema validation through IDE plugin 
+## Schema validation through IDE plugin
 
 Datadog provides a [JSON Schema][18] for definitions so that when you are editing a definition in a [supporting IDE][19], features such as autocomplete and validation are provided.
 
@@ -572,3 +597,5 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [18]: http://json-schema.org/
 [19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
+[21]: /dora_metrics/setup/deployments?tab=apmdeploymenttracking#handling-multiple-services-in-the-same-repository
+[22]: /continuous_delivery/features/code_changes_detection?tab=github#specify-service-file-path-patterns

@@ -46,12 +46,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
-integration_title: ElasticSearch
-integration_version: 8.0.1
+integration_title: Elasticsearch
+integration_version: 8.2.0
 is_public: true
 manifest_version: 2.0.0
 name: elastic
-public_title: ElasticSearch
+public_title: Elasticsearch
 short_description: Monitoriza el estado general del clúster hasta el uso del montón
   de JVM y todo lo demás.
 supported_os:
@@ -81,7 +81,7 @@ tile:
   - resource_type: blog
     url: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics
   support: README.md#Support
-  title: ElasticSearch
+  title: Elasticsearch
 ---
 
 <!--  FUENTE https://github.com/DataDog/integrations-core -->
@@ -123,6 +123,16 @@ A fin de configurar este check para un Agent que se ejecuta en un host:
      ## fetch statistics from the nodes and information about the cluster health.
      #
      - url: http://localhost:9200
+
+      ## @param username - string - optional
+      ## The username to use if services are behind basic or digest auth.
+      #
+      # username: <USERNAME>
+
+      ## @param password - string - optional
+      ## The password to use if services are behind basic or NTLM auth.
+      #
+      # password: <PASSWORD>
    ```
 
     **Notas**:
@@ -147,7 +157,7 @@ A fin de configurar este check para un Agent que se ejecuta en un host:
       - Todas las solicitudes a la API de configuración de Amazon ES deben estar firmadas. Consulta [Cómo realizar y firmar solicitudes de OpenSearch Service][4] para obtener más información.
       - El tipo de autenticación de `aws` se basa en [Boto3][5] para recopilar las credenciales de AWS de `.aws/credentials` de manera automática. Usa `auth_type: basic` en `conf.yaml` y define las credenciales con `username: <USERNAME>` y `password: <PASSWORD>`.
       - Debes crear un usuario y un rol (si aún no los tienes) en Elasticsearch con los permisos adecuados para la monitorización. Esto se puede hacer a través de la API REST que ofrece Elasticsearch o la interfaz de usuario de Kibana.
-      - Si has habilitado las funciones de seguridad en Elasticsearch, puedes usar el privilegio `monitor` o `manage` al usar la API para realizar llamadas a los índices de Elasticsearch.
+      - Si has habilitado las funciones de seguridad en Elasticsearch, puedes utilizar los privilegios `monitor` o `manage` mientras utilizas la API para realizar las llamadas a los índices de Elasticsearch.
       - Incluye las siguientes propiedades en el rol creado:
         ```json
         name = "datadog"
@@ -168,9 +178,21 @@ A fin de configurar este check para un Agent que se ejecuta en un host:
 
 ###### Consultas personalizadas
 
-La integración de Elasticsearch te permite recopilar métricas personalizadas a través de consultas personalizadas mediante la opción de configuración `custom_queries`.
+La integración de Elasticsearch permite recopilar métricas personalizadas a través de consultas personalizadas utilizando la opción de configuración `custom_queries`. Un endpoint de consulta personalizada puede recopilar múltiples métricas y etiquetas.
 
-**Nota:** Al ejecutar consultas personalizadas, usa una cuenta de solo lectura para asegurarte de que no cambie la instancia de Elasticsearch.
+Cada consulta personalizada tiene los siguientes parámetros:
+
+- `endpoint` (obligatorio): el endpoint de la API de Elasticsearch que se va a consultar.
+- `data_path` (obligatorio): la ruta JSON hasta (sin incluir) la métrica. No puede contener comodines. Por ejemplo: si estás consultando el tamaño de un disyuntor principal, y la ruta completa es `breakers.parent.estimated_size_in_bytes`, entonces `data_path` es `breakers.parent`.
+- `columns` (obligatorio): una lista que representa los datos que se recopilarán de la consulta JSON. Cada elemento de esta lista incluye:
+   - `value_path` (obligatorio): la ruta JSON desde `data_path` a la métrica. Esta ruta puede incluir claves de cadena e índices de lista. Por ejemplo: si estás consultando el tamaño de un disyuntor principal, y la ruta completa es `breakers.parent.estimated_size_in_bytes`, entonces el `value_path` es `estimated_size_in_bytes`.
+   - `name` (obligatorio): El nombre completo de métrica enviado a Datadog. Si también estableces `type` a `tag`, entonces cada métrica recopilada por esta consulta se etiqueta con este nombre.
+   - `type` (opcional): designa el tipo de datos enviados. Valores posibles: `gauge`, `monotonic_count`, `rate`, `tag`. Por defecto es `gauge`.
+- `payload` (opcional): si se declara, convierte la solicitud GET en una solicitud POST. Utiliza el formato YAML y un usuario de sólo lectura al escribir consultas personalizadas con una carga útil.
+
+**Nota:** Cuando ejecutes consultas personalizadas, utiliza una cuenta de sólo lectura para asegurarte de que la instancia de Elasticsearch no cambia.
+
+Ejemplos:
 
 ```yaml
 custom_queries:
@@ -190,7 +212,7 @@ custom_queries:
    tags:
    - custom_tag:1
 ```
-La consulta personalizada se envía como una solicitud `GET`. Si usas un parámetro `payload` opcional, la solicitud se envía como una solicitud `POST`.
+La consulta personalizada se envía como una solicitud `GET`. Si usas un parámetro `payload` opcional, la solicitud se envía como una solicitud `POST`. 
 
 Los `value_path` pueden ser claves de cadena o índices de lista. Por ejemplo:
 ```json
@@ -206,16 +228,17 @@ Los `value_path` pueden ser claves de cadena o índices de lista. Por ejemplo:
 
 `value_path: foo.bar.1` devuelve el valor `result1`.
 
+
 ##### Recopilación de trazas
 
 Datadog APM se integra con Elasticsearch para ver las trazas (traces) en todo el sistema distribuido. La recopilación de trazas se encuentra habilitada de manera predeterminada en el Datadog Agent versión 6 o posterior. Para empezar a recopilar trazas:
 
 1. [Habilita la recopilación de trazas en Datadog][9].
-2. [Instrumenta la aplicación que realiza solicitudes a Elasticsearch][10].
+2. [Instrumenta tu aplicación que realiza solicitudes a Elasticsearch][10].
 
 ##### Recopilación de logs
 
-_Disponible para las versiones del Agent posteriores a la 6.0_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
 1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en el archivo `datadog.yaml` con:
 
@@ -299,11 +322,11 @@ _Disponible para las versiones del Agent posteriores a la 6.0_
 
 #### Docker
 
-A fin de configurar este check para un Agent que se ejecuta en un contenedor:
+Para configurar este check para un Agent que se ejecuta en un contenedor:
 
 ##### Recopilación de métricas
 
-Establece las [plantillas de integraciones de Autodiscovery][1] como etiquetas (labels) de Docker en el contenedor de tu aplicación:
+Configura [plantillas de integraciones de Autodiscovery][1] como etiquetas (labels) Docker en el contenedor de tu aplicación:
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["elastic"]'
@@ -314,9 +337,9 @@ LABEL "com.datadoghq.ad.instances"='[{"url": "http://%%host%%:9200"}]'
 ##### Recopilación de logs
 
 
-La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta la [Recopilación de logs de Docker][2].
+La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta la [recopilación de logs de Docker][2].
 
-Luego, configura las [integraciones de log][3] como etiquetas de Docker:
+Luego, configura [integraciones de logs][3] como etiquetas Docker:
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"elasticsearch","service":"<SERVICE_NAME>"}]'
@@ -324,15 +347,15 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"elasticsearch","service":"<SERVICE_NA
 
 ##### Recopilación de trazas
 
-APM para aplicaciones en contenedores es compatible con el Agent versión 6, o posterior, pero requiere una configuración adicional a fin de empezar a recopilar trazas.
+APM para aplicaciones en contenedores es compatible con el Agent v6 o posterior, pero requiere configuración adicional para empezar a recopilar trazas.
 
-Variables de entorno necesarias en el contenedor del Agent:
+Variables de entorno requeridas en el contenedor del Agent:
 
 | Parámetro            | Valor                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
-| `<DD_APM_ENABLED>`      | true                                                              |
-| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+| `<DD_APM_ENABLED>`      | verdadero                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | verdadero |
 
 Consulta el [Rastreo de aplicaciones de Kubernetes][4] y la [Configuración del daemon de Kubernetes][5] para obtener una lista completa de las variables de entorno y configuración disponibles.
 
@@ -350,13 +373,13 @@ Luego, [instrumenta tu contenedor de aplicaciones][6] y configura `DD_AGENT_HOST
 
 #### Kubernetes
 
-A fin de configurar este check para un Agent que se ejecuta en Kubernetes:
+Para Configurar este check para un Agent que se ejecuta en Kubernetes:
 
 ##### Recopilación de métricas
 
-Establece las [plantillas de integraciones de Autodiscovery][1] como anotaciones de pod en el contenedor de tu aplicación. Además de esto, las plantillas también se pueden configurar con [un archivo, un mapa de configuración o un almacén de clave-valor][2].
+Configura [plantillas de integraciones de Autodiscovery][1] como anotaciones de pod en el contenedor de tu aplicación. Además de esto, las plantillas también se pueden configurar con [un archivo, un ConfigMap o un almacén de clave-valor][2].
 
-**Anotaciones v1** (para el Datadog Agent versión 7.36 o anterior)
+**Anotaciones v1** (para el Datadog Agent v7.36 o anterior)
 
 ```yaml
 apiVersion: v1
@@ -377,7 +400,7 @@ spec:
     - name: elasticsearch
 ```
 
-**Anotaciones v2** (para el Datadog Agent versión 7.36 o posterior)
+**Anotaciones v2** (para el Datadog Agent v7.36 o posterior)
 
 ```yaml
 apiVersion: v1
@@ -406,7 +429,7 @@ spec:
 
 La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta la [Recopilación de logs de Kubernetes][3].
 
-Luego, establece las [integraciones de log][4] como anotaciones de pod. Esto también se puede configurar con [un archivo, un mapa de configuración o un almacén de clave-valor][5].
+Luego, configura las [integraciones de logs][4] como anotaciones de pod. Esto también se puede configurar con [un archivo, un mapa de configuración o un almacén de clave-valor][5].
 
 **Anotaciones v1/v2**
 
@@ -424,17 +447,17 @@ spec:
 
 ##### Recopilación de trazas
 
-APM para aplicaciones en contenedores es compatible con los hosts que ejecutan el Agent versión 6, o posterior, pero requiere una configuración adicional a fin de empezar a recopilar trazas.
+APM para aplicaciones en contenedores es compatible con hosts que se ejecutan en la versión 6 o posteriores del Agent, pero requiere configuración adicional para empezar a recopilar trazas.
 
-Variables de entorno necesarias en el contenedor del Agent:
+Variables de entorno requeridas en el contenedor del Agent:
 
 | Parámetro            | Valor                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
-| `<DD_APM_ENABLED>`      | true                                                              |
-| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+| `<DD_APM_ENABLED>`      | verdadero                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | verdadero |
 
-Consulta el [Rastreo de aplicaciones de Kubernetes][6] y la [Configuración del daemon de Kubernetes][7] para obtener una lista completa de las variables de entorno y configuración disponibles.
+Para ver una lista completa de las variables de entorno y la configuración disponibles, consulta [Rastreo de aplicaciones Kubernetes][6] y la [configuración del DaemonSet de Kubernetes][7].
 
 Luego, [instrumenta tu contenedor de aplicaciones][8] y configura `DD_AGENT_HOST` con el nombre del contenedor de tu Agent.
 
@@ -451,11 +474,11 @@ Luego, [instrumenta tu contenedor de aplicaciones][8] y configura `DD_AGENT_HOST
 
 #### ECS
 
-A fin de configurar este check para un Agent que se ejecuta en ECS:
+Para configurar este check para un Agent que se ejecuta en ECS:
 
 ##### Recopilación de métricas
 
-Establece las [plantillas de integraciones de Autodiscovery][1] como etiquetas de Docker en el contenedor de tu aplicación:
+Configura [plantillas de integraciones de Autodiscovery][1] como etiquetas (labels) Docker en el contenedor de tu aplicación:
 
 ```json
 {
@@ -474,9 +497,9 @@ Establece las [plantillas de integraciones de Autodiscovery][1] como etiquetas d
 ##### Recopilación de logs
 
 
-La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta la [Recopilación de logs de ECS][2].
+La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta la [recopilación de logs de ECS][2].
 
-Luego, configura las [integraciones de log][3] como etiquetas de Docker:
+Luego, configura [integraciones de logs][3] como etiquetas Docker:
 
 ```json
 {
@@ -492,15 +515,15 @@ Luego, configura las [integraciones de log][3] como etiquetas de Docker:
 
 ##### Recopilación de trazas
 
-APM para aplicaciones en contenedores es compatible con el Agent versión 6, o posterior, pero requiere una configuración adicional a fin de empezar a recopilar trazas.
+APM para aplicaciones en contenedores es compatible con el Agent v6 o posterior, pero requiere configuración adicional para empezar a recopilar trazas.
 
-Variables de entorno necesarias en el contenedor del Agent:
+Variables de entorno requeridas en el contenedor del Agent:
 
 | Parámetro            | Valor                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
-| `<DD_APM_ENABLED>`      | true                                                              |
-| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+| `<DD_APM_ENABLED>`      | verdadero                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | verdadero |
 
 Consulta el [Rastreo de aplicaciones de Kubernetes][4] y la [Configuración del daemon de Kubernetes][5] para obtener una lista completa de las variables de entorno y configuración disponibles.
 
@@ -529,9 +552,10 @@ De manera predeterminada, el Agent no envía todas las siguientes métricas. Par
 - `index_stats` envía la métrica **elasticsearch.index.\***
 - `pending_task_stats` envía la métrica **elasticsearch.pending\_\***
 - `slm_stats` envía la métrica **elasticsearch.slm.\***
+- `cat_allocation_stats` envía métricas de **elasticsearch.disk.\***.
 
 ### Métricas
-{{< get-metrics-from-git "elasticsearch" >}}
+{{< get-metrics-from-git "elastic" >}}
 
 
 ### Eventos
@@ -539,7 +563,7 @@ De manera predeterminada, el Agent no envía todas las siguientes métricas. Par
 El check de Elasticsearch emite un evento a Datadog cada vez que cambia el estado general de tu clúster de Elasticsearch: rojo, amarillo o verde.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "elasticsearch" >}}
+{{< get-service-checks-from-git "elastic" >}}
 
 
 ## Solucionar problemas

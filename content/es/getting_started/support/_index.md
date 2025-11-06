@@ -43,7 +43,7 @@ Si no sabes cuál es la mejor opción, no dudes en utilizar cualquiera de los ca
 
 ## Consultas por chat
 
-<div class="alert alert-warning">El chat está disponible cualquier día laborable entre las 10:00 y las 19:00, hora del Este (ET). El chat no está disponible para cuentas compatibles con HIPAA.</a></div>
+<div class="alert alert-danger">El chat está disponible cualquier día laborable entre las 10:00 y las 19:00, hora del Este (ET). El chat no está disponible para cuentas compatibles con HIPAA.</a></div>
 
 Para empezar, haz clic en **Support** (Asistencia) en la esquina inferior izquierda del menú de navegación.
 

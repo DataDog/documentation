@@ -52,7 +52,7 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <em>Setting up S3 Log Archives using Role Delegation is in limited availability. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request this feature in your Datadog for Government account</em>.
 </div>
 {{< /site-region >}}
@@ -90,6 +90,8 @@ Datadog assumes this role to collect data on your behalf.
 {{< site-region region="gov" >}}
 3. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
+**Note**: Ensure that the **DATADOG SITE** selector on the right of this documentation page is set to your Datadog site before copying the account ID above.
+
 4. Select **Require external ID** and enter the external ID copied in the previous section.
 Leave `Require MFA` disabled. For more details, see the [Access to AWS accounts owned by third parties][3] page in the AWS documentation.
 5. Click **Next**.
@@ -121,9 +123,9 @@ This policy defines the permissions necessary for the Datadog integration role t
 5. Click **Save**.
 6. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
-<div class="alert alert-warning">If there is a <code>Datadog is not authorized to perform sts:AssumeRole</code> error, follow the troubleshooting steps recommended in the UI, or read the <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">troubleshooting guide</a>.</div>
+<div class="alert alert-danger">If there is a <code>Datadog is not authorized to perform sts:AssumeRole</code> error, follow the troubleshooting steps recommended in the UI, or read the <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">troubleshooting guide</a>.</div>
 
-*\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][8] section on our website.*
+\*{{% mainland-china-disclaimer %}}
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html
@@ -132,7 +134,6 @@ This policy defines the permissions necessary for the Datadog integration role t
 [5]: /integrations/amazon_web_services/#resource-collection
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
 [7]: https://aws.amazon.com/blogs/security/easier-way-to-control-access-to-aws-regions-using-iam-policies/
-[8]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{% tab "Access keys" %}}
 
@@ -153,10 +154,9 @@ This policy defines the permissions necessary for the Datadog integration role t
 7. Click **Save**.
 8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
-*\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][2] section on our website.*
+\*{{% mainland-china-disclaimer %}}
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
-[2]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{< /tabs >}}
 

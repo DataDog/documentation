@@ -1,5 +1,6 @@
 ---
 title: Datadog Mobile App
+description: "Monitor your infrastructure on-the-go with the Datadog mobile app for iOS and Android, featuring dashboards, alerts, incidents, and on-call management."
 aliases:
 - /service_management/mobile/
 algolia:
@@ -20,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-app-getting-started/"
   tag: "Blog"
   text: "Getting started with the Datadog mobile app"
+- link: "https://www.datadoghq.com/blog/mobile-app-reduce-mttr/"
+  tag: "Blog"
+  text: "Reduce your mean time to repair with the Datadog mobile app"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
@@ -63,6 +67,11 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 
 If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][5]
 
+##### Subdomain login
+
+1. Tap subdomain and enter your custom [subdomain][29].
+2. Proceed with login steps as prompted.
+
 ### Switch organizations
 
 To switch organizations, navigate to the **Settings** page on the mobile app and click on **Organization**. 
@@ -88,9 +97,48 @@ To log out, navigate to the **Settings** page on the mobile app and click on **L
 
 The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **Escalate** prompts you to confirm the escalation to the next policy level. Tapping **Declare Incident** prompts you to enter a title and provide relevant incident attributes.
 
-You can initiate a page to an individual or team, and also override existing shifts when necessary. For more information, see [Datadog On-Call][20].
+You can initiate a page to an individual or team, and also override existing shifts by tapping on the shift you would like to override. You can view Bits AI SRE monitor investigations for initial findings and conclusions. For more information, see [Datadog On-Call][20].
 
 To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
+
+## Incidents
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/incident_may_2025.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/Android_Incident.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+On the Incidents page, you can view, search, and filter all incidents that you have access to in your Datadog account to ensure response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see [Datadog Incident Management][12].
+
+### Create an incident
+
+1. Navigate to the incident list by tapping on the Incidents Tab in the bottom bar.
+2. Tap the **+** button in the top right corner.
+3. Give your incident a title, severity, and commander.
+
+## Notification Center
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/ios_notification_center.png" alt="ios Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_notification_center.png" alt="Android Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+The Notification Center lists all push notifications received so that notification context is never lost. You can filter by notification type.
 
 ## Dashboards
 
@@ -109,9 +157,10 @@ To configure On-Call notifications on your mobile device, see the guide to [Set 
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
 
-**Notes**: 
+**Note**: 
 - To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
 - Dashboard links configured in UTC open in UTC on the mobile app. For more information, see [Dashboard Configurations][24].
+- Not all widget types are available, which means they do not display data on the mobile app. This includes Topology Map, List Widget (all data sources), Legacy treemap widget, and SLO Summary widget.
 
 ## Monitors
 
@@ -216,41 +265,55 @@ You can also group by log patterns and select different log attributes for clust
 
 On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
 
-## Incidents
+## Bits AI
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/incident_may_2025.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/ios_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in ios where a user asks about a service">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Incident.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/android_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in Android where a user asks about a service">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Chat with Bits AI][27].
 
-### Create an incident
+### Bits AI SRE
+{{< tabs >}}
+{{% tab "iOS" %}}
 
-1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
-2. Click the **+** button in the top right corner.
-3. Give your incident a title, severity, and commander.
+{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
 
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+When enabled, Bits AI SRE initiates investigations directly on On-Call pages. These investigations present initial findings and conclusions to help responders identify potential root causes and next steps. For more information, see [Bits AI SRE][28].
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
-Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed.
+Upon successful authentication to the mobile app, you will remain logged in for 90 days.  
+
+**Note**: If you have notifications enabled, proactive notifications will be sent 10 days prior to token expiration.
 
 ### Will I still receive notifications if I am automatically signed out?
-If you are automatically logged out due to inactivity during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
+If you are automatically logged out during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
 
 **Note**: If you manually log out from the app, you will stop receiving notifications.
 
 ### Why am I not receiving notifications?
 Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
+### What happens if a user is disabled?
+The mobile app token will be invalid and force the user to log out.
 
 ## Troubleshooting
 
@@ -284,6 +347,9 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [21]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [22]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
 [23]: https://docs.datadoghq.com/logs/explorer/search_syntax/
-[24]: https://docs.datadoghq.com/dashboards/configure/#configuration-actions
-[25]: https://docs.datadoghq.com/logs/explorer/watchdog_insights/
-[26]: https://docs.datadoghq.com/watchdog/insights/?tab=logmanagement
+[24]: /dashboards/configure/#configuration-actions
+[25]: /logs/explorer/watchdog_insights/
+[26]: /watchdog/insights/?tab=logmanagement
+[27]: /bits_ai/chat_with_bits_ai/
+[28]: /bits_ai/bits_ai_sre/
+[29]: /account_management/multi_organization/#custom-sub-domains

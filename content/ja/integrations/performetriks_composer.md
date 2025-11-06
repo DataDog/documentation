@@ -11,8 +11,8 @@ author:
   support_email: composer@performetriks.com
   vendor_id: performetriks
 categories:
-- マーケットプレイス
-custom_kind: integration
+- marketplace
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false

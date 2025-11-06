@@ -30,6 +30,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -47,6 +48,7 @@ For verification, ensure that the `orchestratorExplorer.enabled` parameter is se
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   # (...)
   processAgent:
     enabled: true
@@ -156,12 +158,12 @@ There are multiple types of terms available:
 
 | Type | Examples |
 |---|---|
-| **Tags**: Attached to resources by [the agent collecting them][20]. There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`<br>`tag#datacenter:staging`<br>*(the `tag#` is optional)* |
+| **Tags**: Attached to resources by [the agent collecting them][20]. There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`, `tag#datacenter:staging`<br>_(the `tag#` is optional)_ |
 | **Labels**: Extracted from [a resource's metadata][25]. They are typically used to organize your cluster and target specific resources with selectors. | `label#chart_version:2.1.0` |
 | **Annotations**: Extracted from [a resource's metadata][26]. They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
 | **Metrics**: Added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
-| **String matching**: Supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannot specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`web-api-3` (Name) |
-| **Fields**: Extracted from [a resource's metadata][27]. | `field#metadata.creationTimestamp:>=4wk`<br>`field#metadata.deletionTimestamp:<=1hr` |
+| **String matching**: Supported by some specific resource attributes, see below.<br>_Note: string matching does not use the key-value format, and you cannot specify the attribute to match on._ | `"10.132.6.23"` (IP),<br>`"9cb4b43f-8dc1-4a0e"` (UID),<br>`web-api-3` (Name) |
+| **Fields**: Extracted from [a resource's metadata][27] or from custom resources' indexed fields. | `field#metadata.creationTimestamp:>=4wk`, `field#metadata.deletionTimestamp:<=1hr`, `field#status.currentReplicas:3`, `field#status.conditions.Active.status:True` |
 
 >  ***Note**: You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
 
@@ -292,7 +294,7 @@ Some resources have specific tags that are extracted based on your cluster's env
 | Resource | Extracted Tags |
 |---|---|
 | **Cluster** | `api_server_version`<br>`kubelet_version` |
-| **Custom Resource Definitions** &<br>**Custom Resources** | `kube_crd_kind`<br>`kube_crd_group`<br>`kube_crd_version`<br>`kube_crd_scope` |
+| **Custom Resource Definitions** &<br>**Custom Resources** | `kube_crd_kind`<br>`kube_crd_group`<br>`kube_crd_version`<br>`kube_crd_scope`<br>`kube_crd_resource` |
 | **Namespace** | `phase` |
 | **Node** | `kube_node_unschedulable`<br>`kube_node_kubelet_version`<br>`kube_node_kernel_version`<br>`kube_node_runtime_version`<br>`eks_fargate_node`<br>`node_schedulable`<br>`node_status` |
 | **Persistent Volume** | `kube_reclaim_policy`<br>`kube_storage_class_name`<br>`pv_type`<br>`pv_phase` |

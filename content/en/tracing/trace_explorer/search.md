@@ -5,6 +5,9 @@ further_reading:
     - link: 'tracing/trace_explorer/query_syntax'
       tag: 'Documentation'
       text: 'Query Syntax'
+    - link: "/getting_started/search/"
+      tag: "Documentation"
+      text: "Getting Started with Search in Datadog"
 ---
 
 ## Overview
@@ -15,18 +18,13 @@ Trace Explorer search consists of a time range and a search query that combines 
 
 ## Search query
 
-For example, to find spans from a web store service, with an error status, over the past thirty minutes, create a custom query like `service:web-store status:error`, and set the time range to the `Past 30 minutes`:
+For example, to find spans from a web store service and production environment, over the past thirty minutes, create a custom query like `service:web-store env:prod`, and set the time range to the `Past 30 minutes`:
 
-{{< img src="tracing/trace_explorer/search/trace_explorer_list_search.png" alt="Trace Explorer list search, where user has searched for 'service:web-store' and 'status:error'. A requests bar chart, errors bar chart, and latency line chart are shown. The Visualize As option is set to List." style="width:100%;">}}
+{{< img src="tracing/trace_explorer/search/trace_explorer_search.png" alt="Trace Explorer list search, where user has searched for 'service:web-store' and 'env:prod'" style="width:100%;">}}
 
-Select a top list view, and group the query by `resource` to see which specific resources are most affected.
+Group the query by `http.route` to see which specific endpoints are most affected. Read more in trace groups.
 
-{{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="Trace Explorer list search. The Visualize As option is set to Top List." style="width:100%;">}}
-
-{{< site-region region="us,eu,us3,us5,ap,ap2" >}}
-
-[1]: /tracing/trace_explorer/query_syntax/#facets
-{{< /site-region >}}
+{{< img src="tracing/trace_explorer/search/trace_explorer_group_by.png" alt="Trace Explorer list search. The Visualize As option is set to Top List." style="width:100%;">}}
 
 ## Query Syntax
 

@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -31,11 +31,14 @@ GITHUB_TOKEN ?= ""
 FULL_BUILD ?= false
 CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
+# Set default S3 path for websites sources data
+FF_S3_PATH ?= "staging"
+
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
 clean-all: clean clean-examples clean-dependent-repos clean-build-scripts ## Clean everything (environment, sourced repos, generated files, build scripts)
-	rm -rf ./node_modules ./hugpython ./public
+	rm -rf ./node_modules ./hugpython ./public ./_vendor
 
 clean-dependent-repos:
 	rm -rf ./integrations_data
@@ -72,10 +75,15 @@ watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
+# compile .mdoc.md files to HTML
+# so Hugo can include them in the site
+build-llms-txt:
+	@echo "Launching llms.txt build ...";
+	@node ./local/bin/js/llms-txt-build.js;
+
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
-	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
@@ -87,7 +95,13 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 # Leave build scripts as is for local testing
 # This is useful for testing changes to the build scripts locally
 start-preserve-build: dependencies
-	@make update_websites_sources_module
+	@make server
+	
+# Run the site with websites_sources_data (integrations previews)
+start-sources: node_modules
+	@make setup-build-scripts
+	@make websites_sources_data
+	@make build-cdocs
 	@make server
 
 # Leave build scripts in place, but skip dependencies and sources_module
@@ -116,7 +130,18 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs placeholders
+	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-llms-txt
+
+# Download files from S3 bucket and add them to the file system.
+# Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets
+# e.g. make start-sources FF_S3_PATH=<websites-sources feature branch>
+websites_sources_data: hugpython
+	@echo "Removing _vendor directory..."
+	rm -rf _vendor
+	@echo "Downloading fresh data from websites-sources S3 bucket..."
+	@. hugpython/bin/activate && \
+		export FF_S3_PATH=${FF_S3_PATH} && \
+		python3 ./local/bin/py/build/get_websites_sources_data.py
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
@@ -129,12 +154,13 @@ vector_data: integrations_data/extracted/vector
 # only build placeholders in ci
 placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
+	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/" 
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.59352473-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.72592276-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython
@@ -147,12 +173,19 @@ config:
 	envsubst '$$CI_COMMIT_REF_NAME' < "config/$(CI_ENVIRONMENT_NAME)/params.yaml" | sponge "config/$(CI_ENVIRONMENT_NAME)/params.yaml"; \
 	echo -e "\nbranch: ${CI_COMMIT_REF_NAME}" >> config/$(CI_ENVIRONMENT_NAME)/params.yaml;
 
-# Automatically download the latest module from websites-sources repo
-update_websites_sources_module:
-	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
-	node_modules/hugo-bin/vendor/hugo mod clean
-	node_modules/hugo-bin/vendor/hugo mod tidy
-	cat go.mod
+# # Automatically download the latest module from websites-sources repo
+# update_websites_sources_module:
+# 	node_modules/hugo-bin/vendor/hugo mod get github.com/DataDog/websites-sources@main
+# 	node_modules/hugo-bin/vendor/hugo mod clean
+# 	node_modules/hugo-bin/vendor/hugo mod tidy
+# 	cat go.mod
+# 	@if [ -n "$(CI_COMMIT_REF_NAME)" ]; then \
+# 		echo "In ci, vendoring integrations pages for placeholder generation"; \
+# 		node_modules/hugo-bin/vendor/hugo mod vendor; \
+# 		cp -rpv _vendor/github.com/DataDog/websites-sources/content/en/integrations/. content/en/integrations/; \
+# 		rm -rf _vendor; \
+# 	fi
+
 #######################################################################################################################
 # API Code Examples
 #######################################################################################################################

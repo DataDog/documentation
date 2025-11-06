@@ -37,7 +37,7 @@ Asegúrate de que [Test Optimization][1] ya está configurado para tu lenguaje.
 * `cucumber-js>=7.0.0`.
 * `vitest>=2.0.0`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota</strong>: El rastreador de DataDog no genera cobertura de código. Si tus tests se ejecutan con la cobertura de código activada, <code>dd-trace</code> lo informa en la etiqueta <code>test.code_coverage.lines_pct</code> para tus sesiones de tests automáticamente.
 </div>
 
@@ -221,7 +221,7 @@ Consulta [Personalizar el análisis de cobertura de código][2] en la documentac
 
 Cuando la cobertura de código está disponible, el rastreador de Datadog informa de ella en la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
 
-[Jacoco][1] es compatible con la biblioteca de cobertura de código.
+[Jacoco][1] es compatible con la librería de cobertura de código.
 
 Si tu proyecto ya tiene Jacoco configurado, el rastreador de Datadog lo instrumenta e informa los datos de cobertura a Datadog automáticamente.
 
@@ -286,11 +286,11 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 * `datadog-ci-rb>=1.7.0`
 * `simplecov>=0.18.0`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Datadog biblioteca no genera la cobertura total del código. Si sus pruebas se ejecutan con la cobertura de código activada, <code>Datadog-ci-rb informa de ello en</code> <code>test.code_coverage.lines_pct</code> etiquetar para sus sesiones de prueba automáticamente.
 </div>
 
-Si tu proyecto tiene configurado [simplecov][1], la biblioteca satadog-ci-rb lo instrumenta e informa los datos de cobertura a Datadog automáticamente bajo la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Si tu proyecto tiene configurado [simplecov][1], la librería satadog-ci-rb lo instrumenta e informa los datos de cobertura a Datadog automáticamente bajo la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
 
 Esta función está activada por defecto. Utiliza la variable de entorno `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED` para desactivar esta función (por ejemplo: `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED=0`).
 
@@ -303,11 +303,11 @@ Esta función está activada por defecto. Utiliza la variable de entorno `DD_CIV
 
 * `go test -cover`
 
-<div class="alert alert-warning">
-  <strong>Nota</strong>: La biblioteca de DataDog no genera cobertura total de código. Si tus tests se ejecutan con la cobertura de código activada, <code>dd-trace-go</code> lo informa en la etiqueta <code>test.code_coverage.lines_pct</code> para tus sesiones de tests automáticamente.
+<div class="alert alert-danger">
+  <strong>Nota</strong>: La librería de DataDog no genera cobertura total de código. Si tus tests se ejecutan con la cobertura de código activada, <code>dd-trace-go</code> lo informa en la etiqueta <code>test.code_coverage.lines_pct</code> para tus sesiones de tests automáticamente.
 </div>
 
-Si tus tests se ejecutan con el indicador `-cover`, la biblioteca de Datadog lo instrumenta y automáticamente reporta los datos de cobertura a Datadog bajo la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Si tus tests se ejecutan con el indicador `-cover`, la librería de Datadog lo instrumenta y automáticamente reporta los datos de cobertura a Datadog bajo la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
 
 {{% /tab %}}
 

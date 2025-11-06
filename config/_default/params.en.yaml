@@ -3,10 +3,8 @@ meta_title: Getting Started with Datadog
 meta_description: Datadog, the leading service for cloud-scale monitoring.
 disclaimer: "This page is not yet available in English. We are working on its translation. <br> If you have any questions or feedback about our current translation project, <a href=\"https://docs.datadoghq.com/fr/help/\">feel free to reach out to us!</a>"
 announcement_banner:
-  desktop_message: '<i class="icon-right-arrow-slim"></i><span>DASH 2025 | Catch up on Keynote highlights and everything new from Datadog.</span><span>Learn More</span>'
-  mobile_message: 'Catch up on Keynote highlights from DASH'
-  background_color: "#000000"
-  custom_classes: 'dash-announcement-banner'
-  external_link: https://www.datadoghq.com/blog/dash-2025-new-feature-roundup-keynote/
+  desktop_message: Datadog named a Leader in the Gartner® Magic Quadrant™ for Observability Platforms
+  mobile_message: Leader in the Gartner® Magic Quadrant™
+  external_link: https://www.datadoghq.com/resources/gartner-magic-quadrant-observability-platforms-2025/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-apm-ww-announcement-corpsite-announcement-gartnermq2025-obsplat
 translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"
 site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."

@@ -7,6 +7,9 @@ further_reading:
 - link: "/observability_pipelines/guide/strategies_for_reducing_log_volume/"
   tag: "documentation"
   text: "Strategies for Reducing Log Volume"
+private: true
+cascade:
+    private: true
 ---
 
 ## Overview

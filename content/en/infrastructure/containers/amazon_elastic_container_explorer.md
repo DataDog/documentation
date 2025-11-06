@@ -59,6 +59,28 @@ ecs_task_collection_enabled: true
 {{% /tab %}}
 {{< /tabs >}}
 
+### Logs
+
+For ECS on Fargate, it is recommended to use the [AWS FireLens integration][11] built on Datadog's Fluent Bit output plugin to send logs to Datadog. To ensure that logs are properly correlated between ECS resources and the log explorer, set `dd_source` to `ecs`:
+```
+{
+  "logConfiguration": {
+    "logDriver": "awsfirelens",
+    "options": {
+      "Name": "datadog",
+      "apikey": "<DATADOG_API_KEY>",
+      "Host": "http-intake.logs.datadoghq.com",
+      "dd_service": "...",
+      "dd_source": "ecs",
+      "dd_message_key": "log",
+      "dd_tags": "...",
+      "TLS": "on",
+      "provider": "ecs"
+    }
+  }
+}
+```
+
 ## Usage
 
 ### Views
@@ -173,3 +195,4 @@ Some resources have specific tags. The following tags are available in addition 
 [8]: /infrastructure/containers/orchestrator_explorer/?tab=manual#query-filter-details
 [9]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
 [10]: /integrations/amazon_web_services/#resource-collection
+[11]: /integrations/aws-fargate/?tab=webui#fluent-bit-and-firelens

@@ -57,7 +57,12 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 After processing, the following structured log is generated:
 
-{{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1" style="width:80%;">}}
+```json
+{
+  "users": "john",
+  "date": 1575590400000
+}
+```
 
 **Note**:
 
@@ -72,7 +77,7 @@ After processing, the following structured log is generated:
 
 ### Matcher and filter
 
-<div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in <a href="/logs/workspaces/#transformation-cell">Log Workspaces</a> and in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>).<br><br>
+<div class="alert alert-danger">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>).<br><br>
 The following full set of matchers and filters are specific to <em>ingest-time</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">Grok Parser</a> functionality.</div>
 
 Here is a list of all the matchers and filters natively implemented by Datadog:
@@ -80,7 +85,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 {{< tabs >}}
 {{% tab "Matchers" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])` 
+`date("pattern"[, "timezoneId"[, "localeId"]])`
 : Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates).
 
 `regex("pattern")`
@@ -216,21 +221,19 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 
 ## Advanced settings
 
-At the bottom of your Grok processor tiles, there is an **Advanced Settings** section:
-
-{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" style="width:80%;">}}
+Use the **Advanced Settings** section at the bottom of your Grok processor to parse a specific attribute instead of the default `message` attribute, or to define helper rules that reuse common patterns across multiple parsing rules.
 
 ### Parsing a specific text attribute
 
 Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
 
-For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could parse this log as follows:
+For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. Extract from `command.line` to parse its contents and create structured attributes from the command data.
 
-{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line" style="width:80%;">}}
+{{< img src="/logs/processing/parsing/grok_advanced_settings_extract.png" alt="Advanced Settings with Extract from command.line attribute example" style="width:80%;">}}
 
-### Using helper rules to factorize multiple parsing rules
+### Using helper rules to reuse common patterns
 
-Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules let you reuse common Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
 Example for a classic unstructured log:
 
@@ -251,8 +254,6 @@ user %{word:user.name} id:%{integer:user.id}
 connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
-
-{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" style="width:80%;">}}
 
 ## Examples
 
@@ -292,12 +293,18 @@ user=john connect_date=11/08/2017 id=123 action=click
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2" style="width:80%;">}}
-
 You don't need to specify the name of your parameters as they are already contained in the log.
 If you add an **extract** attribute `my_attribute` in your rule pattern you will see:
 
-{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" style="width:80%;">}}
+```json
+{
+  "my_attribute": {
+    "user": "john",
+    "id": 123,
+    "action": "click"
+  }
+}
+```
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with a separator.
 
@@ -313,8 +320,6 @@ user: john connect_date: 11/08/2017 id: 123 action: click
 rule %{data::keyvalue(": ")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser" style="width:80%;" >}}
-
 If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the allowlist in the parsing rule:
 
 **Log:**
@@ -328,8 +333,6 @@ url=https://app.datadoghq.com/event/stream user=john
 ```text
 rule %{data::keyvalue("=","/:")}
 ```
-
-{{< img src="logs/processing/parsing/key_value_allowlist.png" alt="Key value allowlist" style="width:80%;" >}}
 
 Other examples:
 
@@ -605,7 +608,7 @@ The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` whe
 * Values containing a separator character must be quoted.
 * Quoted Values containing a quoting character must be escaped with a quoting characters. For example, `""` within a quoted value represents `"`.
 * If the log doesn't contain the same number of value as the number of keys in the header, the CSV parser will match the first ones.
-* Intergers and Double are automatically casted if possible.
+* Integers and Double are automatically casted if possible.
 
 **Log**:
 

@@ -11,7 +11,7 @@ title: Crear aplicaciones
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
+<div class="alert alert-danger">App Builder no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> ({{< region-param key="dd_site_name" >}}) seleccionado.</div>
 {{< /site-region >}}
 
 Puedes crear una aplicación o editar aplicaciones existentes desde la página de [App Builder][1]. La página muestra información sobre las aplicaciones existentes e incluye lo siguiente:

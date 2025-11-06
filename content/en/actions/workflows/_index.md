@@ -1,5 +1,6 @@
 ---
 title: Workflow Automation
+description: Orchestrate and automate end-to-end processes with workflows that connect actions across your infrastructure and tools.
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
@@ -39,7 +40,7 @@ Datadog Workflow Automation allows you to orchestrate and automate your end-to-e
 
 ## Configure workflow actions
 
-Datadog Workflow Automation provides over 400+ actions across several tools, along with Workflow-specific actions such as the HTTP action and the JavaScript data operator. These actions allow you to perform any task required in your flow.
+Datadog Workflow Automation provides over 2000+ actions across several tools, along with Workflow-specific actions such as the HTTP action and the JavaScript data operator. These actions allow you to perform any task required in your flow.
 
 ## Start with blueprints
 

@@ -1,5 +1,6 @@
 ---
 title: Tracing ECS Applications
+description: Configure APM trace collection for containerized applications running on Amazon ECS
 aliases:
   - /agent/amazon_ecs/apm
 further_reading:
@@ -127,21 +128,6 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
 ]
 ```
 For Python the startup command is generally `ddtrace-run python my_app.py` but may vary depending on the framework used, for example, using [uWSGI][1] or instrumenting your [code manually with `patch_all`][2].
-
-#### Code
-You can alternatively update your code to have the tracer set the hostname explicitly:
-
-```python
-import requests
-from ddtrace import tracer
-
-
-def get_aws_ip():
-  r = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4')
-  return r.text
-
-tracer.configure(hostname=get_aws_ip())
-```
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#uwsgi
 [2]: https://ddtrace.readthedocs.io/en/stable/basic_usage.html#patch-all

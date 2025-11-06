@@ -14,7 +14,7 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Azure DevOps Server is not officially supported.
 </div>
 

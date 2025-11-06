@@ -23,7 +23,7 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 * Use default and add custom attributes to each span.
 * Leverage optimized network usage with automatic bulk posts.
 
-<div class="alert alert-info"><strong>Note</strong>: Datadog charges for <strong>ingested and indexed</strong> spans sent from your iOS applications, but does not charge for the underlying devices. Read more in the <a href="/account_management/billing/apm_tracing_profiler/">APM billing documentation</a>.</div>
+<div class="alert alert-info">Datadog charges for <strong>ingested and indexed</strong> spans sent from your iOS applications, but does not charge for the underlying devices. Read more in the <a href="/account_management/billing/apm_tracing_profiler/">APM billing documentation</a>.</div>
 
 ## Setup
 
@@ -438,7 +438,7 @@ span.log(
 {{% /tab %}}
 {{< /tabs >}}
 
-8. (Optional) To distribute traces between your environments, for example frontend - backend, you can either do it manually or leverage our auto instrumentation. In both cases, network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
+8. (Optional) To distribute traces between your environments, for example frontend - backend, you can either do it manually or leverage our auto instrumentation. In both cases, you can opt to inject the trace context into all requests or only into the sampled ones. A sampling of 100% is applied by default.
 
 * To manually propagate the trace, inject the span context into `URLRequest` headers:
 
@@ -448,11 +448,12 @@ span.log(
 var request: URLRequest = ... // the request to your API
 
 let span = tracer.startSpan(operationName: "network request")
+let traceContextInjection = ... // either `.all` or `.sampled`
 
-let headersWriter = HTTPHeadersWriter(samplingRate: 20)
+let headersWriter = HTTPHeadersWriter(traceContextInjection: traceContextInjection)
 tracer.inject(spanContext: span.context, writer: headersWriter)
 
-for (headerField, value) in headersWriter.tracePropagationHTTPHeaders {
+for (headerField, value) in headersWriter.traceHeaderFields {
     request.addValue(value, forHTTPHeaderField: headerField)
 }
 ```
@@ -460,7 +461,8 @@ for (headerField, value) in headersWriter.tracePropagationHTTPHeaders {
 {{% tab "Objective-C" %}}
 ```objective-c
 id<OTSpan> span = [tracer startSpan:@"network request"];
-DDHTTPHeadersWriter *headersWriter = [[DDHTTPHeadersWriter alloc] initWithSamplingRate:20];
+DDTraceContextInjection traceContextInjection = ...; // either `DDTraceContextInjectionAll` or `DDTraceContextInjectionSampled`
+DDHTTPHeadersWriter *headersWriter = [[DDHTTPHeadersWriter alloc] initWithTraceContextInjection:traceContextInjection];
 
 NSError *error = nil;
 [tracer inject:span.context
@@ -468,8 +470,8 @@ NSError *error = nil;
     carrier:headersWriter
         error:&error];
 
-for (NSString *key in headersWriter.tracePropagationHTTPHeaders) {
-    NSString *value = headersWriter.tracePropagationHTTPHeaders[key];
+for (NSString *key in headersWriter.traceHeaderFields) {
+    NSString *value = headersWriter.traceHeaderFields[key];
     [request addValue:value forHTTPHeaderField:key];
 }
 ```
@@ -544,11 +546,14 @@ The following attributes in `Trace.Configuration` can be used when creating the 
 
 | Method | Description |
 |---|---|
-| `service` | Set the value for the `service`. |
-| `networkInfoEnabled` | Set to `true` to enrich traces with network connection info (reachability status, connection type, mobile carrier name, and more).|
-| `tags` | Set a `<KEY>:<VALUE>` pair of tags to be added to spans created by the Tracer. |
 | `bundleWithRumEnabled` | Set to `true` to enable spans to be enriched with the current RUM View information. This enables you to see all of the spans produced during a specific View lifespan in the RUM Explorer. |
+| `customEndpoint` | Set the url to send traces for a custom server. |
+| `eventMapper` | Set the mapper to modify span events before they are sent. |
+| `networkInfoEnabled` | Set to `true` to enrich traces with network connection info (reachability status, connection type, mobile carrier name, and more).|
 | `sampleRate` | Set a value `0-100` to define the percentage of Traces to collect. |
+| `service` | Set the value for the `service`. |
+| `tags` | Set a `<KEY>:<VALUE>` pair of tags to be added to spans created by the Tracer. |
+| `urlSessionTracking` | Set it to configure automatic tracing for network requests. It defines the first-party hosts, the sample rate, and the trace context injection strategy. Do not set this if it's already configured by another feature like `RUM`. |
 
 ## Further Reading
 

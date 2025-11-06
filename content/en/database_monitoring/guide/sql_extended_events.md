@@ -1,6 +1,5 @@
 ---
-title: Configuring Deobfuscated Query Event and Query Error Capture on SQL Server
-private: true
+title: Configuring Query Completion and Query Error Capture on SQL Server
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -8,14 +7,21 @@ further_reading:
 - link: "/database_monitoring/setup_sql_server/"
   tag: "Documentation"
   text: "Setting Up SQL Server"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Configuring Query Capture with Parameter Values"
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting Database Monitoring"
 ---
 
-This feature collects deobfuscated queries and query error events from your SQL Server instances using Extended Events (XE). It provides visibility into:
-- Metrics and behavior of SQL queries with deobfuscated parameter values
+This feature collects query completion and query error events from your SQL Server instances using Extended Events (XE). It provides visibility into:
+- Metrics and behavior of SQL queries with parameter values
 - Errors and timeouts that occurred during execution
+
+For information about query parameter capture across different database systems, see [Configuring Query Capture with Parameter Values][1].
+
+[1]: /database_monitoring/guide/parameterized_queries/
 
 This data is useful for:
 - Performance analysis
@@ -25,7 +31,7 @@ This data is useful for:
 
 ## Before you begin
 
-You must configure Database Monitoring for your [SQL Server][1] before continuing with this guide.
+You must configure Database Monitoring for your [SQL Server][1] instance before continuing with this guide.
 
 
 Supported databases
@@ -101,10 +107,11 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 WITH (
-    MAX_MEMORY = 2048 KB, -- do not exceed 2048, values above 2 MB may result in data loss due to SQLServer internals
+    MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
+    MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems (not supported on RDS)
     STARTUP_STATE = ON
 );
 
@@ -147,15 +154,18 @@ ADD EVENT sqlserver.attention(
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 WITH (
-    MAX_MEMORY = 2048 KB, -- do not change, setting this larger than 2 MB may result in data loss due to SQLServer internals
+    MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
+    MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems (not supported on RDS)
     STARTUP_STATE = ON
 );
 
 ALTER EVENT SESSION datadog_query_errors ON SERVER STATE = START;
 GO
 ```
+
+   **Note**: If you're using Amazon RDS for SQL Server, remove the `MEMORY_PARTITION_MODE = PER_NODE` line from both session configurations, as this option is not supported on RDS instances.
 
 2. In the Datadog Agent configuration, enable `xe_collection` in `sqlserver.d/conf.yaml`.
 See the [sample conf.yaml.example][3] for all available configuration options.
@@ -166,14 +176,14 @@ See the [sample conf.yaml.example][3] for all available configuration options.
     query_errors:
       enabled: true
 ```
-To collect deobfuscated versions of `query_completion` and `query_error` events, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`.
+To collect query statements with parameter values, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`. For more information about parameter capture, see [Configuring Query Capture with Parameter Values][1].
 
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
 
-<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
 [1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
@@ -243,10 +253,11 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 WITH (
-    MAX_MEMORY = 2048 KB, -- do not exceed 2048, values above 2 MB may result in data loss due to SQLServer internals
+    MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
+    MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems
     STARTUP_STATE = ON
 );
 
@@ -289,9 +300,10 @@ ADD EVENT sqlserver.attention(
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 WITH (
-    MAX_MEMORY = 2048 KB, -- do not change, setting this larger than 2 MB may result in data loss due to SQLServer internals
+    MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
     MAX_DISPATCH_LATENCY = 30 SECONDS,
+    MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems
     STARTUP_STATE = ON
 );
 
@@ -308,14 +320,14 @@ See the [sample conf.yaml.example][3] for all available configuration options.
     query_errors:
       enabled: true
 ```
-To collect deobfuscated versions of `query_completion` and `query_error` events, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`.
+To collect query statements with parameter values, enable `collect_raw_query_statement` in `sqlserver.d/conf.yaml`. For more information about parameter capture, see [Configuring Query Capture with Parameter Values][1].
 
 ```yaml
   collect_raw_query_statement:
     enabled: true
 ```
 
-<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans, which appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-info">Raw query statements and execution plans may contain sensitive information (for example, passwords in query text) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
 [1]: https://learn.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-error-severities
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/event-classes/attention-event-class
@@ -334,13 +346,13 @@ The default query duration threshold is `duration > 1000000` (1 second). Adjust 
 
 - **Capture more queries**: Lower the threshold (for example, `duration > 500000` for 500 ms)
 - **Capture fewer queries**: Raise the threshold (for example, `duration > 5000000` for 5 seconds)
-<div class="alert alert-warning">Setting thresholds too low can result in excessive event collection that affects server performance, event loss due to buffer overflow, and incomplete data, as Datadog only collects the most recent 1000 events per collection interval.</div>
+<div class="alert alert-danger">Setting thresholds too low can result in excessive event collection that affects server performance, event loss due to buffer overflow, and incomplete data, as Datadog only collects the most recent 1000 events per collection interval.</div>
 
 ### Memory allocation
-- The default value is `MAX_MEMORY = 2048 KB`.
-- Do not exceed 2048 KB, as higher values may cause data loss due to [SQL Server internal limitations][3].
-- For high-volume servers, keeping this at a maximum of 2048 KB is recommended.
-- For lower-traffic servers, a setting of 1024 KB may be sufficient.
+- The default value is `MAX_MEMORY = 1024 KB`.
+- Do not exceed 1024 KB, as higher values may cause data loss due to [SQL Server internal limitations][3].
+- For high-volume servers, keeping this at a maximum of 1024 KB is recommended.
+- For lower-traffic servers, a setting of 512 KB may be sufficient.
 
 ### Event filtering {#event-filtering}
 
@@ -351,9 +363,8 @@ To reduce event volume, you can add filters to the `WHERE` clause. For example:
       sql_text <> '' AND
       duration > 1000000 AND
       -- Add custom filters here
-      database_name = 'YourImportantDB' -- Only track specific databases
-      -- OR --
-      username <> 'ReportUser' -- Exclude specific users
+      database_name = 'YourImportantDB' AND -- Only track specific databases
+      username <> 'datadog' -- Exclude Datadog Agent queries or specific users
   )
   ```
 

@@ -3,8 +3,8 @@ title: Instrumentación de aplicaciones serverless de Python mediante el Datadog
 ---
 ## Información general
 
-<div class="alert alert-warning">
-Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/python">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera la funcionalidad lista para usar, utiliza esta guía para mantener tu instancia.
+<div class="alert alert-danger">
+Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/python">instrucciones para instrumentar tus funciones Lambda utilizando la extensión Lambda en Datadog</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera la funcionalidad predefinida, utiliza esta guía para conservar tu instancia.
 </div>
 
 ## Requisitos previos
@@ -119,8 +119,8 @@ Transform:
       pythonLayerVersion: "{{< latest-lambda-layer-version layer="python" >}}"
       stackName: !Ref "AWS::StackName"
       forwarderArn: "<FORWARDER_ARN>"
-      service: "<SERVICE>" # Opcional
-      env: "<ENV>" # Opcional
+      service: "<SERVICE>" # Optional
+      env: "<ENV>" # Optional
 ```
 
 Para rellenar los parámetros, haz lo siguiente:
@@ -171,8 +171,8 @@ class CdkStack(core.Stack):
           "pythonLayerVersion": "{{< latest-lambda-layer-version layer="python" >}}",
           "forwarderArn": "<FORWARDER_ARN>",
           "stackName": self.stackName,
-          "service": "<SERVICE>",  # Opcional
-          "env": "<ENV>",  # Opcional
+          "service": "<SERVICE>",  # Optional
+          "env": "<ENV>",  # Optional
         }
       })
 ```
@@ -326,10 +326,10 @@ La versión secundaria del paquete `datadog-lambda` siempre coincide con la vers
 [Configura las capas][1] de tu función de Lambda con el ARN en el siguiente formato:
 
 ```
-# Para las regiones us, us3, us5, ap1 y eu
+# For us,us3,us5,ap1, ap2, and eu regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
-# Para las regiones us-gov
+# For us-gov regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
@@ -399,21 +399,21 @@ from ddtrace import tracer
 from datadog_lambda.metric import lambda_metric
 
 def lambda_handler(event, context):
-    # añade etiquetas personalizadas al tramo de la función de Lambda,
-    # NO funciona si el rastreo de X-Ray está habilitado
+    # add custom tags to the lambda function span,
+    # does NOT work when X-Ray tracing is enabled
     current_span = tracer.current_span()
     if current_span:
         current_span.set_tag('customer.id', '123456')
 
-    # envía un tramo personalizado
+    # submit a custom span
     with tracer.trace("hello.world"):
         print('Hello, World!')
 
-    # envía una métrica personalizada
+    # submit a custom metric
     lambda_metric(
         metric_name='coffee_house.order_value',
         value=12.45,
-        timestamp=int(time.time()), # opcional, debe estar dentro de los últimos 20 minutos
+        timestamp=int(time.time()), # optional, must be within last 20 mins
         tags=['product:latte', 'order:online']
     )
 
@@ -422,7 +422,7 @@ def lambda_handler(event, context):
         'body': get_message()
     }
 
-# rastrea una función
+# trace a function
 @tracer.wrap()
 def get_message():
     return 'Hello from serverless!'

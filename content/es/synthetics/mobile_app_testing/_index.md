@@ -13,7 +13,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: Blog
   text: Prácticas recomendadas para crear tests de extremo a extremo
-- link: /synthetics/mobile_app_testing/mobile_app_tests
+- link: /synthetics/mobile_app_testing/
   tag: Documentación
   text: Aprenda a crear tests de aplicaciones móviles Synthetic
 - link: /synthetics/mobile_app_testing/settings
@@ -25,11 +25,16 @@ further_reading:
 title: Tests y monitorización de aplicaciones móviles
 ---
 
+{{< site-region region="gov" >}}<div class="alert alert-danger"> Mobile Application Testing no es compatible en este <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Información general
 
 Los tests de aplicaciones móviles te permiten probar y monitorizar flujos (flows) de negocios clave para aplicaciones Android e iOS utilizando dispositivos reales. 
 Datadog ejecuta estos tests en dispositivos reales para proporcionar una representación realista, paso a paso, de los flujos de trabajo clave de la aplicación, capturas de pantalla de cada paso y resultados detallados de tests superados o fallidos, para que tu equipo pueda visualizar rápidamente qué ha salido mal.
 Los tests de aplicaciones móviles pueden ejecutarse de forma programada, bajo demanda o directamente en tus [pipelines CI/CD][1].
+
+Opcionalmente, vinculs los datos de test móviles de Synthetic con los datos móviles de RUM si se utiliza el [SDK de RUM][15] dentro de la aplicación probada. 
 
 Puedes crear tests de aplicaciones móviles en Datadog accediendo a [**Experiencia digital** > **Nuevo test**][12] y seleccionando **Mobile Application Test** (Test de aplicaciones móviles).
 
@@ -39,24 +44,24 @@ Puedes crear tests de aplicaciones móviles en Datadog accediendo a [**Experienc
 
 Puedes crear un test utilizando una de las siguientes opciones:
 
-- **Crea un test a partir de una plantilla**:
+### Crear un test a partir de una plantilla
 
-    1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, condiciones de alerta y pasos.
-    2. Haz clic en **+Create Test** (+Crear test) para abrir la página de configuración, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
-    3. Haz clic en **Save & Quit** (Guardar y salir) en la esquina superior derecha para enviar tu test de aplicación móvil.<br /><br>
-       {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Vídeo de la página de inicio de Tests de aplicaciones móviles con plantillas" video="true" >}}
+  1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, condiciones de alerta y pasos.
+  2. Haz clic en **+Create Test** (+Crear test) para abrir la página de configuración, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
+  3. Haz clic en **Save & Quit** (Guardar y salir) en la esquina superior derecha para enviar tu test de aplicación móvil.<br /><br>
+       {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Vídeo de página de inicio de test de la aplicación móvil con plantillas" video="true" >}}
 
-- **Crea un test desde cero**:
+### Crear un test desde cero
 
-    1. Haz clic en la plantilla **+** y, luego, selecciona una aplicación móvil en el menú desplegable. Si aún no has creado ninguna, crea una aplicación móvil en la [sección Lista de aplicaciones][2] de la [página de parámetros de Monitorización de Synthetic y tests continuos][3]. 
-    1. Selecciona una **versión** o haz clic en **Always run the latest version** (Ejecutar siempre la última versión) para utilizar la última versión de tu aplicación móvil cada vez que se ejecute el test.
-    1. Añade un **nombre** para tu test.
-    1. Seleccione **entorno y etiquetas (tags)** adicionales, relacionados con tu test. Utiliza el formato `<KEY>:<VALUE>` para filtrar por un `<VALUE>` para una `<KEY>` concreta.
-    1. Selecciona los **dispositivos** en los que quieres realizar el test.
-    1. Configura las condiciones de reintento para tu test.
-    1. Define la **frecuencia de test** haciendo clic en los intervalos de tiempo básicos o personalizando la frecuencia de test y las **condiciones de alerta** para tu monitor de tests.
-    1. Introduce un nombre para el monitor de tests, selecciona un servicio o miembro del equipo al que notificar y añade un mensaje de notificación.
-    1. Haz clic en **Save & Edit Recording** (Guardar y editar grabación) para enviar tu test de aplicación móvil.
+  1. Haz clic en la plantilla **+** y, luego, selecciona una aplicación móvil en el menú desplegable. Si aún no has creado ninguna, crea una aplicación móvil en la [sección Lista de aplicaciones][2] de la [página de parámetros de Monitorización de Synthetic y tests continuos][3]. 
+  1. Selecciona una **versión** o haz clic en **Always run the latest version** (Ejecutar siempre la última versión) para utilizar la última versión de tu aplicación móvil cada vez que se ejecute el test.
+  1. Añade un **nombre** para tu test.
+  1. Seleccione **entorno y etiquetas (tags)** adicionales, relacionados con tu test. Utiliza el formato `<KEY>:<VALUE>` para filtrar por un `<VALUE>` para una `<KEY>` concreta.
+  1. Selecciona los [**dispositivos**](#devices) en los que quieres realizar el test.
+  1. Establece [condiciones de reintento](#test-retries) para tu test.
+  1. Define la [**frecuencia de test**](#scheduling-and-alerts) haciendo clic en los intervalos de tiempo básicos o personalizando la frecuencia de test y las **condiciones de alerta** para tu monitor de tests.
+  1. Introduce un nombre para el monitor de tests, selecciona un servicio o miembro del equipo al que notificar y añade un mensaje de notificación.
+  1. Haz clic en **Save & Edit Recording** (Guardar y editar grabación) para enviar tu test de aplicación móvil.
 
 ### Fragmentos
 
@@ -79,23 +84,32 @@ Al configurar un nuevo test de aplicación móvil, utiliza fragmentos para relle
 <br/>
   {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Captura de pantalla del lado izquierdo de la creación de un test de aplicación móvil, que muestra ejemplos de fragmentos" width="70%" >}}
 
-## Variables
+## Dispositivos
 
-{{% synthetics-variables %}}
+En la pantalla de selección de dispositivos, puedes elegir probar dispositivos móviles ubicados en Europa (UE) o en Estados Unidos (EE. UU.). 
+Para configurar un test móvil para utilizar dispositivos alojados en UE o en EE. UU.:
 
-### Uso de variables globales
+1. Abre la página de edición de un test móvil existente o cree uno nuevo.
+2. Amplía la sección Dispositivos y elige las localizaciones del dispositivo para tu test:
+   - **Todas las localizaciones**: realiza tests tanto en UE como en EE. UU.
+   - **UE**: realiza tests sólo en UE.
+   - **EE. UU**: realiza tests sólo en EE. UU.
+3. Utiliza el menú desplegable Seleccionar dispositivos para seleccionar los dispositivos en los que deseas realizar el test.
+4. Haz clic en **Save & Edit Recording** (Guardar y editar grabación) para guardar tu configuración de test.
 
-Puedes utilizar las [variables globales definidas en **Parámetros**][4] en la información **URL de inicio** y **Opciones avanzadas** de test de tu aplicación móvil, así como en la grabación del test para definir variables locales. Para mostrar una lista de las variables disponibles, escribe `{{` en el campo elegido.
+**Notas**: 
+- Los tests realizados en dispositivos alojados en EE. UU. se ejecutan desde AWS US West (Oregón). Del mismo modo, los tests realizados en dispositivos alojados en UE se ejecutan desde AWS Germany (Frankfurt).
+- No todos los dispositivos están disponibles tanto en UE como en EE.UU. Para más información, consulta la lista de [dispositivos compatibles][16].
 
-Antes de empezar a grabar, define las variables que quieres incorporar al recorrido del usuario.
-
-Puedes inyectar las variables disponibles mientras grabas. Para obtener más información sobre el uso de variables en la grabación de tests móviles, consulta [Pasos de test de aplicaciones móviles][11].
+{{< img src="mobile_app_testing/mobile_app_devices_EU.mp4" alt="Selección de uno o más dispositivos móviles en EE. UU. y UE" video=true >}}
 
 ## Reintentos de tests
 
 Puedes especificar durante cuánto tiempo debe fallar un test antes de que se active una alerta de notificación.
 
 * Reintentar `X` veces después de `Y` ms en caso de fallo.
+
+{{< img src="mobile_app_testing/retry_condition.png" alt="Paso de reintento de condición, que muestra el reintento del test 0 veces después de 300ms en caso de error" width="90%" >}}
 
 ## Programación y alertas
 
@@ -191,3 +205,5 @@ Si estás utilizando la función [rol personalizado][9], añade tu usuario a cua
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /es/continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /es/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
+[15]: /es/real_user_monitoring/mobile_and_tv_monitoring/
+[16]: /es/synthetics/mobile_app_testing/devices

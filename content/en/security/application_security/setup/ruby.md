@@ -30,6 +30,7 @@ You can monitor App and API Protection for Ruby apps running in Docker, Kubernet
 {{% appsec-getstarted %}}
 
 ## Enabling threat detection
+
 ### Get started
 
 1. **Update your Gemfile to include the Datadog library**:
@@ -122,6 +123,7 @@ You can monitor App and API Protection for Ruby apps running in Docker, Kubernet
      c.appsec.instrument :sinatra
    end
    ```
+
 {{% /tab %}}
 
 {{% tab "Rack" %}}
@@ -143,6 +145,7 @@ You can monitor App and API Protection for Ruby apps running in Docker, Kubernet
    use Datadog::Tracing::Contrib::Rack::TraceMiddleware
    use Datadog::AppSec::Contrib::Rack::RequestMiddleware
    ```
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -203,6 +206,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% tab "AWS Fargate" %}}
 
 Initialize AAP in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
+
 ```shell
 env DD_APPSEC_ENABLED=true rails server
 ```

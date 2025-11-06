@@ -1,4 +1,6 @@
 ---
+description: Unifica métricas y logs de infraestructura utilizando integraciones basadas
+  en el Agent, basadas en la autenticación y de biblioteca.
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-integrations
   tag: Centro de aprendizaje
@@ -6,6 +8,9 @@ further_reading:
 - link: /integrations/
   tag: Documentación
   text: Consulta la lista de integraciones de Datadog
+- link: https://www.datadoghq.com/blog/1k-integrations-milestone/
+  tag: Blog
+  text: 'Escalado de la observabilidad de Datadog: 1.000 integraciones y más'
 title: Introducción a las integraciones
 ---
 
@@ -31,7 +36,7 @@ El paquete del Datadog Agent incluye integraciones compatibles oficialmente con 
 
 ### Permisos
 
-El permiso `manage_integrations` es necesario para interactuar con un cuadro de integración. Ver [roles RBAC][45] para obtener más información.
+El permiso de gestión de integraciones es necesario para interactuar con el cuadro de una integración. Para obtener más información, consulta [Roles RBAC][45].
 
 ### Claves de API y de aplicación
 
@@ -43,7 +48,7 @@ En caso de que quieras conectarte con una integración basada en un rastreador o
 
 ### Configurar las integraciones del Agent
 
-La mayoría de los parámetros de configuración son propios de cada [integración][18]. Accede a la carpeta `conf.d` en la raíz del directorio de configuración de tu Agent para configurar las integraciones. Cada una cuenta con una carpeta llamada `<INTEGRATION_NAME>.d` que contiene el archivo `conf.yaml.example`. En el siguiente archivo de ejemplo, se muestran todas las opciones de configuración disponibles para la integración en cuestión.
+La mayoría de los parámetros de configuración son propios de cada [integración][18]. Accede a la carpeta `conf.d` en la raíz del directorio de configuración de tu Agent para configurar las integraciones. Todas cuentan con una carpeta llamada `<INTEGRATION_NAME>.d` que contiene el archivo `conf.yaml.example`. En el siguiente archivo de ejemplo, se muestran todas las opciones de configuración disponibles para la integración en cuestión.
 
 Para activar una integración concreta:
 
@@ -73,7 +78,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-Si deseas monitorear varias instancias de Apache en el mismo check del Agent, añade más instancias a la sección `instances`:
+Si quieres monitorizar varias instancias de Apache en el mismo check del Agent, añade más instancias a la sección `instances`:
 
 ```yaml
 init_config:
@@ -94,54 +99,93 @@ El intervalo de recopilación predeterminado para todas las integraciones están
 
 El etiquetado es clave para filtrar y agregar los datos que llegan a Datadog desde diversas fuentes. Para obtener más información sobre el etiquetado, consulta [Empezando con las etiquetas (tags)][25].
 
-Si defines etiquetas (tags) en el archivo `datadog.yaml`, se aplicarán a todos los datos de tus integraciones. Una vez que definas una etiqueta en `datadog.yaml`, la heredarán todas las nuevas integraciones.
+Si defines etiquetas en el archivo `datadog.yaml`, se aplicarán a todos los datos de tus integraciones. Una vez que definas una etiqueta en `datadog.yaml`, la heredarán todas las nuevas integraciones.
 
-Por ejemplo, la [configuración del Agent][26] recomendada para monitorear sistemas separados e independientes consiste en definir `service` en tu archivo de configuración.
+Por ejemplo, la [configuración del Agent][26] recomendada para monitorizar sistemas separados e independientes consiste en definir `service` en tu archivo de configuración.
 
 También es recomendable configurar la etiqueta `env` en el Agent para unificar mejor el entorno. Si deseas obtener más información, consulta [Etiquetado de servicios unificado][27].
 
-De forma predeterminada, las métricas que envían las integraciones incluyen etiquetas del entorno detectadas automáticamente. Por ejemplo, las métricas que envía un check de Redis ejecutadas dentro de un contenedor incluyen etiquetas que hacen referencia a dicho contenedor, como `image_name`. Si deseas desactivar este comportamiento, configura el parámetro `ignore_autodiscovery_tags` con el valor `true`:
+#### Configuración de etiquetas por cada check
+Puedes personalizar el comportamiento de las etiquetas de cada check sobreescribiendo la configuración global de Agent:
+
+1. **Desactivar las etiquetas de Autodiscovery**
+
+    Por defecto, las métricas informadas por las integraciones incluyen etiquetas detectadas automáticamente en el entorno. Por ejemplo, las métricas informadas por un check Redis que se ejecuta dentro de un contenedor incluyen etiquetas asociadas al contenedor, como `image_name`. Puedes desactivar este comportamiento configurando el parámetro `ignore_autodiscovery_tags` como `true`.
+
+1. **Configurar la cardinalidad de las etiquetas por cada check de integración**
+
+    Puedes definir el nivel de cardinalidad de las etiquetas (bajo, orquestador o elevado) por cada check utilizando el parámetro `check_tag_cardinality`. Esta acción sobreescribe la configuración global de la cardinalidad de las etiquetas definida en la configuración del Agent.
+
 ```yaml
 init_config:
-
+# Ignores tags coming from autodiscovery
 ignore_autodiscovery_tags: true
+
+# Override global tag cardinality setting
+check_tag_cardinality: low
 
 # Rest of the config here
 ```
 
 ### Validación
 
-Para validar la configuración de tu Agent y tus integraciones, [ejecuta el subcomando `status` del Agent][28] y busca la nueva configuración en la sección Checks.
+Para validar la configuración de tu Agent y tus integraciones, [ejecuta el subcomando `status` del Agent][28] y busca la nueva configuración en la sección Checks (Comprobaciones).
 
 ## Instalar varias integraciones
 
 Para instalar más de una integración, basta con añadir la información de configuración en un nuevo archivo `conf.yaml` dentro de la carpeta `<INTEGRATIONS>.d` correspondiente. Busca los parámetros necesarios para la nueva integración en el archivo `conf.yaml.example`, añádelos al nuevo archivo `conf.yaml` y sigue los mismos pasos para validar tu configuración.
 
-## Integraciones detectadas automáticamente
+## Integraciones detectadas de manera automática
 
-Si configuras la [recopilación de procesos][29], Datadog detectará de forma automática las tecnologías que se ejecutan en tus hosts. De este modo, se identificarán las integraciones de Datadog que pueden ayudarte a monitorear estas tecnologías. Estas integraciones detectadas automáticamente se muestran en la [sección de búsqueda de Integrations (Integraciones)][2]:
+Si configuras la [recopilación de procesos][29], Datadog detectará de forma automática las tecnologías que se ejecutan en tus hosts. De este modo, se identificarán las integraciones de Datadog que pueden ayudarte a monitorizar estas tecnologías. Estas integraciones detectadas automáticamente se muestran en la [búsqueda de integraciones][2]:
 
 {{< img src="getting_started/integrations/ad_integrations_1.png" alt="Integraciones detectadas automáticamente" >}}
 
-Cada integración tiene uno de estos tres tipos de estado:
+Cada integración tiene uno de los cuatro tipos de estado:
 
-- **Detectada**: la tecnología se está ejecutando en un host, pero la integración no está instalada ni configurada y solo se recopilan métricas parciales. Configura la integración para obtener una cobertura completa. Para encontrar una lista de hosts que estén ejecutando una tecnología autodetectada, abre el cuadro de integraciones y selecciona la pestaña **hosts**.
-- **Instalada**: esta integración está instalada y configurada en un host.
-- **Disponible**: todas las integraciones que no entran en las categorías **Instalada** y **Detectada**.
+- **Detected** (Detectada): la tecnología se está ejecutando en un host, pero la integración no está instalada ni configurada y solo se recopilan métricas parciales. Configura la integración para obtener una cobertura completa. Para encontrar una lista de hosts que estén ejecutando una tecnología detectada automáticamente, abre el cuadro de integraciones y selecciona la pestaña **Hosts**.
+- **Installed** (Instalada): esta integración está instalada y configurada en un host.
+- **Available** (Disponible): todas las integraciones que no entran en las categorías **Installed** y **Detected**.
+- **Faltan datos**: No se detectaron métricas de integración en las últimas 24 horas.
 
 ## Protocolos de seguridad
 
 Para obtener información sobre cómo Datadog maneja tus datos y otras cuestiones de seguridad, consulta la [documentación acerca de la seguridad][30].
 
+## Control de acceso preciso
+Por defecto, el acceso a los recursos de una integración (cuentas, servicios, webhooks) no está restringido. Se pueden utilizar controles de acceso granulares para restringir el comportamiento de usuarios, equipos, funciones o toda la organización a nivel de recursos de la integración.
+
+**Nota**: La opción de acceso restringido sólo es visible si integración admite el control de acceso granular. Para verificar si el control de acceso granular es compatible con una integración, consulta la [documentación de la integración][46].
+{{< img src="getting_started/integrations/GRACE integration-account-modal.png" alt="Controles de acceso granular" style="width:70%;" >}}
+
+1. Mientras visualizas una integración, ve a la pestaña **Configurar** y busca el recurso (cuenta, servicio, webhook) al que deben aplicarse controles de acceso granular.
+2. Haz clic en **Set Permissions** (Configurar permisos).
+3. Por defecto, todos los miembros de tu organización tienen acceso total. Haz clic en **Restrict Access** (Restringir el acceso).
+4. El cuadro de diálogo se actualiza para mostrar que los miembros de tu organización tienen por omisión el permiso de acceso **Viewer** (Visualización).
+5. Utiliza el menú desplegable para seleccionar uno o varios equipos, roles o usuarios que puedan editar el monitor.
+    **Nota**: El permiso de [gestión de integraciones][45] también es necesario para editar recursos individuales.
+6. Haz clic en **Add** (Añadir).
+7. El cuadro de diálogo se actualiza para mostrar los permisos actualizados.
+8. Haz clic en **Save** (Guardar). La página de la integración se actualiza automáticamente con los permisos actualizados.
+
+**Nota:** Para mantener el acceso de edición al recurso, el sistema requiere que incluyas al menos un rol o equipo al que pertenezcas antes de guardar.
+
+Para restablecer el acceso general a un recurso de integración con acceso restringido, sigue estos pasos:
+
+1. Mientras visualizas una integración, ve a la pestaña **Configurar** y busca el recurso (cuenta, servicio, webhook) al que se debe restablecer el acceso general.
+2. Haz clic en **Set Permissions** (Configurar permisos).
+3. Haz clic en **Restore Full Access** (Restablecer acceso completo).
+4. Haz clic en **Save** (Guardar). La página de la integración se actualiza automáticamente con los permisos actualizados.
+
 ## ¿Qué toca hacer ahora?
 
-Después de configurar tu primera integración, [explora todas las métricas][31] que tu aplicación envía a Datadog y utilízalas para empezar a configurar [dashboards][32] y [alertas][33] para monitorear tus datos.
+Después de configurar tu primera integración, [explora todas las métricas][31] que tu aplicación envía a Datadog y utilízalas para empezar a configurar [dashboards][32] y [alertas][33] para monitorizar tus datos.
 
-Consulta también las siguientes soluciones de Datadog: [Log Management][34], [APM][35] y la [Synthetic Monitoring][36].
+Consulta también las siguientes soluciones de Datadog: [Log Management][34], [APM][35] y [Synthetic Monitoring][36].
 
 ## Solucionar problemas
 
-El primer paso para solucionar problemas de integración es utilizar un plugin en tu editor de código o utilizar una de las numerosas herramientas disponibles en línea para verificar que el YAML es válido. A continuación, ejecuta todos los pasos descritos en [Solucionar problemas del Agent][37].
+El primer paso para solucionar problemas de integración es utilizar un plugin en tu editor de código o elegir alguna de las numerosas herramientas disponibles online para verificar que el YAML es válido. A continuación, ejecuta todos los pasos descritos en [Solucionar problemas del Agent][37].
 
 Si sigues teniendo problemas, ponte en contacto con el [equipo de asistencia de Datadog][38].
 
@@ -151,7 +195,7 @@ Si sigues teniendo problemas, ponte en contacto con el [equipo de asistencia de 
 : Crea el archivo `conf.yaml` en la carpeta `conf.d/<INTEGRATION_NAME>.d`, en la raíz del [directorio de configuración del Agent][39], y utilízalo para conectar integraciones a tu sistema y para configurar sus ajustes.
 
 check personalizado
-: Si tienes un sistema único y quieres monitorearlo, o si vas a ampliar las métricas ya enviadas por una integración, puedes crear un [check personalizado][10] para definir y enviar métricas a Datadog. Sin embargo, si lo que quieres es monitorear una aplicación disponible de forma general, un servicio público o un proyecto de código abierto, y la integración no existe, puedes [crear una nueva integración][1] en lugar de un check personalizado.
+: Si tienes un sistema único y quieres monitorizarlo, o si vas a ampliar las métricas que ya se envían mediante una integración, puedes crear un [check personalizado][10] para definir y enviar métricas a Datadog. Sin embargo, si quieres monitorizar una aplicación disponible de forma general, un servicio público o un proyecto de código abierto, y la integración no existe, puedes [crear una nueva integración][1] en lugar de un check personalizado.
 
 `datadog.yaml`
 : Se trata del archivo de configuración principal donde debes definir cómo interactúa el Agent en su totalidad con sus propias integraciones y con tu sistema. Utiliza este archivo para actualizar claves de API, proxies, etiquetas de host y otros ajustes generales.
@@ -160,7 +204,7 @@ evento
 : Los eventos son mensajes informativos sobre tu sistema que [el explorador de eventos][40] utiliza para que puedas crear monitores a partir de ellos.
 
 instancia
-: En el archivo `conf.yaml`, se define y asigna la instancia de lo que se está monitoreando. Por ejemplo, en la [integración `http_check`][41], defines el nombre asociado a la instancia del endpoint HTTP que vas a monitorear durante los tiempos de actividad y caída del sistema. Puedes monitorear **varias instancias** en la misma integración al definir todas las instancias en el archivo `conf.yaml`.
+: En el archivo `conf.yaml`, se define y asigna la instancia de lo que se está monitorizando. Por ejemplo, en la [integración `http_check`][41], defines el nombre asociado a la instancia del endpoint HTTP que vas a monitorizar durante los tiempos de actividad y caída del sistema. Puedes monitorizar **varias instancias** en la misma integración al definir todas las instancias en el archivo `conf.yaml`.
 
 `<INTEGRATION_NAME>.d`
 : Si se trata de una configuración compleja, puedes dividirla en varios archivos `YAML` y, después, almacenarlos todos en la carpeta `<INTEGRATION_NAME>.d` para definir la configuración. El Agent carga cualquier archivo `YAML` válido en la carpeta `<INTEGRATION_NAME>.d`.
@@ -172,18 +216,18 @@ logs
 : Archivo que muestra una lista de las métricas recopiladas por cada integración y las almacena.
 
 métricas
-: La lista que cada integración recopila de tu sistema. Puedes encontrar las métricas de cada integración en el archivo `metadata.csv` de cada integración en particular. Para obtener más información sobre las métricas, consulta la página para desarrolladores [Métricas][42]. También puedes configurar [métricas personalizadas][43]; de modo que si la integración no brinda una métrica de forma predeterminada, puedes añadirla.
+: La lista que cada integración recopila de tu sistema. Puedes encontrar las métricas de cada integración en el archivo `metadata.csv` de cada integración en particular. Para obtener más información sobre las métricas, consulta la página para desarrolladores [Métricas][42]. También puedes configurar [métricas personalizadas][43]; de modo que si la integración no ofrece una métrica de forma predeterminada, puedes añadirla.
 
 parámetros
 : Utiliza los parámetros del archivo `conf.yaml` para controlar los accesos entre tu fuente de datos de la integración y el Agent. El archivo `conf.yaml.example` de las integraciones incluye una lista con todos los parámetros obligatorios y opcionales.
 
-check de servicio
-: Los checks de servicio son un tipo de monitor que se utiliza para realizar un seguimiento del estado del tiempo de actividad del servicio. Para obtener más información, consulta la [guía sobre checks de servicio][44].
+Check de servicio
+: Los checks de servicio son un tipo de monitor que se utiliza para hacer un seguimiento del estado del tiempo de actividad del servicio. Para obtener más información, consulta la [guía sobre checks de servicio][44].
 
-etiquetado
-: Las [etiquetas (tags)][25] te permiten personalizar las métricas para que puedas filtrarlas y visualizarlas de la forma que te resulte más útil.
+Etiquetado
+: Las [etiquetas][25] te permiten personalizar las métricas para que puedas filtrarlas y visualizarlas de la forma que te resulte más útil.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -231,3 +275,4 @@ etiquetado
 [43]: /es/metrics/custom_metrics/
 [44]: /es/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
 [45]: /es/account_management/rbac/permissions/#integrations
+[46]: /es/integrations/

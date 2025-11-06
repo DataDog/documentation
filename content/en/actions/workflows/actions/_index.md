@@ -1,5 +1,6 @@
 ---
 title: Actions
+description: Use generic workflow actions for logic control, data transformation, HTTP requests, and JavaScript operations in your workflows.
 disable_toc: false
 disable_sidebar: false
 type: documentation

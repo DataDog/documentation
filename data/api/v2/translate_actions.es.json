@@ -1,20 +1,36 @@
 {
+  "ListAppKeyRegistrations": {
+    "description": "Listar registros de claves de aplicación",
+    "summary": "Listar registros de claves de aplicación"
+  },
+  "UnregisterAppKey": {
+    "description": "Anular el registro de una clave de aplicación",
+    "summary": "Anular el registro de una clave de aplicación"
+  },
+  "GetAppKeyRegistration": {
+    "description": "Obtener el registro de una clave de aplicación existente",
+    "summary": "Obtener el registro de una clave de aplicación existente"
+  },
+  "RegisterAppKey": {
+    "description": "Registrar una nueva clave de aplicación",
+    "summary": "Registrar una nueva clave de aplicación"
+  },
   "CreateActionConnection": {
-    "description": "Crear una nueva Action Connection",
-    "summary": "Crear una nueva conexión de acción",
+    "description": "Crea una nueva Action Connection. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "summary": "Crear una nueva Action Connection",
     "request_description": "",
     "request_schema_description": "Solicitud utilizada para crear una conexión de acción."
   },
   "DeleteActionConnection": {
-    "description": "Eliminar una conexión de acción existente",
+    "description": "Elimina una Action Connection existente. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Eliminar una conexión de acción existente"
   },
   "GetActionConnection": {
-    "description": "Obtener una Action Connection existente",
+    "description": "Obtén una Action Connection existente. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Obtener una conexión de acción existente"
   },
   "UpdateActionConnection": {
-    "description": "Actualizar una conexión de acción existente",
+    "description": "Actualiza una Action Connection existente. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Actualizar una conexión de acción existente",
     "request_description": "Actualizar un cuerpo de solicitud de conexión de acción existente",
     "request_schema_description": "Solicitud utilizada para actualizar una conexión de acción."
@@ -156,41 +172,41 @@
     "request_schema_description": "El cuerpo del filtro de retención que debe actualizarse."
   },
   "DeleteApps": {
-    "description": "Elimina varias aplicaciones en una sola solicitud de una lista de ID de aplicaciones.",
+    "description": "Elimina varias aplicaciones en una sola solicitud a partir de una lista de ID de aplicaciones. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Eliminar varias aplicaciones",
     "request_description": "",
     "request_schema_description": "Un objeto de solicitud para eliminar varias aplicaciones por ID."
   },
   "ListApps": {
-    "description": "Arma una lista de todas las aplicaciones, con filtros y clasificación opcionales. Este endpoint está paginado. Este endpoint solo devuelve información básica sobre la aplicación, como su ID, nombre y descripción.",
+    "description": "Enumera todas las aplicaciones, con filtros y clasificación opcionales. Este endpoint está paginado y sólo devuelve información básica sobre la aplicación, como su ID, nombre y descripción. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Armar una lista de aplicaciones"
   },
   "CreateApp": {
-    "description": "Crea una nueva aplicación, devolviendo el ID de la aplicación.",
+    "description": "Crea una nueva aplicación, devolviendo el ID de la aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Crear aplicación",
     "request_description": "",
     "request_schema_description": "Un objeto de solicitud para crear una nueva aplicación."
   },
   "DeleteApp": {
-    "description": "Elimina una sola aplicación.",
+    "description": "Elimina una sola aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Eliminar aplicación"
   },
   "GetApp": {
-    "description": "Obtén la definición completa de una aplicación.",
+    "description": "Obtén la definición completa de una aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Obtener aplicación"
   },
   "UpdateApp": {
-    "description": "Actualiza una aplicación existente. Esto crea una nueva versión de la aplicación.",
+    "description": "Actualiza una aplicación existente. Crea una nueva versión de la aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Actualizar aplicación",
     "request_description": "",
     "request_schema_description": "Objeto de solicitud para actualizar una aplicación existente."
   },
   "UnpublishApp": {
-    "description": "Anula la publicación de una aplicación, eliminando la versión activa de la aplicación. La anulación de la publicación crea una nueva instancia del objeto `deployment` en la aplicación, con un `app_version_id` nulo (`00000000-0000-0000-0000-000000000000`). La aplicación puede actualizarse y publicarse de nuevo en el futuro.",
+    "description": "Anula la publicación de una aplicación, eliminando la versión activa de la aplicación. La anulación de la publicación crea una nueva instancia de un objeto de `deployment` en la aplicación, con un `app_version_id` nulo (`00000000-0000-0000-0000-000000000000`). La aplicación puede actualizarse y publicarse de nuevo en el futuro. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Anular la publicación de la aplicación"
   },
   "PublishApp": {
-    "description": "Publica una aplicación para que la utilicen otros usuarios. Para garantizar que la aplicación sea accesible para los usuarios correctos, también debes establecer una [Política de restricción](https://docs.datadoghq.com/api/latest/restriction-policies/) en la aplicación si aún no existe una.",
+    "description": "Publica una aplicación para que la utilicen otros usuarios. Para asegurarte de que la aplicación es accesible para los usuarios correctos, también debes definir una [política de restricción](https://docs.datadoghq.com/api/latest/restriction-policies/) en la aplicación, si aún no existe una política. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Publicar aplicación"
   },
   "ListApplicationKeys": {
@@ -288,6 +304,12 @@
     "summary": "Asignar caso",
     "request_description": "Asignar la carga útil del caso",
     "request_schema_description": "Solicitud de asignación de caso"
+  },
+  "UpdateAttributes": {
+    "description": "Actualice los atributos de case (incidencia) ",
+    "summary": "Actualice los atributos de case (incidencia) ",
+    "request_description": "case (incidencia) atributos actualizar carga útil",
+    "request_schema_description": "case (incidencia) solicitud de actualización de atributos"
   },
   "UpdatePriority": {
     "description": "Actualizar la prioridad del caso",
@@ -497,12 +519,32 @@
     "description": "Obtén el archivo de costes personalizados especificado.",
     "summary": "Obtener el archivo de costes personalizados"
   },
+  "ListCostGCPUsageCostConfigs": {
+    "description": "Enumera las configuraciones de costes de uso de GCP.",
+    "summary": "Enumerar las configuraciones de costes de uso de GCP de Cloud Cost Management"
+  },
+  "CreateCostGCPUsageCostConfig": {
+    "description": "Crea una cuenta Cloud Cost Management para una configuración de costes de uso de GCP.",
+    "summary": "Crear una configuración de costes de uso de GCP de Cloud Cost Management",
+    "request_description": "",
+    "request_schema_description": "Solicitud de publicación de la configuración de costes de uso de GCP."
+  },
+  "DeleteCostGCPUsageCostConfig": {
+    "description": "Archiva una cuenta de Cloud Cost Management.",
+    "summary": "Eliminar la configuración de costes de uso de GCP de Cloud Cost Management"
+  },
+  "UpdateCostGCPUsageCostConfig": {
+    "description": "Actualiza el estado de la configuración de costes de uso de GCP (activo/archivado).",
+    "summary": "Actualizar la configuración de costes de uso de GCP de Cloud Cost Management",
+    "request_description": "",
+    "request_schema_description": "Solicitud de parche de configuración de costes de uso de GCP."
+  },
   "GetActiveBillingDimensions": {
     "description": "Obtén las dimensiones activas de facturación para la atribución de costes. Los datos de costes de un mes determinado están disponibles a más tardar el día 19 del mes siguiente.",
     "summary": "Obtener las dimensiones activas de facturación para la atribución de costes"
   },
   "GetMonthlyCostAttribution": {
-    "description": "Obtén la atribución mensual de costes por etiqueta a través de cuentas de múltiples organismos y cuentas de un único organismo raíz.\nLos datos de atribución de costes de un mes determinado están disponibles a más tardar el día 19 del mes siguiente.\nEste endpoint de la API está paginado. Para asegurarte de que recibes todos los registros, comprueba si el valor de `next_record_id` está\nconfigurado en la respuesta. Si lo está, haz otra solicitud y pasa `next_record_id` como parámetro.\nEjemplo de pseudocódigo:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\nsleep(5 seconds) # Avoid running into rate limit\nresponse := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\ncursor := response.metadata.pagination.next_record_id\nEND\n```\n\nEste endpoint solo es accesible para [organizaciones de nivel superior](https://docs.datadoghq.com/account_management/multi_organization/). Este endpoint no está disponible en el sitio del Gobierno (US1-FED).",
+    "description": "Obtén la atribución mensual de costes por etiqueta (tag) a través de cuentas de múltiples organismos y cuentas de un único organismo raíz.\nLos datos de atribución de costes de un mes determinado están disponibles a más tardar el día 19 del mes siguiente.\nEste endpoint de la API está paginado. Para asegurarte de que recibes todos los registros, comprueba si el valor de `next_record_id` está\nconfigurado en la respuesta. Si lo está, haz otra solicitud y pasa `next_record_id` como parámetro.\nEjemplo de pseudocódigo:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\nsleep(5 seconds) # Avoid running into rate limit\nresponse := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\ncursor := response.metadata.pagination.next_record_id\nEND\n```\n\nEste endpoint solo es accesible para [organizaciones de nivel superior](https://docs.datadoghq.com/account_management/multi_organization/). Este endpoint no está disponible en el sitio del Gobierno (US1-FED).",
     "summary": "Obtener atribución mensual de costes"
   },
   "ListAllCSMAgents": {
@@ -570,6 +612,30 @@
     "summary": "Modificar elementos de una lista de dashboards",
     "request_description": "Dashboards nuevos en la lista de dashboards.",
     "request_schema_description": "Solicitud con la lista de dashboards que hay que modificar."
+  },
+  "GetAllDatasets": {
+    "description": "Obtén todos los conjuntos de datos configurados para una organización.",
+    "summary": "Obtener todos los conjuntos de datos"
+  },
+  "CreateDataset": {
+    "description": "Crea un conjunto de datos con las configuraciones de la solicitud.",
+    "summary": "Crear un conjunto de datos",
+    "request_description": "Carga útil del conjunto de datos",
+    "request_schema_description": "Crea una solicitud para un conjunto de datos."
+  },
+  "DeleteDataset": {
+    "description": "Elimina el conjunto de datos asociado al ID.",
+    "summary": "Eliminar un conjunto de datos"
+  },
+  "GetDataset": {
+    "description": "Recupera el conjunto de datos asociado al ID.",
+    "summary": "Obtener un único conjunto de datos por ID"
+  },
+  "UpdateDataset": {
+    "description": "Edita el conjunto de datos asociado al ID.",
+    "summary": "Editar un conjunto de datos",
+    "request_description": "Carga útil del conjunto de datos",
+    "request_schema_description": "Solicitud de edición de un conjunto de datos."
   },
   "GetDomainAllowlist": {
     "description": "Obtén la lista de dominios permitidos de una organización.",
@@ -648,9 +714,9 @@
     "summary": "Ver una lista de eventos"
   },
   "CreateEvent": {
-    "description": "Este endpoint te permite publicar eventos.\n\n✅ **Sólo los eventos con la categoría `change`** tienen disponibilidad general. Consulta [Seguimiento de cambios](https://docs.datadoghq.com/change_tracking) para obtener más detalles.\n\n❌ Para casos de uso que impliquen otras categorías de evento, utiliza el endpoint V1.",
+    "description": "Este endpoint permite publicar eventos.\n\n**Nota:** Para utilizar este endpoint con nuestras bibliotecas cliente, asegúrate de estar utilizando la última versión publicada a partir del 1 de julio de 2025. Las versiones anteriores no admiten esta funcionalidad.\n\n✅ **Sólo los eventos con la categoría `cambio` o `alerta`** tienen disponibilidad general. Para los eventos de cambio, consulta [Seguimiento de cambios](https://docs.datadoghq.com/change_tracking) para ver más detalles.\n\n❌ Para casos de uso que impliquen otras categorías de eventos, utiliza el endpoint V1 o ponte en contacto con el [servicio de asistencia](https://www.datadoghq.com/support/).\n\n❌ Aún no se admiten notificaciones para los eventos enviados a este endpoint. Utiliza el endpoint V1 para la funcionalidad de notificación.",
     "summary": "Publicar un evento",
-    "request_description": "Objeto de solicitud de evento",
+    "request_description": "Carga útil de la solicitud de creación de evento.",
     "request_schema_description": "Carga útil para crear un evento."
   },
   "SearchEvents": {
@@ -658,6 +724,10 @@
     "summary": "Buscar eventos",
     "request_description": "",
     "request_schema_description": "Objeto enviado con la solicitud para ver una lista de eventos de tu organización."
+  },
+  "GetEvent": {
+    "description": "Obtener los detalles de un evento por `event_id`.",
+    "summary": "Obtener un evento"
   },
   "ListIncidents": {
     "description": "Muestra todas las incidencias de la organización del usuario.",
@@ -800,6 +870,10 @@
   "CreateNewAWSExternalID": {
     "description": "Genera un nuevo ID externo para la autenticación basada en roles de AWS.",
     "summary": "Generar un nuevo ID externo"
+  },
+  "GetAWSIntegrationIAMPermissions": {
+    "description": "Obtén todos los permisos IAM AWS necesarios para la integración AWS.",
+    "summary": "Obtener permisos IAM para la integración AWS"
   },
   "ListAWSLogsServices": {
     "description": "Obtén una lista de los servicios de AWS que pueden enviar logs a Datadog.",
@@ -1250,7 +1324,7 @@
     "request_schema_description": "Objeto de contenedor de una única solicitud de configuración de etiquetas en bloque."
   },
   "ListActiveMetricConfigurations": {
-    "description": "Lista de etiquetas (tags) y agregaciones que se consultan activamente en dashboards, notebooks, monitores, el Metrics Explorer, y utilizando la API para un determinado nombre de métrica.",
+    "description": "Lista de etiquetas y agregaciones que se consultan activamente en dashboards, notebooks, monitores, el Metrics Explorer, y utilizando la API para un determinado nombre de métrica.",
     "summary": "Mostrar etiquetas y agregaciones activas"
   },
   "ListTagsByMetricName": {
@@ -1264,6 +1338,10 @@
   "EstimateMetricsOutputSeries": {
     "description": "Devuelve la cardinalidad estimada de una métrica con una configuración concreta de etiquetas, percentil y número de agregaciones con Metrics without Limits&trade;.",
     "summary": "Herramienta para estimar la cardinalidad de una configuración de etiquetas"
+  },
+  "GetMetricTagCardinalityDetails": {
+    "description": "Devuelve los detalles de cardinalidad de las etiquetas para una métrica específica.",
+    "summary": "Obtener detalles de cardinalidad de clave de etiqueta"
   },
   "DeleteTagConfiguration": {
     "description": "Elimina la configuración de etiquetas de una métrica. Solo puede usarse con\nclaves de aplicación de usuarios que tengan permiso para gestionar etiquetas de métricas (`Manage Tags for Metrics`).",
@@ -1336,6 +1414,42 @@
     "summary": "Editar una política de configuración de un monitor",
     "request_description": "Descripción de la actualización.",
     "request_schema_description": "Solicitud de edición de una política de configuración de un monitor."
+  },
+  "ListMonitorUserTemplates": {
+    "description": "Recupera todas las plantillas de usuario de monitor.",
+    "summary": "Obtener todas las plantillas de usuario de monitor"
+  },
+  "CreateMonitorUserTemplate": {
+    "description": "Crea una nueva plantilla de usuario de monitor.",
+    "summary": "Crear una plantilla de usuario de monitor",
+    "request_description": "",
+    "request_schema_description": "Solicitud de creación de una plantilla de usuario de monitor."
+  },
+  "ValidateMonitorUserTemplate": {
+    "description": "Confirma la estructura y el contenido de una plantilla de usuario de monitor.",
+    "summary": "Confirmar una plantilla de usuario de monitor",
+    "request_description": "",
+    "request_schema_description": "Solicitud de creación de una plantilla de usuario de monitor."
+  },
+  "DeleteMonitorUserTemplate": {
+    "description": "Elimina una plantilla de usuario de monitor existente por su ID.",
+    "summary": "Eliminar una plantilla de usuario de monitor"
+  },
+  "GetMonitorUserTemplate": {
+    "description": "Recupera una plantilla de usuario de monitor por su ID.",
+    "summary": "Obtener una plantilla de usuario de monitor"
+  },
+  "UpdateMonitorUserTemplate": {
+    "description": "Crea una nueva versión de una plantilla de usuario de monitor existente.",
+    "summary": "Actualizar una plantilla de usuario de monitor a una nueva versión",
+    "request_description": "",
+    "request_schema_description": "Solicitud de creación de una nueva versión de plantilla de usuario de monitor."
+  },
+  "ValidateExistingMonitorUserTemplate": {
+    "description": "Confirma la estructura y el contenido de una plantilla de usuario de monitor existente que se está actualizando a una nueva versión.",
+    "summary": "Confirmar una plantilla de usuario de monitor existente",
+    "request_description": "",
+    "request_schema_description": "Solicitud de creación de una nueva versión de plantilla de usuario de monitor."
   },
   "ListMonitorDowntimes": {
     "description": "Obtén todas las caídas del sistema activas para el monitor especificado.",
@@ -1462,7 +1576,7 @@
     "summary": "Mostrar una lista de permisos"
   },
   "ListFindings": {
-    "description": "Obtén una lista de hallazgos. Estos incluyen los errores de configuración y los riesgos de identidad.\n\n**Nota**: Para filtrar y devolver solo riesgos de identidad, añade el siguiente parámetro de consultas: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtrado\n\nSe pueden aplicar filtros al anexar parámetros de consulta a la URL.\n\n  - Uso de un filtro único: `?filter[attribute_key]=attribute_value`\n  - Encadenar filtros: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtros en etiquetas: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nAquí, `attribute_key` puede ser cualquiera de las claves de filtro descritas a continuación.\n\nParámetros de consulta de tipo `integer` admiten operadores de comparación (`>`, `>=`, `<`, `<=`). Esto es muy útil al filtrar por `evaluation_changed_at` o `resource_discovery_timestamp`. Por ejemplo: `?filter[evaluation_changed_at]=>20123123121`.\n\nPuedes también utilizar el operador de negación en cadenas. Por ejemplo, usa `filter[resource_type]=-aws*` para filtrar cualquier recurso que no sea de AWS.\n\nEl operador debe estar después de un signo igual. Por ejemplo, para filtrar con el operador `>=` añade el operador después del signo igual: `filter[evaluation_changed_at]=>=1678809373257`.\n\nLos parámetros de consulta deben estar solo entre los parámetros registrados y con valores de tipos correctos. Los parámetros de consulta duplicados (por ejemplo, `filter[status]=low&filter[status]=info`) no están permitidos.\n\n### Campos de extensión adicionales\n\nLos campos de extensión adicionales están disponibles para algunos hallazgos.\n\nLos datos están disponibles cuando incluyes el parámetro de consulta `?detailed_findings=true` en la solicitud.\n\nLos siguientes campos están disponibles para los hallazgos:\n- `external_id`: el ID de recurso externo relacionado al hallazgo.\n- `description`: los pasos de descripción y corrección para el hallazgo.\n- `datadog_link`: el enlace de Datadog relacionado para el hallazgo.\n\n### Respuesta\n\nLa respuesta incluye una matriz de objetos de hallazgo, metadatos de paginación y un recuento de elementos que coinciden con la consulta.\n\nCada objeto de hallazgo contiene lo siguiente:\n\n- El ID de hallazgo que se puede usar en una solicitud `GetFinding` para recuperar todos los detalles del hallazgo.\n- Atributos principales, incluido estado, evaluación, detalles de recurso muy claro, estado silenciado y detalles de reglas.\n- Marcas temporales `evaluation_changed_at` y `resource_discovery_date`.\n- Una matriz de etiquetas asociadas.\n",
+    "description": "Obtenga una lista de hallazgos. En ella se incluyen tanto los errores de configuración como los riesgos para la identidad.\n\n**Nota**: Para filtrar y devolver sólo los riesgos de identidad, añada el siguiente parámetro de consulta: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtrado\n\nLos filtros pueden aplicarse añadiendo parámetros de consulta a la URL.\n\n  - Con un único filtro: `?filter[attribute_key]=attribute_value`.\n  - Encadenamiento de filtros: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtrado por etiquetas: `?filtro[etiquetas]=clave_etiqueta:valor_etiqueta&filtro[etiquetas]=clave_etiqueta_2:valor_etiqueta_2`.\n\nEn este caso, `attribute_key` puede ser cualquiera de las claves de filtro que se describen más adelante.\n\nLos parámetros de consulta de tipo `integer` admiten operadores de comparación (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nTambién puede utilizar el operador de negación en cadenas. Por ejemplo, utilice `filter[resource_type]=-aws*` para filtrar cualquier recurso que no seaAWS.\n\nEl operador debe ir después del signo igual. Por ejemplo, para filtrar con el operador `>=`, añada el operador después del signo igual: `filter[evaluation_changed_at]=>=1678809373257`.\n\nLos parámetros de consulta deben estar sólo entre los documentados y con valores de tipos correctos. No se permiten parámetros de consulta duplicados (por ejemplo, `filtro[estado]=bajo&filtro[estado]=info`).\n\n### Campos de ampliación adicionales\n\nExisten campos de extensión adicionales para algunas conclusiones.\n\nLos datos están disponibles cuando se incluye el parámetro de consulta `?detailed_findings=true` en la solicitud.\n\nLos siguientes campos están disponibles para los resultados:\n- `external_id`: El ID externo del recurso relacionado con el hallazgo.\n- descripción La descripción y los pasos de corrección del hallazgo.\n- `datadog_link`: El enlace relativo Datadog para el hallazgo.\n- ip_addresses`: La lista de direcciones IP privadas para el recurso relacionado con el hallazgo.\n\n### Respuesta\n\nLa respuesta incluye una matriz de objetos de búsqueda, metadatos de paginación y un recuento de elementos que coinciden con la consulta.\n\nCada objeto de búsqueda contiene lo siguiente\n\n- El ID del hallazgo que puede utilizarse en una solicitud `GetFinding` para recuperar todos los detalles del hallazgo.\n- Atributos principales, como estado, evaluación, detalles de recursos de alto nivel, estado silenciado y detalles de reglas.\n- Las marcas de tiempo `evaluation_changed_at` y `resource_discovery_date`.\n- Una matriz de etiquetas asociadas.\n",
     "summary": "Hacer una lista de resultados"
   },
   "MuteFindings": {
@@ -1654,7 +1768,7 @@
     "summary": "Obtener una política de restricción"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Actualiza la política de restricción asociada con un recurso.\n\n#### Recursos compatibles\nPolíticas de restricción se pueden aplicar a los siguientes recursos:\n- Dashboards: `dashboard`\n- Cuentas de integración: `integration-account`\n- Servicios de integración: `integration-service`\n- Webhooks de integración: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Tablas de referencia: `reference-table`\n- Reglas de seguridad: `security-rule`\n- Objetivos de nivel de servicio: `slo`\n- Variables globales de Synthetic: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Localizaciones privadas de Synthetic: `synthetics-private-location`\n- Monitores: `monitor`\n- Procesos: `workflow`\n- Aplicaciones de App Builder: `app-builder-app`\n- Conexiones: `connection`\n- Grupos de conexión: `connection-group`\n- Aplicaciones RUM: `rum-application`\n\n#### Relaciones compatibles para recursos\nTipo de recurso               | Relaciones compatibles\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nCuentas de integración        | `viewer`, `editor`\nServicios de integración        | `viewer`, `editor`\nWebhooks de integración       | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nReglas de seguridad              | `viewer`, `editor`\nObjetivos de nivel de servicio    | `viewer`, `editor`\nVariables globales de Synthetic  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nLocalizaciones privadas de Synthetic | `viewer`, `editor`\nMonitores                    | `viewer`, `editor`\nTablas de referencia            | `viewer`, `editor`\nProcesos                   | `viewer`, `runner`, `editor`\nAplicaciones de App Builder            | `viewer`, `editor`\nConexiones                 | `viewer`, `resolver`, `editor`\nGrupos de conexión           | `viewer`, `editor`\nAplicación RUM             | `viewer`, `editor`",
+    "description": "Actualiza la política de restricciones asociada a un recurso.\n\n#### Recursos admitidos\nLas políticas de restricción pueden aplicarse a los siguientes recursos:\n- Cuadros de mando: Panel de control\n- Servicios de integración: Servicio de integración\n- Webhooks de integración: integración-webhook\n- Cuadernos: notebook \n- Paquetes de herramientas: `powerpack`\n- Tablas de referencia: `reference-table`\n- Reglas de seguridad: reglas de seguridad\n- objetivos de nivel de servicio (SLO): `slo`\n- Synthetic Monitoring Variables globales: `synthetics-global-variable`\n- Synthetic Monitoring Pruebas: `synthetics-test`\n- Synthetic Monitoring Ubicaciones privadas: `synthetics-private-location`\n- Monitores: `monitor (noun)`\n- Flujos de trabajo: `workflow (UI) / proceso (generic)`\n- App Builder Aplicaciones: `app-builder-app`\n- Conexiones: `connection (conexión)`\n- connection (conexión) Grupos: `connection (conexión)-group`\n- Aplicaciones RUM: `rum-application`\n- Conexiones entre organizaciones: `cross-org-connection (conexión)`\n- Hojas de cálculo: `hoja de cálculo`\n\n#### Relaciones soportadas para los recursos\nTipo de recurso | Relaciones admitidas\n----------------------------|--------------------------\nCuadros de mando | \"visor\", \"editor\nServicios de integración: visor, editor\nWebhooks de integración: visor, editor\nCuadernos: visor, editor\nPowerpacks: visor, editor\nReglas de seguridad: visor, editor\nobjetivos de nivel de servicio (SLO)   | Reglas de seguridad\nSynthetic Monitoring Variables Globales | `viewer`, `editor`\nSynthetic Monitoring Pruebas | Visor, Editor\nSynthetic Monitoring Ubicaciones Privadas | `viewer`, `editor`\nMonitores | \"viewer\", \"editor\nTablas de Referencia | `viewer`, `editor`.\nFlujos de trabajo: visor, corredor y editor.\nApp Builder Aplicaciones: visor, editor\nConexiones: visor, solucionador, editor\nconnection (conexión) Grupos: visor, editor\nAplicación RUM: `viewer`, `editor`.\nConexiones entre organizaciones: visor, editor\nHojas de cálculo | `viewer`, `editor`.",
     "summary": "Actualizar una política de restricción",
     "request_description": "Carga útil de política de restricción",
     "request_schema_description": "Solicitud de actualización de una política de restricción."
@@ -1918,6 +2032,10 @@
   "DownloadCloudWorkloadPolicyFile": {
     "description": "El endpoint de descarga genera un archivo de política de Workload Protection a partir de tus reglas del Agent de Workload Protection activas en ese momento y las descarga como un archivo `.policy`. Este archivo puede desplegarse en\ntus agentes para actualizar la política que se ejecuta en tu entorno.\n\n**Nota**: Este endpoint solo debe usarse para el sitio del Gobierno (US1-FED).",
     "summary": "Descargar la política de Workload Protection (US1-FED)"
+  },
+  "ListAssetsSBOMs": {
+    "description": "Obtén una lista de lista de materiales de software (SBOM) de los recursos de una organización.\n\n### Paginación\n\nConsulta la sección [Paginación](#pagination) del endpoint \"Enumerar vulnerabilidades\".\n\n### Filtrado\n\nConsulta la sección [Filtrado](#filtering) del endpoint \"Enumerar vulnerabilidades\".\n\n### Metadatos\n\nConsulta la sección [Metadatos](#metadata) del endpoint \"Enumerar vulnerabilidades\".",
+    "summary": "Enumerar materiales de software (SBOM) de recursos"
   },
   "GetSBOM": {
     "description": "Obtén un único SBOM relacionado con un activo por su tipo y nombre.\n",
@@ -2530,41 +2648,41 @@
     "summary": "Obtener membresías de usuario"
   },
   "CreateWorkflow": {
-    "description": "Crea un nuevo proceso, devolviendo el ID del proceso. Esta API requiere una clave de aplicación con el permiso `workflows_write`.",
+    "description": "Crea un nuevo flujo de trabajo, devolviendo el ID del flujo de trabajo. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Crear un proceso",
     "request_description": "",
     "request_schema_description": "Un objeto de solicitud para crear un nuevo proceso."
   },
   "DeleteWorkflow": {
-    "description": "Eliminar un proceso por ID. Esta API requiere una clave de aplicación con el permiso `workflows_write`.",
+    "description": "Elimina un flujo de trabajo por ID. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Eliminar un proceso existente"
   },
   "GetWorkflow": {
-    "description": "Obtener un proceso por ID.  Esta API requiere una clave de aplicación con el permiso `workflows_read`.",
+    "description": "Obtén un flujo de trabajo por ID. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Obtener un proceso existente"
   },
   "UpdateWorkflow": {
-    "description": "Actualizar un proceso por ID. Esta API requiere una clave de aplicación con el permiso `workflows_write`.",
+    "description": "Actualiza un flujo de trabajo por ID. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Actualizar un proceso existente",
     "request_description": "",
     "request_schema_description": "Un objeto de solicitud para actualizar un proceso existente."
   },
   "ListWorkflowInstances": {
-    "description": "Haz una lista de todas las instancias de un flujo de trabajo determinado. Esta API requiere una clave de aplicación con el permiso workflows_read.",
+    "description": "Enumera todas las instancias de un flujo de trabajo dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Hacer una lista de instancias de flujo de trabajo"
   },
   "CreateWorkflowInstance": {
-    "description": "Ejecuta el flujo de trabajo dado. Esta API requiere una clave de aplicación con el permiso workflows_run.",
+    "description": "Ejecuta el flujo de trabajo dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Ejecutar un flujo de trabajo",
     "request_description": "",
     "request_schema_description": "Solicitud utilizada para crear una instancia de flujo de trabajo."
   },
   "GetWorkflowInstance": {
-    "description": "Obtén una ejecución específica de un flujo de trabajo determinado. Esta API requiere una clave de aplicación con el permiso workflows_read.",
+    "description": "Obtén una ejecución específica de un flujo de trabajo dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Obtener una instancia de flujo de trabajo"
   },
   "CancelWorkflowInstance": {
-    "description": "Cancela una ejecución específica de un flujo de trabajo determinado. Esta API requiere una clave de aplicación con el permiso workflows_run.",
+    "description": "Cancela una ejecución específica de un flujo de trabajo dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Cancelar una instancia de flujo de trabajo"
   }
 }

@@ -11,6 +11,9 @@ products:
 - icon: cloud-security-management
   name: CSM 위협
   url: /security/threats/
+- icon: app-sec
+  name: 앱 및 API 보호
+  url: /security/application_security/
 title: 억제
 ---
 
@@ -42,7 +45,7 @@ title: 억제
 
 {{< img src="security/security_monitoring/suppressions/suppression_list.png" alt="억제 규칙 목록을 보여주는 억제 페이지" style="width:90%;" >}}
 
-## 억제 규칙 만들기 
+## 억제 규칙 만들기
 
 1. [억제][3] 페이지로 이동하세요.
 1. **+ New Suppression**을 클릭하세요.

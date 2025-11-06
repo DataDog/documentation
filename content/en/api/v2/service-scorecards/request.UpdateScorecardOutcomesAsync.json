@@ -1,0 +1,15 @@
+{
+  "data": {
+    "attributes": {
+      "results": [
+        {
+          "rule_id": "q8MQxk8TCqrHnWkx",
+          "entity_reference": "service:my-service",
+          "remarks": "See: <a href=\"https://app.datadoghq.com/services\">Services</a>",
+          "state": "pass"
+        }
+      ]
+    },
+    "type": "batched-outcome"
+  }
+}

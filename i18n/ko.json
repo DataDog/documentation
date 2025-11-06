@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "850"
+    "other": "1,000"
   },
   "beta_sentence": {
     "other": "베타 - 지원이 필요하거나 오류 발생 시 다음으로 문의해 주세요 "
@@ -291,5 +291,17 @@
   },
   "available_for": {
     "other": "이용 가능"
+  },
+  "alert_note": {
+    "other": "참고"
+  },
+  "alert_warning": {
+    "other": "경고"
+  },
+  "alert_caution": {
+    "other": "주의"
+  },
+  "alert_tip": {
+    "other": "팁"
   }
 }

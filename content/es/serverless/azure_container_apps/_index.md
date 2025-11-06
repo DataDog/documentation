@@ -7,7 +7,7 @@ further_reading:
 title: Azure Container Apps
 ---
 
-<div class="alert alert-info">Para instrumentar tus aplicaciones Azure Container Apps con <code>serverless-init</code>, consulta Azure Container Apps con serverless-init3.</div>
+<div class="alert alert-info">Para instrumentar tus aplicaciones Azure Container Apps con <code>serverless-init</code>, consulta <a href="/serverless/guide/aca_serverless_init">Azure Container Apps con serverless-init3</a>.</div>
 
 ## Información general
 Azure Container Apps es una plataforma serverless totalmente gestionada que sirve para desplegar y escalar aplicaciones basadas en contenedores. Datadog ofrece monitorización y recopilación de logs para Container Apps a través de la [integración de Azure][1]. Datadog también brinda una solución para instrumentar las aplicaciones de Container Apps con un Agent especialmente diseñado para habilitar el rastreo, las métricas personalizadas y la recopilación directa de logs.
@@ -19,15 +19,15 @@ Azure Container Apps es una plataforma serverless totalmente gestionada que sirv
 {{< tabs >}}
 {{% tab "Node.js" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-js`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Node.js][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-js`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Node.js][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
-En Azure, añade un montaje de volumen utilizando el [almacenamiento limitado a réplicas][5]. Los ejemplos de esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
+En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adición de un montaje de volumen a un contenedor en Azure" style="width:60%;" >}}
 
@@ -41,15 +41,15 @@ Para configurar la generación de logs en tu aplicación, consulta [Recopilació
 {{% /tab %}}
 {{% tab "Python" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-py`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Python][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-py`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Python][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
-En Azure, añade un montaje de volumen utilizando el [almacenamiento limitado a réplicas][5]. Los ejemplos de esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
+En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adición de un montaje de volumen a un contenedor en Azure" style="width:60%;" >}}
 
@@ -63,15 +63,15 @@ Para configurar la generación de logs en tu aplicación, consulta [Recopilació
 {{% /tab %}}
 {{% tab "Java" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-java`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Java][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-java`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Java][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
-En Azure, añade un montaje de volumen utilizando el [almacenamiento limitado a réplicas][5]. Los ejemplos de esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
+En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adición de un montaje de volumen a un contenedor en Azure" style="width:60%;" >}}
 
@@ -85,15 +85,15 @@ Para configurar el registro en tu aplicación, consulta [Recopilación de logs d
 {{% /tab %}}
 {{% tab "Go" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-go`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Go][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-go`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Go][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
-En Azure, añade un montaje de volumen utilizando el [almacenamiento limitado a réplicas][5]. Los ejemplos de esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
+En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adición de un montaje de volumen a un contenedor en Azure" style="width:60%;" >}}
 
@@ -107,15 +107,15 @@ Para configurar la generación de logs en tu aplicación, consulta [Recopilació
 {{% /tab %}}
 {{% tab ".NET" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-go`. Para obtener instrucciones, consulta [Rastreo de aplicaciones .NET][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-dotnet`. Para obtener instrucciones, consulta [Rastreo de aplicaciones .NET][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
-En Azure, añade un montaje de volumen utilizando el [almacenamiento limitado a réplicas][5]. Los ejemplos de esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
+En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adición de un montaje de volumen a un contenedor en Azure" style="width:60%;" >}}
 
@@ -129,15 +129,15 @@ Para configurar la generación de logs en tu aplicación, consulta [Recopilació
 {{% /tab %}}
 {{% tab "PHP" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-php`. Para obtener instrucciones, consulta [Rastreo de aplicaciones PHP][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-php`. Para obtener instrucciones, consulta [Rastreo de aplicaciones PHP][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
-En Azure, añade un montaje de volumen utilizando el [almacenamiento limitado a réplicas][5]. Los ejemplos de esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
+En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
 {{< img src="serverless/azure_container_apps/aca-volume-mount.png" alt="Adición de un montaje de volumen a un contenedor en Azure" style="width:60%;" >}}
 
@@ -170,7 +170,7 @@ Dado que Azure Container Apps se basa en Kubernetes, no puedes compartir variabl
    - **Servidor de inicio de sesión de registro**: `docker.io`
    - **Imagen y etiqueta (tag)**: `datadog/serverless-init:latest`
    - Define tu asignación de recursos de contenedor en función de tu uso.
-4. Añade un montaje de volumen utilizando el [almacenamiento limitado a réplicas][2]. Asegúrate de que el nombre y la ruta de montaje coinciden con el montaje que configuraste en el contenedor de la aplicación.
+4. Añade un volumen de montaje utilizando [almacenamiento de alcance de réplica][2]. Utiliza el tipo "Almacenamiento efímero" al crear el volumen. Asegúrate de que el nombre y la ruta de montaje coinciden con el montaje que configuraste en el contenedor de la aplicación.
 5. Configura las variables de entorno de la siguiente tabla:
 
 #### Variables de entorno
@@ -179,6 +179,7 @@ Dado que Azure Container Apps se basa en Kubernetes, no puedes compartir variabl
 | `DD_AZURE_SUBSCRIPTION_ID` | **Requerido**. Tu ID de suscripción a Azure. |
 | `DD_AZURE_RESOURCE_GROUP` | **Requerido**. Tu grupo de recursos Azure. |
 | `DD_API_KEY` | **Requerido**. Tu [clave de API Datadog][3]. |
+| `DD_SITE`  | Tu sitio de Datadog: `{{< region-param key="dd_site" code="true" >}}`
 | `DD_SERVICE` | Cómo quieres etiquetar tu servicio. Por ejemplo, `sidecar-azure`. |
 | `DD_ENV` | Cómo quieres etiquetar tu entorno. Por ejemplo, `prod`.|
 | `DD_VERSION` | Cómo quieres etiquetar tu versión. |
@@ -305,8 +306,8 @@ import (
    "os"
    "path/filepath"
    "github.com/DataDog/datadog-go/v5/statsd"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 const logDir = "/LogFiles"

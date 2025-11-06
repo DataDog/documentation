@@ -2,19 +2,19 @@
 further_reading:
 - link: /security/default_rules/?category=cat-application-security#cat-application-security
   tag: Documentación
-  text: Explorar las reglas predefinidas de detección de amenazas de ASM
-- link: /security/application_security/threats/custom_rules/
+  text: Explorar las reglas predefinidas de detección de amenazas de AAP
+- link: /security/application_security/policies/custom_rules/
   tag: Documentación
-  text: Configurar reglas personalizadas de detección de amenazas de ASM
-- link: /security/application_security/threats/threat-intelligence/
+  text: Configurar reglas personalizadas de detección de amenazas de AAP
+- link: /security/application_security/how-it-works/threat-intelligence/
   tag: Documentación
-  text: Inteligencia sobre amenazas de ASM
+  text: Inteligencia sobre amenazas de AAP
 title: Investigar las señales de seguridad
 ---
 
 ## Información general
 
-Las señales de seguridad de ASM se crean cuando Datadog detecta una amenaza basándose en una regla de detección. Ve, busca, filtra e investiga las señales de seguridad en el [Signals Explorer][2] o configura las [Reglas de notificación][8] para enviar señales a herramientas de terceros.
+Las señales de seguridad de AAP se crean cuando Datadog detecta una amenaza basada en una regla de detección. Visualiza, busca, filtra e investiga las señales de seguridad en el [Signals Explorer][2] o configura [reglas de notificación][8] para enviar señales a herramientas de terceros.
 
 {{< img src="security/application_security/threats/security_signals/appsec-threat-signals.png" alt="Información general de la investigación de amenazas en el explorador de señales con el panel lateral de detalles">}}
 
@@ -55,7 +55,7 @@ Puedes clasificar una señal asignándola a un usuario para que la investigue. E
     - **En revisión**: la señal está siendo investigada activamente. Desde el estado **En revisión**, puedes mover la señal a **Archivado** o **Abierto** según sea necesario.
     - **Archivado**: la detección que causó la señal se ha resuelto. Desde el estado **Archivado**, puedes volver a mover la señal a **Abierto** si no han transcurrido más de 30 días desde que se detectó la señal originalmente.
 
-**Nota**: Para modificar las señales de seguridad, debes tener el permiso `security_monitoring_signals_write`. Consulta [Control de acceso basado en roles][9] para obtener más información sobre los roles predeterminados de Datadog y los permisos detallados de control de acceso basados en roles disponibles para la Application Security Management.
+**Nota**: Para modificar las señales de seguridad, debes tener el permiso `security_monitoring_signals_write`. Consulta [Control de acceso basado en roles][9] para obtener más información sobre los roles predeterminados de Datadog y los permisos de control de acceso granular basados en roles disponibles para App y API Protection.
 
 ## Declarar una incidencia
 
@@ -92,7 +92,7 @@ Utiliza la [Automatización del flujo de trabajo][5] para activar manualmente un
 2. En los detalles de la señal, mira cada una de las secciones, como **Qué ha pasado**, **Resumen de actividades** y **Regla de detección**.
 3. Revisa los **Siguientes pasos** y actúa:
     -  Haz clic en **Bloquear todas las IP atacantes** (por una duración específica o de modo permanente).
-    -  Haz clic en **Bloqueo automático de atacantes** (basado en reglas de [detección][10]). Esta configuración requiere el permiso **Proteger escritura** de Application Security Management.
+    -  Haz clic en **Automated Attacker Blocking** (Bloqueo automático de atacantes) (basado en reglas de [detección][10]). Esta configuración requiere el permiso **Protección contra escritura** de App and API Protection.
     -  Haz clic en **[Bloquear con Edge WAF][11]**.
 
 ## Acciones masivas
@@ -155,5 +155,5 @@ Para ver todas las vistas guardadas, haz clic en **Vistas** junto al título de 
 [7]: https://app.datadoghq.com/security/appsec?
 [8]: /es/security/notifications/rules/
 [9]: /es/account_management/rbac/permissions/#cloud-security-platform
-[10]: /es/security/application_security/threats/protection/#respond-to-threats-in-real-time-by-automating-attacker-blocking
-[11]: /es/security/application_security/threats/protection/#blocking-attack-attempts-with-in-app-waf
+[10]: /es/security/application_security/policies/#respond-to-threats-in-real-time-by-automating-attacker-blocking
+[11]: /es/security/application_security/policies/#blocking-attack-attempts-with-in-app-waf

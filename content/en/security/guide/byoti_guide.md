@@ -21,7 +21,7 @@ Threat intelligence is supported in the CSV format and requires the following co
 | additional_data  | json      | Additional data to enrich the trace. | false | `{"ref":"hxxp://example.org"}`
 | category         | text  | The threat intel [category][7]. This is used by some out of the box detection rules. | true | `residential_proxy` |
 | intention        | text | The threat intel [intent][8]. This is used by some out of the box detection rules.| true | malicious | |
-| source           | text  | The name of the source and the link to its site, such as your team and your teams wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
+| source           | json  | Fields representing where the threat intelligence originates, such as your team and your team's wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
 
 
 
@@ -40,9 +40,17 @@ ip_address,additional_data,category,intention,source
 
 Datadog supports creating reference tables through a manual upload, or by periodically retrieving the data from [Amazon S3, Azure storage, or Google Cloud storage][10].
 
-Notes:
-- It can take 10 to 30 minutes to start enriching AAP traces after creating a table.
-- If a primary key is duplicated, it is skipped and an error message about the key is displayed.
+<div class="alert alert-info">
+<p>**Usage notes:**</p>
+<ul>
+<li>If a primary key is duplicated, it is skipped and an error message about the key is displayed.</li>
+<li>Signals are not enriched. Enrichment only applies to traces.</li>
+<li>Datadog does not enrich local or private IPs.</li>
+<li>Only new traces (after the reference table is enabled or updated) are enriched. Old traces are not retroactively enriched.</li>
+<li>Enrichment happens for traces that match the IPs (supported in SIEM and App and API Protection) and domains (supported in SIEM) in the reference table.</li>
+<li>Manual file uploads don't auto-update. Updates occur only from cloud storage.</li>
+</ul>
+</div>
 
 On a new [references table][4] page:
 

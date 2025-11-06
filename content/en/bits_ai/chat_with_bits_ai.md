@@ -1,5 +1,6 @@
 ---
 title: Chat with Bits AI
+description: "Chat with Bits AI in Datadog and Slack to query observability data using natural language and get insights about your services."
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"

@@ -47,6 +47,6 @@ The [Analytics Explorer][1] contains views data aggregation to help you understa
 [1]: /product_analytics/charts/analytics_explorer/
 [2]: /product_analytics/charts/funnel_analysis
 [3]: /product_analytics/charts/pathways
-[4]: /product_analytics/charts/user_retention
+[4]: /product_analytics/charts/retention_analysis
 
 

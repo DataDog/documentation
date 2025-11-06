@@ -3,6 +3,9 @@ title: Split Logs
 disable_toc: false
 aliases:
     - /observability_pipelines/split_logs/
+private: true
+cascade:
+    private: true
 ---
 
 ## Overview

@@ -3,6 +3,9 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentación
   text: Consulta de dashboards
+- link: https://www.datadoghq.com/blog/nested-queries/
+  tag: Blog
+  text: Descubre información útil con consultas de métricas anidadas
 title: Consultas anidadas
 ---
 
@@ -284,7 +287,7 @@ Puedes utilizar la funcionalidad de consultas anidadas de nuestra [API pública 
 [4]: /es/metrics/distributions/
 [5]: /es/metrics/#anatomy-of-a-metric-query
 [6]: /es/metrics/nested_queries/#multilayer-aggregation
-[7]: /es/metrics/nested_queries/#percentiles-and-standard-deviation-for-aggregated-countsratesgauges
-[8]: /es/metrics/nested_queries/#higher-resolution-queries-over-historical-timeframes
+[7]: /es/metrics/nested_queries/#percentiles-and-standard-deviation-for-aggregated-counts-rates-and-gauges
+[8]: /es/metrics/nested_queries/#higher-resolution-queries-over-historical-time-frames
 [9]: /es/metrics/distributions/
 [10]: /es/dashboards/functions/rollup/#moving-rollup

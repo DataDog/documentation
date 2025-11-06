@@ -1,34 +1,5 @@
 ---
 - data:
-    # - org_name: jenkinsci
-
-    #   repos:
-    #   - repo_name: datadog-plugin
-
-    #     contents:
-
-    #     - action: pull-and-push-file
-    #       branch: master
-    #       globs:
-    #       - README.md
-    #       options:
-    #         dest_path: '/integrations/'
-    #         file_name: 'jenkins.md'
-    #         front_matters:
-    #           dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
-    #           public_title: Datadog-Jenkins Integration
-    #           custom_kind: integration
-    #           name: jenkins
-    #           is_public: true
-    #           integration_title: Jenkins
-    #           has_logo: true
-    #           git_integration_title: jenkins
-    #           description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
-    #           short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
-    #           categories:
-    #             - "configuration & deployment"
-    #           doc_link: https://docs.datadoghq.com/integrations/jenkins/
-
     - org_name: ansible-collections
 
       repos:
@@ -40,11 +11,13 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'ansible.md'
             front_matters:
               title: Ansible
               dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
+              aliases:
+              - /agent/basic_agent_usage/ansible/
 
     - org_name: aws
 
@@ -62,87 +35,6 @@
     - org_name: DataDog
 
       repos:
-      - repo_name: dd-go
-
-        contents:
-
-        - action: npm-integrations
-          branch: prod
-          globs:
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
-          - networks/model/domain/gcp_services.go
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
-          - networks/model/domain/azure_services.go
-
-      # - repo_name: dogweb
-
-      #   contents:
-
-      #   - action: integrations
-      #     branch: prod
-      #     globs:
-      #     - integration/*/*_metadata.csv
-      #     - integration/*/manifest.json
-      #     - integration/*/service_checks.json
-      #     - integration/*/README.md
-      #     - integration/*/__init__.py
-
-      # - repo_name: integrations-core
-      #   contents:
-
-      #   - action: integrations
-      #     branch: master
-      #     globs:
-      #     - "*/metadata.csv"
-      #     - "*/manifest.json"
-      #     - "*/assets/service_checks.json"
-      #     - "*/README.md"
-      #     - "*/datadog_checks/*/__about__.py"
-
-      # - repo_name: integrations-extras
-      #   contents:
-
-      #   - action: integrations
-      #     branch: master
-      #     globs:
-      #     - "*/metadata.csv"
-      #     - "*/manifest.json"
-      #     - "*/assets/service_checks.json"
-      #     - "*/README.md"
-      #     - "*/datadog_checks/*/__about__.py"
-
-      # - repo_name: integrations-internal-core
-      #   contents:
-
-      #   - action: integrations
-      #     branch: main
-      #     globs:
-      #     - "*/metadata.csv"
-      #     - "*/manifest.json"
-      #     - "*/assets/service_checks.json"
-      #     - "*/assets/metrics/metric-spec.yaml"
-      #     - "*/README.md"
-      #     - "*/datadog_checks/*/__about__.py"
-
-      # - repo_name: marketplace
-      #   contents:
-
-      #   - action: marketplace-integrations
-      #     branch: master
-      #     globs:
-      #     - "*/metadata.csv"
-      #     - "*/manifest.json"
-      #     - "*/assets/service_checks.json"
-      #     - "*/README.md"
-      #     - "*/images/*.png"
-      #     - "*/images/*.jpg"
-      #     - "*/images/*.jpeg"
-      #     - "*/images/*.svg"
-      #     options:
-      #       front_matters:
-      #         algolia:
-      #           subcategory: Marketplace Integrations
-
       - repo_name: ansible-datadog
         contents:
 
@@ -165,11 +57,13 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'chef.md'
             front_matters:
               title: Chef
               dependencies: ["https://github.com/DataDog/chef-datadog/blob/main/README.md"]
+              aliases:
+              - /agent/basic_agent_usage/chef/
 
       - repo_name: heroku-buildpack-datadog
         contents:
@@ -179,13 +73,14 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'heroku.md'
             front_matters:
               title: Datadog Heroku Buildpack
               dependencies: ["https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md"]
               aliases:
               - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+              - /agent/basic_agent_usage/heroku/
 
       - repo_name: puppet-datadog-agent
         contents:
@@ -195,11 +90,13 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'puppet.md'
             front_matters:
               title: Puppet
               dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md"]
+              aliases:
+              - /agent/basic_agent_usage/puppet/
 
       - repo_name: datadog-formula
         contents:
@@ -209,11 +106,13 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'saltstack.md'
             front_matters:
               title: SaltStack
               dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
+              aliases:
+              - /agent/basic_agent_usage/saltstack/
 
       - repo_name: dd-trace-rb
         contents:
@@ -297,12 +196,12 @@
         - action: pull-and-push-file
           branch: master
           globs:
-          - 'src/commands/lambda/README.md'
+          - 'packages/plugin-lambda/README.md'
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'cli.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-lambda/README.md"]
               title: Datadog Serverless CLI
               aliases:
                 - /serverless/datadog_lambda_library/
@@ -310,12 +209,22 @@
         - action: pull-and-push-file
           branch: master
           globs:
-          - 'src/commands/synthetics/README.md'
+          - 'packages/plugin-cloud-run/README.md'
+          options:
+            dest_path: '/serverless/libraries_integrations/'
+            file_name: 'cli-cloud-run.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-cloud-run/README.md"]
+              title: Datadog Serverless CLI for Cloud Run
+        - action: pull-and-push-file
+          branch: master
+          globs:
+          - 'packages/plugin-synthetics/README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'configuration.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
               aliases:
@@ -492,6 +401,7 @@
             path_to_remove: 'generated/md/external/'
             front_matters:
               disable_edit: true
+              exclude_headers_from_search: true
 
       - repo_name: datadog-agent
         contents:
@@ -503,7 +413,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: 7.66.x
+          branch: 7.71.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend_linux.md'
@@ -511,7 +421,7 @@
           - 'docs/cloud-workload-security/linux_expressions.md'
           - 'docs/cloud-workload-security/windows_expressions.md'
           options:
-            dest_dir: '/security/threats/'
+            dest_dir: '/security/workload_protection/'
             path_to_remove: 'docs/cloud-workload-security/'
 
       - repo_name: web-ui
@@ -527,6 +437,19 @@
 
       - repo_name: datadog-operator
         contents:
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/configuration_public.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'configuration.md'
+              front_matters:
+                title: Configure the Datadog Operator
+                description: "Configure Datadog Agent deployment options using DatadogAgent custom resource specifications and example manifests"
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/configuration_public.md"]
+                aliases:
+                  - /containers/datadog_operator/config
           - action: pull-and-push-file
             branch: main
             globs:
@@ -620,4 +543,3 @@
               front_matters:
                 dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
                 title: (Legacy) Ruby Compatibility Requirements
-

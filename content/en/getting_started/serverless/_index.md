@@ -1,10 +1,10 @@
 ---
 title: Getting Started with AWS Lambda Serverless Monitoring
-
+description: Monitor serverless applications with enhanced Lambda metrics, traces, and logs to troubleshoot performance and errors.
 further_reading:
-    - link: '/agent/basic_agent_usage/'
-      tag: 'Documentation'
-      text: 'Basic Agent Usage'
+    - link: "agent/"
+      tag: "Documentation"
+      text: "The Datadog Agent"
     - link: "https://dtdg.co/fe"
       tag: "Foundation Enablement"
       text: "Join an interactive session to learn more about serverless monitoring"
@@ -32,7 +32,7 @@ You can [see your sample app functions in Serverless View][7].
 
 The Serverless View displays telemetry from all serverless resources in your AWS environment. You can use this page as a starting point for monitoring, debugging, and optimizing your applications.
 
-The Serverless View groups your resources by the `SERVICE_NAME`. If you have invoked your functions at least once, you will see a seperate service group for each of the individual backend services.
+The Serverless View groups your resources by the `SERVICE_NAME`. If you have invoked your functions at least once, you will see a separate service group for each of the individual backend services.
 
 {{< img src="getting_started/serverless/functions_view_2.png" alt="Close-up of two functions" style="width:80%;">}}
 

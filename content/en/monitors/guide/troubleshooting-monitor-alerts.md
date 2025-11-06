@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Monitor Alerts
+description: "Troubleshoot common monitor alerting issues including state mismatches, data verification, alert conditions, and notification problems."
 further_reading:
 - link: "https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/"
   tag: "Guide"

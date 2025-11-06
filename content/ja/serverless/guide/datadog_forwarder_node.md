@@ -4,7 +4,7 @@ title: Datadog Forwarder を使用した Node.js サーバーレスアプリケ�
 
 ## 概要
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/nodejs">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
 </div>
 
@@ -253,7 +253,7 @@ Datadog Lambda ライブラリは、レイヤーまたは JavaScript パッケ�
 以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][8]します。
 
 ```
-# us、us3、us5、eu リージョンの場合
+# us、us3、us5、eu、ap1、ap2 リージョンの場合
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # 米国政府リージョンの場合

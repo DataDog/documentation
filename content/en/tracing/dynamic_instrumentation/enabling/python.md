@@ -1,5 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for Python
+description: Set up Dynamic Instrumentation for Python applications to add probes and capture data without code changes.
 aliases:
     - /dynamic_instrumentation/enabling/python/
 private: false
@@ -20,7 +21,7 @@ Recommended, [autocomplete and search (in Preview)][6] is enabled.
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.45.0][2] or higher.
+1. Install or upgrade your Agent to version [7.49.0][2] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 3. Install `ddtrace`, which provides both tracing and Dynamic Instrumentation:

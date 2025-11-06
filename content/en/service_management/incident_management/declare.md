@@ -11,11 +11,24 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 
 You can declare an incident from multiple places within the Datadog platform, such as a graph widget on a dashboard, the Incidents UI, or any alert reporting into Datadog.
 
+## Declaration modal
+
+When you declare an incident, a declaration modal appears. This modal has several core elements:
+
+| Incident elements  | Description |
+| ------------------ | ----------- |
+| Title              | (Required) A descriptive title for the incident. |
+| Severity Level     | (Required) By default, severity ranges from SEV-1 (most severe) to SEV-5 (least severe). You can customize the number of severities and their descriptions in Incident Management settings.
+| Incident Commander | The person assigned to lead the incident response. |
+
+You can configure [Incident Management Settings][2] to include more fields in the incident declaration modal or require certain fields.
+
+
 ## From the Incident page
 
 In the [Datadog UI][1], click **Declare Incident** to create an incident.
 
-The *Declare Incident* modal displays a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in [Incident Settings][2]. 
+The *Declare Incident* modal displays a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in [Incident Settings][2].
 
 ## From a monitor
 
@@ -32,7 +45,7 @@ Incidents created from a monitor will inherit [field values][10] from the monito
 Declare an incident directly from a Cloud SIEM or Workload Protection signal side panel, by clicking **Declare incident** or **Escalate Investigation**. For more information, see [Investigate Security Signals][3].
 
 Declare an incident from an App and API Protection signal through the actions listed in the signal side panel. Click **Show all actions** and click **Declare Incident**.
-For more information, see [Investigate Security Signals][4] for App and API Protection. 
+For more information, see [Investigate Security Signals][4] for App and API Protection.
 
 {{< img src="/service_management/incidents/declare/declare_asm.png" alt="Your image description" style="width:90%;" >}}
 
@@ -57,6 +70,10 @@ Create incidents directly from a [Synthetic test][8] through the Actions dropdow
 Use the [Datadog Clipboard][6] to gather multiple monitors and graphs and to generate an incident. To declare an incident from the Clipboard, copy a graph you want to investigate and open the Clipboard with the command `Cmd/Ctrl + Shift + K`. Click **Declare Incident** or the export icon to add to the incident as a signal.
 
 {{< img src="service_management/incidents/declare/declare_clipboard.png" alt="Declare an incident from the Datadog Clipboard" style="width:90%;" >}}
+
+## From a Datadog On-Call page
+
+You can declare an incident directly from a [Datadog On-Call page][12]. From the [On-Call pages list][13], select a page and click **Declare Incident** to create an incident and automatically associate it with the relevant on-call team.
 
 ## From Slack
 
@@ -100,3 +117,5 @@ You can declare an incident from individual Handoff Notification cards.
 [9]: https://app.datadoghq.com/incidents/settings?section=global-settings
 [10]: /service_management/incident_management/incident_settings/property_fields
 [11]: /service_management/incident_management/incident_settings/notification_rules
+[12]: /service_management/on-call/
+[13]: https://app.datadoghq.com/on-call/pages

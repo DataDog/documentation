@@ -1,4 +1,6 @@
 ---
+description: Configura el Datadog Agent para enviar logs a través de proxies TCP y
+  SOCKS5, con ejemplos detallados de configuración de HAProxy y NGINX.
 further_reading:
 - link: /logs/
   tag: Documentación
@@ -12,6 +14,13 @@ further_reading:
 title: Proxy TCP del Agent para el envío de logs
 ---
 
+{{% site-region region="us3,eu,us5,gov,ap1,ap2" %}}
+<div class="alert alert-danger">
+    TCP no está disponible para el sitio {{< region-param key="dd_site_name" >}}. Ponte en contacto con el <a href="/help/">servicio de asistencia</a> para obtener más información.
+</div>
+{{% /site-region %}}
+
+{{% site-region region="us" %}}
 ## Información general
 
 La recopilación de logs requiere la versión 6.0 o posterior del Datadog Agent. Las versiones anteriores del Agent no incluyen la interfaz `log collection`.
@@ -94,12 +103,12 @@ HAProxy debe instalarse en un host que tenga conectividad con Datadog. Utiliza e
 {{% site-region region="us" %}}
 
 ```conf
-# Basic configuration
+# Configuración básica
 global
     log 127.0.0.1 local0
     maxconn 4096
     stats socket /tmp/haproxy
-# Some sane defaults
+# Algunos elementos predeterminados sensatos
 defaults
     log     global
     option  dontlognull
@@ -108,18 +117,18 @@ defaults
     timeout client 5s
     timeout server 5s
     timeout connect 5s
-# This declares a view into HAProxy statistics, on port 3833
-# You do not need credentials to view this page and you can
-# turn it off once you are done with setup.
+# Esto declara una vista de las estadísticas de HAProxy en el puerto 3833
+# No necesitas credenciales para visualizar esta página
+# y puedes apagarla una vez que finalices la configuración.
 listen stats
     bind *:3833
     mode http
     stats enable
     stats uri /
-# This section is to reload DNS Records
-# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
-# For HAProxy 1.8 and newer
-resolvers my-dns
+# Esta sección es para la recarga de registros DNS
+# Sustituye <DNS_SERVER_IP> y <DNS_SECONDARY_SERVER_IP> por las direcciones IP de tu servidor DNS.
+# Para HAProxy v1.8 y resolvedores
+más recientes my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
     nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
     resolve_retries 3
@@ -128,16 +137,16 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-# This declares the endpoint where your Agents connects for
-# sending Logs (e.g the value of "logs.config.logs_dd_url")
+# Esto declara el endpoint al que se conectan tus Agents para
+# enviar logs (p. ej. el valor de "logs.config.logs_dd_url")
 frontend logs_frontend
     bind *:10514
     mode tcp
     option tcplog
     default_backend datadog-logs
-# This is the Datadog server. In effect any TCP request coming
-# to the forwarder frontends defined above are proxied to
-# Datadog's public endpoints.
+# Este es el servidor Datadog. En efecto, toda solicitud TCP que llegue
+# a los frontends del forwarder definidos anteriormente se envían mediante proxy
+# a endpoints públicos de Datadog.
 backend datadog-logs
     balance roundrobin
     mode tcp
@@ -158,12 +167,12 @@ Una vez que se haya realizado la configuración de HAProxy, puedes volver a carg
 {{% site-region region="eu" %}}
 
 ```conf
-# Basic configuration
+# Configuración básica
 global
     log 127.0.0.1 local0
     maxconn 4096
     stats socket /tmp/haproxy
-# Some sane defaults
+# Algunos elementos predeterminados sensatos
 defaults
     log     global
     option  dontlognull
@@ -172,18 +181,18 @@ defaults
     timeout client 5s
     timeout server 5s
     timeout connect 5s
-# This declares a view into HAProxy statistics, on port 3833
-# You do not need credentials to view this page and you can
-# turn it off once you are done with setup.
+# Esto declara una vista de las estadísticas de HAProxy en el puerto 3833
+# No necesitas credenciales para visualizar esta página
+# y puedes apagarla una vez que finalices la configuración.
 listen stats
     bind *:3833
     mode http
     stats enable
     stats uri /
-# This section is to reload DNS Records
-# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
-# For HAProxy 1.8 and newer
-resolvers my-dns
+# Esta sección es para la recarga de registros DNS
+# Sustituye <DNS_SERVER_IP> y <DNS_SECONDARY_SERVER_IP> por las direcciones IP de tu servidor DNS.
+# Para HAProxy v1.8 y resolvedores
+más recientes my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
     nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
     resolve_retries 3
@@ -192,20 +201,21 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-# This declares the endpoint where your Agents connects for
-# sending Logs (e.g the value of "logs.config.logs_dd_url")
+# Esto declara el endpoint al que se conectan tus Agents para
+# enviar logs (p. ej. el valor de "logs.config.logs_dd_url")
 frontend logs_frontend
     bind *:10514
     mode tcp
+    option tcplog
     default_backend datadog-logs
-# This is the Datadog server. In effect any TCP request coming
-# to the forwarder frontends defined above are proxied to
-# Datadog's public endpoints.
+# Este es el servidor Datadog. En efecto, toda solicitud TCP que llegue
+# a los frontends del forwarder definidos anteriormente se envían mediante proxy
+# a endpoints públicos de Datadog.
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
+    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
 Descarga el certificado con el siguiente comando:
@@ -215,7 +225,7 @@ Descarga el certificado con el siguiente comando:
 
 Si todo sale bien, el archivo se ubicará en `/etc/ssl/certs/ca-bundle.crt` para CentOS, Redhat.
 
-Una vez que se haya realizado la configuración de HAProxy, puedes volver a cargarlo o reiniciar HAProxy. **Se recomienda tener una tarea `cron` que vuelve a cargar HAProxy cada 10 minutos** (por ejemplo, `service haproxy reload`) para forzar una actualización de la caché DNS de HAProxy, en caso de que `app.datadoghq.com` conmute a otra IP.
+Una vez que se haya realizado la configuración de HAProxy, puedes volver a cargarlo o reiniciar HAProxy. **Se recomienda tener una tarea `cron` que vuelve a cargar HAProxy cada 10 minutos** (por ejemplo, `service haproxy reload`) para forzar una actualización de la caché DNS de HAProxy, en caso de que `app.datadoghq.eu` conmute a otra IP.
 
 {{% /site-region %}}
 
@@ -250,10 +260,10 @@ pid /run/nginx.pid;
 events {
     worker_connections 1024;
 }
-# TCP Proxy for Datadog Agent
+# Proxy TCP para el Datadog Agent
 stream {
     server {
-        listen 10514; #listen for logs
+        listen 10514; #escuchar logs
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.com:10516;
     }
@@ -271,12 +281,12 @@ pid /run/nginx.pid;
 events {
     worker_connections 1024;
 }
-# TCP Proxy for Datadog Agent
+# Proxy TCP para el Datadog Agent
 stream {
     server {
-        listen 10514; #listen for logs
+        listen 10514; #escuchar logs
         proxy_ssl on;
-        proxy_pass agent-intake.logs.datadoghq.eu:443;
+        proxy_pass agent-intake.logs.datadoghq.com:10516;
     }
 }
 ```
@@ -284,6 +294,7 @@ stream {
 {{% /site-region %}}
 {{% /tab %}}
 {{< /tabs >}}
+{{% /site-region %}}
 
 
 ## Referencias adicionales

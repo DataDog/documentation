@@ -11,7 +11,7 @@ datadog:
 
 `<OPW_HOST>` is the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
 
-For Kubernetes installs, you can use the internal DNS record of the Observability Pipelines Worker service. For example: `opw-observability-pipelines-worker.default.svc.cluster.local`.
+For Kubernetes installs, you can use the internal DNS record of the Observability Pipelines Worker service. For example: `http://opw-observability-pipelines-worker.default.svc.cluster.local:<PORT>`.
 
 [1021]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 [1022]: https://docs.datadoghq.com/agent/guide/environment-variables/

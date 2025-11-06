@@ -28,4 +28,4 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 {{% observability_pipelines/aws_authentication/amazon_s3_source/permissions %}}
 
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/

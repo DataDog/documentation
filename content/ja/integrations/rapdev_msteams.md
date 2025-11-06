@@ -27,13 +27,13 @@ assets:
   logs:
     source: rapdev_msteams
   monitors:
-    '[Microsoft Teams] Poor Call Session Audio Performance Qualifier A': assets/monitors/performance_audio_packet_utilization.json
-    '[Microsoft Teams] Poor Call Session Audio Performance Qualifier B': assets/monitors/performance_audio_rtt.json
-    '[Microsoft Teams] Poor Call Session Audio Performance Qualifier C': assets/monitors/performance_audio_packet_loss.json
-    '[Microsoft Teams] Poor Call Session Audio Performance Qualifier D': assets/monitors/performance_audio_average_jitter.json
-    '[Microsoft Teams] Poor Call Session Video Performance Qualifier A': assets/monitors/performance_video_frame_loss_percentage.json
-    '[Microsoft Teams] Poor Call Session Video Performance Qualifier B': assets/monitors/performance_video_average_frame_rate.json
-    '[Microsoft Teams] Poor Call Session Video Performance Qualifier C': assets/monitors/performance_video_fecplr.json
+    Call session packet utilization is poor: assets/monitors/performance_audio_packet_utilization.json
+    Network jitter is too high: assets/monitors/performance_audio_average_jitter.json
+    Packet loss rate is too high: assets/monitors/performance_audio_packet_loss.json
+    Roundtrip time is too high: assets/monitors/performance_audio_rtt.json
+    Video frame loss is too high: assets/monitors/performance_video_frame_loss_percentage.json
+    Video frame rate is too low: assets/monitors/performance_video_average_frame_rate.json
+    Video packet loss is too high after packet corrections: assets/monitors/performance_video_fecplr.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -43,7 +43,7 @@ author:
 categories:
 - コラボレーション
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -120,9 +120,9 @@ Microsoft Teams インテグレーションは、Active Directory テナント�
 ## サポート
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メール: support@rapdev.io
+ - メール: support@rapdev.io 
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - 電話: 855-857-0222
+ - 電話: 855-857-0222 
 
 ---
 
@@ -132,4 +132,4 @@ Microsoft Teams インテグレーションは、Active Directory テナント�
 
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-msteams" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-msteams" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -1,4 +1,7 @@
 ---
+description: Aprende a crear alertas de clúster que avisen cuando un porcentaje de
+  grupos cumple ciertas condiciones, como por ejemplo cuando el 40% de los hosts tienen
+  un uso elevado de CPU.
 further_reading:
 - link: /monitors/
   tag: Documentación
@@ -22,12 +25,9 @@ En este ejemplo, quieres recibir una notificación cuando el 40 por ciento de lo
 * Utiliza la función `min_cutoff` para contabilizar el número de hosts que tienen un uso de CPU superior al 50 por ciento.
 * Utiliza la función `count_nonzero` para contabilizar el número total de hosts.
 * Divide uno por el otro para obtener el porcentaje resultante de hosts con un uso de CPU superior al 50 por ciento.
-
-{{< img src="monitors/faq/cluster-condition.png" alt="cluster-alert-condition" >}}
-
 * Luego, establece la condición para generar una alerta si el porcentaje de hosts que tienen esa condición alcanza el 40 por ciento.
 
-{{< img src="monitors/faq/cluster-trigger.png" alt="cluster-alert-trigger" >}}
+{{< img src="/monitors/guide/create_cluster_alert/cluster_alert_config.png" alt="Monitoriza la configuración en busca de alertas de clúster para recibir una notificación cuando el 40 por ciento de los hosts tenga un uso de la CPU por encima del 50 por ciento" style="width:100%;" >}}
 
 Este monitor rastrea el porcentaje de hosts que han tenido un uso de CPU superior al 50 por ciento durante los últimos diez minutos y genera un notificación si más del 40 por ciento de esos hosts cumplen la condición especificada.
 

@@ -138,7 +138,7 @@ Goroutines
 : A snapshot of the number of goroutines currently executing the same functions (both on-CPU and waiting off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and the number of goroutines they use. Applications that are extremely latency-sensitive and use a large number of goroutines (> 10.000) should be aware that enabling this profile requires stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for around `1µsec` per goroutine. Typical applications with a p99 latency SLO of around `100ms` can generally ignore this warning. See Datadog's [Goroutine Profiling in Go][2] research for more in-depth information.
 
 #### Delta profiles
-<div class="alert alert-info"><strong>Note</strong>: In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated Memory, Mutex, and Block metrics are shown as measures <em>accumulated since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. Delta profiling is on by default. Profiler version <code>1.35.0</code> allows you to disable delta profiles using the <code>WithDeltaProfiles</code> option. <br/><br/>As of profiler version <code>1.37.0</code>, accumulated profiles are no longer uploaded when delta profiling is enabled to reduce upload bandwidth usage. <a href="/help/">Contact Support</a> to discuss your use case if you rely on the full accumulated profiles.</div>
+<div class="alert alert-info">In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated Memory, Mutex, and Block metrics are shown as measures <em>accumulated since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. Delta profiling is on by default. Profiler version <code>1.35.0</code> allows you to disable delta profiles using the <code>WithDeltaProfiles</code> option. <br/><br/>As of profiler version <code>1.37.0</code>, accumulated profiles are no longer uploaded when delta profiling is enabled to reduce upload bandwidth usage. <a href="/help/">Contact Support</a> to discuss your use case if you rely on the full accumulated profiles.</div>
 
 
 [1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
@@ -181,12 +181,14 @@ Once profiling is enabled, the following profile types are collected for [suppor
 
 CPU
 : The time each function spent running on the CPU, including JavaScript and native code.<br />
+: CPU profiling is available on Linux and macOS. The feature is not available on Windows.
 
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
 Heap Live Size
 : The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: Deep stack traces in Heap Live Size profiles are truncated to 64 frames.
 
 [1]: /profiler/enabling/nodejs/#requirements
 {{< /programming-lang >}}
@@ -203,18 +205,18 @@ CPU (v2.15+)
 Thrown Exceptions (v2.31+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
-Allocations (in beta, v2.18+)
+Allocations (v3.28+)
 : The number and size of allocated objects by each method, as well as their type.
 For .NET Framework, the size is not available.<br />
-_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+_
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+, but Datadog recommends .NET 10+ for more accurate sampling.
 
 Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
 _Requires: .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
-Live Heap (in beta, v2.22+)
+Live Heap (v3.28+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
-_Requires: .NET 7+_
+_Requires: .NET 7+ but Datadog recommends .NET 10+ for more accurate sampling.
 
 Outgoing HTTP requests (in Timeline) (in beta v3.19+)
 : Start and end of outgoing HTTP requests with the duration of the different phases (DNS, security handshake, socket, request/response) and possible unexpected redirections.<br />
@@ -228,7 +230,7 @@ Garbage Collector CPU consumption (v3.19+)
 : The time garbage collector's threads spent running on the CPU.<br />
 _Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
 
-Note: **Allocations** and **Live Heap** profiling are in beta until .NET 10, where required better statistical allocation sampling will be available.
+**Note**: Before .NET 10, **Allocations** and **Live Heap** profiling might show bigger objects more than smaller ones due to the sampling algorithm used by the .NET runtime. Datadog recommends using .NET 10+ for more statistically correct results. 
 
 
 [1]: /profiler/enabling/dotnet/#requirements

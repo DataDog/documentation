@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - C#
+  - APM
 aliases:
 - /es/tracing/trace_collection/otel_instrumentation/dotnet/
 - /es/tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet
@@ -123,12 +127,12 @@ catch(Exception e)
 
 Puedes añadir eventos de tramos utilizando la API `AddEvent`. Este método requiere un `ActivityEvent` creado con un parámetro de `name` y acepta opcionalmente los parámetros `attributes` y `timestamp`. El método crea un nuevo evento de tramo con las propiedades especificadas y lo asocia al tramo correspondiente.
 
-- **Name** (Nombre) [_obligatorio_]: una cadena que representa el nombre del evento.
+- **Nombre** [_obligatorio_]: una cadena que representa el nombre del evento.
 - **Marca de tiempo** [_opcional_]: una marca de tiempo UNIX que representa la hora en que se produjo un evento. Se espera un objeto `DateTimeOffset`.
 - **Atributos** [_opcional_]: cero o más pares clave-valor con las siguientes propiedades:
   - La clave debe ser una cadena no vacía.
   - El valor puede ser:
-    - Un tipo primitivo: cadena, booleano o número.
+    - Un tipo primitivo: string, Boolean o number.
     - Una matriz homogénea de valores de tipo primitivo (por ejemplo, una matriz de cadenas).
   - Las matrices anidadas y las matrices que contienen elementos de distintos tipos de datos no están permitidas.
 

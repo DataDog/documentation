@@ -149,7 +149,7 @@ Supported packages have changed between v1 and v2 of the Go tracer.
 {{% /tab %}}
 {{% /tabs %}}
 
-[1]: /agent/remote_config/#enabling-remote-configuration
+[1]: /tracing/guide/remote_config
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://github.com/DataDog/dd-trace-go#support-policy
 [4]: https://github.com/DataDog/dd-trace-go#support-maintenance

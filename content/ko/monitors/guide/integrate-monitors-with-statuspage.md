@@ -44,7 +44,7 @@ Statuspage 알림을 트리거하는 [메트릭 모니터][8]을 생성하는 �
 1. [**모니터** > **새 모니터**][9]로 이동한 다음 **메트릭**을 클릭합니다.
 2. [메트릭 모니터 설명서][8]를 참조해 탐지 방법을 선택하고, 메트릭을 정의하고, 알림 조건과 고급 모니터 옵션을 설정하세요.
 3. 모니터 이름을 커스터마이즈하여 테스트 상태에 따라 `UP` 또는 `DOWN`을 반환하도록 합니다. 예: `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`
-4. **팀에 알리기** 섹션에서 메시지의 `@custom-statuspage-email@notifications.statuspage.io` 등 생성된 이메일 주소를 추가합니다. 이를 통해 자동으로 **재알림** 위에 있는 `Notify your services and your team members` 필드를 채울 수 있습니다.
+4. **Configure notifications and automations** 섹션에서 메시지의 `@custom-statuspage-email@notifications.statuspage.io` 등 생성된 이메일 주소를 추가합니다. 이를 통해 **Renotification** 위에 있는 `Notify your services and your team members` 필드를 자동으로 채울 수 있습니다.
 5. 모니터 알림 섹션을 작성하고 `Shopist Checkout Functionality` 등 모니터 이름에 요약을 추가합니다.
 6. 모니터 재알림 조건을 설정하고 `service:status-page` 등 태그를 추가하세요.
 7. 팀을 선택하고 모니터에 우선순위를 할당하세요.

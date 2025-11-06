@@ -1,5 +1,6 @@
 ---
 title: Amazon ECS
+description: Install and configure the Datadog Agent on Amazon Elastic Container Service
 aliases:
   - /agent/amazon_ecs/
 further_reading:
@@ -29,11 +30,21 @@ algolia:
 
 Amazon ECS is a scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
 
+To configure Amazon ECS with Datadog, you can either use **Fleet Automation** or **install manually**. If you prefer to install manually, run one Agent container per Amazon EC2 host by creating a Datadog Agent task definition and deploying it as a daemon service. Each Agent then monitors the other containers on its host. See the [Install manually](#install-manually) section for more details.
+
+
+## Fleet Automation setup
+Follow the [in-app installation guide in Fleet Automation][32] to complete setup on ECS. After completing the outlined steps in the in-app guide, [Fleet Automation][33] generates a ready-to-use task definition or CloudFormation template, with your API key pre-injected.
+
+{{< img src="agent/basic_agent_usage/ecs_install_page.png" alt="In-app installation steps for the Datadog Agent on ECS." style="width:90%;">}}
+
 <div class="alert alert-info">
 If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.
 </div>
 
-## Setup
+<br>
+
+## Manual setup
 
 To monitor your ECS containers and tasks, deploy the Datadog Agent as a container **once on each EC2 instance** in your ECS cluster. You can do this by creating a task definition for the Datadog Agent container and deploying it as a daemon service. Each Datadog Agent container then monitors the other containers on its respective EC2 instance.
 
@@ -212,7 +223,7 @@ To collect Live Process information for all your containers and send it to Datad
 
 #### Cloud Network Monitoring
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 This feature is only available for Linux.
 </div>
 
@@ -355,3 +366,5 @@ Need help? Contact [Datadog support][11].
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /network_monitoring/network_path
+[32]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
+[33]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs

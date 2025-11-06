@@ -92,6 +92,13 @@ It means that you are either:
 - running your CI pipeline with a Linux distribution that does not rely on the glibc (such as Alpine Linux). Instead,
   run your CI pipeline with a distribution that supports the latest version of the glibc (such as the stable version of Ubuntu).
 
+### Services or teams in the SAST explorer or Repositories view are not updating
+
+Results for services and teams in Static Code Analysis (SAST) are based on the `entity.datadog.yml` or `CODEOWNERS` files from your repository's default branch.
+If you've made changes to these files in a feature branch, those updates are not reflected in the vulnerability for that branch.
+
+After updating either file on your default branch, it may take up to six hours for the changes to appear in subsequent scan results.
+
 ### Results are not being surfaced in the Datadog UI
 
 **If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
@@ -164,6 +171,7 @@ Datadog-hosted SCA scans do **not** support repositories that:
 - Use [Git Large File Storage][18] (`git-lfs`)
 - Contain invalid or reserved file paths (such as `/` or `\\`)
 - Contain file paths with parent directory traversal (`..`)
+- Contain file names longer than 255 characters
 
 If any of these conditions apply to your repository, and you cannot update your repository to account for these constraints, [set up the analysis in a CI pipeline][19] to run SCA and upload results to Datadog.
 
@@ -183,13 +191,13 @@ There are a series of steps that must run successfully for vulnerability informa
 
 ### Confirming runtime detection is enabled
 
-If you have enabled runtime vulnerability detection on your services, you can use the metric `datadog.apm.appsec_host` to check if SCA is running.
+If you have enabled Runtime Software Composition Analysis (SCA) on your services, you can use the metric `datadog.appsec.risk_management.sca.host_instance` to check if it is running.
 
 1. Go to **Metrics > Summary** in Datadog.
-2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
+2. Search for the metric `datadog.appsec.risk_management.sca.host_instance`. If the metric doesn't exist, then there are no services running Runtime Software Composition Analysis (SCA). If the metric exists, the services are reported with the metric tags `host` and `service`.
 3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
 
-If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
+If you are not seeing `datadog.appsec.risk_management.sca.host_instance`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
 Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
@@ -206,13 +214,23 @@ Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRAC
 ### Confirm IAST is enabled
 Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corresponding system property for your language is enabled.
 
+If you have enabled Runtime Code Analysis (IAST) on your services, you can use the metric `datadog.appsec.risk_management.iast.host_instance` to check if it is running.
+
+1. Go to **Metrics > Summary** in Datadog.
+2. Search for the metric `datadog.appsec.risk_management.iast.host_instance`. If the metric doesn't exist, then there are no services running Runtime Code Analysis (IAST). If the metric exists, the services are reported with the metric tags `host` and `service`.
+3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
+
+If you are not seeing `datadog.appsec.risk_management.iast.host_instance`, check the [in-app instructions][20] to confirm that all steps for the initial setup are complete.
+
+Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+
 ### Issues with Python and Flask instrumentation
 If you're running a Flask application, ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. For more information, see the [Flask integration documentation][17].
 
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
 To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
-- If you are scanning GitHub repositories through Datadog-hosted scanning, navigate to [**Code Security > Setup**][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
+- If you are scanning your repositories through Datadog-hosted scanning, navigate to [**Code Security > Setup**][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
 - If you are scanning source code repositories through your CI pipelines, remove the relevant job(s) from your CI pipelines.
 
 ### Disabling runtime SCA on your services
@@ -223,20 +241,34 @@ SCA can be enabled on your running services using one of the following two metho
 
 To disable SCA, you must use the *same method* you used to enable SCA.
 
-**Note**: If you enabled SCA manually, you must disable it manually. You cannot disable it using the UI.
+{{< tabs >}}
+{{% tab "Enabled in the UI" %}}
+<div class="alert alert-danger">
+If you enabled SCA through the <code>DD_APPSEC_SCA_ENABLED</code> environment variable, you cannot disable it using the UI.
+</div>
 
 To disable SCA through the UI, you can:
 
-* Go to the [Code Security Setup page][17] and select **Activate runtime detection of library vulnerabilities"**. In this table, you can disable services that were previously activated.
+* Go to the [Code Security Setup page][1] and select **Activate runtime detection of library vulnerabilities"**. In this table, you can disable services that were previously activated.
 
 or
 
-* Go to [Services][15], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
+* Go to [Services][2], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on x services**.
 
-To disable SCA manually:
+[1]: https://app.datadoghq.com/security/configuration/code-security/setup
+[2]: https://app.datadoghq.com/security/code-security/inventory/services
+{{% /tab %}}
+{{% tab "Enabled using environment variable" %}}
+<div class="alert alert-danger">
+If you enabled SCA through the UI, you cannot disable it by removing the <code>DD_APPSEC_SCA_ENABLED</code> environment variable.
+</div>
 
 * Remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP applications.
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Disabling Runtime Code Analysis (IAST)
 
@@ -253,8 +285,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
 [12]: https://app.datadoghq.com/security/appsec/vm/library
 [13]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/diff-aware.md
-[15]: https://app.datadoghq.com/security/code-security/inventory/services
 [16]: https://app.datadoghq.com/services?&lens=Security
-[17]: https://app.datadoghq.com/security/configuration/code-security/setup
 [18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 [19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/?tab=datadog#running-options
+[20]: /security/configuration/code-security/setup?steps=iast

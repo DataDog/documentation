@@ -9,7 +9,7 @@ further_reading:
 
 To verify you have access to JMX, test using JConsole or equivalent if possible. If you're unable to connect using JConsole [this article][1] may help to get you sorted. Also, if the metrics listed in your YAML aren't 1:1 with those listed in JConsole you'll need to correct this.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For all versions of <strong>Agent v5.32.8 or greater</strong>, the <code>jmxterm</code> JAR is not shipped with the agent. To download and use <code>jmxterm</code>, see the <a href="https://github.com/jiaqi/jmxterm">upstream project</a>. Change <code>/opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar</code> in the examples below to the <code>jmxterm</code> JAR path you downloaded from the upstream project.
 </div>
 

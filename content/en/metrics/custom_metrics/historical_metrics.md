@@ -18,7 +18,7 @@ further_reading:
 {{< jqmath-vanilla >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">Historical metrics ingestion is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Historical metrics ingestion is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 ## Overview
@@ -455,10 +455,12 @@ Historical Metrics are counted and billed as indexed custom metrics. Billable cu
 
 The following example assumes:
 - 3000 unique tag-value combinations
+- 1500 real-time metrics
+- 1500 historical metrics 
 - 720 hours in the month (30 days)
 - Custom metric cost of $5 per 100 metrics
 
-$(3000 / 720) ⋅ (5 / 100) = \\$0.21$
+$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21$
 
 Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
 

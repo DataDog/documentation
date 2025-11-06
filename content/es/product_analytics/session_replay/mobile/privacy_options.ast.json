@@ -1,0 +1,143 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "e516d0bca63367c3cdea9592e5e874ce": {
+            "string": "Opciones de privacidad de Mobile Session Replay"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "44bba57ecf1000d4c26a1710931ea04a": {
+            "string": "Configura opciones de privacidad para Mobile Session Replay."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "/real_user_monitoring/session_replay/mobile",
+            "text": {
+              "itemTranslationData": {
+                "ff298467956d0977568a022601ce36b1": {
+                  "string": "Session Replay para móviles"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "/real_user_monitoring/session_replay/mobile/app_performance",
+            "text": {
+              "itemTranslationData": {
+                "4c2c25fadc44b452805930d66b92e081": {
+                  "string": "Cómo afecta Mobile Session Replay al rendimiento de las aplicaciones"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
+            "text": {
+              "itemTranslationData": {
+                "e8c885469af2de3bdc7fc4a10ed7bcfb": {
+                  "string": "Configuración de Mobile Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          },
+          "3": {
+            "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
+            "text": {
+              "itemTranslationData": {
+                "2b6f1133cdf7f0450b0e81404e234b74": {
+                  "string": "Solución de problemas de Mobile Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          },
+          "4": {
+            "link": "/real_user_monitoring/session_replay",
+            "text": {
+              "itemTranslationData": {
+                "8ec0e8f790e9b74cb7203f0fb5efd79b": {
+                  "string": "Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "children": {
+    "listTranslationData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "attributes": {
+          "file": "real_user_monitoring/session_replay/mobile/privacy_options.mdoc.md"
+        },
+        "children": {
+          "listTranslationData": {}
+        },
+        "type": "tag",
+        "tag": "partial",
+        "annotations": {
+          "listTranslationData": {
+            "0": {
+              "type": "attribute",
+              "name": "file",
+              "value": "real_user_monitoring/session_replay/mobile/privacy_options.mdoc.md"
+            }
+          }
+        },
+        "slots": {},
+        "location": "line 25-26"
+      }
+    }
+  },
+  "type": "document",
+  "annotations": {
+    "listTranslationData": {}
+  },
+  "slots": {}
+}

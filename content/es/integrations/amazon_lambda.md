@@ -36,7 +36,7 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-<div class="alert alert-warning">Esta página se limita a la documentación para la ingesta de métricas AWS Lambda desde Amazon CloudWatch. Ppara recopilar telemetría directamente de tus funciones Lambda en tiempo real, consulta la <a href="/serverless">documentación de Datadog serverless</a>.</div>
+<div class="alert alert-danger">Esta página se limita a la documentación para la ingesta de métricas AWS Lambda desde Amazon CloudWatch. Ppara recopilar telemetría directamente de tus funciones Lambda en tiempo real, consulta la <a href="/serverless">documentación de Datadog serverless</a>.</div>
 
 ## Información general
 
@@ -69,7 +69,7 @@ Una vez que lo hagas, visualiza todos tus funciones Lambda en la [vista de Datad
 
 ## Datos recopilados
 
-<div class="alert alert-warning">Cuando se utilizan extensiones AWS Lambda, la métrica de <em>duración</em> informada por AWS incluye la <em>post_runtime_extensions_duration</em> consumida por las extensiones Lambda <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">que realizan actividades después de que se devuelve la respuesta de la función</a>. Para monitorizar el rendimiento real de la función, utiliza <em>duration - post_runtime_extensions_duration</em> o la <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">métrica Datadog mejorada</a> <em>aws.lambda.enhanced.runtime_duration</em>.</div>
+<div class="alert alert-danger">Cuando se utilizan extensiones AWS Lambda, la métrica de <em>duración</em> informada por AWS incluye la <em>post_runtime_extensions_duration</em> consumida por las extensiones Lambda <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">que realizan actividades después de que se devuelve la respuesta de la función</a>. Para monitorizar el rendimiento real de la función, utiliza <em>duration - post_runtime_extensions_duration</em> o la <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">métrica Datadog mejorada</a> <em>aws.lambda.enhanced.runtime_duration</em>.</div>
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, incluyendo, entre otras, el nombre de la función, los grupos de seguridad, etc.
 

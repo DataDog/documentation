@@ -1,5 +1,6 @@
 ---
 title: IoT Agent
+description: "Monitor IoT devices and embedded applications with the optimized Datadog IoT Agent for resource-constrained environments."
 further_reading:
   - link: "/getting_started/agent/"
     tag: "Documentation"

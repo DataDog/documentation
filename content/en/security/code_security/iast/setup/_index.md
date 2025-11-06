@@ -514,7 +514,7 @@ Versions 22 and above are supported as in Preview.
 
 
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /remote_configuration
 [3]: /security/code_security/software_composition_analysis/
 
 {{% /collapse-content %}}
@@ -609,7 +609,7 @@ These are supported on the following architectures:
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /agent/remote_config/#enabling-remote-configuration
+[3]: /remote_configuration#enabling-remote-configuration
 
 
 {{% /collapse-content %}}
@@ -669,6 +669,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | Framework | Versions | Runtime Code Analysis (IAST)     |
 |-----------|----------|----------------------------------|
 | express   | >=4      | <i class="icon-check-bold"></i>  |
+| fastify   | >=2      | <i class="icon-check-bold"></i>  |
 | nextjs    | >=11.1   |                                  |
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities or for your Node.js framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -719,7 +720,7 @@ Datastore tracing provides:
 | [sequelize][42]          | `>=4`     | <i class="icon-check-bold"></i>        |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver
@@ -774,8 +775,8 @@ Two release branches are supported:
 
 | Release    | Support level                              | Minimum Datadog Agent |
 |------------|--------------------------------------------|-----------------------|
-| `>=3.0,<4` | General Availability   7.28                |
-| `>=2.0,<3` | Maintenance (End of Life October 31, 2025) | 7.28                  |
+| `>=3.0,<4` | General Availability                       | 7.28                  |
+| `>=2.0,<3` | End of Life                                | 7.28                  |
 |    `<2`    | End of Life                                |                       |
 
 And the library supports the following runtimes:
@@ -800,10 +801,11 @@ And the library supports the following runtimes:
 
 #### Supported frameworks
 
-| Framework                | Versions    | Runtime Code Analysis (IAST)                |
-| ------------------------ | ----------- | ------------------------------------------- |
-| Django                   | 1.8         |  <i class="icon-check-bold"></i>            |
-| Flask                    | 0.10        |  <i class="icon-check-bold"></i>            |
+| Framework   | Versions     | Runtime Code Analysis (IAST)    |
+|-------------|--------------|---------------------------------|
+| Django      | 1.8          | <i class="icon-check-bold"></i> |
+| FastAPI     | 0.86         | <i class="icon-check-bold"></i> |
+| Flask       | 0.10         | <i class="icon-check-bold"></i> |
 
 Support for query strings is not available for Flask.
 
@@ -823,7 +825,7 @@ Datastore tracing provides:
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
 
 [1]: /tracing/trace_collection/compatibility/python/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /remote_configuration#enabling-remote-configuration
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
 

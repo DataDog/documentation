@@ -3,8 +3,8 @@ aliases:
 - /ko/tracing/trace_collection/otel_instrumentation/php/
 - /ko/tracing/trace_collection/custom_instrumentation/otel_instrumentation/php
 code_lang: otel
-code_lang_weight: 2
-description: OpenTelemetry API를 사용해 PHP 애플리케이션을 계측하고 트레이스를 Datadog에 전송하세요.
+code_lang_weight: 1
+description: OpenTelemetry API로 PHP 애플리케이션을 계측하여 Datadog로 트레이스를 전송합니다.
 further_reading:
 - link: tracing/glossary/
   tag: 설명서
@@ -101,6 +101,52 @@ $span->end();
 
 ```
 
+## 스팬 이벤트 추가하기
+
+<div class="alert alert-info">스팬 이벤트를 추가하려면 SDK 버전 1.3.0 이상이 필요합니다.</div>
+
+`addEvent` API를 사용하여 스팬 이벤트를 추가할 수 있습니다. 이 메서드에는 `name` 파라미터가 필요하며 선택적으로 `attributes` 및 `timestamp` 파라미터를 허용합니다. 이 메서드는 지정된 속성을 가진 새 스팬 이벤트를 생성하고 해당 스팬 이벤트와 연결합니다.
+
+- **이름** [_필수_]: 이벤트의 이름을 나타내는 문자열입니다.
+- **속성** [_옵션_]: 다음 속성을 가진 0개 이상의 키-값 쌍입니다.
+  - 키는 비어 있지 않은 문자열이어야 합니다.
+  - 값은 둘 중 하나가 될 수 있습니다.
+    - 기본 유형: 문자열, 부울, 또는 숫자
+    - 원시 타입 값의 균일한 배열(예: 문자열 배열)입니다.
+  - 중첩 배열 및 서로 다른 데이터 유형의 요소를 포함하는 배열은 허용되지 않습니다.
+- **타임스탬프** [_옵션_]: 이벤트 발생 시간을 나타내는 UNIX 타임스탬프입니다. `nanoseconds`가 예상됩니다.
+
+다음 예는 스팬에 이벤트를 추가하는 다양한 방법을 보여줍니다.
+
+```php
+$span->addEvent("Event With No Attributes");
+$span->addEvent(
+    "Event With Some Attributes", 
+    [ 
+        'int_val' => 1, 
+        'string_val' => "two", 
+        'int_array' => [3, 4], 
+        'string_array' => ["5", "6"],
+        'bool_array' => [true, false]
+    ]
+);
+```
+
+자세한 내용은 [OpenTelemetry][14] 사양을 참조하세요.
+
+### 예외 사항 기록
+
+예외를 기록하려면 `recordException` API를 사용하세요. 이 메서드는 `exception` 파라미터가 필요하며, 선택적으로 UNIX `timestamp` 파라미터를 허용합니다. 표준화된 예외 속성을 포함하는 새 스팬 이벤트를 생성하고 해당 스팬과 연결합니다.
+
+다음 예에서는 예외를 기록하는 다양한 방법을 보여줍니다.
+
+```php
+$span->recordException(new \Exception("Error Message"));
+$span->recordException(new \Exception("Error Message"), [ "status" => "failed" ]);
+```
+
+자세한 내용은 [OpenTelemetry][15] 사양을 읽어보세요.
+
 ## 활성 스팬에 액세스(스팬(span))
 
 현재 활성화된 스팬(span) 에 액세스하려면:
@@ -116,3 +162,5 @@ $span->end();
 [5]: https://opentelemetry.io/docs/instrumentation/php/manual/
 [6]: /ko/tracing/trace_collection/dd_libraries/php#getting-started
 [13]: https://opentelemetry.io/docs/languages/php/instrumentation/#instrumentation-setup
+[14]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[15]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception

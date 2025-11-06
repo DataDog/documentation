@@ -28,17 +28,19 @@ The following operating systems and architectures are compatible:
 
 <div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#language-specific-requirements">Language specific requirements</a>.</div>
 
-## Platforms
+## Deployment environments
 
-The following container platforms are compatible:
+The following environments are compatible:
 
-| Environment     | Requirements & Limitations                             | Support |
-|-----------------|--------------------------------------------------------|---------|
-| Linux           | Not supported on hardened environments such as SELinux | GA      |
-| Docker on Linux |                                                        | GA      |
-| Kubernetes      | [Datadog Admission Controller][1] enabled              | GA |
+| Environment     | Requirements & Limitations                              | Support |
+|-----------------|---------------------------------------------------------|---------|
+| Linux           | Not supported on hardened environments such as SELinux. | GA      |
+| Docker on Linux |                                                         | GA      |
+| Kubernetes      | Requires [Datadog Admission Controller][1] to be enabled. <br>Only supports Linux nodepools     | GA      |
+| Windows IIS     | Requires Agent v7.67.1+ and Tracer v3.19.0+.<br>Only .NET applications running in IIS are supported.     | GA      |
 
-### Platform-specific requirements
+
+### Environment-specific requirements
 
 #### Linux virtual machines (VMs)
 
@@ -101,12 +103,24 @@ The following section provides additional notes, troubleshooting guidance, and k
 
 {{< programming-lang lang="java" >}}
 
+### Limitations
+
+By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or low-value traces. These exclusions are defined in the [Java tracer denylist][1]. If your workload is included, the injector skips attaching the Java agent.
+
 ### Troubleshooting
 
-**Environment Variable Length**: If your application uses extensive command-line options or environment variables, you might encounter initialization failures. This typically occurs when you have many JVM arguments or other startup configurations. To resolve this:
+**Environment variable length**: If your application uses extensive command-line options or environment variables, you might encounter initialization failures. This typically occurs when you have many JVM arguments or other startup configurations. To resolve this:
   - Minimize non-essential JVM arguments
   - Consider moving some configurations to a `.properties` file
   - Check application logs for specific initialization errors
+
+### Known warnings
+
+When using SSI for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. These warnings can be suppressed with the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables. See [JEP 472][2] and [JEP 498][3] for more information.
+
+[1]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
+[2]: https://openjdk.org/jeps/472
+[3]: https://openjdk.org/jeps/498
 
 {{< /programming-lang >}}
 
@@ -121,8 +135,6 @@ Single Step Instrumentation requires Python 3.7+, which is available by default 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
-
-<div class="alert alert-warning">Using Single Step Instrumentation with Ruby applications is in Preview.</div>
 
 ### Troubleshooting
 

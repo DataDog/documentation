@@ -112,5 +112,5 @@ Datadog does not officially support any early-access versions of Java.
 | MongoDB                 | 3.0-4.0+ |                                  |
 
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /remote_configuration
 [3]: /security/code_security/software_composition_analysis/

@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Prometheus and OpenMetrics metrics collection
+description: Collect Prometheus and OpenMetrics from Kubernetes workloads using the Datadog Agent with Autodiscovery
 aliases:
     - /getting_started/prometheus
     - /getting_started/integrations/prometheus

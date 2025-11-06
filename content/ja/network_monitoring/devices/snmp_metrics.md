@@ -1,7 +1,4 @@
 ---
-aliases:
-- /ja/network_performance_monitoring/devices/setup/
-- /ja/network_monitoring/devices/setup/
 further_reading:
 - link: /network_monitoring/devices/profiles
   tag: ドキュメント
@@ -12,12 +9,26 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: GitHub
   text: Datadog での SNMP モニタリング
-title: ネットワークデバイスから SNMP メトリクスを収集
+title: SNMP メトリクス
 ---
 
 ## インストール
 
-ネットワークデバイスモニタリングは [Datadog Agent][1] パッケージに含まれている SNMP インテグレーションに依存します。Agent v7.32+ を使用していることを確認してください。追加のインストールは必要ありません。
+ネットワークデバイスモニタリングは [Datadog Agent][1] パッケージに含まれている SNMP インテグレーションに依存しており、SNMP の 3 つのバージョン (`SNMPv1`、`SNMPv2`、`SNMPv3`) をすべてサポートしています。検出時には、SNMP ポート (デフォルトは 161) がポーリングされます。応答があり、一致するプロファイルがある場合、そのデバイスは検出済みと見なされます。
+
+## 前提条件
+
+Agent v7.32+
+
+## 仕組み
+
+次の図は、Datadog Agent と監視対象デバイス間のデフォルトのポートおよびプロトコルを示しています。SNMP メトリクスについては、Datadog Agent がオートディスカバリー、または手動のデバイス IP 構成に基づいてデバイスをポーリングします。NDM で構成され、オンプレミスまたはクラウドにデプロイされた Datadog Agent は、ネットワークから収集したデバイスおよびネットワークデータを統合し、ポート `443` の HTTPS 経由で Datadog に送信します。これにより、メトリクス、ログ、トレース、モニター、ダッシュボードにわたる統合されたフルスタックの可観測性を提供します。
+
+{{< img src="/network_device_monitoring/snmp/snmp_device_polling.png" alt="SNMP デバイスのポーリングの流れを示す NDM の図。" style="width:90%;" >}}
+
+## 次のステップ
+
+以下の手順に従って Datadog を構成し、ネットワークデバイスから SNMP メトリクスを収集します。
 
 ## 構成
 
@@ -25,8 +36,11 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
 
 ネットワーク上に存在するデバイスの数、およびネットワークがどれだけ動的か (つまり、デバイスが追加または削除される頻度) に基づき、収集戦略を選択します。
 
-- 小規模でほとんど静的なネットワークについては、[個々のデバイスの監視](#monitoring-individual-devices)をご覧ください。
-- 大規模なネットワークや動的なネットワークについては、[オートディスカバリー](#autodiscovery)をご覧ください。
+[個々のデバイスの監視](#monitoring-individual-devices)
+: 小規模で大部分が静的なネットワーク向け。
+
+[オートディスカバリー](#autodiscovery)
+: より大規模なネットワークや動的なネットワーク向け。
 
 収集戦略に関係なく、Datadog の [sysObjectID マップデバイスプロファイル][2]を利用して、デバイスから関連するメトリクスを自動的に収集できます。
 
@@ -80,7 +94,7 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
 
 - [Agent を再起動します][5]。
 
-セットアップしたら、Agent は、[Datadog のデバイスプロファイル][6]の 1 つとデバイスを照合して、関連するメトリクスを収集します。
+セットアップ後、Agent は、[Datadog のサポートされているデバイスプロファイル][6]の 1 つとデバイスを照合して、関連するメトリクスを収集します。
 
 セットアップを拡張するには
 
@@ -89,9 +103,9 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
 
 ### オートディスカバリー
 
-An alternative to specifying individual devices is to use Autodiscovery to automatically discover all the devices on your network.
+個々のデバイスを指定する代わりに、オートディスカバリーを使用して、ネットワーク上のすべてのデバイスを自動的に検出することも可能です。
 
-オートディスカバリーは、構成されたサブネット上の各 IP をポーリングし、デバイスからの応答を確認します。次に、Datadog Agent は、検出されたデバイスの `sysObjectID` を検索し、それを [Datadog のデバイスプロファイル][6]の 1 つにマップします。このプロファイルには、さまざまなタイプのデバイスについて収集される事前定義メトリクスのリストが含まれます。
+オートディスカバリーは、構成されたサブネット上の各 IP アドレスをポーリングし、デバイスからの応答を確認します。次に、Datadog Agent は、検出されたデバイスの `sysObjectID` を検索し、それを [Datadog のサポートされているデバイスプロファイル][6]の 1 つにマップします。このプロファイルには、さまざまなタイプのデバイスについて収集される事前定義メトリクスのリストが含まれます。
 
 ネットワークデバイスモニタリングでオートディスカバリーを使用するには
 
@@ -99,33 +113,42 @@ An alternative to specifying individual devices is to use Autodiscovery to autom
 
 2. [`datadog.yaml`][8] Agent コンフィギュレーションファイルを編集し、Datadog がスキャンするすべてのサブネットを含めます。以下のサンプルコンフィギュレーションは、オートディスカバリーに必要なパラメーター、デフォルト値、そして例を示しています。
 
+3. オプションとして、Agent のオートディスカバリー中にデバイスの[重複排除][11]を有効にできます。この機能はデフォルトでは無効で、Agent バージョン `7.67+` が必要です。
+
+   ```yaml
+   network_devices:
+     autodiscovery:
+       use_deduplication: true
+   ```
+
 {{< tabs >}}
 {{% tab "SNMPv2" %}}
 
 ```yaml
 network_devices:
   autodiscovery:
-    workers: 100  # number of workers used to discover devices concurrently
-    discovery_interval: 3600  # interval between each autodiscovery in seconds
-    loader: core  # use core check implementation of SNMP integration. recommended
-    use_device_id_as_hostname: true  # recommended
+    ## use_deduplication - boolean - オプション - デフォルト: false
+    workers: 100  # デバイスの発見に同時に使用されるワーカー数
+    discovery_interval: 3600  # 各オートディスカバリーの間隔 (秒)
+    loader: core  # SNMP インテグレーションのコアチェック実装を使用します。推奨
+    use_device_id_as_hostname: true  # 推奨
     configs:
-      - network_address: 10.10.0.0/24  # CIDR subnet
+      - network_address: 10.10.0.0/24  # CIDR サブネット
         loader: core
         snmp_version: 2
         port: 161
-        community_string: '***'  # enclose with single quote
+        community_string: '***'  # 一重引用符で囲みます
         tags:
-        - "key1:val1"
-        - "key2:val2"
+          - "key1:val1"
+          - "key2:val2"
       - network_address: 10.20.0.0/24
         loader: core
         snmp_version: 2
         port: 161
         community_string: '***'
         tags:
-        - "key1:val1"
-        - "key2:val2"
+          - "key1:val1"
+          - "key2:val2"
 ```
 
 {{% /tab %}}
@@ -135,18 +158,19 @@ network_devices:
 ```yaml
 network_devices:
   autodiscovery:
-    workers: 100  # number of workers used to discover devices concurrently
-    discovery_interval: 3600  # interval between each autodiscovery in seconds
-    loader: core  # use core check implementation of SNMP integration. recommended
-    use_device_id_as_hostname: true  # recommended
+    ## use_deduplication - boolean - オプション - デフォルト: false
+    workers: 100  # デバイスの発見に同時に使用されるワーカー数
+    discovery_interval: 3600  # 各オートディスカバリーの間隔 (秒)
+    loader: core  # SNMP インテグレーションのコアチェック実装を使用します。推奨
+    use_device_id_as_hostname: true  # 推奨
     configs:
-      - network_address: 10.10.0.0/24  # CIDR subnet
+      - network_address: 10.10.0.0/24  # CIDR サブネット
         snmp_version: 3
         user: 'user'
-        authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
-        authKey: 'fakeKey'  # enclose with single quote
-        privProtocol: 'AES256'  # choices: DES, AES, AES192, AES192C, AES256, AES256C
-        privKey: 'fakePrivKey'  # enclose with single quote
+        authProtocol: 'SHA256'  # 選択肢: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+        authKey: 'fakeKey'  # 一重引用符で囲みます
+        privProtocol: 'AES256'  # 選択肢: DES, AES, AES192, AES192C, AES256, AES256C
+        privKey: 'fakePrivKey'  # 一重引用符で囲みます
         tags:
           - 'key1:val1'
           - 'key2:val2'
@@ -167,117 +191,13 @@ network_devices:
 
 **注**: Datadog Agent は検出された各 IP の SNMP チェックを自動で構成します。検出されたデバイスは、SNMP を使用してポールされた際に正常に応答する IP となります。
 
-**Note**: Make sure you are on Agent 7.53+ for this syntax. For previous versions, see the [previous config_template.yaml][10]
+**注**: この構文を使用するには、Agent 7.54 以降を使用していることを確認してください。以前のバージョンについては、[以前の config_template.yaml][9] を参照してください。
 
-### Ping
+## 検証
 
-When configured, the SNMP check can also send ICMP pings to your devices. This can be configured for individual as well as Autodiscovered devices.
+[Agent の status サブコマンドを実行][10]し、Checks セクションで `snmp` を探します。
 
-#### Setup
-
-1. Install or upgrade the Datadog Agent to v7.52+. For platform specific instructions, see the [Datadog Agent][7] documentation.
-
-2. Edit the `snmp.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][3] for individual devices, or the [`datadog.yaml`][8] Agent configuration file for Autodiscovery. See the [sample snmp.d/conf.yaml][4] for all available configuration options.
-
-3. **Linux Only**: If you're receiving errors when running ping, you may need to configure the integration to send pings using a raw socket. This requires elevated privileges and is done using the Agent's system-probe. See the [linux.use_raw_socket][11] `system-probe` configuration below.
-
-**Note**: For Autodiscovery, Datadog does not ping devices that do not respond to SNMP.
-
-{{< tabs >}}
-{{% tab "Individual" %}}
-
-- To apply ping settings to all _manually_ configured devices, add the ping configuration in the `init_config` section.
-
-    ```yaml
-        init_config:
-          loader: core
-          use_device_id_as_hostname: true
-        instances:
-        - ip_address: '1.2.3.4'
-          community_string: 'sample-string'
-          tags:
-            - 'key1:val1'
-            - 'key2:val2'
-          ping:
-            enabled: true            # (default false) enable the ping check
-            linux:                   # (optional) Linux specific configuration
-              use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
-    ```
-
-{{% /tab %}}
-
-{{% tab "Autodiscovery" %}}
-
-- To apply ping settings to all _Autodiscovery_ subnets, create the ping configuration under the `network_devices.autodiscovery` section.
-
-    ```yaml
-    network_devices:
-    autodiscovery:
-        workers: 100
-        discovery_interval: 3600
-        loader: core
-        use_device_id_as_hostname: true
-        configs:
-          - network_address: 10.10.0.0/24
-            loader: core
-            snmp_version: 2
-            port: 161
-            community_string: '***'
-            tags:
-            - "key1:val1"
-            - "key2:val2"
-            ping:
-              enabled: true            # (default false) enable the ping check
-              linux:                   # (optional) Linux specific configuration
-                use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
-    ```
-
-{{% /tab %}}
-
-{{% tab "Use raw sockets (Linux only)" %}}
-
-If you're on Linux and want to use raw sockets for ping, you must also enable ping in the `system-probe` configuration file in addition to the Agent configuration.
-
-Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to true.
-
-```yaml
-ping:
-  enabled: true
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-After successfully enabling ping on your network devices, the **Ping State** column in the UI is enabled, allowing you to see the ping state statuses for your devices:
-
-{{< img src="/network_device_monitoring/snmp/ping_state_status.png" alt="The status column in the NDM UI showing the Ping state toggle enabled with the ping state status column highlighted" style="width:100%;">}}
-
-The following are the status names in the **Ping State** column and their descriptions:
-
-| Status name  | Description                                             |
-|--------------|------------------------------------------------------|
-| Unreachable  | Device is unreachable through ping.                   |
-| Unmonitored  | Ping has not been configured for this device.        |
-| Ok           | Device is reachable through ping.                     |
-| N/A          | The devices do not support ping. |
-
-#### Metrics collected
-
-The following metrics are made available after enabling ping:
-
-| Metric name  | Description                                              |
-|--------------|------------------------------------------------------|
-| networkdevice.ping.avg_rtt  |       Average round-trip time |
-| networkdevice.ping.reachable |   Device reachability status        |
-| networkdevice.ping.packet_loss  |   Packet loss percentage |
-| networkdevice.ping.unreachable         | Device unreachable status |
-
-
-## Validation
-
-[Run the Agent's status subcommand][9] and look for `snmp` under the Checks section.
-
-## Further Reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -287,9 +207,9 @@ The following metrics are made available after enabling ping:
 [3]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
 [5]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
-[6]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
+[6]: https://docs.datadoghq.com/ja/network_monitoring/devices/supported_devices
 [7]: /ja/agent
 [8]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[9]: /ja/agent/configuration/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
-[11]: /ja/network_monitoring/devices/snmp_metrics/?tab=userawsocketslinuxonly#ping
+[9]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
+[10]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L4036

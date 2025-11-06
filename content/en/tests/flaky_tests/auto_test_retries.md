@@ -48,7 +48,7 @@ This behavior can be fine-tuned with the following environment variables:
 [3]: /tests/setup/java/#compatibility
 {{% /tab %}}
 
-{{% tab "Javascript" %}}
+{{% tab "JavaScript" %}}
 
 ### Compatibility
 
@@ -66,35 +66,7 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to 0 or false to explicitly disable retries even if the remote setting is enabled (default: true).
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: 5).
 
-### Failed Test Replay
-
-In addition to automatically retrying failed tests, Failed Test Replay allows you to see local variable data in the topmost frame of the test error's stack trace. Enable this feature with the **Failed Test Replay** toggle.
-
-#### Create a logs index
-
-Failed Test Replay creates logs that are sent to Datadog and appear alongside your regular application logs.
-
-If you use [Exclusion filters][4], ensure Failed Test Replay logs are not filtered:
-
-1. Create a logs index and [configure it][5] to the desired retention with **no sampling**.
-2. Set the filter to match on the `source:dd_debugger` tag. All Failed Test Replay logs have this source.
-3. Ensure that the new index takes precedence over any other index with filters that match that tag, because the first match wins.
-
-
-After you enable this feature, you can see local variable data in failed tests:
-
-{{< img src="continuous_integration/failed_test_replay_local_variables.png" alt="Failed Test Replay." style="width:100%" >}}
-
-
-#### Known limitations
-
-[jest-image-snapshot][2] is incompatible with `jest.retryTimes` unless `customSnapshotIdentifier` is passed (see [jest-image-snapshot docs][3]) to `toMatchImageSnapshot`. Therefore, auto test retries do not work unless `customSnapshotIdentifier` is used.
-
 [1]: https://app.datadoghq.com/ci/settings/test-optimization
-[2]: https://www.npmjs.com/package/jest-image-snapshot
-[3]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
-[4]: /logs/log_configuration/indexes/#exclusion-filters
-[5]: /logs/log_configuration/indexes/#add-indexes
 
 {{% /tab %}}
 
@@ -216,6 +188,30 @@ This behavior can be fine-tuned with the following environment variables:
 
 {{< /tabs >}}
 
+### Failed Test Replay
+
+<div class="alert alert-info">Failed Test Replay is only supported for Java, JavaScript, and .NET.</a></div>
+
+In addition to automatically retrying failed tests, Failed Test Replay allows you to see local variable data in the topmost frame of the test error's stack trace. Enable this feature with the **Failed Test Replay** toggle.
+
+#### Create a logs index
+
+Failed Test Replay creates logs that are sent to Datadog and appear alongside your regular application logs.
+
+If you use [Exclusion filters][5], ensure Failed Test Replay logs are not filtered:
+
+1. Create a logs index and [configure it][6] to the desired retention with **no sampling**.
+2. Set the filter to match on the `source:dd_debugger` tag. All Failed Test Replay logs have this source.
+3. Ensure that the new index takes precedence over any other index with filters that match that tag, because the first match wins.
+
+After you enable this feature, you can see local variable data in failed tests:
+
+{{< img src="continuous_integration/failed_test_replay_local_variables.png" alt="Failed Test Replay." style="width:100%" >}}
+
+#### Known limitations
+
+[jest-image-snapshot][7] is incompatible with `jest.retryTimes` unless `customSnapshotIdentifier` is passed (see [jest-image-snapshot docs][8]) to `toMatchImageSnapshot`. Therefore, auto test retries do not work unless `customSnapshotIdentifier` is used.
+
 ## Explore results in the Test Optimization Explorer
 
 You can query the retried tests in the [Test Optimization Explorer][2]: they have the `@test.is_retry` tag set to `true` (some of them may also have the `@test.is_new` set to `true`, which indicates they have been retried by the [Early Flakiness Detection][3] feature).
@@ -232,3 +228,7 @@ If you suspect there are any issues with Auto Test Retries, navigate to the [Tes
 [2]: /tests/explorer/
 [3]: /tests/flaky_test_management/early_flake_detection
 [4]: https://app.datadoghq.com/ci/settings/test-optimization
+[5]: /logs/log_configuration/indexes/#exclusion-filters
+[6]: /logs/log_configuration/indexes/#add-indexes
+[7]: https://www.npmjs.com/package/jest-image-snapshot
+[8]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes

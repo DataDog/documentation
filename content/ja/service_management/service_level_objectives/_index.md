@@ -3,6 +3,7 @@ aliases:
 - /ja/monitors/monitor_uptime_widget/
 - /ja/monitors/slos/
 - /ja/monitors/service_level_objectives/
+- /ja/service_management/service_level_objectives/ootb_dashboard
 description: SLO のステータスを追跡する
 further_reading:
 - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
@@ -73,7 +74,7 @@ SLO を作成する際は、以下の種類から選択できます。
 
 Datadog の [Service Level Objectives ステータスページ][2]を使用して、SLO の新規作成や既存 SLO の閲覧・管理が行えます。
 
-### 構成
+### 設定
 
 1. [Service Level Objectives ステータスページ][2]で **New SLO +** を選択します。
 2. SLO の種類を選択します。[Metric-based][3]、[Monitor-based][4]、または [Time Slices][5] のいずれかを選択して SLO を作成できます。

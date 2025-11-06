@@ -5,9 +5,9 @@ aliases:
   - /synthetics/browser_check
   - /synthetics/browser_test
 further_reading:
-- link: "https://www.datadoghq.com/blog/browser-tests/"
-  tag: "Blog"
-  text: "User experience monitoring with browser tests"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
@@ -16,13 +16,16 @@ further_reading:
   text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
-  text: "Getting started with browser tests"
+  text: "Getting started with Browser Tests"
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
   tag: "External Site"
   text: "Create and manage Synthetic Browser Tests with Terraform"
+- link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+  tag: "Blog"
+  text: "How I helped my client scale their browser tests with Datadog"
 ---
 
 ## Overview
@@ -43,7 +46,7 @@ You may create a test using one of the following options:
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
-    
+
   1. Click the **+** template to start a new Browser Test from scratch.
   1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
   1. Add a **name**: The name of your browser test.
@@ -187,7 +190,7 @@ You can customize alert conditions to define the circumstances under which you w
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
+1. Enter a **message** for the browser test or use pre-filled monitor messages. This field allows standard [Markdown formatting][7] and supports the following [conditional variables][8]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -200,19 +203,34 @@ A notification is sent according to the set of alerting conditions. Use this sec
     | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
     | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    Notification messages include the **message** defined in this section and information about the failing locations.
+    Notification messages include the **message** defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
+
+     {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
+
+     For example, to create a monitor that iterates over steps extracting variables for browser tests, add the following to the monitor message:
+
+   ```text
+   {{! List extracted variables across all successful steps }}
+   # Extracted variables
+   {{#each synthetics.attributes.result.steps}}
+   {{#if extractedValue}}
+   * **Name**: `{{extractedValue.name}}`
+   **Value:** {{#if extractedValue.secure}}*Obfuscated (value hidden)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+   {{/if}}
+   {{/each}}
+   ```
 
 2. Choose team members and services to notify.
-3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-4. Click **Save Details and Record Test** to save your test configuration and record your browser steps.
+3. Specify a renotification frequency. To prevent renotification on failing tests, check the option `Stop re-notifying on X occurrences`.
+4. Click **Save & Start Recording** to save your test configuration and record your browser steps.
 
-For more information, see [Using Synthetic Test Monitors][9].
+For more information, see [Synthetic Monitoring notifications][9].
 
 ## Record your steps
 
-Tests can be only recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension for Google Chrome][11].
+Tests can be only recorded from [Google Chrome][10] and [Microsoft Edge][18]. To record your test, download the [Datadog Record Test extension][11].
 
-You can switch tabs in a browser test recording in order to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][12]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
+You can switch tabs in a browser test recording to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][12]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="90%" >}}
 
@@ -225,6 +243,73 @@ You can switch tabs in a browser test recording in order to perform an action on
 
    Datadog recommends ending your browser test with an **[assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
 6. Once you have finished your scenario, click **Save and Launch Test**.
+
+## Step replay
+
+Step replay allows you to re-run one or more steps of your browser test directly in your browser with the [Datadog Record Test extension][11]. This feature helps you establish the correct state when adding or editing steps in the middle of a test, so you don't need to do it manually.
+
+### Debugger permission
+
+JavaScript-based steps and keystroke simulations require the debugger permission.
+
+The first time the extension is updated to a version requiring debugger permission, you'll see a permission request and the extension is disabled until you approve it:
+{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_2.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Click on the three dots {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu to accept the permission.</em></p>
+
+### How to use step replay
+
+You can replay steps in three ways:
+
+<strong>1. Single step replay:</strong> Re-execute a single step:
+{{< img src="synthetics/browser_tests/recording__replay--replay-one-step_1.mp4" alt="Single Step Replay" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Hover over the step, and click on the play button to replay only this step.</em></p>
+
+<strong>2. Replay all steps:</strong> Run the entire sequence of steps as defined in the recorder:
+{{< img src="synthetics/browser_tests/recording__replay--replay-all-steps_1.mp4" alt="Replay All Steps" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Click on the replay all button (⏩︎) on top of the step list to replay all steps.</em></p>
+
+<strong>3. Replay selected steps:</strong> Run a subset of steps you select in the step list:
+{{< img src="synthetics/browser_tests/recording__replay--replay-selected-steps_1.mp4" alt="Replay Selected Steps" video="true">}}
+<p style="text-align: center;"><em>Select the steps you want to replay then click on the replay selected button (⏩︎) on top of the step list.</em></p>
+
+### Step replay feature support
+
+The following table summarizes which Browser Test step types are supported by step replay:
+
+| Step type                | Supported by Step Replay | Notes |
+|--------------------------|:------------------------:|-------|
+| Extract variable         | {{< X >}}                       |       |
+| Go to URL                | {{< X >}}                       |       |
+| Refresh                  | {{< X >}}                       |       |
+| Scroll                   | {{< X >}}                       |       |
+| Select option            | {{< X >}}                       |       |
+| Wait                     | {{< X >}}                       |       |
+| Run API test             | {{< X >}}                       |       |
+| Assert checkbox state    | {{< X >}}                       |       |
+| Assert current URL       | {{< X >}}                       |       |
+| Assert element attribute | {{< X >}}                       |       |
+| Assert element content   | {{< X >}}                       |       |
+| Assert element present   | {{< X >}}                       |       |
+| Assert file download     | {{< X >}}                       |       |
+| Assert page contains     | {{< X >}}                       |       |
+| Assert page lacks        | {{< X >}}                       |       |
+| Assert from JavaScript   | {{< X >}}                       |       |
+| Extract from JavaScript  | {{< X >}}                       |       |
+| Press key                | {{< X >}}                       |       |
+| Type text                | {{< X >}}                       |       |
+| Click                    | {{< X >}}*                      | *Click steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
+| Hover                    | {{< X >}}*                      | *Hover steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
+
+### Step types not supported by step replay
+
+| Step type                | Supported by step replay |
+|--------------------------|:------------------------:|
+| Assert email             | Not supported yet        |
+| Assert requests          | Not supported yet        |
+| Extract from email body  | Not supported yet        |
+| Go to email link         | Not supported yet        |
+| Upload files             | Not supported yet        |
+| Assert natural language  | Not supported yet        |
 
 ## Permissions
 
@@ -245,7 +330,7 @@ Use [granular access control][17] to limit who has access to your test based on 
 6. Select the level of access you want to associate with each of them.
 7. Click **Done**.
 
-<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
 
 | Access level | View test configuration | Edit test configuration | View test results | Run test  | View recording | Edit recording |
 | ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
@@ -265,7 +350,7 @@ Use [granular access control][17] to limit who has access to your test based on 
 [6]: /api/latest/synthetics/#create-or-clone-a-test
 [7]: http://daringfireball.net/projects/markdown/syntax
 [8]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[9]: /synthetics/guide/synthetic-test-monitors
+[9]: /synthetics/notifications/
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [12]: /synthetics/browser_tests/actions/#assertion
@@ -274,3 +359,4 @@ Use [granular access control][17] to limit who has access to your test based on 
 [15]: /account_management/rbac#custom-roles
 [16]: /account_management/rbac/#create-a-custom-role
 [17]: /account_management/rbac/granular_access
+[18]: https://www.microsoft.com/edge

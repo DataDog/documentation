@@ -9,6 +9,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-ai-agents/"
     tag: "Blog"
     text: "Monitor, troubleshoot, and improve AI agents with Datadog"
+  - link: "https://www.datadoghq.com/blog/llm-observability-bedrock-agents/"
+    tag: "Blog"
+    text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
 ---
 
 ## Overview

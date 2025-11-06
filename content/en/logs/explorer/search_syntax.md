@@ -5,6 +5,9 @@ aliases:
     - /logs/search-syntax
     - /logs/search_syntax/
 further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Learn how to visualize logs"
@@ -17,9 +20,9 @@ further_reading:
 - link: "/logs/explorer/saved_views/"
   tag: "Documentation"
   text: "Learn about Saved Views"
-- link: "/logs/explorer/calculated_fields/expression_language"
+- link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
-  text: "Learn more about Calculated Fields Expression Language"
+  text: "Learn more about Calculated Fields Formulas"
 ---
 
 ## Overview
@@ -43,7 +46,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 ## Full-text search 
 
-<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, rehydration filters, or in Live Tail. </div>
+<div class="alert alert-danger">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, rehydration filters, or in Live Tail. </div>
 
 Use the syntax `*:search_term` to perform a full-text search across all log attributes, including the log message.
 
@@ -52,7 +55,7 @@ Use the syntax `*:search_term` to perform a full-text search across all log attr
 | Search syntax | Search type | Description                                               |
 | ------------- | ----------- | --------------------------------------------------------- |
 | `*:hello`     | Full-text   | Searches all log attributes for the exact string `hello`. |
-| `hello`       | Free text   | Searches only the log message for the exact string `hello`.       |
+| `hello`       | Free text   | Searches only the `message`, `@title`, `@error.message`, and `@error.stack` attributes for the exact string `hello`.       |
 
 ### Search term with wildcard example
 
@@ -70,7 +73,7 @@ Use the syntax `*:search_term` to perform a full-text search across all log attr
 
 ## Escape special characters and spaces
 
-The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `#`, and spaces require escaping with the `\` character. 
+The following characters are considered special and require escaping with the `\` character: `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#`, and spaces. 
 - `/` is not considered a special character and doesn't need to be escaped.
 - `@` cannot be used in search queries within Logs Explorer because it is reserved for [Attribute Search](#attributes-search).
 

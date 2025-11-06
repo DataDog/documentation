@@ -1,5 +1,6 @@
 ---
 title: Alert on anomalous p99 latency of a database service
+description: Learn how to create monitors and alerts for anomalous p99 latency patterns in database services using APM metrics and anomaly detection.
 
 further_reading:
 - link: "/tracing/guide/week_over_week_p50_comparison/"

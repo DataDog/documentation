@@ -33,21 +33,21 @@ Si crees que tu configuración es correcta, pero no estás viendo datos en tus p
 1. Prueba la conectividad TCP en los endpoints de recopilación de DBM:
 
 ```
-telnet dbm-metrics-intake.datadoghq.com 443
-telnet dbquery-intake.datadoghq.com 443
+telnet dbm-metrics-intake.{{< region-param key="dd_site" code="true" >}} 443
+telnet dbquery-intake.{{< region-param key="dd_site" code="true" >}} 443
 ```
 
 2. Prueba publicar una carga útil vacía con una clave de API no válida en ambos endpoints de DBM.
 Estos comandos deberían fallar con el código HTTP `403: Forbidden`.
 
 ```
-curl -vvv -X POST "https://dbm-metrics-intake.datadoghq.com/api/v2/databasequery" \
+curl -vvv -X POST "https://dbm-metrics-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/databasequery" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: NONE" \
 -d "[{}]"
 
-curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
+curl -vvv -X POST "https://dbquery-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/databasequery" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: NONE" \

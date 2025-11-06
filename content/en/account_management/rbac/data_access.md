@@ -43,13 +43,13 @@ Log in as a user assigned the Datadog Admin role, or any user with a role in you
 
 In order to create a Restricted Dataset, identify the data to be restricted with a query.
 
-{{< img src="/account_management/rbac/restricted_dataset.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
+{{< img src="/account_management/rbac/restricted_dataset-2.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
 
 Name Dataset
-: A descriptive name to help users understand what data is contained in the dataset. 
+: A descriptive name to help users understand what data is contained in the dataset.
 
 Select data to be included in this Dataset
-: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, and CI Visibility pipelines.
+: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, and Software Delivery repository info (CI Visibility pipelines).
 
 Grant access
 : Select one or more teams or roles that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
@@ -61,20 +61,21 @@ After completing all the fields to define the dataset, click **Create Restricted
 You may create a maximum of 100 Restricted Datasets. If you need a higher limit, reach out to Support.
 
 ### API
-The Data Access Control API is under development and should be considered unstable. Future versions may be backward incompatible. 
+The Data Access Control API is under development and should be considered unstable. Future versions may be backward incompatible.
 
 Terraform support will be announced after Data Access Control is generally available.
 
 ### Supported telemetry types {#supported-telemetry}
 
 - APM traces
-- CI Visibility pipelines
+- Software Delivery repository info (CI Visibility pipelines)
 - Cloud costs
 - Custom metrics
-    - **Note:** Standard metrics are not supported
+    - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
 - Logs
 - RUM sessions
+- LLM Observability
 
 ## Usage constraints
 
@@ -92,6 +93,16 @@ Playlists are collections of Session Replays you can aggregate in a folder-like 
 ### Logs
 Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. To use Data Access Control with Log Management, first request access to Data Access Control. Next, manually migrate your configuration from Log Management permissions to Data Access Control.
 
+### Software Delivery repository info (CI Visibility pipelines)
+
+* **Supported telemetry**: Only CI Visibility pipelines are supported. Test Optimizations tests are not supported.
+* **CI Logs**: CI Logs are stored in the Log Management product. To restrict access to CI Logs, create a Logs dataset.
+* **Supported dataset tags**: Only the following tags are supported:
+  * `@git.repository_url`
+  * `@git.repository.id`
+  * `@gitlab.groups`
+
+
 ## Select tags for access
 
 Each Restricted Dataset can control access to multiple types of data, such as metrics. You are free to use the same or different tags across multiple types of telemetry. Within each telemetry type, you must use a _single_ tag or attribute to define your access strategy.
@@ -101,7 +112,7 @@ If you have too many combinations of tags or attributes to fit within these cons
 ### Supported example
 
 #### Restricted Dataset 1
-- Telemetry Type: RUM  
+- Telemetry Type: RUM
    - Filters: `@application.id:ABCD`
 
 #### Restricted Dataset 2
@@ -112,23 +123,23 @@ If you have too many combinations of tags or attributes to fit within these cons
 
 ### Not supported example
 
-#### Restricted Dataset 1: 
-* Telemetry type: RUM 
+#### Restricted Dataset 1:
+* Telemetry type: RUM
     * Filters: `@application.id:ABCD`
 
 #### Restricted Dataset 2:
-* Telemetry type: RUM 
+* Telemetry type: RUM
     * Filters: `env:prod`
 
 Restricted Dataset 1 uses `@application.id` as the tag for RUM data, so a new Restricted Dataset can't change to a different tag. Instead, consider reconfiguring Restricted Dataset 2 to use `@application.id`, or changing all of your Restricted Datasets with RUM data to use another tag.
 
 ### Not supported example
 
-#### Restricted Dataset 1: 
-* Telemetry type: RUM 
+#### Restricted Dataset 1:
+* Telemetry type: RUM
     * Filters: `@application.id:ABCD`
 
-#### Restricted Dataset 2: 
+#### Restricted Dataset 2:
 * Telemetry type: RUM
     * Filters: `@application.id:IJKL` `env:prod`
 
@@ -150,7 +161,7 @@ For example, if you have a single application that is instrumented with Real Use
     * Telemetry type: RUM
         * Filters: `@application.id:<rum-app-id>`
 * **Grant access:**
-    * Teams or roles of users who can see this RUM data      
+    * Teams or roles of users who can see this RUM data
 
 This configuration example would protect the RUM data from this application, and keep other data from this application available to existing users in your organization.
 
@@ -193,6 +204,8 @@ When exploring Datadog with restrictions enabled, users without permissions can 
 
 Similar to exploring data in a data explorer like the RUM Explorer or Metrics Explorer, viewing data in dashboards in an organization that has Restricted Datasets enabled only shows the data the user can access. Since dashboards are shared objects that can be accessed by others, it is possible for two users who have different access to view the same dashboard or notebook at the same time and see different data.
 
+**Note**: Viewers of [Shared Dashboards][12] see all telemetry data displayed in the Dashboard in accordance to the creator's permissions. Review your dashboard content before sharing to ensure no sensitive or confidential data is exposed.
+
 ### APIs
 
 When querying data through Datadog APIs with restrictions enabled, users without permissions do **not** see query results that have been restricted by Restricted Datasets.
@@ -212,3 +225,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [9]: /software_catalog/customize/
 [10]: /account_management/rbac/data_access/#supported-telemetry
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
+[12]: /dashboards/sharing/shared_dashboards/

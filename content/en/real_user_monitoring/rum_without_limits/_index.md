@@ -43,9 +43,9 @@ To get started with RUM without Limits for new applications, at the [instrumenta
 
 3. For applications with the [APM integration enabled][3], configure the percentage of sessions for which you want to make sure APM backend traces are ingested with `traceSampleRate` (browser), `traceSampler` (Android), or `sampleRate` (iOS).
 
-4. Enable `traceContextInjection: sampled` to defer sampling decisions to backend tracers for sessions where the decision is **not** to keep the trace.
+4. Enable `traceContextInjection: sampled` to allow backend tracing libraries to make their own sampling decisions for sessions where the RUM SDK decides not to keep the trace.
 
-   <div class="alert alert-warning">Steps 1, 3, and 4 may impact your APM traces ingestion. To ensure that ingested span volumes remain stable, configure the <code>traceSampleRate</code> to the previously configured <code>sessionSampleRate</code>. For instance, if you used to have <code>sessionSampleRate</code> set to 10% and you bump it to 100% for RUM without Limits, decrease the <code>traceSampleRate</code> from 100% to 10% accordingly to ingest the same amount of traces.</div>
+   <div class="alert alert-danger">Steps 1, 3, and 4 may impact your APM traces ingestion. To ensure that ingested span volumes remain stable, configure the <code>traceSampleRate</code> to the previously configured <code>sessionSampleRate</code>. For instance, if you used to have <code>sessionSampleRate</code> set to 10% and you bump it to 100% for RUM without Limits, decrease the <code>traceSampleRate</code> from 100% to 10% accordingly to ingest the same amount of traces.</div>
 
 5. Deploy your application to apply the configuration.
 
@@ -80,7 +80,7 @@ After:
 
 If you've increased `sessionSampleRate`, you might increase the number of ingested APM spans since the RUM SDK has the ability to override the sampling decisions of backend traces to make the correlation.
 
-To alleviate this, set `traceSampleRate` to a percentage below 100% (to the previously set `sessionSampleRate`) and set `traceContextInjection: sampled` to make sure the trace sampling decision is made by backend tracing libraries for sessions where the sampling decision is to **not** keep the trace.
+To alleviate this, set `traceSampleRate` to a percentage below 100% (to the previously set `sessionSampleRate`) and set `traceContextInjection: sampled` to allow backend tracing libraries to make their own sampling decisions for sessions where the RUM SDK decides not to keep the trace.
 
 #### Step 3: Create retention filters
 
@@ -99,7 +99,7 @@ Create and configure [retention filters][6].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/rum_without_limits/metrics
-[2]: /real_user_monitoring/browser/setup/
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
 [3]: /real_user_monitoring/platform/connect_rum_and_traces/
 [4]: https://app.datadoghq.com/rum/list
 [5]: /real_user_monitoring/guide/retention_filter_best_practices/

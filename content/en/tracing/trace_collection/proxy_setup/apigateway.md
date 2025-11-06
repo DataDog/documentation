@@ -21,9 +21,9 @@ This feature is in Preview.
 {{< /callout >}}
 
 
-Datadog APM can create **synthetic root spans** for requests that pass through Amazon API Gateway to container- or EC2-hosted services. The spans power end-to-end traces, service maps, and sampling based on the gateway itself.
+Datadog APM can create **inferred spans** for requests that pass through Amazon API Gateway to container- or EC2-hosted services. The spans power end-to-end traces, service maps, and sampling based on the gateway itself.
 
-<div class="alert alert-danger">If your API Gateway integrates with AWS Lambda, do <b>not</b> follow the instructions on this page. <a href="https://docs.datadoghq.com/serverless/aws_lambda/installation/">Datadog Lambda layers</a> already emit inferred API Gateway spans; adding the proxy headers described here can create duplicate or conflicting traces.</div>
+<div class="alert alert-warning">If your API Gateway integrates with AWS Lambda, do <b>not</b> follow the instructions on this page. <a href="https://docs.datadoghq.com/serverless/aws_lambda/installation/">Datadog Lambda layers</a> already emit inferred API Gateway spans; adding the proxy headers described here can create duplicate or conflicting traces.</div>
 
 
 ### Prerequisites
@@ -37,11 +37,21 @@ Datadog APM can create **synthetic root spans** for requests that pass through A
   export DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED=true
   {{< /code-block >}}
   
-  Or enable it through the Datadog ECS Fargate CDK construct:
+  Alternatively, enable it through the Datadog ECS Fargate CDK construct:
   {{< code-block lang="typescript" >}}
   new DatadogECSFargate(this, 'Datadog', {
     apm: { isEnabled: true, traceInferredProxyServices: true },
   });
+  {{< /code-block >}}
+  
+  Or you can enable it through the Datadog ECS Fargate Terraform module:
+  {{< code-block lang="typescript" >}}
+  module "ecs_fargate_task" { 
+    dd_apm = {
+      enabled = true,
+      trace_inferred_proxy_services = true
+    }
+  }
   {{< /code-block >}}
 
 - Your underlying application is running a [supported web framework](#supported-versions-and-web-frameworks).
@@ -54,6 +64,8 @@ Datadog APM can create **synthetic root spans** for requests that pass through A
 | Node.js | `dd-trace-js` | v[4.50.0][2]+ or v[5.26.0][1]+ | express, fastify, hapi, koa, microgateway-core, next, paperplane, restify, router, apollo |
 | Go | `dd-trace-go` | v[1.72.1][3]+ | chi, httptreemux, echo, go-restful, fiber, gin, gorilla mux, httprouter, fasthttp, goji |
 | Python | `dd-trace-py` | v[3.1.0][4]+ | aiohttp, asgi, bottle, cherrypy, django, djangorestframework, falcon, fastapi, flask, molten, pyramid, sanic, starlette, tornado, wsgi |
+| PHP | `dd-trace-php` | v[1.8.0][7]+ | CakePHP, CodeIgniter, Drupal, FuelPHP, Laminas, Laravel, Lumen, Magento, Neos Flow, Phalcon, Roadrunner, Slim, Symfony, WordPress, Zend Framework |
+| .NET | `dd-trace-dotnet` | v[3.15.0][8]+ | CakePHP, CodeIgniter, Drupal, FuelPHP, Laminas, Laravel, Lumen, Magento, Neos Flow, Phalcon, Roadrunner, Slim, Symfony, WordPress, Zend Framework |
 
 ## Setup
 
@@ -159,7 +171,7 @@ Attach the parameter mapping that injects the headers:
 
 ## Update sampling rules
 
-Head-based sampling still applies when using API Gateway tracing. Because the synthetic span becomes the new trace root, update your rules so the service value matches the API Gateway service name shown in Datadog.
+Head-based sampling still applies when using API Gateway tracing. Because the inferred span becomes the new trace root, update your rules so the service value matches the API Gateway service name shown in Datadog.
 
 For example, if the original sampling rule is:
 
@@ -192,3 +204,5 @@ Update the rule in one of the following ways:
 [4]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.1.0
 [5]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html
 [6]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html
+[7]: https://github.com/DataDog/dd-trace-php/releases/tag/1.8.0
+[8]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.15.0

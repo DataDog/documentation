@@ -15,7 +15,7 @@ further_reading:
     text: "Proactively enforce infrastructure best practices with Datadog Resource Policies"
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Resource Catalog is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger"> Resource Catalog is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/infra-governance-policies/" btn_hidden="false" header="Join the Preview!">}}

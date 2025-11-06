@@ -10,7 +10,7 @@ further_reading:
     text: "Learn how to search and manage your pipeline executions"
 ---
 
-<div class="alert alert-info"><strong>Note</strong>: This method only applies to runners using the "Instance" or "Docker Autoscaler" executors.</div>
+<div class="alert alert-info">This method only applies to runners using the "Instance" or "Docker Autoscaler" executors.</div>
 
 ## Overview
 

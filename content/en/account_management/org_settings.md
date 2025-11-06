@@ -1,5 +1,6 @@
 ---
 title: Organization Settings
+description: Manage users, teams, authentication, API keys, roles, and security settings for your Datadog organization from the Organization Settings section.
 further_reading:
     - link: "/account_management/api-app-keys/"
       tag: "Documentation"
@@ -148,6 +149,16 @@ The session duration can be configured within the following limits:
 
 {{< img src="account_management/org_settings/max_session_duration.png" alt="Max Session Duration Setting" style="width:70%;" >}}
 
+#### Idle time session duration configuration
+
+<div class="alert alert-info">
+  This feature is available in preview.
+</div>
+
+Users with the `Org Management` permission can enable or disable the idle time session timeout for their organization. When enabled, users are automatically signed out after 30 minutes of inactivity. The setting applies to all new web sessions created after you change it, and for all users, regardless of their role in the organization. It doesn’t apply to Datadog mobile application sessions.
+
+{{< img src="account_management/org_settings/idle_session_timeout.png" alt="Idle Session Timeout Setting" style="width:70%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -161,7 +172,7 @@ The session duration can be configured within the following limits:
 [7]: /account_management/saml/mapping
 [8]: /account_management/api-app-keys/
 [9]: /account_management/rbac/
-[10]: /agent/remote_config/?tab=configurationyamlfile#how-it-works
+[10]: /remote_configuration#how-it-works
 [11]: /account_management/api-app-keys/#client-tokens
 [12]: /service_management/events/guides/email/
 [13]: /synthetics/settings/?tab=specifyvalue#overview

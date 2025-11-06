@@ -59,7 +59,7 @@ instances:
 
 ### 構成
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 構成とチェックファイルは、名前が一致していなければなりません。チェックが <code>mycheck.py</code> という名前なら、構成ファイルは <code>mycheck.yaml</code> という名前にしなければなりません。
 </div>
 

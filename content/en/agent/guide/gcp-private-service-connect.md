@@ -1,5 +1,6 @@
 ---
 title: Connect to Datadog over Google Cloud Private Service Connect
+description: Configure Google Cloud Private Service Connect endpoints and DNS zones to send telemetry to Datadog privately without using the public internet.
 further_reading:
     - link: '/integrations/google_cloud_platform/'
       tag: 'Documentation'
@@ -10,7 +11,7 @@ further_reading:
 ---
 
 {{% site-region region="us,us3,gov,ap1,ap2" %}}
-<div class="alert alert-warning">This feature is not supported for the selected Datadog site.</div>
+<div class="alert alert-danger">This feature is not supported for the selected Datadog site.</div>
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}
@@ -120,7 +121,7 @@ Ensure that the IP address in the response matches the one associated with your 
 {{% site-region region="eu" %}}
 [Private Service Connect][1] (PSC) allows you to send telemetry to Datadog without using the public internet.
 
-Datadog exposes some of its data intake services in Google Cloud Platform as PSC [_published services_][2], as seen in the [table of published services](#published-services).
+Datadog exposes some of its data intake services in Google Cloud Platform as PSC [_published services_][2], as seen in the [table of published services](#published-services-1).
 
 You can configure a PSC endpoint to expose a private IP address for each Datadog intake service. This IP address routes traffic to the Datadog backend. You can then configure a Google Cloud [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed.
 
@@ -135,7 +136,7 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
    {{< img src="agent/guide/psc/connect-endpoint-eu1.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
 
    - Under **Target**, select _Published service_.
-   - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services).
+   - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services-1).
    - For **Endpoint name**, enter a unique identifier to use for this endpoint. You can use `datadog-<SERVICE>`. For example: `datadog-metrics`.
    - For **Network** and **Subnetwork**, choose the network and subnetwork where you want to publish your endpoint.
    - For **IP address**, click the dropdown and select _Create IP address_ to create an internal IP from your subnet dedicated to the endpoint. Select this IP.
@@ -153,7 +154,7 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
 
    - Under **Zone type**, select _Private_.
    - For **Zone name**, enter a descriptive name for your zone.
-   - For **DNS name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services).
+   - For **DNS name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services-1).
 3. Next, create an `A` record that points to the endpoint IP. On the _Zone details_ page of the zone you created, click on **Add record set**.
    {{< img src="agent/guide/psc/create-record-eu1.png" alt="Screenshot of the 'Create record set' page in the Google Cloud console." >}}
 

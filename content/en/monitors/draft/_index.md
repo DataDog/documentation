@@ -1,5 +1,6 @@
 ---
 title: Draft Monitors
+description: "Create, test, and refine monitor alerts safely without triggering notifications using Draft Monitors."
 further_reading:
 - link: "monitors/"
   tag: "Documentation"
@@ -11,6 +12,10 @@ further_reading:
   tag: "Documentation"
   text: "Manage monitors"
 ---
+
+{{< callout url="#" btn_hidden="true" >}}
+Draft Monitors is in Preview.
+{{< /callout >}}
 
 ## Overview
 

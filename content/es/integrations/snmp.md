@@ -17,7 +17,7 @@
     "metrics":
       "check": "snmp.devices_monitored"
       "metadata_path": "metadata.csv"
-      "prefix": "snmp."
+      "prefix": "snmp"
     "service_checks":
       "metadata_path": "assets/service_checks.json"
     "source_type_id": !!int "78"
@@ -49,7 +49,7 @@
 "git_integration_title": "snmp"
 "integration_id": "snmp"
 "integration_title": "SNMP"
-"integration_version": "10.0.0"
+"integration_version": "10.1.0"
 "is_public": true
 "manifest_version": "2.0.0"
 "name": "snmp"
@@ -63,13 +63,13 @@
   "changelog": "CHANGELOG.md"
   "classifier_tags":
   - "Category::Red"
-  - "Category::Notificaciones"
+  - "Category::Notifications"
   - "Category::SNMP"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
-  - "Offering::Integración"
-  "configuration": "README.md#Configuración"
+  - "Offering::Integration"
+  "configuration": "README.md#Setup"
   "description": "Recopila métricas de SNMP de tus dispositivos de red."
   "media": []
   "overview": "README.md#Información general"
