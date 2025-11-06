@@ -2,9 +2,9 @@
 title: AI Agents Console
 private: true
 further_reading:
-    - link: 'https://docs.claude.com/en/docs/claude-code/settings'
-      tag: 'Anthropic Documentation'
-      text: 'Claude Code settins'
+  - link: 'https://docs.claude.com/en/docs/claude-code/settings'
+    tag: 'Anthropic Documentation'
+    text: 'Claude Code settings'
 ---
 
 {{< callout url=#
