@@ -89,6 +89,7 @@ A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity
 | Maximum intake payload size                | 5 MB                     |
 | Maximum source maps and mapping files size | 500 MB per file          |
 | Maximum dSYM files size                    | 2 GB per file            |
+| Maximum delay at ingestion                 | 24 hours – beyond this limit, events uploaded by the SDK are dropped by our intake |
 
 
 ## What is Session Replay?
