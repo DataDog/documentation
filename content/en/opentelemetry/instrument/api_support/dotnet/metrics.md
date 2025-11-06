@@ -79,6 +79,12 @@ If you are already using the OpenTelemetry SDK with a manual OTLP exporter confi
 
 If you are currently using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code. The main difference is that OTel metrics are configured using environment variables rather than code, and you create `Instrument` objects first.
 
+## Troubleshooting
+
+{{% otel-api-troubleshooting signal="metrics" %}}
+- Verify the Datadog Profiler is attached. This feature relies on Datadog's automatic instrumentation. Ensure the .NET Profiler is correctly enabled for your application.
+- Verify `OpenTelemetry.Api` is installed. The Datadog SDK requires the `OpenTelemetry.Api` package to be present.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -38,7 +38,7 @@ Follow these steps to enable OTel Logs API support in your Python application.
     ```sh
     ddtrace-run python my_app.py
     ```
-    When enabled, `ddtrace` automatically detects the OTel packages and configures the `OTLPLogExporter` to send logs to the Datadog Agent.
+    When enabled, `ddtrace` automatically detects the OTel packages and configures the `OTLPLogExporter` to send logs to your OTLP destination.
 
 ## Examples
 
@@ -101,10 +101,9 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 
 ## Troubleshooting
 
-**Logs aren't being exported.**
-  - Ensure `DD_LOGS_OTEL_ENABLED` is set to `true`.
-  - Verify that `opentelemetry-sdk` and `opentelemetry-exporter-otlp` are installed in your environment. The Datadog SDK treats these  as optional runtime dependencies; if they are not found, log export cannot be configured.
- -  Verify that logs collection is enabled on the Datadog Agent and that the OTLP receiver is configured. See [Enabling OTLP Ingestion on the Datadog Agent][2] for details.
+{{% otel-api-troubleshooting signal="logs" %}}
+- Verify `opentelemetry-sdk` is installed. The Python SDK requires `opentelemetry-sdk` and `opentelemetry-exporter-otlp` to be installed in your Python environment.
+- Ensure `ddtrace-run` is active. Verify that you are running your application with `ddtrace-run` (or have imported and initialized `ddtrace` manually).
 
 ## Further reading
 

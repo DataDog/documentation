@@ -102,6 +102,10 @@ For more details, see the [OpenTelemetry Node.js onboarding docs][2].
 
 ## Troubleshooting
 
+{{% otel-api-troubleshooting signal="metrics" %}}
+- Verify `dd-trace` is initialized first. The Datadog SDK must be initialized at the top of your application, *before* any other modules are imported.
+- Verify `@opentelemetry/api` is installed. The Node.js SDK requires this API package.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -34,14 +34,22 @@ This feature works by intercepting logs from the built-in `Microsoft.Extensions.
     ```
 3.  Ensure Datadog instrumentation is active for your application.
     ```sh
-    Command for enabling .NET profiler
+    [TODO: Code example]
     ```
 
 ## Examples
 
 ### Standard logging
 
+```csharp
+[TODO: Code example]
+```
+
 ### Trace and log correlation
+
+```csharp
+[TODO: Code example]
+```
 
 ## Supported configuration
 
@@ -71,9 +79,8 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 
 ## Troubleshooting
 
-**Logs aren't being exported.**
-    - Ensure `DD_LOGS_OTEL_ENABLED` is set to `true`.
-    - Verify that logs collection is enabled on the Datadog Agent and that the OTLP receiver is configured. See [Enabling OTLP Ingestion on the Datadog Agent][2] for details.
+{{% otel-api-troubleshooting signal="logs" %}}
+- Verify the Datadog Profiler is attached. This feature relies on Datadog's automatic instrumentation. Ensure the .NET Profiler is correctly enabled for your application.
 
 ## Further reading
 

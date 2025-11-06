@@ -36,7 +36,7 @@ Follow these steps to enable OTel Metrics API support in your Python application
    ```
 4. Instrument your application:
    ```py
-   [Code example]
+   ddtrace-run python my_app.py
    ```
 
 ## Examples
@@ -48,7 +48,17 @@ You can use the standard OpenTelemetry API packages to create custom metrics.
 This example uses the OTel Metrics API to create a counter that increments every time an item is processed:
 
 ```py
-[Code example]
+import os
+os.environ["DD_METRICS_OTEL_ENABLED"] = "true"
+import ddtrace.auto # This must be imported before opentelemetry
+from opentelemetry import metrics
+
+# ddtrace automatically configures the MeterProvider
+meter = metrics.get_meter(__name__)
+
+# Counter - monotonically increasing values
+counter = meter.create_counter("http.requests_total")
+counter.add(1, {"method": "GET", "status_code": "200"})
 ```
 
 ### Create a histogram
@@ -56,7 +66,29 @@ This example uses the OTel Metrics API to create a counter that increments every
 This example uses the OTel Metrics API to create a histogram to track request durations:
 
 ```py
-[Code example]
+import os
+os.environ["DD_METRICS_OTEL_ENABLED"] = "true"
+import ddtrace.auto # This must be imported before opentelemetry
+from opentelemetry import metrics
+import time
+
+# ddtrace automatically configures the MeterProvider
+meter = metrics.get_meter(__name__)
+
+# Histogram - distribution of values
+histogram = meter.create_histogram(
+    name="http.request_duration",
+    description="HTTP request duration",
+    unit="ms"
+)
+
+start_time = time.time()
+# ... simulate work ...
+time.sleep(0.05)
+end_time = time.time()
+
+duration = (end_time - start_time) * 1000 # convert to milliseconds
+histogram.record(duration, {"method": "POST", "route": "/api/users"})
 ```
 
 ## Supported configuration
@@ -83,7 +115,9 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 
 ## Troubleshooting
 
-[Likely user errors and how to resolve them]
+{{% otel-api-troubleshooting signal="metrics" %}}
+- Verify `opentelemetry-sdk` is installed. The Python SDK requires `opentelemetry-sdk` and `opentelemetry-exporter-otlp` to be installed in your Python environment.
+- Ensure `ddtrace-run` is active. Verify that you are running your application with `ddtrace-run` (or have imported and initialized `ddtrace` manually).
 
 ## Further reading
 
