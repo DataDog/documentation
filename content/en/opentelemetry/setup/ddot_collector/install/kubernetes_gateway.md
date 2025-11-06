@@ -411,7 +411,7 @@ otelAgentGateway:
         stabilizationWindowSeconds: 60
 ```
 
-You can use resource metrics (CPU or memory), custom metrics (Kubernetets Pod or Object) or external metrics as the autoscaling metrics. For resource metrics, make sure to have the [Kubernetes metrics server][9] running in your cluster. For custom or external metrics, consider configuring the [Datadog Cluster Agent metrics provider][10].
+You can use resource metrics (CPU or memory), custom metrics (Kubernetes Pod or Object), or external metrics as autoscaling inputs. For resource metrics, ensure that the [Kubernetes metrics server][9] is running in your cluster. For custom or external metrics, consider configuring the [Datadog Cluster Agent metrics provider][10].
 
 ### Deploying a multi-layer gateway
 
