@@ -75,9 +75,7 @@ Agent `v7.59+` is required.
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Agent `v7.61+` is required.
-
-**Note**: Windows only supports TCP traceroutes.
+Agent `v7.72+` is required.
 
 1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
@@ -115,34 +113,6 @@ Agent `v7.61+` is required.
     ```
 
   3. Restart the Agent after making these configuration changes to start seeing network paths.
-
-#### Limitations:
-
-- In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example:
-
-  ```yaml
-  init_config:
-    min_collection_interval: 60 # in seconds, default 60 seconds
-  instances:
-    - hostname: api.datadoghq.eu # endpoint hostname or IP
-      protocol: TCP
-      port: 443 # optional port number, default is 80
-  ```
-
-- In Windows Client OS environments, raw packets are [not supported][5]. To work around this, set `protocol: TCP` and `tcp_method: syn_socket`. Agent `v7.67+` and [Windows version 2004 (10.0; Build 19041) or later][6] are required. For example:
-
-  ```yaml
-  init_config:
-    min_collection_interval: 60 # in seconds, default 60 seconds
-  instances:
-    - hostname: api.datadoghq.eu # endpoint hostname or IP
-      protocol: TCP
-      port: 443 # optional port number, default is 80
-      tcp_method: syn_socket
-  ```
-
-[5]: https://learn.microsoft.com/en-us/windows/win32/winsock/tcp-ip-raw-sockets-2#limitations-on-raw-sockets
-[6]: https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-wsasetfailconnectonicmperror
 
 {{% /tab %}}
 {{% tab "Helm" %}}
