@@ -132,7 +132,7 @@ Datadog SDKs support the following [OpenTelemetry OTLP Exporter][13] options.
 
 Signal-specific variables (like `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) always take precedence over their general counterparts (like `OTEL_EXPORTER_OTLP_PROTOCOL`).
 
-### General OTLP Configuration
+### General OTLP configuration
 
 `OTEL_EXPORTER_OTLP_PROTOCOL`
 : **Description**: Specifies the transport protocol to use for all signals unless overridden. <br>
@@ -151,7 +151,7 @@ Signal-specific variables (like `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) always ta
 : **Description**: Specifies the timeout (in milliseconds) for all outgoing OTLP requests unless overridden. <br>
 **Default**: `10000` (10s).
 
-### Metrics-Specific OTLP Configuration
+### Metrics-specific OTLP configuration
 
 For more details on the official specification for these variables, see the [OpenTelemetry OTLP Metrics Exporter documentation][15].
 
@@ -173,12 +173,12 @@ For more details on the official specification for these variables, see the [Ope
 : **Description**: Specifies the timeout (in milliseconds) for a single outgoing OTLP metrics request. Takes precedence over the general `OTEL_EXPORTER_OTLP_TIMEOUT`. <br>
 **Default**: `10000` (10s).
 
-### Logs-Specific OTLP Configuration
+### Logs-specific OTLP configuration
 
 `OTEL_EXPORTER_OTLP_LOGS_PROTOCOL`
 : **Description**: Specifies the OTLP transport protocol for logs. Takes precedence over `OTEL_EXPORTER_OTLP_PROTOCOL`.
 : **Accepted values**: `grpc`, `http/protobuf`, `http/json`
-: **Default**: (SDK-dependent)
+: **Default**: `http/protobuf`
 
 `OTEL_EXPORTER_OTLP_LOGS_ENDPOINT`
 : **Description**: Specifies the URL for sending OTLP logs. Takes precedence over `OTEL_EXPORTER_OTLP_ENDPOINT`.
