@@ -215,7 +215,6 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 
 [200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [201]: https://docs.aws.amazon.com/systems-manager/
-
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
