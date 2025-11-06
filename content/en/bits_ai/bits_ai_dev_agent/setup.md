@@ -60,7 +60,6 @@ The Dev Agent ingests custom instruction files from your repository, including:
 - `agents.md`  
 - `agent.md`  
 
-You can also define global custom instructions in **Bits AI** > **Dev Agent** > [**Settings**][12], which apply to all Dev Agent sessions.  
 
 You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI** > **Dev Agent** > [**Settings**][12], in the **Agent Instructions** section. 
 
