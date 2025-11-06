@@ -25,7 +25,7 @@ further_reading:
 
 The Network Analytics page provides insights into your overall network health and shows [recommended queries](#recommended-queries) at the top of the page. These recommended queries enable you to run common queries and see snapshots of relevant metrics, so that you can see changes in throughput, latency, DNS errors, and more. Clicking on a recommended query automatically populates the search bar, group bys, and summary graphs to provide you with relevant insights into your network.
 
-{{< img src="network_performance_monitoring/network_analytics/cnm_network_analytics_3.png" alt="Network Analytics landing page under Cloud Network Monitoring" >}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_network_analytics_2.png" alt="Network Analytics landing page under Cloud Network Monitoring" >}}
 
 ## Queries
 
@@ -35,17 +35,25 @@ Additionally, Datadog provides a list of default [out-of-the-box](#default-tags)
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="network diagram showing how requests are seen when grouping by tags" style="width:100%;">}}
 
-For example, if you want to see network traffic between your ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, and add the `client_service` and `server_availability-zone` tags in the **Group By** drop-down to visualize the traffic flow between these two sets of tags:
+For example, if you want to see network traffic between your ordering service called `orders-app` and all of your availability zones, use `client_service:orders-app` in the search bar, add the `service` tag in the **View clients as** drop-down, then use the `availability-zone` tag in the **View servers as** drop-down to visualize the traffic flow between these two sets of tags:
 
-{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag_2.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/network_analytics_with_client_and_server_tag.png" alt="Network Analytics page showing how requests are seen when filtering on service and grouping by availability zone" style="width:90%;">}}
 
-The default view aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select **Auto-grouped traffic** to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
-
-**Note**: For information on `NA/Untagged` traffic paths, see [Unresolved traffic](#unresolved-traffic).
+For information on `NA/Untagged` traffic paths, see [Unresolved traffic](#unresolved-traffic).
 
 Additionally, the following diagram illustrates inbound and outbound requests when grouping by `client` and `server` tags. The client is where the connection originated, and the server is where the connection terminated.
 
 {{< img src="network_performance_monitoring/network_analytics/network_diagram2.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
+
+The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period. Select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
+
+{{< img src="network_performance_monitoring/network_analytics/cnm_default_view_2.png" alt="CNM default view with drop downs showing view clients and servers as auto grouped traffic" style="width:90%;">}}
+
+The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
+
+{{< img src="network_performance_monitoring/network_analytics/cnm_flow_table_region_2.png" alt="Aggregate connection table filtered" style="width:90%;">}}
+
+You can further aggregate to isolate to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
 
 ### Understanding client and server roles in relation to traffic direction
 
@@ -64,7 +72,7 @@ For example, if a client in `us-east-1d` talks to a server in `us-east-1c`, you 
 
 ### Recommended queries
 
-{{< img src="network_performance_monitoring/network_analytics/recommended_queries_3.png" alt="The Network Analytics page in Datadog displaying three recommended queries">}}
+{{< img src="network_performance_monitoring/network_analytics/recommended_queries_2.png" alt="The Network Analytics page in Datadog displaying three recommended queries">}}
 
 Recommended queries allow you to begin investigating into your network—whether you're troubleshooting a specific issue or gaining a better overall understanding of your network. The recommended queries help you quickly find relevant network information without needing to search for or group the traffic. For example, the recommended query `Find dependencies of service: web-store` populates the search bar with the query `client_service: web-store` and displays the top services that the service web-store is sending traffic to within the network, and therefore its downstream dependencies.
 
@@ -82,7 +90,9 @@ You can use the facet panels to browse through all of the tags available on your
 
 #### Custom facets
 
-Aggregate and filter your traffic data by any tags on the network analytics page. A list of included tags is located on the left side of the screen under the **Client** and **Server** tabs, and in the **Group By** dropdown menu.
+Aggregate and filter your traffic data by any tags on the network analytics page. A list of included tags is located on the left side of the screen under the **Client** and **Server** tags, and in the **View clients as** and **View servers as** dropdown menus.
+
+{{< img src="network_performance_monitoring/network_analytics/drop_down_cnm.png" alt="Dropdown menu from network analytics page showing the facet list" style="width:90%;">}}
 
 Include listed tags are `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
@@ -90,7 +100,7 @@ Include listed tags are `service`, `availability zone`, `env`, `environment`, `p
 2. Enter the relevant tag you want to create a custom facet upon.
 3. Click **Add**.
 
-After the custom facet is created, use this tag to filter and aggregate traffic on the network analytics page and network map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
+Once the custom facet is created, use this tag to filter and aggregate traffic on the network analytics page and network map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
 
 ### Wildcard search
 To perform a multi-character wildcard search, use the `*` symbol as follows:
@@ -107,15 +117,23 @@ To learn more, see the [search syntax][1] documentation.
 
 ### Group by
 
-Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to view all your data in a single group using the **Auto-Grouped** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
+Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to view all your data in a single group using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
 
-If you want to investigate connections from all of your hosts in a single grouping, add the `client_host` and  `Auto-Grouped-Servers` tags in the **Group By** dropdown.
+If you want to investigate connections from all of your hosts in a single grouping, add the `host` tag in the **View clients as** dropdown, and add `Ungrouped traffic` in the **View servers as** dropdown. 
 
-{{< img src="network_performance_monitoring/network_analytics/cnm_auto-grouped_client.png" alt="NPM analytics page sorting by host and grouped by Auto-grouped traffic" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_un-grouped.png" alt="NPM analytics page sorting by host and grouped by Ungrouped traffic" style="width:90%;">}}
+
+If you have traffic that is not tagged by a specific group, you can select **Auto-grouped traffic** to group data by any available tags. For example, to see which tags are available for a specific `service`, use the `service` tag in the **View clients as** dropdown, and add `Auto-grouped traffic` in the **View servers as** dropdown:
+
+{{< img src="network_performance_monitoring/network_analytics/cnm_auto-grouped.png" alt="NPM analytics page sorting by service tags" style="width:90%;">}}
 
 The **Auto-grouped traffic** option can help you identify the source of your tags. For example, hover over the individual icons to display a tooltip that indicates the tag's origin:
 
 {{< img src="network_performance_monitoring/network_analytics/npm_icon_tooltip.png" alt="Hovering over the icon tooltip to display the tag source" style="width:90%;">}}
+
+Using the search bar and the group by feature together is helpful to further isolate your network traffic. For example, to find all traffic from your `auth-dotnet` service across all data centers, enter `service:auth-dotnet` in the search bar and select `datacenter` in the **View clients** as dropdown:
+
+{{< img src="network_performance_monitoring/network_analytics/search_bar_with_groupby_2.png" alt="Using group by option with search field" style="width:90%;">}}
 
 ### Neutral tags
 
@@ -208,13 +226,17 @@ The summary graphs are a condensed view of your network, which you can modify to
 
 To change the visualization type, click on the pencil icon in the top right corner of the graph. Select from the options available, as shown in the screenshot below.
 
-{{< img src="network_performance_monitoring/network_analytics/summary_graph_visualization_options.png" alt="The summary graph visualization options, displaying options to adjust Y-Axis Scale with Linear, Log, Pow, and Sqrt, and to adjust Graph Type with Area, Line, Bars, Toplist, Change, and Piechart" style="width:70%;">}}
+{{< img src="network_performance_monitoring/network_analytics/summary_graph_visualization_options.png" alt="The summary graph visualization options, displaying options to adjust Y-Axis Scale with Linear, Log, Pow, and Sqrt, and to adjust Graph Type with Area, Line, Bars, Toplist, Change, and Piechart" style="width:80%;">}}
 
 To hide a specific graph, click on the hide icon next to the pencil icon. You can display as little as one graph or as many as three graphs. To add graphs, click on the plus icon `+` on the right side of the summary graph and select the graph to add. You can also reset the graphs to the default graphs when adding a new graph.
 
+{{< img src="network_performance_monitoring/network_analytics/summary_graphs_reset_graphs.png" alt="The summary graphs section displaying the options to Add graph and Reset Graphs" style="width:80%;">}}
+
 ## Network data
 
-Network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source:
+{{< img src="network_performance_monitoring/network_analytics/network_data2.png" alt="network data" style="width:90%;" >}}
+
+Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source:
 
 * **Sent metrics**: measure the value of something from the _source_ to the _destination_ from the source's perspective.
 * **Received metrics**: measure the value of something from the _destination_ to the _source_ from the source's perspective.
