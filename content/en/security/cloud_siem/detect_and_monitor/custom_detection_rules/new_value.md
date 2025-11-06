@@ -26,7 +26,7 @@ A new value detection rule:
 
 The **Detect new value** field defines the attributes containing the values to learn. You can add up to five attributes.
 
-#### Group by fields
+#### Group-by fields
 
 {{< img src="security/security_monitoring/detection_rules/new_value/group_by.png" alt="A new value rule's query's group by field highlighted" style="width:100%;" >}}
 
