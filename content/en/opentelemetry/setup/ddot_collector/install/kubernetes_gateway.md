@@ -374,6 +374,45 @@ otelAgentGateway:
   config: | <YOUR CONFIG>
 ```
 
+### Enable Autoscaling with Horizontal Pod Autoscaler (HPA)
+
+The DDOT Collector gateway supports autoscaling with the Kubernetes Horizontal Pod Autoscaler (HPA) feature. To enable HPA, configure `otelAgentGateway.autoscaling`.
+
+```yaml
+# values.yaml
+targetSystem: "linux"
+agents:
+  enabled: false
+clusterAgent:
+  enabled: false
+otelAgentGateway:
+  enabled: true
+  ports:
+    - containerPort: "4317"
+      name: "otel-grpc"
+  config: | <YOUR CONFIG>
+  replicas: 4  # 4 replicas to begin with and HPA may override it based on the metrics
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    metrics:
+      # Aim for high CPU utilization for higher throughput
+      - type: Resource
+        resource:
+          name: cpu
+          target:
+            type: Utilization
+            averageUtilization: 80
+    behavior:
+      scaleUp:
+        stabilizationWindowSeconds: 30
+      scaleDown:
+        stabilizationWindowSeconds: 60
+```
+
+You can use resource metrics (CPU or memory), custom metrics (Kubernetets Pod or Object) or external metrics as the autoscaling metrics. For resource metrics, make sure to have the [Kubernetes metrics server][9] running in your cluster. For custom or external metrics, consider configuring the [Datadog Cluster Agent metrics provider][10].
+
 ### Deploying a multi-layer gateway
 
 For advanced scenarios, you can deploy multiple gateway layers to create a processing chain. To do this, deploy each layer as a separate Helm release, starting from the final layer and working backward.
@@ -516,3 +555,5 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
 [6]: https://opentelemetry.io/docs/collector/deployment/gateway/
 [7]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/config/configtls
 [8]: http://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
+[9]: http://github.com/kubernetes-sigs/metrics-server
+[10]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
