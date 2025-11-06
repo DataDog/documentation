@@ -3552,6 +3552,11 @@ menu:
       parent: cnm_analytics
       identifier: cnm_analytics_cloud_services
       weight: 10001
+    - name: Tags Reference
+      url: network_monitoring/cloud_network_monitoring/tags_reference/
+      parent: cnm_analytics
+      identifier: cnm_analytics_tags_reference
+      weight: 10002
     - name: Network Map
       url: network_monitoring/cloud_network_monitoring/network_map/
       parent: cnm

@@ -254,77 +254,7 @@ For information about monitoring cloud services and external endpoints, see [Clo
 
 For information about analyzing data in the network table and sidepanel, see [Network Data Table][14].
 
-## Default tags
-
-The following is a list of default `server` and `client` tags available out-of-the-box for querying and analyzing network traffic.
-| server                    | client                      |
-|---------------------------|-----------------------------|
-| server_team               | client_team                |
-| server_role               | client_role                |
-| server_env                | client_env                 |
-| server_environment        | client_environment         |
-| server_app                | client_app                 |
-| server_domain             | client_datacenter          |
-| server_dns_server         | client_instance-id         |
-| server_datacenter         | client_instance-type       |
-| server_instance-id        | client_security-group-name |
-| server_instance-type      | client_security-group      |
-| server_security-group-name| client_name                |
-| server_security-group     | client_image               |
-| server_name               | client_account             |
-| server_image              | client_kernel_version      |
-| server_account            | client_autoscaling_group   |
-| server_kernel_version     | client_region              |
-| server_autoscaling_group  | client_terraform.module    |
-| server_region             | client_site                |
-| server_terraform.module   | client_image_name          |
-| server_site               | client_pod_name            |
-| server_image_name         | client_kube_deployment     |
-| server_pod_name           | client_kube_replica_set    |
-| server_kube_deployment    | client_kube_job            |
-| server_kube_replica_set   | client_kube_cronjob        |
-| server_kube_job           | client_kube_daemon_set     |
-| server_kube_cronjob       | client_kube_stateful_set   |
-| server_kube_daemon_set    | client_kube_cluster_name   |
-| server_kube_stateful_set  | client_kube_service        |
-| server_kube_cluster_name  | client_kube_namespace      |
-| server_kube_service       | client_kubernetes_cluster  |
-| server_kube_namespace     | client_cluster-name        |
-| server_kubernetes_cluster | client_kube_container_name |
-| server_cluster-name       | client_kube-labels         |
-| server_kube_container_name| client_task_name           |
-| server_kube-labels        | client_task_version        |
-| server_task_name          | client_task_family         |
-| server_task_version       | client_ecs_cluster         |
-| server_task_family        | client_loadbalancer        |
-| server_ecs_cluster        | client_mesos_task          |
-| server_loadbalancer       | client_marathon_app        |
-| server_cacheclusterid     | client_chronos_job         |
-| server_mesos_task         | client_chronos_job_owner   |
-| server_marathon_app       | client_nomad_task          |
-| server_chronos_job        | client_nomad_group         |
-| server_chronos_job_owner  | client_nomad_job           |
-| server_nomad_task         | client_rancher_container   |
-| server_nomad_group        | client_rancher_service     |
-| server_nomad_job          | client_rancher_stack       |
-| server_rancher_container  | client_swarm_service       |
-| server_rancher_service    | client_swarm_namespace     |
-| server_rancher_stack      | client_container_id        |
-| server_swarm_service      | client_container_name      |
-| server_swarm_namespace    | client_image_tag           |
-| server_container_id       | client_short_image         |
-| server_container_name     | client_docker_image        |
-| server_image_tag          | client_kubernetescluster   |
-| server_short_image        | client_kube_cluster        |
-| server_cluster            | client_protocol            |
-| server_docker_image       |                             |
-| server_kubernetescluster  |                             |
-| server_kube_cluster       |                             |
-| server_s3_bucket          |                             |
-| server_rds_instance_id    |                             |
-| server_cloud_endpoint_detection |                      |
-| server_gateway_id         |                             |
-| server_protocol           |                             |
+For a complete reference of default tags available for querying and filtering network traffic, see [Tags Reference][15].
 
 ## Further Reading
 
@@ -338,4 +268,5 @@ The following is a list of default `server` and `client` tags available out-of-t
 [12]: /getting_started/tagging/unified_service_tagging/
 [13]: /network_monitoring/cloud_network_monitoring/cloud_service_monitoring/
 [14]: /network_monitoring/cloud_network_monitoring/network_data_table/
+[15]: /network_monitoring/cloud_network_monitoring/tags_reference/
 
