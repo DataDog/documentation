@@ -11,11 +11,12 @@ further_reading:
 
 ## Overview
 
-Datadog Notebooks combines live graphs, metrics, logs, monitors, and [Analysis Features][1] to create a collaborative environment using your data in real-time. Teams use notebooks to isolate and investigate issues, document incident details, create interactive guides, and build special reports to enhance their proactive workflows. This guide introduces Datadog Notebooks and demonstrates how notebook types enhance team collaboration and investigation workflows.
+Datadog Notebooks combines live graphs, metrics, logs, monitors, and [Analysis Features][1] to create a real-time collaborative environment using your data. Teams can use notebooks to isolate and investigate issues, document incident details, create interactive guides, and build special reports to enhance their proactive workflows.
+
+This guide introduces Datadog Notebooks and demonstrates how notebook types enhance team collaboration and investigation workflows.
 
 ### Key benefits
 
-Notebooks provide:
 - **Direct data access**: Query and visualize your Datadog metrics, logs, and traces without leaving the document
 - **Real-time collaboration**: Multiple team members can edit simultaneously, leave comments, and track changes
 - **Workflow integration**: Create notebooks from alerts, dashboards, logs, or Datadog Case Management to start investigations where issues appear
@@ -34,17 +35,17 @@ Selecting the appropriate notebook type helps your team understand the document'
 
 **Postmortem** notebooks analyze completed incidents. Create these after service disruptions to document timelines, identify root causes, and track improvement actions.
 
-Every notebook type offers collaboration with others and connects to your Datadog data in real-time.
+Every notebook type offers collaboration with others and connects to your Datadog data.
 
 ## Example case study: Investigating log errors with notebooks
 
-When error logs appear in your system, creating a Notebook is one click away. Here's a walkthrough of how your team can use a collaborative notebook to investigate and uncover the root cause of recent check failures. This process allows the team to make the necessary adjustments to prevent similar issues in the future.
+When error logs appear in your system, creating a Notebook is one click away. Here's an example of how your team can use a collaborative notebook to investigate and uncover the root cause of recent check failures. This process allows the team to make the necessary adjustments to prevent similar issues in the future.
 
 1. **You notice error spikes in your application logs**
-
    {{< img src="/getting_started/notebooks/log-explorer-errors.png" alt="Your image description" style="width:100%;" >}}
 
-1. **From the Log Explorer, click "Open in Notebooks" and select "New notebook" on the next screen**
+1. **Create a notebook from the Log Explorer**<br>
+   Click "Open in Notebooks" and select "New notebook" on the next screen.
 
    {{< img src="/getting_started/notebooks/notebooks-button.png" alt="Your image description" style="width:80%;" >}}
 
