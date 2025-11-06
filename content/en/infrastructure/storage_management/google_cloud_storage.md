@@ -15,8 +15,6 @@ further_reading:
 
 ## Setup
 
-Follow these steps to set up Storage Management:
-
 ### Step 1: Install the Google Cloud integration and enable resource collection
 
 To collect Google Cloud Storage metrics from your Google Cloud project, install the Google Cloud integration in Datadog. Enable Resource Collection for the project containing the buckets you want to monitor. Resource Collection allows Datadog to associate your buckets' labels with the metrics collected through Storage Management.
