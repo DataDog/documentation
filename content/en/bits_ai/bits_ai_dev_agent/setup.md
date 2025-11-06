@@ -11,7 +11,7 @@ Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull re
 
 1. Install the [GitHub integration][5]. For full installation and configuration steps, see the [GitHub integration guide][6].
 
-1. In Datadog's GitHub integration, configure the following GitHub permissions:
+1. Configure permissions for the GitHub integration.
 
    1. To enable basic Dev Agent functionality, enable the following permissions:
 
