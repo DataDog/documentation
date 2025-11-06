@@ -60,7 +60,7 @@ In the detail view, you can modify:
 - Description
 - Components
 
-After accepting a System, you can update additional metadata on the entity page in your Catalog.
+After accepting a System, you can update additional metadata on the entity page in your Catalog. Accepted Systems are automatically tagged with `created_by:ai` so you can identify which Systems in your Catalog were originally created by AI.
 
 ## Further reading
 
