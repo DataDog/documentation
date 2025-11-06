@@ -43,7 +43,7 @@ Use **custom metrics from spans** when you:
 - Don't need to retain the span, but want to extract key signals for trending or alerting
 
 Use **custom metrics from traces** when you:
-- Need metrics derived from **complete trace context**, such as total trace duration or span diversity
+- Need metrics derived from **complete trace context**, such as total trace duration or the number of operations per trace.
 - Want to alert on conditions that require full trace knowledge (e.g., N+1 query detection, fan-out patterns)
 
 <div class="alert alert-danger">Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and are billed accordingly. To avoid high costs, do not group metrics by high-cardinality values such as user IDs or request IDs.</div>
