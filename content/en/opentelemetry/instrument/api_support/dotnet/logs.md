@@ -65,12 +65,12 @@ To migrate, you must remove the OpenTelemetry logging packages (such as `OpenTel
 
 This feature works by intercepting logs directly from the `Microsoft.Extensions.Logging.ILogger` interface and does not interact with the OpenTelemetry Logs API.
 
-### Existing Datadog Log Injection
+### Existing Datadog log injection
 
-If you are currently using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
+If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
 
 1.  Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-2.  The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is now handled by the structured OTLP payload.
+2.  The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
 3.  Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required) and disable any file-based log collection for this service to avoid duplicate logs.
 
 ## Troubleshooting

@@ -121,11 +121,11 @@ Your existing code that uses `logs.getLogger()` will continue to work.
 
 ### Existing Datadog log injection
 
-If you are using Datadog's traditional log injection (`DD_LOGS_INJECTION=true`):
+If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
 
 1.  Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-2.  The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs.
-3.  Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required).
+2.  The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
+3.  Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required) and disable any file-based log collection for this service to avoid duplicate logs.
 
 ## Troubleshooting
 
