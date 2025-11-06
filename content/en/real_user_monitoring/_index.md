@@ -79,14 +79,17 @@ A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity
 
 ### Technical limitations
 
-| Property                                 | Limitation               |
-| ---------------------------------------- | ------------------------ |
-| Maximum duration of a session            | 4 hours                  |
-| Timeout of a session                     | 15 minutes of inactivity |
-| Maximum number of attributes per event   | 1,000                    |
-| Maximum attribute depth per event        | 20                       |
-| Maximum event size                       | 1 MB                     |
-| Maximum intake payload size              | 5 MB                     |
+| Property                                   | Limitation               |
+| ------------------------------------------ | ------------------------ |
+| Maximum duration of a session              | 4 hours                  |
+| Timeout of a session                       | 15 minutes of inactivity |
+| Maximum number of attributes per event     | 1,000                    |
+| Maximum attribute depth per event          | 20                       |
+| Maximum event size                         | 1 MB                     |
+| Maximum intake payload size                | 5 MB                     |
+| Maximum source maps and mapping files size | 500 MB per file          |
+| Maximum dSYM files size                    | 2 GB per file            |
+
 
 ## What is Session Replay?
 
