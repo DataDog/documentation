@@ -111,4 +111,4 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 [2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
 [3]: /network_monitoring/cloud_network_monitoring/network_analytics#table
 [4]: /network_monitoring/cloud_network_monitoring/network_analytics/#recommended-queries
-[5]: https://app.datadoghq.com/network/
+[5]: https://app.datadoghq.com/network
