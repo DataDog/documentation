@@ -10,6 +10,8 @@ further_reading:
 
 You can use account-level log subscriptions in your AWS environment to automatically forward all of your CloudWatch logs to Datadog. With an account-level log subscription, you don't need to manually configure log forwarding when you have a new log source, or when AWS releases a new service. You can also define your own selection criteria or filter pattern, for more control over which logs are forwarded.
 
+**Note**: [Open Cybersecurity Schema Framework (OCSF)][6] format is supported by Datadog Log Management.
+
 ## Create an account-level log subscription
 
 There are two ways to create an account-level log subscription, through [CloudFormation](#cloudformation-recommended) and through [manual setup](#manual). For the simplest setup, use CloudFormation to create an Amazon Data Firehose and associated resources in each of your selected regions.
@@ -266,3 +268,4 @@ Go to the [Log Explorer][2] and enter the search query `@aws.firehose.arn:"<FIRE
 [3]: https://console.aws.amazon.com/firehose/home
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /getting_started/site/
+[6]: https://schema.ocsf.io/
