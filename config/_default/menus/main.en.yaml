@@ -5380,11 +5380,6 @@ menu:
       parent: code_coverage
       identifier: code_coverage_data_collected
       weight: 2
-    - name: Upload Reports
-      url: code_coverage/upload/
-      parent: code_coverage
-      identifier: code_coverage_upload
-      weight: 3
     - name: PR Gates
       url: pr_gates/
       pre: ci
