@@ -40,7 +40,7 @@ The following sections detail how Bits AI Dev Agent integrates with Datadog prod
 Bits AI Dev Agent integrates with GitHub to create pull requests, respond to comments, update commits, and fix CI failures. 
 
 - Generates PR titles and descriptions based on your PR template.
-- Opens PRs as drafts, iterates using CI logs, and marks them ready for review when checks pass.
+- Opens PRs as drafts, iterates using CI logs, and marks the PRs as ready for review when checks pass.
 - Continues iterating in response to chat messages and review feedback.
   
   **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
@@ -50,9 +50,9 @@ Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent 
 ### Auto-push
 
 Auto-push allows the Agent to create branches, push code, and open PRs when it detects something it can help you with. For example, the Agent can:
-- Auto-create PRs for high impact errors (such as 500s or crashes)
-- Update PRs in response to your comments in GitHub
-- Update PRs to address CI failures
+- Auto-create PRs for high-impact errors (such as 500s or crashes).
+- Update PRs in response to your comments in GitHub.
+- Update PRs to address CI failures.
 
 Auto-push only opens PRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
 

@@ -11,21 +11,21 @@ Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull re
 
 1. Install the [GitHub integration][5]. For full installation and configuration steps, see the [GitHub integration guide][6].
 
-1. Configure GitHub permissions:
+1. In Datadog's GitHub integration, configure the following GitHub permissions:
 
-   1. To enable basic Dev Agent functionality, configure the GitHub integration with the following permissions:
+   1. To enable basic Dev Agent functionality, enable the following permissions:
 
-      - **Repository Permissions**
+      - **Repository permissions**
         - `Contents: Read & Write`
         - `Pull Requests: Read & Write`
-      - **Subscribe to Events**
-        - `Push`
+      - **Subscribe to events**
+        - `Pushes`
 
     1. (Optional) To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
 
         - **Repository permissions**  
           - `Checks: Read`  
-          - `Commit statuses: Read only`  
+          - `Commit statuses: Read Only`
         - **Subscribe to events**  
           - `Check run`  
           - `Check suite`  
@@ -45,12 +45,9 @@ To configure telemetry tagging, see [Tag your APM telemetry with Git information
 You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][11] > **Service Repository Mapping**.
 
 ### Enable auto-push
+To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to **Bits AI Dev** > [**Settings**][12], and set the toggle to **Enable**.
 
-Enable auto-push to allow the Dev Agent to push commits directly to a branch:
-
-1. Navigate to **Bits AI Dev** > [**Settings**][12], and use the toggle to enable auto-push.
-
-**Note**: If auto-push is disabled, you must review and approve code in Datadog before it is pushed. 
+**Note**: If auto-push is disabled, you must review and approve code in Datadog before the Dev Agent can push it.
 
 ### Configure custom instructions
 
