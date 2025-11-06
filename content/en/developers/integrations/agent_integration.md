@@ -31,14 +31,14 @@ Before you begin, ensure that you've [joined the Datadog Partner Network][7], ha
 
 Follow these steps to create your agent-based integration:
 
-1. [Install the required development tools](#preqrequisites).
+1. [Install the required development tools](#prerequisites).
 2. [Configure the Datadog Agent integration developer tool](#configure-the-datadog-agent-integration-developer-tool).
 3. [Generate your integration scaffolding](#generate-your-scaffolding).
 4. [Develop your agent check](#develop-your-agent-check).
 5. [Test your integration](#test-your-agent-check).
-6. [Submit your code for review](#submit-your-code).
+6. [Submit your code for review](#submit-your-code-for-review).
 
-### Preqrequisites
+### Prerequisites
 
 Ensure following tools are installed:
 
@@ -55,38 +55,28 @@ Use the Datadog Agent developer tool to build and test your integration. The set
 
 {{% tab "OOTB integration" %}}
 
-1. **Create a working directory**
-   
-   The developer tool expects your work to be located in `$HOME/dd/`:
+1. Create a working directory. The developer tool expects your work to be located in `$HOME/dd/`:
 
    ```shell
    mkdir $HOME/dd && cd $HOME/dd
    ```
 
-2. **Fork the repository**
+2. Fork the [Datadog/integrations-extras][101] repository to your GitHub account.
 
-   Fork the [Datadog/integrations-extras][101] repository to your GitHub account.
-
-3. **Clone your fork** 
-
-   Clone your fork into the `dd` directory:
+3. Clone your fork into the `dd` directory:
 
    ```shell
    git clone git@github.com:<YOUR_USERNAME>/integrations-extras.git
    ```
 
-4. **Create a feature branch**
-
-   Create and switch to a new branch for your integration:
+4. Create and switch to a new branch for your integration:
 
    ```shell
    cd integrations-extras
    git switch -c <YOUR_INTEGRATION_NAME> origin/master
    ```
 
-5. **Configure the default respository**
-
-   Set `extras` as the default working repository: 
+5. Set `extras` as the default working repository: 
 
    ```shell
    ddev config set repo extras
@@ -105,34 +95,26 @@ Use the Datadog Agent developer tool to build and test your integration. The set
 
 {{% tab "Marketplace integration" %}}
 
-1. **Create a working directory**
-
-   The developer tool expects your work to be located in `$HOME/dd/`:
+1. Create a working directory. The developer tool expects your work to be located in `$HOME/dd/`:
 
    ```shell
    mkdir $HOME/dd && cd $HOME/dd
    ```
 
-2. **Clone the repository**
-
-   Clone the [Datadog/marketplace][101] repository. If you don't have access, request it from your Datadog contact.
+2. Clone the [Datadog/marketplace][101] repository. If you don't have access, request it from your Datadog contact.
 
    ```shell
    git clone git@github.com:DataDog/marketplace.git
    ```
 
-3. **Create a feature branch**
-
-   Create and switch to a new branch for your integration:
+3. Create and switch to a new branch for your integration:
 
    ```shell
    cd marketplace
    git switch -c <YOUR_INTEGRATION_NAME> origin/master
    ```
 
-4. **Configure the default repository**
-
-   Set `marketplace` as the default working repository:
+4. Set `marketplace` as the default working repository:
 
    ```shell
    ddev config set repo marketplace
@@ -155,6 +137,8 @@ Use the Datadog Agent developer tool to build and test your integration. The set
 
 Use the `ddev create` command to generate the initial file and directory structure for your agent-based integration.
 
+<div class="alert alert-info">See the Configuration Method tab in the Developer Platform for the correct command for your integration.</div>
+
 1. **Run a dry run (recommended)**
 
     Use the `-n` or `--dry-run` flag to preview the files that are generated, without writing anything to disk. Confirm that the output path matches the expected repository location.
@@ -165,7 +149,7 @@ Use the `ddev create` command to generate the initial file and directory structu
 
 2. **Generate the files** 
 
-    After verifying, run the same command without the `-n` to create the scaffolding. Follow the prompts to provide integration details.
+    After verifying the directory location, run the same command without the `-n` to create the scaffolding. Follow the prompts to provide integration details.
 
     ```shell
     ddev create -t check_only <YOUR_INTEGRATION_NAME> --skip-manifest
@@ -178,7 +162,7 @@ Each agent-based integration centers around an agent check, a Python class that 
 Agent [checks][16] inherit from the `AgentCheck` base class and must meet the following requirements:
 
 - **Python compatibility**:
-    - Integrations for Datadog Agent v7+ must support Python 3. 
+    - Integrations for Datadog Agent v7+ must support Python 3. All new integrations must target v7+.
     - Integrations for Datadog Agent v5-v6 use Python 2.7.
 - **Class inheritance**: Each check must subclass `AgentCheck`.
 - **Entry point**: Each check must implement a `check(self, instance)` method.
@@ -192,14 +176,15 @@ Agent [checks][16] inherit from the `AgentCheck` base class and must meet the fo
 The following example shows logic for an integration named `Awesome`.
 
 This check defines a [service check][4] called `awesome.search`, which searches a webpage for a specific string:
-    - Returns `OK` if the string is found.
-    - Returns `WARNING` if the page loads but the string is missing.
-    - Returns `CRITICAL` if the page cannot be reached.
+- Returns `OK` if the string is found.
+- Returns `WARNING` if the page loads but the string is missing.
+- Returns `CRITICAL` if the page cannot be reached.
 
 To learn how to submit additional data from your check, see:
-    - [Custom Agent Check][17] for submitting metrics.
-    - [Agent Integration Log Collection][5] for collecting logs from your AgentCheck using `send_log`. Best for single-source log emission.
-    - [HTTP Crawler Tutorial][24] for collecting logs from multiple log sources, such as when pollin several endpoints or external HTTP APIs.
+
+- [Custom Agent Check][17] for submitting metrics.
+- [Agent Integration Log Collection][5] for collecting logs from your AgentCheck using `send_log`. Best for single-source log emission.
+- [HTTP Crawler Tutorial][24] for collecting logs from multiple log sources, such as when pollin several endpoints or external HTTP APIs.
 
 The file `awesome/datadog_checks/awesome/check.py` might look like this:
 
@@ -406,8 +391,6 @@ Agent-based integrations are distributed as Python wheel (.whl) files that custo
 
 The `pyproject.toml` file provides the metadata that is used to package and build the wheel. The wheel contains the files necessary for the functioning of the integration itself, which includes the agent check, configuration example file, and artifacts generated during the wheel build.
 
-All additional elements, including the metadata files, are not meant to be contained within the wheel, and are used elsewhere by the Datadog.
-
 To learn more about Python packaging, see [Packaging Python Projects][21].
 
 After your `pyproject.toml` is ready, create a wheel using one of the following options:
@@ -457,7 +440,7 @@ For customer install commands for both host and container environments, see the 
 
 ## Submit your code for review
 
-Open a pull request with your integration directory in the approriate repo, either [Datadog/integrations-extras][14] or [Datadog/marketplace][15]. The pull request will be reviewed in parrallel with your Developer Platform submission.
+Open a pull request with your integration directory in the appropriate repo, either [Datadog/integrations-extras][14] or [Datadog/marketplace][15]. The pull request is reviewed in parallel with your Developer Platform submission.
 
 ## Updating your integration
 
