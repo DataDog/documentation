@@ -34,13 +34,13 @@ Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments
 
 #### Mobile
 
-1. Install [External Dependency Manager for Unity (EDM4U)][4]. This can be done using [Open UPM][5].
+1. Install the [External Dependency Manager for Unity (EDM4U)][4]. This can be done using [Open UPM][5].
 
 2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][6]. The package URL is `https://github.com/DataDog/unity-package.git`.
 
-3. (Android Only) Configure your project to use [Gradle templates][8], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
+3. (Android only) Configure your project to use [Gradle templates][8], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
 
-4. (Android Only) If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following block in the `dependencies` block in your `mainTemplate.gradle`:
+4. (Android only) If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following code to the `dependencies` block of your `mainTemplate.gradle`:
 
    ```groovy
    constraints {
@@ -52,9 +52,9 @@ Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments
 
 #### WebGL
 
-1. Create a custom WebGL template, following the instructions provided by [Unity][9], or by using the minimally modified version in Datadog's [Github repo][10].
+1. Create a custom WebGL template, following the instructions provided by [Unity][9], or by using the minimally modified version in Datadog's [GitHub repo][10].
 
-2. If you are using your own WebGL template, or have added a new WebGL template, modify it to included Datadog's Browser SDK delivered by CDN.
+2. If you are using your own WebGL template, or have added a new WebGL template, modify it to include the Datadog Browser SDK delivered by CDN.
 
   ```html
   <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"></script>
