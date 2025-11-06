@@ -6398,6 +6398,11 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_open_cybersecurity_schema_framework
       weight: 103
+    - name: OCSF Processor
+      url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/ocsf_processor
+      parent: cloud_siem_open_cybersecurity_schema_framework
+      identifier: cloud_siem_ocsf_processor
+      weight: 10301
     - name: Detect and Monitor
       url: security/cloud_siem/detect_and_monitor/
       parent: cloud_siem
