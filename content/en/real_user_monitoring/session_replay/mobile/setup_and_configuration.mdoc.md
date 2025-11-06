@@ -26,4 +26,4 @@ further_reading:
     text: Web View Tracking
 ---
 
-{% partial file="mdoc/en/real_user_monitoring/session_replay/setup_and_configuration.mdoc.md" /%}
+{% partial file="real_user_monitoring/session_replay/setup_and_configuration.mdoc.md" /%}

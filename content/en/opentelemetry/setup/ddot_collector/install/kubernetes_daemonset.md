@@ -343,6 +343,8 @@ In the snippet below, the Collector configuration is placed directly under the `
                 exporters: [debug, datadog]
 {{< /code-block >}}
 
+{{% otel-infraattributes-prereq %}}
+
 When you apply the `datadog-agent.yaml` file containing this `DatadogAgent` resource, the Operator automatically mounts the Collector configuration into the Agent DaemonSet.
 
 {{% collapse-content title="Completed datadog-agent.yaml file with inlined Collector config" level="p" %}}
@@ -667,6 +669,8 @@ service:
       exporters: [datadog]
 
 {{< /code-block >}}
+
+{{% otel-infraattributes-prereq %}}
 
 {{% /tab %}}
 {{< /tabs >}}

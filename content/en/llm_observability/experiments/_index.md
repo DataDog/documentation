@@ -18,35 +18,32 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 - Run and manage experiments
 - Compare results to evaluate impact
 
-## Installation
+## Setup
 
-Install Datadog's LLM Observability Python SDK:
+1. Install Datadog's LLM Observability Python SDK:
 
-```shell
-pip install ddtrace>=3.15.0
-```
+   ```shell
+   pip install ddtrace>=3.15.0
+   ```
 
-### Setup
+2. Enable LLM Observability:
 
-Enable LLM Observability:
+   ```python
+   from ddtrace.llmobs import LLMObs
 
-```python
-from ddtrace.llmobs import LLMObs
+   LLMObs.enable(
+       api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
+       app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
+       site="datadoghq.com",      # defaults to DD_SITE environment variable
+       project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
+   )
+   ```
 
-LLMObs.enable(
-    api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
-    app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
-    site="datadoghq.com",      # defaults to DD_SITE environment variable
-    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
-)
-```
-
-**Notes**:
-- You need *both* an API key and an application key
+   <div class="alert alert-warning">You must supply both an <code>api_key</code> and <code>app_key</code>.</div>
 
 ## Projects
 _Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
-You can create a project manually in the Datadog console, API, and SDK by specifying a project name that does not already exist in `LLMObs.enable`.
+You can create a project manually in the Datadog console, API, or SDK by specifying a project name that does not already exist in `LLMObs.enable`.
 
 ```python
 LLMObs.enable(
@@ -57,12 +54,50 @@ LLMObs.enable(
 
 ## Datasets
 
-A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_. Each dataset is associated with a _project_.
-You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK. You can use the SDK to push, modify, and retrieve datasets from Datadog.
+A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.  
+
+- **input** (required): Represents all the information that the agent can access in a [task](#task).
+- **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assesss. 
+- **metadata** (optional): Contains any useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, notes.
 
 ### Creating a dataset
 
+You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK:
+
 {{< tabs >}}
+
+{{% tab "CSV" %}}
+
+To create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
+
+```python
+# Create dataset from CSV
+dataset = LLMObs.create_dataset_from_csv(
+    csv_path="questions.csv",
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project",              # Optional: defaults to the project name from LLMObs.enable
+    description="Geography quiz dataset",         # Optional: Dataset description
+    input_data_columns=["question", "category"],  # Columns to use as input
+    expected_output_columns=["answer"],           # Optional: Columns to use as expected output
+    metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
+    csv_delimiter=","                             # Optional: Defaults to comma
+)
+
+# Example "questions.csv":
+# question,category,answer,difficulty
+# What is the capital of Japan?,geography,Tokyo,medium
+# What is the capital of Brazil?,geography,Brasília,medium
+
+```
+
+**Notes**:
+- CSV files must have a header row
+- Maximum field size is 10MB
+- All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
+- The dataset is automatically pushed to Datadog after creation
+
+{{% /tab %}}
+
 {{% tab "Manual" %}}
 
 To manually create a dataset, use `LLMObs.create_dataset()`:
@@ -92,65 +127,45 @@ dataset = LLMObs.create_dataset(
 print(f"View dataset: {dataset.url}")
 ```
 {{% /tab %}}
-
-{{% tab "CSV" %}}
-
-To create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
-
-```python
-# Create dataset from CSV
-dataset = LLMObs.create_dataset_from_csv(
-    csv_path="questions.csv",
-    dataset_name="geography-quiz",
-    input_data_columns=["question", "category"],  # Columns to use as input
-    expected_output_columns=["answer"],           # Columns to use as expected output
-    metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
-    csv_delimiter=",",                           # Optional: Defaults to comma
-    description="Geography quiz dataset",          # Optional: Dataset description
-    project_name="quizzes-project"          # Optional: defaults to the project name from LLMObs.enable
-)
-
-# Example CSV format:
-# question,category,answer,difficulty
-# What is the capital of Japan?,geography,Tokyo,medium
-# What is the capital of Brazil?,geography,Brasília,medium
-
-```
-
-**Notes**:
-- CSV files must have a header row
-- Maximum field size is 10MB
-- All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
-- The dataset is automatically pushed to Datadog after creation
-
-{{% /tab %}}
 {{< /tabs >}}
 
-### Managing dataset records
+### Retrieving a dataset
 
-The Dataset class provides methods to manage records: `append()`, `update()`, `delete()`. You need to `push()` changes to save the changes in Datadog.
+To retrieve a project's existing dataset from Datadog:
 
 ```python
-# Add a new record
-dataset.append({
-    "input_data": {"question": "What is the capital of Switzerland?"},
-    "expected_output": "Bern",
-    "metadata": {"difficulty": "easy"}
-})
+dataset = LLMObs.pull_dataset(
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project" # optional, defaults to the project name from LLMObs.enable
+)
 
-# Update an existing record
-dataset.update(0, {
-    "input_data": {"question": "What is the capital of China?"},
-    "expected_output": "Beijing",
-    "metadata": {"difficulty": "medium"}
-})
-
-# Delete a record
-dataset.delete(1)  # Deletes the second record
-
-# Save changes to Datadog
-dataset.push()
+# Get dataset length
+print(len(dataset))
 ```
+
+#### Exporting a dataset to pandas
+
+The Dataset class also provides the method `as_dataframe()`, which allows you to transform a dataset as a [pandas DataFrame][11].
+
+<div class="alert alert-info"><a href="https://pandas.pydata.org/docs/index.html">Pandas</a> is required for this operation. To install pandas, <code>pip install pandas</code>.</div>
+
+```python
+# Convert dataset to pandas DataFrame
+df = dataset.as_dataframe()
+print(df.head())
+
+# DataFrame output with MultiIndex columns:
+#                                   input_data     expected_output  metadata
+#    question                       category       answer           difficulty
+# 0  What is the capital of Japan?  geography      Tokyo            medium
+# 1  What is the capital of Brazil? geography      Brasília         medium
+```
+
+The DataFrame has a MultiIndex structure with the following columns:
+- `input_data`: Contains all input fields from `input_data_columns`
+- `expected_output`: Contains all output fields from `expected_output_columns`
+- `metadata`: Contains any additional fields from `metadata_columns`
+
 
 ### Dataset versioning
 
@@ -179,7 +194,7 @@ Dataset versions are **NOT** created for changes to `metadata` fields, or when u
 
 After you publish `12`, `11` becomes a previous version with a 90-day window. After 25 days, you run an experiment with version `11`, which causes the 90-day window to **restart**. After another 90 days, during which you have not used version `11`, version `11` may be deleted.
 
-### Accessing dataset records
+### Accessing and managing dataset records
 
 You can access dataset records using standard Python indexing:
 
@@ -194,58 +209,52 @@ records = dataset[1:3]
 for record in dataset:
     print(record["input_data"])
 ```
-
-### Exporting a dataset to pandas
-
-The Dataset class also provides the method `as_dataframe()`, which allows you to export a dataset as a [pandas DataFrame][11].
-
-<div class="alert alert-info"><a href="https://pandas.pydata.org/docs/index.html">Pandas</a> is required for this operation. To install pandas, <code>pip install pandas</code>.</div>
+  
+The Dataset class provides methods to manage records: `append()`, `update()`, `delete()`. You need to `push()` changes to save the changes in Datadog.
 
 ```python
-# Convert dataset to pandas DataFrame
-df = dataset.as_dataframe()
-print(df.head())
+# Add a new record
+dataset.append({
+    "input_data": {"question": "What is the capital of Switzerland?"},
+    "expected_output": "Bern",
+    "metadata": {"difficulty": "easy"}
+})
 
-# DataFrame output with MultiIndex columns:
-#                                    input_data          expected_output  metadata
-#                                    question category         answer    difficulty
-# 0  What is the capital of Japan?  geography         Tokyo      medium
-# 1  What is the capital of Brazil? geography      Brasília      medium
-```
+# Update an existing record
+dataset.update(0, {
+    "input_data": {"question": "What is the capital of China?"},
+    "expected_output": "Beijing",
+    "metadata": {"difficulty": "medium"}
+})
 
-The DataFrame has a MultiIndex structure with the following columns:
-- `input_data`: Contains all input fields from `input_data_columns`
-- `expected_output`: Contains all output fields from `expected_output_columns`
-- `metadata`: Contains any additional fields from `metadata_columns`
+# Delete a record
+dataset.delete(1)  # Deletes the second record
 
-### Retrieving a dataset
-
-To retrieve a project's existing dataset from Datadog:
-
-```python
-dataset = LLMObs.pull_dataset(
-    dataset_name="capitals-of-the-world",
-    project_name="capitals-project" # optional, defaults to the project name from LLMObs.enable
-)
-
-# Get dataset length
-print(len(dataset))
+# Save changes to Datadog
+dataset.push()
 ```
 
 ## Experiments
-An _experiment_ is a collection of traces used to test the behavior of an LLM application or agent against a dataset. The dataset provides the input data, and the outputs are the final generations produced by the application under test.
+Experiments let you systematically test your LLM application by running your agent across a set of scenarios from your dataset and measuring performance against the expected outputs using evaluators. You can then compare how different app configurations perform, side by side.
 
 ### Task
 The task defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
 
 ### Evaluators
-Evaluators are functions that measure how well the model or agent performs by comparing the output to either the expected_output or the original input. Datadog supports the following evaluator types:
-- Boolean: returns true or false
-- score: returns a numeric value (float)
-- categorical: returns a labeled category (string)
+Evaluators are functions executed on each record that measure how well the model or agent performs. It allows you to compare the output to either the expected_output or the original input.  
+
+Datadog supports the following evaluator types:  
+- **Boolean**: returns true or false
+- **score**: returns a numeric value (float)
+- **categorical**: returns a labeled category (string)
 
 ### Summary Evaluators
-Summary Evaluators are optionally defined functions that measure how well the model or agent performs, by providing an aggregated score against the entire dataset, outputs, and evaluation results. The supported evaluator types are the same as above.
+Summary Evaluators are optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). Summary Evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset. 
+
+Datadog supports the following Summary Evaluator types:
+- **Boolean**: returns true or false
+- **score**: returns a numeric value (float)
+- **categorical**: returns a labeled category (string)
 
 ### Creating an experiment
 
@@ -352,13 +361,97 @@ Summary Evaluators are optionally defined functions that measure how well the mo
    print(f"View experiment: {experiment.url}")
    ```
 
-## Setting up an automated experiment in CI/CD
+### Setting up an automated experiment in CI/CD
 You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
-### GitHub Actions
-Use the following GitHub Actions workflow as a template to run an experiment automatically whenever code is pushed to your repository.
+#### GitHub Actions
+This section assumes you have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections successfully. You can use the following Python script and GitHub Actions workflow as templates to run an experiment automatically whenever code is pushed to your repository.
 
 **Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
+
+```python
+from ddtrace.llmobs import LLMObs
+from typing import Dict, Any, Optional, List
+
+LLMObs.enable(
+    api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
+    app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
+    site="datadoghq.com",      # defaults to DD_SITE environment variable
+    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
+)
+
+
+dataset = LLMObs.create_dataset(
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project",  # optional, defaults to project_name used in LLMObs.enable
+    description="Questions about world capitals",
+    records=[
+        {
+            "input_data": {
+                "question": "What is the capital of China?"
+            },  # required, JSON or string
+            "expected_output": "Beijing",  # optional, JSON or string
+            "metadata": {"difficulty": "easy"},  # optional, JSON
+        },
+        {
+            "input_data": {
+                "question": "Which city serves as the capital of South Africa?"
+            },
+            "expected_output": "Pretoria",
+            "metadata": {"difficulty": "medium"},
+        },
+    ],
+)
+
+def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+    question = input_data["question"]
+    # Your LLM or processing logic here
+    return "Beijing" if "China" in question else "Unknown"
+
+
+def exact_match(
+    input_data: Dict[str, Any], output_data: str, expected_output: str
+) -> bool:
+    return output_data == expected_output
+
+
+def overlap(
+    input_data: Dict[str, Any], output_data: str, expected_output: str
+) -> float:
+    expected_output_set = set(expected_output)
+    output_set = set(output_data)
+
+    intersection = len(output_set.intersection(expected_output_set))
+    union = len(output_set.union(expected_output_set))
+
+    return intersection / union
+
+
+def fake_llm_as_a_judge(
+    input_data: Dict[str, Any], output_data: str, expected_output: str
+) -> str:
+    fake_llm_call = "excellent"
+    return fake_llm_call
+
+
+def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
+    return evaluators_results["exact_match"].count(True)
+
+
+experiment = LLMObs.experiment(
+    name="capital-cities-test",
+    task=task,
+    dataset=dataset,
+    evaluators=[exact_match, overlap, fake_llm_as_a_judge],
+    summary_evaluators=[num_exact_matches],  # optional
+    description="Testing capital cities knowledge",
+    config={"model_name": "gpt-4", "version": "1.0"},
+)
+
+results = experiment.run(jobs=4, raise_errors=True)
+
+print(f"View experiment: {experiment.url}")
+```
 
 ```yaml
 name: Experiment SDK Test
@@ -366,7 +459,7 @@ name: Experiment SDK Test
 on:
   push:
     branches:
-      - main # Or your desired branch
+      - main
 
 jobs:
   test:
@@ -378,12 +471,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13.0' # Or your desired Python version
-      - name: Install Poetry
-        run: pip install poetry
-      - name: Install dependencies
-        run: poetry install
-      - name: Run tests
-        run: poetry run pytest -vv -s
+      - name: Install Dependencies
+        run: pip install ddtrace>=3.15.0 dotenv
+      - name: Run Script
+        run: python ./experiment_sdk_demo/main.py
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
@@ -391,7 +482,7 @@ jobs:
 
 ## Cookbooks
 
-To see in-depth examples of what you can do with LLM Experiments, you can check these [jupyter notebooks][10]
+For in-depth examples of what you can do with LLM Experiments, see Datadog's provided [Jupyter notebooks][10].
 
 ## HTTP API
 
@@ -951,3 +1042,7 @@ Empty body on success.
 [11]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 [12]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [13]: /llm_observability/instrumentation/auto_instrumentation?tab=python
+[14]: /llm_observability/experiments/?tab=manual#setup
+[15]: /llm_observability/experiments/?tab=manual#projects
+[16]: /llm_observability/experiments/?tab=manual#datasets
+[17]: /llm_observability/experiments/?tab=manual#experiments

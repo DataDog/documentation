@@ -5,6 +5,9 @@ aliases:
 - /integrations/guide/azure-programmatic-management/
 description: Connect Microsoft Azure with Datadog using Azure app registration integration options. Configure metric collection, log forwarding, and Agent installation.
 further_reading:
+    - link: 'https://www.datadoghq.com/blog/azure-integration-onboarding/'
+      tag: 'Blog'
+      text: 'Accelerate your Azure integration setup with guided onboarding'
     - link: 'https://docs.datadoghq.com/integrations/azure/#overview'
       tag: 'Documentation'
       text: 'Microsoft Azure integration'
@@ -19,7 +22,7 @@ Datadog offers multiple configuration options for the Azure integration. This gu
 
 ## Prerequisites
 
-If you haven't already, create a [Datadog account][2]. 
+If you haven't already, create a [Datadog account][2].
 
 {{% collapse-content title="Permissions required for integration setup" level="h4" expanded=false id="required-permissions" %}}
 
@@ -56,7 +59,7 @@ The `Datadog Admin Role`, or any other role with the `azure_configurations_manag
 
 ## Setup
 
-Follow the instructions on this page to set up the **Azure integration** through an app registration, available for all Datadog sites. 
+Follow the instructions on this page to set up the **Azure integration** through an app registration, available for all Datadog sites.
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_siteSelector.mp4" alt="Site selector for US3 site" video=true >}}
 
@@ -94,10 +97,10 @@ You can also click to enable custom metric collection from [Azure Application In
    3. Optionally, open **Log filtering options** to filter logs by tags, or apply filtering for specific information (such as PII) using regex.
 
    See the [Architecture section][34] of the automated log forwarding guide for more information about this architecture.
-    
+
 8. Click **Confirm** to finish the setup.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Terraform" expanded=false level="h4" id="terraform-setup" %}}
 
@@ -190,7 +193,7 @@ Datadog provides a monitor template to help you get started. To use the monitor 
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
 5. [Configure notifications][27] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Use an existing app registration" level="h4" expanded=false id="existing-app-registration-setup" %}}
 
@@ -200,7 +203,7 @@ Datadog provides a monitor template to help you get started. To use the monitor 
 
 If you need to set up an app registration for Datadog, see the [Quickstart](#quickstart-setup) or [Terraform](#terraform-setup) setup methods.
 
-### Instructions 
+### Instructions
 
 1. In the [Datadog Azure integration tile][20], select **Add Existing**.
 2. In the **Tenant ID** field, paste your Directory (tenant) ID.
@@ -219,17 +222,17 @@ You can also click to enable custom metric collection from [Azure Application In
 6. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
 7. Click **Create Configuration**.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 ## Metric collection
 
-Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. The [Integrations page][9] shows a curated list of predefined sub-integrations that provide additional out-of-the-box dashboards and monitors for specific Azure services. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. However, Datadog can ingest metrics from **any Azure Monitor-supported resource**, even if it doesn't have a dedicated sub-integration tile. 
+Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. The [Integrations page][9] shows a curated list of predefined sub-integrations that provide additional out-of-the-box dashboards and monitors for specific Azure services. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. However, Datadog can ingest metrics from **any Azure Monitor-supported resource**, even if it doesn't have a dedicated sub-integration tile.
 
 You can find your Azure metrics in the metrics summary page in the Datadog platform by navigating to `Metrics > Summary` and searching for `Azure`.
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="Metric summary image" style="width:100%;" >}}
 
-## Enable log collection 
+## Enable log collection
 
 You can use the automated log forwarding feature to setup and configure the services and diagnostic settings needed to forward logs to Datadog. If an automated log forwarding control plane already exists in the tenant, this flow modifies it and extends its scope to include the selected subscriptions or management groups. For more detail, see [Azure Automated Log Forwarding Setup][19].
 
@@ -257,7 +260,7 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 
 See [Azure Automated Log Forwarding Architecture][34] for more details.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Container App" level="h4" expanded=false id="container-app-log-forwarding-setup" %}}
 
@@ -275,18 +278,18 @@ See [Azure Automated Log Forwarding Architecture][34] for more details.
 
 **Note**: Resources can only stream to a Storage Account in the same Azure region.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% azure-log-archiving %}}
 
-## Get more from the Datadog Platform 
+## Get more from the Datadog Platform
 
 ### Install the Agent for greater visibility into your application
 
-After you set up your Azure integration, Datadog crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1]. Installing the Datadog Agent into your environment allows you to collect additional data including, but not limited to: 
-- **Application health** 
+After you set up your Azure integration, Datadog crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1]. Installing the Datadog Agent into your environment allows you to collect additional data including, but not limited to:
+- **Application health**
 - **Process utilization**
-- **System-level metrics** 
+- **System-level metrics**
 
 You can also use the built-in StatsD client to send custom metrics from your applications, to correlate what's happening with your applications, users, and system. See the guide on [_Why should I install the Datadog Agent on my cloud instances?_][15] for more information on the benefits of installing the Datadog Agent on your instances.
 
@@ -314,7 +317,7 @@ To install the Agent based on operating system or CI and CD tool, see the [Datad
 
 {{% tab "AKS Cluster Extension" %}}
 
-The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension: 
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension:
 
 1. Go to your AKS cluster in the Azure portal.
 2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
@@ -353,7 +356,7 @@ Still need help? Contact [Datadog support][17].
 [26]: https://app.datadoghq.com/monitors/templates?q=Azure%20%22integration%20errors%22&origination=all&p=1
 [27]: /monitors/notify/#configure-notifications-and-automations
 [28]: /integrations/guide/azure-advanced-configuration/#enable-diagnostics
-[29]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
+[29]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FcreateUiDefinition.json
 [30]: /logs/guide/azure-automated-log-forwarding/#basics
 [31]: /logs/guide/azure-automated-log-forwarding/#datadog-configuration
 [32]: /logs/guide/azure-automated-log-forwarding/#deployment
