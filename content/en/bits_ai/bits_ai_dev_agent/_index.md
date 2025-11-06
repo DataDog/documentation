@@ -49,7 +49,7 @@ Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent 
 
 ### Auto-push
 
-Auto-push allows the Agent to create branches, push code, and open PRs when it detects something it can help you with. For example, the Agent can:
+Auto-push allows the Dev Agent to create branches, push code, and open PRs when it detects something it can help you with. For example, the Dev Agent can:
 - Auto-create PRs for high-impact errors (such as 500s or crashes).
 - Update PRs in response to your comments in GitHub.
 - Update PRs to address CI failures.
@@ -60,7 +60,7 @@ Auto-push is available for Error Tracking and Test Optimization.
 
 #### Security considerations
 
-Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Agent, but it is not foolproof. 
+Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Dev Agent, but it is not foolproof. 
 
 ### Error tracking
 
