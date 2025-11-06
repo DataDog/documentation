@@ -434,7 +434,7 @@ To uninstall the Datadog extension, select the appropriate app, then click **Uni
 [3]: https://docs.microsoft.com/cli/azure/datadog?view=azure-cli-latest
 [5]: https://app.datadoghq.com/dash/integration/71/azure-overview
 [6]: https://app.datadoghq.com/monitors/templates?q=azure
-[7]: /infrastructure/storage_monitoring/azure_blob_storage
+[7]: /infrastructure/storage_management/azure_blob_storage
 [8]: /cloud_cost_management/setup/azure/
 [9]: /logs/guide/azure-automated-log-forwarding/#log-archiving
 [10]: https://docs.microsoft.com/azure/azure-resource-manager/management/control-plane-and-data-plane
