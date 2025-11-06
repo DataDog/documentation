@@ -3542,36 +3542,26 @@ menu:
       parent: cnm
       identifier: cnm_analytics
       weight: 103
-    - name: Data Table
-      url: network_monitoring/cloud_network_monitoring/network_data_table/
-      parent: cnm_analytics
-      identifier: cnm_analytics_data_table
-      weight: 10000
-    - name: Cloud Services
-      url: network_monitoring/cloud_network_monitoring/cloud_services/
-      parent: cnm_analytics
-      identifier: cnm_analytics_cloud_services
-      weight: 10001
     - name: Tags Reference
       url: network_monitoring/cloud_network_monitoring/tags_reference/
       parent: cnm_analytics
       identifier: cnm_analytics_tags_reference
-      weight: 10002
+      weight: 10000
     - name: Network Map
       url: network_monitoring/cloud_network_monitoring/network_map/
       parent: cnm
       identifier: cnm_map
-      weight: 104
+      weight: 105
     - name: Guides
       url: network_monitoring/cloud_network_monitoring/guide/
       identifier: cnm_guides
       parent: cnm
-      weight: 105
+      weight: 106
     - name: Supported Cloud Services
       url: network_monitoring/cloud_network_monitoring/supported_cloud_services/
       identifier: cnm_supported_cloud_services
       parent: cnm
-      weight: 106
+      weight: 107
     - name: DNS Monitoring
       url: network_monitoring/dns/
       parent: nm_parent
