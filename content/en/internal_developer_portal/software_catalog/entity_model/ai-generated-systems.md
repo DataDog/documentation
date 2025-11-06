@@ -32,18 +32,18 @@ AI-generated Systems must be enabled once per organization by a user with the `o
 
 To enable:
 
-1. Navigate to **IDP** > **Software Catalog** > **Suggestions**.
+1. Navigate to **IDP** > **Software Catalog** > [**Suggestions**][2].
 2. In the **Suggested Updates** section, click **Enable System Recommendations**.
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/tracing/internal_developer_portal/enable-system-recs.png" alt="The Suggestions page in Software Catalog, showing an option to enable System Recommendations" style="width:100%;" >}}
 
 Recommendations may take up to 30 minutes to appear after enablement.
 
 ## Use AI-generated Systems
 
-To view recommendations, navigate to **IDP** > **Software Catalog** > **Suggestions** > **Systems**.
+To view recommendations, navigate to **IDP** > **Software Catalog** > **Suggestions** > [**Systems**][2].
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/tracing/internal_developer_portal/suggested-updates.png" alt="The Suggestions view in Software Catalog, showing a list of AI-generated Systems with high-level metadata for each" style="width:100%;" >}}
 
 For each recommended System, you can:
 - **Accept** it as-is to add it to your Software Catalog
@@ -52,7 +52,7 @@ For each recommended System, you can:
 
 Accept or reject Systems directly from the list view, or click into an individual System to view details.
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/tracing/internal_developer_portal/add-suggestion-to-catalog.png" alt="The detailed view for one AI-generated System, with an option to reject the suggestion or save it to your Software Catalog" style="width:100%;" >}}
 
 In the detail view, you can modify:
 - Name and display name
@@ -67,4 +67,5 @@ After accepting a System, you can update additional metadata on the entity page 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/permissions/#access-management
+[2]: https://app.datadoghq.com/software?selectedComponent=suggestionsTable
 
