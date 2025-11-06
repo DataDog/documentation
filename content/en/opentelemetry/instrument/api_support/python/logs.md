@@ -69,6 +69,27 @@ logger.info("This is a standard log message.")
 This example shows how logs emitted within an active Datadog span are automatically correlated.
 
 ```python
+from ddtrace import tracer
+import logging
+import time
+
+# Standard logging setup
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+handler = logging.StreamHandler()
+handler.setFormatter(logging.Formatter('%(message)s'))
+logger.addHandler(handler)
+
+@tracer.wrap("do.work")
+def do_work():
+    # This log is automatically correlated with the 'do.work' span
+    logger.info("This log is correlated to the active span.")
+    time.sleep(0.1)
+    logger.warning("So is this one.")
+
+print("Starting work...")
+do_work()
+print("Work complete.")
 ```
 
 ## Supported configuration
