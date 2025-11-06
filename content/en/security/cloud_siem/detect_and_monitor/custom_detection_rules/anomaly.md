@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-Anomaly detection analyzes logs to identify abnormal spikes in your log volume that could indicate issues such as an attack, misconfiguration, or runaway process.
+Anomaly detection analyzes logs to identify abnormal spikes in your log volume, which could indicate issues such as an attack, misconfiguration, or runaway process.
 
 See [Create Rule][1] for instructions on how to configure an anomaly rule.
 
@@ -16,8 +16,8 @@ The anomaly detection rule:
 
 - Aggregates incoming logs into time buckets and computes a baseline.
     - The upper bound reflects the 99.5th percentile of your recent history, using up to 2 weeks of historical logs.
-- Checks on each evaluation the most recent evaluation window and measures how much the series exceeds that bound.
-    - If the excess is large enough over the whole window, a signal is triggered.
+- Checks on each evaluation for the most recent evaluation window and measures how much the series exceeds that bound.
+    - A signal is triggered if the excess is large enough over the whole window.
 
 The anomaly method adapts to your normal patterns and reduces noise from routine fluctuations.
 
