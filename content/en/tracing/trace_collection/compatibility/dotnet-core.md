@@ -89,7 +89,7 @@ The .NET Tracer supports macOS for CI Test Optimization only.
 
 | Operating System         | Version | Architectures | Support level           | Package version            |
 | -------------------------|---------|---------------|-------------------------|----------------------------|
-| macOS                    | 12.0+   |  x64, arm64   | [GA](#support-ga)       | latest                     |
+| macOS                    | 14.0+   |  x64, arm64   | [GA](#support-ga)       | latest                     |
 | macOS                    | 11.0    |  x64          | [EOL](#support-eol)     | < 3.0.0                    |
 | macOS                    | 11.0    |  arm64        | [EOL](#support-eol)     | < 3.0.0 (Added in 2.20.0)  |
 

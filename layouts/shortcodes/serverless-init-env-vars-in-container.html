@@ -9,7 +9,7 @@
 | `DD_LOGS_INJECTION`      | When true, enrich all logs with trace data for supported loggers. See [Correlate Logs and Traces][1003] for more information. |
 | `DD_VERSION`             | See [Unified Service Tagging][1004]. |
 | `DD_ENV`                 | See [Unified Service Tagging][1004]. |
-| `DD_SOURCE`              | Set the log source to enable a [Log Pipeline][1005] for advanced parsing. To automatically apply language-specific parsing rules, set to `{{ .Get "language" }}`, or use your custom pipeline. Defaults to `cloudrun`. |
+| `DD_SOURCE`              | Set the log source to enable a [Log Pipeline][1005] for advanced parsing. To automatically apply language-specific parsing rules, set to `{{ .Get "language" }}`, or use your custom pipeline. Defaults to `{{ .Get "defaultSource" }}`. |
 | `DD_TAGS`                | Add custom tags to your logs, metrics, and traces. Tags should be comma separated in key/value format (for example: `key1:value1,key2:value2`). |{{ if eq (.Get "language") "java" }}
 | `JAVA_TOOL_OPTIONS`      | **Required** for tracing. The path to the Datadog Java agent. For example, `-javaagent:/path/to/dd-java-agent.jar`. |{{ end }}
 
