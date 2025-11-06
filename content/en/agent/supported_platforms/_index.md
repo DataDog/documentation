@@ -223,25 +223,19 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <th>Notes</th>
   </thead>
   <tr>
-    <th rowspan=4><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=3><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
     <td><= 7.45.1</td>
     <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
   </tr>
+  <!-- Supported versions intentionally lowered from 7.49.x to 7.46.x, for more information see https://github.com/DataDog/documentation/pull/22642 -->
   <tr>
-    <td>2012</td>
+    <td>2012/R2</td>
     <td></td>
     <td><= 6.46.0</td>
     <td><= 7.46.0</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>2012 R2</td>
-    <td></td>
-    <td><= 6.49.0</td>
-    <td><= 7.49.0</td>
     <td></td>
   </tr>
   <tr>

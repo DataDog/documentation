@@ -157,6 +157,11 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="ruby" layer="ruby" layerParamTypescript="rubyLayerVersion" layerParamPython="ruby_layer_version">}}
+{{% /tab %}}
+
 {{% tab "Container Image" %}}
 
 1. Install the Datadog Lambda Library

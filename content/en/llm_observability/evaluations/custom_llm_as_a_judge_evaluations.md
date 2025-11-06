@@ -25,6 +25,8 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability.
 
+Learn more about the [compatibility requirements][6].
+
 ### Configure the prompt
 
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
@@ -277,3 +279,4 @@ You can:
 [3]: /service_management/events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
+[6]: /llm_observability/evaluations/evaluation_compatibility

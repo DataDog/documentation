@@ -218,6 +218,27 @@ If the [GitLab integration][1] is not already installed, install it on the [GitH
 
 **Note**: The scope of the service account's personal access token needs to be at least `read_api`.
 
+#### Handling GitLab groups and subgroups
+
+If your repositories are organized under [**GitLab groups or subgroups**][1] (for example,
+`https://gitlab.com/my-org/group(/subgroup)/repo`),
+the automatic service path detection may not resolve correctly due to GitLab's nested group structure.
+
+To ensure that DORA metrics handle your service's source code paths correctly,
+you can use the following configuration in your service definition:
+
+```yaml
+extensions:
+  datadoghq.com/dora-metrics:
+    source_patterns:
+      # All paths relative to the repository URL provided with the deployment
+      - **
+      # or specific paths related to this service (for monorepos)
+      - src/apps/shopist/**
+      - src/libs/utils/**
+```
+[1]: https://docs.gitlab.com/user/group/
+
 {{% /tab %}}
 
 {{% tab "Other Git Providers" %}}
