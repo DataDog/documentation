@@ -3551,17 +3551,17 @@ menu:
       url: network_monitoring/cloud_network_monitoring/network_map/
       parent: cnm
       identifier: cnm_map
-      weight: 105
+      weight: 104
     - name: Guides
       url: network_monitoring/cloud_network_monitoring/guide/
       identifier: cnm_guides
       parent: cnm
-      weight: 106
+      weight: 105
     - name: Supported Cloud Services
       url: network_monitoring/cloud_network_monitoring/supported_cloud_services/
       identifier: cnm_supported_cloud_services
       parent: cnm
-      weight: 107
+      weight: 106
     - name: DNS Monitoring
       url: network_monitoring/dns/
       parent: nm_parent
