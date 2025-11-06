@@ -196,9 +196,9 @@ Datadog SDKs support the following OpenTelemetry Metrics SDK options.
 
 `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE`
 : **Description**: Specifies the aggregation `temporality` to use for each instrument kind. <br>
-**Accepted values**: `Cumulative`, `Delta`, `LowMemory`. <br>
+**Accepted values**: `Cumulative`, `Delta`, `LowMemory`. For more details, see the [OpenTelemetry specification][15]. <br>
 **Default**: `delta` <br>
-**Notes**: This default value is Datadog's recommended configuration and differs from the OpenTelemetry specification's default.
+**Notes**: This default value `delta` is [Datadog's recommended configuration][16] and differs from the OpenTelemetry specification's default.
 
 `OTEL_METRIC_EXPORT_INTERVAL`
 : **Description**: Specifies the time interval (in milliseconds) between metric export attempts. <br>
@@ -296,3 +296,4 @@ A comma-separated list of paths to extension jar files, or folders containing ja
 [13]: https://opentelemetry.io/docs/specs/otel/protocol/exporter/
 [14]: /opentelemetry/instrument/api_support/
 [15]: https://opentelemetry.io/docs/specs/otel/metrics/sdk_exporters/otlp/#additional-environment-variable-configuration
+[16]: /opentelemetry/guide/otlp_delta_temporality/
