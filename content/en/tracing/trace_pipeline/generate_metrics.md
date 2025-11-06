@@ -23,6 +23,10 @@ further_reading:
       text: 'Create and manage span-based metrics with Terraform'
 ---
 
+{{< callout url="https://help.datadoghq.com/hc/en-us/requests/new" header="Request access to the Preview!" >}}
+Custom Metrics from Traces are in Preview. To request access, send a ticket to the support of APM and provide a short description of your use case.
+{{< /callout >}}
+
 {{< img src="tracing/apm_lifecycle/span_based_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Span-based metrics" >}}
 
 Generate custom metrics from ingested spans to track trends, power dashboards, and trigger monitors—even for spans and traces that are not retained for full trace analysis.
