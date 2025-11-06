@@ -22,7 +22,7 @@ further_reading:
       text: "Monitor DNS logs for network and security analysis"
 ---
 
-## Overview
+{{< img src="network_performance_monitoring/dns_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
 
 DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
 
@@ -41,6 +41,20 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 <div class="alert alert-info"> This documentation applies to DNS Monitoring in CNM. For information on Network Device Monitroring (NDM), see the <a href="/network_monitoring/devices/setup/">NDM setup instructions</a>.
 </div>
+
+DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
+
+* The pods or services making DNS requests and the servers receiving those requests.
+* The endpoints making the most requests or making requests at the highest rate.
+* If a DNS server's response time to requests has gradually or suddenly increased.
+* The DNS servers with a high error rate and the type of errors being emitted.
+* Which domains are being resolved.
+
+## Setup
+
+Before you can begin to use DNS Monitoring, [set up Cloud Network Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a **DNS** tab is accessible in the Cloud Network Monitoring product.
+
+Are you looking for Network Device Monitoring instead? See the [NDM setup instructions][2].
 
 ## Queries
 
@@ -99,7 +113,6 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/cloud_network_monitoring/setup
+[1]: /network_monitoring/cloud_network_monitoring/
 [2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
 [4]: /network_monitoring/cloud_network_monitoring/network_analytics/#recommended-queries
-[5]: https://app.datadoghq.com/network/
