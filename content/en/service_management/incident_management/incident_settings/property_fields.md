@@ -57,6 +57,10 @@ You can define new fields of any of the following field types:
 **Datetime**
 : Accepts any datetime. Values are stored in UTC and are parsed and formatted using the user's local timezone.
 
+### Field names
+
+A field's name is a snake-case identifier used in [search and analytics queries][12], [Workflow automations][13], and APIs. Its display name is a user-friendly label that determines how the field appears in an [incident's overview page][1], an [incident's timeline][10], and the [incident declaration modal][11].
+
 ### Required at declaration
 
 If you mark a field as "Required at Declaration," users are required to enter a value when declaring incidents. This option does not affect Datadog Workflow automations or API requests.
@@ -84,3 +88,7 @@ In Incident Management Analytics, number fields appear as measures that can be g
 [7]: /dashboards/
 [8]: /notebooks/
 [9]: /service_management/incident_management/incident_settings/notification_rules
+[10]: /service_management/incident_management/investigate/timeline
+[11]: /service_management/incident_management/declare
+[12]: /service_management/incident_management/incident_settings/property_fields#custom-fields-in-search-and-analytics
+[13]: /actions/workflows/
