@@ -35,6 +35,8 @@ Use Natural Language Queries (NLQ) to describe what you're looking for in plain 
 The system translates natural language input into Datadog queries and understands context such as services, attributes, and tags.
 To disable NLQ, you must have [org_management permissions][8]. Navigate to Organization Settings > Preferences and toggle off the Natural Language Queries feature.
 
+## Graphing
+
 Use the query editor to customize the graph displayed on the Metrics Explorer page.
 
 You can specify the time frame in the top right corner of the page. The default is **Past 1 Hour**.
