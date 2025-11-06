@@ -1,6 +1,9 @@
 ---
 title: Session Replay Setup and Configuration
 description: Setting up and configuring Session Replay for Browser and Mobile.
+aliases:
+- /product_analytics/session_replay/browser/setup_and_configuration
+- /product_analytics/session_replay/mobile/setup_and_configuration
 content_filters:
   - trait_id: platform
     option_group_id: rum_session_replay_sdk_options
