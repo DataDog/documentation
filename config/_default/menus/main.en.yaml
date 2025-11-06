@@ -6913,11 +6913,6 @@ menu:
       url: /security/code_security/static_analysis/generic_ci_providers/
       parent: sec_static_analysis
       weight: 3
-    - name: Malicious PR Protection
-      identifier: sec_static_analysis_malicious_pr_protection
-      url: /security/code_security/static_analysis/malicious_pr_protection
-      parent: sec_static_analysis
-      weight: 4
     - name: AI-Enhanced Static Code Analysis
       identifier: sec_static_analysis_ai
       url: /security/code_security/static_analysis/ai_enhanced_sast/

@@ -31,8 +31,6 @@ High-level architecture / data flow: analysis engine → AI modules → user int
 | AI-powered remediation                    | Generate suggested fixes or code changes                 | When the issue is validated or accepted | Reduces developer effort, accelerates fix cycle           |
 
 
-
-
 ## Malicious PR protection
 
 {{< callout url="https://www.datadoghq.com/product-preview/malicious-pr-protection/" >}}
@@ -125,8 +123,19 @@ False positive filtering is supported for the following CWEs:
 
 ## AI-powered remediation
 
-...
+AI-powered remediation saves time by replacing the filing of individual pull requests to fix vulnerabilities with AI campaigns that can fix multiple vulnerabilities at once.
 
+AI-powered remediation uses the [Bits AI Dev Agent][10] to power single and multiple vulnerability fixes in Code Security. You create campaigns to fix a subset of vulnerabilities and, within each campaign, create pull requests to fix those vulnerabilities.
+
+
+
+### Create a campaign using findings
+
+
+### Create a campaign using rules
+
+
+### Managing campaigns
 
 
 [1]: https://www.datadoghq.com/blog/engineering/malicious-pull-requests/
@@ -138,3 +147,4 @@ False positive filtering is supported for the following CWEs:
 [7]: https://app.datadoghq.com/security/code-security/repositories
 [8]: https://github.com/tree-sitter/tree-sitter
 [9]: /bits_ai/
+[10]: /bits_ai/bits_ai_dev_agent
