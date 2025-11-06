@@ -22,9 +22,9 @@ further_reading:
       text: "Monitor DNS logs for network and security analysis"
 ---
 
-{{< img src="network_performance_monitoring/dns_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
+## Overview
 
-DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
+DNS Monitoring provides visibility into DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, you can identify:
 
 * Which pods or services are making DNS requests and which servers are handling them.
 * Top requesters and their query rates.
@@ -41,20 +41,6 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 <div class="alert alert-info"> This documentation applies to DNS Monitoring in CNM. For information on Network Device Monitroring (NDM), see the <a href="/network_monitoring/devices/setup/">NDM setup instructions</a>.
 </div>
-
-DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
-
-* The pods or services making DNS requests and the servers receiving those requests.
-* The endpoints making the most requests or making requests at the highest rate.
-* If a DNS server's response time to requests has gradually or suddenly increased.
-* The DNS servers with a high error rate and the type of errors being emitted.
-* Which domains are being resolved.
-
-## Setup
-
-Before you can begin to use DNS Monitoring, [set up Cloud Network Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a **DNS** tab is accessible in the Cloud Network Monitoring product.
-
-Are you looking for Network Device Monitoring instead? See the [NDM setup instructions][2].
 
 ## Queries
 
@@ -98,6 +84,14 @@ The following DNS metrics are available:
 | **OTHER**                | The number of requests from the client that generated error codes that are not NXDOMAIN or SERVFAIL (displayed as a percentage of all DNS responses).   |
 | **Failures**             | The total number of timeouts and errors in DNS requests from the client (displayed as a percentage of all DNS responses). |
 
+## Table
+
+The network table breaks down the above metrics by each _client_ and _server_ dependency defined by your query. You can configure the columns in your table using the Customize gear icon (⚙️) at the top right of the table.
+
+Narrow down the traffic in your view with the **Filter Traffic** [options][3].
+
+{{< img src="network_performance_monitoring/dns_monitoring/dns_table_view.png" alt="The CNM Analytics page showing the table view of DNS network traffic." >}}
+
 ## Sidepanel
 
 The sidepanel provides contextual telemetry to help you quickly debug DNS server dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a DNS server's high number of incoming requests, response time, or failure rate is due to:
@@ -106,13 +100,14 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 * Application errors in the code on the client side
 * A high number of requests originating from a particular port or IP
 
-{{< img src="network_performance_monitoring/dns_monitoring/dns_sidepanel_2.png" alt="DNS Monitoring sidepanel" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_sidepanel_3.png" alt="DNS Monitoring sidepanel" style="width:100%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/cloud_network_monitoring/
+[1]: /network_monitoring/cloud_network_monitoring/setup
 [2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
 [4]: /network_monitoring/cloud_network_monitoring/network_analytics/#recommended-queries
+[5]: https://app.datadoghq.com/network
