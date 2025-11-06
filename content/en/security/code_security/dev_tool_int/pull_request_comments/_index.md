@@ -23,7 +23,7 @@ You can configure PR comments at the organization or repository level in [Reposi
 - Setting severity thresholds for each scan type
 - Excluding findings from test files or dev/test dependencies
 
-**Note**: PR comments are not PR checks. To set up checks, see [Quality Gates][10].
+**Note**: PR comments are not PR checks. To set up checks, see [PR Gates][10].
 
 ## Prerequisites
 - You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and [Azure DevOps][9] repositories.  
