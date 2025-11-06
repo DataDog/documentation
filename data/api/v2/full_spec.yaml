@@ -66114,6 +66114,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
+      deprecated: true
       description: The bulk update endpoint for creating, updating, and deleting attachments
         for a given incident.
       operationId: UpdateIncidentAttachments
@@ -66153,9 +66154,7 @@ paths:
         operator: OR
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/incidents/{incident_id}/impacts:
     get:
       description: Get all impacts for an incident.
