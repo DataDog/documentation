@@ -26,7 +26,6 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 Natural Language Querying (NLQ) on the Metrics Explorer is in Preview. If you're interested in this feature, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
-<div class="alert alert-info">Natural Language Queries (NLQ) for Logs is <strong>built with Llama</strong>.</div>
 
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, making it easier to explore metrics without needing to write complex syntax. To access this feature, click Ask in the search field.
 
