@@ -30,10 +30,7 @@ Recommendations include service, datastore, and queue entity types and automatic
 
 AI-generated Systems must be enabled once per organization by a user with the `org_management` permission (included in the default [Datadog Admin role][1]).
 
-To enable:
-
-1. Navigate to **IDP** > **Software Catalog** > [**Suggestions**][2].
-2. In the **Suggested Updates** section, click **Enable System Recommendations**.
+To enable, navigate to **IDP** > **Software Catalog** > [**Suggestions**][2], and click **Enable System Recommendations**.
 
 {{< img src="/tracing/internal_developer_portal/enable-system-recs.png" alt="The Suggestions page in Software Catalog, showing an option to enable System Recommendations" style="width:100%;" >}}
 
