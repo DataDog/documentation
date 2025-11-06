@@ -72,11 +72,11 @@ For a full comparison, see the [SLO Type Comparison][1] chart.
 
 ## Setup
 
-Use Datadog's [Service Level Objectives status page][2] to create new SLOs or to view and manage all your existing SLOs. 
+Use Datadog's [Service Level Objectives manage page][2] to create new SLOs or to view and manage all your existing SLOs. 
 
 ### Configuration
 
-1. On the [SLO status page][2], select **New SLO +**.
+1. On the [SLO manage page][2], select **New SLO +**.
 2. Select the SLO type. You can create an SLO with any of the following types: [Metric-based][3], [Monitor-based][4], or [Time Slices][5].
 3. Set a target and a rolling time window (past 7, 30, or 90 days) for the SLO. Datadog recommends you make the target stricter than your stipulated SLAs. If you configure more than one time window, select one to be the primary time window. This time window is displayed on SLO lists. By default, the shortest time window is selected. 
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
@@ -135,7 +135,7 @@ To maintain your edit access to the SLO, the system requires you to include at l
 
 ## Searching SLOs
 
-The [Service Level Objectives status page][2] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
+The [Service Level Objectives manage page][2] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
 
 Advanced search lets you query SLOs by any combination of SLO attributes:
 
@@ -161,12 +161,24 @@ Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs ne
 
 ### SLO tags
 
-SLO tags can be used for filtering on the [SLO status page][2], creating [SLO saved views][17], or grouping SLOs to view. Tags can be added to SLOs in the following ways:
+SLO tags can be used for filtering on the [SLO manage page][2], creating [SLO saved views][17], or grouping SLOs to view. Tags can be added to SLOs in the following ways:
 
 - When you create or edit an SLO, you can add tags
 - From the SLO list view, you can add and update tags in bulk using the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
 
 {{< img src="service_management/service_level_objectives/slo_bulk_tag.png" alt="SLO list page displays the Edit Tag dropdown for bulk tag editing" >}}
+
+### SLO burn rate indicator 
+
+Burn rate indicators identify SLOs that are consuming their error budget faster than their configured target permits within the rolling 2-hour evaluation window. They appear next to the applicable SLO names on the [SLO manage page][2].
+
+There are two possible indicator types:
+- A red icon indicating a critical burn rate above 6 in the past 2 hours.
+- A yellow icon indicating an elevated burn rate between 1 and 6 in the past 2 hours.
+
+A visual chart accompanies each indicator to show where the burn rate falls relative to the elevated and critical thresholds, allowing quick assessment of the severity. 
+
+SLOs can be filtered by burn rate status: Critical, Elevated, and Healthy. For SLOs with a service tag, each burn rate indicator includes a direct link to the related service page for further investigation.
 
 ### SLO default view
 
@@ -320,7 +332,7 @@ For Metric-based and Time Slice SLOs with status corrections, there is a toggle 
 
 ## SLO calendar view
 
-The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Daily", "Weekly", or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
+The SLO Calendar View is available on the [SLO manage page][2]. On the top right corner, switch from the "Primary" view to the "Daily", "Weekly", or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
 {{< img src="service_management/service_level_objectives/slo-calendar-view-2.png" alt="SLO calendar view" >}}
 
@@ -330,7 +342,7 @@ The SLO Calendar View is available on the [SLO status page][2]. On the top right
 The CSV Export feature is in Preview. Complete the form to request access.
 {{< /callout >}}
 
-The SLO CSV Export feature is available on the [SLO status page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, you can access the new "Export to CSV" option to download a CSV of your historical SLO data with the following information:
+The SLO CSV Export feature is available on the [SLO manage page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, you can access the new "Export to CSV" option to download a CSV of your historical SLO data with the following information:
 
 - SLO id, name, and type
 - SLO tags
