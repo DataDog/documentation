@@ -37,7 +37,7 @@ In [log configuration settings][1], you can configure processors such as the [Gr
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, limit your grok parser to 10 parsing rules. For more information on Grok syntax and parsing rules, see [Parsing][10].
 
-{{< img src="logs/log_configuration/processor/grok_parser.png" alt="Grok Parser" style="width:80%;" >}}
+{{< img src="/logs/processing/processors/define_parsing_rules_syntax_suggestions.png" alt="Grok parser syntax suggestions in the UI" style="width:90%;" >}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -153,8 +153,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log date remap
 ## Log status remapper
 
 Use the status remapper processor to assign attributes as an official status to your logs. For example, add a log severity level to your logs with the status remapper.
-
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log severity after remapping" style="width:40%;" >}}
 
 Each incoming status value is mapped as follows:
 
@@ -289,9 +287,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer:
-
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:60%;">}}
+The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer.
 
 Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints, applied as `:` or `,`, are not allowed in the target tag/attribute name.
 
