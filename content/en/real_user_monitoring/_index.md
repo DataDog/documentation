@@ -71,7 +71,22 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes pageviews and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again.
+### Session definition
+
+A user session is a user journey on your web or mobile application. A session includes all of its constitutive navigation events (RUM Views), user actions (RUM Actions), network requests (RUM Resources), crashes and errors (RUM Errors), and many more events and signals that all together produce a faithfull picture of the user experience.
+
+A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application again after those limits, a new session is automatically create.
+
+### Technical limitations
+
+| Property                                 | Limitation               |
+| ---------------------------------------- | ------------------------ |
+| Maximum duration of a session            | 4 hours                  |
+| Timeout of a session                     | 15 minutes of inactivity |
+| Maximum number of attributes per event   | 1,000                    |
+| Maximum attribute depth per event        | 20                       |
+| Maximum event size                       | 1 MB                     |
+| Maximum intake payload size              | 5 MB                     |
 
 ## What is Session Replay?
 
