@@ -36,21 +36,14 @@ The Session Replay recorder supports all browsers supported by the RUM Browser S
 
 To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser's UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
 
-## Setup
+## Start monitoring Browser Session Replay
 
-Learn how to [set up and configure Browser Session Replay][4].
-
-## Privacy options
-
-See [Privacy Options][5].
-
-## Troubleshooting
-
-Learn how to [troubleshoot Browser Session Replay][7].
-
-## Mobile Session Replay
-
-Learn more about [Session Replay for Mobile][8].
+{{< whatsnext desc="This section includes the following topics:" >}}
+  {{< nextlink href="/product_analytics/session_replay/setup_and_configuration">}}<u>Setup and Configuration</u>: Learn how to set up and configure Browser Session Replay including enabling recording, sampling configuration, and privacy controls.{{< /nextlink >}}
+  {{< nextlink href="/product_analytics/session_replay/browser/privacy_options">}}<u>Privacy Options</u>: Control and mask sensitive data in Session Replay recordings with privacy configuration options.{{< /nextlink >}}
+  {{< nextlink href="/product_analytics/session_replay/browser/developer_tools">}}<u>Developer Tools</u>: Use browser developer tools to debug and inspect Session Replay recordings.{{< /nextlink >}}
+  {{< nextlink href="/product_analytics/session_replay/browser/troubleshooting">}}<u>Troubleshooting</u>: Resolve common Browser Session Replay issues and errors.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further Reading
 
@@ -59,7 +52,3 @@ Learn more about [Session Replay for Mobile][8].
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /product_analytics/session_replay/browser/setup_and_configuration
-[5]: /product_analytics/session_replay/browser/privacy_options
-[7]: /product_analytics/session_replay/browser/troubleshooting
-[8]: /product_analytics/session_replay/mobile/
