@@ -2,7 +2,6 @@
 title: Search Syntax
 description: Learn the new filter query search syntax for your Observability Pipelines processors.
 disable_toc: false
-private: true
 ---
 ## Overview
 
@@ -128,7 +127,7 @@ The follow are example queries that use Boolean operators:
 : This query can also be written as: `Hello world`.
 : **Note**: The message must contain both `hello` and `world` to match.
 
-`hello` AND `status:info`
+`hello AND status:info`
 : Matches logs with a message field that contains `hello` and with `status:info`.
 
 `-http.status_code:200`
@@ -152,7 +151,7 @@ The following characters are considered special and must be escaped with a backs
 
 ### Search an attribute that contains special characters
 
-Searching for an attribute value that contains special characters requires escaping or double quotes. For example, to search for an attribute `my_app` with the value `hello:world`, use the syntax: `my_app:hello:world` or `my_app:"hello:world"`.
+Searching for an attribute value that contains special characters requires escaping or double quotes. For example, to search for an attribute `my_app` with the value `hello:world`, use the syntax: `my_app:hello\:world` or `my_app:"hello:world"`.
 
 ### Match a single special character or space
 

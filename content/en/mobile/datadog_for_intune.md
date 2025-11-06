@@ -56,7 +56,7 @@ Admin consent is required before users can register successfully. Follow these s
 
 For additional support with application management settings, see the [Microsoft documentation][8].
 
-**Note:** If your organization has multiple "Datadog" applications configured, the one managing web and mobile app access has the Application ID **f21cb7e8-00ab-4b0e-aa94-b1e2f674606d**.
+**Note:** If your organization has multiple "Datadog" applications configured, the one managing web and mobile app access has the Application ID **0e6423ac-38ea-4d77-8389-69ec289b5090**.
 
 #### Datadog for Intune required permissions
 Permissions are automatically added when configuring the application:

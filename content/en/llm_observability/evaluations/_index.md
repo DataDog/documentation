@@ -28,9 +28,13 @@ Datadog also supports integrations with some 3rd party evaluation frameworks, su
 
 ### Sensitive Data Scanner integration
 
-In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
+In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information.
 
-By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
+### Security
+
+{{< learning-center-callout header="Get real-time security guardrails for your AI apps and agents" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
+  AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
+{{< /learning-center-callout >}}
 
 ### Permissions
 
