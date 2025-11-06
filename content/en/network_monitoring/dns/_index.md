@@ -106,6 +106,7 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /network_monitoring/cloud_network_monitoring/setup
 [2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
 [3]: /network_monitoring/cloud_network_monitoring/network_analytics#table
