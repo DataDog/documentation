@@ -14,9 +14,9 @@ See [Create Rule][1] for instructions on how to configure a new value rule.
 A new value detection rule:
 
 - Learns the values of the fields you have selected, such as `@userIdentity.arn`.
-- Learns by recording values over a learning period or uses a threshold method that needs no warmup.
+- Learns by recording values over a learning period or uses a threshold method that does not require a learning period. See [Learning duration](#learning-duration) for more information.
 - Triggers a signal when a value appears that has not been observed within the current scope.
-- Forgets a learned value if the value has not been observed for the number of days set in the [Forget value][2] option. If the value has been forgotten, the rule alerts when the value appears.
+- Forgets a learned value if the value has not been observed for the number of days set in the [Forget value](#forget-value) option. If the value has been forgotten, the rule alerts when the value reappears.
 
 ### Configuration options
 
@@ -36,7 +36,10 @@ The `group by` field defines the scope within which new values are evaluated, su
 
 {{< img src="security/security_monitoring/detection_rules/new_value/learning_duration.png" alt="A new value rule's query with the learning duration setting highlighted" style="width:100%;" >}}
 
-The learning duration defines the length of time the rule learns values for the selected fields. The maximum learning duration is 30 days. No signals are generated during this phase.
+The learning duration has the following options:
+- **for all new values**: The rule triggers on any new values.
+- **after the first seen value**: The rule triggers on any new values after the value has been observed once.
+- **after**: Define the length of time the rule learns values for the selected fields. For example, if you select **after 7 days**, the rule learns the values for the first seven days and then triggers on any new values after the seven days. The maximum learning duration is 30 days.
 
 #### Forget value
 
