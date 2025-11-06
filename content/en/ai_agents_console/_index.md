@@ -1,5 +1,6 @@
 ---
 title: AI Agents Console
+private: true
 ---
 
 {{< callout url=#
