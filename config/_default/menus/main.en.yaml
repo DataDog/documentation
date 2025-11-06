@@ -3542,6 +3542,16 @@ menu:
       parent: cnm
       identifier: cnm_analytics
       weight: 103
+    - name: Data Table
+      url: network_monitoring/cloud_network_monitoring/network_data_table/
+      parent: cnm_analytics
+      identifier: cnm_analytics_data_table
+      weight: 10000
+    - name: Cloud Services
+      url: network_monitoring/cloud_network_monitoring/cloud_services/
+      parent: cnm_analytics
+      identifier: cnm_analytics_cloud_services
+      weight: 10001
     - name: Network Map
       url: network_monitoring/cloud_network_monitoring/network_map/
       parent: cnm
