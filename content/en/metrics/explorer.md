@@ -23,8 +23,8 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 ## Natural language queries
 
 {{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/">}}
-Natural Language Querying (NLQ) on the Metrics Explorer is in Preview. If you're interested in this feature, complete this form. </a>
-<div class="alert alert-info">Natural Language Queries (NLQ) for Logs is <strong>built with Llama</strong>.</div>
+Natural Language Querying (NLQ) on the Metrics Explorer is in Preview. If you're interested in this feature, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
 
 <div class="alert alert-info">Natural Language Queries (NLQ) for Logs is <strong>built with Llama</strong>.</div>
 
