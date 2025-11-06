@@ -64,10 +64,6 @@ All OTLP exporter settings (such as endpoints, protocols, and timeouts), resourc
 
 For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][1].
 
-### Tag and resource attribute precedence
-
-{{% otel-config-precedence %}}
-
 ## Migrate from other setups
 
 ### Existing OTel setup

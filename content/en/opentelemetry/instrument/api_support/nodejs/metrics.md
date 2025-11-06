@@ -83,10 +83,6 @@ All OTLP exporter settings (such as endpoints, protocols, and timeouts), resourc
 
 For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][1].
 
-### Tag and resource attribute precedence
-
-{{% otel-config-precedence %}}
-
 ## Migrate from other setups
 
 ### Existing OTel setup
@@ -103,6 +99,8 @@ If you are already using the OpenTelemetry SDK with a manual OTLP exporter confi
 If you are using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code. The main difference is that OTel metrics are configured using environment variables rather than code, and you create `Instrument` objects first.
 
 For more details, see the [OpenTelemetry Node.js onboarding docs][2].
+
+## Troubleshooting
 
 ## Further reading
 

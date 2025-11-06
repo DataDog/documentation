@@ -60,7 +60,7 @@ These environment variables enable the Datadog SDK to ingest OpenTelemetry Metri
 Datadog SDKs support the following general OpenTelemetry SDK options. For more information, see the related [OpenTelemetry documentation][9].
 
 `OTEL_SERVICE_NAME`
-: ****Datadog convention****: `DD_SERVICE`<br>
+: **Datadog convention**: `DD_SERVICE`<br>
 Sets the `service.name` resource attribute.<br>
 **Notes**: This variable is one of several used to determine the final service name. See the `service.name` notes under `OTEL_RESOURCE_ATTRIBUTES` for the complete precedence order.<br>
 
