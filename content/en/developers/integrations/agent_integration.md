@@ -27,7 +27,7 @@ Agent-based integrations are designed to collect telemetry from software or syst
 Agent checks can emit [metrics][2], [events][3], [service checks][4], and [logs][5] into a customer's Datadog account. Each agent-based integration is as a Python package built on top of the Datadog Agent, allowing customers to easily [install][6] it through the Datadog Agent.
 
 ## Building an agent-based integration
-Before you being, ensure that you've [joined the Datadog Partner Network][7], have access to a partner developer organization, and have [created a listing in the Developer Platform][8].
+Before you begin, ensure that you've [joined the Datadog Partner Network][7], have access to a partner developer organization, and have [created a listing in the Developer Platform][8].
 
 Follow these steps to create your agent-based integration:
 
