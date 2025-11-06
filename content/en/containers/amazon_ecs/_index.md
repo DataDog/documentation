@@ -367,4 +367,4 @@ Need help? Contact [Datadog support][11].
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /network_monitoring/network_path
 [32]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
-[33]:https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
+[33]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs

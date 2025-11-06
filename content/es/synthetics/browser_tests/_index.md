@@ -5,9 +5,9 @@ aliases:
 description: Simula y monitoriza los recorridos de los usuarios desde localizaciones
   específicas.
 further_reading:
-- link: https://www.datadoghq.com/blog/browser-tests/
-  tag: Blog
-  text: Monitorización de la experiencia de los usuarios con tests de navegador
+- link: /synthetics/guide/version_history/
+  tag: Guía
+  text: Historial de versiones de Synthetic Monitoring
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: Blog
   text: Prácticas recomendadas para la creación de tests de extremo a extremo
@@ -16,13 +16,16 @@ further_reading:
   text: 'Centro de aprendizaje de Datadog: Empezando con los tests de navegador Synthetic'
 - link: /getting_started/synthetics/browser_test
   tag: Documentación
-  text: Empezando con los tests de navegador
+  text: Introducción a los tests de navegador
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentación
   text: Más información sobre los monitores de test Synthetic
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Sitio externo
   text: Creación y gestión de tests de navegador Synthetic con Terraform
+- link: https://www.datadoghq.com/blog/ambassador-browser-tests/
+  tag: Blog
+  text: Cómo ayudé a mi cliente a escalar sus tests de navegador con Datadog
 title: Tests de navegador
 ---
 
@@ -100,7 +103,7 @@ Cuando configures un nuevo test de navegador de Synthetic Monitoring, utiliza fr
 
 [1]: /es/synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
-{{% /tab %}}
+   {{% /tab %}}
 
 {{% tab "Certificado" %}}
 
@@ -129,13 +132,13 @@ Selecciona **Ignorar error de certificado del servidor** para indicar al test qu
 
 [1]: /es/synthetics/browser_tests/advanced_options#prevent-screenshot-capture
 [2]: /es/data_security/synthetics
-{{% /tab %}}
+   {{% /tab %}}
 
 {{% tab "URL de inicio" %}}
 
 Introduce una cantidad de tiempo en segundos que el test deberá esperar antes de declarar el paso de test inicial como fallido.
 
-{{% /tab %}}
+   {{% /tab %}}
 
 {{% tab "Hora e idioma" %}}
 
@@ -143,9 +146,9 @@ Introduce una cantidad de tiempo en segundos que el test deberá esperar antes d
 
 [1]: https://www.loc.gov/standards/iso639-2/php/code_list.php
 
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Blocked Requests" %}}
+   {{% tab "Blocked Requests" %}}
 
    Introduce uno o más patrones de solicitud para bloquear el proceso de carga mientras se ejecuta el test. Introduce un patrón de solicitud por línea utilizando el [formato de patrón coincidente][1]. Se admiten comodines (por ejemplo, `*://*.example.com/*`).
 
@@ -153,9 +156,9 @@ Introduce una cantidad de tiempo en segundos que el test deberá esperar antes d
 
 [1]: https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
 
-{{% /tab %}}
+   {{% /tab %}}
 
-{{< /tabs >}}
+   {{< /tabs >}}
 
 {{% synthetics-variables %}}
 
@@ -188,7 +191,7 @@ Puedes personalizar las condiciones de alerta para definir las circunstancias en
 
 Se envía una notificación según el conjunto de condiciones de alerta. Utiliza esta sección para definir qué mensajes enviar a tus equipos y cómo hacerlo.
 
-1. Introduce un **mensaje** para el test del navegador. Este campo permite el [formato Markdown][7] estándar y admite las siguientes [variables condicionales][8]:
+1. Introduce un **mensaje** para el test de navegador o utiliza los mensajes prerellenados de monitor. Este campo permite el [formato Markdown][7] estándar y admite las siguientes [variables condicionales][8]:
 
     | Variable condicional       | Descripción                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -201,19 +204,34 @@ Se envía una notificación según el conjunto de condiciones de alerta. Utiliza
     | `{{#is_priority}}`         | Mostrar cuando el monitor coincide con la prioridad (de P1 a P5).                  |
     | `{{^is_priority}}`         | Mostrar a menos que el monitor coincida con la prioridad (de P1 a P5).                |
 
-    Los mensajes de notificación incluyen el **mensaje** definido en esta sección e información sobre las localizaciones que fallan.
+    Los mensajes de notificación incluyen el **mensaje** definido en esta sección e información sobre las ubicaciones que fallan. Los mensajes prerellenados de monitor se incluyen en la sección del cuerpo del mensaje:
+
+     {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="La sección del monitor de Synthetic Monitoring, que resalta los mensajes de monitor prerellenados" style="width:100%;" >}}
+
+     Por ejemplo, para crear un monitor que itere sobre los pasos extrayendo variables para los tests de navegador, añade lo siguiente al mensaje de monitor:
+
+   ```text
+   {{! List extracted variables across all successful steps }}
+   # Extracted variables
+   {{#each synthetics.attributes.result.steps}}
+   {{#if extractedValue}}
+   * **Name**: `{{extractedValue.name}}`
+   **Value:** {{#if extractedValue.secure}}*Obfuscated (value hidden)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+   {{/if}}
+   {{/each}}
+   ```
 
 2. Selecciona los miembros del equipo y los servicios a los que notificar.
-3. Especifica una frecuencia de reenvío de notificaciones. Para evitar el reenvío de notificaciones en caso de tests fallidos, deja la opción como `Never renotify if the monitor has not been resolved`.
-4. Haz clic en **Guardar detalles y grabar test** para guardar la configuración de tu test y grabar los pasos del navegador.
+3. Especifica una frecuencia para volver a enviar la notificación. Para evitar una nueva notificación en caso de error en tests, activa la opción `Stop re-notifying on X occurrences`.
+4. Haz clic en **Save & Start Recording** (Guardar e iniciar grabación) para guardar la configuración de test y grabar los pasos del navegador.
 
-Para obtener más información, consulta [Usar monitores de tests Synthetic][9].
+Para más información, consulta [Notificaciones de Synthetic Monitoring][9].
 
 ## Para grabar tus pasos
 
-Los tests sólo se pueden grabar desde [Google Chrome][10]. Para grabar tu test, descarga la [extensión de Datadog para la grabación de tests de Google Chrome][11].
+Los tests solo se pueden grabar desde [Google Chrome][10] y [Microsoft Edge][18]. Para grabar tu test, descarga la [extensión de Grabación de tests de Datadog][11].
 
-Durante la grabación de un test de navegador puedes cambiar de pestaña para realizar una acción en tu aplicación (como hacer clic en un enlace que abre otra pestaña) y añadir otro paso de test. Tu test de navegador debe interactuar primero con la página (a través de un clic), antes de poder realizar una [aserción][12]. Al grabar todos los pasos del test, el test del navegador puede cambiar de pestaña automáticamente durante la ejecución del test.
+Puedes cambiar de pestaña en una grabación del test de navegador para realizar una acción en tu aplicación (como hacer clic en un enlace que abre otra pestaña) y añadir otro paso de test. El test de navegador debe interactuar primero con la página (a través de un clic) antes de poder realizar una [confirmación][12]. Al grabar todos los pasos de test, el test de navegador puede cambiar de pestaña automáticamente en la ejecución de test.
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Test de grabación de un test de navegador" width="90%" >}}
 
@@ -226,6 +244,73 @@ Durante la grabación de un test de navegador puedes cambiar de pestaña para re
 
    Datadog recomienda finalizar tu test de navegador con una **[aserción][12]** para confirmar que el recorrido ejecutado por el test del navegador ha dado como resultado el estado esperado.
 6. Una vez que termines tu escenario, haz clic en **Guardar e iniciar test**.
+
+## Repetición de pasos
+
+La repetición de pasos te permite volver a ejecutar uno o más pasos de tu test de navegador directamente en tu navegador con la [extensión Grabación de test de Datadog][11]. Esta función te ayuda a establecer el estado correcto cuando añades o editas pasos en medio de un test, por lo que no necesitas hacerlo manualmente.
+
+### Permiso de depuración
+
+Los pasos basados en JavaScript y las simulaciones de pulsaciones de teclas requieren el permiso del depurador.
+
+La primera vez que la extensión se actualice a una versión que requiera permiso de depuración, verás una solicitud de permiso y la extensión se desactivará hasta que la apruebes:
+{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_2.mp4" alt="Aceptar el permiso del depurador" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Haz clic en el menú de tres puntos {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} para aceptar el permiso.</em></p>
+
+### Cómo utilizar la Repetición del paso
+
+Puedes repetir los pasos de tres maneras:
+
+<strong>1. Repetición de paso único:</strong> reejecuta un único paso:
+{{< img src="synthetics/browser_tests/recording__replay--replay-one-step_1.mp4" alt="Repetición de un paso único" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Pasa el ratón por encima del paso, y haz clic en el botón de reproducción para repetir solo este paso.</em></p>
+
+<strong>2. Repetición de todos los pasos:</strong> ejecuta toda la secuencia de pasos definida en la grabadora:
+{{< img src="synthetics/browser_tests/recording__replay--replay-all-steps_1.mp4" alt="Repetición de todos los pasos" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Haz clic en el botón repetir todo (⏩︎) en la parte superior de la lista de pasos para repetir todos los pasos.</em></p>
+
+<strong>3. Repetición de los pasos seleccionados:</strong> ejecuta un subconjunto de pasos que selecciones en la lista de pasos:
+{{< img src="synthetics/browser_tests/recording__replay--replay-selected-steps_1.mp4" alt="Repetición de los pasos seleccionados" video="true">}}
+<p style="text-align: center;"><em>Selecciona los pasos que deseas repetir y, a continuación, haz clic en el botón de repetición seleccionado (⏩︎) en la parte superior de la lista de pasos.</em></p>
+
+### Compatibilidad con la función de repetición de pasos
+
+La siguiente tabla resume qué tipos de paso de test de navegador admiten la repetición de pasos:
+
+| Tipo de paso                | Compatibilidad con la repetición de pasos | Notas |
+|--------------------------|:------------------------:|-------|
+| Extraer variable         | {{< X >}}                       |       |
+| Ir a la URL                | {{< X >}}                       |       |
+| Actualizar                  | {{< X >}}                       |       |
+| Desplazarse                   | {{< X >}}                       |       |
+| Seleccionar una opción            | {{< X >}}                       |       |
+| Esperar                     | {{< X >}}                       |       |
+| Ejecutar test de API             | {{< X >}}                       |       |
+| Confirmar el estado de la casilla    | {{< X >}}                       |       |
+| Confirmar la URL actual       | {{< X >}}                       |       |
+| Confirmar el atributo de elemento | {{< X >}}                       |       |
+| Confirmar el contenido de elemento   | {{< X >}}                       |       |
+| Confirmar el elemento presente   | {{< X >}}                       |       |
+| Confirmar la descarga del archivo     | {{< X >}}                       |       |
+| Confirmar el contenido de página     | {{< X >}}                       |       |
+| Confirmar los faltantes de página        | {{< X >}}                       |       |
+| Confirmar desde JavaScript   | {{< X >}}                       |       |
+| Extraer desde JavaScript  | {{< X >}}                       |       |
+| Pulsar tecla                | {{< X >}}                       |       |
+| Escribir texto                | {{< X >}}                       |       |
+| Clic                    | {{< X >}}*                      | *Se admiten pasos de clic, pero pueden comportarse de forma diferente que en una ejecución completa de test de Synthetic Monitoring. |
+| Pasar el cursor                    | {{< X >}}*                      | *Se admiten pasos flotantes, pero pueden comportarse de forma diferente que en una ejecución completa del test de Synthetic Monitoring. |
+
+### Tipos de pasos no compatibles con la repetición de pasos
+
+| Tipo de paso                | Compatible con la repetición de pasos |
+|--------------------------|:------------------------:|
+| Confirmar correo electrónico             | Aún no se admite        |
+| Confirmar solicitudes          | Aún no se admite        |
+| Extraer del cuerpo del correo electrónico  | Aún no se admite        |
+| Ir al enlace de correo electrónico         | Aún no se admite        |
+| Cargar archivos             | Aún no se admite        |
+| Confirmar el lenguaje natural  | Aún no se admite        |
 
 ## Permisos
 
@@ -246,7 +331,7 @@ Utiliza el [control de acceso detallado][17] para limitar quién tiene acceso a 
 6. Selecciona el nivel de acceso que deseas asociar a cada uno de ellos.
 7. Haz clic en **Done** (Listo).
 
-<div class="alert alert-info"><strong>Nota</strong>: Puedes ver los resultados de una localización privada incluso sin tener acceso a esa localización privada.</div>
+<div class="alert alert-info">Puedes ver los resultados de una Ubicación privada incluso sin acceso del Visor a esa Ubicación privada.</div>
 
 | Nivel de acceso | Ver configuración del test | Editar configuración del test | Ver los resultados de los tests | Ejecutar tests  | Ver grabación | Editar grabación |
 | ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
@@ -266,7 +351,7 @@ Utiliza el [control de acceso detallado][17] para limitar quién tiene acceso a 
 [6]: /es/api/latest/synthetics/#create-or-clone-a-test
 [7]: http://daringfireball.net/projects/markdown/syntax
 [8]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
-[9]: /es/synthetics/guide/synthetic-test-monitors
+[9]: /es/synthetics/notifications/
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [12]: /es/synthetics/browser_tests/actions/#assertion
@@ -275,3 +360,4 @@ Utiliza el [control de acceso detallado][17] para limitar quién tiene acceso a 
 [15]: /es/account_management/rbac#custom-roles
 [16]: /es/account_management/rbac/#create-a-custom-role
 [17]: /es/account_management/rbac/granular_access
+[18]: https://www.microsoft.com/edge

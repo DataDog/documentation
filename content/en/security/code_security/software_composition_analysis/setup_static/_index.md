@@ -40,6 +40,7 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 The following sections describe ways to configure SCA for your repositories.
 
 ## Select where to run static SCA scans
+By default, scans are automatically run upon each commit to a lockfile within an enabled repository. Default branch results are updated every hour to detect new vulnerabilities on existing packages.
 
 ### Scan with Datadog-hosted scanning
 
@@ -51,10 +52,8 @@ You can run Datadog Static SCA scans directly on Datadog infrastructure. Support
 To get started, navigate to the [**Code Security** page][2].
 
 <div class="alert alert-info">
-Datadog-hosted SCA scanning is not supported for repositories that:<br>
-- Contain file paths with parent directory traversal (<code>..</code>)<br>
-- Contain file names longer than 255 characters<br>
-For these cases, use CI Pipelines.
+Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. <br>
+For these cases, scan using CI Pipelines.
 </div>
 
 ### Scan in CI pipelines
@@ -62,7 +61,9 @@ Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` C
 
 Configure your Datadog API and application keys by adding `DD_APP_KEY` and `DD_API_KEY` as secrets. Make sure the application key has the `code_analysis_read` scope.
 
-**Note**: You must scan your default branch at least once before results appear in **Code Security**.
+<div class="alert alert-info">
+You must scan your default branch at least once before results appear in <b>Code Security</b>.
+</div>
 
 ## Select your source code management provider
 Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
@@ -87,61 +88,19 @@ When installing a GitHub App, the following permissions are required to enable c
 
 See the [GitLab source code setup instructions][1] to connect GitLab to Datadog. Both GitLab.com and Self-Managed instances are supported.
 
-[1]: /integrations/gitlab-source-code/#setup 
+[1]: /integrations/gitlab-source-code/#setup
 
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-danger">
-Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
-</div>
+**Note:** Your Azure DevOps integrations must be connected to a Microsoft Entra tenant. Azure DevOps Server is **not** supported.
 
-Before you can begin installation, request access to the closed Preview using the form above. After being granted access, see the following instructions to complete the setup process.
-
-**Note:** Azure DevOps Server is not supported.
-
-### Create and register a Microsoft Entra app
-If you are an admin in your Azure portal, you can configure Entra apps to connect your tenant to Datadog.
-
-1. Navigate to [Code Security setup][1].
-2. In **Activate scanning for your repositories**, click **Manage Repositories**.
-3. Select **CI Pipelines**.
-4. Select the scan types you want to use.
-5. Select **Azure DevOps** as your source code management provider.
-6. If this is your first time connecting an Azure DevOps organization to Datadog, click **Connect Azure DevOps Account**.
-7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following:
-   1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type.
-   2. Set the redirect URI to **Web** and paste the URI given to you in the instructions.
-8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog.
-9. In the Azure Portal for your app registration, navigate to **Manage > Certificates & secrets** and switch to **Client secrets**.
-10. Click **New client secret** and create a secret with your desired description and expiration values.
-11. Copy and paste the string in the **Value** column for your new secret, paste it into Datadog, and click **Create Configuration** to complete connecting your Entra tenant to Datadog.
-13. Add one or more Azure DevOps organizations by pasting the organization slug into Datadog and then adding your Service Principal as a user by going to **Organization settings > Users > Add users**.
-    1.  Your Service Principal will need the **Basic** access level and at least the **Project Contributor** security group.
-14. Click **Submit Organization**.
-
-### Configure project service hooks
-
-To enable all Code Security features in Azure DevOps, you'll need to use a [Datadog API key][3] to configure service hooks for your projects.
-
-First, set your environment variables (note: the Datadog UI will fill these values out for you):
-```shell
-export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
-export DD_API_KEY="..."                         # Datadog API Key
-```
-
-Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
-```shell
-curl https://raw.githubusercontent.com/DataDog/azdevops-sci-hooks/refs/heads/main/setup-hooks.py > setup-hooks.py && chmod a+x ./setup-hooks.py
-./setup-hooks.py --dd-site="<dd-site>" --az-devops-org="<org-name>"
-```
-
-Click [here][4] to see our CLI that automates this process.
+See the [Azure source code setup instructions][4] to connect Azure DevOps repositories to Datadog.
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://github.com/DataDog/azdevops-sci-hooks
+[4]: /integrations/azure-devops-source-code/#setup
 [5]: /getting_started/site/
 
 {{% /tab %}}
@@ -171,6 +130,10 @@ There are two ways to run SCA scans from within your CI Pipelines:
 #### Run Via Pipelines Integration
 
 You can run SCA scans automatically as part of your CI/CD workflows using built-in integrations for popular CI providers.
+
+<div class="alert alert-danger">
+Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event trigger. Other event triggers (<code>pull_request</code>, for example) are not supported and can cause issues with the product.
+</div>
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -228,14 +191,8 @@ trigger:
       # Optionally specify a specific branch to trigger on when merging
       - "*"
 
-pr:
-  branches:
-    include:
-      - "*"
-
 variables:
   - group: "Datadog"
-
 
 jobs:
   - job: DatadogSoftwareCompositionAnalysis

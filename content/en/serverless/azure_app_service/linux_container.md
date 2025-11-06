@@ -96,8 +96,8 @@ Instrument your main application with the `dd-trace-dotnet` library.
    RUN mkdir -p /datadog/tracer
    RUN mkdir -p /home/LogFiles/dotnet
 
-   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
-   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
+   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v3.30.0/datadog-dotnet-apm-3.30.0.tar.gz /datadog/tracer
+   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-3.30.0.tar.gz
    {{< /code-block >}}
 
 2. Build the image and push it to your preferred container registry.
@@ -130,8 +130,8 @@ COPY --from=build /app/out ./
 RUN mkdir -p /datadog/tracer
 RUN mkdir -p /home/LogFiles/dotnet
 
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
-RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v3.30.0/datadog-dotnet-apm-3.30.0.tar.gz /datadog/tracer
+RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-3.30.0.tar.gz
 
 # Set the entry point for the application
 ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
@@ -202,33 +202,36 @@ Instrumentation is done using a sidecar container. This sidecar container collec
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-#### Using the Datadog CLI
+#### Locally
 
-First, install the [Datadog CLI][601] and [Azure CLI][602].
-
-Login to your Azure account using the Azure CLI:
-
-{{< code-block lang="shell" >}}
-az login
-{{< /code-block >}}
+Install the [Datadog CLI][601] and [Azure CLI][602], and login to your Azure account using the Azure CLI by running `az login`.
 
 Then, run the following command to set up the sidecar container:
 
-{{< code-block lang="shell" >}}
+```shell
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
-datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
-{{< /code-block >}}
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
 
 Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
-**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
+**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer, and additionally the `--musl` flag if your container is using dotnet on a musl libc image (such as Alpine Linux).
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
+#### Azure Cloud Shell
+
+To use the Datadog CLI in [Azure Cloud Shell][603], open cloud shell and use `npx` to run the CLI directly. Set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the CLI:
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
 
 [601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 [602]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+[603]: https://portal.azure.com/#cloudshell/
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
@@ -288,13 +291,11 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Linux Web App module][4] only deploys the Web App resource, so you need to [deploy your code][5] separately.
+The [Datadog Linux Web App module][1] only deploys the Web App resource, so you need to build and push your container separately.
 
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
 [2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
 [3]: https://developer.hashicorp.com/terraform/install
-[4]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
-[5]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -325,6 +326,10 @@ In your **App settings** in Azure, set the following environment variables on bo
 
 
    <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
+
+`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
+: **Value**: `true`<br>
+Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
 <details open>
 <summary>

@@ -85,9 +85,10 @@ Install Datadog's [GitLab Source Code integration][101] using the [integration t
 Repositories from Azure DevOps are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
 </div>
 
-Install Datadog's Azure DevOps Source Code integration while onboarding to [Datadog Code Security][101]. This integration's functionality is limited to Code Security.
+Install Datadog's Azure DevOps Source Code integration using the [integration tile][102] or while onboarding to [Datadog Code Security][101].
 
 [101]: https://app.datadoghq.com/security/configuration/code-security/setup?provider=azure-devops&steps=static
+[102]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
@@ -589,6 +590,16 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 
 ### PR comments
 
+<div class="alert alert-warning">
+  PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+</div>
+
+PR comments are automated comments added by Datadog's [source code management integrations][10] to inform developers of issues detected in their code changes and, in certain cases, suggest remediation. 
+
+There is a maximum of 31 unique comments per PR at any time to reduce noise and clutter. These comments include:
+* One summary comment is always posted to give a high-level view of all the issues Datadog detected in the PR. This comment is edited by Datadog as new commits pushed to the PR change the results.
+* When applicable, up to 30 inline comments are posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the PR's diff, the 30 highest severity violations are posted.
+
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
 PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
@@ -642,3 +653,4 @@ To disable PR comments for Test Optimization, go to the [Test Optimization Advan
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /tracing/error_tracking/
 [9]: /tracing/trace_collection/dd_libraries/
+[10]: #source-code-management-providers

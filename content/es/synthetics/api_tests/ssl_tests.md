@@ -29,38 +29,50 @@ title: Tests SSL
 
 ## Información general
 
-Los tests SSL/TLS te permiten monitorizar proactivamente la validez y la caducidad de tus certificados SSL/TLS para garantizar las conexiones seguras entre tus servicios claves y los usuarios. Si tu certificado está a punto de caducar o está en riesgo, Datadog te envía una alerta con los detalles del error. De esta manera podrás identificar rápidamente la causa del problema y solucionarlo.
+Los tests SSL te permiten monitorizar proactivamente la validez y la caducidad de tus certificados SSL para garantizar las conexiones seguras entre tus servicios claves y los usuarios. Si tu certificado está a punto de caducar o está en riesgo, Datadog te envía una alerta con los detalles del error. De esta manera podrás identificar rápidamente la causa del problema y solucionarlo.
 
 Los tests SSL pueden ejecutarse tanto desde [localizaciones gestionadas](#select-locations) como [privadas][1], dependiendo de si prefieres ejecutarlos desde fuera o dentro de tu red. Los tests SSL pueden ejecutarse de forma programada, bajo demanda o directamente dentro de tus [pipelines CI/CD][2].
 
 ## Configuración
 
-Cuando decidas crear un test `SSL`, define la solicitud de tu test.
+Puedes crear un test utilizando una de las siguientes opciones:
 
-### Definición de la solicitud
+- **Crea un test a partir de una plantilla**:
 
-1. Especifica el **Host** y el **Puerto** donde se ejecutará el test. De forma predeterminada, el puerto SSL es `443`.
-2. Añade **Opciones avanzadas** (opcional) a tu test:
-   * **Acepta certificados autofirmados**: Esta opción omite los errores de servidor relacionados con un certificado autofirmado.
-   * **Falla si el certificado está revocado en el stapling OCSP**: Falla el test si el certificado está etiquetado como revocado por el stapling OCSP.
-   * **Tiempo de espera**: Especifica la cantidad de tiempo en segundos antes de que se inicie un tiempo de espera en el test.
-   * **Nombre de servidor**: Especifica en qué servidor quieres iniciar el enlace TLS. Esto permite que el servidor presente uno de los múltiples certificados posibles en la misma dirección IP y el mismo número de puerto TCP. Por defecto, el valor del **Host** se utiliza para rellenar el parámetro.
-   * **Certificado de cliente**: Autentícate a través de mTLS cargando tu certificado de cliente (`.crt`) y la clave privada asociada (`.key`) en formato `PEM`.
+     1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, aserciones, condiciones de alerta y parámetros de monitor. 
+     2. Haz clic en **+Create Test** (+Crear test) para abrir la página **Define Request** (Definir solicitud), en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
+     3. Haz clic en **Save Details** (Guardar detalles) para enviar tu test de API. <br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vídeo de la página de inicio del test de la API de Synthetics" video="true" >}}
 
-   Puedes utilizar la librería `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
+- **Crea un test desde cero**:
 
-   ```
-   openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-   ```
+   1. Para crear un test desde cero, haz clic en la plantilla **+ Start from scratch** (+ Empezar desde cero) y selecciona el tipo de solicitud SSL.
+   1. Especifica el **Host** y el **Puerto** donde se ejecutará el test. De forma predeterminada, el puerto SSL es `443`.
+   1. Añade **Opciones avanzadas** (opcional) a tu test:
+      * **Acepta certificados autofirmados**: Esta opción omite los errores de servidor relacionados con un certificado autofirmado.
+      * **Falla si el certificado está revocado en el stapling OCSP**: Falla el test si el certificado está etiquetado como revocado por el stapling OCSP.
+      * **Falla si la cadena de certificados está incompleta**: Desactiva la obtención de AIA, haciendo que el test falle si falta algún certificado intermedio en la cadena de certificados del servidor.
+      * **Tiempo de espera**: Especifica la cantidad de tiempo en segundos antes de que se inicie un tiempo de espera en el test.
+      * **Nombre de servidor**: Especifica en qué servidor quieres iniciar el enlace TLS. Esto permite que el servidor presente uno de los múltiples certificados posibles en la misma dirección IP y el mismo número de puerto TCP. Por defecto, el valor del **Host** se utiliza para rellenar el parámetro.
+      * **Certificado de cliente**: Autentícate a través de mTLS cargando tu certificado de cliente (`.crt`) y la clave privada asociada (`.key`) en formato `PEM`.
 
-3. **Pon nombre** a tu test SSL.
+      Puedes utilizar la biblioteca `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
 
-4. Añade **Etiquetas** (tags) `env` así como cualquier otra etiqueta a tu test SSL. Luego, puedes utilizar estas etiquetas para filtrar tus tests Synthetic en la [página de monitorización y tests continuos Synthetic][3].
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
 
-   {{< img src="synthetics/api_tests/ssl_test_config.png" alt="Definir la solicitud SSL" style="width:90%;" >}}
+   1. **Pon nombre** a tu test SSL.
 
-Haz clic en **URL del test** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.
+   1. Añade **etiquetas** de entorno así como cualquier otra etiqueta a tu test SSL. A continuación, puedes utilizar estas etiquetas para filtrar a través de tus tests de Synthetic en la [página de Synthetic Monitoring y Continuous Testing][3]. 
+   1. Haz clic en **Test Certificate* (Probar certificado) para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.<br /><br>
+
+      {{< img src="synthetics/api_tests/synthetics_ssl_test_cert.png" alt="Definir solicitud SSL" style="width:90%;" >}}
+
+   1. Haz clic en **Create Test** (Crear test) para enviar tu test de API.
+
+
 
 ### Fragmentos
 
@@ -70,7 +82,7 @@ Haz clic en **URL del test** para probar la configuración de la solicitud. Apar
 
 Las aserciones definen cuál es el resultado esperado de un test. Después de hacer clic en **URL del test**, se añaden aserciones básicas sobre la validez del certificado, la fecha de caducidad. la versión de TLS y el `response time` basadas en la respuesta obtenida. Debes definir al menos una aserción para que sea monitorizada por tu test.
 
-| {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}                  | Operador                                                                               | Tipo de valor                 |
+| Tipo                  | Operación                                                                               | Tipo de valor                 |
 |-----------------------|----------------------------------------------------------------------------------------|----------------------------|
 | certificado           | `expires in more than`, `expires in less than`                                         | Entero (número de días) |
 | propiedad              | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | Cadena <br> [Expresión regular][4] |
@@ -124,7 +136,7 @@ Entre las razones figuran las siguientes:
 `DNS`:
 No se ha encontrado la entrada DNS para la URL del test. Entre las posibles causas se incluyen una URL de test mal configurada o una configuración incorrecta de las entradas DNS.
 
-`INVALID_REQUEST`
+`INVALID_REQUEST` 
 : La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
 
 `SSL`
@@ -132,11 +144,11 @@ No se ha encontrado la entrada DNS para la URL del test. Entre las posibles caus
 
 `TIMEOUT`
 : La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se define en 60 segundos).
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se establece en 60s).
   Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima (60,5 segundos).
 
-## {{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Sintético Mobile Test" style="width:100%;">}}
+## Permisos
 
 De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][11] pueden crear, editar y eliminar tests SSL Synthetic. Para crear, editar y eliminar tests SSL Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][11].
 
@@ -144,15 +156,11 @@ Si estás utilizando la [función de rol personalizado][12], añade tu usuario a
 
 ### Restringir el acceso
 
-La restricción del acceso está disponible para clientes que utilizan [roles personalizados][13] en sus cuentas.
+{{% synthetics_grace_permissions %}}
 
-Puedes restringir el acceso a un test SSL en función de los roles de tu organización. Al crear un test SSL, elige qué roles (además de tu usuario) pueden leer y escribir tu test.
+## Referencias adicionales
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Establecer permisos para tu test" style="width:70%;" >}}
-
-## Configurar tests de API y tests de API multupaso
-
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/synthetics/private_locations
 [2]: /es/synthetics/cicd_integrations
@@ -166,4 +174,3 @@ Grabar pruebas de aplicaciones móviles
 [10]: /es/synthetics/api_tests/errors/#ssl-errors
 [11]: /es/account_management/rbac/
 [12]: /es/account_management/rbac#custom-roles
-[13]: /es/account_management/rbac/#create-a-custom-role

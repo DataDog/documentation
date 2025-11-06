@@ -127,7 +127,7 @@ attributes:
     data_type: | 
        - **Events**: 15 months
        - **User Profiles**: 30 days
-  - product: Quality Gates
+  - product: PR Gates
     data_type: | 
        - **Gate evaluations**: 30 days
   - product: Reference Tables

@@ -1,21 +1,11 @@
 ---
-categories:
-- configuration & deployment
+app_id: jenkins
 custom_kind: integración
-dependencies:
-- https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
 description: Reenvía automáticamente tus métricas, eventos y checks de servicio de
   Jenkins to Datadog.
-doc_link: https://docs.datadoghq.com/integrations/jenkins/
-git_integration_title: jenkins
-has_logo: true
-integration_title: Jenkins
-is_public: true
-name: jenkins
-public_title: Integración de Datadog y Jenkins
-short_description: Reenvía automáticamente tus métricas, eventos y servicios de Jenkins
-  checks to Datadog.
+title: Jenkins
 ---
+
 Un complemento de Jenkins para reenviar automáticamente métricas, eventos y checks de servicio a una cuenta de Datadog.
 
 ![Dashboard de Jenkins Datadog][16]
@@ -274,7 +264,7 @@ pipeline {
         datadog(testOptimization: [ 
             enabled: true, 
             serviceName: "my-service", // the name of service or library being tested
-            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET", "RUBY")
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET", "RUBY", "GO")
             additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
         ])
     }
@@ -425,7 +415,7 @@ NOTA: Como se menciona en la sección [personalización del trabajo](#job-custom
 
 **Nota**: Esta configuración sólo se aplica a aquellos que utilizan la [configuración del Datadog Agent](#plugin-user-interface).
 
-1. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está desactivada en forma predeterminada en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -449,7 +439,7 @@ NOTA: Como se menciona en la sección [personalización del trabajo](#job-custom
 
 Crea el estado `jenkins.job.status` con las siguientes etiquetas predeterminadas: `jenkins_url`, `job`, `node`, `user_id`
 
-## Resolución de problemas
+## Solucionar problemas
 
 ### Generación de un flare de diagnóstico.
 

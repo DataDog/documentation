@@ -281,6 +281,21 @@ Starting in dd-trace-py v3.7, this example shows how to set user monitoring tags
 ```python
 from ddtrace.appsec.track_user_sdk import track_user
 
+# starting in dd-trace-py v3.17, you can use track_user_id
+# without login information, but user_id is required
+# this is the recommended API since it enables best product functionality with least room for mistakes
+track_user_id(
+    "some_user_id",
+    session_id="session_id",
+    metadata={
+        "name": "John",
+        "email": "test@test.com",
+        "scope": "some_scope",
+        "role": "manager",
+    },
+)
+
+# Alternatively, you can use track_user
 user_login = "some_login"
 # to enable all features (user_id and/or session_id monitoring and blocking), 
 # make sure you provide the corresponding optional arguments
@@ -870,6 +885,11 @@ Available since dd-trace-py v3.7, `track_user_sdk` provides 5 functions:
 - `track_signup`
 - `track_custom_event`
 - `track_user`
+
+Available since dd-trace-py v3.17, `track_user_sdk` provides this additional function:
+
+- `tracker_user_id`
+
 
 ```python
 from ddtrace.appsec import track_user_sdk

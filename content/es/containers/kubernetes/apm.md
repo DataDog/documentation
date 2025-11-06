@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/agent/kubernetes/apm
+description: Activar la recopilación de traces (trazas) de APM para aplicaciones en
+  contenedores que se ejecutan en entornos de Kubernetes
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentación
@@ -30,7 +32,7 @@ Esta página describe cómo ajustar y configurar [Application Performance Monito
 
 Puedes enviar trazas a través de Unix Domain Socket (UDS), TCP (`IP:Port`), o el servicio de Kubernetes. Datadog recomienda que utilices UDS, pero es posible utilizar los tres al mismo tiempo, si es necesario.
 
-## Ajustes
+## Configuración
 1. Si aún no lo has hecho, [instala el Datadog Agent][1] en tu entorno de Kubernetes.
 2. [Configura el Datadog Agent](#configure-the-datadog-agent-to-collect-traces) para recopilar trazas.
 3. [Configura pods de aplicación](#configure-your-application-pods-to-submit-traces-to-datadog-agent) para enviar trazas al Datadog Agent.
@@ -76,7 +78,7 @@ Para comprobarlo, asegúrate de que `datadog.apm.socketEnabled` se haya establec
 ```yaml
 datadog:
   apm:
-    socketEnabled: true
+    socketEnabled: true    
 ```
 
 La configuración por defecto crea un directorio en el host y lo monta dentro del Agent. A continuación, el Agent crea y escucha en un archivo de socket `/var/run/datadog/apm.socket`. Los pods de aplicación pueden entonces montar de forma similar este volumen y escribir en este mismo socket. Puedes modificar la ruta y el socket con los valores de configuración `datadog.apm.hostSocketPath` y `datadog.apm.socketPath`.
@@ -289,8 +291,8 @@ Lista de variables de entorno disponibles para configurar APM:
 | `DD_APM_MAX_EPS`     | La cantidad máxima de eventos de APM por segundo a muestrear. <br/>**De manera predeterminada**: `200` |
 | `DD_APM_MAX_MEMORY`     | Lo que el Datadog Agent pretende usar en términos de memoria. Si se sobrepasa, la tasa de la API limita las solicitudes entrantes. <br/>**De manera predeterminada**: `500000000` |
 | `DD_APM_MAX_CPU_PERCENT`     | El porcentaje de CPU que el Datadog Agent pretende usar. Si se sobrepasa, la tasa de la API limita las solicitudes entrantes. <br/>**De manera predeterminada**: `50` |
-| `DD_APM_FILTER_TAGS_REQUIRE`     | Solo recopila las trazas que tienen tramos (spans) raíz con una coincidencia exacta para los valores y span tags especificados. <br/>Consulta [Ignorar recursos no deseados en APM][11]. |
-| `DD_APM_FILTER_TAGS_REJECT`     | Rechaza las trazas que tienen tramos raíz con una coincidencia exacta para los valores y span tags especificados. <br/>Consulta [Ignorar recursos no deseados en APM][11]. |
+| `DD_APM_FILTER_TAGS_REQUIRE`     | Solo recopila las trazas que tienen tramos (spans) raíz con una coincidencia exacta para los valores y etiquetas de tramo especificados. <br/>Consulta [Ignorar recursos no deseados en APM][11]. |
+| `DD_APM_FILTER_TAGS_REJECT`     | Rechaza las trazas que tienen tramos raíz con una coincidencia exacta para los valores y etiquetas de tramo especificados. <br/>Consulta [Ignorar recursos no deseados en APM][11]. |
 | `DD_APM_REPLACE_TAGS` | [Borre los datos confidenciales de su tramo (span)'s etiquetas (tags)][4]. |
 | `DD_APM_IGNORE_RESOURCES`  | Configura recursos para que el Agent los ignore. El formato debe estar separado por comas y contener expresiones regulares. <br/>Por ejemplo: `GET /ignore-me,(GET\|POST) /and-also-me` |
 | `DD_APM_LOG_FILE`  | Ruta al archivo donde se escriben los logs de APM. |
@@ -305,7 +307,7 @@ Lista de variables de entorno disponibles para configurar APM:
 | `DD_PROXY_HTTPS`     | Configura la URL para que lo pueda usar el proxy. |
 
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

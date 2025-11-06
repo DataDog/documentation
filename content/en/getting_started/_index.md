@@ -44,7 +44,7 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Testing</strong></p></td>
         <td>
             <ul>
-                <li>Block faulty code from deploying to production with <a href="/quality_gates/">Quality Gates</a>.</li>
+                <li>Block faulty code from deploying to production with <a href="/pr_gates/">PR Gates</a>.</li>
                 <li>Simulate users around the globe to test your web app, API, or mobile application with <a href="/synthetics/">Synthetic Monitoring</a>.</li>
             </ul>
         </td>
@@ -99,6 +99,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Send metrics and events from your hosts to Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Get started with the Datadog HTTP API.{{< /nextlink >}}
 {{< nextlink href="/getting_started/integrations" >}}<u>Integrations</u>: Learn how to collect metrics, traces, and logs with Datadog integrations.{{< /nextlink >}}
+{{< nextlink href="/getting_started/search" >}}<u>Search</u>: Learn the fundamentals of searching and filtering across Datadog products.{{< /nextlink >}}
 {{< nextlink href="/getting_started/tagging" >}}<u>Tags</u>: Start tagging your metrics, logs, and traces.{{< /nextlink >}}
 {{< nextlink href="/getting_started/opentelemetry" >}}<u>OpenTelemetry</u>: Learn how to send OpenTelemetry metrics, traces, and logs to Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/learning_center" >}}<u>Learning Center</u>: Follow a learning path, take a self-guided class or lab, and explore the Datadog certification program.{{< /nextlink >}}
@@ -106,8 +107,9 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 
 {{< whatsnext desc="Platform Services:">}}
 {{< nextlink href="/getting_started/dashboards" >}}<u>Dashboards</u>: Create, share, and maintain dashboards that answer the work questions that matter to you.{{< /nextlink >}}
-{{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
 {{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Communicate and track problems in your systems.{{< /nextlink >}}
+{{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
+{{< nextlink href="/getting_started/notebooks" >}}<u>Notebooks</u>: Combine live graphs, metrics, logs, and monitors to isolate issues and create interactive guides.{{< /nextlink >}}
 {{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
 {{< /whatsnext >}}
 

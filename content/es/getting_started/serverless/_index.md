@@ -1,8 +1,10 @@
 ---
+description: Monitoriza aplicaciones sin servidor con métricas, trazas y logs de Lambda
+  mejorados para solucionar problemas de rendimiento y errores.
 further_reading:
-- link: /agent/basic_agent_usage/
+- link: agent/
   tag: Documentación
-  text: Uso básico del Agent
+  text: El Datadog Agent
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva para saber más sobre monitorización serverless.

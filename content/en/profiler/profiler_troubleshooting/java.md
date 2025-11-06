@@ -164,6 +164,13 @@ Override templates let you specify profiling properties to override. However, th
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 
+## PODs are getting evicted due to disk usage
+
+The profiler uses ephemeral storage (usually `/tmp`) to save captured profiling data.
+If the node is under disk pressure and the pod hasn't requested ephemeral storage, it may be evicted.
+
+Fix: Add a small ephemeral storage request (such as 100MB) in the pod spec to prevent eviction.
+
 ## Managing issues related to the tmp folder
 
 The Continuous Profiler may encounter errors related to the use of the system `/tmp` directory, particularly in environments with strict security or limited execution permissions (for example, Docker, Kubernetes, or SELinux-enabled systems). These issues can lead to:
@@ -193,7 +200,11 @@ Below are basic troubleshooting steps for resolving those issues:
     chmod 755 /opt/datadog-profiler-tmp
     java -Ddd.profiling.tempdir=/opt/datadog-profiler-tmp -javaagent:/path/to/dd-java-agent.jar ...
     ```
+- If you enable profiling using SSI, you can include the below environment variable in the `application_monitoring.yaml`.
   
+    ```
+    DD_PROFILING_TEMPDIR: <path_to_writable_exec_enabled_directory>
+    ```
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -21,7 +21,7 @@ Event Correlation groups events based on their relationships or on user-defined 
 
 {{< whatsnext desc="Get Started:">}}
     {{< nextlink href="/service_management/events/correlation/configuration" >}}<u>Correlation</u> - Get started with our two different kinds of correlation{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/correlation/triage_and_notify/" >}}<u>Triage and Notify</u> - View, triage, get notified or recieve tickets about the correlations which have been created for you{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/correlation/triage_and_notify/" >}}<u>Triage and Notify</u> - View, triage, get notified or receive tickets about the correlations which have been created for you{{< /nextlink >}}
     {{< nextlink href="/service_management/events/correlation/analytics/" >}}<u>Analytics</u> - Analyze, investigate, the metrics from correlations e.g the number of cases assigned, the number by service, etc {{< /nextlink >}}
 {{< /whatsnext >}}
 

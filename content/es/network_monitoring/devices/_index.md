@@ -37,11 +37,12 @@ title: Network Device Monitoring
 Network Device Monitoring (NDM) te ofrece visibilidad de tus dispositivos de red on-premises y virtuales, como enrutadores, conmutadores y cortafuegos. Detecta automáticamente dispositivos en cualquier red y empieza a recopilar métricas como el uso del ancho de banda, el volumen de bytes enviados y determina si los dispositivos están activos o inactivos.
 
 {{< whatsnext desc="Esta sección incluye los siguientes temas:">}}
-    {{< nextlink href="network_monitoring/devices/getting_started" >}}<u>Empezando</u>: Empezando con Network Device Monitoring{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/supported_devices" >}}<u>Dispositivos compatibles</u>: Ver los dispositivos NDM compatibles{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/snmp_metrics?tab=snmpv2" >}}<u>Métricas de SNMP</u>: Recopilar métricas de SNMP de tus dispositivos de red {{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/device_topology_map" >}}<u>Mapa de topología de dispositivos</u>: Visualiza las conexiones físicas de tu red{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/guide/device_profiles/" >}}<u>Gestor de perfiles SNMP</u>: Empezando con los perfiles de dispositivos{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/getting_started" >}}<u>Introducción</u>: comenzar con Network Device Monitoring{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/supported_devices" >}}<u>Dispositivos compatibles</u>: ver los dispositivos de NDM compatibles{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/snmp_metrics?tab=snmpv2" >}}<u>Métricas de SNMP</u>: recopilar métricas de SNMP desde tus dispositivos de red{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/device_topology_map" >}}<u>Mapa de topología de dispositivo</u>: ver tus conexiones físicas de red{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/device_profiles/" >}}<u>Gestor de perfiles de SNMP</u>: introducción a perfiles de dispositivos{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/integrations/" >}}<u>Integraciones </u>: integraciones de NDM compatibles{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
