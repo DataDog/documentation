@@ -7,9 +7,8 @@ further_reading:
     text: 'Claude Code settings'
 ---
 
-{{< callout url=#
- btn_hidden="true" header="Join the Preview!">}}
-AI Agents Console is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/ai-agents-console/" btn_hidden="false" header="Join the Preview!">}}
+AI Agents Console is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 Datadog's [AI Agents Console][1] provides monitoring for agentic tools like [Claude Code][2], enabling you to collect logs and metrics from developer environments and view them in real time within Datadog.
