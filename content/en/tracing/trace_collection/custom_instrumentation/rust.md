@@ -231,4 +231,4 @@ For more information, see [Trace Context Propagation][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/library_config/rust
-[2]: //tracing/trace_collection/trace_context_propagation
+[2]: /tracing/trace_collection/trace_context_propagation/?tab=rust
