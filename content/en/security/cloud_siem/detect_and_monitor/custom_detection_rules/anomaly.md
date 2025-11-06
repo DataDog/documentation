@@ -27,7 +27,7 @@ The anomaly method adapts to your normal patterns and reduces noise from routine
 
 The algorithm automatically accounts for daily and weekly seasonality so regular peaks, such as end-of-week surges, do not alert.
 
-A short learning period is applied for new rules or newly observed values for a `group by`.` During the learning period, data is collected to build a baseline.
+A short learning period is applied for new rules or newly observed values for a `group by`. During the learning period, data is collected to build a baseline.
 
 ## Best practices
 
