@@ -286,6 +286,7 @@ unsupported_sites:
   events_from_sns_emails: [gov]
   feature_flags: [gov]
   getting_started_feature_flags: [gov]
+  google-hangouts-chat: [gov]
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
   fips-proxy: [us,us3,us5,eu,ap1,ap2]
