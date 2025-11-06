@@ -16,9 +16,6 @@ You can troubleshoot injection issues in two ways: by using Fleet Automation in 
 
 ### Troubleshoot injection in Datadog Fleet Automation
 
-{{< callout btn_hidden="true" header="false">}}
-Troubleshooting in Fleet Automation is available in Preview.
-{{< /callout >}}
 
 Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
 - Which hosts have SSI enabled
