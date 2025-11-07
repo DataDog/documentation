@@ -30,7 +30,7 @@ further_reading:
   text: "Create and manage SLOs with Terraform"
 - link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
   tag: "Blog"
-  text: "Burn Rate is a Better Error Rate"  
+  text: "Burn Rate is a Better Error Rate"
 ---
 
 {{< jqmath-vanilla >}}
@@ -72,13 +72,13 @@ For a full comparison, see the [SLO Type Comparison][1] chart.
 
 ## Setup
 
-Use Datadog's [Service Level Objectives manage page][2] to create new SLOs or to view and manage all your existing SLOs. 
+Use Datadog's [Service Level Objectives manage page][2] to create new SLOs or to view and manage all your existing SLOs.
 
 ### Configuration
 
 1. On the [SLO manage page][2], select **New SLO +**.
 2. Select the SLO type. You can create an SLO with any of the following types: [Metric-based][3], [Monitor-based][4], or [Time Slices][5].
-3. Set a target and a rolling time window (past 7, 30, or 90 days) for the SLO. Datadog recommends you make the target stricter than your stipulated SLAs. If you configure more than one time window, select one to be the primary time window. This time window is displayed on SLO lists. By default, the shortest time window is selected. 
+3. Set a target and a rolling time window (past 7, 30, or 90 days) for the SLO. Datadog recommends you make the target stricter than your stipulated SLAs. If you configure more than one time window, select one to be the primary time window. This time window is displayed on SLO lists. By default, the shortest time window is selected.
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
 After you set up the SLO, select it from the [Service Level Objectives list view][2] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][6] or a grouped metric-based SLO using the [`sum by` clause][7], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
@@ -115,12 +115,12 @@ To create, edit, and delete status corrections, users require the `slos_correcti
 
 ### Granular access controls
 
-Restrict access to individual SLOs by specifying a list of [roles][10] that are allowed to edit it. 
+Restrict access to individual SLOs by specifying a list of [roles][10] that are allowed to edit it.
 
 {{< img src="service_management/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLO permissions option in the cog menu">}}
 
-1. Click on the SLO to open the details side panel. 
-1. Click the cog icon in the upper right of the panel. 
+1. Click on the SLO to open the details side panel.
+1. Click the cog icon in the upper right of the panel.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
@@ -168,15 +168,17 @@ SLO tags can be used for filtering on the [SLO manage page][2], creating [SLO sa
 
 {{< img src="service_management/service_level_objectives/slo_bulk_tag.png" alt="SLO list page displays the Edit Tag dropdown for bulk tag editing" >}}
 
-### SLO burn rate indicator 
+### SLO burn rate indicator
 
 Burn rate indicators identify SLOs that are consuming their error budget faster than their configured target permits within the rolling 2-hour evaluation window. They appear next to the applicable SLO names on the [SLO manage page][2].
+
+{{< img src="/service_management/service_level_objectives/slo_burn_rate_indicator.png" alt="SLO burn rate indicator example" style="width:80%;" >}}
 
 There are two possible indicator types:
 - A red icon indicating a critical burn rate above 6 in the past 2 hours.
 - A yellow icon indicating an elevated burn rate between 1 and 6 in the past 2 hours.
 
-A visual chart accompanies each indicator to show where the burn rate falls relative to the elevated and critical thresholds, allowing quick assessment of the severity. 
+A visual chart accompanies each indicator to show where the burn rate falls relative to the elevated and critical thresholds, allowing quick assessment of the severity.
 
 SLOs can be filtered by burn rate status: Critical, Elevated, and Healthy. For SLOs with a service tag, each burn rate indicator includes a direct link to the related service page for further investigation.
 
@@ -270,11 +272,11 @@ With [Event Monitors][28], you can set up notifications to track SLO audit event
   Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
 {{< /learning-center-callout >}}
 
-After creating your SLO, you can visualize the data through Dashboards and widgets. 
+After creating your SLO, you can visualize the data through Dashboards and widgets.
   - Use the SLO widget to visualize the status of a single SLO
   - Use the SLO List widget to visualize a set of SLOs
-  - Graph 15 months' worth of metric-based SLO data with the [SLO data source][20] in both timeseries and scalar (query value, top list, table, change) widgets. 
-  
+  - Graph 15 months' worth of metric-based SLO data with the [SLO data source][20] in both timeseries and scalar (query value, top list, table, change) widgets.
+
 For more information about SLO Widgets, see the [SLO widget][21] and [SLO List widget][22] pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
 
 ## SLO status corrections
@@ -289,7 +291,7 @@ When you apply a correction, the time period you specify is dropped from the SLO
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 - For Time Slice SLOs, the correction time window is treated as uptime.
 
-You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][24]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][24]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
@@ -326,7 +328,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 
 #### Visualizing status corrections
 
-For Metric-based and Time Slice SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the "History" section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration. 
+For Metric-based and Time Slice SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the "History" section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration.
 
 {{< img src="service_management/service_level_objectives/correction-toggle.png" alt="SLO correction UI" style="width:100%;">}}
 
