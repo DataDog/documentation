@@ -127,6 +127,10 @@ The metric description helps you understand what a metric does. Descriptions are
 
 (Preview) For users with [source code integration][35] enabled, an AI-generated description will automatically be created for each metric, summarizing what it represents based on the underlying code.
 
+{{< img src="metrics/summary/ai_generated_description_11072025.png" alt="AI-generated description example" style="width:80%;">}}
+
+<!--- this screenshot will be replaced with an actual mockup  -->
+
 ### Metrics Source Code
 
 {{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
