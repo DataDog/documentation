@@ -1,2 +1,7 @@
 {{ $baseUrl := site.Params.baseURL }}
+  {{ if eq hugo.Environment "development" }}
+    {{ $baseUrl = site.Params.pagesJsonBaseURL }}
+  {{ else if eq hugo.Environment "preview" }}
+    {{ $baseUrl = print $baseUrl "/" site.Params.branch }}
+  {{ end }}
 {{ return getJSON (print $baseUrl "/pages.json") }}
