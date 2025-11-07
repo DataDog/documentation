@@ -18,6 +18,7 @@ You can use Datadog Incident Management to define, manage, and track follow-up t
 You can define and modify incident follow-ups at any point during an incident. To manage an incident's follow-ups:
 
 **From the Web app**: Go to the incident's **Remediation** tab to manage its follow-ups.
+
 **From Slack**: In the incident channel, run `/datadog followup` to create a follow-up or `/datadog followup list` to manage existing follow-ups.
 
 ## Export follow-ups
