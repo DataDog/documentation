@@ -788,11 +788,13 @@ Service names reflect the actual AWS resource name rather than only the AWS serv
 
 You may prefer the older service representation model if your dashboards and monitors rely on the legacy naming convention. To restore the previous behavior, set the environment var: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
 
-The updated service modeling configuration is recommended. 
+The updated service modeling configuration is recommended.
 
 ## Send logs to Observability Pipelines
 
 {{% observability_pipelines/lambda_extension_source %}}
+
+See [Send Datadog Lambda Extension Forwarder Logs to Observability Pipelines][58] for more information.
 
 ## Reload API key secret periodically
 
@@ -868,3 +870,4 @@ If you have trouble configuring your installations, set the environment variable
 [55]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [57]: /tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
+[58]: /observability_pipelines/sources/lambda_extension/
