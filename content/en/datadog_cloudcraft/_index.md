@@ -1,6 +1,6 @@
 ---
 title: Cloudcraft in Datadog
-description: "Visualize and analyze AWS cloud infrastructure with live Cloudcraft diagrams in Datadog for troubleshooting, security analysis, and cost optimization."
+description: "Visualize and analyze AWS and Azure cloud infrastructure with live Cloudcraft diagrams in Datadog for troubleshooting, security analysis, and cost optimization."
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
@@ -19,7 +19,7 @@ Cloudcraft offers a powerful, live read-only visualization tool for cloud archit
 
 <div class="alert alert-info">This documentation applies to the Cloudcraft <em>in Datadog</em> product. For information on the standalone Cloudcraft product, please refer to the <a href="/cloudcraft">Cloudcraft (Standalone)</a> documentation.</div>
 
-Cloudcraft's core functionality is its ability to generate detailed architecture diagrams. These diagrams visually represent AWS cloud resources, allowing you to explore and analyze your environments. Cloudcraft's diagrams are optimized for clarity and performance, providing an intuitive interface for navigating large-scale deployments. This helps teams to:
+Cloudcraft's core functionality is its ability to generate detailed architecture diagrams. These diagrams visually represent AWS and Azure cloud resources, allowing you to explore and analyze your environments. Cloudcraft's diagrams are optimized for clarity and performance, providing an intuitive interface for navigating large-scale deployments. This helps teams to:
 
 - Trace incidents back to their root causes through infrastructure dependencies.
 - Determine if infrastructure is the cause of an incident, such as cross-region traffic causing latency or increased costs. 
@@ -144,7 +144,7 @@ Click the **\+Filter** menu to quickly filter your resources by commonly used ta
 
 ### Search and highlight
 
-Use the search bar to locate resources on the diagram by name, ID, or tag. This feature is highly effective for finding specific resources within your cloud architecture. It highlights the search criteria in the diagram, without creating a new diagram, by greying out the elements that do not match the search criteria.
+Use the search bar to locate resources on the diagram by name, ID, or tag. This feature is effective for finding specific resources within your cloud architecture. It highlights the search criteria in the diagram, without creating a new diagram, by greying out the elements that do not match the search criteria.
 
 {{< img src="datadog_cloudcraft/search_highlight_4.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
 
