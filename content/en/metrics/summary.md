@@ -125,9 +125,11 @@ The collection interval for the metric in seconds.
 
 The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][9]. Use this field to update the descriptions for your [custom metrics][4].
 
+For users with source code 
+
 ### Metrics Source Code
 
-{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. . {{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
 <!--- waiting for new preview link for source code -->
 
 
