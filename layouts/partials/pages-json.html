@@ -1,0 +1,2 @@
+{{ $baseUrl := site.Params.baseURL }}
+{{ return getJSON (print $baseUrl "/pages.json") }}
