@@ -5,7 +5,7 @@ disable_toc: false
 
 Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive logs from your Splunk HEC. Select and set up this source when you [set up a pipeline][1].
 
-**Note**: You must use the Splunk HEC source if you want to [send logs from the Splunk Distribution of the OpenTelemetry Collector to Observability Pipelines](#send-logs-from-the-splunk-distributor-of-the-opentelemetry-collector-to-observability-pipelines).
+**Note**: Use the Splunk HEC source if you want to [send logs from the Splunk Distribution of the OpenTelemetry Collector to Observability Pipelines](#send-logs-from-the-splunk-distributor-of-the-opentelemetry-collector-to-observability-pipelines).
 
 ## Prerequisites
 
@@ -40,7 +40,6 @@ To send logs from the Splunk Distributor of the OpenTelemetry Collector:
     # If you're forwarding to a Splunk Enterprise instance running on example.com, with HEC at port 8088:
     SPLUNK_HEC_URL=http://0.0.0.0:8088/services/collector
     ```
-
 3. [Set up a pipeline][4] using the [Splunk HEC source](#set-up-the-source-in-the-pipeline-ui).
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
