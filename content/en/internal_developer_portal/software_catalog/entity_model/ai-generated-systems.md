@@ -1,5 +1,5 @@
 ---
-title: AI-generated Systems
+title: AI-Generated Systems
 description: Discover recommended System entities powered by Bits AI to organize your Software Catalog.
 disable_toc: false
 further_reading:
