@@ -51,7 +51,7 @@ When you export your follow-ups to [Case Management][2], you can manage, track, 
 
 When Datadog exports an incident follow-up to Case Management, it creates a case for the follow-up in the project you selected in the export template.
 
-**Status syncing:** Datadog syncs status between the follow-up and the case **in both directions**, following the mapping you defined in the export template.
+**Status syncing:** Datadog syncs the status between the follow-up and the case **in both directions**, following the mapping you defined in the export template.
 
 **Assignee syncing:** Datadog sync assignee between the follow-up and the case **in both directions**. Because a case can have only one assignee, only the first assignee of the follow-up is added to it.
 
