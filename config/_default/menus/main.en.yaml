@@ -6433,6 +6433,11 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_impossible_travel_rule
       weight: 2026
+    - name: New Value
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/new_value
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_new_value_rule
+      weight: 2027
     - name: Sequence
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/sequence
       parent: cloud_siem_custom_detection_rules
