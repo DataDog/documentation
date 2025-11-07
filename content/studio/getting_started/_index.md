@@ -30,7 +30,7 @@ Before getting started, make sure you have an account with Datadog Studio. To cr
 Choose your setup method:
 
 - [Agentic setup](#agentic-setup): Let AI assistants ([Cursor][8] or [Claude][9]) automatically install and configure Datadog SDKs in your codebase. Only available for [specific platforms](#supported-platforms).
-- [Manual setup](#manual-setup): Follow step-by-step instructions to install and configure Datadog SDKs yourself—gives you full control over the integration.
+- [Manual setup](#manual-setup): Follow step-by-step instructions to install and configure Datadog SDKs yourself. This method gives you full control over the integration.
 
 ## Agentic setup
 
