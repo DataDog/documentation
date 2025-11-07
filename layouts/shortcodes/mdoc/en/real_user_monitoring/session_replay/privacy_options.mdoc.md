@@ -50,7 +50,7 @@ After updating your configuration, you can override elements of your HTML docume
 
 Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, images, links and [`data-*` attributes][1]. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
-{{< img src="real_user_monitoring/session_replay/browser-privacy-mask-all.png" alt="Mask mode" style="width:100%;">}}
+{% img src="real_user_monitoring/session_replay/browser-privacy-mask-all.png" alt="Mask mode" style="width:100%;" /%}
 
 **Note**: Masked data is not stored on Datadog servers.
 
@@ -58,13 +58,13 @@ Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, im
 
 Masks most form fields such as inputs, text areas, and checkbox values while recording all other text as is. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
 
-{{< img src="real_user_monitoring/session_replay/browser-privacy-mask-input.png" alt="Mask user input mode" style="width:100%;">}}
+{% img src="real_user_monitoring/session_replay/browser-privacy-mask-input.png" alt="Mask user input mode" style="width:100%;" /%}
 
 ### Allow mode
 
 Records everything unmasked.
 
-{{< img src="real_user_monitoring/session_replay/browser-privacy-allow-all.png" alt="Allow mode" style="width:100%;">}}
+{% img src="real_user_monitoring/session_replay/browser-privacy-allow-all.png" alt="Allow mode" style="width:100%;" /%}
 
 ## Privacy options
 
@@ -88,7 +88,7 @@ The example below demonstrates how you can override certain elements in your HTM
 
 The dollar amount in the cart is replaced with asterisks.
 
-{{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:70%;">}}
+{% img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:70%;" /%}
 
 ## Privacy restrictions
 
@@ -107,7 +107,7 @@ If you are concerned about the number of visible elements in sensitive fields, e
 
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
-{{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%;">}}
+{% img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%;" /%}
 
 ### Override the action name
 
