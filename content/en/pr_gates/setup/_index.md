@@ -9,10 +9,6 @@ further_reading:
   text: "Learn about PR Gates"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-PR Gates are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 To use Datadog PR Gates, you can define one or more rules on the [**PR Gate Rules**][1] page.

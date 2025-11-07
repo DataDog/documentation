@@ -90,6 +90,6 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 
 {{% observability_pipelines/destination_batching %}}
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers

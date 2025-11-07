@@ -66,12 +66,16 @@ The data that can be scanned and redacted are:
 - **RUM**: Event attribute values only
 - **Events**: Event attribute values only
 
+Optionally, sampling rates can be set between 10% and 99% for each product. This helps manage costs when you first get started by reducing the amount of data that gets scanned for sensitive information.
+
 For each [scanning rule][17], one of the following actions can be applied to matched sensitive data:
 
 - **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
 - **Partially redact**: Replace a specific portion of all matching values.
 - **Hash**: Replace the entire matched data with a non-reversible unique identifier.
 - **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action][16] for more information.
+
+**Note**: When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
 
 To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. For scanning rules you can:
 - Add predefined scanning rules from Datadog's [Scanning Rule Library][2]. These rules detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more.
@@ -133,7 +137,7 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 [4]: /security/sensitive_data_scanner/setup/telemetry_data/
 [5]: /observability_pipelines/
 [6]: /observability_pipelines/processors/sensitive_data_scanner
-[7]: /observability_pipelines/set_up_pipelines/
+[7]: /observability_pipelines/configuration/set_up_pipelines/
 [8]: /security/cloud_security_management/setup/agentless_scanning
 [9]: /remote_configuration
 [10]: /security/sensitive_data_scanner/scanning_rules/library_rules/

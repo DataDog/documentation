@@ -638,7 +638,7 @@ To modify some attributes in your RUM events, or to drop some of the events enti
    |               | `view.url`           | URL of the view.                                 |
    |               | `view.name`          | Name of the view.                                |
    
-   **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
+   **Note**: If you return null from the `EventMapper<T>` implementation, the event is kept and sent as-is.
 
 ## Retrieve the RUM session ID
 
