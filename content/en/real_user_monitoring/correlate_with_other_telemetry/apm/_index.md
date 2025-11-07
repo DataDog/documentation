@@ -177,7 +177,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
-3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
+3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
 
     ```kotlin
         val tracedHosts = listOf("example.com")
@@ -185,7 +185,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(
             DatadogInterceptor.Builder(tracedHosts)
-                .setTraceSampler(RateBasedSampler(100f))
+                .setTraceSampler(RateBasedSampler(20f))
                 .build()
         )
         .build()
@@ -194,6 +194,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 **Note**:
 * `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 * If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
+* The default sample rate for the `traceSampler` was 20% on the Android SDK versions 1.x and 2.x, and got increased to 100% with the Android SDK version 3.0.0.
 
 [1]: /real_user_monitoring/android/
 [2]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
