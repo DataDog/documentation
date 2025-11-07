@@ -1,7 +1,10 @@
 {{ $baseUrl := site.Params.baseURL }}
   {{ if eq hugo.Environment "development" }}
     {{ $baseUrl = site.Params.pagesJsonBaseURL }}
-  {{ else if eq hugo.Environment "preview" }}
-    {{ $baseUrl = print $baseUrl "/" site.Params.branch }}
   {{ end }}
-{{ return getJSON (print $baseUrl "/pages.json") }}
+  {{ $url := print $baseUrl "pages.json" }}
+  {{ $data := (resources.GetRemote $url | transform.Unmarshal) }}
+
+  {{ $currentPath := strings.TrimSuffix "/" (strings.TrimPrefix "/" .RelPermalink) }}
+  {{ $lookupKey := print $currentPath "/index.md" }}
+  {{ return (isset $data $lookupKey) }}
