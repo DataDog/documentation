@@ -25,4 +25,4 @@ Use the guides below to set up Storage Management in Datadog for your cloud stor
 
 {{< partial name="cloud_storage_monitoring/storage-monitoring-setup.html" >}}
 
-[1]: https://app.datadoghq.com/storage-monitoring
+[1]: https://app.datadoghq.com/storage-management
