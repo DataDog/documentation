@@ -18,22 +18,23 @@ further_reading:
 This guide introduces the Datadog Agent and covers:
 
   - [Introduction to the Agent](#the-datadog-agent)
-  - [Data collected by the Agent collects](#data-collected-by-the-agent)
+  - [Installing the Agent](#installing-the-agent)
   - [Host vs. container Agents](#differences-between-agents-for-hosts-and-containers)
   - [Agent configuration options](#agent-configuration-files)
+  - [Data collected by the Agent](#data-collected-by-the-agent)
   - [Troubleshooting the Agent](#troubleshooting)
 
 
 ## What is the Datadog Agent
 
-The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
+The Datadog Agent is a software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
 
 The Agent can run on:
 - your local hosts (Windows, MacOS), 
 - a containerized environments (Docker, Kubernetes),
 - in on-premises data centers. 
 
-You can install and configure it using configuration management tools like Chef, Puppet, or Ansible.
+You can also install and configure the Agent using configuration management tools like Chef, Puppet, or Ansible.
 
 The Agent is able to collect 75 to 100 system-level metrics every 15 to 20 seconds. With additional configuration, the Agent can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
@@ -43,6 +44,10 @@ The Agent is able to collect 75 to 100 system-level metrics every 15 to 20 secon
 The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is configured to send. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
 
 See [Agent Overhead][2] to learn more about these benchmarks.
+
+## Install the Agent
+
+[Fleet Automation][39] is the primary, in-app workflow for installing, upgrading, configuring, and troubleshooting the Datadog Agent at scale. See the [Agent][40] documentation to install and configure the Agent for your specific platform.
 
 ## Data collected by the Agent
 
@@ -283,3 +288,5 @@ For help troubleshooting the Agent:
 [36]: /agent/troubleshooting/
 [37]: /agent/configuration/agent-log-files/
 [38]: /help/
+[39]: /agent/fleet_automation/
+[40]: /agent/?tab=Host-based
