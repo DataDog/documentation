@@ -1,5 +1,5 @@
 ---
-title: Storage Management for Amazon S3, Google Cloud Storage, and Azure Blob Storage
+title: Storage Management
 further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-storage-monitoring/"
       tag: "Blog"
