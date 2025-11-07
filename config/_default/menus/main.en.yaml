@@ -7631,6 +7631,11 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_supported_versions
       weight: 110
+    - name: SDK Performance Impact
+      url: real_user_monitoring/application_monitoring/ios/sdk_performance_impact
+      parent: rum_mobile_ios
+      identifier: rum_mobile_ios_performance_overhead
+      weight: 111
     - name: Flutter
       url: real_user_monitoring/application_monitoring/flutter
       parent: application_monitoring
