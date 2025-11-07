@@ -32,9 +32,20 @@ By default, the mobile app is not allowed to send you notifications. To receive 
 
    {{< img src="service_management/mobile/ios_notification_may_2025.png" alt="Configure the system notification settings of your iOS device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog highly recommends you also enable the **Sound** and **Badges** toggles.
+3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog recommends you also enable the **Sound** and **Badges** toggles.
 
 Make sure you grant the mobile app the necessary permissions.
+
+### Custom sounds
+
+You can override the default system notification sounds with custom sounds preloaded in the Datadog mobile app.
+
+To customize notification sounds:
+
+1. In the Datadog mobile app, navigate to **Settings** > **Notifications** > **Notification categories**.
+2. Select the notification category you want to customize.
+3. Select a sound from the available options.
+
 {{% /tab %}}
 
 {{% tab "Android" %}}
@@ -46,11 +57,22 @@ Make sure you grant the mobile app the necessary permissions.
 
    {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
+### Custom sounds
+
+You can override the default system notification sounds with custom sounds preloaded in the Datadog mobile app.
+
+To customize notification sounds:
+
+1. Go to **Device Settings** > **Notifications** > **Advanced Settings**.
+2. Select **Manage notification categories for each app** and make sure Datadog is selected.
+3. In the Datadog mobile app, navigate to **Settings** > **Notifications** > **Notification categories**.
+4. Select the notification category you want to customize.
+5. Select a sound from the available options.
+
+**Note**: The volume for push notifications is dictated by your device's system volume settings.
+
 {{% /tab %}}
 {{< /tabs >}}
-
-### Custom sounds
-On both iOS and Android, you have the option to override the default system notification sounds. The Datadog app comes preloaded with a selection of custom sounds.   
 
 ## Circumvent mute and Do Not Disturb mode for On-Call
 You can override your device's system volume and Do Not Disturb mode for both push notifications (from the Datadog mobile app) and telephony notifications (such as voice call and SMS).
