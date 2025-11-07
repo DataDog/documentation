@@ -1,6 +1,7 @@
 ---
 title: Incident Follow-ups
 description: Manage follow-up tasks defined during your incident response process.
+private: true
 further_reading:
 - link: "/service_management/incident_management/incident_settings"
   tag: "Documentation"
