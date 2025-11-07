@@ -36,9 +36,9 @@ When a pull request includes infrastructure-as-code changes, Datadog adds inline
 
 ### Automatically block risky changes with PR Gates
 
-Use [PR Gates][11] to enforce security standards on infrastructure-as-code changes before they're merged. Datadog scans the IaC changes in each pull request and reports a pass or fail status to GitHub based on your configured severity threshold.
+Use [PR Gates][11] to enforce security standards on infrastructure-as-code changes before they're merged. Datadog scans the IaC changes in each pull request, identifies any vulnerabilities above your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
 
-By default, checks are informational, but you can make them blocking in GitHub to prevent merging when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][12].
+By default, checks are informational, but you can make them blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][12].
 
 ### View and filter findings
 
