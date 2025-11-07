@@ -3,9 +3,9 @@ title: End User Device Monitoring
 description: Monitor employee desktops and laptops to detect performance, connectivity, and application issues across your organization.
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  End User Device Monitoring is in Preview.
-{{< /callout >}} 
+{{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
+End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
 
 End User Device Monitoring helps IT teams monitor the health and performance of employee desktops and laptops, physical or virtual, to detect and resolve issues that affect productivity. This gives organizations a unified view of device, network, and application performance across their workforce.
 
