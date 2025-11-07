@@ -1,10 +1,10 @@
 ---
 title: SNMP Traps
-description: "Enable listening for SNMP Traps."
+description: "Enable listening for SNMP traps."
 further_reading:
   - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
     tag: "Blog"
-    text: "Monitor and diagnose network performance issues with SNMP Traps"
+    text: "Monitor and diagnose network performance issues with SNMP traps"
   - link: "/network_monitoring/devices/troubleshooting"
     tag: "Documentation"
     text: "NDM Troubleshooting"
@@ -12,11 +12,11 @@ further_reading:
 
 ## Overview
 
-SNMP Traps are notifications sent from an SNMP-enabled device to an SNMP manager when unusual activity occurs, such as a sudden state change on a piece of equipment.
+SNMP traps are notifications sent from an SNMP-enabled device to an SNMP manager when unusual activity occurs, such as a sudden state change on a piece of equipment.
 
-Monitoring SNMP Traps helps you capture issues that might otherwise go unnoticed due to device instability. For example, if an interface flaps between available and broken states every 15 seconds, polling every 60 seconds could miss the degree of network instability. Traps also provide visibility into the health of hardware components, such as device battery or chassis.
+Monitoring SNMP traps helps you capture issues that might otherwise go unnoticed due to device instability. For example, if an interface flaps between available and broken states every 15 seconds, polling every 60 seconds could miss the degree of network instability. Traps also provide visibility into the health of hardware components, such as device battery or chassis.
 
-Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to configure [monitors][1] for specific SNMP Trap events.
+Datadog Agent v7.37+ supports listening for SNMP traps, enabling you to configure [monitors][1] for specific trap events.
 
 ## Configuration
 
@@ -57,11 +57,11 @@ To enable listening for SNMP traps, use the following instructions:
 
 After configuration, SNMP traps are forwarded as logs to Datadog. You can find them in the [Log Explorer][2] with the following search query: `source:snmp-traps`.
 
-   {{< img src="network_device_monitoring/snmp/snmp_traps_3.png" alt="Log Explorer showing `source:snmp-traps` with an SNMP Trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
+   {{< img src="network_device_monitoring/snmp/snmp_traps_3.png" alt="Log Explorer showing `source:snmp-traps` with an SNMP trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
 
    <div class="alert alert-info">Even though SNMP traps are <em>forwarded as logs</em>, <code>logs_enabled</code> does <strong>not</strong> need to be set to <code>true</code>.</div>
 
-### Using the default SNMP Trap port 162
+### Using the default SNMP trap port 162
 
 Binding to a port number under `1024` requires elevated permissions. To bind to a port number such as the default SNMP Trap port `162`, use the following instructions:
 
@@ -91,15 +91,15 @@ Binding to a port number under `1024` requires elevated permissions. To bind to 
 
 As with [Network Device Monitoring][3], use namespace tags to differentiate between multiple network devices that share the same private IP. For example, you could have two routers that share the same private IP: one in New York, and another in Paris. In this case, you can deploy an Agent in the New York data center that sends telemetry tagged with `namespace: nyc`; and a second Agent in the Paris data center that sends telemetry tagged with `namespace: paris`.
 
-The namespace can then be used to uniquely pivot from an SNMP Trap to the emitter device, or from the emitter device to an SNMP Trap.
+The namespace can then be used to uniquely pivot from an SNMP trap to the emitter device, or from the emitter device to an SNMP trap.
 
 **Note**: If you are using namespace tags on any of your Agents, ensure that all of your Agents are using namespace tags. Do not configure namespace tags for only a subset of your Agents.
 
 ## Resolution
 
-Each SNMP Trap has a specific {{< tooltip text="object identifier (OID)" tooltip="A unique ID or address on a device that when polled returns the response code of that value." >}} based format. The Datadog Agent performs a _resolution_ step to convert OIDs into more readable strings.
+Each SNMP trap has a specific {{< tooltip text="object identifier (OID)" tooltip="A unique ID or address on a device that when polled returns the response code of that value." >}} based format. The Datadog Agent performs a _resolution_ step to convert OIDs into more readable strings.
 
-An SNMP Trap consists of:
+An SNMP trap consists of:
 
 - Emitter information (for example, the IP of the device).
 - An OID that defines the type of trap.
