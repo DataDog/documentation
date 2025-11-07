@@ -256,9 +256,9 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
    Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
 
-5. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+5. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
 
-     To keep 100% of backend traces:
+     To keep 20% of backend traces:
     ```swift
     RUM.enable(
         with: RUM.Configuration(
@@ -269,13 +269,15 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
                         "example.com",
                         "api.yourdomain.com"
                     ],
-                    sampleRate: 100
+                    sampleRate: 20
                 )
             )
         )
     )
     ```
-**Note**: `sampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+**Note**:
+* `sampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+* The default sample rate for the `sampleRate` was 20% in the iOS SDK versions 1.x and 2.x, and got increased to 100% with the iOS SDK version 3.0.0.
 
 [1]: /real_user_monitoring/ios/
 {{% /tab %}}
