@@ -125,7 +125,7 @@ The collection interval for the metric in seconds.
 
 The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][9]. Use this field to update the descriptions for your [custom metrics][4].
 
-For users with source code 
+(Preview) For users with [source code integration][35] enabled, an AI-generated description will automatically be created for each metric, summarizing what it represents based on the underlying code.
 
 ### Metrics Source Code
 
@@ -264,3 +264,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [33]: /metrics/custom_metrics/agent_metrics_submission/
 [34]: https://app.datadoghq.com/metric/overview
+[35]: https://app.datadoghq.com/integrations?category=Source%20Control
