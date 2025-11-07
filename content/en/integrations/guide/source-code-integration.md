@@ -426,7 +426,7 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-info">The PHP client library version 1.13.0 or later is required (or version 1.2.0 or later if you are using tracing only without profiling).</div>
+<div class="alert alert-info">PHP client library version 1.13.0 or later is required, or 1.2.0 or later if using tracing only without profiling.</div>
 
 #### Containers
 
