@@ -39,6 +39,20 @@ If you have a starting point in mind, but aren't sure what your users did next, 
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_dropoffs.png" alt="The funnel step editor automatically loads the top most common views and actions that users typically see and take next." style="width:50%;" >}}
 
+<div class="alert alert-info"> Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.</div>
+
+
+Click on the funnel chart to open a side panel with additional context about user dropoffs. Then, navigate between steps to see:
+
+- **Step performance**: See metrics related to conversion (for example, conversion rate, dropped off sessions, and average conversion time).
+- **Branching paths from the previous step**: Discover the other paths that users take instead of the ones you anticipate. This section is only available when looking at a step between two views in a funnel.
+- **Issues that might be affecting conversion**: See the top issues that might be affecting conversions and investigate them further with the links to RUM, Error Tracking, and Session Replay.
+
+
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_metrics.png" alt="Click on the funnel view to see additional context about user dropoffs." style="width:90%;" >}}
+
+
+
 ### Filtering
 
 When constructing your funnel, you can filter globally or on a step.
@@ -110,8 +124,7 @@ A, A, A, B, C, C
 If a user performs the actions as in the example above, Datadog counts it as one conversion. This is because the conversion calculations only look at the first element **A** matched and the first element **C** matched. 
 
 <div class="alert alert-info">
-If the user performs the event steps <code>A, A, A, B, C, C, A,...</code>, it would count as two conversions. The first conversion ends at <code>A, A, A, B, C, C</code>, and the second conversion begins with <code>A,...</code>
-
+If the user performs the event steps <code>A, A, A, B, C, C, A,...</code>, it would count as two conversions. The first conversion ends at <code>A, A, A, B, C, C</code>, and the second conversion begins with <code>A,...</code>.
 </div>
 
 
@@ -122,6 +135,11 @@ If the user performs the event steps <code>A, A, A, B, C, C, A,...</code>, it wo
 
 **Total**: This means that your conversion (session, user, or account) is each time the user completes the defined funnel. For example, if the user performs the actions A → B → C → A → B → C during the session or time frame, it counts as 2 conversions.
 
+<div class="alert alert-info">
+The “Total” setting doesn’t multiply conversions for repeated steps within a single flow, instead it counts complete flows, not the number of times an intermediate step is repeated. 
+
+If you switch to “Unique,” then only the first conversion per session (or per user, depending on your analysis scope) is counted.
+</div>
 
 If you analyze your funnel by `user` or by `account`, you can define your conversion timeframe in hours or days of the first event. The default timeframe for conversions is 1 day (a 24-hour window not calendar dates) to determine if a conversion happened or not.
  
