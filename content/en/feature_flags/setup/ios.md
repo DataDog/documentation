@@ -144,7 +144,7 @@ flagsClient.setEvaluationContext(
 )
 {{< /code-block >}}
 
-This method fetches flag assignments from the server asynchronously. By providing optional completion callback or using the async/await variant you can handle the result of context evaluation:
+This method fetches flag assignments from the server asynchronously. By providing an optional completion callback or using the async/await variant you can handle the result of context evaluation:
 
 {{< code-block lang="swift" >}}
 do {
@@ -230,7 +230,7 @@ let config = flagsClient.getObjectValue(
 
 ### Flag evaluation details
 
-When you need more than only the flag value, use the `get<Type>Details` APIs. These methods return both the evaluated value and metadata explaining the evaluation:
+When you need more than just the flag value, use the `get<Type>Details` APIs. These methods return both the evaluated value and metadata explaining the evaluation:
 
 * `getBooleanDetails(key:defaultValue:) -> FlagDetails<Bool>`  
 * `getStringDetails(key:defaultValue:) -> FlagDetails<String>`  
@@ -281,10 +281,10 @@ Flags.enable(with: config)
   You can adjust `gracefulModeEnabled` depending on your development or QA phase.
 
 `customFlagsEndpoint`
-: Configures custom server URL for retrieving flag assignments.
+: Configures a custom server URL for retrieving flag assignments.
 
 `customExposureEndpoint`
-: Configures custom server URL for sending flags exposure data.
+: Configures a custom server URL for sending flags exposure data.
 
 `customFlagsHeaders`
 : Sets additional HTTP headers to attach to requests made to `customFlagsEndpoint`. It can be useful for authentication or routing when using your own flags service.

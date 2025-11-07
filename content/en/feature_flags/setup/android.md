@@ -158,7 +158,7 @@ val priceMultiplier = flagsClient.resolveDoubleValue(
 
 ### Object flags
 
-For structured or JSON-like data, use `resolveStructureValue(key, defaultValue)`. This method returns an `JSONObject`, which can represent complex nested data. Object flags are useful for remote configuration scenarios where multiple properties need to be provided together. For example:
+For structured or JSON-like data, use `resolveStructureValue(key, defaultValue)`. This method returns a `JSONObject`, which can represent complex nested data. Object flags are useful for remote configuration scenarios where multiple properties need to be provided together. For example:
 
 {{< code-block lang="kotlin" >}}
 import org.json.JSONObject
@@ -174,7 +174,7 @@ val config = flagsClient.resolveStructureValue(
 
 ### Flag evaluation details
 
-When you need more than only the flag value, use the `resolve(key, defaultValue): ResolutionDetails<T>` method. These methods return both the evaluated value and metadata explaining the evaluation. For example:
+When you need more than just the flag value, use the `resolve(key, defaultValue): ResolutionDetails<T>` method. These methods return both the evaluated value and metadata explaining the evaluation. For example:
 
 {{< code-block lang="kotlin" >}}
 val details = flagsClient.resolve(
@@ -220,10 +220,10 @@ Flags.enable(config)
   You can adjust `gracefulModeEnabled()` depending on your development or QA phase.
 
 `useCustomFlagEndpoint()`
-: Configures custom server URL for retrieving flag assignments.
+: Configures a custom server URL for retrieving flag assignments.
 
 `useCustomExposureEndpoint()`
-: Configures custom server URL for sending flags exposure data.
+: Configures a custom server URL for sending flags exposure data.
 
 ## Further reading
 
