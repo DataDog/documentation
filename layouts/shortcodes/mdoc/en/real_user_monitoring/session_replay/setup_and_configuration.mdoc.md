@@ -727,7 +727,7 @@ DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
 See [Privacy Options][2].
 
 [1]: /real_user_monitoring/application_monitoring/ios/web_view_tracking
-[2]: /real_user_monitoring/session_replay/mobile/privacy_options
+[2]: /real_user_monitoring/session_replay/privacy_options
 [3]: https://reactnative.dev/architecture/landing-page
 [4]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-session-replay/versions
 [5]: /real_user_monitoring/android/?tab=kotlin
@@ -742,7 +742,7 @@ See [Privacy Options][2].
 [14]: /real_user_monitoring/application_monitoring/react_native/setup
 [15]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
 [16]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[17]: /real_user_monitoring/session_replay/mobile/privacy_options/?tab=reactnative
+[17]: /real_user_monitoring/session_replay/privacy_options/?tab=reactnative
 [18]: https://github.com/DataDog/dd-sdk-reactnative
 [19]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [20]: /real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
@@ -759,5 +759,5 @@ See [Privacy Options][2].
 [101]: /real_user_monitoring/guide/sampling-browser-plans/
 [102]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumGlobal.html#startsessionreplayrecording
 [103]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumGlobal.html#stopsessionreplayrecording
-[104]: /real_user_monitoring/session_replay/browser/privacy_options
+[104]: /real_user_monitoring/session_replay/privacy_options
 [105]: /real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools
