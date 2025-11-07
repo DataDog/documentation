@@ -28,6 +28,9 @@ attributes:
     data_type: |
        - **Audit logs (Audit Trail enabled)**: 90 days
        - **Audit logs (Audit Trail disabled)**: 7 days
+  - product: Bits AI Dev Agent
+    data_type: |
+       - **Source Code**: 7 days
   - product: Browser RUM
     data_type: |
        - **Session, View, Action, and Error Events**: 30 days
