@@ -35,6 +35,14 @@ OTEL_EXPORTER_OTLP_TRACES_HEADERS=dd-api-key=<YOUR_API_KEY>,dd-otlp-source=datad
 
 Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
 
+If your framework previously supported a pre-1.37 OpenTelemetry specification version, you also need to set:
+
+```
+OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
+```
+
+This environment variable enables version 1.37-compliant OpenTelemetry traces for frameworks that now support the version 1.37 semantic conventions, but previously supported older versions (such as [strands-agents][5]).
+
 **Note**: If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. Refer to your library's documentation for the appropriate configuration method.
 
 #### Using strands-agents
@@ -58,6 +66,41 @@ After your application starts sending data, the traces automatically appear in t
 
 **Note**: There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page.
 
+### Example
+
+The following example demonstrates a complete application using strands-agents with the OpenTelemetry integration. This same approach works with any framework that supports OpenTelemetry version 1.37 semantic conventions for generative AI, or with custom instrumentation that emits the required `gen_ai.*` attributes.
+
+```python
+from strands import Agent
+from strands_tools import calculator, current_time
+from strands.telemetry.config import StrandsTelemetry
+import os
+
+# Configure AWS credentials for Bedrock access
+os.environ["AWS_PROFILE"] = "<YOUR_AWS_PROFILE>"
+os.environ["AWS_DEFAULT_REGION"] = "<YOUR_AWS_REGION>"
+
+# Enable latest GenAI semantic conventions (1.37)
+os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
+
+# Configure OTLP endpoint to send traces to Datadog LLM Observability
+os.environ["OTEL_EXPORTER_OTLP_TRACES_PROTOCOL"] = "http/protobuf"
+os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
+os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = f"dd-api-key={os.getenv('DD_API_KEY')},dd-otlp-source=datadog"
+
+# Initialize telemetry with OTLP exporter
+telemetry = StrandsTelemetry()
+telemetry.setup_otlp_exporter()
+
+# Create agent with tools
+agent = Agent(tools=[calculator, current_time])
+
+# Run the agent
+if __name__ == "__main__":
+    result = agent("I was born in 1993, what is my age?")
+    print(f"Agent: {result}")
+```
+
 ## Supported semantic conventions
 
 LLM Observability supports spans that follow the OpenTelemetry 1.37 semantic conventions for generative AI, including:
@@ -69,7 +112,7 @@ LLM Observability supports spans that follow the OpenTelemetry 1.37 semantic con
 
 For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
 
-[1]: https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/
+[1]: https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/#spans
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /help/

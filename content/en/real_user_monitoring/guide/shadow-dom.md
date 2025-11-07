@@ -29,4 +29,4 @@ Starting with `v4.31.0` of the [RUM Browser SDK][1], Datadog provides support of
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/
+[1]: /real_user_monitoring/application_monitoring/browser/

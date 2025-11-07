@@ -160,5 +160,5 @@ Products billed by the sum of usage throughout the month include indexed logs an
 [4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary
 [6]: /api/latest/usage-metering/#get-projected-cost-across-your-account
-[7]: /cloud_cost_management/monitors/?tab=costmetricbased
+[7]: /cloud_cost_management/cost_changes/monitors/?tab=costmetricbased
 [8]: /cloud_cost_management/datadog_costs/

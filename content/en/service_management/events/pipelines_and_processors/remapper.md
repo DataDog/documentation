@@ -1,9 +1,9 @@
 ---
 title: Remapper
-
+description: Remap source attributes or tags to target attributes or tags with optional type casting
 ---
 
-## Overview 
+## Overview
 
 The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Events Explorer:
 

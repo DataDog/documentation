@@ -17,12 +17,16 @@ further_reading:
   text: "DORA Metrics"
 - link: "https://www.datadoghq.com/blog/idp-engineering-reports/"
   tag: "Blog"
-  text: "Track engineering metrics with customizable, executive-ready reports in Datadog’s IDP"
+  text: "Track engineering metrics with customizable, executive-ready reports in Datadog's IDP"
 ---
 
 ## Overview
 
 Engineering Reports provide you with out-of-the-box, executive-level reports on product reliability, adherence to engineering standards, DORA metrics, and more. You can use these reports to uncover key insights, identify gaps, and drive improvements across your organization. The reports include aggregated views of key engineering metrics that are well suited for directors and executive leadership.
+
+Managers and directors who oversee multiple teams can filter reports by [team hierarchies][1] to view aggregated metrics for their organization or focus on specific subteams.
+
+{{< img src="tracing/internal_developer_portal/team-hierarchy-filter-with-report.png" alt="The DORA report with a filter dropdown showing a hierarchical team structure and a subset of subteams selected" style="width:100%;" >}}
 
 {{< whatsnext desc="Explore the following reports:" >}}
     {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
@@ -34,4 +38,5 @@ Engineering Reports provide you with out-of-the-box, executive-level reports on 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /account_management/teams/manage/#subteams-hierarchical-teams
 
