@@ -6423,6 +6423,11 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_real_time_rule
       weight: 2021
+    - name: Anomaly
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_anomaly_rule
+      weight: 2022
     - name: Content Anomaly
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly
       parent: cloud_siem_custom_detection_rules
