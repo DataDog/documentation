@@ -27,7 +27,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 - Onboard new team members.
 - Accelerate incident MTTR and proactive governance tasks by simplifying infrastructure navigation.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_azure_tab_2.mp4" alt="Cloudcraft in Datadog video" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_with_azure_tab_2.mp4" alt="Video showing a Cloudcraft diagram in the security overlay. A resource is selected, opening a side panel with its details. The Changes option is selected from the left hand side of the side panel. In the Security section of the side panel, several misconfigurations are listed. The Investigate button next to one of the misconfigurations is clicked, opening a new side panel with details of the misconfiguration and a Next Steps section with options for Triage, Remediation, and More Actions" video=true >}}
 
 <div class="alert alert-info">Cloudcraft in Datadog is only available for AWS and Azure accounts.</div>
 
@@ -49,7 +49,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.
 </div>
 
-{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="AWS Usage toggle in account settings" style="width:100%;" >}}
+{{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="The Usage service highlighted in the Metric Collection tab of the AWS integration tile" style="width:100%;" >}}
 
 [2]: /integrations/amazon_web_services/#resource-collection
 [3]: /security/cloud_security_management
@@ -66,7 +66,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 - [Resource collection][14] must be enabled for your Azure accounts:
   1. Navigate to [**Integrations > Azure**][15].
   2. Select the App Registration that contains your Azure subscription.
-  3. On the Resource Collection tab, enable the **Resource Collection** toggle.
+  3. On the Resource Collection tab, ensure the **Enable Resource Collection** toggle is enabled.
   4. Optionally, if the subscription hasn't been added to Datadog yet, select **+ Add New App Registration** to add the account to Datadog first.
 - You need the Datadog Admin Role, or any role with the `azure_configurations_manage` permission. For more information, see the [Azure setup][16] instructions.
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
@@ -78,7 +78,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 [12]: /security/sensitive_data_scanner
 [13]: /account_management/rbac/permissions/#compliance
 [14]: /getting_started/integrations/azure/
-[15]: https://app.datadoghq.com/integrations?search=azure
+[15]: https://app.datadoghq.com/integrations/azure
 [16]: /integrations/guide/azure-manual-setup/?tab=azurecli#setup
 
 {{% /tab %}}
@@ -90,11 +90,11 @@ To get started using Cloudcraft, use the following steps:
 1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 
 2. A real-time diagram of the resources is displayed in your environment.
 
-**Note**: If your environment has more than 10,000 resources, filter the diagram by account, region, or tags before it can be displayed.
+**Note**: If your environment has more than 10,000 resources, filter the diagram by account, region, or tags to display it.
 
 {{< img src="datadog_cloudcraft/getting_started.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
 
-<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Azure Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions.
+<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions.
 </div>
 
 ### Group By
@@ -109,9 +109,9 @@ Enable the **Show All Controls** toggle to display the available **Group By** op
 
 You can group resources by AWS and Azure tags, such as app, service, team, or cost center, to organize your view by team or workload. When grouping by tags, color-coded labels are displayed on each group. When grouping by the `service` tag, a raised block is displayed to visually indicate the service grouping.
 
-**Note**: Grouping by tags is supported for AWS and Azure tags only. Tags from the Datadog Agent (for example ,`env`, or `team` tags from local configuration) are not supported. 
+**Note**: Grouping by tags is supported for AWS and Azure tags only. Tags from the Datadog Agent (for example, locally configured `env` or `team` tags) are not supported. 
 
-{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_team_tags.png" alt="Group by tag feature in Cloudcraft, grouping by Team" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_team_tags.png" alt="Cloudcraft landing page with Group by highlighted, and grouping by Team" >}}
 
 ### Saved views 
 
@@ -140,7 +140,7 @@ Toggle the projection from 3D (default) to 2D to visualize your resources from a
 
 Diagrams can be filtered by tags, such as team, application, or service, allowing you to concentrate on relevant resources while maintaining context through connected resources. Additionally, Cloudcraft provides a powerful search and highlight feature, enabling ease of location of specific resources or groups of resources.
 
-Click the **\+Filter** menu to quickly filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the **More Filters** option to filter by AWS and Azure tags, custom tags, and terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
+Click the **+ Filter** menu to filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the **More Filters** option to filter by AWS and Azure tags, custom tags, and Terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
 
 ### Search and highlight
 
