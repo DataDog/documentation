@@ -95,10 +95,6 @@ Bits AI Dev Agent remediates vulnerabilities at scale, from single issues to lar
 - Create PR batches to fix multiple vulnerabilities at once.
 - Use the Campaign tool to push PRs incrementally and manage review workload across teams.
 
-### Bits AI SRE integration 
-
-Bits AI Dev Agent generates fixes from SRE-led investigations. Learn more about [Bits AI SRE][8].
-
 ## Get started
 
 To enable Bits AI Dev Agent, see [Setup][6].

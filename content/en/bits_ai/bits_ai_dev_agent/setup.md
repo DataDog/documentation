@@ -11,26 +11,26 @@ Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull re
 
 1. Install the [GitHub integration][5]. For full installation and configuration steps, see the [GitHub integration guide][6].
 
-1. Configure GitHub permissions:
+1. In your GitHub account, navigate to **Settings** > **Apps** > **Datadog** to configure GitHub permissions.
 
-   1. To enable basic Dev Agent functionality, configure the GitHub integration with the following permissions:
+   1. To enable basic Dev Agent functionality, set the following permissions:
 
-      - **Repository Permissions**
-        - `Contents: Read & Write`
-        - `Pull Requests: Read & Write`
-      - **Subscribe to Events**
-        - `Push`
+      - **Repository permissions**
+        - Repository contents: Read & write
+        - Pull requests: Read & write
+      - **Subscribe to events**
+        - Push
 
-    1. (Optional) To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
+   1. (Optional) To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
 
-        - **Repository permissions**  
-          - `Checks: Read`  
-          - `Commit statuses: Read only`  
-        - **Subscribe to events**  
-          - `Check run`  
-          - `Check suite`  
-          - `Issue comment`  
-          - `Status` 
+       - **Repository permissions**  
+         - Checks: Read  
+         - Commit statuses: Read only 
+       - **Subscribe to events**  
+         - Check run
+         - Check suite  
+         - Issue comment  
+         - Status
 
 ## Additional configuration  
 
