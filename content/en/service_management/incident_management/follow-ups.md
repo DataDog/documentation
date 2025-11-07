@@ -53,7 +53,7 @@ When Datadog exports an incident follow-up to Case Management, it creates a case
 
 **Status syncing:** Datadog syncs the status between the follow-up and the case **in both directions**, following the mapping you defined in the export template.
 
-**Assignee syncing:** Datadog sync assignee between the follow-up and the case **in both directions**. Because a case can have only one assignee, only the first assignee of the follow-up is added to it.
+**Assignee syncing:** Datadog syncs the assignee between the follow-up and the case **in both directions**. Because a case can have only one assignee, only the first assignee of the follow-up is added to it.
 
 
 ### Jira exports
