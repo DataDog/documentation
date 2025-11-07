@@ -74,7 +74,7 @@ The following table compares the different instrumentation methods available:
   <tr>
     <td style="border:1px solid #ccc; font-weight:bold;">Description</td>
     <td style="border:1px solid #ccc;">With a single command, Datadog automatically loads language SDKs to your application processes. You can also control which processes to instrument.</td>
-    <td style="border:1px solid #ccc; border-right:2px solid #999;">Add Datadog tracing libraries (SDKs) to your code. The SDK handles instrumentation automatically.</td>
+    <td style="border:1px solid #ccc; border-right:2px solid #999;">Add Datadog language SDKs to your applications. The SDK handles instrumentation automatically.</td>
     <td style="border:1px solid #ccc;">Add explicit tracing API calls or span logic in your application code.</td>
     <td style="border:1px solid #ccc;">Add instrumentation rules in the Datadog UI (dynamic, runtime; no code changes).</td>
   </tr>
