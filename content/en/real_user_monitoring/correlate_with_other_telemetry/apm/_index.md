@@ -149,7 +149,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
-[1]: /real_user_monitoring/browser/
+[1]: /real_user_monitoring/application_monitoring/browser/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "Android RUM" %}}

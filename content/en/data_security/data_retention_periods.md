@@ -19,7 +19,7 @@ attributes:
        - **Errors**: 15 days
        - **Indexed spans**: 15 or 30 days, determined by customer plan
        - **Services/resources statistics**: 30 days
-       - **Viewed traces**: 15 months
+       - **Viewed traces**: Retained for the duration of the account
   - product: App and API Protection
     data_type: |
        - **Security signals**: 15 months
