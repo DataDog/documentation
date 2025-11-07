@@ -12,15 +12,15 @@ further_reading:
 
 ## Overview
 
-SNMP Traps are notifications sent from an SNMP-enabled device to an SNMP manager. When a network device encounters unusual activity, such as a sudden state change on a piece of equipment, the device triggers an SNMP Trap event.
+SNMP Traps are notifications sent from an SNMP-enabled device to an SNMP manager when unusual activity occurs, such as a sudden state change on a piece of equipment.
 
-Monitoring SNMP Traps helps you to capture issues that might otherwise go unnoticed due to device instability. For example, if an interface is flapping between an available and a broken state every 15 seconds, relying on polls that run every 60 seconds could lead you to misjudge the degree of network instability. Traps can also fill visibility gaps for certain hardware components, such as device battery or chassis health.
+Monitoring SNMP Traps helps you capture issues that might otherwise go unnoticed due to device instability. For example, if an interface flaps between available and broken states every 15 seconds, polling every 60 seconds could miss the degree of network instability. Traps also provide visibility into hardware components such as device battery or chassis health.
 
-Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [monitors][1] for specific Trap events.
+Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to configure [monitors][1] for specific SNMP Trap events.
 
 ## Configuration
 
-1. To enable listening for SNMP traps, add the following to your `datadog.yaml` file:
+1. To enable listening for SNMP traps, ensure that your [firewall rules][7] allow incoming UDP traffic on the configured port, and add the following to your `datadog.yaml` file:
 
    ```yaml
    network_devices:
@@ -52,17 +52,15 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
 
    **Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
 
-   **Note**: Ensure that your [firewall rules][7] allow incoming UDP traffic on the configured port.
+2. After configured, SNMP traps are forwarded as logs and can be found in the [Log Explorer][2] with the following search query: `source:snmp-traps`.
 
-2. Once configured, SNMP traps are forwarded as logs and can be found in the [Log Explorer][2] with the following search query: `source:snmp-traps`.
+   {{< img src="network_device_monitoring/snmp/snmp_traps_3.png" alt="Log Explorer showing `source:snmp-traps` with an SNMP Trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
 
-  {{< img src="network_device_monitoring/snmp/snmp_logs_2.png" alt="Log Explorer showing `source:snmp-traps` with an SNMP Trap log line selected, highlighting the Network Device tag" style="width:90%" >}}
-
-**Note**: Even though SNMP traps are _forwarded as logs_, `logs_enabled` does **not** need to be set to `true`.
+   <div class="alert alert-info">Even though SNMP traps are <em>forwarded as logs</em>, <code>logs_enabled</code> does <strong>not</strong> need to be set to <code>true</code>.</div>
 
 ### Using the default SNMP Trap port 162
 
-Binding to a port number under 1024 requires elevated permissions. To bind to a port number such as the default SNMP Trap port 162, do the following:
+Binding to a port number under `1024` requires elevated permissions. To bind to a port number such as the default SNMP Trap port `162`, use the following instructions:
 
 1. Grant access to the port using the `setcap` command:
 
@@ -88,20 +86,21 @@ Binding to a port number under 1024 requires elevated permissions. To bind to a 
 
 ## Device namespaces
 
-As in [Network Device Monitoring][3], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York and one in Paris, which share the same private IP. There should be one Agent in the New York data center and another in the Paris data center. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.
+As with [Network Device Monitoring][3], namespaces can be used to differentiate between multiple network devices that share the same private IP. For example, if you have two routers, one in New York and one in Paris, that share the same private IP, you can deploy an Agent in each data center and tag them with `namespace: nyc` and `namespace: paris`, respectively.
 
 The namespace can then be used to uniquely pivot from an SNMP Trap to the emitter device, or from the emitter device to an SNMP Trap.
 
-It is critical to have consistency between the multiple Agent configurations. For instance, if you have two Agents configured (for example, one for trap collection, and the other for metrics) you must ensure that the namespaces exist in both places. Alternatively, ensure that the namespaces exist in neither.
+Maintain consistency across multiple Agent configurations. For example, if you configure two Agents, one for trap collection and one for metrics, ensure that both use namespaces or that neither uses namespaces.
 
 ## Resolution
 
-Each SNMP Trap has a specific OID-based format. The Datadog Agent performs a _resolution_ step to convert OIDs into more readable strings.
+Each SNMP Trap has a specific {{< tooltip text="OIDs (Object Identifiers)" tooltip="A unique ID or address on a device that when polled returns the response code of that value." >}} based format. The Datadog Agent performs a _resolution_ step to convert OIDs into more readable strings.
 
 An SNMP Trap consists of:
-- Emitter information (for example, the IP of the device)
-- An OID that defines the type of trap
-- "Variables"—that is, a list of pairs (`OID:value`) that provides additional context for the trap.
+
+- Emitter information (for example, the IP of the device).
+- An OID that defines the type of trap.
+- Variables: A list of pairs (`OID:value`) that provides additional context for the trap.
 
 Decoding is performed on the Agent side, using a mapping stored on disk at `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/dd_traps_db.json.gz`. Datadog supports more than 11,000 different management information bases (MIBs).
 
@@ -160,12 +159,13 @@ You can write these mappings by hand, or generate mappings from a list of MIBs u
 - [`ddev`][4] (`pip3 install "datadog-checks-dev[cli]"`)
 - [`pysmi`][5] (`pip3 install pysmi`)
 
-Put all your MIBs into a dedicated folder. Then, run:
-`ddev meta snmp generate-traps-db -o ./output_dir/ /path/to/my/mib1 /path/to/my/mib2 /path/to/my/mib3 ...`
+Place all your MIBs in a dedicated folder and run:
 
-If your MIBs have dependencies, `ddev` fetches them online if they can be found.
+```
+ddev meta snmp generate-traps-db -o ./output_dir/ /path/to/my/mib1 /path/to/my/mib2 /path/to/my/mib3 ...
+```
 
-If there are errors due to missing dependencies and you have access to the missing MIB files, put the files in a separate folder and use the `--mib-sources <DIR>` parameter so that ddev knows where to find them. Make sure that each filename is the same as the MIB name (for example, `SNMPv2-SMI` and not `snmp_v2_smi.txt`).
+The `ddev` tool automatically fetches MIB dependencies online when available. If you encounter missing dependency errors and have the MIB files locally, use the `--mib-sources <DIR>` parameter to specify their location. Ensure filenames match the MIB name (for example, `SNMPv2-SMI`, not `snmp_v2_smi.txt`).
 
 ## Further Reading
 
