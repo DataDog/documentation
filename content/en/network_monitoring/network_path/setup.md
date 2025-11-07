@@ -60,6 +60,7 @@ Agent `v7.59+` is required.
      ## optional configs:
      # max_ttl: 30 # max traderoute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -103,6 +104,7 @@ Agent `v7.72+` is required.
      ## optional configs:
      # max_ttl: 30 # max traderoute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -145,6 +147,7 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
           ## optional configs:
           # max_ttl: 30 # max traderoute TTL, default is 30
           # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+          # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
 
           # more endpoints
           - hostname: 1.1.1.1 # endpoint hostname or IP
