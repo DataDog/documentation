@@ -24,7 +24,7 @@ author:
 categories:
 - 네트워크
 - 로그 수집
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md
 display_on_public_website: true
@@ -39,9 +39,9 @@ name: pihole
 public_title: Pi-hole
 short_description: 기본 Pi-hole 메트릭 수집 통합
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -50,7 +50,7 @@ tile:
   - Supported OS::Windows
   - Category::Network
   - Category::Log Collection
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: 기본 Pi-hole 메트릭 수집 통합
   media: []
@@ -82,11 +82,11 @@ Pi-hole 점검은 [Datadog 에이전트][2] 패키지에 포함되어 있지 않
 
 2. 통합을 코어 [통합][4]과 유사하게 설정하세요.
 
-### 구성
+### 설정
 
 1. 에이전트 설정 디렉토리 루트의 `conf.d/` 폴더에 있는 `pihole.d/conf.yaml` 파일을 편집하여 Pi-hole 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 pihole.d/conf.yaml][5]을 참조하세요.
 
-2. [Agent를 재시작합니다][6].
+2. [에이전트를 재시작합니다][6].
 
 ### 검증
 

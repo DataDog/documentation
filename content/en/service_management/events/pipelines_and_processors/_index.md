@@ -1,14 +1,18 @@
 ---
 title: Pipelines and Processors
+description: Learn how to use Event Management Pipelines to process and enrich events from various sources with processors
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "/service_management/events/"
   tag: "Documentation"
-  text: "Log processing pipelines"
+  text: "Event Management"
+- link: "/service_management/events/correlation/"
+  tag: "Documentation"
+  text: "Event Correlation"
 ---
 
-## Overview 
+## Overview
 
-Datadog Event Management Pipelines allow you to process and manage events from various sources efficiently. With pipelines, you can apply various processing rules and filters to customize how events are handled. Pipelines make it easier to manage large volumes of incoming events in a structured way. 
+Datadog Event Management Pipelines allow you to process and manage events from various sources efficiently. With pipelines, you can apply various processing rules and filters to customize how events are handled. Pipelines make it easier to manage large volumes of incoming events in a structured way.
 
 Use pipelines to:
 - **Enrich events**: Pipelines can add additional context or information to events, such as tagging, adding custom attributes, or correlating events with relevant metadata to make them more informative and actionable.
@@ -25,7 +29,7 @@ Pipelines and processors can be applied to all events and can be configured in t
 
 ## Create a pipeline
 
-Create an Pipeline to filter to the events that you are interested in, for example, a source or a tag. 
+Create an Pipeline to filter to the events that you are interested in, for example, a source or a tag.
 
 1. Navigate to [Event Management Pipelines][1] in Datadog.
 1. Click **Add a Pipeline**.
@@ -37,15 +41,16 @@ Create an Pipeline to filter to the events that you are interested in, for examp
 
 You can add processors after you create a pipeline. The processors available are:
 
-- [Arithmetic Processor][3]
-- [Date Remapper][4]
-- [Category Processor][5]
-- [Grok Parser][6]
-- [Lookup Processor][7]
-- [Remapper][8]
-- [Service Remapper][9]
-- [Status Remapper][10]
-- [String Builder Processor][11]
+- [Aggregation Key Processor][3]
+- [Arithmetic Processor][4]
+- [Date Remapper][5]
+- [Category Processor][6]
+- [Grok Parser][7]
+- [Lookup Processor][8]
+- [Remapper][9]
+- [Service Remapper][10]
+- [Status Remapper][11]
+- [String Builder Processor][12]
 
 
 ## Further reading
@@ -54,12 +59,13 @@ You can add processors after you create a pipeline. The processors available are
 
 [1]: https://app.datadoghq.com/event/pipelines
 [2]: https://app.datadoghq.com/event/explorer
-[3]: /service_management/events/pipelines_and_processors/arithmetic_processor
-[4]: /service_management/events/pipelines_and_processors/date_remapper
-[5]: /service_management/events/pipelines_and_processors/category_processor
-[6]: /service_management/events/pipelines_and_processors/grok_parser
-[7]: /service_management/events/pipelines_and_processors/lookup_processor
-[8]: /service_management/events/pipelines_and_processors/remapper
-[9]: /service_management/events/pipelines_and_processors/service_remapper
-[10]: /service_management/events/pipelines_and_processors/status_remapper
-[11]: /service_management/events/pipelines_and_processors/string_builder_processor
+[3]: /service_management/events/pipelines_and_processors/aggregation_key
+[4]: /service_management/events/pipelines_and_processors/arithmetic_processor
+[5]: /service_management/events/pipelines_and_processors/date_remapper
+[6]: /service_management/events/pipelines_and_processors/category_processor
+[7]: /service_management/events/pipelines_and_processors/grok_parser
+[8]: /service_management/events/pipelines_and_processors/lookup_processor
+[9]: /service_management/events/pipelines_and_processors/remapper
+[10]: /service_management/events/pipelines_and_processors/service_remapper
+[11]: /service_management/events/pipelines_and_processors/status_remapper
+[12]: /service_management/events/pipelines_and_processors/string_builder_processor

@@ -1,5 +1,6 @@
 ---
 title: Set up an alert for when a specific tag stops reporting
+description: "Create monitors that alert when specific tags disappear from your systems using impossible thresholds and missing data notifications."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
@@ -8,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: "Configure your monitor notifications"
 aliases:
-- /monitors/faq/how-can-i-setup-an-alert-for-when-a-specific-tag-stops-reporting  
+- /monitors/faq/how-can-i-setup-an-alert-for-when-a-specific-tag-stops-reporting
 ---
 
 In some cases, you would like to know when one of your tags disappears from some of your systems. It is possible to set up a [monitor][1] for such an alert scheme within Datadog:
@@ -20,6 +21,8 @@ In some cases, you would like to know when one of your tags disappears from some
 {{< img src="monitors/guide/tag_stop_reporting.png" alt="Tag stop reporting" >}}
 
 Your alert triggers if the tag stops reporting.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

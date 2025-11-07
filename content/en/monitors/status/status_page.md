@@ -19,7 +19,7 @@ further_reading:
   text: "Quickly get rich, actionable context for alerts with Datadog's new Monitor Status page"
 ---
 
-<div class="alert alert-warning">The provisional status page has limited support for monitors and their features. For more details, see <a href="#restrictions-of-provisional-status-page">Restrictions of provisional status page</a>.<br><br>If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation</div>
+<div class="alert alert-danger">The provisional status page has limited support for monitors and their features. For more details, see <a href="#restrictions-of-provisional-status-page">Restrictions of provisional status page</a>.<br><br>If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation</div>
 
 ## Overview
 
@@ -73,11 +73,8 @@ For more information, see the [Monitor status events][3] documentation.
 The following monitor types are not supported by the provisional status page:
 
 - Anomaly
-- Database Monitoring
 - Forecast
 - Outlier
-- SLO Alerts
-- Usage
 
 ## Further reading
 

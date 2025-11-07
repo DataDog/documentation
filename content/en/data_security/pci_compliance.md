@@ -1,68 +1,34 @@
 ---
 title: PCI DSS Compliance
-disable_toc: false
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/"
-  tag: "Blog"
-  text: "Announcing PCI-Compliant Log Management and APM from Datadog"
-- link: "coterm"
-  tag: "Documentation"
-  text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
+- link: "https://trust.datadoghq.com/"
+  tag: "Datadog Trust Center"
+  text: "Learn about Datadog's security posture and review security documentation"
 ---
-
-{{% site-region region="us3,us5,eu,ap1,gov" %}}
-<div class="alert alert-warning">
-PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
-</div>
-{{% /site-region %}}
-
-{{% site-region region="us" %}}
-<div class="alert alert-warning">
-PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
-</div>
 
 ## Overview
 
-The Payment Card Industry (PCI) Data Security Standard (DSS) has rigorous monitoring and data security requirements for all merchants, service providers, and financial institutions. To meet these requirements, organizations have had to separate out PCI-regulated data and non-regulated data to different applications for monitoring.
+The Payment Card Industry (PCI) Data Security Standard (DSS) has rigorous monitoring and data security requirements for all merchants, service providers, and financial institutions. To meet these requirements, organizations often separate PCI-regulated data (such as cardholder data) and non-regulated data into different applications for monitoring and compliance purposes.
 
-Datadog offers PCI-compliant Log Management and Application Performance Monitoring (APM) within the [US1 site][1] so that you can collect all of your logs, whether they are PCI-regulated or not, in one place. See [Set up a PCI-compliant Datadog organization](#set-up-a-pci-compliant-datadog-organization) on how to get started.
+**Datadog's tools and policies comply with PCI v4.0**. To understand the full scope of Datadog's environment and how it relates to customer responsibilities under the relevant PCI-DSS controls, download the Customer Responsibility Matrix and the Attestation of Compliance (AoC) from the [Datadog Trust Center][1].
 
-## Set up a PCI-compliant Datadog organization
+Datadog's Attestation of Compliance (AoC) reflects the tools and policies we have in place to maintain a Connected PCI environment as a service provider. The Datadog platform supports connections to cardholder data environments (CDE) as a Connected PCI environment, but does not serve as a CDE itself for storing, processing, or transmitting cardholder data (CHD).
+It is your responsibility to prevent any CHD from entering the Datadog platform. 
 
-{{< tabs >}}
+## Recommended tools for PCI compliance
 
-{{% tab "Log Management" %}}
-
-{{% pci-logs %}}
-
-{{% /tab %}}
-
-{{% tab "APM" %}}
-
-{{% pci-apm %}}
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-[1]: /getting_started/site/
-
-{{% /site-region %}}
-
-## View your PCI Compliance status
-
-See the [Configuration Page][2] inside Safety Center. 
-
-Example of a fully onboarded customer:
-
-{{< img src="/data_security/pci_compliant.png" alt="View of PCI compliance in the Configuration Page" style="width:75%;" >}}
-
-Example of an onboarding customer:
-
-{{< img src="/data_security/pci_onboarding.png" alt="View of PCI onboarding in the Configuration Page" style="width:75%;" >}}
+To help maintain PCI compliance, **Datadog strongly recommends** the use of the following tools and process:
+- [**Sensitive Data Scanner**][2]: discover, classify, and redact sensitive cardholder data
+- [**Audit Trail**][3]: search and analyze detailed audit events for up to 90 days for long-term retention and archiving
+- [**File Integrity Monitoring**][4]: watch for changes to key files and directories
+- [**Cloud Security Management**][5]: track conformance to requirements of industry benchmarks and other controls
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/organization-settings/safety-center/configuration
+[1]: https://trust.datadoghq.com/?itemUid=53e1508c-665e-45a8-9ce0-03fdf9ae1efb&source=click
+[2]: /security/sensitive_data_scanner/
+[3]: /account_management/audit_trail/
+[4]: /security/workload_protection/
+[5]: /security/cloud_security_management/#track-your-organizations-health

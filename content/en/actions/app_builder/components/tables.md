@@ -1,5 +1,6 @@
 ---
 title: Tables
+description: Advanced table component features including client-side filtering, server-side filtering, loading indicators, and dynamic values.
 disable_toc: false
 aliases:
 - /service_management/app_builder/tables/
@@ -13,15 +14,23 @@ further_reading:
   text: "Build Apps"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 This page describes advanced features you can use to manipulate table components in your App Builder apps.
 
 ## Client-side filtering
 
 When you have a full list of items already and you want to filter them, there are multiple methods to do so on the client side.
+
+### Column filtering
+
+Under **Columns**, expand a column and enable the **Filterable** option to allow users to filter by entries in that column. When enabled, a drop-down menu appears in the table header which allows the user to select an item from that column to filter on.
+
+### Filter by date range
+
+To allow date range filtering, under **Appearance**, enable the **Has Date Range Filter** option and select a data path to filter by. When enabled, a drop-down menu appears in the table header which allows the user to select a time span to filter by.
+
+### Filter with search
+
+To add a search bar to your table, under **Appearance**, enable the **Is Searchable** option.
 
 ### Filter a table with a text input or search component
 
@@ -67,7 +76,7 @@ If you want to filter the results of a query itself, then use those results in y
 1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
 1. Add a text input or search component to your app. Name it `searchInput`.
 1. Add a table component and set its **data source** property to the query that you added.
-1. Expand the **Advanced** section of the query and find **Post-query Tranformation**.
+1. Expand the **Advanced** section of the query and find **Post-query Transformation**.
 1. Replace `return outputs` with the following line:
 
     ```

@@ -52,7 +52,7 @@ Consulta la siguiente tabla para obtener un resumen de las distintas opciones de
 
 Las configuraciones ***_Todos los sitios_** se pueden utilizar en las organizaciones de sitios US3, pero solo las organizaciones de sitios US3 pueden utilizar la integración nativa de Azure.
 
-<div class="alert alert-warning"> <strong>Nota</strong>: La <a href="https://docs.datadoghq.com/cloud_cost_management/azure/?tab=billingaccounts&site=us3#overview">gestión de costes en la nube</a> y los <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">archivos de log</a> solo son compatibles con el registro de aplicaciones. Para los sitios de US3 que han configurado la integración nativa de Azure de Datadog, debes crear un <a href="">registro de aplicaciones</a> para acceder a estas funcionalidades.
+<div class="alert alert-danger"> <strong>Nota</strong>: La <a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">gestión de costes en la nube</a> y los <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">archivos de log</a> solo son compatibles con el registro de aplicaciones. Para los sitios de US3 que han configurado la integración nativa de Azure de Datadog, debes crear un <a href="">registro de aplicaciones</a> para acceder a estas funcionalidades.
 </div>
 
 ## Configuración
@@ -112,7 +112,7 @@ Si estás en el sitio US3 y usas la integración nativa de Azure, utiliza el sel
 ### Integración nativa de Azure
 Si estás utilizando la integración nativa de Azure, consulta la guía [Enviar logs de Azure con el recurso de Datadog][18] para obtener instrucciones sobre cómo enviar tus logs de _nivel de suscripción_, _recurso de Azure_ y _Azure Active Directory_ a Datadog.
 
-<div class="alert alert-warning"> <strong>Nota</strong>: Los<a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage"> archivos de logs</a> solo son compatibles con el registro de aplicaciones. Para los sitios US3 que han configurado la integración nativa de Azure de Datadog, debes crear un <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#creating-the-app-registration">registro de aplicaciones</a> para acceder a estas funcionalidades.
+<div class="alert alert-danger"> <strong>Nota</strong>: Los<a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage"> archivos de logs</a> solo son compatibles con el registro de aplicaciones. Para los sitios US3 que han configurado la integración nativa de Azure de Datadog, debes crear un <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#creating-the-app-registration">registro de aplicaciones</a> para acceder a estas funcionalidades.
 </div>
 
 {{% /site-region %}}

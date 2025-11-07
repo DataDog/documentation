@@ -1,89 +1,89 @@
 ---
-"app_id": "kafka"
-"app_uuid": "39640d5e-54be-48ff-abf1-8871499e2fd3"
-"assets":
-  "dashboards":
-    "kafka": "assets/dashboards/kafka_dashboard.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "kafka.net.bytes_out"
-      - "kafka.net.bytes_out.rate"
-      "metadata_path": "metadata.csv"
-      "prefix": "kafka."
-    "process_signatures":
-    - "java kafka.kafka"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "64"
-    "source_type_name": "Kafka"
-  "monitors":
-    "Partition is offline": "assets/monitors/kafka_offline_partition.json"
-    "Produce latency is high": "assets/monitors/broker_produce_latency.json"
-    "Produce request rate is high": "assets/monitors/kafka_high_producer_request_rate.json"
-  "saved_views":
-    "error_warning_status": "assets/saved_views/error_warning_status.json"
-    "kafka_patterns": "assets/saved_views/kafka_patterns.json"
-    "kafka_processes": "assets/saved_views/kafka_processes.json"
-    "logger_overview": "assets/saved_views/logger_overview.json"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "log collection"
-- "message queues"
-"custom_kind": "통합"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/kafka/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "kafka"
-"integration_id": "kafka"
-"integration_title": "Kafka Broker"
-"integration_version": "4.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "kafka"
-"public_title": "Kafka Broker"
-"short_description": "생산자 및 소비자, 복제, 최대 지연 등에 대한 메트릭을 수집하세요."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Message Queues"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  - "Offering::Integration"
-  - "Product::데이터 스트림 모니터링"
-  "configuration": "README.md#Setup"
-  "description": "생산자 및 소비자, 복제, 최대 지연 등에 대한 메트릭을 수집하세요."
-  "media": []
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/collecting-kafka-performance-metrics"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/monitor-kafka-with-datadog"
-  - "resource_type": "other"
-    "url": "https://www.datadoghq.com/knowledge-center/apache-kafka/"
-  "support": "README.md#Support"
-  "title": "Kafka Broker"
+app_id: kafka
+app_uuid: 39640d5e-54be-48ff-abf1-8871499e2fd3
+assets:
+  dashboards:
+    kafka: assets/dashboards/kafka_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - kafka.net.bytes_out
+      - kafka.net.bytes_out.rate
+      metadata_path: metadata.csv
+      prefix: kafka.
+    process_signatures:
+    - java kafka.kafka
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 64
+    source_type_name: Kafka
+  monitors:
+    Partition is offline: assets/monitors/kafka_offline_partition.json
+    Produce latency is high: assets/monitors/broker_produce_latency.json
+    Produce request rate is high: assets/monitors/kafka_high_producer_request_rate.json
+  saved_views:
+    error_warning_status: assets/saved_views/error_warning_status.json
+    kafka_patterns: assets/saved_views/kafka_patterns.json
+    kafka_processes: assets/saved_views/kafka_processes.json
+    logger_overview: assets/saved_views/logger_overview.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- log collection
+- message queues
+custom_kind: 통합
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/kafka/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: kafka
+integration_id: kafka
+integration_title: Kafka Broker
+integration_version: 4.0.0
+is_public: true
+manifest_version: 2.0.0
+name: kafka
+public_title: Kafka Broker
+short_description: 생산자 및 소비자, 복제, 최대 지연 등에 관한 메트릭 수집하기
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  - Category::Message Queues
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Offering::Integration
+  - Product::데이터 스트림 모니터링
+  configuration: README.md#Setup
+  description: 생산자 및 소비자, 복제, 최대 지연 등에 대한 메트릭을 수집하세요.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
+  - resource_type: other
+    url: https://www.datadoghq.com/knowledge-center/apache-kafka/
+  support: README.md#Support
+  title: Kafka Broker
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -101,15 +101,17 @@ Kafka 브로커 메트릭을 확인하여 Kafka 클러스터 상태와 성능을
 그 이전 버전을 실행 중인 경우 [에이전트 v5.2.x 릴리스 샘플 파일][3]을 참조하세요.
 - Kafka 소비자 메트릭을 수집하려면 [kafka_consumer 점검][4]을 참조하세요.
 
+Kafka 통합을 강화하려면 [Data Streams Monitoring][5]을 고려해 보세요. 이 솔루션은 파이프라인 시각화 및 지연 추적 기능을 제공하여 병목 현상을 파악하고 해결하는 데 도움을 줍니다.
+
 ## 설정
 
 ### 설치
 
-에이전트의 Kafka 점검에는 [Datadog 에이전트][5] 패키지가 포함되어 있으므로 Kafka 노드에 추가로 설치할 필요가 없습니다.
+에이전트의 Kafka 점검에는 [Datadog 에이전트][6] 패키지가 포함되어 있으므로 Kafka 노드 외 다른 것을 설치할 필요가 없습니다.
 
-점검은 [JMXFetch][6]를 사용해 JMX에서 메트릭을 수집합니다. 에이전트에서 JMXFetch를 실행하려면 각 kafka 노드에 JVM이 필요합니다. 이를 위해 Kafka가 사용하는 것과 동일한 JVM을 사용할 수 있습니다.
+점검은 [JMXFetch][7]를 사용해 JMX에서 메트릭 을 수집합니다. 에이전트에서 JMXFetch를 실행하려면 각 kafka 노드에 JVM이 필요합니다. 이를 위해 Kafka가 사용하는 것과 동일한 JVM을 사용할 수 있습니다.
 
-**참고**: Kafka 점검은 Apache Kafka(Amazon MSK) 관리형 스트리밍과 함께 사용할 수 없습니다. 대신 [Amazon MSK 통합][7]을 사용하세요.
+**참고**: Kafka 점검은 Apache Kafka(Amazon MSK) 관리형 스트리밍과 함께 사용할 수 없습니다. 대신 [Amazon MSK 통합][8]을 사용하세요.
 
 ### 설정
 
@@ -174,10 +176,10 @@ _에이전트 버전 > 6.0에서 사용 가능_
 
 5. [에이전트를 다시 시작합니다][3].
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/ko/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/logs/processing/#integration-pipelines
+[3]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ko/logs/processing/#integration-pipelines
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -197,14 +199,14 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 | -------------- | -------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "kafka", "service": "<SERVICE_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[2]: https://docs.datadoghq.com/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/ko/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[2]: https://docs.datadoghq.com/ko/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 검증
 
-[에이전트 상태 하위 명령어][8]를 실행하고 **JMXFetch** 섹션에서 `kafka`를 찾습니다.
+[에이전트 상태 하위 명령어][9]를 실행하고 **JMXFetch** 섹션에서 `kafka`를 찾습니다.
 
 ```text
 ========
@@ -236,40 +238,40 @@ Kafka 점검은 이벤트를 포함하지 않습니다.
 
 ## 트러블슈팅
 
-- [Kafka 트러블슈팅 및 심층 분석][9]
-- [에이전트 RMIServer 스텁 검색 실패][10]
+- [트러블슈팅 및 Kafka에 대한 심층 분석][10]
+- [에이전트 RMIServer 스텁을 검색하지 못했습니다][11]
 
 ## 참고 자료
 
-- [Kafka 성능 메트릭 모니터링][11]
-- [Kafka 성능 메트릭 수집][12]
-- [Datadog를 사용한 Kafka 모니터링][13]
-- [기술 문서 센터의 Kafka 개요][14]
+- [Kafka 성능 메트릭 모니터링][12]
+- [Kafka 성능 수집 메트릭][13]
+- [Datadog를 사용한 Kafka 모니터링][14]
+- [기술 문서 센터의 Kafka 개요][15]
 
 
 
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-## Kafka 소비자 통합
+## Kafka Consumer 통합
 
-![Kafka 대시보드][15]
+![Kafka 대시보드][16]
 
 ## 개요
 
-이 에이전트 통합은 Kafka 소비자로부터 메시지 오프셋 메트릭을 수집합니다. 이 점검은 Kafka 브로커로부터 하이워터 오프셋을, Kafka(또는 기존 고객의 경우 Zookeeper)에 저장된 소비자 오프셋을 전달한 다음 소비자 지연을 계산합니다(브로커 오프셋 및 소비자 오프셋 간 차이). 
+이 Agent 통합은 Kafka 컨슈머로부터 메시지 오프셋 메트릭을 수집합니다. 이 점검은 Kafka 브로커에서 하이워터 오프셋, Kafka(또는 기존 컨슈머의 경우 Zookeeper)에 저장된 컨슈머 오프셋을 가져온 다음, 컨슈머 지연(브로커 오프셋과 컨슈머 오프셋의 차이)을 계산합니다.
 
 **참고:** 
-- 이 통합은 브로커 오프셋보다 먼저 소비자 오프셋을 점검합니다. 최악의 시나리오에서 소비자 지연이 약간은 과장될 수 있습니다. 반대 순서로 오프셋을 점검하면 마이너스 값이 나올 정도로 소비자 지연이 정확하지 않을 수 있습니다. 이는 최악의 시나리오가 보통 메시지 표시를 건너뛰고 있다는 신호입니다
-- Kafka 브로커 또는 자바 기반 소비자/생산자로부터 JMX 메트릭을 수집하려면 [Kafka 브로커 통합][16]을 참조하세요.
+- 이 통합은 브로커 오프셋보다 컨슈머 오프셋을 먼저 확인하도록 하기 때문에, 최악의 경우 컨슈머 지연이 실제보다 더 커보일 수 있습니다. 이 오프셋을 역순으로 확인하면, 컨슈머 지연이 과소평가되어 음수 값이 나타날 수 있으며, 이는 메시지를 건너뛰고 있음을 나타내는 심각한 상황입니다.
+- Kafka 브로커 또는 Java 기반 컨슈머/프로듀서로부터 JMX 메트릭을 수집하려면 [Kafka Broker 통합][17]을 참조하세요.
 
 
 ## 설정
 
 ### 설치
 
-에이전트의 Kafka 소비자 점검은 [Datadog 에이전트][6] 패키지에 포함되어 있습니다. Kafka 노드에 별도의 설치가 필요하지 않습니다.
+Agent의 Kafka 컨슈머 점검은 [Datadog Agent][6] 패키지에 포함되어 있습니다. 따라서, Kafka 노드에 추가로 설치할 필요가 없습니다.
 
-### 설정
+### 구성
 
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
@@ -280,20 +282,20 @@ Kafka 소비자를 실행하는 호스트에서 실행되는 에이전트 점검
 
 ##### 메트릭 수집
 
-1. [에이전트 설정 디렉토리][17] 루트의 `conf.d/` 폴더에 있는 `kafka_consumer.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 설정 옵션은 [kafka_consumer.d/conf.yaml 샘플][18]을 참조하세요.
+1. [에이전트 설정 디렉토리][18] 루트의 `conf.d/` 폴더에 있는 `kafka_consumer.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 설정 옵션은 [kafka_consumer.d/conf.yaml 샘플][19]을 참조하세요.
 
-2. [에이전트를 재시작합니다.][19]
+2. [에이전트를 다시 시작합니다][20].
 
 ##### 로그 수집
 
-이 점검은 추가 로그를 수집하지 않습니다. Kafka 브로커에서 로그를 수집하려면 [Kafka 로그 수집 지침][20]을 참조하세요.
+이 점검은 추가 로그를 수집하지 않습니다. Kafka 브로커에서 로그를 수집하려면 [Kafka 로그 수집 지침][21]을 참조하세요.
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "Containerized" xxx -->
 
 #### 컨테이너화된 환경
 
-컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][21]에 아래 파라미터를 적용하는 방법이 안내되어 있습니다.
+컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][22] 아래 파라미터 적용에 대한 지침을 참조하세요.
 
 ##### 메트릭 수집
 
@@ -305,19 +307,19 @@ Kafka 소비자를 실행하는 호스트에서 실행되는 에이전트 점검
 
 ##### 로그 수집
 
-이 점검은 추가 로그를 수집하지 않습니다. Kafka 브로커에서 로그를 수집하려면 [Kafka 로그 수집 지침][20]을 참조하세요.
+이 점검은 추가 로그를 수집하지 않습니다. Kafka 브로커에서 로그를 수집하려면 [Kafka 로그 수집 지침][21]을 참조하세요.
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행][8]하고 점검 섹션에서 `kafka_consumer`를 찾습니다.
+[에이전트 상태 하위 명령을 실행][9]하고 점검 섹션에서 `kafka_consumer`를 찾습니다.
 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "kafka_consumer" >}}
+{{< get-metrics-from-git "kafka-consumer" >}}
 
 
 ### 이벤트
@@ -331,8 +333,8 @@ Kafka 소비자 점검에는 서비스 점검이 포함되어 있지 않습니�
 
 ## 트러블슈팅
 
-- [Kafka 트러블슈팅 및 심층 분석][9]
-- [에이전트 RMIServer 스텁 검색 실패][10]
+- [트러블슈팅 및 Kafka에 대한 심층 분석][10]
+- [에이전트 RMIServer 스텁을 검색하지 못했습니다][11]
 
 **Kerberos GSSAPI 인증**
 
@@ -376,28 +378,29 @@ sudo service datadog-agent restart
 ## 참고 자료
 
 - [Kafka 성능 메트릭 모니터링][12]
-- [Kafka 성능 메트릭 수집][12]
-- [Datadog를 사용한 Kafka 모니터링][13]
+- [Kafka 성능 수집 메트릭][13]
+- [Datadog를 사용한 Kafka 모니터링][14]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kafka/images/kafka_dashboard.png
-[2]: https://docs.datadoghq.com/integrations/java/
+[2]: https://docs.datadoghq.com/ko/integrations/java/
 [3]: https://raw.githubusercontent.com/DataDog/dd-agent/5.2.1/conf.d/kafka.yaml.example
-[4]: https://docs.datadoghq.com/integrations/kafka/?tab=host#kafka-consumer-integration
-[5]: https://app.datadoghq.com/account/settings/agent/latest
-[6]: https://github.com/DataDog/jmxfetch
-[7]: https://docs.datadoghq.com/integrations/amazon_msk/#pagetitle
-[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.datadoghq.com/integrations/faq/troubleshooting-and-deep-dive-for-kafka/
-[10]: https://docs.datadoghq.com/integrations/guide/agent-failed-to-retrieve-rmiserver-stub/
-[11]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
-[12]: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics
-[13]: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
-[14]: https://www.datadoghq.com/knowledge-center/apache-kafka/
-[15]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kafka_consumer/images/kafka_dashboard.png
-[16]: https://app.datadoghq.com/integrations/kafka?search=kafka
-[17]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
-[18]: https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/datadog_checks/kafka_consumer/data/conf.yaml.example
-[19]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[20]: https://docs.datadoghq.com/integrations/kafka/#log-collection
-[21]: https://docs.datadoghq.com/containers/kubernetes/integrations/
+[4]: https://docs.datadoghq.com/ko/integrations/kafka/?tab=host#kafka-consumer-integration
+[5]: https://docs.datadoghq.com/ko/data_streams/
+[6]: https://app.datadoghq.com/account/settings/agent/latest
+[7]: https://github.com/DataDog/jmxfetch
+[8]: https://docs.datadoghq.com/ko/integrations/amazon_msk/#pagetitle
+[9]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ko/integrations/faq/troubleshooting-and-deep-dive-for-kafka/
+[11]: https://docs.datadoghq.com/ko/integrations/guide/agent-failed-to-retrieve-rmiserver-stub/
+[12]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
+[13]: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics
+[14]: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
+[15]: https://www.datadoghq.com/knowledge-center/apache-kafka/
+[16]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kafka_consumer/images/kafka_dashboard.png
+[17]: https://app.datadoghq.com/integrations/kafka?search=kafka
+[18]: https://docs.datadoghq.com/ko/agent/guide/agent-configuration-files/#agent-configuration-directory
+[19]: https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/datadog_checks/kafka_consumer/data/conf.yaml.example
+[20]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[21]: https://docs.datadoghq.com/ko/integrations/kafka/#log-collection
+[22]: https://docs.datadoghq.com/ko/containers/kubernetes/integrations/

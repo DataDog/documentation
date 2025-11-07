@@ -16,14 +16,14 @@ further_reading:
 - link: /integrations/
   tag: Documentation
   text: インテグレーションについて
-- link: /service_management/workflows/actions_catalog
+- link: /actions/actions_catalog
   tag: ドキュメント
   text: ワークフローアクションの一覧を見る
 title: アクセス・認証
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
+<div class="alert alert-danger">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
 {{< /site-region >}}
 
 ワークフローとそのコンポーネントへのアクセスや認証を制御するツールがいくつかあります。
@@ -49,7 +49,7 @@ title: アクセス・認証
 1. **Create a service account** をクリックします。
 1. サービスアカウントのユーザーのロールを選択します。
 1. サービスアカウントを保存するには、**Create** をクリックします。
-1. ワークフローを保存して、変更を適用します。
+1. ワークフローを保存して、変更を適用します。 
 
 ワークフローを実行する際、ワークフローアクションで定義された接続をサービスアカウントユーザーが解決します。そのため、サービスアカウントユーザーは `connections_resolve` 権限を必要とします。Datadog Admin Role と Datadog Standard Role は、`connections_resolve` 権限を含んでいます。
 
@@ -78,20 +78,20 @@ title: アクセス・認証
 
 [ロールベースのアクセス制御 (RBAC)][3] を使用して、ワークフローと接続へのアクセスを制御します。ワークフローや接続に適用される権限の一覧は、[Datadog のロール権限][7]を参照してください。
 
-By default, the author of a workflow or connection is the only user who receives **Editor** access. The rest of the Datadog organization receives **Viewer** access to the workflow or connection.
+デフォルトでは、ワークフローまたは接続の作成者だけに **Editor** 権限が付与されます。Datadog 組織のその他のユーザーには、当該ワークフローまたは接続に対する **Viewer** 権限が付与されます。
 
 ### 特定の接続へのアクセスを制限する
 
-Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**. By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
+各接続に権限を設定して、変更や利用を制限できます。権限の粒度は **Viewer**、**Resolver**、**Editor** です。デフォルトでは、接続の作成者のみに **Editor** 権限が付与されます。作成者は、他のユーザー、ロール、またはチームに対して追加のアクセス権を付与できます。
 
 Viewer
-: 接続の表示が可能
+: 接続の表示が可能です
 
 Resolver
-: 接続の解決、表示が可能
+: 接続の解決と表示が可能です
 
 Editor
-: 接続の編集、解決、表示が可能
+: 接続の編集、解決、表示が可能です
 
 接続の解決には、ステップに割り当てられた接続オブジェクトを取得し、それに関連するシークレットを取得することが含まれます。
 
@@ -109,18 +109,18 @@ Editor
 
 ### 特定のワークフローへのアクセスを制限する
 
-Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**. By default, only the author of the workflow receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
+各ワークフローに権限を設定して、変更や利用を制限できます。権限の粒度は **Viewer**、**Runner**、**Editor** です。デフォルトでは、ワークフローの作成者のみに **Editor** 権限が付与されます。作成者は、他のユーザー、ロール、またはチームにアクセス権を追加で付与できます。
 
 Viewer
-: ワークフローの表示が可能
+: ワークフローの表示が可能です
 
 Runner
-: ワークフローの実行、表示が可能
+: ワークフローの実行と表示が可能です
 
 Editor
-: ワークフローの編集、実行、表示が可能
+: ワークフローの編集、実行、表示が可能です
 
-特定のワークフローへのアクセスは、ワークフローリストページまたはワークフローを編集中のキャンバスから制限できます。
+ワークフローのリストページ、またはワークフロー編集中のキャンバスから、特定のワークフローへのアクセスを制限できます。
 
 **ワークフローリストページからの権限の制限**
 1. [Workflow Automation ページ][8]に移動します。
@@ -133,8 +133,8 @@ Editor
 1. **Save** をクリックします。
 
 **ワークフローエディターからの権限の制限**
-1. ワークフローエディターで歯車 (**Settings**) アイコンをクリックします。
-1. ドロップダウンから、**Edit Permissions** を選択します。
+1. ワークフローエディターで、歯車 (**Settings**) アイコンをクリックします。
+1. ドロップダウンから **Edit Permissions** を選択します。
 1. **Restrict Access** を選択します。
 1. ドロップダウンメニューからロールを選択します。**Add** をクリックします。選択したロールがダイアログボックスの下部に表示されます。
 1. ロール名の横にある、ドロップダウンメニューから必要な権限を選択します。
@@ -145,13 +145,13 @@ Editor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][9].
+<br>ご質問やフィードバックがある場合は、[Datadog Community Slack][9] の **#workflows** チャンネルにご参加ください。
 
 [1]: /ja/account_management/audit_trail/#overview
 [2]: /ja/account_management/org_settings/service_accounts/
 [3]: /ja/account_management/rbac/
 [4]: /ja/service_management/workflows/trigger/
-[5]: /ja/service_management/workflows/actions_catalog/
+[5]: /ja/actions/actions_catalog/
 [6]: /ja/service_management/workflows/connections/
 [7]: /ja/account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow

@@ -12,7 +12,7 @@ further_reading:
 
 This guide walks you through configuring [Cloud Security][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (AAP)][4], and [Cloud SIEM][5] on AWS Fargate.
 
-{{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how Cloud Security, AAP, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
+{{< img src="security/datadog_security_coverage_aws_fargate2.png" alt="Flow chart showing how Cloud Security, AAP, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
 ## Full stack coverage for AWS Fargate
 
@@ -38,7 +38,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     <tr>
         <td>Fargate Infrastructure</td>
         <td>Infrastructure Monitoring</td>
-        <td>Not yet supported</td>
+        <td>Cloud Security</td>
         <td>Workload Protection</td>
     </tr>
 </table>
@@ -242,9 +242,16 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
 {{< /code-block >}}
 
+#### Datadog Cloud Security
+1. In Datadog, navigate to [Cloud Security > Setup > Cloud Integrations > AWS][9].
+2. Enable Vulnerability Management by deploying the [Datadog Agentless scanner][10] on your AWS accounts hosting your Amazon ECR.
+
 [6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[9]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=aws&vuln_container_enabled=true&vuln_host_enabled=true&vuln_lambda_enabled=true
+[10]: /security/cloud_security_management/setup/agentless_scanning/enable/?tab=existingawsaccount#set-up-aws-cloudformation
+
 
 {{% /tab %}}
 
@@ -355,7 +362,7 @@ In the task definition, replace the "workload" container with the following:
             ],
 {{< /code-block >}}
 
-## Application Security
+## App and API Protection
 
 ### Prerequisites
 
@@ -419,12 +426,12 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/security/agent-events
-[10]: /security/application_security/threats/setup/threat_detection/java/?tab=awsfargate
-[11]: /security/application_security/threats/setup/threat_detection/java/?tab=amazonecs
-[12]: /security/application_security/threats/setup/threat_detection/dotnet?tab=awsfargate
-[13]: /security/application_security/threats/setup/threat_detection/ruby?tab=awsfargate
-[14]: /security/application_security/threats/setup/threat_detection/nodejs?tab=awsfargate
-[15]: /security/application_security/threats/setup/threat_detection/python?tab=awsfargate
+[10]: /security/application_security/setup/java/aws-fargate
+[11]: /security/application_security/setup/dotnet/aws-fargate
+[12]: /security/application_security/setup/aws/fargate
+[13]: /security/application_security/setup/ruby/aws-fargate
+[14]: /security/application_security/setup/nodejs/aws-fargate
+[15]: /security/application_security/setup/python/aws-fargate
 [16]: /security/application_security/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [18]: /security/code_security/iast/setup/java/

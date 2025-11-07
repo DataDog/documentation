@@ -17,7 +17,7 @@ title: Lista de infraestructuras
 
 ## Información general
 
-La lista de infraestructuras muestra todos tus hosts con actividad durante las últimas dos horas (por defecto) y hasta una semana, monitorizados por Datadog. Busca tus hosts o agrúpalos por etiquetas (tags). En Datadog, ve a [**infraestructura > Hosts**][10] para ver la lista de infraestructuras. Esta lista no debe utilizarse para estimar tu facturación por el host de la infraestructura. Para obtener más información sobre facturación, consulta la página [Facturación][11].
+La lista de infraestructuras te ofrece un inventario en tiempo real de todos los hosts que se comunican con Datadog a través de las integraciones en el Agent o en la nube. En forma predeterminada, muestra los hosts con actividad en las últimas dos horas, pero puedes ampliar la vista para cubrir hasta una semana. Busca tus hosts o agrúpalos por etiquetas. En Datadog, ve a [**Infraestructure > Hosts**][10]  (Infraestructura > Hosts) para ver la lista de infraestructuras. Esta lista no debe utilizarse para estimar la facturación de tu host de infraestructura. Consulta la page (página) de [facturación][11] para obtener más información sobre la facturación.
 
 ## Hosts
 
@@ -47,7 +47,7 @@ Carga 15
 Aplicaciones
 : Las integraciones de Datadog que informan métricas del host.
 
-Sistema operativo 
+Sistema operativo
 : El sistema operativo rastreado.
 
 Plataforma en la nube
@@ -74,6 +74,7 @@ Haz clic en un host para ver más detalles, incluido:
 - [contenedores][4]
 - [logs][5] (si se encuentra habilitado)
 - [Configuración del Agent](#agent-configuration) (si se encuentra habilitado)
+- [Configuración del recopilador de OpenTelemetry](#OpenTelemetry-collector-configuration) (si está activada)
 
 {{< img src="infrastructure/index/infra-list2.png" alt="Detalles del host de la lista de infraestructuras" style="width:100%;">}}
 
@@ -85,23 +86,26 @@ Datadog crea alias para nombres de host cuando hay varios nombres unívocos para
 
 #### Configuración del Agent
 
-{{< callout url="#" btn_hidden="true" >}}
-La vista de configuración del Agent se encuentra en la versión beta pública y está disponible en las versiones del Agent 7.39/6.39 o posteriores.
+Puedes ver y gestionar las configuraciones del Agent en toda tu infraestructura utilizando [Fleet Automation][12].
 
-A partir de las versiones del Agent 7.47/6.47 o posteriores, esta función se encuentra habilitada de forma predeterminada.
-{{< /callout >}}
+Para ver las configuraciones del Agent:
+1. Haz clic en **Open Host** (Abrir host) en la esquina superior derecha del panel de detalles del host.
+2. Selecciona **View Agent Configurations** (Ver configuraciones del Agent) en el menú desplegable para ir directamente a Fleet Automation.
 
-El Agent puede enviar su propia configuración a Datadog para que se muestre en la sección `Agent Configuration` del panel de detalles del host.
+{{< img src="infrastructure/index/infra-list-config-4.png" alt="Ver configuraciones del Agent en Fleet Automation" style="width:100%;">}}
 
-La configuración del Agent no incluye información confidencial y sólo contiene la configuración que has establecido mediante el archivo de configuración o las variables de entorno. Los cambios de configuración se actualizan cada 10 minutos.
+#### Configuración de OpenTelemetry Collector
 
-Esta función se encuentra habilitada de manera predeterminada en las versiones del Agent 7.47.0/6.47.0 o posteriores.
+Cuando la [extensión de Datadog][14] está configurada con tu recopilador de OpenTelemetry, puedes ver la configuración del recopilador y la información de creación directamente en el panel de detalles del host de la lista de infraestructuras. La extensión de Datadog proporciona visibilidad de tu flota de recopiladores desde la interfaz de usuario de Datadog, lo que te ayuda a gestionar y depurar tus despliegues de recopiladores de OpenTelemetry.
 
-Para modificar este comportamiento, configura el valor de `inventories_configuration_enabled` en tu [archivo de configuración del Agent][6] como `true` para enviar la configuración o `false` para deshabilitarla.
+Para ver las configuraciones del recopilador de OpenTelemetry:
+1. Haz clic en un host que ejecute el recopilador de OpenTelemetry en la lista Infraestructuras.
+2. En el panel de detalles del host, selecciona la pestaña **OpenTelemetry Collector** (Recopilador de OpenTelemetry) para ver la información de creación y la configuración completa del recopilador.
 
-También puedes utilizar la variable de entorno `DD_INVENTORIES_CONFIGURATION_ENABLED` para habilitar o deshabilitar esta función.
+Para obtener instrucciones y requisitos de configuración detallados, como la coincidencia de nombres de host y la configuración de pipeline, consulta la [documentación principal de la extensión de Datadog][14].
 
-{{< img src="infrastructure/index/infra-list-config3.png" alt="La vista de configuración del Agent" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-config-OpenTelemetry.png" alt="Ver configuraciones del recopilador de OpenTelemetry en la lista de infraestructuras" style="width:100%;">}}
+
 
 ### Exportar
 
@@ -110,9 +114,9 @@ Para obtener una lista con formato JSON de tus hosts que informan a Datadog, uti
 * El **enlace permanente de la API de JSON** en la parte superior de la lista de infraestructuras.
 * El [endpoint de búsqueda de la API de los hosts][7]. Para ver un ejemplo, consulta la [guía para desarrolladores][8].
 
-#### Versión del Agent
+#### Agent version
 
-En ciertas ocasiones, también puede resultar útil auditar tus versiones del Agent para asegurarte de que estás ejecutando la última versión. Para ello, utiliza el [script get_host_agent_list][9], que aprovecha el enlace permanente de JSON para generar los Agents en ejecución actuales con sus números de versión. También puedes utilizar el script `json_to_csv` para convertir el resultado JSON en un archivo CSV.
+Puede ser útil auditar tus versiones del Agent para asegurarte de que estés ejecutando la última versión. Para ello, utiliza el [script get_host_agent_list][9], que aprovecha el vínculo permanente a JSON para mostrar los Agents que se están ejecutando con los números de versión. También hay un script `json_to_csv` para convertir la salida JSON en un archivo CSV.
 
 #### Sin Agent
 
@@ -159,3 +163,6 @@ for host in infra['rows']:
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/es/account_management/billing/
+[12]: https://app.datadoghq.com/release-notes/fleet-automation-is-now-generally-available
+[13]: /es/agent/fleet_automation
+[14]: /es/opentelemetry/integrations/datadog_extension/

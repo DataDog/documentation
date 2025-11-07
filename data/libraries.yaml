@@ -1,371 +1,622 @@
 Classic:
-  - Arduino:
-    - name: ArduinoStatsd
-      link: https://github.com/aelse/ArduinoStatsd
-      dogstatsd: true
-      authors: Alexander Else
-  - C++:
-    - name: cpp-datadogstatsd
-      link: https://github.com/BoardiesITSolutions/cpp-datadogstatsd
-      dogstatsd: true
-      authors: BoardiesITSolutions
-      notes: Send metrics from your C++ applications to your Datadog account.
-    - name: DogFood
-      link: https://github.com/garrettsickles/DogFood
-      dogstatsd: true
-      authors: Garrett Sickles
-      notes: C++ header library to send metrics to your Datadog account.
-  - C# / .NET:
-    - name: dogstatsd-csharp-client
-      link: https://github.com/DataDog/dogstatsd-csharp-client
-      official: true
-      dogstatsd: true
-      authors: Datadog
-    - name: DatadogStatsD
-      link: https://github.com/verdie-g/DatadogStatsD
-      dogstatsd: true
-      notes: High Performance DogStatsD Client for .NET Core
-      authors: Gregoire Verdier
-  - Clojure:
-    - name: clojure-statsd-client
-      link: https://github.com/unbounce/clojure-dogstatsd-client
-      dogstatsd: true
-      notes: A DogStatsD client for Clojure.
-      authors: Unbounce
-  - CloudFormation:
-    - name: cdk-datadog-resources
-      link: https://github.com/NomadBlacky/cdk-datadog-resources
-      notes: An AWS CDK construct library that wraps the DataDog/datadog-cloudformation-resources.
-      author: Takumi Kadowaki
-  - Crystal:
-    - name: statsd.cr
-      link: https://github.com/miketheman/statsd.cr
-      dogstatsd: true
-      authors: Mike Fiedler
-  - Delphi:
-    - name: datadog-delphi
-      link: https://github.com/rfrezino/datadog-delphi
-      dogstatsd: true
-      authors: Rodrigo Farias Rezino
-  - Elixir:
-    - name: ex-datadog-plug
-      link: https://github.com/Tubitv/ex-datadog-plug
-      api: true
-      authors: Tyr Chen, Tubi
-      notes: A plug for logging response times.
-    - name: mtx
-      link: https://github.com/synrc/mtx
-      dogstatsd: true
-      authors: N2O Ecosystem
-    - name: statix
-      link: https://github.com/lexmag/statix
-      dogstatsd: true
-      authors: Aleksei Magusev
-  - Erlang / Elixir:
-    - name: dogstatsde
-      link: https://github.com/waisbrot/dogstatsde
-      dogstatsd: true
-      authors: waisbrot
-  - Go:
-    - name: datadog-go
-      link: https://github.com/DataDog/datadog-go
-      official: true
-      dogstatsd: true
-      authors: Datadog
-    - name: datadog-api-client-go
-      link: https://github.com/DataDog/datadog-api-client-go
-      official: true
-      api: true
-      authors: Datadog
-    - name: xstats
-      link: https://github.com/rs/xstats
-      dogstatsd: true
-      authors: Olivier Poitrey
-    - name: go-datadog-api
-      link: https://github.com/zorkian/go-datadog-api
-      api: true
-      authors: Mark Smith from Dropbox
-  - Haskell:
-    - name: Haskell Datadog Client
-      link: https://github.com/iand675/datadog
-      authors: Ian Duncan
-      api: true
-      dogstatsd: true
-  - Java:
-    - name: java-dogstatsd-client
-      link: https://github.com/DataDog/java-dogstatsd-client
-      official: true
-      dogstatsd: true
-      authors: Datadog
-    - name: datadog-api-client-java
-      link: https://github.com/DataDog/datadog-api-client-java
-      official: true
-      api: true
-      authors: Datadog
-    - name: java-dogstatsd-client
-      link: https://github.com/arnabk/java-dogstatsd-client
-      dogstatsd: true
-      authors: Arnab Karmakar
-      notes: A fork of Indeed's java-dogstatsd-client; supports events and blocking metrics.
-    - name: metrics-datadog
-      link: https://github.com/coursera/metrics-datadog
-      api: true
-      dogstatsd: true
-      notes: A reporting bridge between Dropwizard metrics and Datadog.
-      authors: Coursera
-  - Lua:
-    - name: APISIX
-      link: https://apisix.apache.org/docs/apisix/next/plugins/datadog/
-      dogstatsd: true
-      authors: Apache APISIX
-      notes: Send custom metrics to DogStatsD using the UDP protocol.
-  - Node.js:
-    - name: datadog-api-client
-      link: https://github.com/DataDog/datadog-api-client-typescript
-      official: true
-      api: true
-      authors: Datadog
-    - name: hot-shots
-      link: https://github.com/brightcove/hot-shots
-      dogstatsd: true
-      authors: Brightcove
-    - name: node-dogstatsd
-      link: https://github.com/joybro/node-dogstatsd
-      dogstatsd: true
-      authors: Young Han Lee
-    - name: node-dogapi
-      link: https://github.com/brettlangdon/node-dogapi
-      api: true
-      authors: Brett Langdon
-    - name: datadog-metrics
-      link: https://github.com/dbader/node-datadog-metrics
-      api: true
-      authors: Daniel Bader
-  - Perl:
-    - name: dogstatsd-perl
-      link: https://github.com/binary-com/dogstatsd-perl
-      dogstatsd: true
-      authors: Stefan Goethals
-  - PHP:
-    - name: php-datadogstatsd
-      link: https://github.com/DataDog/php-datadogstatsd
-      official: true
-      dogstatsd: true
-      authors: Alex Corley
-    - name: dog-statsd
-      link: https://github.com/graze/dog-statsd
-      dogstatsd: true
-      notes: A fork of thephpleague/statsd with additional Datadog features by Graze.
-      authors: graze.com
-  - Python:
-    - name: datadogpy
-      link: https://github.com/DataDog/datadogpy
-      official: true
-      api: true
-      dogstatsd: true
-      authors: Datadog
-      notes: Also includes an API client CLI tool, 'dog'.
-    - name: datadog-api-client-python
-      link: https://github.com/DataDog/datadog-api-client-python
-      official: true
-      api: true
-      authors: Datadog
-  - R:
-    - name: datadogr
-      link: https://cran.r-project.org/package=datadogr
-      api: true
-      notes: A simple R package to query for metrics.
-    - name: rdog
-      link: https://github.com/alq666/rdog
-      api: true
-      notes: An R package to analyze Datadog metrics into R.
-      authors: Alexis Lê-Quôc
-  - Racket:
-    - name: racket-dogstatsd
-      link: https://github.com/DarrenN/racket-dogstatsd
-      dogstatsd: true
-      notes: A DogStatsD client for Racket.
-      authors: DarrenN
-  - Ruby:
-    - name: DogApi
-      link: https://github.com/DataDog/dogapi-rb
-      official: true
-      api: true
-      authors: Datadog
-    - name: datadog_api_client
-      link: https://github.com/DataDog/datadog-api-client-ruby
-      official: true
-      api: true
-      authors: Datadog
-    - name: dogstatsd-ruby
-      link: https://github.com/DataDog/dogstatsd-ruby
-      official: true
-      dogstatsd: true
-      authors: Datadog
-  - Rust:
-    - name: cadence
-      link: https://docs.rs/cadence/latest/cadence/
-      dogstatsd: true
-      authors: Nick Pillitteri
-    - name: metrics-exporter-statsd
-      link: https://docs.rs/metrics-exporter-statsd/latest/metrics_exporter_statsd/
-      dogstatsd: true
-      authors: GitHub
-    - name: datadog-api-client-rust
-      link: https://github.com/DataDog/datadog-api-client-rust
-      official: true
-      api: true
-      authors: Datadog
-  - Scala:
-    - name: datadog-scala
-      link: https://github.com/gphat/datadog-scala
-      api: true
-      authors: Cory Watson
-    - name: datadog4s
-      link: https://github.com/avast/datadog4s
-      dogstatsd: true
-      authors: Avast
-      notes: Toolkit for monitoring applications written in functional Scala using Datadog.
-    - name: scaladog
-      link: https://github.com/NomadBlacky/scaladog
-      api: true
-      authors: NomadBlacky
-      notes: Datadog API client for Scala.
-  - Swift:
-    - name: DatadogSDK
-      link: https://github.com/DataDog/dd-sdk-ios
-      api: true
-      official: true
-      authors: Datadog
-  - Swift:
-    - name: Swift-Dogstatsd
-      link: https://github.com/datadog/swift-dogstatsd/
-      dogstatsd: true
-      official: true
-      authors: Datadog
-  - Swift:
-    - name: SwiftDog
-      link: https://github.com/jaronoff97/SwiftDog
-      api: true
-      authors: Jacob Aronoff
+- Arduino:
+  - name: ArduinoStatsd
+    link: https://github.com/aelse/ArduinoStatsd
+    dogstatsd: true
+    authors: Alexander Else
+    notes: ArduinoStatsd is a lightweight Arduino library that allows your Arduino
+      projects to send metrics (counters, timers, gauges, and more) to StatsD servers
+      over UDP. It supports metric tags compatible with modern StatsD implementations,
+      making it easy to monitor and analyze your embedded devices.
+- C++:
+  - name: cpp-datadogstatsd
+    link: https://github.com/BoardiesITSolutions/cpp-datadogstatsd
+    dogstatsd: true
+    authors: BoardiesITSolutions
+    notes: C++ library for sending custom metrics and events from your applications
+      to Datadog via StatsD. Supports UDP and HTTP(S) transmission, tagging, gauge,
+      counter, timer, set, histogram, and event types, with optional asynchronous
+      event submission and flexible tagging APIs.
+  - name: DogFood
+    link: https://github.com/garrettsickles/DogFood
+    dogstatsd: true
+    authors: Garrett Sickles
+    notes: DogFood is a lightweight, header-only C++ library for reporting metrics,
+      events, and service checks to a Datadog Agent using the DogStatsD protocol.
+- C# / .NET:
+  - name: dogstatsd-csharp-client
+    link: https://github.com/DataDog/dogstatsd-csharp-client
+    official: true
+    dogstatsd: true
+    authors: Datadog
+    notes: C# client library for DogStatsD, Datadog’s extension of the StatsD metric
+      server. Features client-side metric aggregation, batching for efficient network
+      usage, and supports Unix domain sockets (UDS) on supported platforms.
+  - name: DatadogStatsD
+    link: https://github.com/verdie-g/DatadogStatsD
+    dogstatsd: true
+    notes: High Performance DogStatsD Client for .NET Core
+    authors: Gregoire Verdier
+- Clojure:
+  - name: clojure-statsd-client
+    link: https://github.com/unbounce/clojure-dogstatsd-client
+    dogstatsd: true
+    notes: A pragmatic Clojure wrapper for the official Java DogStatsD client, providing
+      simple global setup and convenient functions to instrument your code with counters,
+      gauges, histograms, and timers—without needing to manually manage a client instance.
+    authors: Unbounce
+- CloudFormation:
+  - name: cdk-datadog-resources
+    link: https://github.com/NomadBlacky/cdk-datadog-resources
+    notes: An AWS CDK construct library that wraps the DataDog/datadog-cloudformation-resources.
+    author: Takumi Kadowaki
+- Crystal:
+  - name: statsd.cr
+    link: https://github.com/miketheman/statsd.cr
+    dogstatsd: true
+    authors: Mike Fiedler
+    notes: A Crystal client library for sending metrics to StatsD servers. Supports
+      counters, gauges, timers, and Datadog-style tags. Simple API for instrumenting
+      your Crystal applications with real-time metrics.
+- Delphi:
+  - name: datadog-delphi
+    link: https://github.com/rfrezino/datadog-delphi
+    dogstatsd: true
+    authors: Rodrigo Farias Rezino
+    notes: datadog-delphi is a StatsD client library for Delphi, enabling Delphi applications
+      to send metrics to Datadog via the StatsD protocol.
+- Elixir:
+  - name: ex-datadog-plug
+    link: https://github.com/Tubitv/ex-datadog-plug
+    api: true
+    authors: Tyr Chen, Tubi
+    notes: An Elixir plug for automatically logging HTTP response times and related
+      metadata to Datadog. Easily configurable to include request methods, customizable
+      metric prefixes, and query parameter tags for enhanced observability of your
+      Phoenix or Plug-based applications.
+  - name: mtx
+    link: https://github.com/synrc/mtx
+    dogstatsd: true
+    authors: N2O Ecosystem
+    notes: MTX is an Erlang metrics library that provides a front-end API for tracking
+      various metric types, including histograms, meters, counters, gauges, and timings.
+  - name: statix
+    link: https://github.com/lexmag/statix
+    dogstatsd: true
+    authors: Aleksei Magusev
+    notes: Statix is a fast and efficient Elixir client for StatsD-compatible servers,
+      designed for high-throughput metric collection with low memory usage. It features
+      direct socket communication, UDP packet header caching, and connection pooling
+      to maximize performance, making it ideal for real-time monitoring and analytics
+      in Elixir applications.
+- Erlang / Elixir:
+  - name: dogstatsde
+    link: https://github.com/waisbrot/dogstatsde
+    dogstatsd: true
+    authors: waisbrot
+    notes: dogstatsde is an Erlang and Elixir client for DogStatsD, Datadog's extension
+      of StatsD that adds support for tags on metrics. The library is easy to integrate
+      into Erlang or Elixir projects and supports tagging, batching, and sample rate
+      for efficient metric reporting to a DogStatsD/StatsD agent.
+- Go:
+  - name: datadog-go
+    link: https://github.com/DataDog/datadog-go
+    official: true
+    dogstatsd: true
+    authors: Datadog
+    notes: Go client library for DogStatsD, allowing you to send custom metrics, events,
+      and service checks from your Go applications to Datadog.
+  - name: datadog-api-client-go
+    link: https://github.com/DataDog/datadog-api-client-go
+    official: true
+    api: true
+    authors: Datadog
+    notes: Official Go client library for the Datadog API, supporting both v1 and
+      v2 endpoints. It enables developers to interact with Datadog programmatically
+      for tasks such as creating users, managing incidents, querying metrics, and
+      more. The library supports pagination, configurable retries, proxies, and logging,
+      and can be easily integrated into Go applications.
+  - name: xstats
+    link: https://github.com/rs/xstats
+    dogstatsd: true
+    authors: Olivier Poitrey
+    notes: xstats is a Go package for service instrumentation, providing a unified
+      client to send various types of metrics (counters, timings, etc.) to multiple
+      backends.
+  - name: go-datadog-api
+    link: https://github.com/zorkian/go-datadog-api
+    api: true
+    authors: Mark Smith from Dropbox
+    notes: go-datadog-api is a Go client library for interacting with the Datadog
+      API. It supports automating tasks such as managing dashboards, monitors, alerting,
+      and retrieving data like events from Datadog. The library provides pointer-based
+      models with helper functions for safe value handling, and includes accessor
+      methods for working with API objects.
+- Haskell:
+  - name: Haskell Datadog Client
+    link: https://github.com/iand675/datadog
+    authors: Ian Duncan
+    api: true
+    dogstatsd: true
+    notes: Haskell client for Datadog.
+- Java:
+  - name: java-dogstatsd-client
+    link: https://github.com/DataDog/java-dogstatsd-client
+    official: true
+    dogstatsd: true
+    authors: Datadog
+    notes: A Java client library for DogStatsD, enabling Java applications to send
+      custom metrics, events, and service checks to the Datadog Agent via UDP or Unix
+      Domain SocketsSupports modern Datadog features like origin detection and client-side
+      aggregation to optimize performance and reduce metric traffic.
+  - name: datadog-api-client-java
+    link: https://github.com/DataDog/datadog-api-client-java
+    official: true
+    api: true
+    authors: Datadog
+    notes: Official Java client library for the Datadog API. It enables developers
+      to interact programmatically with Datadog’s monitoring, dashboards, alerts,
+      and other resources from Java applications. The client provides both synchronous
+      and asynchronous methods (using CompletableFuture), supports configuration for
+      unstable endpoints, server selection (such as EU instances), proxy settings,
+      request logging, GZIP compression control, retry logic on rate limits or errors,
+      and multiple artifact options including shaded JARs.
+  - name: java-dogstatsd-client
+    link: https://github.com/arnabk/java-dogstatsd-client
+    dogstatsd: true
+    authors: Arnab Karmakar
+    notes: A Java client library for DogStatsD, enabling Java applications to send
+      custom metrics, events, and service checks to the Datadog Agent via UDP or Unix
+      Domain SocketsSupports modern Datadog features like origin detection and client-side
+      aggregation to optimize performance and reduce metric traffic.
+  - name: metrics-datadog
+    link: https://github.com/coursera/metrics-datadog
+    api: true
+    dogstatsd: true
+    notes: A reporting bridge between Dropwizard metrics and Datadog.
+    authors: Coursera
+- Lua:
+  - name: APISIX
+    link: https://apisix.apache.org/docs/apisix/next/plugins/datadog/
+    dogstatsd: true
+    authors: Apache APISIX
+    notes: Send custom metrics to DogStatsD using the UDP protocol.
+- Node.js:
+  - name: datadog-api-client
+    link: https://github.com/DataDog/datadog-api-client-typescript
+    official: true
+    api: true
+    authors: Datadog
+    notes: Official Node.js client for interacting with the Datadog API, allowing
+      you to programmatically manage monitors, metrics, dashboards, incidents, and
+      more. The client offers flexible configuration for request logging, retry logic,
+      request timeouts, and compression. It also supports unstable endpoints, pagination
+      helpers, and can be extended for custom HTTP behavior such as proxy support.
+  - name: hot-shots
+    link: https://github.com/brightcove/hot-shots
+    dogstatsd: true
+    authors: Brightcove
+    notes: hot-shots is a Node.js client for sending metrics and events to StatsD
+      servers, including Etsy’s StatsD, Datadog’s DogStatsD, and InfluxDB’s Telegraf.
+  - name: node-dogstatsd
+    link: https://github.com/joybro/node-dogstatsd
+    dogstatsd: true
+    authors: Young Han Lee
+    notes: Node.js client for sending metrics to Datadog's extended StatsD server.
+      It supports Datadog-specific features such as histograms and tags, in addition
+      to standard StatsD metric types like counters and timers. This library allows
+      you to easily instrument your Node.js applications with custom metrics that
+      can be visualized and monitored in Datadog.
+  - name: node-dogapi
+    link: https://github.com/brettlangdon/node-dogapi
+    api: true
+    authors: Brett Langdon
+    notes: dogapi is a Node.js client library for interacting with the Datadog HTTP
+      API. It allows you to send metrics, events, and more to Datadog programmatically
+      from your Node.js applications. In addition to its programmatic interface, dogapi
+      offers a command-line tool for accessing Datadog API functionality from the
+      terminal.
+  - name: datadog-metrics
+    link: https://github.com/dbader/node-datadog-metrics
+    api: true
+    authors: Daniel Bader
+    notes: datadog-metrics is a Node.js library for collecting and sending custom
+      application metrics to Datadog via its HTTP API, without needing the Datadog
+      Agent. It buffers metrics locally for efficient, periodic submission, minimizing
+      performance impact. datadog-metrics is ideal for environments like serverless
+      or containers where installing the Datadog Agent is not feasible.
+- Perl:
+  - name: dogstatsd-perl
+    link: https://github.com/binary-com/dogstatsd-perl
+    dogstatsd: true
+    authors: Stefan Goethals
+    notes: DataDogStatsd is a Perl client for DogStatsd, enabling applications to
+      send metrics and events to Datadog. This module supports counters, gauges, histograms,
+      timings, sets, and events with optional tags and namespaces for flexible metric
+      organization.
+- PHP:
+  - name: php-datadogstatsd
+    link: https://github.com/DataDog/php-datadogstatsd
+    official: true
+    dogstatsd: true
+    authors: Alex Corley
+    notes: php-datadogstatsd is a simple PHP client for sending custom metrics, events,
+      and service checks to Datadog via DogStatsD. The library requires the PHP sockets
+      extension and is suitable for integration into any PHP project; a Laravel-specific
+      wrapper is also available.
+  - name: dog-statsd
+    link: https://github.com/graze/dog-statsd
+    dogstatsd: true
+    notes: A fork of thephpleague/statsd with additional Datadog features by Graze.
+    authors: graze.com
+- Python:
+  - name: datadogpy
+    link: https://github.com/DataDog/datadogpy
+    official: true
+    api: true
+    dogstatsd: true
+    authors: Datadog
+    notes: The Datadog Python library (datadogpy) provides convenient interfaces for
+      interacting with Datadog’s HTTP API and sending metrics, events, and service
+      checks via DogStatsD. It supports both UDP and Unix Domain Socket (UDS) transports
+      for DogStatsD. It also provides a CLI tool ('dog') for API operations.
+  - name: datadog-api-client-python
+    link: https://github.com/DataDog/datadog-api-client-python
+    official: true
+    api: true
+    authors: Datadog
+    notes: Official Python client library for the Datadog API, providing both synchronous
+      and asynchronous (asyncio) interfaces, and includes features like pagination,
+      retry on rate limiting, proxy configuration, and support for unstable endpoints.
+- R:
+  - name: datadogr
+    link: https://cran.r-project.org/package=datadogr
+    api: true
+    notes: A simple R package to query for metrics.
+  - name: rdog
+    link: https://github.com/alq666/rdog
+    api: true
+    notes: An R package to analyze Datadog metrics into R.
+    authors: Alexis Lê-Quôc
+- Racket:
+  - name: racket-dogstatsd
+    link: https://github.com/DarrenN/racket-dogstatsd
+    dogstatsd: true
+    notes: racket-dogstatsd is a DogStatsD client library for Racket, providing functions
+      to send metrics, events, and service checks to Datadog. It supports counters,
+      gauges, timers, histograms, and tagging, and includes convenient macros like
+      with-timer for measuring code execution time. Requires Racket 6.3 or later.
+    authors: DarrenN
+- Ruby:
+  - name: DogApi
+    link: https://github.com/DataDog/dogapi-rb
+    official: true
+    api: true
+    authors: Datadog
+    notes: DogApi is a Ruby client library for interacting with the Datadog API, designed
+      to simplify the process of reporting events and metrics from your Ruby applications
+      or scripts. It provides a higher-level abstraction over Datadog’s HTTP API,
+      making it easy to submit metrics, send events, tag hosts, and retrieve metric
+      data.
+  - name: datadog_api_client
+    link: https://github.com/DataDog/datadog-api-client-ruby
+    official: true
+    api: true
+    authors: Datadog
+    notes: Ruby client for interacting with the Datadog API, allowing you to manage
+      and monitor your Datadog resources programmatically. It supports all major Datadog
+      API endpoints, including unstable/beta features, and offers flexible configuration
+      for authentication, server selection, logging, proxy support, pagination, and
+      automatic retries.
+  - name: dogstatsd-ruby
+    link: https://github.com/DataDog/dogstatsd-ruby
+    official: true
+    dogstatsd: true
+    authors: Datadog
+    notes: dogstatsd-ruby enables you to send custom metrics, events, and service
+      checks from your Ruby applications to the Datadog Agent via UDP or Unix Domain
+      Sockets. The library supports advanced features such as asynchronous metric
+      buffering with a dedicated sender thread for high performance, configurable
+      packet sizes, tagging, sample rates, and origin detection for Kubernetes pods.
+- Rust:
+  - name: cadence
+    link: https://docs.rs/cadence/latest/cadence/
+    dogstatsd: true
+    authors: Nick Pillitteri
+    notes: ''
+  - name: metrics-exporter-statsd
+    link: https://docs.rs/metrics-exporter-statsd/latest/metrics_exporter_statsd/
+    dogstatsd: true
+    authors: GitHub
+    notes: ''
+  - name: datadog-api-client-rust
+    link: https://github.com/DataDog/datadog-api-client-rust
+    official: true
+    api: true
+    authors: Datadog
+    notes: Rust client library for interacting with the Datadog API, generated from
+      Datadog's public OpenAPI specifications.
+- Scala:
+  - name: datadog-scala
+    link: https://github.com/gphat/datadog-scala
+    api: true
+    authors: Cory Watson
+    notes: Datadog-Scala is a Scala client library for interacting with the Datadog
+      API.
+  - name: datadog4s
+    link: https://github.com/avast/datadog4s
+    dogstatsd: true
+    authors: Avast
+    notes: Toolkit for monitoring applications written in functional Scala using Datadog.
+  - name: scaladog
+    link: https://github.com/NomadBlacky/scaladog
+    api: true
+    authors: NomadBlacky
+    notes: Datadog API client for Scala.
+- Swift:
+  - name: DatadogSDK
+    link: https://github.com/DataDog/dd-sdk-ios
+    api: true
+    official: true
+    authors: Datadog
+    notes: The Datadog SDK for iOS and tvOS enables seamless monitoring and observability
+      for your mobile applications. It provides Swift and Objective-C libraries to
+      collect logs, traces, and Real User Monitoring (RUM) events, with support for
+      WebView tracking to monitor hybrid apps.
+- Swift:
+  - name: Swift-Dogstatsd
+    link: https://github.com/datadog/swift-dogstatsd/
+    dogstatsd: true
+    official: true
+    authors: Datadog
+    notes: Swift Dogstatsd provides an easy way to send Dogstatsd metrics from your
+      Vapor applications. It supports both UDP and UDS transports for metrics delivery
+      and integrates seamlessly with Application and Request contexts, allowing you
+      to increment counters, set gauges, and more with simple method calls.
+- Swift:
+  - name: SwiftDog
+    link: https://github.com/jaronoff97/SwiftDog
+    api: true
+    authors: Jacob Aronoff
+    notes: Swift library for sending metrics and events to the Datadog API. It allows
+      you to easily report custom metrics and events from your iOS or macOS app, with
+      support for customizable tags, event priorities, and alert types. SwiftDog can
+      be integrated using Swift Package Manager or CocoaPods, and requires a configuration
+      file with your Datadog API and app keys.
 Tracing:
-  - C++:
-    - name: dd-trace-cpp
-      link: https://github.com/DataDog/dd-trace-cpp
-      official: true
-      authors: Datadog
-  - .NET:
-    - name: dd-trace-dotnet
-      link: https://github.com/DataDog/dd-trace-dotnet
-      official: true
-      notes: NuGet package is `Datadog.Trace`.
-      authors: Datadog
-  - Rust/C++/C:
-    - name: ddprof
-      link: https://github.com/DataDog/ddprof
-      official: true
-      authors: Datadog
-      notes: A profiler for compiled languages.
-  - Elixir:
-    - name: spandex
-      link: https://github.com/zachdaniel/spandex
-      authors: Zach Daniel
-  - Go:
-    - name: dd-trace-go (v1)
-      link: https://github.com/DataDog/dd-trace-go
-      official: true
-      authors: Datadog
-      notes: Go package is 'gopkg.in/DataDog/dd-trace-go.v1'.
-    - name: dd-trace-go (v2)
-      link: https://github.com/DataDog/dd-trace-go
-      official: true
-      authors: Datadog
-      notes: "Go package is 'github.com/DataDog/dd-trace-go/v2'. Note: v2 is in Preview."
-    - name: datadog-go
-      link: https://github.com/savaki/datadog
-      authors: Matt Ho
-      notes: OpenTracing Tracer implementation for Datadog in Go.
-  - Java:
-    - name: dd-trace-java
-      link: https://github.com/DataDog/dd-trace-java
-      official: true
-      authors: Datadog
-      notes: Java package 'tracer'.
-    - name: apm-client
-      link: https://github.com/chonton/apm-client
-      authors: Chas Honton
-  - Node.js:
-    - name: dd-trace-js
-      link: https://github.com/DataDog/dd-trace-js
-      official: true
-      authors: Datadog
-      notes: OpenTracing API implementation in JavaScript for Node.js.
-  - PHP:
-    - name: dd-trace-php
-      link: https://github.com/DataDog/dd-trace-php/
-      official: true
-      authors: Datadog
-      notes: composer package is 'datadog/dd-trace'.
-  - Python:
-    - name: dd-trace-py
-      link: https://github.com/DataDog/dd-trace-py
-      official: true
-      authors: Datadog
-      notes: pip package is called 'ddtrace'.
-  - Ruby:
-    - name: dd-trace-rb
-      link: https://github.com/DataDog/dd-trace-rb
-      official: true
-      authors: Datadog
-      notes: gem is called 'datadog'.
-    - name: ddtrace-rb-method-wrapper
-      link: https://github.com/brandfolder/ddtrace-rb-method-wrapper
-      authors: Brandfolder
-      notes: gem is called `ddtrace-method-wrapper`.
-  - Rust:
-    - name: datadog-apm
-      link: https://github.com/pipefy/datadog-apm-rust
-      authors: Pipefy
+- C++:
+  - name: dd-trace-cpp
+    link: https://github.com/DataDog/dd-trace-cpp
+    official: true
+    authors: Datadog
+    notes: C++ library for instrumenting applications with Datadog distributed tracing.
+      It allows developers to create and manage spans, propagate trace context, and
+      add custom tags. Compatible with C++17, dd-trace-cpp can be built as a static
+      or shared library and is tested on major platforms, including Linux, Windows,
+      and macOS.
+- .NET:
+  - name: dd-trace-dotnet
+    link: https://github.com/DataDog/dd-trace-dotnet
+    official: true
+    notes: The Datadog .NET Tracer enables distributed tracing, application performance
+      monitoring, application security management, continuous integration visibility,
+      and dynamic instrumentation. It supports a wide range of libraries out-of-the-box,
+      with options for custom instrumentation. Also includes a continuous profiler
+      for automatic application profiling.
+    authors: Datadog
+- Rust/C++/C:
+  - name: ddprof
+    link: https://github.com/DataDog/ddprof
+    official: true
+    authors: Datadog
+    notes: ddprof is a command-line profiler for compiled languages that collects
+      CPU and memory allocation data, capturing profiling information with minimal
+      performance overhead.
+- Elixir:
+  - name: spandex
+    link: https://github.com/zachdaniel/spandex
+    authors: Zach Daniel
+    notes: Spandex is an Elixir library for instrumenting applications with distributed
+      tracing, with built-in support for exporting trace data to Datadog. It provides
+      macros and functions to create and manage spans, supports asynchronous trace
+      propagation, and integrates with Phoenix via middleware plugs.
+- Go:
+  - name: dd-trace-go
+    link: https://github.com/DataDog/dd-trace-go
+    official: true
+    authors: Datadog
+    notes: Datadog's APM tracer library for Go automatically instruments HTTP, gRPC, and database operations, providing visibility into request flows across services. Supports OpenTelemetry integration and custom instrumentation. Enables correlation of traces with logs and metrics in Datadog, helping identify performance bottlenecks and errors in distributed systems.
+  - name: datadog-go
+    link: https://github.com/savaki/datadog
+    authors: Matt Ho
+    notes: Go client library for DogStatsD, allowing you to send custom metrics, events,
+      and service checks from your Go applications to Datadog.
+- Java:
+  - name: dd-trace-java
+    link: https://github.com/DataDog/dd-trace-java
+    official: true
+    authors: Datadog
+    notes: dd-trace-java is Datadog's Java tracer library for Application Performance
+      Monitoring (APM). It enables automatic and manual tracing and profiling of Java
+      applications, providing features such as distributed tracing, continuous profiling,
+      error tracking, CI visibility, deployment tracking, and code hotspot identification.
+      The library supports automatic instrumentation of common Java frameworks and
+      libraries, and offers APIs for custom instrumentation and advanced configuration.
+  - name: apm-client
+    link: https://github.com/chonton/apm-client
+    authors: Chas Honton
+    notes: The apm-client library provides Java-based instrumentation for tracing
+      servlet requests, JAX-RS client and server requests, and CDI bean methods. It
+      generates spans containing resource and method names, wall time, and duration,
+      which are then sent to a local Datadog APM collector via REST.
+- Node.js:
+  - name: dd-trace-js
+    link: https://github.com/DataDog/dd-trace-js
+    official: true
+    authors: Datadog
+    notes: dd-trace-js is Datadog's APM (Application Performance Monitoring) tracer
+      library for Node.js applications. It enables automatic and manual tracing of
+      application performance, distributed traces, and integrates with the Datadog
+      Agent to report telemetry data. Supports integration with the OpenTelemetry
+      API for custom instrumentation.
+- PHP:
+  - name: dd-trace-php
+    link: https://github.com/DataDog/dd-trace-php/
+    official: true
+    authors: Datadog
+    notes: dd-trace-php is Datadog’s PHP tracing library that enables Application
+      Performance Monitoring (APM) and distributed tracing for PHP applications. It
+      provides automatic and manual instrumentation for popular PHP frameworks, libraries,
+      and datastores.
+- Python:
+  - name: dd-trace-py
+    link: https://github.com/DataDog/dd-trace-py
+    official: true
+    authors: Datadog
+    notes: The dd-trace-py library enables Datadog APM features for Python applications,
+      including distributed tracing, continuous profiling, error tracking, CI visibility,
+      deployment tracking, code hotspots, and dynamic instrumentation. It provides
+      automatic and manual instrumentation for various Python frameworks and libraries.
+- Ruby:
+  - name: dd-trace-rb
+    link: https://github.com/DataDog/dd-trace-rb
+    official: true
+    authors: Datadog
+    notes: Datadog's official Application Performance Monitoring (APM) tracer. Collects
+      distributed traces and performance metrics from Ruby applications and supports
+      automatic instrumentation for popular Ruby frameworks and libraries.
+  - name: ddtrace-rb-method-wrapper
+    link: https://github.com/brandfolder/ddtrace-rb-method-wrapper
+    authors: Brandfolder
+    notes: ddtrace-method-wrapper is an extension for ddtrace, Datadog's Ruby tracing
+      library, that provides a convenient way to instrument specific methods within
+      a class or module. By extending your class with DatadogTraceWrapper and specifying
+      methods to trace, this wrapper automatically creates custom spans for those
+      methods.
+- Rust:
+  - name: datadog-apm
+    link: https://github.com/pipefy/datadog-apm-rust
+    authors: Pipefy
+    notes: An unofficial library for integrating Datadog Application Performance Monitoring
+      (APM) with Rust applications. Enables collection and reporting of tracing data
+      to Datadog, allowing developers to monitor and analyze application performance.
+      See the documentation and examples for integration details.
 Serverless:
-  - Lambda:
-    - name: datadog-lambda-python
-      official: true
-      link: https://github.com/DataDog/datadog-lambda-python
-      authors: Datadog
-      notes: Official Datadog Python Lambda library
-    - name: datadog-lambda-js
-      official: true
-      link: https://github.com/DataDog/datadog-lambda-js
-      authors: Datadog
-      notes: Official Datadog Node.js Lambda library
-    - name: datadog-lambda-rb
-      official: true
-      link: https://github.com/DataDog/datadog-lambda-rb
-      authors: Datadog
-      notes: Official Datadog Ruby Lambda library
-    - name: datadog-lambda-go
-      official: true
-      link: https://github.com/DataDog/datadog-lambda-go
-      authors: Datadog
-      notes: Official Datadog Go Lambda library
-    - name: datadog-lambda-java
-      official: true
-      link: https://github.com/DataDog/datadog-lambda-java
-      authors: Datadog
-      notes: Official Datadog Java Lambda library
-    - name: serverless-plugin-datadog
-      official: true
-      link: https://github.com/DataDog/serverless-plugin-datadog
-      authors: Datadog
-      notes: Plugin to automatically instrument your Lambda functions with Datadog.
-    - name: serverless-datadog-metrics
-      link: https://github.com/DanteInc/serverless-datadog-metrics
-      api: true
-      authors: Dante Consulting, Inc.
-      notes: This library logs useful metrics from AWS Lambda functions, so that they can be accumulated via Datadog's AWS Lambda integration.
+- Lambda:
+  - name: datadog-lambda-python
+    official: true
+    link: https://github.com/DataDog/datadog-lambda-python
+    authors: Datadog
+    notes: Provides automatic collection of enhanced Lambda metrics, distributed tracing,
+      and enables custom metric submission to Datadog. The library supports tagging
+      telemetry, capturing Lambda request and response payloads, filtering sensitive
+      information from logs and traces, and advanced cold start tracing options. Optional
+      continuous profiling allows collection of CPU and memory snapshots during Lambda
+      execution.
+  - name: datadog-lambda-js
+    official: true
+    link: https://github.com/DataDog/datadog-lambda-js
+    authors: Datadog
+    notes: datadog-lambda-js library captures traces, logs, and metrics, and provides
+      options to tag telemetry, scrub sensitive data, and capture Lambda request/response
+      payloads. It also supports cold start tracing, fine-grained payload depth controls,
+      and profiling.
+  - name: datadog-lambda-rb
+    official: true
+    link: https://github.com/DataDog/datadog-lambda-rb
+    authors: Datadog
+    notes: The datadog-lambda-rb library enables enhanced metrics, distributed tracing,
+      and custom metric submission for AWS Lambda functions written in Ruby, with
+      automatic correlation between logs and traces.
+  - name: datadog-lambda-go
+    official: true
+    link: https://github.com/DataDog/datadog-lambda-go
+    authors: Datadog
+    notes: Offical library for Go-based AWS Lambda functions to send enhanced Lambda
+      metrics, custom metrics, and distributed traces to Datadog. It supports integration
+      with Datadog tracing by injecting spans into the function context, allowing
+      for trace propagation and creation of custom spans using dd-trace-go. The library
+      can also unify traces from AWS X-Ray and Datadog.
+  - name: datadog-lambda-java
+    official: true
+    link: https://github.com/DataDog/datadog-lambda-java
+    authors: Datadog
+    notes: Official Java client library for AWS Lambda functions that enables enhanced
+      Lambda metrics, distributed tracing, and submission of custom metrics to Datadog.
+      It supports automatic injection of trace headers for outbound HTTP requests
+      3, allowing for distributed tracing across serverless and serverful environments.
+  - name: serverless-plugin-datadog
+    official: true
+    link: https://github.com/DataDog/serverless-plugin-datadog
+    authors: Datadog
+    notes: serverless-plugin-datadog is a Serverless Framework plugin that automates
+      Datadog integration for AWS Lambda applications. . The plugin enables collection
+      of enhanced metrics, distributed traces, and logs, and supports features like
+      AWS X-Ray tracing, App and API Protection (AAP), source code integration, and
+      continuous profiling. Supports Node.js, Python, Ruby, Java, Go, and .NET runtimes.
+  - name: serverless-datadog-metrics
+    link: https://github.com/DanteInc/serverless-datadog-metrics
+    api: true
+    authors: Dante Consulting, Inc.
+    notes: This library logs useful metrics from AWS Lambda functions, so that they
+      can be accumulated via Datadog's AWS Lambda integration.
 Log:
-  - Laravel:
-    - name: laravel-datadog-logger
-      link: https://github.com/myLocalInfluence/laravel-datadog-logger
-      notes: Logger, handler, and formatter created for DataDog log management on Laravel framework.
-      authors: Aurélien SCHILTZ
+- Laravel:
+  - name: laravel-datadog-logger
+    link: https://github.com/myLocalInfluence/laravel-datadog-logger
+    notes: Logger, handler, and formatter created for DataDog log management on Laravel
+      framework.
+    authors: Aurélien SCHILTZ
+Community:
+- Monitors:
+  - name: interferon
+    link: https://github.com/airbnb/interferon
+    authors: Airbnb
+    notes: The Interferon gem enables you to manage alert configurations as code by
+      defining alerts, hosts, and engineer groups in Ruby DSL and YAML files. It supports
+      integration with Datadog as the alerting destination, allowing you to programmatically
+      generate and update Datadog alerts based on custom logic and inventory sources
+      (such as AWS resources or SmartStack services).
+  - name: terraform-datadog
+    link: https://www.terraform.io/docs/providers/datadog/
+    authors: Terraform
+    notes: Official Terraform provider for Datadog
+  - name: datadog-to-terraform
+    link: https://github.com/intercom/datadog-to-terraform
+    authors: Intercom
+    notes: datadog-to-terraform is a browser extension that converts Datadog monitor
+      and dashboard JSON configurations into Terraform code. Users can copy JSON from
+      the Datadog UI, provide a resource name, and generate Terraform HCL for use
+      in infrastructure-as-code workflows.
+- Integrations:
+  - name: k6-datadog
+    link: https://k6.io/docs/results-output/real-time/datadog/
+    notes: Integration for sending K6 test results to Datadog
+  - name: pid-stats
+    link: https://github.com/gitterHQ/pid-stats
+    authors: GitterHQ
+    notes: The pid-stats integration collects resource usage metrics for processes
+      specified by PID files and sends them to StatsD, allowing monitoring in Datadog.
+      It samples metrics such as CPU usage (user, system, guest), memory usage (resident,
+      virtual, percent), memory faults (major, minor), and disk I/O (read, write,
+      cancelled) for each target process.
+  - name: pulumi-datadog
+    link: https://www.pulumi.com/registry/packages/datadog/
+    notes: Datadog resource provider for Pulumi
+  - name: saltstack-datadog
+    link: https://github.com/DataDog/datadog-formula
+    notes: SaltStack formula for Datadog
+  - name: sensu-datadog
+    link: https://github.com/sensu-plugins/sensu-plugins-datadog
+    notes: Sensu handlers for sending metrics and events to Datadog
+  - name: stackstorm-datadog
+    link: https://github.com/StackStorm-Exchange/stackstorm-datadog
+    notes: Enables StackStorm to interact with Datadog by providing actions for managing
+      monitors, events, metrics, dashboards (screenboards and timeboards), downtimes,
+      tags, hosts, users, and embeds. It supports posting and querying time-series
+      data, managing and muting monitors, handling events and comments, scheduling
+      downtimes, and managing visualizations.
+- Agent Ports:
+  - name: nixos-dd-agent
+    link: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
+    notes: NixOS package for the Datadog agent

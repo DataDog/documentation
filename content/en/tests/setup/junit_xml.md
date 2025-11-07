@@ -16,13 +16,7 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files,
   as the native instrumentation provides more accurate time results, supports distributed traces on integration tests
   and other features that are not available with JUnit XML uploads.
@@ -113,7 +107,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </code>
 </pre>
 
-<div class="alert alert-warning">Make sure that this command runs in your CI even when your tests have failed. Usually, when tests fail, the CI job aborts execution, and the upload command does not run.</div>
+<div class="alert alert-danger">Make sure that this command runs in your CI even when your tests have failed. Usually, when tests fail, the CI job aborts execution, and the upload command does not run.</div>
 
 {{< tabs >}}
 
@@ -305,10 +299,6 @@ You can specify these special tags using the `--tags` parameter when calling `da
 
 All of these tags are optional, and only the ones you specify will be used to differentiate between environment configurations.
 
-`test.bundle`
-: Used to execute groups of test suites separately.<br/>
-**Examples**: `ApplicationUITests`, `ModelTests`
-
 `os.platform`
 : Name of the operating system.<br/>
 **Examples**: `windows`, `linux`, `darwin`
@@ -352,7 +342,7 @@ To add [codeowners][9] information to your JUnit XML tests, you can use the [Git
 
 As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of those tests.
 
-### Using the GitHub integration (recommended)
+### Using the GitHub integration
 
 To automatically add the `test.codeowners` tag to your tests, you need to:
 1. Have a `CODEOWNERS` file [in one of the allowed locations][11] in your repository.
@@ -389,8 +379,7 @@ The JUnit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
 6. Give the app a name, for example, `Datadog Test Optimization`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
 
-### Manually providing the `test.source.file` tag
-This is an alternative to using the GitHub integration.
+#### Manually providing the `test.source.file` tag
 
 For those plugins that do not provide the `file` attribute in the XML report, you can provide the `test.source.file` tag.
 There is no need to provide the exact path to a specific file, [you can use any syntax you would use in the CODEOWNERS file][14]
@@ -505,7 +494,7 @@ datadog-ci junit upload --service service_name \
 
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   When using bash from Git for Windows, define the <strong>MSYS_NO_PATHCONV=1</strong> environment variable.
   Otherwise, any argument starting with <strong>/</strong> will be expanded to a Windows path.
 </div>
@@ -551,6 +540,11 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 
 
 ## Reporting code coverage
+
+{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
+This section covers the code coverage feature of the Test Optimization product.
+This feature is being deprecated and replaced by a new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product. Sign up for the Preview!
+{{< /callout >}}
 
 It is possible to report code coverage for a given JUnit report via the `--report-measures` option, by setting the `test.code_coverage.lines_pct` measure:
 

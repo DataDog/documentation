@@ -43,7 +43,7 @@ supported_os:
 ---
 **Remarque** : le check Docker Daemon est toujours tenu à jour, mais fonctionne uniquement avec la **version 5 de l'Agent**.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>Pour utiliser l'intégration Docker avec la version 6 de l'Agent, consultez la <a href="#agent-v6">section sur l'Agent v6</a> ci-dessous.</b>
 </div>
 
@@ -168,7 +168,7 @@ La commande [`import`][18] effectue la conversion de l'ancien `docker_daemon.yam
 
 ## Données collectées
 ### Métriques
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 
 ### Événements
@@ -186,7 +186,7 @@ L'intégration Docker génère les événements suivants :
 * Update
 
 ### Checks de service
-{{< get-service-checks-from-git "docker_daemon" >}}
+{{< get-service-checks-from-git "docker" >}}
 
 
 **Remarque** : pour utiliser `docker.exit`, ajoutez `collect_exit_code: true` dans votre [fichier YAML Docker][21] et redémarrez l'Agent.

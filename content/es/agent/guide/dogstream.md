@@ -5,10 +5,9 @@ private: true
 title: Dogstream
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Se trata de una función obsoleta del Agent 5. Se interrumpen las nuevas versiones de funciones.
 <br>
-¡El Agent v6 está disponible! <a href="https://github.com/Datadog/Datadog-Agent/blob/master/docs/Agent/upgrade.md">Actualiza a la versión más reciente</a> para beneficiarte de las nuevas funcionalidades.
 </div>
 
 Los archivos de logs contienen toneladas de valiosos datos  de aplicaciones y de negocios.
@@ -18,12 +17,12 @@ logs, de modo que los datos que contienen puedan representarse gráficamente en 
 
 ## Análisis de métricas
 
-El Datadog Agent puede leer métricas directamente desde sus archivos de logs:
+El Datadog Agent puede leer métricas directamente desde tus archivos de logs:
 
-- desde el formato canónico de log de Datadog, sin necesidad de programación adicional.
+- desde el formato canónico de log de Datadog, sin necesidad de programación adicional
 - desde cualquier otro formato de log con una función personalizada de análisis de logs 
 
-### Formato canónico de logs de Datadog 
+### Formato de log canónico de Datadog 
 
 Los logs de Datadog tienen el siguiente formato:
 
@@ -42,7 +41,7 @@ También puedes especificar varios archivos de logs de esta forma:
 
     dogstreams: /var/log/web.log, /var/log/db.log, /var/log/cache.log
 
-### Analizar formatos de logs personalizados 
+### Análisis de formatos de logs personalizados 
 
 Si deseas analizar un formato de log diferente, por ejemplo, para un software proveedor o legacy, puedes utilizar una función personalizada de Python para extraer los campos adecuados del archivo de log especificando tu archivo de log en tu archivo de configuración del Agent con el siguiente formato:
 
@@ -50,7 +49,7 @@ Si deseas analizar un formato de log diferente, por ejemplo, para un software pr
 
 La parte `parsers:parse_web` indica que la función personalizada de Python está en un paquete llamado `parsers` en `PYTHONPATH` del Agent y el paquete de `parsers` tiene una función llamada `parse_web`. `PYTHONPATH` del Agent se configura en el script de inicio del Agent, `/etc/init.d/datadog-agent`, en la configuración de supervisor de la versión del Agent.
 
-Si tu analizador sintáctico **no** está en `PYTHONPATH` del Agent, puedes utilizar una sintaxis alternativa para configurar tu analizador sintáctico de líneas:
+Si tu analizador **no** está en `PYTHONPATH` del Agent, puedes utilizar una sintaxis alternativa para configurar tu analizador de líneas:
 
     dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
 
@@ -62,8 +61,8 @@ Si tu analizador personalizado de logs no funciona, el primer check que debes ha
 
 * Si todo va bien deberías ver `dogstream: parsing {filename} with {function name} (requested {config option text})`.
 
-<div class="alert alert-warning">
-Para comprobar que los dogstreams funcionan, añade (no edites) una línea a cualquier archivo de log que hayas configurado para su supervisión con el Agent. El Agent solo <a href="/Glosario/#tail">sigue</a> el final de cada archivo de log, por lo que no detecta los cambios que haces en otras partes del archivo.
+<div class="alert alert-danger">
+Para comprobar que los dogstreams funcionan, añade una línea (no edites una existente) a cualquier archivo de log que hayas configurado para ser monitorizado por el Agent. El Agent solo <a href="/glossary/#tail">sigue</a> el final de cada archivo de log, por lo que no detecta los cambios que haces en otras partes del archivo.
 </div>
 
 ### Funciones de análisis de escritura
@@ -87,7 +86,7 @@ Imagina que estás recopilando métricas de logs que no tienen un formato canón
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
 ```
 
-Podrías configurar un analizador de logs como el siguiente para recopilar un métrica de estos datos registrados en su cuenta Datadog:
+Podrías configurar un analizador de logs como el siguiente para recopilar un métrica de estos datos registrados en tu cuenta Datadog:
 
 ```python
 
@@ -144,7 +143,7 @@ La clave de agregación es una combinación de los siguientes campos:
 - aggregation_key
 - host
 
-Para ver un ejemplo de analizador eventos, consulta el [analizador de eventos de compactación Cassandra][3] que se incluye con Agent.
+Para ver un ejemplo de un analizador de eventos, consulta el [analizador de eventos de compactación de Cassandra][3] que se incluye con el Agent.
 
 ### Recopilación de eventos
 
@@ -154,7 +153,7 @@ Imagina que deseas recopilar eventos de registro donde tienes suficiente control
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
-Podrías configurar un analizador de logs como el siguiente para crear un evento a partir de estos datos registrados en tu Datadog [explorador de eventos][4]:
+Podrías configurar un analizador de logs como el siguiente para crear un evento a partir de estos datos registrados en tu [explorador de eventos][4] de Datadog:
 
 ```python
 
@@ -193,7 +192,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 Esta línea de log específica analizada con este analizador creó el siguiente evento en Datadog:
 
-{{< img src="Agent/FAQ/log_event_in_dd.jpg" alt="Evento de log in Datadog" style="width:70%;">}}
+{{< img src="Agent/FAQ/log_event_in_dd.jpg" alt="Evento de log en Datadog" style="width:70%;">}}
 
 ## Enviar parámetros adicionales a tu función de parseo personalizada
 
@@ -223,7 +222,7 @@ Y tu función de análisis como:
 def custom_parser(logger, line, parser_state, *parser_args):
 ```
 
-Tienes un parámetro de tupla en **parser_args** como (`<CUSTOM_VAR_1>`, `<CUSTOM_VAR_2>`) que está listo para usar en tu código usando parser_args[0] y parser_args[1].
+Tienes un parámetro de tupla en **parser_args** como (`<CUSTOM_VAR_1>`, `<CUSTOM_VAR_2>`) que está listo para usar en tu código utilizando parser_args[0] y parser_args[1].
 
 **Nota**: El parámetro **parser_state** no se debe utilizar, pero tiene que estar en la firma de la función. Y si solo tienes un parámetro, tienes que usar **parser_args[1]** para obtenerlo.
 

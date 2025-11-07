@@ -13,13 +13,13 @@ Cloud Security Misconfigurations makes it easier to assess and visualize the cur
 
 ## Detect misconfigurations across your cloud resources
 
-Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#manage-out-of-the-box-and-custom-compliance-rules). 
+Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#maintain-compliance-with-industry-frameworks-and-benchmarks). 
 
 View a high-level overview of your security posture on the [Overview page][1]. Examine the details of misconfigurations and analyze historical configurations with the [Misconfigurations Findings page][2].
 
 Cloud Security Misconfigurations evaluates resources in increments between 15 minutes and 4 hours (depending on type). Datadog generates new misconfigurations as soon as a scan is completed, and stores a complete history of all misconfigurations for the past 15 months so they are available in case of an investigation or audit.
 
-{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security overview shows a list of prioritized security issues to remediate" width="100%">}}
+{{< img src="security/cspm/misconfigurations_explorer_4.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
 
@@ -27,13 +27,13 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed misconfigurations, a comprehensive breakdown of the number of resources with pass/fail misconfigurations, and the top three high-severity rule failures.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_2.png" alt="Cloud Security Misconfigurations compliance frameworks" width="100%">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_5.png" alt="Cloud Security Misconfigurations compliance frameworks" width="100%">}}
 
-## Manage out-of-the-box and custom compliance rules
+## Manage out-of-the-box and custom detection rules
 
-[Out-of-the-box compliance rules][4] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. [Customize the rules][5] by defining how each rule scans your environment, [create custom rules][6], and [set up real-time notifications for failed misconfigurations](#set-up-real-time-notifications).
+[Out-of-the-box detection rules][4] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. [Customize the rules][5] by defining how each rule scans your environment, [create custom rules][6], and [set up real-time notifications for failed misconfigurations](#set-up-real-time-notifications).
 
-{{< img src="security/cspm/compliance_rules.png" alt="Cloud Security Misconfigurations compliance rules" width="100%">}}
+{{< img src="security/cspm/detection_rules.png" alt="Cloud Security Misconfigurations detection rules" width="100%">}}
 
 ## Set up real-time notifications
 
@@ -46,8 +46,6 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 Investigate details using the [Misconfigurations Findings page][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a misconfiguration does not match your business use case or is an accepted risk, you can [mute the misconfiguration][13] up to an indefinite period of time.
 
 You can also [create a Jira issue][15] and assign it to a team, use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying misconfiguration, and leverage [Workflow Automation][14] to create automated workflows (with or without human involvement).
-
-{{< img src="security/cspm/misconfigurations_explorer.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
 
 ## Get started
 

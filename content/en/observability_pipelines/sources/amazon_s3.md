@@ -15,9 +15,11 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/source_settings/amazon_s3 %}}
 
-## AWS Authentication
+## Set the environment variables
 
-{{% observability_pipelines/aws_authentication/amazon_s3_source/intro %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_s3 %}}
+
+## AWS Authentication
 
 {{% observability_pipelines/aws_authentication/instructions %}}
 
@@ -26,4 +28,4 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 {{% observability_pipelines/aws_authentication/amazon_s3_source/permissions %}}
 
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/

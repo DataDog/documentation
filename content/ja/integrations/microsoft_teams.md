@@ -30,7 +30,7 @@ Microsoft Teams と統合して、以下のことができます。
 - Microsoft Teams から直接トリガーされたモニターをミュートします。
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">テナントベースのインテグレーション (このインテグレーションの非レガシーバージョン) は、 US1-FED サイトではサポートされていません。</div>
+<div class="alert alert-danger">テナントベースのインテグレーション (このインテグレーションの非レガシーバージョン) は、 US1-FED サイトではサポートされていません。</div>
 {{< /site-region >}}
 
 ## Microsoft Teams のチャンネルにモニター通知を送信する

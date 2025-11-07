@@ -7,46 +7,55 @@ aliases:
 - /ja/developers/integrations/new_check_howto/
 description: Datadog Agent インテグレーションを開発し、公開する方法をご紹介します。
 further_reading:
-- link: /developers/integrations/create_a_tile/
+- link: /developers/integrations/
   tag: Documentation
-  text: タイルの作成
+  text: インテグレーションを作成する
 - link: /developers/integrations/python/
   tag: Documentation
   text: Agent ベースのインテグレーション開発のための Python
 - link: /developers/
   tag: Documentation
   text: Datadog プラットフォームで開発する方法について
-title: Agent インテグレーションの作成
+title: Agent ベースのインテグレーションを作成
 ---
 ## 概要
 
-このページでは、Datadog Agent インテグレーションを作成する方法について、テクノロジーパートナーに説明します。このインテグレーションは、[Integrations ページ][23]ですぐに使えるものとして、または [Marketplace ページ][24]で価格を付けて出品することができます。
+このページでは、Technology Partners 向けに Datadog Agent インテグレーションの作成方法を説明します。作成したインテグレーションは、[Integrations ページ][23] で「すぐに使える」ものとして掲載するか、[Marketplace ページ][24] で価格を設定して掲載できます。
 
-## Agent ベースのインテグレーション
+Agent ベースのインテグレーションは、開発者が作成したカスタム チェックを通じてデータを送信するために [Datadog Agent][17] を使用します。これらのチェックは、顧客の Datadog アカウントに [メトリクス][34]、[イベント][18]、[サービス チェック][25] を送出できます。Agent 自体も [ログ][26] を送信できますが、これはチェックの外で設定します。
 
-Agent ベースのインテグレーションでは、[Datadog Agent][17] を使用して、開発者が書いたチェックを介してデータを送信します。チェックは、[メトリクス][34]、[イベント][18]、[サービスチェック][25]を顧客の Datadog アカウントに送信できます。Agent 自体も同様に[ログ][26]を送信することができますが、これはチェックの外側で構成されます。
+## Agent ベースのインテグレーションを使うタイミング
 
-これらのインテグレーションの実装コードは、Datadog がホスティングしています。Agent インテグレーションは、ローカルエリアネットワーク (LAN) や仮想プライベートクラウド (VPC) に存在するシステムまたはアプリケーションからデータを収集するのに最適な方法です。Agent インテグレーションの作成では、ソリューションを Python ホイール (`.whl`) として公開およびデプロイする必要があります。
+Agent インテグレーションは、次の環境で動作するシステムやアプリケーションからデータを収集するのに最適です:
+- ローカル エリア ネットワーク (LAN)
+- バーチャル プライベート クラウド (VPC)
+Agent ベースのインテグレーションは、Python wheel (.whl) として公開およびデプロイする必要があります。
 
-Agent ベースのインテグレーションには、[モニター][27]、[ダッシュボード][28]、[ログパイプライン][29]などのすぐに使えるアセットを含めることができます。ユーザーがインテグレーションタイルの **Install** をクリックすると、セットアップ手順に従うよう促され、すぐに使えるすべてのダッシュボードがアカウントに表示されます。ログパイプラインなどの他のアセットは、インテグレーションを適切にインストールおよび構成した後に、ユーザーに表示されます。
 
 ## 開発プロセス
 
-Agent ベースのインテグレーションを構築するプロセスは、次のようになります。
+Agent ベースのインテグレーションを構築する流れは次のとおりです:
 
-1. [Datadog パートナーネットワーク][32]に合格すると、Datadog テクノロジーパートナーチームと面談し、提供する製品やユースケースについて話し合います。
-2. Datadog パートナーネットワークポータルから、開発用の Datadog サンドボックスアカウントをリクエストします。
-3. インテグレーションの開発を開始します。これには、あなたの側でインテグレーションコードを書くことと、Python ホイール (`.whl`) を構築してインストールすることが含まれます。
-4. Datadog サンドボックスアカウントでインテグレーションをテストします。
-5. 開発作業をテストして完了したら、**Integrations** または **Marketplace** ページに表示されるインテグレーションタイルを構成するセットアップ手順、イメージ、サポート情報などの情報を提供し、タイルアセットを作成します。
-6. プルリクエストが送信され、承認されると、Datadog テクノロジーパートナーチームは、インテグレーションを最終確認するためのデモをスケジュールします。
-7. Datadog のサンドボックスアカウントでタイルとインテグレーションをテストしてから公開するか、すべての顧客向けにインテグレーションをすぐに公開するかのオプションがあります。 
+1. Join the Datadog Partner Network
+   - まず [Datadog Partner Network][32] に申請します。承認されると、Datadog Technology Partner チームとの初回オリエンテーション コールがスケジュールされます。
+2. 開発環境をセットアップする
+   - Datadog Partner Network ポータルから Datadog サンドボックス アカウントをリクエストします。
+   - 必要な開発ツールをインストールします。
+3. インテグレーションを作成する
+   - Datadog サンドボックス内で **Developer Platform** > **add a new listing** に移動します。
+   - インテグレーションの詳細情報を入力します。
+4. Agent チェックをビルドし、インテグレーションをテストする
+   - [こちらの手順](#write-an-agent-check) に従って Agent チェックを作成します。
+4. レビューに提出する
+   - Developer Platform からインテグレーションのコンテンツを提出します。
+   - Agent チェックのコードで GitHub の pull request を作成します。
+   - Datadog チームが最終デモをスケジュールして、インテグレーションをレビューします。
 
 ## 前提条件
 
 必要な Datadog Agent インテグレーション開発ツールは以下の通りです。
 
-- Python v3.11, [pipx][2], and the Agent Integration Developer Tool (`ddev`). For installation instructions, see [Install the Datadog Agent Integration Developer Tool][3].
+- Python v3.12、[pipx][2]、および Agent Integration Developer Tool (`ddev`)。インストール手順は [Datadog Agent Integration Developer Tool のインストール][3] を参照してください。
 - フルテストスイートを実行するための [Docker][4]。
 - git [コマンドライン][5]または [GitHub デスクトップクライアント][19]。
 
@@ -63,7 +72,7 @@ Agent ベースのインテグレーションを構築するプロセスは、�
 mkdir $HOME/dd && cd $HOME/dd
 ```
 
-Datadog Development Toolkit は、`$HOME/dd/` ディレクトリで作業することを想定しています。これは必須ではありませんが、異なるディレクトリで作業する場合は、追加の構成手順が必要です。
+   Datadog Development Toolkit は、`$HOME/dd/` ディレクトリで作業することを前提としています。必須ではありませんが、別のディレクトリで作業する場合は追加の構成手順が必要です。
 
 1. [`integrations-extras` リポジトリ][101]をフォークします。
 
@@ -85,7 +94,7 @@ Agent Integration Developer Tool を使用すると、インテグレーショ�
 
 1. オプションとして、`integrations-extras` リポジトリが `$HOME/dd/` 以外の場所にある場合は、`ddev` 構成ファイルを調整します。
    ```shell
-   ddev config set extras "/path/to/integrations-extras"
+   ddev config set repos.extras "/path/to/integrations-extras"
    ```
 
 1. デフォルトの作業用リポジトリとして `integrations-extras` を設定します。
@@ -130,7 +139,7 @@ Agent Integration Developer Tool をインストールしたら、Marketplace �
 
    ```shell
 
-   ddev config set marketplace $HOME/dd/marketplace
+   ddev config set repos.marketplace $HOME/dd/marketplace
    ddev config set repo marketplace
    ```
 
@@ -138,7 +147,7 @@ Agent Integration Developer Tool をインストールしたら、Marketplace �
 
    ```shell
 
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
+   ddev config set repos.marketplace <PATH/TO/MARKETPLACE>
    ddev config set repo marketplace
    ```
 
@@ -152,9 +161,9 @@ Agent Integration Developer Tool をインストールしたら、Marketplace �
 
 ## インテグレーションを作成する
 
-Docker をダウンロードし、適切なバージョンの Python をインストールし、開発環境を準備したら、Agent ベースのインテグレーションを作成し始めることができます。
+Docker をダウンロードし、適切なバージョンの Python をインストールして開発環境を整えたら、Agent ベースのインテグレーションの作成を開始できます。
 
-以下の説明では、`Awesome` というインテグレーションを例にしています。Awesome のコードを使うか、Awesome を自分のコードに置き換えて、コマンドの中にインテグレーション名を入れてください。例えば、`ddev create Awesome` の代わりに `ddev create <your-integration-name>` を使用します。
+以下の手順では、`Awesome` というサンプル インテグレーションを使用します。Awesome のコードを使って進めるか、Awesome を自身のコードやコマンド内のインテグレーション名に置き換えてください。例えば、`ddev create Awesome` の代わりに `ddev create <your-integration-name>` を使用します。
 
 ### インテグレーションのためのスキャフォールディングを作成する
 
@@ -177,7 +186,7 @@ Docker をダウンロードし、適切なバージョンの Python をイン�
 
 ## Agent チェックを書く
 
-Agent ベースの各インテグレーションの中核には、定期的に情報を収集し Datadog に送信する *Agent Check* があります。
+各 Agent ベースのインテグレーションの中核は、定期的に情報を収集して Datadog に送信する *Agent Check* です。
 
 [チェック][30]は、`AgentCheck` ベースクラスからロジックを継承し、以下の要件を備えています。
 
@@ -190,7 +199,7 @@ Agent ベースの各インテグレーションの中核には、定期的に�
 
 ### チェックロジックの実装
 
-Awesome の場合、Agent Check は、Web ページ上の文字列を検索する `awesome.search` という名前の[サービスチェック][25]で構成されています。文字列が存在する場合は `OK`、ページにはアクセスできるが文字列が見つからない場合は `WARNING`、ページにアクセスできない場合は `CRITICAL` という結果が得られます。
+Awesome の場合、Agent チェックは `awesome.search` という名前の [サービス チェック][25] で構成され、Web ページ上で文字列を検索します。文字列が存在する場合は結果が `OK`、ページにアクセスできるが文字列が見つからない場合は `WARNING`、ページにアクセスできない場合は `CRITICAL` になります。
 
 Agent Check でメトリクスを送信する方法については、[カスタムAgent Check][7] を参照してください。
 
@@ -245,7 +254,7 @@ class AwesomeCheck(AgentCheck):
 
 ### ユニットテストを書く
 
-Awesome の `check` メソッドの前半では、2 つの要素をコンフィギュレーションファイルから取得して検証しています。これは、ユニットテストにかける候補として適切です。
+Awesome の `check` メソッドの最初の部分は、構成ファイルから 2 つの要素を取得して検証します。これはユニット テストに適した対象です。
 
 `awesome/tests/test_awesome.py` ファイルを開き、内容を次に書き換えます。
 
@@ -363,37 +372,13 @@ def test_service_check(aggregator, instance):
    ```
    ddev test -m integration awesome
    ```
-インテグレーションはほぼ完了です。次に、必要なチェックアセットを追加します。
-
-## インテグレーションアセットを入力する
-
-`ddev` スキャフォールディングによって作成された以下のアセットセットには、インテグレーションに関連する情報を入力する**必要があります**。
-
-`README.md`
-: これには、Agent チェックのドキュメント、その設定方法、収集するデータ、サポート情報が含まれます。
-
-`spec.yaml`
-: これは `ddev` ツールを使用して `conf.yaml.example` を生成するために使用されます。詳しくは、[構成仕様][11]を参照してください。
-
-`conf.yaml.example`
-: これには、Agent チェックのデフォルト（または一例として）のコンフィギュレーションオプションが含まれます。**このファイルを手動で編集しないでください**。これは `spec.yaml` のコンテンツから生成されます。詳しくは、[コンフィギュレーションファイルのリファレンスドキュメント][12]を参照してください。
-
-`manifest.json`
-: タイトルやカテゴリーなど、Agent チェックのメタデータが格納されています。詳しくは、[マニフェストファイルリファレンスドキュメント][13]を参照してください。
-
-`metadata.csv`
-: これには、Agent チェックによって収集されたすべてのメトリクスのリストが含まれます。詳細については、[メトリクスメタデータファイルのリファレンスドキュメント][14]を参照してください。
-
-`service_check.json`
-: Agent チェックによって収集されたすべてのサービスチェックのリストが含まれています。詳しくは、[サービスチェックファイルリファレンスドキュメント][15]を参照してください。
-
-`README.md` と `manifest.json` ファイルの詳細については、[タイルの作成][20]と[インテグレーションアセットリファレンス][33]をご覧ください。
+インテグレーションはほぼ完了です。サンドボックス内の Developer Platform に戻り、提出を最終化してください。
 
 ## ホイールのビルド
 
 `pyproject.toml` ファイルは、ホイールのパッケージ化とビルドに使用されるメタデータを提供します。ホイールはインテグレーションを機能させるために必要なファイルを含んでおり、これには Agent Check、構成例ファイル、ホイールビルド中に生成される成果物が含まれます。
 
-メタデータファイルを含むすべての追加要素は、ホイールに含まれることを意図しておらず、Datadog プラットフォームとエコシステムによって他の場所で使用されます。
+メタデータ ファイルを含むすべての追加要素は、wheel に含めることを意図しておらず、Datadog プラットフォームおよびエコシステムの別の場所で使用されます。
 
 Python のパッケージングについてより詳しく知りたい場合は、[Python プロジェクトのパッケージング][16]を参照してください。
 
@@ -435,27 +420,30 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
   ```
 </details>
 
-## タイルを入力し、インテグレーションを公開する
+Kubernetes 環境でテスト用に wheel をインストールする場合:
+1. `.whl` ファイルを initContainer にマウントします。
+2. initContainer 内で wheel のインストールを実行します。
+3. 実行中の Agent コンテナに initContainer をマウントします。
 
-Agent ベースのインテグレーションを作成したら、インテグレーションタイルに表示される残りの[必須アセット][31]を入力し、プルリクエストを開くための情報については、[タイルの作成][20]ドキュメントを参照してください。
+ホスト環境およびコンテナ環境の顧客向けインストール コマンドについては、[Community and Marketplace Integrations ドキュメント][35] を参照してください。
 
-## Update your integration
-To update your integration, edit the relevant files and open a new pull request to your integration's directory in the [`integrations-extras`][21] or [`marketplace`][22] repository. 
+## コードをレビューに提出する
 
-* If you are editing or adding new integration code, a version bump is required.
+Developer Platform に記載された手順に従って、Agent チェックのコードを GitHub でレビューに提出してください。承認されると、その pull request はインテグレーションとともにリリースされます。
 
-* If you are editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is not needed. 
+## インテグレーションを更新する
+* インテグレーションのコードを編集または新規追加する場合は、バージョンの引き上げが必要です。
 
-After making updates to assets such as dashboards and recommended monitors, or non-code files such as `README.md` and `manifest.json`, no further action is needed from the developer after the corresponding pull requests have been merged. These changes will show up for the customer without any action on their end. 
+* README コンテンツ、マニフェスト情報、またはダッシュボードやモニター テンプレートなどのアセットを編集または追加する場合は、バージョンの引き上げは不要です。
 
-### Bumping an integration version 
-In addition to any code changes, the following is required when bumping an integration version:
-1. Update `__about__.py` to reflect the new version number. This file can be found in your integration's directory under `/datadog_checks/<your_check_name>/__about__.py`.
-2. Add an entry to the CHANGELOG.md file that adheres to the following format:
+### インテグレーションのバージョンを上げる
+コード変更に加えて、インテグレーションのバージョンを上げる際には次が必要です:
+1. 新しいバージョン番号を反映するように `__about__.py` を更新します。このファイルはインテグレーションのディレクトリ内の `/datadog_checks/<your_check_name>/__about__.py` にあります。
+2. Developer Platform の **Release Notes** に、次の形式に従ったエントリを追加します:
    ```
-   ## Version Number / Date
+   ## Version Number / Date in YYYY-MM-DD
 
-   ***Added***: 
+   ***Added***:
 
    * New feature
    * New feature
@@ -464,10 +452,20 @@ In addition to any code changes, the following is required when bumping an integ
 
    * Bug fix
    * Bug fix
-   ```
-3. Update all references to the version number mentioned in `README.md` and elsewhere. Installation instructions in `README.md` often include the version number, which needs to be updated.
 
-## 参考資料
+   ***Changed***:
+
+   * Feature update
+   * Feature update
+
+   ***Removed***:
+
+   * Feature removal
+   * Feature removal
+   ```
+3. インストール手順などで言及されているバージョン番号の参照箇所をすべて更新します。インストール手順にはバージョン番号が含まれていることが多いため、必ず更新してください。
+
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -490,7 +488,7 @@ In addition to any code changes, the following is required when bumping an integ
 [17]: https://docs.datadoghq.com/ja/agent/
 [18]: https://docs.datadoghq.com/ja/service_management/events/
 [19]: https://desktop.github.com/
-[20]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile
+[20]: https://docs.datadoghq.com/ja/developers/integrations/
 [21]: https://github.com/Datadog/integrations-extras
 [22]: https://github.com/Datadog/marketplace
 [23]: https://app.datadoghq.com/integrations
@@ -501,7 +499,8 @@ In addition to any code changes, the following is required when bumping an integ
 [28]: https://docs.datadoghq.com/ja/dashboards/
 [29]: https://docs.datadoghq.com/ja/logs/log_configuration/pipelines/
 [30]: https://docs.datadoghq.com/ja/glossary/#check
-[31]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile/#complete-the-necessary-integration-asset-files
+[31]: https://docs.datadoghq.com/ja/developers/integrations/
 [32]: https://partners.datadoghq.com/
 [33]: https://docs.datadoghq.com/ja/developers/integrations/check_references/
 [34]: https://docs.datadoghq.com/ja/metrics/
+[35]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/

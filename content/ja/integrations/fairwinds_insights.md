@@ -26,12 +26,12 @@ author:
   support_email: insights@fairwinds.com
   vendor_id: fairwinds
 categories:
-- コンテナ
+- incident-teams
 - コスト管理
 - kubernetes
-- マーケットプレイス
+- marketplace
 - プロビジョニング
-- セキュリティ
+- security
 custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true

@@ -10,16 +10,16 @@ title: Solucionar problemas de NDM
 
 ## Información general
 
-Utiliza la siguiente información para solucionar problemas de Network Device Monitoring Datadog. Si necesitas más ayuda, ponte en contacto con el [servicio de asistencia de Datadog][1].
+Utiliza la siguiente información para solucionar problemas de Network Device Monitoring de Datadog. Si necesitas más ayuda, ponte en contacto con el [servicio de asistencia de Datadog][1].
 
-### Dispositivo no visible en Datadog
+## Dispositivo no visible en Datadog
 
-La siguiente explicación supone que estás ejecutando Datadog Agent v7.61.0+.
+La siguiente explicación supone que estás ejecutando el Datadog Agent v7.61.0 o posterior.
 
 Si tu dispositivo no está visible en la página [Dispositivos][2]:
 
-1. Ejecuta el comando [datadog-agent status][3] y busca la sección snmp, que contiene la IP de monitorización de tu dispositivo. Después de iniciar el Agent, NDM puede tardar hasta un minuto en detectar los dispositivos configurados individualmente. Si tu Agent está configurado para escanear un gran número de dispositivos, puede tardar más tiempo. 
-El resultado debería ser similar al siguiente: 
+1. Ejecuta el comando [datadog-agent status][3] y busca la sección snmp, que contiene la IP de monitorización de tu dispositivo. Después de iniciar el Agent, NDM puede tardar hasta un minuto en detectar los dispositivos configurados individualmente. Si tu Agent está configurado para analizar un gran número de dispositivos, puede tardar más tiempo.
+El resultado debería ser similar al siguiente:
 
    ```
    snmp
@@ -34,15 +34,15 @@ El resultado debería ser similar al siguiente:
      Average Execution Time : 0s
      Last Execution Date : 2024-11-13 13:12:09 PST / 2024-11-13 21:12:09 UTC (1731532329000)
      Last Successful Execution Date : Never
-     Error: <ERROR MESSAGE> 
+     Error: <ERROR MESSAGE>
      No traceback
    ```
 
-2. Si tu dispositivo no aparece en la lista y estás utilizando Autodiscovery, probablemente significa que el Agent no pudo conectarse a tu dispositivo. 
+2. Si tu dispositivo no aparece en la lista y estás utilizando Autodiscovery, probablemente significa que el Agent no pudo conectarse a tu dispositivo.
 
-   - Ejecuta el comando `datadog-agent status` y espera a que la sección `autodiscovery` informe de que se han escaneado todas las IP de dispositivos posibles. En redes grandes, esto puede tardar varios minutos. La salida debe ser similar a la siguiente:
+   - Ejecuta el comando `datadog-agent status` y espera a que la sección `autodiscovery` informe de que se analizaron todas las IP de dispositivos posibles. En redes grandes, esto puede tardar varios minutos. El resultado debe ser similar al siguiente:
 
-    ``` 
+    ```
     Autodiscovery
     =============
     Subnet 127.0.0.1/24 is queued for scanning.
@@ -55,11 +55,11 @@ El resultado debería ser similar al siguiente:
     No IPs found in the subnet.
     ```
 
-    Si Autodiscovery se ha completado y tu dispositivo sigue sin aparecer en la página [Dispositivos][2], significa que el Agent no ha podido conectarse a tu dispositivo.
+    Si Autodiscovery finalizó y tu dispositivo sigue sin aparecer en la página [Dispositivos][2], significa que el Agent no pudo conectarse a tu dispositivo.
 
-   - Ejecuta un `snmp walk` en la IP de administrador del dispositivo para determinar por qué el Agent no puede conectarse a tu dispositivo. 
+   - Ejecuta un `snmp walk` en la IP de administrador del dispositivo para determinar por qué el Agent no puede conectarse a tu dispositivo.
 
-   **Nota**: Proporciona tus credenciales directamente en la CLI. Si no se proporcionan las credenciales, el Agent intentará localizarlas en los archivos de configuración del Agent que se estén ejecutando. 
+   **Nota**: Proporciona tus credenciales directamente en la CLI. Si no se proporcionan las credenciales, el Agent intentará localizarlas en los archivos de configuración del Agent que se estén ejecutando.
 
    **Linux**: <br />
      SNMP v2:
@@ -70,25 +70,25 @@ El resultado debería ser similar al siguiente:
       ```
       sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
       ```
-      **Windows**:   
+      **Windows**:
       ```
       agent snmp walk <IP Address>[:Port]
 
-      Example:           
-      agent.exe snmp walk  10.143.50.30 1.3.6 
+      Example:
+      agent.exe snmp walk  10.143.50.30 1.3.6
       ```
 
     Consulta la documentación específica de tu proveedor para obtener información adicional sobre la ejecución de estos comandos.
 
-### Solucionar problemas de errores con SNMP
+## Solucionar errores SNMP
 
 Si el estado de SNMP o el recorrido del Agent muestran un error, podría indicar uno de los siguientes problemas:
 
-#### Permiso denegado
+### Permiso denegado
 
-Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, el número de puerto que has indicado puede requerir permisos superiores. Para vincularte a un número de puerto inferior a 1024, consulta [Uso del puerto de trampa predeterminado 162 de SNMP][8].
+Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, el número de puerto que has indicado puede requerir permisos superiores. Para vincularte a un número de puerto inferior a 1024, consulta [Uso del puerto de trampas predeterminado 162 de SNMP][8].
 
-#### Dispositivo inalcanzable o mal configurado:
+### Dispositivo inalcanzable o mal configurado:
 
    **Error**:
    ```plaintext
@@ -112,18 +112,18 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
       ```
    3. Asegúrate de que tu cadena comunitaria coincide.
 
-#### Credenciales de SNMPv2 incorrectas
+### Credenciales de SNMPv2 incorrectas
 
    **Error**:
    ```
    Error: an authentication method needs to be provided
-   ``` 
+   ```
 
    **Solución**:
 
    Si utilizas SNMPv2, asegúrate de que se establece una cadena de comunidad.
 
-#### Protocolo de privacidad de SNMPv3 incorrecto
+### Protocolo de privacidad de SNMPv3 incorrecto
 
    **Error**:
    ```
@@ -145,6 +145,65 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
    - privKey
    - privProtocol
 
+### No se reciben trampas o flujos en absoluto
+
+Si faltan trampas SNMP o tráfico NetFlow, una causa común son las reglas del cortafuegos que bloquean los paquetes UDP antes de que lleguen al Agent. Tanto las trampas SNMP como el tráfico NetFlow dependen de UDP y utilizan los puertos definidos en tu configuración de [datadog.yaml][9].
+
+<div class="alert alert-info">Los firewalls locales como Uncomplicated Firewall (UFW) pueden bloquear el tráfico incluso cuando están configurados con parámetros permisivos. Comprueba los logs del sistema en busca de entradas de paquetes bloqueados, que suelen indicar que el tráfico llegó a la interfaz de red pero se bloqueó antes de llegar al sistema operativo.</div>
+
+Utiliza los siguientes comandos específicos de la plataforma para buscar reglas de cortafuegos que puedan estar bloqueando el tráfico y evitando que llegue al Agent.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Linux dispone de varios tipos de cortafuegos, como `iptables`, `nftables` o `ufw`. Dependiendo de cuál esté en uso, se pueden utilizar los siguientes comandos:
+
+- `sudo iptables -S`
+
+- `sudo nft lista ruleset`
+
+- `sudo ufw status`
+
+Busca si hay reglas que bloquean el tráfico UDP en los puertos configurados.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+A partir de la versión `7.67`, el comando `Datadog-Agent diagnose` del Agent busca automáticamente reglas de bloqueo del cortafuegos y muestra advertencias si encuentra alguna.
+
+Para inspeccionar manualmente las reglas del cortafuegos:
+
+```powershell
+Get-NetFirewallRule -Action Block | ForEach-Object {
+    $rule = $_
+    Get-NetFirewallPortFilter -AssociatedNetFirewallRule $rule | Select-Object
+        @{Name="Name"; Expression={$rule.Name}},
+        @{Name="DisplayName"; Expression={'"' + $rule.DisplayName + '"'}},
+        @{Name="Direction"; Expression={$rule.Direction}},
+        @{Name="Protocol"; Expression={$_.Protocol}},
+        @{Name="LocalPort"; Expression={$_.LocalPort}},
+        @{Name="RemotePort"; Expression={$_.RemotePort}}
+} | Format-Table -AutoSize
+```
+
+Busca normas donde:
+- **Dirección** es entrante
+- **El protocolo** es UDP
+- **LocalPort** coincide con uno de tus puertos configurados
+
+{{% /tab %}}
+{{% tab "MacOS" %}}
+
+Ejecuta el siguiente comando para revisar las reglas de Packet Filter (pf):
+
+```shell
+sudo pfctl -sr
+```
+
+Busca cualquier regla que bloquee el tráfico UDP en los puertos configurados. Por ejemplo:`block drop in proto udp from any to any port = <CONFIG_PORT>`.
+{{% /tab %}}
+{{< /tabs >}}
+
 ### No se reciben trampas para los dispositivos
 
 1. Comprueba el archivo de Datadog `agent.log` para asegurarte de que puedes enlazarte al puerto de trampas. El siguiente error indica que no te puedes enlazar con el puerto de trampas:
@@ -154,19 +213,19 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
    ```
 
    **Solución**:
-   Añade una capacidad de enlace de red al binario del Agent, que permite al Agent enlazarse a puertos reservados: 
+   Añade una capacidad de enlace de red al binario del Agent, que permite al Agent vincularse a puertos reservados:
 
    ```
    sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
    ```
 
-#### Trampas con formato incorrecto
+### Trampas con formato incorrecto
 
 1. Ve al dashboard para solucionar problemas en NDM:
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_troubleshooting_dashboard.png" alt="La página de Network Device Monitoring muestra el menú desplegable de Dashboard con el dashboard Solucionar problemas de NDM resaltado." style="width:80%;" >}}
 
-2. Desplázate hasta el widget de Trampas y observa el gráfico **Traps incorrectly formated** (Trampas formateadas incorrectamente). Si es distinto de cero, probablemente significa que la autenticación en el recopilador de NDM y el dispositivo no coinciden. 
+2. Desplázate hasta el widget Trampas y observa el gráfico **Trampas incorrectamente formateadas**. Si es distinto de cero, probablemente significa que la autenticación en el recopilador NDM y el dispositivo no coinciden.
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_traps_dashboard.png" alt="El dashboard de Solucionar problemas de NDM qemuestra la sección del widget Trampas." style="width:100%;" >}}
 
@@ -206,16 +265,17 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
     #   privProtocol: <PRIVACY_PROTOCOL>
     ```
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /es/help
-[2]: https://app.datadoghq.com/infrastructure/devices
+[2]: https://app.datadoghq.com/devices
 [3]: /es/agent/configuration/agent-commands/#agent-information
 [4]: /es/api/latest/network-device-monitoring/
 [5]: /es/api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device
 [6]: /es/api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [7]: /es/api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [8]: /es/network_monitoring/devices/snmp_traps/#using-the-default-snmp-trap-port-162
+[9]: /es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

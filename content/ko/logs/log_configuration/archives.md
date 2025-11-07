@@ -69,10 +69,10 @@ title: 로그 아카이브
 {{% /tab %}}
 {{< /tabs >}}
 
-### 스토리지 버킷 생성하기 
+### 스토리지 버킷 생성하기
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">아카이브로 로그를 보내는 것은 Datadog GovCloud 환경 외부에서 일어나며, 이는 Datadog의 통제를 벗어나는 것입니다. Datadog은 FedRAMP, DoD 영향 수준, ITAR, 수출 규정 준수, 데이터 보존 또는 해당 로그에 적용되는 유사 규정과 관련해 사용자가 가질 의무 또는 요구 사항을 포함하되 이에 국한되지 않는 Datadog GovCloud 환경을 떠난 모든 로그에 대해 책임을 지지 않습니다.</div>
+<div class="alert alert-danger">아카이브로 로그를 보내는 것은 Datadog GovCloud 환경 외부에서 일어나며, 이는 Datadog의 통제를 벗어나는 것입니다. Datadog은 FedRAMP, DoD 영향 수준, ITAR, 수출 규정 준수, 데이터 보존 또는 해당 로그에 적용되는 유사 규정과 관련해 사용자가 가질 의무 또는 요구 사항을 포함하되 이에 국한되지 않는 Datadog GovCloud 환경을 떠난 모든 로그에 대해 책임을 지지 않습니다.</div>
 {{< /site-region >}}
 
 {{< tabs >}}
@@ -81,7 +81,7 @@ title: 로그 아카이브
 [AWS 콘솔][1]에서 [S3 버킷을 생성하여][2] 아카이브를 보냅니다.
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">가상 호스트 스타일 주소를 이용하는 S3 FIPS 엔드포인트와 통합되어 있을 경우 Datadog Archives에서 점(.)이 있는 버킷 이름을 지원하지 않습니다. 자세한 내용은 AWS 설명서를 참고하세요.<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> 및 <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+<div class="alert alert-danger">가상 호스트 스타일 주소를 이용하는 S3 FIPS 엔드포인트와 통합되어 있을 경우 Datadog Archives에서 점(.)이 있는 버킷 이름을 지원하지 않습니다. 자세한 내용은 AWS 설명서를 참고하세요.<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> 및 <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
 **참조**:
@@ -208,7 +208,7 @@ title: 로그 아카이브
 | **Azure Storage**        | - **Azure Storage** 아카이브 유형을 선택하고 Datadog App의 Azure 테넌트와 클라이언트를 선택합니다. 스토리지 계정에 Storage Blob Data Contributor 역할이 있는 것을 선택해야 합니다.<br>- 아카이브의 스토리지 계정 이름과 컨테이너 이름을 입력합니다.<br>**(선택 사항)**: 로그 아카이브의 모든 내용에 적용할 접두사 디렉터리를 입력합니다. |
 | **Google Cloud Storage** | - **Google Cloud Storage** 아카이브 유형을 선택하고, 스토리지 버킷에 쓸 권한이 있는 GCS Service Account를 선택합니다.<br>- 버킷 이름을 입력합니다.<br>**(선택 사항)**: 로그 아카이브의 모든 내용에 적용할 접두사 디렉터리를 입력합니다. |
 
-### 고급 설정 
+### 고급 설정
 
 {{< img src="/logs/archives/log_archives_advanced_settings.png" alt="선택 사항으로 태그를 추가하고 최대 스캔 규모를 정의하는 고급 설정" style="width:100%;" >}}
 
@@ -346,7 +346,7 @@ S3 버킷이 SSE-S3으로 암호화되었는지 확인하려면 다음을 수행
 
 3. S3 버킷에서 **Properties** 탭으로 이동하여 **Default Encryption**을 선택합니다. "AWS-KMS" 옵션을 선택하고, CMK ARN을 선택한 후 저장합니다.
 
-기존 KSM 키를 변경하려면 [Datadog 지원팀][3]에 문의하여 추가 지원을 받으세요.
+기존 KMS 키를 변경하려면 [Datadog 지원팀][3]에 문의하여 추가 지원을 받으세요.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
@@ -407,6 +407,7 @@ Datadog이 스토리지 버킷에 전달하는 로그 아카이브는 압축된 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits는 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/logs/indexes/#exclusion-filters

@@ -490,7 +490,7 @@ In your browser test's recorder, add a step recording, and click **Extract varia
 
 To edit a browser recording after it's saved:
 
-- Navigate to [Synthetics > Tests.][14]
+- Navigate to [Synthetic Monitoring > Tests.][14]
 - Click on a previously saved browser test.
 - Click the gear icon on the top right hand corner and then click "edit recording".
 - Select multiple or single steps for deletion or replay, then click **Save & Quit**.

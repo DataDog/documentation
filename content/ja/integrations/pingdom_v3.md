@@ -83,7 +83,7 @@ Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーシ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "pingdom_v3" >}}
+{{< get-metrics-from-git "pingdom-v3" >}}
 
 
 ### イベント

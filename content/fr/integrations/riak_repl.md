@@ -68,7 +68,7 @@ Lancez la [sous-commande status de l'Agent][7] et cherchez `riak_repl` dans la s
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "riak_repl" >}}
+{{< get-metrics-from-git "riak-repl" >}}
 
 
 ### Checks de service

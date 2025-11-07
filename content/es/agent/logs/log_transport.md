@@ -33,8 +33,8 @@ Para comprobar qué transporte utiliza el Agent, ejecuta el [comando de estado d
 
 **Notas**:
 
-* En las versiones anteriores del Agent, se utiliza el transporte TCP de forma predeterminada. Datadog recomienda encarecidamente aplicar el protocolo de transporte HTTPS si se ejecutan las versiones 6.14/7.14 y posteriores, y el HTTPS comprimido si se ejecutan las versiones 6.16/7.16 y posteriores.
-* Cuando utilices un proxy, aplica siempre un canal de transporte específico (ya sea TCP o HTTPS) para reenviar los logs a Datadog.
+* Para las versiones anteriores del Agent, se utiliza el transporte TCP en forma predeterminada. Datadog recomienda encarecidamente que apliques el transporte HTTPS si estás ejecutando v6.14+/v7.14+ y la compresión HTTPS si estás ejecutando v6.16+/v7.16+.
+* Cuando utilices un proxy, aplica siempre un canal de transporte específico (ya sea TCP o HTTPS) para reenviar los logs a Datadog. 
 
 ## Aplica un transporte específico
 
@@ -48,7 +48,7 @@ Para aplicar el transporte HTTPS con las versiones del Agent 6.14/7.14 y posteri
 ```yaml
 logs_enabled: true
 logs_config:
-  use_http: true
+  force_use_http: true
 ```
 
 Para enviar logs con variables de entorno, configura lo siguiente:
@@ -67,8 +67,8 @@ De forma predeterminada, el Datadog Agent utiliza el puerto `443` para enviar su
 Al usar HTTP, el Agent envía lotes de logs con los siguientes límites:
 
 * Tamaño máximo del lote: 1 MB
-* Tamaño máximo para un log único: 256 kB
-* Número máximo de logs en un lote: 200
+* Tamaño máximo de un único log: 900 kB
+* Número máximo de Logs en un lote: 1000
 
 ### Compresión de logs
 
@@ -103,11 +103,13 @@ También puedes usar la variable de entorno `DD_LOGS_CONFIG_BATCH_WAIT=2`. La un
 
 Cuando los logs se envíen a través de HTTPS, usa el mismo [conjunto de parámetros de proxy][3] que los otros tipos de datos para enviar los logs a través de un proxy web.
 
-[1]: /es/agent/guide/agent-configuration-files/
+[1]: /es/agent/configuration/agent-configuration-files/
 [2]: /es/agent/basic_agent_usage/#agent-overhead
-[3]: /es/agent/proxy/
+[3]: /es/agent/configuration/proxy/
 {{% /tab %}}
+
 {{% tab "TCP" %}}
+{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
 
 Para aplicar el transporte TCP, actualiza el [archivo de configuración principal][1] del Agent (`datadog.yaml`) con:
 
@@ -123,12 +125,19 @@ Para enviar logs con variables de entorno, configura lo siguiente:
 
 De forma predeterminada, el Datadog Agent envía sus logs a Datadog mediante el protocolo TCP con cifrado TLS. Esto requiere comunicación de salida (en el puerto `10516` para el sitio de Datadog de EE. UU. y en el puerto `443` para el sitio de Datadog de la UE).
 
-[1]: /es/agent/guide/agent-configuration-files/
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+El endpoint TCP no es compatible con este sitio.
+
+{{< /site-region >}}
+
+[1]: /es/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
 **Nota**: Al configurar un servidor [proxy SOCKS5][2], se aplica el transporte TCP, ya que los proxies Socks5 aún no son compatibles con el protocolo HTTPS comprimido.
 
 
-[1]: /es/agent/guide/agent-commands/?tab=agentv6v7#service-status
+[1]: /es/agent/configuration/agent-commands/?tab=agentv6v7#service-status
 [2]: /es/agent/logs/proxy/?tab=socks5

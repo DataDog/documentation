@@ -10,6 +10,8 @@ title: Guías SLO
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Dashboard guides:">}}
-    {{< nextlink href="/dashboards/guide/slo_data_source" >}}Grafica los datos históricos de SLO en los dashboards{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Consultas SLO basadas en métricas{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo" >}}Widget de SLOs{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo_list" >}}Widget de listas de SLOs{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/slo_data_source" >}}Graficar datos históricos de SLOs en dashboards{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Delimitar consultas de SLOs basadas en métricas{{< /nextlink >}}
 {{< /whatsnext >}}

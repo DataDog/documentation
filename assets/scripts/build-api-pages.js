@@ -6,6 +6,7 @@ const marked = require('marked');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
+const oneOfLimit = 50;
 
 const supportedLangs = ['en'];
 
@@ -303,7 +304,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
             }
 
             // for items -> oneOf
-            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
+            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < oneOfLimit) {
               // if we have an example use that otherwise choose the first one oneof
               if(!parentExample) {
                 if (Object.keys(value.items.oneOf).length !== 0) {
@@ -445,7 +446,7 @@ const outputValue = (value, trailingComma = false) => {
       out = `${value}`;
       break;
     case "string":
-      out = `"${value.replace(/\r?\n|\r/g, '\\n')}"`;
+      out = `"${value.replace(/\r?\n|\r/g, '\\n').replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')}"`;
       break;
     default:
       out = `"${value}"`;
@@ -608,7 +609,8 @@ const filterExampleJson = (actionType, data) => {
   const requiredKeys = getInitialRequiredData(data);
 
   // just return the example in additionalProperties cases with example
-  if(data.additionalProperties && data.example) {
+  // just return the example if theres a top-level example and its response
+  if(data.additionalProperties && data.example || data.example && actionType === 'response') {
     return data.example;
   }
 
@@ -771,7 +773,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               newRequiredFields = (value.items.required) ? value.items.required : [];
             }
             // for items -> oneOf
-            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
+            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < oneOfLimit) {
               childData = value.items.oneOf
               .map((obj, indx) => {
                 return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
@@ -794,7 +796,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           }
         } else if (typeof value === 'object' && "oneOf" in value) {
           // for properties -> oneOf
-          if(value.oneOf instanceof Array && value.oneOf.length < 20) {
+          if(value.oneOf instanceof Array && value.oneOf.length < oneOfLimit) {
             childData = value.oneOf
               .map((obj, indx) => {
                 return {[`Option ${indx + 1}`]: value.oneOf[indx]}

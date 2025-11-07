@@ -50,6 +50,14 @@ Order issues in the list using one of these options:
 
 Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
 
+Some commonly used error attributes include:
+| Attribute | Description |
+|-----------|-------------|
+| `error.message`| The message associated with the error. |
+| `error.type` | The type or class of the error. |
+| `error.stack` | The stack trace associated with the error. |
+| `error.handling` | Indicates whether the error was handled. APM errors are considered `handled` if a parent span reports a successful operation (`HTTP 200`, `gRPC OK`) or successful error handling (`HTTP 400`, `gRPC NOT_FOUND`). RUM errors are `unhandled` if they are not captured manually in the code. |
+
 Click the Edit icon to see the list of available facets that you can show or hide from view.
 
 {{< img src="/error_tracking/error-tracking-facets.png" alt="Click the pencil icon to hide or show available Error Tracking facets from view." style="width:100%;" >}}
@@ -72,9 +80,7 @@ Display only issues that have an AI generated fix available to quickly remediate
 
 #### Teams filters
 
-Issue Team Ownership helps you quickly identify issues and focus on relevant errors by using Git `CODEOWNERS`. Datadog will automatically filter your issues so your team can cut through noise and prioritize what matters.
-
-Issue ownership is derived from the `CODEOWNERS` files of your repositories. To use this feature, you need to link your Datadog teams to their GitHub counterparts. All errors coming from RUM and APM are eligible for Team Ownership.
+[Issue Team Ownership][2] helps you quickly identify issues relevant to your team by using Git `CODEOWNERS` and service owners.
 
 #### Assigned to
 
@@ -98,7 +104,7 @@ The information shown in the issue panel varies depending on the error source. F
 
 The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you troubleshooting information such as the stack trace of the error, and the characteristics of impacted users.
 
-## Get alerted on new errors
+## Get alerted on new or impactful errors
 
 Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking monitors allow you to track any new issue or issues that have a high impact in your systems or on your users (see [Error Tracking Monitors][7])
 
@@ -111,6 +117,7 @@ You can directly export your search query from the explorer to create an Error T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events
+[2]: /error_tracking/issue_team_ownership
 [3]: /error_tracking/suspected_causes
 [4]: /real_user_monitoring/explorer/search/#event-types
 [5]: /error_tracking/issue_states

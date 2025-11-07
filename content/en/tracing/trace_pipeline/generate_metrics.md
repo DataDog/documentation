@@ -18,30 +18,20 @@ further_reading:
 
 {{< img src="tracing/apm_lifecycle/span_based_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Span-based metrics" >}}
 
-Generate metrics from 100% of ingested spans, regardless of whether the spans are indexed by a [retention filter][1].
+Generate custom metrics from ingested spans to track trends, power dashboards, and trigger monitors—even for spans that are not retained for full trace analysis.
 
-Use custom metrics for specific fixed queries and comparisons, while creating retention filters to allow arbitrary querying and investigation of the retained trace and its flame graph.
+Span-based metrics are created from spans that have been ingested by Datadog APM, regardless of whether those spans are indexed by a [retention filter][1]. These metrics allow you to extract numeric values (such as counts, durations, or custom tags) from spans and store them as long-lived [custom metrics][3] with a 15-month retention period.
 
-**Billing Note:** Metrics created from ingested spans are billed as [Custom Metrics][2].
+**Note:** The set of spans available for metric generation depends on your [APM ingestion control settings][12]. Spans dropped due to sampling or filtering are not ingested, and therefore cannot be used to generate metrics.
 
-For example, you may want to use custom metrics to visualize anomalies, create dashboards and monitors, and see trends across any parameters that are important to your business context. All generated metrics are available for 15 months as Datadog [custom metrics][3].
+Use span-based metrics when you:
+- Need long-term visibility into span-level patterns, such as request volume, latency, or error rates
+- Want to power [anomaly][4] or [forecast][7] monitors with low-latency, high-resolution metrics
+- Don't need to retain the full trace, but want to extract key signals for trending or alerting
 
-| Reason                        | Custom Metrics Generated from Spans                   | Retention Filters                           |
-| -------------------------------------- | -------------------------------------- | --------------------------------- |
-| Retention Period                     | 15 months                    | 15 days             |
-| Anomaly Detection                           | Create an [Anomaly Monitor][4] based on generated metrics.                            | Use Analytics to compare behavior over the past 15 days, and view complete traces to investigate root cause.                         |
-| Investigation of matching traces with full context                          | N/A - Custom Metrics do not result in any retention of associated traces.                            | Keep exactly the traces relevant to your business context with [retention filters][1].                            |
-| Granularity of behavior                           | Create custom metrics for important endpoints or other low-cardinality groups.                        | Use [Trace Explorer][5] for specific endpoints, or use the 'Group By' option in [Analytics][6].                    |
-| Forecasting or complex mathematics                          | Create a [Forecast monitor][7] based on generated metrics.                          |   N/A                            |
+<div class="alert alert-danger">Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and are billed accordingly. To avoid high costs, do not group metrics by high-cardinality values such as user IDs or request IDs.</div>
 
-To generate metrics from spans, on the [APM Setup and Configuration][8] page select the [Generate Metrics][9] tab, and click the **New Metric** button.
-
-<br>
-
-{{< img src="tracing/span_to_metrics/GenerateMetrics.png" style="width:100%;" alt="Generate metrics from ingested spans" >}}
-
-
-## Creating a span-based metric
+## Create a span-based metric
 
 {{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="How to create a metric" >}}
 
@@ -57,9 +47,9 @@ To generate metrics from spans, on the [APM Setup and Configuration][8] page sel
 
 1. **Name your metric:** Metric names must follow the [metric naming convention][11]. Metric names that start with `trace.*` are not permitted and will not be saved.
 
-<div class="alert alert-warning"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
+<div class="alert alert-danger"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
-## Updating existing span-based metrics
+## Update existing span-based metrics
 
 {{< img src="tracing/span_to_metrics/editspantometrics.png" style="width:100%;" alt="Edit an existing metrics" >}}
 
@@ -88,3 +78,4 @@ After a metric is created, only two fields can be updated:
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /tracing/trace_explorer/query_syntax/
 [11]: /metrics/#naming-metrics
+[12]: /tracing/trace_pipeline/ingestion_controls

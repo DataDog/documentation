@@ -17,6 +17,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
       tag: "Blog"
       text: "Datadog CNM now supports Consul networking"
+    - link: "https://www.datadoghq.com/blog/cnm-kubernetes-egress/"
+      tag: "Blog"
+      text: "How Datadog Cloud Network Monitoring helps you move to a deny-by-default network egress policy at scale"
+
+      
+
 ---
 
 Datadog Cloud Network Monitoring (CNM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
@@ -90,14 +96,14 @@ Cloud Network Monitoring supports use of the following provisioning systems:
 
 ## Setup
 
-Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
+Cloud Network Monitoring is designed to analyze traffic _between_ network endpoints and map network dependencies. Datadog recommends installing CNM on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
 
 To enable Cloud Network Monitoring with the Datadog Agent, use the following configurations:
 
-1. **If you are using an agent older than v6.14+**, enable [live process collection][1] first, otherwise skip this step.
+1. **If you are using an Agent older than v6.14**, enable [live process collection][1] first, otherwise skip this step.
 
 2. Copy the system-probe example configuration:
 
@@ -206,30 +212,73 @@ To enable Cloud Network Monitoring for Windows hosts:
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Helm" %}}
 
 To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
-**Note:** Helm chart v2.4.39+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
+**Note:** Helm chart v3.135.3+ is required. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
   datadog:
+    ...
     networkMonitoring:
       enabled: true
   ```
 
-**Note**: If you receive a permissions error when configuring CNM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
 
-  ```yaml
-  agents:
-    podSecurity:
-      apparmor:
-        enabled: true
-  ```
+You may require one of the following additional steps depending on your environment:
+
+{{< collapse-content title="Google GKE Autopilot" level="h4" >}}
+
+If your cluster is running Google's GKE Autopilot, add the following to your values file:
+
+```
+providers:
+  gke:
+    autopilot: true
+```
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Google Container-Optimized OS (COS)" level="h4" >}}
+
+If your cluster is running Google Container-Optimized OS (COS), add the following to your values file:
+
+```
+providers:
+  gke:
+    cos: true
+```
+
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Bottlerocket Linux" level="h4" >}}
+
+If your cluster is using the Bottlerocket Linux distribution for its nodes, add the following to your values file:
+
+```
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: "system_u"
+          role: "system_r"
+          type: "spc_t"
+          level: "s0"
+```
+
+{{< /collapse-content >}}
+
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#enabling-npm-collection
+
+{{% /tab %}}
+{{% tab "Kubernetes without Helm" %}}
 
 If you are not using Helm, you can enable Cloud Network Monitoring with Kubernetes from scratch:
 
-1. Download the [datadog-agent.yaml manifest][2] template.
-2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][3].
+1. Download the [datadog-agent.yaml manifest][1] template.
+2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][2].
 3. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
 4. **Deploy the DaemonSet** with the command:
 
@@ -237,7 +286,7 @@ If you are not using Helm, you can enable Cloud Network Monitoring with Kubernet
     kubectl apply -f datadog-agent.yaml
     ```
 
-If you already have the [Agent running with a manifest][4]:
+If you already have the [Agent running with a manifest][3]:
 
 1. For Kubernetes versions below `1.30`, add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
 
@@ -388,18 +437,16 @@ If you already have the [Agent running with a manifest][4]:
                       emptyDir: { }
     ```
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[2]: /resources/yaml/datadog-agent-npm.yaml
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /agent/kubernetes/
-[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
+[1]: /resources/yaml/datadog-agent-npm.yaml
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /agent/kubernetes/
+
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">The Datadog Operator is Generally Available with the `1.0.0` version, and it reconciles the version `v2alpha1` of the DatadogAgent Custom Resource. </div>
 
-[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+[The Datadog Operator][1] simplifies deploying the Datadog Agent on Kubernetes and OpenShift. It provides deployment status, health, and error reporting through its Custom Resource status, while reducing the risk of misconfiguration with higher-level configuration options.
 
-To enable Cloud Network Monitoring in Operator, use the following configuration:
+To enable Cloud Network Monitoring on the Datadog Operator, use the following configuration:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -412,7 +459,7 @@ spec:
       enabled: true
 ```
 
-[1]: https://github.com/DataDog/datadog-operator
+[1]: /containers/datadog_operator 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -474,10 +521,55 @@ services:
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
-To set up on Amazon ECS, see the [Amazon ECS][1] documentation page.
+To set up CNM on Amazon ECS, see the [Amazon ECS][1] documentation page.
 
 
 [1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
+{{% /tab %}}
+
+{{% tab "ECS Fargate" %}}
+
+<div class="alert alert-info">ECS Fargate for CNM is in Preview. Reach out to your Datadog representative to sign up.</div>
+
+To enable Cloud Network Monitoring on ECS Fargate, use the following instructions:
+
+**Requires Agent version `7.58` or higher**.
+
+- For a new Fargate deployment, configure the Datadog Agent to monitor Fargate on ECS by enabling [process collection][1] on your Fargate hosts.
+
+- For existing deployments, update your `task.json` file to include the following configuration settings:
+
+```json
+{
+ "containerDefinitions": [
+   (...)
+     "environment": [
+       (...)
+       {
+         "name": "DD_SYSTEM_PROBE_NETWORK_ENABLED",
+         "value": "true"
+       },
+       {
+          "name": "DD_NETWORK_CONFIG_ENABLE_EBPFLESS",
+          "value": "true"
+       },
+       {
+          "name": "DD_PROCESS_AGENT_ENABLED",
+          "value": "true"
+       }      
+     ],
+     "linuxParameters": {
+      "capabilities": {
+        "add": [
+          "SYS_PTRACE"
+        ]
+      }
+    },
+ ],
+}
+```
+[1]: /integrations/ecs_fargate/?tab=webui#process-collection 
+
 {{% /tab %}}
 {{< /tabs >}}
 

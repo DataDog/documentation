@@ -15,10 +15,6 @@ further_reading:
 title: Datadog における CD Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">現在、選択されたサイト ({{< region-param key="dd_site_name" >}}) では CD Visibility は利用できません。</div>
-{{< /site-region >}}
-
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="プレビューに参加しませんか？" >}}
 CD Visibility は現在プレビュー版です。この機能にご興味がある場合は、フォームにご記入いただき、アクセスをリクエストしてください。
 {{< /callout >}}
@@ -34,7 +30,7 @@ CD Visibility は現在プレビュー版です。この機能にご興味があ
     {{< nextlink href="continuous_delivery/deployments/ciproviders" >}}CI プロバイダー (GitLab、Jenkins、CircleCI など){{< /nextlink >}}
 {{< /whatsnext >}}
 
-<div class="alert alert-warning">サポートされていないプロバイダーをご利用の場合は、<a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">このフォームに記入してサポートをリクエストしてください</a>。</div>
+<div class="alert alert-danger">サポートされていないプロバイダーをご利用の場合は、<a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">このフォームに記入してサポートをリクエストしてください</a>。</div>
 
 ## デプロイメントデータの使用
 

@@ -6,10 +6,6 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 In Datadog On-Call, schedules define the specific times when team members are available to respond to Pages. Schedules organize and manage the availability of team members across different timezones and shifts.
 
 ### Concepts
@@ -106,6 +102,13 @@ Enable reminders for upcoming shifts in your calendar app. You can also configur
 If you encounter issues when exporting your On-Call schedule feeds to Google Calendar (such as "could not fetch URL) or Outlook ("Couldn't import calendar. Try again"), try the following fixes when initially subscribing to the calendar through URL:
 
 - Change `webcal://` to `http://` or `https://` at the beginning of the URL. For example, change `webcal://<your_personal_link>` to `http://<your_personal_link>`.
+
+### Managing user departures
+
+When team members leave your organisation, they are not automatically removed from On-Call schedules:
+
+- **Schedule membership**: Departed users remain in On-Call schedules until manually removed. You must update schedules to remove former team members and reassign their shifts.
+- **Notifications**: If a user's Datadog account is deactivated, they no longer receive On-Call notifications (such as SMS, email, and push notifications), even if still assigned to scheduled shifts.
 
 ## Further Reading
 

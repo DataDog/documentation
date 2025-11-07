@@ -32,11 +32,11 @@ Session Replay amplía tu experiencia de monitorización de usuarios, ya que te 
 
 El SDK del Navegador RUM es de [código abierto][1] y aprovecha el proyecto de código abierto [rrweb][2].
 
-## Grabador de Session Replay
+## Cómo funciona el grabador de Session Replay 
 
 El grabador de Session Replay forma parte del SDK del Navegador RUM. El grabador toma una snapshot de DOM y CSS del navegador, mientras realiza un seguimiento y graba los eventos de una página web (como modificaciones de DOM, movimientos del cursor, clics y eventos de entradas) junto con estas marcas de tiempo de eventos.
 
-Luego, Datadog vuelve a crear la página web y vuelve a aplicar los eventos grabados en la vista de la repetición en el momento adecuado. Session Replay sigue la misma política de conservación de 30 días que las sesiones RUM normales.
+Datadog, a continuación, reconstruye la página web y vuelve a aplicar los eventos registrados en el momento adecuado en la vista de reproducción.
 
 El grabador de Session Replay admite todos los navegadores compatibles con el SDK del Navegador RUM, con la excepción de IE11. Para obtener más información, consulta la [tabla de compatibilidad de navegadores][3].
 
@@ -48,7 +48,7 @@ Session Replay está disponible en el SDK del Navegador RUM. Para empezar a reco
 
 <div class="alert alert-info">Session Replay es compatible con la versión 3.6.0 o posterior del SDK.</div>
 
-## Uso
+## Utilización
 
 A partir de la versión 5.0.0 del SDK del Navegador RUM, Session Replay comienza a grabar automáticamente al llamar a `init()`. Para iniciar condicionalmente la grabación, utiliza el parámetro de inicialización `startSessionReplayRecordingManually` y llama a `startSessionReplayRecording()`.
 
@@ -75,13 +75,23 @@ if (user.isAuthenticated) {
 
 Para detener la grabación de Session Replay, llama a `stopSessionReplayRecording()`.
 
-<div class="alert alert-warning">Cuando se utiliza una versión del SDK del Navegador RUM anterior a v5.0.0, la grabación de Session Replay no comienza automáticamente. Para iniciar la grabación, llama a <code>startSessionReplayRecording()</code>.</div>
+<div class="alert alert-danger">Cuando se utiliza una versión del SDK del Navegador RUM anterior a v5.0.0, la grabación de Session Replay no comienza automáticamente. Para iniciar la grabación, llama a <code>startSessionReplayRecording()</code>.</div>
 
-## Deshabilitar Session Replay
+## Forzar Session Replay
 
-Para detener las grabaciones de sesiones, define `sessionReplaySampleRate` en `0`. Esto detiene la recopilación de datos para el plano [RUM del navegador y Session Replay][6].
+En algunos casos, es posible que desees iniciar la grabación de una sesión después de que haya comenzado, incluso si inicialmente se muestreó fuera de la reproducción. Por ejemplo, es posible que desees forzar Session Replay en una página recién desplegada para una monitorización más detallada, o iniciar la grabación después de detectar un error para garantizar datos de reproducción completos.
 
-<div class="alert alert-warning">Si estás utilizando una versión del SDK del Navegador RUM anterior a v5.0.0, define <code>replaySampleRate</code> en <code>0</code>.</div>
+Para forzar la grabación de Session Replay para el resto de la sesión actual, llama a `startSessionReplayRecording({ force: true })`
+
+Cuando se utiliza la opción de forzar, la sesión se actualiza a una sesión reproducida durante el resto de su duración, independientemente de su decisión de muestreo inicial.
+
+<div class="alert alert-danger">La opción forzar sólo convierte una sesión existente en una repetición si ya se está muestreando. En otras palabras, si aún no se ha iniciado el muestreo, el uso de la opción forzar no lo inicia y no se graba ninguna repetición.</div>
+
+## Desactivar Session Replay
+
+Para detener las grabaciones de sesión, establece `sessionReplaySampleRate` en `0`. Esto detiene la recopilación de datos para el [plan de navegador RUM y Session Replay][6].
+
+<div class="alert alert-danger">Si estás utilizando una versión del SDK del navegador RUM anterior a v5.0.0, define <code>replaySampleRate</code> en <code>0</code>.</div>
 
 ## Conservación
 
@@ -105,9 +115,9 @@ Puedes ver quién ha visto la repetición de una sesión determinada haciendo cl
 
 {{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="Consultar quién ha visto la grabación de una sesión" style="width:100%;" >}}
 
-El historial sólo incluye las reproducciones que se han realizado en la página del reproductor o en un reproductor integrado, como en un [notebook][8] o panel lateral. Las reproducciones incluidas también generan un evento [Audit Trail][7]. Las previsualizaciones en miniatura no se incluyen en el historial.
+El historial sólo incluye las reproducciones que se han realizado en la página del reproductor o en un reproductor integrado, como en un [notebook][8] o panel lateral. Las reproducciones incluidas también generan un evento de [Audit Trail][7]. Las previsualizaciones en miniatura no se incluyen en el historial.
 
-Para ver tu propio historial de reproducción, consulta la lista de reproducción [Mi historial de visionado][9].
+Para ver tu propio historial de reproducción, consulta la lista de reproducción [Mi historial de vistas][9].
 
 ## Session Replay para móviles
 

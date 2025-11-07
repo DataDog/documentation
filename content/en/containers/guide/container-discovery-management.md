@@ -1,5 +1,6 @@
 ---
 title: Container Discovery Management
+description: Control which containers the Datadog Agent monitors by configuring discovery rules and inclusion/exclusion patterns
 aliases:
  - /agent/autodiscovery/management
  - /agent/kubernetes/management
@@ -33,7 +34,16 @@ You can set exceptions in two ways:
 
 ## Agent configuration
 
-Use the environment variables in the table below to configure container filtering. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their container name (`name`), image name (`image`), or Kubernetes namespace (`kube_namespace`).
+Use the environment variables in the table below to configure container filtering. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their:
+- container name (`name`)
+- container image name (`image`)
+- Kubernetes namespace (`kube_namespace`)
+
+<div class="alert alert-danger">
+
+The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
+
+</div>
 
 ### Environment variables
 In **Agent v7.20+**, use the following environment variables to exclude containers by image name, container name, or Kubernetes namespace. Logs and metrics are not collected from excluded containers.
@@ -96,18 +106,20 @@ Alternatively, you can also use `image:.*` or `kube_namespace:.*`. Configuring `
 
 ### Inclusion and exclusion behavior
 
-Inclusion takes precedence over exclusion. For example, to only monitor `ubuntu` or `debian` images, first exclude all other images and then specify which images to include:
+Generally, inclusion takes precedence over exclusion. For example, to only monitor `ubuntu` or `debian` images, first exclude all other images and then specify which images to include:
 
 ```
 DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:^docker.io/library/ubuntu(@sha256)?:.* image:^docker.io/library/debian(@sha256)?:.*"
 ```
 
+The only exception to this rule is pod exclusion annotations like `ad.datadoghq.com/exclude`. When an application has an exclusion annotation set to `true`, this takes precedence, and the container is excluded from being autodiscovered for monitoring. For example, having a condition that includes every container like `DD_CONTAINER_INCLUDE = "image:.*"` does not guarantee a container is included if it has an exclusion annotation set on it. See [Container Discovery Management - Pod exclude configuration](#pod-exclude-configuration) for more information.
+
 You cannot mix cross-category inclusion/exclusion rules. For instance, if you want to include a container with the image name `foo` and exclude only metrics from a container with the image name `bar`, the following is **not sufficient**:
 
 ```
 DD_CONTAINER_EXCLUDE_METRICS = "image:^docker.io/library/bar(@sha256)?:.*"
-DD_CONTAINER_INCLUDE = "image:^^docker.io/library/foo(@sha256)?:.*"
+DD_CONTAINER_INCLUDE = "image:^docker.io/library/foo(@sha256)?:.*"
 ```
 
 Instead, use:
@@ -244,6 +256,10 @@ In **Agent v7.45+** you can set annotations on your Kubernetes pods to control A
 | `ad.datadoghq.com/<CONTAINER_NAME>.logs_exclude`    | Excludes log collection from the container with `<CONTAINER_NAME>` in the pod    |
 | `ad.datadoghq.com/<CONTAINER_NAME>.metrics_exclude` | Excludes metric collection from the container with `<CONTAINER_NAME>` in the pod |
 
+The `ad.datadoghq.com/exclude` annotation set on the application pod takes the highest priority. This means that even if a container matches inclusion through `DD_CONTAINER_INCLUDE`, the Agent still ignores monitoring for that container. The same applies for the respective filtering configurations specific for metrics and logs.
+
+When applying annotation-based exclusions, the Agent checks for all relevant exclusion annotations on the container. For example, when configuring logs for an NGINX container, the Agent will look for `ad.datadoghq.com/exclude`, `ad.datadoghq.com/logs_exclude`, `ad.datadoghq.com/nginx.exclude`, or `ad.datadoghq.com/nginx.logs_exclude` annotations to be `true` on the pod. The same applies for metrics.
+
 #### Exclude the entire pod:
 ```yaml
 apiVersion: apps/v1
@@ -293,6 +309,48 @@ metadata:
     ad.datadoghq.com/tolerate-unready: "true"
   ...
 ```
+
+## Security configuration
+
+In **Agent v7.70+**, you can restrict security monitoring for specific containers, so you only get billed for the containers you want to have monitored. This functionality is not supported for the Datadog Operator.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+| Feature                               | Include container                                   | Exclude container                                   |
+|---------------------------------------|-----------------------------------------------------|-----------------------------------------------------|
+| [Cloud Security Misconfigurations][1] | `datadog.securityAgent.compliance.containerInclude` | `datadog.securityAgent.compliance.containerExclude` |
+| [Cloud Security Vulnerabilities][2]   | `datadog.sbom.containerImage.containerInclude`      | `datadog.sbom.containerImage.containerExclude`      |
+| [Workload Protection][3]              | `datadog.securityAgent.runtime.containerInclude`    | `datadog.securityAgent.runtime.containerExclude`    |
+
+[1]: /security/cloud_security_management/misconfigurations/
+[2]: /security/cloud_security_management/vulnerabilities
+[3]: /security/workload_protection/
+{{% /tab %}}
+{{% tab "Config file" %}}
+For [Cloud Security Vulnerabilities][1], you can use the following format in your config file to include or exclude containers:
+```
+---
+sbom:
+  container_image:
+    container_include: ...
+    container_exclude: ...
+```
+[1]: /security/cloud_security_management/vulnerabilities
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+
+| Feature                               | Include container                              | Exclude container                              |
+|---------------------------------------|------------------------------------------------|------------------------------------------------|
+| [Cloud Security Misconfigurations][1] | `DD_COMPLIANCE_CONFIG_CONTAINER_INCLUDE`       | `DD_COMPLIANCE_CONFIG_CONTAINER_EXCLUDE`       |
+| [Cloud Security Vulnerabilities][2]   | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_INCLUDE`    | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_EXCLUDE`    |
+| [Workload Protection][3]              | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_INCLUDE` | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_EXCLUDE` |
+
+[1]: /security/cloud_security_management/misconfigurations/
+[2]: /security/cloud_security_management/vulnerabilities
+[3]: /security/workload_protection/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

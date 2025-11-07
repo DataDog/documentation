@@ -25,7 +25,7 @@ further_reading:
 ---
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Live Processes and Live Process Monitoring are included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
 
@@ -156,7 +156,7 @@ See the standard [DaemonSet installation][1] and the [Docker Agent][2] informati
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
-<div class="alert alert-warning">You can view your ECS Fargate processes in Datadog. To see their relationship to ECS Fargate containers, use the Datadog Agent v7.50.0 or later.</div>
+<div class="alert alert-danger">You can view your ECS Fargate processes in Datadog. To see their relationship to ECS Fargate containers, use the Datadog Agent v7.50.0 or later.</div>
 
 In order to collect processes, the Datadog Agent must be running as a container within the task.
 
@@ -186,13 +186,13 @@ For example:
 }
 ```
 
-To start collecting process information in ECS Fargate, add the [`PidMode` parameter][3] to the Task Definition and set it to `task` as follows:
+To start collecting process information in ECS Fargate, add the [`pidMode` parameter][3] to the Task Definition and set it to `task` as follows:
 
 ```text
 "pidMode": "task"
 ```
 
-Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page][1] to filter processes by ECS, or enter `fargate:ecs` in the search query.
+Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page][1] to filter for processes running in ECS, or enter `fargate:ecs` in the search query.
 
 {{< img src="infrastructure/process/fargate_ecs.png" alt="Processes in AWS Fargate" >}}
 
@@ -207,7 +207,7 @@ For more information about installing the Datadog Agent with AWS ECS Fargate, se
 
 ### I/O stats
 
-I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. To enable the process module of the system-probe, use the following configuration:
+I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. To collect these stats, enable the process module of the system-probe:
 
 1. Copy the system-probe example configuration:
 
@@ -232,46 +232,156 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
 
-### Optimize footprint for process collection
-By default, the Datadog Agent has a separate Process Agent for container and process collection. You can consolidate container and process collection to the core Agent if you're running a Linux environment.
+### Optimized process collection footprint
 
-{{< tabs >}}
-{{% tab "Helm" %}}
-Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
-```
-datadog:
-  processAgent:
-    runInCoreAgent: true
-```
-{{% /tab %}}
+<div class="alert alert-info">
+Requires Datadog Agent v7.53.0+ and Linux.<br/>
+Enabled by default in Datadog Agent v7.65.0+. <br/>
+</div>
 
-{{% tab "Operator" %}}
-Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
+On Linux, you can reduce the Datadog Agent's overall footprint by running container and process collection in the core Datadog Agent (instead of the separate Process Agent).
 
-```
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
-          value: "true"
-```
-{{% /tab %}}
+#### Enable optimized process collection
 
-{{% tab "Linux hosted" %}}
-If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
+In Datadog Agent v7.65.0+, optimized process collection is enabled by default. If you are using an earlier version of the Datadog Agent (starting with v7.53.0, but lower than v7.65.0), follow these steps to enable optimized process collection:
 
-```
-process_config:
-  run_in_core_agent:
-    enabled: true
-```
-{{% /tab %}}
-{{< /tabs >}}
+1. Edit your configuration.
+   {{< tabs >}}
+   {{% tab "Helm" %}}
+   
+   <div class="alert alert-info">If you are using the Datadog Helm chart v3.84.0+, optimized process collection is enabled by default.</div>
+
+   Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
+   ```
+   datadog:
+     processAgent:
+       enabled: true
+       runInCoreAgent: true
+   ```
+   {{% /tab %}}
+
+   {{% tab "Operator" %}}
+   Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
+
+   ```
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     override:
+       nodeAgent:
+         env:
+           - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
+             value: "true"
+   ```
+   {{% /tab %}}
+
+   {{% tab "Linux hosted" %}}
+   If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
+
+   ```yaml
+   process_config:
+     process_collection:
+       enabled: true
+     run_in_core_agent:
+       enabled: true
+   ```
+
+   In `system-probe.yaml`:
+   ```yaml
+   network_config:
+     enabled: false
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+1. Start the Datadog Agent.
+   ```
+   sudo service datadog-agent start
+   ```
+
+##### Verification
+- View your Process Agent logs (`/var/log/datadog/process-agent.log`) and verify that the Process Agent (`process-agent`) does not start.
+   For example:
+   ```
+   2024-02-14 10:45:23 PST | PROCESS | INFO | (comp/process/agent/agentimpl/agent_linux.go:44 in agentEnabled) | The process checks will run in the core agent
+   2024-02-14 10:45:23 PST | PROCESS | INFO | (command/main_common.go:193 in runApp) | process-agent is not enabled, exiting...
+   ```
+- View your core Datadog Agent logs (`/var/log/datadog/agent.log`) and verify that the Process Agent (`process-agent`) starts.
+   For example:
+   ```
+   2024-02-14 10:33:29 PST | CORE | INFO | (pkg/process/runner/runner.go:276 in Run) | Starting process-agent with enabled checks=[process rtprocess]
+   ...
+   2024-02-14 10:33:29 PST | CORE | INFO | (pkg/process/runner/runner.go:233 in logCheckDuration) | Finished process check #1 in 9.37683ms
+   ```
+- View [Process Explorer][5] in Datadog:
+   - Verify that your process and container data are visible.
+   - Verify that the `agent` process is running.
+   - Verify that the `process-agent` process is not running.
+
+#### Disable optimized process collection
+If you are using Datadog Agent v7.65.0+, or if you enabled optimized process collection in an earlier version of the Datadog Agent, follow these steps to disable optimized process collection:
+
+1. Edit your configuration.
+   {{< tabs >}}
+   {{% tab "Helm" %}}
+   Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
+   ```
+   datadog:
+     processAgent:
+       enabled: true
+       runInCoreAgent: false
+   ```
+   {{% /tab %}}
+
+   {{% tab "Operator" %}}
+   Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
+
+   ```
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     override:
+       nodeAgent:
+         env:
+           - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
+             value: "false"
+   ```
+   {{% /tab %}}
+
+   {{% tab "Linux hosted" %}}
+   If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
+
+   ```
+   process_config:
+     run_in_core_agent:
+       enabled: false
+   ```
+   In `system-probe.yaml`:
+   ```yaml
+   network_config:
+     enabled: false
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+1. Start the Datadog Agent.
+   ```
+   sudo service datadog-agent start
+   ```
+##### Verification
+- View your Process Agent logs (`/var/log/datadog/process-agent.log`) and verify that the Process Agent (`process-agent`) starts.
+   For example:
+   ```
+   2024-02-14 12:37:42 PST | PROCESS | INFO | (pkg/process/runner/runner.go:276 in Run) | Starting process-agent with enabled checks=[process rtprocess]
+   2024-02-14 12:37:42 PST | PROCESS | INFO | (pkg/process/runner/runner.go:233 in logCheckDuration) | Finished process check #1 in 9.249009ms
+   ```
+- View your core Datadog Agent logs (`/var/log/datadog/agent.log`) and verify that the Process Agent (`process-agent`) does not start.
+- View [Process Explorer][5] in Datadog:
+   - Verify that your process and container data are visible.
+   - Verify that the `process-agent` process is running.
+<div class="alert alert-info">In non-Linux environments, container and process collection <strong>always</strong> run in the separate Process Agent.</div>
 
 
 ### Process arguments scrubbing
@@ -391,8 +501,8 @@ You can also filter your processes using Datadog [tags][3], such as `host`, `pod
 Datadog automatically generates a `command` tag, so that you can filter for:
 
 - Third-party software, for example: `command:mongod`, `command:nginx`
-- Container management software, for example:  `command:docker`, `command:kubelet`)
-- Common workloads, for example:  `command:ssh`, `command:CRON`)
+- Container management software, for example:  `command:docker`, `command:kubelet`
+- Common workloads, for example:  `command:ssh`, `command:CRON`
 
 #### Containerized environment tags
 
@@ -405,14 +515,13 @@ Furthermore, processes in ECS containers are also tagged by:
 Processes in Kubernetes containers are tagged by:
 
 - `pod_name`
-- `kube_pod_ip`
 - `kube_service`
 - `kube_namespace`
 - `kube_replica_set`
 - `kube_daemon_set`
 - `kube_job`
 - `kube_deployment`
-- `Kube_cluster`
+- `kube_cluster_name`
 
 If you have configuration for [Unified Service Tagging][4] in place, `env`, `service`, and `version` are picked up automatically.
 Having these tags available lets you tie together APM, logs, metrics, and process data.
@@ -422,24 +531,24 @@ Having these tags available lets you tie together APM, logs, metrics, and proces
 
 You can create rule definitions to add manual tags to processes based on the command line.
 
-1. On the **Manage Process Tags** tab, select _New Process Tag Rule_ button
+1. On the **Manage Process Tags** tab, select the _New Process Tag Rule_ button
 2. Select a process to use as a reference
 3. Define the parsing and match criteria for your tag
 4. If validation passes, create a new rule
 
-After a rule is created, tags are available for all process command line values that match the rule criteria. These tags are be available in search and can be used in the definition of [Live Process Monitors][6] and [Custom Metrics][13].
+After a rule is created, tags are available for all process command line values that match the rule criteria. These tags are available in search and can be used in the definition of [Live Process Monitors][6] and [Custom Metrics][13].
 
 ## Scatter plot
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-To access the scatter plot analytic [in the Processes page][5] click on the _Show Summary graph_ button the select the "Scatter Plot" tab:
+To access the scatter plot analytic [in the Processes page][5] click on the _Show Summary graph_ button then select the "Scatter Plot" tab:
 
 {{< img src="infrastructure/process/scatterplot_selection.png" alt="Scatter plot selection" style="width:60%;">}}
 
-By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual pids and containers that contribute to the group.
+By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual processes and containers that contribute to the group.
 
-The query at the top of the scatter plot analytic allows you to control your scatter plot analytic:
+The options at the top of the graph allow you to control your scatter plot analytic:
 
 - Selection of metrics to display.
 - Selection of the aggregation method for both metrics.
@@ -491,7 +600,7 @@ You can customize integration views (for example, when aggregating a query for N
 
 ## Processes across the platform
 
-### Live containers
+### Live Containers
 
 Live Processes adds extra visibility to your container deployments by monitoring the processes running on each of your containers. Click on a container in the [Live Containers][9] page to view its process tree, including the commands it is running and their resource consumption. Use this data alongside other container metrics to determine the root cause of failing containers or deployments.
 
@@ -510,7 +619,7 @@ Processes are normally collected at 10s resolution. While actively working with 
 ## Additional information
 
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
+- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. If the Agent is running unprivileged, the mount does not occur. Even without access to the `/etc/passwd` file, all features except the `user` metadata field still function. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
 
 ## Further Reading
 

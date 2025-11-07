@@ -1,13 +1,14 @@
 ---
 title: Notebooks
+description: "Create collaborative rich text documents with live Datadog graphs for investigations, postmortems, runbooks, and data-driven storytelling."
 aliases:
   - /graphing/notebooks/
   - /notebooks_new/
   - /notebooks_legacy/
 further_reading:
-- link: "https://www.datadoghq.com/blog/incident-response-templates-notebooks-list/"
-  tag: "Blog"
-  text: "Create and navigate a documentation library"
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"
@@ -17,11 +18,17 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
   tag: "blog"
   text: "Transform and enrich your logs with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
+  tag: "Blog"
+  text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
+- link: "https://www.datadoghq.com/blog/finops-at-datadog/"
+  tag: "Blog"
+  text: "How we've created a successful FinOps practice at Datadog"
 ---
 
 ## Overview
 
-Notebooks are collaborative text editors that give you all the power of Datadog graphs inside your documents. Multiple users can work together to put together an investigation or postmortem featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
+Notebooks are collaborative rich text documents that give you all the power of Datadog graphs. Multiple users can work together to put together an investigation or postmortem featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
 
 ## Creating a notebook
 
@@ -30,102 +37,101 @@ You can create a notebook in two places:
 - From the left-hand navigation bar, click **Dashboards > New Notebook**.
 - On the upper-right-hand corner of the [Notebooks List page][1], click **New Notebook**.
 
-{{< img src="/notebooks/notebooks_new/new_legacy_notebook_dropdown.png" alt="Create legacy notebook through the New Notebook dropdown" style="width:100%;" >}}
-
-To create a legacy notebook, click the **New Noteboook** dropdown and select **New Legacy Notebook**. 
-
 ### Notebook templates
 
 In the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
 ## Editing a notebook
 
-With Notebooks, you can start typing using markdown shortcuts such as `#` for headers or <code>```</code> for code blocks. Notebooks comprise cells that can contain text or graphs. A new cell is created every time you press <kbd>Enter</kbd>. Notebooks automatically save your text content as you type. For graph cells, save all edits in the graph editor for the widget to be saved in the notebook.
+Notebooks offer a rich text editing experience to create and collaborate on content. You can freely type and format text using familiar toolbar options and keyboard shortcuts—such as bold, italic, headers, lists, and more—directly in the editor.
 
-### Cell types
+For users who prefer shortcuts, Notebooks also supports Markdown syntax. For example, typing `#` followed by a space creates a header, and using triple backticks (<code>```</code>) starts a code block.
 
-Notebooks support the following cell types:
+Text content is automatically saved as you type. For embedded graphs, be sure to save your changes in the graph editor to apply them within the notebook.
+
+### Content types
+
+Notebooks support various rich-text and embedded content types, including but not limited to:
+
 - [Graphs](#graphs-in-notebooks)
 - Images
 - Headers (H1 - H3)
 - Lists (bullet lists, numbered lists, and checklists)
 - Codeblocks
-- Quotes
-- [Markdown](#markdown-cells)
+- Block quotes
+- Markdown cells
+
+For the full list, type <kbd>/</kbd> into a notebook.
 
 ### Graphs in notebooks
 
 Notebooks support all widget types. For the full list, see [Widgets][3].
 
-In a notebook graph cell, hover over the widget to display options for editing and configuring the graph. 
+Hover over the widget to display options for editing and configuring graphs.
 
-To edit the query or configure the graph's display, click the pencil icon or hold down the <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> key and click on the graph to open the full graph editor. You can adjust the local timeframe or link the graph to the global notebook time by clicking the clock icon.
+To edit the query or configure the graph's display, use the **Quick Edit** feature to make most changes inline. For more advanced configuration, click the pencil icon or hold down the <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> key and click on the graph to open the full graph editor. You can adjust the local timeframe or link the graph to the global notebook time by clicking the clock icon.
 
 Additional graph configuration options are accessible under the three-dot ellipsis menu, depending on the graph type:
 - **Graph size**: Adjust the graph height by selecting XS, S, M (default), L, or XL.
 - **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for XS and S graphs.
-- **Split graph**: Display one graph per tag value to view small multiples of your visualization.
 
 ### Rich text features
 
 Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list. 
 
-| Feature       | Description                                                                                                      |
-|---------------|------------------------------------------------------------------------------------------------------------------|
-| **Bold**      | To bold text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                 |
-| *Italics*     | To italicize text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.                            |
-| `Inline code` | For inline code, type <code>`</code> at the beginning and at the end of the text.                                |
-| Codeblocks    | Insert a codeblock by typing <code>```</code> and pressing <kbd>Enter</kbd>, or by using the slash command menu. |
-| Quotes        | Insert a quote block by typing `>`, or by using the slash command menu.                                          |
+| Feature       | Description                                                                                                                |
+|---------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Bold**      | To bold text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                           |
+| *Italics*     | To italicize text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.                                      |
+| `Inline code` | For inline code, type <code>`</code> at the beginning and at the end of the text.                                          |
+| Codeblocks    | Insert a codeblock by typing <code>```</code> and pressing <kbd>Enter</kbd>, or by using the slash command menu.           |
+| Quotes        | Insert a quote block by typing `>`, or by using the slash command menu.                                                    |
+| Text tables   | Insert a table by typing `/table` or using the **Add Cell** menu.                                                          |
+| Callouts      | Insert a callout by typing `/table` or typing `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT`, or `!CAUTION` and then pressing <kbd>Space</kbd>.   |
+
+### Smart chips
+
+| Feature    | Description                                                                |
+|------------|----------------------------------------------------------------------------|
+| `@Mention` | To mention another user, type `@` followed by their name or email address. |
+| `$TemplateVariable` | Type `$` followed by the name of your existing template variable. |
+| `/date` | Add a date chip by typing `/date`. You can edit the date or time in the popover whenever you click the chip. Also try out `/today` and `/now`! |
 
 ### Slash commands
 
-Slash commands are an interface for creating graphs or cells. On a new line, type `/` to open the slash command menu. Continue typing the name of the desired cell type and select the appropriate option.
+Slash commands are an interface for creating graphs or inserting other content. On a new line, type `/` to open the slash command menu. Continue typing the name of the desired content type and select the appropriate option.
 
-{{< img src="/notebooks/notebooks_new/slash_command_menu.png" alt="Slash command menu that appears when you type / into a notebook cell" style="width:70%;" >}}
+{{< img src="/notebooks/notebooks_new/slash_command_menu.png" alt="Slash command menu that appears when you type / into a notebook" style="width:70%;" >}}
 
 When you select a graph type, it opens the [graph editor][3]. After you click **Save**, the graph appears in your notebook.
 
-### Markdown cells
+### Keyboard shortcuts
 
-Markdown cells allow you to use the legacy markdown experience in the new editor. They are most useful for the following features:
+{{< img src="/notebooks/notebook_keyboard_shortcuts.png" alt="Keyboard shortcuts menu for Datadog notebooks" style="width:70%;" >}}
 
-- Text Tables  
-- Syntax Highlighting in codeblocks  
-- Inline template variables  
-- @Mentions
+At the bottom-left corner of a notebook, click the keyboard icon to view a list of keyboard shortcuts for editing.
 
-To create a markdown cell, type `/markdown` and press <kbd>Enter</kbd>.
-
-### Moving cells
-
-You can move cells by either cutting and pasting them (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>) or by hovering over a cell and using the drag handle on the left to move it to the desired location.
+Additionally, you can use the following shortcuts to cut and paste widgets (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>).
 
 ### Table of contents 
 
-Notebooks automatically generate a table of contents from any headers you insert into your document. You can create a header using the markdown shortcut `#` or by selecting text and selecting **Header** in the toolbar.
+Notebooks automatically generate a table of contents from any headers or graphs you insert into your document. You can create a header using the markdown shortcut `#` or by selecting text and clicking **Header** in the toolbar.
 
 ### Notebook tags
 
 {{< img src="/notebooks/notebooks_new/notebook_tags.png" alt="Notebook tag options to favorite a notebook, add a team, or add a type" style="width:80%;" >}}
 
 | Tag action                | Description                                                                                                          |
-|------------------------|----------------------------------------------------------------------------------------------------------------------|
-| **Favorite a Notebook** | Favorite a notebook to pin it to the top of your results in the Notebook List page. To toggle a notebook as a favorite, click the star icon in the header of the notebook.                                                                     |
-| **Tag by Team**         | Tagging a notebook with a team allows you to use it as a filter when searching for a notebook. You can tag a notebook with up to 5 teams. To tag a notebook, click on the **Team** option in the notebook header and select the desired teams. |
-| **Tag by Type**         | You can tag your notebooks with type tags for easier searching, such as: Postmortem, Runbook, Investigation, Documentation, Report. To tag a notebook, click **Type** and select a type.                                           |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|
+| **Favorite a Notebook**   | Favorite a notebook to pin it to the top of your results in the Notebook List page. To toggle a notebook as a favorite, click the star icon in the header of the notebook.                                                                     |
+| **Tag by Team**           | Tagging a notebook with a team allows you to use it as a filter when searching for a notebook. You can tag a notebook with up to 5 teams. To tag a notebook, click on the **Team** option in the notebook header and select the desired teams. |
+| **Tag by Type**           | You can tag your notebooks with type tags for easier searching, such as: Postmortem, Runbook, Investigation, Documentation, Report. To tag a notebook, click **Type** and select a type.                                                     |
 
 ### Add images to notebooks
 
 <div class="alert alert-info">Only PNG, JPG, JPEG, and GIF file types are supported. Uploads have a max file size of 4MB.</a></div>
 
-You can add images to your notebook using either the [image cell](#image-cell) or the [Markdown editor](#markdown-editor).
-
-#### Image cell
-
-This approach places the image in a separate cell from your text, and provides options for resizing, aligning, and captioning the image. Images uploaded by the image cell are hosted by Datadog.
-
-To add an image, click the **Image** cell option in the **Add New Cell** menu. 
+You can add images to your notebook using `/image` or the **Add Cell** menu. This provides options for resizing, aligning, and captioning the image. Uploaded images are hosted by Datadog.
 
 <!-- TODO Add updated image from new notebooks -->
 
@@ -134,22 +140,8 @@ You can use any of the following options to upload an image to be hosted by Data
 - Click **Choose File** and locate the image in your file directory
 - Paste a publicly accessible URL for the image
 
-Click the icons on the cell action tray to adjust the size, alignment, add a caption for the image cell, or view the image in full screen mode.
+Click the icons on the image action tray to adjust the size, alignment, add a caption for the image, or view the image in full screen mode.
 
-<!-- TODO Add updated image from new notebooks -->
-
-#### Markdown editor
-
-This approach places the image inline with your text, but does not provide options for resizing the image.
-
-Enter edit mode on any Markdown cell and use any of the following options to add the image:
-- Drop an image file into the text cell area.
-- Copy and paste the image directly into the text cell area.
-- Hyperlink an external image using the image widget in the header or by referencing the [official Markdown guide][4].
-
-  **Note**: This option does not upload the image to be hosted by Datadog. 
-
-You can preview the image in the Preview tab before saving it to your notebook.
 
 ## Adding comments to a notebook
 
@@ -157,11 +149,11 @@ You can add comments on content in the body of the notebook. To comment on text,
 
 <!-- TODO Add updated image from new notebooks -->
 
-To comment on a graph or an image, select the cell and click on the comment icon to the right of the cell.
+To comment on a graph or an image, click on the comment icon to the right of the graph.
 
 | Feature                  | Description                                                                                                          |
 |--------------------------|----------------------------------------------------------------------------------------------------------------------|
-| **Navigating to Comments** | Saved comments appear in the right margin of the notebook. Click a comment highlight in the text to open it in the margin, or click a comment in the margin to scroll to its location in the cell. |
+| **Navigating to Comments** | Saved comments appear in the right margin of the notebook. Click a comment highlight in the text to open it in the margin, or click a comment in the margin to scroll to its location. |
 | **Responding to Comments** | Respond to comments by clicking on them in the right margin, which opens a comment box. You can write text, `@mention` a Datadog user, or resolve a comment by clicking **Resolve**. |
 | **Linking to Comments**    | Link to a specific comment by clicking the link icon in the top right corner of the comment to copy its link.      |
 | **Editing or Deleting Comments** | Edit or delete your comments by clicking the three-dot ellipsis menu in the top right corner of the comment.                 |
@@ -169,7 +161,7 @@ To comment on a graph or an image, select the cell and click on the comment icon
 
 ## Multiplayer experience in Notebooks
 
-Notebooks are collaborative, allowing multiple users to edit simultaneously. If a collaborator opens your notebook, their cursor appears. Hover over a cursor to see the collaborator's name.
+Notebooks support full collaboration, allowing multiple users to edit simultaneously. When a collaborator opens your notebook, their cursor appears in real time. Hover over a cursor to see the collaborator's name.
 
 <!-- TODO Add updated image from new notebooks -->
 
@@ -191,23 +183,25 @@ At the top of the notebook, you can see avatar images of all of the users curren
 
 Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
 
+<div class="alert alert-danger">Some Analysis features have limited or no support for template variables. For more information, see <a href="/notebooks/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a>.</div>
+
 ### Time controls
 
-By default, all graph cells are linked to the global time frame set in the notebook header.
+By default, all graphs are linked to the global time frame set in the notebook header.
 
 To view a different time frame, select an option in the global time picker, or scrub on a graph directly. The notebook URL updates to reflect this new time frame without saving it to the notebook.
 
-**Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
+**Note**: Clicking and dragging to zoom in on a graph does not unlock the graph from the global time. It changes the notebook's global time instead.
 
 <!-- TODO Add updated image from new notebooks -->
 
 To save this time as the notebook's default, click **Set Default Time**. To reset your global time back to the previously saved default global time, click the reset button.
 
-Individual cells can be unlinked from the global time and set to an independent time frame.
+Individual graphs can be unlinked from the global time and set to an independent time frame.
 
 <!-- TODO Add updated image from new notebooks -->
 
-To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
+To view a different time frame on a single graph, edit the graph and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
 ### Modes
 
@@ -218,7 +212,7 @@ You can switch between modes from within the notebook by selecting the dropdown 
 
 ### Version history
 
-From a notebook, click the cog icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][6].
+From a notebook, click the cog icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone a previous version of your notebook. For more information, see the [Version History guide][6].
 
 ### Graph snapshots
 
@@ -228,7 +222,7 @@ Notebooks can be set to automatically take snapshots of graphs that might expire
 
  Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
 
- You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
+You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
 
 To share a version of your notebook with snapshots, from the cog menu, click **View snapshots**. Copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
 
@@ -262,7 +256,7 @@ The [Notebooks List][1] page is the place to find all of your notebooks.
 
 ### Search
 
-The search field supports text search. Type your query to display the relevant notebooks as results.
+The search field supports full-text search. Type your query to display the relevant notebooks as results.
 
 ### Filtering
 
@@ -285,12 +279,6 @@ If no filters are enabled, the Jump Back In section appears, displaying the most
 ### Sorting notebooks
 
 You can sort notebooks by selecting the ⭐, details, or modified headers to sort by those values.
-
-## API access
-
-Notebooks APIs are currently being updated to support the new Notebooks product. Creating notebooks through the API places them in "compatibility mode," supporting only markdown and widget cells. 
-
-You cannot read or edit new notebooks using the notebooks API; attempts to do so result in a 400 error.
 
 ## Further reading
 

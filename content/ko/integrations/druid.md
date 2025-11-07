@@ -24,10 +24,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 캐싱(caching)
-- 데이터 스토어
+- 캐싱
+- 데이터 저장소
 - 로그 수집
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/druid/README.md
 display_on_public_website: true
@@ -42,19 +42,19 @@ name: druid
 public_title: Druid
 short_description: '쿼리, 수집, 조정과 관련된 메트릭을 추적합니다. '
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - 카테고리::캐싱(Caching)
-  - 카테고리::데이터 저장
+  - Category::Caching
+  - Category::Data Stores
   - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: 쿼리, 수집, 조정과 관련된 메트릭을 추적합니다.
   media: []
@@ -89,7 +89,7 @@ Druid 통합이 제대로 작동하려면 아래 두 단계가 모두 필요합�
 [Datadog Agent][5] 패키지에 포함된 Druid 검사를 구성하여 상태 메트릭 및 서비스 점검을 수집합니다.
 
 1. Druid 서비스 점검 수집을 시작하려면 Agent 구성 디렉터리 루트에 있는 `conf.d/` 폴더에서 `druid.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 구성 옵션은 [샘플 druid.d/conf.yaml][6]을 참조하세요.
-2. [Agent를 다시 시작][7]합니다.
+2. [에이전트를 다시 시작][7]합니다.
 
 #### 2단계: 확장 프로그램 `statsd-emitter`을 사용하여 메트릭 수집을 위해 Druid를 DogStatsD(Datadog Agent에 포함됨)에 연결합니다.
 
@@ -139,7 +139,7 @@ Druid 통합이 제대로 작동하려면 아래 두 단계가 모두 필요합�
 
 #### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
 1. 로그 수집은 Datadog Agent에서 기본적으로 비활성화되어 있습니다. datadog.yaml 파일에서 활성화하세요.
 
@@ -163,7 +163,7 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
    `path` 및 `service` 파라미터 값을 변경하고 환경에 맞게 설정합니다.
 
-3. [Agent를 다시 시작][7]합니다.
+3. [에이전트를 다시 시작][7]합니다.
 
 ### 검증
 

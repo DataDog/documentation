@@ -16,10 +16,6 @@ further_reading:
 title: 用語と概念
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Datadog Application Security はサポートされていません。</div>
-{{< /site-region >}}
-
 Datadog Application Security は、脅威を監視し、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する保護を提供します。実行時のコード実行コンテキスト、トレースおよびエラーデータ、ユーザーの属性を利用します。
 
 ## 一般的なアプリケーションセキュリティ用語

@@ -93,7 +93,7 @@ Si votre endpoint est sécurisé, une configuration supplémentaire est requise�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 
 ### Checks de service

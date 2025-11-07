@@ -225,7 +225,7 @@ Docker 컨테이너를 사용하는 경우 세 가지 옵션이 있습니다. Do
   Node.js 클라이언트 라이브러리 버전 3.21.0 이상이 필요합니다.
  </br>
   </br>
-  TypeScript 애플리케이션에 대한 코드 링크 및 스니펫을 표시하려면 Node 애플리케이션을 실행해야 합니다: 
+  TypeScript 애플리케이션에 대한 코드 링크 및 스니펫을 표시하려면 Node 애플리케이션을 실행해야 합니다:
  </br>
   <a href="https://NodeJS.org/dist/v12.22.12/docs/API/cli.html#cli_enable_source_maps"><code>--enable-source-maps</code></a>.
 </div>
@@ -391,7 +391,7 @@ Docker 컨테이너를 사용하는 경우 두 가지 옵션이 있습니다. Do
 | GitHub SaaS(github.com) | Yes | Yes |
 | GitHub Enterprise Server | Yes | Yes |
 | GitLab SaaS(gitlab.com) | Yes | Yes |
-| GitLab 자체 관리형 | Yes | No |
+| GitLab 자체 관리형 | Yes | 네(제한된 평가판) |
 | Bitbucket | Yes | No |
 | Azure DevOps Services | Yes | No |
 | Azure DevOps Server | Yes | No |
@@ -414,11 +414,11 @@ GitHub 통합을 설정하면 [**오류 추적**][103], [**연속 프로파일�
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
-자체 관리 GitLab 인스턴스의 리포지토리는 소스 코드 통합에서 바로 지원되지 않습니다. 이 기능을 사용하려면 <a href="/도움/도움말">지원팀에 문의하세요</a>.
+<div class="alert alert-danger">
+GitLab 인스턴스의 리포지토리는 제한된 평가판 상태로 제공됩니다. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">평가판을 신청하세요</a>.
 </div>
 
-텔레메트리를 소스 코드와 연결하려면 [`datadog-ci git-metadata upload`][2] 명령으로 리포지토리 메타데이터를 업로드하세요. `datadog-ci v2.10.0` 이상이 필요합니다.
+소스 코드와 원격 측정을 연결하려면 GitLab 통합을 설치하거나(제한된 평가판 신청) [`datadog-ci git-metadata upload`][2] 명령을 사용하여 리포지토리 메타데이터를 업로드하세요. `datadog-ci v2.10.0` 이상이 필요합니다.
 
 Git 리포지토리 내에서 `datadog-ci git-metadata upload`를 실행하면 Datadog는 리포지토리 URL, 현재 브랜치의 커밋 SHA, 추적된 파일 경로의 목록을 받습니다.
 
@@ -452,7 +452,7 @@ Successfully synced git DB in 3.579 seconds.
 {{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 자체 호스팅 인스턴스 또는 비공개 URL의 리포지토리는 소스 코드 통합에서 기본적으로 지원되지 않습니다. 이 기능을 사용 설정하려면 <a href="/도움/도움말">지원팀에 문의하세요</a>.
 </div>
 
@@ -520,7 +520,7 @@ GitHub(통합)를 사용 중이거나 GitLab SaaS 인스턴스(gitlab.com)에서
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="연속 프로파일러에서 GitHub 연결" style="width:100%;">}}
 
 [1]: /ko/profiler/
-[2]: https://app.datadoghq.com/profiling/search
+[2]: https://app.datadoghq.com/profiling/explorer
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 

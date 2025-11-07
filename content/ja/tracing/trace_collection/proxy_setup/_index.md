@@ -284,7 +284,7 @@ DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
 
 ## 環境変数
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> Datadog Agent のアドレスは <code>cluster</code> 設定を使用して構成されているため、変数 <code>DD_AGENT_HOST</code>、<code>DD_TRACE_AGENT_PORT</code>、<code>DD_TRACE_AGENT_URL</code> は Envoy に適用されません。
 </div>
 
@@ -380,7 +380,7 @@ http {
 
 ### コントローラ v1.10.0 以降
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>重要:</strong> <b>v1.10.0</b> のリリースに伴い、Ingress コントローラの OpenTracing と Datadog のインテグレーションは廃止されました。代替として、OpenTelemetry インテグレーションが推奨されます。<br><br>
   古いバージョンについては、<a href="#controller-v190-and-older">OpenTracing ベースの説明</a>を参照してください。
 </div>
@@ -660,7 +660,7 @@ IHS HTTP Server は基本的に Apache HTTP Server のラッパーなので、�
 
 ### インストール
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注</strong>: Apache HTTP Server 2.4.x (x86_64 アーキテクチャ) のみサポートしています。
 </div>
 

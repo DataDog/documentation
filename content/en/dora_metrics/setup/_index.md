@@ -1,5 +1,6 @@
 ---
 title: Set up DORA Metrics
+description: "Configure deployment and failure event data sources for DORA Metrics including APM Deployment Tracking, API, CLI, and incident management."
 aliases:
 - /continuous_integration/dora_metrics/setup/
 further_reading:
@@ -7,12 +8,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 

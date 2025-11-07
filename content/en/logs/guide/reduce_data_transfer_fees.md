@@ -22,11 +22,12 @@ Send data over a private network to avoid the public internet and reduce your da
 
 ## Supported cloud providers
 
-<div class="alert alert-warning">Make sure the selected Datadog site {{< region-param key="dd_site_name" code="true" >}} is correct. Cloud specific private links are not available for all Datadog sites.</div>
+<div class="alert alert-danger">Make sure the selected Datadog site {{< region-param key="dd_site_name" code="true" >}} is correct. Cloud specific private links are not available for all Datadog sites.</div>
 
 {{< whatsnext desc="Connect to Datadog over:" >}}
     {{< nextlink href="/agent/guide/private-link/?tab=crossregionprivatelinkendpoints&site=us" >}}US1 - AWS PrivateLink{{< /nextlink >}}
     {{< nextlink href="/agent/guide/private-link/?tab=crossregionprivatelinkendpoints&site=ap1" >}}AP1 - AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/private-link/?tab=crossregionprivatelinkendpoints&site=ap2" >}}AP2 - AWS PrivateLink{{< /nextlink >}}
     {{< nextlink href="/agent/guide/azure-private-link/" >}}US3 - Azure Private Link{{< /nextlink >}}
     {{< nextlink href="/agent/guide/gcp-private-service-connect/" >}}US5 - Google Cloud Private Service Connect{{< /nextlink >}}
 {{< /whatsnext >}}

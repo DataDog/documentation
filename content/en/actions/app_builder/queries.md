@@ -1,5 +1,6 @@
 ---
 title: Queries
+description: Populate apps with data from Datadog APIs and integrations using queries that connect UI components with backend actions.
 aliases:
 - /app_builder/queries
 disable_toc: false
@@ -10,10 +11,6 @@ further_reading:
   tag: "Documentation"
   text: "Build Apps"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Queries populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 
@@ -62,7 +59,7 @@ return arr
 
 ### Post-query hooks
 
-Similar to UI component events, you can configure a reaction to trigger after a query executes. A **post-query hook** can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript. For example, the [ECS Task Manager][7] blueprint's `scaleService` query uses a post-query hook to rerun the `describeService` query after it executes.
+Similar to UI component events, you can configure a reaction to trigger after a query executes. A **post-query hook** can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript. For example, the [ECS Task Balancer][7] blueprint's `scaleService` query uses a post-query hook to rerun the `describeService` query after it executes.
 
 You can use [state functions][12] in post-query hooks.
 
@@ -279,6 +276,6 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 [6]: /service_management/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
 [8]: https://datadoghq.slack.com/
-[10]: https://app.datadoghq.com/app-builder/action-catalog
+[10]: https://app.datadoghq.com/actions/action-catalog/
 [11]: /service_management/app_builder/events
 [12]: /service_management/app_builder/events/#state-functions

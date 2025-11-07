@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ko/tracing/profiler/compare_profiles/
 further_reading:
 - link: profiler/enabling
   tag: 설명서
@@ -11,7 +13,7 @@ further_reading:
   text: DataDog에서 상시 운영 환경 프로파일링 도입
 - link: https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/
   tag: 블로그
-  text: Datadog 프로파일 비교를 통해 코드를 비교하고 최적화하기
+  text: Datadog 프로파일 비교를 통한 코드 비교 및 최적화
 - link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
   tag: 블로그
   text: Datadog의 지속적 프로파일러를 사용해 Akka 애플리케이션을 최적화하는 방법
@@ -24,7 +26,7 @@ title: 프로파일 비교
 - 시간에 따른 서비스 프로파일 평균
 - 각기 다른 세트의 Datadog 태그(예: 환경, 버전, 또는 데이터 센터)를 포함하는 프로파일
 
-이를 통해 서비스에 시간이 많이 소요되는지, 메모리를 더 많거나 적게 사용하는지, 할당이 더 많거나 적은지, 예외를 더 적거나 많이 생산하는지, 과거보다 코드와 호출이 더 적거나 더 많이 포함되는지 확인할 수 있습니다. 
+이를 통해 서비스에 시간이 많이 소요되는지, 메모리를 더 많거나 적게 사용하는지, 할당이 더 많거나 적은지, 예외를 더 적거나 많이 생산하는지, 과거보다 코드와 호출이 더 적거나 더 많이 포함되는지 확인할 수 있습니다.
 
 ## 비교 시나리오
 
@@ -48,27 +50,27 @@ UI의 각기 다른 위치에서 서로 다른 유형의 비교를 열 수 있�
 
 비교하려는 메트릭(코드 언어에 따라 목록 다양)을 선택합니다. 예를 들어 CPU 프로파일 조사 중 할당 증가를 찾을 때 유용할 수 있습니다.
 
-{{< img src="profiler/compare_time_frames.mp4" alt="시간 프레임 동안의 프로파일을 집계와 비교하기 위한 비교 보기 열기" video="true">}}
+{{< img src="profiler/compare_time_period.mp4" alt="시간 프레임 동안의 프로파일을 집계와 비교하기 위한 비교 보기 열기" video="true">}}
 
 범례 색상을 기억해 둡니다. 색상은 다음을 의미합니다.
  - 짙어지는 빨간색은 프로파일 B에서 더 많은 시간이 소요된 메서드입니다.
  - 짙어지는 녹색은 프로파일 B에서 더 적은 시간이 소요된 메서드입니다.
  - 파란색은 프로파일 A에만 있는 메서드입니다.
- - 보라색은 프로파일 B에만 있는 메서드입니다. 
+ - 보라색은 프로파일 B에만 있는 메서드입니다.
 
 이러한 색상은 버전, 기간, 카나리 간 코드에서의 구조적 변화를 식별하고 성능에 미치는 영향을 파악하는 데 도움을 줍니다.
 
-{{< img src="profiler/comparison_legend.png" alt="프로파일 비교를 위한 범례" >}}
+{{< img src="profiler/compare_legend.png" alt="프로파일 비교를 위한 범례" >}}
 
 프로파일에서 메서드를 마우스로 가리켜 비교 프로파일 대비 더 많거나 적은 시간이 소요되거나, 더 많거나 적은 할당을 한 메서드에 대한 구체적인 메트릭을 확인할 수 있습니다.
 
-{{< img src="profiler/compare_hover.png" alt="메트릭 비교를 확인하려면 프로파일에서 메서드를 마우스로 가리킵니다." >}}
+{{< img src="profiler/compare_tooltip.png" alt="메트릭 비교를 확인하려면 프로파일에서 메서드를 마우스로 가리킵니다." >}}
 
 ### 최신 버전 비교
 
 집계 보기에서 서비스를 선택하여 선택한 시간 프레임에 대한 특정 메트릭(예: 실제 시간(wall time)의 집계 프로파일을 확인합니다. 그런 다음 **비교**를 클릭해 또 다른 버전의 집계 프로파일과 해당 정보를 비교합니다.
 
-{{< img src="profiler/compare_recent_versions.mp4" alt="두 버전에 대한 비교 보기 열기" video="true">}}
+{{< img src="profiler/compare_version.mp4" alt="두 버전에 대한 비교 보기 열기" video="true">}}
 
 ## 참고 자료
 

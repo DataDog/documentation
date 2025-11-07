@@ -1,5 +1,6 @@
 ---
 title: Use Private Actions
+description: Set up and use private action runners to interact with services on your private network without exposing them to the internet.
 disable_toc: false
 aliases:
 - service_management/workflows/private_actions/use_private_actions
@@ -37,6 +38,7 @@ To use App Builder with private actions, you must be able to point a hostname to
 
 In addition, the host must have the following:
 - 2GB of RAM
+- Network access to Datadog: https://{{< region-param key=dd_site >}}, https://config.{{< region-param key=dd_site >}}
 - Docker (with Docker Compose if that is your preference) or Kubernetes
 
 ## Set up a private action runner
@@ -177,6 +179,35 @@ When you see the **Ready to use** status, you can create a new connection for th
 - Click **View Runner** to see the runner on the **Private Action Runners** page.
 
 See [Connect a runner](#connect-a-runner) for more information on pairing your runner with a connection.
+
+## Manage access
+
+Use [role-based access control (RBAC)][18] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][19].
+
+You can set permissions on the runner to restrict modifications or prevent new connections from being attached. Available granular permissions include **Viewer**, **Contributor**, and **Editor**.
+
+By default, only the runner's creator has **Editor** access. The creator can grant access to additional users, service accounts, roles, or teams.
+
+### Permission levels
+
+Viewer
+: Can view the runner and the connections attached to it
+
+Contributor
+: Can view and contribute to the runner by attaching new connections to it
+
+Editor
+: Can view, contribute (attach new connections), and edit the runner
+
+### Set permissions on a runner
+
+1. Navigate to the Edit page of the runner.
+2. In the **Who Has Access?** section, click **Edit access**.
+3. Select a user, service account, role, or team from the dropdown menu, then click **Add**. The selected principal appears at the bottom of the dialog box.
+4. Next to the principal name, select your desired permission from the dropdown menu.
+5. To remove access from a principal, select **Remove access** from the permissions dropdown menu.
+6. Click **Done** to finalize the permissions setup.
+7. Click **Save** to apply the new permissions to the runner.
 
 ## Connect a runner
 
@@ -413,3 +444,5 @@ To edit the allowlist for a Private Action Runner:
 [14]: /service_management/app_builder/build
 [15]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
 [17]: /actions/private_actions/
+[18]: /account_management/rbac/
+[19]: /account_management/rbac/permissions/#app-builder--workflow-automations

@@ -14,7 +14,7 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging/
   tag: Documentación
   text: Etiquetado de servicios unificado
-- link: /tracing/service_catalog/
+- link: /tracing/software_catalog/
   tag: Documentación
   text: Descubrir y catalogar los servicios que informan a Datadog
 - link: /tracing/services/service_page/
@@ -23,24 +23,27 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: Documentación
   text: Leer sobre el Mapa de servicios
+- link: https://www.datadoghq.com/blog/monitor-connection-churn-datadog/
+  tag: Blog
+  text: Prácticas recomendadas para la monitorización y corrección del churn de conexiones
+- link: https://www.datadoghq.com/blog/software-catalog/
+  tag: Blog
+  text: Mejorar la experiencia y la colaboración de los desarrolladores con Software
+    Catalog
 title: Universal Service Monitoring
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Universal Service Monitoring no es compatible con este sitio.</div>
-{{< /site-region >}}
-
 ## Información general
 
-Universal Service Monitoring (USM) ofrece visibilidad de tus métricas de estado del servicio de forma universal en toda tu stack, _sin tener que escribir tu propio código_. Solo necesita de la presencia de un Datadog Agent configurado y [Etiquetado de servicios unificado][1], y aporta datos de rendimiento sobre tus servicios no codificados en vistas como el Catálogo de servicios y el Mapa de servicios. USM también funciona con el [Rastreo de implementación][2], monitores, dashboards y SLOs.
+Universal Service Monitoring (USM) proporciona visibilidad de las métricas de salud de tus servicios de forma universal en todo tu stack tecnológico _sin tener que instrumentar tu código_. Se basa únicamente en la presencia de un Datadog Agent configurado y el [etiquetado unificado de servicio][1], y aporta datos de rendimiento sobre tus servicios no instrumentados en vistas como Software Catalog y Mapa de servicios. USM también funciona con [Deployment Tracking][2], monitores, dashboards y SLO.
 
-{{< img src="universal_service_monitoring/usm-demo.mp4" alt="Video de demostración de Universal Service Monitoring. Una descripción general de un servicio a la que accedes pulsando un servicio en el Mapa de servicios y seleccionando View service overview (Ver descripción general del servicio)." video="true" >}}
+{{< img src="universal_service_monitoring/usm-demo.mp4" alt="Vídeo que demuestra Universal Service Monitoring. Información general de un servicio al que se accede haciendo clic en un servicio en el Mapa de servicio y seleccionando Ver información general." video="true" >}}
 
-## Configuración
+## Configurar
 
-Para más información sobre las plataformas y protocolos compatibles, y para recibir instrucciones para empezar, lee [Configurar Universal Service Monitoring][7].
+Para obtener información sobre las plataformas y protocolos compatibles y para obtener instrucciones sobre cómo empezar, lee [Configuración de Universal Service Monitoring][7].
 
-<div class="alert alert-info"><strong>Fase beta: protocolos adicionales y métodos de cifrado</strong><p>USM es compatible en fase beta con servicios de detección en la nube y con protocolos de decodificación adicionales y métodos de cifrado de tráfico. Para obtener más información y solicitar acceso a la fase beta privada, lee <a href="/universal_service_monitoring/additional_protocols/">Detección de servicios en la nube y protocolos adicionales</a>.</p></div>
+<div class="alert alert-info"><strong>Vista previa: protocolos y métodos de cifrado adicionales</strong><p>USM está en Vista previa para detectar servicios en la nube y para decodificar protocolos adicionales y métodos de encriptación de tráfico. Para obtener más información y solicitar acceso, lee <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
 
 ## Etiquetado de servicios automático
 
@@ -52,7 +55,7 @@ Para actualizar el nombre del servicio, configura [Etiquetado de servicios unifi
 
 ## Explorar tus servicios
 
-Después de configurar el Agent, espera unos cinco minutos a que tu servicio aparezca en el Catálogo de servicios. Haz clic en el servicio para ver la página de detalles del servicio. Un nombre de operación de `universal.http.server` o `universal.http.client` en la parte superior izquierda indica que la telemetría del servicio procede de Universal Service Monitoring.
+Después de configurar el Agent, espera unos cinco minutos a que tu servicio aparezca en el Software Catalog. Haz clic en el servicio para ver la página de detalles del servicio. Un nombre de operación de `universal.http.server` o `universal.http.client` en la parte superior izquierda indica que la telemetría del servicio procede de Universal Service Monitoring.
 
 El nombre de operación `universal.http.server` captura las métricas de estado para el tráfico entrante a tu servicio. El nombre de operación `universal.http.client` correspondiente representa el tráfico saliente hacia otros destinos.
 
@@ -61,7 +64,7 @@ El nombre de operación `universal.http.server` captura las métricas de estado 
 Después de activar Universal Service Monitoring, puedes:
 
 
-- Navega a **APM** > **Service Catalog** (APM > Catálogo de servicios) o **APM** > **Service Map** (APM > Mapa de servicios) para [visualizar tus servicios y sus dependencias][3].
+- Navega a **APM** > **Software Catalog** o **APM** > **Service Map** (APM > Mapa de servicios) para [visualizar tus servicios y sus dependencias][3].
 
 - Haz clic en páginas específicas de servicio para ver las métricas de señales clave (solicitudes, errores y duración) y correlacionarlas con los cambios de código recientes con [Rastreo de implementación][2].
 
@@ -69,13 +72,13 @@ Después de activar Universal Service Monitoring, puedes:
 
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/getting_started/tagging/unified_service_tagging
 [2]: /es/tracing/services/deployment_tracking/
-[3]: /es/tracing/service_catalog/
+[3]: /es/tracing/software_catalog/
 [4]: /es/monitors/types/apm/?tab=apmmetrics
 [5]: /es/dashboards/
 [6]: /es/service_management/service_level_objectives/metric/

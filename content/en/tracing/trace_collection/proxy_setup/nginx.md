@@ -62,7 +62,7 @@ if [ -z "$ARCH" ]; then
     exit 1
 fi
 
-NGINX_VERSION="1.26.0"
+NGINX_VERSION="1.29.0"
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
 TARBALL="ngx_http_datadog_module-${ARCH}-${NGINX_VERSION}.so.tgz"
 
@@ -123,7 +123,8 @@ For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-
 **2. Modify your controller's pod specification**<br>
 Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
 
-{{< highlight yaml "hl_lines=4-10 13 16-19" >}}
+
+{{< highlight yaml "hl_lines=4-10 13-16 19-22 25-26" >}}
     spec:
       template:
         spec:
@@ -137,12 +138,19 @@ Update the controller pod specification to include the init-container and config
           containers:
             - name: controller
               image: registry.k8s.io/ingress-nginx/controller:<MY_INGRESS_NGINX_VERSION>
+              volumeMounts:
+                - name: nginx-module
+                  mountPath: /opt/datadog-modules
               env:
                 - ...
                 - name: DD_AGENT_HOST
                   valueFrom:
                     fieldRef:
                       fieldPath: status.hostIP
+          volumes:
+            - ...
+            - name: nginx-module
+              emptyDir: {}
 {{< /highlight >}}
 
 **Note**: For an alternative way to access the Datadog Agent, see the [Kubernetes installation guide][1].
@@ -196,6 +204,11 @@ controller:
         # for the list of all versions supported.
         tag: "v1.10.0"
         distroless: false
+  extraEnvs:
+    - name: DD_AGENT_HOST
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
 {{< /code-block >}}
 
 **3. Deploy**<br>
@@ -327,7 +340,99 @@ To set a different service name per Ingress using annotations:
 ```
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
-## Further Reading
+## Correlating traces to logs
+
+After you've enabled APM tracing, you can connect your traces to the corresponding NGINX logs. This correlation links each trace and span to the specific log events generated during that request, allowing you to pivot between them to troubleshoot issues.
+
+### Prerequisites
+
+Before you begin, ensure that you have:
+- Enabled APM tracing for NGINX by following the steps earlier in this guide.
+- Configured Datadog log collection for NGINX.
+
+### Step 1: Inject trace and span IDs into NGINX logs
+
+Modify your `log_format` directive to include the trace ID and the span ID. The variables you use depends on your instrumentation method. Select the appropriate tab below for the instructions that match your setup.
+
+{{< tabs >}}
+{{% tab "Datadog NGINX Module" %}}
+
+If you installed the [Datadog NGINX module][100], use the `$datadog_trace_id` and `$datadog_span_id` variables. This value is `-` for requests that are not traced.
+
+Update your NGINX configuration file (for example, `/etc/nginx/nginx.conf`):
+
+```nginx
+http {
+  log_format main_datadog '$remote_addr - $remote_user [$time_local] "$request" '
+                         '$status $body_bytes_sent "$http_referer" '
+                         '"$http_user_agent" "$http_x_forwarded_for" '
+                         'dd.trace_id="$datadog_trace_id"' 'dd.span_id="$datadog_span_id"';
+
+  access_log /var/log/nginx/access.log main_datadog;
+}
+```
+[100]: https://github.com/DataDog/nginx-datadog/releases/latest
+
+{{% /tab %}}
+{{% tab "OpenTelemetry" %}}
+
+If you are using the [NGINX OpenTelemetry module][100], use the `$otel_trace_id` and `$otel_span_id` variables. This value is an empty string for requests that are not traced.
+
+Update your NGINX configuration file (for example, `/etc/nginx/nginx.conf`):
+
+```nginx
+http {
+  log_format main_opentelemetry '$remote_addr - $remote_user [$time_local] "$request" '
+                               '$status $body_bytes_sent "$http_referer" '
+                               '"$http_user_agent" "$http_x_forwarded_for" '
+                               'dd.trace_id="$otel_trace_id"' 'dd.span_id="$otel_span_id"' ;
+
+  access_log /var/log/nginx/access.log main_opentelemetry;
+}
+```
+[100]: https://nginx.org/en/docs/ngx_otel_module.html
+{{% /tab %}}
+{{< /tabs >}}
+
+After saving your changes, reload the NGINX configuration. For example:
+
+```sh
+sudo nginx -s reload
+```
+
+### Step 2: Configure the log pipeline to parse the trace and span IDs
+
+By default, logs capture `dd.trace_id` and `dd.span_id` in hexadecimal format:
+
+```
+10.244.0.1 - - [12/Sep/2025:22:41:03 +0000] "GET /health HTTP/1.1" 200 87 0.002 "-" "kube-probe/1.32" "-" dd.trace_id="68c4a17f000000009aed12af2ccb1ead" dd.span_id="9aed12af2ccb1ead"
+```
+
+To enable log and trace correlation in Datadog, configure a log processing pipeline to convert these IDs from hexadecimal to decimal. Follow the same steps regardless of the instrumentation method you use.
+
+1. In Datadog, navigate to the [**Log Configuration**][9] page.
+2. Hover over your active NGINX pipeline and click the **Clone** icon to create an editable version.
+3. Click the cloned pipeline.
+4. Click **Add Processor**.
+5. Select [Grok Parser][11] as the processor type.
+6. Define the following parsing rule to extract the trace ID attribute from a log event. This rule works for both the Datadog module and OpenTelemetry outputs:
+   ```text
+   extract_correlation_ids %{data} dd.trace_id="%{notSpace:dd.trace_id:nullIf("-")}" dd.span_id="%{notSpace:dd.span_id:nullIf("-")}"
+   ```
+7. Click **Create**.
+8. Click **Add Processor** again.
+9. Select [Trace ID Remapper][10] as the processor type. This processor associates the parsed ID with its corresponding APM trace.
+10. In the **Set trace id attribute(s)** field, enter `dd.trace_id`.
+11. Click **Create**.
+12. Click **Add Processor** again.
+13. Select [Span ID Remapper][12] as the processor type. This processor associates the parsed ID with its corresponding APM span.
+14. In the **Set span id attribute(s)** field, enter `dd.span_id`.
+15. Click **Create**.
+16. Save and enable your new pipeline.
+
+Once the pipeline is active, new NGINX logs are automatically correlated with their traces and spans.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -337,3 +442,9 @@ The above overrides the default `nginx-ingress-controller.ingress-nginx` service
 [4]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
 [6]: https://github.com/DataDog/nginx-datadog/
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+[8]: /logs/guide/ease-troubleshooting-with-cross-product-correlation
+[9]: https://app.datadoghq.com/logs/pipelines
+[10]: /logs/log_configuration/processors/?tab=ui#trace-remapper
+[11]: /logs/log_configuration/processors/?tab=ui#grok-parser
+[12]: /logs/log_configuration/processors/?tab=ui#span-remapper
+

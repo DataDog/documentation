@@ -1,9 +1,13 @@
 ---
 title: Getting Started with Datadog Support
+description: Learn best practices for contacting Datadog support through chat or tickets for technical questions and urgent issues.
 further_reading:
 - link: "https://docs.datadoghq.com/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
+- link: "/account_management/guide/access-your-support-ticket"
+  tag: "Documentation"
+  text: "Access Your Support Ticket"
 ---
 
 ## Overview
@@ -30,7 +34,7 @@ For the most efficient resolution of an issue, be ready to provide any of the re
 
 ## Chat or support ticket?
 
-Use the table below to determine whether to open a [support ticket][1] or [reach out on chat](#reaching-out-on-chat). 
+Use the table below to determine whether to open a [support ticket][1] or [reach out on chat](#reaching-out-on-chat).
 
 | Support Ticket                  | Chat        |
 | ------------------------------- | ----------- |
@@ -43,7 +47,7 @@ If you're not sure which option is best, feel free to use either channel to conn
 
 ## Reaching out on chat
 
-<div class="alert alert-warning">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
+<div class="alert alert-danger">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
 
 To get started, click **Support** on the bottom-left corner of the navigation menu.
 
@@ -53,7 +57,7 @@ When a new chat is opened, you are asked if you have a **technical** or **sales*
    - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.
    - For sales questions, you are routed to the first available member of the Datadog sales team, who can answer questions about billing and account management.
 
-**Note**: For urgent issues, it's best to reach out through a Support Ticket, and indicate why your request is urgent. This ensures that Support leadership can route your case to an appropriate expert immediately. 
+**Note**: For urgent issues, it's best to reach out through a Support Ticket, and indicate why your request is urgent. This ensures that Support leadership can route your case to an appropriate expert immediately.
 
 ### Best practices for technical questions
 
@@ -61,7 +65,7 @@ Ensure that you have as many of the relevant [prerequisites](#prerequisites) ava
 
 ### Following up
 
-When the chat closes, a support ticket is automatically created. If the issue was resolved on chat, the ticket can be closed. 
+When the chat closes, a support ticket is automatically created. If the issue was resolved on chat, the ticket can be closed.
 
 If additional investigation is required, the ticket is routed to experts in the appropriate areas, with a full transfer of the details and context provided during the chat. Use the ticket for further communication with the Datadog Support team.
 

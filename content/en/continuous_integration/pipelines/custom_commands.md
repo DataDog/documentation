@@ -8,10 +8,6 @@ further_reading:
     text: "Troubleshooting CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Custom commands provide a way to trace individual commands in your CI pipelines, allowing you to measure the time your command takes without taking into account any setup or teardown actions that the job might have (for example, downloading Docker images or waiting for an available node in a Kubernetes-based infrastructure). These spans appear as part of the pipeline's trace:
 
 {{< img src="ci/ci-custom-spans.png" alt="Details for a single pipeline with custom commands" style="width:100%;">}}
@@ -46,7 +42,7 @@ datadog-ci trace [--name <name>] -- <command>
 
 Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
 
-{{< site-region region="us,us3,eu,ap1" >}}
+{{< site-region region="us,us3,eu,ap1,ap2" >}}
 <pre>
 <code>
 DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace \
@@ -57,7 +53,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ### Configuration settings
@@ -99,7 +95,7 @@ The following environment variables are supported:
 : [Datadog API key][2] used to authenticate the requests.<br/>
 **Default**: (none)
 
-{{< site-region region="us3,us5,eu,ap1" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE`
@@ -118,7 +114,7 @@ datadog-ci trace span [--name <name>] [--start-time <timestamp-ms>] [--end-time 
 
 Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
 
-{{< site-region region="us,us3,eu,ap1" >}}
+{{< site-region region="us,us3,eu,ap1,ap2" >}}
 <pre>
 <code>
 DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace span \
@@ -128,7 +124,7 @@ DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} data
 </pre>
 {{< /site-region >}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ### Configuration settings
@@ -174,7 +170,7 @@ The following environment variables are supported:
 : [Datadog API key][2] used to authenticate the requests.<br/>
 **Default**: (none)
 
-{{< site-region region="us3,us5,eu,ap1" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE`
@@ -185,8 +181,14 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ## Known issue with GitHub Actions
 
-If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]),
-the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
+Starting with `datadog-ci` version `4.1.1`, no additional action is required, even when using custom names or matrix strategies.
+
+<details>
+<summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
+
+If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]), the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
 1. If the job name is changed using the [name property][4]:
     ```yaml
     jobs:
@@ -211,6 +213,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci trace ...
     ```
+</details>
 
 ## Troubleshooting
 

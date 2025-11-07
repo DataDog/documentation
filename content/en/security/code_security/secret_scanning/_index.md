@@ -11,7 +11,7 @@ Secret Scanning is in Preview. Contact your Customer Success Manager to get acce
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Secret Scanning is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}

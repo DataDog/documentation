@@ -312,11 +312,12 @@ Create percentile aggregations within [Distribution Metrics][1] by applying an a
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
-The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
+The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level, as well as logs sent through [automatic subscription triggers][2]. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" style="width:80%;">}}
 
 [1]: /integrations/amazon_web_services/
+[2]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#automatically-set-up-triggers
 {{% /tab %}}
 {{% tab "Service Level Objectives" %}}
 

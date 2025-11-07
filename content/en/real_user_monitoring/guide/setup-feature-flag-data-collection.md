@@ -70,43 +70,43 @@ window.DD_RUM &&
 </details>
 <br/>
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/
 {{% /tab %}}
 {{% tab "Android" %}}
 
 Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/
+[1]: /real_user_monitoring/application_monitoring/android/setup/
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
 Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
+[1]: /real_user_monitoring/application_monitoring/flutter/setup/
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
+[1]: /real_user_monitoring/application_monitoring/ios/setup
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
 
 Feature flag tracking is available for your Kotlin Multiplatform applications. To start, set up [RUM Kotlin Multiplatform monitoring][1].
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
+[1]: /real_user_monitoring/application_monitoring/kotlin_multiplatform
 {{% /tab %}}
 {{% tab "React Native" %}}
 
 Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
+[1]: /real_user_monitoring/application_monitoring/react_native/setup
 {{% /tab %}}
 {{% tab "Unity" %}}
 
 Feature flag tracking is available for your Unity applications. To start, set up [RUM Unity monitoring][1].
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/unity/setup
+[1]: /real_user_monitoring/application_monitoring/unity/setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -990,7 +990,7 @@ When performing your investigations, you can also scope your data for `View Name
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors

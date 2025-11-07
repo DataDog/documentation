@@ -15,6 +15,16 @@
           "lambdas": [
             "arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder"
           ],
+          "log_source_config": {
+            "tag_filters": [
+              {
+                "source": "s3",
+                "tags": [
+                  "test:test"
+                ]
+              }
+            ]
+          },
           "sources": [
             "s3"
           ]

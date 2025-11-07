@@ -1,5 +1,6 @@
 ---
 title: Watchdog Explains
+description: Automatically detect anomalies in timeseries graphs and identify contributing tags for faster root cause analysis.
 aliases:
     - /graphing/correlations/
     - /dashboards/correlations/
@@ -7,41 +8,57 @@ further_reading:
 - link: "/watchdog/insights/"
   tag: "Documentation"
   text: "Learn more about Watchdog Insights"
+- link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
+  tag: "Blog"
+  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
 ---
 
 ## Overview
 
-{{<callout btn_hidden="true" header="Join the Preview!">}}
-Watchdog Explains is available in Preview.
-{{</callout >}}
+Watchdog Explains is an investigation assistant that detects anomalies on timeseries graphs and identifies which tags contribute to them. This allows you to immediately focus your investigation on problematic areas of your infrastructure or software stack.
 
-<div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
+To disable Watchdog Explains, see [Disabling anomaly detection](#disabling-anomaly-detection).
 
-{{< img src="dashboards/graph_insights/watchdog_explains/watchdog_explains_walkthrough.mp4" alt="A walkthrough of the Watchdog Explains product" video=true >}}
+<div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with <strong>Metric</strong> data (avg, sum, min, and max aggregation).</div>
 
-Watchdog Explains is an investigation assistant that guides you to the root cause of anomalies on any timeseries graph. 
+## How Watchdog Explains detects anomalies
 
-In Datadog, an investigation typically starts with graphs, then branches out into investigating individual assets. Watchdog Explains makes investigations more efficient by automatically showing which individual tags account could be responsible for a given spike. This allows you to focus your investigation on problematic areas of your infrastructure or software stack.
+Watchdog Explains applies anomaly detection to graphs on your dashboard by analyzing both the shape and value of the underlying timeseries. It identifies deviations from historical patterns, flagging spikes, dips, or gradual drifts that don't align with expected behavior.
 
-## How does it work?
+To account for seasonality, the algorithm looks back up to three weeks in time. For example, if a spike appears on a Monday at 9:00 a.m., Watchdog compares that datapoint against previous Mondays at the same hour. If similar patterns appear consistently, the spike is treated as **seasonal** and not flagged as an anomaly. This helps reduce false positives and ensures that only unexpected deviations are surfaced.
 
-1. **Watchdog Explains runs anomaly detection** and determines if the graph shape or value changed from the historical pattern. It scans metric-based graphs to look for anomalies and dissects the anomaly to show which tags are responsible. 
+Anomalies can be sharp spikes or drops, but may also be more subtle trends like step changes or slope shifts.
 
-2. **Then, it runs the same query filtered on each applicable tag group**. It compares the same timeseries data across each applicable tag group against the source graph to identify which ones represent that anomalous behavior. 
-   - If a graph’s shape changes significantly by removing an individual tag group, it infers that the tag is mostly likely the cause of the spike. 
-   - Watchdog Explains shows you evidence to quantify exactly how influential a given tag is.
+<div class="alert alert-info">Anomaly detection in Watchdog Explains works with <strong>Metrics data</strong> (avg, sum, min, and max aggregation).</div>
 
+## Watchdog Explains isolates the cause with dimensional analysis
 
-## Investigate anomalies
+You can start your investigation from any timeseries graph that uses metric data. When Watchdog Explains detects an anomaly, it highlights the affected region with a pink box. To begin investigating, click **Investigate Anomaly**.
 
-Start your investigation from any timeseries metric graph. Open a graph in full screen to trigger Watchdog Explains.
+This opens a full-screen investigation view. Watchdog analyzes the anomaly and surfaces any tag groups that significantly contributed to the shape or scale of the anomaly. Click on a tag to see how removing or isolating that dimension affects the graph. Use this to identify root causes like specific customers, services, or environments.
 
-{{< img src="dashboards/graph_insights/watchdog_explains/graph_anomaly_detection.png" alt="Watchdog Explains highlights the anomalous parts of a graph based on historical data" style="width:90%;" >}}
+## Example: Surge in traffic from a single tenant
 
-Watchdog Explains highlights anomalies with a pink box. On the right side panel, you can view the tags that are responsible for the spike. Click on a tag to see evidence of how it contributes to the graph shape.
+A spike in traffic is detected in the `shopist-returns` service. Watchdog surfaces a sharp increase in request volume, highlighted on the graph. Upon investigation, it attributes the anomaly to a single tag group: `org_id:17728`
 
-{{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:90%;" >}}
+A spike in **Shopist Checkout Latency** is quickly explained by Watchdog: the `/apply-coupon` route in `eu-west-1` is the driver. This suggests that customers in that region experienced delays or were blocked when applying discount codes, directly impacting their ability to complete purchases.
 
+{{< img src="/dashboards/graph_insights/watchdog_explains/isolation_root_cause.png" alt="Example of Watchdog Explains highlighting a root cause in a timeseries graph" style="width:100%;" >}}
+
+At the same time, **Shopist Payment Error Rate** climbs. Watchdog Explains attributes the spike to `payment_provider:adyen` and a recent code change (`version:2025.08.14`). The release introduced errors that prevented some customers from completing payments, resulting in failed checkouts and revenue loss.
+
+{{< img src="/dashboards/graph_insights/watchdog_explains/isolation_tag_breakdown.png" alt="Tag breakdown in Watchdog Explains investigation" style="width:100%;" >}}
+
+By automatically surfacing these contributors, Watchdog Explains narrowed the root cause from "checkout is slow" to "coupon submissions in eu-west-1 failed due to a recent code change on Adyen." This clarity enabled a quick rollback and helped restore reliability.
+
+## Disabling anomaly detection
+
+<div class="alert alert-info">You can disable anomaly scanning on any dashboard. This only affects your view, other dashboard viewers still see anomalies unless they turn it off.
+</div>
+
+{{< img src="/dashboards/graph_insights/watchdog_explains/disable_anomaly_detection.png" alt="Disabling anomaly detection in Watchdog Explains" style="width:100%;" >}}
+
+To disable anomaly detection on a dashboard, open **Anomalies** at the top of the dashboard and click **Turn Off**.
 
 ## Further reading
 

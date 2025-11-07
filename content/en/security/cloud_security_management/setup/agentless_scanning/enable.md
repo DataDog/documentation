@@ -16,10 +16,6 @@ further_reading:
     text: "Cloud Security Agentless Scanning"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Agentless Scanning for Cloud Security is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. To learn more about Agentless Scanning's capabilities and how it works, see the [Agentless Scanning][12] docs.
 
 ## Prerequisites
@@ -27,29 +23,39 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 Before setting up Agentless Scanning, ensure the following prerequisites are met:
 
 - **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as which cloud resources to scan.
-- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are automatically applied as part of the installation process.<br><br>
-  {{< collapse-content title="AWS Host and container scanning permissions" level="h5" >}}
+- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are automatically applied as part of the installation process and are strictly limited to the minimum permissions required to perform the necessary scans, following the principle of least privilege.<br><br>
+  {{< collapse-content title="AWS scanning permissions" level="h5" >}}
+  <p>Scanning permissions:</p>
   <ul>
-    <li><code>ec2:DescribeVolumes</code></li>
-    <li><code>ec2:CreateTags</code></li>
-    <li><code>ec2:CreateSnapshot</code></li>
-    <li><code>ec2:DeleteSnapshot</code></li>
-    <li><code>ec2:DescribeSnapshots</code></li>
-    <li><code>ec2:DescribeSnapshotAttribute</code></li>
-    <li><code>ebs:ListSnapshotBlocks</code></li>
-    <li><code>ebs:ListChangedBlocks</code></li>
     <li><code>ebs:GetSnapshotBlock</code></li>
+    <li><code>ebs:ListChangedBlocks</code></li>
+    <li><code>ebs:ListSnapshotBlocks</code></li>
+    <li><code>ec2:CopySnapshot</code></li>
+    <li><code>ec2:CreateSnapshot</code></li>
+    <li><code>ec2:CreateTags</code></li>
+    <li><code>ec2:DeleteSnapshot</code></li>
+    <li><code>ec2:DeregisterImage</code></li>
+    <li><code>ec2:DescribeSnapshotAttribute</code></li>
+    <li><code>ec2:DescribeSnapshots</code></li>
+    <li><code>ec2:DescribeVolumes</code></li>
+    <li><code>ecr:BatchGetImage</code></li>
     <li><code>ecr:GetAuthorizationToken</code></li>
     <li><code>ecr:GetDownloadUrlForLayer</code></li>
-    <li><code>ecr:BatchGetImage</code></li>
+    <li><code>kms:CreateGrant</code></li>
+    <li><code>kms:Decrypt</code></li>
+    <li><code>kms:DescribeKey</code></li>
+    <li><code>lambda:GetFunction</code></li>
+    <li><code>lambda:GetLayerVersion</code></li>
+  </ul>
+  <p>Only when Sensitive Data Scanning (DSPM) is enabled:</p>
+  <ul>
+    <li><code>kms:GenerateDataKey</code></li>
+    <li><code>s3:GetObject</code></li>
+    <li><code>s3:ListBucket</code></li>
   </ul>
   {{< /collapse-content >}}
 
-  {{< collapse-content title="AWS Lambda scanning permissions" level="h5" >}}
-  <ul><li><code>lambda:GetFunction</code></li></ul>
-  {{< /collapse-content >}}
-
-  {{< collapse-content title="Azure Host scanning permissions" level="h5" >}}
+  {{< collapse-content title="Azure scanning permissions" level="h5" >}}
   <ul>
     <li><code>Microsoft.Compute/virtualMachines/read</code></li>
     <li><code>Microsoft.Compute/virtualMachines/instanceView/read</code></li>
@@ -65,7 +71,7 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
 
 ## Setup
 
-<div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
+<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
 
 To enable Agentless Scanning, use one of the following workflows:
 
@@ -80,9 +86,9 @@ Designed for new users, the quick start workflow offers an efficient setup proce
 For existing users who want to add a new AWS account or enable Agentless Scanning on an existing integrated AWS account, see the instructions for
 <a href="#terraform-setup">Terraform</a> or <a href="#aws-cloudformation-setup">AWS CloudFormation</a>.</div>
 
-<div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
+<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
 
-<div class="alert alert-warning">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
+<div class="alert alert-danger">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
 
 ##### Installation
 
@@ -110,7 +116,7 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 ##### Disable Agentless Scanning
 
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
-1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Agentless Scanning** section to the off position.
+1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Enable Vulnerability Management (Host, Container and Lambda)** section to the off position.
 1. Click **Done**.
 
 ##### Uninstall Agentless Scanning
@@ -184,7 +190,7 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 ##### Disable Agentless Scanning
 
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations**, and then expand the **AWS** or **Azure** section.
-1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Vulnerability Scanning** to the off position.
+1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Enable Vulnerability Management (Host, Container and Lambda)** to the off position.
 1. Click **Done**.
 
 ##### Uninstall with Terraform
@@ -214,9 +220,9 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 
 <div class="alert alert-info">If you're setting up Cloud Security for the first time, you can follow the <a href="#quick-start-setup">quick start workflow</a>, which also uses AWS CloudFormation to enable Agentless Scanning.</div>
 
-<div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
+<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
 
-<div class="alert alert-warning">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
+<div class="alert alert-danger">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
 
 ##### Set up AWS CloudFormation
 
@@ -265,7 +271,7 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 ##### Disable Agentless Scanning
 
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
-1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Agentless Scanning** section to the off position.
+1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Enable Vulnerability Management (Host, Container and Lambda)** section to the off position.
 1. Click **Done**.
 
 ##### Uninstall with CloudFormation
@@ -282,7 +288,7 @@ Use the Azure Resource Manager template to deploy the Agentless Scanner. The tem
 {{% collapse-content title="Azure Resource Manager setup guide" level="h4" id="azure-resource-manager-setup" %}}
 If you've already [set up Cloud Security][10] and want to add a new Azure subscription or enable [Agentless Scanning][1] on an existing integrated Azure subscription, you can use either [Terraform][7] or Azure Resource Manager. This article provides detailed instructions for the Azure Resource Manager approach.
 
-<div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
+<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
 
 {{< tabs >}}
 {{% tab "New Azure subscription" %}}
@@ -311,7 +317,7 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **Azure**.
 1. Locate your subscription's tenant, expand the list of subscriptions, and identify the subscription for which you want to disable Agentless Scanning.
-1. Click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Vulnerability Scanning** to the off position.
+1. Click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Enable Vulnerability Management (Host, Container and Lambda)** to the off position.
 1. Click **Done**.
 
 ##### Uninstall with Azure Resource Manager
@@ -331,7 +337,7 @@ If you did not use a dedicated resource group, you must manually delete the scan
 
 [1]: /security/cloud_security_management/agentless_scanning
 [2]: /integrations/amazon_web_services/
-[3]: /agent/remote_config/?tab=configurationyamlfile#setup
+[3]: /remote_configuration
 [4]: https://app.datadoghq.com/security/csm/
 [6]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
 [7]: #terraform-setup

@@ -19,7 +19,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
 
 Supported Agent versions
 : 7.36.1+
@@ -190,7 +190,10 @@ To monitor Aurora hosts, install the Datadog Agent in your infrastructure and co
 
 ### Autodiscovery setup (recommended)
 
-The Datadog Agent supports Autodiscovery of all Aurora endpoints in a cluster. Unless you want different configurations for different instances, or want to find and list Aurora endpoints manually, follow the [Autodiscovery setup instructions for Aurora DB clusters][9] instead of the manual setup section below.
+The Datadog Agent supports Autodiscovery for all Aurora endpoints within a cluster.
+
+If you require different configurations for specific instances, or prefer to manually specify Aurora endpoints, follow the manual setup section below.
+Otherwise, Datadog recommends using the [Autodiscovery setup instructions for Aurora DB clusters][9].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -211,15 +214,11 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
          instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
          region: '<REGION>'
 
-       ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
-       # pg_stat_statements_view: datadog.pg_stat_statements()
-       # pg_stat_activity_view: datadog.pg_stat_activity()
-
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
 2. [Restart the Agent][2].
 
@@ -366,7 +365,7 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
-  
+
 ### Helm
 
 Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the Postgres integration:
@@ -436,14 +435,11 @@ instances:
     tags:
     - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
 
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 ### Configure with Kubernetes service annotations
 
-Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 #### Autodiscovery annotations v2
 
@@ -456,7 +452,7 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+    ad.datadoghq.com/service.checks: |
       {
         "postgres": {
           "init_config": <INIT_CONFIG>,
@@ -477,7 +473,7 @@ metadata:
             }
           ]
         }
-      }      
+      }
 spec:
   ports:
   - port: 5432

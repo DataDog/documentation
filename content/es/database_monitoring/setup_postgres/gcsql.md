@@ -20,8 +20,8 @@ El Agent recopila telemetría directamente de la base de datos iniciando sesión
 
 ## Antes de empezar
 
-Versiones de PostgreSQL compatibles
-: 10, 11, 12, 13, 14, 15
+Versiones PostgreSQL compatibles
+: 10, 11, 12, 13, 14, 15, 16, 17
 
 Versiones del Agent compatibles
 : v7.36.1 o posterior
@@ -47,7 +47,6 @@ Configura los siguientes [parámetros][3] en las [marcas de bases de datos][4] y
 | `pg_stat_statements.max` | `10000` | Opcional. Aumenta el número de consultas normalizadas rastreadas en `pg_stat_statements`. Este parámetro se recomienda para bases de datos de gran volumen que reciben muchos tipos diferentes de consultas de muchos clientes distintos. |
 | `pg_stat_statements.track_utility` | `off` | Opcional. Deshabilita comandos de utilidad como PREPARE y EXPLAIN. Configurar este valor en `off` significa que sólo se rastrearán consultas como SELECT, UPDATE y DELETE. |
 | `track_io_timing` | `on` | Opcional. Habilita la recopilación de los tiempos de lectura y escritura de bloques para las consultas. |
-
 
 ## Conceder acceso al Agent 
 
@@ -137,7 +136,8 @@ Para monitorizar hosts de Cloud SQL, instala el Datadog Agent en tu infraestruct
 
 Para configurar la recopilación de métricas de Database Monitoring para un Agent que se ejecuta en un host, por ejemplo cuando se aprovisiona una pequeña instancia de GCE para que el Agent recopile desde una base de datos Cloud SQL:
 
-1. Edita el archivo `postgres.d/conf.yaml` para que apunte a tu `host` / `port` y configura los principales para monitorizar. Ppara conocer todas las opciones de configuración disponibles, consulta la [muestra de postgres.d/conf.yaml][1]. La localización del directorio `postgres.d` depende de tu sistema operativo. Para obtener más información, consulta el [directorio de configuración del Agent][4].
+1. Edita el archivo `postgres.d/conf.yaml` para que apunte a tu `host` / `port` y configura los maestros para monitorizar. Consulta el [ejemplo de postgres.d/conf.yaml][1] para conocer todas las opciones disponibles de configuración. La localización del directorio `postgres.d` depende de tu sistema operativo. Para obtener más información, consulta [Directorio de configuración del Agent][3].
+
    ```yaml
    init_config:
    instances:
@@ -146,36 +146,35 @@ Para configurar la recopilación de métricas de Database Monitoring para un Age
        port: 5432
        username: datadog
        password: 'ENC[datadog_user_database_password]'
-       ## Optional: Connect to a different database if needed for `custom_queries`
-       # dbname: '<DB_NAME>'
-
-       # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
        gcp:
         project_id: '<PROJECT_ID>'
         instance_id: '<INSTANCE_ID>'
-   ```
-2. [Reinicia el Agent][2].
 
-Para obtener información adicional sobre la configuración de los campos `project_id` y `instance_id`, consulta las [especificaciones para la integración Postgres][3].
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+2. [Reinicia el Agent][2].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /es/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[4]: /es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[3]: /es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 {{% /tab %}}
-{{% tab "Docker" %}}
 
-Para configurar el Database Monitoring Agent que se ejecuta en un contenedor de Docker, como en Google Cloud Run, puedes definir las [plantillas de integración Autodiscovery][1] como etiquetas (labels) de Docker en tu contenedor del Agent.
+{{% tab "Docker" %}}
+Para configurar una integración para un Agent que se ejecuta en un contenedor de Docker como en Google Cloud Run, tienes un par de métodos disponibles, todos los cuales están cubiertos en detalle en la [Documentación de configuración de Docker][1].
+
+Los siguientes ejemplos muestran cómo utilizar [Etiquetas de Docker][2] y [Plantillas de Autodiscovery][3] para configurar la integración de Postgres.
 
 **Nota**: El Agent debe tener permiso de lectura en el socket de Docker para que las etiquetas (labels) de Autodiscovery funcionen.
 
 ### Línea de comandos
 
-Ponte en marcha rápidamente con el siguiente comando para ejecutar el Agent desde tu línea de comandos. Sustituye los valores para que coincidan con tu cuenta y tu entorno:
+Ejecuta el siguiente comando desde tu [línea de comandos][4] para iniciar el Agent. Sustituye los valores de los marcadores de posición por los de tu cuenta y entorno.
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.36.1
+export DD_AGENT_VERSION=<AGENT_VERSION>
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -200,30 +199,89 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Las etiquetas también pueden especificarse en un `Dockerfile`, por lo que puedes crear y desplegar un Agent personalizado sin cambiar la configuración de tu infraestructura:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.36.1
+FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-Para obtener información adicional sobre la configuración de los campos `project_id` y `instance_id`, consulta las [especificaciones para la integración Postgres][2].
+Para evitar exponer la contraseña del usuario `Datadog` en texto plano, utiliza el [paquete de gestión de secretos][5] del Agent y declara la contraseña utilizando la sintaxis `ENC[]`. Alternativamente, consulta la [documentación de variables de plantilla de Autodiscovery][6] para proporcionar la contraseña como una variable de entorno.
 
-[1]: /es/agent/docker/integrations/?tab=docker
-[2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
+[1]: /es/containers/docker/integrations/?tab=labels#configuration
+[2]: https://docs.docker.com/engine/manage-resources/labels/
+[3]: /es/getting_started/containers/autodiscovery/
+[4]: /es/containers/docker/integrations/?tab=labels#using-docker-run-nerdctl-run-or-podman-run
+[5]: /es/agent/configuration/secrets-management
+[6]: /es/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Si tienes un clúster de Kubernetes, utiliza el [Datadog Cluster Agent][1] para la Monitorización de base de datos.
+Si estás ejecutando el clúster de Kubernetes, utiliza el [Datadog Cluster Agent ][1] para activar Database Monitoring.
 
-Sigue las instrucciones para [habilitar checks de clúster][2], si no están habilitados en tu clúster de Kubernetes. Puedes declarar la configuración de Postgres mediante archivos estáticos montados en el contenedor del Cluster Agent o utilizando anotaciones de servicios:
+**Nota**: Asegúrate de que los [checks de clúster][2] estén activados para tu Datadog Cluster Agent antes de continuar.
+
+A continuación encontrarás instrucciones paso a paso para configurar la integración de Postgres utilizando diferentes métodos de despliegue del Datadog Cluster Agent .
+
+### Operación
+
+Tomando como referencia las [Instrucciones para operadores en Kubernetes e integraciones][3], sigue los pasos que se indican a continuación para configurar la integración de Postgres:
+
+1. Crea o actualiza el archivo `Datadog-Agent.yaml` con la siguiente configuración:
+
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterName: <CLUSTER_NAME>
+        site: <DD_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-agent-secret
+            keyName: api-key
+
+      features:
+        clusterChecks:
+          enabled: true
+
+      override:
+        nodeAgent:
+          image:
+            name: agent
+            tag: <AGENT_VERSION>
+
+        clusterAgent:
+          extraConfd:
+            configDataMap:
+              postgres.yaml: |-
+                cluster_check: true
+                init_config:
+                instances:
+                - host: <INSTANCE_ADDRESS>
+                  port: 5432
+                  username: datadog
+                  password: 'ENC[datadog_user_database_password]'
+                  dbm: true
+                  gcp:
+                    project_id: '<PROJECT_ID>'
+                    instance_id: '<INSTANCE_ID>'
+    ```
+
+2. Aplica los cambios al Operador Datadog utilizando el siguiente comando:
+
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
 
 ### Helm
 
-Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu clúster de Kubernetes. Sustituye los valores para que coincidan con tu cuenta y tu entorno.
+Tomando como referencia las [instrucciones de Helm en Kubernetes e integraciones][4], sigue los pasos que se indican a continuación para configurar la integración de Postgres:
 
-1. Sigue las [instrucciones de instalación del Datadog Agent][3] para Helm.
-2. Actualiza tu archivo de configuración YAML (`datadog-values.yaml` en las instrucciones de instalación del Cluster Agent) para incluir lo siguiente:
+1. Actualiza tu archivo `Datadog-values.yaml` (utilizado en las instrucciones de instalación del Cluster Agent) con la siguiente configuración:
+
     ```yaml
     clusterAgent:
       confd:
@@ -244,32 +302,22 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
       enabled: true
     ```
 
-   Para Postgres v9.6, añade los siguientes parámetros a la configuración de la instancia donde se especifican el host y el puerto:
+2. Despliega el Agent con el archivo de configuración anterior utilizando el siguiente comando:
 
-    ```yaml
-    pg_stat_statements_view: datadog.pg_stat_statements()
-    pg_stat_activity_view: datadog.pg_stat_activity()
-    ```
-
-3. Despliega el Agent con el archivo de configuración anterior desde la línea de comandos:
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
 
 <div class="alert alert-info">
-Para Windows, añade <code>--set targetSystem=Windows</code> al comando <code>helm install</code>.
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /es/getting_started/site
-[3]: /es/containers/kubernetes/installation/?tab=helm#installation
-
-### Configurar con archivos integrados
+### Configuración con archivos integrados
 
 Para configurar un check de clúster con un archivo de configuración montado, monta el archivo de configuración del contenedor del Cluster Agent en la ruta: `/conf.d/postgres.yaml`:
 
 ```yaml
-cluster_check: true  # Asegúrate de incluir esta marca
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
@@ -277,15 +325,16 @@ instances:
     port: 5432
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-    # Después de añadir tu proyecto e instancia, configura la integración de Datadog con GCP para extraer datos de nube adicionales, como CPU y memoria, entre otros.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-### Configurar con anotaciones de servicios de Kubernetes
+### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de integrar un archivo, puedes declarar la configuración de la instancia como servicio de Kubernetes. Para configurar este check en un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio con la siguiente sintaxis:
+
+#### Anotaciones de Autodiscovery v2
 
 ```yaml
 apiVersion: v1
@@ -296,22 +345,24 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/service.check_names: '["postgres"]'
-    ad.datadoghq.com/service.init_configs: '[{}]'
-    ad.datadoghq.com/service.instances: |
-      [
-        {
-          "dbm": true,
-          "host": "<INSTANCE_ADDRESS>",
-          "port": 5432,
-          "username": "datadog",
-          "password": "ENC[datadog_user_database_password]",
-          "gcp": {
-            "project_id": "<PROJECT_ID>",
-            "instance_id": "<INSTANCE_ID>"
-          }
+    ad.datadoghq.com/postgres.checks: |
+      {
+        "postgres": {
+          "instances": [
+            {
+              "dbm": true,
+              "host": "<INSTANCE_ADDRESS>",
+              "port": 5432,
+              "username": "datadog",
+              "password": "ENC[datadog_user_database_password]",
+              "gcp": {
+                "project_id": "<PROJECT_ID>",
+                "instance_id": "<INSTANCE_ID>"
+              }
+            }
+          ]
         }
-      ]
+      }
 spec:
   ports:
   - port: 5432
@@ -320,22 +371,25 @@ spec:
     name: postgres
 ```
 
-Para obtener información adicional sobre la configuración de los campos `project_id` y `instance_id`, consulta las [especificaciones para la integración Postgres][4].
+Para obtener más información, consulta [Anotaciones de Autodiscovery][5].
 
 El Cluster Agent registra automáticamente esta configuración y comienza a ejecutar el check de Postgres.
 
-
-[1]: /es/agent/cluster_agent
-[2]: /es/agent/cluster_agent/clusterchecks/
-[3]: https://helm.sh
-[4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
+[1]: /es/containers/cluster_agent/setup/
+[2]: /es/containers/cluster_agent/clusterchecks/
+[3]: /es/containers/kubernetes/integrations/?tab=datadogoperator
+[4]: /es/containers/kubernetes/integrations/?tab=helm
+[5]: /es/containers/kubernetes/integrations/?tab=annotations#configuration
+[6]: /es/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
+
+Consulta la [especificación de integración de Postgres][13] para obtener información adicional sobre la configuración de los campos `project_id` y `instance_id`.
 
 ### Validación
 
 [Ejecuta el subcomando de estado del Agent][9] y busca `postgres` en la sección Checks o visita la página [Bases de datos][10] para empezar.
-## Ejemplo de configuraciones del Agent
+## Configuraciones del Agent de ejemplo
 {{% dbm-postgres-agent-config-examples %}}
 
 ## Instalar la integración Cloud SQL
@@ -362,3 +416,4 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 [10]: https://app.datadoghq.com/databases
 [11]: /es/integrations/google_cloudsql
 [12]: /es/database_monitoring/troubleshooting/?tab=postgres
+[13]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L638-L662

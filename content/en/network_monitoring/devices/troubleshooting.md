@@ -12,14 +12,14 @@ further_reading:
 
 Use the information below for troubleshooting Datadog Network Device Monitoring. If you need additional help, contact [Datadog support][1].
 
-### Device not visible in Datadog
+## Device not visible in Datadog
 
 The following assumes you are running Datadog Agent v7.61.0+.
 
 If your device is not visible on the [Devices][2] page:
 
-1. Run the [datadog-agent status][3] command and look for the snmp section, which contains your device's monitoring IP. After you start the Agent, it may take up to one minute for NDM to discover individually configured devices. If your Agent is set to scan a large number of devices, it may take longer. 
-The output should look similar to the following: 
+1. Run the [datadog-agent status][3] command and look for the snmp section, which contains your device's monitoring IP. After you start the Agent, it may take up to one minute for NDM to discover individually configured devices. If your Agent is set to scan a large number of devices, it may take longer.
+The output should look similar to the following:
 
    ```
    snmp
@@ -34,15 +34,15 @@ The output should look similar to the following:
      Average Execution Time : 0s
      Last Execution Date : 2024-11-13 13:12:09 PST / 2024-11-13 21:12:09 UTC (1731532329000)
      Last Successful Execution Date : Never
-     Error: <ERROR MESSAGE> 
+     Error: <ERROR MESSAGE>
      No traceback
    ```
 
-2. If your device is not listed, and you are using Autodiscovery, it likely means the Agent could not connect to your device. 
+2. If your device is not listed, and you are using Autodiscovery, it likely means the Agent could not connect to your device.
 
    - Run the `datadog-agent status` command, and wait for the `autodiscovery` section to report that all possible device IPs have been scanned. On large networks this can take a several minutes. The output should look similar to the following:
-  
-    ``` 
+
+    ```
     Autodiscovery
     =============
     Subnet 127.0.0.1/24 is queued for scanning.
@@ -57,9 +57,9 @@ The output should look similar to the following:
 
     If Autodiscovery completed and your device is still not appearing on the [Devices][2] page, it means the Agent could not connect to your device.
 
-   - Run an `snmp walk` on the device's admin IP to determine why the Agent cannot connect to your device. 
+   - Run an `snmp walk` on the device's admin IP to determine why the Agent cannot connect to your device.
 
-   **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files. 
+   **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files.
 
    **Linux**: <br />
      SNMP v2:
@@ -70,25 +70,25 @@ The output should look similar to the following:
       ```
       sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
       ```
-      **Windows**:   
+      **Windows**:
       ```
       agent snmp walk <IP Address>[:Port]
 
-      Example:           
-      agent.exe snmp walk  10.143.50.30 1.3.6 
+      Example:
+      agent.exe snmp walk  10.143.50.30 1.3.6
       ```
 
     Refer to your vendor specific documentation for additional information on running these commands.
 
-### Troubleshooting SNMP Errors
+## Troubleshooting SNMP errors
 
 If either the SNMP status or Agent walk shows an error, it could indicate one of the following issues:
 
-#### Permission denied
+### Permission denied
 
 If you see a permission denied error while port binding in agent logs, the port number you've indicated may require elevated permissions. To bind to a port number under 1024, see [Using the default SNMP Trap port 162][8].
 
-#### Unreachable or misconfigured device:
+### Unreachable or misconfigured device:
 
    **Error**:
    ```plaintext
@@ -112,18 +112,18 @@ If you see a permission denied error while port binding in agent logs, the port 
       ```
    3. Ensure your community string matches.
 
-#### Incorrect SNMPv2 credentials
+### Incorrect SNMPv2 credentials
 
    **Error**:
    ```
    Error: an authentication method needs to be provided
-   ``` 
+   ```
 
    **Solution**:
 
    If using SNMPv2, ensure that a community string is set.
 
-#### Incorrect SNMPv3 privacy protocol
+### Incorrect SNMPv3 privacy protocol
 
    **Error**:
    ```
@@ -145,6 +145,65 @@ If you see a permission denied error while port binding in agent logs, the port 
    - privKey
    - privProtocol
 
+### Traps or Flows not being received at all
+
+If SNMP traps or NetFlow traffic are missing, a common cause is firewall rules blocking UDP packets before they reach the Agent. Both SNMP traps and NetFlow rely on UDP and use the ports defined in your [datadog.yaml][9] configuration.
+
+<div class="alert alert-info">Local firewalls like Uncomplicated Firewall (UFW) may block traffic even when configured with permissive settings. Check system logs for blocked packet entries, which typically indicate that traffic reached the network interface but was blocked before reaching the operating system.</div>
+
+Use the following platform-specific commands to check for firewall rules that may be blocking the traffic from reaching the Agent.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Linux has multiple types of firewalls, such as `iptables`, `nftables`, or `ufw`. Depending on which is in use, the following commands can be used:
+
+- `sudo iptables -S`
+
+- `sudo nft list ruleset`
+
+- `sudo ufw status`
+
+Check for rules blocking UDP traffic on the configured ports.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Starting with version `7.67`, the Agent's `datadog-agent diagnose` command automatically checks for blocking firewall rules and displays warnings if any are found.
+
+To manually inspect firewall rules:
+
+```powershell
+Get-NetFirewallRule -Action Block | ForEach-Object {
+    $rule = $_
+    Get-NetFirewallPortFilter -AssociatedNetFirewallRule $rule | Select-Object
+        @{Name="Name"; Expression={$rule.Name}},
+        @{Name="DisplayName"; Expression={'"' + $rule.DisplayName + '"'}},
+        @{Name="Direction"; Expression={$rule.Direction}},
+        @{Name="Protocol"; Expression={$_.Protocol}},
+        @{Name="LocalPort"; Expression={$_.LocalPort}},
+        @{Name="RemotePort"; Expression={$_.RemotePort}}
+} | Format-Table -AutoSize
+```
+
+Look for rules where:
+- **Direction** is inbound
+- **Protocol** is UDP
+- **LocalPort** matches one of your configured ports
+
+{{% /tab %}}
+{{% tab "MacOS" %}}
+
+Run the following command to review Packet Filter (pf) rules:
+
+```shell
+sudo pfctl -sr
+```
+
+Check for any rules blocking UDP traffic on your configured ports. For example:`block drop in proto udp from any to any port = <CONFIG_PORT>`.
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Traps not being received for devices
 
 1. Check the Datadog `agent.log` file to ensure that you can bind to the traps port. The following error indicates that you are unable to bind to the traps port:
@@ -154,22 +213,22 @@ If you see a permission denied error while port binding in agent logs, the port 
    ```
 
    **Solution**:
-   Add a net bind capability to the Agent binary, which allows the Agent to bind to reserved ports: 
+   Add a net bind capability to the Agent binary, which allows the Agent to bind to reserved ports:
 
    ```
    sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
    ```
 
-#### Traps incorrectly formatted
+### Traps incorrectly formatted
 
 1. Navigate to the troubleshooting dashboard in NDM:
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_troubleshooting_dashboard.png" alt="The Network Device Monitoring page showing the Dashboard dropdown with the NDM Troubleshooting dashboard highlighed." style="width:80%;" >}}
 
-2. Scroll down to the Traps widget and observe the **Traps incorrectly formatted** graph. If this is non-zero it likely means that the authentication on the NDM collector and the device do not match. 
+2. Scroll down to the Traps widget and observe the **Traps incorrectly formatted** graph. If this is non-zero it likely means that the authentication on the NDM collector and the device do not match.
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_traps_dashboard.png" alt="The NDM troubleshooting dashboard showing the Traps widget section." style="width:100%;" >}}
-   
+
    **Solution**:
 
      Verify that the following configurations in the `datadog.yaml` file align with the trap settings on the devices from which traps are missing:
@@ -212,10 +271,11 @@ If you see a permission denied error while port binding in agent logs, the port 
 
 
 [1]: /help
-[2]: https://app.datadoghq.com/infrastructure/devices
+[2]: https://app.datadoghq.com/devices
 [3]: /agent/configuration/agent-commands/#agent-information
 [4]: /api/latest/network-device-monitoring/
 [5]: /api/latest/network-device-monitoring/#get-the-list-of-interfaces-of-the-device
 [6]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [7]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [8]: /network_monitoring/devices/snmp_traps/#using-the-default-snmp-trap-port-162
+[9]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

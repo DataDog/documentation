@@ -28,14 +28,11 @@ further_reading:
       tag: "Documentation"
       text: "Learn how to troubleshoot Test Optimization"
 cascade:
+    site_support_id: test_optimization
     algolia:
         rank: 70
         tags: ['ci test', 'ci tests', 'test optimization', 'test visibility', 'failed test', 'flaky test', 'supported features']
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -71,6 +68,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} |           |                        |
 | {{< ci-details title="Early flake detection *" >}}Automatically <a href="/tests/flaky_test_management/early_flake_detection">retry new tests</a> to detect flakiness.{{< /ci-details >}}                                          | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Auto test retries *" >}}Automatically <a href="/tests/flaky_test_management/auto_test_retries">retry failed tests</a> up to N times to avoid failing the build due to test flakiness.{{< /ci-details >}}    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="Failed test replay *" >}}<a href="/tests/flaky_test_management/auto_test_retries#failed-test-replay">Access local variable information</a> on retried failed tests.{{< /ci-details >}}                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |                       |           |           |                        |
 | {{< ci-details title="Selenium RUM integration" >}}Automatically <a href="/tests/browser_tests">link browser sessions to test cases</a> when testing RUM-instrumented applications.{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
 
 \* The feature is opt-in, and needs to be enabled on the [**Test Optimization Settings** page][2].

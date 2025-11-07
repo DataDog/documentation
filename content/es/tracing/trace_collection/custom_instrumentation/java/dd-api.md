@@ -22,13 +22,13 @@ type: multi-code-lang
 
 En esta página, se detallan casos de uso comunes para añadir y personalizar la observabilidad con Datadog APM. Si no has leído las instrucciones de configuración para la instrumentación automática, comienza por las [Instrucciones de configuración de Java][11].
 
-<div class="alert alert-info">El rastreador de Datadog Java se basa en OpenTracing. Aunque OpenTracing está obsoleto en OpenTelemetry, los siguientes ejemplos importan correctamente la biblioteca de <code>opentracing</code>.</div>
+<div class="alert alert-info">El rastreador de Datadog Java se basa en OpenTracing. Aunque OpenTracing está obsoleto en OpenTelemetry, los siguientes ejemplos importan correctamente la librería de <code>opentracing</code>.</div>
 
 ## Añadir etiquetas
 
-Añade [etiquetas (tags) de tramo (span)][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación dentro de Datadog. Las etiquetas de tramo se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información a nivel de código, como el nivel de comerciante, el importe del pago o el ID de usuario.
+Añade [etiquetas (tags) de tramo (span)][1] personalizadas a tus [tramos][2] para personalizar tu capacidad de observación dentro de Datadog. Las span tags se aplican a tus trazas entrantes, lo que te permite correlacionar el comportamiento observado con información a nivel de código, como el nivel de comerciante, el importe del pago o el ID de usuario.
 
-### Añadir etiquetas de tramo personalizadas
+### Añadir span tags personalizadas
 
 Añade etiquetas personalizadas a tus tramos correspondientes a cualquier valor dinámico dentro de tu código de aplicación como `customer.id`.
 
@@ -111,7 +111,7 @@ import java.io.StringWriter;
     }
 ```
 
-**Nota**: Puedes añadir cualquier metadato de error relevante listado en los [documentos de vista de traza][3]. Si el tramo actual no es el tramo raíz, márcalo como error usando la biblioteca `dd-trace-api` para tomar el tramo raíz con `MutableSpan`, luego usa `setError(true)`. Consulta la sección [configuración de etiquetas y errores en un tramo raíz][4] para obtener más detalles.
+**Nota**: Puedes añadir cualquier metadato de error relevante listado en los [documentos de vista de traza][3]. Si el tramo actual no es el tramo raíz, márcalo como error usando la librería `dd-trace-api` para tomar el tramo raíz con `MutableSpan`, luego usa `setError(true)`. Consulta la sección [configuración de etiquetas y errores en un tramo raíz][4] para obtener más detalles.
 
 ### Configuración de etiquetas y errores en un tramo raíz desde un tramo secundario
 

@@ -36,7 +36,7 @@ draft: false
 git_integration_title: tokumx
 integration_id: tokumx
 integration_title: TokuMX
-integration_version: 3.2.0
+integration_version: 3.2.1
 is_public: true
 manifest_version: 2.0.0
 name: tokumx
@@ -71,7 +71,7 @@ tile:
 
 ## 概要
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 このインテグレーションはメンテナンスモードで、Python 2 でのみ動作します。
 v7.37 以降の Agent には含まれていませんが、:6 のバグフィックスリリースには引き続き含まれます。
 </div>

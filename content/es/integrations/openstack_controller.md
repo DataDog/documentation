@@ -32,7 +32,7 @@ categories:
 - suministrar
 - orquestación
 - configuración y despliegue
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md
 display_on_public_website: true
@@ -40,7 +40,7 @@ draft: false
 git_integration_title: openstack_controller
 integration_id: openstack-controller
 integration_title: OpenStack Controller
-integration_version: 8.0.0
+integration_version: 8.6.0
 is_public: true
 manifest_version: 2.0.0
 name: openstack_controller

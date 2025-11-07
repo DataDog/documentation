@@ -44,7 +44,8 @@ Sets the version of the service.
 : **Since**: 0.1.0 <br>
 **Default**: `true` <br>
 Submit or not traces to the Datadog Agent. <br>
-When `false`, the library stop sending traces to the Datadog Agent. However, the library continues to generate traces, report telemetry and poll for remote configuration updates.
+When `false`, the library stop sending traces to the Datadog Agent. However, the library continues to generate traces, report telemetry and poll for remote configuration updates.<br/>
+See also [DD_APM_TRACING_ENABLED][6].
 
 `DD_TRACE_AGENT_PORT`
 : **Since**: v0.1.0 <br>
@@ -64,11 +65,6 @@ If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` t
 : **Since**: 0.1.0 <br>
 **Default**: `200` <br>
 Maximum number of traces allowed to be submitted per second.
-
-`DD_SPAN_SAMPLING_RULES`
-: **Version**: v0.1.0 <br>
-**Default**: `null`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between `0.0` and `1.0` (inclusive).
 
 `DD_SPAN_SAMPLING_RULES_FILE`
 : **Since**: 0.1.0 <br>
@@ -133,15 +129,15 @@ When multiple values are given, the order of matching is based on the order of v
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Since**: v0.1.6 <br>
-**Default**: `datadog,tracecontext` <br>
-**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
+**Default**: `datadog,tracecontext,baggage` <br>
+**Accepted values**: `datadog`, `tracecontext`, `b3`, `baggage` <br>
 Comma separated list of propagation styles to use when injecting tracing context.
 When multiple values are given, the order of matching is based on the order of values.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **Since**: v0.1.6 <br>
-**Default**: `datadog,tracecontext` <br>
-**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
+**Default**: `datadog,tracecontext,baggage` <br>
+**Accepted values**: `datadog`, `tracecontext`, `b3`, `baggage`  <br>
 Comma separated list of propagation styles to use when extracting tracing context.
 When multiple values are given, the order of matching is based on the order of values.
 
@@ -153,4 +149,5 @@ When multiple values are given, the order of matching is based on the order of v
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
 [3]: /agent/configuration/network/#configure-ports
 [4]: /tracing/configure_data_security#telemetry-collection
-[5]: /agent/remote_config
+[5]: /remote_configuration
+[6]: /tracing/trace_collection/library_config/#traces

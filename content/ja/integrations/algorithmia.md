@@ -25,7 +25,7 @@ author:
   sales_email: support@algorithmia.io
   support_email: support@algorithmia.io
 categories:
-- メトリクス
+- モニター
 - ai/ml
 custom_kind: インテグレーション
 dependencies:

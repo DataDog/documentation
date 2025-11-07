@@ -14,10 +14,6 @@ further_reading:
 title: (LEGACY) Configuraciones
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED de Datadog.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Las configuraciones del worker de Observability Pipelines pueden recopilar, transformar y enrutar tus logs desde cualquier origen a cualquier destino. El archivo de configuración admite YAML, TOML y JSON. Los tres componentes principales de configuración son los orígenes, las transformaciones y los sinks.

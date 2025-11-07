@@ -1,4 +1,7 @@
 ---
+description: Guía paso a paso para desplegar e instrumentar una aplicación Ruby on
+  Rails en Heroku con Datadog para recopilar métricas, logs, trazas (traces) y datos
+  de integración.
 further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: Documentación
@@ -9,7 +12,7 @@ further_reading:
 title: Instrumentar una aplicación de Ruby on Rails en Heroku con Datadog
 ---
 
-Heroku es una plataforma popular entre los desarrolladores de Ruby y, más específicamente, los de Ruby on Rails. Datadog es compatible con Heroku y Ruby, por lo que puedes enviar las métricas, logs y trazas (traces) de tu aplicación de Ruby en Heroku a Datadog.
+Heroku es una plataforma popular entre los desarrolladores de Ruby y, más específicamente, los de Ruby on Rails. Datadog es compatible con Heroku y Ruby, por lo que puedes enviar las métricas, logs y trazas de tu aplicación de Ruby en Heroku a Datadog.
 
 En esta guía, te explicaremos los pasos necesarios para utilizar una aplicación de Rails desplegada en Heroku y hacer que las métricas, datos de integración, logs y trazas se envíen a Datadog.
 
@@ -521,7 +524,7 @@ Collector
 [...]
 
 ```
-## Trazas (traces)
+## Trazas
 
 Habilita la instrumentación para obtener un rastreo distribuido de tu aplicación de Ruby en Heroku.
 
@@ -615,10 +618,10 @@ Dirígete a la [sección de trazas de APM][19] para ver tus trazas:
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Trazas de aplicaciones de Ruby en Datadog" >}}
 
-Accede al [Catálogo de servicios][20] para ver todos tus servicios de aplicaciones y una vista de tus servicios de aplicaciones:
+Ve al [Catálogo de software][20] para ver todos los servicios de tu aplicación y la vista de servicios de tu aplicación:
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Catálogo de servicios en Datadog" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Página de detalles de servicios de la aplicación Ruby en Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Catálogo de software en Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Página de información de servicios de aplicaciones en Datadog" >}}
 
 ## Logs
 
@@ -772,7 +775,7 @@ Para obtener más información sobre el significado de cada uno de estos valores
 
 Sigue los mismos pasos de la sección anterior para generar métricas con una retención de 15 meses para cada una de esas medidas.
 
-#### Correlaciona logs y trazas
+#### Correlacionar logs y trazas
 
 Si sigues las instrucciones de configuración anteriores, los logs enviados desde la purga de logs de Heroku se correlacionan con las trazas.
 

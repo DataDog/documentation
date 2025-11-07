@@ -57,7 +57,6 @@ require('dd-trace').init({
 })
 ```
 
-By default, the page shown in response to a blocked action looks like this:
 
 [101]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.html
 [102]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-bootstrap/src/main/resources/datadog/trace/bootstrap/blocking/template.json

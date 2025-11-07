@@ -13,7 +13,7 @@ code_lang_weight: 60
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
   tag: Documentación
-  text: Conectar logs de aplicaciones .NET con trazas
+  text: Conectar logs de aplicaciones .NET con trazas (traces)
 - link: /tracing/metrics/runtime_metrics/dotnet/
   tag: Documentación
   text: Métricas de tiempos de ejecución
@@ -28,10 +28,10 @@ further_reading:
   text: Monitorización .NET con Datadog APM y rastreo distribuido
 - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
   tag: Blog
-  text: Monitorización de aplicaciones contenedorizadas de ASP.NET Core
+  text: Monitorización de aplicaciones contenedorizadas ASP.NET Core
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
   tag: Blog
-  text: Despliegue de aplicaciones de ASP.NET Core en Azure App Service
+  text: Despliegue de aplicaciones ASP.NET Core en Azure App Service
 - link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
   tag: Blog
   text: Optimizar el rendimiento de tu aplicación .NET con el Datadog Continuous Profiler
@@ -49,9 +49,9 @@ type: lenguaje de código múltiple
 
 ### Tiempos de ejecución .NET Core compatibles
 
-El rastreador de .NET es compatible con la instrumentación en .NET Core 2.1, .NET Core 3.1, .NET 5, .NET 6, .NET 7 y .NET 8.
+El rastreador de .NET es compatible con la instrumentación en .NET Core 3.1, .NET 5, .NET 6, .NET 7, .NET 8 y .NET 9.
 
-Para ver una lista completa de las compatibilidades de la arquitectura de la biblioteca y del procesador de Datadog .NET Core (incluyendo las versiones heredadas y de mantenimiento), consulta los [requisitos de compatibilidad][1].
+Para ver la lista completa de los requisitos de compatibilidad de la librería .NET Core y de la arquitectura de procesadores de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta los [requisitos de compatibilidad][1].
 
 ## Para instalar y empezar a utilizar
 
@@ -59,12 +59,12 @@ Para ver una lista completa de las compatibilidades de la arquitectura de la bib
     Para configurar Datadog APM en AWS Lambda, consulta el <strong><a href="/tracing/serverless_functions/">rastreo de funciones serverless</a></strong>en Azure App Service y también el <strong><a href="/serverless/azure_app_services/">rastreo en Azure App Service</a></strong>.
 </div>
 
-<div class="alert alert-warning">
- <strong>Nota:</strong> La instrumentación automática de Datadog se basa en la API de generación de perfiles CLR de .NET. Esta API sólo permite un suscriptor (por ejemplo, Datadog APM). Para garantizar la máxima visibilidad, ejecuta sólo una solución APM en tu entorno de aplicación. 
+<div class="alert alert-danger">
+ <strong>Nota:</strong> La instrumentación automática de Datadog se basa en la API de generación de perfiles CLR de .NET. Esta API sólo permite un suscriptor (por ejemplo, Datadog APM). Para garantizar la máxima visibilidad, ejecuta sólo una solución APM en tu entorno de aplicación.
 </div>
 
 <div class="alert alert-info">
-  Para instrumentar aplicaciones recortadas, consulta el paquete NuGet <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> de tu proyecto. La compatibilidad con aplicaciones recortadas está en fase Beta.
+  Para instrumentar aplicaciones recortadas, haz referencia al paquete <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> de NuGet en tu proyecto.
 </div>
 
 ### Instalación
@@ -77,9 +77,9 @@ Antes de empezar, asegúrate de haber [instalado y configurado el Agent][12].
 
 ### Instalación del rastreador
 
-Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la biblioteca de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
+Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la librería de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
 
-Puedes instalar el rastreador de .NET de Datadog en toda la máquina para que se instrumenten todos los servicios de la máquina, o puedes instalarlo aplicación por aplicación para que los desarrolladores gestionen la instrumentación a través de las dependencias de la aplicación. Para ver más instrucciones sobre la instalación en toda la máquina, haz clic en la pestaña de Windows o Linux. Para ver más instrucciones sobre la instalación aplicación por aplicación, haz clic en la pestaña de NuGet.
+Puedes instalar el rastreador .NET de Datadog en toda la máquina para que se instrumenten todos los servicios de la máquina, o puedes instalarlo aplicación por aplicación para que los desarrolladores gestionen la instrumentación a través de las dependencias de la aplicación. Para ver más instrucciones sobre la instalación en toda la máquina, haz clic en la pestaña de Windows o Linux. Para ver más instrucciones sobre la instalación aplicación por aplicación, haz clic en la pestaña de NuGet.
 
 {{< tabs >}}
 
@@ -87,11 +87,11 @@ Puedes instalar el rastreador de .NET de Datadog en toda la máquina para que se
 
 Para instalar el rastreador .NET en toda la máquina:
 
-1. Descarga el [instalador MSI del rastreador .NET][1]. Selecciona el instalador MSI que corresponda a la arquitectura del sistema operativo (x64 ó x86).
+1. Descarga el [instalador de .NET Tracer MSI][1]. Utiliza el instalador MSI x64 si estás ejecutando Windows de 64 bits; éste puede instrumentar tanto aplicaciones de 64 bits como de 32 bits. Elige el instalador x86 sólo si estás ejecutando Windows de 32 bits. A partir de la versión 3.0.0, sólo se proporciona el instalador x64, ya que no admitimos sistemas operativos de 32 bits.
 
 2. Ejecuta el instalador MSI del rastreador .NET con privilegios administrativos.
 
-También puedes aplicar un script para la configuración de MSI ejecutando lo siguiente en PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
+También puedes aplicar un script para la configuración del MSI ejecutando lo siguiente en PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
@@ -135,7 +135,7 @@ COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota:</strong> Esta instalación no instrumenta aplicaciones que se ejecutan en IIS. En el caso de aplicaciones que se ejecutan en IIS, sigue el proceso de Windows para la instalación en toda la máquina.
 </div>
 
@@ -162,7 +162,7 @@ Para obtener más información sobre los diferentes métodos de configurar varia
 
 1. El instalador MSI del rastreador .NET añade todas las variables de entorno necesarias. No necesitas configurar ninguna variable de entorno.
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> You must set the <strong>.NET CLR version</strong> for the application pool to <strong>No Managed Code</strong> as recommended by <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
    </div>
 
@@ -174,20 +174,17 @@ Para obtener más información sobre los diferentes métodos de configurar varia
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
 #### Servicios que no se encuentran en IIS
 
-<div class="alert alert-info">Cuando inicias v2.14.0, no necesitas configurar <code>CORECLR_PROFILER</code>, si ya has instalado el rastreador utilizando el MSI.</div>
-
 1. Configura las siguientes variables de entorno, obligatorias para la instrumentación automática, a fin de adjuntarlas a tu aplicación:
 
    ```
    CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. En el caso de aplicaciones y servicios de Windows independientes, debes reiniciar la aplicación manualmente.
 
@@ -231,39 +228,39 @@ Después de activar el rastreador .NET para tu servicio:
 
 ## Configuración
 
-Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][4].
+Si es necesario, configura la librería de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de librerías][4].
 
 ## Instrumentación personalizada
 
-Tu configuración de la instrumentación personalizada depende de tu instrumentación automática e incluye pasos adicionales que dependen del método:
+La instrumentación personalizada depende de tu instrumentación automática e incluye pasos adicionales según el método:
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
-<div class="alert alert-warning">
-  <strong>Nota:</strong> Si estás utilizando la instrumentación automática y la personalizada, debes mantener sincronizadas las versiones del paquete (por ejemplo: MSI y NuGet).
+<div class="alert alert-danger">
+  <strong>Nota:</strong> A partir de la versión 3.0.0, la instrumentación personalizada requiere el uso de la instrumentación automática. Debes intentar mantener sincronizadas las versiones automáticas y personalizadas del paquete de instrumentación (por ejemplo: MSI y NuGet) y asegurarte de no mezclar versiones principales de paquetes.
 </div>
 
 Para utilizar la instrumentación personalizada en tu aplicación .NET:
 
-1. Añade el [paquete NuGet][1] `Datadog.Trace` a tu aplicación.
-2. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos (spans).
-
+1. Instrumenta tu aplicación utilizando la instrumentación automática.
+2. Añade el [paquete NuGet][1] `Datadog.Trace` a tu aplicación.
+3. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
 {{% /tab %}}
 
 {{% tab "Linux" %}}
 
-<div class="alert alert-warning">
-  <strong>Nota:</strong> Si estás utilizando la instrumentación automática y la personalizada, debes mantener sincronizadas las versiones del paquete (por ejemplo: MSI y NuGet).
+<div class="alert alert-danger">
+  <strong>Nota:</strong> A partir de la versión 3.0.0, la instrumentación personalizada requiere el uso de la instrumentación automática. Debes intentar mantener sincronizadas las versiones automáticas y personalizadas del paquete de instrumentación (por ejemplo: MSI y NuGet) y asegurarte de no mezclar versiones principales de paquetes.
 </div>
 
 Para utilizar la instrumentación personalizada en tu aplicación .NET:
-1. Añade el [paquete NuGet][1] `Datadog.Trace` a tu aplicación.
-2. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
-
+1. Instrumenta tu aplicación utilizando la instrumentación automática.
+2. Añade el [paquete NuGet][1] `Datadog.Trace` a tu aplicación.
+3. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
 {{% /tab %}}
@@ -286,19 +283,20 @@ Para adjuntar la instrumentación automática a tu servicio, debes configurar la
 
 ### Windows
 
-#### Servicios de Windows
+<div class="alert alert-danger">
+  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar la librería de .NET en <em>cualquier</em> proceso de .NET que se inicia con estas variables de entorno configuradas. Deberías limitar la instrumentación a solo las aplicaciones que deben instrumentarse. <strong>No configures estas variables de entorno de forma global ya que esto causará la instrumentación de <em>todos</em> los procesos de .NET en el host.</strong>
+</div>
 
-<div class="alert alert-info">Cuando inicias v2.14.0, no necesitas configurar <code>CORECLR_PROFILER</code>, si ya has instalado el rastreador utilizando el MSI.</div>
+#### Servicios de Windows
 
 {{< tabs >}}
 
-{{% tab "Editor de registro" %}}
+{{% tab "Registry Editor (Editor de registro)" %}}
 
-En el Editor de registro, crea un valor de cadena múltiples llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` y configura los datos de valor como:
+En el Editor de registro, crea un valor de cadena múltiple llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` y configura los datos de valor como:
 
 ```text
 CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Uso del Editor de registro para crear variables de entorno para un servicio de Windows" >}}
@@ -308,8 +306,7 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value 'CORECLR_ENABLE_PROFILING=1'
 ```
 {{% /tab %}}
 
@@ -319,7 +316,7 @@ Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Env
 
 Una vez instalado el MSI, no es necesaria ninguna configuración adicional para instrumentar tus sitios de IIS automáticamente. Sigue los siguientes pasos para configurar variables de entorno adicionales, heredadas por todos los sitios de IIS:
 
-1. Abre el Editor de registro, busca el valor de cadenas múltiples llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\WAS` y añade las variables de entorno, una por cada línea. Por ejemplo, para añadir la inyección de logs y métricas de tiempos de ejecución, añade las siguientes líneas a los datos de valor:
+1. Abre el Editor de registro, busca el valor de cadena múltiple llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\WAS` y añade las variables de entorno, una por cada línea. Por ejemplo, para añadir la inyección de logs y métricas de tiempos de ejecución, añade las siguientes líneas a los datos de valor:
    ```text
    DD_LOGS_INJECTION=true
    DD_RUNTIME_METRICS_ENABLED=true
@@ -338,12 +335,10 @@ Una vez instalado el MSI, no es necesaria ninguna configuración adicional para 
 Para instrumentar una aplicación de consola automáticamente, antes de iniciar tu aplicación configura las variables de entorno desde un archivo de lote:
 
 ```bat
-rem Configura variables de entorno
+rem Set required environment variables
 SET CORECLR_ENABLE_PROFILING=1
-rem Unless v2.14.0+ and you installed the tracer with the MSI
-SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
-rem Set additional Datadog environment variables
+rem (Optional) Set additional Datadog environment variables, for example:
 SET DD_LOGS_INJECTION=true
 SET DD_RUNTIME_METRICS_ENABLED=true
 
@@ -358,17 +353,17 @@ dotnet.exe example.dll
 Para configurar las variables de entorno obligatorias desde un archivo bash antes de iniciar tu aplicación:
 
 ```bash
-# Configura variables de entorno
+# Set required environment variables
 export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
-# Configura variables de entorno de Datadog adicionales
+# (Optional) Set additional Datadog environment variables, for example:
 export DD_LOGS_INJECTION=true
 export DD_RUNTIME_METRICS_ENABLED=true
 
-# Inicia tu aplicación
+# Start your application
 dotnet example.dll
 ```
 
@@ -379,37 +374,38 @@ dotnet example.dll
 Para configurar las variables de entorno obligatorias en un contenedor Docker de Linux:
 
   ```docker
-  # Configura variables de entorno
+  # Set required environment variables
   ENV CORECLR_ENABLE_PROFILING=1
   ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
   ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
   ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 
-  # Configura variables de entorno de Datadog adicionales
+  # (Optional) Set additional Datadog environment variables, for example:
   ENV DD_LOGS_INJECTION=true
   ENV DD_RUNTIME_METRICS_ENABLED=true
 
-  # Inicia tu aplicación
+  # Start your application
   CMD ["dotnet", "example.dll"]
   ```
 
 #### `systemctl` (por servicio)
 
-Cuando utilizas `systemctl` para ejecutar aplicaciones de .NET como un servicio, puedes añadir las variables de entorno necesarias para que se carguen para un servicio específico.
+Cuando utilizas `systemctl` para ejecutar aplicaciones .NET como un servicio, puedes añadir las variables de entorno necesarias para que se carguen para un servicio específico.
 
 1. Crea un archivo llamado `environment.env` que contenga:
 
     ```ini
+    # Set required environment variables
     CORECLR_ENABLE_PROFILING=1
     CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
     DD_DOTNET_TRACER_HOME=/opt/datadog
 
-    # Set additional Datadog environment variables
+    # (Optional) Set additional Datadog environment variables, for example:
     DD_LOGS_INJECTION=true
     DD_RUNTIME_METRICS_ENABLED=true
     ```
-2. En el archivo de configuración del servicio, indica esto como un [`EnvironmentFile`][1] en el bloque de servicios:
+2. En el archivo de configuración del servicio, haz referencia a esto como un [`EnvironmentFile`][1] en el bloque de servicios:
 
     ```ini
     [Service]
@@ -420,21 +416,22 @@ Cuando utilizas `systemctl` para ejecutar aplicaciones de .NET como un servicio,
 
 #### `systemctl` (todos los servicios)
 
-<div class="alert alert-warning">
-  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar un generador de perfiles en <em>cualquier</em> proceso de .NET que se inicia con estas variables de entorno configuradas. Debes limitar la instrumentación sólo a aplicaciones que necesitan ser rastreadas. <strong>No debes configurar estas variables de entorno globalmente, ya que esto lleva que <em>todos</em> los procesos de .NET en el host carguen el generador de perfiles.</strong>
+<div class="alert alert-danger">
+  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar la librería de .NET en <em>cualquier</em> proceso de .NET que se inicia con estas variables de entorno configuradas. Deberías limitar la instrumentación a solo las aplicaciones que deben instrumentarse. <strong>No configures estas variables de entorno de forma global ya que esto causará la instrumentación de <em>todos</em> los procesos de .NET en el host.</strong>
 </div>
 
-Cuando utilizas `systemctl` para ejecutar aplicaciones de .NET como un servicio, también puedes configurar variables de entorno para que se carguen para todos los servicios que ejecuta `systemctl`.
+Cuando utilizas `systemctl` para ejecutar aplicaciones .NET como un servicio, también puedes configurar variables de entorno para que se carguen para todos los servicios que ejecuta `systemctl`.
 
 1. Ejecuta [`systemctl set-environment`][6] para configurar las variables de entorno obligatorias:
 
     ```bash
+    # Set required environment variables
     systemctl set-environment CORECLR_ENABLE_PROFILING=1
     systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
     systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
 
-    # Set additional Datadog environment variables
+    # (Optional) Set additional Datadog environment variables, for example:
     systemctl set-environment DD_LOGS_INJECTION=true
     systemctl set-environment DD_RUNTIME_METRICS_ENABLED=true
     ```
@@ -442,7 +439,7 @@ Cuando utilizas `systemctl` para ejecutar aplicaciones de .NET como un servicio,
 
 3. Reinicia el servicio de .NET para aplicar las variables de entorno.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

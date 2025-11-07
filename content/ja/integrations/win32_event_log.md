@@ -33,7 +33,7 @@ draft: false
 git_integration_title: win32_event_log
 integration_id: event-viewer
 integration_title: Windows Event Log
-integration_version: 5.0.0
+integration_version: 5.2.1
 is_public: true
 manifest_version: 2.0.0
 name: win32_event_log

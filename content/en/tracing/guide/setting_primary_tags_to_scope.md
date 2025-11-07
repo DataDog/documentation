@@ -1,5 +1,6 @@
 ---
 title: Set Primary Tags to Scope
+description: Learn how to set primary tags to scope and filter APM data across different environments, services, and versions for better organization.
 aliases:
   - /tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
@@ -150,6 +151,8 @@ DD_APM_FEATURES=enable_cid_stats
 Restart the Agent. Go to the [APM Settings][6] page and select the additional primary tag you want to use. It can take up to two hours for changes to this setting to take effect. 
 
 Now you can filter your services in the [Software Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
+
+**Note**: Primary tag values should not contain capital letters or special characters (aside from underscores, minuses, colons, periods, and slashes). If they do, some features may not work properly.
 
 ### Custom labels as tags
 

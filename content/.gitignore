@@ -1,3 +1,13 @@
-# GENERATED FILE: DO NOT EDIT
-# Ignore .md files compiled from Markdoc
+
+# THIS IS A GENERATED FILE. Manual edits will be overwritten. 
+
+# To ignore a content file manually, add it to the .gitignore file in the root of the documentation repository: https://github.com/DataDog/documentation/blob/master/.gitignore
+
+# This file lists compiled Cdocs files to keep them out of version control. For more information, see the internal Cdocs documentation: https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4898063037/Cdocs+Build
+
+/en/product_analytics/session_replay/mobile/privacy_options.md
+/en/product_analytics/session_replay/mobile/setup_and_configuration.md
 /en/real_user_monitoring/guide/proxy-mobile-rum-data.md
+/en/real_user_monitoring/guide/proxy-rum-data.md
+/en/real_user_monitoring/session_replay/mobile/privacy_options.md
+/en/real_user_monitoring/session_replay/mobile/setup_and_configuration.md

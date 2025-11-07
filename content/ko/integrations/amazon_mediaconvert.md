@@ -9,7 +9,7 @@ assets:
     metrics:
       check:
       - aws.mediaconvert.hdoutput_duration
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.mediaconvert.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -25,6 +25,7 @@ categories:
 - 메트릭
 - 로그 수집
 - 클라우드
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -33,7 +34,6 @@ integration_id: amazon-mediaconvert
 integration_title: Amazon MediaConvert
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_mediaconvert
 public_title: Amazon MediaConvert
@@ -46,6 +46,7 @@ tile:
   - Category::Metrics
   - Category::Log Collection
   - Category::Cloud
+  - 제공::통합
   configuration: README.md#Setup
   description: 텔레비전 및 연결 디바이스에서 비디오 형식을 만들고 압축하기
   media: []
@@ -57,7 +58,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
-Amazon Elemental MediaConvert는 오프라인 비디오 컨텐츠의 형식을 지정하고 압축해 텔레비전이나 연결된 디바이스로 전송하는 서비스입니다.
+AWS Elemental MediaConvert는 오프라인 비디오 컨텐츠의 형식을 지정하고 압축해 텔레비전이나 연결된 디바이스로 전송하는 서비스입니다.
 
 이 통합을 활성화하면 Elemental MediaConvert 메트릭 전체를 Datadog에서 확인할 수 있습니다.
 
@@ -70,25 +71,25 @@ Amazon Elemental MediaConvert는 오프라인 비디오 컨텐츠의 형식을 �
 ### 메트릭 수집
 
 1. [AWS 통합 페이지][2]에서 `Metric Collection` 탭 아래 `MediaConvert`가 활성화되어 있는지 확인하세요.
-2. [Datadog - Amazon Elemental MediaConvert 통합][3]을 설치하세요.
+2. [Datadog - AWS Elemental MediaConvert 통합][3]을 설치하세요.
 
 ### 로그 수집
 
 #### 로깅 활성화
 
-S3 버킷이나 CloudWatch로 로그를 전송하도록 Amazon ElementalConvert를 구성하세요.
+S3 버킷이나 CloudWatch로 로그를 전송하도록 AWS ElementalConvert를 설정하세요.
 
 **참고**: S3 버킷에 로깅하는 경우 `amazon_mediaconvert`가 _Target prefix_로 지정되어야 합니다.
 
-#### Datadog에 로그 전송
+#### Datadog로 로그 전송
 
 1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][4]를 설정하세요.
-2. Lambda 함수를 설치한 후 AWS 콘솔에서 Amazon Elemental MediaConvert 로그를 포함하는 S3 버킷이나 CloudWatch 로그 그룹에 수동으로 트리거를 추가하세요.
+2. Lambda 함수가 설치되면, AWS 콘솔에서 AWS Elemental MediaConvert 로그를 포함하는 S3 버킷이나 CloudWatch 로그 그룹에 수동으로 트리거를 추가하세요.
 
-    - [S3 버킷에서 직접 트리거 추가][5]
+    - [S3 버킷에서 수동 트리거 추가][5]
     - [CloudWatch 로그 그룹에 수동으로 트리거 추가][6]
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "amazon_mediaconvert" >}}
@@ -96,11 +97,11 @@ S3 버킷이나 CloudWatch로 로그를 전송하도록 Amazon ElementalConvert�
 
 ### 이벤트
 
-Amazon Elemental MediaConvert 통합에는 이벤트가 포함되어 있지 않습니다.
+AWS Elemental MediaConvert 통합에는 이벤트가 포함되지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
-Amazon Elemental MediaConvert 통합에는 서비스 점검이 포함되어 있지 않습니다.
+AWS Elemental MediaConvert 통합에는 서비스 점검이 포함되지 않습니다.
 
 ## 트러블슈팅
 
@@ -110,7 +111,7 @@ Amazon Elemental MediaConvert 통합에는 서비스 점검이 포함되어 있�
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-mediaconvert
 [4]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mediaconvert/amazon_mediaconvert_metadata.csv
+[5]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[7]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_mediaconvert/assets/metrics/metric-spec.yaml
 [8]: https://docs.datadoghq.com/ko/help/

@@ -76,7 +76,7 @@ Aucune métrique n'est recueillie.
 Le check reboot_required n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "reboot_required" >}}
+{{< get-service-checks-from-git "reboot-required" >}}
 
 
 ## Dépannage

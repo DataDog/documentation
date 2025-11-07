@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Incident Management
+description: Track and communicate issues from declaration through resolution with collaborative workflows, timelines, and postmortems.
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
@@ -37,7 +38,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">Incident Management is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Incident Management is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 ## Overview
@@ -166,7 +167,7 @@ In the _Notifications_ section, you can send out a notification updating the sta
 8. For the timeline section, select **Marked as Important** so that only the _Important_ events are added to the postmortem.
 9. Click **Generate**.
 
-The postmortem is generated as a Datadog Notebook, and it includes the timeline events and resources referenced during the investigation and remediation. This makes it easier to review and further document what caused the issue and how to prevent it in the future. Datadog Notebook supports live collaboration so you can edit it with your teammates in real-time.
+The postmortem is generated as a Datadog Notebook or Confluence page, and it includes the timeline events and resources referenced during the investigation and remediation. This makes it easier to review and further document what caused the issue and how to prevent it in the future.
 
 If there are follow-up tasks that you and your team need to complete to ensure the issue doesn't happen again, add those and track them in the Remediation's _Incident Tasks_ section.
 
@@ -185,8 +186,8 @@ The [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google
 
 You can also declare and edit incidents and quickly communicate to your teams through integrations with Slack, Zoom, and many more.
 
-{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
-  
+{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Two views in the Datadog Mobile App: one showing an incidents list with high-level details about each incident, and one showing a detailed panel for a single incident">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

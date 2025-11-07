@@ -22,7 +22,7 @@ Handover automations run automatically at the start or end of an on-call shift. 
 By using built-in automations instead of maintaining cron jobs or custom tools, you can streamline operations, eliminate manual steps, and ensure the right actions always run when a shift changes.
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If you need a specific action that isn't listed, contact your account representative or <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.
 </div>
 

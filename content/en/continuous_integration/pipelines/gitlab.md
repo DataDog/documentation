@@ -14,10 +14,6 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling automated, continuous deployment of applications with built-in security controls.
@@ -172,7 +168,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 Then, configure the integration on a [project][103] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
 
-<div class="alert alert-danger">Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI.</div>
+<div class="alert alert-warning">Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI.</div>
 
 
 Fill in the integration configuration settings:
@@ -216,7 +212,7 @@ You can test the integration with the **Test settings** button (only available w
 
 {{% tab "GitLab &lt; 13.7" %}}
 
-<div class="alert alert-warning">Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
+<div class="alert alert-danger">Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
 
 For older versions of GitLab, you can use [webhooks][101] to send pipeline data to Datadog.
 
@@ -309,6 +305,8 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitLab.
 
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
+
 For a full explanation, see the guide on [using CI jobs failure analysis][28].
 
 #### Errors provided by GitLab
@@ -371,7 +369,7 @@ To enable collection of job logs:
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 15.3" %}}
-<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+<div class="alert alert-danger">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
 This means that for Datadog servers to access the storage, the storage must not have network restrictions
 The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 
@@ -381,7 +379,7 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 14.8" %}}
-<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+<div class="alert alert-danger">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
 This means that for Datadog servers to access the storage, the storage must not have network restrictions
 The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 
@@ -452,3 +450,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [27]: /continuous_integration/search/#search-for-pipelines
 [28]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [29]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[30]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments

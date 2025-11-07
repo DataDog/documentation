@@ -1,5 +1,6 @@
 ---
 title: Analyze RUM Sessions Using Sheets
+description: "Enrich RUM session data with Reference Tables and analyze premium user error impact using lookups and pivot tables in Sheets."
 further_reading:
 - link: "/sheets/"
   tag: "Documentation"
@@ -26,6 +27,7 @@ To start your analysis, create a table of RUM sessions in Datadog Sheets:
      ```
      @session.error.count:>=2 @session.type:user
      ```
+     {{< img src="/sheets/guide/rum_analysis/rum_explorer_open_in_sheets.png" alt="RUM Sessions Explorer showing a query filtering for sessions with 2 or more errors and user session type" style="width:100%;" >}}
 1. Click on **Open in Sheets** to create a new table with your filtered RUM sessions data.
 
 ## Uploading data to Reference Tables
@@ -63,7 +65,6 @@ You have a web application and want to understand how errors are impacting your 
      ```
      @session.error.count:>=2 @session.type:user
      ```
-     {{< img src="/sheets/guide/rum_analysis/rum_sessions_explorer.png" alt="RUM Session Explorer showing a query filtering @session.error.count:>=2 and @session.type:user" style="width:100%;" >}}
 1. Click **Open in Sheets** to create a table with the filtered sessions.
 
 ### Enrich Data

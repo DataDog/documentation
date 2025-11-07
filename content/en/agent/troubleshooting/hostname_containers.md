@@ -1,5 +1,6 @@
 ---
 title: Hostname Detection in Containers
+description: "Troubleshoot hostname resolution errors in containerized Datadog Agent deployments on Kubernetes, Docker, and cloud platforms."
 ---
 
 Many features in Datadog rely on the Agent to provide an accurate hostname for monitored hosts. While this is straightforward when the Agent runs directly on a host, the hostname resolution process is different when the Agent runs in a containerized environment.

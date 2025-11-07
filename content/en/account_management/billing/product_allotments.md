@@ -139,7 +139,7 @@ Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Sp
 | Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps, Serverless Invocations, Serverless Functions  | Average | Average |
 | Ingested Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps | Average | Average |
 | Custom Events | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts | Sum | Sum |
-| Cloud Security Enterprise Containers    | Cloud Security       |      N/A     | Sum    |
+| Cloud Security Containers    | Cloud Security       |      N/A     | Sum    |
 | CWS Containers      | Cloud Workload Security (CWS)              |       N/A     | Sum      |
 | Infrastructure Containers    | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts |   N/A   | Sum  |
 | Profiled Containers | APM Enterprise, Continuous Profiler    |   N/A        | Sum   |
@@ -150,7 +150,7 @@ Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Sp
 | APM Ingested Spans | APM, APM Pro, APM Enterprise </br> Serverless APM, Legacy - Serverless Invocations </br> Legacy - Serverless Functions </br> Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
 | DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |
 | Data Streams Monitoring | APM Pro, APM Enterprise | HWMP | Sum |
-| CSPM Workflow Executions | Cloud Security Pro, Cloud Security Enterprise | Sum | Sum |
+| CSPM Workflow Executions | Cloud Security | Sum | Sum |
 | Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise) | Average | N/A |
 
 [1]: https://www.datadoghq.com/pricing/list/

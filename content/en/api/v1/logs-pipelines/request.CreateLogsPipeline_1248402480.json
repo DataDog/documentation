@@ -1,0 +1,19 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineArrayAppend",
+  "processors": [
+    {
+      "type": "array-processor",
+      "is_enabled": true,
+      "name": "append_ip_to_array",
+      "operation": {
+        "type": "append",
+        "source": "network.client.ip",
+        "target": "sourceIps"
+      }
+    }
+  ],
+  "tags": []
+}

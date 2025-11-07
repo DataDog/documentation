@@ -12,10 +12,6 @@ further_reading:
 title: Añadir medidas y etiquetas personalizadas a trazas de pipeline
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible para el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Información general
 
 Utiliza las etiquetas (tags) y medidas personalizadas para añadir texto definido por el usuario y etiquetas numéricas a tus trazas (traces) de pipeline en [CI Pipeline Visibility][11]. Puedes utilizar el [paquete `datadog-ci` NPM][1] para añadir etiquetas personalizadas a una traza de pipeline o a un tramo (span) de trabajo, además de añadir medidas a una traza de pipeline o a un tramo de trabajo. A partir de estas etiquetas y medidas personalizadas, puedes crear facetas (etiquetas de valor de cadena) o medidas (etiquetas de valor numérico). 

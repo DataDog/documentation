@@ -250,10 +250,6 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        password: 'ENC[datadog_user_database_password]'
        ssl: 'require'
 
-       ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
-       # pg_stat_statements_view: datadog.pg_stat_statements()
-       # pg_stat_activity_view: datadog.pg_stat_activity()
-
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
 
@@ -373,16 +369,18 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
                 cluster_check: true
                 init_config:
                 instances:
-                - host: <AWS_INSTANCE_ENDPOINT>
-                  port: 5432
-                  username: datadog
-                  password: 'ENC[datadog_user_database_password]'
-                  dbm: true
-                  aws:
-                    instance_endpoint: <AWS_INSTANCE_ENDPOINT>
-                    region: <REGION>
-                  tags:
-                  - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+                  - host: <AZURE_INSTANCE_ENDPOINT>
+                    port: 5432
+                    username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
+                    password: 'ENC[datadog_user_database_password]'
+                    ssl: 'require'
+                    dbm: true
+                    azure:
+                      deployment_type: '<DEPLOYMENT_TYPE>'
+                      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
+                    tags:
+                      - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+
     ```
 
     **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
@@ -397,7 +395,7 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
-  
+
 ### Helm
 
 Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the Postgres integration:
@@ -460,15 +458,11 @@ instances:
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
-
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 ### Configure with Kubernetes service annotations
 
-Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 #### Autodiscovery annotations v2
 

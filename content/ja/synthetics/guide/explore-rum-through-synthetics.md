@@ -24,7 +24,7 @@ Synthetic ブラウザテストは、Real User Monitoring SDK を組み込み、
 
 ## RUM アプリケーションでの Synthetic データの許可
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 ターゲットアプリケーションがすでに RUM でインスツルメンテーションされている場合、予期せぬ動作を引き起こす可能性があるため、Synthetic テストの構成内で RUM データ収集を有効にするべきではありません。</div>
 
 ブラウザテストの記録で、**Start Recording** ボタンの上にある **Collect RUM Data on** をクリックし、データを収集するアプリケーションを選択します。記録とテスト構成を保存すると、RUM はテストデータを収集し、ブラウザテスト実行からセッション記録を生成します。

@@ -28,10 +28,6 @@
         }
       ],
       "name": "Example-On-Call",
-      "tags": [
-        "tag1",
-        "tag2"
-      ],
       "time_zone": "America/New_York"
     },
     "relationships": {

@@ -1,5 +1,6 @@
 ---
 title: Watchdog Alerts
+description: "View and interpret Watchdog Alerts that proactively detect anomalies on your systems and applications using AI-powered monitoring."
 ---
 
 ## Overview
@@ -102,7 +103,7 @@ Watchdog scans all services and resources to look for anomalies on the following
   * Latency
   * Hits (request rate)
 
-Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
+Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Watchdog requires at least 0.5 requests per second for an endpoint to be monitored. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
 
 #### Required data history
 
@@ -169,7 +170,7 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 [13]: /containers/docker/?tab=standard
 [14]: /containers/kubernetes/installation/?tab=operator
 [15]: /integrations/mysql/
-[16]: /integrations/mysql/
+[16]: /integrations/sqlserver/
 [17]: /integrations/cassandra/
 [18]: /integrations/oracle/
 {{% /tab %}}

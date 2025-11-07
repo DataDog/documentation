@@ -13,16 +13,14 @@
 
 <div class="table-responsive-container">
   <div class="table-scroll">
-    <table class="table table-responsive">
+    <table class="table table-responsive table-fixed">
     <thead>
       <tr>
-        <th>{{ i18n "language" }}</th>
-        <th>{{ i18n "library" }}</th>
-        <th>{{ i18n "official" }}</th>
-        <th>{{ i18n "api" }}</th>
-        <th>{{ i18n "dogstatsd" }}</th>
-        <th>{{ i18n "author" }}</th>
-        <th>{{ i18n "notes" }}</th>
+        <th style="width: 15%">{{ i18n "language" }}</th>
+        <th style="width: 15%">{{ i18n "library" }}</th>
+        <th style="width: 15%">{{ i18n "features" }}</th>
+        <th style="width: 15%">{{ i18n "author" }}</th>
+        <th style="width: 40%">{{ i18n "notes" }}</th>
       </tr>
     </thead>
     <tbody>
@@ -32,9 +30,11 @@
               <tr>
                 <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>
                 <td><a href="{{ $el.link }}">{{ $el.name }}</a></td>
-                <td>{{ if $el.official}}<i class="icon-check-bold"></i>{{ end }}</td>
-                <td>{{ if $el.api}}<i class="icon-check-bold"></i>{{ end }}</td>
-                <td>{{ if $el.dogstatsd }}<i class="icon-check-bold"></i>{{ end }}</td>
+                <td>
+                  {{ if $el.official}}Official<br>{{ end }}
+                  {{ if $el.api}}API<br>{{ end }}
+                  {{ if $el.dogstatsd}}DogStatsD{{ end }}
+                </td>
                 <td>{{ if $el.authors }}{{ $el.authors }}{{ end }}</td>
                 <td>{{ if $el.notes }}{{ $el.notes }}{{ end }}</td>
               </tr>

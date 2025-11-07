@@ -26,7 +26,7 @@ algolia:
 
 ## Setup
 
-Error Tracking is available for all the languages supported by APM and does not require using a different SDK.
+Error Tracking is available for all languages supported by APM. It requires no additional SDK and no configuration changes.
 
 Optionally, to see code snippets in your stack traces, set up the [GitHub integration][4].
 
@@ -36,7 +36,7 @@ To get started with configuring your repository, see the [Source Code Integratio
 
 ## Use span attributes to track error spans
 
-The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. Error Tracking processes error spans within a trace if they occur at the service level, regardless of whether they are located in service entry spans. This span must also contain the `error.stack`, `error.message`, and `error.type` [span attributes][1] to be tracked.
+The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. An error span must contain the `error.stack`, `error.message`, and `error.type` [span attributes][1] to be tracked. If an error is reported multiple times within a service, only the top-most error is kept.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:100%;" >}}
 

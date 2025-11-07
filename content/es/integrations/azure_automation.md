@@ -37,7 +37,7 @@ Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_automation" >}}
+{{< get-metrics-from-git "azure-automation" >}}
 
 
 ### Eventos

@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - logs
 aliases:
 - /fr/guides/logs/
 - /fr/en/logs
@@ -43,18 +46,30 @@ further_reading:
 - link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
   tag: Blog
   text: Filter and correlate logs dynamically using Subqueries
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: Blog
+  text: « Surveiller les logs de DNS pour analyser le réseau et la sécurité »
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: Centre d'architecture
+  text: Guide des stratégies d'indexation pour la gestion des logs avec Datadog
+- link: https://www.datadoghq.com/blog/archive-search/
+  tag: Blog
+  text: Recherchez vos journaux historiques plus efficacement avec Datadog Archive
+    Search
 title: Log Management
 ---
 
-## Présentation
+{{< learning-center-callout header="Participez à un webinar de formation" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  Participez à une session d'introduction ou intermédiaire pour apprendre comment la solution Log Management de Datadog unifie les logs, les métriques et les traces dans une vue unique, vous donnant un contexte riche pour analyser les données de vos logs.
+{{< /learning-center-callout >}}
+
+## Section Overview
 
 Pour assurer l'intégrité de votre infrastructure, il est essentiel d'enregistrer des logs à propos des principales opérations de votre système. Les infrastructures modernes peuvent générer des milliers d'événements de log par minute. Vous devez donc déterminer les types de logs à envoyer à la solution de gestion de logs choisie, ainsi que les types de logs à archiver. En revanche, en filtrant vos logs, il se peut que vous effectuiez un traitement non exhaustif ou ignoriez certaines données importantes.
 
 La solution Log Management de Datadog (également appelée « logs Datadog » ou « journalisation Datadog ») met fin à ces problèmes en séparant le processus d'ingestion des logs du processus d'indexation. Vous pouvez ainsi recueillir, traiter, explorer et surveiller tous vos logs de façon rentable et sans aucune limite, grâce à Logging without Limits\*.
 
 La solution Logging without Limits\* simplifie vos processus de dépannage dans le [Log Explorer][1]. Vos équipes et vous-même pouvez accéder rapidement aux problèmes concernant votre infrastructure et les corriger au plus vite. Les fonctionnalités intuitives d'archivage facilitent le travail d'audit et d'évaluation des équipes IT et de sécurité. Logging without Limits\* alimente également la solution [Cloud SIEM Datadog][2], qui détecte les menaces de sécurité dans votre environnement sans nécessiter l'indexation de vos logs.
-
-**Remarque** : consultez la section [Conformité PCI DSS][3] pour des informations sur la mise en place d'une organisation Datadog conforme à la norme PCI.
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
@@ -64,7 +79,7 @@ La solution Logging without Limits\* simplifie vos processus de dépannage dans 
 
 Pour commencer à utiliser Log Management, vous devez d'abord [ingérer des logs][4] depuis vos hosts, conteneurs, fournisseurs cloud et autres sources.
 
-## Configurer un monitor
+## Configurer
 
 {{< img src="logs/lwl_marketecture_20231030.png" alt="Configurer vos logs depuis un seul endroit" >}}
 
@@ -83,6 +98,8 @@ Tirez profit des trois piliers de l'observabilité en associant vos logs à vos 
 
 Commencez à explorer vos logs ingérés dans le [Log Explorer][1].
 
+**Astuce** : pour ouvrir le Log Explorer à partir de la recherche globale de Datadog, appuyez sur <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> et recherchez `logs`.
+
 {{< img src="/logs/explore.png" alt="Explorer vos logs ingérés" style="width:80%;">}}
 
 - [Recherche][8] : effectuez des recherches dans l'ensemble de vos logs.
@@ -90,6 +107,11 @@ Commencez à explorer vos logs ingérés dans le [Log Explorer][1].
 - [Analyse][10] : analysez vos logs indexés.
 - [Patterns][11] : identifiez des patterns de log en rassemblant vos logs indexés au sein d'un cluster.
 - [Vues enregistrées][12] : servez-vous des vues enregistrées pour configurer automatiquement votre vue Log Explorer.
+
+
+{{< learning-center-callout header="Essayez la présentation de Log Management dans le Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
+  Formez-vous sans frais sur la capacité de calcul réelle dans le cloud avec un compte d'essai Datadog. Inscrivez-vous aujourd'hui pour en savoir plus sur la collecte de logs, la création de requêtes, les analyses, les métriques, la surveillance, le traitement, le stockage et le contrôle d'accès.
+{{< /learning-center-callout >}}
 
 ## Pour aller plus loin
 
@@ -100,7 +122,6 @@ Commencez à explorer vos logs ingérés dans le [Log Explorer][1].
 
 [1]: /fr/logs/explorer/
 [2]: /fr/security/cloud_siem/
-[3]: /fr/data_security/pci_compliance/
 [4]: /fr/logs/log_collection/
 [5]: /fr/logs/log_configuration/
 [6]: /fr/tracing/other_telemetry/connect_logs_and_traces/

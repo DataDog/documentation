@@ -89,7 +89,7 @@ Datadog의 Metric Explorer에서 `mesos.cluster`를 찾습니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "mesos_master" >}}
+{{< get-metrics-from-git "mesos-master" >}}
 
 
 ### 이벤트
@@ -97,7 +97,7 @@ Datadog의 Metric Explorer에서 `mesos.cluster`를 찾습니다.
 Mesos-master 점검에는 이벤트가 포함되지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "mesos_master" >}}
+{{< get-service-checks-from-git "mesos-master" >}}
 
 
 ## 트러블슈팅
@@ -259,7 +259,7 @@ DC/OS를 사용하지 않는 경우, 정상적으로 실행 중인 애플리케�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "mesos_slave" >}}
+{{< get-metrics-from-git "mesos" >}}
 
 
 ### 이벤트
@@ -267,7 +267,7 @@ DC/OS를 사용하지 않는 경우, 정상적으로 실행 중인 애플리케�
 Mesos-slave 점검에는 이벤트가 포함되지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "mesos_slave" >}}
+{{< get-service-checks-from-git "mesos" >}}
 
 
 ## 트러블슈팅

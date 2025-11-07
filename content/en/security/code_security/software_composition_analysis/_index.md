@@ -8,6 +8,7 @@ aliases:
 - /security/application_security/vulnerability_management/
 ---
 ## Overview
+
 Software Composition Analysis (SCA) detects open source libraries in both your repositories and running services, providing end-to-end visibility of library vulnerabilities and license management from development to production.
 
 Using Software Composition Analysis provides organizations with the following benefits:
@@ -18,17 +19,16 @@ Using Software Composition Analysis provides organizations with the following be
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
 ## Set up Software Composition Analysis
-The following languages and technologies are supported:
 
-{{< partial name="code_security/sca-getting-started.html" >}}
+{{% security-products/sca-supported-lang %}}  
 
 SCA supports both static and runtime dependency detection:
-- For static detection, you can scan via your CI/CD pipelines or directly via Datadog with hosted scanning (GitHub-only). Go to the [Code Security setup page][4] or see [static setup][1] to get started.
-- For runtime detection, you can easily enable SCA on your services instrumented with Datadog APM. See [runtime setup][2] to get started.
+- For **static detection**, you can scan your repositories from your CI/CD pipelines or directly from Datadog's infrastructure. See [static setup][1] to get started.
+- For **runtime detection**, you can enable SCA on services instrumented with Datadog APM. See [runtime setup][2] to get started.
 
 ## Search and filter results
 ### Vulnerabilities explorer
-The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities shown in this explorer are detected on the default branch of a scanned repository and/or affecting a running service.
+The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
 
 ### Datadog severity score
 Each vulnerability has a defined base severity score. To assist in prioritizing remediation, Datadog modifies the base CVSS score into the Datadog Severity Score by considering evidence of suspicious requests or attacks, the business sensitivity or internet exposure of the environment, and the risk of a successful exploit.
@@ -66,8 +66,24 @@ The Libraries [Inventory][8] helps you understand the list of libraries and its 
 SCA enriches the information Application Performance Monitoring (APM) is already collecting by flagging libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Software Catalog][10].
 - Whether it is reaching end of life
 - Whether it is a malicious package
-- The health of this library version based on its OpenSSF scorecard breakdown 
+- The health of this library version based on its OpenSSF scorecard breakdown
 - Software supply chain & Software Bill of Materials (SBOM) management
+
+
+### Vulnerability lifecycle
+Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datadog after a certain period, depending on the service's usage of the vulnerable library.
+
+- **Hot Libraries:**
+Libraries from services that are alive for more than 2 hours.
+  - **When vulnerabilities are auto-closed by Datadog:** After 1 hour, if they are not detected again and the service is running on all environments where the vulnerability was detected.
+
+- **Lazy Libraries:**
+Libraries that are loaded more than 1 hour after the service has started.
+  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+
+- **Cold Libraries:**
+Libraries from services that are alive for less than 2 hours (such as jobs).
+  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
 
 <!-- ### Remediation
 
@@ -78,10 +94,10 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 [1]: /security/code_security/software_composition_analysis/setup_static/
 [2]: /security/code_security/software_composition_analysis/setup_runtime/
 [3]: https://app.datadoghq.com/security/appsec/vm
-[4]: https://app.datadoghq.com/security/configuration/code-security/setup
 [5]: /getting_started/code_security/
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
 [9]: /account_management/rbac/permissions/#integrations
 [10]: https://app.datadoghq.com/services?lens=Security
 [11]: https://app.datadoghq.com/security/appsec/vm/library
 [12]: https://app.datadoghq.com/ci/code-analysis
+[13]: /security/code_security/software_composition_analysis/setup_static/#upload-third-party-sbom-to-datadog

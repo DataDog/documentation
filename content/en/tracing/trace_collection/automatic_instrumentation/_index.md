@@ -1,5 +1,6 @@
 ---
 title: Automatic Instrumentation
+description: Learn about automatic instrumentation using Datadog tracing libraries, Single Step Instrumentation, or remote configuration.
 algolia:
   tags: ['apm automatic instrumentation']
 further_reading:
@@ -72,7 +73,7 @@ For containerized environments, follow the links below to enable trace collectio
 
    Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist, then stats are sent to `http://localhost:8125`.
 
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
+{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 

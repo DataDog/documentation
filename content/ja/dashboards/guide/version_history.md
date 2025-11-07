@@ -39,7 +39,7 @@ Version History サイドパネルから任意のバージョンをクリック�
 ## バージョンの復元
 ダッシュボードを以前のバージョンに復元するには、2 つの方法があります。
 
-{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Version History side panel shows past dashboard versions and ways to restore them." style="width:100%;" >}}
+{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Version History サイド パネルには、過去のダッシュボード バージョンとそれらを復元する方法が表示されます。" style="width:100%;" >}}
 
 - Version History サイドパネルから復元するバージョンを決め、ユーザープロファイルの右側にあるケバブメニューをクリックし、**Restore this version** を選択します。
 - Version History サイドパネルが開いた際に、ページ上部に **Restore this version** ボタンが表示されます。

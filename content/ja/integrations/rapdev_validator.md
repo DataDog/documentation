@@ -34,8 +34,8 @@ author:
   vendor_id: rapdev
 categories:
 - コンプライアンス
-- 構成 & デプロイ
-- マーケットプレイス
+- 構成とデプロイ
+- marketplace
 custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
@@ -99,7 +99,7 @@ RapDev Validator は、Datadog 環境でのタグモニタリングと Agent の
 1. ホストに必要なタグキーが割り当てられていない
 2. ホストのタグキーに非準拠の値が割り当てられている
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - メール: support@rapdev.io

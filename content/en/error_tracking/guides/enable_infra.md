@@ -104,6 +104,45 @@ For a Datadog agent installed with Helm:
    ```
 {{< /collapse-content >}}
 
+{{< collapse-content title="Datadog Operator" level="h5" >}}
+For a Datadog agent installed with the Datadog Operator:
+
+1. Update your `datadog-agent.yaml` file, replacing the `site` and `env` values appropriately:
+   ```diff
+     apiVersion: datadoghq.com/v2alpha1
+     kind: DatadogAgent
+     metadata:
+       name: datadog
+     spec:
+       global:
+         site: <DATADOG_SITE>
+         tags:
+           - env:<AGENT_ENV>
+         credentials:
+           apiSecret:
+             secretName: datadog-secret
+             keyName: api-key
+         env:
+   -       - name: DD_CORE_AGENT_ENABLED
+   -         value: "false"
+       features:
+         apm:
+           errorTrackingStandalone:
+             enabled: true
+           instrumentation:
+             enabled: true
+             libVersions:
+               java: "1"
+               dotnet: "3"
+               python: "2"
+               js: "5"
+               php: "1"
+   ```
+2. Deploy the Datadog Agent with the updated configuration file:
+   ```shell
+   kubectl apply -f path/to/your/datadog-agent.yaml
+   ```
+{{< /collapse-content >}}
 
 {{% /tab %}}
 {{< /tabs >}}

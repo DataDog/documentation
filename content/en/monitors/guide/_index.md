@@ -1,5 +1,6 @@
 ---
 title: Monitor Guides
+description: "Guides covering monitor best practices, configuration, troubleshooting, and advanced use cases for Datadog monitoring."
 private: true
 disable_toc: true
 cascade:
@@ -18,14 +19,14 @@ cascade:
     {{< nextlink href="monitors/guide/recovery-thresholds" >}}Recovery thresholds{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert_aggregation" >}}Alert aggregation{{< /nextlink >}}
     {{< nextlink href="monitors/guide/notification-message-best-practices" >}}Notification message Best Practice{{< /nextlink >}}
-
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Tutorial:" >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}Create cluster alerts for metric monitor{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}Create monitor dependencies{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
+    {{< nextlink href="monitors/types/synthetic_monitoring" >}}How to create monitors in synthetic tests{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
+        {{< nextlink href="monitors/guide/clean_up_monitor_clutter" >}}Clean up monitor clutter{{< /nextlink >}}
     {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}Troubleshooting monitor alerts{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -40,6 +41,7 @@ cascade:
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone{{< /nextlink >}}
     {{< nextlink href="/monitors/guide/custom_schedules" >}}Add custom schedules to customize monitor evaluation frequencies{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() monitor evaluations{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Template variable evaluation{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Downtimes:" >}}
@@ -59,4 +61,7 @@ cascade:
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/add-a-minimum-request-threshold-for-error-rate-alerts" >}}Add a minimum request threshold for error rate alerts{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}Export monitor alerts to CSV{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/composite_use_cases" >}}Composite monitor use cases{{< /nextlink >}}
 {{< /whatsnext >}}

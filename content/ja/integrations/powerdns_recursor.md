@@ -216,7 +216,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "powerdns_recursor" >}}
+{{< get-metrics-from-git "powerdns" >}}
 
 
 ### イベント
@@ -224,7 +224,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 PowerDNS Recursor チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "powerdns_recursor" >}}
+{{< get-service-checks-from-git "powerdns" >}}
 
 
 ## トラブルシューティング

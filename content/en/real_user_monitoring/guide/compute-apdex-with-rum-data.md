@@ -9,7 +9,7 @@ further_reading:
     - link: '/real_user_monitoring/explorer'
       tag: 'Documentation'
       text: 'RUM Dashboards'
-    - link: '/real_user_monitoring/browser/data_collected'
+    - link: '/real_user_monitoring/application_monitoring/browser/data_collected'
       tag: 'Documentation'
       text: 'RUM Browser Data Collected'
     - link: '/real_user_monitoring/android/data_collected'
@@ -148,7 +148,7 @@ You can also calculate other Apdex scores with the following methods:
 - To compute the Apdex score for a specific application, add an additional `@application.name` query and update your formula.
 - To compute the Apdex score with another RUM performance metric such as First Contentful Paint, replace `@view.LargestContentfulPaint` with `@view.FirstContentfulPaint` in the queries.
 
-To compute additional performance indicators for your applications, determine what data points you need and which RUM events are relevant for you before [creating a quick graph](#create-a-quick-graph).
+To compute additional performance indicators for your applications, determine what datapoints you need and which RUM events are relevant for you before [creating a quick graph](#create-a-quick-graph).
 
 ## Further Reading
 
@@ -156,6 +156,6 @@ To compute additional performance indicators for your applications, determine wh
 
 [1]: /dashboards/guide/quick-graphs/
 [2]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
-[3]: /real_user_monitoring/browser/
+[3]: /real_user_monitoring/application_monitoring/browser/
 [4]: /real_user_monitoring/android/
 [5]: /real_user_monitoring/ios/

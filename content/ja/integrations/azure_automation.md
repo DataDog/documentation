@@ -37,7 +37,7 @@ Datadog Azure インテグレーションを使用して、Azure Automation か�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_automation" >}}
+{{< get-metrics-from-git "azure-automation" >}}
 
 
 ### イベント

@@ -2,7 +2,7 @@
 title: .NET Custom Instrumentation using the Datadog API
 code_lang: dd-api
 type: multi-code-lang
-code_lang_weight: 1
+code_lang_weight: 2
 aliases:
     - /tracing/opentracing/dotnet
     - /tracing/manual_instrumentation/dotnet
@@ -11,6 +11,8 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/dotnet
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/dotnet
 description: 'Manually instrument your .NET application to send custom traces to Datadog.'
+algolia:
+    tags: ["C#","APM"]
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       tag: 'Guide'
@@ -77,11 +79,11 @@ namespace Store.Managers
 ## Custom instrumentation with code
 
 <div class="alert alert-info">
-  <strong>Note</strong>: This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet package</a>. to your application. It provides an API to directly access the Tracer and the active span.
+  This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet package</a>. to your application. It provides an API to directly access the Tracer and the active span.
 </div>
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
+<div class="alert alert-danger">
+  Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
 ### Configuring Datadog in code
@@ -106,7 +108,7 @@ Tracer.Configure(settings);
 
 Calling `Tracer.Configure()` replaces the settings for all subsequent traces, both for custom instrumentation and for automatic instrumentation.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Replacing the configuration should be done <strong>once, as early as possible</strong> in your application.
 </div>
 
@@ -116,7 +118,7 @@ In addition to automatic instrumentation, the `[Trace]` attribute, and `DD_TRACE
 
 To create and activate a custom span, use `Tracer.Instance.StartActive()`. If a trace is already active (when created by automatic instrumentation, for example), the span is part of the current trace. If there is no current trace, a new one is started.
 
-<div class="alert alert-warning"><strong>Warning</strong>: Ensure you dispose of the scope returned from <code>StartActive</code>. Disposing the scope closes the span, and ensures the trace is flushed to Datadog once all its spans are closed.
+<div class="alert alert-danger">Ensure you dispose of the scope returned from <code>StartActive</code>. Disposing the scope closes the span, and ensures the trace is flushed to Datadog once all its spans are closed.
 </div>
 
 ```csharp
@@ -180,6 +182,51 @@ public class ShoppingCartController : Controller
     }
 }
 ```
+
+### Usage with ASP.NET `IHttpModule`
+
+To access the current request span from a custom ASP.NET `IHttpModule`, it is best to read `Tracer.Instance.ActiveScope` in the `PreRequestHandlerExecute` event (or `AcquireRequestState` if you require session state).
+
+While Datadog creates the request span at the start of the ASP.NET pipeline, the execution order of `IHttpModules` is not guaranteed. If your module runs before Datadog's, `ActiveScope` may be `null` during early events like `BeginRequest`. The `PreRequestHandlerExecute` event occurs late enough in the lifecycle to ensure the Datadog module has run and the span is available.
+
+`ActiveScope` can still be `null` for other reasons (for example, if instrumentation is disabled), so you should always check for `null`.
+
+```csharp
+using System;
+using System.Web;
+using Datadog.Trace;
+
+public class MyCustomModule : IHttpModule
+{
+    public void Init(HttpApplication context)
+    {
+        // Prefer reading ActiveScope late in the pipeline
+        context.PreRequestHandlerExecute += OnPreRequestHandlerExecute;
+
+        // If you need session state, you can also hook AcquireRequestState:
+        // context.AcquireRequestState += OnPreRequestHandlerExecute;
+    }
+
+    private void OnPreRequestHandlerExecute(object sender, EventArgs e)
+    {
+        // Earlier events (e.g., BeginRequest) may run before the Datadog module,
+        // so ActiveScope can be null there. Here it should be available.
+        var scope = Tracer.Instance.ActiveScope;
+        if (scope == null)
+        {
+            return; // there is no active scope, for example, if instrumentation is disabled
+        }
+
+        // Example: add a custom tag
+        scope.Span.SetTag("my.custom.tag", "some_value");
+    }
+
+    public void Dispose()
+    {
+    }
+}
+```
+
 
 ### Set errors on a span
 

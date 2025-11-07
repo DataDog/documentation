@@ -6,11 +6,10 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Monitoring Threats with Datadog App and API Protection"
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works in Datadog"
 ---
-
 
 ## Overview
 
@@ -189,13 +188,15 @@ There are no required integrations for PHP.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-The following Go frameworks should be instrumented using the out-of-the-box APM integrations:
+The following Go frameworks should be instrumented using the out-of-the-box APM integrations.
 
-- [gRPC][2] ([v2][8])
-- [net/http][3] ([v2][9])
-- [Gorilla Mux][4] ([v2][10])
-- [Echo][5] ([v2][11])
-- [Chi][6] ([v2][12])
+{{% tracing-go-v2 %}}
+
+- [gRPC][8] ([v1][2])
+- [net/http][9] ([v1][3])
+- [Gorilla Mux][10] ([v1][4])
+- [Echo][11] ([v1][5])
+- [Chi][12] ([v1][6])
 
 Please be sure to reference the docs appropriate for your version (v1.x or v2.x) of the Go Tracer. If your framework is not supported, [create a new issue][7] in the Go repository.
 
@@ -210,6 +211,7 @@ Please be sure to reference the docs appropriate for your version (v1.x or v2.x)
 [10]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2
 [11]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2
 [12]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/go-chi/chi.v5/v2
+[13]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
@@ -534,11 +536,6 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-
-## No vulnerabilities detected by Software Composition Analysis
-
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
-
 ### Confirm AAP is enabled
 
 You can use the metric `datadog.apm.appsec_host` to check if AAP is running.
@@ -553,36 +550,44 @@ AAP data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM s
 
 ### Confirm tracer versions are updated
 
-See the Application Security product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
+See the App and API Protection product set up documentation to validate you you are using the right version of the tracer. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### Ensure the communication of telemetry data
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
-## Disabling threat management and protection
+## Disabling AAP
 
-To disable threat management, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+To disable AAP, use one of the following methods.
 
-If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do one of the following:
-* If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
-* If threat management was activated using [Remote Configuration][16], do the following: 
-  1. Go to [Services][15] (**AAP** > **Catalog** > **Services**).
-  2. Select **Threat Management in Monitoring Mode**.
-  3. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
-  4. Click on a service.
-  5. In the service details, in **Threat Detection**, click **Deactivate**.
+If you enabled AAP using the `DD_APPSEC_ENABLED=true` environment variable, use the DD_APPSEC_ENABLED section below.
+If you enabled AAP using [Remote Configuration][16], use the Remote Configuration method below.
 
-<div class="alert alert-info">If threat management was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If threat management was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
+### DD_APPSEC_ENABLED
 
-* To disable threat management on your services in bulk, do the following: 
+If the `DD_APPSEC_ENABLED=true` environment variable is set for your service, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+
+If your service is a PHP service, explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and if applicable, comment out the flag `datadog.appsec.enabled = On` from your `php.ini` configuration file. Then, restart your service. 
+
+### Remote Configuration
+
+If AAP was activated using [Remote Configuration][16], do the following: 
   1. Go to [Services][15].
-  2. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  2. Select **App & API Protection in Monitoring Mode**.
+  3. In the **App & API Protection** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  4. Click on a service.
+  5. In the service details, in **App & API Protection**, click **Deactivate**.
+
+<div class="alert alert-info">If AAP was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If AAP was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
+
+### Bulk disable
+
+To disable AAP on your services in bulk, do the following: 
+  1. Go to [Services][15].
+  3. In the **App & API Protection** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
   3. Select the check boxes for the services where you want to disable threat detection.
   4. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
 
-## Disabling Code Security
-
-To disable [Code Security][13], remove the `DD_IAST_ENABLED=true` environment variable from your application configuration or set it to `false` as `DD_IAST_ENABLED=false`, and restart your service.
   
 ## Need more help?
 

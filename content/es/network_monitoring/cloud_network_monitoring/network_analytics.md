@@ -32,6 +32,8 @@ La página Network Analytics proporciona información sobre el estado general de
 
 Para refinar tu búsqueda y que recorra endpoints concretos, agrega y filtra tus conexiones de red **con etiquetas (tags)**. Las etiquetas de integraciones de Datadog o el [Etiquetado unificado de servicios][12] pueden utilizarse para agregar y filtrar automáticamente. Al utilizar el etiquetado en Network Monitoring, puedes aprovechar la forma en que fluye el tráfico de red a través de las zonas de disponibilidad para un servicio particular o para toda tu infraestructura. La agrupación por etiquetas `client` y `server` visualiza el flujo de red _entre_ esos dos conjuntos de etiquetas.
 
+Además, Datadog proporciona una lista de etiquetas [predefinidas](#default-tags) que puedes utilizar para consultar y analizar de forma eficiente el tráfico de red más relevante para tus necesidades.
+
 {{< img src="network_performance_monitoring/network_analytics/network_diagram_with_tags.png" alt="Diagrama de red que muestra cómo se ven las solicitudes cuando se agrupan por etiquetas" style="width:100%;">}}
 
 Por ejemplo, si quieres ver el tráfico de red entre tu servicio de pedidos llamado `orders-app` y todas tus zonas de disponibilidad, utiliza `client_service:orders-app` en la barra de búsqueda, añade la etiqueta `service` en el menú desplegable **Ver clientes como** y luego utiliza la etiqueta `availability-zone` del menú desplegable **Ver servidores como** para visualizar el flujo de tráfico entre estos dos conjuntos de etiquetas:
@@ -54,9 +56,20 @@ El siguiente ejemplo muestra todas las conexiones agregadas desde direcciones IP
 
 Puedes agregar más para aislar el tráfico en el que el cliente o el servidor coincide con un CIDR que utiliza `CIDR(network.client.ip, 10.0.0.0/8)` o `CIDR(network.server.ip, 10.0.0.0/8)`.
 
-Además, define el periodo de tiempo durante el cual se agrega el tráfico utilizando el selector de tiempo situado en la parte superior derecha de la página:
+### Comprensión de los roles del cliente y sel servidor en relación con la dirección del tráfico
 
-{{< img src="network_performance_monitoring/network_analytics/npm_timeframe.png" alt="CNM de periodo de tiempo" style="width:30%;">}}
+La page (página) Network Analytics muestra los flujos de tráfico direccional desde los clientes de una zona a los servidores de otra. Estos flujos no son simétricos y pueden no mostrar "bytes enviados" y "bytes recibidos" iguales cuando se invierten.
+
+En este contexto:
+
+- Cliente se refiere al lado que inicia la connection (conexión).
+- El servidor es la parte que responde a esa connection (conexión).
+
+Datadog monitoriza el tráfico en función de quién abrió la connection (conexión). La dirección inversa (de servidor a cliente) se muestra como un flujo separado y puede tener diferentes métricas de volumen o ningún dato en absoluto si no se inician conexiones en esa dirección.
+
+Por ejemplo, si un cliente en `us-east-1d` habla con un servidor en `us-east-1c`, se puede ver un tráfico significativo. Sin embargo, si no hay ningún servidor en `us-east-1d`, la fila inversa (`us-east-1c → us-east-1d`) puede mostrar pocos o ningún dato.
+
+**Nota**: Las asimetrías en el tráfico también pueden deberse al comportamiento de la aplicación o a elementos de la infraestructura (por ejemplo, proxies o NAT) o a la falta de iniciación de connection (conexión) en una dirección.
 
 ### Consultas recomendados
 
@@ -94,7 +107,7 @@ Una vez creada la faceta personalizada, utiliza la etiqueta para filtrar y agreg
 Para realizar una búsqueda con un comodín de varios caracteres, utiliza el símbolo `*` como se indica a continuación:
 
 - `client_service:web*` coincide con todos los servicios de clientes que empiezan con web.
-- `client_service:web*` coincide con todos los servicios de clientes que terminan con web.
+- `client_service:*web` coincide con todos los servicios de clientes que terminan con web.
 - `client_service:*web*` coincide con todos los servicios de clientes que contienen la cadena web.
 
 Las búsquedas con comodines funcionan dentro de las facetas con esta sintaxis. Esta consulta devuelve todos los servicios de clientes que terminan con la cadena "mongo":
@@ -131,22 +144,80 @@ Las etiquetas neutras no son específicas de un cliente o servidor, sino que se 
 
 La siguiente lista muestra etiquetas neutras disponibles para su uso:
 
-| Etiqueta                     | Descripción                                                                                   |
-|-------------------------|-----------------------------------------------------------------------------------------------|
-| `is_agent_traffic`        | Indica si el tráfico ha sido generado por el Datadog Agent.                             |
-| `tls_encrypted`           | Especifica si la conexión está cifrada mediante TLS.                                           |
-| `tls_cipher_suite`        | Identifica el conjunto de cifrado TLS específico utilizado (por ejemplo, `tls_ecdhe_rsa_with_aes_128_gcm_sha256`).  |
-| `tls_cipher_insecure`     | Identifica si el cifrado utilizado en la conexión se considera generalmente seguro o no.  |
-| `tls_version`             | La versión de TLS negociada y utilizada por la conexión (`tls_1.2` o `tls_1.3`).            |
-| `tls_client_version`      | Las versiones de TLS compatibles con el cliente (`tls_1.2` o `tls_1.3`).                      |
-| `gateway_id`              | Identificador único del recurso de pasarela AWS.                                               |
-| `gateway_type`            | Especifica el tipo de pasarela AWS (Internet, NAT o Transit).                             |
-| `gateway_region`          | La región AWS en la que está desplegada la pasarela (por ejemplo, `us-east-1`).                            |
-| `gateway_availability-zone` | La zona de Disponibilidad que aloja la pasarela (por ejemplo, `us-east-1a`).                               |
-| `gateway_public_ip`       | La dirección IP pública asignada a la pasarela NAT.                                                |
-| `tgw_attachment_id`       | Identificador único de la conexión de AWS Transit Gateway.                                     |
-| `tgw_attachment_type`     | Tipo de conexión de AWS Transit Gateway (por ejemplo, VPC, VPN o Direct Connect).                  |
-| `vpc_endpoint_id`         | Identificador único del endpoint de la VPC.                                                       |
+<table>
+<thead>
+<tr>
+<th style="white-space: nowrap; width: 300px; min-width: 300px;">Etiqueta</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_availability-zone</code></td>
+<td>Zona de disponibilidad que aloja la gateway (por ejemplo, <code>us-east-1a</code>).</td>
+</tr>
+<tr>
+<td><code>gateway_id</code></td>
+<td>Identificador único para el recurso gateway de AWS.</td>
+</tr>
+<tr>
+<td><code>gateway_public_ip</code></td>
+<td>Dirección IP pública asignada a la gateway NAT.</td>
+</tr>
+<tr>
+<td><code>gateway_region</code></td>
+<td>Región de AWS de la gateway (por ejemplo, <code>us-east-1</code>).</td>
+</tr>
+<tr>
+<td><code>gateway_type</code></td>
+<td>Tipo de gateway de AWS (internet, NAT o Transit).</td>
+</tr>
+<tr>
+<td><code>intra_availability_zone</code></td>
+<td>Indica si los flujos de red están dentro de la zona de disponibilidad (<code>true</code>), zona entre disponibilidad (<code>false</code>) o no determinado (<code>unknown</code>). <strong>Nota</strong>: No se aplica para Azure.</td>
+</tr>
+<tr>
+<td><code>intra_region</code></td>
+<td>Indica si los flujos de red están dentro de una región (<code>true</code>), entre regiones (<code>false</code>), o no determinado (<code>unknown</code>).</td>
+</tr>
+<tr>
+<td><code>is_agent_traffic</code></td>
+<td>Indica si al tráfico lo generó el Datadog Agent.</td>
+</tr>
+<tr>
+<td><code>tgw_attachment_id</code></td>
+<td>Identificador único para el adjunto de AWS Transit Gateway.</td>
+</tr>
+<tr>
+<td><code>tgw_attachment_type</code></td>
+<td>Tipo de adjunto de Transit Gateway (por ejemplo, VPC, VPN, Direct Connect).</td>
+</tr>
+<tr>
+<td><code>tls_cipher_insecure</code></td>
+<td>Indica si eli cipher se considera seguro.</td>
+</tr>
+<tr>
+<td><code>tls_cipher_suite</code></td>
+<td>Identifica si el conjunto de cipher TLS utilizado (por ejemplo, <code>tls_ecdhe_rsa_with_aes_128_gcm_sha256</code>).</td>
+</tr>
+<tr>
+<td><code>tls_client_version</code></td>
+<td>La versión de TLS admitida por el cliente (<code>tls_1.2</code> o <code>tls_1.3</code>).</td>
+</tr>
+<tr>
+<td><code>tls_encrypted</code></td>
+<td>Especifica si la conexión está cifrada con TLS.</td>
+</tr>
+<tr>
+<td><code>tls_version</code></td>
+<td>La versión de TLS utilizada (<code>tls_1.2</code> o <code>tls_1.3</code>).</td>
+</tr>
+<tr>
+<td><code>vpc_endpoint_id</code></td>
+<td>Identificador único para el endpoint de VPC.</td>
+</tr>
+</tbody>
+</table>
 
 ## Gráficos de resumen
 
@@ -194,16 +265,19 @@ Están disponibles las siguientes métricas TCP:
 
 | Métrica | Descripción |
 |---|---|
-| **Retransmisiones TCP** | Las retransmisiones TCP representan los fallos detectados que se retransmiten para garantizar la entrega, medidas como recuento de retransmisiones del cliente. |
-| **Latencia TCP** | Medida como tiempo de ida y vuelta suavizado por TCP, es decir, el tiempo transcurrido entre el envío y el acuse de recibo de un marco TCP. |
-| **Jitter TCP** | Medido como variación del tiempo de ida y vuelta suavizada por TCP. |
-| **Tiempos de espera TCP**  | Número de conexiones TCP que han expirado desde la perspectiva del sistema operativo. Esto puede indicar problemas generales de conectividad y latencia.  |
-| **Rechazos de TCP**  | Número de conexiones TCP rechazadas por el servidor. Normalmente esto indica un intento de conexión a una IP/puerto que no está recibiendo conexiones o una mala configuración de cortafuegos/seguridad. |
-| **Reinicios de TCP**  | Número de conexiones TCP reiniciadas por el servidor.  |
-| **Conexiones establecidas** | Número de conexiones TCP en estado establecido, medidas en conexiones por segundo del cliente. |
 | **Conexiones finalizadas** | Número de conexiones TCP en estado finalizado, medidas en conexiones por segundo del cliente. |
+| **Conexiones establecidas** | Número de conexiones TCP en estado establecido, medidas en conexiones por segundo del cliente. |
+| **No se puede alcanzar el host** | Indica cuando el host de destino está fuera de línea o el tráfico está bloqueado por routers o firewall. Disponible en el **Agent 7.68+**. |
+| **No se puede alcanzar la red** | Indica problemas de red local en el equipo host del Agent. Disponible en el **Agent 7.68+**. |
+| **Cancelaciones de la conexión** | Rastrea las cancelaciones de conexión de TCP y los tiempos de espera de la conexión del espacio de usuario en tiempos de ejecución de lenguajes como `Go` y `Node.js`. Disponible en el **Agent 7.70+**. |
+| **Jitter TCP** | Medido como variación del tiempo de ida y vuelta suavizada por TCP. |
+| **Latencia TCP** | Medida como tiempo de ida y vuelta suavizado por TCP, es decir, el tiempo transcurrido entre el envío y el acuse de recibo de un marco TCP. |
+| **Rechazos de TCP**  | Número de conexiones de TCP rechazadas por el servidor. Por lo general, esto indica un intento de conexión a una IP/puerto que no está recibiendo conexiones, o una mala configuración del firewall/seguridad. |
+| **Reinicios de TCP**  | Número de conexiones de TCP reiniciadas por el servidor.  |
+| **Retransmisiones TCP** | Las retransmisiones TCP representan los fallos detectados que se retransmiten para garantizar la entrega, medidas como recuento de retransmisiones del cliente. |
+| **Tiempos de espera TCP**  | Número de conexiones de TCP vencidas desde la perspectiva del sistema operativo. Esto puede indicar problemas generales de conectividad y latencia.  |
 
-Todas las métricas se instrumentan desde la perspectiva del lado del `client` de la conexión, cuando está disponible, o del servidor en caso contrario.
+Todas las métricas se miden desde el lado `client` de la conexión cuando están disponibles; en caso contrario, desde el lado del servidor.
 
 ### Detección automática de servicios en la nube
 
@@ -283,7 +357,6 @@ Si dispones de la resolución mejorada [configurada][9] para AWS o Azure, CNM pu
  - nombre_de_sku
  - etiquetas personalizadas (definidas por el usuario) aplicadas a balanceadores de carga y pasarelas de aplicaciones Azure
 
-
 ### Resolución de dominio
 
 A partir del Agent v7.17 y posteriores, el Agent resuelve las IP como nombres de dominio legibles por humanos para el tráfico externo e interno. El dominio te permite monitorizar endpoints de proveedores de nube en los que no se puede instalar un Datadog Agent, como buckets S3, balanceadores de carga de aplicaciones y API. Los nombres de dominio irreconocibles, como los dominios DGA de servidores C&C, pueden apuntar a amenazas de seguridad de la red. El `domain` **está codificado como etiqueta en Datadog**, por lo que puedes utilizarlo en las consultas de la barra de búsqueda y en el panel de facetas para agregar y filtrar el tráfico.
@@ -326,7 +399,6 @@ Organiza y comparte vistas de los datos de tráfico. Las vistas guardadas agiliz
 
 Para obtener más información, consulta la documentación [Vistas guardadas][5].
 
-
 ## Tabla
 
 La tabla de red desglosa las métricas de _Volumen_, _Rendimiento_, _Retransmisiones TCP_, _Tiempo de ida y vuelta (RTT)_ y _Variación RTT_. entre cada _fuente_ y _destino_ definidos por tu consulta.
@@ -337,17 +409,20 @@ Puedes configurar las columnas de tu tabla utilizando el botón `Customize` (Per
 
 Configura el tráfico mostrado con el botón `Filter Traffic` (Filtrar tráfico).
 
-{{< img src="network_performance_monitoring/network_analytics/filter_traffic_toggles_v2.png" alt="Detalles del flujo" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/filter_traffic_toggle.png" alt="Información del flujo" style="width:50%;">}}
 
 El tráfico externo (a las IP públicas) y el tráfico del Datadog Agent se muestran por defecto. Para delimitar la vista, puedes desactivar los conmutadores `Show Datadog Traffic` (Mostrar tráfico de Datadog) y `Show External Traffic` (Mostrar tráfico externo).
 
 ### Tráfico no resuelto
 
-Las etiquetas de clientes y servidores no resueltos se marcan como `N/A`. El tráfico de un cliente o el endpoint del servidor pueden quedar sin resolver porque:
+Las etiquetas no resueltas de clientes y servidores se marcan como `N/A`. Un endpoint de tráfico de cliente o servidor puede quedar sin resolver porque carece de metadatos identificables, como información de origen o destino. Esto puede ocurrir cuando Datadog no puede resolver el tráfico a entidades conocidas como balanceadores de carga, servicios de nube o direcciones IP específicas dentro de la infraestructura monitorizada. Típicamente, puede haber tráfico no resuelto debido a que:
 
 * El cliente del host o contenedor o las API del servidor no se etiquetan con las etiquetas del cliente o del servidor utilizadas para el agregado de tráfico.
 * El endpoint está fuera de tu red privada y, por lo tanto, no está etiquetado por el Datadog Agent.
 * El endpoint es un cortafuegos, una malla de servicios u otra entidad en la que no se puede instalar un Datadog Agent.
+* El destino no se etiquetó con un servicio o una IP no se asignó a ningún servicio.
+
+Monitorizar el tráfico no resuelto es esencial para identificar puntos ciegos en la visibilidad de red y garantizar que todo el tráfico relevante se tiene en cuenta en los análisis de rendimiento y seguridad.
 
 Utiliza el conmutador **Show N/A (Unresolved Traffic)** (Mostrar N/A (Tráfico no resuelto)) en la esquina superior derecha de la tabla de datos para filtrar las conexiones agregadas con clientes o servidores no resueltos (`N/A`).
 
@@ -368,7 +443,7 @@ El panel lateral proporciona telemetría contextual para ayudarte a depurar las 
 - Procesos pesados que consumen la CPU o la memoria del endpoint de destino.
 - Errores de aplicación en el código del endpoint cliente.
 
-{{< img src="network_performance_monitoring/network_analytics/npm_sidepanel2.png" alt="Detalles del flujo" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/cnm_sidepanel.png" alt="Panel lateral de CNM que muestra en detalle el tráfico entre el servicio del cliente orders-app y el servicio del servidor azure.sql_database" style="width:80%;">}}
 
 ### Etiquetas frecuentes
 
@@ -378,7 +453,79 @@ La parte superior del panel lateral muestra las etiquetas de cliente y servidor 
 
 ### Seguridad
 
-La pestaña **Seguridad** destaca las posibles amenazas de red y los hallazgos detectados por [amenazas de Cloud Security Management][6] y [configuraciones erróneas de Cloud Security Management][7]. Estas señales se generan cuando Datadog detecta una actividad de red que coincide con una [regla de detección o cumplimiento][8] o si existen otras amenazas y configuraciones erróneas relacionadas con el flujo de red seleccionado.
+La pestaña **Seguridad** destaca las posibles amenazas a la red y los hallazgos detectados por [Workload Protection][6] y [Cloud Security Misconfigurations][7]. Estas señales se generan cuando Datadog detecta una actividad de red que coincide con una [regla de detección o de cumplimiento][8], o si hay otras amenazas y configuraciones erróneas relacionadas con el flujo de red seleccionado.
+
+## Etiquetas predeterminadas
+
+La siguiente lista muestra las etiquetas (tags) `server` y `client` disponibles de forma predefinida para la consulta y el análisis del tráfico de red.
+| servidor                    | cliente                      |
+|---------------------------|-----------------------------|
+| server_team               | client_team                |
+| server_role               | client_role                |
+| server_env                | client_env                 |
+| server_environment        | client_environment         |
+| server_app                | client_app                 |
+| server_domain             | client_datacenter          |
+| server_dns_server         | client_instance-id         |
+| server_datacenter         | client_instance-type       |
+| server_instance-id        | client_security-group-name |
+| server_instance-type      | client_security-group      |
+| server_security-group-name| client_name                |
+| server_security-group     | client_image               |
+| server_name               | client_account             |
+| server_image              | client_kernel_version      |
+| server_account            | client_autoscaling_group   |
+| server_kernel_version     | client_region              |
+| server_autoscaling_group  | client_terraform.module    |
+| server_region             | client_site                |
+| server_terraform.module   | client_image_name          |
+| server_site               | client_pod_name            |
+| server_image_name         | client_kube_deployment     |
+| server_pod_name           | client_kube_replica_set    |
+| server_kube_deployment    | client_kube_job            |
+| server_kube_replica_set   | client_kube_cronjob        |
+| server_kube_job           | client_kube_daemon_set     |
+| server_kube_cronjob       | client_kube_stateful_set   |
+| server_kube_daemon_set    | client_kube_cluster_name   |
+| server_kube_stateful_set  | client_kube_service        |
+| server_kube_cluster_name  | client_kube_namespace      |
+| server_kube_service       | client_kubernetes_cluster  |
+| server_kube_namespace     | client_cluster-name        |
+| server_kubernetes_cluster | client_kube_container_name |
+| server_cluster-name       | client_kube-labels         |
+| server_kube_container_name| client_task_name           |
+| server_kube-labels        | client_task_version        |
+| server_task_name          | client_task_family         |
+| server_task_version       | client_ecs_cluster         |
+| server_task_family        | client_loadbalancer        |
+| server_ecs_cluster        | client_mesos_task          |
+| server_loadbalancer       | client_marathon_app        |
+| server_cacheclusterid     | client_chronos_job         |
+| server_mesos_task         | client_chronos_job_owner   |
+| server_marathon_app       | client_nomad_task          |
+| server_chronos_job        | client_nomad_group         |
+| server_chronos_job_owner  | client_nomad_job           |
+| server_nomad_task         | client_rancher_container   |
+| server_nomad_group        | client_rancher_service     |
+| server_nomad_job          | client_rancher_stack       |
+| server_rancher_container  | client_swarm_service       |
+| server_rancher_service    | client_swarm_namespace     |
+| server_rancher_stack      | client_container_id        |
+| server_swarm_service      | client_container_name      |
+| server_swarm_namespace    | client_image_tag           |
+| server_container_id       | client_short_image         |
+| server_container_name     | client_docker_image        |
+| server_image_tag          | client_kubernetescluster   |
+| server_short_image        | client_kube_cluster        |
+| server_cluster            | client_protocol            |
+| server_docker_image       |                             |
+| server_kubernetescluster  |                             |
+| server_kube_cluster       |                             |
+| server_s3_bucket          |                             |
+| server_rds_instance_id    |                             |
+| server_cloud_endpoint_detection |                      |
+| server_gateway_id         |                             |
+| server_protocol           |                             |
 
 ## Referencias adicionales
 
@@ -389,7 +536,7 @@ La pestaña **Seguridad** destaca las posibles amenazas de red y los hallazgos d
 [3]: /es/network_monitoring/cloud_network_monitoring/supported_cloud_services/aws_supported_services/
 [4]: /es/network_monitoring/cloud_network_monitoring/supported_cloud_services/gcp_supported_services/
 [5]: /es/logs/explorer/saved_views/
-[6]: /es/security/threats/
+[6]: /es/security/workload_protection/
 [7]: /es/security/cloud_security_management/misconfigurations/
 [8]: /es/security/detection_rules/
 [9]: /es/network_monitoring/cloud_network_monitoring/setup/#enhanced-resolution

@@ -24,7 +24,7 @@ author:
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories: []
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_on_public_website: true
@@ -39,16 +39,16 @@ name: php_opcache
 public_title: PHP OPcache
 short_description: PHP OPcache 바이트코드 캐시 시스템을 모니터링하세요.
 supported_os:
-- 리눅스
+- linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - 제공::통합
+  - Offering::Integration
   configuration: README.md#Setup
   description: PHP OPcache 바이트코드 캐시 시스템을 모니터링하세요.
   media: []
@@ -66,7 +66,7 @@ tile:
 
 ## 설정
 
-아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [오토파일럿 통합 템플릿][3]을 참조하세요.
+아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [자동탐지 통합 템플릿][2]을 참조하세요.
 
 ### 설치
 
@@ -103,14 +103,14 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 </Location>
 ```
 
-### 구성
+### 설정
 
 1. 에이전트의 설정 디렉토리 루트에 있는 `conf.d/` 폴더에 있는 `php_opcache.d/conf.yaml` 파일을 편집하여 `php_opcache` 성능 데이터 수집을 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 `php_opcache.d/conf.yaml` 파일][6]을 참조하세요.
     ```
     instances
       - url: http://localhost/opcache-status
     ```
-2. [ Agent를 다시 시작][7]합니다.
+2. [에이전트를 다시 시작][7]합니다.
 
 ### 검증
 
@@ -119,7 +119,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "php_opcache" >}}
+{{< get-metrics-from-git "php-opcache" >}}
 
 
 ### 이벤트
@@ -127,7 +127,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 PHP OPcache 통합에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "php_opcache" >}}
+{{< get-service-checks-from-git "php-opcache" >}}
 
 
 ## 트러블슈팅

@@ -1,5 +1,6 @@
 ---
 title: Connect RUM and Traces
+description: "Connect frontend RUM data with backend APM traces for end-to-end visibility across your application stack and user journey."
 aliases:
 - /real_user_monitoring/connect_rum_and_traces
 - /real_user_monitoring/platform/connect_rum_and_traces/
@@ -29,7 +30,7 @@ algolia:
   tags: ['rum traces']
 ---
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces" style="width:100%;">}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum-trace-tab.png" alt="RUM and Traces" style="width:100%;">}}
 
 ## Overview
 
@@ -73,7 +74,13 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")],
+      allowedTracingUrls: [
+        "https://api.example.com",
+        // Matches any subdomain of my-api-domain.com, such as https://foo.my-api-domain.com
+        /^https:\/\/[^\/]+\.my-api-domain\.com/,
+        // You can also use a function for advanced matching:
+        (url) => url.startsWith("https://api.example.com")
+      ],
       sessionSampleRate: 100,
       sessionReplaySampleRate: 100, // if not specified, defaults to 100
       trackResources: true,
@@ -92,7 +99,13 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")],
+      allowedTracingUrls: [
+        "https://api.example.com",
+        // Matches any subdomain of my-api-domain.com, such as https://foo.my-api-domain.com
+        /^https:\/\/[^\/]+\.my-api-domain\.com/,
+        // You can also use a function for advanced matching:
+        (url) => url.startsWith("https://api.example.com")
+      ],
       sessionSampleRate: 100,
       sessionReplaySampleRate: 100, // if not included, the default is 100
       trackResources: true,
@@ -105,8 +118,10 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     `allowedTracingUrls` matches the full URL (`<scheme>://<host>[:<port>]/<path>[?<query>][#<fragment>]`). It accepts the following types:
       - `string`: matches any URL that starts with the value, so `https://api.example.com` matches `https://api.example.com/v1/resource`.
-      - `RegExp`: executes a test with the provided RegExp and the URL.
+      - `RegExp`: matches if any substring of the URL matches the provided RegExp. For example, `/^https:\/\/[^\/]+\.my-api-domain\.com/` matches URLs like `https://foo.my-api-domain.com/path`, but not `https://notintended.com/?from=guess.my-api-domain.com`. **Note:** The RegExp is not anchored to the start of the URL unless you use `^`. Be careful, as overly broad patterns can unintentionally match unwanted URLs and cause CORS errors.
       - `function`: evaluates with the URL as parameter. Returning a `boolean` set to `true` indicates a match.
+
+<div class="alert alert-danger">When using RegExp, the pattern is tested against the entire URL as a substring, not just the prefix. To avoid unintended matches, anchor your RegExp with `^` and be as specific as possible. </div>
 
 3.  _(Optional)_ Configure the `traceSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces, for example:
 
@@ -121,20 +136,20 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
-4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `all` by default).
+4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `sampled` by default).
 
     For example, if you set the `traceSampleRate` to 20% in the Browser SDK:
     - When `traceContextInjection` is set to `all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
 
   {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
 
-  - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+    - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
 
     {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
 
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
-[1]: /real_user_monitoring/browser/
+[1]: /real_user_monitoring/application_monitoring/browser/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "Android RUM" %}}
@@ -281,7 +296,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM Flutter Monitoring][1].
 
-2. Follow the instructions under [Automatic Resource Tracking][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
+2. Follow the instructions under [Automatically track resources][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
     ```dart
     final configuration = DatadogConfiguration(
       // ...
@@ -290,16 +305,15 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     )..enableHttpTracking()
     ```
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/#automatic-resource-tracking
-
+[1]: /real_user_monitoring/application_monitoring/flutter/setup/
+[2]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration#automatically-track-resources
 {{% /tab %}}
 
 
 {{% tab "Roku RUM" %}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
+<div class="alert alert-danger">RUM for Roku is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
 1. Set up [RUM Roku Monitoring][1].
@@ -313,7 +327,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         result = ddUrlTransfer.GetToString()
     ```
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
+[1]: /real_user_monitoring/application_monitoring/roku/setup/
 
 
 {{% /tab %}}
@@ -358,8 +372,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup?tab=rum#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
+[1]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup
+[2]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup?tab=rum#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -375,7 +389,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 2. In your browser's developer tools, go to the **Network** tab.
 3. Check the request headers for a resource request that you expect to be correlated contains the [correlation headers from Datadog][1].
 
-[1]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#how-are-rum-resources-linked-to-traces
+[1]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -386,7 +400,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
 [1]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[2]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm?tab=androidrum#how-are-rum-resources-linked-to-traces
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=androidrum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -397,7 +411,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
-[2]: https://docs.datadoghq.com//real_user_monitoring/correlate_with_other_telemetry/apm/?tab=iosrum#how-are-rum-resources-linked-to-traces
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=iosrum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -409,7 +423,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[3]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -421,7 +435,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://docs.flutter.dev/tools/devtools/overview
 [2]: https://docs.flutter.dev/tools/devtools/network
-[3]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=reactnativerum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
@@ -433,10 +447,29 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=kotlinmultiplatformrum#how-are-rum-resources-linked-to-traces
+[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=kotlinmultiplatformrum#how-rum-resources-are-linked-to-traces
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## RUM Explorer to Traces
+
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum-trace-apm-link.png" alt="RUM and Traces" style="width:100%;">}}
+
+To view traces from the RUM Explorer:
+
+1. Navigate to your [list of sessions][21] and click on a session that has traces available. You can also query for sessions with traces by using`@_dd.trace_id:*`.
+
+When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a **View Trace in APM** link.
+
+## Traces to RUM Explorer
+
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum-traces-to-rum.png" alt="RUM and Traces" style="width:100%;">}}
+
+To view the RUM event from Traces:
+
+1. Within a trace view, click **VIEW** to see all traces created during the view's lifespan, or **RESOURCE** to see traces associated with the specific resource from the Overview tab.
+1. Click **See View in RUM** or **See Resource in RUM** to open the corresponding event in the RUM Explorer.
 
 ## Supported libraries
 
@@ -447,7 +480,7 @@ Below is a list of the supported backend libraries that need to be on the servic
 | [Python][3]      | [0.22.0][4]     |
 | [Go][5]          | [1.10.0][6]     |
 | [Java][7]        | [0.24.1][8]     |
-| [Ruby][9]        | [0.20.0][10]     |
+| [Ruby][9]        | [0.20.0][10]    |
 | [JavaScript][11] | [0.10.0][12]    |
 | [PHP][13]        | [0.33.0][14]    |
 | [.NET][15]       | [1.18.2][16]    |
@@ -616,7 +649,7 @@ The default injection style is `tracecontext`, `Datadog`.
 {{< /tabs >}}
 
 
-## How are RUM resources linked to traces?
+## How RUM resources are linked to traces
 
 Datadog uses the distributed tracing protocol and sets up the HTTP headers below. By default, both trace context and Datadog-specific headers are used.
 {{< tabs >}} {{% tab "Datadog" %}}
@@ -640,13 +673,23 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 : `parent id`: 64 bits span ID, hexadecimal on 16 characters.
 : `trace flags`: Sampled (`01`) or not sampled (`00`)
 
+**Trace ID Conversion**: The 128-bit W3C trace ID is created by padding the original 64-bit source trace ID with leading zeros. This ensures compatibility with APM while conforming to the W3C Trace Context specification. The original 64-bit trace ID becomes the lower 64 bits of the 128-bit W3C trace ID.
+
 `tracestate: dd=s:[sampling priority];o:[origin]`
 : `dd`: Datadog's vendor prefix.
 : `sampling priority`: Set to `1` if the trace was sampled, or `0` if it was not.
 : `origin`: Always set to `rum` to make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
 
-Example:
-: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+**Examples**:
+
+Source trace ID (64-bit): `8448eb211c80319c`
+
+W3C Trace Context (128-bit): `00000000000000008448eb211c80319c`
+
+The relationship shows that the original 64-bit trace ID `8448eb211c80319c` is padded with 16 leading zeros (`0000000000000000`) to create the 128-bit W3C trace ID.
+
+Complete traceparent example:
+: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331-01`
 : `tracestate: dd=s:1;o:rum`
 
 {{% /tab %}}
@@ -668,11 +711,11 @@ Example for b3 multiple headers:
 
 These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][17] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][18] (OPTIONS requests), which are made by the browser prior to every request when tracing is allowed on cross-site URLs.
 
-## How are APM quotas affected?
+## Effect on APM quotas
 
 Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
 
-## How long are traces retained?
+## Trace retention
 
 These traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, create [retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
 
@@ -700,3 +743,4 @@ These traces are available for 15 minutes in the [Live Search][19] explorer. To 
 [18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
 [19]: /tracing/trace_explorer/#live-search-for-15-minutes
 [20]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[21]: https://app.datadoghq.com/rum/explorer

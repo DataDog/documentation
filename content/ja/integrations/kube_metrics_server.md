@@ -125,7 +125,7 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 
 ### イベント
@@ -133,7 +133,7 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 kube_metrics_server には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "kube_metrics_server" >}}
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 
 ## トラブルシューティング

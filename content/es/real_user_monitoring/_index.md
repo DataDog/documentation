@@ -57,17 +57,20 @@ further_reading:
 - link: /real_user_monitoring/browser/data_collected/
   tag: Documentación
   text: Datos del navegador de RUM recopilados
+- link: https://www.datadoghq.com/blog/progressive-web-application-monitoring/
+  tag: Blog
+  text: Prácticas recomendadas para la monitorización de aplicaciones web progresivas
 title: RUM y Session Replay
 ---
 
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
-Descubre cómo crear acciones de usuarios personalizadas que se adapten a necesidades empresariales específicas, lo que permite un seguimiento preciso del comportamiento de los usuarios.
+{{< learning-center-callout header="Únete a una sesión de capacitación web" hide_image="true" btn_title="Inscríbete" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
+  Descubre cómo crear acciones de usuarios personalizadas que se adapten a necesidades empresariales específicas, lo que permite un seguimiento preciso del comportamiento de los usuarios.
 {{< /learning-center-callout >}}
 
 ## ¿Qué es Real User Monitoring?
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="Dashboard de RUM" >}}
+{{< img src="real_user_monitoring/performance-summary-browser.png" alt="Dashboard de RUM" >}}
 
 Con Datadog Real User Monitoring (RUM)*, disfrutarás de una visibilidad de extremo a extremo de la actividad y la experiencia en tiempo real de cada usuario. RUM resuelve cuatro tipos de casos de uso para la monitorización de aplicaciones web y móviles:
 
@@ -111,7 +114,7 @@ La siguiente tabla muestra las funcionalidades de RUM compatibles con cada plata
 | Monitorizar indicadores vitales específicos de plataformas | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Seguimiento global de contexto/atributo en logs  | {{< X >}} |  |  |  |  |  |  |
 | Rastreo del lado del cliente |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay está en Vista previa para aplicaciones móviles nativas. |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
 | Señales de frustración | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Compatible sólo parcialmente con todos los dispositivos **móviles** y **Roku** |
 
 ## Endpoints compatibles para dominios de SDK
@@ -126,12 +129,33 @@ El tráfico de todos los SDK de Datadog se transmite a través de SSL (443 por d
 | EU1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
+| AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 
-## Explorar Datadog RUM
+## Explorar RUM de Datadog
 
 Accede a RUM yendo a [**Experiencia digital > Resumen del rendimiento**][1].
 
+Selecciona una aplicación en la barra de navegación superior o sigue las instrucciones de configuración de [navegador][15] o [móvil][16] para añadir tu primera aplicación.
+
+{{< img src="real_user_monitoring/rum-performance-application-selector.png" alt="Selecciona una aplicación RUM" >}}
+
 **Consejo**: Para abrir RUM a partir de la búsqueda global de Datadog, pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> y busca `real user monitoring`.
+
+## Resumen de la monitorización del rendimiento
+
+| Resumen del rendimiento del navegador | Resumen del rendimiento de los móviles |
+|---------|---------|
+| {{< img src="real_user_monitoring/performance-summary-browser.png" alt="Página de resumen de la Monitorización de rendimiento de RUM para una aplicación de navegador" >}} | {{< img src="real_user_monitoring/performance-summary-mobile-2.png" alt="Página de resumen de la Monitorización de rendimiento de RUM para una aplicación móvil" >}} | 
+
+La página [Resumen de monitorización del rendimiento de RUM][1] proporciona información relevante y procesable para aplicaciones web y móviles. Obtén una experiencia personalizada para cada plataforma que te ayudará a:
+
+- **Centrarte en datos clave** por plataforma, como la latencia de la interfaz de usuario para fallos web o móviles.
+- **Monitorizar el estado de las aplicaciones** a través de KPIs conocidos, como Core Web Vitals para aplicaciones web o la tasa de cuelgues para iOS, para evaluar la fiabilidad de las aplicaciones.
+- **Analizar en detalle las investigaciones directamente** desde los widgets interactivos sin salir de la página
+
+Para **aplicaciones web**, utiliza la barra de búsqueda para filtrar los datos, identificar las páginas lentas y seguir la interfaz de usuario hasta la página [RUM Optimization Inspect][17].
+
+Para **aplicaciones móviles**, revisa los fallos recientes en la parte inferior de la página y utiliza el panel lateral [Error Tracking][6] para solucionar problemas.
 
 ### Dashboards predefinidos
 
@@ -149,7 +173,7 @@ Consulta sesiones de usuario en segmentos, como por ejemplo para verificar cuán
 
 Consulta tus [trazas (traces) de back-end, logs y métricas de infraestructura][5] hasta llegar a la línea de código exacta que afecta al rendimiento de la aplicación, que se corresponde con las experiencias del usuario y los problemas notificados.
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM y APM" >}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs-2.png" alt="RUM y APM" >}}
 
 ### Seguimiento de errores e informes de fallos
 
@@ -177,16 +201,39 @@ Ve [grabaciones de navegador][12] de usuarios reales que interactúan con tu sit
 
 Accede a información sobre logs activados, errores y rendimiento cuando soluciones problemas de aplicaciones con [herramientas de desarrollador de navegador[14].
 
+
+## Permisos
+
+Por defecto, todos los usuarios pueden cambiar la configuración RUM de una aplicación.
+
+Utiliza controles de acceso granulares para limitar los [roles][18] que pueden editar la configuración RUM de una aplicación en particular:
+1. Mientras visualizas la configuración RUM de una aplicación, haz clic en el botón **Edit application** (Editar aplicación) situado en la parte superior de la pantalla. Aparece un menú desplegable.
+1. Selecciona **Manage App Permissions** (Gestionar permisos de aplicaciones).
+1. Haz clic en **Restrict Access** (Restringir el acceso).
+1. El cuadro de diálogo se actualiza para mostrar que los miembros de tu organización tienen por omisión el permiso de acceso **Viewer** (Visualización).
+1. Utiliza el menú desplegable para seleccionar uno o varios roles, equipos o usuarios que pueden modificar el notebook.
+1. Haz clic en **Add** (Añadir).
+1. El cuadro de diálogo se actualiza para indicar que el rol que has seleccionado tiene el permiso **Editor** (Edición).
+1. Haz clic en **Save** (Guardar).
+
+**Nota:** Para mantener tu acceso de edición a la aplicación, el sistema requiere que incluyas al menos un rol del que seas miembro antes de guardar.
+
+Debes tener acceso de edición para restaurar el acceso general a una aplicación restringida. Realiza los pasos siguientes:
+1. Mientras visualizas la configuración RUM de una aplicación, haz clic en el botón **Edit application** (Editar aplicación) situado en la parte superior de la pantalla. Aparece un menú desplegable.
+1. Selecciona **Manage App Permissions** (Gestionar permisos de aplicaciones).
+1. Haz clic en **Restore Full Access** (Restablecer acceso completo).
+1. Haz clic en **Save** (Guardar).
+
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /es/real_user_monitoring/platform/dashboards/
 [3]: /es/real_user_monitoring/explorer/visualize/
 [4]: /es/monitors/types/real_user_monitoring/
-[5]: /es/real_user_monitoring/platform/connect_rum_and_traces/
+[5]: /es/real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /es/real_user_monitoring/error_tracking/
 [7]: /es/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /es/real_user_monitoring/ios/mobile_vitals/
@@ -196,3 +243,7 @@ Accede a información sobre logs activados, errores y rendimiento cuando solucio
 [12]: /es/real_user_monitoring/session_replay/browser/
 [13]: /es/real_user_monitoring/session_replay/browser/privacy_options/
 [14]: /es/real_user_monitoring/session_replay/browser/developer_tools/
+[15]: /es/real_user_monitoring/browser/setup/
+[16]: /es/real_user_monitoring/mobile_and_tv_monitoring/
+[17]: https://app.datadoghq.com/rum/optimization/inspect
+[18]: /es/account_management/rbac/

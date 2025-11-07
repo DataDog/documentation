@@ -92,7 +92,7 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
+- marketplace
 - ネットワーク
 - snmp
 custom_kind: インテグレーション
@@ -176,7 +176,7 @@ RapDev SNMP プロファイルパッケージは 150 以上のデバイスプロ
 このインテグレーションでは数百種類の YAML プロファイルにアクセスし、多数の新しいダッシュボードをインスタンス上に自動デプロイすることができます。その後、ネイティブの Datadog SNMP オートディスカバリーを使用してサポート対象のハードウェアを自動検知し、ネイティブの Datadog SNMP インテグレーションで OID のポーリングを開始します。
 お使いの Datadog Agent や YAML で SNMP プロファイルを管理、編集、修正、更新する必要はありません。これらの作業はすべてインテグレーションにより自動で行われるため、モニタリングとアラートの生成をすぐに開始することができます。
 
-### 対応デバイス
+### サポートされているデバイス
 以下は現在サポートされているデバイスの一覧です。すべてのデバイスについての最新リストは[ウェブサイト](https://www.rapdev.io/products/datadog-snmp-profiles)を参照してください。
 
 | メーカー | モデル                 | バージョン       |
@@ -225,7 +225,7 @@ RapDev SNMP プロファイルパッケージは 150 以上のデバイスプロ
 | Steelhead    | Riverbed              | CX、EX        |
 | VMware       | ESXi                  | 6.x           |
 
-## Agent
+## サポート
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
  - メール: support@rapdev.io 

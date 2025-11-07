@@ -17,13 +17,31 @@ further_reading:
 
 ## Overview
 
-While information from individual logs can be useful visualized as a list, sometimes valuable information can be accessed through aggregation. To access this information, search for logs in the [Log Explorer][5] and display them as timeseries, top lists, tree maps, pie charts, or tables.
+The [Logs Explorer][5] lets you search and view individual logs as a list. However, the most valuable insights often come from aggregating logs at scale. Using the search feature, you can filter logs and visualize them as timeseries charts, top lists, tree maps, pie charts, or tables to better understand trends, patterns, and outliers across your log data.
 
-Log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6].
+## Natural language queries
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+Natural Language Queries is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
+
+<div class="alert alert-info">Natural Language Queries (NLQ) for Logs is <strong>built with Llama</strong>.</div>
+
+Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured log query, making it easier to explore logs without needing to write complex syntax. To access this feature, click **Ask** in the search field.
+
+{{< img src="/logs/explorer/search/log_explorer_nlq.mp4" alt="Natural language query in Log Explorer showing how to search for logs using plain English phrases" video=true >}}
+
+The system translates natural language input into Datadog queries and understands context such as services, attributes, tags, and time ranges. It also detects relevant fields automatically and enables users to create visualizations using simple descriptions—for example, "Top 20 services by errors" or "Show errors from service X in the past 24 hours."
+
+To disable NLQ, you must have [`org_management` permissions][8]. Navigate to [Organization Settings > Preferences][7] and toggle off the Natural Language Queries feature.
 
 ## Search query
 
-For example, to filter on logs produced by a web store service, with an error status, over the past fifteen minutes, create a custom query like `service:payment status:error rejected` and set the time range to the `Past 15 minutes`:
+A log Explorer search consists of a time range and a search query, mixing `key:value` and [full-text search][6].
+
+To filter on logs produced by a web store service, with an error status, over the past fifteen minutes, create a custom query like `service:payment status:error rejected` and set the time range to the `Past 15 minutes`:
 
 {{< img src="logs/explorer/search_filter.png" alt="Create a search query in the Log Explorer that filters for error logs of rejected payments for a web store service" style="width:100%;" >}}
 
@@ -42,7 +60,7 @@ Use the search bar's autocomplete feature to complete your query using:
 
 ### Autocomplete facets and values
 
-The search bar autosuggests facets based on your input in the search bar. These facets are displayed in the same order in which they are positioned in the [facet panel][5]. If a facet has a defined display name, it is displayed on the right-hand side of the dropdown menu. Facets that are not configured to be displayed in the facet panel are not autosuggested for a search.
+The search bar autosuggests facets based on your input in the search bar. These facets are displayed in the same order in which they are positioned in the [facet panel][5]. If a facet has a defined display name, it is displayed on the right-hand side of the dropdown menu.
 
 {{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="The logs search bar showing `network` as the query and the facets @network.bytes_written, @network.client.ip, and @network.interface as autocomplete options" style="width:80%;">}}
 
@@ -95,3 +113,5 @@ You can interact with the search bar with your mouse, as well as by using keyboa
 [4]: /dashboards/guide/custom_time_frames
 [5]: /logs/explorer/
 [6]: /logs/explorer/search_syntax/#full-text-search
+[7]: https://app.datadoghq.com/organization-settings/preferences
+[8]: /account_management/rbac/permissions/#access-management

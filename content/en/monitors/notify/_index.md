@@ -16,6 +16,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/alert-monitor-notifications"
   tag: "Learning Center"
   text: "Take a course to customize alert monitor notifications"
+- link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
+  tag: "Blog"
+  text: "Route your monitor alerts with Datadog monitor notification rules"
 ---
 
 ## Overview
@@ -55,7 +58,7 @@ Steps to free up disk space on {{host.name}}: <-- tag variable
 
 
 ## Notification recipients
-Datadog recommends using [monitor notification rules][22] to manage monitor notifications. With notification rules you can automate which notification recipients are added to a monitor based on predefined sets of conditions. Create different rules to route monitor alerts based on the tags of the monitor notification so you don't have to manually set up recipients nor notification routing logic for each individual monitor. 
+Datadog recommends using [monitor notification rules][22] to manage monitor notifications. With notification rules you can automate which notification recipients are added to a monitor based on predefined sets of conditions. Create different rules to route monitor alerts based on the tags of the monitor notification so you don't have to manually set up recipients nor notification routing logic for each individual monitor.
 
 In both notification rules and individual monitors, you can use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog auto-recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click **@ Add Mention**, **Add Workflow**, or **Add Case**.
 
@@ -79,9 +82,15 @@ If a notification channel is set, you can route notifications to a specific Team
 
 {{% /collapse-content %}}
 
+### Bulk editing monitor @-handles
+Datadog supports editing alert message recipients across multiple monitors at once. Use this feature to efficiently add, remove, or replace `@-handles` in the monitor message body. Use cases include:
+
+- **Swap a handle**: Replace one handle with another across multiple monitors. For example, change `@pagerduty-sre` to `@oncall-sre`. You can also swap a single handle with multiple handles, such as replacing `@pagerduty-sre` with both `@pagerduty-sre` and `@oncall-sre`, to support dual paging or expanded alerting coverage.
+- **Add a handle**: Add a new recipient without removing existing ones. For example, add `@slack-infra-leads` to all selected monitors.
+- **Remove a handle**: Remove a specific handle from monitor messages. For example, remove `@webhook-my-legacy-event-intake`.
 
 ## Workflows
-You can trigger a [workflow automation][8] or create a new workflow from a monitor. 
+You can trigger a [workflow automation][8] or create a new workflow from a monitor.
 
 Before you add a workflow to a monitor, [add a monitor trigger to the workflow][9].
 
@@ -93,7 +102,7 @@ After you add the monitor trigger, [add an existing workflow to your monitor][10
 
 For more information on building a workflow, see [Build workflows][11].
 
-## Incidents 
+## Incidents
 Incidents can be automatically created from a monitor when the monitor transitions to an `alert`, `warn`, or `no data` status. Click on **Add Incident** and select an `@incident-` option. Admins can create `@incident-` options in [Incident Settings][12].
 
 When an incident is created from a monitor, the incident's [field values][13] are automatically populated based on the monitor's tags. For example, if your monitor has a tag `service:payments`, the incident's service field will be set to "payments". To receive notifications for these incidents, make sure the monitor's tags align with your incident notification rules. **Note**: Incident notification rules are configured separately from monitor notification rules and need to be set up independently. For more information, see [Incident Notification][14].
@@ -102,7 +111,7 @@ When an incident is created from a monitor, the incident's [field values][13] ar
 
 Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors.
 
-<div class="alert alert-warning">Distribution metrics with percentile aggregators (such as `p50`, `p75`, `p95`, or `p99`) do not generate a snapshot graph in notifications. </div>
+<div class="alert alert-danger">Distribution metrics with percentile aggregators (such as `p50`, `p75`, `p95`, or `p99`) do not generate a snapshot graph in notifications. </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:70%;" >}}
 
@@ -177,7 +186,7 @@ Find more information on this feature in [Configure Monitors][18]
 
 ## Test notifications
 
-After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page. 
+After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
 Test notifications are supported for the [monitor types][19]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 

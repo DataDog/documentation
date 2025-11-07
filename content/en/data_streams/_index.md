@@ -2,6 +2,7 @@
 title: Data Streams Monitoring
 aliases:
 - /data_streams/troubleshooting
+- /data_streams/data_pipeline_lineage
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
@@ -24,6 +25,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
       tag: 'Blog'
       text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
+    - link: "https://www.datadoghq.com/blog/data-observability/"
+      tag: "Blog"
+      text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
 cascade:
     algolia:
         rank: 70
@@ -31,7 +35,7 @@ cascade:
 
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
@@ -43,13 +47,36 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 * Pinpoint faulty producers, consumers or queues, then pivot to related logs or clusters to troubleshoot faster.
 * Prevent cascading delays by equipping service owners to stop backed up events from overwhelming downstream services.
 
-## Setup
+### Supported languages and technologies
 
 Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If you can instrument your client infrastructure, you can use Data Streams Monitoring.
 
-For installation instructions and lists of supported technologies, choose your language:
+|   | Java | Python | .NET | Node.js | Go |
+| - | ---- | ------ | ---- | ------- | -- |
+| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| Azure Service Bus | | | {{< X >}} | | |
+| Google Pub/Sub | {{< X >}} | | | {{< X >}} | |
+| IBM MQ | | | {{< X >}} | | |
+| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+
+Data Streams Monitoring requires minimum Datadog tracer versions. See each setup page for details.
+
+#### Support for OpenTelemetry
+Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM to work with OpenTelemetry, no additional setup is required to use Data Streams Monitoring. See [OpenTelemetry Compatibility][11].
+
+## Setup
+
+### By language
 
 {{< partial name="data_streams/setup-languages.html" >}}
+
+
+### By technology
+
+{{< partial name="data_streams/setup-technologies.html" >}}
 
 <br/>
 
@@ -86,7 +113,7 @@ Alternatively, click a service to open a detailed side panel and view the **Path
 
 Slowdowns caused by high consumer lag or stale messages can lead to cascading failures and increase downtime. With out-of-the-box alerts, you can pinpoint where bottlenecks occur in your pipelines and respond to them right away. For supplementary metrics, Datadog provides additional integrations for message queue technologies like [Kafka][4] and [SQS][5].
 
-Through Data Stream Monitoring's out-of-the-box monitor templates, you can setup monitors on metrics like consumer lag, throughput, and latency in one click. 
+Through Data Stream Monitoring's out-of-the-box monitor templates, you can setup monitors on metrics like consumer lag, throughput, and latency in one click.
 
 {{< img src="data_streams/add_monitors_and_synthetic_tests.png" alt="Datadog Data Streams Monitoring Monitor Templates" style="width:100%;" caption="Click 'Add Monitors and Synthetic Tests' to view monitor templates" >}}
 
@@ -98,7 +125,7 @@ Click on the **Throughput** tab on any service or queue in Data Streams Monitori
 
 By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
 
-### Quickly pivot to identify root causes in infrastructure, logs, or traces 
+### Quickly pivot to identify root causes in infrastructure, logs, or traces
 
 Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra**, **Logs** or **Traces** tabs to further troubleshoot why pathway latency or consumer lag has increased.
 
@@ -121,3 +148,4 @@ Datadog can automatically detect your managed [Confluent Cloud][8] connectors an
 [8]: https://www.confluent.io/confluent-cloud/
 [9]: /integrations/confluent_cloud/
 [10]: https://app.datadoghq.com/data-streams/map
+[11]: /opentelemetry/compatibility

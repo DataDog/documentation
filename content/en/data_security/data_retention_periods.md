@@ -9,6 +9,8 @@ further_reading:
     - link: '/data_security/'
       tag: 'Documentation'
       text: 'Review the main categories of data submitted to Datadog'
+algolia:
+  tags: ['data retention']
 filter_all: All
 content: "The following table lists default data retention periods by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/developers/guide/data-collection-resolution). Still need help? Contact [Datadog support](/help)."
 attributes: 
@@ -17,17 +19,19 @@ attributes:
        - **Errors**: 15 days
        - **Indexed spans**: 15 or 30 days, determined by customer plan
        - **Services/resources statistics**: 30 days
-       - **Viewed traces**: 15 months
+       - **Viewed traces**: Retained for the duration of the account
   - product: App and API Protection
     data_type: |
        - **Security signals**: 15 months
        - **Spans**: 90 days
   - product: Audit Trail
     data_type: |
-       - **Audit logs**: 90 days
+       - **Audit logs (Audit Trail enabled)**: 90 days
+       - **Audit logs (Audit Trail disabled)**: 7 days
   - product: Browser RUM
     data_type: |
-       - **Events**: 30 days
+       - **Session, View, Action, and Error Events**: 30 days
+       - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Case Management
     data_type: | 
        - **Cases**: Retained for the duration of the account
@@ -51,7 +55,7 @@ attributes:
     data_type: | 
        - **Events**: 90 days
        - **Security signals**: 15 months
-  - product: Code Analysis
+  - product: Code Security SAST
     data_type: | 
        - **Scans**: 15 months
   - product: Code Security IAST
@@ -64,8 +68,8 @@ attributes:
        - **YAML definitions**: 7 days
   - product: Continuous Profiler
     data_type: | 
-       - **Profiles (not displayed in the UI)**: 8 days
-       - **Profiles (displayed in the UI)**: 1 year
+       - **Individual profiles (not opened in the UI)**: 8 days
+       - **Individual profiles (opened in the UI at least once)**: 1 year
        - **Profile metrics**: 90 days
   - product: Continuous Testing
     data_type: | 
@@ -80,12 +84,14 @@ attributes:
   - product: Database Monitoring
     data_type: | 
        - **Query samples**: 15 days
+       - **Query metrics**: 15 months
   - product: Datadog App
     data_type: | 
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
   - product: Error Tracking
     data_type: | 
-       - **Errors**: 1 year after last access
+       - **Error samples**: 30 days
+       - **Issues**: 1 year after last activity
   - product: Event Management
     data_type: | 
        - **Events**: 15 months
@@ -108,19 +114,20 @@ attributes:
        - **Mobile application binaries**: Retained for the duration of the account
   - product: Mobile RUM
     data_type: | 
-       - **Events**: 30 days
+       - **Session, View, Action, and Error Events**: 30 days
+       - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Network Device Monitoring
     data_type: | 
        - **Netflow**: 30 days
        - **SNMP traps**: 15 days
-  - product: Network Performance Monitoring
+  - product: Cloud Network Monitoring
     data_type: | 
        - **Netflow**: 14 days
   - product: Product Analytics
     data_type: | 
        - **Events**: 15 months
        - **User Profiles**: 30 days
-  - product: Quality Gates
+  - product: PR Gates
     data_type: | 
        - **Gate evaluations**: 30 days
   - product: Reference Tables

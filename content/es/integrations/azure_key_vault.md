@@ -1,32 +1,59 @@
 ---
-aliases:
-- /es/integrations/azure_keyvault
+app_id: azure-keyvault
+app_uuid: 0b6dfab6-6e21-40be-9105-9028888759be
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.keyvault_vaults.service_api_hit
+      metadata_path: metadata.csv
+      prefix: azure.keyvault
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 295
+    source_type_name: Azure Key Vault
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - nube
 - azure
 custom_kind: integración
 dependencies: []
-description: Rastrea las métricas clave de Azure Key Vault.
-doc_link: https://docs.datadoghq.com/integrations/azure_key_vault/
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/azure-key-vault-monitoring-events/
-  tag: Blog
-  text: Monitorizar eventos de caducidad de Azure Key Vault
 git_integration_title: azure_key_vault
-has_logo: true
 integration_id: azure-keyvault
-integration_title: Microsoft Azure Key Vault
+integration_title: Azure Key Vault
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_key_vault
-public_title: Integración de Datadog y Microsoft Azure Key Vault
+public_title: Azure Key Vault
 short_description: Rastrea las métricas clave de Azure Key Vault.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Categoría::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Rastrea las métricas clave de Azure Key Vault.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/azure-key-vault-monitoring-events/
+  support: README.md#Support
+  title: Azure Key Vault
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Key Vault se utiliza para salvaguardar y gestionar claves criptográficas y secretos utilizados por aplicaciones y servicios en la nube.
@@ -37,7 +64,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure K
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura la [integración de Microsoft Azure][1]. No se requiere ningún paso de instalación adicional.
 
 ## Datos recopilados
 
@@ -47,10 +74,10 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 ### Eventos
 
-Datadog envía *eventos de caducidad de credenciales*, que ofrecen visibilidad sobre la caducidad de credenciales para los registros de aplicaciones de Azure, las claves de Key Vault, los secretos de Key Vault y los certificados de Key Vault. La integración de *Azure Key Vault* debe estar instalada para recibir eventos de claves de Key Vault, secretos de Key Vault y certificados de Key Vault.
+Datadog envía *eventos de caducidad de credenciales* para ayudarte a monitorizar próximos vencimientos para registros de aplicaciones de Azure, claves de Key Vault, secretos de Key Vault y certificados de Key Vault. Para recibir eventos para claves, secretos y certificados de Key Vault, debes instalar la integración de *Azure Key Vault*.
 
-- Los **eventos de caducidad** se envían 60, 30, 15 y 1 día antes de la caducidad de las credenciales y una vez después de la caducidad.
-- Los **eventos de permisos faltantes** se envían cada 15 días. Un evento de permisos faltantes enumera las Key Vaults para las cuales Datadog no ha recibido permisos. Si no se han realizado cambios en relación con los permisos de Key Vault en el ciclo anterior de 15 días, la notificación del evento no se vuelve a enviar.
+- Los **eventos de caducidad** se envían 60, 30, 14, 7 y 1 día antes del vencimiento de la credencial y una vez después del vencimiento.
+- **Eventos de permisos faltantes** se envían cada 15 días y enumera Key Vaults para las cuales Datadog carece de los permisos requeridos. Si no se realizan cambios en los permisos de Key Vault durante el ciclo anterior de 15 días, la notificación del evento no se envía de nuevo.
 
 Puedes consultar estos eventos en el [Explorador de eventos][3].
 
@@ -59,15 +86,15 @@ Puedes consultar estos eventos en el [Explorador de eventos][3].
 - Para recopilar los eventos de caducidad del registro de aplicaciones Azure, [habilita el acceso a la API Microsoft Graph][4].
 - Si un certificado y su clave y secreto asociados caducan exactamente al mismo tiempo, se envía un único evento de caducidad para todos los recursos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Key Vault no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

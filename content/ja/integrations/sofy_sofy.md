@@ -24,7 +24,7 @@ author:
 categories:
 - テスト
 - モバイル
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sofy_sofy/README.md
 display_on_public_website: true
@@ -120,8 +120,8 @@ Sofy インテグレーションを設定するには
 
 ## その他の参考資料
 お役に立つドキュメント、リンクや記事:
-* [Monitor your mobile tests with Sofy's offering in the Datadog Marketplace][7]
-* [Sofy Documentation][8]
+* [Datadog Marketplace の Sofy オファリングでモバイルテストを監視する][7]
+* [Sofy ドキュメント][8]
 
 
 [1]: https://github.com/DataDog/integrations-extras/blob/master/sofy_sofy/metadata.csv

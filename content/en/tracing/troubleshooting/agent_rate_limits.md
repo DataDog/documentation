@@ -1,5 +1,6 @@
 ---
 title: Agent Rate Limits
+description: Configure Agent connection, memory, and CPU limits to prevent APM rate limiting errors and resource exhaustion.
 aliases:
   - /tracing/troubleshooting/apm_rate_limits
 ---

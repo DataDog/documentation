@@ -1,5 +1,6 @@
 ---
 title: Quantization of APM Data
+description: Understand how Datadog normalizes span and resource names by replacing GUIDs, numeric IDs, and query parameters.
 further_reading:
   - link: /tracing/trace_collection/custom_instrumentation/
     tag: Documentation
@@ -72,7 +73,37 @@ Alternatively, you can use the `DD_APM_REPLACE_TAGS` environment variable with a
 export DD_APM_REPLACE_TAGS = '[{"name": "span.name", "pattern": "get id_[0-9]+", "repl": "get id_x"}, {...}, …]'
 ```
 
-## Further Reading
+### Tracer-specific configuration
+
+Some tracers provide options to customize resource name generation directly:
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+The Java tracer allows customization of HTTP resource names with the `dd.trace.http.server.path-resource-name-mapping` option, which maps HTTP request paths to custom resource names using Ant-style patterns.
+
+For more information, read [Configuring the Java Tracing Library][4]
+
+[4]: /tracing/trace_collection/library_config/java/#traces
+
+{{% /tab %}}
+
+{{% tab "PHP" %}}
+
+The PHP tracer provides several options for URI normalization:
+
+- `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` identifies path fragments corresponding to IDs
+- `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` normalizes resource naming for incoming requests
+- `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` normalizes resource naming for outgoing requests
+
+For more information, read [Configuring the PHP Tracing Library][5]
+
+[5]: /tracing/trace_collection/library_config/php/#traces
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

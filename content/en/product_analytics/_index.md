@@ -13,20 +13,14 @@ further_reading:
   text: "Analytics Explorer"
 ---
 
-{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-Product Analytics is in limited availability. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
-
-{{< img src="product_analytics/overview-1.png" alt="Landing page of Product Analytics.">}}
 
 Product Analytics helps you gain insight into user behavior and make data-driven decisions. It can help solve the following types of use cases in your application:
 
-- Understand product adoption
-- Track conversion rates and their evolution over time
-- Track key user behavior patterns
-- Visualize the most and least interacted with buttons on a given page
+- [Understand product adoption](#understand-product-adoption)
+- [Track conversion rates and their evolution over time](#track-conversion-rates-and-their-evolution-over-time)
+- [Track key user behavior patterns](#track-key-user-behavior-patterns)
+- [Visualize the most and least interacted with buttons on a given page](#visualize-the-most-and-least-interacted-with-buttons-on-a-given-page)
 
 ## Getting started
 
@@ -38,44 +32,94 @@ To start using Product Analytics, enable it for each application where you want 
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
 
-By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
+By default, Product Analytics data is retained for 15 months. Learn more about [Datadog's data retention periods][1].
 
-## Measure user retention
+## Navigating the Product Analytics UI
+Each Product Analytics feature provides context into your users' journeys. This section describes the context each feature can provide for your individual use case.
 
-User retention is a metric for measuring the percentage of active users who continue to use your product, app, or service over a set period of time. Use [Retention Analysis][2] to measure how a group of users engage with specific features over time to understand where drop-offs occur.
+### Understand product adoption
+The [Home][3] page gives you a bird's-eye view of your users' activity and a pulse into your product's adoption. This is where you most often land when accessing Product Analytics.
 
-{{< img src="real_user_monitoring/retention_analysis/differing-events-retention-graph.png" alt="Retention graph for differing events" style="width:90%;" >}}
+{{< img src="/product_analytics/pana_home_page.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
-## Map user journeys
+By default, this page displays the `active users`, `page views`, and `average time spent by user` charts, but you have the ability to add additional charts or a dashboard. The Home page also includes the following out-of-the-box sub-sections that provide additional context about your product's users and usage:
 
-[User journeys][3] allow you to measure and report on the impact of every feature change - from backend bottlenecks to user frustrations - so that they can be appropriately optimized. Identify the ideal path for feature adoption and user conversion.
+[Users](https://app.datadoghq.com/product-analytics/user-trends)
+: At a glance, see who is using your product.
 
-{{< img src="/product_analytics/journeys/pa-funnel-1.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+[App & Devices](https://app.datadoghq.com/product-analytics/app-and-devices)
+: Visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
 
-See different visualizations of the user experience when interacting with your application:
+[Engagement](https://app.datadoghq.com/product-analytics/engagement-and-features)
+: Understand how users are engaging with your product to answer questions like how long users are staying on pages and what their top actions are. 
 
-- **[Funnel][4]**: Measure the **conversion rate** and **time to convert** from end-to-end of a given workflow. 
-- **[Pathways][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys. In addition, track conversion rates over time and compare them against specific attributes that might have affected conversion rates, such as browser type or geography.
+[Traffic](https://app.datadoghq.com/product-analytics/traffic-and-acquisition)
+: Get a view into bounce rates, top traffic sources, and where your growth is really coming from.
 
-## Create user segments
+[Performance](https://app.datadoghq.com/product-analytics/performance)
+: View surface top errors and frustrations, and see exactly which views they impact.
 
-Segments are users grouped by specific characteristics or behaviors. [Segmentation][6] in Datadog allows you to analyze and understand specific groups or segments of your user base.
+<br>
 
-## Visualize user interactions with heatmaps
 
-[Heatmaps][7] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high- or low-performing content.
+### Track conversion rates and their evolution over time
+The Product Analytics charts help you visualize your users' journey as they use your product.
 
-{{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
+{{< img src="/product_analytics/pana_charts_video.mp4" alt="visualize your users' journey with charts." video="true">}}
+
+Each chart type provides a different view into the user's journey:
+
+[Pathways][5]
+: You can visualize all user journeys across your application to analyze the critical path.
+
+[Funnel][4]
+: Track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. <br> For example, you can see if customers drop off at a certain point due to poor website performance or measure how adding new steps to a workflow impacts drop off rate.
+
+[Retention][2]
+: Measure how often users are successfully returning to a page or action to gain insights into overall user satisfaction.
+
+[Analytics][13]
+: Contains views data aggregation for understanding how your product is being used.
+
+<br>
+
+### Track key user behavior patterns
+You may want to better understand a specific group of users. This could be for the purpose of improving their user experience, or nudge them to buy the content in their cart. Regardless of the purpose, you can use the [Users & Segments][6] section to group your users based on a desired characteristic.
+
+{{< img src="/product_analytics/segmentation/userprofiles_pana-ga.png" alt="See individual profiles of users and create a segment from these profiles.">}}
+
+You can see the individual profiles of user, and create a segment, or a specified grouping, from these profiles to fit the behavior you would like to observe. For example, you can create a segment on users who have items in their carts but have not yet checked out to send an email nudging them to make a puchase. 
+
+
+### Visualize the most and least interacted with buttons on a given page
+Suppose you want to make changes to your application interface but want to first understand how users navigate in the page. Is there a specific path they take more than others? Can you make user actions and flows smoother? The following features can help you capture and replay your users' browsing experience to inform your product change decisions. 
+
+{{< img src="/product_analytics/pana_session_replay_page.png" alt="Capture and replay your users' browsing experience to inform your product design decisions.">}}
+
+[Session replay][11] 
+: Expands your user experience monitoring by allowing you to capture and visually replay the web browsing or mobile app experience of your users. <br><br>This is beneficial for _error identification_, _reproduction_, and _resolution_, and provides insights into your application’s usage patterns and design pitfalls
+
+[Heatmaps][10]
+:  This is a visualization of your user’s interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps: Click maps, Top elements, Scroll maps. <br><br> Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
+
+[Playlist][12]
+: You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][12].
+<br>
+
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/privacy/
-[2]: /product_analytics/user_retention
-[3]: /product_analytics/journeys
-[4]: /product_analytics/journeys/funnel_analysis
-[5]: /product_analytics/journeys/pathways
+[1]: /data_security/data_retention_periods/
+[2]: /product_analytics/charts/retention_analysis
+[3]: https://app.datadoghq.com/product-analytics
+[4]: /product_analytics/charts/funnel_analysis
+[5]: /product_analytics/charts/pathways
 [6]: /product_analytics/segmentation/
-[7]: /product_analytics/heatmaps
 [8]: https://app.datadoghq.com/rum/
 [9]: https://app.datadoghq.com/rum/list
+[10]: /product_analytics/session_replay/heatmaps
+[11]: /product_analytics/session_replay/
+[12]: /product_analytics/session_replay/playlists
+[13]: /product_analytics/charts/analytics_explorer
+

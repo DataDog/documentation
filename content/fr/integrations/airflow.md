@@ -122,7 +122,7 @@ Connectez Airflow à DogStatsD (inclus avec l'Agent Datadog) via la fonctionnali
 
 2. Modifiez le fichier de configuration `airflow.cfg` d'Airflow pour y ajouter les paramètres suivants :
 
-   <div class="alert alert-warning"> Ne définissez pas `statsd_datadog_enabled` sur true. L'activation de `statsd_datadog_enabled` peut entraîner des conflits. Pour éviter tout problème, vérifiez que la variable est définie sur `false`.</div>
+   <div class="alert alert-danger"> Ne définissez pas `statsd_datadog_enabled` sur true. L'activation de `statsd_datadog_enabled` peut entraîner des conflits. Pour éviter tout problème, vérifiez que la variable est définie sur `false`.</div>
 
    ```conf
    [scheduler]

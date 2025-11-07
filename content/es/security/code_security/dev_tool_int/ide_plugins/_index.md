@@ -10,10 +10,10 @@ title: Complementos del IDE de Datadog para la seguridad del código
 
 ## Información general
 
-La [Seguridad del código][1] se integra directamente con las herramientas del entorno de desarrollo integrado (IDE) para proporcionar información en tiempo real sobre la calidad y la seguridad del código de origen a medida que se escribe.
+[Code Security][1] se integra directamente con las herramientas del entorno de desarrollo integrado (IDE) para proporcionar información en tiempo real sobre la calidad y la seguridad del código de origen a medida que se escribe.
 
-{{< whatsnext desc="Consulta la documentación para obtener información sobre las siguientes integraciones:">}}
-    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>IDEs de JetBrains</u>: IntelliJ IDEA, GoLand, PhpStorm y PyCharm{{< /nextlink >}}
+{{< whatsnext desc="Consulta la documentación para ver información sobre las siguientes integraciones:">}}
+    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>IDE de JetBrains</u>: IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}<u>Visual Studio</u>{{< /nextlink >}}
 {{< /whatsnext >}}

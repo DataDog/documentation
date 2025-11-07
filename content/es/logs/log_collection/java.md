@@ -122,7 +122,7 @@ Log4j 2 incluye una estructura JSON.
   <Configuration>
     <Appenders>
       <File name="FILE" fileName="logs/app.log" >
-        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>      
+        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>
       </File>
     </Appenders>
     <Loggers>
@@ -372,11 +372,11 @@ Si los logs están en formato JSON, Datadog [parsea los mensajes del log][9] de 
 
 ## Registro de logs sin Agent
 
-En caso excepcional de que tu aplicación se esté ejecutando en una máquina a la que no tengas acceso o que no puedas registrar logs en un archivo, es posible transmitir logs a Datadog o al Datadog Agent directamente. Esta configuración no es la más recomendable porque requiere que la aplicación gestione los problemas de conexión. 
+En caso excepcional de que tu aplicación se esté ejecutando en una máquina a la que no tengas acceso o que no puedas registrar logs en un archivo, es posible transmitir logs a Datadog o al Datadog Agent directamente. Esta configuración no es la más recomendable porque requiere que la aplicación gestione los problemas de conexión.
 
 Para transmitir logs directamente a Datadog:
 
-1. Añade la biblioteca de registro de logs a tu código o **crea un puente entre tu logger actual y Logback**.
+1. Añade la librería de registro de logs a tu código o **crea un puente entre tu logger actual y Logback**.
 2. **Configura Logback** para que envíe logs a Datadog.
 
 ### Crear un puente desde las bibliotecas de registro de logs de Java y Logback
@@ -453,19 +453,19 @@ Log4j 2 permite registrar logs en un host remoto, pero no ofrece la posibilidad 
 
 ### Configurar Logback
 
-{{< site-region region="us3,us5,ap1,gov" >}}
- <div class="alert alert-warning">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para consultar una lista de endpoints de registro, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
+{{< site-region region="us3,us5,ap1,ap2,gov" >}}
+  <div class="alert alert-danger">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para obtener una lista de los endpoints de generación de logs, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
 {{< /site-region >}}
 
 
 {{< site-region region="us,eu" >}}
 
-Utiliza la biblioteca de registro de logs [logstash-logback-encoder][11] junto con Logback para enviar los logs directamente a Datadog.
+Utiliza la librería de registro de logs [logstash-logback-encoder][11] junto con Logback para enviar los logs directamente a Datadog.
 
 1. Configura un appender TCP en tu archivo `logback.xml`. Con esta configuración, tu clave de API se recupera de la variable de entorno `DD_API_KEY`. Alternativamente, puedes insertar tu clave de API directamente en el archivo de configuración:
 
-   Para la siguiente configuración, sustituye `<YOUR REGION INTAKE>` por la entrada basada en tu región:{{< region-param key="dd_site_name" code="true" >}}. 
-    - **US1**: `intake.logs.datadoghq.com:10516`    
+   Para la siguiente configuración, sustituye `<YOUR REGION INTAKE>` por la entrada basada en tu región:{{< region-param key="dd_site_name" code="true" >}}.
+    - **US1**: `intake.logs.datadoghq.com:10516`
     - **UE**: `tcp-intake.logs.datadoghq.eu:443`
 
     ```xml

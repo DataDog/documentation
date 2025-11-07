@@ -28,7 +28,7 @@ This guide explains:
 
 When Datadog notices a cardinality increase, before any rate limits are applied, a warning [event][2] is created. If the metric cardinality continues to increase, a rate limit might be applied. If the metric is rate limited, a second event is generated stating a rate limit has been placed. View these events in the [Event Explorer][3]. 
 
-<div class="alert alert-warning">Datadog does not send a notification for every subsequent rate-limiting event. As a best practice, build an Event Monitor to send alerts when metrics are rate-limited in the future.</div>
+<div class="alert alert-danger">Datadog does not send a notification for every subsequent rate-limiting event. As a best practice, build an Event Monitor to send alerts when metrics are rate-limited in the future.</div>
 
 ## Monitor rate limit events
 
@@ -51,7 +51,7 @@ For more information, see the [Best Practices for Custom Metrics Governance][4] 
 
 ## Submit a request to remove the rate limit
 
-<div class="alert alert-warning">Only a Datadog Admin can request a removal of a metric rate limit. If you are not an Admin, make sure to include an Admin on the support ticket so they can confirm the request.</div>
+<div class="alert alert-danger">Only a Datadog Admin can request a removal of a metric rate limit. If you are not an Admin, make sure to include an Admin on the support ticket so they can confirm the request.</div>
 
 After making the changes to remove the unbounded tags, submit a request to [Datadog Support][5] to remove the rate limit. In your request, provide the following information: 
 - Name of the rate-limited metric 

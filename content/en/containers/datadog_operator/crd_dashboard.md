@@ -1,5 +1,6 @@
 ---
 title: DatadogDashboard CRD
+description: Deploy and manage Datadog dashboards using the DatadogDashboard custom resource definition with the Datadog Operator
 ---
 To deploy a Datadog dashboard, you can use the Datadog Operator and `DatadogDashboard` custom resource definition (CRD).
 

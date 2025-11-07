@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
-- link: "/security/application_security/how-appsec-works/"
+- link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works in Datadog"
 ---

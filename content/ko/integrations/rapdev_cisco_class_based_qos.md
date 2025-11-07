@@ -127,4 +127,4 @@ Cisco의 등급 기반 QoS 통합에서는 SNMP가 활성화된 Cisco 디바이�
 [11]: https://app.datadoghq.com/marketplace/app/rapdev-snmp-profiles/
 
 ---
-이 애플리케이션은 Marketplace를 통해 제공되며 Datadog 기술 파트너의 지원을 받습니다. 이 애플리케이션을 구입하려면 <a href="https://app.datadoghq.com/marketplace/app/rapdev-cisco-class-based-qos" target="_blank">여기를 클릭</a>하세요.
+이 애플리케이션은 Datadog Marketplace를 통해 제공되며 Datadog 기술 파트너의 지원을 받습니다. 사용하려면 <a href="https://app.datadoghq.com/marketplace/app/rapdev-cisco-class-based-qos" target="_blank">Marketplace에서 구매하세요</a>.

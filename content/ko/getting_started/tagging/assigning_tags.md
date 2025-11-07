@@ -159,7 +159,7 @@ hostname: mymachine.mydomain
 
 #### 환경 변수
 
-컨테이너화된 Datadog 에이전트를 설치한 후 에이전트 주 구성 파일에서 환경 변수 `DD_TAGS`를 사용해 호스트 태그를 설정할 수 있습니다. 여러 태그를 지정하면 쉼표와 띄어쓰기로 구분하세요.
+컨테이너화된 Datadog Datadog Agent를 설치한 후, Agent 기본 구성 파일의 `DD_TAGS` 환경 변수를 사용하여 호스트 태그를 설정할 수 있습니다. 여러 태그 지정 시 각 태그를 공백으로 구분하세요.
 
 Datadog는 [도커(Docker), 쿠버네티스(Kubernetes), ECS, Swarm, Mesos, Nomad, Rancher][6]에서 일반적인 태그를 자동으로 수집합니다. 더 많은 태그를 추출하려면 다음 옵션을 사용하세요.
 
@@ -216,7 +216,7 @@ services:
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
-      - DD_TAGS="key1:value1, key2:value2, key3:value3"
+      - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
@@ -239,9 +239,18 @@ services:
 
 ##### 태그 카디널리티(Cardinality)
 
-태그 카디널리티를 설정하는 환경 변수는 `DD_CHECKS_TAG_CARDINALITY`와 `DD_DOGSTATSD_TAG_CARDINALITY`로 두 가지가 있습니다. DogStatsD의 요금 설정이 다르므로, 이에 따라 DogStatsD 태그 카디널리티도 세밀하게 구성할 수 있도록 나뉘어 있습니다. 그 이외에는 이러한 변수가 동일하게 작동합니다. 사용할 수 있는 값은 `low`, `orchestrator` 또는 `high`입니다. 모두 기본적으로는 `low`로 설정되어 있으며, 호스트 수준의 태그를 가져옵니다.
+태그 카디널리티를 설정하는 두 가지 환경 변수는 `DD_CHECKS_TAG_CARDINALITY` 및 `DD_DOGSTATSD_TAG_CARDINALITY`입니다. DogStatsD는 가격이 다르기 때문에 DogStatsD 태그 카디널리티 설정이 분리되어 있어 더욱 세밀하게 구성할 수 있습니다. 그 외에는 이 변수 함수가 동일하게 작동하는데 `low`, `orchestrator`, `high` 값을 가질 수 있습니다. 두 변수 모두 기본값이 `low`이며, Kubernetes 클러스터 수준 태그를 가져옵니다.
+
+다양한 카디널리티 설정값은 다음과 같습니다.
+* `low`: Kubernetes 클러스터 수준 태그 (예: `kube_namespace`)
+* `orchestrator`: 포드 수준 태그 (예: `pod_name`)
+* `high`: 컨테이너 수준 태그 (예: `container_id`)
 
 카디널리티에 따라 [쿠버네티스, OpenShift][7] 및 [도커, Rancher, Mesos][8]에서 서로 다른 태그를 바로 사용할 수 있도록 태그 세트가 준비되어 있습니다. ECS와 Fargate에서는 변수를 `orchestrator`로 설정하면 `task_arn` 태그가 추가됩니다.
+
+**참고**:
+- DogStatsD 메트릭용 컨테이너 태그를 전송하면 더 많은 메트릭이 생성됩니다(호스트당 하나가 아닌 컨테이너당 하나). 이는 커스텀 메트릭 청구에 영향을 미칠 수 있습니다.
+- 메트릭에서 타임스탬프는 가장 가까운 초로 반올림됩니다. 동일한 타임스탬프를 가진 데이터 포인트가 여러 개 있을 경우, 가장 마지막 값이 이전 값을 덮어씁니다. 카디널리티를 설정하면 이 문제를 방지할 수 있습니다.
 
 #### 트레이스
 
@@ -303,11 +312,12 @@ Datadog 트레이서는 환경 변수, 시스템 속성 또는 코드 내의 설
 {{% /tab %}}
 {{% tab "통합" %}}
 
-[AWS][1] 통합 타일을 사용하면 계정 수준에서 모든 메트릭에 추가 태그를 할당할 수 있습니다. 쉼표(",")로 구분되는 `<KEY>:<VALUE>` 형식의 태그 목록을 사용하세요.
+[AWS][1] 통합 타일을 사용하면 계정 수준의 모든 메트릭과 [자동 구독 트리거][2]를 통해 전송된 로그에 추가 태그를 할당할 수 있습니다. 태그 목록은 쉼표로 구분하여 `<KEY>:<VALUE>` 형식에 맞추세요.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS 태그" style="width:80%;">}}
 
 [1]: /ko/integrations/amazon_web_services/
+[2]: /ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#automatically-set-up-triggers
 {{% /tab %}}
 {{% tab "서비스 수준 목표" %}}
 

@@ -1,35 +1,36 @@
 ---
+custom_kind: 통합
 integration_title: Hdfs
 is_public: true
-custom_kind: integration
-short_description: 클러스터 디스크 사용, 볼륨 실패, 데드 DataNodes 추적 more.
+short_description: 클러스터 디스크 사용량, 볼륨 오류, 작동하지 않는 DataNodes 등을 추적하세요.
 ---
 
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 ## HDFS DataNode 통합
 
-![HDFS 대시보드][1]
+![HDFS Dashboard][1]
 
 ## 개요
 
-각 HDFS DataNodes에서 디스크 사용과 실패한 볼륨을 추적하세요. 이 에이전트 점검에서는 이와 같은 메트릭은 물론 블록과 캐시 관련 메트릭도 수집합니다.
+각 HDFS DataNodes의 디스크 사용률과 실패한 볼륨을 추적합니다. 이 Agent 점검은 이러한 메트릭뿐만 아니라 블록 및 캐시 관련 메트릭도 수집합니다.
 
-예전 투인원 점검(hdfs) 말고 이 점검(hdfs_datanode)과 그에 대응하는 점검(hdfs_namenode)을 사용하세요. 이전 점검은 이제 사용되지 않습니다. 
+이 점검(hdfs_datanode)과 그에 대응하는 점검(hdfs_namenode)을 사용합니다. 이전의 두 가지 기능이 합쳐진 점검(hdfs)은 더 이상 권장되지 않습니다.
 
-## 구성
+## 설정
 
-호스트에서 실행 중인 에이전트의 경우 다음 지침에 따라 설치하고 구성하세요. 컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][2]에 다음 지침을 적용하는 방법이 안내되어 있습니다.
+호스트에서 실행 중인 Agent에 이 점검을 설치하고 구성하려면 아래 지침을 따르세요. 컨테이너화된 환경이라면  [Autodiscovery 통합 템플릿][2]에서 자세한 적용 방법을 확인하세요.
 
 ### 설치
 
-HDFS DataNode 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있기 때문에 DataNodes에 추가 설치가 필요 없습니다.
+HDFS DataNode 점검은 [Datadog Agent][3] 패키지에 포함되어 있으므로 DataNodes에 다른 것을 설치할 필요가 없습니다. 
 
-### 설정
+### 구성
 
-#### 에이전트 연결
+#### Agent 연결
 
 <!-- xxx tabs xxx -->
-<!-- xxx tab "호스트" xxx -->
+<!-- xxx tab "Host" xxx -->
 
 #### 호스트
 
@@ -99,7 +100,7 @@ HDFS DataNode 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 
 [에이전트 상태 하위 명령을 실행][7]하고 점검 섹션에서 `hdfs_datanode`를 찾습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "hdfs_datanode" >}}
@@ -115,7 +116,7 @@ HDFS-datanode 점검에는 이벤트가 포함되지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원센터][8]로 연락하세요.
+도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
 
 ## 참고 자료
 
@@ -127,30 +128,31 @@ HDFS-datanode 점검에는 이벤트가 포함되지 않습니다.
 
 
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 ## HDFS NameNode 통합
 
 ![HDFS 대시보드][13]
 
 ## 개요
 
-주 HDFS NameNodes_와_ 대기 HDFS NameNodes를 모니터링하면 클러스터가 위험한 상태가 될 때 이를 알 수 있습니다. 즉, NameNode가 하나만 남아 있을 때나 클러스터 용량을 추가해야 할 때 등을 알 수 있습니다. 이 에이전트 점검은 남은 용량, 손상되거나 누락된 블록, 데드 DataNodes, 파일 시스템 로드, 적게 복제된 블록, 총 볼륨 실패 수(전체 DataNodes에서) 등과 같은 메트릭을 수집합니다.
+클러스터가 불안정한 상태(NameNode가 하나만 남았을 때 또는 클러스터에 용량을 추가해야 할 때)로 전환되는 시점을 파악하기 위해 기본 _및_ 대기 HDFS NameNodes를 모니터링합니다. 이 Agent 점검은 남은 용량, 손상/누락된 블록, 작동하지 않는 DataNodes, 파일 시스템 부하, 적게 복제된 블록, 전체 볼륨 장애(모든 DataNodes에서) 등에 메트릭을 수집합니다.
 
-예전 투인원 점검(hdfs) 말고 이 점검(hdfs_namenode)과 그에 대응하는 점검(hdfs_datanode)을 사용하세요. 이전 점검은 이제 사용되지 않습니다. 
+이 점검(hdfs_namenode)과 그에 대응하는 점검(hdfs_datanode)을 사용합니다. 이전의 두 가지 기능이 합쳐진 점검(hdfs)은 더 이상 권장되지 않습니다.
 
-## 구성
+## 설정
 
-호스트에서 실행 중인 에이전트의 경우 다음 지침에 따라 설치하고 구성하세요. 컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][2]에 다음 지침을 적용하는 방법이 안내되어 있습니다.
+호스트에서 실행 중인 Agent에 이 점검을 설치하고 구성하려면 아래 지침을 따르세요. 컨테이너화된 환경이라면 [Autodiscovery 통합 템플릿][2]에서 자세한 적용 방법을 확인하세요.
 
 ### 설치
 
-HDFS NameNode 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있기 때문에 DataNodes에 추가 설치가 필요 없습니다.
+HDFS NameNode 점검은 [Datadog Agent][3] 패키지에 포함되어 있으므로 NameNodes에 다른 것을 설치할 필요가 없습니다. 
 
-### 설정
+### 구성
 
-#### 에이전트 연결
+#### Agent 연결
 
 <!-- xxx tabs xxx -->
-<!-- xxx tab "호스트" xxx -->
+<!-- xxx tab "Host" xxx -->
 
 #### 호스트
 
@@ -220,7 +222,7 @@ HDFS NameNode 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 
 [에이전트 상태 하위 명령을 실행][7]하고 점검 섹션에서 `hdfs_namenode`를 찾습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "hdfs_namenode" >}}
@@ -236,7 +238,7 @@ HDFS-namenode 점검에는 이벤트가 포함되지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원센터][8]로 연락하세요.
+도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
 
 ## 참고 자료
 

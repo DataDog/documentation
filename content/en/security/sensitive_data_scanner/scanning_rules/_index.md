@@ -7,7 +7,14 @@ further_reading:
 - link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
   tag: "Documentation"
   text: "Best practices for creating custom scanning rules"
+- link: https://www.datadoghq.com/blog/cloudcraft-security/
+  tag: Blog
+  text: Visually identify and prioritize security risks using Cloudcraft
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
+Human name PII detection in logs using machine learning is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
 
 ## Telemetry Data
 

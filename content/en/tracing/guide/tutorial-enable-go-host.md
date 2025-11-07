@@ -1,5 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Go Application on the Same Host as the Datadog Agent
+description: Step-by-step tutorial to enable distributed tracing for a Go application running on the same host as the Datadog Agent.
 
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
@@ -20,6 +21,9 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-Go
   tag: "Source Code"
   text: Tracing library open source code repository
+- link: /tracing/trace_collection/proxy_setup/apigateway
+  tag: "Documentation"
+  text: "Instrumenting Amazon API Gateway"
 ---
 
 ## Overview
@@ -93,27 +97,22 @@ make exitNotes
 
 ## Install Datadog tracing
 
+{{% tracing-go-v2 %}}
+
 Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
 
 {{< code-block lang="shell" >}}
-go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace // 1.x
-// go get github.com/DataDog/dd-trace-go/v2/ddtrace // 2.x
+go get github.com/DataDog/dd-trace-go/v2/ddtrace
 {{< /code-block >}}
 
 Now that the tracing library has been added to `go.mod`, enable tracing support.
 
 Uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    
-  // If you are using v2, the lines look like this:
-  // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
-  // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
-  // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" 
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
   "fmt"
 {{< /code-block >}}
 
@@ -211,7 +210,7 @@ run: build
   DD_TRACE_SAMPLE_RATE=1 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.0.1 ./cmd/notes/notes &
 {{< /code-block >}}
 
-<div class="alert alert-warning">The <code>Makefile</code> also sets the <code>DD_TRACE_SAMPLE_RATE</code> environment variable to <code>1</code>, which represents a 100% sample rate. A 100% sample rate ensures that all requests to the notes service are sent to the Datadog backend for analysis and display for the purposes of this tutorial. In an actual production or high-volume environment, you wouldn't specify this high of a rate. Setting a high sample rate with this variable in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
+<div class="alert alert-danger">The <code>Makefile</code> also sets the <code>DD_TRACE_SAMPLE_RATE</code> environment variable to <code>1</code>, which represents a 100% sample rate. A 100% sample rate ensures that all requests to the notes service are sent to the Datadog backend for analysis and display for the purposes of this tutorial. In an actual production or high-volume environment, you wouldn't specify this high of a rate. Setting a high sample rate with this variable in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
 
 For more information on available configuration options, see [Configuring the Go Tracing Library][14].
 
@@ -222,15 +221,9 @@ Datadog has several fully supported libraries for Go that allow for automatic tr
 {{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
 import (
   ...
-
-  sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-    
-  // If you are using v2, the lines look like this:
-  // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
-  // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
-  // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
+  sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
   ...
 )
 {{< /code-block >}}
@@ -275,8 +268,7 @@ Remove the comments around the following lines:
 Also remove the comment around the following import:
 
 {{< code-block lang="go" filename="notes/notesController.go" disable_copy="true" collapsible="true" >}}
-"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-// "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 There are several examples of custom tracing in the sample application. Here are a couple more examples. Remove the comments to enable these spans:
@@ -314,10 +306,8 @@ func privateMethod1(ctx context.Context) {
 Uncomment the following imports:
 
 {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"  // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 Launch the application with `make runNotes` and try the `curl` commands again to observe the custom spans and traces you've just configured:
@@ -347,10 +337,8 @@ The sample project includes a second application called `calendar` that returns 
 To enable tracing in the calendar application, uncomment the following lines in `cmd/calendar/main.go`:
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
-  chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi" // 1.x
-  // chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2" // 2.x
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"  // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+  chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 {{< /code-block >}}
 
 {{< code-block lang="go" filename="cmd/calendar/main.go" disable_copy="true" collapsible="true" >}}
@@ -402,3 +390,4 @@ If you're not receiving traces as expected, set up debug mode for the Go tracer.
 [15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=Go
 [16]: /tracing/trace_collection/compatibility/go/#library-compatibility
 [17]: /getting_started/tagging/unified_service_tagging/
+[18]: /tracing/trace_collection/custom_instrumentation/go/migration

@@ -8,10 +8,6 @@ further_reading:
 
 ## Overview
 
-{{< callout url="#" btn_hidden="true" >}}
-This feature is in Preview. To enable this feature, reach out to your <a href="mailto:success@datadoghq.com">Customer Success</a> Manager.
-{{< /callout >}} 
-
 Composite metrics queries enhance your monitoring and analysis capabilities by allowing dynamic tagging of metrics at query time. This simplifies the process of adding new tags to your metrics, and requires no code changes. Use composite metrics queries to enable more meaningful and actionable insights from your metric data.
 
 Using composite metrics queries, you can accomplish the following:

@@ -39,7 +39,7 @@ draft: false
 git_integration_title: dcgm
 integration_id: dcgm
 integration_title: Nvidia DCGM Exporter
-integration_version: 3.1.0
+integration_version: 3.3.0
 is_public: true
 manifest_version: 2.0.0
 name: dcgm
@@ -78,53 +78,53 @@ Este check envía las métricas expuestas por [NVIDIA DCGM Exporter][1] en forma
 
 ### Instalación
 
-A partir de la versión 7.47.0 del Agent, el check de DCGM está incluido en el paquete del [Datadog Agent][3]. Sin embargo, debes activar el contenedor de DCGM Exporter para exponer las métricas de la GPU a fin de que el Agent pueda recopilar estos datos. Como los contadores predeterminados no son suficientes, Datadog recomienda utilizar la siguiente configuración de DCGM para cubrir lo mismo que la integración de NVML, además de tener métricas útiles.
+A partir de la versión 7.47.0 del Agent, el check DCGM viene incluido en el paquete del [Datadog Agent][3]. Sin embargo, es necesario poner en marcha el contenedor del exportador DCGM para exponer las métricas de GPU con el fin de que el Agent recopile estos datos. Dado que los contadores por defecto no son suficientes, Datadog recomienda utilizar la siguiente configuración de DCGM para cubrir el mismo terreno que la integración NVML, además de tener métricas útiles. Esta integración es totalmente compatible con el Agent v7.59 o posterior. Es posible que algunas telemetrías no estén disponibles para versiones anteriores del Agent.
 
 ```
-# Formato
-# Si la línea comienza con '#', se considera un comentario
-# CAMPO DE DCGM                                                      ,Prometheus metric type ,help message
+# Format
+# If line starts with a '#' it is considered a comment
+# DCGM FIELD                                                      ,Prometheus metric type ,help message
 
-# Relojes
+# Clocks
 DCGM_FI_DEV_SM_CLOCK                                              ,gauge                  ,SM clock frequency (in MHz).
 DCGM_FI_DEV_MEM_CLOCK                                             ,gauge                  ,Memory clock frequency (in MHz).
 
-# Temperatura
+# Temperature
 DCGM_FI_DEV_MEMORY_TEMP                                           ,gauge                  ,Memory temperature (in C).
 DCGM_FI_DEV_GPU_TEMP                                              ,gauge                  ,GPU temperature (in C).
 
-# Potencia
+# Power
 DCGM_FI_DEV_POWER_USAGE                                           ,gauge                  ,Power draw (in W).
 DCGM_FI_DEV_TOTAL_ENERGY_CONSUMPTION                              ,counter                ,Total energy consumption since boot (in mJ).
 
-# PCIe
+# PCIE
 DCGM_FI_DEV_PCIE_REPLAY_COUNTER                                   ,counter                ,Total number of PCIe retries.
 
-# Utilización (el período de muestra varía según el producto)
+# Utilization (the sample period varies depending on the product)
 DCGM_FI_DEV_GPU_UTIL                                              ,gauge                  ,GPU utilization (in %).
 DCGM_FI_DEV_MEM_COPY_UTIL                                         ,gauge                  ,Memory utilization (in %).
 DCGM_FI_DEV_ENC_UTIL                                              ,gauge                  ,Encoder utilization (in %).
 DCGM_FI_DEV_DEC_UTIL                                              ,gauge                  ,Decoder utilization (in %).
 
-# Errores e infracciones
+# Errors and violations
 DCGM_FI_DEV_XID_ERRORS                                            ,gauge                  ,Value of the last XID error encountered.
 
-# Uso de memoria
+# Memory usage
 DCGM_FI_DEV_FB_FREE                                               ,gauge                  ,Framebuffer memory free (in MiB).
 DCGM_FI_DEV_FB_USED                                               ,gauge                  ,Framebuffer memory used (in MiB).
 
 # NVLink
 DCGM_FI_DEV_NVLINK_BANDWIDTH_TOTAL                                ,counter                ,Total number of NVLink bandwidth counters for all lanes.
 
-# Estado de la licencia de VGPU
+# VGPU License status
 DCGM_FI_DEV_VGPU_LICENSE_STATUS                                   ,gauge                  ,vGPU License status
 
-# Filas reasignadas
+# Remapped rows
 DCGM_FI_DEV_UNCORRECTABLE_REMAPPED_ROWS                           ,counter                ,Number of remapped rows for uncorrectable errors
 DCGM_FI_DEV_CORRECTABLE_REMAPPED_ROWS                             ,counter                ,Number of remapped rows for correctable errors
 DCGM_FI_DEV_ROW_REMAP_FAILURE                                     ,gauge                  ,Whether remapping of rows has failed
 
-# Métricas de DCP
+# DCP metrics
 DCGM_FI_PROF_PCIE_TX_BYTES                                        ,counter                ,The number of bytes of active pcie tx data including both header and payload.
 DCGM_FI_PROF_PCIE_RX_BYTES                                        ,counter                ,The number of bytes of active pcie rx data including both header and payload.
 DCGM_FI_PROF_GR_ENGINE_ACTIVE                                     ,gauge                  ,Ratio of time the graphics engine is active (in %).
@@ -136,7 +136,7 @@ DCGM_FI_PROF_PIPE_FP64_ACTIVE                                     ,gauge        
 DCGM_FI_PROF_PIPE_FP32_ACTIVE                                     ,gauge                  ,Ratio of cycles the fp32 pipes are active (in %).
 DCGM_FI_PROF_PIPE_FP16_ACTIVE                                     ,gauge                  ,Ratio of cycles the fp16 pipes are active (in %).
 
-# Campos adicionales recomendados de Datadog
+# Datadog additional recommended fields
 DCGM_FI_DEV_COUNT                                                 ,counter                ,Number of Devices on the node.
 DCGM_FI_DEV_FAN_SPEED                                             ,gauge                  ,Fan speed for the device in percent 0-100.
 DCGM_FI_DEV_SLOWDOWN_TEMP                                         ,gauge                  ,Slowdown temperature for the device.
@@ -423,10 +423,10 @@ Consulta [service_checks.json][7] para obtener una lista de los checks de servic
 
 Si has añadido algunas métricas que no aparecen en el archivo [metadata.csv][8] anterior, pero que aparecen en tu cuenta con el formato `DCGM_FI_DEV_NEW_METRIC`, reasigna estas métricas en el archivo de configuración [dcgm.d/conf.yaml][9]:
 ```yaml
-    ## @param extra_metrics - (lista de cadenas o asignaciones) - opcional
-    ## Esta lista define las métricas que se recopilarán desde `openmetrics_endpoint`, además de
-    ## lo que el check recopila de forma predeterminada. Si el check ya recopila una métrica, entonces
-    ## las definiciones de métricas tienen prioridad aquí. Las métricas pueden definirse de tres maneras:
+    ## @param extra_metrics - (list of string or mapping) - optional
+    ## This list defines metrics to collect from the `openmetrics_endpoint`, in addition to
+    ## what the check collects by default. If the check already collects a metric, then
+    ## metric definitions here take precedence. Metrics may be defined in 3 ways:
     ...
 ```
 El siguiente ejemplo añade la parte de `NEW_METRIC` a espacio de nombres (`dcgm.`), lo que da `dcgm.new_metric`:

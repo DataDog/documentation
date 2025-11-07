@@ -59,7 +59,7 @@ Datadog SDKs do not support OpenTelemetry Metrics and Logs APIs. To use OpenTele
 4. The Datadog SDK for Java also accepts select individual instrumentation JARs produced by OpenTelemetry's [opentelemetry-java-instrumentation][9] build, for example the [R2DBC instrumentation JAR][11].
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 OpenTelemetry incubator APIs are not supported.
 </div>
 
@@ -95,7 +95,7 @@ mvn spring-boot:run -Dstart-class=com.baeldung.pagination.PaginationApplication 
 Open `http://127.0.0.1:8080/products` to exercise the product query. With this setup, you are using OpenTelemetry's instrumentation to ensure full observability for R2DBC queries.
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Versions 2.6.0-alpha and later of these OpenTelemetry instrumentations are not supported by the Datadog Java SDK.
 </div>
 
@@ -185,7 +185,11 @@ if __name__ == "__main__":
 
 ## Compatibility requirements
 
-The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][21], including the [`opentelemetry-go-contrib/instrumentation`][22] libraries.
+The Datadog SDK for Go supports library instrumentations written using the [OpenTelemetry-Go Trace API][21], including the [`opentelemetry-go-contrib/instrumentation`][22] libraries.
+
+{{% tracing-go-v2 %}}
+
+OpenTelemetry support has not changed between v1 and v2 of the Go Tracer.
 
 ## Setup
 
@@ -196,7 +200,7 @@ To use OpenTelemetry integrations with the Datadog Go SDK, perform the following
 
 ## Example
 
-The following is an example instrumenting the `net/http` library with the Datadog Tracer and Opentelemetry's `net/http` integration:
+The following is an example instrumenting the `net/http` library with the Datadog Tracer and OpenTelemetry's `net/http` integration:
 
 ```go
 import (
@@ -204,10 +208,8 @@ import (
 	"log"
 	"net/http"
 
-  ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry" // 1.x
-  ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer // 2.x
-  // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry // 2.x
+  ddotel "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry"
+  ddtracer "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel"

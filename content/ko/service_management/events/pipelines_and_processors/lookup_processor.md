@@ -19,8 +19,7 @@ Lookup 프로세서는 다음 작업을 수행합니다.
 
 
 **참조 테이블**
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" 
-    style="width:80%;">}}
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" style="width:80%;" >}}
 
 
  매핑 테이블의 크기 제한은 100Kb입니다. 이 제한은 플랫폼의 모든 Lookup 프로세서에 적용됩니다. 그러나 참조 테이블은 더 큰 파일 크기를 지원합니다.

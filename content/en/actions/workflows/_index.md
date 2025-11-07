@@ -1,5 +1,6 @@
 ---
 title: Workflow Automation
+description: Orchestrate and automate end-to-end processes with workflows that connect actions across your infrastructure and tools.
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
@@ -16,20 +17,22 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "Blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/soar/"
+  tag: "Blog"
+  text: "Automate identity protection, threat containment, and threat intelligence with Datadog SOAR workflows"
 - link: "https://www.datadoghq.com/blog/azure-workflow-automation/"
   tag: "Blog"
   text: "Quickly remediate issues in your Azure applications with Datadog Workflow Automation"
 - link: "https://www.datadoghq.com/blog/ai-assistant-workflows-apps/"
   tag: "Blog"
   text: "Build Datadog workflows and apps in minutes with our AI assistant"
+- link: "https://www.datadoghq.com/blog/pm-app-automation/"
+  tag: "Blog"
+  text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
 - link: "https://learn.datadoghq.com/courses/automated-workflows"
   tag: "Learning Center"
   text: "Remediate Issues with Workflow Automation"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}
 
@@ -37,7 +40,7 @@ Datadog Workflow Automation allows you to orchestrate and automate your end-to-e
 
 ## Configure workflow actions
 
-Datadog Workflow Automation provides over 400+ actions across several tools, along with Workflow-specific actions such as the HTTP action and the JavaScript data operator. These actions allow you to perform any task required in your flow.
+Datadog Workflow Automation provides over 2000+ actions across several tools, along with Workflow-specific actions such as the HTTP action and the JavaScript data operator. These actions allow you to perform any task required in your flow.
 
 ## Start with blueprints
 

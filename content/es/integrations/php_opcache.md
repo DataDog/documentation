@@ -1,5 +1,5 @@
 ---
-app_id: php-opcache
+app_id: PHP-opcache
 app_uuid: 392e54ac-60d4-4225-ab5a-d75245e0ea06
 assets:
   integration:
@@ -24,7 +24,7 @@ author:
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories: []
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_on_public_website: true
@@ -57,7 +57,7 @@ tile:
   title: OPcache de PHP
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -66,21 +66,21 @@ Este check monitoriza [OPcache de PHP][1] a través del Datadog Agent.
 
 ## Configuración
 
-Sigue las instrucciones de abajo para instalar y configurar este check para un Agent que se ejecuta en un host. En el caso de entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery][2] para obtener orientación sobre la aplicación de estas instrucciones.
+Sigue las instrucciones a continuación para instalar y configurar este check para un Agent que se ejecuta en un host. Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][2] para obtener orientación sobre la aplicación de estas instrucciones.
 
 ### Instalación
 
 Para instalar el check `php_opcache` en tu host:
 
 
-1. Instala el [kit de herramientas para desarrolladores][3]
+1. Instala el [kit de herramientas para desarrolladores][3].
  en cualquier máquina.
 
 2. Ejecuta `ddev -e release build php_opcache` para compilar el paquete.
 
 3. [Descarga el Datadog Agent][4].
 
-4. Carga el artefacto de compilación a cualquier host con un Agent y
+4. Sube el artefacto de compilación a cualquier host con un Agent y
  ejecuta `datadog-agent integration install -w
  path/to/php_opcache/dist/<ARTIFACT_NAME>.whl`.
 
@@ -105,7 +105,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 
 ### Configuración
 
-1. Edita el archivo `snowflake.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent para comenzar a recopilar los datos de rendimiento de `php_opcache`. Consulta el [archivo `php_opcache.d/conf.yaml` de ejemplo][6] para conocer todas las opciones de configuración disponibles.
+1. Edita el archivo `php_opcache.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent para comenzar a recopilar los datos de rendimiento de `php_opcache`. Consulta el [archivo `php_opcache.d/conf.yaml` de ejemplo][6] para conocer todas las opciones de configuración disponibles.
     ```
     instances
       - url: http://localhost/opcache-status
@@ -119,20 +119,20 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "php_opcache" >}}
+{{< get-metrics-from-git "php-opcache" >}}
 
 
 ### Eventos
 
 La integración OPcache de PHP no incluye eventos.
 
-### Checks de servicio
-{{< get-service-checks-from-git "php_opcache" >}}
+### Checks de servicios
+{{< get-service-checks-from-git "php-opcache" >}}
 
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
 
 [1]: https://www.php.net/manual/en/book.opcache.php

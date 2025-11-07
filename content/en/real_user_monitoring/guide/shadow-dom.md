@@ -8,7 +8,7 @@ further_reading:
   text: 'Learn about Session Replay'
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog only supports open Shadow DOM.
 </div>
 
@@ -29,4 +29,4 @@ Starting with `v4.31.0` of the [RUM Browser SDK][1], Datadog provides support of
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/
+[1]: /real_user_monitoring/application_monitoring/browser/

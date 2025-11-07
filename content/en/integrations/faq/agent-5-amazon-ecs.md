@@ -4,7 +4,7 @@ title: Amazon Elastic Container Service with Agent v5
 private: true
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 This documentation is to setup Amazon EC2 container Service with <strong>Datadog Agent 5</strong>
 </div>
 

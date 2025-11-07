@@ -1,5 +1,6 @@
 *                         @DataDog/documentation
 
+
 # Corpweb
 assets/                           @DataDog/corpweb
 data/                             @DataDog/corpweb
@@ -35,6 +36,8 @@ static-analysis.datadog.yml                             @DataDog/WebOps-Platform
 translate.yaml                                          @DataDog/WebOps-Platform
 yarn.lock                                               @DataDog/WebOps-Platform
 .yarnrc.yml                                             @DataDog/WebOps-Platform
+repository.datadog.yml                                  @Datadog/WebOps-Platform
+service.datadog.yaml                                    @DataDog/WebOps-Platform @DataDog/documentation
 
 # Scoped Docs/WebOps
 .github/                                                      @DataDog/WebOps-Platform
@@ -58,10 +61,13 @@ local/bin/py/preview-links-template.mako                      @DataDog/documenta
 local/bin/py/build/configurations/pull_config_preview.yaml    @DataDog/WebOps-Platform @DataDog/documentation
 local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Platform @DataDog/documentation
 local/**/*                                                    @DataDog/WebOps-Platform
-data/sdk_versions.json                                        @Datadog/documentation
 
 # markdown shortcodes
 layouts/shortcodes/**/*.md                                    @DataDog/documentation
+
+# General version bumps
+data/synthetics_worker_versions.json                          @Datadog/documentation
+data/private_action_runner_version.json                       @Datadog/documentation    
 
 # SDK versions
 .github/workflows/bump_versions.yml   @DataDog/web-frameworks @DataDog/documentation @DataDog/WebOps-Platform
@@ -114,14 +120,14 @@ content/en/tracing/trace_collection/dd_libraries/ios.md         @Datadog/rum-mob
 content/en/tracing/**/*dotnet*                                  @DataDog/tracing-dotnet @DataDog/documentation
 
 # Mobile SDK
-content/en/real_user_monitoring/mobile_and_tv_monitoring/android/setup/                        @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/                       @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/ios/setup/                           @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/                    @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/                           @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/unity/setup/                          @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup/           @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/mobile_and_tv_monitoring/session_replay/mobile                 @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/application_monitoring/android/setup/                        @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/application_monitoring/flutter/setup/                       @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/application_monitoring/ios/setup/                           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/application_monitoring/react_native/setup/                    @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/application_monitoring/roku/setup/                           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/application_monitoring/unity/setup/                          @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/application_monitoring/session_replay/mobile                 @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/android.md                @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/expo.md                   @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/flutter.md                @Datadog/rum-mobile @DataDog/documentation
@@ -149,7 +155,7 @@ static/resources/yaml/observability_pipelines/                  @DataDog/observa
 
 content/en/synthetics/*.md                                      @Datadog/synthetics-app @Datadog/documentation
 content/en/continuous_testing/*.md                              @Datadog/synthetics-ct @Datadog/documentation
-content/en/mobile_app_testing/*.md                              @Datadog/synthetics-mobile @Datadog/documentation
+content/en/mobile_app_testing/*.md                              @Datadog/synthetics-executing-mobile @Datadog/documentation
 
 # Software Delivery
 
@@ -162,7 +168,16 @@ content/en/code_analysis/                         @Datadog/static-analysis @Data
 content/en/quality_gates/                         @Datadog/ci-app-backend @Datadog/documentation
 
 # DDSQL Editor References
-content/en/ddsql_editor/reference/*.md              @Datadog/xpq @Datadog/documentation
+content/en/ddsql_reference/*.md                   @Datadog/documentation @Datadog/advanced-query-guild
 
 # Data Streams Monitoring
 content/en/data_streams/*.md                      @Datadog/data-streams-monitoring @Datadog/documentation
+
+# Ignoring files generated by Cdocs
+content/.gitignore                                @Datadog/documentation
+
+# Cdocs
+customization_config/                                         @DataDog/docs-dev @DataDog/documentation
+content/en/**/*.mdoc.md                                       @DataDog/docs-dev @DataDog/documentation  
+layouts/shortcodes/**/*.mdoc.md                               @DataDog/docs-dev @DataDog/documentation
+content/.gitignore                                            @DataDog/docs-dev @DataDog/documentation

@@ -5,11 +5,11 @@
   },
   "aws-logs-integration": {
     "name": "AWS ログインテグレーション",
-    "description": "Datadog-AWS-Logs インテグレーションの構成は、Datadog API から直接行います。\n詳細については、[AWS インテグレーションのページ](https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs)を参照してください。"
+    "description": "Datadog-AWS-Logs インテグレーションの構成は、Datadog API から直接行います。\n詳細については、[AWS インテグレーションのページ](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection)を参照してください。"
   },
   "authentication": {
     "name": "Authentication",
-    "description": "Datadog の API に対するリクエストはすべて認証される必要があります。\nデータを書き込むリクエストにはレポートアクセスが必要で、`API key` が必要です。\nデータを読み取るリクエストにはフルアクセスが必要で、`application key` も必要です。\n\n**注:** すべての Datadog API クライアントは、デフォルトで Datadog US サイト API を使用するように構成されています。\nDatadog EU サイトを使用している場合は、環境変数 `DATADOG_HOST` を `https://api.datadoghq.eu`に設定するか、クライアントを作成するときにこの値を直接オーバーライドします。\n\n[アカウントの API とアプリケーションキーを管理します](https://app.datadoghq.com/account/settings#api)。"
+    "description": "Datadog の API に対するリクエストはすべて認証される必要があります。\nデータを書き込むリクエストにはレポートアクセスが必要で、`API key` が必要です。\nデータを読み取るリクエストにはフルアクセスが必要で、`application key` も必要です。\n\n**注:** すべての Datadog API クライアントは、デフォルトで Datadog US サイト API を使用するように構成されています。\nDatadog EU サイトを使用している場合は、環境変数 `DATADOG_HOST` を `https://api.datadoghq.eu` に設定するか、クライアントを作成するときにこの値を直接オーバーライドします。\n\nDatadog で[アカウントの API およびアプリケーションキーを管理](https://app.datadoghq.com/organization-settings/)し、ドキュメントの [API およびアプリケーションキーのページ](https://docs.datadoghq.com/account_management/api-app-keys/)を参照してください。"
   },
   "azure-integration": {
     "name": "Azure インテグレーション",
@@ -21,19 +21,19 @@
   },
   "dashboards": {
     "name": "ダッシュボード",
-    "description": "API を介してすべてのダッシュボードを簡単に整理、検索、およびチームや組織と共有できます。"
+    "description": "API を使用して、ダッシュボードおよび共有ダッシュボードへのアクセスを管理します。詳細については、[ダッシュボードページ](https://docs.datadoghq.com/dashboards/)をご覧ください。"
   },
   "downtimes": {
     "name": "ダウンタイム",
-    "description": "[ダウンタイム設定](https://docs.datadoghq.com/monitors/notify/downtimes)を使用すると、アラートからいくつかのスコープをグローバルに除外することができ、モニター通知をより詳細に制御できます。ダウンタイム設定は、開始時間と終了時間を指定してスケジューリングされ、指定された Datadog タグに関連するすべてのアラートの発生を抑止します。"
+    "description": "[ダウンタイム](https://docs.datadoghq.com/monitors/notify/downtimes)を使用すると、アラート通知をより柔軟に制御でき、特定のスコープをグローバルにアラート対象から除外できます。開始時刻と終了時刻を設定できるダウンタイムによって、指定した Datadog タグに関連するすべてのアラートが抑制されます。\n\n**注:** `curl` コマンドでは [URL エンコード](https://curl.se/docs/url-syntax.html)が必要です。"
   },
   "embeddable-graphs": {
     "name": "埋め込み可能なグラフ",
-    "description": "API を使用して埋め込み可能なグラフを操作します。"
+    "description": "API を使用して、埋め込み可能なグラフを管理します。詳細については、[テンプレート変数による埋め込み可能なグラフ](https://docs.datadoghq.com/dashboards/guide/embeddable-graphs-with-template-variables/)をご覧ください。"
   },
   "events": {
     "name": "イベント",
-    "description": "イベントサービスを使用すると、プログラムでイベントをイベントストリームにポストしたり、イベントストリームから取得することができます。イベントは 4000 文字に制限されています。4000 文字を超えるメッセージを含むイベントが送信された場合は、最初の 4000 文字だけが表示されます。"
+    "description": "Event Management API を使用すると、Events Explorer へイベントをプログラムで送信したり、Events Explorer からイベントを取得したりできます。詳細は [Event Management ページ](https://docs.datadoghq.com/service_management/events/)を参照してください。\n \n**2025 年 3 月 1 日からの Datadog モニターイベント `aggregation_key` の変更:** `aggregation_key` はこれまでモニター ID ごとに一意でしたが、2025 年 3 月 1 日以降はモニターグループも含まれ、*モニター ID とモニターグループ* の組み合わせで一意になります。ダッシュボードクエリや Event API で `aggregation_key` を使用している場合は、`@monitor.id` への移行が必要です。ご不明点があれば[サポート](https://www.datadoghq.com/support/)までお問い合わせください。"
   },
   "gcp-integration": {
     "name": "GCP インテグレーション",
@@ -41,7 +41,7 @@
   },
   "hosts": {
     "name": "ホスト",
-    "description": "Datadog でライブホストに関する情報を取得します。"
+    "description": "Datadog でインフラストラクチャーホストの情報を取得し、ホストからの通知をミュートまたはミュート解除します。詳細については、[インフラストラクチャーページ](https://docs.datadoghq.com/infrastructure/)をご覧ください。"
   },
   "ip-ranges": {
     "name": "IP 範囲",
@@ -53,23 +53,23 @@
   },
   "logs": {
     "name": "ログ",
-    "description": "ログを検索して、HTTP で Datadog プラットフォームに送信します。"
+    "description": "ログを検索し、HTTP 経由で Datadog プラットフォームに送信します。詳細については、[Log Management ページ](https://docs.datadoghq.com/logs/)をご覧ください。"
   },
   "logs-indexes": {
     "name": "ログインデックス",
-    "description": "[ログインデックス](https://docs.datadoghq.com/logs/indexes/)のコンフィギュレーションを管理します。\nこのエンドポイントとやり取りするには、管理者権限を持つ API とアプリケーションキーが必要です。"
+    "description": "[ログインデックス](https://docs.datadoghq.com/logs/indexes/)の設定を管理します。"
   },
   "logs-pipelines": {
     "name": "ログパイプライン",
-    "description": "パイプラインとプロセッサは受信ログを操作し、クエリを簡単にするためにそれを解析して構造化属性に変換します。\n\n- 現在ウェブ UI で構成されているパイプラインとプロセッサの一覧については、[パイプラインコンフィギュレーションページ](https://app.datadoghq.com/logs/pipelines)を参照してください。\n\n- プロセッサに関する追加の API 関連情報は、[プロセッサのドキュメント](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor)にあります。\n\n- パイプラインの詳細については、[パイプラインのドキュメント]((https://docs.datadoghq.com/logs/log_configuration/pipelines)を参照してください。\n\n**注:**\n\nこれらのエンドポイントは管理者ユーザーのみが利用できます。\n管理者が作成したアプリケーションキーを使用してください。\n\n**Grok パース規則は JSON 出力に影響を与える場合があり、\nリクエスト内で使用する前に、返されたデータが構成済みである必要があります。**\nたとえば、別のリクエスト本文のリクエスト\nから返されたデータを使用していて、スペースに `\\s` のような\n正規表現パターンを使用するパース規則がある場合、\nすべてのエスケープしたスペースを `%{space}` と構成して\n本文データに使用する必要があります。"
+    "description": "パイプラインとプロセッサは受信ログを解析して変換し、クエリしやすい構造化属性にします。\n\n- Web UI で現在設定されているパイプラインとプロセッサの一覧は[パイプライン設定ページ](https://app.datadoghq.com/logs/pipelines)を参照してください。\n\n- プロセッサに関する API 情報は[プロセッサのドキュメント](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor)を参照してください。\n\n- パイプラインの詳細は[パイプラインのドキュメント](https://docs.datadoghq.com/logs/log_configuration/pipelines)を参照してください。\n\n**注:**\n\n**Grok 解析ルールは JSON 出力に影響する場合があり、リクエストで使用する前に返却データの調整が必要になることがあります。**\nたとえば、あるリクエストの戻り値を別のリクエストのボディに使用する際に、`\\s` のような空白を表す正規表現を使用する解析ルールがある場合は、ボディデータ内のエスケープされた空白を `%{space}` に置き換える必要があります。"
   },
   "metrics": {
     "name": "メトリクス",
-    "description": "メトリクスエンドポイントでは、次のことができます。\n\n- メトリクスデータを投稿して Datadog のダッシュボードにグラフ化できるようにする\n- 任意の期間のメトリクスをクエリする\n- メトリクスのタグコンフィギュレーションを変更する\n- メトリクスのタグとボリュームを確認する\n\n**注**: グラフには設定された数のポイントのみを含めることができ、\nメトリクスが表示されるタイムフレームが長くなると、\nポイント間の集計が発生してその設定された数を下回ります。\n\n`manage_tags` を Post、Patch、Delete する API メソッドは\n`Manage Tags for Metrics` アクセス許可を持つユーザーのみが実行できます。"
+    "description": "メトリクスエンドポイントでは、次のことができます。\n\n- メトリクスデータを投稿して Datadog のダッシュボードにグラフ化できるようにする\n- 任意の期間のメトリクスをクエリする\n- メトリクスのタグ構成を変更する\n- メトリクスのタグとボリュームを確認する\n\n**注**: グラフには設定された数のポイントのみを含めることができ、\nメトリクスが表示される期間が長くなると、\nポイント間の集計が発生してその設定された数を下回ります。\n\n`manage_tags` を Post、Patch、Delete する API メソッドは\n`Manage Tags for Metrics` 権限を持つユーザーのみが実行できます。\n\n詳しくは[メトリクスページ](https://docs.datadoghq.com/metrics/)をご覧ください。"
   },
   "monitors": {
     "name": "モニター",
-    "description": "[モニター](https://docs.datadoghq.com/monitors)を使用すると、気になるメトリクスまたはチェックを監視して、定義されたしきい値を超えたときにチームに通知することができます。\n詳しくは、[モニターの作成](https://docs.datadoghq.com/monitors/create/types/)ページを参照してください。"
+    "description": "[モニター](https://docs.datadoghq.com/monitors)を利用すると、重要なメトリクスやチェックを監視し、設定したしきい値を超えた際にチームへ通知できます。\n\n詳細は[モニターの作成](https://docs.datadoghq.com/monitors/create/types/)を参照してください。\n\n**注:** `curl` コマンドでは [URL エンコード](https://curl.se/docs/url-syntax.html)が必要です。"
   },
   "notebooks": {
     "name": "ノートブック",
@@ -85,23 +85,23 @@
   },
   "screenboards": {
     "name": "スクリーンボード",
-    "description": "このエンドポイントは旧バージョンです。代わりに、[新しいダッシュボードエンドポイント](https://docs.datadoghq.com/api/#dashboards)を使用してください。"
+    "description": "このエンドポイントは廃止予定です。代わりに [新しいダッシュボードエンドポイント](https://docs.datadoghq.com/api/latest/dashboards/)を使用してください。"
   },
   "security-monitoring": {
     "name": "セキュリティモニタリング",
-    "description": "信号を生成し、生成された信号を一覧表示するための検出ルール。"
+    "description": "セキュリティ ルール、シグナル、フィルターなどを作成および管理します。詳細については、[Datadog Security ページ](https://docs.datadoghq.com/security/)をご覧ください。"
   },
   "service-checks": {
     "name": "サービスのチェック",
-    "description": "サービスチェックエンドポイントを使用すると、モニターで使用するためにチェックステータスを投稿できます。\nサービスチェックメッセージは 500 文字に制限されています。\n500 文字を超えるメッセージでチェックが投稿された場合、最初の 500 文字のみが表示されます。\nメッセージは、Critical または Warning のステータスのチェックに制限されます。\n\n- [サービスチェックモニターの詳細をご覧ください。][1]\n- [プロセスチェックモニターの詳細をご覧ください。][2]\n- [ネットワークチェックモニターの詳細をご覧ください。][3]\n- [カスタムチェックモニターの詳細をご覧ください。][4]\n- [サービスチェックとステータスコードの詳細をご覧ください。][5]\n\n[1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert\n[2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
+    "description": "サービスチェックエンドポイントを使用すると、モニターで使用するためにチェックステータスを投稿できます。\nサービスチェックメッセージは 500 文字に制限されています。\n500 文字を超えるメッセージでチェックが投稿された場合、最初の 500 文字のみが表示されます。\nメッセージは、Critical または Warning のステータスのチェックに制限されます。OK ステータスのチェックにはメッセージは表示されません。\n\n- [サービスチェックモニターの詳細をご覧ください][1]。\n- [プロセスチェックモニターの詳細をご覧ください][2]。\n- [ネットワークモニターの詳細をご覧ください][3]。\n- [カスタムチェックモニターの詳細をご覧ください][4]。\n- [サービスチェックとステータスコードの詳細をご覧ください][5]。\n\n[1]: https://docs.datadoghq.com/monitors/types/service_check/\n[2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert\n[3]: https://docs.datadoghq.com/monitors/create/types/network/?tab=checkalert\n[4]: https://docs.datadoghq.com/monitors/create/types/custom_check/?tab=checkalert\n[5]: https://docs.datadoghq.com/developers/service_checks/"
   },
   "service-dependencies": {
     "name": "サービスの依存関係",
-    "description": "APM サービスマップ API。詳細については、[サービスマップのドキュメント](https://docs.datadoghq.com/tracing/visualization/services_map/)にアクセスしてください。"
+    "description": "APM サービスマップ API。詳細については、[サービスマップページ](https://docs.datadoghq.com/tracing/visualization/services_map/)をご覧ください。"
   },
   "service-level-objective-corrections": {
     "name": "Service Level Objective Corrections",
-    "description": "SLO ステータス補正を行うことで、特定の期間に発生しうる SLO のステータスとエラー予算への\n悪影響を回避することができます。ステータス補正は計画済みのメンテナンスウィンドウ、営業外の時間、\nまたはその他深刻な問題に相当しない期間の削除など、\nさまざまな目的で使用できます。"
+    "description": "SLO ステータス補正を行うことで、特定の期間に発生しうる SLO のステータスとエラー予算への\n悪影響を回避することができます。ステータス補正は計画済みのメンテナンスウィンドウ、営業外の時間、\nまたはその他深刻な問題に相当しない期間の削除など、\nさまざまな目的で使用できます。詳しくは [SLO ステータス補正](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-status-corrections)をご覧ください。"
   },
   "service-level-objectives": {
     "name": "サービスレベル目標",
@@ -121,15 +121,15 @@
   },
   "tags": {
     "name": "タグ",
-    "description": "タグエンドポイントを使用すると、ホストにタグを割り当てることができます。\n例: `role:database`。これらのタグは、ホストから送信されるすべてのメトリクスに適用されます。タグを取得して特定のホストに適用するときは、名前でホストを参照します (`yourhost.example.com`)。\n\nタグを担当するインフラストラクチャーのコンポーネントはソースによって識別されます。たとえば、有効なソースには、nagios、hudson、jenkins、users、feed、chef、puppet、git、bitbucket、fabric、capistrano などがあります。\n\nタグの詳細は専用の[ドキュメントページ](https://docs.datadoghq.com/tagging)をご覧ください。"
+    "description": "タグエンドポイントを使用すると、ホストにタグを割り当てることができます。\n例: `role:database`。これらのタグは、ホストから送信されるすべてのメトリクスに適用されます。タグを取得して特定のホストに適用するときは、名前でホストを参照します (`yourhost.example.com`)。\n\nタグを担当するインフラストラクチャーのコンポーネントはソースによって識別されます。たとえば、有効なソースには、nagios、hudson、jenkins、users、feed、chef、puppet、git、bitbucket、fabric、capistrano などがあります。\n\nタグの詳細は[タグの概要](https://docs.datadoghq.com/getting_started/tagging/)をご覧ください。"
   },
   "timeboards": {
     "name": "タイムボード",
-    "description": "このエンドポイントは旧バージョンです。代わりに、[新しいダッシュボードエンドポイント](https://docs.datadoghq.com/api/#dashboards)を使用してください。"
+    "description": "このエンドポイントは廃止予定です。代わりに [新しいダッシュボードエンドポイント](https://docs.datadoghq.com/api/latest/dashboards/)を使用してください。"
   },
   "usage-metering": {
     "name": "使用料のメータリング",
-    "description": "使用量計測 API を使用すると、Datadog の複数のファセットで 1 時間ごと、1 日ごと、および 1 か月ごとの使用量を取得できます。\nこの API は、すべての Pro および Enterprise のお客様が利用できます。\n使用量にアクセスできるのは[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)のみです。\n\n**注**: 使用量データは、発生してから最大 72 時間遅れます。\n15 か月間保持されます。\n\n1 回のリクエストで、複数組織の 1 時間単位の利用データを最大 24 時間分、1 組織の 1 時間単位の利用データを最大 2 か月分取得することができます。"
+    "description": "使用量計測 API を使用すると、Datadog の多面的な使用量を 1 時間毎、1 日毎、1 か月毎に取得することができます。この API は、Pro と Enterprise のすべてのお客様にご利用いただけます。**注**: 使用量データは、発生から最大 72 時間遅延します。15 か月間保持されます。1 回のリクエストで、複数組織の最大 24 時間分の 1 時間ごとの使用量データ、および単一組織の最大 2 か月分の 1 時間ごとの使用量データを取得できます。詳細については、[使用量の詳細ドキュメント](https://docs.datadoghq.com/account_management/billing/usage_details/)をご覧ください。"
   },
   "users": {
     "name": "ユーザー",
@@ -137,6 +137,6 @@
   },
   "webhooks-integration": {
     "name": "Webhook インテグレーション",
-    "description": "Datadog-Webhooks インテグレーションの構成は、Datadog API から直接行います。\nDatadog-Webhooks インテグレーションの詳細については、[インテグレーションページ](https://docs.datadoghq.com/integrations/webhooks)を参照してください。"
+    "description": "Datadog API を使用して、Datadog-Webhooks インテグレーションを直接構成します。\n詳細については、[Webhooks インテグレーションページ](https://docs.datadoghq.com/integrations/webhooks)をご覧ください。"
   }
 }

@@ -203,7 +203,7 @@ Pour recueillir des informations sur les live processes pour l'ensemble de vos c
 
 #### Network Performance Monitoring
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Cette fonctionnalité est uniquement disponible sous Linux.
 </div>
 
@@ -273,7 +273,7 @@ Vous pouvez exécuter l'Agent en mode `awsvpc`. Toutefois, Datadog vous le déco
 {{% site-region region="gov" %}}
 #### Proxy FIPS pour Datadog (environnements gouvernementaux)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Cette fonctionnalité est uniquement disponible sous Linux.
 </div>
 

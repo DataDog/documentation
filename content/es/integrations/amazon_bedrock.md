@@ -183,7 +183,7 @@ Si aún no lo has hecho, configura la [integración Amazon Web Services][3].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_bedrock" >}}
+{{< get-metrics-from-git "amazon-bedrock" >}}
 
 
 ### Eventos

@@ -45,7 +45,8 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 
 `DD_TRACE_ENABLED`
 : **Default**: `true`<br>
-Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.
+Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.<br/>
+See also [DD_APM_TRACING_ENABLED][15].
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>
@@ -63,13 +64,6 @@ Comma-separated list of header names that are reported on the root span as tags.
 
 `DD_TRACE_AGENT_URL`
 : The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
-
-`DD_SPAN_SAMPLING_RULES`
-: **Default**: `[]`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][5].<br>
-**Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 ## Agent
 
@@ -101,17 +95,17 @@ Override the port that the default tracer submits DogStatsD metrics to. If the [
 ## Logs
 
 `DD_LOGS_INJECTION`
-: **Default**: `false`<br>
+: **Default**: `true`<br>
 Enable [connecting logs and trace injection][6].
 
 ## Trace context propagation
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `tracecontext,Datadog`<br>
+: **Default**: `tracecontext,Datadog,baggage`<br>
 Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
+: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog,baggage`)<br>
 Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 ## Further Reading
@@ -126,3 +120,4 @@ Propagation styles to use when extracting tracing headers. When multiple values 
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
+[15]: /tracing/trace_collection/library_config/#traces

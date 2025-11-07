@@ -52,6 +52,10 @@ If the high memory consumption is not associated with a single integration, send
    {{< code-block lang="shell">}}sudo datadog-agent flare --profile 30{{< /code-block >}}
    The command takes approximately 30 seconds to run while it collects profile information.
 
+#### Agent Profiling check
+
+Starting with Agent version 7.67, the [Agent Profiling check][8] can be enabled to automatically generate a flare with profiles based on a user-configured memory or CPU threshold. This check can be useful if the high memory or CPU issue is not easily reproduced. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -63,3 +67,4 @@ If the high memory consumption is not associated with a single integration, send
 [5]: /developers/write_agent_check/#collection-interval
 [6]: /getting_started/containers/#enable-autodiscovery
 [7]: /agent/troubleshooting/debug_mode/
+[8]: /integrations/agentprofiling

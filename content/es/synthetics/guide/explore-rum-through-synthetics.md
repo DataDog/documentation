@@ -26,7 +26,7 @@ Los tests de tu navegador Synthetic integran el SDK de Real User Monitoring, lo 
 
 ## Permitir datos Synthetic sobre aplicaciones RUM
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si la aplicación de destino ya está instrumentada con RUM, no debes habilitar la recopilación de datos RUM en la configuración de tests Synthetic, ya que esto puede dar lugar a un comportamiento inesperado.</div>
 
 En la grabación del test de tu navegador, haz clic en **Collect RUM Data on* (Recopilar datos de RUM de), arriba del botón **Start Recording** (Iniciar grabación), y selecciona una aplicación de la que recopilar datos. Después de guardar tu grabación y tu configuración del test, RUM recopila datos del test y genera grabaciones de sesiones de las ejecuciones de tests de tu navegador. 

@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Infrastructure DevSecOps
+description: Introduction to Infrastructure DevSecOps bundles combining monitoring with Cloud Security for Pro and Enterprise tiers.
 ---
 
 This guide introduces the Infrastructure Monitoring DevSecOps bundles, with links to setup instructions to help you install and configure them.
@@ -11,7 +12,7 @@ The Infrastructure DevSecOps bundles combine infrastructure monitoring with the 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [Cloud Security Pro][3]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][4].
+Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [Cloud Security][3]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][4].
 
 ### Setup
 
@@ -21,9 +22,9 @@ To get started with Infrastructure DevSecOps Pro, [install and configure the Dat
 - [Serverless][2]
 - [Integrations][4]
 
-After you install the Agent, configure Cloud Security Pro for your environment.
+After you install the Agent, configure Cloud Security for your environment.
 
-- [Cloud Security Pro][6]
+- [Cloud Security][3]
 
 ### Next steps
 
@@ -41,7 +42,6 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 [3]: /security/cloud_security_management/setup/
 [4]: /integrations/
 [5]: /agent/
-[6]: /security/cloud_security_management/setup/csm_pro
 [7]: /infrastructure/list/
 [8]: /metrics/
 [9]: /infrastructure/hostmap/
@@ -51,7 +51,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [Cloud Security Enterprise][4]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][5].
+Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [Cloud Security][4]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][5].
 
 ### Setup
 
@@ -62,9 +62,9 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 - [Live Processes][7]
 - [Integrations][5]
 
-After you install the Agent, configure Cloud Security Enterprise for your environment.
+After you install the Agent, configure Cloud Security for your environment.
 
-- [Cloud Security Enterprise][8]
+- [Cloud Security][4]
 
 ### Next steps
 
@@ -87,7 +87,6 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 [5]: /integrations/
 [6]: /agent/
 [7]: /infrastructure/process/?tab=linuxwindows#installation
-[8]: /security/cloud_security_management/setup/csm_enterprise
 [9]: /infrastructure/list/
 [10]: /metrics/
 [11]: /dashboards/correlations/

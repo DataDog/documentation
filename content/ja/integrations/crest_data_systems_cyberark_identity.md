@@ -32,7 +32,7 @@ categories:
 - マーケットプレイス
 - セキュリティ
 - イベント管理
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,7 +48,7 @@ name: crest_data_systems_cyberark_identity
 pricing:
 - billing_type: tag_count
   includes_assets: true
-  metric: datadog.marketplace.crest_data_systems.cyberark.identity
+  metric: datadog.marketplace.crest_data_systems.cyberark_identity
   product_id: cyberark-identity
   short_description: CyberArk Identity 1 ユーザーあたり/月
   tag: user_id
@@ -112,10 +112,10 @@ CyberArk Identity は、アプリケーションへのアクセス、エンド�
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- Support Email: [datadog.integrations@crestdata.ai][5]
-- Sales Email: [datadog-sales@crestdata.ai][6]
+- サポートメール: [datadog.integrations@crestdata.ai][5]
+- 営業メール: [datadog-sales@crestdata.ai][6]
 - Web サイト: [crestdata.ai][3]
-- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][12]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][12]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
@@ -130,4 +130,4 @@ CyberArk Identity は、アプリケーションへのアクセス、エンド�
 [11]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [12]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cyberark-identity" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cyberark-identity" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

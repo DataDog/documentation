@@ -111,19 +111,24 @@ For .NET serverless applications, Datadog recommends [installing Datadog's traci
 Learn more about [tracing through .NET Azure serverless applications][15].
 
 ## Span Auto-linking
-Datadog automatically detects linked spans when segements of your asynchronous requests cannot propogate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. Span Auto-links appear in the [Span Links tab][30] in the Datadog Trace UI. 
+{{< img src="serverless/lambda/tracing/autolink.png" alt="In Datadog, a DynamoDB trace. At the top, a message reads 'This trace is linked to other traces'. The Span Links tab is open and displays a clickable link to another DynamoDB trace." style="width:100%;" >}}
 
-This feature is available in Python version 101 and higher. 
+Datadog automatically detects linked spans when segments of your asynchronous requests cannot propagate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. You can see Auto-linked spans appear in the [Span Links tab][30]. These appear as **Backward** or **Forward**.
 
-**Note:** Span Auto-linking may not link traces if you are only ingesting a sample of your traces because the linked traces might be dropped before ingestion. To improve your chances of seeing auto-linked spans, increase your sample rate. 
+_Backward_: The linked span was caused by the trace you are viewing.
 
-If you are viewing the request that originated before the change event and the linked trace is ingested, you can see the linked span as a `Backward` link. 
+_Forward_: The linked span caused the trace you are viewing.
 
-If you are viewing the request that originated before the change event and the linked trace is ingested, you can see the linked span as a `Forward` link. 
 
-This functionality is available for:
-- Python AWS Lambda functions instrumented with layer version 101 and above, and Python applications instrumented with [`dd-trace-py`][31] on version 2.16 and above.
-- Node.js AWS Lambda functions instrumented with layer version 118 and above, and Node.js applications instrumented with [`dd-trace-js`][32] on versions 4.53.0 and above or versions 5.29.0 and above.
+<div class="alert alert-info">Sampling and <a href="/tracing/trace_pipeline/trace_retention/">trace retention filters</a> can interfere with Auto-linking. To improve your chances of seeing Auto-linked spans, increase your sample rate or adjust your retention filters.</div>
+
+### Supported technologies
+
+Span Auto-linking is available for:
+- Python AWS Lambda functions instrumented with [`datadog-lambda-python`][33] layer v101+
+- Python applications instrumented with [`dd-trace-py`][31] v2.16+
+- Node.js AWS Lambda functions instrumented with [`datadog-lambda-js`][34] layer 118+
+- Node.js applications instrumented with [`dd-trace-js`][32] v4.53.0+ or v5.29.0+
 
 ### DynamoDB Change Stream Auto-linking
 
@@ -134,6 +139,8 @@ For [DynamoDB Change Streams][29], Span Auto-linking supports the following oper
 - `DeleteItem`
 - `BatchWriteItem`
 - `TransactWriteItems`
+
+<div class="alert alert-info">The <code>PutItem</code> operation requires additional configuration. For more information, see <a href="/serverless/aws_lambda/installation/python/#span-auto-linking">Instrumenting Python Serverless Applications</a> or <a href="/serverless/aws_lambda/installation/nodejs/#span-auto-linking">Instrumenting Node.js Serverless Applications</a>.</div>
 
 ### S3 Change Notification Auto-linking
 
@@ -399,3 +406,5 @@ If you are already tracing your serverless application with X-Ray and want to co
 [30]: https://docs.datadoghq.com/tracing/trace_explorer/trace_view/?tab=spanlinksbeta
 [31]: https://github.com/DataDog/dd-trace-py/
 [32]: https://github.com/DataDog/dd-trace-js/
+[33]: https://github.com/DataDog/datadog-lambda-python
+[34]: https://github.com/DataDog/datadog-lambda-js

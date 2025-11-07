@@ -110,7 +110,7 @@ pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
 })
 ```
 
-To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][2] (or [WithCustomProfilerLabelKeys v2][3]) option when starting the profiler:
+To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][3] (or [WithCustomProfilerLabelKeys v1][2]) option when starting the profiler:
 
 ```go
 profiler.Start(

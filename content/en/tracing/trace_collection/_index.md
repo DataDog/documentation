@@ -46,10 +46,11 @@ To learn more, see [automatic instrumentation][5].
 
 ### Custom instrumentation
 
-Capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. To custom instrument your application, you can use either of these options:
+Capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. To custom instrument your application, you can use any of these options:
 
 - [Datadog libraries][9]: Use Datadog tracing libraries to add and customize observability within Datadog.
 - [OpenTelemetry APIs][10]: Use OpenTelemetry API support in Datadog libraries to have vendor-neutral instrumentation of your code.
+- [Dynamic Instrumentation][11]: Use Dynamic Instrumentation to add custom telemetry at specific code locations, from the Datadog UI.
 
 To learn more, see [custom instrumentation][6].
 
@@ -93,3 +94,4 @@ The following tutorials guide you through setting up distributed tracing for a s
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [9]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
 [10]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[11]: /tracing/dynamic_instrumentation/

@@ -28,13 +28,19 @@ algolia:
 ---
 
 After you set up [log collection][1], you can customize your collection configuration:
-* [Filter logs](#filter-logs)
-* [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
-* [Aggregate multi-line logs](#multi-line-aggregation)
-* [Copy commonly used examples](#commonly-used-log-processing-rules)
-* [Use wildcards to monitor directories](#tail-directories-using-wildcards)
-* [Specify log file encodings](#log-file-encodings)
-* [Define global processing rules](#global-processing-rules)
+- [Filter logs](#filter-logs)
+  - [Exclude at match](#exclude-at-match)
+  - [Include at match](#include-at-match)
+  - [Exclude truncated](#exclude-truncated)
+- [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
+- [Multi-line aggregation](#manually-aggregate-multi-line-logs)
+- [Automatically aggregate multi-line logs](#automatically-aggregate-multi-line-logs)
+- [Commonly used log processing rules](#commonly-used-log-processing-rules)
+- [Tail directories using wildcards](#tail-directories-using-wildcards)
+  - [Prioritize tailed files by modification time](#prioritize-tailed-files-by-modification-time)
+- [Log file encodings](#log-file-encodings)
+- [Global processing rules](#global-processing-rules)
+- [Further Reading](#further-reading)
 
 To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
 
@@ -74,6 +80,10 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
+<div class="alert alert-info">
+For more information on Agent Configuration, see <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Container Discovery Management</a>.
+</div>
+
 In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
 
 ```yaml
@@ -90,12 +100,16 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Note**:
+- Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
+
+<div class="alert alert-info">
+For more information on Agent Configuration, see <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">Container Discovery Management</a>.
+</div>
 
 To configure using Autodiscovery to collect container logs on a given container (with the name `CONTAINER_NAME`) within your pod, add the following annotations to your pod's `log_processing_rules`:
 
@@ -129,9 +143,9 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Note**:
+- Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -210,9 +224,9 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the container 
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Note**:
+- Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -249,7 +263,85 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+**Note**:
+- Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Exclude truncated
+
+| Parameter           | Description                                                        |
+|---------------------|--------------------------------------------------------------------|
+| `exclude_truncated` | When present, it excludes truncated logs and does not send to Datadog. The `exclude_truncated` rule is available starting with Agent v7.69. |
+
+For example, to **filter out** truncated logs:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+```yaml
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: exclude_truncated
+```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+In a Docker environment, use the label `com.datadoghq.ad.logs` on the container that is sending the logs you want to filter, to specify the `log_processing_rules`. For example:
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "log_processing_rules": [{
+          "type": "exclude_truncated"
+        }]
+      }]
+```
+
+**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
+
+```yaml
+apiVersion: apps/v1
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "log_processing_rules": [{
+              "type": "exclude_truncated"
+            }]
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: '<CONTAINER_NAME>'
+          image: cardpayment:latest
+```
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -301,9 +393,9 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Note**:
+- Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -341,9 +433,9 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Note**:
+- Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -357,7 +449,17 @@ For instance, to scrub user information from the log `User email: foo.bar@exampl
 
 This sends the following log to Datadog: `User email: masked_user@example.com`
 
-## Multi-line aggregation
+## Automatically aggregate multi-line logs
+
+Automatic multi-line detection is helpful when you have many log sources with complex formats or when you don't have time to configure each source individually. This feature automatically detects and aggregates multi-line logs without requiring you to write custom regex patterns.
+
+See the [Auto Multi-line Detection and Aggregation][7] documentation.
+
+For legacy support of the feature, see the [Automatic Multi-line Detection and Aggregation (Legacy)][8] documentation.
+
+## Manually aggregate multi-line logs
+
+Manual multi-line rules give you precise control over log aggregation when you know your log formats. This approach is ideal for ensuring consistent log processing with custom regex patterns tailored to your specific log structure.
 
 If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. Use the `multi_line` type in the `log_processing_rules` parameter to aggregates all lines into a single entry until the given pattern is detected again.
 
@@ -442,14 +544,14 @@ spec:
           image: postgres:latest
 ```
 
-**Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
-
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Note**:
+- Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
+- The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em> <br><br>Log collection works with precision of up to millisecond. Logs with greater precision are not sent even if they match the pattern.</div>
+<div class="alert alert-danger"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em> <br><br>Log collection works with precision of up to millisecond. Logs with greater precision are not sent even if they match the pattern.</div>
 
 More examples:
 
@@ -462,242 +564,6 @@ More examples:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
-### Global automatic multi-line aggregation
-With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically for **all** log integrations it sets up.
-
-
-{{< tabs >}}
-{{% tab "Configuration file" %}}
-
-Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-```
-
-{{% /tab %}}
-{{% tab "Docker" %}}
-
-Use the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION` in the Datadog Agent container to configure a global automatic multi-line aggregation rule. For example:
-
-```shell
-DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
-```
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-#### Operator
-Use the `spec.override.nodeAgent.env` parameter in your Datadog Operator manifest to set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION` environment variable to configure a global automatic multi-line aggregation rule. For example:
-
-```yaml
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION
-          value: "true"
-```
-
-#### Helm
-Use the `datadog.logs.autoMultiLineDetection` option in the Helm chart to configure a global automatic multi-line aggregation rule. For example:
-
-```yaml
-datadog:
-  logs:
-    enabled: true
-    autoMultiLineDetection: true
-```
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Enable multi-line aggregation per integration
-Alternatively, you can enable or disable multi-line aggregation for an individual integration's log collection. Changing the multi-line aggregation for an integration overrides the global configuration.
-
-{{< tabs >}}
-{{% tab "Configuration file" %}}
-
-In a host environment, enable `auto_multi_line_detection` with the [Custom log collection][1] method. For example:
-
-[1]: https://docs.datadoghq.com/agent/logs/?tab=tailfiles#custom-log-collection
-
-```yaml
-logs:
-  - type: file
-    path: /my/test/file.log
-    service: testApp
-    source: java
-    auto_multi_line_detection: true
-```
-{{% /tab %}}
-{{% tab "Docker" %}}
-
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the log configuration. For example:
-
-```yaml
- labels:
-    com.datadoghq.ad.logs: >-
-      [{
-        "source": "java",
-        "service": "testApp",
-        "auto_multi_line_detection": true
-      }]
-```
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-In a Kubernetes environment, use the annotation `ad.datadoghq.com/<CONTAINER_NAME>.logs` on your pod to specify the log configuration. For example:
-
-```yaml
-apiVersion: apps/v1
-metadata:
-  name: testApp
-spec:
-  selector:
-    matchLabels:
-      app: testApp
-  template:
-    metadata:
-      annotations:
-        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
-          [{
-            "source": "java",
-            "service": "testApp",
-            "auto_multi_line_detection": true
-          }]
-      labels:
-        app: testApp
-      name: testApp
-    spec:
-      containers:
-        - name: '<CONTAINER_NAME>'
-          image: testApp:latest
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-### Customize multi-line aggregation configuration
-Automatic multi-line detection uses a list of [common regular expressions][1] to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns and thresholds for detection.
-
-[1]:https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
-{{< tabs >}}
-{{% tab "Configuration file" %}}
-In a configuration file, add the `auto_multi_line_extra_patterns` to your `datadog.yaml`:
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-  auto_multi_line_extra_patterns:
-   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
-```
-
-The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
-
-If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-  auto_multi_line_extra_patterns:
-   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
-  auto_multi_line_default_match_threshold: 0.1
-```
-
-[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
-{{% /tab %}}
-{{% tab "Docker" %}}
-In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`:
-
-```yaml
-    environment:
-      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
-      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS=\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
-```
-**Note**: The Datadog Agent interprets spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. In the following example, the two regex patterns are divided by a space, and `\s` in the second regex pattern matches spaces.
-
-The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
-
-If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
-
-```yaml
-    environment:
-      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
-      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS=\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
-      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD=0.1
-```
-
-[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-In Kubernetes, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`:
-
-#### Operator
-
-```yaml
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
-          value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
-```
-
-#### Helm
-
-```yaml
-datadog:
-  env:
-    - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
-      value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
-```
-**Note**: The Datadog Agent interprets spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. In the following example, the two regex patterns are divided by a space, and `\s` in the second regex pattern matches spaces.
-
-
-The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
-
-If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
-
-[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
-
-#### Operator
-
-```yaml
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
-          value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
-        - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD
-          value: "0.1"
-```
-
-#### Helm
-
-```yaml
-datadog:
-  env:
-    - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
-      value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
-    - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD
-      value: "0.1"
-```
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-With multi-line aggregation enabled, the Agent first tries to detect a pattern in each new log file. This detection process takes at most 30 seconds or the first 500 logs, whichever comes first. During the initial detection process, the logs are sent as single lines.
-
-After the detection threshold is met, all future logs for that source are aggregated with the best matching pattern, or as single lines if no pattern is found.
-
-**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection.
-
-Automatic multi-line detection detects logs that begin and comply with the following date/time formats: RFC3339, ANSIC, Unix Date Format, Ruby Date Format, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano, and default Java logging SimpleFormatter date format.
 
 ## Commonly used log processing rules
 
@@ -745,20 +611,40 @@ logs:
 
 The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.20230101.log` and `C:\\MyApp\\MyLog.20230102.log`.
 
-**Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
+**Note**:
+- The Agent requires read and execute permissions on a directory to list all the available files in it.
+- The path and exclude_paths values are case sensitive.
 
-**Note**: The path and exclude_paths values are case sensitive.
-
-### Tail most recently modified files first
-
-The Agent limits the number of files it can tail simultaneously, as defined by the `logs_config.open_files_limit` parameter.
-By default, when more files match the wildcard pattern than this limit, the Agent prioritizes them by sorting filenames in reverse lexicographic order. This works well for log files named with timestamps or sequential numbering, ensuring that the most recent logs are tailed first.
-
-However, if log filenames do not follow such patterns, the default behavior may not be ideal. To prioritize files by modification time, set logs_config.file_wildcard_selection_mode to by_modification_time. With this setting, the Agent continuously sorts files by their modification time. It always tails the most recently modified files first and stops tailing the least recently modified ones.
-
-To restore default behavior, remove the `logs_config.file_wildcard_selection_mode` entry or explicitly set it to `by_name`.
+### Prioritize tailed files by modification time
 
 This feature requires Agent version 7.40.0 or above.
+
+The Agent limits how many files it can tail simultaneously with the `logs_config.open_files_limit` parameter. If the number of files matching your configured log sources (such as wildcards) is within the limit, the Agent tails all of them. If more files match than the limit allows, the Agent prioritizes by sorting filenames in reverse lexicographic order, so files with newer timestamps or higher numbers are tailed first.
+
+If filenames don’t follow sequential or timestamped patterns, the default ordering may not be ideal. To prioritize by modification time instead, set `logs_config.file_wildcard_selection_mode` to `by_modification_time`. With this setting, the Agent tails the most recently modified files first.
+
+**Example**:
+- `open_files_limit` = 500
+- Your wildcard pattern matches 700 files.
+- With `by_name`: the Agent tails the 500 files with the highest names in reverse lexicographic order (for example, app.log.700 through app.log.201).
+- With `by_modification_time`: the Agent tails the 500 files most recently written to, regardless of their names.
+
+```yaml
+logs_enabled: true
+logs_config:
+ [...]
+  open_files_limit: 500
+
+  ## @param file_wildcard_selection_mode - string - optional - default: by_name
+  ## The strategy used to prioritize wildcard matches if they exceed open_files_limit.
+  ## Choices:
+  ##   - by_name: files are sorted in reverse lexicographic order (default).
+  ##   - by_modification_time: files are sorted by modification time, with the most recent first.
+  ## WARNING: by_modification_time is less performant and increases disk I/O.
+  file_wildcard_selection_mode: by_modification_time
+```
+
+To restore default behavior, remove the `logs_config.file_wildcard_selection_mode` entry or explicitly set it to `by_name`.
 
 ## Log file encodings
 
@@ -785,7 +671,7 @@ logs:
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable. The `exclude_truncated` rule is available starting with Agent v7.69.
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -849,6 +735,21 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 
 **Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][6] to troubleshoot any issues.
 
+## Multi-line log aggregation FAQ
+
+**1. When should I use manual multi-line rules vs. automatic multi-line detection?**
+
+If you know the format of your logs, you should use manual multi-line rules for precise control.
+If you are sending lots of multi-line logs, and you are unsure of their format or don't have the means to configure all sources individually, you should use automatic multi-line detection.
+
+**2. What happens when a multi-line pattern doesn't match any logs?**
+
+All non-JSON log lines are processed individually as separate log entries.
+All JSON-formatted log lines are treated as a single line of logs, and only the first valid JSON format enters the intake; the rest are dropped.
+
+**3. What happens when there are both global rules and integration-specific rules?**
+Integration-specific rules completely override global rules for the particular integration.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -862,3 +763,5 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 [4]: /agent/faq/commonly-used-log-processing-rules
 [5]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [6]: /agent/configuration/agent-commands/#agent-information
+[7]: /agent/logs/auto_multiline_detection
+[8]: /agent/logs/auto_multiline_detection_legacy

@@ -11,10 +11,6 @@ is_beta: true
 title: Monitorizar los despliegues de Argo CD
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CD Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Únete a la Vista previa" >}}
 CD Visibility para Argo CD está en vista previa. Si te interesa esta función, rellena el formulario para solicitar acceso.
 {{< /callout >}}
@@ -74,7 +70,7 @@ Se han añadido los siguientes recursos:
 2. La `cd-visibility-template` define qué enviar en la solicitud para el servicio`cd-visibility-webhook`.
 3. El `cd-visibility-trigger` define cuándo enviar la notificación y hace referencia a la `cd-visibility-template`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La llamada para rellenar el campo <code>commit_metadata</code> no es necesaria. El campo se utiliza para enriquecer la carga útil con información de Git.
 Si el origen de tu aplicación Argo CD no es un algoritmo de hash seguro (SHA) de commit definido (por ejemplo, si estás utilizando repositorios Helm), ajusta el cuerpo eliminando esa línea y la coma de la línea anterior.
 </div>
@@ -192,7 +188,7 @@ Si el comando se ha ejecutado correctamente, los despliegues contienen metadatos
 
 Si tu aplicación de Argo CD despliega más de un servicio, Datadog puede inferir automáticamente los servicios desplegados desde una sincronización de la aplicación. Datadog infiere los servicios basándose en los recursos de Kubernetes que fueron modificados.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La detección automática de servicios no es compatible cuando se utiliza <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#server-side-apply">Server-Side Apply</a>.
 </div>
 

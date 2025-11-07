@@ -7,9 +7,6 @@ further_reading:
   text: Más información sobre LLM Observability
 title: Rastrear una aplicación LLM
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">LLM Observability no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
 
 ## Información general
 

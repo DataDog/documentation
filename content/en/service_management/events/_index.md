@@ -25,17 +25,13 @@ further_reading:
   text: "Ensure high service availability with Datadog Service Management"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Event Management is not supported for this site.</div>
-{{< /site-region >}}
-
 {{< img src="service_management/events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
 
 ## Overview
 
 Ingest, enrich and normalize, and correlate your events from any source into actionable insights. Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations. Event Management can also ingest events from any source, including alert events from third parties, change requests, deployments, configuration changes.
 
-More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [Amazon ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9]. 
+More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [Amazon ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9].
 
 **Tip**: To open the Event Management page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `event explorer`.
 
@@ -45,6 +41,7 @@ More than 100 Datadog integrations support events collection, including [Kuberne
 
 {{< whatsnext desc="Event Management features:">}}
     {{< nextlink href="/service_management/events/ingest/" >}}<u>Ingest events</u> - Learn how to send events to Datadog{{< /nextlink >}}
+     {{< nextlink href="/service_management/events/triage_inbox" >}}<u>Triage Inbox</u> - Triage, investigate, collaborate, and resolve incidents{{< /nextlink >}}
      {{< nextlink href="/service_management/events/pipelines_and_processors/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
     {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u> - View, search and send notifications from events coming into Datadog{{< /nextlink >}}
     {{< nextlink href="/service_management/events/guides/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}

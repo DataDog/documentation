@@ -23,7 +23,7 @@ further_reading:
   text: "Advanced Usage"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> C++ does not provide integrations for automatic instrumentation, but it's used by Proxy tracing such as <a href="/tracing/setup/envoy/">Envoy</a> and <a href="/tracing/setup/nginx/">Nginx</a>.
 </div>
 

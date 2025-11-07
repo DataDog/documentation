@@ -1,5 +1,6 @@
 ---
 title: State Variables
+description: Encapsulate logic within apps using state variables to store and manipulate data across different app components.
 aliases:
 - /app_builder/variables
 - /service_management/app_builder/variables
@@ -12,10 +13,6 @@ further_reading:
   tag: "Documentation"
   text: "JavaScript Expressions"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 If you want to encapsulate logic within your app, you can use state variables.
 

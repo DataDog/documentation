@@ -34,7 +34,7 @@ draft: false
 git_integration_title: tls
 integration_id: tls
 integration_title: TLS
-integration_version: 4.0.0
+integration_version: 4.6.0
 is_public: true
 manifest_version: 2.0.0
 name: tls
@@ -68,7 +68,7 @@ tile:
 
 ## Información general
 
-Este check monitoriza las versiones de protocolo y la caducidad y la validez de certificados, etc.
+Este check monitoriza [TLS][1] las versiones de protocolo y la caducidad y la validez de certificados, etc.
 
 **Notas**:
 

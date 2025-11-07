@@ -69,33 +69,29 @@ tile:
 
 ## Información general
 
-Google Kubernetes Engine (GKE), servicio de Google Cloud Platform (GCP), es una plataforma alojada para la ejecución y la orquestación de aplicaciones en contenedores De forma similar a Elastic Container Service (ECS) de Amazon, GKE gestiona contenedores Docker desplegados en un clúster de equipo. Pero, a diferencia de ECS, GKE utiliza Kubernetes.
+Google Kubernetes Engine (GKE), un servicio en Google Cloud Platform (GCP), es una plataforma alojada para ejecutar y orquestar aplicaciones en contenedores, respaldadas por Kubernetes. Los clústeres GKE se pueden monitorizar mediante [Google Cloud Platform][1], así como mediante el Datadog Agent, ejecutándose como cargas de trabajo dentro del clúster.
 
 ## Configuración
 
 ### Requisitos previos
 
-1. Asegúrate de que tu rol en tu [proyecto GCP][1] tiene los permisos adecuados para utilizar GKE. 
+1. Asegúrate de que tu rol en tu [proyecto GCP][2] tiene los permisos adecuados para utilizar GKE. 
 
-2. Habilita la [API Google Container Engine][2] para tu proyecto. 
+2. Habilita la [API de Google Contenedor Engine][3] para tu proyecto. 
 
-3. Instala el [SDK de Google Cloud][3] y la herramienta de línea de comandos `kubectl` en tu equipo local. Una vez que hayas [emparejado el SDK de Google Cloud con tu cuenta de GCP][4], podrás controlar tus clústeres directamente desde tu equipo local mediante `kubectl`.
-
-4. Crea un pequeño clúster GKE llamado `doglib` capaz de acceder al Cloud Datastore ejecutando el siguiente comando:
-
-```
-$  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" --scopes "cloud-platform"
-```
+3. Instala el [SDK de Google Cloud][4] y la herramienta de línea de comandos `kubectl` en tu máquina local. Una vez que hayas [emparejado el SDK de Google Cloud con tu cuenta de GCP][5], podrás controlar tus clústeres directamente desde tu máquina local mediante `kubectl`.
 
 ### Configuración de la integración CME
 
-Instala la integración [Google Cloud Platform][5].
+Instala la integración [Google Cloud Platform][1].
 
 A continuación, podrás acceder a un [dashboard de Google Compute Engine][6] predefinido que muestra métricas, como E/S de disco, uso de CPU y tráfico de red.
 
-### Configuración de la integración GKE
+### Configurar la integración Kubernetes
 
-Elige un modo de funcionamiento. El *modo de funcionamiento* se refiere al nivel de flexibilidad, responsabilidad y control que tienes sobre tu clúster. GKE ofrece dos modos de funcionamiento:
+Para monitorizar con mayor profundidad tu clúster GKE, instala el Datadog Agent utilizando el Datadog Helm Chart o el Datadog Operator. Una vez desplegado, el Datadog Agent y el Datadog Cluster Agent monitorizan tu clúster y las cargas de trabajo en él.
+
+GKE admite dos [modos principales de operación][7] que pueden cambiar el nivel de flexibilidad, responsabilidad y control que tienes sobre tu clúster. Estos diferentes modos cambian la forma de desplegar los componentes de Datadog.
 
 - **Standard** (Estándar): tú gestionas la infraestructura subyacente del clúster, proporcionándole flexibilidad a la configuración de tu nodo.
 
@@ -116,37 +112,42 @@ Despliega una [versión en contenedor del Datadog Agent][1] en tu clúster Kuber
 
 #### Autopilot
 
-Sigue las instrucciones de la [sección Autopilot][1] GKE en la página de distribuciones Kubernetes.
+Autopilot requiere una configuración más distinta para la instalación de Kubernetes. en comparación con la instalación estándar. Este tipo de clúster requiere el uso del Datadog Helm chart.
+
+Despliega una [versión contenedorizada del Datadog Agent][1] en tu clúster Kubernetes con la [instalación del Datadog Agent en Kubernetes][2] de Helm. Cuando realices tu configuración de Helm `datadog-values.yaml`, consulta la [sección de GKE Autopilot sobre distribuciones Kubernetes][3] para ver los cambios de configuración necesarios. En particular, configura`providers.gke.autopilot` como `true`.
 
 #### Controlador de admisiones (Admission Controller)
 
-Para utilizar el [Controlador de admisión][2] con Autopilot, ajusta el [`configMode`][3] del Controlador de admisión a `service` o `hostip`. 
+Para utilizar el [Controlador de admisión][4] con Autopilot, configura el [`configMode`][5] del Controlador de admisión como `service` o `hostip`. 
 
 Dado que Autopilot no permite el modo `socket`, Datadog recomienda utilizar `service` (con `hostip` como alternativa) para proporcionar una capa de abstracción más robusta para el controlador. 
 
 
 
-[1]: https://docs.datadoghq.com/es/containers/kubernetes/distributions/?tab=helm#autopilot
-[2]: https://docs.datadoghq.com/es/containers/cluster_agent/admission_controller/?tab=operator
-[3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1046
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
+[2]: https://docs.datadoghq.com/es/containers/kubernetes/installation?tab=helm
+[3]: https://docs.datadoghq.com/es/containers/kubernetes/distributions/?tab=helm#autopilot
+[4]: https://docs.datadoghq.com/es/containers/cluster_agent/admission_controller/?tab=operator
+[5]: https://github.com/DataDog/helm-charts/blob/datadog-3.110.0/charts/datadog/values.yaml#L1284-L1293
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Referencias adicionales
 
-- [Monitorización de Autopilot GKE con Datadog][7]
-- [Monitorización de GKE con Datadog][8]
-- [Monitorización de tus cargas de trabajo GKE impulsadas por T2A con Datadog][9]
-- [Los nuevos dashboards y métricas de GKE te proporcionan una visibilidad más profunda de tu entorno][10]
+- [Monitorizar GKE Autopilot con Datadog][8]
+- [Monitorizar GKE con Datadog][9]
+- [Monitorizar tus cargas de trabajo GKE de tecnología T2A con Datadog][10]
+- [Los nuevos dashboards y métricas GKE proporcionan una mayor visibilidad de tu entorno][11]
 
 
-[1]: https://cloud.google.com/resource-manager/docs/creating-managing-projects
-[2]: https://console.cloud.google.com/apis/api/container.googleapis.com
-[3]: https://cloud.google.com/sdk/docs/
-[4]: https://cloud.google.com/sdk/docs/initializing
-[5]: /es/integrations/google_cloud_platform/
+[1]: https://app.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://cloud.google.com/resource-manager/docs/creating-managing-projects
+[3]: https://console.cloud.google.com/apis/api/container.googleapis.com
+[4]: https://cloud.google.com/sdk/docs/
+[5]: https://cloud.google.com/sdk/docs/initializing
 [6]: https://app.datadoghq.com/screen/integration/gce
-[7]: https://www.datadoghq.com/blog/gke-autopilot-monitoring/
-[8]: https://www.datadoghq.com/blog/monitor-google-kubernetes-engine/
-[9]: https://www.datadoghq.com/blog/monitor-tau-t2a-gke-workloads-with-datadog-arm-support/
-[10]: https://www.datadoghq.com/blog/gke-dashboards-integration-improvements/
+[7]: https://cloud.google.com/kubernetes-engine/docs/concepts/choose-cluster-mode
+[8]: https://www.datadoghq.com/blog/gke-autopilot-monitoring/
+[9]: https://www.datadoghq.com/blog/monitor-google-kubernetes-engine/
+[10]: https://www.datadoghq.com/blog/monitor-tau-t2a-gke-workloads-with-datadog-arm-support/
+[11]: https://www.datadoghq.com/blog/gke-dashboards-integration-improvements/

@@ -72,7 +72,7 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_dynamodb" >}}
+{{< get-metrics-from-git "amazon-dynamodb" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。

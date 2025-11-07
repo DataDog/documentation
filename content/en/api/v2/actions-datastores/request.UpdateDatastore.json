@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "name": "updated name"
+    },
+    "type": "datastores",
+    "id": "string"
+  }
+}

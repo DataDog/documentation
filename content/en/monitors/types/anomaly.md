@@ -18,6 +18,9 @@ further_reading:
 - link: "dashboards/functions/algorithms/#anomalies"
   tag: "Documentation"
   text: Anomalies function
+- link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
+  tag: "Blog"
+  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
 algolia:
   rank: 70
   tags: ['anomaly', 'anomaly monitor']
@@ -162,8 +165,6 @@ For detailed instructions on the **Configure notifications and automations** sec
 ## API
 
 Customers on an enterprise plan can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
-
-**Note**: Anomaly detection monitors are only available to customers on an enterprise plan. Customers on a pro plan interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
 
 Anomaly monitors are managed using the [same API][14] as other monitors. These fields are unique for anomaly monitors:
 
