@@ -45,12 +45,9 @@ To configure telemetry tagging, see [Tag your APM telemetry with Git information
 You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][11] > **Service Repository Mapping**.
 
 ### Enable auto-push
+To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to **Bits AI Dev** > [**Settings**][12], and set the toggle to **Enable**.
 
-Enable auto-push to allow the Dev Agent to push commits directly to a branch:
-
-1. Navigate to **Bits AI Dev** > [**Settings**][12], and use the toggle to enable auto-push.
-
-**Note**: If auto-push is disabled, you must review and approve code in Datadog before it is pushed. 
+**Note**: If auto-push is disabled, you must review and approve code in Datadog before the Dev Agent can push it.
 
 ### Configure custom instructions
 
@@ -63,7 +60,6 @@ The Dev Agent ingests custom instruction files from your repository, including:
 - `agents.md`  
 - `agent.md`  
 
-You can also define global custom instructions in **Bits AI** > **Dev Agent** > [**Settings**][12], which apply to all Dev Agent sessions.  
 
 You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI** > **Dev Agent** > [**Settings**][12], in the **Agent Instructions** section. 
 
