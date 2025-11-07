@@ -128,6 +128,8 @@ The metric description helps you understand what a metric does. Descriptions are
 ### Metrics Source Code
 
 {{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. . {{< /callout >}}
+<!--- waiting for new preview link for source code -->
+
 
 Displays the exact file, line, and owner in your source code where the metric is emitted, helping you trace its source code and code owners, understand, and take action directly from the platform. 
 
