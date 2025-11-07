@@ -8222,6 +8222,8 @@ menu:
       parent: product_analytics
       identifier: pa_troubleshooting
       weight: 9
+    - name: Session Replay
+      ## WIP
     - name: Account Management
       url: account_management/
       pre: cog-2
