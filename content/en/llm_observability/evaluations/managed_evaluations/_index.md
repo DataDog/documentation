@@ -65,7 +65,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 {{% /tab %}}
 {{% tab "Anthropic" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Anthropic account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
 
 Connect your Anthropic account to LLM Observability with your Anthropic API key. LLM Observability uses the `Haiku` model for evaluations.
 
@@ -80,7 +80,7 @@ Connect your Anthropic account to LLM Observability with your Anthropic API key.
 {{% /tab %}}
 {{% tab "Amazon Bedrock" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Amazon Bedrock account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
 
 Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for evaluations.
 
