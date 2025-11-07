@@ -107,7 +107,7 @@ You can measure these attributes **across all steps** or between **specific step
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_conversion.png" alt="Measure attributes across all steps or specific steps." style="width:60%;" >}}
 
-Use the **filter** selector to filter by various criteria that you define. These filters are applied to all steps in your funnel.
+Use the **filter** selector to scope to the various criteria you want to define. These filters are applied to all steps in your funnel.
 
 Next, click a datapoint to **investigate the specific attributes** that might have affected conversion rates, such as page load speed, ease of navigation, or checkout experience.
 
