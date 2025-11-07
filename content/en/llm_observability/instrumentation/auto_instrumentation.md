@@ -6,7 +6,7 @@ aliases:
     - /llm_observability/setup/auto_instrumentation
     - /llm_observability/sdk/auto_instrumentation
 further_reading:
-    - link: '/llm_observability/setup/sdk/'
+    - link: '/llm_observability/instrumentation/sdk/'
       tag: 'Documentation'
       text: 'LLM Observability SDK Reference'
 ---
@@ -164,7 +164,7 @@ The Amazon Bedrock integration instruments the following methods:
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
 [3]: https://botocore.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime.html
 [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
-[5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/
+[5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html
 [6]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
 [7]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 {{% /tab %}}
@@ -230,7 +230,7 @@ The Anthropic integration instruments the following methods:
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-The [Anthropic integration][1] provides automatic tracing for the [Anthropic Python SDK's][2] chat message calls.
+The [Anthropic integration][1] provides automatic tracing for the [Anthropic Node.js SDK's][2] chat message calls.
 
 ### Traced methods
 
