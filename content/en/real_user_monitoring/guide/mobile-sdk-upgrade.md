@@ -23,13 +23,13 @@ Follow this guide to migrate between major versions of the Mobile RUM, Logs, and
 {{< tabs >}}
 {{% tab "Android" %}}
 
-The transition from version 2 to version 3 focuses on removing support for the legacy Open Tracing project, improving the stability and consistency of the SDK.
+The transition from version 2 to version 3 focuses on removing support for the legacy Open Tracing project, altering default behaviour for distributed tracing and improving the stability and consistency of the SDK.
 
 {{% /tab %}}
 
 {{% tab "iOS" %}}
 
-The migration from v2 to v3 focuses on streamlining modules, refining defaults, and improving reliability across product features.
+The migration from v2 to v3 focuses on streamlining modules, refining default behaviour, and improving reliability across product features.
 
 All SDK products (RUM, Trace, Logs, Session Replay, and so on) remain modular and separated into distinct libraries. The main change is that the `DatadogObjc` module has been removed, with its contents integrated into the corresponding product modules.
 
@@ -162,6 +162,12 @@ Rum.enable(
       .build()
 )
 ```
+
+We changed the default behaviour of distributed traces. The SDK will now by default inject trace context into outgoing request only when the trace is sampled in.
+Refer to [Connect RUM and Traces][5] for more information.
+
+We have also changed how traces are sampled. Instead of randomly deciding for each RUM Resource (based on your sample rate) whether to create a span, the SDK now makes a sampling decision at the beginning of a session to either sample all traces or none.
+
 
 API changes:
 
@@ -371,6 +377,11 @@ To manage View level attributes more effectively, new APIs were added:
 - `Monitor.addViewAttributes(_:)`
 - `Monitor.removeViewAttribute(forKey:)`
 - `Monitor.removeViewAttributes(forKeys:)`
+
+We changed the default behaviour of distributed traces. The SDK will now by default inject trace context into outgoing request only when the trace is sampled in.
+Refer to [Connect RUM and Traces][5] for more information.
+
+We have also changed how traces are sampled. Instead of randomly deciding for each RUM Resource (based on your sample rate) whether to create a span, the SDK now makes a sampling decision at the beginning of a session to either sample all traces or none.
 
 Other notable changes:
 - All Objective-C RUM APIs are included in `DatadogRUM`. The separate `DatadogObjc` module is no longer available.
@@ -1293,3 +1304,5 @@ Additionally, event mappers no longer allow you to modify their view names. To r
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /real_user_monitoring/correlate_with_other_telemetry/apm
