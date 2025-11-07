@@ -47,7 +47,7 @@ Agentic setup is available for the following platforms:
 **LLM and AI agent applications**  
 - Python or Node.js—from scripts using [OpenAI's Responses API][10] to complex FastAPI applications powered by [LangGraph][11], or rich chatbot experiences built on [Vercel's AI SDK][12].
 
-### Install the Datadog Onboarding MCP server
+### 1. Install the Datadog Onboarding MCP server
 
 To install the Datadog Onboarding Model Context Protocol (MCP) server:
 
@@ -104,7 +104,7 @@ claude mcp add --transport http datadog-onboarding-mcp "https://mcp.us3.datadogh
 
 {{% /collapse-content %}}
 
-### Set up your project
+### 2. Set up your project
 
 Prompt your AI coding agent to enable all capabilities (Error Tracking, Session Replay, Product Analytics, and LLM Observability) in minutes by copying the below prompt into Cursor or Claude Code.
 
@@ -120,7 +120,7 @@ When you give this prompt to your coding agent, it does the following:
 - Follow the instructions the MCP tool provides as context to your coding agent, making code changes on your behalf (don't worry - Datadog does not commit them)
 - Provide testing steps to confirm that your application is correctly configured to send telemetry to Datadog
 
-### Deploying to production
+### 3. Deploy your app to production
 
 Depending on how your application is deployed, you need to commit the changes and set or upload provided environment variables to your production environment.
 
