@@ -6,8 +6,8 @@ further_reading:
   text: "CloudPrem Installation Prerequisites"
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
@@ -40,3 +40,7 @@ To configure CloudPrem to use a forward proxy such as Squid, set the environment
 environment:
   HTTPS_PROXY: <your HTTP proxy>
 ```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
