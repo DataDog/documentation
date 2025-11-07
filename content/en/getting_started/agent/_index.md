@@ -13,20 +13,30 @@ further_reading:
       text: 'Why should I install the Datadog Agent on my cloud instances?'
 ---
 
-This guide provides an introduction to the Agent and how you can use it to send system-level metrics to the Datadog platform. It walks through an example Agent installation on Ubuntu. It covers:
-
-  - Agent installation
-  - Verifying that the Agent is running
-  - Configuring Agent features
-  - Troubleshooting resources
-
 ## Overview
 
-### About the Agent
+This guide introduces the Datadog Agent and covers:
 
-The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. It can run on your local hosts (Windows, MacOS), containerized environments (Docker, Kubernetes), and in on-premises data centers. You can install and configure it using configuration management tools (Chef, Puppet, Ansible).
+  - [Introduction to the Agent](#the-datadog-agent)
+  - [Data collected by the Agent collects](#data-collected-by-the-agent)
+  - [Host vs. container Agents](#differences-between-agents-for-hosts-and-containers)
+  - [Agent configuration options](#agent-configuration-files)
+  - [Troubleshooting the Agent](#troubleshooting)
+
+
+## What is the Datadog Agent
+
+The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
+
+The Agent can run on:
+- your local hosts (Windows, MacOS), 
+- a containerized environments (Docker, Kubernetes),
+- in on-premises data centers. 
+
+You can install and configure it using configuration management tools like Chef, Puppet, or Ansible.
 
 The Agent is able to collect 75 to 100 system-level metrics every 15 to 20 seconds. With additional configuration, the Agent can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
+
 
 ### Agent overhead
 
@@ -34,9 +44,11 @@ The amount of space and resources the Agent takes up depends on the configuratio
 
 See [Agent Overhead][2] to learn more about these benchmarks.
 
-### Data collected
+## Data collected by the Agent
 
-#### Agent metrics
+To give you full visibility into your infrastructure, the Datadog Agent reports metrics about its own health and configuration, as well as metrics gathered from your hosts and services through its default checks.
+
+### Agent metrics
 
 The following Agent metrics are information the Agent sends to Datadog about itself, so that you can determine things like what hosts or containers have running Agents, when an Agent starts, and what version of Python it's running.
 
@@ -48,7 +60,7 @@ The following Agent metrics are information the Agent sends to Datadog about its
 
 See the [Agent Metrics][3] integration for a full list of Agent metrics.
 
-#### Checks
+### Checks
 
 Depending on your platform, the Agent has several core checks enabled by default that collect metrics.
 
@@ -70,89 +82,45 @@ To collect metrics from other technologies, see the [Integrations][9] page.
 
 ## Differences between Agents for hosts and containers
 
-This guide walks you through installing and configuring an Agent on a host. If you plan to eventually install Agents in a containerized environment, there are a few differences you should know about.
+There are key differences between installing Agents on a host and in a containerized environment: 
 
-1. On a host, the Agent is configured using a YAML file (as you will see later in this guide), whereas Agent configuration options for a container's Agent are passed in with [environment variables][10], for example:
-    - `DD_API_KEY` for the Datadog API key
-    - `DD_SITE` for the Datadog site
+- **Configuration differences**: 
+    - On a host, the Agent is configured using a YAML file (as you will see later in this guide).
+    - In a container, Agent configuration options are passed using [environment variables][10], for example:
+    
+    ```sh 
+    `DD_API_KEY` # Datadog API key
+    `DD_SITE`    # Datadog site
+    ```
 
-2. Similarly, while on a host, [integrations][9] are identified through the Agent configuration file, in a container environment, integrations are automatically identified through Datadog's Autodiscovery feature. See [Basic Agent Autodiscovery][11] to learn more.
+- **Integrations detection**: 
+    - On a host, [integrations][9] are identified through the Agent configuration file
+    - In a container environment, integrations are automatically identified using Datadog's Autodiscovery feature. See [Basic Agent Autodiscovery][11] to learn more.
 
-See the [Docker Agent][12] or [Kubernetes][13] for a walkthrough on running the Agent in a containerized environment.
+Additionally, see the [Docker Agent][12] or [Kubernetes][13] for a walkthrough on running the Agent in a containerized environment.
 
-## Why should I install the Agent?
 
-The Agent needs to be installed to send data from any one of the many Agent based Integrations. The Agent is not necessarily required to forward data to the Datadog Platform, for example, you can send Logs and Metrics through the Datadog API. However, the Agent is the recommended method to forward your data to the Datadog Platform.
-
-The Agent collects host data every 15 seconds to provide an accurate understanding of what is happening across your environments. As previously mentioned in the [Checks][14] section, the Agent has several checks enabled which collect over 50 default metrics to provide greater insight on system-level data.
-
-## Setup
+## Setting up the Agent 
 
 ### Prerequisites
 
-1. Create a [Datadog account][15].
 
-2. Have your [Datadog API key][16] on hand.
-
-3. Have the Datadog UI open.
-
-**Note**: This walkthrough uses the Ubuntu operating system. See the [Supported Platforms][17] page for a full list of supported platforms.
 
 ### Installation
 
-In the Datadog UI, navigate to the [Agent Installation page][18] and click on **Ubuntu**. To install the Datadog Agent on a host, use the one-line installation command from that page (example shown below), updated with your [Datadog API key][16].
-
-Example Ubuntu one-line installation command:
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-```
-
-Use the [Agent Installation page][18] to see the most up-to-date installation instructions for your operating system.
 
 ### Validation
 
-#### Terminal command
-
-Run the Agent's [status command][19] to verify installation.
-
-```shell
-sudo datadog-agent status
-```
-A successful installation returns an Agent Status report that begins with Agent information like this:
-
-```text
-===============
-Agent (v7.36.1)
-===============
-
-  Status date: 2022-06-15 15:54:48.364 EDT / 2022-06-15 19:54:48.364 UTC (1655322888364)
-  Agent start: 2022-06-15 15:54:29.85 EDT / 2022-06-15 19:54:29.85 UTC (1655322869850)
-  Pid: 9801
-  Go Version: go1.17.6
-  Python Version: 3.8.11
-  Build arch: amd64
-  Agent flavor: agent
-  Check Runners: 6
-  Log Level: info
-```
 
 #### Events
 
-In the Datadog UI, go to the [Events Explorer Page][20]. When an Agent is started or restarted, it sends events to Datadog. The following message displays if your Agent successfully installs:
-
-```text
-Datadog agent (v. 7.XX.X) started on <Hostname>
-```
 
 #### Service checks
 
 The Agent is set up to provide the following service checks:
 
   - `datadog.agent.up`: Returns `OK` if the Agent connects to Datadog.
-    <div class="alert alert-danger">AIX Agents do not report the <code>datadog.agent.up</code> service check. You can use the metric <code>datadog.agent.running</code> to monitor the uptime of an AIX Agent. The metric emits a value of <code>1</code> if the Agent is reporting to Datadog.</div>
   - `datadog.agent.check_status`: Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
-
 
 These checks can be used in the Datadog Platform to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][21] to learn more.
 
