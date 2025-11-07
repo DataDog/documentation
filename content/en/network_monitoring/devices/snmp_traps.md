@@ -20,7 +20,10 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to configur
 
 ## Configuration
 
-1. To enable listening for SNMP traps, ensure that your [firewall rules][7] allow incoming UDP traffic on the configured port, and add the following to your `datadog.yaml` file:
+To enable listening for SNMP traps, use the following instructions:
+
+1. Ensure that your [firewall rules][7] allow incoming UDP traffic on the configured port.
+2. Add the following to your `datadog.yaml` file:
 
    ```yaml
    network_devices:
@@ -90,7 +93,7 @@ As with [Network Device Monitoring][3], use namespace tags to differentiate betw
 
 The namespace can then be used to uniquely pivot from an SNMP Trap to the emitter device, or from the emitter device to an SNMP Trap.
 
-Maintain consistency across multiple Agent configurations. For example, if you configure two Agents, one for trap collection and one for metrics, ensure that both use namespaces or that neither uses namespaces.
+**Note**: If you are using namespace tags on any of your Agents, ensure that all of your Agents are using namespace tags. Do not configure namespace tags for only a subset of your Agents.
 
 ## Resolution
 
