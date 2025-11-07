@@ -275,11 +275,25 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         )
     )
     ```
+
+6. _(Optional)_ To ensure backend services' sampling decisions are still applied, configure the `traceControlInjection` initialization parameter to `.sampled` (set to `.sampled` by default).
+
+    For example, if you set the `traceSampler` to 20% in the iOS SDK:
+    - When `traceContextInjection` is set to `.all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
+
+  {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
+
+    - When `traceContextInjection` is set to `.sampled`, **20%** of backend traces are kept. For the remaining **80%**, the iOS SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+
+    {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
+
 **Note**:
 * `sampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 * The default sample rate for the `sampleRate` was 20% in the iOS SDK versions 1.x and 2.x, and got increased to 100% with the iOS SDK version 3.0.0.
+* The default for the `traceContextInjection` was `.all` in the iOS SDK versions 1.x and 2.x, and got changed to `.sampled` with the iOS SDK version 3.0.0.
 
 [1]: /real_user_monitoring/ios/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "React Native RUM" %}}
 
