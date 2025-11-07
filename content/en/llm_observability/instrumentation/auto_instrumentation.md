@@ -459,6 +459,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Embeddings][5]:
   - `openai.embeddings.create()` and `azureopenai.embeddings.create()`
 - [Calls made to DeepSeek through the OpenAI Node.js SDK][21] (as of `dd-trace@5.42.0`)
+- [Responses][32] (as of `dd-trace@5.76.0`)
 
 ## LangChain
 
@@ -676,6 +677,7 @@ module.exports = {
 [29]: https://docs.claude.com/en/api/client-sdks#typescript
 [30]: https://docs.anthropic.com/en/api/messages
 [31]: https://docs.anthropic.com/en/api/messages-streaming
+[32]: https://platform.openai.com/docs/api-reference/responses/create
 {{% /tab %}}
 {{< /tabs >}}
 

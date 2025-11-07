@@ -33,7 +33,7 @@ To access this feature, click **Ask** in the search field and type your query.
 
 {{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Natural language query in Metrics Explorer showing how to search for metrics using plain English phrases" video=true >}}
 
-To disable NLQ for your organization, you must have [org_management permissions][8]. Navigate to **Organization Settings > Preferences** and toggle off the Natural Language Queries feature.
+To disable NLQ for your organization, you must have [org_management permissions][11]. Navigate to **Organization Settings > Preferences** and toggle off the Natural Language Queries feature.
 
 ## Graphing
 
@@ -66,9 +66,19 @@ The possible options are:
 
 You can optionally add functions to your query using the function button. Not all functions are available for all metric types. For more information, see the [querying][6] documentation. 
 
+### Split graph
+
+Use the **Split Graph** button to view the data split into individual graphs by values for tags such as region, service, or environment.
+
 ### Export
 
-Export your graph to a dashboard or notebook with the buttons at the top right. You can also use **Split Graph in Notebook** to view the data split into individual graphs by things like region, service, or environment.
+Use the **Export** button (<i class="icon-export"></i>) to export your graph:
+
+- Copy a link to the graph for sharing
+- Add it to an [incident][8]
+- Create a [monitor][9]
+- Save it to a [dashboard][10]
+- Save it to a [notebook][2] 
 
 ### Quick Graphs
 
@@ -87,4 +97,7 @@ For more information, see the [Quick Graphs][7] documentation.
 [5]: /metrics/introduction/#space-aggregation
 [6]: /dashboards/querying/#advanced-graphing
 [7]: /dashboards/guide/quick-graphs/
-[8]: /account_management/rbac/permissions/#access-management
+[8]: /service_management/incident_management/
+[9]: /monitors/
+[10]: /dashboards/
+[11]: /account_management/rbac/permissions/#access-management
