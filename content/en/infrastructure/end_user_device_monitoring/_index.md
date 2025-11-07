@@ -15,12 +15,6 @@ End User Device Monitoring uses the Datadog Agent to collect data directly from 
 
 Devices appear in the Infrastructure Host List, where you can view performance data such as CPU, memory, and network usage. You can use Fleet Automation to manage the Agents installed on those devices, including checking version status, verifying configuration consistency, and ensuring that the necessary integrations are enabled.
 
-## Supported platforms
-
-- Windows 10 and later
-- macOS
-- Virtual desktop environments such as Amazon WorkSpaces, Azure Virtual Desktop, and Google Cloud Workstations
-
 ## Key capabilities
 
 ### Monitor device performance
@@ -46,8 +40,6 @@ The Windows Crash Detection integration captures Blue Screen of Death (BSOD) eve
 ### Trace network paths from devices
 
 Network Path shows the hop-by-hop route between a device and its destination, making it easier to isolate connectivity or latency issues along the network path.
-
-## Setup
 
 ## Further reading
 
