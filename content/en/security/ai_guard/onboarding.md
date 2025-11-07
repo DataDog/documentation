@@ -299,62 +299,6 @@ Example:
 
 SDK instrumentation allows you to set up and monitor AI Guard activity in real time.
 
-{{< tabs >}}
-{{% tab "Python" %}}
-Beginning with [dd-trace-py v3.14.0rc1][1], a new Python SDK has been introduced. This SDK provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
-
-```py
-from ddtrace.appsec.ai_guard import new_ai_guard_client, Prompt, ToolCall
-
-client = new_ai_guard_client(
-    api_key="<YOUR_API_KEY>",
-    app_key="<YOUR_APPLICATION_KEY>"
-)
-```
-
-#### Example: Evaluate a user prompt {#python-example-evaluate-user-prompt}
-
-```py
-# Check if processing the user prompt is considered safe
-prompt_evaluation = client.evaluate_prompt(
-    history=[
-        Prompt(role="system", content="You are an AI Assistant"),
-    ],
-    role="user",
-    content="What is the weather like today?"
-)
-```
-
-The `evaluate_prompt` method accepts the following parameters:
-- `history` (optional): A list of `Prompt` or `ToolCall` objects representing previous prompts or tool evaluations.
-- `role` (required): A string specifying the role associated with the prompt.
-- `content` (required): The content of the prompt.
-
-The method returns a Boolean value: `True` if the prompt is considered safe to execute, or `False` otherwise. If the REST API detects potentially dangerous content, it raises an `AIGuardAbortError`.
-
-#### Example: Evaluate a tool call {#python-example-evaluate-tool-call}
-
-```py
-# Check if executing the shell tool is considered safe
-tool_evaluation = client.evaluate_tool(
-    tool_name="shell",
-    tool_args={"command": "shutdown"}
-)
-```
-
-In this case, the `evaluate_tool` method accepts the following parameters:
-
-- `history` (optional): A list of `Prompt` or `ToolCall` objects representing previous prompts or tool evaluations.
-- `tool_name` (required): A string specifying the name of the tool to invoke.
-- `tool_args` (required): A dictionary containing the required tool arguments.
-
-The method returns a Boolean value: `True` if the tool invocation is considered safe, or `False` otherwise. If the REST API identifies potentially dangerous content, it raises an `AIGuardAbortError`.
-
-[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.14.0rc1
-{{% /tab %}}
-{{% tab "Javascript" %}}
-Starting with [dd-trace-js v5.69.0][1], a new JavaScript SDK is available. This SDK offers a simplified interface for interacting with the REST API directly from JavaScript applications.
-
 To use the SDK, ensure the following environment variables are configured:
 
 | Variable               | Value                                                         |
@@ -363,6 +307,66 @@ To use the SDK, ensure the following environment variables are configured:
 | `DD_API_KEY`           | `<YOUR_API_KEY>`                                              |
 | `DD_APP_KEY`           | `<YOUR_APPLICATION_KEY>`                                      |
 | `DD_TRACE_ENABLED`     | `true`                                                        |
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Beginning with [dd-trace-py v3.18.0][1], a new Python SDK has been introduced. This SDK provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
+
+<div class="alert alert-info">
+Replaced the SDK version implementation in <i>dd-trace-py v3.14.0-rc1</i> with the standardized common message format.
+</div>
+
+```py
+from ddtrace.appsec.ai_guard import new_ai_guard_client, Function, Message, Options, ToolCall
+
+client = new_ai_guard_client()
+```
+
+#### Example: Evaluate a user prompt {#python-example-evaluate-user-prompt}
+
+```py
+# Check if processing the user prompt is considered safe
+result = client.evaluate(
+    messages=[
+        Message(role="system", content="You are an AI Assistant"),
+        Message(role="user", content="What is the weather like today?"),
+    ],
+    options=Options(block=False)
+)
+```
+
+The `evaluate` method accepts the following parameters:
+- `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
+- `opts` (optional): dictionary with a block flag; if set to `true`, the SDK raises an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled.
+
+The method returns an Evaluation object containing:
+- `action`: `ALLOW`, `DENY`, or `ABORT`.
+- `reason`: natural language summary of the decision.
+
+#### Example: Evaluate a tool call {#python-example-evaluate-tool-call}
+
+Like evaluating user prompts, the method can also be used to evaluate tool calls:
+
+```py
+# Check if executing the shell tool is considered safe
+result = client.evaluate(
+    messages=[
+        Message(
+            role="assistant",
+            tool_calls=[
+                ToolCall(
+                    id="call_1",
+                    function=Function(name="shell", arguments='{ "command": "shutdown" }'))
+            ],
+        )
+    ]
+)
+```
+
+[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.18.0
+{{% /tab %}}
+{{% tab "Javascript" %}}
+Starting with [dd-trace-js v5.69.0][1], a new JavaScript SDK is available. This SDK offers a simplified interface for interacting with the REST API directly from JavaScript applications.
 
 The SDK is described in a dedicated [TypeScript][2] definition file. For convenience, the following sections provide practical usage examples:
 
@@ -381,7 +385,7 @@ const result = await tracer.aiguard.evaluate([
 
 The evaluate method returns a promise and receives the following parameters:
 - `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
-- `opts` (optional): dictionary with a block flag; if set to `true`, the SDK rejects the promise with `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
+- `opts` (optional): dictionary with a block flag; if set to `true`, the SDK rejects the promise with `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled.
 
 The method returns a promise that resolves to an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
@@ -417,15 +421,6 @@ const result = await tracer.aiguard.evaluate([
 {{% tab "Java" %}}
 Beginning with [dd-trace-java v1.54.0][1], a new Java SDK is available. This SDK provides a streamlined interface for directly interacting with the REST API from Java applications.
 
-Before using the SDK, make sure the following environment variables are properly configured:
-
-| Variable               | Value                                                         |
-|:-----------------------|:--------------------------------------------------------------|
-| `DD_AI_GUARD_ENABLED`  | `true`                                                        |
-| `DD_API_KEY`           | `<YOUR_API_KEY>`                                              |
-| `DD_APP_KEY`           | `<YOUR_APPLICATION_KEY>`                                      |
-| `DD_TRACE_ENABLED`     | `true`                                                        |
-
 The following sections provide practical usage examples:
 
 #### Example: Evaluate a user prompt {#java-example-evaluate-user-prompt}
@@ -444,7 +439,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
 
 The evaluate method receives the following parameters:
 - `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
-- `options` (optional): object with a block flag; if set to `true`, the SDK throws an `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
+- `options` (optional): object with a block flag; if set to `true`, the SDK throws an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled.
 
 The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
