@@ -8,10 +8,6 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with DDOT Collector"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
-{{< /site-region >}}
-
 This guide explains how to build a DDOT Collector image with additional OpenTelemetry components not included in the default DDOT Collector. To see a list of components already included in the DDOT Collector by default, see [Included components][1].
 
 ## Prerequisites
@@ -61,41 +57,41 @@ Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, whi
    ```
 2. Open the `manifest.yaml` file and add the additional OpenTelemetry components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).
    The highlighted line in this example adds a [metrics transform processor][7]:
-   {{< highlight json "hl_lines=19" >}}
-dist:
-  module: github.com/DataDog/comp/otelcol/collector-contrib
-  name: otelcol-contrib
-  description: Datadog OpenTelemetry Collector
-  version: {{< version key="collector_version" >}}
-  output_path: ./comp/otelcol/collector-contrib/impl
-  otelcol_version: {{< version key="collector_version" >}}
+   {{< highlight json "hl_lines=22" >}}
+connectors:
+# You will see a list of connectors already included by Datadog
+# Add your desired connectors here
 
-extensions:
-# You will see a list of extensions already included by Datadog
-# Add your desired extensions here
+dist:
+  description: Datadog OpenTelemetry Collector
+  module: github.com/DataDog/datadog-agent/comp/otelcol/collector-contrib/impl
+  name: otelcol-contrib
+  output_path: ./comp/otelcol/collector-contrib/impl
+  version: {{< version key="collector_version" >}}
 
 exporters:
 # You will see a list of exporters already included by Datadog
 # Add your desired exporters here
 
+extensions:
+# You will see a list of extensions already included by Datadog
+# Add your desired extensions here
+
 processors:
 # adding metrics transform processor to modify metrics
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v{{< version key="collector_version" >}}
 
-receivers:
-  - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v{{< version key="collector_version" >}}
-  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/fluentforwardreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v{{< version key="collector_version" >}}
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver v{{< version key="collector_version" >}}
+providers:
+# You will see a list of config providers already included by Datadog
+# Add your desired providers here
 
-connectors:
-# You will see a list of connectors already included by Datadog
-# Add your desired connectors here
+receivers:
+# You will see a list of receivers already included by Datadog
+# Add your desired receivers here
+
+replaces:
+# You will see a list of go module replacements included by Datadog
+# Add your desired dependency overrides here
 {{< /highlight >}}
 1. Save your changes to the manifest file.
 

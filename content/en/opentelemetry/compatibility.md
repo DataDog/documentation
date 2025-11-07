@@ -35,6 +35,7 @@ The following table shows feature compatibility across different setups:
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Trace metrics are calculated on the backend based on ingested spans that have passed through sampling, not on 100% of local traces before sampling." >}}) |
 | [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
 | [Live Processes][16] | {{< X >}} | {{< X >}} | | |
@@ -65,6 +66,12 @@ For more information, see [Cloud Network Monitoring Setup][3].
 ### Source Code Integration
 
 For unsupported languages in OpenTelemetry setups, [configure telemetry tagging][5] to link data to a specific commit.
+
+## Platform and environment support
+
+While the OpenTelemetry Collector can be deployed in many environments, certain platforms have specific limitations or support requirements.
+
+* **AWS EKS Fargate**: This environment is **not currently supported** and will result in incorrect infrastructure host billing when used with the OpenTelemetry Collector. Official support is planned for a future release. See the [Collector setup guide][7] for the most up-to-date information.
 
 ## Best practices
 
@@ -106,3 +113,4 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [27]: /tracing/trace_collection/
 [28]: /opentelemetry/setup/agentless
 [29]: /opentelemetry/setup/ddot_collector
+[30]: /infrastructure/list/

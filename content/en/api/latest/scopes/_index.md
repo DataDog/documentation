@@ -1,6 +1,6 @@
 ---
 title: Authorization Scopes
-type: documentation
+type: api
 disable_sidebar: true
 ---
 ## Authorization scopes for OAuth clients

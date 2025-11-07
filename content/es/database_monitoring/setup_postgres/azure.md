@@ -250,10 +250,6 @@ Para configurar la recopilación de métricas de monitorización de Database Mon
        password: 'ENC[datadog_user_database_password]'
        ssl: 'require'
 
-       ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
-       # pg_stat_statements_view: datadog.pg_stat_statements()
-       # pg_stat_activity_view: datadog.pg_stat_activity()
-
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
 
@@ -462,15 +458,11 @@ instances:
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
-
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
 ### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la instancia de configuración como un servicio de Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio con la siguiente sintaxis:
 
 #### Anotaciones de Autodiscovery v2
 

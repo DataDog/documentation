@@ -10,6 +10,10 @@
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
+.alert.alert-info p, .alert.alert-danger p, .alert.alert-warning p, .alert.alert-tip p {
+  color: #4a4a4a;
+}
+
 .alert::before {
   content: '';
   position: absolute;

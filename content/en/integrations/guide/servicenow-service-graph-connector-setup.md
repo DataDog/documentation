@@ -23,9 +23,13 @@ If you already have the integration configured for ServiceNow ITOM/ITSM:
 - The Service Graph Connector does not use the `Target table` and `Custom table` values from the configuration tile. You can save the integration with the Target table default values.
 - You can reuse your existing ITOM/ITSM user, but you must grant them the `cmdb_import_api_admin` role. This is outlined in the Service Graph Connector's guided setup instructions.
 
+## Setup
+
+Before configuring the integration, ensure you have the [ServiceNow tile configured][4] with your ServiceNow instance in Datadog.
+
 ## Customize CI fields
 
-In the [Datadog ServiceNow][3] integration tile, click the **Configure** tab, then the **Service Graph Connector** tab. Expand the **Customize CI** fields section. The following options are available:
+In Datadog, in the [ServiceNow integration tile][3], click the **Configure** tab, then the **Service Graph Connector** tab. Expand the **Customize CI** fields section. The following options are available:
 
 CI Type
 : The type of CI this field applies to.
@@ -43,3 +47,4 @@ Datadog Tag
 [1]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/c877cb86687e0050f8774bfad236c950/1.2.1
 [2]: https://store.servicenow.com/
 [3]: https://app.datadoghq.com/integrations/servicenow
+[4]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog

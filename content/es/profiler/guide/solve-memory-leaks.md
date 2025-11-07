@@ -13,9 +13,9 @@ title: Solucionar problemas de fuga de memoria mediante la generación de perfil
 
 La generación de perfiles dispone de varios conjuntos de datos para ayuda resolver las fugas de memoria, como el tipo de perfil Live Heap, que está [disponible para varios lenguajes][1].
 
-Para ayudarte a empezar, Datadog te ofrece un completo recorrido guiado de los servicios Go:
+Para ayudarte a empezar, Datadog te ofrece un completo recorrido guiado de los servicios Go o Java:
 
-{{< img src="profiler/guide-memory-leak/service-page-memory-leak-walkthrough.mp4" alt="Recorrido guiado de las fugas de memoria" video=true >}}
+{{< img src="profiler/guide-memory-leak/service-page-memory-leak.png" alt="Punto de entrada del recorrido de las fugas de memoria en la página de servicio" style="width:100%;" >}}
 
 ## Qué esperar
 
@@ -29,25 +29,25 @@ El recorrido guiado te ayuda a lo largo de diferentes pasos para que puedas:
 
 ## Requisitos
 
-<div class="alert alert-danger">El recorrido guiado se encuentra en fase beta pública y está sujeto a cambios. En el transcurso del tiempo habrá nuevas compatibilidades para lenguajes e infraestructuras.</div>
-
 Para utilizar este recorrido guiado necesitas:
-* Un servicio Go que se ejecute en Kubernetes.
+* Un servicio Go o Java contenedorizado con las integraciones Datadog Kubernetes o Datadog Contenedor instaladas.
 * El [Continuous Profiler habilitado][3].
+  * Asegúrate de que tus perfiles están etiquetados con `container_id`. Esto es necesario para establecer un vínculo entre las métricas de uso de memoria de contenedores y los datos de perfiles.
 
 ## Para empezar
 
 Investigar una fuga de memoria utilizando el recorrido guiado:
 
-1. Ve a **APM > Service Page** (APM > Página de servicios) en el servicio que quieres investigar.
-2. Haga clic en la pestaña **Memory Leaks* (Fugas de memoria):
-{{< img src="profiler/guide-memory-leak/service-page-memory-leak-entrypoint.png" alt="Punto de entrada del recorrido guiado de las fugas de memoria en la página de servicios" style="width:100%;" >}}
-3. Sigue los pasos guiados para completar tu investigación.
+1. Ve a **[APM > Software Catalog] (APM > Catálogo de software)[4]**.
+1. Pasa el cursor sobre el servicio que quieres investigar y haz clic en **Service Page** (Página de servicio).
+1. Haz clic en la pestaña **Memory Leaks** (Fugas de memoria).
+1. Sigue los pasos guiados para completar tu investigación.
 
 
 [1]: /es/profiler/enabling/supported_versions/#profile-types
 [2]: /es/profiler/compare_profiles
 [3]: /es/profiler/enabling
+[4]: https://app.datadoghq.com/services
 
 ## Referencias adicionales
 

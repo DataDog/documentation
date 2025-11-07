@@ -1,6 +1,9 @@
 ---
 title: Search Syntax
 further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 - link: "logs/explorer/search_syntax"
   tag: "Documentation"
   text: "Log Search Syntax"

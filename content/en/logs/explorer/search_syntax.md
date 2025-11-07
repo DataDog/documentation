@@ -5,6 +5,9 @@ aliases:
     - /logs/search-syntax
     - /logs/search_syntax/
 further_reading:
+- link: "/getting_started/search/"
+  tag: "Documentation"
+  text: "Getting Started with Search in Datadog"
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Learn how to visualize logs"
@@ -17,9 +20,9 @@ further_reading:
 - link: "/logs/explorer/saved_views/"
   tag: "Documentation"
   text: "Learn about Saved Views"
-- link: "/logs/explorer/calculated_fields/expression_language"
+- link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
-  text: "Learn more about Calculated Fields Expression Language"
+  text: "Learn more about Calculated Fields Formulas"
 ---
 
 ## Overview

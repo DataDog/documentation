@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-In Datadog, you can rename inferred entities, including datastores and queues, to make them easier to identify and manage. Renaming rules let you override the `peer.service` tag on spans with custom names, or generate names dynamically using tags and regular expressions. This functionality applies across all of APM, not only in the service catalog. After a rule is created, the updated names appear consistently in service maps, Trace Explorer, monitors, dashboards, and any other APM view.
+In Datadog, you can rename inferred entities, including datastores and queues, to make them easier to identify and manage. Renaming rules let you override the `peer.service` tag on spans with custom names, or generate names dynamically using tags and regular expressions. This functionality applies across all of APM, not only in the [Software Catalog][3]. After a rule is created, the updated names appear consistently in service maps, Trace Explorer, monitors, dashboards, and any other APM view.
 
 Renaming is useful when:
 - The default name does not match your preferences or conventions.  
@@ -23,7 +23,7 @@ Renaming is useful when:
 
 ## Prerequisites
 
-You must have the `apm_service_catalog_write` permission to create renaming rules. See [Permissions][2] for details on Datadog role-based access control.  
+You must have the `apm_service_renaming_write` permission to create renaming rules. See [Permissions][2] for details on Datadog role-based access control.  
 
 ## Create a renaming rule 
 
@@ -54,7 +54,7 @@ You must have the `apm_service_catalog_write` permission to create renaming rule
 1. Enter a descriptive name for the renaming rule so you can identify it later.
 1. Review and save your renaming rule.
 
-**Note:** Rules are processed at intake and applied to data as it comes in. Therefore, they are irreversible and should be created with caution. 
+**Note:** Rules are processed at intake and applied to data as it comes in. Changes affect only spans ingested while a rule is active, and past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.
 
 {{< img src="tracing/services/renaming_rules/create-service-rename-rule-reviewandsave.png" alt="The final step of the Create Service Rename Rule UI, prompting the user to review and save their renaming rule" style="width:100%;" >}}
 
@@ -64,3 +64,4 @@ You must have the `apm_service_catalog_write` permission to create renaming rule
 
 [1]: /tracing/services/inferred_services
 [2]: /account_management/rbac/permissions
+[3]: /internal_developer_portal/software_catalog/

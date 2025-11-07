@@ -43,6 +43,8 @@ To use the Datadog Exporter and Datadog Connector, configure them in your [OpenT
 
 {{% otel-endpoint-note %}}
 
+<div class="alert alert-warning">AWS EKS Fargate is not a supported environment for the OpenTelemetry Collector at this time. Deploying the Collector on EKS Fargate will result in incorrect infrastructure host billing.</div>
+
 ```yaml
 receivers:
   otlp:
@@ -192,6 +194,8 @@ For Datadog Exporter versions 0.83.0 and later, the `service` field of OTel logs
 To get the `service` field correctly populated in your logs, you can specify `service.name` to be the source of a log's service by setting a [log service remapper processor][27].
 
 {{% collapse-content title="Optional: Using Kubernetes" level="h4" %}}
+
+<div class="alert alert-warning">AWS EKS Fargate is not a supported environment for the OpenTelemetry Collector at this time. Deploying the Collector on EKS Fargate will result in incorrect infrastructure host billing.</div>
 
 There are multiple ways to deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure. For the filelog receiver to work, the [Agent/DaemonSet deployment][16] is the recommended deployment method.
 

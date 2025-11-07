@@ -67,6 +67,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/try-rule-modal';
 @import 'components/learning-center-callout';
 @import 'components/expression-language';
+@import 'components/ddsql-schema';
 @import 'components/admonitions';
 
 @import 'components/main-nav'; // imported from websites-modules

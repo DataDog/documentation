@@ -38,6 +38,16 @@ Before you begin, make sure you've already [installed and configured the Agent][
 Follow the relevant documentation for your custom instrumentation approach to learn more:
 
 {{< tabs >}}
+{{% tab "OpenTelemetry API (Recommended)" %}}
+
+Datadog tracing libraries provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog tracing library for your language, and send those to Datadog.
+
+{{< partial name="apm/apm-otel-instrumentation-custom.html" >}}
+
+<br>
+
+{{% /tab %}}
+
 {{% tab "Datadog API" %}}
 
 Use the Datadog API to add custom instrumentation that allows you to programmatically create, modify, or delete traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, and for providing deeper visibility and context into spans, including adding span tags.
@@ -48,17 +58,7 @@ Use the Datadog API to add custom instrumentation that allows you to programmati
 
 {{% /tab %}}
 
-{{% tab "OpenTelemetry API" %}}
-
-Datadog tracing libraries provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog tracing library for your language, and send those to Datadog.
-
-{{< partial name="apm/apm-otel-instrumentation-custom.html" >}}
-
-<br>
-
-{{% /tab %}}
-
-{{% tab "OpenTracing (legacy)" %}}
+{{% tab "OpenTracing (Legacy)" %}}
 
 If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
 

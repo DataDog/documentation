@@ -438,7 +438,7 @@ With [Databricks Networking Restrictions][12], Datadog may not have access to yo
 
 If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspaces/account. See Databricks's documentation for configuring IP access lists for [individual workspaces][16] and the [account console][17] to give Datadog API access. Updating the IP access lists **at both the workspace and account level is required** for the Databricks integration. **Note:** Datadog only uses Databricks account-level APIs to automatically refresh your service principal's client secret.
 
-If you are using [Databricks Private Connectivity][14], reach out to the Datadog [support team][15] to discuss potential options.
+**Note**: Monitoring workspaces that use [Databricks Private Link][14] connectivity is not supported.
 
 ## Further Reading
 
@@ -453,7 +453,6 @@ If you are using [Databricks Private Connectivity][14], reach out to the Datadog
 [12]: https://docs.databricks.com/en/security/network/front-end/index.html
 [13]: https://docs.databricks.com/en/security/network/front-end/ip-access-list.html
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
-[15]: https://www.datadoghq.com/support/
 [16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace
 [17]: https://docs.databricks.com/aws/en/security/network/front-end/ip-access-list-account
 [18]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars

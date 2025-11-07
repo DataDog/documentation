@@ -14,7 +14,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
       tag: 'Blog'
       text: 'Use Datadog Session Replay to view real-time user journeys'
-    - link: '/real_user_monitoring/browser/troubleshooting/'
+    - link: '/real_user_monitoring/application_monitoring/browser/troubleshooting/'
       tag: 'Documentation'
       text: 'Troubleshooting'
 ---
@@ -136,7 +136,7 @@ You can share the replay with your team by selecting the **Share** dropdown at t
 [4]: https://app.datadoghq.com/rum/sessions
 [5]: /real_user_monitoring/explorer/search/#facets
 [6]: /real_user_monitoring/explorer/saved_views/
-[7]: /real_user_monitoring/browser/setup/
+[7]: /real_user_monitoring/application_monitoring/browser/setup/
 [8]: /real_user_monitoring/session_replay/browser/developer_tools
 [9]: /real_user_monitoring/connect_rum_and_traces
 [10]: /real_user_monitoring/error_tracking/

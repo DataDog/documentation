@@ -12,6 +12,9 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+- link: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-apollo
+  tag: "Source Code"
+  text: Source code for dd-sdk-android-apollo
 ---
 ## Overview
 
@@ -235,7 +238,7 @@ Adding user information to your RUM sessions makes it possible to:
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
+{{< img src="real_user_monitoring/application_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -449,6 +452,8 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
 
 ### Automatically track network requests
 
+#### Basic network instrumentation
+
 To get timing information in resources (such as third-party providers, network requests) such as time to first byte or DNS resolution, customize the `OkHttpClient` to add the [EventListener][12] factory:
 
 1. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
@@ -460,27 +465,76 @@ To get timing information in resources (such as third-party providers, network r
     ```
 
 2. Add the [EventListener][12] factory:
+    {{< tabs >}}
+    {{% tab "Kotlin" %}}
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-   ```kotlin
-       val tracedHosts = listOf("example.com")
-       val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor.Builder(tracedHosts).build())
-        .eventListenerFactory(DatadogEventListener.Factory())
-        .build()
-   ```
-{{% /tab %}}
-{{% tab "Java" %}}
-   ```java
-       List<String> tracedHosts = Arrays.asList("example.com");
-       OkHttpClient okHttpClient = new OkHttpClient.Builder()
-        .addInterceptor(new DatadogInterceptor.Builder(tracedHosts).build())
-        .eventListenerFactory(new DatadogEventListener.Factory())
-        .build();
-   ```
-{{% /tab %}}
-{{< /tabs >}}
+```kotlin
+val tracedHosts = listOf("example.com")
+val okHttpClient = OkHttpClient.Builder()
+    .addInterceptor(DatadogInterceptor.Builder(tracedHosts).build())
+    .eventListenerFactory(DatadogEventListener.Factory())
+    .build()
+```
+
+    {{% /tab %}}
+    {{% tab "Java" %}}
+
+```java
+List<String> tracedHosts = Arrays.asList("example.com");
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
+    .addInterceptor(new DatadogInterceptor.Builder(tracedHosts).build())
+    .eventListenerFactory(new DatadogEventListener.Factory())
+    .build();
+```
+
+    {{% /tab %}}
+    {{< /tabs >}}
+
+#### Apollo instrumentation
+
+1. [Set up][14] RUM monitoring with Datadog Android RUM.
+
+2. [Set up](#basic-network-instrumentation) OkHttp instrumentation with the Datadog RUM SDK.
+
+3. Add the following to your application's build.gradle file.
+```groovy
+dependencies {
+    implementation "com.datadoghq:dd-sdk-android-apollo:x.x.x"
+}
+```
+
+4. Add the Datadog interceptor to your Apollo Client setup:
+ 
+```kotlin
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.network.okHttpClient
+import com.datadog.android.apollo.DatadogApolloInterceptor
+
+val apolloClient = ApolloClient.Builder()
+    .serverUrl("GraphQL endpoint")
+    .addInterceptor(DatadogApolloInterceptor())
+    .okHttpClient(okHttpClient)
+    .build()
+```
+
+This automatically adds Datadog headers to your GraphQL requests, allowing them to be tracked
+by Datadog.
+
+<div class="alert alert-danger">
+  <ul>
+    <li>The integration only supports Apollo version <code>4</code>.</li>
+    <li>The <code>query</code> and <code>mutation</code> type operations are tracked, <code>subscription</code> operations are not.</li>
+    <li>GraphQL payload sending is disabled by default. To enable it, set the <code>sendGraphQLPayloads</code> flag in the <code>DatadogApolloInterceptor</code> constructor as follows:</li>
+  </ul>
+
+  <pre><code class="language-kotlin">
+DatadogApolloInterceptor(sendGraphQLPayloads = true)
+  </code></pre>
+</div>
+
+
+
+
 
 ### Automatically track long tasks
 
@@ -584,7 +638,7 @@ To modify some attributes in your RUM events, or to drop some of the events enti
    |               | `view.url`           | URL of the view.                                 |
    |               | `view.name`          | Name of the view.                                |
    
-   **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
+   **Note**: If you return null from the `EventMapper<T>` implementation, the event is kept and sent as-is.
 
 ## Retrieve the RUM session ID
 
@@ -615,5 +669,4 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [11]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#time-to-network-settled
 [12]: https://square.github.io/okhttp/features/events/
 [13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
-[13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
-[13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
+[14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup

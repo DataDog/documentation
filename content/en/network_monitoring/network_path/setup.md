@@ -25,12 +25,14 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ### Monitor individual paths
 
+You can monitor specific network paths by defining them in the Agent configuration file located at `/etc/datadog-agent/conf.d/network_path.d/conf.yaml`.
+
+To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization, see [increase the number of workers](#increase-the-number-of-workers).
+
 {{< tabs >}}
 {{% tab "Linux" %}}
 
 Agent `v7.59+` is required.
-
-Manually configure individual paths by specifying the exact endpoint you want to test. This allows you to target specific network routes for monitoring.
 
 1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
@@ -54,9 +56,11 @@ Manually configure individual paths by specifying the exact endpoint you want to
        tags:
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
+       min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
      # max_ttl: 30 # max traderoute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -64,74 +68,15 @@ Manually configure individual paths by specifying the exact endpoint you want to
        tags:
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
+
     ```
 
-   For full configuration details, reference the [example config][4], or use the following:
-
-   ```yaml
-   init_config:
-    ## @param min_collection_interval - int - optional - default:60
-     ## Interval between each traceroute runs for each destination.
-     # min_collection_interval: <interval_in_seconds>
-
-   instances:
-     ## @param hostname - string - required
-     ## Hostname or IP of the destination endpoint to monitor.
-     ## Traceroute will be run against this endpoint with a sequence of different TTL.
-     #
-     - hostname: <HOSTNAME_OR_IP>
-
-     ## @param port - integer - optional - default:<RANDOM PORT>
-     ## The port of the destination endpoint.
-     ## For UDP, we do not recommend setting the port since it can make probes less reliable.
-     ## By default, the port is random.
-     #
-     # port: <PORT>
-
-     ## @param max_ttl - integer - optional - default:30
-     ## The maximum traceroute TTL used during path collection.
-     #
-     # max_ttl: 30
-
-     ## @param timeout - integer - optional - default:1000
-     ## Specifies how much time in milliseconds the traceroute should
-     ## wait for a response from each hop before timing out.
-     #
-     # timeout: 1000
-
-     ## @param min_collection_interval - integer - optional - default:60
-     ## Interval between each traceroute runs for each destination.
-     # min_collection_interval: <interval_in_seconds>
-     ## @param source_service - string - optional
-     ## Source service name.
-     #
-     # source_service: <SOURCE_SERVICE>
-
-     ## @param destination_service - string - optional
-     ## Destination service name.
-     #
-     # destination_service: <DESTINATION_SERVICE>
-
-     ## @param tags - list of strings - optional
-     ## A list of tags to attach to every metric and service check emitted by this instance.
-     ##
-     ## Learn more about tagging at https://docs.datadoghq.com/tagging
-     #
-     # tags:
-     #   - <KEY_1>:<VALUE_1>
-     #   - <KEY_2>:<VALUE_2>
-   ```
-
 3. Restart the Agent after making these configuration changes to start seeing network paths.
-
-[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Agent `v7.61+` is required.
-
-**Note**: Windows only supports TCP traceroutes.
+Agent `v7.72+` is required.
 
 1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
@@ -155,9 +100,11 @@ Agent `v7.61+` is required.
        tags:
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
+       min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
      # max_ttl: 30 # max traderoute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -167,44 +114,16 @@ Agent `v7.61+` is required.
          - "tag_key2:tag_value2"
     ```
 
-   For full configuration details, reference the [example config][4].
-
   3. Restart the Agent after making these configuration changes to start seeing network paths.
-
-**Note**: In Windows environments, the Agent uses UDP by default to monitor individual paths. If the protocol is not specified in the configuration, the Agent attempts a UDP traceroute, and any errors are logged. To work around this, ensure the protocol is set to TCP. For example:
-
-```yaml
-init_config:
-  min_collection_interval: 60 # in seconds, default 60 seconds
-instances:
-  - hostname: api.datadoghq.eu # endpoint hostname or IP
-    protocol: TCP
-    port: 443 # optional port number, default is 80
-```
-
-**Note**: In Windows Client OS environments, raw packets are [not supported][5]. To work around this, set `protocol: TCP` and `tcp_method: syn_socket`. Agent `v7.67+` and [Windows version 2004 (10.0; Build 19041) or later][6] are required. For example:
-
-```yaml
-init_config:
-  min_collection_interval: 60 # in seconds, default 60 seconds
-instances:
-  - hostname: api.datadoghq.eu # endpoint hostname or IP
-    protocol: TCP
-    port: 443 # optional port number, default is 80
-    tcp_method: syn_socket
-```
-
-[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
-[5]: https://learn.microsoft.com/en-us/windows/win32/winsock/tcp-ip-raw-sockets-2#limitations-on-raw-sockets
-[6]: https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-wsasetfailconnectonicmperror
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
 Agent `v7.59+` is required.
 
-To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
-**Note:** Helm chart v3.109.1+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+<div class="alert alert-info">Helm chart v3.109.1+ is required. For more information, reference the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md">Datadog Helm Chart documentation</a> and the documentation <a href="https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration">for Kubernetes and Integrations.</a></div>
+
+To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
 
   ```yaml
   datadog:
@@ -224,9 +143,11 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
             tags:
               - "tag_key:tag_value"
               - "tag_key2:tag_value2"
+            min_collection_interval: 120 # set min_collection_interval at the instance level
           ## optional configs:
           # max_ttl: 30 # max traderoute TTL, default is 30
           # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+          # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
 
           # more endpoints
           - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -236,68 +157,88 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
               - "tag_key2:tag_value2"
 ```
 
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
-[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 {{% /tab %}}
 {{% tab "Autodiscovery (Kubernetes)" %}}
-Datadog Autodiscovery allows you to enable Network Path on a per-service basis through Kubernetes annotations. To do this, first enable the traceroute module in the Datadog `values.yaml` file, which the Network Path integration depends on.</br>
-**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
+Datadog Autodiscovery allows you to enable Network Path on a per-service basis through Kubernetes annotations. 
 
-  ```yaml
-  datadog:
-    traceroute:
-      enabled: true
-  ```
-After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
-  ```yaml
-apiVersion: v1
-kind: Pod
-# (...)
-metadata:
-  name: '<POD_NAME>'
-  annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
-      {
-        "network_path": {
-          "init_config": {
-            "min_collection_interval": 300
-          },
-          "instances": [
-                {
-                  "protocol": "TCP",
-                  "port": 443,
-                  "source_service": "<CONTAINER_NAME>",
-                  "tags": [
-                    "tag_key:tag_value",
-                    "tag_key2:tag_value2"
-                  ],
-                  "hostname": "api.datadoghq.eu"
-                },
-                {
-                  "protocol": "UDP",
-                  "source_service": "<CONTAINER_NAME>",
-                  "tags": [
-                    "tag_key:tag_value",
-                    "tag_key2:tag_value2"
-                  ],
-                  "hostname": "1.1.1.1"
-                },
-          ]
-        }
-      }
-    # (...)
-spec:
-  containers:
-    - name: '<CONTAINER_NAME>'
-# (...)
-  ```
-  If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
+<div class="alert alert-info">Helm chart v3.109.1+ is required. For more information, see the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md">Datadog Helm Chart documentation</a>.</div>
+
+1. Enable the traceroute module in the Datadog `values.yaml` file, which the Network Path integration depends on.
+
+   ```yaml
+   datadog:
+     traceroute:
+       enabled: true
+
+2. After the module is enabled, Datadog automatically detects Network Path annotations added to your Kubernetes pod. For more information, see [Kubernetes and Integrations][2].
+
+   ```yaml
+   apiVersion: v1
+   kind: Pod
+   # (...)
+   metadata:
+     name: '<POD_NAME>'
+     annotations:
+       ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+         {
+           "network_path": {
+             "init_config": {
+               "min_collection_interval": 300
+             },
+             "instances": [
+                   {
+                     "protocol": "TCP",
+                     "port": 443,
+                     "source_service": "<CONTAINER_NAME>",
+                     "tags": [
+                       "tag_key:tag_value",
+                       "tag_key2:tag_value2"
+                     ],
+                     "hostname": "api.datadoghq.eu"
+                   },
+                   {
+                     "protocol": "UDP",
+                     "source_service": "<CONTAINER_NAME>",
+                     "tags": [
+                       "tag_key:tag_value",
+                       "tag_key2:tag_value2"
+                     ],
+                     "hostname": "1.1.1.1"
+                   },
+             ]
+           }
+         }
+       # (...)
+   spec:
+     containers:
+       - name: '<CONTAINER_NAME>'
+   # (...)
+   ```
+    If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers), add pod annotations under `spec.template.metadata`.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
 
 {{% /tab %}}
 {{< /tabs >}}
+
+#### Increase the number of workers 
+
+Network Path monitoring for individual paths runs as an Agent Integration. The number of concurrent workers is controlled by the `check_runners` setting in the `datadog.yaml` file.
+
+To increase the number of workers, add the following configuration to your `datadog.yaml` file:
+
+```yaml
+## @param check_runners - integer - optional - default: 4
+## @env DD_CHECK_RUNNERS - integer - optional - default: 4
+## The `check_runners` refers to the number of concurrent check runners available for check instance execution.
+## The scheduler attempts to spread the instances over the collection interval and will _at most_ be
+## running the number of check runners instances concurrently.
+##
+## The level of concurrency has effects on the Agent's: RSS memory, CPU load, resource contention overhead, etc.
+#
+check_runners: <NUMBER_OF_WORKERS>
+```
 
 ### Network traffic paths (experimental)
 
@@ -527,5 +468,7 @@ If you encounter an error like the following:
 [2]: https://docs.datadoghq.com/agent/configuration/proxy/?tab=linux
 [3]: /help
 [4]: https://app.datadoghq.com/network/path
+[5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+
 
 

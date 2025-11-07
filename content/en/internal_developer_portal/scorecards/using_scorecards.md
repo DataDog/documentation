@@ -23,10 +23,6 @@ further_reading:
   text: "Track DORA Metrics with Datadog" 
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Scorecards are in Preview.
-{{< /callout >}}
-
 After configuring your Scorecards, you can view entity-level scores, track scores over time, and generate Scorecard reports to automatically update your team with Scorecard information.
 
 ## View entity-level details and scores

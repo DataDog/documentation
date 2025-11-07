@@ -49,9 +49,12 @@ Datadog On-Call supports two routing types: direct call routing and voicemail ro
 
 In direct call routing, the system follows the On-Call team's escalation policy to connect the caller to the first available responder.
 
-Responders must have valid phone numbers in their profiles; those without are automatically skipped.
+Responders must have valid phone numbers in their profiles; On-Call skips any responders that don't.
 
-**Note:** Responders must press `1` to accept a call.
+Responders then have the following options:
+- Press `1` to acknowledge the call.
+- Press `2` to escalate it.
+- Press `3` to resolve it.
 
 #### Escalation logic
 

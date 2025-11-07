@@ -5,9 +5,11 @@ further_reading:
   tag: "Documentation"
   text: "ServiceNow integration"
 ---
+
 ServiceNow's ITOM/ITSM integration allows you to send alerts, cases, and incidents generated in Datadog to ServiceNow as records in the Incident or Event tables. The integration relies on interim tables and transform maps.
 
-To use the integration, follow the instructions to install the integration, and then configure the integration for each product:
+To use the integration, follow the instructions to install it, and then configure it for each product:
+1. [Configure the ServiceNow tile](#tile)
 1. [Install the ITOM/ITSM integration](#install)
 1. Configure the integration
    1. [Configure Datadog templated monitor notifications](#monitor-notifications)
@@ -15,12 +17,15 @@ To use the integration, follow the instructions to install the integration, and 
    1. [Configure Datadog Incident Management](#incident-management)
 1. [Customize data with transform maps](#transform-maps)
 
+## Configure the ServiceNow tile {#tile}
+
+Before installing the integration, ensure you have the [ServiceNow tile configured][3] with your ServiceNow instance in Datadog.
+
 ## Install the ITOM/ITSM integration {#install}
+
 There are two ways to install the integration:
 - Datadog recommends installing the latest version of the [ITOM/ITSM Integration for Datadog][1] integration from the ServiceNow store.
-- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.7.2.xml][2]) and upload it to your ServiceNow instance manually.
-
-Before proceeding, make sure you have [added your ServiceNow instance][3] into your ServiceNow tile in Datadog.
+- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.7.7.xml][2]) and upload it to your ServiceNow instance manually.
 
 ## Configure the integration
 
@@ -48,7 +53,7 @@ To create a ServiceNow record from a monitor, you need to configure an @-handle 
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
 1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Monitors** tab.
 1. Beside **Templates**, click **+ New** to create a new template.
-1. Define an @-handle **Name**, **Instance**, and **Target Table** for the monitor notification to be delivered to. 
+1. Define an @-handle **Name**, **Instance**, and **Target Table** for the monitor notification to be delivered to.
 1. (Optional) Set **Assignment Group**, **Business Service**, and/or **User** in the template.<br /> **Note**: If you set both an assignment group and user, the user must belong to the selected assignment group for the ServiceNow record creation to successfully complete.
 1. (Optional) Expand the **Customize notification payload** section and click **Add field** to add more variables from Datadog.
 1. Click **Save**.
@@ -281,18 +286,18 @@ This section describes the fields that are synced between Incident Management an
 | OK                                             | Resolved                      |
 | Completed _(optional, configured in settings)_ | Resolved                      |
 
-| **Datadog Incident Severity*** | **ServiceNow Urgency** | **ServiceNow Impact** | **ServiceNow Priority** |
-|--------------------------------|------------------------|-----------------------|-------------------------|
-| SEV-1                          | 1                      | 1                     | 1 - Critical            |
-| SEV-2                          | 1                      | 2                     | 2 - High                |
-| SEV-2                          | 2                      | 1                     | 2 - High                |
-| SEV-3                          | 1                      | 3                     | 3 - Moderate            |
-| SEV-3                          | 2                      | 2                     | 3 - Moderate            |
-| SEV-3                          | 3                      | 1                     | 3 - Moderate            |
-| SEV-4                          | 2                      | 3                     | 4 - Low                 |
-| SEV-4                          | 3                      | 2                     | 4 - Low                 |
-| SEV-5 (Minor)                  | 3                      | 3                     | 5 - Planning            |
-| Unknown                        | 3                      | 3                     | 5 - Planning            |
+| **Datadog Incident Severity** | **ServiceNow Urgency** | **ServiceNow Impact** | **ServiceNow Priority** |
+|-------------------------------|------------------------|-----------------------|-------------------------|
+| SEV-1                         | 1                      | 1                     | 1 - Critical            |
+| SEV-2                         | 1                      | 2                     | 2 - High                |
+| SEV-2                         | 2                      | 1                     | 2 - High                |
+| SEV-3                         | 1                      | 3                     | 3 - Moderate            |
+| SEV-3                         | 2                      | 2                     | 3 - Moderate            |
+| SEV-3                         | 3                      | 1                     | 3 - Moderate            |
+| SEV-4                         | 2                      | 3                     | 4 - Low                 |
+| SEV-4                         | 3                      | 2                     | 4 - Low                 |
+| SEV-5 (Minor)                 | 3                      | 3                     | 5 - Planning            |
+| Unknown                       | 3                      | 3                     | 5 - Planning            |
 
 **Note**: If `Start at SEV-0` is enabled in Incident Management settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` will all stay the same, but the `Datadog Incident Severity` shifts down by 1. For example, in the first row of this table, the Datadog Incident Severity would be 0, but the rest of the values in the rest of the row would stay the same.
 {{% /collapse-content %}}
@@ -337,6 +342,58 @@ answer = (function transformEntry(source)
 - The field mappings are at the bottom of the record. Some basic mappings are included. This is where you select the fields to include, define the format, and select the target fields in your ServiceNow instance.
 {{% /collapse-content %}}
 
+{{% collapse-content title="Transform correlated alert data" level="h4" expanded=false id="transform-correlated-alert-data" %}}
+To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map. 
+
+To populate data into the ServiceNow incident, you have to modify your script to parse data that has been sent from Datadog and stored in the EM Correlated Alert column, and specify which fields in the incident you want to send the parsed data to. Below is a sample script that you can customize for your needs:
+
+```
+(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+    // We do not need to process non-correlated-alert events
+    if (!source.em_correlated_alert_id) {
+        return;
+    }
+
+    // Create a GlideRecord for the table
+    var gr = new GlideRecord('x_datad_datadog_case_incident_table');
+    gr.addQuery('case_id', source.case_id);
+    gr.addNotNullQuery('em_correlated_alert_id');
+    gr.orderByDesc('sys_created_on');
+    gr.query();
+
+    // Ensure we process each alert_id only once
+    var seenAlert = {};
+
+    // Add relevant correlated alert fields here
+    var alertNames = [];
+
+
+    // Loop through list of correlated_alerts associated with the same case_id
+    while (gr.next()) {
+        var emAlertId = gr.getValue('em_correlated_alert_id');
+
+        if (!seenAlert.hasOwnProperty(emAlertId)) {
+            seenAlert[emAlertId] = true;
+            var changeType = gr.getValue('em_change_type');
+            if (changeType == "added") {
+                var correlatedAlert = gr.getValue("em_correlated_alert");
+                var jsonAlert = JSON.parse(correlatedAlert);
+
+                // Get relevant fields from the JSON event
+                var alertName = jsonAlert['alert_message'];
+                alertNames.push(alertName);
+            }
+        }
+    }
+
+    // Set the corresponding value on the incident table
+    // target.impact = 1;
+
+})(source, map, log, target);
+```
+
+{{% /collapse-content %}}
+
 ## Troubleshooting
 
 {{% collapse-content title="Error message in your Datadog integration" level="h4" expanded=false id="troubleshooting-error-messages" %}}
@@ -364,8 +421,12 @@ If a monitor is reopening the same incident instead of creating a new one for ea
 
 Need additional help? Contact [Datadog support][10].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[2]: /resources/xml/Datadog-Snow_Update_Set_v2.7.2.xml
+[2]: /resources/xml/Datadog-Snow_Update_Set_v2.7.7.xml
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/cases/settings

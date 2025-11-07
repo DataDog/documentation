@@ -61,10 +61,13 @@ local/bin/py/preview-links-template.mako                      @DataDog/documenta
 local/bin/py/build/configurations/pull_config_preview.yaml    @DataDog/WebOps-Platform @DataDog/documentation
 local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Platform @DataDog/documentation
 local/**/*                                                    @DataDog/WebOps-Platform
-data/sdk_versions.json                                        @Datadog/documentation
 
 # markdown shortcodes
 layouts/shortcodes/**/*.md                                    @DataDog/documentation
+
+# General version bumps
+data/synthetics_worker_versions.json                          @Datadog/documentation
+data/private_action_runner_version.json                       @Datadog/documentation    
 
 # SDK versions
 .github/workflows/bump_versions.yml   @DataDog/web-frameworks @DataDog/documentation @DataDog/WebOps-Platform

@@ -36,10 +36,6 @@ Abre cualquier señal en estos productos y utiliza el botón **Crear case (incid
 
 ## Sincronización bidireccional de tickets con Jira
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-La Sincronización Bidireccional de Jira está en Vista previa. Ponte en contacto con tu Customer Success Manager para obtener acceso.
-{{< /callout >}}
-
 La sincronización bidireccional te permite actualizar automáticamente los tickets de Jira cuando se produzcan cambios en Datadog y actualizar cierta información de Datadog cuando se producen cambios en Jira.
 
 ### Productos compatibles

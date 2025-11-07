@@ -12,7 +12,9 @@ This page discusses using Datadog's [LLM Observability Trace Explorer][1] to que
 #### Querying across spans versus traces
 In LLM Observability, a _span_ represents a unit of work representing a single operation in your LLM application. A _trace_ represents the end-to-end operations involved in processing a request in your LLM application, often consisting of one or more nested spans. For more information about this terminology, see [LLM Observability Terms and Concepts][2].
 
-To toggle between searching spans and traces, use the drop-down menu on the left of the query field on [LLM Observability Trace Explorer][1]. To search across traces where the root span matches the query, select **Traces**. To search across all your spans, including nested child spans, select **All Spans**. 
+In the [LLM Observability Trace Explorer][1], choose whether to search across traces or spans:
+- Select **Traces** to find traces where the root span matches your query.
+- Select **Spans** to search across all your spans, including nested child spans.
 
 Some search terms are only applicable to traces. For examples, see [Trace-level queries](#trace-level-queries).
 

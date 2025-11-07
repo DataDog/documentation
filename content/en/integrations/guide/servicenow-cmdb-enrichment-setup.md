@@ -18,6 +18,10 @@ The **ServiceNow Integration** uses ServiceNow's Configuration Management Databa
 - [**Network Device Tagging**](#network-device-tagging): Adds tags to network devices monitored by Datadog, using metadata from the ServiceNow CMDB.
 - [**Reference Tables**](#reference-tables): Automatically enriches logs and events in Datadog with additional fields from ServiceNow CIs by mapping value fields to a primary key.
 
+## Setup
+
+Before configuring the integration, ensure you have the [ServiceNow tile configured][10] with your ServiceNow instance in Datadog.
+
 ## Host tagging
 
 Enrich your Datadog hosts with ServiceNow CMDB metadata through host tagging.
@@ -31,11 +35,7 @@ To enable ingestion of host tags:
 1. Select any optional field name remapping with **Column Name Maps**. By default, tags are applied to the host in the format `tagName:columnValue`, where `tagName` is a combination of the table name and the column name.
 1. Click **Save**.
 
-Expect host tags to populate in Datadog shortly after your queries' scheduled executions.
-<!-- ![Screenshot of Host info tab showing ServiceNow host tags][image1] -->
-
-Monitor the ingestion process in the Datadog [Events Explorer][2] by scoping your search query on `source:servicenow`.
-<!-- ![Screenshot showing one running ingestion][image2] -->
+Expect host tags to populate in Datadog shortly after your queries' scheduled executions. You can monitor the ingestion process in the Datadog [Events Explorer][2] by searching for `source:servicenow`.
 
 ### Additional Non-CMDB field tagging
 
@@ -59,7 +59,6 @@ To enable ingestion of service data:
 1. Click **Save**.
 
 Expect to see service data populated in Datadog a few minutes after your queries' scheduled executions. To view ingestion errors, go to the [Events Explorer][2] and search for events with `source:servicenow`.
-<!-- ![Screenshot of the Service Configuration panel showing metadata populated from ServiceNow][image3] -->
 
 ## Network device tagging
 
@@ -80,8 +79,7 @@ To enable ingestion of device tags:
 
 You can expect to see network device tags populated in Datadog within a few minutes after your queries' scheduled executions. Any ingestion errors are reported through events viewable in your events explorer.
 
-Monitor the ingestion process in the Datadog [Events Explorer][2] by scoping your search query on `source:servicenow`.
-<!-- ![Screenshot showing one running ingestion][image4] -->
+You can monitor the ingestion process in the Datadog [Events Explorer][2] by scoping your search query on `source:servicenow`.
 
 ## Reference Tables
 
@@ -129,3 +127,4 @@ For tagging to work correctly, ensure that the following are true in your system
 [7]: https://app.datadoghq.com/reference-tables
 [8]: https://docs.servicenow.com/bundle/rome-servicenow-platform/page/product/configuration-management/task/use-cmdb-query-builder.html
 [9]: https://app.datadoghq.com/event/pipelines
+[10]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog

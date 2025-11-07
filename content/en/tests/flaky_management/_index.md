@@ -42,7 +42,7 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 
 Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
 
-1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][11] in Software Delivery settings.
+1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][13] in Software Delivery settings.
 2. Search for and select the repository you want to configure. This opens the **Edit Policies** flyout.
     {{< img src="tests/flaky-policies-2.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
 
@@ -60,6 +60,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
 Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
 
 - `repository_id`
+- `test_service`
 - `branch`
 - `flaky_status`
 - `test_codeowners`
@@ -82,14 +83,28 @@ For any flaky test, you can create a case and use [Case Management][4] to track 
 
 When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. If successful, the test's status is automatically updated to `Fixed`. To enable the remediation flow:
 
-1. For the test you are fixing, click **Fix this test** in the Flaky Test Management UI.
+1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Test Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
-   - Retries any tests you're attempting to fix 20 times.
-   - Runs tests even if they are marked as `Disabled`.
-   - If all retries pass, updates the test's status to `Fixed`.
-   - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
+    - Retries any tests you're attempting to fix 20 times.
+    - Runs tests even if they are marked as `Disabled`.
+    - If all retries pass, updates the test's status to `Fixed`.
+    - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
+
+## AI-powered flaky test fixes
+
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
+Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
+
+Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
+
+{{< img src="tests/bits_ai_flaky_test_fixes.png" alt="Bits AI Dev Agent displaying a proposed fix for a flaky test" style="width:100%;" >}}
+
+### Setup
+
+To enable AI-powered flaky test fixes, enable Bits AI Dev Agent for Test Optimization by following the setup instructions in the [Bits AI Dev Agent documentation][16]. Bits AI Dev Agent automatically create fixes for flaky tests detected by Test Optimization.
 
 ## AI-powered flaky test categorization
 
@@ -116,18 +131,27 @@ Flaky Test Management uses AI to automatically assign a root cause category to e
 | **Environment Dependency** | Test depends on specific OS, library versions, or hardware. It may pass on one environment but fail on another, especially in cloud-CI environments where machines vary nondeterministically. |
 | **Unknown**             | Test is flaky for an unknown reason. |
 
+## Receive notifications
+
+Set up notifications to track changes to your flaky tests. Whenever a user or a policy changes the state of a flaky test, a message is sent to your selected recipients. You can send notifications to email addresses or Slack channels (see the [Datadog Slack integration][5]), and route messages based on test code owners. If no code owners are specified, all selected recipients are notified of all flaky test changes in the repository. Configure notification for each repository from the  [**Flaky Test Policies**][13] page in Software Delivery settings.
+
+Notifications are not sent immediately; they are batched every few minutes to reduce noise.
+
+{{< img src="tests/flaky_management_notifications_settings.png" alt="Notifications settings UI" style="width:100%;" >}}
+
 ## Compatibility
 
 To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |
-| [.NET][5]       | 3.13.0+                       | 3.17.0+                      |
-| [Go][6]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
-| [Java][7]       | 1.48.0+                       | 1.50.0+                      |
-| [JavaScript][8] | 5.44.0+                       | 5.52.0+                      |
-| [Python][9]     | 3.3.0+                        | 3.8.0+                       |
-| [Ruby][10]      | 1.13.0+                       | 1.17.0+                      |
+| [.NET][6]       | 3.13.0+                       | 3.17.0+                      |
+| [Go][7]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
+| [Java][8]       | 1.48.0+                       | 1.50.0+                      |
+| [JavaScript][9] | 5.44.0+                       | 5.52.0+                      |
+| [Python][10]    | 3.3.0+                        | 3.8.0+                       |
+| [Ruby][11]      | 1.13.0+                       | 1.17.0+                      |
+| [Swift][12]     | 2.6.1+                        | 2.6.1+                       |
 
 ## Further reading
 
@@ -137,10 +161,13 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [2]: https://app.datadoghq.com/source-code/repositories
 [3]: /tests/explorer
 [4]: /service_management/case_management
-[5]: /tests/setup/dotnet/
-[6]: /tests/setup/go/
-[7]: /tests/setup/java/
-[8]: /tests/setup/javascript/
-[9]: /tests/setup/python/
-[10]: /tests/setup/ruby/
-[11]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
+[5]: /integrations/slack/?tab=datadogforslack
+[6]: /tests/setup/dotnet/
+[7]: /tests/setup/go/
+[8]: /tests/setup/java/
+[9]: /tests/setup/javascript/
+[10]: /tests/setup/python/
+[11]: /tests/setup/ruby/
+[12]: /tests/setup/swift/
+[13]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
+[16]: /bits_ai/bits_ai_dev_agent/

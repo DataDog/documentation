@@ -51,7 +51,7 @@
                   {{- if $page.Params.exclude_headers_from_search -}}
                     {{- $section_header = "" -}}
                   {{- end -}}
-                  
+
                   {{- $hugo_context.Scratch.Add "algoliaindex" (
                       dict "objectID" $object_id
                       "id" $object_id
@@ -73,9 +73,9 @@
           {{- end -}}
           {{- $order = add $order 1 -}}
       {{- end -}}
-      {{- $order = partial "partials/heading-sections" (dict "data" $v.Headings "ctx" $ctx "order" $order) -}}
+      {{- $order = partial "heading-sections" (dict "data" $v.Headings "ctx" $ctx "order" $order) -}}
   {{- end -}}
   {{- return $order -}}
 {{- end -}}
 
-{{- $ord := partial "partials/heading-sections" (dict "data" $page.Fragments.Headings "ctx" . "order" 0) -}}
+{{- $ord := partial "heading-sections" (dict "data" $page.Fragments.Headings "ctx" . "order" 0) -}}
