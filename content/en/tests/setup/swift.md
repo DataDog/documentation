@@ -23,19 +23,20 @@ further_reading:
 
 Supported languages:
 
-| Language | Version |
-|---|---|
-| Swift | >= 5.7 |
-| Objective-C | >= 2.0 |
-| Xcode | >= 14.3 |
+| Language    | Version |
+| ----------- | ------- |
+| Swift       | >= 5.9  |
+| Objective-C | >= 2.0  |
+| Xcode       | >= 16.0 |
 
 Supported platforms:
 
-| Platform | Version |
-|---|---|
-| iOS | >= 11.0 |
-| macOS | >= 10.13 |
-| tvOS | >= 11.0 |
+| Platform     | Version  |
+| ------------ | -------- |
+| iOS / iPadOS | >= 12.0  |
+| macOS        | >= 10.13 |
+| tvOS         | >= 12.0  |
+| macCatalyst  | >= 13.0  |
 
 ## Installing the Swift testing SDK
 
@@ -70,8 +71,6 @@ There are three ways you can install the testing framework:
 .product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
 {{< /code-block >}}
 
-3. If you run UI Tests and don't use RUM, also add the dependency to your applications running the tests.
-
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
 {{% /tab %}}
@@ -90,8 +89,6 @@ target 'MyApp' do
 end
 {{< /code-block >}}
 
-2. If you run UI Tests and don't use RUM, also add the dependency to the app running the tests.
-
 {{% /tab %}}
 {{% tab "Framework linking" %}}
 
@@ -100,8 +97,6 @@ end
 2. Copy and link your test targets with the resulting XCFramework.
 
 {{< img src="continuous_integration/swift_link.png" alt="Swift Linking XCFramework" >}}
-
-3. If you run UI Tests and don't use RUM, also link the app running the tests with this library.
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}

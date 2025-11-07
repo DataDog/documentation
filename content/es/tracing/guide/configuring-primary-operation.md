@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
+description: Comprende cómo funcionan las operaciones primarias en los servicios y
+  cómo configurarlas para organizar adecuadamente trazas (traces) y recursos en APM.
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentación
@@ -24,7 +26,7 @@ title: Operaciones principales en servicios
 
 Los servicios de APM calculan métricas de rastreo para errores, rendimiento y latencia. Estos cálculos se basan en los recursos que coinciden con un único nombre de tramo, considerado la operación principal. Estas métricas de servicio se utilizan en todo el producto, tanto por la página de servicio por defecto en el Software Catalog y como Mapa de servicio.
 
-**Nota**: Las métricas de trazas pueden consultarse en función de su `trace.*` [espacio de nombres][1].
+**Nota**: Las métricas de rastreo pueden consultarse en función de su `trace.*` [espacio de nombres][1].
 
 ## Operaciones principales
 ### Definición
@@ -36,7 +38,7 @@ Por ejemplo, un servicio `web-store` puede tener varios endpoints instrumentados
 | Tipo de servicio           | Operación principal                                 |
 |------------------------|---------------------------------------------------|
 | web                    | `servlet.request`, `flask.request`, `web.request` |
-| db                     | `postgres.query`, `db.query`                      |
+| base de datos                     | `postgres.query`, `db.query`                      |
 | custom-instrumentation | `trace.annotation`, `method.call`                 |
 
 ### Configuración
@@ -79,7 +81,7 @@ Span span = tracer.buildSpan("http.request").start();
 try (Scope scope = tracer.activateSpan(span)) {
     span.setTag("service.name", "service_name");
     span.setTag("resource.name", "/user/profile");
-    // código que se rastrea
+    // code being traced
 } finally {
     span.finish();
 }

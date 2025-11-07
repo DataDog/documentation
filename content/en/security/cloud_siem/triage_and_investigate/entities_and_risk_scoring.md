@@ -21,7 +21,7 @@ With Risk Insights, you can:
 
 ## Prerequisites
 
-- For Risk Insights coverage, either [Azure][6], [GCP][5], or [AWS must be configured for Cloud SIEM][1].
+- For Risk Insights coverage, either GitHub, [Azure][6], [GCP][5], or [AWS][1] must be configured for Cloud SIEM.
 - (Optional) To view associated Cloud Security insights in the entity panel, [Cloud Security must be configured][2].
 
 

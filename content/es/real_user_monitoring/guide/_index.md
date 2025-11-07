@@ -4,6 +4,8 @@ cascade:
     category: Guía
     rank: 20
     subcategory: Guías de RUM y Session Replay
+description: Guías completas para la implementación, optimización y mejores prácticas
+  de RUM y Session Replay para aplicaciones web y móviles.
 disable_toc: true
 private: true
 title: Guías de Real User Monitoring y Session Replay

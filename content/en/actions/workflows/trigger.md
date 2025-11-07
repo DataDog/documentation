@@ -8,6 +8,9 @@ aliases:
 - /workflows/trigger
 - /service_management/workflows/trigger
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-automation-rules
+  tag: Blog
+  text: Instantly respond to changes in your data with Datadog automation rules
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"

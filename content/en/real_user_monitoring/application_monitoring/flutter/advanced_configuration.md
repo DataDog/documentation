@@ -201,6 +201,10 @@ In order to enable Datadog [Distributed Tracing][13], you must set the `DatadogC
 
 - `DatadogRumConfiguration.traceSampleRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
 
+### Track resources from other packages
+
+While `Datadog Tracking HTTP Client` can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL and Dio. For more information about these libraries, see [Integrated Libraries][22].
+
 ## Enrich user sessions
 
 Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][14] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
@@ -422,7 +426,7 @@ To enable the collection of Flutter-specific performance metrics, set `reportFlu
 
 ## OpenTelemetry setup
 
-The [Datadog Tracking HTTP Client][10] package and [gRPC Interceptor][19] package both support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
+All of Datadog's automatic network tracking packages ([Datadog Tracking HTTP Client][10], [gRPC Interceptor][19], [GQL Link][20], and [Dio Interceptor][21]) support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
 
 ### Datadog header generation
 
@@ -473,7 +477,7 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [6]: https://github.com/openzipkin/b3-propagation#single-headers
 [7]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [8]: https://www.w3.org/TR/trace-context/#tracestate-header
-[9]: /real_user_monitoring/browser/frustration_signals/
+[9]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
 [10]: https://pub.dev/packages/datadog_tracking_http_client
 [11]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [12]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
@@ -484,3 +488,6 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
 [18]: /real_user_monitoring/application_monitoring/mobile_vitals/?tab=flutter
 [19]: https://pub.dev/packages/datadog_grpc_interceptor
+[20]: https://pub.dev/packages/datadog_gql_link
+[21]: https://pub.dev/packages/datadog_dio
+[22]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries

@@ -89,8 +89,12 @@ For Events, you can choose how they're displayed in the widget:
 For incidents, you can sort by:
 
 * Created time
+* Detected time
+* Last modified time
+* Resolved time
 * Severity
 * Status
+* Title
 
 Ascending or descending
 

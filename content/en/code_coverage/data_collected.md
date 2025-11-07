@@ -43,6 +43,15 @@ See Gitlab's [webhook events and payloads documentation][1] for a detailed descr
 [1]: https://docs.gitlab.com/user/project/integrations/webhook_events/
 
 {{% /tab %}}
+{{% tab "Azure DevOps" %}}
+
+Code Coverage relies on Azure DevOps webhooks. The webhooks do not include your source code content. They only include metadata about the pull request, such as the title, description, author, labels, and commit SHAs.
+
+See Azure DevOps' [webhook events and payloads documentation][1] for a detailed description of the data sent by webhooks.
+
+[1]: https://learn.microsoft.com/en-us/azure/devops/service-hooks/events?view=azure-devops#git.pullrequest.created
+
+{{% /tab %}}
 {{< /tabs >}}
 
 By default, when synchronizing your repositories, Datadog doesn’t store the actual content of files in your repository, only the Git commit and tree objects.

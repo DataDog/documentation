@@ -34,6 +34,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-saved-millions/"
     tag: "Blog"
     text: "How we saved $1.5 million per year with Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/cloud-cost-management-oci/"
+    tag: "Blog"
+    text: "Manage and optimize your OCI costs with Datadog Cloud Cost Management"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
@@ -114,7 +117,7 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 | CCM Containers Page                           | Permission Required                         | N/A                                               |
 | CCM Recommendations Page                      | Permission Required                         | N/A                                               |
 | CCM Explorer Page                             | Permission Required                         | N/A                                               |
-| CCM Plan Page                                 | Permission Required                         | Permission Required to view Budgets               |
+| CCM Plan Page                                 | Permission Required                         | Permission Required to modify or create Budgets   |
 | CCM Settings Page - Custom Costs              | Permission Required                         | Permission Required to upload custom costs        |
 | CCM Settings Page - Tag Pipelines             | Permission Required                         | Permission Required to create tag pipelines       |
 | CCM Settings Page - SaaS Integrations         | Permission Required                         | Permission Required to enable integration for CCM |
