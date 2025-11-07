@@ -1493,6 +1493,11 @@ menu:
       parent: bits_ai
       identifier: bits_ai_dev_agent
       weight: 2
+    - name: Setup
+      url: bits_ai/bits_ai_dev_agent/setup
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_setup
+      weight: 200
     - name: Chat with Bits AI
       url: bits_ai/chat_with_bits_ai
       identifier: bits_ai_chat_with_bits_ai
