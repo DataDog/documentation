@@ -17,6 +17,10 @@ Selecciona y configura esta fuente cuando [configures un pipeline][1]. La siguie
 
 {{% observability_pipelines/source_settings/syslog %}}
 
+## Configurar las variables de entorno
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/syslog %}}
+
 ## Enviar logs al worker de Observability Pipelines a través de syslog
 
 {{% observability_pipelines/log_source_configuration/syslog %}}
@@ -33,7 +37,7 @@ Syslog es un protocolo de generación de logs ampliamente utilizado para el env�
 - [Configurar el reenvío de logs][4]
 - [Reenviar logs de tráfico a un servidor syslog][5]
 
-[1]: /es/observability_pipelines/set_up_pipelines/
+[1]: /es/observability_pipelines/configuration/set_up_pipelines/
 [2]: https://help.fortinet.com/fa/faz50hlp/56/5-6-1/FMG-FAZ/2400_System_Settings/1600_Log%20Forwarding/0400_Configuring.htm
 [3]: https://help.fortinet.com/fadc/4-5-1/olh/Content/FortiADC/handbook/log_remote.htm
 [4]: https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-admin/monitoring/configure-log-forwarding
