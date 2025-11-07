@@ -53,7 +53,7 @@ Use process-level insights to verify whether SSI has been correctly applied to y
 Use cluster-level insights to understand how SSI is configured and functioning across your Kubernetes clusters. These insights extend troubleshooting beyond individual processes to show how instrumentation is applied to workloads at the cluster level.
 
 1. Navigate to [**Fleet Automation**][9] > **View Agents**, and select **Kubernetes Clusters** in the upper-right corner.
-1. Select a cluster to open its details, including:
+1. Select a cluster to view its details, including:
    - Whether the cluster is managed by Helm or the Datadog Operator
    - The Cluster Agent and Node Agent versions
    - The integrations and services running on each host
