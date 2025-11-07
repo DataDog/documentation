@@ -35,20 +35,25 @@ In [log configuration settings][1], you can configure processors such as the [Gr
 
 ## Grok parser
 
-Create custom grok rules to parse the full message or a specific attribute of your raw event. For more information, see the [parsing section][2]. As a best practice, it is recommended to use at most 10 parsing rules within a grok processor.
+Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, limit your grok parser to 10 parsing rules. For more information on Grok syntax and parsing rules, see [Parsing][10].
+
+{{< img src="/logs/processing/processors/define_parsing_rules_syntax_suggestions.png" alt="Grok parser syntax suggestions in the UI" style="width:90%;" >}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Grok processor on the [**Pipelines** page][1]:
+Define the Grok processor on the [**Pipelines** page][1]. To configure Grok parsing rules:
 
-{{< img src="logs/log_configuration/processor/grok_parser.png" alt="Grok Parser" style="width:80%;" >}}
-
-Click **Parse my logs** to kickstart a set of three parsing rules for the logs flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
-
-Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
-
-Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
+1. Click **Parse my logs** to automatically generate a set of three parsing rules based on the logs flowing through the pipeline.
+   **Note**: This feature requires that the corresponding logs are indexed and actively flowing in. You can temporarily deactivate or sample down exclusion filters to allow the feature to detect logs.
+1. **Log Samples**: Add up to five sample logs (up to 5000 characters each) to test your parsing rules.
+1. **Define parsing rules**: Write your parsing rules in the rule editor. As you define rules, the Grok parser provides syntax assistance:
+   - **Matcher suggestions**: Type a rule name followed by `%{`. A dropdown appears with available matchers (such as `word`, `integer`, `ip`, `date`). Select a matcher from the list to insert it into your rule.<br>
+     ```
+     MyParsingRule %{
+     ```
+   - **Filter suggestions**: When adding a filter with `:`, a dropdown shows compatible filters for the selected matcher.
+1. **Test your rules**: Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -148,8 +153,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log date remap
 ## Log status remapper
 
 Use the status remapper processor to assign attributes as an official status to your logs. For example, add a log severity level to your logs with the status remapper.
-
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log severity after remapping" style="width:40%;" >}}
 
 Each incoming status value is mapped as follows:
 
@@ -284,9 +287,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer:
-
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:60%;">}}
+The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer.
 
 Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints, applied as `:` or `,`, are not allowed in the target tag/attribute name.
 
@@ -1047,7 +1048,7 @@ The Decoder processor translates binary-to-text encoded string fields (such as B
 2. Select the source encoding: Choose the binary-to-text encoding of the source: `base64` or `base16/hex`.
 2. For `Base16/Hex`: Choose the output format: `string (UTF-8)` or `integer`.
 3. Set the target attribute: Enter the attribute path to store the decoded result.
-   
+
 {{< img src="logs/log_configuration/processor/decoder-processor.png" alt="Decoder processor - Append" style="width:80%;" >}}
 
 {{% /tab %}}
@@ -1075,3 +1076,4 @@ For more information, see [Threat Intelligence][9].
 [7]: /integrations/guide/reference-tables/
 [8]: /tracing/other_telemetry/connect_logs_and_traces/
 [9]: /security/threat_intelligence/
+[10]: /logs/log_configuration/parsing/?tab=matchers
