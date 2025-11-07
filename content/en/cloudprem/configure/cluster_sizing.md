@@ -18,36 +18,54 @@ further_reading:
 
 ## Overview
 
-This document gives recommendations on dimensioning your CloudPrem cluster components, particularly indexers and searchers.
+Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your CloudPrem deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, retention needs, and the complexity of your log data.
 
-<div class="alert alert-info">
-These are starting recommendations. Monitor your cluster's performance and resource utilization closely and adjust sizing as needed.
+This guide provides baseline recommendations for dimensioning your CloudPrem cluster components—indexers, searchers, supporting services, and the PostgreSQL database.
+
+<div class="alert alert-tip">
+Use your expected daily log volume and peak ingestion rates as starting points, then monitor your cluster's performance and adjust sizing as needed.
 </div>
 
 ## Indexers
 
-- **Performance:** Indexing performance depends heavily on the characteristics of the ingest logs, such as their size, number of attributes, and level of nesting. However, Datadog recommends using a baseline indexing throughput of **5 MB/s per vCPU** to determine your initial sizing.
-- **Memory:** 4 GB of RAM per vCPU.
-- **Recommended Pod Sizes:** Deploy indexer pods with at least 2 vCPUs and 8 GB of RAM.
-- **Storage:** Indexers require at least 200 GB of persistent storage (preferably local SSDs, but local HDDs or network-attached block storage volumes such as Amazon EBS, or Azure Managed Disks can also be used) to store temporary data while creating and merging index files. In addition, each indexer vCPU writes on disk at a rate of approximately 20 MB/s. For Amazon EBS volumes, this is equivalent to 320 IOPS per vCPU (assuming 64 KB IOPS).
-- **Example Calculation:** To index 1 TB of logs per day (~11.6 MB/s):
-  - Required vCPUs: `11.6 MB/s / 5 MB/s per vCPU ≈ 2.3 vCPUs`
-  - Required RAM: `2.3 vCPUs × 4 GB RAM ≈ 9 GB RAM`
-  - Adding some headroom, you could start with one indexer pod configured with 3 vCPUs, 12 GB RAM, and a 200 GB disk. Adjust these values based on observed performance and redundancy needs.
+Indexers receive logs from Datadog Agents, then process, index, and store them as index files (called _splits_) in object storage. Proper sizing is critical for maintaining ingestion throughput and ensuring your cluster can handle your log volume.
+
+| Specification | Recommendation | Notes |
+|---------------|----------------|-------|
+| **Performance** | 5 MB/s per vCPU | Baseline throughput to determine initial sizing. Actual performance depends on log characteristics (size, number of attributes, nesting level) |
+| **Memory** | 4 GB RAM per vCPU | |
+| **Minimum Pod Size** | 2 vCPUs, 8 GB RAM | Recommended minimum for indexer pods |
+| **Storage Capacity** | At least 200 GB | Required for temporary data while creating and merging index files |
+| **Storage Type** | Local SSDs (preferred) | Local HDDs or network-attached block storage (Amazon EBS, Azure Managed Disks) can also be used |
+| **Disk I/O** | ~20 MB/s per vCPU | Equivalent to 320 IOPS per vCPU for Amazon EBS (assuming 64 KB IOPS) |
+
+
+{{% collapse-content title="Example: Sizing for 1 TB of logs per day" level="h4" expanded=false %}}
+To index 1 TB of logs per day (~11.6 MB/s), follow these steps:
+
+1. **Calculate vCPUs:** `11.6 MB/s ÷ 5 MB/s per vCPU ≈ 2.3 vCPUs`
+2. **Calculate RAM:** `2.3 vCPUs × 4 GB RAM ≈ 9 GB RAM`
+3. **Add headroom:** Start with one indexer pod configured with **3 vCPUs, 12 GB RAM, and a 200 GB disk**. Adjust these values based on observed performance and redundancy needs.
+{{% /collapse-content %}}
 
 ## Searchers
 
-- **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, amount of data scanned). For instance, term queries (`status:error AND message:exception`) are usually computationally less expensive than aggregations.
-- **Rule of Thumb:** A general starting point is to provision roughly double the total number of vCPUs allocated to Indexers.
-- **Memory:** We recommend 4 GB of RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
+Searchers handle search queries from the Datadog UI, reading metadata from the Metastore and fetching data from object storage. Sizing searchers appropriately ensures responsive query performance.
+
+A general starting point is to provision roughly double the total number of vCPUs allocated to Indexers.
+
+- **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, data scanned). For instance, term queries (`status:error AND message:exception`) are usually computationally less expensive than aggregations.
+- **Memory:** 4 GB of RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
 
 ## Other services
 
 Allocate the following resources for these lightweight components:
 
-- **Control Plane:** 2 vCPUs, 4 GB RAM, 1 replica
-- **Metastore:** 2 vCPUs, 4 GB RAM, 2 replicas
-- **Janitor:** 2 vCPUs, 4 GB RAM, 1 replica
+| Service | vCPUs | RAM | Replicas |
+|---------|-------|-----|----------|
+| **Control Plane** | 2 | 4 GB | 1 |
+| **Metastore** | 2 | 4 GB | 2 |
+| **Janitor** | 2 | 4 GB | 1 |
 
 ## PostgreSQL database
 
