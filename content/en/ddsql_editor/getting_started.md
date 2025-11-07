@@ -5,9 +5,6 @@ aliases:
 - /dashboards/ddsql_editor/getting_started/
 ---
 
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
-{{< /callout >}}
 
 ## Overview
 
