@@ -2,9 +2,6 @@
 title: Packs
 description: Learn more about Observability Pipelines Packs
 disable_toc: false
-private: true
-cascade:
-    private: true
 ---
 
 ## Overview
