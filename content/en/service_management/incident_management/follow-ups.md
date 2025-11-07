@@ -60,7 +60,6 @@ When Datadog exports an incident follow-up to Case Management, it creates a case
 
 To export follow-ups to Jira, you must first install the Jira integration through the [Jira Integration tile][3]. For more information, see the [Jira integration][4] documentation.
 
-To define a Jira export template, you must first install and set up the Jira integration for Datadog.
 
 When Datadog exports an incident follow-up to Jira, it creates a Jira issue for the follow-up in the project you selected in the export template.
 
