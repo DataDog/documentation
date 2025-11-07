@@ -7,6 +7,10 @@ disable_toc: false
 
 Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs from your OTel Collector through HTTP or gRPC. Select and set up this source when you set up a pipeline. The information below is configured in the pipelines UI.
 
+**Notes**:
+- If you are using the Datadog Distribution of OpenTelemetry Collector (DDOT), [use the OpenTelemetry source to send logs to Observability Pipelines](#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
+- If you are using the Splunk HEC Distribution of the OpenTelemetry Collector, you must use the [Splunk HEC source][4] to send logs to Observability pipelines.
+
 ### When to use this source
 
 Common scenarios when you might use this source:
@@ -73,6 +77,23 @@ Based on these example configurations, these are values you enter for the follow
 - HTTP listener address: `worker:4317`
 - gRPC listener address: `worker:4318`
 
+## Send logs from the Datadog Distribution of OpenTelemetry Collector to Observability Pipelines
+
+To send logs from DDOT:
+1. Deploy the DDOT Agent using helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
+1. [Set up a pipeline][6] on Observabiity Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
+    1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
+    1. When you install the Worker, for the OpenTelemetry source environment variables:
+        1. Set your HTTP listener to `0.0.0.0:4318`.
+        1. Set your gRPC listener to `0.0.0.0:4317`.
+
+**Note**: Logs sent from DDOT might have nested objects that prevent Datadog from parsing the log into the prettified structure. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
+
 [1]: https://opentelemetry.io/docs/collector/
 [2]: /observability_pipelines/sources/
 [3]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
+[4]: /observability_pipelines/sources/splunk_hec/#send-logs-from-the-splunk-distributor-of-the-opentelemetry-collector-to-observability-pipelines
+[5]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
+[6]: /observability_pipelines/configuration/set_up_pipelines/
+[7]: /observability_pipelines/processors/edit_fields#add-field
+[8]: /observability_pipelines/processors/custom_processor
