@@ -421,6 +421,41 @@ paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
 
 The solution to this issue is to upgrade to version 4.6.0 or later.
 
+##### Spring Native build crashes with exec.d/toggle error
+
+You may encounter a similar error as the one above, even on buildpack versions newer than 4.6.0, when building a Spring Boot native image:
+
+```text
+disabling Datadog at launch time is unsupported for Node
+ERROR: failed to launch: exec.d: failed to execute exec.d file at path '/layers
+paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
+```
+
+This typically happens because the Datadog buildpack runs before the native image buildpack, so it doesn't know a native image build is intended. It incorrectly adds a toggle script meant for JVM builds, which is incompatible with the final native executable.
+
+The solution is to explicitly set the `BP_NATIVE_IMAGE` environment variable to `true` in the `spring-boot-maven-plugin` configuration. This ensures all buildpacks are aware it's a native image build from the start.
+
+```yaml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <configuration>
+        <image>
+          ...
+          <env>
+            ...
+            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+            ...
+          </env>
+        </image>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
 ##### Problem activating Datadog tracer
 
 You might encounter initialization errors if your tracer configuration relies on Unix Domain Sockets (UDS), which are not supported in native images:
