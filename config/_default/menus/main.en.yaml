@@ -3451,81 +3451,86 @@ menu:
       url: integrations/ecs_fargate
       parent: serverless
       weight: 3
+    - name: Amazon ECS
+      identifier: serverless_ecs
+      url: serverless/amazon_ecs
+      parent: serverless
+      weight: 4
     - name: Azure App Service
       url: serverless/azure_app_service
       parent: serverless
       identifier: serverless_app_services
-      weight: 4
+      weight: 5
     - name: Linux - Code
       identifier: serverless_azure_app_services_linux_code
       url: serverless/azure_app_service/linux_code
       parent: serverless_app_services
-      weight: 401
+      weight: 501
     - name: Linux - Container
       identifier: serverless_azure_app_services_linux_container
       url: serverless/azure_app_service/linux_container
       parent: serverless_app_services
-      weight: 402
+      weight: 502
     - name: Windows - Code
       identifier: serverless_azure_app_services_windows_code
       url: serverless/azure_app_service/windows_code
       parent: serverless_app_services
-      weight: 403
+      weight: 503
     - name: Azure Container Apps
       url: serverless/azure_container_apps
       parent: serverless
       identifier: serverless_container_apps
-      weight: 5
+      weight: 6
     - name: In-Container
       url: serverless/azure_container_apps/in_container
       parent: serverless_container_apps
-      weight: 501
+      weight: 601
       identifier: serverless_container_apps_in_container
     - name: Sidecar
       url: serverless/azure_container_apps/sidecar
       parent: serverless_container_apps
-      weight: 502
+      weight: 602
       identifier: serverless_container_apps_sidecar
     - name: Azure Functions
       url: serverless/azure_functions
       parent: serverless
       identifier: serverless_azure_functions
-      weight: 6
+      weight: 7
     - name: Google Cloud Run
       url: serverless/google_cloud_run
       parent: serverless
       identifier: serverless_gcr
-      weight: 7
+      weight: 8
     - name: Containers
       url: serverless/google_cloud_run/containers
       parent: serverless_gcr
-      weight: 701
+      weight: 801
       identifier: serverless_gcr_containers
     - name: Functions
       url: serverless/google_cloud_run/functions
       parent: serverless_gcr
-      weight: 702
+      weight: 802
       identifier: serverless_gcr_functions
     - name: Functions (1st generation)
       url: serverless/google_cloud_run/functions_1st_gen
       parent: serverless_gcr
-      weight: 703
+      weight: 803
       identifier: serverless_gcr_functions_1st_gen
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
       parent: serverless
       identifier: libraries_integrations
-      weight: 8
+      weight: 9
     - name: Glossary
       url: serverless/glossary
       parent: serverless
       identifier: serverless_glossary
-      weight: 9
+      weight: 10
     - name: Guides
       url: serverless/guide/
       identifier: serverless_guides
       parent: serverless
-      weight: 10
+      weight: 11
     - name: Network Monitoring
       url: network_monitoring/
       pre: network
