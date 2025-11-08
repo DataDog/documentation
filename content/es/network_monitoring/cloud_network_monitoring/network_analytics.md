@@ -144,22 +144,80 @@ Las etiquetas neutras no son específicas de un cliente o servidor, sino que se 
 
 La siguiente lista muestra etiquetas neutras disponibles para su uso:
 
-| Etiqueta                     | Descripción                                                                                   |
-|-------------------------|-----------------------------------------------------------------------------------------------|
-| `is_agent_traffic`      | Indica si el tráfico fue generado por el Datadog Agent.                                  |
-| `tls_encrypted`         | Especifica si la conexión está cifrada mediante TLS.                                           |
-| `tls_cipher_suite`      | Identifica el conjunto de cifrado TLS utilizado (por ejemplo, `tls_ecdhe_rsa_with_aes_128_gcm_sha256`).          |
-| `tls_cipher_insecure`   | Indica si el cifrado utilizado se considera seguro.                                            |
-| `tls_version`           | Versión de TLS utilizada (`tls_1.2` o `tls_1.3`).                                                |
-| `tls_client_version`    | Versiones de TLS compatibles con el cliente (`tls_1.2` o `tls_1.3`).                            |
-| `gateway_id`            | Identificador único del recurso de pasarela AWS.                                               |
-| `gateway_type`          | Tipo de puerta de enlace AWS (Internet, NAT o Tránsito).                                              |
-| `gateway_region`        | Región AWS de la puerta de enlace (por ejemplo, `us-east-1`).                                                |
-| `gateway_availability-zone` | Zona de disponibilidad que aloja la puerta de enlace (por ejemplo, `us-east-1a`).                                |
-| `gateway_public_ip`     | Dirección IP pública asignada a la puerta de enlace NAT.                                                |
-| `tgw_attachment_id`     | Identificador único de la conexión de AWS Transit Gateway.                                     |
-| `tgw_attachment_type`   | Tipo de adjunto de la puerta de enlace de tránsito (por ejemplo, VPC, VPN, Direct Connect).                          |
-| `vpc_endpoint_id`       | Identificador único del endpoint de la VPC.                                                       |
+<table>
+<thead>
+<tr>
+<th style="white-space: nowrap; width: 300px; min-width: 300px;">Etiqueta</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gateway_availability-zone</code></td>
+<td>Zona de disponibilidad que aloja la gateway (por ejemplo, <code>us-east-1a</code>).</td>
+</tr>
+<tr>
+<td><code>gateway_id</code></td>
+<td>Identificador único para el recurso gateway de AWS.</td>
+</tr>
+<tr>
+<td><code>gateway_public_ip</code></td>
+<td>Dirección IP pública asignada a la gateway NAT.</td>
+</tr>
+<tr>
+<td><code>gateway_region</code></td>
+<td>Región de AWS de la gateway (por ejemplo, <code>us-east-1</code>).</td>
+</tr>
+<tr>
+<td><code>gateway_type</code></td>
+<td>Tipo de gateway de AWS (internet, NAT o Transit).</td>
+</tr>
+<tr>
+<td><code>intra_availability_zone</code></td>
+<td>Indica si los flujos de red están dentro de la zona de disponibilidad (<code>true</code>), zona entre disponibilidad (<code>false</code>) o no determinado (<code>unknown</code>). <strong>Nota</strong>: No se aplica para Azure.</td>
+</tr>
+<tr>
+<td><code>intra_region</code></td>
+<td>Indica si los flujos de red están dentro de una región (<code>true</code>), entre regiones (<code>false</code>), o no determinado (<code>unknown</code>).</td>
+</tr>
+<tr>
+<td><code>is_agent_traffic</code></td>
+<td>Indica si al tráfico lo generó el Datadog Agent.</td>
+</tr>
+<tr>
+<td><code>tgw_attachment_id</code></td>
+<td>Identificador único para el adjunto de AWS Transit Gateway.</td>
+</tr>
+<tr>
+<td><code>tgw_attachment_type</code></td>
+<td>Tipo de adjunto de Transit Gateway (por ejemplo, VPC, VPN, Direct Connect).</td>
+</tr>
+<tr>
+<td><code>tls_cipher_insecure</code></td>
+<td>Indica si eli cipher se considera seguro.</td>
+</tr>
+<tr>
+<td><code>tls_cipher_suite</code></td>
+<td>Identifica si el conjunto de cipher TLS utilizado (por ejemplo, <code>tls_ecdhe_rsa_with_aes_128_gcm_sha256</code>).</td>
+</tr>
+<tr>
+<td><code>tls_client_version</code></td>
+<td>La versión de TLS admitida por el cliente (<code>tls_1.2</code> o <code>tls_1.3</code>).</td>
+</tr>
+<tr>
+<td><code>tls_encrypted</code></td>
+<td>Especifica si la conexión está cifrada con TLS.</td>
+</tr>
+<tr>
+<td><code>tls_version</code></td>
+<td>La versión de TLS utilizada (<code>tls_1.2</code> o <code>tls_1.3</code>).</td>
+</tr>
+<tr>
+<td><code>vpc_endpoint_id</code></td>
+<td>Identificador único para el endpoint de VPC.</td>
+</tr>
+</tbody>
+</table>
 
 ## Gráficos de resumen
 
@@ -207,16 +265,19 @@ Están disponibles las siguientes métricas TCP:
 
 | Métrica | Descripción |
 |---|---|
-| **Retransmisiones TCP** | Las retransmisiones TCP representan los fallos detectados que se retransmiten para garantizar la entrega, medidas como recuento de retransmisiones del cliente. |
-| **Latencia TCP** | Medida como tiempo de ida y vuelta suavizado por TCP, es decir, el tiempo transcurrido entre el envío y el acuse de recibo de un marco TCP. |
-| **Jitter TCP** | Medido como variación del tiempo de ida y vuelta suavizada por TCP. |
-| **Tiempos de espera TCP**  | Número de conexiones TCP que han expirado desde la perspectiva del sistema operativo. Esto puede indicar problemas generales de conectividad y latencia.  |
-| **Rechazos de TCP**  | Número de conexiones TCP rechazadas por el servidor. Normalmente esto indica un intento de conexión a una IP/puerto que no está recibiendo conexiones o una mala configuración de cortafuegos/seguridad. |
-| **Reinicios de TCP**  | Número de conexiones TCP reiniciadas por el servidor.  |
-| **Conexiones establecidas** | Número de conexiones TCP en estado establecido, medidas en conexiones por segundo del cliente. |
 | **Conexiones finalizadas** | Número de conexiones TCP en estado finalizado, medidas en conexiones por segundo del cliente. |
+| **Conexiones establecidas** | Número de conexiones TCP en estado establecido, medidas en conexiones por segundo del cliente. |
+| **No se puede alcanzar el host** | Indica cuando el host de destino está fuera de línea o el tráfico está bloqueado por routers o firewall. Disponible en el **Agent 7.68+**. |
+| **No se puede alcanzar la red** | Indica problemas de red local en el equipo host del Agent. Disponible en el **Agent 7.68+**. |
+| **Cancelaciones de la conexión** | Rastrea las cancelaciones de conexión de TCP y los tiempos de espera de la conexión del espacio de usuario en tiempos de ejecución de lenguajes como `Go` y `Node.js`. Disponible en el **Agent 7.70+**. |
+| **Jitter TCP** | Medido como variación del tiempo de ida y vuelta suavizada por TCP. |
+| **Latencia TCP** | Medida como tiempo de ida y vuelta suavizado por TCP, es decir, el tiempo transcurrido entre el envío y el acuse de recibo de un marco TCP. |
+| **Rechazos de TCP**  | Número de conexiones de TCP rechazadas por el servidor. Por lo general, esto indica un intento de conexión a una IP/puerto que no está recibiendo conexiones, o una mala configuración del firewall/seguridad. |
+| **Reinicios de TCP**  | Número de conexiones de TCP reiniciadas por el servidor.  |
+| **Retransmisiones TCP** | Las retransmisiones TCP representan los fallos detectados que se retransmiten para garantizar la entrega, medidas como recuento de retransmisiones del cliente. |
+| **Tiempos de espera TCP**  | Número de conexiones de TCP vencidas desde la perspectiva del sistema operativo. Esto puede indicar problemas generales de conectividad y latencia.  |
 
-Todas las métricas se instrumentan desde la perspectiva del lado del `client` de la conexión, cuando está disponible, o del servidor en caso contrario.
+Todas las métricas se miden desde el lado `client` de la conexión cuando están disponibles; en caso contrario, desde el lado del servidor.
 
 ### Detección automática de servicios en la nube
 

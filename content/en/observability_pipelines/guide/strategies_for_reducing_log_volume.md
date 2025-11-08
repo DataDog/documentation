@@ -93,4 +93,4 @@ Users have implemented the above strategies to reduce their overall log volumes.
 [4]: /observability_pipelines/processors/reduce
 [5]: /observability_pipelines/processors/dedupe
 [6]: /observability_pipelines/processors/quota
-[7]:  /observability_pipelines/set_up_pipelines/archive_logs
+[7]:  /observability_pipelines/configuration/set_up_pipelines/archive_logs

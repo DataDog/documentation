@@ -64,12 +64,20 @@ components:
           additionalProperties:
             description: A list of additional properties.
             type: boolean
-          description: 'An object, (in the form `{"namespace1":true/false, "namespace2":true/false}`),
+          description: 'An object (in the form `{"namespace1":true/false, "namespace2":true/false}`)
+            containing user-supplied overrides
 
-            that enables or disables metric collection for specific AWS namespaces
-            for this
+            for AWS namespace metric collection. **Important**: This field only contains
+            namespaces explicitly configured through API calls,
 
-            AWS account only.'
+            not the comprehensive enabled or disabled status of all namespaces. If
+            a namespace is absent from this field, it uses Datadog''s
+
+            internal defaults (all namespaces enabled by default, except `AWS/SQS`,
+            `AWS/ElasticMapReduce`, and `AWS/Usage`).
+
+            For a complete view of all namespace statuses, use the V2 AWS Integration
+            API instead.'
           example:
             auto_scaling: false
             opswork: false
@@ -2983,6 +2991,7 @@ components:
       - ci_pipelines
       - incident_analytics
       - product_analytics
+      - on_call_events
       example: logs
       type: string
       x-enum-varnames:
@@ -2998,6 +3007,7 @@ components:
       - CI_PIPELINES
       - INCIDENT_ANALYTICS
       - PRODUCT_ANALYTICS
+      - ON_CALL_EVENTS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -6438,6 +6448,7 @@ components:
       - $ref: '#/components/schemas/LogsSpanRemapper'
       - $ref: '#/components/schemas/LogsArrayProcessor'
       - $ref: '#/components/schemas/LogsDecoderProcessor'
+      - $ref: '#/components/schemas/LogsSchemaProcessor'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6499,6 +6510,243 @@ components:
             periods.
           type: string
       type: object
+    LogsSchemaCategoryMapper:
+      description: "Use the Schema Category Mapper to categorize log event into enum
+        fields.\nIn the case of OCSF, they can be used to map sibling fields which
+        are composed of an ID and a name.\n\n**Notes**:\n\n- The syntax of the query
+        is the one of Logs Explorer search bar.\n  The query can be done on any log
+        attribute or tag, whether it is a facet or not.\n  Wildcards can also be used
+        inside your query.\n- Categories are executed in order and processing stops
+        at the first match.\n  Make sure categories are properly ordered in case a
+        log could match multiple queries.\n- Sibling fields always have a numerical
+        ID field and a human-readable string name.\n- A fallback section handles cases
+        where the name or ID value matches a specific value.\n  If the name matches
+        \"Other\" or the ID matches 99, the value of the sibling name field will be
+        pulled from a source field from the original log."
+      properties:
+        categories:
+          description: 'Array of filters to match or not a log and their
+
+            corresponding `name` to assign a custom value to the log.'
+          example:
+          - filter:
+              query: '@eventName:(ConsoleLogin OR ExternalIdPDirectoryLogin OR UserAuthentication
+                OR Authenticate)'
+            id: 1
+            name: Logon
+          - filter:
+              query: '@eventName:*'
+            id: 99
+            name: Other
+          items:
+            $ref: '#/components/schemas/LogsSchemaCategoryMapperCategory'
+          type: array
+        fallback:
+          $ref: '#/components/schemas/LogsSchemaCategoryMapperFallback'
+        name:
+          description: Name of the logs schema category mapper.
+          example: activity_id and activity_name
+          type: string
+        targets:
+          $ref: '#/components/schemas/LogsSchemaCategoryMapperTargets'
+        type:
+          $ref: '#/components/schemas/LogsSchemaCategoryMapperType'
+      required:
+      - categories
+      - targets
+      - type
+      - name
+      type: object
+    LogsSchemaCategoryMapperCategory:
+      description: Object describing the logs filter with corresponding category ID
+        and name assignment.
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        id:
+          description: ID to inject into the category.
+          example: 1
+          format: int64
+          type: integer
+        name:
+          description: Value to assign to target schema field.
+          example: Password Change
+          type: string
+      required:
+      - filter
+      - id
+      - name
+      type: object
+    LogsSchemaCategoryMapperFallback:
+      description: Used to override hardcoded category values with a value pulled
+        from a source attribute on the log.
+      properties:
+        sources:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: Fallback sources used to populate value of field.
+          example: {}
+          type: object
+        values:
+          additionalProperties:
+            type: string
+          description: Values that define when the fallback is used.
+          example: {}
+          type: object
+      type: object
+    LogsSchemaCategoryMapperTargets:
+      description: Name of the target attributes which value is defined by the matching
+        category.
+      properties:
+        id:
+          description: ID of the field to map log attributes to.
+          example: ocsf.activity_id
+          type: string
+        name:
+          description: Name of the field to map log attributes to.
+          example: ocsf.activity_name
+          type: string
+      type: object
+    LogsSchemaCategoryMapperType:
+      description: Type of logs schema category mapper.
+      enum:
+      - schema-category-mapper
+      example: schema-category-mapper
+      type: string
+      x-enum-varnames:
+      - SCHEMA_CATEGORY_MAPPER
+    LogsSchemaData:
+      description: Configuration of the schema data to use.
+      properties:
+        class_name:
+          description: Class name of the schema to use.
+          example: Account Change
+          type: string
+        class_uid:
+          description: Class UID of the schema to use.
+          example: 3001
+          format: int64
+          type: integer
+        profiles:
+          description: Optional list of profiles to modify the schema.
+          example:
+          - security_control
+          - host
+          items:
+            type: string
+          type: array
+        schema_type:
+          description: Type of schema to use.
+          example: ocsf
+          type: string
+        version:
+          description: Version of the schema to use.
+          example: 1.5.0
+          type: string
+      required:
+      - schema_type
+      - version
+      - class_uid
+      - class_name
+      type: object
+    LogsSchemaMapper:
+      description: Configuration of the schema processor mapper to use.
+      oneOf:
+      - $ref: '#/components/schemas/LogsSchemaRemapper'
+      - $ref: '#/components/schemas/LogsSchemaCategoryMapper'
+    LogsSchemaProcessor:
+      description: A processor that has additional validations and checks for a given
+        schema. Currently supported schema types include OCSF.
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        mappers:
+          description: The `LogsSchemaProcessor` `mappers`.
+          example:
+          - name: Map userIdentity to ocsf.user.uid
+            sources:
+            - userIdentity.principalId
+            target: ocsf.user.uid
+            type: schema-remapper
+          items:
+            $ref: '#/components/schemas/LogsSchemaMapper'
+          type: array
+        name:
+          description: Name of the processor.
+          example: Map additionalEventData.LoginTo to ocsf.dst_endpoint.svc_name
+          type: string
+        schema:
+          $ref: '#/components/schemas/LogsSchemaData'
+        type:
+          $ref: '#/components/schemas/LogsSchemaProcessorType'
+      required:
+      - name
+      - mappers
+      - type
+      - schema
+      type: object
+    LogsSchemaProcessorType:
+      default: schema-processor
+      description: Type of logs schema processor.
+      enum:
+      - schema-processor
+      example: schema-processor
+      type: string
+      x-enum-varnames:
+      - SCHEMA_PROCESSOR
+    LogsSchemaRemapper:
+      description: The schema remapper maps source log fields to their correct fields.
+      properties:
+        name:
+          description: Name of the logs schema remapper.
+          example: Map userIdentity.principalId, responseElements.role.roleId, responseElements.user.userId
+            to ocsf.user.uid
+          type: string
+        override_on_conflict:
+          default: false
+          description: Override or not the target element if already set.
+          type: boolean
+        preserve_source:
+          default: false
+          description: Remove or preserve the remapped source element.
+          type: boolean
+        sources:
+          description: Array of source attributes.
+          example:
+          - userIdentity.principalId
+          - responseElements.role.roleId
+          - responseElements.user.userId
+          items:
+            description: Attribute used as a source to remap its value to the target
+              attribute.
+            type: string
+          type: array
+        target:
+          description: Target field to map log source field to.
+          example: ocsf.user.uid
+          type: string
+        target_format:
+          $ref: '#/components/schemas/TargetFormatType'
+        type:
+          $ref: '#/components/schemas/LogsSchemaRemapperType'
+      required:
+      - name
+      - sources
+      - target
+      - type
+      type: object
+    LogsSchemaRemapperType:
+      description: Type of logs schema remapper.
+      enum:
+      - schema-remapper
+      example: schema-remapper
+      type: string
+      x-enum-varnames:
+      - SCHEMA_REMAPPER
     LogsServiceRemapper:
       description: 'Use this processor if you want to assign one or more attributes
         as the official service.
@@ -9753,6 +10001,8 @@ components:
       type: object
     NotebookGlobalTime:
       description: Notebook global timeframe.
+      example:
+        live_span: 1h
       oneOf:
       - $ref: '#/components/schemas/NotebookRelativeTime'
       - $ref: '#/components/schemas/NotebookAbsoluteTime'
@@ -15056,6 +15306,7 @@ components:
     SyntheticsAssertionTargetValue:
       description: Value used by the operator in assertions. Can be either a number
         or string.
+      example: 0.0
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTargetValueNumber'
       - $ref: '#/components/schemas/SyntheticsAssertionTargetValueString'
@@ -20747,6 +20998,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        bits_ai_investigations_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         browser_rum_lite_session_count_sum:
           deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
@@ -21294,6 +21550,11 @@ components:
             hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        on_call_seat_hwm:
+          description: Shows the high-water mark of On-Call seats over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
             date for all organizations.
@@ -21533,19 +21794,163 @@ components:
             organizations.
           format: int64
           type: integer
+        serverless_apps_apm_apm_azure_appservice_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure App Service instances for the current
+            date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_azurefunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Function instances for the current date
+            for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_containerapp_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Container App instances for the current
+            date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_fargate_ecs_tasks_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Fargate Elastic Container Service tasks for
+            the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudfunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Function instances
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudrun_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Run instances for
+            the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_appservice_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure App Service instances
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_azurefunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Function instances
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_containerapp_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Container App instances
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudfunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Function instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudrun_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Run instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for the current date for all
+            organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_container_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Container
+            App instances for the current date for all organizations.
+          format: int64
+          type: integer
         serverless_apps_azure_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
-            for the given date and given org.
+          description: Shows the average number of Serverless Apps for Azure for the
+            given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_azure_function_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Function
+            App instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_web_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Web App
+            instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_ecs_avg:
+          description: Shows the average number of Serverless Apps for Elastic Container
+            Service for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_eks_avg:
+          description: Shows the average number of Serverless Apps for Elastic Kubernetes
+            Service for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_container_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Container App instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_function_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Function App instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_web_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Web App instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_functions_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Functions instances for the current date
+            for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_run_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Run instances for the current date for
+            all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_functions_instances_avg:
+          description: Shows the average number of Serverless Apps for Google Cloud
+            Platform Cloud Functions instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_run_instances_avg:
+          description: Shows the average number of Serverless Apps for Google Cloud
+            Platform Cloud Run instances for the current date for all organizations.
           format: int64
           type: integer
         serverless_apps_google_count_avg:
-          description: Shows the average of the number of Serverless Apps for Google
-            Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Google Cloud
+            for the given date and given org.
           format: int64
           type: integer
         serverless_apps_total_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
-            and Google Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Azure and Google
+            Cloud for the given date and given org.
           format: int64
           type: integer
         siem_analyzed_logs_add_on_count_sum:
@@ -21689,6 +22094,11 @@ components:
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for the given org.
+          format: int64
+          type: integer
+        bits_ai_investigations_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
@@ -22247,6 +22657,11 @@ components:
             hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        on_call_seat_hwm:
+          description: Shows the high-water mark of On-Call seats over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
             date for the given org.
@@ -22487,19 +22902,163 @@ components:
             given org.
           format: int64
           type: integer
-        serverless_apps_azure_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
+        serverless_apps_apm_apm_azure_appservice_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure App Service instances for the given date
+            and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_azurefunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Function instances for the given date
+            and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_containerapp_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Container App instances for the given
+            date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_fargate_ecs_tasks_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Fargate Elastic Container Service tasks for
+            the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudfunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Function instances
             for the given date and given org.
           format: int64
           type: integer
+        serverless_apps_apm_apm_gcp_cloudrun_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Run instances for
+            the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_appservice_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure App Service instances
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_azurefunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Function instances
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_containerapp_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Container App instances
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudfunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Function instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudrun_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Run instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for the given date and given
+            org.
+          format: int64
+          type: integer
+        serverless_apps_azure_container_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Container
+            App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_azure_count_avg:
+          description: Shows the average number of Serverless Apps for Azure for the
+            given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_azure_function_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Function
+            App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_azure_web_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Web App
+            instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_ecs_avg:
+          description: Shows the average number of Serverless Apps for Elastic Container
+            Service for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_eks_avg:
+          description: Shows the average number of Serverless Apps for Elastic Kubernetes
+            Service for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_container_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Container App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_function_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Function App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_web_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Web App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_functions_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Functions instances for the given date
+            and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_run_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Run instances for the given date and given
+            org.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_functions_instances_avg:
+          description: Shows the average number of Serverless Apps for Google Cloud
+            Platform Cloud Functions instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_run_instances_avg:
+          description: Shows the average number of Serverless Apps for Google Cloud
+            Platform Cloud Run instances for the given date and given org.
+          format: int64
+          type: integer
         serverless_apps_google_count_avg:
-          description: Shows the average of the number of Serverless Apps for Google
-            Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Google Cloud
+            for the given date and given org.
           format: int64
           type: integer
         serverless_apps_total_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
-            and Google Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Azure and Google
+            Cloud for the given date and given org.
           format: int64
           type: integer
         siem_analyzed_logs_add_on_count_sum:
@@ -22642,6 +23201,11 @@ components:
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current month for all organizations.
+          format: int64
+          type: integer
+        bits_ai_investigations_agg_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current month for all organizations.
           format: int64
           type: integer
         browser_rum_lite_session_count_agg_sum:
@@ -23221,6 +23785,11 @@ components:
             over all hours in the current months for all organizations
           format: int64
           type: integer
+        on_call_seat_hwm_sum:
+          description: Shows the sum of the high-water marks of On-Call seats over
+            all hours in the current month for all organizations.
+          format: int64
+          type: integer
         online_archive_events_count_agg_sum:
           description: Sum of all online archived events over all hours in the current
             month for all organizations.
@@ -23472,9 +24041,153 @@ components:
             organizations.
           format: int64
           type: integer
+        serverless_apps_apm_apm_azure_appservice_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Azure App Service instances in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_azurefunction_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Function instances in the current month
+            for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_containerapp_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Container App instances in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_fargate_ecs_tasks_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Fargate Elastic Container Service tasks in
+            the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudfunction_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Function instances
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudrun_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Run instances in
+            the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_appservice_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure App Service instances
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_azurefunction_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Function instances
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_containerapp_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Container App instances
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudfunction_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Function instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudrun_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Run instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate in the current month for all
+            organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_container_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure Container
+            App instances in the current month for all organizations.
+          format: int64
+          type: integer
         serverless_apps_azure_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure in the
             current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_function_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure Function
+            App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_web_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure Web
+            App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_ecs_avg_sum:
+          description: Sum of the average number of Serverless Apps for Elastic Container
+            Service in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_eks_avg_sum:
+          description: Sum of the average number of Serverless Apps for Elastic Kubernetes
+            Service in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_container_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Azure Container App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_function_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Azure Function App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_web_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Azure Web App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_functions_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Functions instances in the current month
+            for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_run_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Run instances in the current month for
+            all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_functions_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Google Cloud
+            Platform Cloud Functions instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_run_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Google Cloud
+            Platform Cloud Run instances in the current month for all organizations.
           format: int64
           type: integer
         serverless_apps_google_count_avg_sum:
@@ -27873,8 +28586,9 @@ paths:
   /api/v1/integration/aws:
     delete:
       deprecated: true
-      description: Delete a Datadog-AWS integration matching the specified `account_id`
-        and `role_name parameters`.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Delete a Datadog-AWS integration matching the specified `account_id` and `role_name
+        parameters`.'
       operationId: DeleteAWSAccount
       requestBody:
         content:
@@ -27921,7 +28635,8 @@ paths:
         - aws_configurations_manage
     get:
       deprecated: true
-      description: List all Datadog-AWS integrations available in your Datadog organization.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        List all Datadog-AWS integrations available in your Datadog organization.'
       operationId: ListAWSAccounts
       parameters:
       - description: Only return AWS accounts that matches this `account_id`.
@@ -27973,7 +28688,8 @@ paths:
         - aws_configuration_read
     post:
       deprecated: true
-      description: 'Create a Datadog-Amazon Web Services integration.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Create a Datadog-Amazon Web Services integration.
 
         Using the `POST` method updates your integration configuration
 
@@ -28026,7 +28742,8 @@ paths:
         - aws_configurations_manage
     put:
       deprecated: true
-      description: Update a Datadog-Amazon Web Services integration.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Update a Datadog-Amazon Web Services integration.'
       operationId: UpdateAWSAccount
       parameters:
       - description: Only return AWS accounts that matches this `account_id`.
@@ -28097,8 +28814,9 @@ paths:
   /api/v1/integration/aws/available_namespace_rules:
     get:
       deprecated: true
-      description: List all namespace rules for a given Datadog-AWS integration. This
-        endpoint takes no arguments.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        List all namespace rules for a given Datadog-AWS integration. This endpoint
+        takes no arguments.'
       operationId: ListAvailableAWSNamespaces
       responses:
         '200':
@@ -28131,7 +28849,9 @@ paths:
         - aws_configuration_read
   /api/v1/integration/aws/event_bridge:
     delete:
-      description: Delete an Amazon EventBridge source.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Delete an Amazon EventBridge source.'
       operationId: DeleteAWSEventBridgeSource
       requestBody:
         content:
@@ -28172,7 +28892,9 @@ paths:
         permissions:
         - manage_integrations
     get:
-      description: Get all Amazon EventBridge sources.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Get all Amazon EventBridge sources.'
       operationId: ListAWSEventBridgeSources
       parameters: []
       responses:
@@ -28204,7 +28926,9 @@ paths:
         operator: OPEN
         permissions: []
     post:
-      description: Create an Amazon EventBridge source.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Create an Amazon EventBridge source.'
       operationId: CreateAWSEventBridgeSource
       requestBody:
         content:
@@ -28377,8 +29101,8 @@ paths:
   /api/v1/integration/aws/generate_new_external_id:
     put:
       deprecated: true
-      description: Generate a new AWS external ID for a given AWS account ID and role
-        name pair.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Generate a new AWS external ID for a given AWS account ID and role name pair.'
       operationId: CreateNewAWSExternalID
       requestBody:
         content:
@@ -28610,9 +29334,10 @@ paths:
   /api/v1/integration/aws/logs/services:
     get:
       deprecated: true
-      description: Get the list of current AWS services that Datadog offers automatic
-        log collection. Use returned service IDs with the services parameter for the
-        Enable an AWS service log collection API endpoint.
+      description: '**This endpoint is deprecated - use the V2 endpoint instead.**
+        Get the list of current AWS services that Datadog offers automatic log collection.
+        Use returned service IDs with the services parameter for the Enable an AWS
+        service log collection API endpoint.'
       operationId: ListAWSLogsServices
       responses:
         '200':
@@ -32673,7 +33398,11 @@ paths:
         - timeseries_query
   /api/v1/search:
     get:
-      description: Search for metrics from the last 24 hours in Datadog.
+      deprecated: true
+      description: '**Note**: This endpoint is deprecated. Use `/api/v2/metrics` instead.
+
+
+        Search for metrics from the last 24 hours in Datadog.'
       operationId: ListMetrics
       parameters:
       - description: Query string to search metrics upon. Can optionally be prefixed

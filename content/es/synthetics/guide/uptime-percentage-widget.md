@@ -21,7 +21,7 @@ Para poder cumplir los acuerdos de nivel del servicio suscritos con clientes int
 
 A continuación, te mostramos cómo lograrlo con la herramienta [Synthetic Monitoring][1] y el [widget de objetivos de nivel del servicio ][2] (SLOs). Para ello, usaremos `http://example.com/` como ejemplo.
 
-## Cree una supervisión en Synthetic Monitoring test
+## Crear un test de Synthetic Monitoring
 
 Para crear un [test de API de Synthetics][3] con `http://example.com/`, consulta [Crear un test de API simple][4].
 

@@ -51,12 +51,12 @@ Before you begin, ensure you have the following:
 * **Software**:
     * A Kubernetes cluster (v1.29+). EKS Fargate and GKE Autopilot are not supported.
     * [Helm][3] (v3+).
-    * Datadog Helm chart version 3.137.1 or higher.
+    * Datadog Helm chart version 3.143.0 or higher.
     * [kubectl][4].
 
 ## Installation and configuration
 
-This guide uses the Datadog Helm chart to configure the DDOT Collector gateway.
+This guide uses the Datadog Helm chart to configure the DDOT Collector gateway. Check out all the available configurations on the [Datadog Helm chart README][8].
 
 ### Deploying the gateway with a daemonset
 
@@ -105,8 +105,6 @@ connectors:
   datadog/connector:
     traces:
       compute_top_level_by_span_kind: true
-      peer_tags_aggregation: true
-      compute_stats_by_span_kind: true
 service:
   pipelines:
     traces:
@@ -254,9 +252,13 @@ otelAgentGateway:
           exporters: [datadog]
 ```
 
+{{% otel-infraattributes-prereq %}}
+
 <div class="alert alert-info">
 If you set <code>fullnameOverride</code>, the gateway's Kubernetes service name becomes <code><fullnameOverride>-otel-agent-gateway</code>. The ports defined in <code>otelAgentGateway.ports</code> are exposed on this service. Ensure these ports match the OTLP receiver configuration in the gateway and the OTLP exporter configuration in the DaemonSet.
 </div>
+
+The example configurations use insecure TLS for simplicity. Follow the [OTel configtls instructions][7] if you want to enable TLS.
 
 ## Advanced use cases
 
@@ -351,17 +353,36 @@ To ensure APM Stats are calculated on 100% of your traces before sampling, the <
 
 ### Using a custom Collector image
 
-To use a custom-built Collector image for your gateway, specify the image repository and tag under `agents.image`. This follows the same process as the DaemonSet deployment. For more details, see [Use Custom OpenTelemetry Components][5].
+To use a custom-built Collector image for your gateway, specify the image repository and tag under `otelAgentGateway.image`. If you need instructions on how to build the custom images, see [Use Custom OpenTelemetry Components][5].
 
 ```yaml
 # values.yaml
 targetSystem: "linux"
 agents:
   enabled: false
+clusterAgent:
+  enabled: false
+otelAgentGateway:
+  enabled: true
   image:
     repository: <YOUR REPO>
     tag: <IMAGE TAG>
     doNotCheckTag: true
+  ports:
+    - containerPort: "4317"
+      name: "otel-grpc"
+  config: | <YOUR CONFIG>
+```
+
+### Enable Autoscaling with Horizontal Pod Autoscaler (HPA)
+
+The DDOT Collector gateway supports autoscaling with the Kubernetes Horizontal Pod Autoscaler (HPA) feature. To enable HPA, configure `otelAgentGateway.autoscaling`.
+
+```yaml
+# values.yaml
+targetSystem: "linux"
+agents:
+  enabled: false
 clusterAgent:
   enabled: false
 otelAgentGateway:
@@ -370,7 +391,27 @@ otelAgentGateway:
     - containerPort: "4317"
       name: "otel-grpc"
   config: | <YOUR CONFIG>
+  replicas: 4  # 4 replicas to begin with and HPA may override it based on the metrics
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    metrics:
+      # Aim for high CPU utilization for higher throughput
+      - type: Resource
+        resource:
+          name: cpu
+          target:
+            type: Utilization
+            averageUtilization: 80
+    behavior:
+      scaleUp:
+        stabilizationWindowSeconds: 30
+      scaleDown:
+        stabilizationWindowSeconds: 60
 ```
+
+You can use resource metrics (CPU or memory), custom metrics (Kubernetes Pod or Object), or external metrics as autoscaling inputs. For resource metrics, ensure that the [Kubernetes metrics server][9] is running in your cluster. For custom or external metrics, consider configuring the [Datadog Cluster Agent metrics provider][10].
 
 ### Deploying a multi-layer gateway
 
@@ -512,3 +553,7 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
 [4]: https://kubernetes.io/docs/tasks/tools/#kubectl
 [5]: /opentelemetry/setup/ddot_collector/custom_components
 [6]: https://opentelemetry.io/docs/collector/deployment/gateway/
+[7]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/config/configtls
+[8]: http://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
+[9]: http://github.com/kubernetes-sigs/metrics-server
+[10]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm

@@ -686,7 +686,7 @@ El procesador de búsqueda realiza las siguientes acciones:
 
   * Opcionalmente, si no encuentra el valor en la tabla de asignación, crea un atributo de destino con el valor de la tabla de referencia. Puedes seleccionar un valor para una [tabla de referencias][101] en la pestaña **Reference Table** (Tabla de referencia).
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Procesador de búsqueda" >}}
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Procesador de búsqueda"
     style="width:80%;">}}
 
 
@@ -829,7 +829,7 @@ Define el procesador de matrices en la página [**Pipelines**][1].
 Extrae un valor específico de un objeto dentro de una matriz cuando coincide con una condición.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array_processor_select_value.png" alt="Procesador de matrices - Seleccionar el valor de un elemento" style="width:80%;" >}}
 
@@ -865,6 +865,38 @@ Extrae un valor específico de un objeto dentro de una matriz cuando coincide co
 ```
 
 {{% /tab %}}
+{{% tab "API" %}}
+
+Utiliza el [endpoint de API del pipeline de logs de Datadog][1] con la siguiente carga útil JSON del procesador de matrices:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Extract Referrer URL",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "select",
+    "source": "httpRequest.headers",
+    "target": "referrer",
+    "filter": "name:Referrer",
+    "value_to_extract": "value"
+  }
+}
+```
+
+| Parámetro    | Tipo             | Obligatorio | Descripción                                                   |
+|--------------|------------------|----------|---------------------------------------------------------------|
+| `type`       | Cadena           | Sí      | Tipo de procesador.                                        |
+| `name`       | Cadena           | No       | Nombre del procesador.                                        |
+| `is_enabled` | Booleano          | No       | Si el procesador está activado. Por defecto: `false`.        |
+| `operation.type`  | Cadena      | Sí      | Tipo de funcionamiento del procesador de matrices.                            |
+| `operation.source`  | Cadena    | Sí      | Ruta de la matriz de la que quieres seleccionar.                    |
+| `operation.target`  | Cadena    | Sí      | Atributo objetivo.                                             |
+| `operation.filter`  | Cadena    | Sí      | Expresión que coincide con un elemento de la matriz. Se selecciona el primer elemento coincidente. |
+| `operation.value_to_extract`  | Cadena | Sí | Atributo a leer en el elemento seleccionado.                  |
+
+[1]: /es/api/v1/logs-pipelines/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Longitud de la matriz
@@ -872,7 +904,7 @@ Extrae un valor específico de un objeto dentro de una matriz cuando coincide co
 Calcula el número de elementos de una matriz.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array_processor_length.png" alt="Procesador de matrices - Longitud" style="width:80%;" >}}
 
@@ -898,6 +930,34 @@ Calcula el número de elementos de una matriz.
 }
 ```
 {{% /tab %}}
+{{% tab "API" %}}
+
+Utiliza el [endpoint de API del pipeline de logs de Datadog][1] con la siguiente carga útil JSON del procesador de matrices:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Compute number of tags",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "length",
+    "source": "tags",
+    "target": "tagCount"
+  }
+}
+```
+
+| Parámetro           | Tipo      | Obligatorio | Descripción                                                   |
+|---------------------|-----------|----------|---------------------------------------------------------------|
+| `type`              | Cadena    | Sí      | Tipo de procesador.                                        |
+| `name`              | Cadena    | No       | Nombre del procesador.                                        |
+| `is_enabled`        | Booleano   | No       | Si el procesador está activado. Por defecto: `false`.        |
+| `operation.type`    | Cadena    | Sí      | Tipo de funcionamiento del procesador de matrices.                            |
+| `operation.source`  | Cadena    | Sí      | Ruta de la matriz de la que quieres seleccionar.                   |
+| `operation.target`  | Cadena    | Sí      | Atributo objetivo.                                             |
+
+[1]: /es/api/v1/logs-pipelines/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Añadir a la matriz
@@ -908,7 +968,7 @@ Añade un valor de atributo al final de un atributo de matriz de destino en el l
 
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array_processor_append.png" alt="Procesador de matrices - Añadir" style="width:80%;" >}}
 
@@ -943,6 +1003,60 @@ Añade un valor de atributo al final de un atributo de matriz de destino en el l
 }
 ```
 {{% /tab %}}
+{{% tab "API" %}}
+
+Utiliza el [endpoint de API del pipeline de logs de Datadog][1] con la siguiente carga útil JSON del procesador de matrices:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Append client IP to sourceIps",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "append",
+    "source": "network.client.ip",
+    "target": "sourceIps"
+  }
+}
+```
+
+| Parámetro                    | Tipo       | Obligatorio | Descripción                                                        |
+|------------------------------|------------|----------|--------------------------------------------------------------------|
+| `type`                       | Cadena     | Sí      | Tipo de procesador.                                             |
+| `name`                       | Cadena     | No       | Nombre del procesador.                                             |
+| `is_enabled`                 | Booleano    | No       | Si el procesador está activado. Por defecto: `false`.             |
+| `operation.type`             | Cadena     | Sí      | Tipo de funcionamiento del procesador de matrices.                                 |
+| `operation.source`           | Cadena     | Sí      | Atributo a añadir.                                               |
+| `operation.target`           | Cadena     | Sí      | Atributo de matriz al que añadir.                                      |
+| `operation.preserve_source`  | Booleano    | No      | Si se conserva la fuente original después de la reasignación. Por defecto: `false`.   |
+
+[1]: /es/api/v1/logs-pipelines/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Procesador decodificador
+
+El procesador decodificador traduce los campos de cadena codificados de binario a texto (como Base64 o Hex/Base16) a su representación original. Esto permite interpretar los datos en su contexto nativo, ya sea como cadena UTF-8, comando ASCII o valor numérico (por ejemplo, un número entero derivado de una cadena hexadecimal). El procesador decodificador es especialmente útil para analizar comandos codificados, logs de sistemas específicos o técnicas de evasión utilizadas por actores de amenazas.
+
+**Notas**:
+
+- Cadenas truncadas: El procesador maneja las cadenas Base64/Base16 parcialmente truncadas con elegancia, recortándolas o rellenándolas según sea necesario.
+
+- Formato hexadecimal: La entrada hexadecimal puede descodificarse en una cadena (UTF-8) o en un número entero.
+
+- Gestión de fallos: Si la descodificación falla (debido a una entrada no válida), el procesador omite la transformación y el log permanece inalterado.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+1. Configura el atributo de origen: Proporciona la ruta del atributo que contiene la cadena codificada, como `encoded.base64`.
+2. Selecciona la codificación de origen: Elige la codificación binaria a texto de la fuente: `base64` o `base16/hex`.
+2. Para `Base16/Hex`: Elige el formato de salida: `string (UTF-8)` o `integer`.
+3. Configura el atributo de destino: Introduce la ruta del atributo para almacenar el resultado decodificado.
+
+{{< img src="logs/log_configuration/processor/decoder-processor.png" alt="Procesador decodificador - Adjuntar" style="width:80%;" >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Amenaza procesador intel
@@ -959,7 +1073,7 @@ Para más información, véase [Inteligencia sobre amenazas][9].
 *Logging without Limits es una marca registrada de Datadog, Inc.
 
 [1]: /es/logs/log_configuration/pipelines/
-[2]: /es/logs/log_configuration/parsing/
+[2]: /es/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [3]: /es/logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [5]: /es/logs/log_collection/?tab=host#attributes-and-tags

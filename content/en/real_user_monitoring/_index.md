@@ -42,7 +42,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
   tag: "Blog"
   text: "Best practices for monitoring static web applications"
-- link: "/real_user_monitoring/browser/data_collected/"
+- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
 - link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
@@ -227,7 +227,7 @@ You must have edit access to restore general access to a restricted application.
 [4]: /monitors/types/real_user_monitoring/
 [5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /real_user_monitoring/ios/mobile_vitals/
 [9]: /real_user_monitoring/android/mobile_vitals/
 [10]: /real_user_monitoring/ios/web_view_tracking/
@@ -235,7 +235,7 @@ You must have edit access to restore general access to a restricted application.
 [12]: /real_user_monitoring/session_replay/browser/
 [13]: /real_user_monitoring/session_replay/browser/privacy_options/
 [14]: /real_user_monitoring/session_replay/browser/developer_tools/
-[15]: /real_user_monitoring/browser/setup/
+[15]: /real_user_monitoring/application_monitoring/browser/setup/
 [16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
 [18]: /account_management/rbac/

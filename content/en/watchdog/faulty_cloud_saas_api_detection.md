@@ -29,32 +29,42 @@ Whenever Watchdog detects a provider degradation, it creates an event in the [Ev
 Watchdog monitors the status of the following external providers' APIs: 
 
 | External Provider | API monitored |  
-|----------|--------------------|
-| Amplitude | api.amplitude.com |
-| Atlassian | *.atlassian.net |
-| Auth0 | *.auth0.com |
-| Binance | api.binance.com     |
-| Braintree | api.braintreegateway.com |
-| Cloudflare | api.cloudflare.com |
-| Databricks | *.cloud.databricks.com |
-| Facebook | graph.facebook.com |
-| GitHub | api.github.com |
-| Intercom | api.intercom.io |
-| Mapbox | api.mapbox.com |
-| Mixpanel | api.mixpanel.com |
-| OpenAI | *.openai.com|
-| PagerDuty | api.pagerduty.com |
-| SendGrid | *.sendgrid.com |
-| ServiceNow | *.service-now.com |
-| Slack | *.slack.com |
-| Snowflake | *.snowflakecomputing.com |
-| Splunk | *.splunkcloud.com |
-| Square | connect.squareup.com |
-| Stripe | api.stripe.com |
-| Twilio | api.twilio.com |
-| X | api.twitter.com |
-| Zendesk | *.zendesk.com |
-| Zoom    | api.zoom.us |
+|----------|--------------------| 
+| Adyen | `*.adyenpayments.com` |
+| Amplitude | `api.amplitude.com` |
+| Anthropic | `api.anthropic.com` |
+| Atlassian | `*.atlassian.net`, `*.atlassian.com` |
+| Auth0 | `*.auth0.com` |
+| Azure DevOps | `dev.azure.com` |
+| Binance | `api.binance.com` |
+| Braintree | `api.braintreegateway.com` |
+| Cloudflare | `api.cloudflare.com` |
+| Databricks | `*.cloud.databricks.com` |
+| Facebook | `graph.facebook.com` |
+| GitHub | `api.github.com` |
+| GitLab | `*.gitlab.com` |
+| HubSpot | `api.hubspot.com`, `api.hubapi.com` |
+| Intercom | `api.intercom.io` |
+| LaunchDarkly | `app.launchdarkly.com` |
+| Mapbox | `api.mapbox.com` |
+| Mixpanel | `api.mixpanel.com` |
+| Okta | `*.okta.com` |
+| OpenAI | `*.openai.com` |
+| PagerDuty | `api.pagerduty.com` |
+| Palo Alto Networks | `api.urlcloud.paloaltonetworks.com` |
+| PayPal | `*.paypal.com` |
+| Salesforce | `*.salesforce.com` |
+| SendGrid | `*.sendgrid.com` |
+| ServiceNow | `*.service-now.com` |
+| Slack | `*.slack.com` |
+| Snowflake | `*.snowflakecomputing.com` |
+| Splunk | `*.splunkcloud.com` |
+| Square | `connect.squareup.com` |
+| Stripe | `api.stripe.com` |
+| Twilio | `api.twilio.com` |
+| X | `api.twitter.com` |
+| Zendesk | `*.zendesk.com` |
+| Zoom | `api.zoom.us` |
 
 The following AWS services are monitored (.*amazonaws.com):
 - CloudWatch

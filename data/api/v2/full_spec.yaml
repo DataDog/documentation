@@ -458,20 +458,6 @@ components:
         items:
           $ref: '#/components/schemas/GetIssueIncludeQueryParameterItem'
         type: array
-    HistoricalJobID:
-      description: The ID of the job.
-      in: path
-      name: job_id
-      required: true
-      schema:
-        type: string
-    HistoricalSignalID:
-      description: The ID of the historical signal.
-      in: path
-      name: histsignal_id
-      required: true
-      schema:
-        type: string
     IncidentAttachmentFilterQueryParameter:
       description: Specifies which types of attachments are included in the response.
       explode: false
@@ -938,7 +924,7 @@ components:
         `integration-service`, `integration-webhook`, `notebook`, `reference-table`,
         `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`,
         `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`,
-        `on-call-escalation-policy`, `on-call-team-routing-rules.'
+        `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -1095,6 +1081,20 @@ components:
       description: The name of the span-based metric.
       in: path
       name: metric_id
+      required: true
+      schema:
+        type: string
+    ThreatHuntingJobID:
+      description: The ID of the job.
+      in: path
+      name: job_id
+      required: true
+      schema:
+        type: string
+    ThreatHuntingSignalID:
+      description: The ID of the threat hunting signal.
+      in: path
+      name: histsignal_id
       required: true
       schema:
         type: string
@@ -1435,7 +1435,9 @@ components:
     AWSAccountConfigID:
       description: 'Unique Datadog ID of the AWS Account Integration Config.
 
-        To get the config ID for an account, use the [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
+        To get the config ID for an account, use the
+
+        [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
 
         endpoint and query by AWS Account ID.'
       example: 00000000-abcd-0001-0000-000000000000
@@ -1493,6 +1495,7 @@ components:
       description: 'AWS partition your AWS account is scoped to. Defaults to `aws`.
 
         See [Partitions](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html)
+
         in the AWS documentation for more information.'
       enum:
       - aws
@@ -1737,6 +1740,269 @@ components:
       description: The definition of `AWSCredentialsUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/AWSAssumeRoleUpdate'
+    AWSEventBridgeAccountConfiguration:
+      description: The EventBridge configuration for one AWS account.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '123456789012'
+          type: string
+        event_hubs:
+          description: Array of AWS event sources associated with this account.
+          items:
+            $ref: '#/components/schemas/AWSEventBridgeSource'
+          type: array
+        tags:
+          description: 'Array of tags (in the form `key:value`) which are added to
+            all hosts
+
+            and metrics reporting through the main AWS integration.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: The list of the host_tags.
+            type: string
+          type: array
+      type: object
+    AWSEventBridgeCreateRequest:
+      description: Amazon EventBridge create request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeCreateRequestData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeCreateRequestAttributes:
+      description: The EventBridge source to be created.
+      properties:
+        account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        create_event_bus:
+          description: 'Set to true if Datadog should create the event bus in addition
+            to the event
+
+            source. Requires the `events:CreateEventBus` permission.'
+          example: true
+          type: boolean
+        event_generator_name:
+          description: 'The given part of the event source name, which is then combined
+            with an
+
+            assigned suffix to form the full name.'
+          example: app-alerts
+          type: string
+        region:
+          description: 'The event source''s
+
+            [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).'
+          example: us-east-1
+          type: string
+      required:
+      - account_id
+      - event_generator_name
+      - region
+      type: object
+    AWSEventBridgeCreateRequestData:
+      description: Amazon EventBridge create request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSEventBridgeCreateResponse:
+      description: Amazon EventBridge create response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeCreateResponseData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeCreateResponseAttributes:
+      description: A created EventBridge source.
+      properties:
+        event_source_name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        has_bus:
+          description: True if the event bus was created in addition to the source.
+          example: true
+          type: boolean
+        region:
+          description: 'The event source''s
+
+            [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).'
+          example: us-east-1
+          type: string
+        status:
+          $ref: '#/components/schemas/AWSEventBridgeCreateStatus'
+      type: object
+    AWSEventBridgeCreateResponseData:
+      description: Amazon EventBridge create response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeCreateResponseAttributes'
+        id:
+          default: create_event_bridge
+          description: The ID of the Amazon EventBridge create response data.
+          example: create_event_bridge
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSEventBridgeCreateStatus:
+      description: The event source status "created".
+      enum:
+      - created
+      example: created
+      type: string
+      x-enum-varnames:
+      - CREATED
+    AWSEventBridgeDeleteRequest:
+      description: Amazon EventBridge delete request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteRequestData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeDeleteRequestAttributes:
+      description: The EventBridge source to be deleted.
+      properties:
+        account_id:
+          $ref: '#/components/schemas/AWSAccountID'
+        event_generator_name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        region:
+          description: 'The event source''s
+
+            [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).'
+          example: us-east-1
+          type: string
+      required:
+      - account_id
+      - event_generator_name
+      - region
+      type: object
+    AWSEventBridgeDeleteRequestData:
+      description: Amazon EventBridge delete request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteRequestAttributes'
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSEventBridgeDeleteResponse:
+      description: Amazon EventBridge delete response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteResponseData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeDeleteResponseAttributes:
+      description: The EventBridge source delete response attributes.
+      properties:
+        status:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteStatus'
+      type: object
+    AWSEventBridgeDeleteResponseData:
+      description: Amazon EventBridge delete response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteResponseAttributes'
+        id:
+          default: delete_event_bridge
+          description: The ID of the Amazon EventBridge list response data.
+          example: delete_event_bridge
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSEventBridgeDeleteStatus:
+      description: The event source status "empty".
+      enum:
+      - empty
+      example: empty
+      type: string
+      x-enum-varnames:
+      - EMPTY
+    AWSEventBridgeListResponse:
+      description: Amazon EventBridge list response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSEventBridgeListResponseData'
+      required:
+      - data
+      type: object
+    AWSEventBridgeListResponseAttributes:
+      description: An object describing the EventBridge configuration for multiple
+        accounts.
+      properties:
+        accounts:
+          description: List of accounts with their event sources.
+          items:
+            $ref: '#/components/schemas/AWSEventBridgeAccountConfiguration'
+          type: array
+        is_installed:
+          description: True if the EventBridge integration is enabled for your organization.
+          type: boolean
+      type: object
+    AWSEventBridgeListResponseData:
+      description: Amazon EventBridge list response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSEventBridgeListResponseAttributes'
+        id:
+          default: get_event_bridge
+          description: The ID of the Amazon EventBridge list response data.
+          example: get_event_bridge
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSEventBridgeType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    AWSEventBridgeSource:
+      description: An EventBridge source.
+      properties:
+        name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        region:
+          description: 'The event source''s
+
+            [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).'
+          example: us-east-1
+          type: string
+      type: object
+    AWSEventBridgeType:
+      default: event_bridge
+      description: Amazon EventBridge resource type.
+      enum:
+      - event_bridge
+      example: event_bridge
+      type: string
+      x-enum-varnames:
+      - EVENT_BRIDGE
     AWSIntegration:
       description: The definition of `AWSIntegration` object.
       properties:
@@ -1816,10 +2082,12 @@ components:
       type: object
     AWSLambdaForwarderConfig:
       description: 'Log Autosubscription configuration for Datadog Forwarder Lambda
-        functions. Automatically set up triggers for existing
+        functions.
 
-        and new logs for some services, ensuring no logs from new resources are missed
-        and saving time spent on manual configuration.'
+        Automatically set up triggers for existing and new logs for some services,
+
+        ensuring no logs from new resources are missed and saving time spent on manual
+        configuration.'
       properties:
         lambdas:
           description: List of Datadog Lambda Log Forwarder ARNs in your AWS account.
@@ -1832,9 +2100,11 @@ components:
           $ref: '#/components/schemas/AWSLambdaForwarderConfigLogSourceConfig'
         sources:
           description: 'List of service IDs set to enable automatic log collection.
+
             Discover the list of available services with the
 
             [Get list of AWS log ready services](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)
+
             endpoint.'
           items:
             example: s3
@@ -1854,14 +2124,20 @@ components:
       description: 'AWS log source tag filter list. Defaults to `[]`.
 
         Array of log source to AWS resource tag mappings. Each mapping contains a
-        log source and its associated AWS resource tags (in `key:value` format) used
-        to filter logs submitted to Datadog.
+        log source and its
+
+        associated AWS resource tags (in `key:value` format) used to filter logs submitted
+        to Datadog.
 
         Tag filters are applied for tags on the AWS resource emitting logs; tags associated
-        with the log storage entity (such as a CloudWatch Log Group or S3 Bucket)
-        are not considered.
+        with the
 
-        For more information on resource tag filter syntax, [see AWS resource exclusion](https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion)
+        log storage entity (such as a CloudWatch Log Group or S3 Bucket) are not considered.
+
+        For more information on resource tag filter syntax,
+
+        [see AWS resource exclusion](https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion)
+
         in the AWS integration billing page.'
       properties:
         source:
@@ -1965,17 +2241,21 @@ components:
       - $ref: '#/components/schemas/AWSNamespaceFiltersExcludeOnly'
       - $ref: '#/components/schemas/AWSNamespaceFiltersIncludeOnly'
     AWSNamespaceFiltersExcludeOnly:
-      description: 'Exclude only these namespaces from metrics collection. Defaults
-        to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
+      description: 'Exclude only these namespaces from metrics collection.
+
+        Defaults to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
 
         `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default
+
         to reduce your AWS CloudWatch costs from `GetMetricData` API calls.'
       properties:
         exclude_only:
-          description: 'Exclude only these namespaces from metrics collection. Defaults
-            to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
+          description: 'Exclude only these namespaces from metrics collection.
+
+            Defaults to `["AWS/SQS", "AWS/ElasticMapReduce", "AWS/Usage"]`.
 
             `AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default
+
             to reduce your AWS CloudWatch costs from `GetMetricData` API calls.'
           example:
           - AWS/SQS
@@ -2006,15 +2286,18 @@ components:
       description: 'AWS Metrics Collection tag filters list. Defaults to `[]`.
 
         The array of custom AWS resource tags (in the form `key:value`) defines a
-        filter that Datadog uses when collecting metrics from a specified service.
+        filter that Datadog uses
+
+        when collecting metrics from a specified service.
 
         Wildcards, such as `?` (match a single character) and `*` (match multiple
-        characters), and exclusion using `!` before the tag are supported.
+        characters),
 
-        For EC2, only hosts that match one of the defined tags will be imported into
-        Datadog. The rest will be ignored.
+        and exclusion using `!` before the tag are supported.
 
-        For example, `env:production,instance-type:c?.*,!region:us-east-1`.'
+        For EC2, only hosts that match one of the defined tags are imported into Datadog.
+
+        The rest are ignored. For example, `env:production,instance-type:c?.*,!region:us-east-1`.'
       properties:
         namespace:
           description: The AWS service for which the tag filters defined in `tags`
@@ -2154,15 +2437,19 @@ components:
       description: AWS Resources Collection config.
       properties:
         cloud_security_posture_management_collection:
-          description: Enable Cloud Security Management to scan AWS resources for
-            vulnerabilities, misconfigurations, identity risks, and compliance violations.
-            Defaults to `false`. Requires `extended_collection` to be set to `true`.
+          description: 'Enable Cloud Security Management to scan AWS resources for
+            vulnerabilities, misconfigurations,
+
+            identity risks, and compliance violations. Defaults to `false`.
+
+            Requires `extended_collection` to be set to `true`.'
           example: false
           type: boolean
         extended_collection:
-          description: Whether Datadog collects additional attributes and configuration
-            information about the resources in your AWS account. Defaults to `true`.
-            Required for `cloud_security_posture_management_collection`.
+          description: 'Whether Datadog collects additional attributes and configuration
+            information about the resources
+
+            in your AWS account. Defaults to `true`. Required for `cloud_security_posture_management_collection`.'
           example: true
           type: boolean
       type: object
@@ -2368,6 +2655,7 @@ components:
       - $ref: '#/components/schemas/ActionQueryMockedOutputsObject'
     ActionQueryMockedOutputsEnabled:
       description: Whether to enable the mocked outputs for testing.
+      example: false
       oneOf:
       - type: boolean
       - description: If this is a string, it must be a valid JavaScript expression
@@ -2457,6 +2745,7 @@ components:
         type: string
     ActionQuerySpec:
       description: The definition of the action query.
+      example: ''
       oneOf:
       - type: string
       - $ref: '#/components/schemas/ActionQuerySpecObject'
@@ -11812,7 +12101,7 @@ components:
       - GZIP
       - DEFLATE
     ConvertJobResultsToSignalsAttributes:
-      description: Attributes for converting historical job results to signals.
+      description: Attributes for converting threat hunting job results to signals.
       properties:
         id:
           description: Request ID.
@@ -11844,7 +12133,7 @@ components:
       - notifications
       type: object
     ConvertJobResultsToSignalsData:
-      description: Data for converting historical job results to signals.
+      description: Data for converting threat hunting job results to signals.
       properties:
         attributes:
           $ref: '#/components/schemas/ConvertJobResultsToSignalsAttributes'
@@ -11859,7 +12148,7 @@ components:
       x-enum-varnames:
       - HISTORICALDETECTIONSJOBRESULTSIGNALCONVERSION
     ConvertJobResultsToSignalsRequest:
-      description: Request for converting historical job results to signals.
+      description: Request for converting threat hunting job results to signals.
       properties:
         data:
           $ref: '#/components/schemas/ConvertJobResultsToSignalsData'
@@ -12197,6 +12486,89 @@ components:
         type:
           $ref: '#/components/schemas/DatastoreDataType'
       required:
+      - type
+      type: object
+    CreateConnectionRequest:
+      example:
+        data:
+          attributes:
+            fields:
+            - description: Customer subscription tier from `CRM`
+              display_name: Customer Tier
+              id: customer_tier
+              source_name: subscription_tier
+              type: string
+            - description: Customer lifetime value in `USD`
+              display_name: Lifetime Value
+              id: lifetime_value
+              source_name: ltv
+              type: number
+            join_attribute: user_email
+            join_type: email
+            type: ref_table
+          id: crm-integration
+          type: connection_id
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateConnectionRequestData'
+      type: object
+    CreateConnectionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateConnectionRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateConnectionRequestDataType'
+      required:
+      - type
+      type: object
+    CreateConnectionRequestDataAttributes:
+      properties:
+        fields:
+          items:
+            $ref: '#/components/schemas/CreateConnectionRequestDataAttributesFieldsItems'
+          type: array
+        join_attribute:
+          example: ''
+          type: string
+        join_type:
+          example: ''
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        type:
+          example: ''
+          type: string
+      required:
+      - join_attribute
+      - join_type
+      - type
+      type: object
+    CreateConnectionRequestDataAttributesFieldsItems:
+      properties:
+        description:
+          type: string
+        display_name:
+          type: string
+        groups:
+          items:
+            type: string
+          type: array
+        id:
+          example: ''
+          type: string
+        source_name:
+          example: ''
+          type: string
+        type:
+          example: ''
+          type: string
+      required:
+      - id
+      - source_name
       - type
       type: object
     CreateCustomFrameworkRequest:
@@ -13444,6 +13816,7 @@ components:
       type: object
     CustomAttributeValuesUnion:
       description: Union of supported value for a custom attribute
+      example: ''
       oneOf:
       - $ref: '#/components/schemas/CustomAttributeStringValue'
       - $ref: '#/components/schemas/CustomAttributeMultiStringValue'
@@ -16803,11 +17176,201 @@ components:
         schema:
           $ref: '#/components/schemas/EntityToSchema'
       type: object
+    EntityResponseArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PreviewEntityResponseData'
+          type: array
+      required:
+      - data
+      type: object
     EntityResponseData:
       description: List of entity data.
       items:
         $ref: '#/components/schemas/EntityData'
       type: array
+    EntityResponseDataAttributes:
+      properties:
+        apiVersion:
+          type: string
+        description:
+          type: string
+        displayName:
+          type: string
+        kind:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        owner:
+          type: string
+        properties:
+          additionalProperties: {}
+          type: object
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    EntityResponseDataRelationships:
+      properties:
+        incidents:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsIncidents'
+        oncalls:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsOncalls'
+        rawSchema:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRawSchema'
+        relatedEntities:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRelatedEntities'
+        schema:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsSchema'
+      type: object
+    EntityResponseDataRelationshipsIncidents:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EntityResponseDataRelationshipsIncidentsDataItems'
+          type: array
+      type: object
+    EntityResponseDataRelationshipsIncidentsDataItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsIncidentsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsIncidentsDataItemsType:
+      default: incident
+      description: Incident resource type.
+      enum:
+      - incident
+      example: incident
+      type: string
+      x-enum-varnames:
+      - INCIDENT
+    EntityResponseDataRelationshipsOncalls:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EntityResponseDataRelationshipsOncallsDataItems'
+          type: array
+      type: object
+    EntityResponseDataRelationshipsOncallsDataItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsOncallsDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsOncallsDataItemsType:
+      default: oncall
+      description: Oncall resource type.
+      enum:
+      - oncall
+      example: oncall
+      type: string
+      x-enum-varnames:
+      - ONCALL
+    EntityResponseDataRelationshipsRawSchema:
+      properties:
+        data:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRawSchemaData'
+      required:
+      - data
+      type: object
+    EntityResponseDataRelationshipsRawSchemaData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRawSchemaDataType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsRawSchemaDataType:
+      default: rawSchema
+      description: Raw schema resource type.
+      enum:
+      - rawSchema
+      example: rawSchema
+      type: string
+      x-enum-varnames:
+      - RAWSCHEMA
+    EntityResponseDataRelationshipsRelatedEntities:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EntityResponseDataRelationshipsRelatedEntitiesDataItems'
+          type: array
+      type: object
+    EntityResponseDataRelationshipsRelatedEntitiesDataItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsRelatedEntitiesDataItemsType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsRelatedEntitiesDataItemsType:
+      default: relatedEntity
+      description: Related entity resource type.
+      enum:
+      - relatedEntity
+      example: relatedEntity
+      type: string
+      x-enum-varnames:
+      - RELATEDENTITY
+    EntityResponseDataRelationshipsSchema:
+      properties:
+        data:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsSchemaData'
+      required:
+      - data
+      type: object
+    EntityResponseDataRelationshipsSchemaData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/EntityResponseDataRelationshipsSchemaDataType'
+      required:
+      - type
+      - id
+      type: object
+    EntityResponseDataRelationshipsSchemaDataType:
+      default: schema
+      description: Schema resource type.
+      enum:
+      - schema
+      example: schema
+      type: string
+      x-enum-varnames:
+      - SCHEMA
+    EntityResponseDataType:
+      default: entity
+      description: Entity resource type.
+      enum:
+      - entity
+      example: entity
+      type: string
+      x-enum-varnames:
+      - ENTITY
     EntityResponseIncludedIncident:
       description: Included incident.
       properties:
@@ -19245,6 +19808,140 @@ components:
       x-enum-varnames:
       - ADD
       - REPLACE
+    FacetInfoRequest:
+      example:
+        data:
+          attributes:
+            facet_id: first_browser_name
+            limit: 10
+            search:
+              query: user_org_id:5001 AND first_country_code:US
+            term_search:
+              value: Chrome
+          id: facet_info_request
+          type: users_facet_info_request
+      properties:
+        data:
+          $ref: '#/components/schemas/FacetInfoRequestData'
+      type: object
+    FacetInfoRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FacetInfoRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FacetInfoRequestDataType'
+      required:
+      - type
+      type: object
+    FacetInfoRequestDataAttributes:
+      properties:
+        facet_id:
+          example: ''
+          type: string
+        limit:
+          example: 0
+          format: int64
+          type: integer
+        search:
+          $ref: '#/components/schemas/FacetInfoRequestDataAttributesSearch'
+        term_search:
+          $ref: '#/components/schemas/FacetInfoRequestDataAttributesTermSearch'
+      required:
+      - facet_id
+      - limit
+      type: object
+    FacetInfoRequestDataAttributesSearch:
+      properties:
+        query:
+          type: string
+      type: object
+    FacetInfoRequestDataAttributesTermSearch:
+      properties:
+        value:
+          type: string
+      type: object
+    FacetInfoRequestDataType:
+      default: users_facet_info_request
+      description: Users facet info request resource type.
+      enum:
+      - users_facet_info_request
+      example: users_facet_info_request
+      type: string
+      x-enum-varnames:
+      - USERS_FACET_INFO_REQUEST
+    FacetInfoResponse:
+      example:
+        data:
+          attributes:
+            result:
+              values:
+              - count: 4892
+                value: Chrome
+              - count: 2341
+                value: Safari
+              - count: 1567
+                value: Firefox
+              - count: 892
+                value: Edge
+              - count: 234
+                value: Opera
+          id: facet_info_response
+          type: users_facet_info
+      properties:
+        data:
+          $ref: '#/components/schemas/FacetInfoResponseData'
+      type: object
+    FacetInfoResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FacetInfoResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/FacetInfoResponseDataType'
+      required:
+      - type
+      type: object
+    FacetInfoResponseDataAttributes:
+      properties:
+        result:
+          $ref: '#/components/schemas/FacetInfoResponseDataAttributesResult'
+      type: object
+    FacetInfoResponseDataAttributesResult:
+      properties:
+        range:
+          $ref: '#/components/schemas/FacetInfoResponseDataAttributesResultRange'
+        values:
+          items:
+            $ref: '#/components/schemas/FacetInfoResponseDataAttributesResultValuesItems'
+          type: array
+      type: object
+    FacetInfoResponseDataAttributesResultRange:
+      properties:
+        max:
+          type: object
+        min:
+          type: object
+      type: object
+    FacetInfoResponseDataAttributesResultValuesItems:
+      properties:
+        count:
+          format: int64
+          type: integer
+        value:
+          type: string
+      type: object
+    FacetInfoResponseDataType:
+      default: users_facet_info
+      description: Users facet info resource type.
+      enum:
+      - users_facet_info
+      example: users_facet_info
+      type: string
+      x-enum-varnames:
+      - USERS_FACET_INFO
     FastlyAPIKey:
       description: The definition of the `FastlyAPIKey` object.
       properties:
@@ -20117,6 +20814,627 @@ components:
       - PIPELINES_FAILED_DESCENDING
       - PIPELINES_DURATION_LOST_ASCENDING
       - PIPELINES_DURATION_LOST_DESCENDING
+    FleetAgentVersion:
+      description: Represents an available Datadog Agent version.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetAgentVersionAttributes'
+        id:
+          description: Unique identifier for the Agent version (same as version).
+          example: 7.50.0
+          type: string
+        type:
+          $ref: '#/components/schemas/FleetAgentVersionResourceType'
+      required:
+      - id
+      - type
+      type: object
+    FleetAgentVersionAttributes:
+      properties:
+        version:
+          description: The Agent version string.
+          example: 7.50.0
+          type: string
+      type: object
+    FleetAgentVersionResourceType:
+      default: agent_version
+      description: The type of Agent version resource.
+      enum:
+      - agent_version
+      example: agent_version
+      type: string
+      x-enum-varnames:
+      - AGENT_VERSION
+    FleetAgentVersionsResponse:
+      description: Response containing a list of available Agent versions.
+      properties:
+        data:
+          description: Array of available Agent versions.
+          items:
+            $ref: '#/components/schemas/FleetAgentVersion'
+          type: array
+      required:
+      - data
+      type: object
+    FleetDeployment:
+      description: A deployment that defines automated configuration changes for a
+        fleet of hosts.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetDeploymentAttributes'
+        id:
+          description: Unique identifier for the deployment.
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/FleetDeploymentResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FleetDeploymentAttributes:
+      description: Attributes of a deployment in the response.
+      properties:
+        config_operations:
+          description: Ordered list of configuration file operations to perform on
+            the target hosts.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentOperation'
+          type: array
+        estimated_end_time_unix:
+          description: Estimated completion time of the deployment as a Unix timestamp
+            (seconds since epoch).
+          example: 1699999999
+          format: int64
+          type: integer
+        filter_query:
+          description: Query used to filter and select target hosts for the deployment.
+            Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        high_level_status:
+          description: 'Current high-level status of the deployment (for example,
+            "pending", "running",
+
+            "completed", "failed").'
+          example: pending
+          type: string
+        hosts:
+          description: 'Paginated list of hosts in this deployment with their individual
+            statuses. Only included
+
+            when fetching a single deployment by ID. Use the `limit` and `page` query
+            parameters to
+
+            navigate through pages. Pagination metadata is included in the response
+            `meta.hosts` field.'
+          items:
+            $ref: '#/components/schemas/FleetDeploymentHost'
+          type: array
+        packages:
+          description: List of packages to deploy to target hosts. Present only for
+            package upgrade deployments.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentPackage'
+          type: array
+        total_hosts:
+          description: Total number of hosts targeted by this deployment.
+          example: 42
+          format: int64
+          type: integer
+      type: object
+    FleetDeploymentConfigureAttributes:
+      description: Attributes for creating a new configuration deployment.
+      properties:
+        config_operations:
+          description: Ordered list of configuration file operations to perform on
+            the target hosts.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentOperation'
+          type: array
+        filter_query:
+          description: Query used to filter and select target hosts for the deployment.
+            Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+      required:
+      - config_operations
+      type: object
+    FleetDeploymentConfigureCreate:
+      description: Data for creating a new configuration deployment.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetDeploymentConfigureAttributes'
+        type:
+          $ref: '#/components/schemas/FleetDeploymentResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    FleetDeploymentConfigureCreateRequest:
+      description: Request payload for creating a new configuration deployment.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetDeploymentConfigureCreate'
+      required:
+      - data
+      type: object
+    FleetDeploymentFileOp:
+      description: "Type of file operation to perform on the target configuration
+        file.\n- `merge-patch`: Merges the provided patch data with the existing configuration
+        file.\n  Creates the file if it doesn't exist.\n- `delete`: Removes the specified
+        configuration file from the target hosts."
+      enum:
+      - merge-patch
+      - delete
+      example: merge-patch
+      type: string
+      x-enum-varnames:
+      - MERGE_PATCH
+      - DELETE
+    FleetDeploymentHost:
+      description: A host that is part of a deployment with its current status.
+      properties:
+        error:
+          description: Error message if the deployment failed on this host.
+          example: ''
+          type: string
+        hostname:
+          description: The hostname of the agent.
+          example: web-server-01.example.com
+          type: string
+        status:
+          description: Current deployment status for this specific host.
+          example: succeeded
+          type: string
+        versions:
+          description: List of packages and their versions currently installed on
+            this host.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentHostPackage'
+          type: array
+      type: object
+    FleetDeploymentHostPackage:
+      description: 'Package version information for a host, showing the initial version
+        before deployment,
+
+        the target version to deploy, and the current version on the host.'
+      properties:
+        current_version:
+          description: The current version of the package on the host.
+          example: 7.51.0
+          type: string
+        initial_version:
+          description: The initial version of the package on the host before the deployment
+            started.
+          example: 7.51.0
+          type: string
+        package_name:
+          description: The name of the package.
+          example: datadog-agent
+          type: string
+        target_version:
+          description: The target version that the deployment is attempting to install.
+          example: 7.52.0
+          type: string
+      type: object
+    FleetDeploymentHostsPage:
+      description: Pagination details for the list of hosts in a deployment.
+      properties:
+        current_page:
+          description: Current page index (zero-based).
+          example: 0
+          format: int64
+          type: integer
+        page_size:
+          description: Number of hosts returned per page.
+          example: 50
+          format: int64
+          type: integer
+        total_hosts:
+          description: Total number of hosts in this deployment.
+          example: 150
+          format: int64
+          type: integer
+        total_pages:
+          description: Total number of pages available.
+          example: 3
+          format: int64
+          type: integer
+      type: object
+    FleetDeploymentOperation:
+      description: A single configuration file operation to perform on the target
+        hosts.
+      properties:
+        file_op:
+          $ref: '#/components/schemas/FleetDeploymentFileOp'
+        file_path:
+          description: Absolute path to the target configuration file on the host.
+          example: /datadog.yaml
+          type: string
+        patch:
+          additionalProperties: {}
+          description: 'Patch data in JSON format to apply to the configuration file.
+
+            When using `merge-patch`, this object is merged with the existing configuration,
+
+            allowing you to add, update, or override specific fields without replacing
+            the entire file.
+
+            The structure must match the target configuration file format (for example,
+            YAML structure
+
+            for Datadog Agent config). Not applicable when using the `delete` operation.'
+          example:
+            apm_config:
+              enabled: true
+            log_level: debug
+            logs_enabled: true
+          type: object
+      required:
+      - file_op
+      - file_path
+      type: object
+    FleetDeploymentPackage:
+      description: A package and its target version for deployment.
+      properties:
+        name:
+          description: The name of the package to deploy.
+          example: datadog-agent
+          type: string
+        version:
+          description: The target version of the package to deploy.
+          example: 7.52.0
+          type: string
+      required:
+      - name
+      - version
+      type: object
+    FleetDeploymentPackageUpgradeAttributes:
+      description: Attributes for creating a new package upgrade deployment.
+      properties:
+        filter_query:
+          description: Query used to filter and select target hosts for the deployment.
+            Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        target_packages:
+          description: List of packages and their target versions to deploy to the
+            selected hosts.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentPackage'
+          type: array
+      required:
+      - target_packages
+      type: object
+    FleetDeploymentPackageUpgradeCreate:
+      description: Data for creating a new package upgrade deployment.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetDeploymentPackageUpgradeAttributes'
+        type:
+          $ref: '#/components/schemas/FleetDeploymentResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    FleetDeploymentPackageUpgradeCreateRequest:
+      description: Request payload for creating a new package upgrade deployment.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetDeploymentPackageUpgradeCreate'
+      required:
+      - data
+      type: object
+    FleetDeploymentResourceType:
+      default: deployment
+      description: The type of deployment resource.
+      enum:
+      - deployment
+      example: deployment
+      type: string
+      x-enum-varnames:
+      - DEPLOYMENT
+    FleetDeploymentResponse:
+      description: Response containing a single deployment.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetDeployment'
+        meta:
+          $ref: '#/components/schemas/FleetDeploymentResponseMeta'
+      type: object
+    FleetDeploymentResponseMeta:
+      description: Metadata for a single deployment response, including pagination
+        information for hosts.
+      properties:
+        hosts:
+          $ref: '#/components/schemas/FleetDeploymentHostsPage'
+      type: object
+    FleetDeploymentsPage:
+      description: Pagination details for the list of deployments.
+      properties:
+        total_count:
+          description: Total number of deployments available across all pages.
+          example: 25
+          format: int64
+          type: integer
+      type: object
+    FleetDeploymentsResponse:
+      description: Response containing a paginated list of deployments.
+      properties:
+        data:
+          description: Array of deployments matching the query criteria.
+          items:
+            $ref: '#/components/schemas/FleetDeployment'
+          type: array
+        meta:
+          $ref: '#/components/schemas/FleetDeploymentsResponseMeta'
+      required:
+      - data
+      type: object
+    FleetDeploymentsResponseMeta:
+      description: Metadata for the list of deployments, including pagination information.
+      properties:
+        page:
+          $ref: '#/components/schemas/FleetDeploymentsPage'
+      type: object
+    FleetSchedule:
+      description: A schedule that automatically creates deployments based on a recurrence
+        rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetScheduleAttributes'
+        id:
+          description: Unique identifier for the schedule.
+          example: abc-def-ghi-123
+          type: string
+        type:
+          $ref: '#/components/schemas/FleetScheduleResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FleetScheduleAttributes:
+      description: Attributes of a schedule in the response.
+      properties:
+        created_at_unix:
+          description: Unix timestamp (seconds since epoch) when the schedule was
+            created.
+          example: 1699999999
+          format: int64
+          type: integer
+        created_by:
+          description: User handle of the person who created the schedule.
+          example: user@example.com
+          type: string
+        name:
+          description: Human-readable name for the schedule.
+          example: Weekly Production Agent Updates
+          type: string
+        query:
+          description: Query used to filter and select target hosts for scheduled
+            deployments. Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        rule:
+          $ref: '#/components/schemas/FleetScheduleRecurrenceRule'
+        status:
+          $ref: '#/components/schemas/FleetScheduleStatus'
+        updated_at_unix:
+          description: Unix timestamp (seconds since epoch) when the schedule was
+            last updated.
+          example: 1699999999
+          format: int64
+          type: integer
+        updated_by:
+          description: User handle of the person who last updated the schedule.
+          example: user@example.com
+          type: string
+        version_to_latest:
+          description: 'Number of major versions behind the latest to target for upgrades.
+
+            - 0: Always upgrade to the latest version
+
+            - 1: Upgrade to latest minus 1 major version
+
+            - 2: Upgrade to latest minus 2 major versions
+
+            Maximum value is 2.'
+          example: 0
+          format: int64
+          maximum: 2
+          minimum: 0
+          type: integer
+      type: object
+    FleetScheduleCreate:
+      description: Data for creating a new schedule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetScheduleCreateAttributes'
+        type:
+          $ref: '#/components/schemas/FleetScheduleResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    FleetScheduleCreateAttributes:
+      description: Attributes for creating a new schedule.
+      properties:
+        name:
+          description: Human-readable name for the schedule.
+          example: Weekly Production Agent Updates
+          type: string
+        query:
+          description: Query used to filter and select target hosts for scheduled
+            deployments. Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        rule:
+          $ref: '#/components/schemas/FleetScheduleRecurrenceRule'
+        status:
+          $ref: '#/components/schemas/FleetScheduleStatus'
+        version_to_latest:
+          description: 'Number of major versions behind the latest to target for upgrades.
+
+            - 0: Always upgrade to the latest version (default)
+
+            - 1: Upgrade to latest minus 1 major version
+
+            - 2: Upgrade to latest minus 2 major versions
+
+            Maximum value is 2.'
+          example: 0
+          format: int64
+          maximum: 2
+          minimum: 0
+          type: integer
+      required:
+      - name
+      - query
+      - rule
+      type: object
+    FleetScheduleCreateRequest:
+      description: Request payload for creating a new schedule.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetScheduleCreate'
+      required:
+      - data
+      type: object
+    FleetSchedulePatch:
+      description: Data for partially updating a schedule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetSchedulePatchAttributes'
+        type:
+          $ref: '#/components/schemas/FleetScheduleResourceType'
+      required:
+      - type
+      type: object
+    FleetSchedulePatchAttributes:
+      description: Attributes for partially updating a schedule. All fields are optional.
+      properties:
+        name:
+          description: Human-readable name for the schedule.
+          example: Weekly Production Agent Updates
+          type: string
+        query:
+          description: Query used to filter and select target hosts for scheduled
+            deployments. Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        rule:
+          $ref: '#/components/schemas/FleetScheduleRecurrenceRule'
+        status:
+          $ref: '#/components/schemas/FleetScheduleStatus'
+        version_to_latest:
+          description: 'Number of major versions behind the latest to target for upgrades.
+
+            - 0: Always upgrade to the latest version
+
+            - 1: Upgrade to latest minus 1 major version
+
+            - 2: Upgrade to latest minus 2 major versions
+
+            Maximum value is 2.'
+          example: 0
+          format: int64
+          maximum: 2
+          minimum: 0
+          type: integer
+      type: object
+    FleetSchedulePatchRequest:
+      description: Request payload for partially updating a schedule.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetSchedulePatch'
+      required:
+      - data
+      type: object
+    FleetScheduleRecurrenceRule:
+      description: 'Defines the recurrence pattern for the schedule. Specifies when
+        deployments should be
+
+        automatically triggered based on maintenance windows.'
+      properties:
+        days_of_week:
+          description: 'List of days of the week when the schedule should trigger.
+            Valid values are:
+
+            "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun".'
+          example:
+          - Mon
+          - Wed
+          - Fri
+          items:
+            type: string
+          type: array
+        maintenance_window_duration:
+          description: Duration of the maintenance window in minutes.
+          example: 1200
+          format: int64
+          type: integer
+        start_maintenance_window:
+          description: 'Start time of the maintenance window in 24-hour clock format
+            (HH:MM).
+
+            Deployments will be triggered at this time on the specified days.'
+          example: 02:00
+          type: string
+        timezone:
+          description: Timezone for the schedule in IANA Time Zone Database format
+            (e.g., "America/New_York", "UTC").
+          example: America/New_York
+          type: string
+      required:
+      - days_of_week
+      - start_maintenance_window
+      - maintenance_window_duration
+      - timezone
+      type: object
+    FleetScheduleResourceType:
+      default: schedule
+      description: The type of schedule resource.
+      enum:
+      - schedule
+      example: schedule
+      type: string
+      x-enum-varnames:
+      - SCHEDULE
+    FleetScheduleResponse:
+      description: Response containing a single schedule.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetSchedule'
+      type: object
+    FleetScheduleStatus:
+      description: 'The status of the schedule.
+
+        - `active`: The schedule is active and will create deployments according to
+        its recurrence rule.
+
+        - `inactive`: The schedule is inactive and will not create any deployments.'
+      enum:
+      - active
+      - inactive
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - INACTIVE
+    FleetSchedulesResponse:
+      description: Response containing a list of schedules.
+      properties:
+        data:
+          description: Array of schedules.
+          items:
+            $ref: '#/components/schemas/FleetSchedule'
+          type: array
+      required:
+      - data
+      type: object
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -20430,9 +21748,20 @@ components:
             to this GCP metric namespace.
           example: true
           type: boolean
+        filters:
+          description: When enabled, Datadog applies these additional filters to limit
+            metric collection. A metric is collected only if it does not match all
+            exclusion filters and matches at least one allow filter.
+          example:
+          - snapshot.*
+          - '!*_by_region'
+          items:
+            description: A metric namespace filter
+            type: string
+          type: array
         id:
           description: The id of the GCP metric namespace.
-          example: aiplatform
+          example: pubsub
           type: string
       type: object
     GCPMonitoredResourceConfig:
@@ -20594,6 +21923,10 @@ components:
           example:
           - disabled: true
             id: aiplatform
+          - filters:
+            - snapshot.*
+            - '!*_by_region'
+            id: pubsub
           items:
             $ref: '#/components/schemas/GCPMetricNamespaceConfig'
           type: array
@@ -21434,6 +22767,291 @@ components:
       - ASSIGNEE
       - CASE
       - TEAM_OWNERS
+    GetMappingResponse:
+      example:
+        data:
+          attributes:
+            attributes:
+            - attribute: user_id
+              description: Unique user identifier
+              display_name: User ID
+              groups:
+              - Identity
+              is_custom: false
+              type: string
+            - attribute: user_email
+              description: User email address
+              display_name: Email Address
+              groups:
+              - Identity
+              - Contact
+              is_custom: false
+              type: string
+            - attribute: first_country_code
+              description: The ISO code of the country for the user's first session
+              display_name: First Country Code
+              groups:
+              - Geography
+              is_custom: false
+              type: string
+            - attribute: '@customer_tier'
+              description: Customer subscription tier
+              display_name: Customer Tier
+              groups:
+              - Business
+              is_custom: true
+              type: string
+          id: get_mappings_response
+          type: get_mappings_response
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMappingResponseData'
+      type: object
+    GetMappingResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMappingResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMappingResponseDataType'
+      required:
+      - type
+      type: object
+    GetMappingResponseDataAttributes:
+      properties:
+        attributes:
+          items:
+            $ref: '#/components/schemas/GetMappingResponseDataAttributesAttributesItems'
+          type: array
+      type: object
+    GetMappingResponseDataAttributesAttributesItems:
+      properties:
+        attribute:
+          type: string
+        description:
+          type: string
+        display_name:
+          type: string
+        groups:
+          items:
+            type: string
+          type: array
+        is_custom:
+          type: boolean
+        type:
+          type: string
+      type: object
+    GetMappingResponseDataType:
+      default: get_mappings_response
+      description: Get mappings response resource type.
+      enum:
+      - get_mappings_response
+      example: get_mappings_response
+      type: string
+      x-enum-varnames:
+      - GET_MAPPINGS_RESPONSE
+    GetMultipleRulesetsRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestData'
+      type: object
+    GetMultipleRulesetsRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsRequestDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsRequestDataAttributes:
+      properties:
+        include_testing_rules:
+          type: boolean
+        include_tests:
+          type: boolean
+        rulesets:
+          items:
+            type: string
+          type: array
+      type: object
+    GetMultipleRulesetsRequestDataType:
+      default: get_multiple_rulesets_request
+      description: Get multiple rulesets request resource type.
+      enum:
+      - get_multiple_rulesets_request
+      example: get_multiple_rulesets_request
+      type: string
+      x-enum-varnames:
+      - GET_MULTIPLE_RULESETS_REQUEST
+    GetMultipleRulesetsResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseData'
+      type: object
+    GetMultipleRulesetsResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributes:
+      properties:
+        rulesets:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItems'
+          type: array
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItems:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsData'
+        description:
+          type: string
+        name:
+          type: string
+        rules:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItems'
+          type: array
+        short_description:
+          type: string
+      required:
+      - data
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsData:
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType:
+      default: rulesets
+      description: Rulesets resource type.
+      enum:
+      - rulesets
+      example: rulesets
+      type: string
+      x-enum-varnames:
+      - RULESETS
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItems:
+      properties:
+        arguments:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems'
+          type: array
+        category:
+          type: string
+        checksum:
+          type: string
+        code:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        cve:
+          type: string
+        cwe:
+          type: string
+        data:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData'
+        description:
+          type: string
+        documentation_url:
+          type: string
+        entity_checked:
+          type: string
+        is_published:
+          type: boolean
+        is_testing:
+          type: boolean
+        language:
+          type: string
+        last_updated_at:
+          format: date-time
+          type: string
+        last_updated_by:
+          type: string
+        name:
+          type: string
+        regex:
+          type: string
+        severity:
+          type: string
+        short_description:
+          type: string
+        should_use_ai_fix:
+          type: boolean
+        tests:
+          items:
+            $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems'
+          type: array
+        tree_sitter_query:
+          type: string
+        type:
+          type: string
+      required:
+      - data
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData:
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType'
+      required:
+      - type
+      type: object
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType:
+      default: rules
+      description: Rules resource type.
+      enum:
+      - rules
+      example: rules
+      type: string
+      x-enum-varnames:
+      - RULES
+    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems:
+      properties:
+        annotation_count:
+          format: int64
+          maximum: 65535
+          minimum: 0
+          type: integer
+        code:
+          type: string
+        filename:
+          type: string
+      type: object
+    GetMultipleRulesetsResponseDataType:
+      default: get_multiple_rulesets_response
+      description: Get multiple rulesets response resource type.
+      enum:
+      - get_multiple_rulesets_response
+      example: get_multiple_rulesets_response
+      type: string
+      x-enum-varnames:
+      - GET_MULTIPLE_RULESETS_RESPONSE
     GetResourceEvaluationFiltersResponse:
       description: The definition of `GetResourceEvaluationFiltersResponse` object.
       properties:
@@ -22027,130 +23645,6 @@ components:
       - name
       - type
       - value
-      type: object
-    HistoricalJobDataType:
-      description: Type of payload.
-      enum:
-      - historicalDetectionsJob
-      type: string
-      x-enum-varnames:
-      - HISTORICALDETECTIONSJOB
-    HistoricalJobListMeta:
-      description: Metadata about the list of jobs.
-      properties:
-        totalCount:
-          description: Number of jobs in the list.
-          format: int32
-          maximum: 2147483647
-          type: integer
-      type: object
-    HistoricalJobOptions:
-      description: Job options.
-      properties:
-        detectionMethod:
-          $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
-        evaluationWindow:
-          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
-        impossibleTravelOptions:
-          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions'
-        keepAlive:
-          $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
-        maxSignalDuration:
-          $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
-        newValueOptions:
-          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
-        sequenceDetectionOptions:
-          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
-        thirdPartyRuleOptions:
-          $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
-      type: object
-    HistoricalJobQuery:
-      description: Query for selecting logs analyzed by the historical job.
-      properties:
-        aggregation:
-          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
-        dataSource:
-          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
-        distinctFields:
-          description: Field for which the cardinality is measured. Sent as an array.
-          items:
-            description: Field.
-            type: string
-          type: array
-        groupByFields:
-          description: Fields to group by.
-          items:
-            description: Field.
-            type: string
-          type: array
-        hasOptionalGroupByFields:
-          default: false
-          description: When false, events without a group-by value are ignored by
-            the query. When true, events with missing group-by fields are processed
-            with `N/A`, replacing the missing values.
-          example: false
-          type: boolean
-        metrics:
-          description: Group of target fields to aggregate over when using the sum,
-            max, geo data, or new value aggregations. The sum, max, and geo data aggregations
-            only accept one value in this list, whereas the new value aggregation
-            accepts up to five values.
-          items:
-            description: Field.
-            type: string
-          type: array
-        name:
-          description: Name of the query.
-          type: string
-        query:
-          description: Query to run on logs.
-          example: a > 3
-          type: string
-      type: object
-    HistoricalJobResponse:
-      description: Historical job response.
-      properties:
-        data:
-          $ref: '#/components/schemas/HistoricalJobResponseData'
-      type: object
-    HistoricalJobResponseAttributes:
-      description: Historical job attributes.
-      properties:
-        createdAt:
-          description: Time when the job was created.
-          type: string
-        createdByHandle:
-          description: The handle of the user who created the job.
-          type: string
-        createdByName:
-          description: The name of the user who created the job.
-          type: string
-        createdFromRuleId:
-          description: ID of the rule used to create the job (if it is created from
-            a rule).
-          type: string
-        jobDefinition:
-          $ref: '#/components/schemas/JobDefinition'
-        jobName:
-          description: Job name.
-          type: string
-        jobStatus:
-          description: Job status.
-          type: string
-        modifiedAt:
-          description: Last modification time of the job.
-          type: string
-      type: object
-    HistoricalJobResponseData:
-      description: Historical job response data.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/HistoricalJobResponseAttributes'
-        id:
-          description: ID of the job.
-          type: string
-        type:
-          $ref: '#/components/schemas/HistoricalJobDataType'
       type: object
     HourlyUsage:
       description: Hourly usage for a product family for an org.
@@ -26332,7 +27826,7 @@ components:
           type: string
       type: object
     JobCreateResponse:
-      description: Run a historical job response.
+      description: Run a threat hunting job response.
       properties:
         data:
           $ref: '#/components/schemas/JobCreateResponseData'
@@ -26344,10 +27838,10 @@ components:
           description: ID of the created job.
           type: string
         type:
-          $ref: '#/components/schemas/HistoricalJobDataType'
+          $ref: '#/components/schemas/ThreatHuntingJobDataType'
       type: object
     JobDefinition:
-      description: Definition of a historical job.
+      description: Definition of a threat hunting job.
       properties:
         calculatedFields:
           description: Calculated fields.
@@ -26386,11 +27880,11 @@ components:
           example: Excessive number of failed attempts.
           type: string
         options:
-          $ref: '#/components/schemas/HistoricalJobOptions'
+          $ref: '#/components/schemas/ThreatHuntingJobOptions'
         queries:
           description: Queries for selecting logs analyzed by the job.
           items:
-            $ref: '#/components/schemas/HistoricalJobQuery'
+            $ref: '#/components/schemas/ThreatHuntingJobQuery'
           type: array
         referenceTables:
           description: Reference tables used in the queries.
@@ -26427,7 +27921,8 @@ components:
       - message
       type: object
     JobDefinitionFromRule:
-      description: Definition of a historical job based on a security monitoring rule.
+      description: Definition of a threat hunting job based on a security monitoring
+        rule.
       properties:
         from:
           description: Starting time of data analyzed by the job.
@@ -27004,6 +28499,104 @@ components:
       required:
       - data
       type: object
+    ListConnectionsResponse:
+      example:
+        data:
+          attributes:
+            connections:
+            - created_at: '0001-01-01T00:00:00Z'
+              created_by: 00000000-0000-0000-0000-000000000000
+              fields:
+              - description: Customer subscription tier
+                display_name: Customer Tier
+                groups:
+                - Business
+                - Subscription
+                id: customer_tier
+                source_name: subscription_tier
+                type: string
+              - description: Channel through which user signed up
+                display_name: Signup Source
+                groups:
+                - Marketing
+                - Attribution
+                id: signup_source
+                source_name: acquisition_channel
+                type: string
+              id: user-profiles-connection
+              join:
+                attribute: user_email
+                type: email
+              type: ref_table
+              updated_at: '0001-01-01T00:00:00Z'
+              updated_by: 00000000-0000-0000-0000-000000000000
+          id: list_connections_response
+          type: list_connections_response
+      properties:
+        data:
+          $ref: '#/components/schemas/ListConnectionsResponseData'
+      type: object
+    ListConnectionsResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListConnectionsResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ListConnectionsResponseDataType'
+      required:
+      - type
+      type: object
+    ListConnectionsResponseDataAttributes:
+      properties:
+        connections:
+          items:
+            $ref: '#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItems'
+          type: array
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItems:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          type: string
+        fields:
+          items:
+            $ref: '#/components/schemas/CreateConnectionRequestDataAttributesFieldsItems'
+          type: array
+        id:
+          type: string
+        join:
+          $ref: '#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsJoin'
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        type:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        updated_by:
+          type: string
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsJoin:
+      properties:
+        attribute:
+          type: string
+        type:
+          type: string
+      type: object
+    ListConnectionsResponseDataType:
+      default: list_connections_response
+      description: List connections response resource type.
+      enum:
+      - list_connections_response
+      example: list_connections_response
+      type: string
+      x-enum-varnames:
+      - LIST_CONNECTIONS_RESPONSE
     ListDevicesResponse:
       description: List devices response.
       properties:
@@ -27369,17 +28962,6 @@ components:
       - data
       - meta
       type: object
-    ListHistoricalJobsResponse:
-      description: List of historical jobs.
-      properties:
-        data:
-          description: Array containing the list of historical jobs.
-          items:
-            $ref: '#/components/schemas/HistoricalJobResponseData'
-          type: array
-        meta:
-          $ref: '#/components/schemas/HistoricalJobListMeta'
-      type: object
     ListKindCatalogResponse:
       description: List kind response.
       properties:
@@ -27547,6 +29129,17 @@ components:
       - _NAME
       - USER_COUNT
       - _USER_COUNT
+    ListThreatHuntingJobsResponse:
+      description: List of threat hunting jobs.
+      properties:
+        data:
+          description: Array containing the list of threat hunting jobs.
+          items:
+            $ref: '#/components/schemas/ThreatHuntingJobResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ThreatHuntingJobListMeta'
+      type: object
     ListVulnerabilitiesResponse:
       description: The expected response schema when listing vulnerabilities.
       properties:
@@ -33637,6 +35230,7 @@ components:
     ObservabilityPipelineOcsfMapperProcessorMappingMapping:
       description: Defines a single mapping rule for transforming logs into the OCSF
         schema.
+      example: CloudTrail Account Change
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineOcsfMappingLibrary'
     ObservabilityPipelineOcsfMapperProcessorType:
@@ -37388,6 +38982,19 @@ components:
           description: Offset type.
           type: string
       type: object
+    PreviewEntityResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EntityResponseDataAttributes'
+        id:
+          type: string
+        relationships:
+          $ref: '#/components/schemas/EntityResponseDataRelationships'
+        type:
+          $ref: '#/components/schemas/EntityResponseDataType'
+      required:
+      - type
+      type: object
     ProcessSummariesMeta:
       description: Response metadata object.
       properties:
@@ -37700,6 +39307,153 @@ components:
       - $ref: '#/components/schemas/ActionQuery'
       - $ref: '#/components/schemas/DataTransform'
       - $ref: '#/components/schemas/StateVariable'
+    QueryAccountRequest:
+      example:
+        data:
+          attributes:
+            limit: 20
+            query: plan_type:enterprise AND user_count:>100 AND subscription_status:active
+            select_columns:
+            - account_id
+            - account_name
+            - user_count
+            - plan_type
+            - subscription_status
+            - created_at
+            - mrr
+            - industry
+            sort:
+              field: user_count
+              order: DESC
+            wildcard_search_term: tech
+          id: query_account_request
+          type: query_account_request
+      properties:
+        data:
+          $ref: '#/components/schemas/QueryAccountRequestData'
+      type: object
+    QueryAccountRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/QueryAccountRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/QueryAccountRequestDataType'
+      required:
+      - type
+      type: object
+    QueryAccountRequestDataAttributes:
+      properties:
+        limit:
+          format: int64
+          type: integer
+        query:
+          type: string
+        select_columns:
+          items:
+            type: string
+          type: array
+        sort:
+          $ref: '#/components/schemas/QueryAccountRequestDataAttributesSort'
+        wildcard_search_term:
+          type: string
+      type: object
+    QueryAccountRequestDataAttributesSort:
+      properties:
+        field:
+          type: string
+        order:
+          type: string
+      type: object
+    QueryAccountRequestDataType:
+      default: query_account_request
+      description: Query account request resource type.
+      enum:
+      - query_account_request
+      example: query_account_request
+      type: string
+      x-enum-varnames:
+      - QUERY_ACCOUNT_REQUEST
+    QueryEventFilteredUsersRequest:
+      example:
+        data:
+          attributes:
+            event_query:
+              query: '@type:view AND @view.loading_time:>3000 AND @application.name:ecommerce-platform'
+              time_frame:
+                end: 1761309676
+                start: 1760100076
+            include_row_count: true
+            limit: 25
+            query: user_org_id:5001 AND first_country_code:US AND first_browser_name:Chrome
+            select_columns:
+            - user_id
+            - user_email
+            - first_country_code
+            - first_browser_name
+            - events_count
+            - session_count
+            - error_count
+            - avg_loading_time
+          id: query_event_filtered_users_request
+          type: query_event_filtered_users_request
+      properties:
+        data:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestData'
+      type: object
+    QueryEventFilteredUsersRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataType'
+      required:
+      - type
+      type: object
+    QueryEventFilteredUsersRequestDataAttributes:
+      properties:
+        event_query:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataAttributesEventQuery'
+        include_row_count:
+          type: boolean
+        limit:
+          format: int64
+          type: integer
+        query:
+          type: string
+        select_columns:
+          items:
+            type: string
+          type: array
+      type: object
+    QueryEventFilteredUsersRequestDataAttributesEventQuery:
+      properties:
+        query:
+          type: string
+        time_frame:
+          $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataAttributesEventQueryTimeFrame'
+      type: object
+    QueryEventFilteredUsersRequestDataAttributesEventQueryTimeFrame:
+      properties:
+        end:
+          format: int64
+          type: integer
+        start:
+          format: int64
+          type: integer
+      type: object
+    QueryEventFilteredUsersRequestDataType:
+      default: query_event_filtered_users_request
+      description: Query event filtered users request resource type.
+      enum:
+      - query_event_filtered_users_request
+      example: query_event_filtered_users_request
+      type: string
+      x-enum-varnames:
+      - QUERY_EVENT_FILTERED_USERS_REQUEST
     QueryFormula:
       description: A formula for calculation based on one or more queries.
       properties:
@@ -37713,6 +39467,81 @@ components:
       required:
       - formula
       type: object
+    QueryResponse:
+      example:
+        data:
+          attributes:
+            hits:
+            - first_browser_name: Chrome
+              first_city: San Francisco
+              first_country_code: US
+              first_device_type: Desktop
+              last_seen: '2025-08-14T06:45:12.142Z'
+              session_count: 47
+              user_created: '2024-12-15T08:42:33.287Z'
+              user_email: john.smith@techcorp.com
+              user_id: '150847'
+              user_name: John Smith
+              user_org_id: '5001'
+            - first_browser_name: Chrome
+              first_city: Austin
+              first_country_code: US
+              first_device_type: Desktop
+              last_seen: '2025-08-14T05:22:08.951Z'
+              session_count: 89
+              user_created: '2024-11-28T14:17:45.634Z'
+              user_email: john.williams@techcorp.com
+              user_id: '150848'
+              user_name: John Williams
+              user_org_id: '5001'
+            - first_browser_name: Chrome
+              first_city: Seattle
+              first_country_code: US
+              first_device_type: Desktop
+              last_seen: '2025-08-14T04:18:34.726Z'
+              session_count: 23
+              user_created: '2025-01-03T16:33:21.445Z'
+              user_email: john.jones@techcorp.com
+              user_id: '150849'
+              user_name: John Jones
+              user_org_id: '5001'
+            total: 147
+          id: query_response
+          type: query_response
+      properties:
+        data:
+          $ref: '#/components/schemas/QueryResponseData'
+      type: object
+    QueryResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/QueryResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/QueryResponseDataType'
+      required:
+      - type
+      type: object
+    QueryResponseDataAttributes:
+      properties:
+        hits:
+          items:
+            additionalProperties: {}
+          type: array
+        total:
+          format: int64
+          type: integer
+      type: object
+    QueryResponseDataType:
+      default: query_response
+      description: Query response resource type.
+      enum:
+      - query_response
+      example: query_response
+      type: string
+      x-enum-varnames:
+      - QUERY_RESPONSE
     QuerySortOrder:
       default: desc
       description: Direction of sort.
@@ -37723,6 +39552,74 @@ components:
       x-enum-varnames:
       - ASC
       - DESC
+    QueryUsersRequest:
+      example:
+        data:
+          attributes:
+            limit: 25
+            query: user_email:*@techcorp.com AND first_country_code:US AND first_browser_name:Chrome
+            select_columns:
+            - user_id
+            - user_email
+            - user_name
+            - user_org_id
+            - first_country_code
+            - first_browser_name
+            - first_device_type
+            - last_seen
+            sort:
+              field: first_seen
+              order: DESC
+            wildcard_search_term: john
+          id: query_users_request
+          type: query_users_request
+      properties:
+        data:
+          $ref: '#/components/schemas/QueryUsersRequestData'
+      type: object
+    QueryUsersRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/QueryUsersRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/QueryUsersRequestDataType'
+      required:
+      - type
+      type: object
+    QueryUsersRequestDataAttributes:
+      properties:
+        limit:
+          format: int64
+          type: integer
+        query:
+          type: string
+        select_columns:
+          items:
+            type: string
+          type: array
+        sort:
+          $ref: '#/components/schemas/QueryUsersRequestDataAttributesSort'
+        wildcard_search_term:
+          type: string
+      type: object
+    QueryUsersRequestDataAttributesSort:
+      properties:
+        field:
+          type: string
+        order:
+          type: string
+      type: object
+    QueryUsersRequestDataType:
+      default: query_users_request
+      description: Query users request resource type.
+      enum:
+      - query_users_request
+      example: query_users_request
+      type: string
+      x-enum-varnames:
+      - QUERY_USERS_REQUEST
     RUMAggregateBucketValue:
       description: A bucket value, can be either a timeseries or a single value.
       oneOf:
@@ -39496,6 +41393,95 @@ components:
       type: string
       x-enum-varnames:
       - RULESET
+    ResolveVulnerableSymbolsRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsRequestData'
+      type: object
+    ResolveVulnerableSymbolsRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsRequestDataType'
+      required:
+      - type
+      type: object
+    ResolveVulnerableSymbolsRequestDataAttributes:
+      properties:
+        purls:
+          items:
+            type: string
+          type: array
+      type: object
+    ResolveVulnerableSymbolsRequestDataType:
+      default: resolve-vulnerable-symbols-request
+      enum:
+      - resolve-vulnerable-symbols-request
+      example: resolve-vulnerable-symbols-request
+      type: string
+      x-enum-varnames:
+      - RESOLVE_VULNERABLE_SYMBOLS_REQUEST
+    ResolveVulnerableSymbolsResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseData'
+      type: object
+    ResolveVulnerableSymbolsResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseDataType'
+      required:
+      - type
+      type: object
+    ResolveVulnerableSymbolsResponseDataAttributes:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseResults'
+          type: array
+      type: object
+    ResolveVulnerableSymbolsResponseDataType:
+      default: resolve-vulnerable-symbols-response
+      enum:
+      - resolve-vulnerable-symbols-response
+      example: resolve-vulnerable-symbols-response
+      type: string
+      x-enum-varnames:
+      - RESOLVE_VULNERABLE_SYMBOLS_RESPONSE
+    ResolveVulnerableSymbolsResponseResults:
+      properties:
+        purl:
+          type: string
+        vulnerable_symbols:
+          items:
+            $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseResultsVulnerableSymbols'
+          type: array
+      type: object
+    ResolveVulnerableSymbolsResponseResultsVulnerableSymbols:
+      properties:
+        advisory_id:
+          type: string
+        symbols:
+          items:
+            $ref: '#/components/schemas/ResolveVulnerableSymbolsResponseResultsVulnerableSymbolsSymbols'
+          type: array
+      type: object
+    ResolveVulnerableSymbolsResponseResultsVulnerableSymbolsSymbols:
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+      type: object
     ResourceFilterAttributes:
       description: Attributes of a resource filter.
       example:
@@ -41690,14 +43676,18 @@ components:
             $ref: '#/components/schemas/RumRetentionFilterData'
           type: array
       type: object
-    RunHistoricalJobRequest:
-      description: Run a historical job request.
+    RunRetentionFilterName:
+      description: The name of a RUM retention filter.
+      example: Retention filter for session
+      type: string
+    RunThreatHuntingJobRequest:
+      description: Run a threat hunting job request.
       properties:
         data:
-          $ref: '#/components/schemas/RunHistoricalJobRequestData'
+          $ref: '#/components/schemas/RunThreatHuntingJobRequestData'
       type: object
-    RunHistoricalJobRequestAttributes:
-      description: Run a historical job request.
+    RunThreatHuntingJobRequestAttributes:
+      description: Run a threat hunting job request.
       properties:
         fromRule:
           $ref: '#/components/schemas/JobDefinitionFromRule'
@@ -41707,25 +43697,21 @@ components:
         jobDefinition:
           $ref: '#/components/schemas/JobDefinition'
       type: object
-    RunHistoricalJobRequestData:
-      description: Data for running a historical job request.
+    RunThreatHuntingJobRequestData:
+      description: Data for running a threat hunting job request.
       properties:
         attributes:
-          $ref: '#/components/schemas/RunHistoricalJobRequestAttributes'
+          $ref: '#/components/schemas/RunThreatHuntingJobRequestAttributes'
         type:
-          $ref: '#/components/schemas/RunHistoricalJobRequestDataType'
+          $ref: '#/components/schemas/RunThreatHuntingJobRequestDataType'
       type: object
-    RunHistoricalJobRequestDataType:
+    RunThreatHuntingJobRequestDataType:
       description: Type of data.
       enum:
       - historicalDetectionsJobCreate
       type: string
       x-enum-varnames:
       - HISTORICALDETECTIONSJOBCREATE
-    RunRetentionFilterName:
-      description: The name of a RUM retention filter.
-      example: Retention filter for session
-      type: string
     SAMLAssertionAttribute:
       description: SAML assertion attribute.
       properties:
@@ -42099,6 +44085,184 @@ components:
           example: report_id
           type: string
       type: object
+    ScaRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/ScaRequestData'
+      type: object
+    ScaRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScaRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ScaRequestDataType'
+      required:
+      - type
+      type: object
+    ScaRequestDataAttributes:
+      properties:
+        commit:
+          $ref: '#/components/schemas/ScaRequestDataAttributesCommit'
+        dependencies:
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItems'
+          type: array
+        env:
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesFilesItems'
+          type: array
+        relations:
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesRelationsItems'
+          type: array
+        repository:
+          $ref: '#/components/schemas/ScaRequestDataAttributesRepository'
+        service:
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          type: object
+        vulnerabilities:
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesVulnerabilitiesItems'
+          type: array
+      type: object
+    ScaRequestDataAttributesCommit:
+      properties:
+        author_date:
+          type: string
+        author_email:
+          type: string
+        author_name:
+          type: string
+        branch:
+          type: string
+        committer_email:
+          type: string
+        committer_name:
+          type: string
+        sha:
+          type: string
+      type: object
+    ScaRequestDataAttributesDependenciesItems:
+      properties:
+        exclusions:
+          items:
+            type: string
+          type: array
+        group:
+          type: string
+        is_dev:
+          type: boolean
+        is_direct:
+          type: boolean
+        language:
+          type: string
+        locations:
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItems'
+          type: array
+        name:
+          type: string
+        package_manager:
+          type: string
+        purl:
+          type: string
+        reachable_symbol_properties:
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsReachableSymbolPropertiesItems'
+          type: array
+        version:
+          type: string
+      type: object
+    ScaRequestDataAttributesDependenciesItemsLocationsItems:
+      properties:
+        block:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition'
+        name:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition'
+        namespace:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition'
+        version:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition'
+      type: object
+    ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition:
+      properties:
+        end:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition'
+        file_name:
+          type: string
+        start:
+          $ref: '#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition'
+      type: object
+    ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition:
+      properties:
+        col:
+          format: int32
+          maximum: 2147483647
+          type: integer
+        line:
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    ScaRequestDataAttributesDependenciesItemsReachableSymbolPropertiesItems:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    ScaRequestDataAttributesFilesItems:
+      properties:
+        name:
+          type: string
+        purl:
+          type: string
+      type: object
+    ScaRequestDataAttributesRelationsItems:
+      properties:
+        depends_on:
+          items:
+            type: string
+          type: array
+        ref:
+          type: string
+      type: object
+    ScaRequestDataAttributesRepository:
+      properties:
+        url:
+          type: string
+      type: object
+    ScaRequestDataAttributesVulnerabilitiesItems:
+      properties:
+        affects:
+          items:
+            $ref: '#/components/schemas/ScaRequestDataAttributesVulnerabilitiesItemsAffectsItems'
+          type: array
+        bom_ref:
+          type: string
+        id:
+          type: string
+      type: object
+    ScaRequestDataAttributesVulnerabilitiesItemsAffectsItems:
+      properties:
+        ref:
+          type: string
+      type: object
+    ScaRequestDataType:
+      default: scarequests
+      enum:
+      - scarequests
+      example: scarequests
+      type: string
+      x-enum-varnames:
+      - SCAREQUESTS
     ScalarColumn:
       description: A single column in a scalar query response.
       oneOf:
@@ -42941,6 +45105,116 @@ components:
       - ISSUE_ASSIGNEE
       - ISSUE_CASE
       - ISSUE_TEAM_OWNERS
+    SecretRuleArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SecretRuleData'
+          type: array
+      required:
+      - data
+      type: object
+    SecretRuleData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecretRuleDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SecretRuleDataType'
+      required:
+      - type
+      type: object
+    SecretRuleDataAttributes:
+      properties:
+        default_included_keywords:
+          items:
+            type: string
+          type: array
+        description:
+          type: string
+        license:
+          type: string
+        match_validation:
+          $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidation'
+        name:
+          type: string
+        pattern:
+          type: string
+        priority:
+          type: string
+        sds_id:
+          type: string
+        validators:
+          items:
+            type: string
+          type: array
+      type: object
+    SecretRuleDataAttributesMatchValidation:
+      properties:
+        endpoint:
+          type: string
+        hosts:
+          items:
+            type: string
+          type: array
+        http_method:
+          type: string
+        invalid_http_status_code:
+          items:
+            $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidationInvalidHttpStatusCodeItems'
+          type: array
+        request_headers:
+          additionalProperties:
+            type: string
+          type: object
+        timeout_seconds:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        type:
+          type: string
+        valid_http_status_code:
+          items:
+            $ref: '#/components/schemas/SecretRuleDataAttributesMatchValidationValidHttpStatusCodeItems'
+          type: array
+      type: object
+    SecretRuleDataAttributesMatchValidationInvalidHttpStatusCodeItems:
+      properties:
+        end:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        start:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+      type: object
+    SecretRuleDataAttributesMatchValidationValidHttpStatusCodeItems:
+      properties:
+        end:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+        start:
+          format: int64
+          maximum: 1.8446744073709552e+19
+          minimum: 0
+          type: integer
+      type: object
+    SecretRuleDataType:
+      default: secret_rule
+      description: Secret rule resource type.
+      enum:
+      - secret_rule
+      example: secret_rule
+      type: string
+      x-enum-varnames:
+      - SECRET_RULE
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -43949,6 +46223,8 @@ components:
       - false_positive
       - testing_or_maintenance
       - investigated_case_opened
+      - true_positive_benign
+      - true_positive_malicious
       - other
       type: string
       x-enum-varnames:
@@ -43956,6 +46232,8 @@ components:
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
       - INVESTIGATED_CASE_OPENED
+      - TRUE_POSITIVE_BENIGN
+      - TRUE_POSITIVE_MALICIOUS
       - OTHER
     SecurityMonitoringSignalAssigneeUpdateAttributes:
       description: Attributes describing the new assignee of a security signal.
@@ -50432,6 +52710,130 @@ components:
           description: Offset type.
           type: string
       type: object
+    ThreatHuntingJobDataType:
+      description: Type of payload.
+      enum:
+      - historicalDetectionsJob
+      type: string
+      x-enum-varnames:
+      - HISTORICALDETECTIONSJOB
+    ThreatHuntingJobListMeta:
+      description: Metadata about the list of jobs.
+      properties:
+        totalCount:
+          description: Number of jobs in the list.
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    ThreatHuntingJobOptions:
+      description: Job options.
+      properties:
+        detectionMethod:
+          $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        impossibleTravelOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions'
+        keepAlive:
+          $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
+        maxSignalDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
+        newValueOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        sequenceDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
+        thirdPartyRuleOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
+      type: object
+    ThreatHuntingJobQuery:
+      description: Query for selecting logs analyzed by the threat hunting job.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
+        distinctFields:
+          description: Field for which the cardinality is measured. Sent as an array.
+          items:
+            description: Field.
+            type: string
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        hasOptionalGroupByFields:
+          default: false
+          description: When false, events without a group-by value are ignored by
+            the query. When true, events with missing group-by fields are processed
+            with `N/A`, replacing the missing values.
+          example: false
+          type: boolean
+        metrics:
+          description: Group of target fields to aggregate over when using the sum,
+            max, geo data, or new value aggregations. The sum, max, and geo data aggregations
+            only accept one value in this list, whereas the new value aggregation
+            accepts up to five values.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        query:
+          description: Query to run on logs.
+          example: a > 3
+          type: string
+      type: object
+    ThreatHuntingJobResponse:
+      description: Threat hunting job response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ThreatHuntingJobResponseData'
+      type: object
+    ThreatHuntingJobResponseAttributes:
+      description: Threat hunting job attributes.
+      properties:
+        createdAt:
+          description: Time when the job was created.
+          type: string
+        createdByHandle:
+          description: The handle of the user who created the job.
+          type: string
+        createdByName:
+          description: The name of the user who created the job.
+          type: string
+        createdFromRuleId:
+          description: ID of the rule used to create the job (if it is created from
+            a rule).
+          type: string
+        jobDefinition:
+          $ref: '#/components/schemas/JobDefinition'
+        jobName:
+          description: Job name.
+          type: string
+        jobStatus:
+          description: Job status.
+          type: string
+        modifiedAt:
+          description: Last modification time of the job.
+          type: string
+      type: object
+    ThreatHuntingJobResponseData:
+      description: Threat hunting job response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ThreatHuntingJobResponseAttributes'
+        id:
+          description: ID of the job.
+          type: string
+        type:
+          $ref: '#/components/schemas/ThreatHuntingJobDataType'
+      type: object
     TimeAggregation:
       description: 'Time aggregation period (in seconds) is used to aggregate the
         results of the notification rule evaluation.
@@ -51251,6 +53653,88 @@ components:
           description: The display name of the datastore.
           type: string
       type: object
+    UpdateConnectionRequest:
+      example:
+        data:
+          attributes:
+            fields_to_add:
+            - description: Net Promoter Score from customer surveys
+              display_name: NPS Score
+              groups:
+              - Satisfaction
+              - Metrics
+              id: nps_score
+              source_name: net_promoter_score
+              type: number
+            fields_to_delete:
+            - old_revenue_field
+            fields_to_update:
+            - field_id: lifetime_value
+              updated_display_name: Customer Lifetime Value (`USD`)
+              updated_groups:
+              - Financial
+              - Metrics
+          id: crm-integration
+          type: connection_id
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateConnectionRequestData'
+      type: object
+    UpdateConnectionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateConnectionRequestDataAttributes'
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateConnectionRequestDataType'
+      required:
+      - type
+      - id
+      type: object
+    UpdateConnectionRequestDataAttributes:
+      properties:
+        fields_to_add:
+          items:
+            $ref: '#/components/schemas/CreateConnectionRequestDataAttributesFieldsItems'
+          type: array
+        fields_to_delete:
+          items:
+            type: string
+          type: array
+        fields_to_update:
+          items:
+            $ref: '#/components/schemas/UpdateConnectionRequestDataAttributesFieldsToUpdateItems'
+          type: array
+      type: object
+    UpdateConnectionRequestDataAttributesFieldsToUpdateItems:
+      properties:
+        field_id:
+          example: ''
+          type: string
+        updated_description:
+          type: string
+        updated_display_name:
+          type: string
+        updated_field_id:
+          type: string
+        updated_groups:
+          items:
+            type: string
+          type: array
+      required:
+      - field_id
+      type: object
+    UpdateConnectionRequestDataType:
+      default: connection_id
+      description: Connection id resource type.
+      enum:
+      - connection_id
+      example: connection_id
+      type: string
+      x-enum-varnames:
+      - CONNECTION_ID
     UpdateCustomFrameworkRequest:
       description: Request object to update a custom framework.
       properties:
@@ -53527,6 +56011,842 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/unstable/fleet/agents:
+    get:
+      description: 'Retrieve a list of all available Datadog Agent versions.
+
+
+        This endpoint returns the available Agent versions that can be deployed to
+        your fleet.
+
+        These versions are used when creating deployments or configuring schedules
+        for
+
+        automated Agent upgrades.'
+      operationId: ListFleetAgentVersions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetAgentVersionsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List all available Agent versions
+      tags:
+      - Fleet Automation
+      x-menu-order: 0
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/deployments:
+    get:
+      description: 'Retrieve a list of all deployments for fleet automation.
+
+        Use the `page_size` and `page_offset` parameters to paginate results.'
+      operationId: ListFleetDeployments
+      parameters:
+      - description: Number of deployments to return per page. Maximum value is 100.
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          format: int64
+          maximum: 100
+          type: integer
+      - description: Index of the first deployment to return. Use this with `page_size`
+          to paginate through results.
+        in: query
+        name: page_offset
+        required: false
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List all deployments
+      tags:
+      - Fleet Automation
+      x-menu-order: 0
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/deployments/configure:
+    post:
+      description: "Create a new deployment to apply configuration changes\nto a fleet
+        of hosts matching the specified filter query.\n\nThis endpoint supports two
+        types of configuration operations:\n- `merge-patch`: Merges the provided patch
+        data with the existing configuration file,\n  creating the file if it doesn't
+        exist\n- `delete`: Removes the specified configuration file from the target
+        hosts\n\nThe deployment is created and started automatically. You can specify
+        multiple configuration\noperations that will be executed in order on each
+        target host. Use the filter query to target\nspecific hosts using the Datadog
+        query syntax."
+      operationId: CreateFleetDeploymentConfigure
+      requestBody:
+        content:
+          application/json:
+            examples:
+              add_log_integration:
+                summary: Add log integrations for multiple services
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: merge-patch
+                        file_path: /conf.d/postgres.d/logs.yaml
+                        patch:
+                          logs:
+                          - path: /var/log/postgres.log
+                            service: postgres1
+                            source: postgres
+                            type: file
+                      - file_op: merge-patch
+                        file_path: /conf.d/kafka.d/logs.yaml
+                        patch:
+                          logs:
+                          - path: /var/log/kafka.log
+                            service: kafka1
+                            source: kafka
+                            type: file
+                      filter_query: env:prod
+                    type: deployment
+              delete_config_file:
+                summary: Delete a configuration file
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: delete
+                        file_path: /conf.d/old-integration.yaml
+                      filter_query: env:dev
+                    type: deployment
+              enable_apm_and_logs:
+                summary: Enable APM and Logs products
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: merge-patch
+                        file_path: /datadog.yaml
+                        patch:
+                          apm_config:
+                            enabled: true
+                          log_level: debug
+                          logs_enabled: true
+                      filter_query: env:prod AND service:web
+                    type: deployment
+              simple_log_level:
+                summary: Set log level to info
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: merge-patch
+                        file_path: /datadog.yaml
+                        patch:
+                          log_level: info
+                      filter_query: env:staging
+                    type: deployment
+            schema:
+              $ref: '#/components/schemas/FleetDeploymentConfigureCreateRequest'
+        description: Request payload containing the deployment details.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create a configuration deployment
+      tags:
+      - Fleet Automation
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+        - fleet_policies_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/deployments/upgrade:
+    post:
+      description: 'Create and immediately start a new package upgrade
+
+        on hosts matching the specified filter query.
+
+
+        This endpoint allows you to upgrade the Datadog Agent to a specific version
+
+        on hosts matching the specified filter query.
+
+
+        The deployment is created and started automatically. The system will:
+
+        1. Identify all hosts matching the filter query
+
+        2. Validate that the specified version is available
+
+        3. Begin rolling out the package upgrade to the target hosts'
+      operationId: CreateFleetDeploymentUpgrade
+      requestBody:
+        content:
+          application/json:
+            examples:
+              upgrade_agent:
+                summary: Upgrade Datadog Agent to version 7.52.0
+                value:
+                  data:
+                    attributes:
+                      filter_query: env:prod AND service:web
+                      target_packages:
+                      - name: datadog-agent
+                        version: 7.52.0
+                    type: deployment
+              upgrade_multiple_packages:
+                summary: Upgrade multiple packages
+                value:
+                  data:
+                    attributes:
+                      filter_query: env:staging
+                      target_packages:
+                      - name: datadog-agent
+                        version: 7.52.0-1
+                      - name: datadog-apm-inject
+                        version: 0.10.0
+                    type: deployment
+            schema:
+              $ref: '#/components/schemas/FleetDeploymentPackageUpgradeCreateRequest'
+        description: Request payload containing the package upgrade details.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Upgrade hosts
+      tags:
+      - Fleet Automation
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+        - fleet_policies_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/deployments/{deployment_id}:
+    get:
+      description: "Retrieve detailed information about a specific deployment using
+        its unique identifier.\nThis endpoint returns comprehensive information about
+        a deployment, including:\n- Deployment metadata (ID, type, filter query)\n-
+        Total number of target hosts\n- Current high-level status (pending, running,
+        succeeded, failed)\n- Estimated completion time\n- Configuration operations
+        that were or are being applied\n- Detailed host list: A paginated array of
+        hosts included in this deployment with individual\n  host status, current
+        package versions, and any errors\n\nThe host list provides visibility into
+        the per-host execution status, allowing you to:\n- Monitor which hosts have
+        completed successfully\n- Identify hosts that are still in progress\n- Investigate
+        failures on specific hosts\n- View current package versions installed on each
+        host (including initial, target, and current\n  versions for each package)\n\nPagination:
+        Use the `limit` and `page` query parameters to paginate through hosts. The
+        response\nincludes pagination metadata in the `meta.hosts` field with information
+        about the current page,\ntotal pages, and total host count. The default page
+        size is 50 hosts, with a maximum of 100."
+      operationId: GetFleetDeployment
+      parameters:
+      - description: The unique identifier of the deployment to retrieve.
+        example: abc-def-ghi
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of hosts to return per page. Default is 50, maximum
+          is 100.
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          format: int64
+          maximum: 100
+          type: integer
+      - description: Page index for pagination (zero-based). Use this to retrieve
+          subsequent pages of hosts.
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a configuration deployment by ID
+      tags:
+      - Fleet Automation
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/deployments/{deployment_id}/cancel:
+    post:
+      description: 'Cancel an active deployment and stop all pending operations.
+
+        When you cancel a deployment:
+
+        - All pending operations on hosts that haven''t started yet are stopped
+
+        - Operations currently in progress on hosts may complete or be interrupted,
+        depending on their current state
+
+        - Configuration changes or package upgrades already applied to hosts are not
+        rolled back
+
+
+        After cancellation, you can view the final state of the deployment using the
+        GET endpoint to see which hosts
+
+        were successfully updated before the cancellation.'
+      operationId: CancelFleetDeployment
+      parameters:
+      - description: The unique identifier of the deployment to cancel.
+        example: abc-def-ghi
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deployment successfully canceled.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Cancel a deployment
+      tags:
+      - Fleet Automation
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+        - fleet_policies_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/schedules:
+    get:
+      description: 'Retrieve a list of all schedules for automated fleet deployments.
+
+
+        Schedules allow you to automate package upgrades by defining maintenance windows
+
+        and recurrence rules. Each schedule automatically creates deployments based
+        on its
+
+        configuration.'
+      operationId: ListFleetSchedules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetSchedulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List all schedules
+      tags:
+      - Fleet Automation
+      x-menu-order: 0
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Create a new schedule for automated package upgrades.
+
+
+        Schedules define when and how often to automatically deploy package upgrades
+        to a fleet
+
+        of hosts. Each schedule includes:
+
+        - A filter query to select target hosts
+
+        - A recurrence rule defining maintenance windows
+
+        - A version strategy (e.g., always latest, or N versions behind latest)
+
+
+        When the schedule triggers during a maintenance window, it automatically creates
+        a
+
+        deployment that upgrades the Datadog Agent to the specified version on all
+        matching hosts.'
+      operationId: CreateFleetSchedule
+      requestBody:
+        content:
+          application/json:
+            examples:
+              conservative_staging:
+                summary: Conservative staging updates (N-1 version)
+                value:
+                  data:
+                    attributes:
+                      name: Staging Environment - Conservative Updates
+                      query: env:staging
+                      rule:
+                        days_of_week:
+                        - Fri
+                        maintenance_window_duration: 240
+                        start_maintenance_window: '22:00'
+                        timezone: UTC
+                      status: active
+                      version_to_latest: 1
+                    type: schedule
+              weekly_production_update:
+                summary: Weekly production agent updates
+                value:
+                  data:
+                    attributes:
+                      name: Weekly Production Agent Updates
+                      query: env:prod
+                      rule:
+                        days_of_week:
+                        - Mon
+                        - Wed
+                        maintenance_window_duration: 180
+                        start_maintenance_window: 02:00
+                        timezone: America/New_York
+                      status: active
+                      version_to_latest: 0
+                    type: schedule
+            schema:
+              $ref: '#/components/schemas/FleetScheduleCreateRequest'
+        description: Request payload containing the schedule details.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetScheduleResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create a schedule
+      tags:
+      - Fleet Automation
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/schedules/{id}:
+    delete:
+      description: 'Delete a schedule permanently.
+
+
+        When you delete a schedule:
+
+        - The schedule is permanently removed and will no longer create deployments
+
+        - Any deployments already created by this schedule are not affected
+
+        - This action cannot be undone
+
+
+        If you want to temporarily stop a schedule from creating deployments, consider
+
+        updating its status to "inactive" instead of deleting it.'
+      operationId: DeleteFleetSchedule
+      parameters:
+      - description: The unique identifier of the schedule to delete.
+        example: abc-def-ghi-123
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Schedule successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete a schedule
+      tags:
+      - Fleet Automation
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: 'Retrieve detailed information about a specific schedule using
+        its unique identifier.
+
+
+        This endpoint returns comprehensive information about a schedule, including:
+
+        - Schedule metadata (ID, name, creation/update timestamps)
+
+        - Filter query for selecting target hosts
+
+        - Recurrence rule defining when deployments are triggered
+
+        - Version strategy for package upgrades
+
+        - Current status (active or inactive)'
+      operationId: GetFleetSchedule
+      parameters:
+      - description: The unique identifier of the schedule to retrieve.
+        example: abc-def-ghi-123
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetScheduleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a schedule by ID
+      tags:
+      - Fleet Automation
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: 'Partially update a schedule by providing only the fields you want
+        to change.
+
+
+        This endpoint allows you to modify specific attributes of a schedule without
+
+        affecting other fields. Common use cases include:
+
+        - Changing the schedule status between active and inactive
+
+        - Updating the maintenance window times
+
+        - Modifying the filter query to target different hosts
+
+        - Adjusting the version strategy
+
+
+        Only include the fields you want to update in the request body. All fields
+
+        are optional in a PATCH request.'
+      operationId: UpdateFleetSchedule
+      parameters:
+      - description: The unique identifier of the schedule to update.
+        example: abc-def-ghi-123
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              change_maintenance_window:
+                summary: Change maintenance window time
+                value:
+                  data:
+                    attributes:
+                      rule:
+                        days_of_week:
+                        - Mon
+                        - Wed
+                        - Fri
+                        maintenance_window_duration: 240
+                        start_maintenance_window: 03:00
+                        timezone: America/New_York
+                    type: schedule
+              pause_schedule:
+                summary: Pause a schedule
+                value:
+                  data:
+                    attributes:
+                      status: inactive
+                    type: schedule
+              update_query:
+                summary: Update target hosts query
+                value:
+                  data:
+                    attributes:
+                      query: env:prod AND service:api
+                    type: schedule
+            schema:
+              $ref: '#/components/schemas/FleetSchedulePatchRequest'
+        description: Request payload containing the fields to update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetScheduleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update a schedule
+      tags:
+      - Fleet Automation
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/schedules/{id}/trigger:
+    post:
+      description: 'Manually trigger a schedule to immediately create and start a
+        deployment.
+
+
+        This endpoint allows you to manually initiate a deployment using the schedule''s
+
+        configuration, without waiting for the next scheduled maintenance window.
+        This is
+
+        useful for:
+
+        - Testing a schedule before it runs automatically
+
+        - Performing an emergency update outside the regular maintenance window
+
+        - Creating an ad-hoc deployment with the same settings as a schedule
+
+
+        The deployment is created immediately with:
+
+        - The same filter query as the schedule
+
+        - The package version determined by the schedule''s version strategy
+
+        - All matching hosts as targets
+
+
+        The manually triggered deployment is independent of the schedule and does
+        not
+
+        affect the schedule''s normal recurrence pattern.'
+      operationId: TriggerFleetSchedule
+      parameters:
+      - description: The unique identifier of the schedule to trigger.
+        example: abc-def-ghi-123
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentResponse'
+          description: CREATED - Deployment successfully created and started.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Trigger a schedule deployment
+      tags:
+      - Fleet Automation
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/actions-datastores:
     get:
       description: Lists all datastores for the organization.
@@ -54325,7 +57645,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_findings_read
-      summary: List AWS Scan Options
+      summary: List AWS scan options
       tags:
       - Agentless Scanning
       x-menu-order: 1
@@ -54359,7 +57679,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Post AWS Scan Options
+      summary: Create AWS scan options
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
@@ -54386,7 +57706,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Delete AWS Scan Options
+      summary: Delete AWS scan options
       tags:
       - Agentless Scanning
       x-menu-order: 5
@@ -54447,7 +57767,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Patch AWS Scan Options
+      summary: Update AWS scan options
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
@@ -54470,7 +57790,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_findings_read
-      summary: List azure scan options
+      summary: List Azure scan options
       tags:
       - Agentless Scanning
       x-menu-order: 6
@@ -54497,7 +57817,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Create azure scan options
+      summary: Create Azure scan options
       tags:
       - Agentless Scanning
       x-menu-order: 7
@@ -54523,7 +57843,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Delete azure scan options
+      summary: Delete Azure scan options
       tags:
       - Agentless Scanning
       x-menu-order: 10
@@ -54593,7 +57913,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Update azure scan options
+      summary: Update Azure scan options
       tags:
       - Agentless Scanning
       x-menu-order: 9
@@ -54617,7 +57937,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_findings_read
-      summary: List GCP Scan Options
+      summary: List GCP scan options
       tags:
       - Agentless Scanning
       x-menu-order: 11
@@ -54651,7 +57971,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Post GCP Scan Options
+      summary: Create GCP scan options
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
@@ -54684,7 +58004,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Delete GCP Scan Options
+      summary: Delete GCP scan options
       tags:
       - Agentless Scanning
       x-menu-order: 15
@@ -54761,7 +58081,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Patch GCP Scan Options
+      summary: Update GCP scan options
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
@@ -54786,7 +58106,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_findings_read
-      summary: Get AWS On Demand tasks
+      summary: List AWS on demand tasks
       tags:
       - Agentless Scanning
       x-menu-order: 16
@@ -54824,7 +58144,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - org_management
-      summary: Post an AWS on demand task
+      summary: Create AWS on demand task
       tags:
       - Agentless Scanning
       x-codegen-request-body-name: body
@@ -54859,7 +58179,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_findings_read
-      summary: Get AWS On Demand task by id
+      summary: Get AWS on demand task
       tags:
       - Agentless Scanning
       x-menu-order: 18
@@ -57654,6 +60974,27 @@ paths:
       - Software Catalog
       x-codegen-request-body-name: body
       x-menu-order: 2
+  /api/v2/catalog/entity/preview:
+    post:
+      operationId: PreviewCatalogEntities
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityResponseArray'
+          description: Accepted
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Preview catalog entities
+      tags:
+      - Software Catalog
+      x-menu-order: 3.5
   /api/v2/catalog/entity/{entity_id}:
     delete:
       description: Delete a single entity in Software Catalog.
@@ -61663,8 +65004,12 @@ paths:
       description: "This endpoint allows you to publish events.\n\n**Note:** To utilize
         this endpoint with our client libraries, please ensure you are using the latest
         version released on or after July 1, 2025. Earlier versions do not support
-        this functionality.\n\n\u2705 **Only events with the `change` or `alert` category**
-        are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking)
+        this functionality.\n\n**Important:** Upgrade to the latest client library
+        version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`.
+        Older client library versions of the Post an event (v2) API send requests
+        to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n\u2705 **Only
+        events with the `change` or `alert` category** are in General Availability.
+        For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking)
         for more details.\n\n\u274C For use cases involving other event categories,
         use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n\u274C
         Notifications are not yet supported for events sent to this endpoint. Use
@@ -63340,8 +66685,9 @@ paths:
       description: Get a list of AWS Account Integration Configs.
       operationId: ListAWSAccounts
       parameters:
-      - description: Optional query parameter to filter accounts by AWS Account ID.
-          If not provided, all accounts are returned.
+      - description: 'Optional query parameter to filter accounts by AWS Account ID.
+
+          If not provided, all accounts are returned.'
         example: '123456789012'
         in: query
         name: aws_account_id
@@ -63512,6 +66858,99 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_read
+  /api/v2/integration/aws/event_bridge:
+    delete:
+      description: Delete an Amazon EventBridge source.
+      operationId: DeleteAWSEventBridgeSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSEventBridgeDeleteRequest'
+        description: Delete the Amazon EventBridge source with the given name, region,
+          and associated AWS account.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeDeleteResponse'
+          description: Amazon EventBridge source deleted.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an Amazon EventBridge source
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
+    get:
+      description: Get all Amazon EventBridge sources.
+      operationId: ListAWSEventBridgeSources
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeListResponse'
+          description: Amazon EventBridge sources list.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all Amazon EventBridge sources
+      tags:
+      - AWS Integration
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
+    post:
+      description: Create an Amazon EventBridge source.
+      operationId: CreateAWSEventBridgeSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSEventBridgeCreateRequest'
+        description: Create an Amazon EventBridge source for an AWS account with a
+          given name and region.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeCreateResponse'
+          description: Amazon EventBridge source created.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an Amazon EventBridge source
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
   /api/v2/integration/aws/generate_new_external_id:
     post:
       description: Generate a new external ID for AWS role-based authentication.
@@ -70397,6 +73836,308 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
+  /api/v2/product-analytics/accounts/facet_info:
+    post:
+      description: Get facet information for account attributes including possible
+        values and counts
+      operationId: GetAccountFacetInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FacetInfoRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacetInfoResponse'
+          description: Successful response with facet information
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get account facet info
+      tags:
+      - Rum Audience Management
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/accounts/query:
+    post:
+      description: Query accounts with flexible filtering by account properties
+      operationId: QueryAccounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryAccountRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+          description: Successful response with account data
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Query accounts
+      tags:
+      - Rum Audience Management
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/users/event_filtered_query:
+    post:
+      description: Query users filtered by both user properties and event platform
+        data
+      operationId: QueryEventFilteredUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryEventFilteredUsersRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+          description: Successful response with filtered user data
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Query event filtered users
+      tags:
+      - Rum Audience Management
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/users/facet_info:
+    post:
+      description: Get facet information for user attributes including possible values
+        and counts
+      operationId: GetUserFacetInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FacetInfoRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacetInfoResponse'
+          description: Successful response with facet information
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get user facet info
+      tags:
+      - Rum Audience Management
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/users/query:
+    post:
+      description: Query users with flexible filtering by user properties, with optional
+        wildcard search
+      operationId: QueryUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryUsersRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+          description: Successful response with user data
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Query users
+      tags:
+      - Rum Audience Management
+      x-menu-order: 8
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/{entity}/mapping:
+    get:
+      description: Get entity mapping configuration including all available attributes
+        and their properties
+      operationId: GetMapping
+      parameters:
+      - description: The entity for which to get the mapping
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMappingResponse'
+          description: Successful response with entity mapping configuration
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get mapping
+      tags:
+      - Rum Audience Management
+      x-menu-order: 10
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/{entity}/mapping/connection:
+    post:
+      description: Create a new data connection and its fields for an entity
+      operationId: CreateConnection
+      parameters:
+      - description: The entity for which to create the connection
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectionRequest'
+        required: true
+      responses:
+        '201':
+          description: Connection created successfully
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create connection
+      tags:
+      - Rum Audience Management
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+    put:
+      description: Update an existing data connection by adding, updating, or deleting
+        fields
+      operationId: UpdateConnection
+      parameters:
+      - description: The entity for which to update the connection
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectionRequest'
+        required: true
+      responses:
+        '200':
+          description: Connection updated successfully
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update connection
+      tags:
+      - Rum Audience Management
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/{entity}/mapping/connection/{id}:
+    delete:
+      description: Delete an existing data connection for an entity
+      operationId: DeleteConnection
+      parameters:
+      - description: The connection ID to delete
+        in: path
+        name: id
+        required: true
+        schema:
+          example: connection-id-123
+          type: string
+      - description: The entity for which to delete the connection
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      responses:
+        '204':
+          description: Connection deleted successfully
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete connection
+      tags:
+      - Rum Audience Management
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/{entity}/mapping/connections:
+    get:
+      description: List all data connections for an entity
+      operationId: ListConnections
+      parameters:
+      - description: The entity for which to list connections
+        in: path
+        name: entity
+        required: true
+        schema:
+          example: users
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConnectionsResponse'
+          description: Successful response with list of connections
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List connections
+      tags:
+      - Rum Audience Management
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/query/scalar:
     post:
       description: 'Query scalar values (as seen on Query Value, Table, and Toplist
@@ -70490,7 +74231,7 @@ paths:
       - description: Number of tables to return.
         example: 15
         in: query
-        name: limit
+        name: page[limit]
         required: false
         schema:
           default: 15
@@ -70501,7 +74242,7 @@ paths:
       - description: Number of tables to skip for pagination.
         example: 0
         in: query
-        name: offset
+        name: page[offset]
         required: false
         schema:
           default: 0
@@ -71714,6 +75455,8 @@ paths:
 
         - On-Call Team Routing Rules: `on-call-team-routing-rules`
 
+        - Logs Pipelines: `logs-pipeline`
+
 
         #### Supported relations for resources
 
@@ -71763,7 +75506,9 @@ paths:
 
         On-Call Escalation Policies | `viewer`, `editor`
 
-        On-Call Team Routing Rules  | `viewer`, `editor`'
+        On-Call Team Routing Rules  | `viewer`, `editor`
+
+        Logs Pipelines              | `viewer`, `processors_editor`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -77611,7 +81356,7 @@ paths:
         permissions:
         - incident_settings_write
       x-unstable: '**Note**: This endpoint is deprecated.'
-  /api/v2/siem-historical-detections/histsignals:
+  /api/v2/siem-threat-hunting/histsignals:
     get:
       description: List hist signals.
       operationId: ListSecurityMonitoringHistsignals
@@ -77653,7 +81398,7 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/histsignals/search:
+  /api/v2/siem-threat-hunting/histsignals/search:
     get:
       description: Search hist signals.
       operationId: SearchSecurityMonitoringHistsignals
@@ -77694,12 +81439,12 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/histsignals/{histsignal_id}:
+  /api/v2/siem-threat-hunting/histsignals/{histsignal_id}:
     get:
       description: Get a hist signal's details.
       operationId: GetSecurityMonitoringHistsignal
       parameters:
-      - $ref: '#/components/parameters/HistoricalSignalID'
+      - $ref: '#/components/parameters/ThreatHuntingSignalID'
       responses:
         '200':
           content:
@@ -77731,10 +81476,10 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs:
+  /api/v2/siem-threat-hunting/jobs:
     get:
-      description: List historical jobs.
-      operationId: ListHistoricalJobs
+      description: List threat hunting jobs.
+      operationId: ListThreatHuntingJobs
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
@@ -77757,7 +81502,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListHistoricalJobsResponse'
+                $ref: '#/components/schemas/ListThreatHuntingJobsResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -77769,7 +81514,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: List historical jobs
+      summary: List threat hunting jobs
       tags:
       - Security Monitoring
       x-menu-order: 20
@@ -77777,13 +81522,13 @@ paths:
 
         Please check the documentation regularly for updates.'
     post:
-      description: Run a historical job.
-      operationId: RunHistoricalJob
+      description: Run a threat hunting job.
+      operationId: RunThreatHuntingJob
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RunHistoricalJobRequest'
+              $ref: '#/components/schemas/RunThreatHuntingJobRequest'
         required: true
       responses:
         '201':
@@ -77807,7 +81552,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_rules_write
-      summary: Run a historical job
+      summary: Run a threat hunting job
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
@@ -77819,7 +81564,7 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs/signal_convert:
+  /api/v2/siem-threat-hunting/jobs/signal_convert:
     post:
       description: Convert a job result to a signal.
       operationId: ConvertJobResultToSignal
@@ -77854,12 +81599,12 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs/{job_id}:
+  /api/v2/siem-threat-hunting/jobs/{job_id}:
     delete:
       description: Delete an existing job.
-      operationId: DeleteHistoricalJob
+      operationId: DeleteThreatHuntingJob
       parameters:
-      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/ThreatHuntingJobID'
       responses:
         '204':
           description: OK
@@ -77888,15 +81633,15 @@ paths:
         Please check the documentation regularly for updates.'
     get:
       description: Get a job's details.
-      operationId: GetHistoricalJob
+      operationId: GetThreatHuntingJob
       parameters:
-      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/ThreatHuntingJobID'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HistoricalJobResponse'
+                $ref: '#/components/schemas/ThreatHuntingJobResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -77922,12 +81667,12 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs/{job_id}/cancel:
+  /api/v2/siem-threat-hunting/jobs/{job_id}/cancel:
     patch:
-      description: Cancel a historical job.
-      operationId: CancelHistoricalJob
+      description: Cancel a threat hunting job.
+      operationId: CancelThreatHuntingJob
       parameters:
-      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/ThreatHuntingJobID'
       responses:
         '204':
           description: OK
@@ -77948,7 +81693,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_rules_write
-      summary: Cancel a historical job
+      summary: Cancel a threat hunting job
       tags:
       - Security Monitoring
       x-menu-order: 22
@@ -77959,12 +81704,12 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
 
         Please check the documentation regularly for updates.'
-  /api/v2/siem-historical-detections/jobs/{job_id}/histsignals:
+  /api/v2/siem-threat-hunting/jobs/{job_id}/histsignals:
     get:
       description: Get a job's hist signals.
       operationId: GetSecurityMonitoringHistsignalsByJobId
       parameters:
-      - $ref: '#/components/parameters/HistoricalJobID'
+      - $ref: '#/components/parameters/ThreatHuntingJobID'
       - $ref: '#/components/parameters/QueryFilterSearch'
       - $ref: '#/components/parameters/QueryFilterFrom'
       - $ref: '#/components/parameters/QueryFilterTo'
@@ -78397,6 +82142,111 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.data.attributes.page.limit
         resultsPath: data
+  /api/v2/static-analysis-sca/dependencies:
+    post:
+      operationId: CreateSCAResult
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScaRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: Post dependencies for analysis
+      tags:
+      - Static Analysis
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis-sca/vulnerabilities/resolve-vulnerable-symbols:
+    post:
+      operationId: CreateSCAResolveVulnerableSymbols
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolveVulnerableSymbolsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolveVulnerableSymbolsResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: POST request to resolve vulnerable symbols
+      tags:
+      - Static Analysis
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis/rulesets:
+    post:
+      description: Get rules for multiple rulesets in batch.
+      operationId: ListMultipleRulesets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMultipleRulesetsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMultipleRulesetsResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: Ruleset get multiple
+      tags:
+      - Security Monitoring
+      x-menu-order: 28
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis/secrets/rules:
+    get:
+      description: Returns list of Secrets rules with ID, Pattern, Description, Priority,
+        and SDS ID
+      operationId: GetSecretsRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretRuleArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: Returns list of Secrets rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 28
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
       description: Get the on-demand concurrency cap.
@@ -80334,8 +84184,8 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
-          `cloud_siem`,
+          `application_security`, `audit_trail`, `bits_ai`, `serverless`, `ci_app`,
+          `cloud_cost_management`, `cloud_siem`,
 
           `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
           `cws`, `dbm`, `error_tracking`,
@@ -81708,6 +85558,27 @@ tags:
     through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/)
     for more information.
   name: Fastly Integration
+- description: 'Manage automated deployments across your fleet of hosts.
+
+
+    Fleet Automation provides two types of deployments:
+
+
+    Configuration Deployments (`/configure`):
+
+    - Apply configuration file changes to target hosts
+
+    - Support merge-patch operations to update specific configuration fields
+
+    - Support delete operations to remove configuration files
+
+    - Useful for updating Datadog Agent settings, integration configs, and more
+
+
+    Package Upgrade Deployments (`/upgrade`):
+
+    - Upgrade the Datadog Agent to specific versions'
+  name: Fleet Automation
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
     through the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform).'
@@ -81928,7 +85799,7 @@ tags:
     aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
     for more information
   name: RUM
-- description: Auto-generated tag Reference Tables
+- description: View and manage Reference Tables in your organization.
   name: Reference Tables
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
@@ -81954,6 +85825,8 @@ tags:
 
     [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
   name: Roles
+- description: Auto-generated tag Rum Audience Management
+  name: Rum Audience Management
 - description: Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics)
     for your organization.
   externalDocs:
@@ -82025,6 +85898,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/metrics/metrics_namespace/
   name: Spans Metrics
+- description: API for static analysis
+  name: Static Analysis
 - description: "Datadog Synthetics uses simulated user requests and browser rendering
     to help you ensure uptime,\nidentify regional issues, and track your application
     performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand
