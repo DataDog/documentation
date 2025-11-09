@@ -552,5 +552,14 @@ export default {
     ap1: 'config.ap1.datadoghq.com',
     ap2: 'violet.intake.ap2.datadoghq.com',
     gov: 'config.ddog-gov.com'
+  },
+  org_management_max_session_duration: {
+    us: '720 hours (30 days)',
+    us3: '720 hours (30 days)',
+    us5: '720 hours (30 days)',
+    eu: '720 hours (30 days)',
+    ap1: '720 hours (30 days)',
+    ap2: '720 hours (30 days)',
+    gov: '12 hours'
   }
 };
