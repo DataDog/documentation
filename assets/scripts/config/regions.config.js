@@ -47,6 +47,7 @@ export default {
   },
   tcp_endpoint: {
     us: 'agent-intake.logs.datadoghq.com',
+    us3: 'The US3 TCP endpoint is not supported.',
     us5: 'The US5 TCP endpoint is not supported.',
     eu: 'agent-intake.logs.datadoghq.eu',
     ap1: 'The AP1 endpoint is not supported.',
@@ -68,6 +69,15 @@ export default {
     ap1: 'The AP1 endpoint is not supported.',
     ap2: 'The AP2 endpoint is not supported.',
     gov: 'The GOV TCP endpoint port is not supported.'
+  },
+  hipaa_logs_legacy: {
+    us: 'tcp-encrypted-intake.logs.datadoghq.com<br>lambda-tcp-encrypted-intake.logs.datadoghq.com<br>gcp-encrypted-intake.logs.datadoghq.com<br>http-encrypted-intake.logs.datadoghq.com',
+    us3: 'lambda-tcp-encrypted-intake.logs.us3.datadoghq.com<br>gcp-encrypted-intake.logs.us3.datadoghq.com<br>http-encrypted-intake.logs.us3.datadoghq.com',
+    us5: 'lambda-tcp-encrypted-intake.logs.us5.datadoghq.com<br>gcp-encrypted-intake.logs.us5.datadoghq.com<br>http-encrypted-intake.logs.us5.datadoghq.com',
+    eu: 'tcp-encrypted-intake.logs.datadoghq.eu<br>lambda-tcp-encrypted-intake.logs.datadoghq.eu<br>gcp-encrypted-intake.logs.datadoghq.eu<br>http-encrypted-intake.logs.datadoghq.eu',
+    ap1: 'N/A',
+    ap2: 'N/A',
+    gov: 'lambda-tcp-encrypted-intake.logs.ddog-gov.com<br>gcp-encrypted-intake.logs.ddog-gov.com<br>http-encrypted-intake.logs.ddog-gov.com'
   },
   web_integrations_endpoint: {
     us: 'intake.logs.datadoghq.com',
