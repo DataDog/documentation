@@ -18,35 +18,34 @@ This page explains how to configure the Datadog Agent to enable End User Device 
 ## Configure the Datadog Agent
 
 1. Install the Datadog Agent:
-   - [Windows installation instructions][9]
-   - [macOS installation instructions][10]
+   - [Windows installation instructions][1]
+   - [macOS installation instructions][2]
 1. In `datadog.yaml`, set the following parameter:
 {{< code-block lang="yaml" >}}
-   infrastructure_mode: end_user_device
+infrastructure_mode: end_user_device
 {{< /code-block >}}
-1. [Restart the Datadog Agent][7].
+
+1. [Restart the Datadog Agent][3].
 
 ## Enable related features and integrations
 
 To collect additional data from monitored devices, enable one or more of the following features or integrations:
 
-- [Live Processes][2]
-- [Logs][3]
-- [WiFi/WLAN integration][4]
-- [Crash Detection integration][5]
-- [Network Path integration][6]
+- [Live Processes][4]
+- [Logs][5]
+- [WiFi/WLAN integration][6]
+- [Crash Detection integration][7]
+- [Network Path integration][8]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: /infrastructure/process/
-[3]: /logs/
-[4]: /integrations/wifi/
-[5]: /integrations/crash_detection/
-[6]: /integrations/network_path/
-[7]: /agent/configuration/agent-commands/#restart-the-agent
-[8]: https://app.datadoghq.com/infrastructure
-[9]: /agent/supported_platforms/windows/
-[10]: /agent/supported_platforms/osx/
+[1]: /agent/supported_platforms/windows/
+[2]: /agent/supported_platforms/osx/
+[3]: /agent/configuration/agent-commands/#restart-the-agent
+[4]: /infrastructure/process/
+[5]: /logs/
+[6]: /integrations/wifi/
+[7]: /integrations/crash_detection/
+[8]: /integrations/network_path/
