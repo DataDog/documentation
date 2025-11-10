@@ -24,12 +24,16 @@ Sensitive Data Scanner in the Cloud scans telemetry data, such as your applicati
 - **RUM**: Event attribute values only
 - **Events**: Event attribute values only
 
+Optionally, sampling rates can be set between 10% and 99% for each product. This helps manage costs when you first get started by reducing the amount of data that gets scanned for sensitive information.
+
 For each scanning rule, one of the following actions can be applied to matched sensitive data:
 
 - **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
 - **Partially redact**: Replace a specific portion of all matching values.
 - **Hash**: Replace the entire matched data with a non-reversible unique identifier.
 - **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
+
+**Note**: When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
 
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
@@ -318,5 +322,5 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [11]: https://app.datadoghq.com/logs/pipelines
 [12]: /observability_pipelines/
 [13]: /observability_pipelines/processors/sensitive_data_scanner/
-[14]: /observability_pipelines/set_up_pipelines/
+[14]: /observability_pipelines/configuration/set_up_pipelines/
 [15]: /security/sensitive_data_scanner/scanning_rules/library_rules/

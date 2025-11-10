@@ -75,7 +75,7 @@ If you're curious how App and API Protection is structured and how it uses traci
 
 ## Configure your environment
 
-Powered by provided [out-of-the-box rules][4], AAP detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, setup only requires setting one environment variable to get started.
+Powered by provided [out-of-the-box rules][4], AAP detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, [setup][16] only requires setting one environment variable to get started.
 
 To start configuring your environment to detect and protect threats with AAP, follow the enabling documentation for each product. Once AAP is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
 
@@ -126,4 +126,5 @@ For information on disabling AAP or its features, see the following:
 [13]: /security/application_security/exploit-prevention/#library-compatibility
 [14]: /security/application_security/exploit-prevention/
 [15]: /security/application_security/waf-integration/
+[16]: /security/application_security/setup/
 

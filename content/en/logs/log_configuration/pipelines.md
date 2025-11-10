@@ -35,7 +35,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to cloud-based logging environments. To aggregate, process, and route on-premises logs, see <a href="https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/">Observability Pipelines</a>.</div>
+<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to cloud-based logging environments. To aggregate, process, and route on-premises logs, see <a href="https://docs.datadoghq.com/observability_pipelines/configuration/set_up_pipelines/">Observability Pipelines</a>.</div>
 
 Datadog automatically [parses][1] JSON-formatted logs. You can then add value to all your logs (raw and JSON) by sending them through a processing pipeline. Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog. Implementing a log pipelines and processing strategy is beneficial as it introduces an [attribute naming convention][2] for your organization.
 
@@ -128,7 +128,11 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 #### Message attribute
 
-By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [Log Explorer][1], where it is indexed for [full text search][2].
+By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [Log Explorer][1], where it is indexed for [full text search][2]. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the log's official message:
+
+* `message`
+* `msg`
+* `log`
 
 Specify alternate attributes to use as the source of a log's message by setting a [log message remapper processor][3].
 
@@ -160,6 +164,7 @@ Using the Datadog Agent or the RFC5424 format automatically sets the service val
 
 * `service`
 * `syslog.appname`
+* `dd.service`
 
 Specify alternate attributes to use as the source of a log's service by setting a [log service remapper processor][1].
 
@@ -174,6 +179,8 @@ By default, [Datadog tracers can automatically inject trace and span IDs into yo
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
+* `named_tags.dd.trace_id`
+* `trace_id`
 
 Specify alternate attributes to use as the source of a log's trace ID by setting a [trace ID remapper processor][2].
 
@@ -190,6 +197,8 @@ By default, Datadog tracers can [automatically inject span IDs into your logs][1
 
 * `dd.span_id`
 * `contextMap.dd.span_id`
+* `named_tags.dd.span_id`
+* `span_id`
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
 {{% /tab %}}

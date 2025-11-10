@@ -64,12 +64,20 @@ components:
           additionalProperties:
             description: A list of additional properties.
             type: boolean
-          description: 'An object, (in the form `{"namespace1":true/false, "namespace2":true/false}`),
+          description: 'An object (in the form `{"namespace1":true/false, "namespace2":true/false}`)
+            containing user-supplied overrides
 
-            that enables or disables metric collection for specific AWS namespaces
-            for this
+            for AWS namespace metric collection. **Important**: This field only contains
+            namespaces explicitly configured through API calls,
 
-            AWS account only.'
+            not the comprehensive enabled or disabled status of all namespaces. If
+            a namespace is absent from this field, it uses Datadog''s
+
+            internal defaults (all namespaces enabled by default, except `AWS/SQS`,
+            `AWS/ElasticMapReduce`, and `AWS/Usage`).
+
+            For a complete view of all namespace statuses, use the V2 AWS Integration
+            API instead.'
           example:
             auto_scaling: false
             opswork: false
@@ -2983,6 +2991,7 @@ components:
       - ci_pipelines
       - incident_analytics
       - product_analytics
+      - on_call_events
       example: logs
       type: string
       x-enum-varnames:
@@ -2998,6 +3007,7 @@ components:
       - CI_PIPELINES
       - INCIDENT_ANALYTICS
       - PRODUCT_ANALYTICS
+      - ON_CALL_EVENTS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -20988,6 +20998,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        bits_ai_investigations_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         browser_rum_lite_session_count_sum:
           deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
@@ -21535,6 +21550,11 @@ components:
             hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        on_call_seat_hwm:
+          description: Shows the high-water mark of On-Call seats over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
             date for all organizations.
@@ -22074,6 +22094,11 @@ components:
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for the given org.
+          format: int64
+          type: integer
+        bits_ai_investigations_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
@@ -22632,6 +22657,11 @@ components:
             hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        on_call_seat_hwm:
+          description: Shows the high-water mark of On-Call seats over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
             date for the given org.
@@ -23171,6 +23201,11 @@ components:
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current month for all organizations.
+          format: int64
+          type: integer
+        bits_ai_investigations_agg_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current month for all organizations.
           format: int64
           type: integer
         browser_rum_lite_session_count_agg_sum:
@@ -23748,6 +23783,11 @@ components:
         oci_host_top99p_sum:
           description: Shows the 99th percentile of Oracle Cloud Infrastructure hosts
             over all hours in the current months for all organizations
+          format: int64
+          type: integer
+        on_call_seat_hwm_sum:
+          description: Shows the sum of the high-water marks of On-Call seats over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         online_archive_events_count_agg_sum:
@@ -28546,8 +28586,9 @@ paths:
   /api/v1/integration/aws:
     delete:
       deprecated: true
-      description: Delete a Datadog-AWS integration matching the specified `account_id`
-        and `role_name parameters`.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Delete a Datadog-AWS integration matching the specified `account_id` and `role_name
+        parameters`.'
       operationId: DeleteAWSAccount
       requestBody:
         content:
@@ -28594,7 +28635,8 @@ paths:
         - aws_configurations_manage
     get:
       deprecated: true
-      description: List all Datadog-AWS integrations available in your Datadog organization.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        List all Datadog-AWS integrations available in your Datadog organization.'
       operationId: ListAWSAccounts
       parameters:
       - description: Only return AWS accounts that matches this `account_id`.
@@ -28646,7 +28688,8 @@ paths:
         - aws_configuration_read
     post:
       deprecated: true
-      description: 'Create a Datadog-Amazon Web Services integration.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Create a Datadog-Amazon Web Services integration.
 
         Using the `POST` method updates your integration configuration
 
@@ -28699,7 +28742,8 @@ paths:
         - aws_configurations_manage
     put:
       deprecated: true
-      description: Update a Datadog-Amazon Web Services integration.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Update a Datadog-Amazon Web Services integration.'
       operationId: UpdateAWSAccount
       parameters:
       - description: Only return AWS accounts that matches this `account_id`.
@@ -28770,8 +28814,9 @@ paths:
   /api/v1/integration/aws/available_namespace_rules:
     get:
       deprecated: true
-      description: List all namespace rules for a given Datadog-AWS integration. This
-        endpoint takes no arguments.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        List all namespace rules for a given Datadog-AWS integration. This endpoint
+        takes no arguments.'
       operationId: ListAvailableAWSNamespaces
       responses:
         '200':
@@ -28805,7 +28850,8 @@ paths:
   /api/v1/integration/aws/event_bridge:
     delete:
       deprecated: true
-      description: Delete an Amazon EventBridge source.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Delete an Amazon EventBridge source.'
       operationId: DeleteAWSEventBridgeSource
       requestBody:
         content:
@@ -28847,7 +28893,8 @@ paths:
         - manage_integrations
     get:
       deprecated: true
-      description: Get all Amazon EventBridge sources.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Get all Amazon EventBridge sources.'
       operationId: ListAWSEventBridgeSources
       parameters: []
       responses:
@@ -28880,7 +28927,8 @@ paths:
         permissions: []
     post:
       deprecated: true
-      description: Create an Amazon EventBridge source.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Create an Amazon EventBridge source.'
       operationId: CreateAWSEventBridgeSource
       requestBody:
         content:
@@ -29053,8 +29101,8 @@ paths:
   /api/v1/integration/aws/generate_new_external_id:
     put:
       deprecated: true
-      description: Generate a new AWS external ID for a given AWS account ID and role
-        name pair.
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Generate a new AWS external ID for a given AWS account ID and role name pair.'
       operationId: CreateNewAWSExternalID
       requestBody:
         content:
@@ -29286,9 +29334,10 @@ paths:
   /api/v1/integration/aws/logs/services:
     get:
       deprecated: true
-      description: Get the list of current AWS services that Datadog offers automatic
-        log collection. Use returned service IDs with the services parameter for the
-        Enable an AWS service log collection API endpoint.
+      description: '**This endpoint is deprecated - use the V2 endpoint instead.**
+        Get the list of current AWS services that Datadog offers automatic log collection.
+        Use returned service IDs with the services parameter for the Enable an AWS
+        service log collection API endpoint.'
       operationId: ListAWSLogsServices
       responses:
         '200':
@@ -33349,7 +33398,11 @@ paths:
         - timeseries_query
   /api/v1/search:
     get:
-      description: Search for metrics from the last 24 hours in Datadog.
+      deprecated: true
+      description: '**Note**: This endpoint is deprecated. Use `/api/v2/metrics` instead.
+
+
+        Search for metrics from the last 24 hours in Datadog.'
       operationId: ListMetrics
       parameters:
       - description: Query string to search metrics upon. Can optionally be prefixed

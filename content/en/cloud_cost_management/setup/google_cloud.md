@@ -135,6 +135,12 @@ Continue to follow the steps indicated in [Setup & Configuration][3].
 
 **Note**: Data can take 48 to 72 hours after setup to stabilize in Datadog.
 
+### Getting historical data
+
+Newly created BigQuery billing export datasets only contain the most recent 2 months of data. It can take a day or two for this data to backfill in BigQuery. Datadog automatically ingests up to 15 months of available historical cost data once it appears in the BigQuery table.
+
+Google Cloud does not provide a process for backfilling additional historical data beyond the 2 months automatically included when the BigQuery export is first created.
+
 ## Cost types
 You can visualize your ingested data using the following cost types:
 
