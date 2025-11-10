@@ -2525,6 +2525,7 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_jira
       weight: 901
+<<<<<<< HEAD
     - name: Slack
       url: service_management/incident_management/integrations/slack
       parent: incidents_integrations
@@ -2539,6 +2540,17 @@ menu:
       url: service_management/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
+=======
+    - name: Microsoft Teams
+      url: service_management/incident_management/integrations/microsoft_teams
+      parent: incidents_integrations
+      identifier: incidents_microsoft_teams
+      weight: 902
+    - name: Statuspage
+      url: service_management/incident_management/integrations/statuspage
+      parent: incidents_integrations
+      identifier: incidents_statuspage
+>>>>>>> 184b5fb736 (Move MS Teams from Settings to Integrations)
       weight: 904
     - name: On-Call
       url: service_management/on-call/
