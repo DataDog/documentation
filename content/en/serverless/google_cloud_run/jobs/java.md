@@ -57,7 +57,7 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="\"./mvnw\", \"spring-boot:run\"" %}}
+   {{% serverless-init-install cmd="\"./mvnw\", \"spring-boot:run\"" %}}
 
 3. **Set up logs**.
 
@@ -85,7 +85,7 @@ logger.info("Hello World!");
 
 4. **Configure your application**.
 
-{{% gcr-configure%}}
+{{% serverless-init-configure %}}
 
 5. {{% gcr-service-label %}}
 
@@ -93,11 +93,11 @@ logger.info("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-in-container language="java" %}}
+{{% serverless-init-env-vars-in-container language="java" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
