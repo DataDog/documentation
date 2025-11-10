@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your CloudPrem deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, retention needs, and the complexity of your log data.
+Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your CloudPrem deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, and the complexity of your log data.
 
 This guide provides baseline recommendations for dimensioning your CloudPrem cluster components—indexers, searchers, supporting services, and the PostgreSQL database.
 
@@ -50,11 +50,11 @@ To index 1 TB of logs per day (~11.6 MB/s), follow these steps:
 
 ## Searchers
 
-Searchers handle search queries from the Datadog UI, reading metadata from the Metastore and fetching data from object storage. Sizing searchers appropriately ensures responsive query performance.
+Searchers handle search queries from the Datadog UI, reading metadata from the Metastore and fetching data from object storage.
 
 A general starting point is to provision roughly double the total number of vCPUs allocated to Indexers.
 
-- **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, data scanned). For instance, term queries (`status:error AND message:exception`) are usually computationally less expensive than aggregations.
+- **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, amount of data scanned). For instance, term queries (`status:error AND message:exception`) are usually computationally less expensive than aggregations.
 - **Memory:** 4 GB of RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
 
 ## Other services
