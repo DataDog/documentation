@@ -1493,6 +1493,11 @@ menu:
       parent: bits_ai
       identifier: bits_ai_dev_agent
       weight: 2
+    - name: Setup
+      url: bits_ai/bits_ai_dev_agent/setup
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_setup
+      weight: 200
     - name: Chat with Bits AI
       url: bits_ai/chat_with_bits_ai
       identifier: bits_ai_chat_with_bits_ai
@@ -3687,6 +3692,27 @@ menu:
       parent: network_path
       identifier: network_path_guides
       weight: 504
+    - name: Storage Management
+      url: /infrastructure/storage_management/
+      pre: file-wui
+      identifier: storage_management
+      parent: infrastructure_heading
+      weight: 90000
+    - name: Amazon S3
+      url: /infrastructure/storage_management/amazon_s3/
+      parent: storage_management
+      identifier: storage_management_amazon_s3
+      weight: 1
+    - name: Google Cloud Storage
+      url: /infrastructure/storage_management/google_cloud_storage/
+      parent: storage_management
+      identifier: storage_management_google_cloud_storage
+      weight: 2
+    - name: Azure Blob Storage
+      url: /infrastructure/storage_management/azure_blob_storage/
+      parent: storage_management
+      identifier: storage_management_azure_blob_storage
+      weight: 3
     - name: Cloud Cost
       url: cloud_cost_management/
       identifier: cloud_cost
@@ -6423,6 +6449,11 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_real_time_rule
       weight: 2021
+    - name: Anomaly
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_anomaly_rule
+      weight: 2022
     - name: Content Anomaly
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly
       parent: cloud_siem_custom_detection_rules
@@ -6433,6 +6464,11 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_impossible_travel_rule
       weight: 2026
+    - name: New Value
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/new_value
+      parent: cloud_siem_custom_detection_rules
+      identifier: cloud_siem_new_value_rule
+      weight: 2027
     - name: Sequence
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/sequence
       parent: cloud_siem_custom_detection_rules

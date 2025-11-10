@@ -1060,6 +1060,19 @@ Add the Threat Intel Process to evaluate logs against the table using a specific
 
 For more information, see [Threat Intelligence][9].
 
+## OCSF processor
+
+Use the OCSF processor to normalize your security logs according to the [Open Cybersecurity Schema Framework (OCSF)][11]. The OCSF processor allows you to create custom mappings that remap your log attributes to OCSF schema classes and their corresponding attributes, including enumerated (ENUM) attributes.
+
+The processor enables you to:
+
+- Map source log attributes to OCSF target attributes
+- Configure ENUM attributes with specific numerical values
+- Create sub-pipelines for different OCSF target event classes
+- Pre-process logs before OCSF remapping
+
+For detailed setup instructions, configuration examples, and troubleshooting guidance, see [OCSF Processor][12].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -1077,3 +1090,5 @@ For more information, see [Threat Intelligence][9].
 [8]: /tracing/other_telemetry/connect_logs_and_traces/
 [9]: /security/threat_intelligence/
 [10]: /logs/log_configuration/parsing/?tab=matchers
+[11]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
+[12]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/ocsf_processor/
