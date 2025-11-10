@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a Buildkite Pipeline
+title: Buildkite Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/buildkite
 further_reading:
@@ -18,7 +18,7 @@ further_reading:
 
 [Buildkite][1] is a continuous integration and deployment platform that allows you to run builds on your own infrastructure, providing you with full control over security and customizing your build environment while managing orchestration in the cloud.
 
-Set up tracing on Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
+Set up CI Visibility for Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
 
 ### Compatibility
 

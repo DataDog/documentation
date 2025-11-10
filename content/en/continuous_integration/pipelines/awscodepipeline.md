@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a AWS CodePipeline Pipeline
+title: AWS CodePipeline Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/codepipeline
 further_reading:
@@ -21,7 +21,7 @@ further_reading:
 
 [AWS CodePipeline][1] is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates.
 
-Set up tracing on AWS CodePipeline to collect data about pipeline executions, analyze performance bottlenecks or operational issues, and monitor your deployment workflows.
+Set up CI Visibility for AWS CodePipeline to collect data about pipeline executions, analyze performance bottlenecks or operational issues, and monitor your deployment workflows.
 
 ### Compatibility
 

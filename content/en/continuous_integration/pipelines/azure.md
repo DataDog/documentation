@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on an Azure Pipeline
+title: Azure Pipelines Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/azure
 further_reading:
@@ -22,7 +22,7 @@ Azure DevOps Server is not officially supported.
 
 [Azure Pipelines][1] is a continuous integration and delivery service that supports any language, platform, or cloud.
 
-Set up tracing on Azure Pipelines to gain real time insights into your CI/CD workflows, track pipeline performance, analyze inefficiencies, and manage your deployment operations.
+Set up CI Visibility for Azure Pipelines to gain real time insights into your CI/CD workflows, track pipeline performance, analyze inefficiencies, and manage your deployment operations.
 
 ### Compatibility
 

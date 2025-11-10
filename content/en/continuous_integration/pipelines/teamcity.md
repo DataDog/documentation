@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a TeamCity Pipeline
+title: TeamCity Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/teamcity
 further_reading:
@@ -15,7 +15,7 @@ further_reading:
 
 [TeamCity][1] is a continuous integration and delivery server that optimizes and automates software development processes.
 
-Set up tracing in TeamCity to collect data about your pipeline executions, debug performance bottlenecks, address operational issues, and optimize your development workflows.
+Set up CI Visibility for TeamCity to collect data about your pipeline executions, debug performance bottlenecks, address operational issues, and optimize your development workflows.
 
 ### Compatibility
 

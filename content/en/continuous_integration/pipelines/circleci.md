@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a CircleCI Workflow
+title: CircleCI Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/circleci
 further_reading:
@@ -21,7 +21,7 @@ further_reading:
 
 [CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale.
 
-Set up tracing on CircleCI to optimize the performance of your pipelines, improve collaboration across teams, and ensure consistent, compliant build processes.
+Set up CI Visibility for CircleCI to optimize the performance of your pipelines, improve collaboration across teams, and ensure consistent, compliant build processes.
 
 ### Compatibility
 
