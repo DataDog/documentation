@@ -18,7 +18,7 @@ further_reading:
 To try the preview of App and API Protection for Envoy Gateway, use the following setup instructions.
 {{< /callout >}}
 
-You can enable Datadog App and API Protection for traffic managed by [Envoy Gateway]. The Datadog Envoy Gateway integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure.
+You can enable Datadog App and API Protection for traffic managed by [Envoy Gateway][1]. The Datadog Envoy Gateway integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure.
 
 ## Prerequisites
 
@@ -149,7 +149,7 @@ The External Processor is built on top of the [Datadog Go Tracer][7] and inherit
 
 ### 2. Configure an EnvoyExtensionPolicy
 
-Use an `EnvoyExtensionPolicy` to instruct Envoy Gateway to call the Datadog external processor. You can attach the policy to a **Gateway** (global) or to specific **HTTPRoute/GRPCRoute** resources (granular).
+Use an `EnvoyExtensionPolicy` to instruct Envoy Gateway to call the Datadog external processor. You can attach the policy to a **Gateway** or to specific **HTTPRoute/GRPCRoute** resources.
 
 This sends **all traffic** on the selected Gateway to the external processor.
 
@@ -202,7 +202,7 @@ spec:
 
 #### Cross‑namespace reference
 
-If your external processor `Service` is in a **different namespace** than the policy, add a `ReferenceGrant` in the processor’s namespace. For example, you can do this with a manifest such as `datadog-allow-eep-extproc.yaml`.
+If your external processor `Service` is in a **different namespace** than the policy, add a [ReferenceGrant][10] in the processor’s namespace. For example, you can do this with a manifest such as `datadog-allow-eep-extproc.yaml`.
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1beta1
@@ -233,18 +233,22 @@ After applying the policy, traffic through the targeted Gateway/Routes is inspec
 
 The Envoy Gateway integration has the following limitations:
 
-* Inspection of request and response bodies is supported when using the Datadog External Processor image version `v2.2.2` or later.
-* Configuring TLS (custom certificate and key) on the Datadog External Processor Docker image is supported starting from version `v2.4.0`.
+* Observability mode (asynchronous analysis) is not available for Envoy Gateway.
 
-For additional details on the Envoy Gateway integration compatibilities, refer to the [Envoy Gateway integration compatibility page][9].
+For additional details on the Envoy Gateway integration compatibilities, refer to the [Envoy Gateway integration compatibility page][11].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/remote_config/?tab=helm#enabling-remote-configuration
-[7]: /tracing/trace_collection/library_config/go/
-[8]: /security/application_security/policies/library_configuration/
-[Envoy Gateway]: https://gateway.envoyproxy.io/
-[9]: /security/application_security/setup/compatibility/envoy-gateway
+[1]: https://gateway.envoyproxy.io/docs/
+[2]: /containers/kubernetes/installation/?tab=datadogoperator
+[3]: /agent/remote_config/?tab=helm#enabling-remote-configuration
+[4]: /tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator
+[5]: /tracing/guide/setting_up_apm_with_kubernetes_service/?tab=datadogoperator#cluster-agent-admission-controller
+[6]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
+[7]: https://github.com/DataDog/dd-trace-go
+[8]: /tracing/trace_collection/library_config/go/
+[9]: /security/application_security/policies/library_configuration/
+[10]: https://gateway-api.sigs.k8s.io/api-types/referencegrant/
+[11]: /security/application_security/setup/compatibility/envoy-gateway
