@@ -61,7 +61,7 @@ Datadog SDKs support the following general OpenTelemetry SDK options. For more i
 
 `OTEL_SERVICE_NAME`
 : **Datadog convention**: `DD_SERVICE`<br>
-Sets the `service.name` resource attribute.<br>
+Sets the `service.name` resource attribute<br>
 **Notes**: This variable is one of several used to determine the final service name. See the `service.name` notes under `OTEL_RESOURCE_ATTRIBUTES` for the complete precedence order.<br>
 
 `OTEL_LOG_LEVEL`
@@ -162,8 +162,8 @@ For more details on the official specification for these variables, see the [Ope
 
 `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT`
 : **Description**: Specifies the URL for sending OTLP metrics data. Takes precedence over the general `OTEL_EXPORTER_OTLP_ENDPOINT`. <br>
-**Default (gRPC)**: `"http://localhost:4317"`. <br>
-**Default (HTTP)**: `"http://localhost:4318/v1/metrics"`. <br>
+**Default (gRPC)**: `http://localhost:4317`. <br>
+**Default (HTTP)**: `http://localhost:4318/v1/metrics`. <br>
 **Notes**: For HTTP protocols, the SDK will automatically append `/v1/metrics` if the general `OTEL_EXPORTER_OTLP_ENDPOINT` is used as a fallback.
 
 `OTEL_EXPORTER_OTLP_METRICS_HEADERS`
@@ -242,7 +242,7 @@ Datadog SDKs support the following Java-specific OpenTelemetry configuration opt
 
 `OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED`
 : **Datadog convention**: `!DD_INTEGRATIONS_ENABLED` <br>
-Set to `false` to disable all instrumentation in the agent<br>
+Set to `false` to disable all instrumentation in the Agent<br>
 **Notes**: Mapped values between `OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED` & `DD_INTEGRATIONS_ENABLED`:<br>
   - `true`|`false`
   - `false`|`true`

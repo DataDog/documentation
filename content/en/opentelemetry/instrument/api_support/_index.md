@@ -39,7 +39,7 @@ To learn more, follow the link for your language:
 
 <br>
 
-<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table.</a></div>
+<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/#feature-compatibility">feature compatibility table.</a></div>
 
 ## Further reading
 
