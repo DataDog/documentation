@@ -542,5 +542,26 @@ export default {
     ap1: 'config.ap1.datadoghq.com',
     ap2: 'violet.intake.ap2.datadoghq.com',
     gov: 'config.ddog-gov.com'
+<<<<<<< Updated upstream
+=======
+  },
+  org_management_max_session_duration: {
+    us: '720 hours (30 days)',
+    us3: '720 hours (30 days)',
+    us5: '720 hours (30 days)',
+    eu: '720 hours (30 days)',
+    ap1: '720 hours (30 days)',
+    ap2: '720 hours (30 days)',
+    gov: '12 hours'
+  },
+  jenkins_site_name: {
+    us: 'US1',
+    us3: 'US3',
+    us5: 'US5',
+    eu: 'EU1',
+    ap1: 'AP1',
+    ap2: 'AP2',
+    gov: 'US1_FED'
+>>>>>>> Stashed changes
   }
 };
