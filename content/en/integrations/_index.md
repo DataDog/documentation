@@ -18,6 +18,7 @@ aliases:
 description: Gather data from all of your systems, apps, & services
 algolia:
     tags: ['integration', 'integration setup']
+# Please don't add aliases here, reach out to webops-platform or docs-dev if needed.
 cascade:
 - _target:
     path: /integrations/azure
