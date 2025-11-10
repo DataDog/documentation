@@ -94,7 +94,7 @@ By default, new custom agents run on the latest GPT model.
 
 To change your agent's model, click **Auto** in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and reading [Anthropic's models comparison][5].
 
-### Self-Improve
+### Self Improve
 
 By default, the **Self Improve** feature is not enabled. Self improvement allows the agent to read its own configuration and update it when requested or when it determines its configuration can be changed to improve.
 
