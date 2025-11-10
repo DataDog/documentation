@@ -195,7 +195,7 @@ Flag details may help you debug evaluation behavior and understand why a user re
 The `Flags.enable()` API accepts optional configuration with options listed below.
 
 {{< code-block lang="kotlin" >}}
-val config = FlagsConfiguration.Builder(
+val config = FlagsConfiguration.Builder()
     // configure options here
     .build()
 
