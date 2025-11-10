@@ -560,4 +560,4 @@ See [Supported versions][9] for a list of operating system versions and platform
 [11]: /real_user_monitoring/ios/web_view_tracking/
 [12]: /real_user_monitoring/ios/data_collected/
 [13]: https://app.datadoghq.com/rum/application/
-[14]: /real_user_monitoring/application_monitoring/ios/agentic_onboarding/?tab=realusermonitoring
+[14]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring

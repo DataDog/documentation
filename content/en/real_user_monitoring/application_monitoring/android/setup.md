@@ -644,4 +644,4 @@ val inputStream = context.getRawResAsRumResource(id)
 [15]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
 [16]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [17]: https://square.github.io/okhttp/features/interceptors/
-[18]: /real_user_monitoring/application_monitoring/android/agentic_onboarding/?tab=realusermonitoring
+[18]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring

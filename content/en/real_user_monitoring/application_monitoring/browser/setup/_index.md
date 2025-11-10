@@ -33,4 +33,4 @@ further_reading:
 
 [1]: /real_user_monitoring/application_monitoring/browser/setup/server
 [2]: /real_user_monitoring/application_monitoring/browser/setup/client
-[3]: /real_user_monitoring/application_monitoring/browser/setup/agentic_onboarding
+[3]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
