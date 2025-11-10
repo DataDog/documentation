@@ -46,6 +46,6 @@ To collect additional data from monitored devices, enable one or more of the fol
 [3]: /agent/configuration/agent-commands/#restart-the-agent
 [4]: /infrastructure/process/
 [5]: /logs/
-[6]: /integrations/wifi/
-[7]: /integrations/crash_detection/
-[8]: /integrations/network_path/
+[6]: /integrations/wlan/
+[7]: /integrations/wincrashdetect/
+[8]: /network_monitoring/network_path/setup
