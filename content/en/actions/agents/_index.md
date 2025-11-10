@@ -62,10 +62,6 @@ To build an agent from scratch:
 
 When configuring your agent, you have the following options for customization. 
 
-### Model
-
-Click the dropdown menu to choose a GPT model. You can compare these models using [OpenAI's comparison tool][6].
-
 ### Instructions
 
 Enter the instructions for your agent to follow when performing tasks. You can describe the agent as if it were a person, including its role, specialties, and steps to follow. Click **Suggest With AI** to get help with writing and refining your instructions. 
@@ -92,9 +88,21 @@ During incident response:
 Focus on clear communication, structured processes, and continuous improvement of incident response capabilities.
 ```
 
-### Tools
+### Model
 
-Click **Add Tool** to add actions from the [Action Catalog][7] for the agent to use. The agent is restricted to only its added tools. For example, if you encounter an error when the agent attempts to perform a task you've requested, it might be missing a necessary action. 
+By default, new custom agents run on the latest GPT model. 
+
+To change your agent's model, click **Auto** in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and reading [Anthropic's models comparison][5].
+
+### Self-Improve
+
+By default, the **Self Improve** feature is not enabled. Self improvement allows the agent to read its own configuration and update it when requested or when it determines its configuration can be changed to improve.
+
+To enable this feature, click the settings  **<i class="icon-sliders"></i>**  icon, then the toggle button next to **Self Improve**.
+
+### Actions
+
+Click the plus **<i class="icon-plus-circled-wui"></i>** icon to add actions from the [Action Catalog][7] for the agent to use. The agent is restricted to only its added tools. For example, if you encounter an error when the agent attempts to perform a task you've requested, it might be missing a necessary action. 
 
 ### MCP Server
 
@@ -137,9 +145,7 @@ To invoke an agent in an app:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/actions/agents
-[3]: https://openai.com/index/hello-gpt-4o/
-[4]: https://openai.com/index/gpt-4-1/
-[5]: https://openai.com/gpt-5/
+[5]: https://docs.claude.com/en/docs/about-claude/models/overview#latest-models-comparison
 [6]: https://platform.openai.com/docs/models
 [7]: /actions/actions_catalog/
 [8]: /bits_ai/mcp_server
