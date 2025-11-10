@@ -75,6 +75,11 @@ Use [Synthetic mobile application tests][21] to monitor how your customers exper
 
 {{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
 
+## Create network path tests
+
+Create [Synthetic network path tests][25] from managed locations to perform TCP, UDP, and ICMP checks and visualize packet routes across global endpoints.
+
+{{< img src="synthetics/network_tests/syn_network_path.png" alt="Examples of a Synthetic TCP network test" style="width:100%;">}}
 ## Test suites
 
 Use [Synthetic Test Suites][25] to organize multiple tests into logical collections grouped by user journey, environment, location, service, or team for streamlined management and troubleshooting. 
@@ -166,4 +171,5 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [22]: /synthetics/test_coverage
 [23]: /synthetics/guide/version_history/
 [24]: /synthetics/notifications/
+[25]: /synthetics/network_path_tests/
 [25]: /synthetics/test_suites/

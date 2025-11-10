@@ -47,6 +47,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/archive-search/"
   tag: "Blog"
   text: "Search your historical logs more efficiently with Datadog Archive Search"
+- link: "https://www.datadoghq.com/blog/introducing-datadog-cloudprem/"
+  tag: "blog"
+  text: "Store and search logs at petabyte scale in your own infrastructure with Datadog CloudPrem"
 ---
 
 ## Overview
