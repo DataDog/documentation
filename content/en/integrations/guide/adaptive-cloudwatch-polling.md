@@ -20,11 +20,9 @@ Adaptive Polling helps you save costs by reducing the polling frequency of metri
 
 To see which metrics are unqueried, go to the [Metric Summary][2] page and filter by the **Query Activity** facet in the [facet panel][3].
 
+**Note**: Newly added metrics are unqueried by default.
+
 ## Considerations
-
-### Newly added metrics
-
-A newly added metric must be unqueried for 30 days before being classified as unqueried. During this time, Datadog makes GMD API calls at the default frequency.
 
 ### Multiple AWS accounts
 
@@ -33,6 +31,10 @@ Adaptive Polling applies across all AWS accounts monitored by Datadog.
 ### A previously unqueried metric is queried
 
 If a previously unqueried metric is newly queried, datapoints may initially be missing for up to one hour until polling resumes at the default frequency.
+
+### Unopened dashboards and notebooks
+
+Dashboards and notebooks only run their metric queries when opened. If unopened, the metrics in their queries may become classified as unqueried.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
