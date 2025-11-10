@@ -3,6 +3,8 @@ title: Set up End User Device Monitoring
 description: Set up End User Device Monitoring to collect performance and connectivity data from employee desktops and laptops.
 ---
 
+Use the Datadog Agent to enable End User Device Monitoring on employee desktops and laptops.
+
 ## Supported platforms
 
 - Windows 10 and later
