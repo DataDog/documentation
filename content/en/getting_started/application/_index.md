@@ -71,7 +71,7 @@ Navigate to [**Infrastructure > Host Map**][5] in the app to get started. To lea
 
 Navigate to [Logs][8] in the app to get started. To learn more, read the [Log Management documentation][6].
 
-## APM & Continuous Profiler
+## APM
 
 [Datadog Application Performance Monitoring][9] (APM or tracing) provides you with deep insight into your application's performance side by side with your logs and infrastructure monitoring.
 
@@ -79,11 +79,10 @@ Navigate to [Logs][8] in the app to get started. To learn more, read the [Log Ma
 
 - Trace requests to an application from end to end across a distributed system.
 - See performance bottlenecks by visualizing time spent at each step of the request.
-- Configure your sampling rate to cut down on noise.
-- Automatically discover dependencies for an instrumented service, without having to directly instrument the dependency.
+- Visualize service dependencies and data flows with the Service Map.
+- Correlate traces with corresponding logs, metrics, and user sessions for full-stack context.
 
-Navigate to [APM][10] in the app to get started. To learn more, read the [APM documentation][9]
-<!-- is this the right link in the product? -->
+Navigate to [APM][10] in the app to get started. To learn more, read the [APM documentation][9].
 
 ## RUM & Session Replay
 
@@ -96,7 +95,7 @@ Datadog [Real User Monitoring][11] (RUM) allows you to visualize and analyze rea
 - Monitor feature flag performance and adoption.
 - Correlate frontend issues with backend traces, logs, and infrastructure metrics for full-stack visibility.
 
-Navigate to the [RUM explorer][13] in the app to get started. To learn more, read the [RUM documentation][11]
+Navigate to the [RUM explorer][13] in the app to get started. To learn more, read the [RUM documentation][11].
 
 ## Synthetic Monitoring
 
