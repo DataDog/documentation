@@ -65,7 +65,7 @@ spec:
     spec:
       containers:
       - name: datadog-aap-extproc-container
-        image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.2.2 # Replace with the latest released version
+        image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.4.0 # Replace with the latest released version
         ports:
         - name: grpc
           containerPort: 443 # Default gRPC port for the external processor
