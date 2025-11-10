@@ -30,24 +30,37 @@ This guide introduces the Datadog Agent and covers:
 The Datadog Agent is a software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
 
 The Agent can run on:
-- your local hosts (Windows, MacOS), 
-- a containerized environments (Docker, Kubernetes),
-- in on-premises data centers. 
+- Your local hosts (Windows, MacOS), 
+- A containerized environments (Docker, Kubernetes),
+- In on-premises data centers. 
 
 You can also install and configure the Agent using configuration management tools like Chef, Puppet, or Ansible.
 
 The Agent is able to collect 75 to 100 system-level metrics every 15 to 20 seconds. With additional configuration, the Agent can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
+### Agent configuration files
 
-### Agent overhead
+The Agent's main configuration file is `datadog.yaml`. The required parameters are:
+- Your [Datadog API key][16], which is used to associate your Agent's data with your organization. 
+- Your [Datadog site][41] ({{< region-param key="dd_site" code="true" >}}).
 
-The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is configured to send. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
+See the [sample `config_template.yaml` file][23] for all available configuration options. You can adjust the Agent configuration files to take advantage of other Datadog features including tags.
 
-See [Agent Overhead][2] to learn more about these benchmarks.
 
-## Install the Agent
 
-[Fleet Automation][39] is the primary, in-app workflow for installing, upgrading, configuring, and troubleshooting the Datadog Agent at scale. See the [Agent][40] documentation to install and configure the Agent for your specific platform.
+## How to install the Agent
+
+### Prerequisites
+1. Create a [Datadog account][15].
+
+2. Have your [Datadog API key][16] on hand.
+
+### Setup
+
+Use [Fleet Automation][39], the Datadog in-app workflow, to install, upgrade, configure, and troubleshoot the Datadog Agent at scale. 
+
+See the [Agent documentation][40] for how to get started with the Agent for your specific platform.
+
 
 ## Data collected by the Agent
 
@@ -55,7 +68,7 @@ To give you full visibility into your infrastructure, the Datadog Agent reports 
 
 ### Agent metrics
 
-The following Agent metrics are information the Agent sends to Datadog about itself, so that you can determine things like what hosts or containers have running Agents, when an Agent starts, and what version of Python it's running.
+The Agent reports the following metrics to Datadog about itself. These metrics provide information about which hosts or containers have running Agents, when each Agent started, and the Python version the Agent is using.
 
 | Metric                           | Description                                                                                                          |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -85,42 +98,9 @@ Depending on your platform, the Agent has several core checks enabled by default
 
 To collect metrics from other technologies, see the [Integrations][9] page.
 
-## Differences between Agents for hosts and containers
-
-There are key differences between installing Agents on a host and in a containerized environment: 
-
-- **Configuration differences**: 
-    - On a host, the Agent is configured using a YAML file (as you will see later in this guide).
-    - In a container, Agent configuration options are passed using [environment variables][10], for example:
-    
-    ```sh 
-    `DD_API_KEY` # Datadog API key
-    `DD_SITE`    # Datadog site
-    ```
-
-- **Integrations detection**: 
-    - On a host, [integrations][9] are identified through the Agent configuration file
-    - In a container environment, integrations are automatically identified using Datadog's Autodiscovery feature. See [Basic Agent Autodiscovery][11] to learn more.
-
-Additionally, see the [Docker Agent][12] or [Kubernetes][13] for a walkthrough on running the Agent in a containerized environment.
 
 
-## Setting up the Agent 
-
-### Prerequisites
-
-
-
-### Installation
-
-
-### Validation
-
-
-#### Events
-
-
-#### Service checks
+### Service checks
 
 The Agent is set up to provide the following service checks:
 
@@ -129,25 +109,31 @@ The Agent is set up to provide the following service checks:
 
 These checks can be used in the Datadog Platform to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][21] to learn more.
 
-#### Metrics
 
-In the Datadog UI, go to the [Metrics Summary page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to the Datadog Platform.
+## Advanced configurations and features
 
-Click on either of the metrics and a Metric panel opens up. This panel shows additional metadata about where these metrics are collected from and any associated tags. Because so far in this walkthrough no tags are configured on this host, you should see only the default tags that Datadog assigns to the metrics including `version` and `host`. See the following section on Agent Configuration Files to learn more about how to add tags.
+{{% collapse-content title="Differences between Agent for hosts and containers" level="h4" expanded=false id="id-for-anchoring" %}}
 
-Explore other default metrics such as `ntp.offset` or `system.cpu.idle`.
+There are key differences between installing Agents on a host and in a containerized environment: 
 
-## Agent configuration files
+- **Configuration differences**: 
+    - **Host**: The Agent is configured using a YAML file.
+    - **Container**: Configuration options are passed using [environment variables][10], for example:
+    
+    ```sh 
+    `DD_API_KEY` # Datadog API key
+    `DD_SITE`    # Datadog site
+    ```
 
-The Agent's main configuration file is `datadog.yaml`. The required parameters are:
-- your [Datadog API key][16], which is used to associate your Agent's data with your organization, and
-- the Datadog site ({{< region-param key="dd_site" code="true" >}}).
+- **Integrations detection**: 
+    - **Host**: [Integrations][9] are identified through the Agent configuration file
+    - **Container**: Integrations are automatically identified using Datadog's Autodiscovery feature. See [Basic Agent Autodiscovery][11] to learn more.
 
-See the [sample `config_template.yaml` file][23] for all available configuration options.
+Additionally, see the [Docker Agent][12] or [Kubernetes][13] for a walkthrough on running the Agent in a containerized environment.
+{{% /collapse-content %}} 
 
-You can adjust the Agent configuration files to take advantage of other Datadog features including tags.
 
-#### Setting tags through the Agent configuration file
+{{% collapse-content title="Setting tags through the Agent configuration file" level="h4" expanded=false id="id-for-anchoring" %}}
 
 Tags add an additional layer of metadata to your metrics and events. They allow you to scope and compare your data in Datadog visualizations. When data is sent to Datadog from multiple hosts, tagging this information allows you to scope down to the data you are most interested in visualizing.
 
@@ -200,7 +186,26 @@ For example, let's say you have data that is collected from different teams and 
 
 6. Go to the [Events Explorer page][20] and find the custom tags displayed with the latest Agent Event.
 
-#### Other configuration options
+{{% /collapse-content %}} 
+
+{{% collapse-content title="Finding metrics in the Datadog UI" level="h4" expanded=false id="id-for-anchoring" %}}
+
+In the Datadog UI, go to the [Metrics Summary page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to the Datadog Platform.
+
+Click on either of the metrics and a Metric panel opens up. This panel shows additional metadata about where these metrics are collected from and any associated tags. Because so far in this walkthrough no tags are configured on this host, you should see only the default tags that Datadog assigns to the metrics including `version` and `host`. See the following section on Agent Configuration Files to learn more about how to add tags.
+
+Explore other default metrics such as `ntp.offset` or `system.cpu.idle`.
+{{% /collapse-content %}} 
+
+
+{{% collapse-content title="Agent overhead" level="h4" expanded=false id="id-for-anchoring" %}}
+
+The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is configured to send. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
+
+See [Agent Overhead][2] to learn more about these benchmarks.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Additional configuration options" level="h4" expanded=false id="id-for-anchoring" %}}
 
 The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
 
@@ -222,6 +227,9 @@ Other Datadog features that can be configured through the Agent configuration fi
 - Configuring custom data through [DogStatsD][32]
 
 Throughout your setup, when the documentation refers to the `datadog.yaml` file or the Agent configuration file, this is the file you need to configure.
+
+{{% /collapse-content %}} 
+
 
 ## Commands
 
@@ -290,3 +298,4 @@ For help troubleshooting the Agent:
 [38]: /help/
 [39]: /agent/fleet_automation/
 [40]: /agent/?tab=Host-based
+[41]: /getting_started/site/
