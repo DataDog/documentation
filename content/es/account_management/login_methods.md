@@ -1,4 +1,7 @@
 ---
+description: Activa o desactiva métodos de autenticación como nombre de usuario/contraseña,
+  Google OAuth y SAML para tu organización de Datadog con opciones de aplicación de
+  MFA.
 title: Configuración de métodos de inicio de sesión
 ---
 

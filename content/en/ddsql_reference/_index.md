@@ -110,6 +110,13 @@ WHERE delivery_date IS NULL {{< /code-block >}}
 FROM customers
 LIMIT 10 {{< /code-block >}}
 
+`OFFSET`
+: Skips a specified number of records before starting to return records from the query.
+
+    {{< code-block lang="sql" >}}SELECT *
+FROM employees
+OFFSET 20 {{< /code-block >}}
+
 `ORDER BY`
 : Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.
 
@@ -229,6 +236,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                                                                                                                                              |
 | `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                                                                                                                                            |
 | `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                                                                                                                                                 |
+| `POWER(numeric base, numeric exponent)`          | numeric                               | Returns the value of base raised to the power of exponent.                                                                                                                                        |
 | `LOWER(string s)`                                | string                                | Returns the string as lowercase.                                                                                                                                                                  |
 | `UPPER(string s)`                                | string                                | Returns the string as uppercase.                                                                                                                                                                  |
 | `ABS(numeric n)`                                 | numeric                               | Returns the absolute value.                                                                                                                                                                       |
@@ -314,6 +322,12 @@ FROM products
 {{< code-block lang="sql" >}}
 SELECT ROUND(price) AS rounded_price
 FROM products
+{{< /code-block >}}
+
+### `POWER`
+{{< code-block lang="sql" >}}
+SELECT POWER(response_time, 2) AS squared_response_time
+FROM logs
 {{< /code-block >}}
 
 ### `LOWER`

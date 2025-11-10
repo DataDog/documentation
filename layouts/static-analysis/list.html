@@ -86,7 +86,7 @@
             const containsFilteredValue = filterValues.every(t => t.length ? t.some(f => ruleFilterInfo.includes(f.split(',')[0].toLowerCase())) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type.
             const containsSearchValues = searchValues.every(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
 
-            this.shouldShowRuleSet(ruleEl.closest('.ruleset'), containsSearchValues && containsFilteredValue)
+            this.shouldShowRuleSet(ruleEl.closest('.set'), containsSearchValues && containsFilteredValue)
 
             if(containsSearchValues && containsFilteredValue){
                 ruleEl.classList.add('show')
@@ -217,14 +217,14 @@
                 {{ $ruleset_title := index (index $ruleset_params.rulesets .Key) "title"}}
                 {{ $ruleset_description := index (index $ruleset_params.rulesets .Key) "description"}}
                 <div
-                data-group-id="{{ $group_id }}"
-                class="ruleset d-flex flex-column"
+                data-group-id="{{ $group_id }}" 
+                class="set d-flex flex-column"
                 id="{{ $group_id }}"
                 >
-                    <div class="ruleset-body mb-3 order-1">
+                    <div class="set-body mb-3 order-1">
                         <div class="d-flex flex-column">
                             <span class="m-0">{{printf "Ruleset ID: %s" .Key}}</span>
-                            <span class="ruleset-description m-0">{{$ruleset_description | markdownify}}</span>
+                            <span class="set-description m-0">{{$ruleset_description | markdownify}}</span>
                         </div>
                         <div class="ps-0 mt-1">
                             {{ range .Pages }}
@@ -236,13 +236,13 @@
                             {{ $rule_id := index (split .Params.meta.id "/") 1}}
                             {{ $filter_info := (printf "%s,%s,%s%s" .Params.meta.language .Params.meta.category .Params.meta.severity (cond (.Params.meta.language_alias | not) "" (printf ",%s" .Params.meta.language_alias))) }}
                             {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
-                            <div
-                            class="rule d-flex justify-content-between border p-1 position-relative"
+                            <div 
+                            class="item d-flex justify-content-between border p-1 position-relative"
                             data-info="{{ $rule_info }}"
                             data-name="{{ .Title }}"
                             x-cloak x-show.important="shouldShowRule($el)"
                             >
-                                <div class="rule-name-container d-flex align-items-center">
+                                <div class="item-name-container d-flex align-items-center">
                                     {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $rule_language "variant" "avatar") $rule_language "avatar" }}
                                     {{ if $int_logo }}
                                     <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
@@ -251,7 +251,7 @@
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="d-none d-md-block">{{ $rule_id }}</span>
-                                    <div class="ruleset-header__arrow fw-semibold ms-1">></div>
+                                    <div class="set-header__arrow fw-semibold ms-1">></div>
                                 </div>
                             </div>
 
@@ -267,8 +267,8 @@
                             {{ $pad.SetInMap "filters" "Languages" (union (index ($pad.Get "filters") "Languages") (slice $rule_language_with_alias)) }}
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
                             {{ $pad.SetInMap "filters" "Severities" (merge (index ($pad.Get "filters") "Severities") (dict (string .Params.meta.severity_rank) .Params.meta.severity)) }}
-                            {{/*
-                                build object of arrays with unique languages for each ruleset header (.ruleset-header )
+                            {{/*  
+                                build object of arrays with unique languages for each ruleset header (.set-header )
                                 languagesByRuleset: {
                                     rulesetID: [<languages>],
                                     ...
@@ -281,8 +281,8 @@
 
                     {{/* RULESET-HEADER - Keep here. scratch pad for languageByRuleSet needs to build first */}}
                     <button
-                    data-header-id="{{ $group_id }}"
-                    class="ruleset-header w-100 border mb-1 d-flex align-items-center justify-content-between"
+                    data-header-id="{{ $group_id }}" 
+                    class="set-header w-100 border mb-1 d-flex align-items-center justify-content-between"
                     @click="toggleRuleSet($el)"
                     >
                         <div class="d-flex align-items-center h-100">
@@ -290,17 +290,17 @@
                             <div class="d-flex align-items-center h-100">
                                 {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_languages 0) "variant" "avatar") (index $ruleset_languages 0) "avatar" }}
                                 {{ if $int_logo }}
-                                <img class="ruleset-header__logo" src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                <img class="set-header__logo" src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
                                 {{ if gt (len $ruleset_languages) 1 }}
-                                <span class="ruleset-header__plus fw-semibold">+{{sub (len $ruleset_languages) 1}}</span>
+                                <span class="set-header__plus fw-semibold">+{{sub (len $ruleset_languages) 1}}</span>
                                 {{ end }}
                                 {{ end }}
                             </div>
-                            <span class="ruleset-header__text fw-semibold">{{$ruleset_title}}</span>
+                            <span class="set-header__text fw-semibold">{{$ruleset_title}}</span>
                             <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $ruleset_title) ) }}</span>
                             <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
                         </div>
-                        <div class="ruleset-header__arrow fw-semibold">></div>
+                        <div class="set-header__arrow fw-semibold">></div>
                     </button>
                 </div>
                 {{ end }}

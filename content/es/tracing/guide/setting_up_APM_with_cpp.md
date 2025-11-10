@@ -1,4 +1,6 @@
 ---
+description: Aprende a configurar APM y el rastreo distribuido para aplicaciones C++
+  utilizando bibliotecas de rastreo e instrumentación de Datadog.
 further_reading:
 - link: /tracing/trace_collection/dd_libraries/cpp/
   tag: Documentación
@@ -33,7 +35,7 @@ sudo apt-get update
 sudo apt-get -y install g++ cmake
 ```
 
-Descarga e instala la librería `dd-trace-cpp` con:
+Descarga e instala la biblioteca `dd-trace-cpp` con:
 
 ```bash
 wget https://github.com/DataDog/dd-trace-cpp/archive/v1.0.0.tar.gz -O dd-trace-cpp.tar.gz
@@ -48,7 +50,7 @@ mkdir dd-trace-cpp
 tar zxvf dd-trace-cpp.tar.gz -C ./dd-trace-cpp/ --strip-components=1
 ```
 
-Por último, crea e instala la librería:
+Por último, crea e instala la biblioteca:
 
 ```bash
 cd dd-trace-cpp
@@ -139,7 +141,7 @@ Haz clic en el servicio para ver tus trazas.
 
 {{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="Interfaz de usuario de trazas de APM" >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

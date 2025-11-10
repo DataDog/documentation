@@ -27,7 +27,9 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your Expo applications for [Real User Monitoring (RUM)][1] with the React Native SDK. RUM includes Error Tracking capabilities for crash reporting and error analysis.
+
+**Note:** If you've purchased Error Tracking as a standalone product (without RUM), see the [Error Tracking Expo setup documentation][2] instead.
 
 The RUM React Native SDK supports Expo and Expo Go. To use it, install `expo-datadog` and `@datadog/mobile-react-native`.
 
@@ -51,7 +53,7 @@ yarn add expo-datadog @datadog/mobile-react-native
 
 ### Track view navigation
 
-To see RUM or Error Tracking sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
+To see RUM sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
 
 #### Manual tracking
 
@@ -133,9 +135,7 @@ To control the data your application sends to Datadog RUM, you can specify a sam
 
 ### Upload source maps on EAS builds
 
-<div class="alert alert-info"><p>If you have not enabled Crash Reporting, you can skip this step.<p></div>
-
-Add `expo-datadog` to your plugins in the `app.json` file:
+To enable crash reporting and error symbolication, add `expo-datadog` to your plugins in the `app.json` file:
 
 ```json
 {
@@ -161,7 +161,33 @@ yarn add -D @datadog/datadog-ci
 
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
 
-For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][5].
+#### Configure source maps for accurate symbolication
+
+**Option A: Use Datadog Metro plugin (recommended)**
+
+Starting from `@datadog/mobile-react-native@2.10.0` and `@datadog/datadog-ci@v3.13.0`, add the Datadog Metro Plugin to your `metro.config.js`:
+
+```js
+const { getDatadogExpoConfig } = require("@datadog/mobile-react-native/metro");
+const config = getDatadogExpoConfig(__dirname);
+module.exports = config;
+```
+
+**Option B: Manual Debug ID injection**
+
+Alternatively, use the `datadog-ci react-native inject-debug-id` command to manually attach a unique Debug ID to your application bundle and sourcemap. See the [command documentation][5] for usage instructions.
+
+#### Add git repository data (EAS only)
+
+If you're using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files:
+
+```json
+{
+    "cli": {
+        "requireCommit": true
+    }
+}
+```
 
 ## Tracking Expo Router screens
 
@@ -284,10 +310,10 @@ config.resourceEventMapper = event => {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/
-[2]: /error_tracking/
+[2]: /error_tracking/frontend/mobile/expo/
 [3]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
 [4]: /real_user_monitoring/application_monitoring/react_native/setup/expo#initialize-the-library-with-application-context
-[5]: /real_user_monitoring/error_tracking/mobile/expo/
+[5]: /real_user_monitoring/error_tracking/mobile/expo/#use-the-datadog-ci-react-native-inject-debug-id-command
 [6]: https://expo.github.io/router/docs/
 [7]: https://docs.expo.dev/development/introduction/
 [8]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to

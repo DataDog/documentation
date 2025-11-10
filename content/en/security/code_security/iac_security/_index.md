@@ -17,19 +17,19 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terraform code before deployment. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub repositories. Supported file types include standalone Terraform files and local modules.
+Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terraform and Kubernetes configurations before they're deployed. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub, GitLab, or Azure DevOps repositories. Supported file types include standalone Terraform files, local modules, and Kubernetes manifests.
 
 {{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="IaC misconfiguration side panel showing details for the high severity IMDSv1 Enabled issue, including a security summary, code snippet, detection timestamps, and remediation steps." width="100%">}}
 
 ## How it works
 
-IaC Security integrates with your GitHub repositories to continuously scan for misconfigurations. It analyzes every commit across all branches and performs a daily full scan of each configured repository. Findings surface when violations are detected and are associated with the relevant repository, branch, and file path. This allows you to identify, prioritize, and fix misconfigurations directly at the source.
+IaC Security integrates with your repositories to continuously scan for misconfigurations. It analyzes every commit across all branches and performs a full daily scan of each configured repository. When violations are detected, findings are surfaced and linked to the relevant repository, branch, and file path. This helps you identify, prioritize, and fix misconfigurations directly at the source.
 
 ## Key capabilities
 
 ### Review and fix violations in pull requests
 
-When a GitHub pull request includes infrastructure-as-code changes, Datadog adds inline comments to flag any violations. Where applicable, it also suggests code fixes that can be applied directly in the pull request. You can also open a new pull request from Datadog to remediate a finding. For more information, see [GitHub Pull Requests][5].
+When a pull request includes infrastructure-as-code changes, Datadog adds inline comments to flag any violations. Where applicable, it also suggests code fixes that can be applied directly in the pull request. You can also open a new pull request from Datadog to remediate a finding. For more information, see [Pull Request Comments][5].
 
 ### View and filter findings
 

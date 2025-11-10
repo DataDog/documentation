@@ -29,13 +29,15 @@ For dedicated documentation and examples for monitoring the Kubernetes control p
 
 Some features related to later Kubernetes versions require a minimum Datadog Agent version.
 
-| Kubernetes version | Agent version | Reason                                |
-| ------------------ | ------------- | ------------------------------------- |
-| 1.16.0+            | 7.19.0+       | Kubelet metrics deprecation           |
-| 1.21.0+            | 7.36.0+       | Kubernetes resource deprecation       |
-| 1.22.0+            | 7.37.0+       | Support dynamic service account token |
+| Kubernetes version | Agent version  | Cluster Agent version | Reason                                                                         |
+|--------------------|----------------|-----------------------|--------------------------------------------------------------------------------|
+| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation                                                    |
+| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation                                                |
+| 1.22.0+            | 7.37.0+        | 7.37.0+               | Supports dynamic service account token                                         |
+| 1.25.0+            | 7.40.0+        | 7.40.0+               | Supports `v1` API group                                                        |
+| 1.33.0+            | 7.67.0+        | 7.67.0+               | Fixes incompatibilities with Kubernetes `AllocatedResources` in `/pods` output |
 
-See also: [Minimum Kubernetes and Cluster Agent versions][8].
+For optimal compatibility Datadog recommends to keep your Cluster Agent and Agent on matching versions.
 
 ## Installation
 
@@ -322,7 +324,6 @@ The [Kubernetes][21] section features an overview of all your Kubernetes resourc
 [5]: /agent/kubernetes/integrations/
 [6]: /agent/kubernetes/apm/
 [7]: /agent/kubernetes/log/
-[8]: /containers/cluster_agent/#minimum-agent-and-cluster-agent-versions
 [9]: /containers/datadog_operator
 [10]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [11]: https://helm.sh

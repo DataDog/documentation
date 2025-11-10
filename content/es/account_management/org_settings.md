@@ -1,4 +1,6 @@
 ---
+description: Gestiona usuarios, equipos, autenticaciones, claves de API, roles y parámetros
+  de seguridad de tu organización Datadog desde la sección Parámetros de organización.
 further_reading:
 - link: /account_management/api-app-keys/
   tag: Documentación
@@ -9,11 +11,11 @@ further_reading:
 title: Parámetros de organización
 ---
 ## Información general
-Los [administradores][1] pueden acceder a los parámetros de organización haciendo clic en **Organization Settings**, en el menú de la cuenta que aparece en la parte inferior del panel izquierdo de navegación, o seleccionando **Organization Settings** en el menú desplegable de la página Personal Settings (Parámetros personales).
+Los [administradores][1] pueden acceder a los parámetros de organización haciendo clic en **Organization Settings** (Parámetros de organización), en el menú de la cuenta que aparece en la parte inferior del panel izquierdo de navegación, o seleccionando **Organization Settings** en el menú desplegable de la página Personal Settings (Parámetros personales).
 
 {{< img src="account_management/org_settings/nav.png" alt="Ir a los parámetros de tu organización en Datadog" style="width:80%;" >}}
 
-Desde Organization Settings, puedes gestionar usuarios, grupos, la configuración del control de acceso basado en roles (RBAC), claves y tokens. En esta página, se describen todas las secciones y se indica dónde encontrar información sobre tareas específicas de **Organization Settings** en la documentación.
+Desde Parámetros de organización, puedes gestionar usuarios, grupos, la configuración del control de acceso basado en roles (RBAC), claves y tokens. En esta página, se describen todas las secciones y se indica dónde encontrar información sobre tareas específicas de **Parámetros de organización** en la documentación.
 
 ## Identidad y cuentas
 
