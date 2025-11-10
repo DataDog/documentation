@@ -837,7 +837,7 @@ FROM k8s.daemonsets da INNER JOIN k8s.deployments de
 ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 ```
 
-Additionally, you can extract the tags keys and values into individual arrays of text:
+Additionally, you can extract the tag keys and values into individual arrays of text:
 
 ```sql
 SELECT akeys(tags), avals(tags)
