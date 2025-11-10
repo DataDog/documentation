@@ -145,6 +145,8 @@ Navigate to the [Dashboard List][21] in the app to get started. To learn more, r
 - Send alerts to Slack, email, PagerDuty, and more, by adding`@` in alert messages to direct notifications to the right people.
 - Schedule downtimes to suppress notifications for system shutdowns, offline maintenance, and more.
 
+Navigate to the [Monitors List][23] in the app to get started. To learn more, read the [Monitors documentation][22].
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -170,3 +172,4 @@ Navigate to the [Dashboard List][21] in the app to get started. To learn more, r
 [20]: /dashboards/
 [21]: https://app.datadoghq.com/dashboard/lists
 [22]: /monitors/
+[23]: https://app.datadoghq.com/monitors/manage

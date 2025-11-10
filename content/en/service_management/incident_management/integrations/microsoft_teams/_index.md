@@ -13,32 +13,22 @@ further_reading:
 
 The Microsoft Teams integration for Datadog Incident Management enables you to declare and manage incidents, automatically create incident channels, sync messages to timelines, and keep your team informed, all from within Microsoft Teams.
 
-## Setup
+## Prerequisites
 
-To use Incident Management's Microsoft Teams features, you must first [install the Microsoft Teams integration for Datadog][1].
+To use Incident Management's Microsoft Teams features, you must first [install the Microsoft Teams integration for Datadog][1] and connect your Microsoft Teams account to your Datadog account.
 
 After installation, go to **[Service Management > Incidents > Settings > Integrations][2]** to configure the Microsoft Teams features for Incident Management.
 
-## Declaring and managing incidents
-
-### From the Datadog tab
+## Declaring and managing incidents from Microsoft Teams
 
 To declare or manage an incident from a specific team:
 1. [Add the Datadog application][3] to the team.
-2. Add the **Datadog** tab to any channel in that team.
-3. From this tab, declare incidents and manage existing ones (for example, update fields, impacts, and responders).
+1. Add the **Datadog** tab to any channel in that team.
+1. Start a conversation in a channel, or a chat with the Datadog app.
+1. Type `@Datadog incident`.
+1. An adaptive card appears. Click the **Declare Incident** button to open the Datadog tab and declare an incident.
 
-**Note**: In an incident channel, the tab shows and lets you manage the incident associated with that channel. In other channels, you can only declare new incidents.
-
-### Using @mentions
-
-To declare a new incident from Microsoft Teams using @mentions:
-
-1. Start a conversation in a channel in any team, or a chat with the Datadog app.
-2. Type `@Datadog incident`.
-3. An adaptive card appears. Click the **Declare Incident** button to open the Datadog tab and declare an incident.
-
-**Note**: A user must connect their Microsoft Teams account to their Datadog account to declare an incident.
+**Note**: In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident-specific channels, you can only declare new incidents.
 
 ### Updating incidents
 
@@ -66,17 +56,13 @@ Use the "More actions" menu on any message inside an incident team on the far ri
 
 ### Automatic channel creation
 
-You can configure Incident Management to automatically create an incident Microsoft Teams channel for each incident or for incidents meeting criteria you define.
+You can configure Incident Management to automatically create an incident Microsoft Teams channel for each incident or for incidents meeting criteria you define. To set up automatic incident channel creation:
 
-To set up automatic incident channel creation:
-
-1. Navigate to [Incident Settings][4].
-2. Under the Microsoft Teams section, select your connected Microsoft Teams tenant.
+1. Navigate to [Incident Settings][4] and select **Microsoft Teams**.
+2. From the **Tenant** dropdown, select your connected Microsoft Teams tenant.
 3. Toggle on **Automatically create a Microsoft Teams channel for every incident**.
 4. Select the Team in which you want to automatically create new channels.
 5. Save your settings.
-
-{{< img src="integrations/microsoft_teams/ms_teams_incident_updates_v2.png" alt="Microsoft Teams Incident Update Channel Settings." >}}
 
 After you enable this automation, you can define a **channel name template** for Datadog to follow when creating the channel. The following variables are available in channel name templates:
 
@@ -106,30 +92,22 @@ You can configure Incident Management to automatically archive an incident chann
 Delegated permissions are required for one-click Microsoft Teams meetings. To enable one-click Microsoft Teams meetings for incidents:
 
 1. Navigate to [Incident Settings][4].
-2. Under the Microsoft Teams section, select your connected Microsoft Teams tenant.
+2. In Microsoft Teams, select your connected Microsoft Teams tenant.
 3. Toggle on **Enable meeting creation**.
 4. Save your settings.
 
 After enabling one-click Microsoft Teams meetings, start a meeting by clicking **Start Teams Meeting** from the incident header. You are redirected to instantly join the meeting through the browser.
-
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
-
-<!-- ![ms_teams_one_click_meeting](images/microsoft_teams_create_one_click_meetings.png) -->
 
 ### Automatic meeting creation
 
 Delegated permissions are required for automatic, criteria-based Microsoft Teams meetings. To enable automatic, criteria-based Microsoft Teams meetings for incidents:
 
 1. Navigate to [Incident Settings][4].
-2. Under the Microsoft Teams section, select your connected Microsoft Teams tenant.
+2. In Microsoft Teams, select your connected Microsoft Teams tenant.
 3. Toggle on **Enable meeting creation**.
    1. Toggle on **Automatically create Microsoft Teams meetings**.
    2. (Optional) Specify the incident criteria that creates a Microsoft Teams meeting. If left blank, any changes to an incident without an existing Microsoft Teams meeting will create a Microsoft Teams meeting.
 4. Save your settings.
-
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
-
-<!-- ![ms_teams_automatic_meeting](images/microsoft_teams_enable_automatic_meeting_creation.png) -->
 
 ## Incident updates channel
 
