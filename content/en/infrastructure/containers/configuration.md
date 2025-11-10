@@ -411,11 +411,53 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 
 <div class="alert alert-info">You can select up to 50 fields per resource. You can use the preview to validate your indexing choices.</div>
 
-### Collect Custom Resource Metrics Using Kubernetes State Core Check
+### Collect custom resource metrics using Kubernetes State Core check
 
-**Note**: This functionality requires Cluster Agent 7.63.0+
+<div class="alert alert-info">This functionality requires Cluster Agent 7.63.0+.</div>
 
-It is possible to use the kubernetes_state_core check to collect custom resource metrics when running Cluster Agent.
+You can use the `kubernetes_state_core` check to collect custom resource metrics when running the Datadog Cluster Agent.
+
+1. Write defintions for your custom resources and the fields to turn into metrics according to the following format:
+
+   ```yaml
+   #=(...)
+   collectCrMetrics:
+     - groupVersionKind:
+         group: "crd.k8s.amazonaws.com"
+         kind: "ENIConfig"
+         version: "v1alpha1"
+       commonLabels:
+         crd_type: "eniconfig"
+       labelsFromPath:
+         crd_name: [metadata, name]
+       metrics:
+         - name: "eniconfig"
+           help: "ENI Config"
+           each:
+             type: gauge
+             gauge:
+               path: [metadata, generation]
+     - groupVersionKind:
+         group: "vpcresources.k8s.aws"
+         kind: "CNINode"
+         version: "v1alpha1"
+         resource: "cninode-pluralized"
+       commonLabels:
+         crd_type: "cninode"
+       labelsFromPath:
+         crd_name: [metadata, name]
+       metrics:
+         - name: "cninode"
+           help: "CNI Node"
+           each:
+             type: gauge
+             gauge:
+               path: [metadata, generation]
+   ```
+
+   For more details, see [Custom Resource State Metrics][5].
+   
+2. Update your Helm or Datadog Operator configuration:
 
    {{< tabs >}}
    {{% tab "Helm Chart" %}}
@@ -429,6 +471,8 @@ It is possible to use the kubernetes_state_core check to collect custom resource
           collectCrMetrics:
             - <CUSTOM_RESOURCE_METRIC>
       ```
+
+       Replace `<CUSTOM_RESOURCE_METRIC>` with the definitions you wrote in the first step.
 
    1. Upgrade your Helm chart:
 
@@ -460,6 +504,8 @@ It is possible to use the kubernetes_state_core check to collect custom resource
               - <CUSTOM_RESOURCE_METRIC>
       ```
 
+      Replace `<CUSTOM_RESOURCE_METRIC>` with the definitions you wrote in the first step.
+
    1. Apply your new configuration:
 
       ```
@@ -468,47 +514,7 @@ It is possible to use the kubernetes_state_core check to collect custom resource
 
    {{% /tab %}}
    {{< /tabs >}}
-
-For full description of <CUSTOM_RESOURCE_METRIC> item see: https://github.com/kubernetes/kube-state-metrics/blob/main/docs/metrics/extend/customresourcestate-metrics.md.
-
-Example:
-
-```yaml
-  #=(...)
-  collectCrMetrics:
-    - groupVersionKind:
-        group: "crd.k8s.amazonaws.com"
-        kind: "ENIConfig"
-        version: "v1alpha1"
-      commonLabels:
-        crd_type: "eniconfig"
-      labelsFromPath:
-        crd_name: [metadata, name]
-      metrics:
-        - name: "eniconfig"
-          help: "ENI Config"
-          each:
-            type: gauge
-            gauge:
-              path: [metadata, generation]
-    - groupVersionKind:
-        group: "vpcresources.k8s.aws"
-        kind: "CNINode"
-        version: "v1alpha1"
-        resource: "cninode-pluralized"
-      commonLabels:
-        crd_type: "cninode"
-      labelsFromPath:
-        crd_name: [metadata, name]
-      metrics:
-        - name: "cninode"
-          help: "CNI Node"
-          each:
-            type: gauge
-            gauge:
-              path: [metadata, generation]
-```
-
+   
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -517,3 +523,4 @@ Example:
 [2]: /infrastructure/containers
 [3]: https://app.datadoghq.com/orchestration/explorer/pod
 [4]: https://app.datadoghq.com/orchestration/explorer/crd
+[5]: https://github.com/kubernetes/kube-state-metrics/blob/main/docs/metrics/extend/customresourcestate-metrics.md
