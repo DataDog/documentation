@@ -8602,6 +8602,11 @@ menu:
       url: account_management/teams/manage/
       parent: account_management_teams
       weight: 701
+    - name: Provision with GitHub
+      identifier: account_management_provision_github
+      url: account_management/teams/github/
+      parent: account_management_teams
+      weight: 702
     - name: Multi-Factor Authentication
       identifier: account_management_mfa
       url: account_management/multi-factor_authentication/
