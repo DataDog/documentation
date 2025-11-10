@@ -47,7 +47,6 @@ To build an agent from a blueprint:
 1. In **Agent Blueprints**, click the blueprint you want to use. Alternatively, you can click **New Agent** and browse the full list of blueprints.
 1. Click **Create From Blueprint**.
 1. Your new agent has pre-populated settings and tools. You can immediately start chatting with the agent or [further customize it](#customize-your-agent). 
-1. Click the gear icon to close the agent's settings.
 
 ### Create a custom agent
 
