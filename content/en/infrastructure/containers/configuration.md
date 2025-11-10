@@ -411,7 +411,7 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 
 <div class="alert alert-info">You can select up to 50 fields per resource. You can use the preview to validate your indexing choices.</div>
 
-### Collect custom resource metrics using Kubernetes State Core check
+### Collect Custom Resource Metrics Using Kubernetes State Core Check
 
 **Note**: This functionality requires Cluster Agent 7.63.0+
 
@@ -473,7 +473,7 @@ For full description of <CUSTOM_RESOURCE_METRIC> item see: https://github.com/ku
 
 Example:
 
-``yaml
+```yaml
   #=(...)
   collectCrMetrics:
     - groupVersionKind:
