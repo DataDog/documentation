@@ -2,6 +2,9 @@
 aliases:
 - /es/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 - /es/tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
+description: Aprende a configurar las puntuaciones de Apdex en tus servicios para
+  medir la satisfacción de los usuarios en función de los tiempos de respuesta y umbrales
+  de rendimiento de las aplicaciones.
 title: Configuración de la puntuación del Apdex por servicio
 ---
 {{< jqmath-vanilla >}}

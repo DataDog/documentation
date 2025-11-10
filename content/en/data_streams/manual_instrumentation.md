@@ -14,8 +14,8 @@ further_reading:
 
 Data Streams Monitoring (DSM) propagates context through message headers. Use manual instrumentation to set up DSM if you are using:
 - a message queue technology that is not supported by DSM
-- a message queue technology without headers, such as Kinesis, or
-- Lambdas
+- a message queue technology without headers, such as Kinesis
+- Lambdas in .NET or Java
 
 ### Manual instrumentation installation
 

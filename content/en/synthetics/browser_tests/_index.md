@@ -183,8 +183,16 @@ You can customize alert conditions to define the circumstances under which you w
 
 {{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule" style="width:80%" >}}
 
+#### Alerting rule
+
 * An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and in how many locations a test needs to fail before triggering the notification.
 * Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured with the [API][6].
+
+#### Fast retry
+
+When a test fails, fast retry allows you to retry the test X times after Y ms before marking it as failed. Customizing the retry interval helps reduce false positives and improves your alerting accuracy.
+
+Since location uptime is computed based on the final test result after retries complete, fast retry intervals directly impact what appears in your total uptime graph. The total uptime is computed based on the configured alert conditions, and notifications are sent based on the total uptime.
 
 ### Configure the test monitor
 
@@ -250,19 +258,10 @@ Step replay allows you to re-run one or more steps of your browser test directly
 
 ### Debugger permission
 
-<div class="alert alert-danger">
-  <p>The current version of the extension <strong>does not have <a href="https://developer.chrome.com/docs/extensions/reference/api/debugger">Chrome's debugger permission</a> yet</strong>, as a result:</p>
-  <ul>
-    <li><strong>JavaScript-based steps and keystroke simulations</strong> are <strong>not yet available</strong>.</li>
-    <li>Certain steps (like <strong>click</strong> or <strong>hover</strong>) may behave <strong>differently</strong> than in a full Synthetic Monitoring test run.</li>
-  </ul>
-  <p>A version of the extension with Chrome's debugger permission is <strong>coming soon</strong>.</p>
-</div>
-
 JavaScript-based steps and keystroke simulations require the debugger permission.
 
 The first time the extension is updated to a version requiring debugger permission, you'll see a permission request and the extension is disabled until you approve it:
-{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_1.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
+{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_2.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
 <p style="text-align: center;"><em>Click on the three dots {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu to accept the permission.</em></p>
 
 ### How to use step replay
@@ -302,6 +301,10 @@ The following table summarizes which Browser Test step types are supported by st
 | Assert file download     | {{< X >}}                       |       |
 | Assert page contains     | {{< X >}}                       |       |
 | Assert page lacks        | {{< X >}}                       |       |
+| Assert from JavaScript   | {{< X >}}                       |       |
+| Extract from JavaScript  | {{< X >}}                       |       |
+| Press key                | {{< X >}}                       |       |
+| Type text                | {{< X >}}                       |       |
 | Click                    | {{< X >}}*                      | *Click steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
 | Hover                    | {{< X >}}*                      | *Hover steps are supported, but may behave differently than in a full Synthetic Monitoring test run. |
 
@@ -309,10 +312,6 @@ The following table summarizes which Browser Test step types are supported by st
 
 | Step type                | Supported by step replay |
 |--------------------------|:------------------------:|
-| Assert from JavaScript   | Coming soon with the debugger permission |
-| Extract from JavaScript  | Coming soon with the debugger permission |
-| Press key                | Coming soon with the debugger permission |
-| Type text                | Coming soon with the debugger permission |
 | Assert email             | Not supported yet        |
 | Assert requests          | Not supported yet        |
 | Extract from email body  | Not supported yet        |
