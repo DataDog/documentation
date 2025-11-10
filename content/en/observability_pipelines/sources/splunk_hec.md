@@ -23,9 +23,9 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 {{% observability_pipelines/log_source_configuration/splunk_hec %}}
 
-## Send logs from the Splunk Distributor of the OpenTelemetry collector to Observability Pipelines
+## Send logs from the Splunk Distribution of the OpenTelemetry Collector to Observability Pipelines
 
-To send logs from the Splunk Distributor of the OpenTelemetry Collector:
+To send logs from the Splunk Distribution of the OpenTelemetry Collector:
 
 1. Install the Splunk OpenTelemetry Collector based on the your environment:
     - [Kubernetes][2]

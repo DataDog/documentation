@@ -79,9 +79,9 @@ Based on these example configurations, these are values you enter for the follow
 
 ## Send logs from the Datadog Distribution of OpenTelemetry Collector to Observability Pipelines
 
-To send logs from DDOT:
-1. Deploy the DDOT Agent using helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
-1. [Set up a pipeline][6] on Observabiity Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
+To send logs from the Datadog Distribution of the OpenTelemetry Collector (DDOT):
+1. Deploy the DDOT Collector using helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
+1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
     1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
     1. When you install the Worker, for the OpenTelemetry source environment variables:
         1. Set your HTTP listener to `0.0.0.0:4318`.
