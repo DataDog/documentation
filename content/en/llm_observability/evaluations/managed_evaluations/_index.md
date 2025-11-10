@@ -98,7 +98,7 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
 
 ## Create new evaluations
 
-1. Navigate to [**AI Observability > Settings > Evaluations**][2].
+1. Navigate to [**AI Observability > Evaluations**][2].
 1. Click on the **Create Evaluation** button on the top right corner.
 1. Select a specific managed evaluation. This will open the evalution editor window.
 1. Select the LLM application(s) you want to configure your evaluation for.
@@ -113,7 +113,7 @@ After you click **Save**, LLM Observability uses the LLM account you connected t
 
 ## Edit existing evaluations
 
-1. Navigate to [**AI Observability > Settings > Evaluations**][2].
+1. Navigate to [**AI Observability > Evaluations**][2].
 1. Find on the evaluation you want to edit and toggle the **Enabled Applications** button.
 1. Select the edit icon to configure the evaluation for an individual LLM application or click on the application name.
 1. Evaluations can be disabled by selecting the disable icon for an individual LLM application.
@@ -335,7 +335,7 @@ This check ensures that sensitive information is handled appropriately and secur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/llm/settings/evaluations
+[2]: https://app.datadoghq.com/llm/evaluations
 [3]: https://app.datadoghq.com/llm/applications
 [4]: /security/sensitive_data_scanner/
 [5]: https://docs.datadoghq.com/api/latest/ip-ranges/

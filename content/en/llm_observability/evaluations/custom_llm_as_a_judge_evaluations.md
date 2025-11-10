@@ -274,7 +274,7 @@ You can:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/llm/settings/evaluations
+[1]: https://app.datadoghq.com/llm/evaluations
 [2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
 [3]: /service_management/events/explorer/facets/
 [4]: /monitors/
