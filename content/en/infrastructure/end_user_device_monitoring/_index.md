@@ -1,6 +1,10 @@
 ---
 title: End User Device Monitoring
 description: Monitor employee desktops and laptops to detect performance, connectivity, and application issues across your organization.
+further_reading:
+   - link: "/infrastructure/end_user_device_monitoring/setup"
+     tag: "Documentation"
+     text: "Set up End User Device Monitoring"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
