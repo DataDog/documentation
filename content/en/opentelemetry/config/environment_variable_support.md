@@ -137,7 +137,7 @@ Signal-specific variables (like `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) always ta
 `OTEL_EXPORTER_OTLP_PROTOCOL`
 : **Description**: Specifies the transport protocol to use for all signals unless overridden. <br>
 **Accepted values**: `grpc`, `http/protobuf`, `http/json`. <br>
-**Default**: SDK-dependent, either `http/protobuf` or `grpc`.
+**Default**: SDK-dependent. The Datadog SDK aims to match the default protocol of the corresponding official OpenTelemetry SDK for that language.
 
 `OTEL_EXPORTER_OTLP_ENDPOINT`
 : **Description**: Specifies the base URL for sending OTLP data for all signals unless overridden. <br>
@@ -158,7 +158,7 @@ For more details on the official specification for these variables, see the [Ope
 `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`
 : **Description**: Specifies the OTLP transport protocol to use for metrics data. Takes precedence over the general `OTEL_EXPORTER_OTLP_PROTOCOL`. <br>
 **Accepted values**: `grpc`, `http/protobuf`, `http/json`. <br>
-**Default**: SDK-dependent, either `http/protobuf` or `grpc`.
+**Default**: SDK-dependent. The Datadog SDK aims to match the default protocol of the corresponding official OpenTelemetry SDK for that language.
 
 `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT`
 : **Description**: Specifies the URL for sending OTLP metrics data. Takes precedence over the general `OTEL_EXPORTER_OTLP_ENDPOINT`. <br>
@@ -177,8 +177,8 @@ For more details on the official specification for these variables, see the [Ope
 
 `OTEL_EXPORTER_OTLP_LOGS_PROTOCOL`
 : **Description**: Specifies the OTLP transport protocol for logs. Takes precedence over `OTEL_EXPORTER_OTLP_PROTOCOL`.
-: **Accepted values**: `grpc`, `http/protobuf`, `http/json`
-: **Default**: `http/protobuf`
+: **Accepted values**: `grpc`, `http/protobuf`, `http/json` <br>
+: **Default**: SDK-dependent. The Datadog SDK aims to match the default protocol of the corresponding official OpenTelemetry SDK for that language.
 
 `OTEL_EXPORTER_OTLP_LOGS_ENDPOINT`
 : **Description**: Specifies the URL for sending OTLP logs. Takes precedence over `OTEL_EXPORTER_OTLP_ENDPOINT`.
