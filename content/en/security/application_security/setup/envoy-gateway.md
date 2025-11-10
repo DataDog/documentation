@@ -5,7 +5,7 @@ code_lang_weight: 50
 further_reading:
   - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
     tag: "Source Code"
-    text: "Envoy integration's source code"
+    text: "Envoy integration source code"
   - link: "/security/default_rules/?category=cat-application-security"
     tag: "Documentation"
     text: "OOTB App and API Protection Rules"
@@ -15,7 +15,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="App and API Protection for Envoy Gateway is in Preview" >}}
-To try the preview of App and API Protection for Envoy Gateway, use the following setup instructions.
+App and API Protection for Envoy Gateway is in Preview. Use the following instructions to try the preview.
 {{< /callout >}}
 
 You can enable Datadog App and API Protection for traffic managed by [Envoy Gateway][1]. The Datadog Envoy Gateway integration allows Datadog to inspect and protect your traffic for threat detection and blocking directly at the edge of your infrastructure.
@@ -25,15 +25,15 @@ You can enable Datadog App and API Protection for traffic managed by [Envoy Gate
 1. A running Kubernetes cluster with [Envoy Gateway][1] installed.
 2. The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
     - Ensure [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
-    - Ensure [APM is enabled][4] in the Agent. *This allows the external processor service to send its own traces to the Agent.*
+    - Ensure [APM is enabled][4] in the Agent to allow the external processor service to send its own traces to the Agent.
       - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
 
 ## Enabling threat detection
 
-Enabling App and API Protection with Envoy Gateway involves two steps:
+To enable App and API Protection with Envoy Gateway, do the following:
 
 1. Deploying the Datadog External Processor service in your cluster.
-2. Configuring an `EnvoyExtensionPolicy` that points to the processor service to direct traffic from your Envoy Gateway to this service.
+2. Configure an `EnvoyExtensionPolicy` that points to the processor service. This will direct traffic from your Envoy Gateway to this service.
 
 ### 1. Deploy the Datadog External Processor service
 
@@ -129,8 +129,8 @@ The Datadog External Processor exposes some settings:
 | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`   | `80`                | HTTP server port for health checks.                                                                                                      |
 | `DD_SERVICE_EXTENSION_TLS`                | `true`          | Enable the gRPC TLS layer.                                                                                                      |
 | `DD_SERVICE_EXTENSION_TLS_KEY_FILE`       | `localhost.key` | Change the default gRPC TLS layer key.                                                                           |
-| `DD_SERVICE_EXTENSION_TLS_CERT_FILE`      | `localhost.crt` | Change the default gRPC TLS layer cert.                                                                           |
-| `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`       | `10485760`                 | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. The recommended value is `10485760` (10MB). (To fully enable body processing, the `allowModeOverride` option should also be set in the External Processing filter configuration) |
+| `DD_SERVICE_EXTENSION_TLS_CERT_FILE`      | `localhost.crt` | Change the default gRPC TLS layer certificate.                                                                           |
+| `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`       | `10485760`                 | Maximum size of the bodies to be processed in bytes. If set to `0`, the bodies are not processed. The recommended value is `10485760` (10MB). (To fully enable body processing, the `allowModeOverride` option should also be set in the External Processing filter configuration.) |
 | `DD_SERVICE`                              | `serviceextensions` | Service name shown in the Datadog UI.                                                                                                    |
 
 
