@@ -149,15 +149,15 @@ The External Processor is built on top of the [Datadog Go Tracer][7] and inherit
 
 ### 2. Configure an EnvoyExtensionPolicy
 
-Use an `EnvoyExtensionPolicy` to instruct Envoy Gateway to call the Datadog external processor. You can attach the policy to a **Gateway** or to specific **HTTPRoute/GRPCRoute** resources.
+Use an `EnvoyExtensionPolicy` to instruct Envoy Gateway to call the Datadog external processor. You can attach the policy to a Gateway or to specific HTTPRoute/GRPCRoute resources.
 
-This sends **all traffic** on the selected Gateway to the external processor.
+This sends all traffic on the selected Gateway to the external processor. Here is an example manifest (`datadog-aap-extproc-eep.yaml`):
 
 ```yaml
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: EnvoyExtensionPolicy
 metadata:
-  name: datadog-aap-extproc-eg
+  name: datadog-aap-extproc-eep
   namespace: <your-preferred-namespace> # same namespace as the Gateway
 spec:
   targetRefs:
@@ -202,13 +202,13 @@ spec:
 
 #### Cross‑namespace reference
 
-If your external processor `Service` is in a **different namespace** than the policy, add a [ReferenceGrant][10] in the processor’s namespace. For example, you can do this with a manifest such as `datadog-allow-eep-extproc.yaml`.
+If your external processor `Service` is in a **different namespace** than the policy, add a [ReferenceGrant][10] in the processor’s namespace. For example, you can do this with a manifest such as `datadog-aap-eep-rg.yaml`.
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
-  name: datadog-allow-eep-extproc
+  name: datadog-aap-eep-rg
   namespace: <your-extproc-namespace>   # namespace of the external processor Service
 spec:
   from:
