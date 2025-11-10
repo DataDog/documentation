@@ -50,22 +50,19 @@ Additional protocols and traffic encryption methods are in <a href="/universal_s
 Universal Service Monitoring detects service names from environment variables that exist when a process starts. USM reads these values from the operating system: from <code>/proc/PID/environ</code> on Linux, or through system APIs on Windows.
 </div>
 
-**Environment variables USM recognizes:**
-- `DD_SERVICE` - Explicitly sets the service name
-- `DD_TAGS` - Can include `service:name` tag
-- `DD_ENV` - Sets the environment tag
-- `DD_VERSION` - Sets the version tag
+USM recognizes the following environment variables:
+- `DD_SERVICE`: Explicitly sets the service name
+- `DD_ENV`: Sets the environment tag
+- `DD_VERSION`: Sets the version tag
+- `DD_TAGS`: Additional tags; can include the `service:name` tag
 
-**Key limitation:**
+### Key limitation: USM and programmatically-set environment variables for APM
 
-Setting environment variables programmatically **inside your application code** (such as `System.setProperty("dd.service", "my-service")` in Java or `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` in .NET) will **not** be detected by USM, even though these values work for APM tracing instrumentation.
+If you set environment variables programmatically **inside your application code** (such as `System.setProperty("dd.service", "my-service")` in Java, or `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` in .NET), these environment variables are **not** detected by USM, even though these values work for APM tracing instrumentation.
 
-**Why this happens:**
+This happens because USM runs in the Datadog Agent as a separate process and only sees the environment variables that were set when your process started. Conversely, APM instrumentation libraries run inside your application process and can read runtime environment changes.
 
-- **APM instrumentation libraries** run inside your application process and can read runtime environment changes
-- **USM runs in the Datadog Agent** as a separate process and only sees the environment variables that were set when your process started
-
-**To ensure USM detection, set environment variables before the application starts:**
+**To ensure USM detection, set environment variables before the application starts**:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -802,13 +799,16 @@ service_monitoring_config:
 ```
 
 <div class="alert alert-warning">
-<strong>Important limitation for non-IIS Windows services:</strong> Universal Service Monitoring on Windows uses Event Tracing for Windows (ETW) via the <code>Microsoft-Windows-HttpService</code> provider for HTTPS traffic monitoring. This ETW provider is only available for IIS-based services. Non-IIS services (such as custom .NET applications, Node.js servers, Java servers, or other HTTP servers running on Windows) <strong>do not support HTTPS monitoring</strong> through USM. Only plain HTTP traffic can be monitored for non-IIS Windows services.
+<strong>Important limitation for non-IIS Windows services:</strong> Universal Service Monitoring on Windows uses Event Tracing for Windows (ETW) through the <code>Microsoft-Windows-HttpService</code> provider for HTTPS traffic monitoring. This ETW provider is only available for IIS-based services. Non-IIS services (such as custom .NET applications, Node.js servers, Java servers, or other HTTP servers running on Windows) <strong>do not support HTTPS monitoring</strong> through USM. Only plain HTTP traffic can be monitored for non-IIS Windows services.
 </div>
 
-**What this means:**
-- ✅ **IIS services**: Both HTTP and HTTPS traffic is monitored
-- ✅ **Non-IIS services**: HTTP traffic is monitored
-- ❌ **Non-IIS services**: HTTPS traffic is **not** monitored
+### IIS and non-IIS service support
+
+| Service type     | HTTP traffic monitoring | HTTPS traffic monitoring |
+| ---  | ----------- | ----------- |
+| IIS services     | Supported | Supported               |
+| Non-IIS services | Supported | **Not supported** |
+
    
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 {{% /tab %}}
