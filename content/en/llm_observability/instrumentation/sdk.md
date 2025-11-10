@@ -2081,7 +2081,7 @@ def llm_call():
     return completion
 {{< /code-block >}}
 
-[1]: https://app.datadoghq.com/llm/settings/evaluations
+[1]: https://app.datadoghq.com/llm/evaluations
 
 {{% /tab %}}
 
