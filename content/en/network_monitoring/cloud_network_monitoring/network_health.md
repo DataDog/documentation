@@ -16,18 +16,13 @@ further_reading:
 
 ## Overview
 
-Network Health helps you identify and resolve network issues without requiring deep networking expertise. Eliminating the need for manual analysis, Network Health automatically detects common network problems, such as expired TLS certificates, security group misconfigurations, and DNS failures, and offers clear remediation paths.
-
-The Network Health page prioritizes issues based on their impact to your services, ensuring you focus on problems affecting your most important traffic flows.
-
-**PLACEHOLDER SCREENSHOT FROM ORG2**
+Network Health provides a unified view of your network's most critical issues, automatically detecting and prioritizing problems across DNS, TLS certificates, security groups, and network anomalies. It surfaces actionable insights with clear remediation paths, helping you resolve connectivity issues and reduce incident impact.
 
 {{< img src="network_performance_monitoring/network_health/network_health_overview.png" alt="The Network Health page showing recommended actions, Watchdog insights, TLS certificates, and DNS Failures" style="width:100%;">}}
 
 ## Prerequisites
 
 - [Cloud Network Monitoring][1] enabled
-- Agent version 7.33 or later ??
 
 ## Recommended actions
 
@@ -43,19 +38,17 @@ Each recommended action displays:
 - **Impacted server service**: The service receiving requests.
 - A direct path to remediation.
 
-Hover over a service name to pivot to APM for additional context, or click on a recommended action to open a side panel with remediation steps and links to related resources.
+Hover over a service name to pivot to APM for additional context, or click on a recommended action to open a side panel which contains remediation steps and links to related resources.
 
-**PLACEHOLDER SCREENSHOT FROM ORG2**
-
-   {{< img src="network_performance_monitoring/network_health/recommended_actions_side_panel.png" alt="Recommended actions side panel of an affected service, showing remediation steps, and service action items." style="width:100%;">}}
+   {{< img src="network_performance_monitoring/network_health/recommended_actions_side_panel.png" alt="Recommended actions side panel of an affected service, showing remediation steps." style="width:100%;">}}
 
 ## Watchdog Insights
 
 The **Watchdog Insights** section displays anomalous network behavior detected by Watchdog, specifically focusing on TCP retransmits. A spike in TCP retransmits compared to your baseline (typically the previous week) often indicates an underlying network issue.
 
-While Watchdog Insights help you:
+Watchdog Insights help you:
 - Detect potential problems early.
-- Correlate anomalies with specific root causes listed below.
+- Correlate anomalies with specific root causes.
 - Investigate performance degradation before it impacts users.
 
 ## TLS certificates
@@ -77,7 +70,7 @@ This section shows:
 - Services impacted by DNS resolution issues.
 - The timing of DNS failure spikes.
 
-Hover over a service name to pivot to APM for additional context, or click on DNS Failure to open a side panel with remediation steps and links to related resources.
+Hover over a service name to pivot to APM for additional context, or click on DNS Failure to open a side panel which contains remediation steps and links to related resources.
 
 ## Security groups
 
@@ -96,14 +89,10 @@ This section identifies:
 
 ## Filtering
 
-_I don't currently see this in Org2 so am verifying expected behavior_
-
 Use the filters at the top of the page to narrow the scope of displayed issues. Available filters include:
 
-- **Data center**: Focus on issues within a specific data center.
 - **Service**: View problems affecting a particular service.
 - **Team**: Filter issues by team ownership.
-- **Environment**: Isolate production, staging, or other environment issues.
 
 ## Further Reading
 
