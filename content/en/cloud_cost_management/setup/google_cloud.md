@@ -25,6 +25,7 @@ To use Google Cloud Cost Management in Datadog, follow these steps:
 1. Configure the [Google Cloud Platform Integration][12]
 2. Set up the [detailed usage cost export][13] with the necessary permissions (Google Service APIs, export project access, and BigQuery Dataset access)
 3. Create or select a [Google Cloud Storage bucket][15] with the necessary permissions (Bucket access)
+4. Manually configure an export from your BigQuery billing dataset to the Cloud Storage bucket
 
 ## Setup
 
@@ -97,8 +98,7 @@ The following permissions allow Datadog to access and transfer the billing expor
   **Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.dataEditor`.
 
 ### Create or select a Google Cloud Storage bucket
-Use an existing Google Cloud Storage bucket or create a new one.
-Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to the selected bucket and prefixed with `datadog_cloud_cost_detailed_usage_export`.
+Use an existing Google Cloud Storage bucket or create a new one. When you set up the export in a later step, the exported data should be prefixed with `datadog_cloud_cost_detailed_usage_export`.
 
 **Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
 
@@ -115,6 +115,19 @@ Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to th
    * `storage.objects.list`
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`.
+
+### Set up the export from BigQuery to cloud storage
+
+<div class="alert alert-warning">
+Datadog does not automatically export data from your BigQuery billing dataset to the Cloud Storage bucket. You must manually configure this export.
+</div>
+
+To enable Datadog to access your cost data, you need to export data from your BigQuery billing dataset to the Cloud Storage bucket you created in the previous step. You can do this using one of the following methods:
+
+- **Scheduled queries**: Set up a [BigQuery scheduled query][18] to regularly export data to your bucket. The exported data should be prefixed with `datadog_cloud_cost_detailed_usage_export`.
+- **Manual exports**: Use [BigQuery's export functionality][19] to export your billing data to Cloud Storage in formats such as CSV, JSON, or Avro.
+
+For detailed instructions on exporting BigQuery data to Cloud Storage, see the [Google Cloud documentation on exporting table data][19].
 
 ### (Optional) Configure cross-project service authorization:
 If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset, you need to [grant cross-project service account authorization][10]:
@@ -209,3 +222,5 @@ The following out-of-the-box tags are available:
 [15]: /cloud_cost_management/setup/google_cloud/#create-or-select-a-google-cloud-storage-bucket
 [16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage
 [17]: /cloud_cost_management/tags
+[18]: https://cloud.google.com/bigquery/docs/scheduling-queries
+[19]: https://cloud.google.com/bigquery/docs/exporting-data

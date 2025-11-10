@@ -38,7 +38,7 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 ## Integrate into the development lifecycle
 
 ### Source code management
-{{< whatsnext desc="During code reviews, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request." >}}
+{{< whatsnext desc="During code reviews, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. This is supported for GitHub, GitLab, and Azure DevOps repositories (cloud-hosted). When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request." >}}
     {{< nextlink href="static_analysis/github_pull_requests" >}}Pull Requests{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -65,7 +65,7 @@ Click on a violation to open a side panel that contains information about the sc
 
 The content of the violation is shown in tabs:
 
-- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider (GitHub[4], GitLab[5]).
+- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider ([GitHub][4], [GitLab][5], Azure[6]).
 - **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
 - **Event**: JSON metadata regarding the violation.
 
@@ -74,7 +74,7 @@ For a subset of SAST vulnerabilities, Bits AI can review the context of the find
 
 For each finding, you can provide Bits AI with feedback on its assessment.
 
-{{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="Supported CWEs" level="h4" expanded=true id="id-for-anchoring" %}}
 False positive filtering is supported for the following CWEs:
 - [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
 - [CWE-78: OS Command Injection](https://cwe.mitre.org/data/definitions/78.html)
@@ -192,4 +192,4 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [13]: https://docs.datadoghq.com/security/code_security/static_analysis/#link-results-to-datadog-services-and-teams
 [14]: /account_management/teams/
 [15]: /integrations/github/#connect-github-teams-to-datadog-teams
-
+[16]: /integrations/azure-devops-source-code/

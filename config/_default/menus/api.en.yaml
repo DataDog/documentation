@@ -139,6 +139,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateAWSEventBridgeSource
         unstable: []
@@ -151,6 +152,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - ListAWSEventBridgeSources
         unstable: []
@@ -163,6 +165,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - DeleteAWSEventBridgeSource
         unstable: []
@@ -2413,6 +2416,32 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
+    - name: Returns list of Secrets rules
+      url: '#returns-list-of-secrets-rules'
+      identifier: security-monitoring-returns-list-of-secrets-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecretsRules
+        unstable:
+          - v2
+        order: 28
+    - name: Ruleset get multiple
+      url: '#ruleset-get-multiple'
+      identifier: security-monitoring-ruleset-get-multiple
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMultipleRulesets
+        unstable:
+          - v2
+        order: 28
     - name: Get a job's hist signals
       url: '#get-a-jobs-hist-signals'
       identifier: security-monitoring-get-a-jobs-hist-signals

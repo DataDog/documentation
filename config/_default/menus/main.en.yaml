@@ -1624,26 +1624,31 @@ menu:
       parent: dashboards
       weight: 9
       identifier: dashboards_overlays
+    - name: Annotations
+      url: dashboards/annotations/
+      parent: dashboards
+      weight: 10
+      identifier: dashboards_annotations
     - name: Sharing
       identifier: dashboards_sharing
       url: dashboards/sharing/
       parent: dashboards
-      weight: 10
+      weight: 1001
     - name: Shared Dashboards
       identifier: dashboards_sharing_shared_dashboards
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
-      weight: 1001
+      weight: 1002
     - name: Share Graphs
       identifier: dashboards_sharing_graphs
       url: dashboards/sharing/graphs
       parent: dashboards_sharing
-      weight: 1002
+      weight: 1003
     - name: Scheduled Reports
       identifier: dashboards_reporting
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
-      weight: 1003
+      weight: 1004
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
@@ -2515,7 +2520,7 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_status_pages
       weight: 903
-    - name: Statuspage
+    - name: Atlassian Statuspage
       url: service_management/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
@@ -3819,6 +3824,11 @@ menu:
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
       weight: 901
+    - name: Savings
+      url: cloud_cost_management/recommendations/savings
+      parent: cloud_cost_recommendations
+      identifier: cloud_cost_savings
+      weight: 902
     - name: Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
@@ -5360,391 +5370,396 @@ menu:
       identifier: observability_pipelines
       parent: log_management_heading
       weight: 10000
-    - name: Set Up Pipelines
-      url: observability_pipelines/set_up_pipelines/
+    - name: Configuration
+      url: observability_pipelines/configuration/
       parent: observability_pipelines
+      identifier: observability_pipelines_configuration
+      weight: 1
+    - name: Explore Templates
+      url: observability_pipelines/configuration/explore_templates/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_explore_templates
+      weight: 101
+    - name: Set Up Pipelines
+      url: observability_pipelines/configuration/set_up_pipelines/
+      parent: observability_pipelines_configuration
       identifier: observability_pipelines_set_up_pipelines
-      weight: 2
+      weight: 102
+    - name: Install the Worker
+      url: observability_pipelines/configuration/install_the_worker/
+      identifier: observability_pipelines_install_the_worker
+      parent: observability_pipelines_configuration
+      weight: 103
+    - name: Advanced Worker Configuration
+      url: observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+      parent: observability_pipelines_install_the_worker
+      identifier: observability_pipelines_advanced_worker_configurations
+      weight: 10301
     - name: Run Multiple Pipelines on a Host
       identifier: observability_run_multiple_pipelines_on_a_host
-      url: /observability_pipelines/set_up_pipelines/run_multiple_pipelines_on_a_host/
-      parent: observability_pipelines_set_up_pipelines
-      weight: 201
-    - name: Install the Worker
-      url: observability_pipelines/install_the_worker/
-      identifier: observability_pipelines_install_the_worker
-      parent: observability_pipelines
-      weight: 3
-    - name: Commands
-      url: observability_pipelines/install_the_worker/worker_commands/
-      identifier: install_the_worker_commands
+      url: /observability_pipelines/configuration/install_the_worker/run_multiple_pipelines_on_a_host/
       parent: observability_pipelines_install_the_worker
-      weight: 301
-    - name: ECS Fargate
-      url: observability_pipelines/install_the_worker/set_up_the_worker_in_ecs_fargate/
-      identifier: install_the_worker_ecs_fargate
-      parent: observability_pipelines_install_the_worker
-      weight: 302
-    - name: Update Existing Pipelines
-      url: observability_pipelines/update_existing_pipelines/
-      parent: observability_pipelines
-      identifier: observability_pipelines_update_existing_pipelines
-      weight: 4
+      weight: 10302
     - name: Live Capture
-      identifier: observability_pipelines/live_capture/
-      url: /observability_pipelines/live_capture/
-      parent: observability_pipelines
-      weight: 5
-    - name: Advanced Configurations
-      url: observability_pipelines/advanced_configurations/
-      parent: observability_pipelines
-      identifier: observability_pipelines_advanced_configurations
-      weight: 6
-    - name: Monitoring
-      url: /observability_pipelines/monitoring/
-      identifier: observability_pipelines_monitoring
-      parent: observability_pipelines
-      weight: 7
-    - name: Metrics
-      url: /observability_pipelines/monitoring/metrics/
-      identifier: observability_pipelines_metrics
-      parent: observability_pipelines_monitoring
-      weight: 701
-    - name: Performance
-      identifier: observability_pipelines_performance
-      url: observability_pipelines/performance/
-      parent: observability_pipelines
-      weight: 8
+      identifier: observability_pipelines/configuration/live_capture/
+      url: /observability_pipelines/configuration/live_capture/
+      parent: observability_pipelines_configuration
+      weight: 104
+    - name: Update Existing Pipelines
+      url: observability_pipelines/configuration/update_existing_pipelines
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_update_existing_pipelines
+      weight: 105
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
       identifier: observability_pipelines_sources
-      weight: 9
+      weight: 2
     - name: Amazon Data Firehose
       url: observability_pipelines/sources/amazon_data_firehose/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_amazon_data_firehose
-      weight: 901
+      weight: 201
     - name: Amazon S3
       url: observability_pipelines/sources/amazon_s3/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_amazon_s3
-      weight: 902
+      weight: 202
     - name: Azure Event Hubs
       url: observability_pipelines/sources/azure_event_hubs/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_azure_event_hubs
-      weight: 903
+      weight: 203
     - name: Datadog Agent
       url: observability_pipelines/sources/datadog_agent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_datadog_agent
-      weight: 904
+      weight: 204
     - name: Filebeat
       url: observability_pipelines/sources/filebeat/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_filebeat
-      weight: 905
+      weight: 205
     - name: Fluent
       url: observability_pipelines/sources/fluent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_fluent
-      weight: 906
+      weight: 206
     - name: Google Pub/Sub
       url: observability_pipelines/sources/google_pubsub/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_google_pubsub
-      weight: 907
+      weight: 207
     - name: HTTP Client
       url: observability_pipelines/sources/http_client/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
-      weight: 908
+      weight: 208
     - name: HTTP Server
       url: observability_pipelines/sources/http_server/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
-      weight: 909
-    - name: Kafka
-      url: observability_pipelines/sources/kafka/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_kafka
-      weight: 910
+      weight: 209
     - name: Lambda Forwarder
       url: observability_pipelines/sources/lambda_forwarder/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_forwarder
-      weight: 911
-    - name: Logstash
-      url: observability_pipelines/sources/logstash/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_logstash
-      weight: 912
+      weight: 210
     - name: OpenTelemetry
       url: observability_pipelines/sources/opentelemetry/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
-      weight: 913
+      weight: 211
+    - name: Kafka
+      url: observability_pipelines/sources/kafka/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_kafka
+      weight: 212
+    - name: Logstash
+      url: observability_pipelines/sources/logstash/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_logstash
+      weight: 213
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 914
+      weight: 214
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 915
+      weight: 215
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 916
+      weight: 216
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 917
+      weight: 217
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 918
+      weight: 218
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
       identifier: observability_pipelines_processors
-      weight: 10
+      weight: 3
     - name: Add Environment Variables
       url: observability_pipelines/processors/add_environment_variables
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_environment_variables
-      weight: 1001
+      weight: 301
     - name: Add hostname
       url: observability_pipelines/processors/add_hostname
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_add_hostname
-      weight: 1002
+      weight: 302
     - name: Custom Processor
       url: observability_pipelines/processors/custom_processor
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_custom_processor
-      weight: 1003
+      weight: 303
     - name: Deduplicate
       url: observability_pipelines/processors/dedupe
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_dedupe
-      weight: 1004
+      weight: 304
     - name: Edit fields
       url: observability_pipelines/processors/edit_fields
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_edit_fields
-      weight: 1005
+      weight: 305
     - name: Enrichment Table
       url: observability_pipelines/processors/enrichment_table
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_enrichment_table
-      weight: 1006
+      weight: 306
     - name: Filter
       url: observability_pipelines/processors/filter
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_filter
-      weight: 1007
+      weight: 307
     - name: Generate Metrics
       url: observability_pipelines/processors/generate_metrics
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_generate_metrics
-      weight: 1008
+      weight: 308
     - name: Grok Parser
       url: observability_pipelines/processors/grok_parser
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
-      weight: 1009
+      weight: 309
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 1010
+      weight: 310
     - name: Parse XML
       url: observability_pipelines/processors/parse_xml
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_xml
-      weight: 1011
+      weight: 311
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 1012
+      weight: 312
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 1013
+      weight: 313
     - name: Remap to OCSF
       url: observability_pipelines/processors/remap_ocsf
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
-      weight: 1014
+      weight: 314
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 1015
+      weight: 315
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 1016
+      weight: 316
     - name: Split Array
       url: observability_pipelines/processors/split_array
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
-      weight: 1017
+      weight: 317
     - name: Tags
       url: observability_pipelines/processors/tags
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tags
-      weight: 1018
+      weight: 318
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 1019
+      weight: 319
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
       identifier: observability_pipelines_destinations
-      weight: 11
+      weight: 4
     - name: Amazon OpenSearch
       url: observability_pipelines/destinations/amazon_opensearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_amazon_opensearch
-      weight: 1101
+      weight: 401
     - name: Amazon S3
       identifier: observability_pipelines_destinations_amazon_s3
       url: observability_pipelines/destinations/amazon_s3/
       parent: observability_pipelines_destinations
-      weight: 1102
+      weight: 402
     - name: Amazon Security Lake
       identifier: observability_pipelines_destinations_amazon_security_lake
       url: observability_pipelines/destinations/amazon_security_lake/
       parent: observability_pipelines_destinations
-      weight: 1103
+      weight: 403
     - name: Azure Storage
       identifier: observability_pipelines_azure_storage
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
-      weight: 1104
+      weight: 404
     - name: CrowdStrike NG-SIEM
       identifier: observability_pipelines_crowdstrike_ng_siem
       url: observability_pipelines/destinations/crowdstrike_ng_siem/
       parent: observability_pipelines_destinations
-      weight: 1105
+      weight: 405
     - name: Datadog CloudPrem
-      identifier: observability_pipelines_cloudprem
       url: observability_pipelines/destinations/cloudprem/
       parent: observability_pipelines_destinations
-      weight: 1106
+      identifier: observability_pipelines_datadog_cloudprem
+      weight: 406
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
-      weight: 1107
+      weight: 407
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 1108
+      weight: 408
     - name: Google Chronicle
       url: observability_pipelines/destinations/google_chronicle
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_chronicle
-      weight: 1109
-    - name: Google Pub/Sub
-      identifier: observability_pipelines_google_pubsub
-      url: observability_pipelines/destinations/google_pubsub/
-      parent: observability_pipelines_destinations
-      weight: 1110
+      weight: 409
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 1111
+      weight: 410
+    - name: Google Pub/Sub
+      identifier: observability_pipelines_google_pubsub
+      url: /observability_pipelines/destinations/google_pubsub/
+      parent: observability_pipelines_destinations
+      weight: 411
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_http_client
-      weight: 1112
+      weight: 412
     - name: Kafka
       url: observability_pipelines/destinations/kafka/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_kafka
-      weight: 1113
+      weight: 413
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 1114
+      weight: 414
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 1115
+      weight: 415
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 1116
+      weight: 416
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 1117
+      weight: 417
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 1118
+      weight: 418
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 1119
+      weight: 419
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 1120
+      weight: 420
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 1121
-    - name: Environment Variables
-      url: observability_pipelines/environment_variables/
+      weight: 421
+    - name: Scaling and Performance
+      url: observability_pipelines/scaling_and_performance/
       parent: observability_pipelines
-      identifier: observability_pipelines_environment_variables
-      weight: 12
-    - name: Access Control
-      url: observability_pipelines/access_control/
-      parent: observability_pipelines
-      identifier: observability_pipelines_access_control
-      weight: 13
+      identifier: observability_pipelines_scaling_and_performance
+      weight: 5
+    - name: Handling Load and Backpressure
+      url: observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
+      parent: observability_pipelines_scaling_and_performance
+      identifier: observability_pipelines_handling_load_and_backpressure
+      weight: 501
     - name: Best Practices for Scaling Observability Pipelines
-      url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
-      parent: observability_pipelines
+      url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
+      parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 14
+      weight: 502
+    - name: Monitoring and Troubleshooting
+      url: observability_pipelines/monitoring_and_troubleshooting/
+      parent: observability_pipelines
+      identifier: observability_pipelines_monitoring_and_troubleshooting
+      weight: 6
+    - name: Worker CLI Commands
+      url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
+      parent: observability_pipelines_monitoring_and_troubleshooting
+      identifier: observability_pipelines_worker_cli_commands
+      weight: 601
+    - name: Monitoring Pipelines
+      url: observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/
+      parent: observability_pipelines_monitoring_and_troubleshooting
+      identifier: observability_pipelines_monitoring_pipelines
+      weight: 602
+    - name: Pipeline Usage Metrics
+      url: observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+      parent: observability_pipelines_monitoring_and_troubleshooting
+      identifier: observability_pipelines_pipeline_usage_metrics
+      weight: 603
+    - name: Troubleshooting
+      url: observability_pipelines/monitoring_and_troubleshooting/troubleshooting/
+      identifier: observability_pipelines_troubleshooting
+      parent: observability_pipelines_monitoring_and_troubleshooting
+      weight: 604
     - name: Guides
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 15
-    - name: Troubleshooting
-      url: observability_pipelines/troubleshooting/
-      identifier: observability_pipelines_troubleshooting
-      parent: observability_pipelines
-      weight: 16
+      weight: 7
     - name: Log Management
       url: logs/
       pre: log
@@ -6374,6 +6389,11 @@ menu:
       parent: cloud_siem
       identifier: siem_guides
       weight: 11
+    - name: Data Security
+      url: data_security/cloud_siem/
+      parent: cloud_siem
+      identifier: siem_data_security
+      weight: 12
     - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading
@@ -7312,81 +7332,81 @@ menu:
       identifier: rum
       parent: digital_experience_heading
       weight: 20000
-    - name: Browser Monitoring
-      url: real_user_monitoring/browser/
-      parent: rum
-      identifier: rum_browser
-      weight: 1
-    - name: Setup
-      url: real_user_monitoring/browser/setup/
-      parent: rum_browser
-      identifier: rum_browser_setup
-      weight: 101
-    - name: Client-Side
-      url: real_user_monitoring/browser/setup/client
-      parent: rum_browser_setup
-      identifier: rum_browser_setup_client
-      weight: 1101
-    - name: Auto-Instrumentation
-      url: real_user_monitoring/browser/setup/server
-      parent: rum_browser_setup
-      identifier: rum_browser_setup_server
-      weight: 1102
-    - name: Advanced Configuration
-      url: real_user_monitoring/browser/advanced_configuration/
-      parent: rum_browser
-      identifier: rum_advanced
-      weight: 102
-    - name: Data Collected
-      url: real_user_monitoring/browser/data_collected/
-      parent: rum_browser
-      identifier: rum_data_collected
-      weight: 103
-    - name: Monitoring Page Performance
-      url: real_user_monitoring/browser/monitoring_page_performance/
-      parent: rum_browser
-      identifier: page_performance
-      weight: 104
-    - name: Optimizing Performance
-      url: real_user_monitoring/browser/optimizing_performance/
-      parent: rum_browser
-      identifier: rum_optimizing_performance
-      weight: 105
-    - name: Monitoring Resource Performance
-      url: real_user_monitoring/browser/monitoring_resource_performance/
-      parent: rum_browser
-      identifier: resource_performance
-      weight: 106
-    - name: Collecting Browser Errors
-      url: real_user_monitoring/browser/collecting_browser_errors/
-      parent: rum_browser
-      identifier: collect_errors
-      weight: 107
-    - name: Tracking User Actions
-      url: real_user_monitoring/browser/tracking_user_actions/
-      parent: rum_browser
-      identifier: track_actions
-      weight: 108
-    - name: Frustration Signals
-      url: real_user_monitoring/browser/frustration_signals/
-      parent: rum_browser
-      identifier: rum_frustration_signals
-      weight: 109
-    - name: Error Tracking
-      url: real_user_monitoring/browser/error_tracking/
-      parent: rum_browser
-      identifier: rum_browser_error_tracking
-      weight: 110
-    - name: Troubleshooting
-      url: real_user_monitoring/browser/troubleshooting/
-      parent: rum_browser
-      identifier: troubleshooting
-      weight: 111
-    - name: Mobile and TV Monitoring
+    - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
       identifier: application_monitoring
       weight: 2
+    - name: Browser
+      url: real_user_monitoring/application_monitoring/browser/
+      parent: application_monitoring
+      identifier: rum_browser
+      weight: 200
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/browser/setup/
+      parent: rum_browser
+      identifier: rum_browser_setup
+      weight: 101
+    - name: Client-Side
+      url: real_user_monitoring/application_monitoring/browser/setup/client
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_client
+      weight: 1101
+    - name: Auto-Instrumentation
+      url: real_user_monitoring/application_monitoring/browser/setup/server
+      parent: rum_browser_setup
+      identifier: rum_browser_setup_server
+      weight: 1102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/browser/advanced_configuration/
+      parent: rum_browser
+      identifier: rum_advanced
+      weight: 102
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/browser/data_collected/
+      parent: rum_browser
+      identifier: rum_data_collected
+      weight: 103
+    - name: Monitoring Page Performance
+      url: real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
+      parent: rum_browser
+      identifier: page_performance
+      weight: 104
+    - name: Optimizing Performance
+      url: real_user_monitoring/application_monitoring/browser/optimizing_performance/
+      parent: rum_browser
+      identifier: rum_optimizing_performance
+      weight: 105
+    - name: Monitoring Resource Performance
+      url: real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
+      parent: rum_browser
+      identifier: resource_performance
+      weight: 106
+    - name: Collecting Browser Errors
+      url: real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
+      parent: rum_browser
+      identifier: collect_errors
+      weight: 107
+    - name: Tracking User Actions
+      url: real_user_monitoring/application_monitoring/browser/tracking_user_actions/
+      parent: rum_browser
+      identifier: track_actions
+      weight: 108
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/browser/frustration_signals/
+      parent: rum_browser
+      identifier: rum_frustration_signals
+      weight: 109
+    - name: Error Tracking
+      url: real_user_monitoring/application_monitoring/browser/error_tracking/
+      parent: rum_browser
+      identifier: rum_browser_error_tracking
+      weight: 110
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/browser/troubleshooting/
+      parent: rum_browser
+      identifier: troubleshooting
+      weight: 111
     - name: Android and Android TV
       url: real_user_monitoring/application_monitoring/android
       parent: application_monitoring
@@ -7957,21 +7977,26 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 1002
+    - name: Operations Monitoring
+      url: real_user_monitoring/operations_monitoring/
+      parent: rum
+      identifier: rum_operations_monitoring
+      weight: 11
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 11
+      weight: 12
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 12
+      weight: 13
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 13
+      weight: 14
     - name: Product Analytics
       url: product_analytics
       pre: product-analytics
@@ -8359,31 +8384,36 @@ menu:
       url: account_management/billing/ci_visibility/
       parent: account_management_billing
       weight: 1212
+    - name: Incident Response
+      identifier: account_management_billing_incident_response
+      url: account_management/billing/incident_response/
+      parent: account_management_billing
+      weight: 1213
     - name: AWS Integration
       identifier: account_management_billing_aws
       url: account_management/billing/aws/
       parent: account_management_billing
-      weight: 1213
+      weight: 1214
     - name: Azure Integration
       identifier: account_management_billing_azure
       url: account_management/billing/azure/
       parent: account_management_billing
-      weight: 1214
+      weight: 1215
     - name: Google Cloud Integration
       identifier: account_management_billing_google_cloud
       url: account_management/billing/google_cloud/
       parent: account_management_billing
-      weight: 1215
+      weight: 1216
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1216
+      weight: 1217
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1217
+      weight: 1218
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
@@ -8415,51 +8445,56 @@ menu:
       url: data_security/agent/
       parent: data_security
       weight: 1
-    - name: Tracing
-      identifier: data_security_tracing
-      url: /tracing/configure_data_security/
+    - name: Cloud SIEM
+      identifier: data_security_cloud_siem
+      url: data_security/cloud_siem/
       parent: data_security
       weight: 2
-    - name: Log Management
-      identifier: data_security_log_management
-      url: data_security/logs/
-      parent: data_security
-      weight: 3
     - name: Kubernetes
       identifier: data_security_kubernetes
       url: data_security/kubernetes
       parent: data_security
       weight: 4
-    - name: Synthetic Monitoring
-      identifier: data_security_synthetic_monitoring
-      url: data_security/synthetics/
+    - name: Log Management
+      identifier: data_security_log_management
+      url: data_security/logs/
       parent: data_security
-      weight: 5
+      weight: 4
     - name: Real User Monitoring
       identifier: data_security_real_user_monitoring
       url: data_security/real_user_monitoring/
       parent: data_security
+      weight: 5
+    - name: Synthetic Monitoring
+      identifier: data_security_synthetic_monitoring
+      url: data_security/synthetics/
+      parent: data_security
       weight: 6
+    - name: Tracing
+      identifier: data_security_tracing
+      url: /tracing/configure_data_security/
+      parent: data_security
+      weight: 7
     - name: PCI Compliance
       identifier: data_security_pci_compliance
       url: data_security/pci_compliance/
       parent: data_security
-      weight: 7
+      weight: 8
     - name: HIPAA Compliance
       identifier: data_security_hipaa_compliance
       url: data_security/hipaa_compliance/
       parent: data_security
-      weight: 8
+      weight: 9
     - name: Data Retention Periods
       identifier: data_retention_periods
       url: data_security/data_retention_periods/
       parent: data_security
-      weight: 9
+      weight: 10
     - name: Guides
       identifier: data_security_guide
       url: data_security/guide/
       parent: data_security
-      weight: 9
+      weight: 11
     - name: Help
       url: help/
       pre: info-fill

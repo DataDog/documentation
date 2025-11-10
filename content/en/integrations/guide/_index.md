@@ -49,22 +49,13 @@ cascade:
 
 {{< header-list header="AWS Marketplace guides:" >}}
     {{< nextlink href="integrations/guide/aws-marketplace-datadog-trial" tag=" AWS Marketplace" >}}AWS Marketplace Datadog trial setup{{< /nextlink >}}
-
 {{< /header-list >}}
 
-{{< header-list header="Azure guides" >}}
-    {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Azure manual setup guide{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Azure Native manual setup guide{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-programmatic-management" tag=" Azure" >}}Azure integration programmatic management guide{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-native-programmatic-management" tag=" Azure" >}}Azure Native integration programmatic management guide{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Managing the Azure Native Integration{{< /nextlink >}}
+{{< header-list header="Azure guides:" >}}
+    {{< nextlink href="integrations/guide/azure-integrations" tag=" Azure" >}}Azure Integrations{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-advanced-configuration" tag=" Azure" >}}Azure Advanced Configuration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-native-integration" tag=" Azure" >}}Azure Native Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Azure Cloud Adoption Framework with Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Azure troubleshooting{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Azure architecture and configuration{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-count-metric" tag=" Azure" >}}Azure count metric{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}Azure VMs appear in the app without metrics{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}Powered-down Azure VMs on the Infrastructure list{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Commands to install the Azure Datadog extension{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Microsoft Graph API Permissions for Monitoring Azure{{< /nextlink >}}
 {{< /header-list >}}
 
@@ -99,4 +90,3 @@ cascade:
     {{< nextlink href="integrations/guide/oracle-check-upgrade-7.50.1" tag=" Oracle" >}}Configuring the Oracle Integration on Agent 7.50.1+{{< /nextlink >}}
     {{< nextlink href="integrations/guide/deprecated-oracle-integration" tag=" Oracle" >}}Configuring the Oracle Integration on Agent versions lower than 7.50.1{{< /nextlink >}}
 {{< /header-list >}}
-

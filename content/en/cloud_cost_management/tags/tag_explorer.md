@@ -31,7 +31,7 @@ Use the [Tag Explorer][2] to understand the sources and view descriptions for ea
 
 ## Setup
 
-To use the Tag Explorer, you must configure [Cloud Cost Management][1] for AWS, Azure, or Google Cloud.
+To use the Tag Explorer, you must configure [Cloud Cost Management][1] for AWS, Azure, Google Cloud, or Oracle Cloud.
 
 See the respective documentation for your cloud provider:
 
