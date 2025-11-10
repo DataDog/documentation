@@ -60,6 +60,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
 Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
 
 - `repository_id`
+- `test_service`
 - `branch`
 - `flaky_status`
 - `test_codeowners`

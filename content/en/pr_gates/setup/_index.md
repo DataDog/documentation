@@ -43,10 +43,10 @@ To create a PR Gates rule in Datadog:
 
    {{< img src="pr_gates/setup/static_analysis_3.png" alt="A Static Analysis rule that runs on all repos and fails when a PR has at least one Static Code Analysis code vulnerability with at least `Critical` severity" style="width:100%" >}}
 
-1. Under **Preview checks**, select your CI provider to preview the [status check](#enable-ci-status-checks) to be added to pull requests. To set the check so it blocks the pipeline when it fails, follow your provider's instructions for making a status check _required_:
+1. Under **Preview checks**, select your CI provider to preview the status check to be added to pull requests. To set the check so it blocks the pipeline when it fails, follow your provider's instructions for making a status check _required_:
 
-   - [GitHub][3]
-   - [Azure DevOps][4]
+   - [GitHub][2]
+   - [Azure DevOps][3]
 
    Non-blocking rules can be helpful when you roll out a new rule and want to verify its behavior before making it blocking.
 
@@ -54,11 +54,11 @@ To create a PR Gates rule in Datadog:
 
 ### Manage PR checks
 
-PR Gates automatically create PR checks in [GitHub][10] or [Azure DevOps][11] pull requests for each rule type evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
+PR Gates automatically create PR checks in [GitHub][4] or [Azure DevOps][5] pull requests for each rule type evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
 
 <div class="alert alert-info"><strong>Note</strong>: Re-running a check in the pull request UI does not re-run the corresponding PR Gates rule.</div>
 
-To ensure PR Gates are able to create PR checks, you must install the integration for your SCM provider. If you do not have the integration installed, follow the [GitHub][14] or [Azure DevOps Source Code][13] integration documentation to set one up.
+To ensure PR Gates are able to create PR checks, you must install the integration for your SCM provider. If you do not have the integration installed, follow the [GitHub][6] or [Azure DevOps Source Code][7] integration documentation to set one up.
 
 ## Manage rules
 
@@ -70,24 +70,17 @@ You can edit or delete a PR Gates rule by hovering over it on the [**PR Gates Ru
 
 Only users with the `quality_gate_rules_write` permission can create and edit PR Gate rules. Users with the `quality_gate_rules_read` permission can view PR Gate rules.
 
-For more information, see the [RBAC Permissions documentation][15].
+For more information, see the [RBAC Permissions documentation][8].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pr-gates
-[2]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/gate/README.md
-[3]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
-[4]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pr-status-policy?view=azure-devops
-[5]: https://github.com/DataDog/datadog-ci/blob/master/README.md
-[6]: /pr_gates/guide/understanding_rule_scopes
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: https://app.datadoghq.com/organization-settings/application-keys
-[9]: /getting_started/site/
-[10]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks
-[11]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pull-request-status?view=azure-devops
-[12]: https://app.datadoghq.com/integrations/github
-[13]: https://app.datadoghq.com/integrations/azure-devops-source-code
-[14]: /integrations/github/
-[15]: /account_management/rbac/permissions
+[2]: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches
+[3]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pr-status-policy?view=azure-devops
+[4]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks
+[5]: https://learn.microsoft.com/en-us/azure/devops/repos/git/pull-request-status?view=azure-devops
+[6]: /integrations/github/
+[7]: /integrations/azure-devops-source-code/
+[8]: /account_management/rbac/permissions

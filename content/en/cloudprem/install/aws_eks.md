@@ -27,7 +27,7 @@ Before getting started with CloudPrem, ensure you have:
 
 - AWS account with necessary permissions
 - Kubernetes `1.25+` ([EKS][1] recommended)
-- [AWS Load Balancer Controller installed][2]
+- [AWS Load Balancer Controller installed][2] (optional)
 - PostgreSQL database ([RDS][3] recommended)
 - S3 bucket for log storage
 - Datadog Agent
@@ -92,10 +92,18 @@ echo ""
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-3. Store the PostgreSQL database connection string as a Kubernetes secret:
+3. Store your Datadog API key as a Kubernetes secret:
 
    ```shell
-   kubectl create secret generic <SECRET_NAME> \
+   kubectl create secret generic datadog-secret \
+   -n <NAMESPACE_NAME> \
+   --from-literal api-key="<DD_API_KEY>"
+   ```
+
+4. Store the PostgreSQL database connection string and your Datadog API key as a Kubernetes secret:
+
+   ```shell
+   kubectl create secret generic cloudprem-metastore-uri \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>"
    ```
@@ -122,6 +130,13 @@ echo ""
    environment:
      AWS_REGION: us-east-1
 
+   # Datadog configuration
+   datadog:
+      # The Datadog [site](https://docs.datadoghq.com/getting_started/site/) to connect to. Defaults to `datadoghq.com`.
+      # site: datadoghq.com
+      # The name of the existing Secret containing the Datadog API key. The secret key name must be `api-key`.
+      apiKeyExistingSecret: datadog-secret
+
    # Service account configuration
    # If `serviceAccount.create` is set to `true`, a service account is created with the specified name.
    # The service account will be annotated with the IAM role ARN if `aws.accountId` and serviceAccount.eksRoleName` are set.
@@ -141,27 +156,11 @@ echo ""
      # All indexes created in CloudPrem are stored under this location.
      default_index_root_uri: s3://<BUCKET_NAME>/indexes
 
-   # Ingress configuration
-   # The chart supports two ingress configurations:
-   # 1. A public ingress for external access through the internet that will be used exclusively by Datadog's control plane and query service.
-   # 2. An internal ingress for access within the VPC
-   #
-   # Both ingresses provision an Application Load Balancers (ALBs) in AWS.
-   # The public ingress ALB is created in public subnets.
-   # The internal ingress ALB is created in private subnets.
+   # Internal ingress configuration for access within the VPC
+   # The ingress provisions an Application Load Balancers (ALBs) in AWS which is created in private subnets.
    #
    # Additional annotations can be added to customize the ALB behavior.
    ingress:
-     # The public ingress is configured to only accept TLS traffic and requires mutual TLS (mTLS) authentication.
-     # Datadog's control plane and query service authenticate themselves using client certificates,
-     # ensuring that only authorized Datadog services can access CloudPrem nodes through the public ingress.
-     public:
-       enabled: true
-       name: cloudprem-public
-       host: cloudprem.acme.corp
-       extraAnnotations:
-         alb.ingress.kubernetes.io/load-balancer-name: cloudprem-public
-
      # The internal ingress is used by Datadog Agents and other collectors running outside
      # the Kubernetes cluster to send their logs to CloudPrem.
      internal:

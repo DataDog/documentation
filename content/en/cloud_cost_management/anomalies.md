@@ -27,7 +27,7 @@ A typical workflow could be the following:
 Anomalies are significant, unexpected changes that stand out from typical patterns. Datadog automatically identifies anomalies using machine learning techniques that adapt to your specific usage patterns.
 
 To distinguish between true anomalies and expected fluctuations, Datadog's algorithm:
-- Recognizes recurring cost spikes and dips, such as a cost increase every Monday
+- Recognizes recurring cost spikes and dips, such as a cost increase every Monday, or a spike on the fourth day of every month
 - Focuses on engineering usage (excludes taxes, credits, refunds, and Reserved Instance fees)
 - Filters out low-impact anomalies to reduce noise
 

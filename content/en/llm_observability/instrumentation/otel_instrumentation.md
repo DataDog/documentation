@@ -37,6 +37,16 @@ Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
 
 **Note**: If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. Refer to your library's documentation for the appropriate configuration method.
 
+#### Using strands-agents
+
+If you are using the [`strands-agents` library][5], you need to set an additional environment variable to enable traces that are compliant with OpenTelemetry v1.37:
+
+```
+OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
+```
+
+This environment variable ensures that `strands-agents` emits traces following the OpenTelemetry v1.37 semantic conventions for generative AI, which are required by LLM Observability.
+
 ### Instrumentation
 
 To generate traces compatible with LLM Observability, do one of the following:
@@ -63,4 +73,5 @@ For the complete list of supported attributes and their specifications, see the 
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /help/
+[5]: https://pypi.org/project/strands-agents/
 

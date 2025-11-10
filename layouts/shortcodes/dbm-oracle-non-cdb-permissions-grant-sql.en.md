@@ -35,3 +35,9 @@ grant select on dba_objects to datadog;
 grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
 ```
+
+If you are unable to fetch data after granting the above permissions, you may not be using the Oracle default profile, and may need to grant the `execute` privilege on `dbms_lob`. To do so, run the following:
+
+```SQL
+grant execute on sys.dbms_lob to datadog;
+```

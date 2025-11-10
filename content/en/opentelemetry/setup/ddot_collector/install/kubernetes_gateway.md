@@ -105,8 +105,6 @@ connectors:
   datadog/connector:
     traces:
       compute_top_level_by_span_kind: true
-      peer_tags_aggregation: true
-      compute_stats_by_span_kind: true
 service:
   pipelines:
     traces:

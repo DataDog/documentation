@@ -104,6 +104,16 @@ The LangChain integration instruments the following methods:
 - [Retrieval][25]
   - `langchain_community.<vectorstore>.similarity_search()`
   - `langchain_pinecone.similarity_search()`
+- [Prompt Templating][64]
+  - `BasePromptTemplate.invoke()`, `BasePromptTemplate.ainvoke()`
+
+  **Note**: For best results, assign templates to variables with meaningful names, as auto-instrumentation uses these names to identify prompts.
+
+  ```python
+  # "translation_template" will be used to identify the template in Datadog
+  translation_template = PromptTemplate.from_template("Translate {text} to {language}")
+  chain = translation_template | llm
+  ```
 
 ## Amazon Bedrock
 
@@ -375,6 +385,7 @@ Both the `run_live` and `run_async` methods are supported.
 [61]: https://google.github.io/adk-docs/agents/
 [62]: https://google.github.io/adk-docs/tools
 [63]: https://google.github.io/adk-docs/agents/llm-agents/#code-execution
+[64]: https://docs.langchain.com/langsmith/manage-prompts-programmatically#pull-a-prompt
 
 {{% /tab %}}
 {{% tab "Node.js" %}}

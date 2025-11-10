@@ -23,6 +23,9 @@ further_reading:
   - link: "/metrics/otlp/?tab=summary#mapping"
     tag: "Documentation"
     text: "OTLP Metrics Mapping in Datadog"
+  - link: "https://www.datadoghq.com/blog/otlp-metrics-api/"
+    tag: "Blog"
+    text: "Ingest OTLP metrics directly into Datadog with the new OTLP Metrics API"
 site_support_id: otlp_agentless
 ---
 

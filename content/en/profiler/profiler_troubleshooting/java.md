@@ -193,7 +193,11 @@ Below are basic troubleshooting steps for resolving those issues:
     chmod 755 /opt/datadog-profiler-tmp
     java -Ddd.profiling.tempdir=/opt/datadog-profiler-tmp -javaagent:/path/to/dd-java-agent.jar ...
     ```
+- If you enable profiling using SSI, you can include the below environment variable in the `application_monitoring.yaml`.
   
+    ```
+    DD_PROFILING_TEMPDIR: <path_to_writable_exec_enabled_directory>
+    ```
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

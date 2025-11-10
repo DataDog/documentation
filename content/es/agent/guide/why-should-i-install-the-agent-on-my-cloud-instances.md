@@ -3,6 +3,9 @@ aliases:
 - /es/agent/faq/why-should-i-install-the-agent-on-my-aws-instances/
 - /es/integrations/faq/why-is-my-aws-error-count-metric-orders-of-magnitude-lower-in-datadog-than-cloudwatch/
 - /es/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+description: Explica las ventajas de instalar el Datadog Agent en instancias en la
+  nube, incluida una mejor resolución, más métricas, integraciones y funciones de
+  monitorización personalizadas.
 further_reading:
 - link: /integrations/guide/cloud-metric-delay/
   tag: Guía

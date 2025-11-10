@@ -872,7 +872,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.distribution('example_metric.gauge', rand 20, tags: ['environment:dev'])
+    statsd.distribution('example_metric.distribution', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 ```

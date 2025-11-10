@@ -29,6 +29,9 @@ aliases:
 | Amazon SNS      | [client-sns](https://www.npmjs.com/package/@aws-sdk/client-sns)                          | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="minimal" >}}                 | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="recommended" >}}                 |
 | Google Pub/Sub  | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub)                | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="minimal" >}}        | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="recommended" >}}        |
 
+#### Support for Amazon SQS with AWS Lambda
+To monitor data streams for Node.js Lambda functions calling Amazon SQS, SNS, or Kinesis, use Datadog's Node.js Lambda tracer, [`datadog-lambda-js` v.12.128.0][8] or later.
+
 ### Installation
 
 Node.js uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka.
@@ -68,3 +71,4 @@ Data Streams Monitoring propagates context through message headers. If you are u
 [5]: https://www.npmjs.com/package/amqplib
 [6]: https://www.npmjs.com/package/rhea
 [7]: /data_streams/manual_instrumentation/?tab=nodejs
+[8]: https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.128.0

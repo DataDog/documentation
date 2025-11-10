@@ -3740,17 +3740,17 @@ menu:
       identifier: cloud_cost_container_cost_allocation
       weight: 301
     - name: AWS
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws/
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=aws#prerequisites
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_aws
       weight: 101
     - name: Azure
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=azure
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=azure#prerequisites
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_azure
       weight: 102
     - name: Google Cloud
-      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=google
+      url: cloud_cost_management/cost_allocation/container_cost_allocation/?tab=google#prerequisites
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_google
       weight: 103
@@ -5831,11 +5831,16 @@ menu:
       parent: log_collection
       identifier: log_collection_opentelemetry
       weight: 115
+    - name: Agent Integrations
+      url: logs/log_collection/agent_checks/
+      parent: log_collection
+      identifier: log_collection_agent_checks
+      weight: 116
     - name: Other Integrations
       url: integrations/#cat-log-collection
       identifier: other_integrations
       parent: log_collection
-      weight: 116
+      weight: 117
     - name: Log Configuration
       url: logs/log_configuration/
       parent: log_management
@@ -5891,11 +5896,16 @@ menu:
       url: logs/log_configuration/rehydrating
       parent: log_configuration
       weight: 210
+    - name: Archive Search
+      identifier: log_configuration_archive_search
+      url: logs/log_configuration/archive_search
+      parent: log_configuration
+      weight: 211
     - name: Forwarding
       identifier: log_configuration_forwarding
       url: logs/log_configuration/forwarding_custom_destinations/
       parent: log_configuration
-      weight: 211
+      weight: 212
     - name: Log Explorer
       url: logs/explorer/
       parent: log_management
@@ -7055,111 +7065,116 @@ menu:
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
       weight: 406
+    - name: Test Suites
+      url: synthetics/test_suites/
+      parent: synthetics
+      identifier: synthetics_test_suites
+      weight: 5
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
       identifier: synthetics_platform
-      weight: 5
+      weight: 6
     - name: Dashboards
       url: synthetics/platform/dashboards
       parent: synthetics_platform
       identifier: synthetics_platform_dashboards
-      weight: 501
+      weight: 601
     - name: API Testing
       url: synthetics/platform/dashboards/api_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_api_test
-      weight: 5101
+      weight: 6101
     - name: Browser Testing
       url: synthetics/platform/dashboards/browser_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_browser_test
-      weight: 5102
+      weight: 6102
     - name: Test Summary
       url: synthetics/platform/dashboards/test_summary
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_test_summary
-      weight: 5103
+      weight: 6103
     - name: Metrics
       url: synthetics/platform/metrics/
       parent: synthetics_platform
       identifier: synthetics_platform_metrics
-      weight: 502
+      weight: 602
     - name: Test Coverage
       url: synthetics/platform/test_coverage
       parent: synthetics_platform
       identifier: synthetics_platform_test_coverage
-      weight: 503
+      weight: 603
     - name: Private Locations
       url: synthetics/platform/private_locations
       parent: synthetics_platform
       identifier: synthetics_private_location
-      weight: 504
+      weight: 604
     - name: Configuration
       url: synthetics/platform/private_locations/configuration
       parent: synthetics_private_location
       identifier: synthetics_private_location_configuration
-      weight: 5401
+      weight: 6041
     - name: Dimensioning
       url: synthetics/platform/private_locations/dimensioning
       parent: synthetics_private_location
       identifier: synthetics_private_location_dimensioning
-      weight: 5402
+      weight: 6042
     - name: Monitoring
       url: synthetics/platform/private_locations/monitoring
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
-      weight: 5402
+      weight: 6043
     - name: Connect APM
       url: synthetics/platform/apm/
       parent: synthetics_platform
       identifier: synthetics_platform_apm
-      weight: 505
+      weight: 605
     - name: Settings
       identifier: synthetics_settings
       url: synthetics/platform/settings
       parent: synthetics_platform
-      weight: 506
+      weight: 606
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics
       identifier: synthetics_explore
-      weight: 6
+      weight: 7
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
       identifier: synthetics_explore_saved_views
-      weight: 601
+      weight: 701
     - name: Results Explorer
       url: synthetics/explore/results_explorer
       parent: synthetics_explore
       identifier: synthetics_results_explorer
-      weight: 602
+      weight: 702
     - name: Search Test Batches
       url: synthetics/explore/results_explorer/search
       parent: synthetics_results_explorer
       identifier: synthetcis_results_explorer_search
-      weight: 6200
+      weight: 7200
     - name: Search Test Runs
       url: synthetics/explore/results_explorer/search_runs
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_runs
-      weight: 6201
+      weight: 7201
     - name: Search Syntax
       url: synthetics/explore/results_explorer/search_syntax
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_syntax
-      weight: 6203
+      weight: 7203
     - name: Export Test Runs
       url: synthetics/explore/results_explorer/export
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_export_test_runs
-      weight: 6204
+      weight: 7204
     - name: Saved Views
       url: synthetics/explore/results_explorer/saved_views
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_saved_views
-      weight: 6205
+      weight: 7205
     - name: Guides
       url: synthetics/guide/
       parent: synthetics

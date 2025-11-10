@@ -43,7 +43,7 @@ LLMObs.enable(
 
 **Notes**:
 - You need *both* an API key and an application key
-  
+
 ## Projects
 _Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
 You can create a project manually in the Datadog console, API, and SDK by specifying a project name that does not already exist in `LLMObs.enable`.
@@ -152,6 +152,33 @@ dataset.delete(1)  # Deletes the second record
 dataset.push()
 ```
 
+### Dataset versioning
+
+Datasets are automatically versioned to track changes over time. Versioning information enables reproducibility and allows experiments to reference specific dataset versions. 
+
+The `Dataset` object has a field, `current_version`, which corresponds to the latest version; previous versions are subject to a 90-day retention window. 
+
+Dataset versions start at `0`, and each new version increments the version by 1.
+
+#### When new dataset versions are created
+
+A new dataset version is created when:
+- Adding records
+- Updating records (changes to `input` or `expected_output` fields)
+- Deleting records
+
+Dataset versions are **NOT** created for changes to `metadata` fields, or when updating the dataset name or description.
+
+#### Version retention
+
+- Previous versions (**NOT** the content of `current_version`) are retained for 90 days. 
+- The 90-day retention period resets when a previous version is used — for example, when an experiment reads a version.
+- After 90 consecutive days without use, a previous version is eligible for permanent deletion and may no longer be accessible.
+
+**Example of version retention behavior**
+
+After you publish `12`, `11` becomes a previous version with a 90-day window. After 25 days, you run an experiment with version `11`, which causes the 90-day window to **restart**. After another 90 days, during which you have not used version `11`, version `11` may be deleted.
+
 ### Accessing dataset records
 
 You can access dataset records using standard Python indexing:
@@ -230,7 +257,7 @@ Summary Evaluators are optionally defined functions that measure how well the mo
    dataset = LLMObs.pull_dataset("capitals-of-the-world")
    ```
 
-2. Define a task function that processes a single dataset record  
+2. Define a task function that processes a single dataset record
 
    ```python
    def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
@@ -238,15 +265,15 @@ Summary Evaluators are optionally defined functions that measure how well the mo
        # Your LLM or processing logic here
        return "Beijing" if "China" in question else "Unknown"
    ```
-   A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.  
+   A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.
    This example generates a string, but a dict can be generated as output to store any intermediary information and compare in the Evaluators.
-     
-   You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.  
+
+   You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.
    If you use a [supported framework][13] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-4. Define evaluator functions.  
-   
+4. Define evaluator functions.
+
    ```python
    def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
        return output_data == expected_output
@@ -263,19 +290,19 @@ Summary Evaluators are optionally defined functions that measure how well the mo
    def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
        fake_llm_call = "excellent"
        return fake_llm_call
-   ```  
-   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.  
-   Evaluators can only return a string, a number, or a Boolean.  
+   ```
+   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.
+   Evaluators can only return a string, a number, or a Boolean.
 
-5. (Optional) Define summary evaluator function(s).  
-   
+5. (Optional) Define summary evaluator function(s).
+
    ```python
     def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
         return evaluators_results["exact_match"].count(True)
 
-   ```  
+   ```
    If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
-   Summary evaluators can only return a string, a number, or a Boolean.  
+   Summary evaluators can only return a string, a number, or a Boolean.
 
 6. Create and run the experiment.
    ```python
@@ -564,6 +591,7 @@ List all datasets, sorted by creation date. The most recently-created datasets a
 | `name` | string | Unique dataset name. |
 | `description` | string | Dataset description. |
 | `metadata` | json | Arbitrary key-value metadata associated with the dataset. |
+| `current_version` | int | The current version number of the dataset. Versions start at 0 and increment when records are added or modified. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -589,6 +617,7 @@ Create a dataset. If there is an existing dataset with the same name, the API re
 | `name` | string | Unique dataset name. |
 | `description` | string | Dataset description. |
 | `metadata` | json | Arbitrary key-value metadata associated with the dataset. |
+| `current_version` | int | The current version number of the dataset. Starts at 0 for new datasets. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 
@@ -602,9 +631,14 @@ List all dataset records, sorted by creation date. The most recently-created rec
 
 | Parameter | Type | Description |
 | ---- | ---- | --- |
-| `filter[version]` | string | List results for a given dataset version. |
+| `filter[version]` | int | List results for a given dataset version. If not specified, defaults to the dataset's current version. Version numbers start at 0. |
 | `page[cursor]` | string | List results with a cursor provided in the previous query. |
 | `page[limit]` | int | Limits the number of results. |
+
+**Notes**:
+- Without `filter[version]`, you get records from the **current version only**, not all versions.
+- To retrieve records from a specific historical version, use `filter[version]=N` where N is the version number.
+- Version numbers start at 0 when a dataset is created.
 
 **Response**
 
@@ -634,7 +668,7 @@ Appends records for a given dataset.
 
 | Field | Type | Description |
 | ---- | ---- | --- |
-| `deduplicate` | bool | If `true`, deduplicates appended records. |
+| `deduplicate` | bool | If `true`, deduplicates appended records. Defaults to `true`. |
 | `records` (_required_) | [][RecordReq](#object-recordreq) | List of records to create. |
 
 #### Object: RecordReq
@@ -673,6 +707,7 @@ Partially update a dataset object. Specify the fields to update in the payload.
 | `name` | string | Unique dataset name. |
 | `description` | string | Dataset description. |
 | `metadata` | json | Arbitrary key-value metadata associated with the dataset. |
+| `current_version` | int | The current version number of the dataset. Metadata-only updates do not increment the version. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
 

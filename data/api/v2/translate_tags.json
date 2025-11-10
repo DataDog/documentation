@@ -131,6 +131,10 @@
     "name": "Fastly Integration",
     "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
   },
+  "fleet-automation": {
+    "name": "Fleet Automation",
+    "description": "Manage automated deployments across your fleet of hosts.\nUse these endpoints to create, retrieve, and cancel deployments\nthat apply configuration changes to multiple hosts at once."
+  },
   "gcp-integration": {
     "name": "GCP Integration",
     "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
@@ -294,6 +298,10 @@
   "spans-metrics": {
     "name": "Spans Metrics",
     "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/) for more information."
+  },
+  "static-analysis": {
+    "name": "Static Analysis",
+    "description": "API for static analysis"
   },
   "synthetics": {
     "name": "Synthetics",
