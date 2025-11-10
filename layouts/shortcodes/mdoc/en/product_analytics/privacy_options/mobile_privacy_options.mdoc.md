@@ -7,12 +7,6 @@ content_filters:
     label: "SDK"
 -->
 
-## Overview
-
-Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
-
-Default privacy options for Session Replay protect end user privacy and prevent sensitive organizational information from being collected.
-
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
 ## Fine-grained masking

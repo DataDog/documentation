@@ -43,7 +43,7 @@ To reduce Session Replay's network impact and ensure the Session Replay recorder
   {{< nextlink href="/real_user_monitoring/session_replay/setup_and_configuration">}}<u>Setup and Configuration</u>: Learn how to set up and configure Browser Session Replay including enabling recording, sampling configuration, and privacy controls.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/session_replay/privacy_options">}}<u>Privacy Options</u>: Control and mask sensitive data in Session Replay recordings with privacy configuration options.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/session_replay/browser/developer_tools">}}<u>Developer Tools</u>: Use browser developer tools to debug and inspect Session Replay recordings.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/session_replay/browser/troubleshooting">}}<u>Troubleshooting</u>: Resolve common Browser Session Replay issues and errors.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/troubleshooting">}}<u>Troubleshooting</u>: Resolve common Browser Session Replay issues and errors.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

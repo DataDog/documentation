@@ -32,4 +32,28 @@ further_reading:
     text: 'Use Datadog Session Replay to view real-time user journeys'
 ---
 
-{% partial file="real_user_monitoring/session_replay/setup_and_configuration.mdoc.md" /%}
+## Setup
+
+{% if equals($platform, "browser") %}
+  {% partial file="product_analytics/setup/browser_setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "android") %}
+  {% partial file="product_analytics/setup/mobile_setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "ios") %}
+  {% partial file="product_analytics/setup/mobile_setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "kotlin_multiplatform") %}
+  {% partial file="product_analytics/setup/mobile_setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "react_native") %}
+  {% partial file="product_analytics/setup/mobile_setup.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "flutter") %}
+  {% partial file="product_analytics/setup/mobile_setup.mdoc.md" /%}
+{% /if %}
