@@ -800,6 +800,15 @@ service_monitoring_config:
   process_service_inference:
     enabled: true
 ```
+
+<div class="alert alert-warning">
+<strong>Important limitation for non-IIS Windows services:</strong> Universal Service Monitoring on Windows uses Event Tracing for Windows (ETW) via the <code>Microsoft-Windows-HttpService</code> provider for HTTPS traffic monitoring. This ETW provider is only available for IIS-based services. Non-IIS services (such as custom .NET applications, Node.js servers, Java servers, or other HTTP servers running on Windows) <strong>do not support HTTPS monitoring</strong> through USM. Only plain HTTP traffic can be monitored for non-IIS Windows services.
+</div>
+
+**What this means:**
+- ✅ **IIS services**: Both HTTP and HTTPS traffic is monitored
+- ✅ **Non-IIS services**: HTTP traffic is monitored
+- ❌ **Non-IIS services**: HTTPS traffic is **not** monitored
    
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 {{% /tab %}}
