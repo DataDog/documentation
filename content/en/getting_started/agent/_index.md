@@ -19,9 +19,8 @@ This guide introduces the Datadog Agent and covers:
 
   - [Introduction to the Agent](#the-datadog-agent)
   - [Installing the Agent](#installing-the-agent)
-  - [Host vs. container Agents](#differences-between-agents-for-hosts-and-containers)
-  - [Agent configuration options](#agent-configuration-files)
   - [Data collected by the Agent](#data-collected-by-the-agent)
+  - [Advanced configurations and features](#advanced-configurations-and-features)
   - [Troubleshooting the Agent](#troubleshooting)
 
 
@@ -38,7 +37,7 @@ You can also install and configure the Agent using configuration management tool
 
 The Agent is able to collect 75 to 100 system-level metrics every 15 to 20 seconds. With additional configuration, the Agent can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
-### Agent configuration files
+### The Agent configuration file
 
 The Agent's main configuration file is `datadog.yaml`. The required parameters are:
 - Your [Datadog API key][16], which is used to associate your Agent's data with your organization. 
@@ -104,8 +103,8 @@ To collect metrics from other technologies, see the [Integrations][9] page.
 
 The Agent is set up to provide the following service checks:
 
-  - `datadog.agent.up`: Returns `OK` if the Agent connects to Datadog.
-  - `datadog.agent.check_status`: Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
+  - `datadog.agent.up`: Returns **OK** if the Agent connects to Datadog.
+  - `datadog.agent.check_status`: Returns **CRITICAL** if an Agent check is unable to send metrics to Datadog, otherwise returns **OK**.
 
 These checks can be used in the Datadog Platform to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][21] to learn more.
 
