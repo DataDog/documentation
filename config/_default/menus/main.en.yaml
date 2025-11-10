@@ -5514,40 +5514,40 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_datadog_agent
       weight: 204
+    - name: Datadog Lambda Extension
+      url: observability_pipelines/sources/lambda_extension/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_lambda_extension
+      weight: 205
+    - name: Datadog Lambda Forwarder
+      url: observability_pipelines/sources/lambda_forwarder/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_lambda_forwarder
+      weight: 206
     - name: Filebeat
       url: observability_pipelines/sources/filebeat/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_filebeat
-      weight: 205
+      weight: 207
     - name: Fluent
       url: observability_pipelines/sources/fluent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_fluent
-      weight: 206
+      weight: 208
     - name: Google Pub/Sub
       url: observability_pipelines/sources/google_pubsub/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_google_pubsub
-      weight: 207
+      weight: 209
     - name: HTTP Client
       url: observability_pipelines/sources/http_client/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
-      weight: 208
+      weight: 210
     - name: HTTP Server
       url: observability_pipelines/sources/http_server/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
-      weight: 209
-    - name: Lambda Extension
-      url: observability_pipelines/sources/lambda_extension/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_lambda_extension
-      weight: 210
-    - name: Lambda Forwarder
-      url: observability_pipelines/sources/lambda_forwarder/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_lambda_forwarder
       weight: 211
     - name: OpenTelemetry
       url: observability_pipelines/sources/opentelemetry/

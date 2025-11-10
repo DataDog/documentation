@@ -10,13 +10,13 @@ This document walks through how to send AWS vended logs with the Datadog Lambda 
 - [Set up a pipeline with the HTTP/S Server source](#set-up-a-pipeline).
 - [Deploy the Datadog Lambda Extension](#deploy-the-datadog-lambda-extension)
 
-See [Datadog Lambda Extension][1] to learn more about the Datadog Lambda Extension.
+See [Datadog Lambda Extension][1] to learn more about it.
 
 ## Set up a pipeline
 
 {{% observability_pipelines/lambda_forwarder/pipeline_setup %}}
 
-**Note**: Your Observability Pipeline must use `Http Server` as the source to process logs from the Lambda extension. Do not use `Datadog Agent` as the source.
+**Note**: Your Observability Pipeline must use `HTTP Server` as the source to process logs from the Lambda extension. Do not use `Datadog Agent` as the source.
 
 ## Deploy the Datadog Lambda Extension
 

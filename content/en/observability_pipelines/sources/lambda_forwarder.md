@@ -1,5 +1,5 @@
 ---
-title: Send Lambda Forwarder Logs to Observability Pipelines
+title: Send Datadog Lambda Forwarder Logs to Observability Pipelines
 disable_toc: false
 ---
 
