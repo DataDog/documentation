@@ -3034,6 +3034,7 @@ menu:
       weight: 2
     - name: End User Device Monitoring
       url: infrastructure/end_user_device_monitoring/
+      pre: desktop-wui
       identifier: end_user_device_monitoring
       parent: infrastructure_heading
       weight: 40000
