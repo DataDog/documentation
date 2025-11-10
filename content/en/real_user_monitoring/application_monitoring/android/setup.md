@@ -27,7 +27,14 @@ The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 
 ## Setup
 
-To start sending RUM data from your Android or Android TV application to Datadog:
+**Choose your setup method:**
+
+- **[Agentic Onboarding (in Preview)][18]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your Android application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
+- **Manual setup** (below): Follow the step-by-step instructions to manually add and configure the RUM SDK in your Android application.
+
+### Manual setup
+
+To start sending RUM data from your Android or Android TV application to Datadog, follow the steps below.
 
 ### Step 1 - Declare the Android SDK as a dependency
 
@@ -637,3 +644,4 @@ val inputStream = context.getRawResAsRumResource(id)
 [15]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
 [16]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [17]: https://square.github.io/okhttp/features/interceptors/
+[18]: /real_user_monitoring/application_monitoring/android/agentic_onboarding/?tab=realusermonitoring

@@ -41,6 +41,15 @@ The React Native SDK supports the following services:
 
 ## Setup
 
+**Choose your setup method:**
+
+- **[Agentic Onboarding (in Preview)][15]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your React Native application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
+- **Manual setup** (below): Follow the step-by-step instructions to manually add and configure the RUM SDK in your React Native application.
+
+### Manual setup
+
+To start sending RUM data from your React Native application to Datadog, follow the steps below.
+
 To install with NPM, run:
 
 ```sh
@@ -478,3 +487,4 @@ end
 [12]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [13]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
 [14]: https://reactnative.dev/architecture/landing-page
+[15]: /real_user_monitoring/application_monitoring/ios/agentic_onboarding/?tab=realusermonitoring

@@ -1,6 +1,8 @@
 ---
 title: Agentic Onboarding Setup
-description: instrument your frontend applications with one prompt using LLM coding agents like Cursor or Claude.
+description: Instrument your frontend applications with one prompt using LLM coding agents like Cursor or Claude.
+further_reading:
+
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
@@ -19,19 +21,13 @@ Instead of navigating multiple setup steps or searching through documentation, y
 
 With Agentic Onboarding, your coding assistant automatically detects your project's frameworks, adds the necessary configuration, and creates the required tokens and apps, all without leaving your IDE.
 
+## Prerequisites
+### Supported frameworks
+Agentic Onboarding is available for the following frameworks: React, Next.js, Vue, Svelte, Angular, Vanilla JS, iOS, Android
+
 ## Setup
 
-This setup method is only available for [specific platforms](#supported-platforms).
-
-## Supported platforms
-Agentic Onboarding is available for the following platforms:
-
-| Application Type | Supported Platforms |
-|-----------------|---------------------|
-| Frontend applications | Next.js, React, Svelte, Vanilla JavaScript (Angular is not supported), Vue |
-| LLM and AI agent applications | Python or Node.js from scripts using [OpenAI's Responses API][6] to complex FastAPI applications powered by [LangGraph][7], or rich chatbot experiences built on [Vercel's AI SDK][8] |
-
-## Install the Datadog Onboarding MCP server
+### Install the Datadog Onboarding MCP server
 
 To install the Datadog Onboarding Model Context Protocol (MCP) server, follow the steps below.
 
@@ -171,7 +167,7 @@ Your AI coding agent can automatically configure Datadog for your project. When 
 
 2. After pasting the prompt, review and accept each action your AI agent proposes to move through the setup process.
 
-### 3. Deploy your app to production
+### Deploy your app to production
 
 Depending on how your application is deployed, you need to commit the changes and set or upload provided environment variables to your production environment.
 
