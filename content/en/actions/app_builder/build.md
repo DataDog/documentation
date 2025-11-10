@@ -55,7 +55,7 @@ To build an app with Bits AI:
 1. While it's responding, Bits AI will ask you to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
 1. Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then click the up arrow (**↑**). 
 1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
-1. By default, App Builder saves automatically. You can disable auto-save by clicking the gear <i class="icon-cog-2"></i> icon. To save the app manually, click **Save**.
+1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
