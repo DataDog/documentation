@@ -25,7 +25,7 @@ Follow these steps to enable OTel Metrics API support in your .NET application.
 
 1. Install the Datadog SDK:
    ```sh
-   [Code example]
+   [TODO: Code example]
    ```
 2. Enable OTel metrics by setting the following environment variable:
    ```sh
@@ -33,7 +33,7 @@ Follow these steps to enable OTel Metrics API support in your .NET application.
    ```
 4. Instrument your application:
    ```csharp
-   [Code example]
+   [TODO: Code example]
    ```
 
 ## Examples
@@ -45,7 +45,7 @@ You can use the standard OpenTelemetry API packages to create custom metrics.
 This example uses the OTel Metrics API to create a counter that increments every time an item is processed:
 
 ```csharp
-[Code example]
+[TODO: Code example]
 ```
 
 ### Create a histogram
@@ -53,7 +53,7 @@ This example uses the OTel Metrics API to create a counter that increments every
 This example uses the OTel Metrics API to create a histogram to track request durations:
 
 ```csharp
-[Code example]
+[TODO: Code example]
 ```
 
 ## Supported configuration

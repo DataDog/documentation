@@ -20,19 +20,19 @@ further_reading:
 
 ## Setup
 
-1.  Install the Datadog SDK:
+1. Install the Datadog SDK:
     ```sh
     npm install dd-trace
     ```
-2.  Install the OpenTelemetry Logs API package:
+2. Install the OpenTelemetry Logs API package:
     ```sh
     npm install @opentelemetry/api-logs
     ```
-3.  Enable OTel logs export by setting the following environment variable:
+3. Enable OTel logs export by setting the following environment variable:
     ```sh
     export DD_LOGS_OTEL_ENABLED=true
     ```
-4.  Initialize the Datadog SDK (`dd-trace`) at the beginning of your application, before any other modules (like `express` or `@opentelemetry/api-logs`) are imported.
+4. Initialize the Datadog SDK (`dd-trace`) at the beginning of your application, before any other modules (like `express` or `@opentelemetry/api-logs`) are imported.
     ```javascript
     // This must be the first line of your application
     require('dd-trace').init()
@@ -108,14 +108,14 @@ For a complete list of all shared OTLP environment variables, see [OpenTelemetry
 
 If you are using the full OpenTelemetry SDK (`@opentelemetry/sdk-logs`) with a manual exporter setup:
 
-1.  Remove the OTel SDK and OTLP Exporter packages:
+1. Remove the OTel SDK and OTLP Exporter packages:
     ```sh
     npm uninstall @opentelemetry/sdk-logs @opentelemetry/exporter-otlp-logs
     ```
-2.  Remove all manual OTel SDK initialization code (for example, `new LoggerProvider()`, `addLogRecordProcessor()`, `new OTLPLogExporter()`).
-3.  Install the Datadog SDK: `npm install dd-trace`
+2. Remove all manual OTel SDK initialization code (for example, `new LoggerProvider()`, `addLogRecordProcessor()`, `new OTLPLogExporter()`).
+3. Install the Datadog SDK: `npm install dd-trace`
 4. Keep the `@opentelemetry/api-logs` package.
-5.  Set `DD_LOGS_OTEL_ENABLED=true` and initialize `dd-trace` at the top of your application.
+5. Set `DD_LOGS_OTEL_ENABLED=true` and initialize `dd-trace` at the top of your application.
 
 Your existing code that uses `logs.getLogger()` will continue to work.
 
@@ -123,10 +123,10 @@ Your existing code that uses `logs.getLogger()` will continue to work.
 
 If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
 
-1.  Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-2.  The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
-3.  Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required) and disable any file-based log collection for this service to avoid duplicate logs.
-
+1. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+2. The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
+3. Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required)
+4. Disable any file-based log collection for this service to avoid duplicate logs.
 
 ## Troubleshooting
 

@@ -22,19 +22,19 @@ further_reading:
 
 Follow these steps to enable OTel Logs API support in your Python application.
 
-1.  Install the Datadog SDK:
+1. Install the Datadog SDK:
     ```sh
     pip install ddtrace
     ```
-2.  Install the OTel SDK and Exporter:
+2. Install the OTel SDK and Exporter:
     ```sh
     pip install opentelemetry-sdk opentelemetry-exporter-otlp>=1.15.0
     ```
-3.  Enable OTel logs export by setting the following environment variable:
+3. Enable OTel logs export by setting the following environment variable:
     ```sh
     export DD_LOGS_OTEL_ENABLED=true
     ```
-4.  Run your application using `ddtrace-run`:
+4. Run your application using `ddtrace-run`:
     ```sh
     ddtrace-run python my_app.py
     ```
@@ -106,9 +106,9 @@ For a complete list of all shared OTLP environment variables, see [OpenTelemetry
 
 If you are already using the OTel SDK and manually configuring an `OTLPLogExporter` in your code:
 
-1.  Remove your manual setup code (for example, `LoggerProvider`, `BatchLogRecordProcessor`, and `OTLPLogExporter` instantiation).
-2.  Enable `ddtrace-run` auto-instrumentation for your application.
-3.  Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+1. Remove your manual setup code (for example, `LoggerProvider`, `BatchLogRecordProcessor`, and `OTLPLogExporter` instantiation).
+2. Enable `ddtrace-run` auto-instrumentation for your application.
+3. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
 
 The Datadog SDK will programmatically configure the OTel SDK for you.
 
@@ -116,9 +116,10 @@ The Datadog SDK will programmatically configure the OTel SDK for you.
 
 If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
 
-1.  Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-2.  The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
-3.  Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required) and disable any file-based log collection for this service to avoid duplicate logs.
+1. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+2. The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
+3. Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required)
+4. Disable any file-based log collection for this service to avoid duplicate logs.
 
 ## Troubleshooting
 

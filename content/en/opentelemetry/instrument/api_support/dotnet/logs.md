@@ -24,15 +24,15 @@ This feature works by intercepting logs from the built-in `Microsoft.Extensions.
 
 ## Setup
 
-1.  Install the Datadog SDK:
+1. Install the Datadog SDK:
     ```sh
     dotnet add package Datadog.Trace
     ```
-2.  Enable OTel logs export by setting the following environment variable:
+2. Enable OTel logs export by setting the following environment variable:
     ```sh
     export DD_LOGS_OTEL_ENABLED=true
     ```
-3.  Ensure Datadog instrumentation is active for your application.
+3. Ensure Datadog instrumentation is active for your application.
     ```sh
     [TODO: Code example]
     ```
@@ -73,9 +73,10 @@ This feature works by intercepting logs directly from the `Microsoft.Extensions.
 
 If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
 
-1.  Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-2.  The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
-3.  Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required) and disable any file-based log collection for this service to avoid duplicate logs.
+1. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+2. The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
+3. Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required)
+4. Disable any file-based log collection for this service to avoid duplicate logs.
 
 ## Troubleshooting
 
