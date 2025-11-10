@@ -170,9 +170,9 @@ SLO tags can be used for filtering on the [SLO manage page][2], creating [SLO sa
 
 ### SLO burn rate indicator
 
-Burn rate indicators identify SLOs that are consuming their error budget faster than their configured target permits within the rolling 2-hour evaluation window. They appear next to the applicable SLO names on the [SLO manage page][2].
+Burn rate indicators use a rolling 2-hour window to evaluate which SLOs are consuming their error budget too quickly. Burn rate indicators appear next to the applicable SLO names on the [SLO manage page][2].
 
-{{< img src="/service_management/service_level_objectives/slo_burn_rate_indicator.png" alt="SLO burn rate indicator example" style="width:80%;" >}}
+{{< img src="/service_management/service_level_objectives/slo_burn_rate_indicator.png" alt="The SLO manage page in Datadog. A red icon appears next to the name of an SLO in the list. Mousing over the red icon displays a modal with further information, a burn rate visualization, and a link to the SLO's corresponding service page." style="width:80%;" >}}
 
 There are two possible indicator types:
 - A red icon indicating a critical burn rate above 6 in the past 2 hours.
