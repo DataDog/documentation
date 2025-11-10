@@ -5,6 +5,7 @@ aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
 - /security/code_security/static_analysis/circleci_orbs/
+- /code_analysis/static_analysis/setup/
 is_beta: false
 algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
