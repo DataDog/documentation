@@ -84,8 +84,8 @@ In summary, the Session Replay recorder breaks your app's screen into simple rec
 {{< whatsnext desc="This section includes the following topics:" >}}
   {{< nextlink href="/real_user_monitoring/session_replay/setup_and_configuration">}}<u>Setup and Configuration</u>: Learn how to set up and configure Mobile Session Replay including enabling recording, sampling configuration, and privacy controls.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/session_replay/privacy_options">}}<u>Privacy Options</u>: Control and mask sensitive data in Session Replay recordings with privacy configuration options.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/session_replay/mobile/app_performance">}}<u>Impact on App Performance</u>: Understand how Mobile Session Replay impacts app performance and resource usage.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/session_replay/mobile/troubleshooting">}}<u>Troubleshooting</u>: Resolve common Mobile Session Replay issues and errors.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/app_performance">}}<u>Impact on App Performance</u>: Understand how Mobile Session Replay impacts app performance and resource usage.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/session_replay/troubleshooting">}}<u>Troubleshooting</u>: Resolve common Mobile Session Replay issues and errors.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <div class="alert alert-info">For Session Replay, Datadog supports RUM for native iOS and Android mobile apps, but not for smart TVs or wearables.</div>

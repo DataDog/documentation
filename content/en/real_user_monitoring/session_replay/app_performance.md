@@ -1,18 +1,23 @@
 ---
-title: How Mobile Session Replay Impacts App Performance
+title: How Session Replay Impacts App Performance
 description: Performance benchmarking for Mobile Session Replay.
 aliases:
+- /real_user_monitoring/session_replay/mobile/app_performance
+content_filters:
+  - trait_id: platform
+    option_group_id: rum_session_replay_sdk_options
+    label: "SDK"
 further_reading:
     - link: '/real_user_monitoring/session_replay/mobile'
       tag: Documentation
       text: Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay/mobile/privacy_options'
+    - link: '/real_user_monitoring/session_replay/privacy_options'
       tag: Documentation
       text: Mobile Session Replay Privacy Options
     - link: '/real_user_monitoring/session_replay/setup_and_configuration'
       tag: Documentation
       text: Setup and Configure Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay/mobile/troubleshooting'
+    - link: '/real_user_monitoring/session_replay/troubleshooting'
       tag: Documentation
       text: Troubleshoot Mobile Session Replay
     - link: '/real_user_monitoring/session_replay'
@@ -20,6 +25,8 @@ further_reading:
       text: Session Replay
 ---
 
+<!-- Mobile (Android, iOS, React Native, Flutter, Kotlin Multiplatform) -->
+{% if or(equals($platform, "android"), equals($platform, "ios"), equals($platform, "react_native"), equals($platform, "flutter"), equals($platform, "kotlin_multiplatform")) %}
 ## Overview
 Session Replay leverages the existing mechanisms of batching and smart upload from the Datadog SDK core. These mechanisms enable efficient and optimized data transfer from your application to Datadog servers. By batching multiple events together and intelligently uploading them at appropriate intervals, Session Replay minimizes the overall impact on network and bandwidth usage while ensuring an efficient utilization of network resources.
 
@@ -38,6 +45,13 @@ Datadog's SDK follows strict standards and aims to minimize the inclusion of thi
 
 ## Benchmarks
 For a more detailed description of how Session Replay performance impact was measured, see the following pages: [Android][2], [iOS][3].
+
+{% /if %}
+<!-- end Mobile -->
+
+{% if equals($platform, "browser") %}
+<div class="alert alert-info">This page is specific to Mobile Session Replay. For browser-specific information, please select a mobile platform from the SDK filter above.</div>
+{% /if %}
 
 ## Further reading
 

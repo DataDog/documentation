@@ -29,7 +29,35 @@ further_reading:
     text: "Obfuscate user data with Session Replay default privacy settings"
 ---
 
-{% partial file="real_user_monitoring/session_replay/privacy_options.mdoc.md" /%}
+## Overview
+
+Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
+
+Default privacy options for Session Replay protect end user privacy and prevent sensitive organizational information from being collected.
+
+{% if equals($platform, "browser") %}
+  {% partial file="product_analytics/privacy_options/browser_privacy_options.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "android") %}
+  {% partial file="product_analytics/privacy_options/mobile_privacy_options.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "ios") %}
+  {% partial file="product_analytics/privacy_options/mobile_privacy_options.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "kotlin_multiplatform") %}
+  {% partial file="product_analytics/privacy_options/mobile_privacy_options.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "react_native") %}
+  {% partial file="product_analytics/privacy_options/mobile_privacy_options.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "flutter") %}
+  {% partial file="product_analytics/privacy_options/mobile_privacy_options.mdoc.md" /%}
+{% /if %}
 
 ## Further Reading
 
