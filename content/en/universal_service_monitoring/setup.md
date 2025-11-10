@@ -47,7 +47,7 @@ Additional protocols and traffic encryption methods are in <a href="/universal_s
 ## How USM detects service names
 
 <div class="alert alert-warning">
-<strong>Important:</strong> Universal Service Monitoring detects service names from environment variables that exist when a process starts. USM reads these values from the operating system (from <code>/proc/PID/environ</code> on Linux or via system APIs on Windows).
+Universal Service Monitoring detects service names from environment variables that exist when a process starts. USM reads these values from the operating system: from <code>/proc/PID/environ</code> on Linux, or through system APIs on Windows.
 </div>
 
 **Environment variables USM recognizes:**
