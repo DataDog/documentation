@@ -411,6 +411,103 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 
 <div class="alert alert-info">You can select up to 50 fields per resource. You can use the preview to validate your indexing choices.</div>
 
+### Collect custom resource metrics using Kubernetes State Core check
+
+**Note**: This functionality requires Cluster Agent 7.63.0+
+
+It is possible to use the kubernetes_state_core check to collect custom resource metrics when running Cluster Agent.
+
+   {{< tabs >}}
+   {{% tab "Helm Chart" %}}
+
+   1. Add the following configuration to `datadog-values.yaml`:
+
+      ```yaml
+      datadog:
+        #(...)
+        kubeStateMetricsCore:
+          collectCrMetrics:
+            - <CUSTOM_RESOURCE_METRIC>
+      ```
+
+   1. Upgrade your Helm chart:
+
+      ```
+      helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+      ```
+
+   {{% /tab %}}
+   {{% tab "Datadog Operator" %}}
+
+   1. Install the Datadog Operator with an option that grants the Datadog Agent permission to collect custom resources:
+
+      ```
+      helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
+      ```
+
+   1. Add the following configuration to your `DatadogAgent` manifest, `datadog-agent.yaml`:
+
+      ```yaml
+      apiVersion: datadoghq.com/v2alpha1
+      kind: DatadogAgent
+      metadata:
+        name: datadog
+      spec:
+        #(...)
+        features:
+          kubeStateMetricsCore:
+            collectCrMetrics:
+              - <CUSTOM_RESOURCE_METRIC>
+      ```
+
+   1. Apply your new configuration:
+
+      ```
+      kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+      ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+For full description of <CUSTOM_RESOURCE_METRIC> item see: https://github.com/kubernetes/kube-state-metrics/blob/main/docs/metrics/extend/customresourcestate-metrics.md.
+
+Example:
+
+``yaml
+  #=(...)
+  collectCrMetrics:
+    - groupVersionKind:
+        group: "crd.k8s.amazonaws.com"
+        kind: "ENIConfig"
+        version: "v1alpha1"
+      commonLabels:
+        crd_type: "eniconfig"
+      labelsFromPath:
+        crd_name: [metadata, name]
+      metrics:
+        - name: "eniconfig"
+          help: "ENI Config"
+          each:
+            type: gauge
+            gauge:
+              path: [metadata, generation]
+    - groupVersionKind:
+        group: "vpcresources.k8s.aws"
+        kind: "CNINode"
+        version: "v1alpha1"
+        resource: "cninode-pluralized"
+      commonLabels:
+        crd_type: "cninode"
+      labelsFromPath:
+        crd_name: [metadata, name]
+      metrics:
+        - name: "cninode"
+          help: "CNI Node"
+          each:
+            type: gauge
+            gauge:
+              path: [metadata, generation]
+```
 
 ## Further reading
 
@@ -420,4 +517,3 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 [2]: /infrastructure/containers
 [3]: https://app.datadoghq.com/orchestration/explorer/pod
 [4]: https://app.datadoghq.com/orchestration/explorer/crd
-
