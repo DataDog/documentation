@@ -5669,7 +5669,7 @@ menu:
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_amazon_vpc_flow_logs
       weight: 402
-    - name: AWS CloudFront
+    - name: Amazon CloudFront
       url: observability_pipelines/packs/amazon_cloudfront/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_amazon_cloudfront
