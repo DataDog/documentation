@@ -569,5 +569,14 @@ export default {
     ap1: 'tunnel-ap1.synthetics.datadoghq.com',
     ap2: 'tunnel-ap2.synthetics.datadoghq.com',
     gov: 'N/A'
+  },
+  dogwrap_site_flag: {
+    us: '',
+    us3: ' -s us3',
+    us5: ' -s us5',
+    eu: ' -s eu',
+    ap1: '',
+    ap2: '',
+    gov: ''
   }
 };
