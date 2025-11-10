@@ -63,12 +63,13 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 {{% tab "Azure" %}}
 
 - To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
-- [Resource collection][14] must be enabled for your Azure accounts:
+- You need the Datadog Admin Role, or any role with the `azure_configurations_manage` permission. See the [Azure setup][16] instructions for more information.
+- Enable [resource collection][14] for your Azure accounts:
   1. Navigate to [**Integrations > Azure**][15].
-  2. Select the App Registration that contains your Azure subscription.
-  3. On the Resource Collection tab, ensure the **Enable Resource Collection** toggle is enabled.
-  4. Optionally, if the subscription hasn't been added to Datadog yet, select **+ Add New App Registration** to add the account to Datadog first.
-- You need the Datadog Admin Role, or any role with the `azure_configurations_manage` permission. For more information, see the [Azure setup][16] instructions.
+  2. Add your Azure subscription by selecting **+ Add New App Registration** if not already added.
+  3. Optionally, select the App Registration containing your Azure subscription.
+  4. On the Resource Collection tab, enable the **Enable Resource Collection** toggle.
+
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
   - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
   - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
@@ -103,7 +104,7 @@ With Group By, Cloudcraft divides your diagram into distinct sections based on d
 
 Enable the **Show All Controls** toggle to display the available **Group By** options. You can remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **+ Tags** menu.
 
-{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_network_acl.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu, and the teams tag" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_network_acl.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu." >}}
 
 #### Group by tags
 
