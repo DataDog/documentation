@@ -31,6 +31,16 @@ The following TeamCity versions are supported:
 
 - TeamCity >= 2021.2 or later
 
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and TeamCity:
+
+| Datadog                    | TeamCity    |
+|----------------------------|-------------|
+| Pipeline                   | Build Chain |
+| Job                        | Build       |
+| _Not available in Datadog_ | Step        |
+
 ## Configure the Datadog integration
 
 The integration between [TeamCity][1] and Datadog CI Visibility is provided through a TeamCity plugin. The [source code][8] of the Datadog CI Integration plugin is open source under the Apache 2.0 license.

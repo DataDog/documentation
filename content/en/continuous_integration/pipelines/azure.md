@@ -33,6 +33,17 @@ Set up tracing on Azure Pipelines to gain real time insights into your CI/CD wor
 | [Filter CI Jobs on the critical path][19] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][20] | Execution time  | View the amount of time pipelines have been running jobs. |
 
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Azure Pipelines:
+
+| Datadog                    | Azure Pipelines |
+|----------------------------|-----------------|
+| Pipeline                   | Pipeline        |
+| Stage                      | Stage           |
+| Job                        | Job             |
+| _Not available in Datadog_ | Step            |
+
 ## Configure the Datadog integration
 
 The Datadog integration for [Azure Pipelines][16] works by using [service hooks][2] to send data to Datadog.

@@ -44,6 +44,16 @@ The following Jenkins versions are supported:
 This integration supports both Agentless and Agent-based installation.
 Installing the Agent is required for infrastructure metrics correlation.
 
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Jenkins:
+
+| Datadog  | Jenkins  |
+|----------|----------|
+| Pipeline | Pipeline |
+| Stage    | Stage    |
+| Job      | Step     |
+
 ## Install the Datadog Agent
 
 Skip this step if you do not need infrastructure metrics correlation.

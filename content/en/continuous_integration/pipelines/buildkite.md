@@ -33,6 +33,15 @@ Set up tracing on Buildkite to optimize your resource usage, reduce overhead, an
 | [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
 
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Buildkite:
+
+| Datadog                    | Buildkite                       |
+|----------------------------|---------------------------------|
+| Pipeline                   | Build (execution of a pipeline) |
+| Job                        | Job (execution of a step)       |
+
 ## Configure the Datadog integration
 
 To set up the Datadog integration for [Buildkite][1]:

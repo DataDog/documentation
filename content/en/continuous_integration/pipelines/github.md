@@ -45,6 +45,16 @@ The following GitHub versions are supported:
 - GitHub.com (SaaS)
 - GitHub Enterprise Server (GHES) 3.5.0 or later
 
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and GitHub Actions:
+
+| Datadog  | GitHub Actions |
+|----------|----------------|
+| Pipeline | Workflow       |
+| Job      | Job            |
+| Step     | Step           |
+
 ## Configure the Datadog integration
 
 ### Configure a GitHub App

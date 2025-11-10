@@ -35,6 +35,16 @@ Set up tracing on CircleCI to optimize the performance of your pipelines, improv
 | [Filter CI Jobs on the critical path][18] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][19] | Execution time  | View the amount of time pipelines have been running jobs. |
 
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and CircleCI:
+
+| Datadog                    | CircleCI  |
+|----------------------------|-----------|
+| Pipeline                   | Workflow  |
+| Job                        | Job       |
+| _Not available in Datadog_ | Step      |
+
 ## Configure the Datadog integration
 
 The Datadog integration for [CircleCI][1] works by using [webhooks][2] to send data to Datadog.

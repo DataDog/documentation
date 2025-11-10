@@ -46,6 +46,17 @@ The following GitLab versions are supported:
 - GitLab >= 14.1 (self-hosted)
 - GitLab >= 13.7.0 (self-hosted) with the `datadog_ci_integration` feature flag enabled
 
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and GitLab:
+
+| Datadog                    | GitLab   |
+|----------------------------|----------|
+| Pipeline                   | Pipeline |
+| Stage                      | Stage    |
+| Job                        | Job      |
+| _Not available in Datadog_ | Script   |
+
 ## Configure the Datadog integration
 
 {{< tabs >}}

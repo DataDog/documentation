@@ -38,6 +38,16 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 *AWS CodePipeline running pipelines don't have Git information until they have finished.\
 **AWS CodePipeline logs correlation is only available for AWS CodeBuild actions.
 
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and AWS CodePipeline:
+
+| Datadog  | AWS CodePipeline |
+|----------|------------------|
+| Pipeline | Pipeline         |
+| Stage    | Stage            |
+| Job      | Action           |
+
 ## Configure the Datadog integration
 
 To set up the integration between [AWS CodePipeline][1] and Pipeline Visibility, create two AWS resources.
