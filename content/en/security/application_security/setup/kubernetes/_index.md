@@ -42,6 +42,7 @@ Learn how to set up App and API Protection (AAP) on your Kubernetes services by 
   {{< appsec-integration name="NGINX" avatar="nginx" link="/security/application_security/setup/nginx/kubernetes" >}}
   {{< appsec-integration name="Envoy" avatar="envoy" link="/security/application_security/setup/envoy" >}}
   {{< appsec-integration name="Istio" avatar="istio" link="/security/application_security/setup/istio" >}}
+  {{< appsec-integration name="Envoy Gateway" avatar="envoy" link="/security/application_security/setup/envoy-gateway" >}}
 {{< /appsec-integrations >}}
 
 
