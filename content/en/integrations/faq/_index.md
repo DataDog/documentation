@@ -126,7 +126,6 @@ aliases:
 [25]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
 [26]: /integrations/faq/how-to-collect-metrics-from-custom-vertica-queries/
 [27]: /integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
-[28]: /integrations/faq/how-to-make-trello-card-using-webhooks/
 [29]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
 [30]: /integrations/faq/windows-status-based-check/
 [31]: /integrations/faq/pivotal_architecture/

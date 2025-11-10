@@ -57,7 +57,8 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    ```
 
    {{% /tab %}}
-   {{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
    ```javascript
    window.DD_RUM.onReady(function() {
@@ -70,7 +71,8 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    ```
 
    {{% /tab %}}
-   {{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
    ```javascript
    window.DD_RUM &&
@@ -112,7 +114,8 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    ```
 
    {{% /tab %}}
-   {{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
    ```javascript
    window.DD_RUM.onReady(function() {
@@ -128,7 +131,8 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    ```
 
    {{% /tab %}}
-   {{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
    ```javascript
    window.DD_RUM && window.DD_RUM.startView({
@@ -163,6 +167,7 @@ datadogRum.startView({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
+
 ```javascript
 window.DD_RUM.onReady(function() {
   window.DD_RUM.startView({
@@ -175,6 +180,7 @@ window.DD_RUM.onReady(function() {
 
 {{% /tab %}}
 {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.startView({
@@ -199,8 +205,9 @@ window.DD_RUM && window.DD_RUM.startView({
    datadogRum.startView('checkout')
    ```
 
-   {{% /tab %}}
-   {{% tab "CDN async" %}}
+  {{% /tab %}}
+  {{% tab "CDN async" %}}
+
 
    ```javascript
    window.DD_RUM.onReady(function() {
@@ -208,8 +215,9 @@ window.DD_RUM && window.DD_RUM.startView({
    })
    ```
 
-   {{% /tab %}}
-   {{% tab "CDN sync" %}}
+  {{% /tab %}}
+  {{% tab "CDN sync" %}}
+
 
    ```javascript
    window.DD_RUM && window.DD_RUM.startView('checkout')
@@ -280,7 +288,8 @@ To override default RUM view names so that they are aligned with how you've defi
    ```
 
    {{% /tab %}}
-   {{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
    ```javascript
       import { matchRoutes, useLocation } from 'react-router-dom';
@@ -328,7 +337,8 @@ To override default RUM view names so that they are aligned with how you've defi
    ```
 
    {{% /tab %}}
-   {{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
    ```javascript
       import { matchRoutes, useLocation } from 'react-router-dom';
@@ -394,7 +404,8 @@ datadogRum.setViewName('Checkout');
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -408,7 +419,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewName('<VIEW_NAME>');
@@ -476,7 +488,8 @@ datadogRum.init({
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -495,7 +508,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM &&
@@ -544,7 +558,8 @@ datadogRum.init({
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -560,7 +575,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM &&
@@ -633,7 +649,8 @@ datadogRum.init({
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -651,7 +668,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM &&
@@ -683,7 +701,7 @@ Adding user information to your RUM sessions helps you:
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
 {{< tabs >}}
-{{% tab "6.4.0 and above" %}}
+{{% tab "v6.4.0 and above" %}}
 
 The following attributes are available:
 
@@ -694,7 +712,7 @@ The following attributes are available:
 | `usr.email` | String | No | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
 {{% /tab %}}
-{{% tab "Before 6.4.0" %}}
+{{% tab "Below v6.4.0" %}}
 
 The below attributes are optional but Datadog strongly recommends providing at least one of them. For example, you should set the user ID on your sessions to see relevant data on some default RUM dashboards, which rely on `usr.id` as part of the query.
 
@@ -731,7 +749,8 @@ datadogRum.setUser({
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -746,7 +765,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setUser({
@@ -773,7 +793,8 @@ datadogRum.getUser()
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -782,7 +803,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.getUser()
@@ -803,7 +825,8 @@ datadogRum.setUserProperty('name', 'John Doe')
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -812,7 +835,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
@@ -833,7 +857,8 @@ datadogRum.removeUserProperty('name')
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -842,7 +867,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.removeUserProperty('name')
@@ -863,7 +889,8 @@ datadogRum.clearUser()
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -872,7 +899,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.clearUser()
@@ -908,7 +936,8 @@ datadogRum.setAccount({
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -921,7 +950,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setAccount({
@@ -946,7 +976,8 @@ datadogRum.getAccount()
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -955,7 +986,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.getAccount()
@@ -976,7 +1008,8 @@ datadogRum.setAccountProperty('name', 'My Company Name')
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -985,7 +1018,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
@@ -1006,7 +1040,8 @@ datadogRum.removeAccountProperty('name')
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1015,7 +1050,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
@@ -1036,7 +1072,8 @@ datadogRum.clearAccount()
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1045,7 +1082,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.clearAccount()
@@ -1075,7 +1113,8 @@ datadogRum.init({
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1089,7 +1128,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM &&
@@ -1141,7 +1181,8 @@ acceptCookieBannerButton.addEventListener('click', function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1159,7 +1200,8 @@ acceptCookieBannerButton.addEventListener('click', () => {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.init({
@@ -1203,7 +1245,8 @@ datadogRum.setViewContextProperty('activity', {
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1220,7 +1263,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setViewContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -1253,7 +1297,8 @@ datadogRum.setViewContext({
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1319,7 +1364,8 @@ datadogRum.setGlobalContextProperty('activity', {
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1336,7 +1382,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -1459,7 +1506,8 @@ datadogRum.clearGlobalContext();
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1491,7 +1539,8 @@ const context = datadogRum.getGlobalContext();
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 window.DD_RUM.onReady(function() {
@@ -1604,7 +1653,6 @@ In the `beforeSend` property, you can override the service and version propertie
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
@@ -1627,7 +1675,8 @@ datadogRum.init({
 ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+  {{% tab "CDN async" %}}
+
 
 ```javascript
 const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;
@@ -1651,7 +1700,8 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+  {{% tab "CDN sync" %}}
+
 
 ```javascript
 const SERVICE_REGEX = /some-pathname\/(?<service>\w+)\/(?<version>\w+)\//;

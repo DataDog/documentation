@@ -4,6 +4,7 @@ description: "Create intelligent, self-maintaining mobile tests to ensure the mo
 aliases:
 - /mobile_testing
 - /mobile_app_testing
+- /mobile_app_testing/mobile_app_tests/
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
