@@ -426,7 +426,7 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
+<div class="alert alert-info">PHP client library version 1.13.0 or later is required, or 1.2.0 or later if using tracing only without profiling.</div>
 
 #### Containers
 
@@ -594,7 +594,7 @@ For more information, see the [Dynamic Instrumentation documentation][102].
   PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
 </div>
 
-PR comments are automated comments added by Datadog's [source code management integrations][10] to inform developers of issues detected in their code changes and, in certain cases, suggest remediation. 
+PR comments are automated comments added by Datadog's [source code management integrations][10] to inform developers of issues detected in their code changes and, in certain cases, suggest remediation.
 
 There is a maximum of 31 unique comments per PR at any time to reduce noise and clutter. These comments include:
 * One summary comment is always posted to give a high-level view of all the issues Datadog detected in the PR. This comment is edited by Datadog as new commits pushed to the PR change the results.
