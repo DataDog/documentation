@@ -9,6 +9,8 @@ cascade:
 
 ## Overview
 
+{{< img src="observability_pipelines/packs/packs.png" alt="The packs section of Observability Pipelines" style="width:100%;" >}}
+
 When you set up a pipeline to send logs from a specific source to Observability Pipelines, you might have questions such as:
 
 - Which logs from this source are important?
