@@ -413,7 +413,9 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 
 ### Collect custom resource metrics using Kubernetes State Core check
 
-<div class="alert alert-info">This functionality requires Cluster Agent 7.63.0+.</div>
+<div class="alert alert-info">
+  This functionality requires Cluster Agent 7.63.0+ and Operator v1.20+.
+</div>
 
 You can use the `kubernetes_state_core` check to collect custom resource metrics when running the Datadog Cluster Agent.
 
@@ -430,6 +432,7 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
          crd_type: "eniconfig"
        labelsFromPath:
          crd_name: [metadata, name]
+       metricNamePrefix: "userPrefix"
        metrics:
          - name: "eniconfig"
            help: "ENI Config"
@@ -455,8 +458,18 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
                path: [metadata, generation]
    ```
 
+   By default RBAC is setup using groupVersionKinds `kind` by adding `s` suffix.
+   You can override this behavior by providing **pluralized** `resource` name.
+   In the example above `CNINode` has `resource: "cninode-pluralized"` overridden.
+
+   Metric names produced using the following rules:
+
+   a. No prefix precified: `kubernetes_state_customresource.<metrics.name>`
+
+   b. Prefix precified: `kubernetes_state_customresource.<metricNamePrefix>_<metric.name>`
+
    For more details, see [Custom Resource State Metrics][5].
-   
+
 2. Update your Helm or Datadog Operator configuration:
 
    {{< tabs >}}
@@ -514,7 +527,7 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
 
    {{% /tab %}}
    {{< /tabs >}}
-   
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
