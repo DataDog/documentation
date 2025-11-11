@@ -10,7 +10,7 @@ For certain detections (see the list below), Datadog checks whether a detected s
 
 For secret types with validation available, Datadog displays the validation status in the explorer as "Active" or "Inactive". You can also filter or query detections by their Validation Status.
 
-For some secret types, Datadog uses static validation methods, such as computing a checksum, to confirm that a detected secret is not a false positive. Static validation results are not displayed - all references to "validation" in the explorer correspond to live validation results.
+For some secret types, Datadog uses static validation methods, such as computing a checksum, to confirm that a detected secret is not a false positive. Static validation results are not displayed and all references to "validation" in the explorer correspond to live validation results.
 
 ## List of supported validators
 | Secret type | Static validator available | Live validator available |
