@@ -1,8 +1,9 @@
 ---
 title: Node.js OpenTelemetry Logs API Support
-code_lang: logs
-type: multi-code-lang
-code_lang_weight: 2
+#code_lang: logs
+#type: multi-code-lang
+#code_lang_weight: 2
+private: true
 further_reading:
     - link: opentelemetry/correlate/logs_and_traces
       tag: Documentation
@@ -15,8 +16,18 @@ further_reading:
 
 ## Prerequisites
 
-- **Datadog SDK**: `dd-trace-js` version [x.y.z] or later.
+- **Datadog SDK**: `dd-trace-js` version 5.73.0 or later.
+- **OpenTelemetry Logs API**: The `@opentelemetry/api-logs` package is required, in a version from `v0.200.0` up to `v1.0`.
 - **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
+
+<div class="alert alert-warning">
+The <code>@opentelemetry/api-logs</code> package is still experimental, and version 1.0 has not yet been released. New versions of this package may introduce breaking changes that affect compatibility.
+
+If you encounter an issue after upgrading <code>@opentelemetry/api-logs</code>, <a href="https://github.com/DataDog/dd-trace-js/issues">open an issue in the <code>dd-trace-js</code> repository</a>.
+</div>
+
+## Examples
+...
 
 ## Setup
 
