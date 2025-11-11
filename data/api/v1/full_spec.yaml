@@ -20936,6 +20936,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Enterprise
+            hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current date for all organizations.
@@ -20944,6 +20949,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Pro hosts
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         appsec_fargate_count_avg:
@@ -22034,6 +22044,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Enterprise
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current month for the given org.
@@ -22042,6 +22057,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Pro hosts
+            over all hours in the current date for the given org.
           format: int64
           type: integer
         appsec_fargate_count_avg:
@@ -23136,6 +23156,11 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p_sum:
+          description: Shows the sum of the 99th percentile of all distinct standalone
+            Enterprise hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         apm_fargate_count_avg_sum:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current month for all organizations.
@@ -23144,6 +23169,11 @@ components:
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p_sum:
+          description: Shows the sum of the 99th percentile of all distinct standalone
+            Pro hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         appsec_fargate_count_avg_sum:
