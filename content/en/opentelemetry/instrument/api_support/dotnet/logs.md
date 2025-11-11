@@ -24,10 +24,9 @@ This feature works by intercepting logs from the built-in `Microsoft.Extensions.
 
 ## Setup
 
-1. Install the Datadog SDK:
-    ```sh
-    dotnet add package Datadog.Trace
-    ```
+1. Install the Datadog SDK. Follow the installation steps for your runtime:
+   - [.NET Framework][2]
+   - [.NET Core][3]
 2. Enable OTel logs export by setting the following environment variable:
     ```sh
     export DD_LOGS_OTEL_ENABLED=true
@@ -88,4 +87,5 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/config/environment_variable_support
-[2]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
+[3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer

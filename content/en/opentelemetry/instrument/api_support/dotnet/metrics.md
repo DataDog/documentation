@@ -23,10 +23,9 @@ further_reading:
 
 Follow these steps to enable OTel Metrics API support in your .NET application.
 
-1. Install the Datadog SDK:
-   ```sh
-   [TODO: Code example]
-   ```
+1. Install the Datadog SDK. Follow the installation steps for your runtime:
+   - [.NET Framework][2]
+   - [.NET Core][3]
 2. Enable OTel metrics by setting the following environment variable:
    ```sh
    export DD_METRICS_OTEL_ENABLED=true
@@ -90,3 +89,5 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/config/environment_variable_support
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
+[3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
