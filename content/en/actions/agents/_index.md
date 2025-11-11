@@ -23,7 +23,7 @@ When building an agent, choose a blueprint to get started. Blueprints come with 
 
 {{< img src="/actions/agents/blank-new-agent.png" alt="The Agents page, filtered to show only 'My agents'" style="width:100%;" >}}
 
-## Agents dashboard
+## Agents page
 
 You can create a new agent from the [Agents][1] page. The page lists information about existing agents, including the following:
 - Agent Name
