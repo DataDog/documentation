@@ -65,6 +65,23 @@ There are no billing implications for tracing Java Web Apps during this period.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Prerequisites
+
+1. **Install the Azure integration:** Install the [Datadog-Azure integration](/integrations/azure/) to collect Azure metrics and logs.
+2. **Understand the extension approach:** The Azure App Service extension is a specialized version of the Datadog .NET tracer. It differs from standard APM setup:
+   - No MSI installer needed (extension handles installation)
+   - No manual environment variable configuration for basic setup
+   - Automatic integration with IIS
+3. **Review .NET compatibility:** See [.NET Core Compatibility](/tracing/trace_collection/compatibility/dotnet-core) or [.NET Framework Compatibility](/tracing/trace_collection/compatibility/dotnet-framework) for supported versions.
+
+<div class="alert alert-warning">
+<strong>Do not install the Datadog .NET tracer MSI</strong> on Azure App Service. The extension provides all necessary components. Installing the MSI may cause conflicts.
+</div>
+
+<div class="alert alert-info">
+Looking for Azure Functions instead? See <a href="/serverless/azure_functions/">Azure Functions Setup</a>. Using Linux? See <a href="/serverless/azure_app_service/linux_code">Linux Code</a> or <a href="/serverless/azure_app_service/linux_container">Linux Container</a> setup.
+</div>
+
 ## Installation
 
 Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
@@ -560,6 +577,20 @@ It is likely that you do not have the Azure integration configured to monitor yo
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
 Still need help? Contact [Datadog support][4].
+
+## Additional Resources
+
+### .NET Core (Isolated Worker Model)
+- [Tracing .NET Core Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core)
+- [.NET Core Library Configuration](/tracing/trace_collection/library_config/dotnet-core/)
+
+### .NET Framework (In-Process Model)
+- [Tracing .NET Framework Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework)
+- [.NET Framework Library Configuration](/tracing/trace_collection/library_config/dotnet-framework/)
+
+### All .NET Versions
+- [.NET Custom Instrumentation](/tracing/trace_collection/custom_instrumentation/dotnet/)
+- [.NET Diagnostic Tool](/tracing/troubleshooting/dotnet_diagnostic_tool)
 
 ### Further Reading
 

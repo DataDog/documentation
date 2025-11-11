@@ -21,6 +21,15 @@ This document assumes that your application is set up for sidecars according to 
 
 If you would prefer to not use the sidecar approach (Not Recommended), you can instead follow the instructions to [Instrument Azure App Service - Linux Container with `serverless-init`][2].
 
+## Prerequisites
+
+1. **Install the Azure integration:** Install the [Datadog-Azure integration](/integrations/azure/) to collect Azure metrics and logs.
+2. **Understand container instrumentation:** This guide instruments a containerized app with a sidecar. For other deployment models, see:
+   - [Windows Code](/serverless/azure_app_service/windows_code) - Extension-based
+   - [Linux Code](/serverless/azure_app_service/linux_code) - Sidecar for non-containerized apps
+3. **Review container setup basics:** If new to Datadog's .NET tracer in containers, see [Tracing .NET Core Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core) for background.
+4. **Check compatibility:** See [.NET Core Compatibility](/tracing/trace_collection/compatibility/dotnet-core) for supported runtimes.
+
 ## Setup
 
 ### Azure integration
@@ -579,6 +588,21 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+## Configuration
+
+The .NET tracer supports configuration via environment variables. See [.NET Core Library Configuration](/tracing/trace_collection/library_config/dotnet-core/) for all available options.
+
+**Container-specific notes:**
+- Environment variables are set in your Azure App Service Application Settings
+- The sidecar handles Agent connectivity automatically
+- Logs should be written to `/home/LogFiles/` for collection
+
+## Additional Resources
+
+- [.NET Custom Instrumentation](/tracing/trace_collection/custom_instrumentation/dotnet/) - Adding custom spans
+- [.NET Diagnostic Tool](/tracing/troubleshooting/dotnet_diagnostic_tool) - Troubleshooting
+- [Connecting .NET Logs and Traces](/tracing/other_telemetry/connect_logs_and_traces/dotnet) - Log correlation
 
 [1]: https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container-sidecar
 [2]: /serverless/guide/azure_app_service_linux_containers_serverless_init
