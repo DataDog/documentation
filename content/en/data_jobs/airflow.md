@@ -68,7 +68,7 @@ To get started, follow the instructions below.
 
    Use this option if you're already using OpenLineage with another system and want to add Datadog as an additional destination. The composite transport sends events to all configured transports.
 
-   For example, if you're currently using an HTTP transport to send events to another system:
+   For example, if you're using an HTTP transport to send events to another system:
 
    ```shell
    # Your existing HTTP transport configuration
