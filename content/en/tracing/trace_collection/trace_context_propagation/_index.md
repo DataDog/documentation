@@ -706,7 +706,7 @@ async fn make_http_request() {
     propagator.inject_with_context(&context, &mut HeaderMapCarrier(&mut headers));
 
     // 'headers' now contains 'traceparent', 'x-datadog-trace-id', etc.
-    let res = client.get("[http://example.com](http://example.com)")
+    let res = client.get("http://example.com")
         .headers(headers)
         .send()
         .await;
