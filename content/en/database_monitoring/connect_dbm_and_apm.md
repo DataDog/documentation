@@ -35,7 +35,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \* Full propagation mode on Aurora MySQL requires version 3.
 
-\*\* Full propagation mode on Oracle is curerntly only supported when using Java.
+\*\* Full propagation mode on Oracle is only supported when using Java.
 
 
 **Supported application tracers and drivers**

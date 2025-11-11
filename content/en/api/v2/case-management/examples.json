@@ -17,8 +17,8 @@
                     "is_multi": false,
                     "type": "NUMBER",
                     "value": {
-                      "description": "undefined",
-                      "type": "undefined"
+                      "description": "",
+                      "type": ""
                     }
                   }
                 },
@@ -150,8 +150,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -621,8 +621,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -746,8 +746,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -879,8 +879,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -1018,8 +1018,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -1300,8 +1300,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -1417,8 +1417,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -1536,8 +1536,8 @@
             "is_multi": false,
             "type": "NUMBER",
             "value": {
-              "description": "undefined",
-              "type": "undefined"
+              "description": "",
+              "type": ""
             }
           },
           "type": "case"
@@ -1563,8 +1563,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -1702,8 +1702,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -1841,8 +1841,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -1980,8 +1980,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -2119,8 +2119,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },
@@ -2252,8 +2252,8 @@
                   "is_multi": false,
                   "type": "NUMBER",
                   "value": {
-                    "description": "undefined",
-                    "type": "undefined"
+                    "description": "",
+                    "type": ""
                   }
                 }
               },

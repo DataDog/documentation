@@ -92,11 +92,11 @@ logrus.WithContext(ctx).Info("Hello World!")
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="go" %}}
+{{% serverless-init-env-vars-sidecar language="go" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting sidecar="true" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -106,4 +106,4 @@ logrus.WithContext(ctx).Info("Hello World!")
 [2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
 [3]: /tracing/other_telemetry/connect_logs_and_traces/go/
 [4]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples-5

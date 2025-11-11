@@ -9,7 +9,7 @@ title: Configuración del reenvío automatizado de logs de Azure
 
 ## Información general
 
-Utiliza esta guía para automatizar la configuración del reenvío de logs de Azure con una plantilla de Azure Resource Manager (ARM). 
+Utiliza esta guía para automatizar la configuración del reenvío de logs de Azure con una plantilla de Azure Resource Manager (ARM).
 
 La plantilla ARM despliega recursos de una serie de servicios Azure (cuentas de almacenamiento y aplicaciones de función) en tus suscripciones, que recopilan y reenvían logs a Datadog. Los escalados de estos servicios aumentan o disminuyen automáticamente para adaptarse al volumen de logs. El escalado se gestiona mediante un plano de control, que es un conjunto de aplicaciones de función desplegadas en una suscripción y región de tu elección. Las cuentas de almacenamiento y las aplicaciones de función se despliegan en cada una de las suscripciones que reenvían logs a Datadog.
 
@@ -56,6 +56,6 @@ Empieza abriendo la [plantilla Automated Log Forwarding ARM][1]. Las secciones s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
+[1]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FcreateUiDefinition.json
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /es/getting_started/site/

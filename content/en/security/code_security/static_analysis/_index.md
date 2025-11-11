@@ -6,6 +6,10 @@ aliases:
 is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
+further_reading:
+- link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
+  tag: "Blog"
+  text: "Using LLMs to filter out false positives from static code analysis"
 ---
 
 {{% site-region region="gov" %}}
@@ -38,7 +42,7 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 ## Integrate into the development lifecycle
 
 ### Source code management
-{{< whatsnext desc="During code reviews, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request." >}}
+{{< whatsnext desc="During code reviews, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. This is supported for GitHub, GitLab, and Azure DevOps repositories (cloud-hosted). When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request." >}}
     {{< nextlink href="static_analysis/github_pull_requests" >}}Pull Requests{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -65,7 +69,7 @@ Click on a violation to open a side panel that contains information about the sc
 
 The content of the violation is shown in tabs:
 
-- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider (GitHub[4], GitLab[5]).
+- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider ([GitHub][4], [GitLab][5], Azure[6]).
 - **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
 - **Event**: JSON metadata regarding the violation.
 
@@ -74,7 +78,7 @@ For a subset of SAST vulnerabilities, Bits AI can review the context of the find
 
 For each finding, you can provide Bits AI with feedback on its assessment.
 
-{{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="Supported CWEs" level="h4" expanded=true id="id-for-anchoring" %}}
 False positive filtering is supported for the following CWEs:
 - [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
 - [CWE-78: OS Command Injection](https://cwe.mitre.org/data/definitions/78.html)
@@ -114,13 +118,33 @@ The `paths` attribute is a list of globs that should match paths in the reposito
 apiVersion: v3
 kind: service
 metadata:
-name: my-service
+  name: my-service
 datadog:
-codeLocations:
-- repositoryURL: https://github.com/myorganization/myrepo.git
-paths:
-- path/to/service/code/**
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - path/to/service/code/**
 {{< /code-block >}}
+
+
+#### Detecting file usage patterns
+
+Datadog detects file usage in additional products such as Error Tracking and
+files associated with the runtime service. For example, if a service called `foo` has
+a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
+it associates files `/modules/foo/bar.py` to service `foo`.
+
+#### Detecting service name in paths and repository names
+
+Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
+
+For a repository match, if there is a service called `myservice` and
+the repository URL is `https://github.com/myorganization/myservice.git`, then,
+it associates `myservice` to all files in the repository.
+
+If no repository match is found, Datadog attempts to find a match in the
+`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
+in the path, the service name closest to the filename is selected.
 
 ### Link results to teams
 Datadog associates scan results with the team attached to a service. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
@@ -192,4 +216,4 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [13]: https://docs.datadoghq.com/security/code_security/static_analysis/#link-results-to-datadog-services-and-teams
 [14]: /account_management/teams/
 [15]: /integrations/github/#connect-github-teams-to-datadog-teams
-
+[16]: /integrations/azure-devops-source-code/

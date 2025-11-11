@@ -32,7 +32,7 @@ Datadog proporciona las siguientes métricas predefinidas para obtener una visi�
 | `rum.measure.error.hang` | Recuento de caídas (una congelación de iOS) | Valor predeterminado | Solo móvil |
 | `rum.measure.error.hang.duration` | Duración de las caídas (congelación de iOS) | Por defecto, Nombre de la vista | Solo móvil |
 | `rum.measure.session` | Recuento de sesiones | Valor predeterminado | Móvil y navegador |
-| `rum.measure.session.action` | Recuento de acciones | Por defecto, Tipo de acción, Nombre de la vista | Móvil y navegador |
+| `rum.measure.session.action` | Recuento de acciones | Valor predeterminado | Móvil y navegador |
 | `rum.measure.session.crash_free` | Recuento de sesiones sin caídas | Valor predeterminado | Solo móvil |
 | `rum.measure.session.error` | Recuento de errores por sesión (@session.error.count) | Por defecto, Desglose de percentiles | Móvil y navegador |
 | `rum.measure.session.frustration` | Recuento de señales de frustración | Valor predeterminado | Móvil y navegador |

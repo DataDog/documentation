@@ -11,6 +11,9 @@ further_reading:
 - link: "/synthetics/troubleshooting/"
   tag: "Documentation"
   text: "Synthetic Monitoring Troubleshooting"
+- link: "https://www.datadoghq.com/blog/test-suites/"
+  tag: "Blog"
+  text: "Get organized, actionable insights from complex test environments"
 ---
 
 
@@ -27,7 +30,7 @@ Synthetic Monitoring Test Suites let you organize multiple tests into a single c
 ## Create a test suite
 
 To create a new Test Suite:
-1. In Datadog, navigate to **Digital Experience > Tests**.
+1. In Datadog, navigate to **Digital Experience**.
 2. Click **New Test Suite**.
 3. Optionally, navigate to the [Synthetic Monitoring tests][1] page, and click **+ New Suite**.
 
