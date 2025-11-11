@@ -54439,6 +54439,12 @@ components:
         icon:
           description: URL of the user's icon.
           type: string
+        last_login_time:
+          description: The last time the user logged in.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         mfa_enabled:
           description: If user has MFA enabled.
           readOnly: true
