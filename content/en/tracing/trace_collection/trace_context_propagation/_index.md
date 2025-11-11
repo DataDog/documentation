@@ -646,97 +646,75 @@ For example:
 export DD_TRACE_PROPAGATION_STYLE="tracecontext,datadog"
 ```
 
-### Manual injections and extractions
+### Manual injection and extraction
 
-Because there is no automatic instrumentation in Rust, you must manually propagate context when making or receiving remote calls (like HTTP requests).
+Because there is no automatic instrumentation for Rust, you must manually propagate context when making or receiving remote calls (like HTTP requests).
+- `HeaderExtractor` to **extract** a parent context from incoming request headers.
+- `HeaderInjector` to **inject** the current context into outbound request headers.
 
-You do this by using the global OTel `TextMapPropagator`. This requires a `Carrier` that can read and write HTTP headers. Most Rust web frameworks (like `axum`, `hyper`, and `reqwest`) use the `http::HeaderMap` type.
+First, add `opentelemetry-http` to your `Cargo.toml`:
 
-You can use the following wrapper structs to make `http::HeaderMap` compatible with the OTel propagator API.
-
-```rust
-use opentelemetry::propagation::{Extractor, Injector};
-use http::HeaderMap;
-
-// Carrier for injecting context into a HeaderMap
-struct HeaderMapCarrier<'a>(&'a mut HeaderMap);
-
-impl<'a> Injector for HeaderMapCarrier<'a> {
-    fn set(&mut self, key: &str, value: String) {
-        if let Ok(header_name) = http::HeaderName::from_bytes(key.as_bytes()) {
-            if let Ok(header_value) = http::HeaderValue::from_str(&value) {
-                self.0.insert(header_name, header_value);
-            }
-        }
-    }
-}
-
-// Carrier for extracting context from a HeaderMap
-struct HeaderMapExtractor<'a>(&'a HeaderMap);
-
-impl<'a> Extractor for HeaderMapExtractor<'a> {
-    fn get(&self, key: &str) -> Option<&str> {
-        self.0.get(key).and_then(|v| v.to_str().ok())
-    }
-
-    fn keys(&self) -> Vec<&str> {
-        self.0.keys().map(|k| k.as_str()).collect()
-    }
-}
+```toml
+[dependencies]
+# Provides HeaderInjector and HeaderExtractor
+opentelemetry-http = "0.31"
 ```
 
 ### Injecting context (client side)
 
-When making an HTTP request (for example, with `reqwest`), inject the current span context into the request headers.
+When making an HTTP request (for example, with `reqwest`), inject the current span context into the request headers using `HeaderInjector`.
 
 ```rust
 use opentelemetry::{global, Context};
-use http::HeaderMap;
-// (Assumes HeaderMapCarrier from the example above is present)
+use opentelemetry_http::HeaderInjector;
+use http::Request;
+use hyper::Body;
 
-async fn make_http_request() {
-    let propagator = global::get_text_map_propagator(|propagator| propagator.clone());
-    let context = Context::current();
-    let client = reqwest::Client::new();
+// HYPER example
+fn build_outbound_request(url: &str) -> http::Result<Request<Body>> {
+    let cx = Context::current();
 
-    // Create a mutable HeaderMap
-    let mut headers = HeaderMap::new();
-    
-    // Inject the context into the headers using the carrier
-    propagator.inject_with_context(&context, &mut HeaderMapCarrier(&mut headers));
+    // Build the request and inject headers in-place
+    let mut builder = Request::builder().method("GET").uri(url);
+    global::get_text_map_propagator(|prop| {
+        prop.inject_context(&cx, &mut HeaderInjector(builder.headers_mut().unwrap()))
+    });
 
-    // 'headers' now contains 'traceparent', 'x-datadog-trace-id', etc.
-    let res = client.get("http://example.com")
-        .headers(headers)
-        .send()
-        .await;
+    builder.body(Body::empty())
 }
 ```
 
 ### Extracting context (server side)
 
-When receiving an HTTP request (for example, with `axum`), extract the trace context from the headers to parent your new span.
+When receiving an HTTP request (for example, with `axum`), extract the trace context from the headers using `HeaderExtractor` to parent your new span.
 
 ```rust
-use opentelemetry::{global, trace::Tracer, Context};
-use axum::{extract::Request, http::HeaderMap, routing::get, Router};
-// (Assumes HeaderMapExtractor from the example above is present)
+use opentelemetry::{
+    global,
+    trace::{SpanKind, Tracer},
+};
+use opentelemetry_http::HeaderExtractor;
+use axum::http::HeaderMap;
 
+// AXUM example
 async fn axum_handler(headers: HeaderMap) {
-    let propagator = global::get_text_map_propagator(|propagator| propagator.clone());
-
     // Extract the parent context from the incoming headers
-    let parent_context = propagator.extract(&HeaderMapExtractor(&headers));
+    let parent_cx = global::get_text_map_propagator(|p| p.extract(&HeaderExtractor(&headers)));
 
     let tracer = global::tracer("my-server-component");
 
-    // Start the server span as a child of the extracted context
-    tracer.in_span_with_context("http.server.request", &parent_context, |span| {
-        // ... your handler logic ...
-        // This span is now correctly linked to the client's trace.
-    });
+    // Start the server span as a child of the extracted context.
+    // Setting SpanKind::Server is a best practice.
+    let _span = tracer
+        .span_builder("http.server.request")
+        .with_kind(SpanKind::Server)
+        .start_with_context(tracer, &parent_cx);
+
+    // ... your handler logic ...
+    // This span is now correctly linked to the client's trace.
 }
 ```
+
 [1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
 
