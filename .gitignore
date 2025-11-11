@@ -294,6 +294,7 @@ local/bin/py/add_notranslate_tag.py
 local/bin/py/placehold_translations.py
 local/bin/py/missing_metrics.py
 local/bin/py/submit_github_status_check.py
+!local/bin/py/build/configurations/
 !local/bin/py/build/configurations/pull_config_preview.yaml
 !local/bin/py/build/configurations/pull_config.yaml
 !local/bin/py/build/configurations/integration_merge.yaml

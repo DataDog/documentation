@@ -158,13 +158,3 @@ The following tutorials guide you through setting up distributed tracing for a s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/community/libraries/#apm-tracing-client-libraries
-[2]: /tracing/trace_collection/library_injection_local/
-[4]: /tracing/trace_collection/dd_libraries/
-[5]: /tracing/trace_collection/automatic_instrumentation/
-[6]: /tracing/trace_collection/custom_instrumentation/
-[7]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
-[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[9]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
-[10]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[11]: /tracing/dynamic_instrumentation/
