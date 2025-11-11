@@ -1,5 +1,5 @@
 ---
-title: OpenTelemetry
+title: OpenTelemetry Source
 disable_toc: false
 ---
 
@@ -86,19 +86,22 @@ To send logs from the Datadog Distribution of the OpenTelemetry Collector (DDOT)
     1. When you install the Worker, for the OpenTelemetry source environment variables:
         1. Set your HTTP listener to `0.0.0.0:4318`.
         1. Set your gRPC listener to `0.0.0.0:4317`.
-    1. After you installed the Worker and deployed the pipeline, update the OpenTelemetry Collector's `collector-config.yaml` to include an exporter that sends logs to Observability Pipelines. For example:
+    1. After you installed the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends logs to Observability Pipelines. For example:
         ```
         exporters:
             otlphttp:
                 endpoint: http://opw-observability-pipelines-worker.default.svc.cluster.local:4318
         ...
-        service: pipelines: logs: exporters: [otlphttp]
+        service:
+            pipelines:
+                logs:
+                    exporters: [otlphttp]
         ```
-    1. Redeploy the Datadog Agent with the updated `collector-config.yaml`.For example, if the Agent is installed in Kubernetes:
+    1. Redeploy the Datadog Agent with the updated [`otel-config.yaml`][9].For example, if the Agent is installed in Kubernetes:
         ```
         helm upgrade --install datadog-agent datadog/datadog \
         --values ./agent.yaml \
-        --set-file datadog.otelCollector.config=./collector-config.yaml
+        --set-file datadog.otelCollector.config=./otel-config.yaml
         ```
 
 **Notes**:
@@ -115,3 +118,4 @@ To send logs from the Datadog Distribution of the OpenTelemetry Collector (DDOT)
 [6]: /observability_pipelines/configuration/set_up_pipelines/
 [7]: /observability_pipelines/processors/edit_fields#add-field
 [8]: /observability_pipelines/processors/custom_processor
+[9]: https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=helm#configure-the-opentelemetry-collector
