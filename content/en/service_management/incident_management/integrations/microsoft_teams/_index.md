@@ -58,7 +58,7 @@ Use the "More actions" menu on any message inside an incident team on the far ri
 
 You can configure Incident Management to automatically create an incident Microsoft Teams channel for each incident or for incidents meeting criteria you define. To set up automatic incident channel creation:
 
-1. Navigate to [Incident Settings][4] and select **Microsoft Teams**.
+1. Navigate to [Incident Settings][2] and select **Microsoft Teams**.
 2. From the **Tenant** dropdown, select your connected Microsoft Teams tenant.
 3. Toggle on **Automatically create a Microsoft Teams channel for every incident**.
 4. Select the Team in which you want to automatically create new channels.
@@ -91,7 +91,7 @@ You can configure Incident Management to automatically archive an incident chann
 
 Delegated permissions are required for one-click Microsoft Teams meetings. To enable one-click Microsoft Teams meetings for incidents:
 
-1. Navigate to [Incident Settings][4].
+1. Navigate to [Incident Settings][2].
 2. In Microsoft Teams, select your connected Microsoft Teams tenant.
 3. Toggle on **Enable meeting creation**.
 4. Save your settings.
@@ -102,7 +102,7 @@ After enabling one-click Microsoft Teams meetings, start a meeting by clicking *
 
 Delegated permissions are required for automatic, criteria-based Microsoft Teams meetings. To enable automatic, criteria-based Microsoft Teams meetings for incidents:
 
-1. Navigate to [Incident Settings][4].
+1. Navigate to [Incident Settings][2].
 2. In Microsoft Teams, select your connected Microsoft Teams tenant.
 3. Toggle on **Enable meeting creation**.
    1. Toggle on **Automatically create Microsoft Teams meetings**.
@@ -118,7 +118,7 @@ Using an incident updates channel provides your stakeholders with organization-w
 - Links to the incident's overview page in App
 - Link to join the dedicated incident team
 
-To customize this behavior, deactivate this setting and [define a notification rule][5] instead.
+To customize this behavior, deactivate this setting and [define a notification rule][4] instead.
 
 ## Further reading
 
@@ -127,5 +127,4 @@ To customize this behavior, deactivate this setting and [define a notification r
 [1]: /integrations/microsoft-teams/?tab=datadogapprecommended
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
 [3]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
-[4]: /incidents/settings#Integrations
-[5]: /service_management/incident_management/incident_settings/notification_rules
+[4]: /service_management/incident_management/incident_settings/notification_rules
