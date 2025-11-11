@@ -45,7 +45,19 @@ You can use the standard OpenTelemetry API packages to create custom metrics.
 This example uses the OTel Metrics API to create a counter that increments every time an item is processed:
 
 ```csharp
-[TODO: Code example]
+using System.Diagnostics.Metrics;
+
+// Define a meter
+Meter meter = new("MyService", "1.0.0");
+
+// Create a counter instrument, which will be used to record measurements in your code
+Counter<long> requestsCounter = meter.CreateCounter<long>("http.requests_total");
+
+// Perform work
+// ...
+
+// Record measurements
+requestsCounter.Add(1, new("method", "GET"), new("status_code", "200"));
 ```
 
 ### Create a histogram
@@ -53,7 +65,21 @@ This example uses the OTel Metrics API to create a counter that increments every
 This example uses the OTel Metrics API to create a histogram to track request durations:
 
 ```csharp
-[TODO: Code example]
+using System.Diagnostics.Metrics;
+
+// Define a meter
+Meter meter = new("MyService", "1.0.0");
+
+// Create a histogram instrument, which will be used to record measurements in your code
+Histogram<double> responseTimeHistogram = meter.CreateHistogram<double>("http.response.time");
+
+// Perform work
+var watch = System.Diagnostics.Stopwatch.StartNew();
+await Task.Delay(1_000);
+watch.Stop();
+
+// Record measurements
+responseTimeHistogram.Record(watch.ElapsedMilliseconds, new("method", "GET"), new("status_code", "200"));
 ```
 
 ## Supported configuration
