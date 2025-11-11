@@ -51430,6 +51430,7 @@ components:
       - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorage'
       - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataLocalFile'
     TableResultV2DataAttributesFileMetadataCloudStorage:
+      additionalProperties: false
       description: File metadata for reference tables created by cloud storage.
       properties:
         access_details:
@@ -51476,6 +51477,7 @@ components:
       - OPERATION_ERROR
       - SYSTEM_ERROR
     TableResultV2DataAttributesFileMetadataLocalFile:
+      additionalProperties: false
       description: File metadata for reference tables created by upload. Note that
         upload_id is only returned in the immediate create/replace response and is
         not available in subsequent GET requests.
@@ -54436,6 +54438,12 @@ components:
           type: string
         icon:
           description: URL of the user's icon.
+          type: string
+        last_login_time:
+          description: The last time the user logged in.
+          format: date-time
+          nullable: true
+          readOnly: true
           type: string
         mfa_enabled:
           description: If user has MFA enabled.
