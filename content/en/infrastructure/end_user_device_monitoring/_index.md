@@ -13,24 +13,26 @@ End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>
 
 <div align="center"><b>INSERT SCREENSHOT HERE</b></div></br>
 
-End User Device Monitoring helps IT teams monitor the health and performance of employee desktops and laptops, physical or virtual, to detect and resolve issues that affect productivity. This gives organizations a unified view of device, network, and application performance across their workforce.
+End User Device Monitoring gives IT teams visibility into the health and performance of employee desktops and laptops, both physical and virtual. It helps identify performance and connectivity issues affecting employees and provides a unified view of device, network, and application health across your workforce.
 
 ## How it works
 
-End User Device Monitoring uses the Datadog Agent to collect data directly from employee desktops and laptops. The Agent gathers system metrics, network information, and logs from each device and sends them to Datadog for analysis.
+End User Device Monitoring uses the Datadog Agent to collect data directly from employee desktops, laptops, and workstations. The Agent gathers system metrics, network information, and logs from each device and sends the data to Datadog, where it can be monitored and visualized.
 
-Devices appear in the Infrastructure Host List, where you can view performance data such as CPU, memory, and network usage. You can use Fleet Automation to manage the Agents installed on those devices, including checking version status, verifying configuration consistency, and ensuring that the necessary integrations are enabled.
+The [End User Devices][5] page provides built-in dashboards and metrics that summarize health and performance across your organization's devices. You can view summary metrics for all devices and detailed metrics for individual ones, including CPU, memory, and network usage.
+
+Use [Fleet Automation][6] to manage the Agents installed on those devices, including checking version status, verifying configuration consistency, and ensuring that the necessary integrations are enabled.
 
 ## Key capabilities
 
-| Capability                        | Description                                                                                                                                    |
-|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Device performance monitoring** | Track CPU, memory, disk, and network utilization collected automatically by the Datadog Agent to identify slow or resource-intensive devices.  |
-| **Process visibility**            | Use [Live Processes][1] to view real-time CPU and memory usage by individual processes.                                                             |
-| **Logs collection**               | Collect operating system and application logs from monitored devices to troubleshoot crashes, errors, and performance issues.                  |
-| **Wi-Fi monitoring**              | Use the [WiFi/WLAN integration][2] to view wireless signal strength and connection information from the endpoint perspective.                       |
-| **Crash detection**               | Detect Windows Blue Screen of Death (BSOD) events and driver information with the [Crash Detection integration][3].                                 |
-| **Network path analysis**         | Visualize hop-by-hop routes between a device and its destination using [Network Path][4] to isolate connectivity or latency issues. |
+| Capability                        | Description                                                                                                                                                                                               |
+|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Device performance monitoring** | Monitor overall system health metrics such as CPU, memory, disk, and network utilization to identify underperforming devices.                                                                             |
+| **Process visibility**            | Use [Live Processes][1] to monitor resource usage by individual processes and identify applications affecting device performance.                                                                         |
+| **Logs collection**               | Use [Logs][7] to collect and explore logs from end-user devices and applications for troubleshooting crashes, errors, and performance issues.                                                             |
+| **Wi-Fi monitoring**              | Monitor Wi-Fi metrics such as signal quality, transmission rate, and access point transitions with the [WiFi/WLAN integration][2], which helps identify connectivity issues and overloaded access points. |
+| **Windows crash detection**       | Detect Blue Screen of Death (BSOD) events on Windows devices with the [Windows Crash Detection integration][3], which generates Datadog events showing when system crashes occur.                         |
+| **Network path analysis**         | Use [Network Path][4] to trace network traffic from an end-user device to its destination and identify where latency or connectivity issues occur.                                                        |
 
 ## Further reading
 
@@ -40,3 +42,6 @@ Devices appear in the Infrastructure Host List, where you can view performance d
 [2]: /integrations/wlan/
 [3]: /integrations/wincrashdetect/
 [4]: /network_monitoring/network_path/
+[5]: https://app.datadoghq.com/end-user-devices
+[6]: /agent/fleet_automation/
+[7]: /logs/
