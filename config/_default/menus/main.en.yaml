@@ -8361,51 +8361,56 @@ menu:
       identifier: account_management_saml
       parent: account_management
       weight: 4
+    - name: Configuring SAML
+      url: account_management/saml/configuration/
+      identifier: account_management_saml_configuration
+      parent: account_management_saml
+      weight: 401
     - name: User Group Mapping
       url: account_management/saml/mapping/
       identifier: account_management_saml_mapping
       parent: account_management_saml
-      weight: 401
+      weight: 402
     - name: Active Directory
       url: account_management/saml/activedirectory/
       identifier: account_management_saml_activedirectory
       parent: account_management_saml
-      weight: 402
+      weight: 403
     - name: Auth0
       url: account_management/saml/auth0/
       identifier: account_management_saml_auth0
       parent: account_management_saml
-      weight: 403
+      weight: 404
     - name: Entra ID
       url: account_management/saml/entra/
       identifier: account_management_saml_entra
       parent: account_management_saml
-      weight: 404
+      weight: 405
     - name: Google
       url: account_management/saml/google/
       identifier: account_management_saml_google
       parent: account_management_saml
-      weight: 405
+      weight: 406
     - name: LastPass
       url: account_management/saml/lastpass/
       identifier: account_management_saml_lastpass
       parent: account_management_saml
-      weight: 406
+      weight: 407
     - name: Okta
       url: account_management/saml/okta/
       identifier: account_management_saml_okta
       parent: account_management_saml
-      weight: 407
+      weight: 408
     - name: SafeNet
       url: account_management/saml/safenet/
       identifier: account_management_saml_safenet
       parent: account_management_saml
-      weight: 408
+      weight: 409
     - name: Troubleshooting
       url: account_management/saml/troubleshooting/
       identifier: account_management_samle_troubleshooting
       parent: account_management_saml
-      weight: 409
+      weight: 410
     - name: SCIM
       url: account_management/scim/
       parent: account_management
