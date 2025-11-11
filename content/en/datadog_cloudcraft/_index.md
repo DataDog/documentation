@@ -69,7 +69,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 - Enable [resource collection][14] for your Azure accounts:
   1. Navigate to [**Integrations > Azure**][15].
   2. Add your Azure subscription by selecting **+ Add New App Registration** if not already added.
-  3. Optionally, select the App Registration containing your Azure subscription.
+  3. Select the App Registration containing your Azure subscription.
   4. On the Resource Collection tab, ensure the **Enable Resource Collection** toggle is enabled.
 
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
