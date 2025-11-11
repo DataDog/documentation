@@ -13,7 +13,7 @@ Images are tagged based on semantic versioning, with each new version receiving 
 {{ if eq (.Get "mode") "in-container" }}Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:<YOUR_TAG> /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD [{{ .Get "cmd" | safeHTML }}]
 ```
