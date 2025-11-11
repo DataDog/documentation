@@ -108,7 +108,7 @@ To send logs from the Datadog Distribution of the OpenTelemetry Collector (DDOT)
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED:true`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL:"http://opw-observability-pipelines-worker.default.svc.cluster.local:4317/v1/logs"`
     <br><br>These settings do **not** work when setting up DDOT with the OpenTelemetry source, because the OpenTelemetry Collector's `collector-config.yaml` must be configured with those settings using the exporter.
-- Logs sent from DDOT might have nested objects that prevent Datadog from parsing the logs into the prettified structure. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
+- Logs sent from DDOT might have nested objects that prevent Datadog from parsing the logs correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
 
 [1]: https://opentelemetry.io/docs/collector/
 [2]: /observability_pipelines/sources/
