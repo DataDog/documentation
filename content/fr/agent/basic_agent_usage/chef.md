@@ -1,20 +1,21 @@
 ---
 dependencies:
-- "https://github.com/DataDog/chef-datadog/blob/master/README.md"
+- https://github.com/DataDog/chef-datadog/blob/main/README.md
 title: Chef
 ---
+Le cookbook Chef Datadog automatise l'installation et la configuration de l'Agent Datadog sur les plateformes Linux et Windows prises en charge. Le cookbook est compatible avec `chef-client >= 12.7` et prend en charge les plateformes Windows et Linux. Pour les références complètes d'attributs, les recettes, les exemples d'utilisation et les modèles de configuration d'intégrations, consultez la section [Configurations avancées](#configurations-avancees).
+
+
 Les recettes Chef pour Datadog servent à déployer automatiquement les composants et la configuration de Datadog. Le cookbook prend en charge les versions suivantes de l'Agent :
 
 * Agent Datadog v7.x (par défaut)
 * Agent Datadog v6.x
 * Agent Datadog v5.x
 
-**Remarque** : cette page peut faire référence à des fonctionnalités qui ne sont pas disponibles pour votre version. Consultez le fichier README du
+**Remarque** : cette page peut mentionner des fonctionnalités qui ne sont pas disponibles avec votre version. Consultez le fichier README du
 tag git ou de la version gem pour accéder à la documentation de votre version.
 
-## Configuration
-
-### Prérequis
+## Prérequis
 
 Le cookbook Chef pour Datadog est compatible avec `chef-client` 12.7 ou une version ultérieure. Pour une version antérieure de Chef, utilisez une [version 2.x du cookbook][2]. Consultez le [CHANGELOG][3] pour en savoir plus.
 
@@ -22,10 +23,12 @@ Le cookbook Chef pour Datadog est compatible avec `chef-client` 12.7 ou une ver
 
 Les plateformes suivantes sont prises en charge :
 
-* Amazon Linux
+* AlmaLinux (Chef 16 ou 16.10.8 ou une version supérieure, ou bien Chef 17.0.69 ou une version supérieure requis)
+* Amazon Linux
 * CentOS
 * Debian
 * RedHat (RHEL 8 nécessite Chef 15 ou une version ultérieure)
+* Rocky (Chef 16 ou 16.17.4 ou une version supérieure, ou bien Chef 17.1.35 ou une version supérieure requis)
 * Scientific Linux
 * Ubuntu
 * Windows
@@ -43,29 +46,16 @@ Les cookbooks Opscode suivants sont des dépendances :
 
 #### Chef
 
-**Utilisateurs de Chef 12** : en fonction de votre version de Chef 12, des contraintes de dépendance supplémentaires peuvent s'appliquer :
-
-```ruby
-# Chef < 12.14
-depends 'yum', '< 5.0'
-```
-
-```ruby
-# Chef < 12.9
-depends 'apt', '< 6.0.0'
-depends 'yum', '< 5.0'
-```
-
 **Utilisateurs de Chef 13** : avec Chef 13 et `chef_handler` 1.x, il se peut que vous rencontriez des problèmes avec la recette `dd-handler`. Pour y remédier, mettez à jour dépendance `chef_handler` en installant la version 2.1 ou une version ultérieure.
 
-**Utilisateurs de Chef 14 et 15** : pour prendre en charge les versions 12 et 13 de Chef, le cookbook `datadog` dispose d'une dépendance avec le cookbook `chef_handler`, qui est fourni en tant que ressource dans Chef 14. Malheureusement, la dépendance génère un message indiquant son obsolescence pour les utilisateurs de Chef 14 et 15.
+## Configuration
 
 ### Installation
 
 1. Ajoutez le cookbook à votre serveur Chef avec [Berkshelf][5] ou [Knife][6] :
     ```text
     # Berksfile
-    cookbook 'datadog', '~> 4.0.0'
+    cookbook 'datadog', '~> 4.0'
     ```
 
     ```shell
@@ -96,24 +86,7 @@ depends 'yum', '< 5.0'
 
 5. Patientez jusqu'à la prochaine exécution programmée de `chef-client` ou déclenchez-le manuellement.
 
-### Environnement Dockerisé
-
-Pour créer un environnement Docker, utilisez les fichiers sous `docker_test_env` :
-
-```
-cd docker_test_env
-docker build -t chef-datadog-container .
-```
-
-Pour exécuter le conteneur, utilisez :
-
-```
-docker run -d -v /dev/vboxdrv:/dev/vboxdrv --privileged=true chef-datadog-container
-```
-
-Ensuite, associez une console au conteneur ou utilisez la fonctionnalité de conteneur distant de VS Code pour développer au sein du conteneur.
-
-#### Attributs Datadog
+### Attributs Datadog
 
 Vous pouvez utiliser les méthodes suivantes pour ajouter vos [clés d'API et d'application Datadog][4] :
 
@@ -123,11 +96,11 @@ Vous pouvez utiliser les méthodes suivantes pour ajouter vos [clés d'API et d'
 
 **Remarque** : lorsque vous utilisez l'état d'exécution pour stocker vos clés d'API et d'application, définissez-les en fonction de la durée de compilation avant `datadog::dd-handler` dans la run list.
 
-#### Configuration supplémentaire
+## Configurations avancées
 
 Pour ajouter des éléments supplémentaires qui ne sont pas directement disponibles en tant qu'attributs du cookbook au fichier de configuration de l'Agent (généralement `datadog.yaml`), utilisez l'attribut `node['datadog']['extra_config']`. Il s'agit d'un attribut de hachage, qui est marshalé dans le fichier de configuration en conséquence.
 
-##### Exemples
+### Exemples
 
 Le code suivant définit le champ `secret_backend_command` dans le fichier de configuration `datadog.yaml` :
 
@@ -153,7 +126,7 @@ Pour les attributs imbriqués, utilisez une syntaxe d'objet. Le code suivant dé
 default['datadog']['extra_config']['logs_config'] = { 'use_port_443' => true }
 ```
 
-#### Déploiement Chef sur AWS OpsWorks
+### Déploiement Chef sur AWS OpsWorks
 
 Suivez les étapes ci-dessous pour déployer l'Agent Datadog avec Chef sur AWS OpsWorks :
 
@@ -164,25 +137,25 @@ Suivez les étapes ci-dessous pour déployer l'Agent Datadog avec Chef sur AWS 
 
 2. Incluez la recette dans la recette `install-lifecycle` :
   ```ruby
-  include_recipe 'datadog::dd-agent'
+  include_recipe '::dd-agent'
   ```
 
 ### Intégrations
 
 Activez les intégrations de l'Agent en ajoutant la [recette](#recettes) et les détails de configuration dans la run list et les attributs de votre rôle.
-**Remarque** : vous pouvez créer des recettes d'intégration supplémentaires en utilisant la ressource [datadog_monitor](#monitor-datadog).
+**Remarque** : vous pouvez utiliser la ressource `datadog_monitor` pour activer les intégrations de l'Agent sans passer par une recette.
 
 Associez vos recettes aux `roles` souhaités. Par exemple, `role:chef-client` doit contenir `datadog::dd-handler`, et `role:base` doit démarrer l'Agent avec `datadog::dd-agent`. Voici un exemple de rôle avec les recettes `dd-handler`, `dd-agent` et `mongo` :
 
 ```ruby
 name 'example'
-description 'Exemple de rôle avec Datadog'
+description 'Example role using DataDog'
 
 default_attributes(
   'datadog' => {
     'agent_major_version' => 7,
-    'api_key' => '<VOTRE_CLÉ_API_DD>',
-    'application_key' => '<VOTRE_CLÉ_API_DD>',
+    'api_key' => '<YOUR_DD_API_KEY>',
+    'application_key' => '<YOUR_DD_APP_KEY>',
     'mongo' => {
       'instances' => [
         {'host' => 'localhost', 'port' => '27017'}
@@ -200,11 +173,11 @@ run_list %w(
 
 **Remarque** : cette recette n'utilise pas de `data_bags`, car il est peu probable d'avoir plusieurs clés d'API avec une seule clé d'application.
 
-## Versions
+### Versions
 
 Par défaut, la version majeure actuelle de ce cookbook installe l'Agent v7. Les attributs suivants sont disponibles pour contrôler la version de l'Agent installée :
 
-| Paramètre              | Description                                                                                                                                                                         |
+| Paramètre              | Rôle                                                                                                                                                                         |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `agent_major_version`  | Impose la version majeure 5, 6 ou 7 (par défaut) de l'Agent.                                                                                                                         |
 | `agent_version`        | Impose une version spécifique de l'Agent (conseillé).                                                                                                                                         |
@@ -213,7 +186,7 @@ Par défaut, la version majeure actuelle de ce cookbook installe l'Agent v7. Le
 
 Consultez le fichier d'exemple [attributes/default.rb][1] correspondant à la version de votre cookbook pour découvrir tous les attributs disponibles.
 
-### Passer à une version supérieure
+#### Mise à jour
 
 Certains noms d'attributs ont changé entre les versions 3.x et 4.x du cookbook. Référez-vous à ce tableau de référence pour mettre à jour votre configuration :
 
@@ -225,7 +198,7 @@ Certains noms d'attributs ont changé entre les versions 3.x et 4.x du cookbook
 | Imposer une version de l'Agent     | `'agent_version'` ou `'agent6_version'`               | `'agent_version'` pour toutes les versions        |
 | Modifier package_action | `'agent_package_action'` ou `'agent6_package_action'` | `'agent_package_action'` pour toutes les versions |
 | Modifier l'URL du référentiel APT   | `'aptrepo'` ou `'agent6_aptrepo'`                     | `'aptrepo'` pour toutes les versions              |
-| Modifier la distribution du référentiel APT  | `'aptrepo_dist'` ou `'agent6_aptrepo_dist'`           | `'aptrepo_dist'` pour toutes les versions         |
+| Modifier la distribution du référentiel APT  | `'aptrepo_dist'` ou `'agent6_aptrepo_dist'`   | `'aptrepo_dist'` pour toutes les versions         |
 | Modifier le référentiel YUM       | `'yumrepo'` ou `'agent6_yumrepo'`                     | `'yumrepo'` pour toutes les versions              |
 | Modifier le référentiel SUSE      | `'yumrepo_suse'` ou `'agent6_yumrepo_suse'`           | `'yumrepo_suse'` pour toutes les versions         |
 
@@ -240,13 +213,13 @@ L'exemple suivant permet de passer de la version 6 à la version 7 de l'Agent.
 default_attributes(
   'datadog' => {
     'agent_major_version' => 7,
-    'agent_version' => '7.15.0',
+    'agent_version' => '7.25.1',
     'agent_package_action' => 'install',
   }
 )
 ```
 
-### Passer à une version antérieure
+#### Passer à une version antérieure
 
 Pour passer à une version antérieure de l'Agent, définissez les paramètres `'agent_major_version'`, `'agent_version'` et `'agent_allow_downgrade'`.
 
@@ -262,25 +235,45 @@ L'exemple suivant permet de passer de la version 7 à la version 6 de l'Agent.
   )
 ```
 
-## Recettes
+#### Désinstallation
+
+Pour désinstaller l'Agent, supprimez la recette `dd-agent`, puis ajoutez la recette `remove-dd-agent` sans aucun attribut.
+
+#### Référentiel d'Agent personnalisé
+
+Pour utiliser un Agent depuis un référentiel personnalisé, vous pouvez définir l'option `aptrepo`.
+
+Par défaut, cette option est égale à `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] apt.datadoghq.com`. Si une valeur personnalisée est définie, un autre trousseau `signed-by` peut également être défini `[signed-by=custom-repo-keyring-path] custom-repo`.
+
+L'exemple ci-dessous utilise le référentiel de staging :
+
+```ruby
+  default_attributes(
+    'datadog' => {
+      'aptrepo' => '[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] apt.datad0g.com',
+    }
+  }
+```
+
+### Recettes
 
 Accédez aux [recettes Chef pour Datadog sur GitHub][7].
 
-### Valeur par défaut
+#### Valeur par défaut
 
 La [recette par défaut][8] est donnée à titre d'exemple.
 
-### Agent
+#### Agent
 
 La [recette dd-agent][9] permet d'installer l'Agent Datadog sur le système cible, de définir votre [clé d'API Datadog][4] et de démarrer le service afin de transmettre des métriques système locales.
 
 **Remarque** : pour les utilisateurs Windows qui effectuent une mise à niveau de l'Agent à partir d'une version <= 5.10.1 vers une version >= 5.12.0, définissez l'attribut `windows_agent_use_exe` sur `true`. Pour en savoir plus, consultez la [page Wiki dd-agent][10].
 
-### Gestionnaire
+#### Gestionnaire
 
 La [recette dd-handler][11] permet d'installer le gem [chef-handler-datadog][12] et d'appeler le gestionnaire à la fin d'une exécution Chef pour transmettre les détails au flux d'actualités.
 
-### DogStatsD
+#### DogStatsD
 
 Pour installer une bibliothèque spécifique à un langage qui interagit avec DogStatsD :
 
@@ -290,7 +283,7 @@ Pour installer une bibliothèque spécifique à un langage qui interagit avec Do
     python_package 'dogstatsd-python' # assumes python and pip are installed
     ```
 
-### Tracing
+#### Tracing
 
 Pour installer une bibliothèque spécifique à un langage pour le tracing d'applications (APM) :
 
@@ -300,51 +293,63 @@ Pour installer une bibliothèque spécifique à un langage pour le tracing d'app
     python_package 'ddtrace' # assumes python and pip are installed
     ```
 
-### Intégrations
+#### Intégrations
 
 De nombreuses [recettes][7] peuvent vous aider à déployer des dépendances et des fichiers de configuration pour les intégrations de l'Agent.
 
-## Ressources
+#### System-probe
 
-### datadog_monitor
+Par défaut, la [recette system-probe][17] est automatiquement incluse. Elle génère le fichier `system-probe.yaml`. Pour désactiver ce comportement, définissez `node['datadog']['system_probe']['manage_config']` sur false.
+
+Pour activer la solution [Network Performance Monitoring][7] (NPM) dans `system-probe.yaml`, définissez `node['datadog']['system_probe']['network_enabled']` sur true.
+
+Pour activer [Universal Service Monitoring][7] (USM) dans `system-probe.yaml`, définissez `node['datadog']['system_probe']['service_monitoring_enabled']` sur true.
+
+**Remarque pour les utilisateurs Windows** : la solution NPM fonctionne sous Windows avec les versions 6.27+ et 7.27+ de l'Agent. Elle est fournie en tant que composant facultatif. Celui-ci est uniquement installé lorsque `node['datadog']['system_probe']['network_enabled']` est défini sur true durant l'installation ou la mise à niveau de l'Agent. Ainsi, pour installer le composant NPM, vous devrez probablement désinstaller et réinstaller l'Agent, sauf si vous en profitez pour mettre à niveau l'Agent.
+
+### Ressources
+
+#### Intégrations sans recette
 
 Utilisez la ressource `datadog_monitor` pour activer des intégrations de l'Agent sans passer par une recette.
 
-#### Actions
+##### Actions
 
 - `:add` (par défaut) : active une intégration en configurant le fichier de configuration, en ajoutant les autorisations appropriées au fichier et en redémarrant l'Agent.
 - `:remove` : désactive une intégration.
 
-#### Syntaxe
+##### Syntaxe
 
 ```ruby
 datadog_monitor 'name' do
-  init_config                       Hash # valeur par défaut : {}
-  instances                         Array # valeur par défaut : []
-  logs                              Array # valeur par défaut : []
-  use_integration_template          true, false # valeur par défaut : false
-  action                            Symbol # valeur par défaut : add
+  init_config                       Hash # default value: {}
+  instances                         Array # default value: []
+  logs                              Array # default value: []
+  use_integration_template          true, false # default value: false
+  config_name                       String # default value: 'conf'
+  action                            Symbol # defaults to :add
 end
 ```
 
-#### Propriétés
+##### Propriétés
 
-| Propriété                   | Description                                                                                                                                                                                                                                                                                    |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `'name'`                   | Le nom de l'intégration de l'Agent à configurer et à activer.                                                                                                                                                                                                                                     |
-| `instances`                | Les champs utilisés pour renseigners les valeurs sous la section `instances` dans le fichier de configuration de l'intégration.                                                                                                                                                                                            |
-| `init_config`              | Les champs utilisés pour renseigner les valeurs sous la section `init_config` dans le fichier de configuration de l'intégration.                                                                                                                                                                                      |
-| `logs`                     | Les champs utilisés pour renseigner les valeurs sous la section `logs` dans le fichier de configuration de l'intégration.                                                                                                                                                                                             |
-| `use_integration_template` | Définissez cette propriété sur `true` (conseillé) pour utiliser le modèle par défaut, qui inscrit les valeurs des propriétés `instances`, `init_config` et `logs` dans le fichier YAML sous leurs clés respectives. Cette propriété est par défaut définie sur `false` afin de rendre possible une rétrocompatibilité. La valeur `true` sera prochainement utilisée par défaut dans une prochaine version majeure du cookbook |
+| Propriété                   | Rôle                                                                                                                                                                                                                                                                                   |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `'name'`                   | Le nom de l'intégration de l'Agent à configurer et à activer.                                                                                                                                                                                                                                    |
+| `instances`                | Les champs utilisés pour renseigners les valeurs sous la section `instances` dans le fichier de configuration de l'intégration.                                                                                                                                                                                           |
+| `init_config`              | Les champs utilisés pour renseigner les valeurs sous la section `init_config` dans le fichier de configuration de l'intégration.                                                                                                                                                                                     |
+| `logs`                     | Les champs utilisés pour renseigner les valeurs sous la section `logs` dans le fichier de configuration de l'intégration.                                                                                                                                                                                            |
+| `use_integration_template` | Définissez cette propriété sur `true` (conseillé) pour utiliser le modèle par défaut, qui inscrit les valeurs des propriétés `instances`, `init_config` et `logs` dans le fichier YAML sous leurs clés respectives. Cette propriété est par défaut définie sur `false` afin de rendre possible une rétrocompatibilité. La valeur `true` sera prochainement utilisée par défaut dans une prochaine version majeure du cookbook. |
+| `config_name`              | Le nom de fichier utilisé lors de la création d'un fichier de configuration d'intégrations. Le remplacement de cette propriété permet la création de plusieurs fichiers de configuration pour une seule intégration. Par défaut, la valeur est `conf`, ce qui crée un fichier de configuration nommé `conf.yaml`.                                    |
 
-#### Exemple
+##### Exemple
 
 Cet exemple permet d'activer l'intégration ElasticSearch en utilisant la ressource `datadog_monitor`. Il fournit la configuration d'instance (dans ce cas : l'URL pour se connecter à ElasticSearch) et définit le flag `use_integration_template` afin d'utiliser le modèle de configuration par défaut. En outre, il indique à la ressource `service[datadog-agent]` de redémarrer l'Agent.
 
 **Remarque** : l'installation de l'Agent doit être au-dessus de cette recette dans la run list.
 
 ```ruby
-include_recipe 'datadog::dd-agent'
+include_recipe '::dd-agent'
 
 datadog_monitor 'elastic' do
   instances  [{'url' => 'http://localhost:9200'}]
@@ -355,16 +360,16 @@ end
 
 Consultez les [recettes Chef pour les intégrations Datadog][7] afin de découvrir des exemples supplémentaires.
 
-### datadog_integration
+#### Versions d'intégration
 
 Pour installer une version spécifique d'une intégration Datadog, utilisez la ressource `datadog_integration`.
 
-#### Actions
+##### Actions
 
 - `:install` (par défaut) : installe la version spécifiée d'une intégration.
 - `:remove` : supprime une intégration.
 
-#### Syntaxe
+##### Syntaxe
 
 ```ruby
 datadog_integration 'name' do
@@ -374,20 +379,20 @@ datadog_integration 'name' do
 end
 ```
 
-#### Propriétés
+##### Propriétés
 
 - `'name'` : le nom de l'intégration de l'Agent à installer, par exemple : `datadog-apache`.
 - `version` : la version de l'intégration à installer (obligatoire uniquement pour l'action `:install`).
 - `third_party` : définissez ce paramètre sur false si vous installez une intégration Datadog. Si ce n'est pas le cas, définissez-le sur true. Disponible à partir des versions 6.21/7.21 de l'Agent Datadog uniquement.
 
-#### Exemple
+##### Exemple
 
 Cet exemple permet d'installer la version `1.11.0` de l'intégration ElasticSearch en utilisant la ressource `datadog_integration`.
 
 **Remarque** : l'installation de l'Agent doit être au-dessus de cette recette dans la run list.
 
 ```ruby
-include_recipe 'datadog::dd-agent'
+include_recipe '::dd-agent'
 
 datadog_integration 'datadog-elastic' do
   version '1.11.0'
@@ -398,11 +403,37 @@ Pour obtenir la liste des versions disponibles d'une intégration, consultez son
 
 **Remarque** : pour les utilisateurs de Chef sous Windows, le `chef-client` doit avoir un accès en lecture au fichier `datadog.yaml` lorsque le binaire `datadog-agent` disponible sur le nœud est utilisé par cette ressource.
 
+### Développement
+
+#### Environnement Dockerisé
+
+Pour créer un environnement Docker avec lequel exécuter des tests kitchen, utilisez les fichiers sous `docker_test_env` :
+
+```
+cd docker_test_env
+docker build -t chef-datadog-test-env .
+```
+
+Pour exécuter le conteneur, utilisez :
+
+```
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock chef-datadog-test-env
+```
+
+Attachez ensuite une console au conteneur ou utilisez la fonctionnalité remote-container de VS Code pour développer à l'intérieur du conteneur.
+
+Pour exécuter des tests kitchen-docker depuis l'intérieur du conteneur :
+
+```
+# Note: Also set KITCHEN_DOCKER_HOSTNAME=host.docker.internal if on MacOS or Windows
+# Run this under a login shell (otherwise `bundle` won't be found)
+KITCHEN_LOCAL_YAML=kitchen.docker.yml bundle exec rake circle
+```
 
 [1]: https://github.com/DataDog/chef-datadog/blob/master/attributes/default.rb
 [2]: https://github.com/DataDog/chef-datadog/releases/tag/v2.18.0
 [3]: https://github.com/DataDog/chef-datadog/blob/master/CHANGELOG.md
-[4]: https://app.datadoghq.com/account/settings#api
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://docs.chef.io/berkshelf/
 [6]: https://docs.chef.io/knife/
 [7]: https://github.com/DataDog/chef-datadog/tree/master/recipes
@@ -415,3 +446,4 @@ Pour obtenir la liste des versions disponibles d'une intégration, consultez son
 [14]: https://github.com/poise/poise-python
 [15]: https://github.com/DataDog/chef-datadog/blob/master/recipes/ddtrace-ruby.rb
 [16]: https://github.com/DataDog/integrations-core
+[17]: https://github.com/DataDog/chef-datadog/blob/master/recipes/system-probe.rb
