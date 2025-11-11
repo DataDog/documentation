@@ -91,7 +91,7 @@ Focus on clear communication, structured processes, and continuous improvement o
 
 By default, new custom agents run on the latest GPT model. 
 
-To change your agent's model, click **Auto** in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and reading [Anthropic's models comparison][5].
+To change your agent's model, click **Auto** in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and [Anthropic's models comparison][5].
 
 ### Self Improve
 
