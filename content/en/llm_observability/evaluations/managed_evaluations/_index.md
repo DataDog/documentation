@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By creating them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
+Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By creating them, you can assess the effectiveness of your application's responses, including detection of sentiment, topic relevancy, toxicity, failure to answer, and hallucination.
 
 LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation.
 
@@ -114,7 +114,7 @@ After you click **Save and Publish**, LLM Observability uses the LLM account you
 ## Edit existing evaluations
 
 1. Navigate to [**AI Observability > Evaluations**][2].
-1. Hoover on the evaluation you want to edit click on the **Edit** button.
+1. Hover over the evaluation you want to edit and click the **Edit** button.
 
 ### Estimated token usage
 

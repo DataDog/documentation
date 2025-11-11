@@ -234,7 +234,7 @@ Refine your prompt and schema until outputs are consistent and interpretable.
 
 ## Viewing and using results
 
-After you **Save and Publish** your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can **Save as Draft** and edit or enable them later.
+After you **Save and Publish** your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can **Save as Draft** and edit or enable your evaluation later.
 
 Results are available across LLM Observability in near-real-time for published evaluations. You can find your custom LLM-as-a-judge results for a specific span in the **Evaluations** tab, alongside other evaluations.
 
