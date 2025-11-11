@@ -79,6 +79,29 @@ To get started, follow the instructions below.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
    * Replace `<DD_SITE>` with your Datadog site (for example, `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`).
 
+   **Keeping your existing OpenLineage configuration**
+
+   If you're already using OpenLineage with another system (for example, with a standard HTTP transport), you can keep your existing configuration and add Datadog as an additional destination. The composite transport sends events to all configured transports.
+
+   For example, if you're currently using an HTTP transport to send events to another system:
+
+   ```shell
+   # Your existing HTTP transport configuration
+   export OPENLINEAGE__TRANSPORT__TYPE=composite
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__EXISTING__TYPE=http
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__EXISTING__URL=<YOUR_EXISTING_URL>
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__EXISTING__AUTH__TYPE=api_key
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__EXISTING__AUTH__API_KEY=<YOUR_EXISTING_API_KEY>
+
+   # Add Datadog as an additional transport
+   export DD_API_KEY=<DD_API_KEY>
+   export DD_SITE=<DD_SITE>
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__TYPE=datadog
+   export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
+   ```
+
+   In this example, OpenLineage events are sent to both your existing system and Datadog. You can configure multiple transports by giving each one a unique name (like `EXISTING` and `DATADOG` in the example above).
+
    **Option 3: Simple Configuration**
 
    This option uses the simple URL-based configuration and works with all versions of the OpenLineage provider:
