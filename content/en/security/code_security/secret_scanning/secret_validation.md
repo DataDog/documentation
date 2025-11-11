@@ -6,11 +6,11 @@ algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST', 'secret scanning']
 ---
 ## About validity checks
-For a subset of detections (see here), Datadog will check the validity of a detected secret at each scan. For these “live” validity checks, Datadog will generally make requests to provider endpoints to verify that a credential is “active”. Datadog will only make GET requests to endpoints that don’t return any sensitive data or PII, and only to check whether the detection can still be used to access these endpoints.
+For certain detections (see the list below), Datadog checks whether a detected secret is valid during scans. For these live validation checks, Datadog makes `GET` requests to provider endpoints to confirm that a credential is active. Datadog only makes requests to endpoints that do not return sensitive data or personally identifiable information (PII), and only to verify if the credential can still access the provider endpoint.
 
-Datadog will surface validation status in the explorer, so for secret types with validators, you can see if the detection is active or inactive. You can also filter or query for “Validation Status” in the explorer.
+Datadog displays the validation status in the explorer. For secret types with validation available, you can see if a secret is active or inactive. You can also filter or query detections by Validation Status.
 
-For some secret types, we also employ static validation methods (i.e. computing a checksum) to verify the secret is not a false positive. However, static validation is **not shown**, and all references to validation in the explorer correspond to live validation.
+For some secret types, Datadog uses static validation methods, such as computing a checksum, to confirm that a detection is not a false positive. Static validation results are not displayed in the explorer - all references to "validation" correspond to live validation results.
 
 ## List of supported validators
 | Secret type | Static validator available | Live validator available |
