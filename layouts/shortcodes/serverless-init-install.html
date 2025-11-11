@@ -10,7 +10,7 @@ Images are tagged based on semantic versioning, with each new version receiving 
 - `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
 - `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
-Add the following instructions and arguments to your Dockerfile.
+{{ if eq (.Get "mode") "in-container" }}Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -54,3 +54,4 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
   </div>
 </details>
 <br/>
+{{ end }}
