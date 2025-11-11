@@ -66,7 +66,7 @@ To get started, follow the instructions below.
 
    **Option 2: Composite Transport**
 
-   **Requirements**: Requires `apache-airflow-providers-openlineage` version 2.7.3 or later and `openlineage-python` version 1.37.0 or later.
+   **Requirements**: Requires `apache-airflow-providers-openlineage` version 1.11.0 or later and `openlineage-python` version 1.37.0 or later.
 
    Use this option if you need to send OpenLineage events to multiple destinations (for example, if you're already using OpenLineage with another system and want to add Datadog as an additional destination):
 
