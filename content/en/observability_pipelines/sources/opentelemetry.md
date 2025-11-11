@@ -86,8 +86,29 @@ To send logs from the Datadog Distribution of the OpenTelemetry Collector (DDOT)
     1. When you install the Worker, for the OpenTelemetry source environment variables:
         1. Set your HTTP listener to `0.0.0.0:4318`.
         1. Set your gRPC listener to `0.0.0.0:4317`.
+    1. After you installed the Worker and deployed the pipeline, update the OpenTelemetry Collector's `collector-config.yaml` to include an exporter that sends logs to Observability Pipelines. For example:
+        ```
+        exporters:
+            datadog:
+                api:
+                site: ${env:<DD_SITE>}
+                key: ${env:<DD_API_KEY>}
+            otlphttp:
+                endpoint: http://opw-observability-pipelines-worker.default.svc.cluster.local:4318
+        ```
+    1. Redeploy the Datadog Agent with the updated `collector-config.yaml`.For example, if the Agent is installed in Kubernetes:
+        ```
+        helm upgrade --install datadog-agent datadog/datadog \
+        --values ./agent.yaml \
+        --set-file datadog.otelCollector.config=./collector-config.yaml
+        ```
 
-**Note**: Logs sent from DDOT might have nested objects that prevent Datadog from parsing the log into the prettified structure. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
+**Notes**:
+- These settings are used when setting up the Datadog Agent source in Observability Pipelines:
+    - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED:true`
+    - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL:"http://opw-observability-pipelines-worker.default.svc.cluster.local:4317/v1/logs"`
+    <br><br>These settings do **not** work when setting up DDOT with the OpenTelemetry source, because the OpenTelemetry Collector's `collector-config.yaml` must be configured with those settings using the exporter.
+- Logs sent from DDOT might have nested objects that prevent Datadog from parsing the logs into the prettified structure. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
 
 [1]: https://opentelemetry.io/docs/collector/
 [2]: /observability_pipelines/sources/
