@@ -93,7 +93,7 @@ To get started, follow the instructions below.
 
    **Option 3: Simple Configuration**
 
-   This option uses the simple URL-based configuration and works with all versions of the OpenLineage provider:
+   This option uses the URL-based configuration and works with all versions of the OpenLineage provider:
 
    ```shell
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
