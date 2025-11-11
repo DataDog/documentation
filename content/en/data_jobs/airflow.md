@@ -53,16 +53,12 @@ To get started, follow the instructions below.
    **Requirements**: Requires `apache-airflow-providers-openlineage` version 2.7.3 or later and `openlineage-python` version 1.37.0 or later.
 
    ```shell
+   export DD_API_KEY=<DD_API_KEY>
+   export DD_SITE=<DD_SITE>
    export OPENLINEAGE__TRANSPORT__TYPE=datadog
-   export OPENLINEAGE__TRANSPORT__URL=<DD_DATA_OBSERVABILITY_INTAKE>
-   export OPENLINEAGE__TRANSPORT__AUTH__TYPE=api_key
-   export OPENLINEAGE__TRANSPORT__AUTH__API_KEY=<DD_API_KEY>
-   export OPENLINEAGE__TRANSPORT__COMPRESSION=gzip
-   # OPENLINEAGE_NAMESPACE sets the 'env' tag value in Datadog. You can hardcode this to a different value
-   export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
-   * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
+   * Replace `<DD_SITE>` with your Datadog site (for example, `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`).
 
    **Option 2: Composite Transport**
 
