@@ -203,6 +203,7 @@ If the request is successful, the API responds with a 202 network code and an em
 }
 {{< /code-block >}}
 {{% /tab %}}
+{{< /tabs >}}
 
 #### Meta
 | Field       | Type              | Description  |
