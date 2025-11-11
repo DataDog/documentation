@@ -3916,11 +3916,6 @@ menu:
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
       weight: 601
-    - name: Savings
-      url: cloud_cost_management/recommendations/savings
-      parent: cloud_cost_recommendations
-      identifier: cloud_cost_savings
-      weight: 602
     - name: Planning
       url: cloud_cost_management/planning
       parent: cloud_cost
