@@ -183,8 +183,16 @@ You can customize alert conditions to define the circumstances under which you w
 
 {{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule" style="width:80%" >}}
 
+#### Alerting rule
+
 * An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and in how many locations a test needs to fail before triggering the notification.
 * Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured with the [API][6].
+
+#### Fast retry
+
+When a test fails, fast retry allows you to retry the test X times after Y ms before marking it as failed. Customizing the retry interval helps reduce false positives and improves your alerting accuracy.
+
+Since location uptime is computed based on the final test result after retries complete, fast retry intervals directly impact what appears in your total uptime graph. The total uptime is computed based on the configured alert conditions, and notifications are sent based on the total uptime.
 
 ### Configure the test monitor
 

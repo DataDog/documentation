@@ -45,7 +45,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="./your-binary" %}}
+   {{% serverless-init-install cmd="./your-binary" %}}
 
 3. **Set up logs**.
 
@@ -65,7 +65,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 4. **Configure your application**.
 
-{{% gcr-configure%}}
+{{% serverless-init-configure cloudrun="true" %}}
 
 5. {{% gcr-service-label %}}
 
@@ -73,11 +73,11 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-in-container language="go" %}}
+{{% serverless-init-env-vars-in-container language="go" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
