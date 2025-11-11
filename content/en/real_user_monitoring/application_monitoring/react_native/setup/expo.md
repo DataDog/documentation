@@ -101,7 +101,7 @@ In this Datadog example project, View Tracking is achieved through `@datadog/mob
 Add the following code snippet to your initialization file:
 
 ```js
-import { DdSdkReactNative, DdSdkReactNativeConfiguration } from 'expo-datadog';
+import { DdSdkReactNative, DdSdkReactNativeConfiguration, SdkVerbosity } from 'expo-datadog';
 
 const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
