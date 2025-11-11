@@ -102,6 +102,17 @@ The following instructions are the basic steps to set up GPU Monitoring, either 
 
 To enable GPU Monitoring in Docker without advanced eBPF metrics, use the following configuration when starting the container Agent:
 
+```shell
+docker run \
+--pid host \
+--gpus all \
+-e DD_GPU_ENABLED=true \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+gcr.io/datadoghq/agent:latest
+```
+
 To enable advanced eBPF metrics, use the following configuration for the required permissions to run eBPF programs:
 
 ```shell
