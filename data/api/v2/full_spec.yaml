@@ -51430,6 +51430,7 @@ components:
       - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorage'
       - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataLocalFile'
     TableResultV2DataAttributesFileMetadataCloudStorage:
+      additionalProperties: false
       description: File metadata for reference tables created by cloud storage.
       properties:
         access_details:
@@ -51476,6 +51477,7 @@ components:
       - OPERATION_ERROR
       - SYSTEM_ERROR
     TableResultV2DataAttributesFileMetadataLocalFile:
+      additionalProperties: false
       description: File metadata for reference tables created by upload. Note that
         upload_id is only returned in the immediate create/replace response and is
         not available in subsequent GET requests.
