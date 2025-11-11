@@ -167,6 +167,8 @@ If the request is successful, the API responds with a 202 network code and an em
 | id    | string | The id of this document.  |
 
 #### Prompt
+{{< tabs >}}
+{{% tab "Model" %}}
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
 | id    | string | Logical identifier for this prompt template. Should be unique per `ml_app`.  |
@@ -178,8 +180,10 @@ If the request is successful, the API responds with a 202 network code and an em
 | context_variable_keys | [string] | Variable keys that contain ground-truth or context content. Used for hallucination detection. |
 | tags | Dict[key (string), string] | Tags to attach to the prompt run. |
 
-**Note**: LLM Observability registers new versions of templates when the template or chat_template value is updated. If the input is expected to change between invocations, extract those dynamic parts into a variable.
+**Note**: LLM Observability registers new versions of templates when the template or chat_template value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.
 
+{{% /tab %}}
+{{% tab "Example" %}}
 {{< code-block lang="json" >}}
 {
   "id": "translation-prompt",
@@ -198,6 +202,7 @@ If the request is successful, the API responds with a 202 network code and an em
   }
 }
 {{< /code-block >}}
+{{% /tab %}}
 
 #### Meta
 | Field       | Type              | Description  |
