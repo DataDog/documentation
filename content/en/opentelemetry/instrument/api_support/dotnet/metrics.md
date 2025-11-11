@@ -15,7 +15,8 @@ further_reading:
 
 ## Prerequisites
 
-- **Datadog SDK**: dd-trace-dotnet version [3.30.0] or later.
+- The instrumented application is running on .NET 6 or later.
+- **Datadog SDK**: dd-trace-dotnet version 3.30.0 or later.
 - **OpenTelemetry API**: `OpenTelemetry.Api` version [x.y.z] or later. (The Datadog SDK provides the implementation for this API).
 - **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
 
