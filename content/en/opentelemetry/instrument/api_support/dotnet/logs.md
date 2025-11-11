@@ -19,7 +19,7 @@ This feature works by intercepting logs from the built-in `Microsoft.Extensions.
 
 ## Prerequisites
 
-- **Datadog SDK**: `dd-trace-dotnet` version [x.y.z] or later.
+- **Datadog SDK**: `dd-trace-dotnet` version [3.30.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.30.0) or later.
 - **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
 
 ## Setup
