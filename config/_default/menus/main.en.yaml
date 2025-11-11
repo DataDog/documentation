@@ -3096,216 +3096,221 @@ menu:
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
       weight: 106
+    - name: Autoscaling
+      url: containers/autoscaling
+      parent: containers
+      identifier: containers_autoscaling
+      weight: 2
     - name: Docker and other runtimes
       url: containers/docker/
       parent: containers
       identifier: containers_docker
-      weight: 2
+      weight: 3
     - name: APM
       url: containers/docker/apm/
       parent: containers_docker
       identifier: containers_docker_apm
-      weight: 201
+      weight: 301
     - name: Log collection
       url: containers/docker/log/
       parent: containers_docker
       identifier: containers_docker_log
-      weight: 202
+      weight: 302
     - name: Tag extraction
       url: containers/docker/tag/
       parent: containers_docker
       identifier: containers_docker_tag
-      weight: 203
+      weight: 303
     - name: Integrations
       url: containers/docker/integrations/
       parent: containers_docker
       identifier: containers_docker_integrations
-      weight: 204
+      weight: 304
     - name: Prometheus
       url: containers/docker/prometheus/
       parent: containers_docker
       identifier: containers_docker_prometheus
-      weight: 205
+      weight: 305
     - name: Data Collected
       url: containers/docker/data_collected/
       parent: containers_docker
       identifier: containers_docker_data_collected
-      weight: 206
+      weight: 306
     - name: Kubernetes
       url: containers/kubernetes/
       parent: containers
       identifier: containers_kubernetes
-      weight: 3
+      weight: 4
     - name: Installation
       url: containers/kubernetes/installation
       parent: containers_kubernetes
       identifier: containers_kubernetes_installation
-      weight: 301
+      weight: 401
     - name: Further Configuration
       url: containers/kubernetes/configuration
       parent: containers_kubernetes
       identifier: containers_kubernetes_configuration
-      weight: 302
+      weight: 402
     - name: Distributions
       url: containers/kubernetes/distributions
       parent: containers_kubernetes
       identifier: containers_kubernetes_distributions
-      weight: 303
+      weight: 403
     - name: APM
       url: containers/kubernetes/apm/
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
-      weight: 304
+      weight: 404
     - name: Log collection
       url: containers/kubernetes/log/
       parent: containers_kubernetes
       identifier: containers_kubernetes_log
-      weight: 305
+      weight: 405
     - name: Tag extraction
       url: containers/kubernetes/tag/
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
-      weight: 306
+      weight: 406
     - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
-      weight: 307
+      weight: 407
     - name: Prometheus & OpenMetrics
       url: containers/kubernetes/prometheus/
       parent: containers_kubernetes
       identifier: containers_kubernetes_prometheus
-      weight: 308
+      weight: 408
     - name: Control plane monitoring
       url: containers/kubernetes/control_plane/
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
-      weight: 309
+      weight: 409
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 310
+      weight: 410
+    - name: Datadog CSI Driver
+      url: containers/kubernetes/csi_driver
+      parent: containers_kubernetes
+      identifier: csi_driver
+      weight: 411
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 311
+      weight: 412
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
       identifier: containers_cluster
-      weight: 4
+      weight: 5
     - name: Setup
       url: containers/cluster_agent/setup/
       parent: containers_cluster
       identifier: cluster_agent_setup
-      weight: 401
+      weight: 501
     - name: Commands & Options
       url: containers/cluster_agent/commands/
       identifier: cluster_agent_commands
       parent: containers_cluster
-      weight: 402
+      weight: 502
     - name: Cluster Checks
       identifier: containers_cluster_agent_clusterchecks
       url: containers/cluster_agent/clusterchecks/
       parent: containers_cluster
-      weight: 403
+      weight: 503
     - name: Endpoint Checks
       identifier: containers_cluster_agent_endpoint_checks
       url: containers/cluster_agent/endpointschecks/
       parent: containers_cluster
-      weight: 404
+      weight: 504
     - name: Admission Controller
       identifier: containers_cluster_agent_admission_controller
       url: containers/cluster_agent/admission_controller/
       parent: containers_cluster
-      weight: 405
+      weight: 505
     - name: Amazon ECS
       url: containers/amazon_ecs/
       parent: containers
       identifier: containers_amazon_ecs
-      weight: 5
+      weight: 6
     - name: APM
       url: containers/amazon_ecs/apm/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_apm
-      weight: 501
+      weight: 601
     - name: Log collection
       url: containers/amazon_ecs/logs/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_logs
-      weight: 502
+      weight: 602
     - name: Tag extraction
       url: containers/amazon_ecs/tags/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_tags
-      weight: 503
+      weight: 603
     - name: Data collected
       url: containers/amazon_ecs/data_collected/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_data_collected
-      weight: 504
+      weight: 604
     - name: AWS Fargate
       url: integrations/ecs_fargate/
       parent: containers
       identifier: ecs_fargate
-      weight: 6
+      weight: 7
     - name: Datadog Operator
       url: containers/datadog_operator
       identifier: containers_datadog_operator
       parent: containers
-      weight: 7
+      weight: 8
     - name: Advanced Install
       url: containers/datadog_operator/advanced_install
       identifier: containers_datadog_operator_installation
       parent: containers_datadog_operator
-      weight: 701
+      weight: 801
     - name: Configuration
       url: containers/datadog_operator/config
       identifier: containers_datadog_operator_configuration
       parent: containers_datadog_operator
-      weight: 702
+      weight: 802
     - name: Custom Checks
       url: containers/datadog_operator/custom_check
       identifier: containers_datadog_operator_customchecks
       parent: containers_datadog_operator
-      weight: 703
+      weight: 803
     - name: Data Collected
       url: containers/datadog_operator/data_collected
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
-      weight: 704
+      weight: 804
     - name: kubectl Plugin
       url: containers/datadog_operator/kubectl_plugin
       identifier: containers_datadog_operator_kubectlplugin
       parent: containers_datadog_operator
-      weight: 705
+      weight: 805
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 706
+      weight: 806
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 707
+      weight: 807
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 708
+      weight: 808
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 709
-    - name: Datadog CSI Driver
-      url: containers/csi_driver
-      parent: containers
-      identifier: csi_driver
-      weight: 8
+      weight: 809
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers

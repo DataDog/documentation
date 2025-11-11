@@ -1,6 +1,8 @@
 ---
 title: Kubernetes Autoscaling
 description: Automatically scale Kubernetes workloads using Datadog metrics and intelligent scaling recommendations
+aliases:
+- /containers/monitoring/autoscaling
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
   tag: "Blog"
