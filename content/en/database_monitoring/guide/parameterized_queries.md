@@ -26,7 +26,7 @@ Having access to query parameters enables:
 
 ## Before you begin
 
-<div class="alert alert-info">Query statements and execution plans with parameterized values may contain sensitive information (for example, passwords in query parameters) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-danger">Query statements and execution plans with parameterized values may contain sensitive information (for example, passwords in query parameters) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
 You must configure Database Monitoring for your [SQL Server][1] instance before continuing with this guide.
 
@@ -51,7 +51,7 @@ To capture SQL query text and execution plans with parameter values, update the 
 ```
 
 <div class="alert alert-info">
-For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture through Extended Events. See [configure your SQL Server instance and integration to capture query completions][1] in order to complete the database set up. </div>
+For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture through Extended Events. See <a href="/database_monitoring/guide/sql_extended_events/">configure your SQL Server instance and integration to capture query completions</a> in order to complete the database set up. </div>
 
 ```yaml
   xe_collection:
