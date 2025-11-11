@@ -19,7 +19,7 @@ Agents are in Preview. Click <b>Request Access</b> and fill in the Datadog Produ
 
 You can build custom AI agents to act on your observability data and third-party integrations. Agents can use any action from the [Action Catalog][7] to investigate problems, start remediation, or manage resources.
 
-When building an agent, choose a template to get started. Templates come with pre-filled instructions and relevant tools. Templates are named after their main role, like Security Analyst, Log Analyzer, Incident Responder, or DevOps Assistant. 
+When building an agent, choose a blueprint to get started. Blueprints come with pre-filled instructions and relevant tools. They're named after their main role, like Security Analyst, Log Analyzer, Incident Responder, or DevOps Assistant. 
 
 {{< img src="/actions/agents/blank-new-agent.png" alt="The Agents page, filtered to show only 'My agents'" style="width:100%;" >}}
 
