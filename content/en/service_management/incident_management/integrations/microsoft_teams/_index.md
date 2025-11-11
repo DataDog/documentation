@@ -19,39 +19,6 @@ To use Incident Management's Microsoft Teams features, you must first [install t
 
 After installation, go to **[Service Management > Incidents > Settings > Integrations][2]** to configure the Microsoft Teams features for Incident Management.
 
-## Declaring and managing incidents from Microsoft Teams
-
-To declare or manage an incident from a specific team:
-1. [Add the Datadog application][3] to the team.
-1. Add the **Datadog** tab to any channel in that team.
-1. Start a conversation in a channel, or a chat with the Datadog app.
-1. Type `@Datadog incident`.
-1. An adaptive card appears. Click the **Declare Incident** button to open the Datadog tab and declare an incident.
-
-**Note**: In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident-specific channels, you can only declare new incidents.
-
-### Updating incidents
-
-To update an incident:
-
-1. Start a conversation while in an incident team.
-2. Type `@Datadog` or use the `...` button to open the **Messaging extensions** menu and select the **Datadog** App.
-3. Select **Update Incident**.
-4. Complete the form with your desired information.
-5. Click **Update**.
-
-### Listing incidents
-
-List all open (active and stable) incidents with:
-
-```
-@Datadog list incidents
-```
-
-### Sending messages to the timeline
-
-Use the "More actions" menu on any message inside an incident team on the far right to send that message to the incident timeline.
-
 ## Incident channels
 
 ### Automatic channel creation
@@ -119,6 +86,39 @@ Using an incident updates channel provides your stakeholders with organization-w
 - Link to join the dedicated incident team
 
 To customize this behavior, deactivate this setting and [define a notification rule][4] instead.
+
+## Declaring and managing incidents from Microsoft Teams
+
+To declare or manage an incident from a specific team:
+1. [Add the Datadog application][3] to the team.
+1. Add the **Datadog** tab to any channel in that team.
+1. Start a conversation in a channel, or a chat with the Datadog app.
+1. Type `@Datadog incident`.
+1. An adaptive card appears. Click the **Declare Incident** button to open the Datadog tab and declare an incident.
+
+**Note**: In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident-specific channels, you can only declare new incidents.
+
+### Updating incidents
+
+To update an incident:
+
+1. Start a conversation while in an incident team.
+2. Type `@Datadog` or use the `...` button to open the **Messaging extensions** menu and select the **Datadog** App.
+3. Select **Update Incident**.
+4. Complete the form with your desired information.
+5. Click **Update**.
+
+### Listing incidents
+
+List all open (active and stable) incidents with:
+
+```
+@Datadog list incidents
+```
+
+### Sending messages to the timeline
+
+Use the "More actions" menu on any message inside an incident team on the far right to send that message to the incident timeline.
 
 ## Further reading
 
