@@ -60,7 +60,7 @@ To get started, follow the instructions below.
    export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
-   * Replace `<DD_SITE>` with your Datadog site (for example, `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`).
+   * Replace `<DD_SITE>` with your Datadog site (for example, {{< region-param key="dd_site" code="true" >}}). 
 
    **Option 2: Composite Transport**
 
@@ -86,7 +86,7 @@ To get started, follow the instructions below.
    export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
-   * Replace `<DD_SITE>` with your Datadog site (for example, `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`).
+   * Replace `<DD_SITE>` with your Datadog site (for example, {{< region-param key="dd_site" code="true" >}}).
    * Replace `<YOUR_EXISTING_URL>` and `<YOUR_EXISTING_API_KEY>` with your existing OpenLineage transport configuration.
 
    In this example, OpenLineage events are sent to both your existing system and Datadog. You can configure multiple transports by giving each one a unique name (like `EXISTING` and `DATADOG` in the example above).
