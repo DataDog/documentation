@@ -254,6 +254,12 @@ The [**Deployments**][6] and [**Executions**][7] pages populate with data after 
 If notifications are not sent, examine the logs of the `argocd-notification-controller` pod. The controller logs when it is sending a notification (for example: `Sending notification ...`) and when it fails to notify a recipient
 (for example: `Failed to notify recipient ...`). For additional troubleshooting scenarios, see the [official Argo CD documentation][8].
 
+### Discrepancy between ArgoCD & DatadogCD
+
+If you notice a discrepancy between ArgoCD and Datadog CD, where ArgoCD deployments are reported as successful in ArgoCD but show as errors in Datadog. The key difference lies in how each platform evaluates deployment success:
+- **ArgoCD** considers a sync successful as long as it can apply the changes to the Kubernetes manifests, regardless of the runtime state of the resources.
+- **Datadog’s CD** Visibility evaluates the outcome of the deployment more comprehensively. If any of the resources modified during the sync end up in a degraded state (e.g., due to a bad image or configuration issue), the deployment will be marked as “failed” or "degraded" in Datadog, even though ArgoCD reports it as “successful”.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
