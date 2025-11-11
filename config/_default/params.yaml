@@ -307,7 +307,6 @@ unsupported_sites:
   pr_gates: [gov]
   remote_config: [gov]
   remote_configuration: [gov]
-  resource_catalog: [gov]
   roku_error_tracking: [gov]
   roku_log_collection: [gov]
   rum_roku: [gov]
