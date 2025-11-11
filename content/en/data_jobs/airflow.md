@@ -69,17 +69,15 @@ To get started, follow the instructions below.
    Use this option if you need to send OpenLineage events to multiple destinations (for example, if you're already using OpenLineage with another system and want to add Datadog as an additional destination):
 
    ```shell
+   export DD_API_KEY=<DD_API_KEY>
+   export DD_SITE=<DD_SITE>
    export OPENLINEAGE__TRANSPORT__TYPE=composite
-   export OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__TYPE=http
-   export OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__URL=<DD_DATA_OBSERVABILITY_INTAKE>
-   export OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__AUTH__TYPE=api_key
-   export OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__AUTH__API_KEY=<DD_API_KEY>
-   export OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__COMPRESSION=gzip
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__TYPE=datadog
    # OPENLINEAGE_NAMESPACE sets the 'env' tag value in Datadog. You can hardcode this to a different value
    export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
-   * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
+   * Replace `<DD_SITE>` with your Datadog site (for example, `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ddog-gov.com`).
 
    **Option 3: Simple Configuration**
 
