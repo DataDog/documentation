@@ -57,8 +57,6 @@ This page covers how to enable single sign-on (SSO) with SAML in Datadog, as wel
     {{< img src="account_management/saml/saml_configure.png" alt="Configure SAML by uploading your IdP metadata" style="width:100%;" >}}
 
 6. Click **Save**.
-    
-7. After uploading the IdP metadata, return to the **Login Methods** page and turn SAML `on` by default. 
 
 **Note**: To configure SAML for a multi-org, see [Managing Multiple-Organization Accounts][18].
 
@@ -79,7 +77,7 @@ To configure additional SAML providers:
 
 ### Role mapping with multiple SAML providers
 
-If you use [SAML role mapping][19] and want to use the same role mappings in any additional providers you add, make sure the attributes in the new IdP(s) match what is defined in your mappings. If you add a new IdP, make sure to either use the same attribute names as your existing IdP, or add new mappings that align with the new IdP's attributes to ensure roles are assigned correctly when users log in with different IdPs.
+If you use SAML [role mapping][19] or [team mapping][20] and want to use the same mappings in any additional providers you add, make sure the attributes in the new IdP(s) match what is defined in your mappings. If you add a new IdP, make sure to either use the same attribute names as your existing IdP, or add new mappings that align with the new IdP's attributes to ensure roles and teams are assigned correctly when users log in with different IdPs.
 
 [1]: /help/
 [2]: https://learn.microsoft.com/en-us/entra/architecture/auth-saml
@@ -100,3 +98,4 @@ If you use [SAML role mapping][19] and want to use the same role mappings in any
 [17]: https://app.datadoghq.com/account/saml/metadata.xml
 [18]: /account_management/multi_organization/#setting-up-saml
 [19]: /account_management/saml/mapping/#map-saml-attributes-to-datadog-roles
+[20]: /account_management/saml/mapping/#map-saml-attributes-to-teams
