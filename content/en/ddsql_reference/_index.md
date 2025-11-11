@@ -837,7 +837,7 @@ FROM k8s.daemonsets da INNER JOIN k8s.deployments de
 ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 ```
 
-Additionally, you can extract the tag keys and values into individual arrays of text:
+Additionally, you can extract tag keys and values into individual arrays of text:
 
 ```sql
 SELECT akeys(tags), avals(tags)
@@ -848,9 +848,9 @@ FROM aws.ec2_instance
 
 | Name                                          | Return type   | Description                                                                                      |
 |-----------------------------------------------|---------------|---------------------------------------------------------------------------------------------------
-| tags -> text                                  | text          | Get the value for a given key (returns `null` if key is not present)                             |
-| akeys(tags hstore)                            | array of text | Get the keys of an HSTORE as an array                                                            |
-| avals(tags hstore)                            | array of text | Get the values of an HSTORE as an array                                                          |
+| tags -> 'text'                                  | Text          | Gets the value for a given key. Returns `null` if key is not present.                             |
+| akeys(hstore tags)                            | Array of text | Gets the keys of an HSTORE as an array                                                            |
+| avals(hstore tags)                            | Array of text | Gets the values of an HSTORE as an array                                                          |
 
 ## Further reading
 
