@@ -20936,6 +20936,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Enterprise
+            hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current date for all organizations.
@@ -20944,6 +20949,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Pro hosts
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         appsec_fargate_count_avg:
@@ -20996,6 +21006,11 @@ components:
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for all organizations.
+          format: int64
+          type: integer
+        bits_ai_investigations_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
@@ -21545,6 +21560,11 @@ components:
             hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        on_call_seat_hwm:
+          description: Shows the high-water mark of On-Call seats over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
             date for all organizations.
@@ -22024,6 +22044,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Enterprise
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current month for the given org.
@@ -22032,6 +22057,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Pro hosts
+            over all hours in the current date for the given org.
           format: int64
           type: integer
         appsec_fargate_count_avg:
@@ -22084,6 +22114,11 @@ components:
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for the given org.
+          format: int64
+          type: integer
+        bits_ai_investigations_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
@@ -22642,6 +22677,11 @@ components:
             hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        on_call_seat_hwm:
+          description: Shows the high-water mark of On-Call seats over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
             date for the given org.
@@ -23116,6 +23156,11 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p_sum:
+          description: Shows the sum of the 99th percentile of all distinct standalone
+            Enterprise hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         apm_fargate_count_avg_sum:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current month for all organizations.
@@ -23124,6 +23169,11 @@ components:
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p_sum:
+          description: Shows the sum of the 99th percentile of all distinct standalone
+            Pro hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         appsec_fargate_count_avg_sum:
@@ -23181,6 +23231,11 @@ components:
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current month for all organizations.
+          format: int64
+          type: integer
+        bits_ai_investigations_agg_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current month for all organizations.
           format: int64
           type: integer
         browser_rum_lite_session_count_agg_sum:
@@ -23758,6 +23813,11 @@ components:
         oci_host_top99p_sum:
           description: Shows the 99th percentile of Oracle Cloud Infrastructure hosts
             over all hours in the current months for all organizations
+          format: int64
+          type: integer
+        on_call_seat_hwm_sum:
+          description: Shows the sum of the high-water marks of On-Call seats over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         online_archive_events_count_agg_sum:
@@ -33368,7 +33428,11 @@ paths:
         - timeseries_query
   /api/v1/search:
     get:
-      description: Search for metrics from the last 24 hours in Datadog.
+      deprecated: true
+      description: '**Note**: This endpoint is deprecated. Use `/api/v2/metrics` instead.
+
+
+        Search for metrics from the last 24 hours in Datadog.'
       operationId: ListMetrics
       parameters:
       - description: Query string to search metrics upon. Can optionally be prefixed

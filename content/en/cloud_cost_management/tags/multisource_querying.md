@@ -12,6 +12,8 @@ further_reading:
 - link: "/cloud_cost_management/container_cost_allocation"
   tag: "Documentation"
   text: "Learn about Container Cost Allocation"
+aliases:
+- /cloud_cost_management/multisource_querying/
 ---
 
 ## Overview
