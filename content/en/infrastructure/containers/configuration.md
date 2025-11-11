@@ -460,7 +460,7 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
    You can override this behavior by providing **pluralized** `resource` name.
    In the example above `CNINode` has `resource: "cninode-pluralized"` overridden.
 
-   Metric names produced using the following rules:
+   Metric names are produced using the following rules:
 
    a. No prefix precified: `kubernetes_state_customresource.<metrics.name>`
 
