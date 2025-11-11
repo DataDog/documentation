@@ -230,7 +230,7 @@ To share a version of your notebook with snapshots, from the cog menu, click **V
 
 By default, all users have full access to notebooks.
 
-Use our quick access controls to restrict view and edit access to only yourself:
+Use our access controls to restrict view and edit access to only yourself:
 1. While viewing a notebook, click the **Share** button in the upper right.
 1. Select **Private to me**.
 1. Click **Save**.
