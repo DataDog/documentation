@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
+Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By creating them, you can assess the effectiveness of your application's responses, including detection of sentiment, topic relevancy, toxicity, failure to answer, and hallucination.
 
 LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation.
 
@@ -98,7 +98,7 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
 
 ## Create new evaluations
 
-1. Navigate to [**AI Observability > Settings > Evaluations**][2].
+1. Navigate to [**AI Observability > Evaluations**][2].
 1. Click on the **Create Evaluation** button on the top right corner.
 1. Select a specific managed evaluation. This will open the evalution editor window.
 1. Select the LLM application(s) you want to configure your evaluation for.
@@ -109,14 +109,12 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
    - (Optional) Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than `0` and less than or equal to `100` (sampling all spans).
 1. (Optional) Configure evaluation options by selecting what subcategories should be flagged. Only available on some evaluations.
 
-After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
+After you click **Save and Publish**, LLM Observability uses the LLM account you connected to power the evaluation you enabled. Alternatively, you can **Save as Draft** and edit or enable them later.
 
 ## Edit existing evaluations
 
-1. Navigate to [**AI Observability > Settings > Evaluations**][2].
-1. Find on the evaluation you want to edit and toggle the **Enabled Applications** button.
-1. Select the edit icon to configure the evaluation for an individual LLM application or click on the application name.
-1. Evaluations can be disabled by selecting the disable icon for an individual LLM application.
+1. Navigate to [**AI Observability > Evaluations**][2].
+1. Hover over the evaluation you want to edit and click the **Edit** button.
 
 ### Estimated token usage
 
@@ -335,7 +333,7 @@ This check ensures that sensitive information is handled appropriately and secur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/llm/settings/evaluations
+[2]: https://app.datadoghq.com/llm/evaluations
 [3]: https://app.datadoghq.com/llm/applications
 [4]: /security/sensitive_data_scanner/
 [5]: https://docs.datadoghq.com/api/latest/ip-ranges/
