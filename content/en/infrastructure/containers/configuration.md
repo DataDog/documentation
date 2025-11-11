@@ -456,7 +456,7 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
                path: [metadata, generation]
    ```
 
- By default, RBAC and API resource names are derived from the kind in groupVersionKind by converting it to lowercase and adding an “s” suffix (for example, Kind: ENIConfig → eniconfigs). If the Custom Resource Definition (CRD) uses a different plural form, you can override this behavior by specifying the resource field. In the example above, CNINode overrides the default by setting resource: "cninode-pluralized".
+ By default, RBAC and API resource names are derived from the kind in groupVersionKind by converting it to lowercase, and adding an "s" suffix (for example, Kind: ENIConfig → eniconfigs). If the Custom Resource Definition (CRD) uses a different plural form, you can override this behavior by specifying the resource field. In the example above, CNINode overrides the default by setting resource: "cninode-pluralized".
 
    Metric names are produced using the following rules:
 
