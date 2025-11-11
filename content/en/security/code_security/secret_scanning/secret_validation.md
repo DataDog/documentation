@@ -5,9 +5,9 @@ aliases: /security/code_security/secret_scanning/secret_validation/
 ## About validity checks
 For a subset of detections (see here), Datadog will check the validity of a detected secret at each scan. For these “live” validity checks, Datadog will generally make requests to provider endpoints to verify that a credential is “active”. Datadog will only make GET requests to endpoints that don’t return any sensitive data or PII, and only to check whether the detection can still be used to access these endpoints.
 
-Datadog will surface validation status in the explorer, so for secret types with validators, you can see if the detection is active or inactive. You can also filter for “Validation Status” in the facet bar in the explorer.
+Datadog will surface validation status in the explorer, so for secret types with validators, you can see if the detection is active or inactive. You can also filter or query for “Validation Status” in the explorer.
 
-For some secret types, we also employ static validation methods (i.e. computing a checksum) to verify the secret is not a false positive. However, static validation is **not shown**, and all references to validation in the explorer correspond to “live” validation.
+For some secret types, we also employ static validation methods (i.e. computing a checksum) to verify the secret is not a false positive. However, static validation is **not shown**, and all references to validation in the explorer correspond to live validation.
 
 ## List of supported validators
 | Secret type | Static validator available | Live validator available |
