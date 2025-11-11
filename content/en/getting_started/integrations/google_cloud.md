@@ -180,7 +180,8 @@ To use the Quick Start method, your Datadog user role must be able to create API
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
-   4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
+   4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
+   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
    **Note**: `VM Instance` filtering does not impact related `gcp.logging.*` metrics and does not cause any billing impact for those metrics.
 9. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
 10. A summary of the changes to be made is displayed. If confirmed, the script:
@@ -216,7 +217,8 @@ To use the Quick Start method, your Datadog user role must be able to create API
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
-   4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
+   4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
+   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
 7. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
 8. Copy the provided **Terraform Code**.
 9. Paste the code into a `.tf` file, and run the **Initialize and apply the Terraform** command. If successful, the command:
@@ -250,7 +252,8 @@ To use the Quick Start method, your Datadog user role must be able to create API
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
-   4. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
+   4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
+   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
 9. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
 10. Click **Verify and Save Account**.
 
@@ -316,10 +319,25 @@ For deep dives into monitoring many of the more popular services, check out the 
 
 You can choose which services and resources to collect metrics from. This can help control costs by reducing the number of API calls made on your behalf.
 
-{{% collapse-content title="Limit metric collection by Google Cloud service" level="h4" %}}
+{{% collapse-content title="Limit metric collection by Google Cloud service, and by granular metric filters" level="h4" %}}
+
 Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], deselect the metric namespaces to exclude.
 
-{{< img src="integrations/google_cloud_platform/limit_metric_namespaces.png" alt="The metric collection tab in the Datadog Google Cloud integration page" style="width:80%;">}}
+To apply granular metric filtering for enabled services, click on the service in question and apply your filters in the `Add filters for gcp.<service>` field.
+
+{{< img src="integrations/google_cloud_platform/limit_metric_collection_2025-11-11.png" alt="The metric collection tab in the Datadog Google Cloud integration page, with the AI Platform service expanded to display the Add filters for gcp.ml field" style="width:80%;">}}
+
+**Example filters**:
+
+`subscription.*` `topic.*`
+: Limit collection to metrics **matching either** `gcp.<service>.subscription.*` **or** `gcp.<service>.topic.*`
+
+`!*_cost` `!*_count`
+: Limit collection to metrics **matching neither** `gcp.<service>.*_cost` **nor** `gcp.<service>.*_count`
+
+`snapshot.*` `!*_by_region`
+: Limit collection to metrics **matching** `gcp.<service>.snapshot.*` **but not matching** `gcp.<service>.*_by_region`
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Limit metric collection by host or Cloud Run instance" level="h4" %}}
