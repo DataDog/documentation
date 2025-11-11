@@ -1,6 +1,9 @@
 ---
 title: Secret Validation
 aliases: /security/code_security/secret_scanning/secret_validation/
+is_beta: true
+algolia:
+  tags: ['static analysis', 'ci pipeline', 'SAST', 'secret scanning']
 ---
 ## About validity checks
 For a subset of detections (see here), Datadog will check the validity of a detected secret at each scan. For these “live” validity checks, Datadog will generally make requests to provider endpoints to verify that a credential is “active”. Datadog will only make GET requests to endpoints that don’t return any sensitive data or PII, and only to check whether the detection can still be used to access these endpoints.
