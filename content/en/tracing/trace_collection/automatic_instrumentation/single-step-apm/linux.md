@@ -98,7 +98,9 @@ Use one of the following setup methods:
 
   Enable products by setting environment variables directly in your application configuration. 
 
-## Update SDK version
+## Advanced options
+
+### Update SDK version
 
 The SDK version is fixed when you run the Agent installation command.
 
@@ -106,6 +108,30 @@ To update the SDK versions:
 
 1. Re-run the Agent installation command. This command also updates the Agent to the latest version.
 1. Restart your applications.
+
+### Target specific workloads 
+
+**Workload Selection** is a feature that allows fine-grained control over which Linux processes are automatically instrumented. 
+
+To use workload selection:
+1. In Datadog, navigate to **APM** > **Settings** > [**Workload Selection**][20].
+1. Click **Add or Edit Rules**. 
+1. Define instrumentation rules:
+   1. Click **Add New Rule**, and select **Allow Rule** or **Block Rule**, depending on whether you want processes that match the conditions of this rule to be automatically instrumented or not, respectively.
+   1. Name your rule. 
+   1. Add one or more conditions for the rule. For each rule, define the following:
+      - **Attribute**: process, process args, or language
+      - **Operator**: equals, not equals, prefix, contains
+      - **Value**: 
+1. (Optional) Drag and drop rules to rearrange them. 
+
+   **Note**: Rules are evaluated in the order in which they appear. If a process matches a given rule, later rules are not evaluated. 
+
+1. Define default behavior:
+
+   Select whether to block or allow instrumentation for any process that does not match any of your defined rules. 
+
+
 
 ## Remove Single Step APM instrumentation from your Agent
 
@@ -137,5 +163,6 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [17]: /tracing/trace_collection/library_config/
 [18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[20]: https://app.datad0g.com/apm/settings/workload-selection
 
 
