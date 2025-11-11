@@ -81,12 +81,6 @@ The output should look similar to the following:
       {{% /tab %}}
       {{% tab "Windows" %}}
 
-   **Note**: Run this command as administrator from the Agent installation directory to avoid the following error:
-
-   ```shell
-   Error: unable to read artifact: open C:\ProgramData\Datadog\auth_token: Access is denied.
-   ```
-
    Navigate to the Agent installation directory:
 
    ```shell
@@ -103,6 +97,12 @@ The output should look similar to the following:
 
    ```shell
    agent.exe snmp walk 10.143.50.30 1.3.6
+   ```
+
+   **Note**: Run this command as administrator from the Agent installation directory to avoid the following error:
+
+   ```shell
+   Error: unable to read artifact: open C:\ProgramData\Datadog\auth_token: Access is denied.
    ```
 
       {{% /tab %}}
