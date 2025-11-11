@@ -8,7 +8,7 @@ aliases:
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Settings > Evaluations**][8].
+LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Evaluations**][8].
 
 ### Custom LLM-as-a-judge evaluations
 
@@ -47,4 +47,4 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 [5]: /llm_observability/evaluations/submit_nemo_evaluations
 [6]: /security/sensitive_data_scanner/
 [7]: /account_management/rbac/permissions/#llm-observability
-[8]: https://app.datadoghq.com/llm/settings/evaluations
+[8]: https://app.datadoghq.com/llm/evaluations
