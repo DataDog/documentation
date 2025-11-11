@@ -413,9 +413,7 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 
 ### Collect custom resource metrics using Kubernetes State Core check
 
-<div class="alert alert-info">
-  This functionality requires Cluster Agent 7.63.0+ and Operator v1.20+.
-</div>
+<div class="alert alert-info">This functionality requires Cluster Agent 7.63.0+.</div>
 
 You can use the `kubernetes_state_core` check to collect custom resource metrics when running the Datadog Cluster Agent.
 
@@ -495,6 +493,10 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
 
    {{% /tab %}}
    {{% tab "Datadog Operator" %}}
+
+    <div class="alert alert-info">
+      This functionality requires Agent Operator v1.20+.
+    </div>
 
    1. Install the Datadog Operator with an option that grants the Datadog Agent permission to collect custom resources:
 
