@@ -2539,10 +2539,6 @@ menu:
       url: service_management/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
-    - name: Statuspage
-      url: service_management/incident_management/integrations/statuspage
-      parent: incidents_integrations
-      identifier: incidents_statuspage
       weight: 904
     - name: Microsoft Teams
       url: service_management/incident_management/integrations/microsoft_teams
