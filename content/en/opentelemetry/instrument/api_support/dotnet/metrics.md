@@ -19,31 +19,6 @@ further_reading:
 - **Datadog SDK**: dd-trace-dotnet version 3.30.0 or later.
 - **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
 
-{{% collapse-content title=".NET version and instrument support" id="net-version-and-instrument-support" expanded=false level="h4" %}}
-
-Support for specific OpenTelemetry metric instruments is dependent on your .NET runtime version or the version of the `System.Diagnostics.DiagnosticSource` NuGet package you have installed.
-
-If your code compiles but no metrics are emitted, verify that your instrument is supported by your application's runtime.
-
-Here is the minimum version required for each instrument type:
-
-- **.NET 6+** (or `System.Diagnostics.DiagnosticSource` v6.0.0):
-  - `Counter`
-  - `Histogram`
-  - `ObservableCounter`
-  - `ObservableGauge`
-
-- **.NET 7+** (or `System.Diagnostics.DiagnosticSource` v7.0.0):
-  - *Adds support for:*
-  - `UpDownCounter`
-  - `ObservableUpDownCounter`
-
-- **.NET 9+** (or `System.Diagnostics.DiagnosticSource` v9.0.0):
-  - *Adds support for:*
-  - `Gauge`
-  
-{{% /collapse-content %}}
-
 ## Setup
 
 Follow these steps to enable OTel Metrics API support in your .NET application.
@@ -54,10 +29,6 @@ Follow these steps to enable OTel Metrics API support in your .NET application.
 2. Enable OTel metrics by setting the following environment variable:
    ```sh
    export DD_METRICS_OTEL_ENABLED=true
-   ```
-4. Instrument your application:
-   ```csharp
-   [TODO: Code example]
    ```
 
 ## Examples
@@ -132,8 +103,33 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 ## Troubleshooting
 
 {{% otel-api-troubleshooting signal="metrics" %}}
-- Verify the Datadog Profiler is attached. This feature relies on Datadog's automatic instrumentation. Ensure the .NET Profiler is correctly enabled for your application.
-- Verify `OpenTelemetry.Api` is installed. The Datadog SDK requires the `OpenTelemetry.Api` package to be present.
+- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Ensure you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the metric data.
+- Check your .NET version for instrument support. Support for specific metric instruments depends on your .NET runtime version. If your metrics are not appearing, ensure the instrument you are using is [supported by your version](#net-version-and-instrument-support).
+
+{{% collapse-content title=".NET version and instrument support" id="net-version-and-instrument-support" expanded=false level="h4" %}}
+
+Support for specific OpenTelemetry metric instruments is dependent on your .NET runtime version or the version of the `System.Diagnostics.DiagnosticSource` NuGet package you have installed.
+
+If your code compiles but no metrics are emitted, verify that your instrument is supported by your application's runtime.
+
+Here is the minimum version required for each instrument type:
+
+- **.NET 6+** (or `System.Diagnostics.DiagnosticSource` v6.0.0):
+  - `Counter`
+  - `Histogram`
+  - `ObservableCounter`
+  - `ObservableGauge`
+
+- **.NET 7+** (or `System.Diagnostics.DiagnosticSource` v7.0.0):
+  - *Adds support for:*
+  - `UpDownCounter`
+  - `ObservableUpDownCounter`
+
+- **.NET 9+** (or `System.Diagnostics.DiagnosticSource` v9.0.0):
+  - *Adds support for:*
+  - `Gauge`
+  
+{{% /collapse-content %}}
 
 ## Further reading
 

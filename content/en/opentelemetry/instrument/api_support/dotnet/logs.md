@@ -80,7 +80,7 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 ## Troubleshooting
 
 {{% otel-api-troubleshooting signal="logs" %}}
-- Verify the Datadog Profiler is attached. This feature relies on Datadog's automatic instrumentation. Ensure the .NET Profiler is correctly enabled for your application.
+- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Ensure you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the log data.
 
 ## Further reading
 
