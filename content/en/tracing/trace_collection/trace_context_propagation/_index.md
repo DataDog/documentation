@@ -659,8 +659,10 @@ First, add `opentelemetry-http` to your `Cargo.toml`:
 ```toml
 [dependencies]
 # Provides HeaderInjector and HeaderExtractor
-opentelemetry-http = "0.31"
+opentelemetry-http = "<your-otel-version>"
 ```
+
+<div class="alert alert-danger">Use the same crate version for <code>opentelemetry-http</code> as the rest of your OpenTelemetry dependencies to avoid version conflicts.</div>
 
 ### Injecting context (client side)
 
@@ -693,27 +695,45 @@ When receiving an HTTP request (for example, with `hyper`), extract the trace co
 ```rust
 use opentelemetry::{
     global,
-    trace::{SpanKind, Tracer},
+    trace::{Span, FutureExt, SpanKind, Tracer},
+    Context,
 };
 use opentelemetry_http::HeaderExtractor;
-use axum::http::HeaderMap;
+use hyper::{Body, Request, Response};
 
-// AXUM example
-async fn axum_handler(headers: HeaderMap) {
+// Utility function to extract context from a hyper request
+fn extract_context(req: &Request<Body>) -> Context {
+    global::get_text_map_propagator(|propagator| {
+        propagator.extract(&HeaderExtractor(req.headers()))
+    })
+}
+
+// A placeholder for your actual request handling logic
+async fn your_handler_logic() -> Response<Body> {
+    // ... your logic ...
+    Response::new(Body::from("Hello, World!"))
+}
+
+// HYPER example
+async fn hyper_handler(req:Request<Body>) -> Response<Body> {
     // Extract the parent context from the incoming headers
-    let parent_cx = global::get_text_map_propagator(|p| p.extract(&HeaderExtractor(&headers)));
-
+    let parent_cx = extract_context(&req);
+    
     let tracer = global::tracer("my-server-component");
-
-    // Start the server span as a child of the extracted context.
-    // Setting SpanKind::Server is a best practice.
-    let _span = tracer
+    
+    // Start the server span as a child of the extracted context
+    let server_span = tracer
         .span_builder("http.server.request")
         .with_kind(SpanKind::Server)
         .start_with_context(tracer, &parent_cx);
 
-    // ... your handler logic ...
-    // This span is now correctly linked to the client's trace.
+    // Create a new context with the new server span
+    let cx = parent_cx.with_span(server_span);
+
+    // Attach the new context to the future.
+    // This makes 'server_span' the current span for 'your_handler_logic'
+    // and any calls it makes.
+    your_handler_logic().with_context(cx).await
 }
 ```
 
