@@ -15,10 +15,34 @@ further_reading:
 
 ## Prerequisites
 
-- The instrumented application is running on .NET 6 or later.
+- **.NET Runtime**: Requires .NET 6+ (or `System.Diagnostics.DiagnosticSource` v6.0.0+). See [Version and instrument support](#net-version-and-instrument-support) for a list of supported instruments by version.
 - **Datadog SDK**: dd-trace-dotnet version 3.30.0 or later.
-- **OpenTelemetry API**: `OpenTelemetry.Api` version [x.y.z] or later. (The Datadog SDK provides the implementation for this API).
 - **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
+
+{{% collapse-content title=".NET version and instrument support" id="net-version-and-instrument-support" expanded=false level="h4" %}}
+
+Support for specific OpenTelemetry metric instruments is dependent on your .NET runtime version or the version of the `System.Diagnostics.DiagnosticSource` NuGet package you have installed.
+
+If your code compiles but no metrics are emitted, verify that your instrument is supported by your application's runtime.
+
+Here is the minimum version required for each instrument type:
+
+- **.NET 6+** (or `System.Diagnostics.DiagnosticSource` v6.0.0):
+  - `Counter`
+  - `Histogram`
+  - `ObservableCounter`
+  - `ObservableGauge`
+
+- **.NET 7+** (or `System.Diagnostics.DiagnosticSource` v7.0.0):
+  - *Adds support for:*
+  - `UpDownCounter`
+  - `ObservableUpDownCounter`
+
+- **.NET 9+** (or `System.Diagnostics.DiagnosticSource` v9.0.0):
+  - *Adds support for:*
+  - `Gauge`
+  
+{{% /collapse-content %}}
 
 ## Setup
 
