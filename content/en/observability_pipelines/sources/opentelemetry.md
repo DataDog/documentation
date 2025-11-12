@@ -80,13 +80,13 @@ Based on these example configurations, these are values you enter for the follow
 ## Send logs from the Datadog Distribution of OpenTelemetry Collector to Observability Pipelines
 
 To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
-1. Deploy the DDOT Collector using helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
+1. Deploy the DDOT Collector using Helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
 1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
     1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
     1. When you install the Worker, for the OpenTelemetry source environment variables:
         1. Set your HTTP listener to `0.0.0.0:4318`.
         1. Set your gRPC listener to `0.0.0.0:4317`.
-    1. After you installed the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends logs to Observability Pipelines. For example:
+    1. After you install the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends logs to Observability Pipelines. For example:
         ```
         exporters:
             otlphttp:
@@ -97,7 +97,7 @@ To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector
                 logs:
                     exporters: [otlphttp]
         ```
-    1. Redeploy the Datadog Agent with the updated [`otel-config.yaml`][9].For example, if the Agent is installed in Kubernetes:
+    1. Redeploy the Datadog Agent with the updated [`otel-config.yaml`][9]. For example, if the Agent is installed in Kubernetes:
         ```
         helm upgrade --install datadog-agent datadog/datadog \
         --values ./agent.yaml \

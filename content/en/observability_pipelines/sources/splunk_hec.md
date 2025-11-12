@@ -27,7 +27,7 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 To send logs from the Splunk Distribution of the OpenTelemetry Collector:
 
-1. Install the Splunk OpenTelemetry Collector based on the your environment:
+1. Install the Splunk OpenTelemetry Collector based on your environment:
     - [Kubernetes][2]
     - [Linux][3]
 1. [Set up a pipeline][4] using the [Splunk HEC source](#set-up-the-source-in-the-pipeline-ui).
