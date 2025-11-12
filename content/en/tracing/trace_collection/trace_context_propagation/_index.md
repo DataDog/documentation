@@ -73,14 +73,16 @@ Most services send and receive trace context headers using the same format. Howe
 
 The Datadog SDK supports the following trace context formats:
 
-| Format                 | Configuration Value           |
-|------------------------|-------------------------------|
-| [Datadog][1]           | `datadog`                     |
-| [W3C Trace Context][2] | `tracecontext`                |
-| [B3 Single][3]         | _Language Dependent Value_    |
-| [B3 Multi][4]          | `b3multi`                     |
-| [Baggage][10]          | `baggage`                     |
-| [None][5]              | `none`                        |
+| Format                 | Configuration Value        |
+|------------------------|----------------------------|
+| [Datadog][1]           | `datadog`                  |
+| [W3C Trace Context][2] | `tracecontext`             |
+| [B3 Single][3]         | _Language Dependent Value_ |
+| [B3 Multi][4]          | `b3multi`                  |
+| [Baggage][10]          | `baggage`<sup>*</sup>       |
+| [None][5]              | `none`                     |
+
+<sup>*</sup> **Note**: `baggage` is not supported in Rust.
 
 ## Language support
 
