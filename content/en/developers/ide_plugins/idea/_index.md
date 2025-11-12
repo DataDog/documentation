@@ -119,7 +119,7 @@ The [**Continuous Profiler**][22] highlights resource consumption (such as CPU, 
 
 {{< img src="/developers/ide_plugins/idea/continuous_profiler/flamegraph.png" alt="A flame graph showing CPU Time over the past hour" style="width:100%;" >}}
 
-Find out more in the [Continuous Profiler documentation][22].
+Find out more in the [Continuous Profiler][22] sub-section.
 
 ## CI Test Runs
 You can view recent test runs in the [CI Visibility Explorer][12] by navigating directly from your source files. Look for the **CI Test Run** inlays above test method declarations in your source code:
