@@ -46,7 +46,13 @@ A few Datadog customers post-process their logs data and modify the logger name 
 For these languages, there are no custom settings, only the activate/deactivate checkbox.
 
 ## Advanced Settings
-For a normal setup, the advanced settings are not required. However, a few Datadog customers have log events with a non-standard [logger name attribute][15]. You can change the “Logger name tag” setting accordingly.]
+For a normal setup, the advanced settings are not required. However, a few Datadog customers have log events with a non-standard [logger name attribute][15]. You can change the “Logger name tag” setting accordingly.
+
+{{< img src="/developers/ide_plugins/idea/logs/settings-advanced.png" alt="Advanced settings" style="width:100%;" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.slf4j.org/
 [2]: https://logging.apache.org/log4j/2.12.x/index.html
