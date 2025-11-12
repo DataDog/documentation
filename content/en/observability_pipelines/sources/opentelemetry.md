@@ -8,8 +8,8 @@ disable_toc: false
 Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs from your OTel Collector through HTTP or gRPC. Select and set up this source when you set up a pipeline. The information below is configured in the pipelines UI.
 
 **Notes**:
-- If you are using the Datadog Distribution of OpenTelemetry Collector (DDOT), use the OpenTelemetry source to [send logs to Observability Pipelines](#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
-- If you are using the Splunk HEC Distribution of the OpenTelemetry Collector, use the [Splunk HEC source][4] to send logs to Observability pipelines.
+- If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, use the OpenTelemetry source to [send logs to Observability Pipelines](#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
+- If you are using the Splunk HEC Distribution of the OpenTelemetry Collector, use the [Splunk HEC source][4] to send logs to Observability Pipelines.
 
 ### When to use this source
 
@@ -79,7 +79,7 @@ Based on these example configurations, these are values you enter for the follow
 
 ## Send logs from the Datadog Distribution of OpenTelemetry Collector to Observability Pipelines
 
-To send logs from the Datadog Distribution of the OpenTelemetry Collector (DDOT):
+To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
 1. Deploy the DDOT Collector using helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
 1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
     1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
@@ -105,7 +105,7 @@ To send logs from the Datadog Distribution of the OpenTelemetry Collector (DDOT)
         ```
 
 **Notes**:
-- Since DDOT is sending logs to Observability Pipelines, and not the Datadog Agent, the following settings do not work for sending logs from DDOT to Observability Pipelines:
+- Because DDOT is sending logs to Observability Pipelines, and not the Datadog Agent, the following settings do not work for sending logs from DDOT to Observability Pipelines:
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`
 - Logs sent from DDOT might have nested objects that prevent Datadog from parsing the logs correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.

@@ -5,7 +5,7 @@ disable_toc: false
 
 Use Observability Pipelines' Datadog Agent source to receive logs from the Datadog Agent. Select and set up this source when you [set up a pipeline][1].
 
-**Note**: If you are using the Datadog Distribution of OpenTelemetry Collector (DDOT), you must [use the OpenTelemetry source to send logs to Observability Pipelines][4].
+**Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, you must [use the OpenTelemetry source to send logs to Observability Pipelines][4].
 
 ## Prerequisites
 
