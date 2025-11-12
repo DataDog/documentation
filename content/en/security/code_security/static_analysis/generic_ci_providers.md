@@ -81,6 +81,10 @@ datadog-ci sarif upload /tmp/report.sarif
   This example uses the x86_64 Linux version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value below. You can view all releases on the <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
 </div>
 
+<div class="alert alert-danger">
+Running a Datadog Static Code Analysis job as an action only supports the <code>push</code> event trigger. Other event triggers (<code>pull_request</code>, etc.) are not supported and can cause issues with the product.
+</div>
+
 ## Diff-aware scanning
 
 Diff-aware scanning is a feature that enables Datadog Static Code Analysis to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. The first scan performed, as well as default branch scans, always produce an analysis of the full repository (not diff-aware).
