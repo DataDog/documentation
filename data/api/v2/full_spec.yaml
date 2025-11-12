@@ -449,7 +449,7 @@ components:
         type: string
     GetIssueIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response.
+        in the response. Possible values are `assignee`, `case`, and `team_owners`.
       explode: false
       in: query
       name: include
@@ -1003,7 +1003,8 @@ components:
         $ref: '#/components/schemas/ServiceDefinitionSchemaVersions'
     SearchIssuesIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response.
+        in the response. Possible values are `issue`, `issue.assignee`, `issue.case`,
+        and `issue.team_owners`.
       explode: false
       in: query
       name: include
