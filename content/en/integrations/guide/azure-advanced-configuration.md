@@ -301,13 +301,13 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
 ## Discrepancy between your data in Azure and Datadog
 
-Datadog's Azure integration is built to collect all metrics from [Azure Monitor][14]. Metrics are collected with all available dimensions (which are mapped to tags in Datadog), the highest time granularity, and the primary aggregation type.
+Datadog's Azure integration collects all metrics from [Azure Monitor][14]. Metrics are collected with all available dimensions (which are mapped to tags in Datadog), the highest time granularity, and the primary aggregation type.
 
 The sections below describe two important distinctions to be aware of, as well as steps to [reconcile the discrepancy](#reconcile-the-discrepancy).
 
 ### 1. Time aggregation
 
-Datadog displays raw data from Azure in per-second values, regardless of the time frame selected in Azure. This is why Datadog's value could appear lower. See [Time aggregation][15] in the metric documentation for more information.
+Datadog displays raw data from Azure in per-second values, regardless of the time frame selected in Azure. That can make Datadog's value appear lower than the value Azure displays. See [Time aggregation][15] in the metric documentation for more information.
 
 ### 2. Space aggregation
 
