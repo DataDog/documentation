@@ -12,7 +12,7 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 
 #### Minimum version requirements
 
-- **Datadog Agent**: version 7.70.1
+- **Datadog Agent**: version 7.72.2
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Operating system**: Linux
    - (Optional) For advanced eBPF metrics, Linux kernel version 5.8
