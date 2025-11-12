@@ -8,7 +8,7 @@ disable_toc: false
 Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs from your OTel Collector through HTTP or gRPC. Select and set up this source when you set up a pipeline. The information below is configured in the pipelines UI.
 
 **Notes**:
-- If you are using the Datadog Distribution of OpenTelemetry Collector (DDOT), [use the OpenTelemetry source to send logs to Observability Pipelines](#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
+- If you are using the Datadog Distribution of OpenTelemetry Collector (DDOT), use the OpenTelemetry source to [send logs to Observability Pipelines](#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
 - If you are using the Splunk HEC Distribution of the OpenTelemetry Collector, use the [Splunk HEC source][4] to send logs to Observability pipelines.
 
 ### When to use this source
