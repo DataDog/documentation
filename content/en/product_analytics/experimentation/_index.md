@@ -1,6 +1,6 @@
 ---
 title: Planning and Launching Experiments
-description: Experimentation allows to measure the causal relationship new experiences or features have on user outcomes.
+description: Experimentation allows you to measure the causal relationship new experiences or features have on user outcomes.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"

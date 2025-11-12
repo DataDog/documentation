@@ -1,6 +1,6 @@
 ---
 title: Reading Experiment Results
-description: Experimentation allows to measure the causal relationship new experiences or features have on user outcomes.
+description: Learn to read and understand the results of your Experimentation.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"

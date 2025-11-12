@@ -1,6 +1,6 @@
 ---
 title: Minimum Detectable Effects
-description: Experimentation allows to measure the causal relationship new experiences or features have on user outcomes.
+description: Determine the smallest detectable difference that may result in a statistically significant experiment result.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"

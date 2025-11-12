@@ -1,6 +1,6 @@
 ---
 title: Defining Metrics
-description: Experimentation allows to measure the causal relationship new experiences or features have on user outcomes.
+description: Define the metrics you want to measure during your experimentation.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
