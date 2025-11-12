@@ -48,8 +48,6 @@ For these languages, there are no custom settings, only the activate/deactivate 
 ## Advanced Settings
 For a normal setup, the advanced settings are not required. However, a few Datadog customers have log events with a non-standard [logger name attribute][15]. You can change the “Logger name tag” setting accordingly.]
 
-
-
 [1]: https://www.slf4j.org/
 [2]: https://logging.apache.org/log4j/2.12.x/index.html
 [3]: https://docs.oracle.com/en/java/javase/25/docs/api/java.logging/java/util/logging/package-summary.html
