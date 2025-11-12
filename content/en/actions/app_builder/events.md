@@ -62,4 +62,4 @@ To see what state functions are available for a given component, see [Components
 
 [1]: /service_management/app_builder/components
 [2]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
-[8]: https://datadoghq.slack.com/
+[8]: https://chat.datadoghq.com/

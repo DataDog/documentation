@@ -3,11 +3,6 @@ title: Connect to Datadog over Azure Private Link
 description: Configure Azure Private Link to send telemetry to Datadog securely without using the public internet, including endpoint setup and DNS configuration.
 ---
 
-{{% site-region region="us,us5,eu,gov,ap1,ap2" %}}
-<div class="alert alert-danger">This feature is not supported for the selected Datadog site.</div>
-{{% /site-region %}}
-
-{{% site-region region="us3" %}}
 [Azure Private Link][1] allows you to send telemetry to Datadog without using the public internet.
 
 Datadog exposes some of its data intake services as [Azure Private Link services][2].
@@ -94,4 +89,3 @@ Create a Private DNS Zone for `agent.`{{< region-param key="dd_site" code="true"
 [1]: https://azure.microsoft.com/en-us/products/private-link
 [2]: https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview
 [3]: https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone
-{{% /site-region %}}

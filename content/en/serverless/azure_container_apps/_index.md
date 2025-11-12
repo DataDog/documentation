@@ -44,7 +44,6 @@ To instrument your Azure Container App with Datadog, choose one of two options:
 | Cost overhead                 | Less than sidecar (no extra container).                  | Extra vCPU/memory. Overallocating the sidecar wastes cost; underallocating leads to premature scaling.                                                       |
 | Logging                       | Direct stdout/stderr access.                             | Shared volume + log library routing to a log file. Uncaught errors require extra handling, since they are not automatically handled by your logging library. |
 | Failure isolation             | In rare cases, Datadog Agent bugs can affect your app.   | Datadog Agent faults are isolated.                                                                                                                           |
-| Observing multiple containers | Not supported                                            | Supported                                                                                                                                                    |
 
 ## Further reading
 
