@@ -180,7 +180,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | context_variable_keys | [string] | Variable keys that contain ground-truth or context content. Used for hallucination detection. |
 | tags | Dict[key (string), string] | Tags to attach to the prompt run. |
 
-**Note**: LLM Observability registers new versions of templates when the template or chat_template value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.
+**Note**: LLM Observability registers new versions of templates when the `template` or `chat_template` value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.
 
 {{% /tab %}}
 {{% tab "Example" %}}
