@@ -5481,11 +5481,16 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
+    - name: MCP Server
+      url: feature_flags/feature_flag_mcp_server
+      parent: feature_flags
+      identifier: feature_flags_mcp_server
+      weight: 8
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
       identifier: feature_flags_guide
-      weight: 1
+      weight: 9
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
