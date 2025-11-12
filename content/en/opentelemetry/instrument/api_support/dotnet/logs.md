@@ -31,10 +31,6 @@ This feature works by intercepting logs from the built-in `Microsoft.Extensions.
     ```sh
     export DD_LOGS_OTEL_ENABLED=true
     ```
-3. Ensure Datadog instrumentation is active for your application.
-    ```sh
-    [TODO: Code example]
-    ```
 
 ## Examples
 
