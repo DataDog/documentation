@@ -1,0 +1,14 @@
+{
+  "data": {
+    "id": "ae74b385-ae26-b66b-0a78-1d00cd413878",
+    "attributes": {
+      "active": true,
+      "address": "efe3fa57-1713-e8a1-9ff0-6c6af692446f",
+      "alias": "Example-On-Call-alias",
+      "formats": [
+        "html"
+      ]
+    },
+    "type": "emails"
+  }
+}

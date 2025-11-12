@@ -1950,6 +1950,26 @@
     "request_description": "",
     "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
   },
+  "CreateUserEmailNotificationChannel": {
+    "description": "Create a new email notification channel for an on-call user",
+    "summary": "Create an On-Call email for a user",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an On-Call email notification channel."
+  },
+  "DeleteUserEmailNotificationChannel": {
+    "description": "Delete an email notification channel for an on-call user",
+    "summary": "Delete an On-Call email for a user"
+  },
+  "GetUserEmailNotificationChannel": {
+    "description": "Get an email notification channel for an on-call user",
+    "summary": "Get an On-Call email for a user"
+  },
+  "UpdateUserEmailNotificationChannel": {
+    "description": "Update an email notification channel for an on-call user",
+    "summary": "Update an On-Call email for a user",
+    "request_description": "",
+    "request_schema_description": "Request body for updating an On-Call email notification channel."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"

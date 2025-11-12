@@ -449,7 +449,7 @@ components:
         type: string
     GetIssueIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response. Possible values are `assignee`, `case`, and `team_owners`.
+        in the response.
       explode: false
       in: query
       name: include
@@ -1003,8 +1003,7 @@ components:
         $ref: '#/components/schemas/ServiceDefinitionSchemaVersions'
     SearchIssuesIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response. Possible values are `issue`, `issue.assignee`, `issue.case`,
-        and `issue.team_owners`.
+        in the response.
       explode: false
       in: query
       name: include
@@ -17088,6 +17087,87 @@ components:
       - score
       - severity
       type: object
+    Email:
+      description: On-Call User Email.
+      example:
+        data:
+          attributes:
+            active: true
+            address: john.doe@datadoghq.com
+            alias: ''
+            formats:
+            - html
+          id: 45cd9fe5-dd96-42ad-83de-2242ea9f6efd
+          type: emails
+      properties:
+        data:
+          $ref: '#/components/schemas/EmailData'
+      type: object
+    EmailAttributes:
+      description: Attributes for an on-call email.
+      properties:
+        active:
+          description: Whether the email is currently active.
+          type: boolean
+        address:
+          description: Email address.
+          type: string
+        alias:
+          description: Optional display alias for the email.
+          type: string
+        formats:
+          description: Preferred content formats for notifications.
+          items:
+            $ref: '#/components/schemas/EmailFormatType'
+          type: array
+      type: object
+    EmailCreateRequest:
+      description: Request body for creating an On-Call email notification channel.
+      example:
+        data:
+          attributes:
+            active: true
+            address: john.doe@datadoghq.com
+            alias: ''
+            formats:
+            - html
+          type: emails
+      properties:
+        data:
+          $ref: '#/components/schemas/EmailData'
+      type: object
+    EmailData:
+      description: Data for an on-call email resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EmailAttributes'
+        id:
+          description: The email's unique identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/EmailType'
+      required:
+      - type
+      type: object
+    EmailFormatType:
+      description: Specifies the format of the e-mail that is sent for On-Call notifications
+      enum:
+      - html
+      - text
+      example: html
+      type: string
+      x-enum-varnames:
+      - HTML
+      - TEXT
+    EmailType:
+      default: emails
+      description: Indicates that the resource is of type 'emails'.
+      enum:
+      - emails
+      example: emails
+      type: string
+      x-enum-varnames:
+      - EMAILS
     EmailTypeType:
       description: The type of email.
       enum:
@@ -17095,6 +17175,21 @@ components:
       type: string
       x-enum-varnames:
       - WORK
+    EmailUpdateRequest:
+      description: Request body for updating an On-Call email notification channel.
+      example:
+        data:
+          attributes:
+            active: true
+            address: john.doe@datadoghq.com
+            alias: ''
+            formats:
+            - html
+          type: emails
+      properties:
+        data:
+          $ref: '#/components/schemas/EmailData'
+      type: object
     Enabled:
       description: Field used to enable or disable the rule.
       example: true
@@ -73010,6 +73105,197 @@ paths:
         operator: AND
         permissions:
         - on_call_write
+  /api/v2/on-call/users/{user_id}/notification-channels/emails:
+    post:
+      description: Create a new email notification channel for an on-call user
+      operationId: CreateUserEmailNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create an On-Call email for a user
+      tags:
+      - On-Call
+      x-menu-order: 16
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_admin
+  /api/v2/on-call/users/{user_id}/notification-channels/emails/{email_id}:
+    delete:
+      description: Delete an email notification channel for an on-call user
+      operationId: DeleteUserEmailNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The email ID
+        in: path
+        name: email_id
+        required: true
+        schema:
+          example: 45bb8fe5-dd96-42ad-83de-2241ea9f6ffc
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete an On-Call email for a user
+      tags:
+      - On-Call
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_admin
+    get:
+      description: Get an email notification channel for an on-call user
+      operationId: GetUserEmailNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The email ID
+        in: path
+        name: email_id
+        required: true
+        schema:
+          example: 45bb8fe5-dd96-42ad-83de-2241ea9f6ffc
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get an On-Call email for a user
+      tags:
+      - On-Call
+      x-menu-order: 15
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_admin
+    put:
+      description: Update an email notification channel for an on-call user
+      operationId: UpdateUserEmailNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The email ID
+        in: path
+        name: email_id
+        required: true
+        schema:
+          example: 45bb8fe5-dd96-42ad-83de-2241ea9f6ffc
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update an On-Call email for a user
+      tags:
+      - On-Call
+      x-menu-order: 14
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_admin
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).

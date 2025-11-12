@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "active": true,
+      "address": "john.doe@datadoghq.com",
+      "alias": "",
+      "formats": [
+        "html"
+      ]
+    },
+    "type": "emails"
+  }
+}

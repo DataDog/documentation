@@ -1185,6 +1185,13 @@
       "description": "Create On-Call schedule returns \"Created\" response"
     }
   ],
+  "CreateUserEmailNotificationChannel": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call email for a user returns \"Created\" response"
+    }
+  ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",
@@ -1204,6 +1211,13 @@
       "group": "on-call",
       "suffix": "",
       "description": "Update On-Call schedule returns \"OK\" response"
+    }
+  ],
+  "UpdateUserEmailNotificationChannel": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update an On-Call email for a user returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
