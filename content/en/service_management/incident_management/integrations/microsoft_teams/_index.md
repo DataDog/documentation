@@ -52,6 +52,18 @@ The author of a synced message does not need an Incident Management or Incident 
 
 You can configure Incident Management to automatically archive an incident channel after the incident is resolved.
 
+## Global channel for incident updates
+
+Use an incident updates channel to provide your stakeholders with organization-wide visibility into the status of all incidents directly from Microsoft Teams.
+
+1. In Datadog, navigate to [**Incidents > Settings > Integrations**][2].
+1. Select the Microsoft Teams integration and enable **Send all incident updates to a global channel**.
+1. Select the Team and channel where you want the incident updates to be posted.
+
+Datadog automatically notifies the selected channel about any newly declared incidents, as well as changes to incident states, severities, and incident commanders.
+
+To customize this behavior, deactivate this setting and [define a notification rule][4] instead.
+
 ## Microsoft Teams meetings
 
 ### One-click meeting creation
@@ -76,27 +88,18 @@ Delegated permissions are required for automatic, criteria-based Microsoft Teams
    2. (Optional) Specify the incident criteria that creates a Microsoft Teams meeting. If left blank, any changes to an incident without an existing Microsoft Teams meeting will create a Microsoft Teams meeting.
 4. Save your settings.
 
-## Incident updates channel
-
-Using an incident updates channel provides your stakeholders with organization-wide visibility into the status of all incidents directly from Microsoft Teams. Select which team and channel in your account to post these updates to, and the channel receives the following posts:
-
-- Newly declared incidents
-- Changes to severity, status transition, and incident commander
-- Links to the incident's overview page in App
-- Link to join the dedicated incident team
-
-To customize this behavior, deactivate this setting and [define a notification rule][4] instead.
-
 ## Declaring and managing incidents from Microsoft Teams
 
-To declare or manage an incident from a specific team:
-1. [Add the Datadog application][3] to the team.
-1. Add the **Datadog** tab to any channel in that team.
-1. Start a conversation in a channel, or a chat with the Datadog app.
-1. Type `@Datadog incident`.
-1. An adaptive card appears. Click the **Declare Incident** button to open the Datadog tab and declare an incident.
+In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident channels, you can only declare new incidents.
 
-**Note**: In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident-specific channels, you can only declare new incidents.
+To declare an incident from a specific team:
+1. [Add the Datadog application][3] to the team.
+1. In any **non-incident** channel, click on the **Datadog** tab.
+1. Fill out the incident details and click **Declare Incident**.
+
+To manage an incident from a specific team:
+1. In an **incident channel**, click on the **Datadog** tab.
+1. Edit the incident details and attributes.
 
 ### Updating incidents
 
@@ -108,17 +111,39 @@ To update an incident:
 4. Complete the form with your desired information.
 5. Click **Update**.
 
-### Listing incidents
-
-List all open (active and stable) incidents with:
-
-```
-@Datadog list incidents
-```
-
 ### Sending messages to the timeline
 
 Use the "More actions" menu on any message inside an incident team on the far right to send that message to the incident timeline.
+
+## Microsoft Teams commands
+
+You can view the full list of available commands at any time by typing `@Datadog help` in Microsoft Teams.
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Command</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">Global commands (run anywhere)</td>
+      <td><code>@Datadog incident</code></td>
+      <td>Declare a new incident.</td>
+    </tr>
+    <tr>
+      <td><code>@Datadog list incidents</code></td>
+      <td>Show a list of all open incidents.</td>
+    </tr>
+    <tr>
+      <td><code>@Datadog help</code></td>
+      <td>Show all supported commands.</td>
+    </tr>
+  </tbody>
+</table>
+
 
 ## Further reading
 
