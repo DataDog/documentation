@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-When integrating any SDK into your iOS application, understanding its performance impact is crucial for maintaining a smooth user experience. The Datadog RUM SDK is designed with performance in mind and provides transparent measurements to help you make informed decisions.
+When integrating any SDK into your iOS application, understanding its performance impact is crucial for maintaining a smooth user experience. The Datadog RUM SDK is designed with minimal performance overhead. Use these benchmarks to evaluate whether the SDK fits your app's performance budget and plan your integration accordingly.
 
 ## Performance impact benchmarks
 
