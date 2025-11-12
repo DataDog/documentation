@@ -1,6 +1,5 @@
 ---
 title: Capturing SQL Query Parameter Values With Database Monitoring
-private: true
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -12,10 +11,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting Database Monitoring"
 ---
-
-<div class="alert alert-info">
-This feature is in preview. To enable collection of raw SQL query text and execution plans with parameter values, please contact your Datadog representative or support.
-</div>
 
 The Database Monitoring integrations collect aggregated query metrics, in-flight query executions, and query explain plans across your database. By default, query SQL texts and explain plans are obfuscated and normalized in the Agent before being sent to Datadog in order to protect sensitive data, which may be exposed in query parameters.
 
@@ -31,7 +26,7 @@ Having access to query parameters enables:
 
 ## Before you begin
 
-<div class="alert alert-info">Query statements and execution plans with parameterized values may contain sensitive information (for example, passwords in query parameters) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
+<div class="alert alert-danger">Query statements and execution plans with parameterized values may contain sensitive information (for example, passwords in query parameters) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
 You must configure Database Monitoring for your [SQL Server][1] instance before continuing with this guide.
 
@@ -40,6 +35,10 @@ Supported databases
 
 Supported deployments
 : All deployment types.
+
+## Permissions
+
+To view query parameter values in the Database Monitoring UI, users need the **Database Monitoring Parameterized Queries Read** permission. This permission is located under the **Database Monitoring** section in the [Roles page][2]. This permission is enabled by default in the Datadog Admin Role, Datadog Standard Role, and Datadog Read Only Role. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][3].
 
 ## Setup
 To capture SQL query text and execution plans with parameter values, update the appropriate integration `conf.yaml` file based on your database type:
@@ -51,7 +50,8 @@ To capture SQL query text and execution plans with parameter values, update the 
     enabled: true
 ```
 
-For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture via Extended Events. See [configure your SQL Server instance and integration to capture query completions][1] in order to complete the database set up.
+<div class="alert alert-info">
+For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture through Extended Events. See <a href="/database_monitoring/guide/sql_extended_events/">configure your SQL Server instance and integration to capture query completions</a> in order to complete the database set up. </div>
 
 ```yaml
   xe_collection:
@@ -92,3 +92,5 @@ To capture prepared statements with parameter values in SQL Server, you must [co
 Support for PostgreSQL prepared statement parameter value capture is not available at this time.
 
 [1]: /database_monitoring/guide/sql_extended_events/
+[2]: /account_management/rbac/permissions/
+[3]: /account_management/rbac/
