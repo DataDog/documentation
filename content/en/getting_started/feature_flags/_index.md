@@ -53,7 +53,7 @@ Then, add the following to your project to initialize the SDK:
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
-// Initialize the provider
+// Initialize the provider and evaluation context
 const provider = new DatadogProvider({
    clientToken: '<CLIENT_TOKEN>',
    applicationId: '<APPLICATION_ID>',
@@ -64,8 +64,14 @@ const provider = new DatadogProvider({
    version: '1.0.0',
 });
 
-// Set the provider
-await OpenFeature.setProviderAndWait(provider);
+const context = {
+    targetingKey: '<SUBJECT_KEY>',
+    userId: '<USER_ID>',
+    userRole: '<USER_ROLE>',
+};
+
+// Set the provider and evaluation context
+await OpenFeature.setProviderAndWait(provider, context);
 ```
 
 <div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. You can disable it if you don't need to track feature exposure or guardrail metric status.</div>
