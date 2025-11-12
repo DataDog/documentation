@@ -46,7 +46,54 @@ To get started, follow the instructions below.
       openlineage-airflow
       ```
 
-2. Configure `openlineage` provider. The simplest option is to set the following environment variables and make them available to pods where you run Airflow schedulers and Airflow workers:
+2. Configure `openlineage` provider. Choose one of the following configuration options and set the environment variables, making them available to pods where you run Airflow schedulers and Airflow workers:
+
+   **Option 1: Datadog Transport (Recommended)**
+
+   **Requirements**: Requires `apache-airflow-providers-openlineage` version 2.7.3 or later and `openlineage-python` version 1.37.0 or later.
+
+   ```shell
+   export DD_API_KEY=<DD_API_KEY>
+   export DD_SITE=<DD_SITE>
+   export OPENLINEAGE__TRANSPORT__TYPE=datadog
+   # OPENLINEAGE_NAMESPACE sets the 'env' tag value in Datadog. You can hardcode this to a different value
+   export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
+   ```
+   * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
+   * Replace `<DD_SITE>` with your Datadog site (for example, {{< region-param key="dd_site" code="true" >}}). 
+
+   **Option 2: Composite Transport**
+
+   **Requirements**: Requires `apache-airflow-providers-openlineage` version 1.11.0 or later and `openlineage-python` version 1.37.0 or later.
+
+   Use this option if you're already using OpenLineage with another system and want to add Datadog as an additional destination. The composite transport sends events to all configured transports.
+
+   For example, if you're using an HTTP transport to send events to another system:
+
+   ```shell
+   # Your existing HTTP transport configuration
+   export OPENLINEAGE__TRANSPORT__TYPE=composite
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__EXISTING__TYPE=http
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__EXISTING__URL=<YOUR_EXISTING_URL>
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__EXISTING__AUTH__TYPE=api_key
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__EXISTING__AUTH__API_KEY=<YOUR_EXISTING_API_KEY>
+
+   # Add Datadog as an additional transport
+   export DD_API_KEY=<DD_API_KEY>
+   export DD_SITE=<DD_SITE>
+   export OPENLINEAGE__TRANSPORT__TRANSPORTS__DATADOG__TYPE=datadog
+   # OPENLINEAGE_NAMESPACE sets the 'env' tag value in Datadog. You can hardcode this to a different value
+   export OPENLINEAGE_NAMESPACE=${AIRFLOW_ENV_NAME}
+   ```
+   * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
+   * Replace `<DD_SITE>` with your Datadog site (for example, {{< region-param key="dd_site" code="true" >}}).
+   * Replace `<YOUR_EXISTING_URL>` and `<YOUR_EXISTING_API_KEY>` with your existing OpenLineage transport configuration.
+
+   In this example, OpenLineage events are sent to both your existing system and Datadog. You can configure multiple transports by giving each one a unique name (like `EXISTING` and `DATADOG` in the example above).
+
+   **Option 3: Simple Configuration**
+
+   This option uses the URL-based configuration and works with all versions of the OpenLineage provider:
 
    ```shell
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
@@ -56,6 +103,7 @@ To get started, follow the instructions below.
    ```
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
+
    * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables along with the previous ones. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
       ```shell
       #!/bin/sh
@@ -68,7 +116,7 @@ To get started, follow the instructions below.
 
 3. Trigger an update to your Airflow pods and wait for them to finish.
 
-4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][6]. 
+4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][6].
 
    The `PATH_TO_AIRFLOW_LOGS` value is `$AIRFLOW_HOME/logs` in standard deployments, but may differ if customized. Add the following annotation to your pod:
    ```yaml
@@ -76,13 +124,13 @@ To get started, follow the instructions below.
    ```
 
    Adding `"source": "airflow"` enables the extraction of the correlation-required attributes by the [Airflow integration][8] logs pipeline.
-   
+
    These file paths are relative to the Agent container. Mount the directory containing the log file into both the application and Agent containers so the Agent can access it. For details, see [Collect logs from a container local log file][10].
 
    **Note**: Log collection requires the Datadog agent to already be installed on your Kubernetes cluster. If you haven't installed it yet, see the [Kubernetes installation documentation][9].
 
    For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][7].
-   
+
 
 [1]: https://github.com/apache/airflow/releases/tag/2.5.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
@@ -270,10 +318,10 @@ To get started, follow the instructions below.
 
      ```text
      {
-      "type": "http", 
-      "url": "<DD_DATA_OBSERVABILITY_INTAKE>", 
+      "type": "http",
+      "url": "<DD_DATA_OBSERVABILITY_INTAKE>",
       "auth": {
-         "type": "api_key", 
+         "type": "api_key",
          "api_key": "<DD_API_KEY>"
       }
      }
@@ -281,7 +329,7 @@ To get started, follow the instructions below.
 
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
-   
+
 
    Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of the `openlineage` provider in Google Cloud Composer.
 

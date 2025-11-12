@@ -12994,7 +12994,8 @@ components:
       x-enum-varnames:
       - CREATE_RULESET
     CreateTableRequest:
-      description: The definition of `CreateTableRequest` object.
+      description: Request body for creating a new reference table from a local file
+        or cloud storage.
       example:
         data:
           attributes:
@@ -13024,23 +13025,23 @@ components:
           $ref: '#/components/schemas/CreateTableRequestData'
       type: object
     CreateTableRequestData:
-      description: The definition of `CreateTableRequestData` object.
+      additionalProperties: false
+      description: The data object containing the table definition.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateTableRequestDataAttributes'
-        id:
-          description: The ID of the reference table.
-          type: string
         type:
           $ref: '#/components/schemas/CreateTableRequestDataType'
       required:
       - type
       type: object
     CreateTableRequestDataAttributes:
-      description: The definition of `CreateTableRequestDataAttributes` object.
+      description: Attributes that define the reference table's configuration and
+        properties.
       properties:
         description:
-          description: The description of the reference table.
+          description: Optional text describing the purpose or contents of this reference
+            table.
           type: string
         file_metadata:
           $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadata'
@@ -13049,11 +13050,14 @@ components:
         source:
           $ref: '#/components/schemas/ReferenceTableCreateSourceType'
         table_name:
-          description: The name of the reference table.
-          example: ''
+          description: Name to identify this reference table.
+          example: table_1
           type: string
         tags:
-          description: The tags of the reference table.
+          description: Tags for organizing and filtering reference tables.
+          example:
+          - tag_1
+          - tag_2
           items:
             type: string
           type: array
@@ -13063,8 +13067,8 @@ components:
       - source
       type: object
     CreateTableRequestDataAttributesFileMetadata:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadata`
-        object.
+      description: Metadata specifying where and how to access the reference table's
+        data file.
       oneOf:
       - $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataCloudStorage'
       - $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataLocalFile'
@@ -13090,15 +13094,15 @@ components:
       properties:
         upload_id:
           description: The upload ID.
-          example: ''
+          example: 00000000-0000-0000-0000-000000000000
           type: string
       required:
       - upload_id
       title: LocalFileMetadataV2
       type: object
     CreateTableRequestDataAttributesFileMetadataOneOfAccessDetails:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetails`
-        object.
+      description: Cloud storage access configuration for the reference table data
+        file.
       properties:
         aws_detail:
           $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail'
@@ -13108,15 +13112,14 @@ components:
           $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail'
       type: object
     CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail`
-        object.
+      description: Amazon Web Services S3 storage access configuration.
       properties:
         aws_account_id:
-          description: The ID of the AWS account.
+          description: AWS account ID where the S3 bucket is located.
           example: '123456789000'
           type: string
         aws_bucket_name:
-          description: The name of the Amazon S3 bucket.
+          description: S3 bucket containing the CSV file.
           example: example-data-bucket
           type: string
         file_path:
@@ -13131,23 +13134,23 @@ components:
       x-oneOf-parent:
       - AwsDetail
     CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail`
-        object.
+      description: Azure Blob Storage access configuration.
       properties:
         azure_client_id:
-          description: The Azure client ID.
+          description: Azure service principal (application) client ID with permissions
+            to read from the container.
           example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
           type: string
         azure_container_name:
-          description: The name of the Azure container.
+          description: Azure Blob Storage container containing the CSV file.
           example: reference-data
           type: string
         azure_storage_account_name:
-          description: The name of the Azure storage account.
+          description: Azure storage account where the container is located.
           example: examplestorageaccount
           type: string
         azure_tenant_id:
-          description: The ID of the Azure tenant.
+          description: Azure Active Directory tenant ID.
           example: cccccccc-4444-5555-6666-dddddddddddd
           type: string
         file_path:
@@ -13165,8 +13168,7 @@ components:
       x-oneOf-parent:
       - AzureDetail
     CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail`
-        object.
+      description: Google Cloud Platform storage access configuration.
       properties:
         file_path:
           description: The relative file path from the GCS bucket root to the CSV
@@ -13174,15 +13176,15 @@ components:
           example: data/reference_tables/users.csv
           type: string
         gcp_bucket_name:
-          description: The name of the GCP bucket.
+          description: GCP bucket containing the CSV file.
           example: example-data-bucket
           type: string
         gcp_project_id:
-          description: The ID of the GCP project.
+          description: GCP project ID where the bucket is located.
           example: example-gcp-project-12345
           type: string
         gcp_service_account_email:
-          description: The email of the GCP service account.
+          description: Service account email with read permissions for the GCS bucket.
           example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
           type: string
       required:
@@ -13194,10 +13196,10 @@ components:
       x-oneOf-parent:
       - GcpDetail
     CreateTableRequestDataAttributesSchema:
-      description: The definition of `CreateTableRequestDataAttributesSchema` object.
+      description: Schema defining the structure and columns of the reference table.
       properties:
         fields:
-          description: The `schema` `fields`.
+          description: The schema fields.
           items:
             $ref: '#/components/schemas/CreateTableRequestDataAttributesSchemaFieldsItems'
           type: array
@@ -13206,7 +13208,7 @@ components:
             Only one primary key is supported, and it is used as an ID to retrieve
             rows.
           example:
-          - ''
+          - field_1
           items:
             type: string
           type: array
@@ -13215,12 +13217,11 @@ components:
       - primary_keys
       type: object
     CreateTableRequestDataAttributesSchemaFieldsItems:
-      description: The definition of `CreateTableRequestDataAttributesSchemaFieldsItems`
-        object.
+      description: A single field (column) in the reference table schema to be created.
       properties:
         name:
           description: The field name.
-          example: ''
+          example: field_1
           type: string
         type:
           $ref: '#/components/schemas/ReferenceTableSchemaFieldType'
@@ -13238,50 +13239,51 @@ components:
       x-enum-varnames:
       - REFERENCE_TABLE
     CreateUploadRequest:
-      description: The definition of `CreateUploadRequest` object.
+      description: Request to create an upload for a file to be ingested into a reference
+        table.
       properties:
         data:
           $ref: '#/components/schemas/CreateUploadRequestData'
       type: object
     CreateUploadRequestData:
-      description: The definition of `CreateUploadRequestData` object.
+      additionalProperties: false
+      description: Request data for creating an upload for a file to be ingested into
+        a reference table.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateUploadRequestDataAttributes'
-        id:
-          description: The ID of the upload.
-          type: string
         type:
           $ref: '#/components/schemas/CreateUploadRequestDataType'
       required:
       - type
       type: object
     CreateUploadRequestDataAttributes:
-      description: The definition of `CreateUploadRequestDataAttributes` object.
+      description: Upload configuration specifying how data is uploaded by the user,
+        and properties of the table to associate the upload with.
       properties:
         headers:
-          description: The headers of the file to upload.
+          description: The CSV file headers that define the schema fields, provided
+            in the same order as the columns in the uploaded file.
           example:
-          - ''
+          - field_1
+          - field_2
           items:
             type: string
           type: array
         part_count:
-          description: The number of parts in the upload.
+          description: Number of parts to split the file into for multipart upload.
           example: 3
           format: int32
           maximum: 20
           type: integer
         part_size:
-          description: The size of each part in the upload in bytes. For multipart
-            uploads (part_count > 1), all parts except the last one must be at least
-            5,000,000 bytes. For single-part uploads (part_count = 1), any size is
-            allowed.
+          description: The size of each part in the upload in bytes. All parts except
+            the last one must be at least 5,000,000 bytes.
           example: 10000000
           format: int64
           type: integer
         table_name:
-          description: The name of the reference table.
+          description: Name of the table to associate with this upload.
           example: ''
           type: string
       required:
@@ -13300,18 +13302,21 @@ components:
       x-enum-varnames:
       - UPLOAD
     CreateUploadResponse:
-      description: The definition of `CreateUploadResponse` object.
+      description: Information about the upload created containing the upload ID and
+        pre-signed URLs to PUT chunks of the CSV file to.
       properties:
         data:
           $ref: '#/components/schemas/CreateUploadResponseData'
       type: object
     CreateUploadResponseData:
-      description: The definition of `CreateUploadResponseData` object.
+      additionalProperties: false
+      description: Upload ID and attributes of the created upload.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateUploadResponseDataAttributes'
         id:
-          description: The ID of the upload.
+          description: Unique identifier for this upload. Use this ID when creating
+            the reference table.
           type: string
         type:
           $ref: '#/components/schemas/CreateUploadResponseDataType'
@@ -13319,10 +13324,11 @@ components:
       - type
       type: object
     CreateUploadResponseDataAttributes:
-      description: The definition of `CreateUploadResponseDataAttributes` object.
+      description: Pre-signed URLs for uploading parts of the file.
       properties:
         part_urls:
-          description: The URLs of the parts in the upload.
+          description: The pre-signed URLs for uploading parts. These URLs expire
+            after 5 minutes.
           items:
             type: string
           type: array
@@ -38393,7 +38399,7 @@ components:
           $ref: '#/components/schemas/Version'
       type: object
     PatchTableRequest:
-      description: The definition of `PatchTableRequest` object.
+      description: Request body for updating an existing reference table.
       example:
         data:
           attributes:
@@ -38416,30 +38422,30 @@ components:
             sync_enabled: false
             tags:
             - test_tag
-          id: 00000000-0000-0000-0000-000000000000
           type: reference_table
       properties:
         data:
           $ref: '#/components/schemas/PatchTableRequestData'
       type: object
     PatchTableRequestData:
-      description: The definition of `PatchTableRequestData` object.
+      additionalProperties: false
+      description: The data object containing the partial table definition updates.
       properties:
         attributes:
           $ref: '#/components/schemas/PatchTableRequestDataAttributes'
-        id:
-          description: The ID of the reference table.
-          type: string
         type:
           $ref: '#/components/schemas/PatchTableRequestDataType'
       required:
       - type
       type: object
     PatchTableRequestDataAttributes:
-      description: The definition of `PatchTableRequestDataAttributes` object.
+      description: Attributes that define the updates to the reference table's configuration
+        and properties.
       properties:
         description:
-          description: The description of the reference table.
+          description: Optional text describing the purpose or contents of this reference
+            table.
+          example: example description
           type: string
         file_metadata:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadata'
@@ -38447,16 +38453,20 @@ components:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesSchema'
         sync_enabled:
           description: Whether this table is synced automatically.
+          example: false
           type: boolean
         tags:
-          description: The tags of the reference table.
+          description: Tags for organizing and filtering reference tables.
+          example:
+          - tag_1
+          - tag_2
           items:
             type: string
           type: array
       type: object
     PatchTableRequestDataAttributesFileMetadata:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadata`
-        object.
+      description: Metadata specifying where and how to access the reference table's
+        data file.
       oneOf:
       - $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataCloudStorage'
       - $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataLocalFile'
@@ -38479,15 +38489,15 @@ components:
       properties:
         upload_id:
           description: The upload ID.
-          example: ''
+          example: 00000000-0000-0000-0000-000000000000
           type: string
       required:
       - upload_id
       title: LocalFileMetadataV2
       type: object
     PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails`
-        object.
+      description: Cloud storage access configuration for the reference table data
+        file.
       properties:
         aws_detail:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail'
@@ -38497,15 +38507,14 @@ components:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail'
       type: object
     PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail`
-        object.
+      description: Amazon Web Services S3 storage access configuration.
       properties:
         aws_account_id:
-          description: The ID of the AWS account.
+          description: AWS account ID where the S3 bucket is located.
           example: '123456789000'
           type: string
         aws_bucket_name:
-          description: The name of the AWS bucket.
+          description: S3 bucket containing the CSV file.
           example: example-data-bucket
           type: string
         file_path:
@@ -38516,23 +38525,23 @@ components:
       x-oneOf-parent:
       - AwsDetail
     PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail`
-        object.
+      description: Azure Blob Storage access configuration.
       properties:
         azure_client_id:
-          description: The Azure client ID.
+          description: Azure service principal (application) client ID with permissions
+            to read from the container.
           example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
           type: string
         azure_container_name:
-          description: The name of the Azure container.
+          description: Azure Blob Storage container containing the CSV file.
           example: reference-data
           type: string
         azure_storage_account_name:
-          description: The name of the Azure storage account.
+          description: Azure storage account where the container is located.
           example: examplestorageaccount
           type: string
         azure_tenant_id:
-          description: The ID of the Azure tenant.
+          description: Azure Active Directory tenant ID.
           example: cccccccc-4444-5555-6666-dddddddddddd
           type: string
         file_path:
@@ -38544,8 +38553,7 @@ components:
       x-oneOf-parent:
       - AzureDetail
     PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail`
-        object.
+      description: Google Cloud Platform storage access configuration.
       properties:
         file_path:
           description: The relative file path from the GCS bucket root to the CSV
@@ -38553,34 +38561,35 @@ components:
           example: data/reference_tables/users.csv
           type: string
         gcp_bucket_name:
-          description: The name of the GCP bucket.
+          description: GCP bucket containing the CSV file.
           example: example-data-bucket
           type: string
         gcp_project_id:
-          description: The ID of the GCP project.
+          description: GCP project ID where the bucket is located.
           example: example-gcp-project-12345
           type: string
         gcp_service_account_email:
-          description: The email of the GCP service account.
+          description: Service account email with read permissions for the GCS bucket.
           example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
           type: string
       type: object
       x-oneOf-parent:
       - GcpDetail
     PatchTableRequestDataAttributesSchema:
-      description: The definition of `PatchTableRequestDataAttributesSchema` object.
+      description: Schema defining the updates to the structure and columns of the
+        reference table. Schema fields cannot be deleted or renamed.
       properties:
         fields:
-          description: The `schema` `fields`.
+          description: The schema fields.
           items:
             $ref: '#/components/schemas/PatchTableRequestDataAttributesSchemaFieldsItems'
           type: array
         primary_keys:
           description: List of field names that serve as primary keys for the table.
             Only one primary key is supported, and it is used as an ID to retrieve
-            rows.
+            rows. Primary keys cannot be changed after table creation.
           example:
-          - ''
+          - field_1
           items:
             type: string
           type: array
@@ -38589,12 +38598,12 @@ components:
       - primary_keys
       type: object
     PatchTableRequestDataAttributesSchemaFieldsItems:
-      description: The definition of `PatchTableRequestDataAttributesSchemaFieldsItems`
-        object.
+      description: A single field (column) in the reference table schema to be updated.
+        Schema fields cannot be deleted or renamed.
       properties:
         name:
           description: The field name.
-          example: ''
+          example: field_1
           type: string
         type:
           $ref: '#/components/schemas/ReferenceTableSchemaFieldType'
@@ -47415,6 +47424,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         update_date:
           description: A Unix millisecond timestamp given the update date of the suppression
             rule.
@@ -47476,6 +47493,14 @@ components:
             same syntax as the queries to search signals in the Signals Explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
       required:
       - name
       - enabled
@@ -47571,6 +47596,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         version:
           description: The current version of the suppression. This is optional, but
             it can help prevent concurrent modifications.
@@ -51239,16 +51272,21 @@ components:
           type: number
       type: object
     TableResultV2:
-      description: The definition of `TableResultV2` object.
+      description: A reference table resource containing its full configuration and
+        state.
       example:
         data:
           attributes:
             created_by: 00000000-0000-0000-0000-000000000000
             description: example description
             file_metadata:
-              access_details: {}
-              upload_id: 00000000-0000-0000-0000-000000000000
-            last_updated_by: ''
+              access_details:
+                aws_detail:
+                  aws_account_id: '123456789000'
+                  aws_bucket_name: my-bucket
+                  file_path: path/to/file.csv
+              sync_enabled: true
+            last_updated_by: 00000000-0000-0000-0000-000000000000
             row_count: 5
             schema:
               fields:
@@ -51258,7 +51296,7 @@ components:
                 type: STRING
               primary_keys:
               - id
-            source: LOCAL_FILE
+            source: S3
             status: DONE
             table_name: test_reference_table
             tags:
@@ -51272,7 +51310,7 @@ components:
           $ref: '#/components/schemas/TableResultV2Data'
       type: object
     TableResultV2Array:
-      description: The definition of `TableResultV2Array` object.
+      description: List of reference tables.
       example:
         data:
         - attributes:
@@ -51344,12 +51382,14 @@ components:
       - data
       type: object
     TableResultV2Data:
-      description: The definition of `TableResultV2Data` object.
+      additionalProperties: false
+      description: The data object containing the reference table configuration and
+        state.
       properties:
         attributes:
           $ref: '#/components/schemas/TableResultV2DataAttributes'
         id:
-          description: The ID of the reference table.
+          description: Unique identifier for the reference table.
           type: string
         type:
           $ref: '#/components/schemas/TableResultV2DataType'
@@ -51357,22 +51397,28 @@ components:
       - type
       type: object
     TableResultV2DataAttributes:
-      description: The definition of `TableResultV2DataAttributes` object.
+      description: Attributes that define the reference table's configuration and
+        properties.
       properties:
         created_by:
           description: UUID of the user who created the reference table.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         description:
-          description: The description of the reference table.
+          description: Optional text describing the purpose or contents of this reference
+            table.
+          example: example description
           type: string
         file_metadata:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadata'
         last_updated_by:
           description: UUID of the user who last updated the reference table.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         row_count:
           description: The number of successfully processed rows in the reference
             table.
+          example: 5
           format: int64
           type: integer
         schema:
@@ -51380,27 +51426,35 @@ components:
         source:
           $ref: '#/components/schemas/ReferenceTableSourceType'
         status:
-          description: The status of the reference table.
+          description: The processing status of the table.
+          example: DONE
           type: string
         table_name:
-          description: The name of the reference table.
+          description: Unique name to identify this reference table. Used in enrichment
+            processors and API calls.
+          example: table_1
           type: string
         tags:
-          description: The tags of the reference table.
+          description: Tags for organizing and filtering reference tables.
+          example:
+          - tag_1
+          - tag_2
           items:
             type: string
           type: array
         updated_at:
-          description: The timestamp of the last update to the reference table in
-            ISO 8601 format.
+          description: When the reference table was last updated, in ISO 8601 format.
+          example: '2000-01-01T01:00:00+00:00'
           type: string
       type: object
     TableResultV2DataAttributesFileMetadata:
-      description: The definition of `TableResultV2DataAttributesFileMetadata` object.
+      description: Metadata specifying where and how to access the reference table's
+        data file.
       oneOf:
       - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorage'
       - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataLocalFile'
     TableResultV2DataAttributesFileMetadataCloudStorage:
+      additionalProperties: false
       description: File metadata for reference tables created by cloud storage.
       properties:
         access_details:
@@ -51417,6 +51471,8 @@ components:
         sync_enabled:
           description: Whether this table is synced automatically.
           type: boolean
+      required:
+      - access_details
       title: CloudFileMetadataV2
       type: object
     TableResultV2DataAttributesFileMetadataCloudStorageErrorType:
@@ -51445,7 +51501,10 @@ components:
       - OPERATION_ERROR
       - SYSTEM_ERROR
     TableResultV2DataAttributesFileMetadataLocalFile:
-      description: File metadata for reference tables created by upload.
+      additionalProperties: false
+      description: File metadata for reference tables created by upload. Note that
+        upload_id is only returned in the immediate create/replace response and is
+        not available in subsequent GET requests.
       properties:
         error_message:
           description: The error message returned from the creation/update.
@@ -51454,14 +51513,11 @@ components:
           description: The number of rows that failed to create/update.
           format: int64
           type: integer
-        upload_id:
-          description: The upload ID that was used to create/update the table.
-          type: string
       title: LocalFileMetadataV2
       type: object
     TableResultV2DataAttributesFileMetadataOneOfAccessDetails:
-      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetails`
-        object.
+      description: Cloud storage access configuration for the reference table data
+        file.
       properties:
         aws_detail:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAwsDetail'
@@ -51471,15 +51527,14 @@ components:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail'
       type: object
     TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAwsDetail:
-      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAwsDetail`
-        object.
+      description: Amazon Web Services S3 storage access configuration.
       properties:
         aws_account_id:
-          description: The ID of the AWS account.
+          description: AWS account ID where the S3 bucket is located.
           example: '123456789000'
           type: string
         aws_bucket_name:
-          description: The name of the AWS bucket.
+          description: S3 bucket containing the CSV file.
           example: example-data-bucket
           type: string
         file_path:
@@ -51490,23 +51545,23 @@ components:
       x-oneOf-parent:
       - AwsDetail
     TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAzureDetail:
-      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAzureDetail`
-        object.
+      description: Azure Blob Storage access configuration.
       properties:
         azure_client_id:
-          description: The Azure client ID.
+          description: Azure service principal (application) client ID with permissions
+            to read from the container.
           example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
           type: string
         azure_container_name:
-          description: The name of the Azure container.
+          description: Azure Blob Storage container containing the CSV file.
           example: reference-data
           type: string
         azure_storage_account_name:
-          description: The name of the Azure storage account.
+          description: Azure storage account where the container is located.
           example: examplestorageaccount
           type: string
         azure_tenant_id:
-          description: The ID of the Azure tenant.
+          description: Azure Active Directory tenant ID.
           example: cccccccc-4444-5555-6666-dddddddddddd
           type: string
         file_path:
@@ -51518,8 +51573,7 @@ components:
       x-oneOf-parent:
       - AzureDetail
     TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
-      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail`
-        object.
+      description: Google Cloud Platform storage access configuration.
       properties:
         file_path:
           description: The relative file path from the GCS bucket root to the CSV
@@ -51527,25 +51581,25 @@ components:
           example: data/reference_tables/users.csv
           type: string
         gcp_bucket_name:
-          description: The name of the GCP bucket.
+          description: GCP bucket containing the CSV file.
           example: example-data-bucket
           type: string
         gcp_project_id:
-          description: The ID of the GCP project.
+          description: GCP project ID where the bucket is located.
           example: example-gcp-project-12345
           type: string
         gcp_service_account_email:
-          description: The email of the GCP service account.
+          description: Service account email with read permissions for the GCS bucket.
           example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
           type: string
       type: object
       x-oneOf-parent:
       - GcpDetail
     TableResultV2DataAttributesSchema:
-      description: The definition of `TableResultV2DataAttributesSchema` object.
+      description: Schema defining the structure and columns of the reference table.
       properties:
         fields:
-          description: The `schema` `fields`.
+          description: The schema fields.
           items:
             $ref: '#/components/schemas/TableResultV2DataAttributesSchemaFieldsItems'
           type: array
@@ -51554,7 +51608,7 @@ components:
             Only one primary key is supported, and it is used as an ID to retrieve
             rows.
           example:
-          - ''
+          - field_1
           items:
             type: string
           type: array
@@ -51563,12 +51617,11 @@ components:
       - primary_keys
       type: object
     TableResultV2DataAttributesSchemaFieldsItems:
-      description: The definition of `TableResultV2DataAttributesSchemaFieldsItems`
-        object.
+      description: A single field (column) in the reference table schema to be returned.
       properties:
         name:
           description: The field name.
-          example: ''
+          example: field_1
           type: string
         type:
           $ref: '#/components/schemas/ReferenceTableSchemaFieldType'
@@ -51586,7 +51639,7 @@ components:
       x-enum-varnames:
       - REFERENCE_TABLE
     TableRowResourceArray:
-      description: The definition of `TableRowResourceArray` object.
+      description: List of rows from a reference table query.
       properties:
         data:
           description: The rows.
@@ -51597,12 +51650,13 @@ components:
       - data
       type: object
     TableRowResourceData:
-      description: The definition of `TableRowResourceData` object.
+      additionalProperties: false
+      description: The data object containing the row column names and values.
       properties:
         attributes:
           $ref: '#/components/schemas/TableRowResourceDataAttributes'
         id:
-          description: The ID of the row.
+          description: Row identifier, corresponding to the primary key value.
           type: string
         type:
           $ref: '#/components/schemas/TableRowResourceDataType'
@@ -51610,11 +51664,12 @@ components:
       - type
       type: object
     TableRowResourceDataAttributes:
-      description: The definition of `TableRowResourceDataAttributes` object.
+      additionalProperties: false
+      description: Column values for this row in the reference table.
       properties:
         values:
-          additionalProperties: {}
-          description: The values of the row.
+          description: Key-value pairs representing the row data, where keys are field
+            names from the schema.
           type: object
       type: object
     TableRowResourceDataType:
@@ -54407,6 +54462,12 @@ components:
           type: string
         icon:
           description: URL of the user's icon.
+          type: string
+        last_login_time:
+          description: The last time the user logged in.
+          format: date-time
+          nullable: true
+          readOnly: true
           type: string
         mfa_enabled:
           description: If user has MFA enabled.
@@ -63538,7 +63599,9 @@ paths:
         permissions:
         - user_app_keys
     get:
-      description: Get an application key owned by current user
+      description: 'Get an application key owned by current user.
+
+        The `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: GetCurrentUserApplicationKey
       parameters:
       - $ref: '#/components/parameters/ApplicationKeyID'
@@ -63572,7 +63635,9 @@ paths:
         permissions:
         - user_app_keys
     patch:
-      description: Edit an application key owned by current user
+      description: 'Edit an application key owned by current user.
+
+        The `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: UpdateCurrentUserApplicationKey
       parameters:
       - $ref: '#/components/parameters/ApplicationKeyID'
@@ -66114,6 +66179,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
+      deprecated: true
       description: The bulk update endpoint for creating, updating, and deleting attachments
         for a given incident.
       operationId: UpdateIncidentAttachments
@@ -66153,9 +66219,7 @@ paths:
         operator: OR
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/incidents/{incident_id}/impacts:
     get:
       description: Get all impacts for an incident.
@@ -74249,8 +74313,8 @@ paths:
           format: int64
           minimum: 0
           type: integer
-      - description: Sort field and direction. Use field name for ascending, prefix
-          with "-" for descending.
+      - description: Sort field and direction for the list of reference tables. Use
+          field name for ascending, prefix with "-" for descending.
         example: -updated_at
         in: query
         name: sort
@@ -74298,12 +74362,12 @@ paths:
       - Reference Tables
       x-menu-order: 3
     post:
-      description: 'Create a new reference table. You can provide data in two ways:
-        1) Call POST api/v2/reference-tables/upload first to get an upload ID, then
-        PUT chunks of CSV data to each provided URL, and finally call this POST endpoint
-        with the upload_id in file_metadata, OR 2) Provide access_details in file_metadata
-        pointing to a CSV file in cloud storage (Amazon S3, Azure Blob Storage, or
-        GCP Cloud Storage).'
+      description: "Creates a reference table. You can provide data in two ways:\n1.
+        Call POST /api/v2/reference-tables/upload to get an upload ID. Then, PUT the
+        CSV data\n   (not the file itself) in chunks to each URL in the request body.
+        Finally, call this\n   POST endpoint with `upload_id` in `file_metadata`.\n2.
+        Provide `access_details` in `file_metadata` pointing to a CSV file in cloud
+        storage."
       operationId: CreateReferenceTable
       requestBody:
         content:
@@ -74337,7 +74401,7 @@ paths:
       description: Delete a reference table by ID
       operationId: DeleteTable
       parameters:
-      - description: The ID of the reference table to delete
+      - description: Unique identifier of the reference table to delete
         in: path
         name: id
         required: true
@@ -74364,7 +74428,7 @@ paths:
       description: Get a reference table by ID
       operationId: GetTable
       parameters:
-      - description: The ID of the reference table to retrieve
+      - description: Unique identifier of the reference table to retrieve
         in: path
         name: id
         required: true
@@ -74402,7 +74466,7 @@ paths:
         pointing to a CSV file in the same type of cloud storage.'
       operationId: UpdateReferenceTable
       parameters:
-      - description: The ID of the reference table to update
+      - description: Unique identifier of the reference table to update
         in: path
         name: id
         required: true
@@ -74436,7 +74500,7 @@ paths:
       description: Get reference table rows by their primary key values.
       operationId: GetRowsByID
       parameters:
-      - description: The ID of the reference table
+      - description: Unique identifier of the reference table to get rows from
         example: table-123
         in: path
         name: id

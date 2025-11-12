@@ -4,79 +4,103 @@
   "attributes": {
     "frontmatter": {
       "title": {
-        "ast-str-b62f1162-1bff-4465-a001-a5e6a114c8c7": {
-          "string": "Options de confidentialité de Mobile Session Replay"
+        "itemTranslationData": {
+          "e516d0bca63367c3cdea9592e5e874ce": {
+            "string": "Options de confidentialité de Mobile Session Replay"
+          }
         }
       },
       "description": {
-        "ast-str-1075f136-3c58-4b63-9ab3-e7e9d7c33f4f": {
-          "string": "Configurer des options de confidentialité pour Mobile Session Replay."
+        "itemTranslationData": {
+          "44bba57ecf1000d4c26a1710931ea04a": {
+            "string": "Configurer des options de confidentialité pour Mobile Session Replay."
+          }
         }
       },
       "further_reading": {
-        "translationListData": {
+        "listTranslationData": {
           "0": {
             "link": "/real_user_monitoring/session_replay/mobile",
             "text": {
-              "ast-str-554c7c0f-2ec8-4333-92d7-98380b943dfd": {
-                "string": "Session Replay sur mobile"
+              "itemTranslationData": {
+                "ff298467956d0977568a022601ce36b1": {
+                  "string": "Session Replay sur mobile"
+                }
               }
             },
             "tag": {
-              "ast-str-b68dc5d4-e923-4037-b1bb-9235db0dcf67": {
-                "string": "Documentation"
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentation"
+                }
               }
             }
           },
           "1": {
             "link": "/real_user_monitoring/session_replay/mobile/app_performance",
             "text": {
-              "ast-str-0ca51e64-ea05-4c21-8c45-d06646c6346f": {
-                "string": "Impact de Mobile Session Replay sur les performances des applications"
+              "itemTranslationData": {
+                "4c2c25fadc44b452805930d66b92e081": {
+                  "string": "Impact de Mobile Session Replay sur les performances des applications"
+                }
               }
             },
             "tag": {
-              "ast-str-7d320255-ecda-4fd0-aee6-723b15f023ea": {
-                "string": "Documentation"
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentation"
+                }
               }
             }
           },
           "2": {
             "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
             "text": {
-              "ast-str-a09b4acf-a362-42ce-9eab-b0dc82050248": {
-                "string": "Installer et configurer Mobile Session Replay"
+              "itemTranslationData": {
+                "e8c885469af2de3bdc7fc4a10ed7bcfb": {
+                  "string": "Installer et configurer Mobile Session Replay"
+                }
               }
             },
             "tag": {
-              "ast-str-9a557a23-7752-4cce-9f1d-a6f9ac923741": {
-                "string": "Documentation"
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentation"
+                }
               }
             }
           },
           "3": {
             "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
             "text": {
-              "ast-str-bb966d34-8c5f-4826-905c-c6d71db4d2f7": {
-                "string": "Dépanner Mobile Session Replay"
+              "itemTranslationData": {
+                "2b6f1133cdf7f0450b0e81404e234b74": {
+                  "string": "Dépanner Mobile Session Replay"
+                }
               }
             },
             "tag": {
-              "ast-str-7bd87fc2-1907-41bc-945b-146121ac07f3": {
-                "string": "Documentation"
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentation"
+                }
               }
             }
           },
           "4": {
             "link": "/real_user_monitoring/session_replay",
             "text": {
-              "ast-str-d0da3c02-16da-4d40-91e4-f08cbea2faa5": {
-                "string": "Session Replay"
+              "itemTranslationData": {
+                "8ec0e8f790e9b74cb7203f0fb5efd79b": {
+                  "string": "Session Replay"
+                }
               }
             },
             "tag": {
-              "ast-str-b8ce4c09-28a9-4b98-a446-b15620b73544": {
-                "string": "Documentation"
+              "itemTranslationData": {
+                "372e351119ae0818a8d70fda6f25b76e": {
+                  "string": "Documentation"
+                }
               }
             }
           }
@@ -85,7 +109,7 @@
     }
   },
   "children": {
-    "translationListData": {
+    "listTranslationData": {
       "0": {
         "$$mdtype": "Node",
         "inline": false,
@@ -93,12 +117,12 @@
           "file": "real_user_monitoring/session_replay/mobile/privacy_options.mdoc.md"
         },
         "children": {
-          "translationListData": {}
+          "listTranslationData": {}
         },
         "type": "tag",
         "tag": "partial",
         "annotations": {
-          "translationListData": {
+          "listTranslationData": {
             "0": {
               "type": "attribute",
               "name": "file",
@@ -113,7 +137,7 @@
   },
   "type": "document",
   "annotations": {
-    "translationListData": {}
+    "listTranslationData": {}
   },
   "slots": {}
 }
