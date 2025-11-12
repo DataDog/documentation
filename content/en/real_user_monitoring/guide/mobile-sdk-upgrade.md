@@ -23,7 +23,7 @@ Follow this guide to migrate between major versions of the Mobile RUM, Logs, and
 {{< tabs >}}
 {{% tab "Android" %}}
 
-The transition from version 2 to version 3 focuses on removing support for the legacy Open Tracing project, altering default behaviour for distributed tracing and improving the stability and consistency of the SDK.
+The transition from version 2 to version 3 focuses on removing support for the legacy Open Tracing project, altering default behavior for distributed tracing and improving the stability and consistency of the SDK.
 
 {{% /tab %}}
 
