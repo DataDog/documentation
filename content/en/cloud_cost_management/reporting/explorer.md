@@ -46,6 +46,30 @@ Use the Cost Explorer to:
 
 **Note:** When querying costs across multiple providers, resource-level tags are not available. To access resource-specific tags, filter to a single provider in your query.
 
+## Cost Change Summary Side Panel 
+
+The Cost Change Summary panel highlights what and who may be driving cost changes for the current period vs the prior period.
+
+   {{< img src="cloud_cost/reporting/cost-change-sidepanel.png" alt="The Cost Change Summary panel highlights what and who may be driving cost changes for the current period vs the prior period." style="width:100%;" >}}
+
+At the top, you’ll see Total cost for the current period and the dollar and percent cost change versus the prior period. 
+
+### Change details and Investigate Further
+
+- **Instantly Identify Cost Anomalies:** Unexpected deviations in cost, calculated against historical data, are automatically highlighted in red, allowing you to quickly focus your investigation on critical trends.  
+     
+- **Analyze Change Drivers:** Easily determine the cause of a cost change—whether it was driven by a change in **usage** (the count of resources) or a change in **unit price** (the cost per resource). For example, in the screenshot below, we can see the change in spend is driven by a shift in unit price rather than usage—the resource count stays flat while cost per resource rises and falls, causing the overall cost change.
+
+{{< img src="cloud_cost/reporting/cloud-cost-spend-summary.png" alt="The change in spend is driven by a shift in unit price rather than usage—the resource count stays flat while cost per resource rises and falls, causing the overall cost change" style="width:100%;" >}}
+
+### Take Action
+
+- **Associated Team(s)**: The responsible team(s) for the cost change are automatically identified, inferred from resource tags (e.g., `team:shopist`). To gain full context for the change, follow up with the listed teams (e.g., Shopist, Platform, Cloud-Networks). For a streamlined investigation, you can **send a Notebook** containing the full context directly to the team with a single click. Use the Notebook to capture context, annotate findings, and share the investigation thread.
+
+- **Associated Tags**: This list shows all relevant tags contributing to the current cost line item. A crucial feature is the ability to \[Refine your search\] by clicking on a tag value (like `account:demo` or a specific `aws_account`). This acts as a quick filter to narrow down the entire Cloud Cost Explorer to only the resources with that specific tag. 
+
+- Create a Monitor to be alerted the next time a similar change occurs. Learn more about [Cloud Cost Monitors](https://docs.datadoghq.com/monitors/types/cloud_cost/).
+
 ## Refine your results
 
 Click **Refine Results** to access advanced filtering options that help you focus on specific cost patterns.
