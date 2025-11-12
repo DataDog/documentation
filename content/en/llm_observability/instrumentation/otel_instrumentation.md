@@ -62,13 +62,17 @@ To generate traces compatible with LLM Observability, do one of the following:
 - Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37 semantic conventions for generative AI][1].
 - Create custom OpenTelemetry instrumentation that produces spans with the required `gen_ai.*` attributes, as defined in the semantic conventions.
 
+**Note**: OpenInference and OpenLLMetry are not currently supported, as they have not yet been updated to support OpenTelemetry 1.37 semantic conventions for generative AI.
+
 After your application starts sending data, the traces automatically appear in the [**LLM Observability Traces** page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
-**Note**: There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page.
+**Note**: There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. They should appear immediately in the APM Traces page.
 
-### Example
+### Examples
 
-The following example demonstrates a complete application using strands-agents with the OpenTelemetry integration. This same approach works with any framework that supports OpenTelemetry version 1.37 semantic conventions for generative AI, or with custom instrumentation that emits the required `gen_ai.*` attributes.
+#### Using strands-agents
+
+The following example demonstrates a complete application using strands-agents with the OpenTelemetry integration. This same approach works with any framework that supports OpenTelemetry version 1.37 semantic conventions for generative AI.
 
 ```python
 from strands import Agent
@@ -99,6 +103,102 @@ agent = Agent(tools=[calculator, current_time])
 if __name__ == "__main__":
     result = agent("I was born in 1993, what is my age?")
     print(f"Agent: {result}")
+```
+
+#### Custom OpenTelemetry instrumentation
+
+The following example demonstrates how to instrument your LLM application using custom OpenTelemetry code. This approach gives you full control over the traces and spans emitted by your application.
+
+**Note**: After running this example, search for `ml_app:simple-llm-example` in the LLM Observability UI to find the generated trace.
+
+```python
+import os
+import json
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.resources import Resource, SERVICE_NAME
+from openai import OpenAI
+
+# Configure OpenTelemetry to send traces to Datadog
+os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
+os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = "dd-api-key=<YOUR_DATADOG_API_KEY>,dd-otlp-source=datadog"
+os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
+
+# Initialize OpenTelemetry SDK
+resource = Resource(attributes={SERVICE_NAME: "simple-llm-example"})
+provider = TracerProvider(resource=resource)
+provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter()))
+trace.set_tracer_provider(provider)
+
+tracer = trace.get_tracer(__name__)
+
+# Make LLM call with OpenTelemetry tracing
+with tracer.start_as_current_span(
+    "chat gpt-4o",
+    kind=trace.SpanKind.CLIENT,
+) as span:
+    model = "gpt-4o"
+    max_tokens = 1024
+    temperature = 0.7
+    messages = [{"role": "user", "content": "Explain OpenTelemetry in one sentence."}]
+    
+    # Set request attributes
+    span.set_attribute("gen_ai.provider.name", "openai")
+    span.set_attribute("gen_ai.request.model", model)
+    span.set_attribute("gen_ai.operation.name", "chat")
+    span.set_attribute("gen_ai.request.max_tokens", max_tokens)
+    span.set_attribute("gen_ai.request.temperature", temperature)
+    
+    # Add input messages as event
+    input_messages_parts = []
+    for msg in messages:
+        input_messages_parts.append({
+            "role": msg["role"],
+            "parts": [{"type": "text", "content": msg["content"]}]
+        })
+    
+    span.add_event(
+        "gen_ai.client.inference.operation.details",
+        {
+            "gen_ai.input.messages": json.dumps(input_messages_parts)
+        }
+    )
+    
+    # Make actual LLM call
+    client = OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
+    response = client.chat.completions.create(
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        messages=messages
+    )
+    
+    # Set response attributes from actual data
+    span.set_attribute("gen_ai.response.id", response.id)
+    span.set_attribute("gen_ai.response.model", response.model)
+    span.set_attribute("gen_ai.response.finish_reasons", [response.choices[0].finish_reason])
+    span.set_attribute("gen_ai.usage.input_tokens", response.usage.prompt_tokens)
+    span.set_attribute("gen_ai.usage.output_tokens", response.usage.completion_tokens)
+    
+    # Add output messages as event
+    output_text = response.choices[0].message.content
+    span.add_event(
+        "gen_ai.client.inference.operation.details",
+        {
+            "gen_ai.output.messages": json.dumps([{
+                "role": "assistant",
+                "parts": [{"type": "text", "content": output_text}],
+                "finish_reason": response.choices[0].finish_reason
+            }])
+        }
+    )
+    
+    print(f"Response: {output_text}")
+
+# Flush spans before exit
+provider.force_flush()
 ```
 
 ## Supported semantic conventions
