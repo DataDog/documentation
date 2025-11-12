@@ -1,6 +1,6 @@
 ---
-title: Feature Flag MCP Server
-description: Learn how to use the feature flag MCP server
+title: Feature Flags MCP Server
+description: "Learn how to use the Feature Flags toolset in the Datadog MCP Server"
 further_reading:
 - link: "getting_started/feature_flags"
   tag: "Documentation"
