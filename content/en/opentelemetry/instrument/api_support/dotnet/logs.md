@@ -15,7 +15,7 @@ You can export OTLP logs from your .NET application using the Datadog SDK (`dd-t
 
 This feature works by intercepting logs from the built-in `Microsoft.Extensions.Logging.ILogger` library and exporting them as structured OTLP data.
 
-<div class="alert alert-info">This implementation does not use the OpenTelemetry Logs API. It is not compatible with the <code>OpenTelemetry.SDK.Logs</code> or <code>OpenTelemetry.Exporter.Otlp.Logs</code> packages. You must remove them to use this feature.</div>
+<div class="alert alert-info">You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The Datadog SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.</div>
 
 ## Prerequisites
 

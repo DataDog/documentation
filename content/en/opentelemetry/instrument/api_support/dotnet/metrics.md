@@ -92,8 +92,8 @@ For a complete list of all shared OTLP environment variables, see [OpenTelemetry
 If you are already using the OpenTelemetry SDK with a manual OTLP exporter configuration, follow these steps to migrate:
 
 1. Add the Datadog SDK (`dd-trace-dotnet`) to your project and enable its instrumentation.
-2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
-3. Remove the `opentelemetry-sdk` and `opentelemetry-exporter-otlp` packages from your project's dependencies.
+2. Remove any code that manually configures the `OtlpExporter` for metrics. The Datadog SDK handles this configuration automatically.
+3. Remove the `OpenTelemetry` and `OpenTelemetry.Exporter.OpenTelemetryProtocol` packages from your project's dependencies.
 4. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
 
 ### Existing DogStatsD setup
