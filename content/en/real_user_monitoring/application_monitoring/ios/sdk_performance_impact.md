@@ -35,7 +35,7 @@ Below are the results of the measurements.
 | Bundle size       | 23.6 MB                         | 22.2 MB     |
 | Network usage     | 21.88 KB sent, 1.68 KB received | n/a         |
 
-You can read the following [page][1] for more details about these benchmarks.
+See the [SDK performance details on GitHub][2] for more information.
 
 ## Continuous benchmarks
 
