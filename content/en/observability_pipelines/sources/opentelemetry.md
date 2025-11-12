@@ -74,8 +74,8 @@ The Worker exposes the gRPC endpoint on port 4318. This is an example of configu
 
 Based on these example configurations, these are values you enter for the following environment variables:
 
-- HTTP listener address: `worker:4317`
-- gRPC listener address: `worker:4318`
+- HTTP listener address: `worker:4318`
+- gRPC listener address: `worker:4317`
 
 ## Send logs from the Datadog Distribution of OpenTelemetry Collector to Observability Pipelines
 
