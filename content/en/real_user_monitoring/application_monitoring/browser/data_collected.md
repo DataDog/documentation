@@ -143,6 +143,19 @@ Detailed network timing data for the loading of an application's resources are c
 | `resource.provider.domain` | string | The resource provider domain.                                                                        |
 | `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                |
 
+### GraphQL attributes
+
+For GraphQL requests configured in `allowedGraphQlUrls`, additional metadata is automatically collected:
+
+| Attribute                       | Type   | Description                                                                                          |
+|---------------------------------|--------|------------------------------------------------------------------------------------------------------|
+| `resource.graphql.operation_type` | string | The GraphQL operation type: `query`, `mutation`, or `subscription`.                                  |
+| `resource.graphql.operation_name` | string | The GraphQL operation name, if provided in the request.                                              |
+| `resource.graphql.variables`      | string | JSON-stringified GraphQL variables sent with the request.                                            |
+| `resource.graphql.payload`        | string | The GraphQL query (limited to 32 KB, available only if `trackPayload` is enabled).                   |
+| `resource.graphql.errors_count`   | number | Number of errors returned in the GraphQL response (available only if `trackResponseErrors` is enabled). |
+| `resource.graphql.errors`         | array  | Array of GraphQL errors with `message`, `code`, `locations`, and `path` (available only if `trackResponseErrors` is enabled). |
+
 ### Long task timing attributes
 
 | Attribute  | Type   | Description                |

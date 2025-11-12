@@ -34,6 +34,63 @@ See [Connect RUM and Traces][2] for information about setting up this feature.
 
 {{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource" >}}
 
+## Track GraphQL requests
+
+The Browser SDK can automatically enrich GraphQL requests with operation-specific metadata, making it easier to identify and debug individual operations in RUM.
+
+### Setup
+
+Configure `allowedGraphQlUrls` during SDK initialization to specify which endpoints should be treated as GraphQL:
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    clientToken: '<DATADOG_CLIENT_TOKEN>',
+    site: 'datadoghq.com',
+    allowedGraphQlUrls: [
+        "https://api.example.com/graphql",
+        /\/graphql$/,
+        (url) => url.includes("graphql")
+    ]
+})
+```
+
+`allowedGraphQlUrls` accepts the same types as `allowedTracingUrls`:
+- `string`: Matches any URL starting with the value
+- `RegExp`: Tests against the full URL
+- `function`: Evaluates with the URL as parameter, returning `true` for a match
+
+### Advanced options
+
+To collect additional data, use the extended configuration:
+
+```javascript
+datadogRum.init({
+    allowedGraphQlUrls: [
+        {
+            match: "https://api.example.com/graphql",
+            trackPayload: true,          // Include GraphQL query (limited to 32 KB)
+            trackResponseErrors: true
+        }
+    ]
+})
+```
+
+**Note**: Enabling `trackResponseErrors` collects response bodies for matching requests, which may impact bandwidth usage.
+
+### Collected data
+
+For matching requests, the SDK automatically extracts:
+- **Operation type**: `query`, `mutation`, or `subscription`
+- **Operation name**: The operation name if provided
+- **Variables**: JSON-stringified variables sent with the request
+- **Payload** (if `trackPayload: true`): The GraphQL query, truncated to 32 KB
+- **Errors** (if `trackResponseErrors: true`): Error details including `message`, `code`, `locations`, and `path`
+
+See [GraphQL attributes][8] for the full list of collected attributes.
+
 ## Resource attributes
 
 Detailed network timing data for resources is collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
@@ -96,3 +153,4 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Resource_timing#cross-origin_timing_information
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
+[8]: /real_user_monitoring/application_monitoring/browser/data_collected/#graphql-attributes
