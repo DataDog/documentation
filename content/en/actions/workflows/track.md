@@ -109,7 +109,7 @@ To track billing for your workflow executions, perform the following steps:
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][1].
 
 
-[1]: https://datadoghq.slack.com/
+[1]: https://chat.datadoghq.com/
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: /service_management/workflows/build/#workflow-notifications
 [4]: https://app.datadoghq.com/monitors/create
