@@ -13,8 +13,8 @@ further_reading:
   text: "Datadog Operator Guide"
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
@@ -40,7 +40,6 @@ no_proxy:
 ```
 
 Additionally, you need to set `DD_NO_PROXY_NONEXACT_MATCH` to true. For more details, see [Datadog Agent Proxy Configuration][2].
-
 
 ## Send Kubernetes logs with the Datadog Operator
 
