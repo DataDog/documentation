@@ -379,7 +379,7 @@ To manage View level attributes more effectively, new APIs were added:
 - `Monitor.removeViewAttributes(forKeys:)`
 
 The SDK now defaults to injecting trace context into going requests only when the trace is sampled in. Review your trace sampling configuration. If you need the v2 behavior where trace context is injected for all requests regardless of sampling, set `traceContextInjection` to `.all`.
-Refer to [Connect RUM and Traces][5] for more information.
+See [Connect RUM and Traces][2] for more details.
 
 We have also changed how traces are sampled. Instead of randomly deciding for each RUM Resource (based on your sample rate) whether to create a span, the SDK now makes a sampling decision at the beginning of a session to either sample all traces or none.
 
