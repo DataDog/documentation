@@ -163,8 +163,8 @@ Rum.enable(
 )
 ```
 
-We changed the default behavior of distributed traces. The SDK now defaults to injecting trace context into outgoing requests only when the trace is sampled in. Review your trace sampling configuration. If you need the v2 behavior where trace context is injected for all requests regardless of sampling, set `traceContextInjection` to `.ALL`.
-Refer to [Connect RUM and Traces][5] for more information.
+We changed the default behavior of distributed traces. The SDK now defaults to injecting trace context into outgoing requests only when the trace is sampled in. Review your trace sampling configuration. If you need the v2 behavior where trace context is injected for all requests regardless of sampling, set `traceContextInjection` to `ALL`.
+Refer to [Connect RUM and Traces][2] for more information.
 
 Additionally, trace sampling is now session-based: the SDK makes a single sampling decision at the start of each session to either sample all traces or none, instead of randomly deciding for each RUM Resource (based on your sample rate) whether to create a span. This provides consistent trace coverage throughout each user session.
 
@@ -340,6 +340,8 @@ SessionReplay.enable(
 )
 ```
 
+[2]:  /real_user_monitoring/correlate_with_other_telemetry/apm
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -444,6 +446,7 @@ Legacy delegate types have been replaced by a unified instrumentation API:
 |`DDNSURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
 
 [1]: /real_user_monitoring/session_replay/mobile/privacy_options?platform=ios
+[2]:  /real_user_monitoring/correlate_with_other_telemetry/apm
 
 {{% /tab %}}
 {{< /tabs >}}
