@@ -28,7 +28,7 @@ Ensure you're using the [Datadog Agent v7.34.0 or later][1].
 ## API reference
 
 ### `DataStreamsCheckpointer.get().setProduceCheckpoint(queueType, name, carrier)`
-- **queueType**: message system (such as `kafka`, `rabbitmq`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
+- **queueType**: message system (for example `kafka`, `rabbitmq`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
 - **name**: queue, topic, or subscription name.
 - **carrier**: an implementation of `DataStreamsContextCarrier`. This is where DSM context is **stored** with the message (typically a headers map, but could be payload fields if no headers exist).
 
@@ -120,7 +120,7 @@ private class Carrier implements DataStreamsContextCarrier {
 ## API reference
 
 ### `tracer.dataStreamsCheckpointer.setProduceCheckpoint(queueType, name, carrier)`
-- **queueType**: message system (e.g., `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
+- **queueType**: message system (for example `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
 - **name**: queue, topic, or subscription name.
 - **carrier**: writeable key/value container to **store** DSM context with the message (headers object if supported; otherwise add fields to the payload).
 
@@ -181,11 +181,11 @@ function handleMessage(msg) {
 ## API reference
 
 ### `set_produce_checkpoint(queue_type, name, setter)`
-- **queue_type**: message system (e.g., `kafka`, `rabbitmq`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
+- **queue_type**: message system (for example `kafka`, `rabbitmq`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
 - **name**: queue, topic, or subscription name.
 - **setter**: a callable `(key, value)` used to **store** DSM context in the message.
   - If headers are supported: use `headers.setdefault`.
-  - If not: use a function that writes into the message payload (e.g., JSON field).
+  - If not: use a function that writes into the message payload (like a JSON field).
 
 ### `set_consume_checkpoint(queue_type, name, getter)`
 - **queue_type**: same as producer.
@@ -243,19 +243,19 @@ def handle_message(message, properties):
 {{% tab "Ruby" %}}
 ## API reference
 
-### `set_produce_checkpoint(queue_type, name, &block)`
-- **queue_type**: the message system (e.g., `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized queue_type helps surface metrics related to that system in Data Streams, but other strings are allowed if needed.
+### `Datadog::DataStreams.set_produce_checkpoint(queue_type, name, &block)`
+- **queue_type**: the message system (for example `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized queue_type helps surface metrics related to that system in Data Streams, but other strings are allowed if needed.
 - **name**: the queue, topic, or subscription name.
-- **block**: yields `(key, pathway_context)`. Your block must *store* the DSM context with the message.
+- **block**: yields `(key, pathway_context)`. Your block must *store* the DSM context with the message, under the given key
   - If headers are supported: put it in headers.
   - If not: embed it in the payload.
+  -
 
-### `set_consume_checkpoint(queue_type, name, &block)`
+### `Datadog::DataStreams.set_consume_checkpoint(queue_type, name, &block)`
 - **queue_type**: same message system as the producer. Using a recognized queue_type helps surface metrics related to that system in Data Streams, but other strings are also allowed.
 - **name**: same queue, topic, or subscription name.
 - **block**: yields `(key)`. Your block must *retrieve* the DSM context from the message.
-  - If headers are supported: read from headers.
-  - If not: read from payload fields.
+  - Whichever method (header or message body), the message was produced with
 
 **Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
 
@@ -270,7 +270,7 @@ def publish_order(order)
   headers = {}
 
   # Mark DSM produce checkpoint before sending the message.
-  Datadog::Tracing::DataStreams.set_produce_checkpoint("rabbitmq", "orders") do |key, pathway_context|
+  Datadog::DataStreams.set_produce_checkpoint("rabbitmq", "orders") do |key, pathway_context|
     # Store DSM context in the message
     # - If headers supported: headers[key] = pathway_context
     # - If no headers: message[key] = pathway_context
@@ -285,7 +285,7 @@ end
 
 def handle_message(message)
   # Mark DSM consume checkpoint when receiving the message.
-  Datadog::Tracing::DataStreams.set_consume_checkpoint("rabbitmq", "orders") do |key|
+  Datadog::DataStreams..set_consume_checkpoint("rabbitmq", "orders") do |key|
     # Retrieve DSM context from the message
     # - If headers supported pull them from there
     # - If no headers:  parsed_message[key]
