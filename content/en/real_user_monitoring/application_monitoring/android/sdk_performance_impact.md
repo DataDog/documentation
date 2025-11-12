@@ -46,7 +46,7 @@ You can read the following [page][1] for more details about these benchmarks.
 
 Datadog has an internal infrastructure of continuous benchmarking. There is an internal set of UI tests that run on a special benchmark application for every change made to the SDK. This way Datadog is able to detect performance regression early to ensure that they are prevented from reaching production releases.
 
-You can find the source code of the benchmark app [here][2].
+See the [benchmark app source code][2].
 
 ## Further Reading
 
