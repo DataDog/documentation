@@ -19,26 +19,28 @@ Click the log icon to query logs using Datadog:
 
 {{< img src="/developers/ide_plugins/idea/logs/log-query-button.png" alt="The log query button" style="width:80%;" >}}
 
-This launches the Log Explorer with the latest log events showing.  Notice how the query has been prefilled with the environment, log status, logger name and text elements extracted from your source code:
+This launches the [Log Explorer][16] with the latest log events showing.  Notice how the query has been prefilled with the environment, log status, logger name and text elements extracted from your source code:
 
 {{< img src="/developers/ide_plugins/idea/logs/browser.png" alt="The log query button" style="width:100%;" >}}
 
-## Supported Languages & Frameworks
-The following languages and logging frameworks are supported:
+Use the full power of the Datadog platform to inspect individual logs and related traces, or modify the search query to focus on the logs that you are interested in.
 
-* Java & Kotlin : [SLF4J][1], [Log4j 2][2], [java.util.logging][3]
+## Supported Languages & Frameworks
+The Logs integration supports the following languages and logging frameworks:
+
+* Java & Kotlin : [SLF4J][1], [Log4j 2][2], [java.util.logging][3] and [Logback][17]
 * Go : [Logrus][4], [Zap][5] and the [log package][6] in the Standard Library
 * Python : [Python logging][7] and [Loguru][8]
 * JavaScript & TypeScript : [Datadog Browser Logs][9] and [Winston][10]
 * PHP : [Laravel][11], [Monolog][12], [Symfony][13] and [PSR-3][14] 
 
 ## Settings
-Right-click a log element in the source editor to open the settings for the current language, and activate or deactivate the feature.
+Right-click a log element in the source editor to open the settings (Editor → Inlay Hints) for the current language, and activate or deactivate the feature.
 
 ### Java / Kotlin
 By convention logs are usually tagged with the logger name corresponding to the fully qualified class name of the class where the logger is created.  
 
-A few Datadog customers post-process their logs data and modify the logger name tag to use only the simple class name–for these customers, there is a “Logger name” setting to inform the plugin to create Log Explorer queries that use the simple class name.
+In rare cases, customers post-process their logs data and modify the logger name tag to use only the simple class name. For these customers, there is a “Logger name” setting to inform the plugin to create Log Explorer queries using the simple class name.
 
 {{< img src="/developers/ide_plugins/idea/logs/settings-java.png" alt="Log settings - Java" style="width:100%;" >}}
 
@@ -46,7 +48,7 @@ A few Datadog customers post-process their logs data and modify the logger name 
 For these languages, there are no custom settings, only the activate/deactivate checkbox.
 
 ## Advanced Settings
-For a normal setup, the advanced settings are not required. However, a few Datadog customers have log events with a non-standard [logger name attribute][15]. You can change the “Logger name tag” setting accordingly.
+For a normal setup, the advanced settings are not required. However, a few Datadog customers have log events with a non-standard [logger name attribute][15]. You can change the “Logger name tag” setting accordingly. If you set it to blank, the logger name will not be used in log queries at all.
 
 {{< img src="/developers/ide_plugins/idea/logs/settings-advanced.png" alt="Advanced settings" style="width:100%;" >}}
 
@@ -70,3 +72,4 @@ For a normal setup, the advanced settings are not required. However, a few Datad
 [14]: https://www.php-fig.org/psr/psr-3/
 [15]: https://docs.datadoghq.com/standard-attributes/?product=log
 [16]: /logs/explorer/
+[17]: https://logback.qos.ch/
