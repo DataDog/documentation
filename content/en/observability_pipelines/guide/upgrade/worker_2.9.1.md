@@ -1,10 +1,10 @@
 ---
-title: Upgrade to Worker Version 2.09
-description: Learn more about Worker version 2.09.
+title: Upgrade to Worker Version 2.9.1
+description: Learn more about Worker version 2.9.1.
 disable_toc: false
 ---
 
-Upgrade to Worker version 2.09 to have access to the following fixes.
+Upgrade to Worker version 2.9.1 to have access to the following fixes.
 
 ## Fixes
 
