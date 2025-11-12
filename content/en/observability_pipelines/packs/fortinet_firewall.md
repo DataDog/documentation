@@ -5,6 +5,8 @@ description: Learn more about the Fortinet Firewall pack.
 
 ## Overview
 
+{{< img src="observability_pipelines/packs/fortinet_firewall.png" alt="The Fortinet Firewall pack" style="width:25%;" >}}
+
 Fortinet firewall logs record allowed, denied, and other network traffic.
 
 What this pack does:
