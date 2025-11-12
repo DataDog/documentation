@@ -81,7 +81,7 @@ datadog-ci sarif upload /tmp/report.sarif
   This example uses the x86_64 Linux version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value below. You can view all releases on the <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
 </div>
 
-<div class="alert alert-warning"> Running a Datadog Static Code Analysis job as part of your CI/CD pipeline only supports workflows triggered by direct code commits (for example, a <code>push</code> event). Other types of triggers — such as pull, merge, or review request events — are not supported and may cause unexpected behavior. </div>
+<div class="alert alert-danger"> Running a Datadog Static Code Analysis job as part of your CI/CD pipeline only supports workflows triggered by direct code commits (for example, a <code>push</code> event). Other types of triggers, such as pull, merge, or review request events are not supported and may cause unexpected behavior. </div>
 
 ## Diff-aware scanning
 
