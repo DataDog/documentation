@@ -15,7 +15,7 @@ Because Azure Container Apps is built on Kubernetes, you cannot share environmen
    - **Image source**: Docker Hub or other registries
    - **Image type**: `Public`
    - **Registry login server**: `docker.io`
-   - **Image and tag**: `datadog/serverless-init:latest`
+   - **Image and tag**: `datadog/serverless-init:<YOUR_TAG>`
    - Define your container resource allocation based on your usage.
 4. Add a volume mount using [replica-scoped storage][1001]. Use type "Ephemeral storage" when creating your volume. Ensure that the name and mount path matches the mount you configured in the application container.
 5. Set the environment variables in the following table:

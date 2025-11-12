@@ -430,6 +430,7 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
          crd_type: "eniconfig"
        labelsFromPath:
          crd_name: [metadata, name]
+       metricNamePrefix: "userPrefix"
        metrics:
          - name: "eniconfig"
            help: "ENI Config"
@@ -455,8 +456,16 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
                path: [metadata, generation]
    ```
 
+ By default, RBAC and API resource names are derived from the kind in groupVersionKind by converting it to lowercase, and adding an "s" suffix (for example, Kind: ENIConfig → eniconfigs). If the Custom Resource Definition (CRD) uses a different plural form, you can override this behavior by specifying the resource field. In the example above, CNINode overrides the default by setting resource: "cninode-pluralized".
+
+   Metric names are produced using the following rules:
+
+   a. No prefix precified: `kubernetes_state_customresource.<metrics.name>`
+
+   b. Prefix precified: `kubernetes_state_customresource.<metricNamePrefix>_<metric.name>`
+
    For more details, see [Custom Resource State Metrics][5].
-   
+
 2. Update your Helm or Datadog Operator configuration:
 
    {{< tabs >}}
@@ -482,6 +491,10 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
 
    {{% /tab %}}
    {{% tab "Datadog Operator" %}}
+
+    <div class="alert alert-info">
+      This functionality requires Agent Operator v1.20+.
+    </div>
 
    1. Install the Datadog Operator with an option that grants the Datadog Agent permission to collect custom resources:
 
@@ -514,7 +527,7 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
 
    {{% /tab %}}
    {{< /tabs >}}
-   
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
