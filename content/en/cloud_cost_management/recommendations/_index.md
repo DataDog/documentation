@@ -647,6 +647,8 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
   - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue  
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
 
+- **Bits AI Dev Agent code fixes**: Code fixes are currently available for all S3 recommendations wherein the Bits AI Dev Agent creates production-ready pull requests to quickly implement cloud resource changes and optimize cost directly in code. Set up the Bits AI Dev Agent[13] to use this feature. (In Preview)
+
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations.
 - **Dismiss**: Use "Dismiss" in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the "Dismissed" tab.
@@ -671,3 +673,4 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [10]: https://app.datadoghq.com/integrations/gcp
 [11]: /cloud_cost_management/tags/tag_pipelines/
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized
+[13]: https://docs.datadoghq.com/bits_ai/bits_ai_dev_agent/setup 
