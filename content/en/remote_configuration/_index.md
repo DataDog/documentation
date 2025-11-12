@@ -97,7 +97,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 
 ### Role-based access
 
-Enabling Remote Configuration impacts the following products. Each product defines a set of Role-Based access controls that need to be granted to their users. For general information on access management, see [Access Control][37].
+Enabling Remote Configuration impacts the following products. Each product defines a set of role-based access controls that need to be granted to their users. For general information on access management, see [Access Control][37].
 
  Remote Configuration Enabled Product | Role-Based Access Controls |
 | --- | --- |
