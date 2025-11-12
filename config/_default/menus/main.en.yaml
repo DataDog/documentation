@@ -5481,6 +5481,11 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
+    - name: Getting Started
+      url: getting_started/feature_flags
+      parent: feature_flags
+      identifier: feature_flags_getting_started
+      weight: 1
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
