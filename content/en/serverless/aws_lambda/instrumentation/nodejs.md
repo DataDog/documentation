@@ -28,7 +28,7 @@ If your application is deployed as a container image, use the _Container Image_ 
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-If [remote instrumentation][1] is enabled, you can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select **Instrument Functions**.
+You can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select **Instrument Functions**.
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
