@@ -20,7 +20,7 @@ When integrating any SDK into your iOS application, understanding its performanc
 
 To simulate the typical usage of Datadog SDK, it was integrated into the [Beam][1] application and typical user behavior (scrolling the feed, browsing subreddits) was simulated.
 
-The SDK features that were used:
+The SDK features used:
 1. Basic RUM instrumentation for tracking views, actions, and resources
 2. Logging
 3. Tracing
