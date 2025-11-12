@@ -17,7 +17,7 @@ Hover over a log element with your mouse pointer to see matching log patterns wi
 ## Log Queries
 Click the log icon to query logs using Datadog:
 
-{{< img src="/developers/ide_plugins/idea/logs/log-query-button.png" alt="The log query button" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/logs/log-query-button.png" alt="The log query button" style="width:80%;" >}}
 
 This launches the Log Explorer with the latest log events showing.  Notice how the query has been prefilled with the environment, log status, logger name and text elements extracted from your source code:
 
