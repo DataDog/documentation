@@ -18,7 +18,7 @@ When integrating any SDK into your iOS application, understanding its performanc
 
 ## Performance impact benchmarks
 
-To simulate the typical usage of Datadog SDK, it was integrated into the [Beam][3] application and typical user behavior (scrolling the feed, browsing reddits) was simulated.
+To simulate the typical usage of Datadog SDK, it was integrated into the [Beam][1] application and typical user behavior (scrolling the feed, browsing subreddits) was simulated.
 
 The SDK features that were used:
 1. Basic RUM instrumentation for tracking views, actions, and resources
