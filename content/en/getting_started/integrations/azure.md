@@ -54,7 +54,7 @@ The `Datadog Admin Role`, or any other role with the `azure_configurations_manag
 
 {{% /collapse-content %}}
 
-<div class="alert alert-danger"><a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud Cost Management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives</a> are only supported with the app registration setup method. If you set up the Datadog Azure Native integration for a US3 Datadog account, use the instructions on this page to create an app registration.
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud Cost Management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log Archives</a> require the app registration setup method. For US3 Datadog accounts using the Azure Native integration, follow the setup steps on this page to create an app registration. If a subscription is connected through both methods, a redundancy warning appears in the Azure integration tile—this can be safely ignored for cloud cost management and log archiving.
 </div>
 
 ## Setup
@@ -255,7 +255,7 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 5. Start the deployment process on the [Review + create tab][33].
 
 
-<div class="alert alert-danger"><a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log archives</a> are only supported with the app registration setup method. If you set up the Datadog Azure Native integration for a US3 Datadog account, you need to create an <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#create-an-app-registration">App registration</a> to access this functionality.
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log Archives</a> require the app registration setup method. For US3 Datadog accounts using the Azure Native integration, follow this page’s steps to [create an app registration](#setup).
 </div>
 
 See [Azure Automated Log Forwarding Architecture][34] for more details.
