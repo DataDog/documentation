@@ -20,7 +20,7 @@ Feature Flags are in Preview. Complete the form to request access.
 
 ## Overview
 
-Datadog feature flags offer a powerful, integrated way to manage feature delivery, with built-in observability and seamless integration across the platform.
+Datadog [Feature Flags][5] offer a powerful, integrated way to manage feature delivery, with built-in observability and seamless integration across the platform.
 
 * **Real-time metrics:** Understand who's receiving each variant, as well as how your flag impacts the health & performance of your application—all in real time.
 
@@ -141,3 +141,4 @@ Monitor the feature rollout from the feature flag details page, which provides r
 [2]: https://app.datadoghq.com/feature-flags/create
 [3]: https://app.datadoghq.com/feature-flags/environments
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[5]: /feature_flags/
