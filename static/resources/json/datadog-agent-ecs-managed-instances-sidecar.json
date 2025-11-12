@@ -1,6 +1,5 @@
 {
     "family": "<TASK_NAME>",
-    "networkMode": "awsvpc",
     "containerDefinitions": [
         {
             "name": "datadog-agent",
