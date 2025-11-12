@@ -105,6 +105,7 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 {{% otel-api-troubleshooting signal="metrics" %}}
 - Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Ensure you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the metric data.
 - Check your .NET version for instrument support. Support for specific metric instruments depends on your .NET runtime version. If your metrics are not appearing, ensure the instrument you are using is [supported by your version](#net-version-and-instrument-support).
+{{% /otel-api-troubleshooting %}}
 
 {{% collapse-content title=".NET version and instrument support" id="net-version-and-instrument-support" expanded=false level="h4" %}}
 
@@ -138,3 +139,4 @@ Here is the minimum version required for each instrument type:
 [1]: /opentelemetry/config/environment_variable_support
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
+[200]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent 

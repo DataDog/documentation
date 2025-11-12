@@ -144,6 +144,7 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 {{% otel-api-troubleshooting signal="logs" %}}
 - Verify `dd-trace` is initialized first. The Datadog SDK must be initialized at the top of your application, *before* any other modules are imported.
 - Verify `@opentelemetry/api-logs` is installed. The Node.js SDK requires this API package.
+{{% /otel-api-troubleshooting %}}
 
 ## Further reading
 
@@ -151,3 +152,4 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 
 [1]: /opentelemetry/config/environment_variable_support
 [2]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
+[200]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent 

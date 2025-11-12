@@ -118,9 +118,11 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 {{% otel-api-troubleshooting signal="metrics" %}}
 - Verify `opentelemetry-sdk` is installed. The Python SDK requires `opentelemetry-sdk` and `opentelemetry-exporter-otlp` to be installed in your Python environment.
 - Ensure `ddtrace-run` is active. Verify that you are running your application with `ddtrace-run` (or have imported and initialized `ddtrace` manually).
+{{% /otel-api-troubleshooting %}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/config/environment_variable_support
+[200]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent 

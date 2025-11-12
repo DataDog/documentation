@@ -77,6 +77,7 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 
 {{% otel-api-troubleshooting signal="logs" %}}
 - Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Ensure you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the log data.
+{{% /otel-api-troubleshooting %}}
 
 ## Further reading
 
@@ -86,3 +87,4 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.30.0
+[200]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent 
