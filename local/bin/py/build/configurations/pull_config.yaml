@@ -137,8 +137,6 @@
               - /agent/apm/ruby/
               - /tracing/setup_overview/setup/ruby
               - /tracing/trace_collection/ruby
-              - /tracing/trace_collection/dd_libraries/ruby/
-              - /tracing/trace_collection/dd_libraries/ruby
               - /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby
         - action: pull-and-push-file
           branch: release
