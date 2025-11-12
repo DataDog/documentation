@@ -29,7 +29,7 @@ The transition from version 2 to version 3 focuses on removing support for the l
 
 {{% tab "iOS" %}}
 
-The migration from v2 to v3 focuses on streamlining modules, refining default behaviour, and improving reliability across product features.
+The migration from v2 to v3 focuses on streamlining modules, refining default behavior, and improving reliability across product features.
 
 All SDK products (RUM, Trace, Logs, Session Replay, and so on) remain modular and separated into distinct libraries. The main change is that the `DatadogObjc` module has been removed, with its contents integrated into the corresponding product modules.
 
