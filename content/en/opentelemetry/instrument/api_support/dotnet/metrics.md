@@ -115,19 +115,17 @@ If your code compiles but no metrics are emitted, verify that your instrument is
 
 Here is the minimum version required for each instrument type:
 
-- **.NET 6+** (or `System.Diagnostics.DiagnosticSource` v6.0.0):
+- **.NET 6+** (or `System.Diagnostics.DiagnosticSource` v6.0.0) supports:
   - `Counter`
   - `Histogram`
   - `ObservableCounter`
   - `ObservableGauge`
 
-- **.NET 7+** (or `System.Diagnostics.DiagnosticSource` v7.0.0):
-  - *Adds support for:*
+- **.NET 7+** (or `System.Diagnostics.DiagnosticSource` v7.0.0) supports:
   - `UpDownCounter`
   - `ObservableUpDownCounter`
 
-- **.NET 9+** (or `System.Diagnostics.DiagnosticSource` v9.0.0):
-  - *Adds support for:*
+- **.NET 9+** (or `System.Diagnostics.DiagnosticSource` v9.0.0) supports:
   - `Gauge`
   
 {{% /collapse-content %}}
