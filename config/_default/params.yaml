@@ -277,6 +277,7 @@ unsupported_sites:
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
+  cloudprem: [gov]
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
   ddot_collector: [gov]
@@ -307,7 +308,6 @@ unsupported_sites:
   pr_gates: [gov]
   remote_config: [gov]
   remote_configuration: [gov]
-  resource_catalog: [gov]
   roku_error_tracking: [gov]
   roku_log_collection: [gov]
   rum_roku: [gov]

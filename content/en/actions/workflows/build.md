@@ -56,7 +56,7 @@ To iterate on an existing workflow:
 1. Enter a detailed prompt for the behavior you'd like to add to your workflow. Include the integrations and actions you'd like to use.
 1. Click the up arrow (**↑**) to add the functionality to your workflow.
 
-<div class="alert alert-info">The Workflow Automation AI does not answer questions about the product. If you have questions or feedback, consider joining the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack</a></div>
+<div class="alert alert-info">The Workflow Automation AI does not answer questions about the product. If you have questions or feedback, consider joining the <strong>#workflows</strong> channel on the <a href="https://chat.datadoghq.com/">Datadog Community Slack</a></div>
 
 ## Create a custom workflow
 
@@ -111,7 +111,7 @@ You can update published workflows without affecting the live version until you 
 
 Editing a published workflow creates a draft. All changes made to the draft do not alter the published workflow. Each workflow can have one active draft, which all editors can modify. When ready, click on **Publish Changes** to replace the published version.
 
-Drafts execute all configured steps like any normal workflow. You can only run drafts from the workflow editor. 
+Drafts execute all configured steps like any normal workflow. You can only run drafts from the workflow editor.
 
 To discard the draft, click the **cog icon** in the top-right corner of the editor and select **Discard draft**.
 
@@ -205,7 +205,7 @@ To perform tasks using the API, see the [Workflow Automation API documentation][
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
-[10]: https://datadoghq.slack.com/
+[10]: https://chat.datadoghq.com/
 [11]: /service_management/workflows/test_and_debug/#test-a-step
 [12]: /service_management/workflows/variables/
 [13]: /api/latest/workflow-automation/
