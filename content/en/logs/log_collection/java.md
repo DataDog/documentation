@@ -436,7 +436,7 @@ Once [log collection is enabled][5], set up [custom log collection][6] to tail y
 
 If logs are in JSON format, Datadog automatically [parses the log messages][10] to extract log attributes. Use the [Log Explorer][11] to view and troubleshoot your logs.
 
-## Agentless logging
+## Stream logs directly to the Agent
 
 In the exceptional case where your application is running on a machine that cannot be accessed or cannot log to a file, it is possible to stream logs to Datadog or to the Datadog Agent directly. This is not the recommended setup, because it requires that your application handles connection issues.
 
