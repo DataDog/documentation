@@ -664,7 +664,7 @@ opentelemetry-http = "0.31"
 
 ### Injecting context (client side)
 
-When making an HTTP request (for example, with `reqwest`), inject the current span context into the request headers using `HeaderInjector`.
+When making an HTTP request (for example, with `hyper`), inject the current span context into the request headers using `HeaderInjector`.
 
 ```rust
 use opentelemetry::{global, Context};
@@ -688,7 +688,7 @@ fn build_outbound_request(url: &str) -> http::Result<Request<Body>> {
 
 ### Extracting context (server side)
 
-When receiving an HTTP request (for example, with `axum`), extract the trace context from the headers using `HeaderExtractor` to parent your new span.
+When receiving an HTTP request (for example, with `hyper`), extract the trace context from the headers using `HeaderExtractor` to parent your new span.
 
 ```rust
 use opentelemetry::{
