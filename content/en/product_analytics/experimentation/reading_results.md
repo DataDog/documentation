@@ -21,17 +21,18 @@ After launching your experiment, you can immediately see the impact on the metri
 For each metric, you can see the average per-subject (typically user) metric value in both the control and treatment. You can also see the relative lift and the associated confidence interval. The relative lift is defined as:
 
 ```
-
                       (Average metric value per treatment subject - Average metric value per control subject)
  Relative lift =   -----------------------------------------------------------------------------------------------             
                                        (Average metric value per control subject)
 ```
 
-The confidence interval around the estimated lift show the range of lifts that could be plausibly supported by the data from the experiment; lifts outside that confidence interval are possible, but unlikely. If the entire confidence interval is above zero, then it is unlikely for the true lift to be zero, or negative: the experiment data indicates that the treatment had a positive effect on that metric (and vice versa if the entire confidence interval is below zero).
+The confidence interval around the estimated lift shows the range of lifts that could be plausibly supported by the data from the experiment. Lifts outside that confidence interval are possible, but unlikely. 
+
+`CLARIFY THIS`: If the entire confidence interval is above zero, then it is unlikely for the true lift to be zero, or negative: the experiment data indicates that the treatment had a positive effect on that metric (and vice versa if the entire confidence interval is below zero).
 
 
 ## Exploring results 
-To dive deeper into experiment results, hover over a metric and click “Chart”. This will give you the option to both view results over time and compare the experiment’s impact across different user segments.
+To dive deeper into experiment results, hover over a metric and click **Chart**. This gives you the option to view results over time and compare the experiment’s impact across different user segments.
 
 ### Time series
 The time series chart shows how the percent lift and precision have changed over the duration of the experiment. The relative lift is shown as the center line, and the confidence interval bands are shown in the lower opacity shading.
@@ -43,12 +44,13 @@ If there is not enough data to calculate the confidence of a lift, then the band
 
 
 ### Segment-level results
-You can also measure metric lift grouped by subject-level properties. Subject level properties are based on attributes at initial time of exposure: region, new vs repeat visitor, and so forth. This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
+You can also measure metric lift grouped by subject-level properties. Subject level properties are based on attributes at initial time of exposure (for example, region, new vistor vs repeat visitor etc.). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
 
 You can view segment-level results in aggregate or as a time series.
 
 <!-- [SCREENSHOT OF SEGMENT VIEW] -->
 {{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
+
 
 <!-- The following page was copied directly from [Eppo’s docs](https://docs.geteppo.com/statistics/sample-size-calculator/mde/) 
 
