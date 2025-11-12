@@ -381,7 +381,7 @@ To manage View level attributes more effectively, new APIs were added:
 The SDK now defaults to injecting trace context into going requests only when the trace is sampled in. Review your trace sampling configuration. If you need the v2 behavior where trace context is injected for all requests regardless of sampling, set `traceContextInjection` to `.all`.
 See [Connect RUM and Traces][2] for more details.
 
-We have also changed how traces are sampled. Instead of randomly deciding for each RUM Resource (based on your sample rate) whether to create a span, the SDK now makes a sampling decision at the beginning of a session to either sample all traces or none.
+Also, trace sampling is now session-based: the SDK makes a single sampling decision at the start of each session to either sample all traces or none, rather than randomly deciding for each RUM Resource (based on your sample rate) whether to create a span. This provides consistent trace coverage throughout each user session.
 
 Other notable changes:
 - All Objective-C RUM APIs are included in `DatadogRUM`. The separate `DatadogObjc` module is no longer available.
