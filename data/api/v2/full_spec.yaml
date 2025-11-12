@@ -63575,7 +63575,9 @@ paths:
         permissions:
         - user_app_keys
     get:
-      description: Get an application key owned by current user
+      description: 'Get an application key owned by current user.
+
+        The `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: GetCurrentUserApplicationKey
       parameters:
       - $ref: '#/components/parameters/ApplicationKeyID'
@@ -63609,7 +63611,9 @@ paths:
         permissions:
         - user_app_keys
     patch:
-      description: Edit an application key owned by current user
+      description: 'Edit an application key owned by current user.
+
+        The `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: UpdateCurrentUserApplicationKey
       parameters:
       - $ref: '#/components/parameters/ApplicationKeyID'

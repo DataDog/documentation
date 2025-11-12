@@ -26085,7 +26085,9 @@ paths:
         - api_keys_write
   /api/v1/application_key:
     get:
-      description: Get all application keys available for your Datadog account.
+      description: 'Get all application keys available for your Datadog account.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: ListApplicationKeys
       responses:
         '200':
@@ -26112,7 +26114,9 @@ paths:
         - org_app_keys_read
         - user_app_keys
     post:
-      description: Create an application key with a given name.
+      description: 'Create an application key with a given name.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: CreateApplicationKey
       requestBody:
         content:
@@ -26158,7 +26162,9 @@ paths:
         - user_app_keys
   /api/v1/application_key/{key}:
     delete:
-      description: Delete a given application key.
+      description: 'Delete a given application key.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: DeleteApplicationKey
       parameters:
       - description: The specific APP key you are working with.
@@ -26198,7 +26204,9 @@ paths:
         - org_app_keys_write
         - user_app_keys
     get:
-      description: Get a given application key.
+      description: 'Get a given application key.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: GetApplicationKey
       parameters:
       - description: The specific APP key you are working with.
@@ -26238,7 +26246,9 @@ paths:
         - org_app_keys_read
         - user_app_keys
     put:
-      description: Edit an application key name.
+      description: 'Edit an application key name.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: UpdateApplicationKey
       parameters:
       - description: The specific APP key you are working with.
