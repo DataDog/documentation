@@ -6,6 +6,10 @@ further_reading:
   text: "Datadog Resource Catalog Overview"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Resource Changes is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
 Resource Changes is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
 {{< /callout >}} 

@@ -7166,6 +7166,11 @@ menu:
       url: /security/code_security/secret_scanning/generic_ci_providers/
       parent: sec_secret_scanning
       weight: 2
+    - name: Secret Validation
+      identifier: sec_secret_scanning_secret_validation
+      url: /security/code_security/secret_scanning/secret_validation/
+      parent: sec_secret_scanning
+      weight: 3
     - name: Runtime Code Analysis (IAST)
       identifier: sec_iast
       url: /security/code_security/iast/
