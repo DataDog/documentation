@@ -21,7 +21,9 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 
 ## Set up GPU Monitoring on a uniform cluster or non-Kubernetes environment
 
-The following instructions are the basic steps to set up GPU Monitoring, either in a Kubernetes cluster where all the nodes have GPU devices, or in a non-Kubernetes environment such as Docker or non-containerized Linux.
+The following instructions are the basic steps to set up GPU Monitoring in the following environments:
+- In a Kubernetes cluster where **all** the nodes have GPU devices
+- In a non-Kubernetes environment, such as Docker or non-containerized Linux.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -150,6 +152,8 @@ gcr.io/datadoghq/agent:latest
 ```
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 {{% tab "Docker Compose" %}}
