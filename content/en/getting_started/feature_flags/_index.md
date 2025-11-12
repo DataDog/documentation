@@ -46,7 +46,6 @@ First, install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@ope
 ```
 yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk @openfeature/core
 ```
-
 Then, add the following to your project to initialize the SDK:
 
 ```js
@@ -58,7 +57,7 @@ const provider = new DatadogProvider({
    clientToken: '<CLIENT_TOKEN>',
    applicationId: '<APPLICATION_ID>',
    enableExposureLogging: true, // Can impact RUM costs if enabled
-   site: 'datadoghq.com',
+   site: '{{< region-param key="dd_site" >}}',
    env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
    service: '<SERVICE_NAME>',
    version: '1.0.0',
