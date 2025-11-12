@@ -197,7 +197,7 @@ Below is an example of a UDS setup:
 
 #### Logs
 
-The setup for log collection is identical to ECS fargate. Follow the instructions outlined in the [ECS Fargate documentation][14] to set up log collection with the AWS FireLens integration built on Datadog’s Fluent Bit output plugin or the awslogs log driver to store the logs in a CloudWatch Log Group, and then a Lambda function to route logs to Datadog
+The setup for log collection is identical to ECS fargate. Follow the instructions outlined in the [ECS Fargate documentation][14] to set up log collection with the AWS FireLens integration built on Datadog's Fluent Bit output plugin or the awslogs log driver to store the logs in a CloudWatch Log Group, and then a Lambda function to route logs to Datadog
 
 #### Process collection
 
