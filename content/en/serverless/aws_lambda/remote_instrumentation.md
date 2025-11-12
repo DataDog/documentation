@@ -26,6 +26,7 @@ The instrumenter must be deployed to every region and account where you want to 
 
 ## Setup
 
+### Installation
 1. On the [Serverless > AWS Lambda][3] page, select **Instrument Functions**.
 
 1. On the **Select AWS Region and Launch CloudFormation** modal:
@@ -44,6 +45,18 @@ The instrumenter must be deployed to every region and account where you want to 
    After you finish your selections, click **Enable Remote Instrumentation**.
 
 1. Confirm your function selections. You can also set layer versions and toggle logging and tracing. These settings are used for all future instrumentation and remain fixed until you manually update them. Updates can take a few minutes to be applied.
+
+### Upgrade to a new version
+1. Find the [datadog-remote-instrument (if you didn't rename it)][5] CloudFormation stack.
+2. Find the current version of the stack template in the "Template" tab. 
+   ```yaml
+   Mappings:
+     Constants:
+      DdRemoteInstrumentApp:
+        Version: <TEMPLATE_VERSION>
+   ```
+   Note down the value of the template version, such as `1.10.0`, in case you run into issues with the new version and need to roll back.
+3. Update the stack using template URL `https://datadog-cloudformation-template.s3.amazonaws.com/aws/remote-instrument/latest.yaml`. You can also replace `latest` with a specific version, such as `1.10.0`, if needed. Check the [releases page][6] for new features and fixes. Make sure to review the changesets before applying the update. 
 
 ## Skipped functions
 Functions that have pre-existing Datadog layers or environment variables are considered manually instrumented. Manually instrumented functions are marked `manual` and skipped by the remote instrumenter to ensure there are no layer conflicts.
@@ -71,3 +84,5 @@ If you see issues related to IAM roles, ensure that you have permission to creat
 [2]: https://app.datadoghq.com/integrations/amazon-web-services?panel=resource-collection
 [3]: https://app.datadoghq.com/functions?cloud=aws
 [4]: /agent/remote_config/?tab=configurationyamlfile#setup
+[5]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=datadog-remote-instrument
+[6]: https://github.com/DataDog/serverless-remote-instrumentation/releases
