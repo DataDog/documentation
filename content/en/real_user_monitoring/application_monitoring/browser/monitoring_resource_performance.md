@@ -72,15 +72,11 @@ datadogRum.init({
         {
             match: "https://api.example.com/graphql",
             trackPayload: true,          // Include GraphQL query (limited to 32 KB)
-            trackResponseErrors: true
+            trackResponseErrors: true    // Capture GraphQL errors from responses
         }
     ]
 })
 ```
-
-**Note**: Enabling `trackResponseErrors` collects response bodies for matching requests, which may impact bandwidth usage.
-
-### Collected data
 
 For matching requests, the SDK automatically extracts:
 - **Operation type**: `query`, `mutation`, or `subscription`
@@ -88,6 +84,8 @@ For matching requests, the SDK automatically extracts:
 - **Variables**: JSON-stringified variables sent with the request
 - **Payload** (if `trackPayload: true`): The GraphQL query, truncated to 32 KB
 - **Errors** (if `trackResponseErrors: true`): Error details including `message`, `code`, `locations`, and `path`
+
+**Note**: You can modify GraphQL variables in the [`beforeSend` callback][9] if needed (for example, to redact sensitive data).
 
 See [GraphQL attributes][8] for the full list of collected attributes.
 
@@ -154,3 +152,4 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [8]: /real_user_monitoring/application_monitoring/browser/data_collected/#graphql-attributes
+[9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
