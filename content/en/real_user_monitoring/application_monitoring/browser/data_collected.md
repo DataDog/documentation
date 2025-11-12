@@ -151,7 +151,7 @@ For GraphQL requests configured in `allowedGraphQlUrls`, additional metadata is 
 |---------------------------------|--------|------------------------------------------------------------------------------------------------------|
 | `resource.graphql.operation_type` | string | The GraphQL operation type: `query`, `mutation`, or `subscription`.                                  |
 | `resource.graphql.operation_name` | string | The GraphQL operation name, if provided in the request.                                              |
-| `resource.graphql.variables`      | string | JSON-stringified GraphQL variables sent with the request.                                            |
+| `resource.graphql.variables`      | string | The GraphQL variables sent with the request.                                            |
 | `resource.graphql.payload`        | string | The GraphQL query (limited to 32 KB, available only if `trackPayload` is enabled).                   |
 | `resource.graphql.errors_count`   | number | Number of errors returned in the GraphQL response (available only if `trackResponseErrors` is enabled). |
 | `resource.graphql.errors`         | array  | Array of GraphQL errors with `message`, `code`, `locations`, and `path` (available only if `trackResponseErrors` is enabled). |
