@@ -47,6 +47,6 @@ You can find the source code of the benchmark app [here][2].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/sdk_performance.md
+[1]: https://github.com/awkward/beam
 [4]: https://github.com/DataDog/dd-sdk-ios/tree/develop/BenchmarkTests
 [3]: https://github.com/awkward/beam
