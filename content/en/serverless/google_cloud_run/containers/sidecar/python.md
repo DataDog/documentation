@@ -37,6 +37,8 @@ CMD ["ddtrace-run", "python", "app.py"]
 
 2. **Install serverless-init as a sidecar**.
 
+   {{% serverless-init-install mode="sidecar" %}}
+
    {{< tabs >}}
 
    {{% tab "Datadog CLI" %}}

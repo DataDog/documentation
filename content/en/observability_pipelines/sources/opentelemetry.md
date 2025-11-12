@@ -32,15 +32,7 @@ Optionally, toggle the switch to enable TLS. If you enable TLS, the following ce
 
 {{< img src="observability_pipelines/sources/otel_env_vars.png" alt="The install page showing the OpenTelemetry environment variable field" style="width:75%;" >}}
 
-You must provide both HTTP and gRPC endpoints. Configure your OTLP exporters to point to one of these endpoints. See [Send logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker) for more information.
-
-- HTTP listener address
-	- The Observability Pipelines Worker listens to this socket address to receive logs from the OTel collector.
-    - Stored as the environment variable `DD_OP_SOURCE_OTEL_HTTP_ADDRESS`.
-
-- gRPC listener address
-	- The Observability Pipelines Worker listens to this socket address to receive logs from the OTel collector.
-    - Stored as the environment variable `DD_OP_SOURCE_OTEL_GRPC_ADDRESS`.
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
 
 ## Send logs to the Observability Pipelines Worker
 
