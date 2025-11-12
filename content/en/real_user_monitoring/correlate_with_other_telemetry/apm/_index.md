@@ -206,7 +206,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 **Note**:
 * `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 * If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
-* The default sample rate for the `traceSampler` was 20% in the Android SDK versions 1.x and 2.x, and got increased to 100% with the Android SDK version 3.0.0.
+* The default sample rate for the `traceSampler` was 20% in the Android SDK versions 1.x and 2.x, and was increased to 100% with the Android SDK version 3.0.0.
 * The default for the `traceContextInjection` was `ALL` in the Android SDK versions 1.x and 2.x, and got changed to `SAMPLED` with the Android SDK version 3.0.0.
 
 [1]: /real_user_monitoring/android/
