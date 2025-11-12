@@ -16,10 +16,6 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 
 ## Slack
 
-To use Incident Management's Slack features, you must first [install the Slack integration for Datadog][3].
-
-Then, go to **[Service Management > Incidents > Settings > Integrations][2]** to configure the Slack features for Incident Management.
-
 For a full overview of Slack configuration options in Datadog Incident Management, including incident declaration, channel automation, message syncing, responder management, and notification settings, see the [Slack integration documentation][4].
 
 ## Microsoft Teams
