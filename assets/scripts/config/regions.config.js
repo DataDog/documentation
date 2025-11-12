@@ -561,5 +561,32 @@ export default {
     ap1: '720 hours (30 days)',
     ap2: '720 hours (30 days)',
     gov: '12 hours'
+  },
+  jenkins_site_name: {
+    us: 'US1',
+    us3: 'US3',
+    us5: 'US5',
+    eu: 'EU1',
+    ap1: 'AP1',
+    ap2: 'AP2',
+    gov: 'US1_FED'
+  },
+  synthetics_tunnel_endpoint: {
+    us: 'tunnel-us1.synthetics.datadoghq.com',
+    us3: 'tunnel-us3.synthetics.datadoghq.com',
+    us5: 'tunnel-us5.synthetics.datadoghq.com',
+    eu: 'tunnel-eu1.synthetics.datadoghq.com',
+    ap1: 'tunnel-ap1.synthetics.datadoghq.com',
+    ap2: 'tunnel-ap2.synthetics.datadoghq.com',
+    gov: 'N/A'
+  },
+  dogwrap_site_flag: {
+    us: '',
+    us3: ' -s us3',
+    us5: ' -s us5',
+    eu: ' -s eu',
+    ap1: '',
+    ap2: '',
+    gov: ''
   }
 };

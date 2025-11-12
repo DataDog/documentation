@@ -808,9 +808,6 @@ ORDER BY value DESC;{{< /code-block >}}
 </table>
 
 
-
-
-
 ## Tags
 
 DDSQL exposes tags as an `hstore` type, which is inspired by PostgreSQL. You can access the values for specific tag keys using the PostgreSQL arrow operator. For example:
@@ -839,6 +836,21 @@ SELECT *
 FROM k8s.daemonsets da INNER JOIN k8s.deployments de
 ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 ```
+
+Additionally, you can extract tag keys and values into individual arrays of text:
+
+```sql
+SELECT akeys(tags), avals(tags)
+FROM aws.ec2_instance
+```
+
+### HSTORE functions and operators
+
+| Name                                          | Return type   | Description                                                                                      |
+|-----------------------------------------------|---------------|---------------------------------------------------------------------------------------------------
+| tags -> 'text'                                  | Text          | Gets the value for a given key. Returns `null` if key is not present.                             |
+| akeys(hstore tags)                            | Array of text | Gets the keys of an HSTORE as an array                                                            |
+| avals(hstore tags)                            | Array of text | Gets the values of an HSTORE as an array                                                          |
 
 ## Further reading
 

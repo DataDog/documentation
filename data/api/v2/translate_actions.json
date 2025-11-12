@@ -851,11 +851,11 @@
     "summary": "Delete an application key owned by current user"
   },
   "GetCurrentUserApplicationKey": {
-    "description": "Get an application key owned by current user",
+    "description": "Get an application key owned by current user.\nThe `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Get one application key owned by current user"
   },
   "UpdateCurrentUserApplicationKey": {
-    "description": "Edit an application key owned by current user",
+    "description": "Edit an application key owned by current user.\nThe `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Edit an application key owned by current user",
     "request_description": "",
     "request_schema_description": "Request used to update an application key."
