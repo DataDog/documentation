@@ -38,6 +38,8 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
 2. **Install serverless-init as a sidecar**.
 
+   {{% serverless-init-install mode="sidecar" %}}
+
    {{< tabs >}}
 
    {{% tab "Terraform" %}}
