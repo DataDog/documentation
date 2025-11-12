@@ -56,8 +56,8 @@ This ECS task definition launches the Datadog Agent container with the necessary
 
 #### Register the task definition
 
-<!-- xxx tabs xxx -->
-<!-- xxx tab "Web UI" xxx -->
+{{< tabs >}}
+{{% tab "Web UI" %}}
 ##### Web UI
 
 After you have your task definition file, use the AWS Console to register the file.
@@ -66,24 +66,24 @@ After you have your task definition file, use the AWS Console to register the fi
 3. In the JSON editor box, paste the contents of your task definition file.
 4. Select **Create**.
 
-<!-- xxz tab xxx -->
+{{% /tab %}}
+{{% tab "AWS CLI" %}}
 
-<!-- xxx tab "AWS CLI" xxx -->
 ##### AWS CLI
 After you have created your task definition file, execute the following command to register the file in AWS.
 
 ```bash
 aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs-managed-instances-sidecar.json>
 ```
-<!-- xxz tab xxx -->
-<!-- xxz tabs xxx -->
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Run the task as a replica service
 
 As ECS Managed Instances does not support daemon scheduling yet, run the task as a [Replica Service][8].
 
-<!-- xxx tabs xxx -->
-<!-- xxx tab "Web UI" xxx -->
+{{< tabs >}}
+{{% tab "Web UI" %}}
 
 ##### Web UI Replica Service
 
@@ -98,9 +98,9 @@ As ECS Managed Instances does not support daemon scheduling yet, run the task as
 9. Click the **Next step** button.
 10. Click the **Next step** button, then click the **Create service** button.
 
-<!-- xxz tab xxx -->
+{{% /tab %}}
+{{% tab "AWS CLI" %}}
 
-<!-- xxx tab "AWS CLI" xxx -->
 ##### AWS CLI Replica Service
 
 Run the following commands using the [AWS CLI tools][11].
@@ -115,8 +115,8 @@ aws ecs create-service --cluster <CLUSTER_NAME> \
 --network-configuration "awsvpcConfiguration={subnets=[subnet-abcd1234],securityGroups=[sg-abcd1234]}"
 ```
 
-<!-- xxz tab xxx -->
-<!-- xxz tabs xxx -->
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Set up additional Agent features
 
@@ -126,19 +126,19 @@ Instrument your application based on your setup:
 
 | Language                           |
 |------------------------------------|
-| [Java][47] |
-| [Python][48] |
-| [Ruby][49] |
-| [Go][50] |
-| [Node.js][51] |
-| [PHP][52] |
-| [C++][53] |
-| [.NET Core][54] |
-| [.NET Framework][55] |
+| [Java][17] |
+| [Python][18] |
+| [Ruby][19] |
+| [Go][20] |
+| [Node.js][21] |
+| [PHP][22] |
+| [C++][23] |
+| [.NET Core][24] |
+| [.NET Framework][25] |
 
 ##### UDP
 
-To collect traces over UDP, do not set DD_AGENT_HOST - the default of localhost works.
+To collect traces over UDP, do not set `DD_AGENT_HOST` - the default of `localhost` works.
 
 ##### UDS
 
@@ -211,7 +211,7 @@ text
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-managed-instances.html
 [2]: #create-an-ecs-task-definition
-[3]: #run-task-replica-service
+[3]: #run-the-task-as-a-replica-service
 [4]: https://aws.amazon.com/console
 [5]: /organization-settings/api-keys
 [6]: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
@@ -225,3 +225,12 @@ text
 [14]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=awscli#log-collection
 [15]: /process
 [16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
+[17]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/java?tab=containers#automatic-instrumentation
+[18]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/python?tab=containers#instrument-your-application
+[19]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[20]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/go/?tab=containers#activate-go-integrations-to-create-spans
+[21]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/nodejs?tab=containers#instrument-your-application
+[22]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers#automatic-instrumentation
+[23]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/cpp?tab=containers#instrument-your-application
+[24]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
+[25]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-framework?tab=containers#custom-instrumentation
