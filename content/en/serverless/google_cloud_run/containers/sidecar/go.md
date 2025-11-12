@@ -43,6 +43,8 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 2. **Install serverless-init as a sidecar**.
 
+   {{% serverless-init-install mode="sidecar" %}}
+
    {{< tabs >}}
 
    {{% tab "Datadog CLI" %}}
@@ -92,11 +94,11 @@ logrus.WithContext(ctx).Info("Hello World!")
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="go" %}}
+{{% serverless-init-env-vars-sidecar language="go" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting sidecar="true" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 

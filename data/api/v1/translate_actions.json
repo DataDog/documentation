@@ -28,25 +28,25 @@
     "request_schema_description": "Datadog API key."
   },
   "ListApplicationKeys": {
-    "description": "Get all application keys available for your Datadog account.",
+    "description": "Get all application keys available for your Datadog account.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Get all application keys"
   },
   "CreateApplicationKey": {
-    "description": "Create an application key with a given name.",
+    "description": "Create an application key with a given name.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Create an application key",
     "request_description": "",
     "request_schema_description": "An application key with its associated metadata."
   },
   "DeleteApplicationKey": {
-    "description": "Delete a given application key.",
+    "description": "Delete a given application key.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Delete an application key"
   },
   "GetApplicationKey": {
-    "description": "Get a given application key.",
+    "description": "Get a given application key.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Get an application key"
   },
   "UpdateApplicationKey": {
-    "description": "Edit an application key name.",
+    "description": "Edit an application key name.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Edit an application key",
     "request_description": "",
     "request_schema_description": "An application key with its associated metadata."
@@ -726,7 +726,7 @@
     "summary": "Query timeseries points"
   },
   "ListMetrics": {
-    "description": "Search for metrics from the last 24 hours in Datadog.",
+    "description": "**Note**: This endpoint is deprecated. Use `/api/v2/metrics` instead.\n\nSearch for metrics from the last 24 hours in Datadog.",
     "summary": "Search metrics"
   },
   "AddSecurityMonitoringSignalToIncident": {

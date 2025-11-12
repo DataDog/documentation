@@ -19,7 +19,7 @@ attributes:
        - **Errors**: 15 days
        - **Indexed spans**: 15 or 30 days, determined by customer plan
        - **Services/resources statistics**: 30 days
-       - **Viewed traces**: 15 months
+       - **Viewed traces**: Retained for the duration of the account
   - product: App and API Protection
     data_type: |
        - **Security signals**: 15 months
@@ -28,6 +28,9 @@ attributes:
     data_type: |
        - **Audit logs (Audit Trail enabled)**: 90 days
        - **Audit logs (Audit Trail disabled)**: 7 days
+  - product: Bits AI Dev Agent
+    data_type: |
+       - **Source Code**: 7 days
   - product: Browser RUM
     data_type: |
        - **Session, View, Action, and Error Events**: 30 days
