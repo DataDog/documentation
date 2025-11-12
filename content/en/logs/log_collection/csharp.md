@@ -494,58 +494,6 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
-{{< site-region region="us" >}}
-
-You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
-
-For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
-
-```csharp
-var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs(
-        "<API_KEY>",
-        source: "<SOURCE_NAME>",
-        service: "<SERVICE_NAME>",
-        host: "<HOST_NAME>",
-        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
-        configuration: config
-    )
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
-
-For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
-
-```csharp
-var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs(
-        "<API_KEY>",
-        source: "<SOURCE_NAME>",
-        service: "<SERVICE_NAME>",
-        host: "<HOST_NAME>",
-        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
-        configuration: config
-    )
-    .CreateLogger())
-{
-    // Some code
-}
-```
-[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-
-{{< /site-region >}}
-
 New logs are now directly sent to Datadog.
 
 ## Further Reading

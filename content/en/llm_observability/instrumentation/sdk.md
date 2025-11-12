@@ -1834,9 +1834,7 @@ function ragWorkflow(userQuestion) {
 {{< /tabs >}}
 
 ## Prompt tracking
-{{< callout url="#" btn_hidden="true" >}}
-  Prompt Tracking for LLM Observability is in Preview. For access, <a href="/help">contact Datadog Support</a>.
-{{< /callout >}}
+
 Attach structured prompt metadata to the LLM span so you can reproduce results, audit changes, and compare prompt performance across versions. When using templates, LLM Observability also provides [version tracking](#version-tracking) based on template content changes.
 
 {{< tabs >}}
@@ -2081,7 +2079,7 @@ def llm_call():
     return completion
 {{< /code-block >}}
 
-[1]: https://app.datadoghq.com/llm/settings/evaluations
+[1]: https://app.datadoghq.com/llm/evaluations
 
 {{% /tab %}}
 
