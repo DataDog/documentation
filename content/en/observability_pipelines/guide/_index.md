@@ -12,6 +12,13 @@ aliases:
     {{< nextlink href="observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax" >}}Upgrade Your Filter Queries to the New Search Syntax{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Worker Upgrade Guides" >}}
+   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.11" >}}Upgrade to Worker 2.11{{< /nextlink >}}
+   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.10" >}}Upgrade to Worker 2.10{{< /nextlink >}}
+   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.9.1" >}}Upgrade to Worker 2.9.1{{< /nextlink >}}
+   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.9.0" >}}Upgrade to Worker 2.9.0{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Processor guides:" >}}
     {{< nextlink href="observability_pipelines/guide/get_started_with_the_custom_processor" >}}Get started with the Custom Processor{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/guide/remap_reserved_attributes" >}}Remap reserved attributes{{< /nextlink >}}
