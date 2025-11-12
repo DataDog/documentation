@@ -50,17 +50,15 @@ datadogRum.init({
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     site: 'datadoghq.com',
     allowedGraphQlUrls: [
+        // String: matches any URL starting with the value
         "https://api.example.com/graphql",
+        // RegExp: tests against the full URL
         /\/graphql$/,
+        // Function: evaluates with the URL as parameter, returning true for a match
         (url) => url.includes("graphql")
     ]
 })
 ```
-
-`allowedGraphQlUrls` accepts the same types as `allowedTracingUrls`:
-- `string`: Matches any URL starting with the value
-- `RegExp`: Tests against the full URL
-- `function`: Evaluates with the URL as parameter, returning `true` for a match
 
 ### Advanced options
 
@@ -78,16 +76,9 @@ datadogRum.init({
 })
 ```
 
-For matching requests, the SDK automatically extracts:
-- **Operation type**: `query`, `mutation`, or `subscription`
-- **Operation name**: The operation name if provided
-- **Variables**: JSON-stringified variables sent with the request
-- **Payload** (if `trackPayload: true`): The GraphQL query, truncated to 32 KB
-- **Errors** (if `trackResponseErrors: true`): Error details including `message`, `code`, `locations`, and `path`
+For matching requests, the SDK automatically extracts operation type, operation name, variables, and optionally the GraphQL query payload and response errors. See [GraphQL attributes][8] for the complete list of collected attributes.
 
 **Note**: You can modify GraphQL variables in the [`beforeSend` callback][9] if needed (for example, to redact sensitive data).
-
-See [GraphQL attributes][8] for the full list of collected attributes.
 
 ## Resource attributes
 
