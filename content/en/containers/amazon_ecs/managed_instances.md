@@ -201,7 +201,7 @@ The setup for log collection is identical to ECS fargate. Follow the instruction
 
 #### Process collection
 
-You can monitor processes in ECS Fargate in Datadog by using the [Live Processes page][15]. To enable process collection, add the [`PidMode` parameter][16] in the Task Definition and set it to `task` as follows:
+You can monitor processes in ECS Managed Instances in Datadog by using the [Live Processes page][15]. To enable process collection, add the [`PidMode` parameter][16] in the Task Definition and set it to `task` as follows:
 
 ```
 text
