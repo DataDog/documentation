@@ -49,4 +49,4 @@ You can find the source code of the benchmark app [here][2].
 
 [1]: https://github.com/awkward/beam
 [2]: https://github.com/DataDog/dd-sdk-ios/blob/develop/docs/sdk_performance.md
-[3]: https://github.com/awkward/beam
+[3]: https://github.com/DataDog/dd-sdk-ios/tree/develop/BenchmarkTests
