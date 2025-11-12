@@ -16,10 +16,11 @@ further_reading:
 
 Amazon ECS Managed Instances is a compute option for Amazon ECS that combines the flexibility of using Amazon EC2 instances with the ease of a fully managed service. AWS handles the management of the underlying EC2 infrastructure, including provisioning, scaling, patching, and maintenance, while you retain control over specific EC2 instance types, such as those with GPUs or high network performance.
 
-To configure Amazon ECS Managed Instances with Datadog, add the Datadog agent as a sidecar alongside your application containers as described below. Note that this setup is only supported on **Agent version >= 7.73.0**.
+To configure Amazon ECS Managed Instances with Datadog, add the Datadog agent as a sidecar alongside your application containers as described below.
+**Note:** this setup is only supported on **Agent version >= 7.73.0**.
 
 <div class="alert alert-info">
-Amazon ECS Managed Instances does not currently support daemon scheduling. In order to monitor every task in the cluster, the agent needs to be added alongside each task as a sidecar.
+Amazon ECS Managed Instances does not support daemon scheduling. In order to monitor every task in the cluster, the agent needs to be added alongside each task as a sidecar.
 </div>
 
 ## Setup
@@ -53,7 +54,7 @@ This ECS task definition launches the Datadog Agent container with the necessary
     }
     ```
 
-#### Register the Task Definition
+#### Register the task definition
 
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Web UI" xxx -->
@@ -109,7 +110,7 @@ Run the task as a service for your cluster:
 ```bash
 aws ecs create-service --cluster <CLUSTER_NAME> \
 --service-name <SERVICE_NAME> \
---task-definition <TASK_DEFINITION_ARN" \
+--task-definition <TASK_DEFINITION_ARN> \
 --desired-count 1 \
 --network-configuration "awsvpcConfiguration={subnets=[subnet-abcd1234],securityGroups=[sg-abcd1234]}"
 ```
@@ -198,7 +199,7 @@ Below is an example of a UDS setup:
 
 The setup for log collection is identical to ECS fargate. Follow the instructions outlined in the [ECS Fargate documentation][14] to set up log collection with the AWS FireLens integration built on Datadog’s Fluent Bit output plugin or the awslogs log driver to store the logs in a CloudWatch Log Group, and then a Lambda function to route logs to Datadog
 
-#### Process Collection
+#### Process collection
 
 You can monitor processes in ECS Fargate in Datadog by using the [Live Processes page][15]. To enable process collection, add the [`PidMode` parameter][16] in the Task Definition and set it to `task` as follows:
 
