@@ -11,24 +11,37 @@ cascade:
 
 {{< img src="observability_pipelines/packs/packs.png" alt="The packs section of Observability Pipelines" style="width:100%;" >}}
 
-When you set up a pipeline to send logs from a specific source to Observability Pipelines, you might have questions such as:
+When setting up a pipeline to send logs from a specific source to **Observability Pipelines**, you often need to decide how to process and manage those logs.  
+Questions such as the following may come up:  
+- Which logs from this source are important?  
+- Which logs can safely be dropped?  
+- Should repetitive logs be sampled?  
+- Which fields should be parsed or formatted for the destination?  
 
-- Which logs from this source are important?
-- Which logs from this source should be dropped?
-- Which logs should be retained?
-- Should logs be sampled?
-- Should quotas be added?
+Making these decisions typically requires coordination across multiple teams and detailed knowledge of each log source.
 
-Often, you need to consult with different teams to answer these questions.
+**Observability Pipelines Packs** provide predefined configurations to help you make these decisions quickly and consistently. Packs apply Datadog-recommended best practices for specific log sources such as **Palo Alto Firewall, Cloudflare, Akamai, Zscaler, AWS CloudTrail, and Fastly**.
 
-Use Observability Pipelines Packs to help you set up and optimize Observability Pipelines without extensive manual configuration. Packs contain predefined configurations that are specific to a source and identify:
+### What Packs do
 
-- Log fields that can safely be removed
-- Logs that can be dropped, such as duplicated logs
-- Logs that need to be parsed
-- Logs that need to be formatted for the destination
+Each Pack includes source-specific configuration that defines:
 
-## Packs
+- **Fields that can safely be removed** to reduce payload size  
+- **Logs that can be dropped**, such as duplicate events or health checks  
+- **Logs that should be retained or parsed**, such as errors or security detections  
+- **Formatting and normalization rules** to align logs across different destinations and environments
+
+By using Packs, you can apply consistent parsing, filtering, and routing logic for each log source without creating configurations manually.
+
+### Why use Packs 
+
+Packs help teams:
+
+- **Reduce ingestion volume and costs** by filtering or sampling repetitive, low-value events  
+- **Maintain consistency** in parsing and field mapping across environments and destinations  
+- **Accelerate setup** by applying ready-to-use configurations for common sources  
+
+## Packs  
 
 These packs are available:
 
