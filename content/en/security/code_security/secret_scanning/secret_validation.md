@@ -6,7 +6,7 @@ algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST', 'secret scanning']
 ---
 ## About validity checks
-For certain detections (see the list below), Datadog checks whether a detected secret is valid during scans. For these live validation checks, Datadog makes `GET` requests to provider endpoints to confirm that a credential is active. Datadog only makes requests to endpoints that do not return sensitive data or personally identifiable information (PII), and only to verify if the credential can still access the provider endpoint.
+For certain detections (see the list below), Datadog checks whether a detected secret is valid during scans. For these live validation checks, Datadog makes API requests to provider endpoints to confirm that a credential is active. Datadog only makes requests to endpoints that do not return sensitive data or personally identifiable information (PII), and only to verify if the credential can still access the provider endpoint.
 
 For secret types with validation available, Datadog displays the validation status in the explorer as "Active" or "Inactive". You can also filter or query detections by their Validation Status.
 
