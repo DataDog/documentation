@@ -208,6 +208,14 @@ text
 "pidMode": "task"
 ```
 
+## Troubleshooting
+
+Need help? Contact [Datadog support][26].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-managed-instances.html
 [2]: #create-an-ecs-task-definition
@@ -234,3 +242,4 @@ text
 [23]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/cpp?tab=containers#instrument-your-application
 [24]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
 [25]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-framework?tab=containers#custom-instrumentation
+[26]: https://docs.datadoghq.com/help/
