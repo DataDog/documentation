@@ -104,7 +104,7 @@ use opentelemetry::{global, trace::Tracer};
 fn do_work() {
     let tracer = global::tracer("my-component");
     
-    tracer.in_span("operation_name", |span| {
+    tracer.in_span("operation_name", |cx| {
         // The span is active within this closure
         println!("Doing work...");
         
@@ -146,7 +146,7 @@ use opentelemetry::trace::{Span, Tracer};
 fn do_work_with_active_span() {
     let tracer = opentelemetry::global::tracer("my-component");
 
-    tracer.in_span("my-operation", |span| {
+    tracer.in_span("my-operation", |cx| {
         // 'span' is the active span here.
         // You can also get it from the context at any point
         // inside this closure:
@@ -171,7 +171,7 @@ use opentelemetry::KeyValue;
 fn add_tags_to_span() {
     let tracer = opentelemetry::global::tracer("my-component");
 
-    tracer.in_span("operation.with.tags", |span| {
+    tracer.in_span("operation.with.tags", |cx| {
         // Set attributes (tags) on the active span
         span.set_attribute(KeyValue::new("customer.id", "12345"));
         span.set_attribute(KeyValue::new("http.method", "GET"));
@@ -198,7 +198,7 @@ use opentelemetry::KeyValue;
 fn add_events_to_span() {
     let tracer = opentelemetry::global::tracer("my-component");
 
-    tracer.in_span("operation.with.events", |span| {
+    tracer.in_span("operation.with.events", |cx| {
         // Add a simple event
         span.add_event("Data received", vec![]);
 
