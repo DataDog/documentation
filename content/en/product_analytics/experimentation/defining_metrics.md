@@ -37,11 +37,25 @@ After you’ve selected your event of interest, you can specify an aggregation m
 
 All metrics are normalized by the number of enrolled subjects. That is, a **count of unique users** metric is computed as: 
 
-{{< img src="/product_analytics/experiment/pana_exp_equation1.png" alt="A view of the User profiles page." style="width:50%;border:none" >}}
+```
+
+                             Number of users with specified event
+Count of unique users = -----------------------------------------------           
+                          Number of users enrolled into this variant
+```
+
+<!-- {{< img src="/product_analytics/experiment/pana_exp_equation1.png" alt="A view of the User profiles page." style="width:50%;border:none" >}} -->
 
 Similarly, a **Sum of** metric is computed as: 
 
-{{< img src="/product_analytics/experiment/pana_exp_equation2.png" alt="A view of the User profiles page." style="width:60%;border:none" >}}
+<!-- {{< img src="/product_analytics/experiment/pana_exp_equation2.png" alt="A view of the User profiles page." style="width:60%;border:none" >}} -->
+
+```
+
+            Sum of property over users enrolled in this variant
+Sum of =  --------------------------------------------------------           
+                Number of users enrolled into this variant
+```
 
 ### Custom normalized metrics
 

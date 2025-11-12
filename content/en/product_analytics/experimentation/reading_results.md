@@ -12,18 +12,19 @@ further_reading:
 
 ## Overview 
 
-Once you’ve launched your experiment, you can immediately see the impact on the metrics you’ve selected. You can also add more metrics to your experiment, organize metrics into groups, and view related sessions:
+After launching your experiment, you can immediately see the impact on the metrics you’ve selected. You can also add more metrics to your experiment, organize metrics into groups, and view related sessions.
 
 {{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
 
 
 ## Confidence intervals
-For each metric you’ll see the average per-subject (typically user) metric value in both control and treatment. You’ll also see the relative lift and the associated confidence interval. The relative lift is defined as:
+For each metric, you can see the average per-subject (typically user) metric value in both the control and treatment. You can also see the relative lift and the associated confidence interval. The relative lift is defined as:
 
 ```
-Relative lift = 
-(average metric value per treatment subject - average metric value per control subject)/
-(average metric value per control subject)
+
+                      (Average metric value per treatment subject - Average metric value per control subject)
+ Relative lift =   -----------------------------------------------------------------------------------------------             
+                                       (Average metric value per control subject)
 ```
 
 The confidence interval around the estimated lift show the range of lifts that could be plausibly supported by the data from the experiment; lifts outside that confidence interval are possible, but unlikely. If the entire confidence interval is above zero, then it is unlikely for the true lift to be zero, or negative: the experiment data indicates that the treatment had a positive effect on that metric (and vice versa if the entire confidence interval is below zero).
