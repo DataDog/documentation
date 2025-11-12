@@ -1,0 +1,34 @@
+{
+    "family": "<TASK_NAME>",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_API_KEY",
+                    "value": "<YOUR_API_KEY>"
+                },
+                {
+                    "name": "DD_SITE",
+                    "value": "<YOUR_SITE>"
+                },
+                {
+                    "name": "ECS_MANAGED_INSTANCES",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_ECS_DEPLOYMENT_MODE",
+                    "value": "sidecar"
+                },
+            ]
+        }
+    ],
+    "requiresCompatibilities": [
+        "MANAGED_INSTANCES"
+    ],
+    "cpu": "256",
+    "memory": "512"
+}
