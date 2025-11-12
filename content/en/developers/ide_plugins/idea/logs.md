@@ -19,11 +19,11 @@ Click the log icon to query logs using Datadog:
 
 {{< img src="/developers/ide_plugins/idea/logs/log-query-button.png" alt="The log query button" style="width:80%;" >}}
 
-This launches the [Log Explorer][16] with the latest log events showing.  Notice how the query has been prefilled with the environment, log status, logger name and text elements extracted from your source code:
+This launches the [Log Explorer][16] and shows the latest log events.  Notice how the query has been prefilled with the environment, log status, logger name and text elements extracted from your source code:
 
 {{< img src="/developers/ide_plugins/idea/logs/browser.png" alt="The log query button" style="width:100%;" >}}
 
-Use the full power of the Datadog platform to inspect individual logs and related traces, or modify the search query to focus on the logs that you are interested in.
+Use the full power of the Datadog platform to inspect individual logs and related traces, or modify the search query to narrow down to the logs that you are most interested in.
 
 ## Supported Languages & Frameworks
 The Logs integration supports the following languages and logging frameworks:
@@ -38,7 +38,7 @@ The Logs integration supports the following languages and logging frameworks:
 Right-click a log element in the source editor to open the settings (Editor → Inlay Hints) for the current language, and activate or deactivate the feature.
 
 ### Java / Kotlin
-By convention logs are usually tagged with the logger name corresponding to the fully qualified class name of the class where the logger is created.  
+In Java & Kotlin, by convention, logs are normally tagged with the logger name corresponding to the fully qualified class name of the class where the logger is created.  
 
 In rare cases, customers post-process their logs data and modify the logger name tag to use only the simple class name. For these customers, there is a “Logger name” setting to inform the plugin to create Log Explorer queries using the simple class name.
 
