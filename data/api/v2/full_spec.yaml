@@ -47424,6 +47424,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         update_date:
           description: A Unix millisecond timestamp given the update date of the suppression
             rule.
@@ -47485,6 +47493,14 @@ components:
             same syntax as the queries to search signals in the Signals Explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
       required:
       - name
       - enabled
@@ -47580,6 +47596,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         version:
           description: The current version of the suppression. This is optional, but
             it can help prevent concurrent modifications.
