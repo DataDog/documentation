@@ -18,14 +18,13 @@ Community developed integrations for the Datadog Agent are stored in the Datadog
 
 ## Setup
 
-For new users, follow the installation method for your environment. For host installation, download and install the latest version of the [Datadog Agent][2]. For containzerized environments, use the [Datadog Agent container image][4].
+Follow the installation method for your environment. 
 
 
 
-### Installation
 
 {{< tabs >}}
-{{% tab "Host Install" %}}
+{{% tab "Host installation" %}}
 
 For Agent v7.21+ / v6.21+:
 
@@ -35,19 +34,19 @@ For Agent v7.21+ / v6.21+:
     sudo -u dd-agent datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
 
-   The version for the integration can be found in the respective changelog on the integration's Github repository
+   The version for the integration can be found in the respective changelog on the integration's Github repository.
 2. Configure your integration similar to core [integrations][1].
 3. [Restart the Agent][2].
 
 [1]: /getting_started/integrations/
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
-#### Building Image
+{{% tab "Containerized installation" %}}
+#### Building the image
 
-To use a community or Marketplace integration in a containerized environment, you must build a custom image that includes your desired community integration.  
+To use a community or Marketplace integration in a containerized environment, build a custom Agent image that includes your desired integration.
 
-Building a custom image ensures that the integration persists across deployments each time a new container starts.
+Building a custom image ensures the integration persists across deployments each time a container starts.
 
 Use the following Dockerfile to build a custom version of the Agent that includes the `<INTEGRATION_NAME>` from [integrations-extras][2]. If you are installing a Marketplace integration, the `<INTEGRATION_NAME>` is available in the configuration instructions.
 
@@ -55,18 +54,18 @@ Use the following Dockerfile to build a custom version of the Agent that include
 FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
-Then build the image and push:
+Build and push the image:
 
 ```
 docker build -t <RepoName>/agent:<version>-custom .
 docker push <RepoName>/agent:<version>-custom
 ```
 
-If you are using a both `amd64` and `arm` based host architectures, you can [build multi-architecture images][3] as well.
+If you use both `amd64` and `arm` host architectures, you can also [build multi-architecture images][3].
 
-#### Deploying Image
+#### Deploying the image
 
-If you are using Kubernetes, update your Helm chart or Datadog Operator configuration to pull your custom image:
+To deploy the custom image in Kubernetes, update your Helm chart or Datadog Operator configuration to pull the image.
 
 ##### Helm:
 ```
