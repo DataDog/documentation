@@ -14,7 +14,7 @@ This guide goes over Worker version releases to help you determine whether you w
 
 ## Worker Version 2.11.0
 
-To upgrade to Work version 2.11.0:
+To upgrade to Worker version 2.11.0:
 
 - Docker: Run the `docker pull` command to pull the [2.11.0 image][24].
 - Kubernetes:
@@ -36,7 +36,7 @@ Version 2.11.0 gives you access to the following:
 
 ## Worker Version 2.10.0
 
-To upgrade to Work version 2.10.0:
+To upgrade to Worker version 2.10.0:
 
 - Docker: Run the `docker pull` command to pull the [2.10.0 image][].
 - Kubernetes:
@@ -73,7 +73,7 @@ Worker version 2.10.0 gives you access to the following:
 
 ## Worker Version 2.9.1
 
-To upgrade to Work version 2.9.1:
+To upgrade to Worker version 2.9.1:
 
 - Docker: Run the `docker pull` command to pull the [2.9.1 image][].
 - Kubernetes:
@@ -89,7 +89,7 @@ Worker version 2.9.1 gives you access to the following:
 
 ## Worker Version 2.9.0
 
-To upgrade to Work version 2.9.0:
+To upgrade to Worker version 2.9.0:
 
 - Docker: Run the `docker pull` command to pull the [2.9.0 image][].
 - Kubernetes:
@@ -114,7 +114,7 @@ Worker version 2.9.0 gives you access to the following:
 
 ## Worker Version 2.8.1
 
-To upgrade to Work version 2.8.1:
+To upgrade to Worker version 2.8.1:
 
 - Docker: Run the `docker pull` command to pull the [2.8.1 image][].
 - Kubernetes:
@@ -130,7 +130,7 @@ Worker version 2.8.1 gives you access to the following:
 
 ## Worker Version 2.8.0
 
-To upgrade to Work version 2.8.0:
+To upgrade to Worker version 2.8.0:
 
 - Docker: Run the `docker pull` command to pull the [2.8.0 image][].
 - Kubernetes:
@@ -157,7 +157,7 @@ Worker version 2.8.0 gives you access to the following:
 
 ## Worker Version 2.7.0
 
-To upgrade to Work version 2.7.0:
+To upgrade to Worker version 2.7.0:
 
 - Docker: Run the `docker pull` command to pull the [2.7.0 image][].
 - Kubernetes:
