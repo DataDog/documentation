@@ -18,9 +18,7 @@ Community developed integrations for the Datadog Agent are stored in the Datadog
 
 ## Setup
 
-For new users, follow the installation method for your environment.  
-For host installation, download and install the latest version of the [Datadog Agent][2].  
- For containzerized environments, use the [Datadog Agent container image][4].
+For new users, follow the installation method for your environment. For host installation, download and install the latest version of the [Datadog Agent][2]. For containzerized environments, use the [Datadog Agent container image][4].
 
 
 
