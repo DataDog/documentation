@@ -290,6 +290,7 @@ local/bin/py/sh
 local/bin/py/js
 local/bin/js/
 local/bin/py/translations
+local/bin/py/blog_linker.py
 local/bin/py/add_notranslate_tag.py
 local/bin/py/placehold_translations.py
 local/bin/py/missing_metrics.py
