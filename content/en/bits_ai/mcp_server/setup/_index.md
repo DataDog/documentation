@@ -215,6 +215,8 @@ The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through 
 }
 {{< /code-block >}}
 
+For security, it is recommended to use a scoped API and application key from a [service account][23] with only the permissions you intend to use.
+
 ### Test access to the MCP Server
 
 1. Install the [MCP inspector][4], a developer tool for testing and debugging MCP servers.
@@ -430,3 +432,4 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [20]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
 [21]: /synthetics/
 [22]: https://kiro.dev/
+[23]: /account_management/org_settings/service_accounts/
