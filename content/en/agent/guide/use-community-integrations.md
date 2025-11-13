@@ -42,7 +42,9 @@ For Agent v7.21+ / v6.21+:
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
-To use a community or Marketplace integration in a containerized environment, you must build a custom image that includes your desired community integration.
+To use a community or Marketplace integration in a containerized environment, you must build a custom image that includes your desired community integration.  
+
+Building a custom image ensures that the integration persists across deployments each time a new container starts.
 
 Use the following Dockerfile to build a custom version of the Agent that includes the `<INTEGRATION_NAME>` from [integrations-extras][2]. If you are installing a Marketplace integration, the `<INTEGRATION_NAME>` is available in the configuration instructions.
 
