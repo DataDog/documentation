@@ -104,14 +104,12 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 
 {{% otel-api-troubleshooting signal="metrics" %}}
 - Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Ensure you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the metric data.
-- Check your .NET version for instrument support. Support for specific metric instruments depends on your .NET runtime version. If your metrics are not appearing, ensure the instrument you are using is [supported by your version](#net-version-and-instrument-support).
+- If, after removing the OpenTelemetry SDK packages, your application fails to compile due to missing APIs in the [System.Diagnostics.Metrics namespace][4], you must update your application by either adding a direct NuGet package reference to `System.Diagnostics.DiagnosticSource` or upgrading the version of .NET. See [.NET version and instrument support](#net-version-and-instrument-support) for more information.
 {{% /otel-api-troubleshooting %}}
 
 {{% collapse-content title=".NET version and instrument support" id="net-version-and-instrument-support" expanded=false level="h4" %}}
 
 Support for specific OpenTelemetry metric instruments is dependent on your .NET runtime version or the version of the `System.Diagnostics.DiagnosticSource` NuGet package you have installed.
-
-If your code compiles but no metrics are emitted, verify that your instrument is supported by your application's runtime.
 
 Here is the minimum version required for each instrument type:
 
@@ -137,4 +135,5 @@ Here is the minimum version required for each instrument type:
 [1]: /opentelemetry/config/environment_variable_support
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
+[4]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics
 [200]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent 
