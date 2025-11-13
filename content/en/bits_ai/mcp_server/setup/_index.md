@@ -215,7 +215,7 @@ The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through 
 }
 {{< /code-block >}}
 
-For security, it is recommended to use a scoped API and application key from a [service account][23] with only the permissions you intend to use.
+For security, use a scoped API key and application key from a [service account][23] that has only the required permissions.
 
 ### Test access to the MCP Server
 
