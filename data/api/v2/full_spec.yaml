@@ -449,7 +449,7 @@ components:
         type: string
     GetIssueIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response.
+        in the response. Possible values are `assignee`, `case`, and `team_owners`.
       explode: false
       in: query
       name: include
@@ -1003,7 +1003,8 @@ components:
         $ref: '#/components/schemas/ServiceDefinitionSchemaVersions'
     SearchIssuesIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response.
+        in the response. Possible values are `issue`, `issue.assignee`, `issue.case`,
+        and `issue.team_owners`.
       explode: false
       in: query
       name: include
@@ -47424,6 +47425,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         update_date:
           description: A Unix millisecond timestamp given the update date of the suppression
             rule.
@@ -47485,6 +47494,14 @@ components:
             same syntax as the queries to search signals in the Signals Explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
       required:
       - name
       - enabled
@@ -47580,6 +47597,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         version:
           description: The current version of the suppression. This is optional, but
             it can help prevent concurrent modifications.
@@ -63575,7 +63600,9 @@ paths:
         permissions:
         - user_app_keys
     get:
-      description: Get an application key owned by current user
+      description: 'Get an application key owned by current user.
+
+        The `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: GetCurrentUserApplicationKey
       parameters:
       - $ref: '#/components/parameters/ApplicationKeyID'
@@ -63609,7 +63636,9 @@ paths:
         permissions:
         - user_app_keys
     patch:
-      description: Edit an application key owned by current user
+      description: 'Edit an application key owned by current user.
+
+        The `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: UpdateCurrentUserApplicationKey
       parameters:
       - $ref: '#/components/parameters/ApplicationKeyID'
