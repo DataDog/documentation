@@ -27,6 +27,8 @@ Tag Pipelines apply to Cloud Cost metrics from all providers, affecting both cos
 
 When tag pipelines change, the new rules are automatically applied to the most recent three months of data. It may take up to 24 hours for the historical data update to complete after rules are added or modified.
 
+All new users have the recommended rule for [turning on tag normalization][6] enabled by default.
+
 ## Create a ruleset
 
 To create a ruleset, navigate to [**Cloud Cost > Settings > Tag Pipelines**][1].
@@ -99,3 +101,4 @@ To delete a tag created using Tag Pipelines, delete the rule that created it. Wi
 [3]: /getting_started/tagging/unified_service_tagging/
 [4]: /getting_started/tagging/
 [5]: /help/
+[6]: /cloud_cost_management/tags#how-tags-are-normalized

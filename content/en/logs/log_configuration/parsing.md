@@ -399,7 +399,7 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 The supported format for timezones are:
 
 * `GMT`, `UTC`, `UT` or `Z`
-* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive.
+* `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`. The maximum supported range is from +18:00 to -18:00 inclusive.
 * Timezones starting with `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
 * Timezone IDs pulled from the TZ database. For more information, see [TZ database names][2].
 
@@ -423,11 +423,25 @@ Note that "id" is an integer and not a string.
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**Results**:
-
-{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4" style="width:80%;" >}}
-
-{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" style="width:80%;" >}}
+**Results**:<br>
+`%{integer:user.id}`
+```json
+{
+  "user": {
+    "id": 12345
+  },
+  "connect_date": 1510099200000
+}
+```
+`%{word:user.firstname}`
+```json
+{
+  "user": {
+    "firstname": "john"
+  },
+  "connect_date": 1510099200000
+}
+```
 
 ### Optional attribute
 
@@ -437,6 +451,7 @@ Some logs contain values that only appear part of the time. In this case, make a
 
 ```text
 john 1234 connected on 11/08/2017
+john connected on 11/08/2017
 ```
 
 **Rule**:
@@ -447,9 +462,28 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **Note**: A rule will not match if you include a space after the first word in the optional section.
 
-{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" style="width:80%;" >}}
+**Result**:<br>
+`(%{integer:user.id} )?`
 
-{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" style="width:80%;" >}}
+```json
+{
+  "user": {
+    "firstname": "john",
+    "id": 1234
+  },
+  "connect_date": 1510099200000
+}
+```
+
+`%{word:user.firstname} (%{integer:user.id} )?`
+```json
+{
+  "user": {
+    "firstname": "john",
+  },
+  "connect_date": 1510099200000
+}
+```
 
 ### Nested JSON
 
@@ -467,7 +501,17 @@ Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":20
 parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
 ```
 
-{{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example" style="width:80%;" >}}
+**Result**:
+```json
+{
+  "timestamp": 1567761218000,
+  "vm": "vagrant",
+  "app": "program",
+  "logger": {
+    "thread_id": 123
+  }
+}
+```
 
 ### Regex
 
@@ -483,7 +527,15 @@ john_1a2b3c4 connected on 11/08/2017
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
+**Result**:
+```json
+{
+  "user": {
+    "firstname": "john",
+    "id": "1a2b3c4"
+  }
+}
+```
 
 ### List to array
 
@@ -501,7 +553,17 @@ Users [John, Oliver, Marc, Tom] have been added to the database
 myParsingRule Users %{data:users:array("[]",",")} have been added to the database
 ```
 
-{{< img src="logs/processing/parsing/array_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
+**Result**:
+```json
+{
+  "users": [
+    "John",
+    " Oliver",
+    " Marc",
+    " Tom"
+  ]
+}
+```
 
 **Log**:
 
