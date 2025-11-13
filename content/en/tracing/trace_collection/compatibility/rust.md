@@ -21,17 +21,12 @@ The Datadog Rust SDK is open source. For more information, see the [`dd-trace-rs
 
 ## Language and library support
 
-The Rust tracer relies on specific versions of the Rust compiler and the OpenTelemetry crate.
+The Rust SDK relies on specific versions of the Rust compiler and the OpenTelemetry crate.
 
 | Component | Requirement |
 |---|---|
-| **Rust Version** | 1.84 (MSRV) or newer |
-| **OpenTelemetry Crate** | Version 0.30 |
-
-## Operating systems
-
-The Rust tracer is tested and supported on the following operating systems:
-- [TODO]
+| **Rust Version** | 1.84 (MSRV) |
+| **OpenTelemetry Crate** | Version 0.31 |
 
 ## Integrations
 
