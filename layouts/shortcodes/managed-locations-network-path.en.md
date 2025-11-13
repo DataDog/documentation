@@ -1,6 +1,6 @@
 Datadog's out-of-the-box managed locations allow you to test public-facing websites and endpoints from regions where your customers are located. 
 
-<div class="alert alert-info">Azure region is not yet supported for Network Path tests.</div>
+<div class="alert alert-info">Azure region is not supported for Network Path tests.</div>
 
 **AWS**:
 | Americas           | Asia Pacific      | EMEA           |
