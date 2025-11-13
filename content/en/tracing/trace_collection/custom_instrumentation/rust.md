@@ -13,6 +13,10 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
+{{< callout btn_hidden="true" >}}
+  The Datadog Rust SDK is in Preview. It is not recommended for full production use.
+{{< /callout >}}
+
 Datadog provides support for custom instrumentation in Rust applications through the `datadog-opentelemetry` crate. This library is built on the OpenTelemetry (OTel) API and SDK, providing a tracer that includes Datadog-specific features and an exporter.
 
 Because this library is built on OpenTelemetry, you use the standard OpenTelemetry API to create traces and spans.

@@ -626,6 +626,8 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 
 {{% tab "Rust" %}}
 
+<div class="alert alert-danger">The Datadog Rust SDK is in Preview. It is not recommended for full production use.</div>
+
 The Datadog Rust SDK is built on the OpenTelemetry (OTel) SDK.
 
 Trace context propagation is handled by the OTel SDK, which is configured by `datadog-opentelemetry` to support both `datadog` and `tracecontext` (W3C) formats.
