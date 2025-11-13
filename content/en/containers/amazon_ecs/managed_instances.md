@@ -7,9 +7,18 @@ further_reading:
     - link: "/agent/amazon_ecs/logs/"
       tag: "Documentation"
       text: "Collect your application logs"
+    - link: "/agent/amazon_ecs/apm/"
+      tag: "Documentation"
+      text: "Collect your application traces"
+    - link: "/agent/amazon_ecs/data_collected/#metrics"
+      tag: "Documentation"
+      text: "Collect ECS metrics"
     - link: "/agent/amazon_ecs/tags/"
       tag: "Documentation"
       text: "Assign tags to all data emitted by a container"
+    - link: "https://www.datadoghq.com/blog/ecs-default-monitors/"
+      tag: "Blog"
+      text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
 ---
 
 ## Overview
