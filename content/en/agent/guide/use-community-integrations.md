@@ -41,6 +41,7 @@ For Agent v7.21+ / v6.21+:
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
+#### Building Image
 
 To use a community or Marketplace integration in a containerized environment, you must build a custom image that includes your desired community integration.  
 
@@ -61,9 +62,11 @@ docker push <RepoName>/agent:<version>-custom
 
 If you are using a both `amd64` and `arm` based host architectures, you can [build multi-architecture images][3] as well.
 
+#### Deploying Image
+
 If you are using Kubernetes, update your Helm chart or Datadog Operator configuration to pull your custom image:
 
-#### Helm:
+##### Helm:
 ```
 agents:
   image:
@@ -71,7 +74,7 @@ agents:
     tagSuffix: "custom"
     repository: <Registry>/<RepoName>/agent
 ```
-#### Operator:
+##### Operator:
 ```
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -93,26 +96,6 @@ Use [Autodiscovery][1] to enable and configure the integration.
 [1]: /agent/autodiscovery/
 [2]: https://github.com/DataDog/integrations-extras
 [3]: https://docs.docker.com/build/building/multi-platform/
-{{% /tab %}}
-
-{{% tab "Agent earlier versions" %}}
-
-For Agent < v7.21 / v6.21:
-
-1. Download the files in the `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/` folder from the [integrations-extra repository][1].
-2. Place `<INTEGRATION_NAME>.py` and any other Python files in the Agent's `checks.d` directory.
-3. Create a new `<INTEGRATION_NAME>.d/` folder in your [Agent configuration directory][2].
-4. Place the `conf.yaml.example` file from the `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/data/` folder in the created directory.
-4. Rename this file to `conf.yaml`.
-5. Configure your integration similar to core [integrations][3].
-6. [Restart the Agent][4].
-
-
-
-[1]: https://github.com/DataDog/integrations-extras
-[2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
-[3]: /getting_started/integrations/
-[4]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
