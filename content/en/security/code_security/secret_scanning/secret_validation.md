@@ -1,6 +1,5 @@
 ---
 title: Secret Validation
-aliases: /security/code_security/secret_scanning/secret_validation/
 is_beta: true
 algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST', 'secret scanning']
