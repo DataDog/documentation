@@ -39,7 +39,7 @@ This guide walks you through the following steps so that you can start detecting
 
 {{% cloud-siem-aws-setup-cloudformation %}}
 
-## Enable AWS CloudTrail logging 
+## Enable AWS CloudTrail logging
 
 {{% cloud-siem-aws-cloudtrail-enable %}}
 
@@ -62,8 +62,8 @@ Since Cloud SIEM applies detection rules to all processed logs, see the [in-app 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Log%20Detection%22
-[9]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
+[1]: https://app.datadoghq.com/security/signals?query=%40workflow.rule.type%3A%22Log%20Detection%22
+[9]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc
 [10]: /security/cloud_siem/triage_and_investigate/investigate_security_signals
 [11]: https://app.datadoghq.com/dash/integration/30459/aws-cloudtrail
 [12]: https://docs.datadoghq.com/security/default_rules/#cat-cloud-siem
