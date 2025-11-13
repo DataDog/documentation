@@ -34,7 +34,53 @@ See [Connect RUM and Traces][2] for information about setting up this feature.
 
 {{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource" >}}
 
-## Resource attributes
+## Track GraphQL requests
+
+The Browser SDK can automatically enrich GraphQL requests with operation-specific metadata, making it easier to identify and debug individual operations in RUM.
+
+### Setup
+
+Configure `allowedGraphQlUrls` during SDK initialization to specify which endpoints should be treated as GraphQL:
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    clientToken: '<DATADOG_CLIENT_TOKEN>',
+    site: 'datadoghq.com',
+    allowedGraphQlUrls: [
+        // String: matches any URL starting with the value
+        "https://api.example.com/graphql",
+        // RegExp: tests against the full URL
+        /\/graphql$/,
+        // Function: evaluates with the URL as parameter, returning true for a match
+        (url) => url.includes("graphql")
+    ]
+})
+```
+
+### Advanced options
+
+To collect additional data, use the extended configuration:
+
+```javascript
+datadogRum.init({
+    allowedGraphQlUrls: [
+        {
+            match: "https://api.example.com/graphql",
+            trackPayload: true,          // Include GraphQL query (limited to 32 KB)
+            trackResponseErrors: true    // Capture GraphQL errors from responses
+        }
+    ]
+})
+```
+
+For matching requests, the SDK automatically extracts operation type, operation name, variables, and optionally the GraphQL query payload and response errors. See [GraphQL attributes][8] for the complete list of collected attributes.
+
+**Note**: You can modify GraphQL variables in the [`beforeSend` callback][9] if needed (for example, to redact sensitive data).
+
+## Resource timing attributes
 
 Detailed network timing data for resources is collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
 
@@ -96,3 +142,5 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Resource_timing#cross-origin_timing_information
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
+[8]: /real_user_monitoring/application_monitoring/browser/data_collected/#graphql-attributes
+[9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
