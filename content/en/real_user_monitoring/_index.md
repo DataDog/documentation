@@ -73,9 +73,9 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 
 ### Session definition
 
-A user session is a user journey on your web or mobile application. A session includes all of its constitutive navigation events (RUM Views), user actions (RUM Actions), network requests (RUM Resources), crashes and errors (RUM Errors), and many more events and signals that all together produce a faithfull picture of the user experience.
+A user session is a user journey on your web or mobile application. A session includes all related navigation events (RUM Views), user actions (RUM Actions), network requests (RUM Resources), crashes and errors (RUM Errors), and other events and signals that collectively produce a faithful representation of the user experience.
 
-A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application again after those limits, a new session is automatically create.
+A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically.
 
 ### Technical limitations
 
