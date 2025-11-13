@@ -1,10 +1,10 @@
 ---
-title: Upgrade to Worker Version 2.10
-description: Learn more about Worker version 2.10.
+title: Upgrade to Worker Version 2.10.0
+description: Learn more about Worker version 2.10.0.
 disable_toc: false
 ---
 
-Upgrade to Worker version 2.10 to have access to the following new features, enhancements, and fixes.
+Upgrade to Worker version 2.10.0 to have access to the following new features, enhancements, and fixes.
 
 ## New features
 

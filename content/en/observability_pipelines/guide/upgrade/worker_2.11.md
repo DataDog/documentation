@@ -1,12 +1,12 @@
 ---
-title: Upgrade to Worker Version 2.11
-description: Learn more about Worker version 2.11.
+title: Upgrade to Worker Version 2.11.0
+description: Learn more about Worker version 2.11..0
 disable_toc: false
 ---
 
 Upgrade to Worker version 2.11 to have access to the following new features.
 
-## Features
+## New features
 
 - More than 100 out-of-the-box rules for the Sensitive Data Scanner processor have been added. These rules redact Personally Identifiable Information (PII) and access key information that focus on GDPR compliance and secrets.
 - [Live Capture][1] configurations that let you:
