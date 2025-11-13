@@ -8,12 +8,12 @@ Upgrade to Worker version 2.8.0 to have access to the following new features, en
 
 ## New features
 
-- Custom environment variable support for all sources and destinations.
+- All sources and destination have custom environment variable support.
 
 ## Enhancements
 
-- Support data streams in the Elasticsearch destination as an indexing strategy.
-- Template syntax support for the HTTP Client destination.
+- Data streams in the Elasticsearch destination is available as an indexing strategy.
+- The HTTP Client destination supports template syntax.
 
 ## Fixes
 

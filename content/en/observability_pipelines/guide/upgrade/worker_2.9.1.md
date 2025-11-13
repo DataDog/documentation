@@ -8,6 +8,6 @@ Upgrade to Worker version 2.9.1 to have access to the following fixes.
 
 ## Fixes
 
-- Limit the Microsoft Sentinel destination to batch sizes of 1 MB when reading logs using the Azure Logs Ingestion API. Limit is based on [Azure documentation][1].
+- The Microsoft Sentinel destination has been limited to batch sizes of 1 MB when reading logs using the Azure Logs Ingestion API. The limit is based on [Azure documentation][1].
 
 [1]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#logs-ingestion-api

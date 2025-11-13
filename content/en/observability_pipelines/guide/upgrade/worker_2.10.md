@@ -11,7 +11,7 @@ Upgrade to Worker version 2.10 to have access to the following new features, enh
 - The [Kafka destination][1]: Send logs from Observability Pipelines to your Kafka topics.
 - New and updated [Custom Processor functions][2]:
     - The `pop` function removes the last item from an array.
-    - Cryptographic functions `encrypt_ip` and `decrypt_ip` for IP address encryption.
+    - The cryptographic functions `encrypt_ip` and `decrypt_ip` for IP address encryption.
         - These functions use the IPCrypt specification and support both IPv4 and IPv6 addresses with two encryption modes:
             - aes128 (IPCrypt deterministic, 16-byte key)
             - pfx (IPCryptPfx, 32-byte key).
@@ -23,9 +23,9 @@ Upgrade to Worker version 2.10 to have access to the following new features, enh
 
 ## Enhancements
 
-- Performance enhancement for Custom Processor.
-- Workers now use their own copy of the Datadog key to authenticate, disregarding any keys sent in by the Datadog Agent to prevent the use of stale keys.
-- Improved error reporting when validating JSON schema in custom functions that use the `validate_json_schema` function.
+- Performance enhancement for the Custom Processor.
+- Workers use their own copy of the Datadog key to authenticate, disregarding any keys sent in by the Datadog Agent to prevent the use of stale keys.
+- Error reporting has been improved when validating JSON schema in custom functions that use the `validate_json_schema` function.
 
 ## Fixes
 

@@ -8,4 +8,4 @@ Upgrade to Worker version 2.8.1 to have access to the following fixes.
 
 ## Fixes
 
-- Authorization strategy for HTTP Client source and destination updates.
+- THe HTTP Client source's authorization strategy has been updated.
