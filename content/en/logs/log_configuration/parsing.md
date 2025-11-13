@@ -399,7 +399,7 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 The supported format for timezones are:
 
 * `GMT`, `UTC`, `UT` or `Z`
-* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive.
+* `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`. The maximum supported range is from +18:00 to -18:00 inclusive.
 * Timezones starting with `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
 * Timezone IDs pulled from the TZ database. For more information, see [TZ database names][2].
 
