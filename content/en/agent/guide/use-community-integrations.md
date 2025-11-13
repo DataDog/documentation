@@ -53,8 +53,6 @@ FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-The `agent integration install` command (run inside Docker) issues the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. You can ignore this warning.
-
 If you are using Kubernetes, update your Helm chart or Datadog Operator configuration to pull your custom image.
 
 Use [Autodiscovery][1] to enable and configure the integration.
