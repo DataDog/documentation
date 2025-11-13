@@ -44,7 +44,7 @@ Use the Cost Explorer to:
 
 4. Select a time range using the time picker to analyze costs over different periods (hour, day, week, month, or custom range).
 
-**Note:** When querying costs across multiple providers, resource-level tags are not available. To access resource-specific tags, filter to a single provider in your query.
+**Note**: When querying costs across multiple providers, resource-level tags are not available. To access resource-specific tags, filter to a single provider in your query.
 
 ## Cost Change Summary side panel 
 
@@ -64,9 +64,9 @@ At the top, you can see the **total cost** for the current period and the dollar
 
 Use the **Change Details** and **Investigate Further** sections to:
 
-- **Instantly identify cost anomalies**---Unexpected deviations in cost, calculated against historical data, are automatically highlighted in red, allowing you to focus your investigation on critical trends.  
+- **Instantly identify cost anomalies**: Unexpected deviations in cost, calculated against historical data, are automatically highlighted in red, allowing you to focus your investigation on critical trends.  
      
-- **Analyze Change Drivers:** Easily determine the cause of a cost change—whether it was driven by a change in **usage** (the count of resources) or a change in **unit price** (the cost per resource). For example, in the screenshot below, we can see the change in spend is driven by a shift in unit price rather than usage—the resource count stays flat while cost per resource rises and falls, causing the overall cost change.
+- **Analyze Change Drivers**: Easily determine the cause of a cost change—whether it was driven by a change in **usage** (the count of resources) or a change in **unit price** (the cost per resource). For example, in the screenshot below, the change in spend is driven by a shift in unit price rather than usage---the resource count stays flat while cost per resource rises and falls, causing the overall cost change.
 
 {{< img src="cloud_cost/reporting/cloud-cost-spend-summary.png" alt="The change in spend is driven by a shift in unit price rather than usage—the resource count stays flat while cost per resource rises and falls, causing the overall cost change" style="width:100%;" >}}
 
