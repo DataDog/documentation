@@ -98,6 +98,7 @@ As ECS Managed Instances does not support daemon scheduling yet, run the task as
 9. Click the **Next step** button.
 10. Click the **Next step** button, then click the **Create service** button.
 
+[4]: https://aws.amazon.com/console
 {{% /tab %}}
 {{% tab "AWS CLI" %}}
 
@@ -114,7 +115,7 @@ aws ecs create-service --cluster <CLUSTER_NAME> \
 --desired-count 1 \
 --network-configuration "awsvpcConfiguration={subnets=[subnet-abcd1234],securityGroups=[sg-abcd1234]}"
 ```
-
+[11]: https://aws.amazon.com/cli
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -220,10 +221,10 @@ Need help? Contact [Datadog support][26].
 [2]: #create-an-ecs-task-definition
 [3]: #run-the-task-as-a-replica-service
 [4]: https://aws.amazon.com/console
-[5]: /organization-settings/api-keys
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
 [7]: /resources/json/datadog-agent-ecs-managed-instances-sidecar.json
-[8]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_replica
+[8]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_service-options.html#service_scheduler_replica
 [9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
 [10]: /getting_started/site/
 [11]: https://aws.amazon.com/cli
@@ -231,7 +232,7 @@ Need help? Contact [Datadog support][26].
 [13]: /resources/json/datadog-agent-ecs-apm.json
 [14]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=awscli#log-collection
 [15]: /process
-[16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
+[16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
 [17]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/java?tab=containers#automatic-instrumentation
 [18]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/python?tab=containers#instrument-your-application
 [19]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
