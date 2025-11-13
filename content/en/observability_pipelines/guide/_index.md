@@ -13,14 +13,7 @@ aliases:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Worker Upgrade Guides" >}}
-    {{< nextlink href="/observability_pipelines/guide/upgrade/worker_upgrades_2.x" >}}Upgrade to Worker 2.x{{< /nextlink >}}
-   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.11" >}}Upgrade to Worker 2.11{{< /nextlink >}}
-   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.10" >}}Upgrade to Worker 2.10{{< /nextlink >}}
-   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.9.1" >}}Upgrade to Worker 2.9.1{{< /nextlink >}}
-   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.9.0" >}}Upgrade to Worker 2.9.0{{< /nextlink >}}
-   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.8.1" >}}Upgrade to Worker 2.8.1{{< /nextlink >}}
-   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.8.0" >}}Upgrade to Worker 2.8.0{{< /nextlink >}}
-   {{< nextlink href="/observability_pipelines/guide/upgrade/worker_2.7.0" >}}Upgrade to Worker 2.7.0{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/upgrade_worker_2.x" >}}Upgrade to Worker 2.x{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Processor guides:" >}}
