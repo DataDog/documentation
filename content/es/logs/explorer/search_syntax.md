@@ -19,9 +19,9 @@ further_reading:
 - link: /logs/explorer/saved_views/
   tag: Documentación
   text: Más información sobre las vistas guardadas
-- link: /logs/explorer/calculated_fields/expression_language
+- link: /logs/explorer/calculated_fields/formulas
   tag: Documentación
-  text: Más información sobre el lenguaje de expresión de campos calculados
+  text: Más información sobre fórmulas de campos calculados
 title: Sintaxis de búsqueda de logs
 ---
 
