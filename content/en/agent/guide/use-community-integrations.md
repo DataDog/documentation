@@ -52,9 +52,41 @@ Use the following Dockerfile to build a custom version of the Agent that include
 FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
+Then build the image and push:
+
+```
+docker build -t <RepoName>/agent:<version>-custom .
+docker push <RepoName>/agent:<version>-custom
+```
+
 If you are using a both `amd64` and `arm` based host architectures, you can [build multi-architecture images][3] as well.
 
-If you are using Kubernetes, update your Helm chart or Datadog Operator configuration to pull your custom image.
+If you are using Kubernetes, update your Helm chart or Datadog Operator configuration to pull your custom image:
+
+#### Helm:
+```
+agents:
+  image:
+    tag: <version>
+    tagSuffix: "custom"
+    repository: <Registry>/<RepoName>/agent
+```
+#### Operator:
+```
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    registry: <Registry>/<RepoName>
+    #(...)  
+  override:
+    nodeAgent:
+      image:
+        name: agent
+        tag: <version>-custom
+```
 
 Use [Autodiscovery][1] to enable and configure the integration.
 
