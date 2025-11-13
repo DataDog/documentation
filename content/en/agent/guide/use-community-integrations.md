@@ -18,7 +18,11 @@ Community developed integrations for the Datadog Agent are stored in the Datadog
 
 ## Setup
 
-For new users, download and install the latest version of the [Datadog Agent][2].
+For new users, follow the installation method for your environment.  
+For host installation, download and install the latest version of the [Datadog Agent][2].  
+ For containzerized environments, use the [Datadog Agent container image][4].
+
+
 
 ### Installation
 
@@ -112,3 +116,4 @@ If your site restricts network access, ensure you have added all of the [`ip-ran
 [1]: https://github.com/DataDog/integrations-extras
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: /agent/configuration/network
+[4]: /containers/guide/container-images-for-docker-environments/?tab=gcr
