@@ -23,7 +23,7 @@ For new users, download and install the latest version of the [Datadog Agent][2]
 ### Installation
 
 {{< tabs >}}
-{{% tab "Agent v7.21+ / v6.21+" %}}
+{{% tab "Host Install" %}}
 
 For Agent v7.21+ / v6.21+:
 
