@@ -80,7 +80,7 @@ For matching requests, the SDK automatically extracts operation type, operation 
 
 **Note**: You can modify GraphQL variables in the [`beforeSend` callback][9] if needed (for example, to redact sensitive data).
 
-## Resource attributes
+## Resource timing attributes
 
 Detailed network timing data for resources is collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
 
