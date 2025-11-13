@@ -64,9 +64,7 @@ To generate traces compatible with LLM Observability, do one of the following:
 
 After your application starts sending data, the traces automatically appear in the [**LLM Observability Traces** page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-OpenInference and OpenLLMetry are not currently supported, as they have not yet been updated to support OpenTelemetry 1.37 semantic conventions for generative AI.
-{{< /callout >}}
+<div class="alert alert-danger">OpenInference and OpenLLMetry are not  supported, as they have not been updated to support OpenTelemetry 1.37 semantic conventions for generative AI.</a></div>
 
 **Note**: There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
 
@@ -110,8 +108,6 @@ if __name__ == "__main__":
 #### Custom OpenTelemetry instrumentation
 
 The following example demonstrates how to instrument your LLM application using custom OpenTelemetry code. This approach gives you full control over the traces and spans emitted by your application.
-
-**Note**: After running this example, search for `ml_app:simple-llm-example` in the LLM Observability UI to find the generated trace.
 
 ```python
 import os
@@ -202,6 +198,8 @@ with tracer.start_as_current_span(
 # Flush spans before exit
 provider.force_flush()
 ```
+
+After running this example, search for `ml_app:simple-llm-example` in the LLM Observability UI to find the generated trace.
 
 ## Supported semantic conventions
 
