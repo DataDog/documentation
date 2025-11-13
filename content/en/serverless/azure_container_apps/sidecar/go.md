@@ -41,6 +41,8 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 2. **Install serverless-init as a sidecar**.
 
+   {{% serverless-init-install mode="sidecar" %}}
+
    {{< tabs >}}
 
    {{% tab "Terraform" %}}

@@ -37,7 +37,7 @@ apk add libgcc
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install cmd="\"apache2-foreground\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"apache2-foreground\"" %}}
 
 3. **Set up logs**.
 
