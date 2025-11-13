@@ -293,7 +293,6 @@ local/bin/py/translations
 local/bin/py/blog_linker.py
 local/bin/py/add_notranslate_tag.py
 local/bin/py/placehold_translations.py
-local/bin/py/blog_linker.py
 local/bin/py/missing_metrics.py
 local/bin/py/submit_github_status_check.py
 !local/bin/py/build/configuration/pull_config_preview.yaml
