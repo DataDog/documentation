@@ -68,7 +68,7 @@ If you use both `amd64` and `arm` host architectures, you can also [build multi-
 To deploy the custom image in Kubernetes, update your Helm chart or Datadog Operator configuration to pull the image.
 
 ##### Helm:
-```
+```yaml
 agents:
   image:
     tag: <version>
@@ -76,7 +76,7 @@ agents:
     repository: <Registry>/<RepoName>/agent
 ```
 ##### Operator:
-```
+```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
