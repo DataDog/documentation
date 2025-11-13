@@ -145,7 +145,7 @@ Detailed network timing data for the loading of an application's resources are c
 
 ### GraphQL attributes
 
-For GraphQL requests configured in `allowedGraphQlUrls`, additional metadata is automatically collected:
+For GraphQL requests configured in `allowedGraphQlUrls`, additional metadata is automatically collected. See [Track GraphQL requests][15] for configuration details.
 
 | Attribute                       | Type   | Description                                                                                          |
 |---------------------------------|--------|------------------------------------------------------------------------------------------------------|
@@ -235,3 +235,4 @@ Source errors include code-level information about the error. For more informati
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [13]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
 [14]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
+[15]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/#track-graphql-requests
