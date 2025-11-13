@@ -18,7 +18,7 @@ further_reading:
 
 Network Health provides a unified view of your network's most critical issues, automatically detecting and prioritizing problems across DNS, TLS certificates, security groups, and network anomalies. It surfaces actionable insights with clear remediation paths, helping you resolve connectivity issues and reduce incident impact.
 
-{{< img src="network_performance_monitoring/network_health/network_health_overview.png" alt="The Network Health page showing recommended actions, Watchdog insights, TLS certificates, and DNS Failures" style="width:100%;">}}
+{{< img src="network_performance_monitoring/network_health/network_health_overview.png" alt="The Network Health page with the collapsible menu open, highlighting Recommended Actions." style="width:100%;">}}
 
 ## Prerequisites
 
@@ -33,12 +33,11 @@ The **Recommended Actions** section highlights the most critical issues detected
 
 Each recommended action displays:
 
-- The specific problem detected (for example, "TLS certificate expired 5 days ago").
+- The specific problem detected (for example, "TLS certificate expired _N_ days ago").
 - **Impacted client service**: The service making requests.
 - **Impacted server service**: The service receiving requests.
-- A direct path to remediation.
 
-Hover over a service name to pivot to APM for additional context, or click on a recommended action to open a side panel which contains remediation steps and links to related resources.
+Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [New workflow,][2] [Create a Case][3], or [Declare an Incident][4].
 
    {{< img src="network_performance_monitoring/network_health/recommended_actions_side_panel.png" alt="Recommended actions side panel of an affected service, showing remediation steps." style="width:100%;">}}
 
@@ -59,18 +58,30 @@ TLS certificates that have expired or are about to expire prevent secure connect
 - **Expiring certificates**: Certificates about to expire, allowing you to take preventative action.
 - **Impacted services**: The client and server services affected by each certificate issue.
 
-Click **Renew Certificate** to initiate the certificate renewal process directly from the Network Health page.
+Click on an expired certificate to view remediation steps for renewing it in AWS, along with options to create a [New workflow,][2] [Create a Case][3], or [Declare an Incident][4].
 
 ## DNS failures
 
 DNS server misconfigurations can route traffic to incorrect destinations, preventing services from communicating. DNS failures typically result from changes made to DNS server routing configurations.
 
 This section shows:
-- DNS servers experiencing elevated failure rates.
-- Services impacted by DNS resolution issues.
-- The timing of DNS failure spikes.
 
-Hover over a service name to pivot to APM for additional context, or click on DNS Failure to open a side panel which contains remediation steps and links to related resources.
+- DNS failure reason.
+- **DNS servers** experiencing elevated failure rates.
+- **Impacted services**: The client and server services affected by each DNS failure issue.
+
+**Failure reasons**:
+
+NXDOMAIN  
+: The domain name does not exist. This typically indicates a misconfiguration or the domain has been removed.
+
+TIMEOUT 
+: The DNS query timed out before receiving a response. This may indicate network issues or unresponsive DNS servers.
+
+SERVFAIL
+: The DNS server failed to process a query, often due to a server-side problem.
+
+Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [New workflow,][2] [Create a Case][3], or [Declare an Incident][4].
 
 ## Security groups
 
@@ -85,7 +96,7 @@ This section identifies:
 1. Click on a security group issue to open the side panel.
 2. Select **View in AWS** to navigate to the AWS console.
 3. Review and modify the inbound and outbound rules.
-4. Use **Infrastructure Change Tracking** data in the side panel to identify when the problematic change occurred, making it easier to revert specific modifications.
+4. Use the **Infrastructure Change Tracking** data in the side panel to identify when the problematic change occurred, making it easier to revert specific modifications.
 
 ## Filtering
 
@@ -99,3 +110,6 @@ Use the filters at the top of the page to narrow the scope of displayed issues. 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /network_monitoring/cloud_network_monitoring/setup
+[2]: /service_management/case_management/create_case
+[3]: /actions/workflows/build/
+[4]: /service_management/incident_management/declare/
