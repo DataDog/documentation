@@ -1,9 +1,12 @@
 ---
-title: OAuth Apps
+description: Gérez et supervisez les applications OAuth dans votre organisation, y
+  compris les autorisations, l'accès des utilisateurs et les contrôles de statut des
+  applications.
 further_reading:
-  - link: /account_management/org_settings/
-    tag: Documentation
-    text: En savoir plus sur les paramètres de votre organisation
+- link: /account_management/org_settings/
+  tag: Documentation
+  text: En savoir plus sur les paramètres de votre organisation
+title: OAuth Apps
 ---
 ## Présentation
 
@@ -14,13 +17,13 @@ Utilisez la page **OAuth Apps** des [paramètres d'organisation][1] pour gérer 
 ## Configuration
 ### Autorisations
 
-Par défaut, tous les utilisateurs disposant des rôles [Standard et Admin Datadog][2] peuvent accéder à la page de gestion OAuth Apps. Si votre organisation a défini des [rôles personnalisés][3], ajoutez des utilisateurs à n'importe quel rôle disposant des autorisations `org_authorized_apps_read` et `org_authorized_apps_write` pour qu'ils puissent accéder à la page.
+Par défaut, tous les utilisateurs disposant du rôle [Admin Datadog][2] peuvent accéder à la page de gestion OAuth Apps. Si votre organisation a défini des [rôles personnalisés][3], ajoutez des utilisateurs à n'importe quel rôle personnalisé disposant de l'autorisation `org_management`.
 
-Seuls les utilisateurs avec le rôle Admin Datadog ou l'autorisation `org_authorized_apps_write` peuvent gérer les applications OAuth sur cette page. Ils ont par exemple la possibilité de désactiver des applications ou de révoquer l'accès OAuth d'un certain utilisateur.
+Seuls les utilisateurs avec le rôle Admin Datadog ou l'autorisation `org_management` peuvent gérer les applications OAuth sur cette page. Ils ont par exemple la possibilité de désactiver des applications ou de révoquer l'accès OAuth d'un certain utilisateur.
 
 ### Section Enable
 
-Lorsqu'une application OAuth est activée, les utilisateurs disposant des autorisations nécessaires peuvent autoriser son accès en leur nom. Les applications OAuth comprennent par exemple l'application mobile Datadog ainsi que vos [applications Datadog][4] personnalisées dotées d'un [accès à l'API OAuth][5].
+Les applications OAuth activées permettent aux utilisateurs disposant des autorisations nécessaires d'autoriser l'accès en leur nom. Les applications OAuth incluent l'application mobile Datadog<!-- ainsi que vos [extensions d'interface utilisateur personnalisées][4] disposant d'un [accès à l'API OAuth][5]-->.
 
 ### Section Disable
 
@@ -47,5 +50,5 @@ Lorsque vous révoquez l'accès OAuth d'un utilisateur à une application, il ne
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: /fr/account_management/rbac/permissions/#general-permissions
 [3]: /fr/account_management/rbac/?tab=datadogapplication#custom-role
-[4]: /fr/developers/datadog_apps/
-[5]: /fr/developers/datadog_apps/#oauth-api-access
+[4]: /fr/developers/ui_extensions/
+[5]: /fr/developers/ui_extensions/#oauth-api-access

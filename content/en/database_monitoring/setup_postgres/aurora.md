@@ -66,7 +66,7 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**Note:** IAM authentication is also supported. Please see [the guide][13] on how to configure this for your Aurora instance.
+**Note:** IAM authentication is also supported. Please see [the guide][14] on how to configure this for your Aurora instance.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}

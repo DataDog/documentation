@@ -25,18 +25,18 @@
     {{ range ($list.GroupByParam "group_id") }}
         {{ range .Pages }}
             {{ $pad.Set "providers" ( union ($pad.Get "providers") (slice (( .Params.meta.cloud_provider ))) ) }}
-            {{ $pad.Set "frameworks" ( union ($pad.Get "frameworks") (slice (( .Params.meta.framework ))) ) }}
+            {{ $pad.Set "platforms" ( union ($pad.Get "platforms") (slice (( .Params.meta.platform ))) ) }}
         {{ end }}
     {{ end }}
 
     {{ $valid_clouds := $pad.Get "providers" }}
-    {{ $valid_frameworks := $pad.Get "frameworks" }}
+    {{ $valid_platforms := $pad.Get "platforms" }}
     <div
     class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
     x-data="{
         filterTypes: {
             providers: [],
-            frameworks: [],
+            platforms: [],
             categories: [],
             severities: []
         },
@@ -48,10 +48,11 @@
             // if logo name different than 'providers' name,
             // map to appropriate integration logo name (e.g. csharp: 'net')
             gcp: 'google-cloud-platform',
-            aws: 'amazon-web-services'
+            aws: 'amazon-web-services',
         },
-        framework_aliases: {
-            // if logo name different than 'frameworks' name,
+        platform_aliases: {
+            cicd: 'github_cicd',
+            // if logo name different than 'platforms' name,
             // map to appropriate integration logo name (e.g. csharp: 'net')
         },
         resetFilteredRulesets () {
@@ -86,7 +87,7 @@
             *   FILTER LOGIC (containsFilteredValue) e.g.
             *   {
             *      providers: [aws, azure],
-            *      frameworks: [terraform, kurbernetes],
+            *      platforms: [terraform, kurbernetes],
             *      categories: [severity],
             *      severities: [warning]
             *   }
@@ -132,11 +133,11 @@
 
             window.history.pushState(null,'', newURL || url.toString())
         },
-        updateWithURLParams (validClouds, validFrameworks) {
+        updateWithURLParams (validClouds, validPlatforms) {
             // Updates x-data properties with url param values
 
             const validCloudsArr = validClouds.replaceAll(/[\[\]]/g, '').split(' ')
-            const validFrameworksArr = validFrameworks.replaceAll(/[\[\]]/g, '').split(' ')
+            const validPlatformsArr = validPlatforms.replaceAll(/[\[\]]/g, '').split(' ')
             const url = new URL(window.location.href)
             const cloudAliasMap = validCloudsArr.reduce((acc,l) => {
                 // map to appropriate cloud display name
@@ -144,9 +145,9 @@
                 acc[cloud.toLowerCase()] = displayName
                 return acc
             }, {})
-            const frameworkAliasMap = validFrameworksArr.reduce((acc,l) => {
-                const [framework, displayName] = l.split(';')
-                acc[framework.toLowerCase()] = displayName
+            const platformAliasMap = validPlatformsArr.reduce((acc,l) => {
+                const [platform, displayName] = l.split(';')
+                acc[platform.toLowerCase()] = displayName
                 return acc
             }, {})
 
@@ -158,12 +159,12 @@
                     const displayName = cloudAliasMap[value.toLowerCase()] ?? value
                     const cloudLookupName = cloudAliasMap[value.toLowerCase()] ? `,${value}`: ''
                     this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg${cloudLookupName}`)
-                } else if ((key === 'frameworks') && validFrameworksArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
-                    const logoName = this.framework_aliases[value.toLowerCase()] ?? value
-                    const displayName = frameworkAliasMap[value.toLowerCase()] ?? value
-                    const frameworkLookupName = frameworkAliasMap[value.toLowerCase()] ? `,${value}`: ''
-                    this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg${frameworkLookupName}`)
-                } else if (key != 'providers' && key != 'frameworks'){
+                } else if ((key === 'platform') && validPlatformsArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
+                    const logoName = this.platform_aliases[value.toLowerCase()] ?? value
+                    const displayName = platformAliasMap[value.toLowerCase()] ?? value
+                    const platformLookupName = platformAliasMap[value.toLowerCase()] ? `,${value}`: ''
+                    this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg${platformLookupName}`)
+                } else if (key != 'providers' && key != 'platforms'){
                     this.filterTypes[key]?.push(value)
                 }
             })
@@ -229,7 +230,7 @@
             }
         }
     }"
-    x-init="updateWithURLParams('{{$valid_clouds}}', '{{$valid_frameworks}}')">
+    x-init="updateWithURLParams('{{$valid_clouds}}', '{{$valid_platforms}}')">
         {{/*  DATA TABLE  */}}
         <div class="col-12 order-1">
             <div class="ps-0">
@@ -251,7 +252,7 @@
                                 build a string with rule's lookup info for filtering and searching against
                             */}}
                             {{ $rule_id := index (split .Params.meta.name "/") 1}}
-                            {{ $filter_info := (printf "%s,%s,%s,%s" .Params.meta.cloud_provider .Params.meta.category .Params.meta.severity .Params.meta.framework) }}
+                            {{ $filter_info := (printf "%s,%s,%s,%s" .Params.meta.cloud_provider .Params.meta.category .Params.meta.severity .Params.meta.platform) }}
                             {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
                             <div 
                             class="item container justify-content-between border p-1 position-relative"
@@ -281,13 +282,13 @@
                                 e.g:
                                 filters: {
                                     Provider: [],
-                                    Framework: [],
+                                    Platform: [],
                                     Category: [],
                                     Severity: {}
                                 }
                             */}}
                             {{ $pad.SetInMap "filters" "Providers" (union (index ($pad.Get "filters") "Providers") (slice .Params.meta.cloud_provider)) }}
-                            {{ $pad.SetInMap "filters" "Frameworks" (union (index ($pad.Get "filters") "Frameworks") (slice .Params.meta.framework)) }}
+                            {{ $pad.SetInMap "filters" "Platforms" (union (index ($pad.Get "filters") "Platforms") (slice .Params.meta.platform)) }}
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
                             {{ $pad.SetInMap "filters" "Severities" (slice "CRITICAL" "HIGH" "MEDIUM" "LOW" "INFO") }}
                             {{/*  
@@ -337,7 +338,7 @@
         </div>
         {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
         <nav id="multifilter-search-nav" class="container px-0">
-            {{ $filter_types := (slice "Providers" "Frameworks" "Categories" "Severities") }}
+            {{ $filter_types := (slice "Providers" "Platforms" "Categories" "Severities") }}
             <div class="filters__multifilter row">
                 {{ range $filter_types }}
                 {{ $filter_type := . | lower}}
@@ -396,7 +397,16 @@
                             <div class="filter-selection-container">
 
                                 {{ $cloud_lookup_name := . }}
-                                {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $cloud_lookup_name "variant" "avatar") $cloud_lookup_name "avatar" }}
+                                {{ $int_logo := partialCached "integrations-logo.html" 
+                                    (dict "context" $dot "basename"
+                                        (cond (eq
+                                        $cloud_lookup_name "CICD") "github"
+                                        $cloud_lookup_name
+                                        )
+                                    )
+                                    "variant" "avatar"
+                                     $cloud_lookup_name "avatar" 
+                                }}
                                 {{/*  store $int_logo and $cloud_lookup_name with filter value if $int_logo is present. e.g. "Javascript,int_logo url,<alias name>" */}}
                                 {{ $value := (printf "%s,%s" $cloud_lookup_name $int_logo)}}
                                 <input
@@ -409,7 +419,7 @@
                                 >
 
                                 <label for="{{ $cloud_lookup_name | anchorize }}" class="d-flex align-items-center">
-                                    {{ if and ( or (eq $filter_type "providers") (eq $filter_type "frameworks")) $int_logo }}
+                                    {{ if and ( or (eq $filter_type "providers") (eq $filter_type "platforms")) $int_logo }}
                                     <img src="{{ $int_logo }}" height="16" alt="{{ $cloud_lookup_name }}"/>
                                     {{ end }}
                                     {{$cloud_lookup_name}}

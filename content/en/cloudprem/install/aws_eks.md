@@ -13,8 +13,8 @@ further_reading:
   text: "Configure Log Ingestion"
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
@@ -27,7 +27,7 @@ Before getting started with CloudPrem, ensure you have:
 
 - AWS account with necessary permissions
 - Kubernetes `1.25+` ([EKS][1] recommended)
-- [AWS Load Balancer Controller installed][2]
+- [AWS Load Balancer Controller installed][2] (optional)
 - PostgreSQL database ([RDS][3] recommended)
 - S3 bucket for log storage
 - Datadog Agent
@@ -80,27 +80,42 @@ echo ""
 ## Install the CloudPrem Helm chart
 
 1. Add and update the Datadog Helm repository:
-
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
    ```
 
-2. Create a Kubernetes namespace for the chart:
-
+1. Create a Kubernetes namespace for the chart:
    ```shell
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-3. Store the PostgreSQL database connection string as a Kubernetes secret:
+   For example, to create a `cloudprem` namespace:
+   ```shell
+   kubectl create namespace cloudprem
+   ```
+
+   **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
+   ```shell
+   kubectl config set-context --current --namespace=cloudprem
+   ```
+
+1. Store your Datadog API key as a Kubernetes secret:
 
    ```shell
-   kubectl create secret generic <SECRET_NAME> \
+   kubectl create secret generic datadog-secret \
+   -n <NAMESPACE_NAME> \
+   --from-literal api-key="<DD_API_KEY>"
+   ```
+
+1. Store the PostgreSQL database connection string as a Kubernetes secret:
+   ```shell
+   kubectl create secret generic cloudprem-metastore-uri \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>"
    ```
 
-4. Customize the Helm chart
+1. Customize the Helm chart
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the image tag, AWS account ID, service account, ingress setup, resource requests and limits, and more.
 
@@ -122,6 +137,13 @@ echo ""
    environment:
      AWS_REGION: us-east-1
 
+   # Datadog configuration
+   datadog:
+      # The Datadog [site](https://docs.datadoghq.com/getting_started/site/) to connect to. Defaults to `datadoghq.com`.
+      # site: datadoghq.com
+      # The name of the existing Secret containing the Datadog API key. The secret key name must be `api-key`.
+      apiKeyExistingSecret: datadog-secret
+
    # Service account configuration
    # If `serviceAccount.create` is set to `true`, a service account is created with the specified name.
    # The service account will be annotated with the IAM role ARN if `aws.accountId` and serviceAccount.eksRoleName` are set.
@@ -141,27 +163,11 @@ echo ""
      # All indexes created in CloudPrem are stored under this location.
      default_index_root_uri: s3://<BUCKET_NAME>/indexes
 
-   # Ingress configuration
-   # The chart supports two ingress configurations:
-   # 1. A public ingress for external access through the internet that will be used exclusively by Datadog's control plane and query service.
-   # 2. An internal ingress for access within the VPC
-   #
-   # Both ingresses provision an Application Load Balancers (ALBs) in AWS.
-   # The public ingress ALB is created in public subnets.
-   # The internal ingress ALB is created in private subnets.
+   # Internal ingress configuration for access within the VPC
+   # The ingress provisions an Application Load Balancers (ALBs) in AWS which is created in private subnets.
    #
    # Additional annotations can be added to customize the ALB behavior.
    ingress:
-     # The public ingress is configured to only accept TLS traffic and requires mutual TLS (mTLS) authentication.
-     # Datadog's control plane and query service authenticate themselves using client certificates,
-     # ensuring that only authorized Datadog services can access CloudPrem nodes through the public ingress.
-     public:
-       enabled: true
-       name: cloudprem-public
-       host: cloudprem.acme.corp
-       extraAnnotations:
-         alb.ingress.kubernetes.io/load-balancer-name: cloudprem-public
-
      # The internal ingress is used by Datadog Agents and other collectors running outside
      # the Kubernetes cluster to send their logs to CloudPrem.
      internal:
@@ -227,7 +233,7 @@ echo ""
          memory: "16Gi"
    ```
 
-5. Install or upgrade the Helm chart
+1. Install or upgrade the Helm chart
 
    ```shell
    helm upgrade --install <RELEASE_NAME> datadog/cloudprem \

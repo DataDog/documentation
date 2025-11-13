@@ -3,8 +3,8 @@ title: Install CloudPrem
 description: Learn how to deploy CloudPrem on various platforms and environments
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
@@ -36,6 +36,7 @@ CloudPrem supports the following object storage types:
 {{< whatsnext desc="Select the installation guide that matches your environment:">}}
   {{< nextlink href="/cloudprem/install/aws_eks/" >}}Install on AWS EKS{{< /nextlink >}}
   {{< nextlink href="/cloudprem/install/azure_aks/" >}}Install on Azure AKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/docker/" >}}Install locally with Docker for testing{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <!-- ## Self-managed Kubernetes

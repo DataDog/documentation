@@ -4,6 +4,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-network-path-monitoring/
   tag: Blog
   text: Obtener visibilidad de extremo a extremo de la red con la Ruta de red de Datadog
+- link: https://www.datadoghq.com/blog/network-path/
+  tag: Blog
+  text: Identifica las ralentizaciones en toda la red con Datadog Network Path
 is_beta: true
 title: Ruta de red
 ---
@@ -13,7 +16,7 @@ title: Ruta de red
 La Ruta de red ilustra la ruta que sigue el tráfico de red desde su origen hasta su destino. Esto proporciona a los administradores de red la capacidad de identificar con precisión el origen de los problemas de red, ya sean internos o de un proveedor de servicios de Internet (ISP), o debido a otros problemas como un enrutamiento erróneo. Cada fila significa una ruta desde un origen hasta su destino, como se muestra en el panel de facetas `source` y `destination`.
 
 
-{{< img src="network_performance_monitoring/network_path/network_path_default_view_3.png" alt="La vista predeterminada de Ruta de red, que muestra la ruta desde el origen al destino" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_default_view_4.png" alt="La vista predeterminada de Network Path, que muestra la ruta desde la fuente al destino, con la leyenda ampliada" >}}
 
 ## Cómo funciona
 

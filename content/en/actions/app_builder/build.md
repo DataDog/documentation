@@ -183,7 +183,7 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [5]: /service_management/workflows/connections
 [6]: /service_management/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
-[8]: https://datadoghq.slack.com/
+[8]: https://chat.datadoghq.com/
 [9]: /service_management/app_builder/components
 [10]: https://app.datadoghq.com/app-builder/action-catalog
 [11]: /service_management/app_builder/events

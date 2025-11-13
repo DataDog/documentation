@@ -65,4 +65,4 @@ For a full working example configuration with the Datadog exporter, see [`trace-
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
 [2]: /tracing/metrics/metrics_namespace/
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/trace-metrics.yaml
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/trace-metrics.yaml

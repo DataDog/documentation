@@ -188,7 +188,7 @@ Value: 0.170933
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
 [2]: /opentelemetry/guide/metrics_mapping/
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/docker-stats.yaml
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/docker-stats.yaml
 [4]: /universal_service_monitoring/setup/
 [5]: /opentelemetry/guide/semantic_mapping/
 [6]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard

@@ -4,18 +4,24 @@ aliases:
 - /es/logs/search_syntax/
 description: Busca a través de todos tus logs.
 further_reading:
+- link: /getting_started/search/
+  tag: Documentación
+  text: Introducción a la búsqueda en Datadog
 - link: /logs/explorer/#visualize
   tag: Documentación
   text: Aprende a visualizar logs
 - link: /logs/explorer/#patterns
   tag: Documentación
-  text: Detecta patrones dentro de tus logs
+  text: Detecta patrones en tus logs
 - link: /logs/log_configuration/processors
   tag: Documentación
-  text: Aprende a procesar tus logs
+  text: Aprender a procesar tus logs
 - link: /logs/explorer/saved_views/
   tag: Documentación
-  text: Información sobre las vistas guardadas
+  text: Más información sobre las vistas guardadas
+- link: /logs/explorer/calculated_fields/expression_language
+  tag: Documentación
+  text: Más información sobre el lenguaje de expresión de campos calculados
 title: Sintaxis de búsqueda de logs
 ---
 
@@ -25,62 +31,55 @@ Un filtro de consulta se compone de términos y operadores.
 
 Existen dos tipos de términos:
 
-* Un **término único** es una sola palabra, como `test` o `hello`.
+* Un **término único** es una sola palabra como `test` o `hello`.
 
-* Una **secuencia** es un grupo de palabras delimitadas por comillas dobles, como `"hello dolly"`.
+* Una **secuencia** es un grupo de palabras rodeadas de comillas dobles, como `"hello dolly"`.
 
 Para combinar varios términos en una consulta compleja, puedes utilizar cualquiera de los siguientes operadores booleanos que distinguen entre mayúsculas y minúsculas:
 
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | **Operador** | **Descripción**                                                                                        | **Ejemplo**                  |
-| `AND`        | **Intersección**: ambos términos están en los eventos seleccionados (si no se añade nada, se toma AND por defecto). | autenticación AND error   |
-| `OR`         | **Unión**: cualquiera de los dos términos está en los eventos seleccionados.                                             | autenticación OR contraseña   |
-| `-`          | **Exclusión**: el término siguiente NO figura en el evento (se aplica a cada búsqueda individual de texto sin formato).                                                  | autenticación AND -contraseña |
+| `AND`        | **Intersección**: ambos términos están en los eventos seleccionados (si no se añade nada, se toma AND por defecto). | autenticación Y fallo   |
+| `OR`         | **Unión**: cualquiera de los dos términos está en los eventos seleccionados.                                             | autenticación O contraseña   |
+| `-`          | **Exclusión**: el siguiente término NO figura en el evento (se aplica a cada búsqueda de texto sin formato individual).                                                  | autenticación Y contraseña |
 
 ## Búsqueda de texto completo
 
-<div class="alert alert-danger">La función de búsqueda de texto completo solo está disponible en Log Management y funciona en las consultas de monitor, dashboard y notebook. La sintaxis de búsqueda de texto completo no puede utilizarse para definir filtros de índice, filtros de archivo, filtros de pipeline de log ni en Live Tail. </div>
+<div class="alert alert-danger">La función de búsqueda de texto completo solo está disponible en Log Management y funciona en las consultas de monitor, dashboard y notebook. La sintaxis de búsqueda de texto completo no puede utilizarse para definir filtros de índice, filtros de archivo, filtros de pipeline de log, filtros de rehidratación ni en Live tail. </div>
 
 Utiliza la sintaxis `*:search_term` para realizar una búsqueda de texto completo en todos los atributos de log, incluido el mensaje de log.
 
 ### Ejemplo de término único
 
-| Sintaxis de búsqueda | Tipo de búsqueda | Descripción                                           |
-| ------------- | ----------- | ----------------------------------------------------- |
-| `*:hello` | Texto completo   | Busca todos los atributos de log para el término `hello`.     |
-| `hello`       | Texto libre   | Busca solo en el mensaje de log el término `hello`.   |
+| Sintaxis de búsqueda | Tipo de búsqueda | Descripción                                               |
+| ------------- | ----------- | --------------------------------------------------------- |
+| `*:hello`     | Texto completo   | Busca en todos los atributos de log la cadena exacta `hello`. |
+| `hello`       | Texto libre   | Busca la cadena exacta `hello` solo en los atributos `message`, `@title`, `@error.message` y `@error.stack`.       |
 
 ### Ejemplo de término de búsqueda con comodín
 
-| Sintaxis de búsqueda | Tipo de búsqueda | Descripción                                                                                  |
-| ------------- | ----------- | -------------------------------------------------------------------------------------------- |
-| `*:hello` | Texto completo   | Busca en todos los atributos de log la cadena exacta `hello`.                                    |
-| `*:hello*`| Texto completo   | Busca en todos los atributos de log cadenas que empiecen por `hello`. Por ejemplo, `hello_world`.|
+| Sintaxis de búsqueda | Tipo de búsqueda | Descripción                                                                                 |
+| ------------- | ----------- | ------------------------------------------------------------------------------------------- |
+| `*:hello`     | Texto completo   | Busca en todos los atributos de log la cadena exacta `hello`.                                   |
+| `*:hello*`    | Texto completo   | Busca en todos los atributos de log las cadenas que empiecen por `hello`. Por ejemplo, `hello_world`.  |
 
 ### Ejemplo de términos múltiples con coincidencia exacta
 
-| Sintaxis de búsqueda       | Tipo de búsqueda | Descripción                                            |
-| ------------------- | ----------- |------------------------------------------------------- |
-| `*:"hello world"` | Texto completo   | Busca todos los atributos de log para el término `hello world`. |
-| `hello world`       | Texto libre   | Busca solo en el mensaje de log el término `hello`.     |
-
-### Ejemplo de términos múltiples sin coincidencia exacta
-
-La sintaxis de búsqueda de texto completo `*:hello world` es equivalente a `*:hello *:world`. Busca en todos los atributos de log los términos `hello` y `world`.
-
-### Ejemplo de términos múltiples con un espacio en blanco
-
-La sintaxis de búsqueda de texto completo `*:"hello world" "i am here"` es equivalente a `*:"hello world" *:"i am here"`. Busca en todos los atributos de log los términos `hello world` y `i am here`.
+| Sintaxis de búsqueda       | Tipo de búsqueda | Descripción                                                                                        |
+| ------------------- | ----------- |--------------------------------------------------------------------------------------------------- |
+| `*:"hello world"`   | Texto completo   | Busca en todos los atributos de log la cadena exacta `hello world`.                                    |
+| `hello world`       | Texto libre   | Busca sólo en el mensaje de log las palabras `hello` y `world`. Por ejemplo `hello beautiful world`.  |
 
 ## Caracteres especiales de escape y espacios
 
-Los siguientes caracteres, que se consideran especiales: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `#` y los espacios que requieren ser de escape con el carácter `\`. 
-`/` no se considera un carácter especial y no necesita ser de escape.
+Los siguientes caracteres se consideran especiales y deben escaparse con el carácter `\`: `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#` y espacios.
+- `/` no se considera un carácter especial y no necesita escape.
+- `@` no puede utilizarse en las consultas de búsqueda dentro del Log Explorer porque está reservado para la [búsqueda de atributos](#attributes-search).
 
 No se pueden buscar caracteres especiales en un mensaje de log. Puedes buscar caracteres especiales cuando están dentro de un atributo.
 
-Para buscar caracteres especiales, analízalos en un atributo con el [Analizador Grok][1], y busca los logs que contengan ese atributo.
+Para buscar caracteres especiales, analízalos en un atributo con el [Analizador Grok][1] y busca los logs que contengan ese atributo.
 
 
 ## Búsqueda de atributos
@@ -102,7 +101,7 @@ Por ejemplo, si el nombre de tu atributo es **url** y quieres filtrar por el val
 
 3. La búsqueda de un valor de atributo que contenga caracteres especiales requiere un carácter de escape o comillas dobles.
     - Por ejemplo, para un atributo `my_attribute` con el valor `hello:world`, busca utilizando: `@my_attribute:hello\:world` o `@my_attribute:"hello:world"`.
-    - Para que coincida con un único carácter especial o espacio, utiliza el comodín `?`. Por ejemplo, para un atributo `my_attribute` con el valor `hello world`, busca utilizando: `@my_attribute:hello?world`.
+    - Para buscar una coincidencia con un único carácter especial o espacio, utiliza el comodín `?`. Por ejemplo, para un atributo `my_attribute` con los valores `hello world`, realiza la búsqueda utilizando: `@my_attribute:hello?world`.
 
 Ejemplos:
 
@@ -134,11 +133,11 @@ Puedes utilizar comodines con la búsqueda de texto libre. Sin embargo, solo bus
 
 Para realizar una búsqueda de comodín de varios caracteres en el mensaje de log (la columna `content` en Log Explorer), utiliza el símbolo `*` como se indica a continuación:
 
-* `service:web*` coincide con cada mensaje de log que tenga un servicio que empiece por `web`.
+* `service:web*` coincide con cada mensaje de log que tenga un servicio que empiece con `web`.
 * `web*` coincide con todos los mensajes de log que empiecen con `web`.
 * `*web` coincide con todos los mensajes de log que terminan con `web`.
 
-**Nota**: Los comodines solo funcionan fuera de las comillas dobles. Por ejemplo, `"*test*"` coincide con un log que tenga la cadena `*test*` en su mensaje. `*test*` coincide con un log que tenga la test de cadena en cualquier parte de su mensaje.
+**Nota**: Los comodines solo funcionan fuera de las comillas dobles. Por ejemplo, `"*test*"` coincide con un log que tenga la cadena `*test*` en su mensaje. `*test*` coincide con un log que tenga el test de cadena en cualquier parte de su mensaje.
 
 Las búsquedas con comodines funcionan dentro de etiquetas y atributos (con o sin facetas) con esta sintaxis. Esta consulta devuelve todos los servicios que terminan con la cadena `mongo`:
 <p> </p>
@@ -163,7 +162,7 @@ Cuando busques un valor de atributo o etiqueta que contenga caracteres especiale
 
 ## Valores numéricos
 
-Para buscar en un atributo numérico, primero [añádelo como faceta][2]. A continuación, puedes utilizar operadores numéricos (`<`,`>`, `<=`, o `>=`) para realizar una búsqueda sobre facetas numéricas.
+Para buscar en un atributo numérico, primero [añádelo como faceta][2]. A continuación, puedes utilizar operadores numéricos (`<`,`>`, `<=` o `>=`) para realizar una búsqueda sobre facetas numéricas.
 Por ejemplo, recupera todos los logs que tengan un tiempo de respuesta superior a 100ms con:
 <p> </p>
 
@@ -204,11 +203,17 @@ En el siguiente ejemplo, los logs de CloudWatch para Windows contienen una matri
 {{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Consulta sin facetas en una matriz de objetos JSON" style="width:80%;">}}
 <p> </p>
 
+## Campos calculados
+
+Los campos calculados función como atributos de log y pueden utilizarse para la búsqueda, agregación, visualización y definición de otros campos calculados. Utiliza el prefijo `#` cuando hagas referencia a nombres de campos calculados.
+
+{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="Un campo calculado llamado request_duration que se utiliza para filtrar resultados en el Log Explorer" style="width:100%;" >}}
+
 ## Búsquedas guardadas
 
 Las [Vistas guardadas][6] contienen tu consulta de búsqueda, columnas, horizonte temporal y faceta.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

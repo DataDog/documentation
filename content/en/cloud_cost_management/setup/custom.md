@@ -44,7 +44,7 @@ Additionally, all dates are transformed into UTC timestamps. For example, "2024-
 
 ## Setup
 
-To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.
+To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, Google Cloud, or Oracle Cloud, even if your custom costs are not related to any of these cloud providers. This configuration is required to enable the Custom Costs feature.
 
 ### Collect the required fields
 
