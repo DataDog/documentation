@@ -56,7 +56,20 @@
 
       <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
         <div id="mainContent">
-          {{ block "main" . }}{{ end }}
+          <div class="row">
+            <div class="col-12 order-1">
+                <h1 id="pagetitle">{{ .Title }}</h1>
+            </div>
+            <div class="col-12">
+              {{ if .File }}
+                {{ partial "breadcrumbs.html" . }}
+              {{ end }}
+            </div>
+          </div>
+          {{ partial "translate_status_banner/translate_status_banner.html" . }}
+          {{ partial "site_support_banner/site_support_banner.html" . }}
+          {{ .Content }}
+
           {{ partial "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
         </div>
       </div>

@@ -37,14 +37,14 @@ Choose your setup method:
 ### Supported platforms
 Agentic setup is available for the following platforms:
 
-**Frontend applications**  
+**Frontend applications**
 - Next.js
 - React
 - Svelte
 - Vanilla JavaScript (Angular is not supported)
 - Vue
 
-**LLM and AI agent applications**  
+**LLM and AI agent applications**
 - Python or Node.js—from scripts using [OpenAI's Responses API][10] to complex FastAPI applications powered by [LangGraph][11], or rich chatbot experiences built on [Vercel's AI SDK][12].
 
 ### Install the Datadog Onboarding MCP server
@@ -108,7 +108,7 @@ claude mcp add --transport http datadog-onboarding-mcp "https://mcp.us3.datadogh
 
 Prompt your AI coding agent to enable all capabilities (Error Tracking, Session Replay, Product Analytics, and LLM Observability) in minutes by copying the below prompt into Cursor or Claude Code.
 
-**Prompt**: 
+**Prompt**:
 ```console
 Add Datadog Studio to my project
 ```
