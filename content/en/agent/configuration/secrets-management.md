@@ -413,7 +413,41 @@ If you want the Agent to read a Secret from a different namespace, use the `k8s_
 password: ENC[k8s_secret@database/database-secret/password]
 ```
 
-In this case, you must manually configure RBAC to allow the Agent's Service Account to read the Secret:
+In this case, you must manually RBAC to allow the Agent's Service Account to read the Secret:
+{{< tabs >}}
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  (...)
+  secretBackend:
+    command: "/readsecret_multiple_providers.sh"
+    roles:
+      - namespace: database
+        secrets:
+          - database-secret
+```
+{{% /tab %}}
+{{% tab "Operator" %}}
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    secretBackend:
+      command: "/readsecret_multiple_providers.sh"
+      roles:
+      - namespace: database
+        secrets:
+        - "database-secret"
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+In this example, a Role is created granting read access to the Secret `database-secret` in the `database` namespace.
+
+You can also manually configure RBAC to allow the Agent's Service Account to read the Secret:
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
