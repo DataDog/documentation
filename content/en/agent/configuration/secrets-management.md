@@ -413,7 +413,7 @@ If you want the Agent to read a Secret from a different namespace, use the `k8s_
 password: ENC[k8s_secret@database/database-secret/password]
 ```
 
-In this case, you must manually RBAC to allow the Agent's Service Account to read the Secret:
+In this case, you must configure RBAC to allow the Agent's Service Account to read the Secret:
 {{< tabs >}}
 {{% tab "Helm" %}}
 ```yaml
