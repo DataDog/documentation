@@ -5842,56 +5842,161 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
       weight: 421
+    - name: Packs
+      url: observability_pipelines/packs/
+      parent: observability_pipelines
+      identifier: observability_pipelines_packs
+      weight: 5
+    - name: Akamai CDN
+      url: observability_pipelines/packs/akamai_cdn/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_akamai_cdn
+      weight: 501
+    - name: Amazon CloudFront
+      url: observability_pipelines/packs/amazon_cloudfront/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_amazon_cloudfront
+      weight: 502
+    - name: Amazon VPC Flow Logs
+      url: observability_pipelines/packs/amazon_vpc_flow_logs/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_amazon_vpc_flow_logs
+      weight: 503
+    - name: AWS CloudTrail
+      url: observability_pipelines/packs/aws_cloudtrail/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_cloudtrail
+      weight: 504
+    - name: Cisco ASA
+      url: observability_pipelines/packs/cisco_asa/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cisco_asa
+      weight: 505
+    - name: Cloudflare
+      url: observability_pipelines/packs/cloudflare/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cloudflare
+      weight: 506
+    - name: F5
+      url: observability_pipelines/packs/f5/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_f5
+      weight: 507
+    - name: Fastly
+      url: observability_pipelines/packs/fastly/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_fastly
+      weight: 508
+    - name: Fortinet Firewall
+      url: observability_pipelines/packs/fortinet_firewall/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_fortinet_firewall
+      weight: 509
+    - name: HAProxy Ingress
+      url: observability_pipelines/packs/haproxy_ingress/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_haproxy_ingress
+      weight: 510
+    - name: Istio Proxy
+      url: observability_pipelines/packs/istio_proxy/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_istio_proxy
+      weight: 511
+    - name: Netskope
+      url: observability_pipelines/packs/netskope/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_netskope
+      weight: 512
+    - name: NGINX
+      url: observability_pipelines/packs/nginx/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_nginx
+      weight: 513
+    - name: Okta
+      url: observability_pipelines/packs/okta/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_okta
+      weight: 514
+    - name: Palo Alto Firewall
+      url: observability_pipelines/packs/palo_alto_firewall/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_palo_alto_firewall
+      weight: 515
+    - name: Windows XML
+      url: observability_pipelines/packs/windows_xml/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_windows_xml
+      weight: 516
+    - name: ZScaler ZIA DNS
+      url: observability_pipelines/packs/zscaler_zia_dns/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_zscaler_zia_dns
+      weight: 517
+    - name: Zscaler ZIA Firewall
+      url: observability_pipelines/packs/zscaler_zia_firewall/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_zscaler_zia_firewall
+      weight: 518
+    - name: Zscaler ZIA Tunnel
+      url: observability_pipelines/packs/zscaler_zia_tunnel/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_zscaler_zia_tunnel
+      weight: 519
+    - name: Zscaler ZIA Web Logs
+      url: observability_pipelines/packs/zscaler_zia_web_logs/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_zscaler_zia_web_logs
+      weight: 520
     - name: Search Syntax
       url: observability_pipelines/search_syntax/
       parent: observability_pipelines
       identifier: observability_pipelines_search_syntax
-      weight: 5
+      weight: 6
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
-      weight: 6
+      weight: 7
     - name: Handling Load and Backpressure
       url: observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_handling_load_and_backpressure
-      weight: 601
+      weight: 701
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 602
+      weight: 702
     - name: Monitoring and Troubleshooting
       url: observability_pipelines/monitoring_and_troubleshooting/
       parent: observability_pipelines
       identifier: observability_pipelines_monitoring_and_troubleshooting
-      weight: 7
+      weight: 8
     - name: Worker CLI Commands
       url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_worker_cli_commands
-      weight: 701
+      weight: 801
     - name: Monitoring Pipelines
       url: observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_monitoring_pipelines
-      weight: 702
+      weight: 802
     - name: Pipeline Usage Metrics
       url: observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_pipeline_usage_metrics
-      weight: 703
+      weight: 803
     - name: Troubleshooting
       url: observability_pipelines/monitoring_and_troubleshooting/troubleshooting/
       identifier: observability_pipelines_troubleshooting
       parent: observability_pipelines_monitoring_and_troubleshooting
-      weight: 704
+      weight: 804
     - name: Guides
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 8
+      weight: 9
     - name: Log Management
       url: logs/
       pre: log
@@ -7061,6 +7166,11 @@ menu:
       url: /security/code_security/secret_scanning/generic_ci_providers/
       parent: sec_secret_scanning
       weight: 2
+    - name: Secret Validation
+      identifier: sec_secret_scanning_secret_validation
+      url: /security/code_security/secret_scanning/secret_validation/
+      parent: sec_secret_scanning
+      weight: 3
     - name: Runtime Code Analysis (IAST)
       identifier: sec_iast
       url: /security/code_security/iast/
@@ -7689,6 +7799,11 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_supported_versions
       weight: 110
+    - name: SDK Performance Impact
+      url: real_user_monitoring/application_monitoring/ios/sdk_performance_impact
+      parent: rum_mobile_ios
+      identifier: rum_mobile_ios_performance_overhead
+      weight: 111
     - name: Flutter
       url: real_user_monitoring/application_monitoring/flutter
       parent: application_monitoring

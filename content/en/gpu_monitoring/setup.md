@@ -12,16 +12,18 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 
 #### Minimum version requirements
 
-- **Datadog Agent**: version 7.70.1
+- **Datadog Agent**: version 7.72.2
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Operating system**: Linux
    - (Optional) For advanced eBPF metrics, Linux kernel version 5.8
 - **NVIDIA driver**: version 450.51
 - **Kubernetes**: 1.22 with PodResources API active
 
-## Set up GPU Monitoring on a uniform cluster
+## Set up GPU Monitoring on a uniform cluster or non-Kubernetes environment
 
-In a uniform cluster, all nodes have GPU devices.
+The following instructions are the basic steps to set up GPU Monitoring in the following environments:
+- In a Kubernetes cluster where **all** the nodes have GPU devices
+- In a non-Kubernetes environment, such as Docker or non-containerized Linux.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -97,6 +99,156 @@ In a uniform cluster, all nodes have GPU devices.
 [2]: https://github.com/DataDog/datadog-agent/releases
 
 {{% /tab %}}
+
+{{% tab "Docker" %}}
+
+To enable GPU Monitoring in Docker without advanced eBPF metrics, use the following configuration when starting the container Agent:
+
+```shell
+docker run \
+--pid host \
+--gpus all \
+-e DD_GPU_ENABLED=true \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+gcr.io/datadoghq/agent:latest
+```
+
+To enable advanced eBPF metrics, use the following configuration for the required permissions to run eBPF programs:
+
+```shell
+docker run \
+--cgroupns host \
+--pid host \
+--gpus all \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
+-e DD_GPU_MONITORING_ENABLED=true \
+-e DD_GPU_ENABLED=true \
+-v /:/host/root:ro \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+-v /sys/kernel/debug:/sys/kernel/debug \
+-v /lib/modules:/lib/modules:ro \
+-v /usr/src:/usr/src:ro \
+-v /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build \
+-v /var/tmp/datadog-agent/system-probe/kernel-headers:/var/tmp/datadog-agent/system-probe/kernel-headers \
+-v /etc/apt:/host/etc/apt:ro \
+-v /etc/yum.repos.d:/host/etc/yum.repos.d:ro \
+-v /etc/zypp:/host/etc/zypp:ro \
+-v /etc/pki:/host/etc/pki:ro \
+-v /etc/yum/vars:/host/etc/yum/vars:ro \
+-v /etc/dnf/vars:/host/etc/dnf/vars:ro \
+-v /etc/rhsm:/host/etc/rhsm:ro \
+-e HOST_ROOT=/host/root \
+--security-opt apparmor:unconfined \
+--cap-add=SYS_ADMIN \
+--cap-add=SYS_RESOURCE \
+--cap-add=SYS_PTRACE \
+--cap-add=IPC_LOCK \
+--cap-add=CHOWN \
+gcr.io/datadoghq/agent:latest
+```
+
+Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+
+{{% /tab %}}
+{{% tab "Docker Compose" %}}
+
+If using `docker-compose`, make the following additions to the Datadog Agent service.
+
+```yaml
+version: '3'
+services:
+  datadog:
+    image: "gcr.io/datadoghq/agent:latest"
+    environment:
+      - DD_GPU_ENABLED=true
+      - DD_API_KEY=<DATADOG_API_KEY>
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+```
+
+To enable advanced eBPF metrics, use the following configuration for the required permissions to run eBPF programs:
+
+```yaml
+version: '3'
+services:
+  datadog:
+    image: "gcr.io/datadoghq/agent:latest"
+    environment:
+      - DD_GPU_MONITORING_ENABLED=true  # only for advanced eBPF metrics
+      - DD_GPU_ENABLED=true
+      - DD_API_KEY=<DATADOG_API_KEY>
+      - HOST_ROOT=/host/root
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /sys/kernel/debug:/sys/kernel/debug
+      - /:/host/root
+    cap_add:
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - IPC_LOCK
+      - CHOWN
+    security_opt:
+      - apparmor:unconfined
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+```
+
+{{% /tab %}}
+{{% tab "Linux (non-containerized)" %}}
+
+Modify your `/etc/datadog-agent/datadog.yaml` file to enable GPU monitoring
+
+```yaml
+gpu:
+  enabled: true
+```
+
+To enable advanced eBPF metrics, follow these steps:
+
+1. If `/etc/datadog-agent/system-probe.yaml` does not exist, create it from `system-probe.yaml.example`:
+
+    ```shell
+    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    ```
+
+2. Edit `/etc/datadog-agent/system-probe.yaml` and enable GPU monitoring in system-probe:
+
+    ```yaml
+    gpu_monitoring:
+      enabled: true
+    ```
+
+3. Restart the Datadog Agent
+
+    ```shell
+    sudo systemctl restart datadog-agent
+    ```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Set up GPU Monitoring on a mixed cluster
