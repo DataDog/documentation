@@ -17,7 +17,7 @@ Datadog Forms allows you to collect input, analyze responses, and trigger automa
 Here are some ways you can use forms:  
 - create a GitHub repository from a template using [our scaffolding blueprint][3]. 
 - run developer surveys in an internal developer portal (IDP).
-- collect employee feedback about security concerns via a form that creates a case.
+- collect employee feedback about security concerns through a form that creates a case.
 
 ## Create a form
 
@@ -34,7 +34,7 @@ To create a new form:
     | Data         | The available options that respondents can choose from.                | Select and checkboxes | 
     | Questions             | The questions respondents are asked when rating their experience. | Ratings |  
 1. Click **Save** to save your changes. 
-1. Click **View** to display the form as respondents will see it. Click **Edit** to return to the creator view. 
+1. Click **View** to display the form as it appears to respondents. Click **Edit** to return to the creator view. 
 1. Click **Share** to copy the form link to your clipboard.
 1. In the **Debug** section:
     1. click **Form** to show a mini-preview of your form.
@@ -47,10 +47,10 @@ After creating a form, you can add an [action][4] or [blueprint][5] that trigger
 1. From the [Forms][1] page, click a form. 
 1. Click **Automation**.
 1. Choose an action or blueprint. 
-1. The action or blueprint will open in a workflow canvas, where you can [edit it][2]. 
+1. The action or blueprint opens in a workflow canvas, where you can [edit it][2]. 
 1. Click **Create**.
 
-**Note**: Because forms are powered by workflows, automations triggered by forms will appear under [Workflow Automation][6]. Additionally, there is no charge associated with workflow executions that are triggered by a form. 
+**Note**: Because forms are powered by workflows, automations triggered by forms appear under [Workflow Automation][6]. Additionally, there is no charge associated with workflow executions that are triggered by a form. 
 
 ## Manage access
 
@@ -62,13 +62,13 @@ By default, new forms are restricted to only the creator's access. To change the
 
 ## Analyze your data 
 
-### View in Forms 
+### View in forms 
 
 1. From the [Forms][1] page, click a form.
 1. Click **Responses**.
 1. Click the edit icon on a response to view the JSON version. 
 
-**Note**: Responses to forms generate a datastore, which will be listed in [Datastores][7].
+**Note**: Responses to forms generate a datastore, which are listed in [Datastores][7].
 
 ### Create a dashboard
 
