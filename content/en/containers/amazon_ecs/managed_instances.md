@@ -48,7 +48,7 @@ This ECS task definition launches the Datadog Agent container with the necessary
 
 #### Create and manage the task definition file
 
-1. Download [datadog-agent-ecs-managed-instances-sidecar.json][7]. This files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the Set up additional Agent features section on this page.
+1. Download [datadog-agent-ecs-managed-instances-sidecar.json][7]. This files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the [Set up additional Agent features][27] section on this page.
 2. Modify the task definition file:
     - Set the `DD_API_KEY` environment variable by replacing `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][5] for your account. Alternatively, you can also [supply the ARN of a secret stored in AWS Secrets Manager][9].
     - Set the `DD_SITE` environment variable to your [Datadog site][10]. Your site is: {{< region-param key="dd_site" code="true" >}}
@@ -104,8 +104,7 @@ As ECS Managed Instances does not support daemon scheduling yet, run the task as
 6. For **Launch type**, choose **Capacity Provider** and select the Manged Instance capcity provider tied to the cluster.
 7. For **Number of tasks** enter `1`, then click the **Next step** button.
 8. Fill in the rest of the optional fields based on your preference.
-9. Click the **Next step** button.
-10. Click the **Next step** button, then click the **Create service** button.
+9. Click the **Next step** button, then click the **Create service** button.
 
 [4]: https://aws.amazon.com/console
 {{% /tab %}}
@@ -252,3 +251,4 @@ Need help? Contact [Datadog support][26].
 [24]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
 [25]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-framework?tab=containers#custom-instrumentation
 [26]: https://docs.datadoghq.com/help/
+[27]: #set-up-additional-agent-features
