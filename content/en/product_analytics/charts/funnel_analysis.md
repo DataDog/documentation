@@ -87,7 +87,7 @@ You can analyze conversion by **session**, **users** or **accounts**. This can b
 
 - If you select <strong>User</strong>, the funnel requires the same individual user (<code>@user.id</code>) to complete every step for the conversion to count.
 
-- If you select <strong>Account</strong>, different users within the same account can complete different steps and the conversion still counts. In this case, the funnel is tied to the <code>@account.id</code> facet, which maps to org IDs in Datadog. 
+- If you select <strong>Account</strong>, different users within the same account can complete different steps and the conversion still counts. In this case, the funnel is tied to the <code>@account.id</code> facet.
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_refine_conversion.png" alt="Specify which facet you'd like to use to refine your conversion. The available options are Session, User, and Account." style="width:50%;" >}}
  
@@ -98,9 +98,7 @@ You can measure conversion by the following attributes:
 
 - **Conversion count**: A count of users who went through the funnel you've defined.
 - **Conversion rate**: A conversion refers to the moment when a user responds to a call to action. This rate is the percentage of users who have entered the funnel and converted.
-
-  **Note**: Only completed RUM sessions contribute to conversion rates.
-- **Time to convert**: The time it took for the user to complete the step events.
+- **Time to convert**: The time it took for the user to complete the step events. This is not available for the _Steps_ visualization, it changes to timeseries when selected.
 
 
 You can measure these attributes **across all steps** or between **specific steps**.
@@ -123,10 +121,10 @@ A, A, A, B, C, C
 In this case, Datadog counts one conversion. This is because the conversion calculations matches only the first occurence of event **A** and the first occurence of event **C** in the sequence. 
 
 <div class="alert alert-info">
-To further illustrate, if the user performs the event sequence <code>A, A, A, B, C, C, A,...</code>, Datadog counts two conversions. The first conversion completes with the sequence <code>A, A, A, B, C, C</code>, and the second conversion begins with the next occurence of <code>A</code>.
+To further illustrate, if the user performs the event sequence <code>A, A, A, B, C, C, A, B, C...</code>, Datadog counts two conversions. The first conversion completes with the sequence <code>A, A, A, B, C, C</code>, and the second conversion begins with the next occurence of <code>A</code>.
 </div>
 
-The average time between steps is calculated by looking at the average duration between each conversion and takes all conversions into account, regardless of whether you selected `unique` or `total` is selected for the counts.
+The average time between steps is calculated by looking at the average duration between the first and last step of each conversion and takes all conversions into account, regardless of whether you selected `unique` or `total` is selected for the counts.
 
 
 ### Select a conversion computing metric
@@ -140,7 +138,7 @@ When computing your conversion, you can choose between two counting methods: **U
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_conversion.png" alt="Select a conversion measure, whether Unique or Total, to determine how your session conversions are counted." style="width:80%;" >}}
 
 <div class="alert alert-info">
-The <strong>Total</strong> setting doesn’t multiply conversions for repeated steps within a single flow, instead it counts complete flows, not the number of times an intermediate step is repeated. 
+The <strong>Total</strong> setting doesn't multiply conversions for repeated steps within a single flow, instead it counts complete flows, not the number of times an intermediate step is repeated. 
 
 <br>
 <br
@@ -148,7 +146,7 @@ The <strong>Total</strong> setting doesn’t multiply conversions for repeated s
 If you switch to <strong>Unique</strong>, then only the first conversion per session (or per user, depending on your analysis scope) is counted.
 </div>
 
-If you analyze your funnel by `user` or by `account`, you can define your conversion timeframe in hours or days of the first event. The default timeframe for conversions is onw day (a 24-hour window, not a calendar date) to determine if a conversion happened or not.
+If you analyze your funnel by `user` or by `account`, you can define your conversion time frame in hours or days of the first event. The default time frame for conversions is onw day (a 24-hour window, not a calendar date) to determine if a conversion happened or not.
 
 
 ## Changing the visualization
