@@ -43,7 +43,20 @@ Una variable de plantilla se determina por:
 * **Default Value** (Valor predeterminado): El valor de la etiqueta o el atributo que aparece automáticamente cuando se carga el dashboard. El valor por defecto es `*`.
 * **Available Values** (Valores disponibles): Los valores de la etiqueta o el atributo disponibles en el menú desplegable. Por defecto, `(all)`. La lista de valores disponibles siempre incluye `*`, que consulta todos los valores de la etiqueta o el atributo.
 
-**Nota**: Si no ves la etiqueta o el atributo que buscas, puede deberse a que esos datos no se han informado a Datadog recientemente. Para obtener más información, consulta [Datos históricos][4].
+### Valores de las variables de plantilla
+Los valores de las variables de plantilla (valores disponibles mediante los menús desplegables de variables de plantilla) se rellenan en función de las sources (fuentes) que utilizan los widgets del dashboard. Por ejemplo, si tu dashboard tiene widgets que consultan registros, solo se muestran los valores de los logs. Si tu dashboard tiene widgets que consultan logs, métricas y RUM, se mostrarán los valores de los logs, las métricas y el RUM.
+
+Para la mayoría de las sources (fuentes), los valores de las variables de plantilla son relevantes para el marco temporal global de tu dashboard. Por ejemplo:
+- Si el intervalo de tiempo de tu dashboard se configura en los últimos 15 minutos, solo se mostrarán los valores de las variables de plantilla de los últimos 15 minutos. 
+- Si el marco temporal de tu dashboard está configurado para durar el 15 de agosto de 12:00 a 23:59, solo se mostrarán los valores de ese marco temporal.
+
+| Fuente de datos                                     | Periodo de consulta de datos   |
+|--------------------------------------           |---------------------|
+| Métricas                                         | Ahora - 48 horas      |
+| Coste de la nube                                      | Ahora - 48 horas      |
+| Todas las demás sources (fuentes)                               | Marco temporal del dashboard |
+
+**Nota**: Si no ves la etiqueta o el atributo que buscas, puede deberse a que esos datos no se hayan comunicado a Datadog recientemente. Además, todos los datos consultados para las variables de plantilla están sujetos a la política de conservación de datos. Para más información, consulta [Datos históricos][4].
 
 ## Añadir una variable de plantilla
 Si las variables de plantilla ya están definidas, consulta [Editar una variable de plantilla](#edit-a-template-variable). Si tu dashboard no tiene ninguna variable de plantilla, puedes hacer clic en el icono del signo de interrogación para abrir un modal de ayuda sobre cómo utilizar las variables del dashboard.

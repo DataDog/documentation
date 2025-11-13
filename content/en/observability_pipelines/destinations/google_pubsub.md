@@ -114,11 +114,7 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 {{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="The install page showing the Google Pub/Sub environment variable field" style="width:70%;" >}}
 
-By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
-
-If your Pub/Sub topic is region-specific, configure the Google Pub/Sub alternative endpoint URL with the regional endpoint. See [About Pub/Sub endpoints][5] for more information.
-
-Stored as the environment variable: `DD_OP_DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
 
 ## Troubleshooting
 
@@ -163,7 +159,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [2]: https://cloud.google.com/docs/authentication#auth-flowchart
 [3]: https://cloud.google.com/pubsub/docs/access-control#roles
 [4]: https://console.cloud.google.com/iam-admin/serviceaccounts
-[5]: https://cloud.google.com/pubsub/docs/reference/service_apis_overview#pubsub_endpoints
 [6]: /observability_pipelines/destinations/#event-batching
 [7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [8]: /observability_pipelines/monitoring_and_maintenance/pipeline_usage_metrics/
