@@ -124,16 +124,16 @@ In this case, Datadog counts one conversion. This is because the conversion calc
 To further illustrate, if the user performs the event sequence <code>A, A, A, B, C, C, A, B, C...</code>, Datadog counts two conversions. The first conversion completes with the sequence <code>A, A, A, B, C, C</code>, and the second conversion begins with the next occurence of <code>A</code>.
 </div>
 
-The average time between steps is calculated by looking at the average duration between the first and last step of each conversion and takes all conversions into account, regardless of whether you selected `unique` or `total` is selected for the counts.
+The average time between steps is calculated based on the average duration between the first and last step of each conversion. This calculation takes all conversions into account regardless of whether you selected `unique` or `total` for the counts.
 
 
-### Select a conversion computing metric
+### Choosing a conversion counting method
 
 When computing your conversion, you can choose between two counting methods: **Unique** or **Total**. 
 
-- **Unique**: Counts conversion only once per session, user or account. For example, if the user completes the funnel sequence A → B → C multiple times within the same session or time frame, (A → B → C → A → B → C), it counts as **one conversion**.
+- **Unique**: Counts conversion only once per session, user, or account. For example, if the user completes the funnel sequence `A → B → C` multiple times within the same session (for example, `A → B → C → A → B → C`), it counts as **one conversion**.
 
-- **Total**: Counts a conversion each time the same session, user or account completes the defined funnel. Using the same example, the funnel sequence A → B → C → A → B → C counts as **2 conversions**.
+- **Total**: Counts a conversion each time the same session, user or account completes the defined funnel. Using the same example (`A → B → C → A → B → C`), this methods counts **two conversions**.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_conversion.png" alt="Select a conversion measure, whether Unique or Total, to determine how your session conversions are counted." style="width:80%;" >}}
 
