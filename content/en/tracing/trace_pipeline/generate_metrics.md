@@ -86,10 +86,9 @@ After a metric is created, only two fields can be updated:
 
 ## Data availability
 
-Metrics generated from traces are emitted once a trace is considered complete. 
-For long-running traces, the delay increases accordingly (for example, the metric associated to a 45-minute cannot be emited before the trace completion).
+Metrics generated from traces are emitted after a trace completes. For long-running traces, the delay increases accordingly (for example, a 45-minute trace's metric cannot be emitted until trace completion).
 
-Monitors using custom metrics from traces should account for this latency to avoid false positive.
+When using custom metrics from traces in monitors, account for this latency to avoid false positives.
 
 ## Further Reading
 
@@ -109,3 +108,4 @@ Monitors using custom metrics from traces should account for this latency to avo
 [11]: /metrics/#naming-metrics
 [12]: /tracing/trace_pipeline/ingestion_controls
 [13]: /tracing/metrics/metrics_namespace/ 
+[14]: https://app.datadoghq.com/apm/traces/generate-metrics
