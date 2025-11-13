@@ -278,7 +278,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 6. _(Optional)_ To ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `.sampled` (set to `.sampled` by default).
 
-    For example, if you set the `traceSampler` to 20% in the iOS SDK:
+    For example, if you set the `sampleRate` to 20% in the iOS SDK:
     - When `traceContextInjection` is set to `.all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
 
   {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
