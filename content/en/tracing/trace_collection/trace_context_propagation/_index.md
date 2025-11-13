@@ -626,7 +626,7 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 
 {{% tab "Rust" %}}
 
-<div class="alert alert-danger">The Datadog Rust SDK is in Preview. It is not recommended for full production use.</div>
+<div class="alert alert-info">The Datadog Rust SDK is in Preview.</div>
 
 The Datadog Rust SDK is built on the OpenTelemetry (OTel) SDK.
 

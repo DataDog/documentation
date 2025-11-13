@@ -13,8 +13,8 @@ further_reading:
       text: 'dd-trace-rs repository'
 ---
 
-{{< callout btn_hidden="true" >}}
-  The Datadog Rust SDK is in Preview. It is not recommended for full production use.
+{{< callout header="false" btn_hidden="true"  >}}
+  The Datadog Rust SDK is in Preview.
 {{< /callout >}} 
 
 The Datadog Rust SDK is open source. For more information, see the [`dd-trace-rs` repository][1].
