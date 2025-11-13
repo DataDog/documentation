@@ -67,7 +67,7 @@ If your organization hasn't configured the GitHub integration, this section disp
 - Statuses: Read
 - Checks: Read
 
-If you have multiple Github orgs connected within Datadog, users will need to have the Datadog Integrations Read Permissions to toglle between orgs.
+If you have multiple GitHub orgs connected within Datadog, users must have the Datadog Integrations Read Permissions to toggle between orgs.
 
 
 ## Further reading
