@@ -64,17 +64,19 @@ By default, new forms are restricted to only the creator's access. To change the
 
 ### View in forms 
 
+To view form responses in a tablet format: 
 1. From the [Forms][1] page, click a form.
 1. Click **Responses**.
 1. Click the edit icon on a response to view the JSON version. 
 
 **Note**: Responses to forms generate a datastore, which are listed in [Datastores][7].
 
-### Create a dashboard
+### View in a dashboard
 
-Use a dashboard plus DDSQL
-
-
+To visualize form responses in a dashboard:
+1. After [creating a dashboard][9], [add a widget][10] for [**Timeseries**][11]. 
+1. In **Graph Your Data**, choose **DDSQL Editor**. 
+1. Finish [configuring your widget][12] and click **Save**.
 
 [1]: https://app.datadoghq.com/actions/forms
 [2]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
@@ -84,3 +86,8 @@ Use a dashboard plus DDSQL
 [6]: https://app.datadoghq.com/workflow
 [7]: https://app.datadoghq.com/actions/datastores
 [8]: /actions/forms/#view-in-forms
+[9]: /dashboards/#get-started
+[10]: /dashboards/widgets/#add-a-widget-to-your-dashboard
+[11]: /dashboards/widgets/timeseries/
+[12]: /dashboards/widgets/configuration/
+
