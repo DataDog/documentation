@@ -21,9 +21,9 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 
 ## Setup
 
-1. Set up the [Google Cloud integration][6]. 
+1. Set up the [Google Cloud integration][6].
 1. Enable log collection with the [Dataflow Method][14] to collect your Cloud Function logs.
-1. Configure tracing, runtime metrics, and custom metrics for your function’s runtime.
+1. Configure tracing, runtime metrics, and custom metrics for your function's runtime.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
 {{< programming-lang lang="nodejs" >}}
