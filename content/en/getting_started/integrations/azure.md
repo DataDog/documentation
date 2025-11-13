@@ -255,7 +255,7 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 5. Start the deployment process on the [Review + create tab][33].
 
 
-<div class="alert alert-danger"><a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log Archives</a> require the app registration setup method. For US3 Datadog accounts using the Azure Native integration, follow this page’s steps to [create an app registration](#setup).
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log Archives</a> require the app registration setup method. For US3 Datadog accounts using the Azure Native integration, follow the steps on this page to create an app registration.
 </div>
 
 See [Azure Automated Log Forwarding Architecture][34] for more details.
