@@ -24,12 +24,16 @@ Sensitive Data Scanner in the Cloud scans telemetry data, such as your applicati
 - **RUM**: Event attribute values only
 - **Events**: Event attribute values only
 
+Optionally, sampling rates can be set between 10% and 99% for each product. This helps manage costs when you first get started by reducing the amount of data that gets scanned for sensitive information.
+
 For each scanning rule, one of the following actions can be applied to matched sensitive data:
 
 - **Redact**: Replace the entire matched data with a single token that you choose, such as `[sensitive_data]`.
 - **Partially redact**: Replace a specific portion of all matching values.
 - **Hash**: Replace the entire matched data with a non-reversible unique identifier.
 - **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
+
+**Note**: When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
 
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
@@ -111,6 +115,10 @@ The [recommended keywords][15] are used by default when library rules are added.
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click **Update**.
 
+#### Add suppressions
+
+{{% sds-suppressions %}}
+
 {{% /collapse-content %}}
 {{% collapse-content title="Add a custom rule" level="p" id="add-custom-rule"%}}
 You can create custom scanning rules using regex patterns to scan for sensitive data.
@@ -119,7 +127,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 1. Enter a name for the rule.
 1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
 1. (Optional) Enter a description for the rule.
-1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.<br>
+1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Regex pattern** field.<br>
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -131,14 +139,16 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. For **Check for keywords near regex pattern**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
+1. For **Check surrounding match context for keywords to reduce noise**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
       **Note**: You cannot have more than 20 keywords for a rule.
+{{% sds-suppressions %}}
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
+
 {{% /collapse-content %}}
 
 **Notes**:
@@ -252,6 +262,15 @@ The excluded namespaces are:
 
 {{% /tab %}}
 {{% /tabs %}}
+
+#### Suppress specific matches to ignore risk-accepted data
+
+Use suppressions to ignore sensitive data matches you consider operationally safe (for example: internal email domains or private IP ranges).
+
+**Notes**:
+- Suppressed matches are not redacted, masked, or hashed.
+- Suppressed matches are excluded from the Findings page, dashboards, alerts, and other reporting workflows.
+- Suppressions are defined per rule within a scanning group.
 
 ### Edit scanning rules
 

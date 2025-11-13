@@ -47,7 +47,7 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
 
 3. **Set up logs**.
 
@@ -78,7 +78,7 @@ logger.info('Hello world!');
 
 4. **Configure your application**.
 
-{{% gcr-configure %}}
+{{% serverless-init-configure %}}
 
 5. {{% gcr-service-label %}}
 
@@ -86,11 +86,11 @@ logger.info('Hello world!');
 
    To send custom metrics, [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-in-container language="nodejs" %}}
+{{% serverless-init-env-vars-in-container language="nodejs" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 

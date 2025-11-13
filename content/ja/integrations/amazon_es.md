@@ -11,7 +11,7 @@ assets:
     metrics:
       check:
       - aws.es.cpuutilization
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.es.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -20,11 +20,11 @@ assets:
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
-  sales_email: info@datadoghq.com
+  sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
 - aws
-- metrics
+- モニター
 custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
@@ -37,7 +37,7 @@ is_public: true
 manifest_version: 2.0.0
 name: amazon_es
 public_title: Amazon OpenSearch Service
-short_description: Amazon OpenSearch Service は、OpenSearch のデプロイと運用を簡単にします。
+short_description: Amazon OpenSearch Service は、OpenSearch のデプロイと運用を容易にします。
 supported_os: []
 tile:
   changelog: CHANGELOG.md
@@ -92,7 +92,7 @@ Amazon OpenSearch Service から S3 バケットまたは CloudWatch のいず�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-es" >}}
+{{< get-metrics-from-git "amazon_es" >}}
 
 
 ### イベント
@@ -114,5 +114,5 @@ Amazon OpenSearch Service インテグレーションには、サービスのチ
 [5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#manually-set-up-triggers
-[8]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/metadata.csv
+[8]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/assets/metrics/metric-spec.yaml
 [9]: https://docs.datadoghq.com/ja/help/

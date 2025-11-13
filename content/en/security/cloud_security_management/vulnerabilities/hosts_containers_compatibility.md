@@ -26,7 +26,7 @@ Cloud Security Vulnerabilities supports vulnerability scanning for hosts and con
 | Windows                  | Windows Server 2016/2019/2022, Windows 10 and later | Windows OS                | {{< X >}}         | {{< X >}}         |
 
 <div class="alert alert-info">
-Datadog supports only the official OS packages provided by the vendors listed above. Third-party or self-compiled packages are not supported.
+Datadog supports official OS packages from vendors listed above. Third-party or self-compiled packages are not supported.
 </div>
 
 {{% collapse-content title="Windows limitations" level="h4" %}}
