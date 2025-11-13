@@ -63,7 +63,7 @@ To build an app with Bits AI:
 To iterate on an existing app:
 1. From an existing app, click **UI Agent Chat** (**<i class="icon-bits-ai"></i>**).
 1. Enter a detailed prompt for the behavior you'd like to add to your app. Include the integrations and actions you'd like to use.
-1. Click the up arrow (**↑**) to add the functionality to your app.
+1. Press **Enter** to add the functionality to your app.
 
 ### Create a custom app
 
