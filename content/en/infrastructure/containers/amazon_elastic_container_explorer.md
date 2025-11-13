@@ -1,5 +1,9 @@
 ---
 title: Amazon Elastic Container (ECS) Explorer
+further_reading:
+  - link: "https://www.datadoghq.com/blog/ecs-default-monitors/"
+    tag: "Blog"
+    text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
 ---
 
 {{< img src="infrastructure/livecontainers/orch_ecs_ex.png" alt="ECS Explorer displaying ECS tasks." style="width:80%;">}}
@@ -185,6 +189,10 @@ Some resources have specific tags. The following tags are available in addition 
 * A newly created ECS Service is typically collected within approximately 15 seconds. However, for status changes in an existing Service, a refresh within 15 seconds is not guaranteed.
 * Installing the Datadog Agent in your cluster enables visibility into task lifecycle changes. Without the Datadog Agent, stopped tasks can appear as running for up to two days.
 * Installing the Datadog Agent in your cluster provides additional, relevant host-level tags, such as `availability_zone`.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/orchestration/explorer/ecsTask
 [2]: /integrations/amazon_ecs

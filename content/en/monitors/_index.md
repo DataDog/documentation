@@ -23,6 +23,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
     tag: "Blog"
     text: "Route your monitor alerts with Datadog monitor notification rules"
+  - link: "https://www.datadoghq.com/blog/ecs-default-monitors/"
+    tag: "Blog"
+    text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
 cascade:
     algolia:
         rank: 70
@@ -72,7 +75,7 @@ Monitors and alerts are essential tools for ensuring the reliability, performanc
 1. [Investigate alerts through the status page.][6]
 1. [Resolve misconfigured monitors on the Monitor Quality page.][7]
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

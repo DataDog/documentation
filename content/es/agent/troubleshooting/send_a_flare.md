@@ -30,7 +30,7 @@ Cuando te pongas en contacto con el servicio de asistencia de Datadog con la con
 ## Enviar un flare desde el sitio de Datadog 
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">El envío de un flare del Agent desde Fleet Automation no es compatible con este sitio.</div>
+<div class="alert alert-danger">El envío de un Flare del Agent desde Fleet Automation no es compatible con este sitio.</div>
 {{< /site-region >}}
 
 Para enviar un flare desde el sitio de Datadog, asegúrate de haber habilitado la [automatización de flotas][2] y la [configuración remota][3] en el Agent.
@@ -157,5 +157,5 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
 [2]: /es/agent/fleet_automation/
-[3]: /es/agent/remote_config#enabling-remote-configuration
+[3]: /es/agent/guide/setup_remote_config
 [4]: /es/tracing/troubleshooting/tracer_debug_logs/?code-lang=dotnet#data-collected

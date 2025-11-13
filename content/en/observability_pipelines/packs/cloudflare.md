@@ -5,6 +5,8 @@ description: Learn more about the Cloudflare pack.
 
 ## Overview
 
+{{< img src="observability_pipelines/packs/cloudflare.png" alt="The Cloudflare pack" style="width:25%;" >}}
+
 Cloudflare logs show edge traffic, performance, and security.
 
 What this pack does:

@@ -15,6 +15,8 @@ aliases:
     - /integrations/perimeterx/
     - /integrations/open-policy-agent/
     - /integrations/open_policy_agent/
+    - /integrations/coreos/
+    - /integrations/ubuntu/
 description: Gather data from all of your systems, apps, & services
 algolia:
     tags: ['integration', 'integration setup']
