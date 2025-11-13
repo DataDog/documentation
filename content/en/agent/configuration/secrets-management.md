@@ -413,7 +413,7 @@ If you want the Agent to read a Secret from a different namespace, use the `k8s_
 password: ENC[k8s_secret@database/database-secret/password]
 ```
 
-In this case, you must configure RBAC to allow the Agent's Service Account to read the Secret:
+Configure RBAC to allow the Agent's Service Account to read the Secret. The following Role grants read access to the `database-secret` Secret in the `database` namespace:
 {{< tabs >}}
 {{% tab "Helm" %}}
 ```yaml
@@ -445,9 +445,8 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-In this example, a Role is created granting read access to the Secret `database-secret` in the `database` namespace.
 
-You can also manually configure RBAC to allow the Agent's Service Account to read the Secret:
+Alternatively, you can define RBAC resources directly:
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
