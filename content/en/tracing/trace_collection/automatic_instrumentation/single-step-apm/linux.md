@@ -109,28 +109,48 @@ To update the SDK versions:
 1. Re-run the Agent installation command. This command also updates the Agent to the latest version.
 1. Restart your applications.
 
-### Target specific workloads 
+### Define workload selection rules 
 
-**Workload Selection** is a feature that allows fine-grained control over which Linux processes are automatically instrumented. 
+{{< callout url="#" btn_hidden="false" header="Join the Preview!">}}
+Workload selection is in Preview. Use this form to submit your request today.
+{{< /callout >}}
 
-To use workload selection:
+Workload selection rules let you control which Linux processes are automatically instrumented by SSI.
+
+#### Prerequisites
+
+To use workload selection, you must be running Datadog Agent v7.73 or later.
+
+#### Configure workload selection
+
 1. In Datadog, navigate to **APM** > **Settings** > [**Workload Selection**][20].
 1. Click **Add or Edit Rules**. 
 1. Define instrumentation rules:
-   1. Click **Add New Rule**, and select **Allow Rule** or **Block Rule**, depending on whether you want processes that match the conditions of this rule to be automatically instrumented or not, respectively.
+   1. Click **Add New Rule** and select **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
    1. Name your rule. 
-   1. Add one or more conditions for the rule. For each rule, define the following:
-      - **Attribute**: process, process args, or language
-      - **Operator**: equals, not equals, prefix, contains
-      - **Value**: 
-1. (Optional) Drag and drop rules to rearrange them. 
+   1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
+1. (Optional) Drag and drop rules to reorder them. 
 
-   **Note**: Rules are evaluated in the order in which they appear. If a process matches a given rule, later rules are not evaluated. 
+   **Note**: Rules are evaluated in order. After a process matches a rule, subsequent rules are ignored.
 
-1. Define default behavior:
+1. Define the default behavior (allow or block) for processes that don't match any rule.
+1. Click **Next** to preview your rules. 
+1. Click **Deploy Rules**. 
 
-   Select whether to block or allow instrumentation for any process that does not match any of your defined rules. 
+If Remote Configuration is enabled, rules are deployed to every host and applied within 50 seconds on those with SSI enabled. Alternatively, click **Export** to export the configuration file and apply it manually to your hosts.
 
+#### Define rule conditions
+
+Each rule consists of one or more conditions. A condition includes:
+- **Attribute**: The process property that the rule evaluates.
+- **Operator**: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
+- **Value**: The text or pattern to match against, such as a process name or command-line flag.
+
+| Attribute    | Description |
+| ----------- | ----------- |
+| `process` | Executable name of the process. |
+| `process args` | Command-line arguments used to start the process. |
+| `language` | Programming language detected for the process. |
 
 
 ## Remove Single Step APM instrumentation from your Agent

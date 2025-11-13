@@ -43,15 +43,13 @@ After SSI loads the Datadog SDK into your applications and enables distributed t
 
 To enable products, [set environment variables][3] in your application configuration.
 
-## Optional configuration
+## (Optional) Target specific workloads 
 
-### Target specific workloads 
+Workload selection lets you control which .NET workloads are automatically instrumented by SSI. You can use workload selection to instrument specific applications or exclude certain IIS Application Pools.
 
-**Workload Selection** is a feature that allows fine-grained control over which .NET workloads are automatically instrumented. This is especially useful limiting instrumentation to specific apps, or ensuring some IIS Application Pools are not automatically instrumented.
+To configure workload selection:
 
-To use Workload Selection:
-
-1. Download and extract the Workload Selection rule compiler:
+1. Download and extract the rule compiler:
    ```
    Invoke-WebRequest -Uri "https://github.com/DataDog/dd-policy-engine/releases/download/v0.1.0/dd-rules-converter-win-x64.zip" -OutFile "dd-rules-converter.zip" 
    Expand-Archive -Path "dd-rules-converter.zip" -DestinationPath "C:\tools\dd-rules-converter"
@@ -59,13 +57,13 @@ To use Workload Selection:
 
    This tool compiles your rule definitions into a format the tracer can consume.
 
-1. Write your workload selection rules.
+1. Create a rule definition.
+   
+   Write your workload selection rules in a TOML-formatted file. Each rule can match against criteria such as executable name, DLL name, runtime, and IIS application pool. See [selection rule syntax](#selection-rule-syntax) for supported selectors.
 
-   Rules are written in a TOML-formatted file and allow matching against criteria such as executable name, DLL name, runtime, and IIS application pool. See [selection rule syntax](#selection-rule-syntax) for details.
+   Example `rules.toml`:
 
-   Example:
-   ```
-   # rules.toml
+   ```toml
    [allow-console-app]
    description = "Allow my .NET console app"
    instrument  = true
@@ -77,35 +75,48 @@ To use Workload Selection:
    expression  = "iis.application_pool:staging*"
    ```
 
-1. Use the rule compiler to generate the compiled policy file:
+1. Compile the rules. 
+
+   Use the rule compiler to generate the binary rules file that the tracer reads at startup:
    ```
    C:\tools\dd-rules-convert.exe -rules rules.toml -output "C:\ProgramData\Datadog\protected\workload-selection.rules"
    ```
 
-Anytime a .NET workload is started, the tracer automatically loads and applies the rules.
+When a .NET workload starts, the tracer automatically loads and applies these rules.
 
-#### Selection rule syntax 
+### Selection rule syntax 
 
-Each rule is a section in the TOML file with the following attributes:
-- A unique identifier enclosed in brackets (for example `[myRule]`)
+Each rule is a TOML section with a unique identifier enclosed in brackets. For example:
+
+```
+[disable-staging-app-pool]
+description = "Disable all application pool starting with staging"
+instrument  = false
+expression  = "iis.application_pool:staging*"
+```
+
+Rules include the following fields:
+
 - `description`: A short description of the rule.
-- `instrument`: Boolean (true or false), indicating whether to enable or disable auto-instrumentation.
-- `expression`: The match condition based on process, DLL, runtime, or IIS pool.
+- `instrument`: Boolean (`true` or `false`) that determines whether to enable or disable instrumentation.
+- `expression`: The condition that defines which workloads to match. 
 
-`expression` supports the following selectors:
+#### Expression selectors
 
-| Field    | Description | Examples |
-| ----------- | ----------- |----------- |
-| `process.executable` | The name of the process | `myapp.exe` | 
-| `runtime.language` | The runtime of the process | `dotnet cpp node` |
-| `dotnet.dll` | The DLL used in with dotnet MyDll.dll | `ConsoleApp.dll` |
-| `iis.application_pool` | The IIS application pool | `staging-app-pool` `DefaultAppPool` | 
+The `expression` field supports the following selectors:
 
-For example:
-* The expression `process.executable:myapp.exe` matches any process with the name `myapp.exe`
-* The expression `process.executable:myapp.exe runtime.language:dotnet` matches any process with the name `myapp.exe` AND running on .NET.
+| Field | Description | Examples |
+|-------|-------------|----------|
+| `process.executable` | The name of the process executable. | `myapp.exe` |
+| `runtime.language` | The runtime language of the process. | `dotnet`, `cpp`, `node` |
+| `dotnet.dll` | The DLL file executed with `dotnet MyDll.dll`. | `ConsoleApp.dll` |
+| `iis.application_pool` | The IIS application pool name. | `staging-app-pool`, `DefaultAppPool` |
 
-### Remove Single Step APM instrumentation from your Agent
+**Example expressions:**
+- `process.executable:myapp.exe` matches any process named `myapp.exe`
+- `process.executable:myapp.exe runtime.language:dotnet` matches processes named `myapp.exe` running on .NET
+
+## Remove Single Step APM instrumentation from your Agent
 
 To disable SSI for .NET on your host, run:
 
