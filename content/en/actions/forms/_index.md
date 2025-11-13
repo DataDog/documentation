@@ -27,19 +27,19 @@ To create a new form:
 1. New forms are auto-populated with placeholder component. To edit the form, click the placeholder component, or click the **<i class="icon-plus-circled-wui"></i>** icon to add a new component. Component types include single line text, multi-line text, select, checkboxes, and ratings. The following table lists the elements available inside components:
     | Element  | Description    | Component Availability |
     |----------------------------|---------------------------------------------------------------------|-----|
-    | Required | Determines whether the question requires an answer from the user; required questions are marked with a red asterisk on forms. | All components | 
-    | Field name           | The name of the field; appears in the JSON version in [**Responses**][8].                                   | All components | 
-    | Placeholder         | The text the user sees before entering any text.                 | All components except ratings |
-    | Default value         | The default item or text that is selected before the user makes a selection.                                | All components except ratings | 
-    | Data         | The available options that users can choose from.                | Select and checkboxes | 
-    | Questions             | The questions users are asked when rating their experience. | Ratings |  
-   1. Click the title of the form to change the title and description.
-   1. Click the field to change: 
-        1. the field name; this value will only be visible to you when looking at the JSON version of the field in [**Responses**][8].
-        1. placeholder value, or default value. 
-        1. derp
-   1. Click the plus **<i class="icon-plus-circled-wui"></i>** icon to add a new element. 
-1. Click **View** to display the form as respondents will see it. 
+    | Required | Determines whether the question requires an answer from the respondent; required questions are marked with a red asterisk on forms. | All components | 
+    | Field name           | The name of the field; appears in the JSON version in [**Responses**][8]; not visible to respondents.                                   | All components | 
+    | Placeholder         | The text the respondent sees before entering any text.                 | All components except ratings |
+    | Default value         | The default item or text that is selected before the respondent makes a selection.                                | All components except ratings | 
+    | Data         | The available options that respondents can choose from.                | Select and checkboxes | 
+    | Questions             | The questions respondents are asked when rating their experience. | Ratings |  
+1. Click **Save** to save your changes. 
+1. Click **View** to display the form as respondents will see it. Click **Edit** to return to the creator view. 
+1. Click **Share** to copy the form link to your clipboard.
+1. In the **Debug** section:
+    1. click **Form** to show a mini-preview of your form.
+    1. click **Data Definition** to show the JSON version of the components' definition.
+    1. click **UI Definition** to show the JSON version of the form's UI.
 
 ### Add automation 
 
