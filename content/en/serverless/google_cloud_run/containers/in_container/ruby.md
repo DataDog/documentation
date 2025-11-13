@@ -30,7 +30,7 @@ gem 'datadog'
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install cmd="\"rails\", \"server\", \"-b\", \"0.0.0.0\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"rails\", \"server\", \"-b\", \"0.0.0.0\"" %}}
 
 3. **Set up logs**.
 
