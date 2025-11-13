@@ -37,7 +37,6 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 1. Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
 1. To save the app, click **Save as New App**.
 1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ### Build an app with AI
@@ -57,7 +56,6 @@ To build an app with Bits AI:
 1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
-1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 To iterate on an existing app:
@@ -73,7 +71,6 @@ To iterate on an existing app:
 1. Use [queries][12] to populate or interact with your canvas.
 1. To save the app, click **Save as New App**.
 1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ## Customize your app
