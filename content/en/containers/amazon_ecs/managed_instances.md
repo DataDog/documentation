@@ -129,6 +129,50 @@ aws ecs create-service --cluster <CLUSTER_NAME> \
 
 ### Set up additional Agent features
 
+#### Metrics Collection
+
+Docker labels are not supported for ECS Managed Instances. In order to provide a custom integration configuration, a config file must be mounted directly onto the agent container.
+
+The following is an example of setting up an Agent with custom configuration files mounted. Create the following file structure:
+```
+|- datadog
+  |- Dockerfile
+  |- conf.d
+    |-redis.yaml
+```
+
+The `redis.yaml` contains the configurations for the [redis][28] integration.
+```
+ad_identifiers:
+  - redis
+
+init_config:
+
+instances:
+    - host: %%host%%
+      port: 6379
+```
+The `Dockerfile` is used to build a Datadog Agent image and include the redis.yaml file at the right location:
+```
+FROM public.ecr.aws/datadog/agent:latest
+
+COPY conf.d/ /etc/datadog-agent/conf.d/
+```
+
+Once the image is built and pushed to an image repository, reference the custom image in the ECS task definition:
+```
+{
+    "containerDefinitions": [
+        {
+            "image": "<registry-domain>/<namespace-or-account>/<repository>:<tag>",
+            "name": "datadog-agent",
+            ...
+        }
+    ],
+    ...
+}
+```
+
 #### APM
 
 Instrument your application based on your setup:
@@ -251,3 +295,4 @@ Need help? Contact [Datadog support][26].
 [25]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-framework?tab=containers#custom-instrumentation
 [26]: https://docs.datadoghq.com/help/
 [27]: #set-up-additional-agent-features
+[28]: https://docs.datadoghq.com/integrations/redis/?tab=ecs
