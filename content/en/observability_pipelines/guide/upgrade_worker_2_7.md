@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements and fixes for Worker versions 2.x.
+description: Learn about new features, enhancements and fixes for Worker versions 2.7 to 2.11.
 disable_toc: false
 ---
 
