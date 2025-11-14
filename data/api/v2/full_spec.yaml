@@ -53084,6 +53084,9 @@ components:
         modifiedAt:
           description: Last modification time of the job.
           type: string
+        signalOutput:
+          description: Whether the job outputs signals.
+          type: boolean
       type: object
     ThreatHuntingJobResponseData:
       description: Threat hunting job response data.
