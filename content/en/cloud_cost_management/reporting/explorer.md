@@ -81,7 +81,7 @@ Use the **Change Details** and **Investigate Further** sections to:
   - Click any tag value (like `account:demo` or a specific `aws_account`) to refine your search and filter the entire Explorer to show only resources with that tag.
 
 - **Create a monitor**:
-  - Set up a Cloud Cost Monitor to be alerted the next time a similar change occurs. Learn more about [Cloud Cost Monitors][10].
+  - Set up a Cloud Cost Monitor to be alerted the next time a similar change occurs. Learn more about [Cloud Cost Monitors][8].
 
 ## Refine your results
 
