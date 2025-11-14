@@ -23,6 +23,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/internal-developer-portal/"
   tag: "Blog"
   text: "Ship software quickly and confidently with Datadog IDP"
+- link: "https://www.datadoghq.com/blog/datadog-backstage-plugin/"
+  tag: "Blog"
+  text: "Sync your Backstage catalog with Datadog IDP"
 ---
 
 {{< img src="tracing/internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}
