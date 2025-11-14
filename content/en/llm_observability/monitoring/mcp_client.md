@@ -137,50 +137,7 @@ initializationTaskSpan.finish();
 
 {{< /tabs >}}
 
-4. Start a task span around your call to the MCP server for getting the list of available tools within your client session. Annotate the parent client session span with the number of tools returned from the MCP server the client connected to.
-
-{{< tabs >}}
-
-{{% tab "Python" %}}
-{{< code-block lang="python">}}
-with LLMObs.task(name="MCP Client Session List Tools"):
-    tools = list_tools()
-    LLMObs.annotate(
-        client_session_span,
-        tags={
-            "mcp_num_tools": len(tools),
-        }
-    )
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Node.js" %}}
-{{< code-block lang="javascript">}}
-llmobs.trace({ kind: 'task', name: 'MCP Client Session List Tools' }, async () => {
-  const tools = await listTools();
-  llmobs.annotate(clientSessionSpan, {
-    tags: {
-      mcp_num_tools: tools.length,
-    }
-  });
-});
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Java" %}}
-{{< code-block lang="java">}}
-LLMObsSpan listToolsSpan = LLMObs.startTaskSpan("MCP Client Session List Tools");
-List<Object> tools = listTools();
-clientSessionSpan.setTags(Map.of(
-  "mcp_num_tools", tools.length,
-));
-listToolsSpan.finish();
-{{< /code-block >}}
-{{% /tab %}}
-
-{{< /tabs >}}
-
-5. Start a tool span around your tool calls to the MCP server within your client session. Annotate the tool span with the MCP tool type ("client", as opposed to "server" for server-side monitoring).
+4. Start a tool span around your tool calls to the MCP server within your client session. Annotate the tool span with the MCP tool type ("client", as opposed to "server" for server-side monitoring), as well as the server name from the information returned from the initialization call. If the tool call returns an error from the MCP server, even if it would not normally raise or throw an error, mark the tool span with an error.
 
 {{< tabs >}}
 
@@ -189,10 +146,16 @@ listToolsSpan.finish();
 name, arguments = get_next_tool_call()
 with LLMObs.tool(name=f"MCP Client Tool: {name}") as tool_span:
     result = call_tool(name, arguments)
+
+    if result.isError:
+        tool_span.error = 1
+        tool_span.set_tag("error.message", result.content[0].text)
+
     LLMObs.annotate(
             input_data=arguments,
             output_data=result,
             tags={
+              "mcp_server_name": server_info.name,
               "mcp_tool_kind": "client",
             }
         )
@@ -204,10 +167,16 @@ with LLMObs.tool(name=f"MCP Client Tool: {name}") as tool_span:
 const { name, arguments } = await getNextToolCall();
 llmobs.trace({ kind: 'tool', name: `MCP Client Tool: ${name}` }, async () => {
   const result = await callTool(name, arguments);
+
+  if (result.isError) {
+    toolSpan.setTag("error", true);
+    toolSpan.setTag("error.message", result.content[0].text);
+  }
+
   llmobs.annotate({
     inputData: arguments,
     outputData: result,
-    tags: { mcp_tool_kind: "client" }
+    tags: { mcp_server_name: serverInfo.name, mcp_tool_kind: "client" }
   });
 })
 {{< /code-block >}}
@@ -218,15 +187,22 @@ llmobs.trace({ kind: 'tool', name: `MCP Client Tool: ${name}` }, async () => {
 Object tool = await getNextToolCall();
 LLMObsSpan toolSpan = LLMObs.startToolSpan("MCP Client Tool: " + tool.name());
 Object result = callTool(tool.name(), tool.arguments());
+
+if (result.isError) {
+  toolSpan.setError(true);
+  toolSpan.setErrorMessage(result.content[0].text);
+}
+
 toolSpan.annotateIO(arguments, result);
 toolSpan.setTag("mcp_tool_kind", "client");
+toolSpan.setTag("mcp_server_name", serverInfo.name());
 toolSpan.finish();
 {{< /code-block >}}
 {{% /tab %}}
 
 {{< /tabs >}}
 
-6. In total, your MCP client should be instrumented as follows
+5. In total, your MCP client should be instrumented as follows
 
 {{< tabs >}}
 
@@ -243,23 +219,23 @@ with LLMObs.workflow(name="MCP Client Session") as client_session_span:
                 "mcp_server_title": server_info.title,
             }
         )
-    with LLMObs.task(name="MCP Client Session List Tools"):
-        tools = list_tools()
-        LLMObs.annotate(
-            client_session_span,
-            tags={
-                "mcp_num_tools": len(tools),
-            }
-        )
+
+    tools = list_tools()  # get the list of tools from the MCP server
 
     # tool calls as part of a user feedback loop or user interaction
     name, arguments = get_next_tool_call()
     with LLMObs.tool(name=f"MCP Client Tool: {name}") as tool_span:
         result = call_tool(name, arguments)
+
+        if result.isError:
+            tool_span.error = 1
+            tool_span.set_tag("error.message", result.content[0].text)
+
         LLMObs.annotate(
             input_data=arguments,
             output_data=result,
             tags={
+              "mcp_server_name": server_info.name,
               "mcp_tool_kind": "client",
             }
         )
@@ -279,22 +255,23 @@ llmobs.trace({ kind: 'workflow', name: 'MCP Client Session' }, async (clientSess
       }
     });
   });
-  llmobs.trace({ kind: 'task', name: 'MCP Client Session List Tools' }, async () => {
-    const tools = await listTools();
-    llmobs.annotate(clientSessionSpan, {
-      tags: {
-        mcp_num_tools: tools.length,
-      }
-    });
-  });
+
+  const tools = await listTools(); // get the list of tools from the MCP server
+
   // tool calls as part of a user feedback loop or user interaction
   const { name, arguments } = await getNextToolCall();
   llmobs.trace({ kind: 'tool', name: `MCP Client Tool: ${name}` }, async () => {
     const result = await callTool(name, arguments);
+
+    if (result.isError) {
+      toolSpan.setTag("error", true);
+      toolSpan.setTag("error.message", result.content[0].text);
+    }
+
     llmobs.annotate({
       inputData: arguments,
       outputData: result,
-      tags: { mcp_tool_kind: "client" }
+      tags: { mcp_server_name: serverInfo.name, mcp_tool_kind: "client" }
     });
   });
 })
@@ -312,18 +289,22 @@ clientSessionSpan.setTags(Map.of(
   "mcp_server_title", serverInfo.title(),
 ));
 initializationTaskSpan.finish();
-LLMObsSpan listToolsSpan = LLMObs.startTaskSpan("MCP Client Session List Tools");
-List<Object> tools = listTools();
-clientSessionSpan.setTags(Map.of(
-  "mcp_num_tools", tools.length,
-));
-listToolsSpan.finish();
+
+List<Object> tools = listTools(); // get the list of tools from the MCP server
+
 // tool calls as part of a user feedback loop or user interaction
-Object tool = await getNextToolCall();
+Object tool = getNextToolCall();
 LLMObsSpan toolSpan = LLMObs.startToolSpan("MCP Client Tool: " + tool.name());
 Object result = callTool(tool.name(), tool.arguments());
+
+if (result.isError) {
+  toolSpan.setTag("error", true);
+  toolSpan.setTag("error.message", result.content[0].text);
+}
+
 toolSpan.annotateIO(tool.arguments(), result);
 toolSpan.setTag("mcp_tool_kind", "client");
+toolSpan.setTag("mcp_server_name", serverInfo.name());
 toolSpan.finish();
 // ... more tool calls, tasks, or user interactions
 clientSessionSpan.finish(); // finish at the end of the client session scope
@@ -332,7 +313,7 @@ clientSessionSpan.finish(); // finish at the end of the client session scope
 
 {{< /tabs >}}
 
-7. Set the necessary environment variables to enable MCP client monitoring:
+6. Set the necessary environment variables to enable MCP client monitoring:
 
 {{< code-block lang="shell">}}
 export DD_LLMOBS_ENABLED=true
@@ -342,7 +323,7 @@ export DD_API_KEY=<YOUR_API_KEY>
 export DD_SITE=<YOUR_DATADOG_SITE>
 {{< /code-block >}}
 
-8. Run your application:
+7. Run your application:
 
 {{< tabs >}}
 
