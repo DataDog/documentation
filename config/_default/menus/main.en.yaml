@@ -1107,6 +1107,11 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_debugger
       weight: 7012
+    - name: Logs
+      url: developers/ide_plugins/idea/logs/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_logs
+      weight: 7013
     - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
@@ -7166,6 +7171,11 @@ menu:
       url: /security/code_security/secret_scanning/generic_ci_providers/
       parent: sec_secret_scanning
       weight: 2
+    - name: Secret Validation
+      identifier: sec_secret_scanning_secret_validation
+      url: /security/code_security/secret_scanning/secret_validation/
+      parent: sec_secret_scanning
+      weight: 3
     - name: Runtime Code Analysis (IAST)
       identifier: sec_iast
       url: /security/code_security/iast/
