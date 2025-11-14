@@ -95,13 +95,14 @@ For a complete list of all shared OTLP environment variables, see [OpenTelemetry
 
 ## Migrate from other setups
 
-### Existing OTel setup (manual configuration)
+### Existing OTel setup
 
-This Datadog feature is not compatible with applications already using the OpenTelemetry Logs API or OpenTelemetry SDK for logs.
+If you are already using the OpenTelemetry SDK with a manual OTLP exporter configuration, follow these steps to migrate:
 
-To migrate, you must remove the OpenTelemetry logging packages (such as `OpenTelemetry.SDK.Logs` or `OpenTelemetry.Exporter.Otlp.Logs`) and any code that manually configures or uses the OTel Logs API.
-
-This feature works by intercepting logs directly from the `Microsoft.Extensions.Logging.ILogger` interface and does not interact with the OpenTelemetry Logs API.
+1. Add the Datadog SDK (`dd-trace-dotnet`) to your project and enable its instrumentation.
+2. Remove any code that manually configures the `OtlpExporter` for logs. The Datadog SDK handles this configuration automatically.
+3. Remove the `OpenTelemetry` and `OpenTelemetry.Exporter.OpenTelemetryProtocol` packages from your project's dependencies.
+4. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
 
 ### Existing Datadog log injection
 
