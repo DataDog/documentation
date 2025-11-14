@@ -7,13 +7,21 @@ further_reading:
     text: 'Accelerate Kubernetes issue resolution with AI-powered guided remediation'
 ---
 
-Bits AI Kubernetes Remediation identifies and fixes infrastructure issues in your Kubernetes clusters.
+Bits AI Kubernetes Remediation analyzes and fixes Kubernetes errors in your infrastructure.
+
+The following Kubernetes errors are supported:
+- `CreateContainerError`
+- `CreateContainerConfigError`
+- `CrashLoopBackOff`
+- `ErrImagePull`
+- `ImagePullBackOff`
+- `OOMKilled`
 
 ## Usage
 
 You can launch Bits AI Kubernetes Remediation from multiple locations within Datadog:
 - **From a Kubernetes monitor**: In the _Troubleshooting_ section, select a workload under _Problematic Workloads_.
-- **From [Kubernetes Explorer][2]**: Hover over an error like `CrashLoopBackOff` to see more information about the alert and the affected workload(s), and click _Start Remediation_.
+- **From [Kubernetes Explorer][2]**: Hover over an error to see more information about the alert and the affected workload(s), and click _Start Remediation_.
 - **From the [Kubernetes Remediation][1] tab**: Select a workload from the list.
 
 Any one of these actions opens a Remediation side panel that displays:
