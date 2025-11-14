@@ -617,7 +617,7 @@ menu:
       weight: 3021
       identifier: otel_api_java
     - name: Python
-      url: /opentelemetry/instrument/api_support/python
+      url: /opentelemetry/instrument/api_support/python/traces
       parent: otel-api-dd-sdk
       weight: 3022
       identifier: otel_api_python
@@ -632,7 +632,7 @@ menu:
       weight: 3024
       identifier: otel_api_go
     - name: Node.js
-      url: /opentelemetry/instrument/api_support/nodejs
+      url: /opentelemetry/instrument/api_support/nodejs/traces
       parent: otel-api-dd-sdk
       weight: 3025
       identifier: otel_api_nodejs
@@ -642,7 +642,7 @@ menu:
       weight: 3026
       identifier: otel_api_php
     - name: .NET
-      url: /opentelemetry/instrument/api_support/dotnet
+      url: /opentelemetry/instrument/api_support/dotnet/traces
       parent: otel-api-dd-sdk
       weight: 3027
       identifier: otel_api_dotnet
@@ -1107,6 +1107,11 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_debugger
       weight: 7012
+    - name: Logs
+      url: developers/ide_plugins/idea/logs/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_logs
+      weight: 7013
     - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
