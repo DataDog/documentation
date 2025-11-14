@@ -16,10 +16,10 @@ This guide goes over how to upgrade to a specific Worker version and the updates
 
 To upgrade to Worker version 2.11.0:
 
-- Docker: Run the `docker pull` command for the [2.11.0 image][24]
-- Kubernetes: See the [Helm chart][25]
-- APT: Run the command `apt-get install observability-pipelines-worker=2.11.0`
-- RPM: Run the command `sudo yum install observability-pipelines-worker-2.11.0`
+- Docker: Run the `docker pull` command for the [2.11.0 image][24].
+- Kubernetes: See the [Helm chart][25].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.11.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.11.0`.
 
 <div class="alert alert-info">After you have upgraded to Worker 2.11.0: For pipelines that were running Worker 2.10 or older, you must manually update your processors' filter queries to the updated Search Syntax.<br><br>See <a href="https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/">Upgrade Your Filter Queries to the New Search Syntax</a> for more information.</a></div>
 
@@ -39,10 +39,10 @@ Version 2.11.0 gives you access to the following:
 
 To upgrade to Worker version 2.10.0:
 
-- Docker: Run the `docker pull` command for the [2.10.0 image][26]
-- Kubernetes: See the [Helm chart][25]
-- APT: Run the command `apt-get install observability-pipelines-worker=2.10.0`
-- RPM: Run the command `sudo yum install observability-pipelines-worker-2.10.0`
+- Docker: Run the `docker pull` command for the [2.10.0 image][26].
+- Kubernetes: See the [Helm chart][25].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.10.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.10.0`.
 
 Worker version 2.10.0 gives you access to the following:
 
@@ -77,10 +77,10 @@ Worker version 2.10.0 gives you access to the following:
 
 To upgrade to Worker version 2.9.1:
 
-- Docker: Run the `docker pull` command to pull the [2.9.1 image][27]
-- Kubernetes: See the [Helm chart][25]
-- APT: Run the command `apt-get install observability-pipelines-worker=2.9.1`
-- RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.1`
+- Docker: Run the `docker pull` command to pull the [2.9.1 image][27].
+- Kubernetes: See the [Helm chart][25].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.9.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.1`.
 
 Worker version 2.9.1 gives you access to the following:
 
@@ -94,10 +94,10 @@ Worker version 2.9.1 gives you access to the following:
 
 To upgrade to Worker version 2.9.0:
 
-- Docker: Run the `docker pull` command to pull the [2.9.0 image][28]
-- Kubernetes: See the [Helm chart][25]
-- APT: Run the command `apt-get install observability-pipelines-worker=2.9.0`
-- RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.0`
+- Docker: Run the `docker pull` command to pull the [2.9.0 image][28].
+- Kubernetes: See the [Helm chart][25].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.9.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.0`.
 
 Worker version 2.9.0 gives you access to the following:
 
@@ -120,10 +120,10 @@ Worker version 2.9.0 gives you access to the following:
 
 To upgrade to Worker version 2.8.1:
 
-- Docker: Run the `docker pull` command to pull the [2.8.1 image][29]
-- Kubernetes: See the [Helm chart][25]
-- APT: Run the command `apt-get install observability-pipelines-worker=2.8.1`
-- RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.1`
+- Docker: Run the `docker pull` command to pull the [2.8.1 image][29].
+- Kubernetes: See the [Helm chart][25].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.8.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.1`.
 
 Worker version 2.8.1 gives you access to the following:
 
@@ -137,10 +137,10 @@ Worker version 2.8.1 gives you access to the following:
 
 To upgrade to Worker version 2.8.0:
 
-- Docker: Run the `docker pull` command to pull the [2.8.0 image][30]
-- Kubernetes: See the [Helm chart][25]
-- APT: Run the command `apt-get install observability-pipelines-worker=2.8.0`
-- RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.0`
+- Docker: Run the `docker pull` command to pull the [2.8.0 image][30].
+- Kubernetes: See the [Helm chart][25].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.8.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.0`.
 
 Worker version 2.8.0 gives you access to the following:
 
@@ -165,10 +165,10 @@ Worker version 2.8.0 gives you access to the following:
 
 To upgrade to Worker version 2.7.0:
 
-- Docker: Run the `docker pull` command to pull the [2.7.0 image][31]
-- Kubernetes: See the [Helm chart][25]
-- APT: Run the command `apt-get install observability-pipelines-worker=2.7.0`
-- RPM: Run the command `sudo yum install observability-pipelines-worker-2.7.0`
+- Docker: Run the `docker pull` command to pull the [2.7.0 image][31].
+- Kubernetes: See the [Helm chart][25].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.7.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.7.0`.
 
 Worker version 2.7.0 gives you access to the following:
 
