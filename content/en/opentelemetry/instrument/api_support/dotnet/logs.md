@@ -55,7 +55,7 @@ logger.LogInformation("This is a standard log message.");
 
 ### Trace and log correlation
 
-This example shows how logs emitted within an active Datadog span are automatically correlated. If you are using the OTel Tracing API or built-in .NET Activity API to create spans, ensure OTel Tracing API support is enabled.
+This example shows how logs emitted within an active Datadog span are automatically correlated. If you are using the OTel Tracing API or built-in .NET Activity API to create spans, ensure [OTel Tracing API support][5] is enabled.
 
 ```csharp
 using Microsoft.Extensions.Logging;
@@ -127,4 +127,5 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.30.0
+[5]: /opentelemetry/instrument/api_support/dotnet/traces
 [200]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent 
