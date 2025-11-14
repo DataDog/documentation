@@ -24,7 +24,7 @@ Here are some ways you can use forms:
 To create a new form: 
 1. Navigate to the [Forms][1] page.
 1. Click **+ New Form**.
-1. New forms are auto-populated with placeholder component. To edit the form, click the placeholder component, or click the **<i class="icon-plus-circled-wui"></i>** icon to add a new component. Component types include single line text, multi-line text, select, checkboxes, and ratings. The following table lists the elements available inside components:
+1. New forms are auto-populated with a placeholder component. To edit the form, click the placeholder component, or click the **<i class="icon-plus-circled-wui"></i>** icon to add a new component. Component types include single line text, multi-line text, select, checkboxes, and ratings. The following table lists the elements available inside components:
     | Element  | Description    | Component Availability |
     |----------------------------|---------------------------------------------------------------------|-----|
     | Required | Determines whether the question requires an answer from the respondent; required questions are marked with a red asterisk on forms. | All components | 
