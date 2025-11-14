@@ -47,6 +47,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/archive-search/"
   tag: "Blog"
   text: "Search your historical logs more efficiently with Datadog Archive Search"
+- link: "https://www.datadoghq.com/blog/introducing-datadog-cloudprem/"
+  tag: "blog"
+  text: "Store and search logs at petabyte scale in your own infrastructure with Datadog CloudPrem"
+- link: "https://www.datadoghq.com/blog/manage-high-volume-logs-with-observability-pipeline-packs/"
+  tag: "blog"
+  text: "Control logging costs on any SIEM or data lake using Packs with Observability Pipelines"
 ---
 
 ## Overview
