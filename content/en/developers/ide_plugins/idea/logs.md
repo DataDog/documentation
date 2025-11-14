@@ -23,7 +23,7 @@ This launches the [Log Explorer][16] and shows the latest log events.  The query
 
 {{< img src="/developers/ide_plugins/idea/logs/browser.png" alt="The log query button" style="width:100%;" >}}
 
-Use the full power of the Datadog platform to inspect individual logs and related traces, or modify the search query to narrow down to the logs that you are most interested in.
+Use the Datadog platform to inspect individual logs and related traces, or modify the search query to narrow down to the logs that you are most interested in.
 
 ## Supported Languages & Frameworks
 The Logs integration supports the following languages and logging frameworks:
