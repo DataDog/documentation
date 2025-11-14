@@ -7,7 +7,7 @@ disable_toc: false
 ## Overview
 
 <div class="alert alert-info">
-Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates.
+Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or monthly at a minimum. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates.
 </div>
 
 This guide goes over Worker version releases and how to upgrade to that version.
@@ -16,18 +16,19 @@ This guide goes over Worker version releases and how to upgrade to that version.
 
 To upgrade to Worker version 2.11.0:
 
-- Docker: Run the `docker pull` command to pull the [2.11.0 image][24].
-- Kubernetes:
-- APT and RPM: See [Upgrade the Worker][25].
+- Docker: Run the `docker pull` command for the [2.11.0 image][24]
+- Kubernetes: See the [Helm chart][25]
+- APT: Run the command `apt-get install observability-pipelines-worker=2.11.0`
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.11.0`
 
-<div class="alert alert-info">After you have upgraded to Worker 2.11.0, you must manually update your processors' filter queries to the new Search Syntax.<br><br>See <a href="https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/">Upgrade Your Filter Queries to the New Search Syntax</a> for more information.</a></div>
+<div class="alert alert-info">After you have upgraded to Worker 2.11.0: For pipelines that were running Worker 2.10 or older, you must manually update your processors' filter queries to the updated Search Syntax.<br><br>See <a href="https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/">Upgrade Your Filter Queries to the New Search Syntax</a> for more information.</a></div>
 
 Version 2.11.0 gives you access to the following:
 
 #### New features
 
 - More than 100 out-of-the-box rules for the Sensitive Data Scanner processor have been added. These rules redact Personally Identifiable Information (PII) and access key information that focus on GDPR compliance and secrets.
-- An upgraded [Search Syntax][22] that lets you:
+- The [Search Syntax][22] has been updated and lets you:
     - Dereference arrays
     - Perform case insensitive search within log messages
     - Deterministically target log attributes without using `@` symbol
@@ -38,15 +39,16 @@ Version 2.11.0 gives you access to the following:
 
 To upgrade to Worker version 2.10.0:
 
-- Docker: Run the `docker pull` command to pull the [2.10.0 image][].
-- Kubernetes:
-- APT and RPM: See [Upgrade the Worker][25].
+- Docker: Run the `docker pull` command for the [2.10.0 image][26]
+- Kubernetes: See the [Helm chart][25]
+- APT: Run the command `apt-get install observability-pipelines-worker=2.10.0`
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.10.0`
 
 Worker version 2.10.0 gives you access to the following:
 
 #### New features
 
-- The [Kafka destination][11]: Send logs from Observability Pipelines to your Kafka topics.
+- [Kafka destination][11]: Send logs from Observability Pipelines to your Kafka topics.
 - New and updated [Custom Processor functions][12]:
     - The `pop` function removes the last item from an array.
     - The cryptographic functions `encrypt_ip` and `decrypt_ip` for IP address encryption.
@@ -55,19 +57,19 @@ Worker version 2.10.0 gives you access to the following:
             - pfx (IPCryptPfx, 32-byte key).
             - Both algorithms are format-preserving (output is a valid IP address) and deterministic.
     - The `xxhash` function implements `xxh32`, `xxh64`, `xxh3_64`, and `xxh3_128` hashing algorithms.
-    - The `parse_aws_alb_log` function has an optional `strict_mode` parameter.
+    - The `parse_aws_alb_log` function have been updated with an optional `strict_mode` parameter.
         - When `strict_mode` is set to `false`, the parser ignores any newly added or trailing fields in AWS ALB logs, instead of failing.
         - Defaults to `true` to preserve current behavior.
 
 #### Enhancements
 
-- Performance enhancement for the Custom Processor.
-- Workers use their own copy of the Datadog key to authenticate, disregarding any keys sent in by the Datadog Agent to prevent the use of stale keys.
+- The Custom Processor's performance has been improved.
+- Workers have been updated to use their own copy of the Datadog key for authentication, disregarding any keys sent in by the Datadog Agent to prevent the use of stale keys.
 - Error reporting has been improved when validating JSON schema in custom functions that use the `validate_json_schema` function.
 
 #### Fixes
 
-- Group-level filtering logic was fixed to exclude correct logs.
+- Group-level filtering logic has been fixed to exclude correct logs.
 
 ---
 
@@ -75,15 +77,16 @@ Worker version 2.10.0 gives you access to the following:
 
 To upgrade to Worker version 2.9.1:
 
-- Docker: Run the `docker pull` command to pull the [2.9.1 image][].
-- Kubernetes:
-- APT and RPM: See [Upgrade the Worker][25].
+- Docker: Run the `docker pull` command to pull the [2.9.1 image][27]
+- Kubernetes: See the [Helm chart][25]
+- APT: Run the command `apt-get install observability-pipelines-worker=2.9.1`
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.1`
 
 Worker version 2.9.1 gives you access to the following:
 
 #### Fixes
 
-- The Microsoft Sentinel destination has been limited to batch sizes of 1 MB when reading logs using the Azure Logs Ingestion API. The limit is based on [Azure documentation][10].
+- The Microsoft Sentinel destination has been limited to batch sizes of 1 MB when reading logs using the Azure Logs Ingestion API. The limit size was determined based on the [Azure documentation][10].
 
 ---
 
@@ -91,9 +94,10 @@ Worker version 2.9.1 gives you access to the following:
 
 To upgrade to Worker version 2.9.0:
 
-- Docker: Run the `docker pull` command to pull the [2.9.0 image][].
-- Kubernetes:
-- APT and RPM: See [Upgrade the Worker][25].
+- Docker: Run the `docker pull` command to pull the [2.9.0 image][28]
+- Kubernetes: See the [Helm chart][25]
+- APT: Run the command `apt-get install observability-pipelines-worker=2.9.0`
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.0`
 
 Worker version 2.9.0 gives you access to the following:
 
@@ -106,9 +110,9 @@ Worker version 2.9.0 gives you access to the following:
 
 #### Enhancements
 
-- The Datadog API key is partially redacted (first 28 characters only) in the Observability Pipelines Worker's internal logs, to help investigate API-key related issues.
-- Performance enhancement for Remote Configuration delivery time.
-- The `parse_cef` and `parse_syslog` custom functions has enhanced parsing.
+- The Observability Pipelines Worker's internal logs have been updated to partially redact the Datadog API key (first 28 characters only), to help investigate API-key related issues.
+- The performance of Remote Configuration delivery time has been improved.
+- The `parse_cef` and `parse_syslog` custom functions have enhanced parsing.
 
 ---
 
@@ -116,15 +120,16 @@ Worker version 2.9.0 gives you access to the following:
 
 To upgrade to Worker version 2.8.1:
 
-- Docker: Run the `docker pull` command to pull the [2.8.1 image][].
-- Kubernetes:
-- APT and RPM: See [Upgrade the Worker][25].
+- Docker: Run the `docker pull` command to pull the [2.8.1 image][29]
+- Kubernetes: See the [Helm chart][25]
+- APT: Run the command `apt-get install observability-pipelines-worker=2.8.1`
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.1`
 
 Worker version 2.8.1 gives you access to the following:
 
 #### Fixes
 
-- THe HTTP Client source's authorization strategy has been updated.
+- THe HTTP Client source's authorization strategy has been fixed.
 
 ---
 
@@ -132,26 +137,27 @@ Worker version 2.8.1 gives you access to the following:
 
 To upgrade to Worker version 2.8.0:
 
-- Docker: Run the `docker pull` command to pull the [2.8.0 image][].
-- Kubernetes:
-- APT and RPM: See [Upgrade the Worker][25].
+- Docker: Run the `docker pull` command to pull the [2.8.0 image][30]
+- Kubernetes: See the [Helm chart][25]
+- APT: Run the command `apt-get install observability-pipelines-worker=2.8.0`
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.0`
 
 Worker version 2.8.0 gives you access to the following:
 
 #### New features
 
-- All sources and destination have custom environment variable support.
+- All sources and destinations have been updated to support custom environment variables.
 
 #### Enhancements
 
-- Data streams in the Elasticsearch destination is available as an indexing strategy.
+- The Elasticsearch destination's indexing strategy has been updated to include data streams.
 - The HTTP Client destination supports template syntax.
 
 #### Fixes
 
-- Fixes for TLS enablement in the HTTP Server source.
-- Fixes for worker health metrics.
-- A fix for basic authentication in OpenSearch.
+- The HTTP Server source's TLS enablement has been fixed.
+- Worker health metrics have been fixed.
+- OpenSearch's basic authentication has been fixed.
 
 ---
 
@@ -159,9 +165,10 @@ Worker version 2.8.0 gives you access to the following:
 
 To upgrade to Worker version 2.7.0:
 
-- Docker: Run the `docker pull` command to pull the [2.7.0 image][].
-- Kubernetes:
-- APT and RPM: See [Upgrade the Worker][25].
+- Docker: Run the `docker pull` command to pull the [2.7.0 image][31]
+- Kubernetes: See the [Helm chart][25]
+- APT: Run the command `apt-get install observability-pipelines-worker=2.7.0`
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.7.0`
 
 Worker version 2.7.0 gives you access to the following:
 
@@ -173,7 +180,7 @@ Worker version 2.7.0 gives you access to the following:
 
 #### Enhancements
 
-- The `decode_lz4` function supports decompressing `lz4` frame data.
+- The `decode_lz4` custom function has been updated to support decompressing `lz4` frame data.
 - The Azure Blob Storage and Google Cloud Storage archive destinations' prefix fields support template syntax.
 - The Splunk HEC destination has a custom environment variable.
 - The sample processor has an optional `group_by` parameter.
@@ -181,9 +188,9 @@ Worker version 2.7.0 gives you access to the following:
 #### Fixes
 
 - The Datadog Logs destination's default compression has been updated to `zstd`, which matches Datadog Agent's default compression.
-- Amazon S3, Google Cloud Storage, and Azure Blob Storage destinations correctly resolves log timestamps.
-- Performance improvements for custom OCSF mapper.
-- Enabled flag logic in the filter processor to pass events to the next processor.
+- The Amazon S3, Google Cloud Storage, and Azure Blob Storage destinations have been fixed to resolve log timestamps correctly.
+- The custom OCSF mapper's performance has been improved.
+- The filter processor has flag logic enabled to pass events to the next processor.
 
 [1]: /observability_pipelines/destinations/http_client/
 [2]: /observability_pipelines/processors/#processor-groups
@@ -198,4 +205,10 @@ Worker version 2.7.0 gives you access to the following:
 [22]: /observability_pipelines/search_syntax/
 [23]: /observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/
 [24]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.11
-[25]: /observability_pipelines/configuration/install_the_worker/?tab=docker#upgrade-the-worker
+[25]: https://github.com/DataDog/helm-charts/tree/main/charts/observability-pipelines-worker#observability-pipelines-worker
+[26]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.10
+[27]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.9.1
+[28]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.9.0
+[29]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.1
+[30]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.0
+[31]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.7.0
