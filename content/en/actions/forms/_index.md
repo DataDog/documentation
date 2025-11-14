@@ -28,7 +28,7 @@ To create a new form:
     | Element  | Description    | Component Availability |
     |----------------------------|---------------------------------------------------------------------|-----|
     | Required | Determines whether the question requires an answer from the respondent; required questions are marked with a red asterisk on forms. | All components | 
-    | Field name           | The name of the field; appears in the JSON version in [**Responses**][8]; not visible to respondents.                                   | All components | 
+    | Field name           | The name of the field. Appears in the JSON version in [**Responses**][8]. Not visible to respondents.                                   | All components | 
     | Placeholder         | The text the respondent sees before entering any text.                 | All components except ratings |
     | Default value         | The default item or text that is selected before the respondent makes a selection.                                | All components except ratings | 
     | Data         | The available options that respondents can choose from.                | Select and checkboxes | 
