@@ -16,8 +16,8 @@ This guide goes over how to upgrade to a specific Worker version and the updates
 
 To upgrade to Worker version 2.11.0:
 
-- Docker: Run the `docker pull` command for the [2.11.0 image][24].
-- Kubernetes: See the [Helm chart][25].
+- Docker: Run the `docker pull` command for the [2.11.0 image][1].
+- Kubernetes: See the [Helm chart][2].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.11.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.11.0`.
 
@@ -28,7 +28,7 @@ Version 2.11.0 gives you access to the following:
 #### New features
 
 - More than 100 out-of-the-box rules for the Sensitive Data Scanner processor have been added. These rules redact Personally Identifiable Information (PII) and access key information that focus on GDPR compliance and secrets.
-- The [Search Syntax][22] has been updated and lets you:
+- The [Search Syntax][3] has been updated and lets you:
     - Dereference arrays
     - Perform case insensitive search within log messages
     - Deterministically target log attributes without using `@` symbol
@@ -39,8 +39,8 @@ Version 2.11.0 gives you access to the following:
 
 To upgrade to Worker version 2.10.0:
 
-- Docker: Run the `docker pull` command for the [2.10.0 image][26].
-- Kubernetes: See the [Helm chart][25].
+- Docker: Run the `docker pull` command for the [2.10.0 image][4].
+- Kubernetes: See the [Helm chart][2].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.10.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.10.0`.
 
@@ -48,8 +48,8 @@ Worker version 2.10.0 gives you access to the following:
 
 #### New features
 
-- [Kafka destination][11]: Send logs from Observability Pipelines to your Kafka topics.
-- New and updated [Custom Processor functions][12]:
+- [Kafka destination][5]: Send logs from Observability Pipelines to your Kafka topics.
+- New and updated [Custom Processor functions][6]:
     - The `pop` function removes the last item from an array.
     - The cryptographic functions `encrypt_ip` and `decrypt_ip` for IP address encryption.
         - These functions use the IPCrypt specification and support both IPv4 and IPv6 addresses with two encryption modes:
@@ -77,8 +77,8 @@ Worker version 2.10.0 gives you access to the following:
 
 To upgrade to Worker version 2.9.1:
 
-- Docker: Run the `docker pull` command to pull the [2.9.1 image][27].
-- Kubernetes: See the [Helm chart][25].
+- Docker: Run the `docker pull` command to pull the [2.9.1 image][7].
+- Kubernetes: See the [Helm chart][2].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.9.1`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.1`.
 
@@ -86,7 +86,7 @@ Worker version 2.9.1 gives you access to the following:
 
 #### Fixes
 
-- The Microsoft Sentinel destination has been limited to batch sizes of 1 MB when reading logs using the Azure Logs Ingestion API. The limit size was determined based on the [Azure documentation][10].
+- The Microsoft Sentinel destination has been limited to batch sizes of 1 MB when reading logs using the Azure Logs Ingestion API. The limit size was determined based on the [Azure documentation][8].
 
 ---
 
@@ -94,8 +94,8 @@ Worker version 2.9.1 gives you access to the following:
 
 To upgrade to Worker version 2.9.0:
 
-- Docker: Run the `docker pull` command to pull the [2.9.0 image][28].
-- Kubernetes: See the [Helm chart][25].
+- Docker: Run the `docker pull` command to pull the [2.9.0 image][9].
+- Kubernetes: See the [Helm chart][2].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.9.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.0`.
 
@@ -103,9 +103,9 @@ Worker version 2.9.0 gives you access to the following:
 
 #### New features
 
-- [OpenTelemetry Collector source][7]: Ingest logs from your OpenTelemetry Collector into Observability Pipelines.
-- [Datadog CloudPrem destination][8]: Route logs to the Datadog CloudPrem destination.
-- [Google Pub/Sub destination][9]: Send logs from Observability Pipelines to the Google Pub/Sub messaging system.
+- [OpenTelemetry Collector source][10]: Ingest logs from your OpenTelemetry Collector into Observability Pipelines.
+- [Datadog CloudPrem destination][11]: Route logs to the Datadog CloudPrem destination.
+- [Google Pub/Sub destination][12]: Send logs from Observability Pipelines to the Google Pub/Sub messaging system.
 - The `haversine` custom function to calculate haversine distance and bearing.
 
 #### Enhancements
@@ -120,8 +120,8 @@ Worker version 2.9.0 gives you access to the following:
 
 To upgrade to Worker version 2.8.1:
 
-- Docker: Run the `docker pull` command to pull the [2.8.1 image][29].
-- Kubernetes: See the [Helm chart][25].
+- Docker: Run the `docker pull` command to pull the [2.8.1 image][13].
+- Kubernetes: See the [Helm chart][2].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.8.1`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.1`.
 
@@ -137,8 +137,8 @@ Worker version 2.8.1 gives you access to the following:
 
 To upgrade to Worker version 2.8.0:
 
-- Docker: Run the `docker pull` command to pull the [2.8.0 image][30].
-- Kubernetes: See the [Helm chart][25].
+- Docker: Run the `docker pull` command to pull the [2.8.0 image][14].
+- Kubernetes: See the [Helm chart][2].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.8.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.0`.
 
@@ -165,8 +165,8 @@ Worker version 2.8.0 gives you access to the following:
 
 To upgrade to Worker version 2.7.0:
 
-- Docker: Run the `docker pull` command to pull the [2.7.0 image][31].
-- Kubernetes: See the [Helm chart][25].
+- Docker: Run the `docker pull` command to pull the [2.7.0 image][15].
+- Kubernetes: See the [Helm chart][2].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.7.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.7.0`.
 
@@ -174,16 +174,16 @@ Worker version 2.7.0 gives you access to the following:
 
 #### New features
 
-- [The HTTP Client destination][1]: Send logs to an HTTP Client, such as a logging platform or SIEM.
-- [Processor Groups][2]: Organize your processors into logical groups to help you manage them.
-- [Disk][3] and [memory][4] buffering options are available for destinations.
+- [The HTTP Client destination][16]: Send logs to an HTTP Client, such as a logging platform or SIEM.
+- [Processor Groups][17]: Organize your processors into logical groups to help you manage them.
+- [Disk][18] and [memory][19] buffering options are available for destinations.
 
 #### Enhancements
 
 - The `decode_lz4` custom function has been updated to support decompressing `lz4` frame data.
 - The Azure Blob Storage and Google Cloud Storage archive destinations' prefix fields support template syntax.
 - The Splunk HEC destination has a custom environment variable.
-- The sample processor has an optional `group_by` parameter.
+- The sample processor has an optional [`group_by` parameter][20].
 
 #### Fixes
 
@@ -192,23 +192,23 @@ Worker version 2.7.0 gives you access to the following:
 - The custom OCSF mapper's performance has been improved.
 - The filter processor has flag logic enabled to pass events to the next processor.
 
-[1]: /observability_pipelines/destinations/http_client/
-[2]: /observability_pipelines/processors/#processor-groups
-[3]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
-[4]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#in-memory-buffering-for-components
-[7]: /observability_pipelines/sources/opentelemetry/
-[8]: /observability_pipelines/destinations/cloudprem/
-[9]: /observability_pipelines/destinations/google_pubsub/
-[10]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#logs-ingestion-api
-[11]: /observability_pipelines/destinations/kafka/
-[12]: /observability_pipelines/processors/custom_processor/#custom-functions
-[22]: /observability_pipelines/search_syntax/
-[23]: /observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/
-[24]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.11
-[25]: https://github.com/DataDog/helm-charts/tree/main/charts/observability-pipelines-worker#observability-pipelines-worker
-[26]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.10
-[27]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.9.1
-[28]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.9.0
-[29]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.1
-[30]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.0
-[31]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.7.0
+[1]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.11
+[2]: https://github.com/DataDog/helm-charts/tree/main/charts/observability-pipelines-worker#observability-pipelines-worker
+[3]: /observability_pipelines/search_syntax/
+[4]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.10
+[5]: /observability_pipelines/destinations/kafka/
+[6]: /observability_pipelines/processors/custom_processor/#custom-functions
+[7]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.9.1
+[8]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#logs-ingestion-api
+[9]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.9.0
+[10]: /observability_pipelines/sources/opentelemetry/
+[11]: /observability_pipelines/destinations/cloudprem/
+[12]: /observability_pipelines/destinations/google_pubsub/
+[13]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.1
+[14]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.0
+[15]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.7.0
+[16]: /observability_pipelines/destinations/http_client/
+[17]: /observability_pipelines/processors/#processor-groups
+[18]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
+[19]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#in-memory-buffering-for-components
+[20]: /observability_pipelines/processors/sample/#group-by-example
