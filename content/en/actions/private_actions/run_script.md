@@ -18,8 +18,8 @@ The following table outlines supported and unsupported use cases for the script 
 | Use Case                                            | Supported | Notes                                                                                                                        |
 |-----------------------------------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------|
 | Running Linux binaries (`ls`, `rm`, `find`, `curl`) | Yes   | In order to run native Linux binaries, the relevant files must be accessible to the container.          |
-| Running CLIs (`aws`, `terraform`, `kubectl`)        | Yes   | The CLI and your CLI credentials must be added to your custom image.                                                       |
-| Running scripts (`bash`, `python`)                  | Yes   | Scripts can be mounted inside the container. Interpreters such as Python must be installed on your custom image. |
+| Running CLIs (`aws`, `terraform`, `kubectl`)        | Yes   | The CLI and your CLI credentials must be available in the image.                                                       |
+| Running scripts (`bash`, `python`)                  | Yes   | Scripts can be mounted inside the container. Use the [large image][12] to get access to the python interpreter. |
 | Running privileged commands (`systemctl restart`)   | No    | Because the PAR runs inside a container, it does not have high privilege permissions on the host.                                         |
 | Windows tools (PowerShell)                          | No    | Because the PAR runs inside a Linux container, native Windows tools are not supported.                                             |
 
@@ -27,7 +27,7 @@ The following table outlines supported and unsupported use cases for the script 
 
 To use the script action, you need:
 
-- **Custom tools**: For CLI tools not included in the base image, you need to create a custom Docker image.
+- **Custom tools**: For CLI tools not included in the base or the [large image][12], you need to create a custom Docker image.
 - **PAR Version**: 1.7.0 or later. To create a new PAR, see [Set Up a Private Action Runner][2]. To update your PAR version, see [Update the Private Action Runner][11].
 
 ## Set up a PAR script
@@ -86,14 +86,19 @@ In your workflow or app, configure the action to use the `runPredefinedScript` w
 
 {{< img src="service_management/par-script-variables.png" alt="The two levels of variables inside the runner." style="width:80%;" >}}
 
+## Large image
+
+If you want to use tools like [Python](https://www.python.org/), SSH, [AWS CLI](https://aws.amazon.com/cli/), [Terraform](https://developer.hashicorp.com/terraform/cli/commands) or the [gcloud CLI](https://docs.cloud.google.com/sdk/docs/install) you can use the `gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}-large` image instead of the default image.
+
 ## Advanced usage with custom images
 
-For binaries not available in the base runner image, create a custom image:
+For binaries not available in Datadog provided images, create a custom image:
 
 ```dockerfile
 # Dockerfile example
 FROM gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}
 USER root
+# Change this to install the tool of your choice
 RUN apt update && apt install -y python3
 USER dog
 ```
@@ -139,3 +144,4 @@ print("Hello from Python script!")
 [9]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/values.yaml
 [10]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.script.runPredefinedScript
 [11]: /actions/private_actions/update_private_action_runner/
+[12]: /actions/private_actions/run_script/#large-image
