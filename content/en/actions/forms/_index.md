@@ -64,7 +64,7 @@ By default, only the creator of a form can access it. To change the permissions 
 
 ### View in forms 
 
-To view form responses in a tablet format: 
+To view form responses in a table format: 
 1. From the [Forms][1] page, click a form.
 1. Click **Responses**.
 1. Click the edit icon on a response to view the JSON version. 
