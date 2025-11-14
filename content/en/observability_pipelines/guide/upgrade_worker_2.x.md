@@ -104,7 +104,7 @@ Worker version 2.9.0 gives you access to the following:
 #### New features
 
 - [OpenTelemetry Collector source][7]: Send logs from your OpenTelemetry Collector to Observability Pipelines.
-- [Datadog CloudPrem destination][8]: Send logs from Observability Pipelines to Datadog CloudPrem.
+- [Datadog CloudPrem destination][8]: Route logs to the Datadog CloudPrem destination.
 - [Google Pub/Sub destination][9]: Send logs from Observability Pipelines to the Google Pub/Sub messaging system.
 - The `haversine` custom function to calculate haversine distance and bearing.
 
@@ -129,7 +129,7 @@ Worker version 2.8.1 gives you access to the following:
 
 #### Fixes
 
-- THe HTTP Client source's authorization strategy has been fixed.
+- The HTTP Client source's authorization strategy has been fixed.
 
 ---
 
@@ -174,7 +174,7 @@ Worker version 2.7.0 gives you access to the following:
 
 #### New features
 
-- [The HTTP Client destination][1]: Send logs to an HTTP client, such as a logging platform or SIEM.
+- [The HTTP Client destination][1]: Send logs to an HTTP Client, such as a logging platform or SIEM.
 - [Processor Groups][2]: Organize your processors into logical groups to help you manage them.
 - [Disk][3] and [memory][4] buffering options are available for destinations.
 
