@@ -12,6 +12,7 @@ Run this command to install the required dependencies:
 
 ```shell 
 pip install ddtrace crewai crewai-tools
+```
 
 ### Set environment variables
 
