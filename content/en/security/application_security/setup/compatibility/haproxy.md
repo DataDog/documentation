@@ -9,12 +9,12 @@ The following table lists App and API Protection capabilities for the HAProxy in
 
 | App and API Protection capability              | Minimum Datadog HAProxy SPOA image version |
 |------------------------------------------------|--------------------------------------------|
-| Threat Detection                               | v2.3.0                                     |
-| Threat Protection                              | v2.3.0                                     |
-| Customize response to blocked requests         | v2.3.0                                     |
+| Threat Detection                               | v2.4.0                                     |
+| Threat Protection                              | v2.4.0                                     |
+| Customize response to blocked requests         | v2.4.0                                     |
 | Non blocking asynchronous mode (observability) | not supported                              |
-| API Security                                   | v2.3.0                                     |
-| App and API Protection Standalone              | v2.3.0                                     |
+| API Security                                   | v2.4.0                                     |
+| App and API Protection Standalone              | v2.4.0                                     |
 | Automatic user activity event tracking         | not supported                              |
 
 ### Body processing support
@@ -23,7 +23,7 @@ The Datadog HAProxy SPOA supports the processing of request and response bodies 
 
 | Payload type | Minimum Datadog HAProxy SPOA image version |
 |--------------|--------------------------------------------|
-| JSON         | v2.3.0                                     |
+| JSON         | v2.4.0                                     |
 
 ## HAProxy version support
 
@@ -31,7 +31,7 @@ The Datadog HAProxy integration for App and API Protection relies on features th
 
 | Feature | Minimum HAProxy version |
 |---------|-----------------------|
-| SPOE | v2.3.0 |
+| SPOE | v2.4.0 |
 
 ## Datadog HAProxy integration support
 
