@@ -37,13 +37,52 @@ This feature works by intercepting logs from the built-in `Microsoft.Extensions.
 ### Standard logging
 
 ```csharp
-[TODO: Code example]
+using Microsoft.Extensions.Logging;
+
+// For a Console application, manually create a logger factory
+using var loggerFactory = LoggerFactory.Create(builder =>
+{
+    // Additional builder options can be set, such as configuring the log level
+    builder.SetMinimumLevel(LogLevel.Debug);
+});
+
+// Get a logger instance
+var logger = loggerFactory.CreateLogger<Program>();
+
+// This log will be exported via OTLP
+logger.LogInformation("This is a standard log message.");
 ```
 
 ### Trace and log correlation
 
+This example shows how logs emitted within an active Datadog span are automatically correlated. If you are using the OTel Tracing API or built-in .NET Activity API to create spans, ensure OTel Tracing API support is enabled.
+
 ```csharp
-[TODO: Code example]
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.Threading.Tasks;
+
+// For a Console application, manually create a logger factory
+using var loggerFactory = LoggerFactory.Create(builder =>
+{
+    // Additional builder options can set, such as setting the desired log level
+    builder.SetMinimumLevel(LogLevel.Debug);
+});
+
+// Get a logger instance
+var logger = loggerFactory.CreateLogger<Program>();
+
+// Create an activity source (the built-in .NET API for generating traces)
+var activitySource = new ActivitySource("MyService", "1.0.0");
+
+// Start an activity (i.e. start a span)
+using (var activity = activitySource.StartActivity("do.work"))
+{
+    // This log is automatically correlated with the 'do.work' span
+    logger.LogInformation("This log is correlated to the active span.");
+    await Task.Delay(TimeSpan.FromMilliseconds(100));
+    logger.LogWarning("So is this one.");
+}
 ```
 
 ## Supported configuration
