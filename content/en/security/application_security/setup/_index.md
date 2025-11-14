@@ -35,7 +35,6 @@ Learn how to enable App and API Protection on all the following supported platfo
 {{< appsec-integrations >}}
   {{< appsec-integration name="NGINX" avatar="nginx" link="./nginx" >}}
   {{< appsec-integration name="Envoy" avatar="envoy" link="./envoy" >}}
-  {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
 {{< /appsec-integrations >}}
 
 ## Hosts
@@ -52,6 +51,7 @@ Learn how to enable App and API Protection on all the following supported platfo
 {{< appsec-integrations >}}
   {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
   {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
+  {{< appsec-integration name="Envoy Gateway" avatar="envoy" link="./envoy-gateway" >}}
   {{< appsec-integration name="Gateway API" src="integrations_logos/gateway-api_avatar.svg" link="./gateway-api" >}}
 {{< /appsec-integrations >}}
 
