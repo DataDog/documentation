@@ -159,7 +159,7 @@ FROM public.ecr.aws/datadog/agent:latest
 COPY conf.d/ /etc/datadog-agent/conf.d/
 ```
 
-Once the image is built and pushed to an image repository, reference the custom image in the ECS task definition:
+Once the image is built and pushed to an image registry, reference the custom image in the ECS task definition:
 ```
 {
     "containerDefinitions": [
