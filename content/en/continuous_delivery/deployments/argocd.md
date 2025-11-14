@@ -257,7 +257,7 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 ### Status discrepancies between Argo CD and Datadog
 
 You might notice a discrepancy in how a deployment's status is reported, where it is successful in Argo CD but shown as an error in Datadog. The key difference lies in how each platform evaluates deployment success:
-- **ArgoCD** considers a sync successful as long as it can apply the changes to the Kubernetes manifests, regardless of the runtime state of the resources.
+- **Argo CD** considers a sync successful as long as it can apply the changes to the Kubernetes manifests, regardless of the runtime state of the resources.
 - **Datadog CD Visibility** evaluates the outcome of the deployment more comprehensively. If any of the resources modified during the sync end up in a degraded state (for example, due to a bad image or configuration issue), the deployment is marked as failed or degraded in Datadog, even though Argo CD reports it as successful.
 
 ## Further reading
