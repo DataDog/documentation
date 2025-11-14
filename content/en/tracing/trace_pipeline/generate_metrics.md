@@ -36,36 +36,36 @@ Custom metrics are created from spans ingested by Datadog APM, regardless of whe
 - Datadog automatically generates [Trace Metrics][13] that capture request counts, error rates, and latency distributions for 100% of your application traffic.
 - Available spans for custom metric generation depend on your [APM ingestion control settings][12]. Dropped spans from sampling or filtering cannot generate metrics.
 
-Use **custom metrics from spans** when you:
-- Need fine-grained visibility into **span-level** latency, error rates, or tag-level performance
-- Want to power [anomaly][4] or [forecast][7] monitors with low-latency, high-resolution metrics
-- Don't need to retain the span, but want to extract key signals for trending or alerting
 
-Use **custom metrics from traces** when you:
-- Need metrics derived from **complete trace context**, such as total trace duration or the number of operations per trace.
-- Want to alert on conditions that require full trace knowledge (e.g., N+1 query detection, fan-out patterns)
+Use custom metrics from spans for:
+- Fine-grained visibility into span-level latency, error rates, or tag-level performance
+- Powering [anomaly][4] or [forecast][7] monitors with low-latency, high-resolution metrics.
+- Extracting key signals for trending or alerting without retaining the full span.
 
-<div class="alert alert-danger">Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and are billed accordingly. To avoid high costs, do not group metrics by high-cardinality values such as user IDs or request IDs.</div>
+### When to use custom metrics from traces
+
+Use custom metrics from traces for:
+- Metrics derived from complete trace context, such as total trace duration or operations per trace.
+- Alerting on conditions requiring full trace knowledge (for example, N+1 query detection or fan-out patterns).
+- Extracting key signals for trending or alerting without retaining the full trace.
+
+<div class="alert alert-danger">Custom metrics from spans and traces are <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by high-cardinality values (such as user IDs, request IDs, or timestamps) to prevent billing impact.</div>
 
 ## Create a metric from spans or traces
 
 {{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="How to create a metric" >}}
 
-1. **Name your metric:** Metric names must follow the [metric naming convention][11]. Metric names that start with `trace.*` are not allowed.
-   
-2. **Select the type:** Choose between **Spans** or **Traces**. Both use the same [query syntax][10] as APM Search and Analytics.
-
-3. **Define the metric query:** Filter spans or traces to include only the ones you want to measure.
-
-4. **Choose the value to aggregate:**
-     - Select `*` to count all spans or traces matching your query. 
-     - Enter an attribute (for example, `@cassandra_row_count`) to aggregate a numeric value and track its corresponding count, min, max, sum or any percentile.
-
-   **Note**: Span attributes that are not numerical values cannot be used for aggregation. To generate a metric that counts the distinct values of a span attribute (for instance count the number of user IDs hitting a specific endpoint), add this dimension to the `group by` selector, and use the `count_nonzero` function to count the number of tag values.
-
-5.  **Set grouping dimension:** By default, metrics generated will not have any tags unless explicitly added. Any attribute or tag that exists in your spans can be used to create metric tags.
-
-6.  **Preview the result:** You can view the impact of your query in real-time on the data visualization, and the matching spans or traces considered for your query in a live preview.
+1. Navigate to [**APM** > **Generate Metrics**][14].
+2. Click **New Metric**.
+3. Name your metric following the [metric naming convention][11]. Metric names starting with `trace.*` are not allowed.
+4. Select the metric type: **Spans** or **Traces**. Both use the same [query syntax][10] as APM Search and Analytics.
+5. Define the metric query to filter and include only the spans or traces you want to measure.
+6. Choose the value to aggregate:
+     - Select `*` to count all matching spans or traces.
+     - Enter a numeric attribute (for example, `@cassandra_row_count`) to aggregate and track the count, min, max, sum, or percentiles.
+7. Set grouping dimensions. By default, metrics have no tags unless you add them. Use any span attribute or tag to create metric tags.
+8. Preview the result to view the real-time impact of your query through the data visualization and matching spans or traces in the live preview.
+9. Click **Create Metric**.
 
 <div class="alert alert-danger"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
