@@ -42,6 +42,10 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
    {{< tabs >}}
 
+   {{% tab "Datadog CLI" %}}
+   {{% aca-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
+
    {{% tab "Terraform" %}}
    {{% aca-install-sidecar-terraform %}}
    {{% /tab %}}
