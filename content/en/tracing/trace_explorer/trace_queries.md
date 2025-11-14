@@ -101,17 +101,17 @@ For example, if you query for traces that contain a span from the service `web-s
 
 ## How Trace Queries source data
 
-Trace Queries are performed on top of traces indexed by the [Intelligent Retention Filter][3] and [Trace level retention filters][6].
+Trace Queries run on traces indexed by the [intelligent retention filter][3] and [trace-level retention filters][6].
 
-{{< img src="tracing/trace_queries/trace_queries_base_data.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Queries Source data" >}}
+{{< img src="tracing/trace_queries/trace_queries_base_data.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Flow showing where trace retention filters apply in the processing pipeline" >}}
 
-The Intelligent retention filter is enabled by default, and comprises:
-- [Flat sampling][4]: A uniform 1% sample of ingested spans.
-- [Diversity sampling][5]: A representative, diverse selection of traces to keep visibility over each environment, service, operation, and resource.
+The intelligent retention filter is enabled by default and includes:
+- [Flat sampling][4]: Uniformly samples 1% of ingested spans.
+- [Diversity sampling][5]: Retains a diverse set of traces to maintain visibility across environments, services, operations, and resources.
 
-Both Flat sampling and Diversity sampling capture **complete traces**, meaning that all spans of a trace are always indexed to ensure that Trace Queries return accurate results.
+Both Flat sampling and Diversity sampling capture **complete traces**, meaning all spans within a trace are indexed to ensure accurate results in Trace Queries.
 
-Trace level retention filters are configurable: use the filter query to target spans by any tag and attribute to retain the most critical trces. Configuring a trace rate ensure the retention filter retains all spans of a trace so that you are able to query these traces in Trace Queries.
+Trace-level retention filters are configurable. Use a filter query to target spans by any tag or attribute and retain the most critical traces. Setting a trace rate ensures that the filter retains all spans of a trace so you can query those traces in Trace Queries.
 
 
 
