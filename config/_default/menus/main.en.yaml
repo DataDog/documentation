@@ -1117,11 +1117,6 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_vscode
       weight: 702
-    - name: Visual Studio
-      url: developers/ide_plugins/visual_studio/
-      parent: ide_plugins
-      identifier: ide_plugins_visual_studio
-      weight: 703
     - name: Community
       url: developers/community/
       parent: dev_tools
