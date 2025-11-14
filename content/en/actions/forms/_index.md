@@ -34,6 +34,8 @@ To create a new form:
     | Data         | The available options that respondents can choose from.                | Select and checkboxes | 
     | Questions             | The questions respondents are asked when rating their experience. | Ratings |  
 1. Click **Save** to save your changes. 
+
+To preview, share, and debug your form:
 1. Click **View** to display the form as it appears to respondents. Click **Edit** to return to the creator view. 
 1. Click **Share** to copy the form link to your clipboard.
 1. In the **Debug** section:
