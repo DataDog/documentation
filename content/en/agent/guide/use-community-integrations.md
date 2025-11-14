@@ -20,9 +20,6 @@ Community developed integrations for the Datadog Agent are stored in the Datadog
 
 Follow the installation method for your environment. 
 
-
-
-
 {{< tabs >}}
 {{% tab "Host installation" %}}
 
@@ -35,7 +32,7 @@ For Agent v7.21+ / v6.21+:
     ```
 
    The version for the integration can be found in the respective changelog on the integration's Github repository.
-2. Configure your integration similar to core [integrations][1].
+2. Manage your integration configuration files similar to [core integrations][1]—at their respective `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` file.
 3. [Restart the Agent][2].
 
 [1]: /getting_started/integrations/
