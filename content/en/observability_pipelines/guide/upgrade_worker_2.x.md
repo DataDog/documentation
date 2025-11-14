@@ -10,7 +10,7 @@ disable_toc: false
 Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or monthly at a minimum. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates.
 </div>
 
-This guide goes over Worker version releases and how to upgrade to that version.
+This guide goes over how to upgrade to a specific Worker version and updates for that version.
 
 ## Worker Version 2.11.0
 
