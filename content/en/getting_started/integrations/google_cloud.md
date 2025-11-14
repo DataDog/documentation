@@ -99,7 +99,7 @@ Organization-level monitoring is recommended for comprehensive coverage of all p
    - [Monitoring Viewer][403] provides **read-only** access to the monitoring data availabile in your Google Cloud environment
    - [Cloud Asset Viewer][404] provides **read-only** access to cloud assets metadata
    - [Browser][405] provides **read-only** access to browse the hierarchy of a project
-   - [Service Usage Consumer][406] (**optional**, for multi-project environments) provides [per-project cost and API quota attribution](#enable-per-project-cost-and-api-quota-attribution) after this feature has been enabled by Datadog support
+   - [Service Usage Consumer][406] (**optional**, for multi-project environments) provides [per-project cost and API quota attribution](#enable-per-project-cost-and-api-quota-attribution)
 6. Click **Save**.
 
 **Note**: The `Browser` role is only required in the default project of the service account. Other projects require only the other listed roles.
