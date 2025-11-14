@@ -58,33 +58,33 @@ Remote Configuration does not support serverless container managed apps, such as
 The following products and features are supported with Remote Configuration.
 
 Fleet Automation
-:: - [Send flares][27] directly from the Datadog site. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
-:: - [Upgrade your Agents][29] (Preview).
+: - [Send flares][27] directly from the Datadog site. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
+: - [Upgrade your Agents][29] (Preview).
 
 App and API Protection (AAP)
-:: - [1-click AAP activation][33]: Enable AAP in 1-click from the Datadog UI.
-:: - [In-App attack patterns updates][34]: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
-:: - [Protect][34]: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
+: - [1-click AAP activation][33]: Enable AAP in 1-click from the Datadog UI.
+: - [In-App attack patterns updates][34]: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
+: - [Protect][34]: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
 
 Application Performance Monitoring (APM)
-:: - Configuration at runtime (Preview): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
-:: - [Remotely set Agent sampling rate][35] (Preview): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
+: - Configuration at runtime (Preview): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
+: - [Remotely set Agent sampling rate][35] (Preview): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 [Dynamic Instrumentation][36]
-:: - Send critical metrics, traces, and logs from your live applications with no code changes.
+: - Send critical metrics, traces, and logs from your live applications with no code changes.
 
 Workload Protection
-:: - Automatic default Agent rule updates: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Workload Protection][3] for more information.
-:: - Automatic deployment of custom Agent rules: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
+: - Automatic default Agent rule updates: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Workload Protection][3] for more information.
+: - Automatic deployment of custom Agent rules: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
 Observability Pipelines
-:: - Remotely deploy and update [Observability Pipelines Workers][4] (OPW): Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
+: - Remotely deploy and update [Observability Pipelines Workers][4] (OPW): Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
 Autoscaling
-:: - Remotely manage autoscaling policies and workload scaling configurations for your containerized environments from the Datadog UI. See [Autoscaling][47] for more information.
+: - Remotely manage autoscaling cluster and workload scaling configurations for your containerized environments. See [Autoscaling][47] for more information.
 
 Private action runner
-:: - Run Datadog workflows and apps that interact with services hosted on your private network without exposing your services to the public internet. For more information, see [Private Actions][30].
+: - Run Datadog workflows and apps that interact with services hosted on your private network without exposing your services to the public internet. For more information, see [Private Actions][30].
 
 ## Security considerations
 
