@@ -39,9 +39,9 @@ This view helps your network teams identify device outages, latency issues, or c
 
 1. Tag devices using the `geomap:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
 
-{{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap-nyc-test` tag." style="width:100%;" >}}
+{{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
 
-2. In the GeoMap locations Settings page, click on **+Add mapping**. (either manual or csv)
+2. On the [GeoMap locations settings][3] page, click **+Add mapping** and provide the location value and latitude and longitude coordinates. To bulk import locations, select **Import from CSV** from the **+Add mapping** dropdown and use the provided template.
 
 {{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
 
