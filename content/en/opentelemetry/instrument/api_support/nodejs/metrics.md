@@ -1,8 +1,9 @@
 ---
 title: Node.js OpenTelemetry Metrics API Support
-code_lang: metrics
-type: multi-code-lang
-code_lang_weight: 1
+#code_lang: metrics
+#type: multi-code-lang
+#code_lang_weight: 1
+private: true
 further_reading:
     - link: opentelemetry/correlate/metrics_and_traces
       tag: Documentation
