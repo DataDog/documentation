@@ -138,7 +138,7 @@ Inyección de OGNLi (Object-Graph Navigation Language Injection)
 [10]: /es/security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /es/security/application_security/policies/inapp_waf_rules/
-[13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
+[13]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&view=signal
 [14]: /es/security/application_security/how-it-works/add-user-info/
 [15]: /es/security/application_security/how-it-works/trace_qualification/
 [16]: /es/security/application_security/how-it-works/threat-intelligence/
