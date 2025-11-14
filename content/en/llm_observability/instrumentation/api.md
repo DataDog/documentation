@@ -168,7 +168,7 @@ If the request is successful, the API responds with a 202 network code and an em
 
 #### Prompt
 
-<div class="alert alert-info">LLM Observability registers new versions of templates when the `template` or `chat_template` value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.</div>
+<div class="alert alert-info">LLM Observability registers new versions of templates when the <code>template</code> or <code>chat_template</code> value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.</div>
 
 {{< tabs >}}
 {{% tab "Model" %}}
