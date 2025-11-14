@@ -28,11 +28,11 @@ Use the Datadog platform to inspect individual logs and related traces, or modif
 ## Supported Languages & Frameworks
 The Logs integration supports the following languages and logging frameworks:
 
-* Java & Kotlin : [SLF4J][1], [Log4j 2][2], [java.util.logging][3] and [Logback][17]
-* Go : [Logrus][4], [Zap][5] and the [log package][6] in the Standard Library
-* Python : [Python logging][7] and [Loguru][8]
-* JavaScript & TypeScript : [Datadog Browser Logs][9] and [Winston][10]
-* PHP : [Laravel][11], [Monolog][12], [Symfony][13] and [PSR-3][14] 
+* **Java & Kotlin** : [SLF4J][1], [Log4j 2][2], [java.util.logging][3] and [Logback][17]
+* **Go** : [Logrus][4], [Zap][5] and the [log package][6] in the Standard Library
+* **Python** : [Python logging][7] and [Loguru][8]
+* **JavaScript & TypeScript** : [Datadog Browser Logs][9] and [Winston][10]
+* **PHP** : [Laravel][11], [Monolog][12], [Symfony][13] and [PSR-3][14] 
 
 ## Settings
 Right-click a log element in the source editor to open the settings (Editor → Inlay Hints) for the current language, and activate or deactivate the feature.
