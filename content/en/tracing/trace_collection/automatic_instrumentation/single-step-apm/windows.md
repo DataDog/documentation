@@ -43,9 +43,9 @@ After SSI loads the Datadog SDK into your applications and enables distributed t
 
 To enable products, [set environment variables][3] in your application configuration.
 
-## (Optional) Target specific workloads 
+## (Optional) Define workload selection rules
 
-Workload selection lets you control which .NET workloads are automatically instrumented by SSI. You can use workload selection to instrument specific applications or exclude certain IIS Application Pools.
+Workload selection lets you control which .NET workloads are automatically instrumented by SSI. You can use workload selection to instrument specific applications or exclude certain IIS application pools.
 
 To configure workload selection:
 
@@ -99,11 +99,11 @@ Rules include the following fields:
 
 - `description`: A short description of the rule.
 - `instrument`: Boolean (`true` or `false`) that determines whether to enable or disable instrumentation.
-- `expression`: The condition that defines which workloads to match. 
+- `expression`: The condition that defines which workloads to match. See [Expression selectors](#expression-selectors) for supported fields. 
 
 #### Expression selectors
 
-The `expression` field supports the following selectors:
+The `expression` field uses selectors to match process properties, such as executable name or runtime. The following selectors are supported:
 
 | Field | Description | Examples |
 |-------|-------------|----------|
@@ -113,8 +113,8 @@ The `expression` field supports the following selectors:
 | `iis.application_pool` | The IIS application pool name. | `staging-app-pool`, `DefaultAppPool` |
 
 **Example expressions:**
-- `process.executable:myapp.exe` matches any process named `myapp.exe`
-- `process.executable:myapp.exe runtime.language:dotnet` matches processes named `myapp.exe` running on .NET
+- `process.executable:myapp.exe`: matches any process named `myapp.exe`
+- `process.executable:myapp.exe runtime.language:dotnet`: matches processes named `myapp.exe` running on .NET
 
 ## Remove Single Step APM instrumentation from your Agent
 

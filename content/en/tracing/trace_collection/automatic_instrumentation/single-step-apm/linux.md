@@ -115,25 +115,21 @@ To update the SDK versions:
 Workload selection is in Preview. Use this form to submit your request today.
 {{< /callout >}}
 
-Workload selection rules let you control which Linux processes are automatically instrumented by SSI.
+Workload selection rules (available for Agent v7.73+) let you control which Linux processes are automatically instrumented by SSI. 
 
-#### Prerequisites
-
-To use workload selection, you must be running Datadog Agent v7.73 or later.
-
-#### Configure workload selection
+To configure workload selection:
 
 1. In Datadog, navigate to **APM** > **Settings** > [**Workload Selection**][20].
 1. Click **Add or Edit Rules**. 
 1. Define instrumentation rules:
-   1. Click **Add New Rule** and select **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
+   1. Click **Add New Rule**, then choose **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
    1. Name your rule. 
    1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
 1. (Optional) Drag and drop rules to reorder them. 
 
    **Note**: Rules are evaluated in order. After a process matches a rule, subsequent rules are ignored.
 
-1. Define the default behavior (allow or block) for processes that don't match any rule.
+1. Set the default behavior (allow or block) for processes that do not match any rule.
 1. Click **Next** to preview your rules. 
 1. Click **Deploy Rules**. 
 
@@ -141,17 +137,17 @@ If Remote Configuration is enabled, rules are deployed to every host and applied
 
 #### Define rule conditions
 
-Each rule consists of one or more conditions. A condition includes:
+Each rule consists of one or more conditions. A condition includes the following elements:
 - **Attribute**: The process property that the rule evaluates.
 - **Operator**: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
-- **Value**: The text or pattern to match against, such as a process name or command-line flag.
+- **Value**: The text or pattern to match, such as a process name or command-line flag.
 
+Supported attributes include:
 | Attribute    | Description |
 | ----------- | ----------- |
 | `process` | Executable name of the process. |
 | `process args` | Command-line arguments used to start the process. |
 | `language` | Programming language detected for the process. |
-
 
 ## Remove Single Step APM instrumentation from your Agent
 
