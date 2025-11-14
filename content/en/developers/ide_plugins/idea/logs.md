@@ -47,8 +47,9 @@ In rare cases, customers post-process their logs data and modify the logger name
 ### Go, Python, JavaScript, TypeScript and PHP
 For these languages, there are no custom settings, only the activate/deactivate checkbox.
 
-## Advanced Settings
-For a normal setup, the advanced settings are not required. However, a few Datadog customers have log events with a non-standard [logger name attribute][15]. You can change the “Logger name tag” setting accordingly. If you set it to blank, the logger name will not be used in log queries at all.
+## Advanced settings
+
+For a typical setup, the advanced settings are not required. However, if you have log events with a non-standard [logger name attribute][15], you can change the “Logger name tag” setting accordingly. If you set it to blank, the logger name will not be used in log queries at all.
 
 {{< img src="/developers/ide_plugins/idea/logs/settings-advanced.png" alt="Advanced settings" style="width:100%;" >}}
 
