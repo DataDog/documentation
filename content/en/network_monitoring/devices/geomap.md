@@ -26,33 +26,36 @@ Maps in Network Device Monitoring provide two views of your network infrastructu
 
 ## Device GeoMap
 
-The [Device Geomap][1] provides a global visualization of network devices discovered through Network Device Monitoring (NDM). It plots devices on a geographical map based on their configured locations, allowing you to assess connectivity, reachability, and regional network health at a glance.
+[Device Geomap][1] provides a global visualization of network devices discovered through Network Device Monitoring (NDM). It plots devices on a geographical map based on their configured locations, allowing you to assess connectivity, reachability, and regional network health at a glance.
 This view helps your network teams identify device outages, latency issues, or coverage gaps across distributed environments.
 
 {{< img src="network_device_monitoring/geomap/device_geomap.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
 
-
 ### Prerequisites
 
-[Network Device Monitoring][2] installed on your devices.
-
-## Navigation options
-
-
+- [Network Device Monitoring][2] configured on your devices.
 
 ## Configuring locations
 
-Tagging devices with geomap: value
-Adding mappings (csv, or manually/individual)
+1. Tag devices using the `geomap:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
 
+{{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap-nyc-test` tag." style="width:100%;" >}}
+
+2. In the GeoMap locations Settings page, click on **+Add mapping**. (either manual or csv)
+
+{{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
+
+## Navigation options
+
+Flow
 
 ## Troubleshooting
 
-If you experience issues using the Device GeoMap, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][5].
+If you experience issues using Device GeoMap, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][5].
 
 ### Device appears in multiple locations
 
-When a device is tagged with multiple `geomap` tags, it displays at only one location on the map. However, when you click on any cluster containing that device, it appears in the side panel for all tagged locations. 
+When a device is tagged with multiple `geomap` tags, it displays at only one location on the map. However, when you click on any device cluster containing that device, it appears in the side panel for all tagged locations. 
 
 ### CSV upload fails
 
@@ -71,8 +74,6 @@ If a device doesn't appear on the map after tagging:
 1. Verify that the location tag has coordinates configured in the [Settings][3] page.
 2. Allow a few minutes for tag updates to be reflected in the map, as indicated in the application.
 
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -80,6 +81,7 @@ If a device doesn't appear on the map after tagging:
 [1]: https://app.datadoghq.com/devices/maps/geomap
 [2]: /network_monitoring/devices/setup#configuration
 [3]: https://app.datadoghq.com/devices/settings/geomap
+[4]: /network_monitoring/devices/setup#enrich-network-devices-with-tags
 [5]: /help
 [8]: /network_monitoring/devices/topology
 [9]: /network_monitoring/devices/geomap
