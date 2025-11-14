@@ -80,7 +80,7 @@ Workload Protection
 Observability Pipelines
 : - Remotely deploy and update [Observability Pipelines Workers][4] (OPW): Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
-Autoscaling
+[Autoscaling][47]
 : - Remotely manage autoscaling cluster and workload scaling configurations for your containerized environments. See [Autoscaling][47] for more information.
 
 Private action runner
