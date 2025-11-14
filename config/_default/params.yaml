@@ -140,6 +140,8 @@ code_language_ids:
     traces: "Traces"
     metrics: "Metrics"
     logs: "Logs"    
+    topology: "Topology Map"
+    geomap: "GeoMap" 
 branch: ""
 
 signupclass: sign-up-trigger

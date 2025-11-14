@@ -1,7 +1,11 @@
+
 ---
-title: Device Topology Map
+title: Network Topology Map
+code_lang: topology
+type: multi-code-lang
+code_lang_weight: 0
 aliases:
-- /network_monitoring/devices/network_topology_map
+- /network_monitoring/devices/network_topology_map 
 further_reading:
 - link: "https://www.datadoghq.com/blog/visualize-network-device-topology/"
   tag: "Blog"
@@ -15,6 +19,13 @@ further_reading:
 ---
 
 ## Overview
+
+Maps in Network Device Monitoring provide two complementary views of your network infrastructure:
+
+- **Device Topology Map**: Visualizes physical network connections between devices, their interfaces, and relationships.
+- **GeoMap**: Displays the geographic distribution of your network devices across locations.
+
+## Device Topology Map
 
 The [Network Device Topology Map][2] uses [Cloudcraft][7] diagrams to provide an interactive visual representation of your network's physical connections. The map automatically discovers and displays devices, their interfaces, and the relationships between them. This visualization helps you identify issues in your network devices, understand their upstream and downstream impacts, troubleshoot connectivity problems, and gain insights into how traffic flows through your infrastructure.
 
@@ -171,11 +182,9 @@ The connections discovered with LLDP or CDP can correspond to devices already mo
 
 The device resolution can fail if the device is not monitored with NDM, or the LLDP or CDP data is insufficient to match the discovered device to the monitored device.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /network_monitoring/netflow/
 [2]: https://app.datadoghq.com/devices/maps/topology 
@@ -184,3 +193,6 @@ The device resolution can fail if the device is not monitored with NDM, or the L
 [5]: /help
 [6]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#ping
 [7]: /datadog_cloudcraft/
+
+
+

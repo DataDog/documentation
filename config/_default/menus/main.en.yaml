@@ -3659,10 +3659,10 @@ menu:
       parent: ndm
       identifier: ndm_profiles
       weight: 304
-    - name: Device Topology Map
-      url: network_monitoring/devices/device_topology_map
+    - name: Maps
+      url: network_monitoring/devices/topology
       parent: ndm
-      identifier: ndm_topology_map
+      identifier: ndm_network_maps
       weight: 305
     - name: SNMP Metrics Reference
       url: network_monitoring/devices/data
