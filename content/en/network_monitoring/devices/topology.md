@@ -76,7 +76,7 @@ In addition to showing an overview of your network's physical connections, the D
 
 Click on a link between devices to explore connection details including traffic volume, bandwidth utilization, errors, and discards, with options to view the data in [Device Overview][10] or [NetFlow Monitoring][11].
 
-{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="The Network Device Topology Map with a device selected, displaying information about the device in the side panel." video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="A user clicking on a link between devices to open a side panel showing additional link details." video="true" >}}
 
 ### View flow details
 

@@ -26,28 +26,32 @@ Maps in Network Device Monitoring provide two views of your network infrastructu
 
 ## Device GeoMap
 
-[Content about GeoMap]
+The [Device Geomap][1] 
 
-## Setup
+{{< img src="network_device_monitoring/geomap/device_geomap.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
 
-[GeoMap setup instructions]
+
+### Prerequisites
+
+[Network Device Monitoring][2] installed on your devices.
 
 ## Navigation options
 
-[GeoMap navigation]
 
-## Investigating devices
 
-[GeoMap investigation features]
+## Configuring locations
+
+
 
 ## Troubleshooting
 
-[GeoMap troubleshooting]
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://app.datadoghq.com/devices/maps/geomap
+[2]: /network_monitoring/devices/setup#configuration
 [8]: /network_monitoring/devices/topology
 [9]: /network_monitoring/devices/geomap
