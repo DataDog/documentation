@@ -37,10 +37,10 @@ The Logs integration supports the following languages and logging frameworks:
 ## Settings
 Right-click a log element in the source editor to open the settings (Editor → Inlay Hints) for the current language, and activate or deactivate the feature.
 
-### Java / Kotlin
-In Java & Kotlin, by convention, logs are normally tagged with the logger name corresponding to the fully qualified class name of the class where the logger is created.  
+### Logger name for Java and Kotlin
+In Java and Kotlin, by convention, logs are normally tagged with the logger name corresponding to the fully qualified class name of the class where the logger is created.  
 
-In rare cases, customers post-process their logs data and modify the logger name tag to use only the simple class name. For these customers, there is a “Logger name” setting to inform the plugin to create Log Explorer queries using the simple class name.
+In rare cases, users post-process their logs data and modify the logger name tag to use only the simple class name. For these users, there is a **Logger name** setting to inform the plugin to create Log Explorer queries using the simple class name.
 
 {{< img src="/developers/ide_plugins/idea/logs/settings-java.png" alt="Log settings - Java" style="width:100%;" >}}
 
