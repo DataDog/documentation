@@ -44,9 +44,6 @@ In rare cases, users post-process their logs data and modify the logger name tag
 
 {{< img src="/developers/ide_plugins/idea/logs/settings-java.png" alt="Log settings - Java" style="width:100%;" >}}
 
-### Go, Python, JavaScript, TypeScript and PHP
-For these languages, there are no custom settings, only the activate/deactivate checkbox.
-
 ## Advanced settings
 
 For a typical setup, the advanced settings are not required. However, if you have log events with a non-standard [logger name attribute][15], you can change the “Logger name tag” setting accordingly. If you set it to blank, the logger name will not be used in log queries at all.
