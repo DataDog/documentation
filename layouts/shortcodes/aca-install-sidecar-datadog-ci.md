@@ -37,4 +37,4 @@ Additional parameters can be found in the [CLI documentation][1004].
 
 [1001]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
 [1002]: /getting_started/site/
-[1004]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-container-app#readme
+[1004]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-container-app#arguments
