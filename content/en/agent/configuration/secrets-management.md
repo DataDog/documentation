@@ -355,6 +355,18 @@ For containerized environments, the Datadog Agent's container images include a b
 * Kubernetes Secrets: using `ENC[k8s_secret@namespace/secret-name/key]`
 
 {{< tabs >}}
+{{% tab "Datadog Operator" %}}
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    secretBackend:
+      command: "/readsecret_multiple_providers.sh"
+```
+{{% /tab %}}
 {{% tab "Helm" %}}
 
 To use this executable with the Helm chart, set it as the following:
