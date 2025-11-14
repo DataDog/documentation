@@ -30,6 +30,8 @@ The following are key differences between using Amazon Data Firehose and CloudWa
 
 - **AWS Costs**: AWS Costs may vary for individual use cases but Amazon Data Firehose ingestion is generally less expensive than comparable Cloudwatch Log ingestion.
 
+**Note**: [Open Cybersecurity Schema Framework (OCSF)][11] format is supported by Datadog Log Management.
+
 ## Requirements
 1. The following command line tools: [`kubectl`][6], [`aws`][7].
 2. An EKS cluster with a [Fargate profile][1] and Fargate pod execution role. In this guide, the cluster is named `fargate-cluster` with a Fargate profile named `fargate-profile` applied to the namespace `fargate-namespace`. If you don't already have these resources, use [Getting Started with Amazon EKS][8] to create the cluster and [Getting Started with AWS Fargate using Amazon EKS][9] to create the Fargate profile and pod execution role.
@@ -255,3 +257,4 @@ Logs from this configuration require some attributes to be remapped to maximize 
 [8]: https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html
 [9]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-getting-started.html
 [10]: https://app.datadoghq.com/logs
+[11]: https://schema.ocsf.io/

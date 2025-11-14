@@ -24,6 +24,8 @@ You can forward your AWS service logs stored in CloudWatch Log groups to an Amaz
 
 AWS fully manages Amazon Data Firehose, so you don't need to maintain any additional infrastructure or forwarding configurations for streaming logs. You can set up an Amazon Data Firehose delivery stream in the AWS Firehose console, or automatically set up the destination using a CloudFormation template.
 
+**Note**: [Open Cybersecurity Schema Framework (OCSF)][6] format is supported by Datadog Log Management.
+
 ## Setup
 
 {{< tabs >}}
@@ -164,3 +166,4 @@ To populate all logs by ARN:
 [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#FirehoseExample
 [5]: /logs/explorer/
+[6]: https://schema.ocsf.io/
