@@ -1097,11 +1097,6 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 701
-    - name: Continuous Profiler
-      url: developers/ide_plugins/idea/continuous_profiler/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_profiler
-      weight: 7011
     - name: Live Debugger
       url: developers/ide_plugins/idea/live_debugger/
       parent: ide_plugins_idea
