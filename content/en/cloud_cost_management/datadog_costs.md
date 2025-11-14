@@ -49,7 +49,7 @@ After opting in to Datadog Costs, a confirmation message appears and cost data s
 
 ## Data availability to sub-organizations
 
-Daily Datadog cost data is available to sub-organizations with [Sub Organization Cost Summary][10] enabled. To request access, contact your account representative or [Datadog Support][8].
+Daily Datadog cost data is available to sub-organizations with the [Sub Organization Cost Summary][10] feature enabled. To request access, contact your account representative or [Datadog Support][8].
 
 ## Visualize and break down costs
 
