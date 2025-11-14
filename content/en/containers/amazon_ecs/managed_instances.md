@@ -152,9 +152,9 @@ To collect traces over UDP, do not set `DD_AGENT_HOST` - the default of `localho
 ##### UDS
 
 To collect traces over UDS:
-1. Add a volume onto the task definition using the `volumes` parameter.
+1. Add an empty volume onto the task definition using the `volumes` parameter.
 2. Mount the volume onto the agent and application container using the `mountPoints` parameter.
-3. Configure the environmental variable `DD_TRACE_AGENT_URL` on the application container and set it to `"unix:///var/run/datadog/apm.socket"`.
+3. Configure the environmental variable `DD_DOGSTATSD_SOCKET` on the application container and set it to `/var/run/datadog/dsd.socket`.
 
 Below is an example of a UDS setup:
 ```
@@ -176,11 +176,10 @@ Below is an example of a UDS setup:
         {
             "environment": [
                 {
-                    "name": "DD_TRACE_AGENT_URL",
-                    "value": "unix:///var/run/datadog/apm.socket"
+                    "name": "DD_DOGSTATSD_SOCKET",
+                    "value": "/var/run/datadog/dsd.socket"
                 }
             ],
-            "image": "ghcr.io/datadog/apps-tracegen:main",
             "mountPoints": [
                 {
                     "containerPath": "/var/run/datadog",
