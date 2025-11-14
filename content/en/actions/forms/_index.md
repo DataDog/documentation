@@ -54,7 +54,7 @@ After creating a form, you can add an [action][4] or [blueprint][5] that trigger
 
 ## Manage access
 
-By default, new forms are restricted to only the creator's access. To change these settings: 
+By default, only the creator of a form can access it. To change the permissions on a form: 
 1. From the [Forms][1] page, click a form.
 1. Click the gear <i class="icon-cog-2"></i> icon. 
 1. To change who can see the form and submit answers, click **Edit Form Permissions**.
