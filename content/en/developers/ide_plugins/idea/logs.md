@@ -35,7 +35,7 @@ The Logs integration supports the following languages and logging frameworks:
 * **PHP** : [Laravel][11], [Monolog][12], [Symfony][13] and [PSR-3][14] 
 
 ## Settings
-Right-click a log element in the source editor to open the settings (Editor → Inlay Hints) for the current language, and activate or deactivate the feature.
+Right-click a log element in the source editor to open the settings (Editor → Inlay Hints) for the current language, and to activate or deactivate the feature.
 
 ### Logger name for Java and Kotlin
 In Java and Kotlin, by convention, logs are normally tagged with the logger name corresponding to the fully qualified class name of the class where the logger is created.  
