@@ -1,6 +1,6 @@
 #### Setup
 
-Install the Datadog CLI client
+Install the Datadog CLI
 
 ```shell
 npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-container-app
