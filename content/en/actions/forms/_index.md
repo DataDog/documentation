@@ -15,9 +15,9 @@ Datadog Forms allows you to collect input, analyze responses, and trigger automa
 ## Examples
 
 Here are some ways you can use forms:  
-- create a GitHub repository from a template using [our scaffolding blueprint][3]. 
-- run developer surveys in an internal developer portal (IDP).
-- collect employee feedback about security concerns through a form that creates a case.
+- Create a GitHub repository from a template using a [scaffolding blueprint][3]. 
+- Run developer surveys in an internal developer portal (IDP).
+- Collect employee feedback about security concerns through a form that creates a case.
 
 ## Create a form
 
