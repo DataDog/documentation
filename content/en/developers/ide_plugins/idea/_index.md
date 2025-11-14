@@ -4,6 +4,7 @@ disable_toc: false
 is_beta: true
 aliases:
 - '/developers/ide_integrations/idea/'
+- '/developers/ide_plugins/idea/continuous_profiler/'
 further_reading:
 - link: "/tracing/live_debugger/"
   tag: "Documentation"
