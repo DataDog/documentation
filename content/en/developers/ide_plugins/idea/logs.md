@@ -19,7 +19,7 @@ Click the log icon to query logs using Datadog:
 
 {{< img src="/developers/ide_plugins/idea/logs/log-query-button.png" alt="The log query button" style="width:80%;" >}}
 
-This launches the [Log Explorer][16] and shows the latest log events.  Notice how the query has been prefilled with the environment, log status, logger name and text elements extracted from your source code:
+This launches the [Log Explorer][16] and shows the latest log events.  The query is prefilled with the environment, log status, logger name, and text elements extracted from your source code:
 
 {{< img src="/developers/ide_plugins/idea/logs/browser.png" alt="The log query button" style="width:100%;" >}}
 
