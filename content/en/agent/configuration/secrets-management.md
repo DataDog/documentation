@@ -415,19 +415,7 @@ password: ENC[k8s_secret@database/database-secret/password]
 
 Configure RBAC to allow the Agent's Service Account to read the Secret. The following Role grants read access to the `database-secret` Secret in the `database` namespace:
 {{< tabs >}}
-{{% tab "Helm" %}}
-```yaml
-datadog:
-  (...)
-  secretBackend:
-    command: "/readsecret_multiple_providers.sh"
-    roles:
-      - namespace: database
-        secrets:
-          - database-secret
-```
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -441,6 +429,18 @@ spec:
       - namespace: database
         secrets:
         - "database-secret"
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  (...)
+  secretBackend:
+    command: "/readsecret_multiple_providers.sh"
+    roles:
+      - namespace: database
+        secrets:
+          - database-secret
 ```
 {{% /tab %}}
 {{< /tabs >}}
