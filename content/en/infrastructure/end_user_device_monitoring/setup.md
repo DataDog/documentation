@@ -7,6 +7,10 @@ further_reading:
      text: "End User Device Monitoring"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
+End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
+
 This page explains how to configure the Datadog Agent to enable End User Device Monitoring.
 
 ## Supported platforms
