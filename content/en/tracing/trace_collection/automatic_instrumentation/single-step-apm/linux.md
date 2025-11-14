@@ -125,6 +125,9 @@ To configure workload selection:
    1. Click **Add New Rule**, then choose **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
    1. Name your rule. 
    1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
+
+   {{< img src="tracing/trace_collection/workload_selection_landing.png" alt="The workload selection UI, showing configuration options for defining a rule" style="width:100%;" >}}
+
 1. (Optional) Drag and drop rules to reorder them. 
 
    **Note**: Rules are evaluated in order. After a process matches a rule, subsequent rules are ignored.
