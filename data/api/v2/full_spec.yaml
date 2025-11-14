@@ -33819,6 +33819,10 @@ components:
           items:
             $ref: '#/components/schemas/ObservabilityPipelineConfigSourceItem'
           type: array
+        use_legacy_search_syntax:
+          description: Use this field to configure the pipeline's filter queries to
+            use the deprecated search syntax.
+          type: boolean
       required:
       - sources
       - destinations
