@@ -92,5 +92,4 @@ Use unit testing to test your rules against sample logs and make sure the detect
 [6]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly/
 [7]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel/
 [8]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/third_party/
-[9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules/
 [10]: /integrations/guide/reference-tables/

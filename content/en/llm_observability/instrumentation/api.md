@@ -167,6 +167,8 @@ If the request is successful, the API responds with a 202 network code and an em
 | id    | string | The id of this document.  |
 
 #### Prompt
+{{< tabs >}}
+{{% tab "Model" %}}
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
 | id    | string | Logical identifier for this prompt template. Should be unique per `ml_app`.  |
@@ -178,6 +180,30 @@ If the request is successful, the API responds with a 202 network code and an em
 | context_variable_keys | [string] | Variable keys that contain ground-truth or context content. Used for hallucination detection. |
 | tags | Dict[key (string), string] | Tags to attach to the prompt run. |
 
+**Note**: LLM Observability registers new versions of templates when the `template` or `chat_template` value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.
+
+{{% /tab %}}
+{{% tab "Example" %}}
+{{< code-block lang="json" >}}
+{
+  "id": "translation-prompt",
+  "chat_template": [
+    {
+      "role": "system",
+      "content": "You are a translation service. You translate to {{language}}."
+    }, {
+      "role": "user",
+      "content": "{{user_input}}"
+    }
+  ],
+  "variables": {
+    "language": "french",
+    "user_input": "<USER_INPUT_TEXT>"
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Meta
 | Field       | Type              | Description  |
@@ -308,7 +334,9 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
-          "score_value": 3
+          "score_value": 3,
+          "assessment": "fail",
+          "reasoning": "The response provided incorrect information about the weather forecast."
         }
       ]
     }
@@ -364,7 +392,9 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
-          "score_value": 3
+          "score_value": 3,
+          "assessment": "fail",
+          "reasoning": "The response provided incorrect information about the weather forecast."
         }
       ]
     }
@@ -395,6 +425,8 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | label [*required*]      | string | The unique name or label for the provided evaluation . |
 | categorical_value [*required if the metric_type is "categorical"*]    | string | A string representing the category that the evaluation belongs to. |
 | score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
+| assessment | string | An assessment of this evaluation. Accepted values are `pass` and `fail`. |
+| reasoning | string | A text explanation of the evaluation result. |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular evaluation metric.       |
 
 #### JoinOn

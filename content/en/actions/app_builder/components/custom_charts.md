@@ -96,5 +96,5 @@ A histogram chart with your Datadog Logs data displays.
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][0].
 
-[0]: https://datadoghq.slack.com/
+[0]: https://chat.datadoghq.com/
 [1]: https://vega.github.io/vega-lite/examples/

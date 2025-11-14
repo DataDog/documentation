@@ -2,10 +2,10 @@
 title: Remap Reserved Attributes
 disable_toc: false
 further_reading:
-- link: "observability_pipelines/processors/edit_fields/"
+- link: "/observability_pipelines/processors/edit_fields/"
   tag: "Documentation"
   text: "Learn more about the Edit Fields processor"
-- link: "observability_pipelines/processors/custom_processor/"
+- link: "/observability_pipelines/processors/custom_processor/"
   tag: "Documentation"
   text: "Learn more about the Custom Processor processor"
 ---
@@ -163,5 +163,10 @@ Do the following to remap the `source` and `service` attributes to the correct v
     - Enter `source` in the **Field to add** field.
     - Enter `cdn-logs` in the **Value to add** field.
     {{< img src="observability_pipelines/guide/remap_attributes/add_field_source.png" alt="An add field processor that adds the ddsource field" style="width:50%;" >}}
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
