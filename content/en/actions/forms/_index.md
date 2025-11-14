@@ -71,7 +71,7 @@ To view form responses in a table format:
 1. Click **Responses**.
 1. Click the edit icon on a response to view the JSON version. 
 
-**Note**: Responses to forms generate a datastore, which are listed in [Datastores][7].
+**Note**: Datadog stores responses in a datastore, which is listed in [Datastores][7].
 
 ### View in a dashboard
 
