@@ -1,16 +1,17 @@
 ---
-title: Using the Datadog-CrewAI integration for LLM Observability
+title: Datadog-CrewAI integration for LLM Observability
 ---
 
-This guide demonstrates how to integrate LLM Observability with [CrewAI][1] using [auto-instrumentation][2], including how submit LLM Observability traces to Datadog and view your CrewAI agent runs in Datadog's [Agentic Execution View][3].
+This guide demonstrates how to integrate LLM Observability with [CrewAI][1] using [auto-instrumentation][2]. This also includes how to submit LLM Observability traces to Datadog and view your CrewAI agent runs in Datadog's [Agentic Execution View][3].
 
 ## Getting started
 
 ### Install dependencies
 
+Run this command to install the required dependencies:
+
 ```shell 
 pip install ddtrace crewai crewai-tools
-```
 
 ### Set environment variables
 
@@ -37,6 +38,9 @@ export GEMINI_API_KEY=<YOUR_GEMINI_API_KEY>
 ```
 
 ### Create a CrewAI agent application
+
+The following example creates a CrewAI agent to solve a simple problem:
+
 
 ```python 
 # crewai_agent.py
@@ -78,11 +82,11 @@ With the [environment variables](#set-environment-variables) set, you can now ru
 ddtrace-run python crewai_agent.py
 ```
 
-### View the traces in datadog
+### View the traces in Datadog
 
 After running the application, you can view the traces in [Datadog LLM Observability's Traces View][6], selecting the ML application name you chose from the top-left dropdown.
 
-Clicking on a trace shows you the details of the trace, including total tokens used, number of LLM calls, models used, and estimated cost. Clicking into a specific span narrows down these details, and shows related input, output, and metadata.
+Clicking on a trace shows you the details of the trace, including total tokens used, number of LLM calls, models used, and estimated cost. Clicking into a specific span narrows down these details and shows related input, output, and metadata.
 
 {{< img src="llm_observability/guides/crewai/trace_view.png" alt="A trace in LLM Observability, where the user has clicked into a CrewAI Crew workflow span. Toggled to 'Span Details' view. On the left, a tree view of tool calls and LLM calls in the span. Input, output, and metadata are displayed." style="width:100%;" >}}
 
