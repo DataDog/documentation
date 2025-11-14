@@ -31,15 +31,15 @@ For Agent v7.21+ / v6.21+:
     sudo -u dd-agent datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
 
-   The version for the integration can be found in the respective changelog on the integration's Github repository.
-2. Manage your integration configuration files similar to [core integrations][1]—at their respective `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` file.
+   The version for the integration can be found in the respective changelog on the integration's GitHub repository.
+2. Manage your integration configuration files in the same way as [core integrations][1], placing each configuration in `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml`.
 3. [Restart the Agent][2].
 
 [1]: /getting_started/integrations/
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized installation" %}}
-#### Building the image
+#### Build the image
 
 To use a community or Marketplace integration in a containerized environment, build a custom Agent image that includes your desired integration.
 
@@ -60,7 +60,7 @@ docker push <RepoName>/agent:<version>-custom
 
 If you use both `amd64` and `arm` host architectures, you can also [build multi-architecture images][3].
 
-#### Deploying the image
+#### Deploy the image
 
 To deploy the custom image in Kubernetes, update your Helm chart or Datadog Operator configuration to pull the image.
 
