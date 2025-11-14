@@ -95,6 +95,24 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 - Only users with the [`api_keys_write`][5] permission are authorized to enable or disable Remote Configuration capability on API keys and use the supported product features.
 - Your configuration changes submitted through the Datadog UI are signed and validated by the requesting Datadog component, verifying the integrity of the configuration.
 
+### Role-based access
+
+Enabling Remote Configuration impacts the following products. Each product defines a set of role-based access controls that need to be granted to their users. For general information on access management, see [Access Control][37].
+
+ Remote Configuration Enabled Product | Role-Based Access Controls |
+| --- | --- |
+| Fleet Automation | `FLEET_POLICIES_WRITE`<br>`AGENT_UPGRADE_WRITE`<br>`FLEET_FLARE`<br><br>For more information, see [Fleet Automation][38]. |
+| App and API Protection | `APPSEC_ACTIVATION_READ`<br>`APPSEC_ACTIVATION_WRITE`<br>`APPSEC_PROTECT_READ`<br>`APPSEC_PROTECT_WRITE`<br><br>For more information, see [Access Control][39]. |
+| APM | `APM_SERVICE_INGEST_READ`<br>`APM_SERVICE_INGEST_WRITE`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>For more information, see [Adaptive Sampling][40]. |
+| Dynamic Instrumentation | `DEBUGGER_READ`<br>`DEBUGGER_WRITE`<br>`DEBUGGER_WRITE_PRE_PROD`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>For more information, see [APM][41]. |
+| Workload Protection | `SECURITY_MONITORING_CWS_AGENT_RULES_WRITE`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_READ`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_ACTIONS`<br><br>For more information, see [Security][42]. |
+| CSM Side Scanning | `ORG_MANAGEMENT`<br>`MANAGE_INTEGRATIONS`<br><br> For more information, see [Enable Agentless Scanning][43].|
+| Observability Pipelines | `OBSERVABILITY_PIPELINES_READ`<br>`OBSERVABILITY_PIPELINES_WRITE`<br>`OBSERVABILITY_PIPELINES_DELETE`<br>`OBSERVABILITY_PIPELINES_DEPLOY`<br>`OBSERVABILITY_PIPELINES_CAPTURE_WRITE`<br>`OBSERVABILITY_PIPELINES_CAPTURE_READ`<br><br>For more information, see [Observability Pipelines][44]. |
+| Private Action Runner | `ON_PREM_RUNNER_WRITE`<br>`ON_PREM_RUNNER_READ`<br>`ON_PREM_RUNNER_USE`<br><br>For more information, see [App Builder & Workflow Automation][45]. |
+| Network Device Monitoring (NDM) | `NDM_DEVICE_PROFILES_VIEW`<br>`NDM_DEVICE_PROFILES_EDIT` |
+| Container Autoscaling | `ORCHESTRATION_AUTOSCALING_MANAGE`<br>`ORCHESTRATION_WORKLOAD_SCALING_WRITE`<br>`ORCHESTRATION_WORKLOAD_SCALING_READ` |
+| Serverless Lambda Auto-instrumentation | `SERVERLESS_AWS_INSTRUMENTATION_READ`<br>`SERVERLESS_AWS_INSTRUMENTATION_WRITE`<br><br>For more information, see [Serverless][46]. |
+
 ## Enable Remote Configuration
 
 In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page. If you need to enable it:
@@ -169,3 +187,13 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [34]: /security/application_security/
 [35]: /tracing/trace_pipeline/adaptive_sampling/
 [36]: /tracing/dynamic_instrumentation/#explore-dynamic-instrumentation
+[37]: /account_management/rbac
+[38]: /agent/fleet_automation/#control-access-to-fleet-automation
+[39]: /security/access_control/#permissions
+[40]: /tracing/trace_pipeline/adaptive_sampling/#permissions
+[41]: /account_management/rbac/permissions/#apm
+[42]: /account_management/rbac/permissions/#cloud-security-platform
+[43]: /security/cloud_security_management/setup/#enable-agentless-scanning
+[44]: /account_management/rbac/permissions/#observability-pipelines
+[45]: /account_management/rbac/permissions/#app-builder--workflow-automation
+[46]: /account_management/rbac/permissions/#serverless
