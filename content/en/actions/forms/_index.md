@@ -5,7 +5,7 @@ disable_toc: false
 ---
 
 {{< callout url="LINK GOES HERE" btn_hidden="false" header="Join the Preview!" >}}
-Agents are in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
+Forms are in Preview. Click <b>Request Access</b>, and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
 ## Overview
