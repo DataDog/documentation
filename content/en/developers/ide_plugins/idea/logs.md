@@ -14,7 +14,7 @@ The Logs integration detects log lines in your source code, displays live event 
 
 Hover over a log element to see matching log patterns with runtime value ranges. Use this runtime context to understand how your code behaves in production or other deployed environments.
 
-## Log Queries
+## Log queries
 Click the log icon to query logs using Datadog:
 
 {{< img src="/developers/ide_plugins/idea/logs/log-query-button.png" alt="The log query button" style="width:80%;" >}}
