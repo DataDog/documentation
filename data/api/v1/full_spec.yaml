@@ -35913,7 +35913,8 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: The offset from which to start returning results.
+      - description: (Only available on legacy search backend. Contact support for
+          more info.) The offset from which to start returning results.
         in: query
         name: start
         required: false
