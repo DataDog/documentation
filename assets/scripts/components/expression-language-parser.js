@@ -24,6 +24,8 @@ class ExpressionLanguageParser {
         if (typeof value === 'object' && value !== null) return Object.keys(value).length;
         throw new Error('count() requires a string, array, or object argument');
       },
+      isDefined: (value) => {
+      },
       isEmpty: (value) => {
         if (typeof value === 'string') return value.length === 0;
         if (Array.isArray(value)) return value.length === 0;

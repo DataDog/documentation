@@ -55,6 +55,12 @@ The Expression Language provides contextual variables for different instrumentat
 | `@key`      | Provides access to the current key during dictionary iteration. Used in predicates for dictionary operations. |
 | `@value`    | Provides access to the current value during dictionary iteration. Used in predicates for dictionary operations. |
 
+## General operations
+
+| Operation | Description | Example |
+|-----------|-------------|---------|
+| `isDefined(value)` | Checks whether a variable or field exists | {{< expression-language-evaluator expression="isDefined(myValue)" >}} |
+
 ## String operations
 
 The following examples assume a variable named `myString` with value `Hello, world!`:
