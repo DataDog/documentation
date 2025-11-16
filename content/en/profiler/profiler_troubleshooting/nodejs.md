@@ -51,6 +51,10 @@ This issue typically occurs on Linux systems using an unsupported version of the
 
 If you believe your musl version should be supported, contact [Datadog support][5].
 
+## Profiler causes a memory leak
+
+Please ensure that no other Node.js profiler is running alongside the Datadog profiler. We have observed that the Google Cloud profiler conflicts with the Datadog Node.js profiler.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
