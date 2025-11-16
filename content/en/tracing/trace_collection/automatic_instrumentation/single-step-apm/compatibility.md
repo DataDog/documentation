@@ -133,11 +133,11 @@ SSI [automatically downloads][2] a compatible Datadog Language SDK version based
 
 ### Supported runtime versions
 
-For a complete list of supported Java versions, see the [Java SDK compatibility documentation][4].
+For a complete list of supported Java versions, see the [Java SDK compatibility documentation][1].
 
 ### Limitations
 
-By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or low-value traces. These exclusions are defined in the [Java SDK denylist](https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json). If your workload is included, SSI skips loading the Java SDK.
+By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or low-value traces. These exclusions are defined in the [Java SDK denylist][2]. If your workload is included, SSI skips loading the Java SDK.
 
 ### Known issues
 
@@ -146,7 +146,12 @@ By default, SSI does not instrument some Java applications and libraries to avoi
 - Consider moving some configurations to a `.properties` file
 - Check application logs for specific initialization errors
 
-**Java 24+ warnings**: When using SSI for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. These warnings can be suppressed with the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables. See [JEP 472](https://openjdk.org/jeps/472) and [JEP 498](https://openjdk.org/jeps/498) for more information.
+**Java 24+ warnings**: When using SSI for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. These warnings can be suppressed with the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables. See [JEP 472][3] and [JEP 498][4] for more information.
+
+[1]: /tracing/trace_collection/compatibility/java/
+[2]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
+[3]: https://openjdk.org/jeps/472
+[4]: https://openjdk.org/jeps/498
 
 {{< /programming-lang >}}
 
@@ -160,7 +165,7 @@ By default, SSI does not instrument some Java applications and libraries to avoi
 
 **Minimum Python version**: 3.7 or higher
 
-For a complete list of supported Python versions, see the [Python SDK compatibility documentation][5].
+For a complete list of supported Python versions, see the [Python SDK compatibility documentation][1].
 
 ### Operating system considerations
 
@@ -169,6 +174,8 @@ Python 3.7+ is available by default only on:
 - Red Hat Enterprise Linux 8+
 
 For other distributions, you may need to install Python 3.7+ separately.
+
+[1]: /tracing/trace_collection/compatibility/python
 
 {{< /programming-lang >}}
 
@@ -180,7 +187,7 @@ For other distributions, you may need to install Python 3.7+ separately.
 
 ### Supported runtime versions
 
-For a complete list of supported Ruby versions, see the [Ruby SDK compatibility documentation][6].
+For a complete list of supported Ruby versions, see the [Ruby SDK compatibility documentation][1].
 
 ### Operating system requirements
 
@@ -196,6 +203,8 @@ For a complete list of supported Ruby versions, see the [Ruby SDK compatibility 
    - Restore your original `Gemfile` and `Gemfile.lock`, or
    - Run `bundle install` to rebuild your dependencies
 
+[1]: /tracing/trace_collection/compatibility/ruby
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
@@ -206,7 +215,7 @@ For a complete list of supported Ruby versions, see the [Ruby SDK compatibility 
 
 ### Supported runtime versions
 
-For a complete list of supported Node.js versions, see the [Node.js SDK compatibility documentation][7].
+For a complete list of supported Node.js versions, see the [Node.js SDK compatibility documentation][1].
 
 ### Operating system considerations
 
@@ -220,6 +229,8 @@ For other distributions, you may need to install Node.js separately.
 
 - **ESM modules**: Instrumentation of ESM (ECMAScript modules) is not currently supported
 
+[1]: /tracing/trace_collection/compatibility/nodejs
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -232,8 +243,11 @@ For other distributions, you may need to install Node.js separately.
 
 SSI supports both .NET Core and .NET Framework runtimes. For a complete list of supported versions, see:
 
-- [.NET Core SDK compatibility][8]
-- [.NET Framework SDK compatibility][9]
+- [.NET Core SDK compatibility][1]
+- [.NET Framework SDK compatibility][2]
+
+[1]: /tracing/trace_collection/compatibility/dotnet-core
+[2]: /tracing/trace_collection/compatibility/dotnet-framework
 
 {{< /programming-lang >}}
 
@@ -245,7 +259,7 @@ SSI supports both .NET Core and .NET Framework runtimes. For a complete list of 
 
 ### Supported runtime versions
 
-For a complete list of supported PHP versions, see the [PHP SDK compatibility documentation][10].
+For a complete list of supported PHP versions, see the [PHP SDK compatibility documentation][1].
 
 ### Limitations
 
@@ -259,6 +273,8 @@ SSI automatically disables when it detects:
   - pcov
 
 <div class="alert alert-info">If you need to run SSI alongside these tools, you can force it to enable by setting: <code>DD_INJECT_FORCE=true</code></div>
+
+[1]: /tracing/trace_collection/compatibility/php
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -287,11 +303,3 @@ The following Linux distributions and architectures are supported for SSI across
 
 [1]: /containers/cluster_agent/admission_controller/
 [2]: /tracing/guide/injectors/
-[3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[4]: /tracing/trace_collection/compatibility/java/
-[5]: /tracing/trace_collection/compatibility/python
-[6]: /tracing/trace_collection/compatibility/ruby
-[7]: /tracing/trace_collection/compatibility/nodejs
-[8]: /tracing/trace_collection/compatibility/dotnet-core
-[9]: /tracing/trace_collection/compatibility/dotnet-framework
-[10]: /tracing/trace_collection/compatibility/php
