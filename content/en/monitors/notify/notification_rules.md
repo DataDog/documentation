@@ -14,23 +14,69 @@ further_reading:
 ---
 
 ## Overview
-
-Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on predefined conditions and tags. Instead of individually configuring notification recipients and routing for every monitor, notification rules allow you to define the notification logic and recipients in one place and automatically route all monitor events with matching tags to that list of handles.
+Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on tags and rule logic. Instead of individually configuring recipients for every monitor, notification rules let you define once and automatically route all monitor notifications whose notification tagset matches the rule’s scope.
 
 <div class="alert alert-info">There is a default limit of 1000 rules per organization.</a>.</div>
 
-## Creating notification rules
-
-<div class="alert alert-danger">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
-
-1. Navigate to [**Monitors > Settings > Notification Rules**][1].
-1. Click **New Rule**.
-1. Add specific tags and values to set the scope for the rule. Notification rules use an AND logic for multiple tags. Both monitor tags and group tags are considered when matching the scope. For an example of this, see [Routing logic](#routing-logic).
-1. Define your routing conditions by specifying **when** and **to whom** a notification should be sent. Notifications can be sent to emails, Team channels, or Integration channels. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2]. 
-1. Add a name for the rule.
-1. Click **Create Rule**.
-
+## Setup
+To create a Monitor Notification Rule in Datadog, navigate to the [**Monitors > Settings > Notification Rules**][1] page. Then, click the **New Rule** button in the upper right. 
 {{< img src="/monitors/notifications/notification_rules/notification_rules_form_with_conditional_recipients.png" alt="Configuration for a notification rule showing tag scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
+
+### Choose the scope
+Define which tags a monitor notification must have to be routed to this rule. Matching evaluates the notification tagset - the union of monitor tags and the firing group’s tags (for multi-alert monitors). Monitor tags alone can satisfy the scope alone and that would still be considered a match. Only monitor and group tags participate in matching; matching is case-insensitive.
+
+
+<div class="alert alert-info">There is a limit of 5000 characters per rule scope.</a>.</div>
+
+**Note**: Any monitor created or edited after the notification rule is saved will be routed to the defined recipients if it matches the scope of the rule.
+
+#### Rule scope syntax
+
+The Notification Rule scope query supports boolean logic and follows the same common [Search Syntax][3] that many other products across the platform support.
+
+##### Boolean operators
+- Supported: AND, OR, NOT
+- Implicit operator: AND
+- Parentheses: supported
+Examples:
+- service:web-store AND (env:prod OR env:staging)
+- NOT (env:staging OR env:dev)
+
+##### Wildcards
+Only key:* is supported (for example, env:*). Partial wildcards like env:prod-* are not supported. key:* matches if that key exists anywhere in the notification tagset.
+
+##### Multiple values for the same key
+Use either env:(prod OR staging) or env:prod OR env:staging.
+
+##### Quoting
+Wrap values that contain spaces in quotes, for example: team:"data platform".
+
+##### Examples
+
+| Notification Rule scope | Explanation |
+| ------------------- | ---------------------- |
+| `service:web-store`       | Route all monitor notifications about the `web-store` service. |
+| `service:web-store AND env:prod`       | Route all notifications about the `web-store` service running on the `prod` environment. |
+| `service:webstore AND  NOT env:staging`       | Route any notification about the `web-store` service that is **not** running on the `staging` environment. |
+| `env:*`       | Route notifications that carry any `env:<value>` tag (from monitor or group). |
+
+For an example of this, see [Routing logic](#routing-logic).
+
+#### Rule scope limitations
+There are a few limitations that are **not supported** which include:
+
+* Keyless tags, such as `prod AND service:(A or B)` or just `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
+* Partial wildcards (`service:web-*`) and question mark wildcards `service:auth?` are not supported. Wildcard is allowed only if used alone like `service:*`.
+* scope lenght up to 5000 characters.
+
+### Configure the recipients
+Define the recipients to notify whenever a monitor notification matches the rule’s scope. You can specify when and to whom a notification should be sent. Notifications can be sent to email or any integration channel. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2].
+
+#### Conditional recipients
+You can notify a specific recipient only when certain conditions are met. For example, route "alerts" to your on-call recipient, and send "warn" notifications to a Slack channel if they don’t require immediate action.
+
+### Name it
+Give the rule a clear name so it’s easy to recognize on the Manage page.
 
 ## Managing notification rules
 
@@ -49,17 +95,16 @@ The [Monitor Notification Rules][1] page displays a table of all your notificati
 Additionally, you can click the vertical three-dot menu on the notification rule to **Edit** or **Delete**.
 
 ### From an individual monitor
-
-In your monitor configuration, you can view the notification recipients that are applied to the monitor under **Recipient Summary**. Notification rules automatically add recipients to monitors that match the configured scopes.
+In your monitor configuration, the R**Recipient Summary** shows recipients that are applied to the monitor by matching notification rules. On the Monitor edit page, you may also see rules that Could match when new groups report (multi-alert monitors). The Monitor status page shows rules that Currently match.
 
 {{< img src="/monitors/notifications/notification_rules/monitor_matching_notification_rule.png" alt="Recipient summary field showing the notification recipients applied by notification rules" style="width:100%;" >}}
 
-## Routing logic
+## How matching works
 
-Notification rules apply to all monitor notifications that match the scopes defined in the rule configuration.
-- Multiple tags apply an AND logic to the scope.
-- Tags can be either from monitor tags or from monitor groups
-- Multiple rules can match a single monitor notification, and all recipients are added to the monitor alert without duplication.
+- Notification tagset = monitor tags ∪ tags of the firing group (for multi-alert monitors). If a key has multiple values across monitor/group, all values are considered.
+- Currently matches: A rule matches if at least one reporting group, combined with monitor tags, satisfies the scope; or, if the monitor tags alone do. NOT is evaluated per candidate tagset, so a group with a denied value won’t match.
+- Could match when new groups report (multi-alert monitors, Monitor edit surface): Treat each group-by key as present with any value, constrained by the monitor query’s allow/deny filters.
+- If multiple rules match a single notification, recipients from all matching rules are merged and de-duplicated.
 
 {{< img src="/monitors/notifications/notification_rules/diagram_notification-rules.png" alt="Flowchart showing how Monitor notification rules match tags, combine recipients from monitors and rules, and remove duplicates before sending alerts" style="width:100%;" >}}
 
