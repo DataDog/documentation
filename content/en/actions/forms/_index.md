@@ -84,7 +84,7 @@ To visualize form responses in a dashboard:
 [2]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
 [3]: https://app.datadoghq.com/workflow/blueprints/scaffold-new-service
 [4]: https://app.datadoghq.com/actions/action-catalog/
-[5]: https://app.datadoghq.com/app-builder/blueprints
+[5]: https://app.datadoghq.com/workflow/blueprints
 [6]: https://app.datadoghq.com/workflow
 [7]: https://app.datadoghq.com/actions/datastores
 [8]: /actions/forms/#view-in-forms
