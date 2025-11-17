@@ -5,7 +5,7 @@ disable_toc: false
 
 ---
 
-This document walks through how to send AWS vended logs with the Datadog Lambda Extension to Observability Pipelines. The setup steps are:
+This document describes how to use the Datadog Lambda Extension to send AWS vended logs to Observability Pipelines. The setup steps are:
 
 - [Set up a pipeline with the HTTP/S Server source](#set-up-a-pipeline).
 - [Deploy the Datadog Lambda Extension](#deploy-the-datadog-lambda-extension)
