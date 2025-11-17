@@ -4,7 +4,7 @@ description: Build forms to collect input, analyze responses, and trigger automa
 disable_toc: false
 ---
 
-{{< callout url="LINK GOES HERE" btn_hidden="false" header="Join the Preview!" >}}
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSe_OxTl8E_djqF107dKJDhcUuLxh1n9ytEKT6CZa-u8ZPqokg/viewform" btn_hidden="false" header="Join the Preview!" >}}
 Forms are in Preview. Click <b>Request Access</b>, and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
