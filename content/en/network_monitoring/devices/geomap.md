@@ -40,7 +40,7 @@ Devices appear on the Device GeoMap when tagged with `geomap:<value>` and mapped
 
 {{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device GeoMap, highlighting the All tab." style="width:100%;" >}}
 
-2. On the settings page, click **+ Add mapping** and enter the location value along with its latitude and longitude coordinates in decimal format. To bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown and use the provided template.
+2. On the settings page, click **+ Add mapping** and enter the location value along with its latitude and longitude coordinates in [decimal degrees][10] notation. To bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown and use the provided template.
 
 {{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
 
@@ -90,3 +90,4 @@ If a device doesn't appear on the map after tagging:
 [5]: /help
 [8]: /network_monitoring/devices/topology
 [9]: /network_monitoring/devices/geomap
+[10]: https://en.wikipedia.org/wiki/Decimal_degrees
