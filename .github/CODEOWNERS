@@ -105,7 +105,7 @@ layouts/shortcodes/integration-assets-reference.md                          @Dat
 layouts/shortcodes/integration_categories.md                                @Datadog/marketplace-product-management @DataDog/documentation
 
 # Cloud Cost Management
-documentation/content/en/cloud_cost_management/*.md              @DataDog/ccm-planning @DataDog/documentation
+content/en/cloud_cost_management/                                @DataDog/cloud-cost-management @DataDog/documentation
 
 # Log collection
 content/en/logs/log_collection/android.md                        @Datadog/rum-mobile @DataDog/documentation

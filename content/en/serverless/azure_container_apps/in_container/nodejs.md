@@ -38,7 +38,7 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
 
 3. **Set up logs**.
 

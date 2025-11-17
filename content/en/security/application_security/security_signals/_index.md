@@ -37,7 +37,7 @@ Entities
 : The attackers and the victims of an attack. Attackers are identified by IP addresses. Victims are identified as authenticated users. Hover over the IP list and then click an IP to see details such as **Threat Intelligence** and **Security Activity**.
 
 Triage State
-: You can assign a responder and set a triage state for the signal. Available states are **Open**, **Under Review**, and **Archived**. 
+: You can assign a responder and set a triage state for the signal. Available states are **Open**, **Under Review**, and **Archived**.
 
 Creation Date
 : The date when the signal was first created. Signals are sorted by date by default.
@@ -59,7 +59,7 @@ You can triage a signal by assigning it to a user for further investigation. The
 
 **Note**: To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][9] for more information about Datadog's default roles and granular role-based access control permissions available for App and API Protection.
 
-## Declare an incident 
+## Declare an incident
 
 Use [Incident Management][4] to create an incident for a security signal.
 
@@ -67,7 +67,7 @@ Declare an incident if:
 
 - An issue is or might be impacting customers.
 - You believe an issue (even if it's internal) needs to be addressed as an emergency.
- 
+
 If you don't know whether you should declare an incident, notify other users and increase severity appropriately.
 
 1. On the [Signals Explorer][2] page, select a security signal to open its details panel.
@@ -78,14 +78,14 @@ If you don't know whether you should declare an incident, notify other users and
 
 ## Run a workflow
 
-Use [Workflow Automation][5] to manually trigger a workflow for a security signal. 
+Use [Workflow Automation][5] to manually trigger a workflow for a security signal.
 
 1. Make sure the workflow you want to run has a security trigger.
 2. On the [Signals Explorer][2] page, open a security signal.
 3. In the **Respond** section, click **Run Workflow**.
-4. In **Run a workflow**, select the workflow you want to run or click **New Workflow**. 
+4. In **Run a workflow**, select the workflow you want to run or click **New Workflow**.
    - Depending on the workflow you select, you might be required to enter additional input parameters.
-   - If you selected **New Workflow**, Run a Security Workflow opens. To learn more about workflows, see [Workflow Automation][5]. 
+   - If you selected **New Workflow**, Run a Security Workflow opens. To learn more about workflows, see [Workflow Automation][5].
 5. Click **Run**.
 
 ## Review and remediate
@@ -107,7 +107,7 @@ Set the triage state to **Open**, **Under Review**, or **Archived**.
 
 ### Assign the signal to users
 
-Select **Assign selection** and then select the user(s) to assign to the signal. 
+Select **Assign selection** and then select the user(s) to assign to the signal.
 
 Select **Remove all assignments** to reset the signal assignment to none.
 
@@ -116,8 +116,8 @@ Select **Remove all assignments** to reset the signal assignment to none.
 Datadog [Case Management][6] offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations.
 
 1. On the [Signals Explorer][2] page, select a security signal.
-2. In **Bulk Actions**, select **Create a case**. 
-3. Select **Create a case** or **Add to an existing case** to add the signal to an existing case. 
+2. In **Bulk Actions**, select **Create a case**.
+3. Select **Create a case** or **Add to an existing case** to add the signal to an existing case.
 4. Enter a title and optional description.
 5. Click **Create Case**.
 
@@ -150,7 +150,7 @@ To see all of the saved views, click **Views** next to the **Signals Explorer** 
 
 
 [1]: https://app.datadoghq.com/services?lens=Security
-[2]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&viz=stream&start=1694726477747&end=1695331277747&paused=false
+[2]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&viz=stream&start=1694726477747&end=1695331277747&paused=false
 [4]: /service_management/incident_management/
 [5]: /service_management/workflows/
 [6]: /service_management/case_management/

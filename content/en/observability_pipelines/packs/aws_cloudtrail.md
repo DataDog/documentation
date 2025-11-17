@@ -5,6 +5,8 @@ description: Learn more about the AWS CloudTrail pack.
 
 ## Overview
 
+{{< img src="observability_pipelines/packs/aws_cloudtrail.png" alt="The AWS CloudTrail pack" style="width:25%;" >}}
+
 AWS CloudTrail records API calls and account activity across AWS services.
 
 What this pack does:
