@@ -52,6 +52,7 @@ This issue typically occurs on Linux systems using an unsupported version of the
 If you believe your musl version should be supported, contact [Datadog support][5].
 
 ## High event loop usage observed after enabling Nodejs profiler
+
 When the Datadog profiler is enabled, it periodically sends a small signal to collect profiling data.If the application is idle (waiting for I/O or timers), this signal briefly wakes the event loop to take a sample — even though there's no real work to do. As a result, ELU appears higher because the loop wakes up more often, but CPU usage stays low, and no latency or extra workload is introduced.
 In a busy application, these same signals occur while the loop is already active, so the effect on ELU is negligible.
 
