@@ -29,8 +29,8 @@ To create a new form:
     |----------------------------|---------------------------------------------------------------------|-----|
     | Required | Determines whether the question requires an answer from the respondent; required questions are marked with a red asterisk on forms. | All components | 
     | Field name           | The name of the field. Appears in the JSON version in [**Responses**][8]. Not visible to respondents.                                   | All components | 
-    | Placeholder         | The text the respondent sees before entering any text.                 | All components except ratings |
-    | Default value         | The default item or text that is selected before the respondent makes a selection.                                | All components except ratings | 
+    | Placeholder         | The text the respondent sees before entering any text.                 | Short answer, paragraph, and dropdown |
+    | Default value         | The default item or text that is selected before the respondent makes a selection.                                | All components except ratings and checkboxes | 
     | Data         | The available options that respondents can choose from.                | Select and checkboxes | 
     | Questions             | The questions respondents are asked when rating their experience. | Ratings |  
 1. Click **Save** to save your changes. 
