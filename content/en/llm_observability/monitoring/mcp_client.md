@@ -137,7 +137,45 @@ initializationTaskSpan.finish();
 
 {{< /tabs >}}
 
-4. Start a tool span around your tool calls to the MCP server within your client session. Annotate the tool span with the MCP tool type ("client", as opposed to "server" for server-side monitoring), as well as the server name from the information returned from the initialization call. If the tool call returns an error from the MCP server, even if it would not normally raise or throw an error, mark the tool span with an error.
+4. Start a task span around your call to the MCP server for getting the list of available tools within your client session.
+
+{{< tabs >}}
+
+{{% tab "Python" %}}
+{{< code-block lang="python">}}
+with LLMObs.task(name="MCP Client Session List Tool"):
+    tools = list_tools()
+    LLMObs.annotate(
+      output_data=tools,
+    )
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript">}}
+const tools = await llmobs.trace({ kind: 'task', name: 'MCP Client Session List Tool' }, async () => {
+  const tools = await listTools();
+  llmobs.annotate({
+    outputData: tools,
+  });
+
+  return tools;
+});
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+{{< code-block lang="java">}}
+LLMObsSpan toolsListTaskSpan = LLMObs.startTaskSpan("MCP Client Session List Tool");
+List<Object> tools = listTools();
+toolsListTaskSpan.annotateIO(null, tools);
+toolsListTaskSpan.finish();
+{{< /code-block >}}
+{{% /tab %}}
+
+{{< /tabs >}}
+
+5. Start a tool span around your tool calls to the MCP server within your client session. Annotate the tool span with the MCP tool type ("client", as opposed to "server" for server-side monitoring), as well as the server name from the information returned from the initialization call. If the tool call returns an error from the MCP server, even if it would not normally raise or throw an error, mark the tool span with an error.
 
 {{< tabs >}}
 
@@ -202,7 +240,7 @@ toolSpan.finish();
 
 {{< /tabs >}}
 
-5. In total, your MCP client should be instrumented as follows
+6. In total, your MCP client should be instrumented as follows
 
 {{< tabs >}}
 
@@ -220,7 +258,11 @@ with LLMObs.workflow(name="MCP Client Session") as client_session_span:
             }
         )
 
-    tools = list_tools()  # get the list of tools from the MCP server
+    with LLMObs.task(name="MCP Client Session List Tool"):
+        tools = list_tools()
+        LLMObs.annotate(
+          output_data=tools,
+        )
 
     # tool calls as part of a user feedback loop or user interaction
     name, arguments = get_next_tool_call()
@@ -256,7 +298,14 @@ llmobs.trace({ kind: 'workflow', name: 'MCP Client Session' }, async (clientSess
     });
   });
 
-  const tools = await listTools(); // get the list of tools from the MCP server
+  const tools = await llmobs.trace({ kind: 'task', name: 'MCP Client Session List Tool' }, async () => {
+    const tools = await listTools();
+    llmobs.annotate({
+      outputData: tools,
+    });
+
+    return tools;
+  });
 
   // tool calls as part of a user feedback loop or user interaction
   const { name, arguments } = await getNextToolCall();
@@ -290,7 +339,10 @@ clientSessionSpan.setTags(Map.of(
 ));
 initializationTaskSpan.finish();
 
-List<Object> tools = listTools(); // get the list of tools from the MCP server
+LLMObsSpan toolsListTaskSpan = LLMObs.startTaskSpan("MCP Client Session List Tool");
+List<Object> tools = listTools();
+toolsListTaskSpan.annotateIO(null, tools);
+toolsListTaskSpan.finish();
 
 // tool calls as part of a user feedback loop or user interaction
 Object tool = getNextToolCall();
@@ -313,7 +365,7 @@ clientSessionSpan.finish(); // finish at the end of the client session scope
 
 {{< /tabs >}}
 
-6. Set the necessary environment variables to enable MCP client monitoring:
+7. Set the necessary environment variables to enable MCP client monitoring:
 
 {{< code-block lang="shell">}}
 export DD_LLMOBS_ENABLED=true
@@ -323,7 +375,7 @@ export DD_API_KEY=<YOUR_API_KEY>
 export DD_SITE=<YOUR_DATADOG_SITE>
 {{< /code-block >}}
 
-7. Run your application:
+8. Run your application:
 
 {{< tabs >}}
 
