@@ -16,7 +16,7 @@ If you want the span included in the trace metrics but don't want it ingested, u
 The recommended approach is to use sampling rules, which allow you to sample traces based on resource names, service names, tags, and operation names:
 
 ```shell
-DD_TRACE_SAMPLING_RULES='[{"resource": "GET healthcheck", "sample_rate": 0.0}]'
+DD_TRACE_SAMPLING_RULES='[{"resource": "GET /healthcheck", "sample_rate": 0.0}]'
 ```
 
 Or to sample based on HTTP URL tags:
