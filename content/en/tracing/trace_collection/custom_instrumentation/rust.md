@@ -151,9 +151,8 @@ fn do_work_with_active_span() {
     let tracer = opentelemetry::global::tracer("my-component");
 
     tracer.in_span("my-operation", |cx| {
-        // 'span' is the active span here.
-        // You can also get it from the context at any point
-        // inside this closure:
+        // A new span "my-operation" is now the active span.
+        // You can retrieve it from the active context:
         let current_span = opentelemetry::trace::Span::current();
 
         // You can now add attributes or events to it
