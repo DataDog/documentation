@@ -89,9 +89,11 @@ Delegated permissions are required for automatic, criteria-based Microsoft Teams
    2. (Optional) Specify the incident criteria that creates a Microsoft Teams meeting. If left blank, any changes to an incident without an existing Microsoft Teams meeting will create a Microsoft Teams meeting.
 4. Save your settings.
 
-## Declaring and managing incidents from Microsoft Teams
+## Using the Datadog tab in Microsoft Teams
 
 In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident channels, you can only declare new incidents.
+
+### Declaring and managing incidents
 
 To declare an incident from a specific team:
 1. [Add the Datadog application][3] to the team.
