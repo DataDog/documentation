@@ -31,17 +31,16 @@ further_reading:
 
 Devices appear on the Device GeoMap when tagged with `geomap:<value>` and mapped to geographic coordinates. Configure device locations using the following steps:
 
-1. From the Device GeoMap page, click on **Add locations ->** in the top right hand corner.
-The [GeoMap locations settings][3] page provides multiple tabs to manage device locations:
+1. From the Device GeoMap page, click **Add locations →** in the top right corner. This opens the [GeoMap locations settings][3] page, which provides multiple tabs to manage device locations:
 
 - **All**: Displays all devices with `geomap` tags, regardless of their mapping status.
 - **Needs Coordinates**: Shows devices tagged with `geomap` values that don't have corresponding location coordinates configured.
-- **On Map**: Lists tagged devices with configured coordinates that are currently displayed on the GeoMap.
+- **On Map**: Lists tagged devices with configured coordinates that are displayed on the GeoMap.
 - **Unused**: Shows location mappings (coordinates) that have been configured but are not associated with any tagged devices.
 
-{{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device GeoMap, highlighting the On Map tab." style="width:100%;" >}}
+{{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device GeoMap, highlighting the All tab." style="width:100%;" >}}
 
-2. On the [GeoMap locations settings][3] page, click **+ Add mapping** and enter the location value along with its latitude and longitude coordinates in decimal format. To bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown and use the provided template.
+2. On the settings page, click **+ Add mapping** and enter the location value along with its latitude and longitude coordinates in decimal format. To bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown and use the provided template.
 
 {{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
 
@@ -49,10 +48,11 @@ The [GeoMap locations settings][3] page provides multiple tabs to manage device 
 
 {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
 
-
 ## Viewing devices
 
-Flow
+After devices are added to the map, you can zoom in to click on individual device or select a device cluster to view all devices in that location. Clicking on any device opens a side panel with detailed device information, including status, tags, and key metrics.
+
+{{< img src="network_device_monitoring/geomap/geomap_device_cluster.mp4" alt="A user zooming in on the map, clicking on a devive cluster, and opening the side panel of a device that is unreachable. " video=true >}}
 
 ## Troubleshooting
 
