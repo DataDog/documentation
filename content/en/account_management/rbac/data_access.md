@@ -204,7 +204,7 @@ When exploring Datadog with restrictions enabled, users without permissions can 
 
 Similar to exploring data in a data explorer like the RUM Explorer or Metrics Explorer, viewing data in dashboards in an organization that has Restricted Datasets enabled only shows the data the user can access. Since dashboards are shared objects that can be accessed by others, it is possible for two users who have different access to view the same dashboard or notebook at the same time and see different data.
 
-**Note**: Viewers of [Shared Dashboards][12] will see all telemetry data displayed in the Dashboard in accordance to the creator's permissions. Please review your dashboard content before sharing to ensure no sensitive or confidential data is exposed.
+**Note**: Viewers of [Shared Dashboards][12] see all telemetry data displayed in the Dashboard in accordance to the creator's permissions. Review your dashboard content before sharing to ensure no sensitive or confidential data is exposed.
 
 ### APIs
 

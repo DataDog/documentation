@@ -42,7 +42,7 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
 
 3. **Set up logs**.
 
@@ -66,14 +66,14 @@ const logger = createLogger({
   ],
 });
 
-logger.info(`Hello world!`);
+logger.info('Hello world!');
 {{< /code-block >}}
 
    For more information, see [Correlating Node.js Logs and Traces][2].
 
 4. **Configure your application**.
 
-{{% gcr-configure %}}
+{{% serverless-init-configure cloudrun="true" %}}
 
 5. {{% gcr-service-label %}}
 
@@ -81,11 +81,11 @@ logger.info(`Hello world!`);
 
    To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-in-container language="nodejs" %}}
+{{% serverless-init-env-vars-in-container language="nodejs" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -93,4 +93,4 @@ logger.info(`Hello world!`);
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
-[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5

@@ -7663,6 +7663,84 @@ menu:
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
       generated: true
+    - name: Trigger a schedule deployment
+      url: '#trigger-a-schedule-deployment'
+      identifier: fleet-automation-trigger-a-schedule-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerFleetSchedule
+        unstable:
+          - v2
+        order: 5
+    - name: Update a schedule
+      url: '#update-a-schedule'
+      identifier: fleet-automation-update-a-schedule
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFleetSchedule
+        unstable:
+          - v2
+        order: 3
+    - name: Get a schedule by ID
+      url: '#get-a-schedule-by-id'
+      identifier: fleet-automation-get-a-schedule-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetSchedule
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a schedule
+      url: '#delete-a-schedule'
+      identifier: fleet-automation-delete-a-schedule
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteFleetSchedule
+        unstable:
+          - v2
+        order: 4
+    - name: Create a schedule
+      url: '#create-a-schedule'
+      identifier: fleet-automation-create-a-schedule
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetSchedule
+        unstable:
+          - v2
+        order: 1
+    - name: List all schedules
+      url: '#list-all-schedules'
+      identifier: fleet-automation-list-all-schedules
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetSchedules
+        unstable:
+          - v2
+        order: 0
     - name: Cancel a deployment
       url: '#cancel-a-deployment'
       identifier: fleet-automation-cancel-a-deployment
@@ -7676,9 +7754,9 @@ menu:
         unstable:
           - v2
         order: 4
-    - name: Get a deployment by ID
-      url: '#get-a-deployment-by-id'
-      identifier: fleet-automation-get-a-deployment-by-id
+    - name: Get a configuration deployment by ID
+      url: '#get-a-configuration-deployment-by-id'
+      identifier: fleet-automation-get-a-configuration-deployment-by-id
       parent: fleet-automation
       generated: true
       params:
@@ -7689,9 +7767,22 @@ menu:
         unstable:
           - v2
         order: 3
-    - name: Create a deployment
-      url: '#create-a-deployment'
-      identifier: fleet-automation-create-a-deployment
+    - name: Upgrade hosts
+      url: '#upgrade-hosts'
+      identifier: fleet-automation-upgrade-hosts
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentUpgrade
+        unstable:
+          - v2
+        order: 2
+    - name: Create a configuration deployment
+      url: '#create-a-configuration-deployment'
+      identifier: fleet-automation-create-a-configuration-deployment
       parent: fleet-automation
       generated: true
       params:
@@ -7712,6 +7803,19 @@ menu:
           - v2
         operationids:
           - ListFleetDeployments
+        unstable:
+          - v2
+        order: 0
+    - name: List all available Agent versions
+      url: '#list-all-available-agent-versions'
+      identifier: fleet-automation-list-all-available-agent-versions
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentVersions
         unstable:
           - v2
         order: 0
@@ -9882,6 +9986,140 @@ menu:
           - ListPermissions
         unstable: []
         order: 1
+    - name: Rum Audience Management
+      url: /api/latest/rum-audience-management/
+      identifier: rum-audience-management
+      generated: true
+    - name: List connections
+      url: '#list-connections'
+      identifier: rum-audience-management-list-connections
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListConnections
+        unstable:
+          - v2
+        order: 7
+    - name: Delete connection
+      url: '#delete-connection'
+      identifier: rum-audience-management-delete-connection
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteConnection
+        unstable:
+          - v2
+        order: 6
+    - name: Update connection
+      url: '#update-connection'
+      identifier: rum-audience-management-update-connection
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateConnection
+        unstable:
+          - v2
+        order: 3
+    - name: Create connection
+      url: '#create-connection'
+      identifier: rum-audience-management-create-connection
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateConnection
+        unstable:
+          - v2
+        order: 2
+    - name: Get mapping
+      url: '#get-mapping'
+      identifier: rum-audience-management-get-mapping
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMapping
+        unstable:
+          - v2
+        order: 10
+    - name: Query users
+      url: '#query-users'
+      identifier: rum-audience-management-query-users
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryUsers
+        unstable:
+          - v2
+        order: 8
+    - name: Get user facet info
+      url: '#get-user-facet-info'
+      identifier: rum-audience-management-get-user-facet-info
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserFacetInfo
+        unstable:
+          - v2
+        order: 9
+    - name: Query event filtered users
+      url: '#query-event-filtered-users'
+      identifier: rum-audience-management-query-event-filtered-users
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryEventFilteredUsers
+        unstable:
+          - v2
+        order: 4
+    - name: Query accounts
+      url: '#query-accounts'
+      identifier: rum-audience-management-query-accounts
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAccounts
+        unstable:
+          - v2
+        order: 1
+    - name: Get account facet info
+      url: '#get-account-facet-info'
+      identifier: rum-audience-management-get-account-facet-info
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAccountFacetInfo
+        unstable:
+          - v2
+        order: 5
     - name: Rum Metrics
       url: /api/latest/rum-metrics/
       identifier: rum-metrics
@@ -10569,6 +10807,18 @@ menu:
           - DeleteCatalogEntity
         unstable: []
         order: 3
+    - name: Preview catalog entities
+      url: '#preview-catalog-entities'
+      identifier: software-catalog-preview-catalog-entities
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PreviewCatalogEntities
+        unstable: []
+        order: 3
     - name: Create or update entities
       url: '#create-or-update-entities'
       identifier: software-catalog-create-or-update-entities
@@ -10744,6 +10994,49 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Team Connections
+      url: /api/latest/team-connections/
+      identifier: team-connections
+      generated: true
+    - name: Create team connections
+      url: '#create-team-connections'
+      identifier: team-connections-create-team-connections
+      parent: team-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamConnections
+        unstable:
+          - v2
+        order: 2
+    - name: List team connections
+      url: '#list-team-connections'
+      identifier: team-connections-list-team-connections
+      parent: team-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamConnections
+        unstable:
+          - v2
+        order: 1
+    - name: Delete team connections
+      url: '#delete-team-connections'
+      identifier: team-connections-delete-team-connections
+      parent: team-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamConnections
+        unstable:
+          - v2
+        order: 3
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
@@ -10980,6 +11273,19 @@ menu:
         unstable:
           - v2
         order: 19
+    - name: Get team sync configurations
+      url: '#get-team-sync-configurations'
+      identifier: teams-get-team-sync-configurations
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamSync
+        unstable:
+          - v2
+        order: 18
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

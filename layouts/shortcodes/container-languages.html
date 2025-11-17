@@ -1,8 +1,9 @@
 {{ $path := .Get "path" }}
 {{ $functions := .Get "functions" }}
+{{ $jobs := .Get "jobs" }}
 <div class="logs-containers">
     <div class="container cards-dd col-num-3">
-        <div class="row {{ if eq $functions "true" }}row-cols-2 row-cols-sm-3{{ else }}row-cols-2 row-cols-md-4{{ end }} g-2 g-xl-3 justify-content-sm-center">
+        <div class="row {{ if or (eq $functions "true") (eq $jobs "true") }}row-cols-2 row-cols-sm-3{{ else }}row-cols-2 row-cols-md-4{{ end }} g-2 g-xl-3 justify-content-sm-center">
             <div class="col">
                 <a class="card h-100" href="/serverless/{{ $path }}/python/">
                     <div class="card-body text-center py-2 px-1">
@@ -38,14 +39,14 @@
                         {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet_text.png" "class" "img-fluid" "alt" ".NET" "width" "400") }}
                     </div>
                 </a>
-            </div>
+            </div>{{ if ne $jobs "true" }}
             <div class="col">
               <a class="card h-100" href="/serverless/{{ $path }}/ruby/">
                 <div class="card-body text-center py-2 px-1">
                   {{ partial "img.html" (dict "root" . "src" "integrations_logos/ruby.png" "class" "img-fluid" "alt" "Ruby" "width" "400") }}
                 </div>
               </a>
-            </div>{{ if ne $functions "true" }}
+            </div>{{ end }}{{ if and (ne $functions "true") (ne $jobs "true") }}
             <div class="col">
               <a class="card h-100" href="/serverless/{{ $path }}/php/">
                     <div class="card-body text-center py-2 px-1">
