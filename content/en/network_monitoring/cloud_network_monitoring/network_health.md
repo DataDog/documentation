@@ -18,6 +18,8 @@ further_reading:
 
 Network Health provides a unified view of your network's most critical issues, automatically detecting and prioritizing problems across DNS, TLS certificates, security groups, and network anomalies. It surfaces actionable insights with clear remediation paths, helping you resolve connectivity issues and reduce incident impact.
 
+This page includes several sections that highlight different types of detected issues and insights across your environment.
+
 {{< img src="network_performance_monitoring/network_health/network_health_overview.png" alt="The Network Health page with the collapsible menu open, highlighting Recommended Actions." style="width:100%;">}}
 
 ## Prerequisites
@@ -28,8 +30,8 @@ Network Health provides a unified view of your network's most critical issues, a
 
 The **Recommended Actions** section highlights the most critical issues detected in your network. These are prioritized based on:
 
-1. **Severity**: Problems that are actively blocking traffic.
-2. **Impact**: Issues affecting services that are important to your infrastructure.
+1. **Severity**: Whether the issue is actively blocking traffic.
+2. **Impact**: How critical the affected services are to your infrastructure.
 
 Each recommended action displays:
 
