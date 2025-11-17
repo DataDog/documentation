@@ -7,10 +7,7 @@ further_reading:
     text: "NDM Troubleshooting"
 ---
 
-{{< callout url=
- btn_hidden="false" header="Join the Preview!">}}
-Network Configuration Management is in Preview. Use this form to submit your request today.
-{{< /callout >}}
+<div class="alert alert-info">Network Configuration Management is in Preview. Contact your Datadog representative to sign up.</div>
 
 ## Overview
 
