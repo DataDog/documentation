@@ -7,7 +7,7 @@ disable_toc: false
 ## Overview
 
 <div class="alert alert-info">
-Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or monthly at a minimum. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates.
+Datadog recommends updating the Observability Pipelines Worker (OPW) with every minor and patch release, or monthly at a minimum. <br><br> Upgrading to the latest major OPW version and keeping it updated is the only supported way to get new OPW functionalities, fixes, and security updates.
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
@@ -57,7 +57,7 @@ Worker version 2.10.0 gives you access to the following:
             - pfx (IPCryptPfx, 32-byte key).
             - Both algorithms are format-preserving (output is a valid IP address) and deterministic.
     - The `xxhash` function implements `xxh32`, `xxh64`, `xxh3_64`, and `xxh3_128` hashing algorithms.
-    - The `parse_aws_alb_log` function have been updated with an optional `strict_mode` parameter.
+    - The `parse_aws_alb_log` function has been updated with an optional `strict_mode` parameter.
         - When `strict_mode` is set to `false`, the parser ignores any newly added or trailing fields in AWS ALB logs, instead of failing.
         - Defaults to `true` to preserve current behavior.
 
