@@ -19,15 +19,7 @@ further_reading:
 
 ## Overview
 
-Maps in Network Device Monitoring provide two views of your network infrastructure:
-
-- **[Device Topology Map][8]**: Visualizes physical network connections between devices, their interfaces, and relationships.
-- **[Device GeoMap][9]**: Displays the geographic distribution of your network devices across locations.
-
-## Device GeoMap
-
-[Device Geomap][1] provides a global visualization of network devices discovered through Network Device Monitoring (NDM). It plots devices on a geographical map based on their configured locations, allowing you to assess connectivity, reachability, and regional network health at a glance.
-This view helps your network teams identify device outages, latency issues, or coverage gaps across distributed environments.
+[Device Geomap][1] displays the geographic distribution of your network devices discovered through Network Device Monitoring (NDM). It plots devices on a geographical map based on their configured locations, allowing you to visualize site coverage, assess connectivity, and monitor regional network health. Use it to identify device outages, latency issues, or coverage gaps across distributed environments.
 
 {{< img src="network_device_monitoring/geomap/device_geomap.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
 
@@ -37,15 +29,28 @@ This view helps your network teams identify device outages, latency issues, or c
 
 ## Configuring locations
 
-1. Tag devices using the `geomap:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
+Devices appear on the Device GeoMap when tagged with `geomap:<value>` and mapped to geographic coordinates. Configure device locations using the following steps:
 
-{{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
+1. From the Device GeoMap page, click on **Add locations ->** in the top right hand corner.
+The [GeoMap locations settings][3] page provides multiple tabs to manage device locations:
 
-2. On the [GeoMap locations settings][3] page, click **+Add mapping** and provide the location value and latitude and longitude coordinates. To bulk import locations, select **Import from CSV** from the **+Add mapping** dropdown and use the provided template.
+- **All**: Displays all devices with `geomap` tags, regardless of their mapping status.
+- **Needs Coordinates**: Shows devices tagged with `geomap` values that don't have corresponding location coordinates configured.
+- **On Map**: Lists tagged devices with configured coordinates that are currently displayed on the GeoMap.
+- **Unused**: Shows location mappings (coordinates) that have been configured but are not associated with any tagged devices.
+
+{{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device GeoMap, highlighting the On Map tab." style="width:100%;" >}}
+
+2. On the [GeoMap locations settings][3] page, click **+ Add mapping** and enter the location value along with its latitude and longitude coordinates in decimal format. To bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown and use the provided template.
 
 {{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
 
-## Navigation options
+3. Tag devices using the `geomap:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
+
+{{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
+
+
+## Viewing devices
 
 Flow
 
@@ -71,7 +76,7 @@ Use the provided template to ensure proper formatting.
 
 If a device doesn't appear on the map after tagging:
 
-1. Verify that the location tag has coordinates configured in the [Settings][3] page.
+1. Verify that the location tag has coordinates configured on the [Settings][3] page.
 2. Allow a few minutes for tag updates to be reflected in the map, as indicated in the application.
 
 ## Further Reading

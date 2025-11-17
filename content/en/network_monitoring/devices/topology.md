@@ -20,13 +20,6 @@ further_reading:
 
 ## Overview
 
-Maps in Network Device Monitoring provide two views of your network infrastructure:
-
-- **[Device Topology Map][8]**: Visualizes physical network connections between devices, their interfaces, and relationships.
-- **[GeoMap][9]**: Displays the geographic distribution of your network devices across locations.
-
-## Device Topology Map
-
 The [Network Device Topology Map][2] uses [Cloudcraft][7] diagrams to provide an interactive visual representation of your network's physical connections. The map automatically discovers and displays devices, their interfaces, and the relationships between them. This visualization helps you identify issues in your network devices, understand their upstream and downstream impacts, troubleshoot connectivity problems, and gain insights into how traffic flows through your infrastructure.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new_2.mp4" alt="A user adds team, service, and vendor tags to the network device topology map, then selects a device to open its side panel." video="true" >}}
@@ -185,6 +178,14 @@ The connections discovered with LLDP or CDP can correspond to devices already mo
 ### Device resolution failures
 
 The device resolution can fail if the device is not monitored with NDM, or the LLDP or CDP data is insufficient to match the discovered device to the monitored device.
+
+## Next steps
+
+NDM provides multiple visualization tools to monitor your infrastructure:
+
+- **[Device GeoMap][9]**: View the geographic distribution of devices across locations to identify regional issues and coverage gaps.
+- **[Device Overview][10]**: Access detailed metrics and performance data for individual devices.
+- **[NetFlow Monitoring][1]**: Analyze traffic flows and bandwidth utilization across your network.
 
 ## Further Reading
 
