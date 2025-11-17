@@ -76,9 +76,14 @@ To view form responses in a table format:
 ### View in a dashboard
 
 To visualize form responses in a dashboard:
-1. After [creating a dashboard][9], [add a widget][10] for [**Timeseries**][11]. 
-1. In **Graph Your Data**, choose **DDSQL Editor**. 
-1. Finish [configuring your widget][12] and click **Save**.
+1. Navigate to [DDSQL Editor][13].
+1. In the **Data** tab, click **Actions Datastores**.
+1. Select the datastore associated with your form, then click **Insert into editor**.
+1. Optionally, click the query's title to rename it. 
+1. Click **Save**.
+1. [Create a dashboard][9], then add a [Query Value widget][14].
+1. When [defining the metric][15], select **DDSQL Editor** and the datastore query you created earlier.
+1. Finish [configuring your widget][12], then click **Save**.
 
 [1]: https://app.datadoghq.com/actions/forms
 [2]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
@@ -92,4 +97,7 @@ To visualize form responses in a dashboard:
 [10]: /dashboards/widgets/#add-a-widget-to-your-dashboard
 [11]: /dashboards/widgets/timeseries/
 [12]: /dashboards/widgets/configuration/
+[13]: https://app.datadoghq.com/ddsql/editor
+[14]: /dashboards/widgets/query_value/
+[15]: /dashboards/querying/#define-the-metric
 
