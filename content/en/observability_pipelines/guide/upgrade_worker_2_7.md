@@ -150,7 +150,7 @@ Worker version 2.8.0 gives you access to the following:
 
 #### Enhancements
 
-- The Elasticsearch destination's indexing strategy has been updated to include data streams.
+- The Elasticsearch destination's [indexing strategy][21] has been updated to include data streams.
 - The HTTP Client destination supports template syntax.
 
 #### Fixes
@@ -212,3 +212,4 @@ Worker version 2.7.0 gives you access to the following:
 [18]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
 [19]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#in-memory-buffering-for-components
 [20]: /observability_pipelines/processors/sample/#group-by-example
+[21]: /observability_pipelines/destinations/elasticsearch/#set-up-the-destination
