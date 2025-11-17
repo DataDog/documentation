@@ -54,7 +54,7 @@ Determine whether an administrator configured a [logs restriction query (RBAC)][
 
 {{< img src="logs/explorer/live_tail/logs_rbac_page.png" alt="Logs RBAC page" style="width:100%;" >}}
 
-## Check Log Timestamps
+## Check log timestamps
 
 If you are expecting logs to appear in Live Tail which are not visible, verify whether the timestamps of the logs are within the 15 minute period of Live Tail's window.
 If log timestamps are aligned with UTC time, logs sent in real time should appear within the 15 minute period specified.
@@ -66,7 +66,7 @@ During processing, this may happen in two ways:
 - If logs are sent as JSON, automatic parsing will extract the date attribute if it is reflected by a listed attribute in [JSON Preprocessing][10].
 
 If the attribute used to reflect the timestamp of the log is in a different timezone to UTC, see [Parsing dates][9] with a Grok Parser to shift the timezone.
-- Note that this will not function for attributes parsed with JSON Preprocessing. These will need to be modified outside of Preprocessing.
+- This does not function for attributes parsed with JSON Preprocessing. These attributes must be modified outside of Preprocessing.
 
 ## Create a support ticket
 
