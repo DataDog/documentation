@@ -39,21 +39,9 @@ If you have a starting point in mind, but aren't sure what your users did next, 
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_dropoffs.png" alt="The funnel step editor automatically loads the top most common views and actions that users typically see and take next." style="width:50%;" >}}
 
-<div class="alert alert-info"> Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.</div>
 
 
-Click on the funnel chart to open a side panel with additional context about user dropoffs. Then, navigate between steps to see:
-
-- **Step performance**: See metrics related to conversion (for example, conversion rate, dropped off sessions, and average conversion time).
-- **Branching paths from the previous step**: Discover the other paths that users take instead of the ones you anticipate. This section is only available when looking at a step between two views in a funnel.
-- **Issues that might be affecting conversion**: See the top issues that might be affecting conversions and investigate them further with the links to RUM, Error Tracking, and Session Replay.
-
-
-{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_metrics.png" alt="Click on the funnel view to see additional context about user dropoffs." style="width:90%;" >}}
-
-
-
-### Filtering
+### Add filters
 
 When constructing your funnel, you can filter globally or on a step.
 
@@ -65,17 +53,17 @@ When constructing your funnel, you can filter globally or on a step.
 
     {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_filter_by_step.png" alt="Use attributes to filter information between steps when constructing your funnel" style="width:50%;" >}}
 
-### Combining events
+### Combine events
 
 When constructing your funnel, you can combine multiple events within a given step, as end users may have different ways to achieve the same outcome through different flows. When combining events, any of the events in the step can represent the step. The numerical value you see is the combination of all steps within the combined step.
 
 To combine an event, click the three dots next to an event and select **+ Combine Events**.
 
-### Grouping
+### Use groupings
 
-Use the Group by dropdown to group the data by a specific attribute.
+Use the **Group by** dropdown to group the data by a specific attribute.
 
-**Note**: The `Group by` option is not supported for the funnel steps visualization; when applied, the visualization automatically changes to a top list.
+The **Group by** option is not supported for the funnel steps visualization; when applied, the visualization automatically changes to a top list.
 
 ## Refine conversion
 
@@ -125,6 +113,7 @@ Datadog calculates the average time between steps based on the average duration 
 
 If you analyze your funnel by **user** or by **Account**, you can define your conversion time frame in hours or days of the first event. The default time frame for conversions is one day (a 24-hour window, not a calendar date) to determine if a conversion happened or not.
 
+<div class="alert alert-info"> Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step 1 and step 2 happen in the right order in a given session at least once, it counts as a single converted session.</div>
 
 ### Choose a conversion counting method
 
@@ -141,11 +130,12 @@ To choose how conversions are counted in your funnel, beside **Conversion count*
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_conversion.png" alt="Select a conversion measure, whether Unique or Total, to determine how your session conversions are counted." style="width:80%;" >}}
 
 
-## Changing the visualization
+## Change the visualization
+After you've defined the step events and conversion measurement, you can switch to a different visualization to better understand user conversions for your app.
+
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_change_viz.mp4" alt="Click the visualization dropdown to select a different view" video=true >}}
 
-After you've defined the step events and conversion measurement, you can switch to a different visualization to better understand user conversions for your app.
 
 ### Timeseries
 Seeing the conversion as a timeseries can be helpful in understanding conversion trends. Each datapoint across the x-axis represents the conversion for the identified query.
@@ -165,6 +155,16 @@ Query values display the current value of the given usage metric.
 Visualize the top values from a facet based on your chosen measure.
 
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_toplist.png" alt="View conversion data as a top list." style="width:80%;" >}}
+
+## Navigate funnel charts
+Click on the funnel chart to open a side panel with additional context about user dropoffs. Then, navigate between steps to see:
+
+- **Step performance**: See metrics related to conversion (for example, conversion rate, dropped off sessions, and average conversion time).
+- **Branching paths from the previous step**: Discover the other paths that users take instead of the ones you anticipate. This section is only available when looking at a step between two views in a funnel.
+- **Issues that might be affecting conversion**: See the top issues that might be affecting conversions and investigate them further with the links to RUM, Error Tracking, and Session Replay.
+
+
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_metrics.png" alt="Click on the funnel view to see additional context about user dropoffs." style="width:90%;" >}}
 
 ## Share a funnel
 
