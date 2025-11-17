@@ -30,14 +30,16 @@ This evaluation checks whether the agent successfully selected the appropriate t
 
 ### Example
 
-{{< img src="llm_observability/evaluations/tool_selection_failure.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_selection_1.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
 ### How to use
+<div class="alert alert-info">Tool selection is only available for OpenAI and Azure OpenAI.</div>
+
 1. Ensure you are running `dd-trace` v3.12+.
 1. Instrument your agent with available tools. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 1. Enable the `ToolSelection` evaluation in the Datadog UI by [creating a new evaluation][1] or [editing an existing evaluation][2].
 
-This evaluation is supported in `dd-trace` version 3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+This evaluation is supported in `dd-trace` version 3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][3]** to run this evaluation.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -102,13 +104,14 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 
 ### Example
 
-{{< img src="llm_observability/evaluations/tool_argument_correctness_error.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_argument_correctness_1.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
 ##### Instrumentation
 
-This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][4]** to run this evaluation.  
 
 ### How to use
+<div class="alert alert-info">Tool argument correctness is only available for OpenAI and Azure OpenAI.</div>
 
 1. Install `dd-trace` v3.12+.
 1. Instrument your agent with available tools that require arguments. The example below uses Pydantic AI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
@@ -209,13 +212,14 @@ An agent can call tools correctly but still fail to achieve the user’s intende
 ### Evaluation summary
 | **Span kind** | **Method** | **Definition** | 
 |---|---|---|
-| Evaluated on LLLM spans | Evaluated using LLM | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
+| Evaluated on LLM spans | Evaluated using LLM | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
 
 ### Example
-{{< img src="llm_observability/evaluations/goal_completeness.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/goal_completeness_1.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 
 ##### How to Use
+<div class="alert alert-info">Goal completeness is only available for OpenAI and Azure OpenAI.</div>
 
 To enable Goal Completeness evaluation, you need to instrument your application to track sessions and their completion status. This evaluation works by analyzing complete sessions to determine if all user intentions were successfully addressed.
 
@@ -262,3 +266,5 @@ This configuration ensures evaluations run only on complete sessions. This provi
 
 [1]: /llm_observability/evaluations/managed_evaluations/#create-new-evaluations
 [2]: /llm_observability/evaluations/managed_evaluations/#edit-existing-evaluations
+[3]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/1-tool-selection-demo.py
+[4]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/2-tool-argument-correctness-demo.py

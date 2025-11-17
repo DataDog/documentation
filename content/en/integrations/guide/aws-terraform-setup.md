@@ -515,7 +515,7 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::065115117704:root"]
+      identifiers = ["arn:aws-us-gov:iam::065115117704:root"]
     }
     condition {
       test     = "StringEquals"
@@ -585,7 +585,7 @@ resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
   role       = aws_iam_role.datadog_aws_integration.name
-  policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
+  policy_arn = "arn:aws-us-gov:iam::aws:policy/SecurityAudit"
 }
 
 resource "datadog_integration_aws_account" "datadog_integration" {

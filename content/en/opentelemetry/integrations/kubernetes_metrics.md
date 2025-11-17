@@ -12,8 +12,6 @@ further_reading:
   text: "Example Collector Configurations"
 ---
 
-<div class="alert alert-info">The OpenTelemetry Kubernetes integration is in Preview. To request access, contact your Datadog account team.</div>
-
 ## Overview
 
 Collect Kubernetes metrics using the OpenTelemetry Collector to gain comprehensive insights into your cluster's health and performance. This integration uses a combination of OpenTelemetry receivers to gather data, which populates the [Kubernetes - Overview][1] dashboard.
