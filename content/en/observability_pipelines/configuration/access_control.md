@@ -1,6 +1,8 @@
 ---
 title: Access Control
 disable_toc: false
+aliases:
+    - /observability_pipelines/access_control/
 ---
 
 ## Overview
@@ -16,6 +18,8 @@ See the [list of permissions][3] for Observability Pipelines' assets and what le
 ## Granular access control
 
 [Granular access control][4] can only restrict access to resources and does **not** elevate permissions. For example, if a user has the **Datadog Read Only Role** and they are given the **Editor** access for a specific pipeline using granular access control, the user still only has read-only access to this pipeline and cannot edit it. You need to update their role to one that allows pipeline editing if you want them to be able to make changes to this pipeline and other pipelines.
+
+{{< img src="observability_pipelines/access_control/menu.png" alt="The pipeline page showing the Access Control menu" style="width:40%;" >}}
 
 ### Restrict access to a pipeline
 
@@ -35,6 +39,8 @@ You can restrict access to a specific pipeline with the following role options:
 
 - You can't save granular access settings if there isn't at least one user with Editor access to the pipeline.
 - You can lock yourself out of a pipeline even if you created it. When you edit granular access restrictions for pipeline access and you want to continue to have Editor access for the pipeline, make sure you are one of the users or part of a Team or role with Editor access.
+
+{{< img src="observability_pipelines/access_control/pipeline_modal.png" alt="The pipeline access control modal showing restriction options" style="width:60%;" >}}
 
 To use granular access controls to limit access to a specific pipeline:
 
@@ -76,6 +82,8 @@ You can restrict access to Live Capture **for a specific pipeline** with the fol
 - You can't save granular access settings if there isn't at least one user with **Editor** access to Live Capture.
 - You can lock yourself out of Live Capture for a specific pipeline even if you created the pipeline. When you edit granular access restrictions for Live Capture access and you want to have Editor access for Live Capture, make sure you are one of the users or part of a Team or role with Editor access.
 
+{{< img src="observability_pipelines/access_control/live_capture_modal.png" alt="The pipeline access control modal showing restriction options" style="width:60%;" >}}
+
 To use granular access controls to limit access to Live Capture for a specific pipeline:
 
 1. Navigate to the [Pipelines][6] page.
@@ -84,7 +92,7 @@ To use granular access controls to limit access to Live Capture for a specific p
 1. Click **Edit Access** > **Live Capture Access**.
 1. Click **Restrict Access**.
 1. The **Organization access** section shows that members of your organization have **Viewer** access by default. Use the dropdown menu to select what kind of access you want them to have.
-1. Click the dropdown menu in the **Restricted* section to set access levels for Teams, roles, users, or service accounts based on your use case.
+1. Click the dropdown menu in the **Restricted** section to set access levels for Teams, roles, users, or service accounts based on your use case.
 1. Click **Save**.
 
 To restore full access to Live Capture for a pipeline:

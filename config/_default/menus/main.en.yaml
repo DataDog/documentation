@@ -5537,6 +5537,11 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
       weight: 105
+    - name: Access Control
+      url: observability_pipelines/configuration/access_control
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_access_control
+      weight: 106
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
