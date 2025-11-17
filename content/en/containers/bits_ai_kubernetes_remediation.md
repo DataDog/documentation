@@ -10,12 +10,12 @@ further_reading:
 Bits AI Kubernetes Remediation analyzes and fixes Kubernetes errors in your infrastructure.
 
 The following Kubernetes errors are supported:
-- `CreateContainerError`
-- `CreateContainerConfigError`
 - `CrashLoopBackOff`
 - `ErrImagePull`
 - `ImagePullBackOff`
 - `OOMKilled`
+- `CreateContainerError`
+- `CreateContainerConfigError`
 
 ## Usage
 
