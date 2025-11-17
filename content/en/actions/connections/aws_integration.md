@@ -58,7 +58,7 @@ In the Permissions modal opened select a user, team or organization to be grante
 {{< img src="service_management/aws_integration_tile_permission_modal.png" alt="A permission modal with Executor permission highlighted" style="width:100%;" >}}
 
 <div class="alert alert-info">
-If instead of a **Set Permissions** button, you have a **Request Edit Access** button, you need to request the AWS Configuration Edit permission from an Admin in your organization.
+If instead of a <b>Set Permissions</b> button, you have a <b>Request Edit Access</b> button, you need to request the AWS Configuration Edit permission from an Admin in your organization.
 </div>
 
 ### 2. Select the Integration in Action
