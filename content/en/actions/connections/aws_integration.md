@@ -53,7 +53,7 @@ To configure the **Executor** permission in Datadog AWS Integration:
 
 {{< img src="service_management/aws_integration_tile_set_permission.png" alt="An integration on the AWS Integration configuration where the Set permission button is usable" style="width:100%;" >}}
 
-In the Permissions modal opened select a user, team or organization to be granted "**Executor**" permissions:
+In the Permissions modal, select a user, team, or organization to be granted **Executor** permissions:
 
 {{< img src="service_management/aws_integration_tile_permission_modal.png" alt="A permission modal with Executor permission highlighted" style="width:100%;" >}}
 
