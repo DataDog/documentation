@@ -313,7 +313,7 @@ To use the SDK, ensure the following environment variables are configured:
 Beginning with [dd-trace-py v3.18.0][1], a new Python SDK has been introduced. This SDK provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
 
 <div class="alert alert-info">
-Replaced the SDK version implementation in <i>dd-trace-py v3.14.0-rc1</i> with the standardized common message format.
+Starting with dd-trace-py v3.18.0, the Python SDK uses the standardized common message format.
 </div>
 
 ```py
