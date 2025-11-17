@@ -15,7 +15,7 @@ further_reading:
 
 AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. This page describes how to set it up so you can keep your data secure against these AI-based threats.
 
-For an overview on AI Guard, see [AI Guard][11].
+For an overview on AI Guard, see [AI Guard][13].
 
 ## Setup
 
@@ -514,3 +514,4 @@ Follow the instructions to create a new [metric monitor][11].
 [10]: /monitors/types/apm/?tab=traceanalytics
 [11]: /monitors/types/metric/
 [12]: https://platform.openai.com/docs/api-reference/chat/object
+[13]: /security/ai_guard/
