@@ -109,7 +109,7 @@ Recommendations enable you to change the status of a vulnerability, assign it to
 Datadog automatically manages the lifecycle of vulnerabilities detected by IAST to ensure findings remain accurate and relevant over time.
 
 - **Automatic closure:**
-Vulnerabilities detected by IAST are automatically closed by Datadog when they haven’t been observed for **14 days** since their last detection.
+Vulnerabilities detected by IAST are automatically closed by Datadog when they haven't been observed for **14 days** since their last detection.
 
 - **Service version updates:**
 If a new version of the service is deployed in the environment where the vulnerability was originally detected, the vulnerability is automatically closed **24 hours** after it is no longer seen in that new version.
