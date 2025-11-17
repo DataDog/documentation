@@ -19,7 +19,7 @@ When the throttle processor is enabled, the number of logs the processor allows 
 
 ### Capacity replenishment rate
 
-The throttle processor follows a generic cell rate algorithm, which enables a steady rate of events to pass through. The replenishment  rate is based on the settings of your throttle processor and allows a certain number of events to pass through per second. This rate can be calculated as follows:
+The throttle processor follows a generic cell rate algorithm, which enables a steady rate of events to pass through. The replenishment rate is based on the settings of your throttle processor and allows a certain number of events to pass through per second. This rate can be calculated as follows:
 
 $$\text"Throttle rate" / \text"Time window (in seconds)"$$
 
