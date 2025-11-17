@@ -125,7 +125,7 @@ attributes:
        - **SNMP traps**: 15 days
   - product: Cloud Network Monitoring
     data_type: |
-       - **Netflow**: 14 days
+       - 14 days
   - product: Network Path
     data_type: |
        - **Network Path Tests**: 30 days
