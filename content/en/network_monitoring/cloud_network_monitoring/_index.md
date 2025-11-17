@@ -43,7 +43,7 @@ Datadog Cloud Network Monitoring (CNM) gives you visibility into your network tr
 * Identify outages of cloud provider regions and third-party tools
 * Troubleshoot client-side and server-side DNS server issues
 
-CNM makes it easier to monitor complex networks with built in support for Linux and [Windows OS][3] as well as containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
+CNM allows you to monitor complex networks with built-in support for Linux, [Windows OS][3], and containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
 
 Additionally, [Network path][5], a feature of CNM, is available in Preview, which allows you to see hop-by-hop traffic in your network.
 

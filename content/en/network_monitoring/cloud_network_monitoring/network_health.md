@@ -22,11 +22,11 @@ Network Health provides a unified view of your network's most critical issues, a
 
 ## Prerequisites
 
-- [Cloud Network Monitoring][1] enabled
+- [Cloud Network Monitoring][1] is enabled.
 
-## Recommended actions
+## Recommended Actions
 
-The **Recommended Actions** section highlights the most critical issues detected in your network. These are prioritized based on two factors:
+The **Recommended Actions** section highlights the most critical issues detected in your network. These are prioritized based on:
 
 1. **Severity**: Problems that are actively blocking traffic.
 2. **Impact**: Issues affecting services that are important to your infrastructure.
@@ -34,82 +34,82 @@ The **Recommended Actions** section highlights the most critical issues detected
 Each recommended action displays:
 
 - The specific problem detected (for example, "TLS certificate expired _N_ days ago").
-- **Impacted client service**: The service making requests.
-- **Impacted server service**: The service receiving requests.
+- The impacted client service (the service making requests).
+- The impacted server service (the service receiving requests).
 
-Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [New workflow,][2] [Create a Case][3], or [Declare an Incident][4].
+Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [New Workflow][2], [Create a Case][3], or [Declare an Incident][4].
 
    {{< img src="network_performance_monitoring/network_health/recommended_actions_side_panel.png" alt="Recommended actions side panel of an affected service, showing remediation steps." style="width:100%;">}}
 
 ## Watchdog Insights
 
-The **Watchdog Insights** section displays anomalous network behavior detected by Watchdog, specifically focusing on TCP retransmits. A spike in TCP retransmits compared to your baseline (typically the previous week) often indicates an underlying network issue.
+The **Watchdog Insights** section displays anomalous network behavior detected by Watchdog, focusing on spikes in TCP retransmits. An increase in retransmits compared to your baseline (typically the previous week) often indicates an underlying network issue.
 
-Watchdog Insights help you:
-- Detect potential problems early.
-- Correlate anomalies with specific root causes.
-- Investigate performance degradation before it impacts users.
+Use Watchdog Insights to:
+- Detect potential problems early
+- Correlate anomalies with specific root causes
+- Investigate performance degradation before it impacts users
 
 ## TLS certificates
 
-TLS certificates that have expired or are about to expire prevent secure connections between services, resulting in dropped traffic. This section lists:
+Expired or expiring TLS certificates can block secure connections between services, resulting in dropped traffic. This **TLS Certificates** section lists:
 
 - **Expired certificates**: Certificates that are invalid and blocking traffic.
-- **Expiring certificates**: Certificates about to expire, allowing you to take preventative action.
+- **Expiring certificates**: Certificates about to expire.
 - **Impacted services**: The client and server services affected by each certificate issue.
 
-Click on an expired certificate to view remediation steps for renewing it in AWS, along with options to create a [New workflow,][2] [Create a Case][3], or [Declare an Incident][4].
+Click on an expired certificate to view remediation steps for renewing it in AWS, or to create a [New Workflow][2], [Create a Case][3], or [Declare an Incident][4].
 
 ## DNS failures
 
-DNS server misconfigurations can route traffic to incorrect destinations, preventing services from communicating. DNS failures typically result from changes made to DNS server routing configurations.
+DNS misconfigurations can route traffic to incorrect destinations, preventing services from communicating. These failures typically result from changes made to DNS routing configurations.
 
-This section shows:
+This **DNS Failures** section shows:
 
-- DNS failure reason.
-- **DNS servers** experiencing elevated failure rates.
-- **Impacted services**: The client and server services affected by each DNS failure issue.
+- **Failure reason**: The cause of the DNS failure
+- **Impacted DNS server**: The DNS server experiencing elevated failure rates
+- **Impacted services**: The client and server services affected by the DNS failure
 
 **Failure reasons**:
 
 NXDOMAIN  
-: The domain name does not exist. This typically indicates a misconfiguration or the domain has been removed.
+: The domain name does not exist, usually due to a misconfiguration or removed domain.
 
 TIMEOUT 
-: The DNS query timed out before receiving a response. This may indicate network issues or unresponsive DNS servers.
+: The DNS query timed out before receiving a response, which may indicate network issues or unresponsive DNS servers.
 
 SERVFAIL
 : The DNS server failed to process a query, often due to a server-side problem.
 
-Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [New workflow,][2] [Create a Case][3], or [Declare an Incident][4].
+Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [New workflow][2], [Create a Case][3], or [Declare an Incident][4].
 
 ## Security groups
 
-Security groups control traffic flow in cloud environments (such as AWS) through allow and deny rules. Since security groups deny traffic by default, accidental rule deletions or modifications can immediately block legitimate traffic between services.
+Security groups control traffic flow in cloud environments (such as AWS) through allow and deny rules. Because security groups deny traffic by default, accidental rule deletions or modifications can immediately block legitimate traffic between services.
 
-This section identifies:
-- Security group misconfigurations blocking traffic.
-- The specific services unable to communicate.
-- Recent changes to security group rules.
+This **Security Groups** section identifies:
+- Security group misconfigurations blocking traffic
+- The specific services unable to communicate
+- Recent changes to security group rules
 
 **Resolution**: 
 1. Click on a security group issue to open the side panel.
 2. Select **View in AWS** to navigate to the AWS console.
 3. Review and modify the inbound and outbound rules.
-4. Use the **Infrastructure Change Tracking** data in the side panel to identify when the problematic change occurred, making it easier to revert specific modifications.
+4. Use the **Infrastructure Change Tracking** data in the side panel to identify when the change occurred and revert it if necessary.
 
 ## Filtering
 
 Use the filters at the top of the page to narrow the scope of displayed issues. Available filters include:
 
-- **Service**: View problems affecting a particular service.
-- **Team**: Filter issues by team ownership.
+- **Service**: View issues affecting a particular service
+- **Team**: View issues owned by a specific team
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /network_monitoring/cloud_network_monitoring/setup
-[2]: /service_management/case_management/create_case
-[3]: /actions/workflows/build/
+[2]: /actions/workflows/build/
+[3]: /service_management/case_management/create_case
 [4]: /service_management/incident_management/declare/
