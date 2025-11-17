@@ -9,7 +9,7 @@ title: Data Streams Monitoring for IBM MQ
 | Language     | Library                                                                                        | Minimal tracer version                                                            | Recommended tracer version                                                            |
 |--------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
 | [.NET][2] | [IBMMQDotnetClient][3]           | {{< dsm-tracer-version lang="dotnet" lib="ibmmqdotnetclient" type="minimal" >}}          | {{< dsm-tracer-version lang="dotnet" lib="ibmmqdotnetclient" type="recommended" >}}          |
-| [Java][4]  | [IBM MQ classes for Java and JMS][5  | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="minimal" >}}          | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="recommended" >}}       |
+| [Java][4]  | [IBM MQ classes for Java and JMS][5]  | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="minimal" >}}          | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="recommended" >}}       |
 
 ### Limitations
 None of the IBM MQ tracers modify messages to add Data Streams Monitoring context information the way that tracers do for most other queue technologies. This is to avoid risk to customer services if unexpected additional fields appear in messages.
