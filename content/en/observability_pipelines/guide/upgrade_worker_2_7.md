@@ -21,7 +21,7 @@ To upgrade to Worker version 2.11.0:
 - APT: Run the command `apt-get install observability-pipelines-worker=2.11.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.11.0`.
 
-<div class="alert alert-info">After you have upgraded to Worker 2.11.0: For pipelines that were running Worker 2.10 or older, you must manually update your processors' filter queries to the updated Search Syntax.<br><br>See <a href="https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/">Upgrade Your Filter Queries to the New Search Syntax</a> for more information.</a></div>
+<div class="alert alert-info">For pipelines that are running Worker 2.10 or older:<br>- After you upgrade to Worker 2.11, your processors' filter queries continue to run the legacy search syntax.<br>- You must manually update your filter queries to the new Search Syntax and uncheck the <b>Use legacy search syntax</b> box.<br><br>See <a href="https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/">Upgrade Your Filter Queries to the New Search Syntax</a> for more information.</a></div>
 
 Version 2.11.0 gives you access to the following:
 
