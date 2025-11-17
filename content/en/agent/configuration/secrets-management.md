@@ -444,6 +444,7 @@ spec:
         secrets:
         - "database-secret"
 ```
+***Note***: Each namespace in the roles list must also be configured in the `WATCH_NAMESPACE` or `DD_AGENT_WATCH_NAMESPACE` environment variable on the Datadog Operator deployment.
 {{% /tab %}}
 {{% tab "Helm" %}}
 ```yaml
