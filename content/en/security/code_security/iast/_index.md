@@ -90,7 +90,7 @@ Datadog Code Security automatically provides the information teams need to ident
 
 {{< img src="/code_security/code_security_remediation.png" alt="Code Security vulnerability remediation" style="width:100%;" >}}
 
-When the [GitHub integration][7] is enabled, Code Security shows the first impacted version of a service, the commit that introduced the vulnerability, and a snippet of the vulnerable code. This information gives teams insight into where and when a vulnerability occurred and helps to prioritize their work.
+When the [GitHub integration][7] is d, Code Security shows the first impacted version of a service, the commit that introduced the vulnerability, and a snippet of the vulnerable code. This information gives teams insight into where and when a vulnerability occurred and helps to prioritize their work.
 
 {{< img src="/code_security/vulnerability_code_snippet.png" alt="Code vulnerability snippet" style="width:100%;" >}}
 
@@ -98,11 +98,24 @@ Detailed remediation steps are provided for each detected vulnerability.
 
 {{< img src="/code_security/remediation_recommendations.png" alt="Remediation recommendations" style="width:100%;" >}}
 
-Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking.
+Recommendations  you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking.
 
 {{< img src="/code_security/vulnerability_jira_ticket.png" alt="creating a Jira ticket from a vulnerability" style="width:100%;" >}}
 
 **Note:** To create Jira issues for vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][3] documentation, as well as the [Role Based Access Control][4] documentation.
+
+## Vulnerability lifecycle
+
+Datadog automatically manages the lifecycle of vulnerabilities detected by IAST to ensure findings remain accurate and relevant over time.
+
+- **Automatic closure:**
+Vulnerabilities detected by IAST are automatically closed by Datadog when they haven’t been observed for **14 days** since their last detection.
+
+- **Service version updates:**
+If a new version of the service is deployed in the environment where the vulnerability was originally detected, the vulnerability is automatically closed **24 hours** after it is no longer seen in that new version.
+
+- **Reopening logic:**
+If a vulnerability that was previously closed is detected again within the following **15 months**, Datadog automatically reopens it.
 
 ## Enable Runtime Code Analysis (IAST)
 
