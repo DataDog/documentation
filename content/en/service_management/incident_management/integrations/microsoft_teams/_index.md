@@ -1,5 +1,6 @@
 ---
 title: Integrate Microsoft Teams with Datadog Incident Management
+description: Integrate Microsoft Teams with Datadog Incident Management to automate incident channel creation, synchronize messages, and collaborate with your team directly within Microsoft Teams.
 further_reading:
 - link: "/service_management/incident_management/incident_settings/integrations"
   tag: "Documentation"
@@ -100,16 +101,6 @@ To declare an incident from a specific team:
 To manage an incident from a specific team:
 1. In an **incident channel**, click on the **Datadog** tab.
 1. Edit the incident details and attributes.
-
-### Updating incidents
-
-To update an incident:
-
-1. Start a conversation while in an incident team.
-2. Type `@Datadog` or use the `...` button to open the **Messaging extensions** menu and select the **Datadog** App.
-3. Select **Update Incident**.
-4. Complete the form with your desired information.
-5. Click **Update**.
 
 ### Sending messages to the timeline
 
