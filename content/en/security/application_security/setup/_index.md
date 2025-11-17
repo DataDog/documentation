@@ -35,6 +35,7 @@ Learn how to enable App and API Protection on all the following supported platfo
 {{< appsec-integrations >}}
   {{< appsec-integration name="NGINX" avatar="nginx" link="./nginx" >}}
   {{< appsec-integration name="Envoy" avatar="envoy" link="./envoy" >}}
+  {{< appsec-integration name="HAProxy" avatar="haproxy" link="./haproxy" >}}
 {{< /appsec-integrations >}}
 
 ## Hosts
