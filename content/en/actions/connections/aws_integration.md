@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Datadog Workflows and Actions can use your existing **Datadog AWS integration credentials** to perform read-only operations in your AWS environment.
+Datadog Workflows and Actions can use your existing Datadog AWS integration credentials to perform read-only operations in your AWS environment.
 This eliminates the need to manually configure a separate AWS Connection, simplifying onboarding and allowing immediate access to your AWS data.
 
 When configured, Datadog uses the same AWS credentials that power integrations such as **Amazon EC2**, **RDS**, and **S3 monitoring** to securely execute supported read-only actions.
