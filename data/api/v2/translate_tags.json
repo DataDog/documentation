@@ -67,6 +67,14 @@
     "name": "Case Management",
     "description": "View and manage cases and projects within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
   },
+  "case-management-attribute": {
+    "name": "Case Management Attribute",
+    "description": "View and configure custom attributes within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+  },
+  "case-management-type": {
+    "name": "Case Management Type",
+    "description": "View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+  },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
@@ -122,6 +130,10 @@
   "fastly-integration": {
     "name": "Fastly Integration",
     "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
+  },
+  "fleet-automation": {
+    "name": "Fleet Automation",
+    "description": "Manage automated deployments across your fleet of hosts.\n\nFleet Automation provides two types of deployments:\n\nConfiguration Deployments (`/configure`):\n- Apply configuration file changes to target hosts\n- Support merge-patch operations to update specific configuration fields\n- Support delete operations to remove configuration files\n- Useful for updating Datadog Agent settings, integration configs, and more\n\nPackage Upgrade Deployments (`/upgrade`):\n- Upgrade the Datadog Agent to specific versions"
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -225,7 +237,7 @@
   },
   "reference-tables": {
     "name": "Reference Tables",
-    "description": "Auto-generated tag Reference Tables"
+    "description": "View and manage Reference Tables in your organization."
   },
   "restriction-policies": {
     "name": "Restriction Policies",
@@ -234,6 +246,10 @@
   "roles": {
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
+  },
+  "rum-audience-management": {
+    "name": "Rum Audience Management",
+    "description": "Auto-generated tag Rum Audience Management"
   },
   "rum-metrics": {
     "name": "Rum Metrics",
@@ -287,9 +303,17 @@
     "name": "Spans Metrics",
     "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/) for more information."
   },
+  "static-analysis": {
+    "name": "Static Analysis",
+    "description": "API for static analysis"
+  },
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+  },
+  "team-connections": {
+    "name": "Team Connections",
+    "description": "View and manage relationships between Datadog teams and teams from external sources, such as GitHub."
   },
   "teams": {
     "name": "Teams",

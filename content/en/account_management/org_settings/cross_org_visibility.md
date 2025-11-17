@@ -25,7 +25,7 @@ A _source_ organization exposes data to a _destination_ organization through an 
 The following limitations apply to organization connections:
 - The source and destination organizations must be in the same [account][1]
 - The source and destination organizations must be in the same [site][11].
-- One organization can share with up to 5 other organizations.
+- Non-Enterprise organizations can share with a maximum of 5 other organizations.
 
 **Note**: After the connection is established, the destination organization can query the source organization's data in the same ways it can query its own data. This means that the source organization's data—including sensitive data—may be queried and displayed as permitted by the _destination organization's_ access-control and other settings. This may include, for example, the destination organization's ability to create [public Dashboards][10] using the source organization's data even if the source organization's own settings do not permit the creation of public Dashboards.
 
@@ -33,9 +33,11 @@ After you set up an organization connection, the exposed data is still stored in
 
 ### Scope
 
-Cross-organization visibility supports Metrics and Log Management telemetry in [Dashboard and Notebook widgets][2].
-
-All types of metrics are supported, including [custom metrics][3], [trace metrics][4], and [metrics generated from logs][5].
+Cross-organization visibility supports the following telemetry in [Dashboard and Notebook widgets][2]:
+* Metrics (all types supported, including [custom metrics][3], [trace metrics][4], and [metrics generated from logs][5])
+* Logs
+* CI Visibility pipelines
+* Test Optimization tests
 
 ## Configure connections
 

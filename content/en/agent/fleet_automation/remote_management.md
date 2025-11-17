@@ -31,10 +31,8 @@ Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and
 
 ## Enable Remote Agent Management
 1. Verify that [Remote Configuration is enabled for your organization][15].
-2. Confirm that your Agent version is 7.69 or later.
+2. Confirm that your Agent version is 7.69 or later (for Windows hosts, use 7.71.1 or later).
 3. Ensure that your Datadog Agent configuration (`datadog.yaml`) includes `remote_updates: true`, or alternatively set the environment variable `DD_REMOTE_UPDATES=true`. Enabling either option turns on Remote Agent Management for the Agent.
-
-<div class="alert alert-info">To configure Agents running on Windows hosts, use Agent version <strong>7.71.1 or later</strong>.</div>
 
 ## Upgrade Agents remotely
 

@@ -1,9 +1,9 @@
 ---
 aliases:
 - /es/graphing/widgets/event_stream/
-description: Muestra eventos filtrados del flujo de eventos.
+description: Muestra eventos filtrados del flujo (stream) de eventos.
 private: true
 title: Widget de flujo de eventos
 ---
 
-<div class="alert alert-danger">El widget de flujo de eventos es compatible con el <a href="https://docs.datadoghq.com/dashboards/widgets/list/">widget de lista</a>.</div>
+<div class="alert alert-danger">El flujo de eventos es compatible con la <a href="https://docs.datadoghq.com/dashboards/widgets/list/">lista de widgets</a>.</div>

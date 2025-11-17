@@ -24,15 +24,12 @@ further_reading:
 The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview. If you're interested in this feature and need access, complete this form. Learn more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
 {{< /callout >}}
 
-<div class="alert alert-danger">
-<h3>Disclaimers</h3>
-<ul>
-<li>The Datadog MCP Server is not supported for production use during the Preview.</li>
-<li>Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.</li>
-<li>The Datadog MCP Server is not available for organizations that require HIPAA compliance.</li>
-<li><i>Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (e.g., user prompts) leading to the use of MCP tools. The data is stored for 120 days.</i></li>
-</ul>
-</div>
+## Disclaimers
+
+- The Datadog MCP Server is not supported for production use during the Preview.
+- Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.
+- The Datadog MCP Server is not available for organizations that require HIPAA compliance.
+- Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
 ## Overview
 
@@ -59,6 +56,7 @@ The following AI clients are compatible with the Datadog MCP Server.
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
 | [Q CLI][10] | Amazon | For remote authentication, add `"oauthScopes": []` to the server [configuration](?tab=remoteauthentication#example-configurations). |
+| [Kiro][22] | Amazon | |
 | [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
@@ -216,6 +214,8 @@ The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through 
   }
 }
 {{< /code-block >}}
+
+For security, use a scoped API key and application key from a [service account][23] that has only the required permissions.
 
 ### Test access to the MCP Server
 
@@ -431,3 +431,5 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [19]: /account_management/rbac/permissions/#case-and-incident-management
 [20]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
 [21]: /synthetics/
+[22]: https://kiro.dev/
+[23]: /account_management/org_settings/service_accounts/

@@ -81,9 +81,9 @@ Sources, categories, and intents are available as facets and filters on relevant
 | [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | AAP and Cloud SIEM |
 | [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
-| [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | malware | Coinminer activity with known mining pools| CWS |
-| Tor | tor | Policy violations for user activity | AAP, Cloud SIEM, and CWS |
-| [Threatfox](https://threatfox.abuse.ch/) | malware | Identify hosts communicating with known malware infrastructure | Cloud SIEM, and CWS |
+| [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | cryptomining | Coinminer activity with known mining pools| Workload Protection and Cloud SIEM |
+| Tor | tor | Policy violations for user activity | App and API Protection, Cloud SIEM, and Workload Protection |
+| [Threatfox](https://threatfox.abuse.ch/) | malware | Identify hosts communicating with known malware infrastructure | Cloud SIEM, and Workload Protection |
 
 
 ### Threat Intelligence Categories
@@ -93,11 +93,12 @@ Sources, categories, and intents are available as facets and filters on relevant
 | residential_proxy | suspicious | IP addresses | Reputation for credential stuffing and fraud | AAP and Cloud SIEM |
 | botnet_proxy | suspicious | IP addresses | Reputation for being part of a botnet and contributing to distributed attacks | AAP and Cloud SIEM |
 | malware | malicious | application library versions, file hashes | Malicious packages and communication with mining pools| CWS |
-| scanner | suspicious | IP addresses | Reputation for scanners | AAP and Cloud SIEM |
+| scanner | suspicious | IP addresses | Reputation for scanners | App and API Protection, Workload Protection, and Cloud SIEM |
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | AAP and Cloud SIEM |
-| tor | suspicious | IP addresses  | Corporate policy violations for user activity | AAP and Cloud SIEM |
+| tor | suspicious | IP addresses  | Corporate policy violations for user activity | App and API Protection, Workload Protection, and Cloud SIEM |
 | disposable_email | suspicious | Domain  | Detect product usage from disposable email addresses | AAP |
 | corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Client SIEM |
+| cryptomining | malicious | IP addresses | IP addresses associated with cryptomining activities | AAP, CWS, and Cloud SIEM |
 
 ### Threat Intelligence Intents
 | Intent | Use Case |

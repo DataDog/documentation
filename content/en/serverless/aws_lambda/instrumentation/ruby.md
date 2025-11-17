@@ -53,7 +53,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 2. Install the Datadog CLI client
 
     ```sh
-    npm install -g @datadog/datadog-ci
+    npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
     ```
 
 3. If you are new to Datadog serverless monitoring, launch the Datadog CLI in the interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
@@ -157,6 +157,11 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="ruby" layer="ruby" layerParamTypescript="rubyLayerVersion" layerParamPython="ruby_layer_version">}}
+{{% /tab %}}
+
 {{% tab "Container Image" %}}
 
 1. Install the Datadog Lambda Library

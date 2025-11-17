@@ -110,6 +110,13 @@ WHERE delivery_date IS NULL {{< /code-block >}}
 FROM customers
 LIMIT 10 {{< /code-block >}}
 
+`OFFSET`
+: Skips a specified number of records before starting to return records from the query.
+
+    {{< code-block lang="sql" >}}SELECT *
+FROM employees
+OFFSET 20 {{< /code-block >}}
+
 `ORDER BY`
 : Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.
 
@@ -229,6 +236,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                                                                                                                                              |
 | `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                                                                                                                                            |
 | `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                                                                                                                                                 |
+| `POWER(numeric base, numeric exponent)`          | numeric                               | Returns the value of base raised to the power of exponent.                                                                                                                                        |
 | `LOWER(string s)`                                | string                                | Returns the string as lowercase.                                                                                                                                                                  |
 | `UPPER(string s)`                                | string                                | Returns the string as uppercase.                                                                                                                                                                  |
 | `ABS(numeric n)`                                 | numeric                               | Returns the absolute value.                                                                                                                                                                       |
@@ -314,6 +322,12 @@ FROM products
 {{< code-block lang="sql" >}}
 SELECT ROUND(price) AS rounded_price
 FROM products
+{{< /code-block >}}
+
+### `POWER`
+{{< code-block lang="sql" >}}
+SELECT POWER(response_time, 2) AS squared_response_time
+FROM logs
 {{< /code-block >}}
 
 ### `LOWER`
@@ -724,6 +738,7 @@ This table provides an overview of the supported window functions. For comprehen
 | json_extract_path_text(text json, text path…) | text         | Extracts a JSON sub-object as text, defined by the path. Its behavior is equivalent to the [Postgres function with the same name][3]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax. |
 | json_extract_path(text json, text path…)      | JSON         | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.                                                                                                                                                                                                        |
 | json_array_elements(text json)                | rows of JSON | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
+| json_array_elements_text(text json)           | rows of text | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
 ## Table functions
 
@@ -793,9 +808,6 @@ ORDER BY value DESC;{{< /code-block >}}
 </table>
 
 
-
-
-
 ## Tags
 
 DDSQL exposes tags as an `hstore` type, which is inspired by PostgreSQL. You can access the values for specific tag keys using the PostgreSQL arrow operator. For example:
@@ -824,6 +836,21 @@ SELECT *
 FROM k8s.daemonsets da INNER JOIN k8s.deployments de
 ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 ```
+
+Additionally, you can extract tag keys and values into individual arrays of text:
+
+```sql
+SELECT akeys(tags), avals(tags)
+FROM aws.ec2_instance
+```
+
+### HSTORE functions and operators
+
+| Name                                          | Return type   | Description                                                                                      |
+|-----------------------------------------------|---------------|---------------------------------------------------------------------------------------------------
+| tags -> 'text'                                  | Text          | Gets the value for a given key. Returns `null` if key is not present.                             |
+| akeys(hstore tags)                            | Array of text | Gets the keys of an HSTORE as an array                                                            |
+| avals(hstore tags)                            | Array of text | Gets the values of an HSTORE as an array                                                          |
 
 ## Further reading
 

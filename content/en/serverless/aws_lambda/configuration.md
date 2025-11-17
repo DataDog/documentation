@@ -45,6 +45,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Configure Auto-linking for DynamoDB PutItem](#configure-auto-linking-for-dynamodb-putitem)
 - [Visualize and model AWS services correctly](#visualize-and-model-aws-services-by-resource-name)
 - [Send logs to Observability Pipelines](#sending-data-to-observability-pipelines)
+- [Reload API key secret periodically](#reload-api-key-secret-periodically)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
@@ -797,6 +798,14 @@ To enable this feature, set these environment variables:
 - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`: `<YOUR_OBSERVABILITY_PIPELINE_URL>`
 
 **Note**: Your Observability Pipeline must use `Http Server` as the source to process logs from the Lambda extension. Do not use `Datadog Agent` as the source.
+
+## Reload API key secret periodically
+
+If you specify the Datadog API key using `DD_API_KEY_SECRET_ARN`, you can also set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to periodically reload the secret. For example, if you set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, then the secret is reloaded when the API key is needed to send data, and it has been more than 43200 seconds since the last load.
+
+Example use case: For security, every day (86400 seconds), the API key is rotated and the secret is updated to the new key, and the old API key is kept valid for another day as a grace period. In this case, you can set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, so the API key is reloaded during the grace period of the old key.
+
+This is available for version 88+ of the Datadog Lambda Extension.
 
 ## Troubleshoot
 

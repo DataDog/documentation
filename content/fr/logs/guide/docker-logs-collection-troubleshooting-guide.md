@@ -134,30 +134,6 @@ Si vos logs ne sont pas transmis à la plate-forme Datadog alors que le statut d
 * Le port utilisé pour l'envoi de logs à Datadog (10516) est bloqué
 * Votre conteneur utilise un pilote de logging autre que celui attendu par l'Agent
 
-#### Le trafic sortant du port 10516 est bloqué
-
-L'Agent Datadog envoie ses logs à Datadog par TCP via le port 10516. Si cette connexion n'est pas disponible, les logs ne sont pas envoyés et une erreur est enregistrée dans le fichier `agent.log`.
-
-Vous pouvez tester manuellement votre connexion avec OpenSSL, GnuTLS ou un autre client SSL/TLS. Pour OpenSSL, exécutez la commande suivante :
-
-```shell
-openssl s_client -connect intake.logs.datadoghq.com:10516
-```
-
-Pour GnuTLS, exécutez la commande suivante :
-
-```shell
-gnutls-cli intake.logs.datadoghq.com:10516
-```
-
-Envoyez ensuite un log comme suit :
-
-```text
-<CLÉ_API> Ceci est un message test
-```
-
-Si vous ne pouvez pas ouvrir le port 10516, vous pouvez configurer l'Agent Datadog de façon à envoyer les logs via HTTPS en définissant la variable d'environnement `DD_LOGS_CONFIG_USE_HTTP` sur `true` :
-
 #### Vos conteneurs n'utilisent pas le pilote de logging JSON
 
 Étant donné que Docker utilise le pilote de logging json-file par défaut, l'Agent de conteneur tente d'abord de recueillir les logs à partir de celui-ci. Si vos conteneurs sont configurés de façon à utiliser un autre pilote de logging, l'Agent indique qu'il parvient à trouver vos conteneurs, mais qu'il n'est pas en mesure de recueillir leurs logs. L'Agent de conteneur peut également être configuré de façon à lire les logs à partir du pilote journald.

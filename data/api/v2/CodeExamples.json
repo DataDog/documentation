@@ -105,25 +105,39 @@
       "description": "Update datastore returns \"OK\" response"
     }
   ],
+  "CreateAwsOnDemandTask": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Create AWS on demand task returns \"AWS on demand task created successfully.\" response"
+    }
+  ],
   "CreateAzureScanOptions": [
     {
       "group": "agentless_scanning",
       "suffix": "",
-      "description": "Create azure scan options returns \"Created\" response"
+      "description": "Create Azure scan options returns \"Created\" response"
+    }
+  ],
+  "CreateGcpScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Create GCP scan options returns \"Agentless scan options enabled successfully.\" response"
     }
   ],
   "UpdateAwsScanOptions": [
     {
       "group": "agentless_scanning",
       "suffix": "",
-      "description": "Patch AWS Scan Options returns \"No Content\" response"
+      "description": "Update AWS scan options returns \"No Content\" response"
     }
   ],
-  "CreateAwsOnDemandTask": [
+  "UpdateGcpScanOptions": [
     {
       "group": "agentless_scanning",
       "suffix": "",
-      "description": "Post an AWS on demand task returns \"AWS on demand task created successfully.\" response"
+      "description": "Update GCP scan options returns \"OK\" response"
     }
   ],
   "CreateApp": [
@@ -313,6 +327,13 @@
       "description": "Assign case returns \"OK\" response"
     }
   ],
+  "CommentCase": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Comment case returns \"OK\" response"
+    }
+  ],
   "CreateCase": [
     {
       "group": "case_management",
@@ -341,6 +362,13 @@
       "description": "Update case attributes returns \"OK\" response"
     }
   ],
+  "UpdateCaseDescription": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case description returns \"OK\" response"
+    }
+  ],
   "UpdatePriority": [
     {
       "group": "case_management",
@@ -353,6 +381,27 @@
       "group": "case_management",
       "suffix": "",
       "description": "Update case status returns \"OK\" response"
+    }
+  ],
+  "UpdateCaseTitle": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update case title returns \"OK\" response"
+    }
+  ],
+  "CreateCustomAttributeConfig": [
+    {
+      "group": "case_management_attribute",
+      "suffix": "",
+      "description": "Create custom attribute config for a case type returns \"CREATED\" response"
+    }
+  ],
+  "CreateCaseType": [
+    {
+      "group": "case_management_type",
+      "suffix": "",
+      "description": "Create a case type returns \"CREATED\" response"
     }
   ],
   "CreateCostAWSCURConfig": [
@@ -1483,11 +1532,11 @@
       "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
-  "RunHistoricalJob": [
+  "RunThreatHuntingJob": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Run a historical job returns \"Status created\" response"
+      "description": "Run a threat hunting job returns \"Status created\" response"
     }
   ],
   "TestSecurityMonitoringRule": [

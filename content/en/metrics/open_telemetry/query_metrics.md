@@ -10,7 +10,7 @@ further_reading:
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-and-opentelemetry-metric-compatibility/" btn_hidden="false" >}}
 Querying across Datadog and OpenTelemetry metrics is in Preview. To enable this feature, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}} 
+{{< /callout >}}
 
 Many organizations use OpenTelemetry (OTel) alongside Datadog, creating hybrid environments where some hosts emit OTel metrics and others emit Datadog metrics. Because OTel and Datadog metrics often use different naming conventions and semantic definitions, creating a unified view of your infrastructure in these environments can be challenging.
 
@@ -51,8 +51,6 @@ If you query for `otel.system.cpu.load_average.15m`, apply a max space aggregati
 2. Combines the timeseries from both `otel.system.cpu.load_average.15m` and `system.load.15`.
 3. Applies the max aggregation across all datapoints from both sources.
 
-This uses the [equiv_otel][2] function to merge the data.
-
 ## Understand metric sources and mappings
 
 To provide clarity when querying, the metric source and equivalent metrics are displayed:
@@ -67,7 +65,7 @@ To provide clarity when querying, the metric source and equivalent metrics are d
 
 For a comprehensive view of how specific OTel and Datadog metrics relate, check the Metrics Summary page:
 
-1. Navigate to [**Metrics > Summary**][3].
+1. Navigate to [**Metrics > Summary**][2].
 2. Search for a known Datadog or OTel metric.
 3. Open the **Metric Details** side panel.
 
@@ -86,5 +84,4 @@ You can also see the tag-based logic used for these mappings. Hover over an equi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/explorer
-[2]: /opentelemetry/guide/combining_otel_and_datadog_metrics/
-[3]: https://app.datadoghq.com/metric/summary
+[2]: https://app.datadoghq.com/metric/summary

@@ -1,6 +1,9 @@
 ---
 title: Status Pages
 further_reading:
+- link: https://www.datadoghq.com/blog/status-pages
+  tag: Blog
+  text: Keep stakeholders informed with Datadog Status Pages
 - link: "service_management/incident_management/"
   tag: "Documentation"
   text: "Learn more about Incident Management"
@@ -10,6 +13,9 @@ further_reading:
 - link: "service_management/incident_management/integrations/status_pages"
   tag: "Documentation"
   text: "Integrate Datadog Status Pages with Incident Management"
+- link: "https://www.datadoghq.com/blog/status-pages/"
+  tag: "Blog"
+  text: "Keep stakeholders informed with Datadog Status Pages"
 ---
 
 ## Overview

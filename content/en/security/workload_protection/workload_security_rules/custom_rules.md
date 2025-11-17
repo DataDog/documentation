@@ -38,7 +38,23 @@ You can create and deploy different custom policies containing rules you want to
 7. Add tags to the policy to target specific infrastructure.
 8. To deploy the policy, toggle the switch next to **Policy is disabled** and confirm.
 
-### Conflicting Rules
+### Pin a Datadog-managed policy to its current version
+
+<div class="alert alert-info">Policy pinning is supported in Agent version 7.71.0 and later. Previous Agents will continue to receive the latest policy updates automatically.</div>
+
+When Datadog-managed policies are updated by Datadog, they are automatically deployed to your infrastructure.
+
+To control when a new policy version is deployed to your infrastructure, you can pin the policy to its current version. Pinning a policy version prevents policy updates from being automatically rolled out when Datadog releases a new policy version. 
+
+To pin a policy, do the following:
+
+1. Go to [Policies][3].
+2. Click a Datadog-managed policy.
+3. In **Version**, click the pin option.
+   If your infrastructure is running Agents below version 7.71.0, an outdated agents warning appears. View and upgrade your Agent version in [Fleet Automation][19].
+4. Click **Pin**. To unpin the policy version, click the pin option again.
+
+### Conflicting rules
 
 When two policies deployed to the same host contain the same rule with a different status, the most severe aciton will be taken (Blocking > Monitoring > Disabled).
 
@@ -84,7 +100,7 @@ To use the Assisted rule creator:
 
 1. Go to [Agent Configuration][3].
 2. Create or open a policy.
-3. In **Actions**, select **Assisted rule creator**.
+3. In **Add Agent Rule**, select **Assisted rule creator**.
 4. Define the detection. To monitor your resource effectively, you have the following detection type options:
    - To detect nonstandard and suspicious changes to files, select **File integrity monitoring (FIM)**.
    - To track and analyze system software processes for malicious behavior or policy violations, select **Process activity monitoring**.
@@ -238,3 +254,4 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 [16]: /security/workload_protection/agent_expressions/
 [17]: #prioritize-policies
 [18]: #apply-tags
+[19]: https://app.datadoghq.com/fleet
