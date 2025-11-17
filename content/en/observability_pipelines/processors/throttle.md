@@ -32,10 +32,10 @@ If you use the following processor settings:
 The capacity replenishment rate is:
 $$\text"1000 events" / \text"60 minutes" ≈ \text"17 events"/ \text"minute" ≈ \text"0.28 events"/ \text"second"$$
 
-If `T` is the time when the processor is enabled and the processor receives 5000 events when it is enabled, the number of events that the processor allows through based on the `T` is as follows:
-`T + 0` minutes (when the processor is enabled):
-- 1000 events processed.
-- 4000 events dropped.
+If `T` is the time when the processor is enabled and the processor receives 5000 events at that time, the number of events that the processor allows through based on `T` is as follows:
+- `T + 0` minutes (when the processor is enabled):
+    - 1000 events processed.
+    - 4000 events dropped.
 - `T + 1` minute: ~17 events can be processed
 - `T + 2` minutes: ~17 events can be processed
 - ...the processor continues processing events at a steady rate of ~17 events per minute and dropping the rest until the next minute.
