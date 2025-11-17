@@ -28,7 +28,7 @@ Automated Analysis automatically detects performance issues in your applications
 
 This reduces the profiling expertise needed to identify and resolve performance issues in your applications that might otherwise go unnoticed.
 
-{{< img src="profiler/profiling_automated_analysis_thread_timeline.png" alt="The Profiler Thread Time line showing a Thrown Exception insight" style="width:100%;" >}}
+{{< img src="profiler/profiling_automated_analysis_detail.png" alt="The Profiler Thread Time line showing a Thrown Exception insight" style="width:100%;" >}}
 
 ## Explore insights
 Access Automated Analysis from the [Profile explorer][1]. Insights are displayed:
@@ -45,11 +45,23 @@ Access Automated Analysis from the [Profile explorer][1]. Insights are displayed
 Click an insight to see a high-level summary that explains the issue, contextual insights from profiling data, and recommended next steps.
 {{< img src="profiler/profiling_automated_analysis_detail.png" alt="Expanded Profiling Insights showing the details of a detected Issue" style="width:100%;">}}
 
+The Insights list page provides a centralized view of all detected issues across your services. It helps teams quickly understand what’s happening in their environments, prioritize what to investigate, and track whether recurring problems are improving over time.
+
+{{< img  src="profiler/profiling_automated_analysis_list_page_home.png" alt="The list page showing detected insights across services" style="width:100%;">}}
+
+Each row represents an insight type, summarizing:
+
+- Service and runtime affected
+- Insight type (for example, GC Pauses or High Lock Contention)
+- Severity (for example, Info or Warning)
+
+You can filter insights by runtime, service, o environment to narrow the list to what matters most. Teams often use this view to identify patterns—such as multiple services affected by the same inefficiency. Clicking on an insight opens its detail panel.
+
 ## Supported insights
 
 Automated Analysis supports finding the following insights:
 
-| Name                      | Severity | Description |
+| Name                      | Priority | Description |
 |---------------------------|----------|-------------|
 | Duplicated Flags          | Info     | Triggers if duplicate flags were provided to the runtime (for example, `-Xmx2g -Xmx5g`). This is a problem as it may lead to changes not having the expected effect. |
 | Explicit GC               | Info     | Triggers if there are System.gc() calls. |
