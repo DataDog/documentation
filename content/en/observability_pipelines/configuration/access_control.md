@@ -1,6 +1,8 @@
 ---
 title: Access Control
 disable_toc: false
+aliases:
+    - /observability_pipelines/access_control/
 ---
 
 ## Overview
@@ -84,7 +86,7 @@ To use granular access controls to limit access to Live Capture for a specific p
 1. Click **Edit Access** > **Live Capture Access**.
 1. Click **Restrict Access**.
 1. The **Organization access** section shows that members of your organization have **Viewer** access by default. Use the dropdown menu to select what kind of access you want them to have.
-1. Click the dropdown menu in the **Restricted* section to set access levels for Teams, roles, users, or service accounts based on your use case.
+1. Click the dropdown menu in the **Restricted** section to set access levels for Teams, roles, users, or service accounts based on your use case.
 1. Click **Save**.
 
 To restore full access to Live Capture for a pipeline:
