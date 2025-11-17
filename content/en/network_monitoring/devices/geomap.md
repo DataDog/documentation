@@ -19,34 +19,41 @@ further_reading:
 
 ## Overview
 
-[Device Geomap][1] displays the geographic distribution of your network devices discovered through Network Device Monitoring (NDM). It plots devices on a geographical map based on their configured locations, allowing you to visualize site coverage, assess connectivity, and monitor regional network health. Use it to identify device outages, latency issues, or coverage gaps across distributed environments.
+[Device Geomap][1] displays the geographic distribution of your network devices discovered through Network Device Monitoring (NDM). Using the [Geomap Widget points visualization][11], it plots devices on a geographical map based on their configured locations, allowing you to visualize site coverage, assess connectivity, and monitor regional network health. Use it to identify device outages, latency issues, or coverage gaps across distributed environments.
 
 {{< img src="network_device_monitoring/geomap/device_geomap.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
 
 ### Prerequisites
 
 - [Network Device Monitoring][2] configured on your devices.
+- Devices must be tagged using the `geomap:<value>` format, where `<value>` is the location identifier. 
 
 ## Configuring locations
 
-Devices appear on the Device GeoMap when tagged with `geomap:<value>` and mapped to geographic coordinates. Configure device locations using the following steps:
+Devices appear on the Device GeoMap when tagged with `geomap:<value>` and mapped to geographic coordinates.
 
-1. From the Device GeoMap page, click **Add locations →** in the top right corner. This opens the [GeoMap locations settings][3] page, which provides multiple tabs to manage device locations:
+Configure device locations using the following steps:
 
-- **All**: Displays all devices with `geomap` tags, regardless of their mapping status.
-- **Needs Coordinates**: Shows devices tagged with `geomap` values that don't have corresponding location coordinates configured.
-- **On Map**: Lists tagged devices with configured coordinates that are displayed on the GeoMap.
-- **Unused**: Shows location mappings (coordinates) that have been configured but are not associated with any tagged devices.
+1. Tag devices using the `geomap:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
 
-{{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device GeoMap, highlighting the All tab." style="width:100%;" >}}
+   {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
 
-2. On the settings page, click **+ Add mapping** and enter the location value along with its latitude and longitude coordinates in [decimal degrees][10] notation. To bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown and use the provided template.
+2. From the Device GeoMap page, click **Add locations →** in the top right corner. This opens the [GeoMap locations settings][3] page, which provides multiple tabs to manage device locations:
 
-{{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
+   - **All**: Displays all devices with `geomap` tags, regardless of their mapping status.
+   - **Needs Coordinates**: Shows devices tagged with `geomap` values that don't have corresponding location coordinates configured.
+   - **On Map**: Lists tagged devices with configured coordinates that are displayed on the GeoMap.
+   - **Unused**: Shows location mappings (coordinates) that have been configured but are not associated with any tagged devices.
 
-3. Tag devices using the `geomap:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
+   {{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device GeoMap, highlighting the All tab." style="width:100%;" >}}
 
-{{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
+3. On the settings page, click **+ Add mapping** and enter the location value along with its latitude and longitude coordinates in [decimal degrees][10] notation. 
+
+   {{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Settings page of Device GeoMap, displaying the Add Mapping screen with fields for location, latitude, and longitude." style="width:100%;" >}}
+
+4. Optionally, to bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown and use the provided template.
+
+   {{< img src="network_device_monitoring/geomap/mapping_csv.png" alt="Settings page of Device GeoMap, displaying the Import from CSV option." style="width:100%;" >}}
 
 ## Viewing devices
 
@@ -91,3 +98,4 @@ If a device doesn't appear on the map after tagging:
 [8]: /network_monitoring/devices/topology
 [9]: /network_monitoring/devices/geomap
 [10]: https://en.wikipedia.org/wiki/Decimal_degrees
+[11]: https://docs.datadoghq.com/dashboards/widgets/geomap/?tab=points
