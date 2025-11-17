@@ -1508,11 +1508,6 @@ menu:
       identifier: bits_ai_mcp_server
       parent: bits_ai
       weight: 4
-    - name: Kubernetes Remediation
-      url: containers/bits_ai_kubernetes_remediation
-      identifier: bits_ai_kubernetes_remediation
-      parent: bits_ai
-      weight: 5
     - name: Dashboards
       url: dashboards/
       pre: dashboard
