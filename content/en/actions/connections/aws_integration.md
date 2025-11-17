@@ -47,7 +47,7 @@ Make sure that:
 - The integration is configured with the **Executor** permission in the Datadog AWS Integration configuration page (see below).
 
 To configure the **Executor** permission in Datadog AWS Integration: 
-- In Datadog, navigate to "Integrations" then open the "Amazon Web Services" configuration page.
+- In Datadog, navigate to **Integration** then open the **Amazon Web Services** configuration page.
 - Select the AWS Account connected to Datadog that you want to run actions with. If you haven't already configured the AWS Integration, follow the [AWS Integration setup guide](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).
 - Click on **Set Permissions**:
 
