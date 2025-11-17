@@ -52696,14 +52696,31 @@ components:
     TeamSyncAttributes:
       description: Team sync attributes.
       properties:
+        frequency:
+          $ref: '#/components/schemas/TeamSyncAttributesFrequency'
         source:
           $ref: '#/components/schemas/TeamSyncAttributesSource'
+        sync_membership:
+          $ref: '#/components/schemas/TeamSyncAttributesSyncMembership'
         type:
           $ref: '#/components/schemas/TeamSyncAttributesType'
       required:
       - source
       - type
       type: object
+    TeamSyncAttributesFrequency:
+      description: How often the sync process should be run. Defaults to `once` when
+        not provided.
+      enum:
+      - once
+      - continuously
+      - paused
+      example: once
+      type: string
+      x-enum-varnames:
+      - ONCE
+      - CONTINUOUSLY
+      - PAUSED
     TeamSyncAttributesSource:
       description: The external source platform for team synchronization. Only "github"
         is supported.
@@ -52713,15 +52730,22 @@ components:
       type: string
       x-enum-varnames:
       - GITHUB
+    TeamSyncAttributesSyncMembership:
+      description: Whether to sync members from the external team to the Datadog team.
+        Defaults to `false` when not provided.
+      example: true
+      type: boolean
     TeamSyncAttributesType:
-      description: The type of synchronization operation. Only "link" is supported,
-        which links existing teams by matching names.
+      description: The type of synchronization operation. "link" connects teams by
+        matching names. "provision" creates new teams when no match is found.
       enum:
       - link
+      - provision
       example: link
       type: string
       x-enum-varnames:
       - LINK
+      - PROVISION
     TeamSyncBulkType:
       description: Team sync bulk type.
       enum:
@@ -52731,10 +52755,15 @@ components:
       x-enum-varnames:
       - TEAM_SYNC_BULK
     TeamSyncData:
-      description: Team sync data.
+      description: A configuration governing syncing between Datadog teams and teams
+        from an external system.
       properties:
         attributes:
           $ref: '#/components/schemas/TeamSyncAttributes'
+        id:
+          description: The sync's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
         type:
           $ref: '#/components/schemas/TeamSyncBulkType'
       required:
@@ -52754,6 +52783,15 @@ components:
           $ref: '#/components/schemas/TeamSyncData'
       required:
       - data
+      type: object
+    TeamSyncResponse:
+      description: Team sync configurations response.
+      properties:
+        data:
+          description: List of team sync configurations
+          items:
+            $ref: '#/components/schemas/TeamSyncData'
+          type: array
       type: object
     TeamTarget:
       description: Represents a team target for an escalation policy step, including
@@ -83048,6 +83086,53 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/sync:
+    get:
+      description: 'Get all team synchronization configurations.
+
+        Returns a list of configurations used for linking or provisioning teams with
+        external sources like GitHub.'
+      operationId: GetTeamSync
+      parameters:
+      - description: Filter by the external source platform for team synchronization
+        in: query
+        name: filter[source]
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamSyncAttributesSource'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamSyncResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Team sync configurations not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team sync configurations
+      tags:
+      - Teams
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: 'This endpoint attempts to link your existing Datadog teams with
         GitHub teams by matching their names.
@@ -83074,7 +83159,8 @@ paths:
         using a normalized exact match; case is ignored and spaces are removed. No
         modifications are made
 
-        to teams in GitHub. This will not create new Teams in Datadog.'
+        to teams in GitHub. This only creates new teams in Datadog when type is set
+        to `provision`.'
       operationId: SyncTeams
       requestBody:
         content:
