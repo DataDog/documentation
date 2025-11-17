@@ -449,7 +449,7 @@ components:
         type: string
     GetIssueIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response.
+        in the response. Possible values are `assignee`, `case`, and `team_owners`.
       explode: false
       in: query
       name: include
@@ -1003,7 +1003,8 @@ components:
         $ref: '#/components/schemas/ServiceDefinitionSchemaVersions'
     SearchIssuesIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response.
+        in the response. Possible values are `issue`, `issue.assignee`, `issue.case`,
+        and `issue.team_owners`.
       explode: false
       in: query
       name: include
@@ -11514,6 +11515,35 @@ components:
             $ref: '#/components/schemas/ConfluentResourceResponseData'
           type: array
       type: object
+    ConnectedTeamRef:
+      description: Reference to a team from an external system.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConnectedTeamRefData'
+      type: object
+    ConnectedTeamRefData:
+      description: Reference to connected external team.
+      properties:
+        id:
+          description: The connected team ID as it is referenced throughout the Datadog
+            ecosystem.
+          example: '@GitHubOrg/team-handle'
+          type: string
+        type:
+          $ref: '#/components/schemas/ConnectedTeamRefDataType'
+      required:
+      - id
+      - type
+      type: object
+    ConnectedTeamRefDataType:
+      default: github_team
+      description: External team resource type.
+      enum:
+      - github_team
+      example: github_team
+      type: string
+      x-enum-varnames:
+      - GITHUB_TEAM
     Connection:
       description: The definition of `Connection` object.
       properties:
@@ -11577,6 +11607,50 @@ components:
       - connectionGroupId
       - label
       - tags
+      type: object
+    ConnectionsPagePagination:
+      description: Page-based pagination metadata.
+      properties:
+        first_number:
+          description: The first page number.
+          format: int64
+          type: integer
+        last_number:
+          description: The last page number.
+          format: int64
+          type: integer
+        next_number:
+          description: The next page number.
+          format: int64
+          nullable: true
+          type: integer
+        number:
+          description: The current page number.
+          format: int64
+          type: integer
+        prev_number:
+          description: The previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        size:
+          description: The page size.
+          format: int64
+          type: integer
+        total:
+          description: Total connections matching request.
+          format: int64
+          type: integer
+        type:
+          description: Pagination type.
+          example: number_size
+          type: string
+      type: object
+    ConnectionsResponseMeta:
+      description: Connections response metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/ConnectionsPagePagination'
       type: object
     Container:
       description: Container object.
@@ -47424,6 +47498,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         update_date:
           description: A Unix millisecond timestamp given the update date of the suppression
             rule.
@@ -47485,6 +47567,14 @@ components:
             same syntax as the queries to search signals in the Signals Explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
       required:
       - name
       - enabled
@@ -47580,6 +47670,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         version:
           description: The current version of the suppression. This is optional, but
             it can help prevent concurrent modifications.
@@ -51778,6 +51876,111 @@ components:
       - handle
       - name
       type: object
+    TeamConnection:
+      description: A relationship between a Datadog team and a team from another external
+        system.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamConnectionAttributes'
+        id:
+          description: The unique identifier of the team connection.
+          example: 12345678-1234-5678-9abc-123456789012
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamConnectionRelationships'
+        type:
+          $ref: '#/components/schemas/TeamConnectionType'
+      required:
+      - id
+      - type
+      type: object
+    TeamConnectionAttributes:
+      description: Attributes of the team connection.
+      properties:
+        managed_by:
+          description: The entity that manages this team connection.
+          example: github_sync
+          type: string
+        source:
+          description: The name of the external source.
+          example: github
+          type: string
+      type: object
+    TeamConnectionCreateData:
+      description: Data for creating a team connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamConnectionAttributes'
+        relationships:
+          $ref: '#/components/schemas/TeamConnectionRelationships'
+        type:
+          $ref: '#/components/schemas/TeamConnectionType'
+      required:
+      - type
+      type: object
+    TeamConnectionCreateRequest:
+      description: Request for creating team connections.
+      properties:
+        data:
+          description: Array of team connections to create.
+          items:
+            $ref: '#/components/schemas/TeamConnectionCreateData'
+          type: array
+      required:
+      - data
+      type: object
+    TeamConnectionDeleteRequest:
+      description: Request for deleting team connections.
+      properties:
+        data:
+          description: Array of team connection IDs to delete.
+          items:
+            $ref: '#/components/schemas/TeamConnectionDeleteRequestDataItem'
+          type: array
+      required:
+      - data
+      type: object
+    TeamConnectionDeleteRequestDataItem:
+      description: A collection of connection ids to delete.
+      properties:
+        id:
+          description: The unique identifier of the team connection to delete.
+          example: 12345678-1234-5678-9abc-123456789012
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamConnectionType'
+      required:
+      - id
+      - type
+      type: object
+    TeamConnectionRelationships:
+      description: Relationships of the team connection.
+      properties:
+        connected_team:
+          $ref: '#/components/schemas/ConnectedTeamRef'
+        team:
+          $ref: '#/components/schemas/TeamRef'
+      type: object
+    TeamConnectionType:
+      default: team_connection
+      description: Team connection resource type.
+      enum:
+      - team_connection
+      example: team_connection
+      type: string
+      x-enum-varnames:
+      - TEAM_CONNECTION
+    TeamConnectionsResponse:
+      description: Response containing information about multiple team connections.
+      properties:
+        data:
+          description: Array of team connections.
+          items:
+            $ref: '#/components/schemas/TeamConnection'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ConnectionsResponseMeta'
+      type: object
     TeamCreate:
       description: Team create
       properties:
@@ -52195,6 +52398,34 @@ components:
             $ref: '#/components/schemas/TeamPermissionSetting'
           type: array
       type: object
+    TeamRef:
+      description: Reference to a Datadog team.
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamRefData'
+      type: object
+    TeamRefData:
+      description: Reference to a Datadog team.
+      properties:
+        id:
+          description: The Datadog team ID.
+          example: 87654321-4321-8765-dcba-210987654321
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamRefDataType'
+      required:
+      - id
+      - type
+      type: object
+    TeamRefDataType:
+      default: team
+      description: Datadog team resource type.
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
     TeamReference:
       description: Provides a reference to a team, including ID, type, and basic attributes/relationships.
       properties:
@@ -52465,14 +52696,31 @@ components:
     TeamSyncAttributes:
       description: Team sync attributes.
       properties:
+        frequency:
+          $ref: '#/components/schemas/TeamSyncAttributesFrequency'
         source:
           $ref: '#/components/schemas/TeamSyncAttributesSource'
+        sync_membership:
+          $ref: '#/components/schemas/TeamSyncAttributesSyncMembership'
         type:
           $ref: '#/components/schemas/TeamSyncAttributesType'
       required:
       - source
       - type
       type: object
+    TeamSyncAttributesFrequency:
+      description: How often the sync process should be run. Defaults to `once` when
+        not provided.
+      enum:
+      - once
+      - continuously
+      - paused
+      example: once
+      type: string
+      x-enum-varnames:
+      - ONCE
+      - CONTINUOUSLY
+      - PAUSED
     TeamSyncAttributesSource:
       description: The external source platform for team synchronization. Only "github"
         is supported.
@@ -52482,15 +52730,22 @@ components:
       type: string
       x-enum-varnames:
       - GITHUB
+    TeamSyncAttributesSyncMembership:
+      description: Whether to sync members from the external team to the Datadog team.
+        Defaults to `false` when not provided.
+      example: true
+      type: boolean
     TeamSyncAttributesType:
-      description: The type of synchronization operation. Only "link" is supported,
-        which links existing teams by matching names.
+      description: The type of synchronization operation. "link" connects teams by
+        matching names. "provision" creates new teams when no match is found.
       enum:
       - link
+      - provision
       example: link
       type: string
       x-enum-varnames:
       - LINK
+      - PROVISION
     TeamSyncBulkType:
       description: Team sync bulk type.
       enum:
@@ -52500,10 +52755,15 @@ components:
       x-enum-varnames:
       - TEAM_SYNC_BULK
     TeamSyncData:
-      description: Team sync data.
+      description: A configuration governing syncing between Datadog teams and teams
+        from an external system.
       properties:
         attributes:
           $ref: '#/components/schemas/TeamSyncAttributes'
+        id:
+          description: The sync's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
         type:
           $ref: '#/components/schemas/TeamSyncBulkType'
       required:
@@ -52523,6 +52783,15 @@ components:
           $ref: '#/components/schemas/TeamSyncData'
       required:
       - data
+      type: object
+    TeamSyncResponse:
+      description: Team sync configurations response.
+      properties:
+        data:
+          description: List of team sync configurations
+          items:
+            $ref: '#/components/schemas/TeamSyncData'
+          type: array
       type: object
     TeamTarget:
       description: Represents a team target for an escalation policy step, including
@@ -52853,6 +53122,9 @@ components:
         modifiedAt:
           description: Last modification time of the job.
           type: string
+        signalOutput:
+          description: Whether the job outputs signals.
+          type: boolean
       type: object
     ThreatHuntingJobResponseData:
       description: Threat hunting job response data.
@@ -82650,7 +82922,217 @@ paths:
         permissions:
         - teams_read
         - teams_manage
+  /api/v2/team/connections:
+    delete:
+      description: Delete multiple team connections.
+      operationId: DeleteTeamConnections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamConnectionDeleteRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Delete team connections
+      tags:
+      - Team Connections
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Returns all team connections.
+      operationId: ListTeamConnections
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: Filter team connections by external source systems.
+        explode: false
+        in: query
+        name: filter[sources]
+        required: false
+        schema:
+          items:
+            example: github
+            type: string
+          type: array
+        style: form
+      - description: Filter team connections by Datadog team IDs.
+        explode: false
+        in: query
+        name: filter[team_ids]
+        required: false
+        schema:
+          items:
+            example: 12345678-1234-5678-9abc-123456789012
+            type: string
+          type: array
+        style: form
+      - description: Filter team connections by connected team IDs from external systems.
+        explode: false
+        in: query
+        name: filter[connected_team_ids]
+        required: false
+        schema:
+          items:
+            example: '@MyGitHubAccount/my-team-name'
+            type: string
+          type: array
+        style: form
+      - description: Filter team connections by connection IDs.
+        explode: false
+        in: query
+        name: filter[connection_ids]
+        required: false
+        schema:
+          items:
+            example: 12345678-1234-5678-9abc-123456789012
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamConnectionsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: List team connections
+      tags:
+      - Team Connections
+      x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create multiple team connections.
+      operationId: CreateTeamConnections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamConnectionCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamConnectionsResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Create team connections
+      tags:
+      - Team Connections
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/sync:
+    get:
+      description: 'Get all team synchronization configurations.
+
+        Returns a list of configurations used for linking or provisioning teams with
+        external sources like GitHub.'
+      operationId: GetTeamSync
+      parameters:
+      - description: Filter by the external source platform for team synchronization
+        in: query
+        name: filter[source]
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamSyncAttributesSource'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamSyncResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Team sync configurations not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team sync configurations
+      tags:
+      - Teams
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: 'This endpoint attempts to link your existing Datadog teams with
         GitHub teams by matching their names.
@@ -82677,7 +83159,8 @@ paths:
         using a normalized exact match; case is ignored and spaces are removed. No
         modifications are made
 
-        to teams in GitHub. This will not create new Teams in Datadog.'
+        to teams in GitHub. This only creates new teams in Datadog when type is set
+        to `provision`.'
       operationId: SyncTeams
       requestBody:
         content:
@@ -85947,6 +86430,9 @@ tags:
     use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
     information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
+- description: View and manage relationships between Datadog teams and teams from
+    external sources, such as GitHub.
+  name: Team Connections
 - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
     for more information.
   name: Teams

@@ -2,6 +2,9 @@
 title: Get Started with AI Guard
 private: true
 further_reading:
+- link: /security/ai_guard/
+  tag: Documentation
+  text: AI Guard
 - link: "https://www.datadoghq.com/blog/llm-guardrails-best-practices/"
   tag: "Blog"
   text: "LLM guardrails: Best practices for deploying LLM apps securely"
@@ -11,6 +14,8 @@ further_reading:
 {{< /site-region >}}
 
 AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. This page describes how to set it up so you can keep your data secure against these AI-based threats.
+
+For an overview on AI Guard, see [AI Guard][13].
 
 ## Setup
 
@@ -509,3 +514,4 @@ Follow the instructions to create a new [metric monitor][11].
 [10]: /monitors/types/apm/?tab=traceanalytics
 [11]: /monitors/types/metric/
 [12]: https://platform.openai.com/docs/api-reference/chat/object
+[13]: /security/ai_guard/

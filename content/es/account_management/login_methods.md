@@ -15,6 +15,7 @@ Cuando un método de inicio de sesión está activado de forma predeterminada, c
 Métodos de inicio de sesión disponibles:
 
 - Nombre de usuario y contraseña de Datadog (estándar) 
+    - Las contraseñas deben tener al menos 8 caracteres que contengan como mínimo un número y una letra minúscula.
 - Inicio de sesión de Google
 - [Iniciar sesión con SAML][2]
 
