@@ -49,7 +49,7 @@ For detailed insights and remediation help, click the **Remediation** tab. In th
 - To remediate the identity risk, you can:
   - Click **Fix in \<cloud provider\>** to update the resource directly in your cloud provider console.
   - Use [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement).
-  - For Terraform resources:
+  - For supported Terraform resources:
     - Locate the file and line the identity risk is in and identify the code owners.
     - Generate a pull request in GitHub with code changes that fix the underlying misconfiguration.
 - To create a Jira issue and assign it to a team, click **Add Jira issue**. See [Create Jira Issues for Cloud Security Issues][2] for more information.

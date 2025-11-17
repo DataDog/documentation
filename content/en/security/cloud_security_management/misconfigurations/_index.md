@@ -48,7 +48,7 @@ Investigate details using the [Misconfigurations Findings page][10], where you c
 To remediate a misconfiguration, you can:
 - [Create a Jira issue][15] and assign it to a team
 - Use [Workflow Automation][14] to create automated remediation workflows (with or without human involvement)
-- For Terraform resources:
+- For supported Terraform resources:
   - Locate the file and line the misconfiguration is in and identify the code owners
   - Generate a pull request in GitHub with code changes that fix the underlying misconfiguration
 
