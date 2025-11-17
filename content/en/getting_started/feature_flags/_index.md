@@ -20,7 +20,7 @@ Feature Flags are in Preview. Complete the form to request access.
 
 ## Overview
 
-Datadog feature flags offer a powerful, integrated way to manage feature delivery, with built-in observability and seamless integration across the platform.
+Datadog [Feature Flags][5] offer a powerful, integrated way to manage feature delivery, with built-in observability and seamless integration across the platform.
 
 * **Real-time metrics:** Understand who's receiving each variant, as well as how your flag impacts the health & performance of your application—all in real time.
 
@@ -46,26 +46,31 @@ First, install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@ope
 ```
 yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk @openfeature/core
 ```
-
 Then, add the following to your project to initialize the SDK:
 
 ```js
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
-// Initialize the provider
+// Initialize the provider and evaluation context
 const provider = new DatadogProvider({
    clientToken: '<CLIENT_TOKEN>',
    applicationId: '<APPLICATION_ID>',
    enableExposureLogging: true, // Can impact RUM costs if enabled
-   site: 'datadoghq.com',
+   site: '{{< region-param key="dd_site" >}}',
    env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
    service: '<SERVICE_NAME>',
    version: '1.0.0',
 });
 
-// Set the provider
-await OpenFeature.setProviderAndWait(provider);
+const context = {
+    targetingKey: '<SUBJECT_KEY>',
+    userId: '<USER_ID>',
+    userRole: '<USER_ROLE>',
+};
+
+// Set the provider and evaluation context
+await OpenFeature.setProviderAndWait(provider, context);
 ```
 
 <div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. You can disable it if you don't need to track feature exposure or guardrail metric status.</div>
@@ -141,3 +146,4 @@ Monitor the feature rollout from the feature flag details page, which provides r
 [2]: https://app.datadoghq.com/feature-flags/create
 [3]: https://app.datadoghq.com/feature-flags/environments
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[5]: /feature_flags/
