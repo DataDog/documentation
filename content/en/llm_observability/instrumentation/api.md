@@ -337,6 +337,19 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "score_value": 3,
           "assessment": "fail",
           "reasoning": "The response provided incorrect information about the weather forecast."
+        },
+        {
+          "join_on": {
+            "tag": {
+              "key": "msg_id",
+              "value": "1123132"
+            }
+          },
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1609479200,
+          "metric_type": "boolean",
+          "label": "Topic Relevancy",
+          "boolean_value": true,
         }
       ]
     }
@@ -395,6 +408,22 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "score_value": 3,
           "assessment": "fail",
           "reasoning": "The response provided incorrect information about the weather forecast."
+        },
+        {
+          "id": "haz3fc7-g3p2-1s37-8m12-ndk4hbf7a522",
+          "join_on": {
+            "tag": {
+              "key": "msg_id",
+              "value": "1123132"
+            }
+          },
+          "span_id": "20245611112024561111",
+          "trace_id": "13932955089405749200",
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1609479200,
+          "metric_type": "boolean",
+          "label": "Topic Relevancy",
+          "boolean_value": true,
         }
       ]
     }
@@ -415,19 +444,20 @@ Evaluations must be joined to a unique span. You can identify the target span us
 
 #### EvalMetric
 
-| Field                  | Type   | Description  |
-|------------------------|--------|--------------|
-| ID                     | string | Evaluation metric UUID (generated upon submission). |
-| join_on [*required*]    | [[JoinOn](#joinon)] | How the evaluation is joined to a span. |
-| timestamp_ms [*required*] | int64  | A UTC UNIX timestamp in milliseconds representing the time the request was sent. |
-| ml_app [*required*] | string | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
-| metric_type [*required*]| string | The type of evaluation: `"categorical"` or `"score"`. |
-| label [*required*]      | string | The unique name or label for the provided evaluation . |
-| categorical_value [*required if the metric_type is "categorical"*]    | string | A string representing the category that the evaluation belongs to. |
-| score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
-| assessment | string | An assessment of this evaluation. Accepted values are `pass` and `fail`. |
-| reasoning | string | A text explanation of the evaluation result. |
-| tags        | [[Tag](#tag)] | A list of tags to apply to this particular evaluation metric.       |
+| Field                                                              | Type                | Description                                                                                            |
+|--------------------------------------------------------------------|---------------------|--------------------------------------------------------------------------------------------------------|
+| ID                                                                 | string              | Evaluation metric UUID (generated upon submission).                                                    |
+| join_on [*required*]                                               | [[JoinOn](#joinon)] | How the evaluation is joined to a span.                                                                |
+| timestamp_ms [*required*]                                          | int64               | A UTC UNIX timestamp in milliseconds representing the time the request was sent.                       |
+| ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
+| metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, or `"boolean"`.                                    |
+| label [*required*]                                                 | string              | The unique name or label for the provided evaluation .                                                 |
+| categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category that the evaluation belongs to.                                     |
+| score_value [*required if the metric_type is "score"*]             | number              | A score value of the evaluation.                                                                       |
+| boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value of the evaluation.                                                                     |
+| assessment                                                         | string              | An assessment of this evaluation. Accepted values are `pass` and `fail`.                               |
+| reasoning                                                          | string              | A text explanation of the evaluation result.                                                           |
+| tags                                                               | [[Tag](#tag)]       | A list of tags to apply to this particular evaluation metric.                                          |
 
 #### JoinOn
 
