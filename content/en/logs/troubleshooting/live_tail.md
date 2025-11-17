@@ -54,6 +54,20 @@ Determine whether an administrator configured a [logs restriction query (RBAC)][
 
 {{< img src="logs/explorer/live_tail/logs_rbac_page.png" alt="Logs RBAC page" style="width:100%;" >}}
 
+## Check Log Timestamps
+
+If you are expecting logs to appear in Live Tail which are not visible, verify whether the timestamps of the logs are within the 15 minute period of Live Tail's window.
+If log timestamps are aligned with UTC time, logs sent in real time should appear within the 15 minute period specified.
+
+Often, if timestamps are sent from hosts with a different local time than UTC, the offset of these timezones can cause discrepancies in how these logs are represented in Datadog.
+
+During processing, this may happen in two ways:
+- If using a Date Remapper processor in a Logs Pipeline, verify that the attribute referenced by the processor is reflective of UTC time.
+- If logs are sent as JSON, automatic parsing will extract the date attribute if it is reflected by a listed attribute in [JSON Preprocessing][10].
+
+If the attribute used to reflect the timestamp of the log is in a different timezone to UTC, see [Parsing dates][9] with a Grok Parser to shift the timezone.
+- Note that this will not function for attributes parsed with JSON Preprocessing. These will need to be modified outside of Preprocessing.
+
 ## Create a support ticket
 
 If the above troubleshooting steps do not resolve the issue with Live Tail, create a [support ticket][6]. If possible, include the following information in your support ticket:
@@ -83,3 +97,5 @@ Attach the HAR file to your support ticket.
 [6]: https://help.datadoghq.com/hc/en-us/requests/new
 [7]: https://support.google.com/admanager/answer/10358597?hl=en
 [8]: https://developer.chrome.com/docs/devtools/open
+[9]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[10]: /logs/log_configuration/pipelines/?tab=date#preprocessing
