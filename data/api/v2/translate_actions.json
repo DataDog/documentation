@@ -851,11 +851,11 @@
     "summary": "Delete an application key owned by current user"
   },
   "GetCurrentUserApplicationKey": {
-    "description": "Get an application key owned by current user",
+    "description": "Get an application key owned by current user.\nThe `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Get one application key owned by current user"
   },
   "UpdateCurrentUserApplicationKey": {
-    "description": "Edit an application key owned by current user",
+    "description": "Edit an application key owned by current user.\nThe `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Edit an application key owned by current user",
     "request_description": "",
     "request_schema_description": "Request used to update an application key."
@@ -2101,10 +2101,10 @@
     "summary": "List tables"
   },
   "CreateReferenceTable": {
-    "description": "Create a new reference table. You can provide data in two ways: 1) Call POST api/v2/reference-tables/upload first to get an upload ID, then PUT chunks of CSV data to each provided URL, and finally call this POST endpoint with the upload_id in file_metadata, OR 2) Provide access_details in file_metadata pointing to a CSV file in cloud storage (Amazon S3, Azure Blob Storage, or GCP Cloud Storage).",
+    "description": "Creates a reference table. You can provide data in two ways:\n1. Call POST /api/v2/reference-tables/upload to get an upload ID. Then, PUT the CSV data\n   (not the file itself) in chunks to each URL in the request body. Finally, call this\n   POST endpoint with `upload_id` in `file_metadata`.\n2. Provide `access_details` in `file_metadata` pointing to a CSV file in cloud storage.",
     "summary": "Create reference table",
     "request_description": "",
-    "request_schema_description": "The definition of `CreateTableRequest` object."
+    "request_schema_description": "Request body for creating a new reference table from a local file or cloud storage."
   },
   "DeleteTable": {
     "description": "Delete a reference table by ID",
@@ -2118,7 +2118,7 @@
     "description": "Update a reference table by ID. You can update the table's data, description, and tags. Note: The source type cannot be changed after table creation. For data updates: For existing tables of type `source:LOCAL_FILE`, call POST api/v2/reference-tables/uploads first to get an upload ID, then PUT chunks of CSV data to each provided URL, and finally call this PATCH endpoint with the upload_id in file_metadata. For existing tables with `source:` types of `S3`, `GCS`, or `AZURE`, provide updated access_details in file_metadata pointing to a CSV file in the same type of cloud storage.",
     "summary": "Update reference table",
     "request_description": "",
-    "request_schema_description": "The definition of `PatchTableRequest` object."
+    "request_schema_description": "Request body for updating an existing reference table."
   },
   "GetRowsByID": {
     "description": "Get reference table rows by their primary key values.",
@@ -2128,7 +2128,7 @@
     "description": "Create a reference table upload for bulk data ingestion",
     "summary": "Create reference table upload",
     "request_description": "",
-    "request_schema_description": "The definition of `CreateUploadRequest` object."
+    "request_schema_description": "Request to create an upload for a file to be ingested into a reference table."
   },
   "ListApplicationSecurityWAFCustomRules": {
     "description": "Retrieve a list of WAF custom rule.",
@@ -3068,8 +3068,28 @@
     "request_description": "",
     "request_schema_description": "Request to create a team"
   },
+  "DeleteTeamConnections": {
+    "description": "Delete multiple team connections.",
+    "summary": "Delete team connections",
+    "request_description": "",
+    "request_schema_description": "Request for deleting team connections."
+  },
+  "ListTeamConnections": {
+    "description": "Returns all team connections.",
+    "summary": "List team connections"
+  },
+  "CreateTeamConnections": {
+    "description": "Create multiple team connections.",
+    "summary": "Create team connections",
+    "request_description": "",
+    "request_schema_description": "Request for creating team connections."
+  },
+  "GetTeamSync": {
+    "description": "Get all team synchronization configurations.\nReturns a list of configurations used for linking or provisioning teams with external sources like GitHub.",
+    "summary": "Get team sync configurations"
+  },
   "SyncTeams": {
-    "description": "This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This will not create new Teams in Datadog.",
+    "description": "This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This only creates new teams in Datadog when type is set to `provision`.",
     "summary": "Link Teams with GitHub Teams",
     "request_description": "",
     "request_schema_description": "Team sync request."
