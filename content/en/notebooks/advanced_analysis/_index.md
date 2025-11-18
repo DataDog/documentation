@@ -150,6 +150,16 @@ To download your dataset as a CSV file:
 2. Click the download icon in the top-right corner of the cell.
 3. Select the number of rows you want to export (up to the maximum available).
 4. The CSV file automatically downloads to your computer.
+5. 
+
+### Schedule a CSV report
+With scheduled reports, you can automatically receive query results for analysis cells via email or Slack.
+
+To schedule a report on an analysis cell, select **Schedule report** from the dropdown next to **Save to Dashboard**.
+
+You can view and manage existing reports from the **Reports** tab.
+
+To schedule reports, users need the **CSV Report Schedules Write** permission. To edit other users' reports, users need the **CSV Report Schedules Manage** permission. These can be granted by a user with the **Org **Management permission.
 
 ## Further reading
 
