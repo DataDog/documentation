@@ -669,5 +669,5 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [8]: https://app.datadoghq.com/integrations/azure
 [9]: /integrations/azure/
 [10]: https://app.datadoghq.com/integrations/gcp
-[11]: /cloud_cost_management/tags/tag_pipelines/
+[11]: /cloud_cost_management/allocation/tag_pipelines/
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized

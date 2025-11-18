@@ -2,6 +2,7 @@
 title: Tag Pipelines
 aliases:
   - /cloud_cost_management/tag_pipelines/
+  - /cloud_cost_management/tags/tag_pipelines/
 further_reading:
 - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
   tag: Blog
