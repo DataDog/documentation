@@ -87,7 +87,7 @@ pytest -W "error::ddtrace.DDTraceDeprecationWarning" tests.py
 Set the`PYTHONWARNINGS` environment variable to surface deprecation warnings when you run your application.
 
 ```sh
-PYTHONWARNINGS=all python app.py
+PYTHONWARNINGS=error::ddtrace.DDTraceDeprecationWarning python app.py
 ```
 
 ### Step 2: Address breaking changes
