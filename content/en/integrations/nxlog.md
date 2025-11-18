@@ -94,6 +94,6 @@ The following outlines the setup for log collection through HTTP endpoints and [
 
 Need help? Contact [Datadog support][3].
 
-[1]: /logs/log_collection/_index.md
+[1]: /logs/log_collection/
 [2]: /resources/crt/ca-certificates.crt
 [3]: /help/
