@@ -36,7 +36,7 @@ The logical flow of retention filters is the following:
 - Be cautious when defining filters on event attributes that update over time. For example, a filter retaining sessions with fewer than two errors might mistakenly retain sessions, as error counts update in real-time, and all sessions start at zero. Either use "greater than or equal to" (≥) conditions for fields that update, such as `@session.error.count >= 2`, or ensure the Session and View objects that are mutable are complete before evaluating them against the retention filters, by adding `@session.is_active: false` or `@view.is_active: false`.
 - Our SDKs batch and compress events before sending them to Datadog, and failed uploads go back at the end of the queue on the device. Therefore, it could happen that event `B` is evaluated before event `A`, but all events are eventually evaluated against the list of retention filters to prevent gaps.
 
-## How retention filters work with replays
+<!-- ## How retention filters work with replays
 
 You can manage session sampling with replays using retention filters. Whenever a session with replays is billed, both the session events and the video recording are kept and billed. This means that if you collect 100% of sessions and 100% of replays from SDKs, whenever a retention filter keeps a session, Datadog keeps and charges for both the session and the replay.
 
@@ -44,7 +44,7 @@ Replays collected through the [force collection][1] mechanism are kept by the de
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-session-filter.png" alt="When force collection is enabled, it is positioned first in the list of retention filters." style="width:90%" >}}
 
-**Note**: Though Datadog's mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by the Browser SDK are kept by default.
+**Note**: Though Datadog's mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by the Browser SDK are kept by default. -->
 
 ## Creating a retention filter
 
@@ -108,6 +108,43 @@ To ensure sessions from a particular environment, application version, device ty
 For example, to exclude sessions from South Korea while retaining all other sessions, create a filter with the query `-@geo.country:"South Korea"` and set the retention rate to 100%.
 
 **Note**: There is no way to prevent a specific event from being retained. You can use negative queries (for instance, adding `-@error.message:"Script error."` to a retention filter targeting RUM Errors) to minimize the volume of undesired events, but other retention filters may still make a positive retention decision about a session that contains the event you tried to filter out.
+
+## Cross-product retention filters
+
+When configuring a RUM retention filter, you can enable two cross-product retention filters: one for session replays and one for APM traces.
+
+- **Session Replay filter**: Retains replays for the specified percentage of sessions retained by the parent RUM retention filter which have an available replay.
+- **APM traces filter**: Indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter which have available traces.
+
+**Notes**:
+- The availability of a session replay or APM traces depends on the initialization parameters `sessionReplaySampleRate` and `traceSampleRate` of the SDK.
+- The APM traces filter is only compatible with the following versions of the SDKs:
+
+- Browser 6.5.0+
+- Android 3.0.0+
+- React Native 3.0.0+
+
+### Default 1% retention
+
+For compatible SDKs (see above), Datadog provides a default RUM retention filter and cross-product retention filter on APM traces that retains 1% of the sessions with available traces and their traces, free of charge.
+
+This default filter ensures that you always have a baseline of correlated APM data available for your RUM sessions, even before custom cross-product retention filters.
+
+The cross-product retention filters allow you to optimize the correlation between different products to retain richer telemetry.
+
+### Example
+
+Consider a RUM retention filter configured as follows:
+
+- **RUM retention filter**: 60% - `@type:error` (retention filter retaining 60% of sessions with at least one error)
+- **Cross-product retention filter Session Replay**: 50%
+- **Cross-product retention filter APM traces**: 25%
+
+If across the sessions, 30% of them have an available replay and 40% of them have available traces, then the outcome is the following:
+
+- 60% of sessions with at least one error are retained
+- 50% × 30% = 15% of these retained sessions have a replay
+- 25% × 40% = 10% of these retained sessions have APM traces
 
 ## Best practices
 
