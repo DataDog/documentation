@@ -32,7 +32,7 @@ The Rust SDK relies on specific versions of the Rust compiler and the OpenTeleme
 
 The Datadog Rust SDK does not provide automatic instrumentation.
 
-You must manually instrument your application using the [OpenTelemetry API][2]. This includes:
+You must manually instrument your application using the OpenTelemetry API]. This includes:
 - Creating spans for functions or operations.
 - Adding attributes (tags) and events to spans.
 - Manually propagating trace context for distributed traces.
