@@ -37,7 +37,7 @@ When the throttle processor is enabled, the number of logs the processor allows 
 
 ### Capacity replenishment rate
 
-The throttle processor follows a generic cell rate algorithm, which enables a steady rate of events to pass through. The replenishment rate is based on the settings of your throttle processor and allows a certain number of events to pass through per second. This rate can be calculated as follows:
+The throttle processor uses a generic cell rate algorithm, which enables a steady rate of events to pass through. The replenishment rate is based on the settings of your throttle processor and allows a certain number of events to pass through per second. This rate can be calculated as follows:
 
 $$\text"Throttle rate" / \text"Time window (in seconds)"$$
 
@@ -69,6 +69,6 @@ If `T` is the time when the processor is enabled and the processor receives 5000
 | Handling initial burst of events | Processes data up to the fixed daily limit. | Processes events up to your configured throttling rate. |
 | After the limit is reached | Stops processing data until the 24-hour time window is reset. | Continues at a steady, calculated rate. |
 | Reset mechanism | Resets every 24 hours. | Continuous replenishment. Time window also resets if you redeploy the Worker or the pipeline. |
-| How limits are stored or tracked | Quota limits persist even if the Worker is restarted, because the limits are stored in the backend. | The time window resets if you redeploy the Worker or the pipeline, because throttle limits are tracked locally. |
+| How limits are stored or tracked | Quota limits persist even if the Worker is restarted, because the limits are stored in the backend. | The time window resets if you redeploy the Worker or the pipeline, because throttle limits are tracked in the Worker's memory. |
 
 [1]: /api/latest/observability-pipelines/#update-a-pipeline
