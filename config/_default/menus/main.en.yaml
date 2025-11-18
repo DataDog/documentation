@@ -2545,6 +2545,11 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 904
+    - name: Microsoft Teams
+      url: service_management/incident_management/integrations/microsoft_teams
+      parent: incidents_integrations
+      identifier: incidents_microsoft_teams
+      weight: 905
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
