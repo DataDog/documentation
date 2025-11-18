@@ -104,7 +104,7 @@ If you need additional assistance, contact [Datadog support][6].
 
 ## Bundling with esbuild
 
-`dd-trace` provides an esbuild plugin. Starting in `dd-trace@5.69.0`, the plugin also supports IAST for CommonJS bundled applications.
+`dd-trace` provides an esbuild plugin. Starting in `dd-trace@5.69.0`, the plugin also supports IAST for CommonJS bundled applications. As of version 5.78.0, support is extended to applications using ESM.
 
 Here's an example of how one might use dd-trace with esbuild:
 
