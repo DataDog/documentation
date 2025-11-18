@@ -22,7 +22,6 @@
         "deploy:liveAssets": "customhugo deploy --target liveAssets -e live --maxDeletes 0 --workers 100 --logLevel info",
         "deploy:live": "customhugo deploy --target live -e live --maxDeletes -1 --workers 100 --logLevel info",
         "build:apiPages": "node -e 'require(\"./assets/scripts/build-api-pages.js\").init()'",
-        "dereference": "node ./assets/scripts/dereference.js",
         "jest-test": "./node_modules/.bin/jest ./assets/scripts/tests",
         "postinstall": "husky",
         "prepack": "pinst --disable",
