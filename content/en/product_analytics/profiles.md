@@ -137,11 +137,6 @@ You can customize the Account Profiles page to include additional attributes, gi
 
 ## Use custom attributes to enrich profiles
 
-{{< callout url="#" header="Join the Preview!" btn_hidden="true">}}
-  Custom Attributes for User & Account Profiles is in Preview.
-{{< /callout >}} 
-
-
 ### How to configure custom attributes using integrations 
 
 Use integrations or reference tables to automatically import custom attribute data into profiles. This data is synced on a regular schedule, reflecting the latest values from the source system to ensure that profiles remain up-to-date and accurate.
