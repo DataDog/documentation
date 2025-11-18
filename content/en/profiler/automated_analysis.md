@@ -55,7 +55,7 @@ Each row represents an insight type, summarizing:
 - Insight type (for example, GC Pauses or High Lock Contention)
 - Severity (for example, Info or Warning)
 
-You can filter insights by runtime, service, o environment to narrow the list to what matters most. Teams often use this view to identify patterns—such as multiple services affected by the same inefficiency. Clicking on an insight opens its detail panel.
+You can filter insights by runtime, service, or environment to narrow the list to the most important insights. Teams often use this view to identify patterns, such as multiple services affected by the same inefficiency. Clicking on an insight opens its detail panel.
 
 ## Supported insights
 
