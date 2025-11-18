@@ -94,6 +94,7 @@ PYTHONWARNINGS=all python app.py
 
 After identifying potential issues, review the following breaking changes. Update your code to be compatible with v4 before proceeding with the upgrade.
 
+- Starting with ddtrace v4.0.0, Datadog Agent v7.63.0 or newer is required.
 - Support for ddtrace with Python 3.8 is removed after being deprecated in the 3.0 release line. Use ddtrace 4.x with Python 3.9 or newer.
 - 32-bit linux is no longer supported. Please contact us if this blocks upgrading dd-trace-py.
 - mongoengine
