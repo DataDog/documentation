@@ -19,7 +19,7 @@ The following table outlines supported and unsupported use cases for the script 
 |-----------------------------------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------|
 | Running Linux binaries (`ls`, `rm`, `find`, `curl`) | Yes   | In order to run native Linux binaries, the relevant files must be accessible to the container.          |
 | Running CLIs (`aws`, `terraform`, `kubectl`)        | Yes   | The CLI and your CLI credentials must be available in the image.                                                       |
-| Running scripts (`bash`, `python`)                  | Yes   | Scripts can be mounted inside the container. Use the [large image][12] to get access to the python interpreter. |
+| Running scripts (`bash`, `python`)                  | Yes   | Scripts can be mounted inside the container. Use the [large image][12] to get access to the Python interpreter. |
 | Running privileged commands (`systemctl restart`)   | No    | Because the PAR runs inside a container, it does not have high privilege permissions on the host.                                         |
 | Windows tools (PowerShell)                          | No    | Because the PAR runs inside a Linux container, native Windows tools are not supported.                                             |
 
@@ -88,7 +88,7 @@ In your workflow or app, configure the action to use the `runPredefinedScript` w
 
 ## Large image
 
-If you want to use tools like [Python](https://www.python.org/), SSH, [AWS CLI](https://aws.amazon.com/cli/), [Terraform](https://developer.hashicorp.com/terraform/cli/commands) or the [gcloud CLI](https://docs.cloud.google.com/sdk/docs/install) you can use the `gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}-large` image instead of the default image.
+If you want to use tools like [Python](https://www.python.org/), SSH, [AWS CLI](https://aws.amazon.com/cli/), [Terraform](https://developer.hashicorp.com/terraform/cli/commands), or the [gcloud CLI](https://docs.cloud.google.com/sdk/docs/install), you can use the `gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}-large` image instead of the default image.
 
 ## Advanced usage with custom images
 
@@ -98,7 +98,7 @@ For binaries not available in Datadog provided images, create a custom image:
 # Dockerfile example
 FROM gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}
 USER root
-# Change this to install the tool of your choice
+# Change the line below to install the tool of your choice
 RUN apt update && apt install -y python3
 USER dog
 ```
