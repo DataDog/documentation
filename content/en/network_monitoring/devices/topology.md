@@ -6,6 +6,7 @@ type: multi-code-lang
 code_lang_weight: 0
 aliases:
 - /network_monitoring/devices/network_topology_map 
+- /network_monitoring/devices/device_topology_map
 further_reading:
 - link: "https://www.datadoghq.com/blog/visualize-network-device-topology/"
   tag: "Blog"

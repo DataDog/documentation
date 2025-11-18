@@ -1,6 +1,6 @@
 
 ---
-title: Device GeoMap
+title: Device Geomap
 code_lang: geomap
 type: multi-code-lang
 code_lang_weight: 1
@@ -25,12 +25,12 @@ further_reading:
 
 ### Prerequisites
 
-- [Network Device Monitoring][2] configured on your devices.
+- [Network Device Monitoring][2] must be configured on your devices.
 - Devices must be tagged using the `geomap:<value>` format, where `<value>` is the location identifier. 
 
 ## Configuring locations
 
-Devices appear on the Device GeoMap when tagged with `geomap:<value>` and mapped to geographic coordinates.
+Devices appear on the Device GeoMap when they're tagged with `geomap:<value>` and mapped to geographic coordinates.
 
 Configure device locations using the following steps:
 
@@ -38,7 +38,7 @@ Configure device locations using the following steps:
 
    {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
 
-2. From the Device GeoMap page, click **Add locations →** in the top right corner. This opens the [GeoMap locations settings][3] page, which provides multiple tabs to manage device locations:
+2. From the Device GeoMap page, click **Add locations** in the top right corner. This opens the [GeoMap locations settings][3] page, which provides multiple tabs to manage device locations:
 
    - **All**: Displays all devices with `geomap` tags, regardless of their mapping status.
    - **Needs Coordinates**: Shows devices tagged with `geomap` values that don't have corresponding location coordinates configured.
@@ -57,7 +57,7 @@ Configure device locations using the following steps:
 
 ## Viewing devices
 
-After devices are added to the map, you can zoom in to click on individual device or select a device cluster to view all devices in that location. Clicking on any device opens a side panel with detailed device information, including status, tags, and key metrics.
+After devices are added to the map, you can zoom in to click on an individual device or select a device cluster to view all devices in that location. Clicking on any device opens a side panel with detailed device information, including status, tags, and key metrics.
 
 {{< img src="network_device_monitoring/geomap/geomap_device_cluster.mp4" alt="A user zooming in on the map, clicking on a devive cluster, and opening the side panel of a device that is unreachable. " video=true >}}
 
@@ -79,12 +79,12 @@ If your CSV file fails to upload despite appearing correct, verify the following
 
 Use the provided template to ensure proper formatting.
 
-### Tagged device not appearing on map
+### Tagged device does not appear on map
 
 If a device doesn't appear on the map after tagging:
 
 1. Verify that the location tag has coordinates configured on the [Settings][3] page.
-2. Allow a few minutes for tag updates to be reflected in the map, as indicated in the application.
+2. Allow a few minutes for tag updates to be reflected in the map.
 
 ## Further Reading
 
@@ -98,4 +98,4 @@ If a device doesn't appear on the map after tagging:
 [8]: /network_monitoring/devices/topology
 [9]: /network_monitoring/devices/geomap
 [10]: https://en.wikipedia.org/wiki/Decimal_degrees
-[11]: https://docs.datadoghq.com/dashboards/widgets/geomap/?tab=points
+[11]: /dashboards/widgets/geomap/?tab=points
