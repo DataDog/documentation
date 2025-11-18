@@ -41,7 +41,7 @@ A user needs an **Incident Management seat** if they perform any of the followin
 - Modify an incident (for example, update severity)
 - Add a comment, graph, or link to an [incident timeline][8]
 
-In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. 
+In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Slack app, such as using action buttons or interacting with @Datadog, trigger a seat requirement. 
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
 
@@ -61,6 +61,10 @@ Each tab includes:
     - Upgraded date (when the user was assigned a seat)
 
 You can also find users by searching by name, email, or team. 
+
+On-Call admins can also use the [Notification Preferences settings page][9] to view which schedules or escalation policies a user belongs to and remove that user's notification preferences if needed. 
+
+Removing a user's notification preferences does not unassign their seat. If a user should no longer occupy a seat, you must explicitly unassign the user from the Seat Management Page. 
 
 ### Assign seats
 
@@ -130,3 +134,4 @@ Your monthly bill contains the following:
 [6]: /service_management/on-call/escalation_policies/
 [7]: /service_management/on-call/profile_settings/#notification-preferences
 [8]: /service_management/incident_management/investigate/timeline
+[9]: https://app.datadoghq.com/on-call/settings/notifications-preferences-admin
