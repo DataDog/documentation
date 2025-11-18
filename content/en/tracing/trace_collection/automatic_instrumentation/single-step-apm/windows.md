@@ -39,9 +39,82 @@ Unified Service Tags (USTs) apply consistent tags across traces, metrics, and lo
 
 ## Enable SDK-dependent products and features
 
-Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
 
 To enable products, [set environment variables][3] in your application configuration.
+
+## (Optional) Define workload selection rules
+
+Workload selection lets you control which .NET workloads are automatically instrumented by SSI. You can use workload selection to instrument specific applications or exclude certain IIS application pools.
+
+To configure workload selection:
+
+1. Download and extract the rule compiler:
+   ```
+   Invoke-WebRequest -Uri "https://github.com/DataDog/dd-policy-engine/releases/download/v0.1.0/dd-rules-converter-win-x64.zip" -OutFile "dd-rules-converter.zip" 
+   Expand-Archive -Path "dd-rules-converter.zip" -DestinationPath "C:\tools\dd-rules-converter"
+   ```
+
+   This tool compiles your rule definitions into a format the tracer can consume.
+
+1. Create a rule definition.
+   
+   Write your workload selection rules in a TOML-formatted file. Each rule can match against criteria such as executable name, DLL name, runtime, and IIS application pool. See [selection rule syntax](#selection-rule-syntax) for supported selectors.
+
+   Example `rules.toml`:
+
+   ```toml
+   [allow-console-app]
+   description = "Allow my .NET console app"
+   instrument  = true
+   expression  = "(process.executable:ConsoleApp1.exe OR process.dll:ConsoleApp1.dll) runtime:dotnet"
+
+   [disable-staging-app-pool]
+   description = "Disable all application pool starting with staging"
+   instrument  = false
+   expression  = "iis.application_pool:staging*"
+   ```
+
+1. Compile the rules. 
+
+   Use the rule compiler to generate the binary rules file that the tracer reads at startup:
+   ```
+   C:\tools\dd-rules-convert.exe -rules rules.toml -output "C:\ProgramData\Datadog\protected\workload-selection.rules"
+   ```
+
+When a .NET workload starts, the tracer automatically loads and applies these rules.
+
+### Selection rule syntax 
+
+Each rule is a TOML section with a unique identifier enclosed in brackets. For example:
+
+```
+[disable-staging-app-pool]
+description = "Disable all application pool starting with staging"
+instrument  = false
+expression  = "iis.application_pool:staging*"
+```
+
+Rules include the following fields:
+
+- `description`: A short description of the rule.
+- `instrument`: Boolean (`true` or `false`) that determines whether to enable or disable instrumentation.
+- `expression`: The condition that defines which workloads to match. See [Expression selectors](#expression-selectors) for supported fields. 
+
+#### Expression selectors
+
+The `expression` field uses selectors to match process properties, such as executable name or runtime. The following selectors are supported:
+
+| Field | Description | Examples |
+|-------|-------------|----------|
+| `process.executable` | The name of the process executable. | `myapp.exe` |
+| `runtime.language` | The runtime language of the process. | `dotnet`, `cpp`, `node` |
+| `dotnet.dll` | The DLL file executed with `dotnet MyDll.dll`. | `ConsoleApp.dll` |
+| `iis.application_pool` | The IIS application pool name. | `staging-app-pool`, `DefaultAppPool` |
+
+**Example expressions:**
+- `process.executable:myapp.exe`: matches any process named `myapp.exe`
+- `process.executable:myapp.exe runtime.language:dotnet`: matches processes named `myapp.exe` running on .NET
 
 ## Remove Single Step APM instrumentation from your Agent
 
