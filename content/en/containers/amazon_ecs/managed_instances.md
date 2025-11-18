@@ -21,32 +21,26 @@ further_reading:
       text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
 ---
 
-## Overview
+Datadog Serverless Monitoring enables visibility into applications running on [Amazon ECS Managed Instances][29].
 
-Amazon ECS Managed Instances is a compute option for Amazon ECS that combines the flexibility of using Amazon EC2 instances with the ease of a fully managed service. AWS handles the management of the underlying EC2 infrastructure, including provisioning, scaling, patching, and maintenance, while you retain control over specific EC2 instance types, such as those with GPUs or high network performance.
+### How it works
+To monitor your ECS Managed Instances tasks with Datadog, run the Datadog Agent as a container in **same task definition** as your application container. When a Datadog Agent is run as an additional container within an ECS task definition, the Agent can use the task's [metadata endpoint][30] to collect data. This endpoint returns a Docker stats JSON for all containers associated with the task. 
 
-To configure Datadog monitoring on Amazon ECS Managed Instances, add the Datadog Agent as a sidecar alongside your application containers, as described in [Setup](#setup).
-**Note**: This setup requires **Datadog Agent 7.73.0+**.
-
-<div class="alert alert-info">
-Amazon ECS Managed Instances does not support daemon scheduling. To monitor every task in a cluster, you must add the Datadog Agent alongside each task as a sidecar.
-</div>
+For more information about the collected Docker stats, see [Docker API: ContainerStats][31] in the Docker documentation.
 
 ## Setup
 
+<div class="alert alert-info">This setup requires Datadog Agent 7.73.0+.</div>
+
 The following instructions assume that you have configured an ECS Managed Instances cluster. See the [Amazon ECS Managed Instances documentation for creating a cluster][1].
 
-To monitor your ECS Managed Instances tasks with Datadog, run the Agent as a container in **same task definition** as your application container. To collect metrics with Datadog, each task definition should include a Datadog Agent container in addition to the application containers. Follow these setup steps:
+1. [Create an ECS Managed Instances task definition file](#create-an-ecs-managed-instances-task-definition-file)
+2. [Register the task definition](#register-the-task-definition)
+3. [Run the task as a replica service](#run-the-task-as-a-replica-service)
 
-1. [Create an ECS Managed Instances task][2]
-2. [Run the task as a replica service][3]
+### Create an ECS Managed Instances task definition file
 
-### Create an ECS task definition
-
-This ECS task definition launches the Datadog Agent container with the necessary configurations. You can configure this task definition by using the AWS Management Console, or with the AWS CLI.
-
-
-#### Create and manage the task definition file
+This ECS task definition launches the Datadog Agent container with the necessary configurations. 
 
 1. Download [datadog-agent-ecs-managed-instances-sidecar.json][7]. This files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the [Set up additional Agent features][27] section on this page.
 2. Modify the task definition file:
@@ -63,47 +57,52 @@ This ECS task definition launches the Datadog Agent container with the necessary
     }
     ```
 
-#### Register the task definition
+### Register the task definition
 
-##### Web UI
+{{< tabs >}}
+{{% tab "AWS Console" %}}
 
-After you have your task definition file, use the AWS Console to register the file.
-1. Log in to your AWS Console and navigate to the Elastic Container Service section.
+1. Log in to your [AWS Console][1] and navigate to the Elastic Container Service section.
 2. Select **Task Definitions** in the navigation pane. On the **Create new task definition** menu, select **Create new task definition with JSON**.
 3. In the JSON editor box, paste the contents of your task definition file.
 4. Select **Create**.
 
-##### AWS CLI
-After you have created your task definition file, execute the following command to register the file in AWS.
+[1]: https://aws.amazon.com/console
+{{% /tab %}}
+
+{{% tab "AWS CLI" %}}
+Use the [AWS CLI][1] to execute the following command:
 
 ```bash
 aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs-managed-instances-sidecar.json>
 ```
+[1]: https://aws.amazon.com/cli
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ### Run the task as a replica service
 
 Because ECS Managed Instances does not support daemon scheduling, run the task as a [replica service][8].
 
-##### Web UI Replica Service
-
-
-1. Log in to your [AWS Web Console][4] and navigate to the ECS section.
+{{< tabs >}}
+{{% tab "AWS Console" %}}
+1. Log in to your [AWS Web Console][1] and navigate to the Elastic Container Service section.
 2. Choose the cluster to run the Datadog Agent on.
-3. On the **Services** tab, click the **Create** button.
+3. On the **Services** tab, click **Create**.
 4. For **Task Definition**, select the task created in the previous steps.
 5. Enter a **Service name**.
-6. For **Launch type**, choose **Capacity Provider** and select the Manged Instance capcity provider tied to the cluster.
-7. For **Number of tasks** enter `1`, then click the **Next step** button.
+6. For **Launch type**, choose **Capacity Provider** and select the Manged Instance capacity provider tied to the cluster.
+7. For **Number of tasks**, enter `1`. Click **Next step**.
 8. Fill in the rest of the optional fields based on your preference.
-9. Click the **Next step** button, then click the **Create service** button.
+9. Click **Next step**.
+10. Click **Create service**.
 
-[4]: https://aws.amazon.com/console
+[1]: https://aws.amazon.com/console
+{{% /tab %}}
 
-##### AWS CLI Replica Service
-
-Run the following commands using the [AWS CLI tools][11].
-
-Run the task as a service for your cluster:
+{{% tab "AWS CLI" %}}
+Use the [AWS CLI][1] to execute the following command:
 
 ```bash
 aws ecs create-service --cluster <CLUSTER_NAME> \
@@ -112,11 +111,14 @@ aws ecs create-service --cluster <CLUSTER_NAME> \
 --desired-count 1 \
 --network-configuration "awsvpcConfiguration={subnets=[subnet-abcd1234],securityGroups=[sg-abcd1234]}"
 ```
-[11]: https://aws.amazon.com/cli
 
-### Set up additional Agent features
+[1]: https://aws.amazon.com/cli
+{{% /tab %}}
+{{< /tabs >}}
 
-#### Metrics collection
+## Set up additional Datadog Agent features
+
+### Metrics collection
 
 Docker labels are not supported for ECS Managed Instances. To provide a custom integration configuration, you must mount a configuration file directly onto the Datadog Agent container.
 
@@ -131,7 +133,8 @@ Create the following file structure:
 ```
 
 The `redis.yaml` file contains the configurations for the [Redis][28] integration.
-```
+
+{{< code-block lang="yaml" filename="redis.yaml" disable_copy="false" collapsible="true" >}}
 ad_identifiers:
   - redis
 
@@ -140,13 +143,15 @@ init_config:
 instances:
     - host: %%host%%
       port: 6379
-```
+{{< /code-block >}}
+
 The `Dockerfile` is used to build a Datadog Agent image and include the `redis.yaml` file at the correct location:
-```
+
+{{< code-block lang="Dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 FROM public.ecr.aws/datadog/agent:latest
 
 COPY conf.d/ /etc/datadog-agent/conf.d/
-```
+{{< /code-block >}}
 
 After the image is built and pushed to an image registry, reference the custom image in the ECS task definition:
 ```
@@ -162,7 +167,7 @@ After the image is built and pushed to an image registry, reference the custom i
 }
 ```
 
-#### Trace collection (APM)
+### Trace collection (APM)
 
 Instrument your application based on your setup:
 
@@ -178,11 +183,11 @@ Instrument your application based on your setup:
 | [.NET Core][24] |
 | [.NET Framework][25] |
 
-##### UDP
+#### UDP
 
 To collect traces over UDP, do not set `DD_AGENT_HOST`. Keep the default `localhost` value.
 
-##### UDS
+#### UDS
 
 To collect traces over UDS:
 1. Add an empty volume onto the task definition using the `volumes` parameter.
@@ -236,11 +241,11 @@ To collect traces over UDS:
 
 ```
 
-#### Logs
+### Log collection
 
-The setup for log collection is identical to the setup for log collection in ECS Fargate. Follow the instructions in the [ECS Fargate documentation][14]. This instructions give you the option to use either AWS FireLens in combination with Datadog's Fluent Bit output plugin, or the `awslogs` log driver.
+The setup for log collection is identical to the setup for log collection in ECS Fargate. Follow the instructions in the [ECS Fargate documentation][14]. These instructions give you the option to use either AWS FireLens in combination with Datadog's Fluent Bit output plugin, or the `awslogs` log driver.
 
-#### Process collection
+### Process collection
 
 You can monitor processes in ECS Managed Instances in Datadog by using the [Live Processes page][15]. To enable process collection, add the [`PidMode` parameter][16] in the task definition and set it to `task` as follows:
 
@@ -285,3 +290,6 @@ Need help? Contact [Datadog support][26].
 [26]: https://docs.datadoghq.com/help/
 [27]: #set-up-additional-agent-features
 [28]: https://docs.datadoghq.com/integrations/redis/?tab=ecs
+[29]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ManagedInstances.html
+[30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint-v4-managed-instances-response.html
+[31]: https://docs.docker.com/reference/api/engine/version/v1.30/#tag/Container/operation/ContainerStats
