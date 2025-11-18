@@ -184,7 +184,7 @@ The device resolution can fail if the device is not monitored with NDM, or the L
 
 NDM provides multiple visualization tools to monitor your infrastructure:
 
-- **[Device GeoMap][9]**: View the geographic distribution of devices across locations to identify regional issues and coverage gaps.
+- **[Device Geomap][9]**: View the geographic distribution of devices across locations to identify regional issues and coverage gaps.
 - **[Device Overview][10]**: Access detailed metrics and performance data for individual devices.
 - **[NetFlow Monitoring][1]**: Analyze traffic flows and bandwidth utilization across your network.
 

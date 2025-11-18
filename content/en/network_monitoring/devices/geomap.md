@@ -4,7 +4,6 @@ title: Device Geomap
 code_lang: geomap
 type: multi-code-lang
 code_lang_weight: 1
-aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/visualize-network-device-topology/"
   tag: "Blog"
@@ -30,7 +29,7 @@ further_reading:
 
 ## Configuring locations
 
-Devices appear on the Device GeoMap when they're tagged with `geomap:<value>` and mapped to geographic coordinates.
+Devices appear on the Device Geomap when they're tagged with `geomap:<value>` and mapped to geographic coordinates.
 
 Configure device locations using the following steps:
 
@@ -38,32 +37,32 @@ Configure device locations using the following steps:
 
    {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
 
-2. From the Device GeoMap page, click **Add locations** in the top right corner. This opens the [GeoMap locations settings][3] page, which provides multiple tabs to manage device locations:
+2. From the Device GeoMap page, click **Add locations** in the top right corner. This opens the [Geomap locations settings][3] page, which provides multiple tabs to manage device locations:
 
    - **All**: Displays all devices with `geomap` tags, regardless of their mapping status.
    - **Needs Coordinates**: Shows devices tagged with `geomap` values that don't have corresponding location coordinates configured.
-   - **On Map**: Lists tagged devices with configured coordinates that are displayed on the GeoMap.
+   - **On Map**: Lists tagged devices with configured coordinates that are displayed on the Geomap.
    - **Unused**: Shows location mappings (coordinates) that have been configured but are not associated with any tagged devices.
 
-   {{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device GeoMap, highlighting the All tab." style="width:100%;" >}}
+   {{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device Geomap, highlighting the All tab." style="width:100%;" >}}
 
 3. On the settings page, click **+ Add mapping** and enter the location value along with its latitude and longitude coordinates in [decimal degrees][10] notation. 
 
-   {{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Settings page of Device GeoMap, displaying the Add Mapping screen with fields for location, latitude, and longitude." style="width:100%;" >}}
+   {{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Settings page of Device Geomap, displaying the Add Mapping screen with fields for location, latitude, and longitude." style="width:80%;" >}}
 
-4. Optionally, to bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown and use the provided template.
+4. To bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown. The CSV form provides a template you can download and use.
 
-   {{< img src="network_device_monitoring/geomap/mapping_csv.png" alt="Settings page of Device GeoMap, displaying the Import from CSV option." style="width:100%;" >}}
+   {{< img src="network_device_monitoring/geomap/mapping_csv.png" alt="Settings page of Device Geomap, displaying the Import from CSV option." style="width:90%;" >}}
 
 ## Viewing devices
 
 After devices are added to the map, you can zoom in to click on an individual device or select a device cluster to view all devices in that location. Clicking on any device opens a side panel with detailed device information, including status, tags, and key metrics.
 
-{{< img src="network_device_monitoring/geomap/geomap_device_cluster.mp4" alt="A user zooming in on the map, clicking on a devive cluster, and opening the side panel of a device that is unreachable. " video=true >}}
+{{< img src="network_device_monitoring/geomap/geomap_device_cluster.mp4" alt="A user zooming in on the map, clicking on a device cluster, and opening the side panel of a device that is unreachable. " video=true >}}
 
 ## Troubleshooting
 
-If you experience issues using Device GeoMap, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][5].
+If you experience issues using Device Geomap, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][5].
 
 ### Device appears in multiple locations
 
@@ -75,9 +74,7 @@ If your CSV file fails to upload despite appearing correct, verify the following
 
 - No missing commas between fields
 - No extra spaces or special characters
-- Proper formatting according to the CSV template
-
-Use the provided template to ensure proper formatting.
+- Proper formatting according to the CSV template (available for download in the **+ Add mapping > Import from CSV** form)
 
 ### Tagged device does not appear on map
 
