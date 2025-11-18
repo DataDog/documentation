@@ -44,7 +44,7 @@ Por ejemplo, para verificar un archivo .msi denominado `ddagent-cli-7.49.1.msi`:
 Get-AuthenticodeSignature ddagent-cli-7.49.1.msi | fl
 {{< /code-block >}}
 
-Si la salida del comando es `A certificate chain could not be built to a trusted root authority`, el equipo puede necesitar una actualización de la CA raíz DigiCert. 
+Si la salida del comando es `A certificate chain could not be built to a trusted root authority`, la máquina puede necesitar una actualización de la CA raíz de DigiCert.
 
 ## Seguridad de la información
 
@@ -92,7 +92,7 @@ Para obtener más información, consulta la documentación [Gestión de secretos
 
 {{< site-region region="gov" >}}
 
-El Agent en sitios no gubernamentales recopila información del entorno, del rendimiento y del uso de funciones del Datadog Agent. Cuando el Agent detecta un sitio gubernamental o si se utiliza el [proxy FIPS del Datadog Agent][1], el Agent desactiva automáticamente esta recopilación de telemetría. Cuando esta detección es imposible (por ejemplo, si se está utilizando un proxy), se emite telemetría del Agent, pero se descarta inmediatamente a la entrada de Datadog.
+El Agent en sitios no gubernamentales recopila información del entorno, de rendimiento y de uso de funciones sobre el Datadog Agent. Cuando el Agent detecta un sitio gubernamental, o se utiliza el [proxy FIPS del Datadog Agent][1], el Agent desactiva automáticamente esta recopilación de telemetría. Cuando dicha detección es imposible (por ejemplo, si se está utilizando un proxy), se emite telemetría del Agent, pero se abandona inmediatamente en la entrada de Datadog.
 
 Para evitar que se emitan estos datos en primer lugar, Datadog recomienda desactivar explícitamente la telemetría del Agent actualizando la configuración de `agent_telemetry` en el archivo de configuración del Agent, como se muestra en el siguiente ejemplo.
 
@@ -188,9 +188,11 @@ agent diagnose show-metadata agent-telemetry
 | **API**                                     |                                                                                                                        |
 | api_server.request_duration_seconds         | Rendimiento de la ejecución de comandos CLI (si se ejecutan)                                                                       |
 | **Eventos**                                  |                                                                                                                        |
-| agent_bsod                                  | Información de errores de pantalla azul (BSOD) relacionada con el Agent (sólo se produce en raras ocasiones, cuando Datadog Cloud Network Monitoring está activado)       |
+| agent_bsod                                  | Blue Screen of Death (BSOD) relacionado con el Agent, incluido el código BugCheck, cuatro argumentos asociados y el stack tecnológico de llamadas sin simbolizar del fallo |
 | **Detección de servicios**                       |                                                                                                                        |
 | service_discovery.discovered_services       | Número de servicios detectados por la función de detección de servicios del Agent                                                   |
+| **Monitorización de la GPU**                          |                                                                                                                        |
+| gpu.device_total                            | Número total de GPUs del sistema                                                                                     |
 
 Sólo se emiten los métricas aplicables. Por ejemplo, si DBM no está activado, no se emite ninguna métrica relacionada con una base de datos.
 

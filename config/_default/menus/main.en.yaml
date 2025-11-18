@@ -1097,21 +1097,16 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 701
-    - name: Continuous Profiler
-      url: developers/ide_plugins/idea/continuous_profiler/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_profiler
-      weight: 7011
     - name: Live Debugger
       url: developers/ide_plugins/idea/live_debugger/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_debugger
-      weight: 7012
+      weight: 7011
     - name: Logs
       url: developers/ide_plugins/idea/logs/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
-      weight: 7013
+      weight: 7012
     - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
@@ -2479,7 +2474,12 @@ menu:
       url: service_management/incident_management/investigate/timeline
       parent: incident_investigate
       identifier: incident_investigate_timeline
-      weight: 401
+      weight: 501
+    - name: Follow Ups
+      url: service_management/incident_management/follow-ups
+      parent: incident_investigate
+      identifier: incident_investigate_follow_ups
+      weight: 502
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
@@ -2489,32 +2489,32 @@ menu:
       url: service_management/incident_management/incident_settings/information
       parent: incidents_settings
       identifier: incidents_settings_information
-      weight: 501
+      weight: 601
     - name: Property Fields
       url: service_management/incident_management/incident_settings/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
-      weight: 502
+      weight: 602
     - name: Responder Types
       url: service_management/incident_management/incident_settings/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
-      weight: 503
+      weight: 603
     - name: Integrations
       url: service_management/incident_management/incident_settings/integrations
       parent: incidents_settings
       identifier: incidents_settings_integrations
-      weight: 504
+      weight: 604
     - name: Notification Rules
       url: service_management/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 505
+      weight: 605
     - name: Templates
       url: service_management/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 506
+      weight: 606
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
@@ -5542,6 +5542,11 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
       weight: 105
+    - name: Access Control
+      url: observability_pipelines/configuration/access_control
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_access_control
+      weight: 106
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -5967,7 +5972,7 @@ menu:
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_handling_load_and_backpressure
       weight: 701
-    - name: Best Practices for Scaling Observability Pipelines
+    - name: Scaling Best Practices
       url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
