@@ -36,6 +36,3 @@ Bits AI is your agentic teammate in Datadog, built to automate development, secu
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[3]: /service_management/incident_management
-[4]: /bits_ai/bits_ai_sre/coordinate_incidents/
