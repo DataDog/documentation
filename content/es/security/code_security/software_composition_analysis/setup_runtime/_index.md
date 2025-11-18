@@ -8,9 +8,10 @@ SCA puede detectar vulnerabilidades que afectan a las bibliotecas de código abi
 
 Antes de configurar la detección en tiempo de ejecución, asegúrate de que se cumplen los siguientes requisitos previos:
 
-1. **Instalación del Datadog Agent:** El Datadog Agent se instala y configura para el sistema operativo de tu aplicación o contenedor, nube o entorno virtual.
-2. **Configuración de Datadog APM:** Datadog APM está configurado para tu aplicación o servicio, y las trazas (traces) web (`type:web`) son recibidas por Datadog.
-3. **Biblioteca de rastreo compatible:** La librería de rastreo de Datadog utilizada por tu aplicación o servicio es compatible con las funciones de Software Composition Analysis para el lenguaje de tu aplicación o servicio. Para ver más detalles, consulta la página [Compatibilidad de librerías][2] de cada producto de AAP.
+1. **Biblioteca de rastreo compatible:** La librería de rastreo de Datadog utilizada por tu aplicación o servicio es compatible con las funciones de Software Composition Analysis para el lenguaje de tu aplicación o servicio.
+2. **Instalación del Datadog Agent:** El Datadog Agent se instala y configura para el sistema operativo de tu aplicación o contenedor, nube o entorno virtual.
+3. **Configuración de Datadog APM:** Datadog APM está configurado para tu aplicación o servicio, y las trazas (traces) web (`type:web`) son recibidas por Datadog.
+4. **Biblioteca de rastreo compatible:** La librería de rastreo de Datadog utilizada por tu aplicación o servicio es compatible con las funciones de Software Composition Analysis para el lenguaje de tu aplicación o servicio. Para ver más detalles, consulta la página [Compatibilidad de librerías][2] de cada producto de AAP.
 
 ## Tipos de activación de Software Composition Analysis
 
