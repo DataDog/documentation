@@ -25,7 +25,7 @@ Because the client cannot detect where transmission stopped, it cannot retry fai
 
 - **No batching or compression**: Each message is sent individually, increasing bandwidth usage and customer egress costs.
 - **Uncontrolled back-pressure**: During high load, intake may pause reading from sockets, causing send buffers to fill and data to drop.
-- **No visibility**: Clients can**not tell whether data was successfully written or lost during connection closure.
+- **No visibility**: Clients cannot tell whether data was successfully written or lost during connection closure.
 
 ## Recommended alternatives
 
