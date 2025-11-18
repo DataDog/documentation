@@ -15,8 +15,9 @@ further_reading:
 Incident AI transforms how your team manages incidents by automating coordination tasks and providing intelligent insights throughout the incident lifecycle. Built into Datadog Incident Management, it works in Slack and the Datadog platform to help you respond faster and learn from every incident.
 
 Key capabilities include:
-- **Smart incident coordination**: Get context-aware summaries when you join incident channels, with automatic detection of related incidents to identify systemic issues.
-- **Natural language commands**: Declare incidents, update severity and status, search incident history, and more—all through conversational prompts in Slack.
+- **Incident summaries**: Get context-aware summaries when you join incident channels.
+- **Related incident detection**: Automatic detection of related incidents to identify systemic issues and recurring issues.
+- **Request information or take action**: Declare incidents, update severity and status, search incident history, and more—all through conversational prompts in Slack.
 - **AI-enhanced notifications**: Dynamically populate stakeholder updates with AI-generated summaries of contributing factors, impact, and remediation across email, MS Teams, Slack, and other channels.
 - **Automated follow-ups**: Incident AI collects action items mentioned during incidents and suggests them as follow-up tasks when the incident is resolved.
 - **Intelligent postmortems**: Generate comprehensive first drafts with AI-powered sections covering executive summaries, timelines, customer impact, and lessons learned—giving responders a strong foundation to build on.
@@ -32,7 +33,7 @@ Incident AI helps coordinate incidents—especially those involving multiple tea
    1. In the [Integrations][4] section of the Incidents settings page, find the **Slack** settings.
    1. Enable the following toggles:
       - **Push Slack channel messages to the incident timeline**
-      - **Activate Bits AI features in incident Slack channels for your organization**<br />
+      - **Activate Incident AI features in incident Slack channels for your organization**<br />
       **Note**: Incident AI's incident management features can only be activated for one Datadog organization within a single Slack workspace.
       {{< img src="service_management/incidents/incident_ai/coordinate_incidents_slack_settings.png" alt="Slack integration settings with the specified toggles enabled" style="width:100%;" >}}
 1. To interact with Incident AI in a Slack channel, invite it by running the `@Datadog` command.
