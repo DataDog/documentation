@@ -123,7 +123,7 @@ Last Browser Version
 ### Account profiles 
 The Account Profiles page surfaces a list of the organizations interacting with your application.
 
-{{< img src="product_analytics/account_profileui.png" alt="A view of the User profiles page." style="width:80%;" >}}
+{{< img src="product_analytics/account_profile_ui1.png" alt="A view of the User profiles page." style="width:80%;" >}}
 
 Each profile includes four default attributes to help you identify and track account activity over time. These default attributes are:
 - `account_id`
@@ -145,7 +145,7 @@ On the [Integrations page][4], you can explore the integrations that are compati
 
 On this same page, you can select the [Custom Attributes][5] tab to view imported attributes for user and account profiles.
 
-{{< img src="product_analytics/integration_page3.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
+{{< img src="product_analytics/integration_page4.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
 
 To import attibutes from a reference table or from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to: 
 
@@ -155,17 +155,17 @@ To import attibutes from a reference table or from an integration such as Salesf
 
 1. Choose a **source of the data** to be imported.
 
-{{< img src="product_analytics/choose_integration.png" alt="Choose a source of the data to be imported." style="width:80%;" >}}
+{{< img src="product_analytics/choose_integration1.png" alt="Choose a source of the data to be imported." style="width:80%;" >}}
 
 
-2. Select the **table** containing the desired user data, then select the **join keys** to merge the table with your profiles.
+2. Select the **table** containing the desired user data.
 
-{{< img src="product_analytics/add_table_and_key.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
+{{< img src="product_analytics/add_table_and_key2.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
 
 
-3. Choose which **attributes from the reference table or integration** to add to your profiles.
+3. Select the **join keys** to merge the table with your profiles. Then, choose which **attributes from the reference table or integration** to add to your profiles.
 
-{{< img src="product_analytics/select_integration_attributes.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
+{{< img src="product_analytics/select_integration_attributes2.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
 
 
 <br>
