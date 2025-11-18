@@ -58,7 +58,7 @@ You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider 
 
 After completing all the fields to define the dataset, click **Create Restricted Dataset** to apply it to your organization.
 
-You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. If you need a higher limit, please reach out to Support.
+You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. If you need a higher limit, reach out to Support.
 
 ### API
 The Data Access Control API is under development and should be considered unstable. Future versions may be backward incompatible.
