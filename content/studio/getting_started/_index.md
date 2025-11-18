@@ -155,7 +155,38 @@ Copy and execute the Claude Code command into your terminal:
 
 ### 2. Set up your project
 
-Your AI coding agent can automatically configure Datadog Studio for your project. When you provide a setup prompt, your coding agent does the following:
+Your AI coding agent can automatically configure Datadog Studio for your project.
+
+{{% collapse-content title="Claude Code" level="h4" expanded=false id="claude-code" %}}
+
+1. Copy and execute the Claude Code command into your terminal:
+
+{{< tabs >}}
+{{% tab "US1" %}}
+```sh
+claude mcp add --transport http datadog-onboarding-mcp "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=onboarding" && claude /mcp
+```
+{{% /tab %}}
+
+{{% tab "US3" %}}
+```sh
+claude mcp add --transport http datadog-onboarding-mcp "https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=onboarding" && claude /mcp
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
+
+### Set up your project
+
+Prompt your AI coding agent to enable all capabilities (Error Tracking, Session Replay, Product Analytics, and LLM Observability) in minutes by copying the below prompt into Cursor or Claude Code.
+
+**Prompt**:
+```console
+Add Datadog Studio to my project
+```
+
+When you give this prompt to your coding agent, it does the following:
 
 - Analyze your project and identify if the MCP server offers a tool that can be used to set it up with Datadog
 - Call the tool (asking for your permission before doing so) with inferred parameters from your project (for example: your project's framework, language, and bundler)

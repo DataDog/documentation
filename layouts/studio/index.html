@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang='{{ if eq .Site.Language.Lang "en" }}en-US{{ else }}{{ .Site.Language.Lang }}{{ end }}' data-base-url="{{ .Site.BaseURL }}" data-type="{{.Type}}" data-page-code-lang="{{ .Params.code_lang }}" data-current-section="{{ strings.TrimLeft "/" .CurrentSection.RelPermalink}}" data-relpermalink="{{.RelPermalink}}"
+  data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
+  class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
+
+<head>
+  {{ partialCached "header-scripts.html" . }}
+
+  <meta charset="utf-8">
+  {{ partial "prefetch.html" . }}
+  {{ partial "preload.html" . }}
+  <title>{{ .Title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
+  {{- partial "canonical.html" . -}}
+  {{- partial "noindex.html" . -}}
+  {{- partial "hreflang.html" . -}}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
+
+  {{ partialCached "css.html" . }}
+
+  {{- if and (ne $.Params.disable_opengraph_meta_tags true) .File -}}
+    {{- partial "meta.html" . -}}
+  {{- end -}}
+
+  <style>
+    .main-nav {
+      background:#000 !important;
+      color:#fff !important;
+    }
+  </style>
+</head>
+{{- $bodyClass := $.Scratch.Get "bodyClass" -}}
+{{ $ctx := . }}
+
+<body
+  class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
+
+
+  <div class="greyside">
+    <div class="container container__content h-100">
+      <div class="row h-100">
+        <div class="d-none d-lg-flex col-12 col-sm-3 h-100 grey" style="background:#f8f8f8; z-index: -1;">
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ partialCached "header/header.html" . }}
+
+  <div class="container container__content h-100 pt-1">
+    <div class="row h-100 position-relative js-content-container">
+      <div class="d-none d-lg-flex col-12 col-sm-3 side">
+        {{ partial "sidenav/main-sidenav.html" . }}
+      </div>
+
+      <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
+        <div id="mainContent">
+          <div class="row">
+            <div class="col-12 order-1">
+                <h1 id="pagetitle">{{ .Title }}</h1>
+            </div>
+            <div class="col-12">
+              {{ if .File }}
+                {{ partial "breadcrumbs.html" . }}
+              {{ end }}
+            </div>
+          </div>
+          {{ partial "translate_status_banner/translate_status_banner.html" . }}
+          {{ partial "site_support_banner/site_support_banner.html" . }}
+          {{ .Content }}
+
+          {{ partial "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
+        </div>
+      </div>
+
+      {{ if ne .Params.disable_sidebar true }}
+        <aside class="sidebar col-lg-2">
+          {{ partial "language-region-select.html" . }}
+
+          {{ if ne .Params.disable_toc true }}
+            {{ partial "table-of-contents/table-of-contents.html" . }}
+          {{ end }}
+        </aside>
+      {{ end }}
+    </div>
+  </div>
+
+  {{ partialCached "footer/footer.html" . }}
+  {{ partial "footer-scripts.html" . }}
+  {{ partial "footer-js-dd-docs-methods" . }}
+  {{ partial "preview_banner/preview_banner" . }}
+</body>
+
+</html>
