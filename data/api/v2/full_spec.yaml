@@ -28217,6 +28217,10 @@ components:
           description: The date/time when the rotation starts (ISO 8601).
           format: date-time
           type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
+          type: string
       type: object
     LayerAttributesInterval:
       description: Defines how often the rotation repeats, using a combination of
@@ -44741,6 +44745,10 @@ components:
           example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
+          type: string
       required:
       - name
       - interval
@@ -45090,6 +45098,10 @@ components:
           description: The date/time at which the rotation begins (ISO 8601 format).
           example: '2025-02-01T00:00:00Z'
           format: date-time
+          type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
           type: string
       required:
       - effective_date
