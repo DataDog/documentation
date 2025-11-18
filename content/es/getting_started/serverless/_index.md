@@ -31,9 +31,9 @@ Puedes [ver las funciones de tu aplicación de ejemplo en la Vista serverless][7
 
 ## Vista Serverless
 
-La vista Serverless muestra la telemetría de todos los recursos sin servidor en tu entorno de AWS. Puedes usar esta página como punto de partida para monitorizar, depurar y optimizar tus aplicaciones.
+La vista serverless muestra la telemetría de todos los recursos sin servidor en tu entorno de AWS. Puedes usar esta página como punto de partida para monitorizar, depurar y optimizar tus aplicaciones.
 
-La Vista serverless agrupa tus recursos por el `SERVICE_NAME`. Si has invocado tus funciones al menos una vez, verás un grupo de servicios separado para cada uno de los servicios de backend individuales.
+La vista serverless agrupa tus recursos por `SERVICE_NAME`. Si has invocado tus funciones al menos una vez, verás un grupo de servicios separado para cada uno de los servicios backend individuales.
 
 {{< img src="getting_started/serverless/functions_view_2.png" alt="Acercamiento de dos funciones" style="width:80%;">}}
 
@@ -50,7 +50,7 @@ La aplicación de ejemplo genera errores periódicamente y tiene una respuesta l
 
 Observa que ambos servicios bajo `product-pricing-service` tienen errores. La sección Issues & Insights (Problemas e información) en la parte superior también identifica que uno de tus servicios tiene problemas con los tiempos de inactividad.
 
-{{< img src="getting_started/serverless/insights_and_issues.png" alt="Vista Información y problemas en la Vista serverless" style="width:80%;">}}
+{{< img src="getting_started/serverless/insights_and_issues.png" alt="Vista Información y problemas en la vista serverless" style="width:80%;">}}
 
 ## Detalles de la función
 Haz clic en tu función para ver más detalles sobre las invocaciones y despliegues recientes.

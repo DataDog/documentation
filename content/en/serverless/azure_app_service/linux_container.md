@@ -204,7 +204,13 @@ Instrumentation is done using a sidecar container. This sidecar container collec
 
 #### Locally
 
-Install the [Datadog CLI][601] and [Azure CLI][602], and login to your Azure account using the Azure CLI by running `az login`.
+Install the [Datadog CLI][601]
+
+```shell
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
+```
+
+Install the [Azure CLI][602] and authenticate with `az login`.
 
 Then, run the following command to set up the sidecar container:
 
