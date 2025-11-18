@@ -4,6 +4,8 @@ cascade:
     category: Guía
     rank: 20
     subcategory: Guías de RUM y Session Replay
+description: Guías completas para la implementación, optimización y mejores prácticas
+  de RUM y Session Replay para aplicaciones web y móviles.
 disable_toc: true
 private: true
 title: Guías de Real User Monitoring y Session Replay
@@ -11,16 +13,15 @@ title: Guías de Real User Monitoring y Session Replay
 
 {{< whatsnext desc="Generalidades de RUM:" >}}
     {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}Entender la jerarquía de eventos de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Calcular indicadores de rendimiento Apdex y personalizados con datos de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Crear alertas con datos de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Crear alertas de tasas de conversión{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Calcular puntuaciones Apdex e indicadores de rendimiento personalizados utilizando datos de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Crear alertas utilizando datos de RUM{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitorizar tu uso de RUM{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Realizar un seguimiento del uso de RUM con etiquetas (tags) de atribución de uso{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Configurar RUM de forma remota utilizando LaunchDarkly{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Empezando con el Seguimiento de despliegues de RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Empezando con el Seguimiento de despliegues en RUM{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Empezando con el Seguimiento de indicadores de funciones{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitorizar sesiones kiosk con RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Prácticas recomendadas para el muestreo de RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitorizar sesiones de quiosco utilizando RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Prácticas recomendadas para el muestreo RUM{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/debug-symbols" >}}Investigar trazas (traces) de stack tecnológico ofuscadas con símbolos de depuración de RUM{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/retention_filter_best_practices" >}}Prácticas recomendadas para los filtros de retención{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-tracing-native-ios-android-apps" >}}Prácticas recomendadas para el rastreo de aplicaciones iOS y Android nativas{{< /nextlink >}}

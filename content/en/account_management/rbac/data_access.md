@@ -71,7 +71,7 @@ Terraform support will be announced after Data Access Control is generally avail
 - Software Delivery repository info (CI Visibility pipelines)
 - Cloud costs
 - Custom metrics
-    - **Note:** Standard metrics are not supported
+    - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
 - Logs
 - RUM sessions
@@ -204,6 +204,8 @@ When exploring Datadog with restrictions enabled, users without permissions can 
 
 Similar to exploring data in a data explorer like the RUM Explorer or Metrics Explorer, viewing data in dashboards in an organization that has Restricted Datasets enabled only shows the data the user can access. Since dashboards are shared objects that can be accessed by others, it is possible for two users who have different access to view the same dashboard or notebook at the same time and see different data.
 
+**Note**: Viewers of [Shared Dashboards][12] see all telemetry data displayed in the Dashboard in accordance to the creator's permissions. Review your dashboard content before sharing to ensure no sensitive or confidential data is exposed.
+
 ### APIs
 
 When querying data through Datadog APIs with restrictions enabled, users without permissions do **not** see query results that have been restricted by Restricted Datasets.
@@ -223,3 +225,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [9]: /software_catalog/customize/
 [10]: /account_management/rbac/data_access/#supported-telemetry
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
+[12]: /dashboards/sharing/shared_dashboards/

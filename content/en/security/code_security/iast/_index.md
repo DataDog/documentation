@@ -104,6 +104,19 @@ Recommendations enable you to change the status of a vulnerability, assign it to
 
 **Note:** To create Jira issues for vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][3] documentation, as well as the [Role Based Access Control][4] documentation.
 
+## Vulnerability lifecycle
+
+Datadog automatically manages the lifecycle of vulnerabilities detected by IAST to ensure findings remain accurate and relevant over time.
+
+- **Automatic closure:**
+Vulnerabilities detected by IAST are automatically closed by Datadog when they haven't been observed for **14 days** since their last detection.
+
+- **Service version updates:**
+If a new version of the service is deployed in the environment where the vulnerability was originally detected, the vulnerability is automatically closed **24 hours** after it is no longer seen in that new version.
+
+- **Reopening logic:**
+If a vulnerability that was previously closed is detected again within the following **15 months**, Datadog automatically reopens it.
+
 ## Enable Runtime Code Analysis (IAST)
 
 To enable IAST, configure the [Datadog Tracing Library][9]. Detailed instructions for both methods can be found in the [**Security > Code Security > Settings**][10] section.

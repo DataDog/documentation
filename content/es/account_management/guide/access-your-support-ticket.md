@@ -2,14 +2,20 @@
 aliases:
 - /es/developers/faq/access-your-support-ticket
 - /es/account_management/faq/access-your-support-ticket
+description: Aprende a crear nuevos tiques de soporte y a acceder a tus tiques de
+  soporte existentes en Datadog a través del portal de Zendesk.
+further_reading:
+- link: /getting_started/support/
+  tag: Documentación
+  text: Empezando con el soporte técnico de Datadog
 title: Acceder a tu ticket de soporte
 ---
 
 ## Crear un ticket de soporte
 
-Para crear un nuevo ticket de soporte, haz clic en el enlace correspondiente en el sitio y haz clic en **Submit a request** (Enviar una solicitud) para rellenar un formulario de ticket.
+Para crear un nuevo tique de soporte, haz clic en el enlace del sitio correcto y haz clic en **Submit a request** (Enviar una solicitud) para rellenar un formulario de tique.
 
-{{< whatsnext desc="Support page by Datadog site:">}}
+{{< whatsnext desc="Página de soporte por sitio de Datadog:">}}
     {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -21,9 +27,9 @@ También puedes acceder a este formulario en Datadog desde la [página de ayuda]
 ## Acceder a tickets existentes
 
 Si ya has abierto al menos un ticket de soporte en Datadog, sigue este proceso para acceder a todos tus tickets de soporte de Datadog:
-1. En la página de Soporte, haz clic en **Sign In** (Iniciar sesión) en la esquina superior derecha.
+1. En la página de soporte, haz clic en **Sign in** (Iniciar sesión) en la parte superior derecha.
 
-2. Si esta es la primera vez que inicias sesión en tu cuenta de Datadog Zendesk, haz clic en el enlace **New to your Datadog Zendesk account? Sign up** (¿Primera vez en tu cuenta Datadog Zendesk? Regístrate).
+2. Si es la primera vez que inicias sesión en tu cuenta de Datadog Zendesk, haz clic en el enlace de **New to your Datadog Zendesk account? Sign up** (¿Eres nuevo en la cuenta de Datadog Zendesk? Regístrate).
 
 3. Si ya enviaste un correo electrónico al equipo de soporte de Datadog, haz clic en **Emailed us for support? Get a password** (¿Nos enviaste un correo? Consigue tu contraseña) e introduce la misma dirección de correo electrónico que usaste para contactar al equipo de soporte de Datadog.
 
@@ -33,7 +39,7 @@ Si ya has abierto al menos un ticket de soporte en Datadog, sigue este proceso p
 
 6. Si quieres ver todos los tickets de tu organización, envía una solicitud al equipo de asistencia de Datadog.
 
-{{< whatsnext desc="Support Page by Datadog Site:">}}
+{{< whatsnext desc="Página de soporte por sitio de Datadog:">}}
     {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -63,6 +69,10 @@ Para garantizar la seguridad de tu cuenta, cualquier contraseña utilizada para 
 El error **Refused to connect** (Conexión rechazada) proviene de ajustes de privacidad que bloquean cookies de terceros. Para solucionarlo, asegúrate de que tu navegador permita cookies de terceros de Zendesk. Lee las instrucciones sobre cómo [Borrar, activar y gestionar cookies en Chrome][1] en la página de Ayuda de Google Chrome.
 
 Si tu navegador tiene bloqueadores de publicidad, desactívalos para ver si así puedes iniciar sesión. Algunos bloqueadores de anuncios tienen su propia lista de excepciones. En este caso, añade **datadog.zendesk.com** a la lista de permitidos.
+
+## Referencias adicionales
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://support.google.com/chrome/answer/95647
 [2]: https://app.datadoghq.com/help

@@ -2,7 +2,7 @@
 title: Usage Attribution
 aliases:
     - /account_management/billing/advanced_usage_reporting/
-    - /account_management/billing/custom_usage_reporitng/
+    - /account_management/billing/custom_usage_reporting/
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"

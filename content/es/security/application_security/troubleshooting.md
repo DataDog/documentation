@@ -27,7 +27,7 @@ Existe una serie de pasos que deben ejecutarse correctamente para que la informa
 
 Para comprobar si AAP se está ejecutando, puedes utilizar la métrica `datadog.apm.appsec_host`.
 
-1. Ve a **Métricas > Resumen** en Datadog.
+1. Ve a **Metrics > Summary** (Métricas > Resumen) en Datadog.
 2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando AAP. Si la métrica existe, los servicios se informan mediante las etiquetas (tags) de métricas `host` y `service`.
 3. Selecciona la métrica y busca `service` en la sección **Etiquetas** para ver qué servicios están ejecutando AAP.
 
@@ -248,7 +248,7 @@ Para resolver este paso del proceso, haz lo siguiente:
 
 - Comprueba los detalles del Agent que se está ejecutando en esta dirección `http://<agent-machine-name>:<agent-port>/info`, normalmente `http://localhost:8126/info`.
 - Asegúrate de que no hay errores de transmisión del Agent relacionados con tramos (spans) en los [logs de tu rastreador][7].
-- Si el Agent se instala en una máquina independiente, comprueba que `DD_AGENT_HOST` y, opcionalmente, `DD_TRACE_AGENT_PORT` están configurados, o que `DD_TRACE_AGENT_URL` está configurado para la librería de rastreo de aplicaciones.
+- Si el Agent se instala en una máquina independiente, comprueba que `DD_AGENT_HOST` y, opcionalmente, `DD_TRACE_AGENT_PORT` están configurados, o que `DD_TRACE_AGENT_URL` está configurado para la biblioteca de rastreo de aplicaciones.
 
 ### Comprobar si los tramos se transmiten correctamente a Datadog
 
@@ -270,7 +270,7 @@ A continuación se indican los pasos adicionales para solucionar problemas para 
 
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
-La librería Java utiliza [SLF4J][1] para la generación de logs. Añade las siguientes marcas de tiempo de ejecución para que el rastreador genere logs en un archivo:
+La biblioteca Java utiliza [SLF4J][1] para la generación de logs. Añade las siguientes marcas de tiempo de ejecución para que el rastreador genere logs en un archivo:
 
 ```java
  -Ddatadog.slf4j.simpleLogger.defaultLogLevel=info
@@ -283,7 +283,7 @@ Luego de que se inicia el servicio, el rastreador genera logs en un archivo espe
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-La librería .NET genera logs en un archivo, pero no puede generar logs en `stdout`/`stderr`. El nivel de logs por defecto es `INFO`. Para habilitar logs `DEBUG`, configura `DD_TRACE_DEBUG=true`.
+La biblioteca .NET genera logs en un archivo, pero no puede generar logs en `stdout`/`stderr`. El nivel de logs por defecto es `INFO`. Para habilitar logs `DEBUG`, configura `DD_TRACE_DEBUG=true`.
 
 Los archivos de log están disponibles en los siguientes directorios:
 
@@ -363,9 +363,9 @@ Por ejemplo, el siguiente log de inicio muestra que AAP está deshabilitado:
 
 #### Activa logs de depuración
 
-Habilita logs de depuración con la variable de entorno `DD_TRACE_DEBUG=1`. La librería AAP generará logs para el resultado de error estándar.
+Habilita logs de depuración con la variable de entorno `DD_TRACE_DEBUG=1`. La biblioteca AAP generará logs para el resultado de error estándar.
 
-**Nota:** AAP sólo envía logs cuando está habilitado. Utiliza la variable de entorno `DD_APPSEC_ENABLED=1` para habilitar AAP.
+**Nota:** AAP solo envía logs cuando está habilitado. Utiliza la variable de entorno `DD_APPSEC_ENABLED=1` para habilitar AAP.
 
 [1]: /es/tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
@@ -540,7 +540,7 @@ Espera un minuto a que el Agent reenvíe las trazas y luego comprueba que estas 
 
 Para comprobar si AAP se está ejecutando, puedes utilizar la métrica `datadog.apm.appsec_host`.
 
-1. Ve a **Métricas > Resumen** en Datadog.
+1. Ve a **Metrics > Summary** (Métricas > Resumen) en Datadog.
 2. Busca la métrica `datadog.apm.appsec_host` . Si la métrica no existe, entonces no hay servicios ejecutando AAP. Si la métrica existe, los servicios se informan mediante las etiquetas de métricas `host` y `service`.
 3. Selecciona la métrica y busca `service` en la sección **Etiquetas** para ver qué servicios están ejecutando AAP.
 
@@ -550,7 +550,7 @@ Los datos de AAP se envían con trazas de APM. Consulta [Solucionar problemas de
 
 ### Confirmar que las versiones del rastreador están actualizadas
 
-Consulta la documentación de configuración del producto App and API Protection para confirmar que estás utilizando la versión correcta del rastreador. Estas versiones mínimas son necesarias para comenzar a enviar datos de telemetría que incluyan información de la librería.
+Consulta la documentación de configuración del producto App and API Protection para confirmar que estás utilizando la versión correcta del rastreador. Estas versiones mínimas son necesarias para comenzar a enviar datos de telemetría que incluyan información de la biblioteca.
 
 ### Garantizar la comunicación de los datos de telemetría
 
@@ -560,6 +560,9 @@ Asegúrate de que la variable de entorno `DD_INSTRUMENTATION_TELEMETRY_ENABLED` 
 
 Para desactivar AAP, utiliza uno de los siguientes métodos.
 
+Si habilitaste AAP utilizando la variable de entorno `DD_APPSEC_ENABLED=true`, utiliza la sección DD_APPSEC_ENABLED a continuación.
+Si habilitaste AAP mediante la [Configuración remota][16], utiliza el método de configuración remota que se indica a continuación.
+
 ### DD_APPSEC_ENABLED
 
 Si la variable de entorno `DD_APPSEC_ENABLED=true` está configurada para tu servicio, elimina la variable de entorno `DD_APPSEC_ENABLED=true` de la configuración de tu aplicación y reinicia tu servicio.
@@ -568,22 +571,22 @@ Si tu servicio es un servicio PHP, define explícitamente la variable de entorno
 
 ### Configuración remota
 
-Si AAP se habilitó mediante [configuración remota][16], haz lo siguiente:
-  1. Ve a [Servicios][15].
-  2. Selecciona **Gestión de amenazas en modo monitorización**.
-  3. En la faceta **Gestión de amenazas**, activa **Monitoring Only**, **No data**, and **Ready to block** (Sólo monitorización, Sin datos y Listo para el bloqueo).
+Si AAP se habilitó mediante [configuración remota][16], haz lo siguiente: 
+  1. Ve a [Services (Servicios)][15].
+  2. Selecciona **App & API Protection in Monitoring Mode** (App & API Protection en modo de monitorización).
+  3. En la faceta **App & API Protection**, activa **Monitoring Only** (Solo monitorización), **No data** (Sin datos) y **Ready to block** (Listo para bloquear).
   4. Haz clic en un servicio.
-  5. En los detalles del servicio, en **Detección de amenazas**, haz clic en **Deactivate** (Desactivar).
+  5. En los detalles del servicio, en **App & API Protection**, haz clic en **Deactivate** (Desactivar).
 
 <div class="alert alert-info">Si AAP se habilitó mediante <a href="https://app.datadoghq.com/organization-settings/remote-config">configuración remota</a>, puedes utilizar el botón <strong>Deactivate</strong> (Desactivar). Si AAP se habilitó mediante configuración local, el botón <strong>Deactivate</strong> (Desactivar) no es una opción.</div>
 
 ### Desactivar en bloque
 
-Para deshabilitar AAP en tus servicios de forma masiva, haz lo siguiente:
-  1. Ve a [Servicios][15].
-  2. En la faceta **Gestión de amenazas**, activa **Monitoring Only**, **No data**, and **Ready to block** (Sólo monitorización, Sin datos y Listo para el bloqueo).
+Para deshabilitar AAP en tus servicios de forma masiva, haz lo siguiente: 
+  1. Ve a [Services (Servicios)][15].
+  3. En la faceta **App & API Protection**, activa **Monitoring Only** (Solo monitorización), **No data** (Sin datos) y **Ready to block** (Listo para bloquear).
   3. Selecciona las casillas de verificación de servicios en las que quieres deshabilitar la detección de amenazas.
-  4. En **Acciones masivas**, selecciona **Desactivar detección de amenazas en (número) servicios**.
+  4. En **Bulk Actions** (Acciones en bloque), selecciona **Deactivate Threat detection on (number of) services** (Desactivar detección de amenazas en (número) servicios).
 
 
 ## ¿Necesitas más ayuda?

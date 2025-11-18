@@ -20,8 +20,8 @@ El Agent recopila telemetría directamente de la base de datos iniciando sesión
 
 ## Antes de empezar
 
-Versiones de PostgreSQL compatibles
-: 10, 11, 12, 13, 14, 15
+Versiones PostgreSQL compatibles
+: 10, 11, 12, 13, 14, 15, 16, 17
 
 Versiones del Agent compatibles
 : v7.36.1 o posterior
@@ -332,7 +332,7 @@ instances:
 
 ### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la configuración de instancia como un servicio de Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent :
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio con la siguiente sintaxis:
 
 #### Anotaciones de Autodiscovery v2
 
@@ -345,22 +345,24 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/service.check_names: '["postgres"]'
-    ad.datadoghq.com/service.init_configs: '[{}]'
-    ad.datadoghq.com/service.instances: |
-      [
-        {
-          "dbm": true,
-          "host": "<INSTANCE_ADDRESS>",
-          "port": 5432,
-          "username": "datadog",
-          "password": "ENC[datadog_user_database_password]",
-          "gcp": {
-            "project_id": "<PROJECT_ID>",
-            "instance_id": "<INSTANCE_ID>"
-          }
+    ad.datadoghq.com/postgres.checks: |
+      {
+        "postgres": {
+          "instances": [
+            {
+              "dbm": true,
+              "host": "<INSTANCE_ADDRESS>",
+              "port": 5432,
+              "username": "datadog",
+              "password": "ENC[datadog_user_database_password]",
+              "gcp": {
+                "project_id": "<PROJECT_ID>",
+                "instance_id": "<INSTANCE_ID>"
+              }
+            }
+          ]
         }
-      ]
+      }
 spec:
   ports:
   - port: 5432

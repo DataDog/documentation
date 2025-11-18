@@ -5,6 +5,8 @@ aliases:
 - /es/agent/openmetrics
 - /es/agent/prometheus
 - /es/agent/kubernetes/prometheus
+description: Recopila Prometheus y OpenMetrics de las cargas de trabajo de Kubernetes
+  utilizando el módulo Datadog Agent con Autodiscovery
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentación
