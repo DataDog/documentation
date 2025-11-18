@@ -68,11 +68,11 @@ For a comprehensive list of configuration options, including Unified Service Tag
 
 Version 4.0.0 of `dd-trace-py` drops support for Python 3.8 and 32-bit linux. It also removes previously deprecated APIs. This guide provides steps to help you upgrade your application.
 
-With the release of `v4.0.0`, the `3.x` release line is in maintenance mode. Only critical bug fixes will be backported. For more details, see the [versioning support policy][14].
+With the release of `v4.0.0`, the `3.x` release line is in maintenance mode. Only critical bug fixes are backported. For more details, see the [versioning support policy][14].
 
 ### Step 1: Detect deprecations
 
-To ensure a smooth transition, first upgrade to the latest v3 release (`3.19.0`) and use the following tools to find any deprecated code that will break in v4.
+To ensure a smooth transition, first upgrade to the latest v3 release (`3.19.0`) and use the following tools to find any deprecated code that breaks in v4.
 
 #### In tests
 
@@ -96,11 +96,11 @@ After identifying potential issues, review the following breaking changes. Updat
 
 - Starting with ddtrace v4.0.0, Datadog Agent v7.63.0 or newer is required.
 - Support for ddtrace with Python 3.8 is removed after being deprecated in the 3.0 release line. Use ddtrace 4.x with Python 3.9 or newer.
-- 32-bit linux is no longer supported. Please contact us if this blocks upgrading dd-trace-py.
+- 32-bit linux is no longer supported. Contact support@datadoghq.com if this blocks upgrading dd-trace-py.
 - mongoengine
-  - Drops support for the `ddtrace.Pin` object with mongoengine. With this change, the ddtrace library no longer directly supports mongoengine. Mongoengine will be supported through the `pymongo` integration.
+  - Drops support for the `ddtrace.Pin` object with mongoengine. With this change, the ddtrace library no longer directly supports mongoengine. Mongoengine is supported through the `pymongo` integration.
 - CI Visibility
-  - Removed deprecated entry points for the `pytest_benchmark` and `pytest_bdd` integrations. These plugins are now supported by the regular `pytest` integration.
+  - Removed deprecated entry points for the `pytest_benchmark` and `pytest_bdd` integrations. These plugins are supported by the regular `pytest` integration.
 - dynamic instrumentation
   - removed the deprecated `DD_DYNAMIC_INSTRUMENTATION_UPLOAD_FLUSH_INTERVAL` variable.
 - exception replay
@@ -111,31 +111,31 @@ After identifying potential issues, review the following breaking changes. Updat
     - `Span.set_struct_tag` has been removed.
     - `Span.get_struct_tag` has been removed.
     - `Span._pprint` has been removed
-    - `Span.finished` setter was removed, please use `Span.finish()` method instead.
+    - `Span.finished` setter was removed, use `Span.finish()` method instead.
     - `Tracer.on_start_span` method has been removed.
     - `Tracer.deregister_on_start_span` method has been removed.
     - `ddtrace.trace.Pin` has been removed.
     - `Span.finish_with_ancestors` was removed with no replacement.
   - Some methods have had their type signatures changed
-    - `Span.set_tag` typing is now `set_tag(key: str, value: Optional[str] = None) -> None`
-    - `Span.get_tag` typing is now `get_tag(key: str) -> Optional[str]`
-    - `Span.set_tags` typing is now `set_tags(tags: dict[str, str]) -> None`
-    - `Span.get_tags` typing is now `get_tags() -> dict[str, str]`
-    - `Span.set_metric` typing is now `set_metric(key: str, value: int | float) -> None`
-    - `Span.get_metric` typing is now `get_metric(key: str) -> Optional[int | float]`
-    - `Span.set_metrics` typing is now `set_metrics(metrics: Dict[str, int | float]) -> None`
-    - `Span.get_metrics` typing is now `get_metrics() -> dict[str, int | float]`
+    - `Span.set_tag` typing is `set_tag(key: str, value: Optional[str] = None) -> None`
+    - `Span.get_tag` typing is `get_tag(key: str) -> Optional[str]`
+    - `Span.set_tags` typing is `set_tags(tags: dict[str, str]) -> None`
+    - `Span.get_tags` typing is `get_tags() -> dict[str, str]`
+    - `Span.set_metric` typing is `set_metric(key: str, value: int | float) -> None`
+    - `Span.get_metric` typing is `get_metric(key: str) -> Optional[int | float]`
+    - `Span.set_metrics` typing is `set_metrics(metrics: Dict[str, int | float]) -> None`
+    - `Span.get_metrics` typing is `get_metrics() -> dict[str, int | float]`
   - `Span.record_exception`'s `timestamp` and `escaped` parameters are removed
 - LLM Observability
-  - manual instrumentation methods, including `LLMObs.annotate()`, `LLMObs.export_span()`, `LLMObs.submit_evaluation()`, `LLMObs.inject_distributed_headers()`, and `LLMObs.activate_distributed_headers()` now raise exceptions instead of logging. LLM Observability auto-instrumentation is not affected.
-  - `LLMObs.submit_evaluation_for()` has been removed. Please use `LLMObs.submit_evaluation()` instead for submitting evaluations. To migrate:
+  - manual instrumentation methods, including `LLMObs.annotate()`, `LLMObs.export_span()`, `LLMObs.submit_evaluation()`, `LLMObs.inject_distributed_headers()`, and `LLMObs.activate_distributed_headers()` raise exceptions instead of logging. LLM Observability auto-instrumentation is not affected.
+  - `LLMObs.submit_evaluation_for()` has been removed. Use `LLMObs.submit_evaluation()` instead for submitting evaluations. To migrate:
     - `LLMObs.submit_evaluation_for(...)` users: rename to `LLMObs.submit_evaluation(...)`
     - `LLMObs.submit_evaluation_for(...)` users: rename the `span_context` argument to `span`, i.e. `LLMObs.submit_evaluation(span_context={"span_id": ..., "trace_id": ...}, ...)` to `LLMObs.submit_evaluation(span={"span_id": ..., "trace_id": ...}, ...)`
 - profiling
   - this updates echion (the Python stack sampler) to the latest version, which introduces an experimental faster memory copy function.
-  - The V1 stack profiler is removed. V2 has been enabled by default since v2.20.0. `DD_PROFILING_STACK_V2_ENABLED` is now removed.
+  - The V1 stack profiler is removed. V2 has been enabled by default since v2.20.0. `DD_PROFILING_STACK_V2_ENABLED` is removed.
 - freezegun
-  - The deprecated `freezegun` integration is now removed.
+  - The deprecated `freezegun` integration is removed.
 - opentracer
   - This change removes the deprecated `opentracer` package
 - aioredis
@@ -144,11 +144,11 @@ After identifying potential issues, review the following breaking changes. Updat
   - The `google_generativeai` integration has been removed as the `google_generativeai` library has reached end-of-life.
   As an alternative, you can use the recommended `google_genai` library and corresponding integration instead.
 - openai
-  - Streamed chat/completions will no longer have token counts computed using the `tiktoken` library, and instead
-  will default to having their token counts estimated if not explicitly provided in the OpenAI response object. To guarantee accurate streamed token metrics, set `stream_options={"include_usage": True}` in the OpenAI request.
+  - Streamed chat/completions no longer have token counts computed using the `tiktoken` library, and instead
+  default to having their token counts estimated if not explicitly provided in the OpenAI response object. To guarantee accurate streamed token metrics, set `stream_options={"include_usage": True}` in the OpenAI request.
 - django
-  - This upgrades the default tracing behavior to enable minimal tracing mode by default (``DD_DJANGO_TRACING_MINIMAL`` now defaults to ``true``). Django ORM, cache, and template instrumentation are disabled by default to eliminate duplicate span creation since library integrations for database drivers (psycopg, MySQLdb, sqlite3), cache clients (redis, memcached), template renderers (Jinja2), and other supported libraries continue to be traced. This reduces performance overhead by removing redundant Django-layer instrumentation. To restore all Django instrumentation, set ``DD_DJANGO_TRACING_MINIMAL=false``, or enable individual features using ``DD_DJANGO_INSTRUMENT_DATABASES=true``, ``DD_DJANGO_INSTRUMENT_CACHES=true``, and ``DD_DJANGO_INSTRUMENT_TEMPLATES=true``.
-  - When ``DD_DJANGO_INSTRUMENT_DATABASES=true`` (default ``false``), database instrumentation now merges Django-specific tags into database driver spans created by supported integrations (psycopg, sqlite3, MySQLdb, etc.) instead of creating duplicate Django database spans. If the database cursor is not already wrapped by a supported integration, Django wraps it and creates a span. This change reduces overhead and duplicate spans while preserving visibility into database operations.
+  - This upgrades the default tracing behavior to enable minimal tracing mode by default (``DD_DJANGO_TRACING_MINIMAL`` defaults to ``true``). Django ORM, cache, and template instrumentation are disabled by default to eliminate duplicate span creation since library integrations for database drivers (psycopg, MySQLdb, sqlite3), cache clients (redis, memcached), template renderers (Jinja2), and other supported libraries continue to be traced. This reduces performance overhead by removing redundant Django-layer instrumentation. To restore all Django instrumentation, set ``DD_DJANGO_TRACING_MINIMAL=false``, or enable individual features using ``DD_DJANGO_INSTRUMENT_DATABASES=true``, ``DD_DJANGO_INSTRUMENT_CACHES=true``, and ``DD_DJANGO_INSTRUMENT_TEMPLATES=true``.
+  - When ``DD_DJANGO_INSTRUMENT_DATABASES=true`` (default ``false``), database instrumentation merges Django-specific tags into database driver spans created by supported integrations (psycopg, sqlite3, MySQLdb, etc.) instead of creating duplicate Django database spans. If the database cursor is not already wrapped by a supported integration, Django wraps it and creates a span. This change reduces overhead and duplicate spans while preserving visibility into database operations.
 - Other
   - This change removes the `ddtrace.settings` package. Environment variables should be used to adjust settings.
   - This change removes the deprecated non_active_span parameter to `HttpPropagator.inject`
