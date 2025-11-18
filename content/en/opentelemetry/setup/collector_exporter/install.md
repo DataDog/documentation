@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"
   text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
+- link: "https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/"
+  tag: "Documentation"
+  text: "Enable the Datadog Extension to inspect collector configurations in Fleet Automation"
 ---
 
 ## Overview
@@ -273,6 +276,10 @@ Configure each of the following components to suit your needs:
     {{< nextlink href="/opentelemetry/collector_exporter/hostname_tagging/" >}}Hostname and Tags{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/collector_batch_memory/" >}}Batch and Memory Settings{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Validate your collector configurations in Fleet Automation
+
+Inspect and troubleshoot your OpenTelemetry Collector configurations in Fleet Automation by enabling the Datadog Extension. 
 
 ## Further reading
 
