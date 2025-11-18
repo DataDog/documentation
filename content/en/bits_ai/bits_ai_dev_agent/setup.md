@@ -80,6 +80,20 @@ When you launch the Dev Agent, it runs the setup command at startup and can use 
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
+### Pre-installed languages
+
+You can specify your preferred version using environment variables, or the system will use the default version.
+
+| Language | Environment Variable | Available Versions |
+|----------|---------------------|-------------------|
+| Node.js | `DD_NODE_VERSION` | 18.20.4<br>20.18.0<br>22.13.1 (default) |
+| Python | `DD_PYTHON_VERSION` | 3.10.5<br>3.10<br>3.11<br>3.12 (default)<br>3.13 |
+| Ruby | `DD_RUBY_VERSION` | 3.1.7<br>3.2.7<br>3.3.7<br>3.4.4 (default) |
+| Java | `DD_JAVA_VERSION` | 8<br>11<br>17 (default)<br>21 |
+| Go | *N/A* | 1.24.2 (`go1.24.2`)<br>1.24.4 (`go1.24.4`) |
+| Rust | *N/A* | Stable (latest) |
+| Swift | *N/A* | 5.10 |
+
 [1]: /error_tracking
 [2]: /security/code_security  
 [3]: /profiler/
