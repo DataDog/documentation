@@ -6566,9 +6566,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/reresolver-testing/cdocs-hugo-integration-v9.9.10.tgz":
-  version: 9.9.10
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/reresolver-testing/cdocs-hugo-integration-v9.9.10.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/reresolver-testing/cdocs-hugo-integration-v9.9.11.tgz":
+  version: 9.9.11
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/reresolver-testing/cdocs-hugo-integration-v9.9.11.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.5.2"
     "@types/markdown-it": "npm:^14.1.2"
@@ -6593,7 +6593,7 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^3.22.4"
-  checksum: 10/d3ebf06fe45bbf6f61dfd4ff567cebff5c9585a11c41530c5fd5916590221529b3e6f403ed088166ff9e9db91f27f97b5ad370718c57a2838cc378eb8fe145a7
+  checksum: 10/ec370e905bcfa552c9341509ba7a0b435373acade2174f6b43bc350839a17a16227509c240e02208e4b733dc2cd0652d991c0eac1f96ef2133a68f161bef4896
   languageName: node
   linkType: hard
 
@@ -7660,7 +7660,7 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/reresolver-testing/cdocs-hugo-integration-v9.9.10.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/reresolver-testing/cdocs-hugo-integration-v9.9.11.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
     docs-llms-txt: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz"
