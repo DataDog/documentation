@@ -1,8 +1,6 @@
 ---
 title: Amazon ECS Managed Instances
 description: Install and configure the Datadog Agent on Amazon Elastic Container Service Managed Instances
-aliases:
-  - /agent/amazon_ecs/managed_instances
 further_reading:
     - link: "/agent/amazon_ecs/logs/"
       tag: "Documentation"
