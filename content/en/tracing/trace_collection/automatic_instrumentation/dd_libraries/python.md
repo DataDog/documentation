@@ -64,15 +64,15 @@ The tracing library can be configured through environment variables. This is the
 
 For a comprehensive list of configuration options, including Unified Service Tagging, see the [Library Configuration][3] documentation.
 
-## Upgrading to dd-trace-py v3
+## Upgrading to dd-trace-py v4
 
-Version 3.0.0 of `dd-trace-py` drops support for Python 3.7 and removes previously deprecated APIs. This guide provides steps to help you upgrade your application.
+Version 4.0.0 of `dd-trace-py` drops support for Python 3.8 and 32-bit linux. It also removes previously deprecated APIs. This guide provides steps to help you upgrade your application.
 
-With the release of `v3.0.0`, the `2.x` release line is in maintenance mode. Only critical bug fixes should be backported. For more details, see the [versioning support policy][14].
+With the release of `v4.0.0`, the `3.x` release line is in maintenance mode. Only critical bug fixes will be backported. For more details, see the [versioning support policy][14].
 
 ### Step 1: Detect deprecations
 
-To ensure a smooth transition, first upgrade to the latest v2 release (`2.21.0`) and use the following tools to find any deprecated code that will break in v3.
+To ensure a smooth transition, first upgrade to the latest v3 release (`3.19.0`) and use the following tools to find any deprecated code that will break in v4.
 
 #### In tests
 
@@ -92,7 +92,66 @@ PYTHONWARNINGS=all python app.py
 
 ### Step 2: Address breaking changes
 
-After identifying potential issues, review the following breaking changes. Update your code to be compatible with v3 before proceeding with the upgrade.
+After identifying potential issues, review the following breaking changes. Update your code to be compatible with v4 before proceeding with the upgrade.
+
+- Support for ddtrace with Python 3.8 is removed after being deprecated in the 3.0 release line. Use ddtrace 4.x with Python 3.9 or newer.
+- 32-bit linux is no longer supported. Please contact us if this blocks upgrading dd-trace-py.
+- mongoengine
+  - Drops support for the `ddtrace.Pin` object with mongoengine. With this change, the ddtrace library no longer directly supports mongoengine. Mongoengine will be supported through the `pymongo` integration.
+- CI Visibility
+  - Removed deprecated entry points for the `pytest_benchmark` and `pytest_bdd` integrations. These plugins are now supported by the regular `pytest` integration.
+- dynamic instrumentation
+  - removed the deprecated `DD_DYNAMIC_INSTRUMENTATION_UPLOAD_FLUSH_INTERVAL` variable.
+- exception replay
+  - removed the deprecated `DD_EXCEPTION_DEBUGGING_ENABLED` variable.
+- tracing
+  - Deprecated methods have been removed
+    - `Span.set_tag_str` has been removed, use `Span.set_tag` instead.
+    - `Span.set_struct_tag` has been removed.
+    - `Span.get_struct_tag` has been removed.
+    - `Span._pprint` has been removed
+    - `Span.finished` setter was removed, please use `Span.finish()` method instead.
+    - `Tracer.on_start_span` method has been removed.
+    - `Tracer.deregister_on_start_span` method has been removed.
+    - `ddtrace.trace.Pin` has been removed.
+    - `Span.finish_with_ancestors` was removed with no replacement.
+  - Some methods have had their type signatures changed
+    - `Span.set_tag` typing is now `set_tag(key: str, value: Optional[str] = None) -> None`
+    - `Span.get_tag` typing is now `get_tag(key: str) -> Optional[str]`
+    - `Span.set_tags` typing is now `set_tags(tags: dict[str, str]) -> None`
+    - `Span.get_tags` typing is now `get_tags() -> dict[str, str]`
+    - `Span.set_metric` typing is now `set_metric(key: str, value: int | float) -> None`
+    - `Span.get_metric` typing is now `get_metric(key: str) -> Optional[int | float]`
+    - `Span.set_metrics` typing is now `set_metrics(metrics: Dict[str, int | float]) -> None`
+    - `Span.get_metrics` typing is now `get_metrics() -> dict[str, int | float]`
+  - `Span.record_exception`'s `timestamp` and `escaped` parameters are removed
+- LLM Observability
+  - manual instrumentation methods, including `LLMObs.annotate()`, `LLMObs.export_span()`, `LLMObs.submit_evaluation()`, `LLMObs.inject_distributed_headers()`, and `LLMObs.activate_distributed_headers()` now raise exceptions instead of logging. LLM Observability auto-instrumentation is not affected.
+  - `LLMObs.submit_evaluation_for()` has been removed. Please use `LLMObs.submit_evaluation()` instead for submitting evaluations. To migrate:
+    - `LLMObs.submit_evaluation_for(...)` users: rename to `LLMObs.submit_evaluation(...)`
+    - `LLMObs.submit_evaluation_for(...)` users: rename the `span_context` argument to `span`, i.e. `LLMObs.submit_evaluation(span_context={"span_id": ..., "trace_id": ...}, ...)` to `LLMObs.submit_evaluation(span={"span_id": ..., "trace_id": ...}, ...)`
+- profiling
+  - this updates echion (the Python stack sampler) to the latest version, which introduces an experimental faster memory copy function.
+  - The V1 stack profiler is removed. V2 has been enabled by default since v2.20.0. `DD_PROFILING_STACK_V2_ENABLED` is now removed.
+- freezegun
+  - The deprecated `freezegun` integration is now removed.
+- opentracer
+  - This change removes the deprecated `opentracer` package
+- aioredis
+  - The aioredis integration has been removed.
+- google_generativeai
+  - The `google_generativeai` integration has been removed as the `google_generativeai` library has reached end-of-life.
+  As an alternative, you can use the recommended `google_genai` library and corresponding integration instead.
+- openai
+  - Streamed chat/completions will no longer have token counts computed using the `tiktoken` library, and instead
+  will default to having their token counts estimated if not explicitly provided in the OpenAI response object. To guarantee accurate streamed token metrics, set `stream_options={"include_usage": True}` in the OpenAI request.
+- django
+  - This upgrades the default tracing behavior to enable minimal tracing mode by default (``DD_DJANGO_TRACING_MINIMAL`` now defaults to ``true``). Django ORM, cache, and template instrumentation are disabled by default to eliminate duplicate span creation since library integrations for database drivers (psycopg, MySQLdb, sqlite3), cache clients (redis, memcached), template renderers (Jinja2), and other supported libraries continue to be traced. This reduces performance overhead by removing redundant Django-layer instrumentation. To restore all Django instrumentation, set ``DD_DJANGO_TRACING_MINIMAL=false``, or enable individual features using ``DD_DJANGO_INSTRUMENT_DATABASES=true``, ``DD_DJANGO_INSTRUMENT_CACHES=true``, and ``DD_DJANGO_INSTRUMENT_TEMPLATES=true``.
+  - When ``DD_DJANGO_INSTRUMENT_DATABASES=true`` (default ``false``), database instrumentation now merges Django-specific tags into database driver spans created by supported integrations (psycopg, sqlite3, MySQLdb, etc.) instead of creating duplicate Django database spans. If the database cursor is not already wrapped by a supported integration, Django wraps it and creates a span. This change reduces overhead and duplicate spans while preserving visibility into database operations.
+- Other
+  - This change removes the `ddtrace.settings` package. Environment variables should be used to adjust settings.
+  - This change removes the deprecated non_active_span parameter to `HttpPropagator.inject`
+  - This change removes the deprecated environment variable `DEFAULT_RUNTIME_METRICS_INTERVAL`.
 
 #### Environment variable changes
 
@@ -101,74 +160,18 @@ The following environment variables have been removed or replaced. Update your c
 You can use the following command to find all occurrences of these deprecated variables in your codebase:
 
 ```sh
-git grep -P -e "DD_LLMOBS_APP_NAME" \
-  -e "_DD_LLMOBS_EVALUATOR_SAMPLING_RULES" \
-  -e "_DD_LLMOBS_EVALUATORS" \
-  -e "DD_TRACE_PROPAGATION_STYLE=.*b3 single header" \
-  -e "DD_TRACE_SAMPLE_RATE" \
-  -e "DD_TRACE_API_VERSION=v0.3" \
-  -e "DD_ANALYTICS_ENABLED" \
-  -e "DD_TRACE_ANALYTICS_ENABLED" \
-  -e "DD_HTTP_CLIENT_TAG_QUERY_STRING" \
-  -e "DD_TRACE_SPAN_AGGREGATOR_RLOCK" \
-  -e "DD_TRACE_METHODS=.*\[\]"
+git grep -P -e "DD_DYNAMIC_INSTRUMENTATION_UPLOAD_FLUSH_INTERVAL" \
+-e "DD_EXCEPTION_DEBUGGING_ENABLED" \
+-e "DD_PROFILING_STACK_V2_ENABLED" \
+-e "DEFAULT_RUNTIME_METRICS_INTERVAL"
 ```
-
-| Deprecation                                     | Action Required                                                                                                                        |
-|-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_ANALYTICS_ENABLED`                          | Removed. This is a no-op. See [Ingestion Controls][15] for alternatives.                                                           |
-| `DD_HTTP_CLIENT_TAG_QUERY_STRING`               | Use `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING` instead.                                                                                   |
-| `DD_LLMOBS_APP_NAME`                            | Use `DD_LLMOBS_ML_APP` instead.                                                                                                        |
-| `_DD_LLMOBS_EVALUATOR_SAMPLING_RULES`           | Use `DD_LLMOBS_EVALUATOR_SAMPLING_RULES` instead (without the leading underscore).                                                     |
-| `_DD_LLMOBS_EVALUATORS`                         | Use `DD_LLMOBS_EVALUATORS` instead (without the leading underscore).                                                                   |
-| `DD_PYTEST_USE_NEW_PLUGIN_BETA`                 | Removed. The new pytest plugin is the default and is no longer in beta.                                                            |
-| `DD_TRACE_ANALYTICS_ENABLED`                    | Removed. This is a no-op. See [Ingestion Controls][15] for alternatives.                                                           |
-| `DD_TRACE_METHODS` (using `[]` notation)        | You must use the `:` notation. For example: `mod.submod:method2;mod.submod:Class.method1`. See the [DD_TRACE_METHODS][16] for details. |
-| `DD_TRACE_PROPAGATION_STYLE="b3 single header"` | Use `DD_TRACE_PROPAGATION_STYLE=b3` for identical behavior.                                                                            |
-| `DD_TRACE_SAMPLE_RATE`                          | Use `DD_TRACE_SAMPLING_RULES` instead. See [User-Defined Rules][17] for details.            |
-| `DD_TRACE_SPAN_AGGREGATOR_RLOCK`                | Removed. This feature has been removed and the variable is a no-op.                                                                    |
 
 <div class="alert alert-info">These changes only apply to <code>dd-trace-py</code> configuration and not the Datadog Agent.</div>
 
-#### API and interface changes
 
-The following methods, attributes, and behaviors have been removed or changed.
+#### Python 3.14 compatibility
 
-##### General
-
-- **Python 3.7 Support**: Support for Python 3.7 is removed.
-
-##### Tracing
-
-- **Multiple Tracer Instances**: Support for multiple `Tracer` instances is removed. You must use the global `ddtrace.tracer` instance.
-- `Tracer.configure()`: Deprecated parameters have been removed. Use environment variables to configure Agent connection details (`hostname`, `port`), sampling, and other settings.
-- `Span.sampled`: This attribute is removed. Use `span.context.sampling_priority > 0` to check if a span is sampled.
-- `ddtrace.opentracer`: The `_dd_tracer` attribute is removed. Use the global `ddtrace.tracer` instead.
-- `LLMObs.annotate()`: The `parameters` argument is removed. Use `metadata` instead.
-- `choose_matcher()`: Callables and regex patterns are no longer allowed as arguments to `ddtrace.tracer.sampler.rules[].choose_matcher`. You must pass a string.
-
-##### LLM Observability
-
-- **OpenAI and Langchain**: Support for OpenAI v0.x and Langchain v0.0.x is dropped.
-
-##### CI Visibility
-
-- The new pytest plugin is the default.
-- Module, suite, and test names are parsed from `item.nodeid`.
-- Test names for class-based tests include the class name (for example, `TestClass::test_method`).
-- Test skipping is performed at the suite level.
-
-### Step 3: Upgrade the library
-
-After you have updated your code to address the breaking changes, you can upgrade to the latest v3 release.
-
-```sh
-pip install --upgrade ddtrace
-```
-
-#### Python 3.13 compatibility
-
-Full support for Python 3.13 is in active development. While the core tracing library is compatible, some integrations may not be fully tested or supported in the latest version.
+Full support for Python 3.14 is in active development. While the core tracing library is compatible, some integrations may not be fully tested or supported in the latest version.
 
 For the most current compatibility details for a specific integration, see the library's [latest release notes][19].
 
