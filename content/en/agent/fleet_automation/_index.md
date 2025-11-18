@@ -1,6 +1,6 @@
 ---
 title: Fleet Automation
-description: "Centrally govern and remotely manage Datadog Agents and OpenTelmetry Collectors at scale with configuration views, upgrades, flare collection, and API key rotation."
+description: "Centrally govern and remotely manage Datadog Agents and OpenTelemetry Collectors at scale with configuration views, upgrades, flare collection, and API key rotation."
 disable_toc: false
 further_reading:
 - link: "/remote_configuration"
@@ -25,7 +25,7 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 With the Fleet Automation platform, you can:
 - View the latest Agent and OTel Collector configurations along with historical changes to help confirm deployment updates and ensure configuration consistency.
 - Ensure your fleet of Agents and OTel Collectors are using the latest feature enhancements by identifying and upgrading outdated versions.
-- Send a flare from within your organization, reducing the time it takes to debug issues on an Agent or OTel Collector.
+- Send a flare from within your organization, reducing the time it takes to debug issues on an Agent or DDOT Collector.
 - Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
 
 ## Configure Fleet Automation
