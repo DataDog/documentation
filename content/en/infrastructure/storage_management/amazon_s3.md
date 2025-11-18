@@ -416,18 +416,19 @@ If you don't see data for buckets you set up for Storage Management:
    3. Confirm the Datadog integration can access the inventory files: ensure `s3:GetObject` and `s3:ListBucket` permissions for the destination buckets are set on the Datadog AWS Integration Role.
    4. If you're still encountering issues, [contact Datadog][1].
 
-### Recommendations
+## Recommendations
 
-Storage Management generated recommendations are available in [Cloud Cost Recommendations][4]. Storage Management generates recommendations to reduce your S3 costs with granular details like which prefixes you can optimize by combining observability data with access logs. In order to see these recommendations, you must enable Storage Management for S3 buckets and enable Cloud Cost Management to see the Recommendations.
+Storage Management generated recommendations are available in [Cloud Cost Recommendations][4]. Storage Management generates recommendations to reduce your S3 costs with granular details, like which prefixes you can optimize, by combining observability data with access logs. In order to see these recommendations, you must enable Storage Management for S3 buckets and enable Cloud Cost Management to see the Recommendations.
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
-Prerequisites for seeing recommendations:
+### Prerequisites
+Seeing recommendations requires the following prerequisites:
 1. Ensure you've configured S3 buckets for Storage Management by following the steps above on this page.
 2. If you would like to see recommendations for moving infrequently accessed data to cheaper tiers by prefix, enable and forward S3 Access Logs to Datadog (Datadog Log Management fees apply).
 3. If you would like to see recommendations for identifying non-current versions in prefixes, ensure you're including "All versions" as part of the S3 inventory configuration.
 
-Available Recommendations (assuming criteria for Recommendations is met):
+### Available Recommendations
 - Transition S3 bucket prefix to Infrequent Access
 - Expire old non-current version objects in S3 bucket prefix
 - Consolidate small files in prefix to minimize per-object storage costs
