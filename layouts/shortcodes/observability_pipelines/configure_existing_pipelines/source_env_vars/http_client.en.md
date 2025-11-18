@@ -1,9 +1,11 @@
 - HTTP/s endpoint URL:
    - The Observability Pipelines Worker collects log events from this endpoint.	For example, `https://127.0.0.8/logs`.
-   - Stored as the environment variable: `DD_OP_SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
+   - Stored in the environment variable `DD_OP_SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
+- HTTP/S Client TLS passphrase (when enabled):
+   - Stored in the environment variable `DD_OP_SOURCE_HTTP_CLIENT_KEY_PASS`.
 - If you are using basic authentication:
    - HTTP/S endpoint authentication username and password.
-   - Stored as the environment variables: `DD_OP_SOURCE_HTTP_CLIENT_USERNAME` and `DD_OP_SOURCE_HTTP_CLIENT_PASSWORD`.
+   - Stored in the environment variable `DD_OP_SOURCE_HTTP_CLIENT_USERNAME` and `DD_OP_SOURCE_HTTP_CLIENT_PASSWORD`.
 - If you are using bearer authentication:
    - HTTP/S endpoint bearer token.
-   - Stored as the environment variable: `DD_OP_SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
+   - Stored in the environment variable `DD_OP_SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
