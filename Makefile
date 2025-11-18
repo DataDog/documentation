@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data build-api-derefs
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -81,6 +81,9 @@ build-llms-txt:
 	@echo "Launching llms.txt build ...";
 	@node ./local/bin/js/llms-txt-build.js;
 
+build-api-derefs:
+	@node ./assets/scripts/build-api-derefs.js
+
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
@@ -96,7 +99,7 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 # This is useful for testing changes to the build scripts locally
 start-preserve-build: dependencies
 	@make server
-	
+
 # Run the site with websites_sources_data (integrations previews)
 start-sources: node_modules
 	@make setup-build-scripts
@@ -130,7 +133,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-llms-txt
+	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-llms-txt build-api-derefs
 
 # Download files from S3 bucket and add them to the file system.
 # Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets
@@ -154,7 +157,7 @@ vector_data: integrations_data/extracted/vector
 # only build placeholders in ci
 placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
-	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/" 
+	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/"
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
