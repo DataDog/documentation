@@ -88,7 +88,7 @@ In your workflow or app, configure the action to use the `runPredefinedScript` w
 
 ## Large image
 
-If you want to use tools like [Python](https://www.python.org/), SSH, [AWS CLI](https://aws.amazon.com/cli/), [Terraform](https://developer.hashicorp.com/terraform/cli/commands), or the [gcloud CLI](https://docs.cloud.google.com/sdk/docs/install), you can use the `gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}-large` image instead of the default image.
+If you want to use tools like [Python][13], SSH, [AWS CLI][14], [Terraform][15], or the [gcloud CLI][16], you can use the `gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}}-large` image instead of the default image.
 
 ## Advanced usage with custom images
 
@@ -145,3 +145,7 @@ print("Hello from Python script!")
 [10]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.script.runPredefinedScript
 [11]: /actions/private_actions/update_private_action_runner/
 [12]: /actions/private_actions/run_script/#large-image
+[13]: https://www.python.org/
+[14]: https://aws.amazon.com/cli/
+[15]: https://developer.hashicorp.com/terraform/cli/commands
+[16]: https://docs.cloud.google.com/sdk/docs/install
