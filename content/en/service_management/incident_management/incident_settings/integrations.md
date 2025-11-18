@@ -16,61 +16,11 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 
 ## Slack
 
-To use Incident Management's Slack features, you must first [install the Slack integration for Datadog][3].
-
-Then, go to **[Service Management > Incidents > Settings > Integrations][2]** to configure the Slack features for Incident Management.
-
 For a full overview of Slack configuration options in Datadog Incident Management, including incident declaration, channel automation, message syncing, responder management, and notification settings, see the [Slack integration documentation][4].
 
 ## Microsoft Teams
 
-To use Incident Management's Microsoft Teams features, you must first [install the Microsoft Teams integration for Datadog][5].
-
-After you do that, go to **[Service Management > Incidents > Settings > Integrations][2]** to configure the Microsoft Teams features for Incident Management.
-
-### Declaring and managing incidents in Microsoft Teams
-
-To declare or manage an incident from a specific team:
-1. [Add the Datadog application][6] to the team.
-2. Add the **Datadog** tab to any channel in that team. 
-3. From this tab, declare incidents and manage existing ones (for example, update fields, impacts, and responders). 
-
-**Note**: In an incident channel, the tab shows and lets you manage the incident associated with that channel. In other channels, you can only declare new incidents.
-
-### Incident channels
-
-#### Automatic channel creation
-
-You can configure Incident Management to automatically create an incident Microsoft Teams channel for each incident or for incidents meeting criteria you define.
-
-After you enable this automation, you can define a **channel name template** for Datadog to follow when creating the channel. The following variables are available in channel name templates:
-
-* `{{public_id}}`: Incident's numeric ID
-* `{{title}}`: Incident's title
-* `{{created}}`: Incident's creation date in format MM_DD_YYYY
-* `{{yyyy}}`: Incident's four-digit creation year
-* `{{mm}}`: Incident's two-digit creation month
-* `{{dd}}`: Incident's two-digit creation day of month
-* `{{random_adjective}}`: Random adjective
-* `{{random_noun}}`: Random noun
-
-#### Channel message syncing
-
-You can configure Incident Management to push all incident Microsoft Teams channel messages to the incident timeline.
-
-The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
-
-#### Other incident channel features
-
-You can configure Incident Management to:
-
-* Automatically archive an incident channel after the incident is resolved
-
-### Other Microsoft Teams features
-
-*Send incident updates to a global channel*: You can configure Incident Management to notify a selected channel when an incident's state, severity, title, or incident commander changes.
-
-To customize this behavior, deactivate this setting and [define a notification rule][7] instead.
+For a full overview of Microsoft Teams configuration options in Datadog Incident Management, including incident declaration, channel automation, message syncing, responder management, and notification settings, see [Integrate Microsoft Teams with Datadog Incident Management][17].
 
 ## Other integrations
 
@@ -104,3 +54,4 @@ In addition to integrating with Slack and Microsoft Teams, Incident Management a
 [14]: /integrations/statuspage/
 [15]: /integrations/servicenow/
 [16]: /integrations/zoom_incident_management/
+[17]: /service_management/incident_management/integrations/microsoft_teams
