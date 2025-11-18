@@ -357,7 +357,7 @@ For containerized environments, the Datadog Agent's container images include a b
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-To use this executable with the Datadog Operator, set it as the following:
+To use this executable with the Datadog Operator, configure it as follows:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
