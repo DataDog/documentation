@@ -41,7 +41,7 @@ Ensure you're using the [Datadog Agent v7.34.0 or later][1].
 
 ---
 
-## Example in context (single block)
+## Examples in context (single block)
 
 {{< code-block lang="java" >}}
 import datadog.trace.api.experimental.*;
@@ -131,7 +131,7 @@ private class Carrier implements DataStreamsContextCarrier {
 
 **Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
 
-## Example in context (single block)
+## Examples in context (single block)
 
 {{< code-block lang="js" >}}
 // ==========================
@@ -198,7 +198,7 @@ function handleMessage(msg) {
 
 ---
 
-## Example in context (single block)
+## Examples in context (single block)
 
 {{< code-block lang="python" >}}
 # ==========================
@@ -249,7 +249,6 @@ def handle_message(message, properties):
 - **block**: yields `(key, pathway_context)`. Your block must *store* the DSM context with the message, under the given key
   - If headers are supported: put it in headers.
   - If not: embed it in the payload.
-  -
 
 ### `Datadog::DataStreams.set_consume_checkpoint(queue_type, name, &block)`
 - **queue_type**: same message system as the producer. Using a recognized queue_type helps surface metrics related to that system in Data Streams, but other strings are also allowed.
@@ -261,7 +260,7 @@ def handle_message(message, properties):
 
 ---
 
-## Example in context
+## Examples in context
 
 {{< code-block lang="ruby" >}}
 # Producer side
