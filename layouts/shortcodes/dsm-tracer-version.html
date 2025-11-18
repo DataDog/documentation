@@ -283,3 +283,25 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+
+<!-- Ruby -->
+{{- if eq (.Get "lang") "ruby" -}}
+<!-- Kafka (ruby-kafka) -->
+  {{- if eq (.Get "lib") "ruby-kafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.23.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.23.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Kafka (karafka) -->
+  {{- if eq (.Get "lib") "karafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.23.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.23.0 or later
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
