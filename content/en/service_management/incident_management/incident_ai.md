@@ -86,6 +86,14 @@ When an incident is changed to resolved, Incident AI posts a final summary. This
 
 {{< img src="service_management/incidents/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
 
+## Proactive follow-up task suggestion
+
+After an incident is resolved, Incident AI collects any follow-up tasks responders mentioned during the incident. It then prompts you to review and create them with a single click. These tasks are saved as Incident Follow-Ups in Datadog Incident Management. For more information, see [Incident Follow-ups][5].
+
+To view suggested follow-up tasks:
+1. Navigate to the relevant incident in Datadog.
+1. Open the **Remediation** tab to view a list of all follow-up tasks you've saved from Slack.
+
 ## Related incident detection
 
 Incident AI automatically flags related incidents if they are declared within 20 minutes of each other, helping you identify broader systemic issues.
@@ -104,14 +112,6 @@ Use natural language prompts to request information or take action from Slack:
 | Dive into specific incidents       | `@Datadog What was the root cause of incident-123?` or<br />`@Datadog What remediation actions did the responders take in incident-123?`        |
 | Find related incidents             | `@Datadog Are there any related incidents?`<br />`@Datadog Find me incidents related to DDoS attacks from the past month`                       |
 | Early detection inquiry            | `@Datadog A customer is unable to check out. Is there an incident?`<br />`@Datadog Are there any incidents now impacting the payments service?` |
-
-## Proactive follow-up task suggestion
-
-After an incident is resolved, Incident AI collects any follow-up tasks responders mentioned during the incident. It then prompts you to review and create them with a single click. These tasks are saved as Incident Follow-Ups in Datadog Incident Management. For more information, see [Incident Follow-ups][5].
-
-To view suggested follow-up tasks:
-1. Navigate to the relevant incident in Datadog.
-1. Open the **Remediation** tab to view a list of all follow-up tasks you've saved from Slack.
 
 ## Customize postmortem templates with AI incident variables
 
