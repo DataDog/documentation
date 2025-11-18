@@ -120,7 +120,7 @@ The **Optimization page** surfaces profiling data in several contexts:
 - In the **Troubleshoot section**, Datadog samples long tasks across multiple views to help you identify your top contributing functions. This overview highlights where your JavaScript execution time is being spent and which functions are most responsible for blocking the main thread.
 {{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_troubleshoot_section.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" >}}
 
-- Within the **Event Waterfall**, any long task that includes profiling data is marked with a yellow profiling icon. Clicking one of these long task events opens a Long Task view panel, which displays detailed profiling data captured during that execution window. You can use this panel to examine identify blocking functions and understand how script execution contributes to poor responsiveness.
+- Within the **Event Waterfall**, any long task that includes profiling data is marked with a yellow profiling icon. Clicking one of these long task events opens a Long Task view panel, which displays detailed profiling data captured during that execution window. You can use this panel to examine and identify blocking functions and understand how script execution contributes to poor responsiveness.
 {{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" >}}
 
 
