@@ -36,7 +36,7 @@ Any one of these actions opens a Remediation side panel that displays:
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent"
  btn_hidden="false" header="Join the Bits Dev Agent Preview!">}}
-Generating pull requests requires <strong>Bits Dev Agent</strong>, now in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+Generating pull requests requires <a href="/bits_ai/bits_ai_dev_agent"><strong>Bits Dev Agent</strong></a>, now in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
 If your repositories are [connected to Datadog][4], and an error can be fixed by changing code in one of these connected repositories, then you can use Bits AI to perform the remediation action directly from Datadog. For other problem scenarios, Bits AI provides a detailed list of remediation steps to follow.
