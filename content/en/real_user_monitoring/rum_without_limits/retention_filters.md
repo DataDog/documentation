@@ -111,18 +111,18 @@ For example, to exclude sessions from South Korea while retaining all other sess
 
 ## Cross-product retention filters
 
+{{< callout url=
+ btn_hidden="false" header="Join the Preview!">}}
+Cross-Product Retention Filters are in Preview. Use this form to submit your request today.
+{{< /callout >}}
+
 When configuring a RUM retention filter, you can enable two cross-product retention filters: one for session replays and one for APM traces.
 
 - **Session Replay filter**: Retains replays for the specified percentage of sessions retained by the parent RUM retention filter which have an available replay.
 - **APM traces filter**: Indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter which have available traces.
+  <div class="alert alert-warning">The APM traces filter is only compatible with the following versions of the SDKs (applies to RUM and APM, but not Session Replay): <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - React Native 3.0.0+ <br></div>
 
-**Notes**:
-- The availability of a session replay or APM traces depends on the initialization parameters `sessionReplaySampleRate` and `traceSampleRate` of the SDK.
-- The APM traces filter is only compatible with the following versions of the SDKs:
-
-- Browser 6.5.0+
-- Android 3.0.0+
-- React Native 3.0.0+
+**Note**: The availability of a session replay or APM traces depends on the initialization parameters `sessionReplaySampleRate` and `traceSampleRate` of the SDK. 
 
 ### Default 1% retention
 
