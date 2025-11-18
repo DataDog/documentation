@@ -82,7 +82,7 @@ When you launch the Dev Agent, it runs the setup command at startup and can use 
 
 ### Pre-installed languages
 
-You can specify your preferred version using environment variables, or the system will use the default version.
+Specify your preferred version using environment variables, or the system uses the default version.
 
 | Language | Environment Variable | Available Versions |
 |----------|---------------------|-------------------|
