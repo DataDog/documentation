@@ -93,7 +93,7 @@ Puedes crear reglas para bloquear la fusión de código cuando una solicitud pul
 
 {{% /tab %}}
 
-{{% pestaña "Escaneo de Infraestructura como Código" %}}
+{{% tab "Escaneo de Infraestructura como Código" %}}
 Puede crear reglas para bloquear la fusión de código cuando una solicitud de extracción introduce al menos una vulnerabilidad de infraestructura como código (IaC) de cierta gravedad.
 
 {{< img src="pr_gates/setup/iac.png" alt="Una regla de PR Gate que falla cuando una o más vulnerabilidades de biblioteca con gravedad crítica o alta están incluidas en el repositorio" style="width:80%" >}}
