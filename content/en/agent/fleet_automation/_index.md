@@ -54,6 +54,10 @@ For each OTel Collector, you can see:
 - Whether the Collector is deployed as a daemonset or gateway
 - The configuration YAML of the Collector
 
+<div class="alert alert-info">
+An OTel collector is currently determined to be a gateway collector when it receives telemetry from multiple hosts and configured with the Datadog Exporter. Further work is planned for identifying gateway collectors in multi-layer or other gateway deployment patterns.
+</div>
+
 ### Examine an Agent or OpenTelemetry Collector
 
 Selecting an Agent or OTel Collector gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
