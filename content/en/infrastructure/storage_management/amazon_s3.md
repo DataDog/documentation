@@ -411,10 +411,10 @@ To verify your setup:
 ### Troubleshooting
 
 If you don't see data for buckets you set up for Storage Management:
-   1. Check the destination bucket for inventory files that are not empty. If there are no inventories, ensure the source buckets have permission to write to the destination bucket.
-   2. Check the AWS integration page to confirm you're not missing any S3-related permissions as part of [Resource Collection][2]. Ensure all S3-related permission are granted.
-   3. Confirm the Datadog integration can access the inventory files: ensure `s3:GetObject` and `s3:ListBucket` permissions for the destination buckets are set on the Datadog AWS Integration Role.
-   4. If you're still encountering issues, [contact Datadog][1].
+   - Check the destination bucket for inventory files that are not empty. If there are no inventories, ensure the source buckets have permission to write to the destination bucket.
+   - Check the AWS integration page to confirm you're not missing any S3-related permissions as part of [Resource Collection][2]. Ensure all S3-related permission are granted.
+   - Confirm the Datadog integration can access the inventory files: ensure `s3:GetObject` and `s3:ListBucket` permissions for the destination buckets are set on the Datadog AWS Integration Role.
+   - If you're still encountering issues, [contact Datadog][1].
 
 ## Recommendations
 
@@ -433,7 +433,7 @@ Seeing recommendations requires the following prerequisites:
 - Expire old non-current version objects in S3 bucket prefix
 - Consolidate small files in prefix to minimize per-object storage costs
 
-  {{< img src="infrastructure/storage_management/storage-recs.png" alt="Storage Management Recommendations in CCM" responsive="true">}}
+  {{< img src="infrastructure/storage_monitoring/storage-recs.png" alt="Storage Management Recommendations in CCM" responsive="true">}}
 
 [1]: mailto:storage-monitoring@datadoghq.com
 [2]: /integrations/amazon-web-services/#resource-types-and-permissions
