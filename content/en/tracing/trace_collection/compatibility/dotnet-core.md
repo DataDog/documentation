@@ -30,6 +30,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET and .NE
 
 | .NET Version         | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
+| .NET 10              | _November 14, 2028_   | [GA](#support-ga)    | latest (>= 3.31.0)   |
 | .NET 9               | _November 10, 2026_   | [GA](#support-ga)    | latest (>= 3.6.0)    |
 | .NET 8               | _November 10, 2026_   | [GA](#support-ga)    | latest (>= 2.42.0)   |
 | .NET 7               | May 14, 2024          | [GA](#support-ga)    | latest (>= 2.20.0)   |
