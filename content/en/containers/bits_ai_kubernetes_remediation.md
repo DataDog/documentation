@@ -21,18 +21,23 @@ The following Kubernetes errors are supported:
 
 You can launch Bits AI Kubernetes Remediation from multiple locations within Datadog:
 - **From a Kubernetes monitor**: In the _Troubleshooting_ section, select a workload under _Problematic Workloads_.
-- **From [Kubernetes Explorer][2]**: Hover over an error to see more information about the alert and the affected workload(s), and click _Start Remediation_.
+- **From [Kubernetes Explorer][2]**: Hover over a pod status with an error to see more information about the alert and the affected workload(s), and click _Start Remediation_.
 - **From the [Kubernetes Remediation][1] tab**: Select a workload from the list.
 
 Any one of these actions opens a Remediation side panel that displays:
 
 - An AI-powered explanation for root cause, based on collected telemetry and known patterns
 - Recommended next steps, which you may be able to [perform directly from Datadog](#remediate-from-datadog)
-- Related information, including recent deployments, error logs, Kubernetes events, etc.
+- Related information on an adjustable timeframe: recent deployments, error logs, Kubernetes events, etc., including relevant metrics based on specific issue type
 
 {{< img src="containers/remediation/side_panel2.png" alt="Remediation side panel opened for a workload with a CrashLoopBackOff error. Displays a What Happened section with a Bits AI-powered explanation of the error's root cause. Below, a Recommended Next Steps section where the user can inspect the workload manifest. Step-by-step instructions for a suggested fix are also displayed." style="width:80%;" >}}
 
 ### Remediate from Datadog
+
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent"
+ btn_hidden="false" header="Join the Bits Dev Agent Preview!">}}
+Generating pull requests requires <strong>Bits Dev Agent</strong>, now in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
 
 If your repositories are [connected to Datadog][4], and an error can be fixed by changing code in one of these connected repositories, then you can use Bits AI to perform the remediation action directly from Datadog. For other problem scenarios, Bits AI provides a detailed list of remediation steps to follow.
 
@@ -46,7 +51,8 @@ When a pod is terminated because the memory usage exceeded its limit, you may be
 2. Adjust your limit so that it is higher than what your container normally uses.
 3. Click **Fix with Bits AI**.
 4. On the next page, select the repository where your deployment is defined, and review the proposed changes. Click **Fix with Bits** to create a pull request.
-5. You are redirected to a Bits [Code Session][3], where you can verify that the Bits AI Dev Agent identified the specific configuration file where your memory limits are defined. Click **View Pull Request** to view the pull request in GitHub.
+5. You are redirected to a Bits [Code Session][3], where you can verify that the Bits AI Dev Agent identified the specific configuration file where your memory limits are defined. Click **Create Pull Request** to initiate the creation of the pull request.
+6. Click **View Pull Request** to view the pull request in GitHub.
 {{% /collapse-content %}}
 
 ## Further reading
