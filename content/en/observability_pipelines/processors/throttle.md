@@ -28,6 +28,8 @@ The throttle processor sets a rate limit on the number of logs sent within a spe
 
 ### Initial capacity
 
+{{< img src="observability_pipelines/processors/throttling_rate.png" alt="The throttle processor with the throttling rate set to 1000 K" style="width:40%;" >}}
+
 When the throttle processor is enabled, the number of logs the processor allows through immediately is based on the configured **Throttling Rate**. For example, if the **Throttling Rate** is set to `1000` events over 60 seconds:
 
 - And 5,000 events arrive the moment the processor is enabled, the processor allows an initial capacity of 1,000 events to pass through while the rest (4,000 events) are dropped.
