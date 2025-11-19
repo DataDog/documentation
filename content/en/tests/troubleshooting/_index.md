@@ -79,7 +79,7 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    : Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
    **Example**: `1.0.1`
 
-5. If no CI provider environment variables are found, tests results are sent with no Git metadata.
+4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
 ### The total test time is empty
 If you cannot see the total test time, it is likely that test suite level visibility is not enabled. To confirm, check if your language supports test suite level visibility in [Supported features][14]. If test suite level visibility is supported, update your tracer to the latest version.
