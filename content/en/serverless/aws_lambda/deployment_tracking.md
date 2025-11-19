@@ -52,9 +52,9 @@ Datadog can group your metrics by tags such as `git.commit.sha` to correlate cod
 {{< img src="serverless/metrics_grouped_by_git_commit.png" alt="Metrics Grouped By Git Commit" style="width:100%;">}}
 
 Depending on your configuration, the Datadog Lambda Extension adds the following tags to your metrics, logs, and traces:
-- **executed_version**: The AWS Lambda function version that was executed. This tag is added by the Datadog Lambda Extension when you enable [AWS Lambda versioning][6] for your function. To use this feature, you must publish versions of your Lambda function and configure aliases or direct invocations to use specific versions.
-- **version**: The deployment version tag set through the `DD_VERSION` Lambda environment variable. If you have this as an environment variable, it is added as a tag by the Datadog Extension.
-- **git.commit.sha**: The Git commit hash associated with the deployed code. This must be included in the `DD_TAGS` Lambda environment variable (for example, `DD_TAGS=git.commit.sha:abc123def456`). If you deploy your Lambda using Datadog's CI or CDK construct, this tag is automatically added to `DD_TAGS` env variable during deployment. Otherwise, you must add it to `DD_TAGS` yourself.
+- `executed_version`: The AWS Lambda function version that was executed. This tag is added by the Datadog Lambda Extension when you enable [AWS Lambda versioning][6] for your function. To use this feature, you must publish versions of your Lambda function and configure aliases or direct invocations to use specific versions.
+- `version`: The deployment version tag set through the `DD_VERSION` Lambda environment variable. If you have this as an environment variable, it is added as a tag by the Datadog Lambda Extension.
+- `git.commit.sha`: The Git commit hash associated with the deployed code. This must be included in the `DD_TAGS` Lambda environment variable (for example, `DD_TAGS=git.commit.sha:abc123def456`). If you deploy your Lambda function using Datadog's CI or CDK construct, this tag is automatically added to the `DD_TAGS` environment variable during deployment. Otherwise, you must add it to `DD_TAGS` yourself.
 
 ## Further Reading
 
