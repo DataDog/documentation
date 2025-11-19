@@ -1,5 +1,5 @@
 ---
-title: Explore templates
+title: Explore Templates
 disable_toc: false
 further_reading:
 - link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"

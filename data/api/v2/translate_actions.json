@@ -851,11 +851,11 @@
     "summary": "Delete an application key owned by current user"
   },
   "GetCurrentUserApplicationKey": {
-    "description": "Get an application key owned by current user",
+    "description": "Get an application key owned by current user.\nThe `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Get one application key owned by current user"
   },
   "UpdateCurrentUserApplicationKey": {
-    "description": "Edit an application key owned by current user",
+    "description": "Edit an application key owned by current user.\nThe `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Edit an application key owned by current user",
     "request_description": "",
     "request_schema_description": "Request used to update an application key."
@@ -905,6 +905,46 @@
     "summary": "Edit a dataset",
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
+  },
+  "CreateDeploymentGate": {
+    "description": "Endpoint to create a deployment gate.",
+    "summary": "Create deployment gate",
+    "request_description": "",
+    "request_schema_description": "Parameters for creating a deployment gate."
+  },
+  "CreateDeploymentRule": {
+    "description": "Endpoint to create a deployment rule. A gate for the rule must already exist.",
+    "summary": "Create deployment rule",
+    "request_description": "",
+    "request_schema_description": "Parameters for creating a deployment rule."
+  },
+  "DeleteDeploymentRule": {
+    "description": "Endpoint to delete a deployment rule.",
+    "summary": "Delete deployment rule"
+  },
+  "GetDeploymentRule": {
+    "description": "Endpoint to get a deployment rule.",
+    "summary": "Get deployment rule"
+  },
+  "UpdateDeploymentRule": {
+    "description": "Endpoint to update a deployment rule.",
+    "summary": "Update deployment rule",
+    "request_description": "",
+    "request_schema_description": "Parameters for updating a deployment rule."
+  },
+  "DeleteDeploymentGate": {
+    "description": "Endpoint to delete a deployment gate. Rules associated with the gate are also deleted.",
+    "summary": "Delete deployment gate"
+  },
+  "GetDeploymentGate": {
+    "description": "Endpoint to get a deployment gate.",
+    "summary": "Get deployment gate"
+  },
+  "UpdateDeploymentGate": {
+    "description": "Endpoint to update a deployment gate.",
+    "summary": "Update deployment gate",
+    "request_description": "",
+    "request_schema_description": "Parameters for updating a deployment gate."
   },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
@@ -3068,8 +3108,28 @@
     "request_description": "",
     "request_schema_description": "Request to create a team"
   },
+  "DeleteTeamConnections": {
+    "description": "Delete multiple team connections.",
+    "summary": "Delete team connections",
+    "request_description": "",
+    "request_schema_description": "Request for deleting team connections."
+  },
+  "ListTeamConnections": {
+    "description": "Returns all team connections.",
+    "summary": "List team connections"
+  },
+  "CreateTeamConnections": {
+    "description": "Create multiple team connections.",
+    "summary": "Create team connections",
+    "request_description": "",
+    "request_schema_description": "Request for creating team connections."
+  },
+  "GetTeamSync": {
+    "description": "Get all team synchronization configurations.\nReturns a list of configurations used for linking or provisioning teams with external sources like GitHub.",
+    "summary": "Get team sync configurations"
+  },
   "SyncTeams": {
-    "description": "This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This will not create new Teams in Datadog.",
+    "description": "This endpoint attempts to link your existing Datadog teams with GitHub teams by matching their names.\nIt evaluates all current Datadog teams and compares them against teams in the GitHub organization\nconnected to your Datadog account, based on Datadog Team handle and GitHub Team slug\n(lowercased and kebab-cased).\n\nThis operation is read-only on the GitHub side, no teams will be modified or created.\n\n[A GitHub organization must be connected to your Datadog account](https://docs.datadoghq.com/integrations/github/),\nand the GitHub App integrated with Datadog must have the `Members Read` permission. Matching is performed by comparing the Datadog team handle to the GitHub team slug\nusing a normalized exact match; case is ignored and spaces are removed. No modifications are made\nto teams in GitHub. This only creates new teams in Datadog when type is set to `provision`.",
     "summary": "Link Teams with GitHub Teams",
     "request_description": "",
     "request_schema_description": "Team sync request."

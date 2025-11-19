@@ -29,7 +29,6 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [CrewAI](#crewai)                             | >= 0.105.0         | >= 3.5.0       |
 | [Google ADK](#google-adk)                       | >= 1.0.0           | >= 3.15.0      |
 | [Google GenAI](#google-genai)                   | >= 1.21.1          | >= 3.11.0      |
-| [Google GenerativeAI](#google-generativeai)     | >= 0.7.2           | >= 2.14.0      |
 | [LangChain](#langchain)                         | >= 0.0.192         | >= 2.9.0       |
 | [LangGraph](#langgraph)                         | >= 0.2.23          | >= 3.10.1      |
 | [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
@@ -328,26 +327,6 @@ The Google GenAI integration instruments the following methods:
 [1]: https://ai.google.dev/gemini-api/docs
 [2]: https://ai.google.dev/api/generate-content#method:-models.generatecontent
 [3]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
-{{% /tab %}}
-{{< /tabs >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Google GenerativeAI" level="h3" expanded=false id="google-generativeai" %}}
-{{< tabs >}}
-{{% tab "Python" %}}
-The Google GenerativeAI integration provides automatic tracing for the Google GenerativeAI Python SDK content generation calls.
-
-**Note:** The [Google Generative AI SDK][1] is deprecated, and succeeded by Google GenAI.
-
-### Traced methods
-
-The Google GenerativeAI integration instruments the following methods:
-
-- Generating content (including streamed calls):
-  - `model.generate_content()` (Also captures `chat.send_message()`)
-  - `model.generate_content_async()` (Also captures `chat.send_message_async()`)
-
-[1]: https://github.com/google-gemini/deprecated-generative-ai-python
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}

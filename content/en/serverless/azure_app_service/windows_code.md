@@ -423,10 +423,9 @@ This setup automatically includes trace correlation when `DD_LOGS_INJECTION=true
 {{% /tab %}}
 {{% tab "Java" %}}
 
-See instructions for [Agentless logging with Java][1] to configure application logging for Java in Azure App Service.
+See [Stream logs directly to the Agent][1] to configure application logging for Java in Azure App Service.
 
-[1]: /logs/log_collection/java/#agentless-logging
-
+[1]: /logs/log_collection/java/##stream-logs-directly-to-the-agent
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
