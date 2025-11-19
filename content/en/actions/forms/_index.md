@@ -105,34 +105,3 @@ To visualize form responses in a dashboard:
 [13]: https://app.datadoghq.com/ddsql/editor
 [14]: /dashboards/widgets/query_value/
 [15]: /dashboards/querying/#define-the-metric
-
-
-
-
-
-### Start with a blueprint 
-
-Blueprints are helpful starter forms that cover common use cases. They come loaded with a sample description and questions to help familiarize yourself with form elements. Blueprints also showcase best practices for setting up form elements. 
-
-To create a form from a blueprint: 
-1. On the [Forms][1] page, click **+ New Form**.
-1. Select a blueprint, then click **Continue**. 
-1. Optionally, change the title and/or description. Click **Continue**.
-1. To edit the form, click the placeholder component, or click the **<i class="icon-plus-circled-wui"></i>** icon to add a new component. Component types include single line text, multi-line text, select, checkboxes, and ratings. The following table lists the elements available inside components:
-    | Element  | Description    | Component Availability |
-    |----------------------------|---------------------------------------------------------------------|-----|
-    | Required | Determines whether the question requires an answer from the respondent; required questions are marked with a red asterisk on forms. | All components | 
-    | Field name           | The name of the field. Appears in the JSON version in [**Responses**][8]. Not visible to respondents.                                   | All components | 
-    | Placeholder         | The text the respondent sees before entering any text.                 | Short answer, paragraph, and dropdown |
-    | Default value         | The default item or text that is selected before the respondent makes a selection.                                | All components except ratings and checkboxes | 
-    | Data         | The available options that respondents can choose from.                | Select and checkboxes | 
-    | Questions             | The questions respondents are asked when rating their experience. | Ratings |  
-1. Click **Save** to save your changes. 
-
-To preview, share, and debug your form:
-1. Click **View** to display the form as it appears to respondents. Click **Edit** to return to the creator view. 
-1. Click **Share** to copy the form link to your clipboard.
-1. In the **Debug** section:
-    1. click **Form** to show a mini-preview of your form.
-    1. click **Data Definition** to show the JSON version of the components' definition.
-    1. click **UI Definition** to show the JSON version of the form's UI.
