@@ -166,7 +166,7 @@ Define the report title and set a time frame to determine the range of time disp
 
 {{< img src="/notebooks/analysis_features/configure_report.png" alt="Report configuration section of report scheduling modal" style="width:100%;" >}}
 
-If the analysis cell has not been published as a dataset before, you can specify the name of the dataset that will be published as part of scheduling this report.
+If the analysis cell has not been published as a dataset before, you can specify the name of the dataset published by scheduling this report.
 
 **Email:** To add email recipients to your report, enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it. To see the report before saving the schedule, click **Send Test Email**. Only Enterprise and Pro accounts can send reports to email addresses that don't correspond to registered Datadog users.
 
