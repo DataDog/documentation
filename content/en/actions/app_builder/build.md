@@ -49,7 +49,7 @@ To build an app with Bits AI:
 1. Click a suggested prompt, or enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example prompts:
    - `Display a list of AWS Lambda functions in a table. Allow the user to filter by function name and specify the limit.`
    - `Display GitHub pull requests in a table.`
-1. Press **Enter** to send your prompt. Bits AI will automatically generate the UI, actions, and logic for your app, mapped to your existing data and permissions.
+1. Press **Enter** to send your prompt. Bits AI automatically generates the UI, actions, and logic for your app, mapped to your existing data and permissions.
 1. While it's responding, Bits AI will ask you to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
 1. Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press **Enter**. 
 1. After Bits AI adds an action to the app, you will be prompted to either Mock with AI Data, or skip configuration. Configuring your action during agent execution helps with connecting the data types to other components.
