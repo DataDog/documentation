@@ -146,11 +146,12 @@ Each rule consists of one or more conditions. A condition includes the following
 - **Value**: The text or pattern to match, such as a process name or command-line flag.
 
 Supported attributes include:
-| Attribute    | Description |
-| ----------- | ----------- |
-| `process` | Executable name of the process. |
-| `process args` | Command-line arguments used to start the process. |
-| `language` | Programming language detected for the process. |
+| Attribute    | Description | Example |
+| ----------- | ----------- | --------- |
+| `process executable` | Executable name of the process. | `python3.11` |
+| `process executable full path` | Full path of the executable. | `/usr/bin/python3.11` |
+| `process args` | Command-line arguments used to start the process. | `--env=production` |
+| `language` | Programming language detected for the process. | `python` |
 
 ## Remove Single Step APM instrumentation from your Agent
 
