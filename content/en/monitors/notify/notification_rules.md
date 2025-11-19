@@ -201,3 +201,4 @@ The following table demonstrates how monitors with different tag combinations ma
 
 [1]: https://app.datadoghq.com/monitors/settings/notifications
 [2]: /monitors/notify/#notifications
+[3]: /logs/explorer/search_syntax/
