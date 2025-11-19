@@ -28,7 +28,7 @@ Use this method to instrument only your .NET applications running on IIS.
 
 To enable APM with Single Step Instrumentation for IIS:
 
-1. In Datadog, go to the Install Datadog [Windows Agent page][1].
+1. In Datadog, go to the Install Datadog [Windows Agent page](https://app.datadoghq.com/fleet/install-agent/latest?platform=windows).
 1. In the **Customize your observability coverage** section, toggle **Application Performance Monitoring (APM)**.
 1. (Optional) Set your SDK version:
    
@@ -54,7 +54,7 @@ Use this method to instrument Java and .NET applications across your entire Wind
 
 Once you receive early access to the Preview, follow the steps below:
 
-1. In Datadog, go to the Install Datadog [Windows Agent page][1].
+1. In Datadog, go to the Install Datadog [Windows Agent page](https://app.datadoghq.com/fleet/install-agent/latest?platform=windows).
 1. In the **Customize your observability coverage** section, toggle **Application Performance Monitoring (APM)**.
 1. (Optional) Set your SDK version:
    
