@@ -28,7 +28,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Test configuration
 
-1. Choose your **request type** (TCP, UDP, or ICMP) and specify the host or URL to query. Port information is optional.  
+1. Choose your **request type** (TCP, UDP, or ICMP) and specify the host or URL to query. Port information is optional for UDP and ICMP tests.  
 2. Name your test.  
 3. Optional: Configure advanced options:  
    1. **Source service**: The label displayed for the source host in the Network Path visualization.  
@@ -54,7 +54,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 6. Select the **locations** from which to run your test. Network Path tests can run from managed locations to test your endpoints from global locations.
 
-   {{% managed-locations %}}
+   {{% managed-locations-network-path %}}
 
 7. Set the **test frequency** to determine how often Datadog runs your Network Path test. Scheduled tests ensure your most important endpoints remain accessible to your users.
 
