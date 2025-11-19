@@ -25,7 +25,7 @@ The Rust SDK does not provide automatic instrumentation. Tracing is achieved by 
 
 ## Overview
 
-Datadog provides tracing support for Rust applications through the []`datadog-opentelemetry` crate][5], which is built on the OpenTelemetry (OTel) API and SDK.
+Datadog provides tracing support for Rust applications through the [`datadog-opentelemetry` crate][5], which is built on the OpenTelemetry (OTel) API and SDK.
 
 To get started, make sure you have [installed and configured the Datadog Agent][4].
 

@@ -800,7 +800,8 @@ Support for baggage as span tags was introduced in the following releases:
 | .NET      | 3.23.0                          |
 | Node      | 5.54.0                          |
 | PHP       | 1.10.0                          |
-| C++/Proxy | Not yet supported               |
+| C++/Proxy | Not supported                   |
+| Rust      | Not supported                   |
 
 ## Further reading
 
