@@ -11,22 +11,27 @@ further_reading:
 
 ## Overview
 
-With Single Step Instrumentation (SSI), you can use a single Datadog Agent installation command to automatically enable APM for your Java and .NET applications running on Windows VMs.
+With Single Step Instrumentation (SSI), you can enable APM for your Java and .NET applications on Windows VMs using a single Datadog Agent installation command.
 
 ## Enable APM on Windows
 
 <div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
 
-Follow the instructions based on your application setup:
+You can enable APM on Windows in the following ways:
+* Instrument only .NET applications on IIS
+* Instrument all Java and .NET applications across your entire Windows host
+
+{{< callout url=
+ btn_hidden="false" header="Join the Preview!">}}
+Host-wide instrumentation for Windows is in Preview. Use this form to submit your request today.
+{{< /callout >}}
 
 {{< tabs >}}
 {{% tab "IIS" %}}
 
-### Instrument .NET applications on IIS
+To instrument only .NET applications running on IIS:
 
-To instrument your .NET applications running on IIS:
-
-1. In Datadog, go to [Install the Datadog Agent on Windows][5].
+1. In Datadog, go to [Install the Datadog Agent on Windows][1].
 1. In the **Customize your observability coverage** section, toggle **Application Performance Monitoring (APM)**.
 1. (Optional) Set your SDK version:
    
@@ -40,20 +45,15 @@ To instrument your .NET applications running on IIS:
 
 After installation, the Agent automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
 
+[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
+
 {{% /tab %}}
 
 {{% tab "Host-wide (Preview)" %}}
 
-### Instrument Java and .NET applications host-wide
-
-{{< callout url=
- btn_hidden="false" header="Join the Preview!">}}
-Host-wide instrumentation for Windows is in Preview. Use this form to submit your request today.
-{{< /callout >}}
-
 To instrument Java and .NET applications across your entire Windows host:
 
-1. In Datadog, go to [Install the Datadog Agent on Windows][5].
+1. In Datadog, go to [Install the Datadog Agent on Windows][1].
 1. In the **Customize your observability coverage** section, toggle **Application Performance Monitoring (APM)**.
 1. (Optional) Set your SDK version:
    
@@ -65,6 +65,8 @@ To instrument Java and .NET applications across your entire Windows host:
 1. Copy and run the provided MSI install command on your Windows host.
 1. Restart the services you want instrumented.
 
+[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -74,7 +76,7 @@ Unified Service Tags (USTs) apply consistent tags across traces, metrics, and lo
 
 ## Enable SDK-dependent products and features
 
-Once SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
 
 To enable products, [set environment variables][3] in your application configuration.
 
@@ -98,4 +100,3 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [2]: /integrations/windows-service/#tags
 [3]: /tracing/trace_collection/library_config/
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
-[5]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
