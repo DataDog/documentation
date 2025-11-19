@@ -64,7 +64,7 @@ Find out more in the [Live Debugger][20] sub-section.
 The [**Code Security**][24] integration promotes better security by:
 
 - flagging library vulnerabilities and runtime code vulnerabilities
-- checking your code locally, as you edit it, to detect quality and security issues before they are committed
+- checking your code changes locally, as you edit, to detect quality and security issues prior to commit
 
 {{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:80%;" >}}
 
@@ -88,9 +88,11 @@ The [**Code Origin for Spans**][22] integration shows you metrics for entry span
 Click the inlay to open the Datadog tool-window and inspect the span details.
 
 ### Flaky Tests
-The [**Flaky Tests**][7] integration shows you flaky tests detected by [Test Optimization][2] and provides a link to Datadog.
+The [**Flaky Tests**][7] integration shows you flaky tests detected by [Test Optimization][2].
 
 {{< img src="/developers/ide_plugins/idea/flaky-test-in-editor.png" alt="APM spans in the source editor" style="width:80%;" >}}
+
+Click the inlay to open the Datadog tool-window and inspect the test details.
 
 ### CI Test Runs
 You can view recent test runs in the [CI Visibility Explorer][12] by navigating directly from your source files. Look for the **CI Test Run** inlays above test method declarations in your source code:
