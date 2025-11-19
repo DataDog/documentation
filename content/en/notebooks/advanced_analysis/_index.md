@@ -152,13 +152,38 @@ To download your dataset as a CSV file:
 4. The CSV file automatically downloads to your computer.
 
 ### Schedule a CSV report
-With scheduled reports, you can automatically receive query results for analysis cells via email or Slack.
+With scheduled reports, you can automatically receive query results for analysis cells through email or Slack.
 
 To schedule a report on an analysis cell, select **Schedule report** from the dropdown next to **Save to Dashboard**.
 
-You can view and manage existing reports from the **Reports** tab.
+{{< img src="/notebooks/analysis_features/schedule_report_from_cell.png" alt="Example of scheduling a report from an analysis cell in a notebook" style="width:100%;" >}}
 
-To schedule reports, users need the **CSV Report Schedules Write** permission. To edit other users' reports, users need the **CSV Report Schedules Manage** permission. These can be granted by a user with the **Org **Management permission.
+In the configuration modal that opens, set a schedule to determine when and how often the report is sent.
+
+{{< img src="/notebooks/analysis_features/select_schedule.png" alt="Schedule configuration section of report scheduling modal" style="width:100%;" >}}
+
+Define the report title and set a time frame to determine the range of time displayed in the report. 
+
+{{< img src="/notebooks/analysis_features/configure_report.png" alt="Report configuration section of report scheduling modal" style="width:100%;" >}}
+
+If the analysis cell has not been published as a dataset before, you can specify the name of the dataset that will be published as part of scheduling this report.
+
+**Email:** To add email recipients to your report, enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it. To see the report before saving the schedule, click **Send Test Email**. Only Enterprise and Pro accounts can send reports to email addresses that don't correspond to registered Datadog users.
+
+{{< img src="/notebooks/analysis_features/add_recipients.png" alt="Email recipient section of report scheduling modal" style="width:100%;" >}}
+
+Here's an example report email, including the optional 10-row inline preview:
+{{< img src="/notebooks/analysis_features/report_email.png" alt="Example report email" style="width:100%;" >}}
+
+**Slack:** To add a Slack channel as recipient, select the Slack workspace and channel from the available dropdowns. If you do not see any available workspaces, ensure you have the Datadog [Slack Integration][6] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click **Send Test Message.**
+
+{{< img src="/notebooks/analysis_features/add_slack_recipients.png" alt="Email recipient section of report scheduling modal" style="width:100%;" >}}
+
+You can view, search, edit, and delete existing report schedules from the **Reports** tab.
+
+To schedule reports and view other users' report schedules, users need the **CSV Report Schedules Write** permission. To edit other users' report schedules, users need the **CSV Report Schedules Manage** permission. These can be granted by a user with the **Org Management** permission.
+
+{{< img src="/notebooks/analysis_features/reports_page.png" alt="Filtered view of the Reports tab" style="width:100%;" >}}
 
 ## Further reading
 
@@ -169,3 +194,4 @@ To schedule reports, users need the **CSV Report Schedules Write** permission. T
 [3]: /logs/explorer/calculated_fields/formulas/
 [4]: /ddsql_reference/
 [5]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/
+[6]: /integrations/slack/?tab=datadogforslack
