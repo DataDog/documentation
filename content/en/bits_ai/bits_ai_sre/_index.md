@@ -14,7 +14,7 @@ cascade:
 
 ## Overview
 
-Bits AI SRE is an autonomous AI agent that investigates alerts. When a monitor triggers, Bits proactively generates multiple hypotheses, queries relevant telemetry, and reasons over the data to help on-call engineers quickly identify the root cause.
+Bits AI SRE is an autonomous AI agent that investigates alerts. When a monitor triggers, Bits AI proactively generates multiple hypotheses, queries relevant telemetry, and reasons over the data to help on-call engineers quickly identify the root cause.
 
 {{< img src="bits_ai/overview.png" alt="Bits AI analysis on a monitor alert" style="width:100%;" >}}
 

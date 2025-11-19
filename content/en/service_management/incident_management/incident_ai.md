@@ -27,7 +27,7 @@ Key capabilities include:
 Incident AI helps coordinate incidents—especially those involving multiple teams—by suggesting next steps throughout the incident lifecycle. This streamlines communication and improves overall process management.
 
 1. Connect Datadog to Slack.
-   1. In Slack, run the `/dd connect` command.
+   1. In any Slack channel, run the `/dd connect` command.
    1. Follow the on-screen prompts to complete the connection process.
 1. Enable the Slack integration in Datadog Incident Management.
    1. In the [Integrations][4] section of the Incidents settings page, find the **Slack** settings.
@@ -39,7 +39,7 @@ Incident AI helps coordinate incidents—especially those involving multiple tea
 
 ## Customize stakeholder notifications
 
-Incident AI can dynamically populate key details in stakeholder notifications—delivering clearer, faster updates across the tools your team already uses. Notification rules support delivery to a wide variety of destinations, including email, Datadog On-Call, MS Teams, Slack, and more, ensuring AI-enhanced updates reach the right people—on the right platform—at the right time.
+Incident AI can dynamically populate key details in stakeholder notifications, delivering clearer, faster updates across the tools your team already uses. Notification rules support delivery to a wide variety of destinations, including email, Datadog On-Call, MS Teams, Slack, and more, ensuring AI-enhanced updates reach the right people, on the right platform, at the right time.
 
 1. In your Incidents settings, go to [Notification Templates][1].
 1. Create a new template or edit an existing one.
@@ -108,7 +108,7 @@ Use natural language prompts to request information or take action from Slack:
 | Change status                      | `@Datadog Mark this incident as stable`<br />`@Datadog Resolve this incident`                                                                   |
 | Request new summary                | `@Datadog Give me a summary of this incident`<br />`@Datadog Summarize incident-262`<br />**Note**: Private incidents are not summarized.       |
 | Search incident history            | `@Datadog How many incidents are currently ongoing?`<br />`@Datadog Show me all Sev-1 incidents that occurred in the past week.`                |
-| Dive into specific incidents       | `@Datadog What was the root cause of incident-123?` or<br />`@Datadog What remediation actions did the responders take in incident-123?`        |
+| Dive into specific incidents       | `@Datadog What was the root cause of incident-123?`<br />`@Datadog What remediation actions did the responders take in incident-123?`        |
 | Find related incidents             | `@Datadog Are there any related incidents?`<br />`@Datadog Find me incidents related to DDoS attacks from the past month`                       |
 | Early detection inquiry            | `@Datadog A customer is unable to check out. Is there an incident?`<br />`@Datadog Are there any incidents now impacting the payments service?` |
 
