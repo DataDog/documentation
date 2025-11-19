@@ -59,7 +59,7 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    : Commit author name.<br/>
    **Example**: `John Smith`
 
-   `DD_GIT_COMMIT_AUTHOR_EMAIL`
+   `DD_GIT_COMMIT_AUTHOR_EMAIL` **(required)**
    : Commit author email.<br/>
    **Example**: `john@example.com`
 
