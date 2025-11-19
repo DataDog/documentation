@@ -18,9 +18,13 @@ The feature is supported for any source code repository that is onboarded for [D
 ## Vulnerabilities
 The Datadog plugin reports library and runtime code vulnerabilities as Code Insights and issues are highlighted directly in the source code:
 
-{{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability-1.png" alt="A library vulnerability highlighted in the source editor" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor" style="width:100%;" >}}
 
-Full details of each vulnerability are shown in the Datadog tool-window in the **File Insights** and **Project Insights** tabs. Click on the link in the `Code Links` section to navigate to the source location, or click on the vulnerability description to open the summary at Datadog.
+Full details of each vulnerability are shown in the Datadog tool-window in the **File Insights** and **Project Insights** tabs. 
+
+{{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability-tool-window.png" alt="A library vulnerability shown in the Datadog tool-window" style="width:100%;" >}}
+
+Click on the link in the `Code Links` section to navigate to the source location, or click on the vulnerability description to open the summary at Datadog.
 
 ## Local code analysis
 
