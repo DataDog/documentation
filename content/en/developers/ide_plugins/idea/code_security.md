@@ -4,7 +4,7 @@ type: documentation
 further_reading:
 - link: "/security/code_security/"
   tag: "Documentation"
-  text: "Learn about Code Security."
+  text: "Learn more about Code Security"
 ---
 
 ## Overview
