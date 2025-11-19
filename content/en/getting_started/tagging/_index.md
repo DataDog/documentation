@@ -99,6 +99,8 @@ As a best practice, Datadog recommends using unified service tagging when assign
 
 All metrics, logs, traces, and integrations go through a process of `host-tag` inheritance as data is ingested into Datadog. Since data is associated with a given hostname, those components inherit all the `host-level` tags associated with that host. These tags are visible in the [infrastructure list][12] for a given host, sourced from either the cloud provider or the Datadog Agent. See [missing `host-level` tags on new hosts or nodes][25] for more information.
 
+Because tags can be inherited from multiple sources, choose unique and specific key names to avoid duplicating them across sources. For example, if you've set a `service` key on a host (`service:my-host`) and a `service` key on a pod running on that host (`service:my-service`), your data inherits both tags. Opt for more differentiated key names (such as `infra_service`) to avoid duplicate tag keys.
+
 ### Tag precedence
 
 The Datadog Agent does **not** enforce a precedence order for tags set from different sources. Instead, the Agent collects all tags from every available source, stores each unique value for a given tag key, and emits all of them with the telemetry.
@@ -112,8 +114,6 @@ service:orders
 ```
 
 Downstream filters or dashboards should explicitly filter on the desired value if you expect only one.
-
-Also, because tags can be inherited from multiple sources, choose unique and specific key names to avoid duplicating them across sources. For example, if you've set a `service` key on a host (`service:my-host`) and a `service` key on a pod running on that host (`service:my-service`), your data inherits both tags. Opt for more differentiated key names (such as `infra_service`) to avoid duplicate tag keys.
 
 ## Usage
 
