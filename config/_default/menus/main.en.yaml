@@ -7334,7 +7334,7 @@ menu:
       weight: 3
     - name: Recording Steps
       identifier: synthetics_browser_tests_recording_steps
-      url: synthetics/browser_tests/actions
+      url: synthetics/browser_tests/test_steps
       parent: synthetics_browser_tests
       weight: 301
     - name: Browser Testing Results
