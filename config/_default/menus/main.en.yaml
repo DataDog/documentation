@@ -1107,6 +1107,11 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
       weight: 7012
+    - name: Code Security
+      url: developers/ide_plugins/idea/code_security/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_code_security
+      weight: 7013
     - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
