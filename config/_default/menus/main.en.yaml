@@ -1483,11 +1483,6 @@ menu:
       identifier: bits_ai_sre_investigate_alerts
       parent: bits_ai_sre
       weight: 100
-    - name: Coordinate incidents
-      url: bits_ai/bits_ai_sre/coordinate_incidents
-      identifier: bits_ai_sre_coordinate_incidents
-      parent: bits_ai_sre
-      weight: 101
     - name: Bits AI Dev Agent
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
@@ -2480,75 +2475,80 @@ menu:
       parent: incident_investigate
       identifier: incident_investigate_follow_ups
       weight: 502
+    - name: Incident AI
+      url: service_management/incident_management/incident_ai
+      identifier: incident_ai
+      parent: incidents
+      weight: 6
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 6
+      weight: 7
     - name: Information
       url: service_management/incident_management/incident_settings/information
       parent: incidents_settings
       identifier: incidents_settings_information
-      weight: 601
+      weight: 701
     - name: Property Fields
       url: service_management/incident_management/incident_settings/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
-      weight: 602
+      weight: 702
     - name: Responder Types
       url: service_management/incident_management/incident_settings/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
-      weight: 603
+      weight: 703
     - name: Integrations
       url: service_management/incident_management/incident_settings/integrations
       parent: incidents_settings
       identifier: incidents_settings_integrations
-      weight: 604
+      weight: 704
     - name: Notification Rules
       url: service_management/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 605
+      weight: 705
     - name: Templates
       url: service_management/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 606
+      weight: 706
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
       identifier: analytics
-      weight: 7
+      weight: 8
     - name: Integrations
       url: service_management/incident_management/integrations
       parent: incidents
       identifier: incidents_integrations
       weight: 9
-    - name: Jira
-      url: service_management/incident_management/integrations/jira
-      parent: incidents_integrations
-      identifier: incidents_integrations_jira
-      weight: 901
     - name: Slack
       url: service_management/incident_management/integrations/slack
       parent: incidents_integrations
       identifier: incidents_integrations_slack
-      weight: 902
-    - name: Status Pages
-      url: service_management/incident_management/integrations/status_pages
-      parent: incidents_integrations
-      identifier: incidents_integrations_status_pages
-      weight: 903
-    - name: Atlassian Statuspage
-      url: service_management/incident_management/integrations/statuspage
-      parent: incidents_integrations
-      identifier: incidents_integrations_statuspage
-      weight: 904
+      weight: 901
     - name: Microsoft Teams
       url: service_management/incident_management/integrations/microsoft_teams
       parent: incidents_integrations
       identifier: incidents_microsoft_teams
+      weight: 902
+    - name: Jira
+      url: service_management/incident_management/integrations/jira
+      parent: incidents_integrations
+      identifier: incidents_integrations_jira
+      weight: 903
+    - name: Status Pages
+      url: service_management/incident_management/integrations/status_pages
+      parent: incidents_integrations
+      identifier: incidents_integrations_status_pages
+      weight: 904
+    - name: Atlassian Statuspage
+      url: service_management/incident_management/integrations/statuspage
+      parent: incidents_integrations
+      identifier: incidents_integrations_statuspage
       weight: 905
     - name: On-Call
       url: service_management/on-call/
@@ -5491,6 +5491,21 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
+    - name: Setup
+      url: feature_flags/setup
+      parent: feature_flags
+      identifier: feature_flags_setup
+      weight: 1
+    - name: Android and Android TV
+      url: feature_flags/setup/android
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_android
+      weight: 101
+    - name: iOS and tvOS
+      url: feature_flags/setup/ios
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_ios
+      weight: 102
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -7319,7 +7334,7 @@ menu:
       weight: 3
     - name: Recording Steps
       identifier: synthetics_browser_tests_recording_steps
-      url: synthetics/browser_tests/actions
+      url: synthetics/browser_tests/test_steps
       parent: synthetics_browser_tests
       weight: 301
     - name: Browser Testing Results
