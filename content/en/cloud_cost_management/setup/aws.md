@@ -461,7 +461,7 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [12]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [13]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
-[15]: /cloud_cost_management/tags/tag_pipelines
+[15]: /cloud_cost_management/allocation/tag_pipelines
 [16]: https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html
 [17]: https://app.datadoghq.com/cost/settings/accounts
 [18]: /help/
