@@ -20,7 +20,7 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 ## Setup
 To create a Monitor Notification Rule in Datadog, navigate to the [**Monitors > Settings > Notification Rules**][1] page. Then, click the **New Rule** button in the upper right. 
-{{< img src="/monitors/notifications/notification_rules/notification_rules_form_with_conditional_recipients.png" alt="Configuration for a notification rule showing tag scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
+{{< img src="/monitors/notifications/notification_rules/notification_rule_form-light.png" alt="Configuration for a notification rule showing scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
 
 ### Choose the scope
 Define which tags a monitor notification must have to be routed to this rule. Matching evaluates the notification tagset - the union of monitor tags and the firing group’s tags (for multi-alert monitors). Monitor tags alone can satisfy the scope alone and that would still be considered a match. Only monitor and group tags participate in matching; matching is case-insensitive.
@@ -34,10 +34,6 @@ The Notification Rule scope query supports boolean logic and follows the same co
 ##### Boolean operators
 - Supported: AND, OR, NOT
 - Implicit operator: AND
-- Parentheses: supported
-Examples:
-- service:web-store AND (env:prod OR env:staging)
-- NOT (env:staging OR env:dev)
 
 ##### Wildcards
 Only key:* is supported (for example, env:*). Partial wildcards like env:prod-* are not supported. key:* matches if that key exists anywhere in the notification tagset.
@@ -46,7 +42,7 @@ Only key:* is supported (for example, env:*). Partial wildcards like env:prod-* 
 Use either env:(prod OR staging) or env:prod OR env:staging.
 
 ##### Quoting
-Wrap values that contain spaces in quotes, for example: team:"data platform".
+Wrap values that contain spaces or special characters in quotes, for example: team:"data platform".
 
 ##### Examples
 
@@ -64,7 +60,7 @@ There are a few limitations that are **not supported** which include:
 
 * Keyless tags, such as `prod AND service:(A or B)` or just `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
 * Partial wildcards (`service:web-*`) and question mark wildcards `service:auth?` are not supported. Wildcard is allowed only if used alone like `service:*`.
-* scope lenght up to 3000 characters.
+* Scope lenght up to 3000 characters.
 
 ### Configure the recipients
 Define the recipients to notify whenever a monitor notification matches the rule’s scope. You can specify when and to whom a notification should be sent. Notifications can be sent to email or any integration channel. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2].
