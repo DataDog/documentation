@@ -433,7 +433,7 @@ Seeing recommendations requires the following prerequisites:
 - Expire old non-current version objects in S3 bucket prefix
 - Consolidate small files in prefix to minimize per-object storage costs
 
-  {{< img src="infrastructure/storage_monitoring/storage-recs.png" alt="Storage Management Recommendations in CCM" responsive="true">}}
+  {{< img src="infrastructure/storage_management/storage-recs.png" alt="Storage Management Recommendations in CCM" responsive="true">}}
 
 [1]: mailto:storage-monitoring@datadoghq.com
 [2]: /integrations/amazon-web-services/#resource-types-and-permissions
