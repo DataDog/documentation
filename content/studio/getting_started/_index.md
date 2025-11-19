@@ -12,8 +12,6 @@ type: studio
 
 Datadog Studio gives small development teams a streamlined observability platform to monitor, debug, and optimize their applications. Get started with pre-configured packages tailored to what you're building without any complex setup required.
 
-## How it works
-
 Datadog Studio provides pre-configured monitoring packages tailored to your application type. Select a package based on what you're building (frontend, backend, or LLM/AI), then use either **agentic setup**, where AI assistants like Cursor or Claude automatically configure your codebase, or **manual setup** for full control. After successfully configuring your package, your application sends telemetry data to Datadog, giving you immediate access to error tracking, performance monitoring, and analytics.
 
 ## What's included
@@ -153,31 +151,7 @@ Copy and execute the Claude Code command into your terminal:
 5. After you've granted access to your Datadog account, you are redirected to Cursor. Click **Open** to complete the authentication process.
 5. Confirm you see MCP tools listed for the `datadog-onboarding-mcp` server.
 
-### 2. Set up your project
-
-Your AI coding agent can automatically configure Datadog Studio for your project.
-
-{{% collapse-content title="Claude Code" level="h4" expanded=false id="claude-code" %}}
-
-1. Copy and execute the Claude Code command into your terminal:
-
-{{< tabs >}}
-{{% tab "US1" %}}
-```sh
-claude mcp add --transport http datadog-onboarding-mcp "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=onboarding" && claude /mcp
-```
-{{% /tab %}}
-
-{{% tab "US3" %}}
-```sh
-claude mcp add --transport http datadog-onboarding-mcp "https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=onboarding" && claude /mcp
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% /collapse-content %}}
-
-### Set up your project
+### 2. Set up your project with a prompt
 
 Prompt your AI coding agent to enable all capabilities (Error Tracking, Session Replay, Product Analytics, and LLM Observability) in minutes by copying the below prompt into Cursor or Claude Code.
 

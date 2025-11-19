@@ -54,7 +54,7 @@ menu:
     - name: LLM Observability
       parent: essentials_heading
       params:
-        ref_id: llm_observability
+        ref_id: llm_obs
     - name: Metrics
       parent: essentials_heading
       params:
