@@ -41,7 +41,7 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 
 ### Build an app with AI
 
-With Bits AI, you can generate a complete app from a single prompt. Describe the app you want to create, and the agent will automatically generate the UI, actions, and logic mapped to your existing data and permissions. You can then iterate by chatting---refining components, flows, or styling---all without writing any code.
+With Bits AI, you can generate a complete app from a single prompt. Describe the app you want to create, and the UI agent automatically generates the UI, actions, and logic mapped to your existing data and permissions. You can then iterate by chatting---refining components, flows, or styling---without writing any code.
 
 To build an app with Bits AI:
 1. From [App Builder][1], click **New App**.
