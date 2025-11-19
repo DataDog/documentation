@@ -119,7 +119,7 @@ Workload selection rules (available for Agent v7.73+) let you control which Linu
 
 To configure workload selection:
 
-1. In Datadog, navigate to **APM** > **Settings** > [**Workload Selection**][20].
+1. In Datadog, navigate to **APM** > **Service Setup** > [**Workload Selection**][20].
 1. Click **Add or Edit Rules**. 
 1. Define instrumentation rules:
    1. Click **Add New Rule**, then choose **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
