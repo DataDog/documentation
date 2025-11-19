@@ -112,7 +112,7 @@ Before getting started, ensure you have the following prerequisites:
 2. Go to the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
 
 3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
-    a. Select the AWS regions to integrate with.  
+    a. Select the AWS region where the CloudFormation stack is created.  
     b. Add your Datadog [API key][9].  
     c. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
     d. Optionally, enable [Cloud Security Misconfigurations][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
