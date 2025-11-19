@@ -13,17 +13,21 @@ The [Code Security][4] integration in the plugin promotes better security by:
 - flagging library vulnerabilities and runtime code vulnerabilities
 - checking your code locally, as you edit it, to detect quality and security issues before they are committed
 
+The feature is supported for any source code repository that is onboarded for [Datadog Code Security][1]
+
 ## Vulnerabilities
-The Datadog plugin reports library and runtime code vulnerabilities as Code Insights, for any source code repository that is onboarded for [Datadog Code Security][1]. Issues are highlighted directly in the source code:
+The Datadog plugin reports library and runtime code vulnerabilities as Code Insights and issues are highlighted directly in the source code:
 
 {{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability-1.png" alt="A library vulnerability highlighted in the source editor" style="width:100%;" >}}
 
 Full details of each vulnerability are shown in the Datadog tool-window in the **File Insights** and **Project Insights** tabs. Click on the link in the `Code Links` section to navigate to the source location, or click on the vulnerability description to open the summary at Datadog.
 
 ## Local Code Analysis
-The Datadog plugin runs [Static Analysis][2] rules locally as you edit your source code to detect quality and security issues before you commit your changes.
 
-This local code analysis supports scanning for many programming languages. For a complete list, see [Static Analysis Rules][3]. Issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
+### Real time checking
+As you edit your source files, the Datadog plugin checks the content (locally) against a set of [rules][2] to detect and flag quality and security issues before you commit your changes.
+
+The local analysis engine supports all the file types listed in [Static Analysis Rules][3]. Issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
 
 {{< img src="/developers/ide_plugins/idea/code_security/local-code-analysis.png" alt="Static analysis violation in the source editor" style="width:100%;" >}}
 
@@ -32,7 +36,7 @@ Additionally, all issues detected by this feature are listed in the standard **P
 ### Analyzing Multiple Files
 You can run the local code analysis across multiple files. In the Code menu, select **Analyse Code** → **Run Inspection By Name…** and choose Datadog Static Analysis:
 
-{{< img src="/developers/ide_plugins/idea/code_security/inspection-by-name.png" alt="Datadog Static Analysis inspection" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/code_security/inspection-by-name.png" alt="Datadog Static Analysis inspection" style="width:60%;" >}}
 
 Choose the scope, click `OK`, then review the flagged issues in the **Problems** view.
 
@@ -44,7 +48,7 @@ The local code analysis will run automatically if:
 
 To see the configuration data in your IDE, run the action **Show Datadog Static Analyzer Config**:
 
-{{< img src="/developers/ide_plugins/idea/code_security/show-sa-config.png" alt="Action to show the Static Analyzer configuration" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/code_security/show-sa-config.png" alt="Action to show the Static Analyzer configuration" style="width:80%;" >}}
 
 A local configuration file (`static-analysis.datadog.yml`) can be placed at the root of the repository and will be merged with the remote configuration. When there is no remote configuration available, the local configuration file will be used on its own.
 
