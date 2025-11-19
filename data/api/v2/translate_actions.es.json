@@ -1,4 +1,112 @@
 {
+  "ListFleetAgentVersions": {
+    "description": "Obtén una lista de todas las versiones disponibles del Datadog Agent.\n\nEste endpoint devuelve las versiones disponibles del Agent que se pueden desplegar en tu flota.\nEstas versiones se utilizan al crear despliegues o configurar cronogramas para\nactualizaciones automatizadas del Agent.",
+    "summary": "Enumerar todas las versiones disponibles del Agent"
+  },
+  "ListFleetDeployments": {
+    "description": "Obtén una lista de todos los despliegues para la automatización de flotas.\nUtiliza los parámetros `page_size` y `page_offset` para paginar los resultados.",
+    "summary": "Enumerar todos los despliegues"
+  },
+  "CreateFleetDeploymentConfigure": {
+    "description": "Crea un nuevo despliegue para aplicar cambios de configuración\na una flota de hosts que coincidan con la consulta de filtro especificada.\n\nEste endpoint admite dos tipos de operaciones de configuración:\n- `merge-patch`: Fusiona los datos del parche proporcionado con el archivo de configuración existente,\n  creando el archivo si no existe\n- `delete`: Elimina el archivo de configuración especificado de los hosts de destino.\n\nEl despliegue se crea y se inicia automáticamente. Puedes especificar varias operaciones de configuración\nque se ejecutarán en orden en cada host de destino. Utiliza la consulta de filtro para\nhosts específicos utilizando la sintaxis de consulta de Datadog.",
+    "summary": "Crear un despliegue de configuración",
+    "request_description": "Carga útil de la solicitud que contiene la información del despliegue.",
+    "request_schema_description": "Carga útil de la solicitud para crear un nuevo despliegue de configuración."
+  },
+  "CreateFleetDeploymentUpgrade": {
+    "description": "Crea e inicia inmediatamente una nueva actualización de paquetes\nen los hosts que coincidan con la consulta de filtro especificada.\n\nEste endpoint te permite actualizar el Datadog Agent a una versión específica\nen hosts que coincidan con la consulta de filtro especificada.\n\nEl despliegue se crea y se inicia automáticamente. El sistema:\n1. Identificará todos los hosts que coincidan con la consulta de filtro\n2. confirmará la disponibilidad de la versión especificada\n3. Empezará a desplegar la actualización del paquete en los hosts de destino",
+    "summary": "Actualizar hosts",
+    "request_description": "Carga útil de la solicitud que contiene la información de actualización del paquete.",
+    "request_schema_description": "Carga útil de la solicitud para crear un nuevo despliegue de actualización de paquetes."
+  },
+  "GetFleetDeployment": {
+    "description": "Recupera información detallada sobre un despliegue específico utilizando tu identificador único.\nEste endpoint devuelve información completa sobre un despliegue, que incluye\n- Metadatos del despliegue (ID, tipo, filtro de consulta)\n- Número total de hosts de destino\n- Estado actual de alto nivel (pendiente, en ejecución, correcto, fallido)\n- Tiempo estimado de finalización\n- Operaciones de configuración que se han aplicado o se están aplicando\n- Lista detallada de hosts: Una lista paginada de los hosts incluidos en este despliegue con el estado individual de cada host, las versiones actuales de los paquetes y cualquier error.\n\nLa lista de hosts proporciona visibilidad del estado de ejecución por host, lo que te permite:\n- Monitorizar qué hosts se han completado correctamente\n- Identificar los hosts que aún están en curso\n- Investigar fallos en hosts específicos\n- Ver las versiones actuales de los paquetes instalados en cada host (incluidas las versiones inicial, de destino y actual de cada paquete).\n\nPaginación: Utiliza los parámetros de consulta `limit` y `page` para paginar a través de los hosts. La respuesta\nincluye metadatos de paginación en el campo `meta.hosts` con información sobre la página actual,\nel número total de páginas y el número total de hosts. El tamaño de página por defecto es de 50 hosts, con un máximo de 100.",
+    "summary": "Obtener un despliegue de configuración por ID"
+  },
+  "CancelFleetDeployment": {
+    "description": "Cancela un despliegue activo y detén todas las operaciones pendientes.\nAl cancelar un despliegue\n- Se detienen todas las operaciones pendientes en los hosts que aún no se han iniciado.\n- Las operaciones en curso en los hosts pueden completarse o interrumpirse, dependiendo de su estado actual.\n- Los cambios de configuración o las actualizaciones de paquetes ya aplicadas a los hosts no se cancelan.\n\nDespués de la cancelación, puedes ver el estado final del despliegue utilizando el endpoint GET para ver qué hosts\nse han actualizado correctamente antes de la cancelación.",
+    "summary": "Cancelar un despliegue"
+  },
+  "ListFleetSchedules": {
+    "description": "Recupera una lista de todos los cronogramas de despliegues automatizados de flotas.\n\nLos cronogramas permiten automatizar las actualizaciones de paquetes definiendo peridos de mantenimiento\ny reglas de recurrencia. Cada cronograma crea automáticamente despliegues basados en su\nconfiguración.",
+    "summary": "Enumerar todos los cronogramas"
+  },
+  "CreateFleetSchedule": {
+    "description": "Crea una nuevo cronograma para las actualizaciones automáticas de paquetes.\n\nLos cronogramas definen cuándo y con qué frecuencia desplegar automáticamente actualizaciones de paquetes para una flota\nde hosts. Cada cronograma incluye:\n- Una consulta de filtro para seleccionar los hosts de destino\n- Una regla de recurrencia que define los periodos de mantenimiento\n- Una estrategia de versiones (por ejemplo, siempre la última, o N versiones por detrás de la última)\n\nCuando un cronograma se activa durante un periodo de mantenimiento, crea automáticamente un \ndespliegue que actualiza el Datadog Agent a la versión especificada en todos los hosts coincidentes.",
+    "summary": "Crear un cronograma",
+    "request_description": "Carga útil de la solicitud que contiene la información del cronograma.",
+    "request_schema_description": "Carga útil de solicitud para crear un nuevo cronograma."
+  },
+  "DeleteFleetSchedule": {
+    "description": "Elimina un cronograma de forma permanente.\n\nAl eliminar un cronograma:\n- El cronograma se elimina permanentemente y ya no creará despliegues.\n- Los despliegues ya creados por este cronograma no se verán afectados.\n- Este acción no se puede deshacer\n\nSi quieres impedir temporalmente que un cronograma cree despliegues, considera la posibilidad de\nactualizar su estado a \"inactivo\" en lugar de eliminarlo.",
+    "summary": "Eliminar un cronograma"
+  },
+  "GetFleetSchedule": {
+    "description": "Recupera información detallada sobre un cronograma específico utilizando su identificador único.\n\nEste endpoint devuelve información completa sobre un cronograma, que incluye\n- Metadatos del cronograma (ID, nombre, marcas de tiempo de creación/actualización)\n- Consulta de filtro para seleccionar hosts de destino\n- Regla de recurrencia que define cuándo se activan los despliegues\n- Estrategia de versiones para las actualizaciones de paquetes\n- Estado actual (activo o inactivo)",
+    "summary": "Obtener un cronograma por ID"
+  },
+  "UpdateFleetSchedule": {
+    "description": "Actualiza parcialmente un cronograma indicando solo los campos que quieres modificar.\n\nEste endpoint te permite modificar atributos específicos de un cronograma sin\nafectar a otros campos. Los casos de uso frecuentes incluyen:\n- Cambiar el estado del cronograma entre activo e inactivo\n- Actualizar los tiempos del periodo de mantenimiento\n- Modificar la consulta de filtro para que apunte a distintos hosts\n- Ajustar la estrategia de versiones\n\nIncluye en el cuerpo de la solicitud solo los campos que quieres actualizar. Todos los campos\nson opcionales en una solicitud PATCH.",
+    "summary": "Actualizar un cronograma",
+    "request_description": "Carga útil de la solicitud que contiene los campos a actualizar.",
+    "request_schema_description": "Carga útil de la solicitud para actualizar parcialmente un cronograma."
+  },
+  "TriggerFleetSchedule": {
+    "description": "Activa manualmente un cronograma para crear e iniciar inmediatamente un despliegue.\n\nEste endpoint te permite iniciar manualmente un despliegue utilizando la configuración del cronograma \nsin esperar al siguiente periodo de mantenimiento programado. Esto es\nútil para:\n- Probar un cronograma antes de que se ejecute automáticamente\n- Realizar una actualización de emergencia fuera del periodo de mantenimiento regular\n- Crear un despliegue ad hoc con la misma configuración que un despliegue programado\n\nEl despliegue se crea inmediatamente con:\n- La misma consulta de filtro que el cronograma\n- La versión del paquete determinada por la estrategia de versiones del cronograma \n- Todos los hosts coincidentes como destinos\n\nEl despliegue activado manualmente es independiente del cronograma y no afecta al patrón de recurrencia normal del cronograma.\nafecta al patrón de recurrencia normal de schedule (horario).",
+    "summary": "Activar un despliegue programado"
+  },
+  "ListDatastores": {
+    "description": "Enumera todos los almacenes de datos de la organización.",
+    "summary": "Lista de almacenes de datos"
+  },
+  "CreateDatastore": {
+    "description": "Crea un nuevo almacén de datos.",
+    "summary": "Crear almacén de datos",
+    "request_description": "",
+    "request_schema_description": "Solicitud de creación de un nuevo almacén de datos con la configuración y los metadatos especificados."
+  },
+  "DeleteDatastore": {
+    "description": "Elimina un almacén de datos por su identificador único.",
+    "summary": "Eliminar almacén de datos"
+  },
+  "GetDatastore": {
+    "description": "Recupera un almacén de datos específico por su ID.",
+    "summary": "Obtener almacén de datos"
+  },
+  "UpdateDatastore": {
+    "description": "Actualiza los atributos de un almacén de datos existente.",
+    "summary": "Actualizar almacén de datos",
+    "request_description": "",
+    "request_schema_description": "Solicitud para actualizar la configuración de un almacén de datos, como su nombre o descripción."
+  },
+  "DeleteDatastoreItem": {
+    "description": "Elimina un elemento de un almacén de datos por su clave.",
+    "summary": "Eliminar elemento del almacén de datos",
+    "request_description": "",
+    "request_schema_description": "Solicitud para eliminar un elemento específico de un almacén de datos por su clave primaria."
+  },
+  "ListDatastoreItems": {
+    "description": "Enumera los elementos de un almacén de datos. Puedes filtrar los resultados especificando una clave de elemento o un parámetro de consulta de filtro, pero no ambos a la vez. Admite la paginación en el servidor para grandes conjuntos de datos.",
+    "summary": "Lista de elementos del almacén de datos"
+  },
+  "UpdateDatastoreItem": {
+    "description": "Actualiza parcialmente un elemento de un almacén de datos por su clave.",
+    "summary": "Actualizar elemento del almacén de datos",
+    "request_description": "",
+    "request_schema_description": "Solicitud para actualizar campos específicos en un elemento existente del almacén de datos."
+  },
+  "BulkDeleteDatastoreItems": {
+    "description": "Elimina varios elementos de un almacén de datos por sus claves en una sola operación.",
+    "summary": "Eliminación masiva de elementos del almacén de datos",
+    "request_description": "",
+    "request_schema_description": "Solicitud de eliminación de elementos de un almacén de datos."
+  },
+  "BulkWriteDatastoreItems": {
+    "description": "Crea o sustituye varios elementos de un almacén de datos por sus claves en una sola operación.",
+    "summary": "Escritura masiva de elementos del almacén de datos",
+    "request_description": "",
+    "request_schema_description": "Solicitud para insertar varios elementos en un almacén de datos en una sola operación."
+  },
   "ListAppKeyRegistrations": {
     "description": "Listar registros de claves de aplicación",
     "summary": "Listar registros de claves de aplicación"
@@ -22,7 +130,7 @@
     "request_schema_description": "Solicitud utilizada para crear una conexión de acción."
   },
   "DeleteActionConnection": {
-    "description": "Elimina una Action Connection existente. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Elimina una conexión de acción existente. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Eliminar una conexión de acción existente"
   },
   "GetActionConnection": {
@@ -37,37 +145,89 @@
   },
   "ListAwsScanOptions": {
     "description": "Obtiene las opciones de escaneo configuradas para las cuentas de AWS.",
-    "summary": "Obtener las opciones de escaneo de AWS"
+    "summary": "Enumerar opciones de análisis de AWS"
   },
   "CreateAwsScanOptions": {
-    "description": "Activa las opciones de escaneo sin agente para una cuenta de AWS.",
-    "summary": "Publicar opciones de escaneo de AWS",
+    "description": "Activa las opciones de escaneo sin agent para una cuenta de AWS.",
+    "summary": "Crear opciones de análisis de AWS",
     "request_description": "La definición de las nuevas opciones de escaneo.",
     "request_schema_description": "Objeto de solicitud que incluye las opciones de escaneo a crear."
   },
   "DeleteAwsScanOptions": {
     "description": "Elimina las opciones de escaneo sin agente de una cuenta de AWS.",
-    "summary": "Eliminar opciones de escaneo de AWS"
+    "summary": "Eliminar opciones de análisis de AWS"
+  },
+  "GetAwsScanOptions": {
+    "description": "Obtiene las opciones de escaneo sin agent para una cuenta activada.",
+    "summary": "Obtener las opciones de escaneo de AWS "
   },
   "UpdateAwsScanOptions": {
-    "description": "Actualiza las opciones de escaneo sin agente para una cuenta activada.",
-    "summary": "Parchear opciones de escaneo de AWS",
+    "description": "Actualiza las opciones de escaneo sin agent para una cuenta activada.",
+    "summary": "Actualizar opciones de análisis de AWS",
     "request_description": "Nueva definición de las opciones de escaneo.",
     "request_schema_description": "Objeto de solicitud que incluye las opciones de escaneo a actualizar."
   },
+  "ListAzureScanOptions": {
+    "description": "Obtiene las opciones de escaneo configuradas para las cuentas de Azure.",
+    "summary": "Enumerar opciones de análisis de Azure"
+  },
+  "CreateAzureScanOptions": {
+    "description": "Activa las opciones de escaneo sin agent para una suscripción de Azure.",
+    "summary": "Crear opciones de análisis de Azure",
+    "request_description": "",
+    "request_schema_description": "Objeto de respuesta que contiene las opciones de escaneo de Azure para una única suscripción."
+  },
+  "DeleteAzureScanOptions": {
+    "description": "Elimina opciones de escaneo sin agent para una suscripción de Azure.",
+    "summary": "Eliminar opciones de análisis de Azure"
+  },
+  "GetAzureScanOptions": {
+    "description": "Recupera las opciones de análisis sin agente para una suscripción activada.",
+    "summary": "Obtener opciones de análisis de Azure"
+  },
+  "UpdateAzureScanOptions": {
+    "description": "Actualiza las opciones de escaneo sin agent para una suscripción activada.",
+    "summary": "Actualizar opciones de análisis de Azure",
+    "request_description": "",
+    "request_schema_description": "Objeto de solicitud para actualizar las opciones de escaneo de Azure."
+  },
+  "ListGcpScanOptions": {
+    "description": "Recupera las opciones de análisis configuradas para todos los proyectos GCP.",
+    "summary": "Enumerar opciones de análisis de GCP"
+  },
+  "CreateGcpScanOptions": {
+    "description": "Activa opciones de análisis sin agente para un proyecto GCP.",
+    "summary": "Crear opciones de análisis de GCP",
+    "request_description": "La definición de las nuevas opciones de escaneo.",
+    "request_schema_description": "Objeto de respuesta que contiene opciones de análisis de GCP para un proyecto único."
+  },
+  "DeleteGcpScanOptions": {
+    "description": "Elimina opciones de análisis sin agente para un proyecto GCP.",
+    "summary": "Eliminar opciones de análisis de GCP"
+  },
+  "GetGcpScanOptions": {
+    "description": "Recupera las opciones de análisis sin agente para un proyecto GCP activado.",
+    "summary": "Obtener opciones de análisis de GCP"
+  },
+  "UpdateGcpScanOptions": {
+    "description": "Actualiza las opciones de análisis sin agente para un proyecto GCP activado.",
+    "summary": "Actualizar opciones de análisis de GCP",
+    "request_description": "Nueva definición de las opciones de escaneo.",
+    "request_schema_description": "Objeto de solicitud para actualizar las opciones de análisis de GCP."
+  },
   "ListAwsOnDemandTasks": {
     "description": "Obtiene las 1000 tareas bajo demanda más recientes de AWS.",
-    "summary": "Obtener tareas bajo demanda de AWS"
+    "summary": "Enumerar tareas AWS bajo demanda"
   },
   "CreateAwsOnDemandTask": {
-    "description": "Activa el escaneado de un recurso de AWS con una prioridad alta. El escaneo sin agente debe estar activado para la cuenta de AWS que contiene el recurso que se va a escanear.",
-    "summary": "Publicar una tarea de AWS bajo demanda",
+    "description": "Activa el escaneado de un recurso de AWS con una prioridad alta. El escaneo sin agent debe estar activado para la cuenta de AWS que contiene el recurso que se va a escanear.",
+    "summary": "Crear tarea AWS bajo demanda",
     "request_description": "La definición de la tarea bajo demanda.",
     "request_schema_description": "Objeto de solicitud que incluye la tarea bajo demanda a enviar."
   },
   "GetAwsOnDemandTask": {
     "description": "Obtén los datos de una tarea específica bajo demanda.",
-    "summary": "Obtenger tarea baja demanda de AWS por ID"
+    "summary": "Obtener tarea AWS bajo demanda"
   },
   "ListAPIKeys": {
     "description": "Muestra una lista con todas las claves de API disponibles para tu cuenta.",
@@ -106,13 +266,13 @@
     "summary": "Obtener una API"
   },
   "UpdateOpenAPI": {
-    "description": "Actualiza la información sobre una API específica. El contenido indicado sustituirá a todo el contenido de la API del ID indicado.\nEl ID es devuelto por la API de creación, o se puede encontrar en la URL de la interfaz de usuario del catálogo de API.\n",
+    "description": "Actualiza la información sobre una API específica. El contenido indicado sustituirá a todo el contenido de la API del ID indicado.\nEl ID es devuelto por la API de creación, o se puede encontrar en la URL de la interfaz de usuario del catálogo de API.",
     "summary": "Actualizar una API",
     "request_description": "",
     "request_schema_description": "Objeto para datos de API en formato `OpenAPI` como archivo."
   },
   "CreateOpenAPI": {
-    "description": "Crea una nueva API a partir de la especificación [OpenAPI](https://spec.openapis.org/oas/latest.html) dada.\nConsulta la [documentación del Catálogo de API](https://docs.datadoghq.com/api_catalog/add_metadata/) para obtener información\ninformación adicional sobre los posibles metadatos.\nDevuelve el ID de la API creada.\n",
+    "description": "Crea una nueva API a partir de la especificación de [OpenAPI](https://spec.openapis.org/oas/latest.html) facilitada.\nConsulta la [Documentación del catálogo de API](https://docs.datadoghq.com/api_catalog/add_metadata/) para obtener información\nadicional sobre los posibles metadatos.\nDevuelve el ID de la API creada.",
     "summary": "Crear una nueva API",
     "request_description": "",
     "request_schema_description": "Objeto para datos de API en formato `OpenAPI` como archivo."
@@ -172,41 +332,41 @@
     "request_schema_description": "El cuerpo del filtro de retención que debe actualizarse."
   },
   "DeleteApps": {
-    "description": "Elimina varias aplicaciones en una sola solicitud a partir de una lista de ID de aplicaciones. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Elimina varias aplicaciones en una sola solicitud a partir de una lista de IDs de aplicaciones. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Eliminar varias aplicaciones",
     "request_description": "",
     "request_schema_description": "Un objeto de solicitud para eliminar varias aplicaciones por ID."
   },
   "ListApps": {
-    "description": "Enumera todas las aplicaciones, con filtros y clasificación opcionales. Este endpoint está paginado y sólo devuelve información básica sobre la aplicación, como su ID, nombre y descripción. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Enumera todas las aplicaciones, con filtros y clasificación opcionales. Este endpoint está paginado. Este endpoint solo devuelve información básica sobre la aplicación, como su ID, nombre y descripción. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Armar una lista de aplicaciones"
   },
   "CreateApp": {
-    "description": "Crea una nueva aplicación, devolviendo el ID de la aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Crea una nueva aplicación, devolviendo el ID de la aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Crear aplicación",
     "request_description": "",
     "request_schema_description": "Un objeto de solicitud para crear una nueva aplicación."
   },
   "DeleteApp": {
-    "description": "Elimina una sola aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Elimina una aplicación única. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Eliminar aplicación"
   },
   "GetApp": {
-    "description": "Obtén la definición completa de una aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Obtén la definición completa de una aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Obtener aplicación"
   },
   "UpdateApp": {
-    "description": "Actualiza una aplicación existente. Crea una nueva versión de la aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Actualiza una aplicación existente. Esto crea una nueva versión de la aplicación. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Actualizar aplicación",
     "request_description": "",
     "request_schema_description": "Objeto de solicitud para actualizar una aplicación existente."
   },
   "UnpublishApp": {
-    "description": "Anula la publicación de una aplicación, eliminando la versión activa de la aplicación. La anulación de la publicación crea una nueva instancia de un objeto de `deployment` en la aplicación, con un `app_version_id` nulo (`00000000-0000-0000-0000-000000000000`). La aplicación puede actualizarse y publicarse de nuevo en el futuro. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Anula la publicación de una aplicación, eliminando la versión activa de la aplicación. La anulación de la publicación crea una nueva instancia de un objeto `deployment` en la aplicación, con un `app_version_id` nulo (`00000000-0000-0000-0000-000000000000`). La aplicación puede actualizarse y publicarse de nuevo en el futuro. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Anular la publicación de la aplicación"
   },
   "PublishApp": {
-    "description": "Publica una aplicación para que la utilicen otros usuarios. Para asegurarte de que la aplicación es accesible para los usuarios correctos, también debes definir una [política de restricción](https://docs.datadoghq.com/api/latest/restriction-policies/) en la aplicación, si aún no existe una política. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Publica una aplicación para que la utilicen otros usuarios. Para asegurarte de que la aplicación es accesible para los usuarios correctos, también debes definir una [política de restricción](https://docs.datadoghq.com/api/latest/restriction-policies/) en la aplicación, si aún no existe una política. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Publicar aplicación"
   },
   "ListApplicationKeys": {
@@ -235,7 +395,7 @@
     "description": "El endpoint de listas devuelve los eventos de Audit Logs que se han ajustado a una consulta de búsqueda de Audit.\n[Los resultados se muestran organizados en páginas][1].\n\nUsa este endpoint para hacer búsquedas y filtrados de eventos de Audit Logs complejos.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "Buscar eventos de Audit Logs",
     "request_description": "",
-    "request_schema_description": "Solicitud de lista de eventos de Audit Logs."
+    "request_schema_description": "Solicitud de enumeración de eventos de Audit Logs."
   },
   "ListAuthNMappings": {
     "description": "Muestra una lista con todos los AuthN Mappings de la organización.",
@@ -245,7 +405,7 @@
     "description": "Crea un AuthN Mapping.",
     "summary": "Crear un AuthN Mapping",
     "request_description": "",
-    "request_schema_description": "Solicitud para crear un AuthN Mapping."
+    "request_schema_description": "Solicitud de creación de asignación AuthN."
   },
   "DeleteAuthNMapping": {
     "description": "Elimina el AuthN Mapping correspondiente al UUID de AuthN Mapping especificado.",
@@ -289,6 +449,38 @@
     "description": "Obtén los detalles de un proyecto por `project_id`.",
     "summary": "Obtener los detalles de un proyecto"
   },
+  "GetAllCaseTypes": {
+    "description": "Obtener todos los tipos de casos",
+    "summary": "Obtener todos los tipos de casos"
+  },
+  "CreateCaseType": {
+    "description": "Crear un tipo de caso",
+    "summary": "Crear un tipo de caso",
+    "request_description": "Carga útil del tipo de caso",
+    "request_schema_description": "Crear solicitud del tipo de caso"
+  },
+  "GetAllCustomAttributes": {
+    "description": "Obtener todos los atributos personalizados",
+    "summary": "Obtener todos los atributos personalizados"
+  },
+  "DeleteCaseType": {
+    "description": "Eliminar un tipo de caso",
+    "summary": "Eliminar un tipo de caso"
+  },
+  "GetAllCustomAttributeConfigsByCaseType": {
+    "description": "Obtener la configuración de todos los atributos personalizados del tipo de caso",
+    "summary": "Obtener la configuración de todos los atributos personalizados del tipo de incidencia"
+  },
+  "CreateCustomAttributeConfig": {
+    "description": "Crear una configuración de atributos personalizados para un tipo de caso",
+    "summary": "Crear una configuración de atributos personalizados para un tipo de caso",
+    "request_description": "Carga útil de configuración de atributos personalizados",
+    "request_schema_description": "Solicitud de creación de una configuración de atributos personalizados"
+  },
+  "DeleteCustomAttributeConfig": {
+    "description": "Eliminar configuración de atributos personalizados",
+    "summary": "Eliminar la configuración de atributos personalizados"
+  },
   "GetCase": {
     "description": "Obtén los detalles del caso por `case_id`.",
     "summary": "Obtener los detalles de un caso"
@@ -306,10 +498,36 @@
     "request_schema_description": "Solicitud de asignación de caso"
   },
   "UpdateAttributes": {
-    "description": "Actualice los atributos de case (incidencia) ",
-    "summary": "Actualice los atributos de case (incidencia) ",
-    "request_description": "case (incidencia) atributos actualizar carga útil",
-    "request_schema_description": "case (incidencia) solicitud de actualización de atributos"
+    "description": "Actualizar los atributos de incidencia",
+    "summary": "Actualizar los atributos de incidencia",
+    "request_description": "Carga útil de actualización de atributos de incidencia",
+    "request_schema_description": "Solicitud de atributos de actualización de incidencia"
+  },
+  "CommentCase": {
+    "description": "Comentar caso",
+    "summary": "Comentar caso",
+    "request_description": "Carga útil de comentario de caso",
+    "request_schema_description": "Solicitud de comentario de caso"
+  },
+  "DeleteCaseComment": {
+    "description": "Eliminar comentario de caso",
+    "summary": "Eliminar comentario de caso"
+  },
+  "DeleteCaseCustomAttribute": {
+    "description": "Eliminar atributo personalizado del caso",
+    "summary": "Eliminar atributo personalizado del caso"
+  },
+  "UpdateCaseCustomAttribute": {
+    "description": "Actualizar atributo personalizado del caso",
+    "summary": "Actualizar atributo personalizado del caso",
+    "request_description": "Actualizar carga útil del atributo personalizado del caso",
+    "request_schema_description": "Solicitud de atributo personalizado de actualización del caso"
+  },
+  "UpdateCaseDescription": {
+    "description": "Actualizar la descripción del caso",
+    "summary": "Actualizar la descripción del caso",
+    "request_description": "Carga útil de actualización de la descripción del caso",
+    "request_schema_description": "Solicitud de descripción de actualización del caso"
   },
   "UpdatePriority": {
     "description": "Actualizar la prioridad del caso",
@@ -322,6 +540,12 @@
     "summary": "Actualizar el estado del caso",
     "request_description": "Carga útil de actualización del estado del caso",
     "request_schema_description": "Solicitud de actualización del estado del caso"
+  },
+  "UpdateCaseTitle": {
+    "description": "Actualizar título del caso",
+    "summary": "Actualizar título del caso",
+    "request_description": "Carga útil de actualización del título del caso",
+    "request_schema_description": "Solicitud de título de actualización del caso"
   },
   "UnarchiveCase": {
     "description": "Desarchivar caso",
@@ -344,6 +568,9 @@
     "summary": "Crear o actualizar entidades",
     "request_description": "Entidad YAML o JSON.",
     "request_schema_description": "Crea o actualiza una solicitud de entidad."
+  },
+  "PreviewCatalogEntities": {
+    "summary": "Vista previa de entidades del catálogo"
   },
   "DeleteCatalogEntity": {
     "description": "Elimina una única entidad en el Catálogo de software.",
@@ -368,7 +595,7 @@
     "summary": "Obtener una lista de relaciones entre entidades"
   },
   "CreateCIAppPipelineEvent": {
-    "description": "Envía tu evento de pipeline a tu plataforma de Datadog a través de HTTP. Para obtener más información sobre cómo se modelan las ejecuciones de pipeline y qué tipos de ejecución admitimos, consulta [Modelo de datos de pipeline y tipos de ejecución](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nLos eventos de pipeline puede enviarse con una marca temporal de hasta 18 horas en el pasado.",
+    "description": "Envía tu evento de pipeline a tu plataforma de Datadog a través de HTTP. Para obtener más información sobre cómo se modelan las ejecuciones de pipeline y qué tipos de ejecución admitimos, consulta [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nSe pueden enviar múltiples eventos en una matriz (hasta 1000).\n\nLos eventos de pipelines pueden enviarse con una marca de tiempo de hasta 18 horas en el pasado.\nLa duración entre las horas de inicio y fin del evento no puede ser superior a 1 año.",
     "summary": "Enviar evento de pipeline",
     "request_description": "",
     "request_schema_description": "Objeto de la solicitud."
@@ -436,12 +663,42 @@
     "request_schema_description": "Objeto de solicitud para actualizar un filtro de recursos."
   },
   "ListContainerImages": {
-    "description": "Obtén todas las imágenes de contenedor para tu organización.",
+    "description": "Obtén todas las imágenes de contenedores de tu organización.\n**Nota**: Para enriquecer los datos devueltos por este endpoint con escaneos de seguridad, consulta el nuevo endpoint [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata).",
     "summary": "Obtener todas las imágenes de contenedor "
   },
   "ListContainers": {
     "description": "Obtén todos los contenedores para tu organización.",
     "summary": "Obtener todos los contenedores"
+  },
+  "ListCustomAllocationRules": {
+    "description": "Enumera todas las reglas de asignación personalizadas: recupera una lista de todas las reglas de asignación personalizadas de la organización.",
+    "summary": "Lista de reglas de asignación personalizadas"
+  },
+  "CreateCustomAllocationRule": {
+    "description": "Crea una nueva regla de asignación personalizada con los filtros y la estrategia de asignación especificados.\n\n**Métodos de estrategia:**\n- **PROPORTIONAL/EVEN**: asigna los costes de forma proporcional/equivalente en función de los costes existentes. Requiere: granularity, allocated_by_tag_keys. Opcional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: asigna en función de datos de series temporales. Requiere: granularity, based_on_timeseries. Opcional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: asigna porcentajes fijos a etiquetas específicas. Requiere: allocated_by (matriz de asignaciones porcentuales).\n\n**Condiciones del filtro:**\n- Utiliza **value** (valor) para condiciones de valor único: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\".\n- Utiliza **values** (valores) para condiciones multivalor: \"in\", \"not in\"\n- No se pueden utilizar simultáneamente valor y valores.\n\n**Operadores admitidos**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "summary": "Crear regla de asignación personalizada",
+    "request_description": "",
+    "request_schema_description": "La definición del objeto `ArbitraryCostUpsertRequest`."
+  },
+  "ReorderCustomAllocationRules": {
+    "description": "Reordenar las reglas de asignación personalizadas: cambia el orden de ejecución de las reglas de asignación personalizadas.\n\n**Importante**: Debes proporcionar la **lista completa** de todos los IDs de reglas en el orden de ejecución deseado. La API reordenará TODAS las reglas según la secuencia proporcionada.\n\nLas reglas se ejecutan en el orden especificado, teniendo mayor prioridad los índices más bajos (anteriores en la matriz).\n\n**Ejemplo**: Si tienes reglas con IDs [123, 456, 789] y quieres cambiar el orden de 123→456→789 a 456→123→789, envía: [{\"id\": \"456\"}, {\"id\": \"123\"}, {\"id\": \"789\"}]",
+    "summary": "Reordenar reglas de asignación personalizadas",
+    "request_description": "",
+    "request_schema_description": "La definición del objeto `ReorderRuleResourceArray`."
+  },
+  "DeleteCustomAllocationRule": {
+    "description": "Eliminar una regla de asignación personalizada: elimina una regla de asignación personalizada existente por su ID",
+    "summary": "Eliminar regla de asignación personalizada"
+  },
+  "GetCustomAllocationRule": {
+    "description": "Obtener una regla de asignación personalizada específica: recupera una regla de asignación personalizada específica por su ID",
+    "summary": "Obtener regla de asignación personalizada"
+  },
+  "UpdateCustomAllocationRule": {
+    "description": "Actualiza una regla de asignación personalizada existente con los filtros y la estrategia de asignación nuevos.\n\n**Métodos de estrategia:**\n- **PROPORTIONAL/EVEN**: asigna los costes de forma proporcional/equivalente en función de los costes existentes. Requiere: granularity, allocated_by_tag_keys. Opcional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: asigna en función de datos de series temporales. Requiere: granularity, based_on_timeseries. Opcional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: asigna porcentajes fijos a etiquetas específicas. Requiere: allocated_by (matriz de asignaciones porcentuales).\n- **USAGE_METRIC**: asigna en función de las métricas de uso (la implementación varía).\n\n**Condiciones del filtro:**\n- Utiliza **value** (valor) para condiciones de valor único: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\".\n- Utiliza **values** (valores) para condiciones multivalor: \"in\", \"not in\"\n- No se pueden utilizar simultáneamente valor y valores.\n\n**Operadores admitidos**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "summary": "Actualizar regla de asignación personalizada",
+    "request_description": "",
+    "request_schema_description": "La definición del objeto `ArbitraryCostUpsertRequest`."
   },
   "ListCostAWSCURConfigs": {
     "description": "Haz una lista de las configuraciones de AWS CUR.",
@@ -456,6 +713,10 @@
   "DeleteCostAWSCURConfig": {
     "description": "Archiva una cuenta de Cloud Cost Management.",
     "summary": "Eliminar una configuración de AWS CUR de Cloud Cost Management"
+  },
+  "GetCostAWSCURConfig": {
+    "description": "Obtén una configuración específica de AWS CUR.",
+    "summary": "Obtener la configuración de coste de AWS CUR"
   },
   "UpdateCostAWSCURConfig": {
     "description": "Actualiza el estado (activo/archivado) o la configuración de filtrado de cuentas de una configuración de AWS CUR.",
@@ -476,6 +737,10 @@
   "DeleteCostAzureUCConfig": {
     "description": "Archiva una cuenta de Cloud Cost Management.",
     "summary": "Eliminar la configuración de Azure de Cloud Cost Management"
+  },
+  "GetCostAzureUCConfig": {
+    "description": "Obtén una configuración específica de Azure.",
+    "summary": "Obtener la configuración de coste de Azure UC"
   },
   "UpdateCostAzureUCConfigs": {
     "description": "Actualiza el estado de una configuración de Azure (activa/archivada).",
@@ -520,24 +785,28 @@
     "summary": "Obtener el archivo de costes personalizados"
   },
   "ListCostGCPUsageCostConfigs": {
-    "description": "Enumera las configuraciones de costes de uso de GCP.",
-    "summary": "Enumerar las configuraciones de costes de uso de GCP de Cloud Cost Management"
+    "description": "Enumera las configuraciones de Google Cloud Usage Cost.",
+    "summary": "Lista de configuraciones de Google Cloud Usage Cost"
   },
   "CreateCostGCPUsageCostConfig": {
-    "description": "Crea una cuenta Cloud Cost Management para una configuración de costes de uso de GCP.",
-    "summary": "Crear una configuración de costes de uso de GCP de Cloud Cost Management",
+    "description": "Crea una cuenta en Cloud Cost Management para configurar Google Cloud Usage Cost.",
+    "summary": "Crear la configuración de Google Cloud Usage Cost",
     "request_description": "",
-    "request_schema_description": "Solicitud de publicación de la configuración de costes de uso de GCP."
+    "request_schema_description": "Solicitud de publicación de la configuración de Google Cloud Usage Cost."
   },
   "DeleteCostGCPUsageCostConfig": {
     "description": "Archiva una cuenta de Cloud Cost Management.",
-    "summary": "Eliminar la configuración de costes de uso de GCP de Cloud Cost Management"
+    "summary": "Eliminar la configuración de Google Cloud Usage Cost"
+  },
+  "GetCostGCPUsageCostConfig": {
+    "description": "Obtén una configuración específica de Google Cloud Usage Cost.",
+    "summary": "Obtener la configuración de Google Cloud Usage Cost"
   },
   "UpdateCostGCPUsageCostConfig": {
-    "description": "Actualiza el estado de la configuración de costes de uso de GCP (activo/archivado).",
-    "summary": "Actualizar la configuración de costes de uso de GCP de Cloud Cost Management",
+    "description": "Actualiza el estado de una configuración de Google Cloud Usage Cost (activo/archivado).",
+    "summary": "Actualizar la configuración de Google Cloud Usage Cost",
     "request_description": "",
-    "request_schema_description": "Solicitud de parche de configuración de costes de uso de GCP."
+    "request_schema_description": "Solicitud de parche de configuración de Google Cloud Usage Cost."
   },
   "GetActiveBillingDimensions": {
     "description": "Obtén las dimensiones activas de facturación para la atribución de costes. Los datos de costes de un mes determinado están disponibles a más tardar el día 19 del mes siguiente.",
@@ -560,7 +829,7 @@
     "summary": "Obtener Coverage Analysis de hosts y contenedores de CSM"
   },
   "GetCSMServerlessCoverageAnalysis": {
-    "description": "Obtén Coverage Analysis de CSM de tus recursos serverless.\nSe calcula en función del número de agentes que se ejecutan en tus \nrecursos serverless con la función de CSM activada.",
+    "description": "Obtén Coverage Analysis de CSM de tus recursos serverless.\nSe calcula en función del número de agents que se ejecutan en tus \nrecursos serverless con la función de CSM activada.",
     "summary": "Obtener Coverage Analysis de CSM para recursos serverless"
   },
   "ListAllCSMServerlessAgents": {
@@ -582,11 +851,11 @@
     "summary": "Eliminar una clave de aplicación que pertenece al usuario actual"
   },
   "GetCurrentUserApplicationKey": {
-    "description": "Muestra una clave de aplicación que pertenece al usuario actual.",
+    "description": "Obtén una clave de aplicación propiedad del usuario actual.\nEl campo `key` no se devuelve para organizaciones en [modo de lectura de una sola vez](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Ver una clave de aplicación que pertenece al usuario actual"
   },
   "UpdateCurrentUserApplicationKey": {
-    "description": "Edita una clave de aplicación que pertenece al usuario actual.",
+    "description": "Edita una clave de aplicación propiedad del usuario actual.\nEl campo `key` no se devuelve para las organizaciones en [modo de lectura de una sola vez](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Editar una clave de aplicación que pertenece al usuario actual",
     "request_description": "",
     "request_schema_description": "Solicitud usada para modificar una clave de aplicación."
@@ -635,7 +904,7 @@
     "description": "Edita el conjunto de datos asociado al ID.",
     "summary": "Editar un conjunto de datos",
     "request_description": "Carga útil del conjunto de datos",
-    "request_schema_description": "Solicitud de edición de un conjunto de datos."
+    "request_schema_description": "Edita la solicitud de un conjunto de datos."
   },
   "GetDomainAllowlist": {
     "description": "Obtén la lista de dominios permitidos de una organización.",
@@ -648,10 +917,14 @@
     "request_schema_description": "Solicitud que contiene la configuración de dominios permitidos de correo electrónico deseado."
   },
   "CreateDORADeployment": {
-    "description": "Utiliza este endpoint de la API para proporcionar datos sobre los despliegues de métricas DORA.\n\nEsto es necesario para:\n- Frecuencia de despliegue\n- Tiempo de cambio\n- Tasa de fallos en los cambios",
-    "summary": "Enviar un evento de despliegue para métricas DORA",
+    "description": "Utiliza este endpoint de la API para proporcionar datos de despliegue.\n\nEsto es necesario para:\n- Frecuencia de despliegue\n- Tiempo de cambio\n- Tasa de fallos en los cambios",
+    "summary": "Enviar un evento de despliegue",
     "request_description": "",
     "request_schema_description": "Solicitud de creación de un evento de despliegue DORA."
+  },
+  "DeleteDORADeployment": {
+    "description": "Utiliza este endpoint de la API para eliminar un evento de despliegue.",
+    "summary": "Eliminar un evento de despliegue"
   },
   "ListDORADeployments": {
     "description": "Utiliza este endpoint de la API para obtener una lista de eventos de despliegue.",
@@ -664,10 +937,14 @@
     "summary": "Obtener un evento de despliegue"
   },
   "CreateDORAFailure": {
-    "description": "Utiliza este endpoint de la API para proporcionar datos de fallos para las métricas de DORA.\n\nEsto es necesario para:\n- Cambiar la tasa de fallos\n- Tiempo de restauración",
-    "summary": "Enviar un evento de fallo para DORA Metrics",
+    "description": "Utiliza este endpoint de la API para proporcionar datos sobre fallos.\n\nEsto es necesario para:\n- Cambiar la tasa de fallos\n- Tiempo de restauración",
+    "summary": "Enviar un evento de fallo",
     "request_description": "",
     "request_schema_description": "Solicitud para crear un evento de fallo de DORA."
+  },
+  "DeleteDORAFailure": {
+    "description": "Utiliza este endpoint de la API para eliminar un evento de fallo.",
+    "summary": "Eliminar un evento de fallo"
   },
   "ListDORAFailures": {
     "description": "Utiliza este endpoint de la API para obtener una lista de eventos de fallo.",
@@ -680,8 +957,8 @@
     "summary": "Obtener un evento de fallo"
   },
   "CreateDORAIncident": {
-    "description": "**Nota**: Este endpoint está obsoleto. Utiliza `/api/v2/dora/failure` en su lugar.\n\nUtiliza este endpoint de la API para proporcionar datos de fallos para las métricas de DORA.\n\nEsto es necesario para:\n- Cambiar la tasa de fallos\n- Tiempo de restauración",
-    "summary": "Enviar un evento de incidencias para métricas DORA",
+    "description": "**Nota**: Este endpoint está obsoleto. Utiliza `/api/v2/dora/failure` en su lugar.\n\nUtiliza este endpoint de la API para proporcionar datos sobre fallos.\n\nEsto es necesario para:\n- Cambiar la tasa de fallos\n- Tiempo de restauración",
+    "summary": "Enviar un evento de incidente",
     "request_description": "",
     "request_schema_description": "Solicitud para crear un evento de fallo de DORA."
   },
@@ -709,12 +986,38 @@
     "request_description": "Actualiza el cuerpo de una solicitud de caída del sistema.",
     "request_schema_description": "Solicitud de edición de una caída del sistema."
   },
+  "SearchIssues": {
+    "description": "El endpoint de búsqueda de incidencias te permite buscar programáticamente incidencias dentro de tu organización. Este endpoint devuelve una lista de incidencias que coinciden con una consulta de búsqueda dada, siguiendo la sintaxis de búsqueda de eventos. Los resultados de la búsqueda están limitados a un máximo de 100 incidencias por solicitud.",
+    "summary": "Buscar incidencias de Error Tracking",
+    "request_description": "Carga útil de la solicitud de incidencias de búsqueda.",
+    "request_schema_description": "Carga útil de la solicitud de incidencia de búsqueda."
+  },
+  "GetIssue": {
+    "description": "Recupera todos los detalles de una edición específica de Error Tracking, incluidos atributos y relaciones.",
+    "summary": "Obtener los detalles de una incidencia en Error Tracking"
+  },
+  "DeleteIssueAssignee": {
+    "description": "Eliminar el responsable de una incidencia por `issue_id`.",
+    "summary": "Eliminar el responsable de una incidencia"
+  },
+  "UpdateIssueAssignee": {
+    "description": "Actualiza el asignatario de una incidencia por `issue_id`.",
+    "summary": "Actualizar el asignatario de una incidencia",
+    "request_description": "Actualiza la carga útil de solicitud de asignatario de la incidencia.",
+    "request_schema_description": "Actualiza la carga útil de solicitud del asignatario de la incidencia."
+  },
+  "UpdateIssueState": {
+    "description": "Actualiza el estado de una incidencia por `issue_id`. Utiliza este endpoint para mover una incidencia entre estados como `OPEN`, `RESOLVED` o `IGNORED`.",
+    "summary": "Actualizar el estado de una incidencia",
+    "request_description": "Actualiza la carga útil de solicitud de estado de una incidencia.",
+    "request_schema_description": "Actualiza la carga útil de solicitud de estado de la incidencia."
+  },
   "ListEvents": {
     "description": "El endpoint de listas devuelve los eventos que se han ajustado a una consulta de búsqueda de eventos.\n[Los resultados se organizan en páginas, igual que en los logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUsa este endpoint para ver los eventos más recientes.",
     "summary": "Ver una lista de eventos"
   },
   "CreateEvent": {
-    "description": "Este endpoint permite publicar eventos.\n\n**Nota:** Para utilizar este endpoint con nuestras bibliotecas cliente, asegúrate de estar utilizando la última versión publicada a partir del 1 de julio de 2025. Las versiones anteriores no admiten esta funcionalidad.\n\n✅ **Sólo los eventos con la categoría `cambio` o `alerta`** tienen disponibilidad general. Para los eventos de cambio, consulta [Seguimiento de cambios](https://docs.datadoghq.com/change_tracking) para ver más detalles.\n\n❌ Para casos de uso que impliquen otras categorías de eventos, utiliza el endpoint V1 o ponte en contacto con el [servicio de asistencia](https://www.datadoghq.com/support/).\n\n❌ Aún no se admiten notificaciones para los eventos enviados a este endpoint. Utiliza el endpoint V1 para la funcionalidad de notificación.",
+    "description": "Este endpoint te permite publicar eventos.\n\n**Nota:** Para utilizar este endpoint con nuestras bibliotecas cliente, asegúrate de que estás utilizando la última versión publicada a partir del 1 de julio de 2025. Las versiones anteriores no admiten esta funcionalidad.\n\n**Importante:** Actualiza a la última versión de la biblioteca cliente para utilizar el endpoint actualizado en `https://event-management-intake.{site}/api/v2/events`. Las versiones anteriores de la biblioteca cliente de la API Publicar un evento (v2) envían solicitudes a un endpoint obsoleto (`https://api.{site}/api/v2/events`).\n\n✅ **Solo los eventos con la categoría `change` o `alert`** tienen disponibilidad general. Para los eventos de cambio, consulta [Seguimiento de cambios](https://docs.datadoghq.com/change_tracking) para ver más detalles.\n\n❌ Para casos de uso que impliquen otras categorías de eventos, utiliza el endpoint V1 o ponte en contacto con el [servicio de asistencia](https://www.datadoghq.com/support/).\n\n❌ Aún no se admiten notificaciones para los eventos enviados a este endpoint. Utiliza el endpoint V1 para la función de notificación.",
     "summary": "Publicar un evento",
     "request_description": "Carga útil de la solicitud de creación de evento.",
     "request_schema_description": "Carga útil para crear un evento."
@@ -726,7 +1029,7 @@
     "request_schema_description": "Objeto enviado con la solicitud para ver una lista de eventos de tu organización."
   },
   "GetEvent": {
-    "description": "Obtener los detalles de un evento por `event_id`.",
+    "description": "Obtén los detalles de un evento por `event_id`.",
     "summary": "Obtener un evento"
   },
   "ListIncidents": {
@@ -738,6 +1041,54 @@
     "summary": "Crear una incidencia",
     "request_description": "Carga útil de la incidencia.",
     "request_schema_description": "Solicitud de creación de una incidencia."
+  },
+  "ListIncidentNotificationRules": {
+    "description": "Enumera todas las reglas de notificación de la organización. Si lo deseas, puedes filtrar por tipo de incidente.",
+    "summary": "Lista de las reglas de notificación del incidente"
+  },
+  "CreateIncidentNotificationRule": {
+    "description": "Crea una nueva regla de notificación.",
+    "summary": "Crear una regla de notificación del incidente",
+    "request_description": "",
+    "request_schema_description": "Crea una solicitud para una regla de notificación."
+  },
+  "DeleteIncidentNotificationRule": {
+    "description": "Elimina una regla de notificación por su ID.",
+    "summary": "Eliminar una regla de notificación de incidente"
+  },
+  "GetIncidentNotificationRule": {
+    "description": "Recupera una regla de notificación específica por su ID.",
+    "summary": "Obtener una regla de notificación de incidente"
+  },
+  "UpdateIncidentNotificationRule": {
+    "description": "Actualiza una regla de notificación existente con una sustitución completa.",
+    "summary": "Actualizar una regla de notificación de incidente",
+    "request_description": "",
+    "request_schema_description": "Envía una solicitud para una regla de notificación."
+  },
+  "ListIncidentNotificationTemplates": {
+    "description": "Enumera todas las plantillas de notificación. Si lo deseas, puedes filtrar por tipo de incidente.",
+    "summary": "Lista de plantillas de notificación de incidente"
+  },
+  "CreateIncidentNotificationTemplate": {
+    "description": "Crea una nueva plantilla de notificación.",
+    "summary": "Crear plantilla de notificación de incidente",
+    "request_description": "",
+    "request_schema_description": "Crea una solicitud para una plantilla de notificación."
+  },
+  "DeleteIncidentNotificationTemplate": {
+    "description": "Elimina una plantilla de notificación por su ID.",
+    "summary": "Eliminar una plantilla de notificación"
+  },
+  "GetIncidentNotificationTemplate": {
+    "description": "Recupera una plantilla de notificación específica por su ID.",
+    "summary": "Obtener plantilla de notificación del incidente"
+  },
+  "UpdateIncidentNotificationTemplate": {
+    "description": "Actualiza los atributos de una plantilla de notificación existente.",
+    "summary": "Actualizar la plantilla de notificación del incidente",
+    "request_description": "",
+    "request_schema_description": "Solicitud de actualización de una plantilla de notificación."
   },
   "ListIncidentTypes": {
     "description": "Obtén todos los tipos de incidencias.",
@@ -790,6 +1141,20 @@
     "summary": "Crear, actualizar y eliminar archivos adjuntos de incidencias",
     "request_description": "Carga útil de archivo adjunto de incidencia.",
     "request_schema_description": "La solicitud de actualización de los archivos adjuntos de una incidencia."
+  },
+  "ListIncidentImpacts": {
+    "description": "Obtén todos los impactos para un incidente.",
+    "summary": "Enumerar los impactos del incidente"
+  },
+  "CreateIncidentImpact": {
+    "description": "Crea un impacto para un incidente.",
+    "summary": "Crear un impacto de incidente",
+    "request_description": "Carga útil de impacto del incidente.",
+    "request_schema_description": "Crea una solicitud para un impacto de incidente."
+  },
+  "DeleteIncidentImpact": {
+    "description": "Elimina un impacto de incidente.",
+    "summary": "Eliminar un impacto de incidente"
   },
   "ListIncidentIntegrations": {
     "description": "Obtén todos los metadatos de integración para una incidencia.",
@@ -867,6 +1232,22 @@
     "description": "Obtén una lista de los espacios de nombres disponibles de AWS CloudWatch que pueden enviar métricas a Datadog.",
     "summary": "Lista de los espacios de nombres disponibles"
   },
+  "DeleteAWSEventBridgeSource": {
+    "description": "Elimina una fuente Amazon EventBridge.",
+    "summary": "Eliminar una fuente Amazon EventBridge",
+    "request_description": "Elimina la fuente Amazon EventBridge con el nombre, la región y la cuenta de AWS asociados.",
+    "request_schema_description": "Cuerpo de la solicitud de eliminación de Amazon EventBridge."
+  },
+  "ListAWSEventBridgeSources": {
+    "description": "Obtén todas las fuentes Amazon EventBridge.",
+    "summary": "Obtener todas las fuentes Amazon EventBridge"
+  },
+  "CreateAWSEventBridgeSource": {
+    "description": "Crea una fuente Amazon EventBridge.",
+    "summary": "Crear una fuente Amazon EventBridge",
+    "request_description": "Crea una fuente Amazon EventBridge para una cuenta de AWS con un nombre y una región determinados.",
+    "request_schema_description": "Cuerpo de la solicitud de creación de Amazon EventBridge."
+  },
   "CreateNewAWSExternalID": {
     "description": "Genera un nuevo ID externo para la autenticación basada en roles de AWS.",
     "summary": "Generar un nuevo ID externo"
@@ -874,6 +1255,14 @@
   "GetAWSIntegrationIAMPermissions": {
     "description": "Obtén todos los permisos IAM AWS necesarios para la integración AWS.",
     "summary": "Obtener permisos IAM para la integración AWS"
+  },
+  "GetAWSIntegrationIAMPermissionsResourceCollection": {
+    "description": "Obtén todos los permisos de AWS IAM de recopilación de recursos necesarios para la integración de AWS.",
+    "summary": "Obtener permisos de IAM de recopilación de recursos"
+  },
+  "GetAWSIntegrationIAMPermissionsStandard": {
+    "description": "Obtén todos los permisos de AWS IAM estándar necesarios para la integración de AWS.",
+    "summary": "Obtener permisos de IAM estándar de la integración de AWS"
   },
   "ListAWSLogsServices": {
     "description": "Obtén una lista de los servicios de AWS que pueden enviar logs a Datadog.",
@@ -1481,6 +1870,10 @@
     "description": "Obtén todas las conexiones agregadas.",
     "summary": "Obtener todas las conexiones agregadas"
   },
+  "GetAggregatedDns": {
+    "description": "Obtén todo el tráfico DNS agregado.",
+    "summary": "Obtener todo el tráfico DNS agregado"
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Crear una nueva política de escalación de On-Call",
     "summary": "Crear política de escalación de On-Call",
@@ -1502,21 +1895,21 @@
     "request_schema_description": "Representa una solicitud de actualización de una política de escalación existente, incluidos los datos actualizados de política."
   },
   "CreateOnCallPage": {
-    "description": "Activa una nueva página de On-Call.\n",
+    "description": "Activa una nueva página de On-Call.",
     "summary": "Crear página de On-Call",
     "request_description": "",
     "request_schema_description": "Solicitud completa para activar una página de On-Call."
   },
   "AcknowledgeOnCallPage": {
-    "description": "Reconoce una página de On-Call.\n",
+    "description": "Reconoce una página de On-Call.",
     "summary": "Confirmación de la página de On-Call"
   },
   "EscalateOnCallPage": {
-    "description": "Escala una página de On-Call.\n",
+    "description": "Escala una página de On-Call.",
     "summary": "Escalar página de On-Call"
   },
   "ResolveOnCallPage": {
-    "description": "Resuelve una página de On-Call.\n",
+    "description": "Resuelve una página de On-Call.",
     "summary": "Resolver la página de On-Call"
   },
   "CreateOnCallSchedule": {
@@ -1571,18 +1964,38 @@
     "request_description": "",
     "request_schema_description": "Una solicitud para actualizar una configuración de organización."
   },
+  "ListOrgConnections": {
+    "description": "Devuelve una lista de conexiones de organización.",
+    "summary": "Lista de conexiones de organizació"
+  },
+  "CreateOrgConnections": {
+    "description": "Crear una nueva conexión de organización entre la organización actual y una organización de destino.",
+    "summary": "Crear una conexión de organización",
+    "request_description": "",
+    "request_schema_description": "Solicitud de creación de una conexión de organización."
+  },
+  "DeleteOrgConnections": {
+    "description": "Elimina una conexión de organización existente.",
+    "summary": "Eliminar conexión de organización"
+  },
+  "UpdateOrgConnections": {
+    "description": "Actualiza una conexión de organización existente.",
+    "summary": "Actualizar conexión de organización",
+    "request_description": "",
+    "request_schema_description": "Solicitud de actualización de una conexión de organización."
+  },
   "ListPermissions": {
     "description": "Devuelve una lista con todos los permisos, incluidos el nombre, la descripción y el ID.",
     "summary": "Mostrar una lista de permisos"
   },
   "ListFindings": {
-    "description": "Obtenga una lista de hallazgos. En ella se incluyen tanto los errores de configuración como los riesgos para la identidad.\n\n**Nota**: Para filtrar y devolver sólo los riesgos de identidad, añada el siguiente parámetro de consulta: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtrado\n\nLos filtros pueden aplicarse añadiendo parámetros de consulta a la URL.\n\n  - Con un único filtro: `?filter[attribute_key]=attribute_value`.\n  - Encadenamiento de filtros: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtrado por etiquetas: `?filtro[etiquetas]=clave_etiqueta:valor_etiqueta&filtro[etiquetas]=clave_etiqueta_2:valor_etiqueta_2`.\n\nEn este caso, `attribute_key` puede ser cualquiera de las claves de filtro que se describen más adelante.\n\nLos parámetros de consulta de tipo `integer` admiten operadores de comparación (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nTambién puede utilizar el operador de negación en cadenas. Por ejemplo, utilice `filter[resource_type]=-aws*` para filtrar cualquier recurso que no seaAWS.\n\nEl operador debe ir después del signo igual. Por ejemplo, para filtrar con el operador `>=`, añada el operador después del signo igual: `filter[evaluation_changed_at]=>=1678809373257`.\n\nLos parámetros de consulta deben estar sólo entre los documentados y con valores de tipos correctos. No se permiten parámetros de consulta duplicados (por ejemplo, `filtro[estado]=bajo&filtro[estado]=info`).\n\n### Campos de ampliación adicionales\n\nExisten campos de extensión adicionales para algunas conclusiones.\n\nLos datos están disponibles cuando se incluye el parámetro de consulta `?detailed_findings=true` en la solicitud.\n\nLos siguientes campos están disponibles para los resultados:\n- `external_id`: El ID externo del recurso relacionado con el hallazgo.\n- descripción La descripción y los pasos de corrección del hallazgo.\n- `datadog_link`: El enlace relativo Datadog para el hallazgo.\n- ip_addresses`: La lista de direcciones IP privadas para el recurso relacionado con el hallazgo.\n\n### Respuesta\n\nLa respuesta incluye una matriz de objetos de búsqueda, metadatos de paginación y un recuento de elementos que coinciden con la consulta.\n\nCada objeto de búsqueda contiene lo siguiente\n\n- El ID del hallazgo que puede utilizarse en una solicitud `GetFinding` para recuperar todos los detalles del hallazgo.\n- Atributos principales, como estado, evaluación, detalles de recursos de alto nivel, estado silenciado y detalles de reglas.\n- Las marcas de tiempo `evaluation_changed_at` y `resource_discovery_date`.\n- Una matriz de etiquetas asociadas.\n",
+    "description": "Obtén una lista de hallazgos. Estos incluyen los errores de configuración y los riesgos de identidad.\n\n**Nota**: Para filtrar y devolver solo riesgos de identidad, añade el siguiente parámetro de consultas: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtrado\n\nSe pueden aplicar filtros al anexar parámetros de consulta a la URL.\n\n  - Uso de un filtro único: `?filter[attribute_key]=attribute_value`\n  - Encadenar filtros: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtros en etiquetas: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nAquí, `attribute_key` puede ser cualquiera de las claves de filtro descritas a continuación.\n\nParámetros de consulta de tipo `integer` admiten operadores de comparación (`>`, `>=`, `<`, `<=`). Esto es muy útil al filtrar por `evaluation_changed_at` o `resource_discovery_timestamp`. Por ejemplo: `?filter[evaluation_changed_at]=>20123123121`.\n\nPuedes también utilizar el operador de negación en cadenas. Por ejemplo, usa `filter[resource_type]=-aws*` para filtrar cualquier recurso que no sea de AWS.\n\nEl operador debe estar después de un signo igual. Por ejemplo, para filtrar con el operador `>=` añade el operador después del signo igual: `filter[evaluation_changed_at]=>=1678809373257`.\n\nLos parámetros de consulta deben estar solo entre los parámetros registrados y con valores de tipos correctos. Los parámetros de consulta duplicados (por ejemplo, `filter[status]=low&filter[status]=info`) no están permitidos.\n\n### Campos de extensión adicionales\n\nLos campos de extensión adicionales están disponibles para algunos hallazgos.\n\nLos datos están disponibles cuando incluyes el parámetro de consulta `?detailed_findings=true` en la solicitud.\n\nLos siguientes campos están disponibles para los hallazgos:\n- `external_id`: el ID de recurso externo relacionado al hallazgo.\n- `description`: los pasos de descripción y corrección para el hallazgo.\n- `datadog_link`: el enlace de Datadog relacionado para el hallazgo.\n- - `ip_addresses`: la lista de direcciones IP privadas para el recurso relacionado al hallazgo.\n\n### Respuesta\n\nLa respuesta incluye una matriz de objetos de hallazgo, metadatos de paginación y un recuento de elementos que coinciden con la consulta.\n\nCada objeto de hallazgo contiene lo siguiente:\n\n- El ID de hallazgo que se puede usar en una solicitud `GetFinding` para recuperar todos los detalles del hallazgo.\n- Atributos principales, incluido estado, evaluación, detalles de recurso muy claro, estado silenciado y detalles de reglas.\n- Marcas temporales `evaluation_changed_at` y `resource_discovery_date`.\n- Una matriz de etiquetas asociadas.\n",
     "summary": "Hacer una lista de resultados"
   },
   "MuteFindings": {
     "description": "Silencia o anula el silencio de los resultados.",
     "summary": "Silenciar o anular el silencio de un lote de resultados",
-    "request_description": "### Atributos\n\nTodos los resultados se actualizan con los mismos atributos. El cuerpo de la solicitud debe incluir al menos dos atributos: `muted` y `reason`.\nLas razones permitidas dependen de si el resultado está siendo silenciado o no:\n  - Para silenciar un resultado: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n  - Para anular el silencio de un resultado: `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n\n### Meta\n\nEl cuerpo de la solicitud debe incluir una lista de los IDs de los resultados que se van a actualizar.\n",
+    "request_description": "### Atributos\n\nTodos los resultados se actualizan con los mismos atributos. El cuerpo de la solicitud debe incluir al menos dos atributos: `muted` y `reason`.\nLas razones permitidas dependen de si el resultado está siendo silenciado o no:\n  - Para silenciar un resultado: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n  - Para anular el silencio de un resultado: `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n\n### Meta\n\nEl cuerpo de la solicitud debe incluir una lista de los IDs de los resultados que se van a actualizar.",
     "request_schema_description": "La nueva solicitud de búsqueda de silencio en bloque."
   },
   "GetFinding": {
@@ -1617,6 +2030,60 @@
     "description": "Muestra todos los procesos de tu organización.",
     "summary": "Ver todos los procesos"
   },
+  "GetAccountFacetInfo": {
+    "description": "Obtener información sobre las facetas de atributos de cuenta, incluidos los posibles valores y recuentos",
+    "summary": "Obtener información sobre facetas de cuentas",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryAccounts": {
+    "description": "Consultar cuentas con filtrado flexible por propiedades de cuenta",
+    "summary": "Consultar cuentas",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryEventFilteredUsers": {
+    "description": "Consultar usuarios filtrados tanto por propiedades del usuario como por datos de la plataforma de eventos",
+    "summary": "Consultar usuarios filtrados por eventos",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetUserFacetInfo": {
+    "description": "Obtener información sobre las facetas de atributos de usuarios, incluidos los posibles valores y recuentos",
+    "summary": "Obtener información sobre facetas de usuarios",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "QueryUsers": {
+    "description": "Consultar usuarios con filtrado flexible por propiedades de usuario, con búsqueda por comodín opcional",
+    "summary": "Consultar usuarios",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetMapping": {
+    "description": "Obtener la configuración de asignación de entidades, incluidos todos los atributos disponibles y sus propiedades",
+    "summary": "Obtener asignación"
+  },
+  "CreateConnection": {
+    "description": "Crear una nueva conexión de datos y sus campos para una entidad",
+    "summary": "Crear conexión",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "UpdateConnection": {
+    "description": "Actualizar una conexión de datos existente añadiendo, actualizando o eliminando campos",
+    "summary": "Actualizar conexión",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteConnection": {
+    "description": "Eliminar una conexión de datos existente de una entidad",
+    "summary": "Eliminar conexión"
+  },
+  "ListConnections": {
+    "description": "Enumerar todas las conexiones de datos de una entidad",
+    "summary": "Lista de conexiones"
+  },
   "QueryScalarData": {
     "description": "Consulta de valores escalares (como se ve en los widgets Query Value, Table y Toplist).\nSe admiten múltiples orígenes de datos con la capacidad de\nprocesar los datos mediante fórmulas y funciones.",
     "summary": "Modificar una configuración de etiquetas",
@@ -1628,6 +2095,40 @@
     "summary": "Crear una configuración de etiquetas",
     "request_description": "",
     "request_schema_description": "Una solicitud de función contenedora sobre una única consulta de series temporales a ejecutar."
+  },
+  "ListTables": {
+    "description": "Enumera todas las tablas de referencia de esta organización.",
+    "summary": "Enumerar tablas"
+  },
+  "CreateReferenceTable": {
+    "description": "Crea una tabla de referencia. Puedes proporcionar datos de dos maneras:\n1. Llama a POST /api/v2/reference-tables/upload para obtener un ID de carga. A continuación, PUT los datos CSV\n   (no el archivo en sí) en trozos en cada URL en el cuerpo de la solicitud. Por último, llama a este\n   endpoint POST con `upload_id` en `file_metadata`.\n2. Proporciona `access_details` en `file_metadata` apuntando a un archivo CSV en el almacenamiento en la nube.",
+    "summary": "Crear tabla de referencia",
+    "request_description": "",
+    "request_schema_description": "Cuerpo de la solicitud para crear una nueva tabla de referencia a partir de un archivo local o un almacenamiento en la nube."
+  },
+  "DeleteTable": {
+    "description": "Eliminar una tabla de referencia por ID",
+    "summary": "Eliminar tabla"
+  },
+  "GetTable": {
+    "description": "Obtener una tabla de referencia por ID",
+    "summary": "Obtener tabla"
+  },
+  "UpdateReferenceTable": {
+    "description": "Actualiza una tabla de referencia por ID. Puedes actualizar los datos, la descripción y las etiquetas de la tabla. Nota: El tipo de fuente no puede modificarse tras la creación de la tabla. Para actualizar datos: para tablas existentes de tipo `source:LOCAL_FILE`, llama primero a POST api/v2/reference-tables/uploads para obtener un ID de carga, luego a PUT de partes de datos CSV a cada URL proporcionada, y finalmente llama a este endpoint PATCH con el upload_id en file_metadata. Para las tablas existentes con tipos `source:` de `S3`, `GCS`, o `AZURE`, proporciona access_details actualizados en file_metadata apuntando a un archivo CSV en el mismo tipo de almacenamiento en la nube.",
+    "summary": "Actualizar la tabla de referencia",
+    "request_description": "",
+    "request_schema_description": "Cuerpo de la solicitud de actualización de una tabla de referencia existente."
+  },
+  "GetRowsByID": {
+    "description": "Obtén filas de la tabla de referencia por sus valores de clave primaria.",
+    "summary": "Obtener filas por id"
+  },
+  "CreateReferenceTableUpload": {
+    "description": "Crear una carga de tablas de referencia para la ingesta masiva de datos",
+    "summary": "Crear carga de tabla de referencia",
+    "request_description": "",
+    "request_schema_description": "Solicitud de creación de una carga de un archivo que se ingerirá en una tabla de referencia."
   },
   "ListApplicationSecurityWAFCustomRules": {
     "description": "Recupera una lista de regla personalizada WAF.",
@@ -1740,7 +2241,7 @@
     "request_schema_description": "Esquema de entrada que representa una configuración del pipeline de observabilidad. Se utiliza en las solicitudes de creación y validación."
   },
   "ValidatePipeline": {
-    "description": "Valida una configuración de pipeline sin crear ni actualizar ningún recurso.\nDevuelve un lista de errores de validación, si los hay.\n",
+    "description": "Valida una configuración de pipeline sin crear ni actualizar ningún recurso.\nDevuelve una lista de errores de validación, si los hay.",
     "summary": "Validar un pipeline de observabilidad",
     "request_description": "",
     "request_schema_description": "Esquema de entrada que representa una configuración del pipeline de observabilidad. Se utiliza en las solicitudes de creación y validación."
@@ -1768,7 +2269,7 @@
     "summary": "Obtener una política de restricción"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Actualiza la política de restricciones asociada a un recurso.\n\n#### Recursos admitidos\nLas políticas de restricción pueden aplicarse a los siguientes recursos:\n- Cuadros de mando: Panel de control\n- Servicios de integración: Servicio de integración\n- Webhooks de integración: integración-webhook\n- Cuadernos: notebook \n- Paquetes de herramientas: `powerpack`\n- Tablas de referencia: `reference-table`\n- Reglas de seguridad: reglas de seguridad\n- objetivos de nivel de servicio (SLO): `slo`\n- Synthetic Monitoring Variables globales: `synthetics-global-variable`\n- Synthetic Monitoring Pruebas: `synthetics-test`\n- Synthetic Monitoring Ubicaciones privadas: `synthetics-private-location`\n- Monitores: `monitor (noun)`\n- Flujos de trabajo: `workflow (UI) / proceso (generic)`\n- App Builder Aplicaciones: `app-builder-app`\n- Conexiones: `connection (conexión)`\n- connection (conexión) Grupos: `connection (conexión)-group`\n- Aplicaciones RUM: `rum-application`\n- Conexiones entre organizaciones: `cross-org-connection (conexión)`\n- Hojas de cálculo: `hoja de cálculo`\n\n#### Relaciones soportadas para los recursos\nTipo de recurso | Relaciones admitidas\n----------------------------|--------------------------\nCuadros de mando | \"visor\", \"editor\nServicios de integración: visor, editor\nWebhooks de integración: visor, editor\nCuadernos: visor, editor\nPowerpacks: visor, editor\nReglas de seguridad: visor, editor\nobjetivos de nivel de servicio (SLO)   | Reglas de seguridad\nSynthetic Monitoring Variables Globales | `viewer`, `editor`\nSynthetic Monitoring Pruebas | Visor, Editor\nSynthetic Monitoring Ubicaciones Privadas | `viewer`, `editor`\nMonitores | \"viewer\", \"editor\nTablas de Referencia | `viewer`, `editor`.\nFlujos de trabajo: visor, corredor y editor.\nApp Builder Aplicaciones: visor, editor\nConexiones: visor, solucionador, editor\nconnection (conexión) Grupos: visor, editor\nAplicación RUM: `viewer`, `editor`.\nConexiones entre organizaciones: visor, editor\nHojas de cálculo | `viewer`, `editor`.",
+    "description": "Actualiza la política de restricción asociada a un recurso.\n\n#### Recursos compatibles\nLas políticas de restricción se pueden aplicar a los siguientes recursos:\n- Dashboards: `dashboard`\n- Servicios de integración: `integration-service`\n- Webhooks de integración: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Tablas de referencia: `reference-table`\n- Reglas de seguridad: `security-rule`\n- Objetivos de nivel de servicio: `slo`\n- Variables globales Synthetic: `synthetics-global-variable`\n- Tests Synthetic: `synthetics-test`\n- Localizaciones privadas Synthetic: `synthetics-private-location`\n- Monitores: `monitor`\n- Flujos de trabajo: `workflow`\n- Aplicaciones App Builder: `app-builder-app`\n- Conexiones: `connection`\n- Grupos de conexiones: `connection-group`\n- Aplicaciones RUM: `rum-application`\n- Conexiones entre organizaciones: `cross-org-connection`\n- Hojas de cálculo: `spreadsheet`\n- Cronogramas de On-Call: `on-call-schedule`\n- Políticas de escalado de On-Call: `on-call-escalation-policy`\n- Reglas de redirección a equipos de On-Call: `on-call-team-routing-rules`\n- Pipelines de logs: `logs-pipeline`\n\n#### Relaciones compatibles en recursos\nTipo de recurso               | Relaciones compatibles\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nServicios de integración        | `viewer`, `editor`\nWebhooks de integración        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nReglas de seguridad              | `viewer`, `editor`\nObjetivos de nivel de servicio    | `viewer`, `editor`\nVariables globales Synthetic  | `viewer`, `editor`\nTests Synthetic             | `viewer`, `editor`\nLocalizaciones privadas Synthetic | `viewer`, `editor`\nMonitores                    | `viewer`, `editor`\nTablas de referencia            | `viewer`, `editor`\nFlujos de trabajo                   | `viewer`, `runner`, `editor`\nAplicaciones App Builder            | `viewer`, `editor`\nConexiones                 | `viewer`, `resolver`, `editor`\nGrupos de conexiones           | `viewer`, `editor`\nAplicación RUM             | `viewer`, `editor`\nConexiones entre organizaciones       | `viewer`, `editor`\nHojas de cálculo                | `viewer`, `editor`\nCronogramas de On-Call           | `viewer`, `overrider`, `editor`\nPolíticas de escalado de On-Call | `viewer`, `editor`\nReglas de redirección a equipos de On-Call  | `viewer`, `editor`\nPipelines de logs              | `viewer`, `processors_editor`, `editor`",
     "summary": "Actualizar una política de restricción",
     "request_description": "Carga útil de política de restricción",
     "request_schema_description": "Solicitud de actualización de una política de restricción."
@@ -1782,6 +2283,10 @@
     "summary": "Crear un rol",
     "request_description": "",
     "request_schema_description": "Crea un rol."
+  },
+  "ListRoleTemplates": {
+    "description": "Lista de todas las plantillas de roles",
+    "summary": "Lista de plantillas de roles"
   },
   "DeleteRole": {
     "description": "Deshabilita un rol.",
@@ -1999,6 +2504,12 @@
     "description": "Obtiene todos los resultados de las reglas.",
     "summary": "Hacer una lista de todos los resultados de las reglas"
   },
+  "UpdateScorecardOutcomesAsync": {
+    "description": "Actualiza varios resultados de reglas de scorecard en una única solicitud por lotes.",
+    "summary": "Actualización asíncrona de los resultados de scorecard ",
+    "request_description": "Conjunto de resultados del cuadro de mando.",
+    "request_schema_description": "Solicitud por lotes de los resultados de los cuadros de mando."
+  },
   "CreateScorecardOutcomesBatch": {
     "description": "Establece varios resultados de la regla de servicio en una única solicitud por lotes.",
     "summary": "Crear lote de resultados",
@@ -2025,12 +2536,8 @@
     "request_description": "Atributos de las reglas.",
     "request_schema_description": "Solicitud de actualización de una regla de cuadro de mando."
   },
-  "ListVulnerableAssets": {
-    "description": "Obtén una lista de los activos vulnerables.\n\n### Paginación\n\nRevisa la sección [Paginación para el endpoint \"List Vulnerabilities\"](#pagination).\n\n### Filtrado\n\nConsulta la sección [Filtrado de vulnerabilidades de \"List Vulnerabilities\"](#filtering).\n\n### Metadatos\n\nConsulta la sección [Metadatos para el endpoint \"List Vulnerabilities\"](#metadata).\n",
-    "summary": "Lista de activos vulnerables"
-  },
   "DownloadCloudWorkloadPolicyFile": {
-    "description": "El endpoint de descarga genera un archivo de política de Workload Protection a partir de tus reglas del Agent de Workload Protection activas en ese momento y las descarga como un archivo `.policy`. Este archivo puede desplegarse en\ntus agentes para actualizar la política que se ejecuta en tu entorno.\n\n**Nota**: Este endpoint solo debe usarse para el sitio del Gobierno (US1-FED).",
+    "description": "El endpoint de descarga genera un archivo de política de Workload Protection a partir de tus reglas del Agent de Workload Protection activas en ese momento y las descarga como un archivo `.policy`. Este archivo puede desplegarse en\ntus agents para actualizar la política que se ejecuta en tu entorno.\n\n**Nota**: Este endpoint solo debe usarse para el sitio del Gobierno (US1-FED).",
     "summary": "Descargar la política de Workload Protection (US1-FED)"
   },
   "ListAssetsSBOMs": {
@@ -2038,8 +2545,12 @@
     "summary": "Enumerar materiales de software (SBOM) de recursos"
   },
   "GetSBOM": {
-    "description": "Obtén un único SBOM relacionado con un activo por su tipo y nombre.\n",
+    "description": "Obtén un único SBOM relacionado con un activo por su tipo y nombre.",
     "summary": "Obtener SBOM"
+  },
+  "ListScannedAssetsMetadata": {
+    "description": "Obtén una lista de metadatos de seguridad de los recursos analizados de una organización.\n\n### Paginación\n\nPara el endpoint \"Lista de vulnerabilidades\", consulta la sección [Paginación](#pagination).\n\n### Filtrado\n\nPara el endpoint \"Lista de vulnerabilidades\", consulte la sección [Filtrado](#filtering).\n\n### Metadatos\n\n Para el endpoint \"Lista de vulnerabilidades\", consulta la sección [Metadatos](#metadata).\n\n### Endpoints relacionados\n\nEste endpoint devuelve metadatos adicionales de los recursos de la nube que no están disponibles en endpoints de recursos estándar. Para acceder a un conjunto de datos más completo, llama a este endpoint junto con los endpoints de recursos relevantes y combina (une) sus resultados utilizando el identificador de recursos.\n\n**Hosts**\n\nPara enriquecer los datos de host, une la respuesta del endpoint del [host](https://docs.datadoghq.com/api/latest/hosts/) con la respuesta del endpoint de metadatos de recursos analizados en los siguientes campos clave:\n\n| ENDPOINT | CLAVE DE UNIÓN | TIPO |\n| --- | --- | --- |\n| [/api/v1/hosts](https://docs.datadoghq.com/api/latest/hosts/) | host_list.host_name | string |\n| /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |\n\n**Imágenes de hosts**\n\nPara enriquecer los datos de imágenes de host, une la respuesta del endpoint del [host](https://docs.datadoghq.com/api/latest/hosts/) con la respuesta del endpoint de metadatos de recursos analizados en los siguientes campos clave:\n\n| ENDPOINT | CLAVE DE UNIÓN | TIPO |\n| --- | --- | --- |\n| [/api/v1/hosts](https://docs.datadoghq.com/api/latest/hosts/) | host_list.tags_by_source[\"Amazon Web Services\"][\"image\"] | string |\n| /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |\n\n**Imágenes de contenedores**\n\nPara enriquecer los datos de imágenes de contenedor, una la respuesta del endpoint de las [imágenes de contenedor](https://docs.datadoghq.com/api/latest/container-images/) con la respuesta del endpoint de metadatos de recursos analizados en los siguientes campos clave:\n\n| ENDPOINT | CLAVE DE UNIÓN | TIPO |\n| --- | --- | --- |\n| [/api/v2/container_images](https://docs.datadoghq.com/api/latest/container-images/) | `data.attributes.name`@`data.attributes.repo_digest` | string |\n| /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |",
+    "summary": "Enumerar metadatos de recursos analizados"
   },
   "GetSignalNotificationRules": {
     "description": "Devuelve la lista de reglas de notificación para señales de seguridad.",
@@ -2048,7 +2559,7 @@
   "CreateSignalNotificationRule": {
     "description": "Crea una nueva regla de notificación para señales de seguridad y devuelve la regla creada.",
     "summary": "Crear una nueva regla de notificación basada en señales",
-    "request_description": "El cuerpo de la solicitud de creación de regla de notificación está compuesto por el tipo de regla y los atributos de la regla:\nel nombre de la regla, los selectores, los destinos de notificación y el estado de activación de la regla.\n",
+    "request_description": "El cuerpo de la solicitud de creación de regla de notificación está compuesto por el tipo de regla y los atributos de la regla:\nel nombre de la regla, los selectores, los objetivos de notificación y el estado de activación de la regla.",
     "request_schema_description": "Cuerpo de la solicitud de creación de la regla de notificación."
   },
   "DeleteSignalNotificationRule": {
@@ -2066,7 +2577,7 @@
     "request_schema_description": "Cuerpo de la solicitud de parche de la regla de notificación."
   },
   "ListVulnerabilities": {
-    "description": "Obtén una lista de vulnerabilidades.\n\n### Paginación\n\nLa paginación está activada por defecto tanto en `vulnerabilities` como en `assets`. El tamaño de la página varía en función del endpoint y no puede modificarse. Para automatizar la solicitud de la página siguiente, puedes utilizar la sección de enlaces en la respuesta.\n\nEste endpoint devolverá respuestas paginadas. Las páginas se almacenan en la sección de enlaces de la respuesta:\n\n```JSON\n{\n\"data\": [...],\n\"meta\": {...},\n\"links\": {\n\"self\": \"https://.../api/v2/security/vulnerabilities\",\n\"first\": \"https://.../api/v2/security/vulnerabilities?page[number]=1&page[token]=abc\",\n\"last\": \"https://.../api/v2/security/vulnerabilities?page[number]=43&page[token]=abc\",\n\"next\": \"https://.../api/v2/security/vulnerabilities?page[number]=2&page[token]=abc\"\n}\n}\n```\n\n\n- `links.previous` está vacío si se solicita la primera página.\n- `links.next` está vacío si se solicita la última página.\n\n#### Token\n\nLas vulnerabilidades se pueden crear, actualizar o eliminar en cualquier momento.\n\nEn la primera solicitud, se crea un token para garantizar la coherencia en las siguientes solicitudes paginadas.\n\nUn token sólo es válido durante 24 horas.\n\n#### Primera solicitud\n\nConsideramos que una solicitud es la primera cuando no existe el parámetro `page[token]`.\n\nLa respuesta de esta primera solicitud contiene el token recién creado en la sección `links`.\n\nEste token puede utilizarse en las siguientes solicitudes paginadas.\n\n#### Solicitudes posteriores\n\nCualquier solicitud que contenga los parámetros `page[token]` y `page[number]` válidos se considerará una solicitud posterior.\n\nSi el `token` no es válido, se devolverá una respuesta `404`.\n\nSi la página `number` no es válida, se devolverá una respuesta `400`.\n\n### Filtrado\n\nLa solicitud puede incluir algunos parámetros de filtrado para filtrar los datos a recuperar. El formato de los parámetros de filtrado sigue el formato [JSON:API](https://jsonapi.org/format/#fetching-filtering): `filter[$prop_name]`, donde `prop_name` es el nombre de la propiedad en la entidad por la que se está filtrando.\n\nTodos los filtros pueden incluir múltiples valores, donde los datos se filtrarán con una cláusula OR: `filter[title]=Title1,Title2` filtrará todas las vulnerabilidades donde title sea igual a `Title1` OR `Title2`.\n\nLos filtros de cadena distinguen entre mayúsculas y minúsculas.\n\nLos filtros booleanos aceptan los valores `true` o `false`.\n\nLos filtros numéricos deben incluir un operador como segunda entrada del filtro: `filter[$prop_name][$operator]`. Por ejemplo, para el endpoint de vulnerabilidades: `filter[cvss.base.score][lte]=8`.\n\nLos operadores disponibles son: `eq` (==), `lt` (<), `lte` (<=), `gt` (>) y `gte` (>=).\n\n### Metadatos\n\nSiguiendo el formato [JSON:API](https://jsonapi.org/format/#document-meta), el objeto incluye metainformación no estándar.\n\nEste endpoint incluye el miembro meta en la respuesta. Para más detalles sobre cada una de las propiedades incluidas en esta sección, consulta las tablas de respuesta de los endpoints.\n\n```JSON\n{\n\"data\": [...],\n\"meta\": {\n\"total\": 1500,\n\"count\": 18732,\n\"token\": \"some_token\"\n},\n\"links\": {...}\n}\n```",
+    "description": "Obtén una lista de vulnerabilidades.\n\n### Paginación\n\nLa paginación está activada por defecto en ambos `vulnerabilities` y `assets`. El tamaño de la página varía según el endpoint y no puede modificarse. Para automatizar la solicitud de la próxima página, puedes usar la sección de enlaces en la respuesta.\n\nEste endpoint devolverá las respuestas paginadas. Las páginas están almacenadas en la sección de enlaces de la respuesta:\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {...},\n  \"links\": {\n    \"self\": \"https://.../api/v2/security/vulnerabilities\",\n    \"first\": \"https://.../api/v2/security/vulnerabilities?page[number]=1&page[token]=abc\",\n    \"last\": \"https://.../api/v2/security/vulnerabilities?page[number]=43&page[token]=abc\",\n    \"next\": \"https://.../api/v2/security/vulnerabilities?page[number]=2&page[token]=abc\"\n  }\n}\n```\n\n\n- `links.previous` está vacío si se solicita la primera página.\n- `links.next` está vacío si se solicita la última página.\n\n#### Token\n\nLas vulnerabilidades se pueden crear, actualizar o eliminar en cualquier momento.\n\nEn la primera solicitud, se crea un token para asegurar la coherencia entre las solicitudes paginadas posteriores.\n\nUn token es válido solo por 24 horas.\n\n#### Primera solicitud\n\nConsideramos una solicitud como la primera solicitud cuando no hay un parámetro `page[token]`.\n\nLa respuesta de esta primera solicitud contiene el token recién creado en la sección `links`.\n\nEste token luego puede utilizarse en las posteriores solicitudes paginadas.\n\n*Nota: La primera solicitud puede tardar más en completarse que las solicitudes posteriores.*\n\n#### Solicitudes posteriores\n\nCualquier solicitud que contenga parámetros `page[token]` y `page[number]` válidos se considerarán una solicitud posterior.\n\nSi el `token` no es válido, se devolverá una respuesta `404`.\n\nSi la página `number` no es válida, se devolverá una respuesta `400`.\n\nEl `token` devuelto es válido para todas las solicitudes en la secuencia de paginación. Para enviar solicitudes paginadas en paralelo, reutiliza el mismo `token` y cambia solo el parámetro `page[number]`.\n\n### Filtrado\n\nLa solicitud puede incluir algunos parámetros de filtro para filtrar los datos a recuperar. El formato de los parámetros de filtro sigue el [formato JSON:API](https://jsonapi.org/format/#fetching-filtering): `filter[$prop_name]`, donde `prop_name` es el nombre de propiedad en la entidad filtrada.\n\nTodos los filtros pueden incluir múltiples valores, en los que los datos se filtrarán con una cláusula OR: `filter[title]=Title1,Title2` filtrará todas las vulnerabilidades en las que el título es igual a `Title1` OR `Title2`.\n\nLos filtros de cadena distinguen mayúscula y minúscula.\n\nLos filtros booleanos aceptan `true` o `false` como valores.\n\nLos filtros de número deben incluir un operador como una segunda entrada de filtro: `filter[$prop_name][$operator]`. Por ejemplo, para el endpoint de vulnerabilidades: `filter[cvss.base.score][lte]=8`.\n\nLos operadores disponibles son: `eq` (==), `lt` (<), `lte` (<=), `gt` (>) and `gte` (>=).\n\n### Metadatos\n\nSigue el [formato JSON:API](https://jsonapi.org/format/#document-meta), objeto que incluye la metainformación no estándar.\n\nEste endpoint incluye el miembro meta en la respuesta. Para obtener más detalles sobre cada una de las propiedades incluidas en esta sección, comprueba las tablas de respuesta de endpoints.\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {\n    \"total\": 1500,\n    \"count\": 18732,\n    \"token\": \"some_token\"\n  },\n  \"links\": {...}\n}\n```\n### Extensiones\n\nLas solicitudes pueden incluir extensiones para modificar el comportamiento del endpoint solicitado. Los parámetros de filtro siguen el [formato JSON:API](https://jsonapi.org/extensions/#extensions) format: `ext:$extension_name`, donde `extension_name` es el nombre del modificador que se está aplicando.\n\nLas extensiones solo pueden incluir un valor: `ext:modifier=value`.",
     "summary": "Lista de vulnerabilidades"
   },
   "GetVulnerabilityNotificationRules": {
@@ -2076,7 +2587,7 @@
   "CreateVulnerabilityNotificationRule": {
     "description": "Crea una nueva regla de notificación para vulnerabilidades de seguridad y devuelve la regla creada.",
     "summary": "Crear una nueva regla de notificación basada en vulnerabilidades",
-    "request_description": "El cuerpo de la solicitud de creación de regla de notificación está compuesto por el tipo de regla y los atributos de la regla:\nel nombre de la regla, los selectores, los destinos de notificación y el estado de activación de la regla.\n",
+    "request_description": "El cuerpo de la solicitud de creación de regla de notificación está compuesto por el tipo de regla y los atributos de la regla:\nel nombre de la regla, los selectores, los objetivos de notificación y el estado de activación de la regla.",
     "request_schema_description": "Cuerpo de la solicitud de creación de la regla de notificación."
   },
   "DeleteVulnerabilityNotificationRule": {
@@ -2092,6 +2603,10 @@
     "summary": "Parchear una regla de notificación basada en vulnerabilidades",
     "request_description": "",
     "request_schema_description": "Cuerpo de la solicitud de parche de la regla de notificación."
+  },
+  "ListVulnerableAssets": {
+    "description": "Obtén una lista de activos vulnerables.\n\n### Paginación\n\nRevisa la [sección Paginación para el endpoint \"Lista de vulnerabilidades\"](#pagination).\n\n### Filtrado\n\nConsulta la sección [Filtrado para el endpoint \"Lista de vulnerabilidades\"](#filtering).\n\n### Metadatos\n\nConsulta la sección [Metadatos para el endpoint \"Lista de vulnerabilidades\"](#metadata).",
+    "summary": "Lista de activos vulnerables"
   },
   "ListCloudWorkloadSecurityAgentRules": {
     "description": "Obtén la lista de reglas del Agent.\n\n**Nota**: Este endpoint sólo debe utilizarse para el sitio del Gobierno (US1-FED).",
@@ -2149,6 +2664,22 @@
     "description": "Crea una nueva regla de supresión.",
     "summary": "Crear una regla de supresión",
     "request_description": "La definición de la nueva norma de supresión.",
+    "request_schema_description": "Objeto de solicitud que incluye la regla de supresión que deseas crear."
+  },
+  "GetSuppressionsAffectingFutureRule": {
+    "description": "Obtén la lista de supresiones que afectarían a una regla.",
+    "summary": "Obtener supresiones que afecten a la futura regla",
+    "request_description": "",
+    "request_schema_description": "Crea una regla."
+  },
+  "GetSuppressionsAffectingRule": {
+    "description": "Obtén la lista de supresiones que afectan a una regla específica existente por su ID.",
+    "summary": "Obtener supresiones que afectan a una regla específica"
+  },
+  "ValidateSecurityMonitoringSuppression": {
+    "description": "Valida una regla de supresión.",
+    "summary": "Validar una regla de supresión",
+    "request_description": "",
     "request_schema_description": "Objeto de solicitud que incluye la regla de supresión que deseas crear."
   },
   "DeleteSecurityMonitoringSuppression": {
@@ -2381,33 +2912,51 @@
     "request_description": "Carga útil del servicio de incidencias.",
     "request_schema_description": "Solicitud de modificación con la carga útil de un servicio de incidencias."
   },
-  "ListHistoricalJobs": {
-    "description": "Arma una lista de trabajos históricos.",
-    "summary": "Lista de trabajos históricos"
+  "ListSecurityMonitoringHistsignals": {
+    "description": "Enumera las señales hist.",
+    "summary": "Lista de señales hist"
   },
-  "RunHistoricalJob": {
-    "description": "Ejecuta un trabajo histórico.",
-    "summary": "Ejecutar un trabajo histórico",
+  "SearchSecurityMonitoringHistsignals": {
+    "description": "Busca las señales hist.",
+    "summary": "Buscar señales hist",
     "request_description": "",
-    "request_schema_description": "Ejecuta una solicitud de trabajo histórico."
+    "request_schema_description": "Solicitud de lista de señales de seguridad."
+  },
+  "GetSecurityMonitoringHistsignal": {
+    "description": "Obtén los detalles de una señal hist.",
+    "summary": "Obtener los detalles de una señal hist"
+  },
+  "ListThreatHuntingJobs": {
+    "description": "Enumera trabajos de caza de amenazas.",
+    "summary": "Enumerar trabajos de caza de amenazas"
+  },
+  "RunThreatHuntingJob": {
+    "description": "Ejecuta un trabajo de caza de amenazas.",
+    "summary": "Ejecutar un trabajo de caza de amenazas",
+    "request_description": "",
+    "request_schema_description": "Ejecuta una solicitud de trabajo de caza de amenazas."
   },
   "ConvertJobResultToSignal": {
     "description": "Convierte el resultado de un trabajo en una señal.",
     "summary": "Convertir el resultado de un trabajo en una señal",
     "request_description": "",
-    "request_schema_description": "Solicitud de conversión de los resultados de trabajos históricos en señales."
+    "request_schema_description": "Solicitud de conversión de los resultados de un trabajo de caza de amenazas en señales."
   },
-  "DeleteHistoricalJob": {
+  "DeleteThreatHuntingJob": {
     "description": "Elimina un trabajo existente.",
     "summary": "Eliminar un trabajo existente"
   },
-  "GetHistoricalJob": {
+  "GetThreatHuntingJob": {
     "description": "Obtén los detalles de un trabajo.",
     "summary": "Obtener los detalles de un trabajo"
   },
-  "CancelHistoricalJob": {
-    "description": "Cancela un trabajo histórico.",
-    "summary": "Cancelar un trabajo histórico"
+  "CancelThreatHuntingJob": {
+    "description": "Cancela un trabajo de caza de amenazas.",
+    "summary": "Cancelar un trabajo de caza de amenazas"
+  },
+  "GetSecurityMonitoringHistsignalsByJobId": {
+    "description": "Obtén las señales hist de un trabajo.",
+    "summary": "Obtener las señales hist de un trabajo"
   },
   "CreateSLOReportJob": {
     "description": "Crea un trabajo para generar un informe de SLO. El trabajo de informe se procesa de forma asíncrona y finalmente da como resultado un informe CSV disponible para su descarga.\n\nComprueba el estado de la tarea y descarga el informe CSV utilizando el `report_id` devuelto.",
@@ -2422,6 +2971,10 @@
   "GetSLOReportJobStatus": {
     "description": "Obtén el estado del trabajo de informe de SLO.",
     "summary": "Obtener el estado del informe de SLO"
+  },
+  "GetSPARecommendations": {
+    "description": "Recupera recomendaciones de recursos para un trabajo de Spark. La persona que llama (Spark Gateway o interfaz de usuario de DJM) proporciona un nombre de servicio y un identificador de partición, y SPA devuelve recomendaciones estructuradas para recursos de controlador y ejecutor.",
+    "summary": "Obtener recomendaciones de SPA"
   },
   "AggregateSpans": {
     "description": "El endpoint de la API para agregar tramos en bucket y calcular métricas y series temporales.\nEste endpoint tiene un límite de `300` solicitudes por hora.",
@@ -2439,6 +2992,26 @@
     "request_description": "",
     "request_schema_description": "La solicitud de una lista de tramos."
   },
+  "CreateSCAResult": {
+    "summary": "Dependencias POST para análisis",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateSCAResolveVulnerableSymbols": {
+    "summary": "Solicitud POST para resolver símbolos vulnerables",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListMultipleRulesets": {
+    "description": "Obtener reglas para múltiples conjuntos de reglas por lotes.",
+    "summary": "Obtener múltiples conjuntos de reglas",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetSecretsRules": {
+    "description": "Devuelve la lista de reglas secretas con ID, Patrón, Descripción, Prioridad e ID SDS",
+    "summary": "Devuelve la lista de reglas secretas"
+  },
   "GetOnDemandConcurrencyCap": {
     "description": "Obtén el límite de concurrencia bajo demanda.",
     "summary": "Obtener el límite de concurrencia bajo demanda"
@@ -2449,6 +3022,42 @@
     "request_description": ".",
     "request_schema_description": "Atributos de límite de concurrencia bajo demanda."
   },
+  "ListTagPipelinesRulesets": {
+    "description": "Enumerar todos los conjuntos de reglas de pipeline de etiqueta: recupera una lista de todos los conjuntos de reglas de pipeline de etiqueta para la organización.",
+    "summary": "Lista de conjuntos de reglas de pipeline de etiqueta"
+  },
+  "CreateTagPipelinesRuleset": {
+    "description": "Crea un nuevo conjunto de reglas de pipeline de etiqueta con las reglas y la configuración especificadas.",
+    "summary": "Crear conjunto de reglas de pipeline de etiqueta",
+    "request_description": "",
+    "request_schema_description": "La definición del objeto `CreateRulesetRequest`."
+  },
+  "ReorderTagPipelinesRulesets": {
+    "description": "Reordenar los conjuntos de reglas de pipeline de etiqueta: cambia el orden de ejecución de los conjuntos de reglas de pipeline de etiqueta",
+    "summary": "Reordenar conjuntos de reglas de pipeline de etiqueta ",
+    "request_description": "",
+    "request_schema_description": "La definición del objeto `ReorderRulesetResourceArray`."
+  },
+  "ValidateQuery": {
+    "description": "Validar una consulta de pipeline de etiqueta: valida la sintaxis y la estructura de una consulta de pipeline de etiqueta",
+    "summary": "Validar consulta",
+    "request_description": "",
+    "request_schema_description": "La definición del objeto `RulesValidateQueryRequest`."
+  },
+  "DeleteTagPipelinesRuleset": {
+    "description": "Eliminar un conjunto de reglas de pipeline de etiqueta: elimina un conjunto de reglas de pipeline de etiqueta existente por su ID",
+    "summary": "Eliminar conjunto de regla de pipeline de etiqueta"
+  },
+  "GetTagPipelinesRuleset": {
+    "description": "Obtener un conjunto de reglas de pipeline de etiqueta específica: recupera un conjunto de datos de pipeline de etiqueta específico por su ID",
+    "summary": "Obtener un conjunto de reglas de pipeline de etiqueta"
+  },
+  "UpdateTagPipelinesRuleset": {
+    "description": "Actualizar un conjunto de reglas de pipeline de etiqueta: actualiza un conjunto de reglas de pipeline de etiqueta existente con nuevas reglas y configuración",
+    "summary": "Actualizar conjunto de reglas de pipeline de etiqueta",
+    "request_description": "",
+    "request_schema_description": "La definición del objeto `UpdateRulesetRequest`."
+  },
   "ListTeams": {
     "description": "Obtén todos los equipos.\nSe puede utilizar para buscar equipos utilizando los parámetros de consulta `filter[keyword]` y `filter[me]`.",
     "summary": "Obtener todos los equipos"
@@ -2458,6 +3067,28 @@
     "summary": "Crear un equipo",
     "request_description": "",
     "request_schema_description": "Solicitud de creación de un equipo"
+  },
+  "DeleteTeamConnections": {
+    "description": "Elimina varias conexiones de equipo.",
+    "summary": "Eliminar conexiones de equipo",
+    "request_description": "",
+    "request_schema_description": "Solicitud de eliminación de conexiones de equipo."
+  },
+  "ListTeamConnections": {
+    "description": "Devuelve todas las conexiones de equipo.",
+    "summary": "Enumerar conexiones de equipo"
+  },
+  "CreateTeamConnections": {
+    "description": "Crea múltiples conexiones de equipo.",
+    "summary": "Crear conexiones de equipo",
+    "request_description": "",
+    "request_schema_description": "Solicitud de creación de conexiones de equipo."
+  },
+  "SyncTeams": {
+    "description": "Este endpoint intenta vincular tus equipos de Datadog existentes con equipos de GitHub haciendo coincidir sus nombres.\nEvalúa todos los equipos de Datadog actuales y los compara con equipos en la organización de GitHub\nconectada a tu cuenta de Datadog, basándose en el encabezado de equipo de Datadog y el slug de equipo de GitHub\n(en minúsculas y en mayúsculas).\n\nEsta operación es de solo lectura en el lado de GitHub, no se modificará ni creará equipos.\n\n[Una organización de GitHub debe estar conectada a tu cuenta de Datadog](https://docs.datadoghq.com/integrations/github/),\ny la aplicación de GitHub integrada con Datadog debe tener el permiso `Members Read`. La coincidencia se realiza comparando el identificador del equipo de Datadog con el slug del equipo de GitHub\nutilizando una coincidencia exacta normalizada; se ignora la distnción de mayúsculas y se eliminan los espacios. No se realizan modificaciones\na equipos en GitHub. Esto no creará nuevos equipos en Datadog.",
+    "summary": "Enlace de Teams con Teams de GitHub",
+    "request_description": "",
+    "request_schema_description": "Solicitud de sincronización del equipo."
   },
   "ListMemberTeams": {
     "description": "Obtén todos los equipos miembros.",
@@ -2565,6 +3196,12 @@
     "request_description": "Carga útil del equipo de incidencias.",
     "request_schema_description": "Solicitud de modificación con la carga útil de un equipo de incidencias."
   },
+  "SearchFlakyTests": {
+    "description": "Enumerar el endpoint que devuelve flaky tests de Flaky Test Management. Los resultados están paginados.",
+    "summary": "Buscar flaky tests",
+    "request_description": "",
+    "request_schema_description": "La solicitud de búsqueda de flaky tests."
+  },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Muestra el uso por hora de la protección de aplicaciones.\n**Nota:** Este endpoint ha quedado obsoleto. Ahora pueden consultarse los datos de uso por hora de todos los productos con la [API para ver el uso por hora según la gama de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Ver el uso por hora de la protección de aplicaciones"
@@ -2648,41 +3285,41 @@
     "summary": "Obtener membresías de usuario"
   },
   "CreateWorkflow": {
-    "description": "Crea un nuevo flujo de trabajo, devolviendo el ID del flujo de trabajo. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Crea un nuevo proceso, devolviendo el ID de proceso. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Crear un proceso",
     "request_description": "",
     "request_schema_description": "Un objeto de solicitud para crear un nuevo proceso."
   },
   "DeleteWorkflow": {
-    "description": "Elimina un flujo de trabajo por ID. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Elimina un proceso por ID. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Eliminar un proceso existente"
   },
   "GetWorkflow": {
-    "description": "Obtén un flujo de trabajo por ID. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Obtén un proceso por ID. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Obtener un proceso existente"
   },
   "UpdateWorkflow": {
-    "description": "Actualiza un flujo de trabajo por ID. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Actualiza un proceso por ID. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Actualizar un proceso existente",
     "request_description": "",
     "request_schema_description": "Un objeto de solicitud para actualizar un proceso existente."
   },
   "ListWorkflowInstances": {
-    "description": "Enumera todas las instancias de un flujo de trabajo dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Enumera todas las instancias de un proceso dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Hacer una lista de instancias de flujo de trabajo"
   },
   "CreateWorkflowInstance": {
-    "description": "Ejecuta el flujo de trabajo dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Ejecuta el proceso dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Ejecutar un flujo de trabajo",
     "request_description": "",
     "request_schema_description": "Solicitud utilizada para crear una instancia de flujo de trabajo."
   },
   "GetWorkflowInstance": {
-    "description": "Obtén una ejecución específica de un flujo de trabajo dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Obtén una ejecución específica de un proceso dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Obtener una instancia de flujo de trabajo"
   },
   "CancelWorkflowInstance": {
-    "description": "Cancela una ejecución específica de un flujo de trabajo dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
+    "description": "Cancela una ejecución específica de un proceso dado. Esta API requiere una [clave de aplicación registrada](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). También puedes configurar estos permisos [en la interfaz de usuario](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Cancelar una instancia de flujo de trabajo"
   }
 }
