@@ -27,20 +27,20 @@ By capturing these items as follow-ups, your team can stay focused on incident r
 
 Follow-ups can be created at any point during an incident (even before it's resolved) allowing responders to document necessary work as they discover it. After resolution, you can [export follow-ups](#export-follow-ups) to Jira or Case Management to integrate them into your team's existing workflows.
 
-**From the Web app**: Go to the incident's **Remediation** tab to view, create, edit, and track all follow-ups associated with the incident.
+**From Datadog**: Go to the incident's **Remediation** tab to view, create, edit, and track all follow-ups associated with the incident.
 
-**From Slack**: In the incident channel, run `/datadog followup` to create a new follow-up or `/datadog followup list` to view and manage existing follow-ups. For more commands, see [Integrate Slack with Datadog Incident Management][5].
+**From Slack**: In the incident channel, run `/datadog followup` to create a new follow-up or `/datadog followup list` to view and manage existing follow-ups. For more Slack commands, see [Integrate Slack with Datadog Incident Management][5].
 
 ## Export follow-ups
 
-You can export follow-ups from Incident Management to either [Case Management][2] or Jira, allowing you to track and manage them within your team's existing workflows. Exports can be done manually on a case-by-case basis or configured to happen automatically for all follow-ups.
+You can export follow-ups from Incident Management to either Case Management or Jira, allowing you to track and manage them within your team's existing workflows. Exports can be done manually on a case-by-case basis or configured to happen automatically for all follow-ups.
 
 To export follow-ups:
 1. Navigate to [**Incident Management settings > Follow-Ups**][1].
 1. Add or define an **export template**. An export template describes the way that Datadog can export and sync a follow-up.
-1. There following export templates are supported:
-   1. **Case Management**
-   1. **Jira**.
+1. The following export templates are supported:
+   1. [Case Management](#case-management-exports)
+   1. [Jira](#jira-exports)
 1. When defining a template, you can configure how Datadog should set the fields on the resulting Datadog case or Jira issue, using variables provided by the follow-up and its incident. For example:
    * `{{ title }}` represents the incident's title
    * `{{ severity }}` represents the incident's severity
@@ -59,7 +59,7 @@ After defining an export template, you have two options:
 
 ### Case Management exports
 
-<div class="alert alert-info">Manual exports is not supported for Case Management.</div>
+<div class="alert alert-info">Manual exports are not supported for Case Management.</div>
 
 When you export your follow-ups to [Case Management][2], you can manage, track, and analyze your follow-ups directly in Datadog. For example, you can:
 
