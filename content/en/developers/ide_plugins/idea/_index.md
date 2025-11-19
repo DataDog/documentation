@@ -98,13 +98,6 @@ Code Insights include a detailed description for each issue, and links to:
 
 You can dismiss individual insights and set filters to view the categories of insights that you are interested in.
 
-## Live Debugger
-
-The [**Live Debugger**][20] enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging.
-
-{{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
-
-Find out more in the [Live Debugger][20] subsection.
 
 ## Logs
 
@@ -114,12 +107,24 @@ The [Logs][23] integration detects log lines in your source code, displays live 
 
 Find out more in the [Logs][23] sub-section.
 
-## CI Test Runs
-You can view recent test runs in the [CI Visibility Explorer][12] by navigating directly from your source files. Look for the **CI Test Run** inlays above test method declarations in your source code:
+## Live Debugger
 
-{{< img src="/developers/ide_plugins/idea/ci-navigation.png" alt="A source file showing a CI Test Run inlay." style="width:100%;" >}}
+The [**Live Debugger**][20] enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging.
 
-Clicking the link opens the **Test Runs** tab showing the recent history for one test case.
+{{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
+
+Find out more in the [Live Debugger][20] sub-section.
+
+
+## Code Security
+The [**Code Security**][7] integration promotes better security by:
+
+- flagging library vulnerabilities and runtime code vulnerabilities as Code Insights
+- checking your code locally, as you edit it, to detect quality and security issues before they are committed
+
+{{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:100%;" >}}
+
+Find out more in the [Code Security][24] sub-section.
 
 ## View in IDE
 
@@ -129,11 +134,12 @@ The **View in IDE** feature provides a link from the Datadog platform directly t
 
 <div class="alert alert-info">A prerequisite to make the most of this feature is that Source Code Integration is configured for your service.</div>
 
-## Code Security
-The [**Code Security**][7] integration promotes better security by:
+## CI Test Runs
+You can view recent test runs in the [CI Visibility Explorer][12] by navigating directly from your source files. Look for the **CI Test Run** inlays above test method declarations in your source code:
 
-- flagging library vulnerabilities and runtime code vulnerabilities as Code Insights
-- checking your code locally, as you edit it, to detect quality and security issues before they are committed
+{{< img src="/developers/ide_plugins/idea/ci-navigation.png" alt="A source file showing a CI Test Run inlay." style="width:100%;" >}}
+
+Clicking the link opens the **Test Runs** tab showing the recent history for one test case.
 
 ## Feedback
 
@@ -174,3 +180,4 @@ If you don't wish to send this data to Datadog, you can disable the collection a
 [20]: /developers/ide_plugins/idea/live_debugger/
 [21]: /tracing/live_debugger/
 [23]: /developers/ide_plugins/idea/logs/
+[24]: /developers/ide_plugins/idea/code_security/

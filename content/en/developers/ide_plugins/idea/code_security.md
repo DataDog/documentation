@@ -8,7 +8,7 @@ further_reading:
 ---
 
 ## Overview
-The Code Security integration in the plugin promotes better security by:
+The [Code Security][4] integration in the plugin promotes better security by:
 
 - flagging library vulnerabilities and runtime code vulnerabilities
 - checking your code locally, as you edit it, to detect quality and security issues before they are committed
@@ -18,7 +18,7 @@ The Datadog plugin reports library and runtime code vulnerabilities as Code Insi
 
 {{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability-1.png" alt="A library vulnerability highlighted in the source editor" style="width:100%;" >}}
 
-Open the **File Insights** or **Project Insights** tab in the Datadog tool-window to see full details for any vulnerability. Click on the link in the `Code Links` section to navigate to the source location, or click on the vulnerability description to open the summary at Datadog.
+Full details of each vulnerability are shown in the Datadog tool-window in the **File Insights** and **Project Insights** tabs. Click on the link in the `Code Links` section to navigate to the source location, or click on the vulnerability description to open the summary at Datadog.
 
 ## Local Code Analysis
 The Datadog plugin runs [Static Analysis][2] rules locally as you edit your source code to detect quality and security issues before you commit your changes.
@@ -55,6 +55,11 @@ A local configuration file (`static-analysis.datadog.yml`) can be placed at the 
 ### Settings
 The Datadog Static Analyzer can be activated and deactivated in the IDE settings under **Editor** → **Inspections**.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security/configuration/code-security/setup
 [2]: /security/code_security/static_analysis/setup/?tab=github
 [3]: /security/code_security/static_analysis/static_analysis_rules/
+[4]: /security/code_security/
