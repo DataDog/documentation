@@ -23,7 +23,9 @@ An event can set the state of a UI component, open or close a modal, trigger ano
 
 For example, the [GitHub PR summarizer][2] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
 
-In addition to working with events manually, you can use Bits AI to set up event handlers, configure event-driven actions, and optimize event logic. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**). Enter a custom prompt for an event, or try the prompt `How can you help me with events?`.
+In addition to working with events manually, you can use Bits AI to set up event handlers, configure event-driven actions, and optimize event logic:
+   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Enter a custom prompt for an event, or try the prompt `How can you help me with events?`.
 
 ### State functions
 
