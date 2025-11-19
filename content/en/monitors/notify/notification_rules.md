@@ -188,7 +188,7 @@ The following table demonstrates how monitors with different tag combinations ma
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center"></td>
-            <td><i>@pagerduty-service1 @slack-service1</i><br><i>@jira-project</i><br><i>@user@datadoghq.com</i></td>
+            <td><i>@slack-channel1</i><br><i>@slack-service1</i><br><i>@jira-project</i><br><i>@user@datadoghq.com</i></td>
         </tr>
     </tbody>
 </table>
