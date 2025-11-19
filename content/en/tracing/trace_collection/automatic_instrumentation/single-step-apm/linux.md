@@ -183,6 +183,6 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [17]: /tracing/trace_collection/library_config/
 [18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
-[20]: https://app.datadog.com/apm/settings/workload-selection
+[20]: https://app.datadog.com/apm/service-setup/workload-selection
 
 
