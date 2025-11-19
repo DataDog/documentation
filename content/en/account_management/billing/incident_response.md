@@ -41,7 +41,7 @@ A user needs an **Incident Management seat** if they perform any of the followin
 - Modify an incident (for example, update severity)
 - Add a comment, graph, or link to an [incident timeline][8]
 
-In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Slack app, such as using action buttons or interacting with @Datadog, trigger a seat requirement. 
+In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement. 
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
 
