@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/browser-tests/"
   tag: "Blog"
   text: "User experience monitoring with Synthetic browser tests"
-- link: "/synthetics/browser_tests/actions/"
+- link: "/synthetics/browser_tests/test_steps/"
   tag: "Documentation"
   text: "Learn more about Browser Test Steps"
 ---
@@ -121,8 +121,8 @@ For more information, see [Browser Test Steps][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/actions/
+[1]: /synthetics/browser_tests/test_steps/
 [2]: /data_security/synthetics/
 [3]: /synthetics/browser_tests/?tab=privacy#test-configuration
-[4]: /synthetics/browser_tests/actions/#subtests
-[5]: /synthetics/browser_tests/actions/#assertion
+[4]: /synthetics/browser_tests/test_steps/#subtests
+[5]: /synthetics/browser_tests/test_steps/#assertion
