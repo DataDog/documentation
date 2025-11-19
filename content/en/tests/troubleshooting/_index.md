@@ -43,6 +43,34 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    : Full (40-character long SHA1) commit hash.<br/>
    **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
+   `DD_GIT_COMMIT_AUTHOR_EMAIL` **(required)**
+   : Commit author email.<br/>
+   **Example**: `john@example.com`
+
+   `DD_GIT_COMMIT_AUTHOR_NAME`
+   : Commit author name.<br/>
+   **Example**: `John Smith`
+
+   `DD_GIT_COMMIT_AUTHOR_DATE`
+   : Commit author date in ISO 8601 format.<br/>
+   **Example**: `2021-03-12T16:00:28Z`
+
+   `DD_GIT_COMMIT_COMMITTER_EMAIL`
+   : Commit committer email.<br/>
+   **Example**: `jane@example.com`
+
+   `DD_GIT_COMMIT_COMMITTER_NAME`
+   : Commit committer name.<br/>
+   **Example**: `Jane Smith`
+
+   `DD_GIT_COMMIT_COMMITTER_DATE`
+   : Commit committer date in ISO 8601 format.<br/>
+   **Example**: `2021-03-12T16:00:28Z`
+
+   `DD_GIT_COMMIT_MESSAGE`
+   : Commit message.<br/>
+   **Example**: `Set release number`
+
    `DD_GIT_BRANCH`
    : Git branch being tested. Leave empty if providing tag information instead.<br/>
    **Example**: `develop`
@@ -51,35 +79,7 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    : Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
    **Example**: `1.0.1`
 
-   `DD_GIT_COMMIT_MESSAGE`
-   : Commit message.<br/>
-   **Example**: `Set release number`
-
-   `DD_GIT_COMMIT_AUTHOR_NAME`
-   : Commit author name.<br/>
-   **Example**: `John Smith`
-
-   `DD_GIT_COMMIT_AUTHOR_EMAIL` **(required)**
-   : Commit author email.<br/>
-   **Example**: `john@example.com`
-
-   `DD_GIT_COMMIT_AUTHOR_DATE`
-   : Commit author date in ISO 8601 format.<br/>
-   **Example**: `2021-03-12T16:00:28Z`
-
-   `DD_GIT_COMMIT_COMMITTER_NAME`
-   : Commit committer name.<br/>
-   **Example**: `Jane Smith`
-
-   `DD_GIT_COMMIT_COMMITTER_EMAIL`
-   : Commit committer email.<br/>
-   **Example**: `jane@example.com`
-
-   `DD_GIT_COMMIT_COMMITTER_DATE`
-   : Commit committer date in ISO 8601 format.<br/>
-   **Example**: `2021-03-12T16:00:28Z`
-
-4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
+5. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
 ### The total test time is empty
 If you cannot see the total test time, it is likely that test suite level visibility is not enabled. To confirm, check if your language supports test suite level visibility in [Supported features][14]. If test suite level visibility is supported, update your tracer to the latest version.
