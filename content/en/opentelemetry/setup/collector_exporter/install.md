@@ -14,7 +14,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"
   text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
-- link: "https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/"
+- link: "/opentelemetry/integrations/datadog_extension/"
   tag: "Documentation"
   text: "Enable the Datadog Extension to inspect collector configurations in Fleet Automation"
 ---
