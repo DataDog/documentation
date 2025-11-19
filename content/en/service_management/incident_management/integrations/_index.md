@@ -24,8 +24,9 @@ Configure and manage incident-related integrations from the **Incident Settings*
 ## Setup
 
 {{< whatsnext desc="Set up and use the following integrations within the context of Datadog Incident Management:">}}
-    {{< nextlink href="/service_management/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/integrations/slack" >}}Slack{{< /nextlink >}}
+    {{< nextlink href="/service_management/incident_management/integrations/microsoft_teams" >}}Microsoft Teams{{< /nextlink >}}
+    {{< nextlink href="/service_management/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/integrations/status_pages" >}}Status Pages{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/integrations/statuspage" >}}Atlassian Statuspage{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -227,7 +227,7 @@ Añade el fragmento de código generado a la etiqueta head (delante de cualquier
 {{% /tab %}}
 {{< /tabs >}}
 
-### Paso 3: Inicializar el SDK del navegador
+### Paso 3: Inicializar el SDL del navegador de logs
 
 El SDK debe inicializarse lo antes posible en el ciclo de vida de la aplicación. Esto garantiza que todos los logs se capturen correctamente.
 
@@ -255,8 +255,8 @@ datadogLogs.init({
 
 ```javascript
 <script>
-  window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
+  window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
       clientToken: '<CLIENT_TOKEN>',
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
@@ -273,7 +273,7 @@ datadogLogs.init({
 
 ```javascript
 <script>
-    window.DD_RUM && window.DD_RUM.init({
+    window.DD_LOGS && window.DD_LOGS.init({
       clientToken: '<CLIENT_TOKEN>',
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
