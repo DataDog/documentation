@@ -13070,30 +13070,6 @@ components:
     CreateTableRequest:
       description: Request body for creating a new reference table from a local file
         or cloud storage.
-      example:
-        data:
-          attributes:
-            description: this is a cloud table generated via a cloud bucket sync
-            file_metadata:
-              access_details:
-                aws_detail:
-                  aws_account_id: test-account-id
-                  aws_bucket_name: test-bucket
-                  file_path: test_rt.csv
-              sync_enabled: true
-            schema:
-              fields:
-              - name: name
-                type: STRING
-              - name: account_id
-                type: STRING
-              primary_keys:
-              - account_id
-            source: S3
-            table_name: test_reference_table
-            tags:
-            - test_tag
-          type: reference_table
       properties:
         data:
           $ref: '#/components/schemas/CreateTableRequestData'
@@ -13315,6 +13291,17 @@ components:
     CreateUploadRequest:
       description: Request to create an upload for a file to be ingested into a reference
         table.
+      example:
+        data:
+          attributes:
+            headers:
+            - product_id
+            - product_name
+            - price
+            part_count: 3
+            part_size: 10000000
+            table_name: my_products_table
+          type: upload
       properties:
         data:
           $ref: '#/components/schemas/CreateUploadRequestData'
@@ -28229,6 +28216,10 @@ components:
         rotation_start:
           description: The date/time when the rotation starts (ISO 8601).
           format: date-time
+          type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
           type: string
       type: object
     LayerAttributesInterval:
@@ -44754,6 +44745,10 @@ components:
           example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
+          type: string
       required:
       - name
       - interval
@@ -45103,6 +45098,10 @@ components:
           description: The date/time at which the rotation begins (ISO 8601 format).
           example: '2025-02-01T00:00:00Z'
           format: date-time
+          type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
           type: string
       required:
       - effective_date
@@ -51522,32 +51521,35 @@ components:
           type: string
       type: object
     TableResultV2DataAttributesFileMetadata:
-      description: Metadata specifying where and how to access the reference table's
-        data file.
-      oneOf:
-      - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorage'
-      - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataLocalFile'
-    TableResultV2DataAttributesFileMetadataCloudStorage:
       additionalProperties: false
-      description: File metadata for reference tables created by cloud storage.
+      description: "Metadata specifying where and how to access the reference table's
+        data file.\n\nFor cloud storage tables (S3/GCS/Azure):\n  - sync_enabled and
+        access_details will always be present\n  - error fields (error_message, error_row_count,
+        error_type) are present only when errors occur\n\nFor local file tables:\n
+        \ - error fields (error_message, error_row_count) are present only when errors
+        occur\n  - sync_enabled, access_details are never present"
       properties:
         access_details:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetails'
+          description: Cloud storage access configuration. Only present for cloud
+            storage sources (S3, GCS, Azure).
         error_message:
-          description: The error message returned from the sync.
+          description: The error message returned from the last operation (sync for
+            cloud storage, upload for local file).
           type: string
         error_row_count:
-          description: The number of rows that failed to sync.
+          description: The number of rows that failed to process.
           format: int64
           type: integer
         error_type:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorageErrorType'
+          description: The type of error that occurred during file processing. Only
+            applicable for cloud storage sources.
         sync_enabled:
-          description: Whether this table is synced automatically.
+          description: Whether this table is synced automatically from cloud storage.
+            Only applicable for cloud storage sources.
           type: boolean
-      required:
-      - access_details
-      title: CloudFileMetadataV2
+      title: FileMetadataV2
       type: object
     TableResultV2DataAttributesFileMetadataCloudStorageErrorType:
       description: The type of error that occurred during file processing. This field
@@ -51574,21 +51576,6 @@ components:
       - STATE_ERROR
       - OPERATION_ERROR
       - SYSTEM_ERROR
-    TableResultV2DataAttributesFileMetadataLocalFile:
-      additionalProperties: false
-      description: File metadata for reference tables created by upload. Note that
-        upload_id is only returned in the immediate create/replace response and is
-        not available in subsequent GET requests.
-      properties:
-        error_message:
-          description: The error message returned from the creation/update.
-          type: string
-        error_row_count:
-          description: The number of rows that failed to create/update.
-          format: int64
-          type: integer
-      title: LocalFileMetadataV2
-      type: object
     TableResultV2DataAttributesFileMetadataOneOfAccessDetails:
       description: Cloud storage access configuration for the reference table data
         file.
@@ -74620,6 +74607,58 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              cloud_storage:
+                summary: Create table from cloud storage (S3)
+                value:
+                  data:
+                    attributes:
+                      description: Customer reference data synced from S3
+                      file_metadata:
+                        access_details:
+                          aws_detail:
+                            aws_account_id: '924305315327'
+                            aws_bucket_name: my-data-bucket
+                            file_path: customers.csv
+                        sync_enabled: true
+                      schema:
+                        fields:
+                        - name: customer_id
+                          type: STRING
+                        - name: customer_name
+                          type: STRING
+                        - name: email
+                          type: STRING
+                        primary_keys:
+                        - customer_id
+                      source: S3
+                      table_name: customer_reference_data
+                      tags:
+                      - team:data-platform
+                    type: reference_table
+              local_file:
+                summary: Create table from local file upload
+                value:
+                  data:
+                    attributes:
+                      description: Product catalog uploaded via local file
+                      file_metadata:
+                        upload_id: 00000000-0000-0000-0000-000000000000
+                      schema:
+                        fields:
+                        - name: product_id
+                          type: STRING
+                        - name: product_name
+                          type: STRING
+                        - name: price
+                          type: DOUBLE
+                        primary_keys:
+                        - product_id
+                      source: LOCAL_FILE
+                      table_name: product_catalog
+                      tags:
+                      - team:ecommerce
+                    type: reference_table
             schema:
               $ref: '#/components/schemas/CreateTableRequest'
         required: true
