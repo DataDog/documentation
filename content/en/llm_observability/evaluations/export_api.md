@@ -29,7 +29,7 @@ Method
 {{% tab "Model" %}}
 | Field | Type | Description                  |
 |-------|------------------------------|------|
-| data[required] | [SearchSpansPayload](#searchspanspayload) | Entry point into the request body. |
+| data[required] | [SearchSpansRequest](#searchspansrequest) | Entry point into the request body. |
 {{% /tab %}}
 
 {{% tab "Example" %}}
@@ -238,14 +238,14 @@ Both endpoints have the same response format.
 
 ## API Standards
 
-### SearchSpansPayload
+### SearchSpansRequest
 
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
 | type [*required*]        | string                        | Identifier for the request. Set to `spans`. |
-| attributes [*required*]  | [SearchSpansRequest](#searchspansrequest) | The body of the request.  |
+| attributes [*required*]  | [SearchSpansPayload](#searchspanspayload) | The body of the request.  |
 
-### SearchSpansRequest
+### SearchSpansPayload
 
 | Field | Type | Description                  |
 |-------|------------------------------|------|
