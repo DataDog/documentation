@@ -22,7 +22,7 @@ You can create an app or edit existing apps from the [App Builder][1] page. The 
 
 On the App Builder page, you can access and filter your apps. Hover over an app for options to edit, delete, view, or clone the app. You can also enable the **My apps** toggle to see only apps that you created:
 
-{{< img src="service_management/app_builder/app-builder-my-apps.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
+{{< img src="service_management/app_builder/app-builder-my-apps-2025-11-19.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
 
 ## Create an app
 
