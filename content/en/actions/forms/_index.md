@@ -21,7 +21,7 @@ Here are some ways you can use forms:
 
 ## Create a form
 
-When creating a new form, you can use a blueprint or start from scratch. Blueprints are helpful starter forms that cover common use cases. They come loaded with a sample description and questions to help familiarize yourself with form elements. Blueprints also showcase best practices for setting up form elements. 
+When creating a new form, you can use a blueprint or start from scratch. Blueprints are starter forms that cover common use cases. They come loaded with a sample description and questions to help familiarize yourself with form elements. Blueprints also showcase best practices for setting up form elements. 
 
 {{< img src="/actions/forms/forms-blueprint-selected.png" alt="The form creation page with the IDP Feedback Survey selected" style="width:100%;" >}}
 
