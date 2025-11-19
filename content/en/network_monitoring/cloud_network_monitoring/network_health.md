@@ -18,7 +18,7 @@ further_reading:
 
 Network Health provides a unified view of your network's most critical issues, automatically detecting and prioritizing problems across DNS, TLS certificates, security groups, and network anomalies. It surfaces actionable insights with clear remediation paths, helping you resolve connectivity issues and reduce incident impact.
 
-This page includes several sections that highlight different types of detected issues and insights across your environment.
+This page describes the sections of the Network Health page and the issues and insights surfaced in each.
 
 {{< img src="network_performance_monitoring/network_health/network_health_overview.png" alt="The Network Health page with the collapsible menu open, highlighting Recommended Actions." style="width:100%;">}}
 
@@ -30,14 +30,14 @@ This page includes several sections that highlight different types of detected i
 
 The **Recommended Actions** section highlights the most critical issues detected in your network. These are prioritized based on:
 
-1. **Severity**: Whether the issue is actively blocking traffic.
-2. **Impact**: How critical the affected services are to your infrastructure.
+1. **Severity**: Whether the issue is actively blocking traffic
+2. **Impact**: How critical the affected services are to your infrastructure
 
 Each recommended action displays:
 
-- The specific problem detected (for example, "TLS certificate expired _N_ days ago").
-- The impacted client service (the service making requests).
-- The impacted server service (the service receiving requests).
+- The specific problem detected (for example, "TLS certificate expired _N_ days ago")
+- The impacted client service (the service making requests)
+- The impacted server service (the service receiving requests)
 
 Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [New Workflow][2], [Create a Case][3], or [Declare an Incident][4].
 
@@ -54,19 +54,19 @@ Use Watchdog Insights to:
 
 ## TLS certificates
 
-Expired or expiring TLS certificates can block secure connections between services, resulting in dropped traffic. This **TLS Certificates** section lists:
+Expired or expiring TLS certificates can block secure connections between services, resulting in dropped traffic. The **TLS Certificates** section lists:
 
-- **Expired certificates**: Certificates that are invalid and blocking traffic.
-- **Expiring certificates**: Certificates about to expire.
-- **Impacted services**: The client and server services affected by each certificate issue.
+- **Expired certificates**: Certificates that are invalid and blocking traffic
+- **Expiring certificates**: Certificates about to expire
+- **Impacted services**: The client and server services affected by each certificate issue
 
-Click on an expired certificate to view remediation steps for renewing it in AWS, or to create a [New Workflow][2], [Create a Case][3], or [Declare an Incident][4].
+Click an expired certificate to view steps for renewing it in AWS, or to create a [New Workflow][2], [Create a Case][3], or [Declare an Incident][4].
 
 ## DNS failures
 
 DNS misconfigurations can route traffic to incorrect destinations, preventing services from communicating. These failures typically result from changes made to DNS routing configurations.
 
-This **DNS Failures** section shows:
+The **DNS Failures** section shows:
 
 - **Failure reason**: The cause of the DNS failure
 - **Impacted DNS server**: The DNS server experiencing elevated failure rates
@@ -89,7 +89,7 @@ Hover over a service name to pivot to APM, or click on a recommended action to v
 
 Security groups control traffic flow in cloud environments (such as AWS) through allow and deny rules. Because security groups deny traffic by default, accidental rule deletions or modifications can immediately block legitimate traffic between services.
 
-This **Security Groups** section identifies:
+The **Security Groups** section identifies:
 - Security group misconfigurations blocking traffic
 - The specific services unable to communicate
 - Recent changes to security group rules
