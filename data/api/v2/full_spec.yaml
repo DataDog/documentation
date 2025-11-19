@@ -34778,7 +34778,6 @@ components:
       - id
       - type
       - inputs
-      - auth
       - customer_id
       type: object
     ObservabilityPipelineGoogleChronicleDestinationEncoding:
@@ -34844,9 +34843,7 @@ components:
       - type
       - inputs
       - bucket
-      - auth
       - storage_class
-      - acl
       type: object
     ObservabilityPipelineGoogleCloudStorageDestinationAcl:
       description: Access control list setting for objects written to the bucket.
@@ -34977,7 +34974,6 @@ components:
       required:
       - id
       - type
-      - auth
       - decoding
       - project
       - subscription
