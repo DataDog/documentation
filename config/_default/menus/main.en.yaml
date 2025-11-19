@@ -2525,30 +2525,30 @@ menu:
       parent: incidents
       identifier: incidents_integrations
       weight: 9
-    - name: Jira
-      url: service_management/incident_management/integrations/jira
-      parent: incidents_integrations
-      identifier: incidents_integrations_jira
-      weight: 901
     - name: Slack
       url: service_management/incident_management/integrations/slack
       parent: incidents_integrations
       identifier: incidents_integrations_slack
-      weight: 902
-    - name: Status Pages
-      url: service_management/incident_management/integrations/status_pages
-      parent: incidents_integrations
-      identifier: incidents_integrations_status_pages
-      weight: 903
-    - name: Atlassian Statuspage
-      url: service_management/incident_management/integrations/statuspage
-      parent: incidents_integrations
-      identifier: incidents_integrations_statuspage
-      weight: 904
+      weight: 901
     - name: Microsoft Teams
       url: service_management/incident_management/integrations/microsoft_teams
       parent: incidents_integrations
       identifier: incidents_microsoft_teams
+      weight: 902
+    - name: Jira
+      url: service_management/incident_management/integrations/jira
+      parent: incidents_integrations
+      identifier: incidents_integrations_jira
+      weight: 903
+    - name: Status Pages
+      url: service_management/incident_management/integrations/status_pages
+      parent: incidents_integrations
+      identifier: incidents_integrations_status_pages
+      weight: 904
+    - name: Atlassian Statuspage
+      url: service_management/incident_management/integrations/statuspage
+      parent: incidents_integrations
+      identifier: incidents_integrations_statuspage
       weight: 905
     - name: On-Call
       url: service_management/on-call/
