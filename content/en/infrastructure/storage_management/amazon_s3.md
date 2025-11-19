@@ -428,7 +428,7 @@ Seeing recommendations requires the following prerequisites:
 2. If you would like to see recommendations for moving infrequently accessed data to cheaper tiers by prefix, enable and forward S3 Access Logs to Datadog (Datadog Log Management fees apply).
 3. If you would like to see recommendations for identifying non-current versions in prefixes, ensure you're including "All versions" as part of the S3 inventory configuration.
 
-### Available Recommendations
+### Available recommendations
 - Transition S3 bucket prefix to Infrequent Access
 - Expire old non-current version objects in S3 bucket prefix
 - Consolidate small files in prefix to minimize per-object storage costs
