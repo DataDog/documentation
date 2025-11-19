@@ -24,7 +24,6 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 - [Network Device Monitoring][3] (NDM) must be configured on your devices.
 - Datadog Agent version `7.74.0` and higher.
-- Devices must be configured with supported [vendor profiles][6]. 
 
 ## Setup
 
@@ -41,8 +40,12 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
        username: "user"
        password: "pass"
    ```
-
    **Note**: Ensure the namespace matches the namespace used for device monitoring to enable proper correlation.
+
+TO DO: Add steps about using default profiles (not the same as SNMP profiles)
+TO DO: Add steps about yaml setup that includes connecting with ssh
+
+the profile is defining commands with specific types: running, startup, and version and a field values for the CLI commands that get the info intended with each type
 
 2. Restart the Agent to apply the configuration changes.
 
@@ -76,6 +79,8 @@ The single-configuration view displays:
 
 You can scroll through the configuration to investigate the device state during an incident, or adjust the time range to view configurations from different time periods.
 
+TO DO : The UI is changing to only display the first 2 lines here
+
    {{< img src="/network_device_monitoring/config_mgmt/point_in_time.png" alt="Network Device Management configuration tab, selecting a configuration from a point in time." style="width:100%;" >}}
 
 ### Compare configuration versions
@@ -98,7 +103,6 @@ Network Configuration Management includes an AI-powered summary panel that trans
 When you compare two configuration versions, the AI summary automatically:
 
 - Describes changes in human-readable terms
-- Categorizes changes by type (for example, security-related, routing-related)
 - Highlights changes that may be relevant for incident investigation or risk analysis
 
 ## Further Reading
