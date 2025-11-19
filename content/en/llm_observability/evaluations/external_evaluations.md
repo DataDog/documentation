@@ -22,7 +22,7 @@ In the context of LLM applications, it's important to track user feedback and ev
 While LLM Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to LLM Observability in two ways: with Datadog's [SDK](#submitting-evaluations-with-the-sdk), or with the [LLM Observability API](#submitting-evaluations-with-the-api). Use this naming convention for the evaluation label:
 
 * Evaluation labels must start with a letter.
-* Evaluation labels must only contain ASCII alphanumerics, underscores.
+* Evaluation labels must only contain ASCII alphanumerics or underscores.
   * Other characters, including spaces, are converted to underscores.
   * Unicode is not supported.
 * Evaluation labels must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
