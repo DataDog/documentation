@@ -20,18 +20,15 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 <!-- Placeholder image -->
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config.png" alt="Network Device Management configuration tab" style="width:100%;" >}}
 
-**Note**: This feature is read-only in preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them. 
-
 ## Prerequisites
 
-- [Network Device Monitoring][3] must be configured on your devices.
+- [Network Device Monitoring][3] (NDM) must be configured on your devices.
 - Datadog Agent version `7.74.0` and higher.
+- Devices must be configured with supported [vendor profiles][6]. 
 
 ## Setup
 
-Enable Network Configuration Management by configuring the following:
-
-1. Create a configuration file at `network_config_management.d/conf.yaml` within the `conf.d` folder at the root of your Agent's configuration directory. 
+1. Create a configuration file at `network_config_management.d/conf.yaml` within the `conf.d` folder at the root of your Agent's configuration directory with the following:
 
    Example:
 
@@ -49,6 +46,8 @@ Enable Network Configuration Management by configuring the following:
 
 2. Restart the Agent to apply the configuration changes.
 
+**Note**: This feature is read-only in preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them. 
+
 ## Viewing configurations
 
 Configuration Management is accessible from the device side panel in Network Device Monitoring:
@@ -57,19 +56,18 @@ Configuration Management is accessible from the device side panel in Network Dev
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
 3. Open the **Configuration** tab in the device side panel.
 
-The configuration tab provides a timeline of configuration versions, a time picker for selecting the inspection window, and tools to view configurations at specific points in time, compare versions, and review AI-generated summaries.
-
+   {{< img src="/network_device_monitoring/config_mgmt/config_tab.png" alt="Network Device Management side panel, highlighting the Configuration tab." style="width:90%;" >}}
 ### Time picker and retention
 
 The time controls at the top of the page allow you to select which configuration history to view. By default, the view shows the last 2 days of configuration changes. You can extend this range to view older versions, up to the retention limit (1 year).
 
 The timeline and configuration version list automatically update based on your selected time range.
 
-**Note**: Configuration history begins only from when this feature was enabled for your account. Historical data prior to enablement is not available.
+**Note**: Configuration history begins only from when this feature is enabled for your account. Historical data prior to enablement is not available.
 
 ### View a configuration at a point in time
 
-Selecting a configuration event from the timeline or list opens a single-configuration view showing the exact state of the device at that moment. This prevents confusion about comparing versions when you first access the page.
+Selecting a configuration event from the timeline or list opens a single configuration view showing the exact state of the device at that moment. This prevents confusion about comparing versions when you first access the page.
 
 The single-configuration view displays:
 
@@ -78,14 +76,20 @@ The single-configuration view displays:
 
 You can scroll through the configuration to investigate the device state during an incident, or adjust the time range to view configurations from different time periods.
 
+   {{< img src="/network_device_monitoring/config_mgmt/point_in_time.png" alt="Network Device Management configuration tab, selecting a configuration from a point in time." style="width:100%;" >}}
+
 ### Compare configuration versions
 
 To see what changed between configuration versions:
 
-1. Select two configurations from the history list or timeline using the checkboxes.
-2. Click **Compare** to open the comparison view.
+1. Select two configurations from the history list or timeline using the checkboxes. 
+2. Click **Compare Two Configs** to open the comparison view.
+
+   {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs.png" alt="Network Device Management configuration tab, highlighting the Compare Two Configs option." style="width:100%;" >}}
 
 The comparison view shows both configurations side by side with inline diffs that highlight changed lines. You can switch between different configuration pairs without closing the comparison view.
+
+   {{< img src="/network_device_monitoring/config_mgmt/config_screen_split.png" alt="Network Device Management configuration tab, comparing two versions in split view" style="width:90%;" >}}
 
 ## AI summaries
 
@@ -106,3 +110,4 @@ When you compare two configuration versions, the AI summary automatically:
 [3]: https://app.datadoghq.com/devices
 [4]: /network_monitoring/devices/geomap
 [5]: /network_monitoring/devices/topology
+[6]: /network_monitoring/devices/supported_devices#vendor-profiles
