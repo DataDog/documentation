@@ -786,7 +786,7 @@ FROM dd.logs(
     <tr>
       <td>
         <pre>
-dd.metric_scalar(
+dd.metrics_scalar(
     query varchar,
     reducer varchar [, from_timestamp timestamp, to_timestamp timestamp]
 )</pre>
@@ -795,7 +795,7 @@ dd.metric_scalar(
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
-FROM dd.metric_scalar(
+FROM dd.metrics_scalar(
     'avg:system.cpu.user{*} by {service}',
     'avg',
     TIMESTAMP '2025-07-10 00:00:00.000-04:00',
@@ -804,11 +804,27 @@ FROM dd.metric_scalar(
 ORDER BY value DESC;{{< /code-block >}}
       </td>
     </tr>
+    <tr>
+      <td>
+        <pre>
+dd.metrics_timeseries(
+    query varchar [, from_timestamp timestamp, to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns metric data as a timeseries. The function accepts a metrics query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns data points over time rather than a single aggregated value.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.metrics_timeseries(
+    'avg:system.cpu.user{*} by {service}',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY timestamp, service;{{< /code-block >}}
+      </td>
+    </tr>
   </tbody>
 </table>
-
-
-
 
 
 ## Tags
@@ -839,6 +855,21 @@ SELECT *
 FROM k8s.daemonsets da INNER JOIN k8s.deployments de
 ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 ```
+
+Additionally, you can extract tag keys and values into individual arrays of text:
+
+```sql
+SELECT akeys(tags), avals(tags)
+FROM aws.ec2_instance
+```
+
+### HSTORE functions and operators
+
+| Name                                          | Return type   | Description                                                                                      |
+|-----------------------------------------------|---------------|---------------------------------------------------------------------------------------------------
+| tags -> 'text'                                  | Text          | Gets the value for a given key. Returns `null` if key is not present.                             |
+| akeys(hstore tags)                            | Array of text | Gets the keys of an HSTORE as an array                                                            |
+| avals(hstore tags)                            | Array of text | Gets the values of an HSTORE as an array                                                          |
 
 ## Further reading
 

@@ -145,7 +145,7 @@ Object-Graph Navigation Language Injection (OGNLi)
 [10]: /ko/security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /ko/security/application_security/threats/inapp_waf_rules
-[13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
+[13]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&view=signal
 [14]: /ko/security/application_security/threats/add-user-info/
 [15]: /ko/security/application_security/threats/trace_qualification/
 [16]: /ko/security/application_security/threats/threat-intelligence/

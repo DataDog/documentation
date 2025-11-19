@@ -70,7 +70,7 @@ php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
 <div class="alert alert-warning">
-<strong>Nota</strong>: Windows sólo es compatible con APM. No utilices las marcas <code>--enable-appsec</code> y <code>--enable-profiling</code> cuando rastrees aplicaciones PHP en Windows.
+<strong>Nota</strong>: Solo APM es compatible con Windows. No uses las opciones <code>--enable-appsec</code> y <code>--enable-profiling</code> cuando rastreas aplicaciones PHP en Windows.
 </div>
 
 Este comando instala la extensión a todos los binarios PHP que se encuentran en el host o el contenedor. Si `--PHP-bin` se omite, el instalador ejecuta el modo interactivo y pide al usuario que seleccione los binarios para la instalación. El valor de `--PHP-bin` puede ser una ruta a un binario específico en caso de que `dd-rastrear-PHP` sólo deba instalarse en dichos binarios.
@@ -80,18 +80,17 @@ Reinicia PHP (PHP-FPM o SAPI de Apache) y visita un endpoint de tu aplicación, 
 Cuando no especificas `--enable-appsec`, la extensión AppSec se carga poco después del inicio y no está activada por defecto. Se cortocircuita inmediatamente, causando una sobrecarga de rendimiento insignificante.
 
 <div class="alert alert-info">
-<strong>Nota:</strong>
-Pueden pasar unos minutos hasta que aparezcan trazas en la interfaz de usuario. Si las trazas siguen sin aparecer después de unos minutos, crea una página <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> desde la máquina host y desplázate hacia abajo hasta `ddtrace`. En esta sección aparecen los checks de diagnóstico fallidos para ayudarte a identificar cualquier problema.
+Pueden pasar algunos minutos hasta que aparezcan las trazas en la interfaz de usuario. Si las trazas siguen sin aparecer después de unos minutos, crea una página <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> desde la máquina host y desplázate hasta `ddtrace`. Los checks de diagnóstico fallidos aparecen en esta sección para ayudarte a identificar cualquier problema.
 </div>
 
 <div class="alert alert-danger">
 <strong>Apache ZTS:</strong>
-Si el binario CLI PHP se ha creado como NTS (non thread-safe), mientras que Apache utiliza una versión ZTS (Zend thread-safe) de PHP, necesitas cambiar manualmente la carga de extensión del binario ZTS. Ejecuta <code>/path/to/php-zts --ini</code> para ver dónde se encuentra el archivo <code>.ini</code> de Datadog, luego añade el sufijo <code>-zts</code> del nombre del archivo. Por ejemplo, de <code>extension=ddtrace-20210902.so</code> a <code>extension=ddtrace-20210902-zts.so</code>.
+Si el binario CLI PHP se ha creado como NTS (no seguro para subprocesos), mientras que Apache utiliza una versión ZTS (seguro para subprocesos Zend) de PHP, necesitas cambiar manualmente la carga de extensión del binario ZTS. Ejecuta <code>/path/to/php-zts --ini</code> para ver dónde se encuentra el archivo <code>.ini</code> de Datadog, y luego añade el sufijo <code>-zts</code> del nombre del archivo. Por ejemplo, de <code>extension=ddtrace-20210902.so</code> a <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
 <div class="alert alert-danger">
 <strong>SELinux:</strong>
-Si las políticas SELinux de httpd están configuradas en el host, la funcionalidad del rastreador puede estar limitada, a menos que la escritura y la ejecución de archivos temporales esté explícitamente permitida en la configuración de SELinux:
+Si las políticas de SELinux httpd están configuradas en el host, la funcionalidad del rastreador puede verse limitada, a menos que la escritura y ejecución de archivos temporales esté explícitamente permitida en la configuración de SELinux:
 
 `allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
 
@@ -112,7 +111,7 @@ Capturas de instrumentación automática:
 
 ## Configuración
 
-Si es necesario, configura la librería de rastreo para enviar datos de telemetría del rendimiento de la aplicación, según tus necesidades, incluyendo la configuración del etiquetado unificado de servicios. Para obtener más detalles, consulta la [configuración de librerías][6].
+Si es necesario, configura la biblioteca de rastreo para enviar datos de telemetría del rendimiento de la aplicación, según tus necesidades, incluyendo la configuración del etiquetado unificado de servicios. Para obtener más detalles, consulta la [configuración de bibliotecas][6].
 
 ## Rastreo de scripts de CLI de corta y larga ejecución
 
@@ -388,7 +387,7 @@ echo 1 > /proc/sys/fs/suid_dumpable
 Para obtener más detalles sobre el fallo, ejecuta la aplicación con Valgrind. A diferencia de los volcados de núcleo, este método siempre opera en un contenedor sin privilegios.
 
 <div class="alert alert-warning">
-<strong>Nota</strong>: Una aplicación que se ejecuta a través de Valgrind es órdenes de magnitud más lenta que cuando se ejecuta de forma nativa. Se recomienda este método para entornos que no son de producción.
+<strong>Nota</strong>: Una aplicación que se ejecuta a través de Valgrind es órdenes de magnitud más lenta que cuando se ejecuta de forma nativa. Este método se recomienda para entornos que no sean de producción.
 </div>
 
 Instala Valgrind con tu gestor de paquetes. Ejecuta la aplicación con Valgrind lo suficiente para generar unas cuantas solicitudes.
@@ -452,7 +451,7 @@ La traza de Valgrind resultante se imprime por defecto en el error estándar. Pa
 Algunos problemas son causados por factores externos, por lo que puede ser valioso disponer de un `strace`.
 
 <div class="alert alert-warning">
-<strong>Nota</strong>: Una aplicación que se ejecuta a través de <code>straces</code> es órdenes de magnitud más lenta que cuando se ejecuta de forma nativa. Se recomienda este método para entornos que no son de producción.
+<strong>Nota</strong>: Una aplicación que se ejecuta a través de <code>strace</code> es órdenes de magnitud más lenta que cuando se ejecuta de forma nativa. Este método se recomienda para entornos que no sean de producción.
 </div>
 
 Instala el `strace` con tu gestor de paquetes. Cuando generes un `strace` para enviarlo al servicio de asistencia de Datadog, asegúrate de utilizar la opción `-f` para seguir a procesos secundarios.
