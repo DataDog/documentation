@@ -148,10 +148,10 @@ Each rule consists of one or more conditions. A condition includes the following
 Supported attributes include:
 | Attribute    | Description | Example |
 | ----------- | ----------- | --------- |
-| `process executable` | Executable name of the process. | `python3.11` |
-| `process executable full path` | Full path of the executable. | `/usr/bin/python3.11` |
-| `process args` | Command-line arguments used to start the process. | `--env=production` |
-| `language` | Programming language detected for the process. | `python` |
+| Process Executable | Executable name of the process. | `python3.11` |
+| Process Executable Full Path | Full path of the executable. | `/usr/bin/python3.11` |
+| Process Args | Command-line arguments used to start the process. | `--env=production` |
+| Language | Programming language detected for the process. | `python` |
 
 ## Remove Single Step APM instrumentation from your Agent
 
