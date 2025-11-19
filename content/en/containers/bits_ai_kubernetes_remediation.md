@@ -7,6 +7,11 @@ further_reading:
     text: 'Accelerate Kubernetes issue resolution with AI-powered guided remediation'
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/kubernetes-remediation/"
+ btn_hidden="false" header="Join the Preview!">}}
+Bits AI Kubernetes Remediation is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
+
 Bits AI Kubernetes Remediation analyzes and fixes Kubernetes errors in your infrastructure.
 
 The following Kubernetes errors are supported:
@@ -33,11 +38,6 @@ Any one of these actions opens a Remediation side panel that displays:
 {{< img src="containers/remediation/side_panel2.png" alt="Remediation side panel opened for a workload with a CrashLoopBackOff error. Displays a What Happened section with a Bits AI-powered explanation of the error's root cause. Below, a Recommended Next Steps section where the user can inspect the workload manifest. Step-by-step instructions for a suggested fix are also displayed." style="width:80%;" >}}
 
 ### Remediate from Datadog
-
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent"
- btn_hidden="false" header="Join the Bits Dev Agent Preview!">}}
-Generating pull requests requires <a href="/bits_ai/bits_ai_dev_agent"><strong>Bits Dev Agent</strong></a>, now in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
 
 If your repositories are [connected to Datadog][4], and an error can be fixed by changing code in one of these connected repositories, then you can use Bits AI to perform the remediation action directly from Datadog. For other problem scenarios, Bits AI provides a detailed list of remediation steps to follow.
 
