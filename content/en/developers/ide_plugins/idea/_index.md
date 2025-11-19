@@ -21,9 +21,6 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn more about Source Code Integration"
-- link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
-  tag: "Blog"
-  text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 ---
 
 {{% site-region region="gov" %}}
@@ -38,7 +35,7 @@ The Datadog plugin for JetBrains IDEs helps improve software performance by prov
 
 {{< img src="/developers/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
-## Core Features
+## Core features
 
 ### Error Tracking
 The [**Error Tracking**][6] integration helps you find and fix runtime errors from Error Tracking.
@@ -73,11 +70,6 @@ Find out more in the [Code Security][24] sub-section.
 
 ## Other features
 
-### Code Origin for Spans
-The [**Code Origin for Spans**][22] integration shows you metrics for entry spans and provides a link to Datadog.
-
-{{< img src="/developers/ide_plugins/idea/apm-span.png" alt="APM spans in the source editor" style="width:100%;" >}}
-
 ### View in IDE
 
 The **View in IDE** feature provides a link from the Datadog platform directly to the source files in your IDE. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
@@ -86,10 +78,20 @@ The **View in IDE** feature provides a link from the Datadog platform directly t
 
 <div class="alert alert-info">A prerequisite to make the most of this feature is that Source Code Integration is configured for your service.</div>
 
+### Code Origin for Spans
+The [**Code Origin for Spans**][22] integration shows you metrics for entry spans and provides a link to Datadog.
+
+{{< img src="/developers/ide_plugins/idea/apm-span.png" alt="APM spans in the source editor" style="width:80%;" >}}
+
+### Flaky Tests
+The [**Flaky Tests**][7] integration shows you flaky tests detected by [Test Optimization][2] and provides a link to Datadog.
+
+{{< img src="/developers/ide_plugins/idea/flaky-test-in-editor.png" alt="APM spans in the source editor" style="width:80%;" >}}
+
 ### CI Test Runs
 You can view recent test runs in the [CI Visibility Explorer][12] by navigating directly from your source files. Look for the **CI Test Run** inlays above test method declarations in your source code:
 
-{{< img src="/developers/ide_plugins/idea/ci-navigation.png" alt="A source file showing a CI Test Run inlay." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/ci-test-in-editor.png" alt="A source file showing a CI Test Run inlay." style="width:80%;" >}}
 
 Clicking the link opens the **Test Runs** tab showing the recent history for one test case.
 
@@ -132,7 +134,7 @@ To remove a service, select it in the **Services** table and click the minus ico
 
 <div class="alert alert-info">The names of linked services persist with the project when you close it.</div>
 
-## Data and Telemetry
+## Data and telemetry
 Datadog collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][16] and [Datadog's EULA][17].
 
 If you don't wish to send this data to Datadog, you can disable the collection at any time in the settings: `Settings > Tools > Datadog > Data Sharing` and disable the `Send usage statistics` option.
@@ -152,10 +154,12 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 </script>
 
 [1]: https://github.com/DataDog/datadog-for-intellij/discussions
+[2]: /tests/
 [3]: https://www.datadoghq.com/
 [4]: https://plugins.jetbrains.com/plugin/19495-datadog
 [5]: /logs/explorer/
 [6]: /tracing/error_tracking/
+[7]: /tests/flaky_tests
 [8]: /security/code_security/software_composition_analysis/
 [9]: /continuous_integration/explorer/
 [11]: mailto:team-ide-integration@datadoghq.com
