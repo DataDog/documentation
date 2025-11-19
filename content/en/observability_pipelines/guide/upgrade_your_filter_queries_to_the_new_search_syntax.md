@@ -30,7 +30,7 @@ If you created your pipeline in the UI:
 
 1. [Upgrade to Observability Pipelines Worker][1] version 2.11.
 1. Navigate to the [Pipeline page][2] for that pipeline and update your filter queries to the new syntax. See the [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax) section for more information.
-1. On the pipeline editor page, by default **Legacy Search Syntax** is enabled because your pipeline is running the old search syntax of Worker 2.10 or older.
+1. On the pipeline editor page, by default **Legacy Search Syntax** is enabled because your pipeline is running the search syntax of Worker 2.10 or older.
 {{< img src="observability_pipelines/guide/legacy_search_syntax_toggle.png" alt="The pipelines editor showing the legacy search toggle enabled" style="width:85%;" >}}
 1. After you've updated all queries in that pipeline, toggle the switch to **New Search Syntax** and deploy your pipeline.
 
