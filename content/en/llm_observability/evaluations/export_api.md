@@ -114,8 +114,8 @@ Method
 | filter[span_kind] | string | The span kind: "agent", "workflow", "llm", "tool", "task", "embedding", or "retrieval". |
 | filter[span_name] | string | Searches for spans based on their provided name. |
 | filter[ml_app] | string | Searches for spans submitted under a particular ML Application. |
-| filter[from] | string | Minimum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). |
-| filter[to] | string | Maximum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). |
+| filter[from] | string | Minimum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time minus 15 minutes. |
+| filter[to] | string | Maximum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time. |
 | sort | string | Sort order. Allowed values: timestamp, -timestamp |
 | page[cursor] | string | List following results with a cursor provided in the previous query. |
 | page[limit] | integer | Maximum number of spans in the response. |
@@ -264,8 +264,8 @@ Both endpoints have the same response format.
 | span_kind | string | The span kind: "agent", "workflow", "llm", "tool", "task", "embedding", or "retrieval". |
 | span_name | string | Searches for spans based on their provided name. |
 | ml_app | string | Search for spans submitted under a particular ML Application. |
-| from | string | Minimum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). |
-| to | string | Maximum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). |
+| from | string | Minimum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time minus 15 minutes. |
+| to | string | Maximum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time. |
 
 ### Options
 
