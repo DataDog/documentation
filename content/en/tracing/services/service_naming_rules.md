@@ -4,10 +4,10 @@ title: Service naming rules
 
 {{< callout url=false
  btn_hidden="true" header="Join the Preview!">}}
-Service naming rules is in Preview.
+Service naming rules are in Preview.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}<div class="alert alert-danger"> Service naming rules is unavailable in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger"> Service naming rules are unavailable in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -51,11 +51,11 @@ You can create service naming rules only for services instrumented with supporte
 1. Use the search bar to select the entities you want to rename.
    - You can select one or more entities, but all must be of the same type (service, datastore, or queue).
    - As you select entities, a span query is built in the background. To edit the query, select **Build Advanced Query**.
-   - If you're correlating a service with infrastructure tags, you can only select **one** service.
+   - If you're correlating a service with infrastructure tags, you can only select _one_ service.
 
 ### Step 2: Specify new entity name
 
-1. In the text box, enter a unique name for the selected entity (or entities). Alternatively, use tag values with the `{{tagName}}` syntax to rename based on an entity's tags.
+In the text box, enter a unique name for the selected entity (or entities). Alternatively, use tag values with the `{{tagName}}` syntax to rename based on an entity's tags.
    1. If tag values follow a pattern, apply a regular expression to extract only the portion you want in the name.
    1. If you're correlating a service with infrastructure tags, choose one of the suggested infrastructure tags for the selected service. 
 
@@ -67,7 +67,7 @@ You can create service naming rules only for services instrumented with supporte
 
 ## Naming rules behavior
 
-Services with naming rules appear consistently in [APM][9], [Software Catalog][10], [Logs][11], and [Metrics][12]. 
+Services with naming rules appear with consistent names across [APM][9], [Software Catalog][10], [Logs][11], and [Metrics][12]. 
 
 - **Historical data:** Changes made by naming rules affect only telemetry ingested while a rule is active, and past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.
 - **Logs service remapper:** Service naming rules occur before logs pipelines. If the logs service remapper and naming rules are both applied to a service, the naming rules take precedence. 
