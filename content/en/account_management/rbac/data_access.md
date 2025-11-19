@@ -86,11 +86,11 @@ After you turn on Data Access Control, Datadog disables or limits other features
 ### Real User Monitoring (RUM)
 
 #### Session Replay: Extended Retention
-By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you enroll in the Preview for Data Access Control, Datadog disables the option for Extended Retention. Extended Retention does not work with Data Access Control because the data store that holds the extended data does not support access restrictions.
+By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. Extended Retention does not work with Data Access Control because the data store that holds the extended data does not support access restrictions. When you create a restricted dataset for RUM, Datadog disables the option for Extended Retention. 
 
 #### Session Replay: Playlists
 
-Playlists are collections of Session Replays you can aggregate in a folder-like structure. Playlists can allow a user to unintentionally escape access controls. When a customer enrolls in the Preview for Data Access Control, Datadog disables Session Replay Playlists.
+Playlists are collections of Session Replays you can aggregate in a folder-like structure. Playlists can allow a user to unintentionally escape access controls. When you create a restricted dataset for RUM, Datadog disables Session Replay Playlists.
 
 ### Logs
 Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. We recommend using a single solution to restrict logs data, but user access be limited by restrictions applied from either system.
