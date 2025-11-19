@@ -8,9 +8,9 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) has specific compatibility requirements that vary by language and environment. This page outlines supported versions, known limitations, and conditions that may impact Single Step Instrumentation for your specific setup.
+Single Step Instrumentation (SSI) has specific compatibility requirements that vary by operating system, environment, and language runtime. This page outlines supported platforms, requirements, and known limitations that may impact SSI for your specific setup.
 
-## Where are your applications running?
+## Compatibility by deployment environment
 
 Select your deployment platform to see compatibility requirements and limitations:
 
@@ -19,16 +19,14 @@ Select your deployment platform to see compatibility requirements and limitation
 
 ### Compatibility
 
-**Status**: GA
-
-**Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
-
-**Supported architectures**: x86_64, arm64
+- **Status**: GA
+- **Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
+- **Supported architectures**: x86_64, arm64
 
 ### Requirements
 
-- Datadog Agent installed with APM Instrumentation enabled
-- One of the [supported Linux distributions](#linux-distributions-reference)
+- Datadog Agent with APM Instrumentation enabled
+- A [supported Linux distribution](#linux-distributions-reference)
 
 ### Limitations
 
@@ -41,16 +39,14 @@ Select your deployment platform to see compatibility requirements and limitation
 
 ### Compatibility
 
-**Status**: GA
-
-**Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
-
-**Supported architectures**: x86_64, arm64
+- **Status**: GA
+- **Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
+- **Supported architectures**: x86_64, arm64
 
 ### Requirements
 
-- Datadog Agent installed with APM Instrumentation enabled
-- Docker running on one of the [supported Linux distributions](#linux-distributions-reference)
+- Datadog Agent with APM Instrumentation enabled
+- Docker running on a [supported Linux distribution](#linux-distributions-reference)
 
 ### Limitations
 
@@ -64,21 +60,21 @@ Select your deployment platform to see compatibility requirements and limitation
 
 ### Compatibility
 
-**Status**: GA
-
-**Supported node pools**: Linux only (see [Linux distributions reference](#linux-distributions-reference))
-
-**Supported architectures**: x86_64, arm64
+- **Status**: GA
+- **Supported node pools**: Linux only (see [Linux distributions reference](#linux-distributions-reference))
+- **Supported architectures**: x86_64, arm64
 
 ### Requirements
 
-- [Datadog Admission Controller][1] must be enabled
-- Kubernetes nodes running one of the [supported Linux distributions](#linux-distributions-reference)
+- [Datadog Admission Controller][1] enabled
+- Kubernetes nodes running a [supported Linux distribution](#linux-distributions-reference)
 
 ### Limitations
 
 - **Linux node pools only**: Only Linux node pools are supported
 - **Windows pods**: For Kubernetes clusters with Windows pods, use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection
+
+[1]: /containers/cluster_agent/admission_controller/
 
 {{% /tab %}}
 
@@ -86,9 +82,8 @@ Select your deployment platform to see compatibility requirements and limitation
 
 ### Compatibility
 
-**Status**: GA
-
-**Supported runtimes**: .NET only
+- **Status**: GA
+- **Supported runtimes**: .NET only
 
 ### Requirements
 
@@ -106,9 +101,7 @@ Select your deployment platform to see compatibility requirements and limitation
 
 ## Supported language runtimes
 
-SSI automatically instruments applications written in the following languages by loading the Datadog Language SDK at runtime.
-
-### Understanding SDK and runtime compatibility
+SSI automatically instruments applications written in the following languages by [loading a compatible Datadog Language SDK][2] at runtime. Select your language below to see minimum SDK versions, supported runtime versions, and any limitations.
 
 <div class="alert alert-info">
 
@@ -117,11 +110,9 @@ SSI compatibility depends on two factors:
 1. **SDK version**: SSI must support the Datadog Language SDK version (minimum versions listed below)
 2. **Runtime version**: The Datadog Language SDK must support your application's language runtime version
 
-If either requirement isn't met, SSI falls back gracefully and your application runs uninstrumented.
+If either requirement isn't met, SSI falls back gracefully and your application runs without instrumentation.
 
 </div>
-
-SSI [automatically downloads][2] a compatible Datadog Language SDK version based on your application's language. Select your language below to see minimum SDK versions, supported runtime versions, and any limitations:
 
 {{< programming-lang-wrapper langs="java,python,ruby,nodejs,dotnet,php" >}}
 
