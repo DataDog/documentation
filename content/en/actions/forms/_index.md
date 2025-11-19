@@ -17,7 +17,7 @@ Datadog Forms allows you to collect input, analyze responses, and trigger automa
 Here are some ways you can use forms:  
 - Scaffold services with a [scaffolding blueprint][3]. 
 - Collect engineering feedback in an internal developer portal (IDP).
-- Create security cases directly from employee form responses. 
+- Create service requests for security, platform, or IT teams, directly from employee form responses. 
 
 ## Create a form
 
