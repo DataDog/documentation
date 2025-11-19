@@ -25,22 +25,22 @@ further_reading:
 ### Prerequisites
 
 - [Network Device Monitoring][2] must be configured on your devices.
-- Devices must be tagged using the `geomap:<value>` format, where `<value>` is the location identifier. 
+- Devices must be tagged using the `geolocation:<value>` format, where `<value>` is the location identifier. 
 
 ## Configuring locations
 
-Devices appear on the Device Geomap when they're tagged with `geomap:<value>` and mapped to geographic coordinates.
+Devices appear on the Device Geomap when they're tagged with `geolocation:<value>` and mapped to geographic coordinates.
 
 Configure device locations using the following steps:
 
-1. Tag devices using the `geomap:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
+1. Tag devices using the `geolocation:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
 
    {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
 
 2. From the Device GeoMap page, click **Add locations** in the top right corner. This opens the [Geomap locations settings][3] page, which provides multiple tabs to manage device locations:
 
-   - **All**: Displays all devices with `geomap` tags, regardless of their mapping status.
-   - **Needs Coordinates**: Shows devices tagged with `geomap` values that don't have corresponding location coordinates configured.
+   - **All**: Displays all devices with `geolocation` tags, regardless of their mapping status.
+   - **Needs Coordinates**: Shows devices tagged with `geolocation` values that don't have corresponding location coordinates configured.
    - **On Map**: Lists tagged devices with configured coordinates that are displayed on the Geomap.
    - **Unused**: Shows location mappings (coordinates) that have been configured but are not associated with any tagged devices.
 
@@ -66,7 +66,7 @@ If you experience issues using Device Geomap, use the following troubleshooting 
 
 ### Device appears in multiple locations
 
-When a device is tagged with multiple `geomap` tags, it displays at only one location on the map. However, when you click on any device cluster containing that device, it appears in the side panel for all tagged locations. 
+When a device is tagged with multiple `geolocation` tags, it displays at only one location on the map. However, when you click on any device cluster containing that device, it appears in the side panel for all tagged locations. 
 
 ### CSV upload fails
 
