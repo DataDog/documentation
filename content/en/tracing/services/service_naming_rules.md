@@ -26,12 +26,12 @@ You can create service naming rules only for services instrumented with supporte
 
 | Language   | Minimum supported tracer version |
 |------------|----------------------------------|
-| Java       | [1.20][2]                        |
 | Dotnet     | [3.4][3]                         |
-| JavaScript | [4.16][4]                        |
-| Python     | [1.19][5]                        |
 | Go         | [1.55][6]                        |
+| Java       | [1.20][2]                        |
+| JavaScript | [4.16][4]                        |
 | PHP        | [0.94][7]                        |
+| Python     | [1.19][5]                        |
 | Ruby       | [1.15][8]                        |
 
 ## Create a service naming rule 
