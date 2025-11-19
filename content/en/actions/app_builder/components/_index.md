@@ -657,60 +657,19 @@ Displays property and value pairs in JSON format.
 
 
 
-{{% collapse-content title="React Renderer" level="h3" %}}
-React Renderer components have the following properties.
+{{% collapse-content title="React renderer" level="h3" %}}
+React renderer components have the following properties.
 
 ### General
 
 React Component Definition
-: The code that will be executed to create a React component.<br>
-**Example**:<br>
-:    ```js
-     const App = (props) => {
-        // Local component state
-        const [localState, setLocalState] = React.useState(0);
-  
-        // Access shared state from props
-        const { count = 0 } = props.state;
-  
-        const incrementShared = () => {
-        // Update shared state that persists outside component
-        
-      props.setComponentState({...props.state, count: count + 1});
-      };
-  
-        return (
-          <div>
-            <h3>Shared Count: {count}</h3>
-            <button onClick={incrementShared}>Increment Shared</button>
-          </div>
-      );
-     }
-      return App;
-     ```
+: The code that is executed to create a React component.<br>
 
 Component Input Props
-: The props that will be passed to the React component and can be accessed in the props object of the component.<br>
-**Example**:<br>
-:    ```json
-     ${{
-        queryData: query0.outputs,
-        name: global?.user?.name,
-        state: self.state,
-      }}
-     ```
+: The props that are passed to the React component and can be accessed in the props object of the component.
 
 Initial Component State
 : Sets the initial state values for your component. This state is used when the component first renders or if no state has been set yet. The component can access this data via <code>props.state</code>.<br>
-**Example**:<br>
-:    ```json
-     ${{
-        count: 0,
-        items: [],
-        isLoading: false,
-        selectedId: null,
-      }}
-     ```
 
 ### Appearance
 
@@ -736,7 +695,12 @@ Displays property and value pairs in JSON format.
 
 ### Relationships
 
-Displays data dependencies between React Renderer and components in the app.
+Displays data dependencies between React renderer and components in the app.
+
+### Example
+
+For an example showing how to use this component, see [React renderer][11].
+
 {{% /collapse-content %}}
 
 
@@ -1258,3 +1222,4 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /service_management/app_builder/events/#state-functions
 [10]: /service_management/app_builder/components/custom_charts/
+[11]: /actions/app_builder/components/react_renderer/
