@@ -41,7 +41,7 @@ You are affected if:
 - Improved performance and new features
 - Long-term support
 
-Agent v5 has reached end-of-life and no longer receives updates. See the [Agent upgrade documentation][1] for migration guidance.
+See the [Agent upgrade documentation][1] for migration guidance.
 
 ## Alternative solution: Update certificates
 
