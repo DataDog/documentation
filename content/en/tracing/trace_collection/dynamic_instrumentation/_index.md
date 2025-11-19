@@ -43,7 +43,7 @@ If you are interested in trying out the latest user experience improvements for 
 
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service.
+- [Datadog Agent][1] 7.49.0 or higher (7.73.0 for Go) is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
 - For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
@@ -51,6 +51,8 @@ Dynamic Instrumentation requires the following:
 - For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
 - (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
 - (Limited Preview) For PHP applications, tracing library [`dd-trace-php`][20] 1.5.0 or higher.
+- (Limited Preview) For Go applications, tracing library [`dd-trace-go`][21] >=1.74.6 or >=2.2.3.
+- (Limited Preview) For Go applications, agent and the application must run on the same host, with Linux kernel >=5.17.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Recommended, [autocomplete and search (in Preview)][17] is enabled.
 - Recommended, [Source Code Integration][7] is set up for your service.
@@ -233,3 +235,4 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 [18]: https://github.com/DataDog/dd-trace-js
 [19]: https://github.com/DataDog/dd-trace-rb
 [20]: https://github.com/DataDog/dd-trace-php
+[21]: https://github.com/DataDog/dd-trace-go
