@@ -2,6 +2,11 @@
 title: Service naming rules
 ---
 
+{{< callout url=false
+ btn_hidden="true" header="Join the Preview!">}}
+Service naming rules is in Preview.
+{{< /callout >}}
+
 {{< site-region region="gov" >}}<div class="alert alert-danger"> Service naming rules is unavailable in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
