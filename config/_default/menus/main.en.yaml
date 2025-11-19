@@ -1691,11 +1691,6 @@ menu:
       identifier: ddsql_editor
       parent: platform_heading
       weight: 30000
-    - name: Getting Started
-      url: ddsql_editor/getting_started
-      parent: ddsql_editor
-      identifier: ddsql_editor_getting_started
-      weight: 1
     - name: Reference Tables
       url: reference_tables/
       pre: inventories
