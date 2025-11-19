@@ -2545,6 +2545,11 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 904
+    - name: Microsoft Teams
+      url: service_management/incident_management/integrations/microsoft_teams
+      parent: incidents_integrations
+      identifier: incidents_microsoft_teams
+      weight: 905
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
@@ -5486,6 +5491,21 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
+    - name: Setup
+      url: feature_flags/setup
+      parent: feature_flags
+      identifier: feature_flags_setup
+      weight: 1
+    - name: Android and Android TV
+      url: feature_flags/setup/android
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_android
+      weight: 101
+    - name: iOS and tvOS
+      url: feature_flags/setup/ios
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_ios
+      weight: 102
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
