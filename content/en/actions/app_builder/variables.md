@@ -18,7 +18,9 @@ If you want to encapsulate logic within your app, you can use state variables.
 
 ## Create a state variable
 
-To add a state variable with Bits AI, click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**). Enter a custom prompt for a variable, or try the prompt `How can you help me with variables?`.
+To add a state variable with Bits AI:
+   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Enter a custom prompt for a variable, or try the prompt `How can you help me with variables?`.
 
 To add a state variable manually:
 
