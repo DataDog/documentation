@@ -79,7 +79,7 @@
         "traverse": "0.6.8",
         "typesense": "^1.8.2",
         "typesense-instantsearch-adapter": "^2.8.0",
-        "typesense-sync": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/reda.elissati/docs-197-optimize-complexity-square-n-to-n/typesense-sync-v1.3.0-beta.1.tgz",
+        "typesense-sync": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.3.0.tgz",
         "yaml-lint": "^1.7.0"
     },
     "devDependencies": {
