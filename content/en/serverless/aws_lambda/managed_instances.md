@@ -1,9 +1,9 @@
 ---
-title: Monitoring Lambda on EC2
-description: Install and configure the Datadog Agent for AWS Lambda on Amazon EC2
+title: Monitoring AWS Lambda Managed Instances
+description: Install and configure the Datadog Agent for AWS Lambda Managed Instances.
 ---
 
-Datadog Serverless Monitoring enables visibility into AWS Lambda functions running on Amazon EC2.
+Datadog Serverless Monitoring enables visibility into AWS Lambda Managed Instances.
 
 ## Setup
 
