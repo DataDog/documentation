@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents and OpenTelemetry Collectors at scale to support your evolving observability needs.
+Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents and OpenTelemetry (OTel) Collectors at scale to support your evolving observability needs.
 
 {{< img src="/agent/fleet_automation/fleet_automation2.png" alt="The fleet automation page" style="width:100%;" >}}
 
@@ -32,13 +32,13 @@ With the Fleet Automation platform, you can:
 
 - **Remotely Upgrade and Configure Agents**: For information on supported Agent versions and configuration steps, see [Enable Remote Agent Management][3].
 - **View Agent and OTel Collector configurations**:
-  - The Agent and DDOT configuration view is enabled by default in Agent versions 7.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
+  - The Agent and Datadog Distribution of OTel Collector (DDOT) configuration view is enabled by default in Agent versions 7.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
   - The upstream OTel Collector configuration view is enabled by setting the [Datadog Extension][8] in your collector configuration file.
 - **View Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
 
 ## Observe your fleet
 
-Use the [**Fleet Automation**][1] page to gain insight into observibility gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues. 
+Use the [**Fleet Automation**][1] page to gain insight into observability gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues. 
 
 For each Agent, you can see:
 - The Agent version
