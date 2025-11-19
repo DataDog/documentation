@@ -113,7 +113,7 @@ service:orders
 
 Downstream filters or dashboards should explicitly filter on the desired value if you expect only one.
 
-Also, given that tags can be inherited from multiple sources, you may want to take care with choosing key names that could overlap across sources. For example, if you've set a `service` key on a host (`service:my-host`) and a `service` key on a pod running on that host (`service:my-service`), your data inherits both tags. Opt for more differentiated key names (such as `infra_service`) to avoid duplicate tag keys.
+Also, because tags can be inherited from multiple sources, choose unique and specific key names to avoid duplicating them across sources. For example, if you've set a `service` key on a host (`service:my-host`) and a `service` key on a pod running on that host (`service:my-service`), your data inherits both tags. Opt for more differentiated key names (such as `infra_service`) to avoid duplicate tag keys.
 
 ## Usage
 
