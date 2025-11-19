@@ -80,6 +80,9 @@ Workload Protection
 Observability Pipelines
 : - Remotely deploy and update [Observability Pipelines Workers][4] (OPW): Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
+[Autoscaling][47]
+: - Remotely manage autoscaling cluster and workload scaling configurations for your containerized environments. See [Autoscaling][47] for more information.
+
 Private action runner
 : - Run Datadog workflows and apps that interact with services hosted on your private network without exposing your services to the public internet. For more information, see [Private Actions][30].
 
@@ -197,3 +200,4 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [44]: /account_management/rbac/permissions/#observability-pipelines
 [45]: /account_management/rbac/permissions/#app-builder--workflow-automation
 [46]: /account_management/rbac/permissions/#serverless
+[47]: /containers/autoscaling
