@@ -2,9 +2,9 @@
 title: Forecasting
 description: Predict future cloud costs and make informed decisions with Cloud Cost Management Forecasts.
 further_reading:
-- link: "/cloud_cost_management/reports/"
-  tag: "Documentation"
-  text: "Learn about Cloud Cost Management Reports"
+# - link: "/cloud_cost_management/reports/"
+#   tag: "Documentation"
+#   text: "Learn about Cloud Cost Management Reports"
 - link: "/cloud_cost_management/planning/budgets"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management Budgets"
@@ -18,7 +18,7 @@ further_reading:
 Cloud Cost Management (CCM) Forecasts help you predict future cloud costs based on historical spending patterns. Use forecasts to anticipate cost trends, plan budgets more effectively, and make data-driven decisions about resource allocation.
 
 Forecasts are available in:
-- [**Reports**](#view-forecasts-in-reports): Enable the forecast toggle to visualize predicted costs alongside your actual spending with daily, weekly, or monthly rollups.
+<!-- - [**Reports**](#view-forecasts-in-reports): Enable the forecast toggle to visualize predicted costs alongside your actual spending with daily, weekly, or monthly rollups. -->
 - [**Budgets**](#view-forecasts-in-budgets): View forecasted costs directly on budget cards to see if you're projected to go over budget.
 
 With Forecasts, you can:
@@ -52,7 +52,7 @@ To generate accurate forecasts, CCM requires:
 
 If you have newly created resources or services, forecasts become available once sufficient historical data is collected.
 
-## View forecasts in reports
+<!-- ## View forecasts in reports
 
 Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecasts in your cost reports.
 
@@ -67,7 +67,7 @@ The report displays:
 - **Forecast toggle and controls**: Located in the left panel to enable forecasting and select the time period.
 - **Historical costs**: Your actual spending shown in solid colors.
 - **Forecasted costs**: Predicted costs shown with a hatched pattern.
-- **Forecast summary card**: At the top of the page showing the total forecasted cost for the selected period.
+- **Forecast summary card**: At the top of the page showing the total forecasted cost for the selected period. -->
 
 ## View forecasts in budgets
 
@@ -94,5 +94,5 @@ To view detailed forecast information:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cost/analyze/reports
+<!-- [1]: https://app.datadoghq.com/cost/analyze/reports -->
 [2]: https://app.datadoghq.com/cost/plan/budgets
