@@ -27,24 +27,23 @@ algolia:
 
 ## Overview
 
-Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate data points.
+Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate datapoints.
 
 Tags are `key:value` pairs containing two parts:
 
-- The tag key is the identifier. The tag key can only exist once on each resource and is case sensitive.
-- The tag value is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `key-value` pair.
+- The tag **key** is the identifier. The tag key is case sensitive.
+- The tag **value** is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `key:value` pair.
 
 Tagging binds different data types in Datadog, allowing for correlation and calls to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys:
-
-| Tag Key   | Allows for                                                            |
-| --------- | --------------------------------------------------------------------- |
+| Tag key   | Allows for                                                             |
+|-----------|------------------------------------------------------------------------|
 | `host`    | Correlation between metrics, traces, processes, and logs.              |
 | `device`  | Segregation of metrics, traces, processes, and logs by device or disk. |
 | `source`  | Span filtering and automated pipeline creation for Log Management.     |
-| `service` | Scoping of application specific data across metrics, traces, and logs. |
-| `env`     | Scoping of application specific data across metrics, traces, and logs. |
-| `version` | Scoping of application specific data across metrics, traces, and logs. |
-| `team`    | Assign ownership to any resources                                     |
+| `service` | Scoping of application-specific data across metrics, traces, and logs. |
+| `env`     | Scoping of application-specific data across metrics, traces, and logs. |
+| `version` | Scoping of application-specific data across metrics, traces, and logs. |
+| `team`    | Assigning ownership to any resources.                                  |
 
 Datadog recommends looking at containers, VMs, and cloud infrastructure at the `service` level in aggregate. For example, look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
 
@@ -114,13 +113,15 @@ service:orders
 
 Downstream filters or dashboards should explicitly filter on the desired value if you expect only one.
 
+Also, given that tags can be inherited from multiple sources, you may want to take care with choosing key names that could overlap across sources. For example, if you've set a `service` key on a host (`service:my-host`) and a `service` key on a pod running on that host (`service:my-service`), your data inherits both tags. Opt for more differentiated key names (such as `infra_service`) to avoid duplicate tag keys.
+
 ## Usage
 
 After you have [assigned tags][7] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform.
 
 | Area                 | Use Tags to                                                                                      |
 | -------------------- | ------------------------------------------------------------------------------------------------ |
-| [Events][10]         | Filter the event stream.                                                                          |
+| [Events][10]         | Filter the Event Stream.                                                                          |
 | [Dashboards][11]     | Filter and group metrics on graphs.                                                               |
 | [Infrastructure][12] | Filter and group on the host map, infrastructure list, live containers, and live processes views. |
 | [Monitors][13]       | Manage monitors, create monitors, or manage downtime.                                             |
@@ -132,7 +133,7 @@ After you have [assigned tags][7] at the host and [integration][9] level, start 
 | [Notebooks][19]      | Filter and group metrics on graphs.                                                               |
 | [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines.                                |
 | [SLOs][21]           | Search for SLOs, grouped metric-based SLOs, and grouped monitor-based SLOs.                       |
-| [Developers][22]     | Pull information or setup different areas in the UI with the API.                                 |
+| [Developers][22]     | Pull information or set up different areas in the UI with the API.                                |
 | [Billing][23]        | Report on Datadog usage by choosing up to three tags, for example: `env`, `team`, and `account_id`. |
 | [CI Visibility][24]  | Filter and group test runs or pipeline executions with the CI Visibility Explorer. |
 
