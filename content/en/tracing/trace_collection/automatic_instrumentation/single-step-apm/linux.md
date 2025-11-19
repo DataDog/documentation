@@ -115,7 +115,7 @@ To update the SDK versions:
 Workload selection is in Preview. Use this form to submit your request today.
 {{< /callout >}}
 
-Workload selection rules (available for Agent v7.73+) let you control which processes are automatically instrumented on Linux hosts by SSI. 
+Workload selection rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
 To configure workload selection:
 
