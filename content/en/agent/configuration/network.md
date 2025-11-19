@@ -109,9 +109,6 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 HTTP: {{< region-param key=agent_http_endpoint code="true" >}}<br>
 Other: See [logs endpoints][32]
 
-[HIPAA logs legacy][31]
-: {{< region-param key=hipaa_logs_legacy code="true" >}}
-
 [Metrics][26], [Service Checks][27], [Events][28], and other Agent metadata
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 For example, Agent v7.31.0 reports to `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. You must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
