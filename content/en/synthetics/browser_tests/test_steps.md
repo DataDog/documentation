@@ -1,6 +1,8 @@
 ---
 title: Browser Testing Steps
 description: Learn how to automatically record and manually set steps in a browser test recording.
+aliases:
+- /synthetics/browser_tests/actions
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
@@ -160,7 +162,7 @@ Create this assertion step to have your browser test verify the downloaded files
 For more information about how to test downloads, see [Test File Upload and Download][3].
 
 [1]: /synthetics/guide/email-validation
-[2]: /synthetics/browser_tests/actions#use-variables
+[2]: /synthetics/browser_tests/test_steps#use-variables
 [3]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 
 #### Test HTTP Request Count
