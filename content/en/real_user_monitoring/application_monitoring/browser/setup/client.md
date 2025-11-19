@@ -62,97 +62,15 @@ Installing through CDN async is recommended for web applications with performanc
 
 Add the generated code snippet to the head tag of every HTML page you want to monitor in your application.
 
-{{< site-region region="us" >}}
-
 ```javascript
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/{{< region-param key=browser_rum_cdn_path >}}','DD_RUM')
 </script>
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```javascript
-<script>
-  (function(h,o,u,n,d) {
-    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
-    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v6/datadog-rum.js','DD_RUM')
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-
-```javascript
-<script>
-  (function(h,o,u,n,d) {
-    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
-    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js','DD_RUM')
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="ap2" >}}
-
-```javascript
-<script>
-  (function(h,o,u,n,d) {
-    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
-    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js','DD_RUM')
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-
-```javascript
-<script>
-  (function(h,o,u,n,d) {
-    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
-    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js','DD_RUM')
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="us5" >}}
-
-```javascript
-<script>
-  (function(h,o,u,n,d) {
-    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
-    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js','DD_RUM')
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-
-```javascript
-<script>
-  (function(h,o,u,n,d) {
-    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
-    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v6.js','DD_RUM')
-</script>
-```
-
-{{< /site-region >}}
 
 {{% /tab %}}
 {{% tab "CDN sync" %}}
@@ -161,76 +79,12 @@ Installing through CDN sync is recommended for collecting all events. The Browse
 
 Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Placing the script tag higher and loading it synchronously ensures Datadog RUM can collect all performance data and errors.
 
-{{< site-region region="us" >}}
-
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+    src="https://www.datadoghq-browser-agent.com/{{< region-param key=browser_rum_cdn_path >}}"
     type="text/javascript">
 </script>
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```javascript
-<script
-    src="https://www.datadoghq-browser-agent.com/eu/v6/datadog-rum.js"
-    type="text/javascript">
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-
-```javascript
-<script
-    src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js"
-    type="text/javascript">
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="ap2" >}}
-
-```javascript
-<script
-    src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js"
-    type="text/javascript">
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-
-```javascript
-<script
-    src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js"
-    type="text/javascript">
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="us5" >}}
-
-```javascript
-<script
-    src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js"
-    type="text/javascript">
-</script>
-```
-
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-
-```javascript
-<script
-    src="https://www.datadoghq-browser-agent.com/datadog-rum-v6.js"
-    type="text/javascript">
-</script>
-```
-
-{{< /site-region >}}
 
 {{% /tab %}}
 {{< /tabs >}}
