@@ -64,6 +64,10 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
+update-blog-links: hugpython
+	@. hugpython/bin/activate && \
+	./local/bin/py/blog_linker.py
+
 # compile .mdoc.md files to HTML
 # so Hugo can include them in the site
 build-cdocs:
