@@ -86,7 +86,7 @@ To visualize form responses in a dashboard:
 1. Select the datastore associated with your form, then click **Insert into editor**.
 1. Optionally, click the query's title to rename it. 
 1. Click **Save**.
-1. [Create a dashboard][9], then [add a widget][14]. For forms, all widgets except [Timeseries][16] are supported.
+1. [Create a dashboard][9], then [add a widget][14]. For forms, all widgets except Timeseries are supported.
 1. When [defining the metric][15], select **DDSQL Editor** and the datastore query you created earlier.
 1. Finish [configuring your widget][12], then click **Save**.
 
@@ -105,4 +105,3 @@ To visualize form responses in a dashboard:
 [13]: https://app.datadoghq.com/ddsql/editor
 [14]: /dashboards/widgets/#add-a-widget-to-your-dashboard
 [15]: /dashboards/querying/#define-the-metric
-[16]: /dashboards/widgets/timeseries/
