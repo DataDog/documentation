@@ -651,5 +651,23 @@ export default {
     ap1: 'ap1',
     ap2: 'ap2',
     gov: 'us1_fed'
+  },
+  android_logs_sdk_site_kotlin: {
+    us: '',
+    us3: '\n                   .useSite(DatadogSite.US3)',
+    us5: '\n                   .useSite(DatadogSite.US5)',
+    eu: '\n                   .useSite(DatadogSite.EU1)',
+    ap1: '\n                   .useSite(DatadogSite.AP1)',
+    ap2: '\n                   .useSite(DatadogSite.AP2)',
+    gov: '\n                   .useSite(DatadogSite.US1_FED)'
+  },
+  android_logs_sdk_site_java: {
+    us: '',
+    us3: '\n                              .useSite(DatadogSite.US3)',
+    us5: '\n                              .useSite(DatadogSite.US5)',
+    eu: '\n                              .useSite(DatadogSite.EU1)',
+    ap1: '\n                              .useSite(DatadogSite.AP1)',
+    ap2: '\n                              .useSite(DatadogSite.AP2)',
+    gov: '\n                              .useSite(DatadogSite.US1_FED)'
   }
 };
