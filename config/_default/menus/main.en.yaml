@@ -2475,7 +2475,7 @@ menu:
       parent: incident_investigate
       identifier: incident_investigate_timeline
       weight: 501
-    - name: Follow Ups
+    - name: Follow-ups
       url: service_management/incident_management/follow-ups
       parent: incident_investigate
       identifier: incident_investigate_follow_ups

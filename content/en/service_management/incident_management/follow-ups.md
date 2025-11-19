@@ -23,13 +23,9 @@ Common examples for creating follow-ups include:
 
 By capturing these items as follow-ups, your team can stay focused on incident resolution while ensuring important improvements aren't forgotten.
 
-You can use Datadog Incident Management to define, manage, and track follow-up tasks for your incidents. Follow-ups can be created at any point during an incident—even before it's resolved—allowing responders to document necessary work as they discover it. After resolution, you can export follow-ups to Jira or Case Management to integrate them into your team's existing workflows.
-
 ## Create and manage follow-ups
 
-You can define and modify incident follow-ups at any point during an incident—from the moment you declare it through post-resolution. This flexibility allows your team to capture action items as they emerge during the investigation, rather than waiting until the incident is closed.
-
-To manage an incident's follow-ups:
+Follow-ups can be created at any point during an incident (even before it's resolved) allowing responders to document necessary work as they discover it. After resolution, you can [export follow-ups](#export-follow-ups) to Jira or Case Management to integrate them into your team's existing workflows.
 
 **From the Web app**: Go to the incident's **Remediation** tab to view, create, edit, and track all follow-ups associated with the incident.
 
@@ -63,6 +59,8 @@ After defining an export template, you have two options:
 
 ### Case Management exports
 
+<div class="alert alert-info">Manual exports is not supported for Case Management.</div>
+
 When you export your follow-ups to [Case Management][2], you can manage, track, and analyze your follow-ups directly in Datadog. For example, you can:
 
 * View all of the open follow-up cases assigned to a particular user in Datadog
@@ -78,7 +76,7 @@ When Datadog exports an incident follow-up to Case Management, it creates a case
 
 ### Jira exports
 
-To export follow-ups to Jira, you must first install the Jira integration through the [Jira Integration tile][3]. For more information, see the [Jira integration][4] documentation.
+To export follow-ups to Jira, you must first install the Jira integration. For more information, see [Integrate Jira with Datadog Incident Management][4].
 
 When Datadog exports an incident follow-up to Jira, it creates a Jira issue for the follow-up in the project you selected in the export template.
 
@@ -92,6 +90,5 @@ Organizations that need two-way sync should export to a Case Management project 
 
 [1]: https://app.datadoghq.com/incidents/settings?section=follow-ups
 [2]: /service_management/case_management
-[3]: https://app.datadoghq.com/integrations/jira
 [4]: /integrations/jira/
 [5]: /service_management/incident_management/integrations/slack/#slack-commands
