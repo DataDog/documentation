@@ -1,2 +1,2 @@
 - SentinelOne write access token:
-    - Stored in the environment variable: `DD_OP_DESTINATION_SENTINEL_ONE_TOKEN`
+    - Stored in the environment variable `DD_OP_DESTINATION_SENTINEL_ONE_TOKEN`.
