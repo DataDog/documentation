@@ -86,7 +86,7 @@ The hostname (tag key `host`) is [assigned automatically][4] by the Datadog Agen
 hostname: mymachine.mydomain
 ```
 
-##### Changing the hostname 
+##### Changing the hostname
 
 * The old hostname remains in the UI for two hours but does not show new metrics.
 * Any data from hosts with the old hostname can be queried with the API.
