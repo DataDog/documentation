@@ -29,7 +29,7 @@ Method
 {{% tab "Model" %}}
 | Field | Type | Description                  |
 |-------|------------------------------|------|
-| data[required] | [SearchSpansRequest](#SearchSpansRequest) | Entry point into the request body. |
+| data[required] | [SearchSpansPayload](#searchspanspayload) | Entry point into the request body. |
 {{% /tab %}}
 
 {{% tab "Example" %}}
@@ -74,7 +74,6 @@ curl -X POST "https://api.datadoghq.com/api/v2/llm-obs/v1/spans/events/search" \
 {
   "data": {
     "type": "spans",
-    "id": "1",
     "attributes": {
       "filter": {
         "from": "2025-10-27T00:00:00Z",
@@ -111,13 +110,13 @@ Method
 |-------|------------------------------|------|
 | filter[span_id] | string | Searches for a specific span by its span ID. |
 | filter[trace_id] | string | Searches for spans by their trace ID. |
-| filter[tag][key] | string | Search for spans by tag key / value pairs. |
+| filter[tag][key] | string | Searches for spans by tag key / value pairs. |
 | filter[span_kind] | string | The span kind: "agent", "workflow", "llm", "tool", "task", "embedding", or "retrieval". |
 | filter[span_name] | string | Searches for spans based on their provided name. |
-| filter[ml_app] | string | Search for spans submitted under a particular ML Application. |
+| filter[ml_app] | string | Searches for spans submitted under a particular ML Application. |
 | filter[from] | string | Minimum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). |
 | filter[to] | string | Maximum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). |
-| sort | string | Sort order. Allowed enum values: timestamp, -timestamp |
+| sort | string | Sort order. Allowed values: timestamp, -timestamp |
 | page[cursor] | string | List following results with a cursor provided in the previous query. |
 | page[limit] | integer | Maximum number of spans in the response. |
 
@@ -156,38 +155,6 @@ Both endpoints have the same response format.
       "type": "span",
       "attributes": {
         "duration": 83000,
-        "evaluation_assessments": {
-          "custom": {
-            "test_eval": "pass"
-          }
-        },
-        "evaluation_metadata": {
-          "custom": {
-            "test_eval": {
-              "test-key": "test-value"
-            }
-          }
-        },
-        "evaluation_reasoning": {
-          "custom": {
-            "test_eval": "it makes sense"
-          }
-        },
-        "evaluation_tags": {
-          "custom": {
-            "test_eval": [
-              "source:undefined",
-              "ddtrace.version:3.17",
-              "test-key:test-value",
-              "ml_app:test-ml-app"
-            ]
-          }
-        },
-        "evaluations": {
-          "custom": {
-            "test_eval": 10
-          }
-        },
         "input": {
           "value": "hi",
           "messages": [
@@ -271,21 +238,21 @@ Both endpoints have the same response format.
 
 ## API Standards
 
-### SearchSpansRequest
+### SearchSpansPayload
 
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
 | type [*required*]        | string                        | Identifier for the request. Set to `spans`. |
-| attributes [*required*]  | [SearchSpansPayload](#searchspanspayload) | The body of the request.  |
+| attributes [*required*]  | [SearchSpansRequest](#searchspansrequest) | The body of the request.  |
 
-### SearchSpansPayload
+### SearchSpansRequest
 
 | Field | Type | Description                  |
 |-------|------------------------------|------|
 | filter | [Filter](#filter) | The search and filter query settings. |
-| options | [Options](#options) | Global query options that are used during the query. Note: You should only supply timezone or time offset but not both otherwise the query will fail. |
+| options | [Options](#options) | Global query options that are used during the query. |
 | page | [PageQuery](#page) | Paging attributes for listing spans. |
-| sort | enum | Sort order. Allowed enum values: timestamp, -timestamp |
+| sort | string | Sort order. Allowed values: timestamp, -timestamp |
 
 ### Filter
 
@@ -304,8 +271,7 @@ Both endpoints have the same response format.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| offset | string | The time offset (in seconds) to apply to the query. |
-| timezone | string | The timezone can be specified as GMT, UTC, an offset from UTC (like UTC+1), or as a Timezone Database identifier (like America/New_York). Default: UTC. |
+| time_offset | integer | The time offset (in seconds) to apply to the query. |
 
 ### PageQuery
 
@@ -318,9 +284,9 @@ Both endpoints have the same response format.
 
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
-| type        | enum                        | Type of the span. Allowed enum values: span. Default: span. |
+| type        | string                        | Type of the span. Allowed values: span. Default: span. |
 | id       | string                        | Unique ID of the span. |
-| attributes  | [SearchSpan](#searchspan) | Object containing all span attributes and their associated values.  |
+| attributes  | [SearchedSpan](#searchedspan) | Object containing all span attributes and their associated values.  |
 
 ### SearchedSpan
 
@@ -335,7 +301,7 @@ Both endpoints have the same response format.
 | start_ns        | integer                       | The span’s start time in nanoseconds. |
 | duration        | float                       | The span’s duration in nanoseconds. |
 | ml_app        | string                       | The name of the span’s LLM Application. |
-| metadata        | Dict[key (string), string]                       | Data about the span that is not input or output related. |
+| metadata        | Dict[key (string), any]                       | Data about the span that is not input or output related. |
 | span_kind        | string                       | The span kind: "agent", "workflow", "llm", "tool", "task", "embedding", or "retrieval". |
 | model_name        | string                       | The name of the model used in the request. Only applicable to LLM spans. |
 | model_provider        | string                       | The provider for the model used in the request. Only applicable to LLM spans. |
@@ -343,11 +309,6 @@ Both endpoints have the same response format.
 | output        | [SearchedIO](#searchedio)                       | The span’s output information. |
 | tool_definitions        | [[ToolDefinition](#tooldefinition)]                       | List of tools available in an LLM request. |
 | metrics        | Dict[key (string), float]                      | Datadog metrics to collect. |
-| evaluations        | Dict[key (string), any]                      | Map of evaluation results. |
-| evaluation_metadata      | Dict[key (string), any]                      | Map of evaluation-related metadata. |
-| evaluation_tags      | Dict[key (string), any]                      | Map of evaluation-related tags. |
-| evaluation_reasoning      | Dict[key (string), any]                      | Map of reasoning associated with each evaluation. |
-| evaluation_assessments      | Dict[key (string), any]                      | Map of assessments associated with each evaluation where an assessment is either “pass” or “fail”. |
 
 ### SearchedIO
 
@@ -378,7 +339,7 @@ Both endpoints have the same response format.
 | elapsed        | integer                        | The time elapsed in milliseconds. |
 | page        | [Page](#page)                        | Paging attributes. |
 | request_id        | string                       | The identifier of the request. |
-| status        | enum                       | The status of the response. Allowed enum values: done,timeout |
+| status        | string                       | The status of the response. Allowed values: done,timeout |
 
 ### Page
 
