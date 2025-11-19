@@ -1483,11 +1483,6 @@ menu:
       identifier: bits_ai_sre_investigate_alerts
       parent: bits_ai_sre
       weight: 100
-    - name: Coordinate incidents
-      url: bits_ai/bits_ai_sre/coordinate_incidents
-      identifier: bits_ai_sre_coordinate_incidents
-      parent: bits_ai_sre
-      weight: 101
     - name: Bits AI Dev Agent
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
@@ -2480,46 +2475,51 @@ menu:
       parent: incident_investigate
       identifier: incident_investigate_follow_ups
       weight: 502
+    - name: Incident AI
+      url: service_management/incident_management/incident_ai
+      identifier: incident_ai
+      parent: incidents
+      weight: 6
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 6
+      weight: 7
     - name: Information
       url: service_management/incident_management/incident_settings/information
       parent: incidents_settings
       identifier: incidents_settings_information
-      weight: 601
+      weight: 701
     - name: Property Fields
       url: service_management/incident_management/incident_settings/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
-      weight: 602
+      weight: 702
     - name: Responder Types
       url: service_management/incident_management/incident_settings/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
-      weight: 603
+      weight: 703
     - name: Integrations
       url: service_management/incident_management/incident_settings/integrations
       parent: incidents_settings
       identifier: incidents_settings_integrations
-      weight: 604
+      weight: 704
     - name: Notification Rules
       url: service_management/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 605
+      weight: 705
     - name: Templates
       url: service_management/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 606
+      weight: 706
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
       identifier: analytics
-      weight: 7
+      weight: 8
     - name: Integrations
       url: service_management/incident_management/integrations
       parent: incidents
