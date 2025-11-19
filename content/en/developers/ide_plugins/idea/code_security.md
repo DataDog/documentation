@@ -41,10 +41,10 @@ You can run the local code analysis across multiple files. In the Code menu, sel
 Choose the scope, click `OK`, then review the flagged issues in the **Problems** view.
 
 ### Configuration
-The local code analysis will run automatically if:
+The code analyzer will run automatically if:
 
-1. the repository has been onboarded for [Datadog Code Security][1]
-2. you are logged in to Datadog so that the configuration data is available
+1. your repository has been onboarded for [Datadog Code Security][1]
+2. you are logged in to Datadog so that the remote configuration data is available
 
 To see the configuration data in your IDE, run the action **Show Datadog Static Analyzer Config**:
 
@@ -52,7 +52,7 @@ To see the configuration data in your IDE, run the action **Show Datadog Static 
 
 A local configuration file (`static-analysis.datadog.yml`) can be placed at the root of the repository and will be merged with the remote configuration. When there is no remote configuration available, the local configuration file will be used on its own.
 
-<div class="alert alert-info">Using a local configuration file is a great way to try out the feature and works even without a Datadog login.</div>
+<div class="alert alert-info">Using a local configuration file is a great way to try out the feature and works even without a Datadog login. Read more about how to [customize your configuration][5].</div>
 
 {{< img src="/developers/ide_plugins/idea/code_security/local-config.png" alt="A local configuration file for Static Analysis" style="width:100%;" >}}
 
@@ -63,7 +63,8 @@ The Datadog Static Analyzer can be activated and deactivated in the IDE settings
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/configuration/code-security/setup
+[1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: /security/code_security/static_analysis/setup/?tab=github
 [3]: /security/code_security/static_analysis/static_analysis_rules/
 [4]: /security/code_security/
+[5]: /security/code_security/static_analysis/setup/?tab=github#customize-your-configuration
