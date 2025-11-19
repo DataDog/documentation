@@ -170,7 +170,7 @@ If the analysis cell has not been published as a dataset before, you can specify
 
 **Email:** To add email recipients to your report, enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it. To see the report before saving the schedule, click **Send Test Email**. Only Enterprise and Pro accounts can send reports to email addresses that don't correspond to registered Datadog users.
 
-{{< img src="/notebooks/analysis_features/add_recipients.png" alt="Email recipient section of report scheduling modal" style="width:100%;" >}}
+{{< img src="/notebooks/analysis_features/add_email_recipients.png" alt="Email recipient section of report scheduling modal" style="width:100%;" >}}
 
 Here's an example report email, including the optional 10-row inline preview:
 {{< img src="/notebooks/analysis_features/report_email.png" alt="Example report email" style="width:100%;" >}}
