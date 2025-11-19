@@ -59,11 +59,11 @@ The [**Code Security**][24] integration promotes better security by:
 - flagging library vulnerabilities and runtime code vulnerabilities as Code Insights
 - checking your code locally, as you edit it, to detect quality and security issues before they are committed
 
-{{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:80%;" >}}
 
 Find out more in the [Code Security][24] sub-section.
 
-## Other Features
+## Other features
 
 ### Error Tracking
 The [**Error Tracking**][6] integration helps you find and fix runtime errors from Error Tracking.
@@ -124,14 +124,14 @@ To remove a service, select it in the **Services** table and click the minus ico
 
 <div class="alert alert-info">The names of linked services persist with the project when you close it.</div>
 
-## Feedback
-
-You can give feedback in the [discussion forum][1], or send an e-mail to [team-ide-integration@datadoghq.com][11].
-
 ## Data and Telemetry
 Datadog collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][16] and [Datadog's EULA][17].
 
 If you don't wish to send this data to Datadog, you can disable the collection at any time in the settings: `Settings > Tools > Datadog > Data Sharing` and disable the `Send usage statistics` option.
+
+## Feedback
+
+You can give feedback in the [discussion forum][1], or send an e-mail to [team-ide-integration@datadoghq.com][11].
 
 ## Further reading
 

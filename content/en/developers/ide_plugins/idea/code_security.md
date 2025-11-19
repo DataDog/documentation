@@ -22,9 +22,9 @@ The Datadog plugin reports library and runtime code vulnerabilities as Code Insi
 
 Full details of each vulnerability are shown in the Datadog tool-window in the **File Insights** and **Project Insights** tabs. Click on the link in the `Code Links` section to navigate to the source location, or click on the vulnerability description to open the summary at Datadog.
 
-## Local Code Analysis
+## Local code analysis
 
-### Real time checking
+### File editing
 As you edit your source files, the Datadog plugin checks the content (locally) against a set of [rules][2] to detect and flag quality and security issues before you commit your changes.
 
 The local analysis engine supports all the file types listed in [Static Analysis Rules][3]. Issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
@@ -33,12 +33,12 @@ The local analysis engine supports all the file types listed in [Static Analysis
 
 Additionally, all issues detected by this feature are listed in the standard **Problems** view.
 
-### Analyzing Multiple Files
-You can run the local code analysis across multiple files. In the Code menu, select **Analyse Code** → **Run Inspection By Name…** and choose Datadog Static Analysis:
+### Analyzing multiple files
+You can run the local code analysis across multiple files. In the **Code** menu, select **Analyse Code** → **Run Inspection By Name…** and choose `Datadog Static Analysis`:
 
 {{< img src="/developers/ide_plugins/idea/code_security/inspection-by-name.png" alt="Datadog Static Analysis inspection" style="width:60%;" >}}
 
-Choose the scope, click `OK`, then review the flagged issues in the **Problems** view.
+Choose the scope, click **OK**, then review the flagged issues in the **Problems** view.
 
 ### Configuration
 The code analyzer will run automatically if:
@@ -52,9 +52,11 @@ To see the configuration data in your IDE, run the action **Show Datadog Static 
 
 A local configuration file (`static-analysis.datadog.yml`) can be placed at the root of the repository and will be merged with the remote configuration. When there is no remote configuration available, the local configuration file will be used on its own.
 
-<div class="alert alert-info">Using a local configuration file is a great way to try out the feature and works even without a Datadog login. Read more about how to [customize your configuration][5].</div>
+<div class="alert alert-info">Using a local configuration file is a great way to try out the feature and works even without a Datadog login.</div>
 
 {{< img src="/developers/ide_plugins/idea/code_security/local-config.png" alt="A local configuration file for Static Analysis" style="width:100%;" >}}
+
+Read more about how to [customize your configuration][5].
 
 ### Settings
 The Datadog Static Analyzer can be activated and deactivated in the IDE settings under **Editor** → **Inspections**.
