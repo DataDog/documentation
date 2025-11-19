@@ -100,7 +100,6 @@ To visualize form responses in a dashboard:
 [8]: /actions/forms/#view-in-forms
 [9]: /dashboards/#get-started
 [10]: /dashboards/widgets/#add-a-widget-to-your-dashboard
-[11]: /dashboards/widgets/timeseries/
 [12]: /dashboards/widgets/configuration/
 [13]: https://app.datadoghq.com/ddsql/editor
 [14]: /dashboards/widgets/#add-a-widget-to-your-dashboard
