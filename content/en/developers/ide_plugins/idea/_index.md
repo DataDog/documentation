@@ -31,7 +31,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers that use Datadog products including [Error Tracking][6], [Logs][23], [Live Debugger][21], [Code Security][24], [Test Optimization][18] and [CI Visibility][19] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm.
+The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers that use Datadog products including [Error Tracking][6], [Logs][23], [Live Debugger][21] and [Code Security][24] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm.
 
 {{< img src="/developers/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -41,6 +41,8 @@ The Datadog plugin for JetBrains IDEs helps improve software performance by prov
 The [**Error Tracking**][6] integration helps you find and fix runtime errors from Error Tracking.
 
 {{< img src="/developers/ide_plugins/idea/error-tracking-in-editor.png" alt="Error tracking in the source editor" style="width:100%;" >}}
+
+Click the inlay to open the Datadog tool-window and inspect details of the runtime error.
 
 ### Logs
 
@@ -61,7 +63,7 @@ Find out more in the [Live Debugger][20] sub-section.
 ### Code Security
 The [**Code Security**][24] integration promotes better security by:
 
-- flagging library vulnerabilities and runtime code vulnerabilities as Code Insights
+- flagging library vulnerabilities and runtime code vulnerabilities
 - checking your code locally, as you edit it, to detect quality and security issues before they are committed
 
 {{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:80%;" >}}
@@ -79,9 +81,11 @@ The **View in IDE** feature provides a link from the Datadog platform directly t
 <div class="alert alert-info">A prerequisite to make the most of this feature is that Source Code Integration is configured for your service.</div>
 
 ### Code Origin for Spans
-The [**Code Origin for Spans**][22] integration shows you metrics for entry spans and provides a link to Datadog.
+The [**Code Origin for Spans**][22] integration shows you metrics for entry spans at the corresponding location in your source code.
 
 {{< img src="/developers/ide_plugins/idea/apm-span.png" alt="APM spans in the source editor" style="width:80%;" >}}
+
+Click the inlay to open the Datadog tool-window and inspect the span details.
 
 ### Flaky Tests
 The [**Flaky Tests**][7] integration shows you flaky tests detected by [Test Optimization][2] and provides a link to Datadog.
