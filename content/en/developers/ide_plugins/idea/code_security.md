@@ -13,7 +13,7 @@ The [Code Security][4] integration in the plugin promotes better security by:
 - flagging library vulnerabilities and runtime code vulnerabilities
 - checking your code locally, as you edit it, to detect quality and security issues before they are committed
 
-The feature is supported for any source code repository that is onboarded for [Datadog Code Security][1]
+The feature is supported for any source code repository that is onboarded for [Datadog Code Security][1].
 
 ## Vulnerabilities
 The Datadog plugin reports library and runtime code vulnerabilities as Code Insights and issues are highlighted directly in the source code:

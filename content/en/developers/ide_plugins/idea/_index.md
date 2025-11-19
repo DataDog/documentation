@@ -6,18 +6,21 @@ aliases:
 - '/developers/ide_integrations/idea/'
 - '/developers/ide_plugins/idea/continuous_profiler/'
 further_reading:
+- link: "/tracing/error_tracking/"
+  tag: "Documentation"
+  text: "Learn more about Error Tracking"
 - link: "/logs/explorer/"
   tag: "Documentation"
-  text: "Learn about Logs"
+  text: "Learn more about Logs"
 - link: "/tracing/live_debugger/"
   tag: "Documentation"
-  text: "Learn about Live Debugger"
+  text: "Learn more about Live Debugger"
 - link: "/security/code_security/"
   tag: "Documentation"
-  text: "Learn about Code Security"
+  text: "Learn more about Code Security"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
-  text: "Learn about Source Code Integration"
+  text: "Learn more about Source Code Integration"
 - link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
   tag: "Blog"
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
@@ -36,6 +39,11 @@ The Datadog plugin for JetBrains IDEs helps improve software performance by prov
 {{< img src="/developers/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
 ## Core Features
+
+### Error Tracking
+The [**Error Tracking**][6] integration helps you find and fix runtime errors from Error Tracking.
+
+{{< img src="/developers/ide_plugins/idea/error-tracking-in-editor.png" alt="Error tracking in the source editor" style="width:100%;" >}}
 
 ### Logs
 
@@ -65,10 +73,10 @@ Find out more in the [Code Security][24] sub-section.
 
 ## Other features
 
-### Error Tracking
-The [**Error Tracking**][6] integration helps you find and fix runtime errors from Error Tracking.
+### Code Origin for Spans
+The [**Code Origin for Spans**][22] integration shows you metrics for entry spans and provides a link to Datadog.
 
-{{< img src="/developers/ide_plugins/idea/error-tracking-in-editor.png" alt="Error tracking in the source editor" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/apm-span.png" alt="APM spans in the source editor" style="width:100%;" >}}
 
 ### View in IDE
 
@@ -161,5 +169,6 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [19]: /continuous_integration/
 [20]: /developers/ide_plugins/idea/live_debugger/
 [21]: /tracing/live_debugger/
+[22]: /tracing/code_origin?tab=java
 [23]: /developers/ide_plugins/idea/logs/
 [24]: /developers/ide_plugins/idea/code_security/
