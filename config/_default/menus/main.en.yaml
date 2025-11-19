@@ -2876,11 +2876,16 @@ menu:
       parent: app_builder_components
       identifier: app_builder_custom_charts
       weight: 701
+    - name: Reacter Renderer
+      url: actions/app_builder/components/react_renderer/
+      parent: app_builder_components
+      identifier: app_builder_react_renderer
+      weight: 702
     - name: Tables
       url: actions/app_builder/components/tables/
       parent: app_builder_components
       identifier: app_builder_tables
-      weight: 702
+      weight: 703
     - name: JavaScript Expressions
       url: actions/app_builder/expressions/
       parent: app_builder
