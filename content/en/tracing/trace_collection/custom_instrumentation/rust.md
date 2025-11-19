@@ -17,7 +17,7 @@ further_reading:
   The Datadog Rust SDK is in Preview.
 {{< /callout >}}
 
-Datadog provides support for custom instrumentation in Rust applications through the `datadog-opentelemetry` crate. This library is built on the OpenTelemetry (OTel) API and SDK, providing a tracer that includes Datadog-specific features and an exporter.
+Datadog provides support for custom instrumentation in Rust applications through the [`datadog-opentelemetry` crate][3]. This library is built on the OpenTelemetry (OTel) API and SDK, providing a tracer that includes Datadog-specific features and an exporter.
 
 Because this library is built on OpenTelemetry, you use the standard OpenTelemetry API to create traces and spans.
 
@@ -32,22 +32,19 @@ Add `datadog-opentelemetry` and the core `opentelemetry` crate to your `Cargo.to
 ```toml
 [dependencies]
 # The main Datadog OTel library
-datadog-opentelemetry = { version = "0.1" } # Note: Update to latest.
+datadog-opentelemetry = { version = "0.1" } # Note: Check crates.io for latest
 
 # The OpenTelemetry API for creating spans
-opentelemetry = { version = "0.30" } # Note: Update to latest.
+opentelemetry = { version = "0.31" }
 ```
 
 ### 2. Initialize the Tracer
 
 In your application's main function, initialize the Datadog tracer provider. The `tracing().init()` function automatically configures the tracer from environment variables.
 
-<div class="alert alert-info">You must shut down the provider before your application exits to ensure all pending traces are flushed.
-</div>
-
+<div class="alert alert-info">You must shut down the provider before your application exits to ensure all pending traces are flushed.</div>
 
 ```rust
-
 use datadog_opentelemetry;
 use opentelemetry::{global, trace::Tracer};
 use std::time::Duration;
@@ -63,7 +60,7 @@ fn main() {
     
     let tracer = global::tracer("my-component");
     
-    tracer.in_span("my-operation", |cx| {
+    tracer.in_span("my-operation", |_cx| {
         // ... do work ...
     });
 
@@ -100,7 +97,7 @@ let tracer = global::tracer("my-component");
 
 ### Create a span
 
-Use `tracer.in_span` (from `opentelemetry::trace::Tracer`) to create a new span that is active for the duration of a closure.
+Use `tracer.in_span` (from `opentelemetry::trace::Tracer`) to create a new span. The span is automatically ended when the closure finishes.
 
 ```rust
 use opentelemetry::{global, trace::Tracer};
@@ -108,11 +105,9 @@ use opentelemetry::{global, trace::Tracer};
 fn do_work() {
     let tracer = global::tracer("my-component");
     
-    tracer.in_span("operation_name", |cx| {
+    tracer.in_span("operation_name", |_cx| {
         // The span is active within this closure
         println!("Doing work...");
-        
-        // Spans are automatically ended when the closure finishes
     });
 }
 ```
@@ -127,11 +122,11 @@ use opentelemetry::{global, trace::Tracer};
 fn parent_operation() {
     let tracer = global::tracer("my-component");
 
-    tracer.in_span("parent_operation", |parent_span| {
-        // parent_span is active
+    tracer.in_span("parent_operation", |_cx| {
+        // The "parent_operation" span is now active on this thread
         
-        tracer.in_span("child_operation", |child_span| {
-            // child_span is active and is a child of parent_span
+        tracer.in_span("child_operation", |_cx| {
+            // This span is automatically parented to "parent_operation"
             println!("Doing child work...");
         });
 
@@ -150,7 +145,7 @@ use opentelemetry::trace::{Span, Tracer};
 fn do_work_with_active_span() {
     let tracer = opentelemetry::global::tracer("my-component");
 
-    tracer.in_span("my-operation", |cx| {
+    tracer.in_span("my-operation", |_cx| {
         // A new span "my-operation" is now the active span.
         // You can retrieve it from the active context:
         let current_span = opentelemetry::trace::Span::current();
@@ -165,27 +160,23 @@ fn do_work_with_active_span() {
 
 ### Add span tags
 
-Add attributes to a span using the `set_attribute` method. In OpenTelemetry, tags are called attributes.
+Add attributes to a span using the `set_attribute` method. You must retrieve the span from the context `cx` to modify it.
 
 ```rust
-use opentelemetry::trace::{Span, Tracer};
+use opentelemetry::trace::{Tracer, TraceContextExt}; // TraceContextExt is required for cx.span()
 use opentelemetry::KeyValue;
 
 fn add_tags_to_span() {
     let tracer = opentelemetry::global::tracer("my-component");
 
     tracer.in_span("operation.with.tags", |cx| {
+        let span = cx.span(); // Retrieve the span from context
+        
         // Set attributes (tags) on the active span
         span.set_attribute(KeyValue::new("customer.id", "12345"));
         span.set_attribute(KeyValue::new("http.method", "GET"));
         span.set_attribute(KeyValue::new("is.test", true));
         span.set_attribute(KeyValue::new("team.name", "backend"));
-
-        // You can also set multiple attributes at once
-        span.set_attributes(vec![
-            KeyValue::new("resource.name", "/users/list"),
-            KeyValue::new("db.system", "postgres"),
-        ]);
     });
 }
 ```
@@ -195,13 +186,15 @@ fn add_tags_to_span() {
 Add time-stamped log messages to a span using the `add_event` method.
 
 ```rust
-use opentelemetry::trace::{Span, Tracer};
+use opentelemetry::trace::{Tracer, TraceContextExt};
 use opentelemetry::KeyValue;
 
 fn add_events_to_span() {
     let tracer = opentelemetry::global::tracer("my-component");
 
     tracer.in_span("operation.with.events", |cx| {
+        let span = cx.span();
+
         // Add a simple event
         span.add_event("Data received", vec![]);
 
@@ -235,3 +228,4 @@ For more information, see [Trace Context Propagation][2].
 
 [1]: /tracing/trace_collection/library_config/rust
 [2]: /tracing/trace_collection/trace_context_propagation/?tab=rust
+[3]: https://crates.io/crates/datadog-opentelemetry

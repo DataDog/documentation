@@ -656,28 +656,33 @@ Because there is no automatic instrumentation for Rust, you must manually propag
 - `HeaderExtractor` to **extract** a parent context from incoming request headers.
 - `HeaderInjector` to **inject** the current context into outbound request headers.
 
-First, add `opentelemetry-http` to your `Cargo.toml`:
+First, add `opentelemetry-http` to your `Cargo.toml`.
 
 ```toml
 [dependencies]
 # Provides HeaderInjector and HeaderExtractor
-opentelemetry-http = "<your-otel-version>"
+# Ensure this version matches your other opentelemetry dependencies
+opentelemetry-http = "0.31"
+
+# Only required for the Hyper examples below
+http-body-util = "0.1"
 ```
 
 <div class="alert alert-danger">Use the same crate version for <code>opentelemetry-http</code> as the rest of your OpenTelemetry dependencies to avoid version conflicts.</div>
 
 ### Injecting context (client side)
 
-When making an HTTP request (for example, with `hyper`), inject the current span context into the request headers using `HeaderInjector`.
+When making an HTTP request (for example, with `hyper` 1.0), inject the current span context into the request headers using `HeaderInjector`.
 
 ```rust
 use opentelemetry::{global, Context};
 use opentelemetry_http::HeaderInjector;
-use http::Request;
-use hyper::Body;
+use hyper::Request;
+use http_body_util::Empty;
+use hyper::body::Bytes;
 
 // HYPER example
-fn build_outbound_request(url: &str) -> http::Result<Request<Body>> {
+fn build_outbound_request(url: &str) -> http::Result<Request<Empty<Bytes>>> {
     let cx = Context::current();
 
     // Build the request and inject headers in-place
@@ -686,13 +691,15 @@ fn build_outbound_request(url: &str) -> http::Result<Request<Body>> {
         prop.inject_context(&cx, &mut HeaderInjector(builder.headers_mut().unwrap()))
     });
 
-    builder.body(Body::empty())
+    builder.body(Empty::<Bytes>::new())
 }
 ```
 
 ### Extracting context (server side)
 
-When receiving an HTTP request (for example, with `hyper`), extract the trace context from the headers using `HeaderExtractor` to parent your new span.
+When receiving an HTTP request, extract the trace context from the headers using `HeaderExtractor`.
+
+When using async runtimes (like Tokio), you must attach the extracted context to the future so that it propagates correctly through the async task chain.
 
 ```rust
 use opentelemetry::{
@@ -701,23 +708,26 @@ use opentelemetry::{
     Context,
 };
 use opentelemetry_http::HeaderExtractor;
-use hyper::{Body, Request, Response};
+use hyper::{Request, Response};
+use hyper::body::Incoming;
+use http_body_util::Full;
+use hyper::body::Bytes;
 
 // Utility function to extract context from a hyper request
-fn extract_context(req: &Request<Body>) -> Context {
+fn extract_context(req: &Request<Incoming>) -> Context {
     global::get_text_map_propagator(|propagator| {
         propagator.extract(&HeaderExtractor(req.headers()))
     })
 }
 
 // A placeholder for your actual request handling logic
-async fn your_handler_logic() -> Response<Body> {
+async fn your_handler_logic() -> Response<Full<Bytes>> {
     // ... your logic ...
-    Response::new(Body::from("Hello, World!"))
+    Response::new(Full::new(Bytes::from("Hello, World!")))
 }
 
 // HYPER example
-async fn hyper_handler(req:Request<Body>) -> Response<Body> {
+async fn hyper_handler(req: Request<Incoming>) -> Response<Full<Bytes>> {
     // Extract the parent context from the incoming headers
     let parent_cx = extract_context(&req);
     
@@ -730,11 +740,11 @@ async fn hyper_handler(req:Request<Body>) -> Response<Body> {
         .start_with_context(tracer, &parent_cx);
 
     // Create a new context with the new server span
+    // This is critical for async propagation
     let cx = parent_cx.with_span(server_span);
 
-    // Attach the new context to the future.
-    // This makes 'server_span' the current span for 'your_handler_logic'
-    // and any calls it makes.
+    // Attach the new context to the future using .with_context(cx)
+    // This makes the span active for the duration of the handler
     your_handler_logic().with_context(cx).await
 }
 ```
