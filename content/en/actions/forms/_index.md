@@ -42,7 +42,7 @@ To create a form:
 
 To preview, share, and debug your form:
 1. Click **View** to display the form as it appears to respondents. Click **Edit** to return to the creator view. 
-1. Click **Share** to copy the form link to your clipboard.
+1. Click **Share** to copy the form link.
 1. In the **Debug** section:
     1. click **Form** to show a mini-preview of your form.
     1. click **Data Definition** to show the JSON version of the components' definition.
