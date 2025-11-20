@@ -17,6 +17,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
+{{% apm-config-visibility %}}
+
 For information about configuring the Ruby tracing library, see [Additional Ruby configuration][2].
 
 ## Further Reading
