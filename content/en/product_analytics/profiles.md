@@ -123,7 +123,7 @@ Last Browser Version
 ### Account profiles 
 The Account Profiles page surfaces a list of the organizations interacting with your application.
 
-{{< img src="product_analytics/account_profile_ui2.png" alt="A view of the User profiles page." style="width:80%;" >}}
+{{< img src="product_analytics/account_profile_ui3.png" alt="A view of the User profiles page." style="width:80%;" >}}
 
 Each profile includes four default attributes to help you identify and track account activity over time. These default attributes are:
 - `account_id`
@@ -165,7 +165,7 @@ To import attibutes from a reference table or from an integration such as Salesf
 
 3. Select the **join keys** to merge the table with your profiles. Then, choose which **attributes from the reference table or integration** to add to your profiles.
 
-{{< img src="product_analytics/select_integration_attributes3.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
+{{< img src="product_analytics/select_integration_attributes4.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
 
 
 <br>
