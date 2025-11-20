@@ -17,50 +17,29 @@ aliases:
 
 ## Overview
 
-A read-only root filesystem (ROFS) is a container security practice where the container's root filesystem is mounted with read-only permissions. This prevents unauthorized modifications and reduces the attack surface. ROFS is recommended by major security frameworks including [AWS Security Hub ECS.5][1], [AWS EKS Best Practices][2], and the [NSA/CISA Kubernetes Hardening Guide][3].
+Enabling read-only root filesystem (ROFS) has become a common container security practice to prevent unauthorized modifications to the container's filesystem. ROFS is recommended by major security frameworks including [AWS Security Hub ECS.5][1], [AWS EKS Best Practices][2], and the [NSA/CISA Kubernetes Hardening Guide][3].
 
-The Datadog Agent performs filesystem write operations during startup and runtime. To run the Agent in ROFS environments, you need to provide writable volumes for specific directories. This guide explains which directories require write access and provides examples to help you configure your deployment.
-
-## Agent filesystem writes
-
-Understanding where and why the Agent writes to the filesystem helps you configure the necessary volumes.
-
-### Startup initialization
-
-During container startup, the Agent runs initialization scripts that modify configuration files based on the detected environment. These scripts require write access to `/etc/datadog-agent/` to create symlinks, copy configurations, and set up integration checks.
-
-Since mounting an empty volume to `/etc/datadog-agent/` would overwrite the default configuration files from the container image, you need to use an init container or setup script to copy the default files to the mounted volume before the Agent starts.
-
-### Runtime directories
-
-During normal operation, the Agent writes to the following directories:
-
-| Directory | Purpose | Required |
-|-----------|---------|----------|
-| `/etc/datadog-agent/` | Configuration and check files | Yes |
-| `/opt/datadog-agent/run/` | Runtime state files (transaction logs, cache, registry) | Yes |
-| `/var/run/datadog/` | APM and DogStatsD sockets | Yes |
-| `/var/log/datadog/` | Agent log output | No |
-| `/tmp/` | Temporary files for flares and diagnostics | No |
-
+To run the Agent with ROFS enabled, you need to configure writable volumes for each directory the Agent writes to. If you're using a managed deployment method (ie. Datadog Helm chart, Datadog Operator, ECS Terraform module, etc) then this configuration is done for you. Otherwise, this guide
+explains how to configure writable volume mounts for your self-managed Agent.
 
 ## Configuration pattern
 
-To run the Agent with ROFS, you need to:
+There are three steps when running configuring the Agent for ROFS:
 
 1. **Provide writable volumes** for the required directories
 2. **Use an init container** to copy default configuration files before the Agent starts
-3. **Mount the volumes** to both the init container and the Agent container
+3. **Mount volumes** to both the init and Agent containers
 
-The specific implementation varies by platform (Kubernetes, Docker, ECS, etc.), but the pattern remains the same.
+Specific implementation varies by platform (Kubernetes, Docker, ECS, etc.), but the pattern remains the same.
 
-### Docker Compose example
+### Example
 
-For self-managed deployments, here's a complete Docker Compose example that demonstrates the ROFS configuration pattern:
+For self-managed deployments, here's a complete Docker Compose example demonstrating ROFS configuration pattern:
 
 ```yaml
 version: '3.8'
 services:
+  # Init container populating 'datadog-config' volume with config files.
   datadog-init:
     image: gcr.io/datadoghq/agent:latest
     command: ["sh", "-c", "cp -r /etc/datadog-agent/* /opt/datadog-agent-config/"]
@@ -77,54 +56,56 @@ services:
     environment:
       - DD_API_KEY=${DD_API_KEY}
       - DD_SITE=${DD_SITE}
-      - DD_DISABLE_FILE_LOGGING=true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      # Mounting populated config volume with read-write permissions.
       - datadog-config:/etc/datadog-agent:rw
       - datadog-run:/opt/datadog-agent/run:rw
       - datadog-sockets:/var/run/datadog:rw
+      # (optional) The Agent will operate mostly normally without these volumes
+      - datadog-tmp:/tmp:rw
+      - datadog-logs:/var/log/datadog:rw
 
 volumes:
   datadog-config:
   datadog-run:
   datadog-sockets:
+  datadog-tmp:
+  datadog-logs:
 ```
 
 **Key elements:**
 - `datadog-init` service copies default configuration files to the `datadog-config` volume
 - `datadog` service starts only after init completes successfully
 - All required directories are mounted as writable named volumes
-- `DD_DISABLE_FILE_LOGGING=true` eliminates the need for `/var/log/datadog` volume
 
-You can adapt this pattern to other container orchestrators like ECS, Nomad, or plain Docker by:
+You can adapt this pattern to other container orchestrators like ECS, K8s, or plain Docker by:
 1. Creating an init container that copies `/etc/datadog-agent/*` to a shared volume
 2. Mounting that volume to `/etc/datadog-agent` in the main Agent container
 3. Providing writable volumes for `/opt/datadog-agent/run` and `/var/run/datadog`
 4. Enabling the read-only root filesystem constraint
 
-## Adding custom configurations
+## Agent filesystem writes
 
-To add custom check configurations or integration files in a ROFS environment:
+Understanding where and why the Agent writes to the filesystem helps you configure the necessary volumes.
 
-**Option 1**: Build a custom image with your configuration files:
+### Startup initialization
 
-```dockerfile
-FROM gcr.io/datadoghq/agent:latest
-COPY my-integration.yaml /etc/datadog-agent/conf.d/my-integration.yaml
-```
+At startup, the Agent runs initialization scripts that modify files in `/etc/datadog-agent/` based on the detected environment. Since mounting an empty volume to this directory would overwrite these default configuration files, an init container must first copy these files to the volume before the Agent starts.
 
-**Option 2**: In Kubernetes, use ConfigMaps to mount additional configuration files into the Agent container. For example with the Helm chart:
+### Runtime directories
 
-```yaml
-agents:
-  customAgentConfig:
-    my-integration.yaml: |-
-      instances:
-        - host: my-service
-          port: 8080
-```
+During normal operation, the Agent writes to the following directories:
+
+| Directory | Purpose | Required |
+|-----------|---------|----------|
+| `/etc/datadog-agent/` | Configuration and check files | Yes |
+| `/opt/datadog-agent/run/` | Runtime state files (transaction logs, cache, registry) | Yes |
+| `/var/run/datadog/` | APM and DogStatsD sockets | Yes |
+| `/var/log/datadog/` | Agent log output | No |
+| `/tmp/` | Temporary files for flares and diagnostics | No |
 
 ## Troubleshooting
 
@@ -132,7 +113,8 @@ agents:
 Check the Agent logs to identify which directory needs write access. The most common required directories are `/etc/datadog-agent/`, `/opt/datadog-agent/run/`, and `/var/run/datadog/`.
 
 **Metrics or traces not being collected:**
-Verify that `/var/run/datadog/` is mounted as writable—this directory contains the APM and DogStatsD socket files needed for trace and metric collection.
+1. Verify that `/var/run/datadog/` is mounted as writable—this directory contains the APM and DogStatsD socket files needed for trace and metric collection.
+2. Confirm default `/etc/datadog-agent/conf.d` checks aren't overwritten by an empty volume.
 
 **Flare creation fails:**
 The Agent flare command requires write access to `/tmp/`. If generating flares is important for your troubleshooting workflow, mount `/tmp/` as a writable volume.
