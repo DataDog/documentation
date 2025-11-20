@@ -1,6 +1,6 @@
 ---
 title: Cost Tracking
-description: Use Crompt Tracking to view your LLM tokens and cost.
+description: Use Cost Tracking to view your LLM tokens and cost.
 ---
 
 Datadog LLM Observability _Cost Tracking_ is a feature that provides customers with clear visibility into the spend cost associated with your LLM-powered applications. Cost Tracking automatically captures input/output token counts and calculates the corresponding cost for each LLM request, using providers' pricing models. 
@@ -44,7 +44,6 @@ Datadog automatically calculates the cost of LLM requests made to the following 
 Cost Tracking metrics can be found in [LLM Observability Metrics][5].
 
 ## View Cost Tracking in LLM Observability
-[screenshot - Cost section in app page]
 {{< img src="llm_observability/cost_tracking_overview.png" alt="Cost view for an app in LLM Observability." style="width:100%;" >}}
 
 Once cost tracking is enabled, open your application in LLM Observability and select Cost on the left sidebar. The Cost view provides a complete, visual breakdown view of your token usage and LLM spend:
