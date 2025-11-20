@@ -400,7 +400,7 @@ Node.js 애플리케이션의 [트레이스 및 신호 탐색기][2]에 ASM 위�
     DD_TRACE_LOG_LEVEL=info
     ```
 
-[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[1]: https://github.com/DataDog/dd-trace-js/blob/main/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /ko/tracing/troubleshooting/tracer_startup_logs/
 [5]: /ko/tracing/troubleshooting/

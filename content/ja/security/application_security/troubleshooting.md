@@ -393,7 +393,7 @@ Node.js アプリケーションの[トレースとシグナルエクスプロ�
     DD_TRACE_LOG_LEVEL=info
     ```
 
-[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[1]: https://github.com/DataDog/dd-trace-js/blob/main/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /ja/tracing/troubleshooting/tracer_startup_logs/
 [5]: /ja/tracing/troubleshooting/
