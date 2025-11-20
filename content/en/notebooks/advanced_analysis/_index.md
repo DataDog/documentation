@@ -152,45 +152,47 @@ To download your dataset as a CSV file:
 4. The CSV file automatically downloads to your computer.
 
 ### Schedule a CSV report
+
 With scheduled reports, you can automatically receive query results from notebook analysis cells by email or Slack.
 
 To schedule a report on an analysis cell:
 
-1. Select **Schedule report** from the dropdown next to **Save to Dashboard**.
+1. Open the dropdown next to **Save to Dashboard** and select **Schedule report**.
 
-   {{< img src="/notebooks/analysis_features/schedule_report_from_cell.png" alt="A report view showing a dropdown menu with the 'Schedule report' option highlighted" style="width:100%;" >}}
+   {{< img src="/notebooks/analysis_features/schedule_report_from_cell_v2.png" alt="Dropdown menu showing the Schedule report option highlighted" style="width:50%;" >}}
 
-2. In the configuration modal that opens, set a schedule to determine when and how often the report is sent.
+2. In the modal, select a schedule to configure when and how often the report is sent.
 
-3. Define a name for the report, and select a time frame to set the range of data displayed in the report. 
+   {{< img src="/notebooks/analysis_features/select_schedule.png" alt="Schedule selection step in the report configuration modal" style="width:80%;" >}}
 
-{{< img src="/notebooks/analysis_features/configure_report.png" alt="Report configuration section of report scheduling modal" style="width:100%;" >}}
+3. Enter a report name and select a time frame to define the data included in the report.
 
    **Note**: If the analysis cell has not yet been published as a dataset, you can specify the name of the dataset created when the report is scheduled.
 
-4. Add email recipients. **Note**: Only Enterprise and Pro accounts can send reports to email addresses that don't correspond to registered Datadog users.
-    - The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it. 
-    - To see the report before saving the schedule, click **Send Test Email**. 
+4. Add email recipients. 
+    - The email associated with your Datadog account is included automatically. To remove it, hover over your email and click the trash icon. 
+    - To preview the report before saving the schedule, click **Send Test Email**. 
+
+    **Note**: Only Enterprise and Pro accounts can send reports to email addresses that aren't associated with registered Datadog users.
     
     Example report email:
-    {{< img src="/notebooks/analysis_features/report_email.png" alt="Example report email" style="width:100%;" >}}
+    {{< img src="/notebooks/analysis_features/report_email.png" alt="Example report email" style="width:90%;" >}}
 
 5. Add Slack recipients. 
-   - Click on the **Slack** tab and select the Slack workspace and channel from the available dropdowns. All public channels within the Slack workspace are listed automatically. 
-   
-        **Note**: If you do not see any available workspaces, ensure the Datadog [Slack Integration][6] is installed. 
-        
-   - To select a private Slack channel, invite the Datadog Slack bot to your channel.
-   - To send a test message to Slack, add a channel recipient and click **Send Test Message.**
+   - Click on the **Slack** tab, then choose a workspace and channel. 
+     - If no workspaces appear, verify that the Datadog [Slack Integration][6] is installed. 
+     - Public channels are listed automatically. To send to a private channel, invite the Datadog Slack bot to your channel.
+   - To preview the message, add a channel and click **Send Test Message.**
 
-   {{< img src="/notebooks/analysis_features/add_slack_recipients.png" alt="Email recipient section of report scheduling modal" style="width:100%;" >}}
+   {{< img src="/notebooks/analysis_features/add_slack_recipients.png" alt="Slack recipient selection in the report scheduling modal" style="width:100%;" >}}
+
 6.  Save your schedule.
 
-You can view, search, edit, and delete existing report schedules from the **Reports** tab.
+You can view, search, edit, and delete existing report schedules from the **Reports** tab:
 
-{{< img src="/notebooks/analysis_features/reports_page.png" alt="Filtered view of the Reports tab" style="width:100%;" >}}
+{{< img src="/notebooks/analysis_features/reports_page.png" alt="Filtered view of the Reports tab" style="width:90%;" >}}
 
-**Note**: To schedule reports and view other users’ schedules, users need the **CSV Report Schedules Write** permission. To edit other users’ schedules, users need the **CSV Report Schedules Manage** permission. These permissions can be granted by a user with the **Org Management** permission.
+**Note**: To schedule reports and view other users' schedules, users need the **CSV Report Schedules Write** permission. To edit other users' schedules, users need the **CSV Report Schedules Manage** permission. These permissions can be granted by a user with the **Org Management** permission.
 
 ## Further reading
 
