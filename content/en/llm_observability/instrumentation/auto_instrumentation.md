@@ -77,6 +77,8 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Responses][50]:
    - `OpenAI().responses.create()`
    - `AsyncOpenAI().responses.create()`
+   - `OpenAI().responses.parse()` (as of `ddtrace==3.17.0`)
+   - `AsyncOpenAI().responses.parse()` (as of `ddtrace==3.17.0`)
 -  [Calls made to DeepSeek through the OpenAI Python SDK][54] (as of `ddtrace==3.1.0`)
 
 ## LangChain
