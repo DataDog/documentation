@@ -87,6 +87,7 @@ Extraction uses Grok parsing rules to capture values from raw log messages or at
 - Capture values from raw log messages.
 - Retroactively extract attributes from already indexed logs without editing pipelines.
 - Test against sample logs.
+- Use AI-powered automatic parsing to generate Grok rules.
 
 For example, you can extract the first three words of a message into separate fields:
 ```
