@@ -4,6 +4,7 @@ description: "Create intelligent, self-maintaining mobile tests to ensure the mo
 aliases:
 - /mobile_testing
 - /mobile_app_testing
+- /mobile_app_testing/mobile_app_tests/
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
@@ -23,6 +24,9 @@ further_reading:
 - link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about Continuous Testing & CI/CD"
+- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
+  tag: "Blog"
+  text: "How to build reliable and accurate synthetic tests for your mobile apps"
 cascade:
   algolia:
     tags: ['mobile_testing']

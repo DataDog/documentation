@@ -156,13 +156,14 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     // NOT SUPPORTED IN V1
 
     // For AWS CDK v2
-    import { Datadog } from "datadog-cdk-constructs-v2";
+    import { Datadog, DatadogAppSecMode } from "datadog-cdk-constructs-v2";
 
     const datadog = new Datadog(this, "Datadog", {
         extension_layer_version: {{< latest-lambda-layer-version layer="extension" >}},
         site: "<DATADOG_SITE>",
         api_key_secret_arn: "<DATADOG_API_KEY_SECRET_ARN>", // or api_key
         enable_asm: true,
+        datadog_app_sec_mode: DatadogAppSecMode.ON,
       });
     datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>]);
     ```
