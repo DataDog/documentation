@@ -1,5 +1,7 @@
-{{ $tagsV1 := .api.v1.full_spec_deref.tags }}
-{{ $tagsV2 := .api.v2.full_spec_deref.tags }}
+{{ $d := partial "api/load-specs.html" (dict "version" "v1") }}
+{{ $d2 := partial "api/load-specs.html" (dict "version" "v2") }}
+{{ $tagsV1 := $d.tags | default slice }}
+{{ $tagsV2 := $d2.tags | default slice }}
 {{ $title := .title }}
 {{ $translate_tag := .translate_tag }}
 {{ range $tag := first 1 (where ($tagsV1 | append $tagsV2) ".name" "==" $title) }}

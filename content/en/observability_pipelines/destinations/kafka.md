@@ -28,6 +28,8 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 1. Enter the name of the topic you want to send logs to.
 1. In the **Encoding** dropdown menu, select either `JSON` or `Raw message` as the output format.
 
+{{< img src="observability_pipelines/destinations/kafka_settings.png" alt="The Kafka destination with sample values" style="width:30%;" >}}
+
 #### Optional settings
 
 ##### Enable TLS
@@ -77,6 +79,8 @@ Click **Advanced** if you want to set any of the following fields:
     1. Click **Add Option** to add another librdkafka option.
 
 ### Set environment variables
+
+{{< img src="observability_pipelines/destinations/kafka_env_var.png" alt="The install page showing the Kafka environment variable field" style="width:70%;" >}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/kafka %}}
 
