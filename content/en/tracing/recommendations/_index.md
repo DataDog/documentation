@@ -107,6 +107,7 @@ APM Recommendations are based on data collected from different parts of your sta
 
 - Sessions and user journeys from Real User Monitoring (RUM)
 - Distributed traces from Application Performance Monitoring (APM)
+- Error data from Error Tracking
 - Database telemetry from Database Monitoring (DBM)
 
 By looking at these sources together, Datadog finds ways to help you improve performance, reliability, and user experience.
