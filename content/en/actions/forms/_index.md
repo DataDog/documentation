@@ -50,7 +50,7 @@ To preview, share, and debug your form:
 
 ### Add automation 
 
-After creating a form, you can add an [action][4] or [blueprint][5] that triggers automatically when a form is submitted. 
+After creating a form, you can add an [action][4] or [workflow blueprint][5] that triggers automatically when a form is submitted. 
 1. From the [Forms][1] page, click a form. 
 1. Click **Automation**.
 1. Choose an action or blueprint. 
