@@ -1,6 +1,6 @@
 ---
 title: React Renderer
-description: WORDS
+description: Render custom React components by defining component code, input props, and the initial component state.
 disable_toc: false
 further_reading:
 - link: "/actions/app_builder/components/"
@@ -11,7 +11,7 @@ further_reading:
   text: "Build Apps"
 ---
 
-This page provides an example of how to use the React Renderer component in your App Builder apps.
+This page provides an example of how to use the React renderer component in your App Builder apps.
 
 ## Example component definition
 
