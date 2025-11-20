@@ -123,3 +123,4 @@ Click on a test run in the table at the bottom of the page to view details for t
 [3]: /network_monitoring/network_path/path_view/#health-bar
 [4]: /synthetics/network_path_tests/#define-alert-conditions
 [5]: /synthetics/network_path_tests/#configure-the-test-monitor
+[6]: /remote_configuration/#enable-remote-configuration
