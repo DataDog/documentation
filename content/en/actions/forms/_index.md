@@ -25,7 +25,7 @@ When creating a form, you can use a template or start from scratch. Templates ar
 
 {{< img src="/actions/forms/forms-blueprint-selected.png" alt="The form creation page with the IDP Feedback Survey selected" style="width:100%;" >}}
 
-To create a new form: 
+To create a form: 
 1. On the [Forms][1] page, click **New Form**.
 1. Select a blueprint or **Start with a blank form**, then click **Continue**.
 1. Optionally, name your form and give it a description. Click **Continue**.
