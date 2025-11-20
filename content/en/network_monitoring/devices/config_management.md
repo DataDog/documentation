@@ -19,6 +19,8 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config_redacted.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
+**Note**: This feature is read-only in preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them.
+
 ## Prerequisites
 
 - [Network Device Monitoring][3] (NDM) must be configured on your devices.
@@ -62,8 +64,6 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 3. Configure the device profile if not already specified in your `conf.yaml`. Default profiles are located at `/conf.d/network_config_management.d/default_profiles`.
 
-   **Profile configuration**
-
    Each default profile (in JSON format) specifies:
    
    - **Configuration commands**: CLI commands to retrieve different configuration types:
@@ -79,8 +79,6 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
    **Note**: NCM uses dedicated default profiles that differ from SNMP device profiles. Custom profiles are not supported.
 
 4. Restart the Agent to apply the configuration changes.
-
-**Note**: This feature is read-only in preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them. 
 
 ## Viewing configurations
 
