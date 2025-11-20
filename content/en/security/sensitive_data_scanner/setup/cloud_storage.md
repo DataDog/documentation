@@ -15,7 +15,7 @@ further_reading:
 ## Overview
 
 {{< callout url="https://www.datadoghq.com/product-preview/data-security/" header="Join the Preview Program!"  >}}
-Scanning support for Amazon S3 buckets and RDS instances is available for Preview. To enroll, click Request Access.
+Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click Request Access.
 {{< /callout >}}
 
 Deploy Datadog Agentless scanners in your environment to scan for sensitive information in your cloud storage resources. Agentless scanners are EC2 instances that you control and run within your environment. The scanners use [Remote Configuration][1] to retrieve a list of S3 buckets as well as their dependencies. They scan many types of text files, such as CSVs and JSONs in your S3 buckets.
