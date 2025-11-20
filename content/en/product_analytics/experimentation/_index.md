@@ -32,7 +32,7 @@ To create, configure, and launch your experiment, complete the following steps:
 
 After you’ve created an experiment, add your primary metric and optional guardrails. See [Defining Metrics][2] for details on how to create metrics.
 
-{{< img src="/product_analytics/experiment/exp_decision_metric.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_decision_metrics.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
 
 
 #### Add a sample size calculation (optional)
