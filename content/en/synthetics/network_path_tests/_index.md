@@ -15,7 +15,7 @@ further_reading:
 
 Network Path Testing in Synthetic Monitoring gives you complete visibility into the routes your synthetic tests follow. You can pinpoint where failures happen, whether in applications, on-premises networks, or with ISPs. This accelerates root cause analysis, enables proactive issue detection, and triggers actionable alerts when tests fail. It also provides uptime data to help you measure and communicate the value of your network reliability investments.
 
-Running Network Path tests from managed locations lets you perform TCP, UDP, and ICMP checks on your application. Visualize the Network Path packets follow when executing queries from different global locations.
+Running Network Path tests from managed locations lets you perform TCP, UDP, and ICMP checks on your application. Visualize the Network Path packets follow when executing queries from different global and private locations.
 
 <div class="alert alert-info">For information on billing for Network Path Testing in Synthetic Monitoring, see the <a href="https://www.datadoghq.com/pricing/?product=network-monitoring#products">pricing page</a>.</div>
 
@@ -52,7 +52,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    | jitter |  | `is`, `<`, `<=`, `>`, `>=` | float |
    | network hops  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
 
-6. Select the **locations** from which to run your test. Network Path tests can run from managed locations to test your endpoints from global locations.
+6. Select the **locations** from which to run your test. Network Path tests can run from managed locations to test your endpoints from global locations and from the [Datadog Agent](#agent-configuration) to test private environments.
 
    {{% managed-locations-network-path %}}
 
@@ -61,6 +61,29 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 8. [Define alert conditions][4] and [configure the test monitor][5] for your Network Path test.
 
 {{% synthetics-alerting-monitoring-network-path %}}
+
+## Agent configuration
+
+Network Path tests can be run from Agents on version `7.72` and higher.
+
+1. Enable the system-probe traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. Enable the Agent Synthetics Collector in `/etc/datadog-agent/datadog.yaml` by adding the following:
+
+   ```yaml
+   synthetics:
+     collector:
+       enabled: true
+   ```
+
+3. Ensure the API key used for the Datadog Agent has [Remote Configuration][6] enabled. All newly created API keys have Remote Configuration enabled by default.
+
+4. Restart the Agent for it to appear in the list of available test locations.
 
 ## View test results
 
@@ -77,7 +100,11 @@ The Network Path visualization shows the routes packets take to complete queries
 
   {{< img src="synthetics/network_tests/network_path_section.png" alt="Network Path visualization section of a network path test." style="width:100%;">}}
 
-To view details for a specific test run, click on a test run in the table at the bottom of the page. A side panel opens displaying run information, Network Path visualization, and assertion results.
+Click on a test run in the table at the bottom of the page to view details for that specific run. The side panel displays:
+ 
+- Run information
+- Network Path visualization aggregated across all traceroute queries (as configured in the Request advanced options)
+- Assertion results aggregated across all end-to-end queries (as configured in the Request advanced options) <br></br>
 
   {{< img src="synthetics/network_tests/test_run_side_panel.png" alt="A single test run from a network test, displaying the side panel" style="width:100%;">}}
 
@@ -94,3 +121,4 @@ To view details for a specific test run, click on a test run in the table at the
 [3]: /network_monitoring/network_path/path_view/#health-bar
 [4]: /synthetics/network_path_tests/#define-alert-conditions
 [5]: /synthetics/network_path_tests/#configure-the-test-monitor
+[6]: /remote_configuration/#enable-remote-configuration
