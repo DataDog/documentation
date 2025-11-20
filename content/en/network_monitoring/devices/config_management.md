@@ -104,7 +104,7 @@ Configuration Management is accessible from the device side panel in Network Dev
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
 3. Open the **Configuration** tab in the device side panel.
 
-   {{< img src="/network_device_monitoring/config_mgmt/config_tab_redacted.png" alt="Network Device Management side panel, highlighting the Configuration tab." style="width:90%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/config_tab_redacted.png" alt="Network Device Management side panel, highlighting the Configuration tab." style="width:100%;" >}}
 
    On the Configuration tab, you can filter the configuration list to display:
    - **All**: Shows both running and startup configurations
@@ -136,8 +136,6 @@ The single-configuration view displays:
 
 You can scroll through the configuration to investigate the device state during an incident, or adjust the time range to view configurations from different time periods.
 
-   {{< img src="/network_device_monitoring/config_mgmt/point_in_time_redacted.png" alt="Network Device Management configuration tab, selecting a configuration from a point in time." style="width:100%;" >}}
-
 ### Compare configuration versions
 
 To see what changed between configuration versions:
@@ -164,7 +162,7 @@ When you compare two configuration versions, the AI summary automatically:
 
 Each default profile (in JSON format) contains:
 
-- **Configuration commands**: CLI commands to retrieve different configuration types and supplemental information:
+- **Configuration commands**: CLI commands to retrieve different configuration types:
   - `running`: Gets the current active configuration
   - `startup`: Gets the configuration that loads on device boot
 
