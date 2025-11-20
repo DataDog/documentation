@@ -2908,7 +2908,7 @@ menu:
       parent: app_builder_components
       identifier: app_builder_custom_charts
       weight: 701
-    - name: Reacter Renderer
+    - name: React Renderer
       url: actions/app_builder/components/react_renderer/
       parent: app_builder_components
       identifier: app_builder_react_renderer
