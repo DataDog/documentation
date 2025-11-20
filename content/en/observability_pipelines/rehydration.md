@@ -12,6 +12,11 @@ further_reading:
   text: "Learn more about Packs"
 ---
 
+{{< callout
+ btn_hidden="true" header="false">}}
+Rehydration is in Preview.
+{{< /callout >}}
+
 ## Overview
 
 Rehydration for Observability Pipelines enables you to pull archived logs from object storage and process them in Observability Pipelines. This gives you consistent access to historical context without having to rebuild workflows or modify ingestion pipelines.
