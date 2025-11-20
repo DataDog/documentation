@@ -82,9 +82,7 @@ When you launch the Dev Agent, it runs the setup command at startup and can use 
 
 ## Troubleshooting
 
-### Problems Creating Pull Requests
-
-#### Missing Permissions Errors with GitHub
+### Missing GitHub permissions
 
 In some cases GitHub requires the `workflows:write` permission to be granted to the App to be able to create/update Pull Requests via API for repositories with many branches. Please add the `workflows:write` permission to your GitHub App in [Source Code Integration][5].
 
