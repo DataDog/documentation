@@ -12,11 +12,11 @@ title: Data Streams Monitoring for IBM MQ
 | [Java][4]  | [IBM MQ classes for Java and JMS][5]  | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="minimal" >}}          | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="recommended" >}}       |
 
 ### Limitations
-None of the IBM MQ tracers modify messages to add Data Streams Monitoring context information the way that tracers do for most other queue technologies. This is to avoid risk to customer services if unexpected additional fields appear in messages.
+For other queue technologies, Datadog's tracers modify messages to add Data Streams Monitoring context information. However, context propagation for IBM MQ is error-prone, as unexpected additional fields can appear in messages. To avoid risk to customer services, Datadog does not propagate context for IBM MQ traces.
 
-Due to this limitation, the Data Streams Monitoring pathways view will not be able to filter IBM MQ messages based on upstream pathway, and latency for pathways that entirely flow through IBM MQ will be approximated.
+Because of this limitation, the Data Streams Monitoring pathways view cannot filter IBM MQ messages based on upstream pathway.
 
-Message throughput and full presence on the Data Streams Topology map is fully supported in these tracers.
+Latency metrics for pathways that entirely flow through IBM MQ are available, though they are approximated. Message throughput and full presence on the Data Streams Topology map are fully supported.
 
 ### Setting up Data Streams Monitoring
 See setup instructions for [.NET][2] or [Java][4].
