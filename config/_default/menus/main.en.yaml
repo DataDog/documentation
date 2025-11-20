@@ -2940,12 +2940,6 @@ menu:
       parent: actions_heading
       identifier: datastores
       weight: 40000
-    - name: Forms
-      url: actions/forms/
-      pre: file-wui
-      parent: actions_heading
-      identifier: forms
-      weight: 50000
     - name: Create and Manage Datastores
       url: actions/datastores/create/
       parent: datastores
@@ -2966,6 +2960,12 @@ menu:
       parent: datastores
       identifier: auth
       weight: 4
+    - name: Forms
+      url: actions/forms/
+      pre: file-wui
+      parent: actions_heading
+      identifier: forms
+      weight: 50000
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
