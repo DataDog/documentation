@@ -71,7 +71,7 @@ The following diagram illustrates how Agentless scanning works with existing Age
 
 ## Cloud Storage scanning
 
-{{< callout header="Preview Program" url="https://www.datadoghq.com/product-preview/data-security" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
   Scanning support for Amazon S3 buckets and RDS instances in our Preview Program. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
