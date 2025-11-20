@@ -6,7 +6,7 @@ further_reading:
   text: "Mitigate the primary risks to API security"
 ---
 
-API security relies on visibility. The biggest failure mode in most programs isn't missed vulnerabilities, it's missed APIs.
+API security relies on visibility. The biggest failure mode in most applications isn't missed vulnerabilities, it's missed APIs.
 
 [API Security Inventory][7] monitors your API traffic to provide visibility into the security posture of your APIs.
 
@@ -18,7 +18,7 @@ API security relies on visibility. The biggest failure mode in most programs isn
 2. **Services:** *Where do risky APIs live, who owns them, and how severe is their collective risk?*
     
     A service groups multiple endpoints into a logical or deployed component (typically aligned with a microservice, app, or backend system).
-3. **API Findings:** *Which API weaknesses or attacks require investigation or remediation?*
+3. **API Findings:** *Which API weaknesses, attacks or misconfigurations require investigation or remediation?*
     
     API Findings are security detections and policy evaluation results tied to endpoints or services. These represent known or inferred weaknesses or threats in API behavior or configuration.
 
@@ -39,7 +39,7 @@ API Endpoints monitors your API traffic to provide visibility into the security 
 - **Attack Exposure**: If the endpoint is targeted by attacks (powered by [App and API Protection][2]).
 - **Business Logic**: Business logic and associated business logic suggestions for this API.
 - **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][8] and [Software Composition Analysis][3]).
-- **Findings**: Security findings found on this API.
+- **Findings**: Security findings identified on this API.
 - **Dependencies**: APIs and Databases the API depends on.
 
 Using API Endpoints you can:
@@ -113,7 +113,7 @@ What actions you take depend on each of the attack surfaces:
 
 ### Processing sensitive data
 
-[App and API Protection][2] matches known patterns for sensitive data in API requests. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
+[App and API Protection][2] matches known patterns for sensitive data in API request and responses. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
 
 The matching occurs within your application, and none of the sensitive data is sent to Datadog.
 
