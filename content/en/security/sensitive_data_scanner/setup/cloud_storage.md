@@ -18,7 +18,7 @@ further_reading:
 Scanning support for Amazon S3 buckets and RDS instances is available for Preview. To enroll, click Request Access.
 {{< /callout >}}
 
-Deploy Datadog Agentless scanners in your environment to scan for sensitive information in your cloud storage resources. Agentless scanners are EC2 instances that you control and run within your environment. The scanners use [Remote Configuration][1] to retrieve a list of S3 buckets as well as their dependencies. They scan many types of text files such as CSVs and JSONs in your S3 buckets.
+Deploy Datadog Agentless scanners in your environment to scan for sensitive information in your cloud storage resources. Agentless scanners are EC2 instances that you control and run within your environment. The scanners use [Remote Configuration][1] to retrieve a list of S3 buckets as well as their dependencies. They scan many types of text files, such as CSVs and JSONs in your S3 buckets.
 
 When an Agentless scanner finds a match with any of the [SDS library rules][2], the scanning instance sends the rule type and location of the match to Datadog. **Note**: Cloud storage resources and their files are only read in your environment - no sensitive data that was scanned is sent back to Datadog.
 
