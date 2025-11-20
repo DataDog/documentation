@@ -26,7 +26,7 @@ When creating a new form, you can use a blueprint or start from scratch. Bluepri
 {{< img src="/actions/forms/forms-blueprint-selected.png" alt="The form creation page with the IDP Feedback Survey selected" style="width:100%;" >}}
 
 To create a new form: 
-1. On the [Forms][1] page, click **+ New Form**.
+1. On the [Forms][1] page, click **New Form**.
 1. Select a blueprint or **Start with a blank form**, then click **Continue**.
 1. Optionally, name your form and give it a description. Click **Continue**.
 1. New forms are auto-populated with placeholder components. To edit the form, click a placeholder component, or click the **<i class="icon-plus-circled-wui"></i>** icon to add a new component. Component types include short answer, paragraph, dropdown, checkboxes, ratings, and toggle. The following table lists the elements available inside components:
