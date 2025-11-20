@@ -506,13 +506,13 @@ Para editar una grabación del navegador después de guardarla:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/synthetics/browser_tests/advanced_options/
-[2]: /es/synthetics/browser_tests/advanced_options/#timeout
+[2]: /es/synthetics/browser_tests/advanced_options/#tiempo-de-espera
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /es/synthetics/guide/email-validation/#create-an-email-variable
+[4]: /es/synthetics/guide/email-validation/#crear-una-variable-de-correo-electrónico
 [5]: /es/synthetics/settings/
 [6]: /es/synthetics/guide/browser-tests-totp
-[7]: /es/synthetics/guide/email-validation/#confirm-the-email-was-sent
-[8]: /es/synthetics/guide/email-validation/#navigate-through-links-in-an-email
+[7]: /es/synthetics/guide/email-validation/#confirmar-que-se-ha-enviado-el-correo-electrónico
+[8]: /es/synthetics/guide/email-validation/#desplazarse-por-los-enlaces-de-un-correo-electrónico
 [9]: /es/synthetics/browser_tests/advanced_options/#subtests
 [10]: /es/synthetics/guide/reusing-browser-test-journeys
 [11]: https://restfulapi.net/json-jsonpath/
