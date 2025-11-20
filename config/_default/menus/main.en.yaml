@@ -6888,6 +6888,11 @@ menu:
       parent: cspm
       identifier: cspm_kspm
       weight: 306
+    - name: Data Security Posture Management
+      url: security/cloud_security_management/misconfigurations/dspm
+      parent: cspm
+      identifier: cspm_dspm
+      weight: 307
     - name: Identity Risks
       url: security/cloud_security_management/identity_risks/
       parent: csm
