@@ -81,7 +81,7 @@ To view form responses in a table format:
 ### View in a dashboard
 
 To visualize form responses in a dashboard:
-1. Navigate to [DDSQL Editor][13].
+1. Navigate to the [DDSQL Editor][13].
 1. In the **Data** tab, click **Actions Datastores**.
 1. Select the datastore associated with your form, then click **Insert into editor**.
 1. Optionally, click the query's title to rename it. 
