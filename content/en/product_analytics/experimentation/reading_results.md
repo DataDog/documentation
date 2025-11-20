@@ -1,6 +1,6 @@
 ---
 title: Reading Experiment Results
-description: Learn to read and understand the results of your Experimentation.
+description: Read and understand the results of your Experimentation.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
@@ -12,13 +12,15 @@ further_reading:
 
 ## Overview 
 
-After launching your experiment, you can immediately see the impact on the metrics you’ve selected. You can also add more metrics to your experiment, organize metrics into groups, and view related sessions.
+After launching your experiment, Datadog immediately begins calculating results for the metrics you selected. You can add additional metrics at any time, organize metrics into groups, and explore related user sessions to understand the impact of each variant.
 
 {{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
 
 
 ## Confidence intervals
-For each metric, you can see the average per-subject (typically user) metric value in both the control and treatment. You can also see the relative lift and the associated confidence interval. The relative lift is defined as:
+For each metric, Datadog shows the average per-subject value (typically per user) for both the control and treatment variants. It also reports the relative lift and the associated confidence interval.
+
+The relative lift is defined as:
 
 ```
                       (Average metric value per treatment subject - Average metric value per control subject)
@@ -26,7 +28,7 @@ For each metric, you can see the average per-subject (typically user) metric val
                                        (Average metric value per control subject)
 ```
 
-The confidence interval around the estimated lift shows the range of lifts that could be plausibly supported by the data from the experiment. Lifts outside that confidence interval are possible, but unlikely. 
+The confidence interval represents the range of lift values that are plausibly supported by the experiment’s data. While the true lift could fall outside this range, values inside the interval are statistically more consistent with the observed data.
 
 `CLARIFY THIS`: If the entire confidence interval is above zero, then it is unlikely for the true lift to be zero, or negative: the experiment data indicates that the treatment had a positive effect on that metric (and vice versa if the entire confidence interval is below zero).
 
@@ -37,7 +39,7 @@ To dive deeper into experiment results, hover over a metric and click **Chart**.
 ### Time series
 The time series chart shows how the percent lift and precision have changed over the duration of the experiment. The relative lift is shown as the center line, and the confidence interval bands are shown in the lower opacity shading.
 
-If there is not enough data to calculate the confidence of a lift, then the bands will be shown in a gradient fading out from the center line.
+If there is not enough data to calculate the confidence of a lift, the bands are shown in a gradient fading out from the center line.
 
 <!-- [SCREENSHOT OF TIME SERIES RESULTS] -->
 {{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
