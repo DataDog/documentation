@@ -160,22 +160,22 @@ To schedule a report on an analysis cell:
 
    {{< img src="/notebooks/analysis_features/schedule_report_from_cell.png" alt="A report view showing a dropdown menu with the 'Schedule report' option highlighted" style="width:100%;" >}}
 
-1. In the configuration modal that opens, set a schedule to determine when and how often the report is sent.
+2. In the configuration modal that opens, set a schedule to determine when and how often the report is sent.
 
-1. Define a name for the report, and select a time frame to set the range of data displayed in the report. 
+3. Define a name for the report, and select a time frame to set the range of data displayed in the report. 
 
 {{< img src="/notebooks/analysis_features/configure_report.png" alt="Report configuration section of report scheduling modal" style="width:100%;" >}}
 
    **Note**: If the analysis cell has not yet been published as a dataset, you can specify the name of the dataset created when the report is scheduled.
 
-1. Add email recipients. **Note**: Only Enterprise and Pro accounts can send reports to email addresses that don't correspond to registered Datadog users.
+4. Add email recipients. **Note**: Only Enterprise and Pro accounts can send reports to email addresses that don't correspond to registered Datadog users.
     - The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it. 
     - To see the report before saving the schedule, click **Send Test Email**. 
     
     Example report email:
     {{< img src="/notebooks/analysis_features/report_email.png" alt="Example report email" style="width:100%;" >}}
 
-1. Add Slack recipients. 
+5. Add Slack recipients. 
    - Click on the **Slack** tab and select the Slack workspace and channel from the available dropdowns. All public channels within the Slack workspace are listed automatically. 
    
         **Note**: If you do not see any available workspaces, ensure the Datadog [Slack Integration][6] is installed. 
@@ -184,13 +184,11 @@ To schedule a report on an analysis cell:
    - To send a test message to Slack, add a channel recipient and click **Send Test Message.**
 
    {{< img src="/notebooks/analysis_features/add_slack_recipients.png" alt="Email recipient section of report scheduling modal" style="width:100%;" >}}
-1.  Save your schedule.
+6.  Save your schedule.
 
 You can view, search, edit, and delete existing report schedules from the **Reports** tab.
 
 {{< img src="/notebooks/analysis_features/reports_page.png" alt="Filtered view of the Reports tab" style="width:100%;" >}}
-1.  Save your schedule.
-1.  Save your schedule.
 
 
 **Note**: To schedule reports and view other users’ schedules, users need the **CSV Report Schedules Write** permission. To edit other users’ schedules, users need the **CSV Report Schedules Manage** permission. These permissions can be granted by a user with the **Org Management** permission.
