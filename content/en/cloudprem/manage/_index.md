@@ -3,8 +3,8 @@ title: Manage and monitor CloudPrem
 description: Learn how to monitor, maintain, and operate your CloudPrem deployment
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Retention policy
@@ -47,6 +47,8 @@ These metrics are exported by [DogStatsD][1]. You can either:
 
 Configure either option with your organization's API key to export these metrics. As soon as your CloudPrem cluster is connected to Datadog, the OOTB dashboard is automatically created, and you can access it from your [Dashboards list][2].
 
+<div class="alert alert-info">To display distribution metrics on your dashboard, you must <a href="/metrics/distributions/#enabling-advanced-query-functionality">enable advanced query functionality</a>.</div>
+
 ### Data Collected
 
 | Metric | Description |
@@ -54,6 +56,7 @@ Configure either option with your organization's API key to export these metrics
 | **indexed_events.count**<br/>(Counter) | Number of indexed events |
 | **indexed_events_bytes.count**<br/>(Counter) | Number of indexed bytes |
 | **ingest_requests.count**<br/>(Counter) | Number of ingest requests |
+| **ingest_requests.duration_seconds**<br/>(Histogram) | Ingest request latency |
 | **object_storage_delete_requests.count**<br/>(Counter) | Number of delete requests on object storage |
 | **object_storage_get_requests.count**<br/>(Counter) | Number of get requests on object storage |
 | **object_storage_get_requests_bytes.count**<br/>(Counter) | Total bytes read from object storage using GET requests |

@@ -81,7 +81,7 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 {{% collapse-content title="Callout value" level="h3" %}}
@@ -954,7 +954,7 @@ Type
 
 ### Sorting
 
-Select the column and direction for default table sorting. 
+Select the column and direction for default table sorting.
 Column
 : The column to sort by.<br>
 **Value**: column name
@@ -1216,7 +1216,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [2]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=datadog_metrics_and_monitors&viewMode=preview
 [3]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ec2_instance_manager&viewMode=preview
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview
-[5]: https://datadoghq.slack.com/
+[5]: https://chat.datadoghq.com/
 [6]: /service_management/app_builder/components/tables/
 [7]: /service_management/app_builder/expressions
 [8]: https://www.markdownguide.org/basic-syntax/

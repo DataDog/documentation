@@ -8,6 +8,14 @@ aliases:
 - /integrations/guide/azure-troubleshooting/
 - /integrations/guide/powered-down-azure-vm-on-infrastructure-list/
 - /integrations/guide/azure-count-metric/
+- /integrations/guide/azure-status-metric
+- /integrations/faq/azure-vm-status-is-not-reporting
+- /integrations/faq/azure-status-metric
+- /integrations/faq/azure-count-metric
+- /integrations/faq/azure-troubleshooting
+- /integrations/faq/azure-vms-are-showing-up-in-the-app-but-not-reporting-metrics
+- /integrations/faq/my-Azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list
+- /integrations/faq/powershell-command-to-install-azure-datadog-extension
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
   tag: "Documentation"
@@ -291,6 +299,34 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
     {{< img src="integrations/guide/azure_troubleshooting/azure_enable_diagnostics.png" alt="azure diagnostics settings overview displayed with No storage account highlighted under Pick a storage account and enable guest level monitoring enabled" style="width:70%">}}
 
+## Discrepancy between your data in Azure and Datadog
+
+Datadog's Azure integration collects all metrics from [Azure Monitor][14]. Metrics are collected with all available dimensions (which are mapped to tags in Datadog), the highest time granularity, and the primary aggregation type.
+
+The sections below describe two important distinctions to be aware of, as well as steps to [reconcile the discrepancy](#reconcile-the-discrepancy).
+
+### 1. Time aggregation
+
+Datadog displays raw data from Azure in per-second values, regardless of the time frame selected in Azure. That can make Datadog's value appear lower than the value Azure displays. See [Time aggregation][15] in the metric documentation for more information.
+
+### 2. Space aggregation
+
+[Space aggregation][20] in Datadog corresponds to the [primary aggregation type][17] of the metric in Azure Monitor. You can find the primary aggregation type from Azure's [Metric Definitions - List][16] API, in the field `primaryAggregationType`.
+
+### Reconcile the discrepancy
+
+1. Graph the metric in [Azure Monitor Metrics Explorer][18], or by going to the resource in Azure and clicking **Monitoring** and then **Metrics** in the left panel.
+2. Graph the metric in the [Datadog Metrics Explorer][19].
+3. Confirm that the query in Azure is scoped identically to the query in Datadog:
+   - Any dimensions used in the Azure metric query should match tags used in the Datadog metric query
+   - The primary aggregation type used in the query should match the Datadog [space aggregator][19]
+   - The time frame should match the time frame in the Datadog Metric Explorer
+4. Hover over a datapoint on the graph to display the timestamp and value.
+
+{{< img src="integrations/guide/azure_advanced_configuration/azure_metric_explorer.png" alt="The Azure Metrics Explorer with the cursor hovering over a point in the graph, and the metric value and timestamp highlighted" >}}
+
+5. Find the same point in time in the Datadog graph and compare the values. If the values are equal, the original discrepancy was due to differences in either time or space aggregation between the two graphs.
+
 ## Automated log collection
 
 ### Naming conflicts
@@ -385,3 +421,10 @@ The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 [11]: /integrations/azure_arc/
 [12]: https://learn.microsoft.com/cli/azure/connectedmachine/extension
 [13]: /logs/guide/azure-event-hub-log-forwarding/
+[14]: https://learn.microsoft.com/azure/azure-monitor/reference/metrics-index
+[15]: /metrics/#time-aggregation
+[16]: https://learn.microsoft.com/rest/api/monitor/metric-definitions/list?view=rest-monitor-2023-10-01
+[17]: https://learn.microsoft.com/azure/azure-monitor/metrics/metrics-aggregation-explained#aggregation-types
+[18]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/metrics
+[19]: https://app.datadoghq.com/metric/explorer
+[20]: /metrics/#space-aggregation

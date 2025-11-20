@@ -70,7 +70,7 @@ window.DD_RUM &&
 </details>
 <br/>
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/
 {{% /tab %}}
 {{% tab "Android" %}}
 
@@ -990,7 +990,7 @@ When performing your investigations, you can also scope your data for `View Name
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors
