@@ -60,9 +60,9 @@ After specifying and aligning your experiment, you can launch your test immediat
 
 
 ## Next steps
-**Defining metrics**: Define the metrics you want to measure during your experimentation.
-**Reading Experiment Results**: Review and explore your Experiment results.
-Learn more about **Minimum Detectable Effects**: Choose an appropriately sized MDE.
+1. **[Defining metrics][2]**: Define the metrics you want to measure during your experimentation.
+1. **[Reading Experiment Results][5]**: Review and explore your Experiment results.
+1. Learn more about **[Minimum Detectable Effects][3]**: Choose an appropriately sized MDE.
 
 
 
@@ -85,3 +85,4 @@ Learn more about **Minimum Detectable Effects**: Choose an appropriately sized M
 [2]: /product_analytics/experimentation/defining_metrics
 [3]: /product_analytics/experimentation/minimum_detectable_effect
 [4]: /getting_started/feature_flags/
+[5]: /product_analytics/experimentation/reading_results
