@@ -3,17 +3,24 @@ title: Rehydration
 description: Learn about using Rehydration to pull archived logs and processing them in Observability Pipelines.
 disable_toc: false
 private: true
+further_reading:
+- link: "/observability_pipelines/processors/"
+  tag: "Documentation"
+  text: "Learn more about processors"
+- link: "/observability_pipelines/packs/"
+  tag: "Documentation"
+  text: "Learn more about Packs"
 ---
 
 ## Overview
 
 Rehydration for Observability Pipelines enables you to pull archived logs from object storage and process them in Observability Pipelines. This gives you consistent access to historical context without having to rebuild workflows or modify ingestion pipelines.
 
-Organizations often store large volumes of logs in cost-efficient, long-term archives to control spend and meet compliance requirements. However, when there is a security incident, audit request, or operational investigation historical data often becomes difficult to access. Retrieving archived logs from cold storage can be slow, manual, and disruptive, requiring ad-hoc scripts, decompression, or dedicated engineering effort. Rehydration for Observability Pipelines resolves these issues.
+Organizations often store large volumes of logs in cost-efficient, long-term archives to control spend and meet compliance requirements. However, historical data often becomes difficult to access when there is a security incident, audit request, or operational investigation. Retrieving archived logs from cold storage can be slow, manual, and disruptive, requiring ad-hoc scripts, decompression, or dedicated engineering effort. Rehydration for Observability Pipelines resolves these issues.
 
 ## How does Rehydration work?
 
-Rehydration provides an automated workflow for retrieving and reprocessing archived logs stored in cost-optimized object stores, such as Amazon S3, Google Cloud Storage, and Azure Blob Storage. This helps you balance storage efficiency with quick access to historical data.
+Rehydration provides an automated workflow for retrieving and reprocessing archived logs stored in object stores, such as Amazon S3, Google Cloud Storage, and Azure Blob Storage. This helps you balance storage efficiency with quick access to historical data.
 
 With Rehydration, you can:
 
@@ -25,7 +32,7 @@ Pull only the data you need for investigations, audits, troubleshooting, or pipe
 
 Specify the exact time frame or subset of events you need to prevent moving or processing data unnecessarily.
 
-### Process historical logs with Observability Pipelines and Packs
+### Process historical logs with Observability Pipelines
 
 Rehydrated logs go through the same parsing, enrichment, normalization, and routing logic applied to live log streams.
 
@@ -38,8 +45,12 @@ This ensures:
 
 ### Route rehydrated data to any supported destination
 
-You can send processed historical logs to SIEMs, data lakes, analytics platforms, or any Observability Pipelines destinations.
+You can send processed historical logs to SIEMs, data lakes, analytics platforms, or any Observability Pipelines destination.
 
 ### Eliminate manual handling
 
 Rehydration provides a structured, predictable way to pull archived data back into your observability platform, so you don't have to use custom scripts, manual decompression, or ad-hoc retrieval processes.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
