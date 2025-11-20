@@ -75,7 +75,7 @@ Audit Trail event visibility depends on your plan. When Audit Trail is enabled i
 
 ### Send a remote flare
 
-After you enable Remote Configuration on an Agent, you can send a flare from Datadog. For instructions on sending a flare, see [Send a flare from the Datadog site][7].
+You can send a flare from the Datadog Agent or DDOT Collector after enabling Remote Configuration on the Agent. For instructions on sending a flare, see [Send a flare from the Datadog site][7].
 
 When contacting Datadog Support with Remote Configuration enabled for an Agent, the Support team may initiate a flare from your environment in order to better assist you in a timely manner. Flares provide troubleshooting information to Datadog Support to help you resolve your issue.
 
