@@ -22,7 +22,7 @@ Real User Monitoring allows you to create alerts which notify you about atypical
 
 To create a RUM monitor in Datadog, first navigate to [Monitors > New Monitor > Real User Monitoring][2].
 
-From there, you can:
+From there, you can click **New Monitor**, then:
 
 - **[Start with a template][3]**: Select a pre-built template for common scenarios like error rates, performance vitals, or availability checks
 - **Build a custom monitor**: Choose from out-of-the-box metrics or custom metrics, then scope to your application, specific pages, or views
