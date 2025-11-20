@@ -1,5 +1,5 @@
 ---
-title: Container Monitoring
+title: Containers
 description: Install & configure the Agent to collect data on containerized infrastructures
 further_reading:
     - link: "https://www.datadoghq.com/container-report/"
@@ -12,18 +12,46 @@ cascade:
         rank: 70
 ---
 
-## Overview
+To maintain the health, performance, and security of your containerized environments, you can install the Datadog Agent and use [Datadog Container Monitoring][1].
 
-Container Monitoring provides real-time visibility into the health and performance of containerized environments.
+## Get started
 
-{{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/containers/docker">}}<u>Docker</u>: Install and configure the Datadog Agent on Docker.{{< /nextlink >}}
-  {{< nextlink href="/containers/kubernetes">}}<u>Kubernetes</u>: Install and configure the Datadog Agent on Kubernetes. {{< /nextlink >}}
-  {{< nextlink href="/containers/cluster_agent">}}<u>Cluster Agent</u>: Install and configure the Cluster Agent for Kubernetes, a version of the Datadog Agent built to efficiently gather monitoring data from across an orchestrated cluster.{{< /nextlink >}}
-  {{< nextlink href="/containers/amazon_ecs">}}<u>Amazon ECS</u>: Install and configure the Datadog Agent on Amazon ECS.{{< /nextlink >}}
-  {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: Install and configure the Datadog Agent with Amazon ECS on AWS Fargate{{< /nextlink >}}
+Log into Datadog and use the [Install Agents][2] page to install the Datadog Agent on your selected platform.
+
+## Datadog Container Monitoring
+
+{{< whatsnext desc="These pages discuss using Datadog's UI to monitor containers and clusters, track resource utilization, autoscale workloads, and remediate issues:">}}
+  {{< nextlink href="/infrastructure/containers/explorer">}}<u>Containers Explorer</u>: Use and configure Containers Explorer for real-time visibility into your containers. {{< /nextlink >}}
+  {{< nextlink href="/infrastructure/containers/container_images">}}<u>Container Images Explorer</u>: Use and configure Containers Images Explorer to monitor the container {{< /nextlink >}}
+  {{< nextlink href="/infrastructure/containers/kubernetes_explorer">}}<u>Kubernetes Explorer</u>: Using and configuring the Kubernetes Explorer page {{< /nextlink >}}
+  {{< nextlink href="/infrastructure/containers/kubernetes_resource_utilization">}}<u>Kubernetes Resource Utilization</u>: Using and configuring the Kubernetes Resource Utilization page {{< /nextlink >}}
+  {{< nextlink href="/containers/autoscaling">}}<u>Kubernetes Autoscaling</u>: Using and configuring the Kubernetes Autoscaling page {{< /nextlink >}}
+  {{< nextlink href="/containers/bits_ai_kubernetes_remediation">}}<u>Kubernetes Remediation</u>: Using and configuring the Kubernetes Remediation page {{< /nextlink >}}
+  {{< nextlink href="/infrastructure/containers/amazon_elastic_container_explorer">}}<u>ECS Explorer</u>: Using and configuring the ECS Explorer page {{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Docker-based environments
+
+{{< whatsnext desc="These pages discuss installing and configuring the Datadog Agent in a Docker-based environment (Docker, containerd, podman):">}}
+  {{< nextlink href="/infrastructure/containers/explorer">}}<u>Containers Explorer</u>: Use and configure Containers Explorer for real-time visibility into your containers. {{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Kubernetes environments
+
+{{< whatsnext desc="These pages discuss installing and configuring the Datadog Agent in a Kubernetes environment:">}}
+  {{< nextlink href="/infrastructure/containers/explorer">}}<u>Containers Explorer</u>: Use and configure Containers Explorer for real-time visibility into your containers. {{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Amazon ECS
+
+{{< whatsnext desc="These pages discuss installing and configuring the Datadog Agent on Amazon ECS:">}}
+  {{< nextlink href="/infrastructure/containers/explorer">}}<u>Containers Explorer</u>: Use and configure Containers Explorer for real-time visibility into your containers. {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/containers
+[2]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+

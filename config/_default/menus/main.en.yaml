@@ -3066,52 +3066,47 @@ menu:
       parent: infrastructure_heading
       weight: 50000
       pre: container
-    - name: Monitoring Containers
+    - name: Container Monitoring
       url: infrastructure/containers/
       parent: containers
       identifier: infrastructure_livecontainers
       weight: 1
-    - name: Configuration
-      url: infrastructure/containers/configuration
+    - name: Containers Explorer
+      url: infrastructure/containers/explorer
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_configuration
       weight: 101
-    - name: Container Images View
+    - name: Container Images Explorer
       url: infrastructure/containers/container_images
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_container_images
       weight: 102
-    - name: Orchestrator Explorer
-      url: infrastructure/containers/orchestrator_explorer
+    - name: Kubernetes Explorer
+      url: infrastructure/containers/kubernetes_explorer
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_explorer
       weight: 103
-    - name: Kubernetes Resource Utilization
+    - name: Resource Utilization
       url: infrastructure/containers/kubernetes_resource_utilization
-      parent: infrastructure_livecontainers
+      parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_resource_utilization
-      weight: 104
-    - name: Kubernetes Autoscaling
-      url: containers/monitoring/autoscaling
-      parent: infrastructure_livecontainers
+      weight: 10301
+    - name: Autoscaling
+      url: containers/autoscaling
+      parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_autoscaling
-      weight: 105
-    - name: Amazon Elastic Container Explorer
+      weight: 10302
+    - name: Remediation
+      url: containers/bits_ai_kubernetes_remediation
+      parent: infrastructure_livecontainers_explorer
+      identifier: containers_autoscaling
+      weight: 30303
+    - name: ECS Explorer
       url: infrastructure/containers/amazon_elastic_container_explorer
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
       weight: 106
-    - name: Autoscaling
-      url: containers/autoscaling
-      parent: containers
-      identifier: containers_autoscaling
-      weight: 2
-    - name: Remediation
-      url: containers/bits_ai_kubernetes_remediation
-      parent: containers
-      identifier: containers_autoscaling
-      weight: 3
-    - name: Docker and other runtimes
+    - name: Docker-based
       url: containers/docker/
       parent: containers
       identifier: containers_docker
