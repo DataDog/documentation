@@ -162,7 +162,7 @@ In the configuration modal that opens, set a schedule to determine when and how 
 
 {{< img src="/notebooks/analysis_features/select_schedule.png" alt="Schedule configuration section of report scheduling modal" style="width:100%;" >}}
 
-Define the report title and set a time frame to determine the range of time displayed in the report. 
+1. Define a name for the report, and select a time frame to set the range of data displayed in the report. 
 
 {{< img src="/notebooks/analysis_features/configure_report.png" alt="Report configuration section of report scheduling modal" style="width:100%;" >}}
 
