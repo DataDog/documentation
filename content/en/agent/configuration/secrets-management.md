@@ -661,7 +661,7 @@ api_key: ENC[<secret_handle>]
 secret_refresh_on_api_key_failure_interval: 5
 ```
 
-The interval is the interval of time between automatic refresh attempts. Setting it to `0` disables this feature (default).
+The interval is the interval of time between automatic refresh attempts. Set to `0` to disable (default).
 
 ### Enabling DDOT collector refresh
 If you are using [DDOT collector][6] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
