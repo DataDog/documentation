@@ -11,40 +11,37 @@ further_reading:
 ---
 
 ## Overview
-A Minimum Detectable Effect (MDE) is a core concept in experimentation that explains (`CALCULATES?`) the smallest difference that you are able to detect in a metric between your experiment’s variants. In general, MDEs can be defined in absolute terms (for example, a $1,000 increase in revenue) or relative terms (a 10% increase in revenue). Datadog defines MDEs in relative terms, that is, as percentage lifts relative to the control.
+A Minimum Detectable Effect (MDE) is the smallest change you can detect between experiment variants for a given metric. MDEs can be absolute (for example, a $1,000 increase) or relative (for example, a 10% increase). Datadog uses relative MDEs, expressed as percentage change from the control.
 
-## What is the difference between a true and a measured effect? 
-To understand Minimum Detectable Effects, it is essential to recognize the difference between the true effect of a variant and the measured effect. 
+## Differences between true and measured effects? 
+To understand Minimum Detectable Effects, it's important to distinguish between the true effect of a variant and the measured effect observed in an experiment. 
 
-The true effect of a variant refers to the lift that would be observed if we could collect an infinite amount of experimental data. As that is impossible, the next best step is to draw conclusions using imprecise(`REMOVE THIS WORD?`) measured effects. 
+The true effect refers to the lift you would observe if you could collect an infinite amount of data. Because that isn’t possible, experiments estimate this value using measured effects, which are subject to randomness. As a result, a measured effect may be smaller or larger than the true effect, and it may even have the opposite sign.
 
-The measured effect may be smaller than the true effect, or it may be larger than the true effect. It may have the same sign as the true effect, or the opposite sign.
 
 MDE (`or DATADOG?`) uses statistics to draw conclusions about true effects using data from the measured effects.
 
-The Minimum Detectable Effect refers to the smallest true effect that will **likely** result in a statistically significant experiment result. 
+Statistics allow us to draw conclusions about true effects from these measured effects. The Minimum Detectable Effect is the smallest true effect that is likely to result in a statistically significant outcome.
 
-**Likely** in this case refers to a specific number: the experiment’s power. **Power** is the percent of the time that an experiment will yield a statistically significant result under the assumption that the true effect is exactly equal to the MDE. Power is typically set to 80%. This means that regardless of experiments’ measured effects, which could be anything, 80% of true effects equal to the MDE being successfully detected.
+In this context, _likely_ corresponds to the experiment’s power. _Power_ is the probability that an experiment will detect a statistically significant result if the true effect is exactly equal to the MDE. Power is typically set to 80%. This means that if the true effect equals the MDE, the experiment will detect it at least 80% of the time, regardless of how much measured effects vary.
 
 For example, if you’re designing an experiment to improve a service’s sign-up rate, setting a relative MDE of 10% means you’re designing the experiment to detect a 10% or greater difference in sign-up rates between variants.
 
-Let’s say the sign-up rate in the control variant is 20%. If the experiment’s power is set to 80%, and the true value of the sign-up rate in the treatment variant is 22% or greater (a 10% relative increase), the experiment will reach statistical significance at least 80% of the time. However, if the true value of the sign-up rate in your treatment group is less than 22%, the experiment will reach statistical significance less than 80% of the time.
+If the control variant’s sign-up rate is 20%, then a true sign-up rate of 22% or higher in the treatment variant (a 10% relative lift) will yield a statistically significant result at least 80% of the time (assuming 80% power). If the true sign-up rate is below 22%, the chance of achieving statistical significance is less than 80%.
 
+## MDEs and sample sizes?
 
-## How are MDEs related to sample size?
+In general, larger sample sizes allow experiments to detect smaller effects. More subjects make it easier to detect small changes between variants. If your organization (or specific experiment) tends to have fewer subjects available, an experiment may need to run for many weeks to reach the sample size required.
 
-In general, the more samples you have in your experiment, the smaller your MDE. In other words, the more subjects are assigned to the experiment, the easier it is to detect small changes between variants. If your organization (or specific experiment) tends to have fewer subjects available, an experiment may need to run for many weeks to reach the sample size required.
+## Choosing an appropriate MDE?
 
-## How should I choose an appropriate MDE?
+Choosing an MDE requires careful consideration and depends on your organization's scale, experiment type, and other factors.
 
-Choosing an MDE is a careful art, and depends on your organization’s scale, the type of experiment, and other potential considerations.
+If the MDE is too large, the experiment may be underpowered, meaning it won’t have enough samples to detect meaningful effects.
 
-Picking an MDE which is too large may lead to an experiment which is underpowered, or lacking a sufficient number of subjects to detect the effect you hope to see.
+If the MDE is too small, the experiment may require excessive traffic or run time, reducing the ability to run parallel experiments and potentially exposing many users to risky changes.
 
-On the other hand, selecting an MDE which is too small may lead to using far too many subjects, limiting your ability to run parallel experiments, or potentially exposing a large share of subjects to a risky change.
-
-One way to pick an MDE is to look at past experiments which tested similar changes. For example, if all experiments within a certain domain in your organization have produced changes of 5%-10%, picking an MDE of about 5% may prove to be a wise choice.
-
+A common way to choose an MDE is to examine results from past experiments. For example, if historical experiments in a particular domain typically yield effects of 5–10%, selecting an MDE near the lower end of that range (such as 5%) can be a reasonable starting point.
 
 
 
