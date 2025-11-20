@@ -26,6 +26,8 @@ To create a metric for your experiment:
 3. Click **Select an Event** to see a list of all of the actions and views collected from the RUM SDK.
 4. Add a metric name and optionally a description. Then, click **Save**.
 
+{{< img src="/product_analytics/experiment/exp_create_metric.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
+
 ## Specify metric aggregation
 
 ### Default metric aggregation 

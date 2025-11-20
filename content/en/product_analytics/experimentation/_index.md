@@ -25,12 +25,14 @@ To create, configure, and launch your experiment, complete the following steps:
 2. Click **+ Create Experiment**.
 3. Enter your experiment name and hypothesis.
 
+{{< img src="/product_analytics/experiment/exp_create_experiment.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
+
 
 ### Step 2 - Add metrics
 
 After you’ve created an experiment, add your primary metric and optional guardrails. See [Defining Metrics][2] for details on how to create metrics.
 
-{{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
+{{< img src="/product_analytics/experiment/exp_decision_metric.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
 
 
 #### Add a sample size calculation (optional)
@@ -43,7 +45,7 @@ For example, if you plan to run an experiment on users who visit the homepage, s
 
 1. Click **Run calculation** to see the [Minimum Detectable Effects][3](MDE) your experiment has on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants.
 
-{{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
+{{< img src="/product_analytics/experiment/exp_sample_size.png" alt="Sleect an entrypoint event to run a sample size calculation" style="width:90%;" >}}
 
 ### Step 3 - Launch your experiment
 
@@ -54,7 +56,7 @@ After specifying and aligning your experiment, you can launch your test immediat
 1. Click **Set up experiment on feature flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout with realtime RUM guardrails. 
 
 
-{{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
+{{< img src="/product_analytics/experiment/exp_feature_flag.png" alt="Set up an experiment on a Feature Flag." style="width:90%;" >}}
 
 
 ## Next steps
