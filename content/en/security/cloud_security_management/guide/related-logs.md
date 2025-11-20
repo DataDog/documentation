@@ -44,6 +44,22 @@ By default, Related Logs looks through the last two weeks of related cloud logs.
 
 If you're using Flex logs, you can the **Include Flex logs** toggle in the **Related Logs** tab to show related cloud logs that are stored as Flex logs.
 
+## Sample generated queries
+
+Here's a sample Logs query that Related Logs automatically generates and runs to find related CloudTrail logs in AWS. In this example, the query looks for logs that relate to a specific EC2 instance:
+
+{{< code-block lang="plaintext" >}}
+source:cloudtrail @recipientAccountId:172597598159 @awsRegion:us-east-1 @readOnly:false -status:error (@eventSource:ec2.amazonaws.com AND (@requestParameters.instanceId:"i-0d52853076ed2a357" OR @requestParameters.instancesSet.items.instanceId:"i-0d52853076ed2a357" OR @responseElements.instancesSet.items.instanceId:"i-0d52853076ed2a357" OR @requestParameters.resourcesSet.items.resourceId:"i-0d52853076ed2a357" OR @responseElements.ReplaceIamInstanceProfileAssociationResponse.iamInstanceProfileAssociation.instanceId:"i-0d52853076ed2a357" OR @responseElements.CreateFleetResponse.fleetInstanceSet.item.instanceIds.item:"i-0d52853076ed2a357" OR @requestParameters.CreateReplaceRootVolumeTaskRequest.InstanceId:"i-0d52853076ed2a357" OR @requestParameters.ModifyInstanceMetadataOptionsRequest.InstanceId:"i-0d52853076ed2a357" OR @serviceEventDetails.instanceIdSet:"i-0d52853076ed2a357" OR @requestParameters.AssociateIamInstanceProfileRequest.InstanceId:"i-0d52853076ed2a357" OR @requestParameters.CreateSnapshotsRequest.InstanceSpecification.InstanceId:"i-0d52853076ed2a357"))
+{{< /code-block >}}
+
+Here's a sample Logs query that Related Logs automatically generates and runs to find related Azure Activity logs. In this example, the query looks for logs that relate to a specific storage account:
+
+{{< code-block lang="plaintext" >}}
+source:azure.* @properties.eventCategory:Administrative @resourceId:(/SUBSCRIPTIONS/FA6CC2AC-1395-5913-1944-F16F8F47EB4D/RESOURCEGROUPS/DEV-RG/PROVIDERS/MICROSOFT.STORAGE/STORAGEACCOUNTS/DEMOSTGACCOUNT OR /SUBSCRIPTIONS/FA6CC2AC-1395-5913-1944-F16F8F47EB4D/RESOURCEGROUPS/DEV-RG/PROVIDERS/MICROSOFT.STORAGE/STORAGEACCOUNTS/DEMOSTGACCOUNT/*) 
+{{< /code-block >}}
+
+
+
 [1]: /security/cloud_security_management/setup/cloudtrail_logs/
 [2]: https://app.datadoghq.com/security/compliance
 [3]: /logs/log_configuration/flex_logs/
