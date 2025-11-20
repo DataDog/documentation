@@ -1,0 +1,4 @@
+feedparser>=6.0.10
+requests>=2.31.0
+ruamel.yaml>=0.17.32
+beautifulsoup4>=4.12.0
