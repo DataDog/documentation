@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/network-path/"
   tag: "Blog"
   text: "Identify slowdowns across your entire network with Datadog Network Path"
+- link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
+  tag: "Blog"
+  text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
 ---
 
 ## Overview
