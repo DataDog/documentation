@@ -60,7 +60,10 @@ Datadog recommends using the [instance profile method][1006] of retrieving secre
 
 ##### Configuration example
 
-Configure the DataDog Agent to use AWS Secrets to resolve secrets using the following configuration:
+{{< tabs >}}
+{{% tab "Agent YAML file" %}}
+
+Configure the Datadog Agent to use AWS Secrets to resolve secrets using the following configuration:
 
 ```yaml
 # datadog.yaml
@@ -68,6 +71,17 @@ secret_backend_type: aws.secrets
 secret_backend_config:
   aws_session:
     aws_region: {regionName}
+```
+
+When using environment variables, convert the configuration to JSON like so:
+
+```yaml
+# datadog.yaml
+secret_backend_type: aws.secrets
+secret_backend_config:
+  aws_session:
+    aws_region: {regionName}
+
 ```
 
 After configuring the Agent to use AWS Secrets, you can reference any secrets in your configurations with `ENC[secretId;secretKey]`. 
@@ -112,6 +126,198 @@ secret_backend_config:
 [1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+Configure the Datadog Agent to use AWS Secrets to resolve secrets in Helm using the following configuration:
+
+##### Integration check
+
+```sh
+datadog: 
+  apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
+  env:
+   - name: DD_SECRET_BACKEND_TYPE
+     value: "aws.secrets"
+   - name: DD_SECRET_BACKEND_CONFIG
+     value: '{"aws_session":{"aws_region":"us-west-2"}}'
+agents:
+  rbac:
+    # IAM role ARN required to grant the Agent permissions to access the AWS secret
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn:<IAM_ROLE_ARN>
+```
+
+<div class="alert alert-info"> You must include the <code>serviceAccountAnnotations</code> to grant the Agent permissions to access the AWS secret. </div>
+
+<br>
+
+
+##### Cluster check: without cluster check runners enabled
+```sh
+datadog: 
+  apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
+  env:
+   - name: DD_SECRET_BACKEND_TYPE
+     value: "aws.secrets"
+   - name: DD_SECRET_BACKEND_CONFIG
+     value: '{"aws_session":{"aws_region":"us-west-2"}}'
+agents:
+  rbac:
+    # IAM role ARN required to grant the Agent permissions to access the AWS secret
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+clusterAgent:  
+  confd:
+  # this is an example
+    <integration name>.yaml: |-
+      cluster_check: true
+      instances:
+        - # some config
+          password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
+```
+
+##### Cluster check: with cluster check runners enabled
+```sh
+datadog: 
+  apiKey: ENC[My-Secrets;datadog-api-key]
+  env:
+   - name: DD_SECRET_BACKEND_TYPE
+     value: "aws.secrets"
+   - name: DD_SECRET_BACKEND_CONFIG
+     value: '{"aws_session":{"aws_region":"us-west-2"}}'
+clusterAgent:
+  confd:
+  # this is an example
+    <integration name>.yaml: |-
+      cluster_check: true
+      instances:
+        - # some config
+          password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
+clusterChecksRunner: 
+  enabled: true
+  env:
+   - name: DD_SECRET_BACKEND_TYPE
+     value: "aws.secrets"
+   - name: DD_SECRET_BACKEND_CONFIG
+     value: '{"aws_session":{"aws_region":"us-west-2"}}'
+  rbac:
+    # IAM role ARN required to grant the Agent permissions to access the AWS secret
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+```
+
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+
+Configure the Datadog Agent to use AWS Secrets to resolve secrets with the Datadog Operator using the following configuration:
+
+##### Integration check
+
+
+```sh
+spec:
+  global:
+    credentials:
+      apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
+  override:
+    nodeAgent:
+      env:
+       - name: DD_SECRET_BACKEND_TYPE
+         value: "aws.secrets"
+       - name: DD_SECRET_BACKEND_CONFIG
+         value: '{"aws_session":{"aws_region":"us-west-2"}}'
+      # IAM role ARN is required to grant the Agent permissions to access the AWS secret
+      serviceAccountAnnotations:
+        eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+```
+
+<div class="alert alert-info"> You must include the <code>serviceAccountAnnotations</code> to grant the Agent permissions to access the AWS secret. </div>
+
+<br>
+
+
+##### Cluster check: without cluster check runners enabled
+
+```sh
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
+  override:
+    nodeAgent:
+      env:
+       - name: DD_SECRET_BACKEND_TYPE
+         value: "aws.secrets"
+       - name: DD_SECRET_BACKEND_CONFIG
+         value: '{"aws_session":{"aws_region":"us-west-2"}}'
+      # IAM role ARN required to grant the Agent permissions to access the AWS secret
+      serviceAccountAnnotations:
+        eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+    clusterAgent:  
+      extraConfd:
+        configDataMap:
+        # this is an example
+          <integration name>.yaml: |-
+            cluster_check: true
+            instances:
+              - # some config
+                password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
+```
+
+<br>
+
+##### Cluster check: with cluster check runners enabled
+
+```sh
+spec:
+  global:
+    credentials:
+      apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
+  features:
+    clusterChecks:
+      useClusterChecksRunners: true
+  override:
+    nodeAgent:
+      env:
+       - name: DD_SECRET_BACKEND_TYPE
+         value: "aws.secrets"
+       - name: DD_SECRET_BACKEND_CONFIG
+         value: '{"aws_session":{"aws_region":"us-west-2"}}'
+      # required to grant the Agent permissions to access the AWS secret
+      serviceAccountAnnotations:
+        eks.amazonaws.com/role-arn: <IAM role arn>
+    clusterChecksRunner:
+      env:
+       - name: DD_SECRET_BACKEND_TYPE
+         value: "aws.secrets"
+       - name: DD_SECRET_BACKEND_CONFIG
+         value: '{"aws_session":{"aws_region":"us-west-2"}}'
+      # IAM role ARN required to grant the Agent permissions to access the AWS secret
+      serviceAccountAnnotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::659775407889:policy/MrMcPatSecretsAccessPolicy
+    clusterAgent:  
+      extraConfd:
+        configDataMap:
+        # this is an example
+          <integration name>.yaml: |-
+            cluster_check: true
+            instances:
+              - # some config
+                password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
+
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 {{% /collapse-content %}} 
 
 {{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-ssm" %}}
@@ -151,7 +357,6 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 
 [200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [201]: https://docs.aws.amazon.com/systems-manager/
-
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
