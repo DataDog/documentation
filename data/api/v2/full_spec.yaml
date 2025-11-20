@@ -1165,6 +1165,24 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Forbidden
+    HTTPCDGatesBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPCDGatesBadRequestResponse'
+      description: Bad request.
+    HTTPCDGatesNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPCDGatesNotFoundResponse'
+      description: Deployment gate not found.
+    HTTPCDRulesNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPCDRulesNotFoundResponse'
+      description: Deployment rule not found.
     NotAuthorizedResponse:
       content:
         application/json:
@@ -12661,6 +12679,91 @@ components:
       required:
       - data
       type: object
+    CreateDeploymentGateParams:
+      description: Parameters for creating a deployment gate.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDeploymentGateParamsData'
+      required:
+      - data
+      type: object
+    CreateDeploymentGateParamsData:
+      description: Parameters for creating a deployment gate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDeploymentGateParamsDataAttributes'
+        type:
+          $ref: '#/components/schemas/DeploymentGateDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    CreateDeploymentGateParamsDataAttributes:
+      description: Parameters for creating a deployment gate.
+      properties:
+        dry_run:
+          default: false
+          description: Whether this gate is run in dry-run mode.
+          example: false
+          type: boolean
+        env:
+          description: The environment of the deployment gate.
+          example: production
+          type: string
+        identifier:
+          default: default
+          description: The identifier of the deployment gate.
+          example: pre
+          type: string
+        service:
+          description: The service of the deployment gate.
+          example: my-service
+          type: string
+      required:
+      - env
+      - service
+      type: object
+    CreateDeploymentRuleParams:
+      description: Parameters for creating a deployment rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDeploymentRuleParamsData'
+      type: object
+    CreateDeploymentRuleParamsData:
+      description: Parameters for creating a deployment rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDeploymentRuleParamsDataAttributes'
+        type:
+          $ref: '#/components/schemas/DeploymentRuleDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    CreateDeploymentRuleParamsDataAttributes:
+      description: Parameters for creating a deployment rule.
+      properties:
+        dry_run:
+          default: false
+          description: Whether this rule is run in dry-run mode.
+          example: false
+          type: boolean
+        name:
+          description: The name of the deployment rule.
+          example: My deployment rule
+          type: string
+        options:
+          $ref: '#/components/schemas/DeploymentRulesOptions'
+        type:
+          description: The type of the deployment rule (faulty_deployment_detection
+            or monitor).
+          example: faulty_deployment_detection
+          type: string
+      required:
+      - name
+      - options
+      - type
+      type: object
     CreateIncidentNotificationRuleRequest:
       description: Create request for a notification rule.
       properties:
@@ -13070,30 +13173,6 @@ components:
     CreateTableRequest:
       description: Request body for creating a new reference table from a local file
         or cloud storage.
-      example:
-        data:
-          attributes:
-            description: this is a cloud table generated via a cloud bucket sync
-            file_metadata:
-              access_details:
-                aws_detail:
-                  aws_account_id: test-account-id
-                  aws_bucket_name: test-bucket
-                  file_path: test_rt.csv
-              sync_enabled: true
-            schema:
-              fields:
-              - name: name
-                type: STRING
-              - name: account_id
-                type: STRING
-              primary_keys:
-              - account_id
-            source: S3
-            table_name: test_reference_table
-            tags:
-            - test_tag
-          type: reference_table
       properties:
         data:
           $ref: '#/components/schemas/CreateTableRequestData'
@@ -13315,6 +13394,17 @@ components:
     CreateUploadRequest:
       description: Request to create an upload for a file to be ingested into a reference
         table.
+      example:
+        data:
+          attributes:
+            headers:
+            - product_id
+            - product_name
+            - price
+            part_count: 3
+            part_size: 10000000
+            table_name: my_products_table
+          type: upload
       properties:
         data:
           $ref: '#/components/schemas/CreateUploadRequestData'
@@ -16239,6 +16329,113 @@ components:
           format: uuid
           type: string
       type: object
+    DeploymentGateDataType:
+      description: Deployment gate resource type.
+      enum:
+      - deployment_gate
+      example: deployment_gate
+      type: string
+      x-enum-varnames:
+      - DEPLOYMENT_GATE
+    DeploymentGateResponse:
+      description: Response for a deployment gate.
+      properties:
+        data:
+          $ref: '#/components/schemas/DeploymentGateResponseData'
+      type: object
+    DeploymentGateResponseData:
+      description: Data for a deployment gate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeploymentGateResponseDataAttributes'
+        id:
+          description: Unique identifier of the deployment gate.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        type:
+          $ref: '#/components/schemas/DeploymentGateDataType'
+      required:
+      - type
+      - attributes
+      - id
+      type: object
+    DeploymentGateResponseDataAttributes:
+      description: Basic information about a deployment gate.
+      properties:
+        created_at:
+          description: The timestamp when the deployment gate was created.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/DeploymentGateResponseDataAttributesCreatedBy'
+        dry_run:
+          description: Whether this gate is run in dry-run mode.
+          example: false
+          type: boolean
+        env:
+          description: The environment of the deployment gate.
+          example: production
+          type: string
+        identifier:
+          description: The identifier of the deployment gate.
+          example: pre
+          type: string
+        service:
+          description: The service of the deployment gate.
+          example: my-service
+          type: string
+        updated_at:
+          description: The timestamp when the deployment gate was last updated.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        updated_by:
+          $ref: '#/components/schemas/DeploymentGateResponseDataAttributesUpdatedBy'
+      required:
+      - created_at
+      - created_by
+      - dry_run
+      - env
+      - identifier
+      - service
+      type: object
+    DeploymentGateResponseDataAttributesCreatedBy:
+      description: Information about the user who created the deployment gate.
+      properties:
+        handle:
+          description: The handle of the user who created the deployment rule.
+          example: test-user
+          type: string
+        id:
+          description: The ID of the user who created the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the user who created the deployment rule.
+          example: Test User
+          type: string
+      required:
+      - id
+      type: object
+    DeploymentGateResponseDataAttributesUpdatedBy:
+      description: Information about the user who updated the deployment gate.
+      properties:
+        handle:
+          description: The handle of the user who updated the deployment rule.
+          example: test-user
+          type: string
+        id:
+          description: The ID of the user who updated the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the user who updated the deployment rule.
+          example: Test User
+          type: string
+      required:
+      - id
+      type: object
     DeploymentMetadata:
       description: Metadata object containing the publication creation information.
       properties:
@@ -16278,6 +16475,164 @@ components:
         type:
           $ref: '#/components/schemas/AppDeploymentType'
       type: object
+    DeploymentRuleDataType:
+      description: Deployment rule resource type.
+      enum:
+      - deployment_rule
+      example: deployment_rule
+      type: string
+      x-enum-varnames:
+      - DEPLOYMENT_RULE
+    DeploymentRuleOptionsFaultyDeploymentDetection:
+      additionalProperties: false
+      description: Faulty deployment detection options for deployment rules.
+      properties:
+        duration:
+          description: The duration for faulty deployment detection.
+          example: 3600
+          format: int64
+          type: integer
+        excluded_resources:
+          description: Resources to exclude from faulty deployment detection.
+          example:
+          - resource1
+          - resource2
+          items:
+            type: string
+          type: array
+      type: object
+    DeploymentRuleOptionsMonitor:
+      additionalProperties: false
+      description: Monitor options for deployment rules.
+      properties:
+        duration:
+          description: Seconds the monitor needs to stay in OK status for the rule
+            to pass.
+          example: 3600
+          format: int64
+          type: integer
+        query:
+          description: Monitors that match this query are evaluated.
+          example: service:my-service env:prod
+          type: string
+      required:
+      - query
+      type: object
+    DeploymentRuleResponse:
+      description: Response for a deployment rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/DeploymentRuleResponseData'
+      type: object
+    DeploymentRuleResponseData:
+      description: Data for a deployment rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeploymentRuleResponseDataAttributes'
+        id:
+          description: Unique identifier of the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        type:
+          $ref: '#/components/schemas/DeploymentRuleDataType'
+      required:
+      - type
+      - attributes
+      - id
+      type: object
+    DeploymentRuleResponseDataAttributes:
+      description: Basic information about a deployment rule.
+      properties:
+        created_at:
+          description: The timestamp when the deployment rule was created.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/DeploymentRuleResponseDataAttributesCreatedBy'
+        dry_run:
+          description: Whether this rule is run in dry-run mode.
+          example: false
+          type: boolean
+        gate_id:
+          description: The ID of the deployment gate.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the deployment rule.
+          example: My deployment rule
+          type: string
+        options:
+          $ref: '#/components/schemas/DeploymentRulesOptions'
+        type:
+          $ref: '#/components/schemas/DeploymentRuleResponseDataAttributesType'
+        updated_at:
+          description: The timestamp when the deployment rule was last updated.
+          format: date-time
+          type: string
+        updated_by:
+          $ref: '#/components/schemas/DeploymentRuleResponseDataAttributesUpdatedBy'
+      required:
+      - created_at
+      - created_by
+      - dry_run
+      - gate_id
+      - name
+      - options
+      - type
+      type: object
+    DeploymentRuleResponseDataAttributesCreatedBy:
+      description: Information about the user who created the deployment rule.
+      properties:
+        handle:
+          description: The handle of the user who created the deployment rule.
+          example: test-user
+          type: string
+        id:
+          description: The ID of the user who created the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the user who created the deployment rule.
+          example: Test User
+          type: string
+      required:
+      - id
+      type: object
+    DeploymentRuleResponseDataAttributesType:
+      description: The type of the deployment rule.
+      enum:
+      - faulty_deployment_detection
+      - monitor
+      example: faulty_deployment_detection
+      type: string
+      x-enum-varnames:
+      - FAULTY_DEPLOYMENT_DETECTION
+      - MONITOR
+    DeploymentRuleResponseDataAttributesUpdatedBy:
+      description: Information about the user who updated the deployment rule.
+      properties:
+        handle:
+          description: The handle of the user who updated the deployment rule.
+          example: test-user
+          type: string
+        id:
+          description: The ID of the user who updated the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the user who updated the deployment rule.
+          example: Test User
+          type: string
+      required:
+      - id
+      type: object
+    DeploymentRulesOptions:
+      description: Options for deployment rule response representing either faulty
+        deployment detection or monitor options.
+      oneOf:
+      - $ref: '#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection'
+      - $ref: '#/components/schemas/DeploymentRuleOptionsMonitor'
     DetailedFinding:
       description: A single finding with with message and resource configuration.
       properties:
@@ -23446,6 +23801,33 @@ components:
           example: application/json
           type: string
       type: object
+    HTTPCDGatesBadRequestResponse:
+      description: Bad request.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/HTTPCIAppError'
+          type: array
+      type: object
+    HTTPCDGatesNotFoundResponse:
+      description: Deployment gate not found.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/HTTPCIAppError'
+          type: array
+      type: object
+    HTTPCDRulesNotFoundResponse:
+      description: Deployment rule not found.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/HTTPCIAppError'
+          type: array
+      type: object
     HTTPCIAppError:
       description: List of errors.
       properties:
@@ -28229,6 +28611,10 @@ components:
         rotation_start:
           description: The date/time when the rotation starts (ISO 8601).
           format: date-time
+          type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
           type: string
       type: object
     LayerAttributesInterval:
@@ -34787,7 +35173,6 @@ components:
       - id
       - type
       - inputs
-      - auth
       - customer_id
       type: object
     ObservabilityPipelineGoogleChronicleDestinationEncoding:
@@ -34853,9 +35238,7 @@ components:
       - type
       - inputs
       - bucket
-      - auth
       - storage_class
-      - acl
       type: object
     ObservabilityPipelineGoogleCloudStorageDestinationAcl:
       description: Access control list setting for objects written to the bucket.
@@ -34986,7 +35369,6 @@ components:
       required:
       - id
       - type
-      - auth
       - decoding
       - project
       - subscription
@@ -44754,6 +45136,10 @@ components:
           example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
+          type: string
       required:
       - name
       - interval
@@ -45103,6 +45489,10 @@ components:
           description: The date/time at which the rotation begins (ISO 8601 format).
           example: '2025-02-01T00:00:00Z'
           format: date-time
+          type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
           type: string
       required:
       - effective_date
@@ -51522,32 +51912,35 @@ components:
           type: string
       type: object
     TableResultV2DataAttributesFileMetadata:
-      description: Metadata specifying where and how to access the reference table's
-        data file.
-      oneOf:
-      - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorage'
-      - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataLocalFile'
-    TableResultV2DataAttributesFileMetadataCloudStorage:
       additionalProperties: false
-      description: File metadata for reference tables created by cloud storage.
+      description: "Metadata specifying where and how to access the reference table's
+        data file.\n\nFor cloud storage tables (S3/GCS/Azure):\n  - sync_enabled and
+        access_details will always be present\n  - error fields (error_message, error_row_count,
+        error_type) are present only when errors occur\n\nFor local file tables:\n
+        \ - error fields (error_message, error_row_count) are present only when errors
+        occur\n  - sync_enabled, access_details are never present"
       properties:
         access_details:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetails'
+          description: Cloud storage access configuration. Only present for cloud
+            storage sources (S3, GCS, Azure).
         error_message:
-          description: The error message returned from the sync.
+          description: The error message returned from the last operation (sync for
+            cloud storage, upload for local file).
           type: string
         error_row_count:
-          description: The number of rows that failed to sync.
+          description: The number of rows that failed to process.
           format: int64
           type: integer
         error_type:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorageErrorType'
+          description: The type of error that occurred during file processing. Only
+            applicable for cloud storage sources.
         sync_enabled:
-          description: Whether this table is synced automatically.
+          description: Whether this table is synced automatically from cloud storage.
+            Only applicable for cloud storage sources.
           type: boolean
-      required:
-      - access_details
-      title: CloudFileMetadataV2
+      title: FileMetadataV2
       type: object
     TableResultV2DataAttributesFileMetadataCloudStorageErrorType:
       description: The type of error that occurred during file processing. This field
@@ -51574,21 +51967,6 @@ components:
       - STATE_ERROR
       - OPERATION_ERROR
       - SYSTEM_ERROR
-    TableResultV2DataAttributesFileMetadataLocalFile:
-      additionalProperties: false
-      description: File metadata for reference tables created by upload. Note that
-        upload_id is only returned in the immediate create/replace response and is
-        not available in subsequent GET requests.
-      properties:
-        error_message:
-          description: The error message returned from the creation/update.
-          type: string
-        error_row_count:
-          description: The number of rows that failed to create/update.
-          format: int64
-          type: integer
-      title: LocalFileMetadataV2
-      type: object
     TableResultV2DataAttributesFileMetadataOneOfAccessDetails:
       description: Cloud storage access configuration for the reference table data
         file.
@@ -54053,6 +54431,77 @@ components:
           $ref: '#/components/schemas/FrameworkHandleAndVersionResponseData'
       required:
       - data
+      type: object
+    UpdateDeploymentGateParams:
+      description: Parameters for updating a deployment gate.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateDeploymentGateParamsData'
+      required:
+      - data
+      type: object
+    UpdateDeploymentGateParamsData:
+      description: Parameters for updating a deployment gate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateDeploymentGateParamsDataAttributes'
+        id:
+          description: Unique identifier of the deployment gate.
+          example: 12345678-1234-1234-1234-123456789012
+          type: string
+        type:
+          $ref: '#/components/schemas/DeploymentGateDataType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    UpdateDeploymentGateParamsDataAttributes:
+      description: Attributes for updating a deployment gate.
+      properties:
+        dry_run:
+          description: Whether to run in dry-run mode.
+          example: false
+          type: boolean
+      required:
+      - dry_run
+      type: object
+    UpdateDeploymentRuleParams:
+      description: Parameters for updating a deployment rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateDeploymentRuleParamsData'
+      required:
+      - data
+      type: object
+    UpdateDeploymentRuleParamsData:
+      description: Parameters for updating a deployment rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateDeploymentRuleParamsDataAttributes'
+        type:
+          $ref: '#/components/schemas/DeploymentRuleDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    UpdateDeploymentRuleParamsDataAttributes:
+      description: Parameters for updating a deployment rule.
+      properties:
+        dry_run:
+          description: Whether to run this rule in dry-run mode.
+          example: false
+          type: boolean
+        name:
+          description: The name of the deployment rule.
+          example: Updated deployment rule
+          type: string
+        options:
+          $ref: '#/components/schemas/DeploymentRulesOptions'
+      required:
+      - dry_run
+      - name
+      - options
       type: object
     UpdateOpenAPIResponse:
       description: Response for `UpdateOpenAPI`.
@@ -64323,6 +64772,411 @@ paths:
       x-unstable: '**Note: Data Access is in preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/deployment_gates:
+    post:
+      description: Endpoint to create a deployment gate.
+      operationId: CreateDeploymentGate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeploymentGateParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/deployment_gates/{gate_id}/rules:
+    post:
+      description: Endpoint to create a deployment rule. A gate for the rule must
+        already exist.
+      operationId: CreateDeploymentRule
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeploymentRuleParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create deployment rule
+      tags:
+      - Deployment Gates
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/deployment_gates/{gate_id}/rules/{id}:
+    delete:
+      description: Endpoint to delete a deployment rule.
+      operationId: DeleteDeploymentRule
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      - description: The ID of the deployment rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDGatesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete deployment rule
+      tags:
+      - Deployment Gates
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Endpoint to get a deployment rule.
+      operationId: GetDeploymentRule
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      - description: The ID of the deployment rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDRulesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get deployment rule
+      tags:
+      - Deployment Gates
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Endpoint to update a deployment rule.
+      operationId: UpdateDeploymentRule
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      - description: The ID of the deployment rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeploymentRuleParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDRulesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update deployment rule
+      tags:
+      - Deployment Gates
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/deployment_gates/{id}:
+    delete:
+      description: Endpoint to delete a deployment gate. Rules associated with the
+        gate are also deleted.
+      operationId: DeleteDeploymentGate
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDGatesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Endpoint to get a deployment gate.
+      operationId: GetDeploymentGate
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDGatesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Endpoint to update a deployment gate.
+      operationId: UpdateDeploymentGate
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeploymentGateParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDGatesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.
@@ -74620,6 +75474,58 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              cloud_storage:
+                summary: Create table from cloud storage (S3)
+                value:
+                  data:
+                    attributes:
+                      description: Customer reference data synced from S3
+                      file_metadata:
+                        access_details:
+                          aws_detail:
+                            aws_account_id: '924305315327'
+                            aws_bucket_name: my-data-bucket
+                            file_path: customers.csv
+                        sync_enabled: true
+                      schema:
+                        fields:
+                        - name: customer_id
+                          type: STRING
+                        - name: customer_name
+                          type: STRING
+                        - name: email
+                          type: STRING
+                        primary_keys:
+                        - customer_id
+                      source: S3
+                      table_name: customer_reference_data
+                      tags:
+                      - team:data-platform
+                    type: reference_table
+              local_file:
+                summary: Create table from local file upload
+                value:
+                  data:
+                    attributes:
+                      description: Product catalog uploaded via local file
+                      file_metadata:
+                        upload_id: 00000000-0000-0000-0000-000000000000
+                      schema:
+                        fields:
+                        - name: product_id
+                          type: STRING
+                        - name: product_name
+                          type: STRING
+                        - name: price
+                          type: DOUBLE
+                        primary_keys:
+                        - product_id
+                      source: LOCAL_FILE
+                      table_name: product_catalog
+                      tags:
+                      - team:ecommerce
+                    type: reference_table
             schema:
               $ref: '#/components/schemas/CreateTableRequest'
         required: true
@@ -84283,8 +85189,7 @@ paths:
         operator: OR
         permissions:
         - test_optimization_read
-      x-unstable: '**Note**: This endpoint is in public beta and may be subject to
-        change.
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/usage/application_security:
@@ -86041,6 +86946,10 @@ tags:
 
     view certain types of telemetry (for example, logs, traces, metrics, and RUM data).'
   name: Datasets
+- description: Manage Deployment Gates using this API to reduce the likelihood and
+    impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/)
+    for more information.
+  name: Deployment Gates
 - description: 'Configure your Datadog Email Domain Allowlist directly through the
     Datadog API.
 

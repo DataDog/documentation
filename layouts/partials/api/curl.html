@@ -18,9 +18,9 @@
         {{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
       {{- end -}}
       {{- if gt (len $def) 0 -}}
-        {{- $contentEncoding = $def -}}
+        {{- $contentEncoding = ($def | default "") -}}
       {{- else if (or (and (isset .schema "example") (.required | default false)) (in $title "compression") ) -}}
-        {{- $contentEncoding = (.example | default .schema.example) -}}
+        {{- $contentEncoding = (.example | default .schema.example | default "") -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
