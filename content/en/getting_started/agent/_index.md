@@ -68,11 +68,12 @@ To give you full visibility into your infrastructure, the Datadog Agent reports 
 
 The Agent reports the following metrics to Datadog about itself. These metrics provide information about which hosts or containers have running Agents, when each Agent started, and the Python version the Agent is using.
 
-| Metric                           | Description                                                                                                          |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `datadog.agent.python.version` | The metric is tagged with the `python_version`. |
-| `datadog.agent.running`        | Shows a value of `1` if the Agent is reporting to Datadog.                                                 |
-| `datadog.agent.started`        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
+| Metric                           | Description                                      |
+| -------------------------------- |------------------------------------------------- |
+| `datadog.agent.running`        | Shows a value of `1` if the Agent is reporting to Datadog.                    |
+| `datadog.agent.started`        | A count sent with a value of `1` when the Agent starts (available in v6.12+).    |
+| `datadog.agent.python.version` | The metric is tagged with the `python_version`.     |
+
 
 See the [Agent Metrics][3] integration for a full list of Agent metrics.
 
@@ -103,9 +104,9 @@ To collect metrics from other technologies, see the [Integrations][9] page.
 The Agent is set up to provide the following service checks:
 
   - `datadog.agent.up`: Returns **OK** if the Agent connects to Datadog.
-  - `datadog.agent.check_status`: Returns **CRITICAL** if an Agent check is unable to send metrics to Datadog, otherwise returns **OK**.
+  - `datadog.agent.check_status`: Returns **CRITICAL** if an Agent check is unable to send metrics to Datadog; otherwise returns **OK**.
 
-These checks can be used in the Datadog Platform to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][21] to learn more.
+These checks can be used in Datadog to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][21] to learn more.
 
 
 ## Advanced configurations and features
@@ -124,7 +125,7 @@ There are key differences between installing Agents on a host and in a container
     ```
 
 - **Integrations detection**: 
-    - **Host**: [Integrations][9] are identified through the Agent configuration file
+    - **Host**: [Integrations][9] are identified through the Agent configuration file.
     - **Container**: Integrations are automatically identified using Datadog's Autodiscovery feature. See [Basic Agent Autodiscovery][11] to learn more.
 
 Additionally, see the [Docker Agent][12] or [Kubernetes][13] for a walkthrough on running the Agent in a containerized environment.
@@ -188,9 +189,9 @@ For example, let's say you have data that is collected from different teams and 
 
 {{% collapse-content title="Finding metrics in the Datadog UI" level="h4" expanded=false id="id-for-anchoring" %}}
 
-In the Datadog UI, go to the [Metrics Summary page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to the Datadog Platform.
+You can confirm the Agent is running correctly by checking its default metrics in the Datadog UI. Go to the [Metrics Summary page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to Datadog.
 
-Click on either of the metrics and a Metric panel opens up. This panel shows additional metadata about where these metrics are collected from and any associated tags. Because so far in this walkthrough no tags are configured on this host, you should see only the default tags that Datadog assigns to the metrics including `version` and `host`. See the following section on Agent Configuration Files to learn more about how to add tags.
+Click on either of the metrics and a Metric panel opens. This panel shows additional metadata about where these metrics are collected and any associated tags. If no tags are configured on a host, you should see only the default tags that Datadog assigns to the metrics including `version` and `host`. See the section above on setting tags through the Agent configuration files to learn more about how to add tags.
 
 Explore other default metrics such as `ntp.offset` or `system.cpu.idle`.
 {{% /collapse-content %}} 
@@ -198,14 +199,14 @@ Explore other default metrics such as `ntp.offset` or `system.cpu.idle`.
 
 {{% collapse-content title="Agent overhead" level="h4" expanded=false id="id-for-anchoring" %}}
 
-The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is configured to send. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
+The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is sending. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
 
 See [Agent Overhead][2] to learn more about these benchmarks.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Additional configuration options" level="h4" expanded=false id="id-for-anchoring" %}}
 
-The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
+The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. Thesefeatures are not enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
 
 ```yaml
 ##################################
