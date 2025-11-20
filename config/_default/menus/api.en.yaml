@@ -7443,6 +7443,114 @@ menu:
         unstable:
           - v2
         order: 3
+    - name: Deployment Gates
+      url: /api/latest/deployment-gates/
+      identifier: deployment-gates
+      generated: true
+    - name: Update deployment gate
+      url: '#update-deployment-gate'
+      identifier: deployment-gates-update-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDeploymentGate
+        unstable:
+          - v2
+        order: 3
+    - name: Get deployment gate
+      url: '#get-deployment-gate'
+      identifier: deployment-gates-get-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDeploymentGate
+        unstable:
+          - v2
+        order: 2
+    - name: Delete deployment gate
+      url: '#delete-deployment-gate'
+      identifier: deployment-gates-delete-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDeploymentGate
+        unstable:
+          - v2
+        order: 4
+    - name: Update deployment rule
+      url: '#update-deployment-rule'
+      identifier: deployment-gates-update-deployment-rule
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDeploymentRule
+        unstable:
+          - v2
+        order: 7
+    - name: Get deployment rule
+      url: '#get-deployment-rule'
+      identifier: deployment-gates-get-deployment-rule
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDeploymentRule
+        unstable:
+          - v2
+        order: 6
+    - name: Delete deployment rule
+      url: '#delete-deployment-rule'
+      identifier: deployment-gates-delete-deployment-rule
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDeploymentRule
+        unstable:
+          - v2
+        order: 8
+    - name: Create deployment rule
+      url: '#create-deployment-rule'
+      identifier: deployment-gates-create-deployment-rule
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDeploymentRule
+        unstable:
+          - v2
+        order: 5
+    - name: Create deployment gate
+      url: '#create-deployment-gate'
+      identifier: deployment-gates-create-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDeploymentGate
+        unstable:
+          - v2
+        order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
@@ -7663,6 +7771,84 @@ menu:
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
       generated: true
+    - name: Trigger a schedule deployment
+      url: '#trigger-a-schedule-deployment'
+      identifier: fleet-automation-trigger-a-schedule-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerFleetSchedule
+        unstable:
+          - v2
+        order: 5
+    - name: Update a schedule
+      url: '#update-a-schedule'
+      identifier: fleet-automation-update-a-schedule
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFleetSchedule
+        unstable:
+          - v2
+        order: 3
+    - name: Get a schedule by ID
+      url: '#get-a-schedule-by-id'
+      identifier: fleet-automation-get-a-schedule-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetSchedule
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a schedule
+      url: '#delete-a-schedule'
+      identifier: fleet-automation-delete-a-schedule
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteFleetSchedule
+        unstable:
+          - v2
+        order: 4
+    - name: Create a schedule
+      url: '#create-a-schedule'
+      identifier: fleet-automation-create-a-schedule
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetSchedule
+        unstable:
+          - v2
+        order: 1
+    - name: List all schedules
+      url: '#list-all-schedules'
+      identifier: fleet-automation-list-all-schedules
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetSchedules
+        unstable:
+          - v2
+        order: 0
     - name: Cancel a deployment
       url: '#cancel-a-deployment'
       identifier: fleet-automation-cancel-a-deployment
@@ -7676,9 +7862,9 @@ menu:
         unstable:
           - v2
         order: 4
-    - name: Get a deployment by ID
-      url: '#get-a-deployment-by-id'
-      identifier: fleet-automation-get-a-deployment-by-id
+    - name: Get a configuration deployment by ID
+      url: '#get-a-configuration-deployment-by-id'
+      identifier: fleet-automation-get-a-configuration-deployment-by-id
       parent: fleet-automation
       generated: true
       params:
@@ -7689,9 +7875,22 @@ menu:
         unstable:
           - v2
         order: 3
-    - name: Create a deployment
-      url: '#create-a-deployment'
-      identifier: fleet-automation-create-a-deployment
+    - name: Upgrade hosts
+      url: '#upgrade-hosts'
+      identifier: fleet-automation-upgrade-hosts
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentUpgrade
+        unstable:
+          - v2
+        order: 2
+    - name: Create a configuration deployment
+      url: '#create-a-configuration-deployment'
+      identifier: fleet-automation-create-a-configuration-deployment
       parent: fleet-automation
       generated: true
       params:
@@ -7712,6 +7911,19 @@ menu:
           - v2
         operationids:
           - ListFleetDeployments
+        unstable:
+          - v2
+        order: 0
+    - name: List all available Agent versions
+      url: '#list-all-available-agent-versions'
+      identifier: fleet-automation-list-all-available-agent-versions
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentVersions
         unstable:
           - v2
         order: 0
@@ -10890,6 +11102,49 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Team Connections
+      url: /api/latest/team-connections/
+      identifier: team-connections
+      generated: true
+    - name: Create team connections
+      url: '#create-team-connections'
+      identifier: team-connections-create-team-connections
+      parent: team-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamConnections
+        unstable:
+          - v2
+        order: 2
+    - name: List team connections
+      url: '#list-team-connections'
+      identifier: team-connections-list-team-connections
+      parent: team-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamConnections
+        unstable:
+          - v2
+        order: 1
+    - name: Delete team connections
+      url: '#delete-team-connections'
+      identifier: team-connections-delete-team-connections
+      parent: team-connections
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamConnections
+        unstable:
+          - v2
+        order: 3
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
@@ -11126,6 +11381,19 @@ menu:
         unstable:
           - v2
         order: 19
+    - name: Get team sync configurations
+      url: '#get-team-sync-configurations'
+      identifier: teams-get-team-sync-configurations
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamSync
+        unstable:
+          - v2
+        order: 18
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

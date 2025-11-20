@@ -1,1 +1,2 @@
-There are no environment variables to configure for the Amazon Security Lake destination.
+- Amazon Security Lake TLS passphrase (when enabled):
+    - Stored in the environment variable `DD_OP_DESTINATION_AMAZON_SECURITY_LAKE_KEY_PASS`.

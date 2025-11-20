@@ -449,7 +449,7 @@ components:
         type: string
     GetIssueIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response.
+        in the response. Possible values are `assignee`, `case`, and `team_owners`.
       explode: false
       in: query
       name: include
@@ -1003,7 +1003,8 @@ components:
         $ref: '#/components/schemas/ServiceDefinitionSchemaVersions'
     SearchIssuesIncludeQueryParameter:
       description: Comma-separated list of relationship objects that should be included
-        in the response.
+        in the response. Possible values are `issue`, `issue.assignee`, `issue.case`,
+        and `issue.team_owners`.
       explode: false
       in: query
       name: include
@@ -1164,6 +1165,24 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Forbidden
+    HTTPCDGatesBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPCDGatesBadRequestResponse'
+      description: Bad request.
+    HTTPCDGatesNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPCDGatesNotFoundResponse'
+      description: Deployment gate not found.
+    HTTPCDRulesNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPCDRulesNotFoundResponse'
+      description: Deployment rule not found.
     NotAuthorizedResponse:
       content:
         application/json:
@@ -11514,6 +11533,35 @@ components:
             $ref: '#/components/schemas/ConfluentResourceResponseData'
           type: array
       type: object
+    ConnectedTeamRef:
+      description: Reference to a team from an external system.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConnectedTeamRefData'
+      type: object
+    ConnectedTeamRefData:
+      description: Reference to connected external team.
+      properties:
+        id:
+          description: The connected team ID as it is referenced throughout the Datadog
+            ecosystem.
+          example: '@GitHubOrg/team-handle'
+          type: string
+        type:
+          $ref: '#/components/schemas/ConnectedTeamRefDataType'
+      required:
+      - id
+      - type
+      type: object
+    ConnectedTeamRefDataType:
+      default: github_team
+      description: External team resource type.
+      enum:
+      - github_team
+      example: github_team
+      type: string
+      x-enum-varnames:
+      - GITHUB_TEAM
     Connection:
       description: The definition of `Connection` object.
       properties:
@@ -11577,6 +11625,50 @@ components:
       - connectionGroupId
       - label
       - tags
+      type: object
+    ConnectionsPagePagination:
+      description: Page-based pagination metadata.
+      properties:
+        first_number:
+          description: The first page number.
+          format: int64
+          type: integer
+        last_number:
+          description: The last page number.
+          format: int64
+          type: integer
+        next_number:
+          description: The next page number.
+          format: int64
+          nullable: true
+          type: integer
+        number:
+          description: The current page number.
+          format: int64
+          type: integer
+        prev_number:
+          description: The previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        size:
+          description: The page size.
+          format: int64
+          type: integer
+        total:
+          description: Total connections matching request.
+          format: int64
+          type: integer
+        type:
+          description: Pagination type.
+          example: number_size
+          type: string
+      type: object
+    ConnectionsResponseMeta:
+      description: Connections response metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/ConnectionsPagePagination'
       type: object
     Container:
       description: Container object.
@@ -12587,6 +12679,91 @@ components:
       required:
       - data
       type: object
+    CreateDeploymentGateParams:
+      description: Parameters for creating a deployment gate.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDeploymentGateParamsData'
+      required:
+      - data
+      type: object
+    CreateDeploymentGateParamsData:
+      description: Parameters for creating a deployment gate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDeploymentGateParamsDataAttributes'
+        type:
+          $ref: '#/components/schemas/DeploymentGateDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    CreateDeploymentGateParamsDataAttributes:
+      description: Parameters for creating a deployment gate.
+      properties:
+        dry_run:
+          default: false
+          description: Whether this gate is run in dry-run mode.
+          example: false
+          type: boolean
+        env:
+          description: The environment of the deployment gate.
+          example: production
+          type: string
+        identifier:
+          default: default
+          description: The identifier of the deployment gate.
+          example: pre
+          type: string
+        service:
+          description: The service of the deployment gate.
+          example: my-service
+          type: string
+      required:
+      - env
+      - service
+      type: object
+    CreateDeploymentRuleParams:
+      description: Parameters for creating a deployment rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDeploymentRuleParamsData'
+      type: object
+    CreateDeploymentRuleParamsData:
+      description: Parameters for creating a deployment rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDeploymentRuleParamsDataAttributes'
+        type:
+          $ref: '#/components/schemas/DeploymentRuleDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    CreateDeploymentRuleParamsDataAttributes:
+      description: Parameters for creating a deployment rule.
+      properties:
+        dry_run:
+          default: false
+          description: Whether this rule is run in dry-run mode.
+          example: false
+          type: boolean
+        name:
+          description: The name of the deployment rule.
+          example: My deployment rule
+          type: string
+        options:
+          $ref: '#/components/schemas/DeploymentRulesOptions'
+        type:
+          description: The type of the deployment rule (faulty_deployment_detection
+            or monitor).
+          example: faulty_deployment_detection
+          type: string
+      required:
+      - name
+      - options
+      - type
+      type: object
     CreateIncidentNotificationRuleRequest:
       description: Create request for a notification rule.
       properties:
@@ -12994,53 +13171,30 @@ components:
       x-enum-varnames:
       - CREATE_RULESET
     CreateTableRequest:
-      description: The definition of `CreateTableRequest` object.
-      example:
-        data:
-          attributes:
-            description: this is a cloud table generated via a cloud bucket sync
-            file_metadata:
-              access_details:
-                aws_detail:
-                  aws_account_id: test-account-id
-                  aws_bucket_name: test-bucket
-                  file_path: test_rt.csv
-              sync_enabled: true
-            schema:
-              fields:
-              - name: name
-                type: STRING
-              - name: account_id
-                type: STRING
-              primary_keys:
-              - account_id
-            source: S3
-            table_name: test_reference_table
-            tags:
-            - test_tag
-          type: reference_table
+      description: Request body for creating a new reference table from a local file
+        or cloud storage.
       properties:
         data:
           $ref: '#/components/schemas/CreateTableRequestData'
       type: object
     CreateTableRequestData:
-      description: The definition of `CreateTableRequestData` object.
+      additionalProperties: false
+      description: The data object containing the table definition.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateTableRequestDataAttributes'
-        id:
-          description: The ID of the reference table.
-          type: string
         type:
           $ref: '#/components/schemas/CreateTableRequestDataType'
       required:
       - type
       type: object
     CreateTableRequestDataAttributes:
-      description: The definition of `CreateTableRequestDataAttributes` object.
+      description: Attributes that define the reference table's configuration and
+        properties.
       properties:
         description:
-          description: The description of the reference table.
+          description: Optional text describing the purpose or contents of this reference
+            table.
           type: string
         file_metadata:
           $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadata'
@@ -13049,11 +13203,14 @@ components:
         source:
           $ref: '#/components/schemas/ReferenceTableCreateSourceType'
         table_name:
-          description: The name of the reference table.
-          example: ''
+          description: Name to identify this reference table.
+          example: table_1
           type: string
         tags:
-          description: The tags of the reference table.
+          description: Tags for organizing and filtering reference tables.
+          example:
+          - tag_1
+          - tag_2
           items:
             type: string
           type: array
@@ -13063,8 +13220,8 @@ components:
       - source
       type: object
     CreateTableRequestDataAttributesFileMetadata:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadata`
-        object.
+      description: Metadata specifying where and how to access the reference table's
+        data file.
       oneOf:
       - $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataCloudStorage'
       - $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataLocalFile'
@@ -13090,15 +13247,15 @@ components:
       properties:
         upload_id:
           description: The upload ID.
-          example: ''
+          example: 00000000-0000-0000-0000-000000000000
           type: string
       required:
       - upload_id
       title: LocalFileMetadataV2
       type: object
     CreateTableRequestDataAttributesFileMetadataOneOfAccessDetails:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetails`
-        object.
+      description: Cloud storage access configuration for the reference table data
+        file.
       properties:
         aws_detail:
           $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail'
@@ -13108,15 +13265,14 @@ components:
           $ref: '#/components/schemas/CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail'
       type: object
     CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail`
-        object.
+      description: Amazon Web Services S3 storage access configuration.
       properties:
         aws_account_id:
-          description: The ID of the AWS account.
+          description: AWS account ID where the S3 bucket is located.
           example: '123456789000'
           type: string
         aws_bucket_name:
-          description: The name of the Amazon S3 bucket.
+          description: S3 bucket containing the CSV file.
           example: example-data-bucket
           type: string
         file_path:
@@ -13131,23 +13287,23 @@ components:
       x-oneOf-parent:
       - AwsDetail
     CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail`
-        object.
+      description: Azure Blob Storage access configuration.
       properties:
         azure_client_id:
-          description: The Azure client ID.
+          description: Azure service principal (application) client ID with permissions
+            to read from the container.
           example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
           type: string
         azure_container_name:
-          description: The name of the Azure container.
+          description: Azure Blob Storage container containing the CSV file.
           example: reference-data
           type: string
         azure_storage_account_name:
-          description: The name of the Azure storage account.
+          description: Azure storage account where the container is located.
           example: examplestorageaccount
           type: string
         azure_tenant_id:
-          description: The ID of the Azure tenant.
+          description: Azure Active Directory tenant ID.
           example: cccccccc-4444-5555-6666-dddddddddddd
           type: string
         file_path:
@@ -13165,8 +13321,7 @@ components:
       x-oneOf-parent:
       - AzureDetail
     CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
-      description: The definition of `CreateTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail`
-        object.
+      description: Google Cloud Platform storage access configuration.
       properties:
         file_path:
           description: The relative file path from the GCS bucket root to the CSV
@@ -13174,15 +13329,15 @@ components:
           example: data/reference_tables/users.csv
           type: string
         gcp_bucket_name:
-          description: The name of the GCP bucket.
+          description: GCP bucket containing the CSV file.
           example: example-data-bucket
           type: string
         gcp_project_id:
-          description: The ID of the GCP project.
+          description: GCP project ID where the bucket is located.
           example: example-gcp-project-12345
           type: string
         gcp_service_account_email:
-          description: The email of the GCP service account.
+          description: Service account email with read permissions for the GCS bucket.
           example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
           type: string
       required:
@@ -13194,10 +13349,10 @@ components:
       x-oneOf-parent:
       - GcpDetail
     CreateTableRequestDataAttributesSchema:
-      description: The definition of `CreateTableRequestDataAttributesSchema` object.
+      description: Schema defining the structure and columns of the reference table.
       properties:
         fields:
-          description: The `schema` `fields`.
+          description: The schema fields.
           items:
             $ref: '#/components/schemas/CreateTableRequestDataAttributesSchemaFieldsItems'
           type: array
@@ -13206,7 +13361,7 @@ components:
             Only one primary key is supported, and it is used as an ID to retrieve
             rows.
           example:
-          - ''
+          - field_1
           items:
             type: string
           type: array
@@ -13215,12 +13370,11 @@ components:
       - primary_keys
       type: object
     CreateTableRequestDataAttributesSchemaFieldsItems:
-      description: The definition of `CreateTableRequestDataAttributesSchemaFieldsItems`
-        object.
+      description: A single field (column) in the reference table schema to be created.
       properties:
         name:
           description: The field name.
-          example: ''
+          example: field_1
           type: string
         type:
           $ref: '#/components/schemas/ReferenceTableSchemaFieldType'
@@ -13238,50 +13392,62 @@ components:
       x-enum-varnames:
       - REFERENCE_TABLE
     CreateUploadRequest:
-      description: The definition of `CreateUploadRequest` object.
+      description: Request to create an upload for a file to be ingested into a reference
+        table.
+      example:
+        data:
+          attributes:
+            headers:
+            - product_id
+            - product_name
+            - price
+            part_count: 3
+            part_size: 10000000
+            table_name: my_products_table
+          type: upload
       properties:
         data:
           $ref: '#/components/schemas/CreateUploadRequestData'
       type: object
     CreateUploadRequestData:
-      description: The definition of `CreateUploadRequestData` object.
+      additionalProperties: false
+      description: Request data for creating an upload for a file to be ingested into
+        a reference table.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateUploadRequestDataAttributes'
-        id:
-          description: The ID of the upload.
-          type: string
         type:
           $ref: '#/components/schemas/CreateUploadRequestDataType'
       required:
       - type
       type: object
     CreateUploadRequestDataAttributes:
-      description: The definition of `CreateUploadRequestDataAttributes` object.
+      description: Upload configuration specifying how data is uploaded by the user,
+        and properties of the table to associate the upload with.
       properties:
         headers:
-          description: The headers of the file to upload.
+          description: The CSV file headers that define the schema fields, provided
+            in the same order as the columns in the uploaded file.
           example:
-          - ''
+          - field_1
+          - field_2
           items:
             type: string
           type: array
         part_count:
-          description: The number of parts in the upload.
+          description: Number of parts to split the file into for multipart upload.
           example: 3
           format: int32
           maximum: 20
           type: integer
         part_size:
-          description: The size of each part in the upload in bytes. For multipart
-            uploads (part_count > 1), all parts except the last one must be at least
-            5,000,000 bytes. For single-part uploads (part_count = 1), any size is
-            allowed.
+          description: The size of each part in the upload in bytes. All parts except
+            the last one must be at least 5,000,000 bytes.
           example: 10000000
           format: int64
           type: integer
         table_name:
-          description: The name of the reference table.
+          description: Name of the table to associate with this upload.
           example: ''
           type: string
       required:
@@ -13300,18 +13466,21 @@ components:
       x-enum-varnames:
       - UPLOAD
     CreateUploadResponse:
-      description: The definition of `CreateUploadResponse` object.
+      description: Information about the upload created containing the upload ID and
+        pre-signed URLs to PUT chunks of the CSV file to.
       properties:
         data:
           $ref: '#/components/schemas/CreateUploadResponseData'
       type: object
     CreateUploadResponseData:
-      description: The definition of `CreateUploadResponseData` object.
+      additionalProperties: false
+      description: Upload ID and attributes of the created upload.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateUploadResponseDataAttributes'
         id:
-          description: The ID of the upload.
+          description: Unique identifier for this upload. Use this ID when creating
+            the reference table.
           type: string
         type:
           $ref: '#/components/schemas/CreateUploadResponseDataType'
@@ -13319,10 +13488,11 @@ components:
       - type
       type: object
     CreateUploadResponseDataAttributes:
-      description: The definition of `CreateUploadResponseDataAttributes` object.
+      description: Pre-signed URLs for uploading parts of the file.
       properties:
         part_urls:
-          description: The URLs of the parts in the upload.
+          description: The pre-signed URLs for uploading parts. These URLs expire
+            after 5 minutes.
           items:
             type: string
           type: array
@@ -16159,6 +16329,113 @@ components:
           format: uuid
           type: string
       type: object
+    DeploymentGateDataType:
+      description: Deployment gate resource type.
+      enum:
+      - deployment_gate
+      example: deployment_gate
+      type: string
+      x-enum-varnames:
+      - DEPLOYMENT_GATE
+    DeploymentGateResponse:
+      description: Response for a deployment gate.
+      properties:
+        data:
+          $ref: '#/components/schemas/DeploymentGateResponseData'
+      type: object
+    DeploymentGateResponseData:
+      description: Data for a deployment gate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeploymentGateResponseDataAttributes'
+        id:
+          description: Unique identifier of the deployment gate.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        type:
+          $ref: '#/components/schemas/DeploymentGateDataType'
+      required:
+      - type
+      - attributes
+      - id
+      type: object
+    DeploymentGateResponseDataAttributes:
+      description: Basic information about a deployment gate.
+      properties:
+        created_at:
+          description: The timestamp when the deployment gate was created.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/DeploymentGateResponseDataAttributesCreatedBy'
+        dry_run:
+          description: Whether this gate is run in dry-run mode.
+          example: false
+          type: boolean
+        env:
+          description: The environment of the deployment gate.
+          example: production
+          type: string
+        identifier:
+          description: The identifier of the deployment gate.
+          example: pre
+          type: string
+        service:
+          description: The service of the deployment gate.
+          example: my-service
+          type: string
+        updated_at:
+          description: The timestamp when the deployment gate was last updated.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        updated_by:
+          $ref: '#/components/schemas/DeploymentGateResponseDataAttributesUpdatedBy'
+      required:
+      - created_at
+      - created_by
+      - dry_run
+      - env
+      - identifier
+      - service
+      type: object
+    DeploymentGateResponseDataAttributesCreatedBy:
+      description: Information about the user who created the deployment gate.
+      properties:
+        handle:
+          description: The handle of the user who created the deployment rule.
+          example: test-user
+          type: string
+        id:
+          description: The ID of the user who created the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the user who created the deployment rule.
+          example: Test User
+          type: string
+      required:
+      - id
+      type: object
+    DeploymentGateResponseDataAttributesUpdatedBy:
+      description: Information about the user who updated the deployment gate.
+      properties:
+        handle:
+          description: The handle of the user who updated the deployment rule.
+          example: test-user
+          type: string
+        id:
+          description: The ID of the user who updated the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the user who updated the deployment rule.
+          example: Test User
+          type: string
+      required:
+      - id
+      type: object
     DeploymentMetadata:
       description: Metadata object containing the publication creation information.
       properties:
@@ -16198,6 +16475,164 @@ components:
         type:
           $ref: '#/components/schemas/AppDeploymentType'
       type: object
+    DeploymentRuleDataType:
+      description: Deployment rule resource type.
+      enum:
+      - deployment_rule
+      example: deployment_rule
+      type: string
+      x-enum-varnames:
+      - DEPLOYMENT_RULE
+    DeploymentRuleOptionsFaultyDeploymentDetection:
+      additionalProperties: false
+      description: Faulty deployment detection options for deployment rules.
+      properties:
+        duration:
+          description: The duration for faulty deployment detection.
+          example: 3600
+          format: int64
+          type: integer
+        excluded_resources:
+          description: Resources to exclude from faulty deployment detection.
+          example:
+          - resource1
+          - resource2
+          items:
+            type: string
+          type: array
+      type: object
+    DeploymentRuleOptionsMonitor:
+      additionalProperties: false
+      description: Monitor options for deployment rules.
+      properties:
+        duration:
+          description: Seconds the monitor needs to stay in OK status for the rule
+            to pass.
+          example: 3600
+          format: int64
+          type: integer
+        query:
+          description: Monitors that match this query are evaluated.
+          example: service:my-service env:prod
+          type: string
+      required:
+      - query
+      type: object
+    DeploymentRuleResponse:
+      description: Response for a deployment rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/DeploymentRuleResponseData'
+      type: object
+    DeploymentRuleResponseData:
+      description: Data for a deployment rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeploymentRuleResponseDataAttributes'
+        id:
+          description: Unique identifier of the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        type:
+          $ref: '#/components/schemas/DeploymentRuleDataType'
+      required:
+      - type
+      - attributes
+      - id
+      type: object
+    DeploymentRuleResponseDataAttributes:
+      description: Basic information about a deployment rule.
+      properties:
+        created_at:
+          description: The timestamp when the deployment rule was created.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/DeploymentRuleResponseDataAttributesCreatedBy'
+        dry_run:
+          description: Whether this rule is run in dry-run mode.
+          example: false
+          type: boolean
+        gate_id:
+          description: The ID of the deployment gate.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the deployment rule.
+          example: My deployment rule
+          type: string
+        options:
+          $ref: '#/components/schemas/DeploymentRulesOptions'
+        type:
+          $ref: '#/components/schemas/DeploymentRuleResponseDataAttributesType'
+        updated_at:
+          description: The timestamp when the deployment rule was last updated.
+          format: date-time
+          type: string
+        updated_by:
+          $ref: '#/components/schemas/DeploymentRuleResponseDataAttributesUpdatedBy'
+      required:
+      - created_at
+      - created_by
+      - dry_run
+      - gate_id
+      - name
+      - options
+      - type
+      type: object
+    DeploymentRuleResponseDataAttributesCreatedBy:
+      description: Information about the user who created the deployment rule.
+      properties:
+        handle:
+          description: The handle of the user who created the deployment rule.
+          example: test-user
+          type: string
+        id:
+          description: The ID of the user who created the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the user who created the deployment rule.
+          example: Test User
+          type: string
+      required:
+      - id
+      type: object
+    DeploymentRuleResponseDataAttributesType:
+      description: The type of the deployment rule.
+      enum:
+      - faulty_deployment_detection
+      - monitor
+      example: faulty_deployment_detection
+      type: string
+      x-enum-varnames:
+      - FAULTY_DEPLOYMENT_DETECTION
+      - MONITOR
+    DeploymentRuleResponseDataAttributesUpdatedBy:
+      description: Information about the user who updated the deployment rule.
+      properties:
+        handle:
+          description: The handle of the user who updated the deployment rule.
+          example: test-user
+          type: string
+        id:
+          description: The ID of the user who updated the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        name:
+          description: The name of the user who updated the deployment rule.
+          example: Test User
+          type: string
+      required:
+      - id
+      type: object
+    DeploymentRulesOptions:
+      description: Options for deployment rule response representing either faulty
+        deployment detection or monitor options.
+      oneOf:
+      - $ref: '#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection'
+      - $ref: '#/components/schemas/DeploymentRuleOptionsMonitor'
     DetailedFinding:
       description: A single finding with with message and resource configuration.
       properties:
@@ -20814,6 +21249,48 @@ components:
       - PIPELINES_FAILED_DESCENDING
       - PIPELINES_DURATION_LOST_ASCENDING
       - PIPELINES_DURATION_LOST_DESCENDING
+    FleetAgentVersion:
+      description: Represents an available Datadog Agent version.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetAgentVersionAttributes'
+        id:
+          description: Unique identifier for the Agent version (same as version).
+          example: 7.50.0
+          type: string
+        type:
+          $ref: '#/components/schemas/FleetAgentVersionResourceType'
+      required:
+      - id
+      - type
+      type: object
+    FleetAgentVersionAttributes:
+      properties:
+        version:
+          description: The Agent version string.
+          example: 7.50.0
+          type: string
+      type: object
+    FleetAgentVersionResourceType:
+      default: agent_version
+      description: The type of Agent version resource.
+      enum:
+      - agent_version
+      example: agent_version
+      type: string
+      x-enum-varnames:
+      - AGENT_VERSION
+    FleetAgentVersionsResponse:
+      description: Response containing a list of available Agent versions.
+      properties:
+        data:
+          description: Array of available Agent versions.
+          items:
+            $ref: '#/components/schemas/FleetAgentVersion'
+          type: array
+      required:
+      - data
+      type: object
     FleetDeployment:
       description: A deployment that defines automated configuration changes for a
         fleet of hosts.
@@ -20852,10 +21329,30 @@ components:
           example: env:prod AND service:web
           type: string
         high_level_status:
-          description: Current high-level status of the deployment (for example, "pending",
-            "running", "completed", "failed").
+          description: 'Current high-level status of the deployment (for example,
+            "pending", "running",
+
+            "completed", "failed").'
           example: pending
           type: string
+        hosts:
+          description: 'Paginated list of hosts in this deployment with their individual
+            statuses. Only included
+
+            when fetching a single deployment by ID. Use the `limit` and `page` query
+            parameters to
+
+            navigate through pages. Pagination metadata is included in the response
+            `meta.hosts` field.'
+          items:
+            $ref: '#/components/schemas/FleetDeploymentHost'
+          type: array
+        packages:
+          description: List of packages to deploy to target hosts. Present only for
+            package upgrade deployments.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentPackage'
+          type: array
         total_hosts:
           description: Total number of hosts targeted by this deployment.
           example: 42
@@ -20880,7 +21377,7 @@ components:
       - config_operations
       type: object
     FleetDeploymentConfigureCreate:
-      description: Data for creating a new deployment.
+      description: Data for creating a new configuration deployment.
       properties:
         attributes:
           $ref: '#/components/schemas/FleetDeploymentConfigureAttributes'
@@ -20891,7 +21388,7 @@ components:
       - attributes
       type: object
     FleetDeploymentConfigureCreateRequest:
-      description: Request payload for creating a new deployment.
+      description: Request payload for creating a new configuration deployment.
       properties:
         data:
           $ref: '#/components/schemas/FleetDeploymentConfigureCreate'
@@ -20911,6 +21408,76 @@ components:
       x-enum-varnames:
       - MERGE_PATCH
       - DELETE
+    FleetDeploymentHost:
+      description: A host that is part of a deployment with its current status.
+      properties:
+        error:
+          description: Error message if the deployment failed on this host.
+          example: ''
+          type: string
+        hostname:
+          description: The hostname of the agent.
+          example: web-server-01.example.com
+          type: string
+        status:
+          description: Current deployment status for this specific host.
+          example: succeeded
+          type: string
+        versions:
+          description: List of packages and their versions currently installed on
+            this host.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentHostPackage'
+          type: array
+      type: object
+    FleetDeploymentHostPackage:
+      description: 'Package version information for a host, showing the initial version
+        before deployment,
+
+        the target version to deploy, and the current version on the host.'
+      properties:
+        current_version:
+          description: The current version of the package on the host.
+          example: 7.51.0
+          type: string
+        initial_version:
+          description: The initial version of the package on the host before the deployment
+            started.
+          example: 7.51.0
+          type: string
+        package_name:
+          description: The name of the package.
+          example: datadog-agent
+          type: string
+        target_version:
+          description: The target version that the deployment is attempting to install.
+          example: 7.52.0
+          type: string
+      type: object
+    FleetDeploymentHostsPage:
+      description: Pagination details for the list of hosts in a deployment.
+      properties:
+        current_page:
+          description: Current page index (zero-based).
+          example: 0
+          format: int64
+          type: integer
+        page_size:
+          description: Number of hosts returned per page.
+          example: 50
+          format: int64
+          type: integer
+        total_hosts:
+          description: Total number of hosts in this deployment.
+          example: 150
+          format: int64
+          type: integer
+        total_pages:
+          description: Total number of pages available.
+          example: 3
+          format: int64
+          type: integer
+      type: object
     FleetDeploymentOperation:
       description: A single configuration file operation to perform on the target
         hosts.
@@ -20931,9 +21498,9 @@ components:
             the entire file.
 
             The structure must match the target configuration file format (for example,
-            YAML structure for Datadog Agent config).
+            YAML structure
 
-            Not applicable when using the `delete` operation.'
+            for Datadog Agent config). Not applicable when using the `delete` operation.'
           example:
             apm_config:
               enabled: true
@@ -20943,6 +21510,57 @@ components:
       required:
       - file_op
       - file_path
+      type: object
+    FleetDeploymentPackage:
+      description: A package and its target version for deployment.
+      properties:
+        name:
+          description: The name of the package to deploy.
+          example: datadog-agent
+          type: string
+        version:
+          description: The target version of the package to deploy.
+          example: 7.52.0
+          type: string
+      required:
+      - name
+      - version
+      type: object
+    FleetDeploymentPackageUpgradeAttributes:
+      description: Attributes for creating a new package upgrade deployment.
+      properties:
+        filter_query:
+          description: Query used to filter and select target hosts for the deployment.
+            Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        target_packages:
+          description: List of packages and their target versions to deploy to the
+            selected hosts.
+          items:
+            $ref: '#/components/schemas/FleetDeploymentPackage'
+          type: array
+      required:
+      - target_packages
+      type: object
+    FleetDeploymentPackageUpgradeCreate:
+      description: Data for creating a new package upgrade deployment.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetDeploymentPackageUpgradeAttributes'
+        type:
+          $ref: '#/components/schemas/FleetDeploymentResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    FleetDeploymentPackageUpgradeCreateRequest:
+      description: Request payload for creating a new package upgrade deployment.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetDeploymentPackageUpgradeCreate'
+      required:
+      - data
       type: object
     FleetDeploymentResourceType:
       default: deployment
@@ -20958,6 +21576,15 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/FleetDeployment'
+        meta:
+          $ref: '#/components/schemas/FleetDeploymentResponseMeta'
+      type: object
+    FleetDeploymentResponseMeta:
+      description: Metadata for a single deployment response, including pagination
+        information for hosts.
+      properties:
+        hosts:
+          $ref: '#/components/schemas/FleetDeploymentHostsPage'
       type: object
     FleetDeploymentsPage:
       description: Pagination details for the list of deployments.
@@ -20986,6 +21613,262 @@ components:
       properties:
         page:
           $ref: '#/components/schemas/FleetDeploymentsPage'
+      type: object
+    FleetSchedule:
+      description: A schedule that automatically creates deployments based on a recurrence
+        rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetScheduleAttributes'
+        id:
+          description: Unique identifier for the schedule.
+          example: abc-def-ghi-123
+          type: string
+        type:
+          $ref: '#/components/schemas/FleetScheduleResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FleetScheduleAttributes:
+      description: Attributes of a schedule in the response.
+      properties:
+        created_at_unix:
+          description: Unix timestamp (seconds since epoch) when the schedule was
+            created.
+          example: 1699999999
+          format: int64
+          type: integer
+        created_by:
+          description: User handle of the person who created the schedule.
+          example: user@example.com
+          type: string
+        name:
+          description: Human-readable name for the schedule.
+          example: Weekly Production Agent Updates
+          type: string
+        query:
+          description: Query used to filter and select target hosts for scheduled
+            deployments. Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        rule:
+          $ref: '#/components/schemas/FleetScheduleRecurrenceRule'
+        status:
+          $ref: '#/components/schemas/FleetScheduleStatus'
+        updated_at_unix:
+          description: Unix timestamp (seconds since epoch) when the schedule was
+            last updated.
+          example: 1699999999
+          format: int64
+          type: integer
+        updated_by:
+          description: User handle of the person who last updated the schedule.
+          example: user@example.com
+          type: string
+        version_to_latest:
+          description: 'Number of major versions behind the latest to target for upgrades.
+
+            - 0: Always upgrade to the latest version
+
+            - 1: Upgrade to latest minus 1 major version
+
+            - 2: Upgrade to latest minus 2 major versions
+
+            Maximum value is 2.'
+          example: 0
+          format: int64
+          maximum: 2
+          minimum: 0
+          type: integer
+      type: object
+    FleetScheduleCreate:
+      description: Data for creating a new schedule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetScheduleCreateAttributes'
+        type:
+          $ref: '#/components/schemas/FleetScheduleResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    FleetScheduleCreateAttributes:
+      description: Attributes for creating a new schedule.
+      properties:
+        name:
+          description: Human-readable name for the schedule.
+          example: Weekly Production Agent Updates
+          type: string
+        query:
+          description: Query used to filter and select target hosts for scheduled
+            deployments. Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        rule:
+          $ref: '#/components/schemas/FleetScheduleRecurrenceRule'
+        status:
+          $ref: '#/components/schemas/FleetScheduleStatus'
+        version_to_latest:
+          description: 'Number of major versions behind the latest to target for upgrades.
+
+            - 0: Always upgrade to the latest version (default)
+
+            - 1: Upgrade to latest minus 1 major version
+
+            - 2: Upgrade to latest minus 2 major versions
+
+            Maximum value is 2.'
+          example: 0
+          format: int64
+          maximum: 2
+          minimum: 0
+          type: integer
+      required:
+      - name
+      - query
+      - rule
+      type: object
+    FleetScheduleCreateRequest:
+      description: Request payload for creating a new schedule.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetScheduleCreate'
+      required:
+      - data
+      type: object
+    FleetSchedulePatch:
+      description: Data for partially updating a schedule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetSchedulePatchAttributes'
+        type:
+          $ref: '#/components/schemas/FleetScheduleResourceType'
+      required:
+      - type
+      type: object
+    FleetSchedulePatchAttributes:
+      description: Attributes for partially updating a schedule. All fields are optional.
+      properties:
+        name:
+          description: Human-readable name for the schedule.
+          example: Weekly Production Agent Updates
+          type: string
+        query:
+          description: Query used to filter and select target hosts for scheduled
+            deployments. Uses the Datadog query syntax.
+          example: env:prod AND service:web
+          type: string
+        rule:
+          $ref: '#/components/schemas/FleetScheduleRecurrenceRule'
+        status:
+          $ref: '#/components/schemas/FleetScheduleStatus'
+        version_to_latest:
+          description: 'Number of major versions behind the latest to target for upgrades.
+
+            - 0: Always upgrade to the latest version
+
+            - 1: Upgrade to latest minus 1 major version
+
+            - 2: Upgrade to latest minus 2 major versions
+
+            Maximum value is 2.'
+          example: 0
+          format: int64
+          maximum: 2
+          minimum: 0
+          type: integer
+      type: object
+    FleetSchedulePatchRequest:
+      description: Request payload for partially updating a schedule.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetSchedulePatch'
+      required:
+      - data
+      type: object
+    FleetScheduleRecurrenceRule:
+      description: 'Defines the recurrence pattern for the schedule. Specifies when
+        deployments should be
+
+        automatically triggered based on maintenance windows.'
+      properties:
+        days_of_week:
+          description: 'List of days of the week when the schedule should trigger.
+            Valid values are:
+
+            "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun".'
+          example:
+          - Mon
+          - Wed
+          - Fri
+          items:
+            type: string
+          type: array
+        maintenance_window_duration:
+          description: Duration of the maintenance window in minutes.
+          example: 1200
+          format: int64
+          type: integer
+        start_maintenance_window:
+          description: 'Start time of the maintenance window in 24-hour clock format
+            (HH:MM).
+
+            Deployments will be triggered at this time on the specified days.'
+          example: 02:00
+          type: string
+        timezone:
+          description: Timezone for the schedule in IANA Time Zone Database format
+            (e.g., "America/New_York", "UTC").
+          example: America/New_York
+          type: string
+      required:
+      - days_of_week
+      - start_maintenance_window
+      - maintenance_window_duration
+      - timezone
+      type: object
+    FleetScheduleResourceType:
+      default: schedule
+      description: The type of schedule resource.
+      enum:
+      - schedule
+      example: schedule
+      type: string
+      x-enum-varnames:
+      - SCHEDULE
+    FleetScheduleResponse:
+      description: Response containing a single schedule.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetSchedule'
+      type: object
+    FleetScheduleStatus:
+      description: 'The status of the schedule.
+
+        - `active`: The schedule is active and will create deployments according to
+        its recurrence rule.
+
+        - `inactive`: The schedule is inactive and will not create any deployments.'
+      enum:
+      - active
+      - inactive
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - INACTIVE
+    FleetSchedulesResponse:
+      description: Response containing a list of schedules.
+      properties:
+        data:
+          description: Array of schedules.
+          items:
+            $ref: '#/components/schemas/FleetSchedule'
+          type: array
+      required:
+      - data
       type: object
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
@@ -22917,6 +23800,33 @@ components:
           description: Content type of the body
           example: application/json
           type: string
+      type: object
+    HTTPCDGatesBadRequestResponse:
+      description: Bad request.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/HTTPCIAppError'
+          type: array
+      type: object
+    HTTPCDGatesNotFoundResponse:
+      description: Deployment gate not found.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/HTTPCIAppError'
+          type: array
+      type: object
+    HTTPCDRulesNotFoundResponse:
+      description: Deployment rule not found.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/HTTPCIAppError'
+          type: array
       type: object
     HTTPCIAppError:
       description: List of errors.
@@ -27701,6 +28611,10 @@ components:
         rotation_start:
           description: The date/time when the rotation starts (ISO 8601).
           format: date-time
+          type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
           type: string
       type: object
     LayerAttributesInterval:
@@ -34259,7 +35173,6 @@ components:
       - id
       - type
       - inputs
-      - auth
       - customer_id
       type: object
     ObservabilityPipelineGoogleChronicleDestinationEncoding:
@@ -34325,9 +35238,7 @@ components:
       - type
       - inputs
       - bucket
-      - auth
       - storage_class
-      - acl
       type: object
     ObservabilityPipelineGoogleCloudStorageDestinationAcl:
       description: Access control list setting for objects written to the bucket.
@@ -34458,7 +35369,6 @@ components:
       required:
       - id
       - type
-      - auth
       - decoding
       - project
       - subscription
@@ -37945,7 +38855,7 @@ components:
           $ref: '#/components/schemas/Version'
       type: object
     PatchTableRequest:
-      description: The definition of `PatchTableRequest` object.
+      description: Request body for updating an existing reference table.
       example:
         data:
           attributes:
@@ -37968,30 +38878,30 @@ components:
             sync_enabled: false
             tags:
             - test_tag
-          id: 00000000-0000-0000-0000-000000000000
           type: reference_table
       properties:
         data:
           $ref: '#/components/schemas/PatchTableRequestData'
       type: object
     PatchTableRequestData:
-      description: The definition of `PatchTableRequestData` object.
+      additionalProperties: false
+      description: The data object containing the partial table definition updates.
       properties:
         attributes:
           $ref: '#/components/schemas/PatchTableRequestDataAttributes'
-        id:
-          description: The ID of the reference table.
-          type: string
         type:
           $ref: '#/components/schemas/PatchTableRequestDataType'
       required:
       - type
       type: object
     PatchTableRequestDataAttributes:
-      description: The definition of `PatchTableRequestDataAttributes` object.
+      description: Attributes that define the updates to the reference table's configuration
+        and properties.
       properties:
         description:
-          description: The description of the reference table.
+          description: Optional text describing the purpose or contents of this reference
+            table.
+          example: example description
           type: string
         file_metadata:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadata'
@@ -37999,16 +38909,20 @@ components:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesSchema'
         sync_enabled:
           description: Whether this table is synced automatically.
+          example: false
           type: boolean
         tags:
-          description: The tags of the reference table.
+          description: Tags for organizing and filtering reference tables.
+          example:
+          - tag_1
+          - tag_2
           items:
             type: string
           type: array
       type: object
     PatchTableRequestDataAttributesFileMetadata:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadata`
-        object.
+      description: Metadata specifying where and how to access the reference table's
+        data file.
       oneOf:
       - $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataCloudStorage'
       - $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataLocalFile'
@@ -38031,15 +38945,15 @@ components:
       properties:
         upload_id:
           description: The upload ID.
-          example: ''
+          example: 00000000-0000-0000-0000-000000000000
           type: string
       required:
       - upload_id
       title: LocalFileMetadataV2
       type: object
     PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails`
-        object.
+      description: Cloud storage access configuration for the reference table data
+        file.
       properties:
         aws_detail:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail'
@@ -38049,15 +38963,14 @@ components:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail'
       type: object
     PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAwsDetail`
-        object.
+      description: Amazon Web Services S3 storage access configuration.
       properties:
         aws_account_id:
-          description: The ID of the AWS account.
+          description: AWS account ID where the S3 bucket is located.
           example: '123456789000'
           type: string
         aws_bucket_name:
-          description: The name of the AWS bucket.
+          description: S3 bucket containing the CSV file.
           example: example-data-bucket
           type: string
         file_path:
@@ -38068,23 +38981,23 @@ components:
       x-oneOf-parent:
       - AwsDetail
     PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsAzureDetail`
-        object.
+      description: Azure Blob Storage access configuration.
       properties:
         azure_client_id:
-          description: The Azure client ID.
+          description: Azure service principal (application) client ID with permissions
+            to read from the container.
           example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
           type: string
         azure_container_name:
-          description: The name of the Azure container.
+          description: Azure Blob Storage container containing the CSV file.
           example: reference-data
           type: string
         azure_storage_account_name:
-          description: The name of the Azure storage account.
+          description: Azure storage account where the container is located.
           example: examplestorageaccount
           type: string
         azure_tenant_id:
-          description: The ID of the Azure tenant.
+          description: Azure Active Directory tenant ID.
           example: cccccccc-4444-5555-6666-dddddddddddd
           type: string
         file_path:
@@ -38096,8 +39009,7 @@ components:
       x-oneOf-parent:
       - AzureDetail
     PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
-      description: The definition of `PatchTableRequestDataAttributesFileMetadataOneOfAccessDetailsGcpDetail`
-        object.
+      description: Google Cloud Platform storage access configuration.
       properties:
         file_path:
           description: The relative file path from the GCS bucket root to the CSV
@@ -38105,34 +39017,35 @@ components:
           example: data/reference_tables/users.csv
           type: string
         gcp_bucket_name:
-          description: The name of the GCP bucket.
+          description: GCP bucket containing the CSV file.
           example: example-data-bucket
           type: string
         gcp_project_id:
-          description: The ID of the GCP project.
+          description: GCP project ID where the bucket is located.
           example: example-gcp-project-12345
           type: string
         gcp_service_account_email:
-          description: The email of the GCP service account.
+          description: Service account email with read permissions for the GCS bucket.
           example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
           type: string
       type: object
       x-oneOf-parent:
       - GcpDetail
     PatchTableRequestDataAttributesSchema:
-      description: The definition of `PatchTableRequestDataAttributesSchema` object.
+      description: Schema defining the updates to the structure and columns of the
+        reference table. Schema fields cannot be deleted or renamed.
       properties:
         fields:
-          description: The `schema` `fields`.
+          description: The schema fields.
           items:
             $ref: '#/components/schemas/PatchTableRequestDataAttributesSchemaFieldsItems'
           type: array
         primary_keys:
           description: List of field names that serve as primary keys for the table.
             Only one primary key is supported, and it is used as an ID to retrieve
-            rows.
+            rows. Primary keys cannot be changed after table creation.
           example:
-          - ''
+          - field_1
           items:
             type: string
           type: array
@@ -38141,12 +39054,12 @@ components:
       - primary_keys
       type: object
     PatchTableRequestDataAttributesSchemaFieldsItems:
-      description: The definition of `PatchTableRequestDataAttributesSchemaFieldsItems`
-        object.
+      description: A single field (column) in the reference table schema to be updated.
+        Schema fields cannot be deleted or renamed.
       properties:
         name:
           description: The field name.
-          example: ''
+          example: field_1
           type: string
         type:
           $ref: '#/components/schemas/ReferenceTableSchemaFieldType'
@@ -44223,6 +45136,10 @@ components:
           example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
+          type: string
       required:
       - name
       - interval
@@ -44572,6 +45489,10 @@ components:
           description: The date/time at which the rotation begins (ISO 8601 format).
           example: '2025-02-01T00:00:00Z'
           format: date-time
+          type: string
+        time_zone:
+          description: The time zone for this layer.
+          example: America/New_York
           type: string
       required:
       - effective_date
@@ -46967,6 +47888,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         update_date:
           description: A Unix millisecond timestamp given the update date of the suppression
             rule.
@@ -47028,6 +47957,14 @@ components:
             same syntax as the queries to search signals in the Signals Explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
       required:
       - name
       - enabled
@@ -47123,6 +48060,14 @@ components:
             the queries to search signals in the signal explorer.
           example: env:staging status:low
           type: string
+        tags:
+          description: List of tags associated with the suppression rule.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
         version:
           description: The current version of the suppression. This is optional, but
             it can help prevent concurrent modifications.
@@ -50791,16 +51736,21 @@ components:
           type: number
       type: object
     TableResultV2:
-      description: The definition of `TableResultV2` object.
+      description: A reference table resource containing its full configuration and
+        state.
       example:
         data:
           attributes:
             created_by: 00000000-0000-0000-0000-000000000000
             description: example description
             file_metadata:
-              access_details: {}
-              upload_id: 00000000-0000-0000-0000-000000000000
-            last_updated_by: ''
+              access_details:
+                aws_detail:
+                  aws_account_id: '123456789000'
+                  aws_bucket_name: my-bucket
+                  file_path: path/to/file.csv
+              sync_enabled: true
+            last_updated_by: 00000000-0000-0000-0000-000000000000
             row_count: 5
             schema:
               fields:
@@ -50810,7 +51760,7 @@ components:
                 type: STRING
               primary_keys:
               - id
-            source: LOCAL_FILE
+            source: S3
             status: DONE
             table_name: test_reference_table
             tags:
@@ -50824,7 +51774,7 @@ components:
           $ref: '#/components/schemas/TableResultV2Data'
       type: object
     TableResultV2Array:
-      description: The definition of `TableResultV2Array` object.
+      description: List of reference tables.
       example:
         data:
         - attributes:
@@ -50896,12 +51846,14 @@ components:
       - data
       type: object
     TableResultV2Data:
-      description: The definition of `TableResultV2Data` object.
+      additionalProperties: false
+      description: The data object containing the reference table configuration and
+        state.
       properties:
         attributes:
           $ref: '#/components/schemas/TableResultV2DataAttributes'
         id:
-          description: The ID of the reference table.
+          description: Unique identifier for the reference table.
           type: string
         type:
           $ref: '#/components/schemas/TableResultV2DataType'
@@ -50909,22 +51861,28 @@ components:
       - type
       type: object
     TableResultV2DataAttributes:
-      description: The definition of `TableResultV2DataAttributes` object.
+      description: Attributes that define the reference table's configuration and
+        properties.
       properties:
         created_by:
           description: UUID of the user who created the reference table.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         description:
-          description: The description of the reference table.
+          description: Optional text describing the purpose or contents of this reference
+            table.
+          example: example description
           type: string
         file_metadata:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadata'
         last_updated_by:
           description: UUID of the user who last updated the reference table.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         row_count:
           description: The number of successfully processed rows in the reference
             table.
+          example: 5
           format: int64
           type: integer
         schema:
@@ -50932,44 +51890,57 @@ components:
         source:
           $ref: '#/components/schemas/ReferenceTableSourceType'
         status:
-          description: The status of the reference table.
+          description: The processing status of the table.
+          example: DONE
           type: string
         table_name:
-          description: The name of the reference table.
+          description: Unique name to identify this reference table. Used in enrichment
+            processors and API calls.
+          example: table_1
           type: string
         tags:
-          description: The tags of the reference table.
+          description: Tags for organizing and filtering reference tables.
+          example:
+          - tag_1
+          - tag_2
           items:
             type: string
           type: array
         updated_at:
-          description: The timestamp of the last update to the reference table in
-            ISO 8601 format.
+          description: When the reference table was last updated, in ISO 8601 format.
+          example: '2000-01-01T01:00:00+00:00'
           type: string
       type: object
     TableResultV2DataAttributesFileMetadata:
-      description: The definition of `TableResultV2DataAttributesFileMetadata` object.
-      oneOf:
-      - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorage'
-      - $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataLocalFile'
-    TableResultV2DataAttributesFileMetadataCloudStorage:
-      description: File metadata for reference tables created by cloud storage.
+      additionalProperties: false
+      description: "Metadata specifying where and how to access the reference table's
+        data file.\n\nFor cloud storage tables (S3/GCS/Azure):\n  - sync_enabled and
+        access_details will always be present\n  - error fields (error_message, error_row_count,
+        error_type) are present only when errors occur\n\nFor local file tables:\n
+        \ - error fields (error_message, error_row_count) are present only when errors
+        occur\n  - sync_enabled, access_details are never present"
       properties:
         access_details:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetails'
+          description: Cloud storage access configuration. Only present for cloud
+            storage sources (S3, GCS, Azure).
         error_message:
-          description: The error message returned from the sync.
+          description: The error message returned from the last operation (sync for
+            cloud storage, upload for local file).
           type: string
         error_row_count:
-          description: The number of rows that failed to sync.
+          description: The number of rows that failed to process.
           format: int64
           type: integer
         error_type:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorageErrorType'
+          description: The type of error that occurred during file processing. Only
+            applicable for cloud storage sources.
         sync_enabled:
-          description: Whether this table is synced automatically.
+          description: Whether this table is synced automatically from cloud storage.
+            Only applicable for cloud storage sources.
           type: boolean
-      title: CloudFileMetadataV2
+      title: FileMetadataV2
       type: object
     TableResultV2DataAttributesFileMetadataCloudStorageErrorType:
       description: The type of error that occurred during file processing. This field
@@ -50996,24 +51967,9 @@ components:
       - STATE_ERROR
       - OPERATION_ERROR
       - SYSTEM_ERROR
-    TableResultV2DataAttributesFileMetadataLocalFile:
-      description: File metadata for reference tables created by upload.
-      properties:
-        error_message:
-          description: The error message returned from the creation/update.
-          type: string
-        error_row_count:
-          description: The number of rows that failed to create/update.
-          format: int64
-          type: integer
-        upload_id:
-          description: The upload ID that was used to create/update the table.
-          type: string
-      title: LocalFileMetadataV2
-      type: object
     TableResultV2DataAttributesFileMetadataOneOfAccessDetails:
-      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetails`
-        object.
+      description: Cloud storage access configuration for the reference table data
+        file.
       properties:
         aws_detail:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAwsDetail'
@@ -51023,15 +51979,14 @@ components:
           $ref: '#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail'
       type: object
     TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAwsDetail:
-      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAwsDetail`
-        object.
+      description: Amazon Web Services S3 storage access configuration.
       properties:
         aws_account_id:
-          description: The ID of the AWS account.
+          description: AWS account ID where the S3 bucket is located.
           example: '123456789000'
           type: string
         aws_bucket_name:
-          description: The name of the AWS bucket.
+          description: S3 bucket containing the CSV file.
           example: example-data-bucket
           type: string
         file_path:
@@ -51042,23 +51997,23 @@ components:
       x-oneOf-parent:
       - AwsDetail
     TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAzureDetail:
-      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetailsAzureDetail`
-        object.
+      description: Azure Blob Storage access configuration.
       properties:
         azure_client_id:
-          description: The Azure client ID.
+          description: Azure service principal (application) client ID with permissions
+            to read from the container.
           example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
           type: string
         azure_container_name:
-          description: The name of the Azure container.
+          description: Azure Blob Storage container containing the CSV file.
           example: reference-data
           type: string
         azure_storage_account_name:
-          description: The name of the Azure storage account.
+          description: Azure storage account where the container is located.
           example: examplestorageaccount
           type: string
         azure_tenant_id:
-          description: The ID of the Azure tenant.
+          description: Azure Active Directory tenant ID.
           example: cccccccc-4444-5555-6666-dddddddddddd
           type: string
         file_path:
@@ -51070,8 +52025,7 @@ components:
       x-oneOf-parent:
       - AzureDetail
     TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail:
-      description: The definition of `TableResultV2DataAttributesFileMetadataOneOfAccessDetailsGcpDetail`
-        object.
+      description: Google Cloud Platform storage access configuration.
       properties:
         file_path:
           description: The relative file path from the GCS bucket root to the CSV
@@ -51079,25 +52033,25 @@ components:
           example: data/reference_tables/users.csv
           type: string
         gcp_bucket_name:
-          description: The name of the GCP bucket.
+          description: GCP bucket containing the CSV file.
           example: example-data-bucket
           type: string
         gcp_project_id:
-          description: The ID of the GCP project.
+          description: GCP project ID where the bucket is located.
           example: example-gcp-project-12345
           type: string
         gcp_service_account_email:
-          description: The email of the GCP service account.
+          description: Service account email with read permissions for the GCS bucket.
           example: example-service@example-gcp-project-12345.iam.gserviceaccount.com
           type: string
       type: object
       x-oneOf-parent:
       - GcpDetail
     TableResultV2DataAttributesSchema:
-      description: The definition of `TableResultV2DataAttributesSchema` object.
+      description: Schema defining the structure and columns of the reference table.
       properties:
         fields:
-          description: The `schema` `fields`.
+          description: The schema fields.
           items:
             $ref: '#/components/schemas/TableResultV2DataAttributesSchemaFieldsItems'
           type: array
@@ -51106,7 +52060,7 @@ components:
             Only one primary key is supported, and it is used as an ID to retrieve
             rows.
           example:
-          - ''
+          - field_1
           items:
             type: string
           type: array
@@ -51115,12 +52069,11 @@ components:
       - primary_keys
       type: object
     TableResultV2DataAttributesSchemaFieldsItems:
-      description: The definition of `TableResultV2DataAttributesSchemaFieldsItems`
-        object.
+      description: A single field (column) in the reference table schema to be returned.
       properties:
         name:
           description: The field name.
-          example: ''
+          example: field_1
           type: string
         type:
           $ref: '#/components/schemas/ReferenceTableSchemaFieldType'
@@ -51138,7 +52091,7 @@ components:
       x-enum-varnames:
       - REFERENCE_TABLE
     TableRowResourceArray:
-      description: The definition of `TableRowResourceArray` object.
+      description: List of rows from a reference table query.
       properties:
         data:
           description: The rows.
@@ -51149,12 +52102,13 @@ components:
       - data
       type: object
     TableRowResourceData:
-      description: The definition of `TableRowResourceData` object.
+      additionalProperties: false
+      description: The data object containing the row column names and values.
       properties:
         attributes:
           $ref: '#/components/schemas/TableRowResourceDataAttributes'
         id:
-          description: The ID of the row.
+          description: Row identifier, corresponding to the primary key value.
           type: string
         type:
           $ref: '#/components/schemas/TableRowResourceDataType'
@@ -51162,11 +52116,12 @@ components:
       - type
       type: object
     TableRowResourceDataAttributes:
-      description: The definition of `TableRowResourceDataAttributes` object.
+      additionalProperties: false
+      description: Column values for this row in the reference table.
       properties:
         values:
-          additionalProperties: {}
-          description: The values of the row.
+          description: Key-value pairs representing the row data, where keys are field
+            names from the schema.
           type: object
       type: object
     TableRowResourceDataType:
@@ -51298,6 +52253,111 @@ components:
       required:
       - handle
       - name
+      type: object
+    TeamConnection:
+      description: A relationship between a Datadog team and a team from another external
+        system.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamConnectionAttributes'
+        id:
+          description: The unique identifier of the team connection.
+          example: 12345678-1234-5678-9abc-123456789012
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamConnectionRelationships'
+        type:
+          $ref: '#/components/schemas/TeamConnectionType'
+      required:
+      - id
+      - type
+      type: object
+    TeamConnectionAttributes:
+      description: Attributes of the team connection.
+      properties:
+        managed_by:
+          description: The entity that manages this team connection.
+          example: github_sync
+          type: string
+        source:
+          description: The name of the external source.
+          example: github
+          type: string
+      type: object
+    TeamConnectionCreateData:
+      description: Data for creating a team connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamConnectionAttributes'
+        relationships:
+          $ref: '#/components/schemas/TeamConnectionRelationships'
+        type:
+          $ref: '#/components/schemas/TeamConnectionType'
+      required:
+      - type
+      type: object
+    TeamConnectionCreateRequest:
+      description: Request for creating team connections.
+      properties:
+        data:
+          description: Array of team connections to create.
+          items:
+            $ref: '#/components/schemas/TeamConnectionCreateData'
+          type: array
+      required:
+      - data
+      type: object
+    TeamConnectionDeleteRequest:
+      description: Request for deleting team connections.
+      properties:
+        data:
+          description: Array of team connection IDs to delete.
+          items:
+            $ref: '#/components/schemas/TeamConnectionDeleteRequestDataItem'
+          type: array
+      required:
+      - data
+      type: object
+    TeamConnectionDeleteRequestDataItem:
+      description: A collection of connection ids to delete.
+      properties:
+        id:
+          description: The unique identifier of the team connection to delete.
+          example: 12345678-1234-5678-9abc-123456789012
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamConnectionType'
+      required:
+      - id
+      - type
+      type: object
+    TeamConnectionRelationships:
+      description: Relationships of the team connection.
+      properties:
+        connected_team:
+          $ref: '#/components/schemas/ConnectedTeamRef'
+        team:
+          $ref: '#/components/schemas/TeamRef'
+      type: object
+    TeamConnectionType:
+      default: team_connection
+      description: Team connection resource type.
+      enum:
+      - team_connection
+      example: team_connection
+      type: string
+      x-enum-varnames:
+      - TEAM_CONNECTION
+    TeamConnectionsResponse:
+      description: Response containing information about multiple team connections.
+      properties:
+        data:
+          description: Array of team connections.
+          items:
+            $ref: '#/components/schemas/TeamConnection'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ConnectionsResponseMeta'
       type: object
     TeamCreate:
       description: Team create
@@ -51716,6 +52776,34 @@ components:
             $ref: '#/components/schemas/TeamPermissionSetting'
           type: array
       type: object
+    TeamRef:
+      description: Reference to a Datadog team.
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamRefData'
+      type: object
+    TeamRefData:
+      description: Reference to a Datadog team.
+      properties:
+        id:
+          description: The Datadog team ID.
+          example: 87654321-4321-8765-dcba-210987654321
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamRefDataType'
+      required:
+      - id
+      - type
+      type: object
+    TeamRefDataType:
+      default: team
+      description: Datadog team resource type.
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
     TeamReference:
       description: Provides a reference to a team, including ID, type, and basic attributes/relationships.
       properties:
@@ -51986,14 +53074,31 @@ components:
     TeamSyncAttributes:
       description: Team sync attributes.
       properties:
+        frequency:
+          $ref: '#/components/schemas/TeamSyncAttributesFrequency'
         source:
           $ref: '#/components/schemas/TeamSyncAttributesSource'
+        sync_membership:
+          $ref: '#/components/schemas/TeamSyncAttributesSyncMembership'
         type:
           $ref: '#/components/schemas/TeamSyncAttributesType'
       required:
       - source
       - type
       type: object
+    TeamSyncAttributesFrequency:
+      description: How often the sync process should be run. Defaults to `once` when
+        not provided.
+      enum:
+      - once
+      - continuously
+      - paused
+      example: once
+      type: string
+      x-enum-varnames:
+      - ONCE
+      - CONTINUOUSLY
+      - PAUSED
     TeamSyncAttributesSource:
       description: The external source platform for team synchronization. Only "github"
         is supported.
@@ -52003,15 +53108,22 @@ components:
       type: string
       x-enum-varnames:
       - GITHUB
+    TeamSyncAttributesSyncMembership:
+      description: Whether to sync members from the external team to the Datadog team.
+        Defaults to `false` when not provided.
+      example: true
+      type: boolean
     TeamSyncAttributesType:
-      description: The type of synchronization operation. Only "link" is supported,
-        which links existing teams by matching names.
+      description: The type of synchronization operation. "link" connects teams by
+        matching names. "provision" creates new teams when no match is found.
       enum:
       - link
+      - provision
       example: link
       type: string
       x-enum-varnames:
       - LINK
+      - PROVISION
     TeamSyncBulkType:
       description: Team sync bulk type.
       enum:
@@ -52021,10 +53133,15 @@ components:
       x-enum-varnames:
       - TEAM_SYNC_BULK
     TeamSyncData:
-      description: Team sync data.
+      description: A configuration governing syncing between Datadog teams and teams
+        from an external system.
       properties:
         attributes:
           $ref: '#/components/schemas/TeamSyncAttributes'
+        id:
+          description: The sync's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
         type:
           $ref: '#/components/schemas/TeamSyncBulkType'
       required:
@@ -52044,6 +53161,15 @@ components:
           $ref: '#/components/schemas/TeamSyncData'
       required:
       - data
+      type: object
+    TeamSyncResponse:
+      description: Team sync configurations response.
+      properties:
+        data:
+          description: List of team sync configurations
+          items:
+            $ref: '#/components/schemas/TeamSyncData'
+          type: array
       type: object
     TeamTarget:
       description: Represents a team target for an escalation policy step, including
@@ -52374,6 +53500,9 @@ components:
         modifiedAt:
           description: Last modification time of the job.
           type: string
+        signalOutput:
+          description: Whether the job outputs signals.
+          type: boolean
       type: object
     ThreatHuntingJobResponseData:
       description: Threat hunting job response data.
@@ -53303,6 +54432,77 @@ components:
       required:
       - data
       type: object
+    UpdateDeploymentGateParams:
+      description: Parameters for updating a deployment gate.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateDeploymentGateParamsData'
+      required:
+      - data
+      type: object
+    UpdateDeploymentGateParamsData:
+      description: Parameters for updating a deployment gate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateDeploymentGateParamsDataAttributes'
+        id:
+          description: Unique identifier of the deployment gate.
+          example: 12345678-1234-1234-1234-123456789012
+          type: string
+        type:
+          $ref: '#/components/schemas/DeploymentGateDataType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    UpdateDeploymentGateParamsDataAttributes:
+      description: Attributes for updating a deployment gate.
+      properties:
+        dry_run:
+          description: Whether to run in dry-run mode.
+          example: false
+          type: boolean
+      required:
+      - dry_run
+      type: object
+    UpdateDeploymentRuleParams:
+      description: Parameters for updating a deployment rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateDeploymentRuleParamsData'
+      required:
+      - data
+      type: object
+    UpdateDeploymentRuleParamsData:
+      description: Parameters for updating a deployment rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateDeploymentRuleParamsDataAttributes'
+        type:
+          $ref: '#/components/schemas/DeploymentRuleDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    UpdateDeploymentRuleParamsDataAttributes:
+      description: Parameters for updating a deployment rule.
+      properties:
+        dry_run:
+          description: Whether to run this rule in dry-run mode.
+          example: false
+          type: boolean
+        name:
+          description: The name of the deployment rule.
+          example: Updated deployment rule
+          type: string
+        options:
+          $ref: '#/components/schemas/DeploymentRulesOptions'
+      required:
+      - dry_run
+      - name
+      - options
+      type: object
     UpdateOpenAPIResponse:
       description: Response for `UpdateOpenAPI`.
       properties:
@@ -53959,6 +55159,12 @@ components:
           type: string
         icon:
           description: URL of the user's icon.
+          type: string
+        last_login_time:
+          description: The last time the user logged in.
+          format: date-time
+          nullable: true
+          readOnly: true
           type: string
         mfa_enabled:
           description: If user has MFA enabled.
@@ -55563,6 +56769,50 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
+  /api/unstable/fleet/agents:
+    get:
+      description: 'Retrieve a list of all available Datadog Agent versions.
+
+
+        This endpoint returns the available Agent versions that can be deployed to
+        your fleet.
+
+        These versions are used when creating deployments or configuring schedules
+        for
+
+        automated Agent upgrades.'
+      operationId: ListFleetAgentVersions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetAgentVersionsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List all available Agent versions
+      tags:
+      - Fleet Automation
+      x-menu-order: 0
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/unstable/fleet/deployments:
     get:
       description: 'Retrieve a list of all deployments for fleet automation.
@@ -55619,9 +56869,15 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/unstable/fleet/deployments/configure:
     post:
-      description: 'Create a new deployment to apply configuration changes
-
-        to a fleet of hosts matching the specified filter query.'
+      description: "Create a new deployment to apply configuration changes\nto a fleet
+        of hosts matching the specified filter query.\n\nThis endpoint supports two
+        types of configuration operations:\n- `merge-patch`: Merges the provided patch
+        data with the existing configuration file,\n  creating the file if it doesn't
+        exist\n- `delete`: Removes the specified configuration file from the target
+        hosts\n\nThe deployment is created and started automatically. You can specify
+        multiple configuration\noperations that will be executed in order on each
+        target host. Use the filter query to target\nspecific hosts using the Datadog
+        query syntax."
       operationId: CreateFleetDeploymentConfigure
       requestBody:
         content:
@@ -55710,7 +56966,7 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Create a deployment
+      summary: Create a configuration deployment
       tags:
       - Fleet Automation
       x-menu-order: 1
@@ -55722,10 +56978,106 @@ paths:
       x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/deployments/upgrade:
+    post:
+      description: 'Create and immediately start a new package upgrade
+
+        on hosts matching the specified filter query.
+
+
+        This endpoint allows you to upgrade the Datadog Agent to a specific version
+
+        on hosts matching the specified filter query.
+
+
+        The deployment is created and started automatically. The system will:
+
+        1. Identify all hosts matching the filter query
+
+        2. Validate that the specified version is available
+
+        3. Begin rolling out the package upgrade to the target hosts'
+      operationId: CreateFleetDeploymentUpgrade
+      requestBody:
+        content:
+          application/json:
+            examples:
+              upgrade_agent:
+                summary: Upgrade Datadog Agent to version 7.52.0
+                value:
+                  data:
+                    attributes:
+                      filter_query: env:prod AND service:web
+                      target_packages:
+                      - name: datadog-agent
+                        version: 7.52.0
+                    type: deployment
+              upgrade_multiple_packages:
+                summary: Upgrade multiple packages
+                value:
+                  data:
+                    attributes:
+                      filter_query: env:staging
+                      target_packages:
+                      - name: datadog-agent
+                        version: 7.52.0-1
+                      - name: datadog-apm-inject
+                        version: 0.10.0
+                    type: deployment
+            schema:
+              $ref: '#/components/schemas/FleetDeploymentPackageUpgradeCreateRequest'
+        description: Request payload containing the package upgrade details.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Upgrade hosts
+      tags:
+      - Fleet Automation
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+        - fleet_policies_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/unstable/fleet/deployments/{deployment_id}:
     get:
-      description: Retrieve the details of a specific deployment using its unique
-        identifier.
+      description: "Retrieve detailed information about a specific deployment using
+        its unique identifier.\nThis endpoint returns comprehensive information about
+        a deployment, including:\n- Deployment metadata (ID, type, filter query)\n-
+        Total number of target hosts\n- Current high-level status (pending, running,
+        succeeded, failed)\n- Estimated completion time\n- Configuration operations
+        that were or are being applied\n- Detailed host list: A paginated array of
+        hosts included in this deployment with individual\n  host status, current
+        package versions, and any errors\n\nThe host list provides visibility into
+        the per-host execution status, allowing you to:\n- Monitor which hosts have
+        completed successfully\n- Identify hosts that are still in progress\n- Investigate
+        failures on specific hosts\n- View current package versions installed on each
+        host (including initial, target, and current\n  versions for each package)\n\nPagination:
+        Use the `limit` and `page` query parameters to paginate through hosts. The
+        response\nincludes pagination metadata in the `meta.hosts` field with information
+        about the current page,\ntotal pages, and total host count. The default page
+        size is 50 hosts, with a maximum of 100."
       operationId: GetFleetDeployment
       parameters:
       - description: The unique identifier of the deployment to retrieve.
@@ -55735,6 +57087,25 @@ paths:
         required: true
         schema:
           type: string
+      - description: Maximum number of hosts to return per page. Default is 50, maximum
+          is 100.
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          format: int64
+          maximum: 100
+          type: integer
+      - description: Page index for pagination (zero-based). Use this to retrieve
+          subsequent pages of hosts.
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -55755,7 +57126,7 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      summary: Get a deployment by ID
+      summary: Get a configuration deployment by ID
       tags:
       - Fleet Automation
       x-menu-order: 3
@@ -55768,11 +57139,23 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/unstable/fleet/deployments/{deployment_id}/cancel:
     post:
-      description: 'Cancel this deployment and stop all associated operations.
+      description: 'Cancel an active deployment and stop all pending operations.
 
-        If a workflow is currently running for this deployment, it is canceled immediately.
+        When you cancel a deployment:
 
-        Changes already applied to hosts are not rolled back.'
+        - All pending operations on hosts that haven''t started yet are stopped
+
+        - Operations currently in progress on hosts may complete or be interrupted,
+        depending on their current state
+
+        - Configuration changes or package upgrades already applied to hosts are not
+        rolled back
+
+
+        After cancellation, you can view the final state of the deployment using the
+        GET endpoint to see which hosts
+
+        were successfully updated before the cancellation.'
       operationId: CancelFleetDeployment
       parameters:
       - description: The unique identifier of the deployment to cancel.
@@ -55807,6 +57190,418 @@ paths:
         permissions:
         - agent_upgrade_write
         - fleet_policies_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/schedules:
+    get:
+      description: 'Retrieve a list of all schedules for automated fleet deployments.
+
+
+        Schedules allow you to automate package upgrades by defining maintenance windows
+
+        and recurrence rules. Each schedule automatically creates deployments based
+        on its
+
+        configuration.'
+      operationId: ListFleetSchedules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetSchedulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List all schedules
+      tags:
+      - Fleet Automation
+      x-menu-order: 0
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Create a new schedule for automated package upgrades.
+
+
+        Schedules define when and how often to automatically deploy package upgrades
+        to a fleet
+
+        of hosts. Each schedule includes:
+
+        - A filter query to select target hosts
+
+        - A recurrence rule defining maintenance windows
+
+        - A version strategy (e.g., always latest, or N versions behind latest)
+
+
+        When the schedule triggers during a maintenance window, it automatically creates
+        a
+
+        deployment that upgrades the Datadog Agent to the specified version on all
+        matching hosts.'
+      operationId: CreateFleetSchedule
+      requestBody:
+        content:
+          application/json:
+            examples:
+              conservative_staging:
+                summary: Conservative staging updates (N-1 version)
+                value:
+                  data:
+                    attributes:
+                      name: Staging Environment - Conservative Updates
+                      query: env:staging
+                      rule:
+                        days_of_week:
+                        - Fri
+                        maintenance_window_duration: 240
+                        start_maintenance_window: '22:00'
+                        timezone: UTC
+                      status: active
+                      version_to_latest: 1
+                    type: schedule
+              weekly_production_update:
+                summary: Weekly production agent updates
+                value:
+                  data:
+                    attributes:
+                      name: Weekly Production Agent Updates
+                      query: env:prod
+                      rule:
+                        days_of_week:
+                        - Mon
+                        - Wed
+                        maintenance_window_duration: 180
+                        start_maintenance_window: 02:00
+                        timezone: America/New_York
+                      status: active
+                      version_to_latest: 0
+                    type: schedule
+            schema:
+              $ref: '#/components/schemas/FleetScheduleCreateRequest'
+        description: Request payload containing the schedule details.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetScheduleResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create a schedule
+      tags:
+      - Fleet Automation
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/schedules/{id}:
+    delete:
+      description: 'Delete a schedule permanently.
+
+
+        When you delete a schedule:
+
+        - The schedule is permanently removed and will no longer create deployments
+
+        - Any deployments already created by this schedule are not affected
+
+        - This action cannot be undone
+
+
+        If you want to temporarily stop a schedule from creating deployments, consider
+
+        updating its status to "inactive" instead of deleting it.'
+      operationId: DeleteFleetSchedule
+      parameters:
+      - description: The unique identifier of the schedule to delete.
+        example: abc-def-ghi-123
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Schedule successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete a schedule
+      tags:
+      - Fleet Automation
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: 'Retrieve detailed information about a specific schedule using
+        its unique identifier.
+
+
+        This endpoint returns comprehensive information about a schedule, including:
+
+        - Schedule metadata (ID, name, creation/update timestamps)
+
+        - Filter query for selecting target hosts
+
+        - Recurrence rule defining when deployments are triggered
+
+        - Version strategy for package upgrades
+
+        - Current status (active or inactive)'
+      operationId: GetFleetSchedule
+      parameters:
+      - description: The unique identifier of the schedule to retrieve.
+        example: abc-def-ghi-123
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetScheduleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a schedule by ID
+      tags:
+      - Fleet Automation
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: 'Partially update a schedule by providing only the fields you want
+        to change.
+
+
+        This endpoint allows you to modify specific attributes of a schedule without
+
+        affecting other fields. Common use cases include:
+
+        - Changing the schedule status between active and inactive
+
+        - Updating the maintenance window times
+
+        - Modifying the filter query to target different hosts
+
+        - Adjusting the version strategy
+
+
+        Only include the fields you want to update in the request body. All fields
+
+        are optional in a PATCH request.'
+      operationId: UpdateFleetSchedule
+      parameters:
+      - description: The unique identifier of the schedule to update.
+        example: abc-def-ghi-123
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              change_maintenance_window:
+                summary: Change maintenance window time
+                value:
+                  data:
+                    attributes:
+                      rule:
+                        days_of_week:
+                        - Mon
+                        - Wed
+                        - Fri
+                        maintenance_window_duration: 240
+                        start_maintenance_window: 03:00
+                        timezone: America/New_York
+                    type: schedule
+              pause_schedule:
+                summary: Pause a schedule
+                value:
+                  data:
+                    attributes:
+                      status: inactive
+                    type: schedule
+              update_query:
+                summary: Update target hosts query
+                value:
+                  data:
+                    attributes:
+                      query: env:prod AND service:api
+                    type: schedule
+            schema:
+              $ref: '#/components/schemas/FleetSchedulePatchRequest'
+        description: Request payload containing the fields to update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetScheduleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update a schedule
+      tags:
+      - Fleet Automation
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/schedules/{id}/trigger:
+    post:
+      description: 'Manually trigger a schedule to immediately create and start a
+        deployment.
+
+
+        This endpoint allows you to manually initiate a deployment using the schedule''s
+
+        configuration, without waiting for the next scheduled maintenance window.
+        This is
+
+        useful for:
+
+        - Testing a schedule before it runs automatically
+
+        - Performing an emergency update outside the regular maintenance window
+
+        - Creating an ad-hoc deployment with the same settings as a schedule
+
+
+        The deployment is created immediately with:
+
+        - The same filter query as the schedule
+
+        - The package version determined by the schedule''s version strategy
+
+        - All matching hosts as targets
+
+
+        The manually triggered deployment is independent of the schedule and does
+        not
+
+        affect the schedule''s normal recurrence pattern.'
+      operationId: TriggerFleetSchedule
+      parameters:
+      - description: The unique identifier of the schedule to trigger.
+        example: abc-def-ghi-123
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetDeploymentResponse'
+          description: CREATED - Deployment successfully created and started.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Trigger a schedule deployment
+      tags:
+      - Fleet Automation
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - agent_upgrade_write
       x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -62501,7 +64296,9 @@ paths:
         permissions:
         - user_app_keys
     get:
-      description: Get an application key owned by current user
+      description: 'Get an application key owned by current user.
+
+        The `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: GetCurrentUserApplicationKey
       parameters:
       - $ref: '#/components/parameters/ApplicationKeyID'
@@ -62535,7 +64332,9 @@ paths:
         permissions:
         - user_app_keys
     patch:
-      description: Edit an application key owned by current user
+      description: 'Edit an application key owned by current user.
+
+        The `key` field is not returned for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: UpdateCurrentUserApplicationKey
       parameters:
       - $ref: '#/components/parameters/ApplicationKeyID'
@@ -62973,6 +64772,411 @@ paths:
       x-unstable: '**Note: Data Access is in preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/deployment_gates:
+    post:
+      description: Endpoint to create a deployment gate.
+      operationId: CreateDeploymentGate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeploymentGateParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/deployment_gates/{gate_id}/rules:
+    post:
+      description: Endpoint to create a deployment rule. A gate for the rule must
+        already exist.
+      operationId: CreateDeploymentRule
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeploymentRuleParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create deployment rule
+      tags:
+      - Deployment Gates
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/deployment_gates/{gate_id}/rules/{id}:
+    delete:
+      description: Endpoint to delete a deployment rule.
+      operationId: DeleteDeploymentRule
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      - description: The ID of the deployment rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDGatesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete deployment rule
+      tags:
+      - Deployment Gates
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Endpoint to get a deployment rule.
+      operationId: GetDeploymentRule
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      - description: The ID of the deployment rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDRulesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get deployment rule
+      tags:
+      - Deployment Gates
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Endpoint to update a deployment rule.
+      operationId: UpdateDeploymentRule
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      - description: The ID of the deployment rule.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeploymentRuleParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDRulesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update deployment rule
+      tags:
+      - Deployment Gates
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/deployment_gates/{id}:
+    delete:
+      description: Endpoint to delete a deployment gate. Rules associated with the
+        gate are also deleted.
+      operationId: DeleteDeploymentGate
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDGatesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Endpoint to get a deployment gate.
+      operationId: GetDeploymentGate
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDGatesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Endpoint to update a deployment gate.
+      operationId: UpdateDeploymentGate
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeploymentGateParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/HTTPCDGatesNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/domain_allowlist:
     get:
       description: Get the domain allowlist for an organization.
@@ -65077,6 +67281,7 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
+      deprecated: true
       description: The bulk update endpoint for creating, updating, and deleting attachments
         for a given incident.
       operationId: UpdateIncidentAttachments
@@ -65116,9 +67321,7 @@ paths:
         operator: OR
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/incidents/{incident_id}/impacts:
     get:
       description: Get all impacts for an incident.
@@ -73212,8 +75415,8 @@ paths:
           format: int64
           minimum: 0
           type: integer
-      - description: Sort field and direction. Use field name for ascending, prefix
-          with "-" for descending.
+      - description: Sort field and direction for the list of reference tables. Use
+          field name for ascending, prefix with "-" for descending.
         example: -updated_at
         in: query
         name: sort
@@ -73261,16 +75464,68 @@ paths:
       - Reference Tables
       x-menu-order: 3
     post:
-      description: 'Create a new reference table. You can provide data in two ways:
-        1) Call POST api/v2/reference-tables/upload first to get an upload ID, then
-        PUT chunks of CSV data to each provided URL, and finally call this POST endpoint
-        with the upload_id in file_metadata, OR 2) Provide access_details in file_metadata
-        pointing to a CSV file in cloud storage (Amazon S3, Azure Blob Storage, or
-        GCP Cloud Storage).'
+      description: "Creates a reference table. You can provide data in two ways:\n1.
+        Call POST /api/v2/reference-tables/upload to get an upload ID. Then, PUT the
+        CSV data\n   (not the file itself) in chunks to each URL in the request body.
+        Finally, call this\n   POST endpoint with `upload_id` in `file_metadata`.\n2.
+        Provide `access_details` in `file_metadata` pointing to a CSV file in cloud
+        storage."
       operationId: CreateReferenceTable
       requestBody:
         content:
           application/json:
+            examples:
+              cloud_storage:
+                summary: Create table from cloud storage (S3)
+                value:
+                  data:
+                    attributes:
+                      description: Customer reference data synced from S3
+                      file_metadata:
+                        access_details:
+                          aws_detail:
+                            aws_account_id: '924305315327'
+                            aws_bucket_name: my-data-bucket
+                            file_path: customers.csv
+                        sync_enabled: true
+                      schema:
+                        fields:
+                        - name: customer_id
+                          type: STRING
+                        - name: customer_name
+                          type: STRING
+                        - name: email
+                          type: STRING
+                        primary_keys:
+                        - customer_id
+                      source: S3
+                      table_name: customer_reference_data
+                      tags:
+                      - team:data-platform
+                    type: reference_table
+              local_file:
+                summary: Create table from local file upload
+                value:
+                  data:
+                    attributes:
+                      description: Product catalog uploaded via local file
+                      file_metadata:
+                        upload_id: 00000000-0000-0000-0000-000000000000
+                      schema:
+                        fields:
+                        - name: product_id
+                          type: STRING
+                        - name: product_name
+                          type: STRING
+                        - name: price
+                          type: DOUBLE
+                        primary_keys:
+                        - product_id
+                      source: LOCAL_FILE
+                      table_name: product_catalog
+                      tags:
+                      - team:ecommerce
+                    type: reference_table
             schema:
               $ref: '#/components/schemas/CreateTableRequest'
         required: true
@@ -73300,7 +75555,7 @@ paths:
       description: Delete a reference table by ID
       operationId: DeleteTable
       parameters:
-      - description: The ID of the reference table to delete
+      - description: Unique identifier of the reference table to delete
         in: path
         name: id
         required: true
@@ -73327,7 +75582,7 @@ paths:
       description: Get a reference table by ID
       operationId: GetTable
       parameters:
-      - description: The ID of the reference table to retrieve
+      - description: Unique identifier of the reference table to retrieve
         in: path
         name: id
         required: true
@@ -73365,7 +75620,7 @@ paths:
         pointing to a CSV file in the same type of cloud storage.'
       operationId: UpdateReferenceTable
       parameters:
-      - description: The ID of the reference table to update
+      - description: Unique identifier of the reference table to update
         in: path
         name: id
         required: true
@@ -73399,7 +75654,7 @@ paths:
       description: Get reference table rows by their primary key values.
       operationId: GetRowsByID
       parameters:
-      - description: The ID of the reference table
+      - description: Unique identifier of the reference table to get rows from
         example: table-123
         in: path
         name: id
@@ -81573,7 +83828,217 @@ paths:
         permissions:
         - teams_read
         - teams_manage
+  /api/v2/team/connections:
+    delete:
+      description: Delete multiple team connections.
+      operationId: DeleteTeamConnections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamConnectionDeleteRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Delete team connections
+      tags:
+      - Team Connections
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Returns all team connections.
+      operationId: ListTeamConnections
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: Filter team connections by external source systems.
+        explode: false
+        in: query
+        name: filter[sources]
+        required: false
+        schema:
+          items:
+            example: github
+            type: string
+          type: array
+        style: form
+      - description: Filter team connections by Datadog team IDs.
+        explode: false
+        in: query
+        name: filter[team_ids]
+        required: false
+        schema:
+          items:
+            example: 12345678-1234-5678-9abc-123456789012
+            type: string
+          type: array
+        style: form
+      - description: Filter team connections by connected team IDs from external systems.
+        explode: false
+        in: query
+        name: filter[connected_team_ids]
+        required: false
+        schema:
+          items:
+            example: '@MyGitHubAccount/my-team-name'
+            type: string
+          type: array
+        style: form
+      - description: Filter team connections by connection IDs.
+        explode: false
+        in: query
+        name: filter[connection_ids]
+        required: false
+        schema:
+          items:
+            example: 12345678-1234-5678-9abc-123456789012
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamConnectionsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: List team connections
+      tags:
+      - Team Connections
+      x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create multiple team connections.
+      operationId: CreateTeamConnections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamConnectionCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamConnectionsResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Create team connections
+      tags:
+      - Team Connections
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/sync:
+    get:
+      description: 'Get all team synchronization configurations.
+
+        Returns a list of configurations used for linking or provisioning teams with
+        external sources like GitHub.'
+      operationId: GetTeamSync
+      parameters:
+      - description: Filter by the external source platform for team synchronization
+        in: query
+        name: filter[source]
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamSyncAttributesSource'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamSyncResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Team sync configurations not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team sync configurations
+      tags:
+      - Teams
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
+        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: 'This endpoint attempts to link your existing Datadog teams with
         GitHub teams by matching their names.
@@ -81600,7 +84065,8 @@ paths:
         using a normalized exact match; case is ignored and spaces are removed. No
         modifications are made
 
-        to teams in GitHub. This will not create new Teams in Datadog.'
+        to teams in GitHub. This only creates new teams in Datadog when type is set
+        to `provision`.'
       operationId: SyncTeams
       requestBody:
         content:
@@ -82723,8 +85189,7 @@ paths:
         operator: OR
         permissions:
         - test_optimization_read
-      x-unstable: '**Note**: This endpoint is in public beta and may be subject to
-        change.
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/usage/application_security:
@@ -84481,6 +86946,10 @@ tags:
 
     view certain types of telemetry (for example, logs, traces, metrics, and RUM data).'
   name: Datasets
+- description: Manage Deployment Gates using this API to reduce the likelihood and
+    impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/)
+    for more information.
+  name: Deployment Gates
 - description: 'Configure your Datadog Email Domain Allowlist directly through the
     Datadog API.
 
@@ -84523,9 +86992,24 @@ tags:
   name: Fastly Integration
 - description: 'Manage automated deployments across your fleet of hosts.
 
-    Use these endpoints to create, retrieve, and cancel deployments
 
-    that apply configuration changes to multiple hosts at once.'
+    Fleet Automation provides two types of deployments:
+
+
+    Configuration Deployments (`/configure`):
+
+    - Apply configuration file changes to target hosts
+
+    - Support merge-patch operations to update specific configuration fields
+
+    - Support delete operations to remove configuration files
+
+    - Useful for updating Datadog Agent settings, integration configs, and more
+
+
+    Package Upgrade Deployments (`/upgrade`):
+
+    - Upgrade the Datadog Agent to specific versions'
   name: Fleet Automation
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
@@ -84855,6 +87339,9 @@ tags:
     use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
     information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
+- description: View and manage relationships between Datadog teams and teams from
+    external sources, such as GitHub.
+  name: Team Connections
 - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
     for more information.
   name: Teams
