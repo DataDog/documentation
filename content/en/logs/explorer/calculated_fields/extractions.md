@@ -13,9 +13,9 @@ Use Calculated Fields Extractions to extract values from your logs in the Log Ex
 
 ## Overview
 
-Calculated Fields Extractions lets you apply Grok parsing rules at query time in the Log Explorer, making it possible to extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with AI-powered parsing, or manually define your own Grok patterns to match your specific needs.
+Calculated Fields Extractions lets you apply Grok parsing rules at query time in the Log Explorer, enabling you to extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with AI-powered parsing, or manually define your own Grok patterns to match your specific needs.
 
-To create an extraction calculated field, see [Create a calculated field][1] in the Calculated Fields documentation.
+To create an extraction calculated field, see [Create a calculated field][1].
 
 ## Automatic parsing
 
@@ -30,11 +30,11 @@ There are two ways to access automatic parsing from the log side panel:
 
 When you click the **AI** button, Datadog automatically populates the Calculated Field form:
 
-1. **Extract from**: Defaults to the full log message, but you can change the dropdown to parse individual attributes instead.
-2. **Log sample**: Automatically populated from your selected log.
-3. **Parsing rule**: Datadog analyzes the log sample and generates a Grok rule.
+1. **Extract from**: Defaults to the full log message. You can change the dropdown to parse individual attributes instead.
+2. **Log sample**: Automatically populated with your selected log.
+3. **Parsing rule**: Automatically generated from the log sample. 
 
-You can review and modify the generated rule to match your needs. Edit it manually or click **Generate a new rule** for Datadog to try again. You can also modify, insert, or replace the log sample to test your rule against different log formats.
+Review and modify the generated rule as needed. You can edit it manually or click **Generate a new rule** for Datadog to try again. You can also modify, insert, or replace the log sample to test your rule against different log formats.
 
 <div class="alert alert-tip">Use the thumbs up or thumbs down buttons to provide inline feedback and help improve the feature.</div>
 
