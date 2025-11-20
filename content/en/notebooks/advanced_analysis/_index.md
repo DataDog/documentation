@@ -190,10 +190,7 @@ You can view, search, edit, and delete existing report schedules from the **Repo
 
 {{< img src="/notebooks/analysis_features/reports_page.png" alt="Filtered view of the Reports tab" style="width:100%;" >}}
 
-
 **Note**: To schedule reports and view other users’ schedules, users need the **CSV Report Schedules Write** permission. To edit other users’ schedules, users need the **CSV Report Schedules Manage** permission. These permissions can be granted by a user with the **Org Management** permission.
-
-{{< img src="/notebooks/analysis_features/reports_page.png" alt="Filtered view of the Reports tab" style="width:100%;" >}}
 
 ## Further reading
 
