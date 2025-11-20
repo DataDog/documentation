@@ -43,7 +43,7 @@ If your repositories are [connected to Datadog][4], and an error can be fixed by
 
 {{% collapse-content title="Example: Increasing memory limit for a deployment" level="h4" expanded=true id="example-pr" %}}
 
-{{< img src="containers/remediation/bitsai_action2.mp4" alt="In a Remediation side panel, the Recommended Next Steps section suggests that the user 'Increase memory limit'. The user enters a new value for the memory limit, increasing it from 10 mebibytes to 20 mebibytes. Clicking Fix with Bits AI brings up a dialog that prompts the user to select a connected repository. " video="true" style="width:80%;" >}}
+{{< img src="containers/remediation/bitsai_action2.mp4" alt="In a Remediation side panel, the Recommended Next Steps section suggests that the user 'Increase memory limit'. The user enters a new value for the memory limit, increasing it from 10 mebibytes to 20 mebibytes. Clicking Fix with Bits AI brings up a dialog that prompts the user to select a connected repository." video="true" style="width:80%;" >}}
 
 When a pod is terminated because the memory usage exceeded its limit, you may be able to fix the error by increasing your container's memory limit.
 
