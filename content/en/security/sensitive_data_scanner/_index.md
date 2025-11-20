@@ -91,15 +91,15 @@ See [Set Up Pipelines][7] for more information.
 
 ## Scan cloud storage
 
-{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
+{{< callout header="Preview Program" url="https://www.datadoghq.com/product-preview/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances available in our Preview Program. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="The Findings page's datastore section with three Amazon S3 findings" style="width:100%;" >}}
 
-If you have Sensitive Data Scanner enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
+If you have Sensitive Data Scanner enabled, you can catalog and classify sensitive data in your Amazon S3 buckets. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
 
-Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time.
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time.
 
 Sensitive Data Scanner leverages its [entire rules library][10] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. **Note**: Data stores and their files are only read in your environment—no sensitive data that was scanned is sent back to Datadog.
 
