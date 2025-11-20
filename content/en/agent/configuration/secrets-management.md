@@ -650,6 +650,19 @@ To refresh manually, use:
 datadog-agent secret refresh
 ```
 
+### Automatic secrets refresh on API key failure / invalidation
+
+Starting in Agent version v7.74, the Agent can automatically refresh secrets when it detects an invalid API key. This happens when the Agent receives a 403 Forbidden response from Datadog or when the periodic health check detects an invalid API key.
+
+To enable this feature, set `secret_refresh_on_api_key_failure_interval` (in minutes) in your `datadog.yaml` file:
+```yaml
+api_key: ENC[<secret_handle>]
+
+secret_refresh_on_api_key_failure_interval: 5
+```
+
+The interval is the interval of time between automatic refresh attempts. Setting it to `0` disables this feature (default).
+
 ### Enabling DDOT collector refresh
 If you are using [DDOT collector][6] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
 ```
