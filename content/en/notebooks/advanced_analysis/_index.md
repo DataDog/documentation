@@ -152,7 +152,7 @@ To download your dataset as a CSV file:
 4. The CSV file automatically downloads to your computer.
 
 ### Schedule a CSV report
-With scheduled reports, you can automatically receive query results for analysis cells through email or Slack.
+With scheduled reports, you can automatically receive query results from notebook analysis cells by email or Slack.
 
 To schedule a report on an analysis cell, select **Schedule report** from the dropdown next to **Save to Dashboard**.
 
