@@ -40,8 +40,8 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
      auth:
        username: "user"
        password: "pass"
-       privateKeyPath: <file> # Authentication supports password and/or private key. 
-       profile: cisco_ios
+       privateKeyPath: <file> # authentication supports password and/or private key. 
+       profile: cisco_ios # optional - apply your device profile
    ```
    **Note**: Ensure the namespace matches the namespace used for device monitoring to enable proper correlation.
 
@@ -60,11 +60,25 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
          host_key_algorithms: [ssh-rsa]
    ```
 
-TO DO: Add steps about using default profiles (not the same as SNMP profiles)
+3. Configure the device profile if not already specified in your `conf.yaml`. Default profiles are located at `/conf.d/network_config_management.d/default_profiles`.
 
-the profile is defining commands with specific types: running, startup, and version and a field values for the CLI commands that get the info intended with each type
+   **Profile configuration**
 
-3. Restart the Agent to apply the configuration changes.
+   Each default profile (in JSON format) specifies:
+   
+   - **Configuration commands**: CLI commands to retrieve different configuration types:
+     - `running`: Gets the current active configuration
+     - `startup`: Gets the configuration that loads on device boot
+     - `version`: Gets device information such as OS version
+   
+   - **Processing rules**: Regex patterns for:
+     - **Metadata extraction**: Captures timestamp, author, and other metadata when available
+     - **Validation**: Verifies command execution was successful and returned valid data
+     - **Redaction**: Removes sensitive data or unnecessary lines from configurations
+
+   **Note**: NCM uses dedicated default profiles that differ from SNMP device profiles. Custom profiles are not supported.
+
+4. Restart the Agent to apply the configuration changes.
 
 **Note**: This feature is read-only in preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them. 
 
@@ -78,6 +92,19 @@ Configuration Management is accessible from the device side panel in Network Dev
 
    {{< img src="/network_device_monitoring/config_mgmt/config_tab_redacted.png" alt="Network Device Management side panel, highlighting the Configuration tab." style="width:90%;" >}}
 
+   On the Configuration tab, you can filter the configuration list to display:
+   - **All**: Shows both running and startup configurations
+   - **Running**: The active, live configuration running on the device
+   - **Startup**: The saved configuration that loads when the device boots
+
+   **Running configuration**
+   : The active configuration with all live changes applied to the device. This is what the device uses in real-time.
+
+   **Startup configuration**
+   : The saved configuration that persists across reboots. When a device restarts, it loads this configuration.
+
+   <div class="alert alert-info">Startup configurations cannot be modified directly. To update the startup configuration, apply changes to the running configuration first, then save it to overwrite the startup configuration. This ensures only validated configurations persist across reboots.</div>
+   
 ### Time picker and retention
 
 The time controls at the top of the page allow you to select which configuration history to view. By default, the view shows the last 2 days of configuration changes. You can extend this range to view older versions, up to the retention limit (1 year).
