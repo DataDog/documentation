@@ -14,28 +14,29 @@ further_reading:
 
 Define the metrics you want to measure during your experimentation. Metrics can be built using Real User Monitoring (RUM) and Product Analytics data.
 
-In order to create a metric, you must have Datadog’s client SDK installed in your application and be actively capturing data.
-
+<div class="alert alert-info"> In order to create a metric, you must have Datadog’s client SDK installed in your application and be actively capturing data.
+</div>
 
 ## Create your first metric
 
-To create a metric for your experiments: 
+To create a metric for your experiment: 
 
 1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
-2. Click **“Create Metric”** at the top right corner. 
-3. Click **“Select an Event”** to see a list of all of the actions and views collected from the RUM SDK. 
+2. Click **+ Create Metric** at the top right corner. 
+3. Click **Select an Event** to see a list of all of the actions and views collected from the RUM SDK.
+4. Add a metric name and optionally a description. Then, click **Save**.
 
 ## Specify metric aggregation
 
 ### Default metric aggregation 
-After you’ve selected your event of interest, you can specify an aggregation method. Metrics default to a **count of unique** subjects (often users) that had at least one event. But, you can also choose to _count the total number_ of events, or _sum a property_ of that event:
+After you’ve selected your event of interest, you can specify an aggregation method. Metrics default to a **count of unique** subjects (often users) that had at least one event. However, you can also choose to _count the total number_ of events, or _sum a property_ of that event:
 
 {{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
 
 
 ### Default normalized metrics 
 
-All metrics are normalized by the number of enrolled subjects. That is, a **count of unique users** metric is computed as: 
+All metrics are normalized by the number of enrolled subjects. For example, a **count of unique users** metric is computed as: 
 
 ```
 
@@ -59,7 +60,10 @@ Sum of =  --------------------------------------------------------
 
 ### Custom normalized metrics
 
-You can also choose to normalize metrics by a different denominator. To do this, click **Create ratio** `WHERE?`. This allows you to normalize your metric by another event, counting either the number of subjects with that event, the total number of events, or the sum of an event property. 
+You can also choose to normalize metrics by a different denominator. To do this, click on a metric
+then on **Create ratio**. This allows you to normalize your metric by another event, counting either the number of subjects with that event, the total number of events, or the sum of an event property. 
+
+{{< img src="/product_analytics/experiment/exp_create_ratio.png" alt="Click on this button to create a ratio." style="width:100%;" >}}
 
 For example, an e-commerce company that wants to measure the _Average Order Value_ can create a ratio metric with the sum of purchase revenue as the numerator, and the count of purchase events as the denominator. 
 
@@ -67,12 +71,12 @@ Datadog’s statistical engine accounts for correlations between the numerator a
 
 
 ## Add filters
-You can also add filters (`to your metrics??`), similar to other Product Analytics dashboards. For instance, you might want to filter page views based on referring URL or UTM parameters. Similarly, you might want to filter actions to a specific page or value of a custom attribute.
-
-{{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
+You can also add filters to your metrics, similar to other Product Analytics dashboards. For instance, you might want to filter page views based on referring URL or UTM parameters. Similarly, you might want to filter actions to a specific page or value of a custom attribute. As you add filters, you can check metric values in real time using the chart on the right.
 
 
-As you add filters, you can check metric values in real time using the chart on the right (`WHERE??`).
+{{< img src="/product_analytics/experiment/exp_filter_by.png" alt="Filter your metric my specific properties." style="width:100%;" >}}
+
+
 
 ## Advanced options
 Datadog supports several advanced options specific to experimentation:
