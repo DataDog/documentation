@@ -10,7 +10,7 @@ Forms are in Preview. Click <b>Request Access</b>, and fill in the Datadog Produ
 
 ## Overview
 
-Datadog Forms allows you to collect input, analyze responses, and trigger automations in Datadog. Forms and their responses can be shared across your organization, allowing you to collect and analyze data with your team.
+Datadog Forms allow you to collect input, analyze responses, and trigger automations in Datadog. Forms and their responses can be shared across your organization, allowing you to collect and analyze data with your team.
 
 ## Examples
 
