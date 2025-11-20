@@ -8,11 +8,11 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) has specific compatibility requirements that vary by operating system, environment, and language runtime. This page outlines supported platforms, requirements, and known limitations that may impact SSI for your specific setup.
+Single Step Instrumentation (SSI) has compatibility requirements that vary by operating system, environment, and language runtime. This page outlines supported platforms, requirements, and known limitations that may impact SSI for your specific setup.
 
-## Compatibility by deployment environment
+## Compatibility by application environment
 
-Select your deployment platform to see compatibility requirements and limitations:
+Select your environment to see compatibility requirements and limitations:
 
 {{< tabs >}}
 {{% tab "Linux Host" %}}
@@ -30,8 +30,8 @@ Select your deployment platform to see compatibility requirements and limitation
 
 ### Limitations
 
-- **SELinux**: Not supported on hardened environments such as SELinux
-- **Small VM instances**: You may encounter timeouts with smaller VM instances such as `t2.micro`. Upgrade to a larger instance such as `t2.small` or higher
+- **SELinux**: Hardened SELinux environments are not supported.
+- **Small VM instances**: Very small instance types (for example, `t2.micro`) can experience timeouts. Use a larger instance type such as `t2.small` or higher.
 
 {{% /tab %}}
 
@@ -50,9 +50,8 @@ Select your deployment platform to see compatibility requirements and limitation
 
 ### Limitations
 
-- **Rootless Docker mode**: If you are using Docker in rootless mode (Docker running without root privileges for added security), you need to configure the socket path to ensure SSI can connect to Docker. Update the socket path in `/etc/datadog-agent/inject/docker_config.yaml` to match your environment. By default, this path is set to `/run/user/$UID/docker.sock`, but it may vary based on your setup.
-
-- **Custom `runc` shims**: If your environment uses custom `runc` shims (for GPU support or other specialized tasks), you must adjust your configuration to avoid conflicts. SSI requires its own `runc` shim to enable automatic instrumentation within Docker containers. To ensure compatibility, update the `runtimes` property in `/etc/datadog-agent/inject/docker_config.yaml` to include both your custom shim and the Datadog shim.
+- **Rootless Docker mode**: When running Docker in rootless mode, update the socket path in `/etc/datadog-agent/inject/docker_config.yaml` so SSI can connect to Docker. The default path is `/run/user/$UID/docker.sock`, but your environment may differ.
+- **Custom `runc` shims**: If your environment uses custom `runc` shims (for example, for GPU workloads), update the `runtimes` entry in `/etc/datadog-agent/inject/docker_config.yaml` to include both your custom runtime and the Datadog runtime required for SSI.
 
 {{% /tab %}}
 
@@ -61,7 +60,7 @@ Select your deployment platform to see compatibility requirements and limitation
 ### Compatibility
 
 - **Status**: GA
-- **Supported node pools**: Linux only (see [Linux distributions reference](#linux-distributions-reference))
+- **Supported node pools**: Linux nodes only (see [Linux distributions reference](#linux-distributions-reference))
 - **Supported architectures**: x86_64, arm64
 
 ### Requirements
@@ -71,8 +70,8 @@ Select your deployment platform to see compatibility requirements and limitation
 
 ### Limitations
 
-- **Linux node pools only**: Only Linux node pools are supported
-- **Windows pods**: For Kubernetes clusters with Windows pods, use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection
+- **Linux node pools only**: Only Linux node pools are supported.
+- **Windows pods**: For Kubernetes clusters with Windows pods, use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
 
 [1]: /containers/cluster_agent/admission_controller/
 
@@ -93,8 +92,8 @@ Select your deployment platform to see compatibility requirements and limitation
 
 ### Limitations
 
-- **IIS only**: Only .NET applications running in IIS are supported
-- **Other .NET applications**: .NET applications not running in IIS are not supported
+- **IIS only**: Only .NET applications running in IIS are supported.
+- **Other .NET applications**: .NET applications not running in IIS are not supported.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -107,10 +106,10 @@ SSI automatically instruments applications written in the following languages by
 
 SSI compatibility depends on two factors:
 
-1. **SDK version**: SSI must support the Datadog Language SDK version (minimum versions listed below)
-2. **Runtime version**: The Datadog Language SDK must support your application's language runtime version
+1. **SDK version**: SSI must support the Datadog Language SDK version (minimum versions listed below).
+2. **Runtime version**: The Datadog Language SDK must support your application's language runtime version.
 
-If either requirement isn't met, SSI falls back gracefully and your application runs without instrumentation.
+If either requirement is not met, SSI falls back gracefully and your application runs without instrumentation.
 
 </div>
 
@@ -128,7 +127,7 @@ For a complete list of supported Java versions, see the [Java SDK compatibility 
 
 ### Limitations
 
-By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or low-value traces. These exclusions are defined in the [Java SDK denylist][2]. If your workload is included, SSI skips loading the Java SDK.
+By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or non-actionable traces. These exclusions are defined in the [Java SDK denylist][2]. If your workload is included, SSI skips loading the Java SDK.
 
 ### Known issues
 
@@ -218,7 +217,7 @@ For other distributions, you may need to install Node.js separately.
 
 ### Limitations
 
-- **ESM modules**: Instrumentation of ESM (ECMAScript modules) is not currently supported
+- **ESM modules**: Instrumentation of ESM (ECMAScript modules) is not supported.
 
 [1]: /tracing/trace_collection/compatibility/nodejs
 
@@ -286,7 +285,7 @@ The following Linux distributions and architectures are supported for SSI across
 | Oracle Linux | 8              | x86_64, arm64 |
 | Rocky Linux  | 8              | x86_64, arm64 |
 
-<div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#language-specific-requirements">Language-specific requirements</a>.</div>
+<div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#supported-language-runtimes">Supported language runtimes</a>.</div>
 
 ## Further reading
 
