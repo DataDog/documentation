@@ -7,7 +7,7 @@ further_reading:
     text: "NDM Troubleshooting"
 ---
 
-<div class="alert alert-info">Network Configuration Management is in Preview. Contact your Datadog representative to sign up.</div>
+<div class="alert alert-info">Network Configuration Management is in Preview. To request access and receive the custom Datadog Agent build, contact your Datadog representative.</div>
 
 ## Overview
 
@@ -24,57 +24,73 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 ## Prerequisites
 
 - [Network Device Monitoring][3] (NDM) must be configured on your devices.
-- Datadog Agent version `7.74.0` and higher.
 
 ## Setup
 
 1. In the Agent's root configuration directory at `conf.d/network_config_management.d/`, create the `conf.yaml` and configure it as follows:
 
    ```yaml
-   init_config:
-   namespace: ncm-namespace # applies namespace to all devices (defaults to `default` namespace if not specified)
-   min_collection_interval: <value in seconds> # optional
-     ssh: # global SSH configuration. Applies to any device without its own SSH config.
-       known_hosts_path: "/location/known_hosts" # specify the file that stores public keys of trusted remote SSH servers
-       timeout:30 #SSH connection timeout in seconds. Defaults to 30 
-   instances:
-   - ip_address: "1.2.3.4"
-     auth:
-       username: "user"
-       password: "pass"
-       privateKeyPath: <file> # authentication supports password and/or private key. 
-       profile: cisco_ios # optional - apply your device profile
+     init_config:
+       ## @param namespace - string - optional - default: default
+       ## The namespace should match namespaces of devices being monitored
+       namespace: default
+       ## @param min_collection_interval - integer - optional - default: 900 (15 minutes)
+       min_collection_interval: 900
+       ## @param ssh - object - optional
+       ## Global SSH configuration that applies to all device instances unless 
+       # overridden at the device level. 
+       ssh:
+         ## @param timeout - duration - optional - default: 30 (seconds)
+         ## Maximum time for the SSH client to establish a TCP connection.
+         timeout: 30
+         ## @param known_hosts_path - string - required (unless insecure_skip_verify is true)
+         ## Path to the known_hosts file containing public keys of servers to 
+         # verify the identity of remote hosts. Required for secure connections.
+         known_hosts_path: /path/to/known_hosts
+         ## @param insecure_skip_verify - boolean - optional - default: false
+         ## Skip host key verification. This is INSECURE and should only be used
+         ## for development/testing purposes.
+         insecure_skip_verify: false 
+      instances:
+        ip_address - string - required
+        ## The IP address of the network device to collect configurations from.
+        ip_address: <IP_ADDRESS>
+        ## @param profile - string - optional
+        ## The device profile name that defines how to collect configurations.
+        ## Examples: "cisco-ios", "junos"
+        ## If not specified, the agent will attempt to auto-detect the device type.
+        profile: <PROFILE_NAME>
+        ## @param auth - object - required
+        ## Authentication credentials to connect to the network device.
+        auth:
+          ## @param username - string - required
+          ## Username to authenticate to the network device.
+          username: <USERNAME>
+          ## @param password - string - required (if private_key_file is not provided)
+          ## Password to authenticate to the network device.
+          ## Used as a fallback after private key authentication if both are provided.
+          password: <PASSWORD>
+          ## @param private_key_file - string - optional
+          ## Path to the SSH private key file for authentication.
+          ## At least one of password or private_key_file must be provided.
+          private_key_file: /path/to/private_key
    ```
-   **Note**: Ensure the namespace matches the namespace used for device monitoring to enable proper correlation.
 
 2. Optionally, if your devices require specific SSH algorithms, use the following configuration:
 
    ```yaml
-   instances:
-   - ip_address: "10.10.1.1"
-     auth:
-       username: "cisco"
-       password: "cisco"
-       ssh: # Device-specific SSH configuration
-         # Specify algorithms for this device
-         ciphers: [aes256-ctr, aes192-ctr, aes128-ctr]
-         key_exchanges: [diffie-hellman-group14-sha1, diffie-hellman-group-exchange-sha1]
-         host_key_algorithms: [ssh-rsa]
+   init_config:
+     ## @param ciphers - list of strings - optional
+     ## List of SSH encryption ciphers to use for the connection.
+     ## If not specified, the SSH library will use its default ciphers.
+     ciphers: [aes128-gcm@openssh.com, aes128-ctr, aes192-ctr]
+     key_exchanges: [diffie-hellman-group14-sha256, ecdh-sha2-nistp256]
+     host_key_algorithms: [ssh-ed25519]
    ```
 
-3. Configure the device profile if not already specified in your `conf.yaml`. Default profiles are located at `/conf.d/network_config_management.d/default_profiles`.
+   See the full [configuration file][7] for more details.
 
-   Each default profile (in JSON format) specifies:
-   
-   - **Configuration commands**: CLI commands to retrieve different configuration types:
-     - `running`: Gets the current active configuration
-     - `startup`: Gets the configuration that loads on device boot
-     - `version`: Gets device information such as OS version
-   
-   - **Processing rules**: Regex patterns for:
-     - **Metadata extraction**: Captures timestamp, author, and other metadata when available
-     - **Validation**: Verifies command execution was successful and returned valid data
-     - **Redaction**: Removes sensitive data or unnecessary lines from configurations
+3. Configure the device profile if not already specified in your `conf.yaml`. Default profiles are located at `/conf.d/network_config_management.d/default_profiles`. See [device profiles](#device-profiles) for more information.
 
    **Note**: NCM uses dedicated default profiles that differ from SNMP device profiles. Custom profiles are not supported.
 
@@ -100,8 +116,6 @@ Configuration Management is accessible from the device side panel in Network Dev
 
    **Startup configuration**
    : The saved configuration that persists across reboots. When a device restarts, it loads this configuration.
-
-   <div class="alert alert-info">Startup configurations cannot be modified directly. To update the startup configuration, apply changes to the running configuration first, then save it to overwrite the startup configuration. This ensures only validated configurations persist across reboots.</div>
    
 ### Time picker and retention
 
@@ -146,6 +160,21 @@ When you compare two configuration versions, the AI summary automatically:
 - Describes changes in human-readable terms
 - Highlights changes that may be relevant for incident investigation or risk analysis
 
+## Device profiles
+
+Each default profile (in JSON format) contains:
+
+- **Configuration commands**: CLI commands to retrieve different configuration types and supplemental information:
+  - `running`: Gets the current active configuration
+  - `startup`: Gets the configuration that loads on device boot
+
+- **Processing rules**: Regex patterns for:
+  - **Metadata extraction**: Captures timestamp, author, and other metadata when available
+  - **Validation**: Verifies command execution was successful and returned valid data
+  - **Redaction**: Removes sensitive data or unnecessary lines from configurations
+
+<div class="alert alert-info">Startup configurations cannot be modified directly. To update the startup configuration, apply changes to the running configuration first, then save it to overwrite the startup configuration. This ensures only validated configurations persist across reboots.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -156,3 +185,4 @@ When you compare two configuration versions, the AI summary automatically:
 [4]: /network_monitoring/devices/geomap
 [5]: /network_monitoring/devices/topology
 [6]: /network_monitoring/devices/supported_devices#vendor-profiles
+[7]: https://github.com/DataDog/datadog-agent/tree/main/cmd/agent/dist/conf.d/network_config_management.d/
