@@ -55,7 +55,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    | jitter |  | `is`, `<`, `<=`, `>`, `>=` | float |
    | network hops  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
 
-6. Select the **locations** from which to run your test. Network Path tests can run from managed locations for testing endpoints globally, or from the [Datadog Agent](#agent-configuration) for testing private environments.
+6. Select the **locations** from which to run your test. You can run Network Path tests from managed locations to test global endpoints, or from a [Datadog Agent](#agent-configuration) to test private environments.
 
    {{% managed-locations-network-path %}}
 
@@ -71,14 +71,14 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 Requires Agent version `7.72` or higher.
 
-1. Enable the system-probe traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+1. Enable the system-probe traceroute module in **/etc/datadog-agent/system-probe.yaml** by adding the following:
 
    ```yaml
    traceroute:
      enabled: true
    ```
 
-2. Enable the Agent Synthetics Collector in `/etc/datadog-agent/datadog.yaml` by adding the following:
+2. Enable the Agent Synthetics Collector in **/etc/datadog-agent/datadog.yaml** by adding the following:
 
    ```yaml
    synthetics:
@@ -108,8 +108,8 @@ The Network Path visualization shows the routes packets take to complete queries
 Click on a test run in the table at the bottom of the page to view details for that specific run. The side panel displays:
  
 - Run information
-- Network Path visualization aggregated across all traceroute queries (as configured in the Request advanced options)
-- Assertion results aggregated across all end-to-end queries (as configured in the Request advanced options) <br></br>
+- Network Path visualization, aggregated across all traceroute queries (based on your Request advanced options)
+- Assertion results, aggregated across all end-to-end queries (based on your Request advanced options) <br></br>
 
   {{< img src="synthetics/network_tests/test_run_side_panel.png" alt="A single test run from a network test, displaying the side panel" style="width:100%;">}}
 
