@@ -52,7 +52,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    | jitter |  | `is`, `<`, `<=`, `>`, `>=` | float |
    | network hops  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
 
-6. Select the **locations** from which to run your test. Network Path tests can run from managed locations to test your endpoints from global locations and from the [Datadog Agent](#agent-configuration) to test private environments.
+6. Select the **locations** from which to run your test. Network Path tests can run from managed locations for testing endpoints globally, or from the [Datadog Agent](#agent-configuration) for testing private environments.
 
    {{% managed-locations-network-path %}}
 
@@ -64,7 +64,9 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Agent configuration
 
-Network Path tests can be run from Agents on version `7.72` and higher.
+### Prerequisites
+
+Requires Agent version `7.72` or higher.
 
 1. Enable the system-probe traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
@@ -121,4 +123,3 @@ Click on a test run in the table at the bottom of the page to view details for t
 [3]: /network_monitoring/network_path/path_view/#health-bar
 [4]: /synthetics/network_path_tests/#define-alert-conditions
 [5]: /synthetics/network_path_tests/#configure-the-test-monitor
-[6]: /remote_configuration/#enable-remote-configuration
