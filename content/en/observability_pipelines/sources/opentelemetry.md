@@ -44,7 +44,9 @@ Configure your OTel exporters to point to HTTP or gRPC.
 
 ### HTTP configuration example
 
-The Worker exposes the HTTP endpoint on port 4318. This is an example of configuring your OTel exporters with HTTP using Python:
+The Worker exposes the HTTP endpoint on port 4318, which is the default port. You can configure the port value in the Worker.
+
+This is an example of configuring your OTel exporters with HTTP using Python:
 
 ```python
     from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
@@ -55,7 +57,9 @@ The Worker exposes the HTTP endpoint on port 4318. This is an example of configu
 
 ### gRPC configuration example
 
-The Worker exposes the gRPC endpoint on port 4317. This is an example of configuring your OTel exporters with gRPC:
+The Worker exposes the gRPC endpoint on port 4317, which is the default port. You can configure the port value in the Worker.
+
+This is an example of configuring your OTel exporters with gRPC:
 
 ```python
     from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
@@ -64,7 +68,7 @@ The Worker exposes the gRPC endpoint on port 4317. This is an example of configu
     )
 ```
 
-Based on these example configurations, these are values you enter for the following environment variables:
+Based on the above example configurations, you can enter these default values for the following environment variables. **Note**: If you configured the port values in the Worker, use your configured values instead.
 
 - HTTP listener address: `worker:4318`
 - gRPC listener address: `worker:4317`
