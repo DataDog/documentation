@@ -18,36 +18,35 @@ further_reading:
 This guide introduces the Datadog Agent and covers:
 
   - [Introduction to the Agent](#the-datadog-agent)
-  - [Installing the Agent](#installing-the-agent)
+  - [Installation](#installing-the-agent)
   - [Data collected by the Agent](#data-collected-by-the-agent)
   - [Advanced configurations and features](#advanced-configurations-and-features)
-  - [Troubleshooting the Agent](#troubleshooting)
+  - [Troubleshooting](#troubleshooting)
 
 
-## What is the Datadog Agent
+## What is the Datadog Agent?
 
-The Datadog Agent is a software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
+The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
 
 The Agent can run on:
-- Your local hosts (Windows, MacOS), 
-- A containerized environments (Docker, Kubernetes),
-- In on-premises data centers. 
+- Local hosts (Windows, MacOS), 
+- Containerized environments (Docker, Kubernetes),
+- On-premises data centers. 
 
 You can also install and configure the Agent using configuration management tools like Chef, Puppet, or Ansible.
 
-The Agent is able to collect 75 to 100 system-level metrics every 15 to 20 seconds. With additional configuration, the Agent can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
+The Agent can collect 75-100 system-level metrics every 15-20 seconds. With additional configuration, it can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source, and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
 ### The Agent configuration file
 
 The Agent's main configuration file is `datadog.yaml`. The required parameters are:
-- Your [Datadog API key][16], which is used to associate your Agent's data with your organization. 
+- Your [Datadog API key][16], which is used to associate the Agent's data with your organization. 
 - Your [Datadog site][41] ({{< region-param key="dd_site" code="true" >}}).
 
-See the [sample `config_template.yaml` file][23] for all available configuration options. You can adjust the Agent configuration files to take advantage of other Datadog features including tags.
+See the [sample `config_template.yaml` file][23] for all available configuration options. You can adjust the Agent configuration files to take advantage of other Datadog features.
 
 
-
-## How to install the Agent
+## Installation
 
 ### Prerequisites
 1. Create a [Datadog account][15].
@@ -56,9 +55,9 @@ See the [sample `config_template.yaml` file][23] for all available configuration
 
 ### Setup
 
-Use [Fleet Automation][39], the Datadog in-app workflow, to install, upgrade, configure, and troubleshoot the Datadog Agent at scale. 
+Use [Fleet Automation][39], the Datadog in-app workflow, to install, upgrade, configure, and troubleshoot the Datadog Agent on a single host or at scale. 
 
-See the [Agent documentation][40] for how to get started with the Agent for your specific platform.
+See the [Agent documentation][40] for additional Agent configuriation for your specific platform.
 
 
 ## Data collected by the Agent
