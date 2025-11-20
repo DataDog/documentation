@@ -39,21 +39,21 @@ To stop recording, click **Stop Recording**.
 
 <div class="alert alert-info">This feature is in Preview. Contact your Datadog representative to enable webview mode recording.</div>
 
-When a webview is detected during a recording, you can toggle on webview recording mode to capture interactions within the webview. Steps recorded in webview mode display a webview tag in the step list, while the rest of the recording experience remains unchanged.
+When a webview is detected during a recording, you can toggle on webview recording mode to capture interactions within the webview. Steps recorded in webview mode display a "WebView" tag in the step list, while the rest of the recording experience remains unchanged.
 
 ### Prerequisites
 
-Some applications may require adding a debugging statement (`isInspectable = true`) for the recorder to consistently detect webviews on devices running `iOS 16.4` and above. 
+Some applications may require adding a debugging statement (`isInspectable = true`) for the recorder to consistently detect webviews on devices running iOS 16.4 and later. 
 See the **iOS** [Apple documentation][14] for more information.
 
 ### Recording with webview mode
 
 1. Create a Mobile application test for an application that contains webview pages.
-2. During a recording of your steps, if a webview is detected, a toggle to switch to webview mode appears. Click **Webview mode** to switch recording modes.
+2. While recording your steps, if a webview is detected, a toggle to switch to webview mode appears. Click **Webview mode** to switch recording modes.
 3. In webview mode, record steps the same way you would for a browser test.
 4. Toggle back to **Native mode** when you're done recording webview steps.
 
-   {{< img src="mobile_app_testing/test_steps/webview.mp4" alt="Mobile app recording of a user clicking on webview, then open wikipedia in webview to activate the webview toggle." video=true >}}
+   {{< img src="mobile_app_testing/test_steps/webview.mp4" alt="Mobile app recording of a user clicking on webview, and then opening a Wikipedia to activate the webview toggle." video=true >}}
 
 ## Manually added steps
 
