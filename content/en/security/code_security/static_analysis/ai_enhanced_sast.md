@@ -13,20 +13,15 @@ further_reading:
   text: "Using LLMs to filter out false positives from static code analysis"
 ---
 
-## AI in Static Code Analysis (SAST)
+AI-enhanced Static Code Analysis (SAST) features help automate security decision-making across the entire static analysis lifecycle, from identifying malicious intent, to improving detection, reducing noise, and accelerating response.
 
-The challenges: false positives, alert fatigue, context bridging, fixing vulnerabilities
+This document describes each of the AI-enhanced SAST features.
 
-How Datadog approaches AI augmentation (not replacement)
-
-High-level architecture / data flow: analysis engine → AI modules → user interface / actions
-
-## Summary of AI in SAST
+## Summary of AI features
 
 | Feature                                 | AI Role                                                  | Trigger Point                           | User Impact                                               |
 | --------------------------------------- | -------------------------------------------------------- | --------------------------------------- | --------------------------------------------------------- |
 | Malicious PR protection                 | Detect potentially malicious changes or suspicious diffs | At PR time or diff level                | Blocks or flags PRs introducing novel risky code          |
-| AI-powered detection                      | Assist or augment pattern matching, semantic inference   | During scan or rule matching            | Catch harder-to-detect issues or flags with AI confidence |
 | Validation and false-positive filtering | Suppress or deprioritize low-likelihood findings         | After scan or analysis                  | Reduce noise, allow focus on actual issues                |
 | AI-powered remediation                    | Generate suggested fixes or code changes                 | When the issue is validated or accepted | Reduces developer effort, accelerates fix cycle           |
 
@@ -42,6 +37,8 @@ Datadog Static Code Analysis (SAST) Malicious PR protection uses LLMs to detect 
 - Scale your code reviews as the volume of AI-assisted code changes increases
 - Secure code changes from both internal and external contributors
 - Embed code security into your security incident response workflows
+
+### Repository support
 
 Malicious PR protection is supported for default branches and GitHub repositories only.
 
@@ -64,10 +61,10 @@ There are two potential verdicts: `malicious` and `benign`. They can be filtered
 - `@malicious_pr_protection.scan.verdict:malicious`
 - `@malicious_pr_protection.scan.verdict:benign`. 
 
-Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally via [Datadog Workflow Automation][5].
+Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally using [Datadog Workflow Automation][5].
 
 
-## AI-powered detection
+<!-- ## AI-powered detection
 
 Code Security SAST provides AI-powered detection for vulnerabilities in source code. AI-powered detection is built on top of Datadog's default static analyzer tool, `datadog-static-analyzer`. The AI-powered layer enhances detection for semantically complex or cross-file vulnerabilities
 
@@ -92,7 +89,7 @@ The `datadog-static-analyzer` serves as the default analysis engine, using queri
 
 AI-powered detection extends beyond static rule execution, using LLMs to analyze function call graphs and contextual code behavior. This method improves coverage for complex code paths, including cases involving data flow, taint propagation, or interprocedural dependencies, where traditional rule-based detection has limited visibility.
 
-Both methods operate as complementary components. The static analyzer continues to deliver high-precision results for deterministic findings, while the AI-assisted layer enhances detection for semantically complex or cross-file vulnerabilities. 
+Both methods operate as complementary components. The static analyzer continues to deliver high-precision results for deterministic findings, while the AI-assisted layer enhances detection for semantically complex or cross-file vulnerabilities.  -->
 
 ## Validation and false-positive filtering
 
@@ -123,19 +120,70 @@ False positive filtering is supported for the following CWEs:
 
 ## AI-powered remediation
 
+{{< callout >}}
+AI-powered remediation is in Preview.
+{{< /callout >}}
+
 AI-powered remediation saves time by replacing the filing of individual pull requests to fix vulnerabilities with AI campaigns that can fix multiple vulnerabilities at once.
 
 AI-powered remediation uses the [Bits AI Dev Agent][10] to power single and multiple vulnerability fixes in Code Security. You create campaigns to fix a subset of vulnerabilities and, within each campaign, create pull requests to fix those vulnerabilities.
 
+### Bulk remediation: Campaigns
+
+The **Campaign** is how you operationalize **AI-powered remediation** in Datadog.
+It connects SAST findings to automated fixes through customizable PR workflows with human-tunable AI behavior (prompt tuning + model choice).
+
+When you create a campaign, the Bits Dev Campaign tool initiates a batched remediation to fix a subset of matching vulnerabilities. 
+
+A campaign defines the following:
+
+| Section                | Description                                  | Options                                                                                                                                                                                                                                                                                          |
+| ---------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Campaign Context**   | Set the scope and type of the campaign.      | - **Campaign Type**: `Security Rule Campaign` (targets static analysis issues)<br>- **Code Security Product**: `Static Code (SAST)`<br>- **Campaign Title**: Name your campaign                                                                                                                          |
+| **Repository**         | Define which repo and paths to scan.         | - Set the GitHub repo URL<br>- Use **Paths** to limit rule scanning to certain directories or files                                                                                                                                                                                                      |
+| **Rule**               | Choose which SAST rule(s) to apply.          | - Select a rule from the dropdown<br>- View description, code example, and number of matches<br>- Click **Show More** to see remediation steps                                                                                                                                                           |
+| **Session Management** | Controls how PRs are grouped and submitted.  | - **Create one PR per**:<br>      • `Repository`: One PR for all findings in the repo<br>      • `File`: One PR per file with findings<br>      • `Finding`: One PR per finding (most granular)<br>- **Allow [n] open PRs at a time**: Prevents PR flooding<br>- **Limit PRs to [n]**: Sets total PR cap |
+| **Prompt Tuning**      | Customizes how the AI proposes remediations. | - **AI Model**: Choose a model (default or faster/more accurate variant)<br>- **Custom Instructions**: Guide the AI on how to write fixes (for example, "Use prepared statements", "Don't break APIs")                                                                                                    |
+### Campain in progress
+
+When you click **Create Campaign**, Bits Dev Agent does the following:
+
+1. Bits Dev Agent scans the selected repo and path.
+2. Runs the chosen rule(s).
+3. Uses LLMs to generate patches for each matched finding.
+4. Submits PRs according to your session rules.
+5. Lets you review, edit, and merge fixes using GitHub.
+
+The campain page shows whether the AI is actively remediating real findings, and how many have been remediated or pending.
+
+You can click a session to view it in more detail.
+
+### Session details
+
+A remediation session shows the full lifecycle of an AI-generated fix. It includes the original security finding, a proposed code change, an explanation of how and why the AI made the fix, and CI results from applying the patch. 
+
+Session details make each remediation transparent, reviewable, and auditable, helping you safely adopt AI in your secure development workflow.
+
+Session details include the following:
+
+- Header: Identifies the campaign, time of session creation, and affected branch, file, or PR.
+- Title: Summarizes the remediation goal based on the vulnerability being fixed.
+- **Dev Agent Campaign, Model name, PR ID**: Indicates the AI model used, campaign source, and related PR metadata.
+- Right panel:
+  - **Suggested code change**: Displays a side-by-side comparison of the vulnerable code and the AI-generated patch.
+  - **View Pull Request**: Opens the linked GitHub PR to review or merge the proposed changes.
+  - **Add Jira Issue**: Allows you to create a Jira ticket linked to this remediation session.
+- Left panel:
+  - **Fix the following static analysis violation**: Explains the triggered rule, the security risk, and why the original code is unsafe.
+  - **Fixing process recap**: Shows exactly how the AI read the code, understood the context, chose its approach, and applied the fix. This is helpful for auditability, compliance, and trust. You can confirm that the AI isn't rewriting code blindly, but applying defensible and explainable patterns.
+  - **CI via GitHub**: Describes whether the AI-generated patch breaks anything downstream, and includes full error logs. This helps you validate that a fix is not only secure but also safe to deploy, without needing to leave the platform.
+  - **Summary**: Recaps the impact of the fix and provides next steps or guidance if tests failed or PR needs to be rebased.
+  - Bits chat field: Lets you interactively refine the fix or ask the AI follow-up questions. This makes remediation collaborative and tunable, giving security engineers control without needing to write the patch themselves.
 
 
-### Create a campaign using findings
+#### Scope
 
-
-### Create a campaign using rules
-
-
-### Managing campaigns
+AI-powered remediation is limited to SAST only for vulnerabilities within the OWASP Top 10 across all languages. It only applies to findings on the default branch.
 
 
 [1]: https://www.datadoghq.com/blog/engineering/malicious-pull-requests/
