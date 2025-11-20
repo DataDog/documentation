@@ -10,14 +10,14 @@ type: studio
 
 ## Overview
 
-Datadog Studio gives small development teams a streamlined observability platform to monitor, debug, and optimize their applications. Get started with pre-configured packages tailored to what you're building without any complex setup required.
+Datadog Studio gives small development teams production-grade observability without the overhead. Instead of manually configuring individual products and piecing together monitoring tools, Studio provides pre-configured monitoring packages for frontend, backend, or LLM/AI applications that work out of the box. 
 
-Datadog Studio provides pre-configured monitoring packages tailored to your application type. Select a package based on what you're building (frontend, backend, or LLM/AI), then use either **agentic setup**, where AI assistants like Cursor or Claude automatically configure your codebase, or **manual setup** for full control. After successfully configuring your package, your application sends telemetry data to Datadog, giving you immediate access to error tracking, performance monitoring, and analytics.
+Choose **agentic setup** to let AI assistants (Cursor or Claude) automatically detect your application type and configure the right features for your codebase, or use **manual setup** for full control. After configuration, your application immediately sends telemetry to Datadog for error tracking, performance insights, and user analytics—so you can focus on building features instead of debugging infrastructure.
 
-## What's included
+## Features by application type
 
-Choose your package based on what you're building:
-| Application Type       | Products Included |
+Studio automatically configures the following features based on your application type:
+| Application Type       | Features Included |
 |------------------------|--------------|
 | Frontend applications  | [Error Tracking][1], [Session Replay][2], [Product Analytics][3] |
 | Backend services       | [Error Tracking][1], [Logs][4], [Metrics][5] |
@@ -25,7 +25,14 @@ Choose your package based on what you're building:
 
 ## Prerequisites
 
-Before getting started, make sure you have an account with Datadog Studio. To create an account, go to [https://app.datadoghq.com/studio/signup][7].
+Before you begin:
+
+- **Datadog Studio account**: [Sign up for free][7] if you don't have one
+- **Development environment**: Access to your application's codebase
+- **For agentic setup**: [Cursor][8] or [Claude Code][9] installed and configured
+- **For manual setup**: Ability to install packages and modify configuration files in your project
+
+No API keys are required upfront—authentication is handled during the setup process.
 
 ## Setup
 
@@ -36,6 +43,8 @@ To get started using Datadog Studio, select your setup method:
 
 ## Agentic setup
 
+With agentic setup, your AI coding assistant analyzes your project, identifies the appropriate monitoring features, and automatically configures Datadog SDKs in your codebase. The AI agent installs dependencies, adds initialization code, and sets up environment variables—all with your approval at each step. Setup typically takes 5-10 minutes.
+
 ### Supported platforms
 Agentic setup is available for the following platforms:
 
@@ -44,9 +53,9 @@ Agentic setup is available for the following platforms:
 | Frontend applications | Next.js, React, Svelte, Vanilla JavaScript (Angular is not supported), Vue |
 | LLM and AI agent applications | Python or Node.js from scripts using [OpenAI's Responses API][10] to complex FastAPI applications powered by [LangGraph][11], or rich chatbot experiences built on [Vercel's AI SDK][12] |
 
-### 1. Install the Datadog Onboarding MCP server
+### 1. Install the Datadog onboarding MCP server
 
-To install the Datadog Onboarding Model Context Protocol (MCP) server, follow the steps below.
+The MCP server enables your AI agent to access Datadog's onboarding tools. This is a one-time setup per AI client.
 
 1. Copy the deeplink or command for your AI agent client:
 
@@ -122,7 +131,7 @@ Copy and execute the Claude Code command into your terminal:
 
    {{% site-region region="eu" %}}
    ```shell
-   claude mcp add --transport http datadog-onboarding-eu1 "https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp?toolsets=onboarding
+   claude mcp add --transport http datadog-onboarding-eu1 "https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp?toolsets=onboarding"
    ```
    {{% /site-region %}}
 
@@ -151,40 +160,69 @@ Copy and execute the Claude Code command into your terminal:
 5. After you've granted access to your Datadog account, you are redirected to Cursor. Click **Open** to complete the authentication process.
 5. Confirm you see MCP tools listed for the `datadog-onboarding-mcp` server.
 
-### 2. Set up your project with a prompt
+### 2. Configure your project
 
-Prompt your AI coding agent to enable all capabilities (Error Tracking, Session Replay, Product Analytics, and LLM Observability) in minutes by copying the below prompt into Cursor or Claude Code.
+After installing the MCP server, use a prompt to start the configuration process. Your AI agent detects your application type, installs the appropriate SDKs, and configures monitoring features automatically.
 
-**Prompt**:
-```console
-Add Datadog Studio to my project
-```
+**What happens when you run the prompt:**
+1. The agent analyzes your project structure, dependencies, and framework
+2. It determines which monitoring features to enable (frontend, backend, or LLM)
+3. It requests permission to install packages and modify configuration files
+4. It adds initialization code and environment variables
+5. It provides testing steps to verify the setup
 
-When you give this prompt to your coding agent, it does the following:
+**To configure your project:**
 
-- Analyze your project and identify if the MCP server offers a tool that can be used to set it up with Datadog
-- Call the tool (asking for your permission before doing so) with inferred parameters from your project (for example: your project's framework, language, and bundler)
-- Follow the instructions the MCP tool provides as context to your coding agent, making code changes on your behalf (don't worry - Datadog does not commit them)
-- Provide testing steps to confirm that your application is correctly configured to send telemetry to Datadog
+1. Open your AI coding assistant in your project directory
 
-1. To get started, copy and paste the following prompt into your coding agent (such as Cursor or Claude Code):
+2. Copy and paste this prompt:
 
-   **Prompt**: 
    ```console
    Add Datadog Studio to my project
    ```
 
-2. After pasting the prompt, review and accept each action your AI agent proposes to move through the setup process.
+3. Review each proposed change and accept the actions to complete setup (approximately 5-10 minutes)
 
-### 3. Deploy your app to production
+The agent does not commit any changes automatically—you maintain full control over what gets added to your codebase.
 
-Depending on how your application is deployed, you need to commit the changes and set or upload provided environment variables to your production environment.
+### 3. Verify and deploy
+
+**Local verification:**
+1. Start your application locally
+2. Generate some activity (pageviews, errors, or API calls)
+3. Check your terminal for confirmation that telemetry is being sent
+
+**Deploy to production:**
+1. Commit the configuration changes to your repository
+2. Add the environment variables provided during setup to your hosting platform (Vercel, Netlify, AWS, etc.)
+3. Deploy your application
+
+**View your data:**
+After deploying, telemetry appears in Datadog Studio within 1-2 minutes:
+- **Frontend apps**: View error tracking, session replays, and analytics in the [RUM Explorer][13]
+- **Backend services**: Check logs and metrics in the [Logs][14] and [Metrics Explorer][15]
+- **LLM apps**: Monitor traces and costs in [LLM Observability][16]
+
+If data doesn't appear after 5 minutes, check that environment variables are set correctly in your production environment.
 
 ## Manual setup
 
-If you prefer manual setup, follow the in-app instructions for each product in your selected package. You can either choose manual setup from the Getting Started page or by adding a New Application from the homepage.
+Manual setup gives you full control over the integration process. Install SDKs, configure initialization code, and set environment variables yourself by following step-by-step instructions.
+
+**Setup workflow:**
+1. Navigate to the [Studio Getting Started page][17] or add a New Application from the homepage
+2. Select your application type (frontend, backend, or LLM)
+3. Follow the in-app instructions specific to your framework and language
+4. Install the required packages using your package manager
+5. Add initialization code to your application entry point
+6. Configure environment variables with your API keys
+7. Deploy and verify data appears in Studio
+
+Typical setup time: 15-30 minutes depending on your application complexity.
 
 ### Frontend monitoring
+
+Set up browser-based monitoring for web applications. **Recommended order**: Error Tracking → Session Replay → Product Analytics.
 
 {{< whatsnext desc="Follow the in-app setup instructions for each frontend product:" >}}
    {{< nextlink href="/studio/error_tracking/frontend" >}}Frontend Error Tracking{{< /nextlink >}}
@@ -193,6 +231,8 @@ If you prefer manual setup, follow the in-app instructions for each product in y
 {{< /whatsnext >}}
 
 ### Backend monitoring
+
+Set up server-side monitoring for APIs and services. Start with your primary log source (host, container, or cloud), then add Error Tracking and custom metrics as needed.
 
 {{< whatsnext desc="Follow the in-app instructions for each backend product:" >}}
    {{< nextlink href="/studio/error_tracking/backend/getting_started/" >}}Backend Error Tracking{{< /nextlink >}}
@@ -206,7 +246,9 @@ If you prefer manual setup, follow the in-app instructions for each product in y
    {{< nextlink href="https://app.datadoghq.com/integrations" >}}Integrations metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### LLM Observability
+### Llm observability
+
+Monitor AI applications, agents, and LLM API calls. Works with OpenAI, Anthropic, LangChain, LangGraph, and more.
 
 {{< whatsnext desc="Follow the in-app instructions for LLM Observability:" >}}
    {{< nextlink href="/studio/llm_observability/quickstart/?tab=python#trace-an-llm-application" >}}LLM Observability{{< /nextlink >}}
@@ -224,3 +266,8 @@ If you prefer manual setup, follow the in-app instructions for each product in y
 [10]: https://platform.openai.com/docs/guides/text
 [11]: https://github.com/langchain-ai/langgraph
 [12]: https://github.com/vercel/ai-chatbot
+[13]: https://app.datadoghq.com/rum/explorer
+[14]: https://app.datadoghq.com/logs
+[15]: https://app.datadoghq.com/metric/explorer
+[16]: https://app.datadoghq.com/llm/overview
+[17]: https://app.datadoghq.com/studio/getting-started
