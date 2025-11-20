@@ -11,7 +11,7 @@ further_reading:
   text: "Build Apps"
 ---
 
-This page provides an example of how to use the React renderer component in your App Builder apps.
+This page provides an example of how to use the React renderer component in your App Builder apps. For a full reference to all of the fields in the React renderer, see [Components][1].
 
 ## Example component definition
 
@@ -57,3 +57,6 @@ ${{
   selectedId: null,
 }}
 ```
+
+
+[1]: /actions/app_builder/components/#general-11
