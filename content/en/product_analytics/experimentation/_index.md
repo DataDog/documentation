@@ -2,9 +2,9 @@
 title: Planning and Launching Experiments
 description: Experimentation allows you to measure the causal relationship new experiences or features have on user outcomes.
 further_reading:
-- link: "/product_analytics/experimentation/reading_results.md"
-  tag: "Documentation"
-  text: "Reading Experiment Results"
+- link: "https://www.datadoghq.com/blog/datadog-product-analytics"
+  tag: "Blog"
+  text: "Make data-driven design decisions with Product Analytics"
 - link: "/product_analytics/experimentation/defining_metrics"
   tag: "Documentation"
   text: "Defining Experiment Metrics"
@@ -17,13 +17,13 @@ This page walks you through planning and launching your experiments.
 
 
 ## Setup
-Follow the steps below to create, add metrics, and launch your experiment. 
+To create, configure, and launch your experiment, complete the following steps:
 
 ### Step 1 - Create your experiment
 
-1. Go to the [Experiments][1] page in Datadog Product Analytics
-2. Click **Create Experiment**
-3. Enter your experiment name and hypothesis
+1. Navigate to the [Experiments][1] page in Datadog Product Analytics.
+2. Click **+ Create Experiment**.
+3. Enter your experiment name and hypothesis.
 
 
 ### Step 2 - Add metrics
@@ -35,31 +35,32 @@ After you’ve created an experiment, add your primary metric and optional guard
 
 #### Add a sample size calculation (optional)
 
-After you’ve selected your experiment’s metrics, you can run an optimal sample size calculation to determine how large of a change in your chosen metric your experiment will be able to reliably detect, given your sample size. 
+After selecting your experiment’s metrics, use the optimal sample size calculator to determine what size of change your experiment can reliably detect with your current sample size.
 
-First, select the entry point of your experiment. This specifies _when_ in the user journey they will be enrolled into the test. 
+1. Select the entry point of your experiment. This specifies _when_ in the user journey they will be enrolled into the test. 
 
-For example, if you plan to run an experiment on users who visit the homepage, select the homepage view as your entry point. You can also update the number of variants and the traffic exposure (the percentage of traffic that hits the entry point that you want to include in the experiment).
+For example, if you plan to run an experiment on users who visit the homepage, select the homepage view as your entry point. You can also configure the number of variants and the traffic exposure percentage (the portion of entry point traffic to include in the experiment).
 
-Then, click **Run calculation** to see the [Minimum Detectable Effects][3](MDE) your experiment will have on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants. To learn more, see the [Minimum Detectable Effects][3] page.
-
+1. Click **Run calculation** to see the [Minimum Detectable Effects][3](MDE) your experiment has on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants.
 
 {{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
 
 ### Step 3 - Launch your experiment
 
-After specifying and aligning your the experiment, you can launch your test immediately or at a scheduled date. 
+After specifying and aligning your experiment, you can launch your test immediately or at a scheduled date. 
 
-First, you need to select a Feature Flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
+1. Select a Feature Flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
 
-Then, click **Set up experiment on feature flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout with realtime RUM guardrails. 
+1. Click **Set up experiment on feature flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout with realtime RUM guardrails. 
 
 
 {{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
 
 
-You have now planned and launched your first experiment. 
-
+## Next steps
+**Defining metrics**: Define the metrics you want to measure during your experimentation.
+**Reading Experiment Results**: Review and explore your Experiment results.
+Learn more about **Minimum Detectable Effects**: Choose an appropriately sized MDE.
 
 
 
