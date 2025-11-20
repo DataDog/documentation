@@ -23,7 +23,7 @@ Rehydration for Observability Pipelines enables you to pull archived logs from o
 
 Organizations often store large volumes of logs in cost-efficient, long-term archives to control spend and meet compliance requirements. However, historical data often becomes difficult to access when there is a security incident, audit request, or operational investigation. Retrieving archived logs from cold storage can be slow, manual, and disruptive, requiring ad-hoc scripts, decompression, or dedicated engineering effort. Rehydration for Observability Pipelines solves these issues.
 
-## How does Rehydration work?
+## How Rehydration works
 
 Rehydration provides an automated workflow for retrieving and reprocessing archived logs stored in object stores, such as Amazon S3, Google Cloud Storage, and Azure Blob Storage. This helps you balance storage efficiency with quick access to historical data.
 
