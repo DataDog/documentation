@@ -12,11 +12,13 @@ further_reading:
   text: "Build Apps"
 ---
 
-Queries populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
+Queries are actions that populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 
 The [Action Catalog][10] within the Datadog App provides actions that can be performed as queries against your infrastructure and integrations using App Builder. You can orchestrate and automate your end-to-end processes by linking together actions that perform tasks in your cloud providers, SaaS tools, and Datadog accounts.
 
-To add a query, click the Data (**{&nbsp;}**) icon to open the Data tab, click the plus (**+**), select **Query**, and search for an action to add to your app. After you've added the query action, it appears in the **Actions** List. Select a query to configure it.
+To add a query, click the Data (**{&nbsp;}**) icon to open the Data tab. Click the plus (**+**), select **Actions**, and search "query" for an action to add to your app. After you've added the query action, it appears in the **Actions** List. Select a query to configure it.
+
+You can also use Bits AI to add, configure, and trigger queries. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**) to get started. 
 
 Queries rely on [Connections][5] for authentication. App Builder shares connections with [Workflow Automation][6].
 
@@ -109,7 +111,7 @@ To provide mocked outputs manually, perform the following steps:
 1. In the **Mocked outputs** section of the query, click the **JSON** tab.
 1. Paste in JSON that matches the expected output format of the query.<br>
     If you do not know the expected output format, you can run the query once and then reference `outputs` in the **Inspect Data** section of the query.
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 ## Order of operations
@@ -119,9 +121,9 @@ When executing a query, App Builder performs the following steps in the order li
 1. Checks if there is a **Condition** expression for the query, and if so, checks that the condition is met. If it is not, execution stops.
 2. Evaluates any expressions in **Inputs** to determine the input data for the query.
 3. If the **Debounce** property is set, delays execution for the interval defined by the debounce value. If query inputs or their dependencies update during this time, the current query execution is stopped, and a new one starts from the beginning using the updated inputs.<br>
-   **Note**: If more than one query request occurs within the debounce interval, all requests except the last execution request are canceled.  
+   **Note**: If more than one query request occurs within the debounce interval, all requests except the last execution request are canceled.
 4. Executes the query.
-5. Stores the raw query response in `query.rawOutputs`.  
+5. Stores the raw query response in `query.rawOutputs`.
 6. Runs any post query transformation and sets `query.outputs` equal to the result. This process takes a snapshot of app data and passes it to the post query transformation.<br>
    **Note**: Post query transformations should be pure functions without side effects. For example, do not update a state variable in your post query transformation.
 7. Computes any expressions in the app that depend on data from the query output.
@@ -142,7 +144,7 @@ This app provides a button to trigger a workflow. The workflow sends a poll to a
 
 ##### Create workflow
 
-1. In a new workflow canvas, under **Datadog Triggers**, click **App**. 
+1. In a new workflow canvas, under **Datadog Triggers**, click **App**.
 1. Under the **App** trigger step, click the plus (**+**) icon, then search for "Make a decision" and select the **Make a decision** Slack action.
 1. Select your workspace and choose a channel to poll.
 1. Fill in the prompt text "Cat fact or dog fact?" and change the button choices to "Cat fact" and "Dog fact".
@@ -197,7 +199,7 @@ To connect App Builder to the workflow, perform the following steps:
 1. Click the **Trigger Workflow** button.
 1. In the Slack channel you selected, answer the poll question.<br>
     Your app displays a result related to the option you chose.
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 ### Combine and transform query output data
 After you get data from a query in App Builder, you can use data transformers to combine and transform that data.
@@ -263,7 +265,7 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 1. Click **Generate fact 1**, then click **Generate fact 2**.<br>
     Your app updates the number facts and the sum of the numbers as you click each button.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 ## Further reading
@@ -275,7 +277,7 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 [5]: /service_management/workflows/connections
 [6]: /service_management/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
-[8]: https://datadoghq.slack.com/
+[8]: https://chat.datadoghq.com/
 [10]: https://app.datadoghq.com/actions/action-catalog/
 [11]: /service_management/app_builder/events
 [12]: /service_management/app_builder/events/#state-functions

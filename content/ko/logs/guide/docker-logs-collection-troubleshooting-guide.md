@@ -134,30 +134,6 @@ Logs Agent 상태가 [Agent 상태 확인](#check-the-agent-status)의 예와 �
 * Datadog으로 로그를 전송하는 데 필요한 포트(10516)가 차단되었습니다.
 * 컨테이너가 Agent가 예상하는 것과 다른 로깅 드라이버를 사용하고 있습니다.
 
-#### 포트 10516의 아웃바운드 트래픽이 차단되었습니다.
-
-Datadog Agent는 포트 10516을 사용하여 TCP를 통해 Datadog에 로그를 보냅니다. 해당 연결을 사용할 수 없는 경우 로그 전송이 실패하고 그에 따른 오류가 `agent.log` 파일에 기록됩니다.
-
-OpenSSL, GnuTLS 또는 다른 SSL/TLS 클라이언트를 사용하여 연결을 수동으로 테스트할 수 있습니다. OpenSSL의 경우 다음 명령을 실행합니다.
-
-```shell
-openssl s_client -connect intake.logs.datadoghq.com:10516
-```
-
-GnuTLS의 경우 다음 명령을 실행합니다.
-
-```shell
-gnutls-cli intake.logs.datadoghq.com:10516
-```
-
-그런 다음 다음과 같은 로그를 보냅니다.
-
-```text
-<API_KEY> 테스트 메시지입니다
-```
-
-포트 10516을 여는 것이 옵션이 아닌 경우 `DD_LOGS_CONFIG_USE_HTTP` 환경 변수를 `true`로 설정하여 HTTPS를 통해 로그를 보내도록 Datadog Agent를 설정할 수 있습니다.
-
 #### 컨테이너가 JSON 로깅 드라이버를 사용하지 않습니다.
 
 Docker의 기본값은 json 파일 로깅 드라이버이므로  Container Agent는 먼저 이 드라이버에서 읽기를 시도합니다. 컨테이너가 다른 로깅 드라이버를 사용하도록 설정된 경우 Logs Agent는 컨테이너를 성공적으로 찾을 수 있지만 로그를 수집할 수 없음을 나타냅니다. journald 로깅 드라이버에서 읽도록 Container Agent를 설정할 수도 있습니다.
@@ -197,7 +173,7 @@ logs_config:
   docker_client_read_timeout: 60
 ```
 
-## Host Agent
+## 호스트 에이전트
 ### Docker 그룹의 Agent 사용자
 
 Host Agent를 사용하는 경우 Docker 소켓에서 읽을 수 있는 권한을 가지려면 `dd-agent` 사용자를 Docker 그룹에 추가해야 합니다. `agent.log` 파일에 다음 오류 로그가 표시되는 경우:

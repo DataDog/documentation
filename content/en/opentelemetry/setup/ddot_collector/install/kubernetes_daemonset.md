@@ -123,7 +123,7 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
 
 The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
 
-4. (Optional) Enable additional Datadog features:
+3. (Optional) Enable additional Datadog features:
 
 <div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
