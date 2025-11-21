@@ -416,24 +416,6 @@ The log archives that Datadog forwards to your storage bucket are in compressed 
 
 This directory structure simplifies the process of querying your historical log archives based on their date.
 
-Within the zipped JSON file, each event's content is formatted as follows:
-
-```json
-{
-    "_id": "123456789abcdefg",
-    "date": "2018-05-15T14:31:16.003Z",
-    "host": "i-12345abced6789efg",
-    "source": "source_name",
-    "service": "service_name",
-    "status": "status_level",
-    "message": "2018-05-15T14:31:16.003Z INFO rid='acb-123' status=403 method=PUT",
-    "attributes": { "rid": "abc-123", "http": { "status_code": 403, "method": "PUT" } },
-    "tags": [ "env:prod", "team:acme" ]
-}
-```
-
-**Note**: Logs are stored as Newline Delimited JSON (NDJSON), meaning each line in the file is a valid JSON object representing one log event.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
