@@ -118,7 +118,7 @@ Method
 | filter[to] | string | Maximum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time. |
 | sort | string | Sort order. Allowed values: timestamp, -timestamp |
 | page[cursor] | string | List following results with a cursor provided in the previous query. |
-| page[limit] | integer | Maximum number of spans in the response. |
+| page[limit] | integer | Maximum number of spans in the response. Default: 10. |
 
 #### Code Example
 
@@ -135,7 +135,7 @@ curl -G "https://api.datadoghq.com/api/v2/llm-obs/v1/spans/events" \
 
 ## Response
 
-Both endpoints have the same response format.
+Both endpoints have the same response format. [Results are paginated](/logs/guide/collect-multiple-logs-with-pagination/).
 
 {{< tabs >}}
 {{% tab "Model" %}}
@@ -251,7 +251,7 @@ Both endpoints have the same response format.
 |-------|------------------------------|------|
 | filter | [Filter](#filter) | The search and filter query settings. |
 | options | [Options](#options) | Global query options that are used during the query. |
-| page | [PageQuery](#page) | Paging attributes for listing spans. |
+| page | [PageQuery](#pagequery) | Paging attributes for listing spans. |
 | sort | string | Sort order. Allowed values: timestamp, -timestamp |
 
 ### Filter
@@ -345,10 +345,13 @@ Both endpoints have the same response format.
 
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
-| after        | string                        | The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]`. |
+| after        | string                        | The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of the `page[cursor]` field. |
 
 ### Links
 
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
-| next        | string                        | Link for the next set of results. |
+| next        | string                        | Link for the next set of results. See [Pagination][1]. |
+
+
+[1]: https://jsonapi.org/format/#fetching-pagination
