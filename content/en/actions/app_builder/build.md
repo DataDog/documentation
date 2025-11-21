@@ -33,9 +33,11 @@ When creating a new app, Datadog displays an onboarding modal with the following
 - [Start with action][20]
 - [Start from scratch][21] 
 
-## See what's possible with App Playground
+## Create an app
 
-If you're new to App Builder, you can use the App Playground to learn about its core concepts, including: 
+### See what's possible with App Playground
+
+The App Playground is an interactive demo that guides users through creating and using an app. If you're new to App Builder, you can use the App Playground to learn about its core concepts, including: 
 - Data fetching
 - Displaying query data in a table
 - Configuring a button to fire a query
@@ -45,8 +47,6 @@ If you're new to App Builder, you can use the App Playground to learn about its 
 To access the App Playground:
 1. From [App Builder][1], click **New App**. 
 1. Click **App Playground**.
-
-## Create an app
 
 ### Build an app with AI
 
