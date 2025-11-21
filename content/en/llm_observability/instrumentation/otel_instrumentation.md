@@ -59,9 +59,12 @@ To generate traces compatible with LLM Observability, do one of the following:
 
 After your application starts sending data, the traces automatically appear in the [**LLM Observability Traces** page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
-<div class="alert alert-danger">OpenInference and OpenLLMetry are not supported, as they have not been updated to support OpenTelemetry 1.37+ semantic conventions for generative AI.</a></div>
+<div class="alert alert-danger">
 
-**Note**: There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
+- OpenInference and OpenLLMetry are not supported, as they have not been updated to support OpenTelemetry 1.37+ semantic conventions for generative AI.
+- There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
+
+</div>
 
 ### Examples
 
@@ -213,4 +216,5 @@ For the complete list of supported attributes and their specifications, see the 
 [4]: /help/
 [5]: https://pypi.org/project/strands-agents/
 [6]: /llm_observability/evaluations/external_evaluations
+[7]: https://strandsagents.com/latest/
 
