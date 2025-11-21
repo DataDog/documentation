@@ -43,7 +43,7 @@ further_reading:
 ### AWS
 {{< appsec-integrations >}}
 {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
-{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="/security/application_security/setup/aws/lambda/" >}}
+{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="/security/application_security/setup/aws/lambda/dotnet" >}}
 {{< /appsec-integrations >}}
 
 ### Google Cloud Platform
