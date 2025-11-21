@@ -60,6 +60,9 @@ ${{
 }}
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://react.dev/reference/react/apis
 [2]: /actions/app_builder/components/#general-11
