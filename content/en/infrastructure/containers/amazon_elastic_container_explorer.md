@@ -25,7 +25,7 @@ The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources 
 
 Ensure you have enabled [AWS resource collection][10], the [ECS on EC2 integration][2], and the [ECS on Fargate integration][3].
 
-**Note**: The collection interval for these integrations is approximately 15 minutes. To achieve a shorter collection interval of 15 seconds, it is recommended to install the Datadog Agent in your ECS cluster.
+**Note**: The collection interval for these integrations is approximately 15 minutes. Datadog recommends installing the Datadog Agent in your ECS cluster to achieve a shorter collection interval of 15 seconds.
 
 {{< tabs >}}
 {{% tab "Task Definition" %}}
