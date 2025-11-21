@@ -60,7 +60,7 @@ Selecting an individual LLM span shows similar cost metrics specific to that **s
 
 [1]: /llm_observability/instrumentation/auto_instrumentation
 [2]: /llm_observability/instrumentation/sdk/?tab=python#cost-tracking
-[3]: /llm_observability/instrumentation/api?tab=model#metrics
+[3]: /llm_observability/instrumentation/api/#metrics
 [4]: https://platform.openai.com/docs/pricing
 [5]: https://platform.claude.com/docs/en/about-claude/models/overview#model-pricing
 [6]: https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/

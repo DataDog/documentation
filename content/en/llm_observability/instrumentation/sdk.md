@@ -1934,10 +1934,11 @@ Use `LLMObs.annotate(metrics=...)` to attach cost metrics for a LLM/embedding ca
 : required - dictionary
 <br />Supported keys are: 
 - Token: `input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, `time_per_output_token`,
-- Cost (in nanodollar): `input_cost`, `output cost`, `total_cost`, ` 
+- Cost (in dollar): `input_cost`, `output_cost`, `total_cost`, `non_cached_input_cost`, `cache_read_input_cost`, `cache_write_input_cost`
 
 {{% /collapse-content %}}
-
+{{% /tab %}}
+{{< /tabs >}}
 
 
 ## Evaluations
