@@ -7,6 +7,10 @@
   {{ partial "announcement_banner" . }} {{/* imported from websites-modules */}}
 {{ end }}
 
+{{ if eq site.Language.Lang "studio" }}
+    {{ partial "header/header-studio.html" . }}
+{{ else }}
 <div class="main-nav-wrapper">
   {{ partialCached "nav/main-nav" . }} {{/* imported from websites-modules */}}
 </div>
+{{ end }}
