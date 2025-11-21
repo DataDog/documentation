@@ -16,7 +16,7 @@ Log Optimizer is in Preview. Request access to optimize your log volumes and red
 
 ## Overview
 
-{{< img src="/logs/log_configuration/log_optimizer/log_optimizer_landing_page.png" alt="Log Optimizer landing page in Datadog, view recommendations to reduce log volume and noise" style="width:100%;" >}}
+{{< img src="/logs/log_configuration/log_optimizer/log_optimizer_main.png" alt="Log Optimizer landing page in Datadog, view recommendations to reduce log volume and noise" style="width:100%;" >}}
 
 Log Optimizer helps you identify log patterns that generate high volumes of repetitive or noisy data. Datadog analyzes your indexed logs and recommends actions, such as excluding, sampling, or converting logs to metrics, so you can optimize log volumes and focus on the most relevant information for troubleshooting and analysis.
 
@@ -26,7 +26,7 @@ This feature builds on [Logging without Limits™][1] and complements tools such
 
 Datadog continuously reviews your **indexed** logs to find patterns that generate large or repetitive volumes of data. Once per day, Log Optimizer evaluates these patterns against Datadog best practices and identifies logs that may benefit from optimization.
 
-The Log Optimizer then suggests actions so you can reduce noise without losing visibility into important events.
+The Log Optimizer then suggests actions (such as excluding debug-level messages, sampling routine logs, or converting static messages to metrics) so you can reduce noise without losing visibility into important events.
 
 <div class="alert alert-danger">The Log Optimizer does not account for existing exclusion filters or logs-to-metrics conversions. Review your settings before applying new actions to avoid duplicates.</div>
 
@@ -43,7 +43,7 @@ Each recommendation includes an explanation and a suggested action.
 | Recommendation | Description | Typical example |
 | :---- | :---- | :---- |
 | **Exclude** | Stop indexing logs that add noise and make it harder to focus on critical signals. | Debug-level messages or verbose system output. |
-| **Sample** | Lower the percentage of repetitive logs to reduce noise without losing visibility. | Logs with little variability (only fields like timestamps or IDs change). |
+| **Sample** | Lower the percentage of repetitive logs to reduce noise without losing visibility. | Logs with very little variability (where fields like timestamps or IDs might be the only change) |
 | **Convert to metric** | Replace repeated logs with a metric to track counts or trends over time. | Logs that always show the same message or status. |
 
 ## Review and apply recommendations
