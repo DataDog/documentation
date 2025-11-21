@@ -1,4 +1,6 @@
 ---
+aliases:
+- /es/synthetics/browser_tests/actions
 description: Aprende a grabar automáticamente y a configurar manualmente los pasos
   en una grabación de tests de navegador.
 further_reading:
@@ -136,7 +138,7 @@ La función de aserción de JavaScript contiene los siguientes parámetros y req
 
 {{< img src="synthetics/browser_tests/assertion_java.mp4" alt="Aserción de JavaScript de test de navegador" video="true" width="100%" >}}
 
-Dado que las aserciones de JavaScript se ejecutan en el contexto de la página activa, estos pasos pueden acceder a todos los objetos definidos en la página activa (tales como bibliotecas, elementos integrados y variables globales). Para cargar bibliotecas externas utiliza una promesa (promise).
+Dado que las aserciones de JavaScript se ejecutan en el contexto de la página activa, estos pasos pueden acceder a todos los objetos definidos en dicha página (tales como bibliotecas, elementos integrados y variables globales). Para cargar bibliotecas externas, usa una promesa. 
 
 Por ejemplo:
 
@@ -161,7 +163,7 @@ Crea este paso de aserción para que tu test de navegador verifique los archivos
 Para obtener más información sobre cómo comprobar las descargas, consulta [Comprobar la carga y descarga de archivos][3].
 
 [1]: /es/synthetics/guide/email-validation
-[2]: /es/synthetics/browser_tests/actions#use-variables
+[2]: /es/synthetics/browser_tests/test_steps#use-variables
 [3]: /es/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 
 #### Realizar tests del recuento de solicitudes HTTP
@@ -308,7 +310,7 @@ Para definir tu solicitud HTTP:
 
 Las aserciones definen cuál es el resultado esperado de un test. Después de hacer clic en **Send** (Enviar), se añaden aserciones básicas en `status code`, `response time` y `header` `content-type`, en función de la respuesta del test. En tests de navegador, las aserciones son opcionales para los pasos HTTP.
 
-| Tipo            | Operación                                                                                                               | Tipo de valor                                               |
+| Tipo            | Operador                                                                                                               | Tipo de valor                                               |
 |-----------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
 | `body`          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _Cadena_ <br> _[Expresión regular][13]_ <br> _Cadena_, _[Expresión regular][13]_ |
 | `header`        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                                       | _Cadena_ <br> _[Expresión regular][13]_                              |
@@ -375,7 +377,7 @@ Puedes seleccionar una de las siguientes funciones integradas disponibles:
 `{{ uuid }}`
 : Genera un identificador único universal (UUID) de la versión 4.
 
-Para enmascarar los valores de las variables locales en los resultados del test, selecciona **Hide and obfuscate variable value** (Ocultar y enmascarar el valor de la variable). Una vez definida la cadena de la variable, haz clic en **Add Variable** (Añadir variable).
+Para enmascarar los valores de las variables locales en los resultados del test, selecciona **Ocultar y enmascarar el valor de la variable**. Una vez definida la cadena de la variable, haz clic en **Añadir variable**.
 
 #### Elemento
 
@@ -399,7 +401,7 @@ La función de JavaScript cuenta con los siguientes parámetros y requiere una i
 
 * `vars` (opcional): una cadena que contiene [variables](#use-variables) de tu test de navegador que puedes usar en tu código. Usa `vars.<YOUR_VARIABLE>` para hacer referencia a una variable de test de navegador en tu fragmento de JavaScript. Por ejemplo, si tu test de navegador ya incluye una variable `PRICE`, invócala en tu fragmento de JavaScript con `vars.PRICE`.
 
-* `element` (opcional): el localizador del elemento en la página. Para configurarlo, usa los botones **Select** (Seleccionar) y **Update** (Actualizar) del elemento de destino. El elemento seleccionado usa de manera automática el algoritmo de multilocalización del test de navegador de Datadog.
+* `element` (opcional): El localizador del elemento en la página. Para configurarlo utiliza los botones **Select** (Seleccionar) y **Update** (Actualizar) del elemento de destino. El elemento seleccionado aprovecha automáticamente el algoritmo de multilocalización de test de navegador de Datadog.
 
 {{< img src="synthetics/browser_tests/custom_java_script.mp4" alt="Variable de JavaScript del test de navegador" video="true" width="100%" >}}
 
@@ -504,13 +506,13 @@ Para editar una grabación del navegador después de guardarla:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/synthetics/browser_tests/advanced_options/
-[2]: /es/synthetics/browser_tests/advanced_options/#timeout
+[2]: /es/synthetics/browser_tests/advanced_options/#tiempo-de-espera
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /es/synthetics/guide/email-validation/#create-an-email-variable
+[4]: /es/synthetics/guide/email-validation/#crear-una-variable-de-correo-electrónico
 [5]: /es/synthetics/settings/
 [6]: /es/synthetics/guide/browser-tests-totp
-[7]: /es/synthetics/guide/email-validation/#confirm-the-email-was-sent
-[8]: /es/synthetics/guide/email-validation/#navigate-through-links-in-an-email
+[7]: /es/synthetics/guide/email-validation/#confirmar-que-se-ha-enviado-el-correo-electrónico
+[8]: /es/synthetics/guide/email-validation/#desplazarse-por-los-enlaces-de-un-correo-electrónico
 [9]: /es/synthetics/browser_tests/advanced_options/#subtests
 [10]: /es/synthetics/guide/reusing-browser-test-journeys
 [11]: https://restfulapi.net/json-jsonpath/
