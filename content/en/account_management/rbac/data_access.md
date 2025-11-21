@@ -68,14 +68,16 @@ Terraform support will be announced after Data Access Control is generally avail
 ### Supported telemetry types {#supported-telemetry}
 
 - APM traces
-- Software Delivery repository info (CI Visibility pipelines)
+- Logs
+- RUM sessions
+
+The following are available as a Preview upon request:
 - Cloud costs
 - Custom metrics
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
-- Logs
-- RUM sessions
 - LLM Observability
+- Software Delivery repository info (CI Visibility pipelines)
 
 ## Usage constraints
 
@@ -84,14 +86,17 @@ After you turn on Data Access Control, Datadog disables or limits other features
 ### Real User Monitoring (RUM)
 
 #### Session Replay: Extended Retention
-By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you enroll in the Preview for Data Access Control, Datadog disables the option for Extended Retention. Extended Retention does not work with Data Access Control because the data store that holds the extended data does not support access restrictions.
+By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you create a restricted dataset for RUM, Datadog disables the option for Extended Retention. 
 
 #### Session Replay: Playlists
 
-Playlists are collections of Session Replays you can aggregate in a folder-like structure. Playlists can allow a user to unintentionally escape access controls. When a customer enrolls in the Preview for Data Access Control, Datadog disables Session Replay Playlists.
+Playlists are collections of Session Replays you can aggregate in a folder-like structure. When you create a restricted dataset for RUM, Datadog disables Session Replay Playlists.
 
 ### Logs
-Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. To use Data Access Control with Log Management, first request access to Data Access Control. Next, manually migrate your configuration from Log Management permissions to Data Access Control.
+Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. We recommend using a single solution to restrict logs data, but user access be limited by restrictions applied from either system.
+
+### Monitors
+Users can create Monitors that query and alert on active telemetry. While the user will only be able to directly query data they’re allowed to access, the Monitor will operate as a System User with full access to data. This gap will be addressed in a future iteration. We encourage customers who are concerned about this to carefully monitor which Monitors are created by their users and restrict the ability to create these Monitors.
 
 ### Software Delivery repository info (CI Visibility pipelines)
 
