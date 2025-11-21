@@ -126,7 +126,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 
 See [Update Existing Pipelines][5] if you want to make changes to your pipeline's configuration.
 
-**Note**: If you enable disk buffering for destinations, you can use Kubernetes [persistence volume][6] to handle back pressure when a destination is unavailable or experiencing a slow down and can't keep up with the volume of data that the Worker is sending.
+**Note**: If you enable disk buffering for destinations, you can use Kubernetes [persistence volume][6] to handle back pressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending.
 
 #### Self-hosted and self-managed Kubernetes clusters
 
