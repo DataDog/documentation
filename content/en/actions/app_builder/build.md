@@ -74,11 +74,10 @@ To iterate on an existing app:
 
 Blueprints are helpful templates that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
-1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint**.
-1. Find the blueprint that you want to use and click **View**.
-1. Click **Use Blueprint** to open the app blueprint.
-1. To change the app name and description, click the app name.
+1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Blueprints** in the onboarding modal.
+1. Find the blueprint you want to use and click **Use Blueprint**.
 1. Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
+1. To change the app name and description, click the app name.
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. When you're ready to publish your app, click **Publish**. After publishing, you can click the **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add it to a dashboard, notebook, or Self-Service Actions.
