@@ -11516,6 +11516,60 @@ components:
           example: UTC
           type: string
       type: object
+    SLOCountCondition:
+      description: 'A count-based SLI specification, composed of three parts: the
+        good events formula, the total events formula,
+
+        and the involved queries.'
+      example:
+        good_events_formula: query1 - query2
+        queries:
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.success{*} by {env}.as_count()
+        - data_source: metrics
+          name: query2
+          query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+        total_events_formula: query2
+      properties:
+        good_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+        queries:
+          example:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          items:
+            $ref: '#/components/schemas/SLODataSourceQueryDefinition'
+          minItems: 1
+          type: array
+        total_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+      required:
+      - good_events_formula
+      - total_events_formula
+      - queries
+      type: object
+    SLOCountSpec:
+      additionalProperties: false
+      description: A count-based SLI specification.
+      example:
+        count:
+          good_events_formula: query1 - query2
+          queries:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.success{*} by {env}.as_count()
+          - data_source: metrics
+            name: query2
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          total_events_formula: query2
+      properties:
+        count:
+          $ref: '#/components/schemas/SLOCountCondition'
+      required:
+      - count
+      type: object
     SLOCreator:
       description: The creator of the SLO
       nullable: true
@@ -12402,8 +12456,6 @@ components:
           type: array
         timeframe:
           $ref: '#/components/schemas/SLOTimeframe'
-        type:
-          $ref: '#/components/schemas/SLOType'
         warning_threshold:
           description: 'The optional warning threshold such that when the service
             level indicator is
@@ -12421,9 +12473,10 @@ components:
       type: object
     SLOSliSpec:
       description: A generic SLI specification. This is currently used for time-slice
-        SLOs only.
+        and count-based SLOs only.
       oneOf:
       - $ref: '#/components/schemas/SLOTimeSliceSpec'
+      - $ref: '#/components/schemas/SLOCountSpec'
     SLOState:
       description: State of the SLO.
       enum:
@@ -13606,8 +13659,7 @@ components:
       - type
       type: object
     ServiceLevelObjectiveQuery:
-      description: 'A metric-based SLO. **Required if type is `metric`**. Note that
-        Datadog only allows the sum by aggregator
+      description: 'A metric-based SLO. Note that Datadog only allows the sum by aggregator
 
         to be used because this will sum up all request counts instead of averaging
         them, or taking the max or
