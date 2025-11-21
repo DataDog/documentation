@@ -90,6 +90,10 @@ To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Te
   {{< nextlink href="/service_management/on-call/profile_settings">}}<u>Profile Settings</u>: Configure your contact methods and notification preferences to ensure you receive timely and effective Pages.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Billing
+
+On-Call is a seat-based SKU. Customers who want to learn more about how On-Call is billed and how to manage seats within Datadog should visit our [pricing page][5] and the [Incident Response billing documentation][6].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +102,5 @@ To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Te
 [2]: /service_management/on-call/profile_settings
 [3]: /account_management/rbac/granular_access/
 [4]: /account_management/rbac/#role-based-access-control
+[5]: https://www.datadoghq.com/pricing/?product=incident-response#products
+[6]: /account_management/billing/incident_response/
