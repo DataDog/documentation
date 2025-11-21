@@ -204,7 +204,7 @@ def generate_answer():
             ),
   )
 {{< /code-block >}}
-The `variables` dictionary should contain the key–value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Use `rag_query_variables` and `rag_context_variables` to specify which variables represent the user query and which represent the retrieval context. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+The `variables` dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Use `rag_query_variables` and `rag_context_variables` to specify which variables represent the user query and which represent the retrieval context. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
 
 Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
 
