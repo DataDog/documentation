@@ -23,7 +23,7 @@ You can also supply your own cost data using the manual option. In this case, Da
 ### Automatic
 If your application uses one of the [supported providers listed below](#supported-providers), Datadog will automatically collect token counts and calculate the cost of each request.
 
-<div class="alert alert-info">Token counts used for this calculation come from [Datadog’s auto-instrumentation][1] or from user annotations.</div>
+Token counts used for this calculation come from [Datadog’s auto-instrumentation][1] or from user annotations.
 
 ### Manual
 For users with custom pricing rates, self-hosted models, or unsupported providers, you can manually provide cost values on your LLM/embedding spans. To manually supply cost information, follow the instrumentation steps described in [SDK Reference][2] or in [API][3].
@@ -52,6 +52,7 @@ View your app in LLM Observability and select **Cost** on the left. The _Cost vi
 - **Most Expensive LLM Calls**: A list of your highest-cost requests
 
 {{< img src="llm_observability/cost_tracking_trace.png" alt="Cost data in trace detail." style="width:100%;" >}}
+
 Cost data is also available within your application’s traces and spans, allowing you to understand cost at both the request (trace) and operation level (span).
 Click any trace or span to open a detailed side-panel view that includes cost metrics for the **full trace** and for each individual LLM call.
 At the top of the trace view, the banner shows aggregated cost information for the full trace, including Estimated Cost and Total Tokens. Hovering over these values reveals a breakdown of input and output token/costs.
