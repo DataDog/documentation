@@ -1,8 +1,6 @@
 ---
-title: Quality Monitoring
-description: Learn about Quality Monitoring and get started
-aliases:
-- /database_monitoring/
+title: Database Monitoring
+description: Learn about Database Monitoring and get started
 further_reading:
 - link: "https://www.datadoghq.com/blog/database-monitoring-recommendations/"
   tag: "Blog"
