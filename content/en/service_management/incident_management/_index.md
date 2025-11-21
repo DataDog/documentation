@@ -108,7 +108,7 @@ Incident Management integrates with third-party applications, including:
 
 ## Billing
 
-Incident Management is a seat-based SKU. Customers who want to learn more about how Incident Management is billed and how to manage seats within Datadog should visit our [pricing page][31] and the [Incident Response billing documentation][32].
+Incident Management is a seat-based SKU. To learn more about how Incident Management is billed and how to manage seats within Datadog, visit our [pricing page][31] and the [Incident Response billing documentation][32].
 
 ## Further Reading
 
