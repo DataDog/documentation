@@ -126,36 +126,36 @@ AI-powered remediation is in Preview.
 
 AI-powered remediation saves time by replacing the filing of individual pull requests to fix vulnerabilities with bulk-remediation campaigns that can fix multiple vulnerabilities at once.
 
-AI-powered remediation uses the [Bits AI Dev Agent][10] to power single and multiple vulnerability fixes in Code Security. You create campaigns to fix a subset of vulnerabilities and each campaign can automatically create pull requests to fix those vulnerabilities.
+AI-powered remediation uses the [Bits AI Dev Agent][10] to power single and multiple vulnerability fixes in Code Security. You create campaigns to fix a subset of vulnerabilities, and each campaign can automatically create pull requests to fix those vulnerabilities.
 
 ### Bulk remediation: Campaigns
 
 The **Campaign** is how you operationalize **AI-powered remediation** in Datadog.
 It connects SAST findings to automated fixes through customizable PR workflows with human-tunable AI behavior.
 
-When you create a campaign, the Bits Dev Campaign tool initiates a batched remediation to fix a subset of matching vulnerabilities. 
+When you create a campaign, the Bits AI Dev Campaign tool initiates a batched remediation to fix a subset of matching vulnerabilities. 
 
 A campaign defines the following:
 
 | Section                | Description                                  | Options                                                                                                                                                                                                                                                                                          |
 | ---------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Repository**         | Define which repo and paths to scan.         | - Set the GitHub repo URL<br>- Use **Paths** to limit rule scanning to certain directories or files                                                                                                                                                                                                      |
-| **Rule**               | Choose which SAST rule to apply.          | - Select a rule from the dropdown<br>- View description, code example, and number of matches<br>- Click **Show More** to see remediation steps                                                                                                                                                           |
-| **Session Management** | Controls how PRs are grouped and submitted.  | - **Create one PR per**:<br>      • `Repository`: One PR for all findings in the repo<br>      • `File`: One PR per file with findings<br>      • `Finding`: One PR per finding (most granular)<br>- **Allow [n] open PRs at a time**: Prevents too many PRs at once<br>- **Limit [n] findings per PR**: Prevents creating too-large PRs |
-| **Prompt Tuning**      | Customizes how the AI proposes remediations. | - **Custom Instructions**: Guide the AI on how to tweak fixes (for example, `Update CHANGELOG.md with a summary of changes`, `Start all PR titles with [autofix]`)                                                                                                    |
-### Campain in progress
+| **Repository**         | Define which repo and paths to scan         | - Set the GitHub repo URL.<br>- Use **Paths** to limit rule scanning to certain directories or files.                                                                                                                                                                                                      |
+| **Rule**               | Choose which SAST rule to apply          | - Select a rule from the dropdown.<br>- View description, code example, and number of matches.<br>- Click **Show More** to see remediation steps.                                                                                                                                                           |
+| **Session Management** | Controls how PRs are grouped and submitted  | - **Create one PR per**:<br>      • `Repository`: One PR for all findings in the repo<br>      • `File`: One PR per file with findings<br>      • `Finding`: One PR per finding (most granular)<br>- **Allow [n] open PRs at a time**: Prevents too many PRs at once<br>- **Limit [n] findings per PR**: Prevents creating too-large PRs |
+| **Prompt Tuning**      | Customizes how the AI proposes remediations | - **Custom Instructions**: Guide the AI on how to tweak fixes (for example, `Update CHANGELOG.md with a summary of changes`, `Start all PR titles with [autofix]`).                                                                                                    |
+### Campaign in progress
 
-When you click **Create Campaign**, Bits Dev Agent does the following:
+When you click **Create Campaign**, [Bits AI Dev Agent][10] does the following:
 
-1. Bits Dev Agent loads SAST findings for the selected repo(s), path(s), and rule.
-2. Uses the [Bits Dev Agent][10] to generate patches for each group of findings.
+1. Loads SAST findings for the selected repo(s), path(s), and rule.
+2. Generates patches for each group of findings.
 3. Creates PRs according to your session rules.
-4. If Bits Dev notifications are turned on, PRs will automatically be sent via Slack to relevant stakeholders.
+4. If Bits AI Dev notifications are turned on, PRs are automatically sent through Slack to relevant stakeholders.
 5. Lets you review, edit, and merge fixes using GitHub.
 
-The campain page shows whether the AI is actively remediating real findings, and how many have been remediated or pending.
+The campaign page shows whether the AI is actively remediating real findings, and how many have been remediated or pending.
 
-You can click a session to view the code changes in more detail and chat with the [Bits Dev Agent][10] to ask for changes.
+You can click a session to view the code changes in more detail and chat with the [Bits AI Dev Agent][10] to ask for changes.
 
 ### Session details
 
@@ -176,7 +176,7 @@ Session details include the following:
   - **Fixing process recap**: Shows exactly how the AI read the code, understood the context, chose its approach, and applied the fix. This is helpful for auditability, compliance, and trust. You can confirm that the AI isn't rewriting code blindly, but applying defensible and explainable patterns.
   - **CI via GitHub**: Describes whether the AI-generated patch breaks anything downstream, and includes full error logs. This helps you validate that a fix is not only secure but also safe to deploy, without needing to leave the platform.
   - **Summary**: Recaps the impact of the fix and provides next steps or guidance if tests failed or PR needs to be rebased.
-  - Bits chat field: Lets you interactively refine the fix or ask the AI follow-up questions. This makes remediation collaborative and tunable, giving security engineers control without needing to write the patch themselves.
+  - Bits AI chat field: Lets you interactively refine the fix or ask the AI follow-up questions. This makes remediation collaborative and tunable, giving security engineers control without needing to write the patch themselves.
 
 
 #### Scope
