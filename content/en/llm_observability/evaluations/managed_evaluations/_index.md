@@ -180,7 +180,8 @@ from ddtrace.llmobs.types import Prompt
 # if your llm call is auto-instrumented...
 with LLMObs.annotation_context(
         prompt=Prompt(
-            template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}"
+            id="generate_answer_prompt",
+            template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
             variables={"user_question": user_question, "article": article},
             rag_query_variables=["user_question"],
             rag_context_variables=["article"]
@@ -195,7 +196,8 @@ def generate_answer():
   ...
   LLMObs.annotate(
             prompt=Prompt(
-                template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}"
+                id="generate_answer_prompt",
+                template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
                 variables={"user_question": user_question, "article": article},
                 rag_query_variables=["user_question"],
                 rag_context_variables=["article"]
@@ -205,8 +207,8 @@ def generate_answer():
 The `variables` dictionary should contain the key–value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Use `rag_query_variables` and `rag_context_variables` to specify which variables represent the user query and which represent the retrieval context. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
 
 Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
-Prompt Tracking requires you to have the template set up to monitor and track your prompt versions.
 
+Prompt Tracking is available on python starting from the 3.15 version, It also requires an id for the prompt and the template set up to monitor and track your prompt versions.
 You can find more examples of prompt tracking and instrumentation in the [SDK documentation][6].
 
 ##### Hallucination configuration
