@@ -1,5 +1,7 @@
 ---
 title: Amazon Elastic Container (ECS) Explorer
+aliases:
+  - /infrastructure/containers/amazon_elastic_container_explorer
 further_reading:
   - link: "https://www.datadoghq.com/blog/ecs-default-monitors/"
     tag: "Blog"

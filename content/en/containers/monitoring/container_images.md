@@ -1,5 +1,7 @@
 ---
 title: Container Images View
+aliases:
+  - /infrastructure/containers/container_images
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
   tag: "Blog"
