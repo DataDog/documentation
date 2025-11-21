@@ -55,7 +55,7 @@ To apply a recommendation:
 1. Click a recommendation to open the side panel.
 2. Click an action button (**Exclude Logs**, **Sample Logs**, or **Create Metric**).
 
-The change takes effect immediately in your configuration and the affected log pattern updates the next time Datadog runs the daily analysis.
+The change takes effect immediately in your configuration. However, The Log Optimizer page does not update until the next time it runs the daily analysis. This means, even after you take action, the page continues to list the same recommendation.
 
 {{% collapse-content title="Case Study: Exclude repetitive log data using the Log Optimizer" level="h4" expanded=false %}}
 
@@ -70,7 +70,7 @@ Critical error logs from the same service remain visible, allowing you to focus 
 
 ## Track applied changes
 
-After applying a recommendation, you can find your changes in the following locations:
+Applying a recommendation creates an exclusion filter or a metric from the log. To see that filter or metric definition, change it, or remove it, go to the corresponding page:
 
 * **Exclusion filters**: [Logs Indexes][2] page
 * **Logs-to-metrics conversions**: [Metrics Configuration][3] page
