@@ -32,7 +32,7 @@ Before you begin:
 - **For agentic setup**: [Cursor][8] or [Claude Code][9] installed and configured
 - **For manual setup**: Ability to install packages and modify configuration files in your project
 
-No API keys are required upfront—authentication is handled during the setup process.
+No API keys are required upfront, as authentication is handled during the setup process.
 
 ## Setup
 
@@ -55,7 +55,7 @@ Agentic setup is available for the following platforms:
 
 ### 1. Install the Datadog onboarding MCP server
 
-The MCP server enables your AI agent to access Datadog's onboarding tools. This is a one-time setup per AI client.
+The Datadog Model Context Protocol (MCP) server enables your AI agent to access Datadog's onboarding tools. This is a one-time setup per AI client.
 
 1. Copy the deeplink or command for your AI agent client:
 
