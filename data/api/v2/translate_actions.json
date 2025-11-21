@@ -3108,6 +3108,24 @@
     "request_description": "",
     "request_schema_description": "Request to create a team"
   },
+  "GetTeamHierarchyLinks": {
+    "description": "Get all team hierarchy links that match the provided filters.",
+    "summary": "Get team hierarchy links"
+  },
+  "AddTeamHierarchyLink": {
+    "description": "Create a new team hierarchy link between a parent team and a sub team.",
+    "summary": "Create a team hierarchy link",
+    "request_description": "",
+    "request_schema_description": "Request to create a team hierarchy link"
+  },
+  "RemoveTeamHierarchyLink": {
+    "description": "Remove a team hierarchy link by the given link_id.",
+    "summary": "Remove a team hierarchy link"
+  },
+  "GetTeamHierarchyLink": {
+    "description": "Get a single team hierarchy link for the given link_id.",
+    "summary": "Get a team hierarchy link"
+  },
   "DeleteTeamConnections": {
     "description": "Delete multiple team connections.",
     "summary": "Delete team connections",
@@ -3135,17 +3153,17 @@
     "request_schema_description": "Team sync request."
   },
   "ListMemberTeams": {
-    "description": "Get all member teams.",
+    "description": "Get all member teams.\n\n**Note**: This API is deprecated. For team hierarchy relationships (parent-child\nteams), use the team hierarchy links API: `GET /api/v2/team-hierarchy-links`.",
     "summary": "Get all member teams"
   },
   "AddMemberTeam": {
-    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.",
+    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.\n\n**Note**: This API is deprecated. For creating team hierarchy links, use the team hierarchy links API: `POST /api/v2/team-hierarchy-links`.",
     "summary": "Add a member team",
     "request_description": "",
     "request_schema_description": "Request to add a member team to super team's hierarchy"
   },
   "RemoveMemberTeam": {
-    "description": "Remove a super team's member team identified by `member_team_id`.",
+    "description": "Remove a super team's member team identified by `member_team_id`.\n\n**Note**: This API is deprecated. For deleting team hierarchy links, use the team hierarchy links API: `DELETE /api/v2/team-hierarchy-links/{link_id}`.",
     "summary": "Remove a member team"
   },
   "DeleteTeam": {
