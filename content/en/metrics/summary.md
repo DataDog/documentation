@@ -139,7 +139,7 @@ The metric description helps you understand what a metric does. Descriptions are
 
 Displays the exact file, line, and owner in your source code where the metric is emitted, helping you trace its source code and code owners, understand, and take action directly from the platform. 
 
-{{< img src="metrics/summary/metrics_source_code_11032025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+{{< img src="metrics/summary/metrics_source_code_11212025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
 
 ### Tags table
