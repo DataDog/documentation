@@ -7914,6 +7914,19 @@ menu:
         unstable:
           - v2
         order: 0
+    - name: Get detailed information about an agent
+      url: '#get-detailed-information-about-an-agent'
+      identifier: fleet-automation-get-detailed-information-about-an-agent
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetAgentInfo
+        unstable:
+          - v2
+        order: 1
     - name: List all available Agent versions
       url: '#list-all-available-agent-versions'
       identifier: fleet-automation-list-all-available-agent-versions
