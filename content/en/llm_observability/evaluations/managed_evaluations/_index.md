@@ -208,7 +208,7 @@ The `variables` dictionary should contain the key–value pairs your app uses to
 
 Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
 
-Prompt Tracking is available on python starting from the 3.15 version, It also requires an id for the prompt and the template set up to monitor and track your prompt versions.
+Prompt Tracking is available on python starting from the 3.15 version, It also requires an ID for the prompt and the template set up to monitor and track your prompt versions.
 You can find more examples of prompt tracking and instrumentation in the [SDK documentation][6].
 
 ##### Hallucination configuration
