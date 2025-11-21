@@ -26,10 +26,9 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [Amazon Bedrock](#amazon-bedrock)               | >= 1.31.57         | >= 2.9.0       |
 | [Amazon Bedrock Agents](#amazon-bedrock-agents) | >= 1.38.26         | >= 3.10.0      |
 | [Anthropic](#anthropic)                         | >= 0.28.0          | >= 2.10.0      |
-| [CrewAI](#crewai)                             | >= 0.105.0         | >= 3.5.0       |
+| [CrewAI](#crewai)                               | >= 0.105.0         | >= 3.5.0       |
 | [Google ADK](#google-adk)                       | >= 1.0.0           | >= 3.15.0      |
 | [Google GenAI](#google-genai)                   | >= 1.21.1          | >= 3.11.0      |
-| [Google GenerativeAI](#google-generativeai)     | >= 0.7.2           | >= 2.14.0      |
 | [LangChain](#langchain)                         | >= 0.0.192         | >= 2.9.0       |
 | [LangGraph](#langgraph)                         | >= 0.2.23          | >= 3.10.1      |
 | [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
@@ -332,26 +331,6 @@ The Google GenAI integration instruments the following methods:
 {{< /tabs >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Google GenerativeAI" level="h3" expanded=false id="google-generativeai" %}}
-{{< tabs >}}
-{{% tab "Python" %}}
-The Google GenerativeAI integration provides automatic tracing for the Google GenerativeAI Python SDK content generation calls.
-
-**Note:** The [Google Generative AI SDK][1] is deprecated, and succeeded by Google GenAI.
-
-### Traced methods
-
-The Google GenerativeAI integration instruments the following methods:
-
-- Generating content (including streamed calls):
-  - `model.generate_content()` (Also captures `chat.send_message()`)
-  - `model.generate_content_async()` (Also captures `chat.send_message_async()`)
-
-[1]: https://github.com/google-gemini/deprecated-generative-ai-python
-{{% /tab %}}
-{{< /tabs >}}
-{{% /collapse-content %}}
-
 {{% collapse-content title="LangChain" level="h3" expanded=false id="langchain" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -517,6 +496,8 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Responses][5]:
    - `OpenAI().responses.create()`
    - `AsyncOpenAI().responses.create()`
+   - `OpenAI().responses.parse()` (as of `ddtrace==3.17.0`)
+   - `AsyncOpenAI().responses.parse()` (as of `ddtrace==3.17.0`)
 -  [Calls made to DeepSeek through the OpenAI Python SDK][6] (as of `ddtrace==3.1.0`)
 
 [1]: /integrations/openai/

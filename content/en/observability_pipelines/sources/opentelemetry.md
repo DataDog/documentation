@@ -36,7 +36,7 @@ Optionally, toggle the switch to enable TLS. If you enable TLS, the following ce
 
 {{< img src="observability_pipelines/sources/otel_env_vars.png" alt="The install page showing the OpenTelemetry environment variable field" style="width:75%;" >}}
 
-{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
 
 ## Send logs to the Observability Pipelines Worker
 
@@ -44,23 +44,23 @@ Configure your OTel exporters to point to HTTP or gRPC.
 
 ### HTTP configuration example
 
-The Worker exposes the HTTP endpoint on port 4317. This is an example of configuring your OTel exporters with HTTP using Python:
+The Worker exposes the HTTP endpoint on port 4318. This is an example of configuring your OTel exporters with HTTP using Python:
 
 ```python
     from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
     http_exporter = OTLPLogExporter(
-        endpoint="http://worker:4317/v1/logs"
+        endpoint="http://worker:4318/v1/logs"
     )
 ```
 
 ### gRPC configuration example
 
-The Worker exposes the gRPC endpoint on port 4318. This is an example of configuring your OTel exporters with gRPC:
+The Worker exposes the gRPC endpoint on port 4317. This is an example of configuring your OTel exporters with gRPC:
 
 ```python
     from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
     grpc_exporter = OTLPLogExporter(
-        endpoint="grpc://worker:4318"
+        endpoint="grpc://worker:4317"
     )
 ```
 

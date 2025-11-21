@@ -1,6 +1,7 @@
 ---
 aliases:
 - /es/data_streams/troubleshooting
+- /es/data_streams/data_pipeline_lineage
 cascade:
   algolia:
     rank: 70
@@ -70,7 +71,7 @@ Data Streams Monitoring requiere versiones mínimas del rastreador Datadog. Para
 #### Compatibilidad con OpenTelemetry
 Data Streams Monitoring es compatible con OpenTelemetry. Si has configurado Datadog APM para que funcione con OpenTelemetry, no es necesaria ninguna configuración adicional para utilizar Data Streams Monitoring. Consulta [Compatibilidad de OpenTelemetry][11].
 
-## Configuración
+## Instalación
 
 ### Por lenguaje
 
