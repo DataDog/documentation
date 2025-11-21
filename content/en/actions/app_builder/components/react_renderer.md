@@ -11,7 +11,9 @@ further_reading:
   text: "Build Apps"
 ---
 
-This page provides an example of how to use the React renderer component in your App Builder apps. For a full reference to all of the fields in the React renderer, see [Components][1].
+The React renderer enables users to create fully custom UI components using the language and libraries they already know. This component gives builders access to [React APIs][1] so they can create flexible, dynamic, and visually impactful apps in App Builder.
+
+This page provides an example of how to use the React renderer component. For a full reference to all of the fields in the React renderer, see [Components][2].
 
 ## Example component definition
 
@@ -59,4 +61,5 @@ ${{
 ```
 
 
-[1]: /actions/app_builder/components/#general-11
+[1]: https://react.dev/reference/react/apis
+[2]: /actions/app_builder/components/#general-11
