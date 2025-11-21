@@ -69,7 +69,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 Network Path tests cannot be run directly from private locations. However, you can run them from any host or device where the Datadog Agent is installed, including hosts that also act as private locations for Synthetic Monitoring tests.
 
-To test network conditions inside private environments, install the Datadog Agent on the host or device, and run Network Path tests from that Agent. For full end-to-end coverage, you can group the application tests running from private locations, and
+To test network conditions inside private environments, install the Datadog Agent on the host or device, and run Network Path tests from that Agent. For full end-to-end visibility, you can group the application tests running from private locations, and
 Network Path tests running from the Datadog Agent on the _same host_, into a single [test suite][9]. This provides a unified view of your service, feature, and application health across all layers affecting user experience.
 
 ### Prerequisites
@@ -100,6 +100,8 @@ Requires [Agent version][7] `7.72` or higher.
    ```shell
    sudo systemctl restart datadog-agent
    ```
+
+   {{< img src="synthetics/network_tests/network_path_test_agent.png" alt="Network Path Testing Location and Agents form, showing the Datadog Agent selection dropdown" style="width:80%;" >}}
 
 ## View test results
 
