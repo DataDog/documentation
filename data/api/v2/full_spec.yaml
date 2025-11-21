@@ -42111,6 +42111,16 @@ components:
           format: date-time
           readOnly: true
           type: string
+        last_modifier_email:
+          description: Email of the user who last modified this restriction query.
+          example: user@example.com
+          readOnly: true
+          type: string
+        last_modifier_name:
+          description: Name of the user who last modified this restriction query.
+          example: John Doe
+          readOnly: true
+          type: string
         modified_at:
           description: Time of last restriction query modification.
           example: '2020-03-17T21:15:15.000Z'
@@ -42122,6 +42132,18 @@ components:
             the query can be returned.
           example: env:sandbox
           type: string
+        role_count:
+          description: Number of roles associated with this restriction query.
+          example: 3
+          format: int64
+          readOnly: true
+          type: integer
+        user_count:
+          description: Number of users associated with this restriction query.
+          example: 5
+          format: int64
+          readOnly: true
+          type: integer
       type: object
     RestrictionQueryCreateAttributes:
       description: Attributes of the created restriction query.
@@ -42130,6 +42152,8 @@ components:
           description: The restriction query.
           example: env:sandbox
           type: string
+      required:
+      - restriction_query
       type: object
     RestrictionQueryCreateData:
       description: Data related to the creation of a restriction query.
@@ -42154,18 +42178,8 @@ components:
             $ref: '#/components/schemas/RestrictionQueryWithoutRelationships'
           type: array
       type: object
-    RestrictionQueryRelationships:
-      description: Relationships of the restriction query object.
-      properties:
-        roles:
-          $ref: '#/components/schemas/RelationshipToRoles'
-      type: object
     RestrictionQueryResponseIncludedItem:
       description: An object related to a restriction query.
-      discriminator:
-        mapping:
-          roles: '#/components/schemas/RestrictionQueryRole'
-        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/RestrictionQueryRole'
     RestrictionQueryRole:
@@ -42178,11 +42192,11 @@ components:
           example: <ROLE_ID>
           type: string
         type:
-          default: roles
-          description: Role resource type.
-          example: roles
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/RolesType'
+      required:
+      - type
+      - id
+      - attributes
       type: object
     RestrictionQueryRoleAttribute:
       description: Attributes of the role for a restriction query.
@@ -42209,6 +42223,8 @@ components:
           description: The restriction query.
           example: env:sandbox
           type: string
+      required:
+      - restriction_query
       type: object
     RestrictionQueryUpdateData:
       description: Data related to the update of a restriction query.
@@ -42234,7 +42250,7 @@ components:
           example: 79a0e60a-644a-11ea-ad29-43329f7f58b5
           type: string
         relationships:
-          $ref: '#/components/schemas/RestrictionQueryRelationships'
+          $ref: '#/components/schemas/UserRelationships'
         type:
           $ref: '#/components/schemas/LogsRestrictionQueriesType'
       type: object
@@ -70969,6 +70985,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get restriction query for a given role
@@ -71007,6 +71029,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all restriction queries for a given user
@@ -71156,6 +71184,56 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Replace a restriction query.
+      operationId: ReplaceRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestrictionQueryUpdatePayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryWithoutRelationshipsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Replace a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-menu-order: 4.5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/logs/config/restriction_queries/{restriction_query_id}/roles:
     delete:
       description: Removes a role from a restriction query.
@@ -71250,7 +71328,11 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
-      description: Adds a role to a restriction query.
+      description: 'Adds a role to a restriction query.
+
+
+        **Note**: This operation automatically grants the `logs_read_data` permission
+        to the role if it doesn''t already have it.'
       operationId: AddRoleToRestrictionQuery
       parameters:
       - $ref: '#/components/parameters/RestrictionQueryID'
