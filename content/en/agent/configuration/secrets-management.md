@@ -225,7 +225,7 @@ On GCE or GKE runtimes, authentication is provisioned automatically by Google th
 
 GCP Secret Manager supports secret versions. The Agent implementation also supports versioning using the `;` delimiter. If no version is specified, the `latest` version is used.
 
-**Version syntax**:
+Version syntax:
 - `secret-key` - Implicit `latest` version
 - `secret-key;latest;` - Explicit `latest` version
 - `secret-key;1;` - Specific version number
