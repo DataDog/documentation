@@ -75,6 +75,48 @@ If you haven't already, set up the [Datadog-Azure integration][3]. You can verif
 </div>
 
 {{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+#### Locally
+
+Install the [Datadog CLI][201]
+
+```shell
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
+```
+
+Install the [Azure CLI][202] and authenticate with `az login`.
+
+Then, run the following command to set up the sidecar container:
+
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
+
+Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
+
+The Datadog CLI will automatically infer the runtime of your app and install the corresponding application. If this fails for whatever reason, you can override this behavior by specifying a runtime with the `--windows-runtime` flag.
+
+Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
+
+#### Azure Cloud Shell
+
+To use the Datadog CLI in [Azure Cloud Shell][203], open a cloud shell, set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and use `npx` to run the CLI directly:
+
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
+
+
+[201]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+[202]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+[203]: https://portal.azure.com/#cloudshell/
+
+{{% /tab %}}
 {{% tab "Terraform" %}}
 
 The [Datadog Terraform module for Windows Web Apps][4] wraps the [azurerm_windows_web_app][5] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the Windows Web App extension for your runtime.
