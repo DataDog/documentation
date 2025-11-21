@@ -92,7 +92,7 @@ To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Te
 
 ## Billing
 
-On-Call is a seat-based SKU. Customers who want to learn more about how On-Call is billed and how to manage seats within Datadog should visit our [pricing page][5] and the [Incident Response billing documentation][6].
+On-Call is a seat-based SKU. To learn more about how On-Call is billed and how to manage seats within Datadog, visit our [pricing page][5] and the [Incident Response billing documentation][6].
 
 ## Further Reading
 
