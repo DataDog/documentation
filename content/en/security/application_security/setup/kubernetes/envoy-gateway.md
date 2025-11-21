@@ -188,7 +188,7 @@ spec:
     # with body processing enabled.
     # Note: This timeout also includes the data communication between Envoy and the external processor.
     # The timeout should be adjusted to accommodate the additional possible processing time.
-    # Larger payloads will require a longer timeout. 
+    # Larger payloads will require a longer timeout.
     messageTimeout: 200ms
 
     processingMode:
