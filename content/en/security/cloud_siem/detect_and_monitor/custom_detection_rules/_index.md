@@ -46,6 +46,8 @@ further_reading:
 
 Out-of-the-box detection rules help you cover the majority of threat scenarios, but you can also create custom detection rules for your specific use cases. See [Create Rule][1] for instructions on how to create a custom rule.
 
+{{< img src="security/security_monitoring/detection_rules/custom_detection_rules_ui.png" alt="The create a rule page showing the detection types and methods you can create" style="width:100%;" >}}
+
 ## Rule types
 
 You can create the following types of custom detection rules:
