@@ -33,9 +33,8 @@ further_reading:
   {{< appsec-integration name="Linux" avatar="linux" link="./linux" >}}
   {{< appsec-integration name="Windows" avatar="windows" link="./windows" >}}
 {{< /appsec-integrations >}}
-## Additional Resources
 
-### Cloud and Container Platforms
+### Container Platforms
 {{< appsec-integrations >}}
 {{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
 {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
@@ -47,11 +46,17 @@ further_reading:
 {{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="/security/application_security/setup/aws/lambda/" >}}
 {{< /appsec-integrations >}}
 
+### Google Cloud Platform
+{{< appsec-integrations >}}
+{{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="/security/application_security/setup/gcp/cloud-run/dotnet" >}}
+{{< /appsec-integrations >}}
+
 ### Microsoft Azure
 {{< appsec-integrations >}}
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="/security/application_security/setup/azure/app-service/?tab=nodenetphppython" >}}
 {{< /appsec-integrations >}}
 
+## Additional Resources
 
 - [Troubleshooting Guide][1]
 - [Compatibility Information][2]
