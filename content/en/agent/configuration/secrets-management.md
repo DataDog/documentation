@@ -17,6 +17,7 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [AWS Secrets Manager](#id-for-secrets)
 - [AWS SSM](#id-for-ssm)
 - [Azure KeyVault](#id-for-azure)
+- [GCP Secret Manager](#id-for-gcp)
 - [HashiCorp Vault](#id-for-hashicorp)
 - [File JSON](#id-for-json-yaml)
 - [File YAML](#id-for-json-yaml)
@@ -201,7 +202,96 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
+
+The following GCP services are supported:
+
+| secret_backend_type value                               | GCP Service                    |
+| ------------------------------------------------------- | ------------------------------ |
+| `gcp.secretmanager` | [GCP Secret Manager][5000] |
+
+##### GCP authentication
+
+The GCP Secret Manager implementation uses [Application Default Credentials (ADC)][5001] for authentication with Google.
+
+The client using the Agent needs the `secretmanager.versions.access` permission to interact with GCP Secret Manager. This can be granted with the predefined role **Secret Manager Secret Accessor** (`roles/secretmanager.secretAccessor`) or a custom role with equivalent access.
+
+On GCE or GKE runtimes, authentication is provisioned automatically by Google through the instance or pod's attached service account.
+
+##### Secret versioning
+
+GCP Secret Manager supports secret versions. The Agent implementation also supports versioning using the `;` delimiter. If no version is specified, the `latest` version is used.
+
+**Version syntax**:
+- `secret-key` - Implicit `latest` version
+- `secret-key;latest;` - Explicit `latest` version
+- `secret-key;1;` - Specific version number
+- `secret-key;n;` - Version `n`
+
+**Note**: The delimiter must surround the version for compatibility with JSON support and to maintain backwards compatibility.
+
+##### JSON support
+
+GCP Secret Manager supports extracting specific keys from JSON-formatted secrets using the `;` delimiter:
+
+- `secret;key` - Extracts the `key` value with an implicit `latest` version
+- `secret;1;key` - Extracts the `key` value from version `1`
+
+##### Configuration example
+
+Configure the Datadog Agent to use GCP Secret Manager to resolve secrets with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: gcp.secretmanager
+secret_backend_config:
+  gcp_session:
+    project_id: <PROJECT_ID>
+```
+
+After configuring the Agent to use GCP Secret Manager, reference secrets in your configurations with `ENC[secret-name]` or `ENC[secret-name;version;]`.
+
+For example, assuming a GCP secret named `datadog-api-key` contains your API key:
+
+```yaml
+# datadog.yaml
+api_key: ENC[datadog-api-key]
+
+secret_backend_type: gcp.secretmanager
+secret_backend_config:
+  gcp_session:
+    project_id: <PROJECT_ID>
+```
+
+For JSON-formatted secrets, assuming a secret named `datadog-keys` contains:
+
+```json
+{
+  "api_key": "your_api_key_value",
+  "app_key": "your_app_key_value"
+}
+```
+
+Reference specific keys like this:
+
+```yaml
+# datadog.yaml
+api_key: ENC[datadog-keys;api_key]
+app_key: ENC[datadog-keys;app_key]
+
+secret_backend_type: gcp.secretmanager
+secret_backend_config:
+  gcp_session:
+    project_id: <PROJECT_ID>
+```
+
+[5000]: https://cloud.google.com/security/products/secret-manager
+[5001]: https://cloud.google.com/docs/authentication/application-default-credentials
+
+{{% /collapse-content %}}
 
 
 {{% collapse-content title="HashiCorp Vault Backend" level="h4" expanded=false id="id-for-hashicorp" %}}
