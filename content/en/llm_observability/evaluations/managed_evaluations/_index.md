@@ -339,7 +339,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [2]: https://app.datadoghq.com/llm/evaluations
 [3]: https://app.datadoghq.com/llm/applications
 [4]: /security/sensitive_data_scanner/
-[5]: https://docs.datadoghq.com/api/latest/ip-ranges/
+[5]: /api/latest/ip-ranges/
 [6]: /llm_observability/instrumentation/sdk?tab=python#prompt-tracking
 [7]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
 [9]: https://learnprompting.org/docs/prompt_hacking/offensive_measures/simple-instruction-attack
