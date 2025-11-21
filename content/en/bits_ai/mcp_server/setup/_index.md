@@ -241,7 +241,7 @@ To use a toolset, include the `toolsets` query parameter in the endpoint URL whe
 
 - `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
 - `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,synthetics,software-delivery` retrieves both core, Synthetic Testing and Software Delivery tools.
+- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,synthetics,software-delivery` retrieves core, Synthetic Testing, and Software Delivery tools.
 
 ## Available tools
 
@@ -398,7 +398,7 @@ Searches CI events with filters and returns details on them.
 
 - Show me all the pipelines for my commit `58b1488`.
 - Show me the latest pipeline failure in branch `my-branch`.
-- Propose a fix for the job `integration-test` that fails everytime on my branch `my-branch`.
+- Propose a fix for the job `integration-test` that fails every time on my branch `my-branch`.
 
 ## Context efficiency
 
