@@ -669,7 +669,7 @@ Component Input Props
 : The props that are passed to the React component and can be accessed in the props object of the component.
 
 Initial Component State
-: Sets the initial state values for your component. This state is used when the component first renders or if no state has been set yet. The component can access this data via <code>props.state</code>.<br>
+: Sets the initial state values for your component. This state is used when the component first renders or if no state has been set yet. The component can access this data through <code>props.state</code>.<br>
 
 ### Appearance
 
