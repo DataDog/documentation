@@ -1,0 +1,16 @@
+options:
+
+- label: Oviraptor
+  id: oviraptor
+
+- label: Ornithomimus
+  id: ornithomimus
+
+- label: Gallimimus
+  id: gallimimus
+
+- label: Therizinosaurus
+  id: therizinosaurus
+
+- label: Deinocheirus
+  id: deinocheirus

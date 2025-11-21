@@ -1,0 +1,15 @@
+options:
+- label: Tyrannosaurus Rex
+  id: trex
+
+- label: Velociraptor
+  id: velociraptor
+
+- label: Spinosaurus
+  id: spinosaurus
+
+- label: Allosaurus
+  id: allosaurus
+
+- label: Giganotosaurus
+  id: giganotosaurus
