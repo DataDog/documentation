@@ -4901,7 +4901,7 @@ menu:
       parent: data_observability_heading
       weight: 60000
     - name: Data Quality
-      url: data_observability/quality_monitoring/data_quality
+      url: data_observability/data_quality
       identifier: data_quality
       parent: quality_monitoring
       weight: 100000
