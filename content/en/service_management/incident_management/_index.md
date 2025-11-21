@@ -106,6 +106,10 @@ Incident Management integrates with third-party applications, including:
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 - [Zoom][24] to launch video calls for incidents.
 
+## Billing
+
+Incident Management is a seat-based SKU. Customers who want to learn more about how Incident Management is billed and how to manage seats within Datadog should visit our [pricing page][31] and the [Incident Response billing documentation][32].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -140,3 +144,5 @@ Incident Management integrates with third-party applications, including:
 [28]: /notebooks/
 [29]: /actions/workflows/
 [30]: /service_management/incident_management/declare#from-a-monitor
+[31]: https://www.datadoghq.com/pricing/?product=incident-response#products
+[32]: /account_management/billing/incident_response/
