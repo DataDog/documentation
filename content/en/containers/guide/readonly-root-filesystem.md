@@ -36,7 +36,6 @@ Specific implementation varies by platform (Kubernetes, Docker, ECS, etc.), but 
 For self-managed deployments, here's a complete Docker Compose example demonstrating the read-only root filesystem configuration pattern:
 
 ```yaml
-version: '3.8'
 services:
   # Init container populating 'datadog-config' volume with config files.
   datadog-init:
@@ -54,7 +53,7 @@ services:
         condition: service_completed_successfully
     environment:
       - DD_API_KEY=${DD_API_KEY}
-      - DD_SITE=${DD_SITE}
+      - DD_SITE="datadoghq.com"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc/:/host/proc/:ro
