@@ -1931,8 +1931,8 @@ Use `LLMObs.annotate(metrics=...)` to attach token or cost metrics for a LLM/emb
 {{% collapse-content title="Arguments" level="h4" expanded=false id="cost-tracking-arguments" %}}
 
 `metrics`
-: required - dictionary
-<br />Token: `input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, `time_per_output_token`
+: optional - dictionary
+<br />Token: `input_tokens`, `output_tokens`, `total_tokens`, `non_cached_input_tokens`, `cache_read_input_tokens`, `cache_write_input_tokens`
 <br />Cost (in dollars): `input_cost`, `output_cost`, `total_cost`, `non_cached_input_cost`, `cache_read_input_cost`, `cache_write_input_cost`
 
 {{% /collapse-content %}}
