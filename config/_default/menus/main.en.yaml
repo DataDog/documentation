@@ -4895,22 +4895,63 @@ menu:
       parent: data_streams
       weight: 5
     - name: Quality Monitoring
-      url: quality_monitoring/
+      url: data_observability/quality_monitoring/
       pre: inventories
-      identifier: data_observability
+      identifier: quality_monitoring
       parent: data_observability_heading
       weight: 60000
-    - name: Datasets
-      url: data_observability/datasets
-      identifier: datasets
-      parent: data_observability
+    - name: Data Quality
+      url: data_observability/quality_monitoring/data_quality
+      identifier: data_quality
+      parent: quality_monitoring
       weight: 100000
     - name: Jobs Monitoring
-      url: jobs_monitoring/
+      url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
       identifier: data_jobs
       parent: data_observability_heading
       weight: 70000
+    - name: Data Integrations
+      url: data_observability/data_integrations
+      pre: integrations
+      identifier: data_integrations
+      parent: data_observability_heading
+      weight: 80000
+    - name: Warehouse Integrations
+      url: data_observability/data_integrations/warehouse
+      identifier: warehouse_integrations
+      parent: data_integrations
+      weight: 100000
+    - name: Snowflake
+      url: data_observability/data_integrations/warehouse/snowflake
+      identifier: snowflake
+      parent: warehouse_integrations
+      weight: 1000000
+    - name: Databricks
+      url: data_observability/data_integrations/warehouse/databricks
+      identifier: databricks
+      parent: warehouse_integrations
+      weight: 2000000
+    - name: BigQuery
+      url: data_observability/data_integrations/warehouse/bigquery
+      identifier: bigquery
+      parent: warehouse_integrations
+      weight: 3000000
+    - name: Transformation Integrations
+      url: data_observability/transformation
+      identifier: transformation_integrations
+      parent: data_integrations
+      weight: 200000
+    - name: Business Intelligence Integrations
+      url: data_observability/business_intelligence
+      identifier: business_intelligence_integrations
+      parent: data_integrations
+      weight: 300000
+    - name: OpenLineage Integrations
+      url: data_observability/openlineage
+      identifier: openlineage_integrations
+      parent: data_integrations
+      weight: 400000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability

@@ -2,7 +2,7 @@
 title: Data Observability
 description: "Monitor data quality, performance, and cost with Data Observability to detect anomalies, analyze data lineage, and prevent issues affecting downstream systems."
 further_reading:
-  - link: '/data_observability/datasets'
+  - link: '/data_observability/data_quality'
     tag: 'Documentation'
     text: 'Datasets'
   - link: '/data_jobs'
