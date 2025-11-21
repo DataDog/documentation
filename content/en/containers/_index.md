@@ -21,19 +21,19 @@ Log into Datadog and use the [Install Agents][2] page to install the Datadog Age
 ## Datadog Container Monitoring
 
 {{< whatsnext desc="These pages discuss using Datadog's UI to monitor containers and clusters, track resource utilization, autoscale workloads, and remediate issues:">}}
-  {{< nextlink href="/infrastructure/containers/explorer">}}<u>Containers Explorer</u>: Use and configure Containers Explorer for real-time visibility into your containers. {{< /nextlink >}}
-  {{< nextlink href="/infrastructure/containers/container_images">}}<u>Container Images Explorer</u>: Use and configure Containers Images Explorer to monitor the container {{< /nextlink >}}
-  {{< nextlink href="/infrastructure/containers/kubernetes_explorer">}}<u>Kubernetes Explorer</u>: Using and configuring the Kubernetes Explorer page {{< /nextlink >}}
-  {{< nextlink href="/infrastructure/containers/kubernetes_resource_utilization">}}<u>Kubernetes Resource Utilization</u>: Using and configuring the Kubernetes Resource Utilization page {{< /nextlink >}}
+  {{< nextlink href="/containers/monitoring/explorer">}}<u>Containers Explorer</u>: Use and configure Containers Explorer for real-time visibility into your containers. {{< /nextlink >}}
+  {{< nextlink href="/containers/monitoring/container_images">}}<u>Container Images Explorer</u>: Use and configure Containers Images Explorer to monitor the container {{< /nextlink >}}
+  {{< nextlink href="/containers/monitoring/kubernetes_explorer">}}<u>Kubernetes Explorer</u>: Using and configuring the Kubernetes Explorer page {{< /nextlink >}}
+  {{< nextlink href="/containers/monitoring/kubernetes_resource_utilization">}}<u>Kubernetes Resource Utilization</u>: Using and configuring the Kubernetes Resource Utilization page {{< /nextlink >}}
   {{< nextlink href="/containers/autoscaling">}}<u>Kubernetes Autoscaling</u>: Using and configuring the Kubernetes Autoscaling page {{< /nextlink >}}
   {{< nextlink href="/containers/bits_ai_kubernetes_remediation">}}<u>Kubernetes Remediation</u>: Using and configuring the Kubernetes Remediation page {{< /nextlink >}}
-  {{< nextlink href="/infrastructure/containers/amazon_elastic_container_explorer">}}<u>ECS Explorer</u>: Using and configuring the ECS Explorer page {{< /nextlink >}}
+  {{< nextlink href="/containers/monitoring/amazon_elastic_container_explorer">}}<u>ECS Explorer</u>: Using and configuring the ECS Explorer page {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Docker-based environments
 
-{{< whatsnext desc="These pages discuss installing and configuring the Datadog Agent in a Docker-based environment (Docker, containerd, podman):">}}
-  {{< nextlink href="/infrastructure/containers/explorer">}}<u>Containers Explorer</u>: Use and configure Containers Explorer for real-time visibility into your containers. {{< /nextlink >}}
+{{< whatsnext desc="These pages discuss installing and configuring the Datadog Agent in a Docker-based environment (Docker, containerd, Podman):">}}
+  {{< nextlink href="/containers/docker">}}<u>Datadog Docker Agent</u>: Install and configure the Datadog Docker Agent for Docker, containerd, and Podman runtimes {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Kubernetes environments

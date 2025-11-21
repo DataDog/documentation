@@ -3067,27 +3067,27 @@ menu:
       weight: 50000
       pre: container
     - name: Container Monitoring
-      url: infrastructure/containers/
+      url: containers/monitoring
       parent: containers
       identifier: infrastructure_livecontainers
       weight: 1
     - name: Containers Explorer
-      url: infrastructure/containers/explorer
+      url: containers/monitoring/explorer
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_configuration
       weight: 101
     - name: Container Images Explorer
-      url: infrastructure/containers/container_images
+      url: containers/monitoring/container_images
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_container_images
       weight: 102
     - name: Kubernetes Explorer
-      url: infrastructure/containers/kubernetes_explorer
+      url: containers/monitoring/kubernetes_explorer
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_explorer
       weight: 103
     - name: Resource Utilization
-      url: infrastructure/containers/kubernetes_resource_utilization
+      url: containers/monitoring/kubernetes_resource_utilization
       parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_resource_utilization
       weight: 10301
@@ -3102,7 +3102,7 @@ menu:
       identifier: containers_autoscaling
       weight: 30303
     - name: ECS Explorer
-      url: infrastructure/containers/amazon_elastic_container_explorer
+      url: containers/monitoring/amazon_elastic_container_explorer
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
       weight: 106
@@ -3261,11 +3261,11 @@ menu:
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_data_collected
       weight: 704
-    - name: AWS Fargate
+    - name: AWS Fargate on ECS
       url: integrations/ecs_fargate/
-      parent: containers
+      parent: containers_amazon_ecs
       identifier: ecs_fargate
-      weight: 8
+      weight: 705
     - name: Datadog Operator
       url: containers/datadog_operator
       identifier: containers_datadog_operator
