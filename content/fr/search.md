@@ -1,6 +1,5 @@
 ---
-title: Résultats de la recherche
-disable_sidebar: true
+titre: Résultats de recherche désactiver\_sidebar: vrai
 ---
 
 <div class="searchbox-container search_results_page">
@@ -8,6 +7,7 @@ disable_sidebar: true
     <div id="count"></div>
     <div class="hits-container">
         <div id="hits"></div>
+        <div id="hits-partners"></div>
     </div>
     <div id="pagination"></div>
 </div>
