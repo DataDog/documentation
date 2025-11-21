@@ -50,9 +50,11 @@ To build an app with Bits AI:
     - While it's responding, Bits AI asks you to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
     - Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press **Enter**. 
     - After Bits AI adds an action to the app, you are prompted to either **Mock with AI Data** or **Skip**. Configuring your action during UI agent execution helps connect the data types to other components.
-1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
+1. After Bits AI responds to your prompt, the following steps are optional: 
+    - To change the app name and description, click the app name.
+    - Click **Edit with AI** or manually [customize your app][15].
+    - To preview the app, click **View**. Click **Edit** to return to the configuration view.
 1. To save the app, click **Save**.
-1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 To iterate on an existing app:
@@ -66,10 +68,12 @@ Blueprints are helpful templates that cover common use cases. They come loaded w
 
 1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint** in the onboarding modal.
 1. Find the blueprint you want to use and click **Use Blueprint**.
-1. Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
-1. To change the app name and description, click the app name.
+1. The following steps are optional: 
+    - Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To change the app name and description, click the app name.
+    - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. To save the app, click **Save**.
-1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ### Build an app from a layout
@@ -80,10 +84,11 @@ Choosing a layout creates an app as a table, form, or custom chart.
 1. Click **Start with Layout** in the onboarding modal.
 1. Select a layout. The pane on the right displays a preview of the app.
 1. Click **Use Layout**.
-1. To change the app name and description, click the app name.
+1. The following steps are optional:
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To change the app name and description, click the app name.
+    - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. To save the app, click **Save**.
-1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ### Build an app from data
@@ -95,11 +100,11 @@ You can get started with an app by importing data from one of the integrations l
 1. Choose an integration, then click **Continue**.
 1. Choose one or more actions. There is no limit to the number of actions you can choose. 
 1. Click **Create**.
-1. To change the app name and description, click the app name.
-1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
+1. The following steps are optional: 
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To change the app name and description, click the app name.
+    - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. To save the app, click **Save**.
-1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ### Create a custom app
@@ -108,11 +113,12 @@ If you don't want to use any of the methods above, you can create a new app from
 
 1. From [App Builder][1], click **New App**. 
 1. Click **Start From Scratch**, or click the **X** to close the onboarding modal.
-1. To change the app name and description, click the app name.
-1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
-1. Use [queries][12] to populate or interact with your canvas.
+1. The following steps are optional: 
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - Use [queries][12] to populate or interact with your canvas.
+    - To change the app name and description, click the app name.
+    - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. To save the app, click **Save**.
-1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ### See what's possible with App Playground
