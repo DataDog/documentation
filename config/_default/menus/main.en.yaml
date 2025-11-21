@@ -3277,7 +3277,7 @@ menu:
       parent: containers_amazon_ecs 
       identifier: containers_amazon_ecs_managed_instances
       weight: 605
-    - name: AWS Fargate on ECS
+    - name: AWS Fargate with ECS
       url: integrations/ecs_fargate/
       parent: containers_amazon_ecs
       identifier: ecs_fargate
