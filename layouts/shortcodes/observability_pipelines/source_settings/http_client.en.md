@@ -1,6 +1,7 @@
 To configure your HTTP/S Client source:
 
-1. Select your authorization strategy.
+1. Select your authorization strategy (**None**,**Basic**, **Bearer**, or **Custom**).
+   - For the **Custom** option, the value is added to the headers as `Authorization: <custom_value>`.
 2. Select the decoder you want to use on the HTTP messages. Logs pulled from the HTTP source must be in this format.
 3. Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Configurations][10172] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
    - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509) format.
