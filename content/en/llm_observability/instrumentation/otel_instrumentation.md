@@ -67,7 +67,7 @@ After your application starts sending data, the traces automatically appear in t
 
 #### Using Strands Agents
 
-The following example demonstrates a complete application using strands-agents with the OpenTelemetry integration. This same approach works with any framework that supports OpenTelemetry version 1.37+ semantic conventions for generative AI.
+The following example demonstrates a complete application using [Strands Agents][7] with the OpenTelemetry integration. This same approach works with any framework that supports OpenTelemetry version 1.37+ semantic conventions for generative AI.
 
 ```python
 from strands import Agent
