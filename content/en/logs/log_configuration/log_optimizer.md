@@ -26,7 +26,7 @@ This feature builds on [Logging without Limits™][1] and complements tools such
 
 Datadog continuously reviews your **indexed** logs to find patterns that generate large or repetitive volumes of data. Once per day, Log Optimizer evaluates these patterns against Datadog best practices and identifies logs that may benefit from optimization.
 
-The Log Optimizer then suggests actions (such as excluding debug-level messages, sampling routine logs, or converting static messages to metrics) so you can reduce noise without losing visibility into important events.
+The Log Optimizer then suggests actions so you can reduce noise without losing visibility into important events.
 
 <div class="alert alert-danger">The Log Optimizer does not account for existing exclusion filters or logs-to-metrics conversions. Review your settings before applying new actions to avoid duplicates.</div>
 
@@ -43,7 +43,7 @@ Each recommendation includes an explanation and a suggested action.
 | Recommendation | Description | Typical example |
 | :---- | :---- | :---- |
 | **Exclude** | Stop indexing logs that add noise and make it harder to focus on critical signals. | Debug-level messages or verbose system output. |
-| **Sample** | Lower the percentage of repetitive logs to reduce noise without losing visibility. | Logs with very little variability (only fields like timestamps or IDs change). |
+| **Sample** | Lower the percentage of repetitive logs to reduce noise without losing visibility. | Logs with little variability (only fields like timestamps or IDs change). |
 | **Convert to metric** | Replace repeated logs with a metric to track counts or trends over time. | Logs that always show the same message or status. |
 
 ## Review and apply recommendations
@@ -63,7 +63,7 @@ The change takes effect immediately in your configuration and the affected log p
 
 When you review the **Log Optimizer** page, you notice a high-volume pattern from the `shopist-support` service. The message "Verifying ticket" appears over 1.3 million times each day across multiple hosts.
 
-Datadog detects this as a repetitive pattern that doesn't change at all and recommends converting it to a metric and excluding the log from indexing. You review the recommendation, confirm that these logs are repetitive, and apply the exclusion directly from the **Recommendation** side panel.
+Datadog detects this as a repetitive pattern that doesn't change and recommends converting it to a metric and excluding the log from indexing. You review the recommendation, confirm that these logs are repetitive, and apply the exclusion directly from the **Recommendation** side panel.
 
 Critical error logs from the same service remain visible, allowing you to focus on meaningful signals without losing observability. After the next daily analysis, your updated configuration would show a reduction in indexed volume.
 {{% /collapse-content %}}
