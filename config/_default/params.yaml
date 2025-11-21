@@ -301,6 +301,7 @@ unsupported_sites:
   fleet_automation: [gov]
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
+  incident_ai: [gov]
   internal_developer_portal: [gov]
   live_debugger: [gov]
   llm_observability: [gov]

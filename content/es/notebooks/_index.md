@@ -3,10 +3,13 @@ aliases:
 - /es/graphing/notebooks/
 - /es/notebooks_new/
 - /es/notebooks_legacy/
+description: Crea documentos de texto enriquecido en colaboración con gráficos en
+  directo en Datadog para investigaciones, análisis retrospectivos, runbooks y narraciones
+  basadas en datos.
 further_reading:
-- link: https://www.datadoghq.com/blog/incident-response-templates-notebooks-list/
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
   tag: Blog
-  text: Crear y consultar una biblioteca de documentación
+  text: Gestiona y optimiza tus costes de OCI con Datadog Cloud Cost Management
 - link: https://www.datadoghq.com/blog/collaborative-notebooks-datadog/
   tag: Blog
   text: Crear artículos basados en datos con notebooks colaborativos
@@ -14,7 +17,7 @@ further_reading:
   tag: Blog
   text: Prácticas recomendadas para redactar informes retrospectivos de incidencias
 - link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
-  tag: Blog
+  tag: blog
   text: Transformar y enriquecer tus logs con Datadog Observability Pipelines
 - link: https://www.datadoghq.com/blog/advanced-analysis-tools/
   tag: Blog
@@ -22,7 +25,7 @@ further_reading:
     en Datadog
 - link: https://www.datadoghq.com/blog/finops-at-datadog/
   tag: Blog
-  text: Cómo logramos crear una exitosa práctica de FinOps en Datadog
+  text: Cómo hemos creado una práctica de FinOps de éxito en Datadog
 title: Notebooks
 ---
 
@@ -157,7 +160,7 @@ Para comentar un gráfico o una imagen, haz clic en el icono de comentario situa
 | **Responder a los comentarios** | Responde a los comentarios haciendo clic en ellos en el margen derecho, lo que abre un cuadro de comentarios. Puedes escribir texto, `@mention` un usuario de Datadog o resolver un comentario haciendo clic en **Resolve** (Resolver). |
 | **Crear enlaces a comentarios**    | Crea un enlace a un comentario específico haciendo clic en el icono del enlace situado en la esquina superior derecha del comentario para copiar su enlace.      |
 | **Editar o eliminar comentarios** | Edita o elimina tus comentarios haciendo clic en el menú de tres puntos situado en la esquina superior derecha del comentario.                 |
-| **Comentar notificaciones** | Por defecto, las notificaciones por correo electrónico se envían al autor del notebook para obtener nuevos comentarios de los demás. Los usuarios de un hilo de comentarios reciben las notificaciones de cada respuesta. Para ajustar las notificaciones, en el menú del engranaje selecciona **Notificaciones**. |
+| **Comentar notificaciones** | Por defecto, las notificaciones por correo electrónico se envían al autor del notebook para obtener nuevos comentarios de los demás. Los usuarios de un hilo de comentarios reciben las notificaciones de cada respuesta. Para ajustar las notificaciones, en el menú del engranaje selecciona **Notifications** (Notificaciones). |
 
 ## Experiencia multi-usuario en notebooks
 
@@ -183,6 +186,8 @@ En la parte superior del notebook, puedes ver las imágenes de los avatares de t
 
 Los notebooks aceptan variables de plantilla. Recorre las visualizaciones de forma dinámica añadiendo y seleccionando valores de variables de plantilla. Para obtener más información, consulta [Variables de plantilla][5].
 
+<div class="alert alert-danger">Algunas funciones de Análisis tienen un soporte limitado o nulo para las variables de plantilla. Para obtener más información, consulta <a href="/notebooks/guide/template_variables_analysis_notebooks">Compatibilidad con variables de plantilla en Analysis Notebooks</a>.</div>
+
 ### Controles de tiempo
 
 Por defecto, todos los gráficos están vinculados al marco temporal global definido en la cabecera del notebook.
@@ -206,7 +211,7 @@ Para ver un marco temporal diferente en un solo gráfico, edita el gráfico y ut
 Puedes cambiar de un modo a otro en el propio notebook. seleccionando el menú desplegable situado en la parte superior derecha del notebook.
 
 - **Edición**: Realizar cambios en el notebook.
-- **Visualización**: Los contenidos son de sólo lectura, lo que evita que los usuarios realicen ediciones no deseadas en las configuraciones e información existentes.
+- **Visualización**: Los contenidos son de solo lectura, lo que evita que los usuarios realicen ediciones no deseadas en las configuraciones e información existentes.
 
 ### Historial de versiones
 

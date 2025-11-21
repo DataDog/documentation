@@ -21432,6 +21432,11 @@ components:
             users over all hours in the current date for all organizations.
           format: int64
           type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for all organizations.
+          format: int64
+          type: integer
         indexed_events_count_sum:
           description: Shows the sum of all log events indexed over all hours in the
             current date for all organizations.
@@ -22546,6 +22551,11 @@ components:
         incident_management_monthly_active_users_hwm:
           description: Shows the high-water mark of incident management monthly active
             users over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for the given organization.
           format: int64
           type: integer
         indexed_events_count_sum:
@@ -23663,6 +23673,11 @@ components:
         incident_management_monthly_active_users_hwm_sum:
           description: Shows sum of the high-water marks of incident management monthly
             active users in the current month for all organizations.
+          format: int64
+          type: integer
+        incident_management_seats_hwm_sum:
+          description: Shows the sum of the high-water marks of Incident Management
+            seats over all hours in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:

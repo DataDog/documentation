@@ -44,5 +44,5 @@ Further customize your tests and test steps to suit your needs, just as you woul
 [2]: /synthetics/browser_tests
 [3]: https://app.datadoghq.com/rum/sessions
 [4]: /real_user_monitoring/session_replay/browser/
-[5]: /synthetics/browser_tests/actions
+[5]: /synthetics/browser_tests/test_steps
 [6]: /synthetics/browser_tests/?tab=requestoptions#test-configuration

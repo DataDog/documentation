@@ -203,7 +203,7 @@ The following out-of-the-box tags are derived from your [usage cost report][9] a
 | `frequency` | Indicates whether a charge is expected to repeat. Charges can either happen once (`OneTime`), repeat on a monthly or yearly basis (`Recurring`), or be based on usage (`Usage`) |
 | `InvoiceId` | The unique document ID listed on the invoice PDF. |
 | `invoicesectionid` | The ID of the MCA invoice section. |
-| `invoicesectionname` | The name of the EA department. |
+| `invoicesectionname` | The name of the Enterprise Agreement (EA) department. |
 | `isazurecrediteligible` | `true` if the charge is eligible to be paid for using Azure credits. |
 | `location` | The data center location where the resource is running. |
 | `metercategory` | The top level service that this usage belongs to (such as `Networking`). |
