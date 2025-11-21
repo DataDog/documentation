@@ -17,8 +17,8 @@ further_reading:
 
 This guide introduces the Datadog Agent and covers:
 
-  - [Introduction to the Agent](#the-datadog-agent)
-  - [Installation](#installing-the-agent)
+  - [Introduction to the Agent](#what-is-the-datadog-agent)
+  - [Installation](#installation)
   - [Data collected by the Agent](#data-collected-by-the-agent)
   - [Advanced configurations and features](#advanced-configurations-and-features)
   - [Troubleshooting](#troubleshooting)
