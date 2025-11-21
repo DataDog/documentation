@@ -112,7 +112,7 @@ To update the SDK versions:
 ### Define workload selection rules 
 
 {{< callout url="#" btn_hidden="false" header="Join the Preview!">}}
-Workload selection is in Preview. Use this form to submit your request today.
+Workload selection is in Preview. Use this form to submit your request to join.
 {{< /callout >}}
 
 Workload selection rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
@@ -136,7 +136,7 @@ To configure workload selection:
 1. Click **Next** to preview your rules. 
 1. Click **Deploy Rules**. 
 
-If Remote Configuration is enabled, rules are deployed to every host and applied within 50 seconds on those with SSI enabled. Alternatively, click **Export** to export the configuration file and apply it manually to your hosts.
+If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds . Alternatively, click **Export** to export the configuration file and apply it manually to your hosts.
 
 #### Define rule conditions
 
@@ -183,6 +183,6 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [17]: /tracing/trace_collection/library_config/
 [18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
-[20]: https://app.datadog.com/apm/service-setup/workload-selection
+[20]: https://app.datadoghq.com/apm/service-setup/workload-selection
 
 
