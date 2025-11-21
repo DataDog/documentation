@@ -19,7 +19,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config_redacted.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
-**Note**: This feature is read-only in preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them.
+**Note**: This feature is read-only in Preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 ## Setup
 
-1. In the Agent's root configuration directory at `conf.d/network_config_management.d/`, create the `conf.yaml` and configure it as follows:
+1. In the Agent's root configuration directory at `conf.d/network_config_management.d/`, create the `conf.yaml` file and configure it as follows:
 
    ```yaml
      init_config:
@@ -38,14 +38,14 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
        min_collection_interval: 900
        ## @param ssh - object - optional
        ## Global SSH configuration that applies to all device instances unless 
-       # overridden at the device level. 
+       ## overridden at the device level. 
        ssh:
          ## @param timeout - duration - optional - default: 30 (seconds)
          ## Maximum time for the SSH client to establish a TCP connection.
          timeout: 30
          ## @param known_hosts_path - string - required (unless insecure_skip_verify is true)
          ## Path to the known_hosts file containing public keys of servers to 
-         # verify the identity of remote hosts. Required for secure connections.
+         ## verify the identity of remote hosts. Required for secure connections.
          known_hosts_path: /path/to/known_hosts
          ## @param insecure_skip_verify - boolean - optional - default: false
          ## Skip host key verification. This is INSECURE and should only be used
@@ -106,7 +106,7 @@ Configuration Management is accessible from the device side panel in Network Dev
 
    {{< img src="/network_device_monitoring/config_mgmt/config_tab_redacted.png" alt="Network Device Management side panel, highlighting the Configuration tab." style="width:100%;" >}}
 
-   On the Configuration tab, you can filter the configuration list to display:
+   On the Configuration tab, you can filter what the configuration list displays:
    - **All**: Shows both running and startup configurations
    - **Running**: The active, live configuration running on the device
    - **Startup**: The saved configuration that loads when the device boots
@@ -123,11 +123,11 @@ The time controls at the top of the page allow you to select which configuration
 
 The timeline and configuration version list automatically update based on your selected time range.
 
-**Note**: Configuration history begins only from when this feature is enabled for your account. Historical data prior to enablement is not available.
+**Note**: Configuration history begins when NCM is enabled for your account. Historical data prior to enablement is not available.
 
 ### View a configuration at a point in time
 
-Selecting a configuration event from the timeline or list opens a single configuration view showing the exact state of the device at that moment. This prevents confusion about comparing versions when you first access the page.
+Selecting a configuration event from the timeline or list opens a single configuration view showing the state of the device at that moment. This prevents confusion about comparing versions when you first access the page.
 
 The single-configuration view displays:
 
