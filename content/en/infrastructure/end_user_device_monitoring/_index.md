@@ -11,7 +11,7 @@ further_reading:
 End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
-<div align="center"><b>INSERT SCREENSHOT HERE</b></div></br>
+{{< img src="/infrastructure/end_user_device_monitoring/end_user_devices.png" alt="End User Devices page showing four healthy devices, charts for device types and operating systems, and a device table with one laptop marked for system crashes." style="width:100%;" >}}
 
 End User Device Monitoring gives IT teams visibility into the health and performance of employee desktops and laptops, both physical and virtual. It helps identify performance and connectivity issues affecting employees and provides a unified view of device, network, and application health across your workforce.
 
