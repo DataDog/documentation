@@ -12,6 +12,8 @@ further_reading:
 
 The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources for the [ECS Explorer][1]. This feature enables you to monitor the status of EC2 and Fargate tasks, services, and other ECS components across all of your AWS accounts. You can view resource specifications for tasks within a service and correlate them with related logs, metrics, profiling, and more.
 
+**Note**: The Datadog Agent only reports ECS tasks. Enable AWS Resource Collection to populate all ECS resources.
+
 ### Prerequisites
 
 * **[AWS resource collection][10]**: Required for collecting ECS resources.
@@ -23,7 +25,7 @@ The Datadog Agent and Datadog Amazon ECS integration can retrieve ECS resources 
 
 Ensure you have enabled [AWS resource collection][10], the [ECS on EC2 integration][2], and the [ECS on Fargate integration][3].
 
-**Note**: The collection interval for these integrations is approximately 24 hours. To achieve a shorter collection interval of 15 seconds, it is recommended to install the Datadog Agent in your ECS cluster.
+**Note**: The collection interval for these integrations is approximately 15 minutes. To achieve a shorter collection interval of 15 seconds, it is recommended to install the Datadog Agent in your ECS cluster.
 
 {{< tabs >}}
 {{% tab "Task Definition" %}}
@@ -176,18 +178,18 @@ Some resources have specific tags. The following tags are available in addition 
 
 ## Notes and known issues
 
-* Installing the Datadog Agent in your cluster affects how often the ECS Explorer refreshes:
+* The Agent and AWS integration setup affects how often the ECS Explorer refreshes:
 
-| **Resource**        | **With Datadog Agent** | **Without Datadog Agent** |
-|---------------------|------------------------|--------------------------|
-| **Cluster**         | ~15 minutes             | ~15 minutes               |
-| **Task**            | ~15 seconds             | ~15 minutes                 |
-| **Task Definition** | ~15 seconds             | ~15 minutes                 |
-| **Service**         | ~15 seconds             | ~15 minutes                 |
-| **Container Instance**         | ~15 minutes               | ~15 minutes                 |
+| **Resource**        | **Resource Collection With Datadog Agent** | **Resource Collection Without Datadog Agent** |  **Datadog Agent Without Resource Collection** |
+|---------------------|------------------------|--------------------------|--------------------------|
+| **Cluster**         | ~15 minutes             | ~15 minutes               | Not Collected               |
+| **Task**            | ~15 seconds             | ~15 minutes                 | ~15 seconds               |
+| **Task Definition** | ~15 seconds             | ~15 minutes                 | Not Collected               |
+| **Service**         | ~15 seconds             | ~15 minutes                 | Not Collected               |
+| **Container Instance**         | ~15 minutes               | ~15 minutes                 | Not Collected               |
 
 * A newly created ECS Service is typically collected within approximately 15 seconds. However, for status changes in an existing Service, a refresh within 15 seconds is not guaranteed.
-* Installing the Datadog Agent in your cluster enables visibility into task lifecycle changes. Without the Datadog Agent, stopped tasks can appear as running for up to two days.
+* Installing the Datadog Agent in your cluster enables visibility into task lifecycle changes. Without the Datadog Agent, stopped tasks can appear as running for up to 15 minutes.
 * Installing the Datadog Agent in your cluster provides additional, relevant host-level tags, such as `availability_zone`.
 
 ## Further reading
