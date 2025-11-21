@@ -37,7 +37,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 
 See [Update Existing Pipelines][602] if you want to make changes to your pipeline's configuration.
 
-**Note**: If you enable disk buffering for destinations, you can use Kubernetes [persistence volume][605] to handle back pressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending.
+**Note**: If you enable [disk buffering][605] for destinations, you can use Kubernetes [persistence volume][606] to handle back pressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending.
 
 #### Self-hosted and self-managed Kubernetes clusters
 
@@ -47,4 +47,5 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [602]: /observability_pipelines/update_existing_pipelines
 [603]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
 [604]: https://app.datadoghq.com/organization-settings/remote-config/setup
-[605]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
+[605]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
+[606]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
