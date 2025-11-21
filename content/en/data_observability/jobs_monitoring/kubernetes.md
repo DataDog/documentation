@@ -1,6 +1,8 @@
 ---
 title: Data Jobs Monitoring for Spark on Kubernetes
 description: "Set up Data Jobs Monitoring for Apache Spark applications on Kubernetes clusters using the Datadog Agent and admission controller."
+aliases:
+  - /data_jobs/kubernetes
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'

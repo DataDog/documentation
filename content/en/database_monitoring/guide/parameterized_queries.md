@@ -1,5 +1,7 @@
 ---
 title: Capturing SQL Query Parameter Values With Database Monitoring
+aliases:
+- /database_monitoring/parameterized_queries
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
