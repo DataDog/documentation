@@ -19,7 +19,7 @@ further_reading:
       text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
 ---
 
-Datadog Serverless Monitoring enables visibility into applications running on [Amazon ECS Managed Instances][29].
+Datadog Container Monitoring enables visibility into applications running on [Amazon ECS Managed Instances][29].
 
 ### How it works
 To monitor your ECS Managed Instances tasks with Datadog, run the Datadog Agent as a container in **same task definition** as your application container. When a Datadog Agent is run as an additional container within an ECS task definition, the Agent can use the task's [metadata endpoint][30] to collect data. This endpoint returns a Docker stats JSON for all containers associated with the task. 
