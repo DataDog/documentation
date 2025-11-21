@@ -124,14 +124,14 @@ False positive filtering is supported for the following CWEs:
 AI-powered remediation is in Preview.
 {{< /callout >}}
 
-AI-powered remediation saves time by replacing the filing of individual pull requests to fix vulnerabilities with AI campaigns that can fix multiple vulnerabilities at once.
+AI-powered remediation saves time by replacing the filing of individual pull requests to fix vulnerabilities with bulk-remediation campaigns that can fix multiple vulnerabilities at once.
 
-AI-powered remediation uses the [Bits AI Dev Agent][10] to power single and multiple vulnerability fixes in Code Security. You create campaigns to fix a subset of vulnerabilities and, within each campaign, create pull requests to fix those vulnerabilities.
+AI-powered remediation uses the [Bits AI Dev Agent][10] to power single and multiple vulnerability fixes in Code Security. You create campaigns to fix a subset of vulnerabilities and each campaign can automatically create pull requests to fix those vulnerabilities.
 
 ### Bulk remediation: Campaigns
 
 The **Campaign** is how you operationalize **AI-powered remediation** in Datadog.
-It connects SAST findings to automated fixes through customizable PR workflows with human-tunable AI behavior (prompt tuning + model choice).
+It connects SAST findings to automated fixes through customizable PR workflows with human-tunable AI behavior.
 
 When you create a campaign, the Bits Dev Campaign tool initiates a batched remediation to fix a subset of matching vulnerabilities. 
 
@@ -141,26 +141,27 @@ A campaign defines the following:
 | ---------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Campaign Context**   | Set the scope and type of the campaign.      | - **Campaign Type**: `Security Rule Campaign` (targets static analysis issues)<br>- **Code Security Product**: `Static Code (SAST)`<br>- **Campaign Title**: Name your campaign                                                                                                                          |
 | **Repository**         | Define which repo and paths to scan.         | - Set the GitHub repo URL<br>- Use **Paths** to limit rule scanning to certain directories or files                                                                                                                                                                                                      |
-| **Rule**               | Choose which SAST rule(s) to apply.          | - Select a rule from the dropdown<br>- View description, code example, and number of matches<br>- Click **Show More** to see remediation steps                                                                                                                                                           |
-| **Session Management** | Controls how PRs are grouped and submitted.  | - **Create one PR per**:<br>      • `Repository`: One PR for all findings in the repo<br>      • `File`: One PR per file with findings<br>      • `Finding`: One PR per finding (most granular)<br>- **Allow [n] open PRs at a time**: Prevents PR flooding<br>- **Limit PRs to [n]**: Sets total PR cap |
-| **Prompt Tuning**      | Customizes how the AI proposes remediations. | - **AI Model**: Choose a model (default or faster/more accurate variant)<br>- **Custom Instructions**: Guide the AI on how to write fixes (for example, "Use prepared statements", "Don't break APIs")                                                                                                    |
+| **Rule**               | Choose which SAST rule to apply.          | - Select a rule from the dropdown<br>- View description, code example, and number of matches<br>- Click **Show More** to see remediation steps                                                                                                                                                           |
+| **Session Management** | Controls how PRs are grouped and submitted.  | - **Create one PR per**:<br>      • `Repository`: One PR for all findings in the repo<br>      • `File`: One PR per file with findings<br>      • `Finding`: One PR per finding (most granular)<br>- **Allow [n] open PRs at a time**: Prevents too many PRs at once<br>- **Limit [n] findings per PR**: Prevents creating too-large PRs |
+| **Prompt Tuning**      | Customizes how the AI proposes remediations. | - **Custom Instructions**: Guide the AI on how to tweak fixes (for example, "Update CHANGELOG.md with a summary of changes", "Start all PR titles with '[autofix]'")                                                                                                    |
 ### Campain in progress
 
 When you click **Create Campaign**, Bits Dev Agent does the following:
 
-1. Bits Dev Agent scans the selected repo and path.
+1. Bits Dev Agent loads SAST findings for the selected repo(s), path(s), and rule.
 2. Runs the chosen rule(s).
-3. Uses LLMs to generate patches for each matched finding.
-4. Submits PRs according to your session rules.
-5. Lets you review, edit, and merge fixes using GitHub.
+3. Uses the [Bits Dev Agent][10] to generate patches for each group of findings.
+4. Creates PRs according to your session rules.
+5. If Bits Dev notifications are turned on, PRs will automatically be sent via Slack to relevant stakeholders.
+6. Lets you review, edit, and merge fixes using GitHub.
 
 The campain page shows whether the AI is actively remediating real findings, and how many have been remediated or pending.
 
-You can click a session to view it in more detail.
+You can click a session to view the code changes in more detail and chat with the [Bits Dev Agent][10] to ask for changes.
 
 ### Session details
 
-A remediation session shows the full lifecycle of an AI-generated fix. It includes the original security finding, a proposed code change, an explanation of how and why the AI made the fix, and CI results from applying the patch. 
+A remediation session shows the full lifecycle of an AI-generated fix. It includes the original security finding, a proposed code change, an explanation of how and why the AI made the fix, and if enabled, CI results from applying the patch. 
 
 Session details make each remediation transparent, reviewable, and auditable, helping you safely adopt AI in your secure development workflow.
 
