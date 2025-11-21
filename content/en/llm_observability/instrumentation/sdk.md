@@ -1924,7 +1924,7 @@ Attach token or cost metrics to the LLM/embedding span so you can view cost data
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Use `LLMObs.annotate(metrics=...)` to attach cost metrics for a LLM/embedding call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
+Use `LLMObs.annotate(metrics=...)` to attach token or cost metrics for a LLM/embedding call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
 
 #### Arguments
 
