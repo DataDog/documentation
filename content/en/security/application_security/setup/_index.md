@@ -50,10 +50,10 @@ Learn how to enable App and API Protection on all the following supported platfo
 ## Kubernetes (K8s)
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
-  {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
-  {{< appsec-integration name="Envoy Gateway" avatar="envoy" link="./envoy-gateway" >}}
-  {{< appsec-integration name="Gateway API" src="integrations_logos/gateway-api_avatar.svg" link="./gateway-api" >}}
+  {{< appsec-integration name="Istio" avatar="istio" link="./kubernetes/istio" >}}
+  {{< appsec-integration name="Envoy Gateway" avatar="envoy" link="./kubernetes/envoy-gateway" >}}
+  {{< appsec-integration name="Gateway API" src="integrations_logos/gateway-api_avatar.svg" link="./kubernetes/gateway-api" >}}
+  {{< appsec-integration name="Ingress NGINX Controller" avatar="nginx" link="./nginx/kubernetes" >}}
 {{< /appsec-integrations >}}
 
 ## Cloud Platforms
