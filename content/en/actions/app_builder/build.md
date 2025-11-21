@@ -56,9 +56,39 @@ Blueprints are helpful templates that cover common use cases. They come loaded w
 1. Click **Use Blueprint** to open the app blueprint.
 1. To change the app name and description, click the app name.
 1. Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
-1. To save the app, click **Save as New App**.
-1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add it to a dashboard, notebook, or Self-Service Actions.
+
+### Build an app from a layout
+
+Choosing a layout creates an app as a table, form, or custom chart. 
+
+1. From [App Builder][1], click **New App**.
+1. Click **Start with Layout**.
+1. Select a layout. The pane on the right displays a preview of the app.
+1. Click **Use Layout**.
+1. To change the app name and description, click the app name.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add it to a dashboard, notebook, or Self-Service Actions.
+
+### Build an app from data
+
+You can get started with an app by importing data from one of the integrations listed in the [Action Catalog][17].
+
+1. From [App Builder][1], click **New App**. 
+1. Click **Start with Data**. 
+1. Choose an integration, then click **Continue**.
+1. Choose one or more actions. There is no limit to the number of actions you can choose. 
+1. Click **Create**.
+1. To change the app name and description, click the app name.
+1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. After you finish modifying the app, click **Run** to test it.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add it to a dashboard, notebook, or Self-Service Actions.
 
 ### Build an app with AI
 
@@ -93,9 +123,9 @@ If you don't want to use any of the methods above, you can create a new app from
 1. To change the app name and description, click the app name.
 1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** to open the **Components** tab. Click the component or drag it onto the canvas.
 1. Use [queries][12] to populate or interact with your canvas.
-1. To save the app, click **Save as New App**.
-1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. When you're ready to publish your app, click **Publish**. After publishing, you can click the **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add it to a dashboard, notebook, or Self-Service Actions.
 
 ## Customize your app
 
