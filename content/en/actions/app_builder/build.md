@@ -87,7 +87,7 @@ Blueprints are helpful templates that cover common use cases. They come loaded w
 Choosing a layout creates an app as a table, form, or custom chart. 
 
 1. From [App Builder][1], click **New App**.
-1. Click **Start with Layout**.
+1. Click **Layouts** in the onboarding modal.
 1. Select a layout. The pane on the right displays a preview of the app.
 1. Click **Use Layout**.
 1. To change the app name and description, click the app name.
