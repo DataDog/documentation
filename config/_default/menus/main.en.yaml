@@ -8091,12 +8091,12 @@ menu:
       identifier: rum_session_replay_mobile
       weight: 501
     - name: Setup
-      url: real_user_monitoring/session_replay/mobile/setup_and_configuration
+      url: real_user_monitoring/session_replay/setup_and_configuration
       parent: rum_session_replay_mobile
       identifier: rum_session_replay_mobile_setup
       weight: 101
     - name: Privacy Options
-      url: real_user_monitoring/session_replay/mobile/privacy_options
+      url: real_user_monitoring/session_replay/privacy_options
       parent: rum_session_replay_mobile
       identifier: rum_session_replay_mobile_privacy
       weight: 102
@@ -8116,12 +8116,12 @@ menu:
       identifier: rum_session_replay_browser
       weight: 502
     - name: Setup
-      url: real_user_monitoring/session_replay/browser/setup_and_configuration
+      url: real_user_monitoring/session_replay/setup_and_configuration
       parent: rum_session_replay_browser
       identifier: rum_session_replay_browser_setup
       weight: 101
     - name: Privacy Options
-      url: real_user_monitoring/session_replay/browser/privacy_options
+      url: real_user_monitoring/session_replay/privacy_options
       parent: rum_session_replay_browser
       identifier: rum_session_replay_privacy_options
       weight: 102
@@ -8372,12 +8372,12 @@ menu:
       identifier: pa_session_replay_mobile
       weight: 302
     - name: Setup
-      url: product_analytics/session_replay/mobile/setup_and_configuration
+      url: product_analytics/session_replay/setup_and_configuration
       parent: pa_session_replay_mobile
       identifier: pa_session_replay_mobile_setup
       weight: 101
     - name: Privacy Options
-      url: product_analytics/session_replay/mobile/privacy_options
+      url: product_analytics/session_replay/privacy_options
       parent: pa_session_replay_mobile
       identifier: pa_session_replay_mobile_privacy
       weight: 102
@@ -8397,12 +8397,12 @@ menu:
       identifier: pa_session_replay_browser
       weight: 303
     - name: Setup
-      url: product_analytics/session_replay/browser/setup_and_configuration
+      url: product_analytics/session_replay/setup_and_configuration
       parent: pa_session_replay_browser
       identifier: pa_session_replay_browser_setup
       weight: 101
     - name: Privacy Options
-      url: product_analytics/session_replay/browser/privacy_options
+      url: product_analytics/session_replay/privacy_options
       parent: pa_session_replay_browser
       identifier: pa_session_replay_browser_privacy_options
       weight: 102
