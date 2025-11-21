@@ -32955,15 +32955,23 @@ components:
       properties:
         recipients:
           $ref: '#/components/schemas/MonitorNotificationRuleRecipients'
+          description: A list of recipients to notify. Uses the same format as the
+            monitor `message` field. Must not start with an '@'.
         scope:
-          $ref: '#/components/schemas/MonitorNotificationRuleScope'
+          $ref: '#/components/schemas/MonitorNotificationRuleConditionScope'
       required:
       - scope
       - recipients
       type: object
+    MonitorNotificationRuleConditionScope:
+      description: The scope to which the monitor applied.
+      example: transition_type:alert
+      maxLength: 3000
+      minLength: 1
+      type: string
     MonitorNotificationRuleConditionalRecipients:
       description: Use conditional recipients to define different recipients for different
-        situations.
+        situations. Cannot be used with `recipients`.
       properties:
         conditions:
           description: Conditions of the notification rule.
@@ -33013,12 +33021,30 @@ components:
       description: Filter used to associate the notification rule with monitors.
       oneOf:
       - $ref: '#/components/schemas/MonitorNotificationRuleFilterTags'
+      - $ref: '#/components/schemas/MonitorNotificationRuleFilterScope'
+    MonitorNotificationRuleFilterScope:
+      additionalProperties: false
+      description: Filter monitor notifications. A monitor notification must match
+        the scope.
+      properties:
+        scope:
+          description: A scope composed of one or several key:value pairs, which can
+            be used to filter monitor notifications on monitor and group tags.
+          example: service:(foo OR bar) AND team:test NOT environment:staging
+          maxLength: 3000
+          minLength: 1
+          type: string
+      required:
+      - scope
+      type: object
     MonitorNotificationRuleFilterTags:
       additionalProperties: false
-      description: Filter monitors by tags. Monitors must match all tags.
+      description: Filter monitor notifications by tags. A monitor notification must
+        match all tags.
       properties:
         tags:
-          description: A list of monitor tags.
+          description: A list of tags (key:value pairs), which can be used to filter
+            monitor notifications on monitor and group tags.
           example:
           - team:product
           - host:abc
@@ -33058,7 +33084,7 @@ components:
       type: string
     MonitorNotificationRuleRecipients:
       description: A list of recipients to notify. Uses the same format as the monitor
-        `message` field. Must not start with an '@'.
+        `message` field. Must not start with an '@'. Cannot be used with `conditional_recipients`.
       example:
       - slack-test-channel
       - jira-test
@@ -33141,12 +33167,6 @@ components:
       description: An object related to a monitor notification rule.
       oneOf:
       - $ref: '#/components/schemas/User'
-    MonitorNotificationRuleScope:
-      description: The scope to which the monitor applied.
-      example: transition_type:alert
-      maxLength: 3000
-      minLength: 1
-      type: string
     MonitorNotificationRuleUpdateRequest:
       description: Request for updating a monitor notification rule.
       properties:
@@ -80912,9 +80932,20 @@ paths:
   /api/v2/security_monitoring/rules/convert:
     post:
       description: 'Convert a rule that doesn''t (yet) exist from JSON to Terraform
-        for datadog provider
+        for Datadog provider
 
-        resource datadog_security_monitoring_rule.'
+        resource `datadog_security_monitoring_rule`. You can do so for the following
+        rule types:
+
+        - App and API Protection
+
+        - Cloud SIEM (log detection and signal correlation)
+
+        - Workload Protection
+
+
+        You can convert Cloud Security configuration rules using Terraform''s [Datadog
+        Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).'
       operationId: ConvertSecurityMonitoringRuleFromJSONToTerraform
       requestBody:
         content:
@@ -81137,9 +81168,20 @@ paths:
         - security_monitoring_rules_write
   /api/v2/security_monitoring/rules/{rule_id}/convert:
     get:
-      description: 'Convert an existing rule from JSON to Terraform for datadog provider
+      description: 'Convert an existing rule from JSON to Terraform for Datadog provider
 
-        resource datadog_security_monitoring_rule.'
+        resource `datadog_security_monitoring_rule`. You can do so for the following
+        rule types:
+
+        - App and API Protection
+
+        - Cloud SIEM (log detection and signal correlation)
+
+        - Workload Protection
+
+
+        You can convert Cloud Security configuration rules using Terraform''s [Datadog
+        Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).'
       operationId: ConvertExistingSecurityMonitoringRule
       parameters:
       - $ref: '#/components/parameters/SecurityMonitoringRuleID'

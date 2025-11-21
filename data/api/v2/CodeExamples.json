@@ -1108,6 +1108,11 @@
       "group": "monitors",
       "suffix": "_1181818787",
       "description": "Create a monitor notification rule with conditional recipients returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1379932371",
+      "description": "Create a monitor notification rule with scope returns \"OK\" response"
     }
   ],
   "CreateMonitorUserTemplate": [
@@ -1134,6 +1139,11 @@
       "group": "monitors",
       "suffix": "_1400905713",
       "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1446058210",
+      "description": "Update a monitor notification rule with scope returns \"OK\" response"
     }
   ],
   "UpdateMonitorUserTemplate": [
