@@ -32,21 +32,9 @@ When creating a new app, Datadog displays an onboarding modal with the following
 - [Start with layouts][19]
 - [Start with action][20]
 - [Start from scratch][21] 
+- [App Playground][23]
 
 ## Create an app
-
-### See what's possible with App Playground
-
-The App Playground is an interactive demo that guides users through creating and using an app. If you're new to App Builder, you can use the App Playground to learn about its core concepts, including: 
-- Data fetching
-- Displaying query data in a table
-- Configuring a button to fire a query
-- Configuring the loading states for a component to reflect a query's loading state
-- Visualizing data in a graph
-
-To access the App Playground:
-1. From [App Builder][1], click **New App**. 
-1. Click **App Playground**.
 
 ### Build an app with AI
 
@@ -125,6 +113,19 @@ If you don't want to use any of the methods above, you can create a new app from
 1. To save the app, click **Save**.
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
+### See what's possible with App Playground
+
+The App Playground is an interactive demo that guides users through creating and using an app. If you're new to App Builder, you can use the App Playground to learn about its core concepts, including: 
+- Data fetching
+- Displaying query data in a table
+- Configuring a button to fire a query
+- Configuring the loading states for a component to reflect a query's loading state
+- Visualizing data in a graph
+
+To access the App Playground:
+1. From [App Builder][1], click **New App**. 
+1. Click **App Playground**.
 
 ## Customize your app
 
@@ -248,3 +249,4 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [20]: /actions/app_builder/build/#build-an-app-from-an-action
 [21]: /actions/app_builder/build/#create-a-custom-app
 [22]: /actions/app_builder/build/#build-an-app-with-ai
+[23]: /actions/app_builder/build/#see-whats-possible-with-app-playground
