@@ -27,10 +27,10 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 ## Start with onboarding
 
 When creating a new app, Datadog displays an onboarding modal with the following options: 
-- [Build apps with Bits AI][22]
-- [Start with blueprints][18]
-- [Start with layouts][19]
-- [Start with action][20]
+- [Start with AI][22]
+- [Start with blueprint][18]
+- [Start with layout][19]
+- [Start with data][20]
 - [Start from scratch][21] 
 - [App Playground][23]
 
@@ -42,6 +42,7 @@ With Bits AI, you can generate a complete app from a single prompt. Describe the
 
 To build an app with Bits AI:
 1. From [App Builder][1], click **New App**.
+1. Click **Start with AI**. 
 1. Click a suggested prompt, or enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example prompts:
    - `Display a list of AWS Lambda functions in a table. Allow the user to filter by function name and specify the limit.`
    - `Display GitHub pull requests in a table.`
@@ -63,7 +64,7 @@ To iterate on an existing app:
 
 Blueprints are helpful templates that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
-1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Blueprints** in the onboarding modal.
+1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint** in the onboarding modal.
 1. Find the blueprint you want to use and click **Use Blueprint**.
 1. Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
 1. To change the app name and description, click the app name.
@@ -76,7 +77,7 @@ Blueprints are helpful templates that cover common use cases. They come loaded w
 Choosing a layout creates an app as a table, form, or custom chart. 
 
 1. From [App Builder][1], click **New App**.
-1. Click **Layouts** in the onboarding modal.
+1. Click **Start with Layout** in the onboarding modal.
 1. Select a layout. The pane on the right displays a preview of the app.
 1. Click **Use Layout**.
 1. To change the app name and description, click the app name.
@@ -85,12 +86,12 @@ Choosing a layout creates an app as a table, form, or custom chart.
 1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
-### Build an app from an action
+### Build an app from data
 
-You can get started with an app by using one of the integrations listed in the [Action Catalog][17].
+You can get started with an app by importing data from one of the integrations listed in the [Action Catalog][17].
 
 1. From [App Builder][1], click **New App**. 
-1. Click **Action** in the onboarding modal. 
+1. Click **Start with Data** in the onboarding modal. 
 1. Choose an integration, then click **Continue**.
 1. Choose one or more actions. There is no limit to the number of actions you can choose. 
 1. Click **Create**.
