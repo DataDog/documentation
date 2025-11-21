@@ -661,7 +661,7 @@ This interval is the minimum amount of time between 2 refreshes to avoid spammin
 ```yaml
 api_key: ENC[<secret_handle>]
 
-secret_refresh_on_api_key_failure_interval: 5
+secret_refresh_on_api_key_failure_interval: 10
 ```
 
 This setting is compatible with `secret_refresh_interval`.
