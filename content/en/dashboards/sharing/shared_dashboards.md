@@ -150,7 +150,6 @@ The following widget types are not supported on shared dashboards. Widgets of th
 * Topology Map
 * List Widget (all data sources)
 * Legacy treemap widget
-* SLO Summary widget
 
 ### Limited timeframe options
 

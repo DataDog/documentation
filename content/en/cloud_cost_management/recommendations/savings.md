@@ -1,5 +1,6 @@
 ---
 title: Savings
+private: true
 description: Learn how to track net savings to inform your cost savings initiatives.
 further_reading:
 - link: "/cloud_cost_management/"
