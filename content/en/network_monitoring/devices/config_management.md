@@ -19,7 +19,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config_redacted.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
-**Note**: This feature is read-only in Preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them.
+**Note**: NCM is read-only in Preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them.
 
 ## Prerequisites
 
@@ -55,11 +55,6 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
         ip_address - string - required
         ## The IP address of the network device to collect configurations from.
         ip_address: <IP_ADDRESS>
-        ## @param profile - string - optional
-        ## The device profile name that defines how to collect configurations.
-        ## Examples: "cisco-ios", "junos"
-        ## If not specified, the agent will attempt to auto-detect the device type.
-        profile: <PROFILE_NAME>
         ## @param auth - object - required
         ## Authentication credentials to connect to the network device.
         auth:
@@ -83,16 +78,16 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
      ## @param ciphers - list of strings - optional
      ## List of SSH encryption ciphers to use for the connection.
      ## If not specified, the SSH library will use its default ciphers.
-     ciphers: [aes128-gcm@openssh.com, aes128-ctr, aes192-ctr]
-     key_exchanges: [diffie-hellman-group14-sha256, ecdh-sha2-nistp256]
-     host_key_algorithms: [ssh-ed25519]
+     ssh:
+       ciphers: [aes128-gcm@openssh.com, aes128-ctr, aes192-ctr]
+       key_exchanges: [diffie-hellman-group14-sha256, ecdh-sha2-nistp256]
+       host_key_algorithms: [ssh-ed25519]
    ```
-
-   See the full [configuration file][7] for more details.
-
-3. Configure the device profile if not already specified in your `conf.yaml`. Default profiles are located at `/conf.d/network_config_management.d/default_profiles`. See [device profiles](#device-profiles) for more information.
+<!-- Subject to change -->
+3. Configure the device profile. Default profiles are located at `/conf.d/network_config_management.d/default_profiles`. 
 
    **Note**: NCM uses dedicated default profiles that differ from SNMP device profiles. Custom profiles are not supported.
+<!-- Subject to change -->
 
 4. Restart the Agent to apply the configuration changes.
 
@@ -111,12 +106,6 @@ Configuration Management is accessible from the device side panel in Network Dev
    - **Running**: The active, live configuration running on the device
    - **Startup**: The saved configuration that loads when the device boots
 
-   **Running configuration**
-   : The active configuration with all live changes applied to the device. This is what the device uses in real-time.
-
-   **Startup configuration**
-   : The saved configuration that persists across reboots. When a device restarts, it loads this configuration.
-   
 ### Time picker and retention
 
 The time controls at the top of the page allow you to select which configuration history to view. By default, the view shows the last 2 days of configuration changes. You can extend this range to view older versions, up to the retention limit (1 year).
@@ -157,21 +146,6 @@ When you compare two configuration versions, the AI summary automatically:
 
 - Describes changes in human-readable terms
 - Highlights changes that may be relevant for incident investigation or risk analysis
-
-## Device profiles
-
-Each default profile (in JSON format) contains:
-
-- **Configuration commands**: CLI commands to retrieve different configuration types:
-  - `running`: Gets the current active configuration
-  - `startup`: Gets the configuration that loads on device boot
-
-- **Processing rules**: Regex patterns for:
-  - **Metadata extraction**: Captures timestamp, author, and other metadata when available
-  - **Validation**: Verifies command execution was successful and returned valid data
-  - **Redaction**: Removes sensitive data or unnecessary lines from configurations
-
-<div class="alert alert-info">Startup configurations cannot be modified directly. To update the startup configuration, apply changes to the running configuration first, then save it to overwrite the startup configuration. This ensures only validated configurations persist across reboots.</div>
 
 ## Further Reading
 
