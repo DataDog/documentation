@@ -67,11 +67,6 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Agent configuration
 
-Network Path tests cannot be run directly from private locations. However, you can run them from any host or device where the Datadog Agent is installed, including hosts that also act as private locations for Synthetic Monitoring tests.
-
-To test network conditions inside private environments, install the Datadog Agent on the host or device, and run Network Path tests from that Agent. For full end-to-end visibility, you can group the application tests running from private locations, and
-Network Path tests running from the Datadog Agent on the _same host_, into a single [test suite][9]. This provides a unified view of your service, feature, and application health across all layers affecting user experience.
-
 ### Prerequisites
 
 Requires [Agent version][7] `7.72` or higher.
@@ -102,6 +97,12 @@ Requires [Agent version][7] `7.72` or higher.
    ```
 
    {{< img src="synthetics/network_tests/network_path_test_agent.png" alt="Network Path Testing Location and Agents form, showing the Datadog Agent selection dropdown" style="width:80%;" >}}
+   
+   **Note**:
+   Network Path tests cannot be run directly from private locations. However, you can run them from any host or device where the Datadog Agent is installed, including hosts that also act as private locations for Synthetic Monitoring tests.
+
+   To test network conditions inside private environments, install the Datadog Agent on the host or device, and run Network Path tests from that Agent. For full end-to-end visibility, you can group the application tests running from private locations, and
+   Network Path tests running from the Datadog Agent on the _same host_, into a single [test suite][9]. This provides a unified view of your service, feature, and application health across all layers affecting user experience.
 
 ## View test results
 
@@ -116,15 +117,15 @@ The Network Path visualization shows the routes packets take to complete queries
 
   <div class="alert alert-info">Changing the health bar does not affect the global time range at the top of the page.</div>
 
-  {{< img src="synthetics/network_tests/network_path_section.png" alt="Network Path visualization section of a network path test." style="width:100%;">}}
+  {{< img src="synthetics/network_tests/synthetics_network_path_hops.png" alt="Network Path visualization section of a network path test." style="width:100%;">}}
 
 Click on a test run in the table at the bottom of the page to view details for that specific run. The side panel displays:
  
 - Run information
-- Network Path visualization, aggregated across all traceroute queries (based on your [tests advanced options](#test-configuration))
+- Network Path visualization, aggregated across all traceroute queries (based on your tests [advanced options](#test-configuration))
 - Assertion results, aggregated across all end-to-end queries (based on your tests [advanced options](#test-configuration)) <br></br>
 
-  {{< img src="synthetics/network_tests/test_run_side_panel.png" alt="A single test run from a network test, displaying the side panel" style="width:100%;">}}
+  {{< img src="synthetics/network_tests/network_path_synthetics.png" alt="A single test run from a network test, displaying the side panel" style="width:80%;">}}
 
 ## Retention
 
