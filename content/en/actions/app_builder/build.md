@@ -27,9 +27,9 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 ## Start with onboarding
 
 When creating a new app, Datadog displays an onboarding modal with the following options: 
-- [Start with Blueprint][18]
-- [Start with Layout][19]
-- [Start with Data][20]
+- [Start with Blueprints][18]
+- [Start with Layouts][19]
+- [Start with Actions][20]
 - [Start from Scratch][21] 
 
 ## See what's possible with App Playground
@@ -96,12 +96,12 @@ Choosing a layout creates an app as a table, form, or custom chart.
 1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. After publishing, you can click the **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add it to a dashboard, notebook, or Self-Service Actions.
 
-### Build an app from data
+### Build an app from an action
 
-You can get started with an app by importing data from one of the integrations listed in the [Action Catalog][17].
+You can get started with an app by using one of the integrations listed in the [Action Catalog][17].
 
 1. From [App Builder][1], click **New App**. 
-1. Click **Start with Data**. 
+1. Click **Action** in the onboarding modal. 
 1. Choose an integration, then click **Continue**.
 1. Choose one or more actions. There is no limit to the number of actions you can choose. 
 1. Click **Create**.
