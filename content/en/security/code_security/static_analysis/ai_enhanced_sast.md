@@ -139,21 +139,19 @@ A campaign defines the following:
 
 | Section                | Description                                  | Options                                                                                                                                                                                                                                                                                          |
 | ---------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Campaign Context**   | Set the scope and type of the campaign.      | - **Campaign Type**: `Security Rule Campaign` (targets static analysis issues)<br>- **Code Security Product**: `Static Code (SAST)`<br>- **Campaign Title**: Name your campaign                                                                                                                          |
 | **Repository**         | Define which repo and paths to scan.         | - Set the GitHub repo URL<br>- Use **Paths** to limit rule scanning to certain directories or files                                                                                                                                                                                                      |
 | **Rule**               | Choose which SAST rule to apply.          | - Select a rule from the dropdown<br>- View description, code example, and number of matches<br>- Click **Show More** to see remediation steps                                                                                                                                                           |
 | **Session Management** | Controls how PRs are grouped and submitted.  | - **Create one PR per**:<br>      • `Repository`: One PR for all findings in the repo<br>      • `File`: One PR per file with findings<br>      • `Finding`: One PR per finding (most granular)<br>- **Allow [n] open PRs at a time**: Prevents too many PRs at once<br>- **Limit [n] findings per PR**: Prevents creating too-large PRs |
-| **Prompt Tuning**      | Customizes how the AI proposes remediations. | - **Custom Instructions**: Guide the AI on how to tweak fixes (for example, "Update CHANGELOG.md with a summary of changes", "Start all PR titles with '[autofix]'")                                                                                                    |
+| **Prompt Tuning**      | Customizes how the AI proposes remediations. | - **Custom Instructions**: Guide the AI on how to tweak fixes (for example, `Update CHANGELOG.md with a summary of changes`, `Start all PR titles with [autofix]`)                                                                                                    |
 ### Campain in progress
 
 When you click **Create Campaign**, Bits Dev Agent does the following:
 
 1. Bits Dev Agent loads SAST findings for the selected repo(s), path(s), and rule.
-2. Runs the chosen rule(s).
-3. Uses the [Bits Dev Agent][10] to generate patches for each group of findings.
-4. Creates PRs according to your session rules.
-5. If Bits Dev notifications are turned on, PRs will automatically be sent via Slack to relevant stakeholders.
-6. Lets you review, edit, and merge fixes using GitHub.
+2. Uses the [Bits Dev Agent][10] to generate patches for each group of findings.
+3. Creates PRs according to your session rules.
+4. If Bits Dev notifications are turned on, PRs will automatically be sent via Slack to relevant stakeholders.
+5. Lets you review, edit, and merge fixes using GitHub.
 
 The campain page shows whether the AI is actively remediating real findings, and how many have been remediated or pending.
 
@@ -173,8 +171,7 @@ Session details include the following:
 - Right panel:
   - **Suggested code change**: Displays a side-by-side comparison of the vulnerable code and the AI-generated patch.
   - **View Pull Request**: Opens the linked GitHub PR to review or merge the proposed changes.
-  - **Add Jira Issue**: Allows you to create a Jira ticket linked to this remediation session.
-- Left panel:
+- Left panel displays the chat message history, for example:
   - **Fix the following static analysis violation**: Explains the triggered rule, the security risk, and why the original code is unsafe.
   - **Fixing process recap**: Shows exactly how the AI read the code, understood the context, chose its approach, and applied the fix. This is helpful for auditability, compliance, and trust. You can confirm that the AI isn't rewriting code blindly, but applying defensible and explainable patterns.
   - **CI via GitHub**: Describes whether the AI-generated patch breaks anything downstream, and includes full error logs. This helps you validate that a fix is not only secure but also safe to deploy, without needing to leave the platform.
