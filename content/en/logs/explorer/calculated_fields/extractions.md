@@ -21,7 +21,7 @@ To create an extraction calculated field, see [Create a calculated field][1].
 
 Use AI-powered automatic parsing to generate Grok rules from your log data. Datadog analyzes the content of your log message and automatically generates an extraction rule, eliminating the need to manually write Grok patterns.
 
-{{< img src="/logs/explorer/calculated_fields/extractions/calculated_fields_parse_with_ai.png" alt="Example of AI-powered Grok parsing in Datadog Calculated Fields" style="width:100%;" >}}
+{{< img src="/logs/explorer/calculated_fields/extractions/calculated_fields_parse_ai.png" alt="Example of AI-powered Grok parsing in Datadog Calculated Fields" style="width:100%;" >}}
 
 There are two ways to access automatic parsing from the log side panel:
 
@@ -32,7 +32,7 @@ When you click the **AI** button, Datadog automatically populates the Calculated
 
 1. **Extract from**: Defaults to the full log message. You can change the dropdown to parse individual attributes instead.
 2. **Log sample**: Automatically populated with your selected log.
-3. **Parsing rule**: Automatically generated from the log sample. 
+3. **Parsing rule**: Automatically generated from the log sample.
 
 Review and modify the generated rule as needed. You can edit it manually or click **Generate a new rule** for Datadog to try again. You can also modify, insert, or replace the log sample to test your rule against different log formats.
 
