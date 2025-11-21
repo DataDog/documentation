@@ -36,7 +36,6 @@ Watchdog monitors the status of the following external providers' APIs:
 | Atlassian | `*.atlassian.net`, `*.atlassian.com` |
 | Auth0 | `*.auth0.com` |
 | Azure DevOps | `dev.azure.com` |
-| Binance | `api.binance.com` |
 | Braintree | `api.braintreegateway.com` |
 | Cloudflare | `api.cloudflare.com` |
 | Databricks | `*.cloud.databricks.com` |
@@ -51,7 +50,6 @@ Watchdog monitors the status of the following external providers' APIs:
 | Okta | `*.okta.com` |
 | OpenAI | `*.openai.com` |
 | PagerDuty | `api.pagerduty.com` |
-| Palo Alto Networks | `api.urlcloud.paloaltonetworks.com` |
 | PayPal | `*.paypal.com` |
 | Salesforce | `*.salesforce.com` |
 | SendGrid | `*.sendgrid.com` |
