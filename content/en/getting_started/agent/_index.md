@@ -29,13 +29,13 @@ This guide introduces the Datadog Agent and covers:
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
 
 The Agent can run on:
-- Local hosts (Windows, MacOS), 
-- Containerized environments (Docker, Kubernetes),
-- On-premises data centers. 
+- Local hosts (Windows, macOS) 
+- Containerized environments (Docker, Kubernetes)
+- On-premises data centers 
 
 You can also install and configure the Agent using configuration management tools like Chef, Puppet, or Ansible.
 
-The Agent can collect 75-100 system-level metrics every 15-20 seconds. With additional configuration, it can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source, and its source code is available on GitHub at [DataDog/datadog-agent][1].
+The Agent can collect 75-100 system-level metrics every 15-20 seconds. With additional configuration, it can send live data, logs, and traces from running processes to Datadog. The Datadog Agent is open source, and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
 ### The Agent configuration file
 
@@ -106,7 +106,7 @@ The Agent is set up to provide the following service checks:
   - `datadog.agent.up`: Returns **OK** if the Agent connects to Datadog.
   - `datadog.agent.check_status`: Returns **CRITICAL** if an Agent check is unable to send metrics to Datadog; otherwise returns **OK**.
 
-These checks can be used in Datadog to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][21] to learn more.
+These checks can be used in Datadog to visualize the Agent status through monitors and dashboards at a glance. See [Service Check Overview][21] to learn more.
 
 
 ## Advanced configurations and features
@@ -206,7 +206,7 @@ See [Agent Overhead][2] to learn more about these benchmarks.
 
 {{% collapse-content title="Additional configuration options" level="h4" expanded=false id="id-for-anchoring" %}}
 
-The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. Thesefeatures are not enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
+The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. These features are not enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
 
 ```yaml
 ##################################
