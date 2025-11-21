@@ -383,61 +383,9 @@ Note that the delimiter is a comma and a whitespace: `, `.
 
 The following configuration values should generally not be modified, but may be set if required.
 
-{{< site-region region="us" >}}
-
 `DD_LOGS_DIRECT_SUBMISSION_URL`
 : Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.datadoghq.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.us3.datadoghq.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.us5.datadoghq.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.ap2.datadoghq.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.datadoghq.eu:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-`DD_LOGS_DIRECT_SUBMISSION_URL`
-: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
-**Default**: `https://http-intake.logs.ddog-gov.com:443` (based on `DD_SITE`)
-
-{{< /site-region >}}
+**Default**: `{{< region-param key=http_endpoint_full >}}:443` (based on `DD_SITE`)
 
 `DD_LOGS_DIRECT_SUBMISSION_SOURCE`
 : Sets the parsing rule for submitted logs. Should always be set to `csharp`, unless you have a [custom pipeline][17].<br>

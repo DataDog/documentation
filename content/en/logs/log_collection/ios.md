@@ -74,7 +74,6 @@ DatadogLogs.xcframework
 
 For more information about setting up a client token, see the [client token documentation][2].
 
-{{< site-region region="us" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
 
@@ -85,7 +84,7 @@ import DatadogLogs
 Datadog.initialize(
 	with: Datadog.Configuration(
 		clientToken: "<client token>",
-		env: "<environment>",
+		env: "<environment>",{{< region-param key=ios_site_swift >}}
 		service: "<service name>"
 	),
 	trackingConsent: trackingConsent
@@ -96,8 +95,8 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.service = @"<service name>";
+{{< region-param key=ios_site_objc >}}DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";{{< region-param key=ios_site_objc_config >}}
 
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
@@ -106,233 +105,6 @@ configuration.service = @"<service name>";
 ```
 {{% /tab %}}
 {{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
-
-```swift
-import DatadogCore
-import DatadogLogs
-
-Datadog.initialize(
-	with: Datadog.Configuration(
-		clientToken: "<client token>",
-		env: "<environment>",
-		site: .eu1,
-		service: "<service name>"
-	),
-	trackingConsent: trackingConsent
-)
-
-Logs.enable()
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.service = @"<service name>";
-configuration.site = [DDSite eu1];
-
-[DDDatadog initializeWithConfiguration:configuration
-                       trackingConsent:trackingConsent];
-
-[DDLogs enable];
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
-
-```swift
-import DatadogCore
-import DatadogLogs
-
-Datadog.initialize(
-	with: Datadog.Configuration(
-		clientToken: "<client token>",
-		env: "<environment>",
-		site: .us3,
-		service: "<service name>"
-	),
-	trackingConsent: trackingConsent
-)
-
-Logs.enable()
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-@import DatadogObjc;
-
-DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.service = @"<service name>";
-configuration.site = [DDSite us3];
-
-[DDDatadog initializeWithConfiguration:configuration
-                       trackingConsent:trackingConsent];
-
-[DDLogs enable];
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
-
-```swift
-import DatadogCore
-import DatadogLogs
-
-Datadog.initialize(
-	with: Datadog.Configuration(
-		clientToken: "<client token>",
-		env: "<environment>",
-		site: .us5,
-		service: "<service name>"
-	),
-	trackingConsent: trackingConsent
-)
-
-Logs.enable()
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-@import DatadogObjc;
-
-DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.service = @"<service name>";
-configuration.site = [DDSite us5];
-
-[DDDatadog initializeWithConfiguration:configuration
-                       trackingConsent:trackingConsent];
-
-[DDLogs enable];
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
-
-```swift
-import DatadogCore
-import DatadogLogs
-
-Datadog.initialize(
-	with: Datadog.Configuration(
-		clientToken: "<client token>",
-		env: "<environment>",
-		site: .us1_fed,
-		service: "<service name>"
-	),
-	trackingConsent: trackingConsent
-)
-
-Logs.enable()
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-@import DatadogObjc;
-
-DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.service = @"<service name>";
-configuration.site = [DDSite us1_fed];
-
-[DDDatadog initializeWithConfiguration:configuration
-                       trackingConsent:trackingConsent];
-
-[DDLogs enable];
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
-
-```swift
-import DatadogCore
-import DatadogLogs
-
-Datadog.initialize(
-	with: Datadog.Configuration(
-		clientToken: "<client token>",
-		env: "<environment>",
-		site: .ap1,
-		service: "<service name>"
-	),
-	trackingConsent: trackingConsent
-)
-
-Logs.enable()
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-@import DatadogObjc;
-
-DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.service = @"<service name>";
-configuration.site = [DDSite ap1];
-
-[DDDatadog initializeWithConfiguration:configuration
-                       trackingConsent:trackingConsent];
-
-[DDLogs enable];
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
-
-```swift
-import DatadogCore
-import DatadogLogs
-
-Datadog.initialize(
-	with: Datadog.Configuration(
-		clientToken: "<client token>",
-		env: "<environment>",
-		site: .ap2,
-		service: "<service name>"
-	),
-	trackingConsent: trackingConsent
-)
-
-Logs.enable()
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-@import DatadogObjc;
-
-DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.service = @"<service name>";
-configuration.site = [DDSite ap2];
-
-[DDDatadog initializeWithConfiguration:configuration
-                       trackingConsent:trackingConsent];
-
-[DDLogs enable];
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
 
 To be compliant with the GDPR regulation, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:
