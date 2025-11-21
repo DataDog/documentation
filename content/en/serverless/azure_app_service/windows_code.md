@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-The Datadog extension for Azure App Service provides monitoring capabilities in addition to the [Datadog-Azure integration][7], which provides metrics and logs.
+The Datadog extension for Azure App Service provides monitoring capabilities in addition to the [Datadog-Azure integration][5], which provides metrics and logs.
 
 - Full distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
@@ -48,24 +48,28 @@ The Datadog .NET, Java, and Node.js APM extensions support the following runtime
 
 {{< tabs >}}
 {{% tab ".NET" %}}
+
 Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution within your application environment.
 
 Additionally, if you are using the Azure Native integration, you can use the Datadog resource in Azure to add the extension to your .NET apps. For instructions, see the [App Service extension section][1] of Datadog's [Azure Native integration guide][2].
 
 [1]: /integrations/guide/azure-native-integration/#app-service-extension
 [2]: /integrations/guide/azure-native-integration/
+
 {{% /tab %}}
 {{% tab "Java" %}}
 Support for Java Web Apps is in Preview for extension v2.4+.
 
 There are no billing implications for tracing Java Web Apps during this period.
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Installation
+
 Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
-If you haven't already, set up the [Datadog-Azure integration][5]. You can verify that your Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog.
+If you haven't already, set up the [Datadog-Azure integration][3]. You can verify that your Azure integration is configured correctly by ensuring that you see the `azure.app_services.count` or `azure.functions.count` metrics in Datadog.
 
 <div class="alert alert-info">This step is critical for metric/trace correlation and functional trace panel views and improves the overall experience of using Datadog with Azure App Services.
 </div>
@@ -182,7 +186,7 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 
    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Example of Extensions page in Azure portal, showing .NET Datadog APM extension." style="width:100%;" >}}
 
-6. Accept the legal terms, click **OK**, and wait for the installation to complete. 
+6. Accept the legal terms, click **OK**, and wait for the installation to complete.
    <div class="alert alert-danger">This step requires that your application be in a stopped state.</div>
 
 7.  Start the main application, click **Start**:
@@ -201,17 +205,17 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Custom metrics
 
-The Azure App Service extension includes an instance of [DogStatsD][3], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
+The Azure App Service extension includes an instance of [DogStatsD][1], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
 
-Writing custom metrics and checks in Azure App Service is similar to the process for doing so with an application on a host running the Datadog Agent. **Unlike** the [standard DogStatsD config process][3], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
+Writing custom metrics and checks in Azure App Service is similar to the process for doing so with an application on a host running the Datadog Agent. **Unlike** the [standard DogStatsD config process][1], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
 
 To submit custom metrics to Datadog from Azure App Service using the extension:
 
 {{< tabs >}}
 {{% tab ".NET" %}}
+
 1. Add the [DogStatsD NuGet package](https://www.nuget.org/packages/DogStatsD-CSharp-Client) to your Visual Studio project.
 2. Initialize DogStatsD and write custom metrics in your application.
 3. Deploy your code to Azure App Service.
@@ -255,9 +259,10 @@ client.Increment("sample.startup");
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
+
 1. [Initialize DogStatsD and write custom metrics][1] in your application.
-1. Deploy your code to a supported Azure Web App.
-1. If you have not already, install Datadog's Azure App Service Node.js extension.
+2. Deploy your code to a supported Azure Web App.
+3. If you have not already, install Datadog's Azure App Service Node.js extension.
 
 <div class="alert alert-info">You do not need to install a Node.js DogStatsD client, as it is included in the Node.js tracer (<code>dd-trace</code>) packaged in the Azure App Service extension.</div>
 
@@ -282,11 +287,12 @@ tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' }
   - Set `DD_TRACE_ENABLED` to `false`.
   - Set `DD_AAS_ENABLE_CUSTOM_METRICS` to `true`.
 
-Learn more about [custom metrics][4].
+Learn more about [custom metrics][2].
 
 ## Logging
 
 ### Application logging
+
 {{< tabs >}}
 {{% tab ".NET" %}}
 
@@ -299,6 +305,7 @@ Both methods allow trace ID injection, making it possible to connect logs and tr
 
 [1]: /logs/log_collection/csharp/#agentless-logging-with-apm
 [2]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
+
 {{% /tab %}}
 {{% tab "Java" %}}
 
@@ -334,6 +341,7 @@ Configure these environment variables in your Azure App Service Application Sett
 
 {{< tabs >}}
 {{% tab ".NET" %}}
+
 **Code Example: Microsoft Native Logging**
 
 An example of how to set up logging in a .NET application using Microsoft.Extensions.Logging:
@@ -354,12 +362,12 @@ public class WeatherForecastController : ControllerBase
     public IActionResult Get()
     {
         _logger.LogInformation("Processing weather forecast request");
-        
+
         // Your business logic here
         var forecast = GetWeatherForecast();
-        
+
         _logger.LogInformation("Weather forecast retrieved for user: {UserId}", userId);
-        
+
         return Ok(forecast);
     }
 }
@@ -415,10 +423,9 @@ This setup automatically includes trace correlation when `DD_LOGS_INJECTION=true
 {{% /tab %}}
 {{% tab "Java" %}}
 
-See instructions for [Agentless logging with Java][1] to configure application logging for Java in Azure App Service.
+See [Stream logs directly to the Agent][1] to configure application logging for Java in Azure App Service.
 
-[1]: /logs/log_collection/java/#agentless-logging
-
+[1]: /logs/log_collection/java/##stream-logs-directly-to-the-agent
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -537,7 +544,7 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 1. Go to the Azure integration tile.
 
-2. Ensure you have installed the [Azure integration][5] for the Azure subscription where your application is running.
+2. Ensure you have installed the [Azure integration][3] for the Azure subscription where your application is running.
 
 3. Ensure that any App Service plan filtering rules you have applied include the App Service plan where the app is running. If an App Service plan is not included, all apps and functions hosted on it are also not included. Tags on the app itself are not used for filtering by Datadog.
 
@@ -551,16 +558,14 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
-Still need help? Contact [Datadog support][6].
+Still need help? Contact [Datadog support][4].
 
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd
-[2]: /tracing/setup/dotnet/
-[3]: /developers/dogstatsd
-[4]: /metrics/
-[5]: /integrations/azure/
-[6]: /help
-[7]: https://app.datadoghq.com/integrations/azure
+[2]: /metrics/custom_metrics/
+[3]: /integrations/azure/
+[4]: /help
+[5]: https://app.datadoghq.com/integrations/azure

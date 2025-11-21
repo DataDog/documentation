@@ -30,6 +30,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET and .NE
 
 | .NET Version         | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
+| .NET 10              | _November 14, 2028_   | [GA](#support-ga)    | latest (>= 3.31.0)   |
 | .NET 9               | _November 10, 2026_   | [GA](#support-ga)    | latest (>= 3.6.0)    |
 | .NET 8               | _November 10, 2026_   | [GA](#support-ga)    | latest (>= 2.42.0)   |
 | .NET 7               | May 14, 2024          | [GA](#support-ga)    | latest (>= 2.20.0)   |
@@ -89,7 +90,7 @@ The .NET Tracer supports macOS for CI Test Optimization only.
 
 | Operating System         | Version | Architectures | Support level           | Package version            |
 | -------------------------|---------|---------------|-------------------------|----------------------------|
-| macOS                    | 12.0+   |  x64, arm64   | [GA](#support-ga)       | latest                     |
+| macOS                    | 14.0+   |  x64, arm64   | [GA](#support-ga)       | latest                     |
 | macOS                    | 11.0    |  x64          | [EOL](#support-eol)     | < 3.0.0                    |
 | macOS                    | 11.0    |  arm64        | [EOL](#support-eol)     | < 3.0.0 (Added in 2.20.0)  |
 

@@ -58,7 +58,7 @@ You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider 
 
 After completing all the fields to define the dataset, click **Create Restricted Dataset** to apply it to your organization.
 
-You may create a maximum of 100 Restricted Datasets. If you need a higher limit, reach out to Support.
+You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. If you need a higher limit, reach out to Support.
 
 ### API
 The Data Access Control API is under development and should be considered unstable. Future versions may be backward incompatible.
@@ -204,7 +204,7 @@ When exploring Datadog with restrictions enabled, users without permissions can 
 
 Similar to exploring data in a data explorer like the RUM Explorer or Metrics Explorer, viewing data in dashboards in an organization that has Restricted Datasets enabled only shows the data the user can access. Since dashboards are shared objects that can be accessed by others, it is possible for two users who have different access to view the same dashboard or notebook at the same time and see different data.
 
-**Note**: Viewers of [Shared Dashboards][12] will see all telemetry data displayed in the Dashboard in accordance to the creator's permissions. Please review your dashboard content before sharing to ensure no sensitive or confidential data is exposed.
+**Note**: Viewers of [Shared Dashboards][12] see all telemetry data displayed in the Dashboard in accordance to the creator's permissions. Review your dashboard content before sharing to ensure no sensitive or confidential data is exposed.
 
 ### APIs
 

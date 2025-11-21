@@ -81,7 +81,7 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 [1]: https://app.datadoghq.com/actions/action-catalog/
 [2]: /service_management/workflows/
 [3]: https://app.datadoghq.com/app-builder/blueprints
-[4]: https://datadoghq.slack.com/
+[4]: https://chat.datadoghq.com/
 [5]: /service_management/app_builder/build/#build-an-app-from-a-blueprint
 [6]: /service_management/app_builder/embedded_apps/#add-apps-to-your-dashboard
 [7]: https://app.datadoghq.com/dash/integration/60

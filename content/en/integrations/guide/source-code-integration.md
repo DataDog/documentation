@@ -426,7 +426,7 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
+<div class="alert alert-info">PHP client library version 1.13.0 or later is required, or 1.2.0 or later if using tracing only without profiling.</div>
 
 #### Containers
 
@@ -487,6 +487,32 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 [1]: /tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
+
+{{% /tab %}}
+{{% tab "RUM" %}}
+
+You can see links from stack frames to their source repository in [Error Tracking for RUM][1].
+
+Source code integration is supported for the following RUM platforms when sourcemaps or debug symbols are uploaded with Git metadata:
+
+- **Browser**: Requires [JavaScript source maps][3] to be uploaded with Git information using the [`datadog-ci sourcemaps upload`][4] command
+- **React Native**: Requires [source maps and debug symbols][5] to be uploaded with Git information
+- **Android**: Requires [Proguard mapping files][6] to be uploaded with Git information
+
+**Note**: Source code integration is not supported for iOS RUM errors.
+
+1. Navigate to [**Digital Experience** > **Error Tracking**][2].
+2. Click on an issue. The **Issue Details** panel appears on the right.
+3. Under **Latest Available Errors** or error samples, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with options to view the file, blame, and commit available on the right side of a RUM error stack trace in Error Tracking, along with inline code snippets" style="width:100%;">}}
+
+[1]: /real_user_monitoring/error_tracking/
+[2]: https://app.datadoghq.com/rum/error-tracking
+[3]: /real_user_monitoring/guide/upload-javascript-source-maps/
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
+[5]: /real_user_monitoring/application_monitoring/react_native/error_tracking/#get-deobfuscated-stack-traces
+[6]: /real_user_monitoring/application_monitoring/android/error_tracking/
 
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
@@ -594,6 +620,12 @@ For more information, see the [Dynamic Instrumentation documentation][102].
   PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
 </div>
 
+PR comments are automated comments added by Datadog's [source code management integrations][10] to inform developers of issues detected in their code changes and, in certain cases, suggest remediation.
+
+There is a maximum of 31 unique comments per PR at any time to reduce noise and clutter. These comments include:
+* One summary comment is always posted to give a high-level view of all the issues Datadog detected in the PR. This comment is edited by Datadog as new commits pushed to the PR change the results.
+* When applicable, up to 30 inline comments are posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the PR's diff, the 30 highest severity violations are posted.
+
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
 PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
@@ -647,3 +679,4 @@ To disable PR comments for Test Optimization, go to the [Test Optimization Advan
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /tracing/error_tracking/
 [9]: /tracing/trace_collection/dd_libraries/
+[10]: #source-code-management-providers

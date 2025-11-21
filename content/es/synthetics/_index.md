@@ -9,7 +9,6 @@ cascade:
     rank: 70
 description: Utiliza tests automatizados para asegurarte de que las zonas más críticas
   de tus sistemas y aplicaciones funcionan en distintos lugares del mundo.
-disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring
   tag: Notas de la versión
@@ -45,13 +44,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ambassador-browser-tests/
   tag: Blog
   text: Cómo ayudé a mi cliente a ampliar sus tests de navegador con Datadog
+- link: https://www.datadoghq.com/blog/datadog-terraform-synthetic-testing/
+  tag: Blog
+  text: Automatización de tu infraestructura de synthetic tests con Datadog Synthetic
+    Monitoring y Terraform
 title: Tests y monitorización Synthetic
 ---
-
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/447241955/rendition/1080p/file.mp4?loc=external&signature=47f0bf6adc93cbbd62e4939228c964c19227a2e0aec2d61822417cd2af985c97" poster="/images/poster/synthetics.png" >}}
-
-<br/>
-
 
 {{< learning-center-callout header="Unirse a una sesión de un seminario web de habilitación" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
 Explora e inscríbete en las sesiones de habilitación de los fundamentos. Aprende cómo la Monitorización Synthetic en Datadog es una solución de monitorización proactiva que te permite crear una API sin código, un navegador y tests móviles para simular automáticamente flujos y solicitudes de usuarios en tu aplicación, endpoints clave y capas de red.
@@ -80,6 +78,17 @@ Utiliza [tests de navegador Synthetic][14] para monitorizar las experiencias de 
 Utiliza [tests de aplicaciones móviles Synthetic][21] para monitorizar las experiencias de tus clientes con tus aplicaciones iOS y Android de extremo a extremo desde distintos tipos de dispositivos.
 
 {{< img src="synthetics/mobile_app_tests.png" alt="Ejemplos de grabaciones de flujos de trabajo de un test móvil Synthetic" style="width:100%;">}}
+
+## Crear tests de ruta de red
+
+Crea [tests de ruta de red de Synthetic Monitoring][25] desde ubicaciones gestionadas para realizar checks TCP, UDP e ICMP y visualizar rutas de paquetes a través de endpoints globales.
+
+{{< img src="synthetics/network_tests/syn_network_path.png" alt="Ejemplos de un test de red TCP de Synthetic" style="width:100%;">}}
+## Conjuntos de tests
+
+Utiliza [conjuntos de tests de Synthetic Monitoring][25] para organizar múltiples tests en colecciones lógicas agrupadas por recorrido del usuario, entorno, ubicación, servicio o equipo para una gestión y resolución de problemas racionalizados.
+
+{{< img src="synthetics/test_suites/test_suite_summary.png" alt="Página de resumen del conjunto de tests de Synthetic Monitoring" style="width:100%;">}}
 
 ## Lanzar localizaciones privadas
 
@@ -111,21 +120,21 @@ Optimiza tu conjunto de tests [asegurándote de que se prueban los flujos de tra
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Explorador de tests continuos" style="width:100%;">}}
 
-## Notificaciones de la monitorización Synthetic
+## Notificaciones de Synthetic Monitoring
 
 Utiliza y enriquece los monitores de monitorización Synthetic para enviar notificaciones cuando un test de monitorización Synthetic está fallando. Están disponibles las siguientes funciones:
 
-Mensajes de monitor pre-rellenados 
-: Los mensajes de monitor pre-rellenados constituyen un punto de partida estructurado para las alertas de tests de monitorización Synthetic. Cada mensaje incluye un título estandarizado, un resumen y un pie de página con metadatos de test, lo que facilita y agiliza la comprensión de la alerta.
+Mensajes de monitor prerellenados 
+: los mensajes de monitor prerellenados proporcionan un punto de partida estructurado para las alertas de Synthetic test. Cada mensaje incluye un título normalizado, un resumen y un pie de página con metadatos de test, lo que facilita la comprensión de la alerta de un vistazo.
 
 Variables de plantilla
-: Las variables de plantilla permiten inyectar datos específicos de test en las notificaciones de monitor de forma dinámica. Estas variables se extraen del objeto `synthetics.attributes`.
+: las variables de plantilla permiten inyectar datos específicos de test en las notificaciones de monitor de forma dinámica. Estas variables se extraen del objeto `synthetics.attributes`.
 
 Uso avanzado
-: El uso avanzado incluye técnicas para revelar informaciones de test profundas o estructurar mensajes complejos utilizando plantillas de Handlebars.
+: el uso avanzado incluye técnicas para profundizar en el test o estructurar mensajes complejos utilizando plantillas de identificadores.
 
-Alertas condicionales
-: Las alertas condicionales te permiten cambiar el contenido de una notificación de monitor en función de resultados específicos o de condiciones de fallo de tests.
+Alerta condicional
+: las alertas condicionales te permiten cambiar el contenido de una notificación de monitor en función de resultados específicos de test o de condiciones de fallo.
 
 Para obtener más información, consulta las [notificaciones de monitorización Synthetic][24].
 
@@ -166,3 +175,5 @@ Consulta el apartado [Empezando con la monitorización Synthetic][18] para obten
 [22]: /es/synthetics/test_coverage
 [23]: /es/synthetics/guide/version_history/
 [24]: /es/synthetics/notifications/
+[25]: /es/synthetics/network_path_tests/
+[25]: /es/synthetics/test_suites/
