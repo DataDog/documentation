@@ -112,7 +112,7 @@ APM Recommendations are based on data collected from different parts of your sta
 
 By looking at these sources together, Datadog finds ways to help you improve performance, reliability, and user experience.
 
-Datadog then prioritizes recommendations by computing a severity score that considers both the potential impact of an issue and supporting signals from your service’s telemetry, such as relative request volume and performance trends. By combining these signals, Datadog elevates the recommendations that are most likely to meaningfully improve service health and performance, ensuring that the highest value insights appear first.
+Datadog prioritizes recommendations by computing a severity score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. This ensures that the most critical insights for improving service health appear first.
 
 ## Using APM Recommendations
 
@@ -123,7 +123,7 @@ To review recommendations that need your attention:
 3. Select a recommendation from the list to see a detailed description of the issue.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
 
-After you've reviewed the recommendation, you can use the **FOR REVIEW** dropdown to change the recommendation status to *Reviewed*, *Ignored*, or *Resolved*. Alternatively, you can click **Create Ticket** to assign the recommendation to an owner and track related work in **Jira** or **Case Management**.
+After you've reviewed the recommendation, you can use the **FOR REVIEW** dropdown to change the recommendation status to *Reviewed*, *Ignored*, or *Resolved*. Alternatively, you can click **Create Ticket** to assign the recommendation to an owner and track related work in Jira or Case Management.
 
 ## Supported recommendations
 
