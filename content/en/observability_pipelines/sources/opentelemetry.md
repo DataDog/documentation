@@ -40,7 +40,9 @@ Optionally, toggle the switch to enable TLS. If you enable TLS, the following ce
 
 ## Send logs to the Observability Pipelines Worker
 
-Configure your OTel exporters to point to HTTP or gRPC.
+Configure your OTel exporters to point to HTTP or gRPC. The Worker exposes configurable listener ports for each protocol.
+
+<div class="alert alert-info">The ports 4318 (HTTP) and 4317 (gRPC) shown below are examples only. You can configure the port value for either protocol in the Worker. Ensure your OTel exporters match the port value you choose.</a></div>
 
 ### HTTP configuration example
 
