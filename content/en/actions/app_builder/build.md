@@ -47,6 +47,30 @@ To access the App Playground:
 
 ## Create an app
 
+### Build an app with AI
+
+With Bits AI, you can generate a complete app from a single prompt. Describe the app you want to create, and the UI agent automatically generates the UI, actions, and logic mapped to your existing data and permissions. You can then iterate by chatting---refining components, flows, or styling---without writing any code.
+
+To build an app with Bits AI:
+1. From [App Builder][1], click **New App**.
+1. Click **Start with AI**.
+1. Click a suggested prompt, or enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example prompts:
+   - `Display a list of AWS Lambda functions in a table. Allow the user to filter by function name and specify the limit.`
+   - `Display GitHub pull requests in a table.`
+1. Press **Enter** to send your prompt. Bits AI automatically generates the UI, actions, and logic for your app, mapped to your existing data and permissions.
+1. While it's responding, Bits AI asks you to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
+1. Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press **Enter**. 
+1. After Bits AI adds an action to the app, you are prompted to either **Mock with AI Data** or **skip configuration**. Configuring your action during UI agent execution helps connect the data types to other components.
+1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
+To iterate on an existing app:
+1. From an existing app, click **UI Agent Chat** (**<i class="icon-bits-ai"></i>**).
+1. Enter a detailed prompt for the behavior you'd like to add to your app. Include the integrations and actions you'd like to use.
+1. Press **Enter** to add the functionality to your app.
+
 ### Build an app from a blueprint
 
 Blueprints are helpful templates that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
@@ -89,30 +113,6 @@ You can get started with an app by importing data from one of the integrations l
 1. To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. After publishing, you can click the **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon to add it to a dashboard, notebook, or Self-Service Actions.
-
-### Build an app with AI
-
-With Bits AI, you can generate a complete app from a single prompt. Describe the app you want to create, and the UI agent automatically generates the UI, actions, and logic mapped to your existing data and permissions. You can then iterate by chatting---refining components, flows, or styling---without writing any code.
-
-To build an app with Bits AI:
-1. From [App Builder][1], click **New App**.
-1. Click **Start with AI**.
-1. Click a suggested prompt, or enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example prompts:
-   - `Display a list of AWS Lambda functions in a table. Allow the user to filter by function name and specify the limit.`
-   - `Display GitHub pull requests in a table.`
-1. Press **Enter** to send your prompt. Bits AI automatically generates the UI, actions, and logic for your app, mapped to your existing data and permissions.
-1. While it's responding, Bits AI asks you to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
-1. Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press **Enter**. 
-1. After Bits AI adds an action to the app, you are prompted to either **Mock with AI Data** or **skip configuration**. Configuring your action during UI agent execution helps connect the data types to other components.
-1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
-1. To save the app, click **Save**.
-1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
-
-To iterate on an existing app:
-1. From an existing app, click **UI Agent Chat** (**<i class="icon-bits-ai"></i>**).
-1. Enter a detailed prompt for the behavior you'd like to add to your app. Include the integrations and actions you'd like to use.
-1. Press **Enter** to add the functionality to your app.
 
 ### Create a custom app
 
