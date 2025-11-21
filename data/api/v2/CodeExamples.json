@@ -1420,6 +1420,30 @@
       "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
+  "AttachCase": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_2096369717",
+      "description": "Attach finding to a Case returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Attach findings to a Case returns \"OK\" response"
+    }
+  ],
+  "AttachJiraIssue": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_3934196360",
+      "description": "Attach finding to a Jira issue returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Attach findings to a Jira issue returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
@@ -1439,6 +1463,23 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
+    }
+  ],
+  "CreateJiraIssues": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_1129059464",
+      "description": "Create Jira issue for finding returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_1518998779",
+      "description": "Create Jira issue for findings returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create Jira issues for findings returns \"Created\" response"
     }
   ],
   "CreateSecurityMonitoringRule": [
@@ -1526,6 +1567,30 @@
       "group": "security_monitoring",
       "suffix": "_3192265332",
       "description": "Create a suppression rule with an exclusion query returns \"OK\" response"
+    }
+  ],
+  "CreateCases": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_3467055701",
+      "description": "Create case for finding returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3820098248",
+      "description": "Create case for findings returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create cases for findings returns \"Created\" response"
+    }
+  ],
+  "DetachCase": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Detach findings from their Case returns \"No Content\" response"
     }
   ],
   "SearchSecurityMonitoringSignals": [

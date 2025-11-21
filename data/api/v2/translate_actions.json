@@ -2580,6 +2580,36 @@
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
   },
+  "DetachCase": {
+    "description": "Detach findings from their case. You can detach up to 50 findings per request.",
+    "summary": "Detach findings from their Case",
+    "request_description": "",
+    "request_schema_description": "Request for detaching findings from their case."
+  },
+  "CreateCases": {
+    "description": "Create cases for findings. You can create up to 50 cases per request and associate up to 50 findings per case. If a finding is already attached to another case, it will be detached and attached to the newly created case.",
+    "summary": "Create cases for findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create cases for findings."
+  },
+  "AttachCase": {
+    "description": "Attach findings to a case. You can attach up to 50 findings per case. If a finding is already attached to another case, it will be detached and attached to the specified case.",
+    "summary": "Attach findings to a Case",
+    "request_description": "",
+    "request_schema_description": "Request for attaching findings to a case."
+  },
+  "AttachJiraIssue": {
+    "description": "Attach findings to a Jira issue by providing the Jira issue URL. You can attach up to 50 findings per Jira issue. If the Jira issue is not linked to any case, this operation will create a case for the findings and link the Jira issue to the created case. If a finding is already attached to another Jira issue, it will be detached and attached to the specified Jira issue.",
+    "summary": "Attach findings to a Jira issue",
+    "request_description": "",
+    "request_schema_description": "Request for attaching findings to a Jira issue."
+  },
+  "CreateJiraIssues": {
+    "description": "Create Jira issues for findings. This operation creates a case in Datadog and creates a Jira issue linked to that case for bidirectional sync between Datadog and Jira. You can create up to 50 Jira issues per request and associate up to 50 findings per Jira issue. If a finding is already attached to another Jira issue, it will be detached and attached to the newly created Jira issue.",
+    "summary": "Create Jira issues for findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create Jira issues for findings."
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
