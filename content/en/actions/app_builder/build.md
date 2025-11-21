@@ -16,28 +16,25 @@ further_reading:
 
 You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the following:
 - Author
-- Status
+- Tags
 - Date that each app was last modified
-- Whether the app is published
+- Whether each app is published
 
 On the App Builder page, you can access and filter your apps. Hover over an app for options to edit, delete, view, or clone the app. You can also enable the **My apps** toggle to see only apps that you created:
 
 {{< img src="service_management/app_builder/app-builder-my-apps-2025-11-19.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
 
+## Start with onboarding
+
+When creating a new app, Datadog displays an onboarding modal with the following options: 
+- [Start with AI][22]
+- [Start with blueprint][18]
+- [Start with layout][19]
+- [Start with data][20]
+- [Start from scratch][21] 
+- [App Playground][23]
+
 ## Create an app
-
-### Build an app from a blueprint
-
-Blueprints are helpful starter apps that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
-
-1. From [App Builder][1], click the [Blueprints][2] tab.
-1. Find the blueprint that you want to use and click **Preview**.
-1. Click **Use Blueprint** to open the app blueprint.
-1. To change the app name and description, click the app name.
-1. Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
-1. To save the app, click **Save as New App**.
-1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ### Build an app with AI
 
@@ -45,33 +42,97 @@ With Bits AI, you can generate a complete app from a single prompt. Describe the
 
 To build an app with Bits AI:
 1. From [App Builder][1], click **New App**.
-1. Click **Start with AI**.
+1. Click **Start with AI**. 
 1. Click a suggested prompt, or enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example prompts:
    - `Display a list of AWS Lambda functions in a table. Allow the user to filter by function name and specify the limit.`
    - `Display GitHub pull requests in a table.`
 1. Press **Enter** to send your prompt. Bits AI automatically generates the UI, actions, and logic for your app, mapped to your existing data and permissions.
-1. While it's responding, Bits AI asks you to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
-1. Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press **Enter**. 
-1. After Bits AI adds an action to the app, you are prompted to either **Mock with AI Data** or **skip configuration**. Configuring your action during UI agent execution helps connect the data types to other components.
-1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
+    - While it's responding, Bits AI asks you to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
+    - Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press **Enter**. 
+    - After Bits AI adds an action to the app, you are prompted to either **Mock with AI Data** or **Skip**. Configuring your action during UI agent execution helps connect the data types to other components.
+1. After Bits AI responds to your prompt, the following steps are optional: 
+    - To change the app name and description, click the app name.
+    - Click **Edit with AI** or manually [customize your app][15].
+    - To preview the app, click **View**. Click **Edit** to return to the configuration view.
 1. To save the app, click **Save**.
-1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 To iterate on an existing app:
-1. From an existing app, click **UI Agent Chat** (**<i class="icon-bits-ai"></i>**).
+1. From an existing app, click **Edit** then **Build with AI** (**<i class="icon-bits-ai"></i>**).
 1. Enter a detailed prompt for the behavior you'd like to add to your app. Include the integrations and actions you'd like to use.
 1. Press **Enter** to add the functionality to your app.
 
-### Create a custom app
+### Build an app from a blueprint
+
+Blueprints are helpful templates that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
+
+1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint** in the onboarding modal.
+1. Find the blueprint you want to use and click **Use Blueprint**.
+1. The following steps are optional: 
+    - Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To change the app name and description, click the app name.
+    - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. To save the app, click **Save**.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
+### Build an app from a layout
+
+Choosing a layout creates an app as a table, form, or custom chart. 
 
 1. From [App Builder][1], click **New App**.
-1. To change the app name and description, click the app name.
-1. To add a [UI component](#app-canvas-and-components) to the app canvas, click the plus ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) to open the **Components** tab, then click the component or drag it onto the canvas.
-1. Use [queries][12] to populate or interact with your canvas.
-1. To save the app, click **Save as New App**.
-1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
+1. Click **Start with Layout** in the onboarding modal.
+1. Select a layout. The pane on the right displays a preview of the app.
+1. Click **Use Layout**.
+1. The following steps are optional:
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To change the app name and description, click the app name.
+    - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. To save the app, click **Save**.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
+### Build an app from data
+
+You can get started with an app by importing data from one of the integrations listed in the [Action Catalog][17].
+
+1. From [App Builder][1], click **New App**. 
+1. Click **Start with Data** in the onboarding modal. 
+1. Choose an integration, then click **Continue**.
+1. Choose one or more actions. There is no limit to the number of actions you can choose. 
+1. Click **Create**.
+1. The following steps are optional: 
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To change the app name and description, click the app name.
+    - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. To save the app, click **Save**.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
+### Create a custom app
+
+If you don't want to use any of the methods above, you can create a new app from the blank App Builder canvas.
+
+1. From [App Builder][1], click **New App**. 
+1. Click **Start From Scratch**, or click the **X** to close the onboarding modal.
+1. The following steps are optional: 
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - Use [queries][12] to populate or interact with your canvas.
+    - To change the app name and description, click the app name.
+    - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
+1. To save the app, click **Save**.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
+### See what's possible with App Playground
+
+The App Playground is an interactive demo that guides users through creating and using an app. If you're new to App Builder, you can use the App Playground to learn about its core concepts, including: 
+- Data fetching
+- Displaying query data in a table
+- Configuring a button to fire a query
+- Configuring the loading states for a component to reflect a query's loading state
+- Visualizing data in a graph
+
+To access the App Playground:
+1. From [App Builder][1], click **New App**. 
+1. Click **App Playground**.
 
 ## Customize your app
 
@@ -79,7 +140,7 @@ Apps are made up of UI components and queries which interact with each other to 
 
 Basic customization:
 - To edit the **Name**, **Description**, or **Canvas Color** of your app, click the app name at the top left.
-- Click the **Preview** button to preview your app. Preview mode allows you to view the app from the user's perspective. Use preview mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
+- Click the **View** button to see your app from the user's perspective. Use view mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
 - To save your app, click **Save**.
 - When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
@@ -188,3 +249,11 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [13]: /service_management/app_builder/expressions
 [14]: https://app.datadoghq.com/app-builder/apps/list
 [15]: /actions/app_builder/build/#customize-your-app
+[16]: /getting_started/integrations/
+[17]: /actions/actions_catalog/
+[18]: /actions/app_builder/build/#build-an-app-from-a-blueprint
+[19]: /actions/app_builder/build/#build-an-app-from-a-layout
+[20]: /actions/app_builder/build/#build-an-app-from-an-action
+[21]: /actions/app_builder/build/#create-a-custom-app
+[22]: /actions/app_builder/build/#build-an-app-with-ai
+[23]: /actions/app_builder/build/#see-whats-possible-with-app-playground
