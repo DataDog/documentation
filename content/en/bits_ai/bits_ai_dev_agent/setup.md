@@ -80,6 +80,12 @@ When you launch the Dev Agent, it runs the setup command at startup and can use 
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
+## Troubleshooting
+
+### Missing GitHub permissions
+
+In some cases, GitHub requires the `workflows:write` permission for an app to create or update pull requests through the API, especially in repositories with many branches. Add this permission to your GitHub App in [Source Code Integration][5].
+
 [1]: /error_tracking
 [2]: /security/code_security  
 [3]: /profiler/
