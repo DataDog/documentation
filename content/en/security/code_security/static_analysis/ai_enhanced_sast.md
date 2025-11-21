@@ -1,6 +1,6 @@
 ---
 title: AI-Enhanced Static Code Analysis
-description: One line description
+description: Automate security decision-making across the entire static analysis lifecycle
 disable_toc: false
 aliases:
 - /security/code_security/static_analysis/malicious_pr_protection/
@@ -24,7 +24,6 @@ This document describes each of the AI-enhanced SAST features.
 | Malicious PR protection                 | Detect potentially malicious changes or suspicious diffs | At PR time or diff level                | Blocks or flags PRs introducing novel risky code          |
 | Validation and false-positive filtering | Suppress or deprioritize low-likelihood findings         | After scan or analysis                  | Reduce noise, allow focus on actual issues                |
 | AI-powered remediation                    | Generate suggested fixes or code changes                 | When the issue is validated or accepted | Reduces developer effort, accelerates fix cycle           |
-
 
 ## Malicious PR protection
 
@@ -130,7 +129,7 @@ AI-powered remediation uses the [Bits AI Dev Agent][10] to power single and mult
 
 ### Bulk remediation: Campaigns
 
-The **Campaign** is how you operationalize **AI-powered remediation** in Datadog.
+The **Campaign** is how you operationalize AI-powered remediation in Datadog.
 It connects SAST findings to automated fixes through customizable PR workflows with human-tunable AI behavior.
 
 When you create a campaign, the Bits AI Dev Campaign tool initiates a batched remediation to fix a subset of matching vulnerabilities. 
@@ -178,11 +177,14 @@ Session details include the following:
   - **Summary**: Recaps the impact of the fix and provides next steps or guidance if tests failed or PR needs to be rebased.
   - Bits AI chat field: Lets you interactively refine the fix or ask the AI follow-up questions. This makes remediation collaborative and tunable, giving security engineers control without needing to write the patch themselves.
 
-
-#### Scope
+### Scope
 
 AI-powered remediation is limited to SAST only for vulnerabilities within the OWASP Top 10 across all languages. It only applies to findings on the default branch.
 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/engineering/malicious-pull-requests/
 [2]: https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction
