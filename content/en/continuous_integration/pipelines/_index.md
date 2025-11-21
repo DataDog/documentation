@@ -22,11 +22,11 @@ cascade:
 
 ## Overview
 
-[Pipeline Visibility][1] provides a pipeline-first view into your CI health by displaying important metrics and results from your pipelines. It helps you troubleshoot pipeline failures, address performance bottlenecks, and track CI performance and reliability over time.
+[CI Visibility][1] provides a pipeline-first view into your CI health by displaying important metrics and results from your pipelines. It helps you troubleshoot pipeline failures, address performance bottlenecks, and track CI performance and reliability over time.
 
 ## Setup
 
-{{< whatsnext desc="Select your CI provider to set up Pipeline Visibility in Datadog:" >}}
+{{< whatsnext desc="Select your CI provider to set up CI Visibility in Datadog:" >}}
     {{< nextlink href="continuous_integration/pipelines/awscodepipeline" >}}AWS CodePipeline{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
@@ -41,98 +41,7 @@ cascade:
     {{< nextlink href="continuous_integration/pipelines/custom_tags_and_measures" >}}Custom Tags and Measures{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Terminology
-
-While the concept of a CI pipeline may vary depending on your provider, see how those concepts correspond to the definition of a CI pipeline in Datadog Pipeline Visibility:
-
-{{< tabs >}}
-{{% tab "GitHub Actions" %}}
-
-| Datadog  | GitHub Actions |
-|----------|----------------|
-| Pipeline | Workflow       |
-| Job      | Job            |
-| Step     | Step           |
-
-{{% /tab %}}
-{{% tab "GitLab" %}}
-
-| Datadog                    | GitLab   |
-|----------------------------|----------|
-| Pipeline                   | Pipeline |
-| Stage                      | Stage    |
-| Job                        | Job      |
-| _Not available in Datadog_ | Script   |
-
-{{% /tab %}}
-{{% tab "Jenkins" %}}
-
-| Datadog  | Jenkins  |
-|----------|----------|
-| Pipeline | Pipeline |
-| Stage    | Stage    |
-| Job      | Step     |
-
-{{% /tab %}}
-{{% tab "CircleCI" %}}
-
-| Datadog                    | CircleCI  |
-|----------------------------|-----------|
-| Pipeline                   | Workflow  |
-| Job                        | Job       |
-| _Not available in Datadog_ | Step      |
-
-{{% /tab %}}
-{{% tab "Buildkite" %}}
-
-| Datadog                    | Buildkite                       |
-|----------------------------|---------------------------------|
-| Pipeline                   | Build (execution of a pipeline) |
-| Job                        | Job (execution of a step)       |
-
-{{% /tab %}}
-{{% tab "TeamCity" %}}
-
-| Datadog                    | TeamCity    |
-|----------------------------|-------------|
-| Pipeline                   | Build Chain |
-| Job                        | Build       |
-| _Not available in Datadog_ | Step        |
-
-{{% /tab %}}
-{{% tab "Azure Pipelines" %}}
-
-| Datadog                    | Azure Pipelines |
-|----------------------------|-----------------|
-| Pipeline                   | Pipeline        |
-| Stage                      | Stage           |
-| Job                        | Job             |
-| _Not available in Datadog_ | Step            |
-
-{{% /tab %}}
-{{% tab "AWS CodePipeline" %}}
-
-| Datadog  | AWS CodePipeline |
-|----------|------------------|
-| Pipeline | Pipeline         |
-| Stage    | Stage            |
-| Job      | Action           |
-
-{{% /tab %}}
-
-{{% tab "Other CI Providers" %}}
-
-| Datadog  | Other CI Providers |
-|----------|--------------------|
-| Pipeline | Pipeline           |
-| Stage    | Stage              |
-| Job      | Job                |
-| Step     | Step               |
-
-{{% /tab %}}
-{{< /tabs >}}
-
-If your CI provider is not supported, you can try setting up Pipeline Visibility through the [public API endpoint][2].
+If your CI provider is not supported, you can try setting up CI Visibility through the [public API endpoint][2].
 
 ### Supported features
 
