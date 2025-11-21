@@ -62,7 +62,7 @@ Under the team's settings, in the **Permissions** tab, specify which users can m
 - Team managers and members
 - Anyone in the organization
 
-The list is sorted in order of increasing permissiveness. Each option in the list includes the group in the entries above it. For example, selecting "team managers" means that both team managers and users with user_access_manage can modify membership.
+The list is sorted in order of increasing permissiveness. Each option in the list includes the group in the entries above it. For example, selecting "team managers" means that both team managers and users with `user_access_manage` can modify membership.
 
 The option that you select for which users can add and remove members determines whether you can add the team to access control lists. Two types of teams exist: invite only teams and open teams.
 
