@@ -57,7 +57,7 @@ See the [sample `config_template.yaml` file][23] for all available configuration
 
 Use [Fleet Automation][39], the Datadog in-app workflow, to install, upgrade, configure, and troubleshoot the Datadog Agent on a single host or at scale. 
 
-See the [Agent documentation][40] for additional Agent configuriation for your specific platform.
+See the [Agent documentation][40] for additional Agent configuration for your specific platform.
 
 
 ## Data collected by the Agent
