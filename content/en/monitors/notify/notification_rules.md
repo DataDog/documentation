@@ -98,7 +98,7 @@ In your monitor configuration, the **Recipient Summary** shows recipients that a
 
 ## How matching works
 
-- Notification tagset = monitor tags ∪ tags of the firing group (for multi alert monitors). If a key has multiple values across monitor/group, all values are considered.
+- Notification tagset is the union of monitor tags and tags of the firing group (for multi alert monitors). If a key has multiple values across monitor/group, all values are considered.
 - Currently matches: A rule matches if at least one reporting group, combined with monitor tags, satisfies the scope; or, if the monitor tags alone do. NOT is evaluated per candidate tagset, so a group with a denied value won't match.
 - Could match when new groups report (multi alert monitors, Monitor edit surface): Treat each group-by key as present with any value, constrained by the monitor query's allow/deny filters.
 - If multiple rules match a single notification, recipients from all matching rules are merged and de-duplicated.
