@@ -5,6 +5,7 @@ disable_toc: false
 aliases:
 - '/developers/ide_integrations/'
 - '/developers/ide_integrations/visual_studio/'
+- '/developers/ide_plugins/visual_studio/'
 ---
 
 ## Overview
