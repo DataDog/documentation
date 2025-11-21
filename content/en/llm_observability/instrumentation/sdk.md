@@ -1997,11 +1997,11 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 `metric_type`
 : required - _string_
-<br />The type of the evaluation. Must be `categorical` or `score`.
+<br />The type of the evaluation. Must be `categorical`, `score`, or `boolean`.
 
 `value`
 : required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (`metric_type==categorical`) or integer/float (`metric_type==score`).
+<br />The value of the evaluation. Must be a string (`metric_type==categorical`), integer/float (`metric_type==score`), or boolean (`metric_type==boolean`).
 
 `span`
 : optional - _dictionary_
@@ -2079,7 +2079,7 @@ def llm_call():
     return completion
 {{< /code-block >}}
 
-[1]: https://app.datadoghq.com/llm/settings/evaluations
+[1]: https://app.datadoghq.com/llm/evaluations
 
 {{% /tab %}}
 

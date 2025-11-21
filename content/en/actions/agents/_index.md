@@ -11,7 +11,7 @@ further_reading:
   text: "What are AI agents and how do they work?"
 ---
 
-{{< callout url="https://app.datadoghq.com/actions/agents" btn_hidden="false" header="Join the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/agent-builder/" btn_hidden="false" header="Join the Preview!" >}}
 Agents are in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
@@ -23,7 +23,7 @@ When building an agent, choose a blueprint to get started. Blueprints come with 
 
 {{< img src="/actions/agents/blank-new-agent.png" alt="The Agents page, filtered to show only 'My agents'" style="width:100%;" >}}
 
-## Agents dashboard
+## Agents page
 
 You can create a new agent from the [Agents][1] page. The page lists information about existing agents, including the following:
 - Agent Name
