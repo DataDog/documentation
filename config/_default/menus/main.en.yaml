@@ -1483,11 +1483,6 @@ menu:
       identifier: bits_ai_sre_investigate_alerts
       parent: bits_ai_sre
       weight: 100
-    - name: Coordinate incidents
-      url: bits_ai/bits_ai_sre/coordinate_incidents
-      identifier: bits_ai_sre_coordinate_incidents
-      parent: bits_ai_sre
-      weight: 101
     - name: Bits AI Dev Agent
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
@@ -1691,11 +1686,6 @@ menu:
       identifier: ddsql_editor
       parent: platform_heading
       weight: 30000
-    - name: Getting Started
-      url: ddsql_editor/getting_started
-      parent: ddsql_editor
-      identifier: ddsql_editor_getting_started
-      weight: 1
     - name: Reference Tables
       url: reference_tables/
       pre: inventories
@@ -2480,71 +2470,81 @@ menu:
       parent: incident_investigate
       identifier: incident_investigate_follow_ups
       weight: 502
+    - name: Incident AI
+      url: service_management/incident_management/incident_ai
+      identifier: incident_ai
+      parent: incidents
+      weight: 6
     - name: Incident Settings
       url: service_management/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 6
+      weight: 7
     - name: Information
       url: service_management/incident_management/incident_settings/information
       parent: incidents_settings
       identifier: incidents_settings_information
-      weight: 601
+      weight: 701
     - name: Property Fields
       url: service_management/incident_management/incident_settings/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
-      weight: 602
+      weight: 702
     - name: Responder Types
       url: service_management/incident_management/incident_settings/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
-      weight: 603
+      weight: 703
     - name: Integrations
       url: service_management/incident_management/incident_settings/integrations
       parent: incidents_settings
       identifier: incidents_settings_integrations
-      weight: 604
+      weight: 704
     - name: Notification Rules
       url: service_management/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 605
+      weight: 705
     - name: Templates
       url: service_management/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 606
+      weight: 706
     - name: Incident Analytics
       url: service_management/incident_management/analytics
       parent: incidents
       identifier: analytics
-      weight: 7
+      weight: 8
     - name: Integrations
       url: service_management/incident_management/integrations
       parent: incidents
       identifier: incidents_integrations
       weight: 9
-    - name: Jira
-      url: service_management/incident_management/integrations/jira
-      parent: incidents_integrations
-      identifier: incidents_integrations_jira
-      weight: 901
     - name: Slack
       url: service_management/incident_management/integrations/slack
       parent: incidents_integrations
       identifier: incidents_integrations_slack
+      weight: 901
+    - name: Microsoft Teams
+      url: service_management/incident_management/integrations/microsoft_teams
+      parent: incidents_integrations
+      identifier: incidents_microsoft_teams
       weight: 902
+    - name: Jira
+      url: service_management/incident_management/integrations/jira
+      parent: incidents_integrations
+      identifier: incidents_integrations_jira
+      weight: 903
     - name: Status Pages
       url: service_management/incident_management/integrations/status_pages
       parent: incidents_integrations
       identifier: incidents_integrations_status_pages
-      weight: 903
+      weight: 904
     - name: Atlassian Statuspage
       url: service_management/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
-      weight: 904
+      weight: 905
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
@@ -2960,6 +2960,12 @@ menu:
       parent: datastores
       identifier: auth
       weight: 4
+    - name: Forms
+      url: actions/forms/
+      pre: file-wui
+      parent: actions_heading
+      identifier: forms
+      weight: 50000
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
@@ -3106,251 +3112,256 @@ menu:
       parent: containers
       identifier: containers_autoscaling
       weight: 2
+    - name: Remediation
+      url: containers/bits_ai_kubernetes_remediation
+      parent: containers
+      identifier: containers_autoscaling
+      weight: 3
     - name: Docker and other runtimes
       url: containers/docker/
       parent: containers
       identifier: containers_docker
-      weight: 3
+      weight: 4
     - name: APM
       url: containers/docker/apm/
       parent: containers_docker
       identifier: containers_docker_apm
-      weight: 301
+      weight: 401
     - name: Log collection
       url: containers/docker/log/
       parent: containers_docker
       identifier: containers_docker_log
-      weight: 302
+      weight: 402
     - name: Tag extraction
       url: containers/docker/tag/
       parent: containers_docker
       identifier: containers_docker_tag
-      weight: 303
+      weight: 403
     - name: Integrations
       url: containers/docker/integrations/
       parent: containers_docker
       identifier: containers_docker_integrations
-      weight: 304
+      weight: 404
     - name: Prometheus
       url: containers/docker/prometheus/
       parent: containers_docker
       identifier: containers_docker_prometheus
-      weight: 305
+      weight: 405
     - name: Data Collected
       url: containers/docker/data_collected/
       parent: containers_docker
       identifier: containers_docker_data_collected
-      weight: 306
+      weight: 406
     - name: Kubernetes
       url: containers/kubernetes/
       parent: containers
       identifier: containers_kubernetes
-      weight: 4
+      weight: 5
     - name: Installation
       url: containers/kubernetes/installation
       parent: containers_kubernetes
       identifier: containers_kubernetes_installation
-      weight: 401
+      weight: 501
     - name: Further Configuration
       url: containers/kubernetes/configuration
       parent: containers_kubernetes
       identifier: containers_kubernetes_configuration
-      weight: 402
+      weight: 502
     - name: Distributions
       url: containers/kubernetes/distributions
       parent: containers_kubernetes
       identifier: containers_kubernetes_distributions
-      weight: 403
+      weight: 503
     - name: APM
       url: containers/kubernetes/apm/
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
-      weight: 404
+      weight: 504
     - name: Log collection
       url: containers/kubernetes/log/
       parent: containers_kubernetes
       identifier: containers_kubernetes_log
-      weight: 405
+      weight: 505
     - name: Tag extraction
       url: containers/kubernetes/tag/
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
-      weight: 406
+      weight: 506
     - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
-      weight: 407
+      weight: 507
     - name: Prometheus & OpenMetrics
       url: containers/kubernetes/prometheus/
       parent: containers_kubernetes
       identifier: containers_kubernetes_prometheus
-      weight: 408
+      weight: 508
     - name: Control plane monitoring
       url: containers/kubernetes/control_plane/
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
-      weight: 409
+      weight: 509
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 410
+      weight: 510
     - name: Datadog CSI Driver
       url: containers/kubernetes/csi_driver
       parent: containers_kubernetes
       identifier: csi_driver
-      weight: 411
+      weight: 511
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 412
+      weight: 512
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
       identifier: containers_cluster
-      weight: 5
+      weight: 6
     - name: Setup
       url: containers/cluster_agent/setup/
       parent: containers_cluster
       identifier: cluster_agent_setup
-      weight: 501
+      weight: 601
     - name: Commands & Options
       url: containers/cluster_agent/commands/
       identifier: cluster_agent_commands
       parent: containers_cluster
-      weight: 502
+      weight: 602
     - name: Cluster Checks
       identifier: containers_cluster_agent_clusterchecks
       url: containers/cluster_agent/clusterchecks/
       parent: containers_cluster
-      weight: 503
+      weight: 603
     - name: Endpoint Checks
       identifier: containers_cluster_agent_endpoint_checks
       url: containers/cluster_agent/endpointschecks/
       parent: containers_cluster
-      weight: 504
+      weight: 604
     - name: Admission Controller
       identifier: containers_cluster_agent_admission_controller
       url: containers/cluster_agent/admission_controller/
       parent: containers_cluster
-      weight: 505
+      weight: 605
     - name: Amazon ECS
       url: containers/amazon_ecs/
       parent: containers
       identifier: containers_amazon_ecs
-      weight: 6
+      weight: 7
     - name: APM
       url: containers/amazon_ecs/apm/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_apm
-      weight: 601
+      weight: 701
     - name: Log collection
       url: containers/amazon_ecs/logs/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_logs
-      weight: 602
+      weight: 702
     - name: Tag extraction
       url: containers/amazon_ecs/tags/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_tags
-      weight: 603
+      weight: 703
     - name: Data collected
       url: containers/amazon_ecs/data_collected/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_data_collected
-      weight: 604
+      weight: 704
     - name: AWS Fargate
       url: integrations/ecs_fargate/
       parent: containers
       identifier: ecs_fargate
-      weight: 7
+      weight: 8
     - name: Datadog Operator
       url: containers/datadog_operator
       identifier: containers_datadog_operator
       parent: containers
-      weight: 8
+      weight: 9
     - name: Advanced Install
       url: containers/datadog_operator/advanced_install
       identifier: containers_datadog_operator_installation
       parent: containers_datadog_operator
-      weight: 801
+      weight: 901
     - name: Configuration
       url: containers/datadog_operator/config
       identifier: containers_datadog_operator_configuration
       parent: containers_datadog_operator
-      weight: 802
+      weight: 902
     - name: Custom Checks
       url: containers/datadog_operator/custom_check
       identifier: containers_datadog_operator_customchecks
       parent: containers_datadog_operator
-      weight: 803
+      weight: 903
     - name: Data Collected
       url: containers/datadog_operator/data_collected
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
-      weight: 804
+      weight: 904
     - name: kubectl Plugin
       url: containers/datadog_operator/kubectl_plugin
       identifier: containers_datadog_operator_kubectlplugin
       parent: containers_datadog_operator
-      weight: 805
+      weight: 905
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 806
+      weight: 906
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 807
+      weight: 907
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 808
+      weight: 908
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 809
+      weight: 909
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
       identifier: containers_troubleshooting
-      weight: 9
+      weight: 10
     - name: Duplicate hosts
       url: containers/troubleshooting/duplicate_hosts
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_duplicate_hosts
-      weight: 901
+      weight: 1001
     - name: Cluster Agent
       url: containers/troubleshooting/cluster-agent
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_cluster_agent
-      weight: 902
+      weight: 1002
     - name: Cluster Checks
       url: containers/troubleshooting/cluster-and-endpoint-checks
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_cluster_and_endpoint_checks
-      weight: 903
+      weight: 1003
     - name: HPA and Metrics Provider
       url: containers/troubleshooting/hpa
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_hpa
-      weight: 904
+      weight: 1004
     - name: Admission Controller
       url: containers/troubleshooting/admission-controller
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_admission_controller
-      weight: 905
+      weight: 1005
     - name: Guides
       url: containers/guide
       parent: containers
       identifier: containers_guide
-      weight: 10
+      weight: 11
     - name: Processes
       url: infrastructure/process
       identifier: process
@@ -5486,6 +5497,21 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
+    - name: Setup
+      url: feature_flags/setup
+      parent: feature_flags
+      identifier: feature_flags_setup
+      weight: 1
+    - name: Android and Android TV
+      url: feature_flags/setup/android
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_android
+      weight: 101
+    - name: iOS and tvOS
+      url: feature_flags/setup/ios
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_ios
+      weight: 102
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -7314,7 +7340,7 @@ menu:
       weight: 3
     - name: Recording Steps
       identifier: synthetics_browser_tests_recording_steps
-      url: synthetics/browser_tests/actions
+      url: synthetics/browser_tests/test_steps
       parent: synthetics_browser_tests
       weight: 301
     - name: Browser Testing Results

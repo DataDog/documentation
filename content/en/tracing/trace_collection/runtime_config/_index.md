@@ -6,8 +6,6 @@ further_reading:
   text: "Remote Configuration"
 ---
 
-<div class="alert alert-info">This feature is in Preview.</div>
-
 ## Overview
 
 Configuration at runtime lets you modify APM library configuration from the Datadog UI, without needing to restart your application or service. You don't need to wait for a new deployment or code change to update your configuration. Instead, update it right away with configuration at runtime.

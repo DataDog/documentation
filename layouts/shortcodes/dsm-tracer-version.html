@@ -86,6 +86,15 @@
       1.42.2 or later
     {{- end -}}
   {{- end -}}
+<!-- IBM MQ (ibmmqjmsclient) -->
+  {{- if eq (.Get "lib") "ibmmqjmsclient" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.55.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.55.0 or later
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
 <!-- Python -->
