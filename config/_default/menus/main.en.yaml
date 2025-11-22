@@ -2101,6 +2101,11 @@ menu:
       parent: software_catalog_entity_model
       identifier: software_catalog_entity_types
       weight: 1021
+    - name: AI-generated Systems
+      url: internal_developer_portal/software_catalog/entity_model/ai-generated-systems
+      parent: software_catalog_entity_model
+      identifier: software_catalog_ai_generated_systems
+      weight: 1022
     - name: Troubleshooting
       url: internal_developer_portal/software_catalog/troubleshooting
       parent: software_catalog
