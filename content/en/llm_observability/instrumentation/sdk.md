@@ -1919,6 +1919,43 @@ The versioning system works as follows:
 
 This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
 
+## Cost tracking
+Attach token or cost metrics to the LLM/embedding span so you can view cost data.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Use `LLMObs.annotate(metrics=...)` to attach token or cost metrics for a LLM/embedding call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
+
+#### Arguments
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="cost-tracking-arguments" %}}
+
+`metrics`
+: optional - dictionary
+<br />Token: `input_tokens`, `output_tokens`, `total_tokens`, `non_cached_input_tokens`, `cache_read_input_tokens`, `cache_write_input_tokens`
+<br />Cost (in dollars): `input_cost`, `output_cost`, `total_cost`, `non_cached_input_cost`, `cache_read_input_cost`, `cache_write_input_cost`
+
+{{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="model_name", model_provider="model_provider")
+def llm_call(prompt):
+    resp = ... # llm call here
+    LLMObs.annotate(
+        metrics={"total_tokens": 10, "total_cost": 1.5,},
+    )
+    return resp
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Evaluations
 
 The LLM Observability SDK provides methods to export and submit your evaluations to Datadog.
