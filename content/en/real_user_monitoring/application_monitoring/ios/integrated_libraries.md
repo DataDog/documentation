@@ -56,6 +56,8 @@ network requests][4].
    ]
    ```
 
+   **Note**: This package is a work in progress, currently awaiting its first release.
+
 4. Add the Datadog interceptor to your Apollo Client setup:
 
    ```swift
@@ -65,7 +67,7 @@ network requests][4].
    class CustomInterceptorProvider: DefaultInterceptorProvider {
        override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
            var interceptors = super.interceptors(for: operation)
-           interceptors.insert(DatadogApollo.createInterceptor(), at: 0)
+           interceptors.insert(DatadogApolloInterceptor(), at: 0)
            return interceptors
        }
    }
