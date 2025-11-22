@@ -235,6 +235,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 
 - `core`: The default toolset
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][21]
+- `alerting`: Tools for interacting with Datadog [Monitors][24] and related resources
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
 
@@ -391,6 +392,12 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
+### `validate_monitor_definition`
+*Toolset: **alerting***\
+Validate a monitor definition.
+
+- This tool should be called each time that a monitor definition is created, generated, or modified. Pass in the 
+
 ## Context efficiency
 
 The Datadog MCP Server is optimized to provide responses in a way that AI agents get relevant context without being overloaded with unnecessary information. For example:
@@ -433,3 +440,4 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [21]: /synthetics/
 [22]: https://kiro.dev/
 [23]: /account_management/org_settings/service_accounts/
+[24]: /monitors/
