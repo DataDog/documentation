@@ -96,7 +96,9 @@ Playlists are collections of Session Replays you can aggregate in a folder-like 
 Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. Datadog recommends using a single solution to restrict logs data. If you limit user access using both Data Access Control and log restriction queries, both sets of restrictions apply.
 
 ### Monitors
-Users can create Monitors that query and alert on active telemetry. While the user will only be able to directly query data they’re allowed to access, the Monitor will operate as a System User with full access to data. This gap will be addressed in a future iteration. We encourage customers who are concerned about this to carefully monitor which Monitors are created by their users and restrict the ability to create these Monitors.
+Users can create monitors that query and alert on active telemetry. While the user can only directly query data they're allowed to access, the monitor operates as a system user with full access to data.
+
+If you are concerned about unauthorized data access through monitors, Datadog recommends that you track the monitors your users create. Then, restrict access to the creation of monitors that read sensitive data.
 
 ### Software Delivery repository info (CI Visibility pipelines)
 
