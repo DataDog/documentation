@@ -132,6 +132,15 @@ The table below describes the impact of these permissions in both Cloud Cost Man
 ### Data access control preview
 More granular tag-level restrictions are available as part of the [Data Access Control Preview][6]. To request preview access, fill out [this form][7].
 
+## Review data history
+
+Monitor the freshness and processing status of your cloud cost data on the **Cloud Cost > Settings** page. You can view when:
+- Billing data was last ingested
+- Tag pipeline rules and custom allocation rules were last applied
+- Bills were last received and processed for each cloud provider.
+
+Use this information to troubleshoot data delays or verify that recent configuration changes have been applied to your cost data.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
