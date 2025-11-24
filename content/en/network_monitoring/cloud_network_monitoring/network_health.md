@@ -39,7 +39,7 @@ Each recommended action displays:
 - The impacted client service (the service making requests)
 - The impacted server service (the service receiving requests)
 
-Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [New Workflow][2], [Create a Case][3], or [Declare an Incident][4].
+Hover over a service name to pivot to APM, or click **Remediate** to view remediation steps along with options to create a [New Workflow][2], [Create a Case][3], or [Declare an Incident][4].
 
    {{< img src="network_performance_monitoring/network_health/recommended_actions_side_panel.png" alt="Recommended actions side panel of an affected service, showing remediation steps." style="width:100%;">}}
 
