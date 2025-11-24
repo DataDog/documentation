@@ -261,7 +261,7 @@ SSI automatically disables when it detects:
   - Blackfire
   - pcov
 
-<div class="alert alert-info">If you need to run SSI alongside these tools, you can force it to enable by setting: <code>DD_INJECT_FORCE=true</code></div>
+<div class="alert alert-info">If you need to run SSI alongside these tools, you can force it to enable by setting <code>DD_INJECT_FORCE=true</code>.</div>
 
 [1]: /tracing/trace_collection/compatibility/php
 
