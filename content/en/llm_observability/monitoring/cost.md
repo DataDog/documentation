@@ -1,6 +1,6 @@
 ---
 title: Cost
-description: Use Cost Tracking to view your LLM tokens and cost.
+description: Monitor your LLM tokens and costs.
 ---
 {{< img src="llm_observability/cost_tracking_overview.png" alt="Cost view for an app in LLM Observability." style="width:100%;" >}}
 
@@ -13,27 +13,27 @@ Use cases:
 - Track changes in token usage and cost over time to proactively guard against higher bills in the future
 - Correlate LLM cost with overall application performance, model versions, model providers, and prompt details in a single view
 
-## Set up Cost Monitoring
-You can monitor your LLM costs in Datadog using either automatic or manual configuration.Automatic cost calculation is provided out of the box for major LLM providers, in which case Datadog automatically estimates the cost by:
-- Using the token counts attached to the LLM/embedding span, provided either by the auto-instrumentation or by your manual token annotations, and
-- Applying the model provider’s public pricing rates for the specific model
+## Set up monitoring costs
 
-You can also supply your own cost data manually. In this case, Datadog will use your values directly instead of calculating our own estimates.
+Datadog provides two ways to monitor your LLM costs:
+- [Automatic](#automatic): Use [supported LLM providers'](#supported-providers) public pricing rates
+- [Manual](#manual): For custom pricing rates, self-hosted models, or unsupported providers, manually supply your own cost values.
 
-### Automatic
-If your LLM requests involve any of the [supported providers listed below](#supported-providers), Datadog will automatically calculate the cost of each request for each LLM/embedding span with annotated token metrics.
+### Automatic 
+If your LLM requests involve any of the [listed supported providers](#supported-providers), Datadog automatically calculates the cost of each request based on the following:
 
-Token counts used for this calculation come from [Datadog’s auto-instrumentation][1] or from user annotations.
+- Token counts attached to the LLM/embedding span, provided by either [auto-instrumentation][1] or manual user annotation
+- The model provider's public pricing rates
 
 ### Manual
-For users with custom pricing rates, self-hosted models, or unsupported providers, you can manually provide cost values on your LLM/embedding spans. To manually supply cost information, follow the instrumentation steps described in [SDK Reference][2] or in [API][3].
+To manually supply cost information, follow the instrumentation steps described in the [SDK Reference][2] or [API][3].
 
 <div class="alert alert-info">If you provide partial cost information, Datadog tries to estimate missing information. For example, if you supply a total cost but not input/output cost values, Datadog uses provider pricing and token values annotated on your span to compute the input/output cost values. This can cause a mismatch between your manually provided total cost and the sum of Datadog’s computed input/output costs. Datadog always displays your provided total cost as-is, even if these values differ.</div>
 
 ## Supported providers
 Datadog automatically calculates the cost of LLM requests made to the following supported providers using the publicly available pricing information from their official documentation.
 
-<div class="alert alert-info">Datadog currently supports monitoring costs for text-based models only.</div>
+<div class="alert alert-info">Datadog only supports monitoring costs for text-based models.</div>
 
 - OpenAI: [OpenAI Pricing][4]
 - Anthropic: [Claude Pricing][5]
@@ -42,24 +42,25 @@ Datadog automatically calculates the cost of LLM requests made to the following 
 - Google Gemini: [Gemini Pricing][7]
 
 ## Metrics
-You can find Cost metrics in [LLM Observability Metrics][8].
+You can find cost metrics in [LLM Observability Metrics][8].
 
 The cost metrics include a `source` tag to indicate where the value originated:
-- `source:user` — manually provided
 - `source:auto` — automatically calculated
+- `source:user` — manually provided
 
-## View Cost in LLM Observability
-View your app in LLM Observability and select **Cost** on the left. The _Cost view_ features the following information:
-- **Summary**: A high-level overview of your LLM usage over time. This includes Total Cost, Cost Change, Total Tokens, and Token Change
-- **Breakdown by Token Type**: A detailed breakdown of token usage, along with their associated costs
-- **Breakdown by Provider/Model and Prompt ID/Version**: Cost and token usage broken down by LLM provider and model, and individual prompts or prompt versions that is powered by [Prompt Tracking][9]
+
+## View costs in LLM Observability
+View your app in LLM Observability and select **Cost** on the left. The _Cost view_ features:
+- A high-level overview of your LLM usage over time. This includes Total Cost, Cost Change, Total Tokens, and Token Change
+- **Breakdown by Token Type**: A breakdown of token usage, along with associated costs
+- **Breakdown by Provider/Model** or **Prompt ID/Version**: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions ( powered by [Prompt Tracking][9])
 - **Most Expensive LLM Calls**: A list of your most expensive requests
 
 {{< img src="llm_observability/cost_tracking_trace.png" alt="Cost data in trace detail." style="width:100%;" >}}
 
 Cost data is also available within your application’s traces and spans, allowing you to understand cost at both the request (trace) and operation level (span).
 Click any trace or span to open a detailed side-panel view that includes cost metrics for the full trace and for each individual LLM call.
-At the top of the trace view, the banner shows aggregated cost information for the full trace, including Estimated Cost and Total Tokens. Hovering over these values reveals a breakdown of input and output token/costs.
+At the top of the trace view, the banner shows aggregated cost information for the full trace, including estimated cost and total tokens. Hovering over these values reveals a breakdown of input and output token/costs.
 
 Selecting an individual LLM span shows similar cost metrics specific to that LLM request.
 
