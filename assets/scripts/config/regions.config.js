@@ -591,12 +591,12 @@ export default {
   },
   kotlin_multiplatform_site_config: {
     us: '',
-    us3: '\n            .useSite(DatadogSite.US3)\n            .trackCrashes(true)',
-    us5: '\n            .useSite(DatadogSite.US5)\n            .trackCrashes(true)',
-    eu: '\n            .useSite(DatadogSite.EU1)\n            .trackCrashes(true)',
-    ap1: '\n            .useSite(DatadogSite.AP1)\n            .trackCrashes(true)',
-    ap2: '\n            .useSite(DatadogSite.AP2)\n            .trackCrashes(true)',
-    gov: '\n            .useSite(DatadogSite.US1_FED)\n            .trackCrashes(true)'
+    us3: '\n        .useSite(DatadogSite.US3)\n        .trackCrashes(true)',
+    us5: '\n        .useSite(DatadogSite.US5)\n        .trackCrashes(true)',
+    eu: '\n        .useSite(DatadogSite.EU1)\n        .trackCrashes(true)',
+    ap1: '\n        .useSite(DatadogSite.AP1)\n        .trackCrashes(true)',
+    ap2: '\n        .useSite(DatadogSite.AP2)\n        .trackCrashes(true)',
+    gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
   ios_site_swift: {
     us: '',

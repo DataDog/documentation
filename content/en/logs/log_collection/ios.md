@@ -74,8 +74,7 @@ DatadogLogs.xcframework
 
 For more information about setting up a client token, see the [client token documentation][2].
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+#### Swift
 
 ```swift
 import DatadogCore
@@ -92,8 +91,9 @@ Datadog.initialize(
 
 Logs.enable()
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+#### Objective-C
+
 ```objective-c
 {{< region-param key=ios_site_objc >}}DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";{{< region-param key=ios_site_objc_config >}}
@@ -103,8 +103,6 @@ configuration.service = @"<service name>";{{< region-param key=ios_site_objc_con
 
 [DDLogs enable];
 ```
-{{% /tab %}}
-{{< /tabs >}}
 
 To be compliant with the GDPR regulation, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:

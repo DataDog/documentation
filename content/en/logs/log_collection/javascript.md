@@ -37,8 +37,7 @@ In Datadog, navigate to [**Organization Settings > New Client Tokens**][1]
 
 Choose the installation method for the Browser SDK.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+#### NPM
 
 For modern web applications, Datadog recommends installing through Node Package Manager (npm). The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may not capture errors or console logs that occur before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.  
 
@@ -46,8 +45,7 @@ Add [`@datadog/browser-logs`][13] to your `package.json` file. For example, if y
 
 [13]: https://www.npmjs.com/package/@datadog/browser-logs
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+#### CDN async
 
 Web applications with performance targets should install through CDN async. The Browser SDK loads from Datadog's CDN asynchronously, ensuring it doesn't impact page load performance. However, the SDK may not capture errors or console logs that occur before the SDK is initialized.  
 
@@ -63,8 +61,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+#### CDN sync
 
 To collect all events, you should install through CDN sync. The Browser SDK loads from Datadog's CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.  
 
@@ -76,9 +73,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
     type="text/javascript">
 </script>
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Step 3 - Initialize the Logs Browser SDK
 
