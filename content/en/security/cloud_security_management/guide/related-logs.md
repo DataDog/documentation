@@ -4,27 +4,30 @@ title: View a misconfiguration's related logs
 
 Datadog Cloud Security's Related Logs feature allows you to quickly identify cloud audit logs that relate to a specific cloud resource. When investigating a misconfiguration, this can help you understand:
 - Who created the resource
-- Who last modified the resource, possibly introducing the misconfiguration
+- Who last modified the resource
 
 ## Supported cloud providers
 
 Related Logs supports the following:
-- AWS CloudTrail logs. CloudTrail events lack a standardized format that would allow a generic Logs query, but Related Logs uses an internal service that maps resource attributes to CloudTrail event fields, enabling Datadog to identify related CloudTrail logs. Here's a sample Logs query that Related Logs automatically generates and runs to find related CloudTrail logs.
+- AWS CloudTrail logs
+
+  **Note**: CloudTrail events do not follow a standardized schema that supports a generic Logs query. Related Logs uses an internal mapping service to match resource attributes to CloudTrail event fields, allowing Datadog to generate the full query needed to identify related CloudTrail activity.
 - Azure Activity Logs
 
 ## Prerequisites
 
 ### AWS
 
-- Set up [CloudTrail logs][1].
-- Related Logs supports the following AWS resources:
+Set up [CloudTrail logs][1].
+
+Related Logs supports the following AWS resources:
   {{< related-logs-supported-resources >}}
 
-    To request additional resource types, fill out the [feedback form][4].
+To request additional resource types, fill out the [feedback form][4].
 
 ### Azure
 
-- Set up [Azure Activity Logs][5]
+Set up [Azure Activity Logs][5].
 
 ## View related logs
 
@@ -33,7 +36,7 @@ Related Logs supports the following:
 
 ### Search through a larger time frame
 
-By default, Related Logs looks through the last two weeks of related cloud logs. To extend the search to a larger time frame:
+By default, Related Logs searches the last two weeks of related cloud logs. To extend the search to a larger time frame:
 
 1. While viewing a misconfiguration's related logs, click **View All Related Logs**. The search used to populate the list opens in Log Explorer.
 1. In the upper-right corner, change the timeframe of the search.
@@ -42,11 +45,11 @@ By default, Related Logs looks through the last two weeks of related cloud logs.
 
 ### Search through Flex Logs
 
-If you're using Flex logs, you can the **Include Flex logs** toggle in the **Related Logs** tab to show related cloud logs that are stored as Flex logs.
+If your organization uses Flex Logs, toggle **Include Flex logs** in the **Related Logs** tab to display related audit logs stored as Flex Logs.
 
 ## Sample generated queries
 
-The following examples show the type of Logs queries Related Logs generates to identify events associated with a specific cloud resource.
+Related Logs generates structured Logs queries based on the selected cloud resource. The following examples illustrate typical queries.
 
 ### AWS CloudTrail
 
