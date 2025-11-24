@@ -1,0 +1,16 @@
+options:
+
+- label: Brachiosaurus
+  id: brachiosaurus
+
+- label: Triceratops
+  id: triceratops
+
+- label: Stegosaurus
+  id: stegosaurus
+
+- label: Ankylosaurus
+  id: ankylosaurus
+
+- label: Diplodocus
+  id: diplodocus
