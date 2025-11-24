@@ -49,6 +49,7 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 {{% /collapse-content %}}
 
 {{% collapse-content title="Terraform" level="h4" id="terraform-log-setup" %}}
+
 #### Choose the Terraform setup method if…
 
 - You manage infrastructure as code and want to keep the Datadog Google Cloud integration under version control.
@@ -56,6 +57,9 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 - You want a repeatable, auditable deployment process that fits into your Terraform-managed environment.
 
 #### Instructions
+
+{{< tabs >}}
+{{% tab "Datadog UI-based setup" %}}
 
 1. In the [Google Cloud integration tile][200], select the **Log Collection** tab.
 1. Select **Terraform**.
@@ -72,11 +76,177 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 1. Optionally, choose to specify inclusion and exclusion filters using Google Cloud's [logging query language][203].
 
 
+You can also use the [terraform-gcp-datadog-integration][205] module to manage this infrastructure through Terraform
+
 [200]: https://app.datadoghq.com/integrations/gcp
 [201]: https://docs.cloud.google.com/dataflow/docs/streaming-engine#benefits
 [202]: https://docs.cloud.google.com/dataflow/docs/guides/enable-dataflow-prime
 [203]: https://cloud.google.com/logging/docs/view/logging-query-language
+{{% /tab %}}
+
+{{% tab "Manual setup with the `terraform-gcp-datadog-integration` Terraform module" %}}
+
+See the instructions on the [`terraform-gcp-datadog-integration`][300] repo to set up and manage the necessary infrastructure through Terraform.
+
+[300]: https://github.com/GoogleCloudPlatform/terraform-gcp-datadog-integration?tab=readme-ov-file#log-collection-integration---google-cloud-platform-to-datadog
+{{% /tab %}}
+{{< /tabs >}}
+
 {{% /collapse-content %}}
+
+{{% collapse-content title="Manual" level="h4" id="manual-logging-setup" %}}
+
+The instructions in this section guide you through the process of:
+
+1. Creating a Pub/Sub [topic][401] and [pull subscription][402] to receive logs from a configured log sink
+2. Creating a custom Dataflow worker service account to provide [least privilege][403] to your Dataflow pipeline workers
+3. Creating a [log sink][404] to publish logs to the Pub/Sub topic
+4. Creating a Dataflow job using the [Datadog template][400] to stream logs from the Pub/Sub subscription to Datadog
+
+You have full control over which logs are sent to Datadog through the logging filters you create in the log sink, including GCE and GKE logs. See Google's [Logging query language page][405] for information about writing filters. For a detailed examination of the created architecture, see [Stream logs from Google Cloud to Datadog][406] in the Cloud Architecture Center.
+
+**Note**: You must enable the **Dataflow API** to use Google Cloud Dataflow. See [Enabling APIs][407] in the Google Cloud documentation for more information.
+
+To collect logs from applications running in GCE or GKE, you can also use the [Datadog Agent][408].
+
+#### 1. Create a Cloud Pub/Sub topic and subscription
+
+1. Go to the [Cloud Pub/Sub console][409] and create a new topic. Select the option **Add a default subscription** to simplify the setup.
+
+   **Note**: You can also manually configure a [Cloud Pub/Sub subscription][410] with the **Pull** delivery type. If you manually create your Pub/Sub subscription, leave the `Enable dead lettering` box **unchecked**. For more details, see [Unsupported Pub/Sub features][411].
+
+{{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="The Create a topic page in the Google Cloud Console with the Add a default subscription checkbox selected" style="width:80%;">}}
+
+2. Give that topic an explicit name such as `export-logs-to-datadog` and click **Create**.
+
+3. Create an additional topic and default subscription to handle any log messages rejected by the Datadog API. The name of this topic is used within the Datadog Dataflow template as part of the path configuration for the `outputDeadletterTopic` [template parameter][412]. When you have inspected and corrected any issues in the failed messages, send them back to the original `export-logs-to-datadog` topic by running a [Pub/Sub to Pub/Sub template][413] job.
+
+4. Datadog recommends creating a secret in [Secret Manager][414] with your valid Datadog API key value, for later use in the Datadog Dataflow template.
+
+**Warning**: Cloud Pub/Subs are subject to [Google Cloud quotas and limitations][415]. If the number of logs you have exceeds those limitations, Datadog recommends you split your logs over several topics. See [the Monitor the Pub/Sub Log Forwarding section](#monitor-the-cloud-pubsub-log-forwarding) for information on setting up monitor notifications if you approach those limits.
+
+#### 2. Create a custom Dataflow worker service account
+
+The default behavior for Dataflow pipeline workers is to use your project's [Compute Engine default service account][416], which grants permissions to all resources in the project. If you are forwarding logs from a **Production** environment, you should instead create a custom worker service account with only the necessary roles and permissions, and assign this service account to your Dataflow pipeline workers.
+
+1. Go to the [Service Accounts][417] page in the Google Cloud console and select your project.
+2. Click **CREATE SERVICE ACCOUNT** and give the service account a descriptive name. Click **CREATE AND CONTINUE**.
+3. Add the roles in the required permissions table and click **DONE**.
+
+##### Required permissions
+
+[Dataflow Admin][418]
+: `roles/dataflow.admin` <br> Allow this service account to perform Dataflow administrative tasks.
+
+[Dataflow Worker][419]
+: `roles/dataflow.worker` <br> Allow this service account to perform Dataflow job operations.
+
+[Pub/Sub Viewer][420]
+: `roles/pubsub.viewer` <br> Allow this service account to view messages from the Pub/Sub subscription with your Google Cloud logs.
+
+[Pub/Sub Subscriber][421]
+: `roles/pubsub.subscriber` <br> Allow this service account to consume messages from the Pub/Sub subscription with your Google Cloud logs.
+
+[Pub/Sub Publisher][422]
+: `roles/pubsub.publisher`<br> Allow this service account to publish failed messages to a separate subscription, which allows for analysis or resending the logs.
+
+[Secret Manager Secret Accessor][423]
+: `roles/secretmanager.secretAccessor` <br> Allow this service account to access the Datadog API key in Secret Manager.
+
+[Storage Object Admin][424]
+: `roles/storage.objectAdmin`<br> Allow this service account to read and write to the Cloud Storage bucket specified for staging files.
+
+**Note**: If you don't create a custom service account for the Dataflow pipeline workers, ensure that the default Compute Engine service account has the required permissions above.
+
+#### 3. Export logs from Google Cloud Pub/Sub topic
+
+1. Go to [the Logs Explorer page][425] in the Google Cloud console.
+2. From the **Log Router** tab, select **Create Sink**.
+3. Provide a name for the sink.
+4. Choose _Cloud Pub/Sub_ as the destination and select the Cloud Pub/Sub topic that was created for that purpose. **Note**: The Cloud Pub/Sub topic can be located in a different project.
+
+    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Export Google Cloud Pub/Sub Logs to Pub Sub" >}}
+
+5. Choose the logs you want to include in the sink with an optional inclusion or exclusion filter. You can filter the logs with a search query, or use the [sample function][426]. For example, to include only 10% of the logs with a `severity` level of `ERROR`, create an inclusion filter with `severity="ERROR" AND sample(insertId, 0.1)`.
+
+    {{< img src="integrations/google_cloud_platform/sink_inclusion_filter_2.png" alt="The inclusion filter for a Google Cloud logging sink with a query of severity=ERROR and sample(insertId, 0.1)" >}}
+
+6. Click **Create Sink**.
+
+**Note**: It is possible to create several exports from Google Cloud Logging to the same Cloud Pub/Sub topic with different sinks.
+
+#### 4. Create and run the Dataflow job
+
+1. Go to the [Create job from template][427] page in the Google Cloud console.
+2. Give the job a name and select a Dataflow regional endpoint.
+3. Select `Pub/Sub to Datadog` in the **Dataflow template** dropdown, and the **Required parameters** section appears.
+   a. Select the input subscription in the **Pub/Sub input subscription** dropdown.
+   b. Enter the following in the **Datadog Logs API URL** field:
+   <pre>https://{{< region-param key="http_endpoint" code="true" >}}</pre>
+
+   **Note**: Ensure that the Datadog site selector on the right of the page is set to your [Datadog site][428] before copying the URL above.
+
+   c. Select the topic created to receive message failures in the **Output deadletter Pub/Sub topic** dropdown.
+   d. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
+
+{{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Required parameters in the Datadog Dataflow template" style="width:80%;">}}
+
+4. Under **Optional Parameters**, check `Include full Pub/Sub message in the payload`.
+
+5. If you created a secret in Secret Manager with your Datadog API key value as mentioned in [step 1](#1-create-a-cloud-pubsub-topic-and-subscription), enter the **resource name** of the secret in the **Google Cloud Secret Manager ID** field.
+
+{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Optional parameters in the Datadog Dataflow template with Google Cloud Secret Manager ID and Source of the API key passed fields both highlighted" style="width:80%;">}}
+
+See [Template parameters][412] in the Dataflow template for details on using the other available options:
+
+   - `apiKeySource=KMS` with `apiKeyKMSEncryptionKey` set to your [Cloud KMS][429] key ID and `apiKey` set to the encrypted API key
+   - **Not recommended**: `apiKeySource=PLAINTEXT` with `apiKey` set to the plaintext API key
+
+6. If you created a custom worker service account, select it in the **Service account email** dropdown.
+
+{{< img src="integrations/google_cloud_platform/dataflow_template_service_account.png" alt="Optional parameters in the Datadog Dataflow template with the service account email dropdown highlighted" style="width:80%;">}}
+
+7. Click **RUN JOB**.
+
+**Note**: If you have a shared VPC, see the [Specify a network and subnetwork][430] page in the Dataflow documentation for guidelines on specifying the `Network` and `Subnetwork` parameters.
+
+[400]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
+[401]: https://cloud.google.com/pubsub/docs/create-topic
+[402]: https://cloud.google.com/pubsub/docs/create-subscription
+[403]: https://cloud.google.com/iam/docs/using-iam-securely#least_privilege
+[404]: https://cloud.google.com/logging/docs/export/configure_export_v2#creating_sink
+[405]: https://cloud.google.com/logging/docs/view/logging-query-language
+[406]: https://cloud.google.com/architecture/partners/stream-cloud-logs-to-datadog
+[407]: https://cloud.google.com/apis/docs/getting-started#enabling_apis
+[408]: https://docs.datadoghq.com/agent/
+[409]: https://console.cloud.google.com/cloudpubsub/topicList
+[410]: https://console.cloud.google.com/cloudpubsub/subscription/
+[411]: https://cloud.google.com/dataflow/docs/concepts/streaming-with-cloud-pubsub#unsupported-features
+[412]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog#template-parameters
+[413]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-pubsub
+[414]: https://console.cloud.google.com/security/secret-manager
+[415]: https://cloud.google.com/pubsub/quotas#quotas
+[416]: https://cloud.google.com/compute/docs/access/service-accounts#default_service_account
+[417]: https://console.cloud.google.com/iam-admin/serviceaccounts
+[418]: https://cloud.google.com/dataflow/docs/concepts/access-control#dataflow.admin
+[419]: https://cloud.google.com/dataflow/docs/concepts/access-control#dataflow.worker
+[420]: https://cloud.google.com/pubsub/docs/access-control#pubsub.viewer
+[421]: https://cloud.google.com/pubsub/docs/access-control#pubsub.subscriber
+[422]: https://cloud.google.com/pubsub/docs/access-control#pubsub.publisher
+[423]: https://cloud.google.com/secret-manager/docs/access-control#secretmanager.secretAccessor
+[424]: https://cloud.google.com/storage/docs/access-control/iam-roles/
+[425]: https://console.cloud.google.com/logs/viewer
+[426]: https://cloud.google.com/logging/docs/view/logging-query-language#sample
+[427]: https://console.cloud.google.com/dataflow/createjob
+[428]: https://docs.datadoghq.com/getting_started/site/
+[429]: https://cloud.google.com/kms/docs
+[430]: https://cloud.google.com/dataflow/docs/guides/specifying-networks#shared
+{{% /collapse-content %}}
+
+
+
+
+
 
 {{% collapse-content title="Pub/Sub Push subscription (legacy; not recommended)" level="h4" id="pub-sub-push-logging-setup" %}}
 
