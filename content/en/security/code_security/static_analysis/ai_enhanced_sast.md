@@ -125,7 +125,7 @@ AI-suggested remediation for SAST is powered by the Bits AI Dev Agent and is in 
 Datadog SAST uses the [Bits AI Dev Agent][10] to generate single and bulk remediations for vulnerabilities.
 
 ### Fix a single vulnerability
-For each SAST vulnerability, open the side panel to see a pre-generated fix under the **Remediation** section. For other findings (e.g. code quality), you can click the **Fix with Bits** button to generate a fix.  
+For each SAST vulnerability, open the side panel to see a pre-generated fix under the **Remediation** section. For other findings (such as code quality), you can click the **Fix with Bits** button to generate a fix.  
 
 From each remediation, you can modify the fix suggested by Bits AI directly in the session view, or click **Create a pull request** to apply the remediation back to your source code repository.
 
