@@ -28,8 +28,6 @@ pip install ddtrace
    export DD_SITE={{< region-param key="dd_site" >}}
    ```
 
-
-
 3. Run your application with the `ddtrace-run` command:
 
    {{< code-block lang="shell">}}
