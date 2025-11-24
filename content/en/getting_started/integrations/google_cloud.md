@@ -436,7 +436,6 @@ Logs are forwarded by [Google Cloud Dataflow][15] using the [Datadog Dataflow te
    **Note**: Only folders and projects that you have the necessary access and permissions for appear in this section. Likewise, folders and projects without a display name do not appear.
 1. In the **Dataflow Job Configuration** section, specify configuration options for the Dataflow job:
    - Select deployment settings (Google Cloud region and project to host the created resources---Pub/Sub topics and subscriptions, a log routing sink, a Secret Manager entry, a service account, a Cloud Storage bucket, and a Dataflow job)
-      **Note**: You cannot name the created resources---the script uses predefined names, so it can skip creation if it finds preexisting resources with the same name.
    - Select scaling settings (maximum workers)
    - Select performance settings (maximum number of parallel requests and batch size)
    - Select execution options (Streaming Engine is enabled by default; read more about its [benefits][201])
@@ -444,8 +443,6 @@ Logs are forwarded by [Google Cloud Dataflow][15] using the [Datadog Dataflow te
 1. In the **Advanced Configuration** section, optionally specify the machine type for your Dataflow worker VMs. If no machine type is selected, Dataflow automatically chooses an appropriate machine type based on your job requirements. 
 1. Optionally, choose to specify inclusion and exclusion filters using Google Cloud's [logging query language][203].
 
-
-You can also use the [terraform-gcp-datadog-integration][205] module to manage this infrastructure through Terraform
 
 [200]: https://app.datadoghq.com/integrations/gcp
 [201]: https://docs.cloud.google.com/dataflow/docs/streaming-engine#benefits
