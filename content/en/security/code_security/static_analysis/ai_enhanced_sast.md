@@ -39,7 +39,7 @@ Malicious PR protection uses LLMs to detect and prevent malicious code changes a
 - Scale your code reviews as the volume of AI-assisted code changes increases
 - Embed code security into your security incident response workflows
 
-#### Detection coverage
+### Detection coverage
 
 Malicious code changes come in many different forms. Datadog SAST covers attack vectors such as: 
 
