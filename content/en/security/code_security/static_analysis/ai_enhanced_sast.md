@@ -28,7 +28,6 @@ This page provides an overview of these features.
 
 ## Detection
 
-### Malicious PR protection
 
 {{< callout url="https://www.datadoghq.com/product-preview/malicious-pr-protection/" >}}
 Malicious PR protection is in Preview and supports GitHub repositories only. Click <strong>Request Access</strong> and complete the form.
