@@ -65,7 +65,7 @@ At the top of the trace view, the banner shows aggregated cost information for t
 Selecting an individual LLM span shows similar cost metrics specific to that LLM request.
 
 [1]: /llm_observability/instrumentation/auto_instrumentation
-[2]: /llm_observability/instrumentation/sdk/?tab=python#cost-tracking
+[2]: /llm_observability/instrumentation/sdk/?tab=python#monitoring-costs
 [3]: /llm_observability/instrumentation/api/#metrics
 [4]: https://platform.openai.com/docs/pricing
 [5]: https://platform.claude.com/docs/en/about-claude/models/overview#model-pricing
