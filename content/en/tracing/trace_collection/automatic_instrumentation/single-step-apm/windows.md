@@ -21,7 +21,7 @@ You can enable APM on Windows in the following ways:
 * Instrument only .NET applications on IIS
 * Instrument all Java and .NET applications across your entire Windows host
 
-{{< callout url=
+{{< callout url=#
  btn_hidden="false" header="Join the Preview!">}}
 Host-wide instrumentation for Windows is in Preview. Use this form to submit your request.
 {{< /callout >}}
