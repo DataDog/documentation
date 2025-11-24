@@ -11,11 +11,14 @@ further_reading:
 
 When you create a pipeline in the Observability Pipelines UI, select one of the out-the-box templates to build and deploy pipelines based on your use case.
 
-{{< img src="observability_pipelines/templates_20241003.png" alt="The Observability Pipelines UI showing the seven templates" style="width:100%;" >}}
+{{< img src="observability_pipelines/templates_20251125.png" alt="The Observability Pipelines UI showing the seven templates" style="width:100%;" >}}
 
 ## Templates
 
 The templates are built for the following use cases:
+
+{{< tabs >}}
+{{% tab "Logs" %}}
 
 ### Archive Logs
 
@@ -29,7 +32,7 @@ Use the Archive Logs template to store logs in a cloud storage solution (Amazon 
 
 As your organization grows, your observability needs for different use cases, such as security, archiving, and log management, also change. This could mean having to trial different archiving, SIEM, and log management solutions. However, managing log pipelines to different solutions can be complicated. Use the Dual Ship Logs template to send your logs to different destinations, so you can evaluate different tools and workflows with minimal disruption to your production environment.
 
-### Generate Metrics
+### Generate Log Metrics
 
 Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't need to be stored. Often, you just want to see a summary of the logs and compare it to historical data. Log-based metrics are also a cost-efficient way to summarize log data from your entire ingest stream. Use the Generate Metrics template to generate a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
 
@@ -58,6 +61,21 @@ Use the Sensitive Data Redaction template to detect and redact sensitive informa
 ### Split Logs
 
 When you have logs from different services and applications, you might need to send them to different downstream services for querying, analysis, and alerting. For example, you might want to send security logs to a SIEM solution and DevOps logs to Datadog. Use the Split Logs template to preprocess your logs separately for each destination before sending them downstream.
+
+{{% /tab %}}
+{{% tab "Metrics" %}}
+
+### Metrics Volume Control
+
+<div class="alert alert-info">
+Metrics Volume Control is in Preview.</div>
+
+Metrics capture signals about your environment, such as your system health, business critical workflows, and critical security indicators. These metrics are emitted from various applications, network devices, and nodes, but not all emitted metrics are of equal value.
+
+Use the Metrics Volume Control template (in Preview) to collect and process all of your metrics in Observability Pipelines, before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
