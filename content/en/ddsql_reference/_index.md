@@ -786,7 +786,7 @@ FROM dd.logs(
     <tr>
       <td>
         <pre>
-dd.metric_scalar(
+dd.metrics_scalar(
     query varchar,
     reducer varchar [, from_timestamp timestamp, to_timestamp timestamp]
 )</pre>
@@ -795,13 +795,32 @@ dd.metric_scalar(
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
-FROM dd.metric_scalar(
+FROM dd.metrics_scalar(
     'avg:system.cpu.user{*} by {service}',
     'avg',
     TIMESTAMP '2025-07-10 00:00:00.000-04:00',
     TIMESTAMP '2025-07-17 00:00:00.000-04:00'
 )
 ORDER BY value DESC;{{< /code-block >}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre>
+dd.metrics_timeseries(
+    query varchar [, from_timestamp timestamp, to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns metric data as a timeseries. The function accepts a metrics query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns data points over time rather than a single aggregated value.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.metrics_timeseries(
+    'avg:system.cpu.user{*} by {service}',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY timestamp, service;{{< /code-block >}}
       </td>
     </tr>
   </tbody>

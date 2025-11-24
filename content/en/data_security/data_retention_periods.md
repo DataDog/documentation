@@ -121,11 +121,11 @@ attributes:
        - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Network Device Monitoring
     data_type: |
-       - **Netflow**: 30 days
+       - **NetFlow**: 30 days
        - **SNMP traps**: 15 days
   - product: Cloud Network Monitoring
     data_type: |
-       - **Netflow**: 14 days
+       - **Network traffic**: 14 days
   - product: Network Path
     data_type: |
        - **Network Path Tests**: 30 days
