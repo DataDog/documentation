@@ -112,7 +112,7 @@ To update the SDK versions:
 ### Define workload selection rules 
 
 {{< callout url="#" btn_hidden="false" header="Join the Preview!">}}
-Workload selection is in Preview. Use this form to submit your request to join.
+Workload selection is in Preview.
 {{< /callout >}}
 
 Workload selection rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
