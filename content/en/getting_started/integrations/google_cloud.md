@@ -389,7 +389,7 @@ Logs are forwarded by [Google Cloud Dataflow][15] using the [Datadog Dataflow te
 
 #### Instructions
 
-1. In the [Google Cloud integration tile][100], select the **Log Collection** tab.
+1. In the [Google Cloud integration tile][100], click the **Configure Log Collection** button.
 1. Select **Quick Start**. A setup script, configured with your Datadog credentials and site, is automatically generated.
 1. Copy the setup script. You can choose to run the script locally, or in Google Cloud Shell:
    - Running the script locally may be faster, but requires that you have your Google Cloud credentials available and the [gcloud CLI][101] installed on your machine.
@@ -430,7 +430,7 @@ Logs are forwarded by [Google Cloud Dataflow][15] using the [Datadog Dataflow te
 {{< tabs >}}
 {{% tab "Datadog UI-based setup" %}}
 
-1. In the [Google Cloud integration tile][200], select the **Log Collection** tab.
+1. In the [Google Cloud integration tile][200], click the **Configure Log Collection** button.
 1. Select **Terraform**.
 1. In the **Select Projects** section, select the folders and projects to forward logs from. If you select a folder, logs are forwarded from all of its child projects.
    **Note**: Only folders and projects that you have the necessary access and permissions for appear in this section. Likewise, folders and projects without a display name do not appear.
