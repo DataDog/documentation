@@ -1,7 +1,8 @@
 ---
-title: Configure Containers View
+title: Configure Kubernetes Explorer
 aliases:
   - /infrastructure/livecontainers/configuration
+  - /infrastructure/containers/configuration
 further_reading:
 - link: "/infrastructure/hostmap/"
   tag: "Documentation"
@@ -13,67 +14,7 @@ further_reading:
 
 This page lists configuration options for the [Containers][1] page in Datadog. To learn more about the Containers page and its capabilities, see [Containers View][2] documentation.
 
-## Configuration options
 
-### Include or exclude containers
-
-Include and exclude containers from real-time collection:
-
-- Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
-- Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.
-
-Both arguments take an **image name** as value. Regular expressions are also supported.
-
-For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
-
-```yaml
-container_exclude: ["image:debian"]
-container_include: ["name:frontend.*"]
-```
-
-**Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
-
-### Scrubbing sensitive information
-
-To prevent the leaking of sensitive data, you can scrub sensitive words in container YAML files. Container scrubbing is enabled by default for Helm charts, and some default sensitive words are provided:
-
-- `password`
-- `passwd`
-- `mysql_pwd`
-- `access_token`
-- `auth_token`
-- `api_key`
-- `apikey`
-- `pwd`
-- `secret`
-- `credentials`
-- `stripetoken`
-
-You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words.
-
-**Note**: The additional sensitive words must be in lowercase, as the Agent compares the text with the pattern in lowercase. This means `password` scrubs `MY_PASSWORD` to `MY_*******`, while `PASSWORD` does not.
-
-You need to setup this environment variable for the following agents:
-
-- process-agent
-- cluster-agent
-
-```yaml
-env:
-    - name: DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS
-      value: "customword1 customword2 customword3"
-```
-
-For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
-
-```text
-password <MY_PASSWORD>
-password=<MY_PASSWORD>
-password: <MY_PASSWORD>
-password::::== <MY_PASSWORD>
-```
-
-However, the scrubber does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
 
 ## Configure Orchestrator Explorer
 
