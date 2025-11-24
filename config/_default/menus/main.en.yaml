@@ -5003,6 +5003,11 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_compatibility
       weight: 403
+    - name: Export API 
+      url: llm_observability/evaluations/export_api
+      parent: llm_obs_evaluations 
+      identifier: llm_obs_evaluations_export_api
+      weight: 404
     - name: Experiments
       url: llm_observability/experiments
       parent: llm_obs

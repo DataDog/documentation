@@ -6,7 +6,7 @@ title: Export API
 
 The LLM Observability Export API provides endpoints to retrieve span data. These endpoints allow you to programmatically access your LLM Observability data for running external evaluations and exporting spans for offline storage.
 
-## Search Spans
+## Search spans
 
 Use this endpoint to search and filter LLM Observability spans based on specific criteria.
 
@@ -61,7 +61,7 @@ Method
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Code Example
+#### Code example
 
 {{< tabs >}}
 {{% tab "Curl" %}}
@@ -88,7 +88,7 @@ EOF
 {{% /tab %}}
 {{< /tabs >}}
 
-## List Spans
+## List spans
 
 Use this endpoint to retrieve a list of LLM Observability spans.
 
@@ -120,7 +120,7 @@ Method
 | page[cursor] | string | List following results with a cursor provided in the previous query. |
 | page[limit] | integer | Maximum number of spans in the response. Default: 10. |
 
-#### Code Example
+#### Code example
 
 {{< tabs >}}
 {{% tab "Curl" %}}
@@ -236,7 +236,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 {{< /tabs >}}
 
 
-## API Standards
+## API standards
 
 ### SearchSpansRequest
 

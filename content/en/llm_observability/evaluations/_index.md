@@ -42,7 +42,7 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 ### Retrieving spans
 
-LLM Observability offers an [Export API][9] that can be used to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
+LLM Observability offers an [Export API][9] that you can use to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 [2]: /llm_observability/evaluations/managed_evaluations
