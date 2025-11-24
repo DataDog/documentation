@@ -323,7 +323,7 @@ To allow Datadog to collect RUM data from your mobile application test runs, con
 [13]: /account_management/billing/usage_attribution
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
-[16]: /synthetics/browser_tests/actions/#use-variables
+[16]: /synthetics/browser_tests/test_steps/#use-variables
 [17]: /synthetics/mobile_app_testing/
 [18]: /synthetics/mobile_app_testing/settings/
 [19]: /synthetics/mobile_app_testing/#use-global-variables

@@ -24,6 +24,10 @@ App Builder accepts standard vanilla JavaScript syntax, with the following cavea
 - The result of the expression must match the result expected by the component or query property. For example, the text component's **Is Visible** property expects a Boolean. To find out what type of data a component property expects, see [View component properties](#view-component-properties).
 - Your code has read-only access to the app state, but App Builder executes the code in a sandboxed environment with no access to the Document Object Model (DOM) or browser APIs.
 
+You can also use Bits AI to work with JS expressions:
+   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Enter a custom prompt, or try the prompt `How can you help me with JavaScript expressions?`.
+
 ## View component properties
 
 Before you create an expression, it's helpful to know the available properties and defaults or current values for the component you want to interact with.
