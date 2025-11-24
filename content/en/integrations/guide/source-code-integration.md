@@ -469,7 +469,7 @@ If your build process is executed in CI within a Docker container, perform the f
 
 ### Configure telemetry tagging
 
-For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example/repo`, the value for the `git.repository_url` tag should be `github.com/example/repo`.
+For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit.
 
 ## Usage
 
