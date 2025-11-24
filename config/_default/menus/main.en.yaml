@@ -3055,11 +3055,22 @@ menu:
       parent: usm_parent
       identifier: universal_service_monitoring_guides
       weight: 2
+    - name: End User Device Monitoring
+      url: infrastructure/end_user_device_monitoring/
+      pre: desktop-wui
+      identifier: end_user_device_monitoring
+      parent: infrastructure_heading
+      weight: 40000
+    - name: Setup
+      url: infrastructure/end_user_device_monitoring/setup/
+      identifier: end_user_device_monitoring_setup
+      parent: end_user_device_monitoring
+      weight: 1      
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
       parent: infrastructure_heading
-      weight: 40000
+      weight: 50000
       pre: host-map
     - name: Host List
       identifier: infrastructure_list
@@ -3070,7 +3081,7 @@ menu:
       url: containers/
       identifier: containers
       parent: infrastructure_heading
-      weight: 50000
+      weight: 60000
       pre: container
     - name: Monitoring Containers
       url: infrastructure/containers/
@@ -3362,7 +3373,7 @@ menu:
       identifier: process
       pre: process
       parent: infrastructure_heading
-      weight: 60000
+      weight: 70000
     - name: Increase Process Retention
       identifier: infrastructure_process_increase_process_retention
       url: infrastructure/process/increase_process_retention/
@@ -3373,7 +3384,7 @@ menu:
       pre: serverless
       identifier: serverless
       parent: infrastructure_heading
-      weight: 70000
+      weight: 80000
     - name: AWS Lambda
       url: serverless/aws_lambda
       parent: serverless
@@ -3564,7 +3575,7 @@ menu:
       pre: network
       identifier: nm_parent
       parent: infrastructure_heading
-      weight: 80000
+      weight: 90000
     - name: Cloud Network Monitoring
       url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
