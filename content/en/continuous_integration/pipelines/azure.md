@@ -34,6 +34,32 @@ Set up tracing on Azure Pipelines to gain real time insights into your CI/CD wor
 | [Execution time][20] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 ## Configure the Datadog integration
+{{< tabs >}} {{% tab "Datadog Integration (recommended)" %}}
+
+<div class="alert alert-warning">
+<strong>Note:</strong> Your Azure DevOps integrations must be connected to a <strong>Microsoft Entra tenant</strong>. Azure DevOps Server is <strong>not supported</strong>.<br><br>
+See the <a href="/integrations/azure_source_code/">Azure source code setup instructions</a> to connect Azure DevOps projects to Datadog.
+</div>
+
+### Enable CI Visibility in Datadog
+
+After the Azure App is created and installed, enable CI Visibility for the organizations and projects you want Datadog to monitor.
+
+1. In Datadog, navigate to  
+   **Software Delivery → CI Visibility → Add a Pipeline Provider → Azure Pipelines**.
+
+2. Click **Configure** next to the Azure DevOps organization you want to enable.
+
+3. To enable CI Visibility for the entire organization, toggle **Enable CI Visibility**.
+
+4. To enable CI Visibility for individual projects:
+   - Scroll through the projects list.
+   - Toggle **Enable CI Visibility** for each project you want to monitor.
+
+Pipelines appear in Datadog immediately after CI Visibility is enabled for an organization or project.
+
+{{% /tab %}}
+{{% tab "Service Hook Subscriptions" %}}
 
 The Datadog integration for [Azure Pipelines][16] works by using [service hooks][2] to send data to Datadog.
 
@@ -56,6 +82,10 @@ The Datadog integration for [Azure Pipelines][16] works by using [service hooks]
     - **Datadog API Key**: Your [Datadog API key][3].
 
 5. Click **Finish**.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Advanced configuration
 
