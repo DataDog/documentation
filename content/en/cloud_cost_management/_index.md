@@ -135,9 +135,10 @@ More granular tag-level restrictions are available as part of the [Data Access C
 ## Review data history
 
 Monitor the freshness and processing status of your cloud cost data on the **Cloud Cost > Settings** page. You can view when:
-- Billing data was last ingested
+
 - Tag pipeline rules and custom allocation rules were last applied
-- Bills were last received and processed for each cloud provider.
+- Bills were last received and processed for each cloud provider
+- Billing data was last ingested
 
 Use this information to troubleshoot data delays or verify that recent configuration changes have been applied to your cost data.
 
