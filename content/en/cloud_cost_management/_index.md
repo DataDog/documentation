@@ -141,6 +141,8 @@ Monitor the freshness and processing status of your cloud cost data on the **Clo
 
 Use this information to troubleshoot data delays or verify that recent configuration changes have been applied to your cost data.
 
+{{< img src="cloud_cost/ccm-data-history.png" alt="View your Cloud Cost data history in Cloud Cost settings." style="width:100%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
