@@ -169,16 +169,16 @@ Session details include the following:
 
 - Header: Identifies the campaign, time of session creation, and affected branch, file, or PR.
 - Title: Summarizes the remediation goal based on the vulnerability being fixed.
-- **Dev Agent Campaign, Model name, PR ID**: Indicates the AI model used, campaign source, and related PR metadata.
+- Session metadata: Indicates whether the session is a part of a campaign, the AI model used, and related PR metadata.
 - Right panel:
-  - **Suggested code change**: Displays a side-by-side comparison of the vulnerable code and the AI-generated patch.
-  - **View Pull Request**: Opens the linked GitHub PR to review or merge the proposed changes.
+  - Suggested code change: Displays a diff of the vulnerable code and the AI-generated patch.
+  - **Create/View Pull Request**: Creates a GitHub PR to apply the remediation, or opens an existing linked GitHub PR for you to review or merge the proposed changes.
 - Left panel displays the chat message history, for example:
-  - **Fix the following static analysis violation**: Explains the triggered rule, the security risk, and why the original code is unsafe.
-  - **Fixing process recap**: Shows exactly how the AI read the code, understood the context, chose its approach, and applied the fix. This is helpful for auditability, compliance, and trust. You can confirm that the AI isn't rewriting code blindly, but applying defensible and explainable patterns.
-  - **CI via GitHub**: Describes whether the AI-generated patch breaks anything downstream, and includes full error logs. This helps you validate that a fix is not only secure but also safe to deploy, without needing to leave the platform.
-  - **Summary**: Recaps the impact of the fix and provides next steps or guidance if tests failed or PR needs to be rebased.
-  - Bits AI chat field: Lets you interactively refine the fix or ask the AI follow-up questions. This makes remediation collaborative and tunable, giving security engineers control without needing to write the patch themselves.
+  - Prompt for remediation: Asks for remediation(s) and explains the triggered rule, the security risk, and why the original code is unsafe.
+  - Task list: Shows exactly how the AI read the code, understood the context, chose its approach, and applied the fix. This is helpful for auditability, compliance, and trust. You can confirm that the AI isn't rewriting code blindly, but applying defensible and explainable patterns.
+  - CI logs via GitHub: Describes whether the AI-generated patch breaks anything downstream, and includes full error logs. This helps you validate that a fix is not only secure but also safe to deploy, without needing to leave the platform.
+  - Summary: Recaps the impact of the fix and provides next steps or guidance if tests failed or PR needs to be rebased.
+  - **Bits AI chat field**: Lets you interactively refine the fix or ask the AI follow-up questions. This makes remediation collaborative and tunable, giving security engineers and developers control without needing to write the patch themselves.
 
 ### Scope
 
