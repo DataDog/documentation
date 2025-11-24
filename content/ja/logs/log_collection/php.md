@@ -532,7 +532,7 @@ class AppServiceProvider extends ServiceProvider
   return $app;
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 参考資料
