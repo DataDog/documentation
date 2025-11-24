@@ -51,7 +51,7 @@ The cost metrics include a `source` tag to indicate where the value originated:
 
 ## View costs in LLM Observability
 View your app in LLM Observability and select **Cost** on the left. The _Cost view_ features:
-- A high-level overview of your LLM usage over time. This includes Total Cost, Cost Change, Total Tokens, and Token Change
+- A high-level overview of your LLM usage over time including **Total Cost**, **Cost Change**, **Total Tokens**, and **Token Change**
 - **Breakdown by Token Type**: A breakdown of token usage, along with associated costs
 - **Breakdown by Provider/Model** or **Prompt ID/Version**: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions ( powered by [Prompt Tracking][9])
 - **Most Expensive LLM Calls**: A list of your most expensive requests
