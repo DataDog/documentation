@@ -1,6 +1,5 @@
 ---
 title: Alerting With RUM Data
-
 description: Guide for creating alerts on RUM events.
 further_reading:
 - link: '/real_user_monitoring/platform/dashboards/'
@@ -42,13 +41,13 @@ Datadog recommends using **event-based monitors** for specific use cases where y
 
 To create an event-based monitor, you can export search queries from the [RUM Explorer][5]. Use any facets that RUM collects, including [custom facets and measures][6], and the `measure by` field for view-related counts like load time and error count.
 
-## Export queries from RUM Explorer
+## Export queries from the RUM homepage
 
-For event-based monitoring use cases, you can export search queries from the [RUM Explorer][5] to create a monitor with all the query context preserved.
+For event-based monitoring use cases, you can export existing queries from the [RUM homepage][12] to create a monitor with all the query context preserved.
 
-{{< img src="real_user_monitoring/guide/alerting-with-rum/export-to-monitor-3.mp4" alt="Export button to the right hand corner of the RUM Explorer" video="true" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/alerting-with-rum/create-monitor-homepage.png" alt="Export button to the right hand corner of the RUM Explorer" style="width:100%;" >}}
 
-Click the **Export** button to export your search query to a pre-configured RUM monitor. For more information, see [Export RUM Events][7]. Remember that event-based monitors should be used alongside properly configured retention filters.
+Click the **Export > Create Monitor** button to export a widget to a pre-configured RUM monitor. For more information, see [Export RUM Events][7]. Remember that event-based monitors should be used alongside properly configured retention filters.
 
 ## Route your alert
 
@@ -103,3 +102,4 @@ This example monitor warns when the LCP takes 2 seconds to load and alerts when 
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [10]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [11]: /real_user_monitoring/android/mobile_vitals/
+[12]: https://app.datadoghq.com/rum/performance-monitoring
