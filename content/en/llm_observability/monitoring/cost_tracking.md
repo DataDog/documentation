@@ -44,6 +44,10 @@ Datadog automatically calculates the cost of LLM requests made to the following 
 ## Metrics
 You can find Cost metrics in [LLM Observability Metrics][8].
 
+The cost metrics include a `source` tag to indicate where the value originated:
+- `source:user` — manually provided
+- `source:auto` — automatically calculated
+
 ## View Cost in LLM Observability
 View your app in LLM Observability and select **Cost** on the left. The _Cost view_ features the following information:
 - **Summary**: A high-level overview of your LLM usage over time. This includes Total Cost, Cost Change, Total Tokens, and Token Change
