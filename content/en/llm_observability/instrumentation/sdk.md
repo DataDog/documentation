@@ -1919,8 +1919,8 @@ The versioning system works as follows:
 
 This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
 
-## Cost tracking
-Attach token or cost metrics to the LLM/embedding span so you can view cost data.
+## Cost Monitoring
+Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. Fore more details, please see [Cost][14].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2648,3 +2648,4 @@ tracer.use('http', false) // disable the http integration
 [11]: /tracing/trace_collection/compatibility/python/#integrations
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/instrumentation/auto_instrumentation/
+[14]: /llm_observability/monitoring/cost_tracking/
