@@ -99,7 +99,7 @@ Select your environment to see compatibility requirements and limitations:
 
 ## Supported language runtimes
 
-SSI automatically instruments applications written in the following languages by [loading a compatible Datadog Language SDK][2] at runtime. Select your language below to see minimum SDK versions, supported runtime versions, and any limitations.
+SSI automatically instruments applications written in the following languages by [loading a compatible Datadog Language SDK][2] at runtime. Select your language to see minimum SDK versions, supported runtime versions, and any limitations.
 
 <div class="alert alert-info">
 
