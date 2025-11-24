@@ -44,7 +44,7 @@ For detailed compatibility information, including supported Go versions, framewo
 
 ### Google Cloud Platform
 {{< appsec-integrations >}}
-{{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="../gcp/cloud-run/go >}}
+{{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="../gcp/cloud-run/go" >}}
 {{< /appsec-integrations >}}
 
 ### Microsoft Azure
