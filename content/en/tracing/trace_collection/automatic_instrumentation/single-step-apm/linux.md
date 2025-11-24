@@ -111,7 +111,7 @@ To update the SDK versions:
 
 ### Define workload selection rules 
 
-{{< callout url="#" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
 Workload selection is in Preview.
 {{< /callout >}}
 
