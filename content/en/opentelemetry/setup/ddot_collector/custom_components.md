@@ -25,7 +25,7 @@ To complete this guide, you need the following:
 
 ## Store the desired Datadog Agent version in a shell variable
 
-This ensures all files are compatible
+This ensures all files are compatible:
 
 ```shell
 DD_AGENT_VERSION="{{< version key="agent_version" >}}"
