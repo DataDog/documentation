@@ -23,7 +23,7 @@ To complete this guide, you need the following:
 - Familiarity with [building a custom collector][4] and [OpenTelemetry Collector Builder][5] (OCB).
 - Basic understanding of the [Go](https://go.dev/) compilation process and [Go modules](https://go.dev/blog/using-go-modules).
 
-## Store the desired Datadog Agent version is a shell variable
+## Store the desired Datadog Agent version in a shell variable
 
 This ensures all files are compatible
 
