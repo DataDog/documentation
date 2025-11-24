@@ -29,7 +29,7 @@ The relative lift is defined as:
 
 The confidence interval represents the range of lift values that are plausibly supported by the experiment’s data. While the true lift could fall outside this range, values inside the interval are statistically more consistent with the observed data.
 
-If the entire confidence interval is above zero, then the result is statistically significant. This suggests that the observed difference in metrics is unlikely to be attributable to random noise, supporting the conclusion that the experiment produced a true effect.
+If the entire confidence interval is above zero, then the result is statistically significant. This suggests that the observed difference in metrics is unlikely to be attributable to random noise, and supports the conclusion that the experiment produced a true effect.
 
 ## Exploring results 
 To dive deeper into experiment results, hover over a metric and click **Chart**. This gives you the option to compare the experiment’s impact across different user segments.
@@ -39,7 +39,6 @@ To dive deeper into experiment results, hover over a metric and click **Chart**.
 Subject level properties are based on attributes at the initial time of exposure (for example, region, new vistor vs repeat visitor etc.). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
 
 
-<!-- [SCREENSHOT OF SEGMENT VIEW] -->
 {{< img src="/product_analytics/experiment/exp_segment_view.png" alt="A view of the metrics and their variations in the control and experiment groups ." style="width:90%;" >}}
 
 
@@ -49,7 +48,3 @@ Subject level properties are based on attributes at the initial time of exposure
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
-[2]: https://en.wikipedia.org/wiki/Delta_method
-[3]: ADD-LINK
-[4]: /getting_started/feature_flags/
