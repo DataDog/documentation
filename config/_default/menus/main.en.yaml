@@ -3072,7 +3072,7 @@ menu:
       identifier: infrastructure_livecontainers
       weight: 1
     - name: Containers Explorer
-      url: containers/monitoring/explorer
+      url: containers/monitoring/containers
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_configuration
       weight: 101

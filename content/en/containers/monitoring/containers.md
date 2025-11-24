@@ -29,7 +29,7 @@ Inspired by *htop*, *ctop*, and *kubectl*, Containers Explorer gives you complet
 
 ## Configuration
 
-### Setup
+### Set up container collection
 
 Collecting container telemetry for Containers Explorer is **enabled by default** for most Datadog Agent installations.
 
@@ -72,7 +72,7 @@ spec:
 
 When you install the Datadog Agent by using the [official Helm chart][1], container collection is enabled by default.
 
-To verify that container collection is enabled, ensure that the `processAgent.containerCollection` parameter is set to `true` in your [`datadog-values.yaml`][2] file:
+To verify that container collection is enabled, ensure that the `processAgent.containerCollection` parameter is set to `true` in your `datadog-values.yaml` file:
 
 ```yaml
 datadog:
@@ -94,7 +94,7 @@ datadog:
 ```
 
 [1]: https://github.com/DataDog/helm-charts
-[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
