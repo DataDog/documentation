@@ -1920,7 +1920,7 @@ The versioning system works as follows:
 This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
 
 ## Monitoring costs
-Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. Foremore details, see [Costs][14].
+Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1944,10 +1944,20 @@ from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import llm
 
 @llm(model_name="model_name", model_provider="model_provider")
-def llm_call(prompt):
+def llm_call_a(prompt):
     resp = ... # llm call here
+    # Annotate token metrics
     LLMObs.annotate(
-        metrics={"total_tokens": 10, "total_cost": 1.5,},
+        metrics={"input_tokens": 50, "output_tokens": 120, "total_tokens": 170,},
+    )
+    return resp
+
+@llm(model_name="model_name", model_provider="model_provider")
+def llm_call_b(prompt):
+    resp = ... # llm call here
+    # Annotate cost metrics
+    LLMObs.annotate(
+        metrics={"input_cost": 3, "output_cost": 7, "total_tokens": 10,},
     )
     return resp
 {{< /code-block >}}
