@@ -23,7 +23,7 @@ You can enable APM on Windows in the following ways:
 
 {{< callout url=
  btn_hidden="false" header="Join the Preview!">}}
-Host-wide instrumentation for Windows is in Preview. Use this form to submit your request today.
+Host-wide instrumentation for Windows is in Preview. Use this form to submit your request.
 {{< /callout >}}
 
 {{< tabs >}}
@@ -37,7 +37,7 @@ To instrument only .NET applications running on IIS:
    
    By default, Single Step Instrumentation installs the latest supported version of the Datadog .NET SDK. If you need to pin a specific version:
 
-   1. Under **Application Performance Monitoring (APM)**, select **Customize library versions**.
+   1. Under **Instrumentation Configuration**, select **Customize Library Versions**.
    1. Under .NET, choose the version you want to use.
    
 1. Copy and run the provided MSI install command on your Windows host.
@@ -59,7 +59,7 @@ To instrument Java and .NET applications across your entire Windows host:
    
    By default, Single Step Instrumentation installs the latest supported version of the Datadog .NET and Java SDK. If you need to pin a specific version:
 
-   1. Under **Application Performance Monitoring (APM)**, select **Customize library versions**.
+   1. Under **Instrumentation Configuration**, select **Customize Library Versions**.
    1. Under .NET, choose the version you want to use.
    
 1. Copy and run the provided MSI install command on your Windows host.
