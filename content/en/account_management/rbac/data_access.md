@@ -77,7 +77,7 @@ The following are available as a Preview upon request:
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
 - LLM Observability
-- Software Delivery repository info (CI Visibility pipelines)
+- Software Delivery repository info (in CI Visibility pipelines)
 
 ## Usage constraints
 
