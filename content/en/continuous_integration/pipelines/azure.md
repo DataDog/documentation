@@ -40,7 +40,7 @@ Set up tracing on Azure Pipelines to gain real time insights into your CI/CD wor
 
 After the Azure App is created and installed, enable CI Visibility for the organizations and projects you want Datadog to monitor. 
 
-1. Your Azure DevOps integrations must be connected to a <strong>Microsoft Entra tenant</strong>. See the [Azure source code setup instructions][1] to connect Azure DevOps projects to Datadog.
+1. Verify that your Azure DevOps organization is linked to a <strong>Microsoft Entra tenant</strong>. See the [Azure source code setup instructions][1] for guidance on connecting Azure DevOps projects to Datadog.
 
 2. In Datadog, navigate to [**Software Delivery → CI Visibility → Add a Pipeline Provider → Azure Pipelines**][2].
 
