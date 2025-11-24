@@ -48,19 +48,19 @@ multifiltersearch:
       filter_by: true
   data:
     - category: Performance
-      recommendation_type: N+1 queries on Database
+      recommendation_type: N+1 Queries on Database
       scope: Backend services
       recommendation_description: A backend application calls the same database sequentially instead of batching queries.
       recommendation_prerequisite: APM
     - category: Performance
-      recommendation_type: Sequential API calls
+      recommendation_type: Repeated Sequential API calls
       scope: Backend services
-      recommendation_description: A backend application calls the same API sequentially instead of batching queries.
+      recommendation_description: A backend application repeatedly retries failing API calls without sufficient backoff, increasing system load and masking underlying reliability issues.
       recommendation_prerequisite: APM
     - category: Performance
-      recommendation_type: Aggressive retries
+      recommendation_type: Persistent Retries
       scope: Backend services
-      recommendation_description: A backend application retries faulty calls to an API without backoff.
+      recommendation_description: A backend application issues an excessive number of retry attempts when calling a downstream API, extending request duration and risking cascading failures under strain.
       recommendation_prerequisite: APM
     - category: Performance
       recommendation_type: Missing index
@@ -77,15 +77,10 @@ multifiltersearch:
       scope: Browser applications and web views on mobile applications
       recommendation_description: Large JS resources causing delays in the initial page render signaling misleading UI or broken elements.
       recommendation_prerequisite: RUM
-    - category: Error rate
-      recommendation_type: New issue
+    - category: Reliability
+      recommendation_type: High Exception Volumes
       scope: Backend services
-      recommendation_description: A backend application started to generate a new Error signature.
-      recommendation_prerequisite: Error Tracking
-    - category: Performance
-      recommendation_type: High volume of thrown exceptions
-      scope: Backend services
-      recommendation_description: A backend application is throwing a high number of exceptions as control-flow
+      recommendation_description: A backend application is throwing a high number of exceptions as control-flow, adding CPU and memory overhead.
       recommendation_prerequisite: APM + Continuous Profiler
 
 ---
@@ -94,7 +89,7 @@ multifiltersearch:
 APM Recommendations are in Preview. Features and recommendations may change before general availability. To request access, fill out this form.
 {{< /callout >}}
 
-APM Recommendations help you optimize your applications' performance, reliability, and error rates by providing optimization opportunities based on the telemetry collected on your applications. These recommendations are designed to:
+APM Recommendations help you improve your applications' performance and reliability by providing optimization opportunities based on the telemetry collected on your applications. These recommendations are designed to:
 
 - Identify and resolve performance bottlenecks
 - Improve service reliability and uptime
@@ -117,16 +112,18 @@ APM Recommendations are based on data collected from different parts of your sta
 
 By looking at these sources together, Datadog finds ways to help you improve performance, reliability, and user experience.
 
+Datadog prioritizes recommendations by computing a severity score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. This ensures that the most critical insights for improving service health appear first.
+
 ## Using APM Recommendations
 
 To review recommendations that need your attention:
 
 1. Go to [**APM** > **Recommendations**][1].
-2. Review the recommendations in **For Review**.
-3. Select a recommendation from the list to see the problem, impact, and how to resolve it.
+2. Filter your recommendations by status or type.
+3. Select a recommendation from the list to see a detailed description of the issue.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
 
-After you've addressed the recommendation, you can use the **FOR REVIEW** dropdown to change the recommendation status to *Reviewed*, *Ignored*, or *Resolved*. Alternatively, you can click **Create Case** to assign the recommendation to an owner and track related work.
+After you've reviewed the recommendation, you can use the **FOR REVIEW** dropdown to change the recommendation status to *Reviewed*, *Ignored*, or *Resolved*. Alternatively, you can click **Create Ticket** to assign the recommendation to an owner and track related work in Jira or Case Management.
 
 ## Supported recommendations
 
