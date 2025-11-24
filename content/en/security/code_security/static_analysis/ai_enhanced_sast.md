@@ -135,7 +135,6 @@ Datadog SAST saves time by replacing the filing of individual pull requests to f
 
 A **campaign** is how teams in Datadog operationalize remediation at scale. Creating a campaign tells Datadog to generate remediations for a certain subset of vulnerabilities in your codebase. Each campaign can also automatically create pull requests to apply fixes for all vulnerabilities in scope of the campaign.  
 
-#### Creating a campaign
 A campaign defines the following:
 
 | Section                | Description                                  | Options                                                                                                                                                                                                                                                                                          |
