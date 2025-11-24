@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ## Overview 
-Datadog Experimentation allows you to measure the causal relationship that new experiences and features have on user outcomes. To do this, Experimentation randomly allocates traffic between two or more variations, and selects a subset of traffic to use as a control group.
+Datadog Experimentation allows you to measure the causal relationship that new experiences and features have on user outcomes. To do this, Experimentation randomly allocates traffic between two or more variations, using one of the variations as a control group.
 
 This page walks you through planning and launching your experiments. 
 
@@ -32,28 +32,28 @@ To create, configure, and launch your experiment, complete the following steps:
 
 After you’ve created an experiment, add your primary metric and optional guardrails. See [Defining Metrics][2] for details on how to create metrics.
 
-{{< img src="/product_analytics/experiment/exp_decision_metrics.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_decision_metrics1.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
 
 
 #### Add a sample size calculation (optional)
 
-After selecting your experiment’s metrics, use the optimal sample size calculator to determine what size of change your experiment can reliably detect with your current sample size.
+After selecting your experiment’s metrics, use the optional sample size calculator to determine how small of a change your experiment can reliably detect with your current sample size.
 
 1. Select the entry point of your experiment. This specifies _when_ in the user journey they will be enrolled into the test. 
 
-For example, if you plan to run an experiment on users who visit the homepage, select the homepage view as your entry point. You can also configure the number of variants and the traffic exposure percentage (the portion of entry point traffic to include in the experiment).
+For example, if you plan to run an experiment on users who visit the homepage, select the homepage view as your entry point.
 
-1. Click **Run calculation** to see the [Minimum Detectable Effects][3](MDE) your experiment has on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants.
+1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants.
 
 {{< img src="/product_analytics/experiment/exp_sample_size.png" alt="Sleect an entrypoint event to run a sample size calculation" style="width:90%;" >}}
 
 ### Step 3 - Launch your experiment
 
-After specifying and aligning your experiment, you can launch your test immediately or at a scheduled date. 
+After specifying your metrics, you can launch your experiment.
 
 1. Select a Feature Flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
 
-1. Click **Set up experiment on feature flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout with realtime RUM guardrails. 
+1. Click **Set up experiment on feature flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout.
 
 
 {{< img src="/product_analytics/experiment/exp_feature_flag.png" alt="Set up an experiment on a Feature Flag." style="width:90%;" >}}
