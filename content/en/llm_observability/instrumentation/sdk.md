@@ -1957,7 +1957,7 @@ def llm_call_b(prompt):
     resp = ... # llm call here
     # Annotate cost metrics
     LLMObs.annotate(
-        metrics={"input_cost": 3, "output_cost": 7, "total_tokens": 10,},
+        metrics={"input_cost": 3, "output_cost": 7, "total_cost": 10,},
     )
     return resp
 {{< /code-block >}}
