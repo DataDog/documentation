@@ -22,7 +22,6 @@
         "deploy:liveAssets": "customhugo deploy --target liveAssets -e live --maxDeletes 0 --workers 100 --logLevel info",
         "deploy:live": "customhugo deploy --target live -e live --maxDeletes -1 --workers 100 --logLevel info",
         "build:apiPages": "node -e 'require(\"./assets/scripts/build-api-pages.js\").init()'",
-        "dereference": "node ./assets/scripts/dereference.js",
         "jest-test": "./node_modules/.bin/jest ./assets/scripts/tests",
         "postinstall": "husky",
         "prepack": "pinst --disable",
@@ -79,7 +78,7 @@
         "traverse": "0.6.8",
         "typesense": "^1.8.2",
         "typesense-instantsearch-adapter": "^2.8.0",
-        "typesense-sync": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.1.0.tgz",
+        "typesense-sync": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.3.0.tgz",
         "yaml-lint": "^1.7.0"
     },
     "devDependencies": {

@@ -35,7 +35,7 @@ Entidades
 : Los atacantes y las víctimas de un ataque. Los atacantes se identifican mediante direcciones IP. Las víctimas se identifican como usuarios autenticados. Pasa el mouse sobre la lista de IP y haz clic en una IP para ver detalles como **Información sobre amenazas** y **Actividad de seguridad**.
 
 Estado de clasificación
-: Puedes asignar un respondedor y configurar un estado de clasificación para la señal. Los estados disponibles son **Abierto**, **En revisión** y **Archivado**. 
+: Puedes asignar un respondedor y configurar un estado de clasificación para la señal. Los estados disponibles son **Abierto**, **En revisión** y **Archivado**.
 
 Fecha de creación
 : Fecha de creación de la señal. En forma predeterminada, las señales se ordenan por fecha.
@@ -81,9 +81,9 @@ Utiliza la [Automatización del flujo de trabajo][5] para activar manualmente un
 1. Asegúrate de que el flujo de trabajo que deseas ejecutar tenga un activador de seguridad.
 2. En la página [Signals Explorer][2], abre una señal de seguridad.
 3. En la sección **Responder**, haz clic en **Ejecutar un flujo de trabajo**.
-4. En **Ejecutar un flujo de trabajo**, selecciona el flujo de trabajo que deseas ejecutar o haz clic en **Nuevo flujo de trabajo**. 
+4. En **Ejecutar un flujo de trabajo**, selecciona el flujo de trabajo que deseas ejecutar o haz clic en **Nuevo flujo de trabajo**.
    - Según el flujo de trabajo que selecciones, es posible que debas introducir parámetros de entrada adicionales.
-   - Si has seleccionado **Nuevo flujo de trabajo**, se abrirá Ejecutar un flujo de trabajo de seguridad. Para obtener más información sobre los flujos de trabajo, consulta [Automatización de flujos de trabajo][5]. 
+   - Si has seleccionado **Nuevo flujo de trabajo**, se abrirá Ejecutar un flujo de trabajo de seguridad. Para obtener más información sobre los flujos de trabajo, consulta [Automatización de flujos de trabajo][5].
 5. Haz clic en **Run** (Ejecutar).
 
 ## Revisar y corregir
@@ -105,7 +105,7 @@ Configura el estado de clasificación en **Abierto**, **En revisión** o **Archi
 
 ### Asignar la señal a los usuarios
 
-Selecciona **Asignar selección** y, a continuación, selecciona el usuario o usuarios que deseas asignar a la señal. 
+Selecciona **Asignar selección** y, a continuación, selecciona el usuario o usuarios que deseas asignar a la señal.
 
 Selecciona **Eliminar todas las asignaciones** para restablecer la asignación de señal a ninguna.
 
@@ -114,8 +114,8 @@ Selecciona **Eliminar todas las asignaciones** para restablecer la asignación d
 La [gestión de casos][6] de Datadog ofrece un lugar centralizado para clasificar, rastrear y solucionar los problemas detectados por Datadog e integraciones de terceros.
 
 1. En la página [Signals Explorer][2], selecciona una señal de seguridad.
-2. En **Acciones masivas**, selecciona **Crear un caso**. 
-3. Selecciona **Crear un caso** o **Añadir a un caso existente** para añadir la señal a un caso existente. 
+2. En **Acciones masivas**, selecciona **Crear un caso**.
+3. Selecciona **Crear un caso** o **Añadir a un caso existente** para añadir la señal a un caso existente.
 4. Introduce un título y una descripción opcional.
 5. Haz clic en **Crear un caso**.
 
@@ -148,7 +148,7 @@ Para ver todas las vistas guardadas, haz clic en **Vistas** junto al título de 
 
 
 [1]: https://app.datadoghq.com/services?lens=Security
-[2]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&viz=stream&start=1694726477747&end=1695331277747&paused=false
+[2]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&viz=stream&start=1694726477747&end=1695331277747&paused=false
 [4]: /es/service_management/incident_management/
 [5]: /es/service_management/workflows/
 [6]: /es/service_management/case_management/

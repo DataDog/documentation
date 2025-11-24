@@ -7,7 +7,7 @@ further_reading:
 - link: "/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
   tag: "Documentation"
   text: "Advanced Worker configurations"
-- link: "/observability_pipelines/monitoring_and_maintenance/worker_cli_commands/"
+- link: "/observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/"
   tag: "Documentation"
   text: "Worker CLI commands"
 - link: "/observability_pipelines/guide/environment_variables/"

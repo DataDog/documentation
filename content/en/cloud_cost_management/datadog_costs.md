@@ -49,7 +49,7 @@ After opting in to Datadog Costs, a confirmation message appears and cost data s
 
 ## Data availability to sub-organizations
 
-Datadog cost data is available at the parent organization level. Sub-organization access is available in limited availability. To request sub-organization access, contact your account representative or [Datadog Support][8].
+Daily Datadog cost data is available to sub-organizations with the [Sub Organization Cost Summary][10] feature enabled. To request access, contact your account representative or [Datadog Support][8].
 
 ## Visualize and break down costs
 
@@ -83,3 +83,4 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [7]: https://app.datadoghq.com/billing/usage
 [8]: /help/
 [9]: /account_management/billing/usage_attribution/
+[10]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization

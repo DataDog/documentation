@@ -5,6 +5,8 @@ description: Learn more about the NGINX pack.
 
 ## Overview
 
+{{< img src="observability_pipelines/packs/nginx.png" alt="The NGINX pack" style="width:25%;" >}}
+
 NGINX logs record client requests, responses, and errors from the web server.
 
 What this pack does:

@@ -5,6 +5,8 @@ description: Learn more about the Zscaler ZIA Tunnel pack.
 
 ## Overview
 
+{{< img src="observability_pipelines/packs/zscaler_tunnel.png" alt="The Zscaler ZIA Tunnel pack" style="width:25%;" >}}
+
 Zscaler Internet Access (ZIA) Tunnel logs show tunnel health, traffic, and key events.
 
 What this pack does:
