@@ -1,7 +1,5 @@
 ---
 title: Google Cloud Log Forwarding Setup
-aliases:
-- 
 further_reading:
 - link: "https://www.datadoghq.com/blog/stream-logs-datadog-dataflow-template/"
   tag: "Blog"
