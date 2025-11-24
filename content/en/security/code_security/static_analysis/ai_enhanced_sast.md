@@ -50,7 +50,7 @@ Malicious code changes come in many different forms. Datadog SAST covers attack 
 
 Examples include the [tj-actions/changed-files breach (March 2025)][2] and [obfuscation of malicious code in npm packages (September 2025)][3]. Read more in the blog post [here][1].
 
-#### Search and filter results
+### Search and filter results
 
 Detections from Datadog SAST on potentially malicious PRs can be found in [Security Signals][4] from the rule ID `def-000-wnp`.  
 
