@@ -8,7 +8,13 @@ further_reading:
 
 ## Overview
 
-Data Security Posture Management (DSPM) for Cloud Security helps you proactively scan your S3 buckets for sensitive data, such as personally identifiable information (PII) and protected health information (PHI), stored in your cloud environments. By layering sensitive data context into your security findings, you can better prioritize remediation and understand potential attack paths across your cloud assets.
+Data Security Posture Management (DSPM) for Cloud Security helps you proactively scan your S3 buckets for sensitive data stored in your cloud environments. By layering sensitive data context into your security findings, you can better prioritize remediation and understand potential attack paths across your cloud assets.
+
+Sensitive data includes:
+- Personally identifiable information (PII)
+- Secrets and credentials
+- Credit card and banking information
+- Network and device information
 
 By default, organizations setting up Cloud Security for the first time have [Sensitive Data Scanner][1] enabled for S3 buckets. For more information, see [Set up Sensitive Data Scanner for cloud storage][7].
 
