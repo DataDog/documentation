@@ -99,9 +99,28 @@ When a configuration file on the host conflicts with a Fleet Automation configur
 
 ### Edit, deploy or roll back configurations
 From your list of configurations in the [Configure Agents][16] tab, you can
-   - Deploy the unused configuration to your Agents
+
    - Edit the configuration, save a new version, and redeploy the updated configuration.
    - Rollback the configuration to a previous version and redeploy.
+   - Deploy the unused configuration to your Agents
+
+#### Edit and redeploy a single Agent configuration
+
+1. In the Datadog UI, navigate to the [Fleet Automation][18] page and select **View Agents**. 
+
+1. Optionally, use `remote_agent_management:enabled` in the search bar to scope to Agents that have Remore Agent Management enabled. You can further scope your search query to `hostname`, `agent_version`, or other attributes to assist in finding the correct Host and Agent for this configuration change.
+
+1. Select your host to open a side panel. In the side panel, click on the **Configuration** tab to access your modifiable configurations. 
+
+1. Click the **Edit** button to edit your configuration. 
+
+1. Submit these changes by selecting **Deploy Changes**.
+
+**Note**: There are some configurations fields ( for example, `api_key`, `site`, and `notable_events`) that cannot be modified using this method. These fields will be listed as _not editable_.
+
+In the following example, the `logs_enabled` field is changed from `true` to `false`. After the changes are deployed, log collection on this Agent is disabled. 
+
+{{< img src="/agent/fleet_automation/agent_remote_management_single_agent_config1.png" alt="Edit and deploy Agent configuration changes." style="width:90%;" >}}
 
 
 ### Mirrors and proxies
@@ -155,3 +174,4 @@ If you don't upgrade an earlier Agent version to 7.66 or higher, there is no imp
 [15]: /agent/guide/setup_remote_config
 [16]: https://app.datadoghq.com/fleet/agent-management
 [17]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#configuration-order-precedence
+[18]: https://app.datadoghq.com/fleet
