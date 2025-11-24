@@ -83,13 +83,8 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
        key_exchanges: [diffie-hellman-group14-sha256, ecdh-sha2-nistp256]
        host_key_algorithms: [ssh-ed25519]
    ```
-<!-- Subject to change -->
-3. Configure the device profile. Default profiles are located at `/conf.d/network_config_management.d/default_profiles`. 
-
-   **Note**: NCM uses dedicated default profiles that differ from SNMP device profiles. Custom profiles are not supported.
-<!-- Subject to change -->
-
-4. Restart the Agent to apply the configuration changes.
+   
+3. Restart the Agent to apply the configuration changes.
 
 ## Viewing configurations
 
