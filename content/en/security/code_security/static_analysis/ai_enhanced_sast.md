@@ -97,7 +97,7 @@ For a subset of SAST vulnerabilities, [Bits AI][9] reviews the context of the fi
 To narrow down your initial list for triage, in [Vulnerabilities][6], select **Filter out false positives**. This option uses the `-bitsAssessment:"False Positive"` query.
 
 Each finding includes a section with an explanation of the assessment. You can provide Bits AI with feedback on its assessment using a thumbs up &#128077; or thumbs down &#128078;.
-{{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res.jpg" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
+{{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res_png.png" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
 
 {{% collapse-content title="Supported CWEs" level="h4" expanded=true id="id-for-anchoring" %}}
 False positive filtering is supported for the following CWEs:
@@ -153,7 +153,7 @@ After you click **Create Campaign**, [Bits AI Dev Agent][10] does the following:
 5. Lets you review, edit, and merge fixes by interacting directly with the Agent.
 
 The campaign page shows real findings that Bits AI is actively remediating and how many have been remediated or are pending so your security and development teams can track progress made toward remediating vulnerabilities.
-{{< img src="/code_security/static_analysis/campaigner-hero-image.jpg" alt="Campaigns page in Bits AI Dev Agent" style="width:100%;">}}
+{{< img src="/code_security/static_analysis/campaigner-hero-image-png.png" alt="Campaigns page in Bits AI Dev Agent" style="width:100%;">}}
 
 You can click a session to view the code changes in more detail and chat with the [Bits AI Dev Agent][10] to ask for changes.
 
@@ -163,7 +163,7 @@ A remediation session shows the full lifecycle of an AI-generated fix. It includ
 
 Session details make each remediation transparent, reviewable, and auditable, helping you safely adopt AI in your secure development workflow.
 
-{{< img src="/code_security/static_analysis/single-session-sql-injection-fix-light.jpg" alt="An image of a concluded session with Bits AI Dev Agent where remediations have been generated" style="width:100%;">}}
+{{< img src="/code_security/static_analysis/single-session-sql-injection-fix-light-png.png" alt="An image of a concluded session with Bits AI Dev Agent where remediations have been generated" style="width:100%;">}}
 
 Session details include the following:
 
