@@ -150,7 +150,7 @@ After you click **Create Campaign**, [Bits AI Dev Agent][10] does the following:
 1. Loads SAST findings for the selected repo(s), path(s), and rule.
 2. Generates patches for each group of findings.
 3. Creates PRs according to your session rules. **Note**: Automatic PR creation is _opt-in_ through Settings. 
-5. Lets you review, edit, and merge fixes by interacting directly with the agent.
+5. Lets you review, edit, and merge fixes by interacting directly with the Agent.
 
 The campaign page shows real findings that Bits AI is actively remediating and how many have been remediated or are pending so your security and development teams can track progress made toward remediating vulnerabilities.
 {{< img src="/code_security/static_analysis/campaigner-hero-image.jpg" alt="Campaigns page in Bits AI Dev Agent" style="width:100%;">}}
