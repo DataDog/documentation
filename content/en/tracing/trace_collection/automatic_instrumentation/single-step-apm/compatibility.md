@@ -93,7 +93,6 @@ Select your environment to see compatibility requirements and limitations:
 ### Limitations
 
 - **IIS only**: Only .NET applications running in IIS are supported.
-- **Other .NET applications**: .NET applications not running in IIS are not supported.
 
 {{% /tab %}}
 {{< /tabs >}}
