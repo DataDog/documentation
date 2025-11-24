@@ -105,7 +105,7 @@ SSI automatically instruments applications written in the following languages by
 
 SSI compatibility depends on two factors:
 
-1. **SDK version**: SSI must support the Datadog Language SDK version (minimum versions listed below).
+1. **SDK version**: SSI must support the Datadog Language SDK version.
 2. **Runtime version**: The Datadog Language SDK must support your application's language runtime version.
 
 If either requirement is not met, SSI falls back gracefully and your application runs without instrumentation.
