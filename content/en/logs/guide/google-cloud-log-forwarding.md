@@ -21,6 +21,10 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 - You prefer a UI-based workflow and want to minimize the time it takes to create and configure the necessary resources.
 - You want to automate setup steps in scripts or CI/CD pipelines.
 
+#### Prerequisite permissions
+
+{{% google-cloud-logging-setup-permissions %}}
+
 #### Instructions
 
 1. In the [Google Cloud integration tile][100], select the **Log Collection** tab.
@@ -55,6 +59,10 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 - You manage infrastructure as code and want to keep the Datadog Google Cloud integration under version control.
 - You need to configure multiple folders or projects consistently with reusable provider blocks.
 - You want a repeatable, auditable deployment process that fits into your Terraform-managed environment.
+
+#### Prerequisite permissions
+
+{{% google-cloud-logging-setup-permissions %}}
 
 #### Instructions
 
