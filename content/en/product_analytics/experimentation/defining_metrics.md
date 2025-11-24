@@ -5,7 +5,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
-- link: "/product_analytics/experimentation/reading_results.md"
+- link: "/product_analytics/experimentation/reading_results"
   tag: "Documentation"
   text: "Reading Experiment Results"
 ---
@@ -26,14 +26,14 @@ To create a metric for your experiment:
 3. Click **Select an Event** to see a list of all of the actions and views collected from the Datadog SDK.
 4. Add a metric name and optionally a description. Then, click **Save**.
 
-{{< img src="/product_analytics/experiment/exp_create_metric1.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric1.png" alt="UI page to create a metric." style="width:90%;" >}}
 
 ## Specify metric aggregation
 
 ### Default metric aggregation 
 After you’ve selected your event of interest, you can specify an aggregation method. Metrics default to a **count of unique** subjects (often users) that had at least one event. However, you can also choose to _count the total number_ of events, or _sum a property_ of that event:
 
-{{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
+{{< img src="/product_analytics/experiment/exp_default_metric_agg.png" alt="Dropdown menu to select the method of aggregation for metrics." style="width:90%;" >}}
 
 
 ### Default metric normalization 
@@ -47,11 +47,8 @@ All metrics are normalized by the number of enrolled subjects. For example, a **
                       Number of users enrolled into this variant
 ```
 
-<!-- {{< img src="/product_analytics/experiment/pana_exp_equation1.png" alt="A view of the User profiles page." style="width:50%;border:none" >}} -->
-
 Similarly, a **Sum of** metric is computed as: 
 
-<!-- {{< img src="/product_analytics/experiment/pana_exp_equation2.png" alt="A view of the User profiles page." style="width:60%;border:none" >}} -->
 
 ```
 
@@ -65,7 +62,7 @@ Similarly, a **Sum of** metric is computed as:
 You can also choose to normalize metrics by a different denominator. To do this, click on a metric
 then on **Create ratio**. This allows you to normalize your metric by another event, counting either the number of subjects with that event, the total number of events, or the sum of an event property. 
 
-{{< img src="/product_analytics/experiment/exp_create_ratio.png" alt="Click on this button to create a ratio." style="width:100%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_ratio.png" alt="Button used to create a ratio from the metric." style="width:90%;" >}}
 
 For example, an e-commerce company that wants to measure the _Average Order Value_ can create a ratio metric with the sum of purchase revenue as the numerator, and the count of purchase events as the denominator. 
 
@@ -76,7 +73,7 @@ Datadog’s statistical engine accounts for correlations between the numerator a
 You can also add filters to your metrics, similar to other Product Analytics dashboards. For instance, you might want to filter page views based on referring URL or UTM parameters. Similarly, you might want to filter actions to a specific page or value of a custom attribute. As you add filters, you can check metric values in real time using the chart on the right.
 
 
-{{< img src="/product_analytics/experiment/exp_filter_by.png" alt="Filter your metric my specific properties." style="width:100%;" >}}
+{{< img src="/product_analytics/experiment/exp_filter_by.png" alt="Filter flow to scope your metric by specific properties." style="width:90%;" >}}
 
 
 
@@ -93,7 +90,7 @@ Datadog supports several advanced options specific to experimentation:
 
 `Guardrail cutoffs`
 : - Use this to specify a `do no harm` threshold. 
-  - Metrics will be yellow(`REPRESENTING WHAT?`) until the confidence interval is small enough to rule out a downside risk larger than this threshold.
+  - Metrics will be yellow until the confidence interval is small enough to rule out a downside risk larger than this threshold. This indicates that you should continue running your experiment to rule out an effect worse than the number entered here.
 
 `Outlier handling`
 : - Real world data often includes extreme outliers that can impact experiment results. 
