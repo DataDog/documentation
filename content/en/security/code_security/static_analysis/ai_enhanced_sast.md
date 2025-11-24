@@ -13,7 +13,7 @@ further_reading:
   text: "Using LLMs to filter out false positives from static code analysis"
 ---
 
-Static Code Analysis (SAST) uses AI to help automate detection, validation, and remediation across the vulnerability management lifecycle.  
+Static Code Analysis (SAST) uses AI to help automate detection, validation, and remediation across the vulnerability management lifecycle.
 This page provides an overview of these features.
 
 ## Summary of AI features in SAST
@@ -41,22 +41,22 @@ Malicious PR protection uses LLMs to detect and prevent malicious code changes a
 
 ### Detection coverage
 
-Malicious code changes come in many different forms. Datadog SAST covers attack vectors such as: 
+Malicious code changes come in many different forms. Datadog SAST covers attack vectors such as:
 
 - Malicious code injection
 - Attempted secret exfiltration
 - Pushing of malicious packages
-- CI workflow compromise  
+- CI workflow compromise
 
 Examples include the [tj-actions/changed-files breach (March 2025)][2] and [obfuscation of malicious code in npm packages (September 2025)][3]. Read more in the blog post [here][1].
 
 ### Search and filter results
 
-Detections from Datadog SAST on potentially malicious PRs can be found in [Security Signals][4] from the rule ID `def-000-wnp`.  
+Detections from Datadog SAST on potentially malicious PRs can be found in [Security Signals][4] from the rule ID `def-000-wnp`.
 
 There are two potential verdicts: `malicious` and `benign`. They can be filtered for using:
 - `@malicious_pr_protection.scan.verdict:malicious`
-- `@malicious_pr_protection.scan.verdict:benign`. 
+- `@malicious_pr_protection.scan.verdict:benign`.
 
 Signals can be triaged directly in Datadog (assign, create a case, or declare an incident), or routed externally using [Datadog Workflow Automation][5].
 
@@ -82,7 +82,7 @@ This analysis doesn't depend on any external LLM integration. Datadog's AI-power
 
 The AI-powered detection engine is designed to augment, not replace, Datadog's default static analyzer tool, `datadog-static-analyzer`.
 
-The `datadog-static-analyzer` serves as the default analysis engine, using queries to parse code at the syntax tree level and apply deterministic rules that detect security issues such as the use of insecure functions, hardcoded secrets, or missing input validation. 
+The `datadog-static-analyzer` serves as the default analysis engine, using queries to parse code at the syntax tree level and apply deterministic rules that detect security issues such as the use of insecure functions, hardcoded secrets, or missing input validation.
 
 AI-powered detection extends beyond static rule execution, using LLMs to analyze function call graphs and contextual code behavior. This method improves coverage for complex code paths, including cases involving data flow, taint propagation, or interprocedural dependencies, where traditional rule-based detection has limited visibility.
 
@@ -92,7 +92,7 @@ Both methods operate as complementary components. The static analyzer continues 
 
 ### False positive filtering
 
-For a subset of SAST vulnerabilities, [Bits AI][9] reviews the context of the finding and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
+For a subset of SAST vulnerabilities, [Bits AI][9] reviews the context of the finding and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning.
 
 To narrow down your initial list for triage, in [Vulnerabilities][6], select **Filter out false positives**. This option uses the `-bitsAssessment:"False Positive"` query.
 
@@ -125,14 +125,14 @@ AI-suggested remediation for SAST is powered by the Bits AI Dev Agent and is in 
 Datadog SAST uses the [Bits AI Dev Agent][10] to generate single and bulk remediations for vulnerabilities.
 
 ### Fix a single vulnerability
-For each SAST vulnerability, open the side panel to see a pre-generated fix under the **Remediation** section. For other findings (such as code quality), you can click the **Fix with Bits** button to generate a fix.  
+For each SAST vulnerability, open the side panel to see a pre-generated fix under the **Remediation** section. For other findings (such as code quality), you can click the **Fix with Bits** button to generate a fix.
 
 From each remediation, you can modify the fix suggested by Bits AI directly in the session view, or click **Create a pull request** to apply the remediation back to your source code repository.
 
 ### Fix multiple vulnerabilities in batches with campaigns
-Datadog SAST saves time by replacing the filing of individual pull requests to fix vulnerabilities with bulk-remediation **campaigns** that can fix multiple vulnerabilities at once.  
+Datadog SAST saves time by replacing the filing of individual pull requests to fix vulnerabilities with bulk-remediation **campaigns** that can fix multiple vulnerabilities at once.
 
-A **campaign** is how teams in Datadog operationalize remediation at scale. Creating a campaign tells Datadog to generate remediations for a certain subset of vulnerabilities in your codebase. Each campaign can also automatically create pull requests to apply fixes for all vulnerabilities in scope of the campaign.  
+A **campaign** is how teams in Datadog operationalize remediation at scale. Creating a campaign tells Datadog to generate remediations for a certain subset of vulnerabilities in your codebase. Each campaign can also automatically create pull requests to apply fixes for all vulnerabilities in scope of the campaign.
 
 A campaign defines the following:
 
@@ -149,17 +149,17 @@ After you click **Create Campaign**, [Bits AI Dev Agent][10] does the following:
 
 1. Loads SAST findings for the selected repo(s), path(s), and rule.
 2. Generates patches for each group of findings.
-3. Creates PRs according to your session rules. **Note**: Automatic PR creation is _opt-in_ through [Settings][11]. 
+3. Creates PRs according to your session rules. **Note**: Automatic PR creation is _opt-in_ through [Settings][11].
 5. Lets you review, edit, and merge fixes by interacting directly with the Agent.
 
 The campaign page shows real findings that Bits AI is actively remediating and how many have been remediated or are pending so your security and development teams can track progress made toward remediating vulnerabilities.
-{{< img src="/code_security/static_analysis/campaigner-hero-image-png.png" alt="Campaigns page in Bits AI Dev Agent" style="width:100%;">}}
+{{< img src="/code_security/static_analysis/campaigner-hero-image.png" alt="Campaigns page in Bits AI Dev Agent" style="width:100%;">}}
 
 You can click a session to view the code changes in more detail and chat with the [Bits AI Dev Agent][10] to ask for changes.
 
 #### Session details
 
-A remediation session shows the full lifecycle of an AI-generated fix. It includes the original security finding, a proposed code change, an explanation of how and why the AI made the fix, and if enabled, CI results from applying the patch. 
+A remediation session shows the full lifecycle of an AI-generated fix. It includes the original security finding, a proposed code change, an explanation of how and why the AI made the fix, and if enabled, CI results from applying the patch.
 
 Session details make each remediation transparent, reviewable, and auditable, helping you safely adopt AI in your secure development workflow.
 
