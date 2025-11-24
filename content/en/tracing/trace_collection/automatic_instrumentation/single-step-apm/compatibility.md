@@ -187,10 +187,10 @@ For a complete list of supported Ruby versions, see the [Ruby SDK compatibility 
 
 **Uninstalling SSI**: When uninstalling Single Step Instrumentation from a Ruby application, follow these steps to prevent errors:
 
-1. **Before uninstalling**: Make a backup of your `Gemfile` and `Gemfile.lock`
-2. **After uninstalling**:
-   - Restore your original `Gemfile` and `Gemfile.lock`, or
-   - Run `bundle install` to rebuild your dependencies
+1. **Before uninstalling**: Make a backup of your `Gemfile` and `Gemfile.lock`.
+2. **After uninstalling**, do one of the following:
+   - Restore your original `Gemfile` and `Gemfile.lock`.
+   - Run `bundle install` to rebuild your dependencies.
 
 [1]: /tracing/trace_collection/compatibility/ruby
 
