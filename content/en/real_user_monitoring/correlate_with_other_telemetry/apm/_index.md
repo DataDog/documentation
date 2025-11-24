@@ -711,13 +711,17 @@ Example for b3 multiple headers:
 
 These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][17] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][18] (OPTIONS requests), which are made by the browser prior to every request when tracing is allowed on cross-site URLs.
 
-## Effect on APM quotas
-
-Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
-
 ## Trace retention
 
-These traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, create [retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions. You can also use [cross-product retention filters][21] to optimize correlation between RUM sessions and APM traces. By default, [1% of RUM sessions and their traces are automatically retained][23] for 15 days at no additional cost. 
+Ingested traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, [create APM retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
+
+If using RUM Without Limits, you can also use [cross-product retention filters][21] to retain APM traces associated to specific RUM sessions, optimizing the correlation between your frontend and your backend. By default 1% of RUM [sessions and their traces are automatically retained][23] at no additional cost.
+
+## Effect on APM quotas
+
+Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to control a share of the backend traces starting from browser and mobile requests to ingest.
+
+Configuring cross-product retention filters may also increase the APM-indexed volumes. Use the retention rate of the cross-product retention filters to control the share of the backend traces to index.
 
 ## Further reading
 

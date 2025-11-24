@@ -120,15 +120,11 @@ When configuring a RUM retention filter, you can enable two cross-product retent
 
 - **Session Replay filter**: Retains replays for the specified percentage of sessions retained by the parent RUM retention filter which have an available replay.
 - **APM traces filter**: Indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter which have available traces.
-  <div class="alert alert-warning">The APM traces filter is only compatible with the following versions of the SDKs (applies to RUM and APM, but not Session Replay): <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - React Native 3.0.0+ <br></div>
+  <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs (applies to RUM and APM, but not Session Replay): <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
 
-**Note**: The availability of a session replay or APM traces depends on the initialization parameters `sessionReplaySampleRate` and `traceSampleRate` of the SDK. 
+<div class="alert alert-danger">Configuring cross-product retention filters may increase APM-indexed volumes.</div>
 
-### Default 1% retention
-
-For compatible SDKs (see above), Datadog provides a default RUM retention filter and cross-product retention filter on APM traces that retains 1% of the sessions with available traces and their traces, free of charge.
-
-This default filter ensures that you always have a baseline of correlated APM data available for your RUM sessions, even before custom cross-product retention filters.
+**Note**: The availability of a session replay or APM traces depends on the initialization parameters `sessionReplaySampleRate` and `traceSampleRate` of the SDK.
 
 The cross-product retention filters allow you to optimize the correlation between different products to retain richer telemetry.
 
@@ -145,6 +141,12 @@ If across the sessions, 30% of them have an available replay and 40% of them hav
 - 60% of sessions with at least one error are retained
 - 50% × 30% = 15% of these retained sessions have a replay
 - 25% × 40% = 10% of these retained sessions have APM traces
+
+### Default 1% retention
+
+For compatible SDKs (see above), Datadog provides a default RUM retention filter and cross-product retention filter on APM traces that retains 1% of the sessions with available traces and their traces, at no additional cost.
+
+This default filter ensures that you always have a baseline of correlated APM data available for your RUM sessions, even before custom cross-product retention filters.
 
 ## Best practices
 
