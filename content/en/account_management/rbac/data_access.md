@@ -93,7 +93,7 @@ By default, Session Replay data is retained for 30 days. To extend retention to 
 Playlists are collections of Session Replays you can aggregate in a folder-like structure. When you create a restricted dataset for RUM, Datadog disables Session Replay Playlists.
 
 ### Logs
-Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. We recommend using a single solution to restrict logs data, but user access be limited by restrictions applied from either system.
+Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. Datadog recommends using a single solution to restrict logs data. If you limit user access using both Data Access Control and log restriction queries, both sets of restrictions apply.
 
 ### Monitors
 Users can create Monitors that query and alert on active telemetry. While the user will only be able to directly query data they’re allowed to access, the Monitor will operate as a System User with full access to data. This gap will be addressed in a future iteration. We encourage customers who are concerned about this to carefully monitor which Monitors are created by their users and restrict the ability to create these Monitors.
