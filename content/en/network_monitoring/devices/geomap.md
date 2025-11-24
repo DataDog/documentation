@@ -35,7 +35,7 @@ Configure device locations using the following steps:
 
 1. Tag devices using the `geolocation:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
 
-   {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geomap:nyc-test` tag." style="width:100%;" >}}
+   {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geolocation:boston-office` tag." style="width:100%;" >}}
 
 2. From the Device GeoMap page, click **Add locations** in the top right corner. This opens the [Geomap locations settings][3] page, which provides multiple tabs to manage device locations:
 
