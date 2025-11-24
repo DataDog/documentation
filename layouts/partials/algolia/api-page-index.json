@@ -40,10 +40,11 @@
 {{ end }}
 
 {{/* Add the resulting object to the index */}}
+{{ $object_id := print $full_url "_" $operationId }}
 {{
     $hugo_context.Scratch.Add "algoliaindex" (
-        dict "objectID" (md5 $full_url)
-        "id" (md5 $full_url)
+        dict "objectID" (md5 $object_id)
+        "id" (md5 $object_id)
         "title" $title
         "section_header" $section_header
         "content" $section_content
