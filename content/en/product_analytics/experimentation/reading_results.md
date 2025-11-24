@@ -30,35 +30,19 @@ The relative lift is defined as:
 
 The confidence interval represents the range of lift values that are plausibly supported by the experiment’s data. While the true lift could fall outside this range, values inside the interval are statistically more consistent with the observed data.
 
-`CLARIFY THIS`: If the entire confidence interval is above zero, then it is unlikely for the true lift to be zero, or negative: the experiment data indicates that the treatment had a positive effect on that metric (and vice versa if the entire confidence interval is below zero).
-
+If the entire confidence interval is above zero, then the result is statistically significant. This suggests that the observed difference in metrics is unlikely to be attributable to random noise, supporting the conclusion that the experiment produced a true effect.
 
 ## Exploring results 
-To dive deeper into experiment results, hover over a metric and click **Chart**. This gives you the option to view results over time and compare the experiment’s impact across different user segments.
-
-### Time series
-The time series chart shows how the percent lift and precision have changed over the duration of the experiment. The relative lift is shown as the center line, and the confidence interval bands are shown in the lower opacity shading.
-
-If there is not enough data to calculate the confidence of a lift, the bands are shown in a gradient fading out from the center line.
-
-<!-- [SCREENSHOT OF TIME SERIES RESULTS] -->
-{{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
+To dive deeper into experiment results, hover over a metric and click **Chart**. This gives you the option to compare the experiment’s impact across different user segments.
 
 
 ### Segment-level results
-You can also measure metric lift grouped by subject-level properties. Subject level properties are based on attributes at initial time of exposure (for example, region, new vistor vs repeat visitor etc.). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
+Subject level properties are based on attributes at the initial time of exposure (for example, region, new vistor vs repeat visitor etc.). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
 
-You can view segment-level results in aggregate or as a time series.
 
 <!-- [SCREENSHOT OF SEGMENT VIEW] -->
 {{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
 
-
-<!-- The following page was copied directly from [Eppo’s docs](https://docs.geteppo.com/statistics/sample-size-calculator/mde/) 
-
-Questions: will the Eppo page or the Datadog page be the source of truth? 
-- this dictates if we pull this in a a single sourced file or keep it here as a new page in the DD docs.
--->
 
 
 
