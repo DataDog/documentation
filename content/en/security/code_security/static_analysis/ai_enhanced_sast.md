@@ -29,7 +29,7 @@ This page provides an overview of these features.
 ### Malicious PR protection
 
 {{< callout url="https://www.datadoghq.com/product-preview/malicious-pr-protection/" >}}
-Malicious PR protection is in Preview and supports GitHub repositories only. Click <strong>Request Access</strong> and complete the form to request access.
+Malicious PR protection is in Preview and supports GitHub repositories only. Click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
 Malicious PR protection uses LLMs to detect and prevent malicious code changes at scale. By scanning pull requests (PRs) submitted to the default branches of your repositories to detect potentially malicious intent, this functionality helps you to:
