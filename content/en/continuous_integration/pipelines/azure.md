@@ -36,23 +36,19 @@ Set up tracing on Azure Pipelines to gain real time insights into your CI/CD wor
 ## Configure the Datadog integration
 {{< tabs >}} {{% tab "Datadog Integration (recommended)" %}}
 
-<div class="alert alert-warning">
-<strong>Note:</strong> Your Azure DevOps integrations must be connected to a <strong>Microsoft Entra tenant</strong>. Azure DevOps Server is <strong>not supported</strong>.<br><br>
-See the <a href="/integrations/azure_source_code/">Azure source code setup instructions</a> to connect Azure DevOps projects to Datadog.
-</div>
-
 ### Enable CI Visibility in Datadog
 
-After the Azure App is created and installed, enable CI Visibility for the organizations and projects you want Datadog to monitor.
+After the Azure App is created and installed, enable CI Visibility for the organizations and projects you want Datadog to monitor. 
 
-1. In Datadog, navigate to  
-   **Software Delivery → CI Visibility → Add a Pipeline Provider → Azure Pipelines**.
+1. Your Azure DevOps integrations must be connected to a <strong>Microsoft Entra tenant</strong>. See the [Azure source code setup instructions][22] to connect Azure DevOps projects to Datadog.
 
-2. Click **Configure** next to the Azure DevOps organization you want to enable.
+2. In Datadog, navigate to [**Software Delivery → CI Visibility → Add a Pipeline Provider → Azure Pipelines**][21].
 
-3. To enable CI Visibility for the entire organization, toggle **Enable CI Visibility**.
+3. Click **Configure** next to the Azure DevOps organization you want to enable.
 
-4. To enable CI Visibility for individual projects:
+4. To enable CI Visibility for the entire organization, toggle **Enable CI Visibility**. Future projects detected by the Azure app will automatically be enabled.
+
+5. To enable CI Visibility for individual projects:
    - Scroll through the projects list.
    - Toggle **Enable CI Visibility** for each project you want to monitor.
 
@@ -82,12 +78,6 @@ The Datadog integration for [Azure Pipelines][16] works by using [service hooks]
     - **Datadog API Key**: Your [Datadog API key][3].
 
 5. Click **Finish**.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
-## Advanced configuration
 
 ### Configuring multiple projects in bulk
 
@@ -134,6 +124,11 @@ Example for enabling the hooks in specified projects:
     projectName1 projectName2
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Advanced configuration
 
 ### Set custom tags
 
@@ -187,3 +182,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [18]: /logs/guide/best-practices-for-log-management/
 [19]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [20]: /glossary/#pipeline-execution-time
+[21]: https://app.datadoghq.com/ci/setup/pipeline?provider=azurepipelines
+[22]: /integrations/azure-devops-source-code/#setup
