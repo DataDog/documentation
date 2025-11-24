@@ -1,43 +1,50 @@
 ---
-title: Monitor MCP Clients
+title: MCP Clients
 description: Learn how to instrument and monitor MCP clients with LLM Observability.
 aliases:
   - /llm_observability/guide/mcp_client
 ---
 
-## Automatic Instrumentation
+You can monitor your MCP clients with Datadog LLM Observability in two ways:
 
-If you are using the official MCP Python package to connect to an MCP server with an MCP client session, you can enable automatic instrumentation by
+- [Automatic instrumentation](#automatically-instrument-your-mcp-client): If you are using the official [MCP Python SDK][1]
+- [Manual instrumentation](#manually-instrument-your-mcp-client): If you are not using the official MCP Python SDK, or your MCP clients are written in Node.js or Java
 
-1. Installing the `ddtrace` package:
+## Automatically instrument your MCP client
 
-{{< code-block lang="shell">}}
+If you are using the official MCP Python SDK to connect to an MCP server with an MCP client session, use the following steps to automatically instrument your MCP client application:
+
+1. Install `ddtrace`:
+
+   {{< code-block lang="shell">}}
 pip install ddtrace
 {{< /code-block >}}
 
-2. Setting the required environment variables:
+2. Set the required environment variables:
 
-{{< code-block lang="shell">}}
-export DD_LLMOBS_ENABLED=true
-export DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
-export DD_LLMOBS_AGENTLESS_ENABLED=true
-export DD_API_KEY=<YOUR_API_KEY>
-export DD_SITE=<YOUR_DATADOG_SITE>
-{{< /code-block >}}
+   ```shell
+   export DD_LLMOBS_ENABLED=true
+   export DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
+   export DD_LLMOBS_AGENTLESS_ENABLED=true
+   export DD_API_KEY=<YOUR_API_KEY>
+   export DD_SITE={{< region-param key="dd_site" >}}
+   ```
 
-3. Running your application with the `ddtrace-run` command:
 
-{{< code-block lang="shell">}}
+
+3. Run your application with the `ddtrace-run` command:
+
+   {{< code-block lang="shell">}}
 ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
-## Manual Instrumentation
+## Manually instrument your MCP client
 
-If you are not using the official MCP Python package, or your MCP clients are written in a different language, you can manually instrument your MCP clients using the LLM Observability SDKs to add the required spans and tags to utilize the LLM Observability MCP client monitoring features.
+You can also manually instrument your MCP client by using Datadog's [LLM Observability SDKs][2] for Python, Node.js, and Java. Use the following steps to add the required tags and spans:
 
 1. Import the LLM Observability SDK:
 
-{{< tabs >}}
+   {{< tabs >}}
 
 {{% tab "Python" %}}
 {{< code-block lang="python">}}
@@ -61,7 +68,7 @@ import datadog.trace.api.llmobs.LLMObs;
 
 2. Start a workflow span around your MCP client session:
 
-{{< tabs >}}
+   {{< tabs >}}
 
 {{% tab "Python" %}}
 {{< code-block lang="python">}}
@@ -88,9 +95,9 @@ clientSessionSpan.finish();
 
 {{< /tabs >}}
 
-3. Start a task span around your MCP client session initialization call within your client session. Annotate the parent client session span with the server information returned from the initialization call.
+3. Within your client session, start a task span around your MCP client session initialization call. Annotate the parent client session span with the server information returned from the initialization call.
 
-{{< tabs >}}
+   {{< tabs >}}
 
 {{% tab "Python" %}}
 {{< code-block lang="python">}}
@@ -139,7 +146,7 @@ initializationTaskSpan.finish();
 
 4. Start a task span around your call to the MCP server for getting the list of available tools within your client session.
 
-{{< tabs >}}
+   {{< tabs >}}
 
 {{% tab "Python" %}}
 {{< code-block lang="python">}}
@@ -175,9 +182,14 @@ toolsListTaskSpan.finish();
 
 {{< /tabs >}}
 
-5. Start a tool span around your tool calls to the MCP server within your client session. Annotate the tool span with the MCP tool type ("client", as opposed to "server" for server-side monitoring), as well as the server name from the information returned from the initialization call. If the tool call returns an error from the MCP server, even if it would not normally raise or throw an error, mark the tool span with an error.
+5. Within your client session, start a tool span around your tool calls to the MCP server. Annotate the tool span with:
+   - The server name from the information returned from the initialization call
+   - The MCP tool type (`client`; for server-side monitoring, use `server`)
+    
+   
+   If the tool call returns an error from the MCP server (even if it would not normally raise or throw an error) mark the tool span with an error.
 
-{{< tabs >}}
+   {{< tabs >}}
 
 {{% tab "Python" %}}
 {{< code-block lang="python">}}
@@ -240,9 +252,9 @@ toolSpan.finish();
 
 {{< /tabs >}}
 
-6. In total, your MCP client should be instrumented as follows
+6. At this point, your instrumentation is complete. Your code should resemble the following:
 
-{{< tabs >}}
+   {{< tabs >}}
 
 {{% tab "Python" %}}
 {{< code-block lang="python">}}
@@ -365,36 +377,40 @@ clientSessionSpan.finish(); // finish at the end of the client session scope
 
 {{< /tabs >}}
 
-7. Set the necessary environment variables to enable MCP client monitoring:
+7. Set the required environment variables:
 
-{{< code-block lang="shell">}}
-export DD_LLMOBS_ENABLED=true
-export DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
-export DD_LLMOBS_AGENTLESS_ENABLED=true
-export DD_API_KEY=<YOUR_API_KEY>
-export DD_SITE=<YOUR_DATADOG_SITE>
-{{< /code-block >}}
+   ```shell
+   export DD_LLMOBS_ENABLED=true
+   export DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
+   export DD_LLMOBS_AGENTLESS_ENABLED=true
+   export DD_API_KEY=<YOUR_API_KEY>
+   export DD_SITE={{< region-param key="dd_site" >}}
+   ```
 
 8. Run your application:
 
-{{< tabs >}}
+   {{< tabs >}}
 
 {{% tab "Python" %}}
-{{< code-block lang="python">}}
+{{< code-block lang="shell">}}
 ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-{{< code-block lang="javascript">}}
+{{< code-block lang="shell">}}
 NODE_OPTIONS="--import dd-trace/initialize.mjs" <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Java" %}}
-{{< code-block lang="java">}}
+{{< code-block lang="shell">}}
 java -javaagent:dd-java-agent.jar -Ddd.llmobs.enabled=true -Ddd.llmobs.ml-app=<YOUR_ML_APP_NAME> -Ddd.llmobs.agentless-enabled=true -Ddd.api-key=<YOUR_API_KEY> -Ddd.site=<YOUR_DATADOG_SITE> <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 {{% /tab %}}
 
 {{< /tabs >}}
+
+
+[1]: https://github.com/modelcontextprotocol/python-sdk
+[2]: /llm_observability/instrumentation/sdk
