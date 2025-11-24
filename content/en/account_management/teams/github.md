@@ -49,7 +49,9 @@ Ensure your Datadog organization is [connected][3] to a GitHub organization. You
 
 ### User configuration
 
-After an admin enables team provisioning from GitHub, a call to action appears on the GitHub integration tile for each user. The call to action asks users to link their accounts from Datadog to GitHub through OAuth.
+After an admin enables team provisioning from GitHub, a call to action appears on the Team detail page. The call to action asks users **Log in to GitHub** to connect their accounts from Datadog to GitHub through OAuth.
+
+{{< img src="account_management/teams/github/connect-to-github.png" alt="Not Connected to GitHub box with button to `Log in the GitHub`" style="width:60%;">}}
 
 Each user must manually link their GitHub account to Datadog to establish the connection between Datadog and GitHub. This behavior is required by GitHub's OAuth and user privacy policies.
 
@@ -58,7 +60,7 @@ After a user links their accounts, Datadog adds the user to any Datadog Teams th
 For example, assume that user B is a member of team A in GitHub. The following sequence occurs in Datadog:
 1. An admin enables Datadog Teams provisioning and user syncing from GitHub.
 1. Team A is created in Datadog, empty.
-1. User B sees a call to action to **Connect GitHub Account** and follows through.
+1. User B sees a call to action to **Log in to GitHub** and follows through.
 1. User B is provisioned into Team A in Datadog
 
 ## Deleting teams
