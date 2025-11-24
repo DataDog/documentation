@@ -96,7 +96,7 @@ For a subset of SAST vulnerabilities, [Bits AI][9] reviews the context of the fi
 To narrow down your initial list for triage, in [Vulnerabilities][6], select **Filter out false positives**. This option uses the `-bitsAssessment:"False Positive"` query.
 
 Each finding includes a section with an explanation of the assessment. You can provide Bits AI with feedback on its assessment using &#128077; or &#128078;.
-{{< img src="static/images/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res.jpg" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:60%;">}}
+{{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res.jpg" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
 
 {{% collapse-content title="Supported CWEs" level="h4" expanded=true id="id-for-anchoring" %}}
 False positive filtering is supported for the following CWEs:
