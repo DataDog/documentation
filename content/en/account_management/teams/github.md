@@ -30,7 +30,7 @@ Datadog only reads GitHub teams. Datadog never modifies, creates, or deletes Git
 ### GitHub integration
 Ensure your Datadog organization is [connected][3] to a GitHub organization. Your GitHub integration must have the `members_read` permission in order to read team data.
 
-### User permissions
+### Permissions
 - To link and create teams, you must have the `teams_manage` permission. 
 - To manage team membership, you must have the `user_access_manage` permission.
 
@@ -49,7 +49,17 @@ Ensure your Datadog organization is [connected][3] to a GitHub organization. You
 
 ### User configuration
 
+After an admin enables team provisioning and user syncing from GitHub, a call to action appears on the GitHub integration tile for each user asking them to link their accounts from Datadog to GitHub through OAuth.
+
 Each user must manually link their GitHub account to Datadog to establish the connection between Datadog and GitHub. This behavior is required by GitHub's OAuth and user privacy policies.
+
+After a user links their GitHub account to Datadog, Datadog adds the user to any Datadog Teams that correspond to GitHub teams where the user is a member.
+
+For example, assume that user B is a member of team A in GitHub. The following sequence occurs in Datadog:
+1. An admin enables Datadog Teams provisioning and user syncing from GitHub.
+1. Team A is created in Datadog, empty.
+1. User B sees a call to action to **Connect GitHub Account** and follows through.
+1. User B is provisioned into Team A in Datadog
 
 ## Deleting teams
 
