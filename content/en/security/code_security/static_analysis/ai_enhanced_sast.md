@@ -152,7 +152,7 @@ After **Create Campaign** is clicked, [Bits AI Dev Agent][10] does the following
 3. Creates PRs according to your session rules. (Note that automatic PR creation is _opt-in_ via Settings). 
 5. Lets you review, edit, and merge fixes by interacting directly with the agent.
 
-The campaign page shows whether Bits AI is actively remediating real findings, and how many have been remediated or pending so your security and development teams can track progress made toward remediating vulnerabilities.
+The campaign page shows real findings that Bits AI is actively remediating and how many have been remediated or are pending so your security and development teams can track progress made toward remediating vulnerabilities.
 {{< img src="/code_security/static_analysis/campaigner-hero-image.jpg" alt="Campaigns page in Bits AI Dev Agent" style="width:100%;">}}
 
 You can click a session to view the code changes in more detail and chat with the [Bits AI Dev Agent][10] to ask for changes.
