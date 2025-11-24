@@ -1,10 +1,10 @@
 ---
-title: Cost Tracking
+title: Cost
 description: Use Cost Tracking to view your LLM tokens and cost.
 ---
 {{< img src="llm_observability/cost_tracking_overview.png" alt="Cost view for an app in LLM Observability." style="width:100%;" >}}
 
-In Datadog's LLM Observability, the _Cost Tracking_ is a feature that provides clear visibility into the spend cost associated with your LLM-powered applications. Cost Tracking automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
+Datadog LLM Observability automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
 
 By aggregating this information across traces and applications, you can gain insights into the user patterns of your LLM models and their impact on overall spending.
 
@@ -13,8 +13,8 @@ Use cases:
 - Track changes in token usage and cost over time to proactively guard against higher bills in the future
 - Correlate LLM cost with overall application performance, model versions, model providers, and prompt details in a single view
 
-## Set up Cost Tracking
-Datadog LLM Observability Cost Tracking can be enabled either automatically or manually. Automatic cost calculation is provided out of the box for major LLM providers, in which case Datadog automatically estimates the cost by:
+## Set up Cost Monitoring
+You can monitor your LLM costs in Datadog using either automatic or manual configuration.Automatic cost calculation is provided out of the box for major LLM providers, in which case Datadog automatically estimates the cost by:
 - Using the token counts attached to the LLM/embedding span, provided either by the auto-instrumentation or by your manual token annotations, and
 - Applying the model provider’s public pricing rates for the specific model
 
@@ -28,12 +28,12 @@ Token counts used for this calculation come from [Datadog’s auto-instrumentati
 ### Manual
 For users with custom pricing rates, self-hosted models, or unsupported providers, you can manually provide cost values on your LLM/embedding spans. To manually supply cost information, follow the instrumentation steps described in [SDK Reference][2] or in [API][3].
 
-<div class="alert alert-info">If you provide partial cost information, for example, supplying a total cost but not input/output cost values, Datadog will still compute the input and output cost using provider pricing and token values annotated on your span. This may cause a mismatch between your manually provided total cost and the sum of Datadog’s computed input/output costs. Datadog will always display your provided total cost as-is, even if these values differ.</div>
+<div class="alert alert-info">If you provide partial cost information, Datadog tries to estimate missing information. For example, if you supply a total cost but not input/output cost values, Datadog uses provider pricing and token values annotated on your span to compute the input/output cost values. This can cause a mismatch between your manually provided total cost and the sum of Datadog’s computed input/output costs. Datadog always displays your provided total cost as-is, even if these values differ.</div>
 
 ## Supported providers
 Datadog automatically calculates the cost of LLM requests made to the following supported providers using the publicly available pricing information from their official documentation.
 
-<div class="alert alert-info">Cost tracking currently supports text-based models only.</div>
+<div class="alert alert-info">Datadog currently supports monitoring costs for text-based models only.</div>
 
 - OpenAI: [OpenAI Pricing][4]
 - Anthropic: [Claude Pricing][5]
@@ -42,9 +42,9 @@ Datadog automatically calculates the cost of LLM requests made to the following 
 - Google Gemini: [Gemini Pricing][7]
 
 ## Metrics
-You can find Cost Tracking metrics in [LLM Observability Metrics][8].
+You can find Cost metrics in [LLM Observability Metrics][8].
 
-## View Cost Tracking in LLM Observability
+## View Cost in LLM Observability
 View your app in LLM Observability and select **Cost** on the left. The _Cost view_ features the following information:
 - **Summary**: A high-level overview of your LLM usage over time. This includes Total Cost, Cost Change, Total Tokens, and Token Change
 - **Breakdown by Token Type**: A detailed breakdown of token usage, along with their associated costs
