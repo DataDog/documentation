@@ -145,7 +145,7 @@ A campaign defines the following:
 
 #### Campaign in progress
 
-After **Create Campaign** is clicked, [Bits AI Dev Agent][10] does the following:
+After you click **Create Campaign**, [Bits AI Dev Agent][10] does the following:
 
 1. Loads SAST findings for the selected repo(s), path(s), and rule.
 2. Generates patches for each group of findings.
