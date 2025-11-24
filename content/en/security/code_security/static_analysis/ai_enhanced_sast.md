@@ -163,7 +163,7 @@ A remediation session shows the full lifecycle of an AI-generated fix. It includ
 
 Session details make each remediation transparent, reviewable, and auditable, helping you safely adopt AI in your secure development workflow.
 
-{{< img src="static/images/code_security/static_analysis/single-session-sql-injection-fix-light.jpg" alt="An image of a concluded session with Bits AI Dev Agent where remediations have been generated" style="width:60%;">}}
+{{< img src="/code_security/static_analysis/single-session-sql-injection-fix-light.jpg" alt="An image of a concluded session with Bits AI Dev Agent where remediations have been generated" style="width:100%;">}}
 
 Session details include the following:
 
