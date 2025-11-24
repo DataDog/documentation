@@ -1,6 +1,6 @@
 ---
-title: Provision with GitHub
-description: Enable automatic provisioning of Datadog Teams based on an organization's GitHub team structure, including nested teams. Allow Datadog to use Github as a source for Teams data.
+title: Provision Datadog Teams with GitHub
+description: Enable automatic provisioning of Datadog Teams based on an organization's GitHub team structure, including nested teams. Allow Datadog to use GitHub as a source for Teams data.
 further_reading:
     - link: '/integrations/github/'
       tag: 'Documentation'
@@ -36,7 +36,7 @@ Ensure your Datadog organization is [connected][3] to a GitHub organization. You
 
 ## Setup
 
-### Configure the GitHub teams to Datadog Teams connection
+### Connect GitHub teams to Datadog Teams
 1. Navigate to [Teams][4].
 1. In the upper right, click **GitHub Connections**.
 1. Configure your connection by selecting options for import type, sync members, and cadence.
@@ -61,7 +61,7 @@ For example, assume that user B is a member of team A in GitHub. The following s
 1. An admin enables Datadog Teams provisioning and user syncing from GitHub.
 1. Team A is created in Datadog, empty.
 1. User B sees a call to action to **Log in to GitHub** and follows through.
-1. User B is provisioned into Team A in Datadog
+1. User B is provisioned into Team A in Datadog.
 
 ## Deleting teams
 
@@ -81,7 +81,7 @@ Team created in Datadog:
 1. Team A remains in Datadog, but is not linked to any GitHub team
 
 Team created automatically from GitHub:
-1. Team B is created automatically from GitHub
+1. In Datadog, Team B is created automatically from GitHub
 1. Team B is deleted in GitHub
 1. Team B is automatically deleted in Datadog
 
