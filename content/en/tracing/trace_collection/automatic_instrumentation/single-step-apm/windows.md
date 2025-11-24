@@ -23,7 +23,7 @@ You can enable APM on Windows in the following ways:
 
 {{< callout url=#
  btn_hidden="false" header="Join the Preview!">}}
-Host-wide instrumentation for Windows is in Preview. Use this form to submit your request.
+Host-wide instrumentation for Windows is in Preview.
 {{< /callout >}}
 
 {{< tabs >}}
