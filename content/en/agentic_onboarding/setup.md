@@ -173,7 +173,7 @@ Depending on how your application is deployed, you need to commit the changes an
 
 [1]: https://cursor.com/
 [2]: https://claude.ai/
-[3]: /error_tracking/frontend_monitoring
+[3]: /error_tracking/frontend/
 [4]: /real_user_monitoring/
 [5]: /product_analytics/
 [6]: https://platform.openai.com/docs/guides/text
