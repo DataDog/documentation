@@ -126,6 +126,11 @@ Example for enabling the hooks in specified projects:
     --az-org datadoghq \
     projectName1 projectName2
 ```
+[2]: https://learn.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops
+[8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
+[12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
+[13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
+[16]: /integrations/azure_devops/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -167,20 +172,15 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://azure.microsoft.com/en-us/products/devops/pipelines
-[2]: https://learn.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
 [9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals
 [10]: /glossary/#custom-tag
 [11]: /glossary/#custom-measure
-[12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
-[13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
 [14]: https://app.datadoghq.com/integrations/azure
 [15]: /glossary/#custom-span
-[16]: /integrations/azure_devops/
 [17]: /continuous_integration/search/#search-for-pipelines
 [18]: /logs/guide/best-practices-for-log-management/
 [19]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
