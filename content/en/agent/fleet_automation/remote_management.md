@@ -38,6 +38,22 @@ Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and
 
 ### Prerequisites
 * **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
+### Upgrade process
+
+Similar to a manual upgrade, expect a downtime of 5-30 seconds while the Agent restarts. The full upgrade process takes approximately 5 minutes. Around 2 minutes of this time is used for the upgrade process. The rest of the time is spent monitoring the upgrade to ensure stability and determining if a rollback is necessary. If the upgrade fails and a rollback is necessary, the Agent automatically reverts to the previously running Agent version.
+
+The upgrade process primarily adds files to the following directories:
+
+Linux:
+* `/opt/datadog-packages`
+* `/etc/datadog-agent`
+* `/etc/systemd/system`
+
+Windows:
+* `C:\ProgramData\Datadog\Installer\packages`
+* `C:\Program Files\Datadog\Datadog Agent`
+
+The Agent ensures that the appropriate permissions are set for these files. No configuration files are altered during the installation process.
 
 ### How to upgrade Agents remotely
 To upgrade your Agents remotely:
@@ -56,22 +72,14 @@ To upgrade your Agents remotely:
 1. Use the [Deployments][10] dashboard to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
    {{< img src="/agent/fleet_automation/deployments.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 
-### Upgrade process
 
-Similar to a manual upgrade, expect a downtime of 5-30 seconds while the Agent restarts. The full upgrade process takes approximately 5 minutes. Around 2 minutes of this time is used for the upgrade process. The rest of the time is spent monitoring the upgrade to ensure stability and determining if a rollback is necessary. If the upgrade fails and a rollback is necessary, the Agent automatically reverts to the previously running Agent version.
+### How to schedule remote Agent upgrades
 
-The upgrade process primarily adds files to the following directories:
+To schedule your Agent upgrades: 
+1. [Enable Remote Agent Management](#enable-remote-agent-management).
 
-Linux:
-* `/opt/datadog-packages`
-* `/etc/datadog-agent`
-* `/etc/systemd/system`
+1. From the [**Upgrade Agents** tab][4], click **+ Create Schedule**.
 
-Windows:
-* `C:\ProgramData\Datadog\Installer\packages`
-* `C:\Program Files\Datadog\Datadog Agent`
-
-The Agent ensures that the appropriate permissions are set for these files. No configuration files are altered during the installation process.
 
 ### Upgrade precedence
 
