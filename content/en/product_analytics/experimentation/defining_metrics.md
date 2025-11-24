@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Define the metrics you want to measure during your experimentation. Metrics can be built using Real User Monitoring (RUM) and Product Analytics data.
+Define the metrics you want to measure during your experimentation. Metrics can be built using Product Analytics and Real User Monitoring (RUM) data.
 
 <div class="alert alert-info"> In order to create a metric, you must have Datadog’s client SDK installed in your application and be actively capturing data.
 </div>
@@ -23,10 +23,10 @@ To create a metric for your experiment:
 
 1. Navigate to the [Metrics page][1] within Datadog Product Analytics.
 2. Click **+ Create Metric** at the top right corner. 
-3. Click **Select an Event** to see a list of all of the actions and views collected from the RUM SDK.
+3. Click **Select an Event** to see a list of all of the actions and views collected from the Datadog SDK.
 4. Add a metric name and optionally a description. Then, click **Save**.
 
-{{< img src="/product_analytics/experiment/exp_create_metric.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric1.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
 
 ## Specify metric aggregation
 
@@ -36,15 +36,15 @@ After you’ve selected your event of interest, you can specify an aggregation m
 {{< img src="dd-logo.png" alt="A view of the User profiles page." style="width:10%;" >}}
 
 
-### Default normalized metrics 
+### Default metric normalization 
 
 All metrics are normalized by the number of enrolled subjects. For example, a **count of unique users** metric is computed as: 
 
 ```
 
-                             Number of users with specified event
-Count of unique users = -----------------------------------------------           
-                          Number of users enrolled into this variant
+                      Number of users with specified event
+                  -----------------------------------------------           
+                      Number of users enrolled into this variant
 ```
 
 <!-- {{< img src="/product_analytics/experiment/pana_exp_equation1.png" alt="A view of the User profiles page." style="width:50%;border:none" >}} -->
@@ -55,12 +55,12 @@ Similarly, a **Sum of** metric is computed as:
 
 ```
 
-            Sum of property over users enrolled in this variant
-Sum of =  --------------------------------------------------------           
-                Number of users enrolled into this variant
+                  Sum of property over users enrolled in this variant
+              --------------------------------------------------------           
+                      Number of users enrolled into this variant
 ```
 
-### Custom normalized metrics
+### Custom metric normalization
 
 You can also choose to normalize metrics by a different denominator. To do this, click on a metric
 then on **Create ratio**. This allows you to normalize your metric by another event, counting either the number of subjects with that event, the total number of events, or the sum of an event property. 
