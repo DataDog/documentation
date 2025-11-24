@@ -171,7 +171,7 @@ DDSQL supports the following data types:
 |-----------|-------------|
 | `BIGINT` | 64-bit signed integers. |
 | `BOOLEAN` | `true` or `false` values. |
-| `DOUBLE` | Double-precision floating-point numbers. |
+| `DECIMAL` | Floating-point numbers. |
 | `INTERVAL` | Time duration values. |
 | `JSON` | JSON data. |
 | `TIMESTAMP` | Date and time values. |
@@ -187,9 +187,9 @@ DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
 
 | Type | Syntax | Example |
 |------|--------|---------|
-| `BIGINT` | `BIGINT value` | `BIGINT 1234567` |
-| `BOOLEAN` | `BOOLEAN value` | `BOOLEAN true` |
-| `DOUBLE` | `DOUBLE value` | `DOUBLE 3.14159` |
+| `BIGINT` | `BIGINT 'value'` | `BIGINT '1234567'` |
+| `BOOLEAN` | `BOOLEAN 'value'` | `BOOLEAN 'true'` |
+| `DECIMAL` | `DECIMAL 'value'` | `DECIMAL '3.14159'` |
 | `INTERVAL` | `INTERVAL 'value unit'` | `INTERVAL '30 minutes'` |
 | `JSON` | `JSON 'value'` | `JSON '{"key": "value", "count": 42}'` |
 | `TIMESTAMP` | `TIMESTAMP 'value'` | `TIMESTAMP '2023-12-25 10:30:00'` |
@@ -205,7 +205,7 @@ Array literals use the syntax `ARRAY[value1, value2, ...]`. The array type is au
 SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits; -- Inferred as VARCHAR array
 SELECT ARRAY[1, 2, 3] AS numbers;                    -- Inferred as BIGINT array
 SELECT ARRAY[true, false, true] AS flags;            -- Inferred as BOOLEAN array
-SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
+SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DECIMAL array
 {{< /code-block >}}
 
 ### Example
@@ -214,7 +214,7 @@ SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
 -- Using type literals in queries
 SELECT
     VARCHAR 'Product Name: ' || name AS labeled_name,
-    price * DOUBLE 1.08 AS price_with_tax,
+    price * DECIMAL '1.08' AS price_with_tax,
     created_at + INTERVAL '7 days' AS expiry_date
 FROM products
 WHERE created_at > TIMESTAMP '2025-01-01';
