@@ -1,6 +1,10 @@
 ---
 title: Provision with GitHub
-description: Enable automatic provisioning of Datadog Teams based on an organization's GitHub team structure, including nested teams. Allow Datadog to use Github as a source for Teams data. 
+description: Enable automatic provisioning of Datadog Teams based on an organization's GitHub team structure, including nested teams. Allow Datadog to use Github as a source for Teams data.
+further_reading:
+    - link: '/integrations/github/'
+      tag: 'Documentation'
+      text: 'GitHub integration'
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" header="Join the Preview!">}}
@@ -59,15 +63,19 @@ However, if a team was originally created by the automatic GitHub sync, and that
 The following examples show the different results when deleting teams that were created in Datadog versus GitHub. 
 
 Team created in Datadog:
-1. An admin creates Team Apples in Datadog
-1. Team Apples is linked to a GitHub team
-1. Team Apples is deleted in GitHub
-1. Team Apples remains in Datadog, but is not linked to any GitHub team
+1. An admin creates Team A in Datadog
+1. Team A is linked to a GitHub team
+1. Team A is deleted in GitHub
+1. Team A remains in Datadog, but is not linked to any GitHub team
 
 Team created automatically from GitHub:
-1. Team Oranges is created automatically from GitHub
-1. Team Oranges is deleted in GitHub
-1. Team Oranges is automatically deleted in Datadog
+1. Team B is created automatically from GitHub
+1. Team B is deleted in GitHub
+1. Team B is automatically deleted in Datadog
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/teams/#team-handle
 [2]: /account_management/teams/manage/#team-modification-permissions
