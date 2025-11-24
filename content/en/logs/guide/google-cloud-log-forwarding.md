@@ -84,7 +84,7 @@ You can also use the [terraform-gcp-datadog-integration][205] module to manage t
 [203]: https://cloud.google.com/logging/docs/view/logging-query-language
 {{% /tab %}}
 
-{{% tab "Manual setup with the `terraform-gcp-datadog-integration` Terraform module" %}}
+{{% tab "Manual setup with Terraform module" %}}
 
 See the instructions on the [`terraform-gcp-datadog-integration`][300] repo to set up and manage the necessary infrastructure through Terraform.
 
