@@ -72,49 +72,7 @@ In the initialization snippet, set an environment name, service name, and versio
 
 During initialization, you can also set the sample rate (RUM sessions) and set the tracking consent for GDPR compliance, as described below. See [other configuration options][11] to initialize the library.
 
-{{< site-region region="us" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-        ).build()
-
-        Datadog.initialize(this, configuration, trackingConsent)
-    }
-}
-```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-```java
-public class SampleApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
-                        .build();
-
-        Datadog.initialize(this, configuration, trackingConsent);
-    }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+#### Kotlin
 
 ```kotlin
 class SampleApplication : Application() {
@@ -124,8 +82,7 @@ class SampleApplication : Application() {
                 clientToken = "<CLIENT_TOKEN>",
                 env = "<ENV_NAME>",
                 variant = "<APP_VARIANT_NAME>"
-            )
-            .useSite(DatadogSite.EU1)
+            ){{< region-param key=android_rum_sdk_site_kotlin >}}
             .build()
 
         Datadog.initialize(this, configuration, trackingConsent)
@@ -133,8 +90,7 @@ class SampleApplication : Application() {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
+#### Java
 
 ```java
 public class SampleApplication extends Application {
@@ -142,233 +98,13 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Configuration configuration =
-                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
-                        .useSite(DatadogSite.EU1)
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>"){{< region-param key=android_rum_sdk_site_java >}}
                         .build();
 
         Datadog.initialize(this, configuration, trackingConsent);
     }
 }
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        val configuration = Configuration.Builder(
-                clientToken = "<CLIENT_TOKEN>",
-                env = "<ENV_NAME>",
-                variant = "<APP_VARIANT_NAME>"
-            )
-            .useSite(DatadogSite.US3)
-            .build()
-
-        Datadog.initialize(this, configuration, trackingConsent)
-    }
-}
-```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-```java
-public class SampleApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
-                        .useSite(DatadogSite.US3)
-                        .build();
-
-        Datadog.initialize(this, configuration, trackingConsent);
-    }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        val configuration = Configuration.Builder(
-                clientToken = "<CLIENT_TOKEN>",
-                env = "<ENV_NAME>",
-                variant = "<APP_VARIANT_NAME>"
-            )
-            .useSite(DatadogSite.US5)
-            .build()
-
-        Datadog.initialize(this, configuration, trackingConsent)
-    }
-}
-```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-```java
-public class SampleApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
-                        .useSite(DatadogSite.US5)
-                        .build();
-
-        Datadog.initialize(this, configuration, trackingConsent);
-    }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        val configuration = Configuration.Builder(
-                clientToken = "<CLIENT_TOKEN>",
-                env = "<ENV_NAME>",
-                variant = "<APP_VARIANT_NAME>"
-            )
-            .useSite(DatadogSite.US1_FED)
-            .build()
-
-        Datadog.initialize(this, configuration, trackingConsent)
-    }
-}
-```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-```java
-public class SampleApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
-                        .useSite(DatadogSite.US1_FED)
-                        .build();
-
-        Datadog.initialize(this, configuration, trackingConsent);
-    }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        val configuration = Configuration.Builder(
-                clientToken = "<CLIENT_TOKEN>",
-                env = "<ENV_NAME>",
-                variant = "<APP_VARIANT_NAME>"
-            )
-            .useSite(DatadogSite.AP1)
-            .build()
-
-        Datadog.initialize(this, configuration, trackingConsent)
-    }
-}
-```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-```java
-public class SampleApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
-                        .useSite(DatadogSite.AP1)
-                        .build();
-
-        Datadog.initialize(this, configuration, trackingConsent);
-    }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        val configuration = Configuration.Builder(
-                clientToken = "<CLIENT_TOKEN>",
-                env = "<ENV_NAME>",
-                variant = "<APP_VARIANT_NAME>"
-            )
-            .useSite(DatadogSite.AP2)
-            .build()
-
-        Datadog.initialize(this, configuration, trackingConsent)
-    }
-}
-```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-```java
-public class SampleApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Configuration configuration =
-                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
-                        .useSite(DatadogSite.AP2)
-                        .build();
-
-        Datadog.initialize(this, configuration, trackingConsent);
-    }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
 
 The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 
