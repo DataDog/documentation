@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
+Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By creating them, you can assess the effectiveness of your application's responses, including detection of sentiment, topic relevancy, toxicity, failure to answer, and hallucination.
 
 LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation.
 
@@ -98,7 +98,7 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
 
 ## Create new evaluations
 
-1. Navigate to [**AI Observability > Settings > Evaluations**][2].
+1. Navigate to [**AI Observability > Evaluations**][2].
 1. Click on the **Create Evaluation** button on the top right corner.
 1. Select a specific managed evaluation. This will open the evalution editor window.
 1. Select the LLM application(s) you want to configure your evaluation for.
@@ -109,14 +109,12 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
    - (Optional) Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than `0` and less than or equal to `100` (sampling all spans).
 1. (Optional) Configure evaluation options by selecting what subcategories should be flagged. Only available on some evaluations.
 
-After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
+After you click **Save and Publish**, LLM Observability uses the LLM account you connected to power the evaluation you enabled. Alternatively, you can **Save as Draft** and edit or enable them later.
 
 ## Edit existing evaluations
 
-1. Navigate to [**AI Observability > Settings > Evaluations**][2].
-1. Find on the evaluation you want to edit and toggle the **Enabled Applications** button.
-1. Select the edit icon to configure the evaluation for an individual LLM application or click on the application name.
-1. Evaluations can be disabled by selecting the disable icon for an individual LLM application.
+1. Navigate to [**AI Observability > Evaluations**][2].
+1. Hover over the evaluation you want to edit and click the **Edit** button.
 
 ### Estimated token usage
 
@@ -173,16 +171,17 @@ This check identifies instances where the LLM makes a claim that disagrees with 
 | Evaluated on Output | Evaluated using LLM | Hallucination flags any output that disagrees with the context provided to the LLM. |
 
 ##### Instrumentation
-
-In order to take advantage of Hallucination detection, you will need to annotate LLM spans with the user query and context:
+You can use [Prompt Tracking][6] annotations to track your prompts and set them up for hallucination configuration. Annotate your LLM spans with the user query and context so hallucination detection can evaluate model outputs against the retrieved data.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.utils import Prompt
+from ddtrace.llmobs.types import Prompt
 
 # if your llm call is auto-instrumented...
 with LLMObs.annotation_context(
         prompt=Prompt(
+            id="generate_answer_prompt",
+            template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
             variables={"user_question": user_question, "article": article},
             rag_query_variables=["user_question"],
             rag_context_variables=["article"]
@@ -197,18 +196,20 @@ def generate_answer():
   ...
   LLMObs.annotate(
             prompt=Prompt(
+                id="generate_answer_prompt",
+                template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
                 variables={"user_question": user_question, "article": article},
                 rag_query_variables=["user_question"],
                 rag_context_variables=["article"]
             ),
   )
 {{< /code-block >}}
-
-The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Set `rag_query_variables` and `rag_context_variables` to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+The `variables` dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Use `rag_query_variables` and `rag_context_variables` to specify which variables represent the user query and which represent the retrieval context. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
 
 Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
 
-You can find more examples of instrumentation in the [SDK documentation][6].
+Prompt Tracking is available on python starting from the 3.15 version, It also requires an ID for the prompt and the template set up to monitor and track your prompt versions.
+You can find more examples of prompt tracking and instrumentation in the [SDK documentation][6].
 
 ##### Hallucination configuration
 <div class="alert alert-info">Hallucination detection is only available for OpenAI.</div>
@@ -335,11 +336,11 @@ This check ensures that sensitive information is handled appropriately and secur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/llm/settings/evaluations
+[2]: https://app.datadoghq.com/llm/evaluations
 [3]: https://app.datadoghq.com/llm/applications
 [4]: /security/sensitive_data_scanner/
-[5]: https://docs.datadoghq.com/api/latest/ip-ranges/
-[6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
+[5]: /api/latest/ip-ranges/
+[6]: /llm_observability/instrumentation/sdk?tab=python#prompt-tracking
 [7]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
 [9]: https://learnprompting.org/docs/prompt_hacking/offensive_measures/simple-instruction-attack
 [10]: https://owasp.org/www-community/attacks/Code_Injection

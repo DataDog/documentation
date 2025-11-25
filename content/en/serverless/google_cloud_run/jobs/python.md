@@ -44,7 +44,7 @@ CMD ["ddtrace-run", "python", "app.py"]
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install cmd="\"ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
 
 3. **Set up logs**.
 
