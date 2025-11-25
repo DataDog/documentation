@@ -92,32 +92,16 @@ To use this custom loader, run your application with the following Node option:
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Support for bundled applications (esbuild, Webpack, Next.js)" level="h4" expanded=false id="bundling-support" %}}
-To use LLM Observability integrations in bundled applications (esbuild, Webpack, Next.js), you must exclude these integrations' modules from bundling.
+{{% collapse-content title="Support for bundled applications (esbuild, Webpack)" level="h4" expanded=false id="bundling-support" %}}
+To use LLM Observability integrations in bundled applications (esbuild, Webpack), you must exclude these integrations' modules from bundling.
 
 ##### esbuild
 If you are using esbuild, see [Bundling with the Node.js tracer](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling).
 
-##### Webpack or Next.js
-For Webpack or Next.js bundling, specify the corresponding integration in the `externals` section of the webpack configuration:
+##### Webpack
+For Webpack, specify the corresponding integration in the `externals` section of the webpack configuration:
 
 ```javascript
-// next.config.js
-module.exports = {
-  webpack: (config) => {
-    // this may be a necessary inclusion
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      graphql: false,
-    }
-
-    // exclude OpenAI from bundling
-    config.externals.push('openai')
-
-    return config
-  }
-}
-
 // webpack.config.js
 module.exports = {
   resolve: {
@@ -128,6 +112,48 @@ module.exports = {
   externals: {
     openai: 'openai'
   }
+}
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Support for Next.js" level="h4" expanded=false id="nextjs-support" %}}
+Properly initialize the tracer in your application to ensure auto-instrumentation works correctly. If using TypeScript or ESM for your Next.js application, initialize the tracer in a `instrumentation.{ts/js}` file as follows, specifying your configuration options as environment variables:
+
+```typescript
+// instrumentation.ts
+export async function register() {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    const initializeImportName = 'dd-trace/initialize.mjs';
+    await import(/* webpackIgnore: true */ initializeImportName as 'dd-trace/initialize.mjs')
+  }
+
+  // ...
+}
+```
+
+Otherwise, for CommonJS Next.js applications, you can use the `init` function directly:
+
+```javascript
+// instrumentation.js
+const tracer = require('dd-trace')
+
+function register () {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    tracer.init({}); // specify options here or they will be read from environment variables
+  }
+
+  // ...
+}
+
+module.exports = register;
+```
+
+
+Then, make sure to specify `dd-trace` and any other supported integrations in `serverExternalPackages` in your `next.config.{ts/js}` file:
+```javascript
+// next.config.ts
+module.exports = {
+  serverExternalPackages: ['dd-trace', 'openai'], // add any other supported integrations here to be auto-instrumented
 }
 ```
 {{% /collapse-content %}}

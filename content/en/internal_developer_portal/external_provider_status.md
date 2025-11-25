@@ -55,7 +55,7 @@ External Provider Status monitors the following third-party providers:
 | Auth0 | `*.auth0.com` |
 | Azure DevOps | `dev.azure.com` |
 | Braintree | `api.braintreegateway.com` |
-| Cloudflare | `api.cloudflare.com` |
+| Cloudflare | `*.cloudflare.com` |
 | Databricks | `*.cloud.databricks.com` |
 | Facebook | `graph.facebook.com` |
 | GitHub | `api.github.com` |

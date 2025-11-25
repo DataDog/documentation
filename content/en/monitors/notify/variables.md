@@ -554,7 +554,7 @@ To avoid missed notifications when using dynamic handles with these variables, m
 {{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
   // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 
