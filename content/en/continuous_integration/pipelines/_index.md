@@ -26,17 +26,12 @@ cascade:
 
 ## Setup
 
-{{< whatsnext desc="Select your CI provider to set up CI Visibility in Datadog:" >}}
-    {{< nextlink href="continuous_integration/pipelines/awscodepipeline" >}}AWS CodePipeline{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/circleci" >}}CircleCI{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/codefresh" >}}Codefresh{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/github" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/gitlab" >}}GitLab{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/jenkins" >}}Jenkins{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/teamcity" >}}TeamCity{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/custom" >}}Other CI Providers{{< /nextlink >}}
+Select your CI provider to set up CI Visibility in Datadog:
+
+{{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
+
+{{< whatsnext desc="For other CI providers and customization options, see the following sections:" >}}
+    {{< nextlink href="continuous_integration/pipelines/custom" >}}Custom Pipelines for other CI Providers{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_tags_and_measures" >}}Custom Tags and Measures{{< /nextlink >}}
 {{< /whatsnext >}}
