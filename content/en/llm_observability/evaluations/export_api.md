@@ -118,7 +118,7 @@ Method
 | filter[to] | string | Maximum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time. |
 | sort | string | Sort order. Allowed values: timestamp, -timestamp |
 | page[cursor] | string | List following results with a cursor provided in the previous query. |
-| page[limit] | integer | Maximum number of spans in the response. The default is 10 while the maximum configurable limit is 5000. |
+| page[limit] | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. |
 
 #### Code example
 
@@ -277,7 +277,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 | Field | Type | Description |
 |-------|------|-------------|
-| limit | integer | Maximum number of spans in the response. The default is 10 while the maximum configurable limit is 5000. |
+| limit | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. |
 | cursor | string | List following results with a cursor provided in the previous query. |
 
 ### SearchedSpanResource
