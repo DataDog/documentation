@@ -1,6 +1,8 @@
 ---
 title: Set up App and API Protection for Nginx in Kubernetes
 type: multi-code-lang
+aliases:
+  - /security/application_security/setup/nginx/kubernetes/
 further_reading:
   - link: "/security/application_security/how-it-works/"
     tag: "Documentation"

@@ -1112,11 +1112,6 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_vscode
       weight: 702
-    - name: Visual Studio
-      url: developers/ide_plugins/visual_studio/
-      parent: ide_plugins
-      identifier: ide_plugins_visual_studio
-      weight: 703
     - name: Community
       url: developers/community/
       parent: dev_tools
@@ -2908,11 +2903,16 @@ menu:
       parent: app_builder_components
       identifier: app_builder_custom_charts
       weight: 701
+    - name: React Renderer
+      url: actions/app_builder/components/react_renderer/
+      parent: app_builder_components
+      identifier: app_builder_react_renderer
+      weight: 702
     - name: Tables
       url: actions/app_builder/components/tables/
       parent: app_builder_components
       identifier: app_builder_tables
-      weight: 702
+      weight: 703
     - name: JavaScript Expressions
       url: actions/app_builder/expressions/
       parent: app_builder
@@ -2960,6 +2960,12 @@ menu:
       parent: datastores
       identifier: auth
       weight: 4
+    - name: Forms
+      url: actions/forms/
+      pre: file-wui
+      parent: actions_heading
+      identifier: forms
+      weight: 50000
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
@@ -3049,11 +3055,22 @@ menu:
       parent: usm_parent
       identifier: universal_service_monitoring_guides
       weight: 2
+    - name: End User Device Monitoring
+      url: infrastructure/end_user_device_monitoring/
+      pre: desktop-wui
+      identifier: end_user_device_monitoring
+      parent: infrastructure_heading
+      weight: 40000
+    - name: Setup
+      url: infrastructure/end_user_device_monitoring/setup/
+      identifier: end_user_device_monitoring_setup
+      parent: end_user_device_monitoring
+      weight: 1      
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
       parent: infrastructure_heading
-      weight: 40000
+      weight: 50000
       pre: host-map
     - name: Host List
       identifier: infrastructure_list
@@ -3064,7 +3081,7 @@ menu:
       url: containers/
       identifier: containers
       parent: infrastructure_heading
-      weight: 50000
+      weight: 60000
       pre: container
     - name: Monitoring Containers
       url: infrastructure/containers/
@@ -3356,7 +3373,7 @@ menu:
       identifier: process
       pre: process
       parent: infrastructure_heading
-      weight: 60000
+      weight: 70000
     - name: Increase Process Retention
       identifier: infrastructure_process_increase_process_retention
       url: infrastructure/process/increase_process_retention/
@@ -3367,7 +3384,7 @@ menu:
       pre: serverless
       identifier: serverless
       parent: infrastructure_heading
-      weight: 70000
+      weight: 80000
     - name: AWS Lambda
       url: serverless/aws_lambda
       parent: serverless
@@ -3558,7 +3575,7 @@ menu:
       pre: network
       identifier: nm_parent
       parent: infrastructure_heading
-      weight: 80000
+      weight: 90000
     - name: Cloud Network Monitoring
       url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
@@ -4953,16 +4970,25 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 304
+    - name: Cost 
+      url: llm_observability/monitoring/cost
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_cost
+    - name: MCP Clients
+      url: llm_observability/monitoring/mcp_client
+      parent: llm_obs_monitoring
+      identifier: llm_obs_mcp_client
+      weight: 305
     - name: Prompt Tracking
       url: llm_observability/monitoring/prompt_tracking
       parent: llm_obs_monitoring
       identifier: llm_obs_prompt_tracking
-      weight: 305
+      weight: 306
     - name: Metrics
       url: llm_observability/monitoring/metrics
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
-      weight: 306
+      weight: 307
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
@@ -6017,11 +6043,16 @@ menu:
       identifier: observability_pipelines_troubleshooting
       parent: observability_pipelines_monitoring_and_troubleshooting
       weight: 804
-    - name: Guides
+    - name: Guides and Resources
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
       weight: 9
+    - name: Upgrade Worker Guide
+      url: observability_pipelines/guide/upgrade_worker_2_7/
+      parent: observability_pipelines_guide
+      identifier: observability_pipelines_guide_upgrade_worker_2_7
+      weight: 901
     - name: Log Management
       url: logs/
       pre: log
@@ -7131,31 +7162,31 @@ menu:
       url: /security/code_security/static_analysis/generic_ci_providers/
       parent: sec_static_analysis
       weight: 3
-    - name: Static Code Analysis (SAST) rules
-      identifier: sec_static_analysis_rules
-      url: /security/code_security/static_analysis/static_analysis_rules/
+    - name: AI-Enhanced Static Code Analysis
+      identifier: sec_static_analysis_ai
+      url: /security/code_security/static_analysis/ai_enhanced_sast/
       parent: sec_static_analysis
-      weight: 5
-    - name: SAST Custom Rules
-      identifier: sec_static_analysis_custom_rules
-      url: /security/code_security/static_analysis/custom_rules/
-      parent: sec_static_analysis
-      weight: 5
+      weight: 5     
     - name: SAST Custom Rule Creation Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
       parent: sec_static_analysis
-      weight: 5
+      weight: 6
+    - name: SAST Custom Rules
+      identifier: sec_static_analysis_custom_rules
+      url: /security/code_security/static_analysis/custom_rules/
+      parent: sec_static_analysis
+      weight: 7
     - name: SAST Custom Rules Guide
       identifier: sec_static_analysis_custom_rules_guide
       url: /security/code_security/static_analysis/custom_rules/guide/
       parent: sec_static_analysis
-      weight: 5
-    - name: Malicious PR Protection
-      identifier: sec_static_analysis_malicious_pr_protection
-      url: /security/code_security/static_analysis/malicious_pr_protection
+      weight: 8
+    - name: Static Code Analysis (SAST) rules
+      identifier: sec_static_analysis_rules
+      url: /security/code_security/static_analysis/static_analysis_rules/
       parent: sec_static_analysis
-      weight: 4
+      weight: 9
     - name: Software Composition Analysis (SCA)
       identifier: software_composition_analysis
       url: /security/code_security/software_composition_analysis/
@@ -7176,6 +7207,11 @@ menu:
       url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
       parent: sca_setup_runtime
       weight: 1
+    - name: Library Inventory
+      identifier: sca_library_inventory
+      url: /security/code_security/software_composition_analysis/library_inventory/
+      parent: software_composition_analysis
+      weight: 3
     - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
