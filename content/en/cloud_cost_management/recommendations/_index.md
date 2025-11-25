@@ -600,7 +600,7 @@ Recommendations are run on a daily basis and are automatically refreshed in your
 
 You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page.
 
-Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations.
+Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations and [are normalized][12].
 
 ## Recommendation categories
 
@@ -670,3 +670,4 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [9]: /integrations/azure/
 [10]: https://app.datadoghq.com/integrations/gcp
 [11]: /cloud_cost_management/tags/tag_pipelines/
+[12]: /cloud_cost_management/tags/#how-tags-are-normalized

@@ -2,6 +2,7 @@
 title: Application Monitoring
 description: Collect RUM data from your browser, mobile and TV applications.
 aliases:
+- /real_user_monitoring/mobile_and_tv_monitoring/
 - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
 - /real_user_monitoring/mobile_and_tv_monitoring/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/

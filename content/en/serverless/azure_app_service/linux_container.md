@@ -96,8 +96,8 @@ Instrument your main application with the `dd-trace-dotnet` library.
    RUN mkdir -p /datadog/tracer
    RUN mkdir -p /home/LogFiles/dotnet
 
-   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
-   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
+   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v3.30.0/datadog-dotnet-apm-3.30.0.tar.gz /datadog/tracer
+   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-3.30.0.tar.gz
    {{< /code-block >}}
 
 2. Build the image and push it to your preferred container registry.
@@ -130,8 +130,8 @@ COPY --from=build /app/out ./
 RUN mkdir -p /datadog/tracer
 RUN mkdir -p /home/LogFiles/dotnet
 
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
-RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v3.30.0/datadog-dotnet-apm-3.30.0.tar.gz /datadog/tracer
+RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-3.30.0.tar.gz
 
 # Set the entry point for the application
 ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
@@ -204,7 +204,13 @@ Instrumentation is done using a sidecar container. This sidecar container collec
 
 #### Locally
 
-Install the [Datadog CLI][601] and [Azure CLI][602], and login to your Azure account using the Azure CLI by running `az login`.
+Install the [Datadog CLI][601]
+
+```shell
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
+```
+
+Install the [Azure CLI][602] and authenticate with `az login`.
 
 Then, run the following command to set up the sidecar container:
 
@@ -326,6 +332,10 @@ In your **App settings** in Azure, set the following environment variables on bo
 
 
    <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
+
+`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
+: **Value**: `true`<br>
+Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
 <details open>
 <summary>
