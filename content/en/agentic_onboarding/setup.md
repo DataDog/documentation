@@ -1,6 +1,6 @@
 ---
 title: Agentic Onboarding Setup
-description: Instrument your frontend applications with one prompt using LLM coding agents like Cursor or Claude.
+description: Instrument your frontend applications with one prompt using LLM coding agents like Cursor or Claude Code.
 further_reading:
 
 ---
@@ -15,7 +15,7 @@ Agentic Onboarding is in Preview.
 
 ## Overview
 
-Datadog's Agentic Onboarding allows you to instrument your frontend applications with one prompt using LLM coding agents like [Cursor][1] or [Claude][2].
+Datadog's Agentic Onboarding allows you to instrument your frontend applications with one prompt using LLM coding agents like [Cursor][1] or [Claude Code][2].
 
 Instead of navigating multiple setup steps or searching through documentation, you can instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], and [Product Analytics][5] in one command.
 
@@ -129,7 +129,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
    {{< /tabs >}}
 
 2. In your AI agent client, click **Install** for the `datadog-onboarding-mcp` server.
-3. If you see a **Needs login** link under the installed MCP server, click the link to complete the Oauth process.
+3. If you see a **Needs login** link under the installed MCP server, click the link to complete the OAuth process.
 4. When prompted to open an external website, click **Open**.
 5. After you've granted access to your Datadog account, you are redirected to Cursor. Click **Open** to complete the authentication process.
 5. Confirm you see MCP tools listed for the `datadog-onboarding-mcp` server.
@@ -138,8 +138,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 
 Your AI coding agent can automatically configure Datadog for your project. When you provide a setup prompt, your coding agent does the following:
 
-- Analyze your project and identify if the MCP server offers a tool that can be used to set it up with Datadog
-- Call the tool (asking for your permission before doing so) with inferred parameters from your project (for example: your project's framework, language, and bundler)
+- Analyze your project and identify your project's framework, language, and bundler
 - Follow the instructions the MCP tool provides as context to your coding agent, making code changes on your behalf (don't worry - Datadog does not commit them)
 - Provide testing steps to confirm that your application is correctly configured to send telemetry to Datadog
 
