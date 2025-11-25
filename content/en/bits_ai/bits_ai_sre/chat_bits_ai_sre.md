@@ -21,11 +21,11 @@ The Bits AI SRE chatbot has access to:
 | Functionality                                  | Example prompt                                                    | Data source                       |
 |------------------------------------------------|-------------------------------------------------------------------|-----------------------------------|
 | Ask for clarification on investigation details | `Why do you think there's database query slowness?`               | Bits AI SRE Investigation details |
-| Ask for elaborations on investigation findings | `Tell me more about the increased 500s on {web-store}.`           | Bits AI SRE Investigation details |
+| Ask for elaborations on investigation findings | `Tell me more about the increased 500s on <web-store>.`           | Bits AI SRE Investigation details |
 | Learn how to make Bits work better             | `How can I make the investigation more effective next time?`      | Bits AI SRE Investigation details |
-| Look up information about a service            | `Are there any ongoing incidents for {web-store}?`                | Software Catalog and Incidents    |
-| Find recent changes for a service              | `Were there any recent changes on {web-store}?`                   | Change Tracking                   |
-| Query APM request, error, and duration metrics | `What's the current error rate for {web-store}?`                  | APM                               |
+| Look up information about a service            | `Are there any ongoing incidents for <web-store>?`                | Software Catalog and Incidents    |
+| Find recent changes for a service              | `Were there any recent changes on <web-store>?`                   | Change Tracking                   |
+| Query APM request, error, and duration metrics | `What's the current error rate for <web-store>?`                  | APM                               |
 | Ask about Datadog products                     | `Does Bits AI SRE connect to Datadog Case Management?`            | Datadog Documentation             |
 | Create a Notebook                              | `Can you create a notebook with a summary of this investigation?` | Notebooks                         |
 
