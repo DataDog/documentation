@@ -9337,9 +9337,9 @@ menu:
           - GetTeamOnCallUsers
         unstable: []
         order: 12
-    - name: Get the schedule on-call user
-      url: '#get-the-schedule-on-call-user'
-      identifier: on-call-get-the-schedule-on-call-user
+    - name: Get the scheduled on-call user
+      url: '#get-the-scheduled-on-call-user'
+      identifier: on-call-get-the-scheduled-on-call-user
       parent: on-call
       generated: true
       params:

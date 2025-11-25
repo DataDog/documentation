@@ -1974,7 +1974,7 @@
   },
   "GetScheduleOnCallUser": {
     "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
-    "summary": "Get the schedule on-call user"
+    "summary": "Get the scheduled on-call user"
   },
   "GetTeamOnCallUsers": {
     "description": "Get a team's on-call users at a given time",
