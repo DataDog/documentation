@@ -1,6 +1,6 @@
 ---
 title: Investigate issues
-description: "Configure Bits AI SRE to automatically investigate monitor alerts and provide root cause analysis for faster incident resolution."
+description: "Use Bits AI SRE to automatically investigate monitor alerts and provide root cause analysis for faster incident resolution."
 aliases: 
 - /bits_ai/bits_ai_sre/investigate_alerts/
 ---
@@ -37,13 +37,19 @@ To use the Slack integration, [connect your Slack workspace to Bits AI SRE][8].
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-#### APM latency graphs on service pages
+#### APM latency
+
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
+Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
+
+##### APM latency graphs on service pages
 
 1. In Datadog, navigate to [APM][1] and open the service or resource page you want to investigate. Next to the latency graph, click **Investigate**.
 1. Click and drag your cursor over the point plot visualization to make a rectangular selection over a region that shows unusual latency to seed the analysis. Initial diagnostics on the latency issue appear, including the observed user impact, anomalous tags contributing to the issue, and recent changes. For more information, see [APM Investigator][2].
 1. Click **Investigate with Bits AI SRE** to run a deeper investigation. 
 
-#### APM latency Watchdog stories
+##### APM latency Watchdog stories
 
 On a Watchdog APM latency story, click **Investigate with Bits AI SRE**. 
 

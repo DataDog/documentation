@@ -1473,14 +1473,14 @@ menu:
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Configure Bits AI SRE
-      url: bits_ai/bits_ai_sre/configure
-      identifier: bits_ai_sre_configure
-      parent: bits_ai_sre
-      weight: 100
     - name: Investigate issues
       url: bits_ai/bits_ai_sre/investigate_issues
       identifier: bits_ai_sre_investigate_issues
+      parent: bits_ai_sre
+      weight: 100
+    - name: Bits AI SRE integrations and settings
+      url: bits_ai/bits_ai_sre/configure
+      identifier: bits_ai_sre_configure
       parent: bits_ai_sre
       weight: 200
     - name: Remediate issues

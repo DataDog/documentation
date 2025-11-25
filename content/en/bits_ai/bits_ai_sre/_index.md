@@ -18,8 +18,8 @@ Bits AI SRE is an autonomous AI agent that investigates production issues end to
 ## Features
 
 {{< whatsnext desc="Learn about how you can use Bits AI SRE:" >}}
-   {{< nextlink href="bits_ai/bits_ai_sre/configure" >}}Configure Bits AI SRE{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_sre/investigate_issues" >}}Investigate issues{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre/configure" >}}Bits AI SRE integrations and settings{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_sre/remediate_issues" >}}Remediate issues{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_sre/help_bits_learn" >}}Help Bits learn{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_sre/chat_bits_ai_sre" >}}Chat with Bits AI SRE{{< /nextlink >}}
