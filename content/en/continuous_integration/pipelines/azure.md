@@ -40,7 +40,7 @@ Set up tracing on Azure Pipelines to gain real time insights into your CI/CD wor
 
 After the Azure App is created and installed, enable CI Visibility for the organizations and projects you want Datadog to monitor. 
 
-1. Verify that your Azure DevOps organization is linked to a <strong>Microsoft Entra tenant</strong>. See the [Azure source code setup instructions][1] for guidance on connecting Azure DevOps projects to Datadog.
+1. Verify that your Azure DevOps organization is linked to a **Microsoft Entra tenant**. See the [Azure source code setup instructions][1] for guidance on connecting Azure DevOps projects to Datadog.
 
 2. In Datadog, navigate to [**Software Delivery → CI Visibility → Add a Pipeline Provider → Azure Pipelines**][2].
 
@@ -127,6 +127,7 @@ Example for enabling the hooks in specified projects:
     projectName1 projectName2
 ```
 [2]: https://learn.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
 [12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
 [13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
@@ -172,7 +173,6 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://azure.microsoft.com/en-us/products/devops/pipelines
-[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
