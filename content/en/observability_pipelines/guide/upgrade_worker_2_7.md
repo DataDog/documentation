@@ -27,7 +27,7 @@ Version 2.11.0 gives you access to the following:
 
 #### New features
 
-- More than 100 out-of-the-box rules for the Sensitive Data Scanner processor have been added. These rules redact Personally Identifiable Information (PII) and access key information that focus on GDPR compliance and secrets.
+- More than 100 out-of-the-box rules for the Sensitive Data Scanner processor have been added. These rules redact Personally Identifiable Information (PII) and access key information.
 - The updated [Search Syntax][3] that lets you:
     - Dereference arrays
     - Perform case insensitive search within log messages
