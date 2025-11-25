@@ -1,8 +1,9 @@
 ---
-title: Replaying User Activity
+title: Session Replay
 description: Learn about how to capture and visually replay your users' web browsing or mobile app experience with Session Replay.
 aliases:
 - /real_user_monitoring/guide/session-replay-getting-started/
+- /real_user_monitoring/session_replay/
 further_reading:
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
   tag: 'Blog'
@@ -13,11 +14,13 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
   tag: 'Blog'
   text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Visualize your RUM data in the Explorer'
 - link: '/integrations/content_security_policy_logs'
   tag: 'Documentation'
   text: 'Detect and aggregate CSP violations with Datadog'
 ---
-
 
 ## Overview
 
@@ -36,6 +39,24 @@ Learn more about the [Session Replay for Browsers][3].
 Mobile Session Replay expands visibility into your mobile applications by visually replaying each user interaction, such as taps, swipes, and scrolls. It is available for native apps on both Android and iOS. Visually replaying user interactions on your applications makes it easier to reproduce crashes and errors, as well as understand the user journey for making UI improvements.
 
 Learn more about the [Session Replay for Mobile][4].
+
+## Extend data retention
+
+By default, Session Replay data is retained for 30 days.
+
+To extend Session Replay data retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience).
+
+To access any Session Replay at a later time, Datadog recommends saving the URL or adding it to a [Playlist][8].
+
+Extended Retention only applies to Session Replay and does not include associated events. The 15 months start when Extended Retention is enabled, not when the session is collected.
+
+You can disable Extended Retention at any time. If the session replay is still within its default 30 days of retention, the replay expires at the end of the initial 30 day window. If you disable Extended Retention on a session replay that is older than 30 days, the replay immediately expires.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Enable extended retention" style="width:100%;" >}}
+
+Refer to the below diagram to understand what data is retained with extended retention.
+
+{{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
 
 ## Playback history
 
@@ -57,9 +78,9 @@ You can create a playlist of Session Replays to organize them by any patterns yo
 
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
-[3]: /product_analytics/session_replay/browser/
-[4]: /product_analytics/session_replay/mobile/
+[3]: /real_user_monitoring/session_replay/browser/
+[4]: /real_user_monitoring/session_replay/mobile/
 [5]: https://docs.datadoghq.com/notebooks/
 [6]: https://docs.datadoghq.com/account_management/audit_trail/
 [7]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
-[8]: /product_analytics/session_replay/playlists
+[8]: /real_user_monitoring/session_replay/playlists

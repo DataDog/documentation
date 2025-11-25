@@ -8466,6 +8466,13 @@ menu:
       parent: product_analytics
       identifier: pa_troubleshooting
       weight: 9
+      
+    - name: Session Replay
+      url: session_replay/
+      pre: play-circle
+      identifier: session_replay
+      parent: digital_experience_heading
+      weight: 60000
     - name: Account Management
       url: account_management/
       pre: cog-2
