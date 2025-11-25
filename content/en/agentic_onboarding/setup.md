@@ -31,12 +31,9 @@ Agentic Onboarding is available for the following frameworks: Android, Angular, 
 
 To install the Datadog Onboarding Model Context Protocol (MCP) server, follow the steps below.
 
-1. Copy the deeplink or the command for your coding agent:
-
-   {{< tabs >}}
-   {{% tab "Cursor" %}}
-
-   Paste the following Cursor deeplink into your browser.
+{{< tabs >}}
+{{% tab "Cursor" %}}
+1. Copy and paste the following deeplink into your browser.
 
    {{% site-region region="us" %}}
 
@@ -79,11 +76,15 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
    <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
    {{< /site-region >}}
 
-   {{% /tab %}}
+2. In Cursor, click **Install** for the `datadog-onboarding-mcp` server.
+3. If the MCP server shows a **Needs login** link, select it and complete the OAuth flow. When prompted, choose **Open** to continue and grant access to your Datadog account.
+4. After authentication, return to Cursor and confirm that MCP tools appear under the `datadog-onboarding-mcp` server.
 
-   {{% tab "Claude Code" %}}
+{{% /tab %}}
 
-   Copy and execute the Claude Code command into your terminal:
+{{% tab "Claude Code" %}}
+
+1. Open an active Claude Code session with the /mcp command:
 
    {{% site-region region="us" %}}
    ```shell
@@ -125,12 +126,11 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
    <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
    {{< /site-region >}}
 
-   {{% /tab %}}
-   {{< /tabs >}}
+2. Select the MCP server installed in Step 1. You should see a `disconnected - Enter to login` message. Press <kbd>Enter</kbd>.
+3. When you see the option to authenticate, press <kbd>Enter</kbd>. This brings you to the OAuth screen.
 
-2. In your client, click **Install** for the `datadog-onboarding-mcp` server.
-3. If the MCP server shows a **Needs login** link, select it and complete the OAuth flow. When prompted, choose **Open** to continue and grant access to your Datadog account.
-4. After authentication, return to your client and confirm that MCP tools appear under the `datadog-onboarding-mcp` server.
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Set up your project
 
