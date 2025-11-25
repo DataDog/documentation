@@ -23,7 +23,7 @@ This page provides an overview of these features.
 | Detection                 | Malicious PR protection: Detect potentially malicious changes or suspicious diffs | At PR time                | Flags PRs introducing novel risky code          |
 | Validation | False positive filtering: Deprioritize low-likelihood findings         | After scan                  | Reduce noise, allow focus on actual issues                |
 | [Detection](#detection)                 | Malicious PR protection: Detect potentially malicious changes or suspicious diffs | At PR time                | Flags PRs introducing novel risky code          |
-| [Validation](#validation) | False positive filtering: Deprioritize low-likelihood findings         | After scan                  | Reduce noise, allow focus on actual issues                |
+| [Validation](#validation-and-triage) | False positive filtering: Deprioritize low-likelihood findings         | After scan                  | Reduce noise, allow focus on actual issues                |
 | [Remediation](#remediation)                    | Batched remediation: Generate suggested fixes (and optionally PRs) for one or multiple vulnerabilities                 | After scan | Reduces developer effort, accelerates fix cycle           |
 
 ## Detection
@@ -176,7 +176,7 @@ Session details include the following:
 - Left panel displays the chat message history, for example:
   - Prompt for remediation: Asks for remediation(s) and explains the triggered rule, the security risk, and why the original code is unsafe.
   - Task list: Shows exactly how the AI read the code, understood the context, chose its approach, and applied the fix. This is helpful for auditability, compliance, and trust. You can confirm that the AI isn't rewriting code blindly, but applying defensible and explainable patterns.
-  - CI logs via GitHub: Describes whether the AI-generated patch breaks anything downstream, and includes full error logs. This helps you validate that a fix is not only secure but also safe to deploy, without needing to leave the platform.
+  - CI logs from GitHub: Describes whether the AI-generated patch breaks anything downstream, and includes full error logs. This helps you validate that a fix is not only secure but also safe to deploy, without needing to leave the platform.
   - Summary: Recaps the impact of the fix and provides next steps or guidance if tests failed or PR needs to be rebased.
   - **Bits AI chat field**: Lets you interactively refine the fix or ask the AI follow-up questions. This makes remediation collaborative and tunable, giving security engineers and developers control without needing to write the patch themselves.
 
