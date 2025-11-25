@@ -83,7 +83,7 @@ A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity
 | ------------------------------------------ | ------------------------ |
 | Maximum duration of a session              | 4 hours                  |
 | Timeout of a session                       | 15 minutes of inactivity |
-| Maximum number of events per session       | 10 million               |
+| Maximum number of events per session       | 10 millions              |
 | Maximum number of attributes per event     | 1,000                    |
 | Maximum attribute depth per event          | 20                       |
 | Maximum event size                         | 1 MB                     |
