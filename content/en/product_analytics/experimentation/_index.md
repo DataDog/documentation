@@ -40,8 +40,7 @@ After you’ve created an experiment, add your primary metric and optional guard
 After selecting your experiment’s metrics, use the optional sample size calculator to determine how small of a change your experiment can reliably detect with your current sample size.
 
 1. Select the entry point of your experiment. This specifies _when_ in the user journey they will be enrolled into the test. 
-
-For example, if you plan to run an experiment on users who visit the homepage, select the homepage view as your entry point.
+  For example, if you plan to run an experiment on users who visit the homepage, select the homepage view as your entry point.
 
 1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants.
 

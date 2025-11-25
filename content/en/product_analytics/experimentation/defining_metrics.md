@@ -70,7 +70,7 @@ Datadog’s statistical engine accounts for correlations between the numerator a
 
 
 ## Add filters
-You can also add filters to your metrics, similar to other Product Analytics dashboards. For instance, you might want to filter page views based on referring URL or UTM parameters. Similarly, you might want to filter actions to a specific page or value of a custom attribute. As you add filters, you can check metric values in real time using the chart on the right.
+You can also add filters to your metrics, similar to other [Product Analytics dashboards][3]. For instance, you might want to filter page views based on referring URL or UTM parameters. Similarly, you might want to filter actions to a specific page or value of a custom attribute. As you add filters, you can check metric values in real time using the chart on the right.
 
 
 {{< img src="/product_analytics/experiment/exp_filter_by.png" alt="Filter flow to scope your metric by specific properties." style="width:90%;" >}}
@@ -105,3 +105,4 @@ Datadog supports several advanced options specific to experimentation:
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [2]: https://en.wikipedia.org/wiki/Delta_method
+[3]: /product_analytics/dashboards
