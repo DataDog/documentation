@@ -23,7 +23,7 @@ With Agentic Onboarding, your coding assistant automatically detects your projec
 
 ## Prerequisites
 ### Supported frameworks
-Agentic Onboarding is available for the following frameworks: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, Vue
+Agentic Onboarding is available for the following frameworks: Android, Angular, iOS, Next.js, Svelte, Vanilla JS, Vue
 
 ## Setup
 
