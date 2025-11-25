@@ -6039,11 +6039,16 @@ menu:
       identifier: observability_pipelines_troubleshooting
       parent: observability_pipelines_monitoring_and_troubleshooting
       weight: 804
-    - name: Guides
+    - name: Guides and Resources
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
       weight: 9
+    - name: Upgrade Worker Guide
+      url: observability_pipelines/guide/upgrade_worker_2_7/
+      parent: observability_pipelines_guide
+      identifier: observability_pipelines_guide_upgrade_worker_2_7
+      weight: 901
     - name: Log Management
       url: logs/
       pre: log
