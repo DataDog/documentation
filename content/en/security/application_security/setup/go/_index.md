@@ -39,7 +39,7 @@ For detailed compatibility information, including supported Go versions, framewo
 {{< appsec-integrations >}}
 {{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="../aws/lambda/go" >}}
 {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="../aws/fargate" >}}
-{{< appsec-integration name="AWS ECS" avatar="aws-ecs" link="./setup?tab=amazonecs" >}}
+{{< appsec-integration name="AWS ECS" avatar="amazon-ecs" link="./setup?tab=amazonecs" >}}
 {{< /appsec-integrations >}}
 
 ### Google Cloud Platform
