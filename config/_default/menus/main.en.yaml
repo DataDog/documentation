@@ -4970,6 +4970,10 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 304
+    - name: Cost 
+      url: llm_observability/monitoring/cost
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_cost
     - name: MCP Clients
       url: llm_observability/monitoring/mcp_client
       parent: llm_obs_monitoring
