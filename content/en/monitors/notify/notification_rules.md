@@ -19,14 +19,15 @@ Monitor notification rules are predefined sets of conditions that automate the p
 <div class="alert alert-info">There is a default limit of 1000 rules per organization.</a>.</div>
 
 ## Setup
-To create a Monitor Notification Rule in Datadog, do the following: 
+
+### 1. Create a Monitor Notification Rule in Datadog
 
 1. Go to [**Notification Rules**][1].
-2. Click **New Rule**. 
+2. Click **New Rule**.
 
 {{< img src="/monitors/notifications/notification_rules/notification_rule_form-light.png" alt="Configuration for a notification rule showing scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
 
-### Choose the scope
+### 2. Choose the scope
 Define the required tags for a monitor notification to be routed to this rule. Matching evaluates the notification tagset (the union of monitor tags and the firing group's tags for multi alert monitors). Monitor tags alone can satisfy the scope, and this is still considered a match. Only monitor and group tags participate in matching. Matching is case-insensitive.
 
 **Note**: Any monitor created or edited after the notification rule is saved and is routed to the defined recipients if it matches the scope of the rule.
@@ -66,13 +67,13 @@ The following limitations are **not supported**:
 * Partial wildcards (`service:web-*`) and question mark wildcards `service:auth?` are not supported. Wildcard is allowed only if used alone like `service:*`.
 * Scope lenght up to 3000 characters.
 
-### Configure the recipients
+### 3. Configure the recipients
 Define the recipients to notify when a monitor notification matches the rule's scope. You can specify when and to which recipients a notification should be sent. Notifications can be sent to email or any integration channel. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2].
 
 #### Conditional recipients
 You can notify a specific recipient only when certain conditions are met. For example, route alerts to your on-call recipient, and send warn notifications to a Slack channel if they don't require immediate action.
 
-### Name it
+### 4. Name it
 Use a clear name so the rule is identifiable on the **Manage** page.
 
 ## Managing notification rules
