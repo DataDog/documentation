@@ -489,6 +489,32 @@ You can see links from stack frames to their source repository in [Error Trackin
 [2]: https://app.datadoghq.com/apm/error-tracking
 
 {{% /tab %}}
+{{% tab "RUM" %}}
+
+You can see links from stack frames to their source repository in [Error Tracking for RUM][1].
+
+Source code integration is supported for the following RUM platforms when sourcemaps or debug symbols are uploaded with Git metadata:
+
+- **Browser**: Requires [JavaScript source maps][3] to be uploaded with Git information using the [`datadog-ci sourcemaps upload`][4] command
+- **React Native**: Requires [source maps and debug symbols][5] to be uploaded with Git information
+- **Android**: Requires [Proguard mapping files][6] to be uploaded with Git information
+
+**Note**: Source code integration is not supported for iOS RUM errors.
+
+1. Navigate to [**Digital Experience** > **Error Tracking**][2].
+2. Click on an issue. The **Issue Details** panel appears on the right.
+3. Under **Latest Available Errors** or error samples, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with options to view the file, blame, and commit available on the right side of a RUM error stack trace in Error Tracking, along with inline code snippets" style="width:100%;">}}
+
+[1]: /real_user_monitoring/error_tracking/
+[2]: https://app.datadoghq.com/rum/error-tracking
+[3]: /real_user_monitoring/guide/upload-javascript-source-maps/
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
+[5]: /real_user_monitoring/application_monitoring/react_native/error_tracking/#get-deobfuscated-stack-traces
+[6]: /real_user_monitoring/application_monitoring/android/error_tracking/
+
+{{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
 You can see source code previews directly in [Continuous Profiler][1] flame graphs.

@@ -10,194 +10,283 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) has specific compatibility requirements that vary by language and environment. This page outlines supported versions, known limitations, and conditions that may impact Single Step Instrumentation for your specific setup.
+Single Step Instrumentation (SSI) has compatibility requirements that vary by operating system, environment, and language runtime. This page outlines supported platforms, requirements, and known limitations that may impact SSI for your specific setup.
 
-## Operating systems
+## Compatibility by application environment
 
-The following operating systems and architectures are compatible:
+Select your environment to see compatibility requirements and limitations:
 
-| OS           | Version   | Architecture  |
-|--------------|-----------|---------------|
-| Amazon Linux | 2022+     | x86_64, arm64 |
-| CentOS       | 7+, 8+    | x86_64, arm64 |
-| Debian       | 10-12     | x86_64, arm64 |
-| Red Hat      | 7+        | x86_64, arm64 |
-| Ubuntu       | 20+ (LTS) | x86_64, arm64 |
-| Fedora       | 40        | x86_64, arm64 |
-| AlmaLinux    | 8+        | x86_64, arm64 |
-| Oracle Linux | 8+        | x86_64, arm64 |
-| Rocky Linux  | 8+        | x86_64, arm64 |
+{{< tabs >}}
+{{% tab "Linux Host" %}}
 
-<div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#language-specific-requirements">Language specific requirements</a>.</div>
+### Compatibility
 
-## Deployment environments
+- **Status**: GA
+- **Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
+- **Supported architectures**: x86_64, arm64
 
-The following environments are compatible:
+### Requirements
 
-| Environment     | Requirements & Limitations                              | Support |
-|-----------------|---------------------------------------------------------|---------|
-| Linux           | Not supported on hardened environments such as SELinux. | GA      |
-| Docker on Linux |                                                         | GA      |
-| Kubernetes      | Requires [Datadog Admission Controller][1] to be enabled. <br>Only supports Linux nodepools     | GA      |
-| Windows IIS     | Requires Agent v7.67.1+ and Tracer v3.19.0+.<br>Only .NET applications running in IIS are supported.     | GA      |
+- Datadog Agent with APM Instrumentation enabled
+- A [supported Linux distribution](#linux-distributions-reference)
 
+### Limitations
 
-### Environment-specific requirements
+- **SELinux**: Hardened SELinux environments are not supported.
+- **Small VM instances**: Very small instance types (for example, `t2.micro`) can experience timeouts. Use a larger instance type such as `t2.small` or higher.
 
-#### Linux virtual machines (VMs)
+{{% /tab %}}
 
-You may encounter timeouts with smaller VM instances such as `t2.micro`. In this case, you should upgrade to a larger instance such as `t2.small`.
+{{% tab "Docker" %}}
 
-#### Docker containers
+### Compatibility
 
-- **Rootless Docker mode**: If you are using Docker in rootless mode (that is, Docker running without root privileges for added security), you need to configure the socket path to ensure SSI can connect to Docker. Update the socket path in `/etc/datadog-agent/inject/docker_config.yaml` to match your environment. By default, this path is set to `/run/user/$UID/docker.sock`, but it may vary based on your setup.
+- **Status**: GA
+- **Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
+- **Supported architectures**: x86_64, arm64
 
-- **Custom `runc` shims**: If your environment uses custom `runc` shims (for GPU support or other specialized tasks), you must adjust your configuration to avoid conflicts. SSI requires its own `runc` shim to enable automatic instrumentation within Docker containers. To ensure compatibility, update the `runtimes` property in `/etc/datadog-agent/inject/docker_config.yaml` to include both your custom shim and the Datadog shim.
+### Requirements
 
-#### Kubernetes with Windows pods
+- Datadog Agent with APM Instrumentation enabled
+- Docker running on a [supported Linux distribution](#linux-distributions-reference)
 
-For Kubernetes clusters with Windows pods, use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
+### Limitations
 
-## Tracer libraries
+- **Rootless Docker mode**: When running Docker in rootless mode, update the socket path in `/etc/datadog-agent/inject/docker_config.yaml` so SSI can connect to Docker. The default path is `/run/user/$UID/docker.sock`, but your environment may differ.
+- **Custom `runc` shims**: If your environment uses custom `runc` shims (for example, for GPU workloads), update the `runtimes` entry in `/etc/datadog-agent/inject/docker_config.yaml` to include both your custom runtime and the Datadog runtime required for SSI.
+
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+
+### Compatibility
+
+- **Status**: GA
+- **Supported node pools**: Linux nodes only (see [Linux distributions reference](#linux-distributions-reference))
+- **Supported architectures**: x86_64, arm64
+
+### Requirements
+
+- [Datadog Admission Controller][1] enabled
+- Kubernetes nodes running a [supported Linux distribution](#linux-distributions-reference)
+
+### Limitations
+
+- **Linux node pools only**: Only Linux node pools are supported.
+- **Windows pods**: For Kubernetes clusters with Windows pods, use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
+
+[1]: /containers/cluster_agent/admission_controller/
+
+{{% /tab %}}
+
+{{% tab "Windows IIS" %}}
+
+### Compatibility
+
+- **Status**: GA
+- **Supported runtimes**: .NET only
+
+### Requirements
+
+- Datadog Agent v7.67.1 or higher
+- Datadog .NET SDK v3.19.0 or higher
+- Applications running in IIS
+
+### Limitations
+
+- **IIS only**: Only .NET applications running in IIS are supported.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Supported language runtimes
+
+SSI automatically instruments applications written in the following languages by [loading a compatible Datadog Language SDK][2] at runtime. Select your language to see minimum SDK versions, supported runtime versions, and any limitations.
 
 <div class="alert alert-info">
 
-SSI instrumentation depends on both the tracer version and your application's language version. Specifically:
+SSI compatibility depends on two factors:
 
-- SSI must be compatible with the tracer version
-- That tracer version must support the language version you're using
+1. **SDK version**: SSI must support the Datadog Language SDK version.
+2. **Runtime version**: The Datadog Language SDK must support your application's language runtime version.
 
-If either requirement isn't met, SSI falls back gracefully and your application runs uninstrumented.
+If either requirement is not met, SSI falls back gracefully and your application runs without instrumentation.
 
 </div>
-
-SSI [automatically downloads][2] a compatible tracer version based on your application's language. The following tracer versions support injection with SSI:
-
-| Tracer Language  | Version   |
-|------------------|-----------|
-| Java             | 1.44.0+   | 
-| Python           | 2.20.1+   | 
-| Node.js          | 4+        | 
-| .NET             | 3.7.0+    | 
-| Ruby             | 2.5.0+    |  
-| PHP              | 1.6.0+    |  
-
-
-## Language-specific requirements
-
-While Single Step Instrumentation itself does not directly require a specific language version, compatibility depends on whether a supported tracer version exists for that language version. See the [Tracer libraries](#tracer-libraries) section for details.
-
-To check which language versions are supported for your runtime, see the compatibility documentation for each tracer:
-
-For a complete list of supported language versions, see the compatibility documentation for each tracer:
-
-- [Java tracer compatibility][4]
-- [Python tracer compatibility][5]
-- [Ruby tracer compatibility][6]
-- [Node.js tracer compatibility][7]
-- [.NET Core tracer compatibility][8]
-- [.NET Framework tracer compatibility][9]
-- [PHP tracer compatibility][10]
-
-The following section provides additional notes, troubleshooting guidance, and known limitations for each language:
 
 {{< programming-lang-wrapper langs="java,python,ruby,nodejs,dotnet,php" >}}
 
 {{< programming-lang lang="java" >}}
 
+### Minimum SDK version
+
+**Java SDK**: 1.44.0 or higher
+
+### Supported runtime versions
+
+For a complete list of supported Java versions, see the [Java SDK compatibility documentation][1].
+
 ### Limitations
 
-By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or low-value traces. These exclusions are defined in the [Java tracer denylist][1]. If your workload is included, the injector skips attaching the Java agent.
+By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or non-actionable traces. These exclusions are defined in the [Java SDK denylist][2]. If your workload is included, SSI skips loading the Java SDK.
 
-### Troubleshooting
+### Known issues
 
 **Environment variable length**: If your application uses extensive command-line options or environment variables, you might encounter initialization failures. This typically occurs when you have many JVM arguments or other startup configurations. To resolve this:
-  - Minimize non-essential JVM arguments
-  - Consider moving some configurations to a `.properties` file
-  - Check application logs for specific initialization errors
+- Minimize non-essential JVM arguments
+- Consider moving some configurations to a `.properties` file
+- Check application logs for specific initialization errors
 
-### Known warnings
+**Java 24+ warnings**: When using SSI for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. These warnings can be suppressed with the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables. See [JEP 472][3] and [JEP 498][4] for more information.
 
-When using SSI for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. These warnings can be suppressed with the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables. See [JEP 472][2] and [JEP 498][3] for more information.
-
-[1]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
-[2]: https://openjdk.org/jeps/472
-[3]: https://openjdk.org/jeps/498
+[1]: /tracing/trace_collection/compatibility/java/
+[2]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
+[3]: https://openjdk.org/jeps/472
+[4]: https://openjdk.org/jeps/498
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
 
-### Default system repository support
+### Minimum SDK version
 
-Single Step Instrumentation requires Python 3.7+, which is available by default only on:
+**Python SDK**: 2.20.1 or higher
+
+### Supported runtime versions
+
+**Minimum Python version**: 3.7 or higher
+
+For a complete list of supported Python versions, see the [Python SDK compatibility documentation][1].
+
+### Operating system considerations
+
+Python 3.7+ is available by default only on:
 - CentOS Stream 8+
 - Red Hat Enterprise Linux 8+
+
+For other distributions, you may need to install Python 3.7+ separately.
+
+[1]: /tracing/trace_collection/compatibility/python
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
 
-### Troubleshooting
+### Minimum SDK version
 
-When uninstalling Single Step Instrumentation from a Ruby application, follow these steps to prevent errors:
+**Ruby SDK**: 2.5.0 or higher
 
-1. **Before uninstalling**: Make a backup of your `Gemfile` and `Gemfile.lock`.
-2. **After uninstalling**:
-   - Restore your original `Gemfile` and `Gemfile.lock`, or
-   - Run `bundle install` to rebuild your dependencies.
+### Supported runtime versions
 
-### Additional information
+For a complete list of supported Ruby versions, see the [Ruby SDK compatibility documentation][1].
+
+### Operating system requirements
 
 - Requires Linux distributions using glibc 2.27 or newer
 - Not compatible with Alpine Linux or other musl-based distributions
+
+### Known issues
+
+**Uninstalling SSI**: When uninstalling Single Step Instrumentation from a Ruby application, follow these steps to prevent errors:
+
+1. **Before uninstalling**: Make a backup of your `Gemfile` and `Gemfile.lock`.
+2. **After uninstalling**, do one of the following:
+   - Restore your original `Gemfile` and `Gemfile.lock`.
+   - Run `bundle install` to rebuild your dependencies.
+
+[1]: /tracing/trace_collection/compatibility/ruby
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
 
-### Default system repository support
-Default system repositories include supported Node.js versions only on:
+### Minimum SDK version
+
+**Node.js SDK**: 4.0 or higher
+
+### Supported runtime versions
+
+For a complete list of supported Node.js versions, see the [Node.js SDK compatibility documentation][1].
+
+### Operating system considerations
+
+Supported Node.js versions are available by default only on:
 - CentOS Stream 9+
 - Red Hat Enterprise Linux 9+
 
-### Additional information
-- Instrumentation of ESM modules is not currently supported.
+For other distributions, you may need to install Node.js separately.
+
+### Limitations
+
+- **ESM modules**: Instrumentation of ESM (ECMAScript modules) is not supported.
+
+[1]: /tracing/trace_collection/compatibility/nodejs
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
 
-## Supported .NET runtimes
+### Minimum SDK version
 
-SSI supports both .NET Core and .NET runtimes. See the tracer documentation for version compatibility details:
+**.NET SDK**: 3.7.0 or higher
 
-- [.NET Core tracer compatibility][8]
-- [.NET Framework tracer compatibility][9]
+### Supported runtime versions
 
-[8]: /tracing/trace_collection/compatibility/dotnet-core
-[9]: /tracing/trace_collection/compatibility/dotnet-framework
+SSI supports both .NET Core and .NET Framework runtimes. For a complete list of supported versions, see:
+
+- [.NET Core SDK compatibility][1]
+- [.NET Framework SDK compatibility][2]
+
+[1]: /tracing/trace_collection/compatibility/dotnet-core
+[2]: /tracing/trace_collection/compatibility/dotnet-framework
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 
-### PHP extensions
+### Minimum SDK version
 
-SSI disables automatically when it detects:
+**PHP SDK**: 1.6.0 or higher
+
+### Supported runtime versions
+
+For a complete list of supported PHP versions, see the [PHP SDK compatibility documentation][1].
+
+### Limitations
+
+SSI automatically disables when it detects:
 - PHP's Just-In-Time (JIT) compilation
 - Any of the following extensions:
-  - Xdebug 
+  - Xdebug
   - ionCube Loader
   - NewRelic
   - Blackfire
   - pcov
-  
-<div class="alert alert-info">If you need to run the SSI alongside these tools, you can force it to enable by setting: <code>DD_INJECT_FORCE=true</code></div>
+
+<div class="alert alert-info">If you need to run SSI alongside these tools, you can force it to enable by setting <code>DD_INJECT_FORCE=true</code>.</div>
+
+[1]: /tracing/trace_collection/compatibility/php
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
+## Linux distributions reference
+
+The following Linux distributions and architectures are supported for SSI across all deployment platforms (Linux hosts, Docker, Kubernetes):
+
+| OS           | Version        | Architecture  |
+|--------------|----------------|---------------|
+| Amazon Linux | 2022, 2023     | x86_64, arm64 |
+| CentOS       | 7, 8           | x86_64, arm64 |
+| Debian       | 10, 11, 12     | x86_64, arm64 |
+| Red Hat      | 7, 8, 9        | x86_64, arm64 |
+| Ubuntu       | 20, 22, 24 (LTS) | x86_64, arm64 |
+| Fedora       | 40             | x86_64, arm64 |
+| AlmaLinux    | 8              | x86_64, arm64 |
+| Oracle Linux | 8              | x86_64, arm64 |
+| Rocky Linux  | 8              | x86_64, arm64 |
+
+<div class="alert alert-info">For additional operating system requirements specific to your programming language, see <a href="#supported-language-runtimes">Supported language runtimes</a>.</div>
 
 ## Further reading
 
@@ -205,11 +294,3 @@ SSI disables automatically when it detects:
 
 [1]: /containers/cluster_agent/admission_controller/
 [2]: /tracing/guide/injectors/
-[3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[4]: /tracing/trace_collection/compatibility/java/
-[5]: /tracing/trace_collection/compatibility/python
-[6]: /tracing/trace_collection/compatibility/ruby
-[7]: /tracing/trace_collection/compatibility/nodejs
-[8]: /tracing/trace_collection/compatibility/dotnet-core
-[9]: /tracing/trace_collection/compatibility/dotnet-framework
-[10]: /tracing/trace_collection/compatibility/php
