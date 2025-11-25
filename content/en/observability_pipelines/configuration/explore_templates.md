@@ -32,7 +32,7 @@ Use the Archive Logs template to store logs in a cloud storage solution (Amazon 
 
 As your organization grows, your observability needs for different use cases, such as security, archiving, and log management, also change. This could mean having to trial different archiving, SIEM, and log management solutions. However, managing log pipelines to different solutions can be complicated. Use the Dual Ship Logs template to send your logs to different destinations, so you can evaluate different tools and workflows with minimal disruption to your production environment.
 
-### Generate Log Metrics
+### Generate Log-based Metrics
 
 Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain log data that don't need to be stored. Often, you just want to see a summary of the logs and compare it to historical data. Log-based metrics are also a cost-efficient way to summarize log data from your entire ingest stream. Use the Generate Metrics template to generate a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration.
 
@@ -70,9 +70,9 @@ When you have logs from different services and applications, you might need to s
 <div class="alert alert-info">
 Metrics Volume Control is in Preview.</div>
 
-Metrics capture signals about your environment, such as your system health, business critical workflows, and critical security indicators. These metrics are emitted from various applications, network devices, and nodes, but not all emitted metrics are of equal value.
+Metrics capture signals about your environment and offer insight into your system health, business workflows, and security activities. These metrics are sent from your various applications, network devices, and nodes, but the value of individual metrics can vary significantly. 
 
-Use the Metrics Volume Control template (in Preview) to collect and process all of your metrics in Observability Pipelines, before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
+To help you manage the quality and volume of your metrics, use the Metrics Volume Control template to process them in Observability Pipelines before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
 
 {{% /tab %}}
 {{< /tabs >}}
