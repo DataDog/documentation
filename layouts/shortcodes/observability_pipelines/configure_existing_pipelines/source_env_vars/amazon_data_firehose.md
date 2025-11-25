@@ -1,3 +1,5 @@
-- Amazon Data Firehose address
+- Amazon Data Firehose address:
     - The Observability Pipelines Worker listens to this socket address to receive logs from Amazon Data Firehose.
-    - The address is stored in the environment variable `AWS_DATA_FIREHOSE_ADDRESS`.
+    - The address is stored in the environment variable `DD_OP_SOURCE_AWS_DATA_FIREHOSE_ADDRESS`.
+- Amazon Data Firehose TLS passphrase (when enabled):
+    - Stored in the environment variable `DD_OP_SOURCE_AWS_DATA_FIREHOSE_KEY_PASS`.

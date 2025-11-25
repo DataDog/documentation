@@ -137,6 +137,7 @@ code_language_ids:
     historical_job: "Historical Job"
     kubernetes_daemonset: "Kubernetes (DaemonSet)"
     kubernetes_gateway: "Kubernetes (Gateway)"
+    haproxy: "HAProxy"
     traces: "Traces"
     metrics: "Metrics"
     logs: "Logs"    
@@ -300,6 +301,7 @@ unsupported_sites:
   fleet_automation: [gov]
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
+  incident_ai: [gov]
   internal_developer_portal: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
