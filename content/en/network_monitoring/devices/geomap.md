@@ -31,6 +31,14 @@ further_reading:
 
 Devices appear on the Device Geomap when they're tagged with `geolocation:<value>` and mapped to geographic coordinates.
 
+For example:
+| Geolocation   | Latitude | Longitude |
+|---------------|----------|-----------|
+| nyc-office    | 40.758896| -73.98513 |
+| denver-office | 39.7433  | -104.9886 |
+| boston-office | 42.3601  | -71.0589  |
+| singapore     | 1.3521   | 103.8198  |
+
 Configure device locations using the following steps:
 
 1. Tag devices using the `geolocation:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
