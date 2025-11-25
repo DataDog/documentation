@@ -178,11 +178,6 @@ Session details include the following:
   - Summary: Recaps the impact of the fix and provides next steps or guidance if tests failed or PR needs to be rebased.
   - **Bits AI chat field**: Lets you interactively refine the fix or ask the AI follow-up questions. This makes remediation collaborative and tunable, giving security engineers and developers control without needing to write the patch themselves.
 
-### Scope
-
-AI-powered remediation is limited to SAST only for vulnerabilities within the OWASP Top 10 across all languages. It only applies to findings on the default branch.
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
