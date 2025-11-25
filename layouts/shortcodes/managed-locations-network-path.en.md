@@ -1,7 +1,5 @@
 Datadog's out-of-the-box managed locations allow you to test public-facing websites and endpoints from regions where your customers are located. 
 
-<div class="alert alert-info">Azure region is not supported for Network Path tests.</div>
-
 **AWS**:
 | Americas           | Asia Pacific      | EMEA           |
 |--------------------|-------------------|----------------|
@@ -27,3 +25,5 @@ The Datadog for Government site (US1-FED) uses the following managed location:
  Region    | Location   |
 |-----------|------------|
 | Americas  | US-West   |
+
+<div class="alert alert-info">Azure region is not supported for Network Path tests.</div>
