@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By enabling them, you can assess the effectiveness of your application's responses, including detection of negative sentiment, topic relevancy, toxicity, failure to answer and hallucination.
+Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By creating them, you can assess the effectiveness of your application's responses, including detection of sentiment, topic relevancy, toxicity, failure to answer, and hallucination.
 
 LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation.
 
@@ -32,7 +32,7 @@ Configure the LLM provider you would like to use for bring-your-own-key (BYOK) e
 {{< tabs >}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM Observability uses the `GPT-4o mini` model for evaluations.
 
@@ -48,7 +48,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 {{% /tab %}}
 {{% tab "Azure OpenAI" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Azure OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8].
 
@@ -65,7 +65,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 {{% /tab %}}
 {{% tab "Anthropic" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Anthropic account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your Anthropic account to LLM Observability with your Anthropic API key. LLM Observability uses the `Haiku` model for evaluations.
 
@@ -80,7 +80,7 @@ Connect your Anthropic account to LLM Observability with your Anthropic API key.
 {{% /tab %}}
 {{% tab "Amazon Bedrock" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a Business Associate Agreement (BAA) and configured for zero data retention.</div>
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Amazon Bedrock account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for evaluations.
 
@@ -98,7 +98,7 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
 
 ## Create new evaluations
 
-1. Navigate to [**AI Observability > Settings > Evaluations**][2].
+1. Navigate to [**AI Observability > Evaluations**][2].
 1. Click on the **Create Evaluation** button on the top right corner.
 1. Select a specific managed evaluation. This will open the evalution editor window.
 1. Select the LLM application(s) you want to configure your evaluation for.
@@ -109,14 +109,12 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
    - (Optional) Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than `0` and less than or equal to `100` (sampling all spans).
 1. (Optional) Configure evaluation options by selecting what subcategories should be flagged. Only available on some evaluations.
 
-After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
+After you click **Save and Publish**, LLM Observability uses the LLM account you connected to power the evaluation you enabled. Alternatively, you can **Save as Draft** and edit or enable them later.
 
 ## Edit existing evaluations
 
-1. Navigate to [**AI Observability > Settings > Evaluations**][2].
-1. Find on the evaluation you want to edit and toggle the **Enabled Applications** button.
-1. Select the edit icon to configure the evaluation for an individual LLM application or click on the application name.
-1. Evaluations can be disabled by selecting the disable icon for an individual LLM application.
+1. Navigate to [**AI Observability > Evaluations**][2].
+1. Hover over the evaluation you want to edit and click the **Edit** button.
 
 ### Estimated token usage
 
@@ -144,7 +142,9 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 #### Topic relevancy
 
 This check identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
-  
+
+{{< img src="llm_observability/evaluations/topic_relevancy_3.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
 | Evaluated on Input | Evaluated using LLM | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the Large Language Model (LLM) application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
@@ -164,23 +164,24 @@ Topics can contain multiple words and should be as specific and descriptive as p
 
 This check identifies instances where the LLM makes a claim that disagrees with the provided input context.
 
-{{< img src="llm_observability/evaluations/hallucination_2.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/hallucination_5.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
 | Evaluated on Output | Evaluated using LLM | Hallucination flags any output that disagrees with the context provided to the LLM. |
 
 ##### Instrumentation
-
-In order to take advantage of Hallucination detection, you will need to annotate LLM spans with the user query and context:
+You can use [Prompt Tracking][6] annotations to track your prompts and set them up for hallucination configuration. Annotate your LLM spans with the user query and context so hallucination detection can evaluate model outputs against the retrieved data.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.utils import Prompt
+from ddtrace.llmobs.types import Prompt
 
 # if your llm call is auto-instrumented...
 with LLMObs.annotation_context(
         prompt=Prompt(
+            id="generate_answer_prompt",
+            template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
             variables={"user_question": user_question, "article": article},
             rag_query_variables=["user_question"],
             rag_context_variables=["article"]
@@ -195,18 +196,20 @@ def generate_answer():
   ...
   LLMObs.annotate(
             prompt=Prompt(
+                id="generate_answer_prompt",
+                template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
                 variables={"user_question": user_question, "article": article},
                 rag_query_variables=["user_question"],
                 rag_context_variables=["article"]
             ),
   )
 {{< /code-block >}}
-
-The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Set `rag_query_variables` and `rag_context_variables` to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+The `variables` dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Use `rag_query_variables` and `rag_context_variables` to specify which variables represent the user query and which represent the retrieval context. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
 
 Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
 
-You can find more examples of instrumentation in the [SDK documentation][6].
+Prompt Tracking is available on python starting from the 3.15 version, It also requires an ID for the prompt and the template set up to monitor and track your prompt versions.
+You can find more examples of prompt tracking and instrumentation in the [SDK documentation][6].
 
 ##### Hallucination configuration
 <div class="alert alert-info">Hallucination detection is only available for OpenAI.</div>
@@ -223,7 +226,7 @@ Contradictions are always detected, while Unsupported Claims can be optionally i
 
 This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
 
-{{< img src="llm_observability/evaluations/failure_to_answer_2.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/failure_to_answer_5.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -251,7 +254,7 @@ Language mismatch is only supported for natural language prompts. Input and outp
 Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Belarusian, Bengali, Norwegian Bokmal, Bosnian, Bulgarian, Chinese, Croatian, Czech, Danish, Dutch, English, Estonian, Finnish, French, Georgian, German, Greek, Gujarati, Hebrew, Hindi, Hungarian, Icelandic, Indonesian, Irish, Italian, Japanese, Kazakh, Korean, Latvian, Lithuanian, Macedonian, Malay, Marathi, Mongolian, Norwegian Nynorsk, Persian, Polish, Portuguese, Punjabi, Romanian, Russian, Serbian, Slovak, Slovene, Spanish, Swahili, Swedish, Tamil, Telugu, Thai, Turkish, Ukrainian, Urdu, Vietnamese, Yoruba, Zulu
 {{% /collapse-content %}}
 
-{{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/language_mismatch_4.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -261,7 +264,7 @@ Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Belarusian, Bengali, Norwegi
 
 This check helps understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This check accurately classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
 
-{{< img src="llm_observability/evaluations/sentiment_2.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sentiment_5.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -273,7 +276,7 @@ This check helps understand the overall mood of the conversation, gauge user sat
 
 This check evaluates each input prompt from the user and the response from the LLM application for toxic content. This check identifies and flags toxic content to ensure that interactions remain respectful and safe.
 
-{{< img src="llm_observability/evaluations/toxicity_2.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/toxicity_4.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -302,7 +305,7 @@ The toxicity categories in this table are informed by: [Banko et al. (2020)][14]
 
 This check identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
-{{< img src="llm_observability/evaluations/prompt_injection_2.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/prompt_injection_4.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -323,7 +326,7 @@ You can configure the prompt injection evaluation to use specific categories of 
 
 This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
 
-{{< img src="llm_observability/evaluations/sensitive_data_scanning_2.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sensitive_data_scanning_4.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -333,11 +336,11 @@ This check ensures that sensitive information is handled appropriately and secur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/llm/settings/evaluations
+[2]: https://app.datadoghq.com/llm/evaluations
 [3]: https://app.datadoghq.com/llm/applications
 [4]: /security/sensitive_data_scanner/
-[5]: https://docs.datadoghq.com/api/latest/ip-ranges/
-[6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
+[5]: /api/latest/ip-ranges/
+[6]: /llm_observability/instrumentation/sdk?tab=python#prompt-tracking
 [7]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
 [9]: https://learnprompting.org/docs/prompt_hacking/offensive_measures/simple-instruction-attack
 [10]: https://owasp.org/www-community/attacks/Code_Injection

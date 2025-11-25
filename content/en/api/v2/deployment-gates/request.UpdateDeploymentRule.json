@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "dry_run": false,
+      "name": "Updated deployment rule",
+      "options": {
+        "excluded_resources": []
+      }
+    },
+    "type": "deployment_rule"
+  }
+}

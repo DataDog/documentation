@@ -5,6 +5,8 @@ description: Learn more about the Okta pack.
 
 ## Overview
 
+{{< img src="observability_pipelines/packs/okta.png" alt="The Okta pack" style="width:25%;" >}}
+
 Okta logs show authentication, user activity, and policy events.
 
 What this pack does:

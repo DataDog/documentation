@@ -494,58 +494,6 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
-{{< site-region region="us" >}}
-
-También puedes reemplazar el comportamiento predeterminado y enviar los logs en TCP al especificar manualmente las siguientes propiedades necesarias: `url`, `port`, `useSSL` y `useTCP`. De manera opcional, [especifica el `source`, `service`, `host` y las etiquetas personalizadas.][1]
-
-Por ejemplo, para reenviar logs a la región US de Datadog en TCP deberías usar la siguiente configuración del receptor:
-
-```csharp
-var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs(
-        "<API_KEY>",
-        source: "<SOURCE_NAME>",
-        service: "<SERVICE_NAME>",
-        host: "<HOST_NAME>",
-        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
-        configuration: config
-    )
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-[1]: /es/logs/log_configuration/attributes_naming_convention/#reserved-attributes
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-También puedes reemplazar el comportamiento predeterminado y enviar los logs en TCP al especificar manualmente las siguientes propiedades necesarias: `url`, `port`, `useSSL` y `useTCP`. De manera opcional, [especifica el `source`, `service`, `host` y las etiquetas personalizadas.][1]
-
-Por ejemplo, para reenviar logs a la región EU de Datadog en TCP deberías usar la siguiente configuración del receptor:
-
-```csharp
-var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs(
-        "<API_KEY>",
-        source: "<SOURCE_NAME>",
-        service: "<SERVICE_NAME>",
-        host: "<HOST_NAME>",
-        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
-        configuration: config
-    )
-    .CreateLogger())
-{
-    // Some code
-}
-```
-[1]: /es/logs/log_configuration/attributes_naming_convention/#reserved-attributes
-
-{{< /site-region >}}
-
 Ahora los logs nuevos se envían directamente a Datadog.
 
 ## Referencias adicionales

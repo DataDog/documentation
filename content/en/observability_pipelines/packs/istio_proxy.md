@@ -5,6 +5,8 @@ description: Learn more about the Istio Proxy pack.
 
 ## Overview
 
+{{< img src="observability_pipelines/packs/istio_proxy.png" alt="The Istio Proxy pack" style="width:25%;" >}}
+
 Istio Proxy logs capture inbound and outbound traffic handled by Envoy.
 
 What this pack does:

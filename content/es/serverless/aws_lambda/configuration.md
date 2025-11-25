@@ -45,6 +45,7 @@ Primero, [instala][1] Datadog Serverless Monitoring para comenzar a recopilar m�
 - [Configuración del enlace automático para PutItem de DynamoDB](#configure-auto-linking-for-dynamodb-putitem)
 - [Visualización y modelado correcto de los servicios de AWS](#visualize-and-model-aws-services-by-resource-name)
 - [Envío de logs a Observability Pipelines](#sending-data-to-observability-pipelines)
+- [Recargar periódicamente el secreto de la clave de API](#reload-api-key-secret-periodically)
 - [Solucionar problemas](#troubleshoot)
 - [Referencias adicionales](#further-reading)
 
@@ -797,6 +798,14 @@ Para activar esta función, establece estas variables de entorno:
 - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`: `<YOUR_OBSERVABILITY_PIPELINE_URL>`
 
 **Nota**: Tu Observability pipeline debe utilizar `Http Server` como fuente para procesar logs de Lambda Extension. No utilices `Datadog Agent` como fuente.
+
+## Recargar periódicamente el secreto de la clave de API
+
+Si especificas la clave de API de Datadog utilizando `DD_API_KEY_SECRET_ARN`, también puedes configurar `DD_API_KEY_SECRET_RELOAD_INTERVAL` para que recargue periódicamente el secreto. Por ejemplo, si configuras `DD_API_KEY_SECRET_RELOAD_INTERVAL` en `43200`, el secreto se recarga cuando se necesita la clave de API para enviar datos y han pasado más de 43200 segundos desde la última carga.
+
+Ejemplo de caso de uso: por seguridad, cada día (86400 segundos), la clave de API se rota y el secreto se actualiza a la nueva clave, y la clave de API antigua se mantiene válida durante otro día como periodo de gracia. En este caso, se puede establecer `DD_API_KEY_SECRET_RELOAD_INTERVAL` en `43200`, por lo que la clave de API se recarga durante el periodo de gracia de la clave antigua.
+
+Está disponible para la versión 88+ de la extensión de Datadog Lambda.
 
 ## Solucionar problemas
 

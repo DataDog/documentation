@@ -15,4 +15,5 @@ cascade:
     {{< nextlink href="/llm_observability/trace_proxy_services" >}}Trace Proxy and Gateway Services{{< /nextlink >}}
     {{< nextlink href="/llm_observability/evaluations/" >}}Evaluations{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/llm_observability_and_apm" >}}Using LLM Observability and APM{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/guide/crewai_guide" >}}Using the Datadog-CrewAI integration for LLM Observability{{< /nextlink >}}
 {{< /whatsnext >}}
