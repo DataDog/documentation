@@ -19,11 +19,12 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config_redacted.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
-**Note**: NCM is read-only in Preview. You can inspect and compare configurations, but you cannot push, roll back, or otherwise modify them.
+**Note**: NCM is read-only in Preview. 
 
 ## Prerequisites
 
 - [Network Device Monitoring][3] (NDM) must be configured on your devices.
+- Install the custom Datadog Agent build provided by your Datadog representative.
 
 ## Setup
 
@@ -88,7 +89,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 ## Viewing configurations
 
-Configuration Management is accessible from the device side panel in Network Device Monitoring:
+Network Configuration Management is accessible from the device side panel in Network Device Monitoring:
 
 1. Navigate to [Network Device Monitoring][3].
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
@@ -111,7 +112,7 @@ The timeline and configuration version list automatically update based on your s
 
 ### View a configuration at a point in time
 
-Selecting a configuration event from the timeline or list opens a single configuration view showing the state of the device at that moment. This prevents confusion about comparing versions when you first access the page.
+Selecting a configuration event from the timeline or list opens a single configuration view showing the state of the device at that moment.
 
 The single-configuration view displays:
 
