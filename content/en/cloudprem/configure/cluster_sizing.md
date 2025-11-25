@@ -5,6 +5,7 @@ further_reading:
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
+- link: "/cloudprem/configure/processing/"
   tag: "Documentation"
   text: "Configure CloudPrem Log Processing"
 - link: "/cloudprem/architecture/"
