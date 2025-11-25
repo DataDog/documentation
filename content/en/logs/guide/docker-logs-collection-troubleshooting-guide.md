@@ -134,30 +134,6 @@ If the Logs Agent status looks like the example in [Check the Agent status](#che
 * The required port (10516) for sending logs to Datadog is being blocked.
 * Your container is using a different logging driver than the Agent expects.
 
-#### Outbound traffic on port 10516 is blocked
-
-The Datadog Agent sends its logs to Datadog over TCP using port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
-
-You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For OpenSSL, run the following command:
-
-```shell
-openssl s_client -connect intake.logs.datadoghq.com:10516
-```
-
-For GnuTLS, run the following command:
-
-```shell
-gnutls-cli intake.logs.datadoghq.com:10516
-```
-
-And then by sending a log like the following:
-
-```text
-<API_KEY> this is a test message
-```
-
-If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_FORCE_USE_HTTP` environment variable to `true`:
-
 #### Your containers are not using the JSON logging driver
 
 Docker's default is the json-file logging driver so the Container Agent tries to read from this first. If your containers are set to use a different logging driver, the Logs Agent indicates that it is able to successfully find your containers but it isn't able to collect their logs. The Container Agent can also be configured to read from the journald logging driver.

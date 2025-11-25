@@ -20936,6 +20936,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Enterprise
+            hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current date for all organizations.
@@ -20944,6 +20949,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Pro hosts
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         appsec_fargate_count_avg:
@@ -21420,6 +21430,11 @@ components:
         incident_management_monthly_active_users_hwm:
           description: Shows the high-water mark of incident management monthly active
             users over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for all organizations.
           format: int64
           type: integer
         indexed_events_count_sum:
@@ -22034,6 +22049,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Enterprise
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current month for the given org.
@@ -22042,6 +22062,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Pro hosts
+            over all hours in the current date for the given org.
           format: int64
           type: integer
         appsec_fargate_count_avg:
@@ -22526,6 +22551,11 @@ components:
         incident_management_monthly_active_users_hwm:
           description: Shows the high-water mark of incident management monthly active
             users over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for the given organization.
           format: int64
           type: integer
         indexed_events_count_sum:
@@ -23136,6 +23166,11 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p_sum:
+          description: Shows the sum of the 99th percentile of all distinct standalone
+            Enterprise hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         apm_fargate_count_avg_sum:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current month for all organizations.
@@ -23144,6 +23179,11 @@ components:
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p_sum:
+          description: Shows the sum of the 99th percentile of all distinct standalone
+            Pro hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         appsec_fargate_count_avg_sum:
@@ -23633,6 +23673,11 @@ components:
         incident_management_monthly_active_users_hwm_sum:
           description: Shows sum of the high-water marks of incident management monthly
             active users in the current month for all organizations.
+          format: int64
+          type: integer
+        incident_management_seats_hwm_sum:
+          description: Shows the sum of the high-water marks of Incident Management
+            seats over all hours in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
@@ -26055,7 +26100,9 @@ paths:
         - api_keys_write
   /api/v1/application_key:
     get:
-      description: Get all application keys available for your Datadog account.
+      description: 'Get all application keys available for your Datadog account.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: ListApplicationKeys
       responses:
         '200':
@@ -26082,7 +26129,9 @@ paths:
         - org_app_keys_read
         - user_app_keys
     post:
-      description: Create an application key with a given name.
+      description: 'Create an application key with a given name.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: CreateApplicationKey
       requestBody:
         content:
@@ -26128,7 +26177,9 @@ paths:
         - user_app_keys
   /api/v1/application_key/{key}:
     delete:
-      description: Delete a given application key.
+      description: 'Delete a given application key.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: DeleteApplicationKey
       parameters:
       - description: The specific APP key you are working with.
@@ -26168,7 +26219,9 @@ paths:
         - org_app_keys_write
         - user_app_keys
     get:
-      description: Get a given application key.
+      description: 'Get a given application key.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: GetApplicationKey
       parameters:
       - description: The specific APP key you are working with.
@@ -26208,7 +26261,9 @@ paths:
         - org_app_keys_read
         - user_app_keys
     put:
-      description: Edit an application key name.
+      description: 'Edit an application key name.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: UpdateApplicationKey
       parameters:
       - description: The specific APP key you are working with.

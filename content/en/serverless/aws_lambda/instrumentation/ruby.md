@@ -53,7 +53,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 2. Install the Datadog CLI client
 
     ```sh
-    npm install -g @datadog/datadog-ci
+    npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
     ```
 
 3. If you are new to Datadog serverless monitoring, launch the Datadog CLI in the interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.

@@ -44,8 +44,6 @@ These configurations can then be customized to add any Datadog feature.
 
 No specific configuration is required.
 
-If you are using AWS Bottlerocket OS on your nodes, add the following to enable container monitoring (`containerd` check):
-
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
