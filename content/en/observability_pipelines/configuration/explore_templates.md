@@ -11,7 +11,7 @@ further_reading:
 
 When you create a pipeline in the Observability Pipelines UI, select one of the out-the-box templates to build and deploy pipelines based on your use case.
 
-{{< img src="observability_pipelines/templates_20251125.png" alt="The Observability Pipelines UI showing the seven templates" style="width:100%;" >}}
+{{< img src="observability_pipelines/eight_templates.png" alt="The Observability Pipelines UI showing the eight templates" style="width:100%;" >}}
 
 ## Templates
 
@@ -65,14 +65,14 @@ When you have logs from different services and applications, you might need to s
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
-### Metrics Volume Control
+### Metrics Volume and Cardinality Control
 
 <div class="alert alert-info">
-Metrics Volume Control is in Preview.</div>
+Metrics Volume and Cardinality Control is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
-Metrics capture signals about your environment and offer insight into your system health, business workflows, and security activities. These metrics are sent from your various applications, network devices, and nodes, but the value of individual metrics can vary significantly. 
+Metrics capture signals about your environment and offer insight into your system health, business workflows, and security activities. These metrics are sent from your various applications, network devices, and nodes, but the value of individual metrics can vary significantly.
 
-To help you manage the quality and volume of your metrics, use the Metrics Volume Control template to process them in Observability Pipelines before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
+To help you manage the quality and volume of your metrics, use the Metrics Volume and Cardinality Control template to process them in Observability Pipelines before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
 
 {{% /tab %}}
 {{< /tabs >}}
