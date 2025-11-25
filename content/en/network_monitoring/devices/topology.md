@@ -76,7 +76,7 @@ Click on a link between devices to explore connection details including traffic 
 
 Click the **NetFlow** tab in the side panel to explore the device's traffic sources, destinations, and volume. The data is automatically filtered by the device's `@device.ip`. For more information, see [NetFlow Monitoring][1].
 
-{{< img src="/network_device_monitoring/network_topology_map/netflow_tab_2.png" alt="View of the Device side panel, with the NetFlow tab highlighted." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/netflow_tab_3.png" alt="View of the Device side panel, with the NetFlow tab highlighted." style="width:100%;" >}}
 
 ### Icon legend
 
