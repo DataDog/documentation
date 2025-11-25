@@ -1,14 +1,13 @@
 ---
-title: Configure Bits AI SRE
+title: Configure integrations and settings
 ---
 
 ## Configure where Bits sends investigation findings
 
 By default, all investigations are listed on the [Bits AI Investigations][1] page.
 
-For monitor alert investigations, a summary of the findings is available on the monitor's status page. If your monitor already has @slack, @case, or @oncall [notifications][2] configured, Bits automatically posts its findings to those destinations. If not, you can set up those integrations using the instructions below. 
+For monitor alert investigations, a summary of the findings is available on the monitor's status page. If your monitor already has `@slack`, `@case`, or `@oncall` [notifications][2] configured, Bits automatically posts its findings to those destinations. If not, you can set up those integrations using the instructions below. 
 
-Additionally, if you have already configured `@slack`, `@case`, or `@oncall` [notifications in your monitor][2], Bits automatically writes to those places. If not, you can add them as destinations for investigation findings to appear:
 
 ### Slack
 
@@ -23,7 +22,7 @@ Datadog Case Management provides a centralized workspace for triaging, tracking,
 
 To set up Case Management, and the Jira and ServiceNow integrations:
 1. Create a Case Management [project][5] for your team.
-1. In Datadog, go to **Case Management** > [**Settings**][6]. In the list of projects, expand your project, go to **Integrations** > **Datadog Monitors**, and turn on the **Enable Datadog Monitors integration for this project** toggle. This generates your project's unique handle: `@case-{project_name}`.
+1. In Datadog, go to [**Case Management** > **Settings**][6]. In the list of projects, expand your project, go to **Integrations** > **Datadog Monitors**, and turn on the **Enable Datadog Monitors integration for this project** toggle. This generates your project's unique handle: `@case-{project_name}`.
 1. On the same page, under **Integrations**, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, Case Management can then automatically open the corresponding Jira ticket or ServiceNow incident.
 1. In your monitor, go to **Configure notifications and automations** and add the `@case-{project_name}` handle. When the monitor triggers:
    - Datadog automatically creates a new case
@@ -71,24 +70,23 @@ These permissions are added by default to Managed Roles. If your organization us
 
 ## Configure rate limits
 
-Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period.
+Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period. Even after you've hit a rate limit, you can still trigger [manual investigations][9].
 
-Even after you've hit a rate limit, you can still trigger [manual investigations][9].
 
 ### Types of rate limits
 
 Per monitor limit
-: Controls how often an investigation is triggered from a single monitor alert within a rolling 24 hour window.
+: Controls how often investigations are automatically triggered from a single monitor within a rolling 24-hour window.
 : **Default:** Each monitor can trigger one automatic investigation per 24 hours.
 
 Organization limit
-: The Organization limit defines the total number of investigations Bits AI SRE can run across your entire organization within 24 hours.
+: The Organization limit defines the total number of automatic investigations Bits AI SRE can run across your entire organization within 24 hours.
 : **Default:** No limit.
 
 ### Set a rate limit
 
 To set a rate limit:
-1. Navigate to **Bits AI SRE** > **Settings** > [**Rate Limits**][10].
+1. Navigate to [**Bits AI SRE** > **Settings** > **Rate Limits**][10].
 2. Toggle on the rate limit you want to enable.
 3. Set the maximum number of investigations you want to run within a rolling 24-hour window.
 4. Click **Save**.
@@ -103,9 +101,7 @@ You can monitor user-initiated actions with [Audit Trail][11]. Events are sent w
 - A user enables or disables automatic investigations for a monitor
 - A user modifies the monitor rate limit
 
-## Reports
 
-The Reports tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to initial findings and conclusion to assess the impact of Bits on your on-call efficiency. 
 
 [1]: https://app.datadoghq.com/bits-ai/investigations
 [2]: /monitors/notify

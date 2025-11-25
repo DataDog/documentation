@@ -7,9 +7,6 @@ aliases:
 
 ## Get started with alert investigations
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
 
 The starting points of a Bits AI SRE investigation are:
 - Monitor alerts, which you can trigger in two ways:
@@ -46,7 +43,7 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 1. Click and drag your cursor over the point plot visualization to make a rectangular selection over a region that shows unusual latency to seed the analysis. Initial diagnostics on the latency issue appear, including the observed user impact, anomalous tags contributing to the issue, and recent changes. For more information, see [APM Investigator][2].
 1. Click **Investigate with Bits AI SRE** to run a deeper investigation. 
 
-##### APM latency Watchdog stories
+#### APM latency Watchdog stories
 
 On a Watchdog APM latency story, click **Investigate with Bits AI SRE**. 
 
@@ -87,13 +84,13 @@ Think of onboarding Bits as you would a new teammate: the more context you provi
    - Datadog notebook with helpful widgets
    - Confluence runbook page containing Datadog telemetry links (requires a configured [Confluence integration][3])
 
-   Bits uses these links during the "Executing Runbook" step of the initial investigation to identify potential problem areas. Because these links are user-defined, you have control over what Bits reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows. You don't have to format the links in any particular way; plain links work.
+   Bits uses these links during the "Runbook" step of the initial investigation to identify potential problem areas. Because these links are user-defined, you have control over what Bits reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows. You don't have to format the links in any particular way; plain links work.
 
 2. **Add service scoping**: For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service.
 
    {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
-For additional suggestions on how to optimize investigations, see [Help Bits AI SRE learn][9].
+For additional suggestions on how to optimize investigations, see [Help Bits learn][9].
 
 ## How Bits AI SRE investigates
 
@@ -118,12 +115,14 @@ Investigations happen in two phases:
      - When a hypothesis is validated, Bits generates sub-hypotheses and repeats the same investigative process on them.
 
    {{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits AI SRE built and tested" style="width:100%;" >}}
+## Reports
 
+The Reports tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to initial findings and conclusion to assess the impact of Bits on your on-call efficiency. 
 [1]: https://app.datadoghq.com/apm/home
 [2]: /tracing/guide/latency_investigator/
 [3]: /bits_ai/bits_ai_sre/configure/#configure-knowledge-base-integrations
 [4]: /change_tracking
-[5]: https://app.datadoghq.com/bits-ai/monitors/all
+[5]: https://app.datadoghq.com/bits-ai/monitors/supported
 [6]: https://app.datadoghq.com/monitors/manage
 [8]: /bits_ai/bits_ai_sre/configure#slack
 [9]: /bits_ai/bits_ai_sre/help_bits_learn/

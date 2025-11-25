@@ -2,7 +2,7 @@
 title: Chat with Bits AI SRE
 ---
 
-On the [Bits AI Investigations][1] page, you can chat with Bits to gather additional information about the investigation, related telemetry, and more. 
+Within an investigation, you can chat with Bits to gather additional information about the investigation, related telemetry, and more. 
 
 {{< img src="bits_ai/bits_ai_sre_chat_example.png" alt="Example chat where a user asks Bits AI about related ongoing incidents, and Bits AI responds with a list of related incidents and an explanation on what makes them related" style="width:100%;" >}}
 
@@ -29,5 +29,4 @@ The Bits AI SRE chatbot has access to:
 | Ask about Datadog products                     | `Does Bits AI SRE connect to Datadog Case Management?`            | Datadog Documentation             |
 | Create a Notebook                              | `Can you create a notebook with a summary of this investigation?` | Notebooks                         |
 
-[1]: https://app.datadoghq.com/bits-ai/investigations
-[2]: /bits_ai/bits_ai_sre/configure/#configure-knowledge-base-integrations
+[1]: /bits_ai/bits_ai_sre/configure/#configure-knowledge-base-integrations

@@ -25,4 +25,4 @@ In addition, you can review steps that Bits took throughout the investigation an
 
 Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to the [Monitor Management][1] page to view and delete memories in the **Memories** column.
 
-[1]: https://app.datadoghq.com/bits-ai/monitors/enabled
+[1]: https://app.datadoghq.com/bits-ai/monitors/supported
