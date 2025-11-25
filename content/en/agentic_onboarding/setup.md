@@ -1,6 +1,6 @@
 ---
 title: Agentic Onboarding Setup
-description: Instrument your frontend applications with one prompt using LLM coding agents like Cursor or Claude Code.
+description: Set up the Datadog MCP server to instrument your frontend applications with coding agents like Cursor or Claude Code.
 further_reading:
 
 ---
@@ -19,11 +19,11 @@ Datadog's Agentic Onboarding allows you to instrument your frontend applications
 
 Instead of navigating multiple setup steps or searching through documentation, you can instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], and [Product Analytics][5] in one command.
 
-With Agentic Onboarding, your coding assistant automatically detects your project's frameworks, adds the necessary configuration, and creates the required tokens and apps, all without leaving your IDE.
+With Agentic Onboarding, your coding assistant automatically detects your project's frameworks, add configuration, and provisions required tokens and apps directly from your IDE.
 
 ## Prerequisites
 ### Supported frameworks
-Agentic Onboarding is available for the following frameworks: React, Next.js, Vue, Svelte, Angular, Vanilla JS, iOS, Android
+Agentic Onboarding is available for the following frameworks: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, Vue
 
 ## Setup
 
@@ -31,7 +31,7 @@ Agentic Onboarding is available for the following frameworks: React, Next.js, Vu
 
 To install the Datadog Onboarding Model Context Protocol (MCP) server, follow the steps below.
 
-1. Copy the deeplink or command for your AI agent client:
+1. Copy the deeplink or the command for your coding agent:
 
    {{< tabs >}}
    {{% tab "Cursor" %}}
@@ -128,19 +128,20 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
    {{% /tab %}}
    {{< /tabs >}}
 
-2. In your AI agent client, click **Install** for the `datadog-onboarding-mcp` server.
-3. If you see a **Needs login** link under the installed MCP server, click the link to complete the OAuth process.
-4. When prompted to open an external website, click **Open**.
-5. After you've granted access to your Datadog account, you are redirected to Cursor. Click **Open** to complete the authentication process.
-5. Confirm you see MCP tools listed for the `datadog-onboarding-mcp` server.
+2. In your client, click **Install** for the `datadog-onboarding-mcp` server.
+3. If the MCP server shows a **Needs login** link, select it and complete the OAuth flow. When prompted, choose **Open** to continue and grant access to your Datadog account.
+4. After authentication, return to your client and confirm that MCP tools appear under the `datadog-onboarding-mcp` server.
 
 ### Set up your project
 
-Your AI coding agent can automatically configure Datadog for your project. When you provide a setup prompt, your coding agent does the following:
+Your AI coding agent can help configure Datadog for your project. When you provide a setup prompt, it:
 
-- Analyze your project and identify your project's framework, language, and bundler
-- Follow the instructions the MCP tool provides as context to your coding agent, making code changes on your behalf (don't worry - Datadog does not commit them)
-- Provide testing steps to confirm that your application is correctly configured to send telemetry to Datadog
+- analyzes your project and identifies your project's framework, language, and bundler
+- calls the tool, asking for your permission before it runs
+
+  **Note**: Your coding agent makes changes locally without committing them.
+- applies the configuration changes specified by the tool
+- provides steps to verify that your application is sending telemetry to Datadog
 
 1. To get started, copy and paste the following prompt based on the product you want to use into your coding agent (such as Cursor or Claude Code):
 
@@ -168,7 +169,7 @@ Your AI coding agent can automatically configure Datadog for your project. When 
 
 ### Deploy your app to production
 
-Depending on how your application is deployed, you need to commit the changes and set or upload provided environment variables to your production environment.
+Commmit the changes in your repository and configure the provided environment variables in your production environment.
 
 [1]: https://cursor.com/
 [2]: https://claude.ai/
