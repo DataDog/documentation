@@ -18,7 +18,7 @@ Custom entities allow you to represent any component or resource that is importa
 
 See GitHub for [full schema definitions][7].
 
-## Create a custom entity
+## Create a custom entity type
 
 You can create custom entity types in Datadog or through the Software Catalog API. After creating the type, you can add entities of that type in Datadog or programmatically through the [Software Catalog APIs][2], [GitHub integration][4], or [Terraform module][3]. 
 
@@ -39,7 +39,7 @@ If you close the window and select **Create New Entry**, your custom type appear
 
 Alternatively, define your custom types through the [Software Catalog API][1].
 
-### Example 
+### Example entity
 
 In the follow example, a user defines an entity of custom type `library` with links, tags, and owning teams:
 
