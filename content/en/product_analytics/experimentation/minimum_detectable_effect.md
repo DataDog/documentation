@@ -26,7 +26,7 @@ For example, if you’re designing an experiment to improve a service’s sign-u
 
 If the control variant’s sign-up rate is 20%, then a true sign-up rate of 22% or higher in the treatment variant (a 10% relative lift) will yield a statistically significant result at least 80% of the time (assuming 80% power). If the true sign-up rate is below 22%, the chance of achieving statistical significance is less than 80%.
 
-## MDEs and sample sizes
+## How are MDEs related to sample size?
 
 In general, larger sample sizes allow experiments to detect smaller effects. More subjects make it easier to detect small changes between variants. If your organization (or specific experiment) tends to have fewer subjects available, an experiment may need to run for many weeks to reach the sample size required.
 
