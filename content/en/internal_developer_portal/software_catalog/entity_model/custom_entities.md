@@ -39,9 +39,9 @@ If you close the window and select **Create New Entry**, your custom type appear
 
 Alternatively, define your custom types through the [Software Catalog API][1].
 
-### Example
+### Example 
 
-In the follow example, a user declares a library with links, tags, and owning teams:
+In the follow example, a user defines an entity of custom type `library` with links, tags, and owning teams:
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
