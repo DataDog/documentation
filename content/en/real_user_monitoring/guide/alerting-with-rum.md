@@ -57,6 +57,14 @@ After creating an alert, route it to people or channels by writing a message and
 
 The following examples highlight common use cases for RUM monitors. For RUM without Limits customers, these scenarios can be implemented using metric-based monitors for visibility into your full traffic and advanced alerting capabilities.
 
+### Traffic monitoring with anomaly detection
+
+Session count monitoring helps teams detect unusual traffic patterns that could indicate issues or opportunities. Unlike threshold-based alerts, anomaly detection automatically learns normal traffic patterns and alerts when behavior deviates significantly.
+
+This example shows a RUM monitor using anomaly detection to track session counts over time. The monitor can be scoped to a specific application or service to detect unexpected drops or spikes in user traffic. Anomaly detection is particularly useful for traffic monitoring because it adapts to daily and weekly patterns, reducing false alerts from expected traffic variations.
+
+{{< img src="real_user_monitoring/guide/alerting-with-rum/traffic-anomaly.png" alt="RUM monitor query showing count of sessions metric summed by application name, with anomaly alert conditions configured to trigger when values deviate from expected patterns" style="width:100%;" >}}
+
 ### Crash-free sessions
 
 The crash-free rate helps teams track how often mobile sessions complete without errors.
@@ -64,14 +72,6 @@ The crash-free rate helps teams track how often mobile sessions complete without
 This example uses mobile RUM to evaluate application stability across release versions. The monitor is filtered to a specific application (for example, `Shop.ist iOS`) and grouped by `version` to help identify regressions tied to specific releases. The query combines crash-free sessions and total sessions to calculate the crash-free rate as a percentage.
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/crash-free-sessions.png" alt="Query view showing two RUM metric queries for crash-free and inactive sessions, filtered on the Shop.ist iOS app and grouped by version, combined into a formula to calculate a crash-free rate." style="width:100%;" >}}
-
-### Error rates
-
-The ratio of errors to requests shows what percentage of requests result in errors.
-
-This example shows a RUM monitor for the error rate of the `/cart` page on a sample Shop.ist application.
-
-{{< img src="real_user_monitoring/guide/alerting-with-rum/error-rate-example-monitor.png" alt="RUM monitor for error rates" style="width:100%;" >}}
 
 ### Performance vitals
 
@@ -83,13 +83,13 @@ This example shows a RUM monitor for the LCP metric filtered to a specific appli
 
 This example monitor warns when the LCP takes 2 seconds to load and alerts when the LCP takes longer than 2.5 seconds to load. With metric-based monitors, you can also use anomaly detection to help identify when performance metrics deviate from normal patterns, or use forecast alerts to predict when thresholds might be breached.
 
-### Traffic monitoring with anomaly detection
+### Error rates
 
-Session count monitoring helps teams detect unusual traffic patterns that could indicate issues or opportunities. Unlike threshold-based alerts, anomaly detection automatically learns normal traffic patterns and alerts when behavior deviates significantly.
+The ratio of errors to requests shows what percentage of requests result in errors.
 
-This example shows a RUM monitor using anomaly detection to track session counts over time. The monitor can be scoped to a specific application or service to detect unexpected drops or spikes in user traffic. Anomaly detection is particularly useful for traffic monitoring because it adapts to daily and weekly patterns, reducing false alerts from expected traffic variations.
+This example shows a RUM monitor for the error rate of the `/cart` page on a sample Shop.ist application.
 
-{{< img src="real_user_monitoring/guide/alerting-with-rum/traffic-anomaly.png" alt="RUM monitor query showing count of sessions metric summed by application name, with anomaly alert conditions configured to trigger when values deviate from expected patterns" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/alerting-with-rum/error-rate-example-monitor.png" alt="RUM monitor for error rates" style="width:100%;" >}}
 
 ## Further reading
 
