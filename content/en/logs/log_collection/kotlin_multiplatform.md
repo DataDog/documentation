@@ -41,10 +41,11 @@ kotlin {
 
     Add the following Datadog iOS SDK dependencies, which are needed for the linking step:
 
-    * `DatadogObjc`
+    * `DatadogCore`
+    * `DatadogLogs`
     * `DatadogCrashReporting`
 
-    **Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][6].
+    **Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][6]. If you are using Kotlin Multiplatform SDK version 1.3.0 or below, you should add `DatadogObjc` dependency instead of `DatadogCore` and `DatadogLogs`.
 
     #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -58,7 +59,12 @@ kotlin {
             baseName = "sharedLib"
         }
 
-        pod("DatadogObjc") {
+        pod("DatadogCore") {
+            linkOnly = true
+            version = x.x.x
+        }
+
+        pod("DatadogLogs") {
             linkOnly = true
             version = x.x.x
         }
