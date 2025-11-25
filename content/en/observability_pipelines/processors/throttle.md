@@ -22,9 +22,9 @@ To set up the processor:
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-## How the throttle processor works
+## How the Throttle processor works
 
-The throttle processor sets a rate limit on the number of logs sent within a specified time window. While similar to the quota processor, the main difference between the throttle and quota is that the quota processor's time window is fixed at 24 hours and cannot be changed, while the throttle processor's time window can be configured. Since the throttle processor's time window is configurable, the processor has a capacity replenishment rate based on the throttling rate and time window you set. See [Capacity replenishment rate](#capacity-replenishment-rate) for more information.
+The Throttle processor sets a rate limit on the number of logs sent within a specified time window. While similar to the quota processor, the main difference between the throttle and quota is that the Quota processor's time window is fixed at 24 hours and cannot be changed, while the Throttle processor's time window can be configured. Since the Throttle processor's time window is configurable, the processor has a capacity replenishment rate based on the throttling rate and time window you set. See [Capacity replenishment rate](#capacity-replenishment-rate) for more information.
 
 ### Initial capacity
 
