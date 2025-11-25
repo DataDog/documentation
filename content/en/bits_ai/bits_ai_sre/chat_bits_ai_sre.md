@@ -14,7 +14,7 @@ The Bits AI SRE chatbot has access to:
 - **Incidents**: Details on incidents and their status, severity, and more
 - **Services**: Services in Software Catalog with their dependencies, owners, and more
 - **Datadog documentation**: Documented Datadog product information
-- **Confluence documentation**: Relevant documentation or runbooks from your Confluence documentation (if the Confluence integration is [configured][2] to enable account crawling)
+- **Confluence documentation**: Relevant documentation or runbooks from your Confluence documentation (if the Confluence integration is [configured][1] to enable account crawling)
 
 ## Example questions
 
