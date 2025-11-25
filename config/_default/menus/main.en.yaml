@@ -1779,86 +1779,91 @@ menu:
       parent: monitor_types
       identifier: monitor_types_database_monitoring
       weight: 410
+    - name: Dataset
+      url: monitors/types/dataset/
+      parent: monitor_types
+      identifier: monitor_types_dataset
+      weight: 411
     - name: Error Tracking
       url: monitors/types/error_tracking/
       parent: monitor_types
       identifier: monitor_types_error_tracking
-      weight: 411
+      weight: 412
     - name: Event
       url: monitors/types/event/
       parent: monitor_types
       identifier: monitor_types_event
-      weight: 412
+      weight: 413
     - name: Forecast
       url: monitors/types/forecasts/
       parent: monitor_types
       identifier: monitor_types_forecasts
-      weight: 413
+      weight: 414
     - name: Integration
       url: monitors/types/integration/
       parent: monitor_types
       identifier: monitor_types_integration
-      weight: 414
+      weight: 415
     - name: Live Process
       url: monitors/types/process/
       parent: monitor_types
       identifier: monitor_types_process
-      weight: 415
+      weight: 416
     - name: Logs
       url: monitors/types/log/
       parent: monitor_types
       identifier: monitor_types_log
-      weight: 416
+      weight: 417
     - name: Network
       url: monitors/types/network/
       parent: monitor_types
       identifier: monitor_types_network
-      weight: 417
+      weight: 418
     - name: Cloud Network Monitoring
       url: monitors/types/cloud_network_monitoring/
       parent: monitor_types
       identifier: monitor_types_cnm
-      weight: 418
+      weight: 419
     - name: NetFlow
       url: monitors/types/netflow/
       parent: monitor_types
       identifier: monitor_types_netflow
-      weight: 419
+      weight: 420
     - name: Outlier
       url: monitors/types/outlier/
       parent: monitor_types
       identifier: monitor_types_outlier
-      weight: 420
+      weight: 421
     - name: Process Check
       url: monitors/types/process_check/
       parent: monitor_types
       identifier: monitor_types_process_check
-      weight: 421
+      weight: 422
     - name: Real User Monitoring
       url: monitors/types/real_user_monitoring/
       parent: monitor_types
       identifier: monitor_types_rum
-      weight: 422
+      weight: 423
     - name: Service Check
       url: monitors/types/service_check/
       parent: monitor_types
       identifier: monitor_types_service_check
-      weight: 423
+      weight: 424
     - name: SLO Alerts
       url: monitors/types/slo/
       parent: monitor_types
       identifier: monitor_types_slo
-      weight: 424
+      weight: 425
     - name: Synthetic Monitoring
       url: monitors/types/synthetic_monitoring/
       parent: monitor_types
       identifier: monitor_types_syn
-      weight: 425
+      weight: 426
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 426
+      weight: 427
     - name: Notifications
       url: monitors/notify/
       parent: alerting
