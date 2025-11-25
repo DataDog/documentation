@@ -20,7 +20,24 @@ See GitHub for [full schema definitions][7].
 
 ## Create a custom entity
 
-Define your custom types through the [Software Catalog API][1]. Entities of that type can then be defined in Datadog or programmatically sent through the existing [Software Catalog APIs][2], [GitHub integration][4], or [Terraform module][3]. 
+You can create custom entity types in Datadog or through the Software Catalog API. After creating the type, you can add entities of that type in Datadog or programmatically through the [Software Catalog APIs][2], [GitHub integration][4], or [Terraform module][3]. 
+
+### In Datadog
+
+1. Navigate to **APM** > **Software Catalog**, and click [**Manage**][8].
+1. Click **Manage Custom Entity Types** to view existing entity types, native and custom.
+
+   {{< img src="/tracing/internal_developer_portal/manage-entity-types.png" alt="The Manage Entity Types pop-up window, showing existing native and custom types and a button to create a custom entity type" style="width:100%;" >}}
+
+1. Click **Add Custom Entity Type** to add a type. 
+
+If you close the window and select **Create New Entry**, your custom type appears in the `kind` dropdown at the top of the pop-up window. 
+
+{{< img src="/tracing/internal_developer_portal/custom-type-in-dropdown.png" alt="The Create New Entry pop-up window, showing the kind dropdown which includes custom entity types" style="width:60%;" >}}
+
+### Through the API 
+
+Alternatively, define your custom types through the [Software Catalog API][1].
 
 ### Example
 
@@ -63,6 +80,10 @@ metadata:
       type: operator
 {{< /code-block >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /api/latest/software-catalog/#create-or-update-kinds
 [2]: /api/latest/software-catalog/#create-or-update-entities
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
@@ -70,7 +91,4 @@ metadata:
 [5]: /internal_developer_portal/software_catalog/entity_model
 [6]: /internal_developer_portal/software_catalog/entity_model/native_entity_types
 [7]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+[8]: https://app.datadoghq.com/software/settings/get-started
