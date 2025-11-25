@@ -88,12 +88,12 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 #### APM Tracing disabled
 
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
 
 {{< tabs >}}
 {{% tab "Using system properties" %}}
 
-Start your Java application with the Datadog agent and App and API Protection enabled using system properties:
+Start your Java application with the Datadog agent and IAST enabled using system properties:
 
 ```bash
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.iast.enabled=true -Ddd.apm.tracing.enabled=false -Ddd.service=<MY_SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
@@ -228,7 +228,7 @@ ENV DD_IAST_ENABLED=true
 
 #### APM Tracing disabled
 
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
 
 ```Dockerfile
 DD_IAST_ENABLED=true
@@ -321,7 +321,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 #### APM Tracing disabled
 
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
 
 ```Dockerfile
 DD_IAST_ENABLED=true
@@ -409,7 +409,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 #### APM Tracing disabled
 
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
 
 ```Dockerfile
 DD_IAST_ENABLED=true
