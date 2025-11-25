@@ -112,7 +112,7 @@ The example code creates the following action event:
 }
 ```
 
-If an event or a request goes beyond any of limitations listed [here][], it is rejected by the Datadog intake.
+If an event or a request goes beyond any of the [listed RUM technical limitations][16], it is rejected by the Datadog intake.
 
 ## "Customer data exceeds the recommended threshold" warning
 
