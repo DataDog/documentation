@@ -1478,14 +1478,14 @@ menu:
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 100
-    - name: Bits AI SRE integrations and settings
-      url: bits_ai/bits_ai_sre/configure
-      identifier: bits_ai_sre_configure
-      parent: bits_ai_sre
-      weight: 200
     - name: Remediate issues
       url: bits_ai/bits_ai_sre/remediate_issues
       identifier: bits_ai_sre_remediate_issues
+      parent: bits_ai_sre
+      weight: 200
+    - name: Bits AI SRE integrations and settings
+      url: bits_ai/bits_ai_sre/configure
+      identifier: bits_ai_sre_configure
       parent: bits_ai_sre
       weight: 300
     - name: Help Bits learn

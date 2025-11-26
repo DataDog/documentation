@@ -39,8 +39,12 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 
 #### APM latency
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
+<!-- {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
 Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}} -->
+
+{{< callout url="#" btn_hidden="true" >}}
+Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are in Preview.
 {{< /callout >}}
 
 ##### APM latency graphs on service pages
@@ -121,9 +125,11 @@ Investigations happen in two phases:
      - When a hypothesis is validated, Bits generates sub-hypotheses and repeats the same investigative process on them.
 
    {{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits AI SRE built and tested" style="width:100%;" >}}
+
 ## Reports
 
-The Reports tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to initial findings and conclusion to assess the impact of Bits on your on-call efficiency. 
+The Reports tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to initial findings and conclusion to assess the impact of Bits on your on-call efficiency.
+
 [1]: https://app.datadoghq.com/apm/home
 [2]: /tracing/guide/latency_investigator/
 [3]: /bits_ai/bits_ai_sre/configure/#configure-knowledge-base-integrations
