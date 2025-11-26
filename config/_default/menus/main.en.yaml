@@ -4940,16 +4940,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_auto
       weight: 201
-    - name: SDK Reference
+    - name: Instrumentation Reference
       url: llm_observability/instrumentation/sdk
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_sdk
       weight: 202
-    - name: HTTP API
-      url: llm_observability/instrumentation/api
-      parent: llm_obs_instrumentation
-      identifier: llm_obs_instrumentation_api
-      weight: 203
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs
