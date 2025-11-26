@@ -1710,6 +1710,12 @@
     "request_description": "",
     "request_schema_description": "Update a restriction query."
   },
+  "ReplaceRestrictionQuery": {
+    "description": "Replace a restriction query.",
+    "summary": "Replace a restriction query",
+    "request_description": "",
+    "request_schema_description": "Update a restriction query."
+  },
   "RemoveRoleFromRestrictionQuery": {
     "description": "Removes a role from a restriction query.",
     "summary": "Revoke role from a restriction query",
@@ -1721,7 +1727,7 @@
     "summary": "List roles for a restriction query"
   },
   "AddRoleToRestrictionQuery": {
-    "description": "Adds a role to a restriction query.",
+    "description": "Adds a role to a restriction query.\n\n**Note**: This operation automatically grants the `logs_read_data` permission to the role if it doesn't already have it.",
     "summary": "Grant role to a restriction query",
     "request_description": "",
     "request_schema_description": "Relationship to role."
