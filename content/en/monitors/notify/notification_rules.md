@@ -21,6 +21,8 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 ## Setup
 
+{{< img src="/monitors/notifications/notification_rules/notification_rule_form-light.png" alt="Configuration for a notification rule showing scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
+
 To create a Monitor Notification Rule in Datadog, do the following:
 
 1. Go to [**Notification Rules**][1].
@@ -33,14 +35,11 @@ To create a Monitor Notification Rule in Datadog, do the following:
 
 Add the required tags for a monitor notification to be routed to this rule. Matching evaluates the notification tagset. Learn more in [How matching works](#how-matching-works).
 
-**Note**: Any monitor created or edited after the notification rule is saved and is routed to the defined recipients if it matches the scope of the rule.
+<div class="alert alert-info">Monitors created or updated after the notification rule is saved are routed to the defined recipients if it matches the scope of the rule.</div>
 
 {{% collapse-content title="Rule scope syntax" level="h4" expanded=false %}}
 
-<!-- To confirm, notification rules use Logging searching syntax over Monitor search syntax? -->
-
-
-The Notification Rule scope query supports Boolean logic and follows the same common [search syntax][3] supported by many other platform products.
+The Notification Rule scope query supports Boolean logic and follows the [event-based search syntax][3] supported by many other platform products.
 
 | Syntax Element | Description |
 | -------------- | ----------- |
@@ -74,8 +73,6 @@ The following are **not supported**:
 
 ### Configure the recipients
 
-<!-- Flatten the conditional so that we don't add more sections. -->
-
 Specify which recipients to notify when a monitor notification matches the rule's scope. You can always notify all recipients, or set conditional recipients that are only notified when certain conditions are met (for example, route critical alerts to your on-call recipient, and send warnings to a Slack channel).
 
 Notifications can be sent to email or any integration channel. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2].
@@ -103,7 +100,7 @@ In your monitor configuration, the **Recipient Summary** shows recipients that a
 
 ## How matching works
 
-- For multi-alert monitors, the notification tagset includes both the monitor's tags and the tags of the group that triggered the alert. If the same tag key appears in both, all values are included in the combined tagset.
+- Notification tagset is the union of monitor tags and tags of the firing group (for multi alert monitors). If a key has multiple values across monitor/group, all values are considered.
 - Currently matches: A rule matches if at least one reporting group, combined with monitor tags, satisfies the scope; or, if the monitor tags alone do. NOT is evaluated per candidate tagset, so a group with a denied value does not match.
 - Could match when new groups report (multi alert monitors, Monitor edit surface): Treat each group-by key as present with any value, constrained by the monitor query's allow/deny filters.
 - If multiple rules match a single notification, recipients from all matching rules are merged and de-duplicated.
@@ -210,4 +207,4 @@ The following table demonstrates how monitors with different tag combinations ma
 
 [1]: https://app.datadoghq.com/monitors/settings/notifications
 [2]: /monitors/notify/#notifications
-[3]: /logs/explorer/search_syntax/
+[3]: /getting_started/search/#event-based-queries
