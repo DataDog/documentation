@@ -116,7 +116,7 @@ From your list of configurations in the [Configure Agents][16] tab, you can
 
 1. Submit these changes by selecting **Deploy Changes**.
 
-**Note**: There are some configurations fields ( for example, `api_key`, `site`, and `notable_events`) that cannot be modified using this method. These fields will be listed as _not editable_.
+**Note**: There are some configurations fields ( for example, `api_key`, `site`, and `notable_events`) that cannot be modified using this method. These fields are listed as _not editable_.
 
 In the following example, the `logs_enabled` field is changed from `true` to `false`. After the changes are deployed, log collection on this Agent is disabled. 
 
