@@ -83,7 +83,10 @@ To schedule your Agent upgrades:
 
 1. On the the upgrade scheduling page, add a **Schedule name**.
 
-1. **Select the Agent version** you want your Agents to be upgraded to. You have the option to upgrade the Agents to the latest version, one version behind the latest version, or two versions behind the latest version. 
+1. **Select the Agent version**. You have the option to upgrade the Agents to:
+      - The latest version
+      - One version behind the latest version
+      - Two versions behind the latest version 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_select_version1.png" alt="See a list of scheduled Agent upgrades." style="width:100%;" >}}
 
@@ -91,7 +94,7 @@ To schedule your Agent upgrades:
    
    {{< img src="/agent/fleet_automation/agent_upgrade_select_agents.png" alt="See a list of Agent to be upgraded." style="width:100%;" >}}
 
-1. Then, **set the deployment window** for these upgrades. You can select the weekdays, time frame, and timezone for the upgrade.
+1. **Set the deployment window** for these upgrades. You can select the weekdays, time frame, and timezone for the upgrade.
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
 
