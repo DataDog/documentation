@@ -12,7 +12,7 @@ Service naming rules are in Preview.
 
 ## Overview
 
-Update how your services appear across Datadog without changing tracer configuration or redeploying code. Service naming rules allows you to rename, merge, or split services, or create new services based on infrastructure tags from the Datadog UI. You can also create naming rules for other entity types, such as datastores and queues.
+Update how your services appear across Datadog without changing tracer configuration or redeploying code. Service naming rules allow you to rename, merge, or split services, or create new services based on infrastructure tags from the Datadog UI. You can also create naming rules for other entity types, such as datastores and queues.
 
 <div class="alert alert-info">Each organization can contain up to 100 naming rules.</div>
 
