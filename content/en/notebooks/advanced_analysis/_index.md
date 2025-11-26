@@ -19,6 +19,10 @@ Notebooks Advanced Analysis is not available in the <a href="/getting_started/si
 </div>
 {{% /site-region %}}
 
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
+Want to query a data source is not available? Use this form to request access.
+{{< /callout >}}
+
 ## Overview
 
 The analysis feature in Notebooks allows you to perform advanced analysis on your Datadog data. You can join multiple datasets, chain queries, and transform your data using either predefined transformations or SQL, while retaining the full capabilities that Notebooks provide.
