@@ -25,7 +25,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| [CI jobs failure analysis][28] | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
+| [CI jobs failure analysis][28] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
@@ -303,7 +303,7 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 #### CI jobs failure analysis
 
-If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitLab.
+If job logs collection is enabled, CI Visibility uses LLM models to compute the analysis for failed CI jobs based on relevant logs coming from Azure Pipelines.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
 
