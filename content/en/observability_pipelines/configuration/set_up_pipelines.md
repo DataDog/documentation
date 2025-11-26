@@ -61,7 +61,7 @@ If you want to add another group of processors for a destination:
 1. If you want to copy all processors in a group and paste them into the same processor group or a different group:
     1. Click the three dots on the processor group.
     1. Select **Copy all processors**.
-    1. Select the processor group you want to paste the processors into and then use `command-v` to paste them.
+    1. Select the desired processor group, and then paste the processors into it.
 1. You can toggle the switch to enable and disable the processor group and also each individual processor.
 
 **Notes**:
