@@ -4317,10 +4317,10 @@ menu:
       parent: tracing_services
       identifier: tracing_renaming_rules
       weight: 907
-    - name: Service Naming Rules
-      url: tracing/services/service_naming_rules
+    - name: Service Remapping Rules
+      url: tracing/services/service_remapping_rules
       parent: tracing_services
-      identifier: tracing_service_naming_rules
+      identifier: tracing_service_remapping_rules
       weight: 908
     - name: APM Monitors
       url: /monitors/create/types/apm/
