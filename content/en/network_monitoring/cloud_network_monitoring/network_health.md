@@ -25,6 +25,7 @@ This page describes the sections of the Network Health page and the issues and i
 ## Prerequisites
 
 - [Cloud Network Monitoring][1] is enabled.
+- To view [Security Groups](#security-groups), [resource collection][6] must enabled in your AWS integration.
 
 ## Recommended Actions
 
@@ -45,7 +46,7 @@ Hover over a service name to pivot to APM, or click **Remediate** to view remedi
 
 ## Watchdog Insights
 
-The **Watchdog Insights** section displays anomalous network behavior detected by Watchdog, focusing on spikes in TCP retransmits. An increase in retransmits compared to your baseline (typically the previous week) often indicates an underlying network issue.
+The **Watchdog Insights** section displays anomalous network behavior detected by Watchdog, focusing on spikes in TCP retransmits. An increase in retransmits compared to your baseline (typically the previous week) often indicates an underlying network issue. See the [Watchdog Insights][5] documentation for more information.
 
 Use Watchdog Insights to:
 - Detect potential problems early
@@ -58,7 +59,7 @@ Expired or expiring TLS certificates can block secure connections between servic
 
 - **Expired certificates**: Certificates that are invalid and blocking traffic
 - **Expiring certificates**: Certificates about to expire
-- **Impacted services**: The client and server services affected by each certificate issue
+- **Impacted services**: The client and server services affected by each certificate issue (note that the client "service" may be an AWS load balancer, such as an Application Load Balancer)
 
 Click an expired certificate to view steps for renewing it in AWS, or to create a [New Workflow][2], [Create a Case][3], or [Declare an Incident][4].
 
@@ -87,7 +88,9 @@ Hover over a service name to pivot to APM, or click on a recommended action to v
 
 ## Security groups
 
-Security groups control traffic flow in cloud environments (such as AWS) through allow and deny rules. Because security groups deny traffic by default, accidental rule deletions or modifications can immediately block legitimate traffic between services.
+Security groups control traffic flow in cloud environments through allow and deny rules. Because security groups deny traffic by default, accidental rule deletions or modifications can immediately block legitimate traffic between services.
+
+**Note**: Security group monitoring is available only for AWS and requires [EC2 resource collection][6] to be enabled in your AWS integration.
 
 The **Security Groups** section identifies:
 - Security group misconfigurations blocking traffic
@@ -115,3 +118,5 @@ Use the filters at the top of the page to narrow the scope of displayed issues. 
 [2]: /actions/workflows/build/
 [3]: /service_management/case_management/create_case
 [4]: /service_management/incident_management/declare/
+[5]: /watchdog/insights
+[6]: /integrations/amazon-web-services/#resource-collection
