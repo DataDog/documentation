@@ -20,7 +20,7 @@ Notebooks Advanced Analysis is not available in the <a href="/getting_started/si
 {{% /site-region %}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
-Want to query a data source is not available? Use this form to request access.
+If you want to query data sources not yet available, use this form to submit your request.
 {{< /callout >}}
 
 ## Overview
