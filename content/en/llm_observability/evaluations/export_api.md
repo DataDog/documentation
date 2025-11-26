@@ -6,6 +6,8 @@ title: Export API
 
 The LLM Observability Export API provides endpoints to retrieve span data. These endpoints allow you to programmatically access your LLM Observability data for running external evaluations and exporting spans for offline storage.
 
+<div class="alert alert-info">By default, we export spans from the past 15 minutes. If you need to search outside of this timeframe, please specify a time range in your request.</div>
+
 ## Search spans
 
 Use this endpoint to search and filter LLM Observability spans based on specific criteria.
@@ -128,7 +130,8 @@ Method
 curl -G "https://api.datadoghq.com/api/v2/llm-obs/v1/spans/events" \
 -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
 -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
---data-urlencode "filter[span_id]=14624140233640368324"
+# searches for spans from the past 15 minutes
+--data-urlencode "filter[trace_id]=6903738200000000af2d3775dfc70530"
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
