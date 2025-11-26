@@ -12,7 +12,6 @@ further_reading:
 
 ## Overview
 
-
 Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. Remote Agent Management gives you access to:
 * **Centralized Management** - Upgrade Agents across all environments with a single tool, ensuring consistency with the latest features and security patches.
 * **Visibility and Monitoring** - Track the status of upgrades in real-time, allowing quick verification of deployment success.
@@ -98,7 +97,7 @@ To schedule your Agent upgrades:
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
 
-1. Optionally, **set notifications** to receive progress updates on the deployment. You can notify individuals or communication integration channels like Slack, teams, or pagerduty. 
+1. Optionally, click **+ Add Recipient** to set up notifications and receive updates on the deployment. You can notify individuals or communication integration channels like Slack, teams, or pagerduty. 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_notification.png" alt="Select people or channels to be notified about the progess of the upgrade." style="width:100%;" >}}
 
