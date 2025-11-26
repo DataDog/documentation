@@ -21,9 +21,9 @@ For monitor alert investigations, a summary of the findings is available on the 
 Datadog Case Management provides a centralized workspace for triaging, tracking, and remediating issues detected by Datadog and third-party integrations. Bits AI SRE automatically delivers its investigation findings to Jira and ServiceNow through Case Management. 
 
 To set up Case Management, and the Jira and ServiceNow integrations:
-1. Create a Case Management [project][5] for your team.
+1. Create a [Case Management project][5] for your team.
 1. In Datadog, go to [**Case Management** > **Settings**][6]. In the list of projects, expand your project, go to **Integrations** > **Datadog Monitors**, and turn on the **Enable Datadog Monitors integration for this project** toggle. This generates your project's unique handle: `@case-{project_name}`.
-1. On the same page, under **Integrations**, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, Case Management can then automatically open the corresponding Jira ticket or ServiceNow incident.
+1. On the same page, under **Integrations**, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, Case Management can automatically open the corresponding Jira ticket or ServiceNow incident.
 1. In your monitor, go to **Configure notifications and automations** and add the `@case-{project_name}` handle. When the monitor triggers:
    - Datadog automatically creates a new case
    - The case creates a linked Jira ticket or ServiceNow incident
@@ -66,11 +66,11 @@ There are two RBAC permissions that apply to Bits AI SRE:
 | Bits Investigations Read (`bits_investigations_read`)   | Read Bits investigations.              | Datadog Read Only Role |
 | Bits Investigations Write (`bits_investigations_write`) | Run and configure Bits investigations. | Datadog Standard Role  |
 
-These permissions are added by default to Managed Roles. If your organization uses Custom Roles or have previously modified the default roles, an admin with the User Access Manage permission needs to manually add the permission to the appropriate roles. For details, see [Access Control][8].
+These permissions are added by default to Managed Roles. If your organization uses Custom Roles or has previously modified the default roles, an admin with the User Access Manage permission needs to manually add these permissions to the appropriate roles. For details, see [Access Control][8].
 
 ## Configure rate limits
 
-Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period. Even after you've hit a rate limit, you can still trigger [manual investigations][9].
+Rate limits define the maximum number of automatic investigations Bits AI SRE can run in a rolling 24-hour period. After you reach a rate limit, you can continue to trigger [manual investigations][9].
 
 
 ### Types of rate limits
@@ -80,7 +80,7 @@ Per monitor limit
 : **Default:** Each monitor can trigger one automatic investigation per 24 hours.
 
 Organization limit
-: The Organization limit defines the total number of automatic investigations Bits AI SRE can run across your entire organization within 24 hours.
+: Defines the total number of automatic investigations Bits AI SRE can run across your entire organization within 24 hours.
 : **Default:** No limit.
 
 ### Set a rate limit

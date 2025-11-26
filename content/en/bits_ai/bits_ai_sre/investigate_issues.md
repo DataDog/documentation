@@ -5,10 +5,10 @@ aliases:
 - /bits_ai/bits_ai_sre/investigate_alerts/
 ---
 
-## Get started with alert investigations
+## Start a Bits AI SRE investigation
 
 
-The starting points of a Bits AI SRE investigation are:
+You can start a Bits AI SRE investigation from:
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert, APM latency graph, or APM Watchdog story
   - [**Automatic**](#enable-automatic-investigations): Configure monitors so that whenever they alert, Bits launches an investigation
@@ -27,10 +27,10 @@ You can invoke Bits on an individual monitor alert or warn event from several en
 1. Click **Investigate Recent Alerts** and select an alert.
 
 ##### Option 2: Monitor status page
-Navigate to the monitor status page of a [Bits AI SRE-supported monitor](#monitor-list) and click **Investigate with Bits AI SRE** in the top-right corner.
+Navigate to the monitor status page of a [Bits AI SRE-supported monitor](#supported-monitors) and click **Investigate with Bits AI SRE** in the top-right corner.
 
 ##### Option 3: Monitor event side panel
-In the monitor event side panel of a [Bits AI SRE-supported monitor](#monitor-list), click **Investigate with Bits AI SRE**.
+In the monitor event side panel of a [Bits AI SRE-supported monitor](#supported-monitors), click **Investigate with Bits AI SRE**.
 
 ##### Option 4: Slack
 To use the Slack integration, [connect your Slack workspace to Bits AI SRE][8].
@@ -61,11 +61,11 @@ On a Watchdog APM latency story, click **Investigate with Bits AI SRE**.
 
 In addition to manual investigations, you can configure Bits to run automatically when a monitor transitions to the alert state:
 
-#### Option 1: Bits AI SRE Monitors list
+#### From the Bits AI SRE Monitors list
 1. Go to [**Bits AI SRE** > **Monitors** > **Supported**][5].
 1. Toggle **Auto-Investigate** on for a single monitor, or bulk-edit multiple monitors by selecting multiple monitors, then clicking **Auto-Investigate All**.
 
-#### Option 2: Configure automatic investigations for a single monitor
+#### For a single monitor
 1. Open the monitor's status page and click **Edit**.
 1. Scroll to **Configure notifications & automations** and toggle **Investigate with Bits AI SRE**.
 
@@ -84,19 +84,19 @@ Bits is able to run investigations on the following monitor types:
   - APM (`APM Metrics` type only; `Trace Analytics` is not supported)
   - Synthetics (API tests only)
 
-#### Best practices: Add investigation context to your monitors {#best-practices}
+### Best practices: Add investigation context to your monitors {#best-practices}
 Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
 
-1. **Include Datadog telemetry links**: Add at least one helpful telemetry link in the monitor message. Think about the first place you'd normally look in Datadog when this monitor triggers. It could be a link to any of the following:
+- **Include Datadog telemetry links**: Add at least one helpful telemetry link in the monitor message. Think about the first place you'd normally look in Datadog when this monitor triggers. It could be a link to any of the following:
    - Datadog dashboard
    - Logs
    - Traces
    - Datadog notebook with helpful widgets
    - Confluence runbook page containing Datadog telemetry links (requires a configured [Confluence integration][3])
 
-   Bits uses these links during the "Runbook" step of the initial investigation to identify potential problem areas. Because these links are user-defined, you have control over what Bits reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows. You don't have to format the links in any particular way; plain links work.
+   Bits uses these links during the _Runbook_ steps of the initial investigation to identify potential problem areas. Because these links are user-defined, you have control over what Bits reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows. You don't have to format the links in any particular way; plain links work.
 
-2. **Add service scoping**: For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service.
+- **Add service scoping**: For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service.
 
    {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
@@ -106,7 +106,7 @@ For additional suggestions on how to optimize investigations, see [Help Bits lea
 
 Investigations happen in two phases:
 
-1. Bits begins by **gathering initial context** on the problem and any information that might help it troubleshoot further. Depending on the starting point of the investigation, you may see one or more of the following sections:
+1. Bits begins by **gathering initial context** on the problem and any information that might help it troubleshoot further. Depending on the starting point of the investigation, you may see one or more of the following types of step:
    - **Runbook**: If the starting point is a monitor alert, Bits begins by parsing [Datadog or Confluence links](#best-practices) that you have added to the monitor's message, and uses them as entry points into the investigation.
    - **Memory**: If you have previously interacted with an investigation for the same monitor, Bits recalls any [memories][9] associated with the monitor to inform and accelerate the current investigation.
    - **General search**: Bits automatically scans your Datadog environment to gather additional context about what's happening around the alert.
@@ -114,15 +114,14 @@ Investigations happen in two phases:
    
    {{< img src="bits_ai/bits_ai_sre_investigation_context.png" alt="Flowchart showing Bits AI SRE combining runbook, memory, and general search into initial findings" style="width:100%;" >}}
 1. Using the collected context, Bits **builds multiple root cause hypotheses and tests them concurrently**.
-   - Today, Bits looks at the following data sources:
+   Bits looks at the following data sources:
      - Metrics
      - Traces
      - Logs
      - Dashboards
      - [Change events][4]
      - Kubernetes events
-   - Each hypothesis ends in one of three states: validated, invalidated, or inconclusive.
-     - When a hypothesis is validated, Bits generates sub-hypotheses and repeats the same investigative process on them.
+   Each hypothesis ends in one of three states: validated, invalidated, or inconclusive. When a hypothesis is validated, Bits generates sub-hypotheses and repeats the same investigative process on them.
 
    {{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits AI SRE built and tested" style="width:100%;" >}}
 
