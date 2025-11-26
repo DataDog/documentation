@@ -168,7 +168,7 @@ The quota processor is synchronized across all Workers in a Datadog organization
 [7]: https://app.datadoghq.com/logs/
 [8]: /containers/docker/log/?tab=containerinstallation#linux
 [9]: /containers/guide/container-discovery-management/?tab=helm#setting-environment-variables
-[10]: /observability_pipelines/configuration/set_up_pipelines/#index-your-worker-logs
+[10]: /observability_pipelines/configuration/install_the_worker/#index-your-worker-logs
 [11]: /observability_pipelines/install_the_worker#uninstall-the-worker
 [12]: https://app.datadoghq.com/logs
 [13]: /observability_pipelines/configuration/install_the_worker/worker_commands/
