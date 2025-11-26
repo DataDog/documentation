@@ -124,6 +124,7 @@ Investigations happen in two phases:
 ## Reports
 
 The Reports tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to initial findings and conclusion to assess the impact of Bits on your on-call efficiency. 
+
 [1]: https://app.datadoghq.com/apm/home
 [2]: /tracing/guide/latency_investigator/
 [3]: /bits_ai/bits_ai_sre/configure/#configure-knowledge-base-integrations
