@@ -43,9 +43,9 @@ Set up your pipelines and its sources, processors, and destinations in the Obser
     - [Sensitive Data Redaction][9]
     - [Split Logs][10]
 1. Select and set up your [source][1].
-1. Add [processors][3] to transform, redact, and enrich log data.
-  - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
-1. Select and set up [destinations][2] for your processed logs.
+1. Add [processors][2] to transform, redact, and enrich log data.
+    - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
+1. Select and set up [destinations][3] for your processed logs.
 
 ### Add or remove components
 
@@ -56,9 +56,9 @@ Set up your pipelines and its sources, processors, and destinations in the Obser
 If you want to add another group of processors for a destination:
 1. Click the plus sign (**+**) at the bottom of the existing processor group.
 1. Click the name of the processor group to update it.
-1. Optionally, enter a group filter. See [Filter Syntax](#filter-query-syntax) for more information.
+1. Optionally, enter a group filter. See [Filter Syntax][17] for more information.
 1. Click **Add** to add processors to the group.
-1. If you want to copy all the processors in a group and paste them into the same processor group or a different group:
+1. If you want to copy all processors in a group and paste them into the same processor group or a different group:
     1. Click the three dots on the processor group.
     1. Select **Copy all processors**.
     1. Select the processor group you want to paste the processors into and then use `command-v` to paste them.
@@ -73,16 +73,20 @@ If you want to add another group of processors for a destination:
 {{< img src="observability_pipelines/setup/another_set_processor_destination.png" alt="The Pipelines page showing two processor groups sending logs to two different destinations" style="width:100%;" >}}
 
 If you want to add another set of processors and destinations, click the plus sign (**+**) to the left of the processor group to add another set of processors and destinations to the source.
-- To delete a processor group, you need to delete all destinations linked to that processor group. When the last destination is deleted, the processor group is removed with it.
+
+To delete a processor group, you need to delete all destinations linked to that processor group. When the last destination is deleted, the processor group is removed with it.
 
 #### Add another destination to a processor group
 
 {{< img src="observability_pipelines/setup/another_destination.png" alt="The Pipelines page showing one processor group sending logs to two different destinations" style="width:100%;" >}}
 
 If you want to add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
-- To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete node**.
-  - If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.
-  - If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
+
+To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete node**.
+
+**Notes**:
+- If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.
+- If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
 
 ### Install the Worker and deploy the pipeline
 
@@ -91,13 +95,14 @@ After you have set up your source, processors, and destinations:
 1. Click **Next: Install**.
 1. Select the platform on which you want to install the Worker.
 1. Enter the [environment variables][15] for your sources and destinations, if applicable.
-1. Follow the instructions on installing the Worker for your platform. The command provided in the UI to install the Worker has the relevant environment variables populated. See [Install the Observability Pipelines Worker][12] for more information.
+1. Follow the instructions on installing the Worker for your platform. The command provided in the UI to install the Worker has the relevant environment variables populated.
+    - See [Install the Worker][12] for more information.
     - **Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][16].
 1. Enable out-of-the-box monitors for your pipeline.
-    1. Navigate to the [Pipelines][1] page and find your pipelines.
+    1. Navigate to the [Pipelines][13] page and find your pipeline.
     1. Click **Enable monitors** in the **Monitors** column for your pipeline.
     1. Click **Start** to set up a monitor for one of the suggested use cases.<br>
-      The new metric monitor page is configured based on the use case you selected. You can update the configuration to further customize it. See the [Metric monitor documentation][14] for more information.
+        - The metric monitor is configured based on the selected use case. You can update the configuration to further customize it. See the [Metric monitor documentation][14] for more information.
 
 After you have set up your pipeline, see [Update Existing Pipelines][11] if you want to make any changes to it.
 
@@ -117,6 +122,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [14]: /monitors/types/metric/
 [15]: /observability_pipelines/guide/environment_variables/
 [16]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
+[17]: /observability_pipelines/processors/#filter-query-syntax
 
 {{% /tab %}}
 {{% tab "API" %}}
