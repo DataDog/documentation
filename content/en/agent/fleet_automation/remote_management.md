@@ -81,7 +81,7 @@ To schedule your Agent upgrades:
 
 1. From the [**Upgrade Agents** tab][4], click **+ Create Schedule**.
 
-1. On the the upgrade scheduling page, add a **Schedule name**.
+1. On the upgrade scheduling page, add a **Schedule name**.
 
 1. **Select the Agent version**. You have the option to upgrade the Agents to:
       - The latest version
@@ -98,7 +98,7 @@ To schedule your Agent upgrades:
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
 
-1. Optionally, click **+ Add Recipient** to set up notifications and receive updates on the deployment. You can notify individuals or communication integration channels like Slack, teams, or pagerduty. 
+1. Optionally, click **+ Add Recipient** to set up notifications and receive updates on the deployment. You can notify individuals or communication integration channels like Slack, Teams, or PagerDuty. 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_notification.png" alt="Select people or channels to be notified about the progess of the upgrade." style="width:100%;" >}}
 
