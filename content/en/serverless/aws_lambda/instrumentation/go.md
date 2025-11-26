@@ -233,7 +233,7 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 	// Trace an HTTP request
 	req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
 	client := http.Client{}
-	client =  httptrace.WrapClient(&client)
+	client = httptrace.WrapClient(&client)
 	client.Do(req)
 
 	// Submit a custom metric
