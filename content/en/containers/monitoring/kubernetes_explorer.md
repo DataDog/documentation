@@ -6,24 +6,23 @@ aliases:
 
 {{< img src="infrastructure/livecontainers/orch_ex.png" alt="Orchestrator Explorer, showing Kubernetes Pods." style="width:80%;">}}
 
-## Overview
+Datadog's [Kubernetes Explorer][1] allows you to monitor the state of pods, deployments, and other Kubernetes resources. You can also view resource specifications for failed pods within a deployment, correlate node activity with related logs, track resource utilization, automatically scale workloads, and remediate errors.
 
-The Datadog Agent and Cluster Agent can retrieve Kubernetes resources for the [Orchestrator Explorer][1]. This feature allows you to monitor the state of pods, deployments, and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
+<div class="alert alert-info">Kubernetes Explorer requires Datadog Agent 7.27.0+ and Datadog Cluster Agent 1.11.0+. <br/>If you are using Kubernetes 1.25+, then Cluster Agent 7.40.0+ is required.</div>
 
-Orchestrator Explorer requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**.
 
-**Note**: For Kubernetes version 1.25 and above, the minimal Cluster Agent version required is 7.40.0.
+## Configuration
 
-## Setup
+### Enable Kubernetes Explorer
 
-Ensure that you have [enabled the Process Agent][2]. If you are using Datadog Operator or the official Helm chart, the Orchestrator Explorer is enabled by default.
+Kubernetes Explorer is **enabled by default** for most Datadog Agent installations.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-The Orchestrator Explorer is enabled in the Datadog Operator by default.
+When you install the Datadog Agent by using the Datadog Operator, Kubernetes Explorer is enabled by default.
 
-For verification, ensure that the `features.orchestratorExplorer.enabled` parameter is set to `true` in your `datadog-agent.yaml`:
+To verify that Kubernetes Explorer is enabled, ensure that the `features.orchestratorExplorer.enabled` parameter is set to `true` in your `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -44,9 +43,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-If you are using the [official Helm chart][3], Orchestrator Explorer is enabled by default.
+When you install the Datadog Agent by using the [official Helm chart][1], Kubernetes Explorer is enabled by default.
 
-For verification, ensure that the `orchestratorExplorer.enabled` parameter is set to `true` in your [`values.yaml`][4] file:
+To verify that Kubernetes Explorer is enabled, ensure that the `orchestratorExplorer.enabled` parameter is set to `true` in your `datadog-values.yaml` file:
 
 ```yaml
 datadog:
@@ -60,13 +59,95 @@ datadog:
 
 Then, upgrade your Helm chart.
 
-[3]: https://github.com/DataDog/helm-charts
-[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[1]: https://github.com/DataDog/helm-charts
+
 {{% /tab %}}
 {{% tab "Manual" %}}
-For manual setup, see [Set up Orchestrator Explorer with DaemonSet][5].
+For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][5].
 
 [5]: /infrastructure/faq/set-up-orchestrator-explorer-daemonset
+{{% /tab %}}
+{{< /tabs >}}
+
+### Collect custom resources
+
+
+### Add custom tags to resources
+
+To ease filtering, you can add custom tags to your Kubernetes resources through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable. **These tags only appear in Kubernetes Explorer.**
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Set the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable **twice** in `datadog-agent.yaml`:
+- In `agents.containers.processAgent.env`
+- In `clusterAgent.env` 
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  features:
+    liveContainerCollection:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+  override:
+    agents:
+      containers:
+        processAgent:
+          env:
+            - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+              value: "tag1:value1 tag2:value2"
+    clusterAgent:
+      env:
+        - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+          value: "tag1:value1 tag2:value2"
+```
+
+Then, apply the new configuration:
+
+```bash
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Set the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable **twice** in `datadog-agent.yaml`:
+- In `processAgent.env`
+- In `clusterAgent.env` 
+
+```yaml
+agents:
+  containers:
+    processAgent:
+      env:
+        - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+          value: "tag1:value1 tag2:value2"
+clusterAgent:
+  env:
+    - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+      value: "tag1:value1 tag2:value2"
+```
+
+Then, upgrade your Helm chart.
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+Set the environment variable on both the Process Agent and Cluster Agent containers:
+
+```yaml
+- name: DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS
+  value: "tag1:value1 tag2:value2"
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
