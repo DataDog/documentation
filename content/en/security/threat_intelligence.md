@@ -114,7 +114,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | IP addresses | 128.66.0.1 | Identify IP addresses associated with attacks, command and control, and scanning activity |
 | domains | example.com, subdomain.example.com | Domains associated with malicious use. Often used with malware as a command and control |
 | application packages versions | (example_package, 1.0.0) | Identify malicious packages downloaded from PyPi |
-| file hashes [SHA1, SHA256, ssdeep] | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | Identify a distinct file associated with malware or compromise |</br>
+| file hashes [SHA1, SHA256, ssdeep (Workload Protection only)] | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | Identify a distinct file associated with malware or compromise |</br>
 
 **Note**: Threat intelligence sources and categories are not configurable at this time.
 
