@@ -63,6 +63,7 @@ If you want to add another group of processors for a destination:
     1. Select **Copy all processors**.
     1. Select the processor group you want to paste the processors into and then use `command-v` to paste them.
 1. You can toggle the switch to enable and disable the processor group and also each individual processor.
+
 <br>**Notes**:
 <br>- Configuring a pipeline with processor groups is available for Worker versions 2.7 and later.
 <br>- There is a limit of 10 processor groups for a pipeline canvas.
@@ -79,7 +80,9 @@ If you want to add another set of processors and destinations, click the plus si
 {{< img src="observability_pipelines/setup/another_destination.png" alt="The Pipelines page showing one processor group sending logs to two different destinations" style="width:100%;" >}}
 
 If you want to add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
-- To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete node**. If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed. If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
+- To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete node**.
+  - If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.
+  - If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
 
 #### Pipeline requirements and limits
 
