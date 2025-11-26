@@ -46,17 +46,18 @@ Similar to a manual upgrade, expect a downtime of 5-30 seconds while the Agent r
 The upgrade process primarily adds files to the following directories:
 
 Linux:
-* `/opt/datadog-packages`
-* `/etc/datadog-agent`
-* `/etc/systemd/system`
+- `/opt/datadog-packages`
+- `/etc/datadog-agent`
+- `/etc/systemd/system`
 
 Windows:
-* `C:\ProgramData\Datadog\Installer\packages`
-* `C:\Program Files\Datadog\Datadog Agent`
+- `C:\ProgramData\Datadog\Installer\packages`
+- `C:\Program Files\Datadog\Datadog Agent`
 
 The Agent ensures that the appropriate permissions are set for these files. No configuration files are altered during the installation process.
 
 ### How to upgrade Agents remotely
+
 To upgrade your Agents remotely:
 1. [Enable Remote Agent Management](#enable-remote-agent-management).
 1. From the [**Upgrade Agents** tab][4], click **Start Agents Upgrade**.
@@ -73,7 +74,6 @@ To upgrade your Agents remotely:
 1. Use the [Deployments][10] dashboard to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
    {{< img src="/agent/fleet_automation/deployments.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 
-
 ### How to schedule Agent upgrades
 
 To schedule your Agent upgrades: 
@@ -87,11 +87,9 @@ To schedule your Agent upgrades:
 
    {{< img src="/agent/fleet_automation/agent_upgrade_select_version1.png" alt="See a list of scheduled Agent upgrades." style="width:100%;" >}}
 
-
 1. **Specify the Agents to be upgraded**. You can use filtering or a search query to scope the Agents by various attributes including, the Agents' environment, operation system, or hostname. You can then see the Agents that are included within your specified scope along with those that are not eligible for deployment. Adjust your filter to include all the Agents you want to upgrade. 
    
    {{< img src="/agent/fleet_automation/agent_upgrade_select_agents.png" alt="See a list of Agent to be upgraded." style="width:100%;" >}}
-
 
 1. Then, **set the deployment window** for these upgrades. You can select the weekdays, time frame, and timezone for the upgrade.
 
@@ -103,20 +101,16 @@ To schedule your Agent upgrades:
 
 1. Click **Create Schedule** to save the schedule. 
 
-
 1. See a list of your scheduled upgrades under the [**Upgrade Agents** tab][4], in the **Upgrade Schedules** section. 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_schedule_list2.png" alt="See a list of upgrades scheduled for your Agents." style="width:100%;" >}}
-
-
-
 
 ### Upgrade precedence
 
 For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version.
 
-
 ## Configure Agents
+
 {{< callout url="https://www.datadoghq.com/product-preview/manage-agent-configurations-from-fleet-automation/" >}}
 Managing Agent Configurations in Fleet Automation is in <strong>preview</strong>. To get access, complete the preview sign‑up form.
 {{< /callout >}}
@@ -136,13 +130,14 @@ Managing Agent Configurations in Fleet Automation is in <strong>preview</strong>
 When a configuration file on the host conflicts with a Fleet Automation configuration, Fleet Automation takes precedence, ensuring a single source of truth. See [Configuration Order Precedence][17].
 
 ### Edit, deploy or roll back configurations
+
 From your list of configurations in the [Configure Agents][16] tab, you can
    - Deploy the unused configuration to your Agents
    - Edit the configuration, save a new version, and redeploy the updated configuration.
    - Rollback the configuration to a previous version and redeploy.
 
-
 ### Mirrors and proxies
+
 You can use Remote Agent Management along with a proxy or mirrored repositories.
 
 For instructions on configuring your Agent to use a proxy, see [Agent Proxy Configuration][6]. After you've configured the proxy, restart the Agent to apply the settings.
