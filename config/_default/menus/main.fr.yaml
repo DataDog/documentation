@@ -4740,11 +4740,6 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
       weight: 203
-    - name: OpenTelemetry
-      url: llm_observability/instrumentation/otel_instrumentation
-      parent: llm_obs_instrumentation
-      identifier: llm_obs_instrumentation_otel
-      weight: 204
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs
