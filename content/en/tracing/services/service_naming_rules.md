@@ -30,7 +30,7 @@ You can create service naming rules only for services instrumented with supporte
 | Go         | [1.55][6]                        |
 | Java       | [1.20][2]                        |
 | JavaScript | [4.16][4]                        |
-| PHP        | [0.94][7]                        |
+| PHP        | [0.94.1][7]                        |
 | Python     | [1.19][5]                        |
 | Ruby       | [1.15][8]                        |
 
@@ -80,7 +80,7 @@ Services with naming rules appear with consistent names across [APM][9], [Softwa
 [4]: https://github.com/DataDog/dd-trace-js/releases/tag/v4.16.0
 [5]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.19.0
 [6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.55.0
-[7]: https://github.com/DataDog/dd-trace-php/releases/tag/0.94.0
+[7]: https://github.com/DataDog/dd-trace-php/releases/tag/0.94.1
 [8]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.15.0
 [9]: /tracing/services/
 [10]: /internal_developer_portal/software_catalog/
