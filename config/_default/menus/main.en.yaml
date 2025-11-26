@@ -3586,11 +3586,11 @@ menu:
       parent: cnm
       identifier: cnm_setup
       weight: 101
-    - name: Overview Page
-      url: network_monitoring/cloud_network_monitoring/overview_page/
+    - name: Network Health
+      url: network_monitoring/cloud_network_monitoring/network_health/
       parent: cnm
-      identifier: cnm_overview_page
-      weight: 102
+      identifier: cnm_network_health
+      weight: 102 
     - name: Network Analytics
       url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: cnm
