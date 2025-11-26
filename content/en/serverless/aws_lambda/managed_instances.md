@@ -3,7 +3,7 @@ title: Monitoring AWS Lambda Managed Instances
 description: Install and configure the Datadog Agent for AWS Lambda Managed Instances.
 ---
 
-{{< callout url=
+{{< callout url=false
  btn_hidden="true" header="Join the Preview!">}}
 Datadog Serverless Monitoring for AWS Lambda Managed Instances is in Preview. To send feedback during the Preview, use the <strong>Share Feedback</strong> option on the <a href="https://app.datadoghq.com/serverless/aws/lambda">Serverless page</a> in Datadog.
 {{< /callout >}}
