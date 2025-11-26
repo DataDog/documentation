@@ -6,10 +6,6 @@ algolia:
   tags: ['secrets scanning', 'secret scanning', 'datadog static analysis', 'SAST']
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/secret-scanning/" btn_hidden="false" header="Join the Preview!" >}}
-Secret Scanning is in Preview. Contact your Customer Success Manager to get access.
-{{< /callout >}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
     Secret Scanning is not available for the {{< region-param key="dd_site_name" >}} site.
