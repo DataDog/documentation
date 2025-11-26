@@ -13,6 +13,10 @@ further_reading:
   text: "Configure your monitor notifications"
 ---
 
+{{< callout btn_hidden="true" header="Join the Preview!">}}
+The Dataset monitor is in Preview
+{{< /callout >}}"
+
 ## Overview
 
 <div class="alert alert-danger">Datasets that include Flex Logs are not supported.</div>
