@@ -14,41 +14,43 @@ further_reading:
 ---
 
 ## Overview
+
 Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on tags and rule logic. Instead of individually configuring recipients for every monitor, notification rules let you define once and automatically route all monitor notifications whose notification tagset matches the rule's scope.
 
 <div class="alert alert-info">There is a default limit of 1000 rules per organization.</a>.</div>
 
 ## Setup
-To create a Monitor Notification Rule in Datadog, do the following: 
-
-1. Go to [**Notification Rules**][1].
-2. Click **New Rule**. 
 
 {{< img src="/monitors/notifications/notification_rules/notification_rule_form-light.png" alt="Configuration for a notification rule showing scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
 
-### Choose the scope
-Define the required tags for a monitor notification to be routed to this rule. Matching evaluates the notification tagset (the union of monitor tags and the firing group's tags for multi alert monitors). Monitor tags alone can satisfy the scope, and this is still considered a match. Only monitor and group tags participate in matching. Matching is case-insensitive.
+To create a Monitor Notification Rule in Datadog, do the following:
 
-**Note**: Any monitor created or edited after the notification rule is saved and is routed to the defined recipients if it matches the scope of the rule.
+1. Go to [**Notification Rules**][1].
+2. Click **New Rule**.
+3. [Configure the scope](#configure-the-scope): Define the required tags for a monitor notification to be routed to this rule.
+4. [Configure the recipients](#configure-the-recipients): Specify who to alert and under what conditions.
+5. Add a clear and identifiable rule name.
 
-#### Rule scope syntax
+### Configure the scope
 
-The Notification Rule scope query supports Boolean logic and follows the same common [search syntax][3] supported by many other platform products.
+Add the required tags for a monitor notification to be routed to this rule. Matching evaluates the notification tagset. Learn more in [How matching works](#how-matching-works).
 
-##### Boolean operators
-- Supported: AND, OR, NOT
-- Implicit operator: AND
+<div class="alert alert-info">Monitors created or updated after the notification rule is saved are routed to the defined recipients if it matches the scope of the rule.</div>
 
-##### Wildcards
-Only `key:*` is supported (for example, `env:*`). Partial wildcards like `env:prod-*` are not supported. `key:*` matches if the key exists anywhere in the notification tagset.
+{{% collapse-content title="Rule scope syntax" level="h4" expanded=false %}}
 
-##### Multiple values for the same key
-Use either `env:(prod OR staging)` or `env:prod OR env:staging`.
+The Notification Rule scope query supports Boolean logic and follows the [event-based search syntax][3] supported by many other platform products.
 
-##### Quoting
-Wrap values that contain spaces or special characters in quotes, for example: `team:"data platform"`.
+| Syntax Element | Description |
+| -------------- | ----------- |
+| **Boolean operators** | Supported: `AND`, `OR`, `NOT`<br>Implicit operator: `AND` |
+| **Wildcards** | Only `key:*` is supported (for example, `env:*`). Partial wildcards like `env:prod-*` are not supported. `key:*` matches if the key exists anywhere in the notification tagset. |
+| **Multiple values for the same key** | Use either `env:(prod OR staging)` or `env:prod OR env:staging`. |
+| **Quoting** | Wrap values that contain spaces or special characters in quotes, for example: `team:"data platform"`. |
+{{% /collapse-content %}}
 
-##### Examples
+
+{{% collapse-content title="Scope examples" level="h4" expanded=false %}}
 
 | Notification Rule scope | Explanation |
 | ------------------- | ---------------------- |
@@ -57,23 +59,23 @@ Wrap values that contain spaces or special characters in quotes, for example: `t
 | `service:webstore AND  NOT env:staging`       | Route any notification about the `web-store` service that is **not** running on the `staging` environment. |
 | `env:*`       | Route any notification that carry the `env:<value>` tag (either from monitor tags or group). |
 
-For an example of this, see [Routing logic](#routing-logic).
+{{% /collapse-content %}}
 
-#### Rule scope limitations
-The following limitations are **not supported**:
+{{% collapse-content title="Rule scope limitations" level="h4" expanded=false %}}
+
+The following are **not supported**:
 
 * Keyless tags, such as `prod AND service:(A or B)` or `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
 * Partial wildcards (`service:web-*`) and question mark wildcards `service:auth?` are not supported. Wildcard is allowed only if used alone like `service:*`.
-* Scope lenght up to 3000 characters.
+* Scope length up to 3000 characters.
+{{% /collapse-content %}}
+
 
 ### Configure the recipients
-Define the recipients to notify when a monitor notification matches the rule's scope. You can specify when and to which recipients a notification should be sent. Notifications can be sent to email or any integration channel. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2].
 
-#### Conditional recipients
-You can notify a specific recipient only when certain conditions are met. For example, route alerts to your on-call recipient, and send warn notifications to a Slack channel if they don't require immediate action.
+Specify which recipients to notify when a monitor notification matches the rule's scope. You can always notify all recipients, or set conditional recipients that are only notified when certain conditions are met (for example, route critical alerts to your on-call recipient, and send warnings to a Slack channel).
 
-### Name it
-Use a clear name so the rule is identifiable on the **Manage** page.
+Notifications can be sent to email or any integration channel. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2].
 
 ## Managing notification rules
 
@@ -205,4 +207,4 @@ The following table demonstrates how monitors with different tag combinations ma
 
 [1]: https://app.datadoghq.com/monitors/settings/notifications
 [2]: /monitors/notify/#notifications
-[3]: /logs/explorer/search_syntax/
+[3]: /getting_started/search/#event-based-queries
