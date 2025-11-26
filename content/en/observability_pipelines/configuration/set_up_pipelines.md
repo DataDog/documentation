@@ -64,7 +64,7 @@ If you want to add another group of processors for a destination:
     1. Select the processor group you want to paste the processors into and then use `command-v` to paste them.
 1. You can toggle the switch to enable and disable the processor group and also each individual processor.
 
-<br>**Notes**:
+**Notes**:
 <br>- Configuring a pipeline with processor groups is available for Worker versions 2.7 and later.
 <br>- There is a limit of 10 processor groups for a pipeline canvas.
 
