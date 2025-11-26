@@ -23,6 +23,8 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 {{< img src="/monitors/notifications/notification_rules/notification_rule_form-light.png" alt="Configuration for a notification rule showing scopes, routing conditions, recipients, and matching monitors" style="width:100%;" >}}
 
+<div class="alert alert-danger">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
+
 To create a Monitor Notification Rule in Datadog, do the following:
 
 1. Go to [**Notification Rules**][1].
