@@ -70,7 +70,7 @@ After you have your pivot table, you can click **Show Graphs** and add up to six
 ## Supported data sources
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
-Want to query a data source is not available? Use this form to request access.
+If you want to query data sources not yet available, use this form to submit your request.
 {{< /callout >}}
 
 Create tables and analyze the data pulled from the following data sources:
