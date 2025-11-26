@@ -4329,16 +4329,21 @@ menu:
       parent: tracing_services
       identifier: tracing_inferred_services
       weight: 906
-    - name: Renaming Rules
+    - name: Renaming Rules for Inferred Entities
       url: tracing/services/renaming_rules
       parent: tracing_services
       identifier: tracing_renaming_rules
       weight: 907
+    - name: Service Remapping Rules
+      url: tracing/services/service_remapping_rules
+      parent: tracing_services
+      identifier: tracing_service_remapping_rules
+      weight: 908
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 908
+      weight: 909
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
