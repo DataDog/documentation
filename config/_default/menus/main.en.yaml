@@ -2948,6 +2948,11 @@ menu:
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 703
+    - name: Reusable Modules
+      url: actions/app_builder/components/reusable_modules/
+      parent: app_builder_components
+      identifier: app_builder_reusable_modules
+      weight: 704
     - name: JavaScript Expressions
       url: actions/app_builder/expressions/
       parent: app_builder
