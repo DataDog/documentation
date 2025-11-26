@@ -84,12 +84,6 @@ If you want to add an additional destination to a processor group, click the plu
   - If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.
   - If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
 
-#### Pipeline requirements and limits
-
-- A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
-- You can add a total of three destinations for a pipeline.
-- A specific destination can only be added once. For example, you cannot add multiple Splunk HEC destinations.
-
 ### Install the Worker and deploy the pipeline
 
 After you have set up your source, processors, and destinations:
@@ -160,11 +154,9 @@ Pipelines created using Terraform are read-only in the UI. Use the [datadog_obse
 
 See [Advanced Worker Configurations][5] for bootstrapping options.
 
-### Index your Worker logs
-
-Make sure your Worker logs are [indexed][6] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
-
 ## Clone a pipeline
+
+To clone a pipeline in the UI:
 
 1. Navigate to [Observability Pipelines][4].
 1. Select the pipeline you want to clone.
@@ -172,11 +164,21 @@ Make sure your Worker logs are [indexed][6] in Log Management for optimal functi
 
 ## Delete a pipeline
 
+To delete a pipeline in the UI:
+
 1. Navigate to [Observability Pipelines][4].
 1. Select the pipeline you want to delete.
 1. Click the cog at the top right side of the page, then select **Delete**.
 
+You can also use the [API][6] to delete a pipeline
+
 **Note**: You cannot delete an active pipeline. You must stop all Workers for a pipeline before you can delete it.
+
+## Pipeline requirements and limits
+
+- A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
+- You can add a total of three destinations for a pipeline.
+- A specific destination can only be added once. For example, you cannot add multiple Splunk HEC destinations.
 
 ## Further Reading
 
@@ -187,4 +189,4 @@ Make sure your Worker logs are [indexed][6] in Log Management for optimal functi
 [3]: /observability_pipelines/destinations/
 [4]: https://app.datadoghq.com/observability-pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
-[6]: /logs/log_configuration/indexes/
+[6]: /api/latest/observability-pipelines/#delete-a-pipeline
