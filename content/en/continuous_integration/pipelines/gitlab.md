@@ -303,7 +303,7 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 #### CI jobs failure analysis
 
-If job logs collection is enabled, CI Visibility uses LLM models to compute the analysis for failed CI jobs based on relevant logs coming from Azure Pipelines.
+If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from Azure Pipelines.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
 
