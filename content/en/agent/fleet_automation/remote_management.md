@@ -75,27 +75,34 @@ To upgrade your Agents remotely:
    {{< img src="/agent/fleet_automation/deployments.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 
 
-### How to schedule remote Agent upgrades
+### How to schedule Agent upgrades
 
 To schedule your Agent upgrades: 
 1. [Enable Remote Agent Management](#enable-remote-agent-management).
 
-1. From the [**Upgrade Agents** tab][4], click **+ Create Schedule** to open the upgrade scheduling page.
+1. From the [**Upgrade Agents** tab][4], click **+ Create Schedule**.
 
-1. On the the upgrade scheduling page add a **Schedule name**.
+1. On the the upgrade scheduling page, add a **Schedule name**.
 
-1. Select the version you want your Agents to be upgraded to. You have the option to upgrade the Agent to the latest version, one version behind the latest, or two versions behind the latest. 
+1. **Select the Agent version** you want your Agents to be upgraded to. You have the option to upgrade the Agents to the latest version, one version behind the latest version, or two versions behind the latest version. 
 
-   {{< img src="/agent/fleet_automation/agent_upgrade_select_version.png" alt="See a list of upgrades scheduled for your Agents." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/agent_upgrade_select_version1.png" alt="See a list of scheduled Agent upgrades." style="width:100%;" >}}
 
 
-1. Select the Agents to be upgraded. You can use a filter or a search query to specify the Agents by various attributes including the Agent;s environment, operation system, or hostname. You are then able to see the Agents that are included within the specified scope and those that are not eligible for deployment. You can adjust your filter to include all the Agents you want to upgrade. 
+1. **Specify the Agents to be upgraded**. You can use filtering or a search query to scope the Agents by various attributes including, the Agents' environment, operation system, or hostname. You can then see the Agents that are included within your specified scope along with those that are not eligible for deployment. Adjust your filter to include all the Agents you want to upgrade. 
+   
+   {{< img src="/agent/fleet_automation/agent_upgrade_select_agents.png" alt="See a list of Agent to be upgraded." style="width:100%;" >}}
 
-1. After you've selected the Agents for upgrade, set the deployment window for these upgrades. You can select the weekdays, time frame, and timezone for the upgrade.
 
-1. You can also optionally set notifications to receive updates on the deployment status along with a summary. You can add individuals or communication integration channels like Slack, teams, or pagerduty. 
+1. Then, **set the deployment window** for these upgrades. You can select the weekdays, time frame, and timezone for the upgrade.
 
-1. Click Create Schedule to save the schedule. 
+   {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
+
+1. Optionally, **set notifications** to receive progress updates on the deployment. You can notify individuals or communication integration channels like Slack, teams, or pagerduty. 
+
+   {{< img src="/agent/fleet_automation/agent_upgrade_set_notification.png" alt="Select people or channels to be notified about the progess of the upgrade." style="width:100%;" >}}
+
+1. Click **Create Schedule** to save the schedule. 
 
 
 1. See a list of your scheduled upgrades under the [**Upgrade Agents** tab][4], in the **Upgrade Schedules** section. 
