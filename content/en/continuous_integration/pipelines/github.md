@@ -106,7 +106,7 @@ To see the metrics, click on a job span in the trace view. A window opens with a
 
 ### CI jobs failure analysis
 
-If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from Azure Pipelines.
+If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from GitHub Actions.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][26].
 
