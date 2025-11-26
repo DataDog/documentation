@@ -28,14 +28,14 @@ Failed deployments are used to calculate the following metrics:
 - Failed Deployment Recovery Time
 : The median duration between a failed deployment and its remediation, either through a rollback or rollforward deployment.
 
-Change Failure Detection identifies rollbacks and rollforward deployments, including those implemented through revert PRs or detected via PR filters, in line with the DORA definition of remediation.
+Change Failure Detection identifies rollbacks and rollforward deployments, including those implemented through revert PRs or detected via custom rules, in line with the DORA definition of remediation.
 
 
 ## Rollback
 
 A rollback occurs when a previously deployed version is redeployed to restore the system after a failed or faulty change.
 
-#### How classification works
+##### How classification works
 
 A deployment is classified as a `rollback` when it deploys a version that matches a previously deployed version but differs from the immediately preceding deployment.
 
@@ -44,7 +44,7 @@ A deployment is classified as a `rollback` when it deploys a version that matche
 
 When a rollback is detected, the change failure is the first deployment after the rollback target (the version you reverted to).
 
-#### Example
+##### Example
 
 For the sequence V1 → V2 → V3 → V1, the rollback target is the original V1, so V2 is marked as the change failure and V1 as a rollback deployment.
 
@@ -60,7 +60,7 @@ A rollforward occurs when a new deployment is made to fix or override a failed o
 
 Datadog detects when a deployment includes a pull request that reverts a previous change, helping you identify recovery actions made through Git.
 
-#### How classification works
+##### How classification works
 
 A deployment is treated as a rollforward when it includes a PR titled "Revert PRx" (where PRx is the title of the original PR).
 
@@ -69,36 +69,58 @@ A deployment is treated as a rollforward when it includes a PR titled "Revert PR
   - Current deployment (with "Revert PRx") is marked as a rollforward.
 - If PRx isn't found in any prior deployment, or PRx and its revert are shipped together in the same deployment: no classification is applied.
 
-#### Example
+##### Example
 
 Deployment V1 includes PR_123 and later, deployment V3 includes "Revert PR_123". V1 is marked as the change failure and V3 as a roll-forward deployment.
 
-### Custom filters
+### Custom rules
 
-DORA Metrics lets you define custom filters to automatically classify recovery deployments based on repository or release metadata.
+DORA Metrics lets you define custom rules to automatically classify recovery deployments based on repository or release metadata. Custom rules are configured in the DORA Settings page.[1]
+Rules can operate either by linking deployments through shared variable values, or by matching static patterns.
 
-#### What can you filter on
+#### Rules linked to failed deployments
 
+Use these rules to identify roll-forward deployments that should be tied back to a specific earlier failed deployment.
+You can enter regex rules that include one of these variables:
+- `$pr_title`
+- `$pr_number`
+- `$version`
+
+##### How classification works
+
+When a rule matches:
+1. The variable value is extracted from the current deployment.
+2. The system finds the earlier deployment with the same extracted value.
+3. The current deployment is marked as a roll-forward linked to that earlier deployment.
+4. The earlier deployment is marked as failed.
+
+These rules are intended for remediation patterns where the failed deployment is identifiable by a shared commit, version, or PR reference.
+
+#### Rules linked to failed deployments
+
+Static rules allow you to classify recovery deployments based on metadata patterns without variables.
+You can enter regex rules that match:
 - PR labels (e.g., `hotfix`)
 - PR title patterns (e.g. `*rollforward*`)
 - Feature branch name patterns (e.g. `recovery/*`)
-- Deployment version tag patterns (e.g. `{failed_version_tag}_*`)
+- Version tag patterns (e.g. `.*_hotfix`)
 
-#### How classification works
+##### How classification works
 
-- Any deployment that matches a defined filter is marked as a roll‑forward.
-- The immediately previous deployment (the one just before the roll‑forward) is marked as the change failure.
-- For deployment version tag patterns: if the new version contains a version tag that has been deployed previously, it is marked as a rollforward and the previously deployed version is marked as failed.
+When a static rule matches:
+1. The current deployment is marked as a roll-forward.
+2. The immediately preceding deployment is marked as the change failure.
+
+These rules are appropriate for broad indicators of remediation such as hotfix labels, branch prefixes, or version tag conventions.
+
 
 #### Default filters
 
 By default, any PR label, title, or branch name containing `hotfix` matches and is treated as a roll‑forward (with the preceding deployment marked as the change failure).
 
-#### Example
-
-Deployment V2 includes a PR labeled `hotfix`. V1 is marked as a roll‑forward, and the previous deployment to V1 is marked as a change failure.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://app.datadoghq.com/ci/settings/dora
