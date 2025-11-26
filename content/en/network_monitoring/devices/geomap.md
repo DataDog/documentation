@@ -45,7 +45,7 @@ Configure device locations using the following steps:
 
    {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geolocation:boston-office` tag." style="width:100%;" >}}
 
-2. From the Device GeoMap page, click **Add locations** in the top right corner. This opens the [Geomap locations settings][3] page, which provides multiple tabs to manage device locations:
+2. From the Device Geomap page, click **Add locations** in the top right corner. This opens the [Geomap locations settings][3] page, which provides multiple tabs to manage device locations:
 
    - **All**: Displays all devices with `geolocation` tags, regardless of their mapping status.
    - **Needs Coordinates**: Shows devices tagged with `geolocation` values that don't have corresponding location coordinates configured.
