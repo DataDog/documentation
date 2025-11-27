@@ -7,7 +7,7 @@ Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are 
 {{< /callout >}} -->
 
 {{< callout url="#" btn_hidden="true" >}}
-Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are in Preview.
+Suggested code fixes from the Bits AI Dev Agent is in Preview.
 {{< /callout >}}
 
 After Bits AI SRE helps you identify a root cause, it can also help you take action as quickly as possible.
