@@ -32,9 +32,95 @@ Before you begin, ensure you have the following:
     - Ensure [APM is enabled][4] in the Agent. *This allows the external processor service to send its own traces to the Agent.*
       - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
 
-## Enabling threat detection
+## Automated configuration with Appsec Injector
 
-Enabling the threat detection for Istio involves two main steps:
+<div class="alert alert-info">
+  The Appsec Injector can automatically configure your Istio service mesh for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
+</div>
+
+Instead of manually deploying the external processor and configuring `EnvoyFilter` (as shown in the manual configuration section below), use the Appsec Injector to handle this automatically.
+
+### When to use the Appsec Injector
+
+Use the Appsec Injector if you want to:
+- Automatically configure Istio ingress gateways for Application Security
+- Simplify deployment and ongoing maintenance
+- Manage configuration through infrastructure-as-code (Datadog Operator or Helm)
+- Centralize Application Security processor management
+
+### Quick setup
+
+**1. Deploy the external processor** using the deployment manifest shown in [Step 1](#1-deploy-the-datadog-external-processor-service) below.
+
+**2. Enable the Appsec Injector** in your DatadogAgent configuration:
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  namespace: datadog
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
+        autoDetect: true
+        processor:
+          service:
+            name: datadog-aap-extproc-service
+            namespace: datadog
+```
+
+Apply the configuration:
+
+```bash
+kubectl apply -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      autoDetect: true
+      processor:
+        service:
+          name: datadog-aap-extproc-service
+          namespace: datadog
+```
+
+Install or upgrade the Datadog Helm chart:
+
+```bash
+helm upgrade -i datadog-agent datadog/datadog -f values.yaml
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**3. The injector automatically:**
+- Detects your Istio installation
+- Creates `EnvoyFilter` resources in the Istio system namespace (typically `istio-system`)
+- Configures the filters to route traffic to the external processor
+
+**4. Verify** the configuration by checking for created filters:
+
+```bash
+kubectl get envoyfilter -n istio-system
+```
+
+For detailed configuration options, advanced features, and troubleshooting, see the [Appsec Injector documentation](./appsec-injector).
+
+## Manual configuration (alternative)
+
+If you prefer manual configuration or need fine-grained control over specific gateways or sidecars, follow the instructions below. Enabling the threat detection for Istio involves two main steps:
 1. Deploying the Datadog External Processor service.
 2. Configuring an `EnvoyFilter` to direct traffic from your Istio Ingress Gateway (or sidecars) to this service.
 

@@ -76,6 +76,113 @@ For Agent commands, see the Agent Commands guides. For information on the Datado
 
 <br>
 
+## Application Security Protection
+
+The Datadog Appsec Injector automatically configures ingress proxies and gateways to enable Application Security monitoring across your Kubernetes cluster. This provides API-wide security coverage without requiring code changes or manual configuration of each gateway.
+
+### What is the Appsec Injector?
+
+The Appsec Injector is a Kubernetes controller that:
+- Automatically detects supported proxies (Envoy Gateway, Istio)
+- Configures proxies to route traffic through an external Application Security processor
+- Enables threat detection and blocking at your ingress layer
+
+### Quick start
+
+**1. Deploy the external processor:**
+
+Create a Kubernetes Deployment and Service for the Datadog Application Security processor:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datadog-aap-extproc-deployment
+  namespace: datadog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: datadog-aap-extproc
+  template:
+    metadata:
+      labels:
+        app: datadog-aap-extproc
+    spec:
+      containers:
+      - name: datadog-aap-extproc-container
+        image: ghcr.io/datadog/dd-trace-go/service-extensions-callout:v2.4.0
+        ports:
+        - name: grpc
+          containerPort: 443
+        - name: health
+          containerPort: 80
+        env:
+        - name: DD_AGENT_HOST
+          value: "datadog-agent.datadog.svc.cluster.local"
+        - name: DD_SERVICE_EXTENSION_TLS
+          value: "false"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datadog-aap-extproc-service
+  namespace: datadog
+spec:
+  ports:
+  - name: grpc
+    port: 443
+    targetPort: grpc
+  selector:
+    app: datadog-aap-extproc
+  type: ClusterIP
+```
+
+**2. Enable the Appsec Injector:**
+
+Configure the injector using the Datadog Operator or Helm:
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  namespace: datadog
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
+        autoDetect: true
+        processor:
+          service:
+            name: datadog-aap-extproc-service
+            namespace: datadog
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      autoDetect: true
+      processor:
+        service:
+          name: datadog-aap-extproc-service
+          namespace: datadog
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+For detailed configuration options and setup instructions, see the [Appsec Injector documentation][8].
+
 ## Additional configuration
 ### Unprivileged installation
 
@@ -195,3 +302,4 @@ helm uninstall datadog-agent
 [5]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 [6]: https://docs.datadoghq.com/agent/supported_platforms/?tab=cloudandcontainers
 [7]: https://docs.datadoghq.com/containers/guide/kubernetes_daemonset/
+[8]: /security/application_security/setup/kubernetes/appsec-injector
