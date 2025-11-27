@@ -19,7 +19,7 @@ further_reading:
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
 algolia:
   tags: ["mcp", "mcp server"]
-  rank: 10
+  rank: 90
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
