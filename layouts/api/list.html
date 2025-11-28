@@ -180,6 +180,8 @@
                   </div>
               </div>
           </div>
+          {{ else }}
+            {{ warnf "endpoint not found in api list.html version: %q, tag: %q" $versionNum ($tag | default "") }}
           {{ end }}
           <!-- endpoint section end -->
 
