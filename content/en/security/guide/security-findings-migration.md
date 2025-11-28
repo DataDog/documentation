@@ -16,13 +16,13 @@ further_reading:
 
 ## Overview
 
-The way Security Findings are queried is changing and it may impact your workflows. You will notice changes to how queries are constructed within Datadog. A set of [new features](#new-features) exposing that new schema will also be released as a part of the upgrade.
+The way Security Findings are queried is changing and it may impact your workflows. You notice changes to how queries are constructed in Datadog. A set of [new features](#new-features) exposing that new schema is also released as a part of the upgrade.
 
 ## Required action
 
 If you are using {insert relevant APIs / Terraform resource}, plan to migrate to the new version by {deprecation date}.
 
-Configuration living in the Datadog application will be updated automatically by Datadog, so no action is needed there.
+Configuration in Datadog is updated automatically, so no action is needed there.
 
 ## What are Security Findings
 
@@ -59,7 +59,7 @@ Following this change, all Security Findings start being queried the same way, u
 
 View the full specification here: {insert link}
 
-Every interface that allows querying security findings data will gradually start leveraging the new data model:
+Every interface that allows querying security findings data gradually starts using the new data model:
 
 - Explorers, dashboards, notification rules and automation pipelines will use the new syntax
 - Workflow Automation
@@ -67,7 +67,7 @@ Every interface that allows querying security findings data will gradually start
 
 ### New features
 
-Starting January 2026, the following features will be rolled out leveraging the new data model:
+Starting January 2026, the following features are rolled out using the new data model:
 
 - A new unified findings public API
 - Dashboard support for Code Security
