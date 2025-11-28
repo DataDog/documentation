@@ -181,7 +181,7 @@
               </div>
           </div>
           {{ else }}
-            {{ warnf "endpoint not found in api list.html version: %q, tag: %q" $versionNum ($tag | default "") }}
+            {{ warnf "endpoint not found in api list.html lang: %q, version: %q, tag: %q" $dot.Lang $versionNum ($tag.name | default "") }}
           {{ end }}
           <!-- endpoint section end -->
 
