@@ -1822,6 +1822,13 @@
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
+  "AddTeamHierarchyLink": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create a team hierarchy link returns \"OK\" response"
+    }
+  ],
   "CreateTeamLink": [
     {
       "group": "teams",
