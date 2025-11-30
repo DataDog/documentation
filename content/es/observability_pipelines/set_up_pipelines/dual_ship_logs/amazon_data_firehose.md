@@ -1,18 +1,19 @@
 ---
 disable_toc: false
-title: Control del volumen de logs para Amazon Data Firehose
+title: Dual Ship Logs para Amazon Data Firehose
 ---
 
 ## Información general
 
-Utiliza el worker de Observability Pipelines para enrutar únicamente los logs útiles de Amazon Data Firehose a sus destinos.
+Utiliza el worker de Observability Pipelines para agregar y procesar tus logs de Amazon Data Firehose antes de enviarlos a varias aplicaciones.
 
-{{% observability_pipelines/use_case_images/log_volume_control %}}
+
+{{% observability_pipelines/use_case_images/dual_ship_logs %}}
 
 Este documento te guiará a través de los siguientes pasos:
 1. Los [requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
 1. [Configuración de Observability Pipelines](#set-up-observability-pipelines)
-1. [Envío de logs al worker de Observability Pipelines](#send-logs-to-the-observability-pipelines-worker-over-amazon_data_firehose)
+1. [Envío de logs al worker de Observability Pipelines](#send-Logs-to-the-observability-pipelines-worker-over-amazon_data_firehose)
 
 ## Requisitos previos
 
@@ -21,7 +22,7 @@ Este documento te guiará a través de los siguientes pasos:
 ## Configurar Observability Pipelines
 
 1. Navega hasta [Observability Pipelines][1].
-1. Selecciona la plantilla **Log Volume Control** (Control del volumen de logs) para crear un pipeline nuevo.
+1. Selecciona la plantilla **Dual Ship Logs** (Envío doble de logs) para crear un pipeline nuevo.
 1. Selecciona la fuente **Amazon Data Firehose**.
 
 ### Configurar el origen

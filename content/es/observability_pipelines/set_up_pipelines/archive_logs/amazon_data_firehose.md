@@ -1,27 +1,77 @@
 ---
 disable_toc: false
-title: Control del volumen de logs para Amazon Data Firehose
+title: Archive Logs para Amazon Data Firehose
 ---
 
 ## Información general
 
-Utiliza el worker de Observability Pipelines para enrutar únicamente los logs útiles de Amazon Data Firehose a sus destinos.
+Utiliza el worker de Observability Pipelines para formatear tus logs de Amazon Data Firehose en un formato rehidratable por Datadog antes de dirigirlos a archivos de logs de Datadog.
 
-{{% observability_pipelines/use_case_images/log_volume_control %}}
+{{% observability_pipelines/use_case_images/archive_logs %}}
 
 Este documento te guiará a través de los siguientes pasos:
 1. Los [requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
+1. [Configuración de un archivo de logs](#configure-a-log-archive)
 1. [Configuración de Observability Pipelines](#set-up-observability-pipelines)
-1. [Envío de logs al worker de Observability Pipelines](#send-logs-to-the-observability-pipelines-worker-over-amazon_data_firehose)
+1. [Envío de logs al worker de Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Requisitos previos
 
 {{% observability_pipelines/prerequisites/amazon_data_firehose %}}
 
+## Configurar archivos de logs
+
+Si ya tienes un archivo de logs de Datadog configurado para Observability Pipelines, pasa a [Configurar Observability Pipelines](#set-up-observability-pipelines).
+
+A fin de configurar el archivo de logs de Datadog, debes tener instalada la integración de Datadog para tu proveedor de nube. Consulta la documentación de la [integración de AWS][1], [Google Cloud Platform][2] y la [integración de Azure][3] para obtener más información.
+
+Selecciona el proveedor de la nube que utilizas para archivar tus logs.
+
+{{% collapse-content title="Amazon S3" level="h4" %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/docker %}}
+
+{{% /tab %}}
+{{% tab "Amazon EKS" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/amazon_eks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
+
+{{% /collapse-content %}}
+
 ## Configurar Observability Pipelines
 
-1. Navega hasta [Observability Pipelines][1].
-1. Selecciona la plantilla **Log Volume Control** (Control del volumen de logs) para crear un pipeline nuevo.
+1. Navega hasta [Observability Pipelines][4].
+1. Selecciona la plantilla **Archive Logs** (Archivar logs) para crear un nuevo pipeline.
 1. Selecciona la fuente **Amazon Data Firehose**.
 
 ### Configurar el origen
@@ -68,9 +118,7 @@ Introduce la siguiente información en función de los destinos de logs seleccio
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
-{{% observability_pipelines/destination_settings/datadog_archives_prerequisites %}}
-
-Para configurar el destino, sigue las instrucciones del proveedor de nube que utilizas para archivar tus logs.
+Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -401,8 +449,11 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 {{% /tab %}}
 {{< /tabs >}}
 
-## Enviar logs al worker de Observability Pipelines a través de Amazon Data Firehose
+## Enviar logs al worker de Observability Pipelines
 
 {{% observability_pipelines/log_source_configuration/amazon_data_firehose %}}
 
-[1]: https://app.datadoghq.com/observability-pipelines
+[1]: /es/integrations/amazon_web_services/#setup
+[2]: /es/integrations/google_cloud_platform/#setup
+[3]: /es/integrations/azure/#setup
+[4]: https://app.datadoghq.com/observability-pipelines

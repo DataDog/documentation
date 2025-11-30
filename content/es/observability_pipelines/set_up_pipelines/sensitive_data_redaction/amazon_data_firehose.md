@@ -1,18 +1,20 @@
 ---
 disable_toc: false
-title: Control del volumen de logs para Amazon Data Firehose
+title: Sensitive Data Redaction para Amazon Data Firehose
 ---
 
 ## Información general
 
-Utiliza el worker de Observability Pipelines para enrutar únicamente los logs útiles de Amazon Data Firehose a sus destinos.
+Los datos confidenciales, como números de tarjetas de crédito, números de ruta bancaria y claves de API, pueden revelarse involuntariamente en tus logs, lo que puede exponer a tu organización a riesgos financieros y de privacidad.
 
-{{% observability_pipelines/use_case_images/log_volume_control %}}
+Utiliza Observability Pipelines para identificar, etiquetar y, de manera opcional, ocultar o codificar información confidencial antes de enviar los logs a diferentes destinos y fuera de tu infraestructura. Puedes utilizar reglas de análisis predefinidas para detectar patrones comunes, como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización y más. También puedes crear reglas de análisis personalizadas con patrones de expresiones regulares para buscar información confidencial.
+
+{{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
 
 Este documento te guiará a través de los siguientes pasos:
 1. Los [requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
 1. [Configuración de Observability Pipelines](#set-up-observability-pipelines)
-1. [Envío de logs al worker de Observability Pipelines](#send-logs-to-the-observability-pipelines-worker-over-amazon_data_firehose)
+1. [Envío de logs al worker de Observability Pipelines](#send-Logs-to-the-observability-pipelines-worker-over-amazon_data_firehose)
 
 ## Requisitos previos
 
@@ -21,8 +23,8 @@ Este documento te guiará a través de los siguientes pasos:
 ## Configurar Observability Pipelines
 
 1. Navega hasta [Observability Pipelines][1].
-1. Selecciona la plantilla **Log Volume Control** (Control del volumen de logs) para crear un pipeline nuevo.
-1. Selecciona la fuente **Amazon Data Firehose**.
+1. Selecciona la plantilla **Sensitive Data Redactions** (Redacciones de datos confidenciales) para crear un nuevo pipeline.
+1. Select the **Amazon Data Firehose** source.
 
 ### Configurar el origen
 
@@ -146,7 +148,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-{{% observability_pipelines/processors/add_processors %}}
+{{% observability_pipelines/processors/add_processors_sds %}}
 
 {{< tabs >}}
 {{% tab "Add env vars" %}}
@@ -379,9 +381,19 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 {{% observability_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Amazon EKS" %}}
 
-{{% observability_pipelines/install_worker/kubernetes %}}
+{{% observability_pipelines/install_worker/amazon_eks %}}
+
+{{% /tab %}}
+{{% tab "Azure AKS" %}}
+
+{{% observability_pipelines/install_worker/azure_aks %}}
+
+{{% /tab %}}
+{{% tab "Google GKE" %}}
+
+{{% observability_pipelines/install_worker/google_gke %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}
