@@ -48,6 +48,7 @@ Define the Grok processor on the [**Pipelines** page][1]. To configure Grok pars
    **Note**: This feature requires that the corresponding logs are indexed and actively flowing in. You can temporarily deactivate or sample down exclusion filters to allow the feature to detect logs.
 1. **Log Samples**: Add up to five sample logs (up to 5000 characters each) to test your parsing rules.
 1. **Define parsing rules**: Write your parsing rules in the rule editor. As you define rules, the Grok parser provides syntax assistance:
+   - Click **Auto-extract** to generate LLM-powered Grok parsing suggestions based on logs matched by your pipeline query. The AI analyzes the structure and patterns in your logs to suggest precise Grok rules that extract key fields. Review the suggested patterns and click **Accept** to add them to your processor. This feature reduces manual Grok pattern creation and accelerates pipeline configuration.
    - **Matcher suggestions**: Type a rule name followed by `%{`. A dropdown appears with available matchers (such as `word`, `integer`, `ip`, `date`). Select a matcher from the list to insert it into your rule.<br>
      ```
      MyParsingRule %{
