@@ -39,9 +39,30 @@ if (window.DD_RUM) {
             trackLongTasks: true,
             defaultPrivacyLevel: 'mask-user-input',
             allowedTracingUrls: [window.location.origin],
-            internalAnalyticsSubdomain: IA_SUBDOMAIN
+            internalAnalyticsSubdomain: IA_SUBDOMAIN,
+            beforeSend: (event, context) => {
+                if (event.type !== 'resource' || !event.resource?.url) return;
+                const u = new URL(event.resource.url);
+                if (u.host.endsWith('imgix.net') || u.host.includes('imgix')) {
+                    const ctx = { provider: 'imgix' };
+
+                    const fmt = u.searchParams.get('fm'); // e.g., avif | webp | jpg | png | auto
+                    if (fmt) ctx['imgix.format'] = fmt.toLowerCase();
+
+                    const dpr = u.searchParams.get('dpr');
+                    const w = u.searchParams.get('w');
+                    const h = u.searchParams.get('h');
+                    if (dpr) ctx['imgix.dpr'] = dpr;
+                    if (w || h) ctx['imgix.variant'] = w && h ? `${w}x${h}` : (w ? `${w}w` : `${h}h`);
+
+                    // Attach
+                    event.context = { ...(event.context || {}), ...ctx };
+                }
+                return true
+            },
         });
 
+        window.DD_RUM.setGlobalContextProperty('domain', window.location.host);
         window.DD_RUM.startSessionReplayRecording();
 
         if (branch) {
