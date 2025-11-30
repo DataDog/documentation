@@ -1,0 +1,132 @@
+menu:
+  studio:
+    # Studio specific labels
+    - name: Onboarding
+      identifier: onboarding_heading
+      weight: 1000000
+    - name: Essentials
+      identifier: essentials_heading
+      weight: 2000000
+    - name: Administration
+      identifier: administration_heading
+      weight: 3000000
+    - name: Platform
+      identifier: platform_heading
+      weight: 4000000
+
+    # Menu items that appear under labels starts below here
+
+    - name: Getting Started
+      url: /studio/
+      parent: onboarding_heading
+      identifier: getting_started
+      weight: 1
+    - name: Test
+      url: /studio/test/
+      parent: essentials_heading
+      identifier: test
+      weight: 2
+    - name: Dashboards
+      parent: essentials_heading
+      params:
+        ref_id: dashboards # This should match the identifier in main.en.yaml
+        # Include all children by default, but exclude specific ones
+    - name: Notebooks
+      parent: essentials_heading
+      params:
+        ref_id: notebooks
+    - name: Monitors
+      parent: essentials_heading
+      params:
+        ref_id: alerting
+        # Exclude specific monitor types
+        includes:
+          - monitors_types_metric
+          - monitors_types_error_tracking
+          - monitors_types_logs
+    - name: Bits AI
+      parent: essentials_heading
+      params:
+        ref_id: bits_ai
+        excludes:
+          - bits_ai_sre
+          - bits_ai_chat_with_bits_ai
+    - name: LLM Observability
+      parent: essentials_heading
+      params:
+        ref_id: llm_obs
+    - name: Metrics
+      parent: essentials_heading
+      params:
+        ref_id: metrics
+    - name: Error Tracking
+      parent: essentials_heading
+      params:
+        ref_id: error_tracking
+    # pull in from existing docs instead with granular control
+    - name: Logs
+      parent: essentials_heading
+      params:
+        ref_id: logs
+        # Include everything (no filters)
+    - name: Product Analytics
+      parent: essentials_heading
+      params:
+        ref_id: product_analytics
+    - name: Session Replay
+      parent: essentials_heading
+      params:
+        ref_id: session_replay
+    - name: Account Management
+      parent: administration_heading
+      params:
+        ref_id: account_management
+        # Include specific child items only
+        includes:
+          - account_management_org_switching
+          - account_management_billing
+        # Or exclude specific items
+        # excludes:
+        #   - account_management_saml
+    - name: Data Security
+      parent: administration_heading
+      params:
+        ref_id: data_security
+        includes:
+          - data_security_agent
+          - data_security_log_management
+          - data_security_pci_compliance
+          - data_security_hipaa_compliance
+          - data_retention_periods
+          - data_security_guide
+    - name: Integrations
+      parent: platform_heading
+      params:
+        ref_id: integrations_top_level
+    # Instead of sourcing the api nav from main menu which has no children
+    # Lets define our own so we can load /api/latest/ and not have to handle redirect for just /api/
+    - name: API
+      parent: platform_heading
+      url: /studio/api/latest/
+      identifier: studio_api
+    #- name: API
+    #  parent: platform_heading
+    #  params:
+    #    ref_id: api
+    - name: Agent
+      parent: platform_heading
+      params:
+        ref_id: agent
+
+
+
+
+
+
+
+
+
+
+
+
+

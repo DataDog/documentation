@@ -7,6 +7,10 @@ further_reading:
   text: "Managing Multiple-Organization Accounts"
 ---
 
+{{% not_available_in_studio %}}
+
+## THIS SHOULD SHOW ON REGULAR DOCS & NOT VISIBLE ON STUDIO
+
 If you belong to multiple Datadog organizations, the org switcher at the bottom left of the nav bar allows you to toggle between organizations. You can also view all organizations and switch between them from the [**Organizations** page][1] in **Personal Settings**.
 
 {{< img src="account_management/org_switching_062024.png" alt="Two ways of switching organizations" style="width:90%;" >}}
@@ -16,6 +20,8 @@ For security purposes, you must have a valid session for each org you switch to.
 1. **Mixed auth approaches**: In cases where you have both SAML and username and password authentication, you must log in with the type required by the organization (username and password or SAML) as opposed to logging into one and getting access to all.
 
 2. **SAML Strict**: If your org is set for [SAML Strict][2], you must authenticate with SAML. You are required to re-authenticate each time you switch organizations. Since IdPs persist sessions, this is often a redirect.
+
+{{% /not_available_in_studio %}}
 
 ## Resetting passwords for multi-org users
 

@@ -23,3 +23,6 @@ ko:
 es:
   languageName: "Español"
   weight: 5
+studio:
+  languageName: "Studio"
+  weight: 6
