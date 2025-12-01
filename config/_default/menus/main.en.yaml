@@ -1473,11 +1473,31 @@ menu:
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Investigate alerts
-      url: bits_ai/bits_ai_sre/investigate_alerts
-      identifier: bits_ai_sre_investigate_alerts
+    - name: Investigate issues
+      url: bits_ai/bits_ai_sre/investigate_issues
+      identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 100
+    - name: Remediate issues
+      url: bits_ai/bits_ai_sre/remediate_issues
+      identifier: bits_ai_sre_remediate_issues
+      parent: bits_ai_sre
+      weight: 200
+    - name: Bits AI SRE integrations and settings
+      url: bits_ai/bits_ai_sre/configure
+      identifier: bits_ai_sre_configure
+      parent: bits_ai_sre
+      weight: 300
+    - name: Help Bits learn
+      url: bits_ai/bits_ai_sre/help_bits_learn
+      identifier: bits_ai_sre_learn
+      parent: bits_ai_sre
+      weight: 400
+    - name: Chat with Bits AI SRE
+      url: bits_ai/bits_ai_sre/chat_bits_ai_sre
+      identifier: bits_ai_sre_chat
+      parent: bits_ai_sre
+      weight: 500
     - name: Bits AI Dev Agent
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
