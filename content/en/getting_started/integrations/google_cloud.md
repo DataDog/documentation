@@ -608,7 +608,7 @@ See [Template parameters][412] in the Dataflow template for details on using the
 [430]: https://cloud.google.com/dataflow/docs/guides/specifying-networks#shared
 {{% /collapse-content %}}
 
-{{% collapse-content title="Pub/Sub Push subscription (legacy; not recommended)" level="h4" id="pub-sub-push-logging-setup" %}}
+{{% collapse-content title="Pub/Sub Push subscription (legacy)" level="h4" id="pub-sub-push-logging-setup" %}}
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Collecting Google Cloud logs with a Pub/Sub Push subscription</a> is in the process of being **deprecated**.
 
