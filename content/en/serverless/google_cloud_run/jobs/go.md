@@ -50,7 +50,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install mode="in-container" cmd="./your-binary" %}}
+   {{% serverless-init-install mode="in-container" cmd="./your-binary" cloudservice="jobs" %}}
 
 3. **Set up logs**.
 

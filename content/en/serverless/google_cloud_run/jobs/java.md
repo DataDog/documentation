@@ -57,7 +57,7 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install mode="in-container" cmd="\"./mvnw\", \"spring-boot:run\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"./mvnw\", \"spring-boot:run\"" cloudservice="jobs" %}}
 
 3. **Set up logs**.
 

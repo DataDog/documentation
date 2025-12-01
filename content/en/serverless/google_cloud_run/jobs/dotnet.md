@@ -50,7 +50,7 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install mode="in-container" cmd="\"dotnet\", \"dotnet.dll\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"dotnet\", \"dotnet.dll\"" cloudservice="jobs" %}}
 
 3. **Set up logs**.
 
