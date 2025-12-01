@@ -62,17 +62,26 @@ Advanced profiling capabilities in Datadog provide rich context—such as endpoi
 Under normal circumstances, these should remain enabled. However, when diagnosing performance issues or overhead, temporarily disabling specific components can help isolate the source of additional load.
 You can do so to narrow down which feature contributes to CPU, memory, or latency changes during profiling.
  
-1. Disable Code Hotspots
-   
-`DD_PROFILING_CODEHOTSPOTS_ENABLED=false` Disables trace-to-profile linking in Datadog UI.
+- **Disable code hotspots**
 
-2. Disable Timeline View
+  Disable trace-to-profile linking in the Datadog UI:
+  ```
+  DD_PROFILING_CODEHOTSPOTS_ENABLED=false
+  ```
 
-`DD_PROFILING_TIMELINE_ENABLED=false` Disables timeline view in the Datadog UI.
+- **Disable timeline view**
 
-3. Disable Endpoint Collection
+  Disable timeline view in the Datadog UI:
+  ```
+  DD_PROFILING_TIMELINE_ENABLED=false
+  ```
 
-`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=false` Disables per-endpoint aggregation of profiling data, this prevents grouping samples by HTTP endpoints or routes
+- **Disable endpoint collection**
+
+  Disable per-endpoint aggregation of profiling data, which groups samples by HTTP endpoints or routes:
+  ```
+  DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=false
+  ```
 
 After you identify that disabling a specific profiling feature reduces overhead, report your findings so Datadog can investigate further. You can do so by contacting [Datadog support][5].
 
