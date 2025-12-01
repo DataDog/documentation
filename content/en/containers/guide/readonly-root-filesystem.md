@@ -1,5 +1,5 @@
 ---
-title: Running the Datadog Agent with a Read-Only Root Filesystem
+title: Running the Datadog Agent with a Read-Only Root Filesystem (ROFS)
 description: Understand Agent filesystem writes and configure for read-only root filesystem container environments
 further_reading:
     - link: '/agent/docker/'
@@ -19,11 +19,11 @@ aliases:
 
 Enabling read-only root filesystem (ROFS) has become a common container security practice to prevent unauthorized modifications to the container's filesystem. ROFS is recommended by major security frameworks including [AWS Security Hub ECS.5][1], [AWS EKS Best Practices][2], and the [NSA/CISA Kubernetes Hardening Guide][3].
 
-To run the Agent with ROFS enabled, you need to configure writable volumes for each directory the Agent writes to. If you're using a managed deployment method (ie. Datadog Helm chart, Datadog Operator, ECS Terraform module, etc) then this configuration is already done for you. Otherwise, this guide explains how to configure writable volume mounts for your self-managed Agent installation.
+If you're using a managed deployment method for the Datadog Agent (Helm chart, Datadog Operator, ECS Terraform module, etc.) then ROFS is already enabled. Otherwise, this guide explains how to run the Datadog Agent with ROFS enabled: by configuring writable volume mounts for your self-managed Datadog Agent installation.
 
 ## Configuration pattern
 
-There are three steps when running configuring the Agent for ROFS:
+To configure the Datadog Agent for ROFS:
 
 1. **Provide writable volumes** for the required directories
 2. **Use an init container** to copy default configuration files before the Agent starts
@@ -33,7 +33,7 @@ Specific implementation varies by platform (Kubernetes, Docker, ECS, etc.), but 
 
 ### Example
 
-For self-managed deployments, here's a complete Docker Compose example demonstrating the read-only root filesystem configuration pattern:
+The following is complete Docker Compose example demonstrating the read-only root filesystem configuration pattern:
 
 ```yaml
 services:
@@ -75,27 +75,21 @@ volumes:
   datadog-logs:
 ```
 
-**Key elements:**
 - `datadog-init` service copies default configuration files to the `datadog-config` volume.
-- `datadog` service starts only after init completes successfully,
+- `datadog` service starts only after init completes successfully.
 - All required directories are mounted as writable volumes.
 
-You can adapt this pattern to other container orchestrators like ECS, K8s, or plain Docker by:
-1. Creating an init container that copies `/etc/datadog-agent/*` to a shared volume
-2. Mounting that volume to `/etc/datadog-agent` in the main Agent container
-3. Mounting writable volumes for other runtime directories (like `/opt/datadog-agent/run` and `/var/run/datadog`)
-4. Enabling read-only root filesystem
+To adapt this pattern to other container orchestrators like ECS, Kubernetes, or plain Docker:
+1. Create an init container that copies `/etc/datadog-agent/*` to a shared volume
+2. Mount that volume to `/etc/datadog-agent` in the main Datadog Agent container
+3. Mount writable volumes for other runtime directories (like `/opt/datadog-agent/run` and `/var/run/datadog`)
+4. Enable read-only root filesystem
 
-## Agent filesystem writes
+## Datadog Agent filesystem write footprint
 
-Historically, the Datadog Agent has followed the longstanding [Linux Filesystem Hierarchy Standard (FHS)][4], which is a guidelines outlining where applications should place their files. As a result,
-the Datadog Agent defaults to a set of locations that need read/write permissions for normal operation.
+Following [Linux Filesystem Hierarchy Standard (FHS)][4] guidelines, the Datadog Agent writes defaults to the following directories, which require read/write permissions:
 
-### Write footprint
-
-Following FHS guidelines, the Agent writes defaults to the following directories:
-
-| Directory | Purpose | Required |
+| Directory | Purpose | Read/Write Required |
 |-----------|---------|----------|
 | `/etc/datadog-agent/` | Configuration and check files | Yes |
 | `/opt/datadog-agent/run/` | Runtime state files | Yes |
@@ -105,15 +99,15 @@ Following FHS guidelines, the Agent writes defaults to the following directories
 
 ## Troubleshooting
 
-**Agent fails to start with "read-only file system" errors:**
-- Check the Agent logs to identify which directory needs write access. The most common required directories are `/etc/datadog-agent/`, `/opt/datadog-agent/run/`, and `/var/run/datadog/`.
+### Agent fails to start with "read-only file system" errors
+Check the Agent logs to identify which directory needs write access. The most common required directories are `/etc/datadog-agent/`, `/opt/datadog-agent/run/`, and `/var/run/datadog/`.
 
-**Metrics or traces not being collected:**
-1. Verify that `/var/run/datadog/` is mounted as writable—this directory contains the APM and DogStatsD socket files needed for trace and metric collection.
+### Metrics or traces not being collected
+1. Verify that `/var/run/datadog/` is mounted as writable. This directory contains the APM and DogStatsD socket files needed for trace and metric collection.
 2. Confirm default `/etc/datadog-agent/conf.d` checks aren't overwritten by an empty volume.
 
-**Flare creation fails:**
-- Agent flares requires write access to `/tmp/`. If generating flares is important for your troubleshooting workflow, mount `/tmp/` as a writable volume.
+### Flare creation fails
+Agent flares requires write access to `/tmp/`. If generating flares is important for your troubleshooting workflow, mount `/tmp/` as a writable volume.
 
 ## Further Reading
 
