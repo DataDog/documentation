@@ -137,14 +137,14 @@ Complete the following steps to configure these components.
       extensions: [datadog/extension]
       pipelines:
         traces:
-          processors: [resource, resourcedetection, transform, memory_limiter]
+          processors: [memory_limiter, resource, resourcedetection, transform]
           exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
         metrics:
           receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
-          processors: [resource, resourcedetection, transform, memory_limiter]
+          processors: [memory_limiter, resource, resourcedetection, transform]
           exporters: [otlphttp/prometheus, debug, datadog]
         logs:
-          processors: [resource, resourcedetection, transform, memory_limiter]
+          processors: [memory_limiter, resource, resourcedetection, transform]
           exporters: [opensearch, debug, datadog]
     ```
 
@@ -225,14 +225,14 @@ Complete the following steps to configure these components.
           extensions: [datadog/extension]
           pipelines:
             traces:
-              processors: [resource, resourcedetection, transform, memory_limiter]
+              processors: [memory_limiter, resource, resourcedetection, transform]
               exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
             metrics:
               receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
-              processors: [resource, resourcedetection, transform, memory_limiter]
+              processors: [memory_limiter, resource, resourcedetection, transform]
               exporters: [otlphttp/prometheus, debug, datadog]
             logs:
-              processors: [resource, resourcedetection, transform, memory_limiter]
+              processors: [memory_limiter, resource, resourcedetection, transform]
               exporters: [opensearch, debug, datadog]
     ```
 
