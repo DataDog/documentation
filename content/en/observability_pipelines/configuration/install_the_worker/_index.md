@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs.
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs and metrics (in Preview).
 
 **Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
 
@@ -174,10 +174,10 @@ See [Update Existing Pipelines][4] if you want to make changes to your pipeline'
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-1. Select one of the options in the dropdown to provide the expected log volume for the pipeline:
+1. Select one of the options in the dropdown to provide the expected log or metrics (in Preview) volume for the pipeline:
 |   Option   | Description |
 | ---------- | ----------- |
-| Unsure | Use this option if you are not able to project the log volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
+| Unsure | Use this option if you are not able to project the data volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
 | 1-5 TB/day | This option provisions the EC2 Auto Scaling group with a maximum of 2 compute optimized instances `c6g.large`. |
 | 5-10 TB/day | This option provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 5 compute optimized `c6g.large` instances. |
 | >10 TB/day | Datadog recommends this option for large-scale production deployments. It provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 10 compute optimized `c6g.xlarge` instances. |

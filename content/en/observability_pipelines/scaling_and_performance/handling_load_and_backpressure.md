@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Sometimes problems can occur even when you try to ensure your Observability Pipelines deployments are sized for the expected load. For example, an application might start generating more logs than usual, or the downstream service you are sending data to starts responding slower than expected. To address these issues:
+Sometimes problems can occur even when you try to ensure your Observability Pipelines deployments are sized for the expected load. For example, an application might start generating more data than usual, or the downstream service you are sending data to starts responding slower than expected. To address these issues:
 - Observability Pipelines propagates backpressure, which signals that the system cannot process events immediately upon receiving them.
 - Observability Pipelines components also have in-memory buffering in case the next component is busy processing incoming data.
 

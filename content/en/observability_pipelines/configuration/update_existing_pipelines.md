@@ -24,7 +24,7 @@ This document goes through updating the pipeline in the UI. You can also use the
 
 On the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. If you want to update source environment variables, update the information for your log source.
+1. If you want to update source environment variables, update the information for your source.
 {{< tabs >}}
 {{% tab "Amazon Data Firehose" %}}
 
@@ -97,7 +97,7 @@ On the Worker installation page:
 
 {{% /tab %}}
 {{< /tabs >}}
-1. If you want to update destination environment variables, update the information for your log destination.
+1. If you want to update destination environment variables, update the information for your destination.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 

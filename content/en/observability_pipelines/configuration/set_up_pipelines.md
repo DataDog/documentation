@@ -22,7 +22,7 @@ further_reading:
 
 <div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to on-premises logging environments. To aggregate, process, and route cloud-based logs, see <a href="https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=source">Log Management Pipelines</a>.</div>
 
-In Observability Pipelines, a pipeline is a sequential path with three types of components: source, processors, and destinations. The Observability Pipeline [source][1] receives logs from your log source (for example, the Datadog Agent). The [processors][2] enrich and transform your data, and the [destination][3] is where your processed logs are sent.
+In Observability Pipelines, a pipeline is a sequential path with three types of components: source, processors, and destinations. The Observability Pipeline [source][1] receives data from your log source (for example, the Datadog Agent). The [processors][2] enrich and transform your data, and the [destination][3] is where your processed data are sent.
 
 {{< img src="observability_pipelines/archive_log_pipeline.png" alt="Pipeline with one source connected to two processor groups and two destinations" style="width:100%;" >}}
 
@@ -103,7 +103,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 <div class="alert alert-danger">Creating pipelines using the Observability Pipelines API is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
 1. You can use Observability Pipelines API to [create a pipeline][1].
-1. After creating the pipeline, [install the Worker][2] to send logs through it.
+1. After creating the pipeline, [install the Worker][2] to send data through it.
     - See [Environment Variables][4] for the list of environment variables you need for the different sources, processor, and destinations when you install the Worker.
 
 **Note**: Pipelines created using the API are read-only in the UI. Use the [update a pipeline][3] endpoint to make any changes to an existing pipeline.
@@ -119,7 +119,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 <div class="alert alert-danger">Creating pipelines using Terraform is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
 1. You can use the [datadog_observability_pipeline][1] module to create a pipeline using Terraform.
-1. After creating the pipeline, [install the Worker][2] to send logs through it.
+1. After creating the pipeline, [install the Worker][2] to send data through it.
     - See [Environment Variables][3] for the list of environment variables you need for the different sources, processor, and destinations when you install the Worker.
 
 Pipelines created using Terraform are read-only in the UI. Use the [datadog_observability_pipeline][1] module to make any changes to an existing pipeline.
