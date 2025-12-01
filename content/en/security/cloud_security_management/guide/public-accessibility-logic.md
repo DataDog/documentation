@@ -135,7 +135,7 @@ An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
 
 ***OR***
 
-* _ELB-determined access through load balancer:_
+* _ELB-determined access:_
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
