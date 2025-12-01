@@ -26,6 +26,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
   tag: "Learning Center"
   text: "Getting Started with App Builder"
+- link: "https://www.datadoghq.com/blog/generate-apps-with-ai/"
+  tag: "Blog"
+  text: "Build custom apps in seconds with conversational AI in App Builder"
 ---
 
 ## Overview 
