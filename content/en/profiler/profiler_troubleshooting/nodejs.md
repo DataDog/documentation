@@ -74,7 +74,7 @@ You can do so to narrow down which feature contributes to CPU, memory, or latenc
 
 `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=false` Disables per-endpoint aggregation of profiling data, this prevents grouping samples by HTTP endpoints or routes
 
-Once you identify that disabling a specific profiling feature reduces overhead, please report your findings so we can investigate further. You can contact [Datadog support][5]
+After you identify that disabling a specific profiling feature reduces overhead, report your findings so Datadog can investigate further. You can do so by contacting [Datadog support][5].
 
 ## Further Reading
 
