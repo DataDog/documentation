@@ -53,7 +53,7 @@
             {{- $val := .example | default (.schema.example | default "CHANGE_ME") -}}
             {{- if and (.explode | default false) (reflect.IsSlice $val) -}}
               {{- range $k,$v := $val -}}
-                <span class="kn">export</span> <span class="n">{{ $name }}_{{ $k }}</span><span class="o">=</span><span class="s1">"{{ $v }}"</span><br/>
+                <span class="kn">export</span> <span class="n">{{ $name }}_{{ $k }}</span><span class="o">=</span><span class="s1">"{{ $name }}_{{ $k }}"</span><br/>
               {{- end -}}
             {{- else -}}
             <span class="kn">export</span> <span class="n">{{ $name }}</span><span class="o">=</span><span class="s1">"{{ $val }}"</span><br/>
