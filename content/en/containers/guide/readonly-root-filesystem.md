@@ -11,8 +11,6 @@ further_reading:
     - link: 'https://docs.aws.amazon.com/securityhub/latest/userguide/ecs-controls.html#ecs-5'
       tag: 'External'
       text: 'AWS Security Hub ECS.5 Control'
-aliases:
-    - /agent/guide/readonly-root-filesystem
 ---
 
 ## Overview
