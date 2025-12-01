@@ -204,7 +204,6 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 
 {{% /collapse-content %}}
 
-
 {{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
 
 The following GCP services are supported:
@@ -213,7 +212,7 @@ The following GCP services are supported:
 | ------------------------------------------------------- | ------------------------------ |
 | `gcp.secretmanager` | [GCP Secret Manager][5000] |
 
-##### GCP authentication
+##### GCP authentication & access policy
 
 The GCP Secret Manager implementation uses [Application Default Credentials (ADC)][5001] for authentication with Google.
 
@@ -221,26 +220,7 @@ The service account under which the Datadog Agent runs (such as the VM’s servi
 
 On GCE or GKE runtimes, authentication is provisioned automatically by Google through the instance or pod's attached service account.
 
-##### Secret versioning
-
-GCP Secret Manager supports secret versions. The Agent implementation also supports versioning using the `;` delimiter. If no version is specified, the `latest` version is used.
-
-Version syntax:
-- `secret-key` - Implicit `latest` version
-- `secret-key;latest;` - Explicit `latest` version
-- `secret-key;1;` - Specific version number
-- `secret-key;n;` - Version `n`
-
-**Note**: The delimiter must surround the version for compatibility with JSON support and to maintain backwards compatibility.
-
-##### JSON support
-
-The Datadog Agent supports extracting specific keys from JSON-formatted secrets using the `;` delimiter:
-
-- `secret;key` - Extracts the `key` value with an implicit `latest` version
-- `secret;1;key` - Extracts the `key` value from version `1`
-
-##### Configuration example
+##### GCP Configuration example
 
 Configure the Datadog Agent to use GCP Secret Manager to resolve secrets with the following configuration:
 
@@ -287,6 +267,24 @@ secret_backend_config:
   gcp_session:
     project_id: <PROJECT_ID>
 ```
+
+##### Secret versioning
+
+GCP Secret Manager supports secret versions. The Agent implementation also supports secret versioning using the `;` delimiter. If no version is specified, the `latest` version is used.
+
+Version syntax:
+
+- `secret-key` - Implicit `latest` version
+- `secret-key;;latest` - Explicit `latest` version
+- `secret-key;;1` - Specific version number
+- `secret-key;;n` - Version `n`
+
+##### JSON support
+
+The Datadog Agent supports extracting specific keys from JSON-formatted secrets using the `;` delimiter:
+
+- `secret;key` - Extracts the `key` value with an implicit `latest` version
+- `secret;key;1` - Extracts the `key` value from version `1`
 
 [5000]: https://cloud.google.com/security/products/secret-manager
 [5001]: https://cloud.google.com/docs/authentication/application-default-credentials
