@@ -232,13 +232,20 @@ secret_backend_config:
     project_id: <PROJECT_ID>
 ```
 
-After configuring the Agent to use GCP Secret Manager, reference secrets in your configurations with `ENC[secret-name]` or `ENC[secret-name;version;]`.
+After configuring the Agent to use GCP Secret Manager, reference secrets in your configurations with `ENC[secret-name]` or `ENC[secret-name;;version;]`.
 
-For example, assuming a GCP secret named `datadog-api-key` contains your API key:
+The ENC notation is composed of:
+
+- `secret`: the secret name in GCP Secret Manager (for example, `datadog-api-key`)
+- `version`: (optional) the secret version number. If not specified, the `latest` version is used.
+- `key`: (optional) the JSON key to extract from a JSON-formatted secret. Typically plain-text secrets are used with the GCP secret manager, however binary blobs like JSON can be used.
+
+For example, assuming GCP secrets named `datadog-api-key` with two versions and `datadog-app-key`:
 
 ```yaml
 # datadog.yaml
-api_key: ENC[datadog-api-key]
+api_key: ENC[datadog-api-key;;1] # specify the first version of the api key
+app_key: ENC[datadog-app-key] # latest version
 
 secret_backend_type: gcp.secretmanager
 secret_backend_config:
@@ -259,8 +266,8 @@ Reference specific keys like this:
 
 ```yaml
 # datadog.yaml
-api_key: ENC[datadog-keys;api_key]
-app_key: ENC[datadog-keys;app_key]
+api_key: ENC[datadog-keys;api_key;1] # specify the first version of the api key 
+app_key: ENC[datadog-keys;app_key] # latest
 
 secret_backend_type: gcp.secretmanager
 secret_backend_config:
