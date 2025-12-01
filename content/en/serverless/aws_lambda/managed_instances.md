@@ -12,8 +12,11 @@ Datadog provides full visibility into the metrics, logs, and traces emitted by y
 
 ## Setup
 
-<div class="alert alert-info"><strong>Metrics, enhanced metrics, and log collection</strong>: Supported for all runtimes<br/>
-<strong>Trace collection</strong>: Supported for Python, Node.js
+<div class="alert alert-info">
+<ul>
+<li><strong>Metrics, enhanced metrics, and log collection</strong>: Supported for all runtimes</li>
+<li><strong>Trace collection</strong>: Supported for Python, Node.js</li>
+</ul>
  </div>
 
 ### Metrics and logs
@@ -32,7 +35,7 @@ To collect traces, use Datadog's standard setup for instrumenting AWS Lambda fun
 
 Datadog collects the same metrics for AWS Lambda Managed Instances as it does for standard AWS Lambda applications, **excluding** `aws.lambda.enhanced.estimated_cost` and `aws.lambda.enhanced.billed_duration`. These two metrics are not available for AWS Lambda Managed Instances.
 
-See the [list of all metrics collected from AWS Lambda applications][4].
+See the [list of all metrics collected for AWS Lambda applications][4].
 
 ## Correlating logs and traces
 To correlate your logs and traces, ensure that you have set `DD_TRACE_ENABLED` and `DD_LOGS_INJECTION ` to `true`.
