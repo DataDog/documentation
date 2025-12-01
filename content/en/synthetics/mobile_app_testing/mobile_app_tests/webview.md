@@ -7,7 +7,7 @@ further_reading:
   text: "Mobile app testing advanced options"
 - link: "/synthetics/mobile_app_testing/devices/"
   tag: "Documentation"
-  text: "Supported Mobile App testing devicves"
+  text: "Supported Mobile App testing devices"
 ---
 
 <div class="alert alert-info">This feature is in Preview. Contact your Datadog representative to enable webview mode recording.</div>
