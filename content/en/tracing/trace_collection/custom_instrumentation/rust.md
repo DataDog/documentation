@@ -29,13 +29,8 @@ To configure your Rust application to send OpenTelemetry traces to Datadog, you 
 
 Add `datadog-opentelemetry` and the core `opentelemetry` crate to your `Cargo.toml`.
 
-```toml
-[dependencies]
-# The main Datadog OTel library
-datadog-opentelemetry = { version = "0.1" } # Note: Check crates.io for latest
-
-# The OpenTelemetry API for creating spans
-opentelemetry = { version = "0.31" }
+```shell
+cargo add datadog-opentelemetry opentelemetry
 ```
 
 ### 2. Initialize the Tracer
