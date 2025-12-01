@@ -34,7 +34,7 @@ For RUM without Limits™ customers, metric-based monitors are the recommended s
 
 - **Visibility into your full traffic**: Metrics are computed over your full, unsampled traffic before retention filters apply to provide broader visibility into application health
 - **Reduce the risk of missing issues**: Event-based monitors depend on retention filters and can miss issues if relevant events aren't indexed
-- **Advanced capabilities**: Metric-based monitors support anomaly detection, outlier detection, and forecasts
+- **Advanced capabilities**: Metric-based monitors support anomaly detection
 - **15-month retention**: Metrics provide long-term visibility into trends and patterns
 
 Datadog recommends using **event-based monitors** when you need to alert on data that is indexed, such as specific events or attributes that are not available in metric form. When using event-based monitors, configure retention filters to ensure meaningful data is available.
