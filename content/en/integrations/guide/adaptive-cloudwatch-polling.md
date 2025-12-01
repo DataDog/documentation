@@ -4,7 +4,7 @@ private: true
 description: "Adaptive Polling of CloudWatch Metrics"
 further_reading:
 - link: "https://www.datadoghq.com/aws-reinvent/products/"
-  tag: "Product page"
+  tag: "re:Invent 2025"
   text: "Explore our latest innovations"
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
   tag: "Documentation"
