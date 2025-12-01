@@ -45,44 +45,14 @@ Instead of manually deploying the external processor and configuring `EnvoyFilte
 Use the Appsec Injector if you want to:
 - Automatically configure Istio ingress gateways for Application Security
 - Simplify deployment and ongoing maintenance
-- Manage configuration through infrastructure-as-code (Datadog Operator or Helm)
+- Manage configuration through infrastructure-as-code with Helm
 - Centralize Application Security processor management
 
 ### Quick setup
 
 **1. Deploy the external processor** using the deployment manifest shown in [Step 1](#1-deploy-the-datadog-external-processor-service) below.
 
-**2. Enable the Appsec Injector** in your DatadogAgent configuration:
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-  namespace: datadog
-spec:
-  features:
-    appsec:
-      injector:
-        enabled: true
-        autoDetect: true
-        processor:
-          service:
-            name: datadog-aap-extproc-service
-            namespace: datadog
-```
-
-Apply the configuration:
-
-```bash
-kubectl apply -f datadog-agent.yaml
-```
-
-{{% /tab %}}
-{{% tab "Helm" %}}
+**2. Enable the Appsec Injector** using Helm values:
 
 ```yaml
 datadog:
@@ -94,6 +64,7 @@ datadog:
         service:
           name: datadog-aap-extproc-service
           namespace: datadog
+        port: 443
 ```
 
 Install or upgrade the Datadog Helm chart:
@@ -101,9 +72,6 @@ Install or upgrade the Datadog Helm chart:
 ```bash
 helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 **3. The injector automatically:**
 - Detects your Istio installation

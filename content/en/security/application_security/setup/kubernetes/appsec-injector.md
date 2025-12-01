@@ -34,7 +34,7 @@ The Appsec Injector is a Kubernetes controller that:
 - **Automatically detects** supported proxies in your cluster (Envoy Gateway, Istio)
 - **Configures proxies** to route traffic through an external Application Security processor
 - **Enables threat detection** for all traffic passing through your ingress layer
-- **Simplifies operations** through centralized configuration with the Datadog Operator or Helm
+- **Simplifies operations** through centralized configuration with Helm
 
 ### Supported proxies
 
@@ -71,56 +71,13 @@ The Appsec Injector operates in **External Mode**, where a single Application Se
 
 - **Resource Efficient**: A single shared processor handles traffic from all gateways
 - **Centralized Management**: One deployment to monitor, scale, and configure
-- **Infrastructure-as-Code**: Manage configuration through Datadog Operator CRDs or Helm values
+- **Infrastructure-as-Code**: Manage configuration through Helm values
 - **Non-Invasive**: No application code changes required
 - **Scalable**: Easily add new gateways without additional configuration
 
 ## Configuration
 
-You can configure the Appsec Injector using either the Datadog Operator or Helm Chart.
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-Add the following configuration to your `DatadogAgent` custom resource:
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-  namespace: datadog
-spec:
-  features:
-    appsec:
-      injector:
-        # Enable the Appsec Injector
-        enabled: true
-
-        # Enable automatic proxy detection (recommended)
-        autoDetect: true
-
-        # Or manually specify proxy types to inject
-        # proxies:
-        #   - envoy-gateway
-        #   - istio
-
-        # External processor configuration
-        processor:
-          service:
-            name: datadog-aap-extproc-service
-            namespace: datadog
-          port: 443
-```
-
-Apply the configuration:
-
-```bash
-kubectl apply -f datadog-agent.yaml
-```
-
-{{% /tab %}}
-{{% tab "Helm" %}}
+Configure the Appsec Injector using the Datadog Helm Chart.
 
 Add the following configuration to your Helm `values.yaml`:
 
@@ -152,9 +109,6 @@ Install or upgrade the Datadog Helm chart:
 ```bash
 helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Setup
 
@@ -223,24 +177,6 @@ Enable the injector and configure it to use your external processor service usin
 
 **Manual specification**: Alternatively, explicitly list the proxy types to configure:
 
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-```yaml
-spec:
-  features:
-    appsec:
-      injector:
-        enabled: true
-        autoDetect: false
-        proxies:
-          - envoy-gateway
-          - istio
-```
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
 ```yaml
 datadog:
   appsec:
@@ -251,9 +187,6 @@ datadog:
         - envoy-gateway
         - istio
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### 4. Apply configuration and verify
 
