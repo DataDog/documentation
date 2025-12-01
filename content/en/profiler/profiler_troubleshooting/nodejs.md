@@ -56,7 +56,7 @@ If you believe your musl version should be supported, contact [Datadog support][
 When the Datadog profiler is enabled, it periodically sends a small signal to collect profiling data. If the application is idle (waiting for I/O or timers), this signal briefly wakes the event loop to take a sample, even though there's no real work to do. As a result, ELU appears higher because the loop wakes up more often, but CPU usage stays low, and no latency or extra workload is introduced.
 In a busy application, these same signals occur while the loop is already active, so the effect on ELU is negligible.
 
-## Disabling Advanced Profiling Features
+## Disable advanced profiling features
 
 Advanced profiling capabilities in Datadog provide rich context—such as endpoint-level visibility, timeline correlations, and code hotspot linking—that significantly improve analysis quality.
 Under normal circumstances, these should remain enabled. However, when diagnosing performance issues or overhead, temporarily disabling specific components can help isolate the source of additional load.
