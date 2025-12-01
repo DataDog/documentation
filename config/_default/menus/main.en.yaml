@@ -8476,16 +8476,36 @@ menu:
       parent: product_analytics
       identifier: pa_profiles
       weight: 7
+    - name: Experiments
+      url: product_analytics/experimentation/
+      parent: product_analytics
+      identifier: pa_experiments
+      weight: 8
+    - name: Define Metrics
+      url: product_analytics/experimentation/defining_metrics
+      parent: pa_experiments
+      identifier: pa_experiments_metrics
+      weight: 801
+    - name: Reading Experiment Results
+      url: product_analytics/experimentation/reading_results
+      parent: pa_experiments
+      identifier: pa_experiments_results
+      weight: 802
+    - name: Minimum Detectable Effects
+      url: product_analytics/experimentation/minimum_detectable_effect
+      parent: pa_experiments
+      identifier: pa_experiments_mde
+      weight: 803
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 9
+      weight: 10
     - name: Account Management
       url: account_management/
       pre: cog-2
