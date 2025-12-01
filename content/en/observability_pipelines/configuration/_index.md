@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="observability_pipelines/setup/pipeline_ui.png" alt="The pipelines page with a source going to two processors groups and two destinations" style="width:100%;" >}}
 
-Observability Pipelines lets you collect and process logs and metrics (in Preview) within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
+Observability Pipelines lets you collect and process logs and metrics ({{< tooltip glossary="preview" >}}) within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
 
 - [Source][1]: Receives data from a tool like the Datadog Agent.
 - [Processors][2]: Transform, enrich, or filter data.

@@ -1,4 +1,4 @@
-1. Select one of the options in the dropdown to provide the expected log or metrics (in Preview) volume for the pipeline:
+1. Select one of the options in the dropdown to provide the expected log or metrics ({{< tooltip glossary="preview" >}}) volume for the pipeline:
 |   Option   | Description |
 | ---------- | ----------- |
 | Unsure | Use this option if you are not able to project the data volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
