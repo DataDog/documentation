@@ -80,14 +80,6 @@ This example shows a RUM monitor for the INP metric filtered to a specific appli
 
 This example monitor warns when INP exceeds 200 milliseconds and alerts when INP exceeds 500 milliseconds. With metric-based monitors, you can also use anomaly detection to help identify when performance metrics deviate from normal patterns, or use forecast alerts to predict when thresholds might be breached.
 
-### Error rates
-
-The ratio of errors to requests shows what percentage of requests result in errors.
-
-This example shows a RUM monitor for the error rate of the `/cart` page on a sample Shop.ist application.
-
-{{< img src="real_user_monitoring/guide/alerting-with-rum/error-rate-example-monitor.png" alt="RUM monitor for error rates" style="width:100%;" >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
