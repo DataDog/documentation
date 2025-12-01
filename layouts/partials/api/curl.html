@@ -87,16 +87,18 @@
 {{- end -}}
 {{- end -}}
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
+{{- $count := 0 -}}
 {{- range $qi, $q := $parameters.queryStrings -}}
       {{- if or (eq $q.required true) (eq (index $q "x-docs-curl-required") true) -}}
         {{- $val := .example | default (.schema.example | default .name) -}}
         {{- if and ($q.explode | default false) (reflect.IsSlice $val) -}}
           {{- range $k, $v := $val -}}
-            <span class="kn">{{ cond (gt $k 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}}_{{- $k -}} }</span>
+            <span class="kn">{{ cond (or (gt $count 0) (gt $k 0)) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}}_{{- $k -}} }</span>
           {{- end -}}
         {{- else -}}
-          <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
+          <span class="kn">{{ cond (gt $count 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
         {{- end -}}
+        {{- $count = add $count 1 -}}
       {{- end -}}
 {{- end -}}
 
