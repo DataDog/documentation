@@ -30,7 +30,7 @@ Managers and directors who oversee multiple teams can filter reports by [team hi
 
 Datadog’s IDP supports two types of reports:
 - **Out-of-the-box (OOTB) Engineering Reports**: reports designed by Datadog that let you assess different engineering metrics across your organization
-- **Custom Reports**: any Datadog Dashboards that your org has added to your IDP Overview Page
+- [**Custom Reports**][2]: any Datadog Dashboards that your org has added to your IDP Overview Page
 
 {{< whatsnext desc="Explore the following OOTB Engineering Reports:" >}}
     {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
@@ -43,4 +43,5 @@ Datadog’s IDP supports two types of reports:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/teams/manage/#subteams-hierarchical-teams
+[2]: /internal_developer_portal/eng_reports/custom_reports
 
