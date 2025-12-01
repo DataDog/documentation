@@ -34,7 +34,6 @@ When creating a new app, Datadog displays an onboarding modal with the following
 - [Start from scratch][21] 
 - [App Playground][23]
 
-## Create an app
 
 ### Build an app with AI
 
