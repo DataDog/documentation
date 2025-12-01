@@ -35,26 +35,6 @@ After you click **Start Recording**, Datadog automatically records any interacti
 
 To stop recording, click **Stop Recording**.
 
-## Webview mode
-
-<div class="alert alert-info">This feature is in Preview. Contact your Datadog representative to enable webview mode recording.</div>
-
-When a webview is detected during a recording, you can toggle on webview recording mode to capture interactions within the webview. Steps recorded in webview mode display a "WebView" tag in the step list, while the rest of the recording experience remains unchanged.
-
-### Prerequisites
-
-Some applications may require adding a debugging statement (`isInspectable = true`) for the recorder to consistently detect webviews on devices running iOS 16.4 and later. 
-See the **iOS** [Apple documentation][14] for more information.
-
-### Recording with webview mode
-
-1. Create a Mobile application test for an application that contains webview pages.
-2. While recording your steps, if a webview is detected, a toggle to switch to webview mode appears. Click **Webview mode** to switch recording modes.
-3. In webview mode, record steps the same way you would for a browser test.
-4. Toggle back to **Native mode** when you're done recording webview steps.
-
-   {{< img src="mobile_app_testing/test_steps/webview.mp4" alt="Mobile app recording of a user clicking on webview, and then opening a Wikipedia to activate the webview toggle." video=true >}}
-
 ## Manually added steps
 
 In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using the [element inspector](#element-inspector), [assertions](#assertion), and [interactions](#interaction)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
@@ -375,4 +355,4 @@ To edit a mobile recording after it's saved:
 [11]: https://restfulapi.net/json-jsonpath/
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[14]: https://developer.apple.com/documentation/safari-developer-tools/enabling-inspecting-content-in-your-apps
+
