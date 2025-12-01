@@ -383,14 +383,12 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 ### Finishing setup
 
 1. Restart your service.
-2. To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
-
-{{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
+2. To see Runtime Code Analysis (IAST) in action, browse your service and find IAST vulnerabilities in the [Runtime Code (IAST) Vulnerability Explorer][4].
 
 If you need additional assistance, contact [Datadog support][5].
 
 [1]: /security/code_security/iast/setup/
-[4]: https://app.datadoghq.com/security/appsec/vm
+[4]: https://app.datadoghq.com/security/code-security/iast
 [5]: /help
 
 ## Compatibility Requirements
