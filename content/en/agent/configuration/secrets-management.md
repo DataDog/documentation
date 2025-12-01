@@ -235,7 +235,7 @@ Version syntax:
 
 ##### JSON support
 
-The datadog-secret-backend supports extracting specific keys from JSON-formatted secrets using the `;` delimiter:
+The Datadog Agent supports extracting specific keys from JSON-formatted secrets using the `;` delimiter:
 
 - `secret;key` - Extracts the `key` value with an implicit `latest` version
 - `secret;1;key` - Extracts the `key` value from version `1`
