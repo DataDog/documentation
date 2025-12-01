@@ -139,8 +139,10 @@ An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-| A security group (for example, `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`; the load balancer has a listener accepting traffic on port `X`; and the load balancer has a target group forwarding traffic to some port `Y`. | This opens the load balancer to incoming traffic from the Internet on a specific port, checks for connection requests, and routes requests to registered targets. |
-|The EC2 instance is listed as a target of the target group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (for example, `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|Because the instance is listed as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group allows traffic from the load balancer.|
+| A security group (for example, `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`. | This opens the load balancer to incoming traffic from the Internet on a specific port. |
+| The load balancer has a listener accepting traffic on port `X`. | A [listener][37] is a process that checks for connection requests using the protocol and port that you configure. |
+| The load balancer has a target group forwarding traffic to some port `Y`. | [Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify. |
+| The EC2 instance is listed as a target of the target group, and has a security group with at least one rule that allows ingress traffic on port `Y` from `0.0.0.0/0`, from the VPC CIDR (for example, `10.0.0.0/8`), or from the load balancer’s security group (`SG1`). | Because the instance is registered as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group must allow traffic coming from the load balancer. |
 
 See [Authorize inbound traffic for your Linux instances][19] for more information about EC2 Instances and public access. See [Example: VPC with servers in private subnets and NAT][36] for an example of EC2 instances that are exposed through a load balancer.
 
