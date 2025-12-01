@@ -1,13 +1,13 @@
 ---
 disable_toc: false
-title: Dividir logs para Amazon S3
+title: Enriquecimiento de logs para Amazon S3
 ---
 
 ## Información general
 
-Utiliza el worker de Observability Pipelines para procesar y enrutar logs de Amazon S3 a diferentes destinos en función de tu caso de uso.
+Utiliza el worker de Observability Pipelines para enriquecer y transformar tus logs de Amazon S3 antes de dirigirlos a su destino.
 
-{{% observability_pipelines/use_case_images/split_logs %}}
+{{% observability_pipelines/use_case_images/log_enrichment %}}
 
 Este documento te guiará a través de los siguientes pasos:
 1. Los [requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
@@ -20,7 +20,7 @@ Este documento te guiará a través de los siguientes pasos:
 ## Configurar Observability Pipelines
 
 1. Navega hasta [Observability Pipelines][1].
-1. Selecciona la plantilla **Split Logs** (Dividir logs) para crear un pipeline nuevo.
+1. Selecciona la plantilla **Log Enrichment** (Enriquecimiento de logs) para crear un pipeline nuevo.
 1. Selecciona la fuente **Amazon S3**.
 
 ### Configurar el origen
@@ -241,12 +241,12 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-{{% collapse-content title="Añadir reglas de la biblioteca" level="h5" %}}
+{{% collapse-content title="Añadir reglas desde la biblioteca" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Añadir regla personalizada" level="h5" %}}
+{{% collapse-content title="Añadir una regla personalizada" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
