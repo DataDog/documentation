@@ -378,7 +378,7 @@ Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidel
    - Periods
    - Slashes
 
-## Tracing spans
+## Tracing Common LLM Operations
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1246,66 +1246,6 @@ public class MyJavaClass {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tracking user sessions
-
-Session tracking allows you to associate multiple interactions with a given user.
-
-{{< tabs >}}
-{{% tab "Python" %}}
-When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session, which is submitted as a tag on the span. Optionally, you can also specify the `user_handle`, `user_name`, and `user_id` tags.
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import workflow
-
-@workflow(session_id="<SESSION_ID>")
-def process_user_message():
-    LLMObs.annotate(
-        ...
-        tags = {"user_handle": "poodle@dog.com", "user_id": "1234", "user_name": "poodle"}
-    )
-    return
-{{< /code-block >}}
-
-### Session tracking tags
-
-| Tag | Description |
-|---|---|
-| `session_id` | The ID representing a single user session, for example, a chat session. |
-| `user_handle` | The handle for the user of the chat session. |
-| `user_name` | The name for the user of the chat session. |
-| `user_id` | The ID for the user of the chat session. |
-{{% /tab %}}
-
-{{% tab "Node.js" %}}
-When starting a root span for a new trace or span in a new process, specify the `sessionId` argument with the string ID of the underlying user session:
-
-{{< code-block lang="javascript" >}}
-function processMessage() {
-    ... # user application logic
-    return
-}
-processMessage = llmobs.wrap({ kind: 'workflow', sessionId: "<SESSION_ID>" }, processMessage)
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Java" %}}
-When starting a root span for a new trace or span in a new process, specify the `sessionId` argument with the string ID of the underlying user session:
-
-{{< code-block lang="java" >}}
-import datadog.trace.api.llmobs.LLMObs;
-
-public class MyJavaClass {
-  public String processChat(int userID) {
-    LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("incoming-chat", null, "session-" + System.currentTimeMillis() + "-" + userID);
-    String chatResponse = answerChat(); // user application logic
-    workflowSpan.annotateIO(...); // record the input and output
-    workflowSpan.finish();
-    return chatResponse;
-  }
-}
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Annotating a span
 
@@ -2359,6 +2299,67 @@ function internalWorkflow() {
 {{% /tab %}}
 {{< /tabs >}}
 
+
+## Tracking user sessions
+
+Session tracking allows you to associate multiple interactions with a given user.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session, which is submitted as a tag on the span. Optionally, you can also specify the `user_handle`, `user_name`, and `user_id` tags.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import workflow
+
+@workflow(session_id="<SESSION_ID>")
+def process_user_message():
+    LLMObs.annotate(
+        ...
+        tags = {"user_handle": "poodle@dog.com", "user_id": "1234", "user_name": "poodle"}
+    )
+    return
+{{< /code-block >}}
+
+### Session tracking tags
+
+| Tag | Description |
+|---|---|
+| `session_id` | The ID representing a single user session, for example, a chat session. |
+| `user_handle` | The handle for the user of the chat session. |
+| `user_name` | The name for the user of the chat session. |
+| `user_id` | The ID for the user of the chat session. |
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+When starting a root span for a new trace or span in a new process, specify the `sessionId` argument with the string ID of the underlying user session:
+
+{{< code-block lang="javascript" >}}
+function processMessage() {
+    ... # user application logic
+    return
+}
+processMessage = llmobs.wrap({ kind: 'workflow', sessionId: "<SESSION_ID>" }, processMessage)
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+When starting a root span for a new trace or span in a new process, specify the `sessionId` argument with the string ID of the underlying user session:
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+
+public class MyJavaClass {
+  public String processChat(int userID) {
+    LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("incoming-chat", null, "session-" + System.currentTimeMillis() + "-" + userID);
+    String chatResponse = answerChat(); // user application logic
+    workflowSpan.annotateIO(...); // record the input and output
+    workflowSpan.finish();
+    return chatResponse;
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Advanced tracing
 
