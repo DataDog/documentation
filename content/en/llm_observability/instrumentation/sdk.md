@@ -378,7 +378,7 @@ Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidel
    - Periods
    - Slashes
 
-## Tracing common LLM operations
+## Tracing LLM operations
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -486,7 +486,7 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 {{% /tab %}}
 {{< /tabs >}}
 
-### LLM operations
+### LLM calls
 
 <div class="alert alert-info">If you are using any LLM providers or frameworks that are supported by <a href="/llm_observability/instrumentation/auto_instrumentation/">Datadog's LLM integrations</a>, you do not need to manually start an LLM span to trace these operations.</div>
 
@@ -2361,6 +2361,87 @@ public class MyJavaClass {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Distributed tracing
+
+The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][1] and [HTTP][2] libraries. If your application makes requests using these supported libraries, you can enable distributed tracing by running:
+{{< code-block lang="python">}}
+from ddtrace import patch
+patch(<INTEGRATION_NAME>=True)
+{{< /code-block >}}
+
+If your application does not use any of these supported libraries, you can enable distributed tracing by manually propagating span information to and from HTTP headers. The SDK provides the helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to inject and activate tracing contexts in request headers.
+
+### Injecting distributed headers
+
+The `LLMObs.inject_distributed_headers()` method takes a span and injects its context into the HTTP headers to be included in the request. This method accepts the following arguments:
+
+`request_headers`
+: required - _dictionary_
+<br />The HTTP headers to extend with tracing context attributes.
+
+`span`
+: optional - _Span_ - **default**: `The current active span.`
+<br />The span to inject its context into the provided request headers. Any spans (including those with function decorators), this defaults to the current active span.
+
+### Activating distributed headers
+
+The `LLMObs.activate_distributed_headers()` method takes HTTP headers and extracts tracing context attributes to activate in the new service.
+
+**Note**: You must call `LLMObs.activate_distributed_headers()` before starting any spans in your downstream service. Spans started prior (including function decorator spans) do not get captured in the distributed trace.
+
+This method accepts the following argument:
+
+`request_headers`
+: required - _dictionary_
+<br />The HTTP headers to extract tracing context attributes.
+
+
+### Example
+
+{{< code-block lang="python" filename="client.py" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def client_send_request():
+    request_headers = {}
+    request_headers = LLMObs.inject_distributed_headers(request_headers)
+    send_request("<method>", request_headers)  # arbitrary HTTP call
+{{< /code-block >}}
+
+{{< code-block lang="python" filename="server.py" >}}
+from ddtrace.llmobs import LLMObs
+
+def server_process_request(request):
+    LLMObs.activate_distributed_headers(request.headers)
+    with LLMObs.task(name="process_request") as span:
+        pass  # arbitrary server work
+{{< /code-block >}}
+
+[1]: /tracing/trace_collection/compatibility/python/#integrations
+[2]: /tracing/trace_collection/compatibility/python/#library-compatibility
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+The `dd-trace` library provides out-of-the-box integrations that support distributed tracing for popular [web frameworks][1]. Requiring the tracer automatically enables these integrations, but you can disable them optionally with:
+
+{{< code-block lang="javascript">}}
+const tracer = require('dd-trace').init({
+  llmobs: { ... },
+})
+tracer.use('http', false) // disable the http integration
+{{< /code-block >}}
+
+[1]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Advanced tracing
 
 {{< tabs >}}
@@ -2426,67 +2507,6 @@ def process_message():
     return
 {{< /code-block >}}
 
-### Distributed tracing
-
-The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
-
-The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][1] and [HTTP][2] libraries. If your application makes requests using these supported libraries, you can enable distributed tracing by running:
-{{< code-block lang="python">}}
-from ddtrace import patch
-patch(<INTEGRATION_NAME>=True)
-{{< /code-block >}}
-
-If your application does not use any of these supported libraries, you can enable distributed tracing by manually propagating span information to and from HTTP headers. The SDK provides the helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to inject and activate tracing contexts in request headers.
-
-#### Injecting distributed headers
-
-The `LLMObs.inject_distributed_headers()` method takes a span and injects its context into the HTTP headers to be included in the request. This method accepts the following arguments:
-
-`request_headers`
-: required - _dictionary_
-<br />The HTTP headers to extend with tracing context attributes.
-
-`span`
-: optional - _Span_ - **default**: `The current active span.`
-<br />The span to inject its context into the provided request headers. Any spans (including those with function decorators), this defaults to the current active span.
-
-#### Activating distributed headers
-
-The `LLMObs.activate_distributed_headers()` method takes HTTP headers and extracts tracing context attributes to activate in the new service.
-
-**Note**: You must call `LLMObs.activate_distributed_headers()` before starting any spans in your downstream service. Spans started prior (including function decorator spans) do not get captured in the distributed trace.
-
-This method accepts the following argument:
-
-`request_headers`
-: required - _dictionary_
-<br />The HTTP headers to extract tracing context attributes.
-
-
-#### Example
-
-{{< code-block lang="python" filename="client.py" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.decorators import workflow
-
-@workflow
-def client_send_request():
-    request_headers = {}
-    request_headers = LLMObs.inject_distributed_headers(request_headers)
-    send_request("<method>", request_headers)  # arbitrary HTTP call
-{{< /code-block >}}
-
-{{< code-block lang="python" filename="server.py" >}}
-from ddtrace.llmobs import LLMObs
-
-def server_process_request(request):
-    LLMObs.activate_distributed_headers(request.headers)
-    with LLMObs.task(name="process_request") as span:
-        pass  # arbitrary server work
-{{< /code-block >}}
-
-[1]: /tracing/trace_collection/compatibility/python/#integrations
-[2]: /tracing/trace_collection/compatibility/python/#library-compatibility
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -2583,20 +2603,6 @@ function processMessage () {
 processMessage = llmobs.wrap({ kind: 'workflow', name: 'processMessage', mlApp: '<NON_DEFAULT_ML_APP_NAME>' }, processMessage)
 {{< /code-block >}}
 
-### Distributed tracing
-
-The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
-
-The `dd-trace` library provides out-of-the-box integrations that support distributed tracing for popular [web frameworks][1]. Requiring the tracer automatically enables these integrations, but you can disable them optionally with:
-
-{{< code-block lang="javascript">}}
-const tracer = require('dd-trace').init({
-  llmobs: { ... },
-})
-tracer.use('http', false) // disable the http integration
-{{< /code-block >}}
-
-[1]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 {{% /tab %}}
 {{< /tabs >}}
 
