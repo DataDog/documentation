@@ -253,7 +253,7 @@ To access the Debug Console, go to [your apps list][14] and click **Edit** {{< i
 [17]: /actions/actions_catalog/
 [18]: /actions/app_builder/build/#build-an-app-from-a-blueprint
 [19]: /actions/app_builder/build/#build-an-app-from-a-layout
-[20]: /actions/app_builder/build/#build-an-app-from-an-action
+[20]: /actions/app_builder/build/#build-an-app-from-data
 [21]: /actions/app_builder/build/#create-a-custom-app
 [22]: /actions/app_builder/build/#build-an-app-with-ai
 [23]: /actions/app_builder/build/#see-whats-possible-with-app-playground
