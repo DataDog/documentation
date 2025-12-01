@@ -136,8 +136,10 @@ More granular tag-level restrictions are available as part of the [Data Access C
 
 Monitor the freshness and processing status of your cloud cost data on the **Cloud Cost > Settings** page. You can view when:
 
-- Tag pipeline rules and custom allocation rules were last applied
-- Bills were last received and processed for each cloud provider
+- Tag pipeline rules were last applied (retroactively processes up to 3 months of historical data by default)
+- Custom allocation rules were last applied (retroactively processes up to 1 month of historical data by default)
+- A bill was last received from the cloud or SaaS provider
+- A bill was last processed in Datadog, including applied tag pipelines and custom allocation rules
 - Billing data was last ingested
 
 Use this information to troubleshoot data delays or verify that recent configuration changes have been applied to your cost data.
