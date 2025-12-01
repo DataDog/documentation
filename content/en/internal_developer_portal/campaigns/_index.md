@@ -4,6 +4,9 @@ further_reading:
 - link: "/internal_developer_portal/scorecards/"
   tag: "Documentation"
   text: "Scorecards Documentation"
+- link: "https://www.datadoghq.com/blog/idp-campaigns/"
+  tag: "Blog"
+  text: "Coordinate large-scale engineering initiatives with IDP Campaigns"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Campaigns!" >}}

@@ -21,6 +21,9 @@ further_reading:
 - link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
   tag: "Documentation"
   text: "Use Reference Tables to add multiple tags to cost data"
+- link: "/metrics/composite_metrics_queries/"
+  tag: "Documentation"
+  text: "Learn about composite metrics queries"
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
   tag: 'Blog'
   text: 'Add more context to your logs with Reference Tables'
