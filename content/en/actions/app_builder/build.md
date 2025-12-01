@@ -24,7 +24,7 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 {{< img src="service_management/app_builder/app-builder-my-apps-2025-11-19.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
 
-## Start with onboarding
+## Create an app
 
 When creating a new app, Datadog displays an onboarding modal with the following options: 
 - [Start with AI][22]
