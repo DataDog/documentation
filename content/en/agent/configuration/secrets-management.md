@@ -218,7 +218,7 @@ The GCP Secret Manager implementation uses [Application Default Credentials (ADC
 
 The service account under which the Datadog Agent runs (such as the VM’s service account, a workload identity, or a locally activated credentials) requires the `secretmanager.versions.access` permission to interact with GCP Secret Manager. This can be granted with the predefined role **Secret Manager Secret Accessor** (`roles/secretmanager.secretAccessor`) or a custom role with equivalent [access][5002].
 
-On GCE or GKE runtimes, ADC is configured automatically through the instance or pod's attached service account. The attached service account needs to have the proper roles to access GCP Sercet Manager.
+On GCE or GKE runtimes, ADC is configured automatically through the instance or pod's attached service account. The attached service account needs to have the proper roles to access GCP Sercet Manager. In addition, the GCE or GKE runtime requires the `cloud-platform` [OAuth access scope][5003]
 
 ##### GCP Configuration example
 
@@ -289,6 +289,7 @@ The Datadog Agent supports extracting specific keys from JSON-formatted secrets 
 [5000]: https://cloud.google.com/security/products/secret-manager
 [5001]: https://cloud.google.com/docs/authentication/application-default-credentials
 [5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
+[5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
 
 {{% /collapse-content %}}
 
