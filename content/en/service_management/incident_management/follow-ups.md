@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Incident follow-ups are tasks to be performed following an incident's resolution. During an incident investigation, your team may identify issues that need attention but aren't directly related to resolving the immediate problem. Rather than losing track of these items in the rush to restore service, you can capture them as follow-ups to address after the incident is resolved.
+Incident follow-ups are tasks performed after an incident is resolved. During an incident investigation, your team might identify issues that need attention but aren't directly related to resolving the immediate problem. Rather than losing track of these items in the rush to restore service, you can capture them as follow-ups to address after the incident is resolved.
 
 Common examples for creating follow-ups include:
 
@@ -25,7 +25,7 @@ By capturing these items as follow-ups, your team can stay focused on incident r
 
 ## Create and manage follow-ups
 
-Follow-ups can be created at any point during an incident (even before it's resolved) allowing responders to document necessary work as they discover it. After resolution, you can [export follow-ups](#export-follow-ups) to Jira or Case Management to integrate them into your team's existing workflows.
+Follow-ups can be created at any point during an incident (even before it's resolved), allowing responders to document necessary work as they discover it. After resolution, you can [export follow-ups](#export-follow-ups) to Jira or Case Management to integrate them into your team's existing workflows.
 
 **From Datadog**: Go to the incident's **Remediation** tab to view, create, edit, and track all follow-ups associated with the incident.
 
