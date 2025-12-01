@@ -107,7 +107,7 @@ Check the Agent logs to identify which directory needs write access. The most co
 2. Confirm default `/etc/datadog-agent/conf.d` checks aren't overwritten by an empty volume.
 
 ### Flare creation fails
-Agent flares requires write access to `/tmp/`. If generating flares is important for your troubleshooting workflow, mount `/tmp/` as a writable volume.
+Agent flare requires write access to `/tmp/`. If generating flares is important for your troubleshooting workflow, mount `/tmp/` as a writable volume.
 
 ## Further Reading
 
