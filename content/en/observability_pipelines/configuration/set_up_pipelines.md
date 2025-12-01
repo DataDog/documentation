@@ -176,8 +176,6 @@ To delete a pipeline in the UI:
 1. Select the pipeline you want to delete.
 1. Click the cog at the top right side of the page, then select **Delete**.
 
-You can also use the [API][6] to delete a pipeline
-
 **Note**: You cannot delete an active pipeline. You must stop all Workers for a pipeline before you can delete it.
 
 ## Pipeline requirements and limits
@@ -195,4 +193,3 @@ You can also use the [API][6] to delete a pipeline
 [3]: /observability_pipelines/destinations/
 [4]: https://app.datadoghq.com/observability-pipelines
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
-[6]: /api/latest/observability-pipelines/#delete-a-pipeline
