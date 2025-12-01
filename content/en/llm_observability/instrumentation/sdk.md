@@ -378,7 +378,7 @@ Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidel
    - Periods
    - Slashes
 
-## Tracing Common LLM Operations
+## Tracing common LLM operations
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -486,7 +486,7 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 {{% /tab %}}
 {{< /tabs >}}
 
-### LLM span
+### LLM operations
 
 <div class="alert alert-info">If you are using any LLM providers or frameworks that are supported by <a href="/llm_observability/instrumentation/auto_instrumentation/">Datadog's LLM integrations</a>, you do not need to manually start an LLM span to trace these operations.</div>
 
@@ -623,7 +623,7 @@ public class MyJavaClass {
 {{< /tabs >}}
 
 
-### Workflow span
+### Workflows
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -732,7 +732,7 @@ public class MyJavaClass {
 {{< /tabs >}}
 
 
-### Agent span
+### Agents
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -822,7 +822,7 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 {{% /tab %}}
 {{< /tabs >}}
 
-### Tool span
+### Tool calls
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -914,7 +914,7 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 {{% /tab %}}
 {{< /tabs >}}
 
-### Task span
+### Tasks
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1007,7 +1007,7 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 {{% /tab %}}
 {{< /tabs >}}
 
-### Embedding span
+### Embeddings
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1094,7 +1094,7 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 {{% /tab %}}
 {{< /tabs >}}
 
-### Retrieval span
+### Retrievals
 
 {{< tabs >}}
 {{% tab "Python" %}}
