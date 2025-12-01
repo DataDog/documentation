@@ -3,12 +3,12 @@ title: Adaptive Polling of CloudWatch Metrics
 private: true
 description: "Adaptive Polling of CloudWatch Metrics"
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
-  tag: "Documentation"
-  text: "AWS Integration"
 - link: "https://www.datadoghq.com/aws-reinvent/products/"
   tag: "Product page"
   text: "Explore our latest innovations"
+- link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
+  tag: "Documentation"
+  text: "AWS Integration"
 ---
 
 {{< callout url="#" header="false" btn_hidden="true" >}}
