@@ -60,7 +60,7 @@ In a busy application, these same signals occur while the loop is already active
 
 Advanced profiling capabilities in Datadog provide rich context—such as endpoint-level visibility, timeline correlations, and code hotspot linking—that significantly improve analysis quality.
 Under normal circumstances, these should remain enabled. However, when diagnosing performance issues or overhead, temporarily disabling specific components can help isolate the source of additional load.
-The goal is to narrow down which feature contributes to CPU, memory, or latency changes during profiling.
+You can do so to narrow down which feature contributes to CPU, memory, or latency changes during profiling.
  
 1. Disable Code Hotspots
    
