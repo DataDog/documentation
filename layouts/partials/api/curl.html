@@ -92,7 +92,7 @@
         {{- $val := .example | default (.schema.example | default .name) -}}
         {{- if and ($q.explode | default false) (reflect.IsSlice $val) -}}
           {{- range $k, $v := $val -}}
-            <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}}_{{- $k -}} }</span>
+            <span class="kn">{{ cond (gt $k 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}}_{{- $k -}} }</span>
           {{- end -}}
         {{- else -}}
           <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
