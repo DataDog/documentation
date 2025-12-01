@@ -293,8 +293,6 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 You can detect code-level vulnerabilities and monitor application security in Python applicationss running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-NOTE: Runtime Code Analysis (IAST) in Python is in Preview.
-
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
@@ -402,7 +400,7 @@ The following code security capabilities are supported relative to each language
 | Code Security capability                      | Java    | .NET     | Node.js    | Python      | Go             | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|------------|-------------|----------------|---------------|---------------|
 | Runtime Software Composition Analysis (SCA)   | 1.1.4   | 2.16.0   | 4.0.0      | 1.5.0       | 1.49.0         | 1.11.0        | 0.90.0        |
-| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | Preview     | not supported  | not supported | not supported |
+| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | 3.18.0      | not supported  | not supported | not supported |
 
 **Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require Datadog's tracing library. Therefore, the requirements listed below do not apply to these two Code Security capabilities.
 
@@ -753,7 +751,7 @@ The following code security capabilities are supported in the Python library, fo
 | Code Security capability                    | Minimum Python tracer version |
 | ------------------------------------------- |-------------------------------|
 | Runtime Software Composition Analysis (SCA) | 1.5.0                         |
-| Runtime Code Analysis (IAST)                | Preview (2.21.0)              |
+| Runtime Code Analysis (IAST)                | 3.18.0                        |
 
 #### Supported deployment types
 | Type        | Runtime Code Analysis (IAST)      |
