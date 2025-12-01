@@ -82,7 +82,9 @@ logger.info('Hello world!');
 
 5. {{% gcr-service-label %}}
 
-6. **Send custom metrics**.
+6. {{% gcr-jobs-retention-filter %}}
+
+7. **Send custom metrics**.
 
    To send custom metrics, [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
