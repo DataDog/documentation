@@ -4,8 +4,11 @@ aliases:
 - /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
 further_reading:
 - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
-  tag: "Documentation"
-  text: "Single Step APM Instrumentation"
+  tag: Documentation
+  text: Single Step APM Instrumentation
+- link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
+  tag: Learning Center
+  text: Troubleshooting APM Instrumentation on a Host
 ---
 
 ## Overview

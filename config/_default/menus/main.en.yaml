@@ -1473,11 +1473,31 @@ menu:
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Investigate alerts
-      url: bits_ai/bits_ai_sre/investigate_alerts
-      identifier: bits_ai_sre_investigate_alerts
+    - name: Investigate issues
+      url: bits_ai/bits_ai_sre/investigate_issues
+      identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 100
+    - name: Remediate issues
+      url: bits_ai/bits_ai_sre/remediate_issues
+      identifier: bits_ai_sre_remediate_issues
+      parent: bits_ai_sre
+      weight: 200
+    - name: Bits AI SRE integrations and settings
+      url: bits_ai/bits_ai_sre/configure
+      identifier: bits_ai_sre_configure
+      parent: bits_ai_sre
+      weight: 300
+    - name: Help Bits learn
+      url: bits_ai/bits_ai_sre/help_bits_learn
+      identifier: bits_ai_sre_learn
+      parent: bits_ai_sre
+      weight: 400
+    - name: Chat with Bits AI SRE
+      url: bits_ai/bits_ai_sre/chat_bits_ai_sre
+      identifier: bits_ai_sre_chat
+      parent: bits_ai_sre
+      weight: 500
     - name: Bits AI Dev Agent
       url: bits_ai/bits_ai_dev_agent
       parent: bits_ai
@@ -3278,11 +3298,16 @@ menu:
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_data_collected
       weight: 604
-    - name: AWS Fargate
+    - name: Managed Instances
+      url: containers/amazon_ecs/managed_instances/
+      parent: containers_amazon_ecs 
+      identifier: containers_amazon_ecs_managed_instances
+      weight: 605
+    - name: AWS Fargate with ECS
       url: integrations/ecs_fargate/
-      parent: containers
+      parent: containers_amazon_ecs
       identifier: ecs_fargate
-      weight: 7
+      weight: 606
     - name: Datadog Operator
       url: containers/datadog_operator
       identifier: containers_datadog_operator
@@ -3395,66 +3420,71 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_installation
       weight: 101
+    - name: Managed Instances 
+      url: serverless/aws_lambda/managed_instances
+      parent: serverless_aws_lambda
+      identifier: serverless_aws_lambda_managed_instances
+      weight: 102
     - name: Lambda Metrics
       url: serverless/aws_lambda/metrics
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_metrics
-      weight: 102
+      weight: 103
     - name: Distributed Tracing
       url: serverless/aws_lambda/distributed_tracing
       identifier: serverless_distributed_tracing
       parent: serverless_aws_lambda
-      weight: 103
+      weight: 104
     - name: Log Collection
       url: serverless/aws_lambda/logs
       identifier: serverless_aws_lambda_logs
       parent: serverless_aws_lambda
-      weight: 104
+      weight: 105
     - name: Remote Instrumentation
       url: serverless/aws_lambda/remote_instrumentation
       identifier: serverless_aws_lambda_remote_instrumentation
       parent: serverless_aws_lambda
-      weight: 105
+      weight: 106
     - name: Advanced Configuration
       url: serverless/aws_lambda/configuration
       parent: serverless_aws_lambda
       identifier: serverless_configuration
-      weight: 106
+      weight: 107
     - name: Continuous Profiler
       url: serverless/aws_lambda/profiling
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_continuous_profiler
-      weight: 107
+      weight: 108
     - name: Securing Functions
       url: /serverless/aws_lambda/securing_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_securing_functions
-      weight: 108
+      weight: 109
     - name: Deployment Tracking
       url: serverless/aws_lambda/deployment_tracking
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_deployment_tracking
-      weight: 109
+      weight: 110
     - name: OpenTelemetry
       url: serverless/aws_lambda/opentelemetry
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_opentelemetry
-      weight: 110
+      weight: 111
     - name: Troubleshooting
       url: serverless/aws_lambda/troubleshooting
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_troubleshooting
-      weight: 111
+      weight: 112
     - name: Lambda Web Adapter
       url: serverless/aws_lambda/lwa
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
-      weight: 112
+      weight: 113
     - name: FIPS Compliance
       url: serverless/aws_lambda/fips-compliance
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_fips_compliance
-      weight: 113
+      weight: 114
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
@@ -3586,11 +3616,11 @@ menu:
       parent: cnm
       identifier: cnm_setup
       weight: 101
-    - name: Overview Page
-      url: network_monitoring/cloud_network_monitoring/overview_page/
+    - name: Network Health
+      url: network_monitoring/cloud_network_monitoring/network_health/
       parent: cnm
-      identifier: cnm_overview_page
-      weight: 102
+      identifier: cnm_network_health
+      weight: 102 
     - name: Network Analytics
       url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: cnm
@@ -3676,26 +3706,31 @@ menu:
       parent: ndm
       identifier: ndm_profiles
       weight: 304
-    - name: Device Topology Map
-      url: network_monitoring/devices/device_topology_map
+    - name: Configuration Management
+      url: network_monitoring/devices/config_management
       parent: ndm
-      identifier: ndm_topology_map
-      weight: 305
+      identifier: ndm_config_management
+      weight: 305   
+    - name: Maps
+      url: network_monitoring/devices/topology
+      parent: ndm
+      identifier: ndm_network_maps
+      weight: 306
     - name: SNMP Metrics Reference
       url: network_monitoring/devices/data
       parent: ndm
       identifier: ndm_data
-      weight: 306
+      weight: 307
     - name: Troubleshooting
       url: network_monitoring/devices/troubleshooting
       parent: ndm
       identifier: ndm_trouble
-      weight: 307
+      weight: 308
     - name: Guides
       url: network_monitoring/devices/guide/
       parent: ndm
       identifier: ndm_guide
-      weight: 308
+      weight: 309
     - name: NetFlow Monitoring
       url: /network_monitoring/netflow/
       parent: nm_parent
@@ -4399,16 +4434,21 @@ menu:
       parent: tracing_services
       identifier: tracing_inferred_services
       weight: 906
-    - name: Renaming Rules
+    - name: Renaming Rules for Inferred Entities
       url: tracing/services/renaming_rules
       parent: tracing_services
       identifier: tracing_renaming_rules
       weight: 907
+    - name: Service Remapping Rules
+      url: tracing/services/service_remapping_rules
+      parent: tracing_services
+      identifier: tracing_service_remapping_rules
+      weight: 908
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 908
+      weight: 909
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
@@ -5005,6 +5045,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
       weight: 203
+    - name: OpenTelemetry
+      url: llm_observability/instrumentation/otel_instrumentation
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_instrumentation_otel
+      weight: 204
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs
@@ -5089,6 +5134,11 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_compatibility
       weight: 403
+    - name: Export API 
+      url: llm_observability/evaluations/export_api
+      parent: llm_obs_evaluations 
+      identifier: llm_obs_evaluations_export_api
+      weight: 404
     - name: Experiments
       url: llm_observability/experiments
       parent: llm_obs
@@ -5673,76 +5723,81 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_datadog_agent
       weight: 204
+    - name: Datadog Lambda Extension
+      url: observability_pipelines/sources/lambda_extension/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_lambda_extension
+      weight: 205
+    - name: Datadog Lambda Forwarder
+      url: observability_pipelines/sources/lambda_forwarder/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_lambda_forwarder
+      weight: 206
     - name: Filebeat
       url: observability_pipelines/sources/filebeat/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_filebeat
-      weight: 205
+      weight: 207
     - name: Fluent
       url: observability_pipelines/sources/fluent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_fluent
-      weight: 206
+      weight: 208
     - name: Google Pub/Sub
       url: observability_pipelines/sources/google_pubsub/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_google_pubsub
-      weight: 207
+      weight: 209
     - name: HTTP Client
       url: observability_pipelines/sources/http_client/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
-      weight: 208
+      weight: 210
     - name: HTTP Server
       url: observability_pipelines/sources/http_server/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
-      weight: 209
-    - name: Lambda Forwarder
-      url: observability_pipelines/sources/lambda_forwarder/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_lambda_forwarder
-      weight: 210
+      weight: 211
     - name: OpenTelemetry
       url: observability_pipelines/sources/opentelemetry/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
-      weight: 211
+      weight: 212
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 212
+      weight: 213
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 213
+      weight: 214
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 214
+      weight: 215
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 215
+      weight: 216
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 216
+      weight: 217
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 217
+      weight: 218
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 218
+      weight: 219
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -8506,16 +8561,36 @@ menu:
       parent: product_analytics
       identifier: pa_profiles
       weight: 7
+    - name: Experiments
+      url: product_analytics/experimentation/
+      parent: product_analytics
+      identifier: pa_experiments
+      weight: 8
+    - name: Define Metrics
+      url: product_analytics/experimentation/defining_metrics
+      parent: pa_experiments
+      identifier: pa_experiments_metrics
+      weight: 801
+    - name: Reading Experiment Results
+      url: product_analytics/experimentation/reading_results
+      parent: pa_experiments
+      identifier: pa_experiments_results
+      weight: 802
+    - name: Minimum Detectable Effects
+      url: product_analytics/experimentation/minimum_detectable_effect
+      parent: pa_experiments
+      identifier: pa_experiments_mde
+      weight: 803
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 9
+      weight: 10
     - name: Account Management
       url: account_management/
       pre: cog-2
