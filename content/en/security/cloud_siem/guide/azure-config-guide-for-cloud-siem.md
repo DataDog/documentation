@@ -117,6 +117,8 @@ Create a new Function App. If you are using an existing function app, skip to Ad
 
 ### Add the Datadog Azure function
 
+<br />**Note**: The steps described below are based on the Azure Functions Programming Model v3. Datadog’s latest [Azure function code][8] has been updated to support the Azure Functions Programming Model v4, and the documentation is currently being revised to reflect these changes. If you need guidance on deploying the v4-compatible version or have questions regarding the differences between v3 and v4, please contact Datadog Technical Support for assistance.
+
 1. In the new function, select **Code + Test** in the left side menu.
 1. Copy and paste the [Datadog-Azure function code][4] to your `index.js` file.
 1. Replace `<DATADOG_API_KEY>` with your Datadog API on line 22 of the function code.
@@ -165,10 +167,11 @@ Go to [Log Explorer][7] and enter `service:azure` in the search query to view yo
 [1]: https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups
 [2]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.EventHub%2Fnamespaces
 [3]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
-[4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
+[4]: https://github.com/DataDog/datadog-serverless-functions/blob/aws-dd-forwarder-4.5.0/azure/activity_logs_monitoring/index.js
 [5]: https://docs.datadoghq.com/getting_started/site/
 [6]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/activityLog
 [7]: https://app.datadoghq.com/logs
+[8]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
 
 {{% /tab %}}
 {{< /tabs >}}
