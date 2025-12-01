@@ -292,6 +292,7 @@ unsupported_sites:
   dynamic_quotas: [gov]
   eng_reports: [gov]
   events_from_sns_emails: [gov]
+  exception_replay: [gov]
   feature_flags: [gov]
   forwarding_audit_events: [gov]
   getting_started_feature_flags: [gov]
