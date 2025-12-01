@@ -50,6 +50,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-datadog-cloudprem/"
   tag: "blog"
   text: "Store and search logs at petabyte scale in your own infrastructure with Datadog CloudPrem"
+- link: "https://www.datadoghq.com/blog/manage-high-volume-logs-with-observability-pipeline-packs/"
+  tag: "blog"
+  text: "Control logging costs on any SIEM or data lake using Packs with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-otel-cost-control/"
+  tag: "Blog"
+  text: "Use OpenTelemetry with Observability Pipelines for vendor-neutral log collection and cost control"
 ---
 
 ## Overview

@@ -49,6 +49,17 @@ If you are using a containerized environment, use the `docker exec` or `kubectl 
 
 See [Worker Commands][13] for a list of commands and options.
 
+## Enable debug logs
+
+To see debug logs, restart the Worker with the `VECTOR_LOG` environment variable set to `debug`. For example, if you are running the Worker in Docker, add `-e VECTOR_LOG=debug` to the `docker run` command:
+
+```
+docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+   -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+   -e VECTOR_LOG=debug \
+   datadog/observability-pipelines-worker run
+```
+
 ## Seeing delayed logs at the destination
 
 Observability Pipelines destinations batch events before sending them to the downstream integration. For example, the Amazon S3, Google Cloud Storage, and Azure Storage destinations have a batch timeout of 900 seconds. If the other batch parameters (maximum events and maximum bytes) have not been met within the 900-second timeout, the batch is flushed at 900 seconds. This means the destination component can take up to 15 minutes to send out a batch of events to the downstream integration.

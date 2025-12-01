@@ -26,8 +26,6 @@ El siguiente diagrama representa el flujo típico de una ruta de red desde un or
 
 {{< img src="network_performance_monitoring/network_path/network_path_diagram.png" alt="Diagrama de cómo funciona la ruta de red" >}}
 
-**Nota**: Por defecto, Datadog ejecuta una `traceroute` cada cinco minutos.
-
 ## Siguientes pasos
 
 Utiliza las siguientes vistas y herramientas para configurar Network Path e investigar el rendimiento de la red y los problemas de conectividad:
