@@ -438,7 +438,7 @@ bar: quuz
 </div>
 
 
-
+{{% collapse-content title="Legacy Configuration" level="h4" expanded=false id="legacy-configuration" %}}
 ### Node labels as tags
 
 <div class="alert alert-info">
@@ -835,6 +835,7 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 {{< /tabs >}}
 
 **Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
+{{% /collapse-content %}}
 
 ### Container environment variables as tags
 
