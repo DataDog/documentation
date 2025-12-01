@@ -64,7 +64,7 @@ further_reading:
 
 Datadog Observability Pipelines allows you to collect, process, and route logs and metrics (in Preview) within your own infrastructure. It gives you control over your observability data before it leaves your environment.
 
-With out-of-the-box templates, you can build pipelines that redact sensitive data, enrich data, filter out noisy events, and route events to destinations like Datadog, SIEM tools, or cloud storage.
+With out-of-the-box templates, you can build pipelines that redact sensitive data, enrich data, filter out noisy events, and route data to destinations like Datadog, SIEM tools, or cloud storage.
 
 ## Key components
 
