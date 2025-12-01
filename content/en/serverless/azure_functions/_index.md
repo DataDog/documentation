@@ -12,6 +12,8 @@ further_reading:
 ## Overview
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Azure Functions. To collect additional metrics, install the [Datadog Azure integration][5].
 
+For .NET Windows Azure Functions on Dedicated/App Service or Premium plans, use the [Datadog .NET APM Extension][9]. For all other runtimes, operating system, and hosting plan combinations use the instructions below to install the Serverless Compatibility Layer.
+
 ## Setup
 
 If you haven't already, install the [Datadog-Azure integration][5] to collect metrics and logs. Then instrument your application with the following steps:
@@ -218,3 +220,4 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 [6]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://learn.microsoft.com/en-us/azure/azure-functions/flex-consumption-plan
+[9]: /serverless/azure_app_service/windows_code/?tab=net
