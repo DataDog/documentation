@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs and metrics (in Preview).
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs and metrics (in Preview), and then route them to different destinations.
 
 **Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
 

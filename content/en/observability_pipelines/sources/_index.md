@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' sources to receive logs or metrics (in Preview) from your different data sources. Sources have different prerequisites and settings. Some sources also need to be configured to send data to the Observability Pipelines Worker.
+Use Observability Pipelines' sources to receive logs or metrics (in Preview) from different data sources. Sources have different prerequisites and settings. Some sources also need to be configured to send data to the Observability Pipelines Worker.
 
 Select a source in the left navigation menu to see more information about it.
 
