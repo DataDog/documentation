@@ -33,11 +33,12 @@ You must have the `apm_service_renaming_write` permission to create renaming rul
    {{< img src="tracing/services/renaming_rules/service-side-panel.png" alt="The side panel for a particular service, showing the Service Page dropdown menu with a Service Renaming option" style="width:100%;" >}}
 
 1. Choose a renaming action you want to perform for your new renaming rule.
-   1. You can select to split a single entity, rename an entity, merge multiple entites together, or rename several entities.
+   
+   You can select to split a single entity, rename an entity, merge multiple entities together, or rename several entities.
 
 1. Use the search bar to select the entities you want to rename.
-   1. You can select one or more entities, but all must be of the same type (service, datastore, or queue).
-   1. As you select entities, a span query is built in the background. To edit the query, select **Build Advanced Query**.
+   - You can select one or more entities, but all must be of the same type (service, datastore, or queue).
+   - As you select entities, a span query is built in the background. To edit the query, select **Build Advanced Query**.
 
 
 ### Step 2: Specify new entity name
@@ -51,8 +52,7 @@ You must have the `apm_service_renaming_write` permission to create renaming rul
 1. Optionally, enter a descriptive name for the renaming rule so you can identify it later.
 1. Review and save your renaming rule.
 
-**Note:** Rules are processed at intake and applied to data as it comes in. Changes affect only spans ingested while a rule is active, and past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.
-
+<div class="alert alert-info"><ul><li>Rules are processed at intake and applied to data as it comes in.</li><li>Changes affect only spans ingested while a rule is active, and past data is not updated retroactively.</li><li>Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.</li></ul></div>
 
 ## Further reading
 

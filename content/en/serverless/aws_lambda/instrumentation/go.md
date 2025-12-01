@@ -204,7 +204,7 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 ### Install the Datadog Lambda library
 
 ```
-go get github.com/DataDog/datadog-lambda-go
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2 
 ```
 
 ### Update your Lambda function code
@@ -217,11 +217,11 @@ import (
 	"net/http"
 	"time"
 
-  ddlambda "github.com/DataDog/datadog-lambda-go"
+  ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
   "github.com/aws/aws-lambda-go/events"
   "github.com/aws/aws-lambda-go/lambda"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -233,7 +233,7 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 	// Trace an HTTP request
 	req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
 	client := http.Client{}
-	client = *httptrace.WrapClient(&client)
+	client = httptrace.WrapClient(&client)
 	client.Do(req)
 
 	// Submit a custom metric

@@ -117,11 +117,10 @@
 
         {{ $tags := $adat.tags | default (slice) }}
         {{ range $tag := (first 1 (where $tags ".name" "==" $ParamTitleEn)) }}
-          <!-- get action strings from params, why? because they are translated here -->
-          {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
-
           <!-- endpoint section start -->
           {{ if $endpoint }}
+          <!-- get action strings from params, why? because they are translated here -->
+          {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
           <div class="row endpoint">
               <div class="col-12">
                   <div class="endpoint-content">
@@ -181,6 +180,8 @@
                   </div>
               </div>
           </div>
+          {{ else }}
+            {{ warnf "endpoint not found in api list.html lang: %q, version: %q, tag: %q" $dot.Lang $versionNum ($tag.name | default "") }}
           {{ end }}
           <!-- endpoint section end -->
 

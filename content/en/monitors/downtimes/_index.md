@@ -56,7 +56,7 @@ Schedule a downtime based on one or more [monitor tags][3]. The maximum number o
 
 [3]: /monitors/manage/#monitor-tags
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 #### Downtime scope
 Use group scope to apply additional filters to your downtime and have more control over which monitors to mute. The group scope of a downtime is matched after the monitor specific target. If you target multiple monitors by using monitor tags, it finds monitors that are tagged before it matches the group scope.

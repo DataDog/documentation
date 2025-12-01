@@ -113,6 +113,8 @@ Automatic instrumentation captures:
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][6] for details.
 
+To control trace ingestion by service or resource (including using wildcards in resource names), see [Control trace ingestion with resource-based sampling][15].
+
 ## Tracing short- and long-running CLI scripts
 
 Additional steps are required for instrumenting CLI scripts. Read [Trace PHP CLI Scripts][7] for more information.
@@ -489,3 +491,4 @@ For Apache, run:
 [12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
 [13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
 [14]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[15]: /tracing/guide/resource_based_sampling/

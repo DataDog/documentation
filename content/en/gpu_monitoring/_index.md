@@ -10,6 +10,12 @@ further_reading:
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+    GPU Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 {{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring/" >}}
 GPU Monitoring is in Preview. To join the preview, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}

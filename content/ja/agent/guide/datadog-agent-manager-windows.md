@@ -1,4 +1,6 @@
 ---
+description: ブラウザ ベースの Datadog Agent Manager GUI を使用し、サポート対象のブラウザと認証機能を利用して Windows
+  Agent を設定および管理します。
 further_reading:
 - link: /agent/basic_agent_usage/windows/
   tag: ドキュメント
@@ -20,7 +22,7 @@ Datadog Agent Manager GUI はブラウザベースです。GUI が実行され�
 
 #### サポートされるブラウザ
 
-| Browser       | サポートされるバージョン (以降) | コメント                 |
+| ブラウザ       | サポートされるバージョン (以降) | コメント                 |
 |---------------|------------------------------|-------------------------|
 | IE            | 11                           |                         |
 | Edge          | 12                           |  Pre-Chromium Edge |
@@ -57,7 +59,7 @@ Datadog Agent Manager がデフォルトのウェブブラウザで起動しま�
 
 Datadog Agent Manager を起動すると、デフォルトで一般ステータスページが表示されます。次のセクションが含まれます。
 
-| セクション     | 説明                                                                     |
+| セクション     | Description                                                                     |
 |-------------|---------------------------------------------------------------------------------|
 | Agent Info  | バージョン、ログレベル、ファイルパスなどの Agent に関する情報を提供します。 |
 | System Info | システム時間、ntp オフセット、Go、Python バージョンに関する情報が含まれています。       |
@@ -136,7 +138,7 @@ Agent に問題がある場合、フレアページは [Datadog サポート][4]
 
 左側のナビゲーションバーで **Restart Agent** をクリックすると、Agent が即座に再起動します。ページや確認プロンプトはありません。Agent を再起動すると、[一般ステータス](#general)ページに転送されます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -26,8 +26,6 @@ The following diagram depicts the typical flow of a network path from a source (
 
 {{< img src="network_performance_monitoring/network_path/network_path_diagram.png" alt="Diagram of how Network path works" >}}
 
-**Note**: By default, Datadog executes a `traceroute` every five minutes.
-
 ## Next steps
 
 Use the following views and tools to set up Network Path and investigate network performance and connectivity issues:

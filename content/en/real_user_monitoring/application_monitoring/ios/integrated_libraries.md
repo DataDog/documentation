@@ -9,9 +9,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: "Source Code"
   text: Source code for dd-sdk-ios
-- link: https://github.com/DataDog/dd-sdk-ios-apollo-interceptor
-  tag: "Source Code"
-  text: Datadog Integration for Apollo iOS
 ---
 
 This page lists integrated libraries you can use for iOS and tvOS applications.
@@ -47,31 +44,6 @@ URLSessionInstrumentation.enable(with: .init(delegateClass: Apollo.URLSessionCli
 For additional information on sampling rate, distributed tracing, and adding custom 
 attributes to tracked RUM resources, see [Advanced Configuration > Automatically track 
 network requests][4].
-
-3. Add the [Datadog Apollo interceptor][8] package to your `Package.swift` file:
-
-   ```swift
-   dependencies: [
-       .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
-   ]
-   ```
-
-4. Add the Datadog interceptor to your Apollo Client setup:
-
-   ```swift
-   import Apollo
-   import DatadogApollo
-
-   class CustomInterceptorProvider: DefaultInterceptorProvider {
-       override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
-           var interceptors = super.interceptors(for: operation)
-           interceptors.insert(DatadogApollo.createInterceptor(), at: 0)
-           return interceptors
-       }
-   }
-   ```
-
-For additional information on distributed tracing, adding custom attributes, and enabling GraphQL payload tracking, see [Advanced Configuration > Apollo instrumentation][7].
 
 ## SDWebImage
 
@@ -133,5 +105,3 @@ For additional information on sampling rate, distributed tracing, and adding cus
 [4]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#automatically-track-network-requests
 [5]: https://github.com/SDWebImage/SDWebImage
 [6]: https://github.com/OpenAPITools/openapi-generator
-[7]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#apollo-instrumentation
-[8]: https://github.com/DataDog/dd-sdk-ios-apollo-interceptor
