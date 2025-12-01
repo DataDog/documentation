@@ -30,13 +30,16 @@ The Datadog extension for Azure App Service provides monitoring capabilities in 
 - Support for submitting custom metrics using [DogStatsD][1].
 
 <div class="alert alert-info">
-The extension supports Azure App Service Web Apps on Basic, Standard, and Premium plans. Flex or Consumption plans are not supported.<br/><br/>
+The extension supports Azure App Service Web Apps for .NET, Java, and Node on Basic, Standard, and Premium plans. In addition, the extension supports Azure Functions for .NET using on Basic, Standard, and Premium plans. Flex Consumption and Consumption plans are not supported for any runtime.
+
+Azure Function support for .NET on Flex Consumption and Consumption plans, Java for all hosting plans, and Node for all hosting plans, is available using the [Serverless Compatibility Layer][6].
+<br/><br/>
 
 <strong>Interested in support for other App Service resource types or runtimes?</strong> <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 ### Supported runtimes
 
-The Datadog .NET, Java, and Node.js APM extensions support the following runtimes in Windows Code web apps:
+The Datadog .NET, Java, and Node.js APM extensions support the following runtimes:
 
 | Framework | Supported runtimes |
 | --------- | ------------------ |
@@ -137,6 +140,7 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 [3]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
 [4]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/windows
 [5]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_web_app
+[6]: /serverless/azure_functions
 
 {{% /tab %}}
 {{% tab "Manual" %}}
