@@ -263,7 +263,6 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
-  actions: [gov]
   adobe_experience_manager: [us3,ap1,ap2]
   agent_flare: [gov]
   agentless_scanning: [gov]
