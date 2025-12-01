@@ -53,7 +53,6 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 {{% /collapse-content %}}
 
 {{% collapse-content title="Terraform" level="h4" id="terraform-log-setup" %}}
-
 #### Choose the Terraform setup method if…
 
 - You manage infrastructure as code and want to keep the Datadog Google Cloud integration under version control.
@@ -89,17 +88,14 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 {{% /tab %}}
 
 {{% tab "Manual setup with Terraform module" %}}
-
 See the instructions on the [`terraform-gcp-datadog-integration`][300] repo to set up and manage the necessary infrastructure through Terraform.
 
 [300]: https://github.com/GoogleCloudPlatform/terraform-gcp-datadog-integration?tab=readme-ov-file#log-collection-integration---google-cloud-platform-to-datadog
 {{% /tab %}}
 {{< /tabs >}}
-
 {{% /collapse-content %}}
 
 {{% collapse-content title="Manual" level="h4" id="manual-logging-setup" %}}
-
 The instructions in this section guide you through the process of:
 
 1. Creating a Pub/Sub [topic][401] and [pull subscription][402] to receive logs from a configured log sink
@@ -247,13 +243,7 @@ See [Template parameters][412] in the Dataflow template for details on using the
 [430]: https://cloud.google.com/dataflow/docs/guides/specifying-networks#shared
 {{% /collapse-content %}}
 
-
-
-
-
-
-{{% collapse-content title="Pub/Sub Push subscription (legacy; not recommended)" level="h4" id="pub-sub-push-logging-setup" %}}
-
+{{% collapse-content title="Pub/Sub Push subscription (legacy)" level="h4" id="pub-sub-push-logging-setup" %}}
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Collecting Google Cloud logs with a Pub/Sub Push subscription</a> is in the process of being **deprecated**.
 
 The above documentation for the **Push** subscription is only maintained for troubleshooting or modifying legacy setups.
