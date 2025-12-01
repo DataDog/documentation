@@ -2753,6 +2753,18 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 4
+    - name: Get a suppression's version history
+      url: '#get-a-suppressions-version-history'
+      identifier: security-monitoring-get-a-suppressions-version-history
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuppressionVersionHistory
+        unstable: []
+        order: 0
     - name: Update a suppression rule
       url: '#update-a-suppression-rule'
       identifier: security-monitoring-update-a-suppression-rule
