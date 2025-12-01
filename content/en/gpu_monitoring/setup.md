@@ -26,7 +26,7 @@ If using Kubernetes, the following requirements must be met:
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Kubernetes**: 1.22 with PodResources API active
 
-## Set up GPU Monitoring on a uniform cluster or non-Kubernetes environment
+## Set up GPU Monitoring on a uniform Kubernetes cluster or non-Kubernetes environment
 
 The following instructions are the basic steps to set up GPU Monitoring in the following environments:
 - In a Kubernetes cluster where **all** the nodes have GPU devices
@@ -258,9 +258,11 @@ Additionally, to enable advanced eBPF-based metrics such as GPU core utilization
 
 {{< /tabs >}}
 
-## Set up GPU Monitoring on a mixed Kubernetescluster
+## Set up GPU Monitoring on a mixed Kubernetes cluster
 
-In a mixed cluster, some nodes have GPU devices while other nodes do not. Due to the way that the NVIDIA device plugin for Kubernetes works, the agent needs to have a specific runtime class to access the GPU devices that is only present on GPU nodes. Therefore, we need two DaemonSets, one for GPU nodes with the GPU-specific runtime class, and one for non-GPU nodes with the default runtime class. The recommended method to set up the Agent in this case is using the Datadog Operator, version 1.20 or greater, which provides features to make this setup easier. For compatibility, however, we also provide instructions for Helm installations or for older versions of the Datadog Operator.
+In a mixed cluster, some nodes have GPU devices while other nodes do not. Due to the way that the NVIDIA device plugin for Kubernetes works, the agent needs to have a specific runtime class to access the GPU devices that is only present on GPU nodes, so we need one DaemonSet for the runtime class in GPU nodes, and another DaemonSet for non-GPU nodes.
+
+The recommended method to set up the Agent in this case is using the Datadog Operator, version 1.20 or greater, which provides features to make this setup easier. For compatibility, however, we also provide instructions for Helm installations or for older versions of the Datadog Operator.
 
 {{< tabs >}}
 {{% tab "Datadog Operator (>=1.20)" %}}
@@ -269,7 +271,13 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
 
 1. Configure the Datadog Operator to enable the Datadog Agent Profile feature in the DatadogAgentInternal mode.
 
-   If the Datadog Operator was deployed with Helm directly without a values file, the configuration can be toggled from the command line with `helm upgrade --set datadogAgentProfile.enabled=true --set datadogAgentInternal.enabled=true --set datadogCRDs.crds.datadogAgentProfiles=true --set datadogCRDs.crds.datadogAgentInternal=true <release-name> datadog/datadog-operator`. If the Datadog Operator was deployed with a values file, the configuration can be toggled by adding the following settings to the values file:
+   If the Datadog Operator was deployed with Helm directly without a values file, the configuration can be toggled from the command line:
+
+   ```shell
+   helm upgrade --set datadogAgentProfile.enabled=true --set datadogAgentInternal.enabled=true --set datadogCRDs.crds.datadogAgentProfiles=true --set datadogCRDs.crds.datadogAgentInternal=true <release-name> datadog/datadog-operator
+   ```
+
+   If the Datadog Operator was deployed with a values file, the configuration can be toggled by adding the following settings to the values file:
 
    ```yaml
    datadogAgentProfile:
@@ -290,6 +298,8 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
 
    1. Add the `agent.datadoghq.com/update-metadata` annotation to the `DatadogAgent` resource.
    2. If advanced eBPF metrics are wanted, ensure at least one system-probe feature is enabled. Examples of system-probe features are `npm`, `cws`, `usm`. If none is enabled, the `oomKill` feature can be enabled.
+
+   The additions to the `datadog-agent.yaml` file should look like this:
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
@@ -332,8 +342,10 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
            patchCgroupPermissions: true # Only for GKE
    ```
 
-5. After you apply this new Datadog Agent Profile, the Datadog Operator creates a new DaemonSet, `gpu-nodes-agent`.
+5. After you apply this new [Datadog Agent Profile][2], the Datadog Operator creates a new DaemonSet, `gpu-nodes-agent`.
 
+[1]: /containers/kubernetes/installation/?tab=datadogoperator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/datadog_agent_profiles.md
 [3]: http://nvidia.com/gpu.present
 [4]: https://github.com/DataDog/datadog-agent/releases
 
