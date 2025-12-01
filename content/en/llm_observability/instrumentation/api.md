@@ -223,6 +223,12 @@ If the request is successful, the API responds with a 202 network code and an em
 | total_tokens           | float64 | The total number of tokens associated with the span. **Only valid for LLM spans.**   |
 | time_to_first_token    | float64 | The time in seconds it takes for the first output token to be returned in streaming-based LLM applications. Set for root spans. |
 | time_per_output_token  | float64 | The time in seconds it takes for the per output token to be returned in streaming-based LLM applications. Set for root spans. |
+| input_cost             | float64 | The input cost in dollars. **Only valid for LLM and embedding spans.** |
+| output_cost            | float64 | The output cost in dollars. **Only valid for LLM spans.** |
+| total_cost             | float64 | The total cost in dollars. **Only valid for LLM spans.** |
+| non_cached_input_cost  | float64 | The non cached input cost in dollars. **Only valid for LLM spans.** |
+| cache_read_input_cost  | float64 | The cache read input cost in dollars. **Only valid for LLM spans.** |
+| cache_write_input_cost | float64 | The cache write input cost in dollars. **Only valid for LLM spans.** |
 
 #### Span
 
