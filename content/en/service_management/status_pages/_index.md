@@ -150,6 +150,7 @@ To match your branding, you have the option to map your status page to a custom 
 **Note**:
 
 - DNS propagation may take several minutes.
+- Custom domains cannot contain hypen characters.
 - You can revert to the default Datadog domain at any time.
 - Ensure DNS changes are made by someone with access to your domain registrar.
 
