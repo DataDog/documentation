@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Real User Monitoring (RUM) lets you create alerts about atypical behavior in your applications. With [RUM without Limits™][1], use metric-based monitors to alert on your full unsampled traffic with 15-month retention. Metric-based monitors support advanced alerting conditions such as anomaly detection
+Real User Monitoring (RUM) lets you create alerts about atypical behavior in your applications. With [RUM without Limits™][1], use metric-based monitors to alert on your full unsampled traffic with 15-month retention. Metric-based monitors support advanced alerting conditions such as anomaly detection.
 
 ## Create a RUM monitor
 
@@ -28,18 +28,15 @@ From there, you can click **New Monitor**, then:
 
 Learn more about [creating RUM Monitors][4].
 
-## Metric-based and event-based monitors
+## Choosing between monitoring metrics and events
 
-For RUM without Limits™ customers, metric-based monitors are the recommended standard for the following benefits:
+Choose what to monitor based on your use case:
 
-- **Visibility into your full traffic**: Metrics are computed over your full, unsampled traffic before retention filters apply to provide broader visibility into application health
-- **Reduce the risk of missing issues**: Event-based monitors depend on retention filters and can miss issues if relevant events aren't indexed
-- **Advanced capabilities**: Metric-based monitors support anomaly detection, outlier detection, and forecasts
-- **15-month retention**: Metrics provide long-term visibility into trends and patterns
+- **Full traffic metrics** - Best for monitoring availability, loading times, error rates, and user experience trends. For RUM without Limits™ customers, metric-based monitors provide full unsampled traffic visibility (before retention filters apply), 15-month retention, and advanced capabilities like anomaly detection and forecasts.
+- **Retained events** - Best for detecting critical, low-frequency issues that require full event context. Use event-based monitors when you need to alert on indexed data or specific attributes not available as metrics. Configure retention filters to ensure the relevant data is captured.
 
-Datadog recommends using **event-based monitors** when you need to alert on data that is indexed, such as specific events or attributes that are not available in metric form. When using event-based monitors, configure retention filters to ensure meaningful data is available.
 
-To create an event-based monitor, you can export search queries from the [RUM Explorer][5]. Use any facets that RUM collects, including [custom facets and measures][6], and the `measure by` field for view-related counts like load time and error count.
+  To create an event-based monitor, you can export search queries from the [RUM Explorer][5]. Use any facets that RUM collects, including [custom facets and measures][6], and the `measure by` field for view-related counts like load time and error count.
 
 ## Export queries from the RUM homepage
 
@@ -75,13 +72,13 @@ This example uses mobile RUM to evaluate application stability across release ve
 
 ### Performance vitals
 
-Real User Monitoring measures, calculates, and scores application performance as [Core Web Vitals][10] and [Mobile Vitals][11]. For example, Largest Contentful Paint (LCP) measures loading performance. A widely used benchmark is 2.5 seconds when the page starts loading.
+Real User Monitoring measures, calculates, and scores application performance as [Core Web Vitals][10] and [Mobile Vitals][11]. For example, Interaction to Next Paint (INP) measures responsiveness by tracking the time from a user interaction to the next paint. A widely used benchmark is 200 milliseconds or less for good responsiveness.
 
-This example shows a RUM monitor for the LCP metric filtered to a specific application (for example, `Shop.ist`) and grouped by `view name` to track performance across different pages. Grouping by view name helps pinpoint which pages have performance issues.
+This example shows a RUM monitor for the INP metric filtered to a specific application (for example, `Shop.ist`) and grouped by `view name` to track performance across different pages. Grouping by view name helps pinpoint which pages have performance issues.
  
 {{< img src="real_user_monitoring/guide/alerting-with-rum/core-web-vital.png" alt="RUM monitor query showing Interaction to Next Paint (INP) metric with p75 aggregation grouped by view name, with threshold alert conditions set for warning and alert levels" style="width:100%;" >}}
 
-This example monitor warns when the LCP takes 2 seconds to load and alerts when the LCP takes longer than 2.5 seconds to load. With metric-based monitors, you can also use anomaly detection to help identify when performance metrics deviate from normal patterns, or use forecast alerts to predict when thresholds might be breached.
+This example monitor warns when INP exceeds 200 milliseconds and alerts when INP exceeds 500 milliseconds. With metric-based monitors, you can also use anomaly detection to help identify when performance metrics deviate from normal patterns, or use forecast alerts to predict when thresholds might be breached.
 
 ### Error rates
 
