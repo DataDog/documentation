@@ -411,18 +411,9 @@ If all logs are missing, verify your [Datadog site][9] and API key:
 
 For missing Azure resource logs, find the ARM-deployed storage account in the resource's region and check the container with the expected logs.
 
-{{< img src="integrations/guide/gcp-metric-discrepancy/storage_account_container.png" alt="storage account container" >}}
-
-{{< img src="integrations/guide/gcp-metric-discrepancy/storage_account_container_logs.png" alt="storage account container logs" >}}
-{{% /collapse-content %}} 
-
 {{% collapse-content title="Inspect the containerAppConsole logs of the forwarder jobs" level="h4" expanded=false id="troubleshooting-logs-inspect-forwarder-job-logs" %}}
 
 [Container App Console logs][11] help you diagnose application errors and exceptions. To inspect the logs, enable logging within the Container Apps environment in the same region as your resources that are missing logs.
-
-{{< img src="integrations/guide/azure-log-troubleshooting/list_forwarder_env.png" alt="list of forwarder container apps environment" >}}
-
-{{< img src="integrations/guide/azure-log-troubleshooting/forwarder_env_log_config.png" alt="diagnostic setting config in forwarder container apps environment" >}}
 
 [11]: https://learn.microsoft.com/azure/azure-monitor/reference/tables/containerappconsolelogs
 {{% /collapse-content %}} 
@@ -511,9 +502,7 @@ If a diagnostic setting has not been added automatically to your resources or Ac
 
 {{% collapse-content title="Check resource logs tag rules" level="h4" expanded=false id="troubleshooting-logs-check-resource-logs-tag-rules" %}}
 
-Check that any tag rules in the Datadog resource configuration match the tags set on your resource logs:
-
-{{< img src="integrations/guide/azure-logs-troubleshooting/tag_rules.png" alt="tag rules in datadog resource config" >}}
+Check that any tag rules in the Datadog resource configuration match the tags set on your resource logs.
 
 If there are no issues with the tag rules, contact [Datadog Support][3] and share the following information:
    - **Tenant ID**: Find the Tenant ID value nn Entra ID, under **Basic information**
