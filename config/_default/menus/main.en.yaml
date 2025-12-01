@@ -3298,11 +3298,16 @@ menu:
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_data_collected
       weight: 604
-    - name: AWS Fargate
+    - name: Managed Instances
+      url: containers/amazon_ecs/managed_instances/
+      parent: containers_amazon_ecs 
+      identifier: containers_amazon_ecs_managed_instances
+      weight: 605
+    - name: AWS Fargate with ECS
       url: integrations/ecs_fargate/
-      parent: containers
+      parent: containers_amazon_ecs
       identifier: ecs_fargate
-      weight: 7
+      weight: 606
     - name: Datadog Operator
       url: containers/datadog_operator
       identifier: containers_datadog_operator
