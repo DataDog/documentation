@@ -355,4 +355,3 @@ To edit a mobile recording after it's saved:
 [11]: https://restfulapi.net/json-jsonpath/
 [12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-
