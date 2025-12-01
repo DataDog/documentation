@@ -141,6 +141,8 @@ code_language_ids:
     traces: "Traces"
     metrics: "Metrics"
     logs: "Logs"    
+    topology: "Topology Map"
+    geomap: "Geomap" 
 branch: ""
 
 signupclass: sign-up-trigger
@@ -301,6 +303,7 @@ unsupported_sites:
   fleet_automation: [gov]
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
+  incident_ai: [gov]
   internal_developer_portal: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
