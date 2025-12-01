@@ -28,7 +28,11 @@ Managers and directors who oversee multiple teams can filter reports by [team hi
 
 {{< img src="tracing/internal_developer_portal/team-hierarchy-filter-with-report.png" alt="The DORA report with a filter dropdown showing a hierarchical team structure and a subset of subteams selected" style="width:100%;" >}}
 
-{{< whatsnext desc="Explore the following reports:" >}}
+Datadog’s IDP supports two types of reports:
+- **Out-of-the-box (OOTB) Engineering Reports**: reports designed by Datadog that let you assess different engineering metrics across your organization
+- **Custom Reports**: any Datadog Dashboards that your org has added to your IDP Overview Page
+
+{{< whatsnext desc="Explore the following OOTB Engineering Reports:" >}}
     {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
     {{< nextlink href="/software_catalog/eng_reports/scorecards_performance" >}}Scorecards Performance: Organization-wide view of Scorecard performance broken down by teams and rules.{{< /nextlink >}}
     {{< nextlink href="/software_catalog/eng_reports/dora_metrics" >}}DORA Metrics: Software development velocity and stability metrics broken down by services and teams.{{< /nextlink >}}
