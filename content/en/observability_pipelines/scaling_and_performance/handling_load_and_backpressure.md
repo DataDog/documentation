@@ -18,7 +18,7 @@ further_reading:
   text: "Destinations"
 ---
 
-<div class="alert alert-danger">In-memory and disk buffering options for destinations are in Preview. Contact your account manager to request access.</a></div>
+<div class="alert alert-info">In-memory and disk buffering options for destinations are in Preview. Contact your account manager to request access.</a></div>
 
 ## Overview
 
