@@ -3611,41 +3611,46 @@ menu:
       parent: nm_parent
       identifier: cnm
       weight: 1
+    - name: CNM Terms and Concepts
+      url: network_monitoring/cloud_network_monitoring/glossary
+      parent: cnm
+      identifier: cnm_glossary
+      weight: 101
     - name: Setup
       url: network_monitoring/cloud_network_monitoring/setup/
       parent: cnm
       identifier: cnm_setup
-      weight: 101
+      weight: 102
     - name: Network Health
       url: network_monitoring/cloud_network_monitoring/network_health/
       parent: cnm
       identifier: cnm_network_health
-      weight: 102 
+      weight: 103 
     - name: Network Analytics
       url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: cnm
       identifier: cnm_analytics
-      weight: 103
+      weight: 104
     - name: Tags Reference
       url: network_monitoring/cloud_network_monitoring/tags_reference/
       parent: cnm_analytics
       identifier: cnm_analytics_tags_reference
-      weight: 10000
+      weight: 10401
     - name: Network Map
       url: network_monitoring/cloud_network_monitoring/network_map/
       parent: cnm
       identifier: cnm_map
-      weight: 104
+      weight: 105
     - name: Guides
       url: network_monitoring/cloud_network_monitoring/guide/
       identifier: cnm_guides
       parent: cnm
-      weight: 105
+      weight: 106
     - name: Supported Cloud Services
       url: network_monitoring/cloud_network_monitoring/supported_cloud_services/
       identifier: cnm_supported_cloud_services
       parent: cnm
-      weight: 106
+      weight: 10601 
     - name: DNS Monitoring
       url: network_monitoring/dns/
       parent: nm_parent
@@ -3655,7 +3660,7 @@ menu:
       url: network_monitoring/devices
       parent: nm_parent
       identifier: ndm
-      weight: 3
+      weight: 3      
     - name: NDM Terms and Concepts
       url: network_monitoring/devices/glossary
       parent: ndm
@@ -3670,67 +3675,67 @@ menu:
       url: network_monitoring/devices/supported_devices
       parent: ndm_setup
       identifier: ndm_supported_devices
-      weight: 30001
+      weight: 30301
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
       parent: ndm_setup
       identifier: ndm_snmp_metrics
-      weight: 30002
+      weight: 30302
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
       parent: ndm_setup
       identifier: ndm_snmptraps
-      weight: 30003
+      weight: 30303
     - name: Ping
       url: network_monitoring/devices/ping
       parent: ndm_setup
       identifier: ndm_snmp_ping
-      weight: 30004
+      weight: 30304
     - name: Syslog
       url: network_monitoring/devices/syslog
       parent: ndm_setup
       identifier: ndm_syslog
-      weight: 30005
+      weight: 30305
     - name: VPN Monitoring
       url: network_monitoring/devices/vpn_monitoring
       parent: ndm_setup
       identifier: ndm_vpn_monitoring
-      weight: 30006
+      weight: 30306
     - name: Integrations
       url: network_monitoring/devices/integrations
       parent: ndm
       identifier: ndm_integrations
-      weight: 303
+      weight: 304
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
       identifier: ndm_profiles
-      weight: 304
+      weight: 305
     - name: Configuration Management
       url: network_monitoring/devices/config_management
       parent: ndm
       identifier: ndm_config_management
-      weight: 305   
+      weight: 306   
     - name: Maps
       url: network_monitoring/devices/topology
       parent: ndm
       identifier: ndm_network_maps
-      weight: 306
+      weight: 307
     - name: SNMP Metrics Reference
       url: network_monitoring/devices/data
       parent: ndm
       identifier: ndm_data
-      weight: 307
+      weight: 308
     - name: Troubleshooting
       url: network_monitoring/devices/troubleshooting
       parent: ndm
       identifier: ndm_trouble
-      weight: 308
+      weight: 309
     - name: Guides
       url: network_monitoring/devices/guide/
       parent: ndm
       identifier: ndm_guide
-      weight: 309
+      weight: 310
     - name: NetFlow Monitoring
       url: /network_monitoring/netflow/
       parent: nm_parent
