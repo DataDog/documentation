@@ -216,7 +216,7 @@ The following GCP services are supported:
 
 The GCP Secret Manager implementation uses [Application Default Credentials (ADC)][5001] for authentication with Google.
 
-The service account under which the Datadog Agent runs (such as the VM's service account, a workload identity, or a locally activated credentials) requires the `secretmanager.versions.access` permission to interact with GCP Secret Manager.
+To interact with GCP Secret Manager, the service account used by the Datadog Agent (such as the VM's service account, a workload identity, or locally activated credentials) requires the `secretmanager.versions.access` permission.
 
 This can be granted with the predefined role **Secret Manager Secret Accessor** (`roles/secretmanager.secretAccessor`) or a custom role with equivalent [access][5002].
 
