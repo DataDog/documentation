@@ -1,6 +1,8 @@
 ---
 title: Data Jobs Monitoring
 description: "Monitor performance, reliability, and cost efficiency of data processing jobs across platforms like EMR, Databricks, Dataproc, and Kubernetes."
+aliases:
+  - /data_jobs/
 further_reading:
   - link: '/data_streams'
     tag: 'Documentation'
