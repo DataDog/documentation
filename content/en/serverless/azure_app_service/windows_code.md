@@ -30,10 +30,15 @@ The Datadog extension for Azure App Service provides monitoring capabilities in 
 - Support for submitting custom metrics using [DogStatsD][1].
 
 <div class="alert alert-info">
-The extension supports Azure App Service Web Apps for .NET, Java, and Node on Basic, Standard, and Premium plans.
+The extension supports the following:
+- App Service Web Apps: Supported for .NET, Java, and Node runtimes on Basic, Standard, and Premium plans.
+- Azure Functions: Supported only for the .NET runtime on Basic, Standard, and Premium plans.
 <br/><br/>
 
-In addition, the extension supports Azure Functions for .NET on Basic, Standard, and Premium plans. The extension does not support Flex Consumption or Consumption plans for any runtime. Azure Function support for .NET on Flex Consumption and Consumption plans, Java on all hosting plans, and Node on all hosting plans is available using the <a href="/serverless/azure_functions">Serverless Compatibility Layer</a>.
+For all other Azure Functions configurations, you must use the <a href="/serverless/azure_functions">Serverless Compatibility Layer</a>:
+- Azure Functions on Flex Consumption or Consumption plans (for any runtime).
+- Azure Functions for Java (on any hosting plan).
+- Azure Functions for Node (on any hosting plan).
 <br/><br/>
 
 <strong>Interested in support for other App Service resource types or runtimes?</strong> <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
