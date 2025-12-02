@@ -411,6 +411,8 @@ If all logs are missing, verify your [Datadog site][9] and API key:
 
 For missing Azure resource logs, find the ARM-deployed storage account in the resource's region and check the container with the expected logs.
 
+{{% /collapse-content %}} 
+
 {{% collapse-content title="Inspect the containerAppConsole logs of the forwarder jobs" level="h4" expanded=false id="troubleshooting-logs-inspect-forwarder-job-logs" %}}
 
 [Container App Console logs][11] help you diagnose application errors and exceptions. To inspect the logs, enable logging within the Container Apps environment in the same region as your resources that are missing logs.
@@ -656,7 +658,7 @@ The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 
 [2]: https://manage.windowsazure.com
 
-[4]: /logs/indexes/#set-daily-quota
+
 [5]: /account_management/billing/
 
 
@@ -665,6 +667,7 @@ The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 [1]: /getting_started/integrations/azure/
 [2]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
 [3]: https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/aad/
+[4]: /logs/indexes/#set-daily-quota
 [5]: /integrations/guide/azure-event-hub-log-forwarding
 [6]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
 [7]: /integrations/guide/azure-native-integration/#agent-extensions
