@@ -2,9 +2,15 @@
 title: CNM Terms and Concepts
 description: Glossary for Cloud Network Monitoring (CNM)
 further_reading:
-    - link: 'https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/'
-      tag: 'Knowledge Center'
-      text: 'SNMP Monitoring Overview'
+    - link: '/network_monitoring/cloud_network_monitoring/setup/'
+      tag: 'Documentation'
+      text: 'Setting Up Cloud Network Monitoring'
+    - link: '/network_monitoring/cloud_network_monitoring/tags_reference/'
+      tag: 'Documentation'
+      text: 'CNM Tags Reference'
+    - link: '/monitors/types/cloud_network_monitoring/'
+      tag: 'Documentation'
+      text: 'CNM Monitors and Alerts'
 ---
 
 ## Overview
