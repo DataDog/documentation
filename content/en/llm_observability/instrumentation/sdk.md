@@ -34,7 +34,9 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
 
 ## Setup
 
-### Prerequisites
+- A [Datadog API key][1]
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -42,9 +44,6 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
    ```shell
    pip install ddtrace
    ```
-- A [Datadog API key][1]
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -52,17 +51,13 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
    ```shell
    npm install dd-trace
    ```
-- A [Datadog API key][1]
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
 {{% tab "Java" %}}
 - You have downloaded the latest [`dd-trace-java` JAR][1]. The LLM Observability SDK is supported in `dd-trace-java` v1.51.0+.
-- A [Datadog API key][2]
 
 [1]: https://github.com/DataDog/dd-trace-java
-[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -369,7 +364,36 @@ export const handler = async (event) => {
 {{< tabs >}}
 {{% tab "Python" %}}
 
-To trace a span, use `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a function decorator (for example, `llmobs.decorators.task()` for a task span) for the function you'd like to trace. For a list of available span kinds, see the [Span Kinds documentation][1]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
+To capture an LLM operation a function decorator or context manager can be used:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def handle_user_request():
+    make_llm_request()
+
+
+def make_llm_request():
+    with LLMObs.llm(model="gpt-4o"):
+        # do llm request
+        ...
+        LLMObs.annotate(
+            metrics={
+                "input_tokens": ...,
+                "output_tokens": ...,
+
+            },
+            metadata={
+              "temperature": ...
+            }
+        )
+
+{{< /code-block >}}
+
+
+For a list of available span kinds, see the [Span Kinds documentation][1]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
 
 [1]: /llm_observability/terms/
 {{% /tab %}}
