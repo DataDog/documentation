@@ -43,9 +43,6 @@ Docker, Kubernetes, Amazon ECS, AWS Fargate에서 실행되는 Python 애플리�
 {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-{{< tabs >}}
-
-
 ```shell
 docker run [...] -e DD_IAST_ENABLED=true [...]
 ```
@@ -95,8 +92,8 @@ spec:
 
 {{< /tabs >}}
 
-4. 서비스를 다시 시작하세요.
-5. Code Security가 실제로 어떻게 작동하는지 확인하려면 서비스를 살펴보세요. [Vulnerability Explorer][4]에 코드 수준 취약점이 나타납니다.
+1. 서비스를 다시 시작하세요.
+2. Code Security가 실제로 어떻게 작동하는지 확인하려면 서비스를 살펴보세요. [Vulnerability Explorer][4]에 코드 수준 취약점이 나타납니다.
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="코드 취약점을 보여주는 동영상" video="true" >}}
 
