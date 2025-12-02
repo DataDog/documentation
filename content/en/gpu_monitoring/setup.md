@@ -8,7 +8,7 @@ This page provides instructions on setting up Datadog's GPU Monitoring on your i
 
 To begin using Datadog's GPU Monitoring, your environment must meet the following criteria:
 
-- You are a Datadog user with active Datadog infrastructure hosts. If not, refer to the following guides:
+- You are a Datadog user with active Datadog infrastructure hosts. If not, see the following guides:
   - [Install the Datadog Agent on Kubernetes][1]
   - [Install the Datadog Agent on Docker][7]
   - [Install the Datadog Agent on non-containerized Linux][8]
@@ -260,9 +260,9 @@ Additionally, to enable advanced eBPF-based metrics such as GPU core utilization
 
 ## Set up GPU Monitoring on a mixed Kubernetes cluster
 
-In a mixed cluster, some nodes have GPU devices while other nodes do not. Due to the way that the NVIDIA device plugin for Kubernetes works, the agent needs to have a specific runtime class to access the GPU devices that is only present on GPU nodes, so we need one DaemonSet for the runtime class in GPU nodes, and another DaemonSet for non-GPU nodes.
+In a mixed cluster, some nodes have GPU devices while other nodes do not. Due to the way that the NVIDIA device plugin for Kubernetes works, the agent needs to have a specific runtime class to access the GPU devices that is only present on GPU nodes. Therefore, two separate DaemonSets, one for the runtime class in GPU nodes, and another for non-GPU nodes, are required.
 
-The recommended method to set up the Agent in this case is using the Datadog Operator, version 1.20 or greater, which provides features to make this setup easier. For compatibility, however, we also provide instructions for Helm installations or for older versions of the Datadog Operator.
+The recommended method to set up the Agent in this case is using the Datadog Operator, version 1.20 or greater, which provides features to make this setup easier. However, for compatibility reasons instructions are also provided for Helm installations or for older versions of the Datadog Operator.
 
 {{< tabs >}}
 {{% tab "Datadog Operator (>=1.20)" %}}
