@@ -1,6 +1,10 @@
 ---
 title: Set up GPU Monitoring
 private: true
+further_reading:
+- link: "/gpu_monitoring/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting GPU Monitoring"
 ---
 This page provides instructions on setting up Datadog's GPU Monitoring on a uniform cluster (all nodes have GPU devices) or a mixed cluster (only some nodes have GPU devices).
 
