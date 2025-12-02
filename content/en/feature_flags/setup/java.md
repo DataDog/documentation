@@ -1,0 +1,560 @@
+---
+title: Java Feature Flags
+description: Set up Datadog Feature Flags for Java applications.
+further_reading:
+- link: "/feature_flags/setup/"
+  tag: "Documentation"
+  text: "Feature Flags Setup"
+- link: "/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/"
+  tag: "Documentation"
+  text: "Java APM and Distributed Tracing"
+---
+
+{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
+Feature Flags are in Preview. Complete the form to request access.
+{{< /callout >}}
+
+<div class="alert alert-warning"><strong>Experimental Feature:</strong> Java Feature Flags support is currently experimental and requires enabling an experimental flag in the tracer. See the configuration section for details.</div>
+
+## Overview
+
+This page describes how to instrument your Java application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
+
+The Java SDK integrates feature flags directly into your Datadog APM tracer and implements the [OpenFeature](https://openfeature.dev/) standard for maximum flexibility and compatibility.
+
+## Prerequisites
+
+- **Java 11 or higher**: The Feature Flags SDK requires Java 11+
+- **Datadog APM Tracer**: Datadog Feature Flags requires `dd-trace-java` version **1.57.0** or later (currently in development)
+- **Datadog Agent**: A running Datadog Agent **7.x or later** with Remote Configuration enabled and EVP Proxy support
+- **Datadog API Key**: Required for Remote Configuration
+
+<div class="alert alert-info"><strong>Note:</strong> Feature Flags support is not yet available in the public release of <code>dd-trace-java</code>. You'll need a development build or wait for the official release.</div>
+
+## Installation
+
+Feature flagging is included in the Datadog Java APM tracer (`dd-trace-java`). No additional dependencies are required beyond the tracer and the OpenFeature SDK.
+
+{{< tabs >}}
+{{% tab "Gradle" %}}
+Add the following dependencies to your `build.gradle`:
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    // Datadog Java tracer (includes feature flagging)
+    implementation 'com.datadoghq:dd-trace-api:X.X.X'
+
+    // OpenFeature SDK for flag evaluation
+    implementation 'dev.openfeature:sdk:1.18.2'
+
+    // OpenFeature Provider (packaged separately)
+    implementation 'com.datadoghq:dd-openfeature:X.X.X'
+}
+{{< /code-block >}}
+
+Or with Kotlin DSL (`build.gradle.kts`):
+
+{{< code-block lang="kotlin" filename="build.gradle.kts" >}}
+dependencies {
+    // Datadog Java tracer (includes feature flagging)
+    implementation("com.datadoghq:dd-trace-api:X.X.X")
+
+    // OpenFeature SDK for flag evaluation
+    implementation("dev.openfeature:sdk:1.18.2")
+
+    // OpenFeature Provider (packaged separately)
+    implementation("com.datadoghq:dd-openfeature:X.X.X")
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Maven" %}}
+Add the following dependencies to your `pom.xml`:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<dependencies>
+    <!-- Datadog Java tracer (includes feature flagging) -->
+    <dependency>
+        <groupId>com.datadoghq</groupId>
+        <artifactId>dd-trace-api</artifactId>
+        <version>X.X.X</version>
+    </dependency>
+
+    <!-- OpenFeature SDK for flag evaluation -->
+    <dependency>
+        <groupId>dev.openfeature</groupId>
+        <artifactId>sdk</artifactId>
+        <version>1.18.2</version>
+    </dependency>
+
+    <!-- OpenFeature Provider (packaged separately) -->
+    <dependency>
+        <groupId>com.datadoghq</groupId>
+        <artifactId>dd-openfeature</artifactId>
+        <version>X.X.X</version>
+    </dependency>
+</dependencies>
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+## Configuration
+
+### Agent Configuration
+
+Configure your Datadog Agent to enable Remote Configuration:
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+# Enable Remote Configuration
+remote_configuration:
+  enabled: true
+
+# Set your API key
+api_key: <YOUR_API_KEY>
+{{< /code-block >}}
+
+### Application Configuration
+
+Configure your Java application with the required environment variables or system properties:
+
+{{< tabs >}}
+{{% tab "Environment Variables" %}}
+{{< code-block lang="bash" >}}
+# Required: Enable Remote Configuration in the tracer
+export DD_REMOTE_CONFIG_ENABLED=true
+
+# Required: Enable experimental feature flagging support
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+
+# Required: Your Datadog API key
+export DD_API_KEY=<YOUR_API_KEY>
+
+# Required: Service name
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+
+# Required: Environment (e.g., prod, staging, dev)
+export DD_ENV=<YOUR_ENVIRONMENT>
+
+# Optional: Version
+export DD_VERSION=<YOUR_APP_VERSION>
+
+# Start your application with the tracer
+java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "System Properties" %}}
+{{< code-block lang="bash" >}}
+java -javaagent:path/to/dd-java-agent.jar \
+  -Ddd.remote.config.enabled=true \
+  -Ddd.experimental.flagging.provider.enabled=true \
+  -Ddd.api.key=<YOUR_API_KEY> \
+  -Ddd.service=<YOUR_SERVICE_NAME> \
+  -Ddd.env=<YOUR_ENVIRONMENT> \
+  -Ddd.version=<YOUR_APP_VERSION> \
+  -jar your-application.jar
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-warning"><strong>Important:</strong> Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without the experimental flag, the Feature Flagging system will not start.</div>
+
+<div class="alert alert-info"><strong>Note:</strong> The Datadog Feature Flagging system starts automatically when the tracer is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.</div>
+
+## Initialize the OpenFeature Provider
+
+Initialize the Datadog OpenFeature provider in your application startup code. The provider connects to the feature flagging system running in the Datadog tracer.
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.OpenFeatureAPI;
+import dev.openfeature.sdk.Client;
+import datadog.trace.api.openfeature.Provider;
+
+import dev.openfeature.sdk.exceptions.ProviderNotReadyError;
+
+// Initialize the Datadog provider
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+
+try {
+    // Set provider and wait for initial configuration (recommended)
+    api.setProviderAndWait(new Provider());
+} catch (ProviderNotReadyError e) {
+    // Handle gracefully - app will use default flag values
+    System.err.println("Provider not ready: " + e.getMessage());
+    // Continue - client will use defaults until configuration arrives
+}
+
+// Get a client for evaluating flags
+Client client = api.getClient();
+{{< /code-block >}}
+
+<div class="alert alert-warning"><strong>Important:</strong> Use <code>setProviderAndWait()</code> to block until the initial flag configuration is received from Remote Config. This ensures flags are ready before your application starts serving traffic. The default timeout is 30 seconds.</div>
+
+<div class="alert alert-info"><strong>Graceful Degradation:</strong> If the provider times out, catch <code>ProviderNotReadyError</code> to allow your application to start with default flag values. This prevents application crashes when Remote Config is unavailable.</div>
+
+### Asynchronous Initialization
+
+For non-blocking initialization, use `setProvider()` and listen for the `PROVIDER_READY` event:
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.ProviderEvent;
+
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+Client client = api.getClient();
+
+// Listen for provider ready event
+client.on(ProviderEvent.PROVIDER_READY, (event) -> {
+    System.out.println("Feature flags ready!");
+});
+
+// Set provider asynchronously
+api.setProvider(new Provider());
+{{< /code-block >}}
+
+## Set the Evaluation Context
+
+The evaluation context defines the subject (user, device, session) for flag evaluation. It determines which flag variations are returned based on targeting rules.
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.EvaluationContext;
+import dev.openfeature.sdk.MutableContext;
+
+// Create an evaluation context with a targeting key and attributes
+EvaluationContext context = new MutableContext("user-123")
+    .add("email", "user@example.com")
+    .add("tier", "premium")
+    .add("country", "US");
+
+// Use the context for flag evaluations (see next section)
+{{< /code-block >}}
+
+<div class="alert alert-info"><strong>Targeting Key:</strong> The <code>targetingKey</code> (e.g., "user-123") is the primary identifier used for consistent flag evaluations and percentage-based rollouts. It's typically a user ID, session ID, or device ID.</div>
+
+## Evaluate Flags
+
+Evaluate feature flags using the OpenFeature client. All flag types are supported: boolean, string, integer, double, and object.
+
+### Boolean Flags
+
+{{< code-block lang="java" >}}
+// Simple boolean evaluation
+boolean enabled = client.getBooleanValue("new-checkout-flow", false, context);
+
+if (enabled) {
+    // New checkout flow
+} else {
+    // Old checkout flow
+}
+
+// Get detailed evaluation result
+import dev.openfeature.sdk.FlagEvaluationDetails;
+
+FlagEvaluationDetails<Boolean> details =
+    client.getBooleanDetails("new-checkout-flow", false, context);
+
+System.out.println("Value: " + details.getValue());
+System.out.println("Variant: " + details.getVariant());
+System.out.println("Reason: " + details.getReason());
+{{< /code-block >}}
+
+### String Flags
+
+{{< code-block lang="java" >}}
+// Evaluate string flags (e.g., UI themes, API endpoints)
+String theme = client.getStringValue("ui-theme", "light", context);
+
+String apiEndpoint = client.getStringValue(
+    "payment-api-endpoint",
+    "https://api.example.com/v1",
+    context
+);
+{{< /code-block >}}
+
+### Number Flags
+
+{{< code-block lang="java" >}}
+// Integer flags (e.g., limits, quotas)
+int maxRetries = client.getIntegerValue("max-retries", 3, context);
+
+// Double flags (e.g., thresholds, rates)
+double discountRate = client.getDoubleValue("discount-rate", 0.0, context);
+{{< /code-block >}}
+
+### Object Flags
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.Value;
+
+// Evaluate object/JSON flags for complex configuration
+Value config = client.getObjectValue("feature-config", new Value(), context);
+
+// Access structured data
+if (config.isStructure()) {
+    Value timeout = config.asStructure().getValue("timeout");
+    Value endpoint = config.asStructure().getValue("endpoint");
+}
+{{< /code-block >}}
+
+## Error Handling
+
+The OpenFeature SDK uses a default value pattern - if evaluation fails for any reason, the default value you provide is returned.
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.ErrorCode;
+
+// Check evaluation details for errors
+FlagEvaluationDetails<Boolean> details =
+    client.getBooleanDetails("my-flag", false, context);
+
+if (details.getErrorCode() != null) {
+    switch (details.getErrorCode()) {
+        case FLAG_NOT_FOUND:
+            System.err.println("Flag does not exist");
+            break;
+        case PROVIDER_NOT_READY:
+            System.err.println("Provider not initialized yet");
+            break;
+        case TARGETING_KEY_MISSING:
+            System.err.println("Evaluation context missing targeting key");
+            break;
+        case TYPE_MISMATCH:
+            System.err.println("Flag value type doesn't match requested type");
+            break;
+        default:
+            System.err.println("Evaluation error: " + details.getErrorMessage());
+    }
+}
+{{< /code-block >}}
+
+### Common Error Codes
+
+| Error Code | Description | Resolution |
+|------------|-------------|------------|
+| `PROVIDER_NOT_READY` | Initial configuration not received | Wait for provider initialization or use `setProviderAndWait()` |
+| `FLAG_NOT_FOUND` | Flag doesn't exist in configuration | Check flag key or create flag in Datadog UI |
+| `TARGETING_KEY_MISSING` | No targeting key in evaluation context | Provide a targeting key when creating context |
+| `TYPE_MISMATCH` | Flag value can't be converted to requested type | Use correct evaluation method for flag type |
+| `INVALID_CONTEXT` | Evaluation context is null | Provide a valid evaluation context |
+
+## Exposure Tracking
+
+Flag exposures are automatically tracked and sent to Datadog when:
+1. A flag is evaluated successfully
+2. The flag's allocation has `doLog=true` configured
+
+Exposures appear in the Datadog UI and can be used for:
+- Analyzing feature adoption
+- Correlating feature flags with application performance
+- Debugging flag behavior
+
+No additional code is required - exposures are automatically logged by the Datadog tracer integration.
+
+## Advanced Configuration
+
+### Custom Initialization Timeout
+
+Configure how long the provider waits for initial configuration:
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.openfeature.Provider;
+import java.util.concurrent.TimeUnit;
+
+Provider.Options options = new Provider.Options()
+    .initTimeout(10, TimeUnit.SECONDS);
+
+api.setProviderAndWait(new Provider(options));
+{{< /code-block >}}
+
+### Configuration Change Events
+
+Listen for configuration updates from Remote Config:
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.ProviderEvent;
+
+client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
+    System.out.println("Flag configuration updated: " + event.getMessage());
+    // Optionally re-evaluate flags or trigger cache refresh
+});
+{{< /code-block >}}
+
+### Multiple Clients
+
+Use named clients to organize flags by domain or team:
+
+{{< code-block lang="java" >}}
+// All clients use the same provider but can have different contexts
+Client checkoutClient = api.getClient("checkout");
+Client analyticsClient = api.getClient("analytics");
+
+// Each client can have its own evaluation context
+EvaluationContext checkoutContext = new MutableContext("session-abc");
+EvaluationContext analyticsContext = new MutableContext("user-123");
+
+boolean newCheckout = checkoutClient.getBooleanValue(
+    "new-checkout-ui", false, checkoutContext
+);
+
+boolean enhancedAnalytics = analyticsClient.getBooleanValue(
+    "enhanced-analytics", false, analyticsContext
+);
+{{< /code-block >}}
+
+## Best Practices
+
+### 1. Initialize Early
+Initialize the OpenFeature provider as early as possible in your application lifecycle (e.g., in `main()` or application startup) to ensure flags are ready before business logic executes.
+
+### 2. Use Meaningful Default Values
+Always provide sensible default values that maintain safe behavior if flag evaluation fails:
+
+{{< code-block lang="java" >}}
+// Good: Safe default that maintains current behavior
+boolean useNewAlgorithm = client.getBooleanValue("new-algorithm", false, context);
+
+// Good: Conservative default for limits
+int rateLimit = client.getIntegerValue("rate-limit", 100, context);
+{{< /code-block >}}
+
+### 3. Create Context Once
+Create the evaluation context once per request/user/session and reuse it for all flag evaluations:
+
+{{< code-block lang="java" >}}
+// In a web filter or request handler
+EvaluationContext userContext = new MutableContext(userId)
+    .add("email", user.getEmail())
+    .add("plan", user.getPlan());
+
+// Reuse context for all flags in this request
+boolean featureA = client.getBooleanValue("feature-a", false, userContext);
+boolean featureB = client.getBooleanValue("feature-b", false, userContext);
+{{< /code-block >}}
+
+### 4. Handle Initialization Failures
+Always handle cases where the provider fails to initialize:
+
+{{< code-block lang="java" >}}
+try {
+    api.setProviderAndWait(new Provider());
+} catch (Exception e) {
+    // Log error and continue with defaults
+    logger.error("Failed to initialize feature flags", e);
+    // Application will use default values for all flags
+}
+{{< /code-block >}}
+
+### 5. Use Consistent Targeting Keys
+Use consistent, stable identifiers as targeting keys:
+- **Good**: User IDs, session IDs, device IDs
+- **Avoid**: Timestamps, random values, frequently changing IDs
+
+### 6. Monitor Flag Evaluation
+Use the detailed evaluation results for logging and debugging:
+
+{{< code-block lang="java" >}}
+FlagEvaluationDetails<Boolean> details =
+    client.getBooleanDetails("critical-feature", false, context);
+
+logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
+    "critical-feature",
+    details.getValue(),
+    details.getVariant(),
+    details.getReason()
+);
+{{< /code-block >}}
+
+## Integration with Datadog APM
+
+Feature flags automatically integrate with Datadog APM:
+
+- **Trace Correlation**: Flag evaluations are automatically correlated with APM traces
+- **Performance Impact**: Track how feature flags affect application performance
+- **Error Tracking**: See which flags were active when errors occurred
+- **Exposure Analytics**: Analyze feature adoption in the Datadog UI
+
+No additional configuration is required - this integration is automatic when using the Datadog tracer.
+
+## Troubleshooting
+
+### Provider Not Ready
+
+**Problem**: `PROVIDER_NOT_READY` errors when evaluating flags
+
+**Common Causes**:
+1. **Experimental flag not enabled**: Feature flagging is disabled by default
+2. **Agent not ready**: Application started before Agent was fully initialized
+3. **No flags configured**: No flags published to your service/environment combination
+4. **Agent Remote Config disabled**: Agent not configured for Remote Configuration
+
+**Solutions**:
+1. **Enable experimental feature**:
+   ```bash
+   export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+   ```
+2. **Verify Feature Flagging system started** in application logs:
+   ```
+   [dd.trace] Feature Flagging system starting
+   [dd.trace] Feature Flagging system started
+   ```
+3. **Ensure Agent is ready** before app starts (use healthchecks in Docker/K8s)
+4. **Check EVP Proxy discovered** in logs:
+   ```
+   discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
+   ```
+5. **Wait for Remote Config sync** (can take 30-60 seconds after publishing flags)
+6. **Verify flags are published** in Datadog UI to the correct service and environment
+
+### Feature Flagging System Not Starting
+
+**Problem**: No "Feature Flagging system starting" messages in logs
+
+**Cause**: Experimental flag not enabled in tracer
+
+**Solution**:
+Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`
+
+### EVP Proxy Not Available Error
+
+**Problem**: Logs show "EVP Proxy not available" or "agent does not support EVP proxy"
+
+**Cause**: Application started before Agent was fully initialized
+
+**Solutions**:
+1. **Add Agent healthcheck** in orchestration (Docker Compose, Kubernetes)
+2. **Add startup delay** to application
+3. **Retry logic**: Implement retry on provider initialization failure
+4. **Upgrade Agent**: Ensure using Agent 7.x or later with EVP Proxy support
+
+### Flags Not Updating
+
+**Problem**: Flag configuration changes aren't reflected in the application
+
+**Solutions**:
+1. Check Remote Configuration is enabled on both Agent and application
+2. Verify Agent can connect to Datadog backend
+3. Check application logs for "No configuration changes" or "Configuration received"
+4. Ensure flags are published (not just saved as draft) in the Datadog UI
+5. Verify service and environment tags match between app and flag targeting
+
+### Type Mismatch Errors
+
+**Problem**: `TYPE_MISMATCH` errors when evaluating flags
+
+**Solutions**:
+1. Verify the flag type in Datadog UI matches the evaluation method
+2. Use correct method: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`
+3. Check flag configuration for correct value types
+
+### No Exposures in Datadog
+
+**Problem**: Flag evaluations aren't appearing in Datadog UI
+
+**Solutions**:
+1. Verify the flag's allocation has `doLog=true` configured
+2. Check Datadog Agent is receiving exposure events
+3. Verify `DD_API_KEY` is correct
+4. Check Agent logs for exposure upload errors
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
