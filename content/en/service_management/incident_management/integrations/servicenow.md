@@ -54,9 +54,9 @@ In ServiceNow, you can sync state, impact, and urgency bidirectionally with Inci
    4. Check the **Enabled** box.
 5. Click **Save**.
 
-As incidents are created in Datadog, an incident is also created in the corresponding ServiceNow instance. This ServiceNow incident links to the incident in Datadog for reference and syncs bidirectionally based on the [field mappings](#field-mappings).
+With bidirectional sync, when and incident is created in Datadog, a corresponding incident is also created in the linked ServiceNow instance. This ServiceNow incident includes a reference to the Datadog incident and stays in sync based on the defined [field mappings](#field-mappings).
 
-### Field mappings
+## Field mappings
 
 Field mappings define how information in Datadog incidents is transferred to, and synchronized with, fields in ServiceNow incidents. This ensures that key incident details such as status, severity, and descriptions are consistent and up-to-date in both systems.
 
@@ -73,16 +73,16 @@ The following fields are synced between Datadog Incident Management and ServiceN
 | Severity                | Incident Urgency (int)     | Urgency                 | Bi-directionally synced                 |
 | Severity                | Incident Impact (int)      | Impact                  | Bi-directionally synced                 |
 
-#### Datadog incident state to ServiceNow incident state mapping
+### Incident state mapping
 
-| **Datadog Monitor State**                     | **ServiceNow Incident State** |
-| ---------------------------------------------- | ----------------------------- |
-| Active                                         | In Progress                   |
-| Warn                                         | In Progress                   |
-| OK                                       | Resolved                      |
-| Completed _(optional, configured in settings)_ | Resolved                      |
+| **Datadog Monitor State**                    | **ServiceNow Incident State** |
+|----------------------------------------------|------------------------------|
+| Active                                      | In Progress                  |
+| Warn                                        | In Progress                  |
+| OK                                          | Resolved                     |
+| Completed _(optional, configured in settings)_ | Resolved                  |
 
-#### Datadog incident severity to ServiceNow priority mapping
+### Datadog incident severity to ServiceNow priority mapping
 
 | **Datadog Incident Severity** | **ServiceNow Urgency** | **ServiceNow Impact** | **ServiceNow Priority** |
 |-------------------------------|------------------------|-----------------------|-------------------------|
@@ -98,12 +98,6 @@ The following fields are synced between Datadog Incident Management and ServiceN
 | Unknown                       | 3                      | 3                     | 5 - Planning            |
 
 **Note**: If `Start at SEV-0` is enabled in Incident Management settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` will all stay the same, but the `Datadog Incident Severity` shifts down by 1. For example, in the first row of this table, the Datadog Incident Severity would be 0, but the rest of the values in the rest of the row would stay the same.
-
-<!-- TODO: Add information about customization options. Questions:
-- Can users customize these field mappings?
-- Are there transform map customization options available specifically for Incident Management?
-- Should we reference the ITOM/ITSM setup guide for advanced customization?
--->
 
 ## Further Reading
 
