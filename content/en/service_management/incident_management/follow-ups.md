@@ -59,7 +59,6 @@ After defining an export template, you have two options:
 
 ### Case Management exports
 
-<div class="alert alert-info">Manual exports are not supported for Case Management.</div>
 
 When you export your follow-ups to [Case Management][2], you can manage, track, and analyze your follow-ups directly in Datadog. For example, you can:
 
