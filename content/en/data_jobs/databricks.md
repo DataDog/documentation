@@ -358,9 +358,13 @@ If some jobs are not visible, navigate to the [Configuration][9] page to underst
 
 ## Troubleshooting
 
-{{% djm-install-troubleshooting %}}
+If you don't see any data in DJM after installing the product, follow these steps.
 
-If the init script was manually installed but cluster data still isn't showing up in the DJM product, use [this endpoint][25] to ensure that the Datadog API key specified in the script is valid.
+1. **API Validation:** If the init script was manually installed but cluster data still isn't showing up in the DJM product, use [this endpoint][25] to ensure that the Datadog API key specified in the script is valid.
+1. **Agent Validation:** The init script installs the Datadog Agent. To make sure it is properly installed, ssh into the cluster and run the Agent status command:
+  ```shell
+  sudo datadog-agent status
+  ```
 
 ## Advanced Configuration
 
