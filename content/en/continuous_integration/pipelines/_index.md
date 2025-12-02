@@ -30,14 +30,12 @@ cascade:
 Select your CI provider to set up CI Visibility in Datadog:
 
 {{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
+<br />
 
-{{< whatsnext desc="For other CI providers and customization options, see the following sections:" >}}
-    {{< nextlink href="continuous_integration/pipelines/custom" >}}Custom Pipelines for other CI Providers{{< /nextlink >}}
+{{< whatsnext desc="For customization options, see the following sections:" >}}
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_tags_and_measures" >}}Custom Tags and Measures{{< /nextlink >}}
 {{< /whatsnext >}}
-
-If your CI provider is not supported, you can try setting up CI Visibility through the [public API endpoint][2].
 
 ## Supported features
 
@@ -89,7 +87,6 @@ You can export your search query to a [CI Pipeline monitor][12] on the [**Execut
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
 [6]: https://app.datadoghq.com/ci/pipeline-executions
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/notebook/list
