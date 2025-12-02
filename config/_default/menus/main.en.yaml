@@ -5562,21 +5562,36 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
-    - name: Setup
-      url: feature_flags/setup
+    - name: Client SDKs
+      url: feature_flags/client_sdks
       parent: feature_flags
-      identifier: feature_flags_setup
+      identifier: feature_flags_client_sdks
       weight: 1
     - name: Android and Android TV
-      url: feature_flags/setup/android
-      parent: feature_flags_setup
-      identifier: feature_flags_setup_android
+      url: feature_flags/client_sdks/android
+      parent: feature_flags_client_sdks
+      identifier: feature_flags_client_sdks_android
       weight: 101
     - name: iOS and tvOS
-      url: feature_flags/setup/ios
-      parent: feature_flags_setup
-      identifier: feature_flags_setup_ios
+      url: feature_flags/client_sdks/ios
+      parent: feature_flags_client_sdks
+      identifier: feature_flags_client_sdks_ios
       weight: 102
+    - name: Server SDKs
+      url: feature_flags/server_sdks
+      parent: feature_flags
+      identifier: feature_flags_server_sdks
+      weight: 2
+    - name: Java
+      url: feature_flags/server_sdks/java
+      parent: feature_flags_server_sdks
+      identifier: feature_flags_server_sdks_java
+      weight: 201
+    - name: Python
+      url: feature_flags/server_sdks/python
+      parent: feature_flags_server_sdks
+      identifier: feature_flags_server_sdks_python
+      weight: 202
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
