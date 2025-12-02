@@ -141,7 +141,7 @@ Habilitar los checks de JMX obliga al Agent a utilizar más memoria dependiendo 
 
 Los resultados que se muestran a continuación se obtuvieron a partir de una recopilación de *110 KB de logs por segundo* de un archivo con el [Forwarder de HTTP][6] habilitado. Muestra la evolución del uso de recursos en los distintos niveles de compresión disponibles.
 
-{{< tabs >}}
+{{< pestañas >}}
 {{% tab "Nivel 6 de compresión HTTP" %}}
 
 * Versión de prueba del Agent: 6.15.0
