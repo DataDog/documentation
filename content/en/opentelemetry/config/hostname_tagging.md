@@ -82,28 +82,25 @@ processors:
             name: k8s.pod.ip
     extract:
       metadata:
-        - k8s.pod.name
-        - k8s.pod.uid
-        - k8s.deployment.name
-        - k8s.node.name
-        - k8s.namespace.name
-        - k8s.pod.start_time
-        - k8s.replicaset.name
-        - k8s.replicaset.uid
+        - container.id
+        - container.image.name
+        - container.image.tag
+        - k8s.container.name
+        - k8s.cronjob.name
         - k8s.daemonset.name
         - k8s.daemonset.uid
+        - k8s.deployment.name
         - k8s.job.name
         - k8s.job.uid
-        - k8s.cronjob.name
+        - k8s.namespace.name
+        - k8s.node.name
+        - k8s.pod.name
+        - k8s.pod.start_time
+        - k8s.pod.uid
+        - k8s.replicaset.name
+        - k8s.replicaset.uid
         - k8s.statefulset.name
         - k8s.statefulset.uid
-        - container.image.name
-        - container.image.tag
-        - container.id
-        - k8s.container.name
-        - container.image.name
-        - container.image.tag
-        - container.id
       labels:
         - tag_name: kube_app_name
           key: app.kubernetes.io/name
@@ -171,28 +168,25 @@ processors:
             name: k8s.pod.ip
     extract:
       metadata:
-        - k8s.pod.name
-        - k8s.pod.uid
-        - k8s.deployment.name
-        - k8s.node.name
-        - k8s.namespace.name
-        - k8s.pod.start_time
-        - k8s.replicaset.name
-        - k8s.replicaset.uid
+        - container.id
+        - container.image.name
+        - container.image.tag
+        - k8s.container.name
+        - k8s.cronjob.name
         - k8s.daemonset.name
         - k8s.daemonset.uid
+        - k8s.deployment.name
         - k8s.job.name
         - k8s.job.uid
-        - k8s.cronjob.name
+        - k8s.namespace.name
+        - k8s.node.name
+        - k8s.pod.name
+        - k8s.pod.start_time
+        - k8s.pod.uid
+        - k8s.replicaset.name
+        - k8s.replicaset.uid
         - k8s.statefulset.name
         - k8s.statefulset.uid
-        - container.image.name
-        - container.image.tag
-        - container.id
-        - k8s.container.name
-        - container.image.name
-        - container.image.tag
-        - container.id
       labels:
         - tag_name: kube_app_name
           key: app.kubernetes.io/name
@@ -240,28 +234,25 @@ processors:
             name: k8s.pod.ip
     extract:
       metadata:
-        - k8s.pod.name
-        - k8s.pod.uid
-        - k8s.deployment.name
-        - k8s.node.name
-        - k8s.namespace.name
-        - k8s.pod.start_time
-        - k8s.replicaset.name
-        - k8s.replicaset.uid
+        - container.id
+        - container.image.name
+        - container.image.tag
+        - k8s.container.name
+        - k8s.cronjob.name
         - k8s.daemonset.name
         - k8s.daemonset.uid
+        - k8s.deployment.name
         - k8s.job.name
         - k8s.job.uid
-        - k8s.cronjob.name
+        - k8s.namespace.name
+        - k8s.node.name
+        - k8s.pod.name
+        - k8s.pod.start_time
+        - k8s.pod.uid
+        - k8s.replicaset.name
+        - k8s.replicaset.uid
         - k8s.statefulset.name
         - k8s.statefulset.uid
-        - container.image.name
-        - container.image.tag
-        - container.id
-        - k8s.container.name
-        - container.image.name
-        - container.image.tag
-        - container.id
       labels:
         - tag_name: kube_app_name
           key: app.kubernetes.io/name
