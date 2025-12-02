@@ -12,7 +12,7 @@ Forwarding logs from your Google Cloud environment enables near real-time monito
 
 Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow template][3]. This approach offers batching and compression of your log events before forwarding them to Datadog, which is the most network-efficient way to forward your logs. You can specify which logs are forwarded with inclusion and exclusion filters.
 
-### Setup
+## Setup
 
 {{% collapse-content title="Quick Start (recommended)" level="h4" id="quick-start-log-setup" %}}
 #### Choose the Quick Start setup method if…
@@ -29,9 +29,9 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 
 1. In the [Google Cloud integration tile][100], click the **Configure Log Collection** button.
 1. Select **Quick Start**. A setup script, configured with your Datadog credentials and site, is automatically generated.
-1. Copy the setup script. You can choose to run the script locally, or in Google Cloud Shell:
-   - Running the script locally may be faster, but requires that you have your Google Cloud credentials available and the [gcloud CLI][101] installed on your machine.
-   - Click **Open Google Cloud Shell** to run the script in the [Google Cloud Shell][102].
+1. Copy the setup script. You can run the script locally or in Google Cloud Shell:
+   - Locally: May be faster, but requires your Google Cloud credentials and the [gcloud CLI][101] installed on your machine.
+   - [Google Cloud Shell][102]: Click **Open Google Cloud Shell** to run the script.
 1. After running the script, return to the Google Cloud integration tile.
 1. In the **Select Projects** section, select the folders and projects to forward logs from. If you select a folder, logs are forwarded from all of its child projects.<br>
    **Note**: Only folders and projects that you have the necessary access and permissions for appear in this section. Likewise, folders and projects without a display name do not appear.
@@ -123,7 +123,9 @@ To collect logs from applications running in GCE or GKE, you can also use the [D
 
 4. Datadog recommends creating a secret in [Secret Manager][414] with your valid Datadog API key value, for later use in the Datadog Dataflow template.
 
-**Warning**: Cloud Pub/Subs are subject to [Google Cloud quotas and limitations][415]. If the number of logs you have exceeds those limitations, Datadog recommends you split your logs over several topics. See [the Monitor the Pub/Sub Log Forwarding section](#monitor-the-cloud-pubsub-log-forwarding) for information on setting up monitor notifications if you approach those limits.
+<div class="alert alert-danger">
+Cloud Pub/Subs are subject to <a href="https://cloud.google.com/pubsub/quotas#quotas">Google Cloud quotas and limitations</a>. If the number of logs you have exceeds those limitations, Datadog recommends you split your logs over several topics. See the <a href="#monitor-the-cloud-pubsub-log-forwarding">Monitor the Pub/Sub Log Forwarding</a> section for information on setting up monitor notifications if you approach those limits.
+</div>
 
 #### 2. Create a custom Dataflow worker service account
 
