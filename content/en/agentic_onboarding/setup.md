@@ -33,101 +33,43 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 
 {{< tabs >}}
 {{% tab "Cursor" %}}
-1. Copy and paste the following deeplink into your browser.
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
-   {{% site-region region="us" %}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+1. Copy and paste the following deeplink into your browser:
 
-   ```shell
-   cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-mcp&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuY29tL2FwaS91bnN0YWJsZS9tY3Atc2VydmVyL21jcD90b29sc2V0cz1vbmJvYXJkaW5nIiwidHlwZSI6Im9hdXRoIn0=
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="us3" %}}
-   ```shell
-   cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us3&config=eyJ1cmwiOiJodHRwczovL21jcC51czMuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="us5" %}}
-   ```shell
-   cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us5&config=eyJ1cmwiOiJodHRwczovL21jcC51czUuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="eu" %}}
-   ```shell
-   cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-mcp&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuZXUvYXBpL3Vuc3RhYmxlL21jcC1zZXJ2ZXIvbWNwP3Rvb2xzZXRzPW9uYm9hcmRpbmciLCJ0eXBlIjoib2F1dGgifQ==
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="ap1" %}}
-   ```shell
-   cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap1&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="ap2" %}}
-   ```shell
-   cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap2&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDIuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9
-   ```
-   {{% /site-region %}}
-
-   {{< site-region region="gov" >}}
-   <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-   {{< /site-region >}}
+   <pre>
+   <code>
+   {{< region-param key=cursor_mcp_install_deeplink >}}
+   </code>
+   </pre>
 
 2. In Cursor, click **Install** for the `datadog-onboarding-mcp` server.
 3. If the MCP server shows a **Needs login** link, select it and complete the OAuth flow. When prompted, choose **Open** to continue and grant access to your Datadog account.
 4. After authentication, return to Cursor and confirm that MCP tools appear under the `datadog-onboarding-mcp` server.
+{{< /site-region >}}
 
 {{% /tab %}}
 
 {{% tab "Claude Code" %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Open an active Claude Code session with the /mcp command:
 
-   {{% site-region region="us" %}}
-   ```shell
-   claude mcp add --transport http datadog-onboarding-us1 "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=onboarding"
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="us3" %}}
-   ```shell
-   claude mcp add --transport http datadog-onboarding-us3 "https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=onboarding"
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="us5" %}}
-   ```shell
-   claude mcp add --transport http datadog-onboarding-us5 "https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=onboarding"
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="eu" %}}
-   ```shell
-   claude mcp add --transport http datadog-onboarding-eu1 "https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp?toolsets=onboarding
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="ap1" %}}
-   ```shell
-   claude mcp add --transport http datadog-onboarding-ap1 "https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=onboarding"
-   ```
-   {{% /site-region %}}
-
-   {{% site-region region="ap2" %}}
-   ```shell
-   claude mcp add --transport http datadog-onboarding-ap2 "https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=onboarding"
-   ```
-   {{% /site-region %}}
-
-   {{< site-region region="gov" >}}
-   <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-   {{< /site-region >}}
+   <pre>
+   <code>
+   claude mcp add --transport http datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}} "https://mcp.{{< region-param key=dd_site >}}/api/unstable/mcp-server/mcp?toolsets=onboarding"
+   </code>
+   </pre>
 
 2. Select the MCP server installed in Step 1. You should see a `disconnected - Enter to login` message. Press <kbd>Enter</kbd>.
 3. When you see the option to authenticate, press <kbd>Enter</kbd>. This brings you to the OAuth screen.
+{{< /site-region >}}
 
 {{% /tab %}}
 {{< /tabs >}}
