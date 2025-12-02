@@ -76,10 +76,6 @@ For Agent commands, see the Agent Commands guides. For information on the Datado
 
 <br>
 
-## Application Security Protection
-
-To enable Application Security monitoring at the ingress layer, use the Datadog Appsec Injector to automatically configure your proxies and gateways. See the [Appsec Injector documentation][8] for setup instructions.
-
 ## Additional configuration
 ### Unprivileged installation
 
@@ -179,6 +175,7 @@ helm uninstall datadog-agent
   {{< nextlink href="/agent/kubernetes/configuration">}}<u>Further Configuration</u>: Collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, and reference the full list of available environment variables.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/distributions">}}<u>Distributions</u>: Review base configurations for major Kubernetes distributions, including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE).{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/apm">}}<u>APM</u>: Set up trace collection: configure the Agent to accept traces, configure your Pods to communicate with the Agent, and configure your application tracers to emit traces.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/appsec">}}<u>App & API Protection</u>: Configure your ingress controller to analyze and protect your cluster API endpoints and applications.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/csi">}}<u>CSI Driver</u>: Install and set up Datadog CSI driver, and mount DogStatsD and Trace Agent UDS socket using Datadog CSI volumes.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/log">}}<u>Log collection</u>: Set up log collection in a Kubernetes environment.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/tag">}}<u>Tag extraction</u>: Configure the Agent to create and assign tags to all metrics, traces, and logs emitted by a container, Pod, or Node, based on Kubernetes labels or annotations.{{< /nextlink >}}
@@ -199,4 +196,3 @@ helm uninstall datadog-agent
 [5]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
 [6]: https://docs.datadoghq.com/agent/supported_platforms/?tab=cloudandcontainers
 [7]: https://docs.datadoghq.com/containers/guide/kubernetes_daemonset/
-[8]: /security/application_security/setup/kubernetes/appsec-injector
