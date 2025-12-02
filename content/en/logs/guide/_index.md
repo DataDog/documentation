@@ -31,6 +31,7 @@ cascade:
     {{< nextlink href="/logs/guide/aws-account-level-logs/" >}}Set up AWS account-level log subscriptions{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send Amazon EKS Fargate Logs with Amazon Data Firehose{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/google-cloud-log-forwarding" >}}Google Cloud Log Forwarding Setup{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-automated-log-forwarding" >}}Azure Automated Log Forwarding{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-manual-log-forwarding" >}}Azure Manual Log Forwarding{{< /nextlink >}}
     {{< nextlink href="/logs/guide/apigee" >}}Collect Apigee Logs{{< /nextlink >}}
