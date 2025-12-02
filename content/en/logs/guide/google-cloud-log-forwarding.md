@@ -21,11 +21,11 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 - You prefer a UI-based workflow and want to minimize the time it takes to create and configure the necessary resources.
 - You want to automate setup steps in scripts or CI/CD pipelines.
 
-#### Prerequisite permissions
+##### Prerequisite permissions
 
 {{% google-cloud-logging-setup-permissions %}}
 
-#### Instructions
+##### Instructions
 
 1. In the [Google Cloud integration tile][100], click the **Configure Log Collection** button.
 1. Select **Quick Start**. A setup script, configured with your Datadog credentials and site, is automatically generated.
@@ -59,7 +59,7 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 - You need to configure multiple folders or projects consistently with reusable provider blocks.
 - You want a repeatable, auditable deployment process that fits into your Terraform-managed environment.
 
-#### Prerequisite permissions
+##### Prerequisite permissions
 
 {{% google-cloud-logging-setup-permissions %}}
 
@@ -255,13 +255,13 @@ Datadog recommends instead using a **Pull** subscription with the Datadog Datafl
 
 See the [Stream logs from Google Cloud to Datadog][1] guide in the Google Cloud architecture center for a more detailed explanation of the steps and architecture involved in log forwarding. For a deep dive into the benefits of the Pub/Sub to Datadog template, read [Stream your Google Cloud logs to Datadog with Dataflow][2] in the Datadog blog.
 
-### Validation
+## Validation
 
 New logging events delivered to the Cloud Pub/Sub topic appear in the [Datadog Log Explorer][8].
 
 **Note**: You can use the [Google Cloud Pricing Calculator][9] to calculate potential costs.
 
-### Monitor the Cloud Pub/Sub log forwarding
+## Monitor the Cloud Pub/Sub log forwarding
 
 The [Google Cloud Pub/Sub integration][10] provides helpful metrics to monitor the status of the log forwarding:
 
@@ -270,7 +270,7 @@ The [Google Cloud Pub/Sub integration][10] provides helpful metrics to monitor t
 
 Use the metrics above with a [metric monitor][11] to receive alerts for the messages in your input and deadletter subscriptions.
 
-### Monitor the Dataflow pipeline
+## Monitor the Dataflow pipeline
 
 Use Datadog's [Google Cloud Dataflow integration][12] to monitor all aspects of your Dataflow pipelines. You can see all your key Dataflow metrics on the out-of-the-box dashboard, enriched with contextual data such as information about the GCE instances running your Dataflow workloads, and your Pub/Sub throughput.
 
