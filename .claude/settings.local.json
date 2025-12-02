@@ -3,9 +3,7 @@
     "allow": [
       "WebSearch",
       "WebFetch(domain:support.google.com)",
-      "Bash(git commit:*)",
-      "Bash(tree:*)",
-      "Bash(find:*)"
+      "Bash(git commit:*)"
     ]
   }
 }
