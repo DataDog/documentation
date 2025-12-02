@@ -63,7 +63,7 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 
 {{% google-cloud-logging-setup-permissions %}}
 
-#### Instructions
+##### Instructions
 
 {{< tabs >}}
 {{% tab "Datadog UI-based setup" %}}
