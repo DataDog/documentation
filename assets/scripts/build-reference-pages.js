@@ -710,6 +710,7 @@ const typeColumn = (key, value, readOnlyMarkup, level = 0) => {
  * Takes an object from the schema and outputs a description column
  * @param {string} key - key for the current schema object
  * @param {object} value - part of a schema object
+ * @param {string} defaultMarkup - markup for default values
  * returns html column
  */
 const descColumn = (key, value, defaultMarkup) => {
@@ -822,6 +823,7 @@ const defaultColumn = (key, value, parentDefaults) => {
  * @param {number} level - how deep does the rabbit hole go?
  * @param {string} parentKey - parent key
  * @param {boolean} skipAnyKeys - whether to skip <any-key> rows
+ * @param {object} parentDefaults - parent default values
  * returns html row with nested rows
  */
 const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '', skipAnyKeys = false, parentDefaults = {}) => {
@@ -1138,6 +1140,34 @@ const processSpecs = (specs) => {
               jsonData[widget.properties.type.default] = {"json_curl": requestCurlJson, "json": requestJson, "html": html};
             });
             fs.writeFileSync(`${pageDir}widgets.json`, safeJsonStringify(jsonData, null, 2), 'utf-8');
+          }
+
+          // Generate processors.json file - same format as widgets.json
+          if(deref.components.schemas && deref.components.schemas.LogsProcessor && deref.components.schemas.LogsProcessor.oneOf) {
+            const jsonData = {};
+            const pageDir = `./content/en/api/${version}/logs-pipelines/`;
+            // Ensure directory exists
+            if (!fs.existsSync(pageDir)) {
+              fs.mkdirSync(pageDir, { recursive: true });
+            }
+            deref.components.schemas.LogsProcessor.oneOf.forEach((processor) => {
+              const requestJson = filterExampleJson("request", processor);
+              const requestCurlJson = filterExampleJson("curl", processor);
+              const html = schemaTable("request", processor);
+              // Get processor type from properties.type.default or properties.type.enum[0]
+              let processorType = '';
+              if(processor.properties && processor.properties.type) {
+                if(processor.properties.type.default) {
+                  processorType = processor.properties.type.default;
+                } else if(processor.properties.type.enum && processor.properties.type.enum.length > 0) {
+                  processorType = processor.properties.type.enum[0];
+                }
+              }
+              if(processorType) {
+                jsonData[processorType] = {"json_curl": requestCurlJson, "json": requestJson, "html": html};
+              }
+            });
+            fs.writeFileSync(`${pageDir}processors.json`, safeJsonStringify(jsonData, null, 2), 'utf-8');
           }
 
         }).catch((e) => {
