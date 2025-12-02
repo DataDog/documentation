@@ -10,8 +10,8 @@ further_reading:
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/flexible-spreadsheets-in-datadog-sheets/" header="Create flexible spreadsheets">}}
-Preview our new, more flexible spreadsheet - built to let you start from scratch, build models, track operations, and more.
+{{< callout url="https://www.datadoghq.com/product-preview/flexible-spreadsheets-in-datadog-sheets/">}}
+Create flexible spreadsheets: built to let you start from scratch, build models, track operations, and more.
 {{< /callout >}}
 
 ## Overview
