@@ -363,20 +363,6 @@ export const handler = async (event) => {
 
 {{% /collapse-content %}}
 
-### Application naming guidelines
-
-Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidelines:
-
-- Must be a lowercase Unicode string
-- Can be up to 193 characters long
-- Cannot contain contiguous or trailing underscores
-- Can contain the following characters:
-   - Alphanumerics
-   - Underscores
-   - Minuses
-   - Colons
-   - Periods
-   - Slashes
 
 ## Tracing LLM operations
 
@@ -1247,11 +1233,11 @@ public class MyJavaClass {
 {{< /tabs >}}
 
 
-## Annotating a span
+## Enriching spans
 
 {{< tabs >}}
 {{% tab "Python" %}}
-The SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata.
+The SDK provides the method `LLMObs.annotate()` to enrich spans with inputs, outputs, and metadata.
 
 The `LLMObs.annotate()` method accepts the following arguments:
 
@@ -2605,6 +2591,21 @@ processMessage = llmobs.wrap({ kind: 'workflow', name: 'processMessage', mlApp: 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Application naming guidelines
+
+Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidelines:
+
+- Must be a lowercase Unicode string
+- Can be up to 193 characters long
+- Cannot contain contiguous or trailing underscores
+- Can contain the following characters:
+   - Alphanumerics
+   - Underscores
+   - Minuses
+   - Colons
+   - Periods
+   - Slashes
 
 
 [1]: https://github.com/openai/openai-python
