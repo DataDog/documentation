@@ -265,7 +265,7 @@ In a mixed cluster, some nodes have GPU devices while other nodes do not. Due to
 The recommended method to set up the Agent in this case is using the Datadog Operator, version 1.20 or greater, which provides features to make this setup easier. However, for compatibility reasons instructions are also provided for Helm installations or for older versions of the Datadog Operator.
 
 {{< tabs >}}
-{{% tab "Datadog Operator (>=1.20)" %}}
+{{% tab "Datadog Operator (1.20 or greater)" %}}
 
 To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the Operator's [Agent Profiles][2] feature to selectively enable GPU Monitoring only on nodes with GPUs.
 
@@ -350,7 +350,7 @@ To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the O
 [4]: https://github.com/DataDog/datadog-agent/releases
 
 {{% /tab %}}
-{{% tab "Datadog Operator (<1.20)" %}}
+{{% tab "Datadog Operator (1.18 or 1.19)" %}}
 To set up GPU Monitoring on a mixed cluster with the Datadog Operator, use the Operator's [Agent Profiles][2] feature to selectively enable GPU Monitoring only on nodes with GPUs.
 
 1. Ensure that the [latest version of the Datadog Agent][4] is [installed and deployed][1] on every GPU host you wish to monitor.
