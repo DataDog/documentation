@@ -107,7 +107,7 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 (
-SET MAX_MEMORY = 1024
+  SET MAX_MEMORY = 1024
 )
 WITH (
     MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
@@ -157,7 +157,7 @@ ADD EVENT sqlserver.attention(
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 (
-SET MAX_MEMORY = 1024
+  SET MAX_MEMORY = 1024
 )
 WITH (
     MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
@@ -259,7 +259,7 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 (
-SET MAX_MEMORY = 1024
+  SET MAX_MEMORY = 1024
 )
 WITH (
     MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
@@ -309,7 +309,7 @@ ADD EVENT sqlserver.attention(
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
 (
-SET MAX_MEMORY = 1024
+  SET MAX_MEMORY = 1024
 )
 WITH (
     MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals

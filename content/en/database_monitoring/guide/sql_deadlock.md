@@ -43,7 +43,7 @@ Supported Agent versions
   ADD EVENT sqlserver.xml_deadlock_report
   ADD TARGET package0.ring_buffer
   (
-  SET MAX_MEMORY = 1024
+    SET MAX_MEMORY = 1024
   )
   WITH (
       MAX_MEMORY = 1024 KB,
@@ -78,7 +78,7 @@ Supported Agent versions
   ADD EVENT sqlserver.database_xml_deadlock_report
   ADD TARGET package0.ring_buffer
   (
-  SET MAX_MEMORY = 1024
+    SET MAX_MEMORY = 1024
   )
   WITH (
       MAX_MEMORY = 1024 KB,
