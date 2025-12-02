@@ -8,7 +8,7 @@ further_reading:
   text: "AWS Integration"
 ---
 
-{{< callout url="#" header="false" btn_hidden="true" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/adaptive-metric-polling/" header="Join the Preview!" btn_hidden="false" >}}
   Adaptive Polling of CloudWatch Metrics is in Preview.
 {{< /callout >}} 
 

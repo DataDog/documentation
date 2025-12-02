@@ -264,6 +264,7 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   actions: [gov]
+  adaptive_sampling: [gov]
   adobe_experience_manager: [us3,ap1,ap2]
   agent_flare: [gov]
   agentless_scanning: [gov]
@@ -280,6 +281,7 @@ unsupported_sites:
   ci_visibility: [gov]
   code_coverage: [gov]
   code_security: [gov]
+  configuration_at_runtime: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
@@ -313,6 +315,7 @@ unsupported_sites:
   otlp_agentless: [gov]
   overview_pages: [gov]
   pr_gates: [gov]
+  resource_based_sampling: [gov]
   remote_config: [gov]
   remote_configuration: [gov]
   roku_error_tracking: [gov]
