@@ -1,6 +1,6 @@
 ---
 title: CNM Terms and Concepts
-description: CNM Glossary
+description: Glossary for Cloud Network Monitoring (CNM)
 further_reading:
     - link: 'https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/'
       tag: 'Knowledge Center'
@@ -9,29 +9,29 @@ further_reading:
 
 ## Overview
 
-Cloud Network Monitoring (CNM) provides end-to-end visibility into network communication across services, containers, hosts, and cloud environments. It aggregates connection-level data into meaningful service-to-service dependencies, helping you analyze traffic patterns, troubleshoot latency or connectivity issues, and ensure the health of your cloud-native applications.
+Cloud Network Monitoring (CNM) provides end-to-end visibility into network communication across services, containers, hosts, and cloud environments. It aggregates connection-level data into meaningful service-to-service dependencies, helping you analyze traffic patterns, troubleshoot latency and connectivity issues, and monitor the health of your applications.
 
 ## Terminology
 
-| Concept                                                 |Description                                                                                                                                                                                                                                                                                               |
+| Concept                                                 | Description                                                                                                                                                                                                                                                                                               |
 | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Cloud Network Monitoring (CNM)**                      | Cloud Network Monitoring provides visibility into network traffic between services, containers, availability zones, and any other tag in Datadog, aggregating raw connection-level data (IP, port, PID) into application-layer dependencies between client and server endpoints.  |
-| **Flow data**                                           | The low-level data collected by CNM (connections at IP, port, PID levels) which CNM uses to build higher-level representations of network dependencies and traffic flow.                                                                                                                     |
-| **[Network Health][3]**                                      |  Displays the overall health of network connections, for example surface issues like connectivity problems or degraded network performance across hosts/services. |
-| **[Network Analytics][2]**          | The tool within CNM allowing users to graph and analyze network data between each client and server based on chosen grouping tags, enabling investigation of traffic patterns, dependencies, or anomalies.  |
-| **[Network Map][1]**                                         | A visualization view in CNM that maps network data between tags (services, containers, zones, etc.), showing how different endpoints communicate.  |
-| **[CNM Monitor][4]**              | A type of monitor in Datadog that can alert when a CNM (TCP network) metric crosses a user-defined threshold — e.g., network throughput between a specific client/server.                    |
-| **[CNM Tags][5]**                               | Metadata labels (for example, service, container, availability zone, custom tags) that can be used to group client/server endpoints; CNM uses tags to aggregate and display traffic at logical groupings (service-to-service, zone-to-zone, etc.).                                                   |
+| **Cloud Network Monitoring (CNM)**                      | Cloud Network Monitoring (CNM) provides visibility into network traffic between services, containers, availability zones, and other tags in Datadog, aggregating raw connection-level data (IP, port, PID) into application-layer dependencies between client and server endpoints.  |
+| **Flow data**                                           | The low-level data collected by CNM (connections at IP, port, PID levels) that CNM uses to build higher-level representations of network dependencies and traffic flow.                                                                                                                     |
+| **[Network Health][1]**                                      |  Displays the overall health of network connections, surfacing connectivity problems and degraded network performance across hosts and services. |
+| **[Network Analytics][2]**          | A CNM view that lets you graph and analyze network data between each client and server based on grouping tags, so you can investigate traffic patterns, dependencies, or anomalies.  |
+| **[Network Map][3]**                                         | A visualization view in CNM that maps network data between tags such as services, containers, and zones, showing how different endpoints communicate.  |
+| **[CNM Monitor][4]**              | A Datadog monitor that alerts when a CNM (TCP network) metric crosses a user-defined threshold, for example network throughput between a specific client and server.                    |
+| **[CNM Tags][5]**                               | CNM uses tags to group and display traffic, for example, service-to-service or zone-to-zone communication.                                           |
 
 ## Network Path
 
 Network Path provides hop-by-hop visibility into the route between a source and destination, helping you identify where latency, packet loss, or routing changes occur.
 | Concept                                 | Description                                                                                                                                                                                      |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Network Path**                        | A Datadog feature that maps the hop-by-hop route between a source and a destination, helping identify where latency, drops, or routing issues occur. It visualizes each hop, ASN, and region along the route. |
-| **Path View**                           | The Network Path visualization that displays each hop, grouped by Autonomous System, region, or network, along with probe status and hop metrics.                                                             |
-| **Hop**                                 | A network node along a route between source and destination, identified by IP address and associated metadata (ASN, cloud region, provider).                                                                  |
-| **Autonomous System (AS / ASN)**        | A collection of IP routing prefixes managed by a single network operator. Network Path groups hops by ASN to show routing domains along the path.                                                             |
+| **[Network Path][6]**                        | Network Path provides hop-by-hop visibility into the route between a source and a destination, so you can identify where latency, packet loss, or routing changes occur. |
+| **Autonomous System (AS / ASN)**        | A collection of IP routing prefixes managed by a single network operator. Network Path groups hops by Autonomous System (AS) or Autonomous System Number (ASN) to show routing domains along the path.      
+| **[Path View][7]**                           | The Network Path visualization that displays each hop, grouped by Autonomous System Number (ASN), region, or network, along with probe status and hop metrics.                                                             |
+| **Hop**                                 | A network node along a route between source and destination, identified by IP address and associated metadata (ASN, cloud region, provider).                                                                  |                                                      |
 | **Source**                              | The starting point of a Network Path probe, typically an agent-monitored host or container running the Datadog network monitoring tracer.                                                                     |
 | **Destination**                         | The endpoint that the Network Path probe is targeting, such as a service, public endpoint, or domain.                                                                                                         |
 | **Trace Route / Traceroute-like Probe** | The underlying mechanism Network Path uses to determine intermediate hops and latency. CNM sends controlled probes to discover each hop on the route.                                                         |
@@ -59,8 +59,10 @@ Network Path provides hop-by-hop visibility into the route between a source and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/cloud_network_monitoring/network_map/
+[1]: /network_monitoring/cloud_network_monitoring/network_health/
 [2]: /network_monitoring/cloud_network_monitoring/network_analytics/
-[3]: /network_monitoring/cloud_network_monitoring/network_health/
+[3]: /network_monitoring/cloud_network_monitoring/network_map/
 [4]: /monitors/types/cloud_network_monitoring/
 [5]: /network_monitoring/cloud_network_monitoring/tags_reference/
+[6]: /network_monitoring/cloud_network_monitoring/network_path/
+[7]: /network_monitoring/cloud_network_monitoring/network_path/path_view
