@@ -41,7 +41,7 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
    : Enables GPU Monitoring.
 
    `gpu.privilegedMode: true`
-   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.core.usage`).
+   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.process.core.usage`).
 
    `gpu.patchCgroupPermissions: true`
    : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
@@ -81,7 +81,7 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
    : Enables GPU Monitoring.
 
    `gpuMonitoring.privilegedMode: true`
-   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.core.usage`).
+   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.process.core.usage`).
 
    `gpuMonitoring.configureCgroupPerms: true`
    : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
@@ -477,7 +477,7 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
    : Enables GPU Monitoring.
 
    `gpuMonitoring.privilegedMode: true`
-   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.core.usage`).
+   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.process.core.usage`).
 
    `gpuMonitoring.configureCgroupPerms: true`
    : _Only for GKE_. Enables a code path in `system-probe` that ensures the Agent can access GPU devices.
