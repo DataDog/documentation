@@ -7458,7 +7458,7 @@ menu:
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_results
       weight: 502
-    - name: Webview
+    - name: Recording in Webviews
       url: synthetics/mobile_app_testing/mobile_app_tests/webview
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_webview

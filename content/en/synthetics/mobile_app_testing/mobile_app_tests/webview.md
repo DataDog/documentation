@@ -1,6 +1,6 @@
 ---
-title: Mobile App testing webview mode
-description: Use Synthetic mobile app testing to capture webview mode recordings.
+title: Recording interactions inside Webviews
+description: Use Synthetic mobile app testing to capture webview recordings.
 further_reading:
 - link: "/synthetics/mobile_app_testing/mobile_app_tests/advanced_options"
   tag: "Documentation"
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Some mobile apps embed web content using WebViews (for example, in-app checkouts, login pages, or help centers). Use webview mode to locate and assert on elements inside these embedded web views, in addition to native UI elements.
+Some mobile apps embed web content using WebViews (for example, in-app checkouts, login pages, or help centers). Use webview mode to locate and assert on elements inside these embedded webviews, in addition to native UI elements.
 
 When a webview is detected during a mobile app test recording, you can toggle on webview recording mode to capture interactions within the webview. Steps recorded in webview mode display a "WebView" tag in the step list, while the rest of the recording experience remains unchanged.
 
