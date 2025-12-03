@@ -154,6 +154,7 @@ vector_data: integrations_data/extracted/vector
 
 # only build placeholders in ci
 placeholders: hugpython update_pre_build
+	make build-api-derefs
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/"
 
@@ -166,7 +167,6 @@ hugpython: local/etc/requirements3.txt
 
 update_pre_build: hugpython
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
-	make build-api-derefs
 
 # Only to be run during deployment
 # Updates hugo preview config file for feature branch naming scheme
