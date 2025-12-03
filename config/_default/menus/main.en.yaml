@@ -2111,11 +2111,16 @@ menu:
       parent: software_catalog
       identifier: software_catalog_entity_model
       weight: 102
-    - name: Entity Types
-      url: internal_developer_portal/software_catalog/entity_model/entity_types
+    - name: Native Entities
+      url: internal_developer_portal/software_catalog/entity_model/native_entities
       parent: software_catalog_entity_model
-      identifier: software_catalog_entity_types
+      identifier: software_catalog_native_entities
       weight: 1021
+    - name: Custom Entities
+      url: internal_developer_portal/software_catalog/entity_model/custom_entities
+      parent: software_catalog_entity_model
+      identifier: software_catalog_custom_entities
+      weight: 1022
     - name: Troubleshooting
       url: internal_developer_portal/software_catalog/troubleshooting
       parent: software_catalog
