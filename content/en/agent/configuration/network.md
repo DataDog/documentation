@@ -102,12 +102,14 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 
 {{% /site-region %}}
 
+{{% logs-tcp-disclaimer %}}
+
 [Logs][30] & [HIPAA logs][31]
-: TCP: {{< region-param key=tcp_endpoint code="true" >}}<br>
+: (Deprecated) TCP: {{< region-param key=tcp_endpoint code="true" >}}<br>
 HTTP: {{< region-param key=agent_http_endpoint code="true" >}}<br>
 Other: See [logs endpoints][32]
 
-[HIPAA logs legacy][31]
+[HIPAA logs legacy][31] (Deprecated, TCP not supported)
 : {{< region-param key=hipaa_logs_legacy code="true" >}}
 
 [Metrics][26], [Service Checks][27], [Events][28], and other Agent metadata
@@ -179,7 +181,8 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics<br>Cloud Network Monitoring<br>Universal Service Monitoring | 443 | TCP | Most Agent data uses port 443. |
 | [Custom Agent Autoscaling][22] | 8443 | TCP |  |
-| Log collection | {{< region-param key=web_integrations_port >}} | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
+| Log collection | {{< region-param key=web_integrations_port >}} | (Deprecated) TCP | Logging over TCP. <br>**Note**:TCP log collection is **not supported**. Datadog provides **no delivery or reliability guarantees** when using TCP, and log data may be lost without notice.
+For reliable ingestion, use the HTTP intake endpoint, an official Datadog Agent, or forwarder integration instead. For other connection types, see [logs endpoints][21]. |
 | NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
 [19]: /agent/faq/network-time-protocol-ntp-offset-issues/
