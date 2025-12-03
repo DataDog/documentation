@@ -68,7 +68,7 @@ You can use webhooks to send alerts to other platforms, such as SOAR. To set up 
 1. Enter a name for the webhook.
 1. Enter the webhook URL.
 1. In the **Payload** section, select **Security Signal**.
-{{< img src="security/security_signal_payload.png" alt="The webhooks signal security payload" style="width:100%;" >}}
+  {{< img src="security/security_signal_payload.png" alt="The webhooks signal security payload" style="width:100%;" >}}
 1. See the [Webhooks integration][5] documentation for more information on adding variables, custom variables, custom headers, and encoding as a form.
 1. Click **Save**.
 
