@@ -77,7 +77,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 Your AI coding agent can help configure Datadog for your project. When you provide a setup prompt, the agent:
 
 - Analyzes your project and identifies the framework, language, and bundler
-- Calls the tool and requests permission before running
+- Calls the MCP tool and requests permission before running
 - Applies the configuration changes specified by the tool
 - Provides steps to verify that your application is sending telemetry to Datadog
 

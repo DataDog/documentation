@@ -21,7 +21,7 @@ further_reading:
 
 | | Auto-instrumentation (Preview) | Agentic Onboarding (Preview) | Client-side (Manual) |
 |----------------------|--------------------------------|------------------------------|----------------------|
-| **SDK setup mechanism** | [Automatically][1] add RUM JS to your web app HTML, then manage configurations in the UI. | Use an [AI-guided setup][3] that detects your project's framework and adds the RUM SDK with a single prompt through coding agents. | [Manually][2] add the RUM SDK to your application code and manage configurations in code. |
+| **SDK setup mechanism** | [Automatically][1] add RUM JS to your web app HTML, then manage configurations in the UI. | Use an [AI-guided setup][3] that detects your project's framework and adds the RUM SDK with a single prompt. | [Manually][2] add the RUM SDK to your application code and manage configurations in code. |
 | **Code changes required** | No | Yes (automated by AI agent) | Yes |
 | **Setup complexity** | Low | Low | Medium |
 | **Supported platforms** | Apache, IBM HTTP Server, Java Servlet, Nginx, Windows IIS | Next.js, React, Svelte, Vue, Vanilla JavaScript | All browser-based applications |
