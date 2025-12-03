@@ -1,6 +1,12 @@
 ---
 title: OpenTelemetry Source
 disable_toc: false
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+    tag: Blog
+    text: Manage metric volume and tags in your environment with Observability Pipelines
+
 ---
 
 ## Overview

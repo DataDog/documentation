@@ -12,6 +12,12 @@ aliases:
     - /llm_observability/instrumentation/custom_instrumentation
     - /tracing/llm_observability/trace_an_llm_application
     - /llm_observability/setup
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview

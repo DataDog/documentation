@@ -4,6 +4,12 @@ description: Learn how to configure Evaluations for your LLM application.
 aliases:
     - /tracing/llm_observability/evaluations/
     - /llm_observability/configuration/
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview

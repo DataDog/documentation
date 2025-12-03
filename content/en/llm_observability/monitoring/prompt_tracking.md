@@ -1,6 +1,12 @@
 ---
 title: Prompt Tracking
 description: Use Prompt Tracking to track your prompt templates and versions.
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 In Datadog's LLM Observability, the _Prompt Tracking_ feature links prompt templates and versions to LLM calls. Prompt Tracking works alongside LLM Observability's traces, spans, and Playground.

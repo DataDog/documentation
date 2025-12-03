@@ -1,6 +1,12 @@
 ---
 title: Monitoring AWS Lambda Managed Instances
 description: Install and configure the Datadog Agent for AWS Lambda Managed Instances.
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/lambda-managed-instances
+    tag: Blog
+    text: Monitor AWS Lambda Managed Instances with Datadog
+
 ---
 
 {{< callout url=false

@@ -5,6 +5,12 @@ disable_toc: false
 private: true
 cascade:
     private: true
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
+    tag: Blog
+    text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
+
 ---
 
 ## Overview

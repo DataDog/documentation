@@ -6,6 +6,12 @@ aliases:
 - /security/application_security/software_composition_analysis/
 - /code_analysis/software_composition_analysis/
 - /security/application_security/vulnerability_management/
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
+
 ---
 ## Overview
 

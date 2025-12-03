@@ -2,6 +2,12 @@
 title: Threat Intelligence
 aliases:
   - /security/application_security/threats/threat-intelligence
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/cloud-siem-enterprise-security
+    tag: Blog
+    text: Datadog Cloud SIEM: Driving innovation in security operations
+
 ---
 
 ## Overview

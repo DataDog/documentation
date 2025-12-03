@@ -2,6 +2,12 @@
 title: Sequence
 description: Learn about how the sequence detection method works.
 disable_toc: false
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/cloud-siem-enterprise-security
+    tag: Blog
+    text: Datadog Cloud SIEM: Driving innovation in security operations
+
 ---
 
 ## Overview

@@ -1,6 +1,12 @@
 ---
 title: MCP Clients
 description: Learn how to instrument and monitor MCP clients with LLM Observability.
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/mcp-client-monitoring
+    tag: Blog
+    text: Gain end-to-end visibility into MCP clients with Datadog LLM Observability
+
 ---
 
 You can monitor your MCP clients with Datadog LLM Observability in two ways:

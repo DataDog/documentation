@@ -2,6 +2,12 @@
 title: Forms
 description: Build forms to collect input, analyze responses, and trigger automations.
 disable_toc: false
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/datadog-forms
+    tag: Blog
+    text: Turn feedback into action across your engineering org with Datadog Forms
+
 ---
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSe_OxTl8E_djqF107dKJDhcUuLxh1n9ytEKT6CZa-u8ZPqokg/viewform" btn_hidden="false" header="Join the Preview!" >}}

@@ -4,6 +4,12 @@ description: Use Datadog Secret Scanning to find secrets exposed in source code.
 is_beta: true
 algolia:
   tags: ['secrets scanning', 'secret scanning', 'datadog static analysis', 'SAST']
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
+
 ---
 
 {{% site-region region="gov" %}}
