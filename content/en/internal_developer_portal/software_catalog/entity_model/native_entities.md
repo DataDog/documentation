@@ -1,5 +1,5 @@
 ---
-title: Native Entity Types
+title: Native Entities
 disable_toc: false
 aliases:
 - /internal_developer_portal/software_catalog/entity_model/entity_types

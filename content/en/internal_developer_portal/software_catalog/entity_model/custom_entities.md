@@ -41,7 +41,7 @@ Alternatively, define your custom types through the [Software Catalog API][1].
 
 ### Example entity
 
-In the follow example, a user defines an entity of custom type `library` with links, tags, and owning teams:
+In the following example, a user defines an entity of custom type `library` with links, tags, and owning teams:
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -89,6 +89,6 @@ metadata:
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/software_catalog
 [4]: /integrations/github/
 [5]: /internal_developer_portal/software_catalog/entity_model
-[6]: /internal_developer_portal/software_catalog/entity_model/native_entity_types
+[6]: /internal_developer_portal/software_catalog/entity_model/native_entities
 [7]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 [8]: https://app.datadoghq.com/software/settings/get-started
