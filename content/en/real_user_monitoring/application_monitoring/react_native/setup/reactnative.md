@@ -484,4 +484,3 @@ end
 [12]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [13]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
 [14]: https://reactnative.dev/architecture/landing-page
-[15]: /real_user_monitoring/application_monitoring/ios/agentic_onboarding/?tab=realusermonitoring
