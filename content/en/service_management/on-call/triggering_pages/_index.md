@@ -38,10 +38,22 @@ To page a team through email:
 
 You can also trigger a Page through live call routing, which lets users initiate a Page by calling a dedicated phone number. This provides an additional channel for urgent situations. For setup instructions, see [Live Call Routing][3].
 
-
 ### Page manually
 
 You can manually send a Page directly in the Datadog platform, or through a tool like Slack or Microsoft Teams. This lets you alert a Datadog team or an individual directly (even if they aren't On-Call).
+
+### Reroute Pages
+You can reroute an active Page to a different user or team if it is still open. Pages can only be rerouted when they’re in a Triggered or Acknowledged state, once a page is Resolved, it can’t be reassigned.
+
+To reroute a Page:
+
+1. Open the active Page.
+1. Click Reassign.
+1. Choose the user or team you want to send it to.
+1. (Optional) Add a short message explaining the handoff.
+1. Confirm the reroute.
+
+The new recipient will be notified right away, and the page will continue from its current state.
 
 #### Through Datadog
 
