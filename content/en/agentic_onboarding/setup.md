@@ -69,6 +69,8 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 
 2. Select the MCP server installed in Step 1. You should see a `disconnected - Enter to login` message. Press <kbd>Enter</kbd>.
 3. When you see the option to authenticate, press <kbd>Enter</kbd>. This brings you to the OAuth screen.
+4. After authentication, choose **Open** to continue and grant access to your Datadog account.
+5. Confirm that MCP tools appear under the `datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}` server.
 {{< /site-region >}}
 
 {{% /tab %}}
