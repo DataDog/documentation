@@ -11355,6 +11355,76 @@ components:
       required:
       - type
       type: object
+    ConfiguredSchedule:
+      description: Full resource representation of a configured schedule target with
+        position (previous, current, or next).
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetAttributes'
+        id:
+          description: Specifies the unique identifier of the configured schedule
+            target.
+          example: 00000000-aba1-0000-0000-000000000000_previous
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetRelationships'
+        type:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetType'
+      required:
+      - type
+      - id
+      - attributes
+      - relationships
+      type: object
+    ConfiguredScheduleTarget:
+      description: Relationship reference to a configured schedule target.
+      properties:
+        id:
+          description: Specifies the unique identifier of the configured schedule
+            target.
+          example: 00000000-aba1-0000-0000-000000000000_previous
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetType'
+      required:
+      - type
+      - id
+      type: object
+    ConfiguredScheduleTargetAttributes:
+      description: Attributes for a configured schedule target, including position.
+      example:
+        position: previous
+      properties:
+        position:
+          $ref: '#/components/schemas/ScheduleTargetPosition'
+      required:
+      - position
+      type: object
+    ConfiguredScheduleTargetRelationships:
+      description: Represents the relationships of a configured schedule target.
+      properties:
+        schedule:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetRelationshipsSchedule'
+      required:
+      - schedule
+      type: object
+    ConfiguredScheduleTargetRelationshipsSchedule:
+      description: Holds the schedule reference for a configured schedule target.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleTarget'
+      required:
+      - data
+      type: object
+    ConfiguredScheduleTargetType:
+      default: schedule_target
+      description: Indicates that the resource is of type `schedule_target`.
+      enum:
+      - schedule_target
+      example: schedule_target
+      type: string
+      x-enum-varnames:
+      - SCHEDULE_TARGET
     ConfluentAccountCreateRequest:
       description: Payload schema when adding a Confluent account.
       properties:
@@ -19038,6 +19108,8 @@ components:
                 type: users
               - id: 00000000-aba2-0000-0000-000000000000
                 type: schedules
+              - id: 00000000-aba2-0000-0000-000000000000_previous
+                type: schedule_target
               - id: 00000000-aba3-0000-0000-000000000000
                 type: teams
           type: steps
@@ -19045,6 +19117,15 @@ components:
           type: users
         - id: 00000000-aba2-0000-0000-000000000000
           type: schedules
+        - attributes:
+            position: previous
+          id: 00000000-aba2-0000-0000-000000000000_previous
+          relationships:
+            schedule:
+              data:
+                id: 00000000-aba2-0000-0000-000000000000
+                type: schedules
+          type: schedule_target
         - id: 00000000-aba3-0000-0000-000000000000
           type: teams
       properties:
@@ -19072,7 +19153,10 @@ components:
               targets:
               - id: 00000000-aba1-0000-0000-000000000000
                 type: users
-              - id: 00000000-aba2-0000-0000-000000000000
+              - config:
+                  schedule:
+                    position: previous
+                id: 00000000-aba2-0000-0000-000000000000
                 type: schedules
               - id: 00000000-aba3-0000-0000-000000000000
                 type: teams
@@ -19116,6 +19200,7 @@ components:
         name:
           description: Specifies the name for the new escalation policy.
           example: On-Call Escalation Policy
+          minLength: 1
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -19125,12 +19210,16 @@ components:
           description: Specifies how many times the escalation sequence is retried
             if there is no response.
           format: int64
+          maximum: 10
+          minimum: 0
           type: integer
         steps:
           description: A list of escalation steps, each defining assignment, escalation
             timeout, and targets for the new policy.
           items:
             $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributesStepsItems'
+          maxItems: 10
+          minItems: 1
           type: array
       required:
       - name
@@ -19147,6 +19236,8 @@ components:
             step.
           example: 3600
           format: int64
+          maximum: 36000
+          minimum: 60
           type: integer
         targets:
           description: Specifies the collection of escalation targets for this step.
@@ -19198,6 +19289,7 @@ components:
         name:
           description: Specifies the name of the escalation policy.
           example: On-Call Escalation Policy
+          minLength: 1
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -19207,6 +19299,8 @@ components:
           description: Specifies how many times the escalation sequence is retried
             if there is no response.
           format: int64
+          maximum: 10
+          minimum: 0
           type: integer
       required:
       - name
@@ -19269,10 +19363,11 @@ components:
       description: Represents included related resources when retrieving an escalation
         policy, such as teams, steps, or targets.
       oneOf:
-      - $ref: '#/components/schemas/TeamReference'
       - $ref: '#/components/schemas/EscalationPolicyStep'
       - $ref: '#/components/schemas/EscalationPolicyUser'
       - $ref: '#/components/schemas/ScheduleData'
+      - $ref: '#/components/schemas/ConfiguredSchedule'
+      - $ref: '#/components/schemas/TeamReference'
     EscalationPolicyStep:
       description: Represents a single step in an escalation policy, including its
         attributes, relationships, and resource type.
@@ -19320,14 +19415,28 @@ components:
       type: object
     EscalationPolicyStepTarget:
       description: Defines a single escalation target within a step for an escalation
-        policy creation request. Contains `id` and `type`.
+        policy creation request. Contains `id`, `type`, and optional `config`.
       properties:
+        config:
+          $ref: '#/components/schemas/EscalationPolicyStepTargetConfig'
         id:
           description: Specifies the unique identifier for this target.
           example: 00000000-aba1-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/EscalationPolicyStepTargetType'
+      type: object
+    EscalationPolicyStepTargetConfig:
+      description: Configuration for an escalation target, such as schedule position.
+      properties:
+        schedule:
+          $ref: '#/components/schemas/EscalationPolicyStepTargetConfigSchedule'
+      type: object
+    EscalationPolicyStepTargetConfigSchedule:
+      description: Schedule-specific configuration for an escalation target.
+      properties:
+        position:
+          $ref: '#/components/schemas/ScheduleTargetPosition'
       type: object
     EscalationPolicyStepTargetType:
       description: Specifies the type of escalation target (example `users`, `schedules`,
@@ -19409,6 +19518,7 @@ components:
         name:
           description: Specifies the name of the escalation policy.
           example: On-Call Escalation Policy
+          minLength: 1
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -19418,12 +19528,16 @@ components:
           description: Specifies how many times the escalation sequence is retried
             if there is no response.
           format: int64
+          maximum: 10
+          minimum: 0
           type: integer
         steps:
           description: A list of escalation steps, each defining assignment, escalation
             timeout, and targets.
           items:
             $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributesStepsItems'
+          maxItems: 10
+          minItems: 1
           type: array
       required:
       - name
@@ -19441,6 +19555,8 @@ components:
             step.
           example: 3600
           format: int64
+          maximum: 36000
+          minimum: 60
           type: integer
         id:
           description: Specifies the unique identifier of this step.
@@ -19549,12 +19665,13 @@ components:
       x-enum-varnames:
       - USERS
     EscalationTarget:
-      description: Represents an escalation target, which can be a team, user, or
-        schedule.
+      description: Represents an escalation target, which can be a team, user, schedule,
+        or configured schedule target.
       oneOf:
       - $ref: '#/components/schemas/TeamTarget'
       - $ref: '#/components/schemas/UserTarget'
       - $ref: '#/components/schemas/ScheduleTarget'
+      - $ref: '#/components/schemas/ConfiguredScheduleTarget'
     EscalationTargets:
       description: A list of escalation targets for a step
       properties:
@@ -45870,7 +45987,8 @@ components:
       type: object
     ScheduleTarget:
       description: Represents a schedule target for an escalation policy step, including
-        its ID and resource type.
+        its ID and resource type. This is a shortcut for a configured schedule target
+        with position set to 'current'.
       properties:
         id:
           description: Specifies the unique identifier of the schedule resource.
@@ -45882,6 +46000,19 @@ components:
       - type
       - id
       type: object
+    ScheduleTargetPosition:
+      description: Specifies the position of a schedule target (example `previous`,
+        `current`, or `next`).
+      enum:
+      - previous
+      - current
+      - next
+      example: previous
+      type: string
+      x-enum-varnames:
+      - PREVIOUS
+      - CURRENT
+      - NEXT
     ScheduleTargetType:
       default: schedules
       description: Indicates that the resource is of type `schedules`.
