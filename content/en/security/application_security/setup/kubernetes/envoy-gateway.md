@@ -58,8 +58,8 @@ datadog:
       autoDetect: true
       processor:
         service:
-          name: datadog-aap-extproc-service
-          namespace: datadog
+          name: datadog-aap-extproc-service  # Required: name of the processor service
+          namespace: datadog                  # Optional: defaults to Cluster Agent namespace
         port: 443
 ```
 
@@ -80,7 +80,7 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 kubectl get envoyextensionpolicy -A
 ```
 
-For detailed configuration options, advanced features, and troubleshooting, see the [Appsec Injector documentation](./appsec-injector).
+For detailed configuration options, advanced features, and troubleshooting, see the [Appsec Injector documentation](/containers/kubernetes/appsec).
 
 ## Manual configuration (alternative)
 

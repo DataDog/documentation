@@ -27,7 +27,6 @@ Learn how to set up App and API Protection (AAP) on your Kubernetes clusters by 
 </div>
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Appsec Injector" avatar="datadog" link="./appsec-injector" >}}
   {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
   {{< appsec-integration name="Envoy Gateway" avatar="envoy" link="./envoy-gateway" >}}
   {{< appsec-integration name="Gateway API" src="integrations_logos/gateway-api_avatar.svg" link="./gateway-api" >}}

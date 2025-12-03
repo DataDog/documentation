@@ -3,6 +3,7 @@ title: Kubernetes Application Security - Appsec Injector
 description: Automatically enable Application Security monitoring for ingress proxies and gateways in Kubernetes
 aliases:
     - /agent/kubernetes/appsec
+    - /security/application_security/setup/kubernetes/appsec-injector
 further_reading:
 - link: "/containers/kubernetes/apm/"
   tag: "Documentation"
@@ -10,15 +11,18 @@ further_reading:
 - link: "/containers/kubernetes/log/"
   tag: "Documentation"
   text: "Collect your application logs"
-- link: "/security/application_security/setup/kubernetes/appsec-injector"
-  tag: "Documentation"
-  text: "Appsec Injector detailed documentation"
 - link: "/security/application_security/setup/kubernetes/envoy-gateway"
   tag: "Documentation"
   text: "App and API Protection for Envoy Gateway"
 - link: "/security/application_security/setup/kubernetes/istio"
   tag: "Documentation"
   text: "App and API Protection for Istio"
+- link: "/security/default_rules/?category=cat-application-security"
+  tag: "Documentation"
+  text: "OOTB App and API Protection Rules"
+- link: "/security/application_security/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting App and API Protection"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Appsec Injector is in Preview" >}}
@@ -31,21 +35,22 @@ This page describes how to set up the Datadog Appsec Injector to automatically e
 
 The Datadog Appsec Injector automatically configures ingress proxies and gateways in your Kubernetes cluster to enable Application Security monitoring. This eliminates the need for manual proxy configuration and provides API-wide security coverage without modifying individual services or deploying tracers across your application fleet.
 
-### How it works
+### What is the Appsec Injector?
 
-The Appsec Injector:
-1. **Detects proxies**: Automatically discovers supported proxies (Envoy Gateway, Istio) in your cluster
-2. **Configures routing**: Creates proxy configuration resources to route traffic through an external Application Security processor
-3. **Enables monitoring**: Allows the processor to analyze traffic for security threats and attacks
+The Appsec Injector is a Kubernetes controller that:
+- **Automatically detects** supported proxies in your cluster (Envoy Gateway, Istio)
+- **Configures proxies** to route traffic through an external Application Security processor
+- **Enables threat detection** for all traffic passing through your ingress layer
+- **Simplifies operations** through centralized configuration with Helm
 
 ### Supported proxies
 
 - **Envoy Gateway**: Automatically creates `EnvoyExtensionPolicy` resources
 - **Istio**: Automatically creates `EnvoyFilter` resources in the Istio system namespace
 
-## Setup
+More proxies are available via manual installation on the global [setup page][10].
 
-### Prerequisites
+## Prerequisites
 
 Before enabling the Appsec Injector, ensure you have:
 
@@ -56,11 +61,36 @@ Before enabling the Appsec Injector, ensure you have:
    - [Istio][3]
 4. [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
 
+## How it works
+
+The Appsec Injector operates in **External Mode**, where a single Application Security processor deployment serves all gateway traffic in your cluster.
+
+### Architecture
+
+1. **External Processor Deployment**: You deploy a centralized Application Security processor as a Kubernetes Deployment with an associated Service.
+2. **Automatic Proxy Detection**: The Appsec Injector controller watches for supported proxy resources in your cluster using Kubernetes informers.
+3. **Automatic Configuration**: When proxies are detected, the injector creates the necessary configuration:
+   - For Envoy Gateway: Creates `EnvoyExtensionPolicy` resources that reference the external processor service
+   - For Istio: Creates `EnvoyFilter` resources in the Istio system namespace
+4. **Traffic Processing**: Gateways route traffic to the external processor via the Kubernetes service for security analysis.
+
+### Benefits
+
+- **Resource Efficient**: A single shared processor handles traffic from all gateways
+- **Centralized Management**: One deployment to monitor, scale, and configure
+- **Infrastructure-as-Code**: Manage configuration through Helm values
+- **Non-Invasive**: No application code changes required
+- **Scalable**: Easily add new gateways without additional configuration
+
+## Setup
+
 ### Step 1: Deploy the external processor
 
 Deploy the Datadog Application Security external processor service. This processor analyzes traffic forwarded from your gateways.
 
-Create a Kubernetes Deployment and Service:
+For detailed deployment instructions and configuration options, see the [Envoy Gateway documentation][6] or [Istio documentation][7].
+
+Example processor deployment:
 
 ```yaml
 apiVersion: apps/v1
@@ -125,7 +155,9 @@ Apply the manifest:
 kubectl apply -f datadog-aap-extproc-service.yaml
 ```
 
-### Step 2: Enable the Appsec Injector
+### Step 2: Configure the Appsec Injector
+
+Enable the injector and configure it to use your external processor service.
 
 Configure the Appsec Injector using Helm values. Add the following to your `values.yaml`:
 
@@ -139,11 +171,11 @@ datadog:
       # Enable automatic proxy detection (recommended)
       autoDetect: true
 
-      # External processor configuration
+      # External processor configuration (required)
       processor:
         service:
-          name: datadog-aap-extproc-service
-          namespace: datadog
+          name: datadog-aap-extproc-service  # Required: name of the processor service
+          namespace: datadog                  # Optional: defaults to Cluster Agent namespace
         port: 443
 ```
 
@@ -153,26 +185,11 @@ Install or upgrade the Datadog Helm chart:
 helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
 
-### Step 3: Verify the setup
+### Step 3: Enable auto-detection or specify proxies
 
-Verify the injector is running and has detected your proxies:
+**Auto-detection (recommended)**: Set `autoDetect: true` to automatically detect and configure all supported proxies in your cluster.
 
-```bash
-# Check Cluster Agent logs
-kubectl logs -n datadog deployment/datadog-cluster-agent | grep "appsec.*injector"
-
-# For Envoy Gateway - check for created policies
-kubectl get envoyextensionpolicy -A
-
-# For Istio - check for created filters
-kubectl get envoyfilter -n istio-system
-```
-
-## Configuration options
-
-### Manual proxy specification
-
-Instead of auto-detection, you can explicitly list the proxy types to configure:
+**Manual specification**: Alternatively, explicitly list the proxy types to configure:
 
 ```yaml
 datadog:
@@ -183,93 +200,126 @@ datadog:
       proxies:
         - envoy-gateway
         - istio
-      processor:
-        service:
-          name: datadog-aap-extproc-service
-          namespace: datadog
-        port: 443
 ```
 
-### Processor configuration
+### Step 4: verify installation
 
-Customize the external processor service connection:
-
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `processor.service.name` | String | - | Name of the external processor Kubernetes Service |
-| `processor.service.namespace` | String | - | Namespace where the external processor Service is deployed |
-| `processor.address` | String | - | (Optional) Full service address. Defaults to `{service.name}.{service.namespace}.svc` |
-| `processor.port` | Integer | `443` | Port of the external processor service |
-
-## Validation
-
-After enabling the Appsec Injector, verify that Application Security monitoring is active:
-
-### Check proxy configuration
-
-For **Envoy Gateway**, verify that `EnvoyExtensionPolicy` resources were created:
-
-```bash
-kubectl get envoyextensionpolicy -A
-kubectl describe envoyextensionpolicy <policy-name> -n <namespace>
-```
-
-For **Istio**, verify that `EnvoyFilter` resources were created:
-
-```bash
-kubectl get envoyfilter -n istio-system
-kubectl describe envoyfilter <filter-name> -n istio-system
-```
-
-### Test traffic processing
-
-Send test requests through your gateway and verify they appear in the Datadog App and API Protection UI:
-
-1. Navigate to [Security > Application Security][5] in Datadog
-2. Look for security signals from your gateway traffic
-3. Verify that threat detection is active
-
-## Troubleshooting
-
-### Injector not detecting proxies
-
-**Check Cluster Agent logs:**
+After applying your configuration, verify the injector is running:
 
 ```bash
 kubectl logs -n datadog deployment/datadog-cluster-agent | grep appsec
 ```
 
-**Verify configuration:**
-- Ensure `autoDetect: true` is set or proxies are manually specified
-- Confirm your proxies are installed and have the expected Kubernetes resources
+Look for log messages indicating the injector has started and detected proxies.
+
+#### Verify proxy configuration
+
+For **Envoy Gateway**, check that `EnvoyExtensionPolicy` resources were created:
+
+```bash
+kubectl get envoyextensionpolicy -A
+```
+
+For **Istio**, check that `EnvoyFilter` resources were created:
+
+```bash
+kubectl get envoyfilter -n istio-system
+```
+
+#### Test traffic processing
+
+Send requests through your gateway and verify they appear in the Datadog App and API Protection UI:
+
+1. Navigate to [Security > Application Security][5] in Datadog
+2. Look for security signals from your gateway traffic
+3. Verify that threat detection is active
+
+## Configuration reference
+
+### Injector options
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `enabled` | Boolean | `false` | Enable or disable the Appsec Injector |
+| `autoDetect` | Boolean | `true` | Automatically detect and configure supported proxies |
+| `proxies` | Array | `[]` | Manual list of proxy types to configure. Valid values: `"envoy-gateway"`, `"istio"` |
+| `processor.service.name` | String | - | **Required.** Name of the external processor Kubernetes Service |
+| `processor.service.namespace` | String | Cluster Agent namespace | Namespace where the external processor Service is deployed. Defaults to the namespace where the Cluster Agent is running |
+| `processor.address` | String | `{service.name}.{service.namespace}.svc` | (Optional) Full service address override |
+| `processor.port` | Integer | `443` | Port of the external processor service |
+
+### Proxy types
+
+- `envoy-gateway`: Configures Envoy Gateway using `EnvoyExtensionPolicy` resources
+- `istio`: Configures Istio using global `EnvoyFilter` resources in the Istio system namespace
+
+## Troubleshooting
+
+### Injector not detecting proxies
+
+**Symptom**: No `EnvoyExtensionPolicy` or `EnvoyFilter` resources are created.
+
+**Solutions**:
+- Check that `autoDetect` is set to `true` or proxies are manually specified
+- Verify the Cluster Agent logs for proxy detection messages
+- Ensure your proxies are installed and have the expected Kubernetes resources (Gateway, GatewayClass)
+- Try manually specifying proxy types using the `proxies` parameter
 
 ### EnvoyExtensionPolicy or EnvoyFilter not created
 
-**Check for RBAC permission errors:**
+**Symptom**: Injector is running but configuration resources are missing.
 
-```bash
-kubectl logs -n datadog deployment/datadog-cluster-agent | grep -i permission
-```
-
-**Verify the Cluster Agent has permissions for:**
-- `gateway.envoyproxy.io/envoyextensionpolicies` (create, update, delete, get, list, watch)
-- `networking.istio.io/envoyfilters` (create, update, delete, get, list, watch)
-- `gateway.networking.k8s.io/gateways` (get, list, watch)
-- `gateway.networking.k8s.io/gatewayclasses` (get, list, watch)
+**Solutions**:
+- Check Cluster Agent logs for RBAC permission errors
+- Verify the Cluster Agent service account has permissions to create `EnvoyExtensionPolicy` or `EnvoyFilter` resources
+- Ensure the processor service exists and is accessible
+- Check for conflicting existing policies or filters
 
 ### Traffic not being processed
 
-**Verify the external processor is running:**
+**Symptom**: No security events appear in the Datadog UI.
 
-```bash
-kubectl get pods -n datadog -l app=datadog-aap-extproc
-kubectl logs -n datadog -l app=datadog-aap-extproc
-```
+**Solutions**:
+- Verify the external processor deployment is running: `kubectl get pods -n datadog -l app=datadog-aap-extproc`
+- Look for warning logs in your reverse proxies concerning this part of the configuration.
+- Check processor logs for connection errors: `kubectl logs -n datadog -l app=datadog-aap-extproc`
+- Verify the processor service is correctly configured and resolvable
+- Test connectivity from gateway pods to the processor service
+- Ensure [Remote Configuration][4] is enabled in your Datadog Agent
 
-**Check connectivity:**
-- Verify the processor service exists: `kubectl get svc -n datadog datadog-aap-extproc-service`
-- Test DNS resolution from gateway pods
+### External processor connection issues
+
+**Symptom**: Gateways cannot reach the external processor.
+
+**Solutions**:
+- Verify the processor service name and namespace match your configuration
 - Check for NetworkPolicy rules blocking cross-namespace traffic
+- For Envoy Gateway: Ensure `ReferenceGrant` resources exist for cross-namespace service references
+- Test DNS resolution from gateway pods: `nslookup datadog-aap-extproc-service.datadog.svc.cluster.local`
+- Verify the processor port configuration matches the service definition
+
+### RBAC permission errors
+
+**Symptom**: Cluster Agent logs show permission denied errors.
+
+**Solutions**:
+- Verify the Cluster Agent ClusterRole includes permissions for:
+  - `gateway.envoyproxy.io/envoyextensionpolicies` (create, update, delete, get, list, watch)
+  - `networking.istio.io/envoyfilters` (create, update, delete, get, list, watch)
+  - `gateway.networking.k8s.io/gateways` (get, list, watch)
+  - `gateway.networking.k8s.io/gatewayclasses` (get, list, watch)
+- Check that the ClusterRoleBinding references the correct service account
+
+## Limitations
+
+- The Appsec Injector is in Preview and subject to change
+- Requires Datadog Cluster Agent 7.73.0 or later
+- Supported proxy types: Envoy Gateway, Istio
+- External processor must be manually deployed and scaled
+- Cross-namespace service references require appropriate NetworkPolicy and ReferenceGrant configuration
+- For specific proxy version compatibility, see:
+  - [Envoy Gateway compatibility][8]
+  - [Istio compatibility][9]
 
 ## Further Reading
 
@@ -280,3 +330,8 @@ kubectl logs -n datadog -l app=datadog-aap-extproc
 [3]: https://istio.io/
 [4]: /agent/remote_config/?tab=helm#enabling-remote-configuration
 [5]: https://app.datadoghq.com/security/appsec
+[6]: /security/application_security/setup/kubernetes/envoy-gateway
+[7]: /security/application_security/setup/kubernetes/istio
+[8]: /security/application_security/setup/compatibility/envoy-gateway
+[9]: /security/application_security/setup/compatibility/istio
+[10]: /security/application_security/setup/kubernetes/
