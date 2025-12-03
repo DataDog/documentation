@@ -11,7 +11,7 @@ assets:
     metrics:
       check:
       - aws.bedrock.invocations
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.bedrock.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -171,6 +171,78 @@ Si tienes problemas durante la configuración, habilita el registro de depuraci�
 
 Aquí se muestran todos los errores relacionados con la instrumentación o transmisión de datos, incluidos los problemas con las trazas de Amazon Bedrock.
 
+#### Instalación para Node.js
+
+##### Si no dispones del Datadog Agent:
+1. Instala el paquete `dd-trace`:
+
+   ```shell
+     npm install dd-trace
+   ```
+
+2. Inicia tu aplicación con el siguiente comando, habilitando el modo sin agente:
+
+   ```shell
+     DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_AGENTLESS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> node -r 'dd-trace/init' <your_app>.js
+   ```
+
+##### Si ya tienes instalado el Datadog Agent:
+1. Asegúrate de que el Agent se está ejecutando y que APM está activado. Por ejemplo, utiliza el siguiente comando con Docker:
+
+   ```shell
+   docker run -d \
+     --cgroupns host \
+     --pid host \
+     -v /var/run/docker.sock:/var/run/docker.sock:ro \
+     -v /proc/:/host/proc/:ro \
+     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+     -e DD_API_KEY=<DATADOG_API_KEY> \
+     -p 127.0.0.1:8126:8126/tcp \
+     -p 127.0.0.1:8125:8125/udp \
+     -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
+     -e DD_APM_ENABLED=true \
+     gcr.io/datadoghq/agent:latest
+   ```
+
+2. Instala la biblioteca Node.js de Datadog APM.
+
+   ```shell
+   npm install dd-trace
+   ```
+
+3. Inicia tu aplicación utilizando el comando `-r dd-trace/init` o `NODE_OPTIONS='--require dd-trace/init'` para habilitar automáticamente el rastreo:
+
+   ```shell
+   DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> node -r 'dd-trace/init' <your_app>.js
+   ```
+
+**Nota**: Si el Agent se ejecuta en un host o puerto personalizado, configura `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT` según corresponda.
+
+##### Si ejecutas la observabilidad de LLM en un entorno serverless (AWS Lambda):
+1. Habilita la observabilidad de LLM al configurar las siguientes variables de entorno:
+
+   ```shell
+   DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
+   ```
+
+2. Antes de que termine la función Lambda, llama a `llmobs.flush()`:
+
+   ```js
+   const llmobs = require('dd-trace').llmobs;
+   // or, if dd-trace was not initialized via NODE_OPTIONS
+   const llmobs = require('dd-trace').init({
+     llmobs: {
+       mlApp: <YOUR_ML_APP>,
+     }
+   }).llmobs; // with DD_API_KEY and DD_SITE being set at the environment level
+
+   async function handler (event, context) {
+     ...
+     llmobs.flush()
+     return ...
+   }
+   ```
+
 ### APM: obtén métricas de uso para aplicaciones de Python
 
 Si aún no lo has hecho, configura la [integración Amazon Web Services][3].
@@ -183,7 +255,7 @@ Si aún no lo has hecho, configura la [integración Amazon Web Services][3].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-bedrock" >}}
+{{< get-metrics-from-git "amazon_bedrock" >}}
 
 
 ### Eventos
@@ -194,9 +266,9 @@ La integración de Amazon Bedrock no incluye eventos.
 
 La integración de Amazon Bedrock no incluye checks de servicio.
 
-## Solucionar problemas
+## Resolución de problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][7].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
 ## Referencias adicionales
 
@@ -209,6 +281,6 @@ Más enlaces, artículos y documentación útiles:
 [3]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://app.datadoghq.com/integrations/amazon-bedrock
-[6]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_bedrock/metadata.csv
+[6]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_bedrock/assets/metrics/metric-spec.yaml
 [7]: https://docs.datadoghq.com/es/help/
 [8]: https://www.datadoghq.com/blog/monitor-amazon-bedrock-with-datadog/

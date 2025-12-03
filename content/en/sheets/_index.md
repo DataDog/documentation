@@ -10,6 +10,10 @@ further_reading:
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/flexible-spreadsheets-in-datadog-sheets/">}}
+Create flexible spreadsheets: built to let you start from scratch, build models, track operations, and more.
+{{< /callout >}}
+
 ## Overview
 
 Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don't have to export and use another tool with stale data.

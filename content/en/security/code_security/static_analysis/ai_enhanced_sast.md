@@ -130,7 +130,7 @@ From each remediation, you can modify the fix suggested by Bits AI directly in t
 ### Fix multiple vulnerabilities in batches with campaigns
 Datadog SAST saves time by replacing the filing of individual pull requests to fix vulnerabilities with bulk-remediation **campaigns** that can fix multiple vulnerabilities at once.
 
-A **campaign** is how teams in Datadog operationalize remediation at scale. Creating a campaign tells Datadog to generate remediations for a certain subset of vulnerabilities in your codebase. Each campaign can also automatically create pull requests to apply fixes for all vulnerabilities in scope of the campaign.
+A **campaign** is how teams in Datadog operationalize remediation at scale. Creating a campaign tells Datadog to generate remediations for a certain subset of vulnerabilities in your codebase. Each campaign can also automatically create pull requests to apply fixes for all vulnerabilities in the scope of the campaign.
 
 A campaign defines the following:
 

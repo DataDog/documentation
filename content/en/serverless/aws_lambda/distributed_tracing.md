@@ -61,6 +61,7 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
   - EventBridge
   - DynamoDB
   - S3
+  - Step Functions
 - Tracing dozens of additional out-of-the-box [Python][3] and [Node.js][4] libraries.
 
 For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][5].

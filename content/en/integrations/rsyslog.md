@@ -452,8 +452,4 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 Need help? Contact [Datadog support][1].
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /help/

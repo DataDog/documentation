@@ -4,6 +4,7 @@ description: Automatically adjust sampling rates to match specific budgets while
 disable_toc: false
 aliases:
     - /tracing/guide/adaptive_sampling
+site_support_id: adaptive_sampling
 further_reading:
     - link: "/tracing/trace_pipeline/ingestion_mechanisms"
       tag: "Documentation"

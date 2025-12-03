@@ -182,10 +182,6 @@ In the last section, for everything that was not explicitly configured by the pr
 
 Need help? Contact [Datadog support][6].
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /agent/kubernetes/#installation
 [2]: https://www.youtube.com/watch?v=raJRLmGb9Is&t=1s
 [3]: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/

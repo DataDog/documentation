@@ -1,0 +1,50 @@
+{
+  "data": [
+    {
+      "type": "jira_issues",
+      "attributes": {},
+      "relationships": {
+        "case": {
+          "data": {
+            "type": "cases",
+            "id": "6a773295-8729-4034-aada-53b64cbe02e7"
+          }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "type": "cases",
+      "attributes": {
+        "title": "A title",
+        "description": "A description"
+      },
+      "relationships": {
+        "project": {
+          "data": {
+            "type": "projects",
+            "id": "959a6f71-bac8-4027-b1d3-2264f569296f"
+          }
+        },
+        "findings": {
+          "data": [
+            {
+              "type": "findings",
+              "id": "ZGZhMDI3ZjdjMDM3YjJmNzcxNTlhZGMwMjdmZWNiNTZ-MTVlYTNmYWU3NjNlOTNlYTE2YjM4N2JmZmI4Yjk5N2Y="
+            }
+          ]
+        }
+      },
+      "id": "6a773295-8729-4034-aada-53b64cbe02e7"
+    },
+    {
+      "type": "projects",
+      "id": "959a6f71-bac8-4027-b1d3-2264f569296f"
+    },
+    {
+      "type": "findings",
+      "id": "ZGZhMDI3ZjdjMDM3YjJmNzcxNTlhZGMwMjdmZWNiNTZ-MTVlYTNmYWU3NjNlOTNlYTE2YjM4N2JmZmI4Yjk5N2Y="
+    }
+  ]
+}

@@ -12,9 +12,9 @@ further_reading:
   text: "Learn more about Packs"
 ---
 
-{{< callout
- btn_hidden="true" header="false">}}
-Rehydration is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/rehydration-for-observability-pipelines/"
+ btn_hidden="false">}}
+Rehydration is in Preview. Fill out the form to request access.
 {{< /callout >}}
 
 ## Overview

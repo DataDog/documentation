@@ -3094,6 +3094,66 @@ menu:
         unstable:
           - v2
         order: 28
+    - name: Create Jira issues for security findings
+      url: '#create-jira-issues-for-security-findings'
+      identifier: security-monitoring-create-jira-issues-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateJiraIssues
+        unstable: []
+        order: 7
+    - name: Attach security findings to a Jira issue
+      url: '#attach-security-findings-to-a-jira-issue'
+      identifier: security-monitoring-attach-security-findings-to-a-jira-issue
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachJiraIssue
+        unstable: []
+        order: 8
+    - name: Attach security findings to a case
+      url: '#attach-security-findings-to-a-case'
+      identifier: security-monitoring-attach-security-findings-to-a-case
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachCase
+        unstable: []
+        order: 5
+    - name: Create cases for security findings
+      url: '#create-cases-for-security-findings'
+      identifier: security-monitoring-create-cases-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCases
+        unstable: []
+        order: 4
+    - name: Detach security findings from their case
+      url: '#detach-security-findings-from-their-case'
+      identifier: security-monitoring-detach-security-findings-from-their-case
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DetachCase
+        unstable: []
+        order: 6
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -11115,49 +11175,6 @@ menu:
         unstable:
           - v2
         order: 2
-    - name: Team Connections
-      url: /api/latest/team-connections/
-      identifier: team-connections
-      generated: true
-    - name: Create team connections
-      url: '#create-team-connections'
-      identifier: team-connections-create-team-connections
-      parent: team-connections
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateTeamConnections
-        unstable:
-          - v2
-        order: 2
-    - name: List team connections
-      url: '#list-team-connections'
-      identifier: team-connections-list-team-connections
-      parent: team-connections
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListTeamConnections
-        unstable:
-          - v2
-        order: 1
-    - name: Delete team connections
-      url: '#delete-team-connections'
-      identifier: team-connections-delete-team-connections
-      parent: team-connections
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteTeamConnections
-        unstable:
-          - v2
-        order: 3
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
@@ -11407,6 +11424,45 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Create team connections
+      url: '#create-team-connections'
+      identifier: teams-create-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamConnections
+        unstable:
+          - v2
+        order: 2
+    - name: List team connections
+      url: '#list-team-connections'
+      identifier: teams-list-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamConnections
+        unstable:
+          - v2
+        order: 1
+    - name: Delete team connections
+      url: '#delete-team-connections'
+      identifier: teams-delete-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamConnections
+        unstable:
+          - v2
+        order: 3
     - name: Get a team hierarchy link
       url: '#get-a-team-hierarchy-link'
       identifier: teams-get-a-team-hierarchy-link

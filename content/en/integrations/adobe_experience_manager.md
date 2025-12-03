@@ -64,10 +64,6 @@ _Available for Agent version >6.0_
 
 Need help? Contact [Datadog support][4].
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/guide/agent-commands/#restart-the-agent

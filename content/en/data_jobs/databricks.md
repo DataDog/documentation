@@ -358,7 +358,13 @@ If some jobs are not visible, navigate to the [Configuration][9] page to underst
 
 ## Troubleshooting
 
-{{% djm-install-troubleshooting %}}
+If you don't see any data in DJM after installing the product, follow these steps.
+
+1. **API Key Validation:** If the init script was manually installed, but cluster data still isn't showing up in the DJM product, use the [Validate API key endpoint][25] to ensure that the Datadog API key specified in the script is valid.
+1. **Agent Validation:** The init script installs the Datadog Agent. To make sure it is properly installed, connect to the cluster with SSH and run the Agent status command:
+  ```shell
+  sudo datadog-agent status
+  ```
 
 ## Advanced Configuration
 
@@ -462,3 +468,4 @@ If you are controlling Databricks API access with [IP access lists][13], allow-l
 [22]: https://docs.databricks.com/aws/en/security/auth/access-control#lakeflow-declarative-pipelines-acls
 [23]: https://docs.databricks.com/aws/en/security/auth/access-control#query-acls
 [24]: https://docs.databricks.com/aws/en/security/auth/access-control#sql-warehouse-acls
+[25]: https://docs.datadoghq.com/api/latest/authentication/?code-lang=curl#validate-api-key
