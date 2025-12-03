@@ -1012,26 +1012,26 @@
     "request_schema_description": "Details of the global variable to create."
   },
   "ListHostTags": {
-    "description": "Return a mapping of tags to hosts for your whole infrastructure.",
-    "summary": "Get Tags"
+    "description": "Return a mapping of tags to hosts for your whole infrastructure. There is a restriction of 10,000 hostnames from your organization that can be attached to tags and returned.",
+    "summary": "Get All Hosts' Tags"
   },
   "DeleteHostTags": {
     "description": "This endpoint allows you to remove all user-assigned tags\nfor a single host.",
-    "summary": "Remove host tags"
+    "summary": "Remove Host Tags"
   },
   "GetHostTags": {
     "description": "Return the list of tags that apply to a given host.",
-    "summary": "Get host tags"
+    "summary": "Get Host Tags"
   },
   "CreateHostTags": {
     "description": "This endpoint allows you to add new tags to a host,\noptionally specifying where these tags come from.",
-    "summary": "Add tags to a host",
+    "summary": "Add Tags to a Host",
     "request_description": "Update host tags request body.",
     "request_schema_description": "Set of tags to associate with your host."
   },
   "UpdateHostTags": {
     "description": "This endpoint allows you to update/replace all tags in\nan integration source with those supplied in the request.",
-    "summary": "Update host tags",
+    "summary": "Update Host Tags",
     "request_description": "Add tags to host",
     "request_schema_description": "Set of tags to associate with your host."
   },
