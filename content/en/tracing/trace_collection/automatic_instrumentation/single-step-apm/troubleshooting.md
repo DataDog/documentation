@@ -2,8 +2,11 @@
 title: Troubleshooting Single Step APM
 further_reading:
 - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
-  tag: "Documentation"
-  text: "Single Step APM Instrumentation"
+  tag: Documentation
+  text: Single Step APM Instrumentation
+- link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
+  tag: Learning Center
+  text: Troubleshooting APM Instrumentation on a Host
 ---
 
 ## Overview
@@ -17,11 +20,11 @@ You can troubleshoot injection issues in two ways: by using Fleet Automation in 
 ### Troubleshoot injection in Datadog Fleet Automation
 
 
-Using Datadog, you can identify and troubleshoot instrumentation issues across your infrastructure. You can see information like:
-- Which hosts have SSI enabled
-- Which processes failed instrumentation and why
-- Which services were instrumented successfully
-- Process-level details to help debug injection failures
+Fleet Automation provides two types of instrumentation insights for SSI:
+- **Process-level insights** show instrumentation status and SDK installation details for individual hosts or containers.
+- **Kubernetes cluster insights** provide a higher-level view of instrumentation across your clusters, helping you understand how SSI configuration and injection are applied at scale.
+
+Together, these views let you diagnose injection issues from both the process and cluster perspectives.
 
 #### Prerequisites
 
@@ -31,9 +34,9 @@ This functionality is available for:
 - **Environments**: Linux hosts, containers, Kubernetes
 - Datadog Agent v7.68.2+
 
-#### View SSI troubleshooting insights 
+#### View process-level insights 
 
-To explore instrumentation troubleshooting data in Datadog:
+Use process-level insights to verify whether SSI has been correctly applied to your application processes and to identify any injection failures.
 
 1. Navigate to [Fleet Automation][9].
 1. Use facets to filter down to relevant hosts:
@@ -44,6 +47,25 @@ To explore instrumentation troubleshooting data in Datadog:
 1. If SSI is enabled on the host, the tab shows:
    - A banner with the message: "Single Step Instrumentation is enabled on this host."
    - An **SDK Installations** section if there are issues to troubleshoot.
+
+#### View Kubernetes cluster insights
+
+Use cluster-level insights to understand how SSI is configured and functioning across your Kubernetes clusters. These insights extend troubleshooting beyond individual processes to show how instrumentation is applied to workloads at the cluster level.
+
+1. Navigate to [**Fleet Automation**][9] > **View Agents**, and select **Kubernetes Clusters** in the upper-right corner.
+1. Select a cluster to view its details, including:
+   - Whether the cluster is managed by Helm or the Datadog Operator
+   - The Cluster Agent and Node Agent versions
+   - The integrations and services running on each host
+1. Open the **Single Step Instrumentation** tab to review:
+   - The cluster's SSI configuration (YAML view)
+   - The pods identified as instrumentation targets based on cluster configuration or pod-level annotations
+   - The status of each targeted pod, including whether instrumentation succeeded
+   - The SDKs injected into each pod, including language and version
+   - Whether each instrumented workload is generating traces 
+1. Hover over any status icon to see contextual details about the state of instrumentation or trace collection. 
+
+{{< img src="tracing/trace_collection/k8s-ssi-tab.png" alt="The Single Step Instrumentation tab for a Kubernetes cluster, showing the SSI config yaml and a list of instrumented pods" style="width:100%;" >}}
 
 ### Manually verify injection in the application container
 

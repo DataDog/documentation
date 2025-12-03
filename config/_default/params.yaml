@@ -137,6 +137,12 @@ code_language_ids:
     historical_job: "Historical Job"
     kubernetes_daemonset: "Kubernetes (DaemonSet)"
     kubernetes_gateway: "Kubernetes (Gateway)"
+    haproxy: "HAProxy"
+    traces: "Traces"
+    metrics: "Metrics"
+    logs: "Logs"    
+    topology: "Topology Map"
+    geomap: "Geomap" 
 branch: ""
 
 signupclass: sign-up-trigger
@@ -258,6 +264,7 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   actions: [gov]
+  adaptive_sampling: [gov]
   adobe_experience_manager: [us3,ap1,ap2]
   agent_flare: [gov]
   agentless_scanning: [gov]
@@ -266,6 +273,7 @@ unsupported_sites:
   app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
+  azure-private-link: [us,us5,eu,gov,ap1,ap2]
   backstage: [gov]
   bits_ai: [gov]
   bits_ai_sre: [gov, ap2]
@@ -273,9 +281,11 @@ unsupported_sites:
   ci_visibility: [gov]
   code_coverage: [gov]
   code_security: [gov]
+  configuration_at_runtime: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
+  cloudprem: [gov]
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
   ddot_collector: [gov]
@@ -284,8 +294,11 @@ unsupported_sites:
   dynamic_quotas: [gov]
   eng_reports: [gov]
   events_from_sns_emails: [gov]
+  exception_replay: [gov]
   feature_flags: [gov]
+  forwarding_audit_events: [gov]
   getting_started_feature_flags: [gov]
+  gcp-private-service-connect: [us,us3,gov,ap1,ap2]
   google-hangouts-chat: [gov]
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
@@ -293,6 +306,7 @@ unsupported_sites:
   fleet_automation: [gov]
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
+  incident_ai: [gov]
   internal_developer_portal: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
@@ -302,9 +316,9 @@ unsupported_sites:
   otlp_agentless: [gov]
   overview_pages: [gov]
   pr_gates: [gov]
+  resource_based_sampling: [gov]
   remote_config: [gov]
   remote_configuration: [gov]
-  resource_catalog: [gov]
   roku_error_tracking: [gov]
   roku_log_collection: [gov]
   rum_roku: [gov]
