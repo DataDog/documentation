@@ -73,9 +73,47 @@ the oTel and Datadog modules.
 
 To disable OpenTelemetry, set `enable-opentelemetry: false`.
 
+## Enabling AppSec
+
+You can enable the WAF provided by AppSec to protect your applications from security threats. To do so, update your Helm values to include the AppSec configuration:
+
+```yaml
+controller:
+  config:
+    main-snippet: |
+      load_module /modules_mount/ngx_http_datadog_module.so;
+      # AppSec thread pool configuration (adjust threads and max_queue as needed)
+      thread_pool waf_thread_pool threads=2 max_queue=16;
+    http-snippet: |
+      # Enable AppSec
+      datadog_appsec_enabled on;
+      datadog_waf_thread_pool_name waf_thread_pool;
+  opentelemetry:
+    enabled: false
+  extraModules:
+    - name: nginx-datadog
+      image:
+        registry: docker.io
+        image: datadog/ingress-nginx-injection
+        tag: "v1.10.0"
+        distroless: false
+```
+
+**Key configuration parameters:**
+- `thread_pool waf_thread_pool`: Creates a dedicated thread pool for AppSec processing. Adjust `threads` and `max_queue` based on your traffic patterns and available resources.
+- `datadog_appsec_enabled on`: Enables the Application Security module for threat detection and protection. This can be omitted so that AppSec can be enabled/disabled through Remote Configuration.
+- `datadog_waf_thread_pool_name waf_thread_pool`: Associates the matching requests with the configured thread pool.
+
+Refer to [the configuration reference][7] for more configurable options.
+
+<div class="alert alert-info">
+For production environments, monitor the thread pool performance and adjust the <code>threads</code> and <code>max_queue</code> parameters based on your traffic volume and latency requirements.
+</div>
+
 [1]: https://github.com/kubernetes/ingress-nginx
 [2]: https://kubernetes.io/docs/concepts/services-networking/ingress/
 [3]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
 [4]: https://hub.docker.com/r/datadog/ingress-nginx-injection
 [5]: https://github.com/DataDog/nginx-datadog/tree/master/example/ingress-nginx
 [6]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#enable-opentelemetry
+[7]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
