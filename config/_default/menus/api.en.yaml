@@ -11175,49 +11175,6 @@ menu:
         unstable:
           - v2
         order: 2
-    - name: Team Connections
-      url: /api/latest/team-connections/
-      identifier: team-connections
-      generated: true
-    - name: Create team connections
-      url: '#create-team-connections'
-      identifier: team-connections-create-team-connections
-      parent: team-connections
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateTeamConnections
-        unstable:
-          - v2
-        order: 2
-    - name: List team connections
-      url: '#list-team-connections'
-      identifier: team-connections-list-team-connections
-      parent: team-connections
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListTeamConnections
-        unstable:
-          - v2
-        order: 1
-    - name: Delete team connections
-      url: '#delete-team-connections'
-      identifier: team-connections-delete-team-connections
-      parent: team-connections
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteTeamConnections
-        unstable:
-          - v2
-        order: 3
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
@@ -11467,6 +11424,45 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Create team connections
+      url: '#create-team-connections'
+      identifier: teams-create-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamConnections
+        unstable:
+          - v2
+        order: 2
+    - name: List team connections
+      url: '#list-team-connections'
+      identifier: teams-list-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamConnections
+        unstable:
+          - v2
+        order: 1
+    - name: Delete team connections
+      url: '#delete-team-connections'
+      identifier: teams-delete-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamConnections
+        unstable:
+          - v2
+        order: 3
     - name: Get a team hierarchy link
       url: '#get-a-team-hierarchy-link'
       identifier: teams-get-a-team-hierarchy-link

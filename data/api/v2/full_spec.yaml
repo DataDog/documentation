@@ -85145,7 +85145,7 @@ paths:
         - teams_read
       summary: Delete team connections
       tags:
-      - Team Connections
+      - Teams
       x-menu-order: 3
       x-permission:
         operator: OR
@@ -85225,7 +85225,7 @@ paths:
         - teams_read
       summary: List team connections
       tags:
-      - Team Connections
+      - Teams
       x-menu-order: 1
       x-pagination:
         limitParam: page[size]
@@ -85270,7 +85270,7 @@ paths:
         - teams_read
       summary: Create team connections
       tags:
-      - Team Connections
+      - Teams
       x-menu-order: 2
       x-permission:
         operator: OR
@@ -88647,9 +88647,6 @@ tags:
     use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
     information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
-- description: View and manage relationships between Datadog teams and teams from
-    external sources, such as GitHub.
-  name: Team Connections
 - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
     for more information.
   name: Teams
