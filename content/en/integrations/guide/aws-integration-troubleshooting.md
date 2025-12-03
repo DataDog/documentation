@@ -63,12 +63,11 @@ See [Space aggregation][22] in the metric documentation for more information.
 
 4. Confirm that the query in CloudWatch is scoped identically to the query in Datadog:
    - Any [Dimensions][17] used in the CloudWatch metric query should match tags used in the Datadog metric query
-   - The [Statistic][18] used in the query should match the Datadog [space aggregator][19]
+   - Datadog queries metrics with one-minute granularity, so the **Period** of the CloudWatch metric query should also be set to one-minute precision
    - Region
-   - Metric Namespace and Metric name
-5. Match the time frame in the [Datadog Metric Explorer][15] with the **Period** selected in the [CloudWatch Metric Explorer][16].
-6. Hover over a datapoint on the graph to display the timestamp and value.
-7. Find the same point in time in the Datadog graph and compare the values. If the values are equal, the original discrepancy was due to differences in either time or space aggregation between the two graphs.
+   - Metric namespace and name
+5. Hover over a datapoint on the graph to display the timestamp and value.
+6. Find the same point in time in the Datadog graph and compare the values. If the values are equal, the original discrepancy was due to differences in either time or space aggregation between the two graphs.
 
 ## Metrics
 
@@ -150,11 +149,7 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [12]: https://github.com/DataDog/Miscellany/blob/master/remove_lingering_aws_host_tags.py
 [13]: https://api.datadoghq.com/api/v2/integration/aws/iam_permissions
 [14]: https://github.com/DataDog/cloudformation-template/tree/master/aws_attach_integration_permissions
-[15]: https://app.datadoghq.com/metric/explorer
-[16]: https://console.aws.amazon.com/cloudwatch/#explorer
 [17]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension
-[18]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
-[19]: /metrics/#configure-space-aggregation
 [20]: /metrics/#time-aggregation
 [21]: /metrics/guide/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [22]: /metrics/#space-aggregation
