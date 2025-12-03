@@ -131,7 +131,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs
+	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data
 
 # Download files from S3 bucket and add them to the file system.
 # Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets
@@ -166,6 +166,7 @@ hugpython: local/etc/requirements3.txt
 
 update_pre_build: hugpython
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
+	make build-api-derefs
 
 # Only to be run during deployment
 # Updates hugo preview config file for feature branch naming scheme
