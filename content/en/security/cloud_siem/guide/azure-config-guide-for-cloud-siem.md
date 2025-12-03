@@ -117,7 +117,7 @@ Create a new Function App. If you are using an existing function app, skip to Ad
 
 ### Add the Datadog Azure function
 
-<br />**Note**: The steps described below are based on the Azure Functions Programming Model v3. Datadog’s latest [Azure function code][8] has been updated to support the Azure Functions Programming Model v4, and the documentation is currently being revised to reflect these changes. If you need guidance on deploying the v4-compatible version or have questions regarding the differences between v3 and v4, please contact Datadog Technical Support for assistance.
+<br />**Note**: The steps described below are based on the Azure Functions Programming Model v3. Datadog's latest [Azure function code][8] has been updated to support the Azure Functions Programming Model v4. If you need guidance on deploying the v4-compatible version or have questions regarding the differences between v3 and v4, contact Datadog Technical Support for assistance.
 
 1. In the new function, select **Code + Test** in the left side menu.
 1. Copy and paste the [Datadog-Azure function code][4] to your `index.js` file.
