@@ -1,6 +1,7 @@
 ---
 title: Recording interactions inside Webviews
 description: Use Synthetic mobile app testing to capture webview recordings.
+private: true
 further_reading:
 - link: "/synthetics/mobile_app_testing/mobile_app_tests/advanced_options"
   tag: "Documentation"
