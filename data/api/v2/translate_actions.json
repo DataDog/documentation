@@ -2586,6 +2586,36 @@
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
   },
+  "DetachCase": {
+    "description": "Detach security findings from their case. This operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
+    "summary": "Detach security findings from their case",
+    "request_description": "",
+    "request_schema_description": "Request for detaching security findings from their case."
+  },
+  "CreateCases": {
+    "description": "Create cases for security findings. You can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.",
+    "summary": "Create cases for security findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create cases for security findings."
+  },
+  "AttachCase": {
+    "description": "Attach security findings to a case. You can attach up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the specified case.",
+    "summary": "Attach security findings to a case",
+    "request_description": "",
+    "request_schema_description": "Request for attaching security findings to a case."
+  },
+  "AttachJiraIssue": {
+    "description": "Attach security findings to a Jira issue by providing the Jira issue URL. You can attach up to 50 security findings per Jira issue. If the Jira issue is not linked to any case, this operation will create a case for the security findings and link the Jira issue to the newly created case. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the specified Jira issue.",
+    "summary": "Attach security findings to a Jira issue",
+    "request_description": "",
+    "request_schema_description": "Request for attaching security findings to a Jira issue."
+  },
+  "CreateJiraIssues": {
+    "description": "Create Jira issues for security findings. This operation creates a case in Datadog and a Jira issue linked to that case for bidirectional sync between Datadog and Jira. You can create up to 50 Jira issues per request and associate up to 50 security findings per Jira issue. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the newly created Jira issue.",
+    "summary": "Create Jira issues for security findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create Jira issues for security findings."
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
