@@ -37,7 +37,7 @@ For additional definitions and descriptions of important CNM terms such as _poli
 | **[CNM Tags][5]**                               | CNM uses tags to group and display traffic, for example, service-to-service or zone-to-zone communication.                                           |
 | **[Traffic Volume][9] (Bytes Sent and Received)**     | A primary network metric in CNM representing the amount of data transferred between endpoints. Often visualized in the Network Load section of dashboards or Analytics to spot spikes or traffic bottlenecks. |
 | **[TCP Metrics][8] (Connections, Retransmits, Latency)** | Set of metrics CNM tracks for TCP flows, including number of open and closed connections, retransmits (packet retransmissions), and round-trip time/latency, enabling detection of connectivity issues, packet loss, or network congestion. |
-| **Unresolved or NA Traffic**                     | Network flows that cannot be associated with defined tags (client or server), perhaps because tagging metadata is missing. Often shown as "unresolved" or "NA," indicating that the origin or destination cannot be identified or grouped meaningfully. |
+| **[Unresolved or NA Traffic][10]**                     | Network flows that cannot be associated with defined tags (client or server), perhaps because tagging metadata is missing. Often shown as "unresolved" or "NA," indicating that the origin or destination cannot be identified or grouped meaningfully. |
 
 ## Further Reading
 
@@ -49,6 +49,7 @@ For additional definitions and descriptions of important CNM terms such as _poli
 [4]: /monitors/types/cloud_network_monitoring/
 [5]: /network_monitoring/cloud_network_monitoring/tags_reference/
 [6]: /glossary/?product=cloud-network-monitoring
-[7]: /network_monitoring/cloud_network_monitoring/network_analytics/?tab=loadbalancers#group-by
-[8]: /network_monitoring/cloud_network_monitoring/network_analytics/?tab=loadbalancers#tcp
-[9]: /network_monitoring/cloud_network_monitoring/network_analytics/?tab=loadbalancers#network-load
+[7]: /network_monitoring/cloud_network_monitoring/network_analytics/#group-by
+[8]: /network_monitoring/cloud_network_monitoring/network_analytics/#tcp
+[9]: /network_monitoring/cloud_network_monitoring/network_analytics/#network-load
+[10]: /network_monitoring/cloud_network_monitoring/network_analytics/#unresolved-traffic
