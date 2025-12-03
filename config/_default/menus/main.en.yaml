@@ -3751,26 +3751,31 @@ menu:
       parent: nm_parent
       identifier: network_path
       weight: 5
+    - name: Terms and Concepts
+      url: network_monitoring/network_path/glossary
+      parent: network_path
+      identifier: network_path_glossary
+      weight: 501 
     - name: Setup
       url: network_monitoring/network_path/setup/
       parent: network_path
       identifier: network_path_setup
-      weight: 501
+      weight: 502
     - name: List View
       url: network_monitoring/network_path/list_view/
       parent: network_path
       identifier: network_path_list_view
-      weight: 502
+      weight: 503
     - name: Path View
       url: network_monitoring/network_path/path_view/
       parent: network_path
       identifier: network_path_path_view
-      weight: 503
+      weight: 504
     - name: Guides
       url: network_monitoring/network_path/guide
       parent: network_path
       identifier: network_path_guides
-      weight: 504
+      weight: 505
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
