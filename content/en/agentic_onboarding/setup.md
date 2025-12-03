@@ -72,16 +72,17 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 
 ### Set up your project
 
-Your AI coding agent can help configure Datadog for your project. When you provide a setup prompt, it:
+Your AI coding agent can help configure Datadog for your project. When you provide a setup prompt, the agent:
 
-- analyzes your project and identifies your project's framework, language, and bundler
-- calls the tool, asking for your permission before it runs
+- Analyzes your project and identifies the framework, language, and bundler
+- Calls the tool and requests permission before running
+- Applies the configuration changes specified by the tool
+- Provides steps to verify that your application is sending telemetry to Datadog
 
-  **Note**: Your coding agent makes changes locally without committing them.
-- applies the configuration changes specified by the tool
-- provides steps to verify that your application is sending telemetry to Datadog
+**Note**: Your coding agent makes changes locally but does not commit them.
 
-1. To get started, copy and paste the following prompt based on the product you want to use into your coding agent (such as Cursor or Claude Code):
+To get started:
+1. Choose the product you want to use and paste its setup prompt into your AI agent:
 
    {{< tabs >}}
    {{% tab "Error Tracking" %}}
@@ -103,18 +104,15 @@ Your AI coding agent can help configure Datadog for your project. When you provi
    {{% /tab %}}
    {{< /tabs >}}
 
-2. After pasting the prompt, review and accept each action your AI agent proposes to move through the setup process.
+2. Review and accept each action your AI agent proposes to complete the setup process.
 
 ### Deploy your app to production
 
-Commmit the changes in your repository and configure the provided environment variables in your production environment.
+Commit the changes to your repository and configure the provided environment variables in your production environment.
 
 [1]: https://cursor.com/
 [2]: https://claude.ai/
 [3]: /error_tracking/frontend/
 [4]: /real_user_monitoring/
 [5]: /product_analytics/
-[6]: https://platform.openai.com/docs/guides/text
-[7]: https://github.com/langchain-ai/langgraph
-[8]: https://github.com/vercel/ai-chatbot
 
