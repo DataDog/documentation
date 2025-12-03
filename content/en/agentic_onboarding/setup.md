@@ -1,7 +1,6 @@
 ---
 title: Agentic Onboarding Setup
 description: Set up the Datadog MCP server to instrument your frontend applications with coding agents like Cursor or Claude Code.
-further_reading:
 
 ---
 
@@ -15,21 +14,18 @@ Agentic Onboarding is in Preview.
 
 ## Overview
 
-Datadog's Agentic Onboarding allows you to instrument your frontend applications with one prompt using LLM coding agents like [Cursor][1] or [Claude Code][2].
+Agentic Onboarding lets LLM coding agents instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], and [Product Analytics][5] with a single prompt.
 
-Instead of navigating multiple setup steps or searching through documentation, you can instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], and [Product Analytics][5] in one command.
+Your coding assistant, such as [Cursor][1] or [Claude Code][2], detects your project's frameworks, adds configuration, and provisions required tokens and apps directly from your IDE.
 
-With Agentic Onboarding, your coding assistant automatically detects your project's frameworks, add configuration, and provisions required tokens and apps directly from your IDE.
-
-## Prerequisites
-### Supported frameworks
-Agentic Onboarding is available for the following frameworks: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, Vue
+## Supported frameworks
+Agentic Onboarding is available for the following frameworks: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, and Vue.
 
 ## Setup
 
 ### Install the Datadog Onboarding MCP server
 
-To install the Datadog Onboarding Model Context Protocol (MCP) server, follow the steps below.
+To install the Datadog Onboarding Model Context Protocol (MCP) server, follow the steps for your coding assistant:
 
 {{< tabs >}}
 {{% tab "Cursor" %}}
