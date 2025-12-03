@@ -1,7 +1,5 @@
 ---
-title: Engineering Reports
-aliases:
-- /software_catalog/eng_reports
+title: Engineering Report
 further_reading:
 - link: "/service_management/service_level_objectives/"
   tag: "Documentation"
@@ -28,9 +26,9 @@ Managers and directors who oversee multiple teams can filter reports by [team hi
 
 {{< img src="tracing/internal_developer_portal/team-hierarchy-filter-with-report.png" alt="The DORA report with a filter dropdown showing a hierarchical team structure and a subset of subteams selected" style="width:100%;" >}}
 
-Datadog’s IDP supports two types of reports:
-- **Out-of-the-box (OOTB) Engineering Reports**: reports designed by Datadog that let you assess different engineering metrics across your organization
-- [**Custom Reports**][2]: any Datadog Dashboards that your org has added to your IDP Overview Page
+Datadog's IDP supports two types of reports:
+- **Out-of-the-box (OOTB) Engineering Reports**: Reports designed by Datadog that let you assess engineering metrics across your organization
+- [**Custom Reports**][2]: Any Datadog Dashboards that your organization has added to your IDP Overview Page
 
 {{< whatsnext desc="Explore the following OOTB Engineering Reports:" >}}
     {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}

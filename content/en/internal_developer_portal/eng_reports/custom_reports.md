@@ -13,23 +13,25 @@ further_reading:
 
 ## Overview
 
-With Custom Reports, you can embed any Datadog Dashboard directly into the IDP Overview for all users at your organization. This simplifies customizing the Overview page so different users can find relevant information directly in IDP, without context switching. 
+Custom Reports let you embed existing Datadog dashboards directly into the IDP Overview page for all users at your organization. This allows teams to view key engineering insights in one place without context switching navigating between IDP and Dashboards.
 
 {{< img src="/tracing/eng_reports/idp-custom-reports.png" alt="Example custom report in IDP Overview page" style="width:100%;" >}}
 
+## Viewing Custom Reports
+
+To view Custom Reports, go to **IDP** > **Overview** and find the **Custom Reports** section. Custom Reports are set at the organization level, so all users see the same list. 
+
+Select a Custom Report to view it directly in the IDP Overview page. You can adjust template variable filters and the time frame in place.
+
+**Note**: Individual [dashboard permissions][2] apply to any dashboards added to IDP's Custom Reports. 
+
 ## Managing Custom Reports
 
-In IDP > Overview, see **Custom Reports**. 
+Users with the [Software Catalog write permission][1], included in the default Datadog Admin and Datadog Standard Roles, can add, remove, or reorder the dashboards in the Custom Reports section. 
 
-Users with the [Software Catalog write permission][1], included in the default Datadog Admin Role and Datadog Standard Role, can manage Custom Reports. You can add, remove, or adjust the order of Datadog Dashboards that appear in the Custom Reports section. 
-
-**Note:** Custom Reports are set at the organization level. All users in the org will see the same list of Custom Reports in the IDP Overview page. Individual [Dashboard permissions][2] also apply to any Dashboards added to IDP. 
+To modify the content of a Custom Report or set up scheduled PDF reports through Slack or email, select **Edit Report**. This opens the underlying dashboard in the Dashboards UI. Edits made in the dashboard, such as changing widgets, updating queries, or adjusting template variables, automatically apply to the Custom Report in IDP. 
 
 {{< img src="/tracing/eng_reports/idp-custom-reports-edit.png" alt="IDP Custom Report modal" style="width:100%;" >}}
-
-You can view a Datadog Dashboard directly in the IDP Overview page, and adjust template variable filters and the timeframe. 
-
-To edit the dashboard or set up scheduled PDF reports via email or Slack, click **Edit Report**. Then, you will see the Datadog Dashboard. Any changes you make to this dashboard are also applied to the IDP Overview page.
 
 ## Further reading
 
