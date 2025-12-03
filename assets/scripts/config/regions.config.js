@@ -588,5 +588,14 @@ export default {
     ap1: '',
     ap2: '',
     gov: ''
+  },
+  microsoft_teams_app_name: {
+    us: 'Datadog',
+    us3: 'Datadog',
+    us5: 'Datadog',
+    eu: 'Datadog',
+    ap1: 'Datadog',
+    ap2: 'Datadog',
+    gov: 'Datadog for Government'
   }
 };
