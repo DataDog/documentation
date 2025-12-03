@@ -1,6 +1,6 @@
 ---
 disable_toc: false
-title: Ocultamiento de datos confidenciales para Amazon S3
+title: Sensitive Data Redaction para Amazon Data Firehose
 ---
 
 ## Información general
@@ -14,20 +14,21 @@ Utiliza Observability Pipelines para identificar, etiquetar y, de manera opciona
 Este documento te guiará a través de los siguientes pasos:
 1. Los [requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
 1. [Configuración de Observability Pipelines](#set-up-observability-pipelines)
+1. [Envío de logs al worker de Observability Pipelines](#send-Logs-to-the-observability-pipelines-worker-over-amazon_data_firehose)
 
 ## Requisitos previos
 
-{{% observability_pipelines/prerequisites/amazon_s3 %}}
+{{% observability_pipelines/prerequisites/amazon_data_firehose %}}
 
 ## Configurar Observability Pipelines
 
-1. Ve a [Observability Pipelines][1].
+1. Navega hasta [Observability Pipelines][1].
 1. Selecciona la plantilla **Sensitive Data Redactions** (Redacciones de datos confidenciales) para crear un nuevo pipeline.
-1. Selecciona la fuente **Amazon S3**.
+1. Select the **Amazon Data Firehose** source.
 
 ### Configurar el origen
 
-{{% observability_pipelines/source_settings/amazon_s3 %}}
+{{% observability_pipelines/source_settings/amazon_data_firehose %}}
 
 ### Configurar los destinos
 
@@ -276,9 +277,9 @@ Para configurar el destino, sigue las instrucciones del proveedor de nube que ut
 
 {{% observability_pipelines/multiple_processors %}}
 
-### Instalar el Observability Pipelines Worker
+### Instalar el worker de Observability Pipelines
 1. Selecciona tu plataforma en el menú desplegable **Elige tu plataforma de instalación**.
-1. En el campo **AWS S3 SQS URL**, introduce la URL de la cola SQS a la que el bucket S3 envía eventos de notificación.
+1. Ingresa la dirección de Amazon Data Firehose. El worker de Observability Pipelines escucha esta dirección y este puerto para recibir logs desde Amazon Data Firehose.
 1. Proporciona las variables de entorno para cada uno de los destinos seleccionados. Para obtener más información, consulta [Requisitos previos](#prerequisites).
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -373,16 +374,26 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 
 {{% /tab %}}
 {{< /tabs >}}
-1. Sigue las instrucciones de tu entorno para instalar el Worker.
+1. Sigue las instrucciones de tu entorno para instalar el worker.
 {{< tabs >}}
 {{% tab "Docker" %}}
 
 {{% observability_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Amazon EKS" %}}
 
-{{% observability_pipelines/install_worker/kubernetes %}}
+{{% observability_pipelines/install_worker/amazon_eks %}}
+
+{{% /tab %}}
+{{% tab "Azure AKS" %}}
+
+{{% observability_pipelines/install_worker/azure_aks %}}
+
+{{% /tab %}}
+{{% tab "Google GKE" %}}
+
+{{% observability_pipelines/install_worker/google_gke %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}
@@ -401,5 +412,9 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Enviar logs al worker de Observability Pipelines a través de Amazon Data Firehose
+
+{{% observability_pipelines/log_source_configuration/amazon_data_firehose %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
