@@ -5145,7 +5145,7 @@ menu:
       parent: pipeline_visibility
       identifier: ci_teamcity
       weight: 109
-    - name: Other Providers
+    - name: Other CI Providers
       url: continuous_integration/pipelines/custom/
       parent: pipeline_visibility
       identifier: ci_custom
