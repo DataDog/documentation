@@ -2111,16 +2111,21 @@ menu:
       parent: software_catalog
       identifier: software_catalog_entity_model
       weight: 102
-    - name: Entity Types
-      url: internal_developer_portal/software_catalog/entity_model/entity_types
+    - name: Native Entities
+      url: internal_developer_portal/software_catalog/entity_model/native_entities
       parent: software_catalog_entity_model
-      identifier: software_catalog_entity_types
+      identifier: software_catalog_native_entities
       weight: 1021
+    - name: Custom Entities
+      url: internal_developer_portal/software_catalog/entity_model/custom_entities
+      parent: software_catalog_entity_model
+      identifier: software_catalog_custom_entities
+      weight: 1022
     - name: AI-generated Systems
       url: internal_developer_portal/software_catalog/entity_model/ai-generated-systems
       parent: software_catalog_entity_model
       identifier: software_catalog_ai_generated_systems
-      weight: 1022
+      weight: 1023
     - name: Troubleshooting
       url: internal_developer_portal/software_catalog/troubleshooting
       parent: software_catalog
@@ -7487,27 +7492,27 @@ menu:
       url: synthetics/test_suites/
       parent: synthetics
       identifier: synthetics_test_suites
-      weight: 5
+      weight: 6
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
       identifier: synthetics_platform
-      weight: 6
+      weight: 7
     - name: Dashboards
       url: synthetics/platform/dashboards
       parent: synthetics_platform
       identifier: synthetics_platform_dashboards
-      weight: 601
+      weight: 701
     - name: API Testing
       url: synthetics/platform/dashboards/api_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_api_test
-      weight: 6101
+      weight: 7101
     - name: Browser Testing
       url: synthetics/platform/dashboards/browser_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_browser_test
-      weight: 6102
+      weight: 7102
     - name: Test Summary
       url: synthetics/platform/dashboards/test_summary
       parent: synthetics_platform_dashboards
@@ -7517,82 +7522,82 @@ menu:
       url: synthetics/platform/metrics/
       parent: synthetics_platform
       identifier: synthetics_platform_metrics
-      weight: 602
+      weight: 702
     - name: Test Coverage
       url: synthetics/platform/test_coverage
       parent: synthetics_platform
       identifier: synthetics_platform_test_coverage
-      weight: 603
+      weight: 703
     - name: Private Locations
       url: synthetics/platform/private_locations
       parent: synthetics_platform
       identifier: synthetics_private_location
-      weight: 604
+      weight: 704
     - name: Configuration
       url: synthetics/platform/private_locations/configuration
       parent: synthetics_private_location
       identifier: synthetics_private_location_configuration
-      weight: 6041
+      weight: 7041
     - name: Dimensioning
       url: synthetics/platform/private_locations/dimensioning
       parent: synthetics_private_location
       identifier: synthetics_private_location_dimensioning
-      weight: 6042
+      weight: 7042
     - name: Monitoring
       url: synthetics/platform/private_locations/monitoring
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
-      weight: 6043
+      weight: 7043
     - name: Connect APM
       url: synthetics/platform/apm/
       parent: synthetics_platform
       identifier: synthetics_platform_apm
-      weight: 605
+      weight: 705
     - name: Settings
       identifier: synthetics_settings
       url: synthetics/platform/settings
       parent: synthetics_platform
-      weight: 606
+      weight: 706
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics
       identifier: synthetics_explore
-      weight: 7
+      weight: 8
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
       identifier: synthetics_explore_saved_views
-      weight: 701
+      weight: 801
     - name: Results Explorer
       url: synthetics/explore/results_explorer
       parent: synthetics_explore
       identifier: synthetics_results_explorer
-      weight: 702
+      weight: 802
     - name: Search Test Batches
       url: synthetics/explore/results_explorer/search
       parent: synthetics_results_explorer
       identifier: synthetcis_results_explorer_search
-      weight: 7200
+      weight: 8200
     - name: Search Test Runs
       url: synthetics/explore/results_explorer/search_runs
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_runs
-      weight: 7201
+      weight: 8201
     - name: Search Syntax
       url: synthetics/explore/results_explorer/search_syntax
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_syntax
-      weight: 7203
+      weight: 8203
     - name: Export Test Runs
       url: synthetics/explore/results_explorer/export
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_export_test_runs
-      weight: 7204
+      weight: 8204
     - name: Saved Views
       url: synthetics/explore/results_explorer/saved_views
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_saved_views
-      weight: 7205
+      weight: 8205
     - name: Guides
       url: synthetics/guide/
       parent: synthetics
