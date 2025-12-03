@@ -34,7 +34,7 @@ The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 
 ### Manual setup
 
-To start sending RUM data from your Android or Android TV application to Datadog, follow the steps below.
+To send RUM data from your Android or Android TV application to Datadog, complete the following steps.
 
 ### Step 1 - Declare the Android SDK as a dependency
 
