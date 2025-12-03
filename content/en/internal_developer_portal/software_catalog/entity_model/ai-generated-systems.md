@@ -11,6 +11,9 @@ further_reading:
   text: "Discover Entities"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for AI-generated Systems!" >}}
+{{< /callout >}}
+
 ## Overview
 
 Bits AI recommends AI-generated Systems that you can add to your Software Catalog. It analyzes the following data sources to identify candidate Systems:
