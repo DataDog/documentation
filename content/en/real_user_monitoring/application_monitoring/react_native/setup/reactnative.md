@@ -41,11 +41,11 @@ The React Native SDK supports the following services:
 
 ## Setup
 
-Follow the step-by-step instructions to manually add and configure the RUM SDK in your React Native application.
+Follow these instructions to manually add and configure the RUM SDK in your React Native application.
 
 ### Manual setup
 
-To start sending RUM data from your React Native application to Datadog, follow the steps below.
+To send RUM data from your React Native application to Datadog, complete the following steps.
 
 To install with NPM, run:
 

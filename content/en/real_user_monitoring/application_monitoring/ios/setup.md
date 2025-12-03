@@ -54,7 +54,7 @@ Before you begin, ensure you have:
 
 ### Manual setup
 
-To start sending RUM data from your iOS or tvOS application to Datadog, follow the steps below.
+To send RUM data from your iOS or tvOS application to Datadog, complete the following steps.
 
 ### Step 1 - Add the iOS SDK as a dependency
 
