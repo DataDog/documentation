@@ -253,6 +253,29 @@ Send requests through your gateway and verify they appear in the Datadog App and
 - `envoy-gateway`: Configures Envoy Gateway using `EnvoyExtensionPolicy` resources
 - `istio`: Configures Istio using global `EnvoyFilter` resources in the Istio system namespace
 
+### Opting out specific resources
+
+You can exclude specific Gateway or GatewayClass resources from automatic Appsec Injector configuration by adding a label:
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: my-gateway
+  namespace: my-namespace
+  labels:
+    appsec.datadoghq.com/enabled: "false"  # Exclude this gateway from automatic configuration
+spec:
+  # ... gateway configuration
+```
+
+Resources with the `appsec.datadoghq.com/enabled: "false"` label will be ignored by the injector. This is useful when you want to:
+- Manually configure specific gateways
+- Temporarily disable Appsec for testing
+- Exclude certain gateways from security monitoring
+
+**Note**: By default, all resources are included. Only resources with the label explicitly set to `"false"` are excluded.
+
 ## Troubleshooting
 
 ### Injector not detecting proxies
