@@ -54,9 +54,8 @@ External Provider Status monitors the following third-party providers:
 | Atlassian | `*.atlassian.net`, `*.atlassian.com` |
 | Auth0 | `*.auth0.com` |
 | Azure DevOps | `dev.azure.com` |
-| Binance | `api.binance.com` |
 | Braintree | `api.braintreegateway.com` |
-| Cloudflare | `api.cloudflare.com` |
+| Cloudflare | `*.cloudflare.com` |
 | Databricks | `*.cloud.databricks.com` |
 | Facebook | `graph.facebook.com` |
 | GitHub | `api.github.com` |
@@ -69,7 +68,6 @@ External Provider Status monitors the following third-party providers:
 | Okta | `*.okta.com` |
 | OpenAI | `*.openai.com` |
 | PagerDuty | `api.pagerduty.com` |
-| Palo Alto Networks | `api.urlcloud.paloaltonetworks.com` |
 | PayPal | `*.paypal.com` |
 | Salesforce | `*.salesforce.com` |
 | SendGrid | `*.sendgrid.com` |

@@ -84,7 +84,7 @@ Cuando se recopilan logs del contenedor de Docker de archivos, el Agent recurre 
       Status: Error: file /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log does not exist
 ```
 
-Este estado significa que el Agent no puede encontrar un archivo de log para un determinado contenedor. Para resolver este problema, comprueba que la carpeta que contiene logs del contenedor de Docker está correctamente expuesta al contenedor del Datadog Agent. En Linux, esto corresponde a `-v /var/lib/Docker/containers:/var/lib/Docker/containers:ro` on the command line starting the Agent container, whereas on Windows it corresponds to `-v c:/programdata/Docker/containers:c:/programdata/Docker/containers:ro`. Note that the directory relative to the underlying host may be different due to specific configuration of the Docker daemon—this is not an issue pending a correct Docker volume mapping. For example, use `-v /data/Docker/containers:/var/lib/Docker/containers:ro` if the Docker data directory has been relocated to `/data/Docker` en el subyacente host.
+Este estado significa que el Agent no puede encontrar un archivo de log para un determinado contenedor. Para resolver este problema, comprueba que la carpeta que contiene logs del contenedor de Docker está correctamente expuesta al contenedor del Datadog Agent. En Linux, esto corresponde a `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` on the command line starting the Agent container, whereas on Windows it corresponds to `-v c:/programdata/docker/containers:c:/programdata/docker/containers:ro`. Note that the directory relative to the underlying host may be different due to specific configuration of the Docker daemon—this is not an issue pending a correct Docker volume mapping. For example, use `-v /data/docker/containers:/var/lib/docker/containers:ro` if the Docker data directory has been relocated to `/data/docker` en el subyacente host.
 
 Si se recopilan logs pero las líneas individuales parecen estar divididas, comprueba que el daemon Docker utiliza el [controlador de gestión de logs JSON](#your-containers-are-not-using-the-json-logging-driver).
 
@@ -133,30 +133,6 @@ Si el estado del Logs Agent de logs se parece al ejemplo en [Comprobar el estado
 
 * El puerto requerido (10516) para enviar logs a Datadog está bloqueado.
 * Tu contenedor está utilizando un controlador de gestión de logs diferente del que espera el Agent.
-
-#### El tráfico saliente en el puerto 10516 está bloqueado
-
-El Datadog Agent envía sus logs a Datadog a través de TCP utilizando el puerto 10516. Si esa conexión no está disponible, los logs no se pueden enviar y se registra un error en el archivo `agent.log`.
-
-Puedes probar manualmente tu conexión utilizando OpenSSL, GnuTLS u otro cliente SSL/TLS. Para OpenSSL, ejecuta el siguiente comando:
-
-```shell
-openssl s_client -connect intake.logs.datadoghq.com:10516
-```
-
-Para GnuTLS, ejecuta el siguiente comando:
-
-```shell
-gnutls-cli intake.logs.datadoghq.com:10516
-```
-
-Y luego, enviando un log como el siguiente:
-
-```texto
-<API_KEY> este es un mensaje de prueba
-```
-
-Si abrir el puerto 10516 no es una opción, es posible configurar el Datadog Agent para enviar logs a través de HTTPS configurando la variable de entorno `DD_LOGS_CONFIG_FORCE_USE_HTTP` en `true`:
 
 #### Tus contenedores no están utilizando el controlador de gestión de logs JSON
 

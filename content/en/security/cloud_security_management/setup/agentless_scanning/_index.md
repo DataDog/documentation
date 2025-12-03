@@ -71,13 +71,13 @@ The following diagram illustrates how Agentless scanning works with existing Age
 
 ## Cloud Storage scanning
 
-{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
+{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
-If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
+If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets.
 
-Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
 
 Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security][9] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security.
 
