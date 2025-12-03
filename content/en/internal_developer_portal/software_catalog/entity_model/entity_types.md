@@ -44,7 +44,6 @@ In Software Catalog, you can collect non-instrumented services by declaring them
 
 In Software Catalog, a system (`kind:system`) is a group of entities that cooperate to perform a broader function. For example, you can group multiple instrumented APM services into a system because they are operated by the same team. You can also use `system` to represent a full microservice-based architecture, and include components like APIs, datastores, queues, and other common building blocks.
 
-Systems can be manually defined or added through [AI-generated Systems][2].
 
 **Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][1]. 
 
