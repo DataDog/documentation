@@ -97,7 +97,7 @@ The [**Live Debugger**][20] enables you to add logpoints—auto-expiring, non-br
 Find out more in the [Live Debugger][20] sub-section.
 
 ### Code Security
-The [**Code Security**][24] integration promotes better security by flagging library vulnerabilities and runtime code vulnerabilities. The local code analyzer checks your code changes locally, as you edit, to detect quality and security issues prior to commit.
+The [**Code Security**][24] integration promotes better security by flagging library vulnerabilities and runtime code vulnerabilities. The local code analyzer checks your code changes as you edit to detect quality and security issues prior to commit.
 
 {{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:80%;" >}}
 
