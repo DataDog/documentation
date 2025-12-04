@@ -4,6 +4,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/ecs-default-monitors/"
     tag: "Blog"
     text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
+  - link: https://www.datadoghq.com/blog/ecs-managed-instances
+    tag: Blog
+    text: Monitor ECS Managed Instances with Datadog
 ---
 
 {{< img src="infrastructure/livecontainers/orch_ecs_ex.png" alt="ECS Explorer displaying ECS tasks." style="width:80%;">}}

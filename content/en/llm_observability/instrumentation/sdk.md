@@ -12,6 +12,12 @@ aliases:
     - /llm_observability/instrumentation/custom_instrumentation
     - /tracing/llm_observability/trace_an_llm_application
     - /llm_observability/setup
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview
@@ -2646,6 +2652,9 @@ tracer.use('http', false) // disable the http integration
 {{% /tab %}}
 {{< /tabs >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/openai/openai-python
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
