@@ -4620,7 +4620,7 @@ menu:
           - GetUsageIndexedSpans
         unstable: []
         order: 14
-    - name: Get hourly usage for incident management
+    - name: Get hourly usage for Incident Management
       url: '#get-hourly-usage-for-incident-management'
       identifier: usage-metering-get-hourly-usage-for-incident-management
       parent: usage-metering
