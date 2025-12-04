@@ -101,10 +101,10 @@ controller:
 
 **Key configuration parameters:**
 - `thread_pool waf_thread_pool`: Creates a dedicated thread pool for AppSec processing. Adjust `threads` and `max_queue` based on your traffic patterns and available resources.
-- `datadog_appsec_enabled on`: Enables the Application Security module for threat detection and protection. This can be omitted so that AppSec can be enabled/disabled through Remote Configuration.
+- `datadog_appsec_enabled on`: Enables the Application Security module for threat detection and protection. This can be omitted so that AppSec can be enabled or disabled through Remote Configuration.
 - `datadog_waf_thread_pool_name waf_thread_pool`: Associates the matching requests with the configured thread pool.
 
-Refer to [the configuration reference][7] for more configurable options.
+Refer to the [configuration reference][7] for more configurable options.
 
 <div class="alert alert-info">
 For production environments, monitor the thread pool performance and adjust the <code>threads</code> and <code>max_queue</code> parameters based on your traffic volume and latency requirements.
