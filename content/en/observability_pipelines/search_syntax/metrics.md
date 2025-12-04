@@ -9,7 +9,7 @@ weight: 2
 
 ## Overview
 
-When you add a processor to a pipeline, you can filter metrics to only process a defined subset. This document goes over the following information:
+When you add a processor to a pipeline, you can filter metrics ({{< tooltip glossary="preview" >}}) to only process a defined subset. This document goes over the following information:
 
 - [Free text search](#free-text-search)
 - [Attribute search](#attribute-search)
