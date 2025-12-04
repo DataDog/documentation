@@ -99,10 +99,6 @@ If you see an error with `certificate verify failed` and `self-signed certificat
 
 If you see the error `Please ensure you organization is enabled for RC`, ensure your Worker API key has [Remote Configuration enabled][17]. See [Security considerations][19] for information on safeguards implemented for Remote Configuration.
 
-### Too many files error
-
-If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
-
 ### The Worker is not receiving logs from the source
 
 If you have configured your source to send logs to the Worker, make sure the port that the Worker is listening on is the same port to which the source is sending logs.
@@ -138,6 +134,10 @@ curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.c
 
 The curl command you use is based on the port you are using, as well as the path and expected payload from your source.
 
+### Too many files error
+
+If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
+
 ## General pipeline issues
 
 ### Missing environment variable
@@ -145,6 +145,10 @@ The curl command you use is based on the port you are using, as well as the path
 If you see the error `Configuration is invalid. Missing environment variable $<env_var>`, make sure you add the environment variables for your source, processors, and destinations when you install the Worker. See [Environment Variables][18] for a list of source, processor, and destination environment variables.
 
 ## Logs pipeline issues
+
+### Logs are not getting forwarded to the destination
+
+Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
 
 ### Seeing delayed logs at the destination
 
@@ -155,10 +159,6 @@ These are the batch parameters for each destination:
 {{% observability_pipelines/destination_batching %}}
 
 See [event batching][6] for more information.
-
-### Logs are not getting forwarded to the destination
-
-Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
 
 ## Component issues
 
