@@ -63,7 +63,7 @@ To combine an event, click the three dots next to an event and select **+ Combin
 
 Use the **Group by** dropdown to group the data by a specific attribute.
 
-**Note**: Grouping data is not supported for the funnel steps visualization; when applied, the visualization automatically changes to a top list.
+**Note**: Grouping data is not supported for the funnel steps [visualization](#change-the-visualization); when applied, the visualization automatically changes to a top list.
 
 ## Refine conversion
 
@@ -71,23 +71,22 @@ You can further analyze the information on the funnel page to understand the con
 
 You can analyze conversion by **session**, **user** or **account**. This can be useful if you suspect, for instance, that a minority of your user base converts at a high rate.
 
-- If you select <strong>Session</strong>, all steps must be completed within the same <code>@session.id</code> to count as a conversion.
+- If you select **Session**, all steps must be completed within the same `@session.id` to count as a conversion.
 
-- If you select <strong>User</strong>, the funnel requires the same individual user (<code>@user.id</code>) to complete every step for the conversion to count.
+- If you select **User**, the funnel requires the same individual user (`@user.id`) to complete every step for the conversion to count.
 
-- If you select <strong>Account</strong>, different users within the same account can complete different steps and the conversion still counts. In this case, the funnel is tied to the <code>@account.id</code> facet.
+- If you select **Account**, different users within the same account can complete different steps and the conversion still counts. In this case, the funnel is tied to the `@account.id` facet.
 
-{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_refine_conversion.png" alt="The section of the UI where you can select Session, User, or Account to analyze your conversion.." style="width:50%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_refine_conversion.png" alt="The section of the UI where you can select Session, User, or Account to analyze your conversion." style="width:50%;" >}}
  
-
-
 
 A conversion refers to the moment when a user responds to a call to action. You can measure conversion by the following attributes:
 
 - **Conversion count**: A count of users who went through the funnel you've defined.
 - **Conversion rate**: This rate is the percentage of users who have entered the funnel and converted.
-- **Time to convert**: The time it took for the user to complete the step events. This option is not available for the funnel steps visualization; if you select it, the visualization automatically changes to a timeseries.
+- **Time to convert**: The time it took for the user to complete the step events. This option is not available for the funnel steps [visualization](#change-the-visualization); if you select it, the visualization automatically changes to a timeseries.
 
+{{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_conversion_measures.png" alt="The section of the UI where you can select Session, User, or Account to analyze your conversion." style="width:50%;" >}}
 
 You can measure these attributes **across all steps** or between **specific steps**.
 
@@ -152,7 +151,7 @@ Visualize the top values from a facet based on your chosen measure.
 {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_toplist.png" alt="View conversion data as a top list." style="width:80%;" >}}
 
 ## Navigate funnel charts
-Click on the funnel chart to open a side panel with additional context about user dropoffs. Then, navigate between steps to see:
+To get more context about user dropoffs, click on the funnel chart to open a side panel that contains additional information. Then, navigate between steps to see:
 
 - **Step performance**: See metrics related to conversion (for example, conversion rate, dropped off sessions, and average conversion time).
 - **Branching paths from the previous step**: Discover the other paths that users take instead of the ones you anticipate. This section is only available when looking at a step between two views in a funnel.
