@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Application Security - Appsec Injector
+title: Kubernetes Application Security using Appsec Injector
 description: Automatically enable Application Security monitoring for ingress proxies and gateways in Kubernetes
 aliases:
     - /agent/kubernetes/appsec
@@ -49,7 +49,15 @@ The Appsec Injector is a Kubernetes controller that:
 - **Istio**: Automatically creates `EnvoyFilter` resources in the Istio system namespace
 
 More proxies are available via manual installation on the global [setup page][10].
+## Limitations
 
+- Requires Datadog Cluster Agent 7.73.0 or later
+- Supported proxy types: Envoy Gateway, Istio
+- External processor must be manually deployed and scaled
+- Cross-namespace service references require appropriate NetworkPolicy and ReferenceGrant configuration
+- For specific proxy version compatibility, see:
+  - [Envoy Gateway compatibility][8]
+  - [Istio compatibility][9]
 ## Prerequisites
 
 Before enabling the Appsec Injector, ensure you have:
@@ -202,7 +210,7 @@ datadog:
         - istio
 ```
 
-### Step 4: verify installation
+### Step 4: Verify installation
 
 After applying your configuration, verify the injector is running:
 
@@ -230,9 +238,9 @@ kubectl get envoyfilter -n istio-system
 
 Send requests through your gateway and verify they appear in the Datadog App and API Protection UI:
 
-1. Navigate to [Security > Application Security][5] in Datadog
-2. Look for security signals from your gateway traffic
-3. Verify that threat detection is active
+1. Navigate to [Security > Application Security][5] in Datadog.
+2. Look for security signals from your gateway traffic.
+3. Verify that threat detection is active.
 
 ## Configuration reference
 
@@ -243,7 +251,7 @@ Send requests through your gateway and verify they appear in the Datadog App and
 | `enabled` | Boolean | `false` | Enable or disable the Appsec Injector |
 | `autoDetect` | Boolean | `true` | Automatically detect and configure supported proxies |
 | `proxies` | Array | `[]` | Manual list of proxy types to configure. Valid values: `"envoy-gateway"`, `"istio"` |
-| `processor.service.name` | String | - | **Required.** Name of the external processor Kubernetes Service |
+| `processor.service.name` | String |   | **Required.** Name of the external processor Kubernetes Service |
 | `processor.service.namespace` | String | Cluster Agent namespace | Namespace where the external processor Service is deployed. Defaults to the namespace where the Cluster Agent is running |
 | `processor.address` | String | `{service.name}.{service.namespace}.svc` | (Optional) Full service address override |
 | `processor.port` | Integer | `443` | Port of the external processor service |
