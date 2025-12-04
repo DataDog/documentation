@@ -290,7 +290,7 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 {{< tabs >}}
 {{% tab "AWS" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
-1. If required, use filters to find the account you want to stop resource collection for. Click the account to open the side panel that contains its settings.
+1. If required, use filters to find the account you want to stop agentless scanning for. Click the account to open the side panel that contains its settings.
 1. On the **Features** tab, click **Configure Agentless Scanning** to open the Agentless Scanning Setup modal.
 1. Under **How would you like to set up Agentless scanning?**, click **Terraform**.
 1. Under **Enable Features**, beside **Enable Agentless Vulnerability management**, switch the toggle to the off position.
