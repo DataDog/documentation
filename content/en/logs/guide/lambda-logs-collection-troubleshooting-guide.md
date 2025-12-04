@@ -14,7 +14,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
     * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][3]. 
     * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
-3. If logs appear in Live Tail but are missing from the Log Explorer, the discrepancy is likely due to one of the following reasons (refer to the [logs troubleshooting document for details][4]):
+3. If logs appear in Live Tail but are missing from the Log Explorer, the discrepancy is likely due to one of the following reasons (see the [logs troubleshooting document for details][4]):
    * Your log index has exclusion filters that are actively filtering out these logs.
    * You have exceeded your daily logs quota.
    * The logs have a timestamp older than 18 hours in the past.
@@ -29,7 +29,7 @@ Verify the forwarder's policy by running the following command:
    get-policy command aws lambda get-policy --function-name <FUNCTION_NAME>
    ```
 
-This command returns a resource-based policy that specifies which AWS services and resources (like specific S3 buckets) are allowed to invoke the forwarder function. Crucially, ensure the Action and Resource elements in the policy document exactly match the specifications in our [public documentation][5].
+This command returns a resource-based policy that specifies which AWS services and resources (like specific S3 buckets) are allowed to invoke the forwarder function. Crucially, ensure the Action and Resource elements in the policy document exactly match the specifications in the [public documentation][5].
 
 ## Check the Lambda function monitoring tab
 
@@ -118,7 +118,7 @@ The lambda forwarder uses the following [environment variables][12] to filter lo
 * INCLUDE_AT_MATCH
 * EXCLUDE_AT_MATCH
 
-You can search for these variables in the forwarder’s DEBUG logs and it will indicate whether or not certain logs are discarded due to the filter.  
+You can search for these variables in the forwarder's DEBUG logs, it indicates whether or not certain logs are discarded due to the filter.  
 
 ## Further reading
 
