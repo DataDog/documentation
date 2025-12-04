@@ -259,7 +259,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found.                                                                                         |
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter.                                                                                                                       |
 | `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                                                                                                                                              |
-| `APPROX_PERCENTILE(percentile) WITHIN GROUP (ORDER BY expression)` | typeof expression        | Computes an approximate percentile value. The percentile must be between 0.0 and 1.0 (inclusive). Requires the `WITHIN GROUP (ORDER BY ...)` syntax.                                              |
+| `APPROX_PERCENTILE(double percentile) WITHIN GROUP (ORDER BY expression e)` | typeof expression        | Computes an approximate percentile value. The percentile must be between 0.0 and 1.0 (inclusive). Requires the `WITHIN GROUP (ORDER BY ...)` syntax.                                              |
 | `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause.                                                                                                                    |
 
 {{% collapse-content title="Examples" level="h3" %}}
@@ -603,7 +603,7 @@ SELECT
 FROM
   logs
 
--- Calculate 95th and 99th percentiles by service
+-- Calculate 95th and 99th response time percentiles by service
 SELECT
   service_name,
   APPROX_PERCENTILE(0.95) WITHIN GROUP (ORDER BY response_time) AS p95_response_time,
