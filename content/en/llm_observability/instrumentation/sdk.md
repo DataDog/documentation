@@ -270,6 +270,10 @@ const llmobs = tracer.llmobs;
 
 **Options for general tracer configuration**:
 
+`site`
+: optional - _string_
+<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this defaults to the value of `DD_SITE`.
+
 `env`
 : optional - _string_
 <br />The name of your application's environment (examples: `prod`, `pre-prod`, `staging`). If not provided, this defaults to the value of `DD_ENV`.
@@ -281,10 +285,6 @@ const llmobs = tracer.llmobs;
 ##### Environment variables
 
 Set the following values as environment variables. They cannot be configured programmatically.
-
-`DD_SITE`
-: required - _string_
-<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_API_KEY`
 : optional - _string_
@@ -1919,6 +1919,53 @@ The versioning system works as follows:
 
 This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
 
+## Monitoring costs
+Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Use `LLMObs.annotate(metrics=...)` to attach token or cost metrics for a LLM/embedding call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
+
+#### Arguments
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="cost-tracking-arguments" %}}
+
+`metrics`
+: optional - dictionary
+<br />Token: `input_tokens`, `output_tokens`, `total_tokens`, `non_cached_input_tokens`, `cache_read_input_tokens`, `cache_write_input_tokens`
+<br />Cost (in dollars): `input_cost`, `output_cost`, `total_cost`, `non_cached_input_cost`, `cache_read_input_cost`, `cache_write_input_cost`
+
+{{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="model_name", model_provider="model_provider")
+def llm_call_a(prompt):
+    resp = ... # llm call here
+    # Annotate token metrics
+    LLMObs.annotate(
+        metrics={"input_tokens": 50, "output_tokens": 120, "total_tokens": 170,},
+    )
+    return resp
+
+@llm(model_name="model_name", model_provider="model_provider")
+def llm_call_b(prompt):
+    resp = ... # llm call here
+    # Annotate cost metrics
+    LLMObs.annotate(
+        metrics={"input_cost": 3, "output_cost": 7, "total_cost": 10,},
+    )
+    return resp
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Evaluations
 
 The LLM Observability SDK provides methods to export and submit your evaluations to Datadog.
@@ -1997,11 +2044,11 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 `metric_type`
 : required - _string_
-<br />The type of the evaluation. Must be `categorical` or `score`.
+<br />The type of the evaluation. Must be `categorical`, `score`, or `boolean`.
 
 `value`
 : required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (`metric_type==categorical`) or integer/float (`metric_type==score`).
+<br />The value of the evaluation. Must be a string (`metric_type==categorical`), integer/float (`metric_type==score`), or boolean (`metric_type==boolean`).
 
 `span`
 : optional - _dictionary_
@@ -2611,3 +2658,4 @@ tracer.use('http', false) // disable the http integration
 [11]: /tracing/trace_collection/compatibility/python/#integrations
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/instrumentation/auto_instrumentation/
+[14]: /llm_observability/monitoring/cost
