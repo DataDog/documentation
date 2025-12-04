@@ -2,6 +2,7 @@
 categories:
 - cloud
 - configuration & deployment
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md
 description: 본 통합을 활성화하여 CloudCheckr에서 Datadog 메트릭을 확인하세요.
@@ -14,7 +15,6 @@ has_logo: true
 integration_id: cloudcheckr
 integration_title: CloudCheckr
 is_public: true
-custom_kind: integration
 name: cloudcheckr
 public_title: Datadog-CloudCheckr 통합
 short_description: CloudCheckr에 Datadog 메트릭을 추가해 AWS 사용량을 모니터링 및 최적화하세요.
@@ -34,10 +34,6 @@ Datadog 계정을 CloudCheckr 계정에 연결하려면 다음을 따릅니다.
 
 - CloudCheckr 확장 프로그램을 클릭합니다.
 - [Datadog API 및 애플리케이션 키][2]를 추가합니다.
-
-## 참고 자료
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://spot.io/product/cloudcheckr/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
