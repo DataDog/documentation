@@ -6,9 +6,9 @@ aliases:
   - /security_platform/cloud_siem/
   - /security/cloud_siem/security_home/
 further_reading:
-- link: https://www.datadoghq.com/blog/cloud-siem-enterprise-security
-  tag: Blog
-  text: Datadog Cloud SIEM: Driving innovation in security operations
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
 - link: "https://www.datadoghq.com/blog/track-issues-datadog-case-management/"
   tag: "Blog"
   text: "Proactively track, triage, and assign issues with Datadog Case Management"

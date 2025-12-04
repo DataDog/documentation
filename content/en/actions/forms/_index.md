@@ -96,6 +96,10 @@ To visualize form responses in a dashboard:
 1. When [defining the metric][15], select **DDSQL Editor** and the datastore query you created earlier.
 1. Finish [configuring your widget][12], then click **Save**.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/actions/forms
 [2]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
 [3]: https://app.datadoghq.com/workflow/blueprints/scaffold-new-service

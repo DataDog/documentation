@@ -4,9 +4,9 @@ disable_toc: true
 aliases:
   - /security/cloud_siem/content_packs
 further_reading:
-- link: https://www.datadoghq.com/blog/cloud-siem-enterprise-security
-  tag: Blog
-  text: Datadog Cloud SIEM: Driving innovation in security operations
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
 - link: https://www.datadoghq.com/blog/oci-content-pack
   tag: Blog
   text: Monitor OCI Audit Logs with Datadog Cloud SIEM

@@ -2,11 +2,10 @@
 title: Sequence
 description: Learn about how the sequence detection method works.
 disable_toc: false
-
 further_reading:
-  - link: https://www.datadoghq.com/blog/cloud-siem-enterprise-security
-    tag: Blog
-    text: Datadog Cloud SIEM: Driving innovation in security operations
+  - link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+    tag: "Blog"
+    text: "Datadog Cloud SIEM: Driving innovation in security operations"
 
 ---
 
@@ -61,5 +60,9 @@ When you [create a sequence detection rule][1], you can configure these options:
 
 - Sequence detection supports up to 10 steps per rule and a total evaluation window of 24 hours.
 - Steps must be in a linear sequence.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=sequence
