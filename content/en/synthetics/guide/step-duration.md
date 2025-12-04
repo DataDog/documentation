@@ -21,6 +21,9 @@ Step duration includes:
 - Network request completion time
 
 Step duration does **not** include overhead such as finding the step element, taking screenshots, or creating snapshots on errors.
+This exclusion ensures that reported durations reflect only the actual execution time, giving you a clearer sense of how much you can fit into a single test.
+
+## Page load completion
 
 A page is considered fully loaded when:
 - The [frame](#understanding-frames) has finished loading, _and_
@@ -62,6 +65,12 @@ The Synthetics Worker also monitors pending network requests to determine step c
 **Performance optimization**: If a step takes approximately 10 seconds to complete, this typically indicates pending requests are causing delays. Check the network tab of that step or subsequent steps to identify slow requests. For requests irrelevant to your test, add them to the **blocked requests** section in your test configuration to improve performance.
 
 ## Troubleshooting
+
+### Timeout
+
+If your test reaches the maximum execution time, the timeout message indicates that the total includes both test steps and system overhead. This is why the reported test duration may differ from the sum of individual step durations.
+
+{{< img src="synthetics/browser_tests/test_results/test_execution_error.png" alt="Test duration execution error message stating 'Maximum test execution time reached. This includes test steps and system overhead, so reported test durations may vary'." style="width:90%;" >}}
 
 ### LCP impact on fully loaded time
 
