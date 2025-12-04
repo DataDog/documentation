@@ -11,34 +11,34 @@ private: true
 ## Overview
 
 
-Action Management is a no-code way of labeling autocaptured actions in your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page guides you through using Action Management for your use cases. 
+Action Management is a no-code way of labeling autocaptured actions in your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page guides you through getting started with using Action Management. 
 
 As this feature is in preview, here are some important things to consider:
 - There are known limitations with the feature which Datadog is addressing. See the [limitations section](#known-limitations) for more information.
 
-- Your feedback is invaluable to Datadog during this preview stage. Share all of your feedback with Milene through `milene.darnis@datadoghq.com` or using Slack. If you do not have a Slack channel for sharing your feedback, send an email to Milene to create one.
+- Your feedback is invaluable to Datadog during this preview stage. Share all of your feedback with the Product Analytics team using [Slack](https://chat.datadoghq.com/). If you do not have a Slack channel for sharing your feedback, send an message to Milene Darnis on the Datadog Public Slack.
 
 
 ## Setup 
 
 ### Step 1 - Install the browser extension 
 
-Labeling actions from this UI requires this [Chrome extension][1]. See the [manual instructions if needed][2]. 
+Labeling actions with Datadog Product Analytics requires this [Chrome extension][1]. See the [manual instructions if needed][2]. 
  
 
 ### Step 2 - Label your actions 
 
-1. Go to the [Actions][3] page in the Datadog UI, and click on **Label New Action**. This takes you to the point-and-click interface.
+1. Go to the [Actions][3] page in the Datadog UI, and click on **Label New Action**. This takes you to the point-and-click interface where you can select your actions.
 
 {{< img src="product_analytics/action_management/pana-labeled-new-action.png" alt="Actions page to start labelling" style="width:90%;">}}
 
 
-2. Use the **Navigate Site** mode to browse through your website and identify the location of your action 
+2. Use the **Navigate Site** mode to browse through your website and identify the location of your actions. 
 
 {{< img src="product_analytics/action_management/pana-point-click-interface.png" alt="The point and click interface used to locate and labed your action " style="width:90%;">}}
 
 
-3. Use the **Label Actions** mode then click on each action to name your actions. 
+3. Use the **Label Actions** mode, then click on each action to name your actions. 
 
 {{< img src="product_analytics/action_management/pana-label-mode.png" alt="Clik on and label your actions." style="width:90%;">}}
 
@@ -48,12 +48,12 @@ Labeling actions from this UI requires this [Chrome extension][1]. See the [manu
 {{< img src="product_analytics/action_management/pana-new-label-action.png" alt="Define your selected actions." style="width:90%;">}}
 
 
-5. When you are ready, click on "New Labeled Action" to
+5. When you are ready, click on **"New Labeled Action"** to:
 - Limit the action on the current page or define an action for that selector on any page
 - Limit to the target text on that page or define an action regardless of the target text (useful if your website is localized in several languages for instance)
 - Give a name (required) and description (optional) to the action
 
-You can also hold the Shift key to select other actions on the page and label several actions under the same name (will be used as an “OR” in analysis). 
+You can also hold the Shift key to select other actions on the page and label several actions under the same name (is used as an “OR” in analysis). 
 
 
 ### Step 3 - Retrieve your Label your actions 
@@ -69,10 +69,10 @@ After you define an action, you can find them in the [list of labeled actions][4
 
 ## Known limitations 
 - Action Management only works for web pages at this time, mobile support is on the roadmap. 
-- When switching to label mode, we will load the top elements on the page and you will have the ability to pick from these at the moment. 
-- You cannot label Actions that are hidden behind a hover today, please give us examples of when this limitation impacts you so we can find solutions to address it. 
-- Labeled actions can be used in Funnels and Retention graphs, we’re adding the ability to use them in all graphs this year.
-- Deleting a labeled will impact the dashboards where it was being used (the action will be removed from there too)
+- When switching to label mode, Datadog loads the top available elements. 
+- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with Datadog to inform future improvements. 
+- Labeled actions can only be used in Funnels and Retention graphs at this time. The ability to use them in all graphs is a feature .
+- Deleting a labeled action also deletes it from the dashboards where it is being used.
 
 
 
