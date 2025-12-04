@@ -9,6 +9,15 @@ export default {
     gov: 'US1-FED',
     ap2: 'AP2'
   },
+  dd_datacenter_lowercase: {
+    us: 'us1',
+    us3: 'us3',
+    us5: 'us5',
+    eu: 'eu1',
+    ap1: 'ap1',
+    ap2: 'ap2',
+    gov: 'us1_fed'
+  },
   dd_site: {
     us: 'datadoghq.com',
     us3: 'us3.datadoghq.com',
