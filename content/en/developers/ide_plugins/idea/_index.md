@@ -35,6 +35,42 @@ The Datadog plugin for JetBrains IDEs helps improve software performance by prov
 
 {{< img src="/developers/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
+## Requirements
+
+- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
+
+## Setup
+
+### Install the Datadog plugin
+
+1. In the IDE **Settings** select **Plugins** and search for `Datadog` in the **Marketplace** tab.
+1. Click **Install** to download and install the plugin in your IDE.
+1. Click **Restart IDE**.
+
+Alternatively, you can install the plugin from the [JetBrains Marketplace][4].
+
+<span id="datadog_plugin_install_button"></span>
+
+### Log in to Datadog
+
+After installing the Datadog plugin and restarting the IDE, log in to Datadog:
+1. With a file or project open in the IDE, click the **Datadog** tool window.
+1. Click **Log in...**.
+1. In the browser window that opens, select your site and organization, then authorize access to the platform.
+
+**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login your IDE is using, click **Settings** -> **Tools** -> **Datadog**, and check which account is active.
+
+### Link a service
+
+To provide relevant data from the Datadog platform, add related services to your project:
+1. With your project open in the IDE, open the **Datadog** tool window and select **Manage Linked Services...** from the **Options** menu.
+1. A settings dialog opens, click the plus icon (**+**).
+1. Search for and select the services that you want to add to the current project.
+
+To remove a service, select it in the **Services** table and click the minus icon (**-**).
+
+<div class="alert alert-info">The names of linked services persist with the project when you close it.</div>
+
 ## Core features
 
 ### Error Tracking
@@ -61,10 +97,7 @@ The [**Live Debugger**][20] enables you to add logpoints—auto-expiring, non-br
 Find out more in the [Live Debugger][20] sub-section.
 
 ### Code Security
-The [**Code Security**][24] integration promotes better security by:
-
-- flagging library vulnerabilities and runtime code vulnerabilities
-- checking your code changes locally, as you edit, to detect quality and security issues prior to commit
+The [**Code Security**][24] integration promotes better security by flagging library vulnerabilities and runtime code vulnerabilities. The local code analyzer checks your code changes locally, as you edit, to detect quality and security issues prior to commit.
 
 {{< img src="/developers/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:80%;" >}}
 
@@ -100,45 +133,6 @@ You can view recent test runs in the [CI Visibility Explorer][12] by navigating 
 {{< img src="/developers/ide_plugins/idea/ci-test-in-editor.png" alt="A source file showing a CI Test Run inlay." style="width:80%;" >}}
 
 Clicking the link opens the **Test Runs** tab showing the recent history for one test case.
-
-## Requirements
-
-- **A Datadog account**: The plugin requires a Datadog account (except when using [Static Analysis][13] features). If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
-
-## Setup
-
-### Install the Datadog plugin
-
-1. Click **Plugins** and search for `Datadog`.
-1. Click **Install** to download and install the plugin in your IDE.
-1. If you receive a prompt notifying you that Datadog is a third-party plugin, click **Accept**.
-1. Click **Restart IDE**.
-
-{{< img src="/developers/ide_plugins/idea/install-plugin.png" alt="The Datadog plugin" style="width:100%;" >}}
-
-Alternatively, you can install the plugin from the [JetBrains Marketplace][4].
-
-<span id="datadog_plugin_install_button"></span>
-
-### Log in to Datadog
-
-After installing the Datadog plugin and restarting the IDE, log in to Datadog:
-1. With a file or project open in the IDE, click the **Datadog** tool window.
-1. Click **Log in...**.
-1. In the browser window that opens, select your site and organization, then authorize access to the platform.
-
-**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login your IDE is using, click **Settings** -> **Tools** -> **Datadog**, and check which account is active.
-
-### Link a service
-
-To provide relevant data from the Datadog platform, add related services to your project:
-1. With your project open in the IDE, open the **Datadog** tool window and select **Manage Linked Services...** from the **Options** menu.
-1. A settings dialog opens, click the plus icon (**+**).
-1. Search for and select the services that you want to add to the current project.
-
-To remove a service, select it in the **Services** table and click the minus icon (**-**).
-
-<div class="alert alert-info">The names of linked services persist with the project when you close it.</div>
 
 ## Data and telemetry
 Datadog collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][16] and [Datadog's EULA][17].

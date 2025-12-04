@@ -8,7 +8,7 @@ further_reading:
 ---
 
 ## Overview
-The [Code Security][4] integration in the Datadog plugin for JetBrains IDEs promotes better security by flagging library vulnerabilities and runtime code vulnerabilities. It checks your code changes locally, as you edit, to detect quality and security issues prior to commit.
+The [Code Security][4] integration in the Datadog plugin for JetBrains IDEs promotes better security by flagging library vulnerabilities and runtime code vulnerabilities. The local code analyzer checks your code changes locally, as you edit, to detect quality and security issues prior to commit.
 
 The feature is supported for any source code repository that is onboarded for [Datadog Code Security][1].
 
