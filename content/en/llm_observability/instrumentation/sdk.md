@@ -270,6 +270,10 @@ const llmobs = tracer.llmobs;
 
 **Options for general tracer configuration**:
 
+`site`
+: optional - _string_
+<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this defaults to the value of `DD_SITE`.
+
 `env`
 : optional - _string_
 <br />The name of your application's environment (examples: `prod`, `pre-prod`, `staging`). If not provided, this defaults to the value of `DD_ENV`.
@@ -281,10 +285,6 @@ const llmobs = tracer.llmobs;
 ##### Environment variables
 
 Set the following values as environment variables. They cannot be configured programmatically.
-
-`DD_SITE`
-: required - _string_
-<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_API_KEY`
 : optional - _string_
