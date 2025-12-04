@@ -10,7 +10,7 @@ Use the following instructions to enable Misconfigurations and Identity Risks (C
 
 ## Enable resource scanning
 
-To enable resource scanning for your cloud accounts, you must first set up the integration and then enable Cloud Security for each AWS account, Azure subscription, and Google Cloud project.
+To enable resource scanning for your cloud accounts, you must first set up the integration and then enable Cloud Security for each AWS account, Azure account, and Google Cloud account.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
