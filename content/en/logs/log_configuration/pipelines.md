@@ -287,6 +287,8 @@ Reorder pipelines precisely with the `Move to` option in the sliding option pane
 
 {{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="How to reorder your pipelines precisely using the move to modal" style="width:50%;">}}
 
+Clone pipelines to reuse existing rules and processors without having to start over. When you clone a pipeline, Datadog automatically disables the pipeline you cloned. Click the toggle to enable.
+
 ## Estimated usage metrics
 
 Estimated usage metrics are displayed for each pipeline. This shows the volume and count of logs being ingested and modified by each pipeline. Every pipeline includes a link to the out-of-the-box [Logs Estimated Usage Dashboard][13]. This dashboard offers detailed charts of the pipeline's usage metrics.
