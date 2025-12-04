@@ -12,44 +12,159 @@ further_reading:
       text: 'Software Catalog'
 ---
 
-Data Streams Monitoring (DSM) tracks how data flows through queues and services. If your message system is **not automatically supported** (for example, your queue technology and language is not instrumented or the library you use in the language isn't automatically instrumented), you must **manually record checkpoints** so DSM can connect producers and consumers.
+Data Streams Monitoring (DSM) tracks how data flows through queues and services. Depending on your queue technology, language, and library, your message system may be [automatically supported][2]. If your message system is **not** automatically supported, **you must manually record produce and consume checkpoints**:
 
-- **Produce checkpoint**: records when a message is published, injects DSM context into the message.
-- **Consume checkpoint**: records when a message is received, extracting the DSM context if it exists, and prepares future produce checkpoints to carry that context forward.
+- **Produce checkpoint**: Records when a message is published, injects DSM context into the message.
+- **Consume checkpoint**: Records when a message is received, extracts the DSM context if it exists, and prepares future produce checkpoints to carry that context forward.
 
-**The DSM context must travel _with the message_**. If your system supports headers, store it there. Otherwise, embed it directly in the payload.
+The DSM context must travel _with the message_. If your system supports headers, store it there. Otherwise, embed it directly in the payload.
 
-### Manual instrumentation installation
-Ensure you're using the [Datadog Agent v7.34.0 or later][1].
+## Manual instrumentation 
 
+Ensure you're using the [Datadog Agent v7.34.0 or later][1]. Use the following methods to manually record produce and consume checkpoints. 
 
 {{< tabs >}}
 {{% tab "Java" %}}
-## API reference
 
-### `DataStreamsCheckpointer.get().setProduceCheckpoint(queueType, name, carrier)`
-- **queueType**: message system (for example `kafka`, `rabbitmq`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
-- **name**: queue, topic, or subscription name.
-- **carrier**: an implementation of `DataStreamsContextCarrier`. This is where DSM context is **stored** with the message (typically a headers map, but could be payload fields if no headers exist).
+#### Produce checkpoint
 
-### `DataStreamsCheckpointer.get().setConsumeCheckpoint(queueType, name, carrier)`
-- **queueType**: same as producer.
-- **name**: same as producer.
-- **carrier**: an implementation of `DataStreamsContextCarrier`. This is where DSM context is **retrieved** from the message.
+`DataStreamsCheckpointer.get().setProduceCheckpoint(queueType, name, carrier)`
 
-- **Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
+`queueType`
+: The message system (for example: `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized `queue_type` helps surface metrics related to that system in DSM, but other strings are also allowed.
 
----
+`name`
+: Queue, topic, or subscription name.
 
-## Examples in context (single block)
+`carrier`
+: An implementation of `DataStreamsContextCarrier`. This is where DSM context is **stored** with the message (typically a headers map, but could be payload fields if no headers exist).
 
-{{< code-block lang="java" >}}
+#### Consume checkpoint
+
+`DataStreamsCheckpointer.get().setConsumeCheckpoint(queueType, name, carrier)`
+
+`queueType`
+: The message system (for example: `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized `queue_type` helps surface metrics related to that system in DSM, but other strings are also allowed.
+
+`name`
+: Queue, topic, or subscription name.
+
+`carrier`
+: An implementation of `DataStreamsContextCarrier`. This is where DSM context is **retrieved** from the message.
+
+This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+#### Produce checkpoint
+
+`tracer.dataStreamsCheckpointer.setProduceCheckpoint(queueType, name, carrier)`
+
+`queueType`
+: The message system (for example: `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized `queue_type` helps surface metrics related to that system in DSM, but other strings are also allowed.
+
+`name`
+: Queue, topic, or subscription name.
+
+`carrier`
+: Writeable key/value container to **store** DSM context with the message (headers object if supported; otherwise add fields to the payload).
+
+#### Consume checkpoint
+
+`tracer.dataStreamsCheckpointer.setConsumeCheckpoint(queueType, name, carrier)`
+
+`queueType`
+: The message system (for example: `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized `queue_type` helps surface metrics related to that system in DSM, but other strings are also allowed.
+
+`name`
+: Queue, topic, or subscription name.
+
+`carrier`
+: Readable key/value container to **retrieve** DSM context from the message (headers object if supported; otherwise: the parsed payload).
+
+This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+#### Produce checkpoint
+
+`set_produce_checkpoint(queue_type, name, setter)`
+
+`queue_type`
+: The message system (for example: `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized `queue_type` helps surface metrics related to that system in DSM, but other strings are also allowed.
+
+`name`
+: Queue, topic, or subscription name.
+
+`setter`
+: A callable `(key, value)` used to **store** DSM context in the message.
+  - If headers are supported: use `headers.setdefault`.
+  - If not: use a function that writes into the message payload (like a JSON field).
+
+#### Consume checkpoint
+
+`set_consume_checkpoint(queue_type, name, getter)`
+
+`queue_type`
+: The message system (for example: `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized `queue_type` helps surface metrics related to that system in DSM, but other strings are also allowed.
+
+`name`
+: Queue, topic, or subscription name.
+
+`getter`
+: A callable `(key)` used to **retrieve** DSM context from the message.
+  - If headers are supported: use `headers.get`.
+  - If not: use a function that reads from the payload.
+
+This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+#### Produce checkpoint
+
+`Datadog::DataStreams.set_produce_checkpoint(queue_type, name, &block)`
+
+`queue_type`
+: The message system (for example: `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized `queue_type` helps surface metrics related to that system in DSM, but other strings are also allowed.
+
+`name`
+: Queue, topic, or subscription name.
+
+`block`
+: Yields `(key, pathway_context)`. Your block must **store** the DSM context with the message, under the given key.
+  - If headers are supported: put it in headers.
+  - If not: embed it in the payload.
+
+#### Consume checkpoint
+
+`Datadog::DataStreams.set_consume_checkpoint(queue_type, name, &block)`
+
+`queue_type`
+: The message system (for example: `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized `queue_type` helps surface metrics related to that system in DSM, but other strings are also allowed.
+
+`name`
+: Queue, topic, or subscription name.
+
+`block`
+: Yields `(key)`. Your block must **retrieve** the DSM context from the message — from the header or message body, depending on how it was produced.
+
+This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Examples
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+{{< code-block lang="java" filename="producer-service.java">}}
 import datadog.trace.api.experimental.*;
 import java.util.*;
 
-// ==========================
-// producer-service.java
-// ==========================
 public class ProducerService {
     private final Channel channel;   // your MQ/Kafka/etc. client
 
@@ -74,9 +189,12 @@ public class ProducerService {
     }
 }
 
-// ==========================
-// consumer-service.java
-// ==========================
+{{< /code-block >}}
+
+{{< code-block lang="java" filename="consumer-service.java">}}
+import datadog.trace.api.experimental.*;
+import java.util.*;
+
 public class ConsumerService {
     public void handleMessage(String payload, Headers headers) {
         Carrier headersAdapter = new Carrier(headers);
@@ -94,9 +212,9 @@ public class ConsumerService {
     }
 }
 
-// ==========================
-// carrier implementation
-// ==========================
+{{< /code-block >}}
+
+{{< code-block lang="java" filename="carrier.java">}}
 private class Carrier implements DataStreamsContextCarrier {
     private Headers headers;
 
@@ -115,28 +233,12 @@ private class Carrier implements DataStreamsContextCarrier {
     }
 }
 {{< /code-block >}}
+
 {{% /tab %}}
+
 {{% tab "Node.js" %}}
-## API reference
 
-### `tracer.dataStreamsCheckpointer.setProduceCheckpoint(queueType, name, carrier)`
-- **queueType**: message system (for example `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
-- **name**: queue, topic, or subscription name.
-- **carrier**: writeable key/value container to **store** DSM context with the message (headers object if supported; otherwise add fields to the payload).
-
-### `tracer.dataStreamsCheckpointer.setConsumeCheckpoint(queueType, name, carrier)`
-- **queueType**: same value used by the producer (recognized strings preferred, other strings allowed).
-- **name**: same queue, topic, or subscription name.
-- **carrier**: readable key/value container to **retrieve** DSM context from the message (headers object if supported; otherwise the parsed payload).
-
-**Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
-
-## Examples in context (single block)
-
-{{< code-block lang="js" >}}
-// ==========================
-// producer-service.js
-// ==========================
+{{< code-block lang="js" filename="producer-service.js">}}
 const tracer = require('dd-trace').init({}) // init in the producer service
 
 async function publishOrder(order, channel) {
@@ -154,10 +256,10 @@ async function publishOrder(order, channel) {
   const payload = JSON.stringify(order)
   publisher.publish('orders', Buffer.from(payload), { headers })
 }
+{{< /code-block >}}
 
-// ==========================
-// consumer-service.js
-// ==========================
+{{< code-block lang="js" filename="consumer-service.js">}}
+
 const tracer = require('dd-trace').init({}) // init in the consumer service
 
 function handleMessage(msg) {
@@ -176,31 +278,11 @@ function handleMessage(msg) {
   processOrder(body)
 }
 {{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Python" %}}
-## API reference
 
-### `set_produce_checkpoint(queue_type, name, setter)`
-- **queue_type**: message system (for example `kafka`, `rabbitmq`, `sqs`, `sns`, `kinesis`, `servicebus`). Recognized strings surface system-specific DSM metrics; other strings are allowed.
-- **name**: queue, topic, or subscription name.
-- **setter**: a callable `(key, value)` used to **store** DSM context in the message.
-  - If headers are supported: use `headers.setdefault`.
-  - If not: use a function that writes into the message payload (like a JSON field).
-
-### `set_consume_checkpoint(queue_type, name, getter)`
-- **queue_type**: same as producer.
-- **name**: same as producer.
-- **getter**: a callable `(key)` used to **retrieve** DSM context from the message.
-  - If headers are supported: use `headers.get`.
-  - If not: use a function that reads from the payload.
-
-**Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
-
----
-
-## Examples in context (single block)
-
-{{< code-block lang="python" >}}
+{{< code-block lang="python" filename="producer_service.py" >}}
 # ==========================
 # producer_service.py
 # ==========================
@@ -221,9 +303,9 @@ def publish_order(order, channel):
     publisher.publish(topic="orders", body=payload, properties=headers)
 
 
-# ==========================
-# consumer_service.py
-# ==========================
+{{< /code-block >}}
+
+{{< code-block lang="python" filename="consumer_service.py">}}
 from ddtrace.data_streams import set_consume_checkpoint
 
 def handle_message(message, properties):
@@ -239,28 +321,10 @@ def handle_message(message, properties):
     # Continue with your application logic.
     process_order(message)
 {{< /code-block >}}
+
 {{% /tab %}}
+
 {{% tab "Ruby" %}}
-## API reference
-
-### `Datadog::DataStreams.set_produce_checkpoint(queue_type, name, &block)`
-- **queue_type**: the message system (for example `rabbitmq`, `kafka`, `sqs`, `sns`, `kinesis`, `servicebus`). Using a recognized queue_type helps surface metrics related to that system in Data Streams, but other strings are allowed if needed.
-- **name**: the queue, topic, or subscription name.
-- **block**: yields `(key, pathway_context)`. Your block must *store* the DSM context with the message, under the given key
-  - If headers are supported: put it in headers.
-  - If not: embed it in the payload.
-
-### `Datadog::DataStreams.set_consume_checkpoint(queue_type, name, &block)`
-- **queue_type**: same message system as the producer. Using a recognized queue_type helps surface metrics related to that system in Data Streams, but other strings are also allowed.
-- **name**: same queue, topic, or subscription name.
-- **block**: yields `(key)`. Your block must *retrieve* the DSM context from the message.
-  - Whichever method (header or message body), the message was produced with
-
-**Note**: This checkpoint does two things: it links the current message to the data stream, and it prepares this consumer to automatically pass the context to any messages it produces next.
-
----
-
-## Examples in context
 
 {{< code-block lang="ruby" >}}
 # Producer side
@@ -298,12 +362,10 @@ end
 
 {{% /tab %}}
 {{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
-[2]: /tracing/trace_collection/dd_libraries/java/
-[3]: https://pypi.org/project/confluent-kafka/
-[4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
-[5]: /remote_configuration
+[2]: /data_streams/#supported-languages-and-technologies
