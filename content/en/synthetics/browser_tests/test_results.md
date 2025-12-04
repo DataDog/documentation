@@ -147,9 +147,9 @@ For more information about cross-product correlation, see the [Ease Troubleshoot
 
 ### Step duration
 
-The step duration represents the amount of time the step takes to be considered fully loaded, using the [Datadog locator system][9]. For more information, see [How Step Duration is Determined in Browser Tests][25].
+Step duration represents the time a step takes to be considered fully loaded using the [Datadog locator system][9]. For more information, see [How Step Duration is Determined in Browser Tests][25].
 
-If your test reaches the maximum execution time, the timeout message indicates that the total includes both test steps and system overhead. This is why the reported test duration may differ from the sum of individual step durations.
+If your test reaches the maximum execution time, the timeout message indicates that the total duration includes both test steps and system overhead. As a result, the reported test duration may differ from the sum of individual step durations.
 
 {{< img src="synthetics/browser_tests/test_results/test_execution_error.png" alt="Test duration execution error message stating 'Maximum test execution time reached. This includes test steps and system overhead, so reported test durations may vary'." style="width:90%;" >}}
 
