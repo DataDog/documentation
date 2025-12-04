@@ -60,43 +60,52 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
    datadog/observability-pipelines-worker run
 ```
 
-## Seeing delayed logs at the destination
+## Worker logs issues
 
-Observability Pipelines destinations batch events before sending them to the downstream integration. For example, the Amazon S3, Google Cloud Storage, and Azure Storage destinations have a batch timeout of 900 seconds. If the other batch parameters (maximum events and maximum bytes) have not been met within the 900-second timeout, the batch is flushed at 900 seconds. This means the destination component can take up to 15 minutes to send out a batch of events to the downstream integration.
-
-These are the batch parameters for each destination:
-
-{{% observability_pipelines/destination_batching %}}
-
-See [event batching][6] for more information.
-
-## Duplicate Observability Pipelines logs
-
-If you see duplicate Observability Pipelines logs in [Log Explorer][7] and your Agent is running in a Docker container, you must exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. This prevents duplicate logs, as the Worker also sends its own logs directly to Datadog. See [Docker Log Collection][8] or [Setting environment variables for Helm][9] for more information.
-
-## Getting an error when installing a new version of the Worker
-
-If you try to install a new version of the Worker in an instance that is running an older version of the Worker, you get an error. You need to [uninstall][11] the older version before you can install the new version of the Worker.
-
-## No Worker logs in Log Explorer
+### No Worker logs in Log Explorer
 
 If you do not see Worker logs in [Log Explorer][12], make sure they are not getting excluded in your log pipelines. Worker logs must be indexed in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the Observability Pipelines UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
 
-## Too many files error
+### Duplicate Observability Pipelines logs
 
-If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
+If you see duplicate Observability Pipelines logs in [Log Explorer][7] and your Agent is running in a Docker container, you must exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. This prevents duplicate logs, as the Worker also sends its own logs directly to Datadog. See [Docker Log Collection][8] or [Setting environment variables for Helm][9] for more information.
 
-## The Worker is not receiving logs from the source
+## Worker issues and errors
+
+### Getting an error when installing a new version of the Worker
+
+If you try to install a new version of the Worker in an instance that is running an older version of the Worker, you get an error. You need to [uninstall][11] the older version before you can install the new version of the Worker.
+
+### Worker is not starting
+
+If the Worker is not starting, Worker logs are not sent to Datadog and are not visible in Log Explorer for troubleshooting. To view the logs locally, use the following command:
+
+- For a VM-based environment:
+    ```
+    sudo journalctl -u observability-pipelines-worker.service -b
+    ```
+
+- For Kubernetes:
+    ```
+    kubectl logs <pod-name>
+    ```
+    An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
+
+### Certificate verify failed
+
+If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. Observability Pipelines does not accept self-signed certificates because they are not secure.
+
+### Ensure your organization is enabled for RC
+
+If you see the error `Please ensure you organization is enabled for RC`, ensure your Worker API key has [Remote Configuration enabled][17]. See [Security considerations][19] for information on safeguards implemented for Remote Configuration.
+
+### The Worker is not receiving logs from the source
 
 If you have configured your source to send logs to the Worker, make sure the port that the Worker is listening on is the same port to which the source is sending logs.
 
 If you are using RHEL and need to forward logs from one port (for example UDP/514) to the port the Worker is listening on (for example, UDP/1514, which is an unprivileged port), you can use [`firewalld`][14] to forward logs from port 514 to port 1514.
 
-## Logs are not getting forwarded to the destination
-
-Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
-
-## Failed to connect error
+### Failed to connect error
 
 If you see an error similar to one of these errors:
 
@@ -125,34 +134,35 @@ curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.c
 
 The curl command you use is based on the port you are using, as well as the path and expected payload from your source.
 
-## Worker is not starting
+### Too many files error
 
-If the Worker is not starting, Worker logs are not sent to Datadog and are not visible in Log Explorer for troubleshooting. To view the logs locally, use the following command:
+If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
 
-- For a VM-based environment:
-    ```
-    sudo journalctl -u observability-pipelines-worker.service -b
-    ```
+## General pipeline issues
 
-- For Kubernetes:
-    ```
-    kubectl logs <pod-name>
-    ```
-    An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
-
-## Certificate verify failed
-
-If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. Observability Pipelines does not accept self-signed certificates because they are not secure.
-
-## Ensure your organization is enabled for RC
-
-If you see the error `Please ensure you organization is enabled for RC`, ensure your Worker API key has [Remote Configuration enabled][17]. See [Security considerations][19] for information on safeguards implemented for Remote Configuration.
-
-## Missing environment variable
+### Missing environment variable
 
 If you see the error `Configuration is invalid. Missing environment variable $<env_var>`, make sure you add the environment variables for your source, processors, and destinations when you install the Worker. See [Environment Variables][18] for a list of source, processor, and destination environment variables.
 
-## Failed to sync quota state
+## Logs pipeline issues
+
+### Logs are not getting forwarded to the destination
+
+Run the command `netstat -anp | find "<port_number>"` to check that the port that the destination is listening on is not being used by another service.
+
+### Seeing delayed logs at the destination
+
+Observability Pipelines destinations batch events before sending them to the downstream integration. For example, the Amazon S3, Google Cloud Storage, and Azure Storage destinations have a batch timeout of 900 seconds. If the other batch parameters (maximum events and maximum bytes) have not been met within the 900-second timeout, the batch is flushed at 900 seconds. This means the destination component can take up to 15 minutes to send out a batch of events to the downstream integration.
+
+These are the batch parameters for each destination:
+
+{{% observability_pipelines/destination_batching %}}
+
+See [event batching][6] for more information.
+
+## Component issues
+
+### Failed to sync quota state error
 
 The quota processor is synchronized across all Workers in a Datadog organization. For the synchronization, there is a default rate limit of 50 Workers per organization. When there are more than 50 Workers for an organization:
 - The processor continues to run, but does not sync correctly with the other Workers, which can result in logs being sent after the quota limit has been reached.
