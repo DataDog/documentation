@@ -134,14 +134,13 @@ Configure the Datadog Agent to use AWS Secrets to resolve secrets in Helm using 
 
 ##### Integration check
 
-```sh
+```sh 
 datadog: 
-  apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
   env:
    - name: DD_SECRET_BACKEND_TYPE
      value: "aws.secrets"
    - name: DD_SECRET_BACKEND_CONFIG
-     value: '{"aws_session":{"aws_region":"us-west-2"}}'
+     value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
 agents:
   rbac:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
@@ -157,12 +156,11 @@ agents:
 ##### Cluster check: without cluster check runners enabled
 ```sh
 datadog: 
-  apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
   env:
    - name: DD_SECRET_BACKEND_TYPE
      value: "aws.secrets"
    - name: DD_SECRET_BACKEND_CONFIG
-     value: '{"aws_session":{"aws_region":"us-west-2"}}'
+     value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
 agents:
   rbac:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
@@ -175,18 +173,17 @@ clusterAgent:
       cluster_check: true
       instances:
         - # some config
-          password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
+          password: "<PASSWORD>"
 ```
 
 ##### Cluster check: with cluster check runners enabled
 ```sh
 datadog: 
-  apiKey: ENC[My-Secrets;datadog-api-key]
   env:
    - name: DD_SECRET_BACKEND_TYPE
      value: "aws.secrets"
    - name: DD_SECRET_BACKEND_CONFIG
-     value: '{"aws_session":{"aws_region":"us-west-2"}}'
+     value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
 clusterAgent:
   confd:
   # this is an example
@@ -194,14 +191,14 @@ clusterAgent:
       cluster_check: true
       instances:
         - # some config
-          password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
+          password: "<PASSWORD>"
 clusterChecksRunner: 
   enabled: true
   env:
    - name: DD_SECRET_BACKEND_TYPE
      value: "aws.secrets"
    - name: DD_SECRET_BACKEND_CONFIG
-     value: '{"aws_session":{"aws_region":"us-west-2"}}'
+     value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
   rbac:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
     serviceAccountAnnotations:
@@ -219,16 +216,13 @@ Configure the Datadog Agent to use AWS Secrets to resolve secrets with the Datad
 
 ```sh
 spec:
-  global:
-    credentials:
-      apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
   override:
     nodeAgent:
       env:
        - name: DD_SECRET_BACKEND_TYPE
          value: "aws.secrets"
        - name: DD_SECRET_BACKEND_CONFIG
-         value: '{"aws_session":{"aws_region":"us-west-2"}}'
+         value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
       # IAM role ARN is required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
@@ -256,7 +250,7 @@ spec:
        - name: DD_SECRET_BACKEND_TYPE
          value: "aws.secrets"
        - name: DD_SECRET_BACKEND_CONFIG
-         value: '{"aws_session":{"aws_region":"us-west-2"}}'
+         value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
       # IAM role ARN required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
@@ -268,7 +262,7 @@ spec:
             cluster_check: true
             instances:
               - # some config
-                password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
+                password: "<PASSWORD>"
 ```
 
 <br>
@@ -277,9 +271,6 @@ spec:
 
 ```sh
 spec:
-  global:
-    credentials:
-      apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
   features:
     clusterChecks:
       useClusterChecksRunners: true
@@ -289,7 +280,7 @@ spec:
        - name: DD_SECRET_BACKEND_TYPE
          value: "aws.secrets"
        - name: DD_SECRET_BACKEND_CONFIG
-         value: '{"aws_session":{"aws_region":"us-west-2"}}'
+         value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
       # required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: <IAM role arn>
@@ -298,7 +289,7 @@ spec:
        - name: DD_SECRET_BACKEND_TYPE
          value: "aws.secrets"
        - name: DD_SECRET_BACKEND_CONFIG
-         value: '{"aws_session":{"aws_region":"us-west-2"}}'
+         value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
       # IAM role ARN required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::659775407889:policy/MrMcPatSecretsAccessPolicy
@@ -310,7 +301,7 @@ spec:
             cluster_check: true
             instances:
               - # some config
-                password: "ENC[mrmcpat/secrets;test-secret]" #CONFIRM WHAT SHOULD GO HERE
+                password: "<PASSWORD>"
 
 ```
 
