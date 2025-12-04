@@ -3923,26 +3923,26 @@ menu:
       parent: cloud_cost_tags
       identifier: cloud_cost_tag_explorer
       weight: 301
-    - name: Tag Pipelines
-      url: cloud_cost_management/tags/tag_pipelines
-      parent: cloud_cost_tags
-      identifier: cloud_cost_tag_pipelines
-      weight: 302
     - name: Multisource Querying
       url: cloud_cost_management/tags/multisource_querying
       parent: cloud_cost_tags
       identifier: cloud_cost_multisource_querying
-      weight: 303
+      weight: 302
     - name: Allocation
       url: cloud_cost_management/allocation
       parent: cloud_cost
       identifier: cloud_cost_cost_allocation
       weight: 4
+    - name: Tag Pipelines
+      url: cloud_cost_management/tags/tag_pipelines
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_tag_pipelines
+      weight: 401
     - name: Container Cost Allocation
       url: cloud_cost_management/allocation/container_cost_allocation
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_container_cost_allocation
-      weight: 401
+      weight: 402
     - name: AWS
       url: cloud_cost_management/allocation/container_cost_allocation/?tab=aws/
       parent: cloud_cost_container_cost_allocation
@@ -3962,12 +3962,12 @@ menu:
       url: cloud_cost_management/allocation/bigquery
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_cost_allocationbigquery
-      weight: 402
+      weight: 403
     - name: Custom Allocation Rules
       url: cloud_cost_management/allocation/custom_allocation_rules
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_custom_allocation_rules
-      weight: 403
+      weight: 404
     - name: Reporting
       url: cloud_cost_management/reporting
       parent: cloud_cost
