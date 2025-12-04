@@ -112,7 +112,7 @@ También puedes integrar la URL en una etiqueta HTML `<meta>`.
 
 Cada navegador interpreta el formato del informe de forma diferente:
 
-{{< tabs >}}
+{{&lt; tabs &gt;}}
 {{% tab "Firefox" %}}
 ```json
 {
@@ -200,16 +200,12 @@ Si utilizas la configuración CDN async o CDN sync para [Real User Monitoring][6
 script-src https://www.datadoghq-browser-agent.com
 ```
 
-## Referencias adicionales
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
 [3]: /es/getting_started/tagging/unified_service_tagging
-[4]: /es/real_user_monitoring/browser/setup/#initialization-parameters
+[4]: /es/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [5]: /es/logs/log_collection/javascript/#initialization-parameters
-[6]: /es/real_user_monitoring/browser/setup/
+[6]: /es/real_user_monitoring/application_monitoring/browser/setup/
 [7]: /es/logs/log_collection/javascript/#cdn-async
 [8]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4470
 [9]: https://www.npmjs.com/package/@datadog/browser-worker
