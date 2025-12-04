@@ -32,15 +32,15 @@ Before you begin, ensure you have the following:
     - Ensure [APM is enabled][4] in the Agent. *This allows the external processor service to send its own traces to the Agent.*
       - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
 
-## Automated configuration with Appsec Injector
+## Automated configuration with Gateway Injector
 
 <div class="alert alert-info">
-  The Appsec Injector can automatically configure your Istio service mesh for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
+  The AppSec Gateway Injector can automatically configure your Istio service mesh for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
 </div>
 
 Instead of manually deploying the external processor and configuring `EnvoyFilter` (as shown in the manual configuration section below), use the Appsec Injector to handle this automatically.
 
-### When to use the Appsec Injector
+### When to use the Gateway Injector
 
 Use the Appsec Injector if you want to:
 - Automatically configure Istio ingress gateways for Application Security
@@ -52,7 +52,7 @@ Use the Appsec Injector if you want to:
 
 **1. Deploy the external processor** using the deployment manifest shown in [Step 1](#1-deploy-the-datadog-external-processor-service) below.
 
-**2. Enable the Appsec Injector** using Helm values:
+**2. Enable the Injector** using Helm values:
 
 ```yaml
 datadog:
