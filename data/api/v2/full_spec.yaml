@@ -74998,10 +74998,14 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get the schedule on-call user
+      summary: Get scheduled on-call user
       tags:
       - On-Call
       x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
   /api/v2/on-call/teams/{team_id}/on-call:
     get:
       description: Get a team's on-call users at a given time
@@ -75045,6 +75049,10 @@ paths:
       tags:
       - On-Call
       x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
   /api/v2/on-call/teams/{team_id}/routing-rules:
     get:
       description: Get a team's On-Call routing rules
