@@ -4,6 +4,7 @@ description: Embed published apps in dashboards and sync them with template vari
 disable_toc: false
 aliases:
     - /service_management/app_builder/embedded_apps
+    - /actions/app_builder/embedded_apps/
 further_reading:
 - link: "https://app.datadoghq.com/actions/action-catalog/"
   tag: "App"
