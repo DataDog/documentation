@@ -4,7 +4,7 @@ private: true
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-  Action Management is currently in preview.
+  Action Management is in preview.
 {{< /callout >}} 
 
 
@@ -13,10 +13,10 @@ private: true
 
 Action Management is a no-code way of labeling autocaptured actions in your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page guides you through using Action Management for your use cases. 
 
-As this feature is currently in preview, here are some important things to keep in mind:
-- There are known limitations with the feature which Datadog is currently addressing. See the [limitations section](#known-limitations) for more information.
+As this feature is in preview, here are some important things to consider:
+- There are known limitations with the feature which Datadog is addressing. See the [limitations section](#known-limitations) for more information.
 
-- Your feedback is invaluable to Datadog during this preview stage. Share all of your feedback with Milene through `milene.darnis@datadoghq.com` or using Slack. If you do not currently have a Slack channel for sharing your feedback, send an email to Milene to create one.
+- Your feedback is invaluable to Datadog during this preview stage. Share all of your feedback with Milene through `milene.darnis@datadoghq.com` or using Slack. If you do not have a Slack channel for sharing your feedback, send an email to Milene to create one.
 
 
 ## Setup 
@@ -68,7 +68,7 @@ After you define an action, you can find them in the [list of labeled actions][4
 
 
 ## Known limitations 
-- Action Management currently only works for web pages, mobile support is on the roadmap. 
+- Action Management only works for web pages at this time, mobile support is on the roadmap. 
 - When switching to label mode, we will load the top elements on the page and you will have the ability to pick from these at the moment. 
 - You cannot label Actions that are hidden behind a hover today, please give us examples of when this limitation impacts you so we can find solutions to address it. 
 - Labeled actions can be used in Funnels and Retention graphs, we’re adding the ability to use them in all graphs this year.
