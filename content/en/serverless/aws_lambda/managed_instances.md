@@ -54,6 +54,10 @@ To correlate your logs and traces, ensure that you have set `DD_TRACE_ENABLED` a
 ## Known limitations
 During Preview, the Datadog Lambda Extension and Lambda Libraries only support trace collection for Python and Node.js runtimes.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /integrations/amazon-web-services/
 [2]: /serverless/aws_lambda/metrics?tab=python#enhanced-lambda-metrics
 [3]: /serverless/libraries_integrations/extension/

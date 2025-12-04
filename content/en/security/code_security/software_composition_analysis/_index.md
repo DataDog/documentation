@@ -104,6 +104,11 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 
 <!-- **Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][9] documentation. -->
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /security/code_security/software_composition_analysis/setup_static/
 [2]: /security/code_security/software_composition_analysis/setup_runtime/
 [3]: https://app.datadoghq.com/security/appsec/vm

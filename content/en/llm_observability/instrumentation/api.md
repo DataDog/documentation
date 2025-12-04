@@ -504,6 +504,10 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
 | attributes [*required*] | [[Attributes](#attributes)] | The body of the request. |
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /llm_observability/setup/sdk/
 [2]: /llm_observability/terms/
 [3]: /getting_started/tagging/

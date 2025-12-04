@@ -58,6 +58,10 @@ Under `@threat_intel.results` you can always see the full details of what was ma
 
  <!-- {{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}} -->
 
+ ## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security/threat_intelligence/#threat-intelligence-sources
 [2]: /integrations/guide/reference-tables
 [3]: /security/threat_intelligence/#threat-intelligence-facets

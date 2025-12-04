@@ -2652,6 +2652,9 @@ tracer.use('http', false) // disable the http integration
 {{% /tab %}}
 {{< /tabs >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/openai/openai-python
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html

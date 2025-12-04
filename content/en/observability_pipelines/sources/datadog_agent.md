@@ -44,6 +44,10 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /containers/docker/log/?tab=containerinstallation#linux
 [3]: /containers/guide/container-discovery-management/?tab=helm#setting-environment-variables

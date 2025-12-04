@@ -20,3 +20,7 @@ What this pack does:
 - Keeps detections and enforcement logs
 - Drops redundant and benign events
 - Normalizes traffic, threat, and system fields
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

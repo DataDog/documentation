@@ -53,6 +53,10 @@ Click on a prompt to open a detailed side-panel view that features information a
 
 You can use the LLM Observability Trace Explorer to locate requests by prompt usage. You can use a prompt's name, ID, and version as facets for both trace-level and span-level search. Click any LLM span to see the prompt that generated it.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/llm/traces
 [2]: https://app.datadoghq.com/llm/playground
 [3]: /llm_observability/instrumentation/sdk/?tab=python#prompt-tracking

@@ -91,6 +91,10 @@ To set up packs:
             1. The pack is added to the last processor group in your pipeline.
             1. Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/set_up_pipelines/

@@ -413,6 +413,9 @@ java -javaagent:dd-java-agent.jar -Ddd.llmobs.enabled=true -Ddd.llmobs.ml-app=<Y
 
 {{< /tabs >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/modelcontextprotocol/python-sdk
 [2]: /llm_observability/instrumentation/sdk
