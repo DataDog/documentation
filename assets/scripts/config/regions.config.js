@@ -350,12 +350,12 @@ export default {
     gov: 'https://ip-ranges.ddog-gov.com'
   },
   otlp_trace_endpoint: {
-    us: 'https://trace.agent.datadoghq.com/v1/traces',
-    us3: 'https://trace.agent.us3.datadoghq.com/v1/traces',
-    us5: 'https://trace.agent.us5.datadoghq.com/v1/traces',
-    eu: 'https://trace.agent.datadoghq.eu/v1/traces',
-    ap1: 'https://trace.agent.ap1.datadoghq.com/v1/traces',
-    ap2: 'https://trace.agent.ap2.datadoghq.com/v1/traces'
+    us: 'https://otlp.datadoghq.com/v1/traces',
+    us3: 'https://otlp.us3.datadoghq.com/v1/traces',
+    us5: 'https://otlp.us5.datadoghq.com/v1/traces',
+    eu: 'https://otlp.datadoghq.eu/v1/traces',
+    ap1: 'https://otlp.ap1.datadoghq.com/v1/traces',
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/traces'
   },
   otlp_metrics_endpoint: {
     us: 'https://otlp.datadoghq.com/v1/metrics',
@@ -588,5 +588,14 @@ export default {
     ap1: '',
     ap2: '',
     gov: ''
+  },
+  microsoft_teams_app_name: {
+    us: 'Datadog',
+    us3: 'Datadog',
+    us5: 'Datadog',
+    eu: 'Datadog',
+    ap1: 'Datadog',
+    ap2: 'Datadog',
+    gov: 'Datadog for Government'
   }
 };

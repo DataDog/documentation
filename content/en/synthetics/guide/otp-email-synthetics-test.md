@@ -138,10 +138,10 @@ From here, you can continue [recording the rest of your Browser Test][9] and the
 [2]: https://app.datadoghq.com/synthetics/settings/variables
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
-[5]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#javascript
-[6]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
-[7]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#email
+[5]: /synthetics/browser_tests/test_steps/?tab=testanelementontheactivepage#javascript
+[6]: /synthetics/browser_tests/test_steps/?tab=testanelementontheactivepage#assertion
+[7]: /synthetics/browser_tests/test_steps/?tab=testanelementontheactivepage#email
 [8]: /synthetics/guide/email-validation/#create-an-email-variable
-[9]: /synthetics/browser_tests/actions?tab=testanelementontheactivepage
+[9]: /synthetics/browser_tests/test_steps?tab=testanelementontheactivepage
 [10]: /synthetics/browser_tests/test_results
-[11]: /synthetics/browser_tests/actions?tab=testanelementontheactivepage#automatically-recorded-steps
+[11]: /synthetics/browser_tests/test_steps?tab=testanelementontheactivepage#automatically-recorded-steps

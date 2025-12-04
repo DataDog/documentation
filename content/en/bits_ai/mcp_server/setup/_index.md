@@ -55,8 +55,8 @@ The following AI clients are compatible with the Datadog MCP Server.
 | [Codex CLI][7] | OpenAI | |
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
-| [Q CLI][10] | Amazon | For remote authentication, add `"oauthScopes": []` to the server [configuration](?tab=remoteauthentication#example-configurations). |
-| [Kiro][22] | Amazon | |
+| [Kiro][23] | Amazon | |
+| [Kiro CLI][10] | Amazon | |
 | [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
@@ -118,6 +118,7 @@ These examples are for the US1 site:
 * **Configuration file**: Edit the configuration file for your AI agent:
   * Codex CLI: `~/.codex/config.toml`
   * Gemini CLI: `~/.gemini/settings.json`
+  * Kiro CLI: `~/.kiro/settings/mcp.json`
 
   ```json
   {
@@ -125,19 +126,6 @@ These examples are for the US1 site:
       "datadog": {
         "type": "http",
         "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
-      }
-    }
-  }
-  ```
-  * Amazon Q CLI: `~/.aws/amazonq/default.json`
-
-  ```json
-  {
-    "mcpServers": {
-      "datadog": {
-        "type": "http",
-        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
-        "oauthScopes": []
       }
     }
   }
@@ -215,7 +203,7 @@ The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through 
 }
 {{< /code-block >}}
 
-For security, use a scoped API key and application key from a [service account][23] that has only the required permissions.
+For security, use a scoped API key and application key from a [service account][24] that has only the required permissions.
 
 ### Test access to the MCP Server
 
@@ -235,12 +223,13 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 
 - `core`: The default toolset
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][21]
+- `software-delivery`: Tools for interacting with Software Delivery [CI Visibility][22]
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
 
 - `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
 - `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,synthetics` retrieves both core and Synthetic Testing tools.
+- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,synthetics,software-delivery` retrieves core, Synthetic Testing, and Software Delivery tools.
 
 ## Available tools
 
@@ -391,6 +380,14 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
+### `search_datadog_ci_pipeline_events`
+*Toolset: **software-delivery***\
+Searches CI events with filters and returns details on them.
+
+- Show me all the pipelines for my commit `58b1488`.
+- Show me the latest pipeline failure in branch `my-branch`.
+- Propose a fix for the job `integration-test` that fails every time on my branch `my-branch`.
+
 ## Context efficiency
 
 The Datadog MCP Server is optimized to provide responses in a way that AI agents get relevant context without being overloaded with unnecessary information. For example:
@@ -419,7 +416,7 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [7]: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
 [8]: https://www.cursor.com/
 [9]: https://github.com/block/goose
-[10]: https://github.com/aws/amazon-q-developer-cli
+[10]: https://kiro.dev/cli/
 [11]: https://code.visualstudio.com/
 [12]: /developers/ide_plugins/vscode/
 [13]: https://nodejs.org/en/about/previous-releases
@@ -431,5 +428,6 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [19]: /account_management/rbac/permissions/#case-and-incident-management
 [20]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
 [21]: /synthetics/
-[22]: https://kiro.dev/
-[23]: /account_management/org_settings/service_accounts/
+[22]: /continuous_integration/
+[23]: https://kiro.dev/
+[24]: /account_management/org_settings/service_accounts/

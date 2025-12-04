@@ -13,7 +13,6 @@ further_reading:
   text: "Learn about advanced options in mobile tests"
 ---
  
-
 ## Overview
 
 Steps represent individually recorded interactions or assertions that you want to execute in your test. To define a step, click **Start Recording** and interact with the device as you would normally, or create a step manually by clicking **Assertion** or **Interaction**. 

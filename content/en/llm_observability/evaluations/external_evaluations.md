@@ -19,9 +19,20 @@ further_reading:
 ## Overview
 
 In the context of LLM applications, it's important to track user feedback and evaluate the quality of your LLM application's responses.
-While LLM Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to LLM Observability in two ways: with Datadog's [SDK](#submitting-evaluations-with-the-sdk), or with the [LLM Observability API](#submitting-evaluations-with-the-api). See [Naming custom metrics][1] for guidelines on how to choose an appropriate label for your evaluations.
+While LLM Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to LLM Observability in two ways: with Datadog's [SDK](#submitting-evaluations-with-the-sdk), or with the [LLM Observability API](#submitting-evaluations-with-the-api). Use this naming convention for the evaluation label:
 
-<div class="alert alert-info">Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.</div>
+* Evaluation labels must start with a letter.
+* Evaluation labels must only contain ASCII alphanumerics or underscores.
+  * Other characters, including spaces, are converted to underscores.
+  * Unicode is not supported.
+* Evaluation labels must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
+
+<div class="alert alert-info">
+
+- Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
+- External evaluations are not supported for [OpenTelemetry spans][5].
+
+</div>
 
 ## Submitting external evaluations with the SDK
 
@@ -98,3 +109,4 @@ You can use the evaluations API provided by LLM Observability to send evaluation
 [2]: /llm_observability/setup/api/?tab=model#evaluations-api
 [3]: /llm_observability/setup/sdk/python/#evaluations
 [4]: /llm_observability/setup/sdk/nodejs/#evaluations
+[5]: /llm_observability/instrumentation/otel_instrumentation
