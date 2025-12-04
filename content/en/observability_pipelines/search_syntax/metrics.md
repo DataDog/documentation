@@ -28,8 +28,6 @@ An example of a free text search: `system.cpu.user`, which matches metrics with 
 You can search the attribute keys:
 
 - `kind`: Whether the metrics is `absolute` or `incremental`.
-	- `absolute` metrics set the reference value for future updates.
-	- `incremental` metrics update previous values.
 -  `value`: The metric type.
 	- `counter`
 	- `gauge`
@@ -42,11 +40,11 @@ Here are some attribute search syntax examples:
 : Matches metrics with `kind:absolute`.
 
 `value:counter`
-: Matches metrics with `counter` metrics.
+: Matches `counter` metrics.
 
 **Note**: Attribute searches are case sensitive.
 
-## Tags search {#tags-search}
+## Tags search
 
 You can search a metric's `tags`. Special characters and spaces in a tag must be escaped in the search syntax.
 
@@ -58,20 +56,20 @@ The following characters are considered special and must be escaped with a backs
 
 **Notes**:
 
-\- `/` is not considered a special character and doesn't need to be escaped.
-\- You can search for special characters in tag. See [Search a tag that contains special characters](#search-a-tag-that-contains-special-characters).
-\- If you want to match metrics tags that contain the special character `!` , use the attribute search syntax: `tags:*/:!*.`
+- `/` is not considered a special character and doesn't need to be escaped.
+- You can search for special characters in tag. See [Search a tag that contains special characters](#search-a-tag-that-contains-special-characters).
+- If you want to match metrics tags that contain the special character `!` , use the attribute search syntax: `tags:*\:!*.`
 
 ### Search a tag that contains special characters
 
 Searching for a tag that contains special characters requires escaping or double quotes. For example, to search for a tag `my_app` with the value `hello:world`, use one of the following search syntaxes:
 
-- `tags\:my_app:hello\:world`
-- `tags:\my_app:"hello:world"`
+- `tags:my_app:hello\:world`
+- `tags:my_app:"hello:world"`
 
 ### Match a single special character
 
-To match a single special character or space, use the `?` wildcard. For example, the search syntax: `"tags\:message\:hello?world"` matches metrics with either of these tags:
+To match a single special character or space, use the `?` wildcard. For example, the search syntax: `"tags:message\:hello?world"` matches metrics with either of these tags:
 
 - `message:"hello world"`
 - `message:"hello-world"`.
@@ -96,9 +94,9 @@ To learn how to escape special characters in a tag search, let's look at a metri
 }
 ```
 
-The following are search syntax examples that escape special character in the metric example:
+The following are search syntax examples that escape special characters in the metric example:
 
-`tags:env\*`
+`tags:env*`
 : Matches metrics with  `tags` containing the `env`  key.
 
 `tags:(env\:prod OR env\:test)`
@@ -122,7 +120,7 @@ The follow are example queries that use Boolean operators:
 `system.cpu.user OR system.cpu.user.total`
 : Matches metrics that have either `name:system.cpu.user` or `name:system.cpu.user.total`.
 
-`value:counter AND (tags:env/:staging OR tags:env/:dev)`
+`value:counter AND (tags:env\:staging OR tags:env\:dev)`
 : Matches metrics that have both `counter:{value:<value>}` and the either the tag `env:prod` or `env:dev`
 
 ## Wildcards
@@ -130,13 +128,13 @@ The follow are example queries that use Boolean operators:
 ​​You can use `*` for wildcard searches. The following are wildcard search examples:
 
 `*system.cpu.user*`
-: Matches metrics with a `name` field value that contains `system.cpu.user`.
+: Matches metrics with a `name` value that contains `system.cpu.user`.
 
 `system.cpu.user*`
-: Matches metrics with a `name` field value that starts with `system.cpu.user`.
+: Matches metrics with a `name` value that starts with `system.cpu.user`.
 
 `*system.cpu.user`
-: Matches metrics with a `name` field value that ends with `system.cpu.user`.
+: Matches metrics with a `name` value that ends with `system.cpu.user`.
 
 `tags:*\:bin`
 : Matches metrics that have a tag with the value `bin`, regardless of what the tag key is.
