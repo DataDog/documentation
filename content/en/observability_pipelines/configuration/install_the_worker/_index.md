@@ -395,6 +395,10 @@ sudo apt-get remove --purge observability-pipelines-worker
 {{% /tab %}}
 {{< /tabs >}}
 
+## Index your Worker logs
+
+Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -407,3 +411,4 @@ sudo apt-get remove --purge observability-pipelines-worker
 [6]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [7]: /observability_pipelines/guide/environment_variables/
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
+[9]: /logs/log_configuration/indexes/
