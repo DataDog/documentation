@@ -4940,12 +4940,18 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
+    - name: Data Observability
+      url: data_observability/
+      pre: inventories
+      identifier: data_observability
+      parent: data_observability_heading
+      weight: 60000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: inventories
       identifier: quality_monitoring
       parent: data_observability_heading
-      weight: 60000
+      weight: 70000
     - name: Data Quality
       url: data_observability/data_quality
       identifier: data_quality
@@ -4956,13 +4962,13 @@ menu:
       pre: data-jobs-monitoring
       identifier: data_jobs
       parent: data_observability_heading
-      weight: 70000
+      weight: 80000
     - name: Integrations
       url: data_observability/integrations
       pre: integrations
       identifier: data_integrations
       parent: data_observability_heading
-      weight: 80000
+      weight: 90000
     - name: Warehouse Integrations
       url: data_observability/integrations/warehouse
       identifier: warehouse_integrations
