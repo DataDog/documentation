@@ -65,12 +65,12 @@ More proxies are available via manual installation on the global [setup page][10
 
 Before enabling the Security Injector, ensure you have:
 
-1. A running Kubernetes cluster (version 1.20 or later)
-2. [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
-3. One or more supported proxies installed:
-   - [Envoy Gateway][2]
-   - [Istio][3]
-4. [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
+- 1. A running Kubernetes cluster (version 1.20 or later)
+- 2. [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
+- 3. One or more supported proxies installed:
+-   - [Envoy Gateway][2]
+-   - [Istio][3]
+- 4. [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
 
 ## How it works
 
@@ -78,12 +78,12 @@ The Gateway Injector operates in **External Mode**, where a single Application S
 
 ### Architecture
 
-1. **External Processor Deployment**: You deploy a centralized Application Security processor as a Kubernetes Deployment with an associated Service.
-2. **Automatic Proxy Detection**: The Injector controller watches for supported proxy resources in your cluster using Kubernetes informers.
-3. **Automatic Configuration**: When proxies are detected, the injector creates the necessary configuration:
+-  **External Processor Deployment**: You deploy a centralized Application Security processor as a Kubernetes Deployment with an associated Service.
+-  **Automatic Proxy Detection**: The Injector controller watches for supported proxy resources in your cluster using Kubernetes informers.
+-  **Automatic Configuration**: When proxies are detected, the injector creates the necessary configuration:
    - For Envoy Gateway: Creates `EnvoyExtensionPolicy` resources that reference the external processor service
    - For Istio: Creates `EnvoyFilter` resources in the Istio system namespace
-4. **Traffic Processing**: Gateways route traffic to the external processor via the Kubernetes service for security analysis.
+-  **Traffic Processing**: Gateways route traffic to the external processor via the Kubernetes service for security analysis.
 
 ### Benefits
 
