@@ -906,6 +906,46 @@
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
   },
+  "CreateDeploymentGate": {
+    "description": "Endpoint to create a deployment gate.",
+    "summary": "Create deployment gate",
+    "request_description": "",
+    "request_schema_description": "Parameters for creating a deployment gate."
+  },
+  "CreateDeploymentRule": {
+    "description": "Endpoint to create a deployment rule. A gate for the rule must already exist.",
+    "summary": "Create deployment rule",
+    "request_description": "",
+    "request_schema_description": "Parameters for creating a deployment rule."
+  },
+  "DeleteDeploymentRule": {
+    "description": "Endpoint to delete a deployment rule.",
+    "summary": "Delete deployment rule"
+  },
+  "GetDeploymentRule": {
+    "description": "Endpoint to get a deployment rule.",
+    "summary": "Get deployment rule"
+  },
+  "UpdateDeploymentRule": {
+    "description": "Endpoint to update a deployment rule.",
+    "summary": "Update deployment rule",
+    "request_description": "",
+    "request_schema_description": "Parameters for updating a deployment rule."
+  },
+  "DeleteDeploymentGate": {
+    "description": "Endpoint to delete a deployment gate. Rules associated with the gate are also deleted.",
+    "summary": "Delete deployment gate"
+  },
+  "GetDeploymentGate": {
+    "description": "Endpoint to get a deployment gate.",
+    "summary": "Get deployment gate"
+  },
+  "UpdateDeploymentGate": {
+    "description": "Endpoint to update a deployment gate.",
+    "summary": "Update deployment gate",
+    "request_description": "",
+    "request_schema_description": "Parameters for updating a deployment gate."
+  },
   "GetDomainAllowlist": {
     "description": "Get the domain allowlist for an organization.",
     "summary": "Get Domain Allowlist"
@@ -1670,6 +1710,12 @@
     "request_description": "",
     "request_schema_description": "Update a restriction query."
   },
+  "ReplaceRestrictionQuery": {
+    "description": "Replace a restriction query.",
+    "summary": "Replace a restriction query",
+    "request_description": "",
+    "request_schema_description": "Update a restriction query."
+  },
   "RemoveRoleFromRestrictionQuery": {
     "description": "Removes a role from a restriction query.",
     "summary": "Revoke role from a restriction query",
@@ -1681,7 +1727,7 @@
     "summary": "List roles for a restriction query"
   },
   "AddRoleToRestrictionQuery": {
-    "description": "Adds a role to a restriction query.",
+    "description": "Adds a role to a restriction query.\n\n**Note**: This operation automatically grants the `logs_read_data` permission to the role if it doesn't already have it.",
     "summary": "Grant role to a restriction query",
     "request_description": "",
     "request_schema_description": "Relationship to role."
@@ -2540,6 +2586,36 @@
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
   },
+  "DetachCase": {
+    "description": "Detach security findings from their case. This operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
+    "summary": "Detach security findings from their case",
+    "request_description": "",
+    "request_schema_description": "Request for detaching security findings from their case."
+  },
+  "CreateCases": {
+    "description": "Create cases for security findings. You can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.",
+    "summary": "Create cases for security findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create cases for security findings."
+  },
+  "AttachCase": {
+    "description": "Attach security findings to a case. You can attach up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the specified case.",
+    "summary": "Attach security findings to a case",
+    "request_description": "",
+    "request_schema_description": "Request for attaching security findings to a case."
+  },
+  "AttachJiraIssue": {
+    "description": "Attach security findings to a Jira issue by providing the Jira issue URL. You can attach up to 50 security findings per Jira issue. If the Jira issue is not linked to any case, this operation will create a case for the security findings and link the Jira issue to the newly created case. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the specified Jira issue.",
+    "summary": "Attach security findings to a Jira issue",
+    "request_description": "",
+    "request_schema_description": "Request for attaching security findings to a Jira issue."
+  },
+  "CreateJiraIssues": {
+    "description": "Create Jira issues for security findings. This operation creates a case in Datadog and a Jira issue linked to that case for bidirectional sync between Datadog and Jira. You can create up to 50 Jira issues per request and associate up to 50 security findings per Jira issue. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the newly created Jira issue.",
+    "summary": "Create Jira issues for security findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create Jira issues for security findings."
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
@@ -2707,7 +2783,7 @@
     "request_schema_description": "Create a new rule."
   },
   "ConvertSecurityMonitoringRuleFromJSONToTerraform": {
-    "description": "Convert a rule that doesn't (yet) exist from JSON to Terraform for datadog provider\nresource datadog_security_monitoring_rule.",
+    "description": "Convert a rule that doesn't (yet) exist from JSON to Terraform for Datadog provider\nresource `datadog_security_monitoring_rule`. You can do so for the following rule types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection\n\nYou can convert Cloud Security configuration rules using Terraform's [Datadog Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).",
     "summary": "Convert a rule from JSON to Terraform",
     "request_description": "",
     "request_schema_description": "Convert a rule from JSON to Terraform."
@@ -2739,7 +2815,7 @@
     "request_schema_description": "Update an existing rule."
   },
   "ConvertExistingSecurityMonitoringRule": {
-    "description": "Convert an existing rule from JSON to Terraform for datadog provider\nresource datadog_security_monitoring_rule.",
+    "description": "Convert an existing rule from JSON to Terraform for Datadog provider\nresource `datadog_security_monitoring_rule`. You can do so for the following rule types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection\n\nYou can convert Cloud Security configuration rules using Terraform's [Datadog Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).",
     "summary": "Convert an existing rule from JSON to Terraform"
   },
   "TestExistingSecurityMonitoringRule": {
@@ -3068,6 +3144,24 @@
     "request_description": "",
     "request_schema_description": "Request to create a team"
   },
+  "ListTeamHierarchyLinks": {
+    "description": "List all team hierarchy links that match the provided filters.",
+    "summary": "Get team hierarchy links"
+  },
+  "AddTeamHierarchyLink": {
+    "description": "Create a new team hierarchy link between a parent team and a sub team.",
+    "summary": "Create a team hierarchy link",
+    "request_description": "",
+    "request_schema_description": "Request to create a team hierarchy link"
+  },
+  "RemoveTeamHierarchyLink": {
+    "description": "Remove a team hierarchy link by the given link_id.",
+    "summary": "Remove a team hierarchy link"
+  },
+  "GetTeamHierarchyLink": {
+    "description": "Get a single team hierarchy link for the given link_id.",
+    "summary": "Get a team hierarchy link"
+  },
   "DeleteTeamConnections": {
     "description": "Delete multiple team connections.",
     "summary": "Delete team connections",
@@ -3095,17 +3189,17 @@
     "request_schema_description": "Team sync request."
   },
   "ListMemberTeams": {
-    "description": "Get all member teams.",
+    "description": "Get all member teams.\n\n**Note**: This API is deprecated. For team hierarchy relationships (parent-child\nteams), use the team hierarchy links API: `GET /api/v2/team-hierarchy-links`.",
     "summary": "Get all member teams"
   },
   "AddMemberTeam": {
-    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.",
+    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.\n\n**Note**: This API is deprecated. For creating team hierarchy links, use the team hierarchy links API: `POST /api/v2/team-hierarchy-links`.",
     "summary": "Add a member team",
     "request_description": "",
     "request_schema_description": "Request to add a member team to super team's hierarchy"
   },
   "RemoveMemberTeam": {
-    "description": "Remove a super team's member team identified by `member_team_id`.",
+    "description": "Remove a super team's member team identified by `member_team_id`.\n\n**Note**: This API is deprecated. For deleting team hierarchy links, use the team hierarchy links API: `DELETE /api/v2/team-hierarchy-links/{link_id}`.",
     "summary": "Remove a member team"
   },
   "DeleteTeam": {

@@ -1,3 +1,4 @@
+{{ if eq (.Get "cloudservice") "jobs" }}<div class="alert alert-info">Serverless-init automatically creates a span for the duration of a task, even if the tracer is not installed. You can disable this by setting <code>DD_APM_ENABLED=false</code>. However, tracing is <strong>recommended</strong> because it is required for task-level visibility.</div>{{ end }}
 Datadog publishes new releases of the `serverless-init` container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
 
 | hub.docker.com | gcr.io | public.ecr.aws |
