@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
-The Dataset monitor is in Preview
+The Dataset monitor is in Preview.
 {{< /callout >}}"
 
 ## Overview
@@ -28,7 +28,7 @@ Dataset monitors enable you to alert on advanced log analysis by leveraging all 
 - Run complex SQL queries
 - Create sophisticated analysis workflows
 
-Dataset monitors offer full Notebook analysis features, letting you alert on complex data patterns not easily detected with standard monitors.
+Dataset monitors offer full Notebook analysis features, letting you alert on complex data patterns that standard monitors might miss.
 
 ## Monitor creation
 
