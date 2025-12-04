@@ -606,5 +606,14 @@ export default {
     ap1: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap1&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
     ap2: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap2&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDIuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
     gov: 'N/A'
+  },
+  microsoft_teams_app_name: {
+    us: 'Datadog',
+    us3: 'Datadog',
+    us5: 'Datadog',
+    eu: 'Datadog',
+    ap1: 'Datadog',
+    ap2: 'Datadog',
+    gov: 'Datadog for Government'
   }
 };
