@@ -42,10 +42,9 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations**.
-1. Expand the **AWS** section.
-1. To stop resource collection for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and switch the **Enable Resource Scanning** toggle to the off position.
-1. Click **Done**.
+1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **AWS**.
+1. If required, use filters to find the account you want to stop resource collection for. Click the account to open the side panel that contains its settings.
+1. On the **Features** tab, beside **Posture Management**, switch the **Enable** toggle to the off position.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -53,9 +52,8 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations**.
-1. Expand the **Azure** section.
-1. To stop resource collection for a subscription, switch the **Resource Scanning** toggle to the off position.
+1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **Azure**.
+1. To stop resource collection for an account, switch the **Resource Scanning** toggle to the off position.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -64,9 +62,8 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 {{% /tab %}}
 {{% tab "Google Cloud" %}}
 
-1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations**.
-1. Expand the **GCP** section.
-1. To stop resource collection for a project, switch the **Resource Scanning** toggle to the off position.
+1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **GCP**.
+1. To stop resource collection for an account, switch the **Resource Scanning** toggle to the off position.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup

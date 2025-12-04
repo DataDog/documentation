@@ -113,16 +113,6 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 4. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][14]. Paste that URL into the **Amazon S3 URL** field.
 5. Click **Next** to advance through the next several pages without modifying them, then submit the form.
 
-##### Disable Agentless Scanning
-
-1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
-1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Enable Vulnerability Management (Host, Container and Lambda)** section to the off position.
-1. Click **Done**.
-
-##### Uninstall Agentless Scanning
-
-To uninstall Agentless Scanning, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.
-
 {{% /collapse-content %}}
 
 <br />
@@ -186,16 +176,6 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 ##### Exclude resources from scans
 
 {{% csm-agentless-exclude-resources %}}
-
-##### Disable Agentless Scanning
-
-1. On the [Cloud Security Setup][10] page, click **Cloud Integrations**, and then expand the **AWS** or **Azure** section.
-1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Enable Vulnerability Management (Host, Container and Lambda)** to the off position.
-1. Click **Done**.
-
-##### Uninstall with Terraform
-
-Follow the instructions for [Terraform][9] uninstallation.
 
 ##### Update the Terraform modules version
 
@@ -267,16 +247,6 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 3. Click **Replace existing template**.
 4. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][14]. Paste that URL into the **Amazon S3 URL** field.
 5. Click **Next** to advance through the next several pages without modifying them, then submit the form.
-
-##### Disable Agentless Scanning
-
-1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
-1. To disable Agentless Scanning for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle the **Enable Vulnerability Management (Host, Container and Lambda)** section to the off position.
-1. Click **Done**.
-
-##### Uninstall with CloudFormation
-
-To uninstall Agentless Scanning, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.
 {{% /collapse-content %}}
 
 <br />
@@ -313,23 +283,57 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 
 {{% csm-agentless-exclude-resources %}}
 
-##### Disable Agentless Scanning
+{{% /collapse-content %}}
 
-1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **Azure**.
-1. Locate your subscription's tenant, expand the list of subscriptions, and identify the subscription for which you want to disable Agentless Scanning.
-1. Click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Enable Vulnerability Management (Host, Container and Lambda)** to the off position.
+## Disable Agentless scanning
+
+{{< tabs >}}
+{{% tab "AWS" %}}
+1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
+1. If required, use filters to find the account you want to stop resource collection for. Click the account to open the side panel that contains its settings.
+1. On the **Features** tab, click **Configure Agentless Scanning** to open the Agentless Scanning Setup modal.
+1. Under **How would you like to set up Agentless scanning?**, click **Terraform**.
+1. Under **Enable Features**, beside **Enable Agentless Vulnerability management**, switch the toggle to the off position.
 1. Click **Done**.
 
-##### Uninstall with Azure Resource Manager
+[10]: https://app.datadoghq.com/security/configuration/csm/setup
 
+{{% /tab %}}
+
+{{% tab "Azure" %}}
+1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **Azure**.
+1. Locate your subscription's tenant, expand the list of subscriptions, and identify the subscription for which you want to disable Agentless Scanning.
+1. Beside the **Enabled** label, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) to open the Vulnerability Scanning modal.
+1. Beside **Vulnerability Scanning**, switch the toggle to the off position.
+1. Click **Done**.
+
+[10]: https://app.datadoghq.com/security/configuration/csm/setup
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Uninstall Agentless scanning
+
+{{< tabs >}}
+{{% tab "Terraform" %}}
+To uninstall Agentless Scanning, remove the scanner module from your Terraform code. For more information, see the [Terraform module][9] documentation.
+
+[9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
+
+{{% /tab %}}
+
+{{% tab "AWS CloudFormation" %}}
+To uninstall Agentless Scanning, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.
+{{% /tab %}}
+
+{{% tab "Azure Resource Manager" %}}
 To uninstall Agentless Scanning, log in to your Azure subscription. If you created a dedicated resource group for the Agentless scanner, delete this resource group along with the following Azure role definitions:
   - Datadog Agentless Scanner Role
   - Datadog Agentless Scanner Delegate Role
 
 If you did not use a dedicated resource group, you must manually delete the scanner resources, which can be identified by the tags `Datadog:true` and `DatadogAgentlessScanner:true`.
-{{% /collapse-content %}}
-
-<br />
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
@@ -342,7 +346,6 @@ If you did not use a dedicated resource group, you must manually delete the scan
 [6]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
 [7]: #terraform-setup
 [8]: mailto:success@datadoghq.com
-[9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 [10]: https://app.datadoghq.com/security/configuration/csm/setup
 [11]: #aws-cloudformation-setup
 [12]: /security/cloud_security_management/agentless_scanning
