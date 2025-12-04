@@ -37,10 +37,6 @@ further_reading:
       text: 'How we manage incidents at Datadog'
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">Incident Management is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
-
 ## Overview
 
 Datadog Incident Management is for tracking and communicating about an issue you've identified with your metrics, traces, or logs.

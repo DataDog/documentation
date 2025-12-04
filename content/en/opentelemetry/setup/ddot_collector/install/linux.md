@@ -275,7 +275,7 @@ Use Datadog to explore the observability data for your application.
 
 ### Fleet automation
 
-Explore your Datadog Agent and Collector configuration.
+Explore your Datadog Agent, DDOT, and upstream OpenTelemetry Collector configurations.
 
 {{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Review your Agent and Collector configuration from the Fleet Automation page." style="width:100%;" >}}
 

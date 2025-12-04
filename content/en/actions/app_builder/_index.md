@@ -26,6 +26,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
   tag: "Learning Center"
   text: "Getting Started with App Builder"
+- link: "https://www.datadoghq.com/blog/generate-apps-with-ai/"
+  tag: "Blog"
+  text: "Build custom apps in seconds with conversational AI in App Builder"
 ---
 
 Datadog App Builder is a low-code application building platform. It streamlines the development of your internal tools with a user-friendly drag-and-drop interface and built-in support for JavaScript. App Builder integrates with popular services such as AWS and GitHub, allowing you to leverage data and seamlessly connect with external APIs and data stores. By integrating with Datadog's existing capabilities, App Builder provides a centralized context that enables you to take preventive actions or respond to ongoing incidents, all from within the same view that you use for troubleshooting.
@@ -85,7 +88,7 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 [1]: https://app.datadoghq.com/actions/action-catalog/
 [2]: /service_management/workflows/
 [3]: https://app.datadoghq.com/app-builder/blueprints
-[4]: https://datadoghq.slack.com/
+[4]: https://chat.datadoghq.com/
 [5]: /service_management/app_builder/build/#build-an-app-from-a-blueprint
 [6]: /service_management/app_builder/embedded_apps/#add-apps-to-your-dashboard
 [7]: https://app.datadoghq.com/dash/integration/60

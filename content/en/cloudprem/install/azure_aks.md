@@ -4,8 +4,8 @@ description: Learn how to install and configure CloudPrem on Azure AKS
 ---
 
 ## Overview
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 This document walks you through the process of installing CloudPrem on Azure AKS.

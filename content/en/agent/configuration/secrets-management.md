@@ -551,6 +551,20 @@ For containerized environments, the Datadog Agent's container images include a b
 * Kubernetes Secrets: using `ENC[k8s_secret@namespace/secret-name/key]`
 
 {{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+To use this executable with the Datadog Operator, configure it as follows:
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    secretBackend:
+      command: "/readsecret_multiple_providers.sh"
+```
+{{% /tab %}}
 {{% tab "Helm" %}}
 
 To use this executable with the Helm chart, set it as the following:
@@ -609,7 +623,41 @@ If you want the Agent to read a Secret from a different namespace, use the `k8s_
 password: ENC[k8s_secret@database/database-secret/password]
 ```
 
-In this case, you must manually configure RBAC to allow the Agent's Service Account to read the Secret:
+Configure RBAC to allow the Agent's Service Account to read the Secret. The following Role grants read access to the `database-secret` Secret in the `database` namespace:
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    secretBackend:
+      command: "/readsecret_multiple_providers.sh"
+      roles:
+      - namespace: database
+        secrets:
+        - "database-secret"
+```
+***Note***: Each namespace in the roles list must also be configured in the `WATCH_NAMESPACE` or `DD_AGENT_WATCH_NAMESPACE` environment variable on the Datadog Operator deployment.
+{{% /tab %}}
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  (...)
+  secretBackend:
+    command: "/readsecret_multiple_providers.sh"
+    roles:
+      - namespace: database
+        secrets:
+          - database-secret
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
+Alternatively, you can define RBAC resources directly:
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
