@@ -57,10 +57,10 @@ The following characters are considered special and must be escaped with a backs
 **Notes**:
 
 - `/` is not considered a special character and doesn't need to be escaped.
-- You can search for special characters in tag. See [Search a tag that contains special characters](#search-a-tag-that-contains-special-characters).
+- You can search for special characters in a tag. See [Search for a tag that contains special characters](#search-for-a-tag-that-contains-special-characters).
 - If you want to match metrics tags that contain the special character `!` , use the attribute search syntax: `tags:*\:!*.`
 
-### Search a tag that contains special characters
+### Search for a tag that contains special characters
 
 Searching for a tag that contains special characters requires escaping or double quotes. For example, to search for a tag `my_app` with the value `hello:world`, use one of the following search syntaxes:
 
