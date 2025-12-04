@@ -1,5 +1,5 @@
 - Socket address:
     - The address to which the Observability Pipelines Worker sends processed logs.
-	- Stored as the environment variable `DD_OP_DESTINATION_SOCKET_ADDRESS`.
+	- Stored in the environment variable `DD_OP_DESTINATION_SOCKET_ADDRESS`.
 - TLS passphrase:
-	- Stored as the environment variable `DD_OP_DESTINATION_SOCKET_KEY_PASS`.
+	- Stored in the environment variable `DD_OP_DESTINATION_SOCKET_KEY_PASS`.

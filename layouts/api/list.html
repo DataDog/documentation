@@ -28,8 +28,9 @@
     {{ end }}
     {{ $ParamTitleEn := ($.Scratch.Get "ParamTitleEn") }}
 
-    {{ $d := index $dot.Site.Data.api.v1 "full_spec_deref" }}
-    {{ $d2 := index $dot.Site.Data.api.v2 "full_spec_deref" }}
+    <!-- Load YAML specs using shared partial -->
+    {{ $d := partial "api/load-specs.html" (dict "version" "v1") }}
+    {{ $d2 := partial "api/load-specs.html" (dict "version" "v2") }}
 
     {{ $baseDir := "" }}
     {{ with .File }}
@@ -83,7 +84,7 @@
       <div class="col-12 col-md-6">
           <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
             {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
-              {{ $adat := (index (index $dot.Site.Data.api $versionNum) "full_spec_deref") }}
+              {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
               {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
               {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
               {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
@@ -99,90 +100,94 @@
     <div class="tab-content">
     <!-- If we have multiple endpoints for a version output them next to each other -->
     {{ range $versionIndex, $versionNum := .Params.versions }}
-      {{ $adat := (index (index $dot.Site.Data.api $versionNum) "full_spec_deref") }}
+      {{ $adat := partial "api/load-specs.html" (dict "version" $versionNum) }}
 
-      <!-- Get the general API server url for this version -->
-      {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
-      {{ $dot.Scratch.Set "regions" $generalRegions }}
+      {{ if $adat }}
+        <!-- Get the general API server url for this version -->
+        {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+        {{ $dot.Scratch.Set "regions" $generalRegions }}
 
-      {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
-      {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
+        {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
+        {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
 
-      <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">
+        <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">
 
-      <!-- for accessing v1/v2 resources from latest -->
-      {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" $baseDir "") }}
+        <!-- for accessing v1/v2 resources from latest -->
+        {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" $baseDir "") }}
 
-      {{ range $tag := (first 1 (where $adat.tags ".name" "==" $ParamTitleEn)) }}
-        <!-- get action strings from params, why? because they are translated here -->
-        {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
+        {{ $tags := $adat.tags | default (slice) }}
+        {{ range $tag := (first 1 (where $tags ".name" "==" $ParamTitleEn)) }}
+          <!-- endpoint section start -->
+          {{ if $endpoint }}
+          <!-- get action strings from params, why? because they are translated here -->
+          {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
+          <div class="row endpoint">
+              <div class="col-12">
+                  <div class="endpoint-content">
 
-        <!-- endpoint section start -->
-        {{ if $endpoint }}
-        <div class="row endpoint">
-            <div class="col-12">
-                <div class="endpoint-content">
+                      <!-- Unstable Notification on this endpoint -->
+                      {{ with index $endpoint.action "x-unstable"}}
+                        <div class="alert alert-warning mb-2 unstable">
+                            <p class="alert-warning">{{ . | markdownify }}</p>
+                        </div>
+                      {{ end }}
 
-                    <!-- Unstable Notification on this endpoint -->
-                    {{ with index $endpoint.action "x-unstable"}}
-                      <div class="alert alert-warning mb-2 unstable">
-                          <p class="alert-warning">{{ . | markdownify }}</p>
-                      </div>
-                    {{ end }}
+                      <!-- if this is deprecated and we have a higher version link to that -->
+                      {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1) (eq (index $tag "x-deprecated") true)) }}}}
+                        {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
+                        <div class="alert alert-warning">
+                          <p class="alert-warning">This endpoint is deprecated use the latest endpoint here <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
+                        </div>
+                      {{ end }}
 
-                    <!-- if this is deprecated and we have a higher version link to that -->
-                    {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1) (eq (index $tag "x-deprecated") true)) }}}}
-                      {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
-                      <div class="alert alert-warning">
-                        <p class="alert-warning">This endpoint is deprecated use the latest endpoint here <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
-                      </div>
-                    {{ end }}
+                      <!-- If this is a v1 visible endpoint and v2 is unstable, notify user of the unstable version -->
+                      {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1)) }}
+                        {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
+                        <div class="alert alert-warning mb-2 unstable-newer">
+                          <p class="alert-warning">Note: For the "v2" version of this endpoint, which is in beta, see <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
+                        </div>
+                      {{ end }}
 
-                    <!-- If this is a v1 visible endpoint and v2 is unstable, notify user of the unstable version -->
-                    {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1)) }}
-                      {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
-                      <div class="alert alert-warning mb-2 unstable-newer">
-                        <p class="alert-warning">Note: For the "v2" version of this endpoint, which is in beta, see <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
-                      </div>
-                    {{ end }}
+                      <p class="mb-0"><span style="padding: 3px" class="font-semibold text-api-{{ $endpoint.actionType }} bg-bg-api-{{ $endpoint.actionType }}">{{ $endpoint.actionType | upper }}</span>&nbsp;
+                        {{- range $region, $url := $endpoint.regions -}}
+                            <span class="d-none" data-region="{{ $region }}">{{ $url }}{{ $endpoint.pathKey }}</span>
+                        {{- end -}}
+                        {{- range $region, $url := $generalRegions -}}
+                            {{- if not (index ($endpoint.regions) $region) -}}
+                                <span class="d-none" data-region="{{ $region }}">Not supported in the {{ upper $region }} region</span>
+                            {{- end -}}
+                        {{- end -}}
+                      </p>
 
-                    <p class="mb-0"><span style="padding: 3px" class="font-semibold text-api-{{ $endpoint.actionType }} bg-bg-api-{{ $endpoint.actionType }}">{{ $endpoint.actionType | upper }}</span>&nbsp;
-                      {{- range $region, $url := $endpoint.regions -}}
-                          <span class="d-none" data-region="{{ $region }}">{{ $url }}{{ $endpoint.pathKey }}</span>
-                      {{- end -}}
-                      {{- range $region, $url := $generalRegions -}}
-                          {{- if not (index ($endpoint.regions) $region) -}}
-                              <span class="d-none" data-region="{{ $region }}">Not supported in the {{ upper $region }} region</span>
-                          {{- end -}}
-                      {{- end -}}
-                    </p>
+                      <h3 class="mt-2">{{ i18n "overview" }}</h3>
+                      <p>
+                       {{ $translate_action.description | default $endpoint.action.description | $dot.Page.RenderString }}
+                        <!-- required permissions and scopes -->
+                        {{ partial "api/permissions.html" (dict "context" $dot "endpoint" $endpoint "securitySchemes" $adat.components.securitySchemes "tag" $tag) }}
+                      </p>
 
-                    <h3 class="mt-2">{{ i18n "overview" }}</h3>
-                    <p>
-                     {{ $translate_action.description | default $endpoint.action.description | $dot.Page.RenderString }}
-                      <!-- required permissions and scopes -->
-                      {{ partial "api/permissions.html" (dict "context" $dot "endpoint" $endpoint "securitySchemes" $adat.components.securitySchemes "tag" $tag) }}
-                    </p>
+                      <!-- querystring, path params, header params -->
+                      {{ partial "api/arguments.html" (dict "context" $dot "endpoint" $endpoint) }}
 
-                    <!-- querystring, path params, header params -->
-                    {{ partial "api/arguments.html" (dict "context" $dot "endpoint" $endpoint) }}
+                      <!-- request body -->
+                      {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
 
-                    <!-- request body -->
-                    {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+                      <!-- response -->
+                      {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
 
-                    <!-- response -->
-                    {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+                      <!-- code example -->
+                      {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum) }}
+                  </div>
+              </div>
+          </div>
+          {{ else }}
+            {{ warnf "endpoint not found in api list.html lang: %q, version: %q, tag: %q" $dot.Lang $versionNum ($tag.name | default "") }}
+          {{ end }}
+          <!-- endpoint section end -->
 
-                    <!-- code example -->
-                    {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum) }}
-                </div>
-            </div>
-        </div>
         {{ end }}
-        <!-- endpoint section end -->
-
+        </div>
       {{ end }}
-      </div>
     {{ end }}
     </div>
 

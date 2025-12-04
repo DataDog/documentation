@@ -6,12 +6,12 @@
 
 <!-- Python Layer -->
 {{- if eq (.Get "layer") "python" -}}
-    114
+    118
 {{- end -}}
 
 <!-- Node Layer -->
 {{- if eq (.Get "layer") "node" -}}
-    130
+    131
 {{- end -}}
 
 <!-- Ruby Layer -->
@@ -45,9 +45,9 @@
 
 <!-- Node Versions -->
 {{- if eq (.Get "layer") "node-versions" -}}
-    `Node18-x`, `Node20-x`, `Node22-x`
+    `Node18-x`, `Node20-x`, `Node22-x`, `Node24-x`
 {{- end -}}
 
 {{- if eq (.Get "layer") "node-example-version" -}}
-    Node22-x
+    Node24-x
 {{- end -}}

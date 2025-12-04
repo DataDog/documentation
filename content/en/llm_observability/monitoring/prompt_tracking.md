@@ -1,12 +1,7 @@
 ---
 title: Prompt Tracking
 description: Use Prompt Tracking to track your prompt templates and versions.
-private: true
 ---
-
-{{< callout url="#" btn_hidden="true" >}}
-  Prompt Tracking for LLM Observability is in Preview. For access, <a href="/help">contact Datadog Support</a>.
-{{< /callout >}}
 
 In Datadog's LLM Observability, the _Prompt Tracking_ feature links prompt templates and versions to LLM calls. Prompt Tracking works alongside LLM Observability's traces, spans, and Playground.
 

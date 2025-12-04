@@ -350,12 +350,12 @@ export default {
     gov: 'https://ip-ranges.ddog-gov.com'
   },
   otlp_trace_endpoint: {
-    us: 'https://trace.agent.datadoghq.com/v1/traces',
-    us3: 'https://trace.agent.us3.datadoghq.com/v1/traces',
-    us5: 'https://trace.agent.us5.datadoghq.com/v1/traces',
-    eu: 'https://trace.agent.datadoghq.eu/v1/traces',
-    ap1: 'https://trace.agent.ap1.datadoghq.com/v1/traces',
-    ap2: 'https://trace.agent.ap2.datadoghq.com/v1/traces'
+    us: 'https://otlp.datadoghq.com/v1/traces',
+    us3: 'https://otlp.us3.datadoghq.com/v1/traces',
+    us5: 'https://otlp.us5.datadoghq.com/v1/traces',
+    eu: 'https://otlp.datadoghq.eu/v1/traces',
+    ap1: 'https://otlp.ap1.datadoghq.com/v1/traces',
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/traces'
   },
   otlp_metrics_endpoint: {
     us: 'https://otlp.datadoghq.com/v1/metrics',
@@ -561,5 +561,41 @@ export default {
     ap1: '720 hours (30 days)',
     ap2: '720 hours (30 days)',
     gov: '12 hours'
+  },
+  jenkins_site_name: {
+    us: 'US1',
+    us3: 'US3',
+    us5: 'US5',
+    eu: 'EU1',
+    ap1: 'AP1',
+    ap2: 'AP2',
+    gov: 'US1_FED'
+  },
+  synthetics_tunnel_endpoint: {
+    us: 'tunnel-us1.synthetics.datadoghq.com',
+    us3: 'tunnel-us3.synthetics.datadoghq.com',
+    us5: 'tunnel-us5.synthetics.datadoghq.com',
+    eu: 'tunnel-eu1.synthetics.datadoghq.com',
+    ap1: 'tunnel-ap1.synthetics.datadoghq.com',
+    ap2: 'tunnel-ap2.synthetics.datadoghq.com',
+    gov: 'N/A'
+  },
+  dogwrap_site_flag: {
+    us: '',
+    us3: ' -s us3',
+    us5: ' -s us5',
+    eu: ' -s eu',
+    ap1: '',
+    ap2: '',
+    gov: ''
+  },
+  microsoft_teams_app_name: {
+    us: 'Datadog',
+    us3: 'Datadog',
+    us5: 'Datadog',
+    eu: 'Datadog',
+    ap1: 'Datadog',
+    ap2: 'Datadog',
+    gov: 'Datadog for Government'
   }
 };

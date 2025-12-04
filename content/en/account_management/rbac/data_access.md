@@ -58,7 +58,7 @@ You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider 
 
 After completing all the fields to define the dataset, click **Create Restricted Dataset** to apply it to your organization.
 
-You may create a maximum of 100 Restricted Datasets. If you need a higher limit, reach out to Support.
+You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. If you need a higher limit, reach out to Support.
 
 ### API
 The Data Access Control API is under development and should be considered unstable. Future versions may be backward incompatible.
@@ -68,14 +68,16 @@ Terraform support will be announced after Data Access Control is generally avail
 ### Supported telemetry types {#supported-telemetry}
 
 - APM traces
-- Software Delivery repository info (CI Visibility pipelines)
+- Logs
+- RUM sessions
+
+The following are available as a Preview upon request:
 - Cloud costs
 - Custom metrics
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
-- Logs
-- RUM sessions
 - LLM Observability
+- Software Delivery repository info (in CI Visibility pipelines)
 
 ## Usage constraints
 
@@ -84,14 +86,19 @@ After you turn on Data Access Control, Datadog disables or limits other features
 ### Real User Monitoring (RUM)
 
 #### Session Replay: Extended Retention
-By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you enroll in the Preview for Data Access Control, Datadog disables the option for Extended Retention. Extended Retention does not work with Data Access Control because the data store that holds the extended data does not support access restrictions.
+By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you create a restricted dataset for RUM, Datadog disables the option for Extended Retention. 
 
 #### Session Replay: Playlists
 
-Playlists are collections of Session Replays you can aggregate in a folder-like structure. Playlists can allow a user to unintentionally escape access controls. When a customer enrolls in the Preview for Data Access Control, Datadog disables Session Replay Playlists.
+Playlists are collections of Session Replays you can aggregate in a folder-like structure. When you create a restricted dataset for RUM, Datadog disables Session Replay Playlists.
 
 ### Logs
-Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. To use Data Access Control with Log Management, first request access to Data Access Control. Next, manually migrate your configuration from Log Management permissions to Data Access Control.
+Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. Datadog recommends using a single solution to restrict logs data. If you limit user access using both Data Access Control and log restriction queries, both sets of restrictions apply.
+
+### Monitors
+Users can create monitors that query and alert on active telemetry. While the user can only directly query data they're allowed to access, the monitor operates as a system user with full access to data.
+
+If you are concerned about unauthorized data access through monitors, Datadog recommends that you track the monitors your users create. Then, restrict access to the creation of monitors that read sensitive data.
 
 ### Software Delivery repository info (CI Visibility pipelines)
 
