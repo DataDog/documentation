@@ -34,7 +34,9 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
 
 ## Setup
 
-### Prerequisites
+- A [Datadog API key][1]
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -42,9 +44,6 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
    ```shell
    pip install ddtrace
    ```
-- A [Datadog API key][1]
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -52,17 +51,13 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
    ```shell
    npm install dd-trace
    ```
-- A [Datadog API key][1]
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
 {{% tab "Java" %}}
 - You have downloaded the latest [`dd-trace-java` JAR][1]. The LLM Observability SDK is supported in `dd-trace-java` v1.51.0+.
-- A [Datadog API key][2]
 
 [1]: https://github.com/DataDog/dd-trace-java
-[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -363,27 +358,42 @@ export const handler = async (event) => {
 
 {{% /collapse-content %}}
 
-### Application naming guidelines
 
-Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidelines:
-
-- Must be a lowercase Unicode string
-- Can be up to 193 characters long
-- Cannot contain contiguous or trailing underscores
-- Can contain the following characters:
-   - Alphanumerics
-   - Underscores
-   - Minuses
-   - Colons
-   - Periods
-   - Slashes
-
-## Tracing spans
+## Tracing LLM operations
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-To trace a span, use `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a function decorator (for example, `llmobs.decorators.task()` for a task span) for the function you'd like to trace. For a list of available span kinds, see the [Span Kinds documentation][1]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
+To capture an LLM operation a function decorator or context manager can be used:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def handle_user_request():
+    make_llm_request()
+
+
+def make_llm_request():
+    with LLMObs.llm(model="gpt-4o"):
+        # do llm request
+        ...
+        LLMObs.annotate(
+            metrics={
+                "input_tokens": ...,
+                "output_tokens": ...,
+
+            },
+            metadata={
+              "temperature": ...
+            }
+        )
+
+{{< /code-block >}}
+
+
+For a list of available span kinds, see the [Span Kinds documentation][1]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
 
 [1]: /llm_observability/terms/
 {{% /tab %}}
@@ -486,7 +496,7 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 {{% /tab %}}
 {{< /tabs >}}
 
-### LLM span
+### LLM calls
 
 <div class="alert alert-info">If you are using any LLM providers or frameworks that are supported by <a href="/llm_observability/instrumentation/auto_instrumentation/">Datadog's LLM integrations</a>, you do not need to manually start an LLM span to trace these operations.</div>
 
@@ -623,7 +633,7 @@ public class MyJavaClass {
 {{< /tabs >}}
 
 
-### Workflow span
+### Workflows
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -732,7 +742,7 @@ public class MyJavaClass {
 {{< /tabs >}}
 
 
-### Agent span
+### Agents
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -822,7 +832,7 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 {{% /tab %}}
 {{< /tabs >}}
 
-### Tool span
+### Tool calls
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -914,7 +924,7 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 {{% /tab %}}
 {{< /tabs >}}
 
-### Task span
+### Tasks
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1007,7 +1017,7 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 {{% /tab %}}
 {{< /tabs >}}
 
-### Embedding span
+### Embeddings
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1094,7 +1104,7 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 {{% /tab %}}
 {{< /tabs >}}
 
-### Retrieval span
+### Retrievals
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1246,72 +1256,12 @@ public class MyJavaClass {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tracking user sessions
 
-Session tracking allows you to associate multiple interactions with a given user.
-
-{{< tabs >}}
-{{% tab "Python" %}}
-When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session, which is submitted as a tag on the span. Optionally, you can also specify the `user_handle`, `user_name`, and `user_id` tags.
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import workflow
-
-@workflow(session_id="<SESSION_ID>")
-def process_user_message():
-    LLMObs.annotate(
-        ...
-        tags = {"user_handle": "poodle@dog.com", "user_id": "1234", "user_name": "poodle"}
-    )
-    return
-{{< /code-block >}}
-
-### Session tracking tags
-
-| Tag | Description |
-|---|---|
-| `session_id` | The ID representing a single user session, for example, a chat session. |
-| `user_handle` | The handle for the user of the chat session. |
-| `user_name` | The name for the user of the chat session. |
-| `user_id` | The ID for the user of the chat session. |
-{{% /tab %}}
-
-{{% tab "Node.js" %}}
-When starting a root span for a new trace or span in a new process, specify the `sessionId` argument with the string ID of the underlying user session:
-
-{{< code-block lang="javascript" >}}
-function processMessage() {
-    ... # user application logic
-    return
-}
-processMessage = llmobs.wrap({ kind: 'workflow', sessionId: "<SESSION_ID>" }, processMessage)
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Java" %}}
-When starting a root span for a new trace or span in a new process, specify the `sessionId` argument with the string ID of the underlying user session:
-
-{{< code-block lang="java" >}}
-import datadog.trace.api.llmobs.LLMObs;
-
-public class MyJavaClass {
-  public String processChat(int userID) {
-    LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("incoming-chat", null, "session-" + System.currentTimeMillis() + "-" + userID);
-    String chatResponse = answerChat(); // user application logic
-    workflowSpan.annotateIO(...); // record the input and output
-    workflowSpan.finish();
-    return chatResponse;
-  }
-}
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
-
-## Annotating a span
+## Enriching spans
 
 {{< tabs >}}
 {{% tab "Python" %}}
-The SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata.
+The SDK provides the method `LLMObs.annotate()` to enrich spans with inputs, outputs, and metadata.
 
 The `LLMObs.annotate()` method accepts the following arguments:
 
@@ -2407,6 +2357,148 @@ function internalWorkflow() {
 {{< /tabs >}}
 
 
+## Tracking user sessions
+
+Session tracking allows you to associate multiple interactions with a given user.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session, which is submitted as a tag on the span. Optionally, you can also specify the `user_handle`, `user_name`, and `user_id` tags.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import workflow
+
+@workflow(session_id="<SESSION_ID>")
+def process_user_message():
+    LLMObs.annotate(
+        ...
+        tags = {"user_handle": "poodle@dog.com", "user_id": "1234", "user_name": "poodle"}
+    )
+    return
+{{< /code-block >}}
+
+### Session tracking tags
+
+| Tag | Description |
+|---|---|
+| `session_id` | The ID representing a single user session, for example, a chat session. |
+| `user_handle` | The handle for the user of the chat session. |
+| `user_name` | The name for the user of the chat session. |
+| `user_id` | The ID for the user of the chat session. |
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+When starting a root span for a new trace or span in a new process, specify the `sessionId` argument with the string ID of the underlying user session:
+
+{{< code-block lang="javascript" >}}
+function processMessage() {
+    ... # user application logic
+    return
+}
+processMessage = llmobs.wrap({ kind: 'workflow', sessionId: "<SESSION_ID>" }, processMessage)
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+When starting a root span for a new trace or span in a new process, specify the `sessionId` argument with the string ID of the underlying user session:
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+
+public class MyJavaClass {
+  public String processChat(int userID) {
+    LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("incoming-chat", null, "session-" + System.currentTimeMillis() + "-" + userID);
+    String chatResponse = answerChat(); // user application logic
+    workflowSpan.annotateIO(...); // record the input and output
+    workflowSpan.finish();
+    return chatResponse;
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+## Distributed tracing
+
+The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][1] and [HTTP][2] libraries. If your application makes requests using these supported libraries, you can enable distributed tracing by running:
+{{< code-block lang="python">}}
+from ddtrace import patch
+patch(<INTEGRATION_NAME>=True)
+{{< /code-block >}}
+
+If your application does not use any of these supported libraries, you can enable distributed tracing by manually propagating span information to and from HTTP headers. The SDK provides the helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to inject and activate tracing contexts in request headers.
+
+### Injecting distributed headers
+
+The `LLMObs.inject_distributed_headers()` method takes a span and injects its context into the HTTP headers to be included in the request. This method accepts the following arguments:
+
+`request_headers`
+: required - _dictionary_
+<br />The HTTP headers to extend with tracing context attributes.
+
+`span`
+: optional - _Span_ - **default**: `The current active span.`
+<br />The span to inject its context into the provided request headers. Any spans (including those with function decorators), this defaults to the current active span.
+
+### Activating distributed headers
+
+The `LLMObs.activate_distributed_headers()` method takes HTTP headers and extracts tracing context attributes to activate in the new service.
+
+**Note**: You must call `LLMObs.activate_distributed_headers()` before starting any spans in your downstream service. Spans started prior (including function decorator spans) do not get captured in the distributed trace.
+
+This method accepts the following argument:
+
+`request_headers`
+: required - _dictionary_
+<br />The HTTP headers to extract tracing context attributes.
+
+
+### Example
+
+{{< code-block lang="python" filename="client.py" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def client_send_request():
+    request_headers = {}
+    request_headers = LLMObs.inject_distributed_headers(request_headers)
+    send_request("<method>", request_headers)  # arbitrary HTTP call
+{{< /code-block >}}
+
+{{< code-block lang="python" filename="server.py" >}}
+from ddtrace.llmobs import LLMObs
+
+def server_process_request(request):
+    LLMObs.activate_distributed_headers(request.headers)
+    with LLMObs.task(name="process_request") as span:
+        pass  # arbitrary server work
+{{< /code-block >}}
+
+[1]: /tracing/trace_collection/compatibility/python/#integrations
+[2]: /tracing/trace_collection/compatibility/python/#library-compatibility
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+The `dd-trace` library provides out-of-the-box integrations that support distributed tracing for popular [web frameworks][1]. Requiring the tracer automatically enables these integrations, but you can disable them optionally with:
+
+{{< code-block lang="javascript">}}
+const tracer = require('dd-trace').init({
+  llmobs: { ... },
+})
+tracer.use('http', false) // disable the http integration
+{{< /code-block >}}
+
+[1]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Advanced tracing
 
 {{< tabs >}}
@@ -2472,67 +2564,6 @@ def process_message():
     return
 {{< /code-block >}}
 
-### Distributed tracing
-
-The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
-
-The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][1] and [HTTP][2] libraries. If your application makes requests using these supported libraries, you can enable distributed tracing by running:
-{{< code-block lang="python">}}
-from ddtrace import patch
-patch(<INTEGRATION_NAME>=True)
-{{< /code-block >}}
-
-If your application does not use any of these supported libraries, you can enable distributed tracing by manually propagating span information to and from HTTP headers. The SDK provides the helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to inject and activate tracing contexts in request headers.
-
-#### Injecting distributed headers
-
-The `LLMObs.inject_distributed_headers()` method takes a span and injects its context into the HTTP headers to be included in the request. This method accepts the following arguments:
-
-`request_headers`
-: required - _dictionary_
-<br />The HTTP headers to extend with tracing context attributes.
-
-`span`
-: optional - _Span_ - **default**: `The current active span.`
-<br />The span to inject its context into the provided request headers. Any spans (including those with function decorators), this defaults to the current active span.
-
-#### Activating distributed headers
-
-The `LLMObs.activate_distributed_headers()` method takes HTTP headers and extracts tracing context attributes to activate in the new service.
-
-**Note**: You must call `LLMObs.activate_distributed_headers()` before starting any spans in your downstream service. Spans started prior (including function decorator spans) do not get captured in the distributed trace.
-
-This method accepts the following argument:
-
-`request_headers`
-: required - _dictionary_
-<br />The HTTP headers to extract tracing context attributes.
-
-
-#### Example
-
-{{< code-block lang="python" filename="client.py" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.decorators import workflow
-
-@workflow
-def client_send_request():
-    request_headers = {}
-    request_headers = LLMObs.inject_distributed_headers(request_headers)
-    send_request("<method>", request_headers)  # arbitrary HTTP call
-{{< /code-block >}}
-
-{{< code-block lang="python" filename="server.py" >}}
-from ddtrace.llmobs import LLMObs
-
-def server_process_request(request):
-    LLMObs.activate_distributed_headers(request.headers)
-    with LLMObs.task(name="process_request") as span:
-        pass  # arbitrary server work
-{{< /code-block >}}
-
-[1]: /tracing/trace_collection/compatibility/python/#integrations
-[2]: /tracing/trace_collection/compatibility/python/#library-compatibility
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -2629,22 +2660,23 @@ function processMessage () {
 processMessage = llmobs.wrap({ kind: 'workflow', name: 'processMessage', mlApp: '<NON_DEFAULT_ML_APP_NAME>' }, processMessage)
 {{< /code-block >}}
 
-### Distributed tracing
-
-The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
-
-The `dd-trace` library provides out-of-the-box integrations that support distributed tracing for popular [web frameworks][1]. Requiring the tracer automatically enables these integrations, but you can disable them optionally with:
-
-{{< code-block lang="javascript">}}
-const tracer = require('dd-trace').init({
-  llmobs: { ... },
-})
-tracer.use('http', false) // disable the http integration
-{{< /code-block >}}
-
-[1]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 {{% /tab %}}
 {{< /tabs >}}
+
+### Application naming guidelines
+
+Your application name (the value of `DD_LLMOBS_ML_APP`) must follow these guidelines:
+
+- Must be a lowercase Unicode string
+- Can be up to 193 characters long
+- Cannot contain contiguous or trailing underscores
+- Can contain the following characters:
+   - Alphanumerics
+   - Underscores
+   - Minuses
+   - Colons
+   - Periods
+   - Slashes
 
 
 [1]: https://github.com/openai/openai-python
