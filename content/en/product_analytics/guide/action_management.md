@@ -69,7 +69,6 @@ After you define an action, you can find them in the [list of labeled actions][4
 
 ## Known limitations 
 - Action Management only works for web pages at this time, mobile support is on the roadmap. 
-- When switching to label mode, Datadog loads the top available elements. 
 - You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with Datadog to inform future improvements. 
 - Labeled actions can only be used in Funnels and Retention graphs at this time. The ability to use them in all graphs is a feature .
 - Deleting a labeled action also deletes it from the dashboards where it is being used.
