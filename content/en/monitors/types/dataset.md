@@ -15,20 +15,20 @@ further_reading:
 
 {{< callout btn_hidden="true" header="Join the Preview!">}}
 The Dataset monitor is in Preview.
-{{< /callout >}}"
+{{< /callout >}}
 
 ## Overview
 
 <div class="alert alert-danger">Datasets that include Flex Logs are not supported.</div>
 
-Dataset monitors enable you to alert on advanced log analysis by leveraging all Notebooks advanced analysis features. With Dataset monitors, you can:
+Dataset monitors enable you to create alerts based on advanced log analysis using all of the advanced analysis features available in Notebooks. With Dataset monitors, you can:
 
 - Query multiple data sources
 - Chain data transformations
 - Run complex SQL queries
 - Create sophisticated analysis workflows
 
-Dataset monitors offer full Notebook analysis features, letting you alert on complex data patterns that standard monitors might miss.
+Dataset monitors offer full access to Notebook analysis features, allowing you to alert on complex data patterns that standard monitors may miss.
 
 ## Monitor creation
 
@@ -60,7 +60,7 @@ Dataset monitors use the same query interface as Notebook Analysis cells.
 
 ## Set alert conditions
 
-Configure monitors to trigger if the query value crosses a threshold, and customize advanced alert options for recovery thresholds and evaluation delays. For more information, see [Configure Monitors][2].
+Configure monitors to trigger when the query value crosses a threshold, and customize advanced alert options such as recovery thresholds and evaluation delays. For more information, see [Configure Monitors][2].
 
 ## Notifications
 
