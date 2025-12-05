@@ -4940,15 +4940,20 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Data Observability
+    - name: DO Overview
       url: data_observability/
       pre: inventories
       identifier: data_observability
       parent: data_observability_heading
       weight: 60000
+    - name: Data Quality
+      url: data_observability/data_quality
+      identifier: data_quality
+      parent: data_observability
+      weight: 100000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
-      pre: inventories
+      pre: check-light-wui
       identifier: quality_monitoring
       parent: data_observability_heading
       weight: 70000
