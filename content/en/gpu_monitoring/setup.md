@@ -8,7 +8,7 @@ This page provides instructions on setting up Datadog's GPU Monitoring on your i
 
 To begin using Datadog's GPU Monitoring, your environment must meet the following criteria:
 
-- You are a Datadog user with active Datadog infrastructure hosts. If not, see the following guides:
+- You have a Datadog account and are running the Datadog Agent on your infrastructure hosts. If not, see the following guides:
   - [Install the Datadog Agent on Kubernetes][1]
   - [Install the Datadog Agent on Docker][7]
   - [Install the Datadog Agent on non-containerized Linux][8]
@@ -16,7 +16,7 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 
 #### Minimum version requirements
 
-- **Datadog Agent**: version 7.72.2
+- **Datadog Agent**: v7.72.2
 - **Operating system**: Linux
    - (Optional) For advanced eBPF metrics, Linux kernel version 5.8
 - **NVIDIA driver**: version 450.51
@@ -26,10 +26,10 @@ If using Kubernetes, the following requirements must be met:
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Kubernetes**: 1.22 with PodResources API active
 
-## Set up GPU Monitoring on a uniform Kubernetes cluster or non-Kubernetes environment
+## Set up GPU Monitoring on a uniform Kubernetes or non-Kubernetes environment
 
 The following instructions are the basic steps to set up GPU Monitoring in the following environments:
-- In a Kubernetes cluster where **all** the nodes have GPU devices
+- In a Kubernetes cluster where **all** nodes have GPU devices
 - In a non-Kubernetes environment, such as Docker or non-containerized Linux.
 
 {{< tabs >}}
@@ -260,7 +260,7 @@ Additionally, to enable advanced eBPF-based metrics such as GPU core utilization
 
 ## Set up GPU Monitoring on a mixed Kubernetes cluster
 
-In a mixed cluster, some nodes have GPU devices while other nodes do not. Due to the way that the NVIDIA device plugin for Kubernetes works, the agent needs to have a specific runtime class to access the GPU devices that is only present on GPU nodes. Therefore, two separate DaemonSets, one for the runtime class in GPU nodes, and another for non-GPU nodes, are required.
+In a mixed cluster, some nodes have GPU devices while other nodes do not. Due to the way that the NVIDIA device plugin for Kubernetes works, the Agent needs to have a specific runtime class to access the GPU devices that is only present on GPU nodes. Therefore, two separate DaemonSets, one for the runtime class in GPU nodes, and another for non-GPU nodes, are required.
 
 The recommended method to set up the Agent in this case is using the Datadog Operator, version 1.20 or greater, which provides features to make this setup easier. However, for compatibility reasons instructions are also provided for Helm installations or for older versions of the Datadog Operator.
 
