@@ -26,6 +26,8 @@ further_reading:
 
 After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], start the tracer and configure the library as desired. {{% tracing-go-v2 %}}
 
+{{% apm-config-visibility %}}
+
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
 Read the [Unified Service Tagging][2] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
