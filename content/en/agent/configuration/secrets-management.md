@@ -224,7 +224,12 @@ Configure the Datadog Agent to use AWS Secrets to resolve secrets with the Datad
 
 
 ```sh
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
 spec:
+  [...]
   override:
     nodeAgent:
       env:
@@ -235,6 +240,16 @@ spec:
       # IAM role ARN is required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+      extraConfd:
+        configDataMap:
+        # this is an example
+          <INTEGRATION_NAME>.yaml: |-
+            ad_identifiers:
+              - <SHORT_IMAGE>
+            instances:
+              - [...]
+                 password: "ENC[secretId;secretKey]"
+
 ```
 
 <div class="alert alert-info"> You must include the <code>serviceAccountAnnotations</code> to grant the Agent permissions to access the AWS secret. </div>
@@ -250,9 +265,7 @@ kind: DatadogAgent
 metadata:
   name: datadog
 spec:
-  global:
-    credentials:
-      apiKey: ENC[mrmcpat/secrets;datadog-api-key] #CONFIRM WHAT SHOULD GO HERE
+  [...]
   override:
     nodeAgent:
       env:
@@ -279,6 +292,12 @@ spec:
 ##### Cluster check: with cluster check runners enabled
 
 ```sh
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
 spec:
   features:
     clusterChecks:
@@ -301,7 +320,7 @@ spec:
          value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
       # IAM role ARN required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::659775407889:policy/MrMcPatSecretsAccessPolicy
+        eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
     clusterAgent:  
       extraConfd:
         configDataMap:
