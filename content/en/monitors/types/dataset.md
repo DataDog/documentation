@@ -21,14 +21,12 @@ The Dataset monitor is in Preview.
 
 <div class="alert alert-danger">Datasets that include Flex Logs are not supported.</div>
 
-Dataset monitors enable you to create alerts based on advanced log analysis using all of the advanced analysis features available in Notebooks. With Dataset monitors, you can:
+Dataset monitors offer full access to Notebook analysis features, allowing you to alert on complex data patterns that standard monitors may miss. With Dataset monitors, you can:
 
 - Query multiple data sources
 - Chain data transformations
 - Run complex SQL queries
 - Create sophisticated analysis workflows
-
-Dataset monitors offer full access to Notebook analysis features, allowing you to alert on complex data patterns that standard monitors may miss.
 
 ## Monitor creation
 
