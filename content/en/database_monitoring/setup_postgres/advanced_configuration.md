@@ -43,7 +43,7 @@ instances:
 
 If you have queries that are relatively infrequent or execute quickly, raise the sampling rate by lowering the `collection_interval` value to collect samples more frequently.
 
-Set the `collection_interval` in your database instance configuration of the Datadog Agent. The default value is 1 second and can be seen in the <a href="https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L332C9-L336" target="_blank">`postgres/conf.yaml.example`</a>.
+Set the `collection_interval` in the `postgres/conf.yaml` for your database instance configuration of the Datadog Agent. The default value is 10 seconds.
 
 Lower the value to a smaller interval:
 
@@ -51,6 +51,6 @@ Lower the value to a smaller interval:
 instances:
   - dbm: true
     ...
-    query_samples:
-        collection_interval: 0.1
+    query_activity:
+        collection_interval: 1
 ```
