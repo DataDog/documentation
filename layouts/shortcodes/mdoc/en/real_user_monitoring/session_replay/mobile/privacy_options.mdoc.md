@@ -564,7 +564,7 @@ Overrides operate using a "nearest parent" principle: if a view has an override,
 
 
 <!-- Android, iOS, or Flutter -->
-{% if or(equals($platform, "android"), equals($platform, "ios"), equals($platform, "flutter")) %}
+{% if or(equals($platform, "android"), or(equals($platform, "ios"), equals($platform, "flutter"))) %}
 
 ### Text and input override
 
