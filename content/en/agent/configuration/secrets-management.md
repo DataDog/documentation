@@ -75,13 +75,9 @@ secret_backend_config:
 
 When using environment variables, convert the configuration to JSON like so:
 
-```yaml
-# datadog.yaml
-secret_backend_type: aws.secrets
-secret_backend_config:
-  aws_session:
-    aws_region: {regionName}
-
+```sh
+DD_SECRET_BACKEND_TYPE="aws.secrets"
+DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'
 ```
 
 After configuring the Agent to use AWS Secrets, you can reference any secrets in your configurations with `ENC[secretId;secretKey]`. 
@@ -137,10 +133,10 @@ Configure the Datadog Agent to use AWS Secrets to resolve secrets in Helm using 
 ```sh 
 datadog: 
   confd:
-  # this is an example
+  # This is an example
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
-        - <short image>
+        - <SHORT_IMAGE>
       instances:
         - [...]
           password: "ENC[secretId;secretKey]" 
@@ -176,7 +172,7 @@ agents:
       eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
 clusterAgent:  
   confd:
-  # this is an example
+    # This is an example
     <INTEGRATION_NAME>.yaml: |-
       cluster_check: true
       instances:
