@@ -1,10 +1,12 @@
 ---
 title: Android and Android TV Feature Flags
 description: Set up Datadog Feature Flags for Android and Android TV applications.
+aliases:
+  - /feature_flags/setup/android
 further_reading:
-- link: "/feature_flags/setup/"
+- link: "/feature_flags/client_sdks/"
   tag: "Documentation"
-  text: "Feature Flags Setup"
+  text: "Client SDKs for Feature Flags"
 - link: "/real_user_monitoring/android/"
   tag: "Documentation"
   text: "Android and Android TV Monitoring"
