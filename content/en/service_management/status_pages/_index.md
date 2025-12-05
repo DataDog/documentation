@@ -136,6 +136,10 @@ Email subscriptions on status pages are **double opt-in**: users must confirm th
 
 For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
 
+### Importing
+
+Email subscribers can be imported in subscription settings using a .txt file. Each subscriber's email address must be on a new line. Subscribers must confirm their subscription by clicking the link in the confirmation email.
+
 ## Set a custom domain
 
 To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
