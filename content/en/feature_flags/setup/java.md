@@ -298,7 +298,7 @@ public class App {
 
 ### Asynchronous Initialization
 
-For non-blocking initialization, use `setProvider()` and listen for the `PROVIDER_READY` event:
+For non-blocking initialization, use `setProvider()` and listen for provider events:
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.ProviderEvent;
@@ -306,9 +306,17 @@ import dev.openfeature.sdk.ProviderEvent;
 OpenFeatureAPI api = OpenFeatureAPI.getInstance();
 Client client = api.getClient();
 
-// Listen for provider ready event
+// Listen for provider state changes
 client.on(ProviderEvent.PROVIDER_READY, (event) -> {
     logger.info("Feature flags ready!");
+});
+
+client.on(ProviderEvent.PROVIDER_ERROR, (event) -> {
+    logger.error("Provider error: {}", event.getMessage());
+});
+
+client.on(ProviderEvent.PROVIDER_STALE, (event) -> {
+    logger.warn("Provider configuration is stale");
 });
 
 // Set provider asynchronously
@@ -482,12 +490,14 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
+<div class="alert alert-info"><strong>Note:</strong> <code>PROVIDER_CONFIGURATION_CHANGED</code> is an optional OpenFeature event. Check the Datadog provider documentation to verify this event is supported in your version.</div>
+
 ### Multiple Clients
 
-Use named clients to organize flags by domain or team:
+Use named clients to organize context and flags by domain or team:
 
 {{< code-block lang="java" >}}
-// All clients use the same provider but can have different contexts
+// Named clients share the same provider instance but can have different contexts
 Client checkoutClient = api.getClient("checkout");
 Client analyticsClient = api.getClient("analytics");
 
@@ -503,6 +513,8 @@ boolean enhancedAnalytics = analyticsClient.getBooleanValue(
     "enhanced-analytics", false, analyticsContext
 );
 {{< /code-block >}}
+
+<div class="alert alert-info"><strong>Note:</strong> The <code>Provider</code> instance is shared globally—client names are for organizational purposes only and don't create separate provider instances. All clients use the same underlying Datadog provider and flag configurations.</div>
 
 ## Best Practices
 
