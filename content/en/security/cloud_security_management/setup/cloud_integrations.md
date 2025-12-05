@@ -43,8 +43,8 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 {{% tab "AWS" %}}
 
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **AWS**.
-1. If required, use filters to find the account you want to stop resource collection for. Click the account to open the side panel that contains its settings.
-1. On the **Features** tab, beside **Posture Management**, switch the **Enable** toggle to the off position.
+2. If required, use filters to find the account you want to stop resource scanning for. Click the account to open the side panel that contains its settings.
+3. On the **Features** tab, beside **Posture Management**, switch the **Enable** toggle to the off position.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -53,7 +53,7 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 {{% tab "Azure" %}}
 
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **Azure**.
-1. To stop resource collection for an account, switch the **Resource Scanning** toggle to the off position.
+1. To stop resource scanning for an account, switch the **Resource Scanning** toggle to the off position.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -63,7 +63,7 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 {{% tab "Google Cloud" %}}
 
 1. On the [**Cloud Security Setup**][1] page, click **Cloud Integrations** > **GCP**.
-1. To stop resource collection for an account, switch the **Resource Scanning** toggle to the off position.
+1. To stop resource scanning for an account, switch the **Resource Scanning** toggle to the off position.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
