@@ -136,6 +136,14 @@ Configure the Datadog Agent to use AWS Secrets to resolve secrets in Helm using 
 
 ```sh 
 datadog: 
+  confd:
+  # this is an example
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <short image>
+      instances:
+        - [...]
+          password: "ENC[secretId;secretKey]" 
   env:
    - name: DD_SECRET_BACKEND_TYPE
      value: "aws.secrets"
@@ -145,7 +153,7 @@ agents:
   rbac:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
     serviceAccountAnnotations:
-      eks.amazonaws.com/role-arn:<IAM_ROLE_ARN>
+      eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
 ```
 
 <div class="alert alert-info"> You must include the <code>serviceAccountAnnotations</code> to grant the Agent permissions to access the AWS secret. </div>
@@ -169,11 +177,11 @@ agents:
 clusterAgent:  
   confd:
   # this is an example
-    <integration name>.yaml: |-
+    <INTEGRATION_NAME>.yaml: |-
       cluster_check: true
       instances:
-        - # some config
-          password: "<PASSWORD>"
+        - [...]
+          password: "ENC[secretId;secretKey]" 
 ```
 
 ##### Cluster check: with cluster check runners enabled
@@ -187,11 +195,11 @@ datadog:
 clusterAgent:
   confd:
   # this is an example
-    <integration name>.yaml: |-
+    <INTEGRATION_NAME>.yaml: |-
       cluster_check: true
       instances:
-        - # some config
-          password: "<PASSWORD>"
+        - [...]
+          password: "ENC[secretId;secretKey]" 
 clusterChecksRunner: 
   enabled: true
   env:
@@ -203,6 +211,7 @@ clusterChecksRunner:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
     serviceAccountAnnotations:
       eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+
 ```
 
 {{% /tab %}}
@@ -258,11 +267,11 @@ spec:
       extraConfd:
         configDataMap:
         # this is an example
-          <integration name>.yaml: |-
+          <INTEGRATION_NAME>.yaml: |-
             cluster_check: true
             instances:
-              - # some config
-                password: "<PASSWORD>"
+              - [...]
+                password: "ENC[secretId;secretKey]" 
 ```
 
 <br>
@@ -297,11 +306,11 @@ spec:
       extraConfd:
         configDataMap:
         # this is an example
-          <integration name>.yaml: |-
+          <INTEGRATION_NAME>.yaml: |-
             cluster_check: true
             instances:
-              - # some config
-                password: "<PASSWORD>"
+              - [...]
+                password: "ENC[secretId;secretKey]" 
 
 ```
 
