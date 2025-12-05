@@ -61,7 +61,7 @@ Unified Service Tags (USTs) apply consistent tags across traces, metrics, and lo
 
 ## Enable SDK-dependent products and features
 
-After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as [Continuous Profiler][18], [App and API Protection][19], and [trace ingestion controls][20].
 
 To enable products, [set environment variables][3] in your application configuration.
 
@@ -114,6 +114,9 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
 [16]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
 [17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[18]: /profiler/
+[19]: /security/application_security/
+[20]: /tracing/trace_pipeline/ingestion_controls/
 
 
 

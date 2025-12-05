@@ -128,7 +128,7 @@ For complete instructions, see [setting USTs for Kubernetes services][5].
 
 ## Enable SDK-dependent products and features
 
-After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as [Continuous Profiler][37], [Application Security Monitoring][38], and [trace ingestion controls][39].
 
 Use one of the following setup methods:
 
@@ -788,6 +788,9 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [34]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
 [35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
+[37]: /profiler/
+[38]: /security/application_security/
+[39]: /tracing/trace_pipeline/ingestion_controls/
 
 
 
