@@ -82,14 +82,6 @@ receiver_port: 9126
 
 Restart the Agent service after modifying configuration.
 
-Option 3: Firewall or endpoint security interference
-Some security tools may reserve or block ports. Ensure these tools allow the Datadog Agent to bind locally to its ports.
-
-Verifying that the issue is resolved
-
-Restart the Agent service:
-net stop datadogagent
-net start datadogagent
 
 Then verify components with:
 ```
