@@ -1,5 +1,5 @@
 ---
-title: Flaky Test Management
+title: Flaky Tests Management
 description: Track, triage, and manage flaky tests.
 further_reading:
 - link: "/continuous_integration/tests/"
@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-The [Flaky Test Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's status along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
+The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's status along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
 
 From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create cases and Jira issues to track work toward fixes.
 
@@ -83,7 +83,7 @@ For any flaky test, you can create a case and use [Case Management][4] to track 
 
 When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. If successful, the test's status is automatically updated to `Fixed`. To enable the remediation flow:
 
-1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Test Management UI.
+1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Tests Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
@@ -108,7 +108,7 @@ To enable AI-powered flaky test fixes, enable Bits AI Dev Agent for Test Optimiz
 
 ## AI-powered flaky test categorization
 
-Flaky Test Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
+Flaky Tests Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
 
 <div class="alert alert-info">A test must have at least one failed execution that includes both <code>@error.message</code> and <code>@error.stack</code> tags to be eligible for categorization. If the test was recently detected, categorization may take several minutes to complete.</div>
 
@@ -141,7 +141,7 @@ Notifications are not sent immediately; they are batched every few minutes to re
 
 ## Compatibility
 
-To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
+To use Flaky Tests Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |
