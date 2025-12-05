@@ -4,6 +4,15 @@ aliases:
     - /tracing/llm_observability/api
     - /llm_observability/api
     - /llm_observability/setup/api
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+    tag: Blog
+    text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview
@@ -494,6 +503,10 @@ Evaluations must be joined to a unique span. You can identify the target span us
 |------------|-----------------|--------------|
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
 | attributes [*required*] | [[Attributes](#attributes)] | The body of the request. |
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/setup/sdk/
 [2]: /llm_observability/terms/

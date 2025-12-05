@@ -8,6 +8,9 @@ aliases:
     - /developers/faq/ui_extensions
     - /service_management/app_builder/
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
   text: "Action Catalog"

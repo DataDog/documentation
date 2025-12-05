@@ -12,6 +12,12 @@ aliases:
     - /llm_observability/instrumentation/custom_instrumentation
     - /tracing/llm_observability/trace_an_llm_application
     - /llm_observability/setup
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview
@@ -270,6 +276,10 @@ const llmobs = tracer.llmobs;
 
 **Options for general tracer configuration**:
 
+`site`
+: optional - _string_
+<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this defaults to the value of `DD_SITE`.
+
 `env`
 : optional - _string_
 <br />The name of your application's environment (examples: `prod`, `pre-prod`, `staging`). If not provided, this defaults to the value of `DD_ENV`.
@@ -281,10 +291,6 @@ const llmobs = tracer.llmobs;
 ##### Environment variables
 
 Set the following values as environment variables. They cannot be configured programmatically.
-
-`DD_SITE`
-: required - _string_
-<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_API_KEY`
 : optional - _string_
@@ -2646,6 +2652,9 @@ tracer.use('http', false) // disable the http integration
 {{% /tab %}}
 {{< /tabs >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/openai/openai-python
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
