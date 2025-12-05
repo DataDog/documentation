@@ -36803,7 +36803,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get Tags
+      summary: Get All Hosts Tags
       tags:
       - Tags
       x-menu-order: 1

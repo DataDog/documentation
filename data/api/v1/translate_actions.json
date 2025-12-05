@@ -1013,7 +1013,7 @@
   },
   "ListHostTags": {
     "description": "Return a mapping of tags to hosts for your whole infrastructure.",
-    "summary": "Get Tags"
+    "summary": "Get All Hosts Tags"
   },
   "DeleteHostTags": {
     "description": "This endpoint allows you to remove all user-assigned tags\nfor a single host.",
