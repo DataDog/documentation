@@ -190,7 +190,7 @@ datadog:
      value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
 clusterAgent:
   confd:
-  # this is an example
+  # This is an example
     <INTEGRATION_NAME>.yaml: |-
       cluster_check: true
       instances:
@@ -238,7 +238,7 @@ spec:
         eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
       extraConfd:
         configDataMap:
-        # this is an example
+        # This is an example
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
               - <SHORT_IMAGE>
@@ -275,7 +275,7 @@ spec:
     clusterAgent:  
       extraConfd:
         configDataMap:
-        # this is an example
+        # This is an example
           <INTEGRATION_NAME>.yaml: |-
             cluster_check: true
             instances:
@@ -299,15 +299,7 @@ spec:
     clusterChecks:
       useClusterChecksRunners: true
   override:
-    nodeAgent:
-      env:
-       - name: DD_SECRET_BACKEND_TYPE
-         value: "aws.secrets"
-       - name: DD_SECRET_BACKEND_CONFIG
-         value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
-      # required to grant the Agent permissions to access the AWS secret
-      serviceAccountAnnotations:
-        eks.amazonaws.com/role-arn: <IAM role arn>
+    [...]
     clusterChecksRunner:
       env:
        - name: DD_SECRET_BACKEND_TYPE
@@ -320,7 +312,7 @@ spec:
     clusterAgent:  
       extraConfd:
         configDataMap:
-        # this is an example
+        # This is an example
           <INTEGRATION_NAME>.yaml: |-
             cluster_check: true
             instances:
