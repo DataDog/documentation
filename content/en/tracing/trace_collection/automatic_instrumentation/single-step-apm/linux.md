@@ -27,6 +27,8 @@ To enable APM on a Linux host:
 1. Copy and run the Agent installation command on your Linux host or VM.
 1. Restart your applications.
 
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
 ## Set SDK tracer versions
 
 By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.

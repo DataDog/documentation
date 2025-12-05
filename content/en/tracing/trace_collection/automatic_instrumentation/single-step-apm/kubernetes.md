@@ -44,6 +44,8 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 1. Deploy the Agent using the generated configuration file.
 1. Restart your applications.
 
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
 ## Configure Unified Service Tags
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through label extraction (recommended) or in deployment manifests.

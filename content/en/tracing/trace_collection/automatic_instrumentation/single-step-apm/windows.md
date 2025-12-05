@@ -70,6 +70,8 @@ To instrument Java and .NET applications across your entire Windows host:
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
 ## Configure Unified Service Tags
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Windows services][2].

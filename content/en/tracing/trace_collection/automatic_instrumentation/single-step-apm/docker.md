@@ -28,6 +28,8 @@ To enable APM in a Docker Linux container:
 1. Copy and run the Agent installation command in your Docker container.
 1. Restart your applications.
 
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
 ## Set SDK tracer versions
 
 By default, Single Step Instrumentation installs the latest major versions of Datadog APM SDKs. Minor version updates are applied automatically when they become available.
