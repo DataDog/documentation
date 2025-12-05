@@ -32,9 +32,64 @@ Processor groups and the processors within each group are executed from top to b
 
 **Note**: There is a limit of 10 processor groups for a pipeline canvas. For example, if you have a dual ship pipeline, where there are two destinations and each destination has its own set of processor groups, the combined number of processor groups from both sets is limited to 10.
 
-{{% observability_pipelines/processors/filter_syntax %}}
+## Processors
 
-[1]: https://app.datadoghq.com/observability-pipelines
+These are the available processors:
+
+{{< tabs >}}
+{{% tab "Logs" %}}
+
+- [Add Environment Variables Processor][1]
+- [Add Hostname Processor][2]
+- [Custom Processor][3]
+- [Deduplicate Processor][4]
+- [Edit Fields Processor][5]
+- [Enrichment Table Processor][6]
+- [Filter Processor][7]
+- [Generate Metrics Processor][8]
+- [Grok Parser Processor][9]
+- [Parse JSON Processor][10]
+- [Parse XML Processor][11]
+- [Quota Processor][12]
+- [Reduce Processor][13]
+- [Remap to OCSF Processor][14]
+- [Sample Processor][15]
+- [Sensitive Data Scanner Processor][16]
+- [Split Array][17]
+- [Tags][18]
+- [Throttle][19]
+
+[1]: /observability_pipelines/processors/add_environment_variables/
+[2]: /observability_pipelines/processors/add_hostname/
+[3]: /observability_pipelines/processors/custom_processor/
+[4]: /observability_pipelines/processors/dedupe/
+[5]: /observability_pipelines/processors/edit_fields/
+[6]: /observability_pipelines/processors/enrichment_table/
+[7]: /observability_pipelines/processors/filter/
+[8]: /observability_pipelines/processors/generate_metrics/
+[9]: /observability_pipelines/processors/grok_parser/
+[10]: /observability_pipelines/processors/parse_json/
+[11]: /observability_pipelines/processors/parse_xml/
+[12]: /observability_pipelines/processors/quota/
+[13]: /observability_pipelines/processors/reduce/
+[14]: /observability_pipelines/processors/remap_ocsf/
+[15]: /observability_pipelines/processors/sample/
+[16]: /observability_pipelines/processors/sensitive_data_scanner/
+[17]: /observability_pipelines/processors/split_array/
+[18]: /observability_pipelines/processors/tags/
+[19]: /observability_pipelines/processors/throttle/
+
+{{% /tab %}}
+{{% tab "Metrics" %}}
+
+- [Filter][1]
+- [Tag Control][2]
+
+[1]: /observability_pipelines/processors/filter/
+[2]: /observability_pipelines/processors/tag_control/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
