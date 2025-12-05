@@ -5577,6 +5577,11 @@ menu:
       parent: feature_flags_setup
       identifier: feature_flags_setup_ios
       weight: 102
+    - name: Java
+      url: feature_flags/setup/java
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_java
+      weight: 103
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
