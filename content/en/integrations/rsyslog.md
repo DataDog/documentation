@@ -47,25 +47,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 2. Create an `/etc/rsyslog.d/datadog.conf` file.
 
-{{< site-region region="us,eu" >}}
-
-3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
-
-   ```conf
-   ## For each file to send
-   input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
-
-   ## Set the Datadog Format to send the logs
-   $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
-
-   ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
-   }
-   ```
-
-{{< /site-region >}}
-
-{{< site-region region="us3,us5,ap1,gov" >}}
+{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 
 3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. Replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
@@ -182,25 +164,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 2. Create an `/etc/rsyslog.d/datadog.conf` file.
 
-{{< site-region region="us,eu" >}}
-
-3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
-
-   ```conf
-   ## For each file to send
-   input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
-
-   ## Set the Datadog Format to send the logs
-   $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
-
-   ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
-   }
-   ```
-
-{{< /site-region >}}
-
-{{< site-region region="us3,us5,ap1,gov" >}}
+{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 
 3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. Replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
@@ -318,26 +282,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 2. Create an `/etc/rsyslog.d/datadog.conf` file.
 
-
-{{< site-region region="us,eu" >}}
-
-3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
-
-   ```conf
-   ## For each file to send
-   input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
-
-   ## Set the Datadog Format to send the logs
-   $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
-
-   ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
-   }
-   ```
-
-{{< /site-region >}}
-
-{{< site-region region="us3,us5,ap1,gov" >}}
+{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 
 3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. Replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
@@ -399,8 +344,38 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       sudo systemctl restart rsyslog
       ```
 
+[1]: /agent/logs/
+{{% /tab %}}
+
+{{< /tabs >}}
+
+{{% site-region%}}
+
+### TCP
+
+{{< site-region region="us,eu" >}}
+
+TCP forwarding with Rsyslog to Datadog is available, however forwarding with TCP to Datadog provides no guarantee and limited reliability due to a lack of end-to-end acknowledgement. HTTP is recommended in this instance as it lowers network cost with compression, and allows for receipt of transmission at both ends.
+
+In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
+
+   ```conf
+   ## For each file to send
+   input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
+
+   ## Set the Datadog Format to send the logs
+   $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
+
+   ruleset(name="infiles") {
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
+   }
+   ```
+
+   Following the above, follow steps 4-7 in the above steps to complete setup of the integration.
+{{% /site-region %}}
+
 {{% site-region region="us" %}}
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
+(Optional) Add TLS Encryption to logs sent from Rsyslog with TCP to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo dnf install rsyslog-gnutls ca-certificates
@@ -422,7 +397,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 {{% site-region region="eu" %}}
 
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
+(Optional) Add TLS Encryption to logs sent from Rsyslog with TCP to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo dnf install rsyslog-gnutls ca-certificates
@@ -442,11 +417,6 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       sudo systemctl restart rsyslog
       ```
 {{% /site-region %}}
-
-[1]: /agent/logs/
-{{% /tab %}}
-
-{{< /tabs >}}
 
 ## Troubleshooting
 
