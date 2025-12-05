@@ -34,6 +34,31 @@ Set up tracing on Azure Pipelines to gain real time insights into your CI/CD wor
 | [Execution time][20] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 ## Configure the Datadog integration
+{{< tabs >}} {{% tab "Datadog Integration (recommended)" %}}
+
+### Enable CI Visibility in Datadog
+
+After the Azure App is created and installed, enable CI Visibility for the organizations and projects you want Datadog to monitor. 
+
+1. Verify that your Azure DevOps organization is linked to a **Microsoft Entra tenant**. See the [Azure source code setup instructions][1] for guidance on connecting Azure DevOps projects to Datadog.
+
+2. In Datadog, navigate to [**Software Delivery → CI Visibility → Add a Pipeline Provider → Azure Pipelines**][2].
+
+3. Click **Configure** next to the Azure DevOps organization you want to enable.
+
+4. To enable CI Visibility for the entire organization, toggle **Enable CI Visibility**. Future projects detected by the Azure app will automatically be enabled.
+
+5. To enable CI Visibility for individual projects:
+   - Scroll through the projects list.
+   - Toggle **Enable CI Visibility** for each project you want to monitor.
+
+Pipelines appear in Datadog immediately after CI Visibility is enabled for an organization or project.
+
+[1]: /integrations/azure-devops-source-code/#setup
+[2]: https://app.datadoghq.com/ci/setup/pipeline?provider=azurepipelines
+
+{{% /tab %}}
+{{% tab "Service Hook Subscriptions" %}}
 
 The Datadog integration for [Azure Pipelines][16] works by using [service hooks][2] to send data to Datadog.
 
@@ -56,8 +81,6 @@ The Datadog integration for [Azure Pipelines][16] works by using [service hooks]
     - **Datadog API Key**: Your [Datadog API key][3].
 
 5. Click **Finish**.
-
-## Advanced configuration
 
 ### Configuring multiple projects in bulk
 
@@ -103,7 +126,18 @@ Example for enabling the hooks in specified projects:
     --az-org datadoghq \
     projectName1 projectName2
 ```
+[2]: https://learn.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
+[12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
+[13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
+[16]: /integrations/azure_devops/
 
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Advanced configuration
 
 ### Set custom tags
 
@@ -139,20 +173,14 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://azure.microsoft.com/en-us/products/devops/pipelines
-[2]: https://learn.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops
-[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
 [9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals
 [10]: /glossary/#custom-tag
 [11]: /glossary/#custom-measure
-[12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
-[13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
 [14]: https://app.datadoghq.com/integrations/azure
 [15]: /glossary/#custom-span
-[16]: /integrations/azure_devops/
 [17]: /continuous_integration/search/#search-for-pipelines
 [18]: /logs/guide/best-practices-for-log-management/
 [19]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
