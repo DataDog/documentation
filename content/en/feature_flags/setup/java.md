@@ -334,8 +334,7 @@ import dev.openfeature.sdk.MutableContext;
 // Create an evaluation context with a targeting key and attributes
 EvaluationContext context = new MutableContext("user-123")
     .add("email", "user@example.com")
-    .add("tier", "premium")
-    .add("country", "US");
+    .add("tier", "premium");
 
 // Use the context for flag evaluations (see next section)
 {{< /code-block >}}
@@ -350,7 +349,7 @@ Evaluate feature flags using the OpenFeature client. All flag types are supporte
 
 {{< code-block lang="java" >}}
 // Simple boolean evaluation
-boolean enabled = client.getBooleanValue("new-checkout-flow", false, context);
+boolean enabled = client.getBooleanValue("checkout.new", false, context);
 
 if (enabled) {
     // New checkout flow
@@ -362,7 +361,7 @@ if (enabled) {
 import dev.openfeature.sdk.FlagEvaluationDetails;
 
 FlagEvaluationDetails<Boolean> details =
-    client.getBooleanDetails("new-checkout-flow", false, context);
+    client.getBooleanDetails("checkout.new", false, context);
 
 logger.info("Value: {}", details.getValue());
 logger.info("Variant: {}", details.getVariant());
@@ -373,10 +372,10 @@ logger.info("Reason: {}", details.getReason());
 
 {{< code-block lang="java" >}}
 // Evaluate string flags (e.g., UI themes, API endpoints)
-String theme = client.getStringValue("ui-theme", "light", context);
+String theme = client.getStringValue("ui.theme", "light", context);
 
 String apiEndpoint = client.getStringValue(
-    "payment-api-endpoint",
+    "payment.api.endpoint",
     "https://api.example.com/v1",
     context
 );
@@ -386,10 +385,10 @@ String apiEndpoint = client.getStringValue(
 
 {{< code-block lang="java" >}}
 // Integer flags (e.g., limits, quotas)
-int maxRetries = client.getIntegerValue("max-retries", 3, context);
+int maxRetries = client.getIntegerValue("retries.max", 3, context);
 
 // Double flags (e.g., thresholds, rates)
-double discountRate = client.getDoubleValue("discount-rate", 0.0, context);
+double discountRate = client.getDoubleValue("pricing.discount.rate", 0.0, context);
 {{< /code-block >}}
 
 ### Object Flags
@@ -398,7 +397,7 @@ double discountRate = client.getDoubleValue("discount-rate", 0.0, context);
 import dev.openfeature.sdk.Value;
 
 // Evaluate object/JSON flags for complex configuration
-Value config = client.getObjectValue("feature-config", new Value(), context);
+Value config = client.getObjectValue("ui.config", new Value(), context);
 
 // Access structured data
 if (config.isStructure()) {
@@ -416,12 +415,12 @@ import dev.openfeature.sdk.ErrorCode;
 
 // Check evaluation details for errors
 FlagEvaluationDetails<Boolean> details =
-    client.getBooleanDetails("my-flag", false, context);
+    client.getBooleanDetails("checkout.new", false, context);
 
 if (details.getErrorCode() != null) {
     switch (details.getErrorCode()) {
         case FLAG_NOT_FOUND:
-            logger.warn("Flag does not exist: {}", "my-flag");
+            logger.warn("Flag does not exist: {}", "checkout.new");
             break;
         case PROVIDER_NOT_READY:
             logger.warn("Provider not initialized yet");
@@ -433,7 +432,7 @@ if (details.getErrorCode() != null) {
             logger.error("Flag value type doesn't match requested type");
             break;
         default:
-            logger.error("Evaluation error for flag: {}", "my-flag", details.getErrorCode());
+            logger.error("Evaluation error for flag: {}", "checkout.new", details.getErrorCode());
     }
 }
 {{< /code-block >}}
@@ -506,11 +505,11 @@ EvaluationContext checkoutContext = new MutableContext("session-abc");
 EvaluationContext analyticsContext = new MutableContext("user-123");
 
 boolean newCheckout = checkoutClient.getBooleanValue(
-    "new-checkout-ui", false, checkoutContext
+    "checkout.ui.new", false, checkoutContext
 );
 
 boolean enhancedAnalytics = analyticsClient.getBooleanValue(
-    "enhanced-analytics", false, analyticsContext
+    "analytics.enhanced", false, analyticsContext
 );
 {{< /code-block >}}
 
@@ -526,10 +525,10 @@ Always provide sensible default values that maintain safe behavior if flag evalu
 
 {{< code-block lang="java" >}}
 // Good: Safe default that maintains current behavior
-boolean useNewAlgorithm = client.getBooleanValue("new-algorithm", false, context);
+boolean useNewAlgorithm = client.getBooleanValue("algorithm.new", false, context);
 
 // Good: Conservative default for limits
-int rateLimit = client.getIntegerValue("rate-limit", 100, context);
+int rateLimit = client.getIntegerValue("rate.limit", 100, context);
 {{< /code-block >}}
 
 ### 3. Create Context Once
@@ -539,11 +538,11 @@ Create the evaluation context once per request/user/session and reuse it for all
 // In a web filter or request handler
 EvaluationContext userContext = new MutableContext(userId)
     .add("email", user.getEmail())
-    .add("plan", user.getPlan());
+    .add("tier", user.getTier());
 
 // Reuse context for all flags in this request
-boolean featureA = client.getBooleanValue("feature-a", false, userContext);
-boolean featureB = client.getBooleanValue("feature-b", false, userContext);
+boolean featureA = client.getBooleanValue("feature.a", false, userContext);
+boolean featureB = client.getBooleanValue("feature.b", false, userContext);
 {{< /code-block >}}
 
 ### 4. Handle Initialization Failures (Optional)
@@ -571,10 +570,10 @@ Use the detailed evaluation results for logging and debugging:
 
 {{< code-block lang="java" >}}
 FlagEvaluationDetails<Boolean> details =
-    client.getBooleanDetails("critical-feature", false, context);
+    client.getBooleanDetails("feature.critical", false, context);
 
 logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
-    "critical-feature",
+    "feature.critical",
     details.getValue(),
     details.getVariant(),
     details.getReason()
