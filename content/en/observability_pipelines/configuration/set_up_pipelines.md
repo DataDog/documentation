@@ -59,7 +59,7 @@ Set up your pipelines and its sources, processors, and destinations in the Obser
 If you want to add another group of processors for a destination:
 1. Click the plus sign (**+**) at the bottom of the existing processor group.
 1. Click the name of the processor group to update it.
-1. Optionally, enter a group filter. See [Filter Syntax][17] for more information.
+1. Optionally, enter a group filter. See [Search Syntax][17] for more information.
 1. Click **Add** to add processors to the group.
 1. If you want to copy all processors in a group and paste them into the same processor group or a different group:
     1. Click the three dots on the processor group.
@@ -125,7 +125,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [14]: /monitors/types/metric/
 [15]: /observability_pipelines/guide/environment_variables/
 [16]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
-[17]: /observability_pipelines/processors/#filter-query-syntax
+[17]: /observability_pipelines/search_syntax/
 
 {{% /tab %}}
 {{% tab "API" %}}

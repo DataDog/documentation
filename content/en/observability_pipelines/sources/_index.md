@@ -19,6 +19,63 @@ Use Observability Pipelines' sources to receive logs or metrics ({{< tooltip glo
 
 Select a source in the left navigation menu to see more information about it.
 
+## Sources
+
+These are the available sources:
+
+{{< tabs >}}
+{{% tab "Logs" %}}
+
+- [Amazon Data Firehose][1]
+- [Amazon S3][2]
+- [Azure Event Hubs][3]
+- [Datadog Agent][4]
+- [Filebeat][5]
+- [Fluentd and Fluent Bit][6]
+- [Google Pub/Sub][7]
+- [HTTP Client][8]
+- [HTTP Server][9]
+- [Kafka][10]
+- [Lambda Extension][11]
+- [Lambda Forwarder][12]
+- [Logstash][13]
+- [OpenTelemetry][14]
+- [Socket][15]
+- [Splunk HTTP Event Collector (HEC)][16]
+- [Splunk Heavy or Universal Forwarders (TCP)][17]
+- [Sumo Logic Hosted Collector][18]
+- [Syslog][19]
+
+[1]: /observability_pipelines/sources/amazon_data_firehose/
+[2]: /observability_pipelines/sources/amazon_s3/
+[3]: /observability_pipelines/sources/azure_event_hubs/
+[4]: /observability_pipelines/sources/datadog_agent/
+[5]: /observability_pipelines/sources/filebeat/
+[6]: /observability_pipelines/sources/fluent/
+[7]: /observability_pipelines/sources/google_pubsub/
+[8]: /observability_pipelines/sources/http_client/
+[9]: /observability_pipelines/sources/http_server/
+[10]: /observability_pipelines/sources/kafka/
+[11]: /observability_pipelines/sources/lambda_extension/
+[12]: /observability_pipelines/sources/lambda_forwarder/
+[13]: /observability_pipelines/sources/logstash/
+[14]: /observability_pipelines/sources/opentelemetry/
+[15]: /observability_pipelines/sources/socket/
+[16]: /observability_pipelines/sources/splunk_hec/
+[17]: /observability_pipelines/sources/splunk_tcp/
+[18]: /observability_pipelines/sources/sumo_logic/
+[19]: /observability_pipelines/sources/syslog/
+
+{{% /tab %}}
+{{% tab "Metrics" %}}
+
+- [Datadog Agent][1]
+
+[1]: /observability_pipelines/sources/datadog_agent/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Standard metadata fields
 
 All sources add the following standard metadata fields to ingested events:
