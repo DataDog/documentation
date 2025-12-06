@@ -288,6 +288,7 @@ unsupported_sites:
   cloudprem: [gov]
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
+  datadog_disaster_recovery: [gov]
   ddot_collector: [gov]
   dora_metrics: [gov]
   dynamic_instrumentation: [gov]
