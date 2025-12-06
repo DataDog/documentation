@@ -402,7 +402,7 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][2] f
     DD_TRACE_LOG_LEVEL=info
     ```
 
-[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[1]: https://github.com/DataDog/dd-trace-js/blob/main/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /tracing/troubleshooting/tracer_startup_logs/
 [5]: /tracing/troubleshooting/

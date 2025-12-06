@@ -280,7 +280,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
-[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[1]: https://github.com/DataDog/dd-trace-js/blob/main/MIGRATING.md
 [2]: /security/code_security/iast/setup/nodejs/
 [3]: /security/code_security/iast/setup/
 [4]: /agent/versions/upgrade_between_agent_minor_versions/

@@ -280,7 +280,7 @@ spec:
 ]
 ```
 
-[1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[1]: https://github.com/DataDog/dd-trace-js/blob/main/MIGRATING.md
 [2]: /ja/security/code_security/iast/setup/nodejs/
 [3]: /ja/security/code_security/iast/setup/
 [4]: /ja/agent/versions/upgrade_between_agent_minor_versions/

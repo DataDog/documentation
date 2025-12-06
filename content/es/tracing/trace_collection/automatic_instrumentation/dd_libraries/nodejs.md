@@ -269,7 +269,7 @@ Para ver lista de opciones de inicialización, lee los [parámetros del rastread
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /es/tracing/trace_collection/library_config/nodejs/
-[5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[5]: https://github.com/DataDog/dd-trace-js/blob/main/MIGRATING.md
 [6]: /es/tracing/trace_collection/compatibility/nodejs/#complex-framework-usage
 [11]: /es/tracing/trace_collection/library_injection_local/
 [13]: /es/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
