@@ -275,6 +275,33 @@ bar: quuz
 </div>
 
 
+Although Kubernetes labels and annotations are case sensitive, tags are case insensitive. If you have Kubernetes labels or annotations with matching characters, they can conflict.
+
+For example, suppose you have both "foo" and "Foo" labels on a pod:
+
+```yaml
+  labels:
+    foo: bar
+    Foo: qux
+```
+Using tag extraction causes a conflict and creates an unexpected result:
+
+```yaml
+    kubernetesResourcesLabelsAsTags:
+      pods:
+        foo: tag1
+        Foo: tag2 
+```
+
+Instead, use the following configuration to get `tag1: bar` for your data:
+
+```yaml
+    kubernetesResourcesLabelsAsTags:
+      pods:
+        foo: tag1
+```
+
+
 
 ### Kubernetes resources annotations as tags
 
