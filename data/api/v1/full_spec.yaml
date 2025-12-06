@@ -3613,8 +3613,9 @@ components:
         focus: WORLD
       properties:
         focus:
-          description: The 2-letter ISO code of a country to focus the map on. Or
-            `WORLD`.
+          description: The 2-letter ISO code of a country to focus the map on, or
+            `WORLD` for global view, or a region (`EMEA`, `APAC`, `LATAM`), or a continent
+            (`NORTH_AMERICA`, `SOUTH_AMERICA`, `EUROPE`, `AFRICA`, `ASIA`, `OCEANIA`).
           example: WORLD
           type: string
       required:
@@ -3632,6 +3633,12 @@ components:
             width: full
           items:
             $ref: '#/components/schemas/ListStreamColumn'
+          type: array
+        conditional_formats:
+          description: Threshold (numeric) conditional formatting rules may be used
+            by the regions layer.
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
           type: array
         formulas:
           description: List of formulas that operate on queries.
@@ -3658,6 +3665,11 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         sort:
           $ref: '#/components/schemas/WidgetSortBy'
+        text_formats:
+          description: Text formatting rules may be used by the points layer.
+          items:
+            $ref: '#/components/schemas/TableWidgetTextFormatRule'
+          type: array
       type: object
     GraphSnapshot:
       description: Object representing a graph snapshot.
