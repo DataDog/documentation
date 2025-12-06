@@ -30,7 +30,7 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
 <div class="alert alert-info">
 
 - Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
-- External evaluations are not supported for [OpenTelemetry spans][5].
+- External evaluations are supported for [OpenTelemetry spans][5], but require adding the <code>source:otel</code> tag to your evaluation.
 
 </div>
 
@@ -93,7 +93,9 @@ You can use the evaluations API provided by LLM Observability to send evaluation
           "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
-          "score_value": 3
+          "score_value": 3,
+          // source:otel required only for OpenTelemetry spans
+          "tags": ["source:otel"]
         }
       ]
     }
