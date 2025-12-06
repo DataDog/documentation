@@ -20256,7 +20256,7 @@ components:
           type: array
       type: object
     UsageIncidentManagementHour:
-      description: Incident management usage for a given organization for a given
+      description: Incident Management usage for a given organization for a given
         hour.
       properties:
         hour:
@@ -20277,11 +20277,11 @@ components:
           type: string
       type: object
     UsageIncidentManagementResponse:
-      description: Response containing the incident management usage for each hour
+      description: Response containing the Incident Management usage for each hour
         for a given organization.
       properties:
         usage:
-          description: Get hourly usage for incident management.
+          description: Get hourly usage for Incident Management.
           items:
             $ref: '#/components/schemas/UsageIncidentManagementHour'
           type: array
@@ -21487,7 +21487,7 @@ components:
           format: int64
           type: integer
         incident_management_monthly_active_users_hwm:
-          description: Shows the high-water mark of incident management monthly active
+          description: Shows the high-water mark of Incident Management monthly active
             users over all hours in the current date for all organizations.
           format: int64
           type: integer
@@ -22608,7 +22608,7 @@ components:
           description: The organization id.
           type: string
         incident_management_monthly_active_users_hwm:
-          description: Shows the high-water mark of incident management monthly active
+          description: Shows the high-water mark of Incident Management monthly active
             users over all hours in the current date for the given org.
           format: int64
           type: integer
@@ -23730,7 +23730,7 @@ components:
           format: int64
           type: integer
         incident_management_monthly_active_users_hwm_sum:
-          description: Shows sum of the high-water marks of incident management monthly
+          description: Shows sum of the high-water marks of Incident Management monthly
             active users in the current month for all organizations.
           format: int64
           type: integer
@@ -37759,7 +37759,7 @@ paths:
   /api/v1/usage/incident-management:
     get:
       deprecated: true
-      description: 'Get hourly usage for incident management.
+      description: 'Get hourly usage for Incident Management.
 
         **Note:** This endpoint has been deprecated. Hourly usage data for all products
         is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
@@ -37815,7 +37815,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for incident management
+      summary: Get hourly usage for Incident Management
       tags:
       - Usage Metering
       x-menu-order: 26
