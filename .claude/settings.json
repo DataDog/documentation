@@ -1,0 +1,16 @@
+{
+  "permissions": {},
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hooks/block-go-files.py"
+          }
+        ]
+      }
+    ]
+  }
+}
