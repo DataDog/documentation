@@ -48,14 +48,25 @@ To customize notification sounds:
 
 {{% /tab %}}
 
-{{% tab "Android" %}}
+{{% tab "Samsung" %}}
 1. In the Datadog mobile app, navigate to **Settings** > **Notifications**.
 
-   {{< img src="service_management/mobile/android_settings_may_2025.png" alt="Find the notification settings in the Android version of Datadog's mobile app." style="width:40%; background:none; border:none; box-shadow:none;" >}}
+   {{< img src="service_management/mobile/android_settings_may_2025.png" alt="Find the notification settings in the Samsung version of Datadog's mobile app." style="width:40%; background:none; border:none; box-shadow:none;" >}}
 
 2. Enable the **Allow notifications** toggle. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
 
-   {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+   {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Samsung device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+
+{{% /tab %}}
+
+{{% tab "Pixel" %}}
+1. In the Datadog mobile app, navigate to **Settings** > **Notifications**.
+
+   {{< img src="service_management/mobile/android_settings_may_2025.png" alt="Find the notification settings in the Pixel version of Datadog's mobile app." style="width:40%; background:none; border:none; box-shadow:none;" >}}
+
+2. Enable the **Allow notifications** toggle. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
+
+   {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Pixel device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
 ### Custom sounds
 
@@ -102,29 +113,59 @@ Critical push notifications are only available for On-Call. If you are setting u
 5. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 {{% /tab %}}
-{{% tab "Android" %}}
+{{% tab "Samsung" %}}
 
-{{< img src="service_management/mobile/android_critical_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+{{< img src="service_management/mobile/android_critical_may_2025.png" alt="Override your Samsung device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
 1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
 
-{{< img src="service_management/mobile/android_allow_notification_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+{{< img src="service_management/mobile/android_allow_notification_may_2025.png" alt="Override your Samsung device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-2. If notification permissions are missing, tap **Bypass Do Not Disturb** and enable **Allow notifications** in System Settings.
+2. If notification permissions are missing, tap **Override Do Not Disturb** and enable **Allow notifications** in System Settings. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
 
-{{< img src="service_management/mobile/android_override_system_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+{{< img src="service_management/mobile/android_override_system_may_2025.png" alt="Override your Samsung device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-3. Then tap **Bypass Do Not Disturb** and enable **Override Do Not Disturb** in System Settings for High Urgency On-Call.
+3. Then tap **Override Do Not Disturb** >> **App Notifications** and add Datadog to selected apps that are allowed during do not disturb. 
 
-   **On Samsung devices**: Go to **Settings** > **Notifications** > **Do Not Disturb** > **App notifications**. Select Datadog and allow it to bypass Do Not Disturb.
+{{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Override your Samsung device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-{{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+4. In order to override device modes, tap **Mode Access** and toggle on Do not disturb permissions for the Datadog app.
 
-4. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
+5. Toggle on **Override notification volume**. Adjust notification volume on the System volume slider. Datadog recommends max volume.
 
-5. Select your device for **High Urgency Notifications** and/or **Low Urgency Notifications** under the Notification Preferences section.
+6. If you recieve phone calls or SMS and would like to override volume, toggle on **Override call volume** and **Override SMS volume**.
+   
+7. Test the setup of your critical push notification by tapping **Test push notifications**.
 
-6. Test the setup of your critical push notification by tapping **Test push notifications**.
+<div class="alert alert-warning">
+On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
+</div>
+
+{{% /tab %}}
+
+{{% tab "Pixel" %}}
+
+{{< img src="service_management/mobile/android_critical_may_2025.png" alt="Override your Pixel device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+
+1. In the Datadog mobile app, navigate to **Settings** > **On-Call**.
+
+{{< img src="service_management/mobile/android_allow_notification_may_2025.png" alt="Override your Samsung device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+
+2. If notification permissions are missing, tap **Override Do Not Disturb** and enable **Allow notifications** in System Settings. Datadog highly recommends you also enable **Sound and vibration** and **Show content on Lock screen**.
+
+{{< img src="service_management/mobile/android_override_system_may_2025.png" alt="Override your Samsung device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+
+3. Then tap **Override Do Not Disturb** again and enable **High urgency On-Call** and **Override Do Not Disturb** at the bottom of the screen.
+
+{{< img src="service_management/mobile/android_override_system_volume_may_2025.png" alt="Override your Samsung device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
+
+4. In order to override device modes, tap **Mode Access** and enable mode access for the Datadog app.
+
+5. Toggle on **Override notification volume**. Adjust notification volume on the System volume slider. Datadog recommends max volume.
+
+6. If you recieve phone calls or SMS and would like to override volume, toggle on **Override call volume** and **Override SMS volume** to grant access permissions.
+   
+7. Test the setup of your critical push notification by tapping **Test push notifications**.
 
 <div class="alert alert-warning">
 On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
