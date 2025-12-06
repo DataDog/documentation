@@ -183,7 +183,7 @@ Cloud SIEM applies out-of-the-box detection rules to all processed logs, includi
 [4]: https://console.cloud.google.com/iam-admin/audit
 [5]: https://console.cloud.google.com/cloudpubsub/topic
 [6]: https://cloud.google.com/pubsub/quotas#quotas
-[7]: /integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
+[7]: /logs/guide/google-cloud-log-forwarding/#monitor-the-cloud-pubsub-log-forwarding
 [8]: https://console.cloud.google.com/security/secret-manager
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://cloud.google.com/compute/docs/access/service-accounts#default_service_account
