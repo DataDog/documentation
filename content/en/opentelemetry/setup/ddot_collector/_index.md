@@ -144,7 +144,7 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 
 {{% collapse-content title="Datadog components" level="p" %}}
 
-- [Infrastructure Attribute Processor][50]: An OpenTelemetry processor component that automatically assigns [Kubernetes tags][53] to OTLP telemetry (metrics, traces, and logs) emitted by a pod or an individual container within a pod. This component enables [unified service tagging][54] and telemetry correlation for monitoring Kubernetes environments.
+- [Infrastructure Attributes Processor][50]: An OpenTelemetry processor component that automatically assigns [Kubernetes tags][53] to OTLP telemetry (metrics, traces, and logs) emitted by a pod or an individual container within a pod. This component enables [unified service tagging][54] and telemetry correlation for monitoring Kubernetes environments.
 
 - [Converter][51]: An OpenTelemetry converter component that enhances user-provided configurations. It offers an API to return both the original and enhanced configurations, automatically checking for known misconfigurations to reduce errors. This ensures seamless integration of existing OpenTelemetry Collector configurations with the Agent.
 
