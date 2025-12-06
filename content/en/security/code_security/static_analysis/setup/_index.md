@@ -92,23 +92,102 @@ You **must** run an analysis of your repository on the default branch before res
 
 ## Customize your configuration
 
-By default, Datadog Static Code Analysis scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
+By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
 
 ### Configuration locations
 
-Datadog Static Code Analysis can be configured within Datadog and/or by using a file within your repository's **root directory**.
+Datadog Static Code Analysis (SAST) can be configured within Datadog and/or by using a file within your repository's **root directory**.
 
 There are three levels of configuration:
 
-* Org Level Configuration (Datadog)
-* Repo Level Configuration (Datadog)
-* Repo Level Configuration (Repo File)
+* Org-level configuration (Datadog)
+* Repository-level configuration (Datadog)
+* Repository-level configuration (Repo File)
 
 <div class="alert alert-danger">
 By default, when no configuration is defined at the org or repo level, Datadog uses a default configuration with all default rules enabled. If you define an org-level configuration without default rules, default rules are not used. If want to use default rules in this scenario, you must enable them.
 </div>
 
-All three locations use the same YAML format for configuration. These configurations are merged **in order** using an overlay/patch merge method. For example, lets look at these two sample YAML files:
+All three locations use the same YAML format for configuration. These configurations are merged **in order** using an overlay/patch merge method.
+
+#### Default rulesets (baseline configuration)
+
+All three configuration methods described below customize the **same default rulesets**.  
+Use the configuration file below as your baseline when configuring rules at the Org level, Repo level, or through a Repo file.
+
+You can paste and edit the YAML content below directly into:
+
+- **Org-level configuration (Datadog)**  
+- **Repository-level configuration (Datadog)**  
+
+or create the file:
+
+- **`static-analysis.datadog.yaml`** in the root of your repository (required only for the *Repository-level configuration file* option).
+
+To customize rulesets, **remove any rulesets you do not want to apply**:
+
+```yaml
+schema-version: v1
+rulesets:
+  - apex-code-style
+  - apex-security
+  - csharp-best-practices
+  - csharp-code-style
+  - csharp-security
+  - csharp-inclusive
+  - docker-best-practices
+  - github-actions
+  - go-best-practices
+  - go-inclusive
+  - go-security
+  - java-best-practices
+  - java-code-style
+  - java-security
+  - javascript-best-practices
+  - javascript-browser-security
+  - javascript-code-style
+  - javascript-inclusive
+  - javascript-common-security
+  - javascript-express
+  - javascript-node-security
+  - jsx-react
+  - kotlin-security
+  - kotlin-inclusive
+  - kotlin-code-style
+  - kotlin-best-practices
+  - php-best-practices
+  - php-security
+  - python-best-practices
+  - python-code-style
+  - python-django
+  - python-flask
+  - python-inclusive
+  - python-pandas
+  - python-security
+  - ruby-code-style
+  - ruby-security
+  - ruby-best-practices
+  - rails-best-practices
+  - swift-code-style
+  - swift-security
+  - swift-inclusive
+  - tsx-react
+  - typescript-best-practices
+  - typescript-browser-security
+  - typescript-code-style
+  - typescript-common-security
+  - typescript-express
+  - typescript-inclusive
+  - typescript-node-security
+````
+
+#### How org-level, repo-level, and file-level settings interact
+
+All configuration levels use the same YAML format. These configurations are merged in order using an **overlay/patch merge method**.
+
+For example, consider the following two YAML files:
+
+**File 1:**
 
 ```yaml
 rulesets:
@@ -118,6 +197,8 @@ rulesets:
         ignore: ["**"]
         args: ["my_arg1", "my_arg2"]
 ```
+
+**File 2:**
 
 ```yaml
 rulesets:
@@ -131,7 +212,7 @@ rulesets:
 
 ```
 
-If these YAML files were merged in order, first file with the second, the merge of these YAML files with a overlay/patch method would be the following:
+If these YAML files were merged in order (first File 1, then File 2), the result would be:
 
 ```yaml
 rulesets:
@@ -147,7 +228,7 @@ rulesets:
 
 ```
 
-As you can see, the `ignore: ["**"]` from the first file was overlayed with the `ignore: ["my_ignored_file.file"]`. This happened because there was a conflict and the second file's value took precedence due to merge order. The `args` field from the first file is retained because there is no conflicting value in the second file.
+As you can see, the `ignore: ["**"]` from File 1 was **overlayed** by the `ignore: ["my_ignored_file.file"]` value from File 2 due to merge order. This happened because there was a conflict and the second file's value took precedence due to merge order. The `args` field from File 1 is retained because the second file does not override it.
 
 #### Org level configuration
 
