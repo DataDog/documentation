@@ -12,6 +12,8 @@ Single Step Instrumentation (SSI) has compatibility requirements that vary by op
 
 ## Compatibility by application environment
 
+<div class="alert alert-warning">ECS Fargate is not supported.</div>
+
 Select your environment to see compatibility requirements and limitations:
 
 {{< tabs >}}
@@ -56,6 +58,8 @@ Select your environment to see compatibility requirements and limitations:
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
+
+<div class="alert alert-info">EKS Fargate support is in Preview.</div>
 
 ### Compatibility
 
