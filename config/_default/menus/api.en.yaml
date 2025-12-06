@@ -4216,9 +4216,9 @@ menu:
           - DeleteHostTags
         unstable: []
         order: 5
-    - name: Get Tags
-      url: '#get-tags'
-      identifier: tags-get-tags
+    - name: Get All Hosts Tags
+      url: '#get-all-hosts-tags'
+      identifier: tags-get-all-hosts-tags
       parent: tags
       generated: true
       params:
