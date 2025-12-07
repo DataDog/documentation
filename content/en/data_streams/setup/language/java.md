@@ -35,7 +35,7 @@ aliases:
 
 ### Installation
 
-To enable Data Streams Monitoring, set the following environment variables to `true` on services that are sending or consuming messages:
+To enable Data Streams Monitoring, set the following environment variables to `true` on **application services that are sending or consuming messages**:
 
 - `DD_DATA_STREAMS_ENABLED`
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED`
