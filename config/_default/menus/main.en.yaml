@@ -5125,7 +5125,7 @@ menu:
       identifier: ci
       parent: software_delivery_heading
       weight: 10000
-    - name: Pipeline Visibility
+    - name: Setup
       url: continuous_integration/pipelines/
       parent: ci
       identifier: pipeline_visibility
@@ -5220,21 +5220,26 @@ menu:
       parent: ci_explorer
       identifier: ci_explorer_saved_views
       weight: 304
+    - name: CI Health
+      url: continuous_integration/health/
+      parent: ci
+      identifier: ci_health
+      weight: 4
     - name: Monitors
       url: monitors/types/ci/?tab=pipelines
       parent: ci
       identifier: ci_monitors
-      weight: 4
+      weight: 5
     - name: Guides
       url: continuous_integration/guides/
       parent: ci
       identifier: ci_guides
-      weight: 5
+      weight: 6
     - name: Troubleshooting
       url: continuous_integration/troubleshooting/
       parent: ci
       identifier: ci_troubleshooting
-      weight: 6
+      weight: 7
     - name: CD Visibility
       url: continuous_delivery/
       pre: ci
