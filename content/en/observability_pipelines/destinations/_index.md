@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Use the Observability Pipelines Worker to send your processed logs and metrics ({{< tooltip glossary="preview" >}}) to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
+Use the Observability Pipelines Worker to send your processed logs and metrics ({{< tooltip glossary="preview" case="title" >}}) to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
 
 Select a destination in the left navigation menu to see more information about it.
 
