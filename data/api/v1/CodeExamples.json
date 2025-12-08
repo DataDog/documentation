@@ -178,6 +178,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1093147852",
+      "description": "Create a new dashboard with distribution widget with markers and num_buckets"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2432046716",
       "description": "Create a new dashboard with event_stream list_stream widget"
     },
@@ -220,6 +225,11 @@
       "group": "dashboards",
       "suffix": "_1177423752",
       "description": "Create a new dashboard with heatmap widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2823363212",
+      "description": "Create a new dashboard with heatmap widget with markers and num_buckets"
     },
     {
       "group": "dashboards",
