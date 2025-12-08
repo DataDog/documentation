@@ -61,7 +61,7 @@ See [Set Up Pipelines][2] for more information on setting up a source, processor
 <div class="alert alert-info">
 Metrics Volume and Cardinality Control is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
-Use the [Metrics Volume and Cardinality Control][1] template to create a metrics pipeline. 
+Use the [Metrics Volume and Cardinality Control][1] template to create a metrics pipeline.
 
 See [Set Up Pipelines][2] for more information on setting up a source, processors and destination.
 
@@ -71,9 +71,9 @@ Metrics sent to Observability Pipelines include the following:
 
 - `name`: The metric name
 - `kind`: There are two kinds of metrics:
-- Absolute metrics: Represents the current value of a measurement at the time it is reported.
-- Incremental metrics: Represents the change in a measurement since the last reported value, which the system aggregates over time.
-- The [metric type](#metric-types)s:
+  - Absolute metrics: Represents the current value of a measurement at the time it is reported.
+  - Incremental metrics: Represents the change in a measurement since the last reported value, which the system aggregates over time.
+- The [metric types](#metric-types):
 	- `counter`
 	- `gauge`
 	- `distribution`
@@ -81,7 +81,7 @@ Metrics sent to Observability Pipelines include the following:
 - `timestamp`: The date and time the metric is created.
 - `tags`: Includes tags such as `host`.
 
-The `counter` metric type is the only \`incremental\` metric. `gauge`, `distribution`, and `histogram` metric types are `absolute` metrics.
+The `counter` metric type is the only `incremental` metric. `gauge`, `distribution`, and `histogram` metric types are `absolute` metrics.
 
 An example of a metric:
 
@@ -103,7 +103,7 @@ An example of a metric:
 
 #### Metric types
 
-These are the available metric types:
+The available metric types:
 
 | Metric type | Description | Example |
 | ----------- | ----------- | ------- |
