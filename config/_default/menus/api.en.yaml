@@ -3094,6 +3094,66 @@ menu:
         unstable:
           - v2
         order: 28
+    - name: Create Jira issues for security findings
+      url: '#create-jira-issues-for-security-findings'
+      identifier: security-monitoring-create-jira-issues-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateJiraIssues
+        unstable: []
+        order: 7
+    - name: Attach security findings to a Jira issue
+      url: '#attach-security-findings-to-a-jira-issue'
+      identifier: security-monitoring-attach-security-findings-to-a-jira-issue
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachJiraIssue
+        unstable: []
+        order: 8
+    - name: Attach security findings to a case
+      url: '#attach-security-findings-to-a-case'
+      identifier: security-monitoring-attach-security-findings-to-a-case
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachCase
+        unstable: []
+        order: 5
+    - name: Create cases for security findings
+      url: '#create-cases-for-security-findings'
+      identifier: security-monitoring-create-cases-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCases
+        unstable: []
+        order: 4
+    - name: Detach security findings from their case
+      url: '#detach-security-findings-from-their-case'
+      identifier: security-monitoring-detach-security-findings-from-their-case
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DetachCase
+        unstable: []
+        order: 6
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -7783,7 +7843,7 @@ menu:
           - TriggerFleetSchedule
         unstable:
           - v2
-        order: 5
+        order: 13
     - name: Update a schedule
       url: '#update-a-schedule'
       identifier: fleet-automation-update-a-schedule
@@ -7796,7 +7856,7 @@ menu:
           - UpdateFleetSchedule
         unstable:
           - v2
-        order: 3
+        order: 11
     - name: Get a schedule by ID
       url: '#get-a-schedule-by-id'
       identifier: fleet-automation-get-a-schedule-by-id
@@ -7809,7 +7869,7 @@ menu:
           - GetFleetSchedule
         unstable:
           - v2
-        order: 2
+        order: 10
     - name: Delete a schedule
       url: '#delete-a-schedule'
       identifier: fleet-automation-delete-a-schedule
@@ -7822,7 +7882,7 @@ menu:
           - DeleteFleetSchedule
         unstable:
           - v2
-        order: 4
+        order: 12
     - name: Create a schedule
       url: '#create-a-schedule'
       identifier: fleet-automation-create-a-schedule
@@ -7835,7 +7895,7 @@ menu:
           - CreateFleetSchedule
         unstable:
           - v2
-        order: 1
+        order: 9
     - name: List all schedules
       url: '#list-all-schedules'
       identifier: fleet-automation-list-all-schedules
@@ -7848,7 +7908,7 @@ menu:
           - ListFleetSchedules
         unstable:
           - v2
-        order: 0
+        order: 8
     - name: Cancel a deployment
       url: '#cancel-a-deployment'
       identifier: fleet-automation-cancel-a-deployment
@@ -7861,7 +7921,7 @@ menu:
           - CancelFleetDeployment
         unstable:
           - v2
-        order: 4
+        order: 7
     - name: Get a configuration deployment by ID
       url: '#get-a-configuration-deployment-by-id'
       identifier: fleet-automation-get-a-configuration-deployment-by-id
@@ -7874,7 +7934,7 @@ menu:
           - GetFleetDeployment
         unstable:
           - v2
-        order: 3
+        order: 6
     - name: Upgrade hosts
       url: '#upgrade-hosts'
       identifier: fleet-automation-upgrade-hosts
@@ -7887,7 +7947,7 @@ menu:
           - CreateFleetDeploymentUpgrade
         unstable:
           - v2
-        order: 2
+        order: 5
     - name: Create a configuration deployment
       url: '#create-a-configuration-deployment'
       identifier: fleet-automation-create-a-configuration-deployment
@@ -7900,7 +7960,7 @@ menu:
           - CreateFleetDeploymentConfigure
         unstable:
           - v2
-        order: 1
+        order: 4
     - name: List all deployments
       url: '#list-all-deployments'
       identifier: fleet-automation-list-all-deployments
@@ -7913,7 +7973,33 @@ menu:
           - ListFleetDeployments
         unstable:
           - v2
-        order: 0
+        order: 3
+    - name: Get detailed information about an agent
+      url: '#get-detailed-information-about-an-agent'
+      identifier: fleet-automation-get-detailed-information-about-an-agent
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetAgentInfo
+        unstable:
+          - v2
+        order: 2
+    - name: List all Datadog Agents
+      url: '#list-all-datadog-agents'
+      identifier: fleet-automation-list-all-datadog-agents
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgents
+        unstable:
+          - v2
+        order: 1
     - name: List all available Agent versions
       url: '#list-all-available-agent-versions'
       identifier: fleet-automation-list-all-available-agent-versions
@@ -8860,6 +8946,19 @@ menu:
         unstable:
           - v2
         order: 8
+    - name: Replace a restriction query
+      url: '#replace-a-restriction-query'
+      identifier: logs-restriction-queries-replace-a-restriction-query
+      parent: logs-restriction-queries
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReplaceRestrictionQuery
+        unstable:
+          - v2
+        order: 4
     - name: Update a restriction query
       url: '#update-a-restriction-query'
       identifier: logs-restriction-queries-update-a-restriction-query
@@ -9337,9 +9436,9 @@ menu:
           - GetTeamOnCallUsers
         unstable: []
         order: 12
-    - name: Get the schedule on-call user
-      url: '#get-the-schedule-on-call-user'
-      identifier: on-call-get-the-schedule-on-call-user
+    - name: Get scheduled on-call user
+      url: '#get-scheduled-on-call-user'
+      identifier: on-call-get-scheduled-on-call-user
       parent: on-call
       generated: true
       params:
@@ -11102,49 +11201,6 @@ menu:
         unstable:
           - v2
         order: 2
-    - name: Team Connections
-      url: /api/latest/team-connections/
-      identifier: team-connections
-      generated: true
-    - name: Create team connections
-      url: '#create-team-connections'
-      identifier: team-connections-create-team-connections
-      parent: team-connections
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateTeamConnections
-        unstable:
-          - v2
-        order: 2
-    - name: List team connections
-      url: '#list-team-connections'
-      identifier: team-connections-list-team-connections
-      parent: team-connections
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListTeamConnections
-        unstable:
-          - v2
-        order: 1
-    - name: Delete team connections
-      url: '#delete-team-connections'
-      identifier: team-connections-delete-team-connections
-      parent: team-connections
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteTeamConnections
-        unstable:
-          - v2
-        order: 3
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
@@ -11394,6 +11450,93 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Create team connections
+      url: '#create-team-connections'
+      identifier: teams-create-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamConnections
+        unstable:
+          - v2
+        order: 2
+    - name: List team connections
+      url: '#list-team-connections'
+      identifier: teams-list-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamConnections
+        unstable:
+          - v2
+        order: 1
+    - name: Delete team connections
+      url: '#delete-team-connections'
+      identifier: teams-delete-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamConnections
+        unstable:
+          - v2
+        order: 3
+    - name: Get a team hierarchy link
+      url: '#get-a-team-hierarchy-link'
+      identifier: teams-get-a-team-hierarchy-link
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamHierarchyLink
+        unstable: []
+        order: 21
+    - name: Remove a team hierarchy link
+      url: '#remove-a-team-hierarchy-link'
+      identifier: teams-remove-a-team-hierarchy-link
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveTeamHierarchyLink
+        unstable: []
+        order: 23
+    - name: Create a team hierarchy link
+      url: '#create-a-team-hierarchy-link'
+      identifier: teams-create-a-team-hierarchy-link
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddTeamHierarchyLink
+        unstable: []
+        order: 22
+    - name: Get team hierarchy links
+      url: '#get-team-hierarchy-links'
+      identifier: teams-get-team-hierarchy-links
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamHierarchyLinks
+        unstable: []
+        order: 20
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

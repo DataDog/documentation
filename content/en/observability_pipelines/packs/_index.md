@@ -5,6 +5,12 @@ disable_toc: false
 private: true
 cascade:
     private: true
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
+    tag: Blog
+    text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
+
 ---
 
 ## Overview
@@ -84,6 +90,10 @@ To set up packs:
         1. Click **Add to Existing Pipeline**.
             1. The pack is added to the last processor group in your pipeline.
             1. Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/processors/

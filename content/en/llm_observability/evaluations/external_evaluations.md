@@ -27,7 +27,12 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
   * Unicode is not supported.
 * Evaluation labels must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
 
-<div class="alert alert-info">Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.</div>
+<div class="alert alert-info">
+
+- Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
+- External evaluations are not supported for [OpenTelemetry spans][5].
+
+</div>
 
 ## Submitting external evaluations with the SDK
 
@@ -104,3 +109,4 @@ You can use the evaluations API provided by LLM Observability to send evaluation
 [2]: /llm_observability/setup/api/?tab=model#evaluations-api
 [3]: /llm_observability/setup/sdk/python/#evaluations
 [4]: /llm_observability/setup/sdk/nodejs/#evaluations
+[5]: /llm_observability/instrumentation/otel_instrumentation
