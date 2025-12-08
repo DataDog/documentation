@@ -5908,76 +5908,81 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
       weight: 407
+    - name: Datadog Metrics
+      url: observability_pipelines/destinations/datadog_metrics/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_datadog_metrics
+      weight: 408
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 408
+      weight: 409
     - name: Google Chronicle
       url: observability_pipelines/destinations/google_chronicle
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_chronicle
-      weight: 409
+      weight: 410
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 410
+      weight: 411
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
-      weight: 411
+      weight: 412
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_http_client
-      weight: 412
+      weight: 413
     - name: Kafka
       url: observability_pipelines/destinations/kafka/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_kafka
-      weight: 413
+      weight: 414
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 414
+      weight: 415
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 415
+      weight: 416
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 416
+      weight: 417
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 417
+      weight: 418
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 418
+      weight: 419
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 419
+      weight: 420
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 420
+      weight: 421
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 421
+      weight: 422
     - name: Packs
       url: observability_pipelines/packs/
       parent: observability_pipelines

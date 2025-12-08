@@ -69,11 +69,11 @@ See [Set Up Pipelines][2] for more information on setting up a source, processor
 
 Metrics sent to Observability Pipelines include the following:
 
-- `name`: The metric name
+- `name`: The metric name.
 - `kind`: There are two kinds of metrics:
-  - Absolute metrics: Represents the current value of a measurement at the time it is reported.
-  - Incremental metrics: Represents the change in a measurement since the last reported value, which the system aggregates over time.
-- The [metric types](#metric-types):
+  - `absolute` metrics: Represents the current value of a measurement at the time it is reported.
+  - `incremental` metrics: Represents the change in a measurement since the last reported value, which the system aggregates over time.
+- `value`: The [metric type](#metric-types):
 	- `counter`
 	- `gauge`
 	- `distribution`

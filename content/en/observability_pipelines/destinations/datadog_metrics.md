@@ -15,16 +15,16 @@ Set up the Datadog Metrics destination and its environment variables when you [s
 ### Set up the destination
 
 Optionally, toggle the switch to enable Buffering Options.
-**Note**: Buffering options is in Preview. Contact your account manager to request access.
+**Note**: Buffering options is in {{< tooltip glossary="preview" case="title" >}}. Contact your account manager to request access.
 
 - If left disabled, the maximum size for buffering is 500 events.
 - If enabled:
   - Select the buffer type you want to set (Memory or Disk).
   - Enter the buffer size and select the unit.
 
-### Set then environment variables
+### Set the environment variables
 
-No environment variables are required.
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 ## How the destination works
 

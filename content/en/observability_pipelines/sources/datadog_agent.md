@@ -9,9 +9,9 @@ further_reading:
 
 ---
 
-Use Observability Pipelines' Datadog Agent source to receive logs from the Datadog Agent. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from the Datadog Agent. Select and set up this source when you [set up a pipeline][1].
 
-**Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, you must [use the OpenTelemetry source to send logs to Observability Pipelines][4].
+**Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector for logs, you must [use the OpenTelemetry source to send logs to Observability Pipelines][4].
 
 ## Prerequisites
 
@@ -55,7 +55,7 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 
 Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
 
-**Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines metrics, such as utilization, events in and out metrics, using the `DD_CONTAINER_EXCLUDE_METRICS` environment variable. For Helm, use `datadog.containerExcludeMetrics`. This prevents duplicate metrics, as the Worker also sends its own metrics directly to Datadog. See [Docker Log Collection][1] or [Setting environment variables for Helm][2] for more information.
+**Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines metrics, such as utilization and events in/out metrics, using the `DD_CONTAINER_EXCLUDE_METRICS` environment variable. For Helm, use `datadog.containerExcludeMetrics`. This prevents duplicate metrics, as the Worker also sends its own metrics directly to Datadog. See [Docker Log Collection][1] or [Setting environment variables for Helm][2] for more information.
 
 {{% collapse-content title="Agent configuration file" level="h4" expanded=false id="id-for-anchoring" %}}
 
@@ -71,8 +71,8 @@ observability_pipelines_worker:
 ```
 
 `<OPW_HOST>` is the host IP address or the load balancer URL associated with the Observability Pipelines Worker.
-\- For CloudFormation installs, use the `LoadBalancerDNS` CloudFormation output for the URL.
-\- For Kubernetes installs, you can use the internal DNS record of the Observability Pipelines Worker service. For example: `http://opw-observability-pipelines-worker.default.svc.cluster.local:<PORT>`.
+- For CloudFormation installs, use the `LoadBalancerDNS` CloudFormation output for the URL.
+- For Kubernetes installs, you can use the internal DNS record of the Observability Pipelines Worker service. For example: `http://opw-observability-pipelines-worker.default.svc.cluster.local:<PORT>`.
 
 **Note**: If the Worker is listening for logs on port 8282, you must use another port for metrics, such as 8383.
 
