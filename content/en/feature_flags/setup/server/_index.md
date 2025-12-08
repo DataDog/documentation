@@ -132,7 +132,6 @@ Select your language or framework to view SDK-specific setup instructions:
     {{< nextlink href="/feature_flags/setup/server/nodejs" >}}Node.js{{< /nextlink >}}
     {{< nextlink href="/feature_flags/setup/server/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="/feature_flags/setup/server/ruby" >}}Ruby{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/server/dotnet" >}}.NET{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

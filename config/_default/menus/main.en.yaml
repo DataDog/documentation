@@ -5597,6 +5597,36 @@ menu:
       parent: feature_flags_setup
       identifier: feature_flags_setup_ios
       weight: 102
+    - name: Server
+      url: feature_flags/setup/server
+      parent: feature_flags_setup
+      identifier: feature_flags_setup_server
+      weight: 103
+    - name: Go
+      url: feature_flags/setup/server/go
+      parent: feature_flags_setup_server
+      identifier: feature_flags_setup_server_go
+      weight: 10301
+    - name: Java
+      url: feature_flags/setup/server/java
+      parent: feature_flags_setup_server
+      identifier: feature_flags_setup_server_java
+      weight: 10302
+    - name: Node.js
+      url: feature_flags/setup/server/nodejs
+      parent: feature_flags_setup_server
+      identifier: feature_flags_setup_server_nodejs
+      weight: 10303
+    - name: Python
+      url: feature_flags/setup/server/python
+      parent: feature_flags_setup_server
+      identifier: feature_flags_setup_server_python
+      weight: 10304
+    - name: Ruby
+      url: feature_flags/setup/server/ruby
+      parent: feature_flags_setup_server
+      identifier: feature_flags_setup_server_ruby
+      weight: 10305
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
