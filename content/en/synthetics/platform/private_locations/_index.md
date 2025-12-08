@@ -1020,8 +1020,8 @@ Use [granular access control][24] to limit who has access to your test based on 
 6. Select the level of access you want to associate with each of them.
 7. Click **Done**.
 
-<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
-<div class="alert alert-info">Restricting a Private Location may limit other users from adding it to a test or editing it, but they are still able to see the location's name if it was added to a test by an authorized user.</div>
+<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location. <br><br>
+Restricting a Private Location may limit other users from adding it to a test or editing it, but they are still able to see the location's name if it was added to a test by an authorized user.</div>
 
 | Access level | View PL instructions | View PL metrics | Use PL in test | Edit PL configuration  |
 | ------------ | ---------------------| --------------- | -------------- | ---------------------- |
