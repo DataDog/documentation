@@ -5,9 +5,9 @@ further_reading:
 - link: "/feature_flags/setup/"
   tag: "Documentation"
   text: "Feature Flags Setup"
-- link: "/agent/"
+- link: "/remote_configuration/"
   tag: "Documentation"
-  text: "Datadog Agent"
+  text: "Remote Configuration"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
@@ -30,79 +30,20 @@ Before setting up server-side feature flags, ensure you have:
 
 ## Agent configuration
 
-Server-side feature flags use Remote Configuration to deliver flag configurations to your application. Enable Remote Configuration in your Datadog Agent.
+Server-side feature flags use [Remote Configuration][1] to deliver flag configurations to your application. Enable Remote Configuration in your Datadog Agent by setting `DD_REMOTE_CONFIGURATION_ENABLED=true` or adding `remote_configuration.enabled: true` to your `datadog.yaml`.
 
-### Configuration file
+See the [Remote Configuration documentation][1] for detailed setup instructions across different deployment environments.
 
-Add the following to your `datadog.yaml`:
+### Polling interval
 
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-# Enable Remote Configuration
-remote_configuration:
-  enabled: true
-
-# Your Datadog API key
-api_key: <YOUR_API_KEY>
-{{< /code-block >}}
-
-### Environment variables
-
-Alternatively, configure the Agent using environment variables:
+The Agent polls Datadog for configuration updates at a configurable interval. This interval determines the average time between making a flag change in the UI and the change becoming available to your application.
 
 {{< code-block lang="bash" >}}
-# Enable Remote Configuration
-DD_REMOTE_CONFIGURATION_ENABLED=true
-
-# Your Datadog API key
-DD_API_KEY=<YOUR_API_KEY>
-
 # Optional: Configure polling interval (default: 60s)
-# This determines the average time between making a flag change in the UI
-# and the change becoming available to your application.
 DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=10s
 {{< /code-block >}}
 
-### Docker
-
-When running the Agent in Docker, pass the environment variables:
-
-{{< code-block lang="bash" >}}
-docker run -d \
-  -e DD_API_KEY=<YOUR_API_KEY> \
-  -e DD_REMOTE_CONFIGURATION_ENABLED=true \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  gcr.io/datadoghq/agent:latest
-{{< /code-block >}}
-
-### Kubernetes
-
-For Kubernetes deployments, add the configuration to your Agent manifest:
-
-{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: datadog-agent-config
-data:
-  datadog.yaml: |
-    remote_configuration:
-      enabled: true
-{{< /code-block >}}
-
-Or set environment variables in your Agent deployment:
-
-{{< code-block lang="yaml" >}}
-env:
-  - name: DD_REMOTE_CONFIGURATION_ENABLED
-    value: "true"
-  - name: DD_API_KEY
-    valueFrom:
-      secretKeyRef:
-        name: datadog-secrets
-        key: api-key
-{{< /code-block >}}
+[1]: /remote_configuration
 
 ## Application configuration
 
