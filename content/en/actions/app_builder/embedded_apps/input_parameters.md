@@ -46,7 +46,14 @@ To embed an app with input parameters:
 1. In the **Input Parameters** section, select an input parameter:
 {{< img src="/service_management/app_builder/embedded_apps/example-input-params-configuring-in-dashboard.png" alt="An example of an app in editing mode with Input Parameters circled" style="width:80%;" >}}
 1. Click **Save**.
-1. Duplicate the app with copy + paste keyboard shortcuts, or clone it. 
-1. Follow the steps above to select a different input parameter.
+
+## Reuse an app 
+
+After embedding an app in a dashboard or notebook, you can create a copy to reuse it with different contexts:
+1. Select the embedded app. 
+1. Click the **Options** icon (<i class="icon-kebab-wui" style="position:relative; top:2px;font-size: 12px; max-width: 12px"></i>), then click **Clone**.
+    - Alternatively, you can select the app and use copy & paste keyboard shortcuts.
+1. Follow the steps [above][2] to select a different input parameter.
 
 [1]: https://app.datadoghq.com/app-builder/apps/list
+[2]: /actions/app_builder/embedded_apps/input_parameters/#use-input-parameters
