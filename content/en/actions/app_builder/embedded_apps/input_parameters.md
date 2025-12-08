@@ -28,9 +28,9 @@ A common use case for input parameters is an app that's used on separate dashboa
 
 ### Example input parameter 
 
-This example input parameter was configured to show the same app in various staging environments. 
+This example input parameter was configured to show the same app in various staging environments:
 
-{{< img src="/service_management/app_builder/embedded_apps/example-input-parameters-configuration.png" alt="Two embedded apps with different input parameters selected" style="width:40%;" >}}
+{{< img src="/service_management/app_builder/embedded_apps/example-input-parameters-configuration.png" alt="An example of configured input parameters inside an app" style="width:35%;" >}}
 
 ## Use input parameters 
 
@@ -44,7 +44,7 @@ To embed an app with input parameters:
 1. Select a dashboard, then click **Save and Open**.
 1. In your dashboard, hover over the app and click the **Edit** icon ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
 1. In the **Input Parameters** section, select an input parameter:
-{{< img src="/service_management/app_builder/embedded_apps/example-input-params-configuring-in-dashboard.png" alt="Two embedded apps with different input parameters selected" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/embedded_apps/example-input-params-configuring-in-dashboard.png" alt="An example of an app in editing mode with Input Parameters circled" style="width:80%;" >}}
 1. Click **Save**.
 1. Duplicate the app with copy + paste keyboard shortcuts, or clone it. 
 1. Follow the steps above to select a different input parameter.
