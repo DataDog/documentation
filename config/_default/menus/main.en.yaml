@@ -1097,16 +1097,21 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 701
-    - name: Live Debugger
-      url: developers/ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 7011
     - name: Logs
       url: developers/ide_plugins/idea/logs/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
+      weight: 7011  
+    - name: Live Debugger
+      url: developers/ide_plugins/idea/live_debugger/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_debugger
       weight: 7012
+    - name: Code Security
+      url: developers/ide_plugins/idea/code_security/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_code_security
+      weight: 7013
     - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
@@ -2121,6 +2126,11 @@ menu:
       parent: software_catalog_entity_model
       identifier: software_catalog_custom_entities
       weight: 1022
+    - name: AI-generated Systems
+      url: internal_developer_portal/software_catalog/entity_model/ai-generated-systems
+      parent: software_catalog_entity_model
+      identifier: software_catalog_ai_generated_systems
+      weight: 1023
     - name: Troubleshooting
       url: internal_developer_portal/software_catalog/troubleshooting
       parent: software_catalog
@@ -2938,6 +2948,11 @@ menu:
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 703
+    - name: Reusable Modules
+      url: actions/app_builder/components/reusable_modules/
+      parent: app_builder_components
+      identifier: app_builder_reusable_modules
+      weight: 704
     - name: JavaScript Expressions
       url: actions/app_builder/expressions/
       parent: app_builder
@@ -3913,26 +3928,26 @@ menu:
       parent: cloud_cost_tags
       identifier: cloud_cost_tag_explorer
       weight: 301
-    - name: Tag Pipelines
-      url: cloud_cost_management/tags/tag_pipelines
-      parent: cloud_cost_tags
-      identifier: cloud_cost_tag_pipelines
-      weight: 302
     - name: Multisource Querying
       url: cloud_cost_management/tags/multisource_querying
       parent: cloud_cost_tags
       identifier: cloud_cost_multisource_querying
-      weight: 303
+      weight: 302
     - name: Allocation
       url: cloud_cost_management/allocation
       parent: cloud_cost
       identifier: cloud_cost_cost_allocation
       weight: 4
+    - name: Tag Pipelines
+      url: cloud_cost_management/tags/tag_pipelines
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_tag_pipelines
+      weight: 401
     - name: Container Cost Allocation
       url: cloud_cost_management/allocation/container_cost_allocation
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_container_cost_allocation
-      weight: 401
+      weight: 402
     - name: AWS
       url: cloud_cost_management/allocation/container_cost_allocation/?tab=aws/
       parent: cloud_cost_container_cost_allocation
@@ -3952,12 +3967,12 @@ menu:
       url: cloud_cost_management/allocation/bigquery
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_cost_allocationbigquery
-      weight: 402
+      weight: 403
     - name: Custom Allocation Rules
       url: cloud_cost_management/allocation/custom_allocation_rules
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_custom_allocation_rules
-      weight: 403
+      weight: 404
     - name: Reporting
       url: cloud_cost_management/reporting
       parent: cloud_cost

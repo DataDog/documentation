@@ -2,6 +2,9 @@
 title: Processors
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
+  tag: Blog
+  text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
 - link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
   tag: "blog"
   text: "Transform and enrich your logs with Datadog Observability Pipelines"

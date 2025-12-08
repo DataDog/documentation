@@ -50,7 +50,7 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install mode="in-container" cmd="\"dotnet\", \"dotnet.dll\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"dotnet\", \"dotnet.dll\"" cloudservice="jobs" %}}
 
 3. **Set up logs**.
 
@@ -79,7 +79,9 @@ logger.LogInformation("Hello World!");
 
 5. {{% gcr-service-label %}}
 
-6. **Send custom metrics**.
+6. {{% gcr-jobs-retention-filter %}}
+
+7. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 

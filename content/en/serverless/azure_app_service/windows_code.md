@@ -32,7 +32,7 @@ The Datadog extension for Azure App Service provides monitoring capabilities in 
 <div class="alert alert-info">
 The extension supports the following:
 <ul>
-  <li>App Service Web Apps: Supported for .NET, Java, and Node runtimes on Basic, Standard, and Premium plans.</li>
+  <li>App Service Web Apps: Supported for .NET, Java, and Node.js runtimes on Basic, Standard, and Premium plans.</li>
   <li>Azure Functions: Supported only for the .NET runtime on Basic, Standard, and Premium plans.</li>
 </ul>
 

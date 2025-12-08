@@ -13,6 +13,9 @@ further_reading:
   - link: "/dashboards/guide/quick-graphs/"
     tag: "Documentation"
     text: "Quick Graphs"
+  - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+    tag: Blog
+    text: Manage metric volume and tags in your environment with Observability Pipelines
     
 ---
 

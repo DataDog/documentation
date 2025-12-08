@@ -21860,6 +21860,278 @@ components:
       - PIPELINES_FAILED_DESCENDING
       - PIPELINES_DURATION_LOST_ASCENDING
       - PIPELINES_DURATION_LOST_DESCENDING
+    FleetAgentAttributes:
+      description: Attributes of a Datadog Agent in the list view.
+      properties:
+        agent_version:
+          description: The Datadog Agent version.
+          example: 7.50.0
+          type: string
+        api_key_name:
+          description: The API key name (if available and not redacted).
+          example: Production API Key
+          type: string
+        api_key_uuid:
+          description: The API key UUID.
+          example: a1b2c3d4-e5f6-4321-a123-123456789abc
+          type: string
+        cloud_provider:
+          description: The cloud provider where the agent is running.
+          example: aws
+          type: string
+        cluster_name:
+          description: Kubernetes cluster name (if applicable).
+          type: string
+        datadog_agent_key:
+          description: The unique agent key identifier.
+          example: my-agent-hostname
+          type: string
+        enabled_products:
+          description: Datadog products enabled on the agent.
+          items:
+            type: string
+          type: array
+        envs:
+          description: Environments the agent is reporting from.
+          items:
+            type: string
+          type: array
+        first_seen_at:
+          description: Timestamp when the agent was first seen.
+          format: int64
+          type: integer
+        hostname:
+          description: The hostname of the agent.
+          example: my-hostname
+          type: string
+        ip_addresses:
+          description: IP addresses of the agent.
+          items:
+            type: string
+          type: array
+        is_single_step_instrumentation_enabled:
+          description: Whether single-step instrumentation is enabled.
+          type: boolean
+        last_restart_at:
+          description: Timestamp of the last agent restart.
+          format: int64
+          type: integer
+        os:
+          description: The operating system.
+          example: linux
+          type: string
+        otel_collector_version:
+          description: OpenTelemetry collector version (if applicable).
+          type: string
+        otel_collector_versions:
+          description: List of OpenTelemetry collector versions (if applicable).
+          items:
+            type: string
+          type: array
+        pod_name:
+          description: Kubernetes pod name (if applicable).
+          type: string
+        remote_agent_management:
+          description: Remote agent management status.
+          example: enabled
+          type: string
+        remote_config_status:
+          description: Remote configuration status.
+          example: connected
+          type: string
+        services:
+          description: Services running on the agent.
+          items:
+            type: string
+          type: array
+        tags:
+          description: Tags associated with the agent.
+          items:
+            $ref: '#/components/schemas/FleetAgentAttributesTagsItems'
+          type: array
+        team:
+          description: Team associated with the agent.
+          type: string
+      type: object
+    FleetAgentAttributesTagsItems:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    FleetAgentInfo:
+      description: Represents detailed information about a specific Datadog Agent.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetAgentInfoAttributes'
+        id:
+          description: The unique agent key identifier.
+          example: my-agent-hostname
+          type: string
+        type:
+          $ref: '#/components/schemas/FleetAgentInfoResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FleetAgentInfoAttributes:
+      description: Attributes for agent information.
+      properties:
+        agent_infos:
+          $ref: '#/components/schemas/FleetAgentInfoDetails'
+        configuration_files:
+          $ref: '#/components/schemas/FleetConfigurationLayer'
+        detected_integrations:
+          description: List of detected integrations.
+          items:
+            $ref: '#/components/schemas/FleetDetectedIntegration'
+          type: array
+        integrations:
+          $ref: '#/components/schemas/FleetIntegrationsByStatus'
+      type: object
+    FleetAgentInfoDetails:
+      description: Detailed information about a Datadog Agent.
+      properties:
+        agent_version:
+          description: The Datadog Agent version.
+          example: 7.50.0
+          type: string
+        api_key_name:
+          description: The API key name (if available and not redacted).
+          example: Production API Key
+          type: string
+        api_key_uuid:
+          description: The API key UUID.
+          example: a1b2c3d4-e5f6-4321-a123-123456789abc
+          type: string
+        cloud_provider:
+          description: The cloud provider where the agent is running.
+          example: aws
+          type: string
+        cluster_name:
+          description: Kubernetes cluster name (if applicable).
+          type: string
+        datadog_agent_key:
+          description: The unique agent key identifier.
+          example: my-agent-hostname
+          type: string
+        enabled_products:
+          description: Datadog products enabled on the agent.
+          items:
+            type: string
+          type: array
+        env:
+          description: Environments the agent is reporting from.
+          items:
+            type: string
+          type: array
+        first_seen_at:
+          description: Timestamp when the agent was first seen.
+          format: int64
+          type: integer
+        hostname:
+          description: The hostname of the agent.
+          example: my-hostname
+          type: string
+        hostname_aliases:
+          description: Alternative hostname list for the agent.
+          items:
+            type: string
+          type: array
+        install_method_installer_version:
+          description: The version of the installer used.
+          example: 1.2.3
+          type: string
+        install_method_tool:
+          description: The tool used to install the agent.
+          example: chef
+          type: string
+        ip_addresses:
+          description: IP addresses of the agent.
+          items:
+            type: string
+          type: array
+        is_single_step_instrumentation_enabled:
+          description: Whether single-step instrumentation is enabled.
+          type: boolean
+        last_restart_at:
+          description: Timestamp of the last agent restart.
+          format: int64
+          type: integer
+        os:
+          description: The operating system.
+          example: linux
+          type: string
+        os_version:
+          description: The operating system version.
+          example: Ubuntu 20.04
+          type: string
+        otel_collector_version:
+          description: OpenTelemetry collector version (if applicable).
+          type: string
+        otel_collector_versions:
+          description: List of OpenTelemetry collector versions (if applicable).
+          items:
+            type: string
+          type: array
+        otel_collectors:
+          description: OpenTelemetry collectors associated with the agent (if applicable).
+          items:
+            $ref: '#/components/schemas/FleetOtelCollector'
+          type: array
+        pod_name:
+          description: Kubernetes pod name (if applicable).
+          type: string
+        python_version:
+          description: The Python version used by the agent.
+          example: 3.9.5
+          type: string
+        region:
+          description: Regions where the agent is running.
+          items:
+            type: string
+          type: array
+        remote_agent_management:
+          description: Remote agent management status.
+          example: enabled
+          type: string
+        remote_config_status:
+          description: Remote configuration status.
+          example: connected
+          type: string
+        services:
+          description: Services running on the agent.
+          items:
+            type: string
+          type: array
+        tags:
+          description: Tags associated with the agent.
+          items:
+            type: string
+          type: array
+        team:
+          description: Team associated with the agent.
+          type: string
+      type: object
+    FleetAgentInfoResourceType:
+      default: datadog_agent_key
+      description: The type of Agent info resource.
+      enum:
+      - datadog_agent_key
+      example: datadog_agent_key
+      type: string
+      x-enum-varnames:
+      - DATADOG_AGENT_KEY
+    FleetAgentInfoResponse:
+      description: Response containing detailed information about a specific agent.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetAgentInfo'
+      required:
+      - data
+      type: object
     FleetAgentVersion:
       description: Represents an available Datadog Agent version.
       properties:
@@ -21901,6 +22173,89 @@ components:
           type: array
       required:
       - data
+      type: object
+    FleetAgentsResponse:
+      description: Response containing a paginated list of Datadog Agents.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetAgentsResponseData'
+        meta:
+          $ref: '#/components/schemas/FleetAgentsResponseMeta'
+      required:
+      - data
+      type: object
+    FleetAgentsResponseData:
+      description: The response data containing status and agents array.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetAgentsResponseDataAttributes'
+        id:
+          description: Status identifier.
+          example: done
+          type: string
+        type:
+          description: Resource type.
+          example: status
+          type: string
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FleetAgentsResponseDataAttributes:
+      properties:
+        agents:
+          description: Array of agents matching the query criteria.
+          items:
+            $ref: '#/components/schemas/FleetAgentAttributes'
+          type: array
+      type: object
+    FleetAgentsResponseMeta:
+      description: Metadata for the list of agents response.
+      properties:
+        total_filtered_count:
+          description: Total number of agents matching the filter criteria across
+            all pages.
+          example: 150
+          format: int64
+          type: integer
+      type: object
+    FleetConfigurationFile:
+      description: A configuration file for an integration.
+      properties:
+        file_content:
+          description: The raw content of the configuration file.
+          type: string
+        file_path:
+          description: Path to the configuration file.
+          example: /conf.d/postgres.d/postgres.yaml
+          type: string
+        filename:
+          description: Name of the configuration file.
+          example: postgres.yaml
+          type: string
+      type: object
+    FleetConfigurationLayer:
+      description: Configuration information organized by layers.
+      properties:
+        compiled_configuration:
+          description: The final compiled configuration.
+          type: string
+        env_configuration:
+          description: Configuration from environment variables.
+          type: string
+        file_configuration:
+          description: Configuration from files.
+          type: string
+        parsed_configuration:
+          description: Parsed configuration output.
+          type: string
+        remote_configuration:
+          description: Remote configuration settings.
+          type: string
+        runtime_configuration:
+          description: Runtime configuration.
+          type: string
       type: object
     FleetDeployment:
       description: A deployment that defines automated configuration changes for a
@@ -22224,6 +22579,93 @@ components:
       properties:
         page:
           $ref: '#/components/schemas/FleetDeploymentsPage'
+      type: object
+    FleetDetectedIntegration:
+      description: An integration detected on the agent but not necessarily configured.
+      properties:
+        escaped_name:
+          description: Escaped integration name.
+          example: postgresql
+          type: string
+        prefix:
+          description: Integration prefix identifier.
+          example: postgres
+          type: string
+      type: object
+    FleetIntegrationDetails:
+      description: Detailed information about a single integration.
+      properties:
+        data_type:
+          description: Type of data collected (metrics, logs).
+          example: metrics
+          type: string
+        error_messages:
+          description: Error messages if the integration has issues.
+          items:
+            type: string
+          type: array
+        init_config:
+          description: Initialization configuration (YAML format).
+          type: string
+        instance_config:
+          description: Instance-specific configuration (YAML format).
+          type: string
+        is_custom_check:
+          description: Whether this is a custom integration.
+          type: boolean
+        log_config:
+          description: Log collection configuration (YAML format).
+          type: string
+        name:
+          description: Name of the integration instance.
+          type: string
+        source_index:
+          description: Index in the configuration file.
+          format: int64
+          type: integer
+        source_path:
+          description: Path to the configuration file.
+          type: string
+        type:
+          description: Integration type.
+          example: postgres
+          type: string
+      type: object
+    FleetIntegrationsByStatus:
+      description: Integrations organized by their status.
+      properties:
+        configuration_files:
+          description: Configuration files for integrations.
+          items:
+            $ref: '#/components/schemas/FleetConfigurationFile'
+          type: array
+        datadog_agent_key:
+          description: The unique agent key identifier.
+          type: string
+        error_integrations:
+          description: Integrations with errors.
+          items:
+            $ref: '#/components/schemas/FleetIntegrationDetails'
+          type: array
+        missing_integrations:
+          description: Detected but not configured integrations.
+          items:
+            $ref: '#/components/schemas/FleetDetectedIntegration'
+          type: array
+        warning_integrations:
+          description: Integrations with warnings.
+          items:
+            $ref: '#/components/schemas/FleetIntegrationDetails'
+          type: array
+        working_integrations:
+          description: Integrations that are working correctly.
+          items:
+            $ref: '#/components/schemas/FleetIntegrationDetails'
+          type: array
+      type: object
+    FleetOtelCollector:
+      additionalProperties: {}
+      description: OpenTelemetry collector information.
       type: object
     FleetSchedule:
       description: A schedule that automatically creates deployments based on a recurrence
@@ -57720,7 +58162,7 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
-  /api/unstable/fleet/agents:
+  /api/unstable/fleet/agent_versions:
     get:
       description: 'Retrieve a list of all available Datadog Agent versions.
 
@@ -57757,6 +58199,144 @@ paths:
       tags:
       - Fleet Automation
       x-menu-order: 0
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/agents:
+    get:
+      description: 'Retrieve a paginated list of all Datadog Agents.
+
+        This endpoint returns a paginated list of all Datadog Agents with support
+        for pagination, sorting, and filtering.
+
+        Use the `page_number` and `page_size` query parameters to paginate through
+        results.'
+      operationId: ListFleetAgents
+      parameters:
+      - description: Page number for pagination (must be greater than 0).
+        in: query
+        name: page_number
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+      - description: Number of results per page (must be greater than 0 and less than
+          or equal to 100).
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: Attribute to sort by.
+        in: query
+        name: sort_attribute
+        required: false
+        schema:
+          type: string
+      - description: Sort order (true for descending, false for ascending).
+        in: query
+        name: sort_descending
+        required: false
+        schema:
+          type: boolean
+      - description: Comma-separated list of tags to filter agents.
+        in: query
+        name: tags
+        required: false
+        schema:
+          type: string
+      - description: Filter string for narrowing down agent results.
+        example: hostname:my-hostname OR env:dev
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetAgentsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List all Datadog Agents
+      tags:
+      - Fleet Automation
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/agents/{agent_key}:
+    get:
+      description: 'Retrieve detailed information about a specific Datadog Agent.
+
+        This endpoint returns comprehensive information about an agent including:
+
+        - Agent details and metadata
+
+        - Configured integrations organized by status (working, warning, error, missing)
+
+        - Detected integrations
+
+        - Configuration files and layers'
+      operationId: GetFleetAgentInfo
+      parameters:
+      - description: The unique identifier (agent key) for the Datadog Agent.
+        in: path
+        name: agent_key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetAgentInfoResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get detailed information about an agent
+      tags:
+      - Fleet Automation
+      x-menu-order: 2
       x-permission:
         operator: AND
         permissions:
@@ -57810,7 +58390,7 @@ paths:
       summary: List all deployments
       tags:
       - Fleet Automation
-      x-menu-order: 0
+      x-menu-order: 3
       x-permission:
         operator: AND
         permissions:
@@ -57857,6 +58437,77 @@ paths:
                             source: kafka
                             type: file
                       filter_query: env:prod
+                    type: deployment
+              comprehensive_configuration:
+                summary: Comprehensive example with multiple configuration file types
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: merge-patch
+                        file_path: /datadog.yaml
+                        patch:
+                          apm_config:
+                            apm_dd_url: https://trace.agent.datadoghq.com
+                            enabled: true
+                          log_level: info
+                          logs_enabled: true
+                          process_config:
+                            enabled: true
+                      - file_op: merge-patch
+                        file_path: /security-agent.yaml
+                        patch:
+                          runtime_security_config:
+                            enabled: true
+                            fim_enabled: true
+                      - file_op: merge-patch
+                        file_path: /system-probe.yaml
+                        patch:
+                          network_config:
+                            enabled: true
+                          service_monitoring_config:
+                            enabled: true
+                      - file_op: merge-patch
+                        file_path: /application_monitoring.yaml
+                        patch:
+                          enabled: true
+                          server:
+                            host: 0.0.0.0
+                            port: 8126
+                      - file_op: merge-patch
+                        file_path: /conf.d/logs.d/custom-app.yaml
+                        patch:
+                          logs:
+                          - path: /var/log/custom-app/*.log
+                            service: custom-app
+                            source: custom
+                            type: file
+                      - file_op: merge-patch
+                        file_path: /conf.d/docker.d/docker-logs.yaml
+                        patch:
+                          logs:
+                          - service: docker
+                            source: docker
+                            type: docker
+                      - file_op: merge-patch
+                        file_path: /conf.d/snmp.d/network-devices.yaml
+                        patch:
+                          init_config:
+                            loader: core
+                          instances:
+                          - community_string: public
+                            ip_address: 192.168.1.1
+                      - file_op: merge-patch
+                        file_path: /conf.d/postgres.d/conf.yaml
+                        patch:
+                          instances:
+                          - dbname: postgres
+                            host: localhost
+                            port: 5432
+                            username: datadog
+                      - file_op: delete
+                        file_path: /conf.d/deprecated-integration.yaml
+                      filter_query: env:prod AND datacenter:us-east-1
                     type: deployment
               delete_config_file:
                 summary: Delete a configuration file
@@ -57920,7 +58571,7 @@ paths:
       summary: Create a configuration deployment
       tags:
       - Fleet Automation
-      x-menu-order: 1
+      x-menu-order: 4
       x-permission:
         operator: AND
         permissions:
@@ -58002,7 +58653,7 @@ paths:
       summary: Upgrade hosts
       tags:
       - Fleet Automation
-      x-menu-order: 2
+      x-menu-order: 5
       x-permission:
         operator: AND
         permissions:
@@ -58080,7 +58731,7 @@ paths:
       summary: Get a configuration deployment by ID
       tags:
       - Fleet Automation
-      x-menu-order: 3
+      x-menu-order: 6
       x-permission:
         operator: AND
         permissions:
@@ -58135,7 +58786,7 @@ paths:
       summary: Cancel a deployment
       tags:
       - Fleet Automation
-      x-menu-order: 4
+      x-menu-order: 7
       x-permission:
         operator: AND
         permissions:
@@ -58177,7 +58828,7 @@ paths:
       summary: List all schedules
       tags:
       - Fleet Automation
-      x-menu-order: 0
+      x-menu-order: 8
       x-permission:
         operator: AND
         permissions:
@@ -58269,7 +58920,7 @@ paths:
       summary: Create a schedule
       tags:
       - Fleet Automation
-      x-menu-order: 1
+      x-menu-order: 9
       x-permission:
         operator: AND
         permissions:
@@ -58322,7 +58973,7 @@ paths:
       summary: Delete a schedule
       tags:
       - Fleet Automation
-      x-menu-order: 4
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -58378,7 +59029,7 @@ paths:
       summary: Get a schedule by ID
       tags:
       - Fleet Automation
-      x-menu-order: 2
+      x-menu-order: 10
       x-permission:
         operator: AND
         permissions:
@@ -58475,7 +59126,7 @@ paths:
       summary: Update a schedule
       tags:
       - Fleet Automation
-      x-menu-order: 3
+      x-menu-order: 11
       x-permission:
         operator: AND
         permissions:
@@ -58548,7 +59199,7 @@ paths:
       summary: Trigger a schedule deployment
       tags:
       - Fleet Automation
-      x-menu-order: 5
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:

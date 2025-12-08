@@ -3,6 +3,14 @@
     "description": "Retrieve a list of all available Datadog Agent versions.\n\nThis endpoint returns the available Agent versions that can be deployed to your fleet.\nThese versions are used when creating deployments or configuring schedules for\nautomated Agent upgrades.",
     "summary": "List all available Agent versions"
   },
+  "ListFleetAgents": {
+    "description": "Retrieve a paginated list of all Datadog Agents.\nThis endpoint returns a paginated list of all Datadog Agents with support for pagination, sorting, and filtering.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
+    "summary": "List all Datadog Agents"
+  },
+  "GetFleetAgentInfo": {
+    "description": "Retrieve detailed information about a specific Datadog Agent.\nThis endpoint returns comprehensive information about an agent including:\n- Agent details and metadata\n- Configured integrations organized by status (working, warning, error, missing)\n- Detected integrations\n- Configuration files and layers",
+    "summary": "Get detailed information about an agent"
+  },
   "ListFleetDeployments": {
     "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
     "summary": "List all deployments"
