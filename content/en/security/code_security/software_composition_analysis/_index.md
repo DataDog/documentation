@@ -6,6 +6,12 @@ aliases:
 - /security/application_security/software_composition_analysis/
 - /code_analysis/software_composition_analysis/
 - /security/application_security/vulnerability_management/
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
+
 ---
 ## Overview
 
@@ -97,6 +103,11 @@ Libraries from services that are alive for less than 2 hours (such as jobs).
 The Vulnerability Explorer offers remediation recommendations for detected vulnerabilities. Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. They also include a collection of links and references to websites or information sources to help you understand the context behind each vulnerability. -->
 
 <!-- **Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][9] documentation. -->
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /security/code_security/software_composition_analysis/setup_static/
 [2]: /security/code_security/software_composition_analysis/setup_runtime/

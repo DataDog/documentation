@@ -6,6 +6,9 @@ aliases:
   - /service_catalog/scorecards
   - /software_catalog/scorecards
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
 - link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Software Catalog"
