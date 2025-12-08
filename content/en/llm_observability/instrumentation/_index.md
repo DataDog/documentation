@@ -4,6 +4,9 @@ further_reading:
     - link: '/llm_observability/auto_instrumentation'
       tag: 'Auto instrumentation'
       text: 'Get started quickly with Automatic Instrumentation'
+    - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+      tag: Blog
+      text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
 ---
 
 
