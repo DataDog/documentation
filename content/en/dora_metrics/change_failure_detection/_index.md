@@ -56,31 +56,14 @@ For the sequence V1 → V2 → V3 → V1, the rollback target is the original V1
 
 A rollforward occurs when a new deployment is made to fix or override a failed or faulty change, which can include a revert pull request that restores the previous behavior through a new release.
 
-### Revert PRs
-
-Datadog detects when a deployment includes a pull request that reverts a previous change, helping you identify recovery actions made through Git.
-
-##### How classification works
-
-A deployment is treated as a rollforward when it includes a PR titled "Revert PRx" (where PRx is the title of the original PR).
-
-- If PRx shipped in an earlier deployment V1 (V1 ≠ current deployment):
-  - Deployment V1 is marked as a change failure.
-  - Current deployment (with "Revert PRx") is marked as a rollforward.
-- If PRx isn't found in any prior deployment, or PRx and its revert are shipped together in the same deployment: no classification is applied.
-
-##### Example
-
-Deployment V1 includes PR_123 and later, deployment V3 includes "Revert PR_123". V1 is marked as the change failure and V3 as a roll-forward deployment.
-
 ### Custom rules
 
-DORA Metrics lets you define custom rules to automatically classify recovery deployments based on repository or release metadata. Custom rules are configured in the DORA Settings page.[1]
+DORA Metrics lets you define custom rules to automatically classify recovery deployments based on repository or release metadata. Custom rules are configured in the [DORA Settings page][1].
 Rules can operate either by linking deployments through shared variable values, or by matching static patterns.
 
 #### Rules linked to failed deployments
 
-Use these rules to identify roll-forward deployments that should be tied back to a specific earlier failed deployment.
+Use these rules to identify rollforward deployments that should be tied back to a specific earlier failed deployment.
 You can enter regex rules that include one of these variables:
 - `$pr_title`
 - `$pr_number`
@@ -91,12 +74,31 @@ You can enter regex rules that include one of these variables:
 When a rule matches:
 1. The variable value is extracted from the current deployment.
 2. The system finds the earlier deployment with the same extracted value.
-3. The current deployment is marked as a roll-forward linked to that earlier deployment.
+3. The current deployment is marked as a rollforward linked to that earlier deployment.
 4. The earlier deployment is marked as failed.
 
 These rules are intended for remediation patterns where the failed deployment is identifiable by a shared commit, version, or PR reference.
 
-#### Rules linked to failed deployments
+##### Example - Revert PRs
+
+
+Revert pull requests are one of the most common recovery patterns. Datadog provides default rules that match PR titles that revert a previous change, such as Revert PR_123, using the pattern:
+
+Revert "`$pr_title`"
+
+When a PR title matches this pattern:
+
+- The system looks for the original PR referenced in the title (for example, PR_123). If that original PR was deployed in an earlier deployment V1 (and V1 is not the current deployment):
+
+  - Deployment V1 is marked as the change failure.
+
+  - The current deployment that includes the revert PR is marked as the rollforward.
+
+- If the original PR is not found in any prior deployment, or if the original PR and its revert are deployed together in the same deployment, no classification is applied.
+
+
+
+#### Static rules
 
 Static rules allow you to classify recovery deployments based on metadata patterns without variables.
 You can enter regex rules that match:
@@ -108,7 +110,7 @@ You can enter regex rules that match:
 ##### How classification works
 
 When a static rule matches:
-1. The current deployment is marked as a roll-forward.
+1. The current deployment is marked as a rollforward.
 2. The immediately preceding deployment is marked as the change failure.
 
 These rules are appropriate for broad indicators of remediation such as hotfix labels, branch prefixes, or version tag conventions.
@@ -116,7 +118,14 @@ These rules are appropriate for broad indicators of remediation such as hotfix l
 
 #### Default filters
 
-By default, any PR label, title, or branch name containing `hotfix` matches and is treated as a roll‑forward (with the preceding deployment marked as the change failure).
+By default:
+
+- Any PR title that reverts a previous change and follows a common revert naming convention (for example, a title starting with Revert that references a prior PR or change) is treated as a rollforward. When possible, the earlier deployment that contained the original change is marked as the change failure, using the rules linked to failed deployments described above.
+- Any PR label, title, or branch name containing hotfix matches and is treated as a rollforward, with the preceding deployment marked as the change failure.
+
+
+These default rules are fully configurable in the [DORA Settings][1] page so that teams can adapt the patterns (for example, naming conventions or labels) to match their own workflows.
+
 
 
 ## Further reading
