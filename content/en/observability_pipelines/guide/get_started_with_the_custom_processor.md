@@ -467,6 +467,7 @@ This is the output of the example log after it's been processed by the custom sc
    "_raw": "app_id=streaming-services level=info message.duration_ms=245 message.event_type=user_login message.ip_address=192.168.1.100 message.login_method=oauth message.result=success message.session_id=sess_abc123xyz message.user_agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\" processed_ts=2025-05-22T14:30:00Z timestamp=2019-03-12T11:30:00Z user_id=12345"
 }
 ```
+**Note**: To ensure your logs are correctly routed after serializing, configure your preferred destination with **Raw** as the encoding type. 
 
 ## Further reading
 
