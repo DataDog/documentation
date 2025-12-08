@@ -2174,9 +2174,21 @@
     "request_description": "",
     "request_schema_description": "Request body for updating an existing reference table."
   },
+  "DeleteRows": {
+    "description": "Delete multiple rows from a Reference Table by their primary key values.",
+    "summary": "Delete rows",
+    "request_description": "",
+    "request_schema_description": "The request body for deleting multiple rows from a reference table."
+  },
   "GetRowsByID": {
     "description": "Get reference table rows by their primary key values.",
     "summary": "Get rows by id"
+  },
+  "UpsertRows": {
+    "description": "Create or update rows in a Reference Table by their primary key values. If a row with the specified primary key exists, it is updated; otherwise, a new row is created.",
+    "summary": "Upsert rows",
+    "request_description": "",
+    "request_schema_description": "The request body for creating or updating multiple rows into a reference table."
   },
   "CreateReferenceTableUpload": {
     "description": "Create a reference table upload for bulk data ingestion",
