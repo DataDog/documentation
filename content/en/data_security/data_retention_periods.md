@@ -144,8 +144,7 @@ attributes:
        - **Service metadata**: Retained for the duration of the account
   - product: Service Level Objectives
     data_type: |
-       - **Monitor-based results**: 3 months
-       - **Metric and time slice-based results**: 15 months
+       - **SLO results**: 15 months
   - product: Session Replay
     data_type: |
        - **Replays (extension option in UI is unchecked)**: 30 days
