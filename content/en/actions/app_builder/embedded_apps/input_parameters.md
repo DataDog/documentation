@@ -30,7 +30,7 @@ A common use case for input parameters is an app that's used on separate dashboa
 
 This example input parameter was configured to show the same app in various staging environments. 
 
-{{< img src="/service_management/app_builder/embedded_apps/example-input-parameters-configuration.png" alt="Two embedded apps with different input parameters selected" style="width:50%;" >}}
+{{< img src="/service_management/app_builder/embedded_apps/example-input-parameters-configuration.png" alt="Two embedded apps with different input parameters selected" style="width:40%;" >}}
 
 ## Use input parameters 
 
