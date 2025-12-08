@@ -240,7 +240,7 @@ To increase the number of workers, add the following configuration to your `data
 check_runners: <NUMBER_OF_WORKERS>
 ```
 
-### Dynamic Tests
+### Dynamic Tests (Preview)
 
 **Prerequisites**: [CNM][1] must be enabled.
 
@@ -379,14 +379,18 @@ datadog:
     ## The `workers` refers to the number of concurrent workers available for network path execution.
     #
     # workers: 4
-    #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
-    # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-    # pathtest_interval: 10m
+    
+    ## @param pathtest_interval - integer - optional - default: 35m
+    ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 30m
+    ## The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+    #
+    # pathtest_interval: 30m
 
-    # @param pathtest_ttl - integer - optional - default: 35m
-    # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
-    # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
-    # The TTL is reset each time the connection is seen again.
+    ## @param pathtest_ttl - integer - optional - default: 35m
+    ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+    ## The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+    ## The TTL is reset each time the connection is seen again.
+    #
     # pathtest_ttl: 35m
 
 ```
