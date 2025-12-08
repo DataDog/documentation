@@ -15,9 +15,12 @@ This eliminates the need to manually configure a separate AWS Connection, simpli
 
 When configured, Datadog uses the same AWS credentials that power integrations such as **Amazon EC2**, **RDS**, and **S3 monitoring** to securely execute supported read-only actions.
 
-<div class="alert alert-info">
-This feature is limited to <strong>read-only AWS actions</strong> and AWS integrations configured with "Role Delegation" access type. It also requires that your Datadog AWS integration role has the appropriate permissions defined in AWS. All actions under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> should work, as long as the IAM role used by the AWS Integration has been granted the permissions needed, and that an Action exists for the operation.
-</div>
+You have 2 options to execute AWS actions in your environment:
+
+- Use the Datadog AWS Integration to execute **Read-only** actions allowed under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> policy
+- Or, use a custom AWS Connection linked to a **dedicated AWS IAM Role** with specific permissions, for operations not included in the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a>
+
+This guide walks through how to use the **Datadog AWS Integration** to execute **Read-only** actions allowed under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> policy. To execute **other** AWS actions, you will need to [create a custom Connection](https://docs.datadoghq.com/actions/connections/?tab=workflowautomation#work-with-connections) instead.
 
 ## Supported use cases
 
@@ -27,6 +30,8 @@ Examples include:
 - Reading configurations or metadata from AWS services (for example: `GetFunctionConfiguration`, `ListSecrets`)
 - Inspecting resource tags, metrics, or logs
 
+For **other** actions, use a [dedicated Connection](https://docs.datadoghq.com/actions/connections/?tab=workflowautomation#work-with-connections) instead.
+
 ### Requirements
 
 To successfully execute actions with this integration:
@@ -34,6 +39,10 @@ To successfully execute actions with this integration:
 - The **AWS Integration IAM Role** configured for Role Delegation must have the permissions required for the operations desired (for example  `ecs:ListClusters`).
 - The selected action must be read-only. Write or mutating actions (such as `Put*`, `Delete*`, `Update*`) are not supported and fail when running.
 - The user, user's team, or user's org **must** have been given explicit 'Executor' permission on the AWS Integration in Datadog (see next section for details).
+
+<div class="alert alert-info">
+Executing actions using the **Datadog AWS Integration** is only available for users that have setup the Datadog AWS Integration via **Role Delegation**. Additionally, while operations under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> are allowed, the IAM Role associated with the Datadog AWS Integration may not have the permissions needed. Make sure that the role has the correct permissions if encountering issues.
+</div>
 
 ---
 
