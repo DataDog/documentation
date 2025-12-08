@@ -170,6 +170,14 @@ The following is the list of neutral tags available for use:
 <td><code>vpc_endpoint_id</code></td>
 <td>Unique identifier for the VPC endpoint.</td>
 </tr>
+<tr>
+<td><code>security_group_evaluation</code></td>
+<td>Indicates whether the connection was evaluated by security group rules. Values: <code>unknown</code> (unable to evaluate), <code>allowed</code> (connection was allowed), <code>denied</code> (connection was denied).</td>
+</tr>
+<tr>
+<td><code>security_group_denial_reason</code></td>
+<td>Specifies the reason for connection denial. Only present when <code>security_group_evaluation: denied</code>. Current values include <code>client_egress</code>.</td>
+</tr>
 </tbody>
 </table>
 

@@ -2,6 +2,9 @@
 title: Managed Evaluations
 description: Learn how to configure managed evaluations for your LLM applications.
 further_reading:
+- link: https://www.datadoghq.com/blog/llm-aws-strands
+  tag: Blog
+  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about LLM Observability terms and concepts"
@@ -171,16 +174,17 @@ This check identifies instances where the LLM makes a claim that disagrees with 
 | Evaluated on Output | Evaluated using LLM | Hallucination flags any output that disagrees with the context provided to the LLM. |
 
 ##### Instrumentation
-
-In order to take advantage of Hallucination detection, you will need to annotate LLM spans with the user query and context:
+You can use [Prompt Tracking][6] annotations to track your prompts and set them up for hallucination configuration. Annotate your LLM spans with the user query and context so hallucination detection can evaluate model outputs against the retrieved data.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.utils import Prompt
+from ddtrace.llmobs.types import Prompt
 
 # if your llm call is auto-instrumented...
 with LLMObs.annotation_context(
         prompt=Prompt(
+            id="generate_answer_prompt",
+            template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
             variables={"user_question": user_question, "article": article},
             rag_query_variables=["user_question"],
             rag_context_variables=["article"]
@@ -195,18 +199,20 @@ def generate_answer():
   ...
   LLMObs.annotate(
             prompt=Prompt(
+                id="generate_answer_prompt",
+                template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
                 variables={"user_question": user_question, "article": article},
                 rag_query_variables=["user_question"],
                 rag_context_variables=["article"]
             ),
   )
 {{< /code-block >}}
-
-The variables dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Set `rag_query_variables` and `rag_context_variables` to indicate which variables constitute the query and the context, respectively. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+The `variables` dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Use `rag_query_variables` and `rag_context_variables` to specify which variables represent the user query and which represent the retrieval context. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
 
 Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
 
-You can find more examples of instrumentation in the [SDK documentation][6].
+Prompt Tracking is available on python starting from the 3.15 version, It also requires an ID for the prompt and the template set up to monitor and track your prompt versions.
+You can find more examples of prompt tracking and instrumentation in the [SDK documentation][6].
 
 ##### Hallucination configuration
 <div class="alert alert-info">Hallucination detection is only available for OpenAI.</div>
@@ -336,8 +342,8 @@ This check ensures that sensitive information is handled appropriately and secur
 [2]: https://app.datadoghq.com/llm/evaluations
 [3]: https://app.datadoghq.com/llm/applications
 [4]: /security/sensitive_data_scanner/
-[5]: https://docs.datadoghq.com/api/latest/ip-ranges/
-[6]: https://docs.datadoghq.com/llm_observability/setup/sdk/
+[5]: /api/latest/ip-ranges/
+[6]: /llm_observability/instrumentation/sdk?tab=python#prompt-tracking
 [7]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
 [9]: https://learnprompting.org/docs/prompt_hacking/offensive_measures/simple-instruction-attack
 [10]: https://owasp.org/www-community/attacks/Code_Injection
