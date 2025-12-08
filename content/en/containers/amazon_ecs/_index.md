@@ -4,6 +4,9 @@ description: Install and configure the Datadog Agent on Amazon Elastic Container
 aliases:
   - /agent/amazon_ecs/
 further_reading:
+- link: https://www.datadoghq.com/blog/ecs-managed-instances
+  tag: Blog
+  text: Monitor ECS Managed Instances with Datadog
 - link: "/agent/amazon_ecs/logs/"
   tag: "Documentation"
   text: "Collect your application logs"

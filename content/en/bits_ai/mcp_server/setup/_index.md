@@ -55,8 +55,8 @@ The following AI clients are compatible with the Datadog MCP Server.
 | [Codex CLI][7] | OpenAI | |
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
-| [Q CLI][10] | Amazon | For remote authentication, add `"oauthScopes": []` to the server [configuration](?tab=remoteauthentication#example-configurations). |
 | [Kiro][23] | Amazon | |
+| [Kiro CLI][10] | Amazon | |
 | [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
@@ -118,6 +118,7 @@ These examples are for the US1 site:
 * **Configuration file**: Edit the configuration file for your AI agent:
   * Codex CLI: `~/.codex/config.toml`
   * Gemini CLI: `~/.gemini/settings.json`
+  * Kiro CLI: `~/.kiro/settings/mcp.json`
 
   ```json
   {
@@ -125,19 +126,6 @@ These examples are for the US1 site:
       "datadog": {
         "type": "http",
         "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
-      }
-    }
-  }
-  ```
-  * Amazon Q CLI: `~/.aws/amazonq/default.json`
-
-  ```json
-  {
-    "mcpServers": {
-      "datadog": {
-        "type": "http",
-        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
-        "oauthScopes": []
       }
     }
   }
@@ -428,7 +416,7 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [7]: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
 [8]: https://www.cursor.com/
 [9]: https://github.com/block/goose
-[10]: https://github.com/aws/amazon-q-developer-cli
+[10]: https://kiro.dev/cli/
 [11]: https://code.visualstudio.com/
 [12]: /developers/ide_plugins/vscode/
 [13]: https://nodejs.org/en/about/previous-releases

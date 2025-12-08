@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs and metrics ({{< tooltip glossary="preview" >}}), and then route them to different destinations.
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs and metrics ({{< tooltip glossary="preview" case="title" >}}), and then route them to different destinations.
 
 **Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
 
@@ -174,7 +174,7 @@ See [Update Existing Pipelines][4] if you want to make changes to your pipeline'
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-1. Select one of the options in the dropdown to provide the expected log or metrics ({{< tooltip glossary="preview" >}}) volume for the pipeline:
+1. Select one of the options in the dropdown to provide the expected log or metrics ({{< tooltip glossary="preview" case="title" >}}) volume for the pipeline:
 |   Option   | Description |
 | ---------- | ----------- |
 | Unsure | Use this option if you are not able to project the data volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
@@ -395,6 +395,10 @@ sudo apt-get remove --purge observability-pipelines-worker
 {{% /tab %}}
 {{< /tabs >}}
 
+## Index your Worker logs
+
+Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -407,3 +411,4 @@ sudo apt-get remove --purge observability-pipelines-worker
 [6]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [7]: /observability_pipelines/guide/environment_variables/
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
+[9]: /logs/log_configuration/indexes/
