@@ -9908,6 +9908,18 @@ menu:
           - CreateReferenceTableUpload
         unstable: []
         order: 1
+    - name: Upsert rows
+      url: '#upsert-rows'
+      identifier: reference-tables-upsert-rows
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertRows
+        unstable: []
+        order: 8
     - name: Get rows by id
       url: '#get-rows-by-id'
       identifier: reference-tables-get-rows-by-id
@@ -9920,6 +9932,18 @@ menu:
           - GetRowsByID
         unstable: []
         order: 5
+    - name: Delete rows
+      url: '#delete-rows'
+      identifier: reference-tables-delete-rows
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRows
+        unstable: []
+        order: 9
     - name: Update reference table
       url: '#update-reference-table'
       identifier: reference-tables-update-reference-table
