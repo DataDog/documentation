@@ -399,29 +399,63 @@ datadog:
 
 #### Filter syntax
 
-Classless Inter-Domain Routing (CIDR) ranges define blocks of IP addresses using network prefixes. You may want to exclude certain CIDR ranges from network traffic paths to:
+Filters can be used to include/exclude domains or IPs to:
 
 - Reduce monitoring overhead for internal networks
 - Focus on external traffic patterns
 - Exclude known infrastructure ranges that don't require monitoring
 
-To exclude specific CIDR ranges from network traffic paths, configure the following in your `/etc/datadog-agent/datadog.yaml` file:
+To include/exclude specific domain or IPs ranges from Dynamic Tests, configure the following in your `/etc/datadog-agent/datadog.yaml` file:
 
 ```yaml
 network_path:
-    connections_monitoring:
-        enabled: true # enable network path collection
-    collector:
-        source_excludes:
-            "10.0.0.0/8":
-                - "*" # all ports
-        dest_excludes:
-            "10.0.0.0/8":
-                - "*" # all ports
-            "8.8.8.8":
-                - "53" # dns
-                - "33434-33464" # traceroute range
+  connections_monitoring:
+    enabled: true
+  collector:
+    filters:
+      # exclude single domain
+      - match_domain: 'api.slack.com'
+        type: exclude
+
+      # exclude domain using `*` wildcard
+      - match_domain: '*.datadoghq.com'      # this translates to regex '.*\.datadoghq\.com
+        type: exclude
+      - match_domain: '*.zoom.us'
+        match_domain_strategy: wildcard      # use simple wildcard matching (wildcard matching is the default)
+        type: exclude
+
+      # exclude single IP or using CIDR notation
+      - match_ip: 10.10.10.10
+        type: exclude
+      - match_ip: 10.20.0.0/24
+        type: exclude
+
+      # exclude using regex
+      - match_domain: '.*\.zoom\.us'
+        match_domain_strategy: regex         # use regex matching strategy
+        type: exclude
+
+      # include
+      - match_domain: 'api.datadoghq.com'
+        type: include
 ```
+
+##### Filters order
+
+Filters are applied sequentially, the latest filters will take precedence.
+
+In the example below, all domains matching  `*.datadoghq.com` are ignored, except `api.datadoghq.com`.
+
+```yaml
+network_path:
+  collector:
+    filters:
+      - match_domain: '*.datadoghq.com'
+        type: exclude
+      - match_domain: 'api.datadoghq.com'
+        type: include
+```
+
 
 ## Troubleshooting
 
