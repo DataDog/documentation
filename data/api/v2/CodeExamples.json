@@ -793,13 +793,6 @@
       "description": "Update an existing incident returns \"OK\" response"
     }
   ],
-  "UpdateIncidentAttachments": [
-    {
-      "group": "incidents",
-      "suffix": "_3881702075",
-      "description": "Create an incident attachment returns \"OK\" response"
-    }
-  ],
   "CreateIncidentIntegration": [
     {
       "group": "incidents",
