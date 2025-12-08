@@ -16,9 +16,7 @@ This guide recommends configuration settings for forwarding logs with the Google
 
 ### Machine type
 
-Set `--worker-machine-type` to `n2-standard-4` for the best performance-to-cost ratio.
-
-Use `n2-standard-4` as the baseline worker type; it supports about 12k EPS.
+Set `--worker-machine-type` to `n2-standard-4` for the best performance-to-cost ratio. This worker type supports about 12k EPS.
 
 ### Machine count
 
@@ -44,7 +42,7 @@ $$(\text"Average EPS" ≃ {\text"Daily log volume (Terabytes)"} / {\text"Average
 
 Example: One TB per day and messages of one KB yields about 11.5k EPS.
 
-2. Determine the sustained peak EPS by using the following formula, where the multiplier N represents the bursty nature of logging:
+2. Determine the sustained peak EPS by using the following formula, where the multiplier N represents the unpredictable nature of logging volume:
 
 $$(\text"Peak EPS" = N × \text"Average EPS")$$
 
