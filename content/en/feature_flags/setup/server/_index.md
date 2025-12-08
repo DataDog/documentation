@@ -56,8 +56,10 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 # Your Datadog API key
 DD_API_KEY=<YOUR_API_KEY>
 
-# Optional: Configure polling interval (default: 5s)
-DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=5s
+# Optional: Configure polling interval (default: 60s)
+# This determines the average time between making a flag change in the UI
+# and the change becoming available to your application.
+DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=10s
 {{< /code-block >}}
 
 ### Docker
