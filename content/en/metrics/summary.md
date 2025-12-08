@@ -125,12 +125,6 @@ The collection interval for the metric in seconds.
 
 The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][9]. Use this field to update the descriptions for your [custom metrics][4].
 
-(Preview) For users with [source code integration][35] enabled, an AI-generated description will automatically be created for each metric, summarizing what it represents based on the underlying code.
-
-{{< img src="metrics/summary/ai_generated_description_11072025.png" alt="AI-generated description example" style="width:80%;">}}
-
-<!--- this screenshot will be replaced with an actual mockup  -->
-
 ### Metrics Source Code
 
 {{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
@@ -141,6 +135,7 @@ Displays the exact file, line, and owner in your source code where the metric is
 
 {{< img src="metrics/summary/metrics_source_code_11212025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
+To ensure full coverage of your metric's source code, please ensure that you've installed Datadog's [Github][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
 ### Tags table
 
@@ -269,3 +264,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [33]: /metrics/custom_metrics/agent_metrics_submission/
 [34]: https://app.datadoghq.com/metric/overview
 [35]: https://app.datadoghq.com/integrations?category=Source%20Control
+[36]: https://app.datadoghq.com/integrations/github/configuration
+[37]: https://app.datadoghq.com/integrations/gitlab-source-code
+[38]: https://app.datadoghq.com/integrations/azure-devops-source-code?subPath=configuration
+[39]: https://app.datadoghq.com/source-code/repositories
