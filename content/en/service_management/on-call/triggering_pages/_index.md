@@ -32,12 +32,21 @@ You can generate a unique email address that is used to trigger a page directly 
 To page a team through email:
 
  1. Navigate to the on-call team's page and scroll down to "Custom Triggering Sources".
- 1. Click "Generate" under the email trigger section. This generates a unique email address that can be used to trigger a page directly to the team's on-call responders.
+ 2. Click "Generate" under the email trigger section. This generates a unique email address that can be used to trigger a page directly to the team's on-call responders.
+
+### Trigger pages through incidents
+
+You can trigger a page automatically using [Datadog Incident Management](https://docs.datadoghq.com/service_management/incident_management/notification/#trigger-a-page-from-an-incident):
+
+1. Navigate to the Pages tab of an incident.
+2. Click Page.
+3. Select the team or user you want to alert.
+4. (Optional) Assign an incident role automatically to the person who acknowledges the page.
+5. Click Page.
 
 ### Trigger Pages through calls
 
 You can also trigger a Page through live call routing, which lets users initiate a Page by calling a dedicated phone number. This provides an additional channel for urgent situations. For setup instructions, see [Live Call Routing][3].
-
 
 ### Page manually
 
