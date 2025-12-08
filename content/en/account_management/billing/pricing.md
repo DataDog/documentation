@@ -84,6 +84,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
     * Send incident notifications
     * Add responders or assign responder types
     * Create, modify, or assign incident follow-ups
+    * Generate a postmortem
   * You do _not_ become an active user when you:
     * Declare, view, or search for incidents
     * Join third-party channels, meetings, or calls that are connected to the incident

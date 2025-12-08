@@ -10,6 +10,10 @@ further_reading:
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/flexible-spreadsheets-in-datadog-sheets/">}}
+Create flexible spreadsheets: built to let you start from scratch, build models, track operations, and more.
+{{< /callout >}}
+
 ## Overview
 
 Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don't have to export and use another tool with stale data.
@@ -68,6 +72,10 @@ After you add a table of data to a spreadsheet, analyze and add context to your 
 After you have your pivot table, you can click **Show Graphs** and add up to six widgets to graph your data. Supported widget types include **Top List**, **Treemap**, and **Pie Chart** widgets. Hover over the widget title to delete, duplicate, expand, export, and reposition widgets. To edit a widget, click the pencil icon. Editing options allow you to select the widget type, choose which pivot calculation to graph (if there is more than one), and specify the rows, columns, and the number of groupings graphed per row or column.
 
 ## Supported data sources
+
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
+If you want to query data sources not yet available, use this form to submit your request.
+{{< /callout >}}
 
 Create tables and analyze the data pulled from the following data sources:
 

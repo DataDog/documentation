@@ -103,7 +103,7 @@ Después de mover el índice a la primera posición, revisa la configuración y 
 2. Revisa las [señales de seguridad][14]. Cuando se detecta una amenaza con una regla de detección, se genera una señal de seguridad. Consulta la documentación de las [señales de seguridad][15] para obtener más información.
 
     - [Configura las reglas de notificación][16] para recibir un aviso cuando se generen señales. Puedes recibir alertas mediante Slack, Jira, correo electrónico, webhooks y otras integraciones. Consulta el material de referencia de las [reglas de notificación][17] para obtener más información.
-    - Suscríbete a los [informes semanales de amenazas][18] para iniciar la investigación y corrección de las amenazas de seguridad más importantes que se han detectado en los siete días anteriores. 
+    - Suscríbete a los [informes semanales de amenazas][18] para iniciar la investigación y corrección de las amenazas de seguridad más importantes que se han detectado en los siete días anteriores.
 
 ## Fase 3: Investigación
 
@@ -112,7 +112,7 @@ Después de mover el índice a la primera posición, revisa la configuración y 
 
 ## Fase 4: Personalización
 
-1. Configura [reglas de supresión][23] para reducir el ruido. 
+1. Configura [reglas de supresión][23] para reducir el ruido.
 2. Crea [reglas de detección personalizadas][24]. Lee las [prácticas recomendadas para crear reglas de detección][25].
 
 ## Referencias adicionales
@@ -132,7 +132,7 @@ Después de mover el índice a la primera posición, revisa la configuración y 
 [11]: https://app.datadoghq.com/security/configuration/siem/setup
 [12]: /es/security/default_rules/#cat-cloud-siem-log-detection
 [13]: /es/security/detection_rules/
-[14]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
+[14]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
 [15]: /es/security/cloud_siem/investigate_security_signals
 [16]: https://app.datadoghq.com/security/configuration/notification-rules
 [17]: /es/security/notifications/rules/

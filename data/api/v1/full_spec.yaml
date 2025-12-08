@@ -7362,6 +7362,12 @@ components:
     Monitor:
       description: Object describing a monitor.
       properties:
+        assets:
+          description: The list of monitor assets tied to a monitor, which represents
+            key links for users to take action on monitor alerts (for example, runbooks).
+          items:
+            $ref: '#/components/schemas/MonitorAsset'
+          type: array
         created:
           description: Timestamp of the monitor creation.
           format: date-time
@@ -7445,6 +7451,52 @@ components:
       - type
       - query
       type: object
+    MonitorAsset:
+      description: 'Represents key links tied to a monitor to help users take action
+        on alerts.
+
+        This feature is in Preview and only available to users with the feature enabled.'
+      properties:
+        category:
+          $ref: '#/components/schemas/MonitorAssetCategory'
+        name:
+          description: Name for the monitor asset
+          example: Monitor Runbook
+          type: string
+        resource_key:
+          description: Represents the identifier of the internal Datadog resource
+            that this asset represents. IDs in this field should be passed in as strings.
+          example: '12345'
+          type: string
+        resource_type:
+          $ref: '#/components/schemas/MonitorAssetResourceType'
+        url:
+          description: URL link for the asset. For links with an internal resource
+            type set, this should be the relative path to where the Datadog domain
+            is appended internally. For external links, this should be the full URL
+            path.
+          example: /notebooks/12345
+          type: string
+      required:
+      - name
+      - url
+      - category
+      type: object
+    MonitorAssetCategory:
+      description: Indicates the type of asset this entity represents on a monitor.
+      enum:
+      - runbook
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - RUNBOOK
+    MonitorAssetResourceType:
+      description: Type of internal Datadog resource associated with a monitor asset.
+      enum:
+      - notebook
+      type: string
+      x-enum-varnames:
+      - NOTEBOOK
     MonitorDeviceID:
       description: ID of the device the Synthetics monitor is running on. Same as
         `SyntheticsDeviceID`.
@@ -8559,6 +8611,13 @@ components:
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
+        assets:
+          description: The list of monitor assets tied to a monitor, which represents
+            key links for users to take action on monitor alerts (for example, runbooks).
+          items:
+            $ref: '#/components/schemas/MonitorAsset'
+          nullable: true
+          type: array
         created:
           description: Timestamp of the monitor creation.
           format: date-time
@@ -21432,6 +21491,11 @@ components:
             users over all hours in the current date for all organizations.
           format: int64
           type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for all organizations.
+          format: int64
+          type: integer
         indexed_events_count_sum:
           description: Shows the sum of all log events indexed over all hours in the
             current date for all organizations.
@@ -22546,6 +22610,11 @@ components:
         incident_management_monthly_active_users_hwm:
           description: Shows the high-water mark of incident management monthly active
             users over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for the given organization.
           format: int64
           type: integer
         indexed_events_count_sum:
@@ -23663,6 +23732,11 @@ components:
         incident_management_monthly_active_users_hwm_sum:
           description: Shows sum of the high-water marks of incident management monthly
             active users in the current month for all organizations.
+          format: int64
+          type: integer
+        incident_management_seats_hwm_sum:
+          description: Shows the sum of the high-water marks of Incident Management
+            seats over all hours in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
@@ -32249,6 +32323,13 @@ paths:
           all current active downtimes for the monitor.
         in: query
         name: with_downtimes
+        required: false
+        schema:
+          type: boolean
+      - description: If this argument is set to `true`, the returned data includes
+          all assets tied to this monitor.
+        in: query
+        name: with_assets
         required: false
         schema:
           type: boolean
