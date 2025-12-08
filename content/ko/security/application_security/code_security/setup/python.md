@@ -46,9 +46,6 @@ Docker, Kubernetes, Amazon ECS, AWS Fargate에서 실행되는 Python 애플리�
 {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-{{< tabs >}}
-
-
 ```shell
 docker run [...] -e DD_IAST_ENABLED=true [...]
 ```
