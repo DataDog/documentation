@@ -1097,16 +1097,21 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 701
-    - name: Live Debugger
-      url: developers/ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 7011
     - name: Logs
       url: developers/ide_plugins/idea/logs/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
+      weight: 7011  
+    - name: Live Debugger
+      url: developers/ide_plugins/idea/live_debugger/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_debugger
       weight: 7012
+    - name: Code Security
+      url: developers/ide_plugins/idea/code_security/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_code_security
+      weight: 7013
     - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
@@ -2111,11 +2116,21 @@ menu:
       parent: software_catalog
       identifier: software_catalog_entity_model
       weight: 102
-    - name: Entity Types
-      url: internal_developer_portal/software_catalog/entity_model/entity_types
+    - name: Native Entities
+      url: internal_developer_portal/software_catalog/entity_model/native_entities
       parent: software_catalog_entity_model
-      identifier: software_catalog_entity_types
+      identifier: software_catalog_native_entities
       weight: 1021
+    - name: Custom Entities
+      url: internal_developer_portal/software_catalog/entity_model/custom_entities
+      parent: software_catalog_entity_model
+      identifier: software_catalog_custom_entities
+      weight: 1022
+    - name: AI-generated Systems
+      url: internal_developer_portal/software_catalog/entity_model/ai-generated-systems
+      parent: software_catalog_entity_model
+      identifier: software_catalog_ai_generated_systems
+      weight: 1023
     - name: Troubleshooting
       url: internal_developer_portal/software_catalog/troubleshooting
       parent: software_catalog
@@ -2480,7 +2495,7 @@ menu:
       parent: incident_investigate
       identifier: incident_investigate_timeline
       weight: 501
-    - name: Follow Ups
+    - name: Follow-ups
       url: service_management/incident_management/follow-ups
       parent: incident_investigate
       identifier: incident_investigate_follow_ups
@@ -2933,6 +2948,11 @@ menu:
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 703
+    - name: Reusable Modules
+      url: actions/app_builder/components/reusable_modules/
+      parent: app_builder_components
+      identifier: app_builder_reusable_modules
+      weight: 704
     - name: JavaScript Expressions
       url: actions/app_builder/expressions/
       parent: app_builder
@@ -3611,41 +3631,46 @@ menu:
       parent: nm_parent
       identifier: cnm
       weight: 1
+    - name: CNM Terms and Concepts
+      url: network_monitoring/cloud_network_monitoring/glossary
+      parent: cnm
+      identifier: cnm_glossary
+      weight: 101
     - name: Setup
       url: network_monitoring/cloud_network_monitoring/setup/
       parent: cnm
       identifier: cnm_setup
-      weight: 101
+      weight: 102
     - name: Network Health
       url: network_monitoring/cloud_network_monitoring/network_health/
       parent: cnm
       identifier: cnm_network_health
-      weight: 102 
+      weight: 103 
     - name: Network Analytics
       url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: cnm
       identifier: cnm_analytics
-      weight: 103
+      weight: 104
     - name: Tags Reference
       url: network_monitoring/cloud_network_monitoring/tags_reference/
       parent: cnm_analytics
       identifier: cnm_analytics_tags_reference
-      weight: 10000
+      weight: 10401
     - name: Network Map
       url: network_monitoring/cloud_network_monitoring/network_map/
       parent: cnm
       identifier: cnm_map
-      weight: 104
+      weight: 105
     - name: Guides
       url: network_monitoring/cloud_network_monitoring/guide/
       identifier: cnm_guides
       parent: cnm
-      weight: 105
+      weight: 106
     - name: Supported Cloud Services
       url: network_monitoring/cloud_network_monitoring/supported_cloud_services/
       identifier: cnm_supported_cloud_services
       parent: cnm
-      weight: 106
+      weight: 10601 
     - name: DNS Monitoring
       url: network_monitoring/dns/
       parent: nm_parent
@@ -3655,7 +3680,7 @@ menu:
       url: network_monitoring/devices
       parent: nm_parent
       identifier: ndm
-      weight: 3
+      weight: 3      
     - name: NDM Terms and Concepts
       url: network_monitoring/devices/glossary
       parent: ndm
@@ -3670,67 +3695,67 @@ menu:
       url: network_monitoring/devices/supported_devices
       parent: ndm_setup
       identifier: ndm_supported_devices
-      weight: 30001
+      weight: 30301
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
       parent: ndm_setup
       identifier: ndm_snmp_metrics
-      weight: 30002
+      weight: 30302
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
       parent: ndm_setup
       identifier: ndm_snmptraps
-      weight: 30003
+      weight: 30303
     - name: Ping
       url: network_monitoring/devices/ping
       parent: ndm_setup
       identifier: ndm_snmp_ping
-      weight: 30004
+      weight: 30304
     - name: Syslog
       url: network_monitoring/devices/syslog
       parent: ndm_setup
       identifier: ndm_syslog
-      weight: 30005
+      weight: 30305
     - name: VPN Monitoring
       url: network_monitoring/devices/vpn_monitoring
       parent: ndm_setup
       identifier: ndm_vpn_monitoring
-      weight: 30006
+      weight: 30306
     - name: Integrations
       url: network_monitoring/devices/integrations
       parent: ndm
       identifier: ndm_integrations
-      weight: 303
+      weight: 304
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
       identifier: ndm_profiles
-      weight: 304
+      weight: 305
     - name: Configuration Management
       url: network_monitoring/devices/config_management
       parent: ndm
       identifier: ndm_config_management
-      weight: 305   
+      weight: 306   
     - name: Maps
       url: network_monitoring/devices/topology
       parent: ndm
       identifier: ndm_network_maps
-      weight: 306
+      weight: 307
     - name: SNMP Metrics Reference
       url: network_monitoring/devices/data
       parent: ndm
       identifier: ndm_data
-      weight: 307
+      weight: 308
     - name: Troubleshooting
       url: network_monitoring/devices/troubleshooting
       parent: ndm
       identifier: ndm_trouble
-      weight: 308
+      weight: 309
     - name: Guides
       url: network_monitoring/devices/guide/
       parent: ndm
       identifier: ndm_guide
-      weight: 309
+      weight: 310
     - name: NetFlow Monitoring
       url: /network_monitoring/netflow/
       parent: nm_parent
@@ -3746,26 +3771,31 @@ menu:
       parent: nm_parent
       identifier: network_path
       weight: 5
+    - name: Terms and Concepts
+      url: network_monitoring/network_path/glossary
+      parent: network_path
+      identifier: network_path_glossary
+      weight: 501 
     - name: Setup
       url: network_monitoring/network_path/setup/
       parent: network_path
       identifier: network_path_setup
-      weight: 501
+      weight: 502
     - name: List View
       url: network_monitoring/network_path/list_view/
       parent: network_path
       identifier: network_path_list_view
-      weight: 502
+      weight: 503
     - name: Path View
       url: network_monitoring/network_path/path_view/
       parent: network_path
       identifier: network_path_path_view
-      weight: 503
+      weight: 504
     - name: Guides
       url: network_monitoring/network_path/guide
       parent: network_path
       identifier: network_path_guides
-      weight: 504
+      weight: 505
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -3908,26 +3938,26 @@ menu:
       parent: cloud_cost_tags
       identifier: cloud_cost_tag_explorer
       weight: 301
-    - name: Tag Pipelines
-      url: cloud_cost_management/tags/tag_pipelines
-      parent: cloud_cost_tags
-      identifier: cloud_cost_tag_pipelines
-      weight: 302
     - name: Multisource Querying
       url: cloud_cost_management/tags/multisource_querying
       parent: cloud_cost_tags
       identifier: cloud_cost_multisource_querying
-      weight: 303
+      weight: 302
     - name: Allocation
       url: cloud_cost_management/allocation
       parent: cloud_cost
       identifier: cloud_cost_cost_allocation
       weight: 4
+    - name: Tag Pipelines
+      url: cloud_cost_management/tags/tag_pipelines
+      parent: cloud_cost_cost_allocation
+      identifier: cloud_cost_tag_pipelines
+      weight: 401
     - name: Container Cost Allocation
       url: cloud_cost_management/allocation/container_cost_allocation
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_container_cost_allocation
-      weight: 401
+      weight: 402
     - name: AWS
       url: cloud_cost_management/allocation/container_cost_allocation/?tab=aws/
       parent: cloud_cost_container_cost_allocation
@@ -3947,12 +3977,12 @@ menu:
       url: cloud_cost_management/allocation/bigquery
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_cost_allocationbigquery
-      weight: 402
+      weight: 403
     - name: Custom Allocation Rules
       url: cloud_cost_management/allocation/custom_allocation_rules
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_custom_allocation_rules
-      weight: 403
+      weight: 404
     - name: Reporting
       url: cloud_cost_management/reporting
       parent: cloud_cost
@@ -7487,27 +7517,27 @@ menu:
       url: synthetics/test_suites/
       parent: synthetics
       identifier: synthetics_test_suites
-      weight: 5
+      weight: 6
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
       identifier: synthetics_platform
-      weight: 6
+      weight: 7
     - name: Dashboards
       url: synthetics/platform/dashboards
       parent: synthetics_platform
       identifier: synthetics_platform_dashboards
-      weight: 601
+      weight: 701
     - name: API Testing
       url: synthetics/platform/dashboards/api_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_api_test
-      weight: 6101
+      weight: 7101
     - name: Browser Testing
       url: synthetics/platform/dashboards/browser_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_browser_test
-      weight: 6102
+      weight: 7102
     - name: Test Summary
       url: synthetics/platform/dashboards/test_summary
       parent: synthetics_platform_dashboards
@@ -7517,82 +7547,82 @@ menu:
       url: synthetics/platform/metrics/
       parent: synthetics_platform
       identifier: synthetics_platform_metrics
-      weight: 602
+      weight: 702
     - name: Test Coverage
       url: synthetics/platform/test_coverage
       parent: synthetics_platform
       identifier: synthetics_platform_test_coverage
-      weight: 603
+      weight: 703
     - name: Private Locations
       url: synthetics/platform/private_locations
       parent: synthetics_platform
       identifier: synthetics_private_location
-      weight: 604
+      weight: 704
     - name: Configuration
       url: synthetics/platform/private_locations/configuration
       parent: synthetics_private_location
       identifier: synthetics_private_location_configuration
-      weight: 6041
+      weight: 7041
     - name: Dimensioning
       url: synthetics/platform/private_locations/dimensioning
       parent: synthetics_private_location
       identifier: synthetics_private_location_dimensioning
-      weight: 6042
+      weight: 7042
     - name: Monitoring
       url: synthetics/platform/private_locations/monitoring
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
-      weight: 6043
+      weight: 7043
     - name: Connect APM
       url: synthetics/platform/apm/
       parent: synthetics_platform
       identifier: synthetics_platform_apm
-      weight: 605
+      weight: 705
     - name: Settings
       identifier: synthetics_settings
       url: synthetics/platform/settings
       parent: synthetics_platform
-      weight: 606
+      weight: 706
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics
       identifier: synthetics_explore
-      weight: 7
+      weight: 8
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
       identifier: synthetics_explore_saved_views
-      weight: 701
+      weight: 801
     - name: Results Explorer
       url: synthetics/explore/results_explorer
       parent: synthetics_explore
       identifier: synthetics_results_explorer
-      weight: 702
+      weight: 802
     - name: Search Test Batches
       url: synthetics/explore/results_explorer/search
       parent: synthetics_results_explorer
       identifier: synthetcis_results_explorer_search
-      weight: 7200
+      weight: 8200
     - name: Search Test Runs
       url: synthetics/explore/results_explorer/search_runs
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_runs
-      weight: 7201
+      weight: 8201
     - name: Search Syntax
       url: synthetics/explore/results_explorer/search_syntax
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_search_syntax
-      weight: 7203
+      weight: 8203
     - name: Export Test Runs
       url: synthetics/explore/results_explorer/export
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_export_test_runs
-      weight: 7204
+      weight: 8204
     - name: Saved Views
       url: synthetics/explore/results_explorer/saved_views
       parent: synthetics_results_explorer
       identifier: synthetics_results_explorer_saved_views
-      weight: 7205
+      weight: 8205
     - name: Guides
       url: synthetics/guide/
       parent: synthetics
