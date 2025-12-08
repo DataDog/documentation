@@ -244,15 +244,12 @@ check_runners: <NUMBER_OF_WORKERS>
 
 **Prerequisites**: [CNM][1] must be enabled.
 
-Configure Dynamic Tests to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [exclude CIDR ranges](#exclude-cidr-ranges) to filter specific network ranges.
-
-<div class="alert alert-danger"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
-
+Configure Dynamic Tests to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [filter syntax](#filter-syntax) to include/exclude domain or IPs.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-Agent `v7.59+` is required.
+Agent `v7.73+` is required.
 
 1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
@@ -400,7 +397,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Exclude CIDR ranges
+#### Filter syntax
 
 Classless Inter-Domain Routing (CIDR) ranges define blocks of IP addresses using network prefixes. You may want to exclude certain CIDR ranges from network traffic paths to:
 
