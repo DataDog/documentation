@@ -208,12 +208,11 @@ This manual approach gives you full control over the log format, ensuring it is 
 
 #### Collect logs using the Datadog Agent
 
-If you collect logs directly with the Datadog Agent (without sending them through the OpenTelemetry Collector), you must ensure the trace IDs in your logs use the Datadog format.
+If you collect logs directly with the Datadog Agent (without sending them through the OpenTelemetry Collector), you must ensure the trace IDs are injected into your logs.
 
-- **Trace ID format**: The Datadog Agent requires the trace ID to be in the `dd.trace_id` field.
+- **Trace ID format**: Datadog automatically detects standard OpenTelemetry trace context keys (`trace_id` and `span_id`) in JSON logs. No manual configuration is required.
   - If you are using **Datadog's tracing libraries** (like `dd-trace-py`), this is handled for you automatically.
-  - If you are generating logs with OpenTelemetry `trace_id` and `span_id` (as shown in the [file-scraping example](#scrape-logs-from-files)), you must use a [Log Processing Rule][5] in Datadog to remap your `trace_id` attribute to `dd.trace_id`.
-
+  - If you are defining custom attribute names for your trace IDs (not `trace_id` or `span_id`), you must use a [Log Processing Rule][5] to remap your custom attribute to dd.trace_id.
 - **Attribute Mapping**: The Datadog Agent does not automatically convert OTel resource attributes (for example, `service.name`) to Datadog's standard tags. You may need to manually remap these attributes in your log processing pipeline to maintain unified service tagging.
 
 ## View correlated data in Datadog
