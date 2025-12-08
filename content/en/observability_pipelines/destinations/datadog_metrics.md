@@ -2,7 +2,12 @@
 title: Datadog Metrics
 description: Learn how to set up the Datadog Metrics destination.
 disable_toc: false
+products:
+- name: Metrics
+  icon: metrics
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Datadog Metrics destination to send metrics to Datadog. You can also use [AWS PrivateLink](#aws-privatelink) to send metrics from Observability Pipelines to Datadog.
 
