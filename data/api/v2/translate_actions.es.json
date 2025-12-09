@@ -3084,8 +3084,12 @@
     "request_description": "",
     "request_schema_description": "Solicitud de creación de conexiones de equipo."
   },
+  "GetTeamSync": {
+    "description": "Obtén todas las configuraciones de sincronización del equipo.\nDevuelve una lista de configuraciones utilizadas para vincular o aprovisionar a los equipos con fuentes externas como GitHub.",
+    "summary": "Obtener configuraciones de sincronización de equipos"
+  },
   "SyncTeams": {
-    "description": "Este endpoint intenta vincular tus equipos de Datadog existentes con equipos de GitHub haciendo coincidir sus nombres.\nEvalúa todos los equipos de Datadog actuales y los compara con equipos en la organización de GitHub\nconectada a tu cuenta de Datadog, basándose en el encabezado de equipo de Datadog y el slug de equipo de GitHub\n(en minúsculas y en mayúsculas).\n\nEsta operación es de solo lectura en el lado de GitHub, no se modificará ni creará equipos.\n\n[Una organización de GitHub debe estar conectada a tu cuenta de Datadog](https://docs.datadoghq.com/integrations/github/),\ny la aplicación de GitHub integrada con Datadog debe tener el permiso `Members Read`. La coincidencia se realiza comparando el identificador del equipo de Datadog con el slug del equipo de GitHub\nutilizando una coincidencia exacta normalizada; se ignora la distnción de mayúsculas y se eliminan los espacios. No se realizan modificaciones\na equipos en GitHub. Esto no creará nuevos equipos en Datadog.",
+    "description": "Este endpoint intenta vincular tus equipos de Datadog existentes con equipos de GitHub haciendo coincidir sus nombres.\nEvalúa todos los equipos de Datadog actuales y los compara con equipos de la organización GitHub\nconectada a tu cuenta de Datadog, basándose en el identificador del equipo de Datadog y el slug del equipo de GitHub\n(en minúsculas y en mayúsculas).\n\nEsta operación es de solo lectura en el lado de GitHub y no se modificarán ni crearán equipos.\n\n[Una organización GitHub debe estar conectada a tu cuenta de Datadog](https://docs.datadoghq.com/integrations/github/),\ny la aplicación GitHub integrada con Datadog debe tener el permiso de `Lectura para miembros`. La coincidencia se realiza comparando el identificador del equipo de Datadog con el slug del equipo de GitHub\nutilizando una coincidencia exacta normalizada. Se ignora la distnción de mayúsculas y minúsculas, y se eliminan los espacios. No se realizan modificaciones\na equipos de GitHub. Solo se crean nuevos equipos en Datadog cuando el tipo configurado es 'aprovisionamiento'.",
     "summary": "Enlace de Teams con Teams de GitHub",
     "request_description": "",
     "request_schema_description": "Solicitud de sincronización del equipo."

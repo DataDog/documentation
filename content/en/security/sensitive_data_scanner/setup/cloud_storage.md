@@ -12,13 +12,19 @@ further_reading:
     text: "Learn more about creating custom rules"
 ---
 
+{{< site-region region="gov" >}}
+
+<div class="alert alert-danger">Cloud Storage is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+
+{{< /site-region >}}
+
 ## Overview
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security/" header="Join the Limited Availability!"  >}}
-Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click Request Access.
+{{< callout url="https://www.datadoghq.com/product-preview/data-security/" header="Join the Preview Program!"  >}}
+Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click Request Access.
 {{< /callout >}}
 
-Deploy Datadog Agentless scanners in your environment to scan for sensitive information in your cloud storage resources. Agentless scanners are EC2 instances that you control and run within your environment. The scanners use [Remote Configuration][1] to retrieve a list of S3 buckets and RDS instances, as well as their dependencies. They scan many types of text files, such as CSVs and JSONs in your S3 buckets and tables in your RDS instances.
+Deploy Datadog Agentless scanners in your environment to scan for sensitive information in your cloud storage resources. Agentless scanners are EC2 instances that you control and run within your environment. The scanners use [Remote Configuration][1] to retrieve a list of S3 buckets as well as their dependencies. They scan many types of text files, such as CSVs and JSONs in your S3 buckets.
 
 When an Agentless scanner finds a match with any of the [SDS library rules][2], the scanning instance sends the rule type and location of the match to Datadog. **Note**: Cloud storage resources and their files are only read in your environment - no sensitive data that was scanned is sent back to Datadog.
 
@@ -67,7 +73,7 @@ To scan Amazon S3 buckets, these permissions are required:
 
 ## Deploy scanners
 
-Agentless scanners are EC2 instances that run in your environment. They scan your S3 buckets and the tables in your RDS instances for sensitive information.
+Agentless scanners are EC2 instances that run in your environment. They scan your S3 buckets for sensitive information.
 
 There are two methods for deploying scanners to your environment:
 - [Automatically deploy using CloudFormation](#automatically-deploy-scanners-using-cloudformation)

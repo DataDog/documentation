@@ -1,5 +1,5 @@
 ---
-title: Throttle
+title: Throttle Processor
 disable_toc: false
 ---
 

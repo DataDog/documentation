@@ -30,13 +30,19 @@ The Datadog extension for Azure App Service provides monitoring capabilities in 
 - Support for submitting custom metrics using [DogStatsD][1].
 
 <div class="alert alert-info">
-The extension supports Azure App Service Web Apps on Basic, Standard, and Premium plans. Flex or Consumption plans are not supported.<br/><br/>
+The extension supports the following:
+<ul>
+  <li>App Service Web Apps: Supported for .NET, Java, and Node.js runtimes on Basic, Standard, and Premium plans.</li>
+  <li>Azure Functions: Supported only for the .NET runtime on Basic, Standard, and Premium plans.</li>
+</ul>
+
+For all other Azure Functions configurations, you must use the <a href="/serverless/azure_functions">Serverless Compatibility Layer</a>.
 
 <strong>Interested in support for other App Service resource types or runtimes?</strong> <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a Preview becomes available.</div>
 
 ### Supported runtimes
 
-The Datadog .NET, Java, and Node.js APM extensions support the following runtimes in Windows Code web apps:
+The Datadog .NET, Java, and Node.js APM extensions support the following runtimes:
 
 | Framework | Supported runtimes |
 | --------- | ------------------ |
@@ -75,6 +81,48 @@ If you haven't already, set up the [Datadog-Azure integration][3]. You can verif
 </div>
 
 {{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+#### Locally
+
+Install the [Datadog CLI][201]
+
+```shell
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
+```
+
+Install the [Azure CLI][202] and authenticate with `az login`.
+
+Then, run the following command to set up the sidecar container:
+
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
+
+Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
+
+The Datadog CLI will automatically infer the runtime of your app and install the corresponding application. If this fails for whatever reason, you can override this behavior by specifying a runtime with the `--windows-runtime` flag.
+
+Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
+
+#### Azure Cloud Shell
+
+To use the Datadog CLI in [Azure Cloud Shell][203], open a cloud shell, set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and use `npx` to run the CLI directly:
+
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
+
+
+[201]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+[202]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+[203]: https://portal.azure.com/#cloudshell/
+
+{{% /tab %}}
 {{% tab "Terraform" %}}
 
 The [Datadog Terraform module for Windows Web Apps][4] wraps the [azurerm_windows_web_app][5] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the Windows Web App extension for your runtime.
@@ -423,10 +471,9 @@ This setup automatically includes trace correlation when `DD_LOGS_INJECTION=true
 {{% /tab %}}
 {{% tab "Java" %}}
 
-See instructions for [Agentless logging with Java][1] to configure application logging for Java in Azure App Service.
+See [Stream logs directly to the Agent][1] to configure application logging for Java in Azure App Service.
 
-[1]: /logs/log_collection/java/#agentless-logging
-
+[1]: /logs/log_collection/java/##stream-logs-directly-to-the-agent
 {{% /tab %}}
 {{% tab "Node.js" %}}
 

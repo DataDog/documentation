@@ -11,6 +11,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/experimental-data-datadog/'
   tag: 'Blog'
   text: 'How to bridge speed and quality in experiments through unified data'
+- link: 'https://www.datadoghq.com/blog/datadog-feature-flags-cloud-resilience/'
+  tag: 'Blog'
+  text: 'How Datadog Feature Flags is resilient to cloud provider failures'
 site_support_id: getting_started_feature_flags
 ---
 
@@ -44,7 +47,7 @@ First, install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@ope
 
 
 ```
-yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk @openfeature/core
+yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 ```
 
 Then, add the following to your project to initialize the SDK:

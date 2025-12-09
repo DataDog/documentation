@@ -27,7 +27,7 @@ Bits AI Dev Agent is available for the following Datadog products:
 | [Code Security][2]        | Preview              | Remediates code vulnerabilities individually or in bulk    |
 | [Test Optimization][4]    | Preview              | Provides code fixes for flaky tests and verifies that tests remain stable                                                         |
 | [Continuous Profiler][3]  | Preview              | Provides code changes for [Automated Analysis][10] insights                  |
-| [Containers][12]          | Preview              | Provides code changes for Container Recommendations                  |
+| [Containers][12]          | Preview              | Provides code changes for [Kubernetes Remediations][13]                  |
 
 **Note**: Enabling Bits AI Dev Agent is product-specific. Even if it's active for one Datadog product, it must be separately enabled for each additional product you use.
 
@@ -119,3 +119,4 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [10]: /profiler/automated_analysis/
 [11]: /tracing/trace_explorer/
 [12]: /containers/
+[13]: /containers/bits_ai_kubernetes_remediation
