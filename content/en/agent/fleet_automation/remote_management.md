@@ -25,7 +25,7 @@ Remote Agent management with Fleet Automation simplifies how you deploy and upgr
 
 
 <div class="alert alert-info">
-<p> Confirm you are on a supported platform:<strong>Linux VMs</strong> (<em>installed using the install script or Ansible Datadog Role</em>); <strong>Windows VMs.</strong></p>
+<p> Confirm you are on a supported platform: <strong>Linux VMs</strong> (<em>installed using the install script or Ansible Datadog Role</em>); <strong>Windows VMs.</strong></p>
 
 
 <p>Remotely upgrading Agents in containerized environments is not supported.</p>
