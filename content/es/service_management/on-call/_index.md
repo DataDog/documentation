@@ -64,13 +64,13 @@ Para restringir el acceso a un recurso de On-Call:
 
 1. Ve al recurso de On-Call específico (cronograma, política de escalado, reglas de derivación a equipos
 1. Haz clic en **Manage** (Gestionar).
-1. Selecciona **Permisos** en el menú desplegable.
+1. Selecciona **Permissions** (Permisos) en el menú desplegable.
 1. Haz clic en **Restrict Access** (Restringir el acceso).
 1. Selecciona uno o varios roles, equipos o usuarios en el menú desplegable.
 1. Haz clic en **Add** (Añadir).
 1. Selecciona el nivel de acceso que quieres asociar a cada uno de ellos en el menú desplegable situado junto a su nombre:
-   - **Visor**: Acceso de sólo lectura para ver el recurso.
-   - **Anulación** (sólo cronogramas): Se pueden ver y crear anulaciones de cronogramas. 
+   - **Visor**: Acceso de solo lectura para ver el recurso.
+   - **Anulación** (solo cronogramas): Se pueden ver y crear anulaciones de cronogramas. 
    - **Editor**: Acceso total para ver y modificar el recurso.
 1. Haz clic en **Save** (Guardar).
 
@@ -78,7 +78,7 @@ Para restringir el acceso a un recurso de On-Call:
 
 ## Empiece a utilizar Datadog On-Call
 
-<div class="alert alert-danger">Para conservar el historial de incidentes, Datadog On-Call no admite la eliminación de recursos como localizadores, políticas de escalado o cronogramas. Para probar On-Call sin afectar a tu entorno de producción, crea una organización de prueba como sandbox.</div>
+<div class="alert alert-danger">Para conservar el historial de incidentes, Datadog On-Call no admite la eliminación de recursos como páginas, políticas de escalado u horarios. Para testear On-Call sin afectar a tu entorno de producción, crea una organización de prueba como un entorno de pruebas.</div>
 
 Para empezar con On-Call [incorpora un equipo de On-Call][1] y asegúrate de que todos los miembros del equipo configuran sus [ajustes del perfil de On-Call][2] para recibir notificaciones.
 

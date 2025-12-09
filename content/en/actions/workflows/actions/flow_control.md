@@ -79,4 +79,4 @@ When a run completes, the workflow enters **Debug** mode. Select a step within t
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
 
 [1]: https://app.datadoghq.com/workflow/action-catalog#logic//com.datadoghq.core.if
-[2]: https://datadoghq.slack.com/
+[2]: https://chat.datadoghq.com/

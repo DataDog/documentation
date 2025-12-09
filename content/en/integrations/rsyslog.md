@@ -422,8 +422,4 @@ In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<
 
 Need help? Contact [Datadog support][1].
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /help/

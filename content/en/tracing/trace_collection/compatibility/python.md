@@ -133,7 +133,7 @@ The `ddtrace` library includes support for the following libraries:
 [3]: http://asgi.readthedocs.io/
 [4]: https://aiohttp.readthedocs.io
 [5]: https://bottlepy.org
-[6]: https://cherrypy.org/
+[6]: https://cherrypy.dev/
 [7]: https://www.djangoproject.com
 [8]: https://falconframework.org
 [9]: http://flask.pocoo.org

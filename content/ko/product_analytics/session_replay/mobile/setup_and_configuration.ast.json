@@ -1,99 +1,143 @@
 {
   "$$mdtype": "Node",
-  "errors": [],
-  "lines": [],
   "inline": false,
   "attributes": {
     "frontmatter": {
       "title": {
-        "string": "모바일 세션 리플레이 설치 및 설정"
+        "itemTranslationData": {
+          "2408c1d076521ce613780e813e8e0298": {
+            "string": "모바일 세션 리플레이 설치 및 설정"
+          }
+        }
       },
       "description": {
-        "string": "모바일 세션 리플레이을 설치하고 설정합니다."
-      },
-      "further_reading": [
-        {
-          "link": "/product_analytics/session_replay/mobile",
-          "text": {
-            "string": "Mobile Session Replay"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/product_analytics/session_replay/mobile/app_performance",
-          "text": {
-            "string": "How Mobile Session Replay Impacts App Performance"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/product_analytics/session_replay/mobile/privacy_options",
-          "text": {
-            "string": "Mobile Session Replay Privacy Options"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/product_analytics/session_replay/mobile/troubleshooting",
-          "text": {
-            "string": "Troubleshoot Mobile Session Replay"
-          },
-          "tag": {
-            "string": "Documentation"
-          }
-        },
-        {
-          "link": "/product_analytics/session_replay",
-          "text": {
-            "string": "Session Replay"
-          },
-          "tag": {
-            "string": "Documentation"
+        "itemTranslationData": {
+          "22ea099e30f84391cc01cc1784fc9547": {
+            "string": "모바일 세션 리플레이을 설치하고 설정합니다."
           }
         }
-      ]
-    }
-  },
-  "children": [
-    {
-      "$$mdtype": "Node",
-      "errors": [],
-      "lines": [
-        25,
-        26
-      ],
-      "inline": false,
-      "attributes": {
-        "file": "rum/session_replay/setup_and_configuration.mdoc.md"
       },
-      "children": [],
-      "type": "tag",
-      "tag": "partial",
-      "annotations": [
-        {
-          "type": "attribute",
-          "name": "file",
-          "value": "rum/session_replay/setup_and_configuration.mdoc.md"
-        }
-      ],
-      "slots": {},
-      "location": {
-        "start": {
-          "line": 25
-        },
-        "end": {
-          "line": 26
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "/product_analytics/session_replay/mobile",
+            "text": {
+              "itemTranslationData": {
+                "ca24046c72bdfc1cf8f8f5cfdc99b171": {
+                  "string": "Mobile Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "ad30b68e1a4f1d619f61fd2cf57f6546": {
+                  "string": "설명서"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "/product_analytics/session_replay/mobile/app_performance",
+            "text": {
+              "itemTranslationData": {
+                "bb90061aec51afc9870e16b877127a42": {
+                  "string": "모바일 세션 리플레이이 앱 성능에 미치는 영향"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "ad30b68e1a4f1d619f61fd2cf57f6546": {
+                  "string": "설명서"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "/product_analytics/session_replay/mobile/privacy_options",
+            "text": {
+              "itemTranslationData": {
+                "2756ca3a236fd88b26e1ab7d8b5a16f9": {
+                  "string": "모바일 세션 리플레이 개인정보 보호 옵션"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "ad30b68e1a4f1d619f61fd2cf57f6546": {
+                  "string": "설명서"
+                }
+              }
+            }
+          },
+          "3": {
+            "link": "/product_analytics/session_replay/mobile/troubleshooting",
+            "text": {
+              "itemTranslationData": {
+                "ee15c1a8f605ec77f96aea7673f3e7f2": {
+                  "string": "모바일 세션 리플레이 문제 해결"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "ad30b68e1a4f1d619f61fd2cf57f6546": {
+                  "string": "설명서"
+                }
+              }
+            }
+          },
+          "4": {
+            "link": "/product_analytics/session_replay",
+            "text": {
+              "itemTranslationData": {
+                "9e37235e904af289b616526f0aaa91c8": {
+                  "string": "Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "ad30b68e1a4f1d619f61fd2cf57f6546": {
+                  "string": "설명서"
+                }
+              }
+            }
+          }
         }
       }
     }
-  ],
+  },
+  "children": {
+    "listTranslationData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "attributes": {
+          "file": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+        },
+        "children": {
+          "listTranslationData": {}
+        },
+        "type": "tag",
+        "tag": "partial",
+        "annotations": {
+          "listTranslationData": {
+            "0": {
+              "type": "attribute",
+              "name": "file",
+              "value": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+            }
+          }
+        },
+        "slots": {},
+        "location": "line 25-26"
+      }
+    }
+  },
   "type": "document",
-  "annotations": [],
+  "annotations": {
+    "listTranslationData": {}
+  },
   "slots": {}
 }
