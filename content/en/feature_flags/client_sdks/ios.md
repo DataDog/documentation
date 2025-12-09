@@ -1,10 +1,12 @@
 ---
 title: iOS and tvOS Feature Flags
 description: Set up Datadog Feature Flags for iOS and tvOS applications.
+aliases:
+  - /feature_flags/setup/ios
 further_reading:
-- link: "/feature_flags/setup/"
+- link: "/feature_flags/client_sdks/"
   tag: "Documentation"
-  text: "Feature Flags Setup"
+  text: "Client SDKs for Feature Flags"
 - link: "/real_user_monitoring/ios/"
   tag: "Documentation"
   text: "iOS and tvOS Monitoring"
