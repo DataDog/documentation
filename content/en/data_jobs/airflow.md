@@ -335,7 +335,7 @@ In the Advanced Configuration tab, under **Airflow configuration override**, cli
    - In Key 3, enter `namespace`.
    - In Value 3, enter your Composer environment value (e.g. prod, dev, staging, test, etc).
    
-   Note that if [Dataplex][6] is enabled, the namespace is already set by default to the Composer environment name. Only set it here if you want to override it.
+   Note: if [Dataplex][6] is enabled, the namespace is already set by default to the Composer environment name. Only set it here if you want to override it.
 
 Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of the `openlineage` provider in Google Cloud Composer.
 
