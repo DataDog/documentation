@@ -12,7 +12,9 @@ further_reading:
 
 {{% observability_pipelines/processors/filter %}}
 
-{{% observability_pipelines/processors/filter_syntax %}}
+## Filter query syntax
+
+{{% observability_pipelines/processors/filter_syntax_logs_metrics %}}
 
 ## Further reading
 
