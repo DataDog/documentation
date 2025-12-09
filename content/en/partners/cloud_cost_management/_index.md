@@ -1,8 +1,9 @@
 ---
 title: Cloud Cost Management
+description: "Cloud Cost Management for MSP Partners"
 cascade:
     algolia:
-        subcategory: Cloud Cost Management
+        subcategory: 'Cloud Cost Management'
 ---
 
 This section provides Cloud Cost Management guidance specifically for **Managed Service Provider (MSP) partners** who need to enable secure, customer-facing cost visibility using Datadog.

@@ -41,7 +41,7 @@ further_reading:
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
-      tags: ['cloud cost', 'cloud integrations', 'cloud cost management', 'cloud cost aws', 'cloud cost azure', 'cloud cost google cloud', 'cloud cost gcp', 'data collected aws', 'data collected azure', 'data collected google cloud']
+      tags: ['cloud cost', 'cloud integrations', 'cloud cost management', 'cloud cost aws']
 
 ---
 ## Overview
@@ -134,7 +134,7 @@ https://datadog-cloudformation-template.s3.amazonaws.com/aws_cloud_cost/v0.0.1/m
 
 Use the template above and deploy a stack in the customer’s Member Account.
 To deploy the stack, follow the AWS documentation: [Create a stack from the CloudFormation][13].
-When creating the stack, choose: **With new resources (standard)**
+When creating the stack, choose: **With new resources (standard)**.
 
 #### Configure the Cost and Usage Report settings
 
