@@ -113,7 +113,7 @@ To get started:
    {{% /tab %}}
    {{< /tabs >}}
 
-3. Review and accept each action your AI agent proposes to complete the setup process.
+2. Review and accept each action your AI agent proposes to complete the setup process.
 
 ### Deploy your app to production
 
