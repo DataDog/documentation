@@ -60,7 +60,7 @@ The following conditional variables are available:
 
 ### Examples
 
-Conditional variables must have an opening and closing pair with the text and **@-notifications** in-between. Variables based on monitor state (such as `is_alert` or `is_warning`), must have their own message block. Since a monitor can only be in one state at a time, you cannot combine these. However, you can nest conditionals that match on attributes, see the `is_renotify` examples.
+Conditional variables must have an opening and closing pair with the text and **@-notifications** in-between. Variables based on monitor state (such as `is_alert` or `is_warning`), must have their own message block. Because a monitor can only be in one state at a time, you cannot combine these. However, you can nest conditionals that match on attributes, see the `is_renotify` examples.
 
 {{< tabs >}}
 {{% tab "is_alert" %}}
