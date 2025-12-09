@@ -17,34 +17,33 @@ When configured, Datadog uses the same AWS credentials that power integrations s
 
 There are two ways to execute AWS actions in your environment:
 
-- Use the Datadog AWS Integration to execute **Read-only** actions allowed under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> policy
-- Or, use a custom AWS Connection linked to a **dedicated AWS IAM Role** with specific permissions, for operations not included in the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a>
+- Use the Datadog AWS Integration to execute **Read-only** actions allowed under the [`ViewOnlyAccess` permissions][1] policy.
+- Or, use a custom AWS Connection linked to a **dedicated AWS IAM Role** with specific permissions, for operations not included in the [`ViewOnlyAccess` permissions][1].
 
-This guide walks through how to use the **Datadog AWS Integration** to execute **Read-only** actions allowed under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> policy. To execute **other** AWS actions, you will need to [create a custom Connection](https://docs.datadoghq.com/actions/connections/?tab=workflowautomation#work-with-connections) instead.
+This guide walks through how to use the Datadog AWS Integration to execute **Read-only** actions allowed under the [ViewOnlyAccess permissions policy][1]. To execute other AWS actions, you need to [create a custom Connection][2] instead.
 
 ## Supported use cases
 
 Examples include:
 
-- Listing or describing AWS resources (for example: `ListECSClusters`, `DescribeInstances`, `GetBucketPolicy`)
-- Reading configurations or metadata from AWS services (for example: `GetFunctionConfiguration`, `ListSecrets`)
+- Listing or describing AWS resources (such as `ListECSClusters`, `DescribeInstances`, and `GetBucketPolicy`)
+- Reading configurations or metadata from AWS services (such as `GetFunctionConfiguration`, and `ListSecrets`)
 - Inspecting resource tags, metrics, or logs
 
-For **other** actions, use a [dedicated Connection](https://docs.datadoghq.com/actions/connections/?tab=workflowautomation#work-with-connections) instead.
+For other actions, use a [dedicated Connection][2] instead.
 
 ### Requirements
 
 To successfully execute actions with this integration:
 
-- The **AWS Integration IAM Role** configured for Role Delegation must have the permissions required for the operations desired (for example  `ecs:ListClusters`).
-- The selected action must be read-only. Write or mutating actions (such as `Put*`, `Delete*`, `Update*`) are not supported and fail when running.
-- The user, user's team, or user's org **must** have been given explicit 'Executor' permission on the AWS Integration in Datadog (see next section for details).
+- The **AWS Integration IAM Role** configured for Role Delegation must have the permissions required for the operations desired (such as  `ecs:ListClusters`).
+- The selected action must be read-only. Write or mutating actions (such as `Put*`, `Delete*`, and `Update*`) are not supported and fail when running.
+- The user, user's team, or user's org **must** have been given explicit 'Executor' permission on the AWS Integration in Datadog (more details [below][3]).
 
 <div class="alert alert-info">
-Executing actions using the **Datadog AWS Integration** is only available for users that have setup the Datadog AWS Integration via **Role Delegation**. Additionally, while operations under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> are allowed, the IAM Role associated with the Datadog AWS Integration may not have the permissions needed. Make sure that the role has the correct permissions if encountering issues.
+Executing actions using the Datadog AWS Integration is only available for users that have set up the Datadog AWS Integration through <a href="/integrations/guide/aws-manual-setup/?tab=roledelegation" target="_blank">role delegation</a>. Additionally, while operations under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> are allowed, the IAM Role associated with the Datadog AWS Integration may not have the permissions needed. Make sure that the role has the correct permissions if you encounter issues.
 </div>
 
----
 
 ## Configuration
 
@@ -70,7 +69,7 @@ In the Permissions modal, select a user, team, or organization to be granted **E
 If instead of a <b>Set Permissions</b> button, you have a <b>Request Edit Access</b> button, you need to request the AWS Configuration Edit permission from an Admin in your organization.
 </div>
 
-### 2. Select the Integration in Action
+### 2. Add the integration to an action
 
 When creating or editing an Action within **Workflows**, you can choose your existing AWS integration in the Connections field.
 
