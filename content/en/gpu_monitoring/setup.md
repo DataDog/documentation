@@ -26,7 +26,7 @@ If using Kubernetes, the following requirements must be met:
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Kubernetes**: 1.22 with PodResources API active
 
-## Set up GPU Monitoring on a uniform Kubernetes or non-Kubernetes environment
+## Set up GPU Monitoring on a uniform Kubernetes cluster or non-Kubernetes environment
 
 The following instructions are the basic steps to set up GPU Monitoring in the following environments:
 - In a Kubernetes cluster where **all** nodes have GPU devices
