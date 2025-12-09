@@ -5858,16 +5858,21 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 317
+    - name: Tag Control
+      url: observability_pipelines/processors/tag_control
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tag_control
+      weight: 318
     - name: Tags
       url: observability_pipelines/processors/tags
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tags
-      weight: 318
+      weight: 319
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 319
+      weight: 320
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
