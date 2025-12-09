@@ -123,6 +123,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_865807520",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions metrics query with combined semantic_mode"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3685886950",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions metrics query with native semantic_mode"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2563642929",
       "description": "Create a new dashboard with a toplist widget sorted by group"
     },
