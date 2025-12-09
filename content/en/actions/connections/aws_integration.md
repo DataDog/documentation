@@ -46,37 +46,38 @@ Executing actions using the Datadog AWS Integration is only available for users 
 
 
 ## Configuration
+  
+<div class="alert alert-info">
+Before getting started, make sure these conditions have been met: 
+<ul>
+  <li>The AWS integration is active for your target AWS Account and no integration issues are detected by Datadog. If you haven't set up the AWS integration yet, you can follow the <a href="https://docs.datadoghq.com/integrations/amazon-web-services/#setup" target="_blank">AWS integration setup guide</a>.</li>
+  <li>The IAM Role associated with the integration has the permissions for the correct operations (for example <code>ecs:ListClusters</code>).</li>
+  <li>You have access to edit the permissions for the AWS account(s) you want to set up. 
+</ul>
+</div>
 
 ### 1. Configure AWS Integration permissions
-
-Make sure that:
-- The AWS integration is **active** for your target **AWS Account** and no integration issues are detected by Datadog.
-- The **IAM Role** associated with the integration has the permissions for the operations (for example `ecs:ListClusters`).
-- The integration is configured with the **Executor** permission in the Datadog AWS Integration configuration page (see below).
-
-To configure the **Executor** permission in Datadog AWS Integration: 
-- In Datadog, navigate to **Integration** then open the **Amazon Web Services** configuration page.
-- Select the AWS Account connected to Datadog that you want to run actions with. If you haven't already configured the AWS Integration, follow the [AWS Integration setup guide](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).
-- Click on **Set Permissions**:
-
-{{< img src="service_management/aws_integration_tile_set_permission.png" alt="An integration on the AWS Integration configuration where the Set permission button is usable" style="width:100%;" >}}
-
-In the Permissions modal, select a user, team, or organization to be granted **Executor** permissions:
-
-{{< img src="service_management/aws_integration_tile_permission_modal.png" alt="A permission modal with Executor permission highlighted" style="width:100%;" >}}
-
-<div class="alert alert-info">
-If instead of a <b>Set Permissions</b> button, you have a <b>Request Edit Access</b> button, you need to request the AWS Configuration Edit permission from an Admin in your organization.
-</div>
+  
+To configure the **Executor** permission for the Datadog AWS Integration:
+1. In Datadog, navigate to [**Integrations**][4].
+1. Click the **Amazon Web Services** integration.
+1. In the left pane, select the AWS Account you want to run actions with. 
+1. Click **Set Permissions**.
+    - If you see a **Request Edit Access** button instead of a **Set Permissions** button, ask your Datadog organization's admin to add you as an Editor for the AWS account. 
+1. Select a user, term, or organization and click **Add**. 
+1. Under **People with access**, select the **Executor** permission.
+1. Click **Save**.
 
 ### 2. Add the integration to an action
 
-When creating or editing an Action within **Workflows**, you can choose your existing AWS integration in the Connections field.
+1. In [Workflow Automation][5], click the workflow you want to edit.
+1. Add an AWS action, such as **List ECS Clusters**.
+1. In the configuration pane, click the **Connection** dropdown and scroll to **Existing AWS Integrations**. 
+1. Select the AWS Account you configured in step one.
+1. Click **Save**.
 
-1. Open your Workflow in the Datadog UI.
-2. Add an AWS Action (for example, **List ECS Clusters**).
-3. In the **Connection** dropdown, select **Existing AWS Integration**.
-4. Choose the AWS Account configured in your Datadog integration.
-
-{{< img src="service_management/aws_integration_connection_dropdown.png" alt="A Workflow Step configuration with a AWS Account: 0123456789101 Connection option" style="width:100%;" >}}
-
+[1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html 
+[2]: /actions/connections/?tab=workflowautomation#work-with-connections 
+[3]: /add-aws-int-docs/actions/connections/aws_integration/#configuration 
+[4]: https://app.datadoghq.com/integrations 
+[5]: https://app.datadoghq.com/workflow
