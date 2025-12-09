@@ -24,9 +24,15 @@ Using Software Composition Analysis provides organizations with the following be
 
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
-## Set up Software Composition Analysis
+## SCA language support
 
-{{% security-products/sca-supported-lang %}}  
+Software Composition Analysis (SCA) supports the following languages:
+
+{{< partial name="code_security/sca-lang-support.html" >}}
+
+For steps on setting up SCA for your language, see [Set up SCA][15].
+
+## Set up SCA
 
 SCA supports both static and runtime dependency detection:
 - For **static detection**, you can scan your repositories from your CI/CD pipelines or directly from Datadog's infrastructure. See [static setup][1] to get started.
@@ -120,3 +126,4 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 [12]: https://app.datadoghq.com/ci/code-analysis
 [13]: /security/code_security/software_composition_analysis/setup_static/#upload-third-party-sbom-to-datadog
 [14]: /security/code_security/software_composition_analysis/library_inventory
+[15]: /security/code_security/software_composition_analysis/#set-up-sca
