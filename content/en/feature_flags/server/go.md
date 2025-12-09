@@ -24,7 +24,7 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 
 Before setting up the Go Feature Flags SDK, ensure you have:
 
-- **Datadog Agent 7.55 or later** with [Remote Configuration][2] enabled
+- **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog Go tracer** `dd-trace-go` version 2.4.0 or later
 
 Set the following environment variables:
