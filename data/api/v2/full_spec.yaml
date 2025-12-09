@@ -80861,7 +80861,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 46
       x-permission:
         operator: OR
         permissions:
@@ -80900,7 +80900,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 44
       x-permission:
         operator: OR
         permissions:
@@ -80948,7 +80948,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 45
       x-permission:
         operator: OR
         permissions:
@@ -80990,12 +80990,15 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 48
       x-permission:
         operator: OR
         permissions:
         - security_monitoring_findings_write
         - appsec_vm_write
+      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
+
+        Please check the documentation regularly for updates.'
     post:
       description: Create Jira issues for security findings. This operation creates
         a case in Datadog and a Jira issue linked to that case for bidirectional sync
@@ -81031,12 +81034,15 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 47
       x-permission:
         operator: OR
         permissions:
         - security_monitoring_findings_write
         - appsec_vm_write
+      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
+
+        Please check the documentation regularly for updates.'
   /api/v2/security/sboms:
     get:
       description: 'Get a list of assets SBOMs for an organization.
