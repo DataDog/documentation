@@ -2,7 +2,9 @@
 title: Set up GPU Monitoring
 private: true
 ---
-This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. The configuration instructions depend on the environment to monitor.
+This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. Follow the configuration instructions that match your operating environment below.
+
+To get additional insights and advanced eBPF metrics, like GPU core utilization, you can optionally opt-in to enabling System Probe with privileged mode.
 
 ### Prerequisites
 
@@ -21,7 +23,7 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
    - (Optional) For advanced eBPF metrics, Linux kernel version 5.8
 - **NVIDIA driver**: version 450.51
 
-If using Kubernetes, the following requirements must be met:
+If using Kubernetes, the following additional requirements must be met:
 
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Kubernetes**: 1.22 with PodResources API active
