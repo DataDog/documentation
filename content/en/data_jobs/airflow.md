@@ -333,7 +333,7 @@ To get started, follow the instructions below.
    * **Optional:** Configure the OpenLineage namespace to set `env` tag value in Datadog:
       - In Section 3, enter `openlineage`.
       - In Key 3, enter `namespace`.
-      - In Value 3, enter your Composer environment value.
+      - In Value 3, enter your Composer environment value (e.g. prod, dev, staging, test, etc).
 
    Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of the `openlineage` provider in Google Cloud Composer.
 
