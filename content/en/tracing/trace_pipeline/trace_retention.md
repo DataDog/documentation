@@ -107,7 +107,9 @@ The set of data captured by diversity sampling is not uniformly sampled (that is
 
 #### One percent flat sampling
 
-The flat 1% sampling is a **uniform 1% sample** of [ingested spans][12]. It is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision.
+The flat 1% sampling captures:
+1. All **traces associated with 1% of ingested RUM sessions**, ensuring all indexed sessions have associated trace data. This improves [correlation between APM and RUM][20], allowing you to debug user issues by viewing both frontend sessions and backend traces together. The sample is applied based on the `session_id`, meaning all traces linked to the same RUM session share a consistent indexing decision.
+2. A **uniform 1% sample** of [ingested spans][12], applied based on the `trace_id` so all spans in the same trace share the same sampling decision. Use this sample for general system health monitoring and trend analysis.
 
 This sampling mechanism is uniform, and it is proportionally representative of the full ingested traffic. As a result, low-traffic services and endpoints might be missing from that dataset if you filter on a short time frame.
 
@@ -161,7 +163,9 @@ The `retained_by` attribute is present on all retained spans. Its value is:
 - `retained_by:retention_filter` if the span was captured by a [custom retention filter](#create-your-own-retention-filter), including the [default retention filters](#default-retention-filters) and **no trace rate** was configured. These spans are not included in Trace Queries as trace queries require all spans of a trace to be indexed.
 - `retained_by:trace_retention_filter` if the span is captured by a retention filter for which a trace rate was configured.
 - `retained_by:diversity_sampling` if the span was captured by [diversity sampling](#diversity-sampling) (part of the [Intelligent retention filter](#datadog-intelligent-retention-filter)).
-- `retained_by:flat_sampled` if the span was indexed by the [1% flat sampling](#one-percent-flat-sampling).
+- `retained_by:flat_sampled` if the span was indexed by the [1% flat sampling](#one-percent-flat-sampling). Filter further by retention reason:
+  - `@retention_reason:rum` for traces linked to RUM sessions sampled based on the `session_id`. Use this to analyze traces correlated with user sessions.
+  - `@retention_reason:apm` for traces sampled uniformly based on the `trace_id`. Use this for general performance trends and system-wide analysis.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="Retained By facet" >}}
 
@@ -192,3 +196,4 @@ Spans indexed by the intelligent retention filter are **excluded** from APM trac
 [17]: /dynamic_instrumentation/
 [18]: https://app.datadoghq.com/apm/traces/retention-filters
 [19]: /monitors/types/apm/?tab=traceanalytics
+[20]: /tracing/other_telemetry/rum/
