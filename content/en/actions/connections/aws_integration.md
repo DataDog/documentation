@@ -15,7 +15,7 @@ This eliminates the need to manually configure a separate AWS Connection, simpli
 
 When configured, Datadog uses the same AWS credentials that power integrations such as Amazon EC2, RDS, and S3 monitoring to securely execute supported read-only actions.
 
-You have 2 options to execute AWS actions in your environment:
+There are two ways to execute AWS actions in your environment:
 
 - Use the Datadog AWS Integration to execute **Read-only** actions allowed under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> policy
 - Or, use a custom AWS Connection linked to a **dedicated AWS IAM Role** with specific permissions, for operations not included in the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a>
