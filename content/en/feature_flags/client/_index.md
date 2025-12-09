@@ -23,7 +23,7 @@ Feature Flags are in Preview. Complete the form to request access.
 
 Set up Datadog Feature Flags for your applications. Follow the platform-specific guides below to integrate feature flags into your application and start collecting feature flag data:
 
-{{< partial name="feature_flags/feature_flags_setup.html" >}}
+{{< partial name="feature_flags/feature_flags_client.html" >}}
 
 ## Further reading
 

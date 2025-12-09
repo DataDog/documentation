@@ -18,7 +18,9 @@ Feature Flags are in Preview. Complete the form to request access.
 
 Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog APM tracer and use Remote Configuration to receive flag updates in real time.
 
-This guide covers the common setup required for all server-side SDKs, including Agent configuration and application environment variables.
+This guide covers the common setup required for all server-side SDKs, including Agent configuration and application environment variables. Select your language or framework to view SDK-specific setup instructions:
+
+{{< partial name="feature_flags/feature_flags_server.html" >}}
 
 ## Prerequisites
 
@@ -64,18 +66,6 @@ DD_REMOTE_CONFIG_ENABLED=true
 {{< /code-block >}}
 
 <div class="alert alert-info">Some SDKs require additional experimental flags to enable feature flagging. See the SDK-specific documentation for details.</div>
-
-## Available SDKs
-
-Select your language or framework to view SDK-specific setup instructions:
-
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/feature_flags/server/go" >}}Go{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/server/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/server/nodejs" >}}Node.js{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/server/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/server/ruby" >}}Ruby{{< /nextlink >}}
-{{< /whatsnext >}}
 
 ## Further reading
 
