@@ -3059,11 +3059,24 @@ components:
           description: Metrics query definition.
           example: avg:system.cpu.user{*}
           type: string
+        semantic_mode:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricSemanticMode'
       required:
       - data_source
       - query
       - name
       type: object
+    FormulaAndFunctionMetricSemanticMode:
+      description: Semantic mode for metrics queries. This determines how metrics
+        from different sources are combined or displayed.
+      enum:
+      - combined
+      - native
+      example: combined
+      type: string
+      x-enum-varnames:
+      - COMBINED
+      - NATIVE
     FormulaAndFunctionProcessQueryDataSource:
       description: Data sources that rely on the process backend.
       enum:
