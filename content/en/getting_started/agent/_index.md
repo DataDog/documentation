@@ -11,6 +11,9 @@ further_reading:
     - link: '/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/'
       tag: 'FAQ'
       text: 'Why should I install the Datadog Agent on my cloud instances?'
+    - link: https://www.datadoghq.com/blog/lambda-managed-instances
+      tag: Blog
+      text: Monitor AWS Lambda Managed Instances with Datadog
 ---
 
 ## Overview

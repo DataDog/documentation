@@ -741,6 +741,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_3541766733",
+      "description": "Create a monitor with assets returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_440013737",
       "description": "Create an Error Tracking monitor returns \"OK\" response"
     }

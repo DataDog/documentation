@@ -9,6 +9,12 @@ further_reading:
     - link: '/llm_observability/instrumentation/sdk/'
       tag: 'Documentation'
       text: 'LLM Observability SDK Reference'
+    - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+      tag: Blog
+      text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+    - link: https://www.datadoghq.com/blog/mcp-client-monitoring
+      tag: Blog
+      text: Gain end-to-end visibility into MCP clients with Datadog LLM Observability
 ---
 
 ## Overview
