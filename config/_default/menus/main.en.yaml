@@ -3027,6 +3027,11 @@ menu:
       parent: actions_connections
       identifier: actions_http
       weight: 101
+    - name: AWS Integration
+      url: actions/connections/aws_integration/
+      parent: actions_connections
+      identifier: actions_aws_integration
+      weight: 101
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
@@ -3923,16 +3928,21 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_planning
       weight: 5
+    - name: Forecasting
+      url: cloud_cost_management/planning/forecasting
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_forecasting
+      weight: 501
     - name: Budgets
       url: cloud_cost_management/planning/budgets
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_budgets
-      weight: 501
+      weight: 502
     - name: Commitment Programs
       url: cloud_cost_management/planning/commitment_programs
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
-      weight: 502
+      weight: 503
     - name: Tags
       url: cloud_cost_management/tags
       parent: cloud_cost
