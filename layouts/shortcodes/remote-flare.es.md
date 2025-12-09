@@ -1,7 +1,7 @@
 <!---Spanish translation for https://github.com/DataDog/documentation/blob/master/layouts/shortcodes/remote-flare.en.md--->
 
 
-Enviar un Flare remota:
+Enviar un flare desde el sitio de Datadog:
 1. De la pagína de [Fleet Automation][fleet-automation], elige un Agent que reqiere suporte.
 2. Haz click en **Support**.
 3. Haz click **Send Support Ticket**.
