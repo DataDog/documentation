@@ -1,6 +1,7 @@
 ---
-title: cloud_cost_management
+title: Cloud Cost Management
 external_redirect: /partners/cloud_cost_management/aws/
 cascade:
-  type: partners
+    algolia:
+        subcategory: Cloud Cost Management
 ---

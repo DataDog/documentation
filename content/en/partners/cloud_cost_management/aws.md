@@ -9,6 +9,7 @@ further_reading:
     text: "Create a Cloud Cost monitor"
   - link: "/cloud_cost_management/tags/"
     tag: "Documentation"
+    text: "Learn about Tags in Cloud Cost Management"
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
@@ -79,49 +80,49 @@ The customer must have:
 - The AWS integration must be installed for the Member Account in Datadog.  
   See the official documentation: [AWS integration setup][3].
 
-## 1. Configure AWS Billing Conductor
+## Configure AWS Billing Conductor
 
 These steps **must be completed in the MSP’s Management Account**.
 
-### 1.1 Create a Pricing Rule
+### Create a Pricing Rule
 
 Billing Conductor computes Pro Forma costs by adjusting **AWS public on‑demand rates** using a **Discount** or **Markup**.
 
 You must explicitly choose:
-- **Discount** → applies a percentage discount to public on-demand  
-- **Markup** → applies a percentage increase to public on-demand  
+- **Discount**: applies a percentage discount to public on-demand  
+- **Markup**: applies a percentage increase to public on-demand  
 
 **Important behavior**
-- Entering **0%** (whether Discount or Markup) results in _public on‑demand pricing_. 
-- Allowed range is **0–100%**.
+- Entering 0% (whether Discount or Markup) results in _public on‑demand pricing_. 
+- Allowed range is 0–100%.
 
 **Examples**
-- Discount (20%) → public on‑demand × 0.8  
-- Markup (30%) → public on‑demand × 1.3  
+- Discount (20%): public on‑demand × 0.8  
+- Markup (30%): public on‑demand × 1.3  
 
-### 1.2 Create a Pricing Plan
+### Create a Pricing Plan
 
-Create a Pricing Plan and attach the Pricing Rule created in 1.1.  
+Create a Pricing Plan and attach the Pricing Rule created in the previous step.  
 A Pricing Plan can contain **only one** global Discount or Markup rule.
 
-### 1.3 Create a Billing Group
+### Create a Billing Group
 
 Create a Billing Group and assign **one customer’s Member Account** as the **Primary** account.
 
 You can add one or more Member Accounts to the Billing Group, but only the Primary Member Account generates the Pro Forma CUR that Datadog ingests.
 
-### 1.4 Confirm customer-side requirements (Member Account)
+### Confirm customer-side requirements (Member Account)
 
 If the customer manages their Member Account independently, confirm they understand that:
 - They must deploy the CloudFormation template.  
 - They must create the CUR in their account.  
 - They must grant Datadog access to the CUR bucket.
 
-## 2. Configure Datadog Cloud Cost Management
+## Configure Datadog Cloud Cost Management
 
 These steps must be completed in the **customer’s Member Account** and must be performed by the customer.
 
-### 2.1 Download the Datadog CCM CloudFormation template
+### Download the Datadog CCM CloudFormation template
 
 Pro Forma CURs do not support the SPLIT_COST_ALLOCATION_DATA option.
 Because of this limitation, the customer must modify the template before deployment:
@@ -132,7 +133,7 @@ Because of this limitation, the customer must modify the template before deploym
 Use the Datadog-provided CloudFormation template:
 https://datadog-cloudformation-template.s3.amazonaws.com/aws_cloud_cost/v0.0.1/main.yaml
 
-### 2.2 Deploy the CloudFormation stack
+### Deploy the CloudFormation stack
 
 Use the template above and deploy a stack in the customer’s Member Account.
 To deploy the stack, follow the AWS documentation: [Create a stack from the CloudFormation][13].
@@ -148,7 +149,7 @@ Enter the following information during deployment:
 
 These values define where AWS writes the CUR and where Datadog reads it.
 
-### 2.3 Enter the Member Account’s CUR parameters in Datadog
+### Enter the Member Account’s CUR parameters in Datadog
 
 After deploying the CloudFormation stack, go to:
 
@@ -156,25 +157,25 @@ After deploying the CloudFormation stack, go to:
 
 {{< img src="partners/cloud_cost/select_aws_account_ccm.png" alt="Select AWS Account for CCM" style="width:100%;" >}}
 
-Select the Member Account and enter the following fields using the exact values from Step 2.2:
+Select the Member Account and enter the following fields using the exact values from **Deploy the CloudFormation stack**:
 - Bucket Name  
 - Bucket Region  
 - Export Path Prefix  
 - Export Name  
 
-### 2.4 Skip “Create CloudFormation stack”
+### Skip “Create CloudFormation stack”
 
-Since the CloudFormation stack was already deployed in Step 2.2, skip Datadog’s automatic CloudFormation deployment option.
-
-### 2.5 Select **Activate now**
+Since the CloudFormation stack was already deployed, skip Datadog’s automatic CloudFormation deployment option.
 
 {{< img src="partners/cloud_cost/configure_aws_ccm.png" alt="Configure AWS Cloud Cost Management" style="width:100%;" >}}
+
+### Select **Activate now**
 
 Activate CCM for the Member Account.
 
 {{< img src="partners/cloud_cost/complete_aws_ccm.png" alt="Complete AWS Cloud Cost Management" style="width:100%;" >}}
 
-## 3. Validation
+## Validation
 
 Data latency
 It may take 48–72 hours after a Cost and Usage Report (CUR) is generated for all available data to appear in Datadog.
