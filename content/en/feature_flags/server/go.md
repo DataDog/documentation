@@ -24,11 +24,10 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 
 Before setting up the Go Feature Flags SDK, ensure you have:
 
-- **Go 1.23 or later**
 - **Datadog Agent 7.55 or later** with [Remote Configuration][2] enabled
-- **Datadog Go tracer** (`dd-trace-go/v2`) installed and configured
+- **Datadog Go tracer** `dd-trace-go` version 2.4.0 or later
 
-Set the following environment variables to enable feature flags:
+Set the following environment variables:
 
 {{< code-block lang="bash" >}}
 # Required: Enable the feature flags provider
@@ -57,11 +56,14 @@ go get github.com/open-feature/go-sdk/openfeature
 
 Start the Datadog tracer and register the Datadog OpenFeature provider. The tracer must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
 
+### Blocking initialization
+
+Use `SetProviderAndWait` to block until the initial flag configuration is received. This ensures flags are ready before your application starts handling requests.
+
 {{< code-block lang="go" >}}
 package main
 
 import (
-    "context"
     "log"
 
     "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
@@ -81,16 +83,66 @@ func main() {
     }
     defer provider.Shutdown()
 
-    // Register the provider with OpenFeature and wait for initialization
+    // Register the provider and wait for initialization (default 30s timeout)
     if err := openfeature.SetProviderAndWait(provider); err != nil {
         log.Fatalf("Failed to set provider: %v", err)
     }
+
+    // Create the OpenFeature client
+    client := openfeature.NewClient("my-service")
 
     // Your application code here
 }
 {{< /code-block >}}
 
-<div class="alert alert-info"><code>SetProviderAndWait</code> blocks until the initial flag configuration is received from Remote Config. This can take a few seconds on first startup.</div>
+To specify a custom timeout, use `SetProviderAndWaitWithContext`:
+
+{{< code-block lang="go" >}}
+ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+defer cancel()
+
+if err := openfeature.SetProviderAndWaitWithContext(ctx, provider); err != nil {
+    log.Fatalf("Failed to set provider: %v", err)
+}
+{{< /code-block >}}
+
+### Non-blocking initialization
+
+Use `SetProvider` to register the provider without waiting. Flag evaluations return default values until the configuration is received.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+    "log"
+
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+    ddopenfeature "github.com/DataDog/dd-trace-go/v2/openfeature"
+    "github.com/open-feature/go-sdk/openfeature"
+)
+
+func main() {
+    // Start the Datadog tracer (enables Remote Config)
+    tracer.Start()
+    defer tracer.Stop()
+
+    // Create the Datadog OpenFeature provider
+    provider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{})
+    if err != nil {
+        log.Fatalf("Failed to create provider: %v", err)
+    }
+    defer provider.Shutdown()
+
+    // Register the provider without waiting
+    openfeature.SetProvider(provider)
+
+    // Create the OpenFeature client
+    client := openfeature.NewClient("my-service")
+
+    // Your application code here
+    // Flag evaluations return defaults until configuration is received
+}
+{{< /code-block >}}
 
 ## Create a client
 
