@@ -6886,6 +6886,72 @@ components:
       required:
       - data
       type: object
+    BatchDeleteRowsRequestArray:
+      description: The request body for deleting multiple rows from a reference table.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BatchDeleteRowsRequestData'
+          maxItems: 200
+          type: array
+      required:
+      - data
+      type: object
+    BatchDeleteRowsRequestData:
+      description: Row resource containing a single row identifier for deletion.
+      properties:
+        id:
+          example: primary_key_value
+          type: string
+        type:
+          $ref: '#/components/schemas/TableRowResourceDataType'
+      required:
+      - type
+      - id
+      type: object
+    BatchUpsertRowsRequestArray:
+      description: The request body for creating or updating multiple rows into a
+        reference table.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BatchUpsertRowsRequestData'
+          maxItems: 200
+          type: array
+      required:
+      - data
+      type: object
+    BatchUpsertRowsRequestData:
+      description: Row resource containing a single row identifier and its column
+        values.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BatchUpsertRowsRequestDataAttributes'
+        id:
+          example: primary_key_value
+          type: string
+        type:
+          $ref: '#/components/schemas/TableRowResourceDataType'
+      required:
+      - type
+      - id
+      type: object
+    BatchUpsertRowsRequestDataAttributes:
+      description: Attributes containing row data values for row creation or update
+        operations.
+      properties:
+        values:
+          additionalProperties:
+            x-required-field: true
+          description: Key-value pairs representing row data, where keys are field
+            names from the schema.
+          example:
+            example_key_value: primary_key_value
+            name: row_name
+          type: object
+      required:
+      - values
+      type: object
     BillConfig:
       description: Bill config.
       properties:
@@ -77332,6 +77398,48 @@ paths:
       - Reference Tables
       x-menu-order: 6
   /api/v2/reference-tables/tables/{id}/rows:
+    delete:
+      description: Delete multiple rows from a Reference Table by their primary key
+        values.
+      operationId: DeleteRows
+      parameters:
+      - description: Unique identifier of the reference table to delete rows from
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDeleteRowsRequestArray'
+        required: true
+      responses:
+        '200':
+          description: Rows deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete rows
+      tags:
+      - Reference Tables
+      x-menu-order: 9
     get:
       description: Get reference table rows by their primary key values.
       operationId: GetRowsByID
@@ -77377,6 +77485,49 @@ paths:
       tags:
       - Reference Tables
       x-menu-order: 5
+    post:
+      description: Create or update rows in a Reference Table by their primary key
+        values. If a row with the specified primary key exists, it is updated; otherwise,
+        a new row is created.
+      operationId: UpsertRows
+      parameters:
+      - description: Unique identifier of the reference table to upsert rows into
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchUpsertRowsRequestArray'
+        required: true
+      responses:
+        '200':
+          description: Rows created or updated successfully
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Upsert rows
+      tags:
+      - Reference Tables
+      x-menu-order: 8
   /api/v2/reference-tables/uploads:
     post:
       description: Create a reference table upload for bulk data ingestion
