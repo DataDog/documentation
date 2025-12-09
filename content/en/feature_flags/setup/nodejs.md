@@ -1,13 +1,13 @@
 ---
-title: Go Feature Flags
-description: Set up Datadog Feature Flags for Go applications.
+title: Node.js Feature Flags
+description: Set up Datadog Feature Flags for Node.js applications.
 further_reading:
-- link: "/feature_flags/setup/server/"
+- link: "/feature_flags/setup/server"
   tag: "Documentation"
   text: "Server-Side Feature Flags"
-- link: "/tracing/trace_collection/dd_libraries/go/"
+- link: "/tracing/trace_collection/dd_libraries/nodejs/"
   tag: "Documentation"
-  text: "Go Tracing"
+  text: "Node.js Tracing"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
@@ -16,7 +16,7 @@ Feature Flags are in Preview. Complete the form to request access.
 
 ## Overview
 
-This page describes how to instrument your Go application with the Datadog Feature Flags SDK.
+This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK.
 
 Documentation coming soon.
 

@@ -70,11 +70,11 @@ DD_REMOTE_CONFIG_ENABLED=true
 Select your language or framework to view SDK-specific setup instructions:
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/feature_flags/setup/server/go" >}}Go{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/server/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/server/nodejs" >}}Node.js{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/server/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/server/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/setup/go" >}}Go{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/setup/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/setup/nodejs" >}}Node.js{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/setup/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

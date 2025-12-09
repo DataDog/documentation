@@ -1,13 +1,13 @@
 ---
-title: Node.js Feature Flags
-description: Set up Datadog Feature Flags for Node.js applications.
+title: Python Feature Flags
+description: Set up Datadog Feature Flags for Python applications.
 further_reading:
-- link: "/feature_flags/setup/server/"
+- link: "/feature_flags/setup/server"
   tag: "Documentation"
   text: "Server-Side Feature Flags"
-- link: "/tracing/trace_collection/dd_libraries/nodejs/"
+- link: "/tracing/trace_collection/dd_libraries/python/"
   tag: "Documentation"
-  text: "Node.js Tracing"
+  text: "Python Tracing"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
@@ -16,7 +16,7 @@ Feature Flags are in Preview. Complete the form to request access.
 
 ## Overview
 
-This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK.
+This page describes how to instrument your Python application with the Datadog Feature Flags SDK.
 
 Documentation coming soon.
 
