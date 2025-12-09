@@ -17,19 +17,21 @@ The distribution visualization at the top helps you understand whether the curre
 
 {{< img src="real_user_monitoring/explorer/events/side-panel-overview-2.png" alt="RUM Explorer side panel showing the distribution visualization, waterfall timeline, and filter options" width="100%" >}}
 
+Click any tab to view its corresponding details and investigate specific aspects of the event. See [Additional tabs](#additional-tabs) for a full list.
+
 ## Waterfall tab
 
 The **Waterfall** tab displays an interactive timeline of your view's performance, including [Core Web Vitals][3] with pass or fail indicators.
 
-{{< img src="real_user_monitoring/explorer/events/events_side_panel-2.mp4" alt="Interacting with the waterfall timeline in the Waterfall tab" video="true" width="80%" >}}
+{{< img src="real_user_monitoring/explorer/events/events_side_panel-3.mp4" alt="Interacting with the waterfall timeline in the Waterfall tab" video="true" width="80%" >}}
 
 ### Filtering the waterfall
 
 Control which events appear in the waterfall:
 
+- **By critical path**: Click the **Critical Events** toggle to see only events directly impacting your key performance timings.
 - **By attribute**: Use the filter buttons above the waterfall. Click a filter to access additional options like resource URL, action name, error message, and more.
 - **By time range**: Drag the time selectors in the minimap, or expand the left sidebar and click a timing to filter to events before that point.
-- **By critical path**: Click the **Critical Events** toggle to see only events directly impacting your key performance timings.
 
 The left sidebar reveals key timings, including custom timings from the [addTiming API][4].
 
@@ -37,11 +39,11 @@ The left sidebar reveals key timings, including custom timings from the [addTimi
 
 Hover over any event in the waterfall to see its timestamp, duration, and contributing factors (scripts, style/layout, or other processing). Hover over a Core Web Vital to view its definition, threshold, and how it compares to your p75.
 
-{{< img src="real_user_monitoring/explorer/events/specific-times.png" alt="Loading Time popover showing performance details, threshold indicators, and comparison to p75 performance" width="100%" >}}
+{{< img src="real_user_monitoring/explorer/events/specific-times-1.png" alt="Loading Time popover showing performance details, threshold indicators, and comparison to p75 performance" width="100%" >}}
 
 ### Connected telemetry
 
-Click on events to access related data:
+Click on events in the waterfall to access related data:
 
 - **Resources**: View connected backend traces.
 - **Long Animation Frames**: Access associated profiles for performance analysis.
