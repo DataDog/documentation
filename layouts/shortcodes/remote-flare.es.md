@@ -1,4 +1,4 @@
-# Spanish translation for https://github.com/DataDog/documentation/blob/master/layouts/shortcodes/remote-flare.en.md
+<!---Spanish translation for https://github.com/DataDog/documentation/blob/master/layouts/shortcodes/remote-flare.en.md--->
 
 
 Enviar un Flare remota:
