@@ -330,6 +330,10 @@ To get started, follow the instructions below.
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
+   * **Optional:** Configure the OpenLineage namespace to set `env` tag value in Datadog:
+      - In Section 3, enter `openlineage`.
+      - In Key 3, enter `namespace`.
+      - In Value 3, enter your Composer environment value.
 
    Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of the `openlineage` provider in Google Cloud Composer.
 
