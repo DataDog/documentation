@@ -8,7 +8,7 @@ This page provides instructions on setting up Datadog's GPU Monitoring on your i
 
 To begin using Datadog's GPU Monitoring, your environment must meet the following criteria:
 
-- You have a Datadog account and are running the Datadog Agent on your infrastructure hosts. If not, see the following guides:
+- You are running Datadog Agent on your GPU-accelerated hosts that you want to monitor. If not, see the following guides:
   - [Install the Datadog Agent on Kubernetes][1]
   - [Install the Datadog Agent on Docker][7]
   - [Install the Datadog Agent on non-containerized Linux][8]
