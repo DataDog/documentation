@@ -104,9 +104,16 @@ To get started:
    Add Datadog Product Analytics to my project
    ```
    {{% /tab %}}
+   {{% /tab %}}
+
+   {{% tab "LLM Observability" %}}
+   ```console
+   Add Datadog LLM Observability to my project
+   ```
+   {{% /tab %}}
    {{< /tabs >}}
 
-2. Review and accept each action your AI agent proposes to complete the setup process.
+3. Review and accept each action your AI agent proposes to complete the setup process.
 
 ### Deploy your app to production
 
