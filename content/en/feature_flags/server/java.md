@@ -14,7 +14,7 @@ further_reading:
 Feature Flags are in Preview. Complete the form to request access.
 {{< /callout >}}
 
-<div class="alert alert-warning"><strong>Experimental Feature:</strong> Java Feature Flags support is experimental and requires enabling an experimental flag in the tracer. See the <a href="#configuration">Configuration section</a> for details.</div>
+<div class="alert alert-warning">Java Feature Flags support is experimental and requires enabling an experimental flag in the tracer. See the <a href="#configuration">Configuration section</a> for details.</div>
 
 ## Overview
 
@@ -22,7 +22,7 @@ This page describes how to instrument a Java application with the Datadog Featur
 
 The Java SDK integrates feature flags directly into the Datadog APM tracer and implements the [OpenFeature](https://openfeature.dev/) standard for maximum flexibility and compatibility.
 
-<div class="alert alert-info"><strong>Already using Datadog APM?</strong> If your application already has the Datadog Java tracer and Remote Configuration enabled, skip to <a href="#initialize-the-openfeature-provider">Initialize the OpenFeature Provider</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
+<div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java tracer and Remote Configuration enabled, skip to <a href="#initialize-the-openfeature-provider">Initialize the OpenFeature provider</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
 
 ## Compatibility requirements
 
@@ -42,6 +42,8 @@ Before you begin, make sure you've already [installed and configured the Agent](
 ## Installation
 
 Feature flagging is integrated into the Datadog Java APM tracer. You need the tracer JAR and the OpenFeature SDK dependencies.
+
+The `dd-java-agent-feature-flagging-bootstrap` JAR contains shared interfaces that enable the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). This is a standard pattern for Java agents. Both JARs are required for feature flags to work.
 
 {{< tabs >}}
 {{% tab "Gradle" %}}
@@ -119,11 +121,9 @@ Add the following dependencies to your `pom.xml`:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info"><strong>What is the bootstrap JAR?</strong> The <code>dd-java-agent-feature-flagging-bootstrap</code> JAR contains shared interfaces that enable the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). This is a standard pattern for Java agents. Both JARs are required for feature flags to work.</div>
-
 ## Configuration
 
-<div class="alert alert-info"><strong>Already using Remote Configuration?</strong> If your Datadog Agent already has Remote Configuration enabled for other features (like Dynamic Instrumentation or Application Security), you can skip the <a href="#agent-configuration">Agent Configuration</a> section and go directly to <a href="#application-configuration">Application Configuration</a>.</div>
+If your Datadog Agent already has Remote Configuration enabled for other features (like Dynamic Instrumentation or Application Security), you can skip the Agent configuration and go directly to [Application configuration](#application-configuration).
 
 ### Agent configuration
 
@@ -140,7 +140,7 @@ api_key: <YOUR_API_KEY>
 
 ### Application configuration
 
-<div class="alert alert-info"><strong>Already using the Datadog Java tracer?</strong> If your application already runs with <code>-javaagent:dd-java-agent.jar</code> and has Remote Configuration enabled (<code>DD_REMOTE_CONFIG_ENABLED=true</code>), you only need to add the experimental feature flag (<code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>). Skip the tracer download and JVM configuration steps.</div>
+If your application already runs with `-javaagent:dd-java-agent.jar` and has Remote Configuration enabled (`DD_REMOTE_CONFIG_ENABLED=true`), you only need to add the experimental feature flag (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`). Skip the tracer download and JVM configuration steps.
 
 Configure your Java application with the required environment variables or system properties:
 
@@ -184,9 +184,9 @@ java -javaagent:path/to/dd-java-agent.jar \
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Important:</strong> Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without the experimental flag, the feature flagging system does not start and the `Provider` will return the programmatic default.</div>
+The Datadog feature flagging system starts automatically when the tracer is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.
 
-<div class="alert alert-info"><strong>Note:</strong> The Datadog feature flagging system starts automatically when the tracer is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.</div>
+<div class="alert alert-danger">Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without the experimental flag, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
 
 ### Add the Java tracer to the JVM
 
@@ -292,9 +292,9 @@ public class App {
 }
 {{< /code-block >}}
 
-<div class="alert alert-warning"><strong>Important:</strong> Use <code>setProviderAndWait()</code> to block until the initial flag configuration is received from Remote Configuration. This ensures flags are ready before the application starts serving traffic. The default timeout is 30 seconds.</div>
+Use `setProviderAndWait()` to block until the initial flag configuration is received from Remote Configuration. This ensures flags are ready before the application starts serving traffic. The default timeout is 30 seconds.
 
-<div class="alert alert-info"><strong>Exception Handling (Optional):</strong> <code>ProviderNotReadyError</code> is an OpenFeature SDK exception thrown when the provider times out during initialization. Catching it allows the application to start with default flag values if Remote Configuration is unavailable. If not caught, the exception propagates and may prevent application startup—handle this based on your availability requirements.</div>
+`ProviderNotReadyError` is an OpenFeature SDK exception thrown when the provider times out during initialization. Catching it allows the application to start with default flag values if Remote Configuration is unavailable. If not caught, the exception propagates and may prevent application startup. Handle this based on your availability requirements.
 
 ### Asynchronous initialization
 
@@ -339,7 +339,7 @@ EvaluationContext context = new MutableContext("user-123")
 // Use the context for flag evaluations (see next section)
 {{< /code-block >}}
 
-<div class="alert alert-info"><strong>Targeting Key:</strong> The <code>targetingKey</code> (for example, "user-123") is the primary identifier used for consistent flag evaluations and percentage-based rollouts. It's typically a user ID, session ID, or device ID.</div>
+The `targetingKey` (for example, `user-123`) is the primary identifier used for consistent flag evaluations and percentage-based rollouts. It's typically a user ID, session ID, or device ID.
 
 ## Evaluate flags
 
@@ -408,7 +408,7 @@ if (config.isStructure()) {
 
 ## Error handling
 
-The OpenFeature SDK uses a default value pattern - if evaluation fails for any reason, the default value you provide is returned.
+The OpenFeature SDK uses a default value pattern. If evaluation fails for any reason, the default value you provide is returned.
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.ErrorCode;
@@ -458,7 +458,7 @@ Exposures appear in the Datadog UI and can be used for:
 - Correlating feature flags with application performance
 - Debugging flag behavior
 
-No additional code is required - exposures are automatically logged by the Datadog tracer integration.
+No additional code is required. Exposures are automatically logged by the Datadog tracer integration.
 
 ## Advanced configuration
 
@@ -489,7 +489,7 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-<div class="alert alert-info"><strong>Note:</strong> <code>PROVIDER_CONFIGURATION_CHANGED</code> is an optional OpenFeature event. Check the Datadog provider documentation to verify this event is supported in your version.</div>
+`PROVIDER_CONFIGURATION_CHANGED` is an optional OpenFeature event. Check the Datadog provider documentation to verify this event is supported in your version.
 
 ### Multiple clients
 
@@ -513,14 +513,14 @@ boolean enhancedAnalytics = analyticsClient.getBooleanValue(
 );
 {{< /code-block >}}
 
-<div class="alert alert-info"><strong>Note:</strong> The <code>Provider</code> instance is shared globally—client names are for organizational purposes only and don't create separate provider instances. All clients use the same underlying Datadog provider and flag configurations.</div>
+The `Provider` instance is shared globally. Client names are for organizational purposes only and don't create separate provider instances. All clients use the same underlying Datadog provider and flag configurations.
 
 ## Best practices
 
-### 1. Initialize early
+### Initialize early
 Initialize the OpenFeature provider as early as possible in your application lifecycle (for example, in `main()` or application startup). This ensures flags are ready before business logic executes.
 
-### 2. Use meaningful default values
+### Use meaningful default values
 Always provide sensible default values that maintain safe behavior if flag evaluation fails:
 
 {{< code-block lang="java" >}}
@@ -531,7 +531,7 @@ boolean useNewAlgorithm = client.getBooleanValue("algorithm.new", false, context
 int rateLimit = client.getIntegerValue("rate.limit", 100, context);
 {{< /code-block >}}
 
-### 3. Create context once
+### Create context once
 Create the evaluation context once per request/user/session and reuse it for all flag evaluations:
 
 {{< code-block lang="java" >}}
@@ -545,11 +545,9 @@ boolean featureA = client.getBooleanValue("feature.a", false, userContext);
 boolean featureB = client.getBooleanValue("feature.b", false, userContext);
 {{< /code-block >}}
 
-{{< callout type="info" >}}
-Rebuilding the evaluation context for every flag evaluation adds unnecessary overhead. Create the context once at the start of the request lifecycle, then pass it to all subsequent flag evaluations.
-{{< /callout >}}
+<div class="alert alert-info">Rebuilding the evaluation context for every flag evaluation adds unnecessary overhead. Create the context once at the start of the request lifecycle, then pass it to all subsequent flag evaluations.</div>
 
-### 4. Handle initialization failures (optional)
+### Handle initialization failures (optional)
 Consider handling initialization failures if your application can function with default flag values:
 
 {{< code-block lang="java" >}}
@@ -564,12 +562,12 @@ try {
 
 If feature flags are critical for your application to function, let the exception propagate to prevent startup.
 
-### 5. Use consistent targeting keys
+### Use consistent targeting keys
 Use consistent, stable identifiers as targeting keys:
 - **Good**: User IDs, session IDs, device IDs
 - **Avoid**: Timestamps, random values, frequently changing IDs
 
-### 6. Monitor flag evaluation
+### Monitor flag evaluation
 Use the detailed evaluation results for logging and debugging:
 
 {{< code-block lang="java" >}}
@@ -618,7 +616,8 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 **Problem**: Application fails to start with `ClassNotFoundException` for Datadog classes like `datadog.trace.api.featureflag.FeatureFlaggingGateway`
 
-**Cause**: Missing the bootstrap JAR dependency
+**Cause**: Missing the bootstrap JAR dependency. The bootstrap module contains shared interfaces that allow the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). Without it, the two components cannot interact.
+
 
 **Solutions**:
 1. **Add the bootstrap JAR** to your dependencies:
@@ -633,8 +632,6 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
    - `dd-openfeature` (the OpenFeature provider)
    - `dd-java-agent-feature-flagging-bootstrap` (the bootstrap module)
 3. **Check the classpath** includes both JARs in your runtime configuration
-
-<div class="alert alert-info"><strong>Why the bootstrap JAR is needed:</strong> The bootstrap module contains shared interfaces that allow the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). Without it, the two components cannot interact.</div>
 
 ### Feature flagging system not starting
 
