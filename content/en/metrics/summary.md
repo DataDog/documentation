@@ -127,7 +127,7 @@ The metric description helps you understand what a metric does. Descriptions are
 
 ### Metrics Source Code
 
-{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
 <!--- waiting for new preview link for source code -->
 
 
