@@ -4,7 +4,7 @@ Each processor has a corresponding filter query in their fields. Processors only
 
 The following are metrics filter query examples:
 
-- `NOT system.cpu.user`: This filters for metrics that do not have the status `name:system.cpu.user`.
+- `NOT system.cpu.user`: This filters for metrics that do not have the field `name:system.cpu.user`.
 - `system.cpu.user OR system.cpu.user.total`: This filter query only matches metrics that have either `name:system.cpu.user` or `name:system.cpu.user.total`.
 - `tags:(env\:prod OR env\:test)`: This filters for metrics with `env:prod` or `env:test` in `tags`.
 
