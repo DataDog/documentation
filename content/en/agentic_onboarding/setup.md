@@ -104,7 +104,6 @@ To get started:
    Add Datadog Product Analytics to my project
    ```
    {{% /tab %}}
-   {{% /tab %}}
 
    {{% tab "LLM Observability" %}}
    ```console
