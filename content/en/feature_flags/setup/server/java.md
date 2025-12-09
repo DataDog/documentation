@@ -184,7 +184,7 @@ java -javaagent:path/to/dd-java-agent.jar \
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Important:</strong> Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without the experimental flag, the feature flagging system does not start.</div>
+<div class="alert alert-warning"><strong>Important:</strong> Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without the experimental flag, the feature flagging system does not start and the `Provider` will return the programmatic default.</div>
 
 <div class="alert alert-info"><strong>Note:</strong> The Datadog feature flagging system starts automatically when the tracer is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.</div>
 
@@ -545,6 +545,10 @@ boolean featureA = client.getBooleanValue("feature.a", false, userContext);
 boolean featureB = client.getBooleanValue("feature.b", false, userContext);
 {{< /code-block >}}
 
+{{< callout type="info" >}}
+Rebuilding the evaluation context for every flag evaluation adds unnecessary overhead. Create the context once at the start of the request lifecycle, then pass it to all subsequent flag evaluations.
+{{< /callout >}}
+
 ### 4. Handle initialization failures (optional)
 Consider handling initialization failures if your application can function with default flag values:
 
@@ -579,17 +583,6 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
     details.getReason()
 );
 {{< /code-block >}}
-
-## Integration with Datadog APM
-
-Feature flags automatically integrate with Datadog APM:
-
-- **Trace Correlation**: Flag evaluations are automatically correlated with APM traces
-- **Performance Impact**: Track how feature flags affect application performance
-- **Error Tracking**: See which flags were active when errors occurred
-- **Exposure Analytics**: Analyze feature adoption in the Datadog UI
-
-No additional configuration is required - this integration is automatic when using the Datadog tracer.
 
 ## Troubleshooting
 
