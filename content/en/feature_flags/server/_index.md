@@ -2,9 +2,9 @@
 title: Server-Side Feature Flags
 description: Set up Datadog Feature Flags for server-side applications.
 further_reading:
-- link: "/feature_flags/setup/"
+- link: "/feature_flags/client/"
   tag: "Documentation"
-  text: "Feature Flags Setup"
+  text: "Client-Side Feature Flags"
 - link: "/remote_configuration/"
   tag: "Documentation"
   text: "Remote Configuration"
@@ -70,11 +70,11 @@ DD_REMOTE_CONFIG_ENABLED=true
 Select your language or framework to view SDK-specific setup instructions:
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/feature_flags/setup/server/go" >}}Go{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/server/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/server/nodejs" >}}Node.js{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/server/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/setup/server/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/server/go" >}}Go{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/server/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/server/nodejs" >}}Node.js{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/server/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/server/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

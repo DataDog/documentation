@@ -2,7 +2,7 @@
 title: Java Feature Flags
 description: Set up Datadog Feature Flags for Java applications.
 further_reading:
-- link: "/feature_flags/setup/server/"
+- link: "/feature_flags/server/"
   tag: "Documentation"
   text: "Server-Side Feature Flags"
 - link: "/tracing/trace_collection/dd_libraries/java/"
