@@ -1,5 +1,5 @@
 ---
-title: AWS Cloud Cost Management for MSP Partners
+title: AWS Cloud Cost for MSP Partners
 further_reading:
   - link: "/cloud_cost_management/aws/"
     tag: "Documentation"
@@ -66,14 +66,13 @@ To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user g
 ## Prerequisites
 
 As an MSP partner, verify the following before starting:
-
 ### Access requirements
 - Access to the **Management Account** to configure Billing Conductor (Pricing Rules, Pricing Plans, Billing Groups).  
 
 ### Permissions required in the **customer’s Member Account**
 The customer must have:
-- Permission to **deploy CloudFormation stacks**  
-- Permission to **create and manage Cost and Usage Reports (CURs)**  
+- Permission to deploy CloudFormation stacks
+- Permission to create and manage Cost and Usage Reports (CURs)
 - Permission to grant Datadog access to the S3 bucket containing the CUR
 
 ### Datadog requirement
@@ -83,14 +82,13 @@ The customer must have:
 ## Configure AWS Billing Conductor
 
 These steps **must be completed in the MSP’s Management Account**.
-
 ### Create a Pricing Rule
 
 Billing Conductor computes Pro Forma costs by adjusting **AWS public on‑demand rates** using a **Discount** or **Markup**.
 
 You must explicitly choose:
-- **Discount**: applies a percentage discount to public on-demand  
-- **Markup**: applies a percentage increase to public on-demand  
+- Discount: applies a percentage discount to public on-demand  
+- Markup: applies a percentage increase to public on-demand  
 
 **Important behavior**
 - Entering 0% (whether Discount or Markup) results in _public on‑demand pricing_. 
@@ -108,7 +106,6 @@ A Pricing Plan can contain **only one** global Discount or Markup rule.
 ### Create a Billing Group
 
 Create a Billing Group and assign **one customer’s Member Account** as the **Primary** account.
-
 You can add one or more Member Accounts to the Billing Group, but only the Primary Member Account generates the Pro Forma CUR that Datadog ingests.
 
 ### Confirm customer-side requirements (Member Account)
@@ -124,10 +121,10 @@ These steps must be completed in the **customer’s Member Account** and must be
 
 ### Download the Datadog CCM CloudFormation template
 
-Pro Forma CURs do not support the SPLIT_COST_ALLOCATION_DATA option.
+Pro Forma CURs do not support the `SPLIT_COST_ALLOCATION_DATA` option.
 Because of this limitation, the customer must modify the template before deployment:
 1. Download the Datadog CCM CloudFormation template.
-2. Remove the SPLIT_COST_ALLOCATION_DATA field from the template.
+2. Remove the `SPLIT_COST_ALLOCATION_DATA` field from the template.
 3. Save the modified template to use in the next step.
 
 Use the Datadog-provided CloudFormation template:
@@ -169,7 +166,7 @@ Since the CloudFormation stack was already deployed, skip Datadog’s automatic 
 
 {{< img src="partners/cloud_cost/configure_aws_ccm.png" alt="Configure AWS Cloud Cost Management" style="width:100%;" >}}
 
-### Select **Activate now**
+### Click **Activate now**
 
 Activate CCM for the Member Account.
 
