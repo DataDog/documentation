@@ -25,7 +25,7 @@ Cloud SIEM は、Datadog で処理されたすべてのログに検出ルール�
 
 下のボタンをクリックし、Azure ポータルのフォームに記入してください。フォームを完了すると、アクティビティログを Datadog アカウントに送信するために必要な Azure リソースが、お客様のためにデプロイされます。
 
-[![Azure にデプロイ](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
+[![Azure にデプロイ](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Frefs%2Fheads%2Fmaster%2Fazure%2Feventhub_log_forwarder%2Fparent_template.json)
 
 1. 既存のリソースグループを選択するか、新規に作成します。
 1. リージョンを選択します。

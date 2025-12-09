@@ -9,6 +9,7 @@ aliases:
     - /real_user_monitoring/reactnative/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
     - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
+    - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/
 further_reading:
 - link: /real_user_monitoring/application_monitoring/react_native/advanced_configuration
   tag: Documentation
@@ -39,6 +40,12 @@ The React Native SDK supports the following services:
 - [Expo][5]. For more information, see the [Expo documentation][6].
 
 ## Setup
+
+Follow these instructions to manually add and configure the RUM SDK in your React Native application.
+
+### Manual setup
+
+To send RUM data from your React Native application to Datadog, complete the following steps.
 
 To install with NPM, run:
 

@@ -7,6 +7,10 @@ further_reading:
   text: "Learn about the Deployment Gates explorer"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Deployment Gates are not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
@@ -265,9 +269,9 @@ jobs:
         with:
           service: my-service
           env: production
+          identifier: default
 
       - name: Deploy
-        if: success()
         run: |
           echo "Deployment Gate passed, proceeding with deployment"
           # Your deployment commands here

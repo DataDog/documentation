@@ -6,6 +6,12 @@ aliases:
 - /security/application_security/software_composition_analysis/
 - /code_analysis/software_composition_analysis/
 - /security/application_security/vulnerability_management/
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
+
 ---
 ## Overview
 
@@ -59,8 +65,15 @@ Click on a library with a vulnerability to open a side panel that contains infor
 <!-- {{< img src="code_security/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}} -->
 
 ### Library inventory
-The Libraries [Inventory][8] helps you understand the list of libraries and its versions that are used in both your codebase and running on deployed services. For each library version, you can assess how often it is used, its license riskiness, and understand the health of each library (e.g. if it has reached EOL, if it is unmaintained, etc.)
 
+The [Library Inventory][8] provides visibility into the third-party libraries detected across your codebase. Datadog collects this information from:
+
+* **Static SCA**, which identifies all libraries referenced in your repositories, and  
+* **Runtime SCA**, which detects libraries that are actually loaded and used by your services at runtime.
+
+Use the Library Inventory to understand which dependencies you rely on, where they are used, and whether they contain known vulnerabilities or license risks.
+
+To learn more about how the inventory is generated, how Static and Runtime data differ, and how to interpret the library details (usage, vulnerabilities, licenses, versions, and OpenSSF score), see [Library Inventory][14].
 
 ### Library vulnerability context in APM
 SCA enriches the information Application Performance Monitoring (APM) is already collecting by flagging libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Software Catalog][10].
@@ -91,6 +104,11 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 
 <!-- **Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][9] documentation. -->
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /security/code_security/software_composition_analysis/setup_static/
 [2]: /security/code_security/software_composition_analysis/setup_runtime/
 [3]: https://app.datadoghq.com/security/appsec/vm
@@ -101,3 +119,4 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 [11]: https://app.datadoghq.com/security/appsec/vm/library
 [12]: https://app.datadoghq.com/ci/code-analysis
 [13]: /security/code_security/software_composition_analysis/setup_static/#upload-third-party-sbom-to-datadog
+[14]: /security/code_security/software_composition_analysis/library_inventory
