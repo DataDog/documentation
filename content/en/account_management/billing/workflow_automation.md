@@ -14,14 +14,14 @@ Datadog [Workflow Automation][8] billing is based on the number of **workflow ex
     - CSM/DevSecOps SKUs include 5–20 executions per host
     - [Incident Management][9], [On-Call][10], and [App Builder][11] SKUs include free unlimited executions when triggered by events from these products. 
 
-## Pricing Model
+## Pricing model
 
-#### What is the billing metric for Workflow Automation?
+### Billing metrics
 Workflow Automation is billed **per execution**, meaning each complete workflow run counts toward your bill. There are two billing options:
 - **Committed Executions**: $0.10 per execution (purchased in advance)
 - **On-Demand Executions**: $0.14 per execution (pay-as-you-go)
 
-#### What counts as a workflow execution?
+### Definition of workflow executions
 A workflow execution refers to one full run of a published workflow, regardless of how many steps or actions it includes. Executions can be triggered through:
 - Manual starts in the Datadog UI
 - API or programmatic triggers
@@ -31,20 +31,21 @@ A workflow execution refers to one full run of a published workflow, regardless 
 
 Unpublished (test or draft) runs are **not billed**.
 
-#### Are all executions billed, even if they fail?
-Yes. _All published executions are billed once they successfully start_, regardless of success or failure. This includes runs that:
-- Fail due to an error
-- Are interrupted or canceled
-- Time out mid-run
+<div class="alert alert-info">
+Failed executions are not exempt from billing. All published executions are billed once they successfully start, regardless of success or failure. This includes runs that:
+<ul>
+    <li> Fail due to an error
+    <li> Are interrupted or canceled
+    <li> Time out mid-run
+</ul>
+</div>
 
-Unpublished (test or draft) runs are **not billed**. If the execution is halted by rate-limiting or is unable to run due to an invalid configuration, the execution doesn't successfully start and is **not billed**. 
-
-### How is usage tracked?
+### Usage tracking
 Execution usage is continuously tracked and visible in your [Datadog Plan & Usage page][1]. Under **Products**, select **Workflow** Executions for the filter. This is the best source of truth in your account for billing information. 
 
 Further information can be found in the [Workflows Overview dashboard][2], but this dashboard does not reflect billing complexities, such as free allotments of workflows. This dashboard is based on execution metrics, before any billing considerations take place. 
 
-## Included Workflow Allotments by SKU
+## Included workflow allotments by SKU
 Certain Datadog product SKUs include Workflow Automation allotments as part of their pricing:
 
   | SKU                       | Included Workflow Executions | Allotment Basis | 
@@ -56,7 +57,7 @@ Certain Datadog product SKUs include Workflow Automation allotments as part of t
 
 These included executions are automatically applied to your account each month and used before any committed or on-demand executions. They are not reflected in [your Plan & Usage page][1] and do not show up on your bill.
 
-### Included Automations
+### Included automations
 Workflows triggered automatically or manually by events from the following products are **free** and included in their respective SKU pricing:
 - [**Incident Management**][9]
 - [**On-Call**][10]
