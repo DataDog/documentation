@@ -12,6 +12,11 @@ further_reading:
 ## Overview
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Azure Functions. To collect additional metrics, install the [Datadog Azure integration][5].
 
+Here is the list of supported runtimes, operating systems (OS) and hosting plans for Azure Functions monitoring:
+- **Runtimes**: .NET, Node.js, Python, Java
+- **Operating Systems (OS)**: Windows, Linux
+- **Hosting Plans**: Dedicated (App Service) Plan, Premium Plan, Consumption Plan, Flex Consumption Plan
+
 The recommended installation method depends on your Azure Function’s configuration:
 - For .NET Windows Azure Functions running on Dedicated/App Service or Premium plans: use the [Datadog .NET APM Extension][9].
 - For all other configurations (including different runtimes, operating systems, or hosting plans): Follow the instructions below to install the Serverless Compatibility Layer.
