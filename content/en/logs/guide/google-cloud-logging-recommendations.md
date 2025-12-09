@@ -20,18 +20,16 @@ Set `--worker-machine-type` to `n2-standard-4` for the best performance-to-cost 
 
 ### Machine count
 
-Set `--max-workers` to cap the number of workers needed for peak EPS.
+Dataflow autoscaling adjusts worker count based on load. You can set `--max-workers` to cap the number of workers needed for peak EPS, which can help to avoid over-provisioning.
 
-Dataflow autoscaling adjusts worker count based on load. To avoid over-provisioning, always set `--max-workers` when you deploy the pipeline.
-
-Storage is provisioned statically:
+Storage for worker machines is provisioned statically:
 
 An autoscaling pipeline provisions one persistent disk for each potential streaming worker. The default disk size is 400 GB. `--max-workers` sets the maximum, and disks mount to the workers that are running, including at startup.
 
-Each worker can attach up to 15 persistent disks, so the minimum starting workers is ⌈--max-workers/15⌉. For example, with `--max-workers=20`:
+Each worker can attach up to 15 persistent disks, so the minimum starting workers is ⌈--max-workers/15⌉. For example, with `--max-workers=25`:
 
-- Storage is fixed at 20 persistent disks (8 TB total).
-- Compute scales from a minimum of 2 workers (⌈20/15⌉) up to 20.
+- Storage is fixed at 25 persistent disks (10 TB total).
+- Compute scales from a minimum of 2 workers (⌈25/15⌉) up to 20.
 Large unused disks can add cost if only a few workers run most of the time.
 
 To size your workers, follow these steps:
@@ -70,15 +68,15 @@ Set the `parallelism` parameter to twice the total vCPUs across the maximum numb
 
 This maximizes parallel connections to the Datadog logs endpoint, and increases EPS.
 
-The default value `1` disables parallelism and limits throughput. Override it to target 2–4 connections per vCPU at maximum workers. As a guideline, multiply the max workers by vCPUs per worker, then double the result.
+The default value `1` disables parallelism and limits throughput. Override it to target two to four connections per vCPU at maximum workers. As a guideline, multiply the max workers by vCPUs per worker, then double the result.
 
 To determine the total number of parallel connections to Datadog across all Dataflow workers, use the following formula:
 
-$$(\text"Paralellism" = {\text"Max vCPU"} × 2)$$
+$$(\text"Parallelism" = {\text"Max vCPU"} × 2)$$
 
-Example: 8 vCPUs ⇒ 8 × 2 = 16.
+Example: 4 vCPUs ⇒ 4 × 2 = 8.
 
-For this example, you would set the parallelism parameter to a value of 16 based on the previous example calculation. However, remember to use your own unique values and calculations when you deploy this reference architecture in your environment.
+For this example, you would set the parallelism parameter to a value of `8` based on the previous example calculation. However, remember to use your own unique values and calculations when you deploy this reference architecture in your environment.
 
 ### Batch count
 
