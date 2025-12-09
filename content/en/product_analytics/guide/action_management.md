@@ -3,28 +3,24 @@ title: Action Management
 private: true
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
+<div class="alert alert-info">
   Action Management is in preview.
-{{< /callout >}} 
+</div>
 
 
 ## Overview
 
 
-Action Management is a no-code way of labeling autocaptured actions in your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page guides you through getting started with using Action Management. 
+Action Management is a no-code way to label autocaptured actions from your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page describes how to get started with Action Management.
 
-As this feature is in preview, here are some important things to consider:
-- There are known limitations with the feature which Datadog is addressing. See the [limitations section](#known-limitations) for more information.
-
-- Your feedback is invaluable to Datadog during this preview stage. Share all of your feedback with the Product Analytics team using [Slack](https://chat.datadoghq.com/). If you do not have a Slack channel for sharing your feedback, send an message to Milene Darnis on the Datadog Public Slack.
+Your feedback is invaluable to Datadog during this preview stage. Share all of your feedback with the Product Analytics Product Manager, Milene Darnis team using [Datadog Public Slack](https://chat.datadoghq.com/).
 
 
 ## Setup 
 
 ### Step 1 - Install the browser extension 
 
-Labeling actions with Datadog Product Analytics requires this [Chrome extension][1]. See the [manual instructions if needed][2]. 
- 
+Action Management requires [The Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, refer to the [manual instructions][2]. 
 
 ### Step 2 - Label your actions 
 
@@ -33,35 +29,34 @@ Labeling actions with Datadog Product Analytics requires this [Chrome extension]
 {{< img src="product_analytics/action_management/pana-labeled-new-action.png" alt="Actions page to start labelling" style="width:90%;">}}
 
 
-2. Use the **Navigate Site** mode to browse through your website and identify the location of your actions. 
+2. Use the **Navigate Site** mode to browse to the location of the actions you want to label.
 
 {{< img src="product_analytics/action_management/pana-point-click-interface.png" alt="The point and click interface used to locate and labed your action " style="width:90%;">}}
 
 
-3. Use the **Label Actions** mode, then click on each action to name your actions. 
+3. In **Label Actions** mode, click on a UI element to add and label it as an action.
 
-{{< img src="product_analytics/action_management/pana-label-mode.png" alt="Clik on and label your actions." style="width:90%;">}}
+{{< img src="product_analytics/action_management/pana-label-mode.png" alt="Click on and label your actions." style="width:90%;">}}
 
 
-4. When in **Label Actions** mode, click on the action you want to define to see more details about it ( _Past 7 days volume_, _XPath_, _other Labeled Actions on the selected action_)
+4. While in **Label Actions** mode, click on the action you want to define to see more details about it.
 
 {{< img src="product_analytics/action_management/pana-new-label-action.png" alt="Define your selected actions." style="width:90%;">}}
 
 
-5. When you are ready, click on **"New Labeled Action"** to:
-- Limit the action on the current page or define an action for that selector on any page
-- Limit to the target text on that page or define an action regardless of the target text (useful if your website is localized in several languages for instance)
-- Give a name (required) and description (optional) to the action
+5. When you are ready, click on **New Labeled Action** to:
+    - Limit the action on the current page or define an action for that selector on any page.
+    - Limit to the target text on that page or define an action regardless of the target text (useful if your website is localized in several languages for instance).
+    - Give a name (required) and description (optional) to the action.
 
-You can also hold the Shift key to select other actions on the page and label several actions under the same name (is used as an “OR” in analysis). 
-
+You can also hold the Shift key to select multiple actions on the page and label them under the same name. This functionality enables "OR" analysis.
 
 ### Step 3 - Retrieve your Label your actions 
 
 After you define an action, you can find them in the [list of labeled actions][4]. From there you can:
-- Filter to only see your actions
-- Edit actions
-- See this action in a funnel, retention chart or see related replays directly from there
+- Filter to only see your actions.
+- Edit actions.
+- See this action in a funnel, retention chart, or see related replays.
 
  {{< img src="product_analytics/action_management/pana-action-list.png" alt="List of your labeled actions." style="width:90%;">}}
 
