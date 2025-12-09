@@ -11,7 +11,7 @@ further_reading:
 
 The Real User Monitoring (RUM) Explorer displays individual events in a side panel. To open the event side panel in the [RUM Explorer][1], click on a table row in the **List** visualization type.
 
-Use the side panel header to view contextual information about your users (OS, country, browser) and event-specific details like view path and loading type. For Synthetic test runs, click the test ID to view the result.
+Use the side panel header to view contextual information about your users (environment, country) and event-specific details like view path and loading type. For Synthetic test runs, click the test ID to view the result.
 
 The distribution visualization at the top helps you understand whether the current view is close to the median or is an outlier. Use the metric dropdown to switch between {{< tooltip text="Loading Time" tooltip="Time until the page is ready and no network request or DOM mutation is happening. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-telemetry'>Learn more</a>" >}}, {{< tooltip text="Time To First Byte" tooltip="Time elapsed until the first byte of the view has been received. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-telemetry'>Learn more</a>" >}}, {{< tooltip text="FCP" tooltip="First Contentful Paint: Time when the browser first renders any text, image, or SVG. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Learn more</a>" >}}, {{< tooltip text="LCP" tooltip="Largest Contentful Paint: Time when the largest DOM object in the viewport is rendered. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Learn more</a>" >}}, {{< tooltip text="CLS" tooltip="Cumulative Layout Shift: Quantifies unexpected page movement due to dynamically loaded content. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Learn more</a>" >}}, and {{< tooltip text="INP" tooltip="Interaction to Next Paint: Longest duration between a user's interaction and the next paint. <a href='/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals'>Learn more</a>" >}}. Adjust the time range to view data by day, week, or month.
 
@@ -21,7 +21,7 @@ Click any tab to view its corresponding details and investigate specific aspects
 
 ## Waterfall tab
 
-The **Waterfall** tab displays an interactive timeline of your view's performance, including [Core Web Vitals][3] with pass or fail indicators.
+The **Waterfall** tab displays an interactive timeline of the events associated with this view. Key performance markers are overlayed, including [Core Web Vitals][3] or mobile timings, with pass or fail indicators.
 
 {{< img src="real_user_monitoring/explorer/events/events_side_panel-3.mp4" alt="Interacting with the waterfall timeline in the Waterfall tab" video="true" width="80%" >}}
 
