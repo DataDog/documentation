@@ -260,7 +260,7 @@ Additionally, to enable advanced eBPF-based metrics such as GPU core utilization
 
 ## Set up GPU Monitoring on a mixed Kubernetes cluster
 
-In a mixed cluster, some nodes have GPU devices while other nodes do not. Due to the way that the NVIDIA device plugin for Kubernetes works, the Agent needs to have a specific runtime class to access the GPU devices that is only present on GPU nodes. Therefore, two separate DaemonSets, one for the runtime class in GPU nodes, and another for non-GPU nodes, are required.
+In a mixed Kubernetes cluster, some nodes have GPU devices while other nodes do not. Two separate DaemonSets are required (one for the runtime class in GPU nodes, and another for non-GPU nodes) due to runtime class requirements for the NVIDIA device plugin for Kubernetes. 
 
 The recommended method to set up the Agent in this case is using the Datadog Operator, version 1.20 or greater, which provides features to make this setup easier. However, for compatibility reasons instructions are also provided for Helm installations or for older versions of the Datadog Operator.
 
