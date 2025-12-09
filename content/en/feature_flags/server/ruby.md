@@ -1,13 +1,13 @@
 ---
-title: Python Feature Flags
-description: Set up Datadog Feature Flags for Python applications.
+title: Ruby Feature Flags
+description: Set up Datadog Feature Flags for Ruby applications.
 further_reading:
-- link: "/feature_flags/setup/server/"
+- link: "/feature_flags/server/"
   tag: "Documentation"
   text: "Server-Side Feature Flags"
-- link: "/tracing/trace_collection/dd_libraries/python/"
+- link: "/tracing/trace_collection/dd_libraries/ruby/"
   tag: "Documentation"
-  text: "Python Tracing"
+  text: "Ruby Tracing"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
@@ -16,7 +16,7 @@ Feature Flags are in Preview. Complete the form to request access.
 
 ## Overview
 
-This page describes how to instrument your Python application with the Datadog Feature Flags SDK.
+This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK.
 
 Documentation coming soon.
 
