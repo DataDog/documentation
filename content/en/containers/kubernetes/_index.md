@@ -53,16 +53,16 @@ The Datadog Operator flow installs the Datadog Operator and uses Custom Resource
 
 The Helm Chart flow installs the Datadog components more directly and offers similar toggles for observability features.
 
-Both options allow you to manage a simple configuration. Letting the Datadog Operator or Helm Chart create the Datadog Agent DaemonSet, Cluster Agent Deployment, and all their dependencies for your Kubernetes based monitoring.
+Both options allow you to manage a configuration: the Datadog Operator or Helm chart creates the Datadog Agent DaemonSet, Cluster Agent Deployment, and all their dependencies for your Kubernetes-based monitoring.
 
 See [Supported Versions][6] for the full list of Kubernetes versions supported by the Datadog Agent.
 
 
 ### Manual installation
 
-The [in-app installation tool in Fleet Automation][5] provides a guided way to build your configurations. However if you prefer, consult the [Kubernetes installation docs][7] for steps on how to deploy and configure the Datadog Operator or Datadog Helm Chart manually in your enviornment.
+The [in-app installation tool in Fleet Automation][5] provides a guided way to build your configurations. You can also see the [Kubernetes installation docs][7] for steps on how to deploy and configure the Datadog Operator or Datadog Helm chart manually in your enviornment.
 
-Datadog recommends to take advantage of the Datadog Operator or the Datadog Helm Chart to deploy all the Kubernetes resources for you. If you need to deploy the all the manifests directly consult the full [Kubernetes manual installation docs here][8].
+Datadog recommends that you use the Datadog Operator or the Datadog Helm Chart to deploy all the Kubernetes resources for you. If you need to deploy the all the manifests directly consult the full [Kubernetes manual installation documentation][8].
 
 For Agent commands, see the [Agent Commands guides][9]. For information on the Datadog Cluster Agent and its role, see [Cluster Agent for Kubernetes][3].
 
