@@ -4,6 +4,9 @@ code_lang: kubernetes_gateway
 type: multi-code-lang
 code_lang_weight: 2
 further_reading:
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"

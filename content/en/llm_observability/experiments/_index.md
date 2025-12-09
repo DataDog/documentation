@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/llm-experiments/"
     tag: "Blog"
     text: "Create and monitor LLM experiments with Datadog"
+  - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+    tag: Blog
+    text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
 ---
 
 {{< img src="llm_observability/experiments/filtered_experiments.png" alt="LLM Observability, Experiment view. Heading: 'Comparing 12 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}

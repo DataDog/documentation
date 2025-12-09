@@ -5,7 +5,7 @@ further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
-- link: "/cloud_cost_management/tags/tag_pipelines"
+- link: "/cloud_cost_management/allocation/tag_pipelines"
   tag: "Documentation"
   text: "Tag Pipelines"
 - link: "/cloud_cost_management/tags/tag_explorer"
@@ -132,7 +132,7 @@ Other tag sources (such as AWS Organization tags, integration tile tags, and sim
 [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
 [2]: /cloud_cost_management/container_cost_allocation
 [3]: /cloud_cost_management/setup/aws/#aws-resource-tags
-[4]: /cloud_cost_management/tags/tag_pipelines
+[4]: /cloud_cost_management/allocation/tag_pipelines
 [5]: /cloud_cost_management/tags/tag_explorer
 [6]: /cloud_cost_management/allocation/custom_allocation_rules
 [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html
