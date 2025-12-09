@@ -12,7 +12,7 @@ title: Recopilación de logs de Android
 
 ## Información general
 
-Envía logs a Datadog desde tus aplicaciones de Android con [la biblioteca de registro del cliente `dd-sdk-android-logs` de Datadog][1] y aprovecha las siguientes características:
+Envía logs a Datadog desde tus aplicaciones de Android con [la librería de registro del cliente `dd-sdk-android-logs` de Datadog][1] y aprovecha las siguientes características:
 
 * Loguear en Datadog en formato JSON de forma nativa.
 * Añade `context` y atributos personalizados adicionales a cada log enviado.
@@ -22,7 +22,7 @@ Envía logs a Datadog desde tus aplicaciones de Android con [la biblioteca de re
 
 ## Configuración
 
-1. Añade la dependencia de Gradle declarando la biblioteca como una dependencia en el archivo `build.gradle` a nivel de módulo. Asegúrate de sustituir `x.x.x` en el siguiente ejemplo por la última versión de [dd-sdk-android-logs][2].
+1. Añade la dependencia de Gradle declarando la librería como una dependencia en el archivo `build.gradle` a nivel de módulo. Asegúrate de sustituir `x.x.x` en el siguiente ejemplo por la última versión de [dd-sdk-android-logs][2].
 
     ```groovy
     dependencies {
@@ -313,7 +313,7 @@ Envía logs a Datadog desde tus aplicaciones de Android con [la biblioteca de re
     }
    ```
 
-   Al escribir tu aplicación, puedes activar los logs de desarrollo llamando al método `setVerbosity`. Todos los mensajes internos de la biblioteca con una prioridad igual o superior al nivel proporcionado se loguean en Logcat de Android:
+   Al escribir tu aplicación, puedes activar los logs de desarrollo llamando al método `setVerbosity`. Todos los mensajes internos de la librería con una prioridad igual o superior al nivel proporcionado se loguean en Logcat de Android:
    ```kotlin
    Datadog.setVerbosity(Log.INFO)
    ```
@@ -378,10 +378,10 @@ Envía logs a Datadog desde tus aplicaciones de Android con [la biblioteca de re
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       try { 
-           doSomething() 
+       try {
+           doSomething()
        } catch (e: IOException) {
-           logger.e("Error while doing something", e) 
+           logger.e("Error while doing something", e)
        }
    ```
    {{% /tab %}}
@@ -492,7 +492,7 @@ Para más información, consulta [Empezando con etiquetas][7].
 
 Por defecto, los siguientes atributos se añaden a todos los logs enviados por un registrador:
 
-* `http.useragent` y sus propiedades extraídas `device` y `OS` 
+* `http.useragent` y sus propiedades extraídas `device` y `OS`
 * `network.client.ip` y sus propiedades geográficas extraídas (`country`, `city`)
 
 Utiliza la función `addAttribute("<ATTRIBUTE_KEY>", "<ATTRIBUTE_VALUE>")` para añadir un atributo personalizado a todos los logs enviados por un registrador específico:

@@ -67,7 +67,7 @@ Aprovecha la integración con Statuspage para:
 
 {{% site-region region="gov" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La integración de la Gestión de incidentes no es compatible con el sitio {{< region-param key=dd_datacenter code="true" >}}.
 </div>
 {{% /site-region %}}

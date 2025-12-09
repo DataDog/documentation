@@ -309,13 +309,11 @@ namespace Example
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Submit historical metrics with the Datadog Forwarder
+### Submit historical metrics
 
-In most cases, Datadog recommends that you use the Datadog Lambda extension to submit custom metrics. However, the Lambda extension can only submit metrics with a current timestamp.
+Use the Datadog Lambda Extension to submit historical metrics. These metrics can have timestamps up to one hour in the past.
 
-To submit historical metrics, use the Datadog Forwarder. These metrics can have timestamps within the last one hour.
-
-Start by [installing Serverless Monitoring for AWS Lambda][1]. Ensure that you have installed the Datadog Lambda Forwarder.
+Start by [installing Serverless Monitoring for AWS Lambda][1]. Ensure that you have installed the latest Datadog Lambda Extension.
 
 Then, choose your runtime:
 
@@ -469,28 +467,6 @@ For example:
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
-
-#### Submitting many data points
-
-Using the Forwarder to submit many data points for the same metric and the same set of tags (for example, inside a big `for`-loop) may impact Lambda performance and CloudWatch cost.
-
-You can aggregate the data points in your application to avoid the overhead.
-
-For example, in Python:
-
-```python
-def lambda_handler(event, context):
-
-    # Inefficient when event['Records'] contains many records
-    for record in event['Records']:
-      lambda_metric("record_count", 1)
-
-    # Improved implementation
-    record_count = 0
-    for record in event['Records']:
-      record_count += 1
-    lambda_metric("record_count", record_count)
-```
 
 ### Understanding distribution metrics
 

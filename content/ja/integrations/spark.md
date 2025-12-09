@@ -76,7 +76,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> は、Spark および Databricks のジョブやクラスターを監視、トラブルシューティング、コスト最適化するのに役立ちます。<br/><br/>
 このページでは、Spark のメトリクスおよびログの取り込み方法のみを説明します。
 </div>

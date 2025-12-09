@@ -297,7 +297,7 @@ Datadog モニターから、[`@-notification` 機能](https://make.preview.powe
    - `Microsoft Entra ID` > `Manage` > `Users` に移動します。
    - リストで該当ユーザーを見つけ、`User principal name` 列から UPN をコピーします。
 
-<div class="alert alert-warning">プライベート チャネル向けに User として投稿される Workflows Webhook ハンドルでは、ユーザー メンションはサポートされません。Workflows Webhook を User として投稿する際にユーザー メンションを含めると失敗します。Workflows Webhooks でユーザー メンションを使用するには、Flow Bot を使用する必要があります。</div>
+<div class="alert alert-danger">プライベート チャネル向けに User として投稿される Workflows Webhook ハンドルでは、ユーザー メンションはサポートされません。Workflows Webhook を User として投稿する際にユーザー メンションを含めると失敗します。Workflows Webhooks でユーザー メンションを使用するには、Flow Bot を使用する必要があります。</div>
 
 確実な配信を確認するため、Datadog はモニター通知のテストを推奨します。手順については、[通知のテスト](https://docs.datadoghq.com/monitors/notify/#test-notifications) を参照してください。
 
@@ -815,7 +815,7 @@ Datadog にテナントを追加する前にボットをチームに追加した
 
 **例**: `@teams-handle <at>user1@microsoft.com</at> <at>user2@microsoft.com</at> <at>user3@microsoft.com</at>`
 
-<div class="alert alert-warning">通知に複数のユーザー メンションが含まれ、そのうち 1 つが無効な場合でも、有効なユーザーには通知が届きますが、無効なユーザー メンションが原因でメンションの順序が入れ替わって表示されることがあります。</div>
+<div class="alert alert-danger">通知に複数のユーザー メンションが含まれ、そのうち 1 つが無効な場合でも、有効なユーザーには通知が届きますが、無効なユーザー メンションが原因でメンションの順序が入れ替わって表示されることがあります。</div>
 
 {{< /site-region >}}
 

@@ -10,7 +10,7 @@ further_reading:
 title: 새로운 이벤트 기능으로 마이그레이션
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog의 기존 이벤트 스트림(Event Stream) 및 이벤트 모니터링이 <strong>2022년 6월 30일</strong>에 중단됩니다. Datadog은 모든 고객을 새롭고 향상된 이벤트 경험으로 마이그레이션하고 있습니다. 이 페이지에는 이번 마이그레이션에 대한 중요한 정보가 포함되어 있습니다. 중단일 전에 이 페이지의 단계에 따라 기존 이벤트 시각화 및 모니터가 계속해서 제대로 작동하는지 확인하세요.</div>
 
 

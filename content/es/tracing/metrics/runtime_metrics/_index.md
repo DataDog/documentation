@@ -40,17 +40,17 @@ Las métricas de tiempo de ejecución están disponibles para varios lenguajes d
 {{% tab "Java" %}}
 
 - **Activado por defecto**: Sí
-- **Versión de la biblioteca**: 0.29.0 o posterior
+- **Versión de la librería**: 0.29.0 o posterior
 - **Tiempos de ejecución**: Java 8 o posterior
 
-<div class="alert alert-warning">La recopilación de métricas de JMX no es compatible con los entornos AWS Lambda.</div>
+<div class="alert alert-danger">La recopilación de métricas de JMX no es compatible con los entornos AWS Lambda.</div>
 
 {{% /tab %}}
 
 {{% tab "Python" %}}
 
   - **Activado por defecto**: No
-  - **Versión de la biblioteca**: 0.30.0 o posterior
+  - **Versión de la librería**: 0.30.0 o posterior
   - **Nivel de compatibilidad**: Vista previa
   - **Tiempos de ejecución**: Todas las versiones de Python compatibles
 
@@ -59,7 +59,7 @@ Las métricas de tiempo de ejecución están disponibles para varios lenguajes d
 {{% tab "Ruby" %}}
 
   - **Activado por defecto**: No
-  - **Versión de la biblioteca**: 0.44.0 o posterior
+  - **Versión de la librería**: 0.44.0 o posterior
   - **Tiempos de ejecución**: Todas las versiones de Ruby compatibles
 
 
@@ -70,7 +70,7 @@ Las métricas de tiempo de ejecución están disponibles para varios lenguajes d
 {{% tab "Go" %}}
 
   - **Activado por defecto**: No
-  - **Versión de la biblioteca**: 1.18.0 o posterior
+  - **Versión de la librería**: 1.18.0 o posterior
   - **Tiempos de ejecución**: Todas las versiones de Go compatibles
 
 {{% /tab %}}
@@ -78,7 +78,7 @@ Las métricas de tiempo de ejecución están disponibles para varios lenguajes d
 {{% tab "Node.js" %}}
 
   - **Activado por defecto**: No
-  - **Versión de la biblioteca**: 3.0.0 o posterior
+  - **Versión de la librería**: 3.0.0 o posterior
   - **Tiempos de ejecución**: Todas las versiones de Node.js compatibles
 
 {{% /tab %}}
@@ -86,7 +86,7 @@ Las métricas de tiempo de ejecución están disponibles para varios lenguajes d
 {{% tab ".NET" %}}
 
   - **Activado por defecto**: No
-  - **Versión de la biblioteca**: 1.23.0 o posterior
+  - **Versión de la librería**: 1.23.0 o posterior
   - **Tiempos de ejecución**: .NET Framework 4.6.1 o posterior y .NET Core 3.1 o posterior (incluyendo .NET 5 y posteriores).
 
 #### Permisos para Internet Information Services (IIS)
@@ -104,12 +104,12 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">No se admiten métricas en tiempo de ejecución para PHP.</div>
+<div class="alert alert-danger">No se admiten métricas en tiempo de ejecución para PHP.</div>
 
 {{% /tab %}}
 {{% tab "C++" %}}
 
-<div class="alert alert-warning">No se admiten métricas en tiempo de ejecución para C++.</div>
+<div class="alert alert-danger">No se admiten métricas en tiempo de ejecución para C++.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -159,11 +159,11 @@ Utiliza las siguientes variables de entorno para configurar métricas de tiempo 
 
 `DD_AGENT_HOST`
 : **Por defecto**: `localhost` <br>
-**Descripción**: Define la dirección del host para el envío de métricas de la biblioteca de rastreo. Puede ser un nombre de host o una dirección IP.
+**Descripción**: Define la dirección del host para el envío de métricas de la librería de rastreo. Puede ser un nombre de host o una dirección IP.
 
 `DD_DOGSTATSD_PORT`
 : **Por defecto**: `8125` <br>
-**Descripción**: Define el puerto para el envío de métricas de la biblioteca de rastreo.
+**Descripción**: Define el puerto para el envío de métricas de la librería de rastreo.
 
 #### Configuración basada en códigos
 
@@ -188,7 +188,7 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-<div class="alert alert-warning">Esto sólo se aplica si no estás utilizando <code>ddtrace-run</code></div>
+<div class="alert alert-danger">Esto sólo se aplica si no estás utilizando <code>ddtrace-run</code></div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}

@@ -64,12 +64,20 @@ components:
           additionalProperties:
             description: A list of additional properties.
             type: boolean
-          description: 'An object, (in the form `{"namespace1":true/false, "namespace2":true/false}`),
+          description: 'An object (in the form `{"namespace1":true/false, "namespace2":true/false}`)
+            containing user-supplied overrides
 
-            that enables or disables metric collection for specific AWS namespaces
-            for this
+            for AWS namespace metric collection. **Important**: This field only contains
+            namespaces explicitly configured through API calls,
 
-            AWS account only.'
+            not the comprehensive enabled or disabled status of all namespaces. If
+            a namespace is absent from this field, it uses Datadog''s
+
+            internal defaults (all namespaces enabled by default, except `AWS/SQS`,
+            `AWS/ElasticMapReduce`, and `AWS/Usage`).
+
+            For a complete view of all namespace statuses, use the V2 AWS Integration
+            API instead.'
           example:
             auto_scaling: false
             opswork: false
@@ -2982,6 +2990,8 @@ components:
       - ci_tests
       - ci_pipelines
       - incident_analytics
+      - product_analytics
+      - on_call_events
       example: logs
       type: string
       x-enum-varnames:
@@ -2996,6 +3006,8 @@ components:
       - CI_TESTS
       - CI_PIPELINES
       - INCIDENT_ANALYTICS
+      - PRODUCT_ANALYTICS
+      - ON_CALL_EVENTS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -3307,10 +3319,8 @@ components:
       - value
       type: object
     FunnelWidgetDefinition:
-      description: 'The funnel visualization displays a funnel of user sessions that
+      description: The funnel visualization displays a funnel of user sessions that
         maps a sequence of view navigation and user interaction in your application.
-
-        '
       properties:
         requests:
           description: Request payload used to query items.
@@ -3395,15 +3405,19 @@ components:
           example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
         cloud_run_revision_filters:
-          description: 'Limit the Cloud Run revisions that are pulled into Datadog
-            by using tags.
+          deprecated: true
+          description: 'List of filters to limit the Cloud Run revisions that are
+            pulled into Datadog by using tags.
 
             Only Cloud Run revision resources that apply to specified filters are
-            imported into Datadog.'
+            imported into Datadog.
+
+            **Note:** This field is deprecated. Instead, use `monitored_resource_configs`
+            with `type=cloud_run_revision`'
           example:
           - $KEY:$VALUE
           items:
-            description: Cloud Run Filters
+            description: Cloud Run revision filters
             type: string
           type: array
         errors:
@@ -3416,11 +3430,16 @@ components:
             type: string
           type: array
         host_filters:
-          description: 'Limit the GCE instances that are pulled into Datadog by using
-            tags.
+          deprecated: true
+          description: 'A comma-separated list of filters to limit the VM instances
+            that are pulled into Datadog by using tags.
 
-            Only hosts that match one of the defined tags are imported into Datadog.'
-          example: key:value,filter:example
+            Only VM instance resources that apply to specified filters are imported
+            into Datadog.
+
+            **Note:** This field is deprecated. Instead, use `monitored_resource_configs`
+            with `type=gce_instance`'
+          example: $KEY1:$VALUE1,$KEY2:$VALUE2
           type: string
         is_cspm_enabled:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
@@ -3441,6 +3460,15 @@ components:
             account.'
           example: true
           type: boolean
+        monitored_resource_configs:
+          description: Configurations for GCP monitored resources.
+          example:
+          - filters:
+            - $KEY:$VALUE
+            type: gce_instance
+          items:
+            $ref: '#/components/schemas/GCPMonitoredResourceConfig'
+          type: array
         private_key:
           description: Your private key name found in your JSON service account key.
           example: private_key
@@ -3473,6 +3501,37 @@ components:
       items:
         $ref: '#/components/schemas/GCPAccount'
       type: array
+    GCPMonitoredResourceConfig:
+      description: Configuration for a GCP monitored resource.
+      properties:
+        filters:
+          description: 'List of filters to limit the monitored resources that are
+            pulled into Datadog by using tags.
+
+            Only monitored resources that apply to specified filters are imported
+            into Datadog.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: A monitored resource filter
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/GCPMonitoredResourceConfigType'
+      type: object
+    GCPMonitoredResourceConfigType:
+      description: The GCP monitored resource type. Only a subset of resource types
+        are supported.
+      enum:
+      - cloud_function
+      - cloud_run_revision
+      - gce_instance
+      example: gce_instance
+      type: string
+      x-enum-varnames:
+      - CLOUD_FUNCTION
+      - CLOUD_RUN_REVISION
+      - GCE_INSTANCE
     GeomapWidgetDefinition:
       description: This visualization displays a series of values by country on a
         world map.
@@ -4951,9 +5010,7 @@ components:
       description: 'The list stream visualization displays a table of recent events
         in your application that
 
-        match a search criteria using user-defined columns.
-
-        '
+        match a search criteria using user-defined columns.'
       properties:
         legend_size:
           $ref: '#/components/schemas/WidgetLegendSize'
@@ -5861,9 +5918,7 @@ components:
             line.
           example: 'rule_name_1 foo
 
-            rule_name_2 bar
-
-            '
+            rule_name_2 bar'
           type: string
         support_rules:
           default: ''
@@ -5871,9 +5926,7 @@ components:
             line.
           example: 'rule_name_1 foo
 
-            rule_name_2 bar
-
-            '
+            rule_name_2 bar'
           type: string
       required:
       - match_rules
@@ -6395,6 +6448,7 @@ components:
       - $ref: '#/components/schemas/LogsSpanRemapper'
       - $ref: '#/components/schemas/LogsArrayProcessor'
       - $ref: '#/components/schemas/LogsDecoderProcessor'
+      - $ref: '#/components/schemas/LogsSchemaProcessor'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6456,6 +6510,243 @@ components:
             periods.
           type: string
       type: object
+    LogsSchemaCategoryMapper:
+      description: "Use the Schema Category Mapper to categorize log event into enum
+        fields.\nIn the case of OCSF, they can be used to map sibling fields which
+        are composed of an ID and a name.\n\n**Notes**:\n\n- The syntax of the query
+        is the one of Logs Explorer search bar.\n  The query can be done on any log
+        attribute or tag, whether it is a facet or not.\n  Wildcards can also be used
+        inside your query.\n- Categories are executed in order and processing stops
+        at the first match.\n  Make sure categories are properly ordered in case a
+        log could match multiple queries.\n- Sibling fields always have a numerical
+        ID field and a human-readable string name.\n- A fallback section handles cases
+        where the name or ID value matches a specific value.\n  If the name matches
+        \"Other\" or the ID matches 99, the value of the sibling name field will be
+        pulled from a source field from the original log."
+      properties:
+        categories:
+          description: 'Array of filters to match or not a log and their
+
+            corresponding `name` to assign a custom value to the log.'
+          example:
+          - filter:
+              query: '@eventName:(ConsoleLogin OR ExternalIdPDirectoryLogin OR UserAuthentication
+                OR Authenticate)'
+            id: 1
+            name: Logon
+          - filter:
+              query: '@eventName:*'
+            id: 99
+            name: Other
+          items:
+            $ref: '#/components/schemas/LogsSchemaCategoryMapperCategory'
+          type: array
+        fallback:
+          $ref: '#/components/schemas/LogsSchemaCategoryMapperFallback'
+        name:
+          description: Name of the logs schema category mapper.
+          example: activity_id and activity_name
+          type: string
+        targets:
+          $ref: '#/components/schemas/LogsSchemaCategoryMapperTargets'
+        type:
+          $ref: '#/components/schemas/LogsSchemaCategoryMapperType'
+      required:
+      - categories
+      - targets
+      - type
+      - name
+      type: object
+    LogsSchemaCategoryMapperCategory:
+      description: Object describing the logs filter with corresponding category ID
+        and name assignment.
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        id:
+          description: ID to inject into the category.
+          example: 1
+          format: int64
+          type: integer
+        name:
+          description: Value to assign to target schema field.
+          example: Password Change
+          type: string
+      required:
+      - filter
+      - id
+      - name
+      type: object
+    LogsSchemaCategoryMapperFallback:
+      description: Used to override hardcoded category values with a value pulled
+        from a source attribute on the log.
+      properties:
+        sources:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: Fallback sources used to populate value of field.
+          example: {}
+          type: object
+        values:
+          additionalProperties:
+            type: string
+          description: Values that define when the fallback is used.
+          example: {}
+          type: object
+      type: object
+    LogsSchemaCategoryMapperTargets:
+      description: Name of the target attributes which value is defined by the matching
+        category.
+      properties:
+        id:
+          description: ID of the field to map log attributes to.
+          example: ocsf.activity_id
+          type: string
+        name:
+          description: Name of the field to map log attributes to.
+          example: ocsf.activity_name
+          type: string
+      type: object
+    LogsSchemaCategoryMapperType:
+      description: Type of logs schema category mapper.
+      enum:
+      - schema-category-mapper
+      example: schema-category-mapper
+      type: string
+      x-enum-varnames:
+      - SCHEMA_CATEGORY_MAPPER
+    LogsSchemaData:
+      description: Configuration of the schema data to use.
+      properties:
+        class_name:
+          description: Class name of the schema to use.
+          example: Account Change
+          type: string
+        class_uid:
+          description: Class UID of the schema to use.
+          example: 3001
+          format: int64
+          type: integer
+        profiles:
+          description: Optional list of profiles to modify the schema.
+          example:
+          - security_control
+          - host
+          items:
+            type: string
+          type: array
+        schema_type:
+          description: Type of schema to use.
+          example: ocsf
+          type: string
+        version:
+          description: Version of the schema to use.
+          example: 1.5.0
+          type: string
+      required:
+      - schema_type
+      - version
+      - class_uid
+      - class_name
+      type: object
+    LogsSchemaMapper:
+      description: Configuration of the schema processor mapper to use.
+      oneOf:
+      - $ref: '#/components/schemas/LogsSchemaRemapper'
+      - $ref: '#/components/schemas/LogsSchemaCategoryMapper'
+    LogsSchemaProcessor:
+      description: A processor that has additional validations and checks for a given
+        schema. Currently supported schema types include OCSF.
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        mappers:
+          description: The `LogsSchemaProcessor` `mappers`.
+          example:
+          - name: Map userIdentity to ocsf.user.uid
+            sources:
+            - userIdentity.principalId
+            target: ocsf.user.uid
+            type: schema-remapper
+          items:
+            $ref: '#/components/schemas/LogsSchemaMapper'
+          type: array
+        name:
+          description: Name of the processor.
+          example: Map additionalEventData.LoginTo to ocsf.dst_endpoint.svc_name
+          type: string
+        schema:
+          $ref: '#/components/schemas/LogsSchemaData'
+        type:
+          $ref: '#/components/schemas/LogsSchemaProcessorType'
+      required:
+      - name
+      - mappers
+      - type
+      - schema
+      type: object
+    LogsSchemaProcessorType:
+      default: schema-processor
+      description: Type of logs schema processor.
+      enum:
+      - schema-processor
+      example: schema-processor
+      type: string
+      x-enum-varnames:
+      - SCHEMA_PROCESSOR
+    LogsSchemaRemapper:
+      description: The schema remapper maps source log fields to their correct fields.
+      properties:
+        name:
+          description: Name of the logs schema remapper.
+          example: Map userIdentity.principalId, responseElements.role.roleId, responseElements.user.userId
+            to ocsf.user.uid
+          type: string
+        override_on_conflict:
+          default: false
+          description: Override or not the target element if already set.
+          type: boolean
+        preserve_source:
+          default: false
+          description: Remove or preserve the remapped source element.
+          type: boolean
+        sources:
+          description: Array of source attributes.
+          example:
+          - userIdentity.principalId
+          - responseElements.role.roleId
+          - responseElements.user.userId
+          items:
+            description: Attribute used as a source to remap its value to the target
+              attribute.
+            type: string
+          type: array
+        target:
+          description: Target field to map log source field to.
+          example: ocsf.user.uid
+          type: string
+        target_format:
+          $ref: '#/components/schemas/TargetFormatType'
+        type:
+          $ref: '#/components/schemas/LogsSchemaRemapperType'
+      required:
+      - name
+      - sources
+      - target
+      - type
+      type: object
+    LogsSchemaRemapperType:
+      description: Type of logs schema remapper.
+      enum:
+      - schema-remapper
+      example: schema-remapper
+      type: string
+      x-enum-varnames:
+      - SCHEMA_REMAPPER
     LogsServiceRemapper:
       description: 'Use this processor if you want to assign one or more attributes
         as the official service.
@@ -7071,6 +7362,12 @@ components:
     Monitor:
       description: Object describing a monitor.
       properties:
+        assets:
+          description: The list of monitor assets tied to a monitor, which represents
+            key links for users to take action on monitor alerts (for example, runbooks).
+          items:
+            $ref: '#/components/schemas/MonitorAsset'
+          type: array
         created:
           description: Timestamp of the monitor creation.
           format: date-time
@@ -7154,6 +7451,52 @@ components:
       - type
       - query
       type: object
+    MonitorAsset:
+      description: 'Represents key links tied to a monitor to help users take action
+        on alerts.
+
+        This feature is in Preview and only available to users with the feature enabled.'
+      properties:
+        category:
+          $ref: '#/components/schemas/MonitorAssetCategory'
+        name:
+          description: Name for the monitor asset
+          example: Monitor Runbook
+          type: string
+        resource_key:
+          description: Represents the identifier of the internal Datadog resource
+            that this asset represents. IDs in this field should be passed in as strings.
+          example: '12345'
+          type: string
+        resource_type:
+          $ref: '#/components/schemas/MonitorAssetResourceType'
+        url:
+          description: URL link for the asset. For links with an internal resource
+            type set, this should be the relative path to where the Datadog domain
+            is appended internally. For external links, this should be the full URL
+            path.
+          example: /notebooks/12345
+          type: string
+      required:
+      - name
+      - url
+      - category
+      type: object
+    MonitorAssetCategory:
+      description: Indicates the type of asset this entity represents on a monitor.
+      enum:
+      - runbook
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - RUNBOOK
+    MonitorAssetResourceType:
+      description: Type of internal Datadog resource associated with a monitor asset.
+      enum:
+      - notebook
+      type: string
+      x-enum-varnames:
+      - NOTEBOOK
     MonitorDeviceID:
       description: ID of the device the Synthetics monitor is running on. Same as
         `SyntheticsDeviceID`.
@@ -7190,9 +7533,7 @@ components:
 
 
         This field is in preview. The draft value is only available to customers with
-        the feature enabled.
-
-        '
+        the feature enabled.'
       enum:
       - draft
       - published
@@ -8270,6 +8611,13 @@ components:
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
+        assets:
+          description: The list of monitor assets tied to a monitor, which represents
+            key links for users to take action on monitor alerts (for example, runbooks).
+          items:
+            $ref: '#/components/schemas/MonitorAsset'
+          nullable: true
+          type: array
         created:
           description: Timestamp of the monitor creation.
           format: date-time
@@ -9638,7 +9986,7 @@ components:
                 text: '## Some test markdown
 
 
-                  ```js
+                  ```
 
                   var x, y;
 
@@ -9712,6 +10060,8 @@ components:
       type: object
     NotebookGlobalTime:
       description: Notebook global timeframe.
+      example:
+        live_span: 1h
       oneOf:
       - $ref: '#/components/schemas/NotebookRelativeTime'
       - $ref: '#/components/schemas/NotebookAbsoluteTime'
@@ -9880,7 +10230,7 @@ components:
                 text: '## Some test markdown
 
 
-                  ```js
+                  ```
 
                   var x, y;
 
@@ -10040,7 +10390,7 @@ components:
                 text: '## Some test markdown
 
 
-                  ```js
+                  ```
 
                   var x, y;
 
@@ -14211,9 +14561,7 @@ components:
       - LG
     SplitGraphWidgetDefinition:
       description: 'The split graph widget allows you to create repeating units of
-        a graph - one for each value in a group (for example: one per service)
-
-        '
+        a graph - one for each value in a group (for example: one per service)'
       properties:
         has_uniform_y_axes:
           description: Normalize y axes across graphs
@@ -15017,6 +15365,7 @@ components:
     SyntheticsAssertionTargetValue:
       description: Value used by the operator in assertions. Can be either a number
         or string.
+      example: 0.0
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTargetValueNumber'
       - $ref: '#/components/schemas/SyntheticsAssertionTargetValueString'
@@ -15331,9 +15680,7 @@ components:
 
             rkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtp
 
-            Z3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE
-
-            '
+            Z3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE'
           type: string
         type:
           $ref: '#/components/schemas/SyntheticsBasicAuthSigv4Type'
@@ -15791,7 +16138,6 @@ components:
           example: 12345
           format: int64
           type: integer
-          x-secret: true
         isEnabled:
           description: Determines whether RUM data is collected during test runs.
           example: true
@@ -17529,6 +17875,11 @@ components:
           description: Allows loading insecure content for an HTTP request in an API
             test.
           type: boolean
+        blockedRequestPatterns:
+          description: Array of URL patterns to block.
+          items:
+            type: string
+          type: array
         checkCertificateRevocation:
           description: For SSL tests, whether or not the test should fail on revoked
             certificate in stapled OCSP.
@@ -20644,6 +20995,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Enterprise
+            hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current date for all organizations.
@@ -20652,6 +21008,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Pro hosts
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         appsec_fargate_count_avg:
@@ -20704,6 +21065,11 @@ components:
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for all organizations.
+          format: int64
+          type: integer
+        bits_ai_investigations_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
@@ -21125,6 +21491,11 @@ components:
             users over all hours in the current date for all organizations.
           format: int64
           type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for all organizations.
+          format: int64
+          type: integer
         indexed_events_count_sum:
           description: Shows the sum of all log events indexed over all hours in the
             current date for all organizations.
@@ -21251,6 +21622,11 @@ components:
         oci_host_top99p:
           description: Shows the 99th percentile of all Oracle Cloud Infrastructure
             hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        on_call_seat_hwm:
+          description: Shows the high-water mark of On-Call seats over all hours in
+            the current date for all organizations.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -21492,19 +21868,163 @@ components:
             organizations.
           format: int64
           type: integer
+        serverless_apps_apm_apm_azure_appservice_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure App Service instances for the current
+            date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_azurefunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Function instances for the current date
+            for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_containerapp_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Container App instances for the current
+            date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_fargate_ecs_tasks_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Fargate Elastic Container Service tasks for
+            the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudfunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Function instances
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudrun_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Run instances for
+            the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_appservice_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure App Service instances
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_azurefunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Function instances
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_containerapp_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Container App instances
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudfunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Function instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudrun_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Run instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for the current date for all
+            organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_container_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Container
+            App instances for the current date for all organizations.
+          format: int64
+          type: integer
         serverless_apps_azure_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
-            for the given date and given org.
+          description: Shows the average number of Serverless Apps for Azure for the
+            given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_azure_function_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Function
+            App instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_web_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Web App
+            instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_ecs_avg:
+          description: Shows the average number of Serverless Apps for Elastic Container
+            Service for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_eks_avg:
+          description: Shows the average number of Serverless Apps for Elastic Kubernetes
+            Service for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_container_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Container App instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_function_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Function App instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_web_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Web App instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_functions_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Functions instances for the current date
+            for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_run_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Run instances for the current date for
+            all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_functions_instances_avg:
+          description: Shows the average number of Serverless Apps for Google Cloud
+            Platform Cloud Functions instances for the current date for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_run_instances_avg:
+          description: Shows the average number of Serverless Apps for Google Cloud
+            Platform Cloud Run instances for the current date for all organizations.
           format: int64
           type: integer
         serverless_apps_google_count_avg:
-          description: Shows the average of the number of Serverless Apps for Google
-            Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Google Cloud
+            for the given date and given org.
           format: int64
           type: integer
         serverless_apps_total_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
-            and Google Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Azure and Google
+            Cloud for the given date and given org.
           format: int64
           type: integer
         siem_analyzed_logs_add_on_count_sum:
@@ -21588,6 +22108,11 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Enterprise
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current month for the given org.
@@ -21596,6 +22121,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p:
+          description: Shows the 99th percentile of all distinct standalone Pro hosts
+            over all hours in the current date for the given org.
           format: int64
           type: integer
         appsec_fargate_count_avg:
@@ -21648,6 +22178,11 @@ components:
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for the given org.
+          format: int64
+          type: integer
+        bits_ai_investigations_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
@@ -22077,6 +22612,11 @@ components:
             users over all hours in the current date for the given org.
           format: int64
           type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for the given organization.
+          format: int64
+          type: integer
         indexed_events_count_sum:
           deprecated: true
           description: Shows the sum of all log events indexed over all hours in the
@@ -22204,6 +22744,11 @@ components:
         oci_host_top99p:
           description: Shows the 99th percentile of all Oracle Cloud Infrastructure
             hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        on_call_seat_hwm:
+          description: Shows the high-water mark of On-Call seats over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -22446,19 +22991,163 @@ components:
             given org.
           format: int64
           type: integer
-        serverless_apps_azure_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
+        serverless_apps_apm_apm_azure_appservice_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure App Service instances for the given date
+            and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_azurefunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Function instances for the given date
+            and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_containerapp_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Container App instances for the given
+            date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_fargate_ecs_tasks_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Fargate Elastic Container Service tasks for
+            the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudfunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Function instances
             for the given date and given org.
           format: int64
           type: integer
+        serverless_apps_apm_apm_gcp_cloudrun_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Run instances for
+            the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_appservice_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure App Service instances
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_azurefunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Function instances
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_containerapp_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Container App instances
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudfunction_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Function instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudrun_instances_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Run instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_avg:
+          description: Shows the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for the given date and given
+            org.
+          format: int64
+          type: integer
+        serverless_apps_azure_container_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Container
+            App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_azure_count_avg:
+          description: Shows the average number of Serverless Apps for Azure for the
+            given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_azure_function_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Function
+            App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_azure_web_app_instances_avg:
+          description: Shows the average number of Serverless Apps for Azure Web App
+            instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_ecs_avg:
+          description: Shows the average number of Serverless Apps for Elastic Container
+            Service for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_eks_avg:
+          description: Shows the average number of Serverless Apps for Elastic Kubernetes
+            Service for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_container_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Container App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_function_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Function App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_web_app_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Azure Web App instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_functions_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Functions instances for the given date
+            and given org.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_run_instances_avg:
+          description: Shows the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Run instances for the given date and given
+            org.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_functions_instances_avg:
+          description: Shows the average number of Serverless Apps for Google Cloud
+            Platform Cloud Functions instances for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_run_instances_avg:
+          description: Shows the average number of Serverless Apps for Google Cloud
+            Platform Cloud Run instances for the given date and given org.
+          format: int64
+          type: integer
         serverless_apps_google_count_avg:
-          description: Shows the average of the number of Serverless Apps for Google
-            Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Google Cloud
+            for the given date and given org.
           format: int64
           type: integer
         serverless_apps_total_count_avg:
-          description: Shows the average of the number of Serverless Apps for Azure
-            and Google Cloud for the given date and given org.
+          description: Shows the average number of Serverless Apps for Azure and Google
+            Cloud for the given date and given org.
           format: int64
           type: integer
         siem_analyzed_logs_add_on_count_sum:
@@ -22536,6 +23225,11 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
+        apm_enterprise_standalone_hosts_top99p_sum:
+          description: Shows the sum of the 99th percentile of all distinct standalone
+            Enterprise hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         apm_fargate_count_avg_sum:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current month for all organizations.
@@ -22544,6 +23238,11 @@ components:
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        apm_pro_standalone_hosts_top99p_sum:
+          description: Shows the sum of the 99th percentile of all distinct standalone
+            Pro hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         appsec_fargate_count_avg_sum:
@@ -22601,6 +23300,11 @@ components:
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current month for all organizations.
+          format: int64
+          type: integer
+        bits_ai_investigations_agg_sum:
+          description: Shows the sum of all Bits AI Investigations over all hours
+            in the current month for all organizations.
           format: int64
           type: integer
         browser_rum_lite_session_count_agg_sum:
@@ -23030,6 +23734,11 @@ components:
             active users in the current month for all organizations.
           format: int64
           type: integer
+        incident_management_seats_hwm_sum:
+          description: Shows the sum of the high-water marks of Incident Management
+            seats over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         indexed_events_count_agg_sum:
           deprecated: true
           description: Shows the sum of all log events indexed over all hours in the
@@ -23178,6 +23887,11 @@ components:
         oci_host_top99p_sum:
           description: Shows the 99th percentile of Oracle Cloud Infrastructure hosts
             over all hours in the current months for all organizations
+          format: int64
+          type: integer
+        on_call_seat_hwm_sum:
+          description: Shows the sum of the high-water marks of On-Call seats over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         online_archive_events_count_agg_sum:
@@ -23431,9 +24145,153 @@ components:
             organizations.
           format: int64
           type: integer
+        serverless_apps_apm_apm_azure_appservice_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Azure App Service instances in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_azurefunction_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Function instances in the current month
+            for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_azure_containerapp_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Azure Container App instances in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_fargate_ecs_tasks_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Fargate Elastic Container Service tasks in
+            the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudfunction_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Function instances
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_apm_gcp_cloudrun_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring for Google Cloud Platform Cloud Run instances in
+            the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_appservice_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure App Service instances
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_azurefunction_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Function instances
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_azure_containerapp_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Azure Container App instances
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudfunction_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Function instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_apm_gcp_cloudrun_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate for Google Cloud Platform Cloud
+            Run instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_apm_excl_fargate_avg_sum:
+          description: Sum of the average number of Serverless Apps with Application
+            Performance Monitoring excluding Fargate in the current month for all
+            organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_container_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure Container
+            App instances in the current month for all organizations.
+          format: int64
+          type: integer
         serverless_apps_azure_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure in the
             current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_function_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure Function
+            App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_web_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure Web
+            App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_ecs_avg_sum:
+          description: Sum of the average number of Serverless Apps for Elastic Container
+            Service in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_eks_avg_sum:
+          description: Sum of the average number of Serverless Apps for Elastic Kubernetes
+            Service in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_container_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Azure Container App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_function_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Azure Function App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_azure_web_app_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Azure Web App instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_functions_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Functions instances in the current month
+            for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_excl_fargate_google_cloud_run_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps excluding Fargate
+            for Google Cloud Platform Cloud Run instances in the current month for
+            all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_functions_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Google Cloud
+            Platform Cloud Functions instances in the current month for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_cloud_run_instances_avg_sum:
+          description: Sum of the average number of Serverless Apps for Google Cloud
+            Platform Cloud Run instances in the current month for all organizations.
           format: int64
           type: integer
         serverless_apps_google_count_avg_sum:
@@ -24525,7 +25383,7 @@ components:
         display_type:
           description: "Combination of:\n  - A severity error, warning, ok, or info\n
             \ - A line type: dashed, solid, or bold\nIn this case of a Distribution
-            widget, this can be set to be `x_axis_percentile`.\n"
+            widget, this can be set to be `x_axis_percentile`."
           example: error dashed
           type: string
         label:
@@ -25096,8 +25954,6 @@ paths:
       tags:
       - IP Ranges
       x-menu-order: 1
-      x-undo:
-        type: safe
   /api/v1/api_key:
     get:
       description: Get all API keys available for your account.
@@ -25125,8 +25981,6 @@ paths:
         operator: OR
         permissions:
         - api_keys_read
-      x-undo:
-        type: safe
     post:
       description: Creates an API key with a given name.
       operationId: CreateAPIKey
@@ -25166,12 +26020,6 @@ paths:
         operator: OR
         permissions:
         - api_keys_write
-      x-undo:
-        operationId: DeleteAPIKey
-        parameters:
-        - name: key
-          source: <RESPONSE_PATH>
-        type: unsafe
   /api/v1/api_key/{key}:
     delete:
       description: Delete a given API key.
@@ -25218,8 +26066,6 @@ paths:
         operator: OR
         permissions:
         - api_keys_delete
-      x-undo:
-        type: idempotent
     get:
       description: Get a given API key.
       operationId: GetAPIKey
@@ -25259,8 +26105,6 @@ paths:
         operator: OR
         permissions:
         - api_keys_read
-      x-undo:
-        type: safe
     put:
       description: Edit an API key name.
       operationId: UpdateAPIKey
@@ -25313,11 +26157,11 @@ paths:
         operator: OR
         permissions:
         - api_keys_write
-      x-undo:
-        type: idempotent
   /api/v1/application_key:
     get:
-      description: Get all application keys available for your Datadog account.
+      description: 'Get all application keys available for your Datadog account.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: ListApplicationKeys
       responses:
         '200':
@@ -25343,10 +26187,10 @@ paths:
         permissions:
         - org_app_keys_read
         - user_app_keys
-      x-undo:
-        type: safe
     post:
-      description: Create an application key with a given name.
+      description: 'Create an application key with a given name.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: CreateApplicationKey
       requestBody:
         content:
@@ -25390,15 +26234,11 @@ paths:
         operator: OR
         permissions:
         - user_app_keys
-      x-undo:
-        operationId: DeleteApplicationKey
-        parameters:
-        - name: key
-          source: <RESPONSE_PATH>
-        type: unsafe
   /api/v1/application_key/{key}:
     delete:
-      description: Delete a given application key.
+      description: 'Delete a given application key.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: DeleteApplicationKey
       parameters:
       - description: The specific APP key you are working with.
@@ -25437,10 +26277,10 @@ paths:
         permissions:
         - org_app_keys_write
         - user_app_keys
-      x-undo:
-        type: idempotent
     get:
-      description: Get a given application key.
+      description: 'Get a given application key.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: GetApplicationKey
       parameters:
       - description: The specific APP key you are working with.
@@ -25479,10 +26319,10 @@ paths:
         permissions:
         - org_app_keys_read
         - user_app_keys
-      x-undo:
-        type: safe
     put:
-      description: Edit an application key name.
+      description: 'Edit an application key name.
+
+        This endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).'
       operationId: UpdateApplicationKey
       parameters:
       - description: The specific APP key you are working with.
@@ -25540,8 +26380,6 @@ paths:
         permissions:
         - org_app_keys_write
         - user_app_keys
-      x-undo:
-        type: idempotent
   /api/v1/check_run:
     post:
       description: 'Submit a list of Service Checks.
@@ -25600,8 +26438,6 @@ paths:
       - Service Checks
       x-codegen-request-body-name: body
       x-menu-order: 1
-      x-undo:
-        type: safe
   /api/v1/daily_custom_reports:
     get:
       deprecated: true
@@ -25667,8 +26503,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/daily_custom_reports/{report_id}:
     get:
       deprecated: true
@@ -25719,8 +26553,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/dashboard:
     delete:
       description: Delete dashboards using the specified IDs. If there are any failures,
@@ -25778,8 +26610,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_write
-      x-undo:
-        type: idempotent
     get:
       description: 'Get all dashboards.
 
@@ -25852,8 +26682,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_read
-      x-undo:
-        type: safe
     patch:
       description: Restore dashboards using the specified IDs. If there are any failures,
         no dashboards will be restored (partial success is not allowed).
@@ -25910,8 +26738,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_write
-      x-undo:
-        type: idempotent
     post:
       description: 'Create a dashboard using the specified options. When defining
         queries in your widgets, take note of which queries should have the `as_count()`
@@ -25957,28 +26783,11 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-given:
-        dashboard:
-          parameters:
-          - file: dashboard_payload.json
-            name: body
-          step: there is a valid "dashboard" in the system
-        screenboard_dashboard:
-          parameters:
-          - file: screenboard_dashboard_payload.json
-            name: body
-          step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
       x-permission:
         operator: OR
         permissions:
         - dashboards_write
-      x-undo:
-        operationId: DeleteDashboard
-        parameters:
-        - name: dashboard_id
-          source: id
-        type: unsafe
   /api/v1/dashboard/lists/manual:
     get:
       description: Fetch all of your existing dashboard list definitions.
@@ -26011,8 +26820,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_read
-      x-undo:
-        type: safe
     post:
       description: Create an empty dashboard list.
       operationId: CreateDashboardList
@@ -26053,23 +26860,11 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
-      x-given:
-        dashboard_list:
-          parameters:
-          - name: body
-            value: "{\n  \"name\": \"{{ unique }}\"\n}"
-          step: there is a valid "dashboard_list" in the system
       x-menu-order: 2
       x-permission:
         operator: OR
         permissions:
         - dashboards_write
-      x-undo:
-        operationId: DeleteDashboardList
-        parameters:
-        - name: list_id
-          source: id
-        type: unsafe
   /api/v1/dashboard/lists/manual/{list_id}:
     delete:
       description: Delete a dashboard list.
@@ -26116,8 +26911,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_write
-      x-undo:
-        type: idempotent
     get:
       description: Fetch an existing dashboard list's definition.
       operationId: GetDashboardList
@@ -26163,8 +26956,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_read
-      x-undo:
-        type: safe
     put:
       description: Update the name of a dashboard list.
       operationId: UpdateDashboardList
@@ -26224,8 +27015,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_write
-      x-undo:
-        type: idempotent
   /api/v1/dashboard/public:
     post:
       description: Share a specified private dashboard, generating a URL at which
@@ -26284,15 +27073,6 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-given:
-        shared_dashboard:
-          parameters:
-          - name: body
-            value: "{\n  \"dashboard_id\": \"{{ dashboard.id }}\",\n  \"dashboard_type\":
-              \"custom_timeboard\",\n  \"share_type\": \"invite\",\n  \"share_list\":
-              [\"{{unique_lower_alnum}}@datadoghq.com\"],\n  \"global_time\": {\n
-              \   \"live_span\": \"1h\"\n  }\n}"
-          step: there is a valid "shared_dashboard" in the system
       x-menu-order: 8
       x-permission:
         operator: OR
@@ -26300,12 +27080,6 @@ paths:
         - dashboards_public_share
         - dashboards_embed_share
         - dashboards_invite_share
-      x-undo:
-        operationId: DeletePublicDashboard
-        parameters:
-        - name: token
-          source: token
-        type: unsafe
   /api/v1/dashboard/public/{token}:
     delete:
       description: Revoke the public URL for a dashboard (rendering it private) associated
@@ -26358,8 +27132,6 @@ paths:
         - dashboards_public_share
         - dashboards_embed_share
         - dashboards_invite_share
-      x-undo:
-        type: idempotent
     get:
       description: Fetch an existing shared dashboard's sharing metadata associated
         with the specified token.
@@ -26406,8 +27178,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_read
-      x-undo:
-        type: safe
     put:
       description: Update a shared dashboard associated with the specified token.
       operationId: UpdatePublicDashboard
@@ -26488,8 +27258,6 @@ paths:
         - dashboards_public_share
         - dashboards_embed_share
         - dashboards_invite_share
-      x-undo:
-        type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
     delete:
       description: Revoke previously sent invitation emails and active sessions used
@@ -26547,8 +27315,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_invite_share
-      x-undo:
-        type: idempotent
     get:
       description: Describe the invitations that exist for the given shared dashboard
         (paginated).
@@ -26608,8 +27374,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_invite_share
-      x-undo:
-        type: safe
     post:
       description: Send emails to specified email addresses containing links to access
         a given authenticated shared dashboard. Email addresses must already belong
@@ -26672,29 +27436,11 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
-      x-given:
-        public_dashboard_invitation:
-          parameters:
-          - name: token
-            value: '"{{ shared_dashboard.token }}"'
-          - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{unique_lower_alnum}}@datadoghq.com\"\n
-              \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
-          step: there is a valid "public_dashboard_invitation" in the system
       x-menu-order: 11
       x-permission:
         operator: OR
         permissions:
         - dashboards_invite_share
-      x-undo:
-        operationId: DeletePublicDashboardInvitation
-        parameters:
-        - name: token
-          source: data.attributes.share_token
-        - name: body
-          template: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{data.attributes.email}}\"\n
-            \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
-        type: unsafe
   /api/v1/dashboard/{dashboard_id}:
     delete:
       description: Delete a dashboard using the specified ID.
@@ -26735,19 +27481,11 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
-      x-given:
-        deleted_dashboard:
-          parameters:
-          - name: dashboard_id
-            source: dashboard.id
-          step: the "dashboard" was deleted
       x-menu-order: 5
       x-permission:
         operator: OR
         permissions:
         - dashboards_write
-      x-undo:
-        type: idempotent
     get:
       description: Get a dashboard using the specified ID.
       operationId: GetDashboard
@@ -26792,8 +27530,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_read
-      x-undo:
-        type: safe
     put:
       description: Update a dashboard using the specified ID.
       operationId: UpdateDashboard
@@ -26852,8 +27588,6 @@ paths:
         operator: OR
         permissions:
         - dashboards_write
-      x-undo:
-        type: idempotent
   /api/v1/distribution_points:
     post:
       description: "The distribution points end-point allows you to post distribution
@@ -26920,8 +27654,6 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 1
-      x-undo:
-        type: safe
   /api/v1/downtime:
     get:
       deprecated: true
@@ -26971,8 +27703,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: safe
     post:
       deprecated: true
       description: Schedule a downtime. **Note:** This endpoint has been deprecated.
@@ -27015,37 +27745,11 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
-      x-given:
-        downtime:
-          parameters:
-          - name: body
-            value: "{\n  \"message\": \"{{ unique }}\",\n  \"start\": {{ timestamp(\"now\")
-              }},\n  \"end\": {{ timestamp(\"now + 1h\") }},\n  \"timezone\": \"Etc/UTC\",\n
-              \ \"scope\": [\"test:{{ unique_lower_alnum }}\"],\n  \"recurrence\":
-              {\n    \"type\": \"weeks\",\n    \"period\": 1,\n    \"week_days\":
-              [\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\"],\n    \"until_date\":
-              {{ timestamp(\"now + 21d\")}}\n  }\n}"
-          step: there is a valid "downtime" in the system
-        downtime_monitor:
-          parameters:
-          - name: body
-            value: "{\n  \"message\": \"{{ unique }}\",\n  \"monitor_id\": {{ monitor.id
-              }},\n  \"start\": {{ timestamp(\"now\") }},\n  \"end\": {{ timestamp(\"now
-              + 7d\") }},\n  \"timezone\": \"Etc/UTC\",\n  \"scope\": [\"*\"],\n  \"mute_first_recovery_notification\":
-              true,\n  \"notify_end_states\": [\"alert\"],\n  \"notify_end_types\":
-              [\"canceled\"]\n}"
-          step: there is a valid "downtime" for a "monitor" in the system
       x-menu-order: 2
       x-permission:
         operator: OR
         permissions:
         - monitors_downtime
-      x-undo:
-        operationId: CancelDowntime
-        parameters:
-        - name: downtime_id
-          source: id
-        type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
       deprecated: true
@@ -27102,8 +27806,6 @@ paths:
         operator: OR
         permissions:
         - monitors_downtime
-      x-undo:
-        type: idempotent
   /api/v1/downtime/{downtime_id}:
     delete:
       deprecated: true
@@ -27149,8 +27851,6 @@ paths:
         operator: OR
         permissions:
         - monitors_downtime
-      x-undo:
-        type: idempotent
     get:
       deprecated: true
       description: Get downtime detail by `downtime_id`. **Note:** This endpoint has
@@ -27199,8 +27899,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: safe
     put:
       deprecated: true
       description: Update a single downtime by `downtime_id`. **Note:** This endpoint
@@ -27264,8 +27962,6 @@ paths:
         operator: OR
         permissions:
         - monitors_downtime
-      x-undo:
-        type: idempotent
   /api/v1/events:
     get:
       description: "The event stream can be queried and filtered by time, priority,
@@ -27381,8 +28077,6 @@ paths:
         operator: OR
         permissions:
         - events_read
-      x-undo:
-        type: safe
     post:
       description: 'This endpoint allows you to post events to the stream.
 
@@ -27417,8 +28111,6 @@ paths:
       - Events
       x-codegen-request-body-name: body
       x-menu-order: 1
-      x-undo:
-        type: safe
   /api/v1/events/{event_id}:
     get:
       description: "This endpoint allows you to query for event details.\n\n**Note**:
@@ -27467,8 +28159,6 @@ paths:
         operator: OR
         permissions:
         - events_read
-      x-undo:
-        type: safe
   /api/v1/graph/embed:
     get:
       description: Gets a list of previously created embeddable graphs.
@@ -27495,8 +28185,6 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
-      x-undo:
-        type: safe
     post:
       description: 'Creates a new embeddable graph.
 
@@ -27547,10 +28235,6 @@ paths:
         operator: OR
         permissions:
         - embeddable_graphs_share
-      x-undo:
-        operationId: TODO
-        parameters: []
-        type: unsafe
   /api/v1/graph/embed/{embed_id}:
     get:
       description: Get the HTML fragment for a previously generated embed with `embed_id`.
@@ -27590,8 +28274,6 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
-      x-undo:
-        type: safe
   /api/v1/graph/embed/{embed_id}/enable:
     get:
       description: Enable a specified embed.
@@ -27632,8 +28314,6 @@ paths:
         operator: OR
         permissions:
         - embeddable_graphs_share
-      x-undo:
-        type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
     get:
       description: Revoke a specified embed.
@@ -27674,8 +28354,6 @@ paths:
         operator: OR
         permissions:
         - embeddable_graphs_share
-      x-undo:
-        type: safe
   /api/v1/graph/snapshot:
     get:
       description: 'Take graph snapshots. Snapshots are PNG images generated by rendering
@@ -27778,8 +28456,6 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
-      x-undo:
-        type: safe
   /api/v1/host/{host_name}/mute:
     post:
       description: Mute a host. **Note:** This creates a [Downtime V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime)
@@ -27825,8 +28501,6 @@ paths:
       - Hosts
       x-codegen-request-body-name: body
       x-menu-order: 3
-      x-undo:
-        type: safe
   /api/v1/host/{host_name}/unmute:
     post:
       description: Unmutes a host. This endpoint takes no JSON arguments.
@@ -27864,8 +28538,6 @@ paths:
       - Hosts
       x-codegen-request-body-name: body
       x-menu-order: 4
-      x-undo:
-        type: safe
   /api/v1/hosts:
     get:
       description: 'This endpoint allows searching for hosts by name, alias, or tag.
@@ -27877,7 +28549,11 @@ paths:
         Results are paginated with a max of 1000 results at a time.
 
         **Note:** If the host is an Amazon EC2 instance, `id` is replaced with `aws_id`
-        in the response.'
+        in the response.
+
+        **Note**: To enrich the data returned by this endpoint with security scans,
+        see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata)
+        endpoint.'
       operationId: ListHosts
       parameters:
       - description: String to filter search results.
@@ -27970,8 +28646,6 @@ paths:
         operator: OR
         permissions:
         - hosts_read
-      x-undo:
-        type: safe
   /api/v1/hosts/totals:
     get:
       description: 'This endpoint returns the total number of active and up hosts
@@ -28023,12 +28697,12 @@ paths:
         operator: OR
         permissions:
         - hosts_read
-      x-undo:
-        type: safe
   /api/v1/integration/aws:
     delete:
-      description: Delete a Datadog-AWS integration matching the specified `account_id`
-        and `role_name parameters`.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Delete a Datadog-AWS integration matching the specified `account_id` and `role_name
+        parameters`.'
       operationId: DeleteAWSAccount
       requestBody:
         content:
@@ -28073,10 +28747,10 @@ paths:
         operator: OR
         permissions:
         - aws_configurations_manage
-      x-undo:
-        type: idempotent
     get:
-      description: List all Datadog-AWS integrations available in your Datadog organization.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        List all Datadog-AWS integrations available in your Datadog organization.'
       operationId: ListAWSAccounts
       parameters:
       - description: Only return AWS accounts that matches this `account_id`.
@@ -28126,10 +28800,10 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_read
-      x-undo:
-        type: safe
     post:
-      description: 'Create a Datadog-Amazon Web Services integration.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Create a Datadog-Amazon Web Services integration.
 
         Using the `POST` method updates your integration configuration
 
@@ -28175,33 +28849,15 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
-      x-given:
-        aws_account:
-          parameters:
-          - name: body
-            origin: request
-            value: "{\n  \"account_id\": \"{{ timestamp(\"now\") }}00\",\n  \"account_specific_namespace_rules\":
-              {\n      \"auto_scaling\": false\n  },\n  \"cspm_resource_collection_enabled\":
-              true,\n  \"excluded_regions\": [\n      \"us-east-1\",\n      \"us-west-2\"\n
-              \ ],\n  \"extended_resource_collection_enabled\": true,\n  \"filter_tags\":
-              [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\": [\n      \"$KEY:$VALUE\"\n
-              \ ],\n  \"metrics_collection_enabled\": false,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
-          step: there is a valid "aws_account" in the system
       x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
         - aws_configurations_manage
-      x-undo:
-        operationId: DeleteAWSAccount
-        parameters:
-        - name: body
-          origin: request
-          template: '{"account_id": "{{ account_id }}", "role_name": "{{ role_name
-            }}"}'
-        type: unsafe
     put:
-      description: Update a Datadog-Amazon Web Services integration.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Update a Datadog-Amazon Web Services integration.'
       operationId: UpdateAWSAccount
       parameters:
       - description: Only return AWS accounts that matches this `account_id`.
@@ -28269,12 +28925,12 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_edit
-      x-undo:
-        type: safe
   /api/v1/integration/aws/available_namespace_rules:
     get:
-      description: List all namespace rules for a given Datadog-AWS integration. This
-        endpoint takes no arguments.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        List all namespace rules for a given Datadog-AWS integration. This endpoint
+        takes no arguments.'
       operationId: ListAvailableAWSNamespaces
       responses:
         '200':
@@ -28305,11 +28961,11 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_read
-      x-undo:
-        type: safe
   /api/v1/integration/aws/event_bridge:
     delete:
-      description: Delete an Amazon EventBridge source.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Delete an Amazon EventBridge source.'
       operationId: DeleteAWSEventBridgeSource
       requestBody:
         content:
@@ -28349,10 +29005,10 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: idempotent
     get:
-      description: Get all Amazon EventBridge sources.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Get all Amazon EventBridge sources.'
       operationId: ListAWSEventBridgeSources
       parameters: []
       responses:
@@ -28383,10 +29039,10 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
-      x-undo:
-        type: safe
     post:
-      description: Create an Amazon EventBridge source.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Create an Amazon EventBridge source.'
       operationId: CreateAWSEventBridgeSource
       requestBody:
         content:
@@ -28426,12 +29082,9 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        operationId: DeleteAWSEventBridgeSource
-        parameters: []
-        type: unsafe
   /api/v1/integration/aws/filtering:
     delete:
+      deprecated: true
       description: Delete a tag filtering entry.
       operationId: DeleteAWSTagFilter
       requestBody:
@@ -28473,9 +29126,8 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_edit
-      x-undo:
-        type: idempotent
     get:
+      deprecated: true
       description: Get all AWS tag filters.
       operationId: ListAWSTagFilters
       parameters:
@@ -28514,9 +29166,8 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_read
-      x-undo:
-        type: safe
     post:
+      deprecated: true
       description: Set an AWS tag filter.
       operationId: CreateAWSTagFilter
       requestBody:
@@ -28561,14 +29212,11 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_edit
-      x-undo:
-        operationId: DeleteAWSTagFilter
-        parameters: []
-        type: unsafe
   /api/v1/integration/aws/generate_new_external_id:
     put:
-      description: Generate a new AWS external ID for a given AWS account ID and role
-        name pair.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoints instead.**
+        Generate a new AWS external ID for a given AWS account ID and role name pair.'
       operationId: CreateNewAWSExternalID
       requestBody:
         content:
@@ -28611,8 +29259,6 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_edit
-      x-undo:
-        type: idempotent
   /api/v1/integration/aws/logs:
     delete:
       description: Delete a Datadog-AWS logs configuration by removing the specific
@@ -28655,9 +29301,8 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_edit
-      x-undo:
-        type: idempotent
     get:
+      deprecated: true
       description: List all Datadog-AWS Logs integrations configured in your Datadog
         account.
       operationId: ListAWSLogsIntegrations
@@ -28702,8 +29347,6 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_read
-      x-undo:
-        type: safe
     post:
       description: Attach the Lambda ARN of the Lambda created for the Datadog-AWS
         log collection to your AWS account ID to enable log collection.
@@ -28745,10 +29388,6 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_edit
-      x-undo:
-        operationId: DeleteAWSLambdaARN
-        parameters: []
-        type: unsafe
   /api/v1/integration/aws/logs/check_async:
     post:
       description: 'Test if permissions are present to add a log-forwarding triggers
@@ -28806,13 +29445,13 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_read
-      x-undo:
-        type: safe
   /api/v1/integration/aws/logs/services:
     get:
-      description: Get the list of current AWS services that Datadog offers automatic
-        log collection. Use returned service IDs with the services parameter for the
-        Enable an AWS service log collection API endpoint.
+      deprecated: true
+      description: '**This endpoint is deprecated - use the V2 endpoint instead.**
+        Get the list of current AWS services that Datadog offers automatic log collection.
+        Use returned service IDs with the services parameter for the Enable an AWS
+        service log collection API endpoint.'
       operationId: ListAWSLogsServices
       responses:
         '200':
@@ -28852,9 +29491,8 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_read
-      x-undo:
-        type: safe
     post:
+      deprecated: true
       description: Enable automatic log collection for a list of services. This should
         be run after running `CreateAWSLambdaARN` to save the configuration.
       operationId: EnableAWSLogServices
@@ -28895,9 +29533,6 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_edit
-      x-undo:
-        operationId: TODO
-        type: unsafe
   /api/v1/integration/aws/logs/services_async:
     post:
       description: "Test if permissions are present to add log-forwarding triggers
@@ -28945,8 +29580,6 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_read
-      x-undo:
-        type: safe
   /api/v1/integration/azure:
     delete:
       description: Delete a given Datadog-Azure integration from your Datadog account.
@@ -28989,8 +29622,6 @@ paths:
         operator: OR
         permissions:
         - azure_configurations_manage
-      x-undo:
-        type: idempotent
     get:
       description: List all Datadog-Azure integrations configured in your Datadog
         account.
@@ -29024,8 +29655,6 @@ paths:
         operator: OR
         permissions:
         - azure_configuration_read
-      x-undo:
-        type: safe
     post:
       description: 'Create a Datadog-Azure integration.
 
@@ -29075,37 +29704,11 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
-      x-given:
-        azure_account:
-          parameters:
-          - name: body
-            origin: request
-            value: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
-              \ \"automute\": true,\n  \"client_id\": \"{{ uuid }}\",\n  \"client_secret\":
-              \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
-              \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
-              true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
-              \ \"metrics_enabled\": true,\n  \"metrics_enabled_default\": true,\n
-              \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"resource_provider_configs\":
-              [\n    {\n      \"namespace\": \"Microsoft.Compute\",\n      \"metrics_enabled\":
-              false\n    },\n    {\n      \"namespace\": \"Microsoft.Web\",\n      \"metrics_enabled\":
-              false\n    }\n  ],\n  \"tenant_name\": \"{{ uuid }}\",\n  \"usage_metrics_enabled\":
-              true\n}"
-          step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-permission:
         operator: OR
         permissions:
         - azure_configurations_manage
-      x-undo:
-        operationId: DeleteAzureIntegration
-        parameters:
-        - name: body
-          origin: request
-          template: "{\n  \"client_id\": \"{{ client_id }}\",\n  \"tenant_name\":
-            \"{{ tenant_name }}\"\n}"
-        type: unsafe
     put:
       description: 'Update a Datadog-Azure integration. Requires an existing `tenant_name`
         and `client_id`.
@@ -29154,8 +29757,6 @@ paths:
         operator: OR
         permissions:
         - azure_configuration_edit
-      x-undo:
-        type: idempotent
   /api/v1/integration/azure/host_filters:
     post:
       description: Update the defined list of host filters for a given Datadog-Azure
@@ -29199,8 +29800,6 @@ paths:
         operator: OR
         permissions:
         - azure_configuration_edit
-      x-undo:
-        type: safe
   /api/v1/integration/gcp:
     delete:
       deprecated: true
@@ -29245,8 +29844,6 @@ paths:
         operator: OR
         permissions:
         - gcp_configurations_manage
-      x-undo:
-        type: idempotent
     get:
       deprecated: true
       description: "This endpoint is deprecated \u2013 use the V2 endpoints instead.
@@ -29281,8 +29878,6 @@ paths:
         operator: OR
         permissions:
         - gcp_configuration_read
-      x-undo:
-        type: safe
     post:
       deprecated: true
       description: "This endpoint is deprecated \u2013 use the V2 endpoints instead.
@@ -29321,35 +29916,11 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
-      x-given:
-        gcp_account:
-          parameters:
-          - name: body
-            origin: request
-            value: "{\n  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n
-              \ \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n  \"client_email\":
-              \"{{unique_hash}}@example.com\",\n  \"client_id\": \"{{ timestamp(\"now\")
-              }}{{ timestamp(\"now\") }}0\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL\",\n
-              \ \"host_filters\": \"key:value,filter:example\",\n  \"is_cspm_enabled\":
-              true,\n  \"is_security_command_center_enabled\": true,\n  \"is_resource_change_collection_enabled\":
-              true,\n  \"private_key\": \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
-              \ \"project_id\": \"datadog-apitest\",\n  \"resource_collection_enabled\":
-              true,\n  \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n
-              \ \"type\": \"service_account\"\n}"
-          step: there is a valid "gcp_account" in the system
       x-menu-order: 2
       x-permission:
         operator: OR
         permissions:
         - gcp_configurations_manage
-      x-undo:
-        operationId: DeleteGCPIntegration
-        parameters:
-        - name: body
-          origin: request
-          template: '{"client_email": "{{ client_email }}", "client_id": "{{ client_id
-            }}", "project_id": "{{ project_id }}"}'
-        type: unsafe
     put:
       deprecated: true
       description: "This endpoint is deprecated \u2013 use the V2 endpoints instead.
@@ -29396,8 +29967,6 @@ paths:
         operator: OR
         permissions:
         - gcp_configuration_edit
-      x-undo:
-        type: idempotent
   /api/v1/integration/pagerduty/configuration/services:
     post:
       description: Create a new service object in the PagerDuty integration.
@@ -29439,12 +30008,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        operationId: DeletePagerDutyIntegrationService
-        parameters:
-        - name: service_name
-          source: service_name
-        type: unsafe
   /api/v1/integration/pagerduty/configuration/services/{service_name}:
     delete:
       description: Delete a single service object in the Datadog-PagerDuty integration.
@@ -29481,8 +30044,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: idempotent
     get:
       description: Get service name in the Datadog-PagerDuty integration.
       operationId: GetPagerDutyIntegrationService
@@ -29522,8 +30083,6 @@ paths:
         operator: OR
         permissions:
         - integrations_read
-      x-undo:
-        type: safe
     put:
       description: Update a single service object in the Datadog-PagerDuty integration.
       operationId: UpdatePagerDutyIntegrationService
@@ -29573,8 +30132,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: idempotent
   /api/v1/integration/slack:
     delete:
       deprecated: true
@@ -29595,8 +30152,6 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 1
-      x-undo:
-        type: idempotent
     get:
       deprecated: true
       description: Get all information about your Datadog-Slack integration.
@@ -29632,8 +30187,6 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 4
-      x-undo:
-        type: safe
     post:
       deprecated: true
       description: 'Create a Datadog-Slack integration. Once created, add a channel
@@ -29675,10 +30228,6 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
-      x-undo:
-        operationId: DeleteSlackIntegration
-        parameters: []
-        type: unsafe
     put:
       deprecated: true
       description: 'Add channels to your existing Datadog-Slack integration.
@@ -29717,8 +30266,6 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
-      x-undo:
-        type: idempotent
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels:
     get:
       description: Get a list of all channels configured for your Datadog-Slack integration.
@@ -29760,8 +30307,6 @@ paths:
         operator: OR
         permissions:
         - integrations_read
-      x-undo:
-        type: safe
     post:
       description: Add a channel to your Datadog-Slack integration.
       operationId: CreateSlackIntegrationChannel
@@ -29810,8 +30355,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: unsafe
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels/{channel_name}:
     delete:
       description: Remove a channel from your Datadog-Slack integration.
@@ -29850,8 +30393,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: idempotent
     get:
       description: Get a channel configured for your Datadog-Slack integration.
       operationId: GetSlackIntegrationChannel
@@ -29893,8 +30434,6 @@ paths:
         operator: OR
         permissions:
         - integrations_read
-      x-undo:
-        type: safe
     patch:
       description: Update a channel used in your Datadog-Slack integration.
       operationId: UpdateSlackIntegrationChannel
@@ -29944,8 +30483,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: idempotent
   /api/v1/integration/webhooks/configuration/custom-variables:
     post:
       description: Creates an endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
@@ -29982,24 +30519,11 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
-      x-given:
-        webhook_custom_variable:
-          parameters:
-          - name: body
-            value: "{\n  \"name\": \"{{ unique_upper_alnum }}\",\n  \"value\": \"variable-value\",\n
-              \ \"is_secret\": false\n}"
-          step: there is a valid "webhook_custom_variable" in the system
       x-menu-order: 5
       x-permission:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        operationId: DeleteWebhooksIntegrationCustomVariable
-        parameters:
-        - name: custom_variable_name
-          source: name
-        type: unsafe
   /api/v1/integration/webhooks/configuration/custom-variables/{custom_variable_name}:
     delete:
       description: Deletes the endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
@@ -30036,8 +30560,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: idempotent
     get:
       description: 'Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.
 
@@ -30088,8 +30610,6 @@ paths:
         operator: OR
         permissions:
         - integrations_read
-      x-undo:
-        type: safe
     put:
       description: Updates the endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
       operationId: UpdateWebhooksIntegrationCustomVariable
@@ -30143,8 +30663,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: safe
   /api/v1/integration/webhooks/configuration/webhooks:
     post:
       description: Creates an endpoint with the name `<WEBHOOK_NAME>`.
@@ -30186,23 +30704,11 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
-      x-given:
-        webhook:
-          parameters:
-          - name: body
-            value: "{\n  \"name\": \"{{ unique }}\",\n  \"url\": \"http://example.com/webhook\"\n}"
-          step: there is a valid "webhook" in the system
       x-menu-order: 1
       x-permission:
         operator: OR
         permissions:
         - create_webhooks
-      x-undo:
-        operationId: DeleteWebhooksIntegration
-        parameters:
-        - name: webhook_name
-          source: name
-        type: unsafe
   /api/v1/integration/webhooks/configuration/webhooks/{webhook_name}:
     delete:
       description: Deletes the endpoint with the name `<WEBHOOK NAME>`.
@@ -30239,8 +30745,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: idempotent
     get:
       description: Gets the content of the webhook with the name `<WEBHOOK_NAME>`.
       operationId: GetWebhooksIntegration
@@ -30286,8 +30790,6 @@ paths:
         operator: OR
         permissions:
         - integrations_read
-      x-undo:
-        type: safe
     put:
       description: Updates the endpoint with the name `<WEBHOOK_NAME>`.
       operationId: UpdateWebhooksIntegration
@@ -30341,8 +30843,6 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
-      x-undo:
-        type: safe
   /api/v1/logs-queries/list:
     post:
       description: 'List endpoint returns logs that match a log search query.
@@ -30402,8 +30902,6 @@ paths:
         operator: OR
         permissions:
         - logs_read_data
-      x-undo:
-        type: safe
   /api/v1/logs/config/index-order:
     get:
       description: Get the current order of your log indexes. This endpoint takes
@@ -30432,8 +30930,6 @@ paths:
         operator: OR
         permissions:
         - logs_read_config
-      x-undo:
-        type: safe
     put:
       description: 'This endpoint updates the index order of your organization.
 
@@ -30477,8 +30973,6 @@ paths:
         operator: OR
         permissions:
         - logs_modify_indexes
-      x-undo:
-        type: idempotent
   /api/v1/logs/config/indexes:
     get:
       description: 'The Index object describes the configuration of a log index.
@@ -30508,8 +31002,6 @@ paths:
         operator: OR
         permissions:
         - logs_read_config
-      x-undo:
-        type: safe
     post:
       description: Creates a new index. Returns the Index object passed in the request
         body when the request is successful.
@@ -30557,10 +31049,6 @@ paths:
         operator: OR
         permissions:
         - logs_modify_indexes
-      x-undo:
-        operationId: TODO
-        parameters: []
-        type: unsafe
   /api/v1/logs/config/indexes/{name}:
     delete:
       description: 'Delete an existing index from your organization. Index deletions
@@ -30600,8 +31088,6 @@ paths:
         operator: OR
         permissions:
         - logs_modify_indexes
-      x-undo:
-        type: idempotent
     get:
       description: Get one log index from your organization. This endpoint takes no
         JSON arguments.
@@ -30642,8 +31128,6 @@ paths:
         operator: OR
         permissions:
         - logs_read_config
-      x-undo:
-        type: safe
     put:
       description: "Update an index as identified by its name.\nReturns the Index
         object passed in the request body when the request is successful.\n\nUsing
@@ -30694,8 +31178,6 @@ paths:
       - Logs Indexes
       x-codegen-request-body-name: body
       x-menu-order: 4
-      x-undo:
-        type: idempotent
   /api/v1/logs/config/pipeline-order:
     get:
       description: 'Get the current order of your pipelines.
@@ -30725,8 +31207,6 @@ paths:
         operator: OR
         permissions:
         - logs_read_config
-      x-undo:
-        type: safe
     put:
       description: 'Update the order of your pipelines. Since logs are processed sequentially,
         reordering a pipeline may change
@@ -30783,8 +31263,6 @@ paths:
         operator: OR
         permissions:
         - logs_write_pipelines
-      x-undo:
-        type: idempotent
   /api/v1/logs/config/pipelines:
     get:
       description: 'Get all pipelines from your organization.
@@ -30814,8 +31292,6 @@ paths:
         operator: OR
         permissions:
         - logs_read_config
-      x-undo:
-        type: safe
     post:
       description: Create a pipeline in your organization.
       operationId: CreateLogsPipeline
@@ -30856,12 +31332,6 @@ paths:
         operator: OR
         permissions:
         - logs_write_pipelines
-      x-undo:
-        operationId: DeleteLogsPipeline
-        parameters:
-        - name: pipeline_id
-          source: id
-        type: unsafe
   /api/v1/logs/config/pipelines/{pipeline_id}:
     delete:
       description: 'Delete a given pipeline from your organization.
@@ -30900,8 +31370,6 @@ paths:
         operator: OR
         permissions:
         - logs_write_pipelines
-      x-undo:
-        type: idempotent
     get:
       description: 'Get a specific pipeline from your organization.
 
@@ -30943,8 +31411,6 @@ paths:
         operator: OR
         permissions:
         - logs_read_config
-      x-undo:
-        type: safe
     put:
       description: "Update a given pipeline configuration to change it\u2019s processors
         or their order.\n\n**Note**: Using this method updates your pipeline configuration
@@ -30995,8 +31461,6 @@ paths:
         operator: OR
         permissions:
         - logs_write_pipelines
-      x-undo:
-        type: idempotent
   /api/v1/metrics:
     get:
       description: Get the list of actively reporting metrics from a given time until
@@ -31062,8 +31526,6 @@ paths:
         operator: OR
         permissions:
         - metrics_read
-      x-undo:
-        type: safe
   /api/v1/metrics/{metric_name}:
     get:
       description: Get metadata about a specific metric.
@@ -31109,8 +31571,6 @@ paths:
         operator: OR
         permissions:
         - metrics_read
-      x-undo:
-        type: safe
     put:
       description: Edit metadata of a specific metric. Find out more about [supported
         types](https://docs.datadoghq.com/developers/metrics).
@@ -31165,8 +31625,6 @@ paths:
         operator: OR
         permissions:
         - metrics_metadata_write
-      x-undo:
-        type: idempotent
   /api/v1/monitor:
     get:
       description: Get all monitors from your organization.
@@ -31287,8 +31745,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: safe
     post:
       description: "Create a monitor using the specified options.\n\n#### Monitor
         Types\n\nThe type of monitor chosen from:\n\n- anomaly: `query alert`\n- APM:
@@ -31485,23 +31941,11 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
-      x-given:
-        monitor:
-          parameters:
-          - file: monitor_payload.json
-            name: body
-          step: there is a valid "monitor" in the system
       x-menu-order: 1
       x-permission:
         operator: OR
         permissions:
         - monitors_write
-      x-undo:
-        operationId: DeleteMonitor
-        parameters:
-        - name: monitor_id
-          source: id
-        type: unsafe
   /api/v1/monitor/can_delete:
     get:
       description: Check if the given monitors can be deleted.
@@ -31559,8 +32003,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: safe
   /api/v1/monitor/groups/search:
     get:
       description: Search and filter your monitor groups details.
@@ -31650,8 +32092,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: safe
   /api/v1/monitor/search:
     get:
       description: Search and filter your monitors details.
@@ -31743,8 +32183,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: safe
   /api/v1/monitor/validate:
     post:
       description: 'Validate the monitor provided in the request.
@@ -31795,8 +32233,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: idempotent
   /api/v1/monitor/{monitor_id}:
     delete:
       description: Delete the specified monitor
@@ -31864,8 +32300,6 @@ paths:
         operator: OR
         permissions:
         - monitors_write
-      x-undo:
-        type: idempotent
     get:
       description: Get details about the specified monitor from your organization.
       operationId: GetMonitor
@@ -31889,6 +32323,13 @@ paths:
           all current active downtimes for the monitor.
         in: query
         name: with_downtimes
+        required: false
+        schema:
+          type: boolean
+      - description: If this argument is set to `true`, the returned data includes
+          all assets tied to this monitor.
+        in: query
+        name: with_assets
         required: false
         schema:
           type: boolean
@@ -31932,8 +32373,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: safe
     put:
       description: Edit the specified monitor.
       operationId: UpdateMonitor
@@ -32000,8 +32439,6 @@ paths:
         operator: OR
         permissions:
         - monitors_write
-      x-undo:
-        type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
       deprecated: true
@@ -32053,8 +32490,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: safe
   /api/v1/monitor/{monitor_id}/mute:
     post:
       description: Mute the specified monitor.
@@ -32122,8 +32557,6 @@ paths:
         operator: OR
         permissions:
         - monitors_write
-      x-undo:
-        type: safe
   /api/v1/monitor/{monitor_id}/unmute:
     post:
       description: Unmute the specified monitor.
@@ -32191,8 +32624,6 @@ paths:
         operator: OR
         permissions:
         - monitors_write
-      x-undo:
-        type: safe
   /api/v1/monitor/{monitor_id}/validate:
     post:
       description: Validate the monitor provided in the request.
@@ -32249,8 +32680,6 @@ paths:
         operator: OR
         permissions:
         - monitors_read
-      x-undo:
-        type: idempotent
   /api/v1/monthly_custom_reports:
     get:
       deprecated: true
@@ -32316,8 +32745,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/monthly_custom_reports/{report_id}:
     get:
       deprecated: true
@@ -32374,8 +32801,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/notebooks:
     get:
       description: 'Get all notebooks. This can also be used to search for notebooks
@@ -32508,8 +32933,6 @@ paths:
         operator: OR
         permissions:
         - notebooks_read
-      x-undo:
-        type: safe
     post:
       description: Create a notebook using the specified options.
       operationId: CreateNotebook
@@ -32582,23 +33005,11 @@ paths:
       tags:
       - Notebooks
       x-codegen-request-body-name: body
-      x-given:
-        notebook:
-          parameters:
-          - file: notebook_payload.json
-            name: body
-          step: there is a valid "notebook" in the system
       x-menu-order: 1
       x-permission:
         operator: OR
         permissions:
         - notebooks_write
-      x-undo:
-        operationId: DeleteNotebook
-        parameters:
-        - name: notebook_id
-          source: data.id
-        type: unsafe
   /api/v1/notebooks/{notebook_id}:
     delete:
       description: Delete a notebook using the specified ID.
@@ -32642,8 +33053,6 @@ paths:
         operator: OR
         permissions:
         - notebooks_write
-      x-undo:
-        type: idempotent
     get:
       description: Get a notebook using the specified notebook ID.
       operationId: GetNotebook
@@ -32690,8 +33099,6 @@ paths:
         operator: OR
         permissions:
         - notebooks_read
-      x-undo:
-        type: safe
     put:
       description: Update a notebook using the specified ID.
       operationId: UpdateNotebook
@@ -32790,8 +33197,6 @@ paths:
         operator: OR
         permissions:
         - notebooks_write
-      x-undo:
-        type: idempotent
   /api/v1/org:
     get:
       description: This endpoint returns data on your top-level organization.
@@ -32819,8 +33224,6 @@ paths:
         operator: OR
         permissions:
         - org_management
-      x-undo:
-        type: safe
     post:
       description: 'Create a child organization.
 
@@ -32877,10 +33280,6 @@ paths:
         operator: OR
         permissions:
         - org_management
-      x-undo:
-        operationId: TODO
-        parameters: []
-        type: unsafe
   /api/v1/org/{public_id}:
     get:
       description: Get organization information.
@@ -32918,8 +33317,6 @@ paths:
       tags:
       - Organizations
       x-menu-order: 3
-      x-undo:
-        type: safe
     put:
       description: Update your organization.
       operationId: UpdateOrg
@@ -32963,8 +33360,6 @@ paths:
       - Organizations
       x-codegen-request-body-name: body
       x-menu-order: 4
-      x-undo:
-        type: idempotent
   /api/v1/org/{public_id}/downgrade:
     post:
       description: Only available for MSP customers. Removes a child organization
@@ -33004,8 +33399,6 @@ paths:
       tags:
       - Organizations
       x-menu-order: 6
-      x-undo:
-        type: unsafe
   /api/v1/org/{public_id}/idp_metadata:
     post:
       description: 'There are a couple of options for updating the Identity Provider
@@ -33065,8 +33458,6 @@ paths:
       - Organizations
       x-codegen-request-body-name: body
       x-menu-order: 5
-      x-undo:
-        type: safe
   /api/v1/query:
     get:
       description: Query timeseries points.
@@ -33126,11 +33517,13 @@ paths:
         operator: OR
         permissions:
         - timeseries_query
-      x-undo:
-        type: safe
   /api/v1/search:
     get:
-      description: Search for metrics from the last 24 hours in Datadog.
+      deprecated: true
+      description: '**Note**: This endpoint is deprecated. Use `/api/v2/metrics` instead.
+
+
+        Search for metrics from the last 24 hours in Datadog.'
       operationId: ListMetrics
       parameters:
       - description: Query string to search metrics upon. Can optionally be prefixed
@@ -33174,8 +33567,6 @@ paths:
         operator: OR
         permissions:
         - metrics_read
-      x-undo:
-        type: safe
   /api/v1/security_analytics/signals/{signal_id}/add_to_incident:
     patch:
       description: Add a security signal to an incident. This makes it possible to
@@ -33227,8 +33618,6 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_signals_write
-      x-undo:
-        type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
     patch:
       deprecated: true
@@ -33280,8 +33669,6 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_signals_write
-      x-undo:
-        type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
     patch:
       deprecated: true
@@ -33333,8 +33720,6 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_signals_write
-      x-undo:
-        type: idempotent
   /api/v1/series:
     post:
       description: "The metrics end-point allows you to post time-series data that
@@ -33407,20 +33792,7 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
-      x-given:
-        metric:
-          parameters:
-          - file: metric_payload.json
-            name: body
-          step: there is a valid "metric" in the system
-        metric_static:
-          parameters:
-          - file: metric_payload_static.json
-            name: body
-          step: there is a valid "metric_static" in the system
       x-menu-order: 1
-      x-undo:
-        type: safe
   /api/v1/service_dependencies:
     get:
       description: 'Get a list of services from APM and their dependencies. The services
@@ -33486,8 +33858,6 @@ paths:
       tags:
       - Service Dependencies
       x-menu-order: 1
-      x-undo:
-        type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
@@ -33563,8 +33933,6 @@ paths:
       tags:
       - Service Dependencies
       x-menu-order: 2
-      x-undo:
-        type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
@@ -33662,8 +34030,6 @@ paths:
         operator: OR
         permissions:
         - slos_read
-      x-undo:
-        type: safe
     post:
       description: Create a service level objective object.
       operationId: CreateSLO
@@ -33704,27 +34070,11 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
-      x-given:
-        slo:
-          parameters:
-          - name: body
-            value: "{\n  \"type\": \"metric\",\n  \"name\": \"{{ unique }}\",\n  \"thresholds\":
-              [{\n    \"timeframe\": \"7d\",\n    \"target\": 95.0,\n    \"warning\":
-              98.0\n  }],\n  \"query\": {\n    \"numerator\": \"sum:httpservice.hits{code:2xx}.as_count()\",\n
-              \   \"denominator\": \"sum:httpservice.hits{!code:3xx}.as_count()\"\n
-              \ }\n}"
-          step: there is a valid "slo" in the system
       x-menu-order: 1
       x-permission:
         operator: OR
         permissions:
         - slos_write
-      x-undo:
-        operationId: DeleteSLO
-        parameters:
-        - name: slo_id
-          source: data[0].id
-        type: unsafe
   /api/v1/slo/bulk_delete:
     post:
       description: 'Delete (or partially delete) multiple service level objective
@@ -33780,8 +34130,6 @@ paths:
         operator: OR
         permissions:
         - slos_write
-      x-undo:
-        type: idempotent
   /api/v1/slo/can_delete:
     get:
       description: 'Check if an SLO can be safely deleted. For example,
@@ -33837,8 +34185,6 @@ paths:
         operator: OR
         permissions:
         - slos_read
-      x-undo:
-        type: safe
   /api/v1/slo/correction:
     get:
       description: Get all Service Level Objective corrections.
@@ -33892,8 +34238,6 @@ paths:
         operator: OR
         permissions:
         - slos_read
-      x-undo:
-        type: safe
     post:
       description: Create an SLO Correction.
       operationId: CreateSLOCorrection
@@ -33940,27 +34284,11 @@ paths:
       tags:
       - Service Level Objective Corrections
       x-codegen-request-body-name: body
-      x-given:
-        correction:
-          parameters:
-          - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"slo_id\": \"{{
-              slo.data[0].id }}\",\n      \"start\": {{ timestamp(\"now\") }},\n      \"end\":
-              {{ timestamp(\"now + 1h\") }},\n      \"category\": \"Other\",\n      \"timezone\":
-              \"UTC\",\n      \"description\": \"Test Correction\"\n     },\n     \"type\":
-              \"correction\"\n  }\n}"
-          step: there is a valid "correction" for "slo"
       x-menu-order: 1
       x-permission:
         operator: OR
         permissions:
         - slos_corrections
-      x-undo:
-        operationId: DeleteSLOCorrection
-        parameters:
-        - name: slo_correction_id
-          source: data.id
-        type: unsafe
   /api/v1/slo/correction/{slo_correction_id}:
     delete:
       description: Permanently delete the specified SLO correction object.
@@ -33993,8 +34321,6 @@ paths:
       tags:
       - Service Level Objective Corrections
       x-menu-order: 5
-      x-undo:
-        type: idempotent
     get:
       description: Get an SLO correction.
       operationId: GetSLOCorrection
@@ -34030,8 +34356,6 @@ paths:
       tags:
       - Service Level Objective Corrections
       x-menu-order: 3
-      x-undo:
-        type: safe
     patch:
       description: Update the specified SLO correction object.
       operationId: UpdateSLOCorrection
@@ -34081,8 +34405,6 @@ paths:
       - Service Level Objective Corrections
       x-codegen-request-body-name: body
       x-menu-order: 4
-      x-undo:
-        type: idempotent
   /api/v1/slo/search:
     get:
       description: Get a list of service level objective objects for your organization.
@@ -34153,8 +34475,6 @@ paths:
         operator: OR
         permissions:
         - slos_read
-      x-undo:
-        type: safe
   /api/v1/slo/{slo_id}:
     delete:
       description: 'Permanently delete the specified service level objective object.
@@ -34218,8 +34538,6 @@ paths:
         operator: OR
         permissions:
         - slos_write
-      x-undo:
-        type: idempotent
     get:
       description: Get a service level objective object.
       operationId: GetSLO
@@ -34271,8 +34589,6 @@ paths:
         operator: OR
         permissions:
         - slos_read
-      x-undo:
-        type: safe
     put:
       description: Update the specified service level objective object.
       operationId: UpdateSLO
@@ -34331,8 +34647,6 @@ paths:
         operator: OR
         permissions:
         - slos_write
-      x-undo:
-        type: idempotent
   /api/v1/slo/{slo_id}/corrections:
     get:
       description: Get corrections applied to an SLO
@@ -34384,8 +34698,6 @@ paths:
         operator: OR
         permissions:
         - slos_read
-      x-undo:
-        type: safe
   /api/v1/slo/{slo_id}/history:
     get:
       description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\nThe
@@ -34477,8 +34789,6 @@ paths:
         operator: OR
         permissions:
         - slos_read
-      x-undo:
-        type: safe
   /api/v1/synthetics/ci/batch/{batch_id}:
     get:
       description: Get a batch's updated details.
@@ -34518,8 +34828,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
   /api/v1/synthetics/locations:
     get:
       description: 'Get the list of public and private locations available for Synthetic
@@ -34548,8 +34856,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_private_location_read
-      x-undo:
-        type: safe
   /api/v1/synthetics/private-locations:
     post:
       description: Create a new Synthetic private location.
@@ -34596,12 +34902,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_private_location_write
-      x-undo:
-        operationId: DeletePrivateLocation
-        parameters:
-        - name: location_id
-          source: private_location.id
-        type: unsafe
   /api/v1/synthetics/private-locations/{location_id}:
     delete:
       description: Delete a Synthetic private location.
@@ -34639,8 +34939,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_private_location_write
-      x-undo:
-        type: idempotent
     get:
       description: Get a Synthetic private location.
       operationId: GetPrivateLocation
@@ -34681,8 +34979,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_private_location_read
-      x-undo:
-        type: safe
     put:
       description: Edit a Synthetic private location.
       operationId: UpdatePrivateLocation
@@ -34731,8 +35027,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_private_location_write
-      x-undo:
-        type: idempotent
   /api/v1/synthetics/settings/default_locations:
     get:
       description: Get the default locations settings.
@@ -34754,8 +35048,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_default_settings_read
-      x-undo:
-        type: safe
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetic tests.
@@ -34815,8 +35107,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
     post:
       deprecated: true
       description: This endpoint is deprecated. To create a test, use [Create an API
@@ -34873,10 +35163,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        operationId: TODO
-        parameters: []
-        type: unsafe
   /api/v1/synthetics/tests/api:
     post:
       description: Create a Synthetic API test.
@@ -35045,33 +35331,11 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-given:
-        synthetics_api_test:
-          parameters:
-          - file: synthetics_api_http_test_payload.json
-            name: body
-          step: there is a valid "synthetics_api_test" in the system
-        synthetics_api_test_multi_step:
-          parameters:
-          - file: synthetics_api_test_multi_step_payload.json
-            name: body
-          step: there is a valid "synthetics_api_test_multi_step" in the system
-        synthetics_api_test_with_wrong_dns:
-          parameters:
-          - file: synthetics_api_test_with_wrong_dns.json
-            name: body
-          step: there is a "synthetics_api_test_with_wrong_dns" in the system
       x-menu-order: 1
       x-permission:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        operationId: DeleteTests
-        parameters:
-        - name: body
-          template: '{"public_ids": ["{{ public_id }}"]}'
-        type: unsafe
   /api/v1/synthetics/tests/api/{public_id}:
     get:
       description: 'Get the detailed configuration associated with
@@ -35121,8 +35385,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
     put:
       description: Edit the configuration of a Synthetic API test.
       operationId: UpdateAPITest
@@ -35187,8 +35449,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        type: idempotent
   /api/v1/synthetics/tests/browser:
     post:
       description: Create a Synthetic browser test.
@@ -35243,12 +35503,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        operationId: DeleteTests
-        parameters:
-        - name: body
-          template: '{"public_ids": ["{{ public_id }}"]}'
-        type: unsafe
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
       description: 'Get the detailed configuration (including steps) associated with
@@ -35298,8 +35552,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
     put:
       description: Edit the configuration of a Synthetic browser test.
       operationId: UpdateBrowserTest
@@ -35364,8 +35616,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
     get:
       description: Get the last 150 test results summaries for a given Synthetic browser
@@ -35439,8 +35689,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
     get:
       description: Get a specific full result from a given Synthetic browser test.
@@ -35496,8 +35744,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
   /api/v1/synthetics/tests/delete:
     post:
       description: Delete multiple Synthetic tests by ID.
@@ -35557,8 +35803,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        type: idempotent
   /api/v1/synthetics/tests/mobile:
     post:
       description: Create a Synthetic mobile test.
@@ -35608,23 +35852,11 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-given:
-        synthetics_mobile_test:
-          parameters:
-          - file: synthetics_mobile_test_payload.json
-            name: body
-          step: there is a valid "synthetics_mobile_test" in the system
       x-menu-order: 2
       x-permission:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        operationId: DeleteTests
-        parameters:
-        - name: body
-          template: '{"public_ids": ["{{ public_id }}"]}'
-        type: unsafe
   /api/v1/synthetics/tests/mobile/{public_id}:
     get:
       description: 'Get the detailed configuration associated with
@@ -35674,8 +35906,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
     put:
       description: Edit the configuration of a Synthetic Mobile test.
       operationId: UpdateMobileTest
@@ -35740,11 +35970,9 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        type: idempotent
   /api/v1/synthetics/tests/search:
     get:
-      description: Search for Synthetic tests and Test Suites.
+      description: Search for Synthetic tests.
       operationId: SearchTests
       parameters:
       - description: The search query.
@@ -35757,12 +35985,6 @@ paths:
           response.
         in: query
         name: include_full_config
-        required: false
-        schema:
-          type: boolean
-      - description: If true, returns suites instead of tests.
-        in: query
-        name: search_suites
         required: false
         schema:
           type: boolean
@@ -35829,8 +36051,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
   /api/v1/synthetics/tests/trigger:
     post:
       description: Trigger a set of Synthetic tests.
@@ -35866,20 +36086,11 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-given:
-        synthetics_api_test_with_wrong_dns_result:
-          parameters:
-          - name: body
-            value: '{"tests": [{"public_id": "{{ synthetics_api_test_with_wrong_dns.public_id
-              }}"}]}'
-          step: the "synthetics_api_test_with_wrong_dns" is triggered
       x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        type: safe
   /api/v1/synthetics/tests/trigger/ci:
     post:
       description: Trigger a set of Synthetic tests for continuous integration.
@@ -35920,8 +36131,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        type: idempotent
   /api/v1/synthetics/tests/uptimes:
     post:
       description: Fetch uptime for multiple Synthetic tests by ID.
@@ -35970,8 +36179,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: idempotent
   /api/v1/synthetics/tests/{public_id}:
     get:
       description: Get the detailed configuration associated with a Synthetic test.
@@ -36019,8 +36226,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
     patch:
       description: Patch the configuration of a Synthetic test with partial data.
       operationId: PatchTest
@@ -36085,8 +36290,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        type: idempotent
     put:
       deprecated: true
       description: This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test)
@@ -36153,8 +36356,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
     get:
       description: Get the last 150 test results summaries for a given Synthetic API
@@ -36226,8 +36427,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
     get:
       description: Get a specific full result from a given Synthetic API test.
@@ -36281,8 +36480,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_read
-      x-undo:
-        type: safe
   /api/v1/synthetics/tests/{public_id}/status:
     put:
       description: Pause or start a Synthetic test by changing the status.
@@ -36344,8 +36541,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
-      x-undo:
-        type: idempotent
   /api/v1/synthetics/variables:
     get:
       description: Get the list of all Synthetic global variables.
@@ -36381,8 +36576,6 @@ paths:
         permissions:
         - synthetics_global_variable_read
         - apm_api_catalog_read
-      x-undo:
-        type: safe
     post:
       description: Create a Synthetic global variable.
       operationId: CreateGlobalVariable
@@ -36429,23 +36622,11 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-given:
-        synthetics_global_variable:
-          parameters:
-          - file: synthetics_global_variable_payload.json
-            name: body
-          step: there is a valid "synthetics_global_variable" in the system
       x-menu-order: 19
       x-permission:
         operator: OR
         permissions:
         - synthetics_global_variable_write
-      x-undo:
-        operationId: DeleteGlobalVariable
-        parameters:
-        - name: variable_id
-          source: id
-        type: unsafe
   /api/v1/synthetics/variables/{variable_id}:
     delete:
       description: Delete a Synthetic global variable.
@@ -36493,8 +36674,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_global_variable_write
-      x-undo:
-        type: idempotent
     get:
       description: Get the detailed configuration of a global variable.
       operationId: GetGlobalVariable
@@ -36535,8 +36714,6 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 20
-      x-undo:
-        type: safe
     put:
       description: Edit a Synthetic global variable.
       operationId: EditGlobalVariable
@@ -36589,8 +36766,6 @@ paths:
         operator: OR
         permissions:
         - synthetics_global_variable_write
-      x-undo:
-        type: idempotent
   /api/v1/tags/hosts:
     get:
       description: Return a mapping of tags to hosts for your whole infrastructure.
@@ -36635,8 +36810,6 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
-      x-undo:
-        type: safe
   /api/v1/tags/hosts/{host_name}:
     delete:
       description: 'This endpoint allows you to remove all user-assigned tags
@@ -36680,8 +36853,6 @@ paths:
       tags:
       - Tags
       x-menu-order: 5
-      x-undo:
-        type: idempotent
     get:
       description: Return the list of tags that apply to a given host.
       operationId: GetHostTags
@@ -36724,8 +36895,6 @@ paths:
       tags:
       - Tags
       x-menu-order: 2
-      x-undo:
-        type: safe
     post:
       description: 'This endpoint allows you to add new tags to a host,
 
@@ -36781,14 +36950,6 @@ paths:
       - Tags
       x-codegen-request-body-name: body
       x-menu-order: 3
-      x-undo:
-        operationId: DeleteHostTags
-        parameters:
-        - name: host_name
-          source: <RESPONSE_PATH>
-        - name: source
-          source: <RESPONSE_PATH>
-        type: unsafe
     put:
       description: 'This endpoint allows you to update/replace all tags in
 
@@ -36843,8 +37004,6 @@ paths:
       - Tags
       x-codegen-request-body-name: body
       x-menu-order: 4
-      x-undo:
-        type: idempotent
   /api/v1/usage/analyzed_logs:
     get:
       deprecated: true
@@ -36912,8 +37071,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/audit_logs:
     get:
       deprecated: true
@@ -36978,8 +37135,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/aws_lambda:
     get:
       deprecated: true
@@ -37045,8 +37200,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/billable-summary:
     get:
       description: 'Get billable usage across your account.
@@ -37110,8 +37263,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/ci-app:
     get:
       deprecated: true
@@ -37179,8 +37330,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/cspm:
     get:
       deprecated: true
@@ -37248,8 +37397,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/cws:
     get:
       deprecated: true
@@ -37317,8 +37464,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/dbm:
     get:
       deprecated: true
@@ -37386,8 +37531,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/fargate:
     get:
       deprecated: true
@@ -37453,8 +37596,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/hosts:
     get:
       deprecated: true
@@ -37520,8 +37661,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/hourly-attribution:
     get:
       description: "Get hourly usage attribution. Multi-region data is available starting
@@ -37617,8 +37756,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/incident-management:
     get:
       deprecated: true
@@ -37686,8 +37823,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/indexed-spans:
     get:
       deprecated: true
@@ -37753,8 +37888,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/ingested-spans:
     get:
       deprecated: true
@@ -37822,8 +37955,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/iot:
     get:
       deprecated: true
@@ -37891,8 +38022,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/logs:
     get:
       deprecated: true
@@ -37958,8 +38087,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/logs-by-retention:
     get:
       deprecated: true
@@ -38027,8 +38154,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/logs_by_index:
     get:
       description: Get hourly usage for logs by index.
@@ -38096,8 +38221,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/monthly-attribution:
     get:
       description: "Get monthly usage attribution. Multi-region data is available
@@ -38209,21 +38332,11 @@ paths:
       summary: Get monthly usage attribution
       tags:
       - Usage Metering
-      x-given:
-        monthly_usage_attribution:
-          parameters:
-          - name: start_month
-            value: '"{{ timeISO(''now - 3d'') }}"'
-          - name: fields
-            value: '"infra_host_usage"'
-          step: there is a valid "monthly_usage_attribution" response
       x-menu-order: 3
       x-permission:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/network_flows:
     get:
       deprecated: true
@@ -38291,8 +38404,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/network_hosts:
     get:
       deprecated: true
@@ -38358,8 +38469,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/online-archive:
     get:
       deprecated: true
@@ -38427,8 +38536,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/profiling:
     get:
       deprecated: true
@@ -38496,8 +38603,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/rum:
     get:
       deprecated: true
@@ -38564,8 +38669,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/rum_sessions:
     get:
       deprecated: true
@@ -38638,8 +38741,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/sds:
     get:
       deprecated: true
@@ -38707,8 +38808,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/snmp:
     get:
       deprecated: true
@@ -38776,8 +38875,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/summary:
     get:
       description: 'Get all usage across your account.
@@ -38857,8 +38954,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/synthetics:
     get:
       deprecated: true
@@ -38924,8 +39019,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/synthetics_api:
     get:
       deprecated: true
@@ -38991,8 +39084,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/synthetics_browser:
     get:
       deprecated: true
@@ -39058,8 +39149,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/timeseries:
     get:
       deprecated: true
@@ -39125,8 +39214,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/usage/top_avg_metrics:
     get:
       description: Get all [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
@@ -39215,8 +39302,6 @@ paths:
         operator: OR
         permissions:
         - usage_read
-      x-undo:
-        type: safe
   /api/v1/user:
     get:
       description: List all users for your organization.
@@ -39249,8 +39334,6 @@ paths:
         operator: OR
         permissions:
         - user_access_read
-      x-undo:
-        type: safe
     post:
       description: 'Create a user for your organization.
 
@@ -39302,12 +39385,6 @@ paths:
         operator: OR
         permissions:
         - user_access_invite
-      x-undo:
-        operationId: DisableUser
-        parameters:
-        - name: user_handle
-          source: user.handle
-        type: unsafe
   /api/v1/user/{user_handle}:
     delete:
       description: 'Delete a user from an organization.
@@ -39356,8 +39433,6 @@ paths:
       tags:
       - Users
       x-menu-order: 5
-      x-undo:
-        type: idempotent
     get:
       description: Get a user's details.
       operationId: GetUser
@@ -39394,8 +39469,6 @@ paths:
       tags:
       - Users
       x-menu-order: 3
-      x-undo:
-        type: safe
     put:
       description: 'Update a user information.
 
@@ -39449,8 +39522,6 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 4
-      x-undo:
-        type: idempotent
   /api/v1/validate:
     get:
       description: Check if the API key (not the APP key) is valid. If invalid, a
@@ -39480,8 +39551,6 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
-      x-undo:
-        type: safe
   /v1/input:
     post:
       deprecated: true
@@ -39584,9 +39653,7 @@ paths:
                 summary: Multi Raw Messages
                 value: 'hello
 
-                  world
-
-                  '
+                  world'
               simple-raw-message:
                 description: 'Submit log string. Log attributes can be passed as query
                   parameters in the URL. This enables the addition of tags or the
@@ -39652,8 +39719,6 @@ paths:
       - Logs
       x-codegen-request-body-name: body
       x-menu-order: 1
-      x-undo:
-        type: safe
   /v1/monitor/mute_all:
     post:
       deprecated: true
@@ -39690,8 +39755,6 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 4
-      x-undo:
-        type: safe
   /v1/monitor/unmute_all:
     post:
       deprecated: true
@@ -39717,8 +39780,6 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 3
-      x-undo:
-        type: safe
 security:
 - apiKeyAuth: []
   appKeyAuth: []

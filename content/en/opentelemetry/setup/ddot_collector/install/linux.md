@@ -1,8 +1,8 @@
 ---
-title: Install the Datadog Distribution of OTel Collector on Linux
+title: Install the DDOT Collector on Linux
 code_lang: linux
 type: multi-code-lang
-code_lang_weight: 2
+code_lang_weight: 3
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
@@ -12,10 +12,6 @@ further_reading:
 {{< callout header="false" btn_hidden="true">}}
   Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is currently in Preview.
 {{< /callout >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -40,7 +36,7 @@ To complete this guide, you need the following:
 To install the DDOT Collector on a Linux host, use the following one-line installation command:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=69.4-1 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=70.0-1 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 This command installs both the core Datadog Agent package and the DDOT Collector that runs alongside it.
@@ -111,7 +107,7 @@ DDOT automatically binds the OpenTelemetry Collector to ports 4317 (grpc) and 43
 
 ### (Optional) Enable additional Datadog features
 
-<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+<div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
 For a complete list of available options, refer to the fully commented reference file at `/etc/datadog-agent/datadog.yaml.example` or the sample [`config_template.yaml`][12] file.
 
@@ -124,84 +120,39 @@ The installation script provides a sample OpenTelemetry Collector configuration 
 {{% collapse-content title="Sample otel-config.yaml file from installation" level="p" %}}
 Sample `otel-config.yaml` from installation will look something like this:
 {{< code-block lang="yaml" filename="otel-config.yaml" collapsible="true" >}}
-extensions:
-  health_check:
-    endpoint: localhost:13133
-  pprof:
-    endpoint: localhost:1777
-  zpages:
-    endpoint: localhost:55679
-  ddflare:
-    endpoint: localhost:7777
-
-
 receivers:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: "otelcol"
+          scrape_interval: 60s
+          static_configs:
+            - targets: ["0.0.0.0:8888"]
   otlp:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
-    # Collect own metrics
-  prometheus:
-    config:
-      scrape_configs:
-      - job_name: 'otel-collector'
-        fallback_scrape_protocol: PrometheusText0.0.4
-        metric_name_validation_scheme: legacy
-        metric_name_escaping_scheme: underscores
-        scrape_interval: 60s
-        scrape_protocols:
-          - PrometheusText0.0.4
-        static_configs:
-        - targets: ['0.0.0.0:8888']
-        metric_relabel_configs:
-        - source_labels: [__name__]
-          regex: ".*grpc_io.*"
-          action: drop
 exporters:
+  debug:
+    verbosity: detailed
   datadog:
-    hostname: "otelcol-docker"
     api:
       key: <DATADOG_API_KEY>
       site: <DATADOG_SITE>
 processors:
   infraattributes:
+    cardinality: 2
   batch:
-  # using the sampler
-  probabilistic_sampler:
-    sampling_percentage: 30
+    timeout: 10s
 connectors:
-  # Use datadog connector to compute stats for pre-sampled traces
   datadog/connector:
     traces:
-      compute_stats_by_span_kind: true
+      compute_top_level_by_span_kind: true
       peer_tags_aggregation: true
+      compute_stats_by_span_kind: true
 service:
-  extensions: [health_check, pprof, zpages, ddflare]
-  pipelines:
-    traces: # this pipeline computes APM stats
-      receivers: [otlp]
-      processors: [batch]
-      exporters: [datadog/connector]
-    traces/sampling: # this pipeline uses sampling and sends traces
-      receivers: [otlp]
-      processors: [probabilistic_sampler, infraattributes,batch]
-      exporters: [datadog]
-    metrics:
-      receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes,batch]
-      exporters: [datadog]
-    logs:
-      receivers: [otlp]
-      processors: [infraattributes, batch]
-      exporters: [datadog]
-{{< /code-block >}}
-
-Note: this configuration includes a sampling pipeline by default. If you do not wish to sample traces, you can modify the pipelines as follows:
-{{< code-block lang="yaml" filename="otel-config.yaml" collapsible="true" >}}
-service:
-  extensions: [health_check, pprof, zpages, ddflare]
   pipelines:
     traces:
       receivers: [otlp]
@@ -257,7 +208,7 @@ receivers:
   prometheus:
     config:
       scrape_configs:
-        - job_name: "otel-collector"
+        - job_name: "otelcol"
           scrape_interval: 60s
           static_configs:
             - targets: ["0.0.0.0:8888"]
@@ -324,7 +275,7 @@ Use Datadog to explore the observability data for your application.
 
 ### Fleet automation
 
-Explore your Datadog Agent and Collector configuration.
+Explore your Datadog Agent, DDOT, and upstream OpenTelemetry Collector configurations.
 
 {{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Review your Agent and Collector configuration from the Fleet Automation page." style="width:100%;" >}}
 

@@ -170,7 +170,7 @@ Este problema se describe con más detalles en esta [entrada del blog de Microso
 
 ### Cadena de conexión vacía {#empty-connection-string}
 
-El check de SQL Server de Datadog se basa en la biblioteca Python `adodbapi`, que tiene algunas limitaciones en cuanto a los caracteres que puede utilizar para establecer una cadena de conexión con un SQL Server. Si tu Agent tiene problemas para conectarse a tu SQL Server y si encuentras errores similares a los siguientes en los logs del recopilador de tu Agent, es posible que tu `sqlserver.yaml` incluya algunos caracteres que causan problemas con `adodbapi`.
+El check de SQL Server de Datadog se basa en la librería Python `adodbapi`, que tiene algunas limitaciones en cuanto a los caracteres que puede utilizar para establecer una cadena de conexión con un SQL Server. Si tu Agent tiene problemas para conectarse a tu SQL Server y si encuentras errores similares a los siguientes en los logs del recopilador de tu Agent, es posible que tu `sqlserver.yaml` incluya algunos caracteres que causan problemas con `adodbapi`.
 
 ```text
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')

@@ -1,5 +1,6 @@
 ---
 title: Data Jobs Monitoring
+description: "Monitor performance, reliability, and cost efficiency of data processing jobs across platforms like EMR, Databricks, Dataproc, and Kubernetes."
 further_reading:
   - link: '/data_streams'
     tag: 'Documentation'
@@ -63,4 +64,4 @@ To determine why a stage is taking a long time to complete, you can use the **Sp
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors/recommended?q=jobs%20&only_installed=true&p=1
+[1]: https://app.datadoghq.com/monitors/templates

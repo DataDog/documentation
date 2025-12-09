@@ -1,5 +1,6 @@
 ---
 title: Managing DatadogPodAutoscaler with Terraform
+description: Deploy and manage DatadogPodAutoscaler custom resources for Kubernetes autoscaling using Terraform
 aliases:
   - /containers/guide/manage-datadogpodautoscaler-with-terraform
 further_reading:

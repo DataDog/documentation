@@ -1,5 +1,6 @@
 ---
 title: Datadog Audit Trail
+description: Monitor Datadog user activity, API requests, and resource changes with comprehensive audit logging for compliance, security, and governance.
 aliases:
     - /account_management/audit_logs/
 further_reading:
@@ -134,7 +135,7 @@ Notable events are a subset of audit events that show potential critical configu
 
 {{< img src="account_management/audit_logs/notable_events.png" alt="The audit event facet panel showing notable events checked" style="width:30%;">}}
 
-Events that match the following queries are marked as notable.
+Events that match the following queries are marked as notable. You can also retrieve all notable events using the query `is_notable_event:true`.
 
 | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------------------------------------------------- | --------------------------------------------------|
@@ -147,6 +148,7 @@ Events that match the following queries are marked as notable.
 | Creations and deletion of RUM applications | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
 | Changes to Sensitive Data Scanner scanning groups | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
 | Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| Activation, deactivation, and modification of Product Analytics for applications | `@evt.name:"Product Analytics" @asset.type:product_analytics @action:(enabled OR disabled OR modified)` |
 
 ### Inspect Changes (Diff)
 
@@ -156,7 +158,7 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 ## Filter audit events based on Reference Tables
 
-<div class="alert alert-warning">Reference Tables containing over 1,000,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
+<div class="alert alert-danger">Reference Tables containing over 1,000,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
 
 Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
 

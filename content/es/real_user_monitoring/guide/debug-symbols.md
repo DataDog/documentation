@@ -22,7 +22,7 @@ Utiliza la [página RUM Debug Symbols][1] para ver si hay símbolos de depuraci�
 
 Si no hay símbolos de depuración para tu aplicación, [cárgalos][2].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Asegúrate de que el tamaño de cada símbolo de depuración no supere el límite de **500 MB**; de lo contrario, se rechazará la carga.
 Para los dSYM de iOS, se admiten archivos individuales de hasta **2 GB**. 
 </div>

@@ -1,8 +1,13 @@
 ---
 aliases:
 - /es/logs/processing/pipelines/
-description: Analizar tus logs con el procesador grok
+description: Analizar, enriquecer y gestionar tus logs con pipelines y procesadores
+  Datadog
 further_reading:
+- link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
+  tag: Blog
+  text: Cómo utilizamos Datadog para obtener una visibilidad completa y detallada
+    de nuestro sistema de entrega de correo electrónico.
 - link: /logs/log_configuration/processors
   tag: Documentación
   text: Consultar la lista de todos los procesadores disponibles
@@ -32,7 +37,7 @@ title: Pipelines
 
 ## Información general
 
-<div class="alert alert-info">Los pipelines y los procesadores descritos en esta documentación son específicos de los entornos de registro basados en la nube. Para agregar, procesar y enrutar logs on-premises, consulta <a href="https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/">Observability Pipelines</a>.</div>
+<div class="alert alert-info">Los pipelines y procesadores descritos en esta documentación son específicos de los entornos de generación de logs basados en la nube. Para agregar, procesar y enrutar logs on-premises, consulta <a href="https://docs.datadoghq.com/observability_pipelines/configuration/set_up_pipelines/">Observability Pipelines</a>.</div>
 
 Datadog [analiza][1] automáticamente logs con formato JSON. Luego, puedes añadir valor a todos tus logs (sin procesar y JSON), enviándolos a un pipeline de procesamiento. Los pipelines aceptan logs con una amplia variedad de formatos y los traducen a un formato común en Datadog. Implementar una estrategia de pipelines y de procesamiento de logs es beneficioso, ya que introduce una [convención de nomenclatura de atributos][2] para tu organización.
 
@@ -40,7 +45,22 @@ Los pipelines analizan y enriquecen los logs encadenándolos secuencialmente med
 
 Los pipelines y los procesadores pueden aplicarse a cualquier tipo de log. No es necesario modificar la configuración de la gestión de logs, ni implementar cambios en ninguna regla de procesamiento del lado del servidor. Todo puede configurarse en la [página de configuración de pipelines][5].
 
-**Nota**: Para un uso óptimo de la solución Log Management, Datadog recomienda utilizar como máximo 20 procesadores por pipeline y 10 reglas de análisis por [procesador grok][6]. Datadog se reserva el derecho de desactivar reglas de análisis, procesadores o pipelines de bajo desempeño que puedan afectar al rendimiento del servicio Datadog.
+**Nota**: Para un uso óptimo de la solución Log Management, Datadog recomienda utilizar como máximo **20 procesadores por pipeline** y **10 reglas de análisis sintáctico** en un [procesador Grok][6]. Datadog se reserva el derecho de desactivar reglas de análisis, procesadores o pipelines que no rindan lo suficiente y que puedan afectar al rendimiento del servicio de Datadog.
+
+## Permisos de pipelines
+
+Los pipelines utilizan el [Control de acceso detallado][7] para gestionar quién puede editar configuraciones de pipelines y procesadores. Esto significa que los permisos pueden ser asignados a **roles**, **usuarios individuales** y **equipos**, asegurando un control preciso de los recursos de pipelines. Los pipelines sin ninguna restricción se consideran sin irrestrictos, lo que significa que cualquier usuario con el permiso `logs_write_pipelines` puede modificar el pipeline y sus procesadores.
+
+{{< img src="/logs/processing/pipelines/pipeline_permissions_grace.png" alt="Configuración de permisos de pipelines en Datadog" style="width:80%;" >}}
+
+Para cada pipeline, los administradores pueden elegir los siguientes contextos de edición:
+
+- **Editor**: Solo los usuarios, equipos o roles especificados pueden editar la configuración de pipelines y procesadores.
+- **Editor de procesadores**: Solo los procesadores (incluidos los pipelines anidados) pueden ser editados por usuarios, equipos o roles especificados. Nadie puede modificar los atributos de un pipeline, como su consulta de filtro o su orden en la lista global de pipelines.
+
+<div class="alert alert-warning">Conceder a un usuario acceso a una lista de restricciones de pipelines no concede automáticamente los permisos <code>logs_write_pipelines</code> o <code>logs_write_processors</code>. Los administradores deben conceder estos permisos por separado.</div>
+
+Puedes gestionar estos permisos mediante programación a través de la [**API**][14] y **Terraform**.
 
 ## Preprocesamiento
 
@@ -48,14 +68,14 @@ El preprocesamiento de logs JSON se produce antes de que los logs ingresen al pi
 
 El preprocesamiento de logs JSON viene con una configuración predeterminada que funciona para los reenviadores de logs estándar. Para editar esta configuración y adaptar las estrategias de reenvío de logs personalizados o específicos:
 
-1. En la aplicación Datadog, ve a [Pipelines][7] y selecciona [Preprocesamiento de logs JSON][8].
+1. Ve a [Pipelines][8] en Datadog y selecciona [Preprocesamiento de logs de JSON][9].
 
     **Nota:** El preprocesamiento de logs JSON es la única manera de definir uno de los atributos de tus logs como `host` para tus logs.
 
 2. Cambia la asignación por defecto en función del atributo reservado:
 
 {{< tabs >}}
-{{% tab "Source (Origen)" %}}
+{{% tab "Fuente" %}}
 
 #### Atributo de origen
 
@@ -77,6 +97,8 @@ El uso de Datadog Agent o del formato RFC5424 configura automáticamente el valo
 * `hostname`
 * `syslog.hostname`
 
+**Nota**: En Kubernetes, si un log JSON ingestado por Datadog Agent contiene un atributo de clave `host`, `hostname` o `syslog.hostname`, ese valor anula el nombre de host del Agent predeterminado para ese log. Como resultado, el log no hereda las etiquetas (tags) esperadas a nivel de host, que se establecen a nivel de host, del host correcto. En este caso, Datadog recomienda borrar estos atributos para asegurar que tus logs puedan ser atribuidos a los hosts correctos.
+
 {{% /tab %}}
 {{% tab "Date (Fecha)" %}}
 
@@ -97,8 +119,8 @@ Especifica los atributos alternativos que se utilizarán como origen de la fecha
 
 **Nota**: Datadog rechaza una entrada de log si su fecha oficial es anterior a las 18 horas pasadas.
 
-<div class="alert alert-warning">
-Los formatos de fecha reconocidos son: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (el formato EPOCH en milisegundos)</a> y <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
+<div class="alert alert-danger">
+Los formatos de fecha reconocidos son: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (el formato EPOCH de milisegundos)</a> y <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
 
@@ -108,7 +130,11 @@ Los formatos de fecha reconocidos son: <a href="https://www.iso.org/iso-8601-dat
 
 #### Atributo de mensaje
 
-Por defecto, Datadog consume el valor del mensaje como cuerpo de la entrada del log. Ese valor se resalta y se muestra en el [Explorador de logs][1], donde se indexa para [búsquedas de texto completo][2].
+Por defecto, Datadog ingiere el valor del mensaje como cuerpo de la entrada del log. Ese valor se resalta y se muestra en el [Log Explorer][1], donde se indexa para la [búsqueda de texto completo][2]. Sin embargo, si un archivo de log con formato JSON incluye uno de los siguientes atributos, Datadog interpreta su valor como el mensaje oficial del log:
+
+* `message`
+* `msg`
+* `log`
 
 Especifica los atributos alternativos que se utilizarán como origen del mensaje del log, configurando un [procesador del reasignador de mensajes de logs][3].
 
@@ -117,7 +143,7 @@ Especifica los atributos alternativos que se utilizarán como origen del mensaje
 [2]: /es/logs/explorer/#filters-logs
 [3]: /es/logs/log_configuration/processors/#log-message-remapper
 {{% /tab %}}
-{{% tab "Status (Estado)" %}}
+{{% tab "Status" %}}
 
 #### Atributo de estado
 
@@ -140,6 +166,7 @@ El uso de Datadog Agent o del formato RFC5424 configura automáticamente el valo
 
 * `service`
 * `syslog.appname`
+* `dd.service`
 
 Especifica los atributos alternativos que se utilizarán como origen del servicio del log, configurando un [procesador del reasignador de servicios de logs][1].
 
@@ -154,6 +181,8 @@ Por defecto, [los rastreadores de Datadog pueden inyectar automáticamente los I
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
+* `named_tags.dd.trace_id`
+* `trace_id`
 
 Especifica los atributos alternativos que se utilizarán como ID de rastreo del log, configurando un [procesador del reasignador de ID de rastreo de logs][2].
 
@@ -170,6 +199,8 @@ En forma predeterminada, los rastreadores de Datadog pueden [insertar automátic
 
 * `dd.span_id`
 * `contextMap.dd.span_id`
+* `named_tags.dd.span_id`
+* `span_id`
 
 [1]: /es/tracing/other_telemetry/connect_logs_and_traces/
 {{% /tab %}}
@@ -178,14 +209,14 @@ En forma predeterminada, los rastreadores de Datadog pueden [insertar automátic
 
 ## Crear un pipeline
 
-1. En la aplicación Datadog, ve a [Pipelines][7].
+1. Ve a [Pipelines][8] en Datadog.
 2. Selecciona **New Pipeline** (Nuevo pipeline).
 3. Selecciona un log en la vista previa de Live Tail para aplicarle un filtro, o aplícale tu propio filtro. Elige un filtro del menú desplegable o crea tu propio filtro seleccionando el icono **</>**. Los filtros te permiten limitar los tipos de logs a los que se aplica un pipeline.
 
     **Nota**: El filtrado del pipeline se aplica antes que cualquier procesador del pipeline. Por esta razón, no se puede filtrar con un atributo que se extrae del propio pipeline.
 
 4. Ponle un nombre a tu pipeline.
-5. (Opcional) Añade una descripción y etiquetas (tags) al pipeline para indicar su propósito y propiedad. Las etiquetas (tags) de pipeline no afectan a logs, pero pueden utilizarse para filtrar y buscar en la [Page (página) de pipelines][5].
+5. (Opcional) Añade una descripción y etiquetas al pipeline para indicar su propósito y propiedad. Las etiquetas de pipeline no afectan a los logs, pero pueden utilizarse para filtrar y buscar en la [página de pipelines][5].
 6. Pulsa **Create** (Crear).
 
 Ejemplo de log transformado por un pipeline:
@@ -200,7 +231,7 @@ Consulta la <a href="/integrations/#cat-log-collection">lista de integraciones c
 
 Los pipelines de procesamiento de integración están disponibles para ciertas sources (fuentes) cuando se configuran para recopilar logs. Estos pipelines son **sólo de lectura** y analizan tus logs de forma apropiada para el source (fuente) particular. Para los logs de integración, se instala automáticamente un pipeline de integración que se encarga de analizar tus logs y añade la faceta correspondiente en tu Explorer de logs.
 
-Para ver un pipeline de integración, ve a la página [Pipelines][5]. Para editar un pipeline de integración, clónalo y luego edita el clon:
+Para ver un pipeline de integración, ve a la página [Pipelines][8]. Para editar un pipeline de integración, clónalo y luego edita el clon:
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Clonación de un pipeline" style="width:80%;">}}
 
@@ -208,15 +239,15 @@ Consulta el siguiente ejemplo de logs de ELB:
 
 {{< img src="logs/processing/elb_log_post_processing.png" alt="Postprocesamiento de logs de ELB" style="width:70%;">}}
 
-**Nota**: Los pipelines de integración no pueden eliminarse, sólo desactivarse.
+**Nota**: Los pipelines de integraciones no pueden eliminarse, solo desactivarse.
 
-### Biblioteca de pipelines de integración
+### Biblioteca de pipelines de integraciones
 
-Para ver la lista completa de pipelines de integración que ofrece Datadog, consulta la [biblioteca de pipelines de integración][7]. La biblioteca de pipelines muestra cómo Datadog procesa diferentes formatos de logs por defecto.
+Para ver la lista completa de pipelines de integraciones que ofrece Datadog, consulta la [biblioteca de pipelines de integraciones][10]. La biblioteca de pipelines muestra cómo Datadog procesa diferentes formatos de log por defecto.
 
-{{< img src="logs/processing/pipelines/integration-pipeline-library.mp4" alt="Biblioteca de pipelines de integración" video=true style="width:80%;">}}
+{{< img src="logs/processing/pipelines/integration-pipeline-library.mp4" alt="Biblioteca de pipelines de integraciones" video=true style="width:80%;">}}
 
-Para utilizar un pipeline de integración, Datadog recomienda instalar la integración configurando el log `source` correspondiente. Una vez que Datadog recibe el primer log con este origen, la instalación se activa automáticamente y el pipeline de integración se añade a la lista de pipelines de procesamiento. Para configurar el origen del log, consulta la [documentación sobre integraciones][9] correspondiente.
+Para utilizar un pipeline de integración, Datadog recomienda instalar la integración configurando la `source` de logs correspondiente. Una vez que Datadog reciba el primer log con esta fuente, la instalación se activa automáticamente y el pipeline de integración se añade a la lista de pipelines de procesamiento. Para configurar la fuente de logs, consulta la [documentación de la integración][11] correspondiente.
 
 También es posible copiar un pipeline de integración utilizando el botón de clonación.
 
@@ -224,15 +255,15 @@ También es posible copiar un pipeline de integración utilizando el botón de c
 
 ## Añadir un procesador o un pipeline anidado
 
-1. En la aplicación Datadog, ve a [Pipelines][7].
+1. Ve a [Pipelines][8] en Datadog.
 2. Sitúate sobre un pipeline y haz clic en la flecha situada junto a él para expandir los procesadores y los pipelines anidados.
 3. Selecciona **Add Processor** (Añadir procesador) o **Add Nested Pipeline** (Añadir pipeline anidado).
 
 ### Procesadores
 
-Un procesador se ejecuta en un pipeline para completar una acción de estructuración de datos. Consulta la [sección Procesadores][3] para aprender a añadir y configurar un procesador por tipo de procesador, en la aplicación o con la API. 
+Un procesador se ejecuta dentro de un pipeline para completar una acción de estructuración de datos. Consulta la [documentación sobre procesadores][3] para aprender a añadir y configurar un procesador por tipo de procesador, dentro de la aplicación o con la API.
 
-Consulta [Análisis de fechas][10] para obtener más información sobre el análisis de una fecha personalizada, sobre un formato de hora y sobre el parámetro `timezone`, necesario si tus marcas de tiempo no están en el formato UTC.
+Consulta [Análisis de fechas][12] para obtener más información sobre los formatos de fecha y hora personalizados y el parámetro `timezone` necesario para las marcas de tiempo que no sean UTC.
 
 ### Pipelines anidados
 
@@ -260,7 +291,7 @@ Reordena con precisión los pipelines utilizando la opción `Move to` del panel 
 
 ## Métricas de uso estimado
 
-Las métricas de uso estimado se muestran por cada pipeline, específicamente el volumen y el recuento de logs que se consumen y modifican por cada pipeline. También hay un enlace al [dashboard del uso estimado de logs][11] listo para utilizar de cada pipeline, donde puedes ver las métricas de uso de ese pipeline en gráficos más detallados.
+Las métricas de uso estimadas se muestran para cada pipeline. Se muestra el volumen y el recuento de logs que están siendo ingeridos y modificados por cada pipeline. Cada pipeline incluye un enlace al [dashboard de uso estimado de logs][13]. Este dashboard ofrece gráficos detallados de las métricas de uso del pipeline.
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="Obtener una vista rápida de las métricas de uso de tu pipeline" style="width:50%;">}}
 
@@ -277,9 +308,11 @@ Las métricas de uso estimado se muestran por cada pipeline, específicamente el
 [4]: /es/logs/explorer/facets/
 [5]: https://app.datadoghq.com/logs/pipelines
 [6]: /es/logs/log_configuration/processors/?tab=ui#grok-parser
-[7]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[8]: https://app.datadoghq.com/logs/pipelines/remapping
-[9]: /es/integrations/#cat-log-collection
-[10]: /es/logs/log_configuration/parsing/?tab=matchers#parsing-dates
-[11]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
-[12]: /es/account_management/rbac/permissions/?tab=ui#log-management
+[7]: /es/account_management/rbac/granular_access/
+[8]: https://app.datadoghq.com/logs/pipelines
+[9]: https://app.datadoghq.com/logs/pipelines/remapping
+[10]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[11]: /es/integrations/#cat-log-collection
+[12]: /es/logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[13]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
+[14]: /es/api/latest/restriction-policies/

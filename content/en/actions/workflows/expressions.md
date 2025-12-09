@@ -1,5 +1,6 @@
 ---
 title: JavaScript Expressions
+description: Use inline JavaScript expressions and dedicated function/expression actions for custom data transformations in workflows.
 disable_toc: false
 aliases:
 - /service_management/workflows/actions/data_transformation/
@@ -101,6 +102,6 @@ See the test and debug page to learn how to [test a workflow step][3].
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
 
 [1]: https://lodash.com/
-[2]: https://datadoghq.slack.com/
+[2]: https://chat.datadoghq.com/
 [3]: /service_management/workflows/test_and_debug/#test-a-step
 [4]: /service_management/workflows/actions/set_variables

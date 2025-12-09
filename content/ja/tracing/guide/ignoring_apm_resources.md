@@ -9,7 +9,7 @@ title: APM で不要なリソースを無視する
 - [Trace Agent のコンフィギュレーション](#trace-agent-configuration-options) (Datadog Agent 内)、または
 - [トレーサーのコンフィギュレーション](#tracer-configuration-options).
 
-<div class="alert alert-warning"><strong>注</strong>: 以下のいずれかのオプションを使用してトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
+<div class="alert alert-danger"><strong>注</strong>: 以下のいずれかのオプションを使用してトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
 
 ヘルプが必要な場合は、[Datadog のサポートチーム][1]までお問合せください。
 
@@ -113,7 +113,7 @@ agents:
 | `http.useragent_details.browser.family` | User-Agent によって報告されたブラウザファミリー。    |
 | `http.useragent_details.device.family`  | User-Agent によって報告されたデバイスファミリー。     |
 
-<div class="alert alert-warning"><strong>注</strong>: 2022 年 10 月 1 日以降、Datadog バックエンドは、取り込まれたすべてのスパンについてトレーサー間で<a href="/tracing/trace_collection/tracing_naming_convention">スパンタグのセマンティクス</a>を適用するためにリマッピングを適用します。Datadog Agent レベルでタグに基づいてスパンをドロップしたい場合、<strong>Remap from</strong> 列でタグを使用します。</div>
+<div class="alert alert-danger"><strong>注</strong>: 2022 年 10 月 1 日以降、Datadog バックエンドは、取り込まれたすべてのスパンについてトレーサー間で<a href="/tracing/trace_collection/tracing_naming_convention">スパンタグのセマンティクス</a>を適用するためにリマッピングを適用します。Datadog Agent レベルでタグに基づいてスパンをドロップしたい場合、<strong>Remap from</strong> 列でタグを使用します。</div>
 
 #### ネットワーク通信
 
@@ -382,13 +382,13 @@ Amazon ECS を使用している場合 (例えば、EC2 上で)、Datadog Agent 
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
+<div class="alert alert-danger"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
 
 ## トレーサーのコンフィギュレーションオプション
 
 言語固有のトレーサーの中には、Datadog Agent に送信する前にスパンを修正するオプションがあります。アプリケーション固有の要件があり、以下の言語を使用している場合にはこのオプションを使用してください。
 
-<div class="alert alert-danger"><strong>重要</strong>: リクエストが分散されたトレースに関連付けられている場合、これらのフィルタリングルールを通じて部分的に除外すると、結果として得られるトレースのサンプリングが不正確になる場合があります。
+<div class="alert alert-warning"><strong>重要</strong>: リクエストが分散されたトレースに関連付けられている場合、これらのフィルタリングルールを通じて部分的に除外すると、結果として得られるトレースのサンプリングが不正確になる場合があります。
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
@@ -487,7 +487,7 @@ public class GreetingController {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-warning"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
+<div class="alert alert-danger"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
 
 [1]: /ja/help/
 [2]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/

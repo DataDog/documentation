@@ -143,7 +143,7 @@ You can add identifier tags to connections. The tagging rules for connections ar
 
 ## Connection groups
 
-You can create groups of connections so that your workflows and apps can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group). 
+You can create groups of connections so that your workflows and apps can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group).
 
 You define the members of a connection group using a connection's _Identifier Tags_. For example, you can create a connection group consisting of AWS accounts that have the `account_id` tag.
 
@@ -153,7 +153,7 @@ Each connection in the group must have a set of unique identifier tags so that a
 
 ### Create a connection group
 
-<div class="alert alert-info"><strong>Note</strong>: You can only add connections to a group if you have <a href="/actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
+<div class="alert alert-info">You can only add connections to a group if you have <a href="/actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection">Resolver permission</a> for them.</div>
 
 To create a connection group:
 
@@ -176,7 +176,7 @@ To use a connection group:
 
 **Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a workflow or app tries to use a connection you don't have Resolver permission for, it fails with a `403 Forbidden` error. To fix this issue, you can:
 - Configure the workflow or app so that it can't point to a connection that doesn't have a Resolver permission.
-- Remove the connection that doesn't have a Resolver permission from the connection group. <div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows or multiple apps, removing a connection that another workflow relies on causes that workflow to fail.</div>
+- Remove the connection that doesn't have a Resolver permission from the connection group. <div class="alert alert-warning">If you are using a connection group for multiple workflows or multiple apps, removing a connection that another workflow relies on causes that workflow to fail.</div>
 
 ### Update a connection group
 
@@ -192,7 +192,7 @@ To delete a connection group:
 1. Hover over the group you want to delete and click the **delete (trash can)** icon.
 1. Click **Delete**.
 
-<div class="alert alert-warning"><strong>Note</strong>: Deleting a connection group impacts any workflows and apps that are using that group.</div>
+<div class="alert alert-danger">Deleting a connection group impacts any workflows and apps that are using that group.</div>
 
 ## Further reading
 
@@ -206,7 +206,7 @@ To delete a connection group:
 [8]: /service_management/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /actions/connections/http/
-[11]: https://datadoghq.slack.com/
+[11]: https://chat.datadoghq.com/
 [12]: /actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection
 [13]: /getting_started/tagging/
 [14]: https://app.datadoghq.com/app-builder/

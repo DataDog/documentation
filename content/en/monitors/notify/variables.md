@@ -144,7 +144,7 @@ Or use the `{{else}}` parameter in the first example:
   @slack-example
 {{/is_match}}
 ```
-**Note**: To check if a `<TAG_VARIABLE>` does not exist or if it's empty, use `is_exact_match`. See `is_exact_match` tab for more details. 
+**Note**: To check if a `<TAG_VARIABLE>` does not exist or if it's empty, use `is_exact_match`. See `is_exact_match` tab for more details.
 
 {{% /tab %}}
 {{% tab "is_exact_match" %}}
@@ -262,7 +262,7 @@ Attributes
 
 ### Multi alert variables
 
-Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert. 
+Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert.
 
 **Note**: When you use the `group_by` field in aggregation, additional tags and alerts from the monitor may be inherited automatically. This means that any alerts or configurations set on the monitored endpoint could be applied to each group resulting from the aggregation.
 
@@ -381,19 +381,21 @@ For Docs and Links you can also access a specific item with the following syntax
 
 ### Matching attribute/tag variables
 
-To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
+You can include any attribute or tag from a log, trace span, RUM event, CI pipeline, or CI test event that matches the monitor query. The following table shows examples of attributes and variables you can add from different monitor types.
 
-| Monitor type    | Variable syntax                                  |
-|-----------------|--------------------------------------------------|
-| [Log][12]          | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
-| [Trace Analytics][13]  | `{{span.attributes.key}}` or `{{span.tags.key}}` |
-| [Error Tracking][14]   | `{{issue.attributes.key}}`                         |
-| [RUM][15]           | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
-| [Audit Trail][16]      | `{{audit.attributes.key}}` or `{{audit.message}}`    |
-| [CI Pipeline][17]     | `{{cipipeline.attributes.key}}`                  |
-| [CI Test][18]         | `{{citest.attributes.key}}`                      |
-| [Database Monitoring][19] | `{{databasemonitoring.attributes.key}}`      |
-|[Synthetic Monitoring][20] | `{{synthetics.attributes.key}}`      |
+<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click <strong>{{&nbsp;Add Variable</strong> and select from the expanded menu options.</div>
+
+| Monitor type             | Variable syntax                                         |
+|--------------------------|--------------------------------------------------------|
+| [Audit Trail][16]        | `{{audit.attributes.key}}` or `{{audit.message}}`      |
+| [CI Pipeline][17]        | `{{cipipeline.attributes.key}}`                        |
+| [CI Test][18]            | `{{citest.attributes.key}}`                            |
+| [Database Monitoring][19]| `{{databasemonitoring.attributes.key}}`                |
+| [Error Tracking][14]     | `{{issue.attributes.key}}`                             |
+| [Log][12]                | `{{log.attributes.key}}` or `{{log.tags.key}}`         |
+| [RUM][15]                | `{{rum.attributes.key}}` or `{{rum.tags.key}}`         |
+| [Synthetic Monitoring][20]| `{{synthetics.attributes.key}}`                       |
+| [Trace Analytics][13]    | `{{span.attributes.key}}` or `{{span.tags.key}}`       |
 
 {{% collapse-content title="Example syntax usage" level="h4" %}}
 - For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
@@ -552,7 +554,7 @@ To avoid missed notifications when using dynamic handles with these variables, m
 {{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
   // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 

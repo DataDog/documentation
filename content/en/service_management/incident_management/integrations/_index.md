@@ -11,7 +11,7 @@ further_reading:
 
 Datadog Incident Management integrates with third-party platforms to support collaboration and response. Integrations connect your incident workflows with ticketing systems, communication channels, and status pages so your teams can coordinate, escalate, and resolve incidents in their existing tools.
 
-Use integrations in Datadog Incident Management to:**
+Use integrations in Datadog Incident Management to:
 
 - **Automate workflows:** Trigger actions in external systems (such as creating Jira tickets or updating Statuspage) directly from Datadog incidents.
 - **Centralize communication:** Sync incident updates and notifications with chat tools, ticketing platforms, and on-call systems to keep stakeholders informed.
@@ -24,8 +24,11 @@ Configure and manage incident-related integrations from the **Incident Settings*
 ## Setup
 
 {{< whatsnext desc="Set up and use the following integrations within the context of Datadog Incident Management:">}}
+    {{< nextlink href="/service_management/incident_management/integrations/slack" >}}Slack{{< /nextlink >}}
+    {{< nextlink href="/service_management/incident_management/integrations/microsoft_teams" >}}Microsoft Teams{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/integrations/statuspage" >}}Statuspage{{< /nextlink >}}
+    {{< nextlink href="/service_management/incident_management/integrations/status_pages" >}}Status Pages{{< /nextlink >}}
+    {{< nextlink href="/service_management/incident_management/integrations/statuspage" >}}Atlassian Statuspage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

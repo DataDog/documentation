@@ -74,7 +74,7 @@ tile:
 
 IBM ACE からメトリクスメッセージを消費するためには、[IBM MQ][3] サーバーが必要です。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For Linux, make sure to set the LD_LIBRARY_PATH environment variable as described in the <a href="https://docs.datadoghq.com/integrations/ibm_mq/">IBM MQ setup</a> before continuing.
 </div>
 

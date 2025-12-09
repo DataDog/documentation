@@ -67,7 +67,7 @@ v2 ではアーティファクトがモジュール化されています。以�
 
 **注**: 他のすべてのアーティファクトの Maven 座標に変更はありません。
 
-<div class="alert alert-warning">v2 は Android API 19 (KitKat) をサポートしません。サポートされる最小 SDK は API 21 (Lollipop) です。Kotlin 1.7 が必要です。SDK 自体は Kotlin 1.8 でコンパイルされているため、Kotlin 1.6 以下のコンパイラでは SDK クラスのメタデータを読み取れません。</div>
+<div class="alert alert-danger">v2 は Android API 19 (KitKat) をサポートしません。サポートされる最小 SDK は API 21 (Lollipop) です。Kotlin 1.7 が必要です。SDK 自体は Kotlin 1.8 でコンパイルされているため、Kotlin 1.6 以下のコンパイラでは SDK クラスのメタデータを読み取れません。</div>
 
 以下のようなエラーが発生した場合:
 

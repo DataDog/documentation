@@ -7,7 +7,7 @@ type: lenguaje de código múltiple
 
 ## Soporte de las capacidades de Code Security
 
-Las siguientes capacidades de Code Security son compatibles con la biblioteca .NET, para la versión del rastreador especificado:
+Las siguientes capacidades de Code Security son compatibles con la librería .NET, para la versión del rastreador especificado:
 
 | Capacidad de Code Security                      | Versión mínima de rastreador .NET |
 | --------------------------------------------- | ----------------------------|
@@ -34,7 +34,7 @@ La versión mínima de rastreador para contar con todas las funciones de segurid
 
 Para consultar la lista de plataformas y sistemas operativos compatibles, consulta [Compatibilidad de .NET Framework][2] y [Compatibilidad de .NET/.NET Core][1].
 
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)
 - Rastreo distribuido para visualizar flujos (flows) de ataques en tus aplicaciones

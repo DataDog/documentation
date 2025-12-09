@@ -133,7 +133,7 @@ Configura el SDK de RUM Browser en la página web que desees que se represente e
 {{% /tab %}}
 {{% tab "Kotlin Multiplataforma" %}}
 
-Añade la biblioteca `DatadogWebViewTracking` a tu aplicación siguiendo la guía [aquí][1].
+Añade la librería `DatadogWebViewTracking` a tu aplicación siguiendo la guía [aquí][1].
 
 [1]: /es/real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin_multiplatform/#add-native-dependencies-for-ios
 
@@ -147,7 +147,7 @@ Añade la biblioteca `DatadogWebViewTracking` a tu aplicación siguiendo la guí
 
 1. Si deseas reenviar eventos de RUM desde páginas web, descarga la [última versión][1] del SDK de RUM Android y configura la función RUM siguiendo la [guía dedicada][2].
 2. Si deseas reenviar eventos de logs desde páginas web, descarga la [última versión][3] del SDK de Logs Android y configura la función Logs siguiendo la [guía dedicada][4].
-3. Añade la dependencia de Gradle declarando la biblioteca `dd-sdk-android-webview` como dependencia en el archivo `build.gradle` a nivel del módulo:
+3. Añade la dependencia de Gradle declarando la librería `dd-sdk-android-webview` como dependencia en el archivo `build.gradle` a nivel del módulo:
 
     ```groovy
     dependencies {
@@ -318,7 +318,7 @@ El parámetro `allowedHosts` de `DatadogInAppWebViewUserScript` coincide con los
 
 1. Si deseas reenviar eventos RUM desde páginas web, descarga la [última versión][1] del SDK RUM Kotlin Multiplataforma y configura RUM siguiendo la [guía dedicada][2].
 2. Si deseas reenviar eventos de log procedentes de páginas web, descarga la [última versión][3] del SDK Kotlin Multiplataforma de logs y configura logs siguiendo la [guía dedicada][4].
-3. Añade la dependencia Gradle para el conjunto de fuentes comunes declarando la biblioteca `dd-sdk-kotlin-multiplatform-webview` como dependencia en el archivo `build.gradle.kts` a nivel de módulo:
+3. Añade la dependencia Gradle para el conjunto de fuentes comunes declarando la librería `dd-sdk-kotlin-multiplatform-webview` como dependencia en el archivo `build.gradle.kts` a nivel de módulo:
 
     ```kotlin
     kotlin {

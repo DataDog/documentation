@@ -1,5 +1,6 @@
 ---
 title: Use Private Actions
+description: Set up and use private action runners to interact with services on your private network without exposing them to the internet.
 disable_toc: false
 aliases:
 - service_management/workflows/private_actions/use_private_actions

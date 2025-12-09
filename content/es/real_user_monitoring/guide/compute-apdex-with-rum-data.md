@@ -16,7 +16,7 @@ further_reading:
   text: Datos de RUM Android recopilados
 - link: /real_user_monitoring/ios/data_collected
   tag: Documentación
-  text: Datos de RUM iOS recopilados
+  text: Datos recopilados de RUM iOS
 title: Cálculo de la puntuación de Apdex y de los indicadores de rendimiento personalizados
   con datos RUM
 ---
@@ -70,7 +70,7 @@ En el siguiente ejemplo se calcula una puntuación de Apdex utilizando la métri
 
 {{< img src="real_user_monitoring/guide/quick-graph.png" alt="Puntuación de Apdex en un Quick Graph" style="width:100%;">}}
 
-### Configuración JSON
+### Configuración de JSON
 
 Para acceder al código JSON de este gráfico, haz clic en la pestaña **JSON** junto a **Editar**.
 
@@ -149,7 +149,7 @@ También puedes calcular otras puntuaciones de Apdex con los siguientes métodos
 - Para calcular la puntuación de Apdex para una aplicación específica, añade una consulta adicional `@application.name` y actualiza tu fórmula.
 - Para calcular la puntuación de Apdex con otra métrica de rendimiento RUM, como First Contentful Paint, sustituye `@view.LargestContentfulPaint` por `@view.FirstContentfulPaint` en las consultas.
 
-Para calcular indicadores de rendimiento adicionales para tus aplicaciones, determina qué puntos de datos necesitas y qué eventos RUM son relevantes para ti, antes de [crear un Quick Graph](#create-a-quick-graph).
+Para calcular indicadores de rendimiento adicionales para tus aplicaciones, determina qué puntos de datos necesitas y qué eventos RUM son relevantes para ti, antes de [crear un gráfico rápido](#create-a-quick-graph).
 
 ## Referencias adicionales
 

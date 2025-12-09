@@ -175,7 +175,7 @@ La CLI de Datadog modifica las configuraciones de la función Lambda existentes 
 
 El [Constructo CDK Datadog][1] instala automáticamente Datadog en tus funciones utilizando capas Lambda y configura tus funciones para enviar métricas, trazas y logs a Datadog a través de la extensión Lambda de Datadog.
 
-1. Instala la biblioteca del constructo CDK Datadog:
+1. Instala la librería del constructo CDK Datadog:
 
     ```sh
     # For AWS CDK v1

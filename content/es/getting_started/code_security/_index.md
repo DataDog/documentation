@@ -18,7 +18,7 @@ Te ofrece un conjunto de herramientas para ayudarte a proteger tu código a lo l
 
 ### Bibliotecas de código abierto
 
-Datadog Software Composition Analysis detecta vulnerabilidades de biblioteca y cataloga las dependencias en tu base de código y tus servicios en ejecución.
+Datadog Software Composition Analysis detecta vulnerabilidades de librería y cataloga las dependencias en tu base de código y tus servicios en ejecución.
 
 Consulta [Software Composition Analysis][1] para configurar la detección estática de vulnerabilidades o bibliotecas en tiempo de ejecución.
 
@@ -58,17 +58,17 @@ Datadog proporciona [Puertas de calidad][6] como una funcionalidad de la platafo
 
 ## Priorizar las vulnerabilidades con el contexto del tiempo de ejecución
 
-Code Security ofrece **vistas centradas en las vulnerabilidades** de todas las vulnerabilidades de biblioteca y código detectadas, tanto a partir del análisis estático de repositorios como de la detección de servicios en tiempo de ejecución.
+Code Security ofrece **vistas centradas en las vulnerabilidades** de todas las vulnerabilidades de librería y código detectadas, tanto a partir del análisis estático de repositorios como de la detección de servicios en tiempo de ejecución.
 
 ### Explorar las vulnerabilidades
 
-Para las vulnerabilidades de biblioteca, cada fila de la tabla representa una vulnerabilidad específica que afecta a una versión de biblioteca. En función de si tienes activada la detección estática o en tiempo de ejecución, la columna **Detectado en** muestra los repositorios o servicios específicos afectados por esta vulnerabilidad.
+Para las vulnerabilidades de librería, cada fila de la tabla representa una vulnerabilidad específica que afecta a una versión de librería. En función de si tienes activada la detección estática o en tiempo de ejecución, la columna **Detectado en** muestra los repositorios o servicios específicos afectados por esta vulnerabilidad.
 
-En el panel lateral de una única vulnerabilidad de biblioteca en SCA, además de los detalles sobre la vulnerabilidad, Datadog muestra:
+En el panel lateral de una única vulnerabilidad de librería en SCA, además de los detalles sobre la vulnerabilidad, Datadog muestra:
 
 - Un **desglose de la gravedad** de la instancia de mayor gravedad de esta vulnerabilidad observada en tus repositorios y servicios. Para cada localización detectada de la vulnerabilidad en tus repositorios o servicios, Datadog ajusta la puntuación de la gravedad de base de la vulnerabilidad basándose en factores del entorno. Para obtener más información, consulta [Puntuación de la gravedad de Datadog][8].
 - Una tabla **Repositorios** de todas las instancias en las que se detectó la vulnerabilidad en tus repositorios. Para cada instancia, Datadog muestra si la dependencia está clasificada como directa o transitiva, el estado de corrección de la vulnerabilidad, así como los pasos específicos de la corrección.
-- Una tabla **Servicios afectados** de todos los servicios en ejecución afectados por esta vulnerabilidad de biblioteca. Un servicio está afectado por una vulnerabilidad de biblioteca si la biblioteca fue cargada en tiempo de ejecución y detectada por bibliotecas de rastreo de aplicaciones de Datadog.
+- Una tabla **Servicios afectados** de todos los servicios en ejecución afectados por esta vulnerabilidad de librería. Un servicio está afectado por una vulnerabilidad de librería si la librería fue cargada en tiempo de ejecución y detectada por bibliotecas de rastreo de aplicaciones de Datadog.
 
  La gravedad se puntúa de la siguiente manera:
 | Puntuación CVSS    | Calificación cualitativa
@@ -83,7 +83,7 @@ En el panel lateral de una única vulnerabilidad de biblioteca en SCA, además d
 
 Code Security también ofrece **vistas centradas en los repositorios** de los resultados de los análisis estáticos, lo que permite un filtrado granular de todas las ramas y confirmaciones de los repositorios analizados.
 
-Haz clic en un repositorio en la página **Repositorios** para acceder a una vista más detallada donde puedes personalizar la consulta de búsqueda por rama (primero aparece la rama por defecto) y por commit (empezando por el más reciente). 
+Haz clic en un repositorio en la página **Repositorios** para acceder a una vista más detallada donde puedes personalizar la consulta de búsqueda por rama (primero aparece la rama por defecto) y por commit (empezando por el más reciente).
 
 {{< tabs >}}
 {{% tab "Static Code Analysis (SAST)" %}}
@@ -109,12 +109,12 @@ Puedes acceder a las correcciones sugeridas directamente desde los resultados pa
 {{% /tab %}}
 {{% tab "Software Composition Analysis" %}}
 
-Puedes utilizar las siguientes facetas predefinidas para crear una consulta de búsqueda a fin de identificar y tratar los riesgos de seguridad en bibliotecas de terceros en la pestaña **Vulnerabilidades de bibliotecas** o revisar tu inventario de bibliotecas en la pestaña **Catálogo de bibliotecas**.
+Puedes utilizar las siguientes facetas predefinidas para crear una consulta de búsqueda a fin de identificar y tratar los riesgos de seguridad en bibliotecas de terceros en la pestaña **Vulnerabilidades de librerías** o revisar tu inventario de librerías en la pestaña **Catálogo de librerías**.
 
 | Nombre de la faceta         | Descripción                                                    |
 |--------------------|----------------------------------------------------------------|
 | Nombre de la dependencia    | Identifica las bibliotecas por sus nombres.                              |
-| Versión de la dependencia | Filtros por versiones específicas de bibliotecas.                     |
+| Versión de la dependencia | Filtros por versiones específicas de librerías.                     |
 | Lenguaje           | Ordena bibliotecas por el lenguaje de programación.                   |
 | Puntuación              | Ordena la puntuación de riesgo o calidad de las dependencias.           |
 | Gravedad           | Filtra las vulnerabilidades en función de su gravedad.        |
@@ -122,7 +122,7 @@ Puedes utilizar las siguientes facetas predefinidas para crear una consulta de b
 
 Puedes acceder a los informes sobre vulnerabilidades y localizar los archivos fuente en los que se detectó la vulnerabilidad en tus proyectos, junto con información sobre los propietarios de código del archivo.
 
-{{< img src="/security/application_security/code_security/sci_vulnerabilities.png" alt="Enlace al código fuente directamente en GitHub, a partir de una vulnerabilidad de biblioteca detectada" style="width:100%" >}}
+{{< img src="/security/application_security/code_security/sci_vulnerabilities.png" alt="Enlace al código fuente directamente en GitHub, a partir de una vulnerabilidad de librería detectada" style="width:100%" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -137,7 +137,7 @@ Code Security te ayuda a configurar flujos de trabajo para realizar un seguimien
 ## Vincular resultados a servicios y equipos de Datadog
 
 ### Vincular resultados a servicios
-Datadog asocia los resultados del análisis del código y de la biblioteca con los servicios pertinentes mediante los siguientes mecanismos:
+Datadog asocia los resultados del análisis del código y de la librería con los servicios pertinentes mediante los siguientes mecanismos:
 
 1. [Identificación de la localización del código asociado a un servicio mediante el Catálogo de software](#identifying-the-code-location-in-the-software-catalog)
 2. [Detección de patrones de uso de archivos en productos adicionales de Datadog.](#detecting-file-usage-patterns)
@@ -187,7 +187,7 @@ en la ruta, se selecciona el nombre del servicio más cercano al nombre del arch
 ### Vincular resultados a equipos
 
 Datadog asocia automáticamente el equipo adjunto a un servicio cuando se detecta una infracción o vulnerabilidad. Por ejemplo, si el archivo `domains/ecommerce/apps/myservice/foo.py`
-está asociado a `myservice`, entonces el equipo `myservice` se asociará a cualquier infracción 
+está asociado a `myservice`, entonces el equipo `myservice` se asociará a cualquier infracción
 detectada en este archivo.
 
 Si no se encuentra ningún servicio o equipo, Datadog utiliza el archivo `CODEOWNERS` de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un archivo en tu proveedor Git.

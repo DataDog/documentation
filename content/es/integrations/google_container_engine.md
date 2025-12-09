@@ -61,7 +61,7 @@ version: "1.0"
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Esta integración está obsoleta. En su lugar, consulta la <a href="https://docs.datadoghq.com/integrations/google_kubernetes_engine">documentación de la integración Google Kubernetes Engine</a>. Para obtener más información sobre métricas obsoletas, consulta la documentación de <a href="https://cloud.google.com/monitoring/api/metrics_gcp#gcp-container">métricas de Google Cloud</a>.
 </div>
 

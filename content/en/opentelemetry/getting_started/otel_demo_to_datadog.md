@@ -67,14 +67,14 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 
 ### Configuring the OpenTelemetry Collector
 
-To send the demo's telemetry data to Datadog you need to add three components to the OpenTelemetry Collector configuration:
+To send the demo's telemetry data to Datadog you need to add the following components to the OpenTelemetry Collector configuration:
 
 - `Resource Processor` is an `optional` component which is recommended, used to set the `env` tag for Datadog.
 - `Datadog Connector` is responsible for computing Datadog APM Trace Metrics.
 - `Datadog Exporter` is responsible for exporting Traces, Metrics and Logs to Datadog.
 - `Datadog Extension` is an `optional` component which allows you to view OpenTelemetry Collector configuration within infrastructure monitoring. (Read more at [Datadog Extension][13]).
 
-Complete the following steps to configure these three components.
+Complete the following steps to configure these components.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -95,7 +95,7 @@ Complete the following steps to configure these three components.
           - DD_API_KEY=<Your API Key>
     ```
 
-3. To configure the OpenTelemetry Collector, open `src/otelcollector/otelcol-config-extras.yml` and add the following to the file:
+3. To configure the OpenTelemetry Collector, open `src/otel-collector/otelcol-config-extras.yml` and add the following to the file:
 
     ```yaml
     extensions:
@@ -112,15 +112,19 @@ Complete the following steps to configure these three components.
         traces:
           compute_stats_by_span_kind: true
           trace_buffer: 500
-        hostname: "otel-collector-docker"
         api:
           site: ${env:DD_SITE_PARAMETER}
           key: ${env:DD_API_KEY}
+        sending_queue:
+          batch:
+            min_size: 10
+            max_size: 100
+            flush_timeout: 10s
 
     processors:
       resource:
         attributes:
-          - key: deployment.environment
+          - key: deployment.environment.name
             value: "otel"
             action: upsert
 
@@ -133,21 +137,21 @@ Complete the following steps to configure these three components.
       extensions: [datadog/extension]
       pipelines:
         traces:
-          processors: [resource, resourcedetection, memory_limiter, transform, batch]
+          processors: [memory_limiter, resource, resourcedetection, transform]
           exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
         metrics:
           receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
-          processors: [resource, resourcedetection, memory_limiter, transform, batch]
+          processors: [memory_limiter, resource, resourcedetection, transform]
           exporters: [otlphttp/prometheus, debug, datadog]
         logs:
-          processors: [resource, resourcedetection, memory_limiter, transform, batch]
+          processors: [memory_limiter, resource, resourcedetection, transform]
           exporters: [opensearch, debug, datadog]
     ```
 
     By default, the collector in the demo application merges the configuration from two files:
 
-    - `src/otelcollector/otelcol-config.yml`: contains the default configuration for the collector.
-    - `src/otelcollector/otelcol-config-extras.yml`: used to add extra configuration to the collector.
+    - `src/otel-collector/otelcol-config.yml`: contains the default configuration for the collector.
+    - `src/otel-collector/otelcol-config-extras.yml`: used to add extra configuration to the collector.
 
     <div class="alert alert-info">
     When merging YAML values, objects are merged and arrays are replaced.
@@ -199,11 +203,16 @@ Complete the following steps to configure these three components.
             api:
               site: ${env:DD_SITE_PARAMETER}
               key: ${env:DD_API_KEY}
+            sending_queue:
+              batch:
+                min_size: 10
+                max_size: 100
+                flush_timeout: 10s
 
         processors:
           resource:
             attributes:
-              - key: deployment.environment
+              - key: deployment.environment.name
                 value: "otel"
                 action: upsert
 
@@ -216,14 +225,14 @@ Complete the following steps to configure these three components.
           extensions: [datadog/extension]
           pipelines:
             traces:
-              processors: [resource, resourcedetection, memory_limiter, transform, batch]
+              processors: [memory_limiter, resource, resourcedetection, transform]
               exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
             metrics:
               receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
-              processors: [resource, resourcedetection, memory_limiter, transform, batch]
+              processors: [memory_limiter, resource, resourcedetection, transform]
               exporters: [otlphttp/prometheus, debug, datadog]
             logs:
-              processors: [resource, resourcedetection, memory_limiter, transform, batch]
+              processors: [memory_limiter, resource, resourcedetection, transform]
               exporters: [opensearch, debug, datadog]
     ```
 
@@ -252,7 +261,7 @@ make start
 If you don't have `make` installed, you can use the `docker compose` command directly:
 
 ```shell
-docker compose up --force-recreate --remove-orphans --detach
+docker compose --env-file .env --env-file .env.override up --force-recreate --remove-orphans --detach
 ```
 
 {{% /tab %}}

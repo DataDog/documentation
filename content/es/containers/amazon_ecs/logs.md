@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/agent/amazon_ecs/logs
+description: Configurar la recopilación de logs desde aplicaciones en contenedores
+  que se ejecutan en Amazon ECS con el Datadog Agent
 further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: Documentación
@@ -255,7 +257,7 @@ Consulta la [documentación sobre montajes de AWS Bind][6] para obtener más det
 
 El atributo `source` sirve para identificar la integración que usar para cada contenedor. Sobrescríbelo directamente en tus etiquetas de contenedores para empezar a usar las [integraciones de logs de Datadog][2]. Para obtener más información sobre este proceso, lee la [guía de Autodiscovery para logs][1].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -15,7 +15,7 @@ further_reading:
     text: "Learn more about rehydrating log archives"
 ---
 
-<div class="alert alert-warning">The Observability Pipelines Datadog Archives destination is in beta.</div>
+<div class="alert alert-danger">The Observability Pipelines Datadog Archives destination is in beta.</div>
 
 ## Overview
 
@@ -194,7 +194,7 @@ See the [Log Archives documentation][6] for additional information.
 
 You can configure the `datadog_archives` destination using the [configuration file](#configuration-file) or the [pipeline builder UI](#configuration-file).
 
-<div class="alert alert-warning">If the Worker is ingesting logs that are not coming from the Datadog Agent and are routed to the Datadog Archives destination, those logs are not tagged with <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes">reserved attributes</a>. This means that you lose Datadog telemetry and the benefits of <a href="https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes">unified service tagging</a>. For example, say your syslogs are sent to <code>datadog_archives</code> and those logs have the status tagged as <code>severity</code> instead of the reserved attribute of <code>status</code> and the host tagged as <code>hostname</code> instead of the reserved attribute <code>host</code>. When these logs are rehydrated in Datadog, the <code>status</code> for the logs are all set to <code>info</code> and none of the logs will have a hostname tag.</div>
+<div class="alert alert-danger">If the Worker is ingesting logs that are not coming from the Datadog Agent and are routed to the Datadog Archives destination, those logs are not tagged with <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes">reserved attributes</a>. This means that you lose Datadog telemetry and the benefits of <a href="https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes">unified service tagging</a>. For example, say your syslogs are sent to <code>datadog_archives</code> and those logs have the status tagged as <code>severity</code> instead of the reserved attribute of <code>status</code> and the host tagged as <code>hostname</code> instead of the reserved attribute <code>host</code>. When these logs are rehydrated in Datadog, the <code>status</code> for the logs are all set to <code>info</code> and none of the logs will have a hostname tag.</div>
 
 ### Configuration file
 

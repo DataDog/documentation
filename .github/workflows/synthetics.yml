@@ -24,15 +24,32 @@ jobs:
           sparse-checkout: |
             .
 
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=$(echo ${{ github.event.pull_request.head.ref }})" >>$GITHUB_OUTPUT
-        id: extract_branch
+      # Branch Name Validation to be run prior to workflow
+      - name: Validate branch name and set output
+        id: validate
+        env:
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          BRANCH="${{ env.BRANCH }}"
+          # Allow: letters, numbers, dots, hyphens, underscores, and forward slash
+          # This supports the required <name>/<description> format like "user.name/test-this-new-feature"
+          if [[ "$BRANCH" =~ ^[a-zA-Z0-9._/-]+$ ]] && [[ ${#BRANCH} -le 200 ]]; then
+            echo "valid=true" >> $GITHUB_OUTPUT
+            echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          else
+            echo "valid=false" >> $GITHUB_OUTPUT
+            echo "::error::Invalid branch name detected. Branch names must only contain letters, numbers, dots, hyphens, underscores, and forward slashes (max 200 chars)"
+          fi
 
       - name: Check preview status
         id: check-status
+        if: steps.validate.outputs.valid == 'true'
+        env:
+          BRANCH: ${{ steps.validate.outputs.branch }}
         run: |
-          URL="https://docs-staging.datadoghq.com/${{steps.extract_branch.outputs.branch}}"
+          # Use the validated branch name from previous step
+          BRANCH="${{ env.BRANCH }}"
+          URL="https://docs-staging.datadoghq.com/${BRANCH}"
           SUCCESS_CODES=("200" "302" "304")
           for i in {1..30}
           do
@@ -52,9 +69,10 @@ jobs:
           done
 
       - name: Run Datadog Synthetic tests
+        if: steps.validate.outputs.valid == 'true'
         uses: DataDog/synthetics-ci-github-action@d77d9c9a6228ff9b17a4e0056fb94d8c8010d79c # v1.3.0
         env:
-          CI_COMMIT_REF_NAME: ${{steps.extract_branch.outputs.branch}}
+          CI_COMMIT_REF_NAME: ${{ steps.validate.outputs.branch }}
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}

@@ -342,7 +342,7 @@ El endpoint TCP no es compatible para este sitio.
 
 **Notas**:
 
-* La API HTTPS admite logs con tamaños de hasta 1 MB. Sin embargo, para disfrutar de un rendimiento óptimo, es recomendado que cada log no supere los 25 kB. Si utilizas el Datadog Agent para registro, está configurado para dividir un log en 256 kB (256 000 bytes).
+* La API HTTPS admite logs de tamaños de hasta 1 MB. Sin embargo, para un rendimiento óptimo, se recomienda que un log individual no supere los 25  Kbytes. Si utilizas el Datadog Agent para registro, está configurado para dividir un log en 900 kB (900 000 bytes).
 * Un evento de logs no debería tener más de 100 etiquetas, y cada etiqueta no debería superar los 256 caracteres para un máximo de 10 millones de etiquetas únicas al día.
 * Un evento de log convertido a formato JSON debe contener menos de 256 atributos. Cada una de las claves de esos atributos debe tener menos de 50 caracteres, estar anidada en menos de 20 niveles sucesivos, y su valor respectivo debe tener menos de 1024 caracteres si se promueve como faceta.
 * Los eventos de logs se pueden enviar con una [marca temporal][14] de hasta 18 h atrás.

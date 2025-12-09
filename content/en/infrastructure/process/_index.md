@@ -25,7 +25,7 @@ further_reading:
 ---
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Live Processes and Live Process Monitoring are included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
 
@@ -156,7 +156,7 @@ See the standard [DaemonSet installation][1] and the [Docker Agent][2] informati
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
-<div class="alert alert-warning">You can view your ECS Fargate processes in Datadog. To see their relationship to ECS Fargate containers, use the Datadog Agent v7.50.0 or later.</div>
+<div class="alert alert-danger">You can view your ECS Fargate processes in Datadog. To see their relationship to ECS Fargate containers, use the Datadog Agent v7.50.0 or later.</div>
 
 In order to collect processes, the Datadog Agent must be running as a container within the task.
 

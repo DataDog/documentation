@@ -1,5 +1,6 @@
 ---
 title: Getting Started with CI Visibility
+description: Monitor CI pipeline health and performance with traces, metrics, and analytics to optimize development speed and reduce costs.
 further_reading:
 - link: 'https://www.datadoghq.com/blog/monitor-ci-pipelines/'
   tag: 'Blog'

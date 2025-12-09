@@ -3,7 +3,7 @@ title: Mobile Session Replay Privacy Options
 description: Configure privacy options for Mobile Session Replay.
 content_filters:
   - trait_id: platform
-    option_group_id: rum_sdk_platform_options
+    option_group_id: rum_sdk_platform_options_v2
     label: "SDK"
 further_reading:
     - link: '/real_user_monitoring/session_replay/mobile'
@@ -23,4 +23,4 @@ further_reading:
       text: Session Replay
 ---
 
-{% partial file="rum/session_replay/mobile/privacy_options.mdoc.md" /%}
+{% partial file="real_user_monitoring/session_replay/mobile/privacy_options.mdoc.md" /%}

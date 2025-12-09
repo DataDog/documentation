@@ -1,10 +1,11 @@
 ---
 title: Embedded Apps
+description: Embed published apps in dashboards and sync them with template variables and time frames for dynamic, contextual actions.
 disable_toc: false
 aliases:
     - /service_management/app_builder/embedded_apps
 further_reading:
-- link: "https://app.datadoghq.com/app-builder/action-catalog"
+- link: "https://app.datadoghq.com/actions/action-catalog/"
   tag: "App"
   text: "Action Catalog"
 ---
@@ -116,6 +117,6 @@ Once added, you can view and use your app in Software Catalog.
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][1].
 
-[1]: https://datadoghq.slack.com/
+[1]: https://chat.datadoghq.com/
 [2]: https://app.datadoghq.com/software/self-service
 [3]: https://app.datadoghq.com/software

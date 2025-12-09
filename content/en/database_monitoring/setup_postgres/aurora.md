@@ -5,6 +5,9 @@ further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Basic Postgres Integration"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -66,7 +69,7 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**Note:** IAM authentication is also supported. Please see [the guide][13] on how to configure this for your Aurora instance.
+**Note:** IAM authentication is also supported. Please see [the guide][14] on how to configure this for your Aurora instance.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -218,7 +221,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # dbname: '<DB_NAME>'
    ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
 2. [Restart the Agent][2].
 
@@ -439,7 +442,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 #### Autodiscovery annotations v2
 
@@ -452,7 +455,7 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+    ad.datadoghq.com/service.checks: |
       {
         "postgres": {
           "init_config": <INIT_CONFIG>,

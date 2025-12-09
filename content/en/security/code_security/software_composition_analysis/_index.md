@@ -6,8 +6,15 @@ aliases:
 - /security/application_security/software_composition_analysis/
 - /code_analysis/software_composition_analysis/
 - /security/application_security/vulnerability_management/
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
+
 ---
 ## Overview
+
 Software Composition Analysis (SCA) detects open source libraries in both your repositories and running services, providing end-to-end visibility of library vulnerabilities and license management from development to production.
 
 Using Software Composition Analysis provides organizations with the following benefits:
@@ -18,13 +25,16 @@ Using Software Composition Analysis provides organizations with the following be
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
 ## Set up Software Composition Analysis
+
+{{% security-products/sca-supported-lang %}}  
+
 SCA supports both static and runtime dependency detection:
-- For **static detection**, you can scan from your CI/CD pipelines or from Datadog's infrastructure (GitHub-only). See [static setup][1] to get started.
+- For **static detection**, you can scan your repositories from your CI/CD pipelines or directly from Datadog's infrastructure. See [static setup][1] to get started.
 - For **runtime detection**, you can enable SCA on services instrumented with Datadog APM. See [runtime setup][2] to get started.
 
 ## Search and filter results
 ### Vulnerabilities explorer
-The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities shown in this explorer are detected on the default branch and the last commit of a scanned repository and/or affecting a running service.
+The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
 
 ### Datadog severity score
 Each vulnerability has a defined base severity score. To assist in prioritizing remediation, Datadog modifies the base CVSS score into the Datadog Severity Score by considering evidence of suspicious requests or attacks, the business sensitivity or internet exposure of the environment, and the risk of a successful exploit.
@@ -55,8 +65,15 @@ Click on a library with a vulnerability to open a side panel that contains infor
 <!-- {{< img src="code_security/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}} -->
 
 ### Library inventory
-The Libraries [Inventory][8] helps you understand the list of libraries and its versions that are used in both your codebase and running on deployed services. For each library version, you can assess how often it is used, its license riskiness, and understand the health of each library (e.g. if it has reached EOL, if it is unmaintained, etc.)
 
+The [Library Inventory][8] provides visibility into the third-party libraries detected across your codebase. Datadog collects this information from:
+
+* **Static SCA**, which identifies all libraries referenced in your repositories, and  
+* **Runtime SCA**, which detects libraries that are actually loaded and used by your services at runtime.
+
+Use the Library Inventory to understand which dependencies you rely on, where they are used, and whether they contain known vulnerabilities or license risks.
+
+To learn more about how the inventory is generated, how Static and Runtime data differ, and how to interpret the library details (usage, vulnerabilities, licenses, versions, and OpenSSF score), see [Library Inventory][14].
 
 ### Library vulnerability context in APM
 SCA enriches the information Application Performance Monitoring (APM) is already collecting by flagging libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Software Catalog][10].
@@ -66,7 +83,7 @@ SCA enriches the information Application Performance Monitoring (APM) is already
 - Software supply chain & Software Bill of Materials (SBOM) management
 
 
-### Vulnerabilities lifecycle
+### Vulnerability lifecycle
 Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datadog after a certain period, depending on the service's usage of the vulnerable library.
 
 - **Hot Libraries:**
@@ -87,6 +104,11 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 
 <!-- **Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][9] documentation. -->
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /security/code_security/software_composition_analysis/setup_static/
 [2]: /security/code_security/software_composition_analysis/setup_runtime/
 [3]: https://app.datadoghq.com/security/appsec/vm
@@ -97,3 +119,4 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 [11]: https://app.datadoghq.com/security/appsec/vm/library
 [12]: https://app.datadoghq.com/ci/code-analysis
 [13]: /security/code_security/software_composition_analysis/setup_static/#upload-third-party-sbom-to-datadog
+[14]: /security/code_security/software_composition_analysis/library_inventory

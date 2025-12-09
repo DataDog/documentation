@@ -6,12 +6,12 @@
 
 <!-- Python Layer -->
 {{- if eq (.Get "layer") "python" -}}
-    113
+    119
 {{- end -}}
 
 <!-- Node Layer -->
 {{- if eq (.Get "layer") "node" -}}
-    127
+    131
 {{- end -}}
 
 <!-- Ruby Layer -->
@@ -36,7 +36,7 @@
 
 <!-- Python Versions -->
 {{- if eq (.Get "layer") "python-versions" -}}
-    `Python38`, `Python39`, `Python310`, `Python311`, `Python312`, `Python313`
+    `Python38`, `Python39`, `Python310`, `Python311`, `Python312`, `Python313`, `Python314`
 {{- end -}}
 
 {{- if eq (.Get "layer") "python-example-version" -}}
@@ -45,9 +45,9 @@
 
 <!-- Node Versions -->
 {{- if eq (.Get "layer") "node-versions" -}}
-    `Node18-x`, `Node20-x`, `Node22-x`
+    `Node18-x`, `Node20-x`, `Node22-x`, `Node24-x`
 {{- end -}}
 
 {{- if eq (.Get "layer") "node-example-version" -}}
-    Node22-x
+    Node24-x
 {{- end -}}

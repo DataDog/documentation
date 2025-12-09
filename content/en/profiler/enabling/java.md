@@ -309,7 +309,7 @@ The allocation engine does not depend on the `/proc/sys/kernel/perf_event_parano
 
 If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
 
-<div class="alert alert-warning">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
+<div class="alert alert-danger">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
 
 To enable native stack trace collection, understanding that it can destabilize your application, set:
 

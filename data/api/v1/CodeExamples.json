@@ -450,6 +450,11 @@
       "group": "dashboards",
       "suffix": "_3066042014",
       "description": "Create a new timeseries widget with new live span time format"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_607525069",
+      "description": "Create a new timeseries widget with product_analytics data source"
     }
   ],
   "CreatePublicDashboard": [
@@ -645,8 +650,23 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_2256674867",
+      "description": "Create a pipeline with Schema Processor and preserve_source false returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_1745625064",
+      "description": "Create a pipeline with Schema Processor and preserve_source true returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_2707101123",
       "description": "Create a pipeline with Span Id Remapper returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_501419705",
+      "description": "Create a pipeline with schema processor"
     }
   ],
   "SubmitDistributionPoints": [
@@ -718,6 +738,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_3541766733",
+      "description": "Create a monitor with assets returns \"OK\" response"
     },
     {
       "group": "monitors",

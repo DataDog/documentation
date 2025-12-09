@@ -35,7 +35,7 @@ To display raw values without HTML escaping (for example, URLs, or HTTP response
 {{{my_var}}}
 ```
 
-## Accessing list data
+<div class="alert alert-info">Certain messaging integrations (such as Google) require triple braces <code>&#123;&#123;&#123;</code> around template variables to ensure proper formatting when the message is displayed. For example, you can use <code>&#123;&#123;&#123;synthetics.attributes.result.failure.message&#125;&#125;&#125;</code>.</div>
 
 You can loop over lists (like steps or variables) or access items directly:
 
@@ -109,6 +109,33 @@ Use `#each` to loop over dictionaries or lists. You can access:
 
 Users: {{#each users}}`{{@key}}` ({{name}}){{#unless @last}}, {{/unless}}{{/each}}
 ```
+
+### Use local (config) variables in a notification
+
+```handlebars
+Synthetic Test Failed!
+
+Application: {{ synthetics.attributes.result.variables.config[APP_NAME].value }}
+URL Tested: {{ synthetics.attributes.result.variables.config[APP_URL].value }}
+Random value: {{ synthetics.attributes.result.variables.config[NAME].value }}
+
+Test: {{ synthetics.attributes.test.name }} ({{ synthetics.attributes.test.id }})
+Failed step: {{ synthetics.failed_step.name }}
+Location: {{ synthetics.attributes.location.id }}
+Result: {{ synthetics.result_url }}
+
+@your-email
+```
+
+<div class="alert alert-tip">To loop through all config variables and print their values safely:
+
+```handlebars
+{{#each synthetics.attributes.result.variables.config}}
+- {{@key}}: {{#if this.secure}}[secure]{{else}}{{this.value}}{{/if}}
+{{/each}}
+```
+
+</div>
 
 ## Steps loop
 

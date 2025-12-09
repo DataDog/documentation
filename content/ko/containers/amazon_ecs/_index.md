@@ -205,7 +205,7 @@ EC2 인스턴스의 보안 그룹 설정이 APM 및 DogStatsD의 포트를 공�
 
 #### 클라우드 네트워크 모니터링
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 기능은 리눅스에서만 사용할 수 있습니다.
 </div>
 
@@ -317,7 +317,7 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
 {{% site-region region="gov" %}}
 #### 정부용 Datadog FIPS 프록시 환경
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 기능은 리눅스에서만 사용할 수 있습니다.
 </div>
 

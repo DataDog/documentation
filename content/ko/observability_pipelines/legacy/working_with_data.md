@@ -22,7 +22,7 @@ title: (레거시) 데이터로 작업하기
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipeline은 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
+<div class="alert alert-danger">Observability Pipeline은 US1-FED Datadog 사이트에서 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
 ## 개요

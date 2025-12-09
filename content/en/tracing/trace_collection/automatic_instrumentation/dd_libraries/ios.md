@@ -23,7 +23,7 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 * Use default and add custom attributes to each span.
 * Leverage optimized network usage with automatic bulk posts.
 
-<div class="alert alert-info"><strong>Note</strong>: Datadog charges for <strong>ingested and indexed</strong> spans sent from your iOS applications, but does not charge for the underlying devices. Read more in the <a href="/account_management/billing/apm_tracing_profiler/">APM billing documentation</a>.</div>
+<div class="alert alert-info">Datadog charges for <strong>ingested and indexed</strong> spans sent from your iOS applications, but does not charge for the underlying devices. Read more in the <a href="/account_management/billing/apm_tracing_profiler/">APM billing documentation</a>.</div>
 
 ## Setup
 

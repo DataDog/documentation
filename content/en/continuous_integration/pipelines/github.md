@@ -1,5 +1,5 @@
 ---
-title: Set up CI Visibility on GitHub Actions Workflows
+title: GitHub Actions Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/github
 further_reading:
@@ -21,7 +21,7 @@ further_reading:
 
 [GitHub Actions][1] is an automation tool that allows you to build, test, and deploy your code in GitHub. Create workflows that automate every step of your development process, streamlining software updates and enhancing code quality with CI/CD features integrated into your repositories.
 
-Set up CI Visibility in GitHub Actions to track the execution of your workflows, identify performance bottlenecks, troubleshoot operational issues, and optimize your deployment processes.
+Set up CI Visibility for GitHub Actions to track the execution of your workflows, identify performance bottlenecks, troubleshoot operational issues, and optimize your deployment processes.
 
 ### Compatibility
 
@@ -44,6 +44,16 @@ The following GitHub versions are supported:
 
 - GitHub.com (SaaS)
 - GitHub Enterprise Server (GHES) 3.5.0 or later
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and GitHub Actions:
+
+| Datadog  | GitHub Actions |
+|----------|----------------|
+| Pipeline | Workflow       |
+| Job      | Job            |
+| Step     | Step           |
 
 ## Configure the Datadog integration
 
@@ -71,7 +81,7 @@ After the GitHub App is created and installed, enable CI Visibility on the accou
 
 Pipelines appear immediately after enabling CI Visibility for any account or repository.
 
-### Disable CI Visiblity for GitHub Actions
+### Disable CI Visibility for GitHub Actions
 
 To disable the CI Visibility GitHub Actions integration:
 

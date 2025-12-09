@@ -169,7 +169,7 @@ For additional configurations, see [Configuration Settings][1].
 
 ### Manual testing API
 
-<div class="alert alert-warning"><strong>Note</strong>: The Test Optimization manual testing API is in <strong>beta</strong> and subject to change.</div>
+<div class="alert alert-warning">The Test Optimization manual testing API is in <strong>beta</strong> and subject to change.</div>
 
 As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Optimization API (`ddtrace.ext.test_visibility`) to submit test optimization results as needed.
 

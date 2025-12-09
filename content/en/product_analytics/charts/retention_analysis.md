@@ -8,7 +8,7 @@ further_reading:
     - link: '/product_analytics/'
       tag: Documentation
       text: Product Analytics
-    - link: 'real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session'
+    - link: 'real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session'
       tag: Documentation
       text: Set user sessions
 ---
@@ -22,9 +22,9 @@ Only views and actions can act as events.
 
 ## Prerequisites
 
-In order for user retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
+For user retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
 
-## Retention types
+## Measuring retention events
 Product analytics support two types of retention event measurements:
 
 {{< img src="product_analytics/retention/pana_retention_measureby.png" alt="The two types of retention measurements available with product analytics" style="width:80%;" >}}
@@ -41,14 +41,13 @@ For each cohort and return period, `Return on or after` calculates the percentag
 
 `Return on or after` highlights users who either fully leave your product or stop using key functionalities, which is helpful when assessing the effectiveness of onboarding experiences.
 
-
-## Retention calculation and grouping 
-
-### Weighted average cohort calculation
+## Calculating retention events 
+### What is a weighted average cohort
 The weighted average cohort summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than an average.
 
 This weighted average calculation is applied across all [visualization types](#visualization-types). For example, in the retention grid, the weighted average is used to populate the summary cell for each time interval. 
 
+### How to calculate a weighted average cohort
 To compute the value for a specific interval (such as Week 1 in the retention grid), multiply each cohort's value by its size, sum the results, and divide by the total cohort size. The formula is:
 
 ```
@@ -71,8 +70,8 @@ This means each cohort's retention rate is scaled by its number of users before 
 <strong>Note:</strong> The retention chart displays greyed-out values when data is partial or incomplete. This occurs when the time period is ongoing and retention cannot yet be fully calculated.
 </div>
 
-### Grouping
-You scope retention based on event attributes. The `group by` function is applied to the **start event**. This is helpful is you want to, for example, see how retention compares across user countries. 
+## Grouping retention events
+Use the `group by` function to break down retention based on events' attributes. This is helpful is you want to, for example, see how retention compares across user countries. The `group by` function is applied to the **start event**.
 
 
 ## Build a graph
@@ -83,12 +82,16 @@ To build a retention graph, navigate to **[Product Analytics > Charts][1]**, cli
 1. Select the view or action to act as the starting event for defining a group of users.<br>
 2. Select the view or action to act as the return event.
 
-### 2. Define the the measures
+### 2. Define the measures
 1. Select `Retention rate` to see the data in percentages, or `Unique users` to see the absolute number of users. 
 2. Scope the retention measure `Return on or after` or `Return on` based on when the return event occurs.
-3. Choose the time frame for which you want to analyze user retention. Select a period size (day, week, or month) to define how return events are grouped in the analysis.
+3. Choose the time frame for which you want to analyze user retention. Select a period size (day, week, or month) to define how return events are grouped in the analysis. Consider the following when selecting a period size: 
+- **Daily retention**: Can be applied for up to a month.
+- **Weekly retention**: Can be applied for up to a year.
+- **Monthly retention**: Can be applied for up to 16 months.
 
 {{< img src="product_analytics/retention/pana_retention_timeframes_ui.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
+
 
 ### 3. Define users and add filters
 Optionally, select a specific [segment][6] to measure the retention of its users. This defaults to all users. You can also add any desired filter criteria, such as `user country`, `device type`, or `operating system`.
@@ -162,8 +165,9 @@ Top list
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/retention-analysis
-[2]: /real_user_monitoring/browser/data_collected/#view-attributes
-[3]: /real_user_monitoring/browser/data_collected/#action-timing-metrics
-[4]: /real_user_monitoring/browser/advanced_configuration#user-session
+[2]: /real_user_monitoring/application_monitoring/browser/data_collected/#view-attributes
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/#action-timing-metrics
+[4]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#user-session
 [5]: /help
 [6]: https://app.datadoghq.com/product-analytics/segments
+real_user_monitoring/application_monitoring

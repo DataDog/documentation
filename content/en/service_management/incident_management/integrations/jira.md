@@ -9,6 +9,9 @@ further_reading:
 - link: "https://app.datadoghq.com/integrations/jira"
   tag: "App"
   text: "In-app Jira integration tile"
+- link: "/service_management/incident_management/follow-ups"
+  tag: "Documentation"
+  text: "Export follow-ups to Jira"
 
 ---
 

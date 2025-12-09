@@ -1,5 +1,6 @@
 ---
 title: Enable Autocomplete and Search for .NET
+description: Configure .NET applications to enable IDE-like autocomplete and search features for Dynamic Instrumentation.
 is_beta: true
 private: false
 code_lang: dotnet

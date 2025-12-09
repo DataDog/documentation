@@ -121,28 +121,6 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][11] c
 
 If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions.
 
-## Integration settings
-
-{{< img src="synthetics/settings/integration_settings.png" alt="Integration Settings page" style="width:100%;">}}
-
-### APM integration for browser tests
-
-Datadog's APM integration headers allow Datadog to link browser tests with APM.
-
-Define which endpoints you want to send the APM headers to by adding a URL to the **Value** list. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
-
-Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**.
-
-For more information, see [Connect Synthetics and APM Traces][15].
-
-### Synthetic data collection and RUM applications
-
-To allow Datadog to collect RUM data from your test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit RUM settings in the browser test recorder. To apply changes, click **Save RUM Data Collection**.
-
-Select a default application for new browser tests to send data. Use the **Default Application** dropdown menu to select a RUM application that collects browser test data. To apply changes, click **Save RUM Data Applications**.
-
-For more information, see [Explore RUM & Session Replay][14].
-
 ## Private locations
 
 For more information, see [Run Synthetic Tests from Private Locations][3].
@@ -292,7 +270,7 @@ Use [granular access control][22] to limit who has access to your test based on 
 6. Select the level of access you want to associate with each of them.
 7. Click **Done**.
 
-<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
 
 | Access level | View GV value | View GV metadata | Use GV in test | Edit GV value/metadata  |
 | ------------ | --------------| ---------------- | -------------- | ----------------------- |
@@ -314,13 +292,17 @@ Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.co
 
 For more information, see [Connect Synthetics and APM Traces][15].
 
-### Synthetic data collection and RUM applications
+### Synthetic browser test data collection and RUM applications
 
-To allow Datadog to collect RUM data from your test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit the RUM setting in the browser test recorder. When you are done enabling data collection, click **Save RUM Data Collection**.
+To allow Datadog to collect RUM data from your browser test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit the RUM setting in the browser test recorder. When you are done enabling data collection, click **Save RUM Data Collection**.
 
 Select a RUM application from the **Default Application** dropdown menu that collects browser test data. When you are done specifying a default application, click **Save RUM Data Applications**.
 
 For more information, see [Explore RUM & Session Replay][14].
+
+### Synthetic mobile application test data collection
+
+To allow Datadog to collect RUM data from your mobile application test runs, configure and package the RUM [iOS SDK][23] or [Android SDK][24] with your `.ipa` or `.apk` file. This automatically links RUM data, giving you end-to-end observability of test runs.
 
 ## Further Reading
 
@@ -341,10 +323,12 @@ For more information, see [Explore RUM & Session Replay][14].
 [13]: /account_management/billing/usage_attribution
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
-[16]: /synthetics/browser_tests/actions/#use-variables
+[16]: /synthetics/browser_tests/test_steps/#use-variables
 [17]: /synthetics/mobile_app_testing/
 [18]: /synthetics/mobile_app_testing/settings/
 [19]: /synthetics/mobile_app_testing/#use-global-variables
 [20]: https://app.datadoghq.com/synthetics/settings/default
 [21]: https://app.datadoghq.com/monitors/settings/policies
 [22]: /account_management/rbac/granular_access
+[23]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios/setup?tab=swiftpackagemanagerspm
+[24]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/setup?tab=rum

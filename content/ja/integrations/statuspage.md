@@ -63,7 +63,7 @@ Statuspage とインテグレーションすることで、以下のことが可
 
 #### Statuspage アカウントの接続
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Incident Management インテグレーションは、{{< region-param key=dd_datacenter code="true" >}} サイトではサポートされていません。
 </div>
 {{% /site-region %}}

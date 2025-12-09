@@ -2,7 +2,7 @@
 title: Usage Attribution
 aliases:
     - /account_management/billing/advanced_usage_reporting/
-    - /account_management/billing/custom_usage_reporitng/
+    - /account_management/billing/custom_usage_reporting/
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"
@@ -12,10 +12,6 @@ algolia:
 ---
 
 ## Overview
-
-<div class="alert alert-warning">
-Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-</div>
 
 Administrators or users with the Usage Read permission can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 

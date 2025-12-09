@@ -1,5 +1,6 @@
 ---
 title: Connect RUM and Traces
+description: "Connect frontend RUM data with backend APM traces for end-to-end visibility across your application stack and user journey."
 aliases:
 - /real_user_monitoring/connect_rum_and_traces
 - /real_user_monitoring/platform/connect_rum_and_traces/
@@ -120,7 +121,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
       - `RegExp`: matches if any substring of the URL matches the provided RegExp. For example, `/^https:\/\/[^\/]+\.my-api-domain\.com/` matches URLs like `https://foo.my-api-domain.com/path`, but not `https://notintended.com/?from=guess.my-api-domain.com`. **Note:** The RegExp is not anchored to the start of the URL unless you use `^`. Be careful, as overly broad patterns can unintentionally match unwanted URLs and cause CORS errors.
       - `function`: evaluates with the URL as parameter. Returning a `boolean` set to `true` indicates a match.
 
-<div class="alert alert-warning">When using RegExp, the pattern is tested against the entire URL as a substring, not just the prefix. To avoid unintended matches, anchor your RegExp with `^` and be as specific as possible. </div>
+<div class="alert alert-danger">When using RegExp, the pattern is tested against the entire URL as a substring, not just the prefix. To avoid unintended matches, anchor your RegExp with `^` and be as specific as possible. </div>
 
 3.  _(Optional)_ Configure the `traceSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces, for example:
 
@@ -135,20 +136,20 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
-4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `all` by default).
+4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `sampled` by default).
 
     For example, if you set the `traceSampleRate` to 20% in the Browser SDK:
     - When `traceContextInjection` is set to `all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
 
   {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
 
-  - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+    - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
 
     {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
 
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
-[1]: /real_user_monitoring/browser/
+[1]: /real_user_monitoring/application_monitoring/browser/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "Android RUM" %}}
@@ -304,15 +305,15 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     )..enableHttpTracking()
     ```
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration#automatically-track-resources
+[1]: /real_user_monitoring/application_monitoring/flutter/setup/
+[2]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration#automatically-track-resources
 {{% /tab %}}
 
 
 {{% tab "Roku RUM" %}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
+<div class="alert alert-danger">RUM for Roku is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
 1. Set up [RUM Roku Monitoring][1].
@@ -326,7 +327,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         result = ddUrlTransfer.GetToString()
     ```
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
+[1]: /real_user_monitoring/application_monitoring/roku/setup/
 
 
 {{% /tab %}}
@@ -371,8 +372,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup?tab=rum#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
+[1]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup
+[2]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup?tab=rum#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
 {{% /tab %}}
 {{< /tabs >}}
 

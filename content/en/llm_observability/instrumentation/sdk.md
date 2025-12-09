@@ -9,6 +9,15 @@ aliases:
     - /llm_observability/setup/sdk/java
     - /llm_observability/sdk/java
     - /llm_observability/sdk/
+    - /llm_observability/instrumentation/custom_instrumentation
+    - /tracing/llm_observability/trace_an_llm_application
+    - /llm_observability/setup
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview
@@ -87,8 +96,9 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP`
-: required - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
+: optional - _string_
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+<br />**Note**: Before version `ddtrace==3.14.0`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
@@ -97,6 +107,8 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 `DD_API_KEY`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
+
+[1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -120,8 +132,9 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP`
-: required - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
+: optional - _string_
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+<br />**Note**: Before version `dd-trace@5.66.0`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
@@ -130,6 +143,8 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 `DD_API_KEY`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
+
+[1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
 {{% tab "Java" %}}
 
@@ -154,8 +169,9 @@ You can supply the following parameters as environment variables (for example, `
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP` or `dd.llmobs.ml.app`
-: required - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
+: optional - _string_
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of [`DD_SERVICE`][1], or the value of a propagated `DD_LLMOBS_ML_APP` from an upstream service.
+<br />**Note**: Before version 1.54.0 of `dd-trace-java`, this is a **required field**.
 
 `DD_LLMOBS_AGENTLESS_ENABLED` or `dd.llmobs.agentless.enabled`
 : optional - _integer or string_ - **default**: `false`
@@ -164,6 +180,8 @@ You can supply the following parameters as environment variables (for example, `
 `DD_API_KEY` or `dd.api.key`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
+
+[1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -258,6 +276,10 @@ const llmobs = tracer.llmobs;
 
 **Options for general tracer configuration**:
 
+`site`
+: optional - _string_
+<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this defaults to the value of `DD_SITE`.
+
 `env`
 : optional - _string_
 <br />The name of your application's environment (examples: `prod`, `pre-prod`, `staging`). If not provided, this defaults to the value of `DD_ENV`.
@@ -269,10 +291,6 @@ const llmobs = tracer.llmobs;
 ##### Environment variables
 
 Set the following values as environment variables. They cannot be configured programmatically.
-
-`DD_SITE`
-: required - _string_
-<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_API_KEY`
 : optional - _string_
@@ -494,6 +512,8 @@ To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm(
 
 `model_provider`
 : optional - _string_ - **default**: `"custom"`
+<br />The name of the model provider.
+<br />**Note**: To display the estimated cost in US dollars, set `model_provider` to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `session_id`
 : optional - _string_
@@ -533,6 +553,7 @@ To trace an LLM span, specify the span kind as `llm`, and optionally specify the
 `modelProvider`
 : optional - _string_ - **default**: `"custom"`
 <br/>The name of the model provider.
+<br />**Note**: To display the estimated cost in US dollars, set `modelProvider` to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `sessionId`
 : optional - _string_
@@ -576,6 +597,7 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 `modelProvider`
 : optional - _String_ - **default**: `"custom"`
 <br/>The name of the model provider.
+<br />**Note**: To display the estimated cost in US dollars, set `modelProvider` to one of the following values: `openai`, `azure_openai`, or `anthropic`.
 
 `mlApp`
 : optional - _String_
@@ -1167,6 +1189,68 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 {{% /tab %}}
 {{< /tabs >}}
 
+## Nesting spans
+
+Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import task, workflow
+
+@workflow
+def extract_data(document):
+    preprocess_document(document)
+    ... # performs data extraction on the document
+    return
+
+@task
+def preprocess_document(document):
+    ... # preprocesses a document for data extraction
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript" >}}
+function preprocessDocument (document) {
+  ... // preprocesses a document for data extraction
+  return
+}
+preprocessDocument = llmobs.wrap({ kind: 'task' }, preprocessDocument)
+
+function extractData (document) {
+  preprocessDocument(document)
+  ... // performs data extraction on the document
+  return
+}
+extractData = llmobs.wrap({ kind: 'workflow' }, extractData)
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+
+public class MyJavaClass {
+  public void preprocessDocument(String document) {
+  LLMObsSpan taskSpan = LLMObs.startTaskSpan("preprocessDocument", null, "session-141");
+   ...   // preprocess document for data extraction
+   taskSpan.annotateIO(...); // record the input and output
+   taskSpan.finish();
+  }
+
+  public String extractData(String document) {
+    LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("extractData", null, "session-141");
+    preprocessDocument(document);
+    ... // perform data extraction on the document
+    workflowSpan.annotateIO(...); // record the input and output
+    workflowSpan.finish();
+  }
+}
+
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Tracking user sessions
 
@@ -1265,7 +1349,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1322,6 +1406,7 @@ def similarity_search():
     return
 
 {{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -1358,7 +1443,7 @@ The `annotationOptions` object can contain the following:
 
 `tags`
 : optional - _object_
-<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags][1].
+<br />An object of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, etc.). For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1414,8 +1499,6 @@ function similaritySearch () {
 similaritySearch = llmobs.wrap({ kind: 'retrieval', name: 'getRelevantDocs' }, similaritySearch)
 
 {{< /code-block >}}
-
-[1]: /getting_started/tagging/
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -1662,7 +1745,7 @@ public class MyJavaClass {
 {{< tabs >}}
 {{% tab "Python" %}}
 
-The SDK's `LLMObs.annotate_context()` method returns a context manager that can be used to modify all auto-instrumented spans started while the annotation context is active.
+The SDK's `LLMObs.annotation_context()` method returns a context manager that can be used to modify all auto-instrumented spans started while the annotation context is active.
 
 The `LLMObs.annotation_context()` method accepts the following arguments:
 
@@ -1674,11 +1757,11 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `prompt`
 : optional - _dictionary_
-<br />A dictionary that represents the prompt used for an LLM call in the following format:<br />`{"template": "...", "id": "...", "version": "...", "variables": {"variable_1": "...", ...}}`.<br />You can also import the `Prompt` object from `ddtrace.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
+<br />A dictionary that represents the prompt used for an LLM call. See the [Prompt object](#prompt-tracking-arguments) documentation for the complete schema and supported keys. You can also import the `Prompt` object from `ddtrace.llmobs.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags][1].
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 
 {{% /collapse-content %}}
 
@@ -1694,11 +1777,13 @@ def rag_workflow(user_question):
 
     with LLMObs.annotation_context(
         prompt = Prompt(
-            variables = {
+            id="chatbot_prompt",
+            version="1.0.0",
+            template="Please answer the question using the provided context: {{question}}\n\nContext:\n{{context}}",
+            variables={
                 "question": user_question,
                 "context": context_str,
-            },
-            template = "Please answer the..."
+            }
         ),
         tags = {
             "retrieval_strategy": "semantic_similarity"
@@ -1710,11 +1795,181 @@ def rag_workflow(user_question):
 
 {{< /code-block >}}
 
-[1]: /getting_started/tagging/
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+The SDK's `llmobs.annotationContext()` accepts a callback function that can be used to modify all auto-instrumented spans started while inside the scope of the callback function.
+
+The `llmobs.annotationContext()` method accepts the following options on the first argument:
+
+{{% collapse-content title="Options" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
+
+`name`
+: optional - _str_
+<br />Name that overrides the span name for any auto-instrumented spans that are started within the annotation context.
+
+`tags`
+: optional - _object_
+<br />An object of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+{{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="javascript" >}}
+const { llmobs } = require('dd-trace');
+
+function ragWorkflow(userQuestion) {
+    const contextStr = retrieveDocuments(userQuestion).join(" ");
+
+    const completion = await llmobs.annotationContext({
+      tags: {
+        retrieval_strategy: "semantic_similarity"
+      },
+      name: "augmented_generation"
+    }, async () => {
+      const completion = await openai_client.chat.completions.create(...);
+      return completion.choices[0].message.content;
+    });
+}
+
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Prompt tracking
+
+Attach structured prompt metadata to the LLM span so you can reproduce results, audit changes, and compare prompt performance across versions. When using templates, LLM Observability also provides [version tracking](#version-tracking) based on template content changes.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the LLM call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
+
+#### Arguments
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="prompt-tracking-arguments" %}}
+
+`prompt`
+: required - dictionary
+<br />A typed dictionary that follows the Prompt schema below.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Prompt structure" level="h4" expanded=false id="prompt-structure" %}}
+
+Supported keys:
+
+- `id` (str): Logical identifier for this prompt. Should be unique per `ml_app`. Defaults to `{ml_app}-unnamed_prompt`
+- `version` (str): Version tag for the prompt (for example, "1.0.0"). See [version tracking](#version-tracking) for more details.
+- `variables` (Dict[str, str]): Variables used to populate the template placeholders.
+- `template` (str): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`).
+- `chat_template` (List[Message]): Multi-message template form. Provide a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
+- `tags` (Dict[str, str]): Tags to attach to the prompt run.
+- `rag_context_variables` (List[str]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `rag_query_variables` (List[str]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+
+{{% /collapse-content %}}
+
+#### Example: single-template prompt
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def answer_question(text):
+    # Attach prompt metadata to the upcoming LLM span using LLMObs.annotation_context()
+    with LLMObs.annotation_context(prompt={
+        "id": "translation-template",
+        "version": "1.0.0",
+        "chat_template": [{"role": "user", "content": "Translate to {{lang}}: {{text}}"}],
+        "variables": {"lang": "fr", "text": text},
+        "tags": {"team": "nlp"}
+    }):
+        # Example provider call (replace with your client)
+        completion = openai_client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": f"Translate to fr: {text}"}]
+        )
+    return completion
+{{< /code-block >}}
+
+#### Example: LangChain prompt templates
+
+When you use LangChain's prompt templating with auto-instrumentation, assign templates to variables with meaningful names. Auto-instrumentation uses these names to identify prompts.
+
+{{< code-block lang="python" >}}
+# "translation_template" will be used to identify the template in Datadog
+translation_template = PromptTemplate.from_template("Translate {text} to {language}")
+chain = translation_template | llm
+{{< /code-block >}}
+
+#### Notes
+- Annotating a prompt is only available on LLM spans.
+- Place the annotation immediately before the provider call so it applies to the correct LLM span.
+- Use a unique prompt `id` to distinguish different prompts within your application.
+- Keep templates static by using placeholder syntax (like `{{variable_name}}`) and define dynamic content in the `variables` section.
+- For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Version tracking
+
+LLM Observability provides automatic versioning for your prompts when no explicit version is specified. When you provide a `template` or `chat_template` in your prompt metadata without a `version` tag, the system automatically generates a version by computing a hash of the template content. If you do provide a `version` tag, LLM Observability uses your specified version label instead of auto-generating one.
+
+The versioning system works as follows:
+- **Auto versioning**: When no `version` tag is provided, LLM Observability computes a hash of the `template` or `chat_template` content to automatically generate a numerical version identifier
+- **Manual versioning**: When a `version` tag is provided, LLM Observability uses your specified version label exactly as provided
+- **Version history**: Both auto-generated and manual versions are maintained in the version history to track prompt evolution over time
+
+This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
+
+## Monitoring costs
+Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Use `LLMObs.annotate(metrics=...)` to attach token or cost metrics for a LLM/embedding call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
+
+#### Arguments
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="cost-tracking-arguments" %}}
+
+`metrics`
+: optional - dictionary
+<br />Token: `input_tokens`, `output_tokens`, `total_tokens`, `non_cached_input_tokens`, `cache_read_input_tokens`, `cache_write_input_tokens`
+<br />Cost (in dollars): `input_cost`, `output_cost`, `total_cost`, `non_cached_input_cost`, `cache_read_input_cost`, `cache_write_input_cost`
+
+{{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="model_name", model_provider="model_provider")
+def llm_call_a(prompt):
+    resp = ... # llm call here
+    # Annotate token metrics
+    LLMObs.annotate(
+        metrics={"input_tokens": 50, "output_tokens": 120, "total_tokens": 170,},
+    )
+    return resp
+
+@llm(model_name="model_name", model_provider="model_provider")
+def llm_call_b(prompt):
+    resp = ... # llm call here
+    # Annotate cost metrics
+    LLMObs.annotate(
+        metrics={"input_cost": 3, "output_cost": 7, "total_cost": 10,},
+    )
+    return resp
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 
 ## Evaluations
@@ -1780,13 +2035,13 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 {{< tabs >}}
 {{% tab "Python" %}}
-`LLMObs.submit_evaluation_for()` can be used to submit your custom evaluation associated with a given span.
+`LLMObs.submit_evaluation()` can be used to submit your custom evaluation associated with a given span.
 
-<div class="alert alert-info"><code>LLMObs.submit_evaluation</code> is deprecated and will be removed in ddtrace 3.0.0. As an alternative, use <code>LLMObs.submit_evaluation_for</code>.</div>
+<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> is deprecated and will be removed in the next major version of ddtrace (4.0). To migrate, rename your <code>LLMObs.submit_evaluation_for</code> calls with <code>LLMObs.submit_evaluation</code>.</div>
 
 **Note**: Custom evaluations are evaluators that you implement and host yourself. These differ from out-of-the-box evaluations, which are automatically computed by Datadog using built-in evaluators. To configure out-of-the-box evaluations for your application, use the [**LLM Observability** > **Settings** > **Evaluations**][1] page in Datadog.
 
-The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
+The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="submit-evals-arguments" %}}
 `label`
@@ -1795,11 +2050,11 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `metric_type`
 : required - _string_
-<br />The type of the evaluation. Must be `categorical` or `score`.
+<br />The type of the evaluation. Must be `categorical`, `score`, or `boolean`.
 
 `value`
 : required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (`metric_type==categorical`) or integer/float (`metric_type==score`).
+<br />The value of the evaluation. Must be a string (`metric_type==categorical`), integer/float (`metric_type==score`), or boolean (`metric_type==boolean`).
 
 `span`
 : optional - _dictionary_
@@ -1821,7 +2076,15 @@ The `LLMObs.submit_evaluation_for()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][2].
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`assessment`
+: optional - _string_
+<br />An assessment of this evaluation. Accepted values are `pass` and `fail`.
+
+`reasoning`
+: optional - _string_
+<br />A text explanation of the evaluation result.
 {{% /collapse-content %}}
 
 #### Example
@@ -1840,7 +2103,7 @@ def llm_call():
         tags = {'msg_id': msg_id}
     )
 
-    LLMObs.submit_evaluation_for(
+    LLMObs.submit_evaluation(
         span_with_tag_value = {
             "tag_key": "msg_id",
             "tag_value": msg_id
@@ -1850,23 +2113,27 @@ def llm_call():
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
+        assessment="fail",
+        reasoning="Malicious intent was detected in the user instructions."
     )
 
     # joining an evaluation to a span via span ID and trace ID
     span_context = LLMObs.export_span(span=None)
     LLMObs.submit_evaluation(
-        span = span_context,
+        span_context = span_context,
         ml_app = "chatbot",
         label="harmfulness",
         metric_type="score",
         value=10,
         tags={"evaluation_provider": "ragas"},
+        assessment="fail",
+        reasoning="Malicious intent was detected in the user instructions."
     )
     return completion
 {{< /code-block >}}
 
-[1]: https://app.datadoghq.com/llm/settings/evaluations
-[2]: /getting_started/tagging/
+[1]: https://app.datadoghq.com/llm/evaluations
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -1901,7 +2168,7 @@ The `evaluationOptions` object can contain the following:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][1].
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 {{% /collapse-content %}}
 
 #### Example
@@ -1945,7 +2212,7 @@ The `LLMObs.SubmitEvaluation()` method accepts the following arguments:
 
 `tags`
 : optional - _Map<String, Object>_
-<br />A dictionary of string key-value pairs used to tag the evaluation. For more information about tags, see [Getting Started with Tags][1].
+<br />A dictionary of string key-value pairs used to tag the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
 {{% /collapse-content %}}
 
 #### Example
@@ -1980,9 +2247,10 @@ public class MyJavaClass {
 
 ## Span processing
 
+To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. Processor functions can either return the modified span to emit it, or return `None`/`null` to prevent the span from being emitted entirely. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
+
 {{< tabs >}}
 {{% tab "Python" %}}
-To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. See the following examples for usage.
 
 ### Example
 
@@ -2032,6 +2300,115 @@ def call_openai():
         # make call to openai
         ...
 {{< /code-block >}}
+
+### Example: preventing spans from being emitted
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import LLMObsSpan
+from typing import Optional
+
+def filter_processor(span: LLMObsSpan) -> Optional[LLMObsSpan]:
+    # Skip spans that are marked as internal or contain sensitive data
+    if span.get_tag("internal") == "true" or span.get_tag("sensitive") == "true":
+        return None  # This span will not be emitted
+
+    # Process and return the span normally
+    return span
+
+LLMObs.register_processor(filter_processor)
+
+# This span will be filtered out and not sent to Datadog
+with LLMObs.workflow("internal_workflow"):
+    LLMObs.annotate(tags={"internal": "true"})
+    # ... workflow logic
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+### Example
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>"
+  }
+})
+
+const llmobs = tracer.llmobs
+
+function redactProcessor(span) {
+  if (span.getTag("no_output") === "true") {
+    for (const message of span.output) {
+      message.content = ""
+    }
+  }
+  return span
+}
+
+llmobs.registerProcessor(redactProcessor)
+{{< /code-block >}}
+
+### Example: conditional modification with auto-instrumentation
+
+When using auto instrumentation, the span is not always contextually accessible. To conditionally modify the inputs and outputs on auto-instrumented spans, `llmobs.annotationContext()` can be used in addition to a span processor.
+
+{{< code-block lang="javascript" >}}
+const { llmobs } = require('dd-trace');
+
+function redactProcessor(span) {
+  if (span.getTag("no_input") == "true") {
+    for (const message of span.input) {
+      message.content = "";
+    }
+  }
+
+  return span;
+}
+
+llmobs.registerProcessor(redactProcessor);
+
+async function callOpenai() {
+  await llmobs.annotationContext({ tags: { no_input: "true" } }, async () => {
+    // make call to openai
+  });
+}
+{{< /code-block >}}
+
+### Example: preventing spans from being emitted
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>"
+  }
+})
+
+const llmobs = tracer.llmobs
+
+function filterProcessor(span) {
+  // Skip spans that are marked as internal or contain sensitive data
+  if (span.getTag("internal") === "true" || span.getTag("sensitive") === "true") {
+    return null  // This span will not be emitted
+  }
+
+  // Process and return the span normally
+  return span
+}
+
+llmobs.registerProcessor(filterProcessor)
+
+// This span will be filtered out and not sent to Datadog
+function internalWorkflow() {
+  return llmobs.trace({ kind: 'workflow', name: 'internalWorkflow' }, (span) => {
+    llmobs.annotate({ tags: { internal: "true" } })
+    // ... workflow logic
+  })
+}
+{{< /code-block >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -2275,6 +2652,9 @@ tracer.use('http', false) // disable the http integration
 {{% /tab %}}
 {{< /tabs >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/openai/openai-python
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
@@ -2287,3 +2667,4 @@ tracer.use('http', false) // disable the http integration
 [11]: /tracing/trace_collection/compatibility/python/#integrations
 [12]: /tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/instrumentation/auto_instrumentation/
+[14]: /llm_observability/monitoring/cost

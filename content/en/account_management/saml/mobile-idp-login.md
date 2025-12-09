@@ -1,5 +1,6 @@
 ---
 title: The Datadog Mobile App with IdP Initiated SAML
+description: Use the Datadog mobile app with IdP-initiated SAML authentication by configuring relay states for OneLogin, Okta, and Google identity providers.
 is_public: true
 aliases:
   - /account_management/faq/how-do-i-use-the-mobile-app-with-saml/

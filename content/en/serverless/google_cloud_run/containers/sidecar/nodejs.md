@@ -40,27 +40,33 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
 2. **Install serverless-init as a sidecar**.
 
+   {{% serverless-init-install mode="sidecar" %}}
+
    {{< tabs >}}
 
    {{% tab "Datadog CLI" %}}
    {{% gcr-install-sidecar-datadog-ci %}}
    {{% /tab %}}
 
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform %}}
+   {{% /tab %}}
+
    {{% tab "YAML Deploy" %}}
    {{% gcr-install-sidecar-yaml language="nodejs" %}}
    {{% /tab %}}
 
-   {{% tab "Custom" %}}
-   {{% gcr-install-sidecar-custom %}}
+   {{% tab "Other" %}}
+   {{% gcr-install-sidecar-other %}}
    {{% /tab %}}
 
    {{< /tabs >}}
 
 3. **Set up logs**.
 
-   In the previous step, you created a shared volume. Additionally, you set the `DD_SERVERLESS_LOG_PATH` env var, or it was defaulted to `/shared-volume/logs/app.log`.
+   In the previous step, you created a shared volume. You may have also set the `DD_SERVERLESS_LOG_PATH` environment variable, which defaults to `/shared-volume/logs/app.log`.
 
-   Now, you will need to configure your logging library to write logs to that file. In Node.js, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
+   In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Node.js, we recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
    {{< code-block lang="javascript" disable_copy="false" >}}
 const tracer = require('dd-trace').init({
   logInjection: true,
@@ -79,7 +85,7 @@ const logger = createLogger({
   ],
 });
 
-logger.info(`Hello world!`);
+logger.info('Hello world!');
 {{< /code-block >}}
 
    Datadog recommends setting the environment variables `DD_LOGS_INJECTION=true` (in your main container) and `DD_SOURCE=nodejs` (in your sidecar container) to enable advanced Datadog log parsing.
@@ -92,11 +98,11 @@ logger.info(`Hello world!`);
 
    To send custom metrics, [view code examples][3]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="sidecar" language="nodejs" %}}
+{{% serverless-init-env-vars-sidecar language="nodejs" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -104,4 +110,4 @@ logger.info(`Hello world!`);
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
-[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5

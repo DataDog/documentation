@@ -134,7 +134,7 @@ Alternatively, check if your `datadog.repo` file contains `https://keys.datadogh
 
 ## The `datadog-signing-keys` package
 
-<div class="alert alert-info"><strong>Note:</strong> This section only applies to DEB Agent package users.</div>
+<div class="alert alert-info">This section only applies to DEB Agent package users.</div>
 
 Since Agent v6.31.0 and v7.31.0, all Datadog DEB packages have a soft dependency on the `datadog-signing-keys` package. Since Agent v6.35.1 and v 7.35.1, all Datadog DEB packages have a soft dependency on the `datadog-signing-keys` package version `1.1.0`.
 
@@ -163,7 +163,7 @@ With the third method, you need to explicitly install the `datadog-signing-keys`
 
 ### datadog-signing-keys version 1.1.0
 
-<div class="alert alert-info"><strong>Note:</strong> This section only applies to DEB Agent package users.</div>
+<div class="alert alert-info">This section only applies to DEB Agent package users.</div>
 
 `datadog-signing-keys` versions before 1.1.0 do not handle the following corner cases:
 

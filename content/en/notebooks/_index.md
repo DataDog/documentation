@@ -1,10 +1,14 @@
 ---
 title: Notebooks
+description: "Create collaborative rich text documents with live Datadog graphs for investigations, postmortems, runbooks, and data-driven storytelling."
 aliases:
   - /graphing/notebooks/
   - /notebooks_new/
   - /notebooks_legacy/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"
@@ -73,7 +77,7 @@ Additional graph configuration options are accessible under the three-dot ellips
 
 ### Rich text features
 
-Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list. 
+Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list.
 
 | Feature       | Description                                                                                                                |
 |---------------|----------------------------------------------------------------------------------------------------------------------------|
@@ -109,7 +113,7 @@ At the bottom-left corner of a notebook, click the keyboard icon to view a list 
 
 Additionally, you can use the following shortcuts to cut and paste widgets (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>).
 
-### Table of contents 
+### Table of contents
 
 Notebooks automatically generate a table of contents from any headers or graphs you insert into your document. You can create a header using the markdown shortcut `#` or by selecting text and clicking **Header** in the toolbar.
 
@@ -141,7 +145,7 @@ Click the icons on the image action tray to adjust the size, alignment, add a ca
 
 ## Adding comments to a notebook
 
-You can add comments on content in the body of the notebook. To comment on text, highlight the text and click on the comment icon in the toolbar. 
+You can add comments on content in the body of the notebook. To comment on text, highlight the text and click on the comment icon in the toolbar.
 
 <!-- TODO Add updated image from new notebooks -->
 
@@ -178,6 +182,8 @@ At the top of the notebook, you can see avatar images of all of the users curren
 ### Template variables
 
 Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
+
+<div class="alert alert-danger">Some Analysis features have limited or no support for template variables. For more information, see <a href="/notebooks/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a>.</div>
 
 ### Time controls
 
@@ -224,22 +230,25 @@ To share a version of your notebook with snapshots, from the cog menu, click **V
 
 By default, all users have full access to notebooks.
 
+Use our access controls to restrict view and edit access to only yourself:
+1. While viewing a notebook, click the **Share** button in the upper right.
+1. Select **Private to me**.
+1. Click **Save**.
+
 Use granular access controls to limit the [roles][7] that may edit a particular notebook:
-1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. While viewing a notebook, click the **Share** button in the upper right.
+1. Select **Custom**.
+1. Update the Organization access to **Viewer** to revoke edit access from the rest of the organization.
 1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**.
 
-**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. 
+**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving.
 
 You must have edit access to restore general access to a restricted notebook. Complete the following steps:
-1. While viewing the notebook, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restore Full Access**.
+1. While viewing a notebook, click the **Share** button in the upper right.
+1. Select **My Org**.
 1. Click **Save**.
 
 ## Finding notebooks

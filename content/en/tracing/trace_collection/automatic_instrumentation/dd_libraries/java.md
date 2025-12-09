@@ -69,7 +69,7 @@ To begin tracing your applications:
 
     **Note**: When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][23] and [JEP 498][24] for more information.
 
-    <div class="alert alert-danger">Enabling profiling may impact your bill depending on your APM bundle. See the <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">pricing page</a> for more information.</div>
+    <div class="alert alert-warning">Enabling profiling may impact your bill depending on your APM bundle. See the <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">pricing page</a> for more information.</div>
 
 | Environment Variable      | System Property                     | Description|
 | --------- | --------------------------------- | ------------ |
@@ -217,6 +217,20 @@ Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mi
 ## Configuration
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
+
+### Remote configuration
+
+Remote Configuration allows the Datadog Agent to dynamically configure tracing settings without requiring application restarts. By default, Remote Configuration is enabled. To disable it, set the environment variable:
+
+```
+DD_REMOTE_CONFIG_ENABLED=false
+```
+
+Or add the JVM system property:
+
+```
+-Ddd.remote_config.enabled=false
+```
 
 ## Further Reading
 

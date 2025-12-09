@@ -41,20 +41,25 @@ En la sección de [configuración de parámetros de logs][1], puedes configurar 
 
 ## Analizador grok
 
-Crea reglas grok personalizadas para analizar el mensaje completo o un atributo específico de tu evento sin procesar. Para obtener más información, consulta la [sección Análisis][2]. Una práctica recomendada es utilizar como máximo 10 reglas de análisis en un procesador grok.
+Crea reglas Grok personalizadas para analizar el mensaje completo o un atributo específico de tu evento sin procesar. Como práctica recomendada, limita tu analizador Grok a 10 reglas de análisis. Para obtener más información sobre la sintaxis y las reglas de análisis Grok, consulta [Análisis][10].
+
+{{< img src="/logs/processing/processors/define_parsing_rules_syntax_suggestions.png" alt="Sugerencias de sintaxis del analizador Grok en la interfaz de usuario" style="width:90%;" >}}
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
-Define el procesador grok en la [página **Pipelines**][1]:
+Define el procesador Grok en la página [**Pipelines**][1]. Para configurar reglas de análisis Grok:
 
-{{< img src="logs/log_configuration/processor/grok_parser.png" alt="Analizador grok" style="width:80%;" >}}
-
-Haz clic en **Parse my logs** (Analizar mis logs) para configurar un conjunto de tres reglas de análisis para los logs que circulan a través del pipeline subyacente. A partir de ahí, refina los nombres de los atributos y, si es necesario, añade nuevas reglas para otros tipos de logs. Esta función requiere que los logs correspondientes se indexen y fluyan. Puedes desactivar temporalmente o reducir los filtros de exclusión para que esto funcione correctamente.
-
-Selecciona una muestra haciendo clic en ella para activar su evaluación con la regla de análisis y mostrar el resultado en la parte inferior de la pantalla.
-
-Se pueden guardar hasta cinco muestras con el procesador y cada muestra puede tener hasta 5000 caracteres de longitud. Todas las muestras presentan un estado (`match` o `no match`), que destaca si una de las reglas de análisis del analizador grok coincide con la muestra.
+1. Haz clic en **Parse my logs** (Analizar mis logs) para generar automáticamente un conjunto de tres reglas de análisis basadas en los logs que fluyen a través del pipeline.
+   **Nota**: Esta función requiere que los logs correspondientes estén indexados y fluyan activamente. Puedes desactivar temporalmente los filtros de exclusión para permitir que la función detecte logs.
+1. **Ejemplos de logs**: Añade hasta cinco ejemplos de logs (de hasta 5000 caracteres cada uno) para probar tus reglas de análisis.
+1. **Definir reglas de análisis**: Escribe tus reglas de análisis en el editor de reglas. A medida que se definen las reglas, el analizador Grok proporciona asistencia sintáctica:
+   - **Sugerencias de comparadores**: Escribe un nombre de regla seguido de `%{`. Aparece un menú desplegable con los comparadores disponibles (como `word`, `integer`, `ip`, `date`). Selecciona un comparador en la lista para insertarlo en tu regla.<br>
+     ```
+     MyParsingRule %{
+     ```
+   - **Sugerencias de filtros**: Al añadir un filtro con `:`, un desplegable muestra los filtros compatibles con el comparador seleccionado.
+1. **Probar tus reglas**: Selecciona un ejemplo haciendo clic sobre él para activar su evaluación con la regla de análisis y mostrar el resultado en la parte inferior de la pantalla. Todos los ejemplos muestran un estado (`match` o `no match`), que resalta si una de las reglas de análisis del analizador Grok coincide con el ejemplo.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -117,7 +122,7 @@ Para ver cómo se puede analizar un formato personalizado de fecha y hora en Dat
 * Si se aplican varios procesadores de reasignadores de fechas de logs a un determinado log del pipeline, se tiene en cuenta el último (según el orden del pipeline).
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del reasignador de fechas de logs en la [página **Pipelines**][1]:
 
@@ -155,8 +160,6 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 
 Utiliza el procesador del reasignador de estados para asignar atributos como estado oficial a tus logs. Por ejemplo, añade un nivel de gravedad de log a tus logs con el reasignador de estados.
 
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Nivel de gravedad del log tras la reasignación" style="width:40%;" >}}
-
 Cada valor de estado entrante se asigna de la siguiente manera:
 
 * Los números enteros de 0 a 7 asignan según las [normas de gravedad de syslog][4].
@@ -174,7 +177,7 @@ Cada valor de estado entrante se asigna de la siguiente manera:
 **Nota**: Si se aplican varios procesadores del reasignador de estados de logs al log de un pipeline, sólo se tendrá en cuenta el primero en el orden del pipeline. Además, para todos los pipelines que coinciden con el log, sólo se aplica el primer reasignador de estados encontrado (de todos los pipelines aplicables).
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del reasignador de estados de logs en la [página **Pipelines**][1]:
 
@@ -213,7 +216,7 @@ El procesador del reasignador de servicios asigna uno o más atributos a tus log
 **Nota**: Si se aplican varios procesadores del reasignador de servicios a un determinado log del pipeline, sólo se tendrá en cuenta el primero (según el orden del pipeline).
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del reasignador de servicios de logs en la [página **Pipelines**][1]:
 
@@ -256,7 +259,7 @@ Para definir los atributos de los mensajes, utiliza primero el [procesador de cr
 **Nota**: Si se aplican varios procesadores del reasignador de mensajes de logs a un determinado log del pipeline, sólo se tendrá en cuenta el primero (según el orden del pipeline).
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del reasignador de mensajes de logs en la [página **Pipelines**][1]:
 
@@ -290,9 +293,7 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 
 ## Reasignador
 
-El procesador del reasignador reasigna cualquier atributo o etiqueta (tag) de origen a otro atributo u otra etiqueta de destino. Por ejemplo, reasigna `user` por `firstname` para dirigir tus logs en el Explorador de logs:
-
-{{< img src="logs/procesar/processors/attribute_post_remapping.png" alt="Atributo tras la reasignación" style="width:60%;">}}
+El procesador del reasignador reasigna cualquier atributo o etiqueta (tag) de origen a otro atributo u otra etiqueta de destino. Por ejemplo, reasigna `user` por `firstname` para apuntar a tus logs en el Explorador de logs:
 
 Las restricciones de nombre de etiquetas/atributos se explican en la [documentación sobre atributos y etiquetas][5]. Algunas restricciones adicionales, aplicadas como `:` o `,`, no están permitidas en los nombres de etiquetas/atributos de destino.
 
@@ -301,7 +302,7 @@ Si el objetivo del reasignador es un atributo, el reasignador también puede int
 **Nota**: El separador decimal para `Double` debe ser `.`.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del reasignador en la [página de **Pipelines**][1]. Por ejemplo, reasigna `user` a `user.firstname`.
 
@@ -352,7 +353,7 @@ El procesador del analizador de URL extrae los parámetros de consulta y otros p
 {{< img src="logs/procesar/processors/url_processor.png" alt="Procesador de URL" style="width:80%;" >}}
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del analizador de URL en la [página **Pipelines**][1]:
 
@@ -392,7 +393,7 @@ El procesador del analizador del agente de usuario toma un atributo `useragent` 
 **Nota**: Si tus logs contienen agentes de usuario codificados (por ejemplo, logs IIS), configura este procesador para **decodificar la URL** antes del análisis.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del agente de usuario en la [página **Pipelines**][1]:
 
@@ -440,7 +441,7 @@ Utiliza el procesador de categorías para añadir un nuevo atributo (sin espacio
 * Una vez definidas las categorías en el procesador de categorías, puedes asignarlas al estado del log utilizando el [Reasignador de estados de logs](#log-status-remapper).
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador de categorías en la [página **Pipelines**][1]. Por ejemplo, para categorizar tus logs de acceso web basándote en el valor del rango de código de estado (`"OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...`), añade este procesador:
 
@@ -498,7 +499,7 @@ Por defecto, si falta un atributo se omite un cálculo. Selecciona *Replace miss
 * Si necesitas escalar una unidad de medida, utiliza el filtro para escalas.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador aritmético en la [página **Pipelines**][1]:
 
@@ -548,7 +549,7 @@ La plantilla está definida tanto por texto sin formato como por bloques con la 
 * Los resultados de una plantilla no pueden superar los 256 caracteres.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del creador de cadenas en la [página **Pipelines**][1]:
 
@@ -627,7 +628,7 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 El analizador GeoIP toma un atributo de una dirección IP y extrae información de continente, país, subdivisión o ciudad (si está disponible) en la ruta del atributo de destino.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/geoip_processor.png" alt="Procesador GeoIP" style="width:80%;">}}
 
@@ -671,7 +672,7 @@ Utiliza el procesador de búsqueda para definir una reasignación entre un atrib
 Por ejemplo, puedes utilizar el procesador de búsqueda para asignar un ID interno de servicio a un nombre de servicio legible por el ser humano. También puedes utilizarlo para comprobar si la dirección MAC que acaba de intentar conectarse al entorno de producción pertenece a tu lista de máquinas robadas.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 El procesador de búsqueda realiza las siguientes acciones:
 
@@ -686,7 +687,7 @@ El procesador de búsqueda realiza las siguientes acciones:
 
   * Opcionalmente, si no encuentra el valor en la tabla de asignación, crea un atributo de destino con el valor de la tabla de referencia. Puedes seleccionar un valor para una [tabla de referencias][101] en la pestaña **Reference Table** (Tabla de referencia).
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Procesador de búsqueda" >}}
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Procesador de búsqueda"
     style="width:80%;">}}
 
 
@@ -732,7 +733,7 @@ Hay dos formas de definir la correlación entre trazas y logs de aplicaciones:
 2. Utiliza el procesador del reasignador de trazas para definir un atributo de log como su ID de rastreo asociado.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del reasignador de trazas en la [página **Pipelines**][1]. Introduce la ruta de atributo del ID de rastreo en el cuadro del procesador, de la siguiente manera:
 
@@ -764,7 +765,7 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 {{% /tab %}}
 {{< /tabs >}}
 
-**Nota**: Los ID de rastreo y los ID de tramos (span) no se muestran en tus logs o atributos de logs en la interfaz de usuario.
+**Nota**: Los ID de rastreo y los ID de tramos no se muestran en tus logs o atributos de logs en la interfaz de usuario.
 
 ## Reasignador de tramos
 
@@ -775,7 +776,7 @@ Hay dos formas de definir la correlación entre tramos y logs de aplicaciones:
 2. Utiliza el procesador del reasignador de tramos para definir un atributo de log como su ID de tramo asociado.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 Define el procesador del reasignador de tramos en la [página **Pipelines**][1]. Introduce la ruta de atributo del ID de tramo en el cuadro del procesador, de la siguiente manera:
 
@@ -829,7 +830,7 @@ Define el procesador de matrices en la página [**Pipelines**][1].
 Extrae un valor específico de un objeto dentro de una matriz cuando coincide con una condición.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array_processor_select_value.png" alt="Procesador de matrices - Seleccionar el valor de un elemento" style="width:80%;" >}}
 
@@ -865,6 +866,38 @@ Extrae un valor específico de un objeto dentro de una matriz cuando coincide co
 ```
 
 {{% /tab %}}
+{{% tab "API" %}}
+
+Utiliza el [endpoint de API del pipeline de logs de Datadog][1] con la siguiente carga útil JSON del procesador de matrices:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Extract Referrer URL",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "select",
+    "source": "httpRequest.headers",
+    "target": "referrer",
+    "filter": "name:Referrer",
+    "value_to_extract": "value"
+  }
+}
+```
+
+| Parámetro    | Tipo             | Obligatorio | Descripción                                                   |
+|--------------|------------------|----------|---------------------------------------------------------------|
+| `type`       | Cadena           | Sí      | Tipo de procesador.                                        |
+| `name`       | Cadena           | No       | Nombre del procesador.                                        |
+| `is_enabled` | Booleano          | No       | Si el procesador está activado. Por defecto: `false`.        |
+| `operation.type`  | Cadena      | Sí      | Tipo de funcionamiento del procesador de matrices.                            |
+| `operation.source`  | Cadena    | Sí      | Ruta de la matriz de la que quieres seleccionar.                    |
+| `operation.target`  | Cadena    | Sí      | Atributo objetivo.                                             |
+| `operation.filter`  | Cadena    | Sí      | Expresión que coincide con un elemento de la matriz. Se selecciona el primer elemento coincidente. |
+| `operation.value_to_extract`  | Cadena | Sí | Atributo a leer en el elemento seleccionado.                  |
+
+[1]: /es/api/v1/logs-pipelines/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Longitud de la matriz
@@ -872,7 +905,7 @@ Extrae un valor específico de un objeto dentro de una matriz cuando coincide co
 Calcula el número de elementos de una matriz.
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array_processor_length.png" alt="Procesador de matrices - Longitud" style="width:80%;" >}}
 
@@ -886,7 +919,7 @@ Calcula el número de elementos de una matriz.
 
 **Pasos de configuración:**
 
-- **Atributo de matriz**: `etiquetas (tags)`
+- **Atributo de matriz**: `tags`
 - **Atributo de destino**: `tagCount`
 
 **Resultado:**
@@ -898,6 +931,34 @@ Calcula el número de elementos de una matriz.
 }
 ```
 {{% /tab %}}
+{{% tab "API" %}}
+
+Utiliza el [endpoint de API del pipeline de logs de Datadog][1] con la siguiente carga útil JSON del procesador de matrices:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Compute number of tags",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "length",
+    "source": "tags",
+    "target": "tagCount"
+  }
+}
+```
+
+| Parámetro           | Tipo      | Obligatorio | Descripción                                                   |
+|---------------------|-----------|----------|---------------------------------------------------------------|
+| `type`              | Cadena    | Sí      | Tipo de procesador.                                        |
+| `name`              | Cadena    | No       | Nombre del procesador.                                        |
+| `is_enabled`        | Booleano   | No       | Si el procesador está activado. Por defecto: `false`.        |
+| `operation.type`    | Cadena    | Sí      | Tipo de funcionamiento del procesador de matrices.                            |
+| `operation.source`  | Cadena    | Sí      | Ruta de la matriz de la que quieres seleccionar.                   |
+| `operation.target`  | Cadena    | Sí      | Atributo objetivo.                                             |
+
+[1]: /es/api/v1/logs-pipelines/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Añadir a la matriz
@@ -908,7 +969,7 @@ Añade un valor de atributo al final de un atributo de matriz de destino en el l
 
 
 {{< tabs >}}
-{{% tab "UI (IU)" %}}
+{{% tab "UI" %}}
 
 {{< img src="logs/log_configuration/processor/array_processor_append.png" alt="Procesador de matrices - Añadir" style="width:80%;" >}}
 
@@ -943,6 +1004,60 @@ Añade un valor de atributo al final de un atributo de matriz de destino en el l
 }
 ```
 {{% /tab %}}
+{{% tab "API" %}}
+
+Utiliza el [endpoint de API del pipeline de logs de Datadog][1] con la siguiente carga útil JSON del procesador de matrices:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Append client IP to sourceIps",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "append",
+    "source": "network.client.ip",
+    "target": "sourceIps"
+  }
+}
+```
+
+| Parámetro                    | Tipo       | Obligatorio | Descripción                                                        |
+|------------------------------|------------|----------|--------------------------------------------------------------------|
+| `type`                       | Cadena     | Sí      | Tipo de procesador.                                             |
+| `name`                       | Cadena     | No       | Nombre del procesador.                                             |
+| `is_enabled`                 | Booleano    | No       | Si el procesador está activado. Por defecto: `false`.             |
+| `operation.type`             | Cadena     | Sí      | Tipo de funcionamiento del procesador de matrices.                                 |
+| `operation.source`           | Cadena     | Sí      | Atributo a añadir.                                               |
+| `operation.target`           | Cadena     | Sí      | Atributo de matriz al que añadir.                                      |
+| `operation.preserve_source`  | Booleano    | No      | Si se conserva la fuente original después de la reasignación. Por defecto: `false`.   |
+
+[1]: /es/api/v1/logs-pipelines/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Procesador decodificador
+
+El procesador decodificador traduce los campos de cadena codificados de binario a texto (como Base64 o Hex/Base16) a su representación original. Esto permite interpretar los datos en su contexto nativo, ya sea como cadena UTF-8, comando ASCII o valor numérico (por ejemplo, un número entero derivado de una cadena hexadecimal). El procesador decodificador es especialmente útil para analizar comandos codificados, logs de sistemas específicos o técnicas de evasión utilizadas por actores de amenazas.
+
+**Notas**:
+
+- Cadenas truncadas: El procesador maneja las cadenas Base64/Base16 parcialmente truncadas con elegancia, recortándolas o rellenándolas según sea necesario.
+
+- Formato hexadecimal: La entrada hexadecimal puede descodificarse en una cadena (UTF-8) o en un número entero.
+
+- Gestión de fallos: Si la descodificación falla (debido a una entrada no válida), el procesador omite la transformación y el log permanece inalterado.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+1. Configura el atributo de origen: Proporciona la ruta del atributo que contiene la cadena codificada, como `encoded.base64`.
+2. Selecciona la codificación de origen: Elige la codificación binaria a texto de la fuente: `base64` o `base16/hex`.
+2. Para `Base16/Hex`: Elige el formato de salida: `string (UTF-8)` o `integer`.
+3. Configura el atributo de destino: Introduce la ruta del atributo para almacenar el resultado decodificado.
+
+{{< img src="logs/log_configuration/processor/decoder-processor.png" alt="Procesador decodificador - Adjuntar" style="width:80%;" >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Amenaza procesador intel
@@ -950,6 +1065,19 @@ Añade un valor de atributo al final de un atributo de matriz de destino en el l
 Añada el Proceso de Inteligencia de Amenazas para evaluar logs con respecto a la tabla utilizando una clave específica de Indicador de Compromiso (IoC), como una dirección IP. Si se encuentra una coincidencia, log se enriquece con atributos de Inteligencia de Amenazas (TI) relevantes de la tabla, lo que mejora la detección, la investigación y la respuesta.
 
 Para más información, véase [Inteligencia sobre amenazas][9].
+
+## Procesador OCSF
+
+Utiliza el procesador OCSF para normalizar tus logs de seguridad de acuerdo con el [Open Cybersecurity Schema Framework (OCSF)][11]. El procesador OCSF te permite crear asignaciones personalizadas que reasignan tus atributos de logs a clases del esquema OCSF y sus atributos correspondientes, incluyendo atributos enumerados (ENUM).
+
+El procesador te permite:
+
+- Asignar atributos de logs de origen a atributos OCSF de destino
+- Configurar atributos ENUM con valores numéricos específicos
+- Crear subpipelines para diferentes clases de eventos OCSF de destino
+- Preprocesar logs antes de la reasignación OCSF
+
+Para obtener instrucciones detalladas de instalación, ejemplos de configuración y una guía para la resolución de problemas, consulta [Procesador OCSF][12].
 
 ## Referencias adicionales
 
@@ -959,7 +1087,7 @@ Para más información, véase [Inteligencia sobre amenazas][9].
 *Logging without Limits es una marca registrada de Datadog, Inc.
 
 [1]: /es/logs/log_configuration/pipelines/
-[2]: /es/logs/log_configuration/parsing/
+[2]: /es/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [3]: /es/logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [5]: /es/logs/log_collection/?tab=host#attributes-and-tags
@@ -967,3 +1095,6 @@ Para más información, véase [Inteligencia sobre amenazas][9].
 [7]: /es/integrations/guide/reference-tables/
 [8]: /es/tracing/other_telemetry/connect_logs_and_traces/
 [9]: /es/security/threat_intelligence/
+[10]: /es/logs/log_configuration/parsing/?tab=matchers
+[11]: /es/security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
+[12]: /es/security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/ocsf_processor/

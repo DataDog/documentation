@@ -62,10 +62,11 @@ Estimated usage metrics are generally available for the following usage types:
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
 | IOT devices                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | Unique IoT devices seen in the last hour. |
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
-| Custom Events                   | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
-| Events Ingested                        | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
+| Custom Events                 | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
+| Events Ingested               | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
 | Code Security SAST Committers | `datadog.estimated_usage.code_security.sast.committers` | SAST committers seen from (calendar) month-to-date. |
 | Code Security SCA Committers  | `datadog.estimated_usage.code_security.sca.committers`  | SCA committers seen from (calendar) month-to-date.  |
+| Code Security SCA Hosts       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Unique SCA hosts seen in the last hour. |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 

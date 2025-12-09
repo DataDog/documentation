@@ -43,7 +43,7 @@ import (
 
 Para configurar OpenTelemetry para utilizar el proveedor de traza de Datadog:
 
-1. Añade la instrumentación manual de OpenTelemetry deseada a tu código Go siguiendo la [documentación de la Instrumentación manual de OpenTelemetry Go][5]. **Importante**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la biblioteca de rastreo de Datadog en su lugar.
+1. Añade la instrumentación manual de OpenTelemetry deseada a tu código Go siguiendo la [documentación de la Instrumentación manual de OpenTelemetry Go][5]. **Importante**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la librería de rastreo de Datadog en su lugar.
 
 2. Instala el paquete de OpenTelemetry `go.opentelemetry.io/otel` utilizando el comando:
 
@@ -128,7 +128,7 @@ ctx, span := t.Start(context.Background(), "span_name")
 // Establece un error en un tramo con 'span.SetAttributes'.
 span.SetAttributes(attribute.String(ext.ErrorMsg, "error_message"))
 
-// Alternativamente, es posible establecer un error en un tramo mediante las opciones de tramo final. 
+// Alternativamente, es posible establecer un error en un tramo mediante las opciones de tramo final.
 EndOptions(sp, tracer.WithError(errors.New("persisted_option")))
 sp.End()
 
@@ -136,7 +136,7 @@ sp.End()
 
 ## Añadir tramos
 
-A diferencia de otras bibliotecas de rastreo de Datadog, al rastrear aplicaciones de Go, es recomendado que gestiones y pases explícitamente el contexto de Go de tus tramos. Este enfoque asegura relaciones de tramo precisas y un rastreo con sentido. Para más información, consulta la [documentación de la biblioteca de contexto de Go][16] o la documentación de cualquier biblioteca de terceros integrada con tu aplicación.
+A diferencia de otras bibliotecas de rastreo de Datadog, al rastrear aplicaciones de Go, es recomendado que gestiones y pases explícitamente el contexto de Go de tus tramos. Este enfoque asegura relaciones de tramo precisas y un rastreo con sentido. Para más información, consulta la [documentación de la librería de contexto de Go][16] o la documentación de cualquier biblioteca de terceros integrada con tu aplicación.
 
 ```go
 // Solo se puede hacer después de los pasos de configuración.

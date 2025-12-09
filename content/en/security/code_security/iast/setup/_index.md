@@ -293,8 +293,6 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 You can detect code-level vulnerabilities and monitor application security in Python applicationss running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-NOTE: Runtime Code Analysis (IAST) in Python is in Preview.
-
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
@@ -385,14 +383,12 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 ### Finishing setup
 
 1. Restart your service.
-2. To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
-
-{{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
+2. To see Runtime Code Analysis (IAST) in action, browse your service and find IAST vulnerabilities in the [Runtime Code (IAST) Vulnerability Explorer][4].
 
 If you need additional assistance, contact [Datadog support][5].
 
 [1]: /security/code_security/iast/setup/
-[4]: https://app.datadoghq.com/security/appsec/vm
+[4]: https://app.datadoghq.com/security/code-security/iast
 [5]: /help
 
 ## Compatibility Requirements
@@ -402,7 +398,7 @@ The following code security capabilities are supported relative to each language
 | Code Security capability                      | Java    | .NET     | Node.js    | Python      | Go             | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|------------|-------------|----------------|---------------|---------------|
 | Runtime Software Composition Analysis (SCA)   | 1.1.4   | 2.16.0   | 4.0.0      | 1.5.0       | 1.49.0         | 1.11.0        | 0.90.0        |
-| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | Preview     | not supported  | not supported | not supported |
+| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | 3.18.0      | not supported  | not supported | not supported |
 
 **Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require Datadog's tracing library. Therefore, the requirements listed below do not apply to these two Code Security capabilities.
 
@@ -753,7 +749,7 @@ The following code security capabilities are supported in the Python library, fo
 | Code Security capability                    | Minimum Python tracer version |
 | ------------------------------------------- |-------------------------------|
 | Runtime Software Composition Analysis (SCA) | 1.5.0                         |
-| Runtime Code Analysis (IAST)                | Preview (2.21.0)              |
+| Runtime Code Analysis (IAST)                | 3.18.0                        |
 
 #### Supported deployment types
 | Type        | Runtime Code Analysis (IAST)      |
@@ -773,26 +769,11 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level                              | Minimum Datadog Agent |
-|------------|--------------------------------------------|-----------------------|
-| `>=3.0,<4` | General Availability   7.28                |
-| `>=2.0,<3` | Maintenance (End of Life October 31, 2025) | 7.28                  |
-|    `<2`    | End of Life                                |                       |
+{{< partial name="trace_collection/python/supported_versions.html" >}}
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions |
-|---------|-----------------------|---------|-----------------|----------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 3.8+            | `>=3,<4`                   |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.8+            | `>=3,<4`                   |
-| Windows | 64bit, 32bit          | CPython | 3.8+            | `>=3,<4`                   |
-| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
-| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
-
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
 
 #### Web framework compatibility
 ##### Code Security Capability Notes

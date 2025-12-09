@@ -20,7 +20,7 @@ title: Consumo de métricas históricas
 {{< jqmath-vanilla >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">La ingesta de métricas históricas no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">La ingesta de métricas históricas no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 ## Información general

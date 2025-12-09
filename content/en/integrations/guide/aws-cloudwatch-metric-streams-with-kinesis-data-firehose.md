@@ -10,10 +10,6 @@ further_reading:
   text: "Collect Amazon CloudWatch metrics using Metric Streams"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">AWS CloudWatch Metric Streams with Amazon Data Firehose is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
-
 Using Amazon CloudWatch Metric Streams and Amazon Data Firehose, you can get CloudWatch metrics into Datadog with only a two to three minute latency. This is significantly faster than Datadog's default API polling approach, which provides updated metrics every 10 minutes. You can learn more about the API polling approach in the [Cloud Metric Delay documentation][1].
 
 ## Overview
@@ -24,7 +20,7 @@ Using Amazon CloudWatch Metric Streams and Amazon Data Firehose, you can get Clo
    - Optionally specify a limited set of namespaces or metrics to stream.
 2. Once you create the Metric Stream, Datadog immediately starts receiving the streamed metrics and displays them on the Datadog site with no additional configuration needed.
 
-<div class="alert alert-danger">Per-namespace filtering configured in the AWS Integration tile <b>also applies</b> to CloudWatch Metric Streams.</div>
+<div class="alert alert-warning">Tag filtering configured in the AWS Integration tile <b>also applies</b> to CloudWatch Metric Streams.</div>
 
 ### Metric Streaming versus API polling {#streaming-vs-polling}
 

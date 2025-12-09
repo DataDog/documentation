@@ -208,14 +208,14 @@ ServiceNow の CI からの追加フィールドを使用してログやイベ�
 
 {{% site-region region="gov,ap1" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Case Management インテグレーションは {{< region-param key=dd_datacenter code="true" >}} サイトではサポートされません。
 </div>
 {{% /site-region %}}
 
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Incident Management インテグレーションは {{< region-param key=dd_datacenter code="true" >}} サイトではサポートされません。
 </div>
 {{% /site-region %}}
@@ -223,7 +223,7 @@ Incident Management インテグレーションは {{< region-param key=dd_datac
 
 {{% site-region region="gov" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Templated Monitor Notifications は {{< region-param key=dd_datacenter code="true" >}} サイトではサポートされません。
 </div>
 {{% /site-region %}}

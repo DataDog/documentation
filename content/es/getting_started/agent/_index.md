@@ -149,7 +149,7 @@ Agent de Datadog (v. 7.XX.X) iniciado en <Hostname>
 El Agent está configurado para ofrecer los siguientes checks de servicio:
 
   - `datadog.agent.up`: devuelve `OK` si el Agent se conecta a Datadog.
-    <div class="alert alert-warning">AIX Agents no informan el check de servicio <code>datadog.agent.up</code>. Puedes utilizar la métrica <code>datadog.agent.running</code> para monitorizar el tiempo de actividad de un AIX Agent. La métrica emite un valor de <code>1</code> si el Agent está informando a Datadog.</div>
+    <div class="alert alert-danger">AIX Agents no informan el check de servicio <code>datadog.agent.up</code>. Puedes utilizar la métrica <code>datadog.agent.running</code> para monitorizar el tiempo de actividad de un AIX Agent. La métrica emite un valor de <code>1</code> si el Agent está informando a Datadog.</div>
   - `datadog.agent.check_status`: devuelve `CRITICAL` si un Agent check no puede enviar métricas a Datadog, en caso contrario devuelve `OK`.
 
 

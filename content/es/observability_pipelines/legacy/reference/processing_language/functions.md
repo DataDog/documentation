@@ -5,7 +5,7 @@ title: (LEGACY) Funciones
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
+<div class="alert alert-danger">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
 {{< /site-region >}}
 
 Datadog Processing Language (DPL) o Vector Remap Language (VRL), contienen funciones integradas para transformar tus datos.

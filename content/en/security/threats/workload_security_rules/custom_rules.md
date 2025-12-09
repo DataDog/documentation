@@ -266,7 +266,7 @@ You can also disable a rule by setting the **Then...** section of a rule to **Do
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/workload_protection/workload_security_rules
 [8]: /security/workload_protection/
-[9]: /security/cloud_siem/detection_rules/?tab=threshold#set-a-rule-case
+[9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
 [12]: /security/workload_protection/guide/active-protection

@@ -13,7 +13,7 @@ title: CSPM 시작하기
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 본 사이트에서는 현재 Cloud Security Posture Management를 이용할 수 없습니다.
 </div>
 {{< /site-region >}}

@@ -1,5 +1,6 @@
 ---
 title: Geomap Widget
+description: Visualize geographic data with shaded regions or points to display location-based metrics and patterns.
 widget_type: geomap
 aliases:
 - /graphing/widgets/geomap/

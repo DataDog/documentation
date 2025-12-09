@@ -7,7 +7,7 @@ guides:
     link_text: Getting Started with the Agent
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Gather metrics, traces, and logs with over 850 built-in integrations to send to Datadog.
+    desc: Gather metrics, traces, and logs with over 1,000+ built-in integrations to send to Datadog.
     link_text: Getting Started with Integrations
     link: getting_started/integrations/
   - title: Get Started in App
@@ -163,6 +163,10 @@ nav_sections:
         link: internal_developer_portal
         icon: internal-developer-portal-wui
         desc: Unify telemetry, metadata, and workflows to accelerate delivery
+      - title: On-Call
+        link: service_management/on-call/
+        icon: on-call
+        desc: Manage paging, escalation, and on-call schedules in one platform
   - nav_section:
     - name: 'Configuration'
     - navtiles:

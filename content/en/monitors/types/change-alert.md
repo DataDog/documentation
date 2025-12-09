@@ -1,5 +1,6 @@
 ---
 title: Change Alert Monitor
+description: "Create change alert monitors to detect significant changes in metrics over time using absolute or percentage change thresholds."
 disable_toc: false
 aliases:
 - monitors/guide/change-alert
