@@ -86945,7 +86945,13 @@ paths:
         permissions:
         - teams_read
     post:
-      description: Add a user to a team.
+      description: 'Add a user to a team.
+
+
+        **Note**: Each team has a setting that determines who is allowed to modify
+        membership of the team. The `user_access_manage` permission generally grants
+        access to modify membership of any team. To get the full picture, see [Team
+        Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).'
       operationId: CreateTeamMembership
       parameters:
       - description: None
@@ -86999,7 +87005,13 @@ paths:
         - teams_read
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
-      description: Remove a user from a team.
+      description: 'Remove a user from a team.
+
+
+        **Note**: Each team has a setting that determines who is allowed to modify
+        membership of the team. The `user_access_manage` permission generally grants
+        access to modify membership of any team. To get the full picture, see [Team
+        Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).'
       operationId: DeleteTeamMembership
       parameters:
       - description: None
@@ -87041,7 +87053,13 @@ paths:
         permissions:
         - teams_read
     patch:
-      description: Update a user's membership attributes on a team.
+      description: 'Update a user''s membership attributes on a team.
+
+
+        **Note**: Each team has a setting that determines who is allowed to modify
+        membership of the team. The `user_access_manage` permission generally grants
+        access to modify membership of any team. To get the full picture, see [Team
+        Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).'
       operationId: UpdateTeamMembership
       parameters:
       - description: None
