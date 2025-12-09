@@ -2,6 +2,7 @@
 title: Tag Pipelines
 aliases:
   - /cloud_cost_management/tag_pipelines/
+  - /cloud_cost_management/tags/tag_pipelines/
 further_reading:
 - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
   tag: Blog
@@ -19,11 +20,11 @@ further_reading:
 
 ## Overview
 
-To effectively monitor cloud costs, you need to understand how various services, teams, and products contribute to your overall spending. Tag Pipelines enforce the use of standardized tags across your cloud resources and ensure consistent, accurate cost attribution throughout your organization.
+Tags are the foundation for all Cloud Cost Management analysis and allocation. They enable you to break down spending by service, team, project, environment, or any dimension relevant to your business. Tag Pipelines enforce the use of standardized tags across your cloud resources and ensure consistent, accurate cost attribution throughout your organization.
 
-With [Tag Pipelines][1], you can create tag rules to address missing or incorrect tags on your cloud bills. You can also create new inferred tags that align with specific business logic to enhance the accuracy of your cost tracking.
+With [Tag Pipelines][1], you can create tag rules to address missing or incorrect tags on your cloud bills. You can also create new inferred tags that align with specific business logic to enhance the accuracy of your cost tracking. These standardized tags power all cost analysis capabilities, including container cost allocation, custom allocation rules, and cost recommendations.
 
-Tag Pipelines apply to Cloud Cost metrics from all providers, affecting both cost data and cost recommendations.
+Tag Pipelines apply to Cloud Cost metrics from all providers. The rules you create affect all cost data and cost recommendations, ensuring consistency across dashboards, monitors, and allocation reports.
 
 When tag pipelines change, the new rules are automatically applied to the most recent three months of data. It may take up to 24 hours for the historical data update to complete after rules are added or modified.
 
