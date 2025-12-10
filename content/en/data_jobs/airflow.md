@@ -333,7 +333,7 @@ In the Advanced Configuration tab, under **Airflow configuration override**, cli
 **Optional:** Configure the OpenLineage namespace to set the `env` tag value in Datadog:
    - In Section 3, enter `openlineage`.
    - In Key 3, enter `namespace`.
-   - In Value 3, enter your Composer environment value (e.g. prod, dev, staging, test, etc).
+   - In Value 3, enter your Composer environment value (for example, prod, dev, staging, or test).
    
    Note: if [Dataplex][6] is enabled, the namespace is already set by default to the Composer environment name. Only set it here if you want to override it.
 
