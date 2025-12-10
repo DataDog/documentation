@@ -15,7 +15,7 @@ further_reading:
 
 ## Prerequisites
 
-- **Datadog SDK**: datadog version 2.23.0 or later.
+- **Datadog SDK**: `datadog` gem version 2.23.0 or later.
 - **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
 
 ## Setup
