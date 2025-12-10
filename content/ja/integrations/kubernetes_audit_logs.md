@@ -2,8 +2,8 @@
 aliases:
 - /ja/logs/log_collection/kubernetes_audit_logs
 categories:
-- ログの収集
-- コンテナ
+- log collection
+- incident-teams
 - オーケストレーション
 custom_kind: integration
 dependencies:
@@ -41,7 +41,7 @@ Kubernetes 監査ログインテグレーションを使用すると、アクセ
 
 このインテグレーションは **Agent 6.0 以上**で使用可能です。
 
-### コンフィギュレーション
+### 構成
 
 Kubernetes 監査ログの設定について詳しくは、[Kubernetes Auditing][3] を参照してください。
 
@@ -113,7 +113,7 @@ rules:
 
 最後のセクションでは、先行する規則で明示されていないすべてのことに対し、`Metadata` レベルでログを作成するようにポリシーが構成されます。監査ログがあまりに詳細な場合は、重要度の低いアクションや動詞（list、watch、get などクラスターの状態が変化しない操作）を除外することもできます。
 
-### ログの収集
+### ログ収集
 
 1. Kubernetes 環境に [Agent をインストール][1]します。
 2. ログの収集はデフォルトで無効になっています。[DaemonSet][4] の `env` セクションでこれを有効にします。
@@ -178,13 +178,9 @@ rules:
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `Logs` を探します。
 
-## トラブルシューティング
+## トラブル シューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/kubernetes/#installation
 [2]: https://www.youtube.com/watch?v=raJRLmGb9Is&t=1s
