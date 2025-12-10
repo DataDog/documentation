@@ -526,6 +526,7 @@
                 dependencies: [ "https://github.com/DataDog/helm-charts/blob/716c7b57c322bee5bc79fa45b757072ebe4a7d26/charts/datadog/docs/Migration_Helm_to_Operator.md" ]
                 aliases:
                   - /containers/datadog_operator/migration
+                  - /containers/kubernetes/migration
 
       - repo_name: dd-trace-rb
         contents:
