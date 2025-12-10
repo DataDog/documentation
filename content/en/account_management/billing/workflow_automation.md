@@ -7,11 +7,11 @@ title: Workflow Automation
 Datadog [Workflow Automation][8] billing is based on the number of **workflow executions**, which are recorded whenever a published workflow runs---whether manually, programmatically, or automatically.
 
 ## Summary
-- **Billing metric**: $0.10 per committed execution and $0.14 per on-demand execution
-- **Scope**: All published executions billed, regardless of success/failure
-- **Visibility**: Usage and cost breakdowns available in [Plan & Usage][1] 
+- **Billing metric**: You incur a cost per committed execution or on-demand execution, depending on your billing plan.
+- **Scope**: All published executions are billed, regardless of success/failure.
+- **Visibility**: Usage and cost breakdowns are available in [Plan & Usage][1].
 - **Exceptions for certain SKUs**: 
-    - CSM/DevSecOps SKUs include 5–20 executions per host
+    - CSM/DevSecOps SKUs include 5–20 executions per host.
     - [Incident Management][9], [On-Call][10], and [App Builder][11] SKUs include free unlimited executions when triggered by events from these products. 
 
 ## Pricing model
@@ -29,16 +29,16 @@ Unpublished (test or draft) runs are **not billed**.
 <div class="alert alert-info">
 Failed executions are not exempt from billing. All published executions are billed once they successfully start, regardless of success or failure. This includes runs that:
 <ul>
-    <li> Fail due to an error
-    <li> Are interrupted or canceled
-    <li> Time out mid-run
+    <li> Fail due to an error.
+    <li> Are interrupted or canceled.
+    <li> Time out mid-run.
 </ul>
 </div>
 
 ### Billing metrics
-Workflow Automation is billed **per execution**, meaning each complete workflow run counts toward your bill. There are two billing options:
-- **Committed Executions**: $0.10 per execution (purchased in advance)
-- **On-Demand Executions**: $0.14 per execution (pay-as-you-go)
+Workflow Automation is billed **per execution**. This means that each complete workflow run counts toward your bill.
+
+The two billing options are committed executions and on-demand executions. Committed executions are purchased in advance, while on-demand executions are billed as they occur. Prepaid executions cost less than on-demand executions.
 
 ### Usage tracking
 The best source of truth for billing is on your [Datadog Plan & Usage page][1], where execution usage is continuously tracked. Under **Products**, select only **Workflow Executions** for the filter. You can also filter further under **Sub-Orgs** if workflows are tagged individually by team. 
