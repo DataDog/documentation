@@ -128,6 +128,16 @@ database_monitoring:
 
 The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It does not set its value to the value of the tag.
 
+The listener provides an `%%extra_global_view_db%%` variable that can be used to set the `global_view_db` for the instance. This value defaults to the value of the tag `datadoghq.com/global_view_div`. To specify a custom tag for this value use `global_view_db_tag`:
+
+``` yaml {hl_lines=["5-6"]}
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+      global_view_db_tag: "my_db_tag"
+```
+
 ### Create a configuration template
 
 The Datadog Agent supports configuration templates for the Postgres and MySQL integrations. Define a configuration template for the Aurora clusters you wish to monitor.
@@ -165,7 +175,7 @@ In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclust
 
 #### Authentication
 
-If you are using password for authentication note that the password provided in this template file will be used across every database discovered. 
+If you are using password for authentication note that the password provided in this template file will be used across every database discovered.
 
 {{% collapse-content title="Securely store your password" level="h5" id="securely-store-your-password" %}}
 ##### Securely store your password
@@ -190,7 +200,7 @@ instances:
     - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
     - "region:%%extra_region%%"
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="IAM Authentication" level="h5" id="iam-authentication" %}}
 ##### IAM Authentication
@@ -219,7 +229,7 @@ instances:
 The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
 [2]: /database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 {{% /tab %}}
 
 {{% tab "MySQL" %}}
@@ -253,7 +263,7 @@ In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclust
 
 #### Authentication
 
-If you are using password for authentication note that the password provided in this template file will be used across every database discovered. 
+If you are using password for authentication note that the password provided in this template file will be used across every database discovered.
 
 {{% collapse-content title="Securely store your password" level="h5" id="securely-store-your-password" %}}
 ##### Securely store your password
@@ -278,7 +288,7 @@ instances:
     - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
     - "region:%%extra_region%%"
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="IAM Authentication (7.67.0+)" level="h5" id="iam-authentication" %}}
 ##### IAM Authentication
@@ -307,7 +317,32 @@ instances:
 The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
 [2]: /database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
+{{% collapse-content title="Custom global_view_db (7.75.0+)" level="h5" id="global-view-db" %}}
+##### Custom global view database
+
+To set a custom global view database for database autodiscovery, make sure that you are using Agent version 7.75.0 or above and use the following template:
+
+``` yaml {hl_lines=["12-13"]}
+ad_identifiers:
+  - _dbm_postgres_aurora
+init_config:
+instances:
+  - host: "%%host%%"
+    port: "%%port%%"
+    username: datadog
+    dbm: true
+    database_autodiscovery:
+      enabled: true
+      global_view_db: "%%global_view_db%%"
+    aws:
+      instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
+    tags:
+      - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
+      - "region:%%extra_region%%"
+```
+{{% /collapse-content %}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -323,7 +358,7 @@ For more information on configuring Autodiscovery with integrations, see the [Au
 | %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered Aurora cluster                                                                                       |
 | %%extra_dbm%% | Whether DBM is enabled on the cluster. Determined by the presence of `dbm_tag`, which defaults to `datadoghq.com/dbm:true`.                                              |
 | %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for the connection. |
-
+| %%global_view_db%%                       | The value of the `global_view_db_tag`, which defaults to `datadoghq.com/global_view_db`.                                                      |
 [1]: /database_monitoring/setup_postgres/aurora/?tab=postgres10
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
 [4]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
