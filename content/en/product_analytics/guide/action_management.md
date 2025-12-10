@@ -9,11 +9,9 @@ private: true
 
 
 ## Overview
-
-
 Action Management is a no-code way to label autocaptured actions from your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page describes how to get started with Action Management.
 
-Your feedback is invaluable to Datadog during this preview stage. Share all of your feedback with the Product Analytics Product Manager, Milene Darnis team using [Datadog Public Slack](https://chat.datadoghq.com/).
+Your feedback is invaluable to Datadog during this preview stage. Share all of your feedback with the Product Analytics Product Manager, Milene Darnis, using [Datadog Public Slack](https://chat.datadoghq.com/).
 
 
 ## Setup 
@@ -51,32 +49,22 @@ Action Management requires [The Datadog test recorder Chrome extension][1]. If y
 
 You can also hold the Shift key to select multiple actions on the page and label them under the same name. This functionality enables "OR" analysis.
 
-### Step 3 - Retrieve your Label your actions 
+### Step 3 - Retrieve your actions 
 
-After you define an action, you can find them in the [list of labeled actions][4]. From there you can:
+After you define an action, you can find it in the [list of labeled actions][4]. From this list, you can:
 - Filter to only see your actions.
 - Edit actions.
-- See this action in a funnel, retention chart, or see related replays.
+- View actions in a funnel, retention chart, related session replay
 
  {{< img src="product_analytics/action_management/pana-action-list.png" alt="List of your labeled actions." style="width:90%;">}}
 
 
 
 ## Known limitations 
-- Action Management only works for web pages at this time, mobile support is on the roadmap. 
-- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with Datadog to inform future improvements. 
-- Labeled actions can only be used in Funnels and Retention graphs at this time. The ability to use them in all graphs is a feature .
+- Action Management only works for web pages at this time.
+- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with the Product Analytics Product Manager, Milene Darnis, using [Datadog Public Slack](https://chat.datadoghq.com/) to inform future improvements. 
+- Labeled actions can only be used in Funnels and Retention graphs at this time.
 - Deleting a labeled action also deletes it from the dashboards where it is being used.
-
-
-
-## What's coming up 
-
-- A streamlined Edit mode to easily make changes to labeled actions (by end of year)
-- Ability to use labeled actions on all the graph types (by end of year)
-- Mobile support (2026)
-
-
 
 
 [1]: https://chromewebstore.google.com/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
