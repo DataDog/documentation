@@ -46,10 +46,7 @@ Feature flagging is integrated into the Datadog Java APM tracer. You need the tr
 The `dd-java-agent-feature-flagging-bootstrap` JAR contains shared interfaces that enable the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). This is a standard pattern for Java agents. Both JARs are required for feature flags to work.
 
 {{< tabs >}}
-{{% tab "Gradle" %}}
-
-{{< tabs >}}
-{{% tab "Groovy" %}}
+{{% tab "Gradle (Groovy)" %}}
 Add the following dependencies to your `build.gradle`:
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
@@ -69,7 +66,7 @@ dependencies {
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Kotlin" %}}
+{{% tab "Gradle (Kotlin)" %}}
 Add the following dependencies to your `build.gradle.kts`:
 
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
@@ -87,9 +84,6 @@ dependencies {
     implementation("com.datadoghq:dd-java-agent-feature-flagging-bootstrap:X.X.X")
 }
 {{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
-
 {{% /tab %}}
 
 {{% tab "Maven" %}}
@@ -353,8 +347,8 @@ The `targetingKey` (for example, `user-123`) is the primary identifier used for 
 
 Evaluate feature flags using the OpenFeature client. All flag types are supported: Boolean, string, integer, double, and object.
 
-### Boolean flags
-
+{{< tabs >}}
+{{% tab "Boolean" %}}
 {{< code-block lang="java" >}}
 // Simple Boolean evaluation
 boolean enabled = client.getBooleanValue("checkout.new", false, context);
@@ -375,10 +369,8 @@ logger.info("Value: {}", details.getValue());
 logger.info("Variant: {}", details.getVariant());
 logger.info("Reason: {}", details.getReason());
 {{< /code-block >}}
+{{% /tab %}}
 
-### Other flag types
-
-{{< tabs >}}
 {{% tab "String" %}}
 {{< code-block lang="java" >}}
 // Evaluate string flags (e.g., UI themes, API endpoints)
@@ -529,10 +521,11 @@ The `Provider` instance is shared globally. Client names are for organizational 
 
 ## Best practices
 
-### Initialize early
+{{% collapse-content title="Initialize early" level="p" %}}
 Initialize the OpenFeature provider as early as possible in your application lifecycle (for example, in `main()` or application startup). This ensures flags are ready before business logic executes.
+{{% /collapse-content %}}
 
-### Use meaningful default values
+{{% collapse-content title="Use meaningful default values" level="p" %}}
 Always provide sensible default values that maintain safe behavior if flag evaluation fails:
 
 {{< code-block lang="java" >}}
@@ -542,8 +535,9 @@ boolean useNewAlgorithm = client.getBooleanValue("algorithm.new", false, context
 // Good: Conservative default for limits
 int rateLimit = client.getIntegerValue("rate.limit", 100, context);
 {{< /code-block >}}
+{{% /collapse-content %}}
 
-### Create context once
+{{% collapse-content title="Create context once" level="p" %}}
 Create the evaluation context once per request/user/session and reuse it for all flag evaluations:
 
 {{< code-block lang="java" >}}
@@ -557,9 +551,10 @@ boolean featureA = client.getBooleanValue("feature.a", false, userContext);
 boolean featureB = client.getBooleanValue("feature.b", false, userContext);
 {{< /code-block >}}
 
-<div class="alert alert-info">Rebuilding the evaluation context for every flag evaluation adds unnecessary overhead. Create the context once at the start of the request lifecycle, then pass it to all subsequent flag evaluations.</div>
+Rebuilding the evaluation context for every flag evaluation adds unnecessary overhead. Create the context once at the start of the request lifecycle, then pass it to all subsequent flag evaluations.
+{{% /collapse-content %}}
 
-### Handle initialization failures (optional)
+{{% collapse-content title="Handle initialization failures (optional)" level="p" %}}
 Consider handling initialization failures if your application can function with default flag values:
 
 {{< code-block lang="java" >}}
@@ -573,13 +568,15 @@ try {
 {{< /code-block >}}
 
 If feature flags are critical for your application to function, let the exception propagate to prevent startup.
+{{% /collapse-content %}}
 
-### Use consistent targeting keys
+{{% collapse-content title="Use consistent targeting keys" level="p" %}}
 Use consistent, stable identifiers as targeting keys:
 - **Good**: User IDs, session IDs, device IDs
 - **Avoid**: Timestamps, random values, frequently changing IDs
+{{% /collapse-content %}}
 
-### Monitor flag evaluation
+{{% collapse-content title="Monitor flag evaluation" level="p" %}}
 Use the detailed evaluation results for logging and debugging:
 
 {{< code-block lang="java" >}}
@@ -593,10 +590,13 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
     details.getReason()
 );
 {{< /code-block >}}
+{{% /collapse-content %}}
 
 ## Troubleshooting
 
-{{% collapse-content title="Provider not ready" level="h3" %}}
+{{% collapse-content title="Troubleshooting" level="p" %}}
+
+### Provider not ready
 
 **Problem**: `PROVIDER_NOT_READY` errors when evaluating flags
 
@@ -624,14 +624,11 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 5. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
 6. **Verify flags are published** in Datadog UI to the correct service and environment
 
-{{% /collapse-content %}}
-
-{{% collapse-content title="ClassNotFoundException or NoClassDefFoundError" level="h3" %}}
+### ClassNotFoundException or NoClassDefFoundError
 
 **Problem**: Application fails to start with `ClassNotFoundException` for Datadog classes like `datadog.trace.api.featureflag.FeatureFlaggingGateway`
 
 **Cause**: Missing the bootstrap JAR dependency. The bootstrap module contains shared interfaces that allow the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). Without it, the two components cannot interact.
-
 
 **Solutions**:
 1. **Add the bootstrap JAR** to your dependencies:
@@ -647,9 +644,7 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
    - `dd-java-agent-feature-flagging-bootstrap` (the bootstrap module)
 3. **Check the classpath** includes both JARs in your runtime configuration
 
-{{% /collapse-content %}}
-
-{{% collapse-content title="Feature flagging system not starting" level="h3" %}}
+### Feature flagging system not starting
 
 **Problem**: No "Feature Flagging system starting" messages in logs
 
@@ -658,9 +653,7 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 **Solution**:
 Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`
 
-{{% /collapse-content %}}
-
-{{% collapse-content title="EVP proxy not available error" level="h3" %}}
+### EVP proxy not available error
 
 **Problem**: Logs show "EVP Proxy not available" or "agent does not support EVP proxy"
 
@@ -672,9 +665,7 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 3. **Retry logic**: Implement retry on provider initialization failure
 4. **Upgrade Agent**: Ensure using Agent 7.x or later with EVP Proxy support
 
-{{% /collapse-content %}}
-
-{{% collapse-content title="Flags not updating" level="h3" %}}
+### Flags not updating
 
 **Problem**: Flag configuration changes aren't reflected in the application
 
@@ -685,9 +676,7 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 4. Ensure flags are published (not saved as drafts) in the Datadog UI
 5. Verify service and environment tags match between app and flag targeting
 
-{{% /collapse-content %}}
-
-{{% collapse-content title="Type mismatch errors" level="h3" %}}
+### Type mismatch errors
 
 **Problem**: `TYPE_MISMATCH` errors when evaluating flags
 
@@ -696,9 +685,7 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 2. Use correct method: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`
 3. Check flag configuration for correct value types
 
-{{% /collapse-content %}}
-
-{{% collapse-content title="No exposures in Datadog" level="h3" %}}
+### No exposures in Datadog
 
 **Problem**: Flag evaluations aren't appearing in Datadog UI
 
