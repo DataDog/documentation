@@ -128,8 +128,6 @@ The metric description helps you understand what a metric does. Descriptions are
 ### Metrics Source Code
 
 {{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
-<!--- waiting for new preview link for source code -->
-
 
 The Source Code integration pinpoints the exact file, line, and owner in your source code where a metric is emitted. This allows you to trace the code, identify code owners, and take action directly from the platform.
 
