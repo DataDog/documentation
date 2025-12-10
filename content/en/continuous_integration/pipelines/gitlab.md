@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a GitLab Pipeline
+title: GitLab Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/gitlab
 further_reading:
@@ -18,7 +18,7 @@ further_reading:
 
 [GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling automated, continuous deployment of applications with built-in security controls.
 
-Set up tracing in GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
+Set up CI Visibility for GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
 
 ### Compatibility
 
@@ -45,6 +45,17 @@ The following GitLab versions are supported:
 - GitLab.com (SaaS)
 - GitLab >= 14.1 (self-hosted)
 - GitLab >= 13.7.0 (self-hosted) with the `datadog_ci_integration` feature flag enabled
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and GitLab:
+
+| Datadog                    | GitLab   |
+|----------------------------|----------|
+| Pipeline                   | Pipeline |
+| Stage                      | Stage    |
+| Job                        | Job      |
+| _Not available in Datadog_ | Script   |
 
 ## Configure the Datadog integration
 
