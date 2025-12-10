@@ -192,69 +192,11 @@ The Datadog feature flagging system starts automatically when the tracer is init
 
 ### Add the Java tracer to the JVM
 
-Use the documentation for your application server to determine the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
+For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java Tracer to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-tracer-to-the-jvm).
 
-{{< tabs >}}
-{{% tab "Spring Boot" %}}
-
-If your app is called `my_app.jar`, create a `my_app.conf`, containing:
-
-```text
-JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar -Ddd.remote.config.enabled=true -Ddd.experimental.flagging.provider.enabled=true
-```
-
-For more information, see the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs).
-
-{{% /tab %}}
-{{% tab "Tomcat" %}}
-
-Open your Tomcat startup script file, for example `setenv.sh`, and add:
-
-```text
-CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar -Ddd.remote.config.enabled=true -Ddd.experimental.flagging.provider.enabled=true"
-```
-
-{{% /tab %}}
-{{% tab "JBoss" %}}
-
-Add the following line to the end of `standalone.conf`:
-
-```text
-JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar -Ddd.remote.config.enabled=true -Ddd.experimental.flagging.provider.enabled=true"
-```
-
-{{% /tab %}}
-{{% tab "Jetty" %}}
-
-Add the following to your `start.ini`:
-
-```text
---exec
--javaagent:/path/to/dd-java-agent.jar
--Ddd.remote.config.enabled=true
--Ddd.experimental.flagging.provider.enabled=true
-```
-
-{{% /tab %}}
-{{% tab "Docker" %}}
-
-Update your Dockerfile to download and use the tracer:
-
-```dockerfile
-FROM openjdk:17-jre
-
-# Download the Datadog Java tracer
-ADD https://dtdg.co/latest-java-tracer dd-java-agent.jar
-
-# Copy your application
-COPY myapp.jar .
-
-# Run with feature flags enabled
-CMD ["java", "-javaagent:dd-java-agent.jar", "-Ddd.remote.config.enabled=true", "-Ddd.experimental.flagging.provider.enabled=true", "-jar", "myapp.jar"]
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+Make sure to include the feature flagging configuration flags:
+- `-Ddd.remote.config.enabled=true`
+- `-Ddd.experimental.flagging.provider.enabled=true`
 
 ## Initialize the OpenFeature provider
 
@@ -451,19 +393,6 @@ if (details.getErrorCode() != null) {
 | `TYPE_MISMATCH` | Flag value can't be converted to requested type | Use correct evaluation method for flag type |
 | `INVALID_CONTEXT` | Evaluation context is null | Provide a valid evaluation context |
 
-## Exposure tracking
-
-Flag exposures are automatically tracked and sent to Datadog when:
-1. A flag is evaluated successfully
-2. The flag's allocation has `doLog=true` configured
-
-Exposures appear in the Datadog UI and can be used for:
-- Analyzing feature adoption
-- Correlating feature flags with application performance
-- Debugging flag behavior
-
-No additional code is required. Exposures are automatically logged by the Datadog tracer integration.
-
 ## Advanced configuration
 
 ### Custom initialization timeout
@@ -521,11 +450,10 @@ The `Provider` instance is shared globally. Client names are for organizational 
 
 ## Best practices
 
-{{% collapse-content title="Initialize early" level="p" %}}
+### Initialize early
 Initialize the OpenFeature provider as early as possible in your application lifecycle (for example, in `main()` or application startup). This ensures flags are ready before business logic executes.
-{{% /collapse-content %}}
 
-{{% collapse-content title="Use meaningful default values" level="p" %}}
+### Use meaningful default values
 Always provide sensible default values that maintain safe behavior if flag evaluation fails:
 
 {{< code-block lang="java" >}}
@@ -535,9 +463,8 @@ boolean useNewAlgorithm = client.getBooleanValue("algorithm.new", false, context
 // Good: Conservative default for limits
 int rateLimit = client.getIntegerValue("rate.limit", 100, context);
 {{< /code-block >}}
-{{% /collapse-content %}}
 
-{{% collapse-content title="Create context once" level="p" %}}
+### Create context once
 Create the evaluation context once per request/user/session and reuse it for all flag evaluations:
 
 {{< code-block lang="java" >}}
@@ -552,9 +479,8 @@ boolean featureB = client.getBooleanValue("feature.b", false, userContext);
 {{< /code-block >}}
 
 Rebuilding the evaluation context for every flag evaluation adds unnecessary overhead. Create the context once at the start of the request lifecycle, then pass it to all subsequent flag evaluations.
-{{% /collapse-content %}}
 
-{{% collapse-content title="Handle initialization failures (optional)" level="p" %}}
+### Handle initialization failures (optional)
 Consider handling initialization failures if your application can function with default flag values:
 
 {{< code-block lang="java" >}}
@@ -568,15 +494,13 @@ try {
 {{< /code-block >}}
 
 If feature flags are critical for your application to function, let the exception propagate to prevent startup.
-{{% /collapse-content %}}
 
-{{% collapse-content title="Use consistent targeting keys" level="p" %}}
+### Use consistent targeting keys
 Use consistent, stable identifiers as targeting keys:
 - **Good**: User IDs, session IDs, device IDs
 - **Avoid**: Timestamps, random values, frequently changing IDs
-{{% /collapse-content %}}
 
-{{% collapse-content title="Monitor flag evaluation" level="p" %}}
+### Monitor flag evaluation
 Use the detailed evaluation results for logging and debugging:
 
 {{< code-block lang="java" >}}
@@ -590,11 +514,8 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
     details.getReason()
 );
 {{< /code-block >}}
-{{% /collapse-content %}}
 
 ## Troubleshooting
-
-{{% collapse-content title="Troubleshooting" level="p" %}}
 
 ### Provider not ready
 
@@ -694,8 +615,6 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 2. Check Datadog Agent is receiving exposure events
 3. Verify `DD_API_KEY` is correct
 4. Check Agent logs for exposure upload errors
-
-{{% /collapse-content %}}
 
 ## Further reading
 
