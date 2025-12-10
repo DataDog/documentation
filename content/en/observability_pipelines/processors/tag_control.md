@@ -37,7 +37,7 @@ Click **Add tag rule**.
 
 {{< img src="observability_pipelines/processors/tag_control_settings.png" alt="The tag control settings panel" style="width:55%;" >}}
 
-1. Define a filter query. Only matching metrics are processed by this processor, but all metrics continue to the next step in the pipeline.
+1. Define a filter query. Only matching metrics are processed by this processor, but all metrics continue to the next step in the pipeline. See [Filter query syntax](#filter-query-syntax) for more information.
 1. In the **Configure tags** section, choose whether to **Include tags** or **Exclude tags**.
 1. Optionally, input a sample tags object to help you select the tags you want to include or exclude in the next step.
     - The supported input formats are `{"key1":"value1", "key2":"value2"}`.
@@ -45,5 +45,9 @@ Click **Add tag rule**.
 1. If you provided a tag array in the previous step, select the tag keys you want to configure in the dropdown menu. You can also manually add tag keys.
     - Note: You can select up to 15 tags.
 1. Click **Save**.
+
+## Filter query syntax
+
+{{% observability_pipelines/processors/filter_syntax_metrics %}}
 
 [1]: /may/op-metrics-pipelines-components/getting_started/tagging/#define-tags
