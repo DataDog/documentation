@@ -920,6 +920,10 @@
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
   },
+  "GetDeploymentGateRules": {
+    "description": "Endpoint to get rules for a deployment gate.",
+    "summary": "Get rules for a deployment gate"
+  },
   "CreateDeploymentRule": {
     "description": "Endpoint to create a deployment rule. A gate for the rule must already exist.",
     "summary": "Create deployment rule",

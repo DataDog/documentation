@@ -16846,6 +16846,12 @@ components:
       required:
       - id
       type: object
+    DeploymentGateRulesResponse:
+      description: Response for a deployment gate rules.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListDeploymentRuleResponseData'
+      type: object
     DeploymentMetadata:
       description: Metadata object containing the publication creation information.
       properties:
@@ -30191,6 +30197,37 @@ components:
       type: string
       x-enum-varnames:
       - LIST_CONNECTIONS_RESPONSE
+    ListDeploymentRuleResponseData:
+      description: Data for a list of deployment rules.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListDeploymentRulesResponseDataAttributes'
+        id:
+          description: Unique identifier of the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        type:
+          $ref: '#/components/schemas/ListDeploymentRulesDataType'
+      required:
+      - type
+      - attributes
+      - id
+      type: object
+    ListDeploymentRulesDataType:
+      description: List deployment rule resource type.
+      enum:
+      - list_deployment_rules
+      example: list_deployment_rules
+      type: string
+      x-enum-varnames:
+      - LIST_DEPLOYMENT_RULES
+    ListDeploymentRulesResponseDataAttributes:
+      properties:
+        rules:
+          items:
+            $ref: '#/components/schemas/DeploymentRuleResponseDataAttributes'
+          type: array
+      type: object
     ListDevicesResponse:
       description: List devices response.
       properties:
@@ -66486,6 +66523,51 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/deployment_gates/{gate_id}/rules:
+    get:
+      description: Endpoint to get rules for a deployment gate.
+      operationId: GetDeploymentGateRules
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGateRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get rules for a deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Endpoint to create a deployment rule. A gate for the rule must
         already exist.
