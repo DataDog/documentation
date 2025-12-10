@@ -26,14 +26,7 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 ## Create an app
 
-When creating a new app, Datadog displays an onboarding modal with the following options: 
-- [Start with AI][22]
-- [Start with blueprint][18]
-- [Start with layout][19]
-- [Start with data][20]
-- [Start from scratch][21] 
-- [App Playground][23]
-
+When creating a new app, you can use [AI][22], [a blueprint][18], [a layout][19], or [data][20] to get started. Alternatively, you can [start from scratch][21] or use the [App Playground][23] to learn more about App Builder.
 
 ### Build an app with AI
 
