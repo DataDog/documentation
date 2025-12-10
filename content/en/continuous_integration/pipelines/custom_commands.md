@@ -32,6 +32,8 @@ Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
+<div class="alert alert-info">For more ways to install the CLI, see <a href="https://github.com/DataDog/datadog-ci?tab=readme-ov-file#more-ways-to-install-the-cli/">this documentation</a>.</div>
+
 ## Trace a command line
 
 To trace a command line, run:
