@@ -103,7 +103,9 @@ attributes:
        - **Incidents**: Retained for the duration of the account
   - product: LLM Observability
     data_type: |
-       - **Traces and spans**: 15 days
+       - **Production Traces and spans**: 15 days
+       - **Experiments Traces and spans**: 90 days
+       - **Datasets**: 3 years
   - product: Log Management
     data_type: |
        - **Logs**: Determined by customer plan
