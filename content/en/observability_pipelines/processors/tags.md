@@ -1,5 +1,5 @@
 ---
-title: Tags
+title: Tags Processor
 disable_toc: false
 ---
 

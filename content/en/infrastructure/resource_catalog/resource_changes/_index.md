@@ -4,6 +4,9 @@ further_reading:
 - link: "/infrastructure/resource_catalog/"
   tag: "Documentation"
   text: "Datadog Resource Catalog Overview"
+- link: "https://www.datadoghq.com/blog/automate-infrastructure-operations-with-datadog-infrastructure-management/"
+  tag: "Blog"
+  text: "Automate infrastructure operations with Datadog Infrastructure Management"
 ---
 
 {{< site-region region="gov" >}}
