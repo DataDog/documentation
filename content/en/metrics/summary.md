@@ -133,7 +133,7 @@ The Source Code integration pinpoints the exact file, line, and owner in your so
 
 {{< img src="metrics/summary/metrics_source_code_11212025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
-To ensure full coverage of your metric's source code, please ensure that you've installed Datadog's [Github][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
+To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
 ### Tags table
 
