@@ -47,7 +47,7 @@ To build an app with Bits AI:
    - `Display GitHub pull requests in a table.`
 1. Press **Enter** to send your prompt. Bits AI automatically generates the UI, actions, and logic for your app, mapped to your existing data and permissions.
     - While Bits AI is generating your app, it may give you the chance to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
-    - Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press **Enter**. 
+    - Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press <kbd>Enter</kbd>. 
     - After Bits AI adds an action to the app, you are prompted to either **Mock with AI Data** or **Skip**. Configuring your action during UI agent execution helps connect the data types to other components.
 1. After Bits AI responds to your prompt, the following steps are optional: 
     - To change the app name and description, click the app name.
