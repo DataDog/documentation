@@ -19,8 +19,6 @@ further_reading:
 
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
