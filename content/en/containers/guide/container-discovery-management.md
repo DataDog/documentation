@@ -253,10 +253,111 @@ Set `DD_EXCLUDE_PAUSE_CONTAINER` to `false`.
 
 ## Advanced CEL exclusion
 
-Use the parameters in the table below to configure filtering for container 
+In **Agent v7.73+**, you can use the `cel_workload_exclude` configuration option to filter containers from Autodiscovery. This feature allows you to define [Common Expression Langauge][3] rules with fine granularity to target containers to be excluded from telemetry collection by product.
 
+Use the defined parameters for the container representation in the table below to configure filtering rules:
 
-. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their:
+| Attribute                   | Description                                                             |
+|-----------------------------|-------------------------------------------------------------------------|
+| `container.name`            | The name of the container.                                              |
+| `container.image.reference` | The full reference of the container image (registry, repo, tag/digest). |
+| `container.pod.name`        | The name of the pod running the container.                              |
+| `container.pod.namespace`   | The Kubernetes namespace of the pod.                                    |
+| `container.pod.annotations` | The annotations applied to the pod (key-value map).                     |
+
+### Configuration structure
+
+The `cel_workload_exclude` configuration is structured as a list of rule sets joined by logical **ORs**. Each rule set defines the `products` to exclude and the corresponding CEL `rules` to match against containers.
+
+The `products` field accepts `metrics`, `logs`, and `global` (exclude container from all listed products).
+
+If the configuration contains typos or structural errors, the Agent process gracefully crashes to prevent collecting unintended telemetry which could impact billing. Additionally, the CEL compiler performs basic type checking to ensure valid operations on the container attributes.
+
+In the example below, metrics and logs are excluded for any `nginx` container running in the `staging` namespace. Additionally, logs are excluded for any container running the `redis` image, **or** any container within a pod that has the annotation `low_priority: "true"`.
+
+```yaml
+cel_workload_exclude:
+- products: [metrics, logs]
+  rules:
+    containers:
+      - container.name.matches("nginx") && container.pod.namespace == "staging"
+- products: [logs]
+  rules:
+    containers:
+      - container.image.reference.matches("redis")
+      - container.pod.annotations["low_priority"] == "true"
+```
+
+The CEL-backed workload exclusion can also be configured by providing a JSON-formatted environment value to `DD_CEL_WORKLOAD_EXCLUDE`.
+
+{{% collapse-content title="Setting environment variables" level="h4" expanded=false id="setting-environment-variables" %}}
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+In Datadog Operator, set these environment variables under `spec.override.nodeAgent.env`.
+
+##### Example
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+  override:
+    nodeAgent:
+      env:
+      - name: DD_CEL_WORKLOAD_EXCLUDE
+        value: '[{"products":["global"],"rules":{"containers":["container.name == \"redis\""]}}]'
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In your Helm chart, use the `datadog.celWorkloadExclude` configuration option.
+
+##### Example
+
+```yaml
+datadog:
+  celWorkloadExclude:
+  - products: [global]
+    rules:
+      containers:
+        - container.name == "redis"
+```
+
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+
+In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+
+##### Example Docker
+
+```shell
+docker run -e DD_CEL_WORKLOAD_EXCLUDE=<JSON_CEL_RULES> ...
+```
+
+##### Example ECS
+
+```json
+"environment": [
+  {
+    "name": "DD_CEL_WORKLOAD_EXCLUDE",
+    "value": "<JSON_CEL_RULES>"
+  },
+  ...
+]
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
 
 ## Pod exclude configuration
 
@@ -377,3 +478,4 @@ In environments where you are not using Helm or the Operator, the following envi
 
 [1]: /containers/kubernetes/log/?tab=helm#log-collection
 [2]: /getting_started/containers/autodiscovery
+[3]: https://github.com/google/cel-spec/blob/master/doc/langdef.md
