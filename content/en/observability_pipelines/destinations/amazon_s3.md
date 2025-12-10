@@ -75,9 +75,7 @@ If you enter the following values for your Amazon S3 destination:
 - Prefix to apply to all object keys: `op-logs`
 - Storage class for the created objects: `Standard`
 
-<figure class="text-center">
-<img src="{{ .Site.Params.img_url}}images/observability_pipelines/setup/amazon_s3_destination.png" alt="The Amazon S3 destination setup with the example values" width="40%">
-</figure>
+{{< img src="observability_pipelines/setup/amazon_s3_destination.png" alt="The Amazon S3 destination setup with the example values" style="width:40%;" >}}
 
 Then these are the values you enter for configuring the S3 bucket for Log Archives:
 
@@ -85,9 +83,7 @@ Then these are the values you enter for configuring the S3 bucket for Log Archiv
 - Path: `op-logs`
 - Storage class: `Standard`
 
-<figure class="text-center">
-<img src="{{ .Site.Params.img_url}}images/observability_pipelines/setup/amazon_s3_archive.png" alt="The log archive configuration with the example values" width="70%">
-</figure>
+{{< img src="observability_pipelines/setup/amazon_s3_archive.png" alt="The log archive configuration with the example values" style="width:70%;" >}}
 
 ### Set the environment variables
 
@@ -121,7 +117,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/
 [3]: /integrations/amazon_web_services/#setup
-[4]: /observability_pipelines/archive_logs/
+[4]: /observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs
 [5]: /observability_pipelines/configuration/set_up_pipelines/
 [6]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
 [7]: /observability_pipelines/destinations/#event-batching
