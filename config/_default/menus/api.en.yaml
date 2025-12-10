@@ -3104,8 +3104,9 @@ menu:
           - v2
         operationids:
           - CreateJiraIssues
-        unstable: []
-        order: 7
+        unstable:
+          - v2
+        order: 47
     - name: Attach security findings to a Jira issue
       url: '#attach-security-findings-to-a-jira-issue'
       identifier: security-monitoring-attach-security-findings-to-a-jira-issue
@@ -3116,8 +3117,9 @@ menu:
           - v2
         operationids:
           - AttachJiraIssue
-        unstable: []
-        order: 8
+        unstable:
+          - v2
+        order: 48
     - name: Attach security findings to a case
       url: '#attach-security-findings-to-a-case'
       identifier: security-monitoring-attach-security-findings-to-a-case
@@ -3129,7 +3131,7 @@ menu:
         operationids:
           - AttachCase
         unstable: []
-        order: 5
+        order: 45
     - name: Create cases for security findings
       url: '#create-cases-for-security-findings'
       identifier: security-monitoring-create-cases-for-security-findings
@@ -3141,7 +3143,7 @@ menu:
         operationids:
           - CreateCases
         unstable: []
-        order: 4
+        order: 44
     - name: Detach security findings from their case
       url: '#detach-security-findings-from-their-case'
       identifier: security-monitoring-detach-security-findings-from-their-case
@@ -3153,7 +3155,7 @@ menu:
         operationids:
           - DetachCase
         unstable: []
-        order: 6
+        order: 46
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -9908,6 +9910,18 @@ menu:
           - CreateReferenceTableUpload
         unstable: []
         order: 1
+    - name: Upsert rows
+      url: '#upsert-rows'
+      identifier: reference-tables-upsert-rows
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertRows
+        unstable: []
+        order: 8
     - name: Get rows by id
       url: '#get-rows-by-id'
       identifier: reference-tables-get-rows-by-id
@@ -9920,6 +9934,18 @@ menu:
           - GetRowsByID
         unstable: []
         order: 5
+    - name: Delete rows
+      url: '#delete-rows'
+      identifier: reference-tables-delete-rows
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRows
+        unstable: []
+        order: 9
     - name: Update reference table
       url: '#update-reference-table'
       identifier: reference-tables-update-reference-table

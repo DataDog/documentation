@@ -22,10 +22,6 @@ further_reading:
       text: 'Create and manage span-based metrics with Terraform'
 ---
 
-{{< callout url="https://help.datadoghq.com/hc/en-us/requests/new" header="Request access to the Preview!" >}}
-Custom metrics from traces are in Preview. To request access, submit a ticket to the APM Support team and provide a short description of your use case.
-{{< /callout >}}
-
 {{< img src="tracing/apm_lifecycle/span_based_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Span-based metrics" >}}
 
 Generate custom metrics from ingested spans to track trends, power dashboards, and trigger monitors—even for spans and traces that are not retained for full trace analysis.
@@ -42,14 +38,18 @@ Use custom metrics from spans for:
 - Powering [anomaly][4] or [forecast][7] monitors with low-latency, high-resolution metrics.
 - Extracting key signals for trending or alerting without retaining the full span.
 
-### When to use custom metrics from traces
+#### When to use custom metrics from traces
+
+Datadog allows you to generate metrics from [Trace Queries][15].
+
+{{< callout url="https://help.datadoghq.com/hc/en-us/requests/new" header="Request access to the Preview!" >}}
+Custom metrics from traces are in Preview. To request access, submit a ticket to the APM Support team and provide a short description of your use case.
+{{< /callout >}}
 
 Use custom metrics from traces for:
 - Metrics derived from complete trace context, such as total trace duration or operations per trace.
 - Alerting on conditions requiring full trace knowledge (for example, N+1 query detection or fan-out patterns).
 - Extracting key signals for trending or alerting without retaining the full trace.
-
-<div class="alert alert-danger">Custom metrics from spans and traces are <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by high-cardinality values (such as user IDs, request IDs, or timestamps) to prevent billing impact.</div>
 
 ## Create a metric from spans or traces
 
@@ -109,3 +109,4 @@ When using custom metrics from traces in monitors, account for this latency to a
 [12]: /tracing/trace_pipeline/ingestion_controls
 [13]: /tracing/metrics/metrics_namespace/ 
 [14]: https://app.datadoghq.com/apm/traces/generate-metrics
+[15]: /tracing/trace_explorer/trace_queries
