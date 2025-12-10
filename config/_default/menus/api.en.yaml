@@ -7600,6 +7600,19 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Get rules for a deployment gate
+      url: '#get-rules-for-a-deployment-gate'
+      identifier: deployment-gates-get-rules-for-a-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDeploymentGateRules
+        unstable:
+          - v2
+        order: 9
     - name: Create deployment gate
       url: '#create-deployment-gate'
       identifier: deployment-gates-create-deployment-gate
