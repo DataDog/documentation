@@ -11,9 +11,9 @@ further_reading:
     text: "Automation Pipelines"
 ---
 
-{{< learning-center-callout header="Add to Security Inbox Rules are available in Preview" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/">}}
-  Security Inbox customization is currently in Preview and supports the finding types listed below. Try it today!
-{{< /learning-center-callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" header="Join the Preview!">}}
+  Add to Security Inbox Rules are in Preview.
+{{< /callout >}}
 
 Configure inbox rules to manage your Security Inbox effectively, ensuring only the most relevant security issues are highlighted. By customizing conditions, you can focus on critical concerns, prioritize key risks, support compliance, and bring attention to issues that might otherwise be overlooked.
 
