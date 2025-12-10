@@ -55,8 +55,8 @@ The following AI clients are compatible with the Datadog MCP Server.
 | [Codex CLI][7] | OpenAI | |
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
-| [Q CLI][10] | Amazon | For remote authentication, add `"oauthScopes": []` to the server [configuration](?tab=remoteauthentication#example-configurations). |
 | [Kiro][23] | Amazon | |
+| [Kiro CLI][10] | Amazon | |
 | [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
@@ -118,6 +118,7 @@ These examples are for the US1 site:
 * **Configuration file**: Edit the configuration file for your AI agent:
   * Codex CLI: `~/.codex/config.toml`
   * Gemini CLI: `~/.gemini/settings.json`
+  * Kiro CLI: `~/.kiro/settings/mcp.json`
 
   ```json
   {
@@ -125,19 +126,6 @@ These examples are for the US1 site:
       "datadog": {
         "type": "http",
         "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
-      }
-    }
-  }
-  ```
-  * Amazon Q CLI: `~/.aws/amazonq/default.json`
-
-  ```json
-  {
-    "mcpServers": {
-      "datadog": {
-        "type": "http",
-        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
-        "oauthScopes": []
       }
     }
   }
@@ -235,7 +223,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 
 - `core`: The default toolset
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][21]
-- `software-delivery`: Tools for interacting with Software Delivery [CI Visibility][22]
+- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][22] and [Test Optimization][25])
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
 
@@ -400,6 +388,14 @@ Searches CI events with filters and returns details on them.
 - Show me the latest pipeline failure in branch `my-branch`.
 - Propose a fix for the job `integration-test` that fails every time on my branch `my-branch`.
 
+### `get_datadog_flaky_tests`
+*Toolset: **software-delivery***\
+Searches Datadog [Test Optimization][25] for flaky tests and returns triage-ready details, including failure-rate stats, flaky state/category, ownership context (`codeowners`, `services`, `module`, `suite`), branch/SHA history, CI pipeline impact, and recent test-run metadata. Supports pagination with `page_cursor` and sorting by fields such as `failure_rate` or `pipelines_failed`.
+
+- Find active flaky tests for the checkout service owned by `@team-abc`, sorted by failure rate.
+- Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
+- List flaky tests in the `timeout` category with high failure rate (50%+) so I can prioritize fixes.
+
 ## Context efficiency
 
 The Datadog MCP Server is optimized to provide responses in a way that AI agents get relevant context without being overloaded with unnecessary information. For example:
@@ -428,7 +424,7 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [7]: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
 [8]: https://www.cursor.com/
 [9]: https://github.com/block/goose
-[10]: https://github.com/aws/amazon-q-developer-cli
+[10]: https://kiro.dev/cli/
 [11]: https://code.visualstudio.com/
 [12]: /developers/ide_plugins/vscode/
 [13]: https://nodejs.org/en/about/previous-releases
@@ -443,3 +439,4 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [22]: /continuous_integration/
 [23]: https://kiro.dev/
 [24]: /account_management/org_settings/service_accounts/
+[25]: /tests/

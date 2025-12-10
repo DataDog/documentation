@@ -3,6 +3,12 @@ title: Fleet Automation
 description: "Centrally govern and remotely manage Datadog Agents and OpenTelemetry Collectors at scale with configuration views, upgrades, flare collection, and API key rotation."
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/manage-opentelemetry-collectors-with-datadog-fleet-automation
+  tag: Blog
+  text: Manage all your OpenTelemetry collectors with Datadog Fleet Automation
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
 - link: "/remote_configuration"
   tag: "Documentation"
   text: "Find out more about Remote Configuration"
