@@ -111,12 +111,12 @@ If you want to apply different configuration templates to containers running the
 
 ## Advanced container identifiers
 
-For use cases which require further granularity on Agent v7.74.0+, you can use the `cel_selector` check configuration option to target specific containers based on additional container attributes. These rules are based on the [Common Expression Language][3] syntax.
+For use cases which require further granularity on Agent v7.73.0+, you can use the `cel_selector` check configuration option to target specific containers based on additional container attributes. These rules are based on the [Common Expression Language][3] syntax.
 
 Note: To be a valid Autodiscovery configuration, the check configuration must either include an `ad_identifier` or `cel_selector` container rule with the `container.image.reference` parameter.
 
 **Example**:
-The following Nginx Autodiscovery configuration template designates a container image with the name `nginx` on two selected namespaces. Separately listed conditions are joined together through an **OR** operation.
+The following NGINX Autodiscovery configuration template designates a container image with the name `nginx` on two selected namespaces. Separately listed conditions are joined together through an **OR** operation.
 
 ```yaml
 ad_identifiers:
@@ -130,10 +130,10 @@ cel_selector:
 | Attribute                    | Description                                                |
 |------------------------------|------------------------------------------------------------|
 | `container.name`             | The name of the container.                                 |
-| `container.image.reference`  | The full reference of the container image (repo, tag/digest).  |
+| `container.image.reference`  | The full reference of the container image (registry, repo, tag/digest).  |
 | `container.pod.name`         | The name of the pod running the container.                 |
 | `container.pod.namespace`    | The Kubernetes namespace of the pod.                       |
-| `container.pod.annotations`  | The annotations applied to the pod (key–value map).        |
+| `container.pod.annotations`  | The annotations applied to the pod (key-value map).        |
 
 These attributes can be used with the [CEL syntax][4] to define rules to select specific containers for check scheduling. Below is a list of example rules that could be defined:
 
@@ -149,7 +149,7 @@ cel_selector:
     - container.pod.annotations["monitoring"] == "true"
 ```
 
-To select the container running the image `nginx` in namespaces not containing the substring `-dev`:
+To select the container running the image `nginx` in namespaces without the substring `-dev`:
 
 ```yaml
 ad_identifiers:
@@ -169,7 +169,7 @@ cel_selector:
     - container.name == "nginx-server" && container.pod.namespace == "prod"
 ```
 
-To select the container running an image containing the substring `nginx`:
+To select the container running an image with the substring `nginx`:
 
 ```yaml
 cel_selector:
@@ -189,11 +189,11 @@ cel_selector:
 
 <div class="alert alert-danger">
 
-Broad conditions can unintentionally target containers on your host. For example, using a containers `cel_selector` like `container.image.reference != "nginx"` selects **every** container on the host except nginx, including system components and likely unrelated applications. This can lead to additional telemetry collection which can impact billing.
+Broad conditions can unintentionally target containers on your host. For example, using a containers `cel_selector` like `!container.image.reference.matches("nginx")` selects **every** container on the host except nginx, including system components and likely unrelated applications. This can lead to additional telemetry collection which can impact billing.
 
 </div>
 
-To globally exclude particular workloads from being collected regardless of the check integration, refer to the [Container Discovery Management][5] documentation.
+To globally exclude particular workloads from being collected regardless of the check integration, see the [Container Discovery Management][5] documentation.
 
 ## Further Reading
 
