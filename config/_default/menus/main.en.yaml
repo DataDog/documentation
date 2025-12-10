@@ -5030,6 +5030,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_otel
       weight: 204
+    - name: Tracing Proxy Services
+      url: llm_observability/trace_proxy_services
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_instrumentation_trace_proxy_services
+      weight: 205
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs
