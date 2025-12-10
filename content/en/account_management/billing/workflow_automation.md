@@ -16,11 +16,6 @@ Datadog [Workflow Automation][8] billing is based on the number of **workflow ex
 
 ## Pricing model
 
-### Billing metrics
-Workflow Automation is billed **per execution**, meaning each complete workflow run counts toward your bill. There are two billing options:
-- **Committed Executions**: $0.10 per execution (purchased in advance)
-- **On-Demand Executions**: $0.14 per execution (pay-as-you-go)
-
 ### Definition of workflow execution
 A workflow execution refers to one full run of a published workflow, regardless of how many steps or actions it includes. Executions can be triggered through:
 - Manual starts in the Datadog UI
@@ -39,6 +34,11 @@ Failed executions are not exempt from billing. All published executions are bill
     <li> Time out mid-run
 </ul>
 </div>
+
+### Billing metrics
+Workflow Automation is billed **per execution**, meaning each complete workflow run counts toward your bill. There are two billing options:
+- **Committed Executions**: $0.10 per execution (purchased in advance)
+- **On-Demand Executions**: $0.14 per execution (pay-as-you-go)
 
 ### Usage tracking
 The best source of truth for billing is on your [Datadog Plan & Usage page][1], where execution usage is continuously tracked. Under **Products**, select only **Workflow Executions** for the filter. You can also filter further under **Sub-Orgs** if workflows are tagged individually by team. 
