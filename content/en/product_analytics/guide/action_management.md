@@ -50,8 +50,8 @@ Action Management requires [The Datadog test recorder Chrome extension][1]. If y
 ### Step 3 - Retrieve your actions 
 
 After you define an action, you can find it in the [list of labeled actions][4]. From this list, you can:
-- Filter to only see your actions.
-- Edit actions.
+- Filter to only see your actions
+- Edit actions
 - View actions in a funnel, retention chart, related session replay
 
  {{< img src="product_analytics/action_management/pana-action-list.png" alt="List of your labeled actions." style="width:90%;">}}
