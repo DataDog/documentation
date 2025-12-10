@@ -19997,6 +19997,13 @@ components:
           $ref: '#/components/schemas/EventPayloadAttributes'
         category:
           $ref: '#/components/schemas/EventCategory'
+        host:
+          description: Host name to associate with the event. Any tags associated
+            with the host are also applied to this event. Limited to 255 characters.
+          example: hostname
+          maxLength: 255
+          minLength: 1
+          type: string
         integration_id:
           $ref: '#/components/schemas/EventPayloadIntegrationId'
         message:
@@ -67887,6 +67894,7 @@ paths:
                           rule:
                             datacenter: devcycle.us1.prod
                       category: change
+                      host: hostname
                       integration_id: custom-events
                       message: payment_processed feature flag has been enabled
                       tags:
