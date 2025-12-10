@@ -49,7 +49,7 @@ To build an app with Bits AI:
     - While Bits AI is generating your app, it may give you the chance to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
     - Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press <kbd>Enter</kbd>. 
     - After Bits AI adds an action to the app, you are prompted to either **Mock with AI Data** or **Skip**. Configuring your action during UI agent execution helps connect the data types to other components.
-1. After Bits AI responds to your prompt, the following steps are optional: 
+1. Optionally, after Bits AI has generated your app, you can take additional steps to configure and test it:
     - To change the app name and description, click the app name.
     - Click **Edit with AI** or manually [customize your app][15].
     - To preview the app, click **View**. Click **Edit** to return to the configuration view.
@@ -67,7 +67,7 @@ Blueprints are helpful templates that cover common use cases. They come loaded w
 
 1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint** in the onboarding modal.
 1. Find the blueprint you want to use and click **Use Blueprint**.
-1. The following steps are optional: 
+1. Optionally, you can take additional steps to configure and test your app:
     - Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
     - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
     - To change the app name and description, click the app name.
