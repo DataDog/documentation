@@ -160,7 +160,8 @@ For service deployments tracked by APM to contribute to change lead time, ensure
 
 ### Requirements for calculating change lead time
 - Your application telemetry is tagged with Git information. You can enable this [in APM][101] or see the [Source Code Integration documentation][102].
-- Your repository metadata is synchronized to Datadog through the [GitHub integration][103] or by the `datadog-ci git-metadata upload` command.
+- Your [repository metadata is synchronized to DataDog](#synchronize-repository-metadata-to-datadog).
+
 
 [101]: https://app.datadoghq.com/source-code/setup/apm
 [102]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
@@ -174,7 +175,7 @@ For service deployments tracked by the DORA Metrics API or the `datadog-ci dora 
 ### Requirements for calculating change lead time
 
 - The attributes `repository_url` and `commit_sha` are included in the deployment events payload.
-- Your repository metadata is synchronized to Datadog through the [GitHub integration][101] or by the `datadog-ci git-metadata upload` command.
+- Your [repository metadata is synchronized to DataDog](#synchronize-repository-metadata-to-datadog).
 
 [101]: /integrations/github/
 
