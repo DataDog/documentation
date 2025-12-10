@@ -13,16 +13,14 @@ products:
 
 Use this processor to include or exclude specific tags in your metrics. Tags that are excluded or not included are dropped and may reduce your outbound metrics tag volume.
 
-The following table lists tags that can't be dropped and why.
+The following tags can't be dropped because they provide specific platform functionality:
 
-| Tag            | Reason                                                                           |
-| -------------- | -------------------------------------------------------------------------------- |
-| `host`         | Critical for infrastructure mapping, metrics aggregation, and platform features. |
-| `service`      | Used to group data.                                                              |
-| `ddsource`     | Used in Log Management to identify sources and apply integration pipelines.      |
-| `function_arn` | Equivalent to the `host_id` in Lambda.                                           |
-| `datadog_`     | Platform specific tags.                                                         |
-| `_dd.*`        | System-reserved tags, such as `_dd.hostname`.                                    |
+- `host`
+- `service`
+- `ddsource`
+- `function_arn`
+- `datadog_`
+- `_dd.*`
 
 ## Setup
 
