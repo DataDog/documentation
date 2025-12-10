@@ -21149,6 +21149,11 @@ components:
             for the given date and given organization.
           format: int64
           type: integer
+        cloud_cost_management_oci_host_count_avg:
+          description: Average host count for Cloud Cost Management on OCI for the
+            given date and organization.
+          format: int64
+          type: integer
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
@@ -21381,6 +21386,11 @@ components:
         eph_infra_host_proplus_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proxmox_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         error_tracking_apm_error_events_sum:
@@ -21677,6 +21687,16 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_sum:
+          description: Sum of all Proxmox hosts over all hours in the current date
+            for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_top99p:
+          description: 99th percentile of all Proxmox hosts over all hours in the
+            current date for all organizations.
           format: int64
           type: integer
         published_app_hwm:
@@ -22262,6 +22282,11 @@ components:
             for the given date and given org.
           format: int64
           type: integer
+        cloud_cost_management_oci_host_count_avg:
+          description: Average host count for Cloud Cost Management on OCI for the
+            given date and organization.
+          format: int64
+          type: integer
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
@@ -22500,6 +22525,11 @@ components:
         eph_infra_host_proplus_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proxmox_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current date for the given organization.
           format: int64
           type: integer
         error_tracking_apm_error_events_sum:
@@ -22794,6 +22824,16 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for the given org.
+          format: int64
+          type: integer
+        proxmox_host_sum:
+          description: Sum of all Proxmox hosts over all hours in the current date
+            for the given organization.
+          format: int64
+          type: integer
+        proxmox_host_top99p:
+          description: 99th percentile of all Proxmox hosts over all hours in the
+            current date for the given organization.
           format: int64
           type: integer
         public_id:
@@ -23385,6 +23425,11 @@ components:
             all cloud providers.
           format: int64
           type: integer
+        cloud_cost_management_oci_host_count_avg_sum:
+          description: Sum of the average host counts for Cloud Cost Management on
+            OCI.
+          format: int64
+          type: integer
         cloud_siem_events_agg_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current month for all organizations.
@@ -23624,6 +23669,11 @@ components:
         eph_infra_host_proplus_agg_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_proxmox_agg_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         error_tracking_apm_error_events_agg_sum:
@@ -23941,6 +23991,16 @@ components:
           type: integer
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_agg_sum:
+          description: Sum of all Proxmox hosts over all hours in the current month
+            for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_top99p_sum:
+          description: Sum of the 99th percentile of all Proxmox hosts over all hours
             in the current month for all organizations.
           format: int64
           type: integer
