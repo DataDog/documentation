@@ -23,7 +23,7 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ## Setup
 
-### Scheduled Tests
+### Scheduled tests
 
 You can monitor specific network paths by defining them in the Agent configuration file located at `/etc/datadog-agent/conf.d/network_path.d/conf.yaml`.
 
@@ -240,11 +240,11 @@ To increase the number of workers, add the following configuration to your `data
 check_runners: <NUMBER_OF_WORKERS>
 ```
 
-### Dynamic Tests (Preview)
+### Dynamic tests (Preview)
 
 **Prerequisites**: [CNM][1] must be enabled.
 
-Configure Dynamic Tests to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [filter syntax](#filter-syntax) to include/exclude domain or IPs.
+Configure dynamic tests to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [filter syntax](#filter-syntax) to include/exclude domain or IPs.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -403,13 +403,13 @@ datadog:
 
 #### Filter syntax
 
-Filters can be used to include/exclude domains or IPs to:
+Configure filters to include or exclude domains and IPs, allowing you to:
 
 - Reduce monitoring overhead for internal networks
 - Focus on external traffic patterns
 - Exclude known infrastructure ranges that don't require monitoring
 
-To include/exclude specific domain or IPs ranges from Dynamic Tests, configure the following in your `/etc/datadog-agent/datadog.yaml` file:
+To include or exclude specific domains or IP ranges from dynamic tests, add the following to your `/etc/datadog-agent/datadog.yaml` file:
 
 ```yaml
 network_path:
@@ -444,11 +444,10 @@ network_path:
         type: include
 ```
 
-##### Filters order
+**Note**: 
+Filters are applied sequentially, with later filters taking precedence over earlier ones.
 
-Filters are applied sequentially, the latest filters will take precedence.
-
-In the example below, all domains matching  `*.datadoghq.com` are ignored, except `api.datadoghq.com`.
+For example, all domains matching `*.datadoghq.com` are ignored, except `api.datadoghq.com`.
 
 ```yaml
 network_path:
@@ -459,7 +458,6 @@ network_path:
       - match_domain: 'api.datadoghq.com'
         type: include
 ```
-
 
 ## Troubleshooting
 
