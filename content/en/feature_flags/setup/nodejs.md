@@ -35,7 +35,7 @@ OpenFeature.setProvider(tracer.openfeature);
 
 ### Accepting default variant until initialization is complete
 
-When you call `setProvider` without waiting, the client returns default values until remote configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
+When you call `setProvider` without waiting, the client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
 
 ```javascript
 OpenFeature.setProvider(tracer.openfeature);
