@@ -100,6 +100,12 @@ spec:
           env:
             - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
               value: "true"
+    nodeAgent:
+      containers:
+        agent:
+          env:
+            - name: DD_CLOUD_PROVIDER_METADATA
+              value: "azure"
 ```
 
 Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure that the correct SITE for your account is selected on the right of this page).
