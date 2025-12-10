@@ -18,7 +18,7 @@ Your feedback is invaluable to Datadog during this preview stage. Share all of y
 
 ### Step 1 - Install the browser extension 
 
-Action Management requires [The Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, refer to the [manual instructions][2]. 
+Action Management requires [The Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2]. 
 
 ### Step 2 - Label your actions 
 
@@ -38,11 +38,14 @@ Action Management requires [The Datadog test recorder Chrome extension][1]. If y
 
 
 4. When you are ready, click on **New Labeled Action** to:
-    - Limit the action on the current page or define an action for that selector on any page.
-    - Limit to the target text on that page or define an action regardless of the target text (useful if your website is localized in several languages for instance).
-    - Give a name (required) and description (optional) to the action.
+    - **Choose the scope**: Select whether the action should be tracked on the current page only or across all pages.
+    - **Set targeting options**: (Optional) Limit the action to a specific target text. This is useful for localized sites where the same element may appear in multiple languages.
+    - **Name the action**: Provide a name (required) and a description (optional) to help identify the action in your dashboards and reports.
 
-You can also hold the Shift key to select multiple actions on the page and label them under the same name. This functionality enables "OR" analysis.
+    You can also hold the Shift key to select multiple actions on the page and label them under the same name. This functionality enables "OR" analysis.
+
+{{< img src="product_analytics/action_management/pana-name-action.png" alt="Give a name and description to your action." style="width:90%;">}}
+
 
 ### Step 3 - Retrieve your actions 
 
