@@ -26,7 +26,7 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 1. Install Datadog's LLM Observability Python SDK:
 
    ```shell
-   pip install ddtrace>=3.15.0
+   pip install ddtrace>=3.18.0
    ```
 
 2. Enable LLM Observability:
@@ -139,7 +139,8 @@ To retrieve a project's existing dataset from Datadog:
 ```python
 dataset = LLMObs.pull_dataset(
     dataset_name="capitals-of-the-world",
-    project_name="capitals-project" # optional, defaults to the project name from LLMObs.enable
+    project_name="capitals-project", # optional, defaults to the project name from LLMObs.enable
+    version=1 # optional, defaults to the latest version
 )
 
 # Get dataset length
