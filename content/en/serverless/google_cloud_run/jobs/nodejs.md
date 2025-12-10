@@ -18,7 +18,7 @@ further_reading:
 <div class="alert alert-info">
 For full visibility and access to all Datadog features in Cloud Run Jobs,
 ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
-and are using <a href="https://hub.docker.com/r/datadog/serverless-init#180">serverless-init version 1.9.0 or later</a>.
+and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
 1. **Install the Datadog Node.js tracer**.
