@@ -57,7 +57,7 @@ otlp_config:
   traces:
     enabled: true
   logs:
-    enabled: true
+    enabled: false
 ```
 For HTTP, default port 4318:
 
@@ -72,7 +72,7 @@ otlp_config:
   traces:
     enabled: true
   logs:
-    enabled: true
+    enabled: false
 ```
 
 Alternatively, configure the endpoints by providing the port through the environment variables:
@@ -262,7 +262,7 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
        traces:
          enabled: true
        logs:
-         enabled: true
+         enabled: false
    ```
    For HTTP:
    ```yaml
@@ -277,7 +277,7 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
        traces:
          enabled: true
        logs:
-         enabled: true
+         enabled: false
    ```
 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
