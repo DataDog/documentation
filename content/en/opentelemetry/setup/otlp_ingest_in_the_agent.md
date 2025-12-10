@@ -52,6 +52,12 @@ otlp_config:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
+  metrics:
+    enabled: true
+  traces:
+    enabled: true
+  logs:
+    enabled: true
 ```
 For HTTP, default port 4318:
 
@@ -61,6 +67,12 @@ otlp_config:
     protocols:
       http:
         endpoint: 0.0.0.0:4318
+  metrics:
+    enabled: true
+  traces:
+    enabled: true
+  logs:
+    enabled: true
 ```
 
 Alternatively, configure the endpoints by providing the port through the environment variables:
@@ -182,6 +194,12 @@ These configurations can be applied through either the <code>docker</code> comma
         grpc:
           endpoint: 0.0.0.0:4317
           enabled: true
+    metrics:
+      enabled: true
+    traces:
+      enabled: true
+    logs:
+      enabled: false
    ```
 
    For HTTP:
@@ -192,6 +210,12 @@ These configurations can be applied through either the <code>docker</code> comma
         http:
           endpoint: 0.0.0.0:4318
           enabled: true
+    metrics:
+      enabled: true
+    traces:
+      enabled: true
+    logs:
+      enabled: false
    ```
 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
@@ -233,6 +257,12 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
          protocols:
            grpc:
              enabled: true
+       metrics:
+         enabled: true
+       traces:
+         enabled: true
+       logs:
+         enabled: true
    ```
    For HTTP:
    ```yaml
@@ -242,6 +272,12 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
          protocols:
            http:
              enabled: true
+       metrics:
+         enabled: true
+       traces:
+         enabled: true
+       logs:
+         enabled: true
    ```
 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
