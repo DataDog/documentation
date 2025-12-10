@@ -189,6 +189,7 @@ Dataset versions are **NOT** created for changes to `metadata` fields, or when u
 
 #### Version retention
 
+- The active version of a Dataset is retained for 3 years.
 - Previous versions (**NOT** the content of `current_version`) are retained for 90 days. 
 - The 90-day retention period resets when a previous version is used — for example, when an experiment reads a version.
 - After 90 consecutive days without use, a previous version is eligible for permanent deletion and may no longer be accessible.
