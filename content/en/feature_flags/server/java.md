@@ -47,6 +47,9 @@ The `dd-java-agent-feature-flagging-bootstrap` JAR contains shared interfaces th
 
 {{< tabs >}}
 {{% tab "Gradle" %}}
+
+{{< tabs >}}
+{{% tab "Groovy" %}}
 Add the following dependencies to your `build.gradle`:
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
@@ -64,8 +67,10 @@ dependencies {
     implementation 'com.datadoghq:dd-java-agent-feature-flagging-bootstrap:X.X.X'
 }
 {{< /code-block >}}
+{{% /tab %}}
 
-Or with Kotlin DSL (`build.gradle.kts`):
+{{% tab "Kotlin" %}}
+Add the following dependencies to your `build.gradle.kts`:
 
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
 dependencies {
@@ -82,6 +87,9 @@ dependencies {
     implementation("com.datadoghq:dd-java-agent-feature-flagging-bootstrap:X.X.X")
 }
 {{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
 {{% /tab %}}
 
 {{% tab "Maven" %}}
@@ -368,8 +376,10 @@ logger.info("Variant: {}", details.getVariant());
 logger.info("Reason: {}", details.getReason());
 {{< /code-block >}}
 
-### String flags
+### Other flag types
 
+{{< tabs >}}
+{{% tab "String" %}}
 {{< code-block lang="java" >}}
 // Evaluate string flags (e.g., UI themes, API endpoints)
 String theme = client.getStringValue("ui.theme", "light", context);
@@ -380,9 +390,9 @@ String apiEndpoint = client.getStringValue(
     context
 );
 {{< /code-block >}}
+{{% /tab %}}
 
-### Number flags
-
+{{% tab "Number" %}}
 {{< code-block lang="java" >}}
 // Integer flags (e.g., limits, quotas)
 int maxRetries = client.getIntegerValue("retries.max", 3, context);
@@ -390,9 +400,9 @@ int maxRetries = client.getIntegerValue("retries.max", 3, context);
 // Double flags (e.g., thresholds, rates)
 double discountRate = client.getDoubleValue("pricing.discount.rate", 0.0, context);
 {{< /code-block >}}
+{{% /tab %}}
 
-### Object flags
-
+{{% tab "Object" %}}
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.Value;
 
@@ -405,6 +415,8 @@ if (config.isStructure()) {
     Value endpoint = config.asStructure().getValue("endpoint");
 }
 {{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Error handling
 
@@ -584,7 +596,7 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 ## Troubleshooting
 
-### Provider not ready
+{{% collapse-content title="Provider not ready" level="h3" %}}
 
 **Problem**: `PROVIDER_NOT_READY` errors when evaluating flags
 
@@ -612,7 +624,9 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 5. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
 6. **Verify flags are published** in Datadog UI to the correct service and environment
 
-### ClassNotFoundException or NoClassDefFoundError
+{{% /collapse-content %}}
+
+{{% collapse-content title="ClassNotFoundException or NoClassDefFoundError" level="h3" %}}
 
 **Problem**: Application fails to start with `ClassNotFoundException` for Datadog classes like `datadog.trace.api.featureflag.FeatureFlaggingGateway`
 
@@ -633,7 +647,9 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
    - `dd-java-agent-feature-flagging-bootstrap` (the bootstrap module)
 3. **Check the classpath** includes both JARs in your runtime configuration
 
-### Feature flagging system not starting
+{{% /collapse-content %}}
+
+{{% collapse-content title="Feature flagging system not starting" level="h3" %}}
 
 **Problem**: No "Feature Flagging system starting" messages in logs
 
@@ -642,7 +658,9 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 **Solution**:
 Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`
 
-### EVP proxy not available error
+{{% /collapse-content %}}
+
+{{% collapse-content title="EVP proxy not available error" level="h3" %}}
 
 **Problem**: Logs show "EVP Proxy not available" or "agent does not support EVP proxy"
 
@@ -654,7 +672,9 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 3. **Retry logic**: Implement retry on provider initialization failure
 4. **Upgrade Agent**: Ensure using Agent 7.x or later with EVP Proxy support
 
-### Flags not updating
+{{% /collapse-content %}}
+
+{{% collapse-content title="Flags not updating" level="h3" %}}
 
 **Problem**: Flag configuration changes aren't reflected in the application
 
@@ -665,7 +685,9 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 4. Ensure flags are published (not saved as drafts) in the Datadog UI
 5. Verify service and environment tags match between app and flag targeting
 
-### Type mismatch errors
+{{% /collapse-content %}}
+
+{{% collapse-content title="Type mismatch errors" level="h3" %}}
 
 **Problem**: `TYPE_MISMATCH` errors when evaluating flags
 
@@ -674,7 +696,9 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 2. Use correct method: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`
 3. Check flag configuration for correct value types
 
-### No exposures in Datadog
+{{% /collapse-content %}}
+
+{{% collapse-content title="No exposures in Datadog" level="h3" %}}
 
 **Problem**: Flag evaluations aren't appearing in Datadog UI
 
@@ -683,6 +707,8 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 2. Check Datadog Agent is receiving exposure events
 3. Verify `DD_API_KEY` is correct
 4. Check Agent logs for exposure upload errors
+
+{{% /collapse-content %}}
 
 ## Further reading
 
