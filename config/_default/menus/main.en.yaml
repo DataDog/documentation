@@ -3418,6 +3418,11 @@ menu:
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_admission_controller
       weight: 905
+    - name: Log Collection
+      url: containers/troubleshooting/log-collection
+      parent: containers_troubleshooting
+      identifier: containers_troubleshooting_log_collection
+      weight: 906
     - name: Guides
       url: containers/guide
       parent: containers
