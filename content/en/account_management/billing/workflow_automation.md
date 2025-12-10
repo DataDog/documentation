@@ -46,7 +46,7 @@ The best source of truth for billing is on your [Datadog Plan & Usage page][1], 
 Other sources of usage tracking that do not include billing metrics are the [Workflow Automation API][7] and the [Workflows Overview dashboard][2]. Through the API, you can view granular information such as [all instances of a given workflow][12]. The Workflows Overview dashboard is based on execution metrics, before any billing considerations take place. Additionally, the dashboard does not reflect billing complexities such as free allotments of workflows. 
 
 ## Included workflow allotments by SKU
-Certain Datadog product SKUs include Workflow Automation allotments as part of their pricing:
+Certain Datadog SKUs include Workflow Automation allotments as part of their pricing:
 
   | SKU                       | Included Workflow Executions | Allotment Basis | 
   |---------------------------|------------------------------|-----------------|
