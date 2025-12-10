@@ -199,7 +199,7 @@ end
 
 ## Troubleshooting
 
-### Feature flags not working
+### Feature flags surprisingly always return default values
 
 If feature flags always return default values:
 
