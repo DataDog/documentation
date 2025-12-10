@@ -223,7 +223,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 
 - `core`: The default toolset
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][21]
-- `software-delivery`: Tools for interacting with Software Delivery [CI Visibility][22]
+- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][22] and [Test Optimization][25])
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
 
@@ -388,6 +388,14 @@ Searches CI events with filters and returns details on them.
 - Show me the latest pipeline failure in branch `my-branch`.
 - Propose a fix for the job `integration-test` that fails every time on my branch `my-branch`.
 
+### `get_datadog_flaky_tests`
+*Toolset: **software-delivery***\
+Searches Datadog [Test Optimization][25] for flaky tests and returns triage-ready details, including failure-rate stats, flaky state/category, ownership context (`codeowners`, `services`, `module`, `suite`), branch/SHA history, CI pipeline impact, and recent test-run metadata. Supports pagination with `page_cursor` and sorting by fields such as `failure_rate` or `pipelines_failed`.
+
+- Find active flaky tests for the checkout service owned by `@team-abc`, sorted by failure rate.
+- Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
+- List flaky tests in the `timeout` category with high failure rate (50%+) so I can prioritize fixes.
+
 ## Context efficiency
 
 The Datadog MCP Server is optimized to provide responses in a way that AI agents get relevant context without being overloaded with unnecessary information. For example:
@@ -431,3 +439,4 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [22]: /continuous_integration/
 [23]: https://kiro.dev/
 [24]: /account_management/org_settings/service_accounts/
+[25]: /tests/
