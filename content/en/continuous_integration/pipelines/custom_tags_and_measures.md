@@ -37,7 +37,7 @@ Install the [`datadog-ci`][1] (>=v1.15.0) CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 ```
 
-<div class="alert alert-info">For more ways to install the CLI, see <a href="https://github.com/DataDog/datadog-ci?tab=readme-ov-file#more-ways-to-install-the-cli/">this documentation</a>.</div>
+<div class="alert alert-info">For more ways to install the CLI, see <a href="https://github.com/DataDog/datadog-ci?tab=readme-ov-file#more-ways-to-install-the-cli">this documentation</a>.</div>
 
 ## Add tags to pipeline traces
 
