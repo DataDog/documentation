@@ -11,7 +11,7 @@ Datadog [Workflow Automation][8] billing is based on the number of **workflow ex
 - **Scope**: All published executions are billed, regardless of success/failure.
 - **Visibility**: Usage and cost breakdowns are available in [Plan & Usage][1].
 - **Exceptions for certain SKUs**: 
-    - CSM/DevSecOps SKUs include 5–20 executions per host.
+    - CSM/DevSecOps SKUs include 5-20 executions per host.
     - [Incident Management][9], [On-Call][10], and [App Builder][11] SKUs include free unlimited executions when triggered by events from these products. 
 
 ## Pricing model
@@ -63,7 +63,7 @@ Workflows triggered automatically or manually by events from the following produ
 - [**On-Call**][10]
 - [**App Builder**][11]
 
-This means that if your automation originates from one of these services (for example, a workflow triggered by an incident creation or an on-call handover), those executions **do not count** toward your Workflow Automation bill.
+This means that if your automation originates from one of these services, those executions **do not count** toward your Workflow Automation bill. For example, a workflow triggered by an incident creation or an on-call handover will not be billed.
 
 [1]: https://app.datadoghq.com/billing/usage?selected_cost_products=workflow_execution
 [2]: https://app.datadoghq.com/dash/integration/30994/workflows-overview?fromUser=false&refresh_mode=sliding&from_ts=1760203373269&to_ts=1762885373269&live=true
