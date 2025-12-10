@@ -42,4 +42,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: https://falcon.us-2.crowdstrike.com/documentation/page/bdded008/hec-http-event-connector-guide
-[4]: /observability_pipelines/advanced_worker_configurations/
+[4]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

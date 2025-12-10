@@ -62,5 +62,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/processors/remap_ocsf
-[4]: /observability_pipelines/advanced_worker_configurations/
+[4]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [5]: /observability_pipelines/destinations/amazon_security_lake/#aws-authentication
