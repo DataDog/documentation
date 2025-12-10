@@ -16,38 +16,26 @@ aliases:
 
 ## Overview
 
-Datadog's LLM Observability SDK enhances the observability of your LLM applications.
-
-### Supported runtimes
-
-| Runtime | Version |
-| ------- | ------- |
-| Python  | 3.7+    |
-| Node.js | 16+     |
-| Java    | 8+      |
-
-For information about LLM Observability's integration support, see [Auto Instrumentation][13].
-
-You can install and configure tracing of various operations such as workflows, tasks, and API calls with function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
-
-For usage examples you can run from a Jupyter notebook, see the [LLM Observability Jupyter Notebooks repository][10].
+Datadog's LLM Observability SDKs provide automatic instrumentation as well as manual instrumentation APIs to provide observability and insights into your LLM applications.
 
 ## Setup
 
-- A [Datadog API key][1]
+### Requirements
+
+- A [Datadog API key][1].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{< tabs >}}
 {{% tab "Python" %}}
-- The latest `ddtrace` package is installed:
+- The latest `ddtrace` package is installed (Python 3.7+ required):
    ```shell
    pip install ddtrace
    ```
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-- The latest `dd-trace` package is installed:
+- The latest `dd-trace` package is installed (Node.js 16+ required):
    ```shell
    npm install dd-trace
    ```
@@ -55,7 +43,7 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
 {{% /tab %}}
 
 {{% tab "Java" %}}
-- You have downloaded the latest [`dd-trace-java` JAR][1]. The LLM Observability SDK is supported in `dd-trace-java` v1.51.0+.
+- You have downloaded the latest [`dd-trace-java` JAR][1]. The LLM Observability SDK is supported in `dd-trace-java` v1.51.0+ (Java 8+ required).
 
 [1]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
@@ -359,37 +347,36 @@ export const handler = async (event) => {
 {{% /collapse-content %}}
 
 
-## Tracing LLM operations
+After installing the SDK and running your application you should expect to see some data in LLM Observability from auto-instrumentation. Manual instrumentation can be used to capture custom built frameworks or operations from libraries that are not yet supported.
+
+## Manual instrumentation
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-To capture an LLM operation a function decorator or context manager can be used:
+To capture an LLM operation a function decorator can be used to easily instrument workflows:
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import workflow
 
 @workflow
 def handle_user_request():
-    make_llm_request()
+    ...
+{{< /code-block >}}
 
+or a context-manager based approach to capture fine-grained operations:
 
-def make_llm_request():
-    with LLMObs.llm(model="gpt-4o"):
-        # do llm request
-        ...
-        LLMObs.annotate(
-            metrics={
-                "input_tokens": ...,
-                "output_tokens": ...,
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
 
-            },
-            metadata={
-              "temperature": ...
-            }
-        )
-
+with LLMObs.llm(model="gpt-4o"):
+    call_llm()
+    LLMObs.annotate(
+        metrics={
+            "input_tokens": ...,
+            "output_tokens": ...,
+        },
+    )
 {{< /code-block >}}
 
 
@@ -502,7 +489,7 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 
 {{< tabs >}}
 {{% tab "Python" %}}
-To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm()`.
+To trace an LLM call, use the function decorator `ddtrace.llmobs.decorators.llm()`.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
 
@@ -542,7 +529,7 @@ def llm_call():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-To trace an LLM span, specify the span kind as `llm`, and optionally specify the following arguments on the options object.
+To trace an LLM call, specify the span kind as `llm`, and optionally specify the following arguments on the options object.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
 
@@ -581,7 +568,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 {{% /tab %}}
 {{% tab "Java" %}}
-To trace an LLM span, import and call the following method with the arguments listed below:
+To trace an LLM call, import and call the following method with the arguments listed below:
 
 ```
 import datadog.trace.api.llmobs.LLMObs;
@@ -746,7 +733,7 @@ public class MyJavaClass {
 
 {{< tabs >}}
 {{% tab "Python" %}}
-To trace an agent span, use the function decorator `ddtrace.llmobs.decorators.agent()`.
+To trace an agent execution, use the function decorator `ddtrace.llmobs.decorators.agent()`.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="agent-span-arguments" %}}
 
@@ -777,7 +764,7 @@ def react_agent():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-To trace an agent span, specify the span kind as `agent`, and optionally specify arguments on the options object.
+To trace an agent execution, specify the span kind as `agent`, and optionally specify arguments on the options object.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="agent-span-arguments" %}}
 
@@ -807,7 +794,7 @@ reactAgent = llmobs.wrap({ kind: 'agent' }, reactAgent)
 
 {{% /tab %}}
 {{% tab "Java" %}}
-To trace an agent span, import and call the following method with the arguments listed below
+To trace an agent execution, import and call the following method with the arguments listed below
 ```
 import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startAgentSpan(spanName, mlApp, sessionID);
@@ -836,7 +823,7 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-To trace a tool span, use the function decorator `ddtrace.llmobs.decorators.tool()`.
+To trace a tool call, use the function decorator `ddtrace.llmobs.decorators.tool()`.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="tool-span-arguments" %}}
 
@@ -868,7 +855,7 @@ def call_weather_api():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-To trace a tool span, specify the span kind as `tool`, and optionally specify arguments on the options object.
+To trace a tool call, specify the span kind as `tool`, and optionally specify arguments on the options object.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="tool-span-arguments" %}}
 
@@ -898,7 +885,7 @@ callWeatherApi = llmobs.wrap({ kind: 'tool' }, callWeatherApi)
 
 {{% /tab %}}
 {{% tab "Java" %}}
-To trace a tool span, import and call the following method with the arguments listed below:
+To trace a tool call, import and call the following method with the arguments listed below:
 
 ```java
 import datadog.trace.api.llmobs.LLMObs;
@@ -1021,7 +1008,7 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-To trace an embedding span, use the function decorator `LLMObs.embedding()`.
+To trace an embedding operation, use the function decorator `LLMObs.embedding()`.
 
 **Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
 
@@ -1062,7 +1049,7 @@ def perform_embedding():
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-To trace an embedding span, specify the span kind as `embedding`, and optionally specify arguments on the options object.
+To trace an embedding operation, specify the span kind as `embedding`, and optionally specify arguments on the options object.
 
 **Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
 
@@ -1869,7 +1856,7 @@ The versioning system works as follows:
 
 This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
 
-## Monitoring costs
+## Cost monitoring
 Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
 
 {{< tabs >}}
