@@ -49,13 +49,15 @@ After opting in to Datadog Costs, a confirmation message appears and cost data s
 
 ## Data availability to sub-organizations
 
-Datadog cost data is available at the parent organization level. Sub-organization access is available in limited availability. To request sub-organization access, contact your account representative or [Datadog Support][8].
+Daily Datadog cost data is available to sub-organizations with the [Sub Organization Cost Summary][10] feature enabled. To request access, contact your account representative or [Datadog Support][8].
 
 ## Visualize and break down costs
 
 Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) costs on the [**Plan & Usage** page][7] because Plan & Usage costs are cumulative and prorated monthly. Only Cloud Cost Management provides daily cost calculations.
 
-Datadog cost data has an expected data delay of 48 hours and is available for the past 15 months. Cost data can be used in dashboards and notebooks under the **Cloud Cost** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
+Datadog cost data has an expected data delay of 48 hours and is available for the past 15 months. Prior month Datadog charges are finalized around the 16th of each month. Before costs are finalized, the **Usage Charges Only: Enabled** toggle represents estimated usage-based charges only. When charges are finalized, the **Usage Charges Only: Disabled** toggle also includes any adjustment records. These adjustments are applied to the prior month and reflect the finalized cost amounts.
+
+Cost data can be used in dashboards and notebooks under the **Cloud Cost** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
 
 {{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
 
@@ -83,3 +85,4 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [7]: https://app.datadoghq.com/billing/usage
 [8]: /help/
 [9]: /account_management/billing/usage_attribution/
+[10]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization

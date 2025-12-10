@@ -113,7 +113,13 @@ This bash script is intended to run as the startup command, which installs the t
 
 #### Locally
 
-Install the [Datadog CLI][201] and [Azure CLI][202], and login to your Azure account using the Azure CLI by running `az login`.
+Install the [Datadog CLI][201]
+
+```shell
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
+```
+
+Install the [Azure CLI][202] and authenticate with `az login`.
 
 Then, run the following command to set up the sidecar container:
 
@@ -129,7 +135,8 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 
 #### Azure Cloud Shell
 
-To use the Datadog CLI in [Azure Cloud Shell][203], open cloud shell and use `npx` to run the CLI directly. Set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the CLI:
+To use the Datadog CLI in [Azure Cloud Shell][203], open a cloud shell, set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and use `npx` to run the CLI directly:
+
 ```shell
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>

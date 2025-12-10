@@ -47,7 +47,7 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"/nodejs/bin/node\", \"/path/to/your/app.js\"" cloudservice="jobs" %}}
 
 3. **Set up logs**.
 
@@ -82,7 +82,9 @@ logger.info('Hello world!');
 
 5. {{% gcr-service-label %}}
 
-6. **Send custom metrics**.
+6. {{% gcr-jobs-retention-filter %}}
+
+7. **Send custom metrics**.
 
    To send custom metrics, [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 

@@ -56,6 +56,7 @@ Configure either option with your organization's API key to export these metrics
 | **indexed_events.count**<br/>(Counter) | Number of indexed events |
 | **indexed_events_bytes.count**<br/>(Counter) | Number of indexed bytes |
 | **ingest_requests.count**<br/>(Counter) | Number of ingest requests |
+| **ingest_requests.duration_seconds**<br/>(Histogram) | Ingest request latency |
 | **object_storage_delete_requests.count**<br/>(Counter) | Number of delete requests on object storage |
 | **object_storage_get_requests.count**<br/>(Counter) | Number of get requests on object storage |
 | **object_storage_get_requests_bytes.count**<br/>(Counter) | Total bytes read from object storage using GET requests |
