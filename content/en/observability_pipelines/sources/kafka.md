@@ -58,4 +58,4 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 [2]: https://github.com/confluentinc/librdkafka/tree/master
 [3]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [4]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
-[5]: /observability_pipelines/advanced_worker_configurations/
+[5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

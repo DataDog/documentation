@@ -27,4 +27,4 @@ Optionally, toggle the switch to enable TLS. If you enable TLS, the following ce
 {{% observability_pipelines/log_source_configuration/fluent %}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
-[2]: /observability_pipelines/advanced_worker_configurations/
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

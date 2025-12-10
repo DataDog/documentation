@@ -30,4 +30,4 @@ Optionally, toggle the switch to enable TLS. If you enable TLS, the following ce
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /observability_pipelines/sources/filebeat/
-[3]: /observability_pipelines/advanced_worker_configurations/
+[3]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

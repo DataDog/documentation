@@ -36,4 +36,4 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
-[2]: /observability_pipelines/advanced_worker_configurations/
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

@@ -30,5 +30,5 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
-[3]: /observability_pipelines/advanced_worker_configurations/
+[3]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [4]: https://cloud.google.com/docs/authentication#auth-flowchart

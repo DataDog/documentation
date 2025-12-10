@@ -46,4 +46,4 @@ To send AWS vended logs to Observability Pipelines with the HTTP/S Server source
 {{% observability_pipelines/lambda_forwarder/deploy_forwarder %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/advanced_worker_configurations/
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

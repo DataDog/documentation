@@ -54,4 +54,4 @@ To send logs from the Splunk Distribution of the OpenTelemetry Collector:
 [2]: https://help.splunk.com/en/splunk-observability-cloud/manage-data/splunk-distribution-of-the-opentelemetry-collector/get-started-with-the-splunk-distribution-of-the-opentelemetry-collector/collector-for-kubernetes
 [3]: https://help.splunk.com/en/splunk-observability-cloud/manage-data/splunk-distribution-of-the-opentelemetry-collector/get-started-with-the-splunk-distribution-of-the-opentelemetry-collector/collector-for-linux
 [4]: /observability_pipelines/configuration/set_up_pipelines
-[5]: /observability_pipelines/advanced_worker_configurations/
+[5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

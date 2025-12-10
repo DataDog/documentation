@@ -48,4 +48,4 @@ Syslog is a widely used logging protocol for sending network logs to a central s
 [3]: https://help.fortinet.com/fadc/4-5-1/olh/Content/FortiADC/handbook/log_remote.htm
 [4]: https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-admin/monitoring/configure-log-forwarding
 [5]: https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA10g000000ClRxCAK
-[6]: /observability_pipelines/advanced_worker_configurations/
+[6]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

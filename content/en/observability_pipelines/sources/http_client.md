@@ -31,4 +31,4 @@ To configure your HTTP/S Client source:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
-[2]: /observability_pipelines/advanced_worker_configurations/
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
