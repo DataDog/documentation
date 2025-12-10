@@ -23,12 +23,12 @@ Remote Agent management with Fleet Automation simplifies how you deploy and upgr
 1. Verify that Remote Configuration is enabled for your organization.
 1. Confirm that your Agent version is 7.73 or later.
 
+### Supported platforms
+- Linux VMs installed using the install script or Ansible Datadog Role 
+- Windows VMs
 
 <div class="alert alert-info">
-<p> Confirm you are on a supported platform: <strong>Linux VMs</strong> (<em>installed using the install script or Ansible Datadog Role</em>); <strong>Windows VMs.</strong></p>
-
-
-<p>Remotely upgrading Agents in containerized environments is not supported.</p>
+Remotely upgrading Agents in containerized environments is not supported.
 </div>
 
 ### Permissions 
@@ -36,8 +36,8 @@ Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and
 
 ## Upgrade Agents
 
- ### Requirement  <!-- this was previously "Prerequistes, but changed to requirement, which works better?-->
-* **Disk space**: Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
+### Disk space Requirement 
+Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
 
 ### Upgrade Steps 
 <!-- Should the below section be called "Upgrade Agents"?-->
@@ -67,14 +67,11 @@ Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and
 
 1. On the upgrade schedule page, add a **Schedule name**.
 
-1. **Select the Agent version**. You have the option to upgrade the Agents to:
-      - The latest version
-      - One version behind the latest version
-      - Two versions behind the latest version 
+1. **Select the Agent version**. You have the option to upgrade the Agents to the latest version, or to one or two versions behind. 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_select_version1.png" alt="See a list of scheduled Agent upgrades." style="width:100%;" >}}
 
-1. **Specify the Agents to be upgraded**. You can use filtering or a search query to scope the Agents by various attributes including, the Agents' environment, operation system, or hostname. You can then see the Agents that are included within your specified scope along with those that are not eligible for deployment. Adjust your filter to include all the Agents you want to upgrade. 
+1. **Specify the Agents to be upgraded**. You can target a group of Agents by filtering on host information or tags.
    
    {{< img src="/agent/fleet_automation/agent_upgrade_select_agents.png" alt="See a list of Agent to be upgraded." style="width:100%;" >}}
 
@@ -82,7 +79,7 @@ Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
 
-1. Optionally, click **+ Add Recipient** to set up notifications and receive updates on the deployment. You can notify individuals or communication integration channels like Slack, Teams, or PagerDuty. 
+1. Set up notifications and receive updates on the deployment. You can notify individuals or communication integration channels like Slack, Teams, or PagerDuty. 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_notification.png" alt="Select people or channels to be notified about the progess of the upgrade." style="width:100%;" >}}
 
