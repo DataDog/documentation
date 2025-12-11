@@ -5617,6 +5617,11 @@ menu:
       parent: feature_flags_setup
       identifier: feature_flags_setup_ios
       weight: 102
+    - name: Flag History
+      url: feature_flags/history
+      parent: feature_flags
+      identifier: feature_flags_history
+      weight: 6
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
