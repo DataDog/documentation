@@ -61,39 +61,72 @@ You can filter insights by runtime, service, or environment to narrow the list t
 
 Automated Analysis supports finding the following insights:
 
-| Name                         | Priority   | Supported Runtime       | Description |
-|------------------------------|------------|-------------------------|-------------|
-| Virtual Thread Pinning       | High       | Java                    | Triggers if virtual threads were pinned to their carrier threads for a prolonged time. |
-| Virtual Thread Submit Failure| High       | Java                    | Triggers if virtual threads could not be scheduled for execution. |
-| Event Loop Blocking          | Medium     | Node                    | Triggers if callbacks were running for an extended period of time on the Main Event Loop thread. |
-| Sync-over-Async Blocking     | Medium     | .NET                    | Triggers if async functions are detected in CPU samples. |
-| Allocation Stall             | Medium     | Java                    | Triggers if a thread had to be paused due to insufficient available memory. |
-| Explicit GC                  | Medium     | Java                    | Triggers if there are `System.gc()` calls. |
-| GC Setup                     | Medium     | Java                    | Triggers when one of the following is detected: serial GC used on a multi-core machine, parallel GC on a single-core machine, more GC threads configured than available cores, or parallel GC configured to run in one thread. |
-| Deadlocked Threads Detected  | Medium     | Java                    | Triggers if max number of deadlocked threads over query context is greater than 0. |
-| GC Pauses                    | Medium     | Java                    | Triggers if more than 10% of time was spent in GC pauses. |
-| GC Pause Peak Duration       | Medium     | Java                    | Triggers if there is a GC pause longer than 1 second. |
-| Stackdepth Setting           | Medium     | Java                    | Triggers if events were found with truncated stacktraces which may make it hard to understand profiling data. |
-| Thrown Exceptions            | Medium     | Java                    | Triggers when the rate of thrown (caught and uncaught) exceptions per minute goes above a threshold (defaults to 10K). |
-| VMOperation Peak Duration    | Medium     | Java                    | Triggers if a blocking VM operation (or combination of operations close in time) takes more than two seconds. Reports details about the operation with the highest duration. |
-| VMOperations Ratio           | Medium     | Java                    | Triggers if the total amount of blocking VM operations is a significant part of a 60 second window. |
-| CPU Burst                    | Medium     | Java                    | Triggers if there is more than 75% CPU utilization across a 10s window. |
-| CPU Burst Saturation         | Medium     | Java                    | Triggers if there is at least 1 second where CPU utilization is at 100%. |
-| Blocking VMOperations        | Medium     | Java                    | Triggers if blocking VM operations (or combination of operations close in time) take more than 5% of a profile. |
-| Code Cache Size              | Medium     | Java                    | Triggers if the Code Cache was filled during a profile. |
-| Unbalanced Parallelism       | Low        | Java                    | Triggers if at least one peer thread is performing less than half the work of another in the same span. |
-| High Lock Contention         | Low        | Java, Go, Python        | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
-| Libuv Pool Overload          | Low        | Node                    | Triggers if there were more concurrent tasks scheduled to run on the libuv thread pool than it has threads. |
-| Excessive String Concatenation | Low      | .NET                    | Triggers if there is a high ratio of CPU time spent concatenating strings. |
-| Thread Pool Size             | Low        | Java                    | Triggers if a thread pool is CPU-bound but is set to a size larger than the number of available cores. |
-| Head of line blocking        | Low        | Java                    | Triggers if a queue event gets stuck behind the given activity. |
-| Primitive Value Boxing       | Low        | Java                    | Triggers if more than 5% of CPU time was spent converting values between primitive and object values. |
-| Duplicated Flags             | Low        | Java                    | Triggers if duplicate flags were provided to the runtime (for example, `-Xmx2g -Xmx5g`). This is a problem as it may lead to changes not having the expected effect. |
-| Command Line Options Check   | Low        | Java                    | Triggers if undocumented, deprecated, or non-recommended option flags were detected. |
-| GC Overhead                  | Low        | Java, Ruby, Go, Node    | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
-| Context Switches             | Low        | Java                    | Triggers if the rate of context switches on the underlying system is greater than 50k per second. |
-| DebugNonSafepoints           | Low        | Java                    | Triggers if a service is run with potentially less accurate settings for the profiler. |
+{{< tabs >}}
+{{% tab "Java" %}}
+| Name                         | Priority   | Description |
+|------------------------------|------------|-------------|
+| Virtual Thread Pinning       | High       | Triggers if virtual threads were pinned to their carrier threads for a prolonged time. |
+| Virtual Thread Submit Failure| High       | Triggers if virtual threads could not be scheduled for execution. |
+| Allocation Stall             | Medium     | Triggers if a thread had to be paused due to insufficient available memory. |
+| Blocking VMOperations        | Medium     | Triggers if blocking VM operations (or combination of operations close in time) take more than 5% of a profile. |
+| Code Cache Size              | Medium     | Triggers if the Code Cache was filled during a profile. |
+| CPU Burst                    | Medium     | Triggers if there is more than 75% CPU utilization across a 10s window. |
+| CPU Burst Saturation         | Medium     | Triggers if there is at least 1 second where CPU utilization is at 100%. |
+| Deadlocked Threads Detected  | Medium     | Triggers if max number of deadlocked threads over query context is greater than 0. |
+| Explicit GC                  | Medium     | Triggers if there are `System.gc()` calls. |
+| GC Pause Peak Duration       | Medium     | Triggers if at least one GC pause took more than one second. |
+| GC Pauses                    | Medium     | Triggers if more than 10% of time was spent in GC pauses. |
+| GC Setup                     | Medium     | Triggers when one of the following is detected: serial GC used on a multi-core machine, parallel GC on a single-core machine, more GC threads configured than available cores, or parallel GC configured to run in one thread. |
+| Stackdepth Setting           | Medium     | Triggers if events were found with truncated stacktraces which may make it hard to understand profiling data. |
+| Thrown Exceptions            | Medium     | Triggers when the rate of thrown (caught and uncaught) exceptions per minute goes above a threshold (defaults to 10K). |
+| VMOperation Peak Duration    | Medium     | Triggers if a blocking VM operation (or combination of operations close in time) takes more than two seconds. Reports details about the operation with the highest duration. |
+| VMOperations Ratio           | Medium     | Triggers if the total amount of blocking VM operations is a significant part of a 60 second window. |
+| Command Line Options Check   | Low        | Triggers if undocumented, deprecated, or non-recommended option flags were detected. |
+| Context Switches             | Low        | Triggers if the rate of context switches on the underlying system is greater than 50k per second. |
+| DebugNonSafepoints           | Low        | Triggers if a service is run with potentially less accurate settings for the profiler. |
+| Duplicated Flags             | Low        | Triggers if duplicate flags were provided to the runtime (for example, `-Xmx2g -Xmx5g`). This is a problem as it may lead to changes not having the expected effect. |
+| GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
+| Head of line blocking        | Low        | Triggers if a queue event gets stuck behind the given activity. |
+| High Lock Contention         | Low        | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
+| Primitive Value Boxing       | Low        | Triggers if more than 5% of CPU time was spent converting values between primitive and object values. |
+| Thread Pool Size             | Low        | Triggers if a thread pool is CPU-bound but is set to a size larger than the number of available cores. |
+| Unbalanced Parallelism       | Low        | Triggers if at least one peer thread is performing less than half the work of another in the same span. |
+{{% /tab %}}
 
+{{% tab "Node" %}}
+| Name                         | Priority   | Description |
+|------------------------------|------------|-------------|
+| Event Loop Blocking          | Medium     | Triggers if callbacks were running for an extended period of time on the Main Event Loop thread. |
+| GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
+| Libuv Pool Overload          | Low        | Triggers if there were more concurrent tasks scheduled to run on the libuv thread pool than it has threads. |
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+| Name                         | Priority   | Description |
+|------------------------------|------------|-------------|
+| Sync-over-Async Blocking     | Medium     | Triggers if async functions are detected in CPU samples. |
+| Excessive String Concatenation | Low      | Triggers if there is a high ratio of CPU time spent concatenating strings. |
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+| Name                         | Priority   | Description |
+|------------------------------|------------|-------------|
+| GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
+{{% /tab %}}
+
+{{% tab "Go" %}}
+| Name                         | Priority   | Description |
+|------------------------------|------------|-------------|
+| GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
+| High Lock Contention         | Low        | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
+{{% /tab %}}
+
+{{% tab "Python" %}}
+| Name                         | Priority   | Description |
+|------------------------------|------------|-------------|
+| High Lock Contention         | Low        | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
