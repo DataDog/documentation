@@ -41,7 +41,7 @@ To build an app with Bits AI:
 1. Press <kbd>Enter</kbd> to send your prompt. Bits AI automatically generates the UI, actions, and logic for your app, mapped to your existing data and permissions.
     - While Bits AI is generating your app, it may give you the chance to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
     - Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press <kbd>Enter</kbd>. 
-    - After Bits AI adds an action to the app, it gives you the chance to either use mock data in your action, or skip that step. Configuring your action during UI agent execution helps connect the data types to other components.
+    - After Bits AI adds an action to the app, it gives you the chance to either use mock data in your action, or skip that step. With mock data, Bits AI can infer the action's output and auto-bind that data to components (such as set a table's data source). If you skip, you can wire outputs manually later.
 1. Optionally, after Bits AI has generated your app, you can take additional steps to configure and test it:
     - To change the app name and description, click the app name.
     - Click **Edit with AI** or manually [customize your app][15].
