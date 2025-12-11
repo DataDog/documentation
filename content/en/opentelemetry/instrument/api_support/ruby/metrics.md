@@ -121,6 +121,7 @@ If you are using the OTel SDK with your own manual OTLP exporter configuration:
 {{% otel-api-troubleshooting signal="metrics" %}}
 - Verify required gems are installed. Ensure `opentelemetry-metrics-sdk` and `opentelemetry-exporter-otlp-metrics` are installed in your Ruby environment.
 - Ensure `Datadog.configure` is called before `OpenTelemetry::SDK.configure`. The Datadog SDK must be configured first to properly set up the meter provider.
+{{% /otel-api-troubleshooting %}}
 
 ## Further reading
 
