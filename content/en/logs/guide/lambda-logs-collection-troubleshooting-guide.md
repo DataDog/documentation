@@ -12,7 +12,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 1. Navigate to the [Log Explorer's Live Tail view][2].
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
-    * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][3]. 
+    * By source: the source is often set to `source:lambda`, `source:aws`, `source:s3` or `source:cloudwatch` but you can find other possibles sources in the table below.
     * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
 3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][4] set up. These filters are filtering out your logs.
 4. If you don't see the logs in the Live Tail, the logs are not reaching Datadog.
@@ -89,6 +89,40 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose; remember to disable it after debugging.
 
 
+## Log forwarder sources references
+
+| AWS Service                | Source Filter                                                                                                                                   |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| API Gateway                | source:apigateway                                                                                                                               |
+| AppSync                    | source:appsync                                                                                                                                  |
+| Batch                      | source:batch                                                                                                                                    |
+| Bedrock                    | source:bedrock                                                                                                                                  |
+| Carbonblack                | source:carbonblack                                                                                                                              |
+| CloudFront                 | source:cloudfront                                                                                                                               |
+| CloudTrail                 | source:cloudtrail                                                                                                                               |
+| CodeBuild                  | source:codebuild                                                                                                                                |
+| DocumentDB                 | source:docdb                                                                                                                                    |
+| Database Migration Service | source:dms                                                                                                                                      |
+| EKS                        | source:eks, source:kubernetes.audit, source:kube-scheduler, source:kube-apiserver, source:kube-controller-manager, source:aws-iam-authenticator |
+| Elastic Load Balancing     | source:elb                                                                                                                                      |
+| FSX                        | source:aws.fsx                                                                                                                                  |
+| Lambda                     | source:lambda                                                                                                                                   |
+| MWAA                       | source:mwaa                                                                                                                                     |
+| Network Firewall           | source:network-firewall                                                                                                                         |
+| OpenSearch                 | source:opensearch                                                                                                                               |
+| Parallel Computing Service | source:apigateway                                                                                                                               |
+| RDS                        | source:rds, source:postgresql, source:mariadb, source:mysql                                                                                     |
+| Redshift                   | source:redshift                                                                                                                                 |
+| Redshift Serverless        | source:redshift-serverless                                                                                                                      |
+| Route 53                   | source:route53                                                                                                                                  |
+| S3                         | source:s3                                                                                                                                       |
+| Step Functions             | source:stepfunction                                                                                                                             |
+| Systems Manager            | source:ssm                                                                                                                                      |
+| Transit Gateway            | source:transitgateway                                                                                                                           |
+| Verified Access            | source:verified-access                                                                                                                          |
+| VPC                        | source:vpc                                                                                                                                      |
+| WAF                        | source:waf                                                                                                                                      |
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -96,7 +130,6 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 
 [1]: https://docs.datadoghq.com/help
 [2]: https://docs.datadoghq.com/logs/live_tail/#live-tail-view
-[3]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py
 [4]: https://docs.datadoghq.com/logs/indexes/#exclusion-filters
 [5]: https://console.aws.amazon.com/lambda/home
 [6]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=awsconsole#metrics
