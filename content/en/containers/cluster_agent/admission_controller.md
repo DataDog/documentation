@@ -153,7 +153,7 @@ You can configure the Cluster Agent (version 7.39 and higher) to inject instrume
 
 If you do not want to use Single Step Instrumentation, the Datadog Admission Controller can be used to inject APM tracer libraries directly as a manual, pod-level alternative. Read [Local SDK Injection][7] for more information.
 
-### APM and DogStatsD Environment Variable Injection
+### APM and DogStatsD environment variable injection
 
 To configure DogStatsD clients or other APM libraries that do not support library injection, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by doing one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your Pod.
