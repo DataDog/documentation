@@ -11,7 +11,7 @@ further_reading:
 - link: "/observability_pipelines/dual_ship_logs/"
   tag: "Documentation"
   text: "Dual ship logs with Observability Pipelines"
-- link: "/observability_pipelines/archive_logs/"
+- link: "/observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs"
   tag: "Documentation"
   text: "Archive logs with Observability Pipelines"
 - link: "/observability_pipelines/split_logs/"

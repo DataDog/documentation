@@ -123,6 +123,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_865807520",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions metrics query with combined semantic_mode"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3685886950",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions metrics query with native semantic_mode"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2563642929",
       "description": "Create a new dashboard with a toplist widget sorted by group"
     },
@@ -738,6 +748,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_3541766733",
+      "description": "Create a monitor with assets returns \"OK\" response"
     },
     {
       "group": "monitors",
