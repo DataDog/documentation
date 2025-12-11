@@ -175,7 +175,7 @@ For service deployments tracked by the DORA Metrics API or the `datadog-ci dora 
 ### Requirements for calculating change lead time
 
 - The attributes `repository_url` and `commit_sha` are included in the deployment events payload.
-- Your [repository metadata is synchronized to DataDog](#synchronize-repository-metadata-to-datadog).
+- Your repository metadata is [synchronized](#synchronize-repository-metadata-to-datadog) to Datadog.
 
 [101]: /integrations/github/
 
