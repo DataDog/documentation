@@ -93,7 +93,26 @@ Automated Analysis supports finding the following insights:
 | Unbalanced Parallelism       | Low        | Triggers if at least one peer thread is performing less than half the work of another in the same span. |
 {{% /tab %}}
 
-{{% tab "Node" %}}
+{{% tab "Python" %}}
+| Name                         | Priority   | Description |
+|------------------------------|------------|-------------|
+| High Lock Contention         | Low        | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
+{{% /tab %}}
+
+{{% tab "Go" %}}
+| Name                         | Priority   | Description |
+|------------------------------|------------|-------------|
+| GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
+| High Lock Contention         | Low        | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+| Name                         | Priority   | Description |
+|------------------------------|------------|-------------|
+| GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
 | Name                         | Priority   | Description |
 |------------------------------|------------|-------------|
 | Event Loop Blocking          | Medium     | Triggers if callbacks were running for an extended period of time on the Main Event Loop thread. |
@@ -108,24 +127,6 @@ Automated Analysis supports finding the following insights:
 | Excessive String Concatenation | Low      | Triggers if there is a high ratio of CPU time spent concatenating strings. |
 {{% /tab %}}
 
-{{% tab "Ruby" %}}
-| Name                         | Priority   | Description |
-|------------------------------|------------|-------------|
-| GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
-{{% /tab %}}
-
-{{% tab "Go" %}}
-| Name                         | Priority   | Description |
-|------------------------------|------------|-------------|
-| GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
-| High Lock Contention         | Low        | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
-{{% /tab %}}
-
-{{% tab "Python" %}}
-| Name                         | Priority   | Description |
-|------------------------------|------------|-------------|
-| High Lock Contention         | Low        | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Further reading
