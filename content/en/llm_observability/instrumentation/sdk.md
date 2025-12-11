@@ -1932,20 +1932,8 @@ If you’re using automatic instrumentation, token and cost metrics will appear 
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Use `LLMObs.annotate(metrics=...)` to attach token or cost metrics for a LLM/embedding call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
 
-#### Arguments
-
-{{% collapse-content title="Arguments" level="h4" expanded=false id="cost-tracking-arguments" %}}
-
-`metrics`
-: optional - dictionary
-<br />Token: `input_tokens`, `output_tokens`, `total_tokens`, `non_cached_input_tokens`, `cache_read_input_tokens`, `cache_write_input_tokens`
-<br />Cost (in dollars): `input_cost`, `output_cost`, `total_cost`, `non_cached_input_cost`, `cache_read_input_cost`, `cache_write_input_cost`
-
-{{% /collapse-content %}}
-
-#### Example 1: Using a common model provider 
+#### Use case: Using a common model provider 
 Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google GenAI. When using these providers, you only need to annotate your LLM request with `model_name`, `model_provider`, and token usage. Datadog will automatically calculate the estimated cost based on the provider’s pricing.
 
 {{< code-block lang="python" >}}
@@ -1957,12 +1945,19 @@ def llm_call(prompt):
     resp = ... # llm call here
     # Annotate token metrics
     LLMObs.annotate(
-        metrics={"input_tokens": 50, "output_tokens": 120, "total_tokens": 170,},
+        metrics={
+          "input_tokens": 50, 
+          "output_tokens": 120, 
+          "total_tokens": 170,
+          "non_cached_input_tokens": 13, # optional
+          "cache_read_input_tokens": 22, # optional
+          "cache_write_input_tokens"15:  # optional
+        },
     )
     return resp
 {{< /code-block >}}
 
-#### Example 2: Using a custom model
+#### Use case: Using a custom model
 For custom or unsupported models, you’ll need to annotate the span manually with the cost data.
 
 {{< code-block lang="python" >}}
@@ -1974,7 +1969,14 @@ def llm_call(prompt):
     resp = ... # llm call here
     # Annotate cost metrics
     LLMObs.annotate(
-        metrics={"input_cost": 3, "output_cost": 7, "total_cost": 10,},
+        metrics={
+          "input_cost": 3, 
+          "output_cost": 7, 
+          "total_cost": 10,
+          "non_cached_input_cost": 1,    # optional
+          "cache_read_input_cost": 0.6,  # optional
+          "cache_write_input_cost": 1.4, # optional
+        },
     )
     return resp
 {{< /code-block >}}
