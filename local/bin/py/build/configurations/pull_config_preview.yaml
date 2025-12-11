@@ -510,6 +510,25 @@
               front_matters:
                 title: Migrate DatadogAgent CRDs to v2alpha1
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/v2alpha1_migration.md"]
+
+
+      - repo_name: helm-charts
+        contents:
+          - action: pull-and-push-file
+            branch: fanny/AGENTONB-2748/migration-docs
+            globs:
+              - 'charts/datadog/docs/Migration_Helm_to_Operator.md'
+            options:
+              dest_path: '/containers/datadog_operator/migration'
+              file_name: 'migration_helm_to_operator.md'
+              front_matters:
+                title: Migrate from the Datadog Helm Chart to the Datadog Operator
+                description: "Migrate the Datadog Helm installation to the Datadog Operator for managing Datadog Agent deployments"
+                dependencies: [ "https://github.com/DataDog/helm-charts/blob/fanny/AGENTONB-2748/migration-docs/charts/datadog/docs/Migration_Helm_to_Operator.md" ]
+                aliases:
+                  - /containers/datadog_operator/migration
+                  - /containers/kubernetes/migration
+                  
       - repo_name: dd-trace-rb
         contents:
           - action: pull-and-push-file
