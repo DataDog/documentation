@@ -489,7 +489,7 @@ SELECT
   TO_TIMESTAMP('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
 {{< /code-block >}}
 
-**Form 2: Convert Unix epoch timestamp to timestamp**
+**Form 2: Convert UNIX epoch timestamp to timestamp**
 
 {{< code-block lang="sql" >}}
 SELECT
