@@ -3675,12 +3675,12 @@ menu:
       url: network_monitoring/cloud_network_monitoring/supported_cloud_services/
       identifier: cnm_supported_cloud_services
       parent: cnm
-      weight: 10501 
+      weight: 106
     - name: Terms and Concepts
       url: network_monitoring/cloud_network_monitoring/glossary
       parent: cnm
       identifier: cnm_glossary
-      weight: 106
+      weight: 107
     - name: DNS Monitoring
       url: network_monitoring/dns/
       parent: nm_parent
