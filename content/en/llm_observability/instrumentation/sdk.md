@@ -1928,13 +1928,13 @@ This gives you the flexibility to either rely on automatic version management ba
 ## Monitoring costs
 Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
 
-If you’re using automatic instrumentation, token and cost metrics will appear on your spans automatically. If you’re instrumenting manually, follow the guidance below.
+If you're using automatic instrumentation, token and cost metrics appear on your spans automatically. If you're instrumenting manually, follow the guidance below.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 #### Use case: Using a common model provider 
-Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google GenAI. When using these providers, you only need to annotate your LLM request with `model_name`, `model_provider`, and token usage. Datadog will automatically calculate the estimated cost based on the provider’s pricing.
+Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with `model_name`, `model_provider`, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -1958,7 +1958,7 @@ def llm_call(prompt):
 {{< /code-block >}}
 
 #### Use case: Using a custom model
-For custom or unsupported models, you’ll need to annotate the span manually with the cost data.
+For custom or unsupported models, you must annotate the span manually with the cost data.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
