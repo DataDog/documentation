@@ -32,7 +32,7 @@ Action Management requires [The Datadog test recorder Chrome extension][1]. If y
 {{< img src="product_analytics/action_management/pana-point-click-interface.png" alt="The point and click interface used to locate and labed your action " style="width:90%;">}}
 
 
-3. In **Label Actions** mode, click on a UI element to add and label it as an action. You can also click on the action you want to define to see more details about it.
+3. To add an action, first, switch to **Label Actions** mode.
 
 {{< img src="product_analytics/action_management/pana-label-mode.png" alt="Click on and label your actions." style="width:90%;">}}
 
