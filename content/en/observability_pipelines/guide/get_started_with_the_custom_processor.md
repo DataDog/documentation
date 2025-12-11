@@ -455,7 +455,7 @@ This custom function serializes the event into `_raw` format:
 
 ```json
 # Serialize the entire event into _raw
-._raw = encode_key_value(.)
+._raw = encode_key_value!(.)
 # Only keep _raw
 . = { "_raw": ._raw }
 ```
