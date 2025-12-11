@@ -69,7 +69,6 @@ Automated Analysis supports finding the following insights:
 | Sync-over-Async Blocking     | Medium     | .NET                    | Triggers if async functions are detected in CPU samples. |
 | Allocation Stall             | Medium     | Java                    | Triggers if a thread had to be paused due to insufficient available memory. |
 | Explicit GC                  | Medium     | Java                    | Triggers if there are `System.gc()` calls. |
-| GC Pause Peak Duration       | Medium     | Java                    | Triggers if at least one GC pause took more than one second. |
 | GC Setup                     | Medium     | Java                    | Triggers when one of the following is detected: serial GC used on a multi-core machine, parallel GC on a single-core machine, more GC threads configured than available cores, or parallel GC configured to run in one thread. |
 | Deadlocked Threads Detected  | Medium     | Java                    | Triggers if max number of deadlocked threads over query context is greater than 0. |
 | GC Pauses                    | Medium     | Java                    | Triggers if more than 10% of time was spent in GC pauses. |
@@ -77,8 +76,12 @@ Automated Analysis supports finding the following insights:
 | Stackdepth Setting           | Medium     | Java                    | Triggers if events were found with truncated stacktraces which may make it hard to understand profiling data. |
 | Thrown Exceptions            | Medium     | Java                    | Triggers when the rate of thrown (caught and uncaught) exceptions per minute goes above a threshold (defaults to 10K). |
 | VMOperation Peak Duration    | Medium     | Java                    | Triggers if a blocking VM operation (or combination of operations close in time) takes more than two seconds. Reports details about the operation with the highest duration. |
+| VMOperations Ratio           | Medium     | Java                    | Triggers if the total amount of blocking VM operations is a significant part of a 60 second window. |
+| CPU Burst                    | Medium     | Java                    | Triggers if there is more than 75% CPU utilization across a 10s window. |
+| CPU Burst Saturation         | Medium     | Java                    | Triggers if there is at least 1 second where CPU utilization is at 100%. |
 | Blocking VMOperations        | Medium     | Java                    | Triggers if blocking VM operations (or combination of operations close in time) take more than 5% of a profile. |
 | Code Cache Size              | Medium     | Java                    | Triggers if the Code Cache was filled during a profile. |
+| Unbalanced Parallelism       | Low        | Java                    | Triggers if at least one peer thread is performing less than half the work of another in the same span. |
 | High Lock Contention         | Low        | Java, Go, Python        | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
 | Libuv Pool Overload          | Low        | Node                    | Triggers if there were more concurrent tasks scheduled to run on the libuv thread pool than it has threads. |
 | Excessive String Concatenation | Low      | .NET                    | Triggers if there is a high ratio of CPU time spent concatenating strings. |
@@ -89,6 +92,7 @@ Automated Analysis supports finding the following insights:
 | Command Line Options Check   | Low        | Java                    | Triggers if undocumented, deprecated, or non-recommended option flags were detected. |
 | GC Overhead                  | Low        | Java, Ruby, Go, Node    | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
 | Context Switches             | Low        | Java                    | Triggers if the rate of context switches on the underlying system is greater than 50k per second. |
+| DebugNonSafepoints           | Low        | Java                    | Triggers if a service is run with potentially less accurate settings for the profiler. |
 
 
 ## Further reading
