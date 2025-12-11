@@ -131,7 +131,7 @@ The metric description helps you understand what a metric does. Descriptions are
 
 The Source Code integration pinpoints the exact file, line, and owner in your source code where a metric is emitted. This allows you to trace the code, identify code owners, and take action directly from the platform.
 
-{{< img src="metrics/summary/metrics_source_code_11212025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+{{< img src="metrics/summary/metric_context_explorer_12112025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
 To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
