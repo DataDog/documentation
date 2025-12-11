@@ -13,6 +13,8 @@ further_reading:
 
 {{% otel-overview-exporter lang="Ruby" signal="Metrics" sdk_name="dd-trace-rb" %}}
 
+**Note**: The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](https://github.com/open-telemetry/opentelemetry-ruby/tree/main/metrics_sdk). Report issues with the SDK at [opentelemetry-ruby/issues](https://github.com/open-telemetry/opentelemetry-ruby/issues).
+
 ## Prerequisites
 
 - **Datadog SDK**: `datadog` gem version 2.23.0 or later.
@@ -22,23 +24,21 @@ further_reading:
 
 Follow these steps to enable OTel Metrics API support in your Ruby application.
 
-1. Add the required gems to your Gemfile:
+1. Install the Datadog SDK and OTel gems:
    ```ruby
-   gem 'datadog'
+   # Add to your Gemfile
+   gem 'datadog', '~> 2.230'
    gem 'opentelemetry-metrics-sdk', '~> 0.8'
    gem 'opentelemetry-exporter-otlp-metrics', '~> 0.4'
    ```
-
-2. Install the gems:
    ```sh
    bundle install
    ```
-3. Enable OTel metrics by setting the following environment variable:
+2. Enable OTel metrics by setting the following environment variable:
    ```sh
    export DD_METRICS_OTEL_ENABLED=true
    ```
-
-4. Configure your application:
+3. Configure your application:
    ```ruby
    require 'opentelemetry/sdk'
    require 'datadog/opentelemetry'
@@ -62,17 +62,12 @@ This example uses the OTel Metrics API to create a counter that increments every
 ```ruby
 require 'opentelemetry/api'
 
-# Get a meter
+# dd-trace-rb automatically configures the MeterProvider
 meter = OpenTelemetry.meter_provider.meter('my-service', '1.0.0')
 
 # Counter - monotonically increasing values
-request_counter = meter.create_counter('http.requests_total', 
-  description: 'Total HTTP requests',
-  unit: 'requests'
-)
-
-# Record measurements
-request_counter.add(1, attributes: { 'method' => 'GET', 'status_code' => '200' })
+counter = meter.create_counter('http.requests_total')
+counter.add(1, attributes: { 'method' => 'GET', 'status_code' => '200' })
 ```
 
 ### Create a histogram
@@ -81,24 +76,24 @@ This example uses the OTel Metrics API to create a histogram to track request du
 
 ```ruby
 require 'opentelemetry/api'
+require 'time'
 
-# Get a meter
+# dd-trace-rb automatically configures the MeterProvider
 meter = OpenTelemetry.meter_provider.meter('my-service', '1.0.0')
 
 # Histogram - distribution of values
-duration_histogram = meter.create_histogram('http.request_duration',
+histogram = meter.create_histogram('http.request_duration',
   description: 'HTTP request duration',
   unit: 'ms'
 )
 
-# Simulate measuring request duration
 start_time = Time.now
-# ... perform work ...
+# ... simulate work ...
 sleep(0.05)
 end_time = Time.now
 
-duration_ms = (end_time - start_time) * 1000
-duration_histogram.record(duration_ms, attributes: { 'method' => 'POST', 'route' => '/api/users' })
+duration = (end_time - start_time) * 1000 # convert to milliseconds
+histogram.record(duration, attributes: { 'method' => 'POST', 'route' => '/api/users' })
 ```
 
 ## Supported configuration
@@ -119,16 +114,13 @@ If you are using the OTel SDK with your own manual OTLP exporter configuration:
 2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
 3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
 
-### Existing DogStatsD setup
-
-If you are currently using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code.
+**Important**: Runtime and trace metrics continue to be submitted via StatsD. Only custom metrics created through the OpenTelemetry Metrics API are sent via OTLP. The `dd-trace-rb` implementation supports exporting OTLP metrics exclusively to a Datadog Agent or OpenTelemetry Collector—multiple exporters are not supported.
 
 ## Troubleshooting
 
 {{% otel-api-troubleshooting signal="metrics" %}}
-- Verify required gems are installed. Ensure `opentelemetry-metrics-sdk` and `opentelemetry-exporter-otlp-metrics` are installed.
+- Verify required gems are installed. Ensure `opentelemetry-metrics-sdk` and `opentelemetry-exporter-otlp-metrics` are installed in your Ruby environment.
 - Ensure `Datadog.configure` is called before `OpenTelemetry::SDK.configure`. The Datadog SDK must be configured first to properly set up the meter provider.
-{{% /otel-api-troubleshooting %}}
 
 ## Further reading
 
