@@ -1739,21 +1739,26 @@ menu:
       parent: monitor_types
       identifier: monitor_types_metrics
       weight: 402
+    - name: Analysis
+      url: monitors/types/analysis/
+      parent: monitor_types
+      identifier: monitor_types_analysis
+      weight: 403
     - name: Anomaly
       url: monitors/types/anomaly/
       parent: monitor_types
       identifier: monitor_types_anomaly
-      weight: 403
+      weight: 404
     - name: APM
       url: monitors/types/apm/
       parent: monitor_types
       identifier: monitor_types_apm
-      weight: 404
+      weight: 405
     - name: Audit Trail
       url: monitors/types/audit_trail/
       parent: monitor_types
       identifier: monitor_types_auditlogs
-      weight: 405
+      weight: 406
     - name: Change
       url: monitors/types/change-alert/
       parent: monitor_types
@@ -1779,11 +1784,6 @@ menu:
       parent: monitor_types
       identifier: monitor_types_database_monitoring
       weight: 410
-    - name: Dataset
-      url: monitors/types/dataset/
-      parent: monitor_types
-      identifier: monitor_types_dataset
-      weight: 411
     - name: Error Tracking
       url: monitors/types/error_tracking/
       parent: monitor_types
