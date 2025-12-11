@@ -94,6 +94,7 @@ CI jobs failure analysis is available for the following CI providers:
 
 * [GitHub Actions][1]
 * [GitLab][2]
+* [Azure Pipeline][8]
 
 **Note:** You must enable CI job logs collection, and the logs need to be indexed. To set up CI job logs collection, select your CI provider on [Pipeline Visibility][6] and follow the instructions to collect job logs.
 
@@ -147,3 +148,4 @@ For PR Comments to be posted, your repositories need to be integrated with Datad
 [5]:/dashboards/
 [6]:/continuous_integration/pipelines/#setup
 [7]:/integrations/guide/source-code-integration/#connect-your-git-repositories-to-datadog
+[8]:/continuous_integration/pipelines/azure/
