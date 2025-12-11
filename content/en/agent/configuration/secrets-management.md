@@ -596,16 +596,16 @@ db_password: "ENC[secrets-shared/db-creds;password]"
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Advanced configuration
-
-Custom paths
+##### Custom path configuration
+If your setup does not follow the default locations for ServiceAccount based authentication, then a `token_path` and `ca_path` can be specified
 ```yaml
 secret_backend_config:
   token_path: /custom/path/to/token
   ca_path: /custom/path/to/ca.crt
 ```
 
-Custom API server
+##### Custom api server configuration
+If your setup does not expose the default KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT environment variables, then a `api_server` url can be supplied to interact with the k8s REST API.
 ```yaml
 secret_backend_config:
   api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
