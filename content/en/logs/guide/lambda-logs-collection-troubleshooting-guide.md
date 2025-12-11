@@ -88,40 +88,39 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 
 4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose; remember to disable it after debugging.
 
-
 ## Log forwarder sources references
 
-| AWS Service                | Source Filter                                                                                                                                   |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| API Gateway                | source:apigateway                                                                                                                               |
-| AppSync                    | source:appsync                                                                                                                                  |
-| Batch                      | source:batch                                                                                                                                    |
-| Bedrock                    | source:bedrock                                                                                                                                  |
-| Carbonblack                | source:carbonblack                                                                                                                              |
-| CloudFront                 | source:cloudfront                                                                                                                               |
-| CloudTrail                 | source:cloudtrail                                                                                                                               |
-| CodeBuild                  | source:codebuild                                                                                                                                |
-| DocumentDB                 | source:docdb                                                                                                                                    |
-| Database Migration Service | source:dms                                                                                                                                      |
-| EKS                        | source:eks, source:kubernetes.audit, source:kube-scheduler, source:kube-apiserver, source:kube-controller-manager, source:aws-iam-authenticator |
-| Elastic Load Balancing     | source:elb                                                                                                                                      |
-| FSX                        | source:aws.fsx                                                                                                                                  |
-| Lambda                     | source:lambda                                                                                                                                   |
-| MWAA                       | source:mwaa                                                                                                                                     |
-| Network Firewall           | source:network-firewall                                                                                                                         |
-| OpenSearch                 | source:opensearch                                                                                                                               |
-| Parallel Computing Service | source:apigateway                                                                                                                               |
-| RDS                        | source:rds, source:postgresql, source:mariadb, source:mysql                                                                                     |
-| Redshift                   | source:redshift                                                                                                                                 |
-| Redshift Serverless        | source:redshift-serverless                                                                                                                      |
-| Route 53                   | source:route53                                                                                                                                  |
-| S3                         | source:s3                                                                                                                                       |
-| Step Functions             | source:stepfunction                                                                                                                             |
-| Systems Manager            | source:ssm                                                                                                                                      |
-| Transit Gateway            | source:transitgateway                                                                                                                           |
-| Verified Access            | source:verified-access                                                                                                                          |
-| VPC                        | source:vpc                                                                                                                                      |
-| WAF                        | source:waf                                                                                                                                      |
+| AWS Service                | Source Filter                                                                                                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| API Gateway                | `source:apigateway`                                                                                                                                         |
+| AppSync                    | `source:appsync`                                                                                                                                            |
+| Batch                      | `source:batch`                                                                                                                                              |
+| Bedrock                    | `source:bedrock`                                                                                                                                            |
+| Carbonblack                | `source:carbonblack`                                                                                                                                        |
+| CloudFront                 | `source:cloudfront`                                                                                                                                         |
+| CloudTrail                 | `source:cloudtrail`                                                                                                                                         |
+| CodeBuild                  | `source:codebuild`                                                                                                                                          |
+| DocumentDB                 | `source:docdb`                                                                                                                                              |
+| Database Migration Service | `source:dms`                                                                                                                                                |
+| EKS                        | `source:eks`, `source:kubernetes.audit`, `source:kube-scheduler`, `source:kube-apiserver`, `source:kube-controller-manager`, `source:aws-iam-authenticator` |
+| Elastic Load Balancing     | `source:elb`                                                                                                                                                |
+| FSX                        | `source:aws.fsx`                                                                                                                                            |
+| Lambda                     | `source:lambda`                                                                                                                                             |
+| MWAA                       | `source:mwaa`                                                                                                                                               |
+| Network Firewall           | `source:network-firewall`                                                                                                                                   |
+| OpenSearch                 | `source:opensearch`                                                                                                                                         |
+| Parallel Computing Service | `source:apigateway`                                                                                                                                         |
+| RDS                        | `source:rds`, `source:postgresql`, `source:mariadb`, `source:mysql`                                                                                         |
+| Redshift                   | `source:redshift`                                                                                                                                           |
+| Redshift Serverless        | `source:redshift-serverless`                                                                                                                                |
+| Route 53                   | `source:route53`                                                                                                                                            |
+| S3                         | `source:s3`                                                                                                                                                 |
+| Step Functions             | `source:stepfunction`                                                                                                                                       |
+| Systems Manager            | `source:ssm`                                                                                                                                                |
+| Transit Gateway            | `source:transitgateway`                                                                                                                                     |
+| Verified Access            | `source:verified-access`                                                                                                                                    |
+| VPC                        | `source:vpc`                                                                                                                                                |
+| WAF                        | `source:waf`                                                                                                                                                |
 
 ## Further reading
 
