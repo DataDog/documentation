@@ -92,7 +92,7 @@ with tracer.start_as_current_span("my-span") as span:
     span.set_attribute("dd_llmobs_enabled", False)
 ```
 
-### Examples
+## Examples
 
 #### Using Strands Agents
 
