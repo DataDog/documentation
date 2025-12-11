@@ -66,32 +66,6 @@ After your application starts sending data, the traces automatically appear in t
 
 </div>
 
-## Disabling LLM Observability conversion
-
-If you'd only like your generative AI spans to remain in APM and not appear in LLM Observability, you can disable the automatic conversion by setting the `dd_llmobs_enabled` attribute to `false`. Setting this attribute on any span in a trace prevents the entire trace from being converted to LLM Observability.
-
-### Using environment variables
-
-Add the `dd_llmobs_enabled=false` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
-
-```
-OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=false
-```
-
-### Using code
-
-You can also set the attribute programmatically on any span in your trace:
-
-```python
-from opentelemetry import trace
-
-tracer = trace.get_tracer(__name__)
-
-with tracer.start_as_current_span("my-span") as span:
-    # Disable LLM Observability conversion for this entire trace
-    span.set_attribute("dd_llmobs_enabled", False)
-```
-
 ## Examples
 
 #### Using Strands Agents
@@ -235,6 +209,32 @@ LLM Observability supports spans that follow the OpenTelemetry 1.37+ semantic co
 - Model parameters and metadata
 
 For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
+
+## Disabling LLM Observability conversion
+
+If you'd only like your generative AI spans to remain in APM and not appear in LLM Observability, you can disable the automatic conversion by setting the `dd_llmobs_enabled` attribute to `false`. Setting this attribute on any span in a trace prevents the entire trace from being converted to LLM Observability.
+
+### Using environment variables
+
+Add the `dd_llmobs_enabled=false` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
+
+```
+OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=false
+```
+
+### Using code
+
+You can also set the attribute programmatically on any span in your trace:
+
+```python
+from opentelemetry import trace
+
+tracer = trace.get_tracer(__name__)
+
+with tracer.start_as_current_span("my-span") as span:
+    # Disable LLM Observability conversion for this entire trace
+    span.set_attribute("dd_llmobs_enabled", False)
+```
 
 [1]: https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/#spans
 [2]: https://app.datadoghq.com/organization-settings/api-keys
