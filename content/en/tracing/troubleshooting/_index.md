@@ -34,6 +34,9 @@ further_reading:
 - link: '/tracing/services/inferred_services'
   tag: 'Documentation'
   text: 'Inferred Service dependencies'
+- link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
+  tag: Learning Center
+  text: Troubleshooting APM Instrumentation on a Host
 ---
 
 If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].

@@ -2,6 +2,9 @@
 title: Calculated Fields
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/ai-powered-log-parsing
+  tag: Blog
+  text: Accelerate investigations with AI-powered log parsing
 - link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
   text: "Calculated Fields Formulas"

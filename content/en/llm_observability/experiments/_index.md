@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/llm-experiments/"
     tag: "Blog"
     text: "Create and monitor LLM experiments with Datadog"
+  - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+    tag: Blog
+    text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
 ---
 
 {{< img src="llm_observability/experiments/filtered_experiments.png" alt="LLM Observability, Experiment view. Heading: 'Comparing 12 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
@@ -186,6 +189,7 @@ Dataset versions are **NOT** created for changes to `metadata` fields, or when u
 
 #### Version retention
 
+- The active version of a Dataset is retained for 3 years.
 - Previous versions (**NOT** the content of `current_version`) are retained for 90 days. 
 - The 90-day retention period resets when a previous version is used — for example, when an experiment reads a version.
 - After 90 consecutive days without use, a previous version is eligible for permanent deletion and may no longer be accessible.

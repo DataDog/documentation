@@ -2,7 +2,7 @@
 {{- $page := $hugo_context.Site.GetPage "/standard-attributes/" -}}
 
 {{- range $index, $attr := $page.Params.attributes -}}
-  {{- $object_id := (print $page.File.UniqueID "_" $page.Language.Lang "_" ($attr.name | anchorize)) "_" $index -}}
+  {{- $object_id := (print $page.File.UniqueID "_" $page.Language.Lang "_" ($attr.name | anchorize) "_" $index) -}}
   {{- $relpermalink := print $page.RelPermalink "?search=" $attr.name -}}
   {{
     $hugo_context.Scratch.Add "algoliaindex" (

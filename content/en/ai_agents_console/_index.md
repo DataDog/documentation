@@ -5,6 +5,9 @@ further_reading:
   - link: 'https://docs.claude.com/en/docs/claude-code/settings'
     tag: 'Anthropic Documentation'
     text: 'Claude Code settings'
+  - link: "https://www.datadoghq.com/blog/claude-code-monitoring"
+    tag: "Blog"
+    text: "Monitor Claude Code adoption in your organization with Datadog's AI Agents Console"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/ai-agents-console/" btn_hidden="false" header="Join the Preview!">}}
