@@ -160,7 +160,7 @@ For service deployments tracked by APM to contribute to change lead time, ensure
 
 ### Requirements for calculating change lead time
 - Your application telemetry is tagged with Git information. You can enable this [in APM][101] or see the [Source Code Integration documentation][102].
-- Your [repository metadata is synchronized to DataDog](#synchronize-repository-metadata-to-datadog).
+- Your repository metadata is [synchronized](#synchronize-repository-metadata-to-datadog) to Datadog.
 
 
 [101]: https://app.datadoghq.com/source-code/setup/apm
