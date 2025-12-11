@@ -57,9 +57,9 @@ To iterate on an existing app:
 
 ### Build an app from a blueprint
 
-Blueprints are helpful app templates that cover common use cases and showcase best practices for setting up apps. They come loaded with demo data to familiarize yourself with the app's functions. Some blueprints create a starter app that you can customize, like [Manage Datastore][24] and [Export Synthetics][25]. Blueprints with "how to" in their title, like [How to: Custom Code][26], are templates with built-in tutorials for App Builder features. 
+Blueprints are helpful app templates that cover common use cases and showcase best practices for setting up apps. They come loaded with demo data to familiarize yourself with the app's functions. Some blueprints create a starter app that you can customize, like [Manage Datastore][24] and [Export Synthetics][25]. Blueprints with "how to" in their title, like [How to: Custom Code][26], are templates with built-in tutorials for App Builder features.
 
-1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint** in the onboarding modal.
+1. From [App Builder][1], click the [Blueprints][2] tab.
 1. Click the blueprint you want to use. 
 1. Click **Open in Editor**.
 1. Optionally, you can take additional steps to configure and test your app:
