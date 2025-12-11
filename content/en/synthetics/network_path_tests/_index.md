@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
+- link: "/network_monitoring/network_path/glossary/"
+  tag: "Doc"
+  text: "Network Path terms and concepts"
 ---
 
 ## Overview
@@ -132,6 +135,15 @@ Click on a test run in the table at the bottom of the page to view details for t
 ## Retention
 
 <div class="alert alert-info">Network Path Testing data is retained for 30 days.</div>
+
+## Understanding Network Path tests
+
+Network Path tests are the same functionality accessible from both the Network Monitoring and Synthetic Monitoring UIs. Tests created in one location appear in both.
+
+Key points:
+- **Unified test creation**: You can create Network Path tests from either the Network Path UI or the Synthetics UI. Both entry points use the same underlying functionality.
+- **UI-based test creation**: In addition to defining tests manually through Agent configuration files in Synthetic Monitoring, you can create Network Path tests directly from the UI with assertions on network data (packet loss, latency, jitter, and number of hops).
+- **Proactive monitoring**: Group browser, API, and Network Path tests in [test suites][9] to monitor how network performance impacts application performance.
 
 ## Further Reading
 
