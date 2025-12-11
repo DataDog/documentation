@@ -12,7 +12,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 1. Navigate to the [Log Explorer's Live Tail view][2].
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
-    * By source: the source is often set to `source:lambda`, `source:aws`, `source:s3` or `source:cloudwatch` but you can find other possibles sources in the table below.
+    * By source: the source is often set to `source:lambda`, `source:aws`, `source:s3` or `source:cloudwatch` but you can find other possible sources in the table below.
     * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
 3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][4] set up. These filters are filtering out your logs.
 4. If you don't see the logs in the Live Tail, the logs are not reaching Datadog.
