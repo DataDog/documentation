@@ -70,13 +70,15 @@ To instrument Java and .NET applications across your entire Windows host:
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
 ## Configure Unified Service Tags
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Windows services][2].
 
 ## Enable SDK-dependent products and features
 
-After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as [Continuous Profiler][5], [Application Security Monitoring][6], and [trace ingestion controls][7].
 
 To enable products, [set environment variables][3] in your application configuration.
 
@@ -100,3 +102,6 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [2]: /integrations/windows-service/#tags
 [3]: /tracing/trace_collection/library_config/
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[5]: /profiler/
+[6]: /security/application_security/
+[7]: /tracing/trace_pipeline/ingestion_controls/
