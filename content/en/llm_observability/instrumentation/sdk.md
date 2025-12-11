@@ -1928,6 +1928,8 @@ This gives you the flexibility to either rely on automatic version management ba
 ## Monitoring costs
 Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
 
+If you’re using automatic instrumentation, token and cost metrics will appear on your spans automatically. If you’re instrumenting manually, follow the guidance below.
+
 {{< tabs >}}
 {{% tab "Python" %}}
 Use `LLMObs.annotate(metrics=...)` to attach token or cost metrics for a LLM/embedding call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
@@ -1943,23 +1945,32 @@ Use `LLMObs.annotate(metrics=...)` to attach token or cost metrics for a LLM/emb
 
 {{% /collapse-content %}}
 
-#### Example
+#### Example 1: Using a common model provider 
+Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google GenAI. When using these providers, you only need to annotate your LLM request with `model_name`, `model_provider`, and token usage. Datadog will automatically calculate the estimated cost based on the provider’s pricing.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import llm
 
-@llm(model_name="model_name", model_provider="model_provider")
-def llm_call_a(prompt):
+@llm(model_name="gpt-5.1", model_provider="openai")
+def llm_call(prompt):
     resp = ... # llm call here
     # Annotate token metrics
     LLMObs.annotate(
         metrics={"input_tokens": 50, "output_tokens": 120, "total_tokens": 170,},
     )
     return resp
+{{< /code-block >}}
 
-@llm(model_name="model_name", model_provider="model_provider")
-def llm_call_b(prompt):
+#### Example 2: Using a custom model
+For custom or unsupported models, you’ll need to annotate the span manually with the cost data.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="custom_model", model_provider="model_provider")
+def llm_call(prompt):
     resp = ... # llm call here
     # Annotate cost metrics
     LLMObs.annotate(
