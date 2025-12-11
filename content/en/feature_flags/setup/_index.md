@@ -1,6 +1,6 @@
 ---
 title: Set Up Feature Flags
-description: Set up Datadog Feature Flags for your mobile applications.
+description: Set up Datadog Feature Flags for your web and mobile applications.
 further_reading:
 - link: "/feature_flags/"
   tag: "Documentation"
