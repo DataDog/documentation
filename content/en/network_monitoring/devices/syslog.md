@@ -38,15 +38,16 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 
       ```yaml
       logs:
-        - type: syslog
+        - type: udp
           port: 514
           protocol: udp
           source: syslog
           service: <service> # optional tag
       ```
 
+      - **`type`**: Set to `udp` or `tcp` based on your device configuration.
       - **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
-      - **`protocol`**: Set to `udp` or `tcp` based on your device configuration.
+      - **`protocol`**: Should match `type`, set to `udp` or `tcp` based on your device configuration.
       - **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
       - **`service`**: Optional service name for unified service tagging.
 
@@ -66,7 +67,7 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
    ```yaml
    logs_enabled: true # enable logs collection
    logs_config:
-   use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
+     use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
    ```
 
 2. Create a Syslog listener configuration:
@@ -76,14 +77,15 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 
       ```yaml
       logs:
-        - type: syslog
+        - type: udp
           port: 514
           protocol: udp
           source: syslog
           service: <service> # optional tag
        ```
-       * **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
-       * **`protocol`**: Set to `udp` or `tcp` based on your device configuration.
+       - **`type`**: Set to `udp` or `tcp` based on your device configuration.
+       - **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
+       - **`protocol`**: Should match `type`, set to `udp` or `tcp` based on your device configuration.
        * **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
        * **`service`**: Optional service name for unified service tagging.
 
@@ -99,7 +101,7 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
    ```yaml
    logs_enabled: true # enable logs collection
    logs_config:
-   use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
+     use_sourcehost_tag: true # adds a source_host tags to logs with the source IP
    ```
 
 2. Create a Syslog listener configuration:
@@ -109,17 +111,18 @@ Network Device Monitoring (NDM) uses Syslog to provide visibility into the healt
 
       ```yaml
       logs:
-        - type: syslog
+        - type: udp
           port: 514
           protocol: udp
           source: syslog
           service: <service> # optional tag
       ```
 
-      * **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
-      * **`protocol`**: Set to `udp` or `tcp` based on your device configuration.
-      * **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
-      * **`service`**: Optional service name for unified service tagging.
+      - **`type`**: Set to `udp` or `tcp` based on your device configuration.
+      - **`port`**: The port the Agent listens on for Syslog messages. Default is 514.
+      - **`protocol`**: Should match `type`, set to `udp` or `tcp` based on your device configuration.
+      - **`source`**: Custom source name for these logs in Datadog. Use `syslog` to correlate with NDM devices.
+      - **`service`**: Optional service name for unified service tagging.
 
 3. Restart the [Docker container][101] where the Agent is installed to apply the changes.
 
