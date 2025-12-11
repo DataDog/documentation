@@ -16,7 +16,7 @@ Product Analytics is a dedicated offering built for product managers, product ow
 
 ## Product Analytics and RUM
 
-Previously, **Sankeys/Pathways** and **Retention Analysis** were available in Preview within Datadog Real User Monitoring (RUM). These features are moving to Datadog Product Analytics.
+Previously, **Sankeys/Pathways** and **Retention Analysis** were available in beta/preview within Datadog Real User Monitoring (RUM). These features are moving to Datadog Product Analytics.
 
 The transition happened on **June 1st 2025**.
 
@@ -33,7 +33,7 @@ The transition happened on **June 1st 2025**.
 
 As part of the introduction of Product Analytics, the following changes are being made for both existing and new RUM customers:
 
-- **Product Analytics Summary**, **Retention Analytics**, and **Pathways** (formerly **Sankeys**) are now part of Product Analytics and are no longer available in preview within RUM.
+- **Product Analytics Summary**, **Retention Analytics**, and **Pathways** (formerly **Sankeys**) are now part of Product Analytics and are no longer available in beta/preview within RUM.
 
 - **Heatmaps** remain available but have been relocated to the **Session Replay** tab for easier access and contextual relevance.
 
