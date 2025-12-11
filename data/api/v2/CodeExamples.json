@@ -1682,6 +1682,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_2609327779",
+      "description": "Validate a detection rule with detection method 'new_value' with enabled feature 'instantaneousBaseline' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_4152369508",
       "description": "Validate a detection rule with detection method 'sequence_detection' returns \"OK\" response"
     }

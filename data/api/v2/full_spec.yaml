@@ -47546,6 +47546,8 @@ components:
       properties:
         forgetAfter:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter'
+        instantaneousBaseline:
+          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline'
         learningDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration'
         learningMethod:
@@ -47571,6 +47573,15 @@ components:
       - TWO_WEEKS
       - THREE_WEEKS
       - FOUR_WEEKS
+    SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline:
+      description: 'If true, every time Datadog learns a new group-by value, it takes
+        old matching values within the learning window and builds the baseline with
+        it.
+
+        Therefore, it attempts to build the baseline swiftly using existing values
+        instead of learning them over time.'
+      example: false
+      type: boolean
     SecurityMonitoringRuleNewValueOptionsLearningDuration:
       default: 0
       description: 'The duration in days during which values are learned, and after
