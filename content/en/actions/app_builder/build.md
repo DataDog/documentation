@@ -60,7 +60,8 @@ To iterate on an existing app:
 Blueprints are helpful app templates that cover common use cases and showcase best practices for setting up apps. They come loaded with demo data to familiarize yourself with the app's functions. Some blueprints create a starter app that you can customize, like [Manage Datastore][24] and [Export Synthetics][25]. Blueprints with "how to" in their title, like [How to: Custom Code][26], are templates with built-in tutorials for App Builder features. 
 
 1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint** in the onboarding modal.
-1. Find the blueprint you want to use and click **Use Blueprint**.
+1. Click the blueprint you want to use. 
+1. Click **Open in Editor**.
 1. Optionally, you can take additional steps to configure and test your app:
     - Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
     - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (<i class="icon-component-wui" style="position:relative; top:4px;"></i>) to open the **Components** tab. Click the component or drag it onto the canvas.
