@@ -26,7 +26,7 @@ These explorers correspond to the common API security operational flow:
 
 1. **Discover:** Identify what endpoints exist using **API Endpoints**.
 2. **Contextualize:** Identify ownership and dependencies using **Services**.
-3. **Detect and respond:** See where attacks or misconfigurations are occurring using **API Findings**.
+3. **Detect and respond:** See where misconfigurations are, and where attacks could occur, using **API Findings**.
 
 ## API Endpoints
 
@@ -88,10 +88,9 @@ The following data sources are explored.
 
 #### Amazon API Gateway
 
-One you have used the Amazon API Gateway service to formally define your API structure,
-Datadog's AWS integration reads this pre-defined configuration from the Amazon API Gateway Datadog uses this configuration to create API endpoint entries in the Inventory.
+The Amazon API Gateway service formally defined your API structure. Datadog's AWS integration reads this pre-defined configuration from the Amazon API Gateway, and then Datadog uses this configuration to create API endpoint entries in the Inventory.
 
-The **AWS API Gateway** data source provide visibility into these exposed endpoints.
+Use **AWS API Gateway** in **Data Source** to gain visibility into these exposed endpoints. You can also use the query `datasource:aws_apigateway`.
 
 #### API Definition
 
@@ -190,7 +189,7 @@ For example, here are some use cases for **Coverage**:
 
 ## API Findings
 
-**API Findings** provides a central triage view of all detected API risks across definitions, gateways, and live traffic.
+**API Findings** provides a central triage view of all detected API risks across definitions, gateways, and live traffic. It provides a set of default rules to detect common vulnerabilities and misconfigurations. You can also set up [custom rules][12] to adapt to specific use cases.
 
 **API Findings** columns:
 
@@ -230,3 +229,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [9]: /integrations/amazon-web-services
 [10]: /integrations/amazon-api-gateway
 [11]: /security/application_security/setup/
+[12]: /security/application_security/policies/custom_rules/
