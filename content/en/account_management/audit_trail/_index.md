@@ -186,23 +186,17 @@ Give more visual context to your audit trail events with dashboards. To create a
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-## Create a scheduled report
+## Send out a scheduled report
 
-Datadog Audit Trail allows you to send out audit analytics views as routinely scheduled emails. These reports are useful for regular monitoring of the Datadog platform usage. For example, you can choose to get a weekly report of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
+You can save your Audit Trail query as a dashboard and send out a scheduled report. These reports can be useful for regular monitoring of the Datadog platform usage. For example, you can send out a weekly email of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
 
-To export an audit analytics query as a report, create a timeseries, top list, or a table query and click **More...** > **Export as scheduled report** to start exporting your query as a scheduled report.
+To create a scheduled report:
 
-**Note**: The **List** view does not have the option to export to a scheduled report.
-
-{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Export as scheduled report function in the More... dropdown menu" style="width:90%;" >}}
-
-1. Enter a name for the dashboard, which is created with the query widget. A new dashboard is created for every scheduled report. This dashboard can be referenced and changed later if you need to change the report content or schedule.
-2. Schedule the email report by customizing the report frequency and time frame.
-3. Add recipients that you want to send the email to.
-4. Add any additional customized messages that needs to be part of the email report.
-5. Click **Create Dashboard and Schedule Report**.
-
-{{< img src="account_management/audit_logs/export_workflow.png" alt="Exporting a audit analytics view into a scheduled email" style="width:80%;" >}}
+1. Navigate to [Audit Trail][1], enter your query to filter your audit events.
+1. Click **More** and select **Save to dashboard**.
+    - You can either save to an existing dashboard or create a new dashboard.
+1. On your dashboard, click **Share** and select **Schedule report**.
+1. Follow the instructions in [Schedule a Report][17] to set up your report.
 
 ## Download Audit Events as CSV
 
@@ -245,3 +239,4 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 [14]: /coterm
 [15]: /security/cloud_siem/
 [16]: /getting_started/cloud_siem/
+[17]: /dashboards/sharing/scheduled_reports/#schedule-a-report
