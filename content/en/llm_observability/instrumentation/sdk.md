@@ -1949,9 +1949,9 @@ def llm_call(prompt):
           "input_tokens": 50, 
           "output_tokens": 120, 
           "total_tokens": 170,
-          "non_cached_input_tokens": 13, # optional
-          "cache_read_input_tokens": 22, # optional
-          "cache_write_input_tokens"15:  # optional
+          "non_cached_input_tokens": 13,  # optional
+          "cache_read_input_tokens": 22,  # optional
+          "cache_write_input_tokens": 15, # optional
         },
     )
     return resp
