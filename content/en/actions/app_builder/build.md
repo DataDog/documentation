@@ -63,7 +63,7 @@ Blueprints are helpful templates that cover common use cases. They come loaded w
 1. Find the blueprint you want to use and click **Use Blueprint**.
 1. Optionally, you can take additional steps to configure and test your app:
     - Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
-    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (<i class="icon-component-wui" style="position:relative; top:4px;"></i>) to open the **Components** tab. Click the component or drag it onto the canvas.
     - To change the app name and description, click the app name.
     - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. To save the app, click **Save**.
@@ -78,7 +78,7 @@ Choosing a layout creates an app as a table, form, or custom chart.
 1. Select a layout. The pane on the right displays a preview of the app.
 1. Click **Use Layout**.
 1. The following steps are optional:
-    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (<i class="icon-component-wui" style="position:relative; top:4px;"></i>) to open the **Components** tab. Click the component or drag it onto the canvas.
     - To change the app name and description, click the app name.
     - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. To save the app, click **Save**.
@@ -94,7 +94,7 @@ You can get started with an app by importing data from one of the integrations l
 1. Choose one or more actions. There is no limit to the number of actions you can choose. 
 1. Click **Create**.
 1. The following steps are optional: 
-    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (<i class="icon-component-wui" style="position:relative; top:4px;"></i>) to open the **Components** tab. Click the component or drag it onto the canvas.
     - To change the app name and description, click the app name.
     - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
 1. To save the app, click **Save**.
@@ -107,7 +107,7 @@ If you don't want to use any of the methods above, you can create a new app from
 1. From [App Builder][1], click **New App**. 
 1. Click **Start From Scratch**, or click the **X** to close the onboarding modal.
 1. The following steps are optional: 
-    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (**<i class="icon-component-wui"></i>**) to open the **Components** tab. Click the component or drag it onto the canvas.
+    - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (<i class="icon-component-wui" style="position:relative; top:4px;"></i>) to open the **Components** tab. Click the component or drag it onto the canvas.
     - Use [queries][12] to populate or interact with your canvas.
     - To change the app name and description, click the app name.
     - To preview the app, click **View**. Click **Edit** from the preview screen to return to the configuration view.
