@@ -49,8 +49,7 @@ Below are a few examples of what App Builder apps can do:
 - Use a PagerDuty integration to see who is on-call for each team in an organization.
 - Summarize the progress of each PR in a given repo.
 
-
-## Configure App Builder actions
+## How App Builder works with actions
 
 Datadog App Builder provides an [Action Catalog][1] of hundreds of actions across multiple integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, you can use generic actions such as the HTTP requests and JavaScript functions to perform any task that your app requires.
 
