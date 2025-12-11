@@ -31,6 +31,7 @@ Follow these steps to enable OTel Metrics API support in your Ruby application.
    gem 'opentelemetry-metrics-sdk', '~> 0.8'
    gem 'opentelemetry-exporter-otlp-metrics', '~> 0.4'
    ```
+2.   
    ```sh
    bundle install
    ```
