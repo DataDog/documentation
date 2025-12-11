@@ -13,7 +13,7 @@ Utiliza la fuente Sumo Logic Hosted Collector de Observability Pipelines para re
 
 Selecciona y configura esta fuente cuando [configures un pipeline][1]. La siguiente información se refiere a la configuración de la fuente en la interfaz de usuario del pipeline.
 
-{{% observability_pipelines/source_settings/sumo_logic %}}
+En el menú desplegable **Decodificación**, también puedes seleccionar si el formato de entrada es **Bytes** sin procesar, **JSON**, Graylog Extended Log Format (**Gelf**) o **Syslog**. Si no se selecciona ninguna decodificación, ésta será JSON por defecto.
 
 ## Configurar las variables de entorno
 
