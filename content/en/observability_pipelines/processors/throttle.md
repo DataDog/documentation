@@ -24,15 +24,16 @@ To set up the processor:
 
 ## How the Throttle processor works
 
-The Throttle processor sets a rate limit on the number of logs sent within a specified time window. While similar to the [Quota processor][2], the main difference between the Throttle and Quota processor is that the Quota processor's time window is fixed at 24 hours and cannot be changed, while the Throttle processor's time window can be configured. Since the Throttle processor's time window is configurable, the processor has a capacity replenishment rate based on the throttling rate and time window you set. See [Capacity replenishment rate](#capacity-replenishment-rate) for more information.
+The Throttle processor sets a rate limit on the number of logs sent within a specified time window. While similar to the [Quota processor][2], the main difference between the Throttle and Quota processors is that the Quota processor's time window is fixed at 24 hours and cannot be changed, while the Throttle processor's time window can be configured. Since the Throttle processor's time window is configurable, the processor has a capacity replenishment rate based on the throttling rate and time window you set. See [Capacity replenishment rate](#capacity-replenishment-rate) for more information.
 
 ### Initial capacity
 
 {{< img src="observability_pipelines/processors/throttling_rate.png" alt="The Throttle processor with the throttling rate set to 1000 K" style="width:40%;" >}}
 
-When the Throttle processor is enabled, the number of logs the processor allows through immediately is based on the configured **Throttling Rate**. For example, if the **Throttling Rate** is set to `1000` events over 60 seconds:
+When the Throttle processor is enabled, the number of logs the processor allows through immediately is based on the configured **Throttling Rate**. For example, if the **Throttling Rate** is set to `1000` events over 60 seconds, and 5,000 events arrive the moment the processor is enabled:
 
-- And 5,000 events arrive the moment the processor is enabled, the processor allows an initial capacity of 1,000 events to pass through while the rest (4,000 events) are dropped.
+- The processor allows an initial capacity of 1,000 events to pass through.
+- The remaining 4,000 events are dropped.
 - This initial behavior is identical to a Quota processor's.
 
 ### Capacity replenishment rate
