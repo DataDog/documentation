@@ -251,9 +251,9 @@ Set `DD_EXCLUDE_PAUSE_CONTAINER` to `false`.
 
 ## Advanced CEL exclusion
 
-In **Agent v7.73+**, you can use the `cel_workload_exclude` configuration option to filter containers from Autodiscovery. This feature allows you to define [Common Expression Langauge][3] rules with fine granularity to target containers to be excluded from telemetry collection by product.
+In **Agent v7.73+**, you can use the `cel_workload_exclude` configuration option to filter containers from Autodiscovery. This feature allows you to define [Common Expression Langauge][3] rules to target containers to be excluded from telemetry collection.
 
-Use the defined parameters for the container representation in the table below to configure filtering rules:
+The following attributes representing the container object are available for your filtering rules:
 
 | Attribute                   | Description                                                             |
 |-----------------------------|-------------------------------------------------------------------------|
@@ -273,7 +273,7 @@ The `products` field accepts `metrics`, `logs`, and `global` (exclude container 
 If the configuration contains structural errors or CEL syntax issues, the Agent exits with an error to prevent collecting unintended telemetry which could impact billing.
 </div>
 
-In the example below, metrics and logs are excluded for any container with `nginx` in its name running in the `staging` namespace. Additionally, logs are excluded for any container running the `redis` image, **or** any container within a pod that has the annotation `low_priority: "true"`. This can be done by defining the configuration option directly on the [agent's configuration file][4].
+In the example below, metrics and logs are excluded for any container with `nginx` in its name running in the `staging` namespace. Additionally, logs are excluded for any container running the `redis` image, **or** any container within a pod that has the annotation `low_priority: "true"`. The [agent's configuration file][4] can be directly updated as seen by this example.
 
 ```yaml
 # datadog.yaml
@@ -360,6 +360,38 @@ docker run -e DD_CEL_WORKLOAD_EXCLUDE=<JSON_CEL_RULES> ...
 {{< /tabs >}}
 
 {{% /collapse-content %}}
+
+#### Example rules
+
+To exclude the container with a specific pod annotation:
+
+```yaml
+container.pod.annotations["monitoring"] == "false"
+```
+
+To exclude the container in namespaces without the substring `-dev`:
+
+```yaml
+!container.pod.namespace.matches("-dev")
+```
+
+To exclude the container with the name `nginx-server` only in the namespace `prod`:
+
+```yaml
+container.name == "nginx-server" && container.pod.namespace == "prod"
+```
+
+To exclude the container running an image with the substring `nginx`:
+
+```yaml
+container.image.reference.matches("nginx")
+```
+
+To exclude the container using grouped logic (for example, a specific container name in either of two namespaces):
+
+```yaml
+container.name == "my-app" && (container.pod.namespace == "production" || container.pod.namespace == "staging")
+```
 
 ## Pod exclude configuration
 
