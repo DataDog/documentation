@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on an Azure Pipeline
+title: Azure Pipelines Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/azure
 further_reading:
@@ -22,7 +22,7 @@ Azure DevOps Server is not officially supported.
 
 [Azure Pipelines][1] is a continuous integration and delivery service that supports any language, platform, or cloud.
 
-Set up tracing on Azure Pipelines to gain real time insights into your CI/CD workflows, track pipeline performance, analyze inefficiencies, and manage your deployment operations.
+Set up CI Visibility for Azure Pipelines to gain real time insights into your CI/CD workflows, track pipeline performance, analyze inefficiencies, and manage your deployment operations.
 
 ### Compatibility
 
@@ -32,6 +32,17 @@ Set up tracing on Azure Pipelines to gain real time insights into your CI/CD wor
 | [Custom spans][15] | Custom spans | Configure custom spans for your pipelines. |
 | [Filter CI Jobs on the critical path][19] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][20] | Execution time  | View the amount of time pipelines have been running jobs. |
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Azure Pipelines:
+
+| Datadog                    | Azure Pipelines |
+|----------------------------|-----------------|
+| Pipeline                   | Pipeline        |
+| Stage                      | Stage           |
+| Job                        | Job             |
+| _Not available in Datadog_ | Step            |
 
 ## Configure the Datadog integration
 

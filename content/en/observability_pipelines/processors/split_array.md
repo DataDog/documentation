@@ -1,5 +1,5 @@
 ---
-title: Split Array
+title: Split Array Processor
 disable_toc: false
 products:
 - name: Logs

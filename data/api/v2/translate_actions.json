@@ -2174,9 +2174,21 @@
     "request_description": "",
     "request_schema_description": "Request body for updating an existing reference table."
   },
+  "DeleteRows": {
+    "description": "Delete multiple rows from a Reference Table by their primary key values.",
+    "summary": "Delete rows",
+    "request_description": "",
+    "request_schema_description": "The request body for deleting multiple rows from a reference table."
+  },
   "GetRowsByID": {
     "description": "Get reference table rows by their primary key values.",
     "summary": "Get rows by id"
+  },
+  "UpsertRows": {
+    "description": "Create or update rows in a Reference Table by their primary key values. If a row with the specified primary key exists, it is updated; otherwise, a new row is created.",
+    "summary": "Upsert rows",
+    "request_description": "",
+    "request_schema_description": "The request body for creating or updating multiple rows into a reference table."
   },
   "CreateReferenceTableUpload": {
     "description": "Create a reference table upload for bulk data ingestion",
@@ -3253,17 +3265,17 @@
     "summary": "Get team memberships"
   },
   "CreateTeamMembership": {
-    "description": "Add a user to a team.",
+    "description": "Add a user to a team.\n\n**Note**: Each team has a setting that determines who is allowed to modify membership of the team. The `user_access_manage` permission generally grants access to modify membership of any team. To get the full picture, see [Team Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).",
     "summary": "Add a user to a team",
     "request_description": "",
     "request_schema_description": "Team membership request"
   },
   "DeleteTeamMembership": {
-    "description": "Remove a user from a team.",
+    "description": "Remove a user from a team.\n\n**Note**: Each team has a setting that determines who is allowed to modify membership of the team. The `user_access_manage` permission generally grants access to modify membership of any team. To get the full picture, see [Team Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).",
     "summary": "Remove a user from a team"
   },
   "UpdateTeamMembership": {
-    "description": "Update a user's membership attributes on a team.",
+    "description": "Update a user's membership attributes on a team.\n\n**Note**: Each team has a setting that determines who is allowed to modify membership of the team. The `user_access_manage` permission generally grants access to modify membership of any team. To get the full picture, see [Team Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).",
     "summary": "Update a user's membership attributes on a team",
     "request_description": "",
     "request_schema_description": "Team membership request"
