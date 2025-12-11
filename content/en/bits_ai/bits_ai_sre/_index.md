@@ -1,6 +1,6 @@
 ---
 title: Bits AI SRE
-description: "Learn how Bits AI SRE autonomously investigates alerts and coordinates incident response to improve on-call operations."
+description: "Learn how Bits AI SRE autonomously investigates alerts to improve on-call operations."
 further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
     tag: "Blog"
@@ -11,15 +11,18 @@ cascade:
 
 ## Overview
 
-Bits AI SRE is an autonomous AI agent that investigates alerts and coordinates incident response. When a monitor triggers, Bits proactively generates multiple hypotheses, queries relevant telemetry, and reasons over the data to help on-call engineers quickly identify the root cause. If the alert escalates to an incident, Bits supports the response by managing stakeholder communications, surfacing relevant knowledge base content, highlighting related incidents, and accelerating the postmortem and incident follow-up process. By reducing manual effort, Bits ensures smoother and more efficient on-call operations.
+Bits AI SRE is an autonomous AI agent that investigates production issues end to end. It iteratively forms hypotheses, gathers relevant telemetry, and uses data-based reasoning to help on-call engineers pinpoint root causes. By reducing manual effort and cognitive load, Bits AI SRE makes on-call operations smoother and more efficient.
 
-{{< img src="bits_ai/overview.png" alt="Bits AI analysis on a monitor alert" style="width:100%;" >}}
+{{< img src="bits_ai/overview_1.png" alt="Bits AI analysis on a monitor alert" style="width:100%;" >}}
 
 ## Features
 
 {{< whatsnext desc="Learn about how you can use Bits AI SRE:" >}}
-   {{< nextlink href="bits_ai/bits_ai_sre/investigate_alerts" >}}Investigate alerts{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_ai_sre/coordinate_incidents" >}}Coordinate incidents{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre/investigate_issues" >}}Investigate issues{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre/remediate_issues" >}}Remediate issues{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre/configure" >}}Bits AI SRE integrations and settings{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre/help_bits_learn" >}}Help Bits learn{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre/chat_bits_ai_sre" >}}Chat with Bits AI SRE{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

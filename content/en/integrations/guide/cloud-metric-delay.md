@@ -39,12 +39,8 @@ AWS offers two levels of granularity for metrics (5 and 1 minute metrics). If yo
 
 Further, the CloudWatch API only offers a metric-by-metric crawl to pull data. The CloudWatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for *detailed metrics* within AWS, they are available more quickly. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
 
-{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
-On your selected [Datadog site][1] ({{< region-param key="dd_site_name" >}}), you can optionally configure Amazon CloudWatch Metric Streams and Amazon Data Firehose to get CloudWatch metrics into Datadog faster with a 2-3 minute latency. Visit the [documentation on metric streaming][2] to learn more about this approach.
+On your selected [Datadog site][4] ({{< region-param key="dd_site_name" >}}), you can optionally configure Amazon CloudWatch Metric Streams and Amazon Data Firehose to get CloudWatch metrics into Datadog faster with a 2-3 minute latency. Visit the [documentation on metric streaming][5] to learn more about this approach.
 
-[1]: /getting_started/site/
-[2]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
-{{% /site-region %}}
 
 ### Azure
 
@@ -71,3 +67,5 @@ On the Datadog side for the AWS, Azure, and GCP integrations, Datadog may be abl
 [1]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [2]: /help/
 [3]: /integrations/amazon-rds/#metrics
+[4]: /getting_started/site/
+[5]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/

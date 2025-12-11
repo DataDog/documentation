@@ -160,7 +160,8 @@ For service deployments tracked by APM to contribute to change lead time, ensure
 
 ### Requirements for calculating change lead time
 - Your application telemetry is tagged with Git information. You can enable this [in APM][101] or see the [Source Code Integration documentation][102].
-- Your repository metadata is synchronized to Datadog through the [GitHub integration][103] or by the `datadog-ci git-metadata upload` command.
+- Your repository metadata is [synchronized](#synchronize-repository-metadata-to-datadog) to Datadog.
+
 
 [101]: https://app.datadoghq.com/source-code/setup/apm
 [102]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
@@ -174,7 +175,7 @@ For service deployments tracked by the DORA Metrics API or the `datadog-ci dora 
 ### Requirements for calculating change lead time
 
 - The attributes `repository_url` and `commit_sha` are included in the deployment events payload.
-- Your repository metadata is synchronized to Datadog through the [GitHub integration][101] or by the `datadog-ci git-metadata upload` command.
+- Your repository metadata is [synchronized](#synchronize-repository-metadata-to-datadog) to Datadog.
 
 [101]: /integrations/github/
 
@@ -217,6 +218,27 @@ If the [GitLab integration][1] is not already installed, install it on the [GitH
 [2]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 
 **Note**: The scope of the service account's personal access token needs to be at least `read_api`.
+
+#### Handling GitLab groups and subgroups
+
+If your repositories are organized under [**GitLab groups or subgroups**][1] (for example,
+`https://gitlab.com/my-org/group(/subgroup)/repo`),
+the automatic service path detection may not resolve correctly due to GitLab's nested group structure.
+
+To ensure that DORA metrics handle your service's source code paths correctly,
+you can use the following configuration in your service definition:
+
+```yaml
+extensions:
+  datadoghq.com/dora-metrics:
+    source_patterns:
+      # All paths relative to the repository URL provided with the deployment
+      - **
+      # or specific paths related to this service (for monorepos)
+      - src/apps/shopist/**
+      - src/libs/utils/**
+```
+[1]: https://docs.gitlab.com/user/group/
 
 {{% /tab %}}
 

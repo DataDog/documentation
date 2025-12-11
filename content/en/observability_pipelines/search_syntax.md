@@ -2,7 +2,6 @@
 title: Search Syntax
 description: Learn the new filter query search syntax for your Observability Pipelines processors.
 disable_toc: false
-private: true
 ---
 ## Overview
 
@@ -105,6 +104,25 @@ In this example, use the following reference rules:
 
 If you want to search for a literal `.` in the attribute key, wrap the key in escaped quotes in the search query. For example, the search query `"service.status":disabled` matches the event `{"service.status": "disabled"}`.
 
+### Arrays
+
+In the following example, CloudWatch logs for Windows contain an array of JSON objects under `Event.EventData.Data`.
+
+```
+Event
+{
+EventData {
+    Data [
+        {"Name":"SubjectUserID1", "value":"12345"},
+        {"Name":"SubjectUserID2", "value":"Admin"},
+        {"Name":"ObjectServer", "value":"Security"}
+	]
+    }
+}
+```
+
+If you use the filter query `Event.EventData.Data.Name:ObjectServer`, the above log event is matched because it contains a nested object with the attribute key `Name` and the value `ObjectServer`.
+
 ### Boolean operators
 
 You can use the following case sensitive Boolean operators to combine multiple terms in a search query.
@@ -194,25 +212,6 @@ The following are search syntax examples that escape special characters and spac
 
 `my_app:hello?world?again`
 : Matches logs that contain `"my_app":"hello world again"`.
-
-### Arrays
-
-In the following example, CloudWatch logs for Windows contain an array of JSON objects under `Event.EventData.Data`.
-
-```
-Event
-{
-EventData {
-    Data [
-        {"Name":"SubjectUserID1", "value":"12345"},
-        {"Name":"SubjectUserID2", "value":"Admin"},
-        {"Name":"ObjectServer", "value":"Security"}
-	]
-    }
-}
-```
-
-If you use the filter query `Event.EventData.Data.Name:ObjectServer`, the above log event is matched because it contains a nested object with the attribute key `Name` and the value `ObjectServer`.
 
 ## Wildcards
 

@@ -8,6 +8,9 @@ aliases:
 - /workflows
 - /service_management/workflows
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
@@ -32,6 +35,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/automated-workflows"
   tag: "Learning Center"
   text: "Remediate Issues with Workflow Automation"
+- link: "https://www.datadoghq.com/blog/datadog-agent-builder/"
+  tag: "Blog"
+  text: "Introducing Datadog Agent Builder: Build agentic workflows for alert response and remediation"
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}
@@ -73,4 +79,4 @@ Below are a few examples of workflows you can build:
 [1]: /actions/actions_catalog/
 [2]: /workflows/build/#build-a-workflow-from-a-blueprint
 [3]: https://app.datadoghq.com/dashboard/lists
-[4]: https://datadoghq.slack.com/
+[4]: https://chat.datadoghq.com/
