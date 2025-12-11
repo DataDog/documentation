@@ -44,7 +44,7 @@ API Endpoints monitors your API traffic to provide visibility into the security 
 
 Using API Endpoints you can:
 
-- See at a glance which endpoints process sensitive data, are authenticated, have vulnerabilities or findings, or are publicly available.
+- See which endpoints process sensitive data, are authenticated, have vulnerabilities or findings, or are publicly available.
 - See which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection][2] service for further investigation or response.
 - See which endpoints are associated to your business's logic, and find business logic suggestions based on your endpoint's traffic history.
 
@@ -52,10 +52,12 @@ Using API Endpoints you can:
 
 To view the API Endpoints on your services, **you must have App and API Protection Threats Protection enabled**. 
 
-For Amazon Web Services (AWS) API Gateway integration, you must set up the following
+For Amazon Web Services (AWS) API Gateway integration, you must set up the following:
 
 - [Amazon Web Services][9]
 - [Amazon API Gateway Integration][10]
+
+API Endpoints are discovered from the Datadog Software Catalog and specifically from API definitions [uploaded to Datadog][13].
 
 For information on what library versions are compatible with API Security Inventory, see [Enabling App and API Protection][11]. [Remote Configuration][1] is required.
 
@@ -74,11 +76,11 @@ For information on what library versions are compatible with API Security Invent
 
 ### How it works
 
-API Endpoints leverages the Datadog tracing library with App and API Protection enabled, alongside configurations from AWS API Gateway and uploaded API Definitions, to gather security metadata about API traffic. This rich data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, ensuring a comprehensive and up-to-date view of your entire API attack surface.
+API Endpoints gathers security metadata about API traffic by leveraging the Datadog tracing library with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This rich data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, ensuring a comprehensive and up-to-date view of your entire API attack surface.
 
 API Endpoints uses [Remote Configuration][1] to manage and configure scanning rules that detect sensitive data and authentication.
 
-The following risks are calculated for each endpoint:
+The following risks are calculated for each endpoint.
 
 ### Data sources
 
@@ -88,30 +90,30 @@ The following data sources are explored.
 
 #### Amazon API Gateway
 
-The Amazon API Gateway service formally defined your API structure. Datadog's AWS integration reads this pre-defined configuration from the Amazon API Gateway, and then Datadog uses this configuration to create API endpoint entries in the Inventory.
+The Amazon API Gateway service formally defines your API structure. Datadog AWS integration reads this pre-defined configuration from the Amazon API Gateway, and then Datadog uses this configuration to create API endpoint entries in **Inventory**.
 
 Use **AWS API Gateway** in **Data Source** to gain visibility into these exposed endpoints. You can also use the query `datasource:aws_apigateway`.
 
 #### Software Catalog
 
-API Endpoints with the **Software Catalog** data source are the set of endpoints that Datadog learned about by reading a formal specification uploaded to Datadog. The API specification is attached to or registered as a dedicated API component within the IDP service entity.
+The **Software Catalog** data source shows API endpoints that Datadog learned about from the formal specification uploaded to Datadog. The API specification is attached to, or registered as, a dedicated API component within the IDP service entity.
 
 This source ensures that your API inventory is complete by including all planned and formally documented endpoints.
 
 #### APM traces
 
-The Spans data source shows real traffic and data exposure. Remediation should be performed in code, config, or access controls immediately.
+The **Spans** data source shows real traffic and data exposure. Remediation should be performed in code, config, or access controls immediately.
 
 What actions you take depend on each of the attack surfaces:
 
 - **Vulnerabilities:** Patch any vulnerable libraries surfaced by SCA or Runtime Code Analysis, then redeploy the service.
 - **API findings discovered:** Review each issue in context of the traced service, fix any code or configurations, and then validate using new traces.
-- **Processing sensitive data:** Confirm data handling complies with policy, sanitize or encrypt PII and limit access to necessary services.
+- **Processing sensitive data:** Confirm data handling complies with policy, sanitize or encrypt PII, and limit access to necessary services.
 - **Unauthenticated endpoint:** If the endpoint is not intentionally public, enforce authentication and update service configurations.
 
 ### Processing sensitive data
 
-[App and API Protection][2] matches known patterns for sensitive data in API request and responses. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
+[App and API Protection][2] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
 
 The matching occurs within your application, and none of the sensitive data is sent to Datadog.
 
@@ -121,7 +123,7 @@ To see the supported data types, use the **Personal Information (PII)** facet. Y
 
 ### Business logic
 
-These tags `(users.login.success`, `users.login.failure`, etc.) are determined by the presence of business logic traces associated with the endpoint.
+These tags (`(users.login.success`, `users.login.failure`, etc.) are determined by the presence of business logic traces associated with the endpoint.
 
 <div class="alert alert-tip">Datadog can suggest a business logic tag for your endpoint based on its HTTP method, response status codes, and URL.</div>
 
@@ -144,7 +146,7 @@ Authentication is determined by:
 - The presence of a user ID within the trace (for example, the `@usr.id` APM attribute).
 - The request has responded with a 401 or 403 status code.
 
-Datadog reports the type of authentication when available in a header through the Authentication Method facet.
+When the type of authentication is available, Datadog reports it in a header through the **Authentication Method** facet.
 
 #### Supported authentication methods
 
@@ -164,24 +166,24 @@ Review your services for the following:
 
 - **Vulnerability risk:** The **Vulnerability Risk** column shows aggregated SCA and IAST results for each service. Vulnerable services have components needing patching or upgrading.
 - **Signals and attacks:** Click a service to see charts showing ongoing detections for active exploit attempts or recurring attack patterns.
-- **Sensitive data exposure:** Services processing PII (like SSNs or emails) demand stricter controls and monitoring.
+- **Sensitive data exposure:** Services processing PII (such as SSNs or emails) demand stricter controls and monitoring.
 - **Coverage and mode:** Use the **App & API Protection In Monitoring Mode**, **App & API Protection In Blocking Mode**, and the **Inactive** facet to identify where App and API Protection is enabled and enforcing runtime protection.
 - **Trend graphs:** The **Trend** column indicates activity and attack frequency over time.
 
 ### Coverage
 
-The **Coverage** column shows which protection and analysis capabilities are active for each service. Use the column to measure the completeness of your protection stack.
+The **Coverage** column shows the active protection and analysis capabilities for each service. Use **Coverage** to measure the completeness of your protection stack.
 
 For example, here are some use cases for **Coverage**:
 
 - **Runtime protection coverage with App and API Protection**: 
-  - Identify which services are in **Monitoring** or **Blocking** mode.
+  - Identify the services in **Monitoring** or **Blocking** mode.
   - Move ready-to-block services into blocking mode to actively stop attacks.
   - Investigate inactive services to see if instrumentation or configuration gaps are leaving APIs exposed.
 - **Software Composition Analysis (SCA) coverage**:
-  - Track which services have their open source dependencies analyzed.
+  - Track the services with analyzed open source dependencies.
   - Enable SCA for unscanned services to detect vulnerable libraries early.
-  - Prioritize patching in active services with high dependency risk.
+  - Prioritize patching inactive services with high dependency risk.
 - **Runtime Code Analysis (IAST) coverage**:
   - Pinpoint where code-level vulnerability detection is missing.
   - Enable IAST for production or high-risk apps to uncover exploitable issues in live traffic.
@@ -209,7 +211,7 @@ Click a finding to view its details and perform a workflow such as Validate > In
 2. Investigate:
    - Use the **Context** tab to examine the endpoint snapshot and attributes (method, path, authentication flags, tags).
    - **Dectected In** provides information for routing ownership and remediation.
-   - In **Detection Rule Query**, if runtime data (from spans/traces) contributed to the finding, you can view those traces by clicking **See Detection Rule**.
+   - In **Detection Rule Query**, you can edit an API finding rule by clicking **See Detection Rule**.
 3. Fix: 
    - Follow the guidance under **Remediation**.
 4. Track:
@@ -230,3 +232,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [10]: /integrations/amazon-api-gateway
 [11]: /security/application_security/setup/
 [12]: /security/application_security/policies/custom_rules/
+[13]: /internal_developer_portal/software_catalog/entity_model/native_entities/?tab=api#native-entity-types
