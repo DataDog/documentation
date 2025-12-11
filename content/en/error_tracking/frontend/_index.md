@@ -32,7 +32,7 @@ Error Tracking simplifies debugging by grouping thousands of similar errors into
 
 ## Setup
 {{< whatsnext desc="To get started with Datadog Error Tracking, choose one of the following setup options:" >}}
-    {{< nextlink href="agentic_onboarding/setup" >}}Agentic Onboarding (frontend only){{< /nextlink >}}
+    {{< nextlink href="agentic_onboarding/frontend_setup" >}}Agentic Onboarding (frontend only){{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/ios" >}}iOS{{< /nextlink >}}
