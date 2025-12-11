@@ -60,14 +60,14 @@ To share a dashboard with one or more email addresses:
 2. Select **Share Dashboard.**
 3. Select **Invite only**.
 4. Configure the desired options time, variable, and color options. For more details, see the [Configuration Options](#configuration-options).
-5. Add the emails or email domains you want to grant access to, and set the expiration date for each invite. Add a domain to prevent public access and limit dashboard access to anyone with that domain address.
+5. Add the emails or email domains (case sensitive) you want to grant access to, and set the expiration date for each invite. Add a domain to prevent public access and limit dashboard access to anyone with that domain address.
 6. Click **Share Dashboard** to generate a share URL and email an access link to specific invitees. Emails are only sent to specific email addresses. For email domains, you need to manually distribute the dashboard link, as no email is sent.
 
-**Note**: Invited emails lose access at 12:00 a.m. local time on the expiration date.
+### Access Period
 
-The Maximum Access Period of an invitation can be configured by an organization admin in [**Organization Settings > Public Sharing**][3]. By default, it is not configured.
-
-**Note**: Maximum Access Period is enforced by exact timestamp. For example, with a Maximum Access Period of one day, an invitation created at Jan 1st 11:00AM must expire by Jan 2nd 11:00AM.
+- Invited emails lose access at 12:00 a.m. local time on the expiration date.
+- The Maximum Access Period of an invitation can be configured by an organization admin in [**Organization Settings > Public Sharing**][3]. By default, it is not configured.
+- Maximum Access Period is enforced by exact timestamp. For example, with a Maximum Access Period of one day, an invitation created at Jan 1st 11:00AM must expire by Jan 2nd 11:00AM.
 
 ### Access an invite-only shared dashboard
 
