@@ -42,4 +42,4 @@ When Datadog identifies a finding, it evaluates the finding against your sequenc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/security/configuration/pipeline-vulnerability
+[2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=add_to_inbox
