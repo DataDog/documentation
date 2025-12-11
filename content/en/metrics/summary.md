@@ -125,6 +125,16 @@ The collection interval for the metric in seconds.
 
 The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][9]. Use this field to update the descriptions for your [custom metrics][4].
 
+## Metric Context Explorer
+
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+
+The Source Code integration pinpoints the exact file, line, and owner in your source code where a metric is emitted. This allows you to trace the code, identify code owners, and take action directly from the platform.
+
+{{< img src="metrics/summary/metric_context_explorer_12112025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+
+To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
+
 ### Tags table
 
 The tags table offers multiple ways to explore all of the tag keys and tag values that are actively reporting in your metric's data.
@@ -251,3 +261,8 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [33]: /metrics/custom_metrics/agent_metrics_submission/
 [34]: https://app.datadoghq.com/metric/overview
+[35]: https://app.datadoghq.com/integrations?category=Source%20Control
+[36]: https://app.datadoghq.com/integrations/github/configuration
+[37]: https://app.datadoghq.com/integrations/gitlab-source-code
+[38]: https://app.datadoghq.com/integrations/azure-devops-source-code?subPath=configuration
+[39]: https://app.datadoghq.com/source-code/repositories
