@@ -40,7 +40,7 @@ For example, to link a flag to the `payments_api` service used in the examples b
 
 Send feature flag events from any provider using the [Events API][3]. Create a `change` category event and include a service tag to link the event to your service.
 
-#### Recommended Tags
+#### Recommended tags
 
 When sending custom feature flag change events, we **strongly recommend** including the following fields to ensure accurate filtering, and cross-product correlation within Datadog:
 
