@@ -50,7 +50,8 @@ To build an app with Bits AI:
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 To iterate on an existing app:
-1. From an existing app, click **Edit** then **Build with AI** (**<i class="icon-bits-ai"></i>**).
+1. From [your apps list][14], hover over an app and click **Edit app** ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
+1. Click **Build with AI** (**<i class="icon-bits-ai"></i>**).
 1. Enter a detailed prompt for the behavior you'd like to add to your app. Include the integrations and actions you'd like to use.
 1. Press <kbd>Enter</kbd> to add the functionality to your app.
 
@@ -212,7 +213,7 @@ The **Switch to GUI** option in the settings menu takes you back to the GUI edit
 
 The App Builder Debug Console provides a central place to view real-time logs, action executions, and errors. 
 
-To access the Debug Console, go to [your apps list][14] and click **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} for one of your apps. Click **Expand** {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} to see the entire Debug Console. Information inside the console includes:
+To access the Debug Console, go to [your apps list][14] and click **Edit app** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} for one of your apps. Click **Expand** {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} to see the entire Debug Console. Information inside the console includes:
 - **Action Executions:** Track the success and failure of action executions with their associated inputs and outputs.
 - **Errors:** View logs for errors, warnings, and info messages.
 - **Logs:** View configuration errors for your actions, transformers, variables, and components.
