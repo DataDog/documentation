@@ -34,7 +34,7 @@ Follow these steps to enable OTel Metrics API support in your Ruby application.
    ```sh
    bundle install
    ```
-2. Enable OTel metrics by setting the following environment variable:
+3. Enable OTel metrics by setting the following environment variable:
    ```sh
    export DD_METRICS_OTEL_ENABLED=true
    ```
