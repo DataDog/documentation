@@ -598,14 +598,14 @@ db_password: "ENC[secrets-shared/db-creds;password]"
 
 ##### Advanced configuration
 
-**Custom paths**
+Custom paths
 ```yaml
 secret_backend_config:
   token_path: /custom/path/to/token
   ca_path: /custom/path/to/ca.crt
 ```
 
-**Custom API server**
+Custom API server
 ```yaml
 secret_backend_config:
   api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
