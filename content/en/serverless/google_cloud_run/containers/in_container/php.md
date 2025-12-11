@@ -37,7 +37,7 @@ apk add libgcc
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="\"apache2-foreground\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"apache2-foreground\"" %}}
 
 3. **Set up logs**.
 
@@ -49,7 +49,7 @@ apk add libgcc
 
 4. **Configure your application**.
 
-{{% gcr-configure %}}
+{{% serverless-init-configure cloudrun="true" %}}
 
 5. {{% gcr-service-label %}}
 
@@ -57,11 +57,11 @@ apk add libgcc
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-in-container language="php" %}}
+{{% serverless-init-env-vars-in-container language="php" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 

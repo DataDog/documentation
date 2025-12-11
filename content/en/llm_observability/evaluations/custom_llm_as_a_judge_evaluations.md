@@ -2,6 +2,9 @@
 title: Custom LLM-as-a-Judge Evaluations
 description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across LLM Observability.
 further_reading:
+- link: https://www.datadoghq.com/blog/llm-aws-strands
+  tag: Blog
+  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about LLM Observability terms and concepts"
@@ -30,7 +33,7 @@ Learn more about the [compatibility requirements][6].
 ### Configure the prompt
 
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
-   {{< img src="llm_observability/evaluations/custom_llm_judge_1.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/custom_llm_judge_1-2.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
 
 2. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 
@@ -234,7 +237,9 @@ Refine your prompt and schema until outputs are consistent and interpretable.
 
 ## Viewing and using results
 
-After you save your evaluation, Datadog automatically runs your evaluation on targeted spans. Results are available across LLM Observability in near-real-time. You can find your custom LLM-as-a-judge results for a specific span in the **Evaluations** tab, alongside other evaluations.
+After you **Save and Publish** your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can **Save as Draft** and edit or enable your evaluation later.
+
+Results are available across LLM Observability in near-real-time for published evaluations. You can find your custom LLM-as-a-judge results for a specific span in the **Evaluations** tab, alongside other evaluations.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
 
@@ -274,7 +279,7 @@ You can:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/llm/settings/evaluations
+[1]: https://app.datadoghq.com/llm/evaluations
 [2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
 [3]: /service_management/events/explorer/facets/
 [4]: /monitors/
