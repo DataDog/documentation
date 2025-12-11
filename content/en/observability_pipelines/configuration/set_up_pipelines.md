@@ -112,7 +112,7 @@ To delete a destination, click on the pencil icon to the top right of the destin
 
 ### Add another processor group
 
-{{< img src="observability_pipelines/setup/another_processor_group.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
+{{< img src="observability_pipelines/setup/another_processor_group_metrics.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
 
 If you want to add another group of processors for a destination:
 1. Click the plus sign (**+**) at the bottom of the existing processor group.
