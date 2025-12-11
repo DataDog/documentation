@@ -114,7 +114,7 @@ If you are using the OTel SDK with your own manual OTLP exporter configuration:
 2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
 3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
 
-**Important**: Runtime and trace metrics continue to be submitted via StatsD. Only custom metrics created through the OpenTelemetry Metrics API are sent via OTLP. The `dd-trace-rb` implementation supports exporting OTLP metrics exclusively to a Datadog Agent or OpenTelemetry Collector—multiple exporters are not supported.
+**Important**: Runtime and trace metrics continue to be submitted using StatsD. Only custom metrics created through the OpenTelemetry Metrics API are sent using OTLP. The `dd-trace-rb` implementation supports exporting OTLP metrics exclusively to a Datadog Agent or OpenTelemetry Collector. Multiple exporters are not supported.
 
 ## Troubleshooting
 
