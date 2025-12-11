@@ -20,7 +20,7 @@ API security relies on visibility. The biggest failure mode in most applications
     A service groups multiple endpoints into a logical or deployed component (typically aligned with a microservice, app, or backend system).
 3. **API Findings:** *Which API weaknesses, attacks or misconfigurations require investigation or remediation?*
     
-    API Findings are security detections and policy evaluation results tied to endpoints or services. These represent known or inferred weaknesses or threats in API behavior or configuration.
+    API Findings are security detections and policy evaluation results tied to endpoints. These represent known or inferred weaknesses or threats in API behavior or configuration.
 
 These explorers correspond to the common API security operational flow: 
 
@@ -92,13 +92,13 @@ The Amazon API Gateway service formally defined your API structure. Datadog's AW
 
 Use **AWS API Gateway** in **Data Source** to gain visibility into these exposed endpoints. You can also use the query `datasource:aws_apigateway`.
 
-#### API Definition
+#### Software Catalog
 
-API Endpoints with the **API Definition** data source are the set of endpoints that Datadog learned about by reading a formal specification uploaded to Datadog. The API specification is attached to or registered as a dedicated API component within the IDP service entity.
+API Endpoints with the **Software Catalog** data source are the set of endpoints that Datadog learned about by reading a formal specification uploaded to Datadog. The API specification is attached to or registered as a dedicated API component within the IDP service entity.
 
 This source ensures that your API inventory is complete by including all planned and formally documented endpoints.
 
-#### Spans
+#### APM traces
 
 The Spans data source shows real traffic and data exposure. Remediation should be performed in code, config, or access controls immediately.
 
