@@ -14,7 +14,7 @@ API security relies on visibility. The biggest failure mode in most applications
 
 1. **API Endpoints:** *What APIs exist, and what risk do they expose?*
     
-    Each API endpoint is a unique entry point where data or functionality can be accessed. The API Endpoints explorer enables shadow API detection, asset management, and risk prioritization at the granularity attackers exploit.
+    Each API endpoint is a unique entry point where data or functionality can be accessed. The API Endpoints explorer enables shadow and orphan API detection, asset management, and risk prioritization at the granularity attackers exploit.
 2. **Services:** *Where do risky APIs live, who owns them, and how severe is their collective risk?*
     
     A service groups multiple endpoints into a logical or deployed component (typically aligned with a microservice, app, or backend system).
