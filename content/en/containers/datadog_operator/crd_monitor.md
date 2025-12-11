@@ -19,6 +19,11 @@ To deploy a Datadog monitor, you can use the Datadog Operator and `DatadogMonito
 
 ## Setup
 
+1. Run the install command, substituting your Datadog API and application keys:
+   ```shell
+   helm install my-datadog-operator datadog/datadog-operator --set apiKey=<DATADOG_API_KEY> --set appKey=<DATADOG_APP_KEY> --set datadogDashboard.enabled=true --set datadogCRDs.crds.datadogDashboards=true
+   ```
+
 1. Create a file with the spec of your `DatadogMonitor` deployment configuration.
 
    **Example**:
@@ -56,7 +61,7 @@ To deploy a Datadog monitor, you can use the Datadog Operator and `DatadogMonito
 
    See the [complete list of configuration fields](#all-available-configuration-fields).
 
-2. Deploy your `DatadogMonitor`:
+1. Deploy your `DatadogMonitor`:
 
    ```shell
    kubectl apply -f /path/to/your/datadog-metric-monitor.yaml
