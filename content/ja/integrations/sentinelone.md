@@ -151,7 +151,7 @@ SentinelOne インテグレーションにはイベントは含まれていま�
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/security/home
+[1]: https://app.datadoghq.com/security/siem/home
 [2]: https://www.sentinelone.com/platform/singularity-cloud-funnel/
 [3]: https://community.sentinelone.com/s/article/000006282
 [4]: https://community.sentinelone.com/s/article/000006285

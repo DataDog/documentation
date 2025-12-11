@@ -26,7 +26,7 @@ Pour améliorer la visibilité des utilisateurs sur la sécurité, les partenair
 
 Dans votre sandbox Datadog, [créez une nouvelle règle][4].
 
-{{< img src="developers/integrations/detection_rule.png" alt="La page Créer une nouvelle règle dans l'espace Règles de détection de Datadog" style="width:100%;" >}} 
+{{< img src="developers/integrations/detection_rule.png" alt="La page Créer une nouvelle règle dans l'espace Règles de détection de Datadog" style="width:100%;" >}}
 
 Suivez les [bonnes pratiques](#bonnes-pratiques-de-configuration) décrites dans ce guide pour configurer votre règle.
 
@@ -34,14 +34,14 @@ Suivez les [bonnes pratiques](#bonnes-pratiques-de-configuration) décrites dans
 
 Dans votre intégration, sur la plateforme de développement d'intégrations, accédez à l'onglet Content. Sélectionnez ensuite **Import Detection Rule** pour choisir parmi les règles disponibles. Vous pouvez en inclure jusqu'à 10 avec votre intégration.
 
-{{< img src="developers/integrations/content_tab.png" alt="L'onglet Content dans la plateforme de développement" style="width:100%;" >}} 
+{{< img src="developers/integrations/content_tab.png" alt="L'onglet Content dans la plateforme de développement" style="width:100%;" >}}
 
 
 ## Vérifier votre règle de détection en production
 
-Pour voir la règle de détection prête à l'emploi, le carré d'intégration concerné doit être `Installed` dans Datadog, et Cloud SIEM doit être activé. 
+Pour voir la règle de détection prête à l'emploi, le carré d'intégration concerné doit être `Installed` dans Datadog, et Cloud SIEM doit être activé.
 
-1. Recherchez votre règle dans la [liste des règles de détection][2], puis cliquez pour l'afficher. 
+1. Recherchez votre règle dans la [liste des règles de détection][2], puis cliquez pour l'afficher.
 2. Assurez-vous que les logos s'affichent correctement.
 3. Vérifiez que la règle est bien activée.
 
@@ -131,9 +131,9 @@ Contactez Datadog pour résoudre ce problème.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/fr/security/cloud_siem/
-[2]: https://app.datadoghq.com/security/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name 
+[2]: https://app.datadoghq.com/security/siem/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name
 [3]: https://docs.datadoghq.com/fr/developers/integrations/agent_integration/
-[4]: https://app.datadoghq.com/security/rules/new?product=siem
-[5]: https://github.com/DataDog/integrations-extras 
+[4]: https://app.datadoghq.com/security/siem/rules/new?product=siem
+[5]: https://github.com/DataDog/integrations-extras
 [6]: https://github.com/DataDog/marketplace
 [7]: https://docs.datadoghq.com/fr/security/cloud_siem/detection_rules

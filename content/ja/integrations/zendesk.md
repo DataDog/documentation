@@ -143,7 +143,7 @@ Zendesk チケットを作成してグループに割り当てることができ
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 [1]: https://developer.zendesk.com/api-reference/ticketing/account-configuration/audit_logs/
-[2]: https://app.datadoghq.com/security/home
+[2]: https://app.datadoghq.com/security/siem/home
 [3]: https://app.datadoghq.com
 [4]: https://app.datadoghq.com/account/settings#integrations/zendesk
 [5]: https://docs.datadoghq.com/ja/real_user_monitoring/

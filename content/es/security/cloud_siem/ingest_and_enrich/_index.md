@@ -47,7 +47,7 @@ Datadog proporciona [Inteligencia de amenazas][5] integrada para los logs de Clo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/security/cloud_siem/content_packs/
-[2]: https://app.datadoghq.com/security/content-packs
+[2]: https://app.datadoghq.com/security/siem/content-packs
 [3]: /es/integrations/
 [4]: /es/logs/log_collection/
 [5]: /es/security/threat_intelligence/#threat-intelligence-sources

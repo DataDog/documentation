@@ -99,7 +99,7 @@ Snowflake 데이터를 구문 분석한 후 Datadog는 [즉기 사용 가능한 
 
 #### Snowflake 계정과 연결
 
-1. [Snowflake 계정 URL][2]을 찾습니다. 
+1. [Snowflake 계정 URL][2]을 찾습니다.
 
 ![Snowflake UI에서 계정 URL 복사 옵션이 선택된 계정 메뉴][3]
 
@@ -111,8 +111,8 @@ Snowflake 데이터를 구문 분석한 후 Datadog는 [즉기 사용 가능한 
 
 하단 표는 수집되는 메트릭 유형과 관련 메트릭 접두어에 대해 설명합니다.
 
-| **유형** | **설명** | **수집된 메트릭 접두어**  |  
-|------|-------------|-----------------------------|                                                                                            
+| **유형** | **설명** | **수집된 메트릭 접두어**  |
+|------|-------------|-----------------------------|
 | **계정 사용량**      | 계정 수준에서 사용량, 크레딧 사용량, 쿼리 메트릭을 보관합니다.<br>_매 시간 수집됩니다_.              | `snowflake.auto_recluster`<br>`snowflake.billing`<br>`snowflake.data_transfer`<br>`snowflake.logins`<br>`snowflake.pipe`<br>`snowflake.query`<br>`snowflake.replication`<br>`snowflake.storage`<br>`snowflake.storage.database`<br>`snowflake.storage.table` |
 | **조직 사용량** | 조직 수준에서 크레딧 사용량, 데이터 전송 기록 및 예산 메트릭을 보관합니다.<br>_매 시간 수집됩니다_. | `snowflake.organization` |
 
@@ -133,7 +133,7 @@ Snowflake 데이터를 구문 분석한 후 Datadog는 [즉기 사용 가능한 
   </tr>
   <tr>
     <td style="width:10%;">보안</td>
-    <td><a href="https://app.datadoghq.com/security/home">Cloud SIEM</a>과 함께 이러한 로그를 활용하여 사용자 환경에서 보안 위협을 보다 효율적으로 탐지하고 이에 대응할 수 있습니다.</td>
+    <td><a href="https://app.datadoghq.com/security/siem/home">Cloud SIEM</a>과 함께 이러한 로그를 활용하여 사용자 환경에서 보안 위협을 보다 효율적으로 탐지하고 이에 대응할 수 있습니다.</td>
     <td> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/login_history">SNOWFLAKE.ACCOUNT_USAGE.LOGIN_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/sessions">SNOWFLAKE.ACCOUNT_USAGE.SESSIONS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/grants_to_users">SNOWFLAKE.ACCOUNT_USAGE.GRANTS_TO_USERS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/data_transfer_history">SNOWFLAKE.ACCOUNT_USAGE.DATA_TRANSFER_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/stages">SNOWFLAKE.ACCOUNT_USAGE.STAGES</a></td>
   </tr>
   <tr>
@@ -208,7 +208,7 @@ Datadog이 Snowflake 계정에서 데이터를 수집하려면 특정 IP 주소 
 
 #### 커스텀 메트릭
 
-Snowflake 통합은 커스텀 쿼리 를 지원하며 커스텀 메트릭를 수집합니다. 사용자는 커스텀 SQL 쿼리를 작성하여 특정 데이터를 추출하고 Datadog에서 메트릭 및 메트릭 태그로 확인할 수 있습니다. 
+Snowflake 통합은 커스텀 쿼리 를 지원하며 커스텀 메트릭를 수집합니다. 사용자는 커스텀 SQL 쿼리를 작성하여 특정 데이터를 추출하고 Datadog에서 메트릭 및 메트릭 태그로 확인할 수 있습니다.
 
 기본적으로 통합은 공유 `SNOWFLAKE` 데이터베이스 및 `ACCOUNT_USAGE` 스키마에 연결됩니다. `ACCOUNT_USAGE` 스키마 외부의 테이블을 쿼리하는 경우에는 설정된 역할에 해당 테이블에 액세스할 수 있는 적절한 권한이 있는지 확인하세요.
 
@@ -260,7 +260,7 @@ Snowflake 웹 통합에는 서비스 점검이 포함되어 있지 않습니다.
 
 ## 에이전트: 개요
 
-이 점검은 Datadog Agent를 통해 [Snowflake][15]를 모니터링합니다. Snowflake는 SaaS 분석 데이터 웨어하우스이며 클라우드 인프라스트럭처에서 완전히 실행됩니다. 
+이 점검은 Datadog Agent를 통해 [Snowflake][15]를 모니터링합니다. Snowflake는 SaaS 분석 데이터 웨어하우스이며 클라우드 인프라스트럭처에서 완전히 실행됩니다.
 이 통합은 크레딧 사용량, 빌링, 저장 공간, 쿼리 메트릭 등을 모니터링합니다.
 
 <div class="alert alert-info"><bold>참고</bold>: 메트릭은 Snowflake에 대한 쿼리를 통해 수집됩니다. Datadog 통합으로 생성된 쿼리는 Snowflake에서 청구 가능합니다..</div>
@@ -364,7 +364,7 @@ Snowflake 점검은 [Datadog Agent][16] 패키지에 포함되어 있습니다.
         # disable_generic_tags: true
     ```
 
-    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour. 
+    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour.
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
@@ -443,7 +443,7 @@ Snowflake에서는 [프록시 구성을 위한 환경 변수][21] 설정을 권�
 
 또한 [snowflake.d/conf.yaml][19]의 `init_config`에서 `proxy_host`, `proxy_port`, `proxy_user`,`proxy_password`를 설정할 수 있습니다.
 
-**참고**: Snowflake는 자동으로 프록시 구성 형식을 지정하고 [표준 프록시 환경 변수][22]를 설정합니다. 
+**참고**: Snowflake는 자동으로 프록시 구성 형식을 지정하고 [표준 프록시 환경 변수][22]를 설정합니다.
 이러한 변수는 Docker, ECS, Kubernetes와 같은 오케스트레이터를 포함한 통합의 모든 요청에도 영향을 미칩니다.
 
 #### Snowflake 구성에 대한 프라이빗 연결
@@ -537,8 +537,8 @@ Snowflake는 이벤트를 포함하지 않습니다.
 
 ### 에이전트: 서비스 점검
 
-**snowflake.can_connect**  
-점검에서 Snowflake 자격 증명을 인증할 수 없는 경우 `CRITICAL`을 반환합니다. 그렇지 않으면 `OK`를 반환합니다.  
+**snowflake.can_connect**
+점검에서 Snowflake 자격 증명을 인증할 수 없는 경우 `CRITICAL`을 반환합니다. 그렇지 않으면 `OK`를 반환합니다.
 *Statuses: ok, critical*
 
 ## 에이전트: 트러블슈팅

@@ -65,5 +65,5 @@ La [liste des suppressions][3] permet de gérer les suppressions de façon centr
 [1]: https://app.datadoghq.com/security/configuration/siem/rules/new
 [2]: /fr/security/detection_rules/
 [3]: https://app.datadoghq.com/security/configuration/suppressions
-[4]: https://app.datadoghq.com/security/rules
+[4]: https://app.datadoghq.com/security/siem/rules
 [5]: /fr/logs/explorer/facets/#log-side-panel

@@ -170,7 +170,7 @@ Wiz インテグレーションは監査ログと課題を収集します。
 
 お困りの際は、[Datadog サポート][5] または [Wiz サポート][6] までご連絡ください。
 
-[1]: https://app.datadoghq.com/security/home
+[1]: https://app.datadoghq.com/security/siem/home
 [2]: https://app.wiz.io/login
 [3]: https://docs.wiz.io/wiz-docs/docs/webhook-format
 [4]: https://docs.wiz.io/wiz-docs/docs/issues-overview

@@ -24,7 +24,7 @@ title: Cisco Meraki
 ---
 ## Información general
 
-Esta integración proporciona una visibilidad completa de tu entorno de Cisco Meraki mediante la recopilación de métricas para [Network Device Monitoring](https://app.datadoghq.com/devices), logs de eventos de red y logs de eventos de seguridad para [Cloud SIEM](https://app.datadoghq.com/security/home).
+Esta integración proporciona una visibilidad completa de tu entorno de Cisco Meraki mediante la recopilación de métricas para [Network Device Monitoring](https://app.datadoghq.com/devices), logs de eventos de red y logs de eventos de seguridad para [Cloud SIEM](https://app.datadoghq.com/security/siem/home).
 
 **Network Device Monitoring**
 

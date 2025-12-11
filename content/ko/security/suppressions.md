@@ -65,5 +65,5 @@ title: 억제
 [1]: https://app.datadoghq.com/security/configuration/siem/rules/new
 [2]: /ko/security/detection_rules/
 [3]: https://app.datadoghq.com/security/configuration/suppressions
-[4]: https://app.datadoghq.com/security/rules
+[4]: https://app.datadoghq.com/security/siem/rules
 [5]: /ko/logs/explorer/facets/#log-side-panel
