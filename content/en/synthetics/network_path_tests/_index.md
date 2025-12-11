@@ -24,6 +24,8 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Test creation
 
+**Note**: This page covers running Network Path tests in Synthetic Monitoring, including [Agent-based configuration](#agent-configuration). For Scheduled and Dynamic tests in Network Monitoring, see [Network Path Setup][7].
+
 1. In Datadog, hover over **Digital Experience** in the left-hand menu and select Tests (under Synthetic Monitoring & Testing).
 2. Click **New Test > Network Path Test**.
 
@@ -141,6 +143,6 @@ Click on a test run in the table at the bottom of the page to view details for t
 [4]: /synthetics/network_path_tests/#define-alert-conditions
 [5]: /synthetics/network_path_tests/#configure-the-test-monitor
 [6]: /remote_configuration/#enable-remote-configuration
-[7]: /agent/
+[7]: /network_monitoring/network_path/setup/
 [8]: /agent/configuration/agent-commands/#restart-the-agent
 [9]: /synthetics/test_suites
