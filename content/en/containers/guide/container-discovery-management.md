@@ -19,11 +19,9 @@ By default, the Datadog Agent automatically discovers all containers available. 
 
 ## Container discovery patterns
 
-In a containerized environment, you should deploy the Datadog Agent once per host. Each Datadog Agent deployed automatically discovers and monitors all containers on its respective host.
+In a containerized environment, you should deploy the Datadog Agent once per host. Each Datadog Agent deployed automatically discovers and monitors all containers on its respective host. When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers.
 
 You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any [Autodiscovery][2]-based Agent integrations.
-
-When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers. These filtering options do not affect log collection if `containerCollectAll` is not enabled.
 
 You can set exceptions in two ways:
 
@@ -267,15 +265,18 @@ Use the defined parameters for the container representation in the table below t
 
 ### Configuration structure
 
-The `cel_workload_exclude` configuration is structured as a list of rule sets joined by logical **ORs**. Each rule set defines the `products` to exclude and the corresponding CEL `rules` to match against containers.
+The `cel_workload_exclude` configuration option is structured as a list of rule sets joined by logical **ORs**. Each rule set defines the `products` to exclude and the corresponding CEL `rules` to match against containers.
 
 The `products` field accepts `metrics`, `logs`, and `global` (exclude container from all listed products).
 
-If the configuration contains typos or structural errors, the Agent process gracefully crashes to prevent collecting unintended telemetry which could impact billing. Additionally, the CEL compiler performs basic type checking to ensure valid operations on the container attributes.
+<div class="alert alert-danger">
+If the configuration contains structural errors or CEL syntax issues, the Agent exits with an error to prevent collecting unintended telemetry which could impact billing.
+</div>
 
-In the example below, metrics and logs are excluded for any `nginx` container running in the `staging` namespace. Additionally, logs are excluded for any container running the `redis` image, **or** any container within a pod that has the annotation `low_priority: "true"`.
+In the example below, metrics and logs are excluded for any container with `nginx` in its name running in the `staging` namespace. Additionally, logs are excluded for any container running the `redis` image, **or** any container within a pod that has the annotation `low_priority: "true"`. This can be done by defining the configuration option directly on the [agent's configuration file][4].
 
 ```yaml
+# datadog.yaml
 cel_workload_exclude:
 - products: [metrics, logs]
   rules:
@@ -288,7 +289,7 @@ cel_workload_exclude:
       - container.pod.annotations["low_priority"] == "true"
 ```
 
-The CEL-backed workload exclusion can also be configured by providing a JSON-formatted environment value to `DD_CEL_WORKLOAD_EXCLUDE`.
+The CEL-backed workload exclusion can also be configured by providing a **JSON**-formatted environment value to `DD_CEL_WORKLOAD_EXCLUDE`.
 
 {{% collapse-content title="Setting environment variables" level="h4" expanded=false id="setting-environment-variables" %}}
 
@@ -312,7 +313,8 @@ spec:
     nodeAgent:
       env:
       - name: DD_CEL_WORKLOAD_EXCLUDE
-        value: '[{"products":["global"],"rules":{"containers":["container.name == \"redis\""]}}]'
+        value: >
+          [{"products":["global"],"rules":{"containers":["container.name == \"redis\""]}}]
 ```
 
 {{% /tab %}}
@@ -479,3 +481,4 @@ In environments where you are not using Helm or the Operator, the following envi
 [1]: /containers/kubernetes/log/?tab=helm#log-collection
 [2]: /getting_started/containers/autodiscovery
 [3]: https://github.com/google/cel-spec/blob/master/doc/langdef.md
+[4]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
