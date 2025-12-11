@@ -27,7 +27,7 @@ Follow these steps to enable OTel Metrics API support in your Ruby application.
 1. Install the Datadog SDK and OTel gems:
    ```ruby
    # Add to your Gemfile
-   gem 'datadog', '~> 2.230'
+   gem 'datadog', '~> 2.23.0'
    gem 'opentelemetry-metrics-sdk', '~> 0.8'
    gem 'opentelemetry-exporter-otlp-metrics', '~> 0.4'
    ```
