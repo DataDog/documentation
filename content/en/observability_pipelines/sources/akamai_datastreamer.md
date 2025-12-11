@@ -42,8 +42,8 @@ The following are required to send Akamai DataStream logs to Observability Pipel
 1. Enter your endpoint URL.
     - **Note**: Your endpoint URL **must** be a FQDN, not an IP address. If you enter an IP address you get an error message.
 1. Click **Validate & Save**.
-1. It takes about 20 minutes for the stream to be activated. After it is activated, the **Stream list** page shows the status of your stream as **Active**.
-1. View your Akamai DataStream logs in Datadog [Log Explorer][3] or the Observability Pipelines destination to which you are sending the logs.
+1. After the stream is activated (it takes about 20 minutes), the **Stream list** page shows the status of your stream as **Active**.
+1. View your Akamai DataStream logs in Datadog [Log Explorer][3] or the Observability Pipelines destination.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://control.akamai.com/apps/data-stream-ui/#/streams/group/all%20
