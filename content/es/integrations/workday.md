@@ -143,7 +143,7 @@ La integración Workday no incluye eventos.
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-[1]: https://app.datadoghq.com/security/siem/home
+[1]: https://app.datadoghq.com/security/home
 [2]: https://app.datadoghq.com/logs/pipelines?search=workday
 [3]: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html#privacy/v1/get-/activityLogging
 [4]: https://github.com/DataDog/integrations-internal-core/blob/master/workday/assets/service_checks.json

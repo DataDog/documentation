@@ -183,7 +183,7 @@ Datadog 서버에서 Meraki에 액세스하는 데 문제가 발생하는 경우
 - [Datadog으로 Cisco Meraki 모니터링][13]
 
 [1]: https://app.datadoghq.com/devices
-[2]: https://app.datadoghq.com/security/siem/home
+[2]: https://app.datadoghq.com/security/home
 [3]: https://developer.cisco.com/meraki/api/get-network-appliance-security-events/
 [4]: https://app.datadoghq.com/logs/pipelines?search=meraki
 [5]: https://developer.cisco.com/meraki/api/get-network-events/

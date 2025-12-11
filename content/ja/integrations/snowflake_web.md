@@ -111,8 +111,8 @@ Snowflake データをパースした後、Datadog は[すぐに使える概要�
 
 以下の表では、収集されるメトリクスの種類と関連するメトリクスのプレフィックスについて説明します。
 
-| **型** | **説明** | **収集されるメトリクスのプレフィックス**  |
-|------|-------------|-----------------------------|
+| **型** | **説明** | **収集されるメトリクスのプレフィックス**  |  
+|------|-------------|-----------------------------|                                                                                            
 | **アカウント使用量**      | アカウントレベルでのストレージ使用量、クレジット消費量、およびクエリメトリクス。<br>_毎時収集_。              | `snowflake.auto_recluster`<br>`snowflake.billing`<br>`snowflake.data_transfer`<br>`snowflake.logins`<br>`snowflake.pipe`<br>`snowflake.query`<br>`snowflake.replication`<br>`snowflake.storage`<br>`snowflake.storage.database`<br>`snowflake.storage.table` |
 | **組織使用量** | 組織レベルでのクレジット消費量、データ転送履歴、予算メトリクス<br>_毎日収集_。 | `snowflake.organization` |
 
@@ -133,7 +133,7 @@ Snowflake データをパースした後、Datadog は[すぐに使える概要�
 </tr>
 <tr>
 <td style="width:10%;">セキュリティ</td>
-<td>これらのログを <a href="https://app.datadoghq.com/security/siem/home">Cloud SIEM</a> と組み合わせて使用し、環境内のセキュリティ脅威をより適切に検出し対応します。</td>
+<td>これらのログを <a href="https://app.datadoghq.com/security/home">Cloud SIEM</a> と組み合わせて使用し、環境内のセキュリティ脅威をより適切に検出し対応します。</td>
 <td> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/login_history">SNOWFLAKE.ACCOUNT_USAGE.LOGIN_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/sessions">SNOWFLAKE.ACCOUNT_USAGE.SESSIONS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/grants_to_users">SNOWFLAKE.ACCOUNT_USAGE.GRANTS_TO_USERS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/data_transfer_history">SNOWFLAKE.ACCOUNT_USAGE.DATA_TRANSFER_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/stages">SNOWFLAKE.ACCOUNT_USAGE.STAGES</a></td>
 </tr>
 <tr>
@@ -366,7 +366,7 @@ grant role DATADOG to user <USER>;
         # disable_generic_tags: true
     ```
 
-    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour.
+    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour. 
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 

@@ -130,9 +130,9 @@ Internal failure for <RULE_ID_KEY>=<RULE_ID> name="<RULE_NAME>"- Contact Datadog
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ko/security/cloud_siem/
-[2]: https://app.datadoghq.com/security/siem/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name
+[2]: https://app.datadoghq.com/security/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name 
 [3]: https://docs.datadoghq.com/ko/developers/integrations/agent_integration/
-[4]: https://app.datadoghq.com/security/siem/rules/new?product=siem
-[5]: https://github.com/DataDog/integrations-extras
+[4]: https://app.datadoghq.com/security/rules/new?product=siem
+[5]: https://github.com/DataDog/integrations-extras 
 [6]: https://github.com/DataDog/marketplace
 [7]: https://docs.datadoghq.com/ko/security/cloud_siem/detection_rules

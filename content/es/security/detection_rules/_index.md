@@ -200,5 +200,5 @@ El proceso de obsolescencia de las reglas es el siguiente:
 [13]: /es/security/cloud_security_management/misconfigurations/custom_rules
 [14]: /es/security/workload_protection/workload_security_rules?tab=host#create-custom-rules
 [15]: https://app.datadoghq.com/security/configuration/
-[16]: https://app.datadoghq.com/security/siem/rules
+[16]: https://app.datadoghq.com/security/rules
 [17]: https://app.datadoghq.com/security/workload-protection/detection-rules

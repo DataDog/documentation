@@ -171,7 +171,7 @@ Datadog は、サーバーから Meraki にアクセスする際に問題が発�
 - [Datadog で Cisco Meraki を監視する][13]
 
 [1]: https://app.datadoghq.com/devices
-[2]: https://app.datadoghq.com/security/siem/home
+[2]: https://app.datadoghq.com/security/home
 [3]: https://developer.cisco.com/meraki/api/get-network-appliance-security-events/
 [4]: https://app.datadoghq.com/logs/pipelines?search=meraki
 [5]: https://developer.cisco.com/meraki/api/get-network-events/

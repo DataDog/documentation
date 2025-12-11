@@ -81,15 +81,15 @@ HCP Terraform のログを確認するには、Datadog ログで `source:hcp-ter
 ### インストール
 
 **ステップ 1: HCP Terraform 用の組織トークンを作成する**
-1. [HashiCorp アカウント](https://app.terraform.io/)にログインし、該当する組織を選択して **Settings** をクリックします。
-2. **Security** の下にある **API tokens** をクリックします。
-3. **Create an organization token** をクリックします。
-4. 必要に応じて有効期限を設定します。
-5. **Generate token** をクリックします。
+1. [HashiCorp アカウント](https://app.terraform.io/)にログインし、該当する組織を選択して **Settings** をクリックします。 
+2. **Security** の下にある **API tokens** をクリックします。 
+3. **Create an organization token** をクリックします。 
+4. 必要に応じて有効期限を設定します。 
+5. **Generate token** をクリックします。 
 6. 作成された組織トークンをコピーし、保存しておきます。
 
 **ステップ 2: Datadog インテグレーションを作成する**
-1. 下記の **Organization Token** フィールドに上記で作成したトークンを貼り付けます。
+1. 下記の **Organization Token** フィールドに上記で作成したトークンを貼り付けます。 
 2. アカウント名を入力します。
 
 ### 構成
@@ -118,7 +118,7 @@ hcp-terraform にはイベントは含まれていません。
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/security/siem/home
+[1]: https://app.datadoghq.com/security/home
 [2]: https://app.datadoghq.com/logs/pipelines?search=hcp-terraform
 [3]: https://app.datadoghq.com/dash/integration/31325/hcp-terraform-overview
 [4]: https://developer.hashicorp.com/terraform/cloud-docs/api-docs/organizations#show-the-entitlement-set

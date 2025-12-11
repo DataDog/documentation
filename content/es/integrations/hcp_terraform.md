@@ -120,7 +120,7 @@ hcp-terraform no incluye eventos.
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-[1]: https://app.datadoghq.com/security/siem/home
+[1]: https://app.datadoghq.com/security/home
 [2]: https://app.datadoghq.com/logs/pipelines?search=hcp-terraform
 [3]: https://app.datadoghq.com/dash/integration/31325/hcp-terraform-overview
 [4]: https://developer.hashicorp.com/terraform/cloud-docs/api-docs/organizations#show-the-entitlement-set

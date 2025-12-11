@@ -41,9 +41,9 @@ Para crear una integración de Datadog, consulta la sección de [creación de un
 
 ## Verificar tu regla de detección en producción
 
-Para ver la regla de detección lista para utilizar, el cuadro de integración relevante debe ser `Installed` en Datadog y Cloud SIEM debe estar habilitado.
+Para ver la regla de detección lista para utilizar, el cuadro de integración relevante debe ser `Installed` en Datadog y Cloud SIEM debe estar habilitado. 
 
-1. Busca tu regla de detección en la [lista de reglas de detección][2] y expándela.
+1. Busca tu regla de detección en la [lista de reglas de detección][2] y expándela. 
 2. Asegúrate de que tus logotipos se muestran correctamente.
 3. Comprueba que la regla está habilitada.
 
@@ -79,7 +79,7 @@ Este error significa que el JSON ubicado en `<FILE_PATH>` se considera un JSON i
 ```
 partnerRuleId is empty for rule name="<RULE_NAME>" - partnerRuleId=<NEW_RULE_ID> is available
 ```
-Se requiere un `partnerRuleId` para cada regla y este no está presente. Utiliza el `<NEW_RULE_ID>` generado.
+Se requiere un `partnerRuleId` para cada regla y este no está presente. Utiliza el `<NEW_RULE_ID>` generado. 
 
 ```
 partnerRuleId=<RULE_ID> is in the incorrect format for rule name="<RULE_NAME>", it must follow the format=^[a-z0-9]{3}-[a-z0-9]{3}-[a-z0-9]{3}$ - partnerRuleId=<NEW_RULE_ID> is available
@@ -141,9 +141,9 @@ Ponte en contacto con Datadog para abordar el problema.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/es/security/cloud_siem/
-[2]: https://app.datadoghq.com/security/siem/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name
+[2]: https://app.datadoghq.com/security/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name 
 [3]: https://docs.datadoghq.com/es/developers/integrations/agent_integration/
-[4]: https://app.datadoghq.com/security/siem/rules/new?product=siem
-[5]: https://github.com/DataDog/integrations-extras
+[4]: https://app.datadoghq.com/security/rules/new?product=siem
+[5]: https://github.com/DataDog/integrations-extras 
 [6]: https://github.com/DataDog/marketplace
 [7]: https://docs.datadoghq.com/es/security/cloud_siem/log_detection_rules

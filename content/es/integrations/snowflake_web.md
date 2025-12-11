@@ -103,7 +103,7 @@ Se recomienda la integración del Snowflake original con el Agent para configura
 
 #### Conecta tu cuenta de Snowflake
 
-1. Busca la [URL de tu cuenta de Snowflake][2].
+1. Busca la [URL de tu cuenta de Snowflake][2]. 
 
 ![Menú de la cuenta con la opción de copiar URL de la cuenta seleccionada en la interfaz de Snowflake][3]
 
@@ -141,7 +141,7 @@ La siguiente tabla describe los tipos de logs recopilados y qué tablas de Snowf
   </tr>
   <tr>
     <td style="width:10%;">Seguridad</td>
-    <td>Utiliza estos logs con <a href="https://app.datadoghq.com/security/siem/home">Cloud SIEM</a> para detectar y responder mejor a las amenazas de seguridad en tu entorno.</td>
+    <td>Utiliza estos logs con <a href="https://app.datadoghq.com/security/home">Cloud SIEM</a> para detectar y responder mejor a las amenazas de seguridad en tu entorno.</td>
     <td> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/login_history">SNOWFLAKE.ACCOUNT_USAGE.LOGIN_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/sessions">SNOWFLAKE.ACCOUNT_USAGE.SESSIONS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/grants_to_users">SNOWFLAKE.ACCOUNT_USAGE.GRANTS_TO_USERS</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/data_transfer_history">SNOWFLAKE.ACCOUNT_USAGE.DATA_TRANSFER_HISTORY</a> <br> <a href="https://docs.snowflake.com/en/sql-reference/account-usage/stages">SNOWFLAKE.ACCOUNT_USAGE.STAGES</a></td>
   </tr>
   <tr>
@@ -284,7 +284,7 @@ Las [tablas de referencia][12] te permiten enriquecer y unir automáticamente tu
 9. Ve a Tablas de referencia y busca la tabla que acabas de crear, utilizando el nombre de la tabla de Datadog.
 10. Revisa el estado de tu tabla de Snowflake que se encuentra en la sección **Archivo**. Si aparece algún error, resuélvelo en Snowflake.
 
-## Prácticas recomendadas para la ingesta de tablas de Snowflake en tablas de referencia de Datadog
+## Prácticas recomendadas para la ingesta de tablas de Snowflake en tablas de referencia de Datadog 
 
 Al integrar datos de Snowflake en Datadog, es importante estructurar las tablas de forma eficiente para optimizar el rendimiento y los costes. Esta sección te ofrece recomendaciones sobre cómo preparar tus tablas de Snowflake para la ingesta.
 
@@ -492,7 +492,7 @@ El check de Snowflake está incluido en el paquete del [Datadog Agent][24].
      # disable_generic_tags: true
    ```
 
-   <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour.
+   <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour. 
    Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
    <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
@@ -670,8 +670,8 @@ Snowflake no incluye ningún evento.
 
 ### Agent: checks de servicio
 
-**snowflake.can_connect**
-Devuelve `CRITICAL` si el check no puede autenticar las credenciales de Snowflake. En caso contrario, devuelve `OK`.
+**snowflake.can_connect**  
+Devuelve `CRITICAL` si el check no puede autenticar las credenciales de Snowflake. En caso contrario, devuelve `OK`.  
 _Estados: ok, crítico_
 
 ## Agent: solucionar problemas

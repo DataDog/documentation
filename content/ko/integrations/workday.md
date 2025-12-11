@@ -141,7 +141,7 @@ Workday 통합은 이벤트를 포함하지 않습니다.
 
 도움이 필요하신가요? [Datadog 지원팀][5]에 문의하세요.
 
-[1]: https://app.datadoghq.com/security/siem/home
+[1]: https://app.datadoghq.com/security/home
 [2]: https://app.datadoghq.com/logs/pipelines?search=workday
 [3]: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html#privacy/v1/get-/activityLogging
 [4]: https://github.com/DataDog/integrations-internal-core/blob/master/workday/assets/service_checks.json

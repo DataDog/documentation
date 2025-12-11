@@ -143,7 +143,7 @@ Zendesk 티켓을 생성하여 그룹에 할당할 수 있습니다. 먼저 Data
 도움이 필요하세요? [Datadog 지원팀][13]에 문의하세요.
 
 [1]: https://developer.zendesk.com/api-reference/ticketing/account-configuration/audit_logs/
-[2]: https://app.datadoghq.com/security/siem/home
+[2]: https://app.datadoghq.com/security/home
 [3]: https://app.datadoghq.com
 [4]: https://app.datadoghq.com/account/settings#integrations/zendesk
 [5]: https://docs.datadoghq.com/ko/real_user_monitoring/

@@ -111,7 +111,7 @@ Los clientes de SentinelOne pueden recopilar alertas, amenazas y logs de activid
 
    Configura los siguientes parámetros:
 
-   - `DdApiKey`: Tu clave de API Datadog
+   - `DdApiKey`: Tu clave de API Datadog 
    - `DdSite`: Tu [sitio Datadog][6]
    - `DdTags`: `source:sentinelone,service:sentinelone,endpoint:EDR_Telemetry`
 
@@ -153,7 +153,7 @@ El SentinelOne integración no incluye ninguna eventos.
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
 
-[1]: https://app.datadoghq.com/security/siem/home
+[1]: https://app.datadoghq.com/security/home
 [2]: https://www.sentinelone.com/platform/singularity-cloud-funnel/
 [3]: https://community.sentinelone.com/s/article/000006282
 [4]: https://community.sentinelone.com/s/article/000006285

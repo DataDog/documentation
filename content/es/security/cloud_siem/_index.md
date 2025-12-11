@@ -72,7 +72,7 @@ Cloud SIEM integra la telemetría en la nube y on-premises directamente en los f
 
 ### Control flexible de los costes de los datos de seguridad
 
-A medida que tu organización crece, es fundamental controlar el coste de ingesta de los logs de seguridad sin comprometer la visibilidad. Cloud SIEM está integrado con Datadog Log Management para que puedas elegir la capacidad de retención y consulta adecuada para tus logs de seguridad. Esta flexibilidad te ayuda a equilibrar la rentabilidad con tus necesidades de detección de amenazas.
+A medida que tu organización crece, es fundamental controlar el coste de ingesta de los logs de seguridad sin comprometer la visibilidad. Cloud SIEM está integrado con Datadog Log Management para que puedas elegir la capacidad de retención y consulta adecuada para tus logs de seguridad. Esta flexibilidad te ayuda a equilibrar la rentabilidad con tus necesidades de detección de amenazas. 
 
 Almacena logs utilizando una de las opciones disponibles:
 - [Indexación estándar][6] para logs que deben consultarse frecuentemente con el mayor número de cálculos.
@@ -264,7 +264,7 @@ Ve qué reglas son las más ruidosas calculando el porcentaje de señales que se
 
 [1]: https://securitylabs.datadoghq.com/
 [2]: https://www.datadoghq.com/product/cloud-siem/
-[3]: https://app.datadoghq.com/security/siem/home?
+[3]: https://app.datadoghq.com/security/home?
 [4]: /es/getting_started/security/cloud_siem/
 [5]: /es/security/cloud_siem/investigate_security_signals/#case-management
 [6]: /es/logs/log_configuration/indexes

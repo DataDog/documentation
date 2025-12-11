@@ -141,7 +141,7 @@ Workday インテグレーションには、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/security/siem/home
+[1]: https://app.datadoghq.com/security/home
 [2]: https://app.datadoghq.com/logs/pipelines?search=workday
 [3]: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html#privacy/v1/get-/activityLogging
 [4]: https://github.com/DataDog/integrations-internal-core/blob/master/workday/assets/service_checks.json

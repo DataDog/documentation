@@ -127,7 +127,7 @@ Después de mover el índice a la primera posición, revisa la configuración y 
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
 [8]: https://app.datadoghq.com/security/landing
-[9]: https://app.datadoghq.com/security/siem/content-packs
+[9]: https://app.datadoghq.com/security/content-packs
 [10]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [11]: https://app.datadoghq.com/security/configuration/siem/setup
 [12]: /es/security/default_rules/#cat-cloud-siem-log-detection
@@ -137,7 +137,7 @@ Después de mover el índice a la primera posición, revisa la configuración y 
 [16]: https://app.datadoghq.com/security/configuration/notification-rules
 [17]: /es/security/notifications/rules/
 [18]: https://app.datadoghq.com/security/configuration/reports
-[19]: https://app.datadoghq.com/security/siem/investigator/
+[19]: https://app.datadoghq.com/security/investigator/
 [20]: /es/security/cloud_siem/investigator
 [21]: https://app.datadoghq.com/dashboard/lists/preset/100
 [22]: /es/dashboards/#overview
