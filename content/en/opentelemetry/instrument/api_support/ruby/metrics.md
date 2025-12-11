@@ -38,7 +38,7 @@ Follow these steps to enable OTel Metrics API support in your Ruby application.
    ```sh
    export DD_METRICS_OTEL_ENABLED=true
    ```
-3. Configure your application:
+4. Configure your application:
    ```ruby
    require 'opentelemetry/sdk'
    require 'datadog/opentelemetry'
