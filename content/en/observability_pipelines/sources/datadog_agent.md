@@ -1,6 +1,12 @@
 ---
 title: Datadog Agent Source
 disable_toc: false
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+    tag: Blog
+    text: Manage metric volume and tags in your environment with Observability Pipelines
+
 ---
 
 Use Observability Pipelines' Datadog Agent source to receive logs from the Datadog Agent. Select and set up this source when you [set up a pipeline][1].
@@ -37,6 +43,10 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /containers/docker/log/?tab=containerinstallation#linux

@@ -109,7 +109,7 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 HTTP: {{< region-param key=agent_http_endpoint code="true" >}}<br>
 Other: See [logs endpoints][32]
 
-[HIPAA logs legacy][31]
+[HIPAA logs legacy][31] (Deprecated, TCP not supported)
 : {{< region-param key=hipaa_logs_legacy code="true" >}}
 
 [Metrics][26], [Service Checks][27], [Events][28], and other Agent metadata

@@ -3059,11 +3059,24 @@ components:
           description: Metrics query definition.
           example: avg:system.cpu.user{*}
           type: string
+        semantic_mode:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricSemanticMode'
       required:
       - data_source
       - query
       - name
       type: object
+    FormulaAndFunctionMetricSemanticMode:
+      description: Semantic mode for metrics queries. This determines how metrics
+        from different sources are combined or displayed.
+      enum:
+      - combined
+      - native
+      example: combined
+      type: string
+      x-enum-varnames:
+      - COMBINED
+      - NATIVE
     FormulaAndFunctionProcessQueryDataSource:
       description: Data sources that rely on the process backend.
       enum:
@@ -7362,6 +7375,12 @@ components:
     Monitor:
       description: Object describing a monitor.
       properties:
+        assets:
+          description: The list of monitor assets tied to a monitor, which represents
+            key links for users to take action on monitor alerts (for example, runbooks).
+          items:
+            $ref: '#/components/schemas/MonitorAsset'
+          type: array
         created:
           description: Timestamp of the monitor creation.
           format: date-time
@@ -7445,6 +7464,52 @@ components:
       - type
       - query
       type: object
+    MonitorAsset:
+      description: 'Represents key links tied to a monitor to help users take action
+        on alerts.
+
+        This feature is in Preview and only available to users with the feature enabled.'
+      properties:
+        category:
+          $ref: '#/components/schemas/MonitorAssetCategory'
+        name:
+          description: Name for the monitor asset
+          example: Monitor Runbook
+          type: string
+        resource_key:
+          description: Represents the identifier of the internal Datadog resource
+            that this asset represents. IDs in this field should be passed in as strings.
+          example: '12345'
+          type: string
+        resource_type:
+          $ref: '#/components/schemas/MonitorAssetResourceType'
+        url:
+          description: URL link for the asset. For links with an internal resource
+            type set, this should be the relative path to where the Datadog domain
+            is appended internally. For external links, this should be the full URL
+            path.
+          example: /notebooks/12345
+          type: string
+      required:
+      - name
+      - url
+      - category
+      type: object
+    MonitorAssetCategory:
+      description: Indicates the type of asset this entity represents on a monitor.
+      enum:
+      - runbook
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - RUNBOOK
+    MonitorAssetResourceType:
+      description: Type of internal Datadog resource associated with a monitor asset.
+      enum:
+      - notebook
+      type: string
+      x-enum-varnames:
+      - NOTEBOOK
     MonitorDeviceID:
       description: ID of the device the Synthetics monitor is running on. Same as
         `SyntheticsDeviceID`.
@@ -8559,6 +8624,13 @@ components:
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
+        assets:
+          description: The list of monitor assets tied to a monitor, which represents
+            key links for users to take action on monitor alerts (for example, runbooks).
+          items:
+            $ref: '#/components/schemas/MonitorAsset'
+          nullable: true
+          type: array
         created:
           description: Timestamp of the monitor creation.
           format: date-time
@@ -21077,6 +21149,11 @@ components:
             for the given date and given organization.
           format: int64
           type: integer
+        cloud_cost_management_oci_host_count_avg:
+          description: Average host count for Cloud Cost Management on OCI for the
+            given date and organization.
+          format: int64
+          type: integer
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
@@ -21311,6 +21388,11 @@ components:
             Plus over all hours in the current date for the given org.
           format: int64
           type: integer
+        eph_infra_host_proxmox_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
         error_tracking_apm_error_events_sum:
           description: Shows the sum of all Error Tracking APM error events over all
             hours in the current date for the given org.
@@ -21430,6 +21512,11 @@ components:
         incident_management_monthly_active_users_hwm:
           description: Shows the high-water mark of incident management monthly active
             users over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for all organizations.
           format: int64
           type: integer
         indexed_events_count_sum:
@@ -21600,6 +21687,16 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_sum:
+          description: Sum of all Proxmox hosts over all hours in the current date
+            for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_top99p:
+          description: 99th percentile of all Proxmox hosts over all hours in the
+            current date for all organizations.
           format: int64
           type: integer
         published_app_hwm:
@@ -22185,6 +22282,11 @@ components:
             for the given date and given org.
           format: int64
           type: integer
+        cloud_cost_management_oci_host_count_avg:
+          description: Average host count for Cloud Cost Management on OCI for the
+            given date and organization.
+          format: int64
+          type: integer
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
@@ -22425,6 +22527,11 @@ components:
             Plus over all hours in the current date for the given org.
           format: int64
           type: integer
+        eph_infra_host_proxmox_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current date for the given organization.
+          format: int64
+          type: integer
         error_tracking_apm_error_events_sum:
           description: Shows the sum of all Error Tracking APM error events over all
             hours in the current date for the given org.
@@ -22546,6 +22653,11 @@ components:
         incident_management_monthly_active_users_hwm:
           description: Shows the high-water mark of incident management monthly active
             users over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        incident_management_seats_hwm:
+          description: Shows the high-water mark of Incident Management seats over
+            all hours on the current date for the given organization.
           format: int64
           type: integer
         indexed_events_count_sum:
@@ -22712,6 +22824,16 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for the given org.
+          format: int64
+          type: integer
+        proxmox_host_sum:
+          description: Sum of all Proxmox hosts over all hours in the current date
+            for the given organization.
+          format: int64
+          type: integer
+        proxmox_host_top99p:
+          description: 99th percentile of all Proxmox hosts over all hours in the
+            current date for the given organization.
           format: int64
           type: integer
         public_id:
@@ -23303,6 +23425,11 @@ components:
             all cloud providers.
           format: int64
           type: integer
+        cloud_cost_management_oci_host_count_avg_sum:
+          description: Sum of the average host counts for Cloud Cost Management on
+            OCI.
+          format: int64
+          type: integer
         cloud_siem_events_agg_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current month for all organizations.
@@ -23544,6 +23671,11 @@ components:
             Plus over all hours in the current month for all organizations.
           format: int64
           type: integer
+        eph_infra_host_proxmox_agg_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_apm_error_events_agg_sum:
           description: Shows the sum of all Error Tracking APM error events over all
             hours in the current month for all organizations.
@@ -23663,6 +23795,11 @@ components:
         incident_management_monthly_active_users_hwm_sum:
           description: Shows sum of the high-water marks of incident management monthly
             active users in the current month for all organizations.
+          format: int64
+          type: integer
+        incident_management_seats_hwm_sum:
+          description: Shows the sum of the high-water marks of Incident Management
+            seats over all hours in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
@@ -23854,6 +23991,16 @@ components:
           type: integer
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_agg_sum:
+          description: Sum of all Proxmox hosts over all hours in the current month
+            for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_top99p_sum:
+          description: Sum of the 99th percentile of all Proxmox hosts over all hours
             in the current month for all organizations.
           format: int64
           type: integer
@@ -32249,6 +32396,13 @@ paths:
           all current active downtimes for the monitor.
         in: query
         name: with_downtimes
+        required: false
+        schema:
+          type: boolean
+      - description: If this argument is set to `true`, the returned data includes
+          all assets tied to this monitor.
+        in: query
+        name: with_assets
         required: false
         schema:
           type: boolean
