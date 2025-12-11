@@ -57,7 +57,7 @@ To iterate on an existing app:
 
 ### Build an app from a blueprint
 
-Blueprints are helpful templates that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
+Blueprints are helpful app templates that cover common use cases and showcase best practices for setting up apps. They come loaded with demo data to familiarize yourself with the app's functions. Some blueprints create a starter app that you can customize, like [Manage Datastore][24] and [Export Synthetics][25]. Blueprints with "how to" in their title, like [How to: Custom Code][26], are templates with built-in tutorials for App Builder features. 
 
 1. From [App Builder][1], click the [Blueprints][2] tab. Alternatively, click **New App**, then **Start with Blueprint** in the onboarding modal.
 1. Find the blueprint you want to use and click **Use Blueprint**.
@@ -250,3 +250,6 @@ To access the Debug Console, go to [your apps list][14] and click **Edit app** {
 [21]: /actions/app_builder/build/#create-a-custom-app
 [22]: /actions/app_builder/build/#build-an-app-with-ai
 [23]: /actions/app_builder/build/#see-whats-possible-with-app-playground
+[24]: https://app.datadoghq.com/app-builder/apps/edit?template=manage-datastore&viewMode=templatePreview
+[25]: https://app.datadoghq.com/app-builder/apps/edit?template=export-synthetics&viewMode=templatePreview
+[26]: https://app.datadoghq.com/app-builder/apps/edit?template=how_to__write_custom_code&viewMode=templatePreview
