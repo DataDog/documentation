@@ -44,6 +44,9 @@ Supported Agent versions
   ON SERVER
   ADD EVENT sqlserver.xml_deadlock_report
   ADD TARGET package0.ring_buffer
+  (
+    SET MAX_MEMORY = 1024
+  )
   WITH (
       MAX_MEMORY = 1024 KB,
       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
@@ -76,6 +79,9 @@ Supported Agent versions
   ON database
   ADD EVENT sqlserver.database_xml_deadlock_report
   ADD TARGET package0.ring_buffer
+  (
+    SET MAX_MEMORY = 1024
+  )
   WITH (
       MAX_MEMORY = 1024 KB,
       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,

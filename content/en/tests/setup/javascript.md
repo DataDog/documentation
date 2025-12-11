@@ -763,6 +763,9 @@ Jest's [--forceExit][14] option may cause data loss. Datadog tries to send data 
 ### Mocha's `--exit`
 Mocha's [--exit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
 
+### Vitest's browser mode
+Vitest's [browser mode][18] is not supported.
+
 ## Best practices
 
 Follow these practices to take full advantage of the testing framework and Test Optimization.
@@ -851,3 +854,4 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [15]: https://mochajs.org/#-exit
 [16]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [17]: https://www.npmjs.com/package/mocha-each
+[18]: https://vitest.dev/guide/browser/
