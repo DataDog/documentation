@@ -1,6 +1,6 @@
 ---
 title: Input Parameters
-description: Input parameters reduces maintenance overhead by managing one app that can use the same logic in different contexts.
+description: Input parameters allow you to embed the same app in multiple dashboards or notebooks using different configurations for each instance.
 disable_toc: false
 ---
 
