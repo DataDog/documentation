@@ -80,6 +80,12 @@ When you launch the Dev Agent, it runs the setup command at startup and can use 
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
+## Troubleshooting
+
+### Creation of PRs fails unexpectedly
+
+In some cases, especially in repositories with many branches, GitHub fails to run the permission check when creating the branch for the session. If you're using a custom GitHub app, a known workaround is to add the `workflows:write` permission to your app in [Source Code Integration][5]. Beware that this will allow Bits AI to create workflows on your repository, which has security implications.
+
 [1]: /error_tracking
 [2]: /security/code_security  
 [3]: /profiler/
