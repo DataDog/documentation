@@ -163,7 +163,7 @@ spec:
         baz: qux
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, pod tag names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics. In this example, pod tag names are prefixed with `<PREFIX>_`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -174,7 +174,7 @@ spec:
   global:
     kubernetesResourcesLabelsAsTags:
       pods:
-        "*": <PREFIX>_%%label%%
+        "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 
 {{% /tab %}}
@@ -206,13 +206,13 @@ datadog:
       baz: qux
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, pod tag names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics. In this example, pod tag names are prefixed with `<PREFIX>_`:
 
 ```yaml
 datadog:
   kubernetesResourcesLabelsAsTags:
     pods:
-      "*": <PREFIX>_%%label%%
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 
 {{% /tab %}}
@@ -235,10 +235,10 @@ For example, you could set up:
 DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS='{"nodes":{"kubernetes.io/arch": "arch"},"pods":{"baz":"qux"}}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, pod tag names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics. In this example, pod tag names are prefixed with `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS='{"pods":{"*": "<PREFIX>_%%label%%"}}'
+DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS='{"pods":{"*": "<PREFIX>_%%label%%"}}' # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 
 {{% /tab %}}
@@ -337,7 +337,7 @@ spec:
   global:
     kubernetesResourcesAnnotationsAsTags:
       pods:
-        "*": <PREFIX>_%%annotation%% # 
+        "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 
 {{% /tab %}}
@@ -369,13 +369,13 @@ datadog:
       baz: qux
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource annotations as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, pod tag names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all resource annotations as tags to your metrics. In this example, pod tag names are prefixed with `<PREFIX>_`:
 
 ```yaml
 datadog:
   kubernetesResourcesAnnotationsAsTags:
     pods:
-      "*": <PREFIX>_%%annotation%%
+      "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 
 {{% /tab %}}
@@ -398,10 +398,10 @@ For example, you could set up:
 DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS='{"nodes":{"kubernetes.io/arch": "arch"},"pods":{"baz":"qux"}}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource annotations as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, pod tag names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all resource annotations as tags to your metrics. In this example, pod tag names are prefixed with `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS='{"pods":{"*": "<PREFIX>_%%annotation%%"}}'
+DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS='{"pods":{"*": "<PREFIX>_%%annotation%%"}}' # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 
 {{% /tab %}}
@@ -486,7 +486,7 @@ metadata:
 spec:
   global:
     nodeLabelsAsTags:
-      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics before version 7.73
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 
@@ -512,7 +512,7 @@ For Agent v7.24.0+, use the following environment variable configuration to add 
 ```yaml
 datadog:
   nodeLabelsAsTags:
-    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics before version 7.73
+    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 
@@ -532,7 +532,7 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"kubernetes.io/arch":"arch"}'
 For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' tag names are prefixed with `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM metrics before version 7.73
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -586,7 +586,7 @@ metadata:
 spec:
   global:
     podLabelsAsTags:
-      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics before version 7.73
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 
@@ -606,12 +606,12 @@ datadog:
     app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 datadog:
   podLabelsAsTags:
-    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
+    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 
@@ -628,10 +628,10 @@ For example, you could set up:
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -675,7 +675,7 @@ spec:
       app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -685,7 +685,7 @@ metadata:
 spec:
   global:
     podAnnotationsAsTags:
-      "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM metrics
+      "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 
@@ -705,12 +705,12 @@ datadog:
     app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod annotation as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod annotation as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 datadog:
   podAnnotationsAsTags:
-    "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM metrics
+    "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 
@@ -727,10 +727,10 @@ For example, you could set up:
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
+DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}' # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -774,7 +774,7 @@ spec:
       app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -784,7 +784,7 @@ metadata:
 spec:
   global:
     namespaceLabelsAsTags:
-      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 
@@ -804,12 +804,12 @@ datadog:
     app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 datadog:
   namespaceLabelsAsTags:
-    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
+    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 
@@ -826,10 +826,10 @@ For example, you could set up:
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM `kubernetes_state.*` metrics prior to agent version 7.73.0
 ```
 {{% /tab %}}
 {{< /tabs >}}
