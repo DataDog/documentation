@@ -3,6 +3,10 @@
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."
   },
+  "apm": {
+    "name": "APM",
+    "description": "Observe, troubleshoot, and improve cloud-scale applications with all telemetry in context"
+  },
   "apm-retention-filters": {
     "name": "APM Retention Filters",
     "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) on the Trace Retention page for more information."
