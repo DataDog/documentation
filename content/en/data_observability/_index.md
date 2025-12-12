@@ -44,7 +44,7 @@ You can configure static thresholds or rely on automatic anomaly detection to id
 
 ## Trace lineage and understand impact
 
-{{< img src="data_observability/data_observability_lineage_trace-temp.png" alt="Lineage graph tracing data flow from Kafka through a failed Spark job to a Snowflake table with an alert and four downstream nodes labeled Upstream issue." style="width:100%;" >}}
+{{< img src="data_observability/data-obs-lineage.png" alt="Lineage graph tracing data flow from Kafka through a failed Spark job to a Snowflake table with an alert and four downstream nodes labeled Upstream issue." style="width:100%;" >}}
 
 Data Observability provides end-to-end lineage, helping you:
 
@@ -54,7 +54,7 @@ Data Observability provides end-to-end lineage, helping you:
 
 ## Correlate with pipeline and infrastructure activity
 
-{{< img src="data_observability/data_observability_pipeline_infra_correlation-temp.png" alt="Lineage graph showing a failed Spark job with a missing S3 path error, plus a side panel with job run stats and duration trends." style="width:100%;" >}}
+{{< img src="data_observability/data-obs-correlate-trace.png" alt="Lineage graph showing a failed Spark job with a missing S3 path error, plus a side panel with job run stats and duration trends." style="width:100%;" >}}
 
 Understand how pipeline activity and infrastructure events impact your data. Datadog ingests logs and metadata from pipeline tools and user interactions to provide context for data quality issues, including:
 

@@ -25,21 +25,21 @@ With Quality Monitoring, you can:
 ## Supported data sources
 
 {{< whatsnext desc="Connect to these data warehouses:" >}}
-   {{< nextlink href="data_observability/integrations/data_warehouses/snowflake" >}}Snowflake{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/data_warehouses/Databricks" >}}Databricks{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/warehouse/snowflake" >}}Snowflake{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/warehouse/Databricks" >}}Databricks{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/warehouse/bigquery" >}}BigQuery{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Integrate with these transformation and orchestration tools:" >}}
-   {{< nextlink href="data_observability/integrations/transformation_and_orchestration/dbtcloud" >}}dbt Cloud{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/transformation_and_orchestration/dbtcore" >}}dbt Core{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/transformation_and_orchestration/airflow" >}}Airflow{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/transformation/dbtcloud" >}}dbt Cloud{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/transformation/dbtcore" >}}dbt Core{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/transformation/airflow" >}}Airflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Track downstream impact in these BI tools:" >}}
-   {{< nextlink href="data_observability/integrations/bitools/tableau" >}}Tableau{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/bitools/sigma" >}}Sigma{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/bitools/metabase" >}}Metabase{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/business_intelligence/metabase" >}}Metabase{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
