@@ -36,6 +36,18 @@ Each log line is pre-scanned to redact any potentially sensitive information bef
 The LLM model can classify errors with similar messages into distinct yet related subdomains. For example, if the error message is <code>Cannot connect to docker daemon</code>, it is usually categorized under <code>domain:platform</code> and <code>subdomain:network</code>. However, the LLM model may sometimes classify it under <code>subdomain:infrastructure</code> instead.
 </div>
 
+#### Does Job Failure Analysis require all logs to be indexed?
+
+Job Failure Analysis needs:
+* All logs from the **failing job** being analyzed
+* All logs from at **least one successful job** with the same job name, pipeline name, and repository. This is needed to identify which logs are relevant in the failing job.
+
+The following [exclusion filter][4] is compatible with Job Failure Analysis:
+* Query: `datadog.product:cipipeline @ci.is_failure:false`
+* Sampling rule: exclude 90% of `@ci.job.id`
+
+This setup reduces log volume while still supporting Job Failure Analysis, as long as your CI pipeline runs enough successful jobs to ensure logs are indexed for at least one of them.
+
 #### Domains and Subdomains
 
 Errors are categorized with a domain and subdomain:
@@ -144,6 +156,7 @@ For PR Comments to be posted, your repositories need to be integrated with Datad
 [1]:/continuous_integration/pipelines/github/
 [2]:/continuous_integration/pipelines/gitlab/
 [3]:https://app.datadoghq.com/ci/pipelines/health/
+[4]:/logs/log_configuration/indexes#exclusion-filters
 [4]:/resources/json/civisibility-ci-jobs-failure-analysis-dashboard.json
 [5]:/dashboards/
 [6]:/continuous_integration/pipelines/#setup
