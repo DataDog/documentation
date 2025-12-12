@@ -187,6 +187,120 @@ The [Datadog Windows Web App module][2] only deploys the Web App resource and ex
 [5]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_web_app
 
 {{% /tab %}}
+{{% tab "Bicep" %}}
+
+Update your existing Web App to include the necessary Datadog App Settings and extension, as follows:
+
+```bicep
+@secure()
+param datadogApiKey string
+
+resource webApp 'Microsoft.Web/sites@2025-03-01' = {
+  // ...
+  properties: {
+    // ...
+    siteConfig: {
+      // ...
+      appSettings: [
+        //... Your existing app settings
+        { name: 'DD_API_KEY', value: datadogApiKey }
+        { name: 'DD_SITE', value: 'datadoghq.com' }  // Replace with your Datadog site
+        { name: 'DD_SERVICE', value: 'my-service' }  // Replace with your service name
+        { name: 'DD_ENV', value: 'prod' }            // Replace with your environment (e.g. prod, staging)
+        { name: 'DD_VERSION', value: '0.0.0' }       // Replace with your application version
+        { name: 'DD_LOGS_INJECTION', value: 'true' }
+        { name: 'DD_TRACE_ENABLED', value: 'true' }
+        // Add any additional options here
+      ]
+    }
+  }
+}
+
+resource datadogExtension 'Microsoft.Web/sites/siteextensions@2025-03-01' = {
+  parent: webApp
+  // Uncomment the extension for your runtime:
+  // name: 'Datadog.AzureAppServices.Node.Apm'
+  // name: 'Datadog.AzureAppServices.DotNet'
+  // name: 'Datadog.AzureAppServices.Java.Apm'
+}
+```
+
+Deploy your updated template:
+
+```bash
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+**Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work.
+
+See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+
+
+{{% /tab %}}
+{{% tab "ARM Template" %}}
+
+Update your existing Web App to include the necessary Datadog App Settings and sidecar, as follows:
+
+```jsonc
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string"
+    },
+    // ...
+    "datadogApiKey": {
+      "type": "securestring"
+    }
+  },
+  "resources": {
+    "webApp": {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2025-03-01",
+      "name": "[parameters('webAppName')]",
+      // ...
+      "properties": {
+        // ...
+        "siteConfig": {
+          // ...
+          "appSettings": [
+            //... Your existing app settings
+            { "name": "DD_API_KEY", "value": "[parameters('datadogApiKey')]" },
+            { "name": "DD_SITE", "value": "datadoghq.com" }, // Replace with your Datadog site
+            { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
+            { "name": "DD_ENV", "value": "prod" },           // Replace with your environment (e.g. prod, staging)
+            { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
+            { "name": "DD_LOGS_INJECTION", "value": "true" },
+            { "name": "DD_TRACE_ENABLED", "value": "true" }
+            // Add any additional options here
+          ]
+        }
+      }
+    },
+    "datadogExtension": {
+      "type": "Microsoft.Web/sites/siteextensions",
+      "apiVersion": "2025-03-01",
+      // Uncomment the extension for your runtime:
+      // "name": "[concat(parameters('webAppName'), '/Datadog.AzureAppServices.Node.Apm')]",
+      // "name": "[concat(parameters('webAppName'), '/Datadog.AzureAppServices.DotNet')]",
+      // "name": "[concat(parameters('webAppName'), '/Datadog.AzureAppServices.Java.Apm')]",
+    }
+  }
+}
+```
+
+Deploy your updated template:
+
+```bash
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+**Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work.
+
+See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+
+{{% /tab %}}
 {{% tab "Manual" %}}
 
 1. In your [Azure Portal][1], navigate to the dashboard for the Azure app you wish to instrument with Datadog.
