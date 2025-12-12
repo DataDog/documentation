@@ -231,7 +231,7 @@ Deploy your updated template:
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-**Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work.
+**Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work. For updates, you should ensure that the app is stopped before deploying the template, and started again after the deployment finishes.
 
 See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
 
@@ -296,7 +296,7 @@ Deploy your updated template:
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-**Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work.
+**Note**: You will need to manually (or via a script) stop and start the app, otherwise automatic tracing will not work. For updates, you should ensure that the app is stopped before deploying the template, and started again after the deployment finishes.
 
 See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
 
