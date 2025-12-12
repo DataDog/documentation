@@ -272,7 +272,7 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
 
 
 {{% /tab %}}
-{{% tab "ARM" %}}
+{{% tab "ARM Template" %}}
 
 Update your existing Web App to include the necessary Datadog App Settings and sidecar, as follows:
 
