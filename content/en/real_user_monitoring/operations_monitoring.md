@@ -171,7 +171,7 @@ options?: {
 GlobalRumMonitor.get().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-	reason: RUMFeatureOperationFailureReason,	// .error, .abandoned, timeout, .other
+	failureReason: RUMFeatureOperationFailureReason,	// .error, .abandoned, timeout, .other
 	attributes: Map<String, Any?>
 )
 ```
@@ -184,7 +184,7 @@ GlobalRumMonitor.get().failFeatureOperation(
 RUMMonitor.shared().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-    reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
+  reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
 	attributes: [AttributeKey: AttributeValue]
 )
 ```

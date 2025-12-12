@@ -646,6 +646,11 @@ menu:
       parent: otel-api-dd-sdk
       weight: 3027
       identifier: otel_api_dotnet
+    - name: Rust
+      url: /opentelemetry/instrument/api_support/rust
+      parent: otel-api-dd-sdk
+      weight: 3028
+      identifier: otel_api_rust
     - name: OTel Instrumentation Libraries
       url: /opentelemetry/instrument/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
@@ -3021,6 +3026,11 @@ menu:
       url: actions/connections/http/
       parent: actions_connections
       identifier: actions_http
+      weight: 101
+    - name: AWS Integration
+      url: actions/connections/aws_integration/
+      parent: actions_connections
+      identifier: actions_aws_integration
       weight: 101
     - name: Private Actions
       url: actions/private_actions/
@@ -5673,101 +5683,106 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_sources
       weight: 2
+    - name: Akamai DataStreamer
+      url: observability_pipelines/sources/akamai_datastreamer/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_akamai_datastreamer
+      weight: 201
     - name: Amazon Data Firehose
       url: observability_pipelines/sources/amazon_data_firehose/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_amazon_data_firehose
-      weight: 201
+      weight: 202
     - name: Amazon S3
       url: observability_pipelines/sources/amazon_s3/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_amazon_s3
-      weight: 202
+      weight: 203
     - name: Azure Event Hubs
       url: observability_pipelines/sources/azure_event_hubs/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_azure_event_hubs
-      weight: 203
+      weight: 204
     - name: Datadog Agent
       url: observability_pipelines/sources/datadog_agent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_datadog_agent
-      weight: 204
+      weight: 205
     - name: Datadog Lambda Extension
       url: observability_pipelines/sources/lambda_extension/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_extension
-      weight: 205
+      weight: 206
     - name: Datadog Lambda Forwarder
       url: observability_pipelines/sources/lambda_forwarder/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_forwarder
-      weight: 206
+      weight: 207
     - name: Filebeat
       url: observability_pipelines/sources/filebeat/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_filebeat
-      weight: 207
+      weight: 208
     - name: Fluent
       url: observability_pipelines/sources/fluent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_fluent
-      weight: 208
+      weight: 209
     - name: Google Pub/Sub
       url: observability_pipelines/sources/google_pubsub/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_google_pubsub
-      weight: 209
+      weight: 210
     - name: HTTP Client
       url: observability_pipelines/sources/http_client/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
-      weight: 210
+      weight: 211
     - name: HTTP Server
       url: observability_pipelines/sources/http_server/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
-      weight: 211
+      weight: 212
     - name: OpenTelemetry
       url: observability_pipelines/sources/opentelemetry/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
-      weight: 212
+      weight: 213
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 213
+      weight: 214
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 214
+      weight: 215
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 215
+      weight: 216
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 216
+      weight: 217
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 217
+      weight: 218
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 218
+      weight: 219
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 219
+      weight: 220
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
