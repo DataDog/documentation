@@ -28,7 +28,7 @@ A common use case for input parameters is to reuse and customize an app for diff
 
 ### Example input parameter 
 
-This example input parameter was configured to show the same app in various staging environments:
+This example input parameter shows the same app in various staging environments:
 
 {{< img src="/service_management/app_builder/embedded_apps/example-input-parameters-configuration.png" alt="An example of configured input parameters inside an app" style="width:35%;" >}}
 
