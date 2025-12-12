@@ -34,6 +34,7 @@
 | Category::Orchestration | Integrations for technologies that provide orchestration for containers and more. |
 | Category::OS & System | Integrations that monitor operating systems or other low-level systems. |
 | Category::Provisioning | Integrations for technologies that manage the provisioning of resources across the cloud, containers, and more. |
+| Category::RUM | Integrations that monitor browser or mobile application performance. |
 | Category::SAP | Integrations for SAP technologies. |
 | Category::Security | Integrations that monitor security tools or provide security reporting. |
 | Category::SNMP | Integrations that monitor SNMP and related tools. |
