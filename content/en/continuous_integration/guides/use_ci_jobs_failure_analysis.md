@@ -42,7 +42,7 @@ Job Failure Analysis needs:
 * All logs from the **failing job** being analyzed
 * All logs from at **least one successful job** with the same job name, pipeline name, and repository. This is needed to identify which logs are relevant in the failing job.
 
-The following [exclusion filter][4] is compatible with Job Failure Analysis:
+The following [exclusion filter][9] is compatible with Job Failure Analysis:
 * Query: `datadog.product:cipipeline @ci.is_failure:false`
 * Sampling rule: exclude 90% of `@ci.job.id`
 
@@ -156,9 +156,9 @@ For PR Comments to be posted, your repositories need to be integrated with Datad
 [1]:/continuous_integration/pipelines/github/
 [2]:/continuous_integration/pipelines/gitlab/
 [3]:https://app.datadoghq.com/ci/pipelines/health/
-[4]:/logs/log_configuration/indexes#exclusion-filters
 [4]:/resources/json/civisibility-ci-jobs-failure-analysis-dashboard.json
 [5]:/dashboards/
 [6]:/continuous_integration/pipelines/#setup
 [7]:/integrations/guide/source-code-integration/#connect-your-git-repositories-to-datadog
 [8]:/continuous_integration/pipelines/azure/
+[9]:/logs/log_configuration/indexes#exclusion-filters
