@@ -1,9 +1,14 @@
 ---
 title: Google Cloud Storage Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
 
-<div class="alert alert-danger">For Worker versions 2.7 and later, the Google Cloud destination supports <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">uniform bucket-level access</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommends</a> using uniform bucket-level access. <br>For Worker version older than 2.7, only <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a> is supported.</div>
+{{< product-availability >}}
+
+<div class="alert alert-info">For Worker versions 2.7 and later, the Google Cloud destination supports <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">uniform bucket-level access</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommends</a> using uniform bucket-level access. <br>For Worker version older than 2.7, only <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a> is supported.</div>
 
 Use the Google Cloud Storage destination to send your logs to a Google Cloud Storage bucket. If you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). If you do not want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
 

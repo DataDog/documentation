@@ -1,7 +1,12 @@
 ---
 title: OpenSearch Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' OpenSearch destination to send logs to OpenSearch.
 
