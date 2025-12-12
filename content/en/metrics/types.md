@@ -267,7 +267,7 @@ Submit your RATE type metrics from one of the following sources:
 | [Agent check][1]  | `self.rate(...)`                    | RATE            | GAUGE               |
 | [API][2]          | `api.Metric.send(type="rate", ...)` | RATE            | RATE                |
 
-**Note**: To get RATE metrics through DogStatsD, submit either a [COUNT][16] or [HISTOGRAM][18] metric. Count metric values and `<HISTOGRAM>.count` values are time-normalized deltas of the metric’s value over the StatsD flush period.
+**Note**: To get RATE metrics through DogStatsD, submit either a [COUNT][16] or [HISTOGRAM][18] metric. Count metric values and `<HISTOGRAM>.count` values are time-normalized deltas of the metric's value over the StatsD flush period.
 
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=rate
