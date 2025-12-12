@@ -17,7 +17,7 @@ Single Step Instrumentation (SSI) helps instrument applications by automatically
 
 You can troubleshoot injection issues in two ways: by using Fleet Automation in Datadog or by manually verifying at the container level.
 
-### Troubleshoot injection in Datadog Fleet Automation
+### Troubleshoot in Datadog Fleet Automation
 
 
 Fleet Automation provides two types of instrumentation insights for SSI:
