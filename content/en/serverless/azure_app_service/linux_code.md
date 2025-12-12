@@ -270,10 +270,6 @@ For .NET applications, the following environment variables are **required**. See
 : **Value**: `/home/site/wwwroot/datadog`<br>
 Path to the directory containing the .NET tracing libraries.<br>
 
-`DD_TRACE_LOG_DIRECTORY`
-: **Value**: `/home/LogFiles/dotnet`<br>
-Path where the .NET tracing library will write its logs.<br>
-
 `CORECLR_ENABLE_PROFILING`
 : **Value**: `1`<br>
 Enables the instrumentation APIs in the .NET runtime.<br>
