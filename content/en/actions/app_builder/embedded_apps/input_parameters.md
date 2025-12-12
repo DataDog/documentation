@@ -8,7 +8,7 @@ Input parameters allow you to embed the same app in multiple dashboards or noteb
 
 ## Example dashboard
 
-A common use case for input parameters is to reuse and customize an app for different environments, like dev, staging, and production. In the screenshot below, one app is embedded twice in a dashboard. The app on the left shows monitors in the demo environment, while the app on the right shows the same information for monitors in the staging environment. 
+A common use case for input parameters is to reuse and customize an app for different environments, like dev, staging, and production. In the screenshot below, one app is embedded twice in a dashboard. The app on the left shows monitors in the demo environment, while the app on the right shows the same information for monitors in the staging environment. You can test a copy of this dashboard with the blueprint [How to: Input Parameters][3].
 
 {{< img src="/service_management/app_builder/embedded_apps/example-input-parameters-dashboard.png" alt="Two embedded apps with different input parameters selected" style="width:100%;" >}}
 
@@ -57,3 +57,4 @@ After embedding an app in a dashboard or notebook, you can create a copy to reus
 
 [1]: https://app.datadoghq.com/app-builder/apps/list
 [2]: /actions/app_builder/embedded_apps/input_parameters/#use-input-parameters
+[3]: https://app.datadoghq.com/app-builder/apps/edit?template=how_to_input_parameters&viewMode=templatePreview
