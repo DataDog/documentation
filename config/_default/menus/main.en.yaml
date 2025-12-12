@@ -8887,6 +8887,11 @@ menu:
       url: account_management/billing/vsphere/
       parent: account_management_billing
       weight: 1218
+    - name: Workflow Automation
+      identifier: account_management_billing_workflow_automation
+      url: account_management/billing/workflow_automation/
+      parent: account_management_billing
+      weight: 1219
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
