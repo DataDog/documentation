@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" header="Join the Preview!">}}
-  Add to Security Inbox Rules are in Preview.
+  Add to Security Inbox Rules is in Preview.
 {{< /callout >}}
 
 Configure inbox rules to manage your Security Inbox effectively, ensuring only the most relevant security issues are highlighted. By customizing conditions, you can focus on critical concerns, prioritize key risks, support compliance, and bring attention to issues that might otherwise be overlooked.
