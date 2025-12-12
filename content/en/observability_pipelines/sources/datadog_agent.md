@@ -55,14 +55,13 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 
 Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
 
-**Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines metrics, such as utilization and events in/out metrics, using the `DD_CONTAINER_EXCLUDE_METRICS` environment variable. For Helm, use `datadog.containerExcludeMetrics`. This prevents duplicate metrics, as the Worker also sends its own metrics directly to Datadog. See [Docker Log Collection][1] or [Setting environment variables for Helm][2] for more information.
+**Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines metrics, such as utilization and events in/out metrics, using the `DD_CONTAINER_EXCLUDE_METRICS` environment variable. For Helm, use `datadog.containerExcludeMetrics`. This prevents duplicate metrics, as the Worker also sends its own metrics directly to Datadog. See [Docker Metrics Collection][3] or [Setting environment variables for Helm][2] for more information.
 
 {{% collapse-content title="Agent configuration file" level="h4" expanded=false id="id-for-anchoring" %}}
 
 To send Datadog Agent metrics to the Observability Pipelines Worker, update your [Agent configuration file][1] with the following:
 
 ```
-
 observability_pipelines_worker:
   metrics:
     enabled: true
@@ -87,14 +86,12 @@ After you restart the Agent, your observability data should be going to the Work
 To send Datadog Agent metrics to the Observability Pipelines Worker, update your Datadog Helm chart [datadog-values.yaml][1] with the following environment variables. See [Agent Environment Variables][2] for more information.
 
 ```
-
 datadog:
   env:
     - name: DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_ENABLED
       value: true
     - name: DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_URL
       value: "http://<OPW_HOST>:8383"
-
 ```
 
 `<OPW_HOST>` is the host IP address or the load balancer URL associated with the Observability Pipelines Worker.
@@ -110,6 +107,7 @@ datadog:
 
 [1]: /containers/docker/log/?tab=containerinstallation#linux
 [2]: /containers/guide/container-discovery-management/?tab=helm#setting-environment-variables
+[3]: /containers/docker/data_collected/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -119,5 +117,4 @@ datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
-
 [4]: /observability_pipelines/sources/opentelemetry/#send-logs-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines

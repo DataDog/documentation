@@ -36,7 +36,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## AWS PrivateLink
 
-To send logs from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][3] for setup instructions. The two endpoints you need to set up are:
+To send metrics from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][3] for setup instructions. The two endpoints you need to set up are:
 
 - Metrics: {{< region-param key=metrics_endpoint_private_link code="true" >}}
 - Remote Configuration: {{< region-param key=remote_config_endpoint_private_link code="true" >}}
