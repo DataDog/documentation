@@ -4980,7 +4980,7 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: DO Overview
+    - name: Data Observability Overview
       url: data_observability/
       pre: inventories
       identifier: data_observability
