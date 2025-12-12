@@ -112,7 +112,7 @@ If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time in
 : Represents the maximum value of those `X` values sent during the time interval.<br>
 **Datadog In-App Type**: GAUGE
 
-**Note**:
+**Notes**:
 
 - Configure which aggregations you want to send to Datadog with the `histogram_aggregates` parameter in your [`datadog.yaml` configuration file][1]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent to Datadog. `sum` and `min` are also available.
 - Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [`datadog.yaml` configuration file][2]. By default, only the `95percentile` is sent to Datadog.
@@ -151,6 +151,8 @@ If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time
 `sum:<METRIC_NAME>`
 : Represents the sum of all `X` values sent in the time interval.<br>
 **Datadog In-App Type**: COUNT
+
+**Note**: While the different aggregations of distribution metric values are _represented_ as gauges or counts in-app, the metric itself retains the type `DISTRIBUTION`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -204,11 +206,13 @@ Suppose you are submitting a DISTRIBUTION metric, `request.response_time.distrib
 | `min:request.response_time.distribution`   | `1`    | GAUGE               |
 | `sum:request.response_time.distribution`   | `19`   | COUNT               |
 
+**Note**: While the different aggregations of distribution metric values are _represented_ as gauges or counts in-app, the metric itself retains the type `DISTRIBUTION`.
+
 #### Calculation of percentile aggregations
 
 Like other metric types, such as GAUGE or HISTOGRAM, the DISTRIBUTION metric type has the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distribution metrics are initially tagged the same way as other metrics (with custom tags set in the code).
 
-Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be added to distribution metrics. If you were to add percentile aggregations to your distribution metric in-app, the following five additional aggregations are available for query:
+Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be added to distribution metrics. If you add percentile aggregations to your distribution metric in-app, the following five additional aggregations become available for query:
 
 | Metric Name                              | Value | Datadog In-app Type |
 | ---------------------------------------- | ----- | ------------------- |
@@ -251,7 +255,7 @@ Submit your COUNT type metrics from one of the following sources:
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#count
 [2]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
-[3]: /api/v1/metrics/#submit-metrics
+[3]: /api/latest/metrics/#submit-metrics
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#count
 {{% /tab %}}
 {{% tab "RATE" %}}
@@ -263,11 +267,11 @@ Submit your RATE type metrics from one of the following sources:
 | [Agent check][1]  | `self.rate(...)`                    | RATE            | GAUGE               |
 | [API][2]          | `api.Metric.send(type="rate", ...)` | RATE            | RATE                |
 
-**Note**: When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents.
+**Note**: To get RATE metrics through DogStatsD, submit either a [COUNT][16] or [HISTOGRAM][18] metric. Count metric values and `<HISTOGRAM>.count` values are time-normalized deltas of the metric’s value over the StatsD flush period.
 
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=rate
-[2]: /api/v1/metrics/#submit-metrics
+[2]: /api/latest/metrics/#submit-metrics
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
@@ -281,7 +285,7 @@ Submit your GAUGE type metrics from one of the following sources:
 
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=gauge
-[2]: /api/v1/metrics/#submit-metrics
+[2]: /api/latest/metrics/#submit-metrics
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/#gauge
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
@@ -307,9 +311,12 @@ Submit your DISTRIBUTION type metrics from the following source:
 | Submission Source | Submission Method (Python) | Submission Type | Datadog In-App Types |
 | ----------------- | -------------------------- | --------------- | -------------------- |
 | [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, COUNT         |
+| [API][2]          | `api_instance.submit_distribution_points(...)` | DISTRIBUTION           | GAUGE, COUNT               |
 
+**Note**: While the different aggregations of distribution metric values are _represented_ as gauges or counts in-app, the metric itself retains the type `DISTRIBUTION`.
 
 [1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#distribution
+[2]: /api/latest/metrics/#submit-distribution-points
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -334,6 +341,9 @@ Below is a summary of all available metric submission sources and methods. This 
 | [DogStatsD][16]   | `dog.decrement(...)`                 | COUNT           | RATE                 |
 | [DogStatsD][17]   | `dog.set(...)`                       | SET             | GAUGE                |
 | [DogStatsD][18]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE          |
+
+**Note**: While the different aggregations of distribution metric values are _represented_ as gauges or counts in-app, the metric itself retains the type `DISTRIBUTION`. See the [Definitions][19] section of this page for more information.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -344,7 +354,7 @@ Below is a summary of all available metric submission sources and methods. This 
 [4]: https://statsd.readthedocs.io/en/v3.3/types.html#sets
 [5]: /metrics/custom_metrics/agent_metrics_submission/
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[7]: /api/v1/metrics/#submit-metrics
+[7]: /api/latest/metrics/#submit-metrics
 [8]: /developers/dogstatsd/#how-it-works
 [9]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#count
 [10]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
@@ -356,3 +366,4 @@ Below is a summary of all available metric submission sources and methods. This 
 [16]: /metrics/custom_metrics/dogstatsd_metrics_submission/#count
 [17]: /metrics/custom_metrics/dogstatsd_metrics_submission/#set
 [18]: /metrics/custom_metrics/dogstatsd_metrics_submission/#histogram
+[19]: /metrics/types/?tab=distribution#definition
