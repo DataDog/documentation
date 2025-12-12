@@ -18,7 +18,7 @@ ServiceNow is an IT service management platform that provides solutions for mana
 
 The ServiceNow integration with Datadog Incident Management provides you with the following benefits:
 - **Improved Visibility**: Ensure that all stakeholders are immediately informed about incidents, facilitating a quicker response.
-- **Bidirectional Sync**: Sync incident state, severity (impact and urgency), and status updates between Datadog and ServiceNow automatically.
+- **Bidirectional Sync**: Sync the incident's state, severity (impact and urgency), and any status updates between Datadog and ServiceNow automatically.
 - **Supporting Existing Workflows**: Seamlessly integrate with your current processes, making it easier to manage incidents within your established ServiceNow workflows.
 
 ## Prerequisites
@@ -54,7 +54,7 @@ In ServiceNow, you can sync state, impact, and urgency bidirectionally with Inci
    4. Check the **Enabled** box.
 5. Click **Save**.
 
-With bidirectional sync, when and incident is created in Datadog, a corresponding incident is also created in the linked ServiceNow instance. This ServiceNow incident includes a reference to the Datadog incident and stays in sync based on the defined [field mappings](#field-mappings).
+With bidirectional sync, when an incident is created in Datadog, a corresponding incident is also created in the linked ServiceNow instance. This ServiceNow incident includes a reference to the Datadog incident and stays in sync based on the defined [field mappings](#field-mappings).
 
 ## Field mappings
 
@@ -97,7 +97,7 @@ The following fields are synced between Datadog Incident Management and ServiceN
 | SEV-5 (Minor)                 | 3                      | 3                     | 5 - Planning            |
 | Unknown                       | 3                      | 3                     | 5 - Planning            |
 
-**Note**: If `Start at SEV-0` is enabled in Incident Management settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` will all stay the same, but the `Datadog Incident Severity` shifts down by 1. For example, in the first row of this table, the Datadog Incident Severity would be 0, but the rest of the values in the rest of the row would stay the same.
+**Note**: If `Start at SEV-0` is enabled in Incident Management settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` all stay the same, but the `Datadog Incident Severity` shifts down by one. For example, in the first row of this table, the `Datadog Incident Severity` would be `0`, but the rest of the values in the rest of the row would stay the same.
 
 ## Further Reading
 

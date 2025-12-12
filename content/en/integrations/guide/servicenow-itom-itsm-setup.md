@@ -249,7 +249,7 @@ Send cases from Datadog to either the Datadog Cases ITOM or ITSM table in Servic
 
 ### Configure Datadog Incident Management {#incident-management}
 
-The Datadog ServiceNow integration allows you to create incidents in ServiceNow from Datadog incidents and [sync data bidirectionally](#sync-bidirectionally) between the two platforms. This integration with Datadog Incident Management provides improved visibility, automatic bidirectional sync of incident state, severity, and status updates, and support for your existing ServiceNow workflows.
+The Datadog ServiceNow integration allows you to create incidents in ServiceNow from Datadog incidents and [sync data bidirectionally](#sync-bidirectionally) between the two platforms. This integration with Datadog Incident Management provides improved visibility, automatic bidirectional sync of the incident's state, severity, and any status updates, and support for your existing ServiceNow workflows.
 
 After installing the integration, in Datadog, go to the [Integration Settings][9] page. Click the **ServiceNow** tile to configure ServiceNow incident creation.
 
