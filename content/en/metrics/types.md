@@ -206,8 +206,6 @@ Suppose you are submitting a DISTRIBUTION metric, `request.response_time.distrib
 | `min:request.response_time.distribution`   | `1`    | GAUGE               |
 | `sum:request.response_time.distribution`   | `19`   | COUNT               |
 
-**Note**: While the different aggregations of distribution metric values are _represented_ as gauges or counts in-app, the metric itself retains the type `DISTRIBUTION`.
-
 #### Calculation of percentile aggregations
 
 Like other metric types, such as GAUGE or HISTOGRAM, the DISTRIBUTION metric type has the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distribution metrics are initially tagged the same way as other metrics (with custom tags set in the code).
@@ -223,6 +221,8 @@ Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be ad
 | `p99:request.response_time.distribution` | `3`   | GAUGE               |
 
 That is, for a distribution metric with added percentile aggregations during a given time interval, the following 10 aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
+
+**Note**: While the different aggregations of distribution metric values are _represented_ as gauges or counts in-app, the metric itself retains the type `DISTRIBUTION`.
 
 #### Customization of tagging
 
