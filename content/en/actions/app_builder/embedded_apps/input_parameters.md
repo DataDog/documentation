@@ -52,7 +52,7 @@ To embed an app with input parameters:
 After embedding an app in a dashboard or notebook, you can create a copy to reuse it with different contexts:
 1. Select the embedded app. 
 1. Click the **Options** icon (<i class="icon-kebab-wui" style="position:relative; top:2px;font-size: 12px; max-width: 12px"></i>), then click **Clone**.
-    - Alternatively, you can select the app and use copy & paste keyboard shortcuts.
+    - Alternatively, you can select the app and use copy and paste keyboard shortcuts.
 1. Follow the steps [above][2] to select a different input parameter.
 
 [1]: https://app.datadoghq.com/app-builder/apps/list
