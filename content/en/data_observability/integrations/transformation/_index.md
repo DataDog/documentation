@@ -21,8 +21,11 @@ Use these integrations to:
 {{< whatsnext desc="Connect to these transformation tools:" >}}
    {{< nextlink href="data_observability/integrations/transformation/dbtcloud" >}}dbt Cloud{{< /nextlink >}}
    {{< nextlink href="data_observability/integrations/transformation/dbtcore" >}}dbt Core{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/transformation/emr" >}}Spark on Amazon EMR{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/transformation/dataproc" >}}Spark on Google Dataproc{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/airflow" >}}Airflow{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/emr" >}}Spark on Amazon EMR{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/dataproc" >}}Spark on Google Dataproc{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/kubernetes" >}}Spark on Kubernetes{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/databricks" >}}Databricks{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

@@ -5049,16 +5049,51 @@ menu:
       identifier: transformation_integrations_dbtcore
       parent: transformation_integrations
       weight: 2000000
-    - name: Spark on Amazon EMR
-      url: data_observability/integrations/warehouse/bigquery
-      identifier: bigquery
+    - name: Airflow
+      url: data_observability/jobs_monitoring/airflow
+      identifier: transformation_integrations_airflow
       parent: transformation_integrations
       weight: 3000000
+    - name: Spark on Amazon EMR
+      url: data_observability/jobs_monitoring/emr
+      identifier: transformation_integrations_emr
+      parent: transformation_integrations
+      weight: 4000000
+    - name: Spark on Google Dataproc
+      url: data_observability/jobs_monitoring/dataproc
+      identifier: transformation_integrations_dataproc
+      parent: transformation_integrations
+      weight: 5000000
+    - name: Spark on Kubernetes
+      url: data_observability/jobs_monitoring/kubernetes
+      identifier: transformation_integrations_kubernetes
+      parent: transformation_integrations
+      weight: 6000000
+    - name: Databricks
+      url: data_observability/jobs_monitoring/databricks
+      identifier: transformation_integrations_databricks
+      parent: transformation_integrations
+      weight: 7000000
     - name: Business Intelligence Integrations
       url: data_observability/business_intelligence
       identifier: business_intelligence_integrations
       parent: data_integrations
       weight: 300000
+    - name: Tableau
+      url: data_observability/integrations/business_intelligence/tableau
+      identifier: business_intelligence_integrations_tableau
+      parent: business_intelligence_integrations
+      weight: 1000000
+    - name: Sigma
+      url: data_observability/integrations/business_intelligence/sigma
+      identifier: business_intelligence_integrations_sigma
+      parent: business_intelligence_integrations
+      weight: 2000000
+    - name: Metabase
+      url: data_observability/integrations/business_intelligence/metabase
+      identifier: business_intelligence_integrations_metabase
+      parent: business_intelligence_integrations
+      weight: 3000000
     - name: OpenLineage Integrations
       url: data_observability/openlineage
       identifier: openlineage_integrations
