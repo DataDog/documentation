@@ -44,7 +44,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
 1. From the **Upgrade Agents** tab, click **Upgrade Now**.
 
-   {{< img src="/agent/fleet_automation/upgrade-screen1.png" alt="UI howing the Upgrade Agents tab with the ‘Upgrade Now’ button." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/upgrade-screen1.png" alt="UI showing the Upgrade Agents tab with the ‘Upgrade Now’ button." style="width:100%;" >}}
 1. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
 
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Agent selection screen with filtering options to narrow the list of Agents to upgrade." style="width:100%;" >}}
