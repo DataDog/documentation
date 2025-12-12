@@ -64,15 +64,15 @@ The following characters are considered special and must be escaped with a backs
 
 Searching for a tag that contains special characters requires escaping or double quotes. For example, to search for a tag `my_app` with the value `hello:world`, use one of the following search syntaxes:
 
-- `tags:my_app:hello\:world`
-- `tags:my_app:"hello:world"`
+- `tags:my_app\:hello\:world`
+- `tags:my_app\:"hello:world"`
 
 ### Match a single special character
 
 To match a single special character or space, use the `?` wildcard. For example, the search syntax: `"tags:message\:hello?world"` matches metrics with either of these tags:
 
 - `message:"hello world"`
-- `message:"hello-world"`.
+- `message:"hello-world"`
 
 ### Examples
 
