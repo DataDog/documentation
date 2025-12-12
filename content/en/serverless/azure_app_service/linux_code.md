@@ -250,7 +250,7 @@ var datadogAppSettings = [
   // Add any additional options here
 ]
 
-resource sidecar 'Microsoft.Web/sites/sitecontainers@2024-11-01' = {
+resource sidecar 'Microsoft.Web/sites/sitecontainers@2025-03-01' = {
   parent: webApp
   name: 'datadog-sidecar'
   properties: {
@@ -292,10 +292,10 @@ Update your existing Web App to include the necessary Datadog App Settings and s
   "variables": {
     "datadogAppSettings": [
       { "name": "DD_API_KEY", "value": "[parameters('datadogApiKey')]" },
-      { "name": "DD_SITE", "value": "datadoghq.com" },              // Replace with your Datadog site
-      { "name": "DD_SERVICE", "value": "[parameters('name')]" },    // Replace with your service name
-      { "name": "DD_ENV", "value": "[parameters('env')]" },         // Replace with your environment (e.g. prod, staging)
-      { "name": "DD_VERSION", "value": "[parameters('version')]" }, // Replace with your application version
+      { "name": "DD_SITE", "value": "datadoghq.com" }, // Replace with your Datadog site
+      { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
+      { "name": "DD_ENV", "value": "prod" },           // Replace with your environment (e.g. prod, staging)
+      { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
       // Uncomment for .NET applications
       // { "name": "DD_DOTNET_TRACER_HOME", "value": "/datadog/tracer" }
       // { "name": "CORECLR_ENABLE_PROFILING", "value": "1" }
@@ -312,7 +312,7 @@ Update your existing Web App to include the necessary Datadog App Settings and s
   "resources": {
     "webApp": {
       "type": "Microsoft.Web/sites",
-      "apiVersion": "2024-11-01",
+      "apiVersion": "2025-03-01",
       "name": "[parameters('webAppName')]",
       // ...
       "properties": {
@@ -325,7 +325,7 @@ Update your existing Web App to include the necessary Datadog App Settings and s
     },
     "sidecar": {
       "type": "Microsoft.Web/sites/sitecontainers",
-      "apiVersion": "2024-11-01",
+      "apiVersion": "2025-03-01",
       "name": "[concat(parameters('webAppName'), '/datadog-sidecar')]",
       "properties": {
         "image": "index.docker.io/datadog/serverless-init:latest",
