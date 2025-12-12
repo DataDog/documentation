@@ -599,6 +599,7 @@ db_password: "ENC[secrets-shared/db-creds;password]"
 ##### Custom path configuration
 If your setup does not follow the default locations for ServiceAccount based authentication, then a `token_path` and `ca_path` can be specified
 ```yaml
+secret_backend_type: k8s.secrets
 secret_backend_config:
   token_path: /custom/path/to/token
   ca_path: /custom/path/to/ca.crt
