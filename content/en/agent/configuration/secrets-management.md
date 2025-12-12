@@ -502,7 +502,7 @@ The Kubernetes secrets backend requires:
 
 ##### RBAC setup
 
-For each namespace containing secrets, create a Role and RoleBinding:
+For each namespace containing secrets, create a `Role` and `RoleBinding` using the following example using the correct namespace name:
 
 ```yaml
 # Role: grants permission to read secrets
