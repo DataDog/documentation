@@ -2968,6 +2968,11 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 9
+    - name: Input Parameters
+      url: actions/app_builder/embedded_apps/input_parameters/
+      parent: app_builder_embedded_apps
+      identifier: app_builder_input_parameters
+      weight: 901
     - name: Save and Reuse Actions
       url: actions/app_builder/saved_actions/
       parent: app_builder
