@@ -510,7 +510,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: datadog-secret-reader
-  namespace: secrets-namespace  # Namespace with secrets
+  namespace: <target namepace> # Namespace with secrets
 rules:
 - apiGroups: [""]
   resources: ["secrets"]
