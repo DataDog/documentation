@@ -72,10 +72,15 @@ Blueprints are helpful app templates that cover common use cases and showcase be
 
 ### Build an app from a layout
 
-Choosing a layout creates an app as a table, form, or custom chart. 
+Choosing a layout is the fastest way to create a minimal, ready-to-edit app. There are three options: 
+- **Table Manager**: List, filter, and sort data from a query.
+- **Form**: Collect inputs and trigger actions (create, update, request, etc.).
+  - For more detailed form templates, see [Forms][27].
+- **Custom Chart**: Visualize a query by swapping your data into a prebuilt bar chart.
 
+To create an app from a layout:
 1. From [App Builder][1], click **New App**.
-1. Click **Start with Layout** in the onboarding modal.
+1. Click **Layouts** in the onboarding modal.
 1. Select a layout. The pane on the right displays a preview of the app.
 1. Click **Use Layout**.
 1. The following steps are optional:
@@ -254,3 +259,4 @@ To access the Debug Console, go to [your apps list][14] and click **Edit app** {
 [24]: https://app.datadoghq.com/app-builder/apps/edit?template=manage-datastore&viewMode=templatePreview
 [25]: https://app.datadoghq.com/app-builder/apps/edit?template=export-synthetics&viewMode=templatePreview
 [26]: https://app.datadoghq.com/app-builder/apps/edit?template=how_to__write_custom_code&viewMode=templatePreview
+[27]: /actions/forms/
