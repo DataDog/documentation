@@ -55,7 +55,7 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 
 Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
 
-**Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines metrics, such as utilization and events in/out metrics, using the `DD_CONTAINER_EXCLUDE_METRICS` environment variable. For Helm, use `datadog.containerExcludeMetrics`. This prevents duplicate metrics, as the Worker also sends its own metrics directly to Datadog. See [Docker Metrics Collection][3] or [Setting environment variables for Helm][2] for more information.
+**Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines metrics, such as utilization and events in/out metrics, using the `DD_CONTAINER_EXCLUDE_METRICS` environment variable. For Helm, use `datadog.containerExcludeMetrics`. This prevents duplicate metrics, as the Worker also sends its own metrics directly to Datadog. See [Docker Metrics Collection][1] or [Setting environment variables for Helm][2] for more information.
 
 {{% collapse-content title="Agent configuration file" level="h4" expanded=false id="id-for-anchoring" %}}
 
@@ -105,9 +105,8 @@ datadog:
 
 {{% /collapse-content %}}
 
-[1]: /containers/docker/log/?tab=containerinstallation#linux
+[1]: /containers/docker/data_collected/
 [2]: /containers/guide/container-discovery-management/?tab=helm#setting-environment-variables
-[3]: /containers/docker/data_collected/
 
 {{% /tab %}}
 {{< /tabs >}}
