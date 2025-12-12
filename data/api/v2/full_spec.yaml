@@ -1482,6 +1482,8 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
+        ccm_config:
+          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1547,6 +1549,8 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
+        ccm_config:
+          $ref: '#/components/schemas/AWSCCMConfig'
         created_at:
           description: Timestamp of when the account integration was created.
           format: date-time
@@ -1620,6 +1624,8 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
+        ccm_config:
+          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1750,6 +1756,15 @@ components:
           type: string
       required:
       - role_name
+      type: object
+    AWSCCMConfig:
+      description: AWS Cloud Cost Management config.
+      properties:
+        data_export_configs:
+          description: List of data export configurations for Cost and Usage Reports.
+          items:
+            $ref: '#/components/schemas/DataExportConfig'
+          type: array
       type: object
     AWSCredentials:
       description: The definition of `AWSCredentials` object.
@@ -15744,6 +15759,15 @@ components:
       type: object
     DORAListDeploymentsRequest:
       description: Request to get a list of deployments.
+      example:
+        data:
+          attributes:
+            from: '2025-01-01T00:00:00Z'
+            limit: 100
+            query: service:(shopist OR api-service) env:production team:backend
+            sort: -started_at
+            to: '2025-01-31T23:59:59Z'
+          type: dora_deployments_list_request
       properties:
         data:
           $ref: '#/components/schemas/DORAListDeploymentsRequestData'
@@ -15752,6 +15776,13 @@ components:
       type: object
     DORAListDeploymentsRequestAttributes:
       description: Attributes to get a list of deployments.
+      example:
+        from: '2025-01-01T00:00:00Z'
+        limit: 500
+        query: service:(shopist OR api-service OR payment-service) env:(production
+          OR staging) team:(backend OR platform)
+        sort: -started_at
+        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
@@ -15776,6 +15807,14 @@ components:
       type: object
     DORAListDeploymentsRequestData:
       description: The JSON:API data.
+      example:
+        attributes:
+          from: '2025-01-15T08:00:00Z'
+          limit: 200
+          query: env:production service:payment-service version:*v2*
+          sort: -finished_at
+          to: '2025-01-15T18:00:00Z'
+        type: dora_deployments_list_request
       properties:
         attributes:
           $ref: '#/components/schemas/DORAListDeploymentsRequestAttributes'
@@ -15793,6 +15832,15 @@ components:
       - DORA_DEPLOYMENTS_LIST_REQUEST
     DORAListFailuresRequest:
       description: Request to get a list of failures.
+      example:
+        data:
+          attributes:
+            from: '2025-01-01T00:00:00Z'
+            limit: 100
+            query: severity:(SEV-1 OR SEV-2) env:production team:backend
+            sort: -started_at
+            to: '2025-01-31T23:59:59Z'
+          type: dora_failures_list_request
       properties:
         data:
           $ref: '#/components/schemas/DORAListFailuresRequestData'
@@ -15801,6 +15849,13 @@ components:
       type: object
     DORAListFailuresRequestAttributes:
       description: Attributes to get a list of failures.
+      example:
+        from: '2025-01-01T00:00:00Z'
+        limit: 500
+        query: severity:(SEV-1 OR SEV-2) env:(production OR staging) service:(shopist
+          OR api-service OR payment-service) team:(backend OR platform OR payments)
+        sort: -started_at
+        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
@@ -15825,6 +15880,14 @@ components:
       type: object
     DORAListFailuresRequestData:
       description: The JSON:API data.
+      example:
+        attributes:
+          from: '2025-01-15T00:00:00Z'
+          limit: 200
+          query: severity:SEV-1 service:(api-service OR payment-service) env:production
+          sort: -finished_at
+          to: '2025-01-15T23:59:59Z'
+        type: dora_failures_list_request
       properties:
         attributes:
           $ref: '#/components/schemas/DORAListFailuresRequestAttributes'
@@ -15842,6 +15905,39 @@ components:
       - DORA_FAILURES_LIST_REQUEST
     DORAListResponse:
       description: Response for the DORA list endpoints.
+      example:
+        data:
+        - attributes:
+            custom_tags:
+            - language:java
+            - department:engineering
+            - region:us-east-1
+            env: production
+            finished_at: 1693491984000000000
+            git:
+              commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+              repository_url: https://github.com/organization/example-repository
+            service: shopist
+            started_at: 1693491974000000000
+            team: backend
+            version: v1.12.07
+          id: 4242fcdd31586083
+          type: dora_deployment
+        - attributes:
+            custom_tags:
+            - language:go
+            - department:platform
+            env: production
+            finished_at: 1693492084000000000
+            git:
+              commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
+              repository_url: https://github.com/organization/api-service
+            service: api-service
+            started_at: 1693492074000000000
+            team: backend
+            version: v2.1.0
+          id: 4242fcdd31586084
+          type: dora_deployment
       properties:
         data:
           description: The list of DORA events.
@@ -16044,6 +16140,30 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataExportConfig:
+      description: AWS Cost and Usage Report data export configuration.
+      properties:
+        bucket_name:
+          description: Name of the S3 bucket where the Cost and Usage Report is stored.
+          example: billing
+          type: string
+        bucket_region:
+          description: AWS region of the S3 bucket.
+          example: us-east-1
+          type: string
+        report_name:
+          description: Name of the Cost and Usage Report.
+          example: cost-and-usage-report
+          type: string
+        report_prefix:
+          description: S3 prefix where the Cost and Usage Report is stored.
+          example: reports
+          type: string
+        report_type:
+          description: Type of the Cost and Usage Report.
+          example: CUR2.0
+          type: string
+      type: object
     DataRelationshipsTeams:
       description: Associates teams with this schedule in a data structure.
       properties:
@@ -16845,6 +16965,12 @@ components:
           type: string
       required:
       - id
+      type: object
+    DeploymentGateRulesResponse:
+      description: Response for a deployment gate rules.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListDeploymentRuleResponseData'
       type: object
     DeploymentMetadata:
       description: Metadata object containing the publication creation information.
@@ -19997,6 +20123,13 @@ components:
           $ref: '#/components/schemas/EventPayloadAttributes'
         category:
           $ref: '#/components/schemas/EventCategory'
+        host:
+          description: Host name to associate with the event. Any tags associated
+            with the host are also applied to this event. Limited to 255 characters.
+          example: hostname
+          maxLength: 255
+          minLength: 1
+          type: string
         integration_id:
           $ref: '#/components/schemas/EventPayloadIntegrationId'
         message:
@@ -30191,6 +30324,37 @@ components:
       type: string
       x-enum-varnames:
       - LIST_CONNECTIONS_RESPONSE
+    ListDeploymentRuleResponseData:
+      description: Data for a list of deployment rules.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListDeploymentRulesResponseDataAttributes'
+        id:
+          description: Unique identifier of the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        type:
+          $ref: '#/components/schemas/ListDeploymentRulesDataType'
+      required:
+      - type
+      - attributes
+      - id
+      type: object
+    ListDeploymentRulesDataType:
+      description: List deployment rule resource type.
+      enum:
+      - list_deployment_rules
+      example: list_deployment_rules
+      type: string
+      x-enum-varnames:
+      - LIST_DEPLOYMENT_RULES
+    ListDeploymentRulesResponseDataAttributes:
+      properties:
+        rules:
+          items:
+            $ref: '#/components/schemas/DeploymentRuleResponseDataAttributes'
+          type: array
+      type: object
     ListDevicesResponse:
       description: List devices response.
       properties:
@@ -66486,6 +66650,51 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/deployment_gates/{gate_id}/rules:
+    get:
+      description: Endpoint to get rules for a deployment gate.
+      operationId: GetDeploymentGateRules
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGateRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get rules for a deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Endpoint to create a deployment rule. A gate for the rule must
         already exist.
@@ -67052,6 +67261,24 @@ paths:
         '200':
           content:
             application/json:
+              example:
+                data:
+                  attributes:
+                    custom_tags:
+                    - language:java
+                    - department:engineering
+                    - region:us-east-1
+                    env: staging
+                    finished_at: 1693491984000000000
+                    git:
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/organization/example-repository
+                    service: shopist
+                    started_at: 1693491974000000000
+                    team: backend
+                    version: v1.12.07
+                  id: 4242fcdd31586083
+                  type: dora_deployment
               schema:
                 $ref: '#/components/schemas/DORAFetchResponse'
           description: OK
@@ -67173,6 +67400,64 @@ paths:
         '200':
           content:
             application/json:
+              example:
+                data:
+                - attributes:
+                    custom_tags:
+                    - language:java
+                    - department:engineering
+                    - region:us-east-1
+                    env: production
+                    finished_at: 1693491984000000000
+                    git:
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/organization/example-repository
+                    name: Web server is down; all requests are failing.
+                    services:
+                    - shopist
+                    severity: SEV-1
+                    started_at: 1693491974000000000
+                    team: backend
+                  id: 4242fcdd31586085
+                  type: dora_failure
+                - attributes:
+                    custom_tags:
+                    - language:go
+                    - department:platform
+                    env: production
+                    finished_at: 1693492084000000000
+                    git:
+                      commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
+                      repository_url: https://github.com/organization/api-service
+                    name: Database connection timeout
+                    services:
+                    - api-service
+                    - payment-service
+                    severity: SEV-1
+                    started_at: 1693492074000000000
+                    team: platform
+                    version: v2.1.0
+                  id: 4242fcdd31586086
+                  type: dora_failure
+                - attributes:
+                    custom_tags:
+                    - language:python
+                    - department:payments
+                    - region:eu-west-1
+                    env: staging
+                    finished_at: 1693492204000000000
+                    git:
+                      commit_sha: 99edc9350f2cc9b250b69abddab733dd55e1a601
+                      repository_url: https://github.com/organization/payment-service
+                    name: Payment gateway API rate limit exceeded
+                    services:
+                    - payment-service
+                    severity: SEV-2
+                    started_at: 1693492174000000000
+                    team: payments
+                    version: v1.8.3
+                  id: 4242fcdd31586087
+                  type: dora_failure
               schema:
                 $ref: '#/components/schemas/DORAListResponse'
           description: OK
@@ -67213,6 +67498,26 @@ paths:
         '200':
           content:
             application/json:
+              example:
+                data:
+                  attributes:
+                    custom_tags:
+                    - language:java
+                    - department:engineering
+                    - region:us-east-1
+                    env: staging
+                    finished_at: 1693491984000000000
+                    git:
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/organization/example-repository
+                    name: Web server is down; all requests are failing.
+                    services:
+                    - shopist
+                    severity: High
+                    started_at: 1693491974000000000
+                    team: backend
+                  id: 4242fcdd31586085
+                  type: dora_failure
               schema:
                 $ref: '#/components/schemas/DORAFetchResponse'
           description: OK
@@ -67887,6 +68192,7 @@ paths:
                           rule:
                             datacenter: devcycle.us1.prod
                       category: change
+                      host: hostname
                       integration_id: custom-events
                       message: payment_processed feature flag has been enabled
                       tags:

@@ -49,7 +49,7 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/content-packs
+[1]: https://app.datadoghq.com/security/siem/content-packs
 [2]: /security/detection_rules/
 [3]: /security/cloud_siem/triage_and_investigate/investigator
 [4]: /service_management/workflows/
