@@ -269,8 +269,6 @@ Update your existing Web App to include the necessary Datadog App Settings and s
             { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
             { "name": "DD_ENV", "value": "prod" },           // Replace with your environment (e.g. prod, staging)
             { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
-            { "name": "DD_LOGS_INJECTION", "value": "true" },
-            { "name": "DD_TRACE_ENABLED", "value": "true" }
             // Add any additional options here
           ]
         }
