@@ -19,8 +19,8 @@ Use these integrations to:
 - **Identify performance and reliability issues** in your transformation workflows before they reach downstream consumers
 
 {{< whatsnext desc="Connect to these transformation tools:" >}}
-   {{< nextlink href="data_observability/integrations/transformation/dbt_cloud" >}}dbt Cloud{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/transformation/dbt_core" >}}dbt Core{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/transformation/dbtcloud" >}}dbt Cloud{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/transformation/dbtcore" >}}dbt Core{{< /nextlink >}}
    {{< nextlink href="data_observability/integrations/transformation/emr" >}}Spark on Amazon EMR{{< /nextlink >}}
    {{< nextlink href="data_observability/integrations/transformation/dataproc" >}}Spark on Google Dataproc{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -5035,10 +5035,25 @@ menu:
       parent: warehouse_integrations
       weight: 3000000
     - name: Transformation Integrations
-      url: data_observability/transformation
+      url: data_observability/integrations/transformation
       identifier: transformation_integrations
       parent: data_integrations
       weight: 200000
+    - name: dbt Cloud
+      url: data_observability/integrations/transformation/dbtcloud
+      identifier: transformation_integrations_dbtcloud
+      parent: transformation_integrations
+      weight: 1000000
+    - name: dbt Core
+      url: data_observability/integrations/transformation/dbtcore
+      identifier: transformation_integrations_dbtcore
+      parent: transformation_integrations
+      weight: 2000000
+    - name: Spark on Amazon EMR
+      url: data_observability/integrations/warehouse/bigquery
+      identifier: bigquery
+      parent: transformation_integrations
+      weight: 3000000
     - name: Business Intelligence Integrations
       url: data_observability/business_intelligence
       identifier: business_intelligence_integrations
