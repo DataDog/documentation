@@ -542,7 +542,6 @@ Configure the Datadog Agent to use Kubernetes Secrets with the following configu
 ```yaml
 # datadog.yaml
 secret_backend_type: k8s.secrets
-secret_backend_config: {}
 
 # Reference secrets using namespace/secret-name;key format
 api_key: "ENC[secrets-prod/dd-api-key;api_key]"
