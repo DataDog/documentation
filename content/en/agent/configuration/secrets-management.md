@@ -521,7 +521,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: datadog-secret-access
-  namespace: secrets-namespace  # Namespace with secrets
+  namespace: <target namespace>  # Namespace with secrets
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
