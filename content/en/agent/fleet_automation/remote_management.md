@@ -31,7 +31,7 @@ Remotely upgrading Agents in containerized environments is not supported.
 </div>
 
 ### Permissions 
-Users must have the [Agent Upgrade][2] permission within Fleet Automation for upgrades. They must also have the Agent Configuration Management permissions to configure Agents remotely. These permissions are enabled by default on the Datadog Admin role.
+Users must have the [Agent Upgrade][2] permission within Fleet Automation for upgrades. They must also have the [Agent Configuration Management][2] permissions to configure Agents remotely. These permissions are enabled by default on the Datadog Admin role.
 
 ## Upgrade Agents
 
@@ -42,9 +42,9 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
 {{% collapse-content title=" How to upgrade Agents remotely" level="h4" expanded=false id="id-for-anchoring" %}}
 
-1. From the **Upgrade Agents** tab, click **Start Agents Upgrade**.
+1. From the **Upgrade Agents** tab, click **Upgrade Now**.
 
-   {{< img src="/agent/fleet_automation/upgrade-screen.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/upgrade-screen1.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
 1. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
 
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
@@ -76,7 +76,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
 
-1. Set up notifications to receive updates on the deployment. You can notify individuals or communication integration channels like Slack, Teams, or PagerDuty. 
+1. **Set up notifications** to receive updates on the status on the deployment. You can notify your team on deployment status through the services you’ve already connected with Datadog, like Slack, Teams, or PagerDuty.
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_notification.png" alt="Select people or channels to be notified about the progess of the upgrade." style="width:100%;" >}}
 
@@ -195,7 +195,7 @@ If you don't upgrade an earlier Agent version to 7.66 or higher, there is no imp
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/remote-config
-[2]: /account_management/rbac/permissions#fleet-automation
+[2]: https://docs.datadoghq.com/agent/fleet_automation/#control-access-to-fleet-automation
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/fleet/agent-upgrades
 [5]: https://app.datadoghq.com/fleet/deployments
