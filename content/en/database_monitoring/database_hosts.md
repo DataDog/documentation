@@ -146,6 +146,19 @@ The **Active Connections** tab of the host details panel displays the live queri
 
 {{< img src="database_monitoring/db-list-active-connections-2.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
+### Cancel a live query
+
+You can [set up the Cancel Query integration][2] to cancel live Postgres queries.
+
+To cancel a long running database query directly from Datadog:
+1. In **Active Connections**, click **Cancel Query**:
+   {{< img src="database_monitoring/db-cancel-query-button.png" alt="The Cancel Query button inside the Active Connections panel" style="width:90%;" >}}
+1. Select a connection and click **Run Action**:
+   {{< img src="database_monitoring/db-cancel-query-modal.png" alt="The Cancel Query modal when opened" style="width:90%;" >}}
+
+The query is canceled after the run completes.
+
+
 ## Schema
 
 Use the **Schema** tab to explore database structures, tables, columns, data types, existing foreign keys, and indexing strategies for every database on a host.
@@ -181,3 +194,4 @@ The **Configuration** tab of the host details panel provides a direct view into 
 {{< img src="database_monitoring/db-list-configuration.png" alt="The Configuration tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/databases
+[2]: /database_monitoring/setup_postgres/advanced_configuration/#set-up-cancel-query-integration
