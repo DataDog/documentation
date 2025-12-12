@@ -117,7 +117,7 @@ To delete a destination, click on the pencil icon to the top right of the destin
 If you want to add another group of processors for a destination:
 1. Click the plus sign (**+**) at the bottom of the existing processor group.
 1. Click the name of the processor group to update it.
-1. Optionally, enter a group filter. See [Search Syntax][11] for more information.
+1. Optionally, enter a group filter. See [Search Syntax][6] for more information.
 1. Click **Add** to add processors to the group.
 1. If you want to copy all processors in a group and paste them into the same processor group or a different group:
     1. Click the three dots on the processor group.
@@ -132,6 +132,7 @@ If you want to add another group of processors for a destination:
 [3]: /observability_pipelines/sources/datadog_agent/?tab=metrics
 [4]: /observability_pipelines/processors/
 [5]: /observability_pipelines/destinations/datadog_metrics/
+[6]: /observability_pipelines/search_syntax/metrics/
 
 {{% /tab %}}
 {{< /tabs >}}
