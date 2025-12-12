@@ -425,16 +425,16 @@
             dest_dir: '/security/workload_protection/'
             path_to_remove: 'docs/cloud-workload-security/'
 
-      - repo_name: web-ui
-        contents:
-          - action: pull-and-push-file
-            branch: prod
-            globs:
-              - "generated/md/external/semantic-color-documentation.md"
-            options:
-              base_path: ""
-              dest_path: "/layouts/shortcodes/"
-              file_name: "semantic-color.md"
+      # - repo_name: web-ui
+      #   contents:
+      #     - action: pull-and-push-file
+      #       branch: prod
+      #       globs:
+      #         - "generated/md/external/semantic-color-documentation.md"
+      #       options:
+      #         base_path: ""
+      #         dest_path: "/layouts/shortcodes/"
+      #         file_name: "semantic-color.md"
       - repo_name: datadog-operator
         contents:
           - action: pull-and-push-file
