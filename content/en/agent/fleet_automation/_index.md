@@ -32,7 +32,7 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 
 ## Use cases
 
-With the Fleet Automation platform, you can:
+For the following use cases, ensure your fleet of Datadog Agents and OTel Collectors are using the latest feature enhancements. With the Fleet Automation platform, you gain the capabilities to:
 - View the latest Agent and OTel Collector configurations along with historical changes to help confirm deployment updates and ensure configuration consistency.
 - Ensure your fleet of Agents and OTel Collectors are using the latest feature enhancements by identifying and upgrading outdated versions.
 - Configure your Datadog Agents directly from Fleet Automation, enabling your teams to centralize setup and get visibility into your environments faster.

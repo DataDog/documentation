@@ -31,7 +31,7 @@ Remotely upgrading Agents in containerized environments is not supported.
 </div>
 
 ### Permissions 
-Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and the [Fleet Policies Write][2] permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
+Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and the Agent Configuration Management permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
 
 ## Upgrade Agents
 
@@ -111,9 +111,14 @@ The Agent ensures that the appropriate permissions are set for these files. No c
 For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version.
 
 
-## Configure Agents
+## Configure Datadog Agents
 
-With Fleet Automation, you can roll out configuration changes across your Agents through guided workflows or bring your own YAML. You can also update and standardize Agent configuration at scale.
+With Fleet Automation, you can roll out configuration changes across your Agents through guided workflows or bring your own YAML. You can also update and standardize Agent configuration at scale. With Fleet Automation you can:
+- Set up Datadog product telemetry such as APM, Logs, and NDM
+- Enable or adjust Agent integrations
+- Manage Agent tags
+- Apply consistent configuration across environments
+
 
 ### Configuration steps 
 {{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
@@ -130,7 +135,7 @@ With Fleet Automation, you can roll out configuration changes across your Agents
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Configure a single Agent" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Edit configuration of a single Agent" level="h4" expanded=false id="id-for-anchoring" %}}
 1. In the Datadog UI, navigate to the [Fleet Automation][18] page and select **View Agents**. 
 
 1. (**Optional**) You can target a group of Agents by filtering on host information or tags.
@@ -153,7 +158,7 @@ In the following example, the `logs_enabled` field is changed from `false` to `t
 
 ### Configuration precedence
 
-When a configuration file on the host conflicts with a Fleet Automation configuration, Fleet Automation takes precedence, ensuring a single source of truth. See [Configuration Order Precedence][17].
+The latest configuration is applied. If another tool is also used to configure the DD Agent. If the latest change is made from another tool aside from Fleet Automation, the change takes effect.
 
 ### Mirrors and proxies
 
