@@ -25,6 +25,8 @@ When you view an individual feature flag, the **History** panel displays all cha
 - Use the **Environment** filter to view changes in a particular environment or all environments.
 - Select **See Changes** to display a diff view of a specific change.
 
+{{< img src="/feature_flags/flag_history.png" alt="History panel for a single feature flag" style="width:100%;" >}}
+
 ## Global flag history
 
 Navigate to **Feature Flags > Global Flag History** to show all flag changes across your organization in a single view.
@@ -33,6 +35,8 @@ Navigate to **Feature Flags > Global Flag History** to show all flag changes acr
 - Use the **Feature Flag** filter to view changes to a specific flag.
 - Use the date range filter to narrow results to a specific time period.
 - Select **See Changes** to display a diff view of a specific change.
+
+{{< img src="/feature_flags/flag_history_global.png" alt="Global flag history view" style="width:100%;" >}}
 
 ## Further reading
 
