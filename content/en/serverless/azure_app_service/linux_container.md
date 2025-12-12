@@ -347,7 +347,6 @@ If you are setting up monitoring for a .NET application, configure the following
 | Variable name | Value |
 | ------------- | ----- |
 | `DD_DOTNET_TRACER_HOME` | `/datadog/tracer` |
-| `DD_TRACE_LOG_DIRECTORY` | `/home/LogFiles/dotnet` |
 | `CORECLR_ENABLE_PROFILING` | `1` |
 | `CORECLR_PROFILER` | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 | `CORECLR_PROFILER_PATH` | `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so` |
