@@ -105,6 +105,7 @@ The App Playground is an interactive demo that guides users through creating and
 To access the App Playground:
 1. From [App Builder][1], click **New App**. 
 1. Click **App Playground**.
+1. On the next screen, the app canvas (the right pane) displays information to guide you through App Builder. Click elements like **Fetching Data** to see information and instructions for using that feature. 
 
 ## Customize your app
 
