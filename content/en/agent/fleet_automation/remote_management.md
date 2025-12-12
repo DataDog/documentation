@@ -31,7 +31,7 @@ Remotely upgrading Agents in containerized environments is not supported.
 </div>
 
 ### Permissions 
-Users must have the [Agent Upgrade][2] permission within Fleet Automation for upgrades. They must also have the [Agent Configuration Management][2] permissions to configure Agents remotely. These permissions are enabled by default on the Datadog Admin role.
+Users must have the [Agent Upgrade][2] permission within Fleet Automation for upgrades. They must also have the [Agent Configuration Management][2] permission to configure Agents remotely. These permissions are enabled by default on the Datadog Admin role.
 
 ## Upgrade Agents
 
@@ -44,17 +44,17 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
 1. From the **Upgrade Agents** tab, click **Upgrade Now**.
 
-   {{< img src="/agent/fleet_automation/upgrade-screen1.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/upgrade-screen1.png" alt="UI howing the Upgrade Agents tab with the ‘Upgrade Now’ button." style="width:100%;" >}}
 1. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
 
-   {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Agent selection screen with filtering options to narrow the list of Agents to upgrade." style="width:100%;" >}}
 
 1. Review the deployment plan and click **Upgrade Agents** to start the upgrade.
 
-   {{< img src="/agent/fleet_automation/agent-upgrades-staged.png" alt="Review upgrade deployment plan" style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/agent-upgrades-staged.png" alt="Deployment plan view showing the list of Agents staged for upgrade." style="width:100%;" >}}
 
 1. Use the [Deployments][10] dashboard to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
-   {{< img src="/agent/fleet_automation/deployments.png" alt="Select the Agents you want to upgrade." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/deployments.png" alt="Deployments dashboard showing upgrade progress and details for each Agent." style="width:100%;" >}}
 {{% /collapse-content %}}
 
 
@@ -70,15 +70,15 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
 1. **Specify the Agents to be upgraded**. You can target a group of Agents by filtering on host information or tags.
    
-   {{< img src="/agent/fleet_automation/agent_upgrade_select_agents.png" alt="See a list of Agent to be upgraded." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/agent_upgrade_select_agents.png" alt="See a list of Agents to be upgraded." style="width:100%;" >}}
 
 1. **Set the deployment window** for these upgrades. You can select the weekdays, time frame, and timezone for the upgrade.
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
 
-1. **Set up notifications** to receive updates on the status on the deployment. You can notify your team on deployment status through the services you’ve already connected with Datadog, like Slack, Teams, or PagerDuty.
+1. **Set up notifications** to receive updates on the status on the deployment. You can notify your team on the deployment status through the services you’ve already connected with Datadog, like Slack, Teams, or PagerDuty.
 
-   {{< img src="/agent/fleet_automation/agent_upgrade_set_notification.png" alt="Select people or channels to be notified about the progess of the upgrade." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/agent_upgrade_set_notification.png" alt="Select people or channels to be notified about the progress of the upgrade." style="width:100%;" >}}
 
 1. Click **Create Schedule** to save the schedule. 
 
@@ -113,7 +113,7 @@ For the most consistent upgrade experience, Datadog recommends managing upgrades
 
 ## Configure Datadog Agents
 
-With Fleet Automation, you can roll out configuration changes across your Agents through guided workflows or bring your own YAML. You can also update and standardize Agent configuration at scale. With Fleet Automation you can:
+With Fleet Automation, you can roll out configuration changes across your Agents through guided workflows or bring your own YAML. You can also update and standardize Agent configuration at scale. With Fleet Automation, you can:
 - Set up Datadog product telemetry such as APM, Logs, and NDM
 - Enable or adjust Agent integrations
 - Manage Agent tags
@@ -158,7 +158,7 @@ In the following example, the `logs_enabled` field is changed from `false` to `t
 
 ### Configuration precedence
 
-The latest configuration is applied. If another tool is also used to configure the DD Agent. If the latest change is made from another tool aside from Fleet Automation, the change takes effect.
+The latest configuration is applied if another tool is also used to configure the Datadog Agent. If the latest change is made from another tool aside from Fleet Automation, the change takes effect.
 
 ### Mirrors and proxies
 
