@@ -6,9 +6,9 @@ disable_toc: false
 
 Input parameters allow you to embed the same app in multiple dashboards or notebooks using different configurations for each instance. 
 
-## Example dashboard
+## Example app
 
-A common use case for input parameters is to reuse and customize an app for different environments, like dev, staging, and production. In the screenshot below, one app is embedded twice in a dashboard. The app on the left shows monitors in the demo environment, while the app on the right shows the same information for monitors in the staging environment. You can test a copy of this dashboard with the blueprint [How to: Input Parameters][3].
+A common use case for input parameters is to reuse and customize an app for different environments, like dev, staging, and production. In the screenshot below, one app is embedded twice in a dashboard. The app on the left shows monitors in the demo environment, while the app on the right shows the same information for monitors in the staging environment. You can play around with this app by cloning the blueprint [How to: Input Parameters][3].
 
 {{< img src="/service_management/app_builder/embedded_apps/example-input-parameters-dashboard.png" alt="Two embedded apps with different input parameters selected" style="width:100%;" >}}
 
