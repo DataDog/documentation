@@ -12,6 +12,12 @@ aliases:
     - /llm_observability/instrumentation/custom_instrumentation
     - /tracing/llm_observability/trace_an_llm_application
     - /llm_observability/setup
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview
@@ -1922,42 +1928,55 @@ This gives you the flexibility to either rely on automatic version management ba
 ## Monitoring costs
 Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
 
+If you're using automatic instrumentation, token and cost metrics appear on your spans automatically. If you're instrumenting manually, follow the guidance below.
+
 {{< tabs >}}
 {{% tab "Python" %}}
-Use `LLMObs.annotate(metrics=...)` to attach token or cost metrics for a LLM/embedding call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
 
-#### Arguments
-
-{{% collapse-content title="Arguments" level="h4" expanded=false id="cost-tracking-arguments" %}}
-
-`metrics`
-: optional - dictionary
-<br />Token: `input_tokens`, `output_tokens`, `total_tokens`, `non_cached_input_tokens`, `cache_read_input_tokens`, `cache_write_input_tokens`
-<br />Cost (in dollars): `input_cost`, `output_cost`, `total_cost`, `non_cached_input_cost`, `cache_read_input_cost`, `cache_write_input_cost`
-
-{{% /collapse-content %}}
-
-#### Example
+#### Use case: Using a common model provider 
+Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with `model_name`, `model_provider`, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import llm
 
-@llm(model_name="model_name", model_provider="model_provider")
-def llm_call_a(prompt):
+@llm(model_name="gpt-5.1", model_provider="openai")
+def llm_call(prompt):
     resp = ... # llm call here
     # Annotate token metrics
     LLMObs.annotate(
-        metrics={"input_tokens": 50, "output_tokens": 120, "total_tokens": 170,},
+        metrics={
+          "input_tokens": 50, 
+          "output_tokens": 120, 
+          "total_tokens": 170,
+          "non_cached_input_tokens": 13,  # optional
+          "cache_read_input_tokens": 22,  # optional
+          "cache_write_input_tokens": 15, # optional
+        },
     )
     return resp
+{{< /code-block >}}
 
-@llm(model_name="model_name", model_provider="model_provider")
-def llm_call_b(prompt):
+#### Use case: Using a custom model
+For custom or unsupported models, you must annotate the span manually with the cost data.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="custom_model", model_provider="model_provider")
+def llm_call(prompt):
     resp = ... # llm call here
     # Annotate cost metrics
     LLMObs.annotate(
-        metrics={"input_cost": 3, "output_cost": 7, "total_cost": 10,},
+        metrics={
+          "input_cost": 3, 
+          "output_cost": 7, 
+          "total_cost": 10,
+          "non_cached_input_cost": 1,    # optional
+          "cache_read_input_cost": 0.6,  # optional
+          "cache_write_input_cost": 1.4, # optional
+        },
     )
     return resp
 {{< /code-block >}}
@@ -2646,6 +2665,9 @@ tracer.use('http', false) // disable the http integration
 {{% /tab %}}
 {{< /tabs >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/openai/openai-python
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html

@@ -87,7 +87,7 @@ Use unit testing to test your rules against sample logs and make sure the detect
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule/
-[2]: https://app.datadoghq.com/security/rules
+[2]: https://app.datadoghq.com/security/siem/rules
 [3]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/threshold/
 [4]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/new_value/
 [5]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly/

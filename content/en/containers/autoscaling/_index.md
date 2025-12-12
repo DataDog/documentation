@@ -4,6 +4,12 @@ description: Automatically scale Kubernetes workloads using Datadog metrics and 
 aliases:
 - /containers/monitoring/autoscaling
 further_reading:
+- link: https://www.datadoghq.com/blog/kubernetes-custom-query-autoscaling
+  tag: Blog
+  text: Optimize Kubernetes workloads with Custom Query Scaling
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
 - link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
   tag: "Blog"
   text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"

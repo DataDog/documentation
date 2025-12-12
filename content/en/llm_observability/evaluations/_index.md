@@ -4,6 +4,12 @@ description: Learn how to configure Evaluations for your LLM application.
 aliases:
     - /tracing/llm_observability/evaluations/
     - /llm_observability/configuration/
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview
@@ -43,6 +49,10 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 ### Retrieving spans
 
 LLM Observability offers an [Export API][9] that you can use to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 [2]: /llm_observability/evaluations/managed_evaluations
