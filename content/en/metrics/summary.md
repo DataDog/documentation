@@ -131,7 +131,7 @@ The Metric Context Explorer provides a centralized view of every Custom Metric a
 
 {{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metrics Context Explorer is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
 
-Use the Metric Context Explorer to pinpoint a metric’s source code and understand how it is generated and who owns it. This visibility helps you troubleshoot issues and govern your metrics effectively. You can also access the metric’s source file directly in its repository, along with its commit and blame history.
+Use the Metric Context Explorer to pinpoint a metric’s source code and understand how it is generated and who owns it. Gain visibility into ownership and context, accelerating troubleshooting and optimization by navigating directly to the metric's source file in its repository, along with its commit and blame history.
 
 {{< img src="metrics/summary/metric_context_explorer_12112025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
