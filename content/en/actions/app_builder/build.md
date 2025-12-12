@@ -137,7 +137,8 @@ To access the App Playground:
 
 Apps are made up of UI components and queries which interact with each other to form the user experience and logic behind each app. The query list and editor appear on the left side of the page, while the app canvas and UI components make up the right side of the page.
 
-Basic customization:
+To change basic elements of your app:
+- From [App Builder][1], hover over an app and click **Edit app** ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
 - To edit the **Name**, **Description**, or **Canvas Color** of your app, click the app name at the top left.
 - Click the **View** button to see your app from the user's perspective. Use view mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
 - To save your app, click **Save**.
@@ -202,11 +203,11 @@ You can perform the following operations:
 
 ### Edit an app
 
-To edit an app with JSON, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+To edit an app with JSON, click **Settings** ({{< img src="icons/settings.png" inline="true" style="width:14px;">}}) and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
 ### Export an app
 
-To copy an app layout across organizations or back up the app, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+To copy an app layout across organizations or back up the app, click **Settings** ({{< img src="icons/settings.png" inline="true" style="width:14px;">}}) and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
 To copy the app to another organization:
 1. Create an app. 
@@ -219,7 +220,7 @@ The **Switch to GUI** option in the settings menu takes you back to the GUI edit
 
 The App Builder Debug Console provides a central place to view real-time logs, action executions, and errors. 
 
-To access the Debug Console, go to [your apps list][14] and click **Edit app** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} for one of your apps. Click **Expand** {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} to see the entire Debug Console. Information inside the console includes:
+To access the Debug Console, hover over an app in [your apps list][14] and click **Edit app** ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}). Click **Expand** ({{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}}) in the bottom right to see the entire Debug Console. Information inside the console includes:
 - **Action Executions:** Track the success and failure of action executions with their associated inputs and outputs.
 - **Errors:** View logs for errors, warnings, and info messages.
 - **Logs:** View configuration errors for your actions, transformers, variables, and components.
