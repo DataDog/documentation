@@ -59,9 +59,9 @@ See [Set Up Pipelines][2] for more information on setting up a source, processor
 {{% tab "Metrics" %}}
 
 <div class="alert alert-info">
-Metrics Volume and Cardinality Control is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
+Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
-Use the [Metrics Volume and Cardinality Control][1] template to create a metrics pipeline.
+Use the [Metric Tag Governance][1] template to create a metrics pipeline.
 
 See [Set Up Pipelines][2] for more information on setting up a source, processors and destination.
 
@@ -114,7 +114,7 @@ The available metric types:
 
 See [Metric Types][3] for more information.
 
-[1]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metrics-volume-and-cardinality-control
+[1]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
 [2]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: /metrics/types/?tab=gauge#metric-types
 

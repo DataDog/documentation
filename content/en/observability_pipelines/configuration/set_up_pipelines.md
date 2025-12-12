@@ -104,7 +104,7 @@ To delete a destination, click on the pencil icon to the top right of the destin
 {{% tab "Metrics" %}}
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the [Metrics Volume and Cardinality Control][2] template.
+1. Select the [Metric Tag Governance][2] template.
 1. Set up the [Datadog Agent][3] source.
 1. Add [processors][4] to filter and transform your metrics.
     - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
@@ -128,7 +128,7 @@ If you want to add another group of processors for a destination:
 **Notes**: There is a limit of 10 processor groups for a pipeline canvas.
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metrics-volume-and-cardinality-control
+[2]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
 [3]: /observability_pipelines/sources/datadog_agent/?tab=metrics
 [4]: /observability_pipelines/processors/
 [5]: /observability_pipelines/destinations/datadog_metrics/
