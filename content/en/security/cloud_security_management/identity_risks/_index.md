@@ -26,7 +26,7 @@ further_reading:
   text: "Detect cross-account access risks in AWS with Datadog"
 ---
 
-Cloud Security Identity Risks is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies][4], [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
+Cloud Security Identity Risks is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies](#remediate-identity-risks), [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
 
 <div class="alert alert-info">Cloud Security Identity Risks is available for AWS, Azure, and GCP.</div>
 
@@ -83,9 +83,17 @@ In the **Who can access this resource?** section, you can:
 
 ## AWS IAM Access Analyzer integration
 
-Datadog CIEM is integrated with [AWS IAM Access Analyzer][5] to further improve the permissions gap detections. If you are using AWS IAM Access Analyzer, Datadog CIEM automatically leverages its unused access findings to enrich permissions gap detections and downsized policy recommendations.
+Datadog CIEM integrates with [AWS IAM Access Analyzer][4], using Access Analyzer's unused-access findings to recommend downsized policies and enrich permissions-gap detections.
 
-<div class="alert alert-info">If you are enabling AWS IAM Access Analyzer for the first time, there is an additional AWS cost associated with this enablement and it could take up to two hours before AWS IAM Access Analyzer's insights are made available.</div>
+You can also use this integration to extend the time frame beyond Datadog's usual permissions-gap detections, which cover 90 days. You can configure Access Analyzer to analyze more (for example, 180 or 360 days), and view those longer-window findings in Identity Risks.
+
+<div class="alert alert-info">
+If you are enabling AWS IAM Access Analyzer for the first time:
+  <ul>
+    <li>There is an additional AWS cost associated with enabling it.</li>
+    <li>It can take up to two hours before AWS IAM Access Analyzer's insights become available in Datadog.</li>
+  </ul>
+</div>
 
 ## Further reading
 
@@ -94,5 +102,4 @@ Datadog CIEM is integrated with [AWS IAM Access Analyzer][5] to further improve 
 [1]: https://app.datadoghq.com/security/identities
 [2]: /security/cloud_security_management/guide/jira
 [3]: /security/cloud_security_management/workflows
-[4]: /security/cloud_security_management/identity_risks/#:~:text=Click%20View%20Suggested%20Policy%20to%20view%20a%20suggested%20downsized%20policy%20based%20on%20the%20actual%20usage.
-[5]: https://aws.amazon.com/iam/access-analyzer/
+[4]: /integrations/iam-access-analyzer/
