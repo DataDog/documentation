@@ -388,7 +388,7 @@ Amazon ECS を使用している場合 (例えば、EC2 上で)、Datadog Agent 
 
 言語固有のトレーサーの中には、Datadog Agent に送信する前にスパンを修正するオプションがあります。アプリケーション固有の要件があり、以下の言語を使用している場合にはこのオプションを使用してください。
 
-<div class="alert alert-warning"><strong>重要</strong>: リクエストが分散されたトレースに関連付けられている場合、これらのフィルタリングルールを通じて部分的に除外すると、結果として得られるトレースのサンプリングが不正確になる場合があります。
+<div class="alert alert-warning"><strong>重要</strong>: リクエストが分散されたトレースに関連付けられている場合、これらのフィルタリングルールを通じて部分的に除外すると、結果として得られるトレースのサンプリングが不正確になる場合があります。</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
