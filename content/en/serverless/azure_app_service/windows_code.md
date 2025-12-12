@@ -282,9 +282,9 @@ Update your existing Web App to include the necessary Datadog App Settings and s
       "type": "Microsoft.Web/sites/siteextensions",
       "apiVersion": "2025-03-01",
       // Uncomment the extension for your runtime:
-      // "name": "[concat(parameters('webAppName'), '/Datadog.AzureAppServices.Node.Apm')]",
-      // "name": "[concat(parameters('webAppName'), '/Datadog.AzureAppServices.DotNet')]",
-      // "name": "[concat(parameters('webAppName'), '/Datadog.AzureAppServices.Java.Apm')]",
+      // "name": "[concat(parameters('webAppName'), '/Datadog.AzureAppServices.Node.Apm')]"
+      // "name": "[concat(parameters('webAppName'), '/Datadog.AzureAppServices.DotNet')]"
+      // "name": "[concat(parameters('webAppName'), '/Datadog.AzureAppServices.Java.Apm')]"
     }
   }
 }
