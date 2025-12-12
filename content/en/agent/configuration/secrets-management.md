@@ -607,6 +607,7 @@ secret_backend_config:
 ##### Custom api server configuration
 If your setup does not expose the default KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT environment variables, then a `api_server` url can be supplied to interact with the k8s REST API.
 ```yaml
+secret_backend_type: k8s.secrets
 secret_backend_config:
   api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
 ```
