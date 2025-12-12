@@ -90,7 +90,7 @@ You can also use this integration to extend the time frame beyond Datadog's usua
 <div class="alert alert-info">
 If you are enabling AWS IAM Access Analyzer for the first time:
   <ul>
-    <li>There is an additional AWS cost associated with enabling it.</li>
+    <li>There is an additional AWS cost associated with using it.</li>
     <li>It can take up to two hours before AWS IAM Access Analyzer's insights become available in Datadog.</li>
   </ul>
 </div>
