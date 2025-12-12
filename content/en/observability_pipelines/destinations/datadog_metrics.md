@@ -14,10 +14,10 @@ Set up the Datadog Metrics destination and its environment variables when you [s
 
 ### Set up the destination
 
-Optionally, toggle the switch to enable Buffering Options.
+Optionally, toggle **Buffering Options** to configure how events are buffered before being sent.
 **Note**: Buffering options is in {{< tooltip glossary="preview" case="title" >}}. Contact your account manager to request access.
 
-- If left disabled, the maximum size for buffering is 500 events.
+- If disabled, the buffer holds a maximum of 500 events. Events beyond this limit are dropped.
 - If enabled:
   - Select the buffer type you want to set (Memory or Disk).
   - Enter the buffer size and select the unit.

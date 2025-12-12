@@ -98,7 +98,7 @@ datadog:
 
  For Kubernetes installs, you can use the internal DNS record of the Observability Pipelines Worker service. For example: `http://opw-observability-pipelines-worker.default.svc.cluster.local:<PORT>`.
 
-**Note**: If the Worker is listening for logs on port 8282, you must use another port for metrics, such as 8383\.
+**Note**: If the Worker is listening for logs on port 8282, you must use another port for metrics, such as 8383.
 
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 [2]: https://docs.datadoghq.com/agent/guide/environment-variables/

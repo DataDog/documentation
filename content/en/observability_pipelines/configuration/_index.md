@@ -49,7 +49,7 @@ Use one of the [logs templates][1] to create a log pipeline.
 - Sensitive Data Redaction
 - Split Logs
 
-See [Set Up Pipelines][2] for more information on setting up a source, processors and destinations.
+See [Set Up Pipelines][2] for more information on setting up a source, processors, and destinations.
 
 [1]: /observability_pipelines/configuration/explore_templates/?tab=logs#templates
 [2]: /observability_pipelines/configuration/set_up_pipelines/
@@ -65,7 +65,7 @@ Use the [Metric Tag Governance][1] template to create a metrics pipeline.
 
 See [Set Up Pipelines][2] for more information on setting up a source, processors and destination.
 
-#### Metrics data
+### Metrics data
 
 Metrics sent to Observability Pipelines include the following:
 
@@ -101,7 +101,7 @@ An example of a metric:
 }
 ```
 
-#### Metric types
+### Metric types
 
 The available metric types:
 
@@ -121,7 +121,7 @@ See [Metric Types][3] for more information.
 {{% /tab %}}
 {{< /tabs >}}
 
- ## Further reading
+## Further reading
 
  {{< partial name="whats-next/whats-next.html" >}}
 

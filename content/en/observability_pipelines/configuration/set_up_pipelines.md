@@ -107,7 +107,7 @@ To delete a destination, click on the pencil icon to the top right of the destin
 1. Select the [Metric Tag Governance][2] template.
 1. Set up the [Datadog Agent][3] source.
 1. Add [processors][4] to filter and transform your metrics.
-    - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
+    - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
 1. Set up the [Datadog Metrics][5] destination.
 
 ### Add another processor group
@@ -161,7 +161,7 @@ See [Advanced Worker Configurations][5] for bootstrapping options.
 
 <div class="alert alert-danger">Creating pipelines using the Observability Pipelines API is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
-1. You can use Observability Pipelines API to [create a pipeline][6].
+1. Use the Observability Pipelines API to [create a pipeline][6]. See the API reference for example request payloads.
 
 1. After creating the pipeline, [install the Worker][7] to send data through the pipeline.
     - See [Environment Variables][9] for the list of environment variables you need for the different sources, processor, and destinations when you install the Worker.
