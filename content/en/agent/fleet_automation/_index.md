@@ -45,7 +45,7 @@ With the Fleet Automation platform, you can:
 Fleet Automation enables you to centrally manage Datadog Agents across all your hosts directly from the Datadog UI or Fleet Automation API. With remote management, you can view the current state of every Agent, apply configuration changes, and roll out version upgrades without needing direct access to individual systems. This provides a consistent, controlled workflow for keeping your fleet secure, up to date, and aligned with your organization’s standards.
 
 <div class="alert alert-info">
-Remote management of Agents in containerized workloads are not supported yet.
+Remote management of Agents in containerized workloads is not supported yet.
 </div>
 
 

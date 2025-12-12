@@ -13,12 +13,11 @@ further_reading:
 ## Overview
 
 Remote Agent management with Fleet Automation simplifies how you deploy and upgrade your Datadog Agents. Instead of relying on external deployment or configuration tools, you can perform these actions directly from the Datadog platform. With Fleet Automation, you can:
-<!-- In the below list, "Configure your Agent" is added after upgrade here because "Upgrade your Agent" is more established while comfigure just left the preview stage. For doc organization, is this order fine? -->
 1. [Upgrade your Agent](#upgrade-agents-remotely)  
 1. [Configure your Agent](#configure-agents)
 
 
-## Getting Started 
+## Getting started 
 ### Prerequisites
 1. Verify that Remote Configuration is enabled for your organization.
 1. Confirm that your Agent version is 7.73 or later.
@@ -36,11 +35,10 @@ Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and
 
 ## Upgrade Agents
 
-### Disk space Requirement 
-Datadog suggests at least 2GB for the initial Agent install and an additional 2GB for upgrading the Agent from Fleet Automation. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
+### Disk space requirement 
+Datadog suggests at least 2GB for the initial Agent install and an additional 2GB to use Fleet Automation to upgrade the Agent. Specifically, the upgrade requires 1.3GB in the `/opt/datadog-packages` directory on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The extra space ensures that there is enough room to maintain two Agent installs temporarily during the upgrade process in case a rollback is needed.
 
-### Upgrade Steps 
-<!-- Should the below section be called "Upgrade Agents"?-->
+### Upgrade steps 
 
 {{% collapse-content title=" How to upgrade Agents remotely" level="h4" expanded=false id="id-for-anchoring" %}}
 
@@ -60,14 +58,13 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 {{% /collapse-content %}}
 
 
-<!-- Should the below section be called "Schedule Agent Upgrades"?-->
 {{% collapse-content title="How to schedule Agent upgrades" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. From the [**Upgrade Agents** tab][4], click **+ Create Schedule**.
 
-1. On the upgrade schedule page, add a **Schedule name**.
+1. On the Upgrade Schedule page, add a **Schedule name**.
 
-1. **Select the Agent version**. You have the option to upgrade the Agents to the latest version, or to one or two versions behind. 
+1. **Select the Agent version**. You have the option to upgrade the Agents to the latest version, to one version behind, or to two versions behind. 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_select_version1.png" alt="See a list of scheduled Agent upgrades." style="width:100%;" >}}
 
@@ -79,7 +76,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
 
-1. Set up notifications and receive updates on the deployment. You can notify individuals or communication integration channels like Slack, Teams, or PagerDuty. 
+1. Set up notifications to receive updates on the deployment. You can notify individuals or communication integration channels like Slack, Teams, or PagerDuty. 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_notification.png" alt="Select people or channels to be notified about the progess of the upgrade." style="width:100%;" >}}
 
@@ -119,7 +116,7 @@ For the most consistent upgrade experience, Datadog recommends managing upgrades
 With Fleet Automation, you can roll out configuration changes across your Agents through guided workflows or bring your own YAML. You can also update and standardize Agent configuration at scale.
 
 ### Configuration steps 
-{{% collapse-content title="Configure multiple Agent" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. In Fleet Automation, open the [Configure Agents][16] tab and click **Create Configuration**.
 1. Select and configure the products (for example, APM, Logs, NDM) that you want the target Agents to run.
@@ -127,7 +124,7 @@ With Fleet Automation, you can roll out configuration changes across your Agents
    {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
 
 1. Review and name your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
-1. Scope Agents to deploy configuration to (for example through tags such as host names, site, or environment).
+1. Scope Agents to deploy configuration to (for example, through tags such as host names, site, or environment).
 1. Review the deployment plan to confirm scoped Agents and deployment settings, such as rollout concurrency.
 1. Start deployment and track progress from the Deployments page.
 {{% /collapse-content %}}
@@ -136,7 +133,7 @@ With Fleet Automation, you can roll out configuration changes across your Agents
 {{% collapse-content title="Configure a single Agent" level="h4" expanded=false id="id-for-anchoring" %}}
 1. In the Datadog UI, navigate to the [Fleet Automation][18] page and select **View Agents**. 
 
-1. (**Optional**) Use `remote_agent_management:enabled` in the search bar to scope to Agents that have Remote Agent Management enabled. You can further scope your search query to `hostname`, `agent_version`, or other attributes to assist in finding the correct host and Agent for this configuration change.
+1. (**Optional**) You can target a group of Agents by filtering on host information or tags.
 
 1. Select your host to open a side panel. In the side panel, click on the **Configuration** tab to access your modifiable configurations. 
 
@@ -144,7 +141,7 @@ With Fleet Automation, you can roll out configuration changes across your Agents
 
 1. Submit these changes by selecting **Deploy Changes**.
 
-**Note**: There are some configurations fields ( for example, `api_key`, `site`, and `notable_events`) that cannot be modified.
+**Note**: There are some configuration fields ( for example, `api_key`, `site`, and `notable_events`) that cannot be modified.
 
 In the following example, the `logs_enabled` field is changed from `false` to `true`. After the changes are deployed, log collection on this Agent is enabled. 
 
