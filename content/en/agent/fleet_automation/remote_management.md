@@ -31,7 +31,7 @@ Remotely upgrading Agents in containerized environments is not supported.
 </div>
 
 ### Permissions 
-Users must have the [Agent Upgrade][2] within Fleet Automation for upgrades, and the Agent Configuration Management permissions to configure Agents remotely. The permission is enabled by default on the Datadog Admin role.
+Users must have the [Agent Upgrade][2] permission within Fleet Automation for upgrades. They must also have the Agent Configuration Management permissions to configure Agents remotely. These permissions are enabled by default on the Datadog Admin role.
 
 ## Upgrade Agents
 
