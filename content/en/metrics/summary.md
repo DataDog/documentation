@@ -127,9 +127,9 @@ The metric description helps you understand what a metric does. Descriptions are
 
 ## Metric Context Explorer
 
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metrics Source Code Integration is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metrics Context Explorer is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
 
-The Source Code integration pinpoints the exact file, line, and owner in your source code where a metric is emitted. This allows you to trace the code, identify code owners, and take action directly from the platform.
+The Metric Context Explorer provides a centralized view of every Custom Metric and its underlying context. Starting with Source Code for Custom Metrics, you can map each metric to the exact file, line, and code owner responsible for its emission, making it easy to trace how a metric is generated, understand ownership, and take action directly from the platform.
 
 {{< img src="metrics/summary/metric_context_explorer_12112025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
