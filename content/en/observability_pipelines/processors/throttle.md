@@ -26,6 +26,16 @@ To set up the processor:
 
 The Throttle processor sets a rate limit on the number of logs sent within a specified time window. While similar to the [Quota processor][2], the main difference between the Throttle and Quota processors is that the Quota processor's time window is fixed at 24 hours and cannot be changed, while the Throttle processor's time window can be configured. Since the Throttle processor's time window is configurable, the processor has a capacity replenishment rate based on the throttling rate and time window you set. See [Capacity replenishment rate](#capacity-replenishment-rate) for more information.
 
+The following table compares the Throttle processor with the Quota processor:
+
+| Feature | Quota Processor | Throttle Processor |
+|---------|----------------|-------------------|
+| Time window | Fixed at 24 hours | Configurable |
+| Handling initial burst of events | Processes data up to the fixed daily limit. | Processes events up to your configured throttling rate. |
+| After the limit is reached | Stops processing data until the 24-hour time window is reset. | Continues at a steady, calculated rate. |
+| Reset mechanism | Resets every 24 hours. | Continuous replenishment. Time window also resets if you redeploy the Worker or the pipeline. |
+| How limits are stored or tracked | Quota limits persist even if the Worker is restarted, because the limits are stored in the backend. | The time window resets if you redeploy the Worker or the pipeline, because throttle limits are tracked in the Worker's memory. |
+
 ### Initial capacity
 
 {{< img src="observability_pipelines/processors/throttling_rate.png" alt="The Throttle processor with the throttling rate set to 1000 K" style="width:40%;" >}}
@@ -61,16 +71,6 @@ If `T` is the time when the processor is enabled and the processor receives 5000
 - ...the processor continues processing events at a steady rate of ~17 events per minute and dropping the rest until the next minute.
 
 **Note**: The replenishment rate determines the maximum throughput after the initial capacity. You can adjust the throttling rate for a higher or lower throughput if needed.
-
-### Comparing the Throttle processor with the Quota processor
-
-| Feature | Quota Processor | Throttle Processor |
-|---------|----------------|-------------------|
-| Time window | Fixed at 24 hours | Configurable |
-| Handling initial burst of events | Processes data up to the fixed daily limit. | Processes events up to your configured throttling rate. |
-| After the limit is reached | Stops processing data until the 24-hour time window is reset. | Continues at a steady, calculated rate. |
-| Reset mechanism | Resets every 24 hours. | Continuous replenishment. Time window also resets if you redeploy the Worker or the pipeline. |
-| How limits are stored or tracked | Quota limits persist even if the Worker is restarted, because the limits are stored in the backend. | The time window resets if you redeploy the Worker or the pipeline, because throttle limits are tracked in the Worker's memory. |
 
 [1]: /api/latest/observability-pipelines/#update-a-pipeline
 [2]: /observability_pipelines/processors/quota/
