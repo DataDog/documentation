@@ -39,7 +39,7 @@ This example input parameter was configured to show the same app in various stag
 
 To embed an app with input parameters:
 
-1. In [App Builder][1], select an app with a configured input parameter(s).
+1. In [App Builder][1], select an app with a configured input parameter.
 1. Click **Add to a dashboard**. 
 1. Select a dashboard, then click **Save and Open**.
 1. In your dashboard, hover over the app and click the **Edit** icon ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
