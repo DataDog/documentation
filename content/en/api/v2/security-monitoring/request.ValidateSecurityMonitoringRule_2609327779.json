@@ -1,0 +1,47 @@
+{
+  "cases": [
+    {
+      "name": "",
+      "status": "info",
+      "notifications": []
+    }
+  ],
+  "hasExtendedTitle": true,
+  "isEnabled": true,
+  "message": "My security monitoring rule",
+  "name": "My security monitoring rule",
+  "options": {
+    "evaluationWindow": 0,
+    "keepAlive": 300,
+    "maxSignalDuration": 600,
+    "detectionMethod": "new_value",
+    "newValueOptions": {
+      "forgetAfter": 7,
+      "instantaneousBaseline": true,
+      "learningDuration": 1,
+      "learningThreshold": 0,
+      "learningMethod": "duration"
+    }
+  },
+  "queries": [
+    {
+      "query": "source:source_here",
+      "groupByFields": [
+        "@userIdentity.assumed_role"
+      ],
+      "distinctFields": [],
+      "metric": "name",
+      "metrics": [
+        "name"
+      ],
+      "aggregation": "new_value",
+      "name": "",
+      "dataSource": "logs"
+    }
+  ],
+  "tags": [
+    "env:prod",
+    "team:security"
+  ],
+  "type": "log_detection"
+}
