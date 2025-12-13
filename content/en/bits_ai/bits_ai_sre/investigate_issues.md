@@ -121,6 +121,7 @@ Investigations happen in two phases:
      - Dashboards
      - [Change events][4]
      - Kubernetes events
+
    Each hypothesis ends in one of three states: validated, invalidated, or inconclusive. When a hypothesis is validated, Bits generates sub-hypotheses and repeats the same investigative process on them.
 
    {{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits AI SRE built and tested" style="width:100%;" >}}
