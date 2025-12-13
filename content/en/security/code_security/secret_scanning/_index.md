@@ -22,7 +22,7 @@ Datadog Secret Scanning scans code to find exposed secrets. Datadog also attempt
 
 ## Set up Secret Scanning
 
-Scans can run in your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only). To get started, go to the [**Code Security Setup**][1] and click **Activate scanning for your repositories** or learn how to set up Secret Scanning using [GitHub actions][5] or with [other CI providers][6].
+Scans can run in your CI/CD pipelines or directly in Datadog with hosted scanning (supported for GitHub, Azure DevOps, and GitLab). To get started, go to the [**Code Security Setup**][1] and click **Activate scanning for your repositories** or learn how to set up Secret Scanning using [GitHub actions][5] or with [other CI providers][6].
 
 ## Secret Scanning rules
 
