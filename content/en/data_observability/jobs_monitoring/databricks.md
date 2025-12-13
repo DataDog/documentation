@@ -1,6 +1,8 @@
 ---
 title: Enable Data Jobs Monitoring for Databricks
 description: "Enable Data Jobs Monitoring for Databricks workspaces with OAuth or Personal Access Token authentication and Datadog Agent installation."
+aliases:
+  - /data_jobs/databricks
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'

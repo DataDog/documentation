@@ -1,6 +1,7 @@
 ---
 title: Connecting with Managed Authentication
-
+aliases:
+- /database_monitoring/managed_authentication
 ---
 
 This guide assumes that you have configured [Database Monitoring][1].
