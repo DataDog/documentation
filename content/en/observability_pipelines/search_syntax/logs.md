@@ -1,7 +1,12 @@
 ---
-title: Search Syntax
-description: Learn the new filter query search syntax for your Observability Pipelines processors.
+title: Logs Search Syntax
+description: Learn how to use logs search syntax for your Observability Pipelines processors filter queries.
 disable_toc: false
+aliases:
+    - /observability_pipelines/search_syntax/
+code_lang: logs
+type: multi-code-lang
+weight: 1
 ---
 ## Overview
 
