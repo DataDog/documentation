@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
+- link: "/network_monitoring/network_path/glossary/"
+  tag: "Doc"
+  text: "Network Path terms and concepts"
 ---
 
 ## Overview
@@ -23,6 +26,8 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 <div class="alert alert-info">For information on billing for Network Path Testing in Synthetic Monitoring, see the <a href="https://www.datadoghq.com/pricing/?product=network-monitoring#products">pricing page</a>.</div>
 
 ## Test creation
+
+**Note**: This page covers running Network Path tests in Synthetic Monitoring, including [Agent-based configuration](#agent-configuration). For Scheduled and Dynamic tests in Network Monitoring, see [Network Path Setup][7].
 
 1. In Datadog, hover over **Digital Experience** in the left-hand menu and select Tests (under Synthetic Monitoring & Testing).
 2. Click **New Test > Network Path Test**.
@@ -131,6 +136,15 @@ Click on a test run in the table at the bottom of the page to view details for t
 
 <div class="alert alert-info">Network Path Testing data is retained for 30 days.</div>
 
+## Understanding Network Path tests
+
+Network Path tests are the same functionality accessible from both the Network Monitoring and Synthetic Monitoring UIs. Tests created in one location appear in both.
+
+Key points:
+- **Unified test creation**: You can create Network Path tests from either the Network Path UI or the Synthetics UI. Both entry points use the same underlying functionality.
+- **UI-based test creation**: In addition to defining tests manually through Agent configuration files in Synthetic Monitoring, you can create Network Path tests directly from the UI with assertions on network data (packet loss, latency, jitter, and number of hops).
+- **Proactive monitoring**: Group browser, API, and Network Path tests in [test suites][9] to monitor how network performance impacts application performance.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -141,6 +155,6 @@ Click on a test run in the table at the bottom of the page to view details for t
 [4]: /synthetics/network_path_tests/#define-alert-conditions
 [5]: /synthetics/network_path_tests/#configure-the-test-monitor
 [6]: /remote_configuration/#enable-remote-configuration
-[7]: /agent/
+[7]: /network_monitoring/network_path/setup/
 [8]: /agent/configuration/agent-commands/#restart-the-agent
 [9]: /synthetics/test_suites
