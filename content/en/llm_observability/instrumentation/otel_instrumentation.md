@@ -62,7 +62,7 @@ After your application starts sending data, the traces automatically appear in t
 <div class="alert alert-danger">
 
 - <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
-- OpenInference is not currently supported.
+- OpenInference is not supported.
 - There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
 
 </div>
