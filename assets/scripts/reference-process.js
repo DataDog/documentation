@@ -72,18 +72,21 @@ $RefParser.dereference(fileData)
 
       // init our global data
       const allData = {"sources":[], "transforms":[], "sinks": []};
+      const additionalSourceData = {};
+      const additionalTransformData = {};
+      const additionalSinkData = deref["allOf"][0]["properties"]["sinks"]["additionalProperties"]["allOf"][0]["properties"];
 
       // add to global data our processed components
-      buildSection("vector::sources::Sources", deref, allData, ["file", "socket", "exec"]);
-      buildSection("vector::transforms::Transforms", deref, allData, ["lua"]);
-      buildSection("vector::sinks::Sinks", deref, allData, ["file", "websocket"]);
+      buildSection("vector::sources::Sources", deref, allData, ["file", "socket", "exec"], additionalSourceData);
+      buildSection("vector::transforms::Transforms", deref, allData, ["lua"], additionalTransformData);
+      buildSection("vector::sinks::Sinks", deref, allData, ["file", "websocket"], additionalSinkData);
 
       // write it out to the file
       fs.writeFileSync("./data/reference/schema.tables.json", safeJsonStringify(allData, null, 2), 'utf8');
     });
 
 
-function buildSection(specStr, deref, allData, componentsToSkip) {
+function buildSection(specStr, deref, allData, componentsToSkip, additionalData) {
   const skiplabels = ["Unit Test", "Unit Test Stream"];
   const specStrSplit = specStr.split('::');
   const name = specStrSplit[specStrSplit.length - 1].toLowerCase();
@@ -109,7 +112,12 @@ function buildSection(specStr, deref, allData, componentsToSkip) {
         }
         table = null;
         try {
-          table = schemaTable("request", value.allOf[0], true);
+          // combine data that should be on every component (additionalData) with this items data
+          let d = value.allOf[0];
+          if (d.allOf) {
+            d.allOf[0].properties = {...value.allOf[0].allOf[0].properties, ...additionalData}
+          }
+          table = schemaTable("request", d, true);
         } catch (e) {
           console.log(`Couldn't created schematable for ${key} from file ${input} - ${e.message}, ${e.stack}`);
         }
@@ -119,6 +127,34 @@ function buildSection(specStr, deref, allData, componentsToSkip) {
         }
       }
   });
+  /*Object.entries(additionalData).forEach(([key, value]) => {
+    //console.log(key, value);
+    let entryData = {
+      "description1": value.description || "",
+      "description2": (value.oneOf) ? value.oneOf[0].description || "" : "",
+      "title": (value.oneOf) ? value.oneOf[0].title || "" : "",
+      "metadata": value._metadata || {},
+      "simple": "",
+      "advanced": "",
+      "html": {}
+    };
+    let lastChar = entryData.description1.slice(-1);
+    if (lastChar === '.') {
+      entryData.description1 = entryData.description1.slice(0, -1);
+    }
+    if(value.oneOf) {
+      table = null;
+      try {
+        table = schemaTable("request", value.oneOf[0], true);
+      } catch (e) {
+        console.log(`Couldn't created schematable for ${key} from file ${input} - ${e.message}, ${e.stack}`);
+      }
+      entryData["html"] = table;
+    }
+    if(!skiplabels.includes(entryData["metadata"]["docs::label"]) && !skiplabels.includes(entryData["metadata"]["docs::human_name"])) {
+      allData[name].push(entryData);
+    }
+  });*/
 }
 
 function simpleExampleYaml(allOf) {
