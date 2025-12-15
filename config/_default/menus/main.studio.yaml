@@ -50,10 +50,11 @@ menu:
         ref_id: bits_ai
         excludes:
           - bits_ai_sre
+          - bits_ai_chat_with_bits_ai
     - name: LLM Observability
       parent: essentials_heading
       params:
-        ref_id: llm_observability
+        ref_id: llm_obs
     - name: Metrics
       parent: essentials_heading
       params:
