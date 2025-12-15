@@ -87,7 +87,7 @@ An example of a metric:
 
 ```
 {
-"name":"datadog.agent.retry_queue_duration.bytes_per_sec",
+  "name":"datadog.agent.retry_queue_duration.bytes_per_sec",
   "tags":{
     "agent":"core",
     "domain":"https://7-72-3-app.agent.datadoghq.com",
