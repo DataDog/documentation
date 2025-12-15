@@ -369,7 +369,7 @@ To see the link between Airflow tasks and dbt jobs, follow those steps:
 1. Install `openlineage-dbt`. Reference [Using dbt with Amazon MWAA][7] to setup dbt in the virtual environment.
 
 ```shell
-pip3 install openlineage-dbt>=1.36.0
+pip3 install openlineage-dbt>=1.39.0
 ```
 
 2. Change the dbt invocation to `dbt-ol` (OpenLineage wrapper for dbt).
