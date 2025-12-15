@@ -80,17 +80,17 @@ To learn how to escape special characters in a tag search, let's look at a metri
 
 ```
 {
-"name":"datadog.agent.retry_queue_duration.bytes_per_sec",
-"tags":{
-    "agent":"core",
-    "domain":"https://7-72-3-app.agent.datadoghq.com",
-    "host":"COMP-YGVQDJG75L",
-    "source_type_name":"System",
-    "env:prod"
-  },
-"timestamp":"2025-11-28T13:03:09Z",
-"kind":"absolute",
-"gauge":{"value":454.1372767857143}
+  "name":"datadog.agent.retry_queue_duration.bytes_per_sec",
+  "tags":{
+      "agent":"core",
+      "domain":"https://7-72-3-app.agent.datadoghq.com",
+      "host":"COMP-YGVQDJG75L",
+      "source_type_name":"System",
+      "env:prod"
+    },
+  "timestamp":"2025-11-28T13:03:09Z",
+  "kind":"absolute",
+  "gauge":{"value":454.1372767857143}
 }
 ```
 
