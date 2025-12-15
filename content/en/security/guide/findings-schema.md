@@ -95,7 +95,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>detection_changed_at</code></td>
       <td>integer</td>
-      <td>Timestamp (UTC) of the last time the finding’s evaluation or detection state changed.</td>
+      <td>Timestamp (UTC) of the last time the finding's evaluation or detection state changed.</td>
     </tr>
     <tr>
       <td><code>origin</code></td>
@@ -122,7 +122,7 @@ These attributes are present on all security findings and describe the fundament
 
 ## Workflow
 
-The workflow namespace contains all mutable information related to the management of a finding, after it was detected. These should only be fields that can be updated manually by users through the UI, or automatically through the Automation Pipeline "the finding is muted (with a reason) assignment to a JIRA ticket"
+The workflow namespace contains all mutable information related to the management of a finding, after it was detected. These should only be fields that can be updated manually by users through the UI, or automatically through the Automation Pipeline. "the finding is muted (with a reason) assignment to a JIRA ticket"
 
 <table>
   <thead>
@@ -161,7 +161,7 @@ The workflow namespace contains all mutable information related to the managemen
     <tr>
       <td><code>integrations</code></td>
       <td>object</td>
-      <td>Base information for integrations like Jira, Case management and/or ServiceNow, used to triage the finding. Relates to how the finding is managed by customers, in order to track and remediate</td>
+      <td>Base information for integrations like Jira, Case management and/or ServiceNow, used to triage the finding. Relates to how the finding is managed by customers, in order to track and remediate. https://datadoghq.atlassian.net/wiki/spaces/SharedXP/pages/4765483198/Data+model+for+case+management+integration+in+findings</td>
     </tr>
   </tbody>
 </table>
@@ -367,9 +367,7 @@ The workflow namespace contains all mutable information related to the managemen
 
 ### Integrations
 
-Base information for integrations like Jira, Case management and/or ServiceNow, used to triage the finding.
-Relates to how the finding is managed by customers, in order to track and remediate.
-https://datadoghq.atlassian.net/wiki/spaces/SharedXP/pages/4765483198/Data+model+for+case+management+integration+in+findings
+Base information for integrations like Jira, Case management and/or ServiceNow, used to triage the finding. Relates to how the finding is managed by customers, in order to track and remediate. https://datadoghq.atlassian.net/wiki/spaces/SharedXP/pages/4765483198/Data+model+for+case+management+integration+in+findings
 
 <table>
   <thead>
@@ -480,8 +478,7 @@ Groups risk-related attributes for the finding. Each key must have a matching ke
 
 ### Risk Details
 
-Groups contextual risk factors that help assess the potential impact of a finding. These fields describe characteristics like exposure, sensitivity, and signs of active exploitation. All findings should have their risk reported here. if a risk is not significant enough to impact the score, it may be placed somewhere else. The name of each key must explicitely show the boolean nature of the risk (typically prefixed with is_ or has_). Though, a risk might be undefined (for instance, we can't tell fi a service is under attack if the users don't have APM nor AAP).
-Each item of risk_details must be accompanied by a top level boolean risk item enabling to easily search for a specific risk.
+Groups contextual risk factors that help assess the potential impact of a finding. These fields describe characteristics like exposure, sensitivity, and signs of active exploitation. All findings should have their risk reported here. if a risk is not significant enough to impact the score, it may be placed somewhere else. The name of each key must explicitely show the boolean nature of the risk (typically prefixed with is_ or has_). Though, a risk might be undefined (for instance, we can't tell fi a service is under attack if the users don't have APM nor AAP). Each item of risk_details must be accompanied by a top level boolean risk item enabling to easily search for a specific risk.
 
 <table>
   <thead>
@@ -571,10 +568,7 @@ Groups evidence and indicators about whether the affected resource has sensitive
     <tr>
       <td><code>impact_cvss</code></td>
       <td>string</td>
-      <td>Describes how sensitive data presence changes the CVSS score. Possible values: `riskier`, `neutral`, `safer`, `unknown`. For instance considering a vulnerability theoretically exploitable through internet:
- - `safer`: the impacted resource is on a private network, requiring the attacker to be on this private network rather than on the internet.
- - `neutral`: if the impacted resource has an actual internet access.
- - `unknown`: we cannot detect network related information on the impacted resource or about the vulnerability.</td>
+      <td>Describes how sensitive data presence changes the CVSS score. Possible values: `riskier`, `neutral`, `safer`, `unknown`. For instance considering a vulnerability theoretically exploitable through internet:  - `safer`: the impacted resource is on a private network, requiring the attacker to be on this private network rather than on the internet.  - `neutral`: if the impacted resource has an actual internet access.  - `unknown`: we cannot detect network related information on the impacted resource or about the vulnerability.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
@@ -732,7 +726,7 @@ Is the service where the finding was detected exposed to attacks?
     <tr>
       <td><code>impact_cvss</code></td>
       <td>string</td>
-      <td>Describes how the resource’s exposure affects the CVSS scoring. Possible values: <code>riskier</code>, <code>safer</code>, <code>neutral</code>, <code>unknown</code>.</td>
+      <td>Describes how the resource's exposure affects the CVSS scoring. Possible values: <code>riskier</code>, <code>safer</code>, <code>neutral</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
@@ -1145,10 +1139,7 @@ Groups information about whether SHA1 is used in a weak hash.
 
 ### Rule
 
-A rule indicates how to discover a vulnerability. For instance, the rule python-flask/ssrf-requests describes how to find some kinds of SSRF in Python code.
-Vulnerability findings with rules mean that the vulnerability was spotted either in your source code, or in running code.
-
-Rules are also used for non-vulnerability findings such as misconfigurations or API security.
+A rule indicates how to discover a vulnerability. For instance, the rule python-flask/ssrf-requests describes how to find some kinds of SSRF in Python code. Vulnerability findings with rules mean that the vulnerability was spotted either in your source code, or in running code.  Rules are also used for non-vulnerability findings such as misconfigurations or API security.
 
 <table>
   <thead>
@@ -1189,8 +1180,7 @@ Rules are also used for non-vulnerability findings such as misconfigurations or 
 
 ### Advisory
 
-An advisory ties a vulnerability to a set of specific software versions. For instance, CVE-2021-44228 indicates that Log4j2 versions 2.0-beta9 through 2.15.0 are vulnerable to injection.
-Vulnerability findings with advisories mean that a vulnerable version of the software was detected (typically through SBOMs).
+An advisory ties a vulnerability to a set of specific software versions. For instance, CVE-2021-44228 indicates that Log4j2 versions 2.0-beta9 through 2.15.0 are vulnerable to injection. Vulnerability findings with advisories mean that a vulnerable version of the software was detected (typically through SBOMs).
 
 <table>
   <thead>
@@ -1775,7 +1765,7 @@ Groups attributes identifying the Infrastructure as Code (IaC) resource related 
     <tr>
       <td><code>provider</code></td>
       <td>string</td>
-      <td>Indicates the IaC (Infrastructure as Code) provider on which the resource is. For example platform Terraform could have “aws”, “gcp” or “azure” as a provider. Some iac platform (e.g. Kubernetes, Dockerfile) don’t have a provider.</td>
+      <td>Indicates the IaC (Infrastructure as Code) provider on which the resource is. For example platform Terraform could have "aws", "gcp" or "azure" as a provider. Some iac platform (e.g. Kubernetes, Dockerfile) don't have a provider.</td>
     </tr>
     <tr>
       <td><code>platform</code></td>
@@ -2029,7 +2019,7 @@ Contains Git metadata linking a finding to source code context. It contains info
     <tr>
       <td><code>codeowners</code></td>
       <td>array (string)</td>
-      <td>Includes codeowner teams extracted from an SCM provider’s CODEOWNERS file (for example, GitHub).</td>
+      <td>Includes codeowner teams extracted from an SCM provider's CODEOWNERS file (for example, GitHub).</td>
     </tr>
   </tbody>
 </table>
