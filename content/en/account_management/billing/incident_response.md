@@ -48,8 +48,8 @@ If your organization has committed to the Incident Response SKU, any user who me
 ### Status Pages usage
 
 All paid Datadog customers can use Status Pages. Access depends on whether your organization has a committed Incident Management or Incident Response seat:
-- If your organization has at least one committed Incident Management or Incident Response seat, you receive full Status Pages functionality, including the ability to create unlimited pages and configure custom domains.
-- If your organization does not have a committed Incident Management or Incident Response seat, you can create a single Status Page and cannot use custom domains.
+- **With at least one committed seat**: Full access, including unlimited pages and custom domains.
+- **Without a committed seat**: Limited to one Status Page and no custom domain support.
 
 ## Manage seats
 
