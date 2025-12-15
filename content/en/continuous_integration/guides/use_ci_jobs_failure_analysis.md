@@ -42,11 +42,11 @@ Jobs failure analysis requires the following logs to be indexed:
 * All logs from the **failing job** being analyzed.
 * All logs from at **least one successful job** with the same job name, pipeline name, and repository. This is needed to identify which logs are relevant in the failing job.
 
-The following [exclusion filter][9] is compatible with Job Failure Analysis:
+The following [exclusion filter][9] is compatible with jobs failure analysis:
 * Query: `datadog.product:cipipeline @ci.is_failure:false`
 * Sampling rule: exclude 90% of `@ci.job.id`
 
-This setup reduces log volume while still supporting Job Failure Analysis, as long as your CI pipeline runs enough successful jobs to ensure logs are indexed for at least one of them.
+This setup reduces log volume while still supporting jobs failure analysis, as long as your CI pipeline runs enough successful jobs to ensure logs are indexed for at least one of them.
 
 #### Domains and Subdomains
 
