@@ -69,6 +69,26 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
   </ul>
   {{< /collapse-content >}}
 
+  {{< collapse-content title="GCP scanning permissions" level="h5" >}}
+  <ul>
+    <li><code>compute.disks.create</code></li>
+    <li><code>compute.disks.createSnapshot</code></li>
+    <li><code>compute.disks.delete</code></li>
+    <li><code>compute.disks.get</code></li>
+    <li><code>compute.disks.setLabels</code></li>
+    <li><code>compute.disks.use</code></li>
+    <li><code>compute.globalOperations.get</code></li>
+    <li><code>compute.images.get</code></li>
+    <li><code>compute.instances.attachDisk</code></li>
+    <li><code>compute.instances.detachDisk</code></li>
+    <li><code>compute.snapshots.create</code></li>
+    <li><code>compute.snapshots.get</code></li>
+    <li><code>compute.snapshots.list</code></li>
+    <li><code>compute.snapshots.delete</code></li>
+    <li><code>compute.snapshots.setLabels</code></li>
+  </ul>
+  {{< /collapse-content >}}
+
 ## Setup
 
 <div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
@@ -119,7 +139,7 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 
 ### Terraform
 
-The [Terraform Datadog Agentless Scanner module][6] provides a simple and reusable configuration for installing the Datadog Agentless scanner.
+The [Terraform Datadog Agentless Scanner module][6] provides a simple and reusable configuration for installing the Datadog Agentless scanner for AWS, Azure, and GCP.
 
 {{% collapse-content title="Terraform setup guide" level="h4" id="terraform-setup" %}}
 If you've already [set up Cloud Security][10] and want to add a new cloud account or enable [Agentless Scanning][1] on an existing integrated cloud account, you can use either Terraform, [AWS CloudFormation][2], or [Azure Resource Manager][5]. This article provides detailed instructions for the Terraform approach.
@@ -169,6 +189,20 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme
+
+{{% /tab %}}
+
+{{% tab "Existing GCP project" %}}
+
+1. On the [Cloud Security Setup][1] page, click **Cloud Integrations > GCP**.
+1. Expand the account containing the project where you want to deploy the Agentless scanner.
+1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner.
+1. Toggle **Vulnerability Scanning** to the on position.
+1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
+1. Click **Done**.
+
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -303,6 +337,17 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 {{% tab "Azure" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **Azure**.
 1. Locate your subscription's tenant, expand the list of subscriptions, and identify the subscription for which you want to disable Agentless Scanning.
+1. Beside the **Enabled** label, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) to open the Vulnerability Scanning modal.
+1. Beside **Vulnerability Scanning**, switch the toggle to the off position.
+1. Click **Done**.
+
+[10]: https://app.datadoghq.com/security/configuration/csm/setup
+
+{{% /tab %}}
+
+{{% tab "GCP" %}}
+1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **GCP**.
+1. Expand the account containing the project where you want to disable Agentless scanning.
 1. Beside the **Enabled** label, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) to open the Vulnerability Scanning modal.
 1. Beside **Vulnerability Scanning**, switch the toggle to the off position.
 1. Click **Done**.

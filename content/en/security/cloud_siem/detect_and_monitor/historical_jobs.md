@@ -73,9 +73,9 @@ See [Calculated Fields Formulas][5] for the available functions and operators.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/rules
+[1]: https://app.datadoghq.com/security/siem/rules
 [2]: https://app.datadoghq.com/security/configuration/siem/rules/new-job?product=siem
-[3]: https://app.datadoghq.com/security/detections/historical-jobs
+[3]: https://app.datadoghq.com/security/siem/detections/historical-jobs
 [4]: /logs/explorer/calculated_fields/
 [5]: /logs/explorer/calculated_fields/formulas/
 [6]: https://app.datadoghq.com/security/configuration/siem/rules/new-job?product=siem#rule-editor-define-queries

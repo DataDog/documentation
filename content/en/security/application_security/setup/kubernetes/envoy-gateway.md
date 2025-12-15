@@ -28,9 +28,63 @@ You can enable Datadog App and API Protection for traffic managed by [Envoy Gate
     - Ensure [APM is enabled][4] in the Agent to allow the external processor service to send its own traces to the Agent.
       - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
 
-## Enabling threat detection
+## Automated configuration with Gateway Injector
 
-To enable App and API Protection with Envoy Gateway, do the following:
+<div class="alert alert-info">
+  The AppSec Gateway Injector can automatically configure your Envoy Gateway for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
+</div>
+
+Instead of manually deploying the external processor and configuring `EnvoyExtensionPolicy` (as shown in the manual configuration section below), use the Injector to handle this automatically.
+
+### When to use the Gateway Injector
+
+Use the Gateway Injector if you want to:
+- Automatically configure multiple Envoy Gateways across namespaces
+- Simplify deployment and ongoing maintenance
+- Manage configuration through infrastructure-as-code with Helm
+- Centralize Application Security processor management
+
+### Quick setup
+
+**1. Deploy the external processor** using the deployment manifest shown in [Step 1](#1-deploy-the-datadog-external-processor-service) below.
+
+**2. Enable the Injector** using Helm values:
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      autoDetect: true
+      processor:
+        service:
+          name: datadog-aap-extproc-service  # Required: name of the processor service
+          namespace: datadog                  # Optional: defaults to Cluster Agent namespace
+        port: 443
+```
+
+Install or upgrade the Datadog Helm chart:
+
+```bash
+helm upgrade -i datadog-agent datadog/datadog -f values.yaml
+```
+
+**3. The injector automatically:**
+- Detects your Envoy Gateway installations
+- Creates `EnvoyExtensionPolicy` resources for each Gateway
+- Configures the policies to route traffic to the external processor
+
+**4. Verify** the configuration by checking for created policies:
+
+```bash
+kubectl get envoyextensionpolicy -A
+```
+
+For detailed configuration options, advanced features, and troubleshooting, see the [Gateway Injector documentation](/containers/kubernetes/appsec).
+
+## Manual configuration (alternative)
+
+If you prefer manual configuration or need fine-grained control over specific gateways, follow the instructions below:
 
 1. Deploying the Datadog External Processor service in your cluster.
 2. Configure an `EnvoyExtensionPolicy` that points to the processor service. This will direct traffic from your Envoy Gateway to this service.
@@ -81,9 +135,7 @@ spec:
           value: "8126"
 
         # Disable TLS for communication between Envoy Gateway and the external processor. Default is true.
-        # By default, the external processor configuration used by Envoy Gateway is configured to not use TLS.
-        # You can enable TLS and configure it with DD_SERVICE_EXTENSION_TLS_KEY_FILE and DD_SERVICE_EXTENSION_TLS_CERT_FILE
-        # and apply a BackendTLSPolicy on the Datadog External Processor Service.
+        # Cannot be enabled for now
         - name: DD_SERVICE_EXTENSION_TLS
           value: "false"
 
