@@ -44,7 +44,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Using Datadog Lambda Extension v67+](#using-datadog-lambda-extension-v67)
 - [Configure Auto-linking for DynamoDB PutItem](#configure-auto-linking-for-dynamodb-putitem)
 - [Visualize and model AWS services correctly](#visualize-and-model-aws-services-by-resource-name)
-- [Send logs to Observability Pipelines](#sending-data-to-observability-pipelines)
+- [Send logs to Observability Pipelines](#send-logs-to-observability-pipelines)
 - [Reload API key secret periodically](#reload-api-key-secret-periodically)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
@@ -788,16 +788,13 @@ Service names reflect the actual AWS resource name rather than only the AWS serv
 
 You may prefer the older service representation model if your dashboards and monitors rely on the legacy naming convention. To restore the previous behavior, set the environment var: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
 
-The updated service modeling configuration is recommended. 
+The updated service modeling configuration is recommended.
 
 ## Send logs to Observability Pipelines
-Version 87+ of the Datadog Lambda Extension allows users to send logs to [Observability Pipelines][58].
 
-To enable this feature, set these environment variables:
-- `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`: `true`
-- `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`: `<YOUR_OBSERVABILITY_PIPELINE_URL>`
+{{% observability_pipelines/lambda_extension_source %}}
 
-**Note**: Your Observability Pipeline must use `Http Server` as the source to process logs from the Lambda extension. Do not use `Datadog Agent` as the source.
+See [Send Datadog Lambda Extension Forwarder Logs to Observability Pipelines][58] for more information.
 
 ## Reload API key secret periodically
 
@@ -873,4 +870,4 @@ If you have trouble configuring your installations, set the environment variable
 [55]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [57]: /tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
-[58]: https://www.datadoghq.com/product/observability-pipelines/
+[58]: /observability_pipelines/sources/lambda_extension/

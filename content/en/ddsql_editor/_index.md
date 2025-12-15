@@ -3,6 +3,7 @@ title: DDSQL Editor
 description: "Query infrastructure resources and telemetry data using natural language or DDSQL syntax with support for tags as table columns."
 aliases:
 - /dashboards/ddsql_editor/
+- /ddsql_editor/getting_started/
 further_reading:
 - link: "ddsql_reference/ddsql_default"
   tag: "Documentation"
@@ -13,9 +14,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
-Querying Logs, Metrics, Spans, RUM, and Product Analytics as data sources in DDSQL is in Preview. Use this form to request access.
-
-If you want access to Spans, RUM, or other data sources not listed in the use cases section, mention them in the access request form.
+If you want to query data sources not yet available, use this form to submit your request.
 {{< /callout >}}
 
 ## Overview

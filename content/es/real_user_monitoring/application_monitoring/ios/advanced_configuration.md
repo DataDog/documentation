@@ -755,49 +755,6 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Instrumentación de Apollo
-
-1. Configura la [monitorización de RUM con Datadog iOS RUM][2].
-
-2. Configura la [instrumentación de URLSession con el SDK de Datadog RUM](#basic-network-instrumentation).
-
-3. Añade lo siguiente a tu archivo `Package.swift`:
-
-   ```swift
-   dependencies: [
-       .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
-   ]
-   ```
-
-4. Añade el interceptor de Datadog a la configuración de tu cliente de Apollo:
-
-   ```swift
-   import Apollo
-   import DatadogApollo
-
-   class CustomInterceptorProvider: DefaultInterceptorProvider {
-       override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
-           var interceptors = super.interceptors(for: operation)
-           interceptors.insert(DatadogApollo.createInterceptor(), at: 0)
-           return interceptors
-       }
-   }
-   ```
-
-Esto añade automáticamente encabezados de Datadog a tus solicitudes de GraphQL, lo que les permite ser rastreados por Datadog.
-
-<div class="alert alert-info">
-  <ul>
-    <li>La integración admite las versiones de Apollo iOS <code>1.0</code> y posteriores.</li>
-    <li>Las operaciones de tipo de <code>consulta</code> y <code>mutación</code> se rastrean, las operaciones de <code>suscripción</code> no.</li>
-    <li>El envío de carga útil de GraphQL está desactivado por defecto. Para activarlo, configura el indicador <code>sendGraphQLPayloads</code> en el constructor del interceptor <code>DatadogApollo</code> de la siguiente forma:</li>
-  </ul>
-
-  <pre><code class="language-swift">
-let datadogInterceptor = DatadogApollo.createInterceptor(sendGraphQLPayloads: true)
-  </code></pre>
-</div>
-
 ### Rastreo automático de errores
 
 Todos los "errores" y logs "críticos" enviados con `Logger` se notifican automáticamente como errores de RUM y se vinculan a la vista de RUM actual:

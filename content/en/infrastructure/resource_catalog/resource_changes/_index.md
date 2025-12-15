@@ -4,7 +4,14 @@ further_reading:
 - link: "/infrastructure/resource_catalog/"
   tag: "Documentation"
   text: "Datadog Resource Catalog Overview"
+- link: "https://www.datadoghq.com/blog/automate-infrastructure-operations-with-datadog-infrastructure-management/"
+  tag: "Blog"
+  text: "Automate infrastructure operations with Datadog Infrastructure Management"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Resource Changes is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}
 Resource Changes is in Preview. Click <strong>Request Access</strong> and complete the form to request access.

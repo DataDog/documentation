@@ -13,7 +13,7 @@ Operations Monitoring is in Preview.
 
 ## Overview
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-1-temp.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
 In Datadog RUM, a feature represents a major user-facing area of your application like checkout, login, or search. Each feature includes operations, which are the critical technical steps that make the experience work. 
 
@@ -171,7 +171,7 @@ options?: {
 GlobalRumMonitor.get().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-	reason: RUMFeatureOperationFailureReason,	// .error, .abandoned, timeout, .other
+	failureReason: RUMFeatureOperationFailureReason,	// .error, .abandoned, timeout, .other
 	attributes: Map<String, Any?>
 )
 ```
@@ -184,7 +184,7 @@ GlobalRumMonitor.get().failFeatureOperation(
 RUMMonitor.shared().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-    reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
+  reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
 	attributes: [AttributeKey: AttributeValue]
 )
 ```
@@ -198,7 +198,7 @@ You may have cases where users are starting several feature operations in parall
 
 ## Monitor your availability on Datadog
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-2-temp-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
 After you've configured the SDK APIs, you can monitor your operations by navigating to **RUM > Performance Monitoring > Operations**.
 

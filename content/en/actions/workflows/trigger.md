@@ -285,7 +285,7 @@ After you trigger a workflow, the workflow page switches to the workflow's **Run
 [4]: /security/cloud_security_management/workflows
 [5]: /service_management/workflows/build/#input-parameters
 [6]: https://app.datadoghq.com/incidents/settings#Rules
-[7]: https://datadoghq.slack.com/
+[7]: https://chat.datadoghq.com/
 [8]: /account_management/api-app-keys/#api-keys
 [9]: /account_management/api-app-keys/#application-keys
 [10]: /account_management/api-app-keys/#scopes
