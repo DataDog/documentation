@@ -72,7 +72,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
    
    {{< img src="/agent/fleet_automation/agent_upgrade_select_agents.png" alt="See a list of Agents to be upgraded." style="width:100%;" >}}
 
-1. **Set the deployment window** for these upgrades. You can select the weekdays, time frame, and timezone for the upgrade.
+1. **Set the deployment window** for these upgrades. You can select the days, time frame, and timezone for the upgrade.
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
 
