@@ -39,11 +39,17 @@ In the On-Call product, a user does not need a seat to view existing pages, esca
 
 A user needs an **Incident Management seat** if they perform any of the following actions. These actions require a seat whether they are performed in the Datadog UI or through integrations such as Microsoft Teams or Slack.
 - Modify an incident (for example, update severity)
-- Add a comment, graph, or link to an [incident timeline][8]
+- Add a comment, graph, or link to an incident timeline
 
-In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement. 
+In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
+
+### Status Pages usage
+
+All paid Datadog customers can use Status Pages, with capabilities determined by whether the organization has an Incident Management or Incident Response seat:
+- If your organization has at least one committed Incident Management or Incident Response seat, you receive full Status Pages functionality, including the ability to create unlimited pages and configure custom domains.
+- If your organization does not have a committed Incident Management or Incident Response seat, you can create a single Status Page and cannot use custom domains.
 
 ## Manage seats
 
