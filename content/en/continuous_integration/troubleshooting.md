@@ -41,8 +41,17 @@ Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong co
 ## Gitlab pipeline duration mismatch
 
 The pipeline duration shown in CI Visibility is expected to be different for the following reasons:
-* Datadog pipeline duration includes queue time, manual approvals, gaps between jobs, etc, while Gitlab doesn't. To make a fair comparison we need to look at the [execution time][18] instead.
-* The execution time shown in Datadog will also differ from Gitlab if there are downstream pipelines or runner system failures.
+* Datadog pipeline duration includes queue time, manual approvals, gaps between jobs, etc, while Gitlab doesn't. To make a fair comparison we need to look at the [execution time][18] instead:
+| Datadog | Gitlab |
+|---|---|
+| [Pipeline execution time][18] | Pipeline duration |
+| Pipeline duration | *Not available* |
+
+* The execution time shown in Datadog will also differ from Gitlab in the following cases:
+| Use case | Gitlab duration | Datadog execution time |
+|---|---|---|
+| Downstream pipelines | Included | Not included |
+| Runner system failures | Not included | Included |
 
 
 ## Limitations on running pipelines
