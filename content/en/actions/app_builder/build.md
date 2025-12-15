@@ -34,7 +34,6 @@ With Bits AI, you can generate a complete app from a single prompt. Describe the
 
 To build an app with Bits AI:
 1. From [App Builder][1], click **New App**.
-1. Click **Start with AI**. 
 1. Click a suggested prompt, or enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example prompts:
    - `Display a list of AWS Lambda functions in a table. Allow the user to filter by function name and specify the limit.`
    - `Display GitHub pull requests in a table.`
