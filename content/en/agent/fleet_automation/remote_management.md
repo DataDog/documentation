@@ -125,7 +125,7 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 {{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. In Fleet Automation, open the [Configure Agents][16] tab and click **Create Configuration**.
-1. **Select and configure** the products (for example, APM, Logs, NDM) that you want the target Agents to run.
+1. **Select and configure** the products (for example, APM, Logs, or NDM) that you want the target Agents to run.
 
    {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
 
@@ -147,7 +147,7 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 
 1. **Submit** these changes by selecting **Deploy Changes**.
 
-**Note**: There are some configuration fields ( for example, `api_key`, `site`, and `notable_events`) that cannot be modified.
+**Note**: Some configuration fields ( for example, `api_key`, `site`, and `notable_events`) cannot be modified.
 
 In the following example, the `logs_enabled` field is changed from `false` to `true`. After the changes are deployed, log collection on this Agent is enabled. 
 
