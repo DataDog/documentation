@@ -66430,9 +66430,6 @@ paths:
         operator: OR
         permissions:
         - user_access_read
-      x-unstable: '**Note: Data Access is in preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
     post:
       description: Create a dataset with the configurations in the request.
       operationId: CreateDataset
@@ -66483,9 +66480,6 @@ paths:
         operator: OR
         permissions:
         - user_access_manage
-      x-unstable: '**Note: Data Access is in preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/datasets/{dataset_id}:
     delete:
       description: Deletes the dataset associated with the ID.
@@ -66516,9 +66510,6 @@ paths:
         operator: OR
         permissions:
         - user_access_manage
-      x-unstable: '**Note: Data Access is in preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
     get:
       description: Retrieves the dataset associated with the ID.
       operationId: GetDataset
@@ -66551,9 +66542,6 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
-      x-unstable: '**Note: Data Access is in preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
     put:
       description: Edits the dataset associated with the ID.
       operationId: UpdateDataset
@@ -66595,9 +66583,6 @@ paths:
         operator: OR
         permissions:
         - user_access_manage
-      x-unstable: '**Note: Data Access is in preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/deployment_gates:
     post:
       description: Endpoint to create a deployment gate.
@@ -68233,6 +68218,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
