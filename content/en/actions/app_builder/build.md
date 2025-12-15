@@ -26,7 +26,7 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 ## Create an app
 
-When creating a new app, you can use [AI][22], [a blueprint][18], [a layout][19], or [data][20] to get started. Alternatively, you can [start from scratch][21] or use the [App Playground][23] to learn more about App Builder.
+When creating a new app, you can use [AI][22], [a blueprint][18], [a layout][19], or [an action][20] to get started. Alternatively, you can [start from scratch][21] or use the [App Playground][23] to learn more about App Builder.
 
 ### Build an app with AI
 
@@ -74,9 +74,9 @@ To create an app from a layout:
 1. Click **Use Layout**.
 1. [Customize your app][15].
 
-### Build an app from data
+### Build an app from an action
 
-You can get started with an app by importing data from one of the integrations listed in the [Action Catalog][17].
+You can create an app by choosing an integration and specific actions from the [Action Catalog][17]. App Builder preconfigures the actions and their queries, bringing live data into the app canvas. You can then connect components and test the app immediately. This method is best if you already have an integration and actions in mind (such as interacting with [a Datadog datastore][28]).
 
 1. From [App Builder][1], click **New App**. 
 1. Click **Start with Data** in the onboarding modal. 
@@ -233,7 +233,7 @@ To access the Debug Console, hover over an app in [your apps list][14] and click
 [17]: /actions/actions_catalog/
 [18]: /actions/app_builder/build/#build-an-app-from-a-blueprint
 [19]: /actions/app_builder/build/#build-an-app-from-a-layout
-[20]: /actions/app_builder/build/#build-an-app-from-data
+[20]: /actions/app_builder/build/#build-an-app-from-an-action
 [21]: /actions/app_builder/build/#create-a-custom-app
 [22]: /actions/app_builder/build/#build-an-app-with-ai
 [23]: /actions/app_builder/build/#see-whats-possible-with-app-playground
@@ -241,3 +241,4 @@ To access the Debug Console, hover over an app in [your apps list][14] and click
 [25]: https://app.datadoghq.com/app-builder/apps/edit?template=export-synthetics&viewMode=templatePreview
 [26]: https://app.datadoghq.com/app-builder/apps/edit?template=how_to__write_custom_code&viewMode=templatePreview
 [27]: /actions/forms/
+[28]: https://app.datadoghq.com/actions/action-catalog#com.datadoghq.dd/com.datadoghq.dd.apps_datastore
