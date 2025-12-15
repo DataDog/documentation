@@ -19,7 +19,9 @@ Security findings in Datadog represent vulnerabilities, misconfigurations, and s
 
 All findings share a common schema that enables unified querying and analysis across different security products.
 
-## Core attributes
+
+
+{{% collapse-content title="Core Attributes" level="h4" %}}
 
 These attributes are present on all security findings and describe the fundamental nature and status of the finding.
 
@@ -120,7 +122,9 @@ These attributes are present on all security findings and describe the fundament
   </tbody>
 </table>
 
-## Workflow
+{{% /collapse-content %}}
+
+{{% collapse-content title="Workflow" level="h4" %}}
 
 Contains all mutable information related to the management of a finding after it was detected. Includes fields that can be updated manually through the UI or automatically through automation pipelines.
 
@@ -166,7 +170,7 @@ Contains all mutable information related to the management of a finding after it
   </tbody>
 </table>
 
-### Triage
+{{% collapse-content title="Triage" level="h5" %}}
 
 <table>
   <thead>
@@ -195,7 +199,7 @@ Contains all mutable information related to the management of a finding after it
   </tbody>
 </table>
 
-#### Assignee
+{{% collapse-content title="Assignee" level="h6" %}}
 
 <table>
   <thead>
@@ -229,7 +233,7 @@ Contains all mutable information related to the management of a finding after it
   </tbody>
 </table>
 
-##### Updated By
+{{% collapse-content title="Updated By" level="h6" %}}
 
 <table>
   <thead>
@@ -253,7 +257,13 @@ Contains all mutable information related to the management of a finding after it
   </tbody>
 </table>
 
-### Due Date
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Due Date" level="h5" %}}
 
 <table>
   <thead>
@@ -282,7 +292,9 @@ Contains all mutable information related to the management of a finding after it
   </tbody>
 </table>
 
-### Mute
+{{% /collapse-content %}}
+
+{{% collapse-content title="Mute" level="h5" %}}
 
 <table>
   <thead>
@@ -341,7 +353,7 @@ Contains all mutable information related to the management of a finding after it
   </tbody>
 </table>
 
-#### Muted By
+{{% collapse-content title="Muted By" level="h6" %}}
 
 <table>
   <thead>
@@ -365,7 +377,11 @@ Contains all mutable information related to the management of a finding after it
   </tbody>
 </table>
 
-### Integrations
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Integrations" level="h5" %}}
 
 Contains integrations like Jira, Case Management, or ServiceNow used to triage and remediate the finding.
 
@@ -396,11 +412,11 @@ Contains integrations like Jira, Case Management, or ServiceNow used to triage a
   </tbody>
 </table>
 
-## Risk
+{{% /collapse-content %}}
 
-Risk attributes assess the potential impact and exposure of a finding.
+{{% /collapse-content %}}
 
-### Risk
+{{% collapse-content title="Risk" level="h4" %}}
 
 Groups risk-related attributes for the finding. Each key must have a matching key in the `risk_details` namespace.
 
@@ -476,7 +492,9 @@ Groups risk-related attributes for the finding. Each key must have a matching ke
   </tbody>
 </table>
 
-### Risk Details
+{{% /collapse-content %}}
+
+{{% collapse-content title="Risk Details" level="h4" %}}
 
 Groups contextual risk factors that help assess the potential impact of a finding. These fields describe characteristics like exposure, sensitivity, and signs of active exploitation.
 
@@ -552,7 +570,7 @@ Groups contextual risk factors that help assess the potential impact of a findin
   </tbody>
 </table>
 
-#### Has Sensitive Data
+{{% collapse-content title="Has Sensitive Data" level="h5" %}}
 
 Groups evidence and indicators about whether the affected resource has sensitive data.
 
@@ -583,7 +601,7 @@ Groups evidence and indicators about whether the affected resource has sensitive
   </tbody>
 </table>
 
-##### Evidence
+{{% collapse-content title="Evidence" level="h6" %}}
 
 Contains evidence supporting the presence of sensitive data.
 
@@ -604,7 +622,11 @@ Contains evidence supporting the presence of sensitive data.
   </tbody>
 </table>
 
-#### Is Function Reachable
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Is Function Reachable" level="h5" %}}
 
 Groups evidence and indicators about whether the vulnerable function or module is used in the code.
 
@@ -635,7 +657,7 @@ Groups evidence and indicators about whether the vulnerable function or module i
   </tbody>
 </table>
 
-##### Evidence
+{{% collapse-content title="Evidence" level="h6" %}}
 
 Contains the evidence used to determine whether the function is reachable.
 
@@ -656,7 +678,7 @@ Contains the evidence used to determine whether the function is reachable.
   </tbody>
 </table>
 
-###### Locations
+{{% collapse-content title="Locations" level="h6" %}}
 
 <table>
   <thead>
@@ -710,7 +732,13 @@ Contains the evidence used to determine whether the function is reachable.
   </tbody>
 </table>
 
-#### Is Exposed To Attacks
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Is Exposed To Attacks" level="h5" %}}
 
 Groups evidence and indicators about whether the service where the finding was detected is exposed to attacks.
 
@@ -741,7 +769,7 @@ Groups evidence and indicators about whether the service where the finding was d
   </tbody>
 </table>
 
-##### Evidence
+{{% collapse-content title="Evidence" level="h6" %}}
 
 Contains evidence for the presence of attacks.
 
@@ -772,7 +800,11 @@ Contains evidence for the presence of attacks.
   </tbody>
 </table>
 
-#### Has Privileged Access
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Has Privileged Access" level="h5" %}}
 
 Groups evidence and indicators about whether the resource has privileged access.
 
@@ -803,7 +835,7 @@ Groups evidence and indicators about whether the resource has privileged access.
   </tbody>
 </table>
 
-##### Evidence
+{{% collapse-content title="Evidence" level="h6" %}}
 
 Contains evidence showing proof of privileged access.
 
@@ -824,7 +856,11 @@ Contains evidence showing proof of privileged access.
   </tbody>
 </table>
 
-#### Is Production
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Is Production" level="h5" %}}
 
 Groups evidence and indicators about whether the resource associated with the finding is running in a production environment.
 
@@ -855,7 +891,9 @@ Groups evidence and indicators about whether the resource associated with the fi
   </tbody>
 </table>
 
-#### Is Publicly Accessible
+{{% /collapse-content %}}
+
+{{% collapse-content title="Is Publicly Accessible" level="h5" %}}
 
 Groups information about whether the affected resource is accessible from the public internet.
 
@@ -886,7 +924,7 @@ Groups information about whether the affected resource is accessible from the pu
   </tbody>
 </table>
 
-##### Evidence
+{{% collapse-content title="Evidence" level="h6" %}}
 
 Contains evidence showing proof of access from the internet.
 
@@ -907,7 +945,11 @@ Contains evidence showing proof of access from the internet.
   </tbody>
 </table>
 
-#### Has Exploit Available
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Has Exploit Available" level="h5" %}}
 
 Groups information about whether a known exploit exists for this finding advisory.
 
@@ -938,7 +980,7 @@ Groups information about whether a known exploit exists for this finding advisor
   </tbody>
 </table>
 
-##### Evidence
+{{% collapse-content title="Evidence" level="h6" %}}
 
 Contains evidence about exploit availability.
 
@@ -969,7 +1011,11 @@ Contains evidence about exploit availability.
   </tbody>
 </table>
 
-#### Has High Exploitability Chance
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Has High Exploitability Chance" level="h5" %}}
 
 Groups evidence and indicators about whether the vulnerability is likely to be exploited based on EPSS (Exploit Prediction Scoring System).
 
@@ -1000,7 +1046,7 @@ Groups evidence and indicators about whether the vulnerability is likely to be e
   </tbody>
 </table>
 
-##### Evidence
+{{% collapse-content title="Evidence" level="h6" %}}
 
 Contains evidence of the EPSS score.
 
@@ -1031,7 +1077,11 @@ Contains evidence of the EPSS score.
   </tbody>
 </table>
 
-#### Is Tainted From Request Url
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Is Tainted From Request Url" level="h5" %}}
 
 Groups information about whether the tainted parts originating from the request URL.
 
@@ -1057,7 +1107,9 @@ Groups information about whether the tainted parts originating from the request 
   </tbody>
 </table>
 
-#### Is Tainted From Query String
+{{% /collapse-content %}}
+
+{{% collapse-content title="Is Tainted From Query String" level="h5" %}}
 
 Groups information about whether the tainted parts originating from a query string.
 
@@ -1083,7 +1135,9 @@ Groups information about whether the tainted parts originating from a query stri
   </tbody>
 </table>
 
-#### Is Tainted From Database
+{{% /collapse-content %}}
+
+{{% collapse-content title="Is Tainted From Database" level="h5" %}}
 
 Groups information about whether tainted parts originate from a database.
 
@@ -1109,7 +1163,9 @@ Groups information about whether tainted parts originate from a database.
   </tbody>
 </table>
 
-#### Is Using Sha1
+{{% /collapse-content %}}
+
+{{% collapse-content title="Is Using Sha1" level="h5" %}}
 
 Groups information about whether SHA1 is used in a weak hash.
 
@@ -1135,9 +1191,11 @@ Groups information about whether SHA1 is used in a weak hash.
   </tbody>
 </table>
 
-## Vulnerability information
+{{% /collapse-content %}}
 
-### Rule
+{{% /collapse-content %}}
+
+{{% collapse-content title="Rule" level="h4" %}}
 
 Describes how to discover a vulnerability. Vulnerability findings with rules mean the vulnerability was detected in source code or running code. Rules are also used for non-vulnerability findings such as misconfigurations or API security.
 
@@ -1178,7 +1236,9 @@ Describes how to discover a vulnerability. Vulnerability findings with rules mea
   </tbody>
 </table>
 
-### Advisory
+{{% /collapse-content %}}
+
+{{% collapse-content title="Advisory" level="h4" %}}
 
 Ties a vulnerability to a set of specific software versions. Vulnerability findings with advisories mean a vulnerable version of the software was detected (typically through SBOMs).
 
@@ -1229,7 +1289,9 @@ Ties a vulnerability to a set of specific software versions. Vulnerability findi
   </tbody>
 </table>
 
-### Vulnerability
+{{% /collapse-content %}}
+
+{{% collapse-content title="Vulnerability" level="h4" %}}
 
 Contains information specific to vulnerabilities.
 
@@ -1290,7 +1352,7 @@ Contains information specific to vulnerabilities.
   </tbody>
 </table>
 
-#### Stack
+{{% collapse-content title="Stack" level="h5" %}}
 
 <table>
   <thead>
@@ -1314,7 +1376,11 @@ Contains information specific to vulnerabilities.
   </tbody>
 </table>
 
-## Remediation
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Remediation" level="h4" %}}
 
 Groups information about the finding's remediation.
 
@@ -1385,7 +1451,7 @@ Groups information about the finding's remediation.
   </tbody>
 </table>
 
-### Codegen
+{{% collapse-content title="Codegen" level="h5" %}}
 
 <table>
   <thead>
@@ -1409,7 +1475,9 @@ Groups information about the finding's remediation.
   </tbody>
 </table>
 
-### Package
+{{% /collapse-content %}}
+
+{{% collapse-content title="Package" level="h5" %}}
 
 <table>
   <thead>
@@ -1448,7 +1516,9 @@ Groups information about the finding's remediation.
   </tbody>
 </table>
 
-### Root Package
+{{% /collapse-content %}}
+
+{{% collapse-content title="Root Package" level="h5" %}}
 
 <table>
   <thead>
@@ -1487,7 +1557,9 @@ Groups information about the finding's remediation.
   </tbody>
 </table>
 
-### Host Image
+{{% /collapse-content %}}
+
+{{% collapse-content title="Host Image" level="h5" %}}
 
 Contains remediation suggesting the latest host image version that may remediate the vulnerability.
 
@@ -1508,7 +1580,7 @@ Contains remediation suggesting the latest host image version that may remediate
   </tbody>
 </table>
 
-#### Latest Major
+{{% collapse-content title="Latest Major" level="h6" %}}
 
 <table>
   <thead>
@@ -1527,7 +1599,11 @@ Contains remediation suggesting the latest host image version that may remediate
   </tbody>
 </table>
 
-### Container Image
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Container Image" level="h5" %}}
 
 Contains remediation suggesting a newer container image version that may remediate the vulnerability.
 
@@ -1548,7 +1624,7 @@ Contains remediation suggesting a newer container image version that may remedia
   </tbody>
 </table>
 
-#### Closest No Vulnerabilities
+{{% collapse-content title="Closest No Vulnerabilities" level="h6" %}}
 
 <table>
   <thead>
@@ -1577,7 +1653,11 @@ Contains remediation suggesting a newer container image version that may remedia
   </tbody>
 </table>
 
-### Code Update
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Code Update" level="h5" %}}
 
 <table>
   <thead>
@@ -1596,7 +1676,9 @@ Contains remediation suggesting a newer container image version that may remedia
   </tbody>
 </table>
 
-### Microsoft Kb
+{{% /collapse-content %}}
+
+{{% collapse-content title="Microsoft Kb" level="h5" %}}
 
 Contains remediation strategy using a Microsoft Knowledge Base (KB) article.
 
@@ -1617,7 +1699,7 @@ Contains remediation strategy using a Microsoft Knowledge Base (KB) article.
   </tbody>
 </table>
 
-#### Closest Fix Advisory
+{{% collapse-content title="Closest Fix Advisory" level="h6" %}}
 
 Specifies the closest patch available to address the current advisory.
 
@@ -1638,7 +1720,13 @@ Specifies the closest patch available to address the current advisory.
   </tbody>
 </table>
 
-## Compliance
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Compliance" level="h4" %}}
 
 Contains information specific to compliance findings, such as compliance rule or evaluation (pass/fail).
 
@@ -1674,11 +1762,9 @@ Contains information specific to compliance findings, such as compliance rule or
   </tbody>
 </table>
 
-## Resource identification
+{{% /collapse-content %}}
 
-These attributes identify and provide context about the affected resource.
-
-### Cloud Resource
+{{% collapse-content title="Cloud Resource" level="h4" %}}
 
 Groups attributes identifying the cloud resource affected by the finding.
 
@@ -1749,7 +1835,9 @@ Groups attributes identifying the cloud resource affected by the finding.
   </tbody>
 </table>
 
-### Iac Resource
+{{% /collapse-content %}}
+
+{{% collapse-content title="Iac Resource" level="h4" %}}
 
 Groups attributes identifying the Infrastructure as Code (IaC) resource related to the finding.
 
@@ -1775,7 +1863,9 @@ Groups attributes identifying the Infrastructure as Code (IaC) resource related 
   </tbody>
 </table>
 
-### K8S
+{{% /collapse-content %}}
+
+{{% collapse-content title="K8S" level="h4" %}}
 
 Contains Kubernetes fields for findings generated against Kubernetes resources.
 
@@ -1796,7 +1886,9 @@ Contains Kubernetes fields for findings generated against Kubernetes resources.
   </tbody>
 </table>
 
-### Host
+{{% /collapse-content %}}
+
+{{% collapse-content title="Host" level="h4" %}}
 
 Contains host information.
 
@@ -1837,7 +1929,7 @@ Contains host information.
   </tbody>
 </table>
 
-#### Os
+{{% collapse-content title="Os" level="h5" %}}
 
 <table>
   <thead>
@@ -1861,7 +1953,11 @@ Contains host information.
   </tbody>
 </table>
 
-### Service
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Service" level="h4" %}}
 
 <table>
   <thead>
@@ -1890,7 +1986,9 @@ Contains host information.
   </tbody>
 </table>
 
-### Container Image
+{{% /collapse-content %}}
+
+{{% collapse-content title="Container Image" level="h4" %}}
 
 <table>
   <thead>
@@ -1954,11 +2052,7 @@ Contains host information.
   </tbody>
 </table>
 
-## Code context
-
-These attributes provide source code context for findings detected in code.
-
-### Git
+{{% /collapse-content %}}{{% collapse-content title="Git" level="h4" %}}
 
 Contains Git metadata linking a finding to source code context. Includes information about the repository, branch, commit, author, and committer.
 
@@ -2024,7 +2118,7 @@ Contains Git metadata linking a finding to source code context. Includes informa
   </tbody>
 </table>
 
-#### Author
+{{% collapse-content title="Author" level="h5" %}}
 
 <table>
   <thead>
@@ -2053,7 +2147,9 @@ Contains Git metadata linking a finding to source code context. Includes informa
   </tbody>
 </table>
 
-#### Committer
+{{% /collapse-content %}}
+
+{{% collapse-content title="Committer" level="h5" %}}
 
 <table>
   <thead>
@@ -2082,7 +2178,11 @@ Contains Git metadata linking a finding to source code context. Includes informa
   </tbody>
 </table>
 
-### Code Location
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Code Location" level="h4" %}}
 
 Groups attributes pinpointing the specific file and line numbers where the finding is located.
 
@@ -2138,7 +2238,9 @@ Groups attributes pinpointing the specific file and line numbers where the findi
   </tbody>
 </table>
 
-### Package
+{{% /collapse-content %}}
+
+{{% collapse-content title="Package" level="h4" %}}
 
 Contains package manager information. A package manager automates the installation, upgrading, configuration, and removal of software packages.
 
@@ -2209,7 +2311,7 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-#### Declaration
+{{% collapse-content title="Declaration" level="h5" %}}
 
 <table>
   <thead>
@@ -2238,7 +2340,7 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-##### Block
+{{% collapse-content title="Block" level="h6" %}}
 
 <table>
   <thead>
@@ -2292,7 +2394,9 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-##### Name
+{{% /collapse-content %}}
+
+{{% collapse-content title="Name" level="h6" %}}
 
 <table>
   <thead>
@@ -2346,7 +2450,9 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-##### Version
+{{% /collapse-content %}}
+
+{{% collapse-content title="Version" level="h6" %}}
 
 <table>
   <thead>
@@ -2400,7 +2506,13 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-### Secret
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Secret" level="h4" %}}
 
 <table>
   <thead>
@@ -2419,7 +2531,9 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-### Api Endpoint
+{{% /collapse-content %}}
+
+{{% collapse-content title="Api Endpoint" level="h4" %}}
 
 Contains the HTTP endpoint representation.
 
@@ -2454,6 +2568,8 @@ Contains the HTTP endpoint representation.
     </tr>
   </tbody>
 </table>
+
+{{% /collapse-content %}}
 
 ## Tags
 
