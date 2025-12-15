@@ -305,7 +305,7 @@ local/bin/py/submit_github_status_check.py
 !local/bin/py/build/configuration/pull_config.yaml
 !local/bin/py/build/configuration/integration_merge.yaml
 
-# CDOCS
+# CDOCS (Customizable Docs)
 layouts/partials/markdoc-assets.html
 static/cdocs
 content/en/**/*.ast.json
