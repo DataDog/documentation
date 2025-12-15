@@ -44,16 +44,16 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
 1. From the **Upgrade Agents** tab, click **Upgrade Now**.
 
-   {{< img src="/agent/fleet_automation/upgrade-screen1.png" alt="UI showing the Upgrade Agents tab with the ‘Upgrade Now’ button." style="width:100%;" >}}
-1. Select the Agents you want to upgrade. You can target a group of Agents by filtering on host information or tags.
+   {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="UI showing the Upgrade Agents tab with the ‘Upgrade Now’ button." style="width:100%;" >}}
+1. **Select the Agents you want to upgrade**. You can target a group of Agents by filtering on host information or tags.
 
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="Agent selection screen with filtering options to narrow the list of Agents to upgrade." style="width:100%;" >}}
 
-1. Review the deployment plan and click **Upgrade Agents** to start the upgrade.
+1. **Review the deployment plan** and click **Upgrade Agents** to start the upgrade.
 
    {{< img src="/agent/fleet_automation/agent-upgrades-staged.png" alt="Deployment plan view showing the list of Agents staged for upgrade." style="width:100%;" >}}
 
-1. Use the [Deployments][10] dashboard to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
+1. **Use the [Deployments][10] dashboard** to track the upgrade process. Clicking on an Agent in the deployments table gives you more information about the upgrade, including the duration time, progress, and the user who started the upgrade.
    {{< img src="/agent/fleet_automation/deployments.png" alt="Deployments dashboard showing upgrade progress and details for each Agent." style="width:100%;" >}}
 {{% /collapse-content %}}
 
@@ -76,7 +76,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_window.png" alt="Select the time frame for your Agent upgrades." style="width:100%;" >}}
 
-1. **Set up notifications** to receive updates on the status on the deployment. You can notify your team on the deployment status through the services you’ve already connected with Datadog, like Slack, Teams, or PagerDuty.
+1. **Set up notifications** to receive updates on the status of the deployment. You can notify your team of the deployment status through the services you’ve already connected with Datadog, like Slack, Teams, or PagerDuty.
 
    {{< img src="/agent/fleet_automation/agent_upgrade_set_notification.png" alt="Select people or channels to be notified about the progress of the upgrade." style="width:100%;" >}}
 
@@ -84,7 +84,8 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
 1. See a list of your scheduled upgrades under the [**Upgrade Agents** tab][4], in the **Upgrade Schedules** section. 
 
-   {{< img src="/agent/fleet_automation/agent_upgrade_schedule_list2.png" alt="See a list of upgrades scheduled for your Agents." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/agent_upgrade_schedule_list3.png" alt="See a list of upgrades scheduled for your Agents." style="width:100%;" >}}
+   
 {{% /collapse-content %}}
 
 <br>
@@ -113,7 +114,7 @@ For the most consistent upgrade experience, Datadog recommends managing upgrades
 
 ## Configure Datadog Agents
 
-With Fleet Automation, you can roll out configuration changes across your Agents through guided workflows or bring your own YAML. You can also update and standardize Agent configuration at scale. With Fleet Automation, you can:
+Fleet Automation allows you to roll out and manage Datadog Agent configuration at scale. Configuration changes can be applied using guided workflows in the UI or by providing custom YAML files. Fleet Automation allows you to standardize Agent configuration across environments. With Fleet Automation, you can:
 - Set up Datadog product telemetry such as APM, Logs, and NDM
 - Enable or adjust Agent integrations
 - Manage Agent tags
@@ -124,14 +125,14 @@ With Fleet Automation, you can roll out configuration changes across your Agents
 {{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. In Fleet Automation, open the [Configure Agents][16] tab and click **Create Configuration**.
-1. Select and configure the products (for example, APM, Logs, NDM) that you want the target Agents to run.
+1. **Select and configure** the products (for example, APM, Logs, NDM) that you want the target Agents to run.
 
    {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
 
-1. Review and name your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
-1. Scope Agents to deploy configuration to (for example, through tags such as host names, site, or environment).
-1. Review the deployment plan to confirm scoped Agents and deployment settings, such as rollout concurrency.
-1. Start deployment and track progress from the Deployments page.
+1. **Review and name** your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
+1. **Scope Agents** to deploy configuration to (for example, through tags such as host names, site, or environment).
+1. **Review the deployment plan** to confirm scoped Agents and deployment settings, such as rollout concurrency.
+1. **Start deployment** and track progress from the Deployments page.
 {{% /collapse-content %}}
 
 
@@ -140,11 +141,11 @@ With Fleet Automation, you can roll out configuration changes across your Agents
 
 1. (**Optional**) You can target a group of Agents by filtering on host information or tags.
 
-1. Select your host to open a side panel. In the side panel, click on the **Configuration** tab to access your modifiable configurations. 
+1. **Select your host** to open a side panel. In the side panel, click on the **Configuration** tab to access your modifiable configurations. 
 
 1. Click the **Edit** button to edit your configuration. 
 
-1. Submit these changes by selecting **Deploy Changes**.
+1. **Submit** these changes by selecting **Deploy Changes**.
 
 **Note**: There are some configuration fields ( for example, `api_key`, `site`, and `notable_events`) that cannot be modified.
 
