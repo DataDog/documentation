@@ -154,13 +154,9 @@ The tag displays on the line for this app in the app list. You can click the tag
 
 ## Favorite an app
 
-To favorite an app and pin it to the top of your list of apps, click the star next to the name of the app in the [app list][14]:
+Favoriting an app pins it to the top of your [app list][14]. 
 
-{{< img src="service_management/app_builder/app-list-star.png" alt="An app list with four apps, none of which are starred" style="width:40%;" >}}
-
-When you refresh the page, the starred app appears in a section at the top of your list of apps:
-
-{{< img src="service_management/app_builder/app-list-with-favorited-app.png" alt="An app list with four apps, one of which is starred and pinned to the top of the list" style="width:40%;" >}}
+To favorite an app, click the star icon (<i class="icon-star-empty-wui" style="position:relative; top:4px;"></i>) next to the app's name. When you refresh the page, the starred app appears at the top of your app list.
 
 ## View app version history
 
