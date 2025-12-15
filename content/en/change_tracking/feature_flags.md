@@ -42,10 +42,12 @@ Send feature flag events from any provider using the [Events API][3]. Create a `
 
 #### Recommended tags
 
-When sending custom feature flag change events, Datadog strongly recommends including the following fields to ensure accurate filtering, and cross-product correlation within Datadog:
+When sending custom feature flag change events, Including the following fields to ensure accurate filtering, and cross-product correlation within Datadog:
 
 - **impacted_resources** (with type service): Add the relevant service name to the `impacted_resources` array to associate the feature flag change with the service it affects.
 - **env tag**: Include an `env` tag to specify the environment where the change occurred (for example: production, staging, or development).
+
+If setting tags at event change isn’t applicable to your setup, see the next section for auto-enrichment.
 
 Example request:
 
@@ -108,9 +110,12 @@ Example request:
 
 ## Automatically detect affected services
 
-In addition to tracking when a feature flag's configuration changes using the LaunchDarkly integration or the Events API, you can also automatically identify every service that evaluates a flag. This auto-enrichment provides deeper context by using APM traces to show the real-time impact of a flag, which is especially useful when a single flag is used by multiple services.
+In addition to tracking when a feature flag's configuration changes using the LaunchDarkly integration or the Events API, you can also automatically identify every service that evaluates a flag. This auto-enrichment provides deeper context by using APM traces or metrics to show the real-time impact of a flag, which is especially useful when a single flag is used by multiple services.
 
-### Setup
+### Trace Based Auto-Enrichment
+This method allows you to use APM traces to auto-enrich your feature flag changes to associated Datadog services. Here is details on how to implement it for your codebase.
+
+#### Setup
 
 To automatically detect services using a feature flag, instrument your feature flag evaluation code with the APM tracing library. This allows Datadog to automatically detect all services that evaluate a specific flag, even if they weren't originally tagged.
 
@@ -127,6 +132,30 @@ with tracer.trace("experiments.IsEnabled") as span:
     # Your existing feature flag evaluation code
     flag_value = evaluate_flag("fallback_payments_test")
     span.set_tag("experiment_value", flag_value) # adds the evaluated flag value as a span tag
+```
+
+### Metrics Based Auto-Enrichment
+
+This method allows you to use Datadog metrics to auto-enrich your feature flag changes to associated Datadog services. Here is details on how to implement it for your codebase.
+
+#### Setup
+
+Send the `dd.dynamic_config.is_experiment_enabled` metric with your experiment status.
+
+```python
+from datadog import initialize, statsd
+
+initialize(statsd_host='localhost', statsd_port=8125)
+
+# Any metric type is supported
+statsd.gauge(
+    'dd.dynamic_config.is_experiment_enabled',
+    1,  # 1 if enabled, 0 if disabled
+    tags=[
+        'experiment.id:fallback_payments_test',
+        'service:payments_api'
+    ]
+)
 ```
 
 ## Remediate feature flag changes with Workflow Automation
