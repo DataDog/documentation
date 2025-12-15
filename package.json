@@ -50,7 +50,7 @@
         "@popperjs/core": "^2.11.8",
         "alpinejs": "^3.13.7",
         "bootstrap": "^5.2",
-        "cdocs-hugo-integration": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/reresolver-testing/cdocs-hugo-integration-v9.9.12.tgz",
+        "cdocs-hugo-integration": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.5.tgz",
         "del": "4.1.1",
         "docs-llms-txt": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz",
         "fancy-log": "^1.3.3",
