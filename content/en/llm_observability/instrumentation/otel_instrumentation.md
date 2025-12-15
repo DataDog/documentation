@@ -61,7 +61,8 @@ After your application starts sending data, the traces automatically appear in t
 
 <div class="alert alert-danger">
 
-- OpenInference and OpenLLMetry are not supported, as they have not been updated to support OpenTelemetry 1.37+ semantic conventions for generative AI.
+- <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
+- OpenInference is not supported.
 - There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
 
 </div>
@@ -198,6 +199,51 @@ provider.force_flush()
 ```
 
 After running this example, search for `ml_app:simple-llm-example` in the LLM Observability UI to find the generated trace.
+
+#### Using OpenLLMetry
+
+The following example demonstrates using [OpenLLMetry](https://github.com/traceloop/openllmetry) to automatically instrument OpenAI calls with OpenTelemetry.
+
+```python
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.openai import OpenAIInstrumentor
+import openai
+from opentelemetry.sdk.resources import Resource
+
+resource = Resource.create({
+    "service.name": "simple-openllmetry-test",
+})
+
+provider = TracerProvider(resource=resource)
+trace.set_tracer_provider(provider)
+
+exporter = OTLPSpanExporter(
+    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+    headers={
+        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
+        "dd-ml-app": "simple-openllmetry-test",
+        "dd-otlp-source": "datadog",
+    },
+)
+
+provider.add_span_processor(BatchSpanProcessor(exporter))
+
+OpenAIInstrumentor().instrument()
+
+# Make OpenAI call (automatically traced)
+client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
+client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
+)
+
+provider.force_flush(timeout_millis=5000)
+```
+
+After running this example, search for `ml_app:simple-openllmetry-test` in the LLM Observability UI to find the generated trace.
 
 ## Supported semantic conventions
 
