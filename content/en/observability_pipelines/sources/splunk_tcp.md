@@ -23,7 +23,7 @@ Click the toggle to **Enable TLS**. If you enable TLS, the following certificate
 - Enter the identifier for your Splunk TCP key pass.
     - **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
     - If left blank, the default is used: `DD_OP_SOURCE_SPLUNK_TCP_KEY_PASS`.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
+- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in either DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 
