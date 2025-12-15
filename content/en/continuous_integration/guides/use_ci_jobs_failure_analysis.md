@@ -38,8 +38,8 @@ The LLM model can classify errors with similar messages into distinct yet relate
 
 #### Logs requirements for jobs failure analysis
 
-Job Failure Analysis needs:
-* All logs from the **failing job** being analyzed
+Jobs failure analysis requires the following logs to be indexed:
+* All logs from the **failing job** being analyzed.
 * All logs from at **least one successful job** with the same job name, pipeline name, and repository. This is needed to identify which logs are relevant in the failing job.
 
 The following [exclusion filter][9] is compatible with Job Failure Analysis:
