@@ -10236,10 +10236,6 @@ components:
           description: Whether the policy is pinned
           example: false
           type: boolean
-        policyType:
-          description: The type of the policy
-          example: policy
-          type: string
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -10418,11 +10414,11 @@ components:
     CloudWorkloadSecurityAgentPolicyVersion:
       description: The versions of the policy
       properties:
-        date:
+        Date:
           description: The date and time the version was created
           nullable: true
           type: string
-        name:
+        Name:
           description: The version of the policy
           example: 1.47.0-rc2
           type: string
@@ -10449,11 +10445,8 @@ components:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
-      description: Hash file specified by the field attribute
-      properties:
-        field:
-          description: The field of the hash action
-          type: string
+      additionalProperties: {}
+      description: An empty object indicating the hash action
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
       description: The metadata action applied on the scope matching the rule
@@ -10501,14 +10494,9 @@ components:
           format: int64
           type: integer
         value:
-          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSetValue'
+          description: The value of the set action
+          type: string
       type: object
-    CloudWorkloadSecurityAgentRuleActionSetValue:
-      description: The value of the set action
-      oneOf:
-      - type: string
-      - type: integer
-      - type: boolean
     CloudWorkloadSecurityAgentRuleActions:
       description: The array of actions the rule can perform if triggered
       items:
@@ -68233,6 +68221,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -69327,9 +69316,6 @@ paths:
         operator: OR
         permissions:
         - incident_read
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create an impact for an incident.
       operationId: CreateIncidentImpact
@@ -69374,9 +69360,6 @@ paths:
         operator: OR
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/impacts/{impact_id}:
     delete:
       description: Delete an incident impact.
@@ -69408,9 +69391,6 @@ paths:
         operator: OR
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/relationships/integrations:
     get:
       description: Get all integration metadata for an incident.
