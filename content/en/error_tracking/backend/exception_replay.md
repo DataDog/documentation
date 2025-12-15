@@ -53,11 +53,10 @@ below for details.
 
 | | By Environment<br>(Bulk) | By Service<br>(In-App) | By Service<br>(Env Var) |
 |---|---|---|---|
-| **How to Enable** | Settings page | Settings page | Environment variables |
+| **How to Enable** | Enabled by default | Settings page | Environment variables |
 | **Agent Version** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
 | **Minimum Tracer Versions** | Python ≥ 3.15.0<br>Java ≥ 1.54.0<br>.NET ≥ 3.29.0<br>PHP: N/A | Python ≥ 3.10.0<br>Java ≥ 1.48.0<br>.NET ≥ 3.29.0<br>PHP: N/A	 | Python ≥ 1.16.0<br>Java ≥ 1.47.0<br>.NET ≥ 2.53.0<br>PHP ≥ 1.12.1 |
 | **Remote Configuration Required?** | Yes | Yes | No |
-| **Enabled by default** | Yes | No | No |
 
 To enable Exception Replay in-app, navigate to the Exception Replay **Settings** page in Error Tracking, select the
 desired environment or service, and toggle it to **Enabled**.
@@ -141,6 +140,7 @@ runtimes, a snapshot is only captured after the **second occurrence** for a give
 - Snapshot occurred outside selected time window
 - Third-party package exclusions (use `DD_THIRD_PARTY_DETECTION_EXCLUDES` to include these)
 - Logs with `source:dd_debugger` missing due to [Log Index][6] retention settings or [Exclusion Filters][7] in preceding indexes
+- Exception Replay is not available in the FedRAMP region
 
 Use the query `@error.debug_info_captured:true` in Error Tracking Explorer to find errors with Exception Replay
 snapshots.
