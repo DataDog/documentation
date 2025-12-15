@@ -5693,10 +5693,10 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_sources
       weight: 2
-    - name: Akamai DataStreamer
-      url: observability_pipelines/sources/akamai_datastreamer/
+    - name: Akamai DataStream
+      url: observability_pipelines/sources/akamai_datastream/
       parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_akamai_datastreamer
+      identifier: observability_pipelines_sources_akamai_datastream
       weight: 201
     - name: Amazon Data Firehose
       url: observability_pipelines/sources/amazon_data_firehose/
