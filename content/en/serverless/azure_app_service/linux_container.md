@@ -461,7 +461,7 @@ Update your existing Web App to include the necessary Datadog App Settings and s
 
 Redeploy your updated template:
 
-```bash
+```shell
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
