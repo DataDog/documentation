@@ -388,6 +388,14 @@ Searches CI events with filters and returns details on them.
 - Show me the latest pipeline failure in branch `my-branch`.
 - Propose a fix for the job `integration-test` that fails every time on my branch `my-branch`.
 
+### `aggregate_datadog_ci_pipeline_events`
+*Toolset: **software-delivery***\
+Aggregates CI pipeline events to produce statistics, metrics, and grouped analytics.
+
+- What's the average job duration for the last 7 days?
+- How many failed pipelines have there been in the last 2 weeks?
+- Show me the 95th percentile of pipeline duration grouped by pipeline name.
+
 ### `get_datadog_flaky_tests`
 *Toolset: **software-delivery***\
 Searches Datadog [Test Optimization][25] for flaky tests and returns triage-ready details, including failure-rate stats, flaky state/category, ownership context (`codeowners`, `services`, `module`, `suite`), branch/SHA history, CI pipeline impact, and recent test-run metadata. Supports pagination with `page_cursor` and sorting by fields such as `failure_rate` or `pipelines_failed`.
