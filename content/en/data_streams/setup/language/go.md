@@ -31,8 +31,7 @@ Data Streams Monitoring has not been changed between v1 and v2 of the tracer.
 | ---------- | ----------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | Kafka      | [confluent-kafka-go][8] | {{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="minimal" >}} | {{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="recommended" >}} |
 | Kafka      | [Sarama][9]             | {{< dsm-tracer-version lang="go" lib="ibm-sarama" type="minimal" >}}         | {{< dsm-tracer-version lang="go" lib="ibm-sarama" type="recommended" >}}         |
-| Kafka      | [Sarama (Shopify)][10]  | {{< dsm-tracer-version lang="go" lib="sarama" type="minimal" >}}             | {{< dsm-tracer-version lang="go" lib="sarama" type="recommended" >}}             |
-| Kafka      | [kafka-go][11]          | {{< dsm-tracer-version lang="go" lib="kafka-go" type="minimal" >}}           | {{< dsm-tracer-version lang="go" lib="kafka-go" type="recommended" >}}           |
+| Kafka      | [kafka-go][10]          | {{< dsm-tracer-version lang="go" lib="kafka-go" type="minimal" >}}           | {{< dsm-tracer-version lang="go" lib="kafka-go" type="recommended" >}}           |
 
 ### Installation
 
@@ -151,5 +150,4 @@ if ok {
 [7]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44
 [8]: https://github.com/confluentinc/confluent-kafka-go
 [9]: https://github.com/IBM/sarama
-[10]: https://github.com/Shopify/sarama
-[11]: https://github.com/segmentio/kafka-go
+[10]: https://github.com/segmentio/kafka-go

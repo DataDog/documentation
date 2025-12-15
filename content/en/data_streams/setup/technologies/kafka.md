@@ -23,7 +23,7 @@ title: Data Streams Monitoring for Kafka
       <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="recommended" >}}</td>
     </tr>
     <tr>
-      <td rowspan="4"><a href="/data_streams/go">Go</a></td>
+      <td rowspan="3"><a href="/data_streams/go">Go</a></td>
       <td><a href="https://github.com/confluentinc/confluent-kafka-go">confluent-kafka-go</a></td>
       <td>{{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="recommended" >}}</td>
@@ -32,11 +32,6 @@ title: Data Streams Monitoring for Kafka
       <td><a href="https://github.com/IBM/sarama">Sarama</a></td>
       <td>{{< dsm-tracer-version lang="go" lib="ibm-sarama" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="go" lib="ibm-sarama" type="recommended" >}}</td>
-    </tr>
-    <tr>
-      <td><a href="https://github.com/Shopify/sarama">Sarama (Shopify)</a></td>
-      <td>{{< dsm-tracer-version lang="go" lib="sarama" type="minimal" >}}</td>
-      <td>{{< dsm-tracer-version lang="go" lib="sarama" type="recommended" >}}</td>
     </tr>
     <tr>
       <td><a href="https://github.com/segmentio/kafka-go">kafka-go</a></td>
