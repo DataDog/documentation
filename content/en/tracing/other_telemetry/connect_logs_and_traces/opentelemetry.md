@@ -208,11 +208,11 @@ This manual approach gives you full control over the log format, ensuring it is 
 
 #### Collect logs using the Datadog Agent
 
-If you collect logs directly with the Datadog Agent (without sending them through the OpenTelemetry Collector), you must ensure the trace IDs in your logs use the Datadog format.
+If you collect logs directly with the Datadog Agent (without sending them through the OpenTelemetry Collector), you must ensure the trace IDs are present in your logs.
 
-- **Trace ID format**: The Datadog Agent requires the trace ID to be in the `dd.trace_id` field.
-  - If you are using **Datadog's tracing libraries** (like `dd-trace-py`), this is handled for you automatically.
-  - If you are generating logs with OpenTelemetry `trace_id` and `span_id` (as shown in the [file-scraping example](#scrape-logs-from-files)), you must use a [Log Processing Rule][5] in Datadog to remap your `trace_id` attribute to `dd.trace_id`.
+- **Trace ID format**: Datadog automatically detects the `dd.trace_id` and `dd.span_id` convention used by Datadog's tracing libraries, as well as the OpenTelemetry standards `trace_id` and `span_id`. See [OpenTelemetry Compatibility docs][6] for details on the standard.
+
+<div class="alert alert-info">If your logging instrumentation uses a different attribute name for your trace/span IDs, you must ensure the attribute is added to the <a href="/logs/log_configuration/pipelines/?tab=traceid#preprocessing">Preprocessing for JSON logs</a> configuration so it is recognized as a valid Trace ID.</div>
 
 - **Attribute Mapping**: The Datadog Agent does not automatically convert OTel resource attributes (for example, `service.name`) to Datadog's standard tags. You may need to manually remap these attributes in your log processing pipeline to maintain unified service tagging.
 
@@ -248,3 +248,4 @@ Click **View Trace in APM** to pivot directly to the full APM trace associated w
 [3]: https://app.datadoghq.com/apm/traces
 [4]: https://app.datadoghq.com/logs
 [5]: /logs/log_configuration/processors
+[6]: https://opentelemetry.io/docs/specs/otel/compatibility/logging_trace_context/

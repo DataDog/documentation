@@ -2573,16 +2573,21 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_jira
       weight: 903
+    - name: ServiceNow
+      url: service_management/incident_management/integrations/servicenow
+      parent: incidents_integrations
+      identifier: incidents_integrations_servicenow
+      weight: 904
     - name: Status Pages
       url: service_management/incident_management/integrations/status_pages
       parent: incidents_integrations
       identifier: incidents_integrations_status_pages
-      weight: 904
+      weight: 905
     - name: Atlassian Statuspage
       url: service_management/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
-      weight: 905
+      weight: 906
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
@@ -2971,6 +2976,11 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 9
+    - name: Input Parameters
+      url: actions/app_builder/embedded_apps/input_parameters/
+      parent: app_builder_embedded_apps
+      identifier: app_builder_input_parameters
+      weight: 901
     - name: Save and Reuse Actions
       url: actions/app_builder/saved_actions/
       parent: app_builder
@@ -9002,6 +9012,11 @@ menu:
       url: account_management/billing/vsphere/
       parent: account_management_billing
       weight: 1218
+    - name: Workflow Automation
+      identifier: account_management_billing_workflow_automation
+      url: account_management/billing/workflow_automation/
+      parent: account_management_billing
+      weight: 1219
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
