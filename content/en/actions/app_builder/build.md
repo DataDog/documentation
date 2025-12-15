@@ -118,7 +118,7 @@ To change basic elements of your app:
   - Description
   - Tags
   - Appearance
-  - Input parameters
+  - [Input parameters][29]
 - To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (<i class="icon-component-wui" style="position:relative; top:4px;"></i>) to open the **Components** tab. Click the component or drag it onto the canvas.
 - Click the **View** button to see your app from the user's perspective. Use view mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
 - To save your app, click **Save**.
@@ -238,3 +238,4 @@ To access the Debug Console, hover over an app in [your apps list][14] and click
 [26]: https://app.datadoghq.com/app-builder/apps/edit?template=how_to__write_custom_code&viewMode=templatePreview
 [27]: /actions/forms/
 [28]: https://app.datadoghq.com/actions/action-catalog#com.datadoghq.dd/com.datadoghq.dd.apps_datastore
+[29]: /actions/app_builder/embedded_apps/input_parameters/
