@@ -5281,7 +5281,7 @@ components:
       description: Data of the case to attach security findings to.
       properties:
         id:
-          description: The unique identifier of the case.
+          description: Unique identifier of the case.
           example: c1234567-89ab-cdef-0123-456789abcdef
           type: string
         relationships:
@@ -5312,10 +5312,6 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/AttachJiraIssueRequestDataAttributes'
-        id:
-          description: The unique identifier of the Jira issue attachment request.
-          example: j1234567-89ab-cdef-0123-456789abcdef
-          type: string
         relationships:
           $ref: '#/components/schemas/AttachJiraIssueRequestDataRelationships'
         type:
@@ -5327,7 +5323,7 @@ components:
       description: Attributes of the Jira issue to attach security findings to.
       properties:
         jira_issue_url:
-          description: The URL of the Jira issue to attach security findings to.
+          description: URL of the Jira issue to attach security findings to.
           example: https://domain.atlassian.net/browse/PROJ-123
           type: string
       required:
@@ -5338,8 +5334,12 @@ components:
       properties:
         findings:
           $ref: '#/components/schemas/Findings'
+          description: Security findings to attach to the Jira issue.
         project:
           $ref: '#/components/schemas/CaseManagementProject'
+          description: Case management project with Jira integration configured. It
+            is used to attach security findings to the Jira issue. To configure the
+            integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
       required:
       - findings
       - project
@@ -9103,17 +9103,17 @@ components:
       description: An insight of the case.
       properties:
         ref:
-          description: The reference of the insight.
+          description: Reference of the insight.
           example: /security/appsec/vm/library/vulnerability/dfa027f7c037b2f77159adc027fecb56?detection=static
           type: string
         resource_id:
-          description: The unique identifier of the resource. For example, the unique
+          description: Unique identifier of the resource. For example, the unique
             identifier of a security finding.
           example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
           type: string
         type:
-          description: The type of the resource. For example, the type of a security
-            finding is "SECURITY_FINDING".
+          description: Type of the resource. For example, the type of a security finding
+            is "SECURITY_FINDING".
           example: SECURITY_FINDING
           type: string
       type: object
@@ -9128,7 +9128,7 @@ components:
     CaseManagementProjectData:
       properties:
         id:
-          description: The unique identifier of the case management project.
+          description: Unique identifier of the case management project.
           example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
           type: string
         type:
@@ -12875,10 +12875,6 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/CreateCaseRequestDataAttributes'
-        id:
-          description: The unique identifier of the case.
-          example: c1234567-89ab-cdef-0123-456789abcdef
-          type: string
         relationships:
           $ref: '#/components/schemas/CreateCaseRequestDataRelationships'
         type:
@@ -12890,21 +12886,21 @@ components:
       description: Attributes of the case to create.
       properties:
         assignee_id:
-          description: The unique identifier of the user assigned to the case.
+          description: Unique identifier of the user assigned to the case.
           example: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
           type: string
         description:
-          description: The description of the case. If not provided, the description
-            will be automatically generated.
+          description: Description of the case. If not provided, the description will
+            be automatically generated.
           example: A description of the case.
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
-          description: The priority of the case. If not provided, the priority will
-            be automatically set to "NOT_DEFINED".
+          description: Priority of the case. If not provided, the priority will be
+            automatically set to "NOT_DEFINED".
           example: P4
         title:
-          description: The title of the case. If not provided, the title will be automatically
+          description: Title of the case. If not provided, the title will be automatically
             generated.
           example: A title for the case.
           type: string
@@ -12914,10 +12910,10 @@ components:
       properties:
         findings:
           $ref: '#/components/schemas/Findings'
-          description: Security findings of the case to create.
+          description: Security findings to create a case for.
         project:
           $ref: '#/components/schemas/CaseManagementProject'
-          description: Project of the case to create.
+          description: Case management project in which the case will be created.
       required:
       - findings
       - project
@@ -13129,29 +13125,14 @@ components:
           items:
             $ref: '#/components/schemas/CreateJiraIssueRequestData'
           type: array
-        included:
-          items:
-            $ref: '#/components/schemas/CreateJiraIssueRequestArrayIncluded'
-          type: array
       required:
       - data
       type: object
-    CreateJiraIssueRequestArrayIncluded:
-      description: 'Attributes and relationships of the case linked to the Jira issue.
-        Should contain all of the following: case, project, and security findings.'
-      oneOf:
-      - $ref: '#/components/schemas/CreateCaseRequestData'
-      - $ref: '#/components/schemas/CaseManagementProjectData'
-      - $ref: '#/components/schemas/FindingData'
     CreateJiraIssueRequestData:
       description: Data of the Jira issue to create.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateJiraIssueRequestDataAttributes'
-        id:
-          description: The unique identifier of the Jira issue creation request.
-          example: j1234567-89ab-cdef-0123-456789abcdef
-          type: string
         relationships:
           $ref: '#/components/schemas/CreateJiraIssueRequestDataRelationships'
         type:
@@ -13162,48 +13143,51 @@ components:
     CreateJiraIssueRequestDataAttributes:
       description: Attributes of the Jira issue to create.
       properties:
+        assignee_id:
+          description: Unique identifier of the user assigned to the Jira issue.
+          example: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
+          type: string
+        description:
+          description: Description of the Jira issue. If not provided, the description
+            will be automatically generated.
+          example: A description of the Jira issue.
+          type: string
         fields:
-          $ref: '#/components/schemas/CreateJiraIssueRequestDataAttributesFields'
-      type: object
-    CreateJiraIssueRequestDataAttributesFields:
-      description: Custom fields of the Jira issue to create. For the list of available
-        fields, see [Jira documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-createmeta-projectidorkey-issuetypes-issuetypeid-get).
-      properties:
-        fields:
+          additionalProperties: {}
+          description: Custom fields of the Jira issue to create. For the list of
+            available fields, see [Jira documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-createmeta-projectidorkey-issuetypes-issuetypeid-get).
           example:
-            customfield_10001: Value 1
-            customfield_10002:
-            - Value 2
-            - Value 3
+            key1: value
+            key2:
+            - value
+            key3:
+              key4: value
           type: object
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+          description: Priority of the Jira issue. If not provided, the priority will
+            be automatically set to "NOT_DEFINED".
+          example: P4
+        title:
+          description: Title of the Jira issue. If not provided, the title will be
+            automatically generated.
+          example: A title for the Jira issue.
+          type: string
       type: object
     CreateJiraIssueRequestDataRelationships:
       description: Relationships of the Jira issue to create.
       properties:
-        case:
-          $ref: '#/components/schemas/CreateJiraIssueRequestDataRelationshipsCase'
+        findings:
+          $ref: '#/components/schemas/Findings'
+          description: Security findings to create a Jira issue for.
+        project:
+          $ref: '#/components/schemas/CaseManagementProject'
+          description: Case management project configured with the Jira integration.
+            It is used to create the Jira issue. To configure the Jira integration,
+            see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
       required:
-      - case
-      type: object
-    CreateJiraIssueRequestDataRelationshipsCase:
-      description: Case linked to the Jira issue.
-      properties:
-        data:
-          $ref: '#/components/schemas/CreateJiraIssueRequestDataRelationshipsCaseData'
-      required:
-      - data
-      type: object
-    CreateJiraIssueRequestDataRelationshipsCaseData:
-      description: Case linked to the Jira issue.
-      properties:
-        id:
-          example: c1234567-89ab-cdef-0123-456789abcdef
-          type: string
-        type:
-          $ref: '#/components/schemas/CaseDataType'
-      required:
-      - type
-      - id
+      - findings
+      - project
       type: object
     CreateNotificationRuleParameters:
       description: Body of the notification rule create request.
@@ -17178,10 +17162,6 @@ components:
     DetachCaseRequestData:
       description: Data for detaching security findings from their case.
       properties:
-        id:
-          description: The unique identifier of the detachment request.
-          example: f8b9e3b1-24ec-4413-8be5-1b12b98533c6
-          type: string
         relationships:
           $ref: '#/components/schemas/DetachCaseRequestDataRelationships'
         type:
@@ -21356,7 +21336,7 @@ components:
         attributes:
           $ref: '#/components/schemas/FindingCaseResponseDataAttributes'
         id:
-          description: The unique identifier of the case.
+          description: Unique identifier of the case.
           example: c1234567-89ab-cdef-0123-456789abcdef
           type: string
         relationships:
@@ -21463,7 +21443,7 @@ components:
     FindingData:
       properties:
         id:
-          description: The unique identifier of the security finding.
+          description: Unique identifier of the security finding.
           example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
           type: string
         type:
@@ -21526,15 +21506,15 @@ components:
       description: Jira issue associated with the case.
       properties:
         error_message:
-          description: The error message if the Jira issue creation failed.
+          description: Error message if the Jira issue creation failed.
           example: '{"errorMessages":["An error occured."],"errors":{}}'
           type: string
         result:
           $ref: '#/components/schemas/FindingJiraIssueResult'
         status:
-          description: The status of the Jira issue creation. Can be "COMPLETED" if
-            the Jira issue was created successfully, or "FAILED" if the Jira issue
-            creation failed.
+          description: Status of the Jira issue creation. Can be "COMPLETED" if the
+            Jira issue was created successfully, or "FAILED" if the Jira issue creation
+            failed.
           example: COMPLETED
           type: string
       type: object
@@ -21542,19 +21522,19 @@ components:
       description: Result of the Jira issue creation.
       properties:
         account_id:
-          description: The account ID of the Jira issue.
+          description: Account ID of the Jira issue.
           example: 463a8631-680e-455c-bfd3-3ed04d326eb7
           type: string
         issue_id:
-          description: The unique identifier of the Jira issue.
+          description: Unique identifier of the Jira issue.
           example: '2871276'
           type: string
         issue_key:
-          description: The key of the Jira issue.
+          description: Key of the Jira issue.
           example: PROJ-123
           type: string
         issue_url:
-          description: The URL of the Jira issue.
+          description: URL of the Jira issue.
           example: https://domain.atlassian.net/browse/PROJ-123
           type: string
       type: object
@@ -68241,6 +68221,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -81140,11 +81121,13 @@ paths:
         - security_monitoring_cws_agent_rules_read
   /api/v2/security/findings/cases:
     delete:
-      description: Detach security findings from their case. This operation dissociates
-        security findings from their associated cases without deleting the cases themselves.
-        You can detach security findings from multiple different cases in a single
-        request, with a limit of 50 security findings per request. Security findings
-        that are not currently attached to any case will be ignored.
+      description: 'Detach security findings from their case.
+
+        This operation dissociates security findings from their associated cases without
+        deleting the cases themselves. You can detach security findings from multiple
+        different cases in a single request, with a limit of 50 security findings
+        per request. Security findings that are not currently attached to any case
+        will be ignored.'
       operationId: DetachCase
       requestBody:
         content:
@@ -81176,10 +81159,12 @@ paths:
         - security_monitoring_findings_write
         - appsec_vm_write
     post:
-      description: Create cases for security findings. You can create up to 50 cases
-        per request and associate up to 50 security findings per case. Security findings
-        that are already attached to another case will be detached from their previous
-        case and attached to the newly created case.
+      description: 'Create cases for security findings.
+
+        You can create up to 50 cases per request and associate up to 50 security
+        findings per case. Security findings that are already attached to another
+        case will be detached from their previous case and attached to the newly created
+        case.'
       operationId: CreateCases
       requestBody:
         content:
@@ -81216,14 +81201,14 @@ paths:
         - appsec_vm_write
   /api/v2/security/findings/cases/{case_id}:
     patch:
-      description: Attach security findings to a case. You can attach up to 50 security
-        findings per case. Security findings that are already attached to another
-        case will be detached from their previous case and attached to the specified
-        case.
+      description: 'Attach security findings to a case.
+
+        You can attach up to 50 security findings per case. Security findings that
+        are already attached to another case will be detached from their previous
+        case and attached to the specified case.'
       operationId: AttachCase
       parameters:
-      - description: The unique identifier of the case to attach security findings
-          to
+      - description: Unique identifier of the case to attach security findings to
         in: path
         name: case_id
         required: true
@@ -81264,12 +81249,16 @@ paths:
         - appsec_vm_write
   /api/v2/security/findings/jira_issues:
     patch:
-      description: Attach security findings to a Jira issue by providing the Jira
-        issue URL. You can attach up to 50 security findings per Jira issue. If the
-        Jira issue is not linked to any case, this operation will create a case for
-        the security findings and link the Jira issue to the newly created case. Security
-        findings that are already attached to another Jira issue will be detached
-        from their previous Jira issue and attached to the specified Jira issue.
+      description: 'Attach security findings to a Jira issue by providing the Jira
+        issue URL.
+
+        You can attach up to 50 security findings per Jira issue. If the Jira issue
+        is not linked to any case, this operation will create a case for the security
+        findings and link the Jira issue to the newly created case. To configure the
+        Jira integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
+        Security findings that are already attached to another Jira issue will be
+        detached from their previous Jira issue and attached to the specified Jira
+        issue.'
       operationId: AttachJiraIssue
       requestBody:
         content:
@@ -81308,12 +81297,15 @@ paths:
 
         Please check the documentation regularly for updates.'
     post:
-      description: Create Jira issues for security findings. This operation creates
-        a case in Datadog and a Jira issue linked to that case for bidirectional sync
-        between Datadog and Jira. You can create up to 50 Jira issues per request
-        and associate up to 50 security findings per Jira issue. Security findings
-        that are already attached to another Jira issue will be detached from their
-        previous Jira issue and attached to the newly created Jira issue.
+      description: 'Create Jira issues for security findings.
+
+        This operation creates a case in Datadog and a Jira issue linked to that case
+        for bidirectional sync between Datadog and Jira. To configure the Jira integration,
+        see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
+        You can create up to 50 Jira issues per request and associate up to 50 security
+        findings per Jira issue. Security findings that are already attached to another
+        Jira issue will be detached from their previous Jira issue and attached to
+        the newly created Jira issue.'
       operationId: CreateJiraIssues
       requestBody:
         content:
