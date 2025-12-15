@@ -36,9 +36,42 @@ further_reading:
 The Datadog Docker Agent is a version of the [Datadog Agent][1] that supports Docker, containerd, and Podman runtimes. For supported Docker versions, see [Supported Platforms][35].
 
 ## Install the Datadog Docker Agent
-Follow the [in-app installation flow in Datadog][34].
+Follow the [in-app installation flow in Datadog][34]. This is the recommended flow that helps create your `docker run` command with your API Key, the necessary minimum configurations, and toggles for the different Datadog features.
 
 {{< img src="/agent/basic_agent_usage/agent_install_docker.png" alt="In-app installation steps for the Datadog Agent on Docker." style="width:90%;">}}
+
+## Manually run the Datadog Docker Agent
+
+The Fleet Automation flow helps configure your Datadog Agent container with our recommended instructions. To configure this manually see the examples below.
+
+Use the command below to run the Agent as a Docker container once on each host to monitor. Replace the `<DATADOG_API_KEY>` with your Datadog API key, and `<DATADOG_SITE>` with your {{< region-param key=dd_site code="true" >}}.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+```shell
+docker run -d --cgroupns host --pid host --name dd-agent \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /proc/:/host/proc/:ro \
+  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+  -e DD_SITE=<DATADOG_SITE> \
+  -e DD_API_KEY=<DATADOG_API_KEY> \
+  gcr.io/datadoghq/agent:7
+```
+{{% /tab %}}
+{{% tab "Windows" %}}
+The Datadog Agent is supported in Windows Server 2019 (LTSC) and Windows Server 2022 (LTSC). The following PowerShell command runs the Datadog Agent container:
+
+```powershell
+docker run -d --name dd-agent `
+  -v \\.\pipe\docker_engine:\\.\pipe\docker_engine `
+  -e DD_SITE=<DATADOG_SITE> `
+  -e DD_API_KEY=<DATADOG_API_KEY> `
+  gcr.io/datadoghq/agent:7
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Note: For Docker Compose, see [Compose and the Datadog Agent][37]. For deploying the Agent in [Podman see our instructions here][38].
 
 ## Integrations
 
@@ -46,9 +79,24 @@ After the Datadog Docker Agent is up and running, you can [configure Datadog int
 
 ## Configuration options for the Datadog Docker Agent
 
-In a non-containerized environment, configuration options for the Datadog Agent are set in [`datadog.yaml`][13]. For the Datadog Docker Agent, you can set `datadog.yaml` configuration options through environment variables.
+### Container registries
+
+Images are available for 64-bit x86 and Arm v8 architectures. Datadog publishes container images to Google Artifact Registry, Amazon ECR, Azure ACR, and Docker Hub:
+
+| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
+| ------------------------ | ---------------------- | -------------------- | ----------------- |
+| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
+
+By default, the above instructions pull the image from Google Artifact Registry (`gcr.io/datadoghq`). If Google Artifact Registry is not accessible in your deployment region, use another registry.
+
+If you are deploying the Agent in an AWS environment, Datadog recommend that you use Amazon ECR.
+
+<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ### Environment variables
+
+In a non-containerized environment, configuration options for the Datadog Agent are set in [`datadog.yaml`][13]. For the Datadog Docker Agent, you can set `datadog.yaml` configuration options through environment variables.
+
 
 #### Global options
 
@@ -286,3 +334,5 @@ If you installed the Datadog Docker Agent with Single Step APM Instrumentation, 
 [34]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
 [35]: /agent/supported_platforms/?tab=cloudandcontainers
 [36]: /getting_started/containers/autodiscovery
+[37]: /containers/guide/compose-and-the-datadog-agent/
+[38]: /containers/guide/podman-support-with-docker-integration/
