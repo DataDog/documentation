@@ -28,25 +28,14 @@ Exception Replay is generally available for Python, Java, .NET, PHP, and is enab
 ## Overview
 
 Exception Replay captures execution context and local variable values when an exception occurs, helping you diagnose,
-reproduce, and resolve issues faster. It records the surrounding state, including stack trace and variable snapshots, and
-surfaces this data directly in Error Tracking alongside the rest of the issue details.
+reproduce, and resolve issues faster. It records the surrounding state, including the stack trace and variable
+snapshots, then surfaces this data directly in Error Tracking alongside the rest of the issue details.
 
 {{< img src="tracing/error_tracking/error_tracking_executional_context-2.png" alt="Error Tracking Explorer Exception Replay" style="width:90%" >}}
 
-## How it works
-
-Exception Replay uses Datadog's [Dynamic Instrumentation][3] to capture runtime context without the need to redeploy.
-It is designed for production use: snapshots are rate-limited and sensitive data is automatically redacted.
-When enabled, it listens for exceptions in your APM-instrumented application and captures snapshots of the stack trace
-and local variables, sending them to Datadog for display in Error Tracking.
-
-At a high level, the process is:
-
-1. A service runs with a supported [Datadog tracing library][5].
-2. Exception Replay is [enabled](#requirements--setup) for the environment or service.
-3. When an exception occurs, the tracer captures a snapshot (rate-limited to one per exception type per instance per hour).
-4. Sensitive data is automatically [redacted](#sensitive-data-redaction).
-5. The snapshot is correlated with the originating APM trace and surfaced in Error Tracking.
+Exception Replay is designed for production use. Snapshots are rate-limited, and sensitive data is automatically
+[redacted](#sensitive-data-redaction). When enabled, it waits for exceptions in an application and captures snapshots of
+the stack trace and local variables before forwarding them to Datadog.
 
 <div class="alert alert-info">
 <b>What products are supported?</b>
@@ -56,13 +45,13 @@ Exception Replay is available only for <b>APM-based exceptions</b> and does not 
 ## Requirements & Setup
 
 Exception Replay supports Python, Java, .NET, and PHP, and captures only APM-based exceptions. It
-requires the Datadog Agent and an [APM-instrumented application][5]. You can enable it for an entire
+requires the Datadog Agent and an [APM-instrumented application][1]. You can enable it for an entire
 environment, an individual service in-app, or a specific service using environment variables.
 
-The enablement method depends on your tracer version and whether [Remote Configuration][4] is available. See the table
+The enablement method depends on your tracer version and whether [Remote Configuration][2] is available. See the table
 below for details.
 
-| | By Environment (Bulk) | By Service (In-App) | By Service (Env Var) |
+| | By Environment<br>(Bulk) | By Service<br>(In-App) | By Service<br>(Env Var) |
 |---|---|---|---|
 | **How to Enable** | Settings page | Settings page | Environment variables |
 | **Agent Version** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
@@ -70,8 +59,8 @@ below for details.
 | **Remote Configuration Required?** | Yes | Yes | No |
 | **Enabled by default** | Yes | No | No |
 
-To enable Exception Replay in-app, in the Exception Replay **Settings** page for the environment or
-service, toggle it to **Enabled**.
+To enable Exception Replay in-app, navigate to the Exception Replay **Settings** page in Error Tracking, select the
+desired environment or service, and toggle it to **Enabled**.
 
 {{< img src="tracing/error_tracking/error_tracking_exception_replay_enablement.mp4" video="true" alt="Enabling Exception Replay through the setting page" style="width:90%" >}}
 
@@ -79,10 +68,11 @@ If in-app enablement isn't available, set the environment variable:
 
 ```bash
 DD_EXCEPTION_REPLAY_ENABLED=true
-
 ```
 
-### Create a logs index for Exception Replay snapshots (Recommended)
+This can also be used to override in-app configuration and takes precedence when both are set.
+
+### Create a logs index for Exception Replay snapshots
 
 Create a logs index dedicated to Exception Replay snapshots and configure it with the desired retention and no sampling.
 
@@ -94,7 +84,7 @@ Create a logs index dedicated to Exception Replay snapshots and configure it wit
 Exception Replay snapshots are emitted as logs enriched with links back to the originating APM spans.
 </div>
 
-### Link your source code (Recommended)
+### Link your source code
 
 If you enable the Datadog Source Code Integration, you can see code previews directly inside your Error Tracking stack
 traces. When Exception Replay snapshots are captured, you can hover over variable names in the code preview to view
@@ -104,12 +94,12 @@ Source Code Integration is helpful but not required.
 
 ## Sensitive data redaction
 
-Exception Replay applies automatic identifier- and mode-based redaction to ensure sensitive data is protected before it
-becomes available.
+Exception Replay applies automatic identifier- and mode-based redaction to ensure sensitive data is protected before
+snapshots becomes available.
 
 ### Identifier-based redaction
 
-Variable values associated with common sensitive identifiers (for example, `password`, `accessToken`, and similar terms)
+Variable values associated with [common sensitive identifiers][3] (for example, `password`, `accessToken`, and similar terms)
 are scrubbed before snapshots leave the host. Additional language-specific redaction rules are built into each tracer
 (for example, the Python tracer maintains a list of default sensitive identifiers).
 
@@ -119,7 +109,14 @@ You can extend redaction behavior through:
 - Class/type-based redaction rules
 - Sensitive Data Scanner rules
 
-See the [Dynamic Instrumentation][1] and [Sensitive Data Scanner][2] documentation for configuration details.
+See the [Dynamic Instrumentation Sensitive Data Scrubbing instructions][4] and [Sensitive Data Scanner][5] documentation
+for configuration details.
+
+<div class="alert alert-info">
+<b>Why DI instructions?</b>
+Exception Replay is built on <a href="/tracing/dynamic_instrumentation/">Dynamic Instrumentation (DI)</a>, so its
+sensitive data scrubbing configuration options also apply here.
+</div>
 
 ### Mode-based redaction
 
@@ -152,10 +149,10 @@ snapshots.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dynamic_instrumentation/sensitive-data-scrubbing/
-[2]: /security/sensitive_data_scanner/
-[3]: /tracing/dynamic_instrumentation/
-[4]: /tracing/guide/remote_config
-[5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[2]: /tracing/guide/remote_config
+[3]: https://github.com/DataDog/dd-trace-py/blob/main/ddtrace/debugging/_redaction.py
+[4]: /dynamic_instrumentation/sensitive-data-scrubbing/
+[5]: /security/sensitive_data_scanner/
 [6]: https://app.datadoghq.com/logs/pipelines/indexes
 [7]: /logs/log_configuration/indexes/#exclusion-filters
