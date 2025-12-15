@@ -27,7 +27,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Test creation
 
-**Note**: This page covers running Network Path tests in Synthetic Monitoring, including [Agent-based configuration](#agent-configuration). For Scheduled and Dynamic tests in Network Monitoring, see [Network Path Setup][7].
+**Note**: This page covers running Network Path tests in Synthetic Monitoring, including [Agent-based configuration](#agent-configuration). For scheduled and dynamic tests in Network Monitoring, see the Cloud Network Monitoring (CNM) [Network Path Setup][7] documentation. See [understanding Network Path tests](#understanding-network-path-tests) for more information.
 
 1. In Datadog, hover over **Digital Experience** in the left-hand menu and select Tests (under Synthetic Monitoring & Testing).
 2. Click **New Test > Network Path Test**.
@@ -138,11 +138,12 @@ Click on a test run in the table at the bottom of the page to view details for t
 
 ## Understanding Network Path tests
 
-Network Path tests are the same functionality accessible from both the Network Monitoring and Synthetic Monitoring UIs. Tests created in one location appear in both.
+Network Path tests use the same underlying functionality in both [Cloud Network Monitoring][7] and Synthetic Monitoring, so tests created in one UI are visible in the other.
 
-Key points:
-- **Unified test creation**: You can create Network Path tests from either the Network Path UI or the Synthetics UI. Both entry points use the same underlying functionality.
-- **UI-based test creation**: In addition to defining tests manually through Agent configuration files in Synthetic Monitoring, you can create Network Path tests directly from the UI with assertions on network data (packet loss, latency, jitter, and number of hops).
+**Capabilities**:
+
+- **Unified test creation**: You can create Network Path tests from either the Network Path UI or the Synthetic Monitoring UI. Both entry points use the same underlying functionality.
+- **UI-based test creation**: In addition to defining tests manually through Agent configuration files in Synthetic Monitoring, you can create Network Path tests directly from the Synthetic Monitoring UI with additional assertions on network data such as packet loss, latency, jitter, and number of hops.
 - **Proactive monitoring**: Group browser, API, and Network Path tests in [test suites][9] to monitor how network performance impacts application performance.
 
 ## Further Reading

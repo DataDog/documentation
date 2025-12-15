@@ -13,7 +13,7 @@ further_reading:
       text: 'CNM Monitors and Alerts'
     - link: '/network_monitoring/network_path/glossary'
       tag: 'Documentation'
-      text: 'Network Path Glossary'
+      text: 'Network Path Terms and Concepts'
 ---
 
 ## Overview
