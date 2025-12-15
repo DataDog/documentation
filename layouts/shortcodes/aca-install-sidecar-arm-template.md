@@ -140,7 +140,7 @@ Update your existing Container App ARM Template to include the necessary Datadog
 
 Redeploy your updated template:
 
-```bash
+```shell
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 

@@ -264,7 +264,7 @@ resource sidecar 'Microsoft.Web/sites/sitecontainers@2025-03-01' = {
 
 Redeploy your updated template:
 
-```bash
+```shell
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 

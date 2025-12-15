@@ -71,7 +71,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 Redeploy your updated template:
 
-```bash
+```shell
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 

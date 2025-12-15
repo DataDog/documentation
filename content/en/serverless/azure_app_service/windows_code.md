@@ -225,7 +225,7 @@ resource datadogExtension 'Microsoft.Web/sites/siteextensions@2025-03-01' = {
 
 Deploy your updated template:
 
-```bash
+```shell
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
