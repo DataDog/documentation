@@ -19,7 +19,7 @@ Remote Agent management with Fleet Automation simplifies how you deploy and upgr
 
 ## Getting started 
 ### Prerequisites
-1. Verify that Remote Configuration is enabled for your organization.
+1. Verify that [Remote Configuration][15] is enabled for your organization.
 1. Confirm that your Agent version is 7.73 or later.
 
 ### Supported platforms
@@ -42,7 +42,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
 {{% collapse-content title=" How to upgrade Agents remotely" level="h4" expanded=false id="id-for-anchoring" %}}
 
-1. From the **Upgrade Agents** tab, click **Upgrade Now**.
+1. From the **[Upgrade Agents][4]** tab, click **Upgrade Now**.
 
    {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="UI showing the Upgrade Agents tab with the ‘Upgrade Now’ button." style="width:100%;" >}}
 1. **Select the Agents you want to upgrade**. You can target a group of Agents by filtering on host information or tags.
@@ -58,7 +58,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="How to schedule Agent upgrades" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="How to schedule Agent upgrades (in preview)" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. From the [**Upgrade Agents** tab][4], click **+ Create Schedule**.
 
@@ -129,7 +129,7 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 
    {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
 
-1. **Review and name** your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
+1. **Review** your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
 1. **Scope Agents** to deploy configuration to (for example, through tags such as host names, site, or environment).
 1. **Review the deployment plan** to confirm scoped Agents and deployment settings, such as rollout concurrency.
 1. **Start deployment** and track progress from the Deployments page.
