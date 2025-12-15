@@ -75,4 +75,4 @@ After syncing, you can explore your Metabase assets and their upstream dependenc
 
 [1]: https://www.metabase.com/docs/latest/people-and-groups/api-keys
 [2]: https://app.datadoghq.com/integrations/metabase
-[3]: https://app.datadoghq.com/data-observability/explorer
+[3]: https://app.datadoghq.com/datasets/catalog

@@ -59,4 +59,4 @@ After syncing, you can explore your Tableau assets and their upstream dependenci
 [2]: https://help.tableau.com/current/api/metadata_api/en-us/docs/meta_api_start.html#enable-the-tableau-metadata-api-for-tableau-server
 [3]: https://help.tableau.com/current/pro/desktop/en-us/useracct.htm#create-and-revoke-personal-access-tokens
 [4]: https://app.datadoghq.com/integrations/tableau
-[5]: https://app.datadoghq.com/data-observability/explorer
+[5]: https://app.datadoghq.com/datasets/catalog

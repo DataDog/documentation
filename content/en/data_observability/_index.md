@@ -44,7 +44,7 @@ You can configure static thresholds or rely on automatic anomaly detection to id
 
 ## Trace lineage and understand impact
 
-{{< img src="data_observability/data-obs-lineage.png" alt="Lineage graph tracing data flow from Kafka through a failed Spark job to a Snowflake table with an alert and four downstream nodes labeled Upstream issue." style="width:100%;" >}}
+{{< img src="data_observability/data-obs-lineage-blurred.png" alt="Lineage graph tracing data flow from Kafka through a failed Spark job to a Snowflake table with an alert and four downstream nodes labeled Upstream issue." style="width:100%;" >}}
 
 Data Observability provides end-to-end lineage, helping you:
 
@@ -78,4 +78,4 @@ If your organization enforces IP allowlists, you must allowlist the IPs under th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[2]: https://ip-ranges.datadoghq.com/
+[2]: https://ip-ranges.datadoghq.com/webhooks.json

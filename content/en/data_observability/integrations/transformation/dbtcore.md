@@ -29,7 +29,7 @@ Follow the steps below to connect dbt Core to Datadog.
 
 ## Set the environment variables
 
-1. Set the following environment variables for the relevant [Datadog site][4]. Replace `datadoghq.com` with the relevant [Datadog site][5] for your organization.
+1. Set the following environment variables. Replace `datadoghq.com` with the relevant [Datadog site][4] for your organization. For more information on predefined Datadog sites, see the [OpenLineage documentation][5].
 
    ```shell
    export DD_SITE=datadoghq.com
@@ -66,6 +66,6 @@ After your next dbt job run, you should start seeing job run and lineage data in
 [1]: /data_jobs/airflow/?tab=kubernetes
 [2]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [3]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
-[4]: https://openlineage.io/docs/client/python/#predefined-datadog-sites
-[5]: getting_started/site/#access-the-datadog-site
+[4]: /getting_started/site/#access-the-datadog-site
+[5]: https://openlineage.io/docs/client/python/#predefined-datadog-sites
 [6]: https://app.datadoghq.com/datasets/catalog?integration=dbt

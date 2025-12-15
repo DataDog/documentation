@@ -46,4 +46,4 @@ After syncing, you can explore your Sigma assets and their upstream dependencies
 [1]: https://help.sigmacomputing.com/hc/en-us/articles/4408555307027-Get-an-API-Token-and-Client-Id
 [2]: https://app.datadoghq.com/integrations/sigma-computing
 [3]: https://help.sigmacomputing.com/docs/region-warehouse-and-feature-support#supported-cloud-platforms-and-regions
-[4]: https://app.datadoghq.com/data-observability/explorer
+[4]: https://app.datadoghq.com/datasets/catalog
