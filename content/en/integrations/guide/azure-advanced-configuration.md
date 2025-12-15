@@ -259,7 +259,7 @@ If you see a status of `query_failed` you need to enable the Resource Health pro
 
 ## Azure integration troubleshooting
 
-{{% collapse-content title="Azure integration troubleshooting" level="h4" expanded=false id="troubleshooting-find-your-tenant-name" %}}
+{{% collapse-content title="Find your tenant name" level="h4" expanded=false id="troubleshooting-find-your-tenant-name" %}}
 1. Navigate to [portal.azure.com][24].
 2. In the left sidebar, select **Azure Active Directory**.
 3. Under **Basic information**, find the **Name** value.
@@ -325,7 +325,7 @@ Datadog displays raw data from Azure in per-second values, regardless of the tim
 
 ### Log collection troubleshooting
 
-Use the information in this section to troubleshoot log forwarding issues. If your issue isn't described in the [general troubleshooting section](#general-troubleshooting-applicable-to-all-setup-methods), click the link below that corresponds to your setup method for more specific troubleshooting steps.
+To troubleshoot log forwarding issues, begin with the [general troubleshooting section](#general-troubleshooting-applicable-to-all-setup-methods). If those steps do not resolve your issue, look at the following setup-specific guidance. 
 
 - [Automated](#automated-log-forwarding-troubleshooting)
 - [Blob Storage](#blob-storage-log-forwarding-troubleshooting)
@@ -353,7 +353,7 @@ Diagnostic setting not present:
 {{% collapse-content title="Check for naming conflicts" level="h4" expanded=false id="troubleshooting-logs-naming-conflicts" %}}
 If you have Azure resources with the same resource name as one of the default parameters, it can lead to naming conflicts. Azure does not allow resources to share resource names within an individual subscription. Datadog recommends renaming the default parameter with a unique name that does not already exist within your environment.
 
-**Note**: If you are rerunning the template due to this failure, Datadog also recommends removing the entire resource group to create a fresh deployment. 
+**Note**: If you are rerunning the template due to this failure, Datadog recommends also removing the entire resource group to create a fresh deployment. 
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Ensure the resource provider is registered" level="h4" expanded=false id="troubleshooting-logs-unregistered-resource-provider" %}}
@@ -386,7 +386,7 @@ For missing Azure resource logs, find the ARM-deployed storage account in the re
 [Container App Console logs][32] help you diagnose application errors and exceptions. To inspect the logs, enable logging within the Container Apps environment in the same region as your resources that are missing logs.
 {{% /collapse-content %}} 
 
-**Note**: When using the automated log forwarder to send logs, Microsoft Entra diagnostic settings must be set manually. See [Configure Microsoft Entra diagnostic settings for activity logs][14] for more information.
+**Note**: When using the automated log forwarder to send logs, you must manually set Microsoft Entra diagnostic settings. See [Configure Microsoft Entra diagnostic settings for activity logs][14] for more information.
 
 #### Blob Storage log forwarding troubleshooting
 
@@ -494,7 +494,7 @@ If you are missing all logs, ensure that:
 A spike in incoming messages with a drop in outgoing ones suggests a bottleneck. Use these metrics to investigate:
 
 Check for incoming messages:
-: `azure.eventhub_namespaces.incoming_messages`:
+: `azure.eventhub_namespaces.incoming_messages`
 
 Check for incoming data:
 : `azure.eventhub_namespaces.incoming_bytes`
@@ -551,7 +551,7 @@ Subscriptions monitored by multiple app registrations can introduce overlapping 
 
 When you power down your VMs in Azure, the Datadog Azure integration still collects the metric `azure.vm.status` for that VM. This metric is tagged with `status:running`, `status:not_running`, or `status:unknown`.
 
-This is intended, but causes the VM to remain on your infrastructure list. If your VM reports only this metric, it does not count towards your billable host-count. See the Datadog [billing page][21] for more info on billing matters.
+This is intended, but causes the VM to remain on your infrastructure list. If your VM reports only this metric, it does not count towards your billable host-count. For more billing information, see the Datadog [billing page][21].
 
 If you destroy your Azure VM, it phases out of your infrastructure list within 3 hours.
 
@@ -587,6 +587,8 @@ azure provider register Microsoft.ResourceHealth
 ```
 
 The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
