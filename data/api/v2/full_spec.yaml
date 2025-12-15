@@ -35105,6 +35105,10 @@ components:
       description: The `add_env_vars` processor adds environment variable values to
         log events.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this processor in the pipeline.
@@ -35115,14 +35119,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineAddEnvVarsProcessorType'
         variables:
@@ -35134,8 +35130,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - variables
+      - enabled
       type: object
     ObservabilityPipelineAddEnvVarsProcessorType:
       default: add_env_vars
@@ -35164,6 +35160,10 @@ components:
     ObservabilityPipelineAddFieldsProcessor:
       description: The `add_fields` processor adds static key-value fields to logs.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         fields:
           description: A list of static fields (key-value pairs) that is added to
             each log event processed by this component.
@@ -35181,14 +35181,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessorType'
       required:
@@ -35196,7 +35188,7 @@ components:
       - type
       - include
       - fields
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineAddFieldsProcessorType:
       default: add_fields
@@ -35499,15 +35491,25 @@ components:
             $ref: '#/components/schemas/ObservabilityPipelineConfigDestinationItem'
           type: array
         processors:
-          description: A list of processors that transform or enrich log data.
+          description: A list of processor groups that transform or enrich log data.
           example:
-          - id: filter-processor
+          - enabled: true
+            id: my-processor-group
             include: service:my-service
             inputs:
             - datadog-agent-source
-            type: filter
+            processors:
+            - enabled: true
+              id: filter-processor
+              include: status:error
+              type: filter
+            - enabled: true
+              field: message
+              id: json-processor
+              include: '*'
+              type: parse_json
           items:
-            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorItem'
+            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorGroup'
           type: array
         sources:
           description: A list of configured data sources for the pipeline.
@@ -35543,6 +35545,73 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
+    ObservabilityPipelineConfigProcessorGroup:
+      description: A group of processors.
+      example:
+        enabled: true
+        id: my-processor-group
+        include: service:my-service
+        inputs:
+        - datadog-agent-source
+        processors:
+        - enabled: true
+          fields:
+          - name: env
+            value: prod
+          id: add-fields-processor
+          include: '*'
+          type: add_fields
+        - enabled: true
+          id: filter-processor
+          include: status:error
+          type: filter
+      properties:
+        enabled:
+          description: Whether this processor group is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for the processor group.
+          example: grouped-processors
+          type: string
+        include:
+          description: Conditional expression for when this processor group should
+            execute.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of IDs for components whose output is used as the input
+            for this processor group.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        processors:
+          description: Processors applied sequentially within this group. Events flow
+            through each processor in order.
+          example:
+          - enabled: true
+            fields:
+            - name: env
+              value: prod
+            id: add-fields-processor
+            include: '*'
+            type: add_fields
+          - enabled: true
+            id: filter-processor
+            include: status:error
+            type: filter
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorItem'
+          type: array
+      required:
+      - id
+      - include
+      - inputs
+      - processors
+      - enabled
+      type: object
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -35660,6 +35729,10 @@ components:
         Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
         advanced filtering capabilities.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this processor.
           example: remap-vrl-processor
@@ -35671,14 +35744,6 @@ components:
             processor.
           example: '*'
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         remaps:
           description: Array of VRL remap rules.
           items:
@@ -35692,7 +35757,7 @@ components:
       - type
       - include
       - remaps
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineCustomProcessorRemap:
       description: Defines a single VRL remap rule with its own filtering and transformation
@@ -35723,7 +35788,6 @@ components:
       - include
       - name
       - source
-      - enabled
       - drop_on_error
       type: object
     ObservabilityPipelineCustomProcessorType:
@@ -35832,6 +35896,10 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -35843,14 +35911,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         keys:
           description: A list of tag keys.
           example:
@@ -35871,7 +35931,7 @@ components:
       - mode
       - action
       - keys
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineDatadogTagsProcessorAction:
       description: The action to take on tags with matching keys.
@@ -35917,6 +35977,10 @@ components:
     ObservabilityPipelineDedupeProcessor:
       description: The `dedupe` processor removes duplicate fields in log events.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         fields:
           description: A list of log field paths to check for duplicates.
           example:
@@ -35934,14 +35998,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - parse-json-processor
-          items:
-            type: string
-          type: array
         mode:
           $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessorMode'
         type:
@@ -35950,9 +36006,9 @@ components:
       - id
       - type
       - include
-      - inputs
       - fields
       - mode
+      - enabled
       type: object
     ObservabilityPipelineDedupeProcessorMode:
       description: The deduplication mode to apply to the fields.
@@ -36158,6 +36214,10 @@ components:
       description: The `enrichment_table` processor enriches logs using a static CSV
         file or GeoIP database.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         file:
           $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableFile'
         geoip:
@@ -36171,14 +36231,6 @@ components:
             targets.
           example: source:my-source
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - add-fields-processor
-          items:
-            type: string
-          type: array
         target:
           description: Path where enrichment results should be stored in the log.
           example: enriched.geoip
@@ -36189,8 +36241,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - target
+      - enabled
       type: object
     ObservabilityPipelineEnrichmentTableProcessorType:
       default: enrichment_table
@@ -36221,6 +36273,10 @@ components:
         on a Datadog search query. Logs that match the `include` query are passed
         through; others are discarded.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -36233,21 +36289,13 @@ components:
             components; others are dropped.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineFilterProcessorType'
       required:
       - id
       - type
       - include
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineFilterProcessorType:
       default: filter
@@ -36327,6 +36375,10 @@ components:
         Metrics can be counters, gauges, or distributions and optionally grouped by
         log fields.'
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline.
@@ -36337,14 +36389,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this processor.
-          example:
-          - source-id
-          items:
-            type: string
-          type: array
         metrics:
           description: Configuration for generating individual metrics.
           items:
@@ -36355,9 +36399,7 @@ components:
       required:
       - id
       - type
-      - inputs
-      - include
-      - metrics
+      - enabled
       type: object
     ObservabilityPipelineGenerateMetricsProcessorType:
       default: generate_datadog_metrics
@@ -36954,6 +36996,10 @@ components:
       description: The `ocsf_mapper` processor transforms logs into the OCSF schema
         using a predefined mapping configuration.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline.
@@ -36964,14 +37010,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this processor.
-          example:
-          - filter-processor
-          items:
-            type: string
-          type: array
         mappings:
           description: A list of mapping rules to convert events to the OCSF format.
           items:
@@ -36983,8 +37021,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - mappings
+      - enabled
       type: object
     ObservabilityPipelineOcsfMapperProcessorMapping:
       description: Defines how specific events are transformed to OCSF using a mapping
@@ -37089,6 +37127,10 @@ components:
             by Datadog.
           example: true
           type: boolean
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: A unique identifier for this processor.
           example: parse-grok-processor
@@ -37098,14 +37140,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         rules:
           description: The list of Grok parsing rules. If multiple matching rules
             are provided, they are evaluated in order. The first successful match
@@ -37119,8 +37153,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - rules
+      - enabled
       type: object
     ObservabilityPipelineParseGrokProcessorRule:
       description: 'A Grok parsing rule used in the `parse_grok` processor. Each rule
@@ -37205,6 +37239,10 @@ components:
         and flattens it into the event. This is useful when logs contain embedded
         JSON as a string.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         field:
           description: The name of the log field that contains a JSON string.
           example: message
@@ -37220,14 +37258,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessorType'
       required:
@@ -37235,7 +37265,7 @@ components:
       - type
       - include
       - field
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineParseJSONProcessorType:
       default: parse_json
@@ -37268,6 +37298,10 @@ components:
             the filter query continue through the pipeline.
           example: false
           type: boolean
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -37283,14 +37317,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         limit:
           $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimit'
         name:
@@ -37320,9 +37346,8 @@ components:
       - type
       - include
       - name
-      - drop_events
       - limit
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineQuotaProcessorLimit:
       description: The maximum amount of data or number of events allowed before the
@@ -37398,6 +37423,10 @@ components:
       description: The `reduce` processor aggregates and merges logs based on matching
         keys and merge strategies.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         group_by:
           description: A list of fields used to group log events for merging.
           example:
@@ -37415,14 +37444,6 @@ components:
             targets.
           example: env:prod
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - parse-json-processor
-          items:
-            type: string
-          type: array
         merge_strategies:
           description: List of merge strategies defining how values from grouped events
             should be combined.
@@ -37435,9 +37456,9 @@ components:
       - id
       - type
       - include
-      - inputs
       - group_by
       - merge_strategies
+      - enabled
       type: object
     ObservabilityPipelineReduceProcessorMergeStrategy:
       description: Defines how a specific field should be merged across grouped events.
@@ -37494,6 +37515,10 @@ components:
     ObservabilityPipelineRemoveFieldsProcessor:
       description: The `remove_fields` processor deletes specified fields from logs.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         fields:
           description: A list of field names to be removed from each log event.
           example:
@@ -37513,13 +37538,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: The `PipelineRemoveFieldsProcessor` `inputs`.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessorType'
       required:
@@ -37527,7 +37545,7 @@ components:
       - type
       - include
       - fields
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineRemoveFieldsProcessorType:
       default: remove_fields
@@ -37541,6 +37559,10 @@ components:
     ObservabilityPipelineRenameFieldsProcessor:
       description: The `rename_fields` processor changes field names.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         fields:
           description: A list of rename rules specifying which fields to rename in
             the event, what to rename them to, and whether to preserve the original
@@ -37559,14 +37581,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessorType'
       required:
@@ -37574,7 +37588,7 @@ components:
       - type
       - include
       - fields
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineRenameFieldsProcessorField:
       description: Defines how to rename a field in log events.
@@ -37680,6 +37694,10 @@ components:
       description: The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -37691,14 +37709,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         percentage:
           description: The percentage of logs to sample.
           example: 10.0
@@ -37716,7 +37726,7 @@ components:
       - id
       - type
       - include
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineSampleProcessorType:
       default: sample
@@ -37731,6 +37741,10 @@ components:
       description: The `sensitive_data_scanner` processor detects and optionally redacts
         sensitive data in log events.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (e.g., as input to downstream
@@ -37742,14 +37756,6 @@ components:
             targets.
           example: source:prod
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - parse-json-processor
-          items:
-            type: string
-          type: array
         rules:
           description: A list of rules for identifying and acting on sensitive data
             patterns.
@@ -37762,8 +37768,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - rules
+      - enabled
       type: object
     ObservabilityPipelineSensitiveDataScannerProcessorAction:
       description: Defines what action to take when sensitive data is matched.
@@ -38724,6 +38730,10 @@ components:
       description: The `throttle` processor limits the number of events that pass
         through over a given time window.
       properties:
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         group_by:
           description: Optional list of fields used to group events before the threshold
             has been reached.
@@ -38741,14 +38751,6 @@ components:
             targets.
           example: env:prod
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         threshold:
           description: the number of events allowed in a given time window. Events
             sent after the threshold has been reached, are dropped.
@@ -38766,9 +38768,9 @@ components:
       - id
       - type
       - include
-      - inputs
       - threshold
       - window
+      - enabled
       type: object
     ObservabilityPipelineThrottleProcessorType:
       default: throttle
