@@ -55,7 +55,7 @@ See [Space aggregation][22] in the metric documentation for more information.
 
 #### Reconcile the discrepancy
 
-1. Go to **CloudWatch → All metrics**.
+1. Go to **CloudWatch**, and then **All metrics**.
 2. Search for and graph the metric. 
 3. Select the **Source** tab to show the full metric query.
 
