@@ -20,7 +20,9 @@ Charts are the primary way to analyze and share insights in Product Analytics. T
 - [Using prebuilt chart templates]
 
 ## Create a chart 
-To create a chart 
+To create a chart, click **New Chart** on the [Chart List page][1] and select the chart you'd like to build.  
+
+{{< img src="product_analytics/chart_basics/pana_chart_basics_new2.png" alt="The two types of retention measurements available with product analytics" style="width:100%;" >}}
 
 
 ## Save a chart 
@@ -34,3 +36,11 @@ To create a chart
 
 
 ## Start from a template 
+
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/product-analytics/saved-charts
