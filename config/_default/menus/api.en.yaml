@@ -8338,8 +8338,7 @@ menu:
           - v2
         operationids:
           - DeleteIncidentImpact
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: Create an incident impact
       url: '#create-an-incident-impact'
@@ -8351,8 +8350,7 @@ menu:
           - v2
         operationids:
           - CreateIncidentImpact
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: List an incident's impacts
       url: '#list-an-incidents-impacts'
@@ -8364,8 +8362,7 @@ menu:
           - v2
         operationids:
           - ListIncidentImpacts
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: 'Create, update, and delete incident attachments'
       url: '#create,-update,-and-delete-incident-attachments'
