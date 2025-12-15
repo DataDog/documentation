@@ -131,18 +131,8 @@ You can add a budget to dashboards in two ways:
 
 Learn how to [create a budget-based monitor][2].
 
-## View forecasts in budgets
-
-Budget cards automatically display forecast information when available, showing projected costs for each budget period. If forecasted costs are projected to exceed your budget, the budget status indicates **Projected Over** to help you take action before going over budget.
-
-To view detailed forecast information in a budget, click **View Performance** and toggle **Show Forecast** to visualize predicted costs alongside actual spending.
-
-Learn more about how [forecasting][3] works and data requirements.
-
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
 [2]: /cloud_cost_management/cost_changes/monitors/
-[3]: /cloud_cost_management/planning/forecasting
-
