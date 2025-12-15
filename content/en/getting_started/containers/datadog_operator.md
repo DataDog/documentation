@@ -11,6 +11,9 @@ further_reading:
   - link: '/containers/datadog_operator/configuration'
     tag: "documentation"
     text: 'Datadog Operator: Configuration'
+  - link: '/containers/datadog_operator/migration'
+    tag: 'documentation'
+    text: 'Migrate to the Datadog Operator from the Datadog Helm Chart'
 ---
 
 The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. This guide describes how to use the Operator to deploy the Datadog Agent.

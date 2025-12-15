@@ -38,6 +38,7 @@ disable_toc: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Operator guides:" >}}
+    {{< nextlink href="/containers/guide/helm_operator_migration" >}}Migrate to the Datadog Operator from the Datadog Helm Chart{{< /nextlink >}}
     {{< nextlink href="/containers/guide/datadogoperator_migration" >}}Migration to version 1.0 of the Datadog Operator{{< /nextlink >}}
     {{< nextlink href="/containers/guide/operator-eks-addon" >}}Installing the Datadog Agent on Amazon EKS with the Datadog Operator add-on{{< /nextlink >}}
 {{< /whatsnext >}}

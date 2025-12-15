@@ -1106,7 +1106,7 @@ menu:
       url: developers/ide_plugins/idea/logs/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
-      weight: 7011  
+      weight: 7011
     - name: Live Debugger
       url: developers/ide_plugins/idea/live_debugger/
       parent: ide_plugins_idea
@@ -3115,7 +3115,7 @@ menu:
       url: infrastructure/end_user_device_monitoring/setup/
       identifier: end_user_device_monitoring_setup
       parent: end_user_device_monitoring
-      weight: 1      
+      weight: 1
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
@@ -3218,61 +3218,66 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_installation
       weight: 401
+    - name: Migrate to the Datadog Operator
+      url: containers/kubernetes/migration
+      parent: containers_kubernetes
+      identifier: containers_datadog_operator_migration
+      weight: 402
     - name: Further Configuration
       url: containers/kubernetes/configuration
       parent: containers_kubernetes
       identifier: containers_kubernetes_configuration
-      weight: 402
+      weight: 403
     - name: Distributions
       url: containers/kubernetes/distributions
       parent: containers_kubernetes
       identifier: containers_kubernetes_distributions
-      weight: 403
+      weight: 404
     - name: APM
       url: containers/kubernetes/apm/
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
-      weight: 404
+      weight: 405
     - name: Log collection
       url: containers/kubernetes/log/
       parent: containers_kubernetes
       identifier: containers_kubernetes_log
-      weight: 405
+      weight: 406
     - name: Tag extraction
       url: containers/kubernetes/tag/
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
-      weight: 406
+      weight: 407
     - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
-      weight: 407
+      weight: 408
     - name: Prometheus & OpenMetrics
       url: containers/kubernetes/prometheus/
       parent: containers_kubernetes
       identifier: containers_kubernetes_prometheus
-      weight: 408
+      weight: 409
     - name: Control plane monitoring
       url: containers/kubernetes/control_plane/
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
-      weight: 409
+      weight: 410
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 410
+      weight: 411
     - name: Datadog CSI Driver
       url: containers/kubernetes/csi_driver
       parent: containers_kubernetes
       identifier: csi_driver
-      weight: 411
+      weight: 412
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 412
+      weight: 413
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
@@ -3330,7 +3335,7 @@ menu:
       weight: 604
     - name: Managed Instances
       url: containers/amazon_ecs/managed_instances/
-      parent: containers_amazon_ecs 
+      parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_managed_instances
       weight: 605
     - name: AWS Fargate with ECS
@@ -3343,51 +3348,56 @@ menu:
       identifier: containers_datadog_operator
       parent: containers
       weight: 8
+    - name: Migrate to the Datadog Operator
+      url: containers/datadog_operator/migration
+      identifier: containers_datadog_operator_migration
+      parent: containers_datadog_operator
+      weight: 801
     - name: Advanced Install
       url: containers/datadog_operator/advanced_install
       identifier: containers_datadog_operator_installation
       parent: containers_datadog_operator
-      weight: 801
+      weight: 802
     - name: Configuration
       url: containers/datadog_operator/config
       identifier: containers_datadog_operator_configuration
       parent: containers_datadog_operator
-      weight: 802
+      weight: 803
     - name: Custom Checks
       url: containers/datadog_operator/custom_check
       identifier: containers_datadog_operator_customchecks
       parent: containers_datadog_operator
-      weight: 803
+      weight: 804
     - name: Data Collected
       url: containers/datadog_operator/data_collected
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
-      weight: 804
+      weight: 805
     - name: kubectl Plugin
       url: containers/datadog_operator/kubectl_plugin
       identifier: containers_datadog_operator_kubectlplugin
       parent: containers_datadog_operator
-      weight: 805
+      weight: 806
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 806
+      weight: 807
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 807
+      weight: 808
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 808
+      weight: 809
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 809
+      weight: 810
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -3450,7 +3460,7 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_installation
       weight: 101
-    - name: Managed Instances 
+    - name: Managed Instances
       url: serverless/aws_lambda/managed_instances
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_managed_instances
@@ -3655,7 +3665,7 @@ menu:
       url: network_monitoring/cloud_network_monitoring/network_health/
       parent: cnm
       identifier: cnm_network_health
-      weight: 103 
+      weight: 103
     - name: Network Analytics
       url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: cnm
@@ -3680,7 +3690,7 @@ menu:
       url: network_monitoring/cloud_network_monitoring/supported_cloud_services/
       identifier: cnm_supported_cloud_services
       parent: cnm
-      weight: 10601 
+      weight: 10601
     - name: DNS Monitoring
       url: network_monitoring/dns/
       parent: nm_parent
@@ -3690,7 +3700,7 @@ menu:
       url: network_monitoring/devices
       parent: nm_parent
       identifier: ndm
-      weight: 3      
+      weight: 3
     - name: NDM Terms and Concepts
       url: network_monitoring/devices/glossary
       parent: ndm
@@ -3745,7 +3755,7 @@ menu:
       url: network_monitoring/devices/config_management
       parent: ndm
       identifier: ndm_config_management
-      weight: 306   
+      weight: 306
     - name: Maps
       url: network_monitoring/devices/topology
       parent: ndm
@@ -3785,7 +3795,7 @@ menu:
       url: network_monitoring/network_path/glossary
       parent: network_path
       identifier: network_path_glossary
-      weight: 501 
+      weight: 501
     - name: Setup
       url: network_monitoring/network_path/setup/
       parent: network_path
@@ -5055,7 +5065,7 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 304
-    - name: Cost 
+    - name: Cost
       url: llm_observability/monitoring/cost
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_cost
@@ -5114,9 +5124,9 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_compatibility
       weight: 403
-    - name: Export API 
+    - name: Export API
       url: llm_observability/evaluations/export_api
-      parent: llm_obs_evaluations 
+      parent: llm_obs_evaluations
       identifier: llm_obs_evaluations_export_api
       weight: 404
     - name: Experiments
@@ -7261,7 +7271,7 @@ menu:
       identifier: sec_static_analysis_ai
       url: /security/code_security/static_analysis/ai_enhanced_sast/
       parent: sec_static_analysis
-      weight: 5     
+      weight: 5
     - name: SAST Custom Rule Creation Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
@@ -7637,7 +7647,7 @@ menu:
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
-      weight: 10  
+      weight: 10
     - name: Template Variables
       url: synthetics/notifications/template_variables
       parent: synthetics_notifications

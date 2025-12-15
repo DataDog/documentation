@@ -514,7 +514,7 @@
       - repo_name: helm-charts
         contents:
           - action: pull-and-push-file
-            branch: fanny/AGENTONB-2748/migration-docs
+            branch: main
             globs:
               - 'charts/datadog/docs/Migration_Helm_to_Operator.md'
             options:
@@ -523,7 +523,7 @@
               front_matters:
                 title: Migrate from the Datadog Helm Chart to the Datadog Operator
                 description: "Migrate the Datadog Helm installation to the Datadog Operator for managing Datadog Agent deployments"
-                dependencies: [ "https://github.com/DataDog/helm-charts/blob/fanny/AGENTONB-2748/migration-docs/charts/datadog/docs/Migration_Helm_to_Operator.md" ]
+                dependencies: [ "https://github.com/DataDog/helm-charts/blob/main/charts/datadog/docs/Migration_Helm_to_Operator.md" ]
                 aliases:
                   - /containers/datadog_operator/migration
                   - /containers/kubernetes/migration
