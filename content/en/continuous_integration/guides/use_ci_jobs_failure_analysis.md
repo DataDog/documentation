@@ -36,7 +36,7 @@ Each log line is pre-scanned to redact any potentially sensitive information bef
 The LLM model can classify errors with similar messages into distinct yet related subdomains. For example, if the error message is <code>Cannot connect to docker daemon</code>, it is usually categorized under <code>domain:platform</code> and <code>subdomain:network</code>. However, the LLM model may sometimes classify it under <code>subdomain:infrastructure</code> instead.
 </div>
 
-#### Does Job Failure Analysis require all logs to be indexed?
+#### Logs requirements for jobs failure analysis
 
 Job Failure Analysis needs:
 * All logs from the **failing job** being analyzed
