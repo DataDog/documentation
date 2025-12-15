@@ -42,12 +42,12 @@ Send feature flag events from any provider using the [Events API][3]. Create a `
 
 #### Recommended tags
 
-When sending custom feature flag change events, Including the following fields to ensure accurate filtering, and cross-product correlation within Datadog:
+When sending custom feature flag change events, Including the following fields ensures accurate filtering, and cross-product correlation within Datadog:
 
 - **impacted_resources** (with type service): Add the relevant service name to the `impacted_resources` array to associate the feature flag change with the service it affects.
 - **env tag**: Include an `env` tag to specify the environment where the change occurred (for example: production, staging, or development).
 
-If setting tags at event change isn’t applicable to your setup, see the next section for auto-enrichment.
+If setting these tags at event change isn’t applicable to your setup, see the next section for auto-enrichment.
 
 Example request:
 
