@@ -20,6 +20,8 @@ Charts are the primary way to analyze and share insights in Product Analytics. T
 - [Using prebuilt chart templates]
 
 ## Create a chart 
+To create a chart 
+
 
 ## Save a chart 
 
