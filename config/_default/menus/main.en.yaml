@@ -5094,11 +5094,21 @@ menu:
       identifier: business_intelligence_integrations_metabase
       parent: business_intelligence_integrations
       weight: 3000000
-    - name: OpenLineage Integrations
-      url: data_observability/openlineage
+    - name: Power BI
+      url: data_observability/integrations/business_intelligence/powerbi
+      identifier: business_intelligence_integrations_powerbi
+      parent: business_intelligence_integrations
+      weight: 4000000
+    - name: OpenLineage
+      url: data_observability/integrations/openlineage
       identifier: openlineage_integrations
       parent: data_integrations
       weight: 400000
+    - name: Datadog Agent for OpenLineage Proxy
+      url: data_observability/integrations/openlineage/datadog_agent_for_openlineage
+      identifier: openlineage_datadog_agent_for_openlineage
+      parent: openlineage_integrations
+      weight: 1000000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
