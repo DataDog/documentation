@@ -28,7 +28,7 @@ Exception Replay is generally available for Python, Java, .NET, PHP, and is enab
 ## Overview
 
 Exception Replay captures execution context and local variable values when an exception occurs, helping you diagnose,
-reproduce, and resolve issues faster. It records the surrounding state—including stack trace and variable snapshots—and
+reproduce, and resolve issues faster. It records the surrounding state, including stack trace and variable snapshots, and
 surfaces this data directly in Error Tracking alongside the rest of the issue details.
 
 {{< img src="tracing/error_tracking/error_tracking_executional_context-2.png" alt="Error Tracking Explorer Exception Replay" style="width:90%" >}}
@@ -55,11 +55,11 @@ Exception Replay is available only for <b>APM-based exceptions</b> and does not 
 
 ## Requirements & Setup
 
-Exception Replay supports **Python**, **Java**, **.NET**, and **PHP**, and captures only APM-based exceptions. It
+Exception Replay supports Python, Java, .NET, and PHP, and captures only APM-based exceptions. It
 requires the Datadog Agent and an [APM-instrumented application][5]. You can enable it for an entire
 environment, an individual service in-app, or a specific service using environment variables.
 
-The enablement method depends on your tracer version and whether [Remote Configuration][4] is available—see the table
+The enablement method depends on your tracer version and whether [Remote Configuration][4] is available. See the table
 below for details.
 
 | | By Environment (Bulk) | By Service (In-App) | By Service (Env Var) |
@@ -70,8 +70,8 @@ below for details.
 | **Remote Configuration Required?** | Yes | Yes | No |
 | **Enabled by default** | Yes | No | No |
 
-You can enable Exception Replay in-app by toggling it through the Exception Replay Settings page for the environment or
-service.
+To enable Exception Replay in-app, in the Exception Replay **Settings** page for the environment or
+service, toggle it to **Enabled**.
 
 {{< img src="tracing/error_tracking/error_tracking_exception_replay_enablement.mp4" video="true" alt="Enabling Exception Replay through the setting page" style="width:90%" >}}
 
