@@ -17,7 +17,7 @@ further_reading:
 
 Data Observability helps data teams detect, resolve, and prevent issues that impact data quality, performance, and cost. It enables teams to monitor anomalies, troubleshoot faster, and maintain trust in the data powering downstream systems.
 
-{{< img src="data_observability/overview-temp.png" alt="Lineage graph showing a failed application upstream of a table with an upstream issue and downstream nodes including tables, a dashboard, and a workbook labeled Upstream issue." style="width:100%;" >}}
+{{< img src="data_observability/data-obs-overview-1.png" alt="Lineage graph showing a failed application upstream of a table with an upstream issue and downstream nodes including tables, a dashboard, and a workbook labeled Upstream issue." style="width:100%;" >}}
 
 Datadog makes this possible by monitoring key signals across your data stack, including metrics, metadata, lineage, and logs. These signals help detect issues early and support reliable, high-quality data.
 

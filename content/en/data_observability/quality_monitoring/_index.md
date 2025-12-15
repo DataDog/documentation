@@ -10,6 +10,8 @@ further_reading:
     text: 'Jobs Monitoring'
 ---
 
+<div class="alert alert-info">Data Observability is in Preview.</div>
+
 ## Overview
 
 Quality Monitoring detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides the context to trace them back to upstream jobs or sources.
@@ -40,6 +42,7 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/integrations/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}
    {{< nextlink href="data_observability/integrations/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
    {{< nextlink href="data_observability/integrations/business_intelligence/metabase" >}}Metabase{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/business_intelligence/powerbi" >}}Power BI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

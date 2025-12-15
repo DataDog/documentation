@@ -6,6 +6,9 @@ further_reading:
     tag: 'Documentation'
     text: 'Data Observability'
 ---
+
+<div class="alert alert-info">Data Observability is in Preview.</div>
+
 ## Overview
 
 Data Observability connects to your data warehouse and automatically syncs metadata and query history, enabling you to detect quality issues, track costs, and analyze usage patterns.

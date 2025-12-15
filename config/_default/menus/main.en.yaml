@@ -5075,7 +5075,7 @@ menu:
       parent: transformation_integrations
       weight: 7000000
     - name: Business Intelligence Integrations
-      url: data_observability/business_intelligence
+      url: data_observability/integrations/business_intelligence
       identifier: business_intelligence_integrations
       parent: data_integrations
       weight: 300000
