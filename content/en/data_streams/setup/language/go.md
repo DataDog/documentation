@@ -5,20 +5,21 @@ further_reading:
       tag: 'Blog'
       text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
 aliases:
-  - /data_streams/go
+    - /data_streams/go
 ---
 
 The following instrumentation types are available:
-* [Automatic instrumentation for Kafka-based workloads](#automatic-instrumentation)
-* [Manual Instrumentation for Kafka-based workloads](#kafka-based-workloads)
-* [Manual instrumentation for other queuing technology or protocol](#other-queuing-technologies-or-protocols)
+
+-   [Automatic instrumentation for Kafka-based workloads](#automatic-instrumentation)
+-   [Manual Instrumentation for Kafka-based workloads](#kafka-based-workloads)
+-   [Manual instrumentation for other queuing technology or protocol](#other-queuing-technologies-or-protocols)
 
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries.
 
-* [Datadog Agent v7.34.0 or later][1]
-* [dd-trace-go v1.56.1 or later][2]
+-   [Datadog Agent v7.34.0 or later][1]
+-   [dd-trace-go v1.56.1 or later][2]
 
 {{% tracing-go-v2 %}}
 
@@ -27,9 +28,11 @@ Data Streams Monitoring has not been changed between v1 and v2 of the tracer.
 ### Supported libraries
 
 | Technology | Library                 | Minimal tracer version                                                       | Recommended tracer version                                                       |
-|------------|-------------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| ---------- | ----------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | Kafka      | [confluent-kafka-go][8] | {{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="minimal" >}} | {{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="recommended" >}} |
-| Kafka      | [Sarama][9]             | {{< dsm-tracer-version lang="go" lib="sarama" type="minimal" >}}             | {{< dsm-tracer-version lang="go" lib="sarama" type="recommended" >}}             |
+| Kafka      | [Sarama][9]             | {{< dsm-tracer-version lang="go" lib="ibm-sarama" type="minimal" >}}         | {{< dsm-tracer-version lang="go" lib="ibm-sarama" type="recommended" >}}         |
+| Kafka      | [Sarama (Shopify)][10]  | {{< dsm-tracer-version lang="go" lib="sarama" type="minimal" >}}             | {{< dsm-tracer-version lang="go" lib="sarama" type="recommended" >}}             |
+| Kafka      | [kafka-go][11]          | {{< dsm-tracer-version lang="go" lib="kafka-go" type="minimal" >}}           | {{< dsm-tracer-version lang="go" lib="kafka-go" type="recommended" >}}           |
 
 ### Installation
 
@@ -56,7 +59,7 @@ To manually instrument the Sarama Kafka client with Data Streams Monitoring:
 
 ```go
 import (
-  ddsarama "github.com/DataDog/dd-trace-go/contrib/Shopify/sarama/v2"
+  ddsarama "github.com/DataDog/dd-trace-go/contrib/IBM/sarama/v2"
 )
 
 2. Wrap the producer with `ddsarama.WrapAsyncProducer`
@@ -93,9 +96,10 @@ producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
 If a service consumes data from one point and produces to another point, propagate context between the two places using the Go context structure:
 
 3. Extract the context from headers
-  ```go
-  ctx = datastreams.ExtractFromBase64Carrier(ctx, ddsarama.NewConsumerMessageCarrier(message))
-  ```
+
+```go
+ctx = datastreams.ExtractFromBase64Carrier(ctx, ddsarama.NewConsumerMessageCarrier(message))
+```
 
 4. Inject it into the header before producing downstream
     ```go
@@ -131,6 +135,7 @@ if ok {
 ### Monitoring connectors
 
 #### Confluent Cloud connectors
+
 {{% data_streams/dsm-confluent-connectors %}}
 
 ## Further reading
@@ -145,4 +150,6 @@ if ok {
 [6]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37
 [7]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44
 [8]: https://github.com/confluentinc/confluent-kafka-go
-[9]: https://github.com/Shopify/sarama
+[9]: https://github.com/IBM/sarama
+[10]: https://github.com/Shopify/sarama
+[11]: https://github.com/segmentio/kafka-go

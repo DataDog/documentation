@@ -282,6 +282,24 @@
       1.66.0 or later
     {{- end -}}
   {{- end -}}
+<!-- Kafka (kafka-go) -->
+  {{- if eq (.Get "lib") "kafka-go" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.63.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.63.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Kafka (ibm-sarama) -->
+  {{- if eq (.Get "lib") "ibm-sarama" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.67.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.67.0 or later
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
 <!-- Ruby -->
