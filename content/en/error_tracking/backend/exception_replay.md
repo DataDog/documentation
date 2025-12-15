@@ -21,8 +21,8 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Exception Replay for APM Error Tracking is generally available for Python, Java, .NET, PHP, and is enabled by default
-when supported.
+Exception Replay is generally available for Python, Java, .NET, PHP, and is enabled by default
+<a href="#requirements--setup">when supported</a>.
 </div>
 
 ## Overview
@@ -68,7 +68,7 @@ below for details.
 | **Agent Version** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
 | **Minimum Tracer Versions** | Python ≥ 3.15.0<br>Java ≥ 1.54.0<br>.NET ≥ 3.29.0<br>PHP: N/A | Python ≥ 3.10.0<br>Java ≥ 1.48.0<br>.NET ≥ 3.29.0<br>PHP: N/A	 | Python ≥ 1.16.0<br>Java ≥ 1.47.0<br>.NET ≥ 2.53.0<br>PHP ≥ 1.12.1 |
 | **Remote Configuration Required?** | Yes | Yes | No |
-| **Enabled by default** | Yes | Yes | No |
+| **Enabled by default** | Yes | No | No |
 
 You can enable Exception Replay in-app by toggling it through the Exception Replay Settings page for the environment or
 service.
@@ -104,8 +104,10 @@ Source Code Integration is helpful but not required.
 
 ## Sensitive data redaction
 
-Exception Replay applies **automatic, on-host redaction**, and redaction modes further enforce protection before data
-becomes queryable.
+Exception Replay applies automatic identifier- and mode-based redaction to ensure sensitive data is protected before it
+becomes available.
+
+### Identifier-based redaction
 
 Variable values associated with common sensitive identifiers (for example, `password`, `accessToken`, and similar terms)
 are scrubbed before snapshots leave the host. Additional language-specific redaction rules are built into each tracer
@@ -119,7 +121,7 @@ You can extend redaction behavior through:
 
 See the [Dynamic Instrumentation][1] and [Sensitive Data Scanner][2] documentation for configuration details.
 
-### Redaction modes
+### Mode-based redaction
 
 Exception Replay has two redaction modes:
 
