@@ -79,9 +79,9 @@ To create an app from a layout:
 You can create an app by choosing an integration and specific actions from the [Action Catalog][17]. App Builder preconfigures the actions and their queries, bringing live data into the app canvas. You can then connect components and test the app immediately. This method is best if you already have an integration and actions in mind (such as interacting with [a Datadog datastore][28]).
 
 1. From [App Builder][1], click **New App**. 
-1. Click **Start with Data** in the onboarding modal. 
+1. Click **Action** in the onboarding modal. 
 1. Choose an integration, then click **Continue**.
-1. Choose one or more actions. There is no limit to the number of actions you can choose. 
+1. Choose one or more actions. Each set of actions are templates that are specific to the integration you've selected. There is no limit to the number of actions you can choose.
 1. Click **Create**.
 1. [Customize your app][15].
 
