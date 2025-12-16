@@ -34,7 +34,7 @@ Optionally, toggle the switch to enable **Buffering Options** (Preview).<br>**No
 - CloudPrem endpoint URL
 	- Observability Pipelines sends logs to the CloudPrem intake endpoint. Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
 	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
-  - Stored as the environment variable: `DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+  - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
 
 ## How the destination works
 
