@@ -22,7 +22,7 @@ This page covers configuring and using {{< tooltip glossary="Remote Configuratio
 |---------|-------------|------------------------|
 | **[Agent flares][9]** | Send a flare from the Datadog site using Fleet Automation | 7.47+<br>7.66+ recommended |
 | **[Agent upgrades][10]** | Remotely upgrade your Agents | 7.66+ |
-| **[Agent configuration][11]**<br>(**{{< tooltip glossary="preview" case="title" >}}**) | Remotely configure your Agents | 7.73+ |
+| **[Agent configuration][11]** | Remotely configure your Agents | 7.73+ |
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
