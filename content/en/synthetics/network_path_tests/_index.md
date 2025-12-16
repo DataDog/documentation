@@ -143,7 +143,7 @@ Network Path tests use the same underlying functionality in both [Network Path][
 **Capabilities**:
 
 - **Unified test creation**: You can create Network Path tests from either the Network Path UI or the Synthetic Monitoring UI. Both entry points use the same underlying functionality.
-- **UI-based test creation**: :You can create Network Path tests directly from the Synthetic Monitoring UI with additional assertions on network data such as packet loss, latency, jitter, and number of hops.
+- **UI-based test creation**: You can create Network Path tests directly from the Synthetic Monitoring UI with additional assertions on network data such as packet loss, latency, jitter, and number of hops.
 - **Proactive monitoring**: Group browser, API, and Network Path tests in [test suites][9] to monitor how network performance impacts application performance.
 
 ## Further Reading
