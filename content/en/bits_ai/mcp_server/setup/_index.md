@@ -408,9 +408,9 @@ Searches Datadog [Test Optimization][25] for flaky tests and returns triage deta
 *Toolset: **software-delivery***\
 Aggregates Datadog Test events to quantify reliability and performance trends with aggregation functions, optional metrics, group-by facets, and configurable test levels.
 
-- Failure volume by branch over the last week: `aggregation=count query=@test.status:fail group_by=@git.branch`.
-- Slowest suites with percentiles: `aggregation=pc95 metric=@duration test_level=suite group_by=@test.suite`.
-- Pass/fail split by owners: `aggregation=count group_by=@test.codeowners query="(@test.status:pass OR @test.status:fail)"`.
+- Count the number of failed tests over the last week, grouped by branch.
+- Show me the 95th-percentile duration for each test suite to identify the slowest ones.
+- Count all passing and failing tests, grouped by code owners.
 
 ## Context efficiency
 
