@@ -51,7 +51,7 @@ Fleet Automation enables you to centrally manage Datadog Agents across all your 
 - **View Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
 
 <div class="alert alert-info">
-Remote management of Agents in containerized workloads is not supported yet.
+Remote management of Agents in containerized workloads is not supported.
 </div>
 
 
