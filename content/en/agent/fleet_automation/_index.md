@@ -44,16 +44,16 @@ For the following use cases, ensure your fleet of Datadog Agents and OTel Collec
 
 Fleet Automation enables you to centrally manage Datadog Agents across all your hosts directly from the Datadog UI. With remote management, you can view the current state of every Agent, apply configuration changes, and roll out version upgrades without needing direct access to individual systems. This provides a consistent, controlled workflow for keeping your fleet secure, up to date, and aligned with your organization’s standards.
 
-<div class="alert alert-info">
-Remote management of Agents in containerized workloads is not supported yet.
-</div>
-
-
 - **Remotely Upgrade and Configure Agents**: For information on supported Agent versions and configuration steps, see [Enable Remote Agent Management][3].
 - **View Agent and OTel Collector configurations**:
   - The Agent and Datadog Distribution of OTel Collector (DDOT) configuration view is enabled by default in Agent versions 7.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
   - The upstream OTel Collector configuration view is enabled by setting the [Datadog Extension][8] in your collector configuration file.
 - **View Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+
+<div class="alert alert-info">
+Remote management of Agents in containerized workloads is not supported.
+</div>
+
 
 ## Observe your fleet
 
@@ -94,12 +94,6 @@ You can send a flare from the Datadog Agent or DDOT Collector after enabling Rem
 When contacting Datadog Support with Remote Configuration enabled for an Agent, the Support team may initiate a flare from your environment in order to better assist you in a timely manner. Flares provide troubleshooting information to Datadog Support to help you resolve your issue.
 
 {{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="Send a remote flare" style="width:100%;" >}}
-
-## Remote Agent Management
-
-Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. For more information, see [Remote Agent Management][6].
-
-{{< img src="agent/fleet_automation/fleet-automation-upgrades-2.png" alt="Upgrade agents remotely in Fleet Automation" style="width:100%;" >}}
 
 ## Control access to Fleet Automation
 
