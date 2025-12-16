@@ -159,7 +159,7 @@ In the following example, the `logs_enabled` field is changed from `false` to `t
 
 ### Configuration precedence
 
-Configuration changes deployed from Fleet Automation are appended into the Datadog Agent’s local configuration. In the case of conflict at a configuration field level, Fleet Automation will override the local configuration. In short, the most recent configuration change, whether made by Fleet Automation, configuration management tools, or directly on the host becomes the Agent’s active configuration.
+Configuration changes deployed through Fleet Automation are appended to the Datadog Agent's local configuration. If a conflict occurs at the configuration-field level, Fleet Automation overrides the local value. In short, the most recent configuration change, whether applied by Fleet Automation, configuration management tools, or directly on the host, becomes the Agent's active configuration.
 
 You can use [Fleet Automation Audit Trail][18] to gain visibility into and alert on recent configuration changes to your Agents.
 
