@@ -2796,6 +2796,10 @@
     "request_description": "New definition of the suppression rule. Supports partial updates.",
     "request_schema_description": "Request object containing the fields to update on the suppression rule."
   },
+  "GetSuppressionVersionHistory": {
+    "description": "Get a suppression's version history.",
+    "summary": "Get a suppression's version history"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -3109,8 +3113,8 @@
     "request_schema_description": ""
   },
   "GetSecretsRules": {
-    "description": "Returns list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID",
-    "summary": "Returns list of Secrets rules"
+    "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
+    "summary": "Returns a list of Secrets rules"
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
