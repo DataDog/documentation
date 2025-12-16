@@ -404,6 +404,14 @@ Searches Datadog [Test Optimization][25] for flaky tests and returns triage-read
 - Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
 - List flaky tests in the `timeout` category with high failure rate (50%+) so I can prioritize fixes.
 
+### `aggregate_datadog_test_events`
+*Toolset: **software-delivery***\
+Aggregates Datadog Test events so you can quantify reliability, performance, and execution trends across tests, suites, modules, or sessions. Supports `aggregation` functions (`count`, `avg`, `sum`, `min`, `max`, `pc50`, `pc75`, `pc90`, `pc95`, `pc99`), an optional `metric` (for non-count aggregations, such as `@duration`), `group_by` facets (for breakdowns like `@test.codeowners`, `@git.branch`, or `@test.name`), and `test_level` (defaults to `test`).
+
+- Failure volume by branch over the last week: `aggregation=count query=@test.status:fail group_by=@git.branch`.
+- Slowest suites with percentiles: `aggregation=pc95 metric=@duration test_level=suite group_by=@test.suite`.
+- Pass/fail split by owners: `aggregation=count group_by=@test.codeowners query="(@test.status:pass OR @test.status:fail)"`.
+
 ## Context efficiency
 
 The Datadog MCP Server is optimized to provide responses in a way that AI agents get relevant context without being overloaded with unnecessary information. For example:
