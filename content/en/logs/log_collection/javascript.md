@@ -37,7 +37,8 @@ In Datadog, navigate to [**Organization Settings > New Client Tokens**][1]
 
 Choose the installation method for the Browser SDK.
 
-#### NPM
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 For modern web applications, Datadog recommends installing through Node Package Manager (npm). The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may not capture errors or console logs that occur before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.  
 
@@ -45,11 +46,14 @@ Add [`@datadog/browser-logs`][13] to your `package.json` file. For example, if y
 
 [13]: https://www.npmjs.com/package/@datadog/browser-logs
 
-#### CDN async
+{{% /tab %}}
+{{% tab "CDN async" %}}
 
 Web applications with performance targets should install through CDN async. The Browser SDK loads from Datadog's CDN asynchronously, ensuring it doesn't impact page load performance. However, the SDK may not capture errors or console logs that occur before the SDK is initialized.  
 
 Add the generated code snippet to the head tag of every HTML page you want to monitor in your application.
+
+{{< site-region region="us" >}}
 
 ```javascript
 <script>
@@ -57,22 +61,170 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/{{< region-param key=browser_logs_cdn_path >}}','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
-#### CDN sync
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="ap2" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="us5" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v6.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
 To collect all events, you should install through CDN sync. The Browser SDK loads from Datadog's CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.  
 
 Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Placing the script tag higher and loading it synchronously ensures Datadog RUM can collect all performance data and errors.
 
+{{< site-region region="us" >}}
+
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/{{< region-param key=browser_logs_cdn_path >}}"
+    src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"
     type="text/javascript">
 </script>
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/eu/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="ap2" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="us5" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/datadog-logs-v6.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Step 3 - Initialize the Logs Browser SDK
 
