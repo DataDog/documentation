@@ -306,7 +306,7 @@ Data Jobs Monitoring for Airflow is not yet compatible with <a href=https://clou
 To get started, follow the instructions below.
 
 
-1. In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
+In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
 
    - In Section 1, enter `openlineage`.
    - In Key 1, enter `disabled`.
@@ -330,20 +330,21 @@ To get started, follow the instructions below.
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
 
+**Optional:** Configure the OpenLineage namespace to set the `env` tag value in Datadog:
+   - In Section 3, enter `openlineage`.
+   - In Key 3, enter `namespace`.
+   - In Value 3, enter your Composer environment value (for example, prod, dev, staging, or test).
+   
+**Note:** If [Dataplex][6] is enabled, the namespace is already set by default to the Composer environment name. Manually setting the OpenLineage namespace here optionally allows you to override this default value.
 
-   Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of the `openlineage` provider in Google Cloud Composer.
-
-2. After starting the Composer environment, install the `openlineage` provider by adding the following package in the Pypi packages tab of your environment page:
-      ```text
-      apache-airflow-providers-openlineage
-      ```
-
+Check official [Airflow][4] and [Composer][3] documentation pages for other supported configurations of the `openlineage` provider in Google Cloud Composer.
 
 [1]: https://cloud.google.com/composer/docs/composer-versioning-overview
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
 [3]: https://cloud.google.com/composer/docs/airflow-configurations
 [4]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[6]: https://cloud.google.com/composer/docs/composer-2/lineage-integration
 [7]: https://app.datadoghq.com/data-jobs/
 
 ### Validation

@@ -42,6 +42,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/detect-bedrock-misconfigurations-cloud-security"
     tag: "Blog"
     text: "Detect Amazon Bedrock misconfigurations with Datadog Cloud Security"
+  - link: https://www.datadoghq.com/blog/security-graph-attack-paths
+    tag: Blog
+    text: Trace exposure routes between resources with Datadog Cloud Security
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:

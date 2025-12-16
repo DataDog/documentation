@@ -46,7 +46,7 @@ Most Observability Pipelines Worker workloads are CPU constrained and benefit fr
 
 ### CPU architectures
 
-Observability Pipelines Worker runs on modern CPU architectures. X86_64 architectures offer the best return on performance for Observability Pipelines Worker.
+Observability Pipelines Worker runs on modern x86 and ARM CPU architectures.
 
 ### Memory sizing
 

@@ -311,6 +311,11 @@ static/cdocs
 content/en/**/*.ast.json
 layouts/shortcodes/mdoc/en/**/*.ast.json
 *.tempAst.json
+.cdocs_temp
 
 # Cursor editor configuration
 .cursor/
+
+
+# Deprecated generated file for LLMs (keep so it's not merged back in)
+static/llms.txt
