@@ -62,6 +62,14 @@ implementation 'com.datadoghq:dd-trace-api:DD_TRACE_JAVA_VERSION_HERE'
    {{% aca-install-sidecar-terraform %}}
    {{% /tab %}}
 
+   {{% tab "Bicep" %}}
+   {{% aca-install-sidecar-bicep %}}
+   {{% /tab %}}
+
+   {{% tab "ARM Template" %}}
+   {{% aca-install-sidecar-arm-template %}}
+   {{% /tab %}}
+
    {{% tab "Manual" %}}
    {{% aca-install-sidecar-manual %}}
    {{% /tab %}}

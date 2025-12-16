@@ -41,6 +41,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/sds-for-insurance-companies/"
       tag: "Blog"
       text: "How insurance companies discover, classify, and act on sensitive data risks with Datadog"
+    - link: https://www.datadoghq.com/blog/llm-aws-strands
+      tag: Blog
+      text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 ---
 
 ## Overview
