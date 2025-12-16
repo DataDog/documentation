@@ -30,7 +30,7 @@ Data Streams Monitoring has not been changed between v1 and v2 of the tracer.
 | Technology | Library                 | Minimal tracer version                                                       | Recommended tracer version                                                       |
 | ---------- | ----------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | Kafka      | [confluent-kafka-go][8] | {{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="minimal" >}} | {{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="recommended" >}} |
-| Kafka      | [Sarama][9]             | {{< dsm-tracer-version lang="go" lib="ibm-sarama" type="minimal" >}}         | {{< dsm-tracer-version lang="go" lib="ibm-sarama" type="recommended" >}}         |
+| Kafka      | [Sarama][9]             | {{< dsm-tracer-version lang="go" lib="sarama" type="minimal" >}}             | {{< dsm-tracer-version lang="go" lib="sarama" type="recommended" >}}             |
 | Kafka      | [kafka-go][10]          | {{< dsm-tracer-version lang="go" lib="kafka-go" type="minimal" >}}           | {{< dsm-tracer-version lang="go" lib="kafka-go" type="recommended" >}}           |
 
 ### Installation

@@ -30,8 +30,8 @@ title: Data Streams Monitoring for Kafka
     </tr>
     <tr>
       <td><a href="https://github.com/IBM/sarama">Sarama</a></td>
-      <td>{{< dsm-tracer-version lang="go" lib="ibm-sarama" type="minimal" >}}</td>
-      <td>{{< dsm-tracer-version lang="go" lib="ibm-sarama" type="recommended" >}}</td>
+      <td>{{< dsm-tracer-version lang="go" lib="sarama" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="go" lib="sarama" type="recommended" >}}</td>
     </tr>
     <tr>
       <td><a href="https://github.com/segmentio/kafka-go">kafka-go</a></td>
