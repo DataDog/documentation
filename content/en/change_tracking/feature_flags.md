@@ -113,7 +113,7 @@ Example request:
 In addition to tracking when a feature flag's configuration changes through the LaunchDarkly integration or the Events API, Datadog can automatically detect which services evaluate that flag by using APM traces or metrics. This provides real-time visibility into how a flag is used across your system, especially when the same flag is evaluated by multiple services.
 
 ### Trace Based Auto-Enrichment
-This method allows you to use APM traces to auto-enrich your feature flag changes to associated Datadog services. Here is details on how to implement it for your codebase.
+This method uses APM traces to automatically associate feature flag changes with the relevant Datadog services. The following section provides details on how to implement it in your codebase.
 
 #### Setup
 
