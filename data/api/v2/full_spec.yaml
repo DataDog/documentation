@@ -6954,15 +6954,21 @@ components:
     BatchUpsertRowsRequestDataAttributes:
       description: Attributes containing row data values for row creation or update
         operations.
+      example:
+        values:
+          age: 25
+          example_key_value: primary_key_value
+          name: row_name
       properties:
         values:
           additionalProperties:
-            x-required-field: true
-          description: Key-value pairs representing row data, where keys are field
-            names from the schema.
-          example:
-            example_key_value: primary_key_value
-            name: row_name
+            oneOf:
+            - type: string
+            - format: int32
+              maximum: 2147483647
+              type: integer
+          description: Key-value pairs representing row data, where keys are schema
+            field names and values match the corresponding column types.
           type: object
       required:
       - values
