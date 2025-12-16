@@ -6159,9 +6159,9 @@ menu:
       identifier: observability_pipelines_guide
       weight: 9
     - name: Upgrade Worker Guide
-      url: observability_pipelines/guide/upgrade_worker_2_7/
+      url: observability_pipelines/guide/upgrade_worker/
       parent: observability_pipelines_guide
-      identifier: observability_pipelines_guide_upgrade_worker_2_7
+      identifier: observability_pipelines_guide_upgrade_worker
       weight: 901
     - name: Log Management
       url: logs/
