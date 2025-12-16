@@ -79,14 +79,14 @@ With test suite alerting, you can:
 1. Datadog, navigate to **Digital Experience** and click **New Test Suite**.
 2. Enter a name for your suite (for example, `Checkout flow` or `API health checks`).
 3. Click **Add Tests** to include existing Synthetic Monitoring tests.
-4. Configure test criticality:
+4. Configure test criticality by selecting the :
    - By default, all added tests are set as critical.
    - To exclude specific tests from triggering the suite-level alert, select them and mark them as **Ignored**.
 5. Choose the alert threshold. By default, the alert triggers if any critical test fails, but you can define a specific percentage threshold.
 6. Configure the monitor settings the same way you would for a single test.
 7. Click **Save suite**.
 
-{{< img src="synthetics/test_suites/test_suite_alerting.png" alt="Synthetic Monitoring Test Suite creation page with four tests in the suite. " style="width:80%;">}}
+{{< img src="synthetics/test_suites/test_alerting.png" alt="Synthetic Monitoring Test Suite creation page with four tests in the suite. " style="width:80%;">}}
 
 ### Create or adjust an alert on an existing test suite
 
