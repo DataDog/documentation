@@ -406,7 +406,7 @@ Searches Datadog [Test Optimization][25] for flaky tests and returns triage deta
 
 ### `aggregate_datadog_test_events`
 *Toolset: **software-delivery***\
-Aggregates Datadog Test events to quantify reliability and performance trends with aggregation functions, optional metrics, group-by facets, and configurable test levels.
+Aggregates Datadog Test Optimization events to quantify reliability and performance trends with aggregation functions, optional metrics, group-by facets, and configurable test levels.
 
 - Count the number of failed tests over the last week, grouped by branch.
 - Show me the 95th-percentile duration for each test suite to identify the slowest ones.
