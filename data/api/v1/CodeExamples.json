@@ -83,6 +83,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_9836563",
+      "description": "Create a geomap widget with conditional formats and text formats"
+    },
+    {
+      "group": "dashboards",
       "suffix": "",
       "description": "Create a new dashboard returns \"OK\" response"
     },
@@ -120,6 +125,16 @@
       "group": "dashboards",
       "suffix": "_1284514532",
       "description": "Create a new dashboard with a timeseries widget using formulas and functions cloud cost query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_865807520",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions metrics query with combined semantic_mode"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3685886950",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions metrics query with native semantic_mode"
     },
     {
       "group": "dashboards",
@@ -738,6 +753,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_3541766733",
+      "description": "Create a monitor with assets returns \"OK\" response"
     },
     {
       "group": "monitors",

@@ -20,13 +20,13 @@ further_reading:
 
 {{< img src="observability_pipelines/setup/pipeline_ui.png" alt="The pipelines page with a source going to two processors groups and two destinations" style="width:100%;" >}}
 
-Observability Pipelines lets you collect, process, and route logs within your own infrastructure. A pipeline consists of three core components:
+Observability Pipelines lets you collect and process logs and metrics ({{< tooltip glossary="preview" case="title" >}}) within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
 
-- [Source][1]: Receives logs from a tool like the Datadog Agent.
-- [Processors][2]: Transform, enrich, or filter logs.
-- [Destinations][3]: Where logs are sent (for example, Datadog, Amazon S3, Splunk, Google Security Operations, and Microsoft Sentinel).
+- [Source][1]: Receives data from a tool like the Datadog Agent.
+- [Processors][2]: Transform, enrich, or filter data.
+- [Destinations][3]: Where data is sent (for example, Datadog, Amazon S3, Splunk, Google Security Operations, and Microsoft Sentinel).
 
-Build and deploy pipelines to collect, transform, and route your logs using one of these methods:
+Build and deploy pipelines to collect, transform, and route your data using one of these methods:
 
  - Pipeline UI
  - [API][4]

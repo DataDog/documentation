@@ -47,7 +47,6 @@ To start running code scans in your IDE, see the respective documentation for yo
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}<u>Visual Studio</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Customize your repository settings
