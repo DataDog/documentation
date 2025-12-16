@@ -94,6 +94,8 @@ You can include regex in two places:
 | Outside the matcher syntax `%{}` | Raw regex embedded in the rule |
 | Inside the matcher syntax `%{}` | Using the regex matcher: `%{regex("<pattern>")}` |
 
+<div class="alert alert-danger">A Grok rule must match the <strong>entire log line</strong>. Conceptually, every rule is wrapped with `^ ... $`. This means you must account for everything before and after the content you want to extract.</div>
+
 ### Escaping inside `%{regex("")}`
 
 If you use regex inside the matcher syntax, the expression is evaluated as a string first, so backslashes must be **escaped**:
@@ -101,7 +103,6 @@ If you use regex inside the matcher syntax, the expression is evaluated as a str
 ```
 %{regex("\\d{2}")}   # Matches two digits
 ```
-<div class="alert alert-danger">A Grok rule must match the <strong>entire log line</strong>. Conceptually, every rule is wrapped with `^ ... $`. This means you must account for everything before and after the content you want to extract.</div>
 
 ## Understanding the `data` Matcher
 
