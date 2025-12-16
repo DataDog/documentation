@@ -47,7 +47,7 @@ When sending custom feature flag change events, include the following fields to 
 - **impacted_resources** (with type service): Add the relevant service name to the `impacted_resources` array to associate the feature flag change with the affected service.
 - **env tag**:  Specify the environment where the change occurred (for example, production, staging, or development).
 
-If adding these tags at event creation time isn't feasible for your setup, refer to the next section for guidance on automatic enrichment.
+If these tags cannot be added at event creation time, see the next section for guidance on automatic enrichment.
 
 Example request:
 
