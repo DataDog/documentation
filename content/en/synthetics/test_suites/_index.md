@@ -63,6 +63,45 @@ You can sort or search within the suite to focus on failing or recently updated 
 
 {{< img src="synthetics/test_suites/test_suite_summary.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
 
+## Alerting
+
+Test suite alerting lets you organize related tests into meaningful collections by user journey, service, environment, or team. This allows you to receive a single, consolidated alert when a critical portion of the suite fails, giving you a unified view of impact and helps you respond more efficiently when important workflows break.
+
+With test suite alerting, you can:
+
+- Mark each test in the suite as **Critical** or **Ignored** (all tests are marked Critical by default).
+- Set a custom percentage threshold so alerts trigger only when a specified percentage of critical tests fail.
+
+**Note**: By default, all tests are marked as critical and the alert triggers when any critical test fails.
+
+### Create an alert on a new test suite
+
+1. Datadog, navigate to **Digital Experience** and click **New Test Suite**.
+2. Enter a name for your suite (for example, `Checkout flow` or `API health checks`).
+3. Click **Add Tests** to include existing Synthetic Monitoring tests.
+4. Configure test criticality:
+   - By default, all added tests are set as critical.
+   - To exclude specific tests from triggering the suite-level alert, select them and mark them as **Ignored**.
+5. Choose the alert threshold. By default, the alert triggers if any critical test fails, but you can define a specific percentage threshold.
+6. Configure the monitor settings the same way you would for a single test.
+7. Click **Save suite**.
+
+{{< img src="synthetics/test_suites/test_suite_alerting.png" alt="Synthetic Monitoring Test Suite creation page with four tests in the suite. " style="width:80%;">}}
+
+### Create or adjust an alert on an existing test suite
+
+Existing test suites come with a pre-configured alert:
+- All tests set to critical
+- The alert triggers when at least one critical test fails
+
+To modify these settings or customize the notification behavior:
+
+1. In the left-hand menu, hover over **Digital Experience** and select **Test Suite**.
+2. Locate the Test Suite you want to configure.
+3. Select the tests you want to mark as ignored and use Bulk edit to change them to **Ignored**.
+4. Adjust the alert threshold in the Alert conditions section.
+5. Update the monitor settings the same way you would for a single test.
+
 ## Troubleshooting
 
 If some tests fail to appear in a suite:
