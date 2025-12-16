@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Overview
 
-Datadog Data Observability connects directly to your cloud data warehouse to help ensure the health of your data. When connected, Datadog automatically syncs your warehouse's metadata and query history to help catch data quality, cost, performance, and usage issues.
+Datadog Data Observability connects directly to your cloud data warehouse to help monitor the health of your data. When connected, Datadog automatically syncs your warehouse's metadata and query history to detect data quality, cost, performance, and usage issues.
 
 Use these integrations to:
 - **Sync your data schema** to keep Datadog in sync with your warehouse structure

@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Quality Monitoring detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides the context to trace them back to upstream jobs or sources.
+Quality Monitoring detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides context to trace them back to upstream jobs or sources.
 
 ## Key capabilities
 

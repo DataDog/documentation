@@ -16,7 +16,7 @@ Use these integrations to:
 - **Visualize lineage** from warehouse tables and columns to BI dashboards, reports, and fields for impact analysis
 - **Monitor data quality** and understand when stale or failed transformations affect downstream dashboards
 - **Correlate BI performance and reliability issues** with upstream data pipeline incidents
-- **Confidently make schema or transformation changes** knowing which dashboards will be affected
+- **Plan schema or transformation changes** with insight into which dashboards will be affected
 
 {{< whatsnext desc="Connect to these business intelligence tools:" >}}
    {{< nextlink href="data_observability/integrations/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}

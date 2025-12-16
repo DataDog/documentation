@@ -17,9 +17,14 @@ Lineage in Datadog Data Observability is built on [OpenLineage][1], the open sou
 - Capture lineage from systems Datadog doesn't integrate with natively, such as in-house tools
 - Emit lineage events for jobs or orchestrators where building a native Datadog integration would be difficult
 
-You can send [OpenLineage events][1] to Datadog in three ways. Replace the hostname in the examples with the relevant [Datadog site][2] for your organization. You can find your Datadog site by [following these instructions][3]. This example uses `datadoghq.com`.
+Replace the hostname in the examples with the relevant [Datadog site][2] for your organization. You can find your Datadog site by [following these instructions][3]. This example uses `datadoghq.com`.
 
 **Note**: If you wish to configure the Datadog Agent to proxy OpenLineage events, see [Set up Datadog Agent for OpenLineage Proxy][4].
+
+You can send [OpenLineage events][1] to Datadog in three ways:
+- [Direct HTTP with curl](#option-1-direct-http-with-curl)
+- [OpenLineage Python client (HTTP transport)](#option-2-openlineage-python-client-http-transport)
+- [OpenLineage Python client (Datadog transport)](#option-3-openlineage-python-client-datadog-transport)
 
 ## Option 1: Direct HTTP with curl
 

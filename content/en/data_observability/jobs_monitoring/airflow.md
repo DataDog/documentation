@@ -17,7 +17,7 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Data Jobs Monitoring for Apache Airflow is in Preview" >}}
+{{< callout url="#" btn_hidden="true" header="Data Jobs Monitoring for Apache Airflow is in preview" >}}
 To try the preview for Airflow monitoring, follow the setup instructions below.
 {{< /callout >}}
 

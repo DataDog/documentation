@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Snowflake integration connects Datadog to your Snowflake account to sync metadata, query history, and table-level metrics. Use it to monitor data freshness, detect anomalies, and trace lineage across your data stack.
+The Snowflake integration connects Datadog to your Snowflake account to sync metadata, query history, and table-level metrics. Use it to monitor data freshness, detect anomalies, and trace lineage across your warehouse and downstream tools.
 
 ## Prerequisites
 
@@ -87,7 +87,7 @@ To set up your account in Snowflake:
    GRANT DATABASE ROLE SNOWFLAKE.ORGANIZATION_BILLING_VIEWER TO ROLE IDENTIFIER($role_name);
    ```
 
-   <div class="alert alert-info">Datadog recommends using schema-level future grants. Snowflake gives schema-level grants precedence over database-level ones. If Datadog only has database-level grants but other roles have schema-level grants on the same schemas, new tables may not appear in Datadog. See <a href="https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#considerations">Snowflake's documentation</a> for details.</div>
+   <div class="alert alert-info">To avoid missing new tables, use schema-level future grants. Snowflake gives schema-level grants precedence over database-level ones. If Datadog only has database-level grants but other roles have schema-level grants on the same schemas, new tables may not appear in Datadog. See <a href="https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#considerations">Snowflake's documentation</a> for details.</div>
 
 4. Grant read-only access to your data.
 

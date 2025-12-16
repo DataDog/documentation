@@ -15,19 +15,19 @@ further_reading:
 
 <div class="alert alert-info">Data Observability is in Preview.</div>
 
-Data Observability helps data teams detect, resolve, and prevent issues that impact data quality, performance, and cost. It enables teams to monitor anomalies, troubleshoot faster, and maintain trust in the data powering downstream systems.
+Data Observability helps data teams detect, resolve, and prevent issues that affect data quality, performance, and cost. It enables teams to monitor anomalies, troubleshoot faster, and maintain trust in the data powering downstream systems.
 
 {{< img src="data_observability/data-obs-overview-1.png" alt="Lineage graph showing a failed application upstream of a table with an upstream issue and downstream nodes including tables, a dashboard, and a workbook labeled Upstream issue." style="width:100%;" >}}
 
-Datadog makes this possible by monitoring key signals across your data stack, including metrics, metadata, lineage, and logs. These signals help detect issues early and support reliable, high-quality data.
+Datadog does this by monitoring key signals across your data stack, including metrics, metadata, lineage, and logs. These signals help detect issues early and maintain reliable, high-quality data.
 
 ## Key capabilities
 
 With Data Observability, you can:
 
-- Detect anomalies in volume, freshness, null rates, and distributions
+- Detect anomalies in volume, freshness, null rates, and distributions across your tables
 - Analyze lineage to trace data dependencies from source to dashboard
-- Integrate with pipelines to correlate issues with job runs, data streams, and infrastructure events
+- Correlate quality issues with job runs, data streams, and infrastructure events
 
 ## Monitor data quality
 
@@ -71,7 +71,7 @@ This permission is included in the [Datadog Standard Role][1]. If your current r
 
 ## IP allowlists
 
-If your organization enforces IP allowlists, you must allowlist the IPs under the `webhooks` section of this [IP ranges file][2].
+If your organization enforces IP allowlists, add the IPs listed under the `webhooks` section of this [file][2] to your allowist.
 
 ## Further reading
 

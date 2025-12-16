@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Overview
 
-Datadog Data Observability connects directly to your transformation layer to help you understand how your data is produced, transformed, and delivered across your pipelines.
+Datadog Data Observability connects directly to your transformation layer so you can understand how your data is produced, transformed, and delivered across your pipelines.
 
 For example, by integrating with dbt, Datadog automatically ingests metadata about model runs, execution performance, and lineage relationships, which allows you to trace data issues to their source and understand downstream impact.
 
