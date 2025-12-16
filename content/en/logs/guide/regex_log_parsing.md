@@ -1,5 +1,6 @@
 ---
 title: Understanding Regular Expressions (Regex) for Log Parsing in Datadog
+description: Learn the basics of using regex for log parsing in Datadog, including usage, engine behavior, and best practices.
 further_reading:
 - link: "/logs/log_configuration/parsing"
   tag: "Documentation"
@@ -61,7 +62,7 @@ Backtracking can become expensive—especially with patterns that allow large, a
 ### **Example**
 
 Pattern: `dog`
-String: adorable `dog`
+String: "adorable dog"
 
 1. `a` does not match
 2. `d` matches
@@ -224,7 +225,7 @@ In this example, we want to extract a specific query parameter from a URL. By an
 ```
 
 **Rule**:
-The rule is saying skip through the URL until you find something that ends with `]=`, then grab everything after the `=` sign (until you hit a space) and save it.
+The rule matches any characters that are not a closing bracket `]`, followed by `]=`, then captures everything after the `=` sign until a space is encountered.
 
 ```
 rule [^\]]+\]=%{notSpace:http.url_details.queryString.utm_custom_rm}
@@ -249,7 +250,7 @@ Connected with 169686468464
 **Rule**:
 
 ```
-rule Connected with (%{regex("OSX|Windows"):os} | %{regex("\\d+"):kernel_version})
+rule Connected with (%{regex("OSX|Windows"):os}|%{regex("\\d+"):kernel_version})
 ```
 {{% /collapse-content %}}
 
