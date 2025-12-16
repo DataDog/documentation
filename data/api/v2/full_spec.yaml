@@ -69391,9 +69391,6 @@ paths:
         operator: OR
         permissions:
         - incident_read
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create an impact for an incident.
       operationId: CreateIncidentImpact
@@ -69438,9 +69435,6 @@ paths:
         operator: OR
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/impacts/{impact_id}:
     delete:
       description: Delete an incident impact.
@@ -69472,9 +69466,6 @@ paths:
         operator: OR
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/relationships/integrations:
     get:
       description: Get all integration metadata for an incident.
