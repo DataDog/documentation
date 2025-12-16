@@ -159,7 +159,9 @@ In the following example, the `logs_enabled` field is changed from `false` to `t
 
 ### Configuration precedence
 
-The latest configuration is applied if another tool is also used to configure the Datadog Agent. If the latest change is made from another tool aside from Fleet Automation, the change takes effect.
+Configuration changes deployed through Fleet Automation are appended to the Datadog Agent's local configuration. If a conflict occurs at the configuration-field level, Fleet Automation overrides the local value. In short, the most recent configuration change, whether applied by Fleet Automation, configuration management tools, or directly on the host, becomes the Agent's active configuration.
+
+You can use [Fleet Automation Audit Trail][18] to gain visibility into recent configuration changes to your Agents and to set up alerts on those changes.
 
 ### Mirrors and proxies
 
@@ -210,3 +212,4 @@ If you don't upgrade an earlier Agent version to 7.66 or higher, there is no imp
 [15]: /agent/guide/setup_remote_config
 [16]: https://app.datadoghq.com/fleet/agent-management
 [17]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#configuration-order-precedence
+[18]: /agent/fleet_automation#view-agent-audit-trail-events
