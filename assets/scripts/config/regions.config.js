@@ -607,15 +607,6 @@ export default {
     ap2: '\n        .useSite(DatadogSite.AP2)\n        .trackCrashes(true)',
     gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
-  browser_rum_cdn_path: {
-    us: 'us1/v6/datadog-rum.js',
-    us3: 'us3/v6/datadog-rum.js',
-    us5: 'us5/v6/datadog-rum.js',
-    eu: 'eu/v6/datadog-rum.js',
-    ap1: 'ap1/v6/datadog-rum.js',
-    ap2: 'ap2/v6/datadog-rum.js',
-    gov: 'datadog-rum-v6.js'
-  },
   flutter_web_logs_cdn_path: {
     us: 'us1/v5/datadog-logs.js',
     us3: 'us3/v5/datadog-logs.js',
@@ -633,24 +624,6 @@ export default {
     ap1: 'ap1/v5/datadog-rum-slim.js',
     ap2: 'ap2/v5/datadog-rum-slim.js',
     gov: 'datadog-rum-slim-v5.js'
-  },
-  ios_rum_site_swift: {
-    us: '',
-    us3: '\n    site: .us3,',
-    us5: '\n    site: .us5,',
-    eu: '\n    site: .eu1,',
-    ap1: '\n    site: .ap1,',
-    ap2: '\n    site: .ap2,',
-    gov: '\n    site: .us1_fed,'
-  },
-  ios_rum_site_objc: {
-    us: '',
-    us3: '\nconfiguration.site = [DDSite us3];',
-    us5: '\nconfiguration.site = [DDSite us5];',
-    eu: '\nconfiguration.site = [DDSite eu1];',
-    ap1: '\nconfiguration.site = [DDSite ap1];',
-    ap2: '\nconfiguration.site = [DDSite ap2];',
-    gov: '\nconfiguration.site = [DDSite us1_fed];'
   },
   reactnative_sdk_init: {
     us: '',
@@ -670,24 +643,6 @@ export default {
     ap2: 'ap2',
     gov: 'us1_fed'
   },
-  android_logs_sdk_site_kotlin: {
-    us: '',
-    us3: '\n                   .useSite(DatadogSite.US3)',
-    us5: '\n                   .useSite(DatadogSite.US5)',
-    eu: '\n                   .useSite(DatadogSite.EU1)',
-    ap1: '\n                   .useSite(DatadogSite.AP1)',
-    ap2: '\n                   .useSite(DatadogSite.AP2)',
-    gov: '\n                   .useSite(DatadogSite.US1_FED)'
-  },
-  android_logs_sdk_site_java: {
-    us: '',
-    us3: '\n                              .useSite(DatadogSite.US3)',
-    us5: '\n                              .useSite(DatadogSite.US5)',
-    eu: '\n                              .useSite(DatadogSite.EU1)',
-    ap1: '\n                              .useSite(DatadogSite.AP1)',
-    ap2: '\n                              .useSite(DatadogSite.AP2)',
-    gov: '\n                              .useSite(DatadogSite.US1_FED)'
-  },
   synthetics_intake_endpoint: {
     us: 'intake.synthetics.datadoghq.com',
     us3: 'intake.synthetics.us3.datadoghq.com',
@@ -696,24 +651,6 @@ export default {
     ap1: 'intake.synthetics.ap1.datadoghq.com',
     ap2: 'intake.synthetics.ap2.datadoghq.com',
     gov: 'intake.synthetics.ddog-gov.com'
-  },
-  android_rum_sdk_site_kotlin: {
-    us: '',
-    us3: '\n            .useSite(DatadogSite.US3)',
-    us5: '\n            .useSite(DatadogSite.US5)',
-    eu: '\n            .useSite(DatadogSite.EU1)',
-    ap1: '\n            .useSite(DatadogSite.AP1)',
-    ap2: '\n            .useSite(DatadogSite.AP2)',
-    gov: '\n            .useSite(DatadogSite.US1_FED)'
-  },
-  android_rum_sdk_site_java: {
-    us: '',
-    us3: '\n                        .useSite(DatadogSite.US3)',
-    us5: '\n                        .useSite(DatadogSite.US5)',
-    eu: '\n                        .useSite(DatadogSite.EU1)',
-    ap1: '\n                        .useSite(DatadogSite.AP1)',
-    ap2: '\n                        .useSite(DatadogSite.AP2)',
-    gov: '\n                        .useSite(DatadogSite.US1_FED)'
   },
   cursor_mcp_install_deeplink: {
     us: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuY29tL2FwaS91bnN0YWJsZS9tY3Atc2VydmVyL21jcD90b29sc2V0cz1vbmJvYXJkaW5nIiwidHlwZSI6Im9hdXRoIn0=',
