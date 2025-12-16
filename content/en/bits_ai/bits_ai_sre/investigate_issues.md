@@ -69,7 +69,7 @@ In addition to manual investigations, you can configure Bits to run automaticall
 
 ### Supported monitors
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Bits AI SRE investigations from Synthetic API tests is now in Preview. Click <strong>Request Access</strong> to join the Preview program.
+Bits AI SRE investigations from Synthetic API tests are now in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
 Bits is able to run investigations on the following monitor types:
