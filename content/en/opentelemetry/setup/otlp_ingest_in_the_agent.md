@@ -52,10 +52,6 @@ otlp_config:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
-  metrics:
-    enabled: true
-  traces:
-    enabled: true
   logs:
     enabled: false
 ```
@@ -67,10 +63,6 @@ otlp_config:
     protocols:
       http:
         endpoint: 0.0.0.0:4318
-  metrics:
-    enabled: true
-  traces:
-    enabled: true
   logs:
     enabled: false
 ```
@@ -210,10 +202,6 @@ These configurations can be applied through either the <code>docker</code> comma
         http:
           endpoint: 0.0.0.0:4318
           enabled: true
-    metrics:
-      enabled: true
-    traces:
-      enabled: true
     logs:
       enabled: false
    ```
@@ -257,10 +245,6 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
          protocols:
            grpc:
              enabled: true
-       metrics:
-         enabled: true
-       traces:
-         enabled: true
        logs:
          enabled: false
    ```
@@ -272,10 +256,6 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
          protocols:
            http:
              enabled: true
-       metrics:
-         enabled: true
-       traces:
-         enabled: true
        logs:
          enabled: false
    ```
