@@ -186,10 +186,6 @@ These configurations can be applied through either the <code>docker</code> comma
         grpc:
           endpoint: 0.0.0.0:4317
           enabled: true
-    metrics:
-      enabled: true
-    traces:
-      enabled: true
     logs:
       enabled: false
    ```
