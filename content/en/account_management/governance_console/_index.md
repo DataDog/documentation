@@ -18,13 +18,15 @@ further_reading:
 
 ## Overview
 
-Governance Console unifies the configuration and administration of a large, multi-team, multi-organization Datadog account. For organizations who need centralized governance, strong defaults, and automatic policy enforcement, Governance Console helps establish and maintain a best practice, compliant environment.
+Governance Console provides a centralized, self-service view of Datadog usage and adoption across your organization. Governance Console helps administrators centrally manage the configuration of a large, multi-team Datadog deployment. For organizations that need centralized governance, strong defaults, and automatic policy enforcement, Governance Console helps establish and maintain an environment compliant with best practices.
 
-Governance Console helps teams understand how their organization is adopting and using Datadog. It provides a centralized, self-service view of Datadog usage and adoption. Governance Console offers control and predictability over the platform's configuration, usage, and cost, helping administrators holistically manage their Datadog deployment. Datadog turns your organization's configuration and usage activity into metrics and insights to guide optimization and investment.
+{{< img src="account_management/governance_console/governance-console-overview.png" alt="Governance console screenshot, showing summary page. Top section labeled Total Org Usage contains metrics including Active dashboards (monthly), Active integrations (total), and Active users (monthly)" style="width:100%;" >}}
 
-Governance Console supports both new and existing customers, helping new customers start from a well-managed setup, and helping existing customers mature and adopt best practices over time.
+## Permissions
 
-{{< img src="account_management/governance_console/governance-console-overview.png" alt="Governance console screenshot, showing summary" style="width:100%;" >}}
+The `governance_console_read` permission controls access to the Governance Console. Users with `governance_console_read` assigned to their role can view the Governance Console UI and associated reporting and insights.
+
+Product-specific permissions restrict users' ability to change product-specific settings. For example, modifying or automating metrics configuration requires the `metrics_write` permission.
 
 ## Explore usage insights
 
@@ -32,17 +34,11 @@ In the total org usage section, Governance Console displays your organization's 
 
 Governance Console also exposes per-product insights to learn more about usage and configuration trends on key platform features and products. You can learn about your adoption and maturity, and identify interesting trends or adoption behaviors.
 
-{{< img src="account_management/governance_console/log-management-product.png" alt="Governance console screenshot, showing Log Management metrics" style="width:100%;" >}}
+{{< img src="account_management/governance_console/log-management-product.png" alt="Governance console screenshot, showing Log Management usage metrics, including Indexed logs (monthly), Ingested logs (weekly), and Unparsed logs (total)" style="width:100%;" >}}
 
-## Establish guardrails
+## Use controls to enforce organization policies
 
-Datadog governance controls help you automatically implement policies in your Datadog organization by identifying configuration drift, notifying the accountable users, and enforcing compliance. Each control helps establish and maintain a best practice, compliant environment.
-
-### Access control
-
-The `governance_console_read` permission controls access to the Governance Console. Users with `governance_console_read` assigned to their role have access to view the Governance Console UI and associated reporting and insights.
-
-Product-specific permissions restrict users' ability to change product-specific settings. For example, modifying or automating metrics configuration requires the `metrics_write` permission.
+Datadog governance controls help you automatically implement policies in your Datadog organization by identifying configuration drift and notifying the accountable users. Each control helps establish and maintain your compliance with best practices.
 
 ## Further reading
 
