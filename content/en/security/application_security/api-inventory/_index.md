@@ -51,7 +51,7 @@ Using API Endpoints you can:
 
 ### Configuration
 
-To view the API Endpoints on your services, **you must have App and API Protection Threats Protection enabled**. 
+To view API Endpoints on your services, **you must have App and API Protection Threats Protection enabled**. 
 
 For Amazon Web Services (AWS) API Gateway integration, you must set up the following:
 
@@ -77,7 +77,7 @@ For information on what library versions are compatible with API Security Invent
 
 ### How it works
 
-API Endpoints gathers security metadata about API traffic by leveraging the Datadog tracing library with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This rich data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, ensuring a comprehensive and up-to-date view of your entire API attack surface.
+API Endpoints gathers security metadata about API traffic by leveraging the Datadog tracing library with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, ensuring a comprehensive and up-to-date view of your entire API attack surface.
 
 API Endpoints uses [Remote Configuration][1] to manage and configure scanning rules that detect sensitive data and authentication.
 
@@ -200,7 +200,7 @@ For example, here are some use cases for **Coverage**:
 - **Endpoints:** Shows how many endpoints are affected and their services.
 - **Status and Ticketing:** `Open` or `In Progress` tracks remediation progress and workflow integration.
 
-Use the **Service** facet see each service's endpoints to identify ownership and prioritize by business impact.
+Use the **Service** facet to see each service's endpoints to identify ownership and prioritize by business impact.
 
 ### Common operations
 
