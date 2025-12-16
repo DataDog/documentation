@@ -1237,6 +1237,13 @@
       "description": "Create On-Call schedule returns \"Created\" response"
     }
   ],
+  "CreateUserNotificationChannel": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification channel for a user returns \"Created\" response"
+    }
+  ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",

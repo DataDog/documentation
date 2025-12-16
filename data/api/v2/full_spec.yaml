@@ -13102,6 +13102,27 @@ components:
       - options
       - type
       type: object
+    CreateEmailNotificationChannelConfig:
+      description: Configuration to create an e-mail notification channel
+      properties:
+        address:
+          description: The e-mail address to be notified
+          example: ''
+          type: string
+        formats:
+          description: Preferred content formats for notifications.
+          example:
+          - html
+          items:
+            $ref: '#/components/schemas/NotificationChannelEmailFormatType'
+          type: array
+        type:
+          $ref: '#/components/schemas/NotificationChannelEmailConfigType'
+      required:
+      - type
+      - address
+      - formats
+      type: object
     CreateIncidentNotificationRuleRequest:
       description: Create request for a notification rule.
       properties:
@@ -13188,6 +13209,29 @@ components:
       required:
       - findings
       - project
+      type: object
+    CreateNotificationChannelAttributes:
+      description: Attributes for creating an on-call notification channel.
+      properties:
+        config:
+          $ref: '#/components/schemas/CreateNotificationChannelConfig'
+          description: Notification channel configuration
+      type: object
+    CreateNotificationChannelConfig:
+      description: Defines the configuration for creating an On-Call notification
+        channel
+      oneOf:
+      - $ref: '#/components/schemas/CreatePhoneNotificationChannelConfig'
+      - $ref: '#/components/schemas/CreateEmailNotificationChannelConfig'
+    CreateNotificationChannelData:
+      description: Data for creating an on-call notification channel
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateNotificationChannelAttributes'
+        type:
+          $ref: '#/components/schemas/NotificationChannelType'
+      required:
+      - type
       type: object
     CreateNotificationRuleParameters:
       description: Body of the notification rule create request.
@@ -13349,6 +13393,19 @@ components:
       type: string
       x-enum-varnames:
       - PAGES
+    CreatePhoneNotificationChannelConfig:
+      description: Configuration to create a phone notification channel
+      properties:
+        number:
+          description: The E-164 formatted phone number (e.g. +3371234567)
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelPhoneConfigType'
+      required:
+      - type
+      - number
+      type: object
     CreateRuleRequest:
       description: Scorecard create rule request.
       properties:
@@ -13915,6 +13972,23 @@ components:
       type: string
       x-enum-varnames:
       - UPLOAD
+    CreateUserNotificationChannelRequest:
+      description: A top-level wrapper for creating a notification channel for a user
+      example:
+        data:
+          attributes:
+            config:
+              address: foo@bar.com
+              formats:
+              - html
+              type: email
+          type: notification_channels
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateNotificationChannelData'
+      required:
+      - data
+      type: object
     CreateWorkflowRequest:
       description: A request object for creating a new workflow.
       example:
@@ -30739,6 +30813,14 @@ components:
         meta:
           $ref: '#/components/schemas/KindResponseMeta'
       type: object
+    ListNotificationChannelsResponse:
+      description: Response type for listing notification channels for a user
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/NotificationChannelData'
+          type: array
+      type: object
     ListPipelinesResponse:
       description: Represents the response payload containing a list of pipelines
         and associated metadata.
@@ -34913,6 +34995,174 @@ components:
       required:
       - notebookTrigger
       type: object
+    NotificationChannel:
+      description: A top-level wrapper for a user notification channel
+      example:
+        data:
+          attributes:
+            config:
+              address: foo@bar.com
+              formats:
+              - html
+              type: email
+          id: 27590dae-47be-4a7d-9abf-8f4e45124020
+          type: notification_channels
+      properties:
+        data:
+          $ref: '#/components/schemas/NotificationChannelData'
+      type: object
+    NotificationChannelAttributes:
+      description: Attributes for an on-call notification channel.
+      properties:
+        active:
+          description: Whether the notification channel is currently active.
+          type: boolean
+        config:
+          $ref: '#/components/schemas/NotificationChannelConfig'
+          description: Notification channel configuration
+      type: object
+    NotificationChannelConfig:
+      description: Defines the configuration for an On-Call notification channel
+      oneOf:
+      - $ref: '#/components/schemas/NotificationChannelPhoneConfig'
+      - $ref: '#/components/schemas/NotificationChannelEmailConfig'
+      - $ref: '#/components/schemas/NotificationChannelPushConfig'
+    NotificationChannelData:
+      description: Data for an on-call notification channel
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotificationChannelAttributes'
+        id:
+          description: Unique identifier for the channel
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelType'
+      required:
+      - type
+      type: object
+    NotificationChannelEmailConfig:
+      description: Email notification channel configuration
+      properties:
+        address:
+          description: The e-mail address to be notified
+          example: ''
+          type: string
+        formats:
+          description: Preferred content formats for notifications.
+          example:
+          - html
+          items:
+            $ref: '#/components/schemas/NotificationChannelEmailFormatType'
+          type: array
+        type:
+          $ref: '#/components/schemas/NotificationChannelEmailConfigType'
+      required:
+      - type
+      - address
+      - formats
+      type: object
+    NotificationChannelEmailConfigType:
+      default: email
+      description: Indicates that the notification channel is an e-mail address
+      enum:
+      - email
+      example: email
+      type: string
+      x-enum-varnames:
+      - EMAIL
+    NotificationChannelEmailFormatType:
+      default: html
+      description: Specifies the format of the e-mail that is sent for On-Call notifications
+      enum:
+      - html
+      - text
+      example: html
+      type: string
+      x-enum-varnames:
+      - HTML
+      - TEXT
+    NotificationChannelPhoneConfig:
+      description: Phone notification channel configuration
+      properties:
+        formatted_number:
+          description: The formatted international version of Number (e.g. +33 7 1
+            23 45 67).
+          example: ''
+          type: string
+        number:
+          description: The E-164 formatted phone number (e.g. +3371234567)
+          example: ''
+          type: string
+        region:
+          description: The ISO 3166-1 alpha-2 two-letter country code.
+          example: ''
+          type: string
+        sms_subscribed_at:
+          description: If present, the date the user subscribed this number to SMS
+            messages
+          format: date-time
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelPhoneConfigType'
+        verified:
+          description: Indicates whether this phone has been verified by the user
+            in Datadog On-Call
+          example: false
+          type: boolean
+      required:
+      - type
+      - number
+      - formatted_number
+      - region
+      - verified
+      type: object
+    NotificationChannelPhoneConfigType:
+      default: phone
+      description: Indicates that the notification channel is a phone
+      enum:
+      - phone
+      example: phone
+      type: string
+      x-enum-varnames:
+      - PHONE
+    NotificationChannelPushConfig:
+      description: Push notification channel configuration
+      properties:
+        application_name:
+          description: The name of the application used to receive push notifications
+          example: ''
+          type: string
+        device_name:
+          description: The name of the mobile device being used
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelPushConfigType'
+      required:
+      - type
+      - device_name
+      - application_name
+      type: object
+    NotificationChannelPushConfigType:
+      default: push
+      description: Indicates that the notification channel is a mobile device for
+        push notifications
+      enum:
+      - push
+      example: push
+      type: string
+      x-enum-varnames:
+      - PUSH
+    NotificationChannelType:
+      default: notification_channels
+      description: Indicates that the resource is of type 'notification_channels'.
+      enum:
+      - notification_channels
+      example: notification_channels
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_CHANNELS
     NotificationRule:
       description: 'Notification rules allow full control over notifications generated
         by the various Datadog security products.
@@ -76217,6 +76467,188 @@ paths:
         operator: AND
         permissions:
         - on_call_write
+  /api/v2/on-call/users/{user_id}/notification-channels:
+    get:
+      description: List the notification channels for a user. The authenticated user
+        must be the target user or have the `on_call_admin` permission
+      operationId: ListUserNotificationChannels
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNotificationChannelsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List On-Call notification channels for a user
+      tags:
+      - On-Call
+      x-menu-order: 15
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
+    post:
+      description: Create a new notification channel for a user. The authenticated
+        user must be the target user or have the `on_call_admin` permission
+      operationId: CreateUserNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserNotificationChannelRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationChannel'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create an On-Call notification channel for a user
+      tags:
+      - On-Call
+      x-menu-order: 16
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_respond
+  /api/v2/on-call/users/{user_id}/notification-channels/{channel_id}:
+    delete:
+      description: Delete a notification channel for a user. The authenticated user
+        must be the target user or have the `on_call_admin` permission
+      operationId: DeleteUserNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The channel ID
+        in: path
+        name: channel_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete an On-Call notification channel for a user
+      tags:
+      - On-Call
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_respond
+    get:
+      description: Get a notification channel for a user. The authenticated user must
+        be the target user or have the `on_call_admin` permission
+      operationId: GetUserNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The channel ID
+        in: path
+        name: channel_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationChannel'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get an On-Call notification channel for a user
+      tags:
+      - On-Call
+      x-menu-order: 14
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).

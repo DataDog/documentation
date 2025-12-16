@@ -9427,6 +9427,54 @@ menu:
       url: /api/latest/on-call/
       identifier: on-call
       generated: true
+    - name: Get an On-Call notification channel for a user
+      url: '#get-an-on-call-notification-channel-for-a-user'
+      identifier: on-call-get-an-on-call-notification-channel-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserNotificationChannel
+        unstable: []
+        order: 14
+    - name: Delete an On-Call notification channel for a user
+      url: '#delete-an-on-call-notification-channel-for-a-user'
+      identifier: on-call-delete-an-on-call-notification-channel-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserNotificationChannel
+        unstable: []
+        order: 13
+    - name: Create an On-Call notification channel for a user
+      url: '#create-an-on-call-notification-channel-for-a-user'
+      identifier: on-call-create-an-on-call-notification-channel-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateUserNotificationChannel
+        unstable: []
+        order: 16
+    - name: List On-Call notification channels for a user
+      url: '#list-on-call-notification-channels-for-a-user'
+      identifier: on-call-list-on-call-notification-channels-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUserNotificationChannels
+        unstable: []
+        order: 15
     - name: Set On-Call team routing rules
       url: '#set-on-call-team-routing-rules'
       identifier: on-call-set-on-call-team-routing-rules
