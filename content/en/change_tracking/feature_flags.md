@@ -110,7 +110,7 @@ Example request:
 
 ## Automatically detect affected services
 
-In addition to tracking when a feature flag's configuration changes through the LaunchDarkly integration or the Events API, Datadog can automatically detect which services evaluate that flag by using APM traces or metrics. This provides real-time visibility into how a flag is used across your system, especially when the same flag is evaluated by multiple services.
+In addition to tracking feature flag configuration changes through the LaunchDarkly integration or the Events API, Datadog can automatically detect which services evaluate a flag by using APM traces or metrics. This provides real-time visibility into flag usage across your system, especially when the same flag is evaluated by multiple services.
 
 ### Trace-based enrichment
 This method uses APM traces to automatically associate feature flag changes with the relevant Datadog services. The following section provides details on how to implement it in your codebase.
