@@ -127,7 +127,9 @@ This ensures the SDK can correctly capture all measurements, including applicati
 
 For more information, see [Using Tags][4].
 
-#### Swift
+{{< site-region region="us" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
 
 ```swift
 import DatadogCore
@@ -136,25 +138,219 @@ import DatadogCore
 Datadog.initialize(
   with: Datadog.Configuration(
     clientToken: "<client token>",  // From Datadog UI
-    env: "<environment>",{{< region-param key=ios_rum_site_swift >}}             // for example, "production", "staging"
+    env: "<environment>",             // for example, "production", "staging"
     service: "<service name>"        // Your app's service name
   ),
   trackingConsent: trackingConsent  // GDPR compliance setting
 )
 ```
-
-#### Objective-C
-
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 @import DatadogCore;
 
 // Initialize Datadog SDK with your configuration
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.service = @"<service name>";  // Your app's service name{{< region-param key=ios_rum_site_objc >}}
+configuration.service = @"<service name>";  // Your app's service name
 
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];  // GDPR compliance setting
 ```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .eu1,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite eu1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .us3,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite us3];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .us5,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite us5];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .us1_fed,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite us1_fed];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .ap1,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .ap2,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap2];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
 
 The iOS SDK automatically tracks user sessions based on the options you provide during SDK initialization. To add GDPR compliance for your EU users (required for apps targeting European users) and configure other [initialization parameters][5], see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
 
