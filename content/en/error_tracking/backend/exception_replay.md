@@ -45,7 +45,7 @@ Exception Replay is available only for <b>APM-based exceptions</b> and does not 
 ## Requirements & Setup
 
 Exception Replay supports Python, Java, .NET, and PHP, and captures only APM-based exceptions. It
-requires the Datadog Agent and an [APM-instrumented application][1]. You can enable it for an entire
+requires the [Datadog Agent][12] and an [APM-instrumented application][1]. You can enable it for an entire
 environment, an individual service in-app, or a specific service using environment variables.
 
 The enablement method depends on your tracer version and whether [Remote Configuration][2] is available. See the table
@@ -55,7 +55,7 @@ below for details.
 |---|---|---|---|
 | **How to Enable** | Enabled by default | Settings page | Environment variables |
 | **Agent Version** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
-| **Minimum Tracer Versions** | Python ≥ 3.15.0<br>Java ≥ 1.54.0<br>.NET ≥ 3.29.0<br>PHP: N/A | Python ≥ 3.10.0<br>Java ≥ 1.48.0<br>.NET ≥ 3.29.0<br>PHP: N/A	 | Python ≥ 1.16.0<br>Java ≥ 1.47.0<br>.NET ≥ 2.53.0<br>PHP ≥ 1.12.1 |
+| **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **Remote Configuration Required?** | Yes | Yes | No |
 
 To enable Exception Replay in-app, navigate to the Exception Replay **Settings** page in Error Tracking, select the
@@ -156,3 +156,8 @@ snapshots.
 [5]: /security/sensitive_data_scanner/
 [6]: https://app.datadoghq.com/logs/pipelines/indexes
 [7]: /logs/log_configuration/indexes/#exclusion-filters
+[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python/
+[9]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[10]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
+[11]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php
+[12]: /agent/
