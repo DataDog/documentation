@@ -31,7 +31,7 @@ Exception Replay captures execution context and local variable values when an ex
 reproduce, and resolve issues faster. It records the surrounding state, including the stack trace and variable
 snapshots, then surfaces this data directly in Error Tracking alongside the rest of the issue details.
 
-{{< img src="tracing/error_tracking/error_tracking_executional_context-2.png" alt="Error Tracking Explorer Exception Replay" style="width:90%" >}}
+{{< img src="tracing/error_tracking/error_tracking_executional_context-3.png" alt="Error Tracking Explorer Exception Replay" style="width:90%" >}}
 
 Exception Replay is designed for production use. Snapshots are rate-limited, and sensitive data is automatically
 [redacted](#sensitive-data-redaction). When enabled, it waits for exceptions in an application and captures snapshots of
@@ -89,12 +89,22 @@ If you enable the Datadog Source Code Integration, you can see code previews dir
 traces. When Exception Replay snapshots are captured, you can hover over variable names in the code preview to view
 their captured values.
 
-Source Code Integration is helpful but not required.
+{{< img src="tracing/error_tracking/error_tracking_exception_replay_sci.mp4" video="true" alt="Exception Replay with source code integration" style="width:90%" >}}
 
 ## Sensitive data redaction
 
-Exception Replay applies automatic identifier- and mode-based redaction to ensure sensitive data is protected before
+Exception Replay applies automatic mode- and identifier-based redaction to ensure sensitive data is protected before
 snapshots becomes available.
+
+### Mode-based redaction
+
+Exception Replay has two redaction modes:
+
+- **Strict Mode:** Redacts all values except numbers and Booleans.
+- **Targeted Mode:** Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII.
+
+These redaction modes cannot be disabled, only switched, and Targeted Mode is applied automatically in common
+pre-production environments like `staging` or `preprod`.
 
 ### Identifier-based redaction
 
@@ -116,16 +126,6 @@ for configuration details.
 Exception Replay is built on <a href="/tracing/dynamic_instrumentation/">Dynamic Instrumentation (DI)</a>, so its
 sensitive data scrubbing configuration options also apply here.
 </div>
-
-### Mode-based redaction
-
-Exception Replay has two redaction modes:
-
-- **Strict Mode:** Redacts all values except numbers and Booleans.
-- **Targeted Mode:** Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII.
-
-These redaction modes cannot be disabled, only switched, and Targeted Mode is applied automatically in common
-pre-production environments like `staging` or `preprod`.
 
 ## Troubleshooting
 
