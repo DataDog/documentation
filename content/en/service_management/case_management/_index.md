@@ -3,6 +3,9 @@ title: Case Management
 aliases:
 - /monitors/case_management/
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
 - link: "https://www.datadoghq.com/blog/track-issues-datadog-case-management/"
   tag: "blog"
   text: "Proactively track, triage, and assign issues with Datadog Case Management"

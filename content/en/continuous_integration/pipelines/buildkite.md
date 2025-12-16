@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a Buildkite Pipeline
+title: Buildkite Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/buildkite
 further_reading:
@@ -18,7 +18,7 @@ further_reading:
 
 [Buildkite][1] is a continuous integration and deployment platform that allows you to run builds on your own infrastructure, providing you with full control over security and customizing your build environment while managing orchestration in the cloud.
 
-Set up tracing on Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
+Set up CI Visibility for Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
 
 ### Compatibility
 
@@ -32,6 +32,15 @@ Set up tracing on Buildkite to optimize your resource usage, reduce overhead, an
 | [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
 | [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Buildkite:
+
+| Datadog                    | Buildkite                       |
+|----------------------------|---------------------------------|
+| Pipeline                   | Build (execution of a pipeline) |
+| Job                        | Job (execution of a step)       |
 
 ## Configure the Datadog integration
 

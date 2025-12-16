@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on Codefresh Pipelines
+title: Codefresh Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/codefresh
 further_reading:
@@ -15,7 +15,7 @@ further_reading:
 
 [Codefresh][1] is a continuous integration and delivery platform built for Kubernetes which offers automation features that streamline the building, testing, and deploying of your applications.
 
-Set up tracing in Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
+Set up CI Visibility for Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
 
 ### Compatibility
 

@@ -32,6 +32,7 @@ To create an incident type:
 {{< whatsnext desc="Set additional customizations on the following:">}}
     {{< nextlink href="/service_management/incident_management/incident_settings/information" >}}Information{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/incident_settings/integrations" >}}Integrations{{< /nextlink >}}
+    {{< nextlink href="/service_management/incident_management/follow-ups" >}}Follow-ups{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/incident_settings/notification_rules" >}}Notification Rules{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/incident_settings/property_fields" >}}Property Fields{{< /nextlink >}}
     {{< nextlink href="/service_management/incident_management/incident_settings/responder_types" >}}Responder Types{{< /nextlink >}}

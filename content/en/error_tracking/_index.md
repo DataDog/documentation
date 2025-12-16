@@ -23,6 +23,19 @@ Additional features are available depending on the source of the error. See [sup
 - Take a tour of key Error Tracking features in the [Error Tracking Explorer][5] documentation.
 - Use the product-specific links in the next section to set up Error Tracking for a particular error source.
 
+## Setup
+{{< whatsnext desc="To get started with Datadog Error Tracking, choose one of the following setup options:" >}}
+    {{< nextlink href="agentic_onboarding/setup" >}}Agentic Onboarding{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/browser" >}}Browser{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/android" >}}Android{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/ios" >}}iOS{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/expo" >}}Expo{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/reactnative" >}}React Native{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/flutter" >}}Flutter{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/logs" >}}Logs{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Supported error sources
 
 Error Tracking captures and processes errors across your web, mobile, and backend applications. You can instrument your applications and services using the [Browser SDK][6], [Mobile SDK][7], or ingest errors from your Logs, Traces, and Real User Monitoring events. 

@@ -410,8 +410,8 @@ It is important to order your archives carefully. For example, if you create a f
 The log archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, such as the following:
 
 ```
-/my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.7dq1a9mnSya3bFotoErfxl.json.gz
-/my/bucket/prefix/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<DATADOG_ID>.json.gz
+/my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.02aafad5-f525-4592-905e-e962d1a5b2f7.json.gz
+/my/bucket/prefix/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<UUID>.json.gz
 ```
 
 This directory structure simplifies the process of querying your historical log archives based on their date.
@@ -427,7 +427,7 @@ This directory structure simplifies the process of querying your historical log 
 [1]: /logs/indexes/#exclusion-filters
 [2]: /logs/archives/rehydrating/
 [3]: https://app.datadoghq.com/logs/pipelines/log-forwarding
-[4]: /observability_pipelines/archive_logs/
+[4]: /observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs
 [5]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
 [6]: https://app.datadoghq.com/logs/pipelines/archives
 [7]: /integrations/azure/
