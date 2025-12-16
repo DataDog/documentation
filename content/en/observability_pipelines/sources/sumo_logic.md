@@ -13,7 +13,13 @@ Use Observability Pipelines' Sumo Logic Hosted Collector source to receive logs 
 
 Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
 
-Optionally, in the **Decoding** dropdown menu, select whether your input format is raw **Bytes**, **JSON**, Graylog Extended Log Format (**Gelf**), or **Syslog**. If no decoding is selected, the decoding defaults to JSON.
+- Enter the identifier for your Sumo Logic address.
+    - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
+    - If left blank, the default is used: `DD_OP_SOURCE_SUMO_LOGIC_ADDRESS`.
+
+### Optional settings
+
+In the **Decoding** dropdown menu, select whether your input format is raw **Bytes**, **JSON**, Graylog Extended Log Format (**Gelf**), or **Syslog**. If no decoding is selected, the decoding defaults to JSON.
 
 ## Set the environment variables
 
