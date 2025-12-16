@@ -2416,9 +2416,9 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
-    - name: Returns list of Secrets rules
-      url: '#returns-list-of-secrets-rules'
-      identifier: security-monitoring-returns-list-of-secrets-rules
+    - name: Returns a list of Secrets rules
+      url: '#returns-a-list-of-secrets-rules'
+      identifier: security-monitoring-returns-a-list-of-secrets-rules
       parent: security-monitoring
       generated: true
       params:
@@ -2753,6 +2753,18 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 4
+    - name: Get a suppression's version history
+      url: '#get-a-suppressions-version-history'
+      identifier: security-monitoring-get-a-suppressions-version-history
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuppressionVersionHistory
+        unstable: []
+        order: 0
     - name: Update a suppression rule
       url: '#update-a-suppression-rule'
       identifier: security-monitoring-update-a-suppression-rule

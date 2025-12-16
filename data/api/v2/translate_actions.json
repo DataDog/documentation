@@ -2611,31 +2611,31 @@
     "summary": "Download the Workload Protection policy (US1-FED)"
   },
   "DetachCase": {
-    "description": "Detach security findings from their case. This operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
+    "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
     "summary": "Detach security findings from their case",
     "request_description": "",
     "request_schema_description": "Request for detaching security findings from their case."
   },
   "CreateCases": {
-    "description": "Create cases for security findings. You can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.",
+    "description": "Create cases for security findings.\nYou can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.",
     "summary": "Create cases for security findings",
     "request_description": "",
     "request_schema_description": "List of requests to create cases for security findings."
   },
   "AttachCase": {
-    "description": "Attach security findings to a case. You can attach up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the specified case.",
+    "description": "Attach security findings to a case.\nYou can attach up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the specified case.",
     "summary": "Attach security findings to a case",
     "request_description": "",
     "request_schema_description": "Request for attaching security findings to a case."
   },
   "AttachJiraIssue": {
-    "description": "Attach security findings to a Jira issue by providing the Jira issue URL. You can attach up to 50 security findings per Jira issue. If the Jira issue is not linked to any case, this operation will create a case for the security findings and link the Jira issue to the newly created case. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the specified Jira issue.",
+    "description": "Attach security findings to a Jira issue by providing the Jira issue URL.\nYou can attach up to 50 security findings per Jira issue. If the Jira issue is not linked to any case, this operation will create a case for the security findings and link the Jira issue to the newly created case. To configure the Jira integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira). Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the specified Jira issue.",
     "summary": "Attach security findings to a Jira issue",
     "request_description": "",
     "request_schema_description": "Request for attaching security findings to a Jira issue."
   },
   "CreateJiraIssues": {
-    "description": "Create Jira issues for security findings. This operation creates a case in Datadog and a Jira issue linked to that case for bidirectional sync between Datadog and Jira. You can create up to 50 Jira issues per request and associate up to 50 security findings per Jira issue. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the newly created Jira issue.",
+    "description": "Create Jira issues for security findings.\nThis operation creates a case in Datadog and a Jira issue linked to that case for bidirectional sync between Datadog and Jira. To configure the Jira integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira). You can create up to 50 Jira issues per request and associate up to 50 security findings per Jira issue. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the newly created Jira issue.",
     "summary": "Create Jira issues for security findings",
     "request_description": "",
     "request_schema_description": "List of requests to create Jira issues for security findings."
@@ -2795,6 +2795,10 @@
     "summary": "Update a suppression rule",
     "request_description": "New definition of the suppression rule. Supports partial updates.",
     "request_schema_description": "Request object containing the fields to update on the suppression rule."
+  },
+  "GetSuppressionVersionHistory": {
+    "description": "Get a suppression's version history.",
+    "summary": "Get a suppression's version history"
   },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
@@ -3109,8 +3113,8 @@
     "request_schema_description": ""
   },
   "GetSecretsRules": {
-    "description": "Returns list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID",
-    "summary": "Returns list of Secrets rules"
+    "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
+    "summary": "Returns a list of Secrets rules"
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
