@@ -15,7 +15,7 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 - Enter the identifier for your Sumo Logic address.
     - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
-    - If left blank, the default is used: `DD_OP_SOURCE_SUMO_LOGIC_ADDRESS`.
+    - If left blank, the default is used: `SOURCE_SUMO_LOGIC_ADDRESS`.
 
 ### Optional settings
 
