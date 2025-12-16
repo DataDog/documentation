@@ -215,6 +215,15 @@
       5.52.0 or later
     {{- end -}}
   {{- end -}}
+<!-- RabbitMQ (rhea) -->
+  {{- if eq (.Get "lib") "rhea" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      5.3.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.3.0 or later
+    {{- end -}}
+  {{- end -}}
 <!-- RabbitMQ (amqplib) -->
   {{- if eq (.Get "lib") "amqplib" -}}
     {{- if eq (.Get "type") "minimal" -}}
