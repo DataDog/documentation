@@ -398,7 +398,7 @@ Aggregates CI pipeline events to produce statistics, metrics, and grouped analyt
 
 ### `get_datadog_flaky_tests`
 *Toolset: **software-delivery***\
-Searches Datadog [Test Optimization][25] for flaky tests and returns triage-ready details, including failure-rate stats, flaky state/category, ownership context (`codeowners`, `services`, `module`, `suite`), branch/SHA history, CI pipeline impact, and recent test-run metadata. Supports pagination with `page_cursor` and sorting by fields such as `failure_rate` or `pipelines_failed`.
+Searches Datadog [Test Optimization][25] for flaky tests and returns triage details (failure rate, category, owners, history, CI impact), with pagination and sorting.
 
 - Find active flaky tests for the checkout service owned by `@team-abc`, sorted by failure rate.
 - Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
@@ -406,7 +406,7 @@ Searches Datadog [Test Optimization][25] for flaky tests and returns triage-read
 
 ### `aggregate_datadog_test_events`
 *Toolset: **software-delivery***\
-Aggregates Datadog Test events so you can quantify reliability, performance, and execution trends across tests, suites, modules, or sessions. Supports `aggregation` functions (`count`, `avg`, `sum`, `min`, `max`, `pc50`, `pc75`, `pc90`, `pc95`, `pc99`), an optional `metric` (for non-count aggregations, such as `@duration`), `group_by` facets (for breakdowns like `@test.codeowners`, `@git.branch`, or `@test.name`), and `test_level` (defaults to `test`).
+Aggregates Datadog Test events to quantify reliability and performance trends with aggregation functions, optional metrics, group-by facets, and configurable test levels.
 
 - Failure volume by branch over the last week: `aggregation=count query=@test.status:fail group_by=@git.branch`.
 - Slowest suites with percentiles: `aggregation=pc95 metric=@duration test_level=suite group_by=@test.suite`.
