@@ -68,10 +68,6 @@ In addition to manual investigations, you can configure Bits to run automaticall
 </li></ul></div>
 
 ### Supported monitors
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Bits AI SRE investigations from Synthetic API tests are now in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
-
 Bits is able to run investigations on the following monitor types:
   - Metric
   - Anomaly
@@ -81,6 +77,10 @@ Bits is able to run investigations on the following monitor types:
   - Logs
   - APM (`APM Metrics` type only; `Trace Analytics` is not supported)
   - Synthetics API tests (Preview)
+
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+Bits AI SRE investigations from Synthetic API tests are now in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
 
 ### Best practices: Add investigation context to your monitors {#best-practices}
 Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
