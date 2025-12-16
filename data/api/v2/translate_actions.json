@@ -3109,8 +3109,8 @@
     "request_schema_description": ""
   },
   "GetSecretsRules": {
-    "description": "Returns list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID",
-    "summary": "Returns list of Secrets rules"
+    "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
+    "summary": "Returns a list of Secrets rules"
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",

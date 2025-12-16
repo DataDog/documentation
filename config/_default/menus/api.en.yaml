@@ -2416,9 +2416,9 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
-    - name: Returns list of Secrets rules
-      url: '#returns-list-of-secrets-rules'
-      identifier: security-monitoring-returns-list-of-secrets-rules
+    - name: Returns a list of Secrets rules
+      url: '#returns-a-list-of-secrets-rules'
+      identifier: security-monitoring-returns-a-list-of-secrets-rules
       parent: security-monitoring
       generated: true
       params:
