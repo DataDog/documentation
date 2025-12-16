@@ -96,9 +96,9 @@ If a service consumes data from one point and produces to another point, propaga
 
 3. Extract the context from headers
 
-```go
-ctx = datastreams.ExtractFromBase64Carrier(ctx, ddsarama.NewConsumerMessageCarrier(message))
-```
+    ```go
+    ctx = datastreams.ExtractFromBase64Carrier(ctx, ddsarama.NewConsumerMessageCarrier(message))
+    ```
 
 4. Inject it into the header before producing downstream
     ```go
