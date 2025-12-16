@@ -8245,31 +8245,6 @@ menu:
       parent: rum_session_replay_mobile
       identifier: rum_session_replay_mobile_troubleshooting
       weight: 104
-    - name: Browser
-      url: real_user_monitoring/session_replay/browser
-      parent: rum_session_replay
-      identifier: rum_session_replay_browser
-      weight: 502
-    - name: Setup
-      url: real_user_monitoring/session_replay/browser/setup_and_configuration
-      parent: rum_session_replay_browser
-      identifier: rum_session_replay_browser_setup
-      weight: 101
-    - name: Privacy Options
-      url: real_user_monitoring/session_replay/browser/privacy_options
-      parent: rum_session_replay_browser
-      identifier: rum_session_replay_privacy_options
-      weight: 102
-    - name: Developer Tools
-      url: real_user_monitoring/session_replay/developer_tools
-      parent: rum_session_replay_browser
-      identifier: rum_session_replay_developer_tools
-      weight: 103
-    - name: Troubleshooting
-      url: real_user_monitoring/session_replay/troubleshooting
-      parent: rum_session_replay_browser
-      identifier: rum_session_replay_troubleshooting
-      weight: 104
     - name: Playlists
       url: real_user_monitoring/session_replay/playlists
       parent: rum_session_replay
@@ -8526,31 +8501,6 @@ menu:
       parent: pa_session_replay_mobile
       identifier: pa_session_replay_mobile_troubleshooting
       weight: 104
-    - name: Browser
-      url: product_analytics/session_replay/browser
-      parent: pa_session_replay
-      identifier: pa_session_replay_browser
-      weight: 303
-    - name: Setup
-      url: product_analytics/session_replay/browser/setup_and_configuration
-      parent: pa_session_replay_browser
-      identifier: pa_session_replay_browser_setup
-      weight: 101
-    - name: Privacy Options
-      url: product_analytics/session_replay/browser/privacy_options
-      parent: pa_session_replay_browser
-      identifier: pa_session_replay_browser_privacy_options
-      weight: 102
-    - name: Developer Tools
-      url: product_analytics/session_replay/browser/developer_tools
-      parent: pa_session_replay_browser
-      identifier: pa_session_replay_browser_developer_tools
-      weight: 103
-    - name: Troubleshooting
-      url: product_analytics/session_replay/browser/troubleshooting
-      parent: pa_session_replay_browser
-      identifier: pa_session_replay_browser_troubleshooting
-      weight: 104
     - name: Segments
       url: product_analytics/segmentation/
       parent: product_analytics
@@ -8597,6 +8547,36 @@ menu:
       identifier: session_replay
       parent: digital_experience_heading
       weight: 60000
+    - name: Browser
+      url: /session_replay/browser
+      parent: session_replay
+      identifier: session_replay_browser
+      weight: 1
+    - name: Setup
+      url: /session_replay/browser/setup_and_configuration
+      parent: session_replay_browser
+      identifier: session_replay_browser_setup
+      weight: 101
+    - name: Privacy Options
+      url: /session_replay/browser/privacy_options
+      parent: session_replay_browser
+      identifier: session_replay_browser_privacy_options
+      weight: 102
+    - name: Developer Tools
+      url: /session_replay/browser/developer_tools
+      parent: session_replay_browser
+      identifier: session_replay_browser_developer_tools
+      weight: 103
+    - name: Troubleshooting
+      url: /session_replay/browser/troubleshooting
+      parent: session_replay_browser
+      identifier: session_replay_browser_troubleshooting
+      weight: 104
+    - name: Mobile
+      url: /session_replay/mobile
+      parent: session_replay
+      identifier: session_replay_mobile
+      weight: 2
     - name: Account Management
       url: account_management/
       pre: cog-2
