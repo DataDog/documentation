@@ -12,7 +12,7 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 - A [Datadog API key][2]
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]
 
-<div class="alert alert-info"><a href="/llm_observability/evaluations/external_evaluations">External evaluations</a> in LLM Observability are not applied to OpenTelemetry spans. Evaluations are only available for spans generated with the Datadog LLM Observability SDK or submitted directly to the HTTP API intake.</div>
+<div class="alert alert-info">If you are sending <a href="/llm_observability/evaluations/external_evaluations">external evaluations</a> for OpenTelemetry spans, you must add the <code>source:otel</code> tag to your evaluation.</div>
 
 ## Setup
 
@@ -61,12 +61,13 @@ After your application starts sending data, the traces automatically appear in t
 
 <div class="alert alert-danger">
 
-- OpenInference and OpenLLMetry are not supported, as they have not been updated to support OpenTelemetry 1.37+ semantic conventions for generative AI.
+- <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
+- OpenInference is not supported.
 - There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
 
 </div>
 
-### Examples
+## Examples
 
 #### Using Strands Agents
 
@@ -199,6 +200,51 @@ provider.force_flush()
 
 After running this example, search for `ml_app:simple-llm-example` in the LLM Observability UI to find the generated trace.
 
+#### Using OpenLLMetry
+
+The following example demonstrates using [OpenLLMetry](https://github.com/traceloop/openllmetry) to automatically instrument OpenAI calls with OpenTelemetry.
+
+```python
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.openai import OpenAIInstrumentor
+import openai
+from opentelemetry.sdk.resources import Resource
+
+resource = Resource.create({
+    "service.name": "simple-openllmetry-test",
+})
+
+provider = TracerProvider(resource=resource)
+trace.set_tracer_provider(provider)
+
+exporter = OTLPSpanExporter(
+    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+    headers={
+        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
+        "dd-ml-app": "simple-openllmetry-test",
+        "dd-otlp-source": "datadog",
+    },
+)
+
+provider.add_span_processor(BatchSpanProcessor(exporter))
+
+OpenAIInstrumentor().instrument()
+
+# Make OpenAI call (automatically traced)
+client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
+client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
+)
+
+provider.force_flush(timeout_millis=5000)
+```
+
+After running this example, search for `ml_app:simple-openllmetry-test` in the LLM Observability UI to find the generated trace.
+
 ## Supported semantic conventions
 
 LLM Observability supports spans that follow the OpenTelemetry 1.37+ semantic conventions for generative AI, including:
@@ -209,6 +255,32 @@ LLM Observability supports spans that follow the OpenTelemetry 1.37+ semantic co
 - Model parameters and metadata
 
 For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
+
+## Disabling LLM Observability conversion
+
+If you'd only like your generative AI spans to remain in APM and not appear in LLM Observability, you can disable the automatic conversion by setting the `dd_llmobs_enabled` attribute to `false`. Setting this attribute on any span in a trace prevents the entire trace from being converted to LLM Observability.
+
+### Using environment variables
+
+Add the `dd_llmobs_enabled=false` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
+
+```
+OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=false
+```
+
+### Using code
+
+You can also set the attribute programmatically on any span in your trace:
+
+```python
+from opentelemetry import trace
+
+tracer = trace.get_tracer(__name__)
+
+with tracer.start_as_current_span("my-span") as span:
+    # Disable LLM Observability conversion for this entire trace
+    span.set_attribute("dd_llmobs_enabled", False)
+```
 
 [1]: https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/#spans
 [2]: https://app.datadoghq.com/organization-settings/api-keys

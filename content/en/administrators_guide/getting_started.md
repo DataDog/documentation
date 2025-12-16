@@ -116,7 +116,7 @@ To successfully create a new Datadog installation, review the [plan][11] page. Y
 [7]: /getting_started/tagging/
 [8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
 [9]: https://app.datadoghq.com/apm/service-setup
-[10]: https://app.datadoghq.com/monitors/recommended
+[10]: https://app.datadoghq.com/monitors/templates
 [11]: /administrators_guide/plan
 [12]: /administrators_guide/plan/#resource-tagging
 [13]: https://github.com/DataDog/datadog-agent/tree/main/examples

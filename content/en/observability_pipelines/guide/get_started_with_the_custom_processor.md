@@ -428,7 +428,7 @@ Splunk and CrowdStrike prefer a format called `_raw` for log ingestion. Sending 
 
 **Notes**:
 - You should add other processing, remapping, and parsing steps before serializing your logs in `_raw` format.
-- Select `Raw` as the encoding option when you set up the Splunk HEC or CrowdStrike destination.
+- To ensure your logs are correctly routed after serialization, configure your preferred destination with **Raw** as the encoding type. 
 
 An example input log:
 
@@ -455,7 +455,7 @@ This custom function serializes the event into `_raw` format:
 
 ```json
 # Serialize the entire event into _raw
-._raw = encode_key_value(.)
+._raw = encode_key_value!(.)
 # Only keep _raw
 . = { "_raw": ._raw }
 ```

@@ -36,8 +36,7 @@ Organization administrators can enable or disable OTR mode from [**Organization 
 
 **Permissions**: Users must have both the `org_app_keys_write` and `org_management` permissions to enable or disable OTR mode for their organization.
 
-### Scopes 
-
+### Scopes
 
 To better protect and secure your applications, you can specify authorization scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization's data.
 
@@ -60,6 +59,8 @@ Action APIs include:
 In order to use application keys with these APIs, you must enable Actions API access on the application key. This can be done [through the UI][2] or [API][21]. By default, application keys cannot be used with these APIs.
 
 {{< img src="account_management/click-enable-actions-api-access.png" alt="Click Enable for Actions API Access" style="width:80%;" >}}
+
+**Note**: The **Last used** section only shows if [Audit Trail is enabled][22] in the account and you have [`Audit Trail Read`][23] permission.
 
 ## Client tokens
 
@@ -195,3 +196,5 @@ Need help? Contact [Datadog support][19].
 [19]: /help/
 [20]: /account_management/org_settings/service_accounts/
 [21]: /api/latest/action-connection/#register-a-new-app-key
+[22]: /account_management/audit_trail/#setup
+[23]: /account_management/rbac/permissions/#compliance
