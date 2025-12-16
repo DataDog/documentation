@@ -134,7 +134,7 @@ with tracer.trace("experiments.IsEnabled") as span:
     span.set_tag("experiment_value", flag_value) # adds the evaluated flag value as a span tag
 ```
 
-### Metrics Based Auto-Enrichment
+### Metrics-based enrichment
 
 This method allows you to use Datadog metrics to auto-enrich your feature flag changes to associated Datadog services. Here is details on how to implement it for your codebase.
 
