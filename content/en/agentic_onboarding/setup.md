@@ -28,27 +28,6 @@ Agentic Onboarding is available for the following frameworks: Android, Angular, 
 To install the Datadog Onboarding Model Context Protocol (MCP) server, follow the steps for your coding assistant:
 
 {{< tabs >}}
-{{% tab "Cursor" %}}
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. Copy and paste the following deeplink into your browser:
-
-   <pre>
-   <code>
-   {{< region-param key=cursor_mcp_install_deeplink >}}
-   </code>
-   </pre>
-
-2. In Cursor, click **Install** for the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
-3. If the MCP server shows a **Needs login** link, select it and complete the OAuth flow. When prompted, choose **Open** to continue and grant access to your Datadog account.
-4. After authentication, return to Cursor and confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
-{{< /site-region >}}
-
-{{% /tab %}}
-
 {{% tab "Claude Code" %}}
 {{< site-region region="gov" >}}
 <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
@@ -67,6 +46,27 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 3. When you see the option to authenticate, press <kbd>Enter</kbd>. This brings you to the OAuth screen.
 4. After authentication, choose **Open** to continue and grant access to your Datadog account.
 5. Confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
+{{< /site-region >}}
+
+{{% /tab %}}
+
+{{% tab "Cursor" %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+1. Copy and paste the following deeplink into your browser:
+
+   <pre>
+   <code>
+   {{< region-param key=cursor_mcp_install_deeplink >}}
+   </code>
+   </pre>
+
+2. In Cursor, click **Install** for the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
+3. If the MCP server shows a **Needs login** or **Connect** link, select it and complete the OAuth flow. When prompted, choose **Open** to continue and grant access to your Datadog account.
+4. After authentication, return to Cursor and confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
 {{< /site-region >}}
 
 {{% /tab %}}

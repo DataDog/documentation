@@ -60,7 +60,7 @@ The following conditional variables are available:
 
 ### Examples
 
-Conditional variable must have an opening and closing pair with the text and **@-notifications** in-between.
+Conditional variables must have an opening and closing pair with the text and **@-notifications** in-between. Variables based on monitor state (such as `is_alert` or `is_warning`), must have their own message block. Because a monitor can only be in one state at a time, you cannot combine these. However, you can nest conditionals that match on attributes, see the `is_renotify` examples.
 
 {{< tabs >}}
 {{% tab "is_alert" %}}
@@ -109,7 +109,7 @@ Search for a substring in a [tag variable](#attribute-and-tag-variables) with th
 To notify your DB team if a triggering host has the tag `role:db_cassandra` or `role:db_postgres`, use the following:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -118,7 +118,7 @@ To notify your DB team if a triggering host has the tag `role:db_cassandra` or `
 The `is_match` condition also supports matching multiple strings:
 
 ```text
-{{#is_match "role.name" "db" "database"}}
+{{#is_match "host.role.name" "db" "database"}}
   This displays if the host triggering the alert contains `db` or `database`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -127,7 +127,7 @@ The `is_match` condition also supports matching multiple strings:
 To send a different notification if the tag doesn't contain `db`, use the negation of the condition as follows:
 
 ```text
-{{^is_match "role.name" "db"}}
+{{^is_match "host.role.name" "db"}}
   This displays if the role tag doesn't contain `db`.
   @slack-example
 {{/is_match}}
@@ -136,7 +136,7 @@ To send a different notification if the tag doesn't contain `db`, use the negati
 Or use the `{{else}}` parameter in the first example:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{else}}
@@ -240,9 +240,10 @@ This is the escalation message @dev-team@company.com
 ```
 
 {{% /tab %}}
+
 {{< /tabs >}}
 
-If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, Datadog recommends that you configure a corresponding `recovery` condition to send a recovery notification to the handle.
 
 **Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 

@@ -25,7 +25,7 @@ Learn how to set up App and API Protection (AAP) on your NGINX proxy by selectin
 
 ### Kubernetes
 {{< appsec-integrations >}}
-{{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./ingress-controller" >}}
+{{< appsec-integration name="Ingress Controller" avatar="kubernetes" link="./ingress-controller" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources
