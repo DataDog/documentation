@@ -319,15 +319,19 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-### Using the Operator (v1.18.0+)
+### Recommended method
+
 <div class="alert alert-info">This feature is in Preview.</div>
 
-The Datadog Operator can automatically configure monitoring for Kubernetes control plane components including the API Server, etcd, Controller Manager, and Scheduler.
+Datadog supports monitoring Kubernetes Control Plane components, including the API Server, Controller Manager, and Scheduler.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
 
 #### Prerequisites
 
-1. Datadog Operator v1.18.0+
-1. Datadog Agent v7.69+
+1. Datadog Operator >= `v1.18.0`
+1. Datadog Agent >= `v7.69`
 
 #### General setup
 
@@ -346,6 +350,32 @@ helm install datadog-operator datadog/datadog-operator --set introspection.enabl
 ```
 
 Since this feature is enabled by default, you can deploy a minimal DatadogAgent spec.
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+#### Prerequisites
+
+1. Helm chart version >= `3.150.0`
+1. Datadog Agent >= `v7.69`
+
+#### General setup
+
+Enable control plane monitoring using the `providers.eks.controlPlaneMonitoring` option:
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+providers:
+  eks:
+    controlPlaneMonitoring: true
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Validation
 Verify that checks are running:
@@ -423,16 +453,17 @@ annotations:
 
 ## Kubernetes on OpenShift 4 {#OpenShift4}
 
-### Using the Operator (v1.18.0+)
 <div class="alert alert-info">This feature is in Preview.</div>
 
-The Datadog Operator can automatically configure monitoring for Kubernetes control plane components including the API Server, etcd, Controller Manager, and Scheduler.
+Datadog supports monitoring Kubernetes Control Plane components, including the API Server, etcd, Controller Manager, and Scheduler.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
 
 #### Prerequisites
 
-1. Datadog Operator v1.18.0+
-1. Datadog Agent v7.69+
-
+1. Datadog Operator >= `v1.18.0`
+1. Datadog Agent >= `v7.69`
 
 **Note**: `etcd` is not supported on versions 4.0-4.13.
 
@@ -464,13 +495,48 @@ Since this feature is enabled by default, you can deploy a minimal DatadogAgent 
 
 Enable `features.clusterChecks.useClusterChecksRunners` to schedule checks there; otherwise, control plane checks run on the Node Agent.
 
-For OpenShift 4.14 and higher, etcd monitoring requires copying certificates. Check the operator logs for the exact command. See the following example (adjust namespace as needed):
+For OpenShift 4.14 and later, etcd monitoring requires you to copy the etcd certificates. Check the operator logs for the exact command. See the following example (adjust namespace as needed):
 
 ```shell
 oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | \
   sed 's/namespace: openshift-etcd-operator/namespace: datadog/' | \
   oc apply -f -
 ```
+
+[12]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+#### Prerequisites
+
+1. Helm chart version >= `3.150.0`
+1. Datadog Agent >= `v7.69`
+
+**Note**: `etcd` is not supported on versions 4.0-4.13.
+
+#### General setup
+
+Enable control plane monitoring using the `providers.openshift.controlPlaneMonitoring` option:
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+providers:
+  openshift:
+    controlPlaneMonitoring: true
+{{< /code-block >}}
+
+For OpenShift 4.14 and later, etcd monitoring requires you to copy the etcd certificates. To copy them into the same namespace as the Datadog Agent:
+
+```shell
+oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Validation
 Verify that checks are running:
@@ -601,9 +667,9 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Etcd OpenShift 4.14 and higher" level="h4" %}}
+{{% collapse-content title="Etcd OpenShift 4.14 and later" level="h4" %}}
 
-Certificates are needed to communicate with the Etcd service, which can be found in the secret `etcd-metric-client` in the `openshift-etcd-operator` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
+Certificates are needed to communicate with the Etcd service, which can be found in the secret `etcd-metric-client` in the `openshift-etcd-operator` namespace. To give the Datadog Agent access to these certificates, copy them into the same namespace as the Datadog Agent:
 
 ```shell
 oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
@@ -1325,4 +1391,3 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [9]: https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/nodes-and-node-pools
 [10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml
 [11]: https://docs.aws.amazon.com/eks/latest/userguide/view-raw-metrics.html
-[12]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator

@@ -59,7 +59,7 @@ After processing, the following structured log is generated:
 
 ```json
 {
-  "users": "john",
+  "user": "john",
   "date": 1575590400000
 }
 ```

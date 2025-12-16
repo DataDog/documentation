@@ -28,7 +28,7 @@ Both can be set up independently, but it is recommended to first set up the conv
 ## Prerequisites
 
  - The [Amazon Web Services integration][1] is setup.
- - Metrics, and Logs collection are enabled on the [AWS WAF integration][2]. 
+ - Metrics, and Logs collection are enabled on the [AWS WAF integration][2]. Note that only logs sent to an S3 bucket are collected by the AWS WAF integration.
  - A [Connection][3] is created with the AWS account hosting the AWS WAF used for blocking.
 
 ## Convert AWS WAF logs to traces

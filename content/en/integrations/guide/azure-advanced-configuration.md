@@ -90,7 +90,9 @@ Datadog provides an Azure extension to assist with Agent deployment on Azure ins
 * [Azure Native integration][7] _US3 only_
 
 An alternative to the GUI installation is the command line.
+
 To run the Datadog Agent in your Azure instances as an extension, use the command that matches your environment. Replace `<SITE_PARAMETER>` with your Datadog account **site parameter** value in the [Datadog sites page][33], and `<DATADOG_API_KEY>` with your [Datadog API key][9].
+   **Note**: Python 3.9+ is required for installing Agent version 7+.
 
 {{< tabs >}}
 {{% tab "Windows" %}}

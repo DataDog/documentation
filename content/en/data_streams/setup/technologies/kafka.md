@@ -55,6 +55,17 @@ title: Data Streams Monitoring for Kafka
       <td>{{< dsm-tracer-version lang="dotnet" lib="confluent-kafka" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="dotnet" lib="confluent-kafka" type="recommended" >}}</td>
     </tr>
+    <tr>
+      <td rowspan="2"><a href="/data_streams/Ruby">Ruby</a></td>
+      <td><a href="https://github.com/zendesk/ruby-kafka">Ruby Kafka</a></td>
+      <td>{{< dsm-tracer-version lang="ruby" lib="ruby-kafka" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="ruby" lib="ruby-kafka" type="recommended" >}}</td>
+    </tr>
+        <tr>
+      <td><a href="https://karafka.io/docs/">Karafka</a></td>
+      <td>{{< dsm-tracer-version lang="ruby" lib="karafka" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="ruby" lib="karafka" type="recommended" >}}</td>
+    </tr>
   </tbody>
 </table>
 
@@ -74,7 +85,7 @@ Instrumenting your consumers and producers with Data Streams Monitoring allows y
 |Red Panda         |Not yet integrated
 
 ### Setting up Data Streams Monitoring
-See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5],  or [.NET][6].
+See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5], [.NET][6] or [Ruby][14].
 
 {{% data_streams/monitoring-kafka-pipelines %}}
 
@@ -91,3 +102,4 @@ See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5],  or [.
 [11]: /integrations/confluent_platform/
 [12]: /integrations/confluent_cloud/
 [13]: /integrations/kafka/?tab=host#kafka-consumer-integration
+[14]: /data_streams/setup/language/ruby
