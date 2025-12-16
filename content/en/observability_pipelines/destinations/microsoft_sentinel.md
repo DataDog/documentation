@@ -60,6 +60,12 @@ The table below summarizes the Azure and Microsoft Sentinel information you need
 
 To set up the Microsoft Sentinel destination in Observability Pipelines:
 
+<div class="alert alert-danger">Only enter the identifiers for the Microsoft Sentinel client secret and Data Collection Endpoint. Do <b>not</b> enter the actual values.</div>
+
+1. Enter the identifier for your Microsoft Sentinel client secret.
+	- If left blank, the default is used: `DESTINATION_MICROSOFT_SENTINEL_CLIENT_SECRET`.
+1. Enter the identifier for your Microsoft Sentinel Data Collection endpoint.
+	- If left blank, the default is used: `DESTINATION_MICROSOFT_SENTINEL_DCE_URI`.
 1. Enter the client ID for your application, such as `550e8400-e29b-41d4-a716-446655440000`.
 1. Enter the directory ID for your tenant, such as `72f988bf-86f1-41af-91ab-2d7cd011db47`. This is the Azure AD tenant ID.
 1. Enter the full table name to which you are sending logs. An example table name: `Custom-MyOPWLogs_CL`.

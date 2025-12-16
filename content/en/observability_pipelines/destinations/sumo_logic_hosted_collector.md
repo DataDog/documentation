@@ -11,7 +11,12 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 ### Set up the destination
 
-The following fields are optional:
+<div class="alert alert-danger">Only enter the identifier for the Sumo Logic endpoint URL. Do <b>not</b> enter the actual values.</div>
+
+- Enter the identifier for your endpoint URL.
+	- If left blank, the default is used: `DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.
+
+#### Optional settings
 
 1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
 1. Enter a **source name** to override the default `name` value configured for your Sumo Logic collector's source.

@@ -11,9 +11,15 @@ Set up the Splunk HEC destination and its environment variables when you [set up
 
 ### Set up the destination
 
-<div class="alert alert-danger">Observability Pipelines compresses logs with the gzip (level 6) algorithm.</div>
+<div class="alert alert-danger">Observability Pipelines compresses logs with the gzip (level 6) algorithm.<br>Only enter the identifiers for the Splunk HEC token and endpoint. Do <b>not</b> enter the actual values.</div>
 
-The following fields are optional:
+1. Enter the identifier for your token.
+	- If left blank, the default is used: `DESTINATION_SPLUNK_HEC_TOKEN`.
+1. Enter the identifier for your endpoint URL.
+	- If left blank, the default is used: `DESTINATION_SPLUNK_HEC_ENDPOINT_URL`.
+
+#### Optional settings
+
 1. Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 1.  Select whether the timestamp should be auto-extracted. If set to `true`, Splunk extracts the timestamp from the message with the expected format of `yyyy-mm-dd hh:mm:ss`.
 1. Optionally, set the `sourcetype` to override Splunk's default value, which is `httpevent` for HEC data. See [template syntax][3] if you want to route logs to different source types based on specific fields in your logs.

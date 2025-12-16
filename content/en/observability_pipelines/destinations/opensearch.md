@@ -11,8 +11,16 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 ### Set up the destination
 
-1. Optionally, enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
+<div class="alert alert-danger">Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
+
+1. Enter the identifier for your OpenSearch endpoint URL.
+    - If left blank, the default is used: `DESTINATION_OPENSEARCH_ENDPOINT_URL`.
+1. Enter the identifier for your OpenSearch username.
+    - If left blank, the default is used: `DESTINATION_OPENSEARCH_USERNAME`.
+1. Enter the identifier for your OpenSearch password.
+    - If left blank, the default is used: `DESTINATION_OPENSEARCH_PASSWORD`.
+1. (Optional) Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
+1. (Optional) Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
 	- If left disabled, the maximum size for buffering is 500 events.
 	- If enabled:
 		1. Select the buffer type you want to set (**Memory** or **Disk**).

@@ -14,6 +14,9 @@ Set up the Google Chronicle destination and its environment variables when you [
 
 To set up the Worker's Google Chronicle destination:
 
+1. Enter the identifier for your Google Chronicle endpoint URL.
+	- **Note**: Only enter the identifier for the endpoint URL. Do **not** enter the actual URL.
+	- If left blank, the default is used: `DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.
 1. Enter the customer ID for your Google Chronicle instance.
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
     - If you're using [workload identity][6] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.

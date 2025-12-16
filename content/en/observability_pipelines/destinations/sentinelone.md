@@ -15,6 +15,10 @@ Set up the SentinelOne destination and its environment variables when you [set u
 
 ### Set up the destination
 
+<div class="alert alert-danger">Only enter the identifier for the token. Do <b>not</b> enter the actual value.</a></div>
+
+1. Enter the identifier for your token.
+	- If left blank, the default is used: `DESTINATION_SENTINEL_ONE_TOKEN`.
 1. Select your SentinelOne logs environment in the dropdown menu.
 1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
 	- If left disabled, the maximum size for buffering is 500 events.

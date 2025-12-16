@@ -11,6 +11,12 @@ Set up the New Relic destination and its environment variables when you [set up 
 
 ### Set up the destination
 
+<div class="alert alert-danger">Only enter the identifiers for the account ID and license. Do <b>not</b> enter the actual values.</div>
+
+1.  Enter the identifier for your account ID.
+	- If left blank, the default is used: `DESTINATION_NEW_RELIC_ACCOUNT_ID`.
+1.  Enter the identifier for your license.
+	- If left blank, the default is used: `DESTINATION_NEW_RELIC_LICENSE_KEY`.
 1. Select the data center region (**US** or **EU**) of your New Relic account.
 1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
 	- If left disabled, the maximum size for buffering is 500 events.
