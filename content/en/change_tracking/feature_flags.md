@@ -136,7 +136,7 @@ with tracer.trace("experiments.IsEnabled") as span:
 
 ### Metrics-based enrichment
 
-This method uses Datadog metrics to enrich your feature flag changes with service context. The following section explains how to implement it in your codebase.
+Metric-based enrichment uses Datadog metrics to enrich your feature flag changes with service context. The following section explains how to implement it in your codebase.
 
 #### Setup
 
