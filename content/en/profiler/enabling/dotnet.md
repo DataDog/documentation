@@ -471,7 +471,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables Live Heap profiling (in Preview). Defaults to `false`.  |
 | `DD_PROFILING_GC_ENABLED` | Boolean        | If set to `false`, disables Garbage Collection profiling used in Timeline user interface. Defaults to `true`.  |
 | `DD_PROFILING_HTTP_ENABLED` | Boolean        | If set to `true`, enables outgoing HTTP request profiling used in Timeline user interface. Defaults to `false`.  |
-| `DD_PROFILING_HEAPSNAPSHOT_ENABLED` | Boolean        | If set to `true`, enables the regular generation of a heap snapshot in case of memory consumption increase. This is used in Memory Leak user interface. Defaults to `false`.  |
+| `DD_PROFILING_HEAPSNAPSHOT_ENABLED` | Boolean        | If set to `true`, enables the regular generation of a heap snapshot in case of memory consumption increase. This is used in the Memory Leak user interface. Defaults to `false`.  |
 
 
 <div class="alert alert-danger">
