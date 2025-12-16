@@ -69,26 +69,25 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 {{% /tab %}}
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
-<div class="alert alert-danger">
-Repositories from GitLab instances are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
+<div class="alert alert-info">
+Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
 </div>
 
 Install Datadog's [GitLab Source Code integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitLab repositories.
 
-[101]: https://www.datadoghq.com/product-preview/gitlab-source-code-integration/
+[101]: https://docs.datadoghq.com/integrations/gitlab-source-code/
 [102]: https://app.datadoghq.com/integrations/gitlab-source-code/
 
 {{% /tab %}}
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
-<div class="alert alert-danger">
-Repositories from Azure DevOps are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
+<div class="alert alert-warning">
+Repositories from Azure DevOps instances are supported for Azure DevOps Services (SaaS). Azure DevOps Server (On-Prem) is <strong>not<strong> supported.
 </div>
 
-Install Datadog's Azure DevOps Source Code integration using the [integration tile][102] or while onboarding to [Datadog Code Security][101].
+Install Datadog's Azure DevOps Source Code integration using the [integration tile][101] or while onboarding other Datadog products to connect to your Azure DevOps repositories.
 
-[101]: https://app.datadoghq.com/security/configuration/code-security/setup?provider=azure-devops&steps=static
-[102]: https://app.datadoghq.com/integrations/azure-devops-source-code/
+[101]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
@@ -487,6 +486,32 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 [1]: /tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
+
+{{% /tab %}}
+{{% tab "RUM" %}}
+
+You can see links from stack frames to their source repository in [Error Tracking for RUM][1].
+
+Source code integration is supported for the following RUM platforms when sourcemaps or debug symbols are uploaded with Git metadata:
+
+- **Browser**: Requires [JavaScript source maps][3] to be uploaded with Git information using the [`datadog-ci sourcemaps upload`][4] command
+- **React Native**: Requires [source maps and debug symbols][5] to be uploaded with Git information
+- **Android**: Requires [Proguard mapping files][6] to be uploaded with Git information
+
+**Note**: Source code integration is not supported for iOS RUM errors.
+
+1. Navigate to [**Digital Experience** > **Error Tracking**][2].
+2. Click on an issue. The **Issue Details** panel appears on the right.
+3. Under **Latest Available Errors** or error samples, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with options to view the file, blame, and commit available on the right side of a RUM error stack trace in Error Tracking, along with inline code snippets" style="width:100%;">}}
+
+[1]: /real_user_monitoring/error_tracking/
+[2]: https://app.datadoghq.com/rum/error-tracking
+[3]: /real_user_monitoring/guide/upload-javascript-source-maps/
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
+[5]: /real_user_monitoring/application_monitoring/react_native/error_tracking/#get-deobfuscated-stack-traces
+[6]: /real_user_monitoring/application_monitoring/android/error_tracking/
 
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}

@@ -9,6 +9,15 @@ export default {
     gov: 'US1-FED',
     ap2: 'AP2'
   },
+  dd_datacenter_lowercase: {
+    us: 'us1',
+    us3: 'us3',
+    us5: 'us5',
+    eu: 'eu1',
+    ap1: 'ap1',
+    ap2: 'ap2',
+    gov: 'us1_fed'
+  },
   dd_site: {
     us: 'datadoghq.com',
     us3: 'us3.datadoghq.com',
@@ -591,48 +600,12 @@ export default {
   },
   kotlin_multiplatform_site_config: {
     us: '',
-    us3: '\n            .useSite(DatadogSite.US3)\n            .trackCrashes(true)',
-    us5: '\n            .useSite(DatadogSite.US5)\n            .trackCrashes(true)',
-    eu: '\n            .useSite(DatadogSite.EU1)\n            .trackCrashes(true)',
-    ap1: '\n            .useSite(DatadogSite.AP1)\n            .trackCrashes(true)',
-    ap2: '\n            .useSite(DatadogSite.AP2)\n            .trackCrashes(true)',
-    gov: '\n            .useSite(DatadogSite.US1_FED)\n            .trackCrashes(true)'
-  },
-  ios_site_swift: {
-    us: '',
-    us3: '\n\t\tsite: .us3,',
-    us5: '\n\t\tsite: .us5,',
-    eu: '\n\t\tsite: .eu1,',
-    ap1: '\n\t\tsite: .ap1,',
-    ap2: '\n\t\tsite: .ap2,',
-    gov: '\n\t\tsite: .us1_fed,'
-  },
-  ios_site_objc: {
-    us: '',
-    us3: '@import DatadogObjc;\n\n',
-    us5: '@import DatadogObjc;\n\n',
-    eu: '@import DatadogObjc;\n\n',
-    ap1: '@import DatadogObjc;\n\n',
-    ap2: '@import DatadogObjc;\n\n',
-    gov: '@import DatadogObjc;\n\n'
-  },
-  ios_site_objc_config: {
-    us: '',
-    us3: '\nconfiguration.site = [DDSite us3];',
-    us5: '\nconfiguration.site = [DDSite us5];',
-    eu: '\nconfiguration.site = [DDSite eu1];',
-    ap1: '\nconfiguration.site = [DDSite ap1];',
-    ap2: '\nconfiguration.site = [DDSite ap2];',
-    gov: '\nconfiguration.site = [DDSite us1_fed];'
-  },
-  browser_logs_cdn_path: {
-    us: 'us1/v6/datadog-logs.js',
-    us3: 'us3/v6/datadog-logs.js',
-    us5: 'us5/v6/datadog-logs.js',
-    eu: 'eu/v6/datadog-logs.js',
-    ap1: 'ap1/v6/datadog-logs.js',
-    ap2: 'ap2/v6/datadog-logs.js',
-    gov: 'datadog-logs-v6.js'
+    us3: '\n        .useSite(DatadogSite.US3)\n        .trackCrashes(true)',
+    us5: '\n        .useSite(DatadogSite.US5)\n        .trackCrashes(true)',
+    eu: '\n        .useSite(DatadogSite.EU1)\n        .trackCrashes(true)',
+    ap1: '\n        .useSite(DatadogSite.AP1)\n        .trackCrashes(true)',
+    ap2: '\n        .useSite(DatadogSite.AP2)\n        .trackCrashes(true)',
+    gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
   browser_rum_cdn_path: {
     us: 'us1/v6/datadog-rum.js',
@@ -741,5 +714,23 @@ export default {
     ap1: '\n                        .useSite(DatadogSite.AP1)',
     ap2: '\n                        .useSite(DatadogSite.AP2)',
     gov: '\n                        .useSite(DatadogSite.US1_FED)'
+  },
+  cursor_mcp_install_deeplink: {
+    us: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuY29tL2FwaS91bnN0YWJsZS9tY3Atc2VydmVyL21jcD90b29sc2V0cz1vbmJvYXJkaW5nIiwidHlwZSI6Im9hdXRoIn0=',
+    us3: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us3&config=eyJ1cmwiOiJodHRwczovL21jcC51czMuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
+    us5: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us5&config=eyJ1cmwiOiJodHRwczovL21jcC51czUuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
+    eu: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-eu1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuZXUvYXBpL3Vuc3RhYmxlL21jcC1zZXJ2ZXIvbWNwP3Rvb2xzZXRzPW9uYm9hcmRpbmciLCJ0eXBlIjoib2F1dGgifQ==',
+    ap1: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap1&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
+    ap2: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap2&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDIuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
+    gov: 'N/A'
+  },
+  microsoft_teams_app_name: {
+    us: 'Datadog',
+    us3: 'Datadog',
+    us5: 'Datadog',
+    eu: 'Datadog',
+    ap1: 'Datadog',
+    ap2: 'Datadog',
+    gov: 'Datadog for Government'
   }
 };

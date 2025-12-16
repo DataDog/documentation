@@ -18,10 +18,6 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="App and API Protection for Envoy is in Preview" >}}
-To try the preview of App and API Protection for Envoy, use the following setup instructions.
-{{< /callout >}}
-
 You can enable App and API Protection for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
 
 ## Prerequisites
