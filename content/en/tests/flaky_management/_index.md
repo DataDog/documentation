@@ -130,7 +130,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 
 ### Track fixes that are in progress
 
-After a successful remediation run, Flaky Test Management tracks the branch containing the fix and displays a **Fix in progress** indicator until the fix reaches the repository's default branch. When the associated pull request merges, the test automatically moves to `Fixed` and the indicator is removed. If the fix is pushed directly to the default branch, the test is marked `Fixed` immediately.
+After a successful remediation run, Flaky Tests Management tracks the branch containing the fix and displays a **Fix in progress** indicator until the fix reaches the repository's default branch. When the associated pull request merges, the test automatically moves to `Fixed` and the indicator is removed. If the fix is pushed directly to the default branch, the test is marked `Fixed` immediately.
 
 Requirements and limitations:
 - Source Code Integration must be configured for a supported SCM provider (GitHub, GitLab, or Azure DevOps) so Datadog can receive pull request merge webhooks. See [Source Code Integration setup][17].
