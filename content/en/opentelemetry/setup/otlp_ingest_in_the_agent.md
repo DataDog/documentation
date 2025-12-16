@@ -40,7 +40,7 @@ Read the OpenTelemetry instrumentation documentation to understand how to point 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-OTLP ingestion is off by default, and you can turn it on by updating your `datadog.yaml` file configuration or by setting environment variables. The following `datadog.yaml` configurations enable endpoints on the default ports.
+OTLP ingestion is off by default, and you can turn it on by updating your `datadog.yaml` file configuration or by setting environment variables. The following `datadog.yaml` configurations enable endpoints on the default ports. When enabled, metrics and traces ingestion is on by default. Logs ingestion is disabled by default to prevent unexpected billing.
 
 {{% otel-endpoint-note %}}
 
@@ -76,24 +76,7 @@ These must be passed to both the core Agent and trace Agent processes. If runnin
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
-OTLP logs ingestion on the Datadog Agent is disabled by default so that you don't have unexpected logs product usage that may impact billing. To enable OTLP logs ingestion:
-
-1. Explicitly enable log collection as a whole by following [Host Agent Log collection setup][2]:
-
-   ```yaml
-   logs_enabled: true
-   ```
-
-2. Set `otlp_config.logs.enabled` to true:
-
-   ```yaml
-   otlp_config:
-     logs:
-       enabled: true
-   ```
-
 [1]: https://gist.github.com/gbbr/4a54dd02d34ad05e694952e0a02e1c67
-[2]: /agent/logs/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -102,10 +85,6 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
 2. For the Datadog Agent container, set the following endpoint environment variables and expose the corresponding port:
    - For gRPC: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` to `0.0.0.0:4317` and expose port `4317`.
    - For HTTP: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` to `0.0.0.0:4318` and expose port `4318`.
-
-3. If you want to enable OTLP logs ingestion, set the following endpoint environment variables in the Datadog Agent container:
-   - Set `DD_LOGS_ENABLED` to true.
-   - Set `DD_OTLP_CONFIG_LOGS_ENABLED` to true.
 
 <div class="alert alert-danger">
 <strong>Known Issue</strong>: Starting with Agent version 7.61.0, OTLP ingestion pipelines may fail to start in Docker environments, displaying the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br><br>
@@ -154,22 +133,7 @@ These configurations can be applied through either the <code>docker</code> comma
        protocol: TCP
    ```
 
-4. If you want to enable OTLP logs ingestion, set the following endpoint environment variables in the core Agent container:
-
-   Enable [log collection with your DaemonSet][2]:
-   ```
-   name: DD_LOGS_ENABLED
-   value: "true"
-   ```
-
-   And enable OTLP logs ingestion:
-   ```
-   name: DD_OTLP_CONFIG_LOGS_ENABLED
-   value: "true"
-   ```
-
 [1]: /agent/kubernetes/?tab=daemonset
-[2]: /containers/guide/kubernetes_daemonset/#log-collection
 {{% /tab %}}
 
 {{% tab "Kubernetes (Helm) - values.yaml" %}}
@@ -202,7 +166,7 @@ These configurations can be applied through either the <code>docker</code> comma
       enabled: false
    ```
 
-This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
 
 
 [1]: /agent/kubernetes/?tab=helm
@@ -239,8 +203,8 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
      otlp:
        receiver:
          protocols:
-           grpc:
-             enabled: true
+         grpc:
+           enabled: true
        logs:
          enabled: false
    ```
@@ -250,13 +214,13 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
      otlp:
        receiver:
          protocols:
-           http:
-             enabled: true
+         http:
+           enabled: true
        logs:
          enabled: false
    ```
 
-This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP). Metrics and traces are enabled by default.
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
@@ -271,6 +235,54 @@ For detailed instructions on using OpenTelemetry with AWS Lambda and Datadog, in
 See the Serverless documentation for [AWS Lambda and OpenTelemetry][100].
 
 [100]: /serverless/aws_lambda/opentelemetry/
+{{% /tab %}}
+{{< /tabs >}}
+
+### Enabling OTLP logs ingestion
+
+OTLP logs ingestion is disabled by default to prevent unexpected logs product usage that may impact billing. To enable OTLP logs ingestion, you must explicitly enable both log collection and OTLP logs ingestion.
+
+{{< tabs >}}
+{{% tab "Host" %}}
+
+1. Enable log collection by following [Host Agent Log collection setup][7]:
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Set `otlp_config.logs.enabled` to true:
+
+   ```yaml
+   otlp_config:
+     logs:
+       enabled: true
+   ```
+
+[7]: /agent/logs/
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+Set the following environment variables in the Datadog Agent container:
+
+- `DD_LOGS_ENABLED=true`
+- `DD_OTLP_CONFIG_LOGS_ENABLED=true`
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Set the following environment variables in the core Agent container:
+
+```yaml
+- name: DD_LOGS_ENABLED
+  value: "true"
+- name: DD_OTLP_CONFIG_LOGS_ENABLED
+  value: "true"
+```
+
+For DaemonSet deployments, see [log collection with your DaemonSet][8].
+
+[8]: /containers/guide/kubernetes_daemonset/#log-collection
 {{% /tab %}}
 {{< /tabs >}}
 
