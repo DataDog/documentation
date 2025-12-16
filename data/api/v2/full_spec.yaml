@@ -10236,10 +10236,6 @@ components:
           description: Whether the policy is pinned
           example: false
           type: boolean
-        policyType:
-          description: The type of the policy
-          example: policy
-          type: string
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -10418,11 +10414,11 @@ components:
     CloudWorkloadSecurityAgentPolicyVersion:
       description: The versions of the policy
       properties:
-        date:
+        Date:
           description: The date and time the version was created
           nullable: true
           type: string
-        name:
+        Name:
           description: The version of the policy
           example: 1.47.0-rc2
           type: string
@@ -10449,11 +10445,8 @@ components:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
-      description: Hash file specified by the field attribute
-      properties:
-        field:
-          description: The field of the hash action
-          type: string
+      additionalProperties: {}
+      description: An empty object indicating the hash action
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
       description: The metadata action applied on the scope matching the rule
@@ -10501,14 +10494,9 @@ components:
           format: int64
           type: integer
         value:
-          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSetValue'
+          description: The value of the set action
+          type: string
       type: object
-    CloudWorkloadSecurityAgentRuleActionSetValue:
-      description: The value of the set action
-      oneOf:
-      - type: string
-      - type: integer
-      - type: boolean
     CloudWorkloadSecurityAgentRuleActions:
       description: The array of actions the rule can perform if triggered
       items:
@@ -24782,6 +24770,30 @@ components:
           $ref: '#/components/schemas/SBOM'
       required:
       - data
+      type: object
+    GetSuppressionVersionHistoryData:
+      description: Data for the suppression version history.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SuppressionVersionHistory'
+        id:
+          description: ID of the suppression.
+          type: string
+        type:
+          $ref: '#/components/schemas/GetSuppressionVersionHistoryDataType'
+      type: object
+    GetSuppressionVersionHistoryDataType:
+      description: Type of data.
+      enum:
+      - suppression_version_history
+      type: string
+      x-enum-varnames:
+      - SUPPRESSIONVERSIONHISTORY
+    GetSuppressionVersionHistoryResponse:
+      description: Response for getting the suppression version history.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetSuppressionVersionHistoryData'
       type: object
     GetTeamMembershipsSort:
       description: Specifies the order of returned team memberships
@@ -44481,38 +44493,13 @@ components:
           description: The `RuleVersionHistory` `data`.
           type: object
       type: object
-    RuleVersionUpdate:
-      description: A change in a rule version.
-      properties:
-        change:
-          description: The new value of the field.
-          example: cloud_provider:aws
-          type: string
-        field:
-          description: The field that was changed.
-          example: Tags
-          type: string
-        type:
-          $ref: '#/components/schemas/RuleVersionUpdateType'
-      type: object
-    RuleVersionUpdateType:
-      description: The type of change.
-      enum:
-      - create
-      - update
-      - delete
-      type: string
-      x-enum-varnames:
-      - CREATE
-      - UPDATE
-      - DELETE
     RuleVersions:
       description: A rule version with a list of updates.
       properties:
         changes:
           description: A list of changes.
           items:
-            $ref: '#/components/schemas/RuleVersionUpdate'
+            $ref: '#/components/schemas/VersionHistoryUpdate'
           type: array
         rule:
           $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
@@ -53072,6 +53059,32 @@ components:
           format: double
           type: number
       type: object
+    SuppressionVersionHistory:
+      description: Response object containing the version history of a suppression.
+      properties:
+        count:
+          description: The number of suppression versions.
+          format: int32
+          maximum: 2147483647
+          type: integer
+        data:
+          additionalProperties:
+            $ref: '#/components/schemas/SuppressionVersions'
+            description: A suppression version with a list of updates.
+          description: The version history of a suppression.
+          type: object
+      type: object
+    SuppressionVersions:
+      description: A suppression version with a list of updates.
+      properties:
+        changes:
+          description: A list of changes.
+          items:
+            $ref: '#/components/schemas/VersionHistoryUpdate'
+          type: array
+        suppression:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionAttributes'
+      type: object
     TableResultV2:
       description: A reference table resource containing its full configuration and
         state.
@@ -57402,6 +57415,31 @@ components:
       example: 1
       format: int64
       type: integer
+    VersionHistoryUpdate:
+      description: A change in a rule version.
+      properties:
+        change:
+          description: The new value of the field.
+          example: cloud_provider:aws
+          type: string
+        field:
+          description: The field that was changed.
+          example: Tags
+          type: string
+        type:
+          $ref: '#/components/schemas/VersionHistoryUpdateType'
+      type: object
+    VersionHistoryUpdateType:
+      description: The type of change.
+      enum:
+      - create
+      - update
+      - delete
+      type: string
+      x-enum-varnames:
+      - CREATE
+      - UPDATE
+      - DELETE
     VirusTotalAPIKey:
       description: The definition of the `VirusTotalAPIKey` object.
       properties:
@@ -68233,6 +68271,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -83196,6 +83235,36 @@ paths:
       - AuthZ:
         - security_monitoring_suppressions_write
       summary: Update a suppression rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+  /api/v2/security_monitoring/configuration/suppressions/{suppression_id}/version_history:
+    get:
+      description: Get a suppression's version history.
+      operationId: GetSuppressionVersionHistory
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringSuppressionID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSuppressionVersionHistoryResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_read
+      summary: Get a suppression's version history
       tags:
       - Security Monitoring
       x-menu-order: 0
