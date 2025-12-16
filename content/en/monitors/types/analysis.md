@@ -13,8 +13,8 @@ further_reading:
   text: "Configure your monitor notifications"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
-The Analysis monitor is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources" btn_hidden="false" header="Join the Preview!">}}
+The Analysis monitor is in Preview. You must have access to the Notebooks advanced querying feature to use this monitor.
 {{< /callout >}}
 
 ## Overview
@@ -50,8 +50,8 @@ This allows you to convert your exploratory analysis into an alerting monitor.
 
 Analysis monitors use the same query interface as Notebook Analysis cells.
 
-1. **Select your dataset**: [To confirm] Select from available Notebook Analysis cells.
-2. **Filter your dataset**: [To confirm] Filter your results by column.
+1. **Select your dataset**: Select from available Notebook Analysis cells.
+2. **Filter your dataset**: Filter your results by column.
 3. **Preview results**: View the output of your query before setting alert conditions.
 
 {{< img src="/monitors/monitor_types/dataset/dataset_monitor_config.png" alt="Analysis monitor configuration example" style="width:100%;" >}}
