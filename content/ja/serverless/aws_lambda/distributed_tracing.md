@@ -61,6 +61,7 @@ Python および Node.js をサポートする Datadog Lambda ライブラリと
   - EventBridge
   - DynamoDB
   - S3
+  - Step Functions
 - すぐに使用できる数十の追加の [Python][3] および [Node.js][4] ライブラリをトレース。
 
 Python と Node.js のサーバーレス アプリケーションでは、Datadog は [Datadog のトレーシング ライブラリをインストール][5] することを推奨します。
@@ -370,7 +371,7 @@ ddlambda.WrapFunction(handler, cfg)
 
 すでに X-Ray でサーバーレス アプリケーションをトレースしており、今後も X-Ray を使用したい場合は、[AWS X-Ray インテグレーションをインストール][2] して、X-Ray から Datadog にトレースを送信できます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
