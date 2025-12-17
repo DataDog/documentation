@@ -47554,6 +47554,86 @@ components:
           description: The name of the reference table.
           type: string
       type: object
+    SecurityMonitoringRuleAnomalyDetectionOptions:
+      additionalProperties: {}
+      description: Options on anomaly detection method.
+      properties:
+        bucketDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsBucketDuration'
+        detectionTolerance:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsDetectionTolerance'
+        learningDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsLearningDuration'
+        learningPeriodBaseline:
+          description: An optional override baseline to apply while the rule is in
+            the learning period. Must be greater than or equal to 0.
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SecurityMonitoringRuleAnomalyDetectionOptionsBucketDuration:
+      description: 'Duration in seconds of the time buckets used to aggregate events
+        matched by the rule.
+
+        Must be greater than or equal to 300.'
+      enum:
+      - 300
+      - 600
+      - 900
+      - 1800
+      - 3600
+      - 10800
+      example: 300
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - FIVE_MINUTES
+      - TEN_MINUTES
+      - FIFTEEN_MINUTES
+      - THIRTY_MINUTES
+      - ONE_HOUR
+      - THREE_HOURS
+    SecurityMonitoringRuleAnomalyDetectionOptionsDetectionTolerance:
+      description: 'An optional parameter that sets how permissive anomaly detection
+        is.
+
+        Higher values require higher deviations before triggering a signal.'
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      example: 5
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE
+      - TWO
+      - THREE
+      - FOUR
+      - FIVE
+    SecurityMonitoringRuleAnomalyDetectionOptionsLearningDuration:
+      description: Learning duration in hours. Anomaly detection waits for at least
+        this amount of historical data before it starts evaluating.
+      enum:
+      - 1
+      - 6
+      - 12
+      - 24
+      - 48
+      - 168
+      - 336
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE_HOUR
+      - SIX_HOURS
+      - TWELVE_HOURS
+      - ONE_DAY
+      - TWO_DAYS
+      - ONE_WEEK
+      - TWO_WEEKS
     SecurityMonitoringRuleCase:
       description: Case when signal is generated.
       properties:
@@ -47919,6 +47999,8 @@ components:
     SecurityMonitoringRuleOptions:
       description: Options.
       properties:
+        anomalyDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptions'
         complianceRuleOptions:
           $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
         decreaseCriticalityBasedOnEnv:
@@ -55358,6 +55440,8 @@ components:
     ThreatHuntingJobOptions:
       description: Job options.
       properties:
+        anomalyDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptions'
         detectionMethod:
           $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
         evaluationWindow:
