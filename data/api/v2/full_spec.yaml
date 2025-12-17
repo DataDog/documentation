@@ -51573,6 +51573,49 @@ components:
             $ref: '#/components/schemas/ServiceDefinitionData'
           type: array
       type: object
+    ServiceList:
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceListData'
+      type: object
+    ServiceListData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceListDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceListDataType'
+      required:
+      - type
+      type: object
+    ServiceListDataAttributes:
+      properties:
+        metadata:
+          items:
+            $ref: '#/components/schemas/ServiceListDataAttributesMetadataItems'
+          type: array
+        services:
+          items:
+            type: string
+          type: array
+      type: object
+    ServiceListDataAttributesMetadataItems:
+      properties:
+        isTraced:
+          type: boolean
+        isUsm:
+          type: boolean
+      type: object
+    ServiceListDataType:
+      default: services_list
+      description: Services list resource type.
+      enum:
+      - services_list
+      example: services_list
+      type: string
+      x-enum-varnames:
+      - SERVICES_LIST
     ServiceNowBasicAuth:
       description: The definition of the `ServiceNowBasicAuth` object.
       properties:
@@ -61906,6 +61949,27 @@ paths:
         permissions:
         - apm_retention_filter_write
         - apm_pipelines_write
+  /api/v2/apm/services:
+    get:
+      operationId: GetServiceList
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
+      summary: Get service list
+      tags:
+      - APM
+      x-menu-order: 1
   /api/v2/app-builder/apps:
     delete:
       description: Delete multiple apps in a single request from a list of app IDs.
@@ -89908,6 +89972,9 @@ servers:
 tags:
 - description: Configure your API endpoints through the Datadog API.
   name: API Management
+- description: Observe, troubleshoot, and improve cloud-scale applications with all
+    telemetry in context
+  name: APM
 - description: Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters)
     for your organization. You need an API and application key with Admin rights to
     interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters)
