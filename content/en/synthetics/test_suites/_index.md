@@ -22,10 +22,10 @@ Synthetic Monitoring Test Suites let you organize multiple tests into a single c
 
 ## Key features
 
+- **Impact-driven alerting**: Receive a consolidated alert when a critical portion of the test suite fails.
 - **Centralized visibility**: View all tests in a suite and their results in one place.
 - **Simplified management**: Create and run test groups instead of managing individual tests separately.
 - **Easier maintenance**: Identify which tests need updates when application changes are made.
-- **Alerting**: Configure suite-level alerting to receive notifications when critical portions of your tests fail.
 
 ## Create a test suite
 
@@ -53,7 +53,9 @@ To create a new Test Suite:
 
    {{< img src="synthetics/test_suites/suite_alerting.png" alt="Suite alerting creation page, with the suite alerting drop-down expanded. " style="width:80%;">}}
 
-6. Configure monitor settings (notification message, recipients, renotification) the same way you would for a single test.
+   **Note**: For existing test suites, alerting is enabled with default settings. You can modify the configuration as needed.
+
+6. Configure [monitor settings][2] (notification message, recipients, renotification) the same way you would for a single test.
 7. Click **Save suite** when finished.
 
 {{< img src="synthetics/test_suites/test_suite_creation_2.png" alt="Synthetic Monitoring Test Suite creation page" style="width:80%;">}}
@@ -65,9 +67,12 @@ After creating your suite, it appears in the **Suites** tab on the [Synthetic Mo
 - A **summary** of test results (success, failures, skipped).
 - **Execution details** such as timing, environment, and test type.
 - **Filters** to refine by location, time frame, or tag.
-- **Drill-down links** to individual test runs for deeper investigation.
 
-You can sort or search within the suite to focus on failing or recently updated tests. Use the **View All** option to visualize the aggregated performance of all included tests.
+When viewing a test suite, three tabs are available:
+
+- **Tests in the Suite**: Lists all tests included in the suite.
+- **Test Runs**: Displays global uptime metrics and related test runs.
+- **Attributes**: Shows suite attributes such as `team`, monitors and who created the test suite.
 
 **Note**: Test runs appear in the suite only from the date the test was added. To view earlier results, check the individual test page. If you rename a test, previous runs remain listed under the original name. A maximum of 300 tests can be added per suite.
 
@@ -92,3 +97,4 @@ If execution results look incomplete:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/tests
+[2]: /synthetics/notifications/
