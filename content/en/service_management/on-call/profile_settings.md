@@ -29,7 +29,7 @@ Phone number support varies by country. To see the supported list, open the phon
 #### Supported contact methods
 - Push notifications through the [Datadog mobile app][3]
 - Emails (HTML or text format)
-- SMS
+- SMS (Note, landlines, Voice Over Internet Protocol (VoIP) or virtual numbers are not supported.)
 - Phone calls
 
 To set up your mobile device, including how to **circumvent Do Not Disturb mode**, see [Set Up Your Mobile Device for Datadog On-Call][4].

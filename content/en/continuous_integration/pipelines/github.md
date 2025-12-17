@@ -28,7 +28,7 @@ Set up CI Visibility for GitHub Actions to track the execution of your workflows
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| [CI jobs failure analysis][23] | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
+| [CI jobs failure analysis][23] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
@@ -116,7 +116,7 @@ To see the metrics, click on a job span in the trace view. A window opens with a
 
 ### CI jobs failure analysis
 
-If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitHub Actions.
+If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from GitHub Actions.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][26].
 
