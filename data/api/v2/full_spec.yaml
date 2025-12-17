@@ -10236,6 +10236,10 @@ components:
           description: Whether the policy is pinned
           example: false
           type: boolean
+        policyType:
+          description: The type of the policy
+          example: policy
+          type: string
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -10414,11 +10418,11 @@ components:
     CloudWorkloadSecurityAgentPolicyVersion:
       description: The versions of the policy
       properties:
-        Date:
+        date:
           description: The date and time the version was created
           nullable: true
           type: string
-        Name:
+        name:
           description: The version of the policy
           example: 1.47.0-rc2
           type: string
@@ -10445,8 +10449,11 @@ components:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
-      additionalProperties: {}
-      description: An empty object indicating the hash action
+      description: Hash file specified by the field attribute
+      properties:
+        field:
+          description: The field of the hash action
+          type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
       description: The metadata action applied on the scope matching the rule
@@ -10494,9 +10501,14 @@ components:
           format: int64
           type: integer
         value:
-          description: The value of the set action
-          type: string
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSetValue'
       type: object
+    CloudWorkloadSecurityAgentRuleActionSetValue:
+      description: The value of the set action
+      oneOf:
+      - type: string
+      - type: integer
+      - type: boolean
     CloudWorkloadSecurityAgentRuleActions:
       description: The array of actions the rule can perform if triggered
       items:
@@ -63887,6 +63899,14 @@ paths:
       - $ref: '#/components/parameters/FilterByRelationType'
       - $ref: '#/components/parameters/FilterByExcludeSnapshot'
       - $ref: '#/components/parameters/Include'
+      - description: If true, includes discovered services from APM and USM that do
+          not have entity definitions.
+        in: query
+        name: includeDiscovered
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -64112,6 +64132,13 @@ paths:
       - $ref: '#/components/parameters/FilterRelationByFromRef'
       - $ref: '#/components/parameters/FilterRelationByToRef'
       - $ref: '#/components/parameters/RelationInclude'
+      - description: If true, includes relationships discovered by APM and USM.
+        in: query
+        name: includeDiscovered
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
