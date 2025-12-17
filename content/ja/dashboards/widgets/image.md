@@ -10,19 +10,16 @@ title: イメージウィジェット
 widget_type: image
 ---
 
-イメージウィジェットを使用すると、ダッシュボードにイメージを埋め込むことができます。イメージには、URLでアクセスできる場所でホストされている PNG、JPG、またはアニメーション GIF を使用できます。
+Image ウィジェットを使うと、ダッシュボードに画像を埋め込めます。画像は Datadog にアップロードすることも、URL でアクセスできる場所にホストすることもできます。対応しているファイル形式は PNG、JPG、GIF です。
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="イメージ" video="true" style="width:80%;" >}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/image/image_setup.png" alt="イメージのセットアップ" style="width:80%;">}}
+{{< img src="dashboards/widgets/image/image_setup2.png" alt="画像の設定" style="width:80%;">}}
 
-1. イメージの URL を入力します。
-2. 外観を選択します。
-    * Zoom image to cover whole tile (タイル全体を覆うようにイメージを拡大縮小)
-    * Fit image on tile (イメージをタイル内に収める)
-    * Center image on tile (イメージをタイルの中心に配置する)
+1. 画像をアップロードするか、画像の URL を入力してください。
+2. プリセット テンプレートを選択するか、表示オプションをカスタマイズしてください。
 
 ## API
 

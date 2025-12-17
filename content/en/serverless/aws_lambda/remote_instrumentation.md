@@ -2,6 +2,10 @@
 title: Remote instrumentation for AWS Lambda
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< img src="serverless/lambda/svl_lambda_remote.png" alt="AWS Remote Instrumentation page in Datadog, showing a 'Scope functions to instrument using tags' box and functions available for remote instrumentation." style="width:100%;" >}}
 
 _Supported runtimes_: Node.js, Python

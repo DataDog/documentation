@@ -5,7 +5,7 @@ disable_toc: false
 
 As you scale your Observability Pipelines architecture to cover your different use cases:
 
-- If you want to run multiple pipelines on a host so that you can send logs from different sources, follow the instructions in [Run Multiple Pipelines on a Host][1].
+- If you want to run multiple pipelines on a host so that you can send data from different sources, follow the instructions in [Run Multiple Pipelines on a Host][1].
 - Observability Pipelines uses backpressure signals and buffering to handle situations where the system cannot process events immediately upon receiving them. See [Handling Load and Backpressure][2] for more information.
 - When you scale Observability Pipelines Workers, each Worker operates independently. See [Best Practices for Scaling Pipelines][3] for the recommended aggregator architecture.
 
