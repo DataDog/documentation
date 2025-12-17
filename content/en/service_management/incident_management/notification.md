@@ -16,7 +16,7 @@ Effective incident response depends on notifying the right people at the right t
 
 - The **Notifications** tab centralizes stakeholder communications. From here, you can create and send manual updates, save drafts, and view all automated messages triggered by [Notification Rules][1].
 
-- The **Pages** tab helps you manage your on-call pages. From this tab, you can page [Datadog On-Call][4] teams to prompt them to join the incident response. This tab also shows a history of all pages sent, whether manually or through [Notification Rules][1], so that you can track which teams have been paged and when.
+- The **Pages** tab helps you manage your on-call Pages. From this tab, you can page [Datadog On-Call][4] teams to prompt them to join the incident response. This tab also shows a history of all Pages sent, whether manually or through [Notification Rules][1], so that you can track which teams have been paged and when.
 
 These tools ensure that both stakeholders and technical responders are promptly and reliably informed throughout the incident lifecycle.
 
@@ -32,13 +32,13 @@ To create a manual notification:
 1. Use the `{{incident.created}}` variable to customize your message timezone. This template variable will display the option to set your variable time zone.
 1. Send your notification or save it as a draft.
 
-## Trigger a page from an incident
+## Trigger a Page from an incident
 
 To page a team or user using [Datadog On-Call][4]:
 1. Navigate to the **Pages** tab of an incident.
 1. Click **Page**.
 1. Select the team or user you want to alert.
-1. (Optional) Assign an incident role automatically to the person who acknowledges the page.
+1. (Optional) Assign an incident role automatically to the person who acknowledges the Page.
 1. Click **Page**.
 
 ## View all notifications
