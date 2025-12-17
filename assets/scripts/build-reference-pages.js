@@ -659,8 +659,8 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
     field = (key || '');
   }
   return `
-    <div class="col-3 column">
-      <p class="key">${toggleMarkup}${field}</p>
+    <div class="col-4 column">
+      <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
     </div>
   `.trim();
 };
@@ -736,7 +736,7 @@ const descColumn = (key, value, defaultMarkup) => {
   //const subst = `[$1]($2)`;
   //const descModified = desc.replace(regex, subst);
   let fmtDesc = marked(desc) ? marked(desc).trim() : "";
-  return `<div class="col-5 column">${(fmtDesc) ? fmtDesc : desc}${defaultMarkup}</div>`.trim();
+  return `<div class="col-6 column">${(fmtDesc) ? fmtDesc : desc}${defaultMarkup}</div>`.trim();
 };
 
 const requiredColumn = (requiredField) => {
@@ -755,22 +755,32 @@ const defaultColumn = (key, value, parentDefaults) => {
       }
     }
   }
+  
+  // Handle defaults - both scalar values and objects
   let localDefault = '';
-  if(typeof value.default === 'object') {
-    localDefault = (value.default && key in value.default) ? ((typeof value.default[key] === 'object') ? value.default[key] : `${value.default[key]}`) : '';
-     if (value.default && key in value.default) {
-      if(value.default[key] && typeof value.default[key] === 'object' && Object.keys(value.default[key]).length > 0) {
-        parentDefault = value.default[key];
-      } else {
-        parentDefault = `${value.default[key]}`;
+  if(value.default !== undefined) {
+    if(typeof value.default === 'object') {
+      // If default is an object, check if it contains the current key
+      localDefault = (value.default && key in value.default) ? ((typeof value.default[key] === 'object') ? value.default[key] : `${value.default[key]}`) : '';
+      if (value.default && key in value.default) {
+        if(value.default[key] && typeof value.default[key] === 'object' && Object.keys(value.default[key]).length > 0) {
+          parentDefault = value.default[key];
+        } else {
+          parentDefault = `${value.default[key]}`;
+        }
       }
+    } else {
+      // Handle scalar defaults (string, number, boolean, etc.)
+      localDefault = value.default;
     }
   }
-  def = localDefault || parentDefault || '';
+  
+  // Use explicit checks to handle falsy values like false, 0, ""
+  def = (localDefault !== '' && localDefault !== undefined) ? localDefault : (parentDefault !== '' && parentDefault !== undefined) ? parentDefault : '';
   if (typeof def === 'object') {
     def = JSON.stringify(def);
   }
-  return (def) ? `<span style="font-size:12px;font-weight:bold;border: 1px solid #632ca6;color: #632ca6;border-radius: 12px;padding: 2px 8px;display:inline-block; white-space:break-spaces; max-width:100%">default: ${def}</span>`.trim() : '';
+  return (def !== '' && def !== undefined) ? `<span style="font-size:12px;font-weight:bold;border: 1px solid #632ca6;color: #632ca6;border-radius: 12px;padding: 2px 8px;display:inline-block; white-space:break-spaces; max-width:100%">default: ${def}</span>`.trim() : '';
 }
 
 /*const processChild = (childData, key, value, requiredFields, newRequiredFields, tableType, level, newParentKey, skipAnyKeys, parentKey, isNested) => {
@@ -960,7 +970,6 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               <div class="col-12 first-column">
                 <div class="row ${nestedRowClasses}">
                   ${fieldColumn(key, value, toggleArrow, required, parentKey)}
-                  ${requiredColumn(requiredFields.includes(key))}
                   ${typeColumn(key, value, readOnlyField, level)}
                   ${descColumn(key, value, defaultMarkup)}
                 </div>
