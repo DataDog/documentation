@@ -1,7 +1,5 @@
 ---
 title: Custom Reports
-aliases:
-- /software_catalog/eng_reports/custom_reports/
 further_reading:
 - link: "dashboards/"
   tag: "Documentation"
@@ -10,7 +8,7 @@ further_reading:
 
 ## Overview
 
-Custom Reports let you embed existing Datadog dashboards directly into the IDP Overview page for all users at your organization. This allows teams to view key engineering insights in one place without context switching navigating between IDP and Dashboards.
+Custom Reports let you embed existing Datadog dashboards directly into the IDP Overview page for all users at your organization. This allows teams to view key engineering insights in one place without context switching between IDP and Dashboards.
 
 {{< img src="/tracing/eng_reports/idp-custom-report.png" alt="Example custom report in IDP Overview page" style="width:100%;" >}}
 
