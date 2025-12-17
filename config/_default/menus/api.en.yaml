@@ -5112,6 +5112,22 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: APM
+      url: /api/latest/apm/
+      identifier: apm
+      generated: true
+    - name: Get service list
+      url: '#get-service-list'
+      identifier: apm-get-service-list
+      parent: apm
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetServiceList
+        unstable: []
+        order: 1
     - name: APM Retention Filters
       url: /api/latest/apm-retention-filters/
       identifier: apm-retention-filters
