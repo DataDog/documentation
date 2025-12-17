@@ -78,7 +78,7 @@ To understand if any device type pools need additional provisioning, check this 
 
 ### Pinpoint areas with insufficient GPU resources to guide provisioning decisions (Kubernetes required) 
 
-**Note**: This section is only available for Kubernetes users. To set up Kubernetes in Datadog, enable [ENTER INSTRUCTIONS HERE]
+**Note**: This section is only available for Kubernetes users. 
 
 Use this section to identify the number of unmet GPU requests for your Kubernetes clusters.
 
@@ -94,7 +94,7 @@ Cost optimization of your GPU workloads is crucial, as GPUs are often the most c
 
 ### Most expensive clusters (Kubernetes required)
 
-**Note**: This section is only available for Kubernetes users. To set up Kubernetes in Datadog, enable [ENTER INSTRUCTIONS HERE]
+**Note**: This section is only available for Kubernetes users.
 
 This table is sorted by **Total Cost**, helping you to identify your most expensive Kubernetes clusters and the amount spent on their idle resources. You can use this information to reach out to the teams responsible for those clusters, and find ways to decrease their costs, such as reducing the number of idle or inefficient GPU devices.
 
@@ -108,7 +108,7 @@ For example, if you see a related pod with low core utilization, that pod is ine
 
 ### Ineffective pods (Kubernetes required)
 
-**Note**: This section is only available for Kubernetes users. To set up Kubernetes in Datadog, enable [ENTER INSTRUCTIONS HERE]
+**Note**: This section is only available for Kubernetes users. 
 
 To maximize the value of your GPU infrastructure spend, it's important to keep your GPU devices consistently busy. This widget reveals which pods are ineffectively using their associated GPU devices. The table is sorted by **SM activity** by default.
 
