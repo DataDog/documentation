@@ -25,7 +25,7 @@ To view data in the IOC Explorer, all of the following must be true:
 - Your organization must subscribe to Cloud SIEM.
 - The indicator of compromise must be in a threat feed that was available to Datadog at the time of the log acquisition.
 - A log that has a matching entity in threat intelligence must be acquired.
-- The log must be in the time frame shown on the Explorer. The time frame is fixed to the last 30 days.
+- The time frame for the Explorer is fixed to the last 30 days. The log must be from within that time frame.
 
 ## Use the IOC Explorer
 
@@ -45,6 +45,7 @@ Additionally, you can click a column heading in the Explorer to sort by that col
 
 Click an indicator of compromise to open a side panel that contains additional information about it:
 - When the indicator was first and last seen in a threat intel feed
+- When the indicator was first and last seen in a threat intelligence feed
   <div class="alert alert-info" style="margin-bottom: 0">This is distinct from the first or last time the indicator was seen in a log.</div>
 - Any categories and ratings assigned to it, and the sources associated with those ratings
 - A breakdown of the indicator's severity score

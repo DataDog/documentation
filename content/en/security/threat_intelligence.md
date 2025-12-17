@@ -46,19 +46,19 @@ For more information, see the [Bring Your Own Threat Intelligence][3] guide.
 
 Datadog collects threat intelligence across the following entity types. Each entity type has unique characteristics and a useful time frame. This time frame, or lifecycle, requires consideration when assessing the importance of a threat intelligence match on your data.
 
-### File hashes: unique digital fingerprints
+### File hashes: Unique digital fingerprints
 
 File hashes function as unique digital fingerprints for specific files. When a file hash is marked as malware, it signifies the file's exact content is harmful. The immutability of a hash, which is tied to its file's content, ensures its consistent identification. As a result, a file hash tagged as malware retains this identification, provided the identification was a true positive.
 
-### Application packages: malware risk in distribution
+### Application packages: Malware risk in distribution
 
 Unlike immutable file hashes, application packages can vary in content and security, even under the same version number. Malicious actors may upload harmful packages mimicking legitimate ones, or they might compromise existing packages by introducing malware. The lifecycle of malicious packages is frequently long-lived, but not immutable.
 
-### Domains: temporary signatures
+### Domains: Temporary signatures
 
 Unlike file hashes, domains identified as malicious are subject to change. They may undergo processes such as remediation, reassignment, or repurposing by various entities. While the lifecycle of malicious or suspicious domains is somewhat prolonged compared to IP addresses, it remains temporary and variable.
 
-### IP addresses: dynamic and transient
+### IP addresses: Dynamic and transient
 
 IP addresses represent the most volatile element in threat intelligence, often changing reputations within a 24-hour cycle. Given their dynamic nature, particularly in residential and mobile networks where multiple hosts may be involved, it's crucial to regularly reassess their status. Not all hosts connected to a low-reputation IP address are inherently malicious, underscoring the need for correlation.
 
@@ -129,6 +129,6 @@ Sources, categories, and intents are available as facets and filters on relevant
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/security/detection_rules/
+[1]: /security/detection_rules/
 [2]: /integrations/guide/reference-tables
 [3]: /security/guide/byoti_guide
