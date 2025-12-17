@@ -88,15 +88,15 @@ The panel to the left of the Scroll map provides high-level insights with direct
 A screenshot is the state of a view at a particular point in time. Changing the screenshot shows different results, depending on the screenshot selected. You can also save screenshots so that everyone in your organization is analyzing the same view state. 
 
 
-### Changing Screenshots
+### Changing screenshots
 From the heatmap view, click the **Change Screenshot** button. You may either choose from existing screenshots previously saved by teammates, or grab a screenshot from a Session replay. 
 
 1. Click **Grab from  replay** if the desired heatmap screenshot has not been previously saved.
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-screenshot-button.png" alt="Click the Grab from replay button to change the screenshot the heatmap background is based on." style="width:100%;">}}
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-screenshot-button-1.png" alt="Click the Grab from replay button to change the screenshot the heatmap background is based on." style="width:100%;">}}
 1. Click an action event on the right to select a different snapshot for your heatmap.
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events.png" alt="List of action events for the session replay." style="width:100%;">}}
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events-1.png" alt="List of action events for the session replay." style="width:100%;">}}
 
 1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired screenshot, you can return to the list of replays by clicking **Choose Another Replay**.
 1. Click the **Take Screenshot** button to apply the screenshot at the paused point to the heatmap.
