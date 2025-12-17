@@ -90,7 +90,7 @@ eval_ctx = EvaluationContext(
 )
 {{< /code-block >}}
 
-The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules such as "enable for users in the US" or "enable for premium tier users."
+The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
 ## Evaluate flags
 
@@ -211,7 +211,7 @@ else:
 client = api.get_client()
 {{< /code-block >}}
 
-**Note:** This requires OpenFeature SDK 0.7.0 or later. Most applications don't need to wait for initialization, as flag evaluations work immediately with default values.
+<div class="alert alert-info">Waiting for provider initialization requires OpenFeature SDK 0.7.0 or later. Most applications don't need to wait for initialization, as flag evaluations work immediately with default values.</div>
 
 ## Cleanup
 
@@ -225,7 +225,7 @@ api.shutdown()
 
 ### Provider not enabled
 
-If you see warnings about the provider not being enabled, ensure `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your environment:
+If you receive warnings about the provider not being enabled, ensure `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your environment:
 
 {{< code-block lang="bash" >}}
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
@@ -233,11 +233,11 @@ export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 ### Remote Configuration not working
 
-Verify that:
-1. Your Datadog Agent is version 7.55 or later
-2. Remote Configuration is enabled on the Agent
-3. `DD_SERVICE` and `DD_ENV` environment variables are set
-4. The tracer can communicate with the Agent
+Verify the following to ensure that Remote Configuration is working:
+- Datadog Agent is version 7.55 or later
+- Remote Configuration is enabled on the Agent
+- `DD_SERVICE` and `DD_ENV` environment variables are set
+- The tracer can communicate with the Agent
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/

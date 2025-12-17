@@ -71,7 +71,7 @@ context = OpenFeature::SDK::EvaluationContext.new(
 )
 ```
 
-The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules such as "enable for users in the US" or "enable for premium tier users."
+The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
 ## Evaluating flags
 
