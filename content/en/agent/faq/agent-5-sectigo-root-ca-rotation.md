@@ -10,7 +10,7 @@ further_reading:
 
 On **April 20th, 2026**, as a downstream effect of Sectigo's public root certificate migration, Datadog will deploy new SSL certificates signed by the new root certificate. **If you are running Datadog Agent v5 versions below 5.32.7**, your Agents may not recognize this new certificate root as trusted and will lose the ability to submit collected data to Datadog after this change.
 
-## What will happens
+## What will happen
 
 Starting on **April 20th, 2026**, any host running an affected Agent v5 will be unable to:
 - Send metrics, logs, traces, and other monitoring data to Datadog
