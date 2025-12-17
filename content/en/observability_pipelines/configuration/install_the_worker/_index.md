@@ -138,7 +138,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [4]: /observability_pipelines/environment_variables/
 [5]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
 [6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
-[7]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
+[7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
 
 {{% /tab %}}
 {{% tab "Linux" %}}
