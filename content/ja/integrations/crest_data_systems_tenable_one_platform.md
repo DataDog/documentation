@@ -31,7 +31,7 @@ categories:
 - マーケットプレイス
 - ネットワーク
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -51,7 +51,7 @@ pricing:
   product_id: tenable-one-platform
   short_description: Tenable One プラットフォームのアセット 1 件あたり/月
   tag: asset_id
-  unit_label: Active Asset
+  unit_label: アクティブ アセット
   unit_price: 1.0
 public_title: Tenable One プラットフォーム
 short_description: Tenable (io および sc) の脆弱性、プラグイン、アセットを監視します
@@ -111,64 +111,18 @@ Tenable は、組織によるサイバーリスクの管理と低減を支援す
 **Tenable.sc** は、継続的なネットワーク監視、脆弱性評価、レポート機能を提供する包括的な脆弱性管理プラットフォームです。組織が IT インフラ全体で脆弱性を特定、評価し、優先順位付けを行うのに役立ち、効果的に修正に取り組むことを可能にします。
 
 このインテグレーションは、以下のデータを収集します。
-* Vulnerabilities
+* 脆弱性
 * アセット
 * プラグイン
 
-## Upgrade Integration
+## サポート
 
-  - Take the backup of your existing 'conf.yaml' file from your Datadog Agent's `crest_data_systems_tenable_one_platform.d` directory under `conf.d` directory.
-  - Uninstall the current version of `crest_data_systems_tenable_one_platform` and install the latest version from the Datadog platform.
-  - This latest version of the integration has more configuration parameters that give you more control over data collection and hence would need reconfiguration of conf.yaml for data collection to resume after the upgrade. You can refer to the example of `conf.yaml` from the `Set up conf.yaml` section that is mentioned above.
-  > **NOTE**:
-  > - Make sure your `conf.yaml` has all the parameters mentioned in the above `Set up conf.yaml` section.
-  > - Create a separate instance in order to collect data for each data type i.e. (vulns/assets/plugins) and make sure 'io_collect_assets' for IO and 'sc_collect_assets' for SC have been enabled in order to continue the other types of data collection.
-  - For instance, if you want to collect IO data, update your `conf.yaml` as shown below, where there are different instances for different data types.
-    - **Older Version 1.0.5**:
-        ```yaml
-        init_config:
+サポートまたは機能リクエストについては、以下の方法で Crest Data にお問い合わせください。
 
-        instances:
-            - is_io_enabled: True
-              io_access_key: <io-access-key>
-              io_secret_key: <io-secret-key>
-              is_sc_enabled: False
-              min_collection_interval: 7200
-        ```
-    - **Newer Version 1.1.0**:
-        ```yaml
-        init_config:
-
-        instances:
-            - is_io_enabled: True
-              io_access_key: <io-access-key>
-              io_secret_key: <io-secret-key>
-              is_sc_enabled: False
-              io_collect_assets: True
-              min_collection_interval: 7200
-            - is_io_enabled: True
-              io_access_key: <io-access-key>
-              io_secret_key: <io-secret-key>
-              is_sc_enabled: False
-              io_collect_vulns: True
-              min_collection_interval: 7200
-            - is_io_enabled: True
-              io_access_key: <io-access-key>
-              io_secret_key: <io-secret-key>
-              is_sc_enabled: False
-              io_collect_plugins: True
-              min_collection_interval: 7200
-        ```
-  > **NOTE**: Checkpoint will be reset after the upgrade.
-
-## Agent
-
-For support or feature requests, please contact Crest Data through the following channels:
-
-- Support email: [datadog.integrations@crestdata.ai][5]
-- Sales email: [datadog-sales@crestdata.ai][6]
+- サポート用メール: [datadog.integrations@crestdata.ai][5]
+- 営業メール: [datadog-sales@crestdata.ai][6]
 - Web サイト: [crestdata.ai][3]
-- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][12]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][12]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
@@ -183,4 +137,4 @@ For support or feature requests, please contact Crest Data through the following
 [11]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [12]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-tenable-one-platform" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-tenable-one-platform" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

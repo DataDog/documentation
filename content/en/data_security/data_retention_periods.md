@@ -103,7 +103,9 @@ attributes:
        - **Incidents**: Retained for the duration of the account
   - product: LLM Observability
     data_type: |
-       - **Traces and spans**: 15 days
+       - **Production Traces and spans**: 15 days
+       - **Experiments Traces and spans**: 90 days
+       - **Datasets**: 3 years
   - product: Log Management
     data_type: |
        - **Logs**: Determined by customer plan
@@ -144,8 +146,7 @@ attributes:
        - **Service metadata**: Retained for the duration of the account
   - product: Service Level Objectives
     data_type: |
-       - **Monitor-based results**: 3 months
-       - **Metric and time slice-based results**: 15 months
+       - **SLO results**: 15 months
   - product: Session Replay
     data_type: |
        - **Replays (extension option in UI is unchecked)**: 30 days

@@ -50,7 +50,9 @@ If you are authoring a commit that includes any of those cases, you can force-di
 
 ### Packages incorrectly detected as third-party
 
-In Python, some packages, such as `sumy` and `sendgrid`, install modules under the `test.*` or `tests.*` package namespace. This can cause tests to be detected as third-party packages if they are located in a folder with the same name. If you use one of those packages, coverage data for tests may be incomplete, which may cause a test to be skipped when it should have been run. To avoid this issue, you can set the `DD_THIRD_PARTY_DETECTION_EXCLUDES` environment variable to a list of such third-party packages (for example, `DD_THIRD_PARTY_DETECTION_EXCLUDES=sumy,sendgrid`). This is a known issue that is scheduled to be resolved in a future version of `dd-trace-py`.
+In Python, some packages, such as `sumy` and `sendgrid`, install modules under the `test.*` or `tests.*` package namespace. In `dd-trace-py` versions prior to 3.16.1, this can cause tests to be detected as third-party packages if they are located in a folder with the same name. If you use one of those packages, coverage data for tests may be incomplete, which may cause a test to be skipped when it should have been run. Datadog recommends upgrading `dd-trace-py` to version 3.16.1 or later.
+
+To avoid this issue in older versions of `dd-trace-py`, you can set the `DD_THIRD_PARTY_DETECTION_EXCLUDES` environment variable to a list of such third-party packages (for example, `DD_THIRD_PARTY_DETECTION_EXCLUDES=sumy,sendgrid`).
 
 ## Further reading
 
