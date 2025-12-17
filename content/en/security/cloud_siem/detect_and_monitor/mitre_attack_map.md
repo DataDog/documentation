@@ -62,7 +62,7 @@ This is an example of the format you need to use for tagging custom rules and th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/rules
+[1]: https://app.datadoghq.com/security/siem/rules
 [2]: https://docs.datadoghq.com/security/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
-[3]: https://app.datadoghq.com/security/rules?query=product=siem&sort=date&viz=attck-map
+[3]: https://app.datadoghq.com/security/siem/rules?query=product=siem&sort=date&viz=attck-map
 [4]: https://docs.datadoghq.com/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold
