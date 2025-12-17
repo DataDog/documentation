@@ -10236,6 +10236,10 @@ components:
           description: Whether the policy is pinned
           example: false
           type: boolean
+        policyType:
+          description: The type of the policy
+          example: policy
+          type: string
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -10414,11 +10418,11 @@ components:
     CloudWorkloadSecurityAgentPolicyVersion:
       description: The versions of the policy
       properties:
-        Date:
+        date:
           description: The date and time the version was created
           nullable: true
           type: string
-        Name:
+        name:
           description: The version of the policy
           example: 1.47.0-rc2
           type: string
@@ -10445,8 +10449,11 @@ components:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
-      additionalProperties: {}
-      description: An empty object indicating the hash action
+      description: Hash file specified by the field attribute
+      properties:
+        field:
+          description: The field of the hash action
+          type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
       description: The metadata action applied on the scope matching the rule
@@ -10494,9 +10501,14 @@ components:
           format: int64
           type: integer
         value:
-          description: The value of the set action
-          type: string
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSetValue'
       type: object
+    CloudWorkloadSecurityAgentRuleActionSetValue:
+      description: The value of the set action
+      oneOf:
+      - type: string
+      - type: integer
+      - type: boolean
     CloudWorkloadSecurityAgentRuleActions:
       description: The array of actions the rule can perform if triggered
       items:
@@ -47542,6 +47554,86 @@ components:
           description: The name of the reference table.
           type: string
       type: object
+    SecurityMonitoringRuleAnomalyDetectionOptions:
+      additionalProperties: {}
+      description: Options on anomaly detection method.
+      properties:
+        bucketDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsBucketDuration'
+        detectionTolerance:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsDetectionTolerance'
+        learningDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsLearningDuration'
+        learningPeriodBaseline:
+          description: An optional override baseline to apply while the rule is in
+            the learning period. Must be greater than or equal to 0.
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SecurityMonitoringRuleAnomalyDetectionOptionsBucketDuration:
+      description: 'Duration in seconds of the time buckets used to aggregate events
+        matched by the rule.
+
+        Must be greater than or equal to 300.'
+      enum:
+      - 300
+      - 600
+      - 900
+      - 1800
+      - 3600
+      - 10800
+      example: 300
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - FIVE_MINUTES
+      - TEN_MINUTES
+      - FIFTEEN_MINUTES
+      - THIRTY_MINUTES
+      - ONE_HOUR
+      - THREE_HOURS
+    SecurityMonitoringRuleAnomalyDetectionOptionsDetectionTolerance:
+      description: 'An optional parameter that sets how permissive anomaly detection
+        is.
+
+        Higher values require higher deviations before triggering a signal.'
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      example: 5
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE
+      - TWO
+      - THREE
+      - FOUR
+      - FIVE
+    SecurityMonitoringRuleAnomalyDetectionOptionsLearningDuration:
+      description: Learning duration in hours. Anomaly detection waits for at least
+        this amount of historical data before it starts evaluating.
+      enum:
+      - 1
+      - 6
+      - 12
+      - 24
+      - 48
+      - 168
+      - 336
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE_HOUR
+      - SIX_HOURS
+      - TWELVE_HOURS
+      - ONE_DAY
+      - TWO_DAYS
+      - ONE_WEEK
+      - TWO_WEEKS
     SecurityMonitoringRuleCase:
       description: Case when signal is generated.
       properties:
@@ -47907,6 +47999,8 @@ components:
     SecurityMonitoringRuleOptions:
       description: Options.
       properties:
+        anomalyDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptions'
         complianceRuleOptions:
           $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
         decreaseCriticalityBasedOnEnv:
@@ -55346,6 +55440,8 @@ components:
     ThreatHuntingJobOptions:
       description: Job options.
       properties:
+        anomalyDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptions'
         detectionMethod:
           $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
         evaluationWindow:
@@ -63887,6 +63983,14 @@ paths:
       - $ref: '#/components/parameters/FilterByRelationType'
       - $ref: '#/components/parameters/FilterByExcludeSnapshot'
       - $ref: '#/components/parameters/Include'
+      - description: If true, includes discovered services from APM and USM that do
+          not have entity definitions.
+        in: query
+        name: includeDiscovered
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -64112,6 +64216,13 @@ paths:
       - $ref: '#/components/parameters/FilterRelationByFromRef'
       - $ref: '#/components/parameters/FilterRelationByToRef'
       - $ref: '#/components/parameters/RelationInclude'
+      - description: If true, includes relationships discovered by APM and USM.
+        in: query
+        name: includeDiscovered
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -87027,10 +87138,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Returns all team connections.
       operationId: ListTeamConnections
@@ -87111,10 +87218,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create multiple team connections.
       operationId: CreateTeamConnections
@@ -87152,10 +87255,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/sync:
     get:
       description: 'Get all team synchronization configurations.
@@ -87200,10 +87299,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: 'This endpoint attempts to link your existing Datadog teams with
         GitHub teams by matching their names.
@@ -87266,10 +87361,6 @@ paths:
         operator: AND
         permissions:
         - teams_manage
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{super_team_id}/member_teams:
     get:
       deprecated: true

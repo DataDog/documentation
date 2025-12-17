@@ -1487,6 +1487,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_2323193894",
+      "description": "Create a detection rule with detection method 'anomaly_detection' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_2899714190",
       "description": "Create a detection rule with detection method 'sequence_detection' returns \"OK\" response"
     },
