@@ -21,7 +21,7 @@ Click any tab to view its corresponding details and investigate specific aspects
 
 ## Waterfall tab
 
-The **Waterfall** tab displays an interactive timeline of the events associated with this view. Key performance markers are overlayed, including [Core Web Vitals][3] or mobile timings, with pass or fail indicators.
+The **Waterfall** tab displays an interactive timeline of the events associated with this view. Overlays display key performance markers, including [Core Web Vitals][3] or mobile timings, with pass or fail indicators.
 
 {{< img src="real_user_monitoring/explorer/events/events_side_panel-3.mp4" alt="Interacting with the waterfall timeline in the Waterfall tab" video="true" width="80%" >}}
 
