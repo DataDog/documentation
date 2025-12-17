@@ -22,7 +22,7 @@ This is a result of SSL/TLS certificate verification failures when the Agent att
 
 ## Why this happens
 
-When Agent v5's embedded certificate bundle is missing or incomplete, it falls back to the Tornado (Python web framework) certificate store. This outdated Tornado certificate store does not include the new Sectigo Root CA that will sign Datadog's certificates after April 20th, 2026, causing certificate verification to fail.
+When Agent v5's embedded certificate bundle is missing or incomplete, it falls back to the Tornado (Python web framework) certificate store. This outdated Tornado certificate store does not include the new Sectigo Root CA that will sign Datadog's certificates after April 20, 2026, causing certificate verification to fail.
 
 ## Who is affected
 
