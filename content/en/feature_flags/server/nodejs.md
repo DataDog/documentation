@@ -40,8 +40,27 @@ See [Tracing Node.js Applications][1] for detailed APM installation instructions
 
 ## Initialize the SDK
 
-Initialize the Datadog tracer with the `flaggingProvider` option enabled, then register it as the OpenFeature provider:
+Initialize the Datadog tracer with feature flagging enabled, then register it as the OpenFeature provider.
 
+You can enable the feature flagging provider using either an environment variable or tracer configuration:
+
+{{< tabs >}}
+{{% tab "Environment Variable" %}}
+```bash
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+```
+
+```javascript
+import { OpenFeature } from '@openfeature/server-sdk'
+import tracer from 'dd-trace';
+
+tracer.init();
+
+OpenFeature.setProvider(tracer.openfeature);
+```
+{{% /tab %}}
+
+{{% tab "Tracer Configuration" %}}
 ```javascript
 import { OpenFeature } from '@openfeature/server-sdk'
 import tracer from 'dd-trace';
@@ -56,6 +75,8 @@ tracer.init({
 
 OpenFeature.setProvider(tracer.openfeature);
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Non-blocking initialization
 

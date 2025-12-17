@@ -38,8 +38,37 @@ gem install ddtrace openfeature-sdk
 
 ## Initialize the SDK
 
-Configure Datadog with feature flagging enabled, then register it as the OpenFeature provider:
+Configure Datadog with feature flagging enabled, then register it as the OpenFeature provider.
 
+You can enable the feature flagging provider using either an environment variable or the Datadog configuration block:
+
+{{< tabs >}}
+{{% tab "Environment Variable" %}}
+```bash
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+```
+
+```ruby
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+# Configure Datadog with Remote Configuration enabled
+Datadog.configure do |config|
+  config.remote.enabled = true
+end
+
+# Configure OpenFeature SDK with Datadog provider
+OpenFeature::SDK.configure do |config|
+  config.set_provider(Datadog::OpenFeature::Provider.new)
+end
+
+# Create OpenFeature client
+client = OpenFeature::SDK.build_client
+```
+{{% /tab %}}
+
+{{% tab "Datadog Configuration" %}}
 ```ruby
 require 'datadog'
 require 'open_feature/sdk'
@@ -59,10 +88,16 @@ end
 # Create OpenFeature client
 client = OpenFeature::SDK.build_client
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Non-blocking initialization
 
 The client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
+
+### Blocking initialization
+
+<div class="alert alert-info">Blocking initialization support is under development. Currently, flag evaluations return default values until the initial configuration is received from Remote Configuration.</div>
 
 ## Set the evaluation context
 
