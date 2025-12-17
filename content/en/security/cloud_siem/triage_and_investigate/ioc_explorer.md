@@ -33,17 +33,17 @@ To access the IOC Explorer in Datadog, go to **Security** > **Cloud SIEM** > **I
 
 ### Query and filter indicators of compromise
 
-You can write custom queries or apply filters to determine which indicators of compromise you can see in the explorer. You can do so by:
+You can write custom queries or apply filters to determine which indicators of compromise you can see in the explorer. You can query or filter by:
 - Severity score
 - [Entity type][3]
 - [Threat intelligence source][2]
 - [Threat intelligence category][4]
 
-Additionally, you can click a column in the Explorer to sort by that column's values.
+Additionally, you can click a column heading in the Explorer to sort by that column's values.
 
 ### Get more context on an indicator of compromise
 
-You can click an indicator of compromise to open a side panel that contains additional information about it:
+Click an indicator of compromise to open a side panel that contains additional information about it:
 - When the indicator was first and last seen in a threat intel feed
   <div class="alert alert-info" style="margin-bottom: 0">This is distinct from the first or last time the indicator was seen in a log.</div>
 - Any categories and ratings assigned to it, and the sources associated with those ratings
@@ -53,9 +53,9 @@ You can click an indicator of compromise to open a side panel that contains addi
 
 ## Understand severity scoring
 
-It's important to have proper context behind how Datadog calculated a severity score for an indicator, so you can properly prioritize its investigation. For example, [IP addresses][5] can be volatile and require frequent reassessments as a result.
+It's important to have proper context for the severity score for an indicator, so you can properly prioritize investigations. For example, [IP addresses][5] can be volatile and require frequent reassessments as a result.
 
-In the IOC Explorer side panel, you can see the factors Datadog takes into account. It starts with a base score based on its classification, then raises or lowers the score based on additional factors:
+In the IOC Explorer side panel, you can see the factors that contribute to the severity score. Severity score starts from a base score based on classification, and increases or decreases based on additional factors:
 - **Classification**: The base score associated with the indicator's category and intent
 - **Corroboration**: Whether the indicator appears on multiple threat intelligent feeds
 - **Persistence**: How long threat intelligence feeds have been reporting on the indicator

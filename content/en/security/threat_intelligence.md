@@ -35,7 +35,7 @@ Datadog curates commercial, open-source, and in-house threat intelligence indica
 
 Datadog Security supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
-The amount of time threat intelligence persists as asn available enrichment varies depending on source:
+The amount of time threat intelligence persists as an available enrichment varies depending on source:
 - OEM- and integration-based feeds: 24 hours
   - Datadog reacquires threat intelligence from these providers at least once a day, and depends on the provider to persist threat intelligence information
 - Bring your own threat intelligence: however long you configure the intelligence to be available
