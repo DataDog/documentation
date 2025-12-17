@@ -4,11 +4,13 @@ description: Use Datadog Secret Scanning to find secrets exposed in source code.
 is_beta: true
 algolia:
   tags: ['secrets scanning', 'secret scanning', 'datadog static analysis', 'SAST']
----
 
-{{< callout url="https://www.datadoghq.com/product-preview/secret-scanning/" btn_hidden="false" header="Join the Preview!" >}}
-Secret Scanning is in Preview. Contact your Customer Success Manager to get access.
-{{< /callout >}}
+further_reading:
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
+
+---
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
@@ -26,6 +28,10 @@ Scans can run in your CI/CD pipelines or directly in Datadog with hosted scannin
 
 Datadog Secret Scanning is powered by [Sensitive Data Scanner (SDS)][3] and includes all of the rules in the
 [Secrets and credentials category of SDS][4].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup

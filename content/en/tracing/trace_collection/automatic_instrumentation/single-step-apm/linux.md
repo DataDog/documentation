@@ -27,6 +27,8 @@ To enable APM on a Linux host:
 1. Copy and run the Agent installation command on your Linux host or VM.
 1. Restart your applications.
 
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
 ## Set SDK tracer versions
 
 By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.
@@ -86,7 +88,7 @@ Unified Service Tags (USTs) apply consistent tags across traces, metrics, and lo
 
 ## Enable SDK-dependent products and features
 
-After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as [Continuous Profiler][21], [Application Security Monitoring][22], and [trace ingestion controls][23].
 
 Use one of the following setup methods:
 
@@ -98,7 +100,9 @@ Use one of the following setup methods:
 
   Enable products by setting environment variables directly in your application configuration. 
 
-## Update SDK version
+## Advanced options
+
+### Update SDK version
 
 The SDK version is fixed when you run the Agent installation command.
 
@@ -106,6 +110,51 @@ To update the SDK versions:
 
 1. Re-run the Agent installation command. This command also updates the Agent to the latest version.
 1. Restart your applications.
+
+### Define workload selection rules 
+
+{{< callout url="https://www.datadoghq.com/product-preview/single-step-instrumentation-targeting-rules-on-linux/"
+ btn_hidden="false" header="Join the Preview!">}}
+Workload selection is in Preview.
+{{< /callout >}}
+
+Workload selection rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
+
+To configure workload selection:
+
+1. In Datadog, navigate to **APM** > **Service Setup** > [**Workload Selection**][20].
+1. Click **Add or Edit Rules**. 
+1. Define instrumentation rules:
+   1. Click **Add New Rule**, then choose **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
+   1. Name your rule. 
+   1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
+
+   {{< img src="tracing/trace_collection/workload_selection_landing.png" alt="The workload selection UI, showing configuration options for defining a rule" style="width:100%;" >}}
+
+1. (Optional) Drag and drop rules to reorder them. 
+
+   **Note**: Rules are evaluated in order. After a process matches a rule, subsequent rules are ignored.
+
+1. Set the default behavior (allow or block) for processes that do not match any rule.
+1. Click **Next** to preview your rules. 
+1. Click **Deploy Rules**. 
+
+If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds . Alternatively, click **Export** to export the configuration file and apply it manually to your hosts.
+
+#### Define rule conditions
+
+Each rule consists of one or more conditions. A condition includes the following elements:
+- **Attribute**: The process property that the rule evaluates.
+- **Operator**: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
+- **Value**: The text or pattern to match, such as a process name or command-line flag.
+
+Supported attributes include:
+| Attribute    | Description | Example |
+| ----------- | ----------- | --------- |
+| Process Executable | Executable name of the process. | `python3.11` |
+| Process Executable Full Path | Full path of the executable. | `/usr/bin/python3.11` |
+| Process Args | Command-line arguments used to start the process. | `--env=production` |
+| Language | Programming language detected for the process. | `python` |
 
 ## Remove Single Step APM instrumentation from your Agent
 
@@ -137,5 +186,9 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [17]: /tracing/trace_collection/library_config/
 [18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[20]: https://app.datadoghq.com/apm/service-setup/workload-selection
+[21]: /profiler/
+[22]: /security/application_security/
+[23]: /tracing/trace_pipeline/ingestion_controls/
 
 
