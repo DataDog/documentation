@@ -354,7 +354,7 @@ For Kubernetes environments, see the [Kubernetes short lived container documenta
 
 ## Troubleshooting
 
-For troubleshooting steps, visit [Container Log Collection Troubleshooting][13].
+For troubleshooting steps, see [Container Log Collection Troubleshooting][13].
 
 ## Further Reading
 
@@ -372,4 +372,4 @@ For troubleshooting steps, visit [Container Log Collection Troubleshooting][13].
 [10]: /logs/guide/docker-logs-collection-troubleshooting-guide/
 [11]: /agent/guide/autodiscovery-management/
 [12]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers
-[13]: /containers/troubleshooting/log-collection/?tab=datadogoperator
+[13]: /containers/troubleshooting/log-collection/

@@ -465,7 +465,7 @@ The equivalent volume and volumeMount path need to be set in the Agent container
 
 ## Troubleshooting
 
-For troubleshooting steps, visit [Container Log Collection Troubleshooting][21].
+For troubleshooting steps, see [Container Log Collection Troubleshooting][21].
 
 ## Further Reading
 

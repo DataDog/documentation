@@ -1,6 +1,6 @@
 ---
 title: Container Log Collection Troubleshooting
-description: Troubleshoot common issues with the log collection in containerized environments
+description: Troubleshoot common issues with log collection in containerized environments
 aliases:
 - /logs/guide/docker-logs-collection-troubleshooting-guide/
 further_reading:
@@ -14,50 +14,52 @@ further_reading:
 
 ## Overview
 
-As applications in containers emit logs to the Standard Output and Error (`stdout` / `stderr`) streams, the container runtime and orchestrator can capture and handle those logs in a variety of ways. The Datadog Agent relies on Docker and Kubernetes to manage these log files using their default file based handling. As the Datadog Agent monitors the containers on its host it will discover, tail, tag, and report those logs up to Datadog accordingly for each container.
+Containerized applications write logs to the Standard Output and Error (`stdout` / `stderr`) streams, which the container runtime and orchestrator capture and handle in a variety of ways. The Datadog Agent relies on Docker and Kubernetes' default file based handling to manage these log files. As the Datadog Agent monitors the containers on its host, it discovers, tails, tags, and reports those logs up to Datadog for each container.
 
-This document covers the troubleshooting steps for [Docker][1] and [Kubernetes][2] log collection. [ECS Fargate][3] and [EKS Fargate][4] based log collection is a bit more unique and the setup and troubleshooting information can be found in their respective docs. Consult the Docker and Kubernetes documentation for the full context and general setup steps for log containerized collection per environment.
+This documentation covers the troubleshooting steps for **Docker** and **Kubernetes** log collection. For the full context and general setup steps for containerized log collection, see the [Docker][1] and [Kubernetes][2] documentation.
+
+For [**ECS Fargate**][3] and [**EKS Fargate**][4] based log collection, see their dedicated setup and troubleshooting documentation. 
 
 ## Log collection context
 
-In containerized environments, logs can be collected by the Datadog Agent in two main ways, file based collection and socket based collection through the Docker API.
+In containerized environments, logs are collected by the Datadog Agent in two main ways, **file based** collection and **socket based** collection through the Docker API.
 
-The configuration steps provided in their respective Docker and Kubernetes docs default to file based collection as it offers better performance and reliability. Socket based collection can be used in Docker environments as a fallback option. In Kubernetes clusters socket based collection requires Docker as the container runtime, however this runtime is largely is deprecated in most Kubernetes distributions.
+The Docker and Kubernetes documentation default to file based collection as it offers better performance and reliability. Socket based collection can be used in Docker environments as a fallback option. In Kubernetes clusters, socket based collections requires Docker runtime, which is largely is deprecated in most Kubernetes distributions.
 
-Datadog additionally recommends to have your applications log to the `stdout` / `stderr` streams in containerized environments. As opposed to writing to log files that are isolated in the application containers. Log collection with these streams can be setup much more automatically and reliably compared to the log files.
+In containerized environments, Datadog recommends logging to the `stdout` / `stderr` streams instead of writing to log files that are isolated in the application containers. These streams allow for more automated and reliable collection.
 
 ### Log files
 
-In Docker with the default `json-file` log driver, the `stdout`/`stderr` logs are stored in `/var/lib/docker/containers` and can be collected by mounting `/var/lib/docker/containers` (`c:/programdata/docker/containers` on Windows) into the Agent container. For example:
+With Docker's default `json-file` log driver, the `stdout`/`stderr` logs are stored in `/var/lib/docker/containers`. These logs can be collected by mounting `/var/lib/docker/containers` (`c:/programdata/docker/containers` on Windows) into the Agent container. For example:
 
 ```bash
 /var/lib/docker/containers/68f21cd4e1e703c8b9ecdab67a5a9e359f1fb46ae1ed2e86f9b4f1f243a0a47d/68f21cd4e1e703c8b9ecdab67a5a9e359f1fb46ae1ed2e86f9b4f1f243a0a47d-json.log. 
 ```
 
-If this mount point does not exist, the Agent will fallback to socket based collection. Accessing the Docker API through the socket at `/var/run/docker.sock`. See [Docker Log Collection][1] for more information.
+If this mount point does not exist, the Agent falls back to socket based collection. Accessing the Docker API through the socket at `/var/run/docker.sock`.
 
-In Kubernetes, `stdout`/`stderr` logs are stored in `/var/log/pods` by default. The folder structure is setup per unique pod and container within it. For example:
+In Kubernetes, `stdout`/`stderr` logs are stored in `/var/log/pods` by default. The folder structure is setup per unique pod and container within that pod. For example:
 
 ```bash
 /var/log/pods/default_my-deployment-55d847444b-2fkch_342819ce-4419-435b-9881-4a3deff618cc/my-container/0.log
 ```
 
-If the container in the pod restarts in Kubernetes, it will automatically increment the filename (`0.log` -> `1.log`) which the Agent will account for automatically. See [Kubernetes log collection][2] for more information.
+If the container in the pod restarts in Kubernetes, it automatically increments the filename (`0.log` -> `1.log`) which the Agent automatically accounts for. See [Kubernetes log collection][2] for more information.
 
-As the Agent discovers the corresponding containers on the host, it will lookup their log files based on the expected folder and file structure per environment.
+As the Agent discovers the corresponding containers on the host, it looks up their log files based on the expected folder and file structure per environment.
 
 ### Agent autodiscovery
 
-By default, the Agent only collects logs from containers when log collection is enabled in the Agent and either:
+By default, the Agent only collects logs from containers when log collection is enabled and either:
 
-- The Datadog Agent has `logs_config.container_collect_all` enabled to collect logs from all discovered containers
+- `logs_config.container_collect_all` is enabled to collect logs from all discovered containers
 - The container is configured for log collection from an Autodiscovery based integration
 
-The agent also takes into account any container exclusion/inclusion rules you have configured from [Container Discovery Management][5]. 
+The Agent also takes into account any container exclusion/inclusion rules you have configured from [Container Discovery Management][5]. 
 
 Lastly, the Agent is responsible for collecting the logs from the containers on the same host as itself. 
 
-It is important to take these rules into account to understand how log collection is setup for your containers. If for example you do not see logs for a given container you should check:
+It is important to take these rules into account to understand how log collection is setup for your containers. If you do not see logs for a given container you should check:
 
 - Has the Agent been enabled for log collection?
 - Is the container enabled for log collection relative to the discovery rules?
@@ -65,7 +67,7 @@ It is important to take these rules into account to understand how log collectio
 
 #### Container collect all configuration
 
-Consult the [Docker][1] and [Kubernetes][2] log collection docs for the full steps on how to enable log collection. For quick reference you can see samples on how to configure the Agent to enable log collection and enable the `container_collect_all` feature, which defaults to false. 
+For comprehensive instructions on how to enable log collection, see the [Docker][1] and [Kubernetes][2] log collection documentation. For quick reference you can see samples on how to configure the Agent to enable log collection and enable the `container_collect_all` feature, which defaults to false. 
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -116,7 +118,7 @@ If `container_collect_all` is not enabled, you need to individually enable log c
 
 #### Autodiscovery configuration
 
-You can configure which containers the Agent collects logs from by using Autodiscovery configurations. Datadog recommends to configure this by using [container labels in Docker][6] or [Pod annotations in Kubernetes][7]. These are JSON based log configurations placed on the corresponding container/pod emitting those logs. You can see a minimal example below:
+Autodiscovery allows you to configure which containers the Agent collects logs from. Datadog recommends using [container labels in Docker][6] or [Pod annotations in Kubernetes][7]. These are JSON based log configurations placed on the corresponding container/pod emitting those logs. See the following minimal example:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -165,26 +167,26 @@ Visit [Advanced Log Collection Configurations][9] for further examples of how to
 
 ### Tagging
 
-The Agent automatically assigns tags to your logs at the “high” level of [tag cardinality][10] for each environment. You can view the out-of-the-box [Docker tags here][11] and [Kubernetes tags here][12]. This additionally includes and tags collected by [Unified Service Tagging][13] or different tag extraction rules from container metadata.
+The Agent automatically assigns tags to your logs at the “high” level of [tag cardinality][10] for each environment. You can view the out-of-the-box [Docker tags here][11] and [Kubernetes tags here][12]. This also includes any tags collected by [Unified Service Tagging][13] or different tag extraction rules from container metadata.
 
-To customize these tags, change the log collection rules, or enable log collection in general - you can apply Autodiscovery Labels or Annotations to the respective containers as documented above.
+To customize these tags, change the log collection rules, or enable log collection in general - you can apply Autodiscovery Labels or Annotations to the respective containers.
 
-Tags on your logs can also come from [host tag inheritance][14]. All data, including logs, coming into Datadog goes through this process. On Datadog intake the logs will inherit all the host-level tags that are associated with that host. You can see these tags on the Infrastructure List for you host. These are most commonly set by:
+Tags on your logs can also come from [host tag inheritance][14]. All data, including logs, coming into Datadog goes through this process. On Datadog intake the logs inherit all the host-level tags that are associated with that host. You can see these tags on the Infrastructure List for you host. These are most commonly set by:
 
 - The Datadog Agent and its automatic discovery or manual set of `DD_TAGS` provided
 - The cloud provider integrations collecting and setting tags for your hosts
 
-So for example the tags `pod_name` and `short_image` come from the Agent setting this tag on submission. Other tags like `region` and `kube_cluster_name` come from host tag inheritance on intake.
+For example, the tags `pod_name` and `short_image` come from the Agent setting this tag on submission. Other tags like `region` and `kube_cluster_name` come from host tag inheritance on intake.
 
 ## Troubleshooting
 
-The Datadog Agent running on the same node as your application container is the one responsible for collecting that container’s logs. So when running these commands, especially in Kubernetes environments, ensure you are working with the correct Agent pod for your desired application container.
+The Datadog Agent running on the same node as your application container is responsible for collecting that container’s logs. When running these commands, especially in Kubernetes environments, ensure you are working with the correct Agent pod for your desired application container.
 
-Visit [Agent Commands][15] to see a list of helpful agent commands for troubleshooting issues.
+For a list of helpful troubleshooting commands, see [Agent Commands][15].
 
 ### Agent status
 
-You can run the agent status command to see if the logging Agent is experiencing any issues
+You can run the Agent status command to see if the logging Agent is experiencing any issues
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -238,7 +240,7 @@ Logs Agent
         24h Peak Latency (ms): 0
 ```
 
-If the Logs Agent Status doesn’t look like the above, refer to the troubleshooting tips in the following sections.
+If the Logs Agent Status doesn’t look like the above, see the troubleshooting tips in the following sections.
 
 Each individual log collector provides detailed information about how the Agent is collecting logs for a specific container. Using the Kubernetes example above, this output tells us:
 
@@ -304,7 +306,7 @@ Autodiscovery IDs:
 * containerd://ba778eaff01fc3555b6ad4a809e78949065bd34ebe2c42522a1bdd1d3b684fb5
 ```
 
-You can see in this case, the `Log Config` applied from Autodiscovery provides custom `service` and `source` tags shown as `[{"service":"example-service","source":"example-source"}]`. The `configcheck` output is useful for verifying how the Agent setup log collection for a given container based on its container ID.
+The `Log Config` applied from Autodiscovery provides custom `service` and `source` tags shown as `[{"service":"example-service","source":"example-source"}]`. The `configcheck` output is useful for verifying how the Agent setup log collection for a given container based on its container ID.
 
 When using `logs_config.container_collect_all` if no unique configuration is provided you will see this default to `[{}]` for the container.
 
@@ -333,9 +335,9 @@ docker exec -it <CONTAINER_NAME> agent stream-logs
 {{% /tab %}}
 {{< /tabs >}}
 
-You can filter this output using the `--name` flag to stream logs relative to the "Namespace/Pod Name/Container Name" based name in Kubernetes. You can alternatively use the `--service` or `--source` flag based on the tags used. 
+You can filter this output with the `--name` flag, which matches the Kubernetes naming format (Namespace/Pod Name/Container). Alternatively, you can filter based on applied tags with the `--service` or `--source` flag. 
 
-You can find the `<NAME>` using the `agent status` command. For example, in this case, the `<NAME>` is `default/my-deployment-55d847444b-2fkch/my-container`:
+To find the `<NAME>`, use the `agent status` command. For example, `default/my-deployment-55d847444b-2fkch/my-container`:
 
 ```
 ==========
@@ -358,13 +360,13 @@ Integration Name: default/my-deployment-55d847444b-2fkch/my-container | Type: fi
 Integration Name: default/my-deployment-55d847444b-2fkch/my-container | Type: file | Status: info | Timestamp: 2025-05-12 23:45:09.016049347 +0000 UTC | Hostname: example-0002 | Service: example-service | Source: example-source | Tags: filename:0.log,dirname:/var/log/pods/default_my-deployment-55d847444b-2fkch_342819ce-4419-435b-9881-4a3deff618cc/my-container,image_name:busybox,short_image:busybox,image_tag:latest,kube_namespace:default,kube_qos:BestEffort,kube_container_name:my-container,kube_ownerref_kind:replicaset,image_id:docker.io/library/busybox@sha256:9e2bbca079387d7965c3a9cee6d0c53f4f4e63ff7637877a83c4c05f2a666112,kube_deployment:my-deployment,kube_replica_set:my-deployment-55d847444b,pod_phase:running,pod_name:my-deployment-55d847444b-2fkch,kube_ownerref_name:my-deployment-55d847444b,container_id:ba778eaff01fc3555b6ad4a809e78949065bd34ebe2c42522a1bdd1d3b684fb5,display_container_name:my-container_my-deployment-55d847444b-2fkch,container_name:my-container | Message: 2025-11-20T23:45:08 ERROR Sample Error Log
 ```
 
-Each line should provide the integration name, type, status, timestamp, hostname, service, source, container tags, and the message. This is a very concrete way to show exactly what logs the agent is collecting, what metadata is associated with those logs, and what message is sent.
+Each line should provide the integration name, type, status, timestamp, hostname, service, source, container tags, and the message. This shows what logs the Agent is collecting, what metadata is associated with those logs, and what message is sent.
 
 Hit `Ctrl + C` to exit the stream process.
 
 ### Capturing the raw log file
 
-To check if the agent is tailing the logs correctly, you can copy the log file over and examine it yourself using the `agent status` command [seen earlier](#agent-status).
+To check if the Agent is tailing the logs correctly, you can copy the log file over and examine it using the [`agent status` command](#agent-status).
 
 Run the `agent status` command and check through the “Logs Agent” section for the container in question. For example, for a Pod named `my-deployment-98878c5d8-mc2sk` with the container `my-container`, it may look like this:
 
@@ -390,7 +392,7 @@ Since the link is open in the Agent Pod, you can copy this file over from the Ag
 kubectl cp <Agent Pod>:<Log Input Path> <Desired Filename>
 ```
 
-For example, if the Agent Pod in this above case was named `datadog-agent-xxxxx` that would look like:
+If the Agent Pod in the example was named `datadog-agent-xxxxx` it would look like:
 
 ```text
 kubectl cp datadog-agent-xxxxx:/var/log/pods/default_my-deployment-98878c5d8-mc2sk_3d602ae0-a0ef-4fe2-b703-3975d2af6947/my-container/0.log my-container.log
