@@ -44,7 +44,7 @@ Observability Pipelines destination's buffers are configured to block events, wh
 
 Observability Pipelines destinations can be configured with disk buffers (in Preview). When disk buffering is enabled for a destination, every event is first sent through the buffer and written to the data files, before the data is sent to the downstream integration. By default, data is not synchronized for every write, but instead synchronized on an interval (500 milliseconds), which allows for high throughput with a reduced risk of data loss.
 
-### Kubernetes persistence volume
+### Kubernetes persistent volumes
 
 If you enable disk buffering for destinations, you can use Kubernetes [persistence volume][1] to handle back pressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending.
 
