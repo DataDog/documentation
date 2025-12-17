@@ -6548,9 +6548,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.1.tgz":
-  version: 1.2.1
-  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.1.tgz"
+"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.0.tgz":
+  version: 1.3.0
+  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.0.tgz"
   dependencies:
     "@types/semver": "npm:^7.7.0"
     js-yaml: "npm:^4.1.0"
@@ -6562,18 +6562,18 @@ __metadata:
     typedoc-plugin-zod: "npm:^1.3.1"
     uuid: "npm:^11.0.5"
     zod: "npm:^4.1.12"
-  checksum: 10/1325be16ab5c2381c5d7c54d8343e7b01da4825e16589116fe82ab5ffa8a25d8b7d870f4d72b20a5e1800932140871e8dfeb830b6fc69bf8637e521fe936e09f
+  checksum: 10/5582490d1b31ffcfcc496c1753603bf5f7d07ccc6a1177b3136855b403a4f3c2cd4d8ac82e56a41541741a43705dbb8f3a586a95857a47312b3316addce0a072
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.3.2.tgz":
-  version: 2.3.2
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.3.2.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.5.0.tgz":
+  version: 2.5.0
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.5.0.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.5.2"
     "@types/markdown-it": "npm:^14.1.2"
     "@vitejs/plugin-react": "npm:^4.3.3"
-    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.1.tgz"
+    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.0.tgz"
     cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.2.tgz"
     chokidar: "npm:^4.0.3"
     chroma-highlight: "npm:^2.4.2"
@@ -6593,7 +6593,7 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^4.1.12"
-  checksum: 10/0ae5af6ed35dbf1e240961210dcd396e890343344a2507fd83de6537bbdd6656189565a6ea6274b8f5c1b13aa79e760257bc979b47fb7289504eddba9e57f108
+  checksum: 10/0b4034a4a7ec48ece4090b51a9882fd114b0970ea554e23d3fdfe40238d6329660eaf0738f97e1b2977d03ab8cee5957cd86ef343146f8f7b5a3708f92ccf960
   languageName: node
   linkType: hard
 
@@ -7623,19 +7623,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz":
-  version: 1.0.0
-  resolution: "docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz"
-  dependencies:
-    js-yaml: "npm:^4.1.0"
-    rimraf: "npm:^5.0.5"
-    simple-git: "npm:^3.28.0"
-    uuid: "npm:^11.1.0"
-    zod: "npm:^3.22.4"
-  checksum: 10/61474d8bc8072864616af5d8fa585fd8951c1a967985edc47dd3c27f7783aa8e68160ceef22199be816a0b66a4c63fda58675a4b397754ad8e6414edb328c8b6
-  languageName: node
-  linkType: hard
-
 "docs@workspace:.":
   version: 0.0.0-use.local
   resolution: "docs@workspace:."
@@ -7653,10 +7640,9 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.3.2.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.5.0.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
-    docs-llms-txt: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz"
     eslint: "npm:^6.8.0"
     eslint-config-airbnb: "npm:^18.2.1"
     eslint-config-prettier: "npm:^6.15.0"
@@ -15584,17 +15570,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-git@npm:^3.28.0":
-  version: 3.28.0
-  resolution: "simple-git@npm:3.28.0"
-  dependencies:
-    "@kwsites/file-exists": "npm:^1.1.1"
-    "@kwsites/promise-deferred": "npm:^1.1.1"
-    debug: "npm:^4.4.0"
-  checksum: 10/2582e6c1c50db8aa0b7d07ed0f0f86eb4ea647e6b33d1596cf44e509c7b658372da9db1dcbea626e7d71e30e8d826a84410bbc73c5d1066f2526724a31836f81
-  languageName: node
-  linkType: hard
-
 "simple-swizzle@npm:^0.2.2":
   version: 0.2.2
   resolution: "simple-swizzle@npm:0.2.2"
@@ -17197,7 +17172,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^11.0.5, uuid@npm:^11.1.0":
+"uuid@npm:^11.0.5":
   version: 11.1.0
   resolution: "uuid@npm:11.1.0"
   bin:
@@ -17887,13 +17862,6 @@ __metadata:
   version: 3.1.1
   resolution: "yn@npm:3.1.1"
   checksum: 10/2c487b0e149e746ef48cda9f8bad10fc83693cd69d7f9dcd8be4214e985de33a29c9e24f3c0d6bcf2288427040a8947406ab27f7af67ee9456e6b84854f02dd6
-  languageName: node
-  linkType: hard
-
-"zod@npm:^3.22.4":
-  version: 3.24.2
-  resolution: "zod@npm:3.24.2"
-  checksum: 10/604c62a8cf8e330d78b106a557f4b44f5d14845d20b1360a423ccc09b58cb8525ccf7e4b40cf1bd4852d22393d2c67774b5817ec5a2fedab25f543b36ed15943
   languageName: node
   linkType: hard
 

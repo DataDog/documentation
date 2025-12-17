@@ -34,7 +34,7 @@ further_reading:
 {{< appsec-integration name="Windows" avatar="windows" link="./windows" >}}
 {{< /appsec-integrations >}}
 
-### Cloud and Container Platforms
+### Container Platforms
 {{< appsec-integrations >}}
 {{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
 {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
@@ -42,7 +42,18 @@ further_reading:
 
 ### AWS
 {{< appsec-integrations >}}
+{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="../aws/lambda/nodejs" >}}
 {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
+{{< /appsec-integrations >}}
+
+### Google Cloud Platform
+{{< appsec-integrations >}}
+{{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="../gcp/cloud-run/nodejs" >}}
+{{< /appsec-integrations >}}
+
+### Microsoft Azure
+{{< appsec-integrations >}}
+{{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="/security/application_security/setup/azure/app-service/?tab=nodenetphppython" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources

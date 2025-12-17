@@ -1016,6 +1016,20 @@
       "description": "Update a log-based metric with include_percentiles field returns \"OK\" response"
     }
   ],
+  "CreateRestrictionQuery": [
+    {
+      "group": "logs_restriction_queries",
+      "suffix": "",
+      "description": "Create a restriction query returns \"OK\" response"
+    }
+  ],
+  "AddRoleToRestrictionQuery": [
+    {
+      "group": "logs_restriction_queries",
+      "suffix": "",
+      "description": "Grant role to a restriction query returns \"OK\" response"
+    }
+  ],
   "CreateBulkTagsMetricsConfiguration": [
     {
       "group": "metrics",
@@ -1223,6 +1237,13 @@
       "description": "Create On-Call schedule returns \"Created\" response"
     }
   ],
+  "CreateUserNotificationChannel": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification channel for a user returns \"Created\" response"
+    }
+  ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",
@@ -1420,6 +1441,18 @@
       "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
+  "AttachCase": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_897782765",
+      "description": "Attach security finding to a case returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Attach security findings to a case returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
@@ -1451,6 +1484,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2323193894",
+      "description": "Create a detection rule with detection method 'anomaly_detection' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1526,6 +1564,30 @@
       "group": "security_monitoring",
       "suffix": "_3192265332",
       "description": "Create a suppression rule with an exclusion query returns \"OK\" response"
+    }
+  ],
+  "CreateCases": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_2385516013",
+      "description": "Create case for security finding returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2798851680",
+      "description": "Create case for security findings returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create cases for security findings returns \"Created\" response"
+    }
+  ],
+  "DetachCase": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Detach security findings from their case returns \"No Content\" response"
     }
   ],
   "SearchSecurityMonitoringSignals": [
@@ -1629,6 +1691,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2609327779",
+      "description": "Validate a detection rule with detection method 'new_value' with enabled feature 'instantaneousBaseline' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1820,6 +1887,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
+    }
+  ],
+  "AddTeamHierarchyLink": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create a team hierarchy link returns \"OK\" response"
     }
   ],
   "CreateTeamLink": [

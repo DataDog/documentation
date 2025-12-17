@@ -3,6 +3,10 @@
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."
   },
+  "apm": {
+    "name": "APM",
+    "description": "Observe, troubleshoot, and improve cloud-scale applications with all telemetry in context"
+  },
   "apm-retention-filters": {
     "name": "APM Retention Filters",
     "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) on the Trace Retention page for more information."
@@ -314,10 +318,6 @@
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
-  },
-  "team-connections": {
-    "name": "Team Connections",
-    "description": "View and manage relationships between Datadog teams and teams from external sources, such as GitHub."
   },
   "teams": {
     "name": "Teams",
