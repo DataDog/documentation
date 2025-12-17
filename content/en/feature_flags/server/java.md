@@ -192,7 +192,7 @@ Use `setProviderAndWait()` to block evaluation until the initial flag configurat
 
 `ProviderNotReadyError` is an OpenFeature SDK exception thrown when the provider times out during initialization. Catching it allows the application to start with default flag values if Remote Configuration is unavailable. If not caught, the exception propagates and may prevent application startup. Handle this based on your availability requirements.
 
-### Asynchronous initialization
+### Non-blocking initialization
 
 For non-blocking initialization, use `setProvider()` and listen for provider events:
 

@@ -57,7 +57,7 @@ tracer.init({
 OpenFeature.setProvider(tracer.openfeature);
 ```
 
-### Accepting default values before initialization
+### Non-blocking initialization
 
 When you call `setProvider` without waiting, the client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
 
@@ -75,7 +75,7 @@ app.get('/my-endpoint', (req, res) => {
 });
 ```
 
-### Waiting for provider initialization
+### Blocking initialization
 
 Use `setProviderAndWait` to ensure the provider fully initializes before evaluating flags. This guarantees that flag evaluations use actual configuration data rather than defaults, at the cost of delaying requests during initialization.
 

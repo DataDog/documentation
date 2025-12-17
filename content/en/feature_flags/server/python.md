@@ -66,7 +66,7 @@ client = api.get_client()
 # Your application code here
 {{< /code-block >}}
 
-### Waiting for provider initialization
+### Blocking initialization
 
 By default, the provider initializes asynchronously and flag evaluations return default values until the first Remote Configuration payload is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
 

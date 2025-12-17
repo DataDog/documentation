@@ -60,7 +60,7 @@ end
 client = OpenFeature::SDK.build_client
 ```
 
-### Accepting default values before initialization
+### Non-blocking initialization
 
 The client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
 
