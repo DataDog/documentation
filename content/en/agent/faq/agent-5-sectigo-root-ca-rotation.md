@@ -1,5 +1,5 @@
 ---
-title: Agent v5 - Certificate Authority Update (2025)
+title: Agent v5 - Certificate Authority Update (2026)
 further_reading:
 - link: "/agent/guide/upgrade_agent_fleet_automation"
   tag: "Documentation"
