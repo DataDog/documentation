@@ -83,21 +83,37 @@ The panel to the left of the Scroll map provides high-level insights with direct
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-minimap.png" alt="A screenshot of the queries for scroll data insights" style="width:50%;">}}
 
-## Snapshots
+## Screenshots
 
-A snapshot is the state of a Session Replay at a particular point in time. Changing the snapshot shows different results, depending on the snapshot selected. You can use the **Change Snapshot** button to select a particular snapshot in a replay for your heatmap.
+A screenshot is the state of a view at a particular point in time. Changing the screenshot shows different results, depending on the screenshot selected. You can also save screenshots so that everyone in your organization is analyzing the same view state. 
 
-To select a background snapshot:
 
-1. From the heatmap view, click the **Change Snapshot** button.
+### Changing Screenshots
+From the heatmap view, click the **Change Screenshot** button. You may either choose from existing screenshots previously saved by teammates, or grab a screenshot from a Session replay. 
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-snapshot-button.png" alt="Click the Change Snapshot button to change the background snapshot the heatmap is based on." style="width:100%;">}}
+1. Click **Grab from  replay** if the desired heatmap screenshot has not been previously saved.
+
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-screenshot-button.png" alt="Click the Grab from replay button to change the screenshot the heatmap background is based on." style="width:100%;">}}
 1. Click an action event on the right to select a different snapshot for your heatmap.
 
    {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events.png" alt="List of action events for the session replay." style="width:100%;">}}
 
-1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired snapshot, you can return to the list of replays by clicking **Choose Another Replay**.
-1. Click the **Select Snapshot** button to apply the snapshot at the paused point to the heatmap.
+1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired screenshot, you can return to the list of replays by clicking **Choose Another Replay**.
+1. Click the **Take Screenshot** button to apply the screenshot at the paused point to the heatmap.
+
+### Saving screenshots
+
+You can save the current heatmap state as a screenshot so it's reused the next time anyone in your organization opens that heatmap. To save the current screenshot auto-picked from a recent replay, click **Save** on the current screenshot.
+
+You can save multiple screenshots for the same view (for example: default view, open navigation menu, open modal) and easily switch between screenshots saved by teammates.
+
+To remove the currently saved screenshot and revert to an auto-picked one from a recent replay, click **Unpin** on the current screenshot.
+
+### Changing screenshots
+
+To change the screenshot, click the **Change Screenshot** menu. You can either choose from existing screenshots previously saved by your teammates for this view, or you can grab a screenshot from a Session Replay.
+
+To select a screenshot from a Session Replay:
 
 ## Next steps
 
@@ -111,13 +127,13 @@ Heatmaps are based on RUM view names. Depending on how your RUM application is c
 
 ### The view that I selected is not showing the initial content.
 
-Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm picks a replay that is both recent and best matches the initial state of the page. In some cases, you might not be able to find the correct replay. To switch the snapshot of your heatmap, you can use the **Change Snapshot** button to navigate through the different states of a replay and find the one you are looking for. If the replay you're viewing does not have the snapshot you're looking for, you can use the **Choose Another Replay** button to select another replay of the same view.
+Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm picks a replay that is both recent and best matches the initial state of the page. In some cases, you might want to see the heatmap for a different view state. To switch the screenshot of your heatmap, you can use the **Change Screenshot** and then **Grab from replay** button to navigate through the different states of a replay and find the one you are looking for. If the replay you're viewing does not have the screenshot you're looking for, you can use the **Choose Another Replay** button to select another replay of the same view.
 
-{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-the-snapshot.mp4" alt="Select a different background by clicking the Change Snapshot button" video=true >}}
+
 
 ### On the action list on the side of my heatmap, I see an icon showing an element that is not visible in the heatmap.
 
-The tooltip on the icon says element is not visible. This means that the element is a common action on your page, but it's not displayed on the snapshot in the heatmap. To see that element, you can click **Change Snapshot** in the top right corner to switch the snapshot of your heatmap to one where that element is present.
+The tooltip on the icon says element is not visible. This means that the element is a common action on your page, but it's not displayed on the screenshot in the heatmap. To see that element, you can click **Change Screenshot** in the top right corner to switch the screenshot of your heatmap to one where that element is present.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-hidden-elements.png" alt="Hidden elements in the action list on a heatmap." style="width:100%;">}}
 
