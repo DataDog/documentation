@@ -51,6 +51,11 @@ After installation, the Agent automatically loads the Datadog .NET SDK into supp
 
 {{% tab "Host-wide (Preview)" %}}
 
+<div class="alert alert-note">
+Host-wide instrumentation on Windows is limited to Preview participants. The installation and configuration options described in this tab appear in the Datadog UI only after you're enrolled.
+</div>
+
+
 To instrument Java and .NET applications across your entire Windows host:
 
 1. In Datadog, go to [Install the Datadog Agent on Windows][1].
