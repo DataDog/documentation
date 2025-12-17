@@ -49,7 +49,7 @@ The following Linux distributions are supported for hosts and containers scans:
 
 ## Application libraries
 
-The following application languages and libraries are supported for vulnerability scans on containers and Lambda instances:
+The following application languages and libraries are supported for vulnerability scans on container images, Lambda functions, and containers running in hosts:
 
 | Language | Supported Package Manager | Supported Files                                                      |
 |----------|---------------------------|----------------------------------------------------------------------|
