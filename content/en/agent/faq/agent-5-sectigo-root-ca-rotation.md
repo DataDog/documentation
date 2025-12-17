@@ -52,7 +52,7 @@ See the [Agent upgrade documentation][1] for migration guidance.
 
 ## Alternative solution: Update certificates
 
-If you are unable to upgrade to an unaffected Agent version before April 20th, 2026, you can update the Agent v5 certificates without upgrading your Agent version using the automated scripts below.
+If you are unable to upgrade to an unaffected Agent version before April 20, 2026, you can update the Agent v5 certificates without upgrading your Agent version using the automated scripts below.
 
 ### Automated solution
 
