@@ -8,6 +8,9 @@ further_reading:
 - link: "/tracing/trace_collection/dd_libraries/ruby/"
   tag: "Documentation"
   text: "Ruby Tracing"
+- link: "/apm/"
+  tag: "Documentation"
+  text: "APM Setup"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
@@ -29,7 +32,7 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 
 ## Installing and initializing
 
-Feature Flagging is provided by APM. To integrate APM into your application with feature flagging support, install the required gems and configure remote configuration with OpenFeature support.
+Feature Flagging is provided by APM. To integrate APM into your application with feature flagging support, install the required gems and configure Remote Configuration with OpenFeature support.
 
 ```shell
 gem install ddtrace openfeature-sdk
@@ -55,7 +58,7 @@ end
 client = OpenFeature::SDK.build_client
 ```
 
-The client returns default values until remote configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
+The client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
 
 ## Set the evaluation context
 
@@ -120,7 +123,7 @@ end
 
 ### Number flags
 
-For numeric flags, use `fetch_integer_value()` or `fetch_float_value()`. Ruby also provides `fetch_number_value()` which returns the appropriate type based on the default value. These are appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
+For numeric flags, use `fetch_integer_value()` or `fetch_float_value()`. Ruby also provides `fetch_number_value()`, which returns the appropriate type based on the default value. These methods are appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
 
 ```ruby
 max_items = client.fetch_integer_value(
@@ -145,7 +148,7 @@ batch_size = client.fetch_number_value(
 
 ### Object flags
 
-For structured data, use `fetch_object_value()`. This method returns a hash. Object flags are useful for remote configuration scenarios where multiple properties need to be provided together.
+For structured data, use `fetch_object_value()`. This method returns a hash. Object flags are useful for Remote Configuration scenarios where multiple properties need to be provided together.
 
 ```ruby
 config = client.fetch_object_value(
@@ -199,18 +202,18 @@ end
 
 ## Troubleshooting
 
-### Feature flags surprisingly always return default values
+### Feature flags always return default values
 
-If feature flags always return default values:
+If feature flags unexpectedly always return default values, check the following:
 
-1. Verify Remote configuration is enabled in your Datadog Agent configuration
-2. Ensure service and environment are configured (either through `DD_SERVICE`/`DD_ENV` environment variables or `config.service`/`config.env` in Ruby)
-3. Check that `config.remote.enabled = true` and `config.open_feature.enabled = true` are set in your Ruby application's Datadog configuration
-4. Verify the datadog gem version includes OpenFeature support (2.23.0 or later)
+- Verify Remote Configuration is enabled in your Datadog Agent configuration
+- Ensure the service and environment are configured (either through `DD_SERVICE` and `DD_ENV` environment variables or `config.service` and `config.env` in Ruby)
+- Check that `config.remote.enabled = true` and `config.open_feature.enabled = true` are set in your Ruby application's Datadog configuration
+- Verify the `datadog` gem version includes OpenFeature support (2.23.0 or later)
 
-### Remote configuration connection issues
+### Remote Configuration connection issues
 
-Check the Datadog tracer logs for Remote configuration status:
+Check the Datadog tracer logs for Remote Configuration status:
 
 ```ruby
 # Enable startup and debug logging

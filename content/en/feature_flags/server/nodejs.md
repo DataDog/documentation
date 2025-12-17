@@ -23,7 +23,7 @@ This page describes how to instrument your Node.js application with the Datadog 
 
 ## Installing and initializing
 
-Feature Flagging is provided by APM. To integrate APM into your application with feature flagging support, install `dd-trace` and enable remote configuration with the `flaggingProvider` option as shown below. See documentation on `dd-trace` integration for detailed APM installation instructions.
+Feature Flagging is provided by APM. To integrate APM into your application with feature flagging support, install `dd-trace` and enable Remote Configuration with the `flaggingProvider` option as shown below. See documentation on `dd-trace` integration for detailed APM installation instructions.
 
 ```shell
 npm install dd-trace @openfeature/server-sdk
@@ -172,7 +172,7 @@ const priceMultiplier = client.getNumberValue(
 
 ### Object flags
 
-For structured JSON data, use `getObjectValue()`. This method returns an `object`, which can represent primitives, arrays, or dictionaries. Object flags are useful for remote configuration scenarios where multiple properties need to be provided together.
+For structured JSON data, use `getObjectValue()`. This method returns an `object`, which can represent primitives, arrays, or dictionaries. Object flags are useful for Remote Configuration scenarios where multiple properties need to be provided together.
 
 ```javascript
 OpenFeature.setContext({
