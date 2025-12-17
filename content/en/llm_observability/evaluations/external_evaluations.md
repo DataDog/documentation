@@ -29,7 +29,7 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
 
 <div class="alert alert-info">
 
-- Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
+Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
 
 </div>
 
