@@ -12,7 +12,8 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 - A [Datadog API key][2]
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]
 
-<div class="alert alert-info">If you are sending <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must add the <code>source:otel</code> tag to your evaluation.</div>
+To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation.
+</div>
 
 ## Setup
 
