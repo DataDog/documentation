@@ -4,7 +4,7 @@ title: Data Streams Monitoring for Kafka
 
 ### Prerequisites
 
-* [Datadog Agent v7.34.0 or later][1]
+-   [Datadog Agent v7.34.0 or later][1]
 
 <table>
   <thead>
@@ -23,15 +23,20 @@ title: Data Streams Monitoring for Kafka
       <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="recommended" >}}</td>
     </tr>
     <tr>
-      <td rowspan="2"><a href="/data_streams/go">Go</a></td>
+      <td rowspan="3"><a href="/data_streams/go">Go</a></td>
       <td><a href="https://github.com/confluentinc/confluent-kafka-go">confluent-kafka-go</a></td>
       <td>{{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="go" lib="confluent-kafka-go" type="recommended" >}}</td>
     </tr>
     <tr>
-      <td><a href="https://github.com/Shopify/sarama">Sarama</a></td>
+      <td><a href="https://github.com/IBM/sarama">Sarama</a></td>
       <td>{{< dsm-tracer-version lang="go" lib="sarama" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="go" lib="sarama" type="recommended" >}}</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/segmentio/kafka-go">kafka-go</a></td>
+      <td>{{< dsm-tracer-version lang="go" lib="kafka-go" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="go" lib="kafka-go" type="recommended" >}}</td>
     </tr>
     <tr>
       <td rowspan="2"><a href="/data_streams/nodejs">Node.js</a></td>
@@ -71,20 +76,20 @@ title: Data Streams Monitoring for Kafka
 
 <div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> is partially supported for Java, and can lead to latency measurements being missed.</div>
 
-
 ### Supported Kafka deployments
 
 Instrumenting your consumers and producers with Data Streams Monitoring allows you to view your topology and track your pipelines with [ready-to-go metrics][7] independently of how Kafka is deployed. Additionally, the following Kafka deployments have further integration support, providing more insights into the health of your Kafka cluster:
 
-|Model             |Integration                                 |
-|------------------|--------------------------------------------|
-|Self Hosted       |[Kafka Broker][8] & [Kafka Consumer][13]                           |
-|Confluent Platform|[Confluent Platform][11]                    |
-|Confluent Cloud   |[Confluent Cloud][12]                       |
-|Amazon MSK        |[Amazon MSK][10] or [Amazon MSK (Agent)][9] |
-|Red Panda         |Not yet integrated
+| Model              | Integration                                 |
+| ------------------ | ------------------------------------------- |
+| Self Hosted        | [Kafka Broker][8] & [Kafka Consumer][13]    |
+| Confluent Platform | [Confluent Platform][11]                    |
+| Confluent Cloud    | [Confluent Cloud][12]                       |
+| Amazon MSK         | [Amazon MSK][10] or [Amazon MSK (Agent)][9] |
+| Red Panda          | Not yet integrated                          |
 
 ### Setting up Data Streams Monitoring
+
 See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5], [.NET][6] or [Ruby][14].
 
 {{% data_streams/monitoring-kafka-pipelines %}}
