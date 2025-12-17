@@ -10236,6 +10236,10 @@ components:
           description: Whether the policy is pinned
           example: false
           type: boolean
+        policyType:
+          description: The type of the policy
+          example: policy
+          type: string
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -10414,11 +10418,11 @@ components:
     CloudWorkloadSecurityAgentPolicyVersion:
       description: The versions of the policy
       properties:
-        Date:
+        date:
           description: The date and time the version was created
           nullable: true
           type: string
-        Name:
+        name:
           description: The version of the policy
           example: 1.47.0-rc2
           type: string
@@ -10445,8 +10449,11 @@ components:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
-      additionalProperties: {}
-      description: An empty object indicating the hash action
+      description: Hash file specified by the field attribute
+      properties:
+        field:
+          description: The field of the hash action
+          type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
       description: The metadata action applied on the scope matching the rule
@@ -10494,9 +10501,14 @@ components:
           format: int64
           type: integer
         value:
-          description: The value of the set action
-          type: string
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSetValue'
       type: object
+    CloudWorkloadSecurityAgentRuleActionSetValue:
+      description: The value of the set action
+      oneOf:
+      - type: string
+      - type: integer
+      - type: boolean
     CloudWorkloadSecurityAgentRuleActions:
       description: The array of actions the rule can perform if triggered
       items:
@@ -51582,6 +51594,49 @@ components:
             $ref: '#/components/schemas/ServiceDefinitionData'
           type: array
       type: object
+    ServiceList:
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceListData'
+      type: object
+    ServiceListData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceListDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceListDataType'
+      required:
+      - type
+      type: object
+    ServiceListDataAttributes:
+      properties:
+        metadata:
+          items:
+            $ref: '#/components/schemas/ServiceListDataAttributesMetadataItems'
+          type: array
+        services:
+          items:
+            type: string
+          type: array
+      type: object
+    ServiceListDataAttributesMetadataItems:
+      properties:
+        isTraced:
+          type: boolean
+        isUsm:
+          type: boolean
+      type: object
+    ServiceListDataType:
+      default: services_list
+      description: Services list resource type.
+      enum:
+      - services_list
+      example: services_list
+      type: string
+      x-enum-varnames:
+      - SERVICES_LIST
     ServiceNowBasicAuth:
       description: The definition of the `ServiceNowBasicAuth` object.
       properties:
@@ -61915,6 +61970,27 @@ paths:
         permissions:
         - apm_retention_filter_write
         - apm_pipelines_write
+  /api/v2/apm/services:
+    get:
+      operationId: GetServiceList
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
+      summary: Get service list
+      tags:
+      - APM
+      x-menu-order: 1
   /api/v2/app-builder/apps:
     delete:
       description: Delete multiple apps in a single request from a list of app IDs.
@@ -89917,6 +89993,9 @@ servers:
 tags:
 - description: Configure your API endpoints through the Datadog API.
   name: API Management
+- description: Observe, troubleshoot, and improve cloud-scale applications with all
+    telemetry in context
+  name: APM
 - description: Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters)
     for your organization. You need an API and application key with Admin rights to
     interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters)
