@@ -25,7 +25,7 @@ This page describes how to instrument your Node.js application with the Datadog 
 
 In addition to the [common server-side prerequisites][2], ensure you have:
 
-- **Datadog Node.js tracer** `dd-trace` version 5.x or later
+- **Datadog Node.js tracer** `dd-trace` version 5.72.0 or later
 - **OpenFeature Server SDK** `@openfeature/server-sdk`
 
 ## Installing and initializing
