@@ -8,6 +8,52 @@
         {{ partial "img.html" (dict "root" . "src" "sad_bits.png" "class" "img-fluid ms-auto" "alt" "sad") }}
       </div>
       <div class="col-xs-12 col-sm-8">
+        {{ if eq site.Language.Lang "studio" }}
+            <h1 class="text-primary">Arf.</h1>
+            <h4 class="mt-0">It seems we can't find what you're looking for on the Studio docs site.</h4>
+
+            <!-- Offer an EN fallback if the same path exists outside /studio/ -->
+            <div id="en-fallback" class="mt-3" style="display:none;">
+              <p class="mt-2 font-semibold">This page may exist in the regular docs:</p>
+              <p class="mb-0"><a id="en-fallback-link" href="#" rel="nofollow">Go to the regular docs version</a></p>
+            </div>
+
+            <script>
+              (function () {
+                // Only relevant for /studio/* paths
+                var path = window.location.pathname || "";
+                if (!path.startsWith("/studio/")) return;
+
+                // Map "/studio/..." -> "/..."
+                var enPath = path.replace(/^\/studio\//, "/");
+                var enUrl = window.location.origin + enPath + window.location.search + window.location.hash;
+
+                // Some servers don't reliably support HEAD, so try HEAD then GET
+                function check(url, method) {
+                  return fetch(url, { method: method, redirect: "follow", credentials: "same-origin" })
+                    .then(function (res) {
+                      if (res && res.ok) return true;
+                      return false;
+                    })
+                    .catch(function () { return false; });
+                }
+
+                Promise.resolve()
+                  .then(function () { return check(enUrl, "HEAD"); })
+                  .then(function (ok) { return ok ? true : check(enUrl, "GET"); })
+                  .then(function (ok) {
+                    if (!ok) return;
+
+                    var container = document.getElementById("en-fallback");
+                    var link = document.getElementById("en-fallback-link");
+                    if (!container || !link) return;
+
+                    link.href = enUrl;
+                    container.style.display = "";
+                  });
+              })();
+            </script>
+        {{ else }}
         <h1 class="text-primary">Arf.</h1>
         <h4 class="mt-0">It seems we can't find what you're looking for.</h4>
         <h5 class="my-4 text-primary">Error 404</h5>
@@ -20,6 +66,7 @@
             <li class="small"><a href="https://www.datadoghq.com/blog/">Blog</a></li>
           </ul>
         </div>
+        {{ end }}
       </div>
     </div>
   </div>

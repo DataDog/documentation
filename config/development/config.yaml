@@ -8,3 +8,13 @@ disableLanguages:
   - ja
   - ko
   - es
+
+server:
+  redirects:
+    - from: /studio/**
+      to: /studio/404.html
+      status: 404
+    # default
+    - from: /**
+      to: /404.html
+      status: 404
