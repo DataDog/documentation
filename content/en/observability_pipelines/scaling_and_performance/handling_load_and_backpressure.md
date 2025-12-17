@@ -46,7 +46,7 @@ Observability Pipelines destinations can be configured with disk buffers (in Pre
 
 ### Kubernetes persistent volumes
 
-If you enable disk buffering for destinations, you can use Kubernetes [persistence volume][1] to handle back pressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending.
+If you enable disk buffering for destinations, you can enable Kubernetes [persistent volumes][1] in the Observability Pipelines helm chart to handle back pressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending.
 
 ## Further reading
 
