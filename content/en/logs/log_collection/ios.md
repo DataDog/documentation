@@ -102,7 +102,7 @@ configuration.service = @"<service name>";
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+[DDLogs enableWith:[[DDLogsConfiguration alloc] init]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -138,7 +138,7 @@ configuration.site = [DDSite eu1];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+[DDLogs enableWith:[[DDLogsConfiguration alloc] init]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -176,7 +176,7 @@ configuration.site = [DDSite us3];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+[DDLogs enableWith:[[DDLogsConfiguration alloc] init]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -214,7 +214,7 @@ configuration.site = [DDSite us5];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+[DDLogs enableWith:[[DDLogsConfiguration alloc] init]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -252,7 +252,7 @@ configuration.site = [DDSite us1_fed];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+[DDLogs enableWith:[[DDLogsConfiguration alloc] init]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -290,7 +290,7 @@ configuration.site = [DDSite ap1];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+[DDLogs enableWith:[[DDLogsConfiguration alloc] init]];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -328,7 +328,7 @@ configuration.site = [DDSite ap2];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+[DDLogs enableWith:[[DDLogsConfiguration alloc] init]];
 ```
 {{% /tab %}}
 {{< /tabs >}}

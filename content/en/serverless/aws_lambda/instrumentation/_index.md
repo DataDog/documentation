@@ -29,9 +29,9 @@ The quick start process configures your Lambda functions on the fly. To instrume
 
 ## Instrumentation instructions
 
-For Node.js and Python runtimes, you can use [remote instrumentation][5] to add instrumentation to your AWS Lambda functions and keep them instrumented securely. See [Remote instrumentation for AWS Lambda][5].
+You can use [remote instrumentation][5] to add instrumentation to your AWS Lambda functions and keep them instrumented securely. See [Remote instrumentation for AWS Lambda][5].
 
-For other Lambda runtimes (or to instrument your Node.js or Python functions without remote instrumentation) see detailed instrumentation instructions:
+To instrument your functions without remote instrumentation, see detailed instrumentation instructions:
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 

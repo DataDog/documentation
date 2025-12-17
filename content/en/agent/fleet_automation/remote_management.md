@@ -13,13 +13,13 @@ further_reading:
 ## Overview
 
 Remote Agent management with Fleet Automation simplifies how you deploy and upgrade your Datadog Agents. Instead of relying on external deployment or configuration tools, you can perform these actions directly from the Datadog platform. With Fleet Automation, you can:
-1. [Upgrade your Agent](#upgrade-agents-remotely)  
-1. [Configure your Agent](#configure-agents)
+1. [Upgrade your Agent](#upgrade-agents)  
+1. [Configure your Agent](#configure-datadog-agents)
 
 
 ## Getting started 
 ### Prerequisites
-1. Verify that Remote Configuration is enabled for your organization.
+1. Verify that [Remote Configuration][15] is enabled for your organization.
 1. Confirm that your Agent version is 7.73 or later.
 
 ### Supported platforms
@@ -42,7 +42,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 
 {{% collapse-content title=" How to upgrade Agents remotely" level="h4" expanded=false id="id-for-anchoring" %}}
 
-1. From the **Upgrade Agents** tab, click **Upgrade Now**.
+1. From the **[Upgrade Agents][4]** tab, click **Upgrade Now**.
 
    {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="UI showing the Upgrade Agents tab with the ‘Upgrade Now’ button." style="width:100%;" >}}
 1. **Select the Agents you want to upgrade**. You can target a group of Agents by filtering on host information or tags.
@@ -58,7 +58,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="How to schedule Agent upgrades" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="How to schedule Agent upgrades (in Preview)" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. From the [**Upgrade Agents** tab][4], click **+ Create Schedule**.
 
@@ -129,7 +129,7 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 
    {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
 
-1. **Review and name** your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
+1. **Review** your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
 1. **Scope Agents** to deploy configuration to (for example, through tags such as host names, site, or environment).
 1. **Review the deployment plan** to confirm scoped Agents and deployment settings, such as rollout concurrency.
 1. **Start deployment** and track progress from the Deployments page.
@@ -159,7 +159,9 @@ In the following example, the `logs_enabled` field is changed from `false` to `t
 
 ### Configuration precedence
 
-The latest configuration is applied if another tool is also used to configure the Datadog Agent. If the latest change is made from another tool aside from Fleet Automation, the change takes effect.
+Configuration changes deployed through Fleet Automation are appended to the Datadog Agent's local configuration. If a conflict occurs at the configuration-field level, Fleet Automation overrides the local value. In short, the most recent configuration change, whether applied by Fleet Automation, configuration management tools, or directly on the host, becomes the Agent's active configuration.
+
+You can use [Fleet Automation Audit Trail][18] to gain visibility into recent configuration changes to your Agents and to set up alerts on those changes.
 
 ### Mirrors and proxies
 
@@ -210,3 +212,4 @@ If you don't upgrade an earlier Agent version to 7.66 or higher, there is no imp
 [15]: /agent/guide/setup_remote_config
 [16]: https://app.datadoghq.com/fleet/agent-management
 [17]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#configuration-order-precedence
+[18]: /agent/fleet_automation#view-agent-audit-trail-events

@@ -69,6 +69,7 @@ The following profiling features are available in the following minimum versions
 | [Trace to Profiling integration][12]         | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+ (and 3.19.0+ for outgoing HTTP requests longer than 50 ms in beta and thread start/end events)     | All supported runtime versions (except .NET 5+ required for garbage collection details and .NET 7+ required for outgoing HTTP requests). |
+| Memory Leak investigation | 3.33.0+      | .NET 6+ (in preview)  |
 
 - Allocations and Lock Contention profiling for .NET Framework requires that the Datadog Agent and the profiled applications are running on the same machine.
 - Due to a limitation of the .NET Framework, Allocations profiling does not show the size of the allocations. Instead, it only shows the count.
@@ -470,6 +471,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables Live Heap profiling (in Preview). Defaults to `false`.  |
 | `DD_PROFILING_GC_ENABLED` | Boolean        | If set to `false`, disables Garbage Collection profiling used in Timeline user interface. Defaults to `true`.  |
 | `DD_PROFILING_HTTP_ENABLED` | Boolean        | If set to `true`, enables outgoing HTTP request profiling used in Timeline user interface. Defaults to `false`.  |
+| `DD_PROFILING_HEAPSNAPSHOT_ENABLED` | Boolean        | If set to `true`, enables the regular generation of a heap snapshot in case of memory consumption increase. This is used in the Memory Leak user interface. Defaults to `false`.  |
 
 
 <div class="alert alert-danger">
