@@ -13,15 +13,12 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 <div class="alert alert-danger">Only enter the identifiers for the Amazon OpenSearch endpoint URL, and if applicable, username and password. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your Amazon OpenSearch endpoint URL.
-    - If left blank, the default is used: `DESTINATION_AMAZON_OPENSEARCH_ENDPOINT_URL`.
+1. Enter the identifier for your Amazon OpenSearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 1. (Optional) Enter the name of the Amazon OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 1. Select an authentication strategy, **Basic** or **AWS**. If you selected:
 	- **Basic**:
-		- Enter the identifier for your Amazon OpenSearch username.
-			- If left blank, the default is used: `DESTINATION_AMAZON_OPENSEARCH_USERNAME`.
-		- Enter the identifier for your Amazon OpenSearch password.
-			- If left blank, the default is used: `DESTINATION_AMAZON_OPENSEARCH_PASSWORD`.
+		- Enter the identifier for your Amazon OpenSearch username. If you leave it blank, the [default](#set-secrets) is used.
+		- Enter the identifier for your Amazon OpenSearch password. If you leave it blank, the [default](#set-secrets) is used.
 	- **AWS**:
 		1. Enter the AWS region.
 		1. (Optional) Select an AWS authentication option. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
@@ -33,9 +30,30 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Amazon OpenSearch endpoint URL:
+	- The default identifier is `DESTINATION_AMAZON_OPENSEARCH_ENDPOINT_URL`.
+- Amazon OpenSearch authentication username:
+	- The default identifier is `DESTINATION_AMAZON_OPENSEARCH_USERNAME`.
+- Amazon OpenSearch authentication password:
+	- The default identifier is `DESTINATION_AMAZON_OPENSEARCH_PASSWORD`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 
