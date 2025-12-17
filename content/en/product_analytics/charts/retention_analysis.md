@@ -27,7 +27,7 @@ For user retention data to populate, you must set the `usr.id` attribute in your
 ## Measuring retention events
 Product analytics support two types of retention event measurements:
 
-{{< img src="product_analytics/chart_basics/pana_chart_basics_new.png" alt="The two types of retention measurements available with product analytics" style="width:100%;" >}}
+{{< img src="product_analytics/retention/pana_retention_measureby.png" alt="The two types of retention measurements available with product analytics" style="width:80%;" >}}
 
 
 ### Return on
