@@ -2008,6 +2008,24 @@
     "request_description": "",
     "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
   },
+  "ListUserNotificationChannels": {
+    "description": "List the notification channels for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification channels for a user"
+  },
+  "CreateUserNotificationChannel": {
+    "description": "Create a new notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification channel for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification channel for a user"
+  },
+  "DeleteUserNotificationChannel": {
+    "description": "Delete a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification channel for a user"
+  },
+  "GetUserNotificationChannel": {
+    "description": "Get a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification channel for a user"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
