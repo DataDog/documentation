@@ -17,6 +17,8 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 
 After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your VM instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted. No confidential or private personal information is ever transmitted outside of your infrastructure.
 
+If you have [Cloud Security Evaluation Filters][15] configured, Agentless Scanning respects these filters and only scans resources that match the configured criteria.
+
 The following diagram illustrates how Agentless Scanning works:
 
 {{< img src="/security/agentless_scanning/how_agentless_works.png" alt="Diagram showing how Agentless scanning works" width="90%" >}}
@@ -32,6 +34,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 **Notes**:
 - The scanner operates as a separate VM instance within your infrastructure, ensuring minimal impact on existing systems and resources.
+- For AWS, scanner instances automatically scale based on workload. When there are no resources to scan, scanners scale to zero to minimize cloud provider costs.
 - The scanner securely collects a list of packages from your hosts without transmitting any confidential or private personal information outside your infrastructure.
 - The scanner limits its use of the cloud provider API to prevent reaching any rate limit, and uses exponential backoff if needed.
 
@@ -118,3 +121,4 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 [11]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#recommended-configuration
 [14]: /api/latest/security-monitoring/#trigger-an-on-demand-agentless-scan
+[15]: /security/cloud_security_management/guide/resource_evaluation_filters
