@@ -105,9 +105,13 @@ From the heatmap view, click the **Change Screenshot** button. You may either ch
 
 You can save the current heatmap state as a screenshot so it's reused the next time anyone in your organization opens that heatmap. To save the current screenshot auto-picked from a recent replay, click **Save** on the current screenshot.
 
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-save-screenshot-1.png" alt="Click Save to apply the auto-picked screenshot." style="width:100%;">}}
+
 You can save multiple screenshots for the same view (for example: default view, open navigation menu, open modal) and easily switch between screenshots saved by teammates.
 
 To remove the currently saved screenshot and revert to an auto-picked one from a recent replay, click **Unpin** on the current screenshot.
+
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-unpin-screenshot-1.png" alt="Click unpin to remove the currently pinned screenshot." style="width:100%;">}}
 
 ### Changing screenshots
 
@@ -128,8 +132,6 @@ Heatmaps are based on RUM view names. Depending on how your RUM application is c
 ### The view that I selected is not showing the initial content.
 
 Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm picks a replay that is both recent and best matches the initial state of the page. In some cases, you might want to see the heatmap for a different view state. To switch the screenshot of your heatmap, you can use the **Change Screenshot** and then **Grab from replay** button to navigate through the different states of a replay and find the one you are looking for. If the replay you're viewing does not have the screenshot you're looking for, you can use the **Choose Another Replay** button to select another replay of the same view.
-
-
 
 ### On the action list on the side of my heatmap, I see an icon showing an element that is not visible in the heatmap.
 
