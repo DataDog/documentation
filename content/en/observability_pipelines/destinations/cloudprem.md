@@ -27,7 +27,21 @@ Optionally, toggle the switch to enable **Buffering Options** (Preview).<br>**No
 
 {{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The CloudPrem destination settings" style="width:35%;" >}}
 
-### Set the environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- CloudPrem endpoint URL identifier:
+	- The default identifier is `DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="The install page showing the CloudPrem environment variable field" style="width:75%;" >}}
 
@@ -35,6 +49,9 @@ Optionally, toggle the switch to enable **Buffering Options** (Preview).<br>**No
 	- Observability Pipelines sends logs to the CloudPrem intake endpoint. Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
 	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
   - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

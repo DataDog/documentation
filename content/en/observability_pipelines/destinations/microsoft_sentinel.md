@@ -62,10 +62,8 @@ To set up the Microsoft Sentinel destination in Observability Pipelines:
 
 <div class="alert alert-danger">Only enter the identifiers for the Microsoft Sentinel client secret and Data Collection Endpoint. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your Microsoft Sentinel client secret.
-	- If left blank, the default is used: `DESTINATION_MICROSOFT_SENTINEL_CLIENT_SECRET`.
-1. Enter the identifier for your Microsoft Sentinel Data Collection endpoint.
-	- If left blank, the default is used: `DESTINATION_MICROSOFT_SENTINEL_DCE_URI`.
+1. Enter the identifier for your Microsoft Sentinel client secret. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your Microsoft Sentinel Data Collection endpoint. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the client ID for your application, such as `550e8400-e29b-41d4-a716-446655440000`.
 1. Enter the directory ID for your tenant, such as `72f988bf-86f1-41af-91ab-2d7cd011db47`. This is the Azure AD tenant ID.
 1. Enter the full table name to which you are sending logs. An example table name: `Custom-MyOPWLogs_CL`.
@@ -76,9 +74,28 @@ To set up the Microsoft Sentinel destination in Observability Pipelines:
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Microsoft Sentinel client secret identifier:
+	- The default identifier is `DESTINATION_MICROSOFT_SENTINEL_CLIENT_SECRET`.
+- Microsoft Sentinel Data Collection endpoint identifier:
+	- The default identifier is `DESTINATION_MICROSOFT_SENTINEL_DCE_URI`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

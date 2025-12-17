@@ -13,12 +13,9 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 <div class="alert alert-danger">Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your OpenSearch endpoint URL.
-    - If left blank, the default is used: `DESTINATION_OPENSEARCH_ENDPOINT_URL`.
-1. Enter the identifier for your OpenSearch username.
-    - If left blank, the default is used: `DESTINATION_OPENSEARCH_USERNAME`.
-1. Enter the identifier for your OpenSearch password.
-    - If left blank, the default is used: `DESTINATION_OPENSEARCH_PASSWORD`.
+1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#set-secrets) is used.
 1. (Optional) Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 1. (Optional) Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
 	- If left disabled, the maximum size for buffering is 500 events.
@@ -26,9 +23,30 @@ Set up the OpenSearch destination and its environment variables when you [set up
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- OpenSearch endpoint URL identifier:
+	- The default identifier is `DESTINATION_OPENSEARCH_ENDPOINT_URL`.
+- OpenSearch authentication username identifier:
+	- The default identifier is `DESTINATION_OPENSEARCH_USERNAME`.
+- OpenSearch authentication password identifier:
+	- The default identifier is `DESTINATION_OPENSEARCH_PASSWORD`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

@@ -40,9 +40,23 @@ Set up the Google Cloud Storage destination and its environment variables when y
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+No default secret identifiers are required for this destination.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

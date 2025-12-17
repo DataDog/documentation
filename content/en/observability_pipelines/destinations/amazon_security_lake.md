@@ -38,11 +38,10 @@ Select an [AWS authentication][5] option.
 Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.
 
 **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][4] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your Amazon Security Lake key pass.
+- Enter the identifier for your Amazon Security Lake key pass. If you leave it blank, the [default](#set-secrets) is used.
     - **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
-    - If left blank, the default is used: `DESTINATION_AWS_SECURITY_LAKE_KEY_PASS`.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
+- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
+- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 
 ##### Buffering options
@@ -53,9 +52,26 @@ Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering option
     1. Select the buffer type you want to set (**Memory** or **Disk**).
     1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Amazon Security Lake TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_AWS_SECURITY_LAKE_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

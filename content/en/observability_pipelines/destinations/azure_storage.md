@@ -17,9 +17,8 @@ You need to have Datadog's [Azure integration][3] installed to set up Datadog Lo
 
 Set up the Azure Storage destination and its environment variables when you [set up an Archive Logs pipeline][4]. The information below is configured in the pipelines UI.
 
-1. Enter the identifier for your Azure connection string.
+1. Enter the identifier for your Azure connection string. If you leave it blank, the [default](#set-secrets) is used.
     - **Note**: Only enter the identifier for the connection string. Do **not** enter the actual connection string.
-    - If left blank, the default is used: `DESTINATION_DATADOG_ARCHIVES_AZURE_BLOB_CONNECTION_STRING`.
 1. Enter the name of the Azure container you created earlier.
 
 ### Optional settings
@@ -40,9 +39,26 @@ Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering option
 	1. Select the buffer type you want to set (**Memory** or **Disk**).
 	1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Azure connection string identifier:
+	- The default identifier is `DESTINATION_DATADOG_ARCHIVES_AZURE_BLOB_CONNECTION_STRING`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

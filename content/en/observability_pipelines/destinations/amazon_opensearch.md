@@ -39,11 +39,11 @@ The following are the defaults used for secret identifiers and environment varia
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- Amazon OpenSearch endpoint URL:
+- Amazon OpenSearch endpoint URL identifier:
 	- The default identifier is `DESTINATION_AMAZON_OPENSEARCH_ENDPOINT_URL`.
-- Amazon OpenSearch authentication username:
+- Amazon OpenSearch authentication username identifier:
 	- The default identifier is `DESTINATION_AMAZON_OPENSEARCH_USERNAME`.
-- Amazon OpenSearch authentication password:
+- Amazon OpenSearch authentication password identifier:
 	- The default identifier is `DESTINATION_AMAZON_OPENSEARCH_PASSWORD`.
 
 {{% /tab %}}

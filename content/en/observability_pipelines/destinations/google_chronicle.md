@@ -14,9 +14,8 @@ Set up the Google Chronicle destination and its environment variables when you [
 
 To set up the Worker's Google Chronicle destination:
 
-1. Enter the identifier for your Google Chronicle endpoint URL.
+1. Enter the identifier for your Google Chronicle endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 	- **Note**: Only enter the identifier for the endpoint URL. Do **not** enter the actual URL.
-	- If left blank, the default is used: `DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.
 1. Enter the customer ID for your Google Chronicle instance.
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
     - If you're using [workload identity][6] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
@@ -31,9 +30,26 @@ To set up the Worker's Google Chronicle destination:
 
 **Note**: Logs sent to the Google Chronicle destination must have ingestion labels. For example, if the logs are from a A10 load balancer, it must have the ingestion label `A10_LOAD_BALANCER`. See Google Cloud's [Support log types with a default parser][5] for a list of available log types and their respective ingestion labels.
 
-### Set the environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Google Chronicle endpoint URL identifier:
+	- The default identifier is `DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### How the destination works
 

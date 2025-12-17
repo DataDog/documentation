@@ -94,8 +94,8 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 #### Optional settings
 
 - Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
-	- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-	- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
+	- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
+	- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
 	- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 - Toggle the switch to enable **Buffering Options** (Preview).<br>**Note**: Contact your account manager to request access to the Preview.
 	- If disabled (default): Up to 500 events are buffered before flush.
@@ -108,13 +108,32 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 {{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
-### Set environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Google Pub/Sub endpoint URL identifier (optional):
+	- The default identifier is `DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
+- Google Pub/Sub TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_GCP_PUBSUB_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 #### Optional alternative Pub/Sub endpoints
 
 {{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="The install page showing the Google Pub/Sub environment variable field" style="width:70%;" >}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 

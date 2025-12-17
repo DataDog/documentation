@@ -11,10 +11,9 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 ### Set up the destination
 
-<div class="alert alert-danger">Only enter the identifier for the Sumo Logic endpoint URL. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifier for the Sumo Logic endpoint URL. Do <b>not</b> enter the actual value.</div>
 
-- Enter the identifier for your endpoint URL.
-	- If left blank, the default is used: `DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 
 #### Optional settings
 
@@ -29,9 +28,26 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Sumo Logic HTTP Collector URL identifier:
+	- The default identifier is `DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

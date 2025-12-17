@@ -35,8 +35,8 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 ##### Enable TLS
 
 Toggle the switch to enable **TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
+- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
+- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 
 ##### Enable SASL authentication
@@ -78,11 +78,35 @@ Click **Advanced** if you want to set any of the following fields:
     1. Check your values against the [librdkafka documentation][7] to make sure they have the correct type and are within the set range.
     1. Click **Add Option** to add another librdkafka option.
 
-### Set environment variables
+### Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Kafka bootstrap servers identifier:
+	- The default identifier is `DESTINATION_KAFKA_BOOTSTRAP_SERVERS`.
+- Kafka TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_KAFKA_KEY_PASS`.
+- If you are using SASL authentication:
+	- Kafka SASL username identifier:
+		- The default identifier is `DESTINATION_KAFKA_SASL_USERNAME`.
+	- Kafka SASL password identifier:
+		- The default identifier is `DESTINATION_KAFKA_SASL_PASSWORD`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{< img src="observability_pipelines/destinations/kafka_env_var.png" alt="The install page showing the Kafka environment variable field" style="width:70%;" >}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/kafka %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## librdkafka options
 
