@@ -22,7 +22,7 @@ The Java SDK integrates feature flags directly into the Datadog APM tracer and i
 
 <div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java tracer and Remote Configuration enabled, skip to <a href="#initialize-the-openfeature-provider">Initialize the OpenFeature provider</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
 
-## Compatibility requirements
+## Prerequisites
 
 The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
@@ -303,6 +303,19 @@ if (config.isStructure()) {
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+### Evaluation without context
+
+You can evaluate flags without providing an evaluation context. This is useful for global flags that don't require user-specific targeting:
+
+{{< code-block lang="java" >}}
+// Global feature flag - no context needed
+boolean maintenanceMode = client.getBooleanValue("maintenance-mode", false);
+
+if (maintenanceMode) {
+    return ResponseEntity.status(503).body("Service temporarily unavailable");
+}
+{{< /code-block >}}
 
 ## Error handling
 

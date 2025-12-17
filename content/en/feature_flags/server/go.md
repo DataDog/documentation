@@ -265,6 +265,46 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+### Evaluation without context
+
+You can evaluate flags without providing an evaluation context. This is useful for global flags that don't require user-specific targeting:
+
+{{< code-block lang="go" >}}
+// Global feature flag - no context needed
+maintenanceMode, err := client.BooleanValue(ctx, "maintenance-mode", false, openfeature.EvaluationContext{})
+if err != nil {
+    log.Printf("Error evaluating flag: %v", err)
+}
+
+if maintenanceMode {
+    http.Error(w, "Service temporarily unavailable", http.StatusServiceUnavailable)
+    return
+}
+{{< /code-block >}}
+
+## Troubleshooting
+
+### Provider not ready
+
+**Problem**: Flag evaluations return default values unexpectedly
+
+**Solutions**:
+1. Ensure `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set
+2. Verify the Datadog Agent has Remote Configuration enabled
+3. Use `SetProviderAndWait` to block until configuration is received
+4. Check that `DD_SERVICE` and `DD_ENV` environment variables are set
+
+### Remote Configuration not working
+
+**Problem**: Flags aren't updating when changed in the Datadog UI
+
+**Solutions**:
+1. Verify the Datadog Agent is version 7.55 or later
+2. Check that Remote Configuration is enabled on the Agent
+3. Ensure the tracer can communicate with the Agent
+4. Verify flags are published (not drafts) in the Datadog UI
+5. Confirm service and environment tags match between your app and flag targeting
+
 [1]: https://openfeature.dev/
 [2]: /feature_flags/server/
 
