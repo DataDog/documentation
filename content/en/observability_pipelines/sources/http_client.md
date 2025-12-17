@@ -15,26 +15,25 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 To configure your HTTP/S Client source:
 
-1. Enter the identifier for your HTTP Client endpoint URL.
-    - **Note**: Only enter the identifier for the endpoint URL. Do **not** enter the actual endpoint URL.
-    - If left blank, the default is used: `SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
+
+<div class="alert alert-danger">Only enter the identifiers for the HTTP Client endpoint URL and if applicable, your authorization strategy secrets. Do <b>not</b> enter the actual values.</div>
+
+1. Enter the identifier for your HTTP Client endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+
 1. Select your authorization strategy. If you selected:
    - **Basic**:
-      - Enter the identifier for your HTTP Client username.
-         - If left blank, the default is used: `SOURCE_HTTP_CLIENT_USERNAME`.
-      Enter the identifier for your HTTP Client password.
-         - If left blank, the default is used: `SOURCE_HTTP_CLIENT_PASSWORD`.
-   - **Bearer**: Enter the identifier for your bearer token.
-      - If left blank, the default is used: `SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
+      - Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#set-secrets) is used.
+      - Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#set-secrets) is used.
+   - **Bearer**: Enter the identifier for your bearer token. If you leave it blank, the [default](#set-secrets) is used.
 1. Select the decoder you want to use on the HTTP messages. Logs pulled from the HTTP source must be in this format.
 
 ### Optional settings
 
 #### Enable TLS
+
 Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-   - Enter the identifier for your HTTP Client key pass.
+   - Enter the identifier for your HTTP Client key pass. If you leave it blank, the [default](#set-secrets) is used.
          - **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
-         - If left blank, the default is used: `SOURCE_HTTP_CLIENT_KEY_PASS`
    - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509) format.
    - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509) format.
    - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
@@ -46,9 +45,36 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
    - Since requests run concurrently, if a scrape takes longer than the interval given, a new scrape is started, which can consume extra resources. Set the timeout to a value lower than the scrape interval to prevent this from happening.
 - Enter the timeout for each scrape request.
 
-## Set the environment variables
+## Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- HTTP Client endpoint URL identifier:
+	- The default identifier is `SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
+- HTTP Client TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `SOURCE_HTTP_CLIENT_KEY_PASS`.
+- If you are using basic authentication:
+	- HTTP Client username identifier:
+		- The default identifier is `SOURCE_HTTP_CLIENT_USERNAME`.
+	- HTTP Client password identifier:
+		- The default identifier is `SOURCE_HTTP_CLIENT_PASSWORD`.
+- If you are using bearer authentication:
+	- HTTP Client bearer token identifier:
+		- The default identifier is `SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

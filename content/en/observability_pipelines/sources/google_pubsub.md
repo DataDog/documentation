@@ -24,9 +24,23 @@ Select and set up this source when you [set up a pipeline][1]. The information b
     - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
     - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
 
-## Set the environment variables
+## Set secrets
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+No default secret identifiers are required for this source.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/google_pubsub %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity

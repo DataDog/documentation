@@ -13,23 +13,40 @@ Use Observability Pipelines' Splunk Heavy and Universal Forwards (TCP) source to
 
 Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
 
-- Enter the identifier for your Splunk TCP address.
-    - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
-    - If left blank, the default is used: `SOURCE_SPLUNK_TCP_ADDRESS`.
+<div class="alert alert-danger">Only enter the identifiers for the Splunk TCP address, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+- Enter the identifier for your Splunk TCP address. If you leave it blank, the [default](#set-secrets) is used.
 
 ### Optional settings
 
 Click the toggle to **Enable TLS**. If you enable TLS, the following certificate and key files are required:
-- Enter the identifier for your Splunk TCP key pass.
-    - **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
-    - If left blank, the default is used: `SOURCE_SPLUNK_TCP_KEY_PASS`.
+- Enter the identifier for your Splunk TCP key pass. If you leave it blank, the [default](#set-secrets) is used.
 - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in either DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 
-## Set the environment variables
+## Set secrets
+
+The following are the defaults used for secret identifiers and environment variables.
+
+**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Splunk TCP address identifier:
+	- The default identifier is `SOURCE_SPLUNK_TCP_ADDRESS`.
+- Splunk TCP TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `SOURCE_SPLUNK_TCP_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_tcp %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% observability_pipelines/log_source_configuration/splunk_tcp %}}
 
