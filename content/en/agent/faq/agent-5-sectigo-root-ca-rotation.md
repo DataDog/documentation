@@ -35,7 +35,7 @@ You are **not** affected if:
 ## Timeline
 
 - **December 1st, 2025 - April 19th, 2026**: Grace period for you to take action
-- **April 20th, 2026**: New certificates deployed - affected unpatched Agents will lose connectivity
+- **April 20, 2026**: New certificates deployed - affected unpatched Agents will lose connectivity
 
 ## Recommended solution: Upgrade your Agent
 
