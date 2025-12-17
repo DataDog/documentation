@@ -76,7 +76,7 @@ context = OpenFeature::SDK::EvaluationContext.new(
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
-## Evaluating flags
+## Evaluate flags
 
 After creating the `OpenFeature` client, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
 

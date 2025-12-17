@@ -44,7 +44,7 @@ tracer.init({
 OpenFeature.setProvider(tracer.openfeature);
 ```
 
-### Accepting default variant until initialization is complete
+### Accepting default values before initialization
 
 When you call `setProvider` without waiting, the client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
 
@@ -62,7 +62,7 @@ app.get('/my-endpoint', (req, res) => {
 });
 ```
 
-### Waiting for initialization before evaluating a flag
+### Waiting for provider initialization
 
 Use `setProviderAndWait` to ensure the provider fully initializes before evaluating flags. This guarantees that flag evaluations use actual configuration data rather than defaults, at the cost of delaying requests during initialization.
 
@@ -89,11 +89,11 @@ app.get('/my-endpoint', async (req, res) => {
 
 ## Set the evaluation context
 
-Define who or what the flag evaluation applies to using an `EvaluationContext`. The evaluation context can include user or session information used to determine which flag variations should be returned. Call `OpenFeature.setContext` method before evaluating flags to ensure proper targeting.
+Define who or what the flag evaluation applies to using an `EvaluationContext`. The evaluation context can include user or session information used to determine which flag variations should be returned. Call the `OpenFeature.setContext` method before evaluating flags to ensure proper targeting.
 
-## Evaluating flags
+## Evaluate flags
 
-After creating the `OpenFeature` client as described in the previous section, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
+After creating the `OpenFeature` client as described in the [Installing and initializing](#installing-and-initializing) section, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
 
 Each flag is identified by a _key_ (a unique string) and can be evaluated with a _typed getter_ that returns a value of the expected type. If the flag doesn't exist or cannot be evaluated, the SDK returns the provided default value.
 
