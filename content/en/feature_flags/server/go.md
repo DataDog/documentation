@@ -58,7 +58,7 @@ Start the Datadog tracer and register the Datadog OpenFeature provider. The trac
 
 ### Blocking initialization
 
-Use `SetProviderAndWait` to block until the initial flag configuration is received. This ensures flags are ready before your application starts handling requests.
+Use `SetProviderAndWait` to block evaluation until the initial flag configuration is received. This ensures flags are ready before your application starts handling requests.
 
 {{< code-block lang="go" >}}
 package main
