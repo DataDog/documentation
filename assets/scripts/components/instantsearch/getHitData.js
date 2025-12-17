@@ -5,7 +5,6 @@ export function getHitData(hit, searchQuery = '') {
     const title = hit.title ? hit.title : hit.type;
     const cleanRelPermalink =
         hit.language == 'en' ? hit.relpermalink : hit.relpermalink.replace(`/${hit.language}/`, '');
-
     const matchingWordsArray = getFilteredMatchingWords(searchQuery).map((word) => replaceSpecialCharacters(word));
     const joinedMatchingWordsFromSearch = matchingWordsArray.join('|');
     const regexQry = new RegExp(`(${joinedMatchingWordsFromSearch})`, 'gi');
