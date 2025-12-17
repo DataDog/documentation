@@ -215,24 +215,6 @@ When your application exits, shut down the OpenFeature API to clean up resources
 api.shutdown()
 {{< /code-block >}}
 
-## Troubleshooting
-
-### Provider not enabled
-
-If you receive warnings about the provider not being enabled, ensure `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your environment:
-
-{{< code-block lang="bash" >}}
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
-
-### Remote Configuration not working
-
-Verify the following to ensure that Remote Configuration is working:
-- Datadog Agent is version 7.55 or later
-- Remote Configuration is enabled on the Agent
-- `DD_SERVICE` and `DD_ENV` environment variables are set
-- The tracer can communicate with the Agent
-
 [1]: https://openfeature.dev/
 [2]: /feature_flags/server/
 

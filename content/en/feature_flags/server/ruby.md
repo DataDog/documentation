@@ -119,7 +119,7 @@ else
 end
 ```
 
-### Number flags
+### Numeric flags
 
 For numeric flags, use `fetch_integer_value()` or `fetch_float_value()`. Ruby also provides `fetch_number_value()`, which returns the appropriate type based on the default value. These methods are appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
 
@@ -182,7 +182,7 @@ puts "Error Message: #{details.error_message}"
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
-## Evaluation without context
+### Evaluation without context
 
 You can evaluate flags without providing an evaluation context. This is useful for global flags that don't require user-specific targeting:
 
@@ -197,36 +197,6 @@ if maintenance_mode
   halt 503, { error: 'Service temporarily unavailable' }.to_json
 end
 ```
-
-## Troubleshooting
-
-### Feature flags always return default values
-
-If feature flags unexpectedly always return default values, check the following:
-
-- Verify Remote Configuration is enabled in your Datadog Agent configuration
-- Ensure the service and environment are configured (either through `DD_SERVICE` and `DD_ENV` environment variables or `config.service` and `config.env` in Ruby)
-- Check that `config.remote.enabled = true` and `config.open_feature.enabled = true` are set in your Ruby application's Datadog configuration
-- Verify the `datadog` gem version includes OpenFeature support (2.23.0 or later)
-
-### Remote Configuration connection issues
-
-Check the Datadog tracer logs for Remote Configuration status:
-
-```ruby
-# Enable startup and debug logging
-Datadog.configure do |config|
-  config.diagnostics.startup_logs.enabled = true
-  config.diagnostics.debug = true
-  config.remote.enabled = true
-  config.open_feature.enabled = true
-end
-```
-
-Look for messages about:
-- Remote Configuration worker starting
-- Feature flags configuration being received
-- OpenFeature component initialization
 
 ## Further reading
 
