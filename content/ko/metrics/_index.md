@@ -18,7 +18,7 @@ title: 메트릭
   커스텀 메트릭에 대한 파운데이션 활성화 세션을 살펴보고 등록하세요. 커스텀 알고리즘에 대한 방문자 수, 평균 고객 장바구니 크기, 요청 지연 시간 또는 성능 분포 같은 애플리케이션 KPI를 추적하는 방법을 알아보세요.
 {{< /learning-center-callout >}}
 
-이 섹션에서는 Datadog 메트릭에 대한 소개 및 메트릭이 유용한 이유에 대해 설명합니다. 구체적으로 다음 주제가 포함되어 있습니다: 
+이 섹션에서는 Datadog 메트릭에 대한 소개 및 메트릭이 유용한 이유에 대해 설명합니다. 구체적으로 다음 주제가 포함되어 있습니다:
 
 {{< whatsnext desc="Submit metrics to Datadog" >}}
     {{< nextlink href="/metrics/custom_metrics">}}<u>커스텀 메트릭 제출</u> - 커스텀 메트릭의 정의와 제출 방법에 관해 알아보세요.{{< /nextlink >}}
@@ -36,7 +36,7 @@ title: 메트릭
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Understand and manage your custom metrics volumes and costs" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}<u>Metrics without LimitsTM</u> - Metrics without LimitsTM을 사용하여 태그 구성으로 커스텀 메트릭 볼륨을 제어하는 방법을 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/">}}<u>Metrics without LimitsTM</u> - Metrics without LimitsTM을 사용하여 태그 구성으로 커스텀 메트릭 볼륨을 제어하는 방법을 알아보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 개요
@@ -113,7 +113,7 @@ Datadog의 [메트릭 탐색기][3], [대시보드][4] 또는 [노트북][5]를 
 
 {{< img src="metrics/introduction/timeseries_example.png" alt="여러 급등 지점과 함께 단일 파란 선으로 표시된 지연 메트릭 시계열 그래프" >}}
 
-이 선 그래프는 사용자가 경험한 지연(밀리초 단위) Y축과 시간 X축을 보여줍니다. 
+이 선 그래프는 사용자가 경험한 지연(밀리초 단위) Y축과 시간 X축을 보여줍니다.
 
 #### 추가 시각화
 
@@ -186,7 +186,7 @@ UI에서 또는 [API][27]을 통해 중첩된 쿼리를 사용하여 시간과 �
 
 ### 메트릭에 대한 실시간 정보 보기
 
-[메트릭 요약 페이지][20]는 지정된 시간(지난 시간, 지난일, 지난주)에 Datadog에 보고된 메트릭 목록을 표시합니다. 메트릭은 메트릭 이름이나 태그로 필터링할 수 있습니다. 
+[메트릭 요약 페이지][20]는 지정된 시간(지난 시간, 지난일, 지난주)에 Datadog에 보고된 메트릭 목록을 표시합니다. 메트릭은 메트릭 이름이나 태그로 필터링할 수 있습니다.
 
 아무 메트릭 이름을 클릭하여 더 자세한 정보를 담은 상세 정보 사이드 패널을 표시합니다. 사이드 패널에 표시되는 상세 정보는 특정 메트릭에 대한 핵심 정보로 메타데이터(유형, 단위, 간격), 메트릭 개수, 보고 호스트 개수, 제출된 태그 개수, 메트릭에 제출된 모든 태그를 포함하는 표를 포함합니다. 메트릭에 제출된 태그를 확인하면 태그 설정으로 보고된 메트릭 수를 이해하는 데 도움이 됩니다. 이 수는 태그 값 조합에 따라 달라집니다.
 
