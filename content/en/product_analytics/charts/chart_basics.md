@@ -5,14 +5,17 @@ further_reading:
     - link: '/product_analytics/'
       tag: Documentation
       text: Product Analytics
-    - link: 'real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session'
+    - link: '/dashboards/configure/'
       tag: Documentation
-      text: Set user sessions
+      text: Configure Dashboards
+    - link: '/product_analytics/charts#deciding-which-chart-to-use'
+      tag: Documentation
+      text: Decide which chart to use
 ---
 
 ## Overview
 
-Charts help you turn user data into actionable insights by visualizing trends, funnels, and key product metrics. Use charts to answer common product questions, such as how users move through a funnel, how engagement changes over time, or how adoption varies across segments. 
+Charts help you turn user data into actionable insights by visualizing trends, funnels, and key product metrics. Use charts to answer common product questions, such as how users move through a funnel, how engagement changes over time, and how adoption varies across segments. 
 
 This page introduces the core charting capabilities available across Product Analytics, including:
 
@@ -30,7 +33,7 @@ To create a chart, click **New Chart** on the [Chart List page][1] and select th
 
 
 ## Save a chart 
-Save charts to track key product metrics over time and return to analyses as your data evolves. For example, you can use a saved chart to follow weekly conversion rates or feature adoption.
+Save charts to track key product metrics over time and return to your analyses as the data evolves. For example, you can use a saved chart to follow weekly conversion rates or feature adoption.
 
 Use the pencil icon to **edit** the name of the chart. Then, click on **Save** at the top-right corner to save the chart. You can view your saved chart on the [Chart List page][1].
 
@@ -49,7 +52,7 @@ To share a link to a chart, click on the **Share** button to copy the link to yo
 
 
 ## Start from a template 
-Start from a template to explore user behavior and product performance using prebuilt chart configurations. For example, you can understand users' average time to convert, or see their conversion breakdown by country with a few clicks. 
+Start from a template to explore user behavior and product performance using pre-built chart configurations. For example, you can understand users' average time to convert, or see their conversion breakdown by country with a few clicks. 
 
 To see the available templates, click on **Explore all templates** on the [Chart List page][1]. Hover over your choice and click **Create Chart** to edit and save your chart.
 
