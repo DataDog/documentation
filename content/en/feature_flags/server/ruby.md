@@ -5,12 +5,12 @@ further_reading:
 - link: "/feature_flags/server/"
   tag: "Documentation"
   text: "Server-Side Feature Flags"
-- link: "/tracing/trace_collection/dd_libraries/ruby/"
+- link: "/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/"
   tag: "Documentation"
   text: "Ruby Tracing"
-- link: "/apm/"
+- link: "/tracing/"
   tag: "Documentation"
-  text: "APM Setup"
+  text: "Learn about Application Performance Monitoring (APM)"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
@@ -32,7 +32,7 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 
 ## Installing and initializing
 
-Feature Flagging is provided by APM. To integrate APM into your application with feature flagging support, install the required gems and configure Remote Configuration with OpenFeature support.
+Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install the required gems and configure Remote Configuration with OpenFeature support.
 
 ```shell
 gem install ddtrace openfeature-sdk

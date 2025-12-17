@@ -8,9 +8,9 @@ further_reading:
 - link: "/tracing/trace_collection/dd_libraries/nodejs/"
   tag: "Documentation"
   text: "Node.js Tracing"
-- link: "/apm/"
+- link: "/tracing/"
   tag: "Documentation"
-  text: "APM Setup"
+  text: "Learn about Application Performance Monitoring (APM)"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
@@ -23,7 +23,7 @@ This page describes how to instrument your Node.js application with the Datadog 
 
 ## Installing and initializing
 
-Feature Flagging is provided by APM. To integrate APM into your application with feature flagging support, install `dd-trace` and enable Remote Configuration with the `flaggingProvider` option as shown below. See documentation on `dd-trace` integration for detailed APM installation instructions.
+Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and enable Remote Configuration with the `flaggingProvider` option as shown below. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
 
 ```shell
 npm install dd-trace @openfeature/server-sdk
@@ -212,3 +212,5 @@ console.log(details.flagMetadata); // Additional information about the evaluatio
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
