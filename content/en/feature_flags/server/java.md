@@ -20,7 +20,7 @@ This page describes how to instrument a Java application with the Datadog Featur
 
 The Java SDK integrates feature flags directly into the Datadog APM tracer and implements the [OpenFeature](https://openfeature.dev/) standard for maximum flexibility and compatibility.
 
-<div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java tracer and Remote Configuration enabled, skip to <a href="#initialize-the-openfeature-provider">Initialize the OpenFeature provider</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
+<div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java tracer and Remote Configuration enabled, skip to <a href="#initialize-the-sdk">Initialize the SDK</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
 
 ## Prerequisites
 
@@ -150,7 +150,7 @@ For instructions on how to add the `-javaagent` argument to your application ser
 [1]: /feature_flags/server/#application-configuration
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-tracer-to-the-jvm
 
-## Initialize the OpenFeature provider
+## Initialize the SDK
 
 Initialize the Datadog OpenFeature provider in your application startup code. The provider connects to the feature flagging system running in the Datadog tracer.
 

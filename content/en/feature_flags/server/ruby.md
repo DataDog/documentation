@@ -28,13 +28,17 @@ In addition to the [common server-side prerequisites][2], ensure you have:
 - **Datadog Ruby tracer** `datadog` version 2.23.0 or later
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.4.1 or later
 
-## Installing and initializing
+## Installation
 
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install the required gems and configure Remote Configuration with OpenFeature support.
+Install the Datadog tracer and OpenFeature SDK:
 
 ```shell
 gem install ddtrace openfeature-sdk
 ```
+
+## Initialize the SDK
+
+Configure Datadog with feature flagging enabled, then register it as the OpenFeature provider:
 
 ```ruby
 require 'datadog'
@@ -55,6 +59,8 @@ end
 # Create OpenFeature client
 client = OpenFeature::SDK.build_client
 ```
+
+### Accepting default values before initialization
 
 The client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
 

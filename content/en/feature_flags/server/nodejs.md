@@ -28,13 +28,19 @@ In addition to the [common server-side prerequisites][2], ensure you have:
 - **Datadog Node.js tracer** `dd-trace` version 5.72.0 or later
 - **OpenFeature Server SDK** `@openfeature/server-sdk`
 
-## Installing and initializing
+## Installation
 
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and enable Remote Configuration with the `flaggingProvider` option as shown below. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
+Install the Datadog tracer and OpenFeature SDK:
 
 ```shell
 npm install dd-trace @openfeature/server-sdk
 ```
+
+See [Tracing Node.js Applications][1] for detailed APM installation instructions.
+
+## Initialize the SDK
+
+Initialize the Datadog tracer with the `flaggingProvider` option enabled, then register it as the OpenFeature provider:
 
 ```javascript
 import { OpenFeature } from '@openfeature/server-sdk'
@@ -100,7 +106,7 @@ Define who or what the flag evaluation applies to using an `EvaluationContext`. 
 
 ## Evaluate flags
 
-After creating the `OpenFeature` client as described in the [Installing and initializing](#installing-and-initializing) section, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
+After creating the `OpenFeature` client as described in the [Initialize the SDK](#initialize-the-sdk) section, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
 
 Each flag is identified by a _key_ (a unique string) and can be evaluated with a _typed getter_ that returns a value of the expected type. If the flag doesn't exist or cannot be evaluated, the SDK returns the provided default value.
 

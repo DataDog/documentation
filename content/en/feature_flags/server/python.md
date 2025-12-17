@@ -66,6 +66,49 @@ client = api.get_client()
 # Your application code here
 {{< /code-block >}}
 
+### Waiting for provider initialization
+
+By default, the provider initializes asynchronously and flag evaluations return default values until the first Remote Configuration payload is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
+
+{{< code-block lang="python" >}}
+import threading
+from openfeature import api
+from openfeature.event import ProviderEvent
+from ddtrace.openfeature import DataDogProvider
+
+# Create an event to wait for readiness
+ready_event = threading.Event()
+
+def on_ready(event_details):
+    ready_event.set()
+
+# Register event handler
+api.add_handler(ProviderEvent.PROVIDER_READY, on_ready)
+
+# Set provider
+provider = DataDogProvider()
+api.set_provider(provider)
+
+# Wait for provider to be ready (with optional timeout)
+if ready_event.wait(timeout=30):
+    print("Provider is ready")
+else:
+    print("Provider initialization timed out")
+
+# Create client and evaluate flags
+client = api.get_client()
+{{< /code-block >}}
+
+<div class="alert alert-info">Waiting for provider initialization requires OpenFeature SDK 0.7.0 or later. Most applications don't need to wait for initialization, as flag evaluations work immediately with default values.</div>
+
+### Cleanup
+
+When your application exits, shut down the OpenFeature API to clean up resources:
+
+{{< code-block lang="python" >}}
+api.shutdown()
+{{< /code-block >}}
+
 ## Set the evaluation context
 
 Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
@@ -170,49 +213,6 @@ maintenance_mode = client.get_boolean_value("maintenance-mode", False)
 
 if maintenance_mode:
     return "Service temporarily unavailable"
-{{< /code-block >}}
-
-## Waiting for provider initialization
-
-By default, the provider initializes asynchronously and flag evaluations return default values until the first Remote Configuration payload is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
-
-{{< code-block lang="python" >}}
-import threading
-from openfeature import api
-from openfeature.event import ProviderEvent
-from ddtrace.openfeature import DataDogProvider
-
-# Create an event to wait for readiness
-ready_event = threading.Event()
-
-def on_ready(event_details):
-    ready_event.set()
-
-# Register event handler
-api.add_handler(ProviderEvent.PROVIDER_READY, on_ready)
-
-# Set provider
-provider = DataDogProvider()
-api.set_provider(provider)
-
-# Wait for provider to be ready (with optional timeout)
-if ready_event.wait(timeout=30):
-    print("Provider is ready")
-else:
-    print("Provider initialization timed out")
-
-# Create client and evaluate flags
-client = api.get_client()
-{{< /code-block >}}
-
-<div class="alert alert-info">Waiting for provider initialization requires OpenFeature SDK 0.7.0 or later. Most applications don't need to wait for initialization, as flag evaluations work immediately with default values.</div>
-
-## Cleanup
-
-When your application exits, shut down the OpenFeature API to clean up resources:
-
-{{< code-block lang="python" >}}
-api.shutdown()
 {{< /code-block >}}
 
 [1]: https://openfeature.dev/

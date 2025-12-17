@@ -138,15 +138,6 @@ func main() {
 }
 {{< /code-block >}}
 
-## Create a client
-
-Create an OpenFeature client to evaluate flags. You can create multiple clients with different names for different parts of your application:
-
-{{< code-block lang="go" >}}
-// Create a client for your application
-client := openfeature.NewClient("my-service")
-{{< /code-block >}}
-
 ## Set the evaluation context
 
 Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
