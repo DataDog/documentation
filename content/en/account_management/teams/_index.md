@@ -10,10 +10,6 @@ Use Teams to link resources such as dashboards, services, monitors, and incident
 
 Team membership is flexible. Users can join teams, be added by other members, or be added by an administrator. Users can belong to multiple teams.
 
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" header="Join the Preview!">}}
-  Github Integration for Teams is in Preview.
-{{< /callout >}}
-
 ## Setup
 
 ### Navigation
