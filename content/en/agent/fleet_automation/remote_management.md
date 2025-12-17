@@ -13,8 +13,8 @@ further_reading:
 ## Overview
 
 Remote Agent management with Fleet Automation simplifies how you deploy and upgrade your Datadog Agents. Instead of relying on external deployment or configuration tools, you can perform these actions directly from the Datadog platform. With Fleet Automation, you can:
-1. [Upgrade your Agent](#upgrade-agents-remotely)  
-1. [Configure your Agent](#configure-agents)
+1. [Upgrade your Agent](#upgrade-agents)  
+1. [Configure your Agent](#configure-datadog-agents)
 
 
 ## Getting started 
