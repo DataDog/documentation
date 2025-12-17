@@ -29,8 +29,7 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
 
 <div class="alert alert-info">
 
-- Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
-- External evaluations are supported for [OpenTelemetry spans][5], but require adding the <code>source:otel</code> tag to your evaluation.
+Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
 
 </div>
 
@@ -69,6 +68,8 @@ def llm_call():
 ## Submitting external evaluations with the API
 
 You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications.
+
+To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation.
 
 ### Example
 
