@@ -22,20 +22,14 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 
 ## Prerequisites
 
-Before setting up the Go Feature Flags SDK, ensure you have:
+In addition to the [common server-side prerequisites][2], ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog Go tracer** `dd-trace-go` version 2.4.0 or later
 
-Set the following environment variables:
+Set the following environment variable to enable feature flags:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Required: Service identification
-DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
 ## Installation
@@ -272,7 +266,7 @@ fmt.Printf("Error: %v\n", details.Error())
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
 [1]: https://openfeature.dev/
-[2]: /agent/remote_config/
+[2]: /feature_flags/server/
 
 ## Further reading
 

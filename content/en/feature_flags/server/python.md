@@ -22,21 +22,15 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 
 ## Prerequisites
 
-Before setting up the Python Feature Flags SDK, ensure you have:
+In addition to the [common server-side prerequisites][2], ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog Python tracer** `ddtrace` version 3.19.0 or later
 - **OpenFeature Python SDK** `openfeature-sdk` version 0.5.0 or later
 
-Set the following environment variables:
+Set the following environment variable to enable feature flags:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Required: Service identification
-export DD_SERVICE=<YOUR_SERVICE_NAME>
-export DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
 ## Installation
@@ -240,7 +234,7 @@ Verify the following to ensure that Remote Configuration is working:
 - The tracer can communicate with the Agent
 
 [1]: https://openfeature.dev/
-[2]: /agent/remote_config/
+[2]: /feature_flags/server/
 
 ## Further reading
 

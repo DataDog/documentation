@@ -23,12 +23,10 @@ This page describes how to instrument your Ruby application with the Datadog Fea
 
 ## Prerequisites
 
-Before setting up the Ruby Feature Flags SDK, ensure you have:
+In addition to the [common server-side prerequisites][2], ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][1] enabled
 - **Datadog Ruby tracer** `datadog` version 2.23.0 or later
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.4.1 or later
-- **Service and environment configured** - Feature flags are targeted by service and environment
 
 ## Installing and initializing
 
@@ -235,3 +233,4 @@ Look for messages about:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config/
+[2]: /feature_flags/server/
