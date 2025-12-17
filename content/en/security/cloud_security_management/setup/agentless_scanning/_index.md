@@ -120,5 +120,5 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 [10]: /remote_configuration
 [11]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#recommended-configuration
-[14]: /api/latest/security-monitoring/#trigger-an-on-demand-agentless-scan
+[14]: /api/latest/agentless-scanning/#create-aws-on-demand-task
 [15]: /security/cloud_security_management/guide/resource_evaluation_filters
