@@ -3,21 +3,29 @@
     <p class="text-uppercase">Language</p>
     <div class="dropdown bootstrap-dropdown-custom">
       <button class="btn d-flex align-items-center justify-content-between" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ .Language.LanguageName }} 
+        {{ if eq (.Language.LanguageName) "Studio" }}
+          English
+        {{ else }}
+          {{ .Language.LanguageName }}
+        {{ end }}
         <div class="chevron chevron-down"></div>
         <div class="chevron chevron-up d-none"></div>
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <!--  dropdown-item hrefs are updated asynchronously in async-loading.js -->
-        <a class="dropdown-item" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}" {{ if ne .Language.Lang "en" }} data-lang="{{ .Language.Lang }}"{{end}}>{{ .Language.LanguageName }}</a>
+        {{ if eq .Language.Lang "studio" }}
+          <a class="dropdown-item" href="{{ .Permalink }}">English</a>
+        {{ else }}
+          <!--  dropdown-item hrefs are updated asynchronously in async-loading.js -->
+          <a class="dropdown-item" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}" {{ if ne .Language.Lang "en" }} data-lang="{{ .Language.Lang }}"{{end}}>{{ .Language.LanguageName }}</a>
 
-        <!-- Manually adding English option to non-English sites -->
-        {{ if ne .Sites.Default .Site }}
-          <a class="dropdown-item" href="{{ replace .Permalink (printf "/%s/" .Language.Lang) "/" }}?lang_pref=en">English</a>
-        {{ end }}
+          <!-- Manually adding English option to non-English sites -->
+          {{ if ne .Sites.Default .Site }}
+            <a class="dropdown-item" href="{{ replace .Permalink (printf "/%s/" .Language.Lang) "/" }}?lang_pref=en">English</a>
+          {{ end }}
 
-        {{ range where .Translations "Language.Lang" "!=" "en" }}
-          <a class="dropdown-item" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}" data-lang="{{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+          {{ range where .Translations "Language.Lang" "!=" "en" }}
+            <a class="dropdown-item" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}" data-lang="{{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+          {{ end }}
         {{ end }}
       </div>
     </div>
