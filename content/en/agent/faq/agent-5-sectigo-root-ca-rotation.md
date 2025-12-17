@@ -12,7 +12,7 @@ On **April 20, 2026**, as a downstream effect of Sectigo's public root certifica
 
 ## What will happen
 
-Starting on **April 20th, 2026**, any host running an affected Agent v5 will be unable to:
+Starting on **April 20, 2026**, any host running an affected Agent v5 will be unable to:
 - Send metrics, logs, traces, and other monitoring data to Datadog
 - Maintain connectivity with Datadog intake endpoints
 
