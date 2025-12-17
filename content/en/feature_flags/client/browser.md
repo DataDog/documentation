@@ -61,13 +61,8 @@ import { OpenFeature } from '@openfeature/web-sdk'
 
 const provider = new DatadogProvider({
     clientToken: '<CLIENT_TOKEN>',
-    applicationId: '<APPLICATION_ID>',
     site: 'datadoghq.com',
     env: '<ENV_NAME>',
-    service: '<SERVICE_NAME>',
-    version: '<APP_VERSION>',
-    enableExposureLogging: true,
-    enableFlagEvaluationTracking: true,
 })
 
 await OpenFeature.setProvider(provider)
@@ -78,13 +73,8 @@ await OpenFeature.setProvider(provider)
 {{< code-block lang="javascript" >}}
 const provider = new window.DD_FLAGGING.Provider({
     clientToken: '<CLIENT_TOKEN>',
-    applicationId: '<APPLICATION_ID>',
     site: 'datadoghq.com',
     env: '<ENV_NAME>',
-    service: '<SERVICE_NAME>',
-    version: '<APP_VERSION>',
-    enableExposureLogging: true,
-    enableFlagEvaluationTracking: true,
 })
 
 await window.OpenFeature.setProvider(provider)
@@ -97,9 +87,9 @@ await window.OpenFeature.setProvider(provider)
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
 | `clientToken` | String | Yes | | Your Datadog client token. |
-| `applicationId` | String | Yes | | Your Datadog application ID for RUM attribution. |
 | `site` | String | Yes | | The Datadog site to send data to (for example, `datadoghq.com`, `datadoghq.eu`). |
-| `env` | String | No | | The environment name (for example, `production`, `staging`). |
+| `env` | String | Yes | | The environment name (for example, `production`, `staging`). |
+| `applicationId` | String | No | | Your Datadog application ID for RUM attribution. |
 | `service` | String | No | | The service name for your application. |
 | `version` | String | No | | The application version. |
 | `enableExposureLogging` | Boolean | No | `false` | When `true`, the SDK automatically records an exposure event when a flag is evaluated. |
@@ -208,6 +198,21 @@ The `DatadogProvider` constructor accepts additional configuration options:
 
 `enableFlagEvaluationTracking`
 : When `true` (default), flag evaluations are tracked in RUM, which enables correlating them with user sessions. This enables analytics such as _"Do users in variant B experience more errors?"_. If your app does not use RUM, this flag has no effect and can be safely left at its default value.
+
+## A/B experimentation
+
+To run A/B experiments and measure the impact of feature variations, enable exposure logging. This records an exposure event each time a flag is evaluated, capturing which flag was accessed, which variant was served, and under what context.
+
+{{< code-block lang="javascript" >}}
+const provider = new DatadogProvider({
+    clientToken: '<CLIENT_TOKEN>',
+    site: 'datadoghq.com',
+    env: '<ENV_NAME>',
+    enableExposureLogging: true,
+})
+{{< /code-block >}}
+
+Exposure events are sent to Datadog, enabling you to analyze feature adoption and experiment results.
 
 ## Further reading
 

@@ -291,6 +291,18 @@ Flags.enable(with: config)
 `customFlagsHeaders`
 : Sets additional HTTP headers to attach to requests made to `customFlagsEndpoint`. It can be useful for authentication or routing when using your own flags service.
 
+## A/B experimentation
+
+To run A/B experiments and measure the impact of feature variations, enable exposure tracking. This records an exposure event each time a flag is evaluated, capturing which flag was accessed, which variant was served, and under what context.
+
+{{< code-block lang="swift" >}}
+var config = Flags.Configuration()
+config.trackExposures = true
+Flags.enable(with: config)
+{{< /code-block >}}
+
+Exposure events are sent to Datadog, enabling you to analyze feature adoption and experiment results.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

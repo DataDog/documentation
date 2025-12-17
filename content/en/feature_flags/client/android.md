@@ -227,6 +227,20 @@ Flags.enable(config)
 `useCustomExposureEndpoint()`
 : Configures a custom server URL for sending flags exposure data.
 
+## A/B experimentation
+
+To run A/B experiments and measure the impact of feature variations, enable exposure tracking. This records an exposure event each time a flag is evaluated, capturing which flag was accessed, which variant was served, and under what context.
+
+{{< code-block lang="kotlin" >}}
+val config = FlagsConfiguration.Builder()
+    .trackExposures(true)
+    .build()
+
+Flags.enable(config)
+{{< /code-block >}}
+
+Exposure events are sent to Datadog, enabling you to analyze feature adoption and experiment results.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
