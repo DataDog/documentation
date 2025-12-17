@@ -29,13 +29,13 @@ Install the Datadog OpenFeature Browser provider and the OpenFeature Web SDK:
 {{< tabs >}}
 {{% tab "npm" %}}
 {{< code-block lang="bash" >}}
-npm install @datadog/openfeature-browser@preview @openfeature/web-sdk
+npm install @datadog/openfeature-browser @openfeature/web-sdk
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "yarn" %}}
 {{< code-block lang="bash" >}}
-yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk
+yarn add @datadog/openfeature-browser @openfeature/web-sdk
 {{< /code-block >}}
 {{% /tab %}}
 
