@@ -44,7 +44,6 @@ Additionally, you can click a column heading in the Explorer to sort by that col
 ### Get more context on an indicator of compromise
 
 Click an indicator of compromise to open a side panel that contains additional information about it:
-- When the indicator was first and last seen in a threat intel feed
 - When the indicator was first and last seen in a threat intelligence feed
   <div class="alert alert-info" style="margin-bottom: 0">This is distinct from the first or last time the indicator was seen in a log.</div>
 - Any categories and ratings assigned to it, and the sources associated with those ratings
