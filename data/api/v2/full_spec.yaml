@@ -87138,10 +87138,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Returns all team connections.
       operationId: ListTeamConnections
@@ -87222,10 +87218,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create multiple team connections.
       operationId: CreateTeamConnections
@@ -87263,10 +87255,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/sync:
     get:
       description: 'Get all team synchronization configurations.
@@ -87311,10 +87299,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: 'This endpoint attempts to link your existing Datadog teams with
         GitHub teams by matching their names.
@@ -87377,10 +87361,6 @@ paths:
         operator: AND
         permissions:
         - teams_manage
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{super_team_id}/member_teams:
     get:
       deprecated: true
