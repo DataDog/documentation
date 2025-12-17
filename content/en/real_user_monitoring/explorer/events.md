@@ -52,16 +52,29 @@ Click on events in the waterfall to access related data:
 
 Use the other tabs to explore related data:
 
-| Tab | Description |
-|-----|-------------|
-| Replay | Watch a visual replay of the user's session. |
-| Errors | View errors associated with the event. |
-| Resources | Inspect all resources loaded during the event. |
-| Traces | See backend traces connected to the event. |
-| Feature Flags | View feature flags evaluated during the event. |
-| Actions | Review user actions captured during the session. |
-| Logs | Access logs associated with the event. |
-| Attributes | View collected context attributes. Add custom attributes with the [Global Context API][2]. |
+Replay
+: Watch a visual replay of the user's session.
+
+Errors
+: View errors associated with the event.
+
+Resources
+: Inspect all resources loaded during the event.
+
+Traces
+: See backend traces connected to the event.
+
+Feature Flags
+: View feature flags evaluated during the event.
+
+Actions
+: Review user actions captured during the session.
+
+Logs
+: Access logs associated with the event.
+
+Attributes
+: View collected context attributes. Add custom attributes with the [Global Context API][2].
 
 ## Further reading
 
