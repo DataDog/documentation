@@ -240,6 +240,15 @@ Logs Agent
 
 If the Logs Agent Status doesn’t look like the above, refer to the troubleshooting tips in the following sections.
 
+Each individual log collector provides detailed information about how the Agent is collecting logs for a specific container. Using the Kubernetes example above, this output tells us:
+
+- **Collector name** (`default/my-deployment-55d847444b-2fkch/my-container`) identifies namespace, pod, and container.
+- **Identifier** (`ba778eaff...`) is the individual container ID being monitored.
+- **Path** and **Inputs** show the locations where the Agent searched for and identified the container's log files.
+- **Service** and **Source** summarize the tags used.
+
+In Docker the output is largely the same, just the individual log collector name is different.
+
 If you see the following message when you run the Agent status command:
 
 ```
@@ -261,15 +270,6 @@ Logs Agent
     LogsSent: 0
 ```
 This status means that logs are enabled but you haven’t specified which containers the Agent should collect from.
-
-Each individual log collector will provide you a lot of information. For example relative to that above sample from Kubernetes this is telling us:
-
-- The `default/my-deployment-55d847444b-2fkch/my-container`, is for the pod in the `default` namespace, pod named `my-deployment-55d847444b-2fkch`, with the container `my-container`. This is the individual log collector name.
-- The `Identifier: ba778eaff01fc3555b6ad4a809e78949065bd34ebe2c42522a1bdd1d3b684fb5`, is the individual container ID that the log collection is for
-- The `Path` and `Inputs` are the locations of where the Agent has searched for and identified the container logs
-- The `Service` and `Source` will tell you a quick view of the tags used
-
-In Docker the output is largely the same, just the individual log collector name is different.
 
 ### Agent configcheck
 
