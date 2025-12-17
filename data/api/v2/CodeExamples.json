@@ -1639,6 +1639,18 @@
       "description": "Run a threat hunting job returns \"Status created\" response"
     }
   ],
+  "SearchSecurityFindings": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Search security findings returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3678541639",
+      "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
   "TestSecurityMonitoringRule": [
     {
       "group": "security_monitoring",

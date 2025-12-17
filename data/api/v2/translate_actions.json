@@ -2631,6 +2631,10 @@
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
   },
+  "ListSecurityFindings": {
+    "description": "Get a list of security findings that match a search query.\n\nThis endpoint requires one of the following permissions:\n- `security_monitoring_findings_read`\n- `appsec_vm_read`\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the custom. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "summary": "List security findings"
+  },
   "DetachCase": {
     "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
     "summary": "Detach security findings from their case",
@@ -2660,6 +2664,12 @@
     "summary": "Create Jira issues for security findings",
     "request_description": "",
     "request_schema_description": "List of requests to create Jira issues for security findings."
+  },
+  "SearchSecurityFindings": {
+    "description": "Get a list of security findings that match a search query.\n\nThis endpoint requires one of the following permissions:\n- `security_monitoring_findings_read`\n- `appsec_vm_read`\n\n### Query Syntax\n\nThe API uses the logs query syntax. Findings attributes (living in the custom. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "summary": "Search security findings",
+    "request_description": "",
+    "request_schema_description": "The request body for searching security findings."
   },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",

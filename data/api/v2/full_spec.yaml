@@ -30939,6 +30939,19 @@ components:
           example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
           type: string
       type: object
+    ListSecurityFindingsResponse:
+      description: The expected response schema when listing security findings.
+      properties:
+        data:
+          description: Array of security findings matching the search query.
+          items:
+            $ref: '#/components/schemas/SecurityFindingsData'
+          type: array
+        links:
+          $ref: '#/components/schemas/SecurityFindingsLinks'
+        meta:
+          $ref: '#/components/schemas/SecurityFindingsMeta'
+      type: object
     ListTagsResponse:
       description: List tags response.
       properties:
@@ -47506,6 +47519,148 @@ components:
         meta:
           $ref: '#/components/schemas/SecurityFilterMeta'
       type: object
+    SecurityFindingsAttributes:
+      description: The JSON object containing all attributes of the security finding.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: The custom attributes of the security finding.
+          example:
+            severity: high
+            status: open
+          type: object
+        tags:
+          description: List of tags associated with the security finding.
+          example:
+          - team:platform
+          - env:prod
+          items:
+            type: string
+          type: array
+        timestamp:
+          description: The Unix timestamp at which the detection changed for the resource.
+            Same value as @detection_changed_at.
+          example: 1765901760
+          format: int64
+          type: integer
+      type: object
+    SecurityFindingsData:
+      description: A single security finding.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityFindingsAttributes'
+        id:
+          description: The unique ID of the security finding.
+          example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityFindingsDataType'
+      type: object
+    SecurityFindingsDataType:
+      default: finding
+      description: The type of the security finding resource.
+      enum:
+      - finding
+      example: finding
+      type: string
+      x-enum-varnames:
+      - FINDING
+    SecurityFindingsLinks:
+      description: Links for pagination.
+      properties:
+        next:
+          description: Link for the next page of results. Note that paginated requests
+            can also be made using the POST endpoint.
+          example: https://app.datadoghq.com/api/v2/security/findings?page[cursor]=eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==&page[limit]=25
+          type: string
+      type: object
+    SecurityFindingsMeta:
+      description: Metadata about the response.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 548
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/SecurityFindingsPage'
+        request_id:
+          description: The identifier of the request.
+          example: pddv1ChZwVlMxMUdYRFRMQ1lyb3B4MGNYbFlnIi0KHQu35LDbucx
+          type: string
+        status:
+          $ref: '#/components/schemas/SecurityFindingsStatus'
+      type: object
+    SecurityFindingsPage:
+      description: Pagination information.
+      properties:
+        after:
+          description: The cursor used to get the next page of results.
+          example: eyJhZnRlciI6IkFRQUFBWWJiaEJXQS1OY1dqUUFBQUFCQldXSmlhRUpYUVVGQlJFSktkbTlDTUdaWFRVbDNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0=
+          type: string
+      type: object
+    SecurityFindingsSearchRequest:
+      description: The request body for searching security findings.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestData'
+      type: object
+    SecurityFindingsSearchRequestData:
+      description: Request data for searching security findings.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestDataAttributes'
+      type: object
+    SecurityFindingsSearchRequestDataAttributes:
+      description: Request attributes for searching security findings.
+      properties:
+        filter:
+          default: '*'
+          description: The search query following log search syntax.
+          example: '@severity:(critical OR high) @status:open team:platform'
+          type: string
+        page:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestPage'
+        sort:
+          $ref: '#/components/schemas/SecurityFindingsSort'
+      type: object
+    SecurityFindingsSearchRequestPage:
+      description: Pagination attributes for the search request.
+      properties:
+        cursor:
+          description: Get the next page of results with a cursor provided in the
+            previous query.
+          example: eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==
+          type: string
+        limit:
+          default: 10
+          description: The maximum number of security findings in the response.
+          example: 25
+          format: int64
+          maximum: 150
+          minimum: 1
+          type: integer
+      type: object
+    SecurityFindingsSort:
+      default: -@detection_changed_at
+      description: The sort parameters when querying security findings.
+      enum:
+      - '@detection_changed_at'
+      - -@detection_changed_at
+      type: string
+      x-enum-varnames:
+      - DETECTION_CHANGED_AT_ASC
+      - DETECTION_CHANGED_AT_DESC
+    SecurityFindingsStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -58724,6 +58879,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            appsec_vm_read: View infrastructure, application code, and library vulnerability
+              findings.
             billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
@@ -81801,6 +81958,99 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_cws_agent_rules_read
+  /api/v2/security/findings:
+    get:
+      description: 'Get a list of security findings that match a search query.
+
+
+        This endpoint requires one of the following permissions:
+
+        - `security_monitoring_findings_read`
+
+        - `appsec_vm_read`
+
+
+        ### Query Syntax
+
+
+        This endpoint uses the logs query syntax. Findings attributes (living in the
+        custom. namespace) are prefixed by @ when queried. Tags are queried without
+        a prefix.
+
+
+        Example: `@severity:(critical OR high) @status:open team:platform`'
+      operationId: ListSecurityFindings
+      parameters:
+      - description: The search query following log search syntax.
+        example: '@severity:(critical OR high) @status:open team:platform'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          default: '*'
+          type: string
+      - description: Get the next page of results with a cursor provided in the previous
+          query.
+        example: eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of findings in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int64
+          maximum: 150
+          minimum: 1
+          type: integer
+      - description: Sorts by @detection_changed_at.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityFindingsSort'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityFindingsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      - AuthZ:
+        - appsec_vm_read
+      summary: List security findings
+      tags:
+      - Security Monitoring
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+        - appsec_vm_read
+      x-unstable: '**Note**: This endpoint is in beta and subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/findings/cases:
     delete:
       description: 'Detach security findings from their case.
@@ -82025,6 +82275,71 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and is subject to change.
 
         Please check the documentation regularly for updates.'
+  /api/v2/security/findings/search:
+    post:
+      description: 'Get a list of security findings that match a search query.
+
+
+        This endpoint requires one of the following permissions:
+
+        - `security_monitoring_findings_read`
+
+        - `appsec_vm_read`
+
+
+        ### Query Syntax
+
+
+        The API uses the logs query syntax. Findings attributes (living in the custom.
+        namespace) are prefixed by @ when queried. Tags are queried without a prefix.
+
+
+        Example: `@severity:(critical OR high) @status:open team:platform`'
+      operationId: SearchSecurityFindings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityFindingsSearchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityFindingsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      - AuthZ:
+        - appsec_vm_read
+      summary: Search security findings
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-pagination:
+        cursorParam: body.data.attributes.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.data.attributes.page.limit
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+        - appsec_vm_read
+      x-unstable: '**Note**: This endpoint is in beta and subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/sboms:
     get:
       description: 'Get a list of assets SBOMs for an organization.
