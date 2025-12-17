@@ -9,9 +9,9 @@ export function getHitData(hit, searchQuery = '') {
     const matchingWordsArray = getFilteredMatchingWords(searchQuery).map((word) => replaceSpecialCharacters(word));
     const joinedMatchingWordsFromSearch = matchingWordsArray.join('|');
     const regexQry = new RegExp(`(${joinedMatchingWordsFromSearch})`, 'gi');
-    const highlightTitle = hit._highlightResult.title.value || title;
-    const highlightContent = hit._highlightResult.content.value || '';
-    const highlightSectionHeader = hit._highlightResult.section_header?.value || '';
+    const highlightTitle = hit._highlightResult?.title?.value || title;
+    const highlightContent = hit._highlightResult?.content?.value || '';
+    const highlightSectionHeader = hit._highlightResult?.section_header?.value || '';
 
     return {
         relpermalink: cleanRelPermalink,
