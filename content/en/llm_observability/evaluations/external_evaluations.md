@@ -62,8 +62,8 @@ def llm_call():
         value=my_harmfulness_eval(completion),
         tags={"type": "custom"},
         timestamp_ms=1765990800016, # optional, unix timestamp in milliseconds
-        assessment="pass", # optional, `pass` or `fail`
-        reasoning="it makes sense", # optional, judgle llm reasoning
+        assessment="pass", # optional, "pass" or "fail"
+        reasoning="it makes sense", # optional, judge llm reasoning
     )
 {{< /code-block >}}
 
