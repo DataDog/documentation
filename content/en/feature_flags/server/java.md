@@ -14,8 +14,6 @@ further_reading:
 Feature Flags are in Preview. Complete the form to request access.
 {{< /callout >}}
 
-<div class="alert alert-warning">Java Feature Flags support is experimental and requires enabling an experimental flag in the tracer. See the <a href="#configuration">Configuration section</a> for details.</div>
-
 ## Overview
 
 This page describes how to instrument a Java application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
