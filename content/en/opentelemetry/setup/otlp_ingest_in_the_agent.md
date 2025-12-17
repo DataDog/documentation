@@ -40,7 +40,7 @@ Read the OpenTelemetry instrumentation documentation to understand how to point 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-OTLP ingestion is off by default, and you can turn it on by updating your `datadog.yaml` file configuration or by setting environment variables. The following `datadog.yaml` configurations enable endpoints on the default ports. When enabled, metrics and traces ingestion is on by default. Logs ingestion is disabled by default to prevent unexpected billing.
+OTLP ingestion is off by default, and you can turn it on by updating your `datadog.yaml` file configuration or by setting environment variables. The following `datadog.yaml` configurations enable endpoints on the default ports. When enabled, metrics and traces ingestion is on by default. Logs ingestion is disabled by default to prevent unexpected logs billing.
 
 {{% otel-endpoint-note %}}
 
