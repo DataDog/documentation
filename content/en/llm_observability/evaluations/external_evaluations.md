@@ -69,7 +69,7 @@ def llm_call():
 
 You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications.
 
-<div class="alert alert-info">Submitting evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the evaluations API requires adding the <code>source:otel</code> tag to your evaluation.</div>
+To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation.
 
 ### Example
 
