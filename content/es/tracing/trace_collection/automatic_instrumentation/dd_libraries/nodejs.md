@@ -172,7 +172,7 @@ esbuild.build({
     // required if you use Datadog security features
     '@datadog/native-appsec',
     '@datadog/native-iast-taint-tracking',
-    '@datadog/native-iast-rewriter',
+    '@datadog/wasm-js-rewriter',
 
     // required if you encounter graphql errors during the build step
     'graphql/language/visitor',
