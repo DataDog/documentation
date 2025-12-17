@@ -36,15 +36,15 @@ further_reading:
 The Datadog Docker Agent is a version of the [Datadog Agent][1] that supports Docker, containerd, and Podman runtimes. For supported Docker versions, see [Supported Platforms][2].
 
 ## Install the Datadog Docker Agent
-Follow the [in-app installation flow in Datadog][3]. This is the recommended flow that helps create your `docker run` command with your API Key, the necessary minimum configurations, and toggles for the different Datadog features.
+Follow the [in-app installation flow in Datadog][3]. This is the recommended flow, which helps you create your `docker run` command with your API key, the required minimum configurations, and toggles for various Datadog features.
 
 {{< img src="/agent/basic_agent_usage/agent_install_docker.png" alt="In-app installation steps for the Datadog Agent on Docker." style="width:90%;">}}
 
 ## Manually run the Datadog Docker Agent
 
-The Fleet Automation flow helps configure your Datadog Agent container with our recommended instructions. To configure this manually see the examples below.
+The Fleet Automation flow helps configure your Datadog Agent container with Datadog's recommended instructions. To configure this manually, see the examples below.
 
-Use the command below to run the Agent as a Docker container once on each host to monitor. Replace the `<DATADOG_API_KEY>` with your Datadog API key, and `<DATADOG_SITE>` with your {{< region-param key=dd_site code="true" >}}.
+Use the following command to run the Agent as a Docker container once on each host you want to monitor. Replace `<DATADOG_API_KEY>` with your Datadog API key and `<DATADOG_SITE>` with your {{< region-param key=dd_site code="true" >}}.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -59,7 +59,7 @@ docker run -d --cgroupns host --pid host --name dd-agent \
 ```
 {{% /tab %}}
 {{% tab "Windows" %}}
-The Datadog Agent is supported in Windows Server 2019 (LTSC) and Windows Server 2022 (LTSC). The following PowerShell command runs the Datadog Agent container:
+The Datadog Agent is supported on Windows Server 2019 (LTSC) and Windows Server 2022 (LTSC). The following PowerShell command runs the Datadog Agent container:
 
 ```powershell
 docker run -d --name dd-agent `
@@ -71,7 +71,7 @@ docker run -d --name dd-agent `
 {{% /tab %}}
 {{< /tabs >}}
 
-Note: For Docker Compose, see [Compose and the Datadog Agent][4]. For deploying the Agent in [Podman see our instructions here][5].
+**Note**: For Docker Compose, see [Compose and the Datadog Agent][4]. For deploying the Agent in Podman, see the instructions in [Using the Docker integration with Podman container runtime][5].
 
 ## Integrations
 
