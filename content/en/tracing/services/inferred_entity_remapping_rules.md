@@ -1,6 +1,8 @@
 ---
 title: Remapping rules for inferred entities
 description: Create custom names for inferred entities like databases and queues using tags and regular expressions.
+aliases:
+- /tracing/services/renaming_rules/
 further_reading:
 - link: "tracing/services/inferred_services"
   tag: "Documentation"
