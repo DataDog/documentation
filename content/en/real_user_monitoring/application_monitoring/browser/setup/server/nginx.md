@@ -13,8 +13,6 @@ further_reading:
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
-<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
-
 ## Overview
 
 RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages the [NGINX Dynamic Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses identified as HTML. After auto-instrumentation is set up, you can manage configurations from the UI.
@@ -56,7 +54,7 @@ Adjust the slider or enter a specific percentage in the input box for Session Sa
 
 ### NGINX stops responding
 
-Since the module is in Preview, it's possible NGINX may stop serving requests, particularly after installation. If you experience this issue, contact [Datadog support][6] with the following information to help us investigate and resolve the issue:
+If NGINX stops serving requests, particularly after installation, contact [Datadog support][6] with the following information to help us investigate and resolve the issue:
 
 - Your NGINX configuration file
 - Any relevant error logs
