@@ -17,9 +17,11 @@ When you add a processor to a pipeline, you can filter metrics ({{< tooltip glos
 - [Boolean operators](#boolean-operators)
 - [Wildcards](#wildcards)
 
+**Note**: Metrics search syntax is case sensitive.
+
 ## Free text search
 
-Free text search for metrics only searches the `name` field and is case sensitive.
+Free text search for metrics only searches the `name` field.
 
 An example of a free text search: `system.cpu.user`, which matches metrics with `name:system.cpu.user`.
 
@@ -41,8 +43,6 @@ Here are some attribute search syntax examples:
 
 `value:counter`
 : Matches `counter` metrics.
-
-**Note**: Attribute searches are case sensitive.
 
 ## Tags search
 
