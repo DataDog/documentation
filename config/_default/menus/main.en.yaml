@@ -6149,9 +6149,9 @@ menu:
       identifier: observability_pipelines_packs_zscaler_zia_web_logs
       weight: 520
     - name: Search Syntax
-      url: observability_pipelines/search_syntax/
+      url: observability_pipelines/search_syntax/logs/
       parent: observability_pipelines
-      identifier: observability_pipelines_search_syntax
+      identifier: observability_pipelines_logs_search_syntax
       weight: 6
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
