@@ -2,6 +2,9 @@
 title: Internal Developer Portal
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
 - link: 'https://app.datadoghq.com/idp/get-started'
   tag: 'App'
   text: 'Exploring IDP in Datadog'
@@ -74,11 +77,7 @@ Use [Datadog Teams][6] to enable team-based features in IDP:
 - Create [hierarchies][8] to have parent-child relationships between your teams
 - Filter views by teams throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
 
-If your organization manages team structure in GitHub, join the preview for GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
-
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams" >}}
-{{< /callout >}}
-
+If your organization manages team structure in GitHub, use GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
 
 ## Further reading
 

@@ -13,6 +13,11 @@ further_reading:
   text: "Understand what is going on at any level of your system"
 ---
 
+{{< callout url=https://www.datadoghq.com/product-preview/hostmap
+ btn_hidden="false" header="Join the Preview!">}}
+A new Host Map experience is in Preview. Use this form to request early access to the new features.
+{{< /callout >}}
+
 ## Overview
 
 Infrastructure Maps ([Host Maps][4] and [Container Maps][5]) help you to visualize hosts and containers on one screen, with metrics made comprehensible through color and shape.
