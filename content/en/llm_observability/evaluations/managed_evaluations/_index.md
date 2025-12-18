@@ -101,7 +101,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 Connect your AI Gateway to LLM Observability with your base URL, API key, and headers.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
-1. Click on the **Configure** tab, then click **New** to create a new gateway.
+1. Click the **Configure** tab, then click **New** to create a new gateway.
 1. Follow the instructions on the tile.
    - Provide a name for your gateway.
    - Select your provider.
