@@ -261,5 +261,5 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [10]: https://docs.azure.cn/en-us/cost-management-billing/manage/resolve-past-due-balance#check-the-type-of-your-account
 [11]: /help/
 [12]: /cloud_cost_management/tags
-[13]: https://docs.datadoghq.com/api/latest/cloud-cost-management/#create-cloud-cost-management-azure-configs
+[13]: /api/latest/cloud-cost-management/#create-cloud-cost-management-azure-configs
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/azure_uc_config
