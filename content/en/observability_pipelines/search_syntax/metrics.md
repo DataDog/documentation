@@ -62,17 +62,17 @@ The following characters are considered special and must be escaped with a backs
 
 ### Search for a tag that contains special characters
 
-Searching for a tag that contains special characters requires escaping or double quotes. For example, to search for a tag `my_app` with the value `hello:world`, use one of the following search syntaxes:
+Searching for a tag that contains special characters requires escaping or double quotes. For example, to search for a tag `service` with the value `web-store`, use one of the following search syntaxes:
 
-- `tags:my_app\:hello\:world`
-- `tags:my_app\:"hello:world"`
+- `tags:service\:web\-store`
+- `tags:service\:"web-store"`
 
 ### Match a single special character
 
-To match a single special character or space, use the `?` wildcard. For example, the search syntax: `"tags:message\:hello?world"` matches metrics with either of these tags:
+To match a single special character or space, use the `?` wildcard. For example, the search syntax: `"tags:service\:web?store"` matches metrics with either of these tags:
 
-- `message:"hello world"`
-- `message:"hello-world"`
+- `service:"web store"`
+- `service:"web-store"`
 
 ### Examples
 
@@ -86,7 +86,8 @@ To learn how to escape special characters in a tag search, let's look at a metri
       "domain":"https://7-72-3-app.agent.datadoghq.com",
       "host":"COMP-YGVQDJG75L",
       "source_type_name":"System",
-      "env:prod"
+      "env:prod",
+      "service:web-store"
     },
   "timestamp":"2025-11-28T13:03:09Z",
   "kind":"absolute",
