@@ -24,7 +24,7 @@ To enable APM in a Docker Linux container:
   
    {{< img src="tracing/trace_collection/docker-apm-instrumentation-toggle.png" alt="The 'Customize your agent install command' section of in-app instructions for installing the Datadog Agent on Docker" style="width:100%;" >}}
 
-1. Copy and run the Agent installation command in your Docker container. If you already had the Agent deployed, redeploy the Agent container using the new command.
+1. Copy and run the Agent installation command in your Docker container. If the Agent is already running, redeploy the Agent container using the new command.
 1. Restart your applications.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
