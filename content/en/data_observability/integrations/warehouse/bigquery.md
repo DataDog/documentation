@@ -4,7 +4,7 @@ description: "Connect BigQuery to Datadog Data Observability to monitor data qua
 further_reading:
   - link: '/data_observability/data_quality'
     tag: 'Documentation'
-    text: 'Datasets'
+    text: 'Data Quality'
 ---
 
 ## Overview
@@ -30,14 +30,14 @@ To set up your account in BigQuery, create a service account with the following 
 
 To configure the BigQuery integration in Datadog:
 
-1. Navigate to [**Datadog Data Observability** > **Connect a Warehouse**][7].
+1. Navigate to [**Datadog Data Observability** > **Settings**][7].
 2. Click the **Configure** button for the BigQuery option.
 3. Follow the flow to use an existing Service Account or set up a new one.
 4. Turn on the **Enable Data Observability** toggle and click **Add Account**.
 
 ## Next steps
 
-After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take several hours depending on the size of your BigQuery deployment.
+After you configure the integration, Datadog begins syncing your information schema and query history in the background. Initial syncs can take several hours depending on the size of your BigQuery deployment.
 
 ## Further reading
 
@@ -46,7 +46,7 @@ After you save, Datadog begins syncing your information schema and query history
 [1]: https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer
 [2]: https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.resourceViewer
 [3]: https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser
-[4]: https://docs.cloud.google.com/compute/docs/access/iam
+[4]: https://docs.cloud.google.com/compute/docs/access/iam#compute.viewer
 [5]: https://docs.cloud.google.com/iam/docs/service-account-permissions#token-creator-role
 [6]: https://docs.cloud.google.com/docs/authentication/use-service-account-impersonation
 [7]: https://app.datadoghq.com/datasets/settings/integrations

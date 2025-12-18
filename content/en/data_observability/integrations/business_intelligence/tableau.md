@@ -18,7 +18,7 @@ Datadog's Tableau integration helps data teams make changes to their data platfo
 
 ### Tableau requirements
 
-In order for Datadog to extract your metadata from Tableau you must meet all of the [Tableau Metadata GraphQL][1] requirements:
+In order for Datadog to extract your metadata from Tableau, you must meet all of the [Tableau Metadata GraphQL][1] requirements:
 
 - Tableau Cloud/Server v2019.3+
 - Tableau REST API must be enabled

@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Data Observability connects to your data warehouse and automatically syncs metadata and query history, enabling you to detect quality issues, track costs, and analyze usage patterns.
+Data Observability connects to your data warehouse and automatically syncs metadata with query history, enabling you to detect quality issues, track costs, and analyze usage patterns.
 
 With these integrations, you can:
 - Monitor table freshness, row counts, and column-level metrics

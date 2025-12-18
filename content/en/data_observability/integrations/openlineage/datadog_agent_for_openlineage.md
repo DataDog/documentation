@@ -11,7 +11,7 @@ further_reading:
 
 You can configure the Datadog Agent to act as a proxy for [OpenLineage events][1], forwarding them to Datadog. This is useful for centralizing configuration and avoiding the need to distribute API keys to every application.
 
-Replace the hostname in the examples with the relevant [Datadog site][2] for your organization. You can find your Datadog site by [following these instructions][3]. This example uses `datadoghq.com`.
+Replace the hostname in the examples with the relevant [Datadog site][2] for your organization. To find your Datadog site, see [Access the Datadog site][3]. This example uses `datadoghq.com`.
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ To enable the OpenLineage proxy:
    sudo service datadog-agent restart
    ```
 
-You can verify the agent is running and the proxy is active by checking the Datadog Agent logs.
+You can verify the Agent is running and the proxy is active by checking the Datadog Agent logs.
 
 ## Configure your application to use the proxy
 
@@ -51,7 +51,7 @@ After the Datadog Agent is configured as an OpenLineage proxy, direct your appli
 
 ### Set the OpenLineage environment variables
 
-Change the `OPENLINEAGE_URL` environment variable in your application's environment to point to the Datadog Agent's proxy address. Assuming the Datadog Agent is running on the same host as your application, and the agent is listening on default port `8126`:
+Change the `OPENLINEAGE_URL` environment variable in your application's environment to point to the Datadog Agent's proxy address. Assuming the Datadog Agent is running on the same host as your application, and the Agent is listening on default port `8126`:
 
 ```bash
 export OPENLINEAGE_URL="http://localhost:8126"

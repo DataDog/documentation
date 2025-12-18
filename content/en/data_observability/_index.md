@@ -2,13 +2,13 @@
 title: Data Observability
 description: "Monitor data quality, performance, and cost with Data Observability to detect anomalies, analyze data lineage, and prevent issues affecting downstream systems."
 further_reading:
-  - link: '/data_observability/data_quality'
+  - link: '/data_observability/quality_monitoring/'
     tag: 'Documentation'
     text: 'Quality Monitoring'
   - link: '/data_observability/jobs_monitoring'
     tag: 'Documentation'
     text: 'Jobs Monitoring'
-  - link: 'https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-acquisition/'
+  - link: 'https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-aquistion/'
     tag: 'Blog'
     text: 'Datadog Brings Observability to Data teams by Acquiring Metaplane'
 ---
@@ -71,7 +71,7 @@ This permission is included in the [Datadog Standard Role][1]. If your current r
 
 ## IP allowlists
 
-If your organization enforces IP allowlists, add the IPs listed under the `webhooks` section of this [file][2] to your allowist.
+If your organization enforces IP allowlists, add the IPs listed under the `webhooks` section of this [webhooks.json][2] file to your allowist.
 
 ## Further reading
 

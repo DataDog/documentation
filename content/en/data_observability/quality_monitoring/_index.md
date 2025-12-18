@@ -28,7 +28,7 @@ With Quality Monitoring, you can:
 
 {{< whatsnext desc="Connect to these data warehouses:" >}}
    {{< nextlink href="data_observability/integrations/warehouse/snowflake" >}}Snowflake{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/warehouse/Databricks" >}}Databricks{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/warehouse/databricks" >}}Databricks{{< /nextlink >}}
    {{< nextlink href="data_observability/integrations/warehouse/bigquery" >}}BigQuery{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -23,16 +23,16 @@ Create a service token in dbt Cloud so Datadog can access your account's metadat
 4. Set the token permissions:
    - For dbt Cloud Enterprise plan, ensure that the token has **Developer** permissions.
    - For dbt Cloud Team plan, ensure that the token has **Account Admin** permissions.
-5. Click Save and copy the generated API Token.
+5. Click **Save** and copy the generated API token.
 
 ## Connect your dbt Cloud account to Datadog
 
 Use the API token to configure the integration in Datadog.
 
 1. Navigate to Datadog's [dbt Cloud integration tile][1].
-2. If you have already created a dbt Cloud integration account, make sure you have updated it with the API Token with permissions described above.
+2. If you have already created a dbt Cloud integration account, make sure you have updated it with the API token with permissions described above.
 3. If not, create a new account. Fill in the **Account Name**, **Account Id**, **Account Url**, and **API Token** sections.
-4. Click the **Save** button to save your settings.
+4. Click **Save** to save your settings.
 
 ## What's next
 

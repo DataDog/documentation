@@ -23,7 +23,7 @@ Datadog's Power BI integration helps data teams make changes to their data platf
 1. Sign into Microsoft Azure.
 2. Search for **App registrations**.
 3. Click **New registration**.
-4. Fill in required fields and register an application for Datadog.
+4. Fill in the required fields and register an application for Datadog.
 5. Copy the Application (client) ID somewhere safe.
 6. Go to **Certificates & secrets** in sidebar and click **New client secret**.
 7. Add a secret for Datadog.
@@ -45,10 +45,11 @@ Datadog's Power BI integration helps data teams make changes to their data platf
 1. Go to the Power BI Admin portal.
 2. In Tenant settings, go to **Developer settings**.
 3. Enable **Allow service principals to use Power BI APIs** for your security group.
-4. In Tenant settings, go to **Admin API settings**.
-5. Enable **Allow service principals to use read-only admin APIs** for your security group.
-6. Enable **Enhance admin APIs responses with detailed metadata** for your security group.
-7. Enable **Enhance admin APIs responses with DAX and mashup expressions** for your security group.
+4. In Tenant settings, find **Admin API settings**.
+5. Enable the following for your security group:
+   - **Allow service principals to use read-only admin APIs**
+   - **Enhance admin APIs responses with detailed metadata**
+   - **Enhance admin APIs responses with DAX and mashup expressions**
 
 #### Grant access to workspaces
 
@@ -60,7 +61,6 @@ From the Power BI Admin portal:
 ### Add the Power BI integration
 
 1. Navigate to the [Power BI integration tile][1] and enter your tenant ID, and the client ID and secret from earlier.
-
 2. After you've entered these credentials, click **Save**.
 
 ## What's next
