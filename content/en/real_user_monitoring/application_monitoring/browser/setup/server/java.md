@@ -1,7 +1,6 @@
 ---
 title: Java Servlet
 description: "Automatically inject RUM Browser SDK into Java servlet-based web applications using the Java SDK auto-instrumentation."
-beta: true
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 7
@@ -12,10 +11,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
-
-{{< callout url="https://forms.gle/RdVvDsmmzW21s2vd7" header="Join the Preview!">}}
-  RUM Auto-Instrumentation through Java servlet-based web servers is in Preview. 
-{{< /callout >}}
 
 ## Overview
 
@@ -119,5 +114,4 @@ DEBUG datadog.trace.api.Config - New instance: Config{..., rumEnabled=true, rumI
 [1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [3]: https://app.datadoghq.com/rum/list
-[4]: https://forms.gle/RdVvDsmmzW21s2vd7
 [5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=configurationfile#configuration
