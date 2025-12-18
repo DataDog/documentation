@@ -65,7 +65,7 @@ These permissions are needed for the following reasons:
 
 ## Next steps
 
-After you save, Datadog begins syncing your metadata and query history in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
+After you configure the integration, Datadog begins syncing your metadata and query history in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
 
 ## Further reading
 

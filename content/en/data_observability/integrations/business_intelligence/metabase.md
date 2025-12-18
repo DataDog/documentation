@@ -22,7 +22,7 @@ This integration requires a Metabase Pro or Enterprise plan.
 
 ### Generate an API key
 
-[Follow these instructions][1] to generate an API key in Metabase.
+Follow [Metabase's API documentation][1] to generate an API key.
 
 ### Get DNS alias (required for cloud instances only)
 
@@ -73,6 +73,6 @@ After syncing, you can explore your Metabase assets and their upstream dependenc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.metabase.com/docs/latest/people-and-groups/api-keys
+[1]: https://www.metabase.com/docs/latest/people-and-groups/api-keys#create-an-api-key
 [2]: https://app.datadoghq.com/integrations/metabase
 [3]: https://app.datadoghq.com/datasets/catalog

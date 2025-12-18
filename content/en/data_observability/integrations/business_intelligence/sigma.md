@@ -18,7 +18,7 @@ Datadog's Sigma integration helps data teams make changes to their data platform
 
 ### Retrieve API keys
 
-[Follow these instructions][1] from the Sigma docs to retrieve a Client ID and Client Secret (also called an API token).
+Follow [Sigma's API client instructions][1] to retrieve a Client ID and Client Secret (also called an API token).
 
 ### Add the Sigma integration
 
@@ -27,7 +27,7 @@ Datadog's Sigma integration helps data teams make changes to their data platform
    - Account name
    - Client ID
    - Client secret
-   - Cloud provider. If you don't know your cloud provider, you can find it in Sigma [following these instructions][3].
+   - Cloud provider. If you don't know your cloud provider, you can find it using Sigma's [Supported cloud platforms and regions documentation][3].
 
 2. After you've entered these credentials, click **Save**.
 
@@ -43,7 +43,7 @@ After syncing, you can explore your Sigma assets and their upstream dependencies
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://help.sigmacomputing.com/hc/en-us/articles/4408555307027-Get-an-API-Token-and-Client-Id
+[1]: https://help.sigmacomputing.com/reference/generate-client-credentials
 [2]: https://app.datadoghq.com/integrations/sigma-computing
 [3]: https://help.sigmacomputing.com/docs/region-warehouse-and-feature-support#supported-cloud-platforms-and-regions
 [4]: https://app.datadoghq.com/datasets/catalog
