@@ -189,19 +189,9 @@ console.log(details.errorCode) // The error that occurred during evaluation, if 
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
-## Advanced configuration
-
-The `DatadogProvider` constructor accepts additional configuration options:
-
-`enableExposureLogging`
-: When `true`, the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can leave this option disabled.
-
-`enableFlagEvaluationTracking`
-: When `true` (default), flag evaluations are tracked in RUM, which enables correlating them with user sessions. This enables analytics such as _"Do users in variant B experience more errors?"_. If your app does not use RUM, this flag has no effect and can be safely left at its default value.
-
 ## A/B experimentation
 
-To run A/B experiments and measure the impact of feature variations, enable exposure logging. This records an exposure event each time a flag is evaluated, capturing which flag was accessed, which variant was served, and under what context.
+To run A/B experiments and measure the impact of feature variations, enable exposure logging with `enableExposureLogging: true`. When enabled, the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. If you only need local evaluation without telemetry, you can leave this option disabled.
 
 {{< code-block lang="javascript" >}}
 const provider = new DatadogProvider({
@@ -212,7 +202,12 @@ const provider = new DatadogProvider({
 })
 {{< /code-block >}}
 
-Exposure events are sent to Datadog, enabling you to analyze feature adoption and experiment results.
+## Advanced configuration
+
+The `DatadogProvider` constructor accepts additional configuration options:
+
+`enableFlagEvaluationTracking`
+: When `true` (default), flag evaluations are tracked in RUM, which enables correlating them with user sessions. This enables analytics such as _"Do users in variant B experience more errors?"_. If your app does not use RUM, this flag has no effect and can be safely left at its default value.
 
 ## Further reading
 
