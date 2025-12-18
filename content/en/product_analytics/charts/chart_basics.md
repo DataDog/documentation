@@ -27,7 +27,7 @@ This page introduces the core charting capabilities available across Product Ana
 ## Create a chart 
 Create charts to explore user behavior and visualize product metrics. For example, use a funnel chart to understand where users drop off during onboarding.
 
-To create a chart, click **New Chart** on the [Chart List page][1] and select the chart type you want to build. For guidance on choosing the right option, see [Deciding which chart to use][2]. 
+To create a chart, click **New Chart** on the [Chart List page][1] and select the chart type you want to build. For guidance on choosing the right option for your use case, see [Deciding which chart to use][2]. 
 
 {{< img src="product_analytics/chart_basics/pana_chart_basics_new2.png" alt="Chart List page showing the New Chart button with options to select a chart type." style="width:100%;" >}}
 
