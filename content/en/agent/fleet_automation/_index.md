@@ -51,7 +51,9 @@ Fleet Automation enables you to centrally manage Datadog Agents across all your 
 - **View Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
 
 ### Fleet Automation API
-Fleet Automation now provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][9]. Note that the Fleet Automation API does not support all Datadog Agent configuration capabilities.
+Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][9]. 
+
+**Note**: The Fleet Automation API does not support all Datadog Agent configuration capabilities.
 
 <div class="alert alert-info">
 Remote management of Agents in containerized workloads is not supported.
