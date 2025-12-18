@@ -16,7 +16,13 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 ### Set up the destination
 
-{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+1. Optionally, enter the name of the Amazon OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
+1. Select an authentication strategy, **Basic** or **AWS**. For **AWS**, enter the AWS region.
+1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
+	- If left disabled, the maximum size for buffering is 500 events.
+	- If enabled:
+		1. Select the buffer type you want to set (**Memory** or **Disk**).
+		1. Enter the buffer size and select the unit.
 
 ### Set the environment variables
 
@@ -34,3 +40,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
+[3]: /observability_pipelines/destinations/#template-syntax

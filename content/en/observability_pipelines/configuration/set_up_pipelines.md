@@ -98,7 +98,7 @@ To delete a destination, click on the pencil icon to the top right of the destin
 [8]: /monitors/types/metric/
 [9]: /observability_pipelines/guide/environment_variables/
 [10]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
-[11]: /observability_pipelines/search_syntax/
+[11]: /observability_pipelines/search_syntax/logs/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}

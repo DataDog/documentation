@@ -18,7 +18,10 @@ Use Observability Pipelines' Splunk Heavy and Universal Forwards (TCP) source to
 
 Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
 
-{{% observability_pipelines/source_settings/splunk_tcp %}}
+Optionally, click the toggle to enable TLS. If you enable TLS, the following certificate and key files are required:
+- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
+- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in either DER or PEM (X.509).
+- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 
 ## Set the environment variables
 

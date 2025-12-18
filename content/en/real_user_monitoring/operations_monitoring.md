@@ -91,6 +91,8 @@ RUMMonitor.shared().startFeatureOperation(
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">The Operation's name cannot contain any whitespaces.</div>
+
 ### Stop an operation with success
 
 Every started operation must have a stop. Use `succeedFeatureOperation` to stop an operation with a successful outcome.
@@ -140,6 +142,8 @@ RUMMonitor.shared().succeedFeatureOperation(
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">The <code>operationKey</code> must be the same in the start and end Operation event.</div>
+
 ### Stop an operation with failure
 
 Every started operation must have a stop. Use `failFeatureOperation` to stop an operation with a failure outcome.
@@ -171,7 +175,7 @@ options?: {
 GlobalRumMonitor.get().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-	reason: RUMFeatureOperationFailureReason,	// .error, .abandoned, timeout, .other
+	failureReason: RUMFeatureOperationFailureReason,	// .error, .abandoned, timeout, .other
 	attributes: Map<String, Any?>
 )
 ```
@@ -184,7 +188,7 @@ GlobalRumMonitor.get().failFeatureOperation(
 RUMMonitor.shared().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-    reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
+  reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
 	attributes: [AttributeKey: AttributeValue]
 )
 ```
