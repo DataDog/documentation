@@ -16,10 +16,13 @@
 
 {{/* Get API action data from spec */}}
 {{ $operationId := $endpoint_data.operationId }}
+{{ $endpoint_path := .endpoint_path | default "" }}
+{{ $http_method := .http_method | default "" }}
 {{ $translate_actions_datafile := cond (eq $api_version "v1") $api_v1_translate_actions $api_v2_translate_actions }}
 {{ $action_data := index $translate_actions_datafile $operationId }}
 {{ $section_header := $action_data.summary }}
-{{ $section_content := $action_data.description }}
+{{ $description := $action_data.description | default $endpoint_data.description | default $action_data.summary }}
+{{ $section_content := (print (upper $http_method) " " $endpoint_path " - " $description) }}
 {{ $full_url := print $permalink "#" ($section_header | anchorize) }}
 {{ $relpermalink = print $relpermalink "#" ($section_header | anchorize) }}
 

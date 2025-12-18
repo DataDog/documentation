@@ -32,10 +32,10 @@
 
         {{/* Get all v1 api actions for this page by matching title with spec data's tag property */}}
         {{ range $endpoint_path, $endpoint_data := $api_v1_data.paths }}
-            {{ range $endpoint_data }}
+            {{ range $http_method, $operation := $endpoint_data }}
                 {{ $tags := slice }}
-                {{ if isset . "tags" }}
-                  {{ $tags = .tags }}
+                {{ if isset $operation "tags" }}
+                  {{ $tags = $operation.tags }}
                 {{ end }}
 
                 {{ if in $tags $title }}
@@ -47,7 +47,9 @@
                             "title" $title
                             "lang" $lang
                             "api_version" "v1"
-                            "endpoint_data" .
+                            "endpoint_path" $endpoint_path
+                            "http_method" $http_method
+                            "endpoint_data" $operation
                             "api_v1_translate_actions" $api_v1_translate_actions
                             "api_v2_translate_actions" $api_v2_translate_actions
                         )
@@ -60,10 +62,10 @@
 
         {{/* Get all v2 api actions for this page by matching title with spec data's tag property */}}
         {{ range $endpoint_path, $endpoint_data := $api_v2_data.paths }}
-            {{ range $endpoint_data }}
+            {{ range $http_method, $operation := $endpoint_data }}
                 {{ $tags := slice }}
-                {{ if isset . "tags" }}
-                  {{ $tags = .tags }}
+                {{ if isset $operation "tags" }}
+                  {{ $tags = $operation.tags }}
                 {{ end }}
 
                 {{ if in $tags $title }}
@@ -75,7 +77,9 @@
                             "title" $title
                             "lang" $lang
                             "api_version" "v2"
-                            "endpoint_data" .
+                            "endpoint_path" $endpoint_path
+                            "http_method" $http_method
+                            "endpoint_data" $operation
                             "api_v1_translate_actions" $api_v1_translate_actions
                             "api_v2_translate_actions" $api_v2_translate_actions
                         )
