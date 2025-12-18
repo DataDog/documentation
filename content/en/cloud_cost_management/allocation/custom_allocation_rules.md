@@ -27,6 +27,8 @@ The following allocation methods are available:
 
 Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs.
 
+You can manage custom allocation rules using the [API][4], [Terraform][5], or directly in Datadog by following the instructions below.
+
 ## Create a custom allocation rule
 
 ### Step 1 - Define the source
@@ -177,3 +179,5 @@ Changes to custom allocation rules may take up to 24 hours to be applied. After 
 [1]: /cloud_cost_management/allocation/tag_pipelines/
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
 [3]: https://www.datadoghq.com/support/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/custom_allocation_rule
+[5]: https://docs.datadoghq.com/api/latest/cloud-cost-management/#create-custom-allocation-rule
