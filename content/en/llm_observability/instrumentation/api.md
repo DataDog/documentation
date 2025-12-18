@@ -468,7 +468,7 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
 | metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, or `"boolean"`.                                    |
 | label [*required*]                                                 | string              | The unique name or label for the provided evaluation .                                                 |
-| categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category that the evaluation belongs to.                                     |
+| categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category that the evaluation belongs to. May not be empty string.                                    |
 | score_value [*required if the metric_type is "score"*]             | number              | A score value of the evaluation.                                                                       |
 | boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value of the evaluation.                                                                     |
 | assessment                                                         | string              | An assessment of this evaluation. Accepted values are `pass` and `fail`.                               |
