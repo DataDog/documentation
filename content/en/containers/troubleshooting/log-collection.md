@@ -20,7 +20,7 @@ This documentation covers the troubleshooting steps for **Docker** and **Kuberne
 
 For [**ECS Fargate**][3] and [**EKS Fargate**][4] based log collection, see their dedicated setup and troubleshooting documentation. 
 
-## Log collection context
+## Understanding log collection in Docker and Kubernetes
 
 In containerized environments, logs are collected by the Datadog Agent in two main ways, **file based** collection and **socket based** collection through the Docker API.
 
@@ -163,13 +163,13 @@ With both of these setups ensure that your configuration:
 - Is set on your corresponding Kubernetes pod or Docker container
 - Uses the right key name to trigger the log configuration, you do not need to adjust the key name based on your [Datadog site][8]. 
 
-Visit [Advanced Log Collection Configurations][9] for further examples of how to set your log configuration.
+For more examples of how to set your log configuration, see [Advanced Log Collection Configurations][9].
 
 ### Tagging
 
 The Agent automatically assigns tags to your logs at the “high” level of [tag cardinality][10] for each environment. You can view the out-of-the-box [Docker tags here][11] and [Kubernetes tags here][12]. This also includes any tags collected by [Unified Service Tagging][13] or different tag extraction rules from container metadata.
 
-To customize these tags, change the log collection rules, or enable log collection in general - you can apply Autodiscovery Labels or Annotations to the respective containers.
+To customize these tags, change the log collection rules, or enable log collection in general, you can apply Autodiscovery Labels or Annotations to the respective containers.
 
 Tags on your logs can also come from [host tag inheritance][14]. All data, including logs, coming into Datadog goes through this process. On Datadog intake the logs inherit all the host-level tags that are associated with that host. You can see these tags on the Infrastructure List for you host. These are most commonly set by:
 
@@ -178,7 +178,7 @@ Tags on your logs can also come from [host tag inheritance][14]. All data, inclu
 
 For example, the tags `pod_name` and `short_image` come from the Agent setting this tag on submission. Other tags like `region` and `kube_cluster_name` come from host tag inheritance on intake.
 
-## Troubleshooting
+## Troubleshooting container log collection with Agent commands
 
 The Datadog Agent running on the same node as your application container is responsible for collecting that container’s logs. When running these commands, especially in Kubernetes environments, ensure you are working with the correct Agent pod for your desired application container.
 
@@ -638,20 +638,20 @@ Docker’s default is the [json-file logging driver][23] so the Agent tries to r
 
 1. If you’re unsure of which logging driver your containers are using, use `docker inspect <CONTAINER_NAME>` to see what logging driver you have set. The following block appears in the Docker Inspect when the container is using the JSON logging driver
 
-```
-"LogConfig": {
-    "Type": "json-file",
-    "Config": {}
-},
-```
+   ```
+   "LogConfig": {
+       "Type": "json-file",
+       "Config": {}
+   },
+   ```
 
 2. If the container is set to the journald logging driver the following block appears in the Docker Inspect:
-```
-"LogConfig": {
-    "Type": "journald",
-    "Config": {}
-},
-```
+   ```
+   "LogConfig": {
+       "Type": "journald",
+       "Config": {}
+   },
+   ```
 
 3. To collect logs from the journald logging driver, set up the journald integration [following the Datadog-Journald documentation][24].
 4. Mount the YAML file into your container following the instructions in the [Docker Agent documentation][25]. For more information on setting log drivers for Docker containers, [see this documentation][26].
