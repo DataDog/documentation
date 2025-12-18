@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Datadog's [Real User Monitoring (RUM)][1]  provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. With [RUM without Limits™][8], you can use metric-based monitors to alert on your full unsampled traffic with 15-month retention. Metric-based monitors support advanced alerting conditions such as anomaly detection.
+Datadog's [Real User Monitoring (RUM)][1] provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. With [RUM without Limits™][8], you can use metric-based monitors to alert on your full unsampled traffic, with 15-month worth of data to power advanced alerting conditions such as anomaly detection.
 
 After you enable RUM for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
 
@@ -83,7 +83,7 @@ For example, this monitor triggers if and only if there are no RUM events for al
 
   {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id-1.png" alt="The monitor configuration page with the search query left blank, set to the count of all RUM events and grouped by @application.id over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" style="width:70%;" >}}
 
-And this monitor triggers if there are no logs for the application `Shop.ist`:
+This monitor triggers if there are no logs for the application `Shop.ist`:
 
   {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist-1.png" alt="The monitor configuration page with Application Id:Shopist entered in the search query, set to the count of all RUM events matching that application over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" style="width:70%;" >}}
 

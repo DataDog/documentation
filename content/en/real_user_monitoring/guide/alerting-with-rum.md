@@ -19,7 +19,7 @@ Real User Monitoring (RUM) lets you create alerts about atypical behavior in you
 
 ## Create a RUM monitor
 
-To create a RUM monitor in Datadog, first navigate to [Monitors > New Monitor > Real User Monitoring][2].
+To create a RUM monitor in Datadog, first, navigate to [Monitors > New Monitor > Real User Monitoring][2].
 
 Next, choose one of the following methods to create your monitor:
 
