@@ -87,7 +87,7 @@ To learn how to escape special characters in a tag search, let's look at a metri
       "host":"COMP-YGVQDJG75L",
       "source_type_name":"System",
       "env:prod",
-      "service:web-store
+      "service:web-store"
     },
   "timestamp":"2025-11-28T13:03:09Z",
   "kind":"absolute",
