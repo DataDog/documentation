@@ -60,7 +60,7 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: CloudTrail Trail
-      recommendation_type: Delete unnecessary Cloudtrail trails
+      recommendation_type: Delete unnecessary CloudTrail trails
       recommendation_description: CloudTrail trails with paid events can be deleted to reduce costs.
       recommendation_prerequisites: ""
     - category: Terminate
@@ -175,7 +175,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: EC2 Instance
       recommendation_type: Downsize EC2 Instance
-      recommendation_description: EC2 instances with CPU and memory utilization less than the available resources of the next smallest instance in the family. Without the Datadog agent, this recommendation is generated using Cloudwatch metrics.
+      recommendation_description: EC2 instances with CPU and memory utilization less than the available resources of the next smallest instance in the family. Without the Datadog Agent, this recommendation is generated using CloudWatch metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Migrate
       cloud_provider: AWS
@@ -193,13 +193,13 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: EC2 Instance
       recommendation_type: Terminate EC2 Instance
-      recommendation_description: EC2 instances with CPU and memory utilization under a customizable threshold. Without the Datadog agent, this recommendation is generated using Cloudwatch metrics.
+      recommendation_description: EC2 instances with CPU and memory utilization under a customizable threshold. Without the Datadog Agent, this recommendation is generated using CloudWatch metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: AWS
       resource_type: EC2 Instance
       recommendation_type: Terminate EC2 Instance with Stuck Node
-      recommendation_description: EC2 instances hosting Kubernetes nodes that are stuck in Pending phase, indicating the node is not functioning properly.
+      recommendation_description: EC2 instances hosting Kubernetes nodes that are stuck in the pending phase, indicating the node is not functioning properly.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: AWS
@@ -258,8 +258,8 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: CloudWatch Logs
-      recommendation_type: Delete Lambda Cloudwatch Logs and write permissions
-      recommendation_description: Lambda function that can have write CloudWatch Logs permissions removed.
+      recommendation_type: Delete Lambda CloudWatch Logs and write permissions
+      recommendation_description: Remove write permissions for Lambda CloudWatch Logs to prevent further unnecessary logging.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -679,4 +679,4 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [10]: https://app.datadoghq.com/integrations/gcp
 [11]: /cloud_cost_management/allocation/tag_pipelines/
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized
-[13]: https://docs.datadoghq.com/bits_ai/bits_ai_dev_agent/setup
+[13]: /bits_ai/bits_ai_dev_agent/setup
