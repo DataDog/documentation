@@ -49,7 +49,11 @@ There are two main approaches to {{< tooltip glossary="instrumentat" >}} your ap
 
 **Custom instrumentation** captures observability data from in-house code or complex functions that aren't captured by automatic instrumentation, providing deeper visibility and context into spans when you need fine-grained control.
 
-The following table compares the different instrumentation methods available:
+The following table compares the different instrumentation methods available.
+
+<div class="alert alert-info">
+If you prefer vendor-neutral instrumentation, see the <a href="https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">OpenTelemetry documentation</a> for using OpenTelemetry API support in Datadog libraries.
+</div>
 
 <table style="width:100%; border-collapse:collapse; border:2px solid #999;">
   <!-- Header group -->
@@ -65,7 +69,7 @@ The following table compares the different instrumentation methods available:
   <tr style="background-color:#f2f2f2;">
     <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"></th>
     <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/automatic_instrumentation/single-step-apm/">Single Step Instrumentation</a></th>
-    <th style="border:1px solid #ccc; border-right:2px solid #999; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/">Manually-managed SDKs</a></th>
+    <th style="border:1px solid #ccc; border-right:2px solid #999; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/">Manually managed SDKs</a></th>
     <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/trace_collection/custom_instrumentation/">Code-based Custom Instrumentation</a></th>
     <th style="border:1px solid #ccc; text-transform:uppercase; font-weight:bold;"><a href="/tracing/dynamic_instrumentation/">Dynamic Instrumentation</a><br>(UI-based Custom Instrumentation)</th>
   </tr>
@@ -76,10 +80,10 @@ The following table compares the different instrumentation methods available:
     <td style="border:1px solid #ccc;">With a single command, Datadog automatically loads language SDKs to your application processes. You can also control which processes to instrument.</td>
     <td style="border:1px solid #ccc; border-right:2px solid #999;">Add Datadog language SDKs to your applications. The SDK handles instrumentation automatically.</td>
     <td style="border:1px solid #ccc;">Add explicit tracing API calls or span logic in your application code.</td>
-    <td style="border:1px solid #ccc;">Add instrumentation rules in the Datadog UI (dynamic, at runtime; no code changes).</td>
+    <td style="border:1px solid #ccc;">Add instrumentation rules in the Datadog UI. Rules are applied dynamically at runtime and do not require code changes.</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ccc; font-weight:bold;">Code changes required?</td>
+    <td style="border:1px solid #ccc; font-weight:bold;">Code changes?</td>
     <td style="border:1px solid #ccc;">No</td>
     <td style="border:1px solid #ccc; border-right:2px solid #999;">No</td>
     <td style="border:1px solid #ccc;">Yes</td>
@@ -93,7 +97,7 @@ The following table compares the different instrumentation methods available:
     <td style="border:1px solid #ccc;">No</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ccc; font-weight:bold;">Set-up complexity</td>
+    <td style="border:1px solid #ccc; font-weight:bold;">Setup complexity</td>
     <td style="border:1px solid #ccc;">Low</td>
     <td style="border:1px solid #ccc; border-right:2px solid #999;">Medium</td>
     <td style="border:1px solid #ccc;">High</td>
@@ -125,11 +129,6 @@ The following table compares the different instrumentation methods available:
     </td>
   </tr>
 </table>
-
-
-<div class="alert alert-info">
-If you prefer vendor-neutral instrumentation, see the <a href="https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">OpenTelemetry documentation</a> for using OpenTelemetry API support in Datadog libraries.
-</div>
 
 
 ## APM setup tutorials
