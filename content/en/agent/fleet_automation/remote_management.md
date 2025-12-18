@@ -159,7 +159,7 @@ In the following example, the `logs_enabled` field is changed from `false` to `t
 [18]: https://app.datadoghq.com/fleet
 {{% /collapse-content %}}
 
-{{% collapse-content title="Configure Agents via API" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Configure Agents using the API" level="h4" expanded=false %}}
 Fleet Automation provide an API to apply configuration updates to your Agents programmatically. You can deploy configuration changes to any group of hosts using filter queries, supplying either full configuration files or targeted patches. Fleet Automation does not support all Agent configuration fields, including settings related to Agent connection or secrets such as site, API keys, and other authentication parameters. Configuration can be pushed on demand or integrated into your existing automation workflows. For full details, see the [Fleet Automation API][19].
 {{% /collapse-content %}}
 
