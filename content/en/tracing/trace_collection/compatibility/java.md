@@ -294,6 +294,33 @@ Integrations can be enabled or disabled individually (overriding the default abo
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
 - When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][13] and [JEP 498][14] for more information.
 
+## Ahead-of-Time Class Loading & Linking support
+
+Ahead-of-Time Class Loading & Linking improves startup time by making the classes of an application instantly available, in a loaded and linked state, when the Java Virtual Machine starts. See [JEP 483][15] and [JEP 514][16] for more information.
+
+### Requirements
+
+Use:
+
+- Java 25 or later
+- [Datadog Java tracer][1] 1.57.0 or later
+
+### Setup
+
+To set up Ahead-of-Time Class Loading & Linking, add the Datadog Java tracer during the training run:
+```shell
+-javaagent:/path/to/dd-java-agent.jar -XX:AOTCacheOutput=my-app.aot
+```
+
+#### Usage
+
+During production, add the same Datadog Java tracer along with the previously cached training data:
+```shell
+-javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=my-app.aot
+```
+
+You can view traces using the [Trace Explorer][9].
+
 ## GraalVM Native Image support
 
 GraalVM Native Image is a technology that allows you to compile Java applications into native executables. The Datadog Java tracer supports GraalVM Native Image. This allows you to compile your applications into native executables while still benefiting from the tracing capabilities offered by the library.
@@ -487,3 +514,5 @@ For more information, see [Configure APM and DogstatsD communication mode][11]. 
 [12]: /tracing/trace_collection/library_config/#agent
 [13]: https://openjdk.org/jeps/472
 [14]: https://openjdk.org/jeps/498
+[15]: https://openjdk.org/jeps/483
+[16]: https://openjdk.org/jeps/514
