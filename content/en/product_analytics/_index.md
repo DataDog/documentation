@@ -11,9 +11,6 @@ further_reading:
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
   text: "Analytics Explorer"
-- link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
-  tag: "Blog"
-  text: "Make data-driven design decisions with Product Analytics"
 ---
 
 ## Overview
@@ -34,6 +31,8 @@ To start using Product Analytics, enable it for each application where you want 
 3. Click the **Enable** button.
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
+
+If you don't have an application set up in Datadog yet, create one for your platform ([browser][14], [iOS][15], or [Android][16]) or use your [coding assistant][17].
 
 By default, Product Analytics data is retained for 15 months. Learn more about [Datadog's data retention periods][1].
 
@@ -91,7 +90,7 @@ You may want to better understand a specific group of users. This could be for t
 
 {{< img src="/product_analytics/segmentation/userprofiles_pana-ga.png" alt="See individual profiles of users and create a segment from these profiles.">}}
 
-You can see the individual profiles of user, and create a segment, or a specified grouping, from these profiles to fit the behavior you would like to observe. For example, you can create a segment on users who have items in their carts but have not yet checked out to send an email nudging them to make a puchase. 
+You can see the individual profiles of user, and create a segment, or a specified grouping, from these profiles to fit the behavior you would like to observe. For example, you can create a segment on users who have items in their carts but have not yet checked out to send an email nudging them to make a purchase. 
 
 
 ### Visualize the most and least interacted with buttons on a given page
@@ -125,4 +124,7 @@ Suppose you want to make changes to your application interface but want to first
 [11]: /product_analytics/session_replay/
 [12]: /product_analytics/session_replay/playlists
 [13]: /product_analytics/charts/analytics_explorer
-
+[14]: /real_user_monitoring/application_monitoring/browser
+[15]: /real_user_monitoring/application_monitoring/ios
+[16]: /real_user_monitoring/application_monitoring/android
+[17]: /product_analytics/agentic_onboarding

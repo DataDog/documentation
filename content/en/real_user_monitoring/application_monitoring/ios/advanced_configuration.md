@@ -15,6 +15,9 @@ further_reading:
   - link: "/real_user_monitoring/application_monitoring/ios/supported_versions/"
     tag: "Documentation"
     text: "RUM iOS and tvOS monitoring supported versions"
+  - link: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor"
+    tag: "Source Code"
+    text: "Datadog Integration for Apollo iOS"
 ---
 
 If you have not set up the RUM iOS SDK yet, follow the [in-app setup instructions][1] or refer to the [RUM iOS setup documentation][2].
@@ -619,6 +622,8 @@ The table below shows how iOS 17 and iOS 18 report different user interactions.
 | Link             | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
 
 ### Automatically track network requests
+
+#### Basic network instrumentation
 
 To automatically track resources (network requests) and get their timing information such as time to first byte or DNS resolution, use the `urlSessionTracking` option when enabling RUM and enable `URLSessionInstrumentation`:
 

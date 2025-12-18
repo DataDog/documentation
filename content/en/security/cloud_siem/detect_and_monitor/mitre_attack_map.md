@@ -39,7 +39,7 @@ Click the rule density buttons to visualize the map for a specific number of rul
 To view more information about a technique and the rules monitoring the technique:
 
 1. On the [MITRE ATT&CK Map][3] page, click on a technique tile.
-1. Click **Create Custom Rule** if you want to create a custom rule for this technique. See [Detection Rules][4] for more information on creating custom rules.
+1. Click **Create Custom Rule** if you want to create a custom rule for this technique. See [Detection Rules][4] for more information on creating custom rules. **Note**: For the custom rule to show within active sources, the appropriate source tag must be defined in the detection rule.
 1. In the **Rules monitoring this Technique** section, you can:
 	1. Enter a search query to filter to specific rules.
   1. Sort by the creation date, rule type, rule name, source, or highest severity.
@@ -62,7 +62,7 @@ This is an example of the format you need to use for tagging custom rules and th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/rules
+[1]: https://app.datadoghq.com/security/siem/rules
 [2]: https://docs.datadoghq.com/security/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
-[3]: https://app.datadoghq.com/security/rules?query=product=siem&sort=date&viz=attck-map
+[3]: https://app.datadoghq.com/security/siem/rules?query=product=siem&sort=date&viz=attck-map
 [4]: https://docs.datadoghq.com/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold

@@ -8,6 +8,12 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/feature-flags/'
   tag: 'Blog'
   text: 'Ship features faster and safer with Datadog Feature Flags'
+- link: 'https://www.datadoghq.com/blog/experimental-data-datadog/'
+  tag: 'Blog'
+  text: 'How to bridge speed and quality in experiments through unified data'
+- link: 'https://www.datadoghq.com/blog/datadog-feature-flags-cloud-resilience/'
+  tag: 'Blog'
+  text: 'How Datadog Feature Flags is resilient to cloud provider failures'
 site_support_id: getting_started_feature_flags
 ---
 
@@ -41,7 +47,7 @@ First, install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@ope
 
 
 ```
-yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk @openfeature/core
+yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 ```
 
 Then, add the following to your project to initialize the SDK:
@@ -54,7 +60,7 @@ import { OpenFeature } from '@openfeature/web-sdk';
 const provider = new DatadogProvider({
    clientToken: '<CLIENT_TOKEN>',
    applicationId: '<APPLICATION_ID>',
-   enableExposureLogging: true,
+   enableExposureLogging: true, // Can impact RUM costs if enabled
    site: 'datadoghq.com',
    env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
    service: '<SERVICE_NAME>',
@@ -64,6 +70,8 @@ const provider = new DatadogProvider({
 // Set the provider
 await OpenFeature.setProviderAndWait(provider);
 ```
+
+<div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. You can disable it if you don't need to track feature exposure or guardrail metric status.</div>
 
 More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][4].
 

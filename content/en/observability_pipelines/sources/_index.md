@@ -2,7 +2,7 @@
 title: Sources
 disable_toc: false
 further_reading:
-- link: "/observability_pipelines/set_up_pipelines/"
+- link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
 - link: "/observability_pipelines/processors/"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' sources to receive logs from your different log sources. Sources have different prerequisites and settings. Some sources also need to be configured to send logs to the Observability Pipelines Worker.
+Use Observability Pipelines' sources to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from different data sources. Sources have different prerequisites and settings. Some sources also need to be configured to send data to the Observability Pipelines Worker.
 
 Select a source in the left navigation menu to see more information about it.
 
@@ -56,7 +56,7 @@ After events are ingested by the source, they get sent to different processors a
 
 ## TLS certificates
 
-Enable TLS for Observability Pipelines to ensure that logs are encrypted during transit. This prevents attackers from tampering with your log data.
+Enable TLS for Observability Pipelines to ensure that data are encrypted during transit. This prevents attackers from tampering with your data.
 
 Observability Pipelines does not accept self-signed certificates by default because they do not provide secure trust verification and can potentially expose your environment to man-in-the-middle attacks.
 
@@ -95,6 +95,6 @@ For the Worker host to trust the self-signed certificate:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/troubleshooting/#use-tap-to-see-your-data
+[2]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#use-tap-to-see-your-data
 [3]: https://letsencrypt.org/
 

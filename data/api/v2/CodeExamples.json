@@ -105,39 +105,39 @@
       "description": "Update datastore returns \"OK\" response"
     }
   ],
+  "CreateAwsOnDemandTask": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Create AWS on demand task returns \"AWS on demand task created successfully.\" response"
+    }
+  ],
   "CreateAzureScanOptions": [
     {
       "group": "agentless_scanning",
       "suffix": "",
-      "description": "Create azure scan options returns \"Created\" response"
-    }
-  ],
-  "UpdateAwsScanOptions": [
-    {
-      "group": "agentless_scanning",
-      "suffix": "",
-      "description": "Patch AWS Scan Options returns \"No Content\" response"
-    }
-  ],
-  "UpdateGcpScanOptions": [
-    {
-      "group": "agentless_scanning",
-      "suffix": "",
-      "description": "Patch GCP Scan Options returns \"OK\" response"
+      "description": "Create Azure scan options returns \"Created\" response"
     }
   ],
   "CreateGcpScanOptions": [
     {
       "group": "agentless_scanning",
       "suffix": "",
-      "description": "Post GCP Scan Options returns \"Agentless scan options enabled successfully.\" response"
+      "description": "Create GCP scan options returns \"Agentless scan options enabled successfully.\" response"
     }
   ],
-  "CreateAwsOnDemandTask": [
+  "UpdateAwsScanOptions": [
     {
       "group": "agentless_scanning",
       "suffix": "",
-      "description": "Post an AWS on demand task returns \"AWS on demand task created successfully.\" response"
+      "description": "Update AWS scan options returns \"No Content\" response"
+    }
+  ],
+  "UpdateGcpScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Update GCP scan options returns \"OK\" response"
     }
   ],
   "CreateApp": [
@@ -582,6 +582,34 @@
       "description": "Edit a dataset returns \"OK\" response"
     }
   ],
+  "CreateDeploymentGate": [
+    {
+      "group": "deployment_gates",
+      "suffix": "",
+      "description": "Create deployment gate returns \"OK\" response"
+    }
+  ],
+  "CreateDeploymentRule": [
+    {
+      "group": "deployment_gates",
+      "suffix": "",
+      "description": "Create deployment rule returns \"OK\" response"
+    }
+  ],
+  "UpdateDeploymentGate": [
+    {
+      "group": "deployment_gates",
+      "suffix": "",
+      "description": "Update deployment gate returns \"OK\" response"
+    }
+  ],
+  "UpdateDeploymentRule": [
+    {
+      "group": "deployment_gates",
+      "suffix": "",
+      "description": "Update deployment rule returns \"OK\" response"
+    }
+  ],
   "PatchDomainAllowlist": [
     {
       "group": "domain_allowlist",
@@ -988,6 +1016,20 @@
       "description": "Update a log-based metric with include_percentiles field returns \"OK\" response"
     }
   ],
+  "CreateRestrictionQuery": [
+    {
+      "group": "logs_restriction_queries",
+      "suffix": "",
+      "description": "Create a restriction query returns \"OK\" response"
+    }
+  ],
+  "AddRoleToRestrictionQuery": [
+    {
+      "group": "logs_restriction_queries",
+      "suffix": "",
+      "description": "Grant role to a restriction query returns \"OK\" response"
+    }
+  ],
   "CreateBulkTagsMetricsConfiguration": [
     {
       "group": "metrics",
@@ -1080,6 +1122,11 @@
       "group": "monitors",
       "suffix": "_1181818787",
       "description": "Create a monitor notification rule with conditional recipients returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1379932371",
+      "description": "Create a monitor notification rule with scope returns \"OK\" response"
     }
   ],
   "CreateMonitorUserTemplate": [
@@ -1106,6 +1153,11 @@
       "group": "monitors",
       "suffix": "_1400905713",
       "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1446058210",
+      "description": "Update a monitor notification rule with scope returns \"OK\" response"
     }
   ],
   "UpdateMonitorUserTemplate": [
@@ -1183,6 +1235,13 @@
       "group": "on-call",
       "suffix": "",
       "description": "Create On-Call schedule returns \"Created\" response"
+    }
+  ],
+  "CreateUserNotificationChannel": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification channel for a user returns \"Created\" response"
     }
   ],
   "SetOnCallTeamRoutingRules": [
@@ -1382,6 +1441,18 @@
       "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
+  "AttachCase": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_897782765",
+      "description": "Attach security finding to a case returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Attach security findings to a case returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
@@ -1413,6 +1484,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2323193894",
+      "description": "Create a detection rule with detection method 'anomaly_detection' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1490,6 +1566,30 @@
       "description": "Create a suppression rule with an exclusion query returns \"OK\" response"
     }
   ],
+  "CreateCases": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_2385516013",
+      "description": "Create case for security finding returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2798851680",
+      "description": "Create case for security findings returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create cases for security findings returns \"Created\" response"
+    }
+  ],
+  "DetachCase": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Detach security findings from their case returns \"No Content\" response"
+    }
+  ],
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
@@ -1532,11 +1632,11 @@
       "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
-  "RunHistoricalJob": [
+  "RunThreatHuntingJob": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Run a historical job returns \"Status created\" response"
+      "description": "Run a threat hunting job returns \"Status created\" response"
     }
   ],
   "TestSecurityMonitoringRule": [
@@ -1591,6 +1691,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2609327779",
+      "description": "Validate a detection rule with detection method 'new_value' with enabled feature 'instantaneousBaseline' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1782,6 +1887,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
+    }
+  ],
+  "AddTeamHierarchyLink": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create a team hierarchy link returns \"OK\" response"
     }
   ],
   "CreateTeamLink": [

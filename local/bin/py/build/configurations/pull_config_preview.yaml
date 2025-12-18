@@ -35,18 +35,6 @@
     - org_name: DataDog
 
       repos:
-      - repo_name: dd-go
-
-        contents:
-
-        - action: npm-integrations
-          branch: prod
-          globs:
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
-          - networks/model/domain/gcp_services.go
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
-          - networks/model/domain/azure_services.go
-
       - repo_name: ansible-datadog
         contents:
 
@@ -248,6 +236,16 @@
         - action: pull-and-push-file
           branch: master
           globs:
+          - 'packages/plugin-cloud-run/README.md'
+          options:
+            dest_path: '/serverless/libraries_integrations/'
+            file_name: 'cli-cloud-run.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-cloud-run/README.md"]
+              title: Datadog Serverless CLI for Cloud Run
+        - action: pull-and-push-file
+          branch: master
+          globs:
           - 'packages/plugin-synthetics/README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
@@ -416,7 +414,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: 7.71.x
+          branch: 7.73.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend_linux.md'
@@ -439,6 +437,19 @@
               file_name: "semantic-color.md"
       - repo_name: datadog-operator
         contents:
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/configuration_public.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'configuration.md'
+              front_matters:
+                title: Configure the Datadog Operator
+                description: "Configure Datadog Agent deployment options using DatadogAgent custom resource specifications and example manifests"
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/configuration_public.md"]
+                aliases:
+                  - /containers/datadog_operator/config
           - action: pull-and-push-file
             branch: main
             globs:

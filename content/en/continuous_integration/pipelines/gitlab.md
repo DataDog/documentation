@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a GitLab Pipeline
+title: GitLab Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/gitlab
 further_reading:
@@ -18,14 +18,14 @@ further_reading:
 
 [GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling automated, continuous deployment of applications with built-in security controls.
 
-Set up tracing in GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
+Set up CI Visibility for GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
 
 ### Compatibility
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| [CI jobs failure analysis][28] | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
+| [CI jobs failure analysis][28] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
@@ -45,6 +45,17 @@ The following GitLab versions are supported:
 - GitLab.com (SaaS)
 - GitLab >= 14.1 (self-hosted)
 - GitLab >= 13.7.0 (self-hosted) with the `datadog_ci_integration` feature flag enabled
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and GitLab:
+
+| Datadog                    | GitLab   |
+|----------------------------|----------|
+| Pipeline                   | Pipeline |
+| Stage                      | Stage    |
+| Job                        | Job      |
+| _Not available in Datadog_ | Script   |
 
 ## Configure the Datadog integration
 
@@ -303,7 +314,7 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 #### CI jobs failure analysis
 
-If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitLab.
+If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from GitLab.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
 

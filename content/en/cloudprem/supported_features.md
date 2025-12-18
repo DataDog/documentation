@@ -3,8 +3,8 @@ title: Supported Features
 description: Learn which Datadog Log Explorer features are supported in CloudPrem
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 ## Overview
 
@@ -24,6 +24,6 @@ The following log features are already supported:
 
 ## Unsupported features
 
-Features like Bits AI, LiveTail, Notebooks, Watchdogs, Sheets, Joins, Filter with Subquery, and search on multiple indexes are not supported.
+Features like LiveTail, Notebooks, Watchdogs, Sheets, Joins, Filter with Subquery, and search on multiple indexes are not supported.
 
 [1]: /api/latest/logs-restriction-queries/

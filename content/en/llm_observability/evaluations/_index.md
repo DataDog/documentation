@@ -4,11 +4,17 @@ description: Learn how to configure Evaluations for your LLM application.
 aliases:
     - /tracing/llm_observability/evaluations/
     - /llm_observability/configuration/
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Settings > Evaluations**][8].
+LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Evaluations**][8].
 
 ### Custom LLM-as-a-judge evaluations
 
@@ -28,13 +34,25 @@ Datadog also supports integrations with some 3rd party evaluation frameworks, su
 
 ### Sensitive Data Scanner integration
 
-In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
+In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information.
 
-By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
+### Security
+
+{{< learning-center-callout header="Get real-time security guardrails for your AI apps and agents" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
+  AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
+{{< /learning-center-callout >}}
 
 ### Permissions
 
 [`LLM Observability Write` permissions][7] are necessary to configure evaluations.
+
+### Retrieving spans
+
+LLM Observability offers an [Export API][9] that you can use to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 [2]: /llm_observability/evaluations/managed_evaluations
@@ -43,4 +61,5 @@ By proactively scanning for sensitive data, LLM Observability ensures that conve
 [5]: /llm_observability/evaluations/submit_nemo_evaluations
 [6]: /security/sensitive_data_scanner/
 [7]: /account_management/rbac/permissions/#llm-observability
-[8]: https://app.datadoghq.com/llm/settings/evaluations
+[8]: https://app.datadoghq.com/llm/evaluations
+[9]: /llm_observability/evaluations/export_api

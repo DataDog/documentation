@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
 
-On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date.
+On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date. Toggle between **List** view and **Board** view: The List view provides a detailed table, and the Board view offers a Kanban board with drag-and-drop functionality.
 
 To make bulk edits to cases within a project, use the checkboxes to select one or more cases. Then, use the drop-down menus to perform actions in bulk, such as status management, assignment, and archiving. When cases are moved to a different project, the cases are assigned a new case ID. The old case URL does not redirect to the new case.
 

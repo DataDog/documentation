@@ -6,6 +6,13 @@ aliases:
 is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
+further_reading:
+- link: https://www.datadoghq.com/blog/code-security-secret-scanning
+  tag: Blog
+  text: Detect and block exposed credentials with Datadog Secret Scanning
+- link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
+  tag: "Blog"
+  text: "Using LLMs to filter out false positives from static code analysis"
 ---
 
 {{% site-region region="gov" %}}
@@ -38,7 +45,7 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 ## Integrate into the development lifecycle
 
 ### Source code management
-{{< whatsnext desc="During code reviews, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request." >}}
+{{< whatsnext desc="During code reviews, Datadog can automatically flag Static Code Analysis violations in pull requests by adding inline review comments on the relevant line(s) of code. This is supported for GitHub, GitLab, and Azure DevOps repositories (cloud-hosted). When applicable, Datadog also provides suggested fixes that can be applied directly in the pull request." >}}
     {{< nextlink href="static_analysis/github_pull_requests" >}}Pull Requests{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -46,7 +53,6 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 {{< whatsnext desc="You can identify code vulnerabilities in real time as you edit a file in your Integrated Development Environment (IDE). See integration-specific documentation for more information:">}}
     {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}Datadog Extension for Visual Studio{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results
@@ -65,30 +71,14 @@ Click on a violation to open a side panel that contains information about the sc
 
 The content of the violation is shown in tabs:
 
-- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider (GitHub[4], GitLab[5]).
+- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the relevant source code integration for your provider ([GitHub][4], [GitLab][5], Azure[6]).
 - **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
 - **Event**: JSON metadata regarding the violation.
 
 ### Filter out false positives
-For a subset of SAST vulnerabilities, Bits AI can review the context of the finding and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. Select the toggle "Filter out false positives" on the [SAST vulnerabilities explorer](https://app.datadoghq.com/security/code-security/sast) to quickly narrow down your initial list for triage. 
+For a subset of SAST vulnerabilities, Bits AI can review the context of the finding and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
 
-For each finding, you can provide Bits AI with feedback on its assessment.
-
-{{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
-False positive filtering is supported for the following CWEs:
-- [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
-- [CWE-78: OS Command Injection](https://cwe.mitre.org/data/definitions/78.html)
-- [CWE-90: LDAP Injection](https://cwe.mitre.org/data/definitions/90.html)
-- [CWE-22: Path Traversal](https://cwe.mitre.org/data/definitions/22.html)
-- [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
-- [CWE-79: Cross-site Scripting](https://cwe.mitre.org/data/definitions/79.html)
-- [CWE-614: Insecure Cookie](https://cwe.mitre.org/data/definitions/614.html)
-- [CWE-327: Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)
-- [CWE-643: XPath Injection](https://cwe.mitre.org/data/definitions/643.html)
-- [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
-- [CWE-284: Improper Access Control](https://cwe.mitre.org/data/definitions/284.html)
-- [CWE-502: Deserialization of Untrusted Data](https://cwe.mitre.org/data/definitions/502.html)
-{{% /collapse-content %}}
+For more information, see [AI-Enhanced Static Code Analysis][17].
 
 ## Customize your configuration
 To customize which Static Code Analysis rules are configured in your repositories or across your organization, see the [Setup documentation][8].
@@ -114,13 +104,33 @@ The `paths` attribute is a list of globs that should match paths in the reposito
 apiVersion: v3
 kind: service
 metadata:
-name: my-service
+  name: my-service
 datadog:
-codeLocations:
-- repositoryURL: https://github.com/myorganization/myrepo.git
-paths:
-- path/to/service/code/**
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - path/to/service/code/**
 {{< /code-block >}}
+
+
+#### Detecting file usage patterns
+
+Datadog detects file usage in additional products such as Error Tracking and
+files associated with the runtime service. For example, if a service called `foo` has
+a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
+it associates files `/modules/foo/bar.py` to service `foo`.
+
+#### Detecting service name in paths and repository names
+
+Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
+
+For a repository match, if there is a service called `myservice` and
+the repository URL is `https://github.com/myorganization/myservice.git`, then,
+it associates `myservice` to all files in the repository.
+
+If no repository match is found, Datadog attempts to find a match in the
+`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
+in the path, the service name closest to the filename is selected.
 
 ### Link results to teams
 Datadog associates scan results with the team attached to a service. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
@@ -192,4 +202,5 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [13]: https://docs.datadoghq.com/security/code_security/static_analysis/#link-results-to-datadog-services-and-teams
 [14]: /account_management/teams/
 [15]: /integrations/github/#connect-github-teams-to-datadog-teams
-
+[16]: /integrations/azure-devops-source-code/
+[17]: /security/code_security/static_analysis/ai_enhanced_sast/

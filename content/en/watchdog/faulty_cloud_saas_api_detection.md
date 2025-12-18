@@ -26,65 +26,7 @@ Whenever Watchdog detects a provider degradation, it creates an event in the [Ev
 3. Select `Third Party` in the alert category.
 
 ## Supported providers
-Watchdog monitors the status of the following external providers' APIs: 
-
-| External Provider | API monitored |  
-|----------|--------------------|
-| Amplitude | api.amplitude.com |
-| Atlassian | *.atlassian.net |
-| Auth0 | *.auth0.com |
-| Binance | api.binance.com     |
-| Braintree | api.braintreegateway.com |
-| Cloudflare | api.cloudflare.com |
-| Databricks | *.cloud.databricks.com |
-| Facebook | graph.facebook.com |
-| GitHub | api.github.com |
-| Intercom | api.intercom.io |
-| Mapbox | api.mapbox.com |
-| Mixpanel | api.mixpanel.com |
-| OpenAI | *.openai.com|
-| PagerDuty | api.pagerduty.com |
-| SendGrid | *.sendgrid.com |
-| ServiceNow | *.service-now.com |
-| Slack | *.slack.com |
-| Snowflake | *.snowflakecomputing.com |
-| Splunk | *.splunkcloud.com |
-| Square | connect.squareup.com |
-| Stripe | api.stripe.com |
-| Twilio | api.twilio.com |
-| X | api.twitter.com |
-| Zendesk | *.zendesk.com |
-| Zoom    | api.zoom.us |
-
-The following AWS services are monitored (.*amazonaws.com):
-- CloudWatch
-- DynamoDB
-- ELB
-- ES
-- Firehose
-- Kinesis
-- KMS
-- Lambda
-- S3
-- SNS
-- SQS
-- STS
-
-in the following regions:
-| AMER          | EMEA         | APAC           |
-| --------------| -------------|----------------|
-| us-east-2     | af-south-1   | ap-east-1      |
-| us-east-1     | eu-central-1 | ap-south-2     | 
-| us-west-1     | eu-west-1    | ap-southeast-3 | 
-| us-west-2     | eu-west-2    | ap-southeast-4 |
-| ca-central-1  | eu-south-1   | ap-south-1     |
-| ca-west-1     | eu-west-3    | ap-northeast-3 |
-| us-gov-east-1 | eu-south-2   | ap-northeast-2 |
-| us-gov-west-1 | eu-north-1   | ap-southeast-1 |
-| sa-east-1     | eu-central-2 | ap-southeast-2 |
-|               | me-south-1   | ap-northeast-1 | 
-|               | me-central-1 |                |
-|               | il-central-1 |                |
+Watchdog monitors the status of the external providers' APIs listed in the [External Provider Status documentation][3].
 
 ## Further Reading
 
@@ -92,3 +34,4 @@ in the following regions:
 
 [1]: https://app.datadoghq.com/event/explorer
 [2]: https://app.datadoghq.com/monitors/create
+[3]: /internal_developer_portal/external_provider_status

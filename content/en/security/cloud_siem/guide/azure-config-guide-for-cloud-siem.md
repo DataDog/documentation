@@ -18,7 +18,7 @@ Cloud SIEM applies detection rules to all processed logs in Datadog to detect th
 
 This guide walks you through configuring Microsoft Azure to send logs to Datadog so that you can start detecting threats on your Azure Platform logs.
 
-<div class="alert alert-info">The Azure Native integration (available for customers on Datadog's US3 site) has different log collection setup instructions. If you are using the Azure Native integration, select <strong>US3</strong> in the Datadog Site dropdown menu and follow the instructions in <a href="https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/">Microsoft Azure log collection</a>. </div>
+<div class="alert alert-info">The Azure Native integration (available for customers on Datadog's US3 site) has different log collection setup instructions. If you are using the Azure Native integration, select <strong>US3</strong> in the Datadog Site dropdown menu and follow the instructions in <a href="https://docs.datadoghq.com/integrations/guide/azure-native-integration/#log-collection">Microsoft Azure log collection</a>. </div>
 
 {{< tabs >}}
 {{% tab "Automated Installation" %}}
@@ -31,14 +31,14 @@ Click the button below and fill in the form on Azure portal. After completing th
 1. Select a region.
 1. Select **true** for **Send Activity Logs**.
 1. Enter your Datadog API key.
-1. Enter names for your resources. See [Optional Parameters][1] for more information.
+1. Enter names for your resources.
 1. Click **Create + review**.
 1. After the validation passes, click **Create**.
 
-After the deployment is completed successfully, go to [Log Explorer][2] and enter `service:azure` in the search query to view your Azure logs.
+After the deployment is completed successfully, go to [Log Explorer][1] and enter `service:azure` in the search query to view your Azure logs.
 
-[1]: /logs/guide/azure-logging-guide/?tab=automatedinstallation#optional-parameters
-[2]: https://app.datadoghq.com/logs
+
+[1]: https://app.datadoghq.com/logs
 
 {{% /tab %}}
 
@@ -117,6 +117,8 @@ Create a new Function App. If you are using an existing function app, skip to Ad
 
 ### Add the Datadog Azure function
 
+<br />**Note**: The steps described below are based on the Azure Functions Programming Model v3. Datadog's latest [Azure function code][8] has been updated to support the Azure Functions Programming Model v4. If you need guidance on deploying the v4-compatible version or have questions regarding the differences between v3 and v4, contact Datadog Technical Support for assistance.
+
 1. In the new function, select **Code + Test** in the left side menu.
 1. Copy and paste the [Datadog-Azure function code][4] to your `index.js` file.
 1. Replace `<DATADOG_API_KEY>` with your Datadog API on line 22 of the function code.
@@ -165,10 +167,11 @@ Go to [Log Explorer][7] and enter `service:azure` in the search query to view yo
 [1]: https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups
 [2]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.EventHub%2Fnamespaces
 [3]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
-[4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
+[4]: https://github.com/DataDog/datadog-serverless-functions/blob/aws-dd-forwarder-4.5.0/azure/activity_logs_monitoring/index.js
 [5]: https://docs.datadoghq.com/getting_started/site/
 [6]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/activityLog
 [7]: https://app.datadoghq.com/logs
+[8]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
 
 {{% /tab %}}
 {{< /tabs >}}

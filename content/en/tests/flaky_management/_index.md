@@ -1,5 +1,5 @@
 ---
-title: Flaky Test Management
+title: Flaky Tests Management
 description: Track, triage, and manage flaky tests.
 further_reading:
 - link: "/continuous_integration/tests/"
@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-The [Flaky Test Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's status along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
+The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's status along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
 
 From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create cases and Jira issues to track work toward fixes.
 
@@ -48,18 +48,55 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
 
 3. Use the toggles to enable specific automated actions, and use automation rules to further customize how tests get quarantined, disabled, or retried:
 
-| Action    | Description |
-| ---- | ---- |
-| **Quarantine**     | Toggle to allow flaky tests to be quarantined for this repository. Customize automation rules based on: <li>Time: Quarantine a test if its status is `Active` for a specified number of days. <li>Branch: Quarantine an `Active` test if it flakes in one or more specified branches.|
-| **Disable**        | Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness. Customize automation rules based on: <li>Status and time: Disable a test if it has a specified status for a specified number of days. <li>Branch: Disable an `Active` or `Quarantined` test if it flakes in one or more specified branches. |
-| **Attempt&nbsp;to&nbsp;Fix** | When you attempt to fix a flaky test, automatically retry the test a specified number of times on the commit containing the fix. |
-| **Fixed**          | If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized. |
+<table>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Quarantine</strong></td>
+      <td>
+        <p>Toggle to allow flaky tests to be quarantined for this repository.</p>
+        <p>Customize automation rules based on:</p>
+        <ul>
+          <li><strong>Time</strong>: Quarantine a test if its status is <code>Active</code> for a specified number of days. The rule is triggered every day at 12:15 UTC.</li>
+          <li><strong>Branch</strong>: Quarantine an <code>Active</code> test if it flakes in one or more specified branches.</li>
+          <li><strong>Failure rate</strong>: Quarantine an <code>Active</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Disable</strong></td>
+      <td>
+        <p>Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness.</p>
+        <p>Customize automation rules based on:</p>
+        <ul>
+          <li><strong>Status and time</strong>: Disable a test if it has a specified status for a specified number of days. The rule is triggered every day at 12:30 UTC.</li>
+          <li><strong>Branch</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if it flakes in one or more specified branches.</li>
+          <li><strong>Failure rate</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Attempt&nbsp;to&nbsp;Fix</strong></td>
+      <td>When you attempt to fix a flaky test, automatically retry the test a specified number of times on the commit containing the fix.</td>
+    </tr>
+    <tr>
+      <td><strong>Fixed</strong></td>
+      <td>If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized.</td>
+    </tr>
+  </tbody>
+  </table>
 
 ## Track evolution of flaky tests
 
 Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
 
 - `repository_id`
+- `test_service`
 - `branch`
 - `flaky_status`
 - `test_codeowners`
@@ -82,18 +119,32 @@ For any flaky test, you can create a case and use [Case Management][4] to track 
 
 When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. If successful, the test's status is automatically updated to `Fixed`. To enable the remediation flow:
 
-1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Test Management UI.
+1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Tests Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
-   - Retries any tests you're attempting to fix 20 times.
-   - Runs tests even if they are marked as `Disabled`.
-   - If all retries pass, updates the test's status to `Fixed`.
-   - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
+    - Retries any tests you're attempting to fix 20 times.
+    - Runs tests even if they are marked as `Disabled`.
+    - If all retries pass, updates the test's status to `Fixed`.
+    - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
+
+## AI-powered flaky test fixes
+
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
+Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
+
+Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
+
+{{< img src="tests/bits_ai_flaky_test_fixes.png" alt="Bits AI Dev Agent displaying a proposed fix for a flaky test" style="width:100%;" >}}
+
+### Setup
+
+To enable AI-powered flaky test fixes, enable Bits AI Dev Agent for Test Optimization by following the setup instructions in the [Bits AI Dev Agent documentation][16]. Bits AI Dev Agent automatically create fixes for flaky tests detected by Test Optimization.
 
 ## AI-powered flaky test categorization
 
-Flaky Test Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
+Flaky Tests Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
 
 <div class="alert alert-info">A test must have at least one failed execution that includes both <code>@error.message</code> and <code>@error.stack</code> tags to be eligible for categorization. If the test was recently detected, categorization may take several minutes to complete.</div>
 
@@ -126,7 +177,7 @@ Notifications are not sent immediately; they are batched every few minutes to re
 
 ## Compatibility
 
-To use Flaky Test Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
+To use Flaky Tests Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |
@@ -155,3 +206,4 @@ To use Flaky Test Management features, you must use Datadog's native instrumenta
 [11]: /tests/setup/ruby/
 [12]: /tests/setup/swift/
 [13]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
+[16]: /bits_ai/bits_ai_dev_agent/

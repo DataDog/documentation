@@ -95,7 +95,7 @@ To manage usage attribution tags to your application in the UI:
 
 [1]: https://app.datadoghq.com/billing/usage-attribution
 [2]: https://app.datadoghq.com/rum/list
-[3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [4]: /api/latest/usage-metering/#get-hourly-usage-attribution-v1
 [5]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#track-attributes
 [6]: /real_user_monitoring/guide/tracking-rum-usage-with-usage-attribution-tags/#check-your-tags

@@ -1,6 +1,8 @@
 ---
 title: Cloud Cost Recommendations
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
+aliases:
+    - /cloud_cost_management/recommendations/savings
 algolia:
   tags:
     - cloud cost recommendations
@@ -600,7 +602,7 @@ Recommendations are run on a daily basis and are automatically refreshed in your
 
 You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page.
 
-Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations.
+Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations and [are normalized][12].
 
 ## Recommendation categories
 
@@ -620,6 +622,8 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 - Cloud provider accounts (for all desired Cloud Cost recommendations)
 - [AWS integration and resource collection][3] (for AWS recommendations)
 - [Azure integration and resource collection][8] (for Azure recommendations)
+- [GCP integration and resource collection][10] (for GCP recommendations)
+- [Datadog Agent integration][5] (for Downsize recommendations)
 
 ## Setup
 
@@ -636,11 +640,24 @@ For each cloud account that you would like to receive recommendations for:
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
 
 ## Recommendation action-taking
-You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking options:
+You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
 
-- **Jira**: Jira issue creation is available in both the recommendation side panel and the "Active Recommendations" list. You can create a Jira issue by clicking "Create Jira issue" in the side panel or by selecting multiple recommendations in the "Active Recommendations" list. Created Jira issues are automatically tagged to indicate their connection to a cost recommendation and include a link back to the referenced recommendation.
+- **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the "Active Recommendations" list and clicking "Create Jira issue." Created issues are tagged and link back to the recommendation in Datadog.
+
+  To filter recommendations by Jira status, use the following query options:
+  - `@jira_issues.issue_key:*` - Show only recommendations with a Jira issue
+  - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue  
+  - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
+
+- **Bits AI Dev Agent code fixes**: Code fixes are available for all S3 recommendations. In these situations, the Bits AI Dev Agent (in Preview) creates production-ready pull requests to implement cloud resource changes and cost optimizations. Join the Preview and [set up the Bits AI Dev Agent][13] to use this feature.
+
+  {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
+  Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+  {{< /callout >}}
+
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations.
+- **Dismiss**: Use "Dismiss" in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the "Dismissed" tab.
 
 ## Recommendation and resource descriptions
 
@@ -660,4 +677,6 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [8]: https://app.datadoghq.com/integrations/azure
 [9]: /integrations/azure/
 [10]: https://app.datadoghq.com/integrations/gcp
-[11]: /cloud_cost_management/tags/tag_pipelines/
+[11]: /cloud_cost_management/allocation/tag_pipelines/
+[12]: /cloud_cost_management/tags/#how-tags-are-normalized
+[13]: https://docs.datadoghq.com/bits_ai/bits_ai_dev_agent/setup 

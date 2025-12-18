@@ -13,10 +13,22 @@ Use Observability Pipelines' HTTP/S Client source to pull logs from the upstream
 
 Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
 
-{{% observability_pipelines/source_settings/http_client %}}
+To configure your HTTP/S Client source:
+
+1. Select your authorization strategy.
+2. Select the decoder you want to use on the HTTP messages. Logs pulled from the HTTP source must be in this format.
+3. Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+   - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509) format.
+   - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509) format.
+   - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+4. Enter the interval between scrapes.
+   - Your HTTP Server must be able to handle GET requests at this interval.
+   - Since requests run concurrently, if a scrape takes longer than the interval given, a new scrape is started, which can consume extra resources. Set the timeout to a value lower than the scrape interval to prevent this from happening.
+5. Enter the timeout for each scrape request.
 
 ## Set the environment variables
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
 
-[1]: /observability_pipelines/set_up_pipelines/
+[1]: /observability_pipelines/configuration/set_up_pipelines/
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

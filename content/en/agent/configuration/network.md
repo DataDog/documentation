@@ -39,6 +39,7 @@ Add the following domains to your inclusion list to allow for Agent installation
 - `yum.datadoghq.com`
 - `keys.datadoghq.com`
 - `apt.datadoghq.com`
+- `windows-agent.datadoghq.com`
 
 ## Destinations
 <div class="alert alert-warning">
@@ -101,104 +102,15 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 
 {{% /site-region %}}
 
-{{% site-region region="us" %}}
-[Logs][200] & [HIPAA logs][201]
-: TCP: `agent-intake.logs.datadoghq.com`<br>
-HTTP: `agent-http-intake.logs.datadoghq.com`<br>
-Other: See [logs endpoints][203]
+{{% logs-tcp-disclaimer %}}
 
-[HIPAA logs legacy][201]
-: `tcp-encrypted-intake.logs.datadoghq.com`<br>
-`lambda-tcp-encrypted-intake.logs.datadoghq.com`<br>
-`gcp-encrypted-intake.logs.datadoghq.com`<br>
-`http-encrypted-intake.logs.datadoghq.com`
+[Logs][30] & [HIPAA logs][31]
+: (Deprecated) TCP: {{< region-param key=tcp_endpoint code="true" >}}<br>
+HTTP: {{< region-param key=agent_http_endpoint code="true" >}}<br>
+Other: See [logs endpoints][32]
 
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[203]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="eu" %}}
-[Logs][200] & [HIPAA logs][201]
-: TCP: `agent-intake.logs.datadoghq.eu`<br>
-HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
-Other: See [logs endpoints][202]
-
-[HIPAA logs legacy][201]
-: `tcp-encrypted-intake.logs.datadoghq.eu`<br>
-`lambda-tcp-encrypted-intake.logs.datadoghq.eu`<br>
-`gcp-encrypted-intake.logs.datadoghq.eu`<br>
-`http-encrypted-intake.logs.datadoghq.eu`
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="us3" %}}
-[Logs][200] & [HIPAA logs][201]
-: HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
-Other: See [logs endpoints][202]
-
-[HIPAA logs legacy][201]
-: `lambda-tcp-encrypted-intake.logs.us3.datadoghq.com`<br>
-`gcp-encrypted-intake.logs.us3.datadoghq.com`<br>
-`http-encrypted-intake.logs.us3.datadoghq.com`
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="us5" %}}
-[Logs][200] & [HIPAA logs][201]
-: HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
-Other: See [logs endpoints][202]
-
-[HIPAA logs legacy][201]
-: `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
-`gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
-`http-encrypted-intake.logs.us5.datadoghq.com`
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="ap1" %}}
-[Logs][200] & [HIPAA logs][201]
-: HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
-Other: See [logs endpoints][202]
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="ap2" %}}
-[Logs][200] & [HIPAA logs][201]
-: HTTP: `agent-http-intake.logs.ap2.datadoghq.com`<br>
-Other: See [logs endpoints][202]
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="gov" %}}
-[Logs][200] & [HIPAA logs][201]
-: HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
-Other: See [logs endpoints][202]
-
-[HIPAA logs legacy][201]
-: `lambda-tcp-encrypted-intake.logs.ddog-gov.com`<br>
-`gcp-encrypted-intake.logs.ddog-gov.com`<br>
-`http-encrypted-intake.logs.ddog-gov.com`
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
+[HIPAA logs legacy][31] (Deprecated, TCP not supported)
+: {{< region-param key=hipaa_logs_legacy code="true" >}}
 
 [Metrics][26], [Service Checks][27], [Events][28], and other Agent metadata
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -263,29 +175,14 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 #### Outbound
 
-{{% site-region region="us" %}}
+{{% site-region region="us,eu" %}}
 
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
 | Agent<br>APM<br>Containers<br>Live Processes<br>Metrics<br>Cloud Network Monitoring<br>Universal Service Monitoring | 443 | TCP | Most Agent data uses port 443. |
 | [Custom Agent Autoscaling][22] | 8443 | TCP |  |
-| Log collection | 10516 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
-| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
-
-[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[20]: /integrations/ntp/#overview
-[21]: /logs/log_collection/#logging-endpoints
-[22]: /containers/guide/cluster_agent_autoscaling_metrics
-
-{{% /site-region %}}
-
-{{% site-region region="eu" %}}
-
-| Product/Functionality | Port | Protocol | Description |
-| ------  | ---- | ------- | ----------- |
-| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics<br>Cloud Network Monitoring<br>Universal Service Monitoring | 443 | TCP | Most Agent data uses port 443. |
-| [Custom Agent Autoscaling][22] | 8443 | TCP |  |
-| Log collection | 443 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
+| Log collection | {{< region-param key=web_integrations_port >}} | (Deprecated) TCP | Logging over TCP. <br>**Note**:TCP log collection is **not supported**. Datadog provides **no delivery or reliability guarantees** when using TCP, and log data may be lost without notice.
+For reliable ingestion, use the HTTP intake endpoint, an official Datadog Agent, or forwarder integration instead. For other connection types, see [logs endpoints][21]. |
 | NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
 [19]: /agent/faq/network-time-protocol-ntp-offset-issues/
@@ -434,3 +331,6 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [27]: /developers/service_checks/
 [28]: /events/
 [29]: /security/cloud_security_management/vulnerabilities/
+[30]: /logs/
+[31]: /data_security/logs/#hipaa-enabled-customers
+[32]: /logs/log_collection/#logging-endpoints

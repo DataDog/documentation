@@ -36,6 +36,8 @@ All shared dashboards in the organization and their public access settings are l
 
 Shared dashboards refresh approximately every 60 seconds, and this [refresh rate][1] cannot be customized.
 
+Viewers of Shared Dashboards see all telemetry data displayed in the Dashboard in accordance to the [creator's permissions][4]. Review your dashboard content before sharing to ensure no sensitive or confidential data is exposed.
+
 ## Share states
 
 Shared dashboards can be in one of two share states:
@@ -148,7 +150,6 @@ The following widget types are not supported on shared dashboards. Widgets of th
 * Topology Map
 * List Widget (all data sources)
 * Legacy treemap widget
-* SLO Summary widget
 
 ### Limited timeframe options
 
@@ -180,3 +181,4 @@ View all shared dashboards in your organization and your settings on the [Shared
 [1]: /dashboards/#refresh-rate
 [2]: https://app.datadoghq.com/dashboard/shared
 [3]: https://app.datadoghq.com/organization-settings/public-sharing
+[4]: /account_management/rbac/data_access/#dashboards-and-notebooks

@@ -21,6 +21,12 @@ content/en/api/**/*.ts
 content/en/api/**/*.rs
 content/en/api/tsconfig.json
 
+# ignore full spec deref, generate during build instead
+data/api/v1/full_spec_deref.json
+data/api/v2/full_spec_deref.json
+static/resources/json/full_spec_v1.json
+static/resources/json/full_spec_v2.json
+
 # Ignoring all automated content
 temp
 
@@ -163,6 +169,7 @@ content/en/containers/guide/v2alpha1_migration.md
 content/en/serverless/libraries_integrations/plugin.md
 content/en/serverless/libraries_integrations/macro.md
 content/en/serverless/libraries_integrations/cli.md
+content/en/serverless/libraries_integrations/cli-cloud-run.md
 content/en/serverless/libraries_integrations/cdk.md
 content/en/serverless/libraries_integrations/extension.md
 
@@ -289,6 +296,7 @@ local/bin/py/sh
 local/bin/py/js
 local/bin/js/
 local/bin/py/translations
+local/bin/py/blog_linker.py
 local/bin/py/add_notranslate_tag.py
 local/bin/py/placehold_translations.py
 local/bin/py/missing_metrics.py
@@ -301,9 +309,13 @@ local/bin/py/submit_github_status_check.py
 layouts/partials/markdoc-assets.html
 static/cdocs
 content/en/**/*.ast.json
+layouts/shortcodes/mdoc/en/**/*.ast.json
+*.tempAst.json
+.cdocs_temp
 
 # Cursor editor configuration
 .cursor/
 
-# Generated file for LLMs
+
+# Deprecated generated file for LLMs (keep so it's not merged back in)
 static/llms.txt

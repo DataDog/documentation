@@ -13,8 +13,8 @@ further_reading:
   text: "Manage and Monitor CloudPrem"
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 ## Overview
 
@@ -23,7 +23,6 @@ This page explains how to configure your Datadog account to access logs from you
 ## Enabling CloudPrem log search
 
 Before you can search CloudPrem logs in the Datadog UI, contact [Datadog support][1] and provide the public DNS of your CloudPrem cluster. This links your cluster to your Datadog account.
-You need to reach out to [Datadog support][1] and give the public DNS of your CloudPrem cluster so that you can search into CloudPrem logs from Datadog UI.
 
 ## Searching your CloudPrem logs in the Logs Explorer
 
