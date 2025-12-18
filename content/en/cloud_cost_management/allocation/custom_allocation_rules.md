@@ -180,4 +180,4 @@ Changes to custom allocation rules may take up to 24 hours to be applied. After 
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
 [3]: https://www.datadoghq.com/support/
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/custom_allocation_rule
-[5]: https://docs.datadoghq.com/api/latest/cloud-cost-management/#create-custom-allocation-rule
+[5]: /api/latest/cloud-cost-management/#create-custom-allocation-rule
