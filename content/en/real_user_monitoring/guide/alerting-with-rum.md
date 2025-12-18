@@ -40,7 +40,7 @@ Choose what to monitor based on your use case:
 
 ## Export queries from the RUM homepage
 
-You can export existing queries from the [RUM homepage][12] to create a monitor with all the query and context preserved. For customers on [RUM without Limits™][1], the queries powering those widgets are based on the [out-of-the-box metrics][13]. For customers on the legacy model, they are based on [events][14].
+You can export existing queries from the [RUM homepage][12] to create a monitor with all queries and context preserved. For customers on [RUM without Limits™][1], the queries powering those widgets are based on the [out-of-the-box metrics][13]. For customers on the legacy model, they are based on [events][14].
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/create-monitor-homepage.png" alt="Export button to the right hand corner of the RUM Explorer" style="width:100%;" >}}
 
