@@ -4234,15 +4234,15 @@ menu:
       parent: tracing_trace_collection
       identifier: tracing_proxies
       weight: 211
+    - name: Apache HTTP Server
+      url: tracing/trace_collection/proxy_setup/httpd
+      parent: tracing_proxies
+      identifier: tracing_proxies_httpd
+      weight: 2111
     - name: Envoy
       url: tracing/trace_collection/proxy_setup/envoy
       parent: tracing_proxies
       identifier: tracing_proxies_envoy
-      weight: 2111
-    - name: NGINX
-      url: tracing/trace_collection/proxy_setup/nginx
-      parent: tracing_proxies
-      identifier: tracing_proxies_nginx
       weight: 2112
     - name: Istio
       url: tracing/trace_collection/proxy_setup/istio
@@ -4254,11 +4254,16 @@ menu:
       parent: tracing_proxies
       identifier: tracing_proxies_kong
       weight: 2114
-    - name: Apache HTTP Server
-      url: tracing/trace_collection/proxy_setup/httpd
+    - name: NGINX
+      url: tracing/trace_collection/proxy_setup/nginx
       parent: tracing_proxies
-      identifier: tracing_proxies_httpd
+      identifier: tracing_proxies_nginx
       weight: 2115
+    - name: Amazon API Gateway
+      url: tracing/trace_collection/proxy_setup/apigateway
+      parent: tracing_proxies
+      identifier: tracing_proxies_apigateway
+      weight: 2116
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
