@@ -1482,8 +1482,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1549,8 +1547,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         created_at:
           description: Timestamp of when the account integration was created.
           format: date-time
@@ -1624,8 +1620,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1756,15 +1750,6 @@ components:
           type: string
       required:
       - role_name
-      type: object
-    AWSCCMConfig:
-      description: AWS Cloud Cost Management config.
-      properties:
-        data_export_configs:
-          description: List of data export configurations for Cost and Usage Reports.
-          items:
-            $ref: '#/components/schemas/DataExportConfig'
-          type: array
       type: object
     AWSCredentials:
       description: The definition of `AWSCredentials` object.
@@ -5281,7 +5266,7 @@ components:
       description: Data of the case to attach security findings to.
       properties:
         id:
-          description: Unique identifier of the case.
+          description: The unique identifier of the case.
           example: c1234567-89ab-cdef-0123-456789abcdef
           type: string
         relationships:
@@ -5312,6 +5297,10 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/AttachJiraIssueRequestDataAttributes'
+        id:
+          description: The unique identifier of the Jira issue attachment request.
+          example: j1234567-89ab-cdef-0123-456789abcdef
+          type: string
         relationships:
           $ref: '#/components/schemas/AttachJiraIssueRequestDataRelationships'
         type:
@@ -5323,7 +5312,7 @@ components:
       description: Attributes of the Jira issue to attach security findings to.
       properties:
         jira_issue_url:
-          description: URL of the Jira issue to attach security findings to.
+          description: The URL of the Jira issue to attach security findings to.
           example: https://domain.atlassian.net/browse/PROJ-123
           type: string
       required:
@@ -5334,12 +5323,8 @@ components:
       properties:
         findings:
           $ref: '#/components/schemas/Findings'
-          description: Security findings to attach to the Jira issue.
         project:
           $ref: '#/components/schemas/CaseManagementProject'
-          description: Case management project with Jira integration configured. It
-            is used to attach security findings to the Jira issue. To configure the
-            integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
       required:
       - findings
       - project
@@ -9103,17 +9088,17 @@ components:
       description: An insight of the case.
       properties:
         ref:
-          description: Reference of the insight.
+          description: The reference of the insight.
           example: /security/appsec/vm/library/vulnerability/dfa027f7c037b2f77159adc027fecb56?detection=static
           type: string
         resource_id:
-          description: Unique identifier of the resource. For example, the unique
+          description: The unique identifier of the resource. For example, the unique
             identifier of a security finding.
           example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
           type: string
         type:
-          description: Type of the resource. For example, the type of a security finding
-            is "SECURITY_FINDING".
+          description: The type of the resource. For example, the type of a security
+            finding is "SECURITY_FINDING".
           example: SECURITY_FINDING
           type: string
       type: object
@@ -9128,7 +9113,7 @@ components:
     CaseManagementProjectData:
       properties:
         id:
-          description: Unique identifier of the case management project.
+          description: The unique identifier of the case management project.
           example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
           type: string
         type:
@@ -10236,10 +10221,6 @@ components:
           description: Whether the policy is pinned
           example: false
           type: boolean
-        policyType:
-          description: The type of the policy
-          example: policy
-          type: string
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -10418,11 +10399,11 @@ components:
     CloudWorkloadSecurityAgentPolicyVersion:
       description: The versions of the policy
       properties:
-        date:
+        Date:
           description: The date and time the version was created
           nullable: true
           type: string
-        name:
+        Name:
           description: The version of the policy
           example: 1.47.0-rc2
           type: string
@@ -10449,11 +10430,8 @@ components:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
-      description: Hash file specified by the field attribute
-      properties:
-        field:
-          description: The field of the hash action
-          type: string
+      additionalProperties: {}
+      description: An empty object indicating the hash action
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
       description: The metadata action applied on the scope matching the rule
@@ -10501,14 +10479,9 @@ components:
           format: int64
           type: integer
         value:
-          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSetValue'
+          description: The value of the set action
+          type: string
       type: object
-    CloudWorkloadSecurityAgentRuleActionSetValue:
-      description: The value of the set action
-      oneOf:
-      - type: string
-      - type: integer
-      - type: boolean
     CloudWorkloadSecurityAgentRuleActions:
       description: The array of actions the rule can perform if triggered
       items:
@@ -12887,6 +12860,10 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/CreateCaseRequestDataAttributes'
+        id:
+          description: The unique identifier of the case.
+          example: c1234567-89ab-cdef-0123-456789abcdef
+          type: string
         relationships:
           $ref: '#/components/schemas/CreateCaseRequestDataRelationships'
         type:
@@ -12898,21 +12875,21 @@ components:
       description: Attributes of the case to create.
       properties:
         assignee_id:
-          description: Unique identifier of the user assigned to the case.
+          description: The unique identifier of the user assigned to the case.
           example: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
           type: string
         description:
-          description: Description of the case. If not provided, the description will
-            be automatically generated.
+          description: The description of the case. If not provided, the description
+            will be automatically generated.
           example: A description of the case.
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
-          description: Priority of the case. If not provided, the priority will be
-            automatically set to "NOT_DEFINED".
+          description: The priority of the case. If not provided, the priority will
+            be automatically set to "NOT_DEFINED".
           example: P4
         title:
-          description: Title of the case. If not provided, the title will be automatically
+          description: The title of the case. If not provided, the title will be automatically
             generated.
           example: A title for the case.
           type: string
@@ -12922,10 +12899,10 @@ components:
       properties:
         findings:
           $ref: '#/components/schemas/Findings'
-          description: Security findings to create a case for.
+          description: Security findings of the case to create.
         project:
           $ref: '#/components/schemas/CaseManagementProject'
-          description: Case management project in which the case will be created.
+          description: Project of the case to create.
       required:
       - findings
       - project
@@ -13158,14 +13135,29 @@ components:
           items:
             $ref: '#/components/schemas/CreateJiraIssueRequestData'
           type: array
+        included:
+          items:
+            $ref: '#/components/schemas/CreateJiraIssueRequestArrayIncluded'
+          type: array
       required:
       - data
       type: object
+    CreateJiraIssueRequestArrayIncluded:
+      description: 'Attributes and relationships of the case linked to the Jira issue.
+        Should contain all of the following: case, project, and security findings.'
+      oneOf:
+      - $ref: '#/components/schemas/CreateCaseRequestData'
+      - $ref: '#/components/schemas/CaseManagementProjectData'
+      - $ref: '#/components/schemas/FindingData'
     CreateJiraIssueRequestData:
       description: Data of the Jira issue to create.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateJiraIssueRequestDataAttributes'
+        id:
+          description: The unique identifier of the Jira issue creation request.
+          example: j1234567-89ab-cdef-0123-456789abcdef
+          type: string
         relationships:
           $ref: '#/components/schemas/CreateJiraIssueRequestDataRelationships'
         type:
@@ -13176,51 +13168,48 @@ components:
     CreateJiraIssueRequestDataAttributes:
       description: Attributes of the Jira issue to create.
       properties:
-        assignee_id:
-          description: Unique identifier of the user assigned to the Jira issue.
-          example: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
-          type: string
-        description:
-          description: Description of the Jira issue. If not provided, the description
-            will be automatically generated.
-          example: A description of the Jira issue.
-          type: string
         fields:
-          additionalProperties: {}
-          description: Custom fields of the Jira issue to create. For the list of
-            available fields, see [Jira documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-createmeta-projectidorkey-issuetypes-issuetypeid-get).
+          $ref: '#/components/schemas/CreateJiraIssueRequestDataAttributesFields'
+      type: object
+    CreateJiraIssueRequestDataAttributesFields:
+      description: Custom fields of the Jira issue to create. For the list of available
+        fields, see [Jira documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-createmeta-projectidorkey-issuetypes-issuetypeid-get).
+      properties:
+        fields:
           example:
-            key1: value
-            key2:
-            - value
-            key3:
-              key4: value
+            customfield_10001: Value 1
+            customfield_10002:
+            - Value 2
+            - Value 3
           type: object
-        priority:
-          $ref: '#/components/schemas/CasePriority'
-          description: Priority of the Jira issue. If not provided, the priority will
-            be automatically set to "NOT_DEFINED".
-          example: P4
-        title:
-          description: Title of the Jira issue. If not provided, the title will be
-            automatically generated.
-          example: A title for the Jira issue.
-          type: string
       type: object
     CreateJiraIssueRequestDataRelationships:
       description: Relationships of the Jira issue to create.
       properties:
-        findings:
-          $ref: '#/components/schemas/Findings'
-          description: Security findings to create a Jira issue for.
-        project:
-          $ref: '#/components/schemas/CaseManagementProject'
-          description: Case management project configured with the Jira integration.
-            It is used to create the Jira issue. To configure the Jira integration,
-            see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
+        case:
+          $ref: '#/components/schemas/CreateJiraIssueRequestDataRelationshipsCase'
       required:
-      - findings
-      - project
+      - case
+      type: object
+    CreateJiraIssueRequestDataRelationshipsCase:
+      description: Case linked to the Jira issue.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateJiraIssueRequestDataRelationshipsCaseData'
+      required:
+      - data
+      type: object
+    CreateJiraIssueRequestDataRelationshipsCaseData:
+      description: Case linked to the Jira issue.
+      properties:
+        id:
+          example: c1234567-89ab-cdef-0123-456789abcdef
+          type: string
+        type:
+          $ref: '#/components/schemas/CaseDataType'
+      required:
+      - type
+      - id
       type: object
     CreateNotificationChannelAttributes:
       description: Attributes for creating an on-call notification channel.
@@ -16210,30 +16199,6 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
-    DataExportConfig:
-      description: AWS Cost and Usage Report data export configuration.
-      properties:
-        bucket_name:
-          description: Name of the S3 bucket where the Cost and Usage Report is stored.
-          example: billing
-          type: string
-        bucket_region:
-          description: AWS region of the S3 bucket.
-          example: us-east-1
-          type: string
-        report_name:
-          description: Name of the Cost and Usage Report.
-          example: cost-and-usage-report
-          type: string
-        report_prefix:
-          description: S3 prefix where the Cost and Usage Report is stored.
-          example: reports
-          type: string
-        report_type:
-          description: Type of the Cost and Usage Report.
-          example: CUR2.0
-          type: string
-      type: object
     DataRelationshipsTeams:
       description: Associates teams with this schedule in a data structure.
       properties:
@@ -17248,6 +17213,10 @@ components:
     DetachCaseRequestData:
       description: Data for detaching security findings from their case.
       properties:
+        id:
+          description: The unique identifier of the detachment request.
+          example: f8b9e3b1-24ec-4413-8be5-1b12b98533c6
+          type: string
         relationships:
           $ref: '#/components/schemas/DetachCaseRequestDataRelationships'
         type:
@@ -20189,13 +20158,6 @@ components:
           $ref: '#/components/schemas/EventPayloadAttributes'
         category:
           $ref: '#/components/schemas/EventCategory'
-        host:
-          description: Host name to associate with the event. Any tags associated
-            with the host are also applied to this event. Limited to 255 characters.
-          example: hostname
-          maxLength: 255
-          minLength: 1
-          type: string
         integration_id:
           $ref: '#/components/schemas/EventPayloadIntegrationId'
         message:
@@ -21422,7 +21384,7 @@ components:
         attributes:
           $ref: '#/components/schemas/FindingCaseResponseDataAttributes'
         id:
-          description: Unique identifier of the case.
+          description: The unique identifier of the case.
           example: c1234567-89ab-cdef-0123-456789abcdef
           type: string
         relationships:
@@ -21529,7 +21491,7 @@ components:
     FindingData:
       properties:
         id:
-          description: Unique identifier of the security finding.
+          description: The unique identifier of the security finding.
           example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
           type: string
         type:
@@ -21592,15 +21554,15 @@ components:
       description: Jira issue associated with the case.
       properties:
         error_message:
-          description: Error message if the Jira issue creation failed.
+          description: The error message if the Jira issue creation failed.
           example: '{"errorMessages":["An error occured."],"errors":{}}'
           type: string
         result:
           $ref: '#/components/schemas/FindingJiraIssueResult'
         status:
-          description: Status of the Jira issue creation. Can be "COMPLETED" if the
-            Jira issue was created successfully, or "FAILED" if the Jira issue creation
-            failed.
+          description: The status of the Jira issue creation. Can be "COMPLETED" if
+            the Jira issue was created successfully, or "FAILED" if the Jira issue
+            creation failed.
           example: COMPLETED
           type: string
       type: object
@@ -21608,19 +21570,19 @@ components:
       description: Result of the Jira issue creation.
       properties:
         account_id:
-          description: Account ID of the Jira issue.
+          description: The account ID of the Jira issue.
           example: 463a8631-680e-455c-bfd3-3ed04d326eb7
           type: string
         issue_id:
-          description: Unique identifier of the Jira issue.
+          description: The unique identifier of the Jira issue.
           example: '2871276'
           type: string
         issue_key:
-          description: Key of the Jira issue.
+          description: The key of the Jira issue.
           example: PROJ-123
           type: string
         issue_url:
-          description: URL of the Jira issue.
+          description: The URL of the Jira issue.
           example: https://domain.atlassian.net/browse/PROJ-123
           type: string
       type: object
@@ -23651,6 +23613,13 @@ components:
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
           type: boolean
+        is_global_location_enabled:
+          default: true
+          description: When enabled, Datadog collects metrics where location is explicitly
+            stated as "global" or where location information cannot be deduced from
+            GCP labels.
+          example: true
+          type: boolean
         is_per_project_quota_enabled:
           default: false
           description: When enabled, Datadog applies the `X-Goog-User-Project` header,
@@ -23691,6 +23660,18 @@ components:
             type: gce_instance
           items:
             $ref: '#/components/schemas/GCPMonitoredResourceConfig'
+          type: array
+        region_filter_configs:
+          description: Configurations for GCP location filtering, such as region,
+            multi-region, or zone. Only monitored resources that match the specified
+            regions are imported into Datadog. By default, Datadog collects from all
+            locations.
+          example:
+          - nam4
+          - europe-north1
+          items:
+            description: Region Filter Configs
+            type: string
           type: array
         resource_collection_enabled:
           description: When enabled, Datadog scans for all resources in your GCP environment.
@@ -35378,10 +35359,6 @@ components:
       description: The `add_env_vars` processor adds environment variable values to
         log events.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this processor in the pipeline.
@@ -35392,6 +35369,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this processor.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineAddEnvVarsProcessorType'
         variables:
@@ -35403,8 +35388,8 @@ components:
       - id
       - type
       - include
+      - inputs
       - variables
-      - enabled
       type: object
     ObservabilityPipelineAddEnvVarsProcessorType:
       default: add_env_vars
@@ -35433,10 +35418,6 @@ components:
     ObservabilityPipelineAddFieldsProcessor:
       description: The `add_fields` processor adds static key-value fields to logs.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         fields:
           description: A list of static fields (key-value pairs) that is added to
             each log event processed by this component.
@@ -35454,6 +35435,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessorType'
       required:
@@ -35461,7 +35450,7 @@ components:
       - type
       - include
       - fields
-      - enabled
+      - inputs
       type: object
     ObservabilityPipelineAddFieldsProcessorType:
       default: add_fields
@@ -35764,25 +35753,15 @@ components:
             $ref: '#/components/schemas/ObservabilityPipelineConfigDestinationItem'
           type: array
         processors:
-          description: A list of processor groups that transform or enrich log data.
+          description: A list of processors that transform or enrich log data.
           example:
-          - enabled: true
-            id: my-processor-group
+          - id: filter-processor
             include: service:my-service
             inputs:
             - datadog-agent-source
-            processors:
-            - enabled: true
-              id: filter-processor
-              include: status:error
-              type: filter
-            - enabled: true
-              field: message
-              id: json-processor
-              include: '*'
-              type: parse_json
+            type: filter
           items:
-            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorGroup'
+            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorItem'
           type: array
         sources:
           description: A list of configured data sources for the pipeline.
@@ -35818,73 +35797,6 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
-    ObservabilityPipelineConfigProcessorGroup:
-      description: A group of processors.
-      example:
-        enabled: true
-        id: my-processor-group
-        include: service:my-service
-        inputs:
-        - datadog-agent-source
-        processors:
-        - enabled: true
-          fields:
-          - name: env
-            value: prod
-          id: add-fields-processor
-          include: '*'
-          type: add_fields
-        - enabled: true
-          id: filter-processor
-          include: status:error
-          type: filter
-      properties:
-        enabled:
-          description: Whether this processor group is enabled.
-          example: true
-          type: boolean
-        id:
-          description: The unique identifier for the processor group.
-          example: grouped-processors
-          type: string
-        include:
-          description: Conditional expression for when this processor group should
-            execute.
-          example: service:my-service
-          type: string
-        inputs:
-          description: A list of IDs for components whose output is used as the input
-            for this processor group.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
-        processors:
-          description: Processors applied sequentially within this group. Events flow
-            through each processor in order.
-          example:
-          - enabled: true
-            fields:
-            - name: env
-              value: prod
-            id: add-fields-processor
-            include: '*'
-            type: add_fields
-          - enabled: true
-            id: filter-processor
-            include: status:error
-            type: filter
-          items:
-            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorItem'
-          type: array
-      required:
-      - id
-      - include
-      - inputs
-      - processors
-      - enabled
-      type: object
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -36002,10 +35914,6 @@ components:
         Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
         advanced filtering capabilities.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: The unique identifier for this processor.
           example: remap-vrl-processor
@@ -36017,6 +35925,14 @@ components:
             processor.
           example: '*'
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this processor.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         remaps:
           description: Array of VRL remap rules.
           items:
@@ -36030,7 +35946,7 @@ components:
       - type
       - include
       - remaps
-      - enabled
+      - inputs
       type: object
     ObservabilityPipelineCustomProcessorRemap:
       description: Defines a single VRL remap rule with its own filtering and transformation
@@ -36061,6 +35977,7 @@ components:
       - include
       - name
       - source
+      - enabled
       - drop_on_error
       type: object
     ObservabilityPipelineCustomProcessorType:
@@ -36169,10 +36086,6 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -36184,6 +36097,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         keys:
           description: A list of tag keys.
           example:
@@ -36204,7 +36125,7 @@ components:
       - mode
       - action
       - keys
-      - enabled
+      - inputs
       type: object
     ObservabilityPipelineDatadogTagsProcessorAction:
       description: The action to take on tags with matching keys.
@@ -36250,10 +36171,6 @@ components:
     ObservabilityPipelineDedupeProcessor:
       description: The `dedupe` processor removes duplicate fields in log events.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         fields:
           description: A list of log field paths to check for duplicates.
           example:
@@ -36271,6 +36188,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this processor.
+          example:
+          - parse-json-processor
+          items:
+            type: string
+          type: array
         mode:
           $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessorMode'
         type:
@@ -36279,9 +36204,9 @@ components:
       - id
       - type
       - include
+      - inputs
       - fields
       - mode
-      - enabled
       type: object
     ObservabilityPipelineDedupeProcessorMode:
       description: The deduplication mode to apply to the fields.
@@ -36487,10 +36412,6 @@ components:
       description: The `enrichment_table` processor enriches logs using a static CSV
         file or GeoIP database.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         file:
           $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableFile'
         geoip:
@@ -36504,6 +36425,14 @@ components:
             targets.
           example: source:my-source
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this processor.
+          example:
+          - add-fields-processor
+          items:
+            type: string
+          type: array
         target:
           description: Path where enrichment results should be stored in the log.
           example: enriched.geoip
@@ -36514,8 +36443,8 @@ components:
       - id
       - type
       - include
+      - inputs
       - target
-      - enabled
       type: object
     ObservabilityPipelineEnrichmentTableProcessorType:
       default: enrichment_table
@@ -36546,10 +36475,6 @@ components:
         on a Datadog search query. Logs that match the `include` query are passed
         through; others are discarded.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -36562,13 +36487,21 @@ components:
             components; others are dropped.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineFilterProcessorType'
       required:
       - id
       - type
       - include
-      - enabled
+      - inputs
       type: object
     ObservabilityPipelineFilterProcessorType:
       default: filter
@@ -36648,10 +36581,6 @@ components:
         Metrics can be counters, gauges, or distributions and optionally grouped by
         log fields.'
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline.
@@ -36662,6 +36591,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this processor.
+          example:
+          - source-id
+          items:
+            type: string
+          type: array
         metrics:
           description: Configuration for generating individual metrics.
           items:
@@ -36672,7 +36609,9 @@ components:
       required:
       - id
       - type
-      - enabled
+      - inputs
+      - include
+      - metrics
       type: object
     ObservabilityPipelineGenerateMetricsProcessorType:
       default: generate_datadog_metrics
@@ -37269,10 +37208,6 @@ components:
       description: The `ocsf_mapper` processor transforms logs into the OCSF schema
         using a predefined mapping configuration.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline.
@@ -37283,6 +37218,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this processor.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
         mappings:
           description: A list of mapping rules to convert events to the OCSF format.
           items:
@@ -37294,8 +37237,8 @@ components:
       - id
       - type
       - include
+      - inputs
       - mappings
-      - enabled
       type: object
     ObservabilityPipelineOcsfMapperProcessorMapping:
       description: Defines how specific events are transformed to OCSF using a mapping
@@ -37400,10 +37343,6 @@ components:
             by Datadog.
           example: true
           type: boolean
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: A unique identifier for this processor.
           example: parse-grok-processor
@@ -37413,6 +37352,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         rules:
           description: The list of Grok parsing rules. If multiple matching rules
             are provided, they are evaluated in order. The first successful match
@@ -37426,8 +37373,8 @@ components:
       - id
       - type
       - include
+      - inputs
       - rules
-      - enabled
       type: object
     ObservabilityPipelineParseGrokProcessorRule:
       description: 'A Grok parsing rule used in the `parse_grok` processor. Each rule
@@ -37512,10 +37459,6 @@ components:
         and flattens it into the event. This is useful when logs contain embedded
         JSON as a string.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         field:
           description: The name of the log field that contains a JSON string.
           example: message
@@ -37531,6 +37474,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessorType'
       required:
@@ -37538,7 +37489,7 @@ components:
       - type
       - include
       - field
-      - enabled
+      - inputs
       type: object
     ObservabilityPipelineParseJSONProcessorType:
       default: parse_json
@@ -37571,10 +37522,6 @@ components:
             the filter query continue through the pipeline.
           example: false
           type: boolean
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -37590,6 +37537,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         limit:
           $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimit'
         name:
@@ -37619,8 +37574,9 @@ components:
       - type
       - include
       - name
+      - drop_events
       - limit
-      - enabled
+      - inputs
       type: object
     ObservabilityPipelineQuotaProcessorLimit:
       description: The maximum amount of data or number of events allowed before the
@@ -37696,10 +37652,6 @@ components:
       description: The `reduce` processor aggregates and merges logs based on matching
         keys and merge strategies.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         group_by:
           description: A list of fields used to group log events for merging.
           example:
@@ -37717,6 +37669,14 @@ components:
             targets.
           example: env:prod
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this processor.
+          example:
+          - parse-json-processor
+          items:
+            type: string
+          type: array
         merge_strategies:
           description: List of merge strategies defining how values from grouped events
             should be combined.
@@ -37729,9 +37689,9 @@ components:
       - id
       - type
       - include
+      - inputs
       - group_by
       - merge_strategies
-      - enabled
       type: object
     ObservabilityPipelineReduceProcessorMergeStrategy:
       description: Defines how a specific field should be merged across grouped events.
@@ -37788,10 +37748,6 @@ components:
     ObservabilityPipelineRemoveFieldsProcessor:
       description: The `remove_fields` processor deletes specified fields from logs.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         fields:
           description: A list of field names to be removed from each log event.
           example:
@@ -37811,6 +37767,13 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: The `PipelineRemoveFieldsProcessor` `inputs`.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessorType'
       required:
@@ -37818,7 +37781,7 @@ components:
       - type
       - include
       - fields
-      - enabled
+      - inputs
       type: object
     ObservabilityPipelineRemoveFieldsProcessorType:
       default: remove_fields
@@ -37832,10 +37795,6 @@ components:
     ObservabilityPipelineRenameFieldsProcessor:
       description: The `rename_fields` processor changes field names.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         fields:
           description: A list of rename rules specifying which fields to rename in
             the event, what to rename them to, and whether to preserve the original
@@ -37854,6 +37813,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessorType'
       required:
@@ -37861,7 +37828,7 @@ components:
       - type
       - include
       - fields
-      - enabled
+      - inputs
       type: object
     ObservabilityPipelineRenameFieldsProcessorField:
       description: Defines how to rename a field in log events.
@@ -37967,10 +37934,6 @@ components:
       description: The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -37982,6 +37945,14 @@ components:
             targets.
           example: service:my-service
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         percentage:
           description: The percentage of logs to sample.
           example: 10.0
@@ -37999,7 +37970,7 @@ components:
       - id
       - type
       - include
-      - enabled
+      - inputs
       type: object
     ObservabilityPipelineSampleProcessorType:
       default: sample
@@ -38014,10 +37985,6 @@ components:
       description: The `sensitive_data_scanner` processor detects and optionally redacts
         sensitive data in log events.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (e.g., as input to downstream
@@ -38029,6 +37996,14 @@ components:
             targets.
           example: source:prod
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - parse-json-processor
+          items:
+            type: string
+          type: array
         rules:
           description: A list of rules for identifying and acting on sensitive data
             patterns.
@@ -38041,8 +38016,8 @@ components:
       - id
       - type
       - include
+      - inputs
       - rules
-      - enabled
       type: object
     ObservabilityPipelineSensitiveDataScannerProcessorAction:
       description: Defines what action to take when sensitive data is matched.
@@ -39003,10 +38978,6 @@ components:
       description: The `throttle` processor limits the number of events that pass
         through over a given time window.
       properties:
-        enabled:
-          description: Whether this processor is enabled.
-          example: true
-          type: boolean
         group_by:
           description: Optional list of fields used to group events before the threshold
             has been reached.
@@ -39024,6 +38995,14 @@ components:
             targets.
           example: env:prod
           type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this processor.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
         threshold:
           description: the number of events allowed in a given time window. Events
             sent after the threshold has been reached, are dropped.
@@ -39041,9 +39020,9 @@ components:
       - id
       - type
       - include
+      - inputs
       - threshold
       - window
-      - enabled
       type: object
     ObservabilityPipelineThrottleProcessorType:
       default: throttle
@@ -68683,7 +68662,6 @@ paths:
                           rule:
                             datacenter: devcycle.us1.prod
                       category: change
-                      host: hostname
                       integration_id: custom-events
                       message: payment_processed feature flag has been enabled
                       tags:
@@ -81803,13 +81781,11 @@ paths:
         - security_monitoring_cws_agent_rules_read
   /api/v2/security/findings/cases:
     delete:
-      description: 'Detach security findings from their case.
-
-        This operation dissociates security findings from their associated cases without
-        deleting the cases themselves. You can detach security findings from multiple
-        different cases in a single request, with a limit of 50 security findings
-        per request. Security findings that are not currently attached to any case
-        will be ignored.'
+      description: Detach security findings from their case. This operation dissociates
+        security findings from their associated cases without deleting the cases themselves.
+        You can detach security findings from multiple different cases in a single
+        request, with a limit of 50 security findings per request. Security findings
+        that are not currently attached to any case will be ignored.
       operationId: DetachCase
       requestBody:
         content:
@@ -81841,12 +81817,10 @@ paths:
         - security_monitoring_findings_write
         - appsec_vm_write
     post:
-      description: 'Create cases for security findings.
-
-        You can create up to 50 cases per request and associate up to 50 security
-        findings per case. Security findings that are already attached to another
-        case will be detached from their previous case and attached to the newly created
-        case.'
+      description: Create cases for security findings. You can create up to 50 cases
+        per request and associate up to 50 security findings per case. Security findings
+        that are already attached to another case will be detached from their previous
+        case and attached to the newly created case.
       operationId: CreateCases
       requestBody:
         content:
@@ -81883,14 +81857,14 @@ paths:
         - appsec_vm_write
   /api/v2/security/findings/cases/{case_id}:
     patch:
-      description: 'Attach security findings to a case.
-
-        You can attach up to 50 security findings per case. Security findings that
-        are already attached to another case will be detached from their previous
-        case and attached to the specified case.'
+      description: Attach security findings to a case. You can attach up to 50 security
+        findings per case. Security findings that are already attached to another
+        case will be detached from their previous case and attached to the specified
+        case.
       operationId: AttachCase
       parameters:
-      - description: Unique identifier of the case to attach security findings to
+      - description: The unique identifier of the case to attach security findings
+          to
         in: path
         name: case_id
         required: true
@@ -81931,16 +81905,12 @@ paths:
         - appsec_vm_write
   /api/v2/security/findings/jira_issues:
     patch:
-      description: 'Attach security findings to a Jira issue by providing the Jira
-        issue URL.
-
-        You can attach up to 50 security findings per Jira issue. If the Jira issue
-        is not linked to any case, this operation will create a case for the security
-        findings and link the Jira issue to the newly created case. To configure the
-        Jira integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
-        Security findings that are already attached to another Jira issue will be
-        detached from their previous Jira issue and attached to the specified Jira
-        issue.'
+      description: Attach security findings to a Jira issue by providing the Jira
+        issue URL. You can attach up to 50 security findings per Jira issue. If the
+        Jira issue is not linked to any case, this operation will create a case for
+        the security findings and link the Jira issue to the newly created case. Security
+        findings that are already attached to another Jira issue will be detached
+        from their previous Jira issue and attached to the specified Jira issue.
       operationId: AttachJiraIssue
       requestBody:
         content:
@@ -81979,15 +81949,12 @@ paths:
 
         Please check the documentation regularly for updates.'
     post:
-      description: 'Create Jira issues for security findings.
-
-        This operation creates a case in Datadog and a Jira issue linked to that case
-        for bidirectional sync between Datadog and Jira. To configure the Jira integration,
-        see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
-        You can create up to 50 Jira issues per request and associate up to 50 security
-        findings per Jira issue. Security findings that are already attached to another
-        Jira issue will be detached from their previous Jira issue and attached to
-        the newly created Jira issue.'
+      description: Create Jira issues for security findings. This operation creates
+        a case in Datadog and a Jira issue linked to that case for bidirectional sync
+        between Datadog and Jira. You can create up to 50 Jira issues per request
+        and associate up to 50 security findings per Jira issue. Security findings
+        that are already attached to another Jira issue will be detached from their
+        previous Jira issue and attached to the newly created Jira issue.
       operationId: CreateJiraIssues
       requestBody:
         content:

@@ -6,27 +6,19 @@
           {
             "id": "updated-datadog-logs-destination-id",
             "inputs": [
-              "my-processor-group"
+              "filter-processor"
             ],
             "type": "datadog_logs"
           }
         ],
         "processors": [
           {
-            "enabled": true,
-            "id": "my-processor-group",
+            "id": "filter-processor",
             "include": "service:my-service",
             "inputs": [
               "datadog-agent-source"
             ],
-            "processors": [
-              {
-                "enabled": true,
-                "id": "filter-processor",
-                "include": "status:error",
-                "type": "filter"
-              }
-            ]
+            "type": "filter"
           }
         ],
         "sources": [
