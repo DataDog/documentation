@@ -95,6 +95,23 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
+{{% tab "AI Gateway" %}}
+<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an AI Gateway that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+
+Connect your AI Gateway to LLM Observability with your base URL, API key, and headers.
+
+1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
+1. Click on the **Configure** tab, then click **New** to create a new gateway.
+1. Follow the instructions on the tile.
+   - Provide a name for your gateway.
+   - Select your provider.
+   - Provide your base URL.
+   - Provide your API key and optionally any headers.
+
+{{< img src="llm_observability/configuration/ai-gateway-tile.png" alt="The AI Gateway configuration tile in LLM Observability. Lists instructions for configuring an ai gateway" style="width:100%;" >}}
+
+[1]: https://app.datadoghq.com/llm/settings/integrations
+{{% /tab %}}
 {{< /tabs >}}
 
 If your LLM provider restricts IP addresses, you can obtain the required IP ranges by visiting [Datadog's IP ranges documentation][5], selecting your `Datadog Site`, pasting the `GET` URL into your browser, and copying the `webhooks` section.
