@@ -22,11 +22,11 @@ further_reading:
 
 {{< img src="data_observability/data_quality_tables.png" alt="Datasets page showing a list of tables with columns for query count, storage size, row count, and last data update; two tables are flagged with triggered alerts" style="width:100%;" >}}
 
-Data Quality detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides the context to trace them back to upstream jobs or sources.
+Data Observability for Datasets detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides the context to trace them back to upstream jobs or sources.
 
 ## Key capabilities
 
-Use Data Quality to:
+With Data Observability, you can:
 
 - Detect delayed updates and unexpected row count behavior in your tables
 - Surface changes in column-level metrics such as null counts or uniqueness
@@ -35,10 +35,11 @@ Use Data Quality to:
 
 ## Supported data sources
 
-Data Observability supports the following data sources:
+Quality Monitoring supports the following data sources that appear in [Datasets][1]:
 
 - Snowflake
 - BigQuery
+- Databricks
 
 ## Setup
 
@@ -224,3 +225,5 @@ To monitor Databricks data in Datadog, you must complete the following steps:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/data-obs/tables/explore

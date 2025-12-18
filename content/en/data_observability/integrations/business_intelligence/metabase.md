@@ -12,7 +12,7 @@ further_reading:
 Datadog's Metabase integration helps data teams make changes to their data platform without breaking Metabase dashboards, and identify unused cards or dashboards. When Datadog connects, it:
 
 - Pulls metadata from your Metabase environment, including cards and dashboards.
-- Automatically generates lineage between warehouse tables and columns and downstream Metabase cards, and between those cards and downstream dashboards.
+- Automatically generates lineage from warehouse tables and columns to downstream Metabase cards, as well as from those cards to downstream dashboards.
 
 ## Connect Metabase
 

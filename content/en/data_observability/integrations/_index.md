@@ -18,10 +18,11 @@ With these integrations, you can:
 - Detect anomalies before they impact downstream dashboards and models
 - Trace column-level lineage to map dependencies and pinpoint root causes
 
-{{< whatsnext desc="Connect to these data warehouses:" >}}
-   {{< nextlink href="data_observability/integrations/data_warehouses/snowflake" >}}Snowflake{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/data_warehouses/Databricks" >}}Databricks{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
+{{< whatsnext desc="Connect to these types of integrations:" >}}
+   {{< nextlink href="data_observability/integrations/warehouse" >}}Warehouse{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/transformation" >}}Transformation{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/business_intelligence" >}}Business Intelligence{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/openlineage" >}}OpenLineage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

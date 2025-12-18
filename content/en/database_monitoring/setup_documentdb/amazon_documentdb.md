@@ -1,7 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Amazon DocumentDB
-aliases:
-- /database_monitoring/setup_documentdb/amazon_documentdb
 ---
 
 Database Monitoring offers comprehensive insights into your Amazon DocumentDB (with MongoDB compatibility) databases by providing access to critical metrics, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for Amazon DocumentDB, ensure that the Datadog Agent is installed and configured to connect to your Amazon DocumentDB instances. This guide outlines the steps to set up Database Monitoring for Amazon DocumentDB.

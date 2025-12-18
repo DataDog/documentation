@@ -17,7 +17,7 @@ Follow the steps below to connect dbt Core to Datadog.
 
 ## Retrieve your Datadog API key
 
-1. [Follow these instructions][2] to retrieve a Datadog API key.
+1. [Follow these instructions][2] to create or retrieve a Datadog API key.
 
 ## Install openlineage-dbt
 

@@ -1,7 +1,5 @@
 ---
 title: Setting up Amazon DocumentDB
-aliases:
-- /database_monitoring/setup_documentdb
 description: Setting up Database Monitoring on a Amazon DocumentDB cluster
 disable_sidebar: true
 ---

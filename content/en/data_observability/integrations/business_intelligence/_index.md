@@ -22,6 +22,7 @@ Use these integrations to:
    {{< nextlink href="data_observability/integrations/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}
    {{< nextlink href="data_observability/integrations/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
    {{< nextlink href="data_observability/integrations/business_intelligence/metabase" >}}Metabase{{< /nextlink >}}
+   {{< nextlink href="data_observability/integrations/business_intelligence/powerbi" >}}Power BI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

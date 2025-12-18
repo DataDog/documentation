@@ -148,7 +148,7 @@ To set up your account in Snowflake:
 
 To configure the Snowflake integration in Datadog:
 
-1. Navigate to [**Datadog Data Observability** > **Connect a Warehouse**][3].
+1. Navigate to [**Datadog Data Observability** > **Settings**][3].
 2. Click the **Configure** button for the Snowflake option.
 
    {{< img src="data_observability/data-obs-settings-integrations.png" alt="List of Data Observability integrations on the Settings page" style="width:100%;" >}}

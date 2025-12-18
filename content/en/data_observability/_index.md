@@ -10,14 +10,14 @@ further_reading:
     text: 'Jobs Monitoring'
   - link: 'https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-acquisition/'
     tag: 'Blog'
-    text: 'Datadog brings observability to data teams by acquiring Metaplane'
+    text: 'Datadog Brings Observability to Data teams by Acquiring Metaplane'
 ---
 
 <div class="alert alert-info">Data Observability is in Preview.</div>
 
 Data Observability helps data teams detect, resolve, and prevent issues that affect data quality, performance, and cost. It enables teams to monitor anomalies, troubleshoot faster, and maintain trust in the data powering downstream systems.
 
-{{< img src="data_observability/data-obs-overview-1.png" alt="Lineage graph showing a failed application upstream of a table with an upstream issue and downstream nodes including tables, a dashboard, and a workbook labeled Upstream issue." style="width:100%;" >}}
+{{< img src="data_observability/data-obs-overview-1.png" alt="Lineage graph showing a failed application upstream." style="width:100%;" >}}
 
 Datadog does this by monitoring key signals across your data stack, including metrics, metadata, lineage, and logs. These signals help detect issues early and maintain reliable, high-quality data.
 
