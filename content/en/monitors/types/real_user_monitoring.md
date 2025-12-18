@@ -31,7 +31,7 @@ To create a RUM monitor in Datadog, first navigate to [**Monitors** > **New Moni
 
 <div class="alert alert-info">There is a default limit of 1000 RUM monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
-From there, you can click **New Monitor**, then:
+Next, choose one of the following methods to create your monitor:
 
 - **Start with a template**: Datadog provides several pre-built templates for common RUM monitoring scenarios like error rates, performance vitals, or availability checks. Browse the [full template gallery][9] to get started.
 - **Build a custom monitor**: Choose from out-of-the-box metrics or custom metrics, then scope to your application, specific pages, or views.

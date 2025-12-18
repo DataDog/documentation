@@ -21,7 +21,7 @@ Real User Monitoring (RUM) lets you create alerts about atypical behavior in you
 
 To create a RUM monitor in Datadog, first navigate to [Monitors > New Monitor > Real User Monitoring][2].
 
-From there, you can click **New Monitor**, then:
+Next, choose one of the following methods to create your monitor:
 
 - **[Start with a template][3]**: Datadog provides several pre-built templates for common RUM monitoring scenarios like error rates, performance vitals, or availability checks. Browse the [full template gallery][3] to get started.
 - **Build a custom monitor**: Choose from out-of-the-box metrics or custom metrics, then scope to your application, specific pages, or views.
@@ -40,7 +40,7 @@ Choose what to monitor based on your use case:
 
 ## Export queries from the RUM homepage
 
-You can export existing queries from the [RUM homepage][12] to create a monitor with all the query and context preserved. For customers on [RUM without Limits™][1], the queries powering up those widgets are based on the [out-of-the-box metrics][13]. For customers on the legacy model, they are based on [events][14].
+You can export existing queries from the [RUM homepage][12] to create a monitor with all the query and context preserved. For customers on [RUM without Limits™][1], the queries powering those widgets are based on the [out-of-the-box metrics][13]. For customers on the legacy model, they are based on [events][14].
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/create-monitor-homepage.png" alt="Export button to the right hand corner of the RUM Explorer" style="width:100%;" >}}
 
@@ -76,7 +76,7 @@ Real User Monitoring measures, calculates, and scores application performance as
 
 This example shows a RUM monitor for the INP metric filtered to a specific application (for example, `Shop.ist`) and grouped by `view name` to track performance across different pages. Grouping by view name helps pinpoint which pages have performance issues.
  
-{{< img src="real_user_monitoring/guide/alerting-with-rum/core-web-vital.png" alt="RUM monitor query showing Interaction to Next Paint (INP) metric with p75 aggregation grouped by view name, with threshold alert conditions set for warning and alert levels" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/alerting-with-rum/core-web-vital-1.png" alt="RUM monitor query showing Interaction to Next Paint (INP) metric with p75 aggregation grouped by view name, with threshold alert conditions set for warning and alert levels" style="width:100%;" >}}
 
 This example monitor warns when INP exceeds 200 milliseconds and alerts when INP exceeds 500 milliseconds. With metric-based monitors, you can also use anomaly detection to help identify when performance metrics deviate from normal patterns, or use forecast alerts to predict when thresholds might be breached.
 
