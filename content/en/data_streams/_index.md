@@ -59,7 +59,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 | Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 | Azure Service Bus | | | {{< X >}} | | | |
 | Google Pub/Sub | {{< X >}} | | | {{< X >}} | | |
-| IBM MQ | | | {{< X >}} | | | |
+| IBM MQ | {{< X >}} | | {{< X >}} | | | |
 | RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 
 Data Streams Monitoring requires minimum Datadog tracer versions. See each setup page for details.
