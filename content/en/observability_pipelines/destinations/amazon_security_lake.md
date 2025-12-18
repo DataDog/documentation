@@ -1,7 +1,12 @@
 ---
 title: Amazon Security Lake Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Amazon Security Lake destination to send logs to Amazon Security Lake.
 
