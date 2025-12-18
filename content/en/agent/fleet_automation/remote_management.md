@@ -89,7 +89,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Upgrade Agents via API" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Upgrade Agents using the API" level="h4" expanded=false %}}
 Fleet Automation provides an API to trigger Agent upgrades programmatically or on a recurring schedule. Start upgrades for any set of hosts using filter queries, or create schedules that run during defined maintenance windows with a specified Agent version. For full details, see the [Fleet Automation API][19].
 {{% /collapse-content %}}
 
