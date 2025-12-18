@@ -105,5 +105,5 @@ To delete a tag created using Tag Pipelines, delete the rule that created it. Wi
 [4]: /getting_started/tagging/
 [5]: /help/
 [6]: /cloud_cost_management/tags#how-tags-are-normalized
-[7]: https://docs.datadoghq.com/api/latest/cloud-cost-management/#create-tag-pipeline-ruleset
+[7]: /api/latest/cloud-cost-management/#create-tag-pipeline-ruleset
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/tag_pipeline_ruleset
