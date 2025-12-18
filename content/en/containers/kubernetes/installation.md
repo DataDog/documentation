@@ -82,7 +82,7 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
            secretName: datadog-secret
            keyName: api-key
    ```
-   - Replace `<CLUSTER_NAME>` with a name for your cluster. 
+   - Replace `<CLUSTER_NAME>` with a name for your cluster.
    - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 4. **Deploy Agent with the above configuration file**
@@ -118,7 +118,7 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
     clusterName: <CLUSTER_NAME>
     site: <DATADOG_SITE>
    ```
-   
+
    - Replace `<CLUSTER_NAME>` with a name for your cluster.
    - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
@@ -154,6 +154,10 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
   <li/>Must be less than or equal to 80 characters
 </ul>
 </div>
+
+### Migrate to the Datadog Operator
+
+To migrate to the Datadog Operator from the Datadog Helm chart, refer to [Migrate to the Datadog Operator from the Datadog Helm Chart][27].
 
 ### Unprivileged installation
 
@@ -342,3 +346,4 @@ The [Kubernetes][21] section features an overview of all your Kubernetes resourc
 [24]: /infrastructure/containers/orchestrator_explorer
 [25]: /infrastructure/containers/kubernetes_resource_utilization
 [26]: /data_security/kubernetes/#running-container-as-root-user
+[27]: /containers/datadog_operator/migration
