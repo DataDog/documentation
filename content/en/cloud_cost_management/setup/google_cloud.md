@@ -217,5 +217,5 @@ The following out-of-the-box tags are available:
 [15]: /cloud_cost_management/setup/google_cloud/#create-or-select-a-google-cloud-storage-bucket
 [16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage
 [17]: /cloud_cost_management/tags
-[18]: https://docs.datadoghq.com/api/latest/cloud-cost-management/#create-google-cloud-usage-cost-config
+[18]: /api/latest/cloud-cost-management/#create-google-cloud-usage-cost-config
 [19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/gcp_uc_config
