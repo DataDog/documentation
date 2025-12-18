@@ -115,7 +115,7 @@ In case of a duplicated primary key, the rows with the duplicated key are not wr
 
 To enable Cloud SIEM threat intelligence data for reference tables:
 1. Navigate to [Threat Intelligence][3].
-1. For the table you want to see Cloud SIEM threat intelligence data, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
+1. For the table you want to see Cloud SIEM threat intelligence data for, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
 
 After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the table using a specific Indicator of Compromise (IoC) key, such as an IP address or domain. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response. A threat intelligence reference table can be shared across multiple security products.
 
