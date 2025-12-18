@@ -469,5 +469,5 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [18]: /help/
 [19]: /cloud_cost_management/tags
 [20]: https://docs.aws.amazon.com/cur/latest/userguide/troubleshooting.html#backfill-data
-[21]: https://docs.datadoghq.com/api/latest/cloud-cost-management/#create-cloud-cost-management-aws-cur-config
+[21]: /api/latest/cloud-cost-management/#create-cloud-cost-management-aws-cur-config
 [22]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/aws_cur_config
