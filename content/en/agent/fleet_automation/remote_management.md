@@ -219,4 +219,4 @@ If you don't upgrade an earlier Agent version to 7.66 or higher, there is no imp
 [16]: https://app.datadoghq.com/fleet/agent-management
 [17]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#configuration-order-precedence
 [18]: /agent/fleet_automation#view-agent-audit-trail-events
-[19]: https://docs.datadoghq.com/api/latest/fleet-automation/
+[19]: /api/latest/fleet-automation/
