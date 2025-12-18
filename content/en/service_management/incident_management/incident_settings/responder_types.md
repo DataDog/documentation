@@ -34,6 +34,6 @@ Responder types allow your responders to understand what their responsibilities 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/service_management/incident_management/response_team
+[1]: /service_management/incident_management/response_team
 [2]: /account_management/rbac/?tab=datadogapplication#pagetitle
 [3]: https://app.datadoghq.com/incidents/settings#Responder-Types
