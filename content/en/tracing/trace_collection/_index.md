@@ -43,7 +43,7 @@ Instrumenting your application allows observability data to be sent to the Agent
 
 ## Instrumentation types
 
-There are two main approaches to instrument your application:
+There are two main approaches to {{< tooltip glossary="instrumentat" >}} your application:
 
 **Automatic instrumentation** creates {{< tooltip glossary="span" >}}s for your application with minimal manual steps, capturing essential observability data across common libraries and languages with minimal configuration.
 
