@@ -13281,6 +13281,40 @@ components:
       - name
       - targets
       type: object
+    CreateOnCallNotificationRuleRequest:
+      description: A top-level wrapper for creating a notification rule for a user
+      example:
+        data:
+          attributes:
+            category: high_urgency
+            channel_settings:
+              method: sms
+              type: phone
+            delay_minutes: 1
+          relationships:
+            channel:
+              data:
+                id: 1562fab3-a8c2-49e2-8f3a-28dcda2405e2
+                type: notification_channels
+          type: notification_rules
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateOnCallNotificationRuleRequestData'
+      required:
+      - data
+      type: object
+    CreateOnCallNotificationRuleRequestData:
+      description: Data for creating an on-call notification rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OnCallNotificationRuleRequestAttributes'
+        relationships:
+          $ref: '#/components/schemas/OnCallNotificationRuleRelationships'
+        type:
+          $ref: '#/components/schemas/OnCallNotificationRuleType'
+      required:
+      - type
+      type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
       properties:
@@ -30833,6 +30867,18 @@ components:
             $ref: '#/components/schemas/NotificationChannelData'
           type: array
       type: object
+    ListOnCallNotificationRulesResponse:
+      description: Response type for listing notification rules for a user
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OnCallNotificationRuleData'
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/OnCallNotificationRulesIncluded'
+          type: array
+      type: object
     ListPipelinesResponse:
       description: Represents the response payload containing a list of pipelines
         and associated metadata.
@@ -39287,6 +39333,130 @@ components:
       required:
       - type
       type: object
+    OnCallNotificationRule:
+      description: A top-level wrapper for a notification rule
+      example:
+        data:
+          attributes:
+            category: high_urgency
+            channel_settings:
+              method: sms
+              type: phone
+            delay_minutes: 1
+          id: 27590dae-47be-4a7d-9abf-8f4e45124020
+          relationships:
+            channel:
+              data:
+                id: 1562fab3-a8c2-49e2-8f3a-28dcda2405e2
+                type: notification_channels
+          type: notification_rules
+      properties:
+        data:
+          $ref: '#/components/schemas/OnCallNotificationRuleData'
+        included:
+          items:
+            $ref: '#/components/schemas/OnCallNotificationRulesIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    OnCallNotificationRuleAttributes:
+      description: Attributes for an on-call notification rule.
+      properties:
+        category:
+          $ref: '#/components/schemas/OnCallNotificationRuleCategory'
+        channel_settings:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelSettings'
+          description: Configuration for the associated channel, if necessary
+          nullable: true
+        delay_minutes:
+          description: The number of minutes that will elapse before this rule is
+            evaluated.  0 indicates immediate evaluation
+          format: int64
+          type: integer
+      type: object
+    OnCallNotificationRuleCategory:
+      default: high_urgency
+      description: Specifies the category a notification rule will apply to
+      enum:
+      - high_urgency
+      - low_urgency
+      type: string
+      x-enum-varnames:
+      - HIGH_URGENCY
+      - LOW_URGENCY
+    OnCallNotificationRuleChannelRelationship:
+      description: Relationship object for creating a notification rule
+      properties:
+        data:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelRelationshipData'
+      required:
+      - data
+      type: object
+    OnCallNotificationRuleChannelRelationshipData:
+      description: Channel relationship data for creating a notification rule
+      properties:
+        id:
+          description: ID of the notification channel
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelType'
+      type: object
+    OnCallNotificationRuleChannelSettings:
+      description: Defines the configuration for a channel associated with a notification
+        rule
+      oneOf:
+      - $ref: '#/components/schemas/OnCallPhoneNotificationRuleSettings'
+    OnCallNotificationRuleData:
+      description: Data for an on-call notification rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OnCallNotificationRuleAttributes'
+        id:
+          description: Unique identifier for the rule
+          type: string
+        relationships:
+          $ref: '#/components/schemas/OnCallNotificationRuleRelationships'
+        type:
+          $ref: '#/components/schemas/OnCallNotificationRuleType'
+      required:
+      - type
+      type: object
+    OnCallNotificationRuleRelationships:
+      description: Relationship object for creating a notification rule
+      properties:
+        channel:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelRelationship'
+      type: object
+    OnCallNotificationRuleRequestAttributes:
+      description: Attributes for creating or modifying an on-call notification rule.
+      properties:
+        category:
+          $ref: '#/components/schemas/OnCallNotificationRuleCategory'
+        channel_settings:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelSettings'
+          description: Configuration for the associated channel, if necessary
+          nullable: true
+        delay_minutes:
+          description: The number of minutes that will elapse before this rule is
+            evaluated.  0 indicates immediate evaluation
+          format: int64
+          type: integer
+      type: object
+    OnCallNotificationRuleType:
+      default: notification_rules
+      description: Indicates that the resource is of type 'notification_rules'.
+      enum:
+      - notification_rules
+      example: notification_rules
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_RULES
+    OnCallNotificationRulesIncluded:
+      description: Represents additional included resources for a on-call notification
+        rules
+      oneOf:
+      - $ref: '#/components/schemas/NotificationChannelData'
     OnCallPageTargetType:
       description: The kind of target, `team_id` | `team_handle` | `user_id`.
       enum:
@@ -39299,6 +39469,29 @@ components:
       - TEAM_ID
       - TEAM_HANDLE
       - USER_ID
+    OnCallPhoneNotificationRuleMethod:
+      description: Specifies the method in which a phone is used in a notification
+        rule
+      enum:
+      - sms
+      - voice
+      example: sms
+      type: string
+      x-enum-varnames:
+      - SMS
+      - VOICE
+    OnCallPhoneNotificationRuleSettings:
+      description: Configuration for using a phone notification channel in a notification
+        rule
+      properties:
+        method:
+          $ref: '#/components/schemas/OnCallPhoneNotificationRuleMethod'
+        type:
+          $ref: '#/components/schemas/NotificationChannelPhoneConfigType'
+      required:
+      - type
+      - method
+      type: object
     OnDemandConcurrencyCap:
       description: On-demand concurrency cap.
       properties:
@@ -56537,6 +56730,59 @@ components:
       - dry_run
       - name
       - options
+      type: object
+    UpdateOnCallNotificationRuleRequest:
+      description: A top-level wrapper for updating a notification rule for a user
+      example:
+        data:
+          attributes:
+            category: high_urgency
+            channel_settings:
+              method: sms
+              type: phone
+            delay_minutes: 1
+          id: 2462ace1-49e2-aab1-xc4f-29cc4ae1105n7
+          relationships:
+            channel:
+              data:
+                id: 1562fab3-a8c2-49e2-8f3a-28dcda2405e2
+                type: notification_channels
+          type: notification_rules
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateOnCallNotificationRuleRequestData'
+      required:
+      - data
+      type: object
+    UpdateOnCallNotificationRuleRequestAttributes:
+      description: Attributes for creating or modifying an on-call notification rule.
+      properties:
+        category:
+          $ref: '#/components/schemas/OnCallNotificationRuleCategory'
+        channel_settings:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelSettings'
+          description: Configuration for the associated channel, if necessary
+          nullable: true
+        delay_minutes:
+          description: The number of minutes that will elapse before this rule is
+            evaluated.  0 indicates immediate evaluation
+          format: int64
+          type: integer
+      type: object
+    UpdateOnCallNotificationRuleRequestData:
+      description: Data for updating an on-call notification rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateOnCallNotificationRuleRequestAttributes'
+        id:
+          description: Unique identifier for the rule
+          type: string
+        relationships:
+          $ref: '#/components/schemas/OnCallNotificationRuleRelationships'
+        type:
+          $ref: '#/components/schemas/OnCallNotificationRuleType'
+      required:
+      - type
       type: object
     UpdateOpenAPIResponse:
       description: Response for `UpdateOpenAPI`.
@@ -76822,6 +77068,260 @@ paths:
       x-menu-order: 14
       x-permission:
         operator: AND
+        permissions:
+        - on_call_read
+  /api/v2/on-call/users/{user_id}/notification-rules:
+    get:
+      description: List the notification rules for a user. The authenticated user
+        must be the target user or have the `on_call_admin` permission
+      operationId: ListUserNotificationRules
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `channel`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOnCallNotificationRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List On-Call notification rules for a user
+      tags:
+      - On-Call
+      x-menu-order: 18
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
+    post:
+      description: Create a new notification rule for a user. The authenticated user
+        must be the target user or have the `on_call_admin` permission
+      operationId: CreateUserNotificationRule
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOnCallNotificationRuleRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallNotificationRule'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create an On-Call notification rule for a user
+      tags:
+      - On-Call
+      x-menu-order: 17
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_respond
+  /api/v2/on-call/users/{user_id}/notification-rules/{rule_id}:
+    delete:
+      description: Delete a notification rule for a user. The authenticated user must
+        be the target user or have the `on_call_admin` permission
+      operationId: DeleteUserNotificationRule
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The rule ID
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete an On-Call notification rule for a user
+      tags:
+      - On-Call
+      x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - on_call_respond
+    get:
+      description: Get a notification rule for a user. The authenticated user must
+        be the target user or have the `on_call_admin` permission
+      operationId: GetUserNotificationRule
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The rule ID
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `channel`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallNotificationRule'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get an On-Call notification rule for a user
+      tags:
+      - On-Call
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - on_call_read
+    put:
+      description: Update a notification rule for a user. The authenticated user must
+        be the target user or have the `on_call_admin` permission
+      operationId: UpdateUserNotificationRule
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The rule ID
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `channel`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOnCallNotificationRuleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallNotificationRule'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update an On-Call notification rule for a user
+      tags:
+      - On-Call
+      x-menu-order: 21
+      x-permission:
+        operator: OR
         permissions:
         - on_call_read
   /api/v2/org_configs:

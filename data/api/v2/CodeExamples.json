@@ -1244,6 +1244,13 @@
       "description": "Create an On-Call notification channel for a user returns \"Created\" response"
     }
   ],
+  "CreateUserNotificationRule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification rule for a user returns \"Created\" response"
+    }
+  ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",
@@ -1263,6 +1270,13 @@
       "group": "on-call",
       "suffix": "",
       "description": "Update On-Call schedule returns \"OK\" response"
+    }
+  ],
+  "UpdateUserNotificationRule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update an On-Call notification rule for a user returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [

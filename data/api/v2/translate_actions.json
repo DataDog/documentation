@@ -2029,6 +2029,30 @@
     "description": "Get a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
     "summary": "Get an On-Call notification channel for a user"
   },
+  "ListUserNotificationRules": {
+    "description": "List the notification rules for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification rules for a user"
+  },
+  "CreateUserNotificationRule": {
+    "description": "Create a new notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification rule for a user"
+  },
+  "DeleteUserNotificationRule": {
+    "description": "Delete a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification rule for a user"
+  },
+  "GetUserNotificationRule": {
+    "description": "Get a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification rule for a user"
+  },
+  "UpdateUserNotificationRule": {
+    "description": "Update a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Update an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
