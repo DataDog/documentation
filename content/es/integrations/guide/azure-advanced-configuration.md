@@ -523,7 +523,7 @@ Para solucionar el cuello de botella, puedes:
    - Dividir el reenviador de logs en varios pipelines en Datadog, procesando cada uno de ellos un subconjunto específico de recursos en función de reglas como la prioridad. Esto aumenta el número de logs que pueden gestionarse simultáneamente.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Inspeccionar métricas de función" level="h4" expanded=false id="inspect-function-metrics-eh" %}
+{{% collapse-content title="Inspeccionar métricas de función" level="h4" expanded=false id="inspect-function-metrics-eh" %}}
 Asegúrate de que la aplicación de función se está ejecutando, observando las siguientes métricas de función:
 
 Comprueba el recuento de ejecución de funciones:
