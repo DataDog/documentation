@@ -29,7 +29,7 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 You can monitor specific network paths by defining them in the Agent configuration file located at `/etc/datadog-agent/conf.d/network_path.d/conf.yaml`.
 
-To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization, see [increase the number of workers](#increase-the-number-of-workers).
+To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization in large environments, see [increase the number of workers](#increase-the-number-of-workers).
 
 {{< tabs >}}
 {{% tab "Linux" %}}

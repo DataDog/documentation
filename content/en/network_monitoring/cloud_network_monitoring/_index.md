@@ -48,7 +48,7 @@ Datadog Cloud Network Monitoring (CNM) gives you visibility into your network tr
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/cloud_network_monitoring/network_health" >}}<u>Network Health</u>: Review the health of your network connections.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/cloud_network_monitoring/network_health" >}}<u>Network Health</u>: Review the health of your network environment.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/network_path/setup/#scheduled-tests" >}}<u>Network Path Scheduled Tests</u>: Visualize the route that network traffic follows from its origin to its destination using scheduled tests.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/network_path/setup/#dynamic-tests-preview" >}}<u>Network Path Dynamic Tests</u>: Dynamically create tests to allow the Agent to automatically discover and monitor network paths.{{< /nextlink >}}
