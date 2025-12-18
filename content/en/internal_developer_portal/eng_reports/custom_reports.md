@@ -24,7 +24,7 @@ Select a Custom Report to view it directly in the IDP Overview page. You can adj
 
 Users with the [Software Catalog write permission][1], included in the default Datadog Admin and Datadog Standard Roles, can add, remove, or reorder the dashboards in the Custom Reports section. 
 
-To modify the content of a Custom Report or set up scheduled PDF reports through Slack or email, select **Edit Report**. This opens the underlying dashboard in the Dashboards UI. Edits made in the dashboard, such as changing widgets, updating queries, or adjusting template variables, automatically apply to the Custom Report in IDP. 
+To modify the content of a Custom Report or set up scheduled PDF reports through Slack or email, select **Manage Dashboard**. This opens the underlying dashboard in the Dashboards UI. Edits made in the dashboard, such as changing widgets, updating queries, or adjusting template variables, automatically apply to the Custom Report in IDP. 
 
 {{< img src="/tracing/eng_reports/idp-custom-report-edit.png" alt="IDP Custom Report modal" style="width:100%;" >}}
 
