@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Datadog's [Real User Monitoring (RUM)][1] provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. With [RUM without Limits™][8], you can use metric-based monitors to alert on your full unsampled traffic, with 15-month worth of data to power advanced alerting conditions such as anomaly detection.
+Datadog's [Real User Monitoring (RUM)][1] provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. With [RUM without Limits™][8], you can use metric-based monitors to alert on your full unsampled traffic, with 15 months' worth of data to power advanced alerting conditions such as anomaly detection.
 
 After you enable RUM for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
 
