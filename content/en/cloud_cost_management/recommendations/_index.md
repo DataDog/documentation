@@ -1,6 +1,8 @@
 ---
 title: Cloud Cost Recommendations
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
+aliases:
+    - /cloud_cost_management/recommendations/savings
 algolia:
   tags:
     - cloud cost recommendations
@@ -638,7 +640,7 @@ For each cloud account that you would like to receive recommendations for:
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
 
 ## Recommendation action-taking
-You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking options:
+You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
 
 - **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the "Active Recommendations" list and clicking "Create Jira issue." Created issues are tagged and link back to the recommendation in Datadog.
 
@@ -646,6 +648,12 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
   - `@jira_issues.issue_key:*` - Show only recommendations with a Jira issue
   - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue  
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
+
+- **Bits AI Dev Agent code fixes**: Code fixes are available for all S3 recommendations. In these situations, the Bits AI Dev Agent (in Preview) creates production-ready pull requests to implement cloud resource changes and cost optimizations. Join the Preview and [set up the Bits AI Dev Agent][13] to use this feature.
+
+  {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
+  Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+  {{< /callout >}}
 
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations.
@@ -669,5 +677,6 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [8]: https://app.datadoghq.com/integrations/azure
 [9]: /integrations/azure/
 [10]: https://app.datadoghq.com/integrations/gcp
-[11]: /cloud_cost_management/tags/tag_pipelines/
+[11]: /cloud_cost_management/allocation/tag_pipelines/
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized
+[13]: https://docs.datadoghq.com/bits_ai/bits_ai_dev_agent/setup 

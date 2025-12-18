@@ -46,6 +46,8 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 1. Deploy the Agent using the generated configuration file.
 1. Restart your applications.
 
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
 ## Configure Unified Service Tags
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through label extraction (recommended) or in deployment manifests.
@@ -130,7 +132,7 @@ For complete instructions, see [setting USTs for Kubernetes services][5].
 
 ## Enable SDK-dependent products and features
 
-After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as [Continuous Profiler][37], [Application Security Monitoring][38], and [trace ingestion controls][39].
 
 Use one of the following setup methods:
 
@@ -180,6 +182,7 @@ Review the following examples demonstrating how to select specific services:
 
 This configuration:
 - enables APM for all namespaces except the `jenkins` namespace.
+  - **Note**: use `enabledNamespaces` to disable for all namespaces except those listed.
 - instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
 
 {{< highlight yaml "hl_lines=4-10" >}}
@@ -790,6 +793,9 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [34]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane
 [35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
+[37]: /profiler/
+[38]: /security/application_security/
+[39]: /tracing/trace_pipeline/ingestion_controls/
 
 
 

@@ -4,6 +4,9 @@ description: Learn about using Rehydration to pull archived logs and processing 
 disable_toc: false
 private: true
 further_reading:
+- link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
+  tag: Blog
+  text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
 - link: "/observability_pipelines/processors/"
   tag: "Documentation"
   text: "Learn more about processors"
@@ -12,9 +15,9 @@ further_reading:
   text: "Learn more about Packs"
 ---
 
-{{< callout
- btn_hidden="true" header="false">}}
-Rehydration is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/rehydration-for-observability-pipelines/"
+ btn_hidden="false">}}
+Rehydration is in Preview. Fill out the form to request access.
 {{< /callout >}}
 
 ## Overview
