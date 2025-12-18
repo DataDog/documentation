@@ -14,7 +14,7 @@ Custom Reports let you embed existing Datadog dashboards directly into the IDP O
 
 ## Viewing Custom Reports
 
-To view Custom Reports, go to **IDP** > **Overview** and find the **Custom Reports** section. Custom Reports are set at the organization level, so all users see the same list. 
+To view Custom Reports, go to [**IDP** > **Overview**][3] and find the **Custom Reports** section. Custom Reports are set at the organization level, so all users see the same list. 
 
 Select a Custom Report to view it directly in the IDP Overview page. You can adjust template variable filters and the time frame in place.
 
@@ -35,6 +35,6 @@ To modify the content of a Custom Report or set up scheduled PDF reports through
 
 [1]: /internal_developer_portal/software_catalog/set_up/#write-permission
 [2]: /dashboards/configure/#permissions
-
+[3]: https://app.datadoghq.com/idp/overview
 
 
