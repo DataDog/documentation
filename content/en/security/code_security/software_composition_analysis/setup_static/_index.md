@@ -285,71 +285,141 @@ If you already have automatic scanning enabled for a repository, a manual upload
 </div>
 
 
-## Link results to Datadog services and teams
+## Link findings to Datadog services and teams
 
-### Link results to services
-Datadog associates static code and library scan results with relevant services by using the following mechanisms:
+Datadog associates code and library scan results with Datadog services and teams so that findings automatically route to the appropriate owners. This enables service-level visibility, ownership-based workflows, and faster remediation.
 
-{{% collapse-content title="Identifying the code location in the Software Catalog" level="h4" %}}
-The [schema version `v3`][15] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
+To determine which service a vulnerability belongs to, Datadog evaluates several mapping mechanisms in the order listed below. **Each vulnerability is mapped with one method only:** if a mapping mechanism succeeds for a particular finding, Datadog does not attempt the remaining mechanisms for that finding.
 
-The `paths` attribute is a list of globs that should match paths in the repository.
+<div class="alert alert-danger">
+Using service definitions that include code locations in the Software Catalog is the only way to explicitly control how static findings are mapped to services. The additional mechanisms described below—such as Error Tracking usage patterns and naming-based inference—are not user-configurable and depend on existing data from other Datadog products. Because of this, these mechanisms may not provide consistent mappings for organizations not using these products.
+</div>
+
+### Mapping using the Software Catalog (recommended)
+
+Services in the Software Catalog can declare the parts of the codebase that belong to them using the `codeLocations` field. This field is available in the **Software Catalog [schema version `v3`][14]** and allows a service to specify:
+
+* a repository URL
+
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: service
 metadata:
-  name: my-service
+  name: billing-service
+  owner: billing-team
 datadog:
   codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
+    - repositoryURL: https://github.com/org/myrepo.git
+{{< /code-block >}}
+
+* one or more code paths inside that repository
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: billing-service
+  owner: billing-team
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/org/myrepo.git
       paths:
         - path/to/service/code/**
 {{< /code-block >}}
+
 If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
+
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: service
 metadata:
-  name: my-service
+  name: billing-service
+  owner: billing-team
 datadog:
   codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
+    - repositoryURL: https://github.com/org/myrepo.git
+      paths:
+        - path/to/service/code/**
+    - repositoryURL: https://github.com/org/billing-service.git
       paths:
         - "**"
 {{< /code-block >}}
-{{% /collapse-content %}}
 
-{{% collapse-content title="Detecting file usage patterns" level="h4" %}}
-Datadog detects file usage in additional products such as Error Tracking and associate
-files with the runtime service. For example, if a service called `foo` has
-a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
-it associates files `/modules/foo/bar.py` to service `foo`.
-{{% /collapse-content %}}
+The schema for this field is described in the [Software Catalog entity model][23].
 
-{{% collapse-content title="Detecting service name in paths and repository names" level="h4" %}}
+Datadog will go through all your Software Catalog definitions and check whether your finding’s file path matches. For a finding to be mapped to a service through `codeLocations`, it must contain a file path. Some findings may not contain a file path; in those cases, Datadog cannot evaluate `codeLocations` for that finding, and this mechanism is skipped.
 
-Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
+<div class="alert alert-danger">
+Services defined with a **Software Catalog schema v2.x** do **not** support `codeLocations`. Existing definitions can be upgraded to the v3 schema in the [Software Catalog][24]. Once the migration is complete, changes may take up to 24 hours to apply to findings. If you are unable to upgrade to v3, Datadog will fall back to alternative linking techniques (described below). These rely on less precise heuristics, so accuracy may vary depending on the Code Security product and your use of other Datadog features.
+</div>
 
-For a repository match, if there is a service called `myservice` and
-the repository URL is `https://github.com/myorganization/myservice.git`, then,
-it associates `myservice` to all files in the repository.
+#### Example (v3 schema)
 
-If no repository match is found, Datadog attempts to find a match in the
-`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
-in the path, the service name closest to the filename is selected.
-{{% /collapse-content %}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: billing-service
+  owner: billing-team
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/org/myrepo.git
+      paths:
+        - path/to/service/code/**
+    - repositoryURL: https://github.com/org/billing-service.git
+      paths:
+        - "**"
+{{< /code-block >}}
 
-If one method succeeds (in order), no further mapping attempts are made.
+#### SAST finding
 
-### Link results to teams
+If a vulnerability appeared in `github.com/org/myrepo` at `/src/billing/models/payment.py`, then using the `codeLocations` for `billing-service` Datadog would add `billing-service` as an owning service. If your service defines an `owner` (see above), then Datadog will link that team to the finding too. In this case, the finding would be linked to the `billing-team`.
 
-Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
-is associated with `myservice`, then the team `myservice` will be associated to any violation
-detected in this file.
+#### SCA finding
 
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
+If a library was declared in `github.com/org/myrepo` at `/go.mod`, then Datadog would not match it to `billing-service`. 
 
-**Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
+If it was instead declared in `github.com/org/billing-service` at `/go.mod`, then Datadog would match it to `billing-service` due to the `“**”` catch-all glob. Consequently, Datadog would link the finding to the `billing-team`.
+
+**Datadog will attempt to map a single finding to as many services as possible. If no matches are found, Datadog will continue onto our next linking method.**
+
+### When the Software Catalog cannot determine the service
+
+If the Software Catalog does not provide a match—either because the finding’s file path does not match any `codeLocations`, or because the service uses the v2.x schema—Datadog evaluates whether **Error Tracking** can identify the service associated with the code. Datadog uses only the last 30 days of Error Tracking data due to product [data-retention limits][25].
+
+When Error Tracking processes stack traces, those traces often include **file paths**.
+For example, if an error occurs in: `/foo/bar/baz.py`
+Datadog inspects the directory: `/foo/bar`
+
+Datadog then checks whether the finding’s **file path** resides under that directory.
+
+**If the finding file is under the same directory:**
+
+  - Datadog treats this as a strong indication that the vulnerability belongs to the same service
+  - The finding inherits the **service** and **team** associated with that error in Error Tracking
+
+**If this mapping succeeds, Datadog stops here.**
+
+### Service inference from file paths or repository names
+
+When neither of the above strategies cannot determine the service, Datadog inspects naming patterns in the repository and file paths.
+
+Datadog evaluates:
+
+  - whether the **file path** contains identifiers matching a known service
+  - whether the **repository name** corresponds to a service name
+
+When using the finding’s file path, Datadog performs a reverse search on each path segment until it finds a matching service or exhausts all options. For example, if a finding occurs in `github.com/org/checkout-service` at `/foo/bar/baz/main.go`, Datadog will take the last path segment, `main`, to see if any Software Catalog service uses that name. If a match exists, the finding is attributed to that service. If not, the process continues with `baz`, then `bar`, and so forth.
+
+If we have exhausted all options, Datadog will check whether the repository name, `checkout-service`, matches a Software Catalog service name. If no match was found, Datadog was unsuccessful at linking your finding using Software Catalog.
+
+This mechanism ensures that findings still receive meaningful service attribution when no explicit metadata exists.
+
+### Link findings to teams through Code Owners
+
+If Datadog was able to link your finding to a service using the above strategies, then the team that owns that service (if defined) would automatically be associated with that finding. Whether Datadog was able to successfully link a finding to a service (and a Datadog team) or not, Datadog will use the `CODEOWNERS` information from your finding’s repository to link Datadog and GitHub teams to your findings.
+
+**Note**: You must accurately map your Git provider teams to your [Datadog Teams][25] for team attribution to function properly.
 
 ## Filter by reachable vulnerabilities
 
@@ -440,3 +510,7 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [20]: https://cyclonedx.org/docs/1.6/json/
 [21]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 [22]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-sbom
+[23]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[24]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[25]: https://docs.datadoghq.com/data_security/data_retention_periods/
+[26]: https://docs.datadoghq.com/account_management/teams/
