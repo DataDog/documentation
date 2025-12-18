@@ -548,13 +548,17 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
     
 ## View gateway pods on Fleet Automation
 
-By default, the gateway DDOT collectors include a [Datadog extension][11]. The Datadog Extension enables collector configuration and build information to be viewed in both Datadog Infrastructure Monitoring and Fleet Automation. The gateway pods can be viewed on the Integrations -> Fleet Automation page.
+The DDOT Collector gateway includes the [Datadog extension][11] by default. This extension exports Collector build information and configurations to Datadog, allowing you to monitor your telemetry pipeline from Infrastructure Monitoring and Fleet Automation.
 
-{{< img src="opentelemetry/embedded_collector/fleet_automation2.png" alt="Fleet Automation page showing DDOT gateway pods" style="width:100%;" >}}
+To view your gateway pods:
 
-You can click on any gateway pod and see the detailed build information and collector configurations.
+1. Navigate to **Integrations > Fleet Automation**.
 
-{{< img src="opentelemetry/embedded_collector/fleet_automation3.png" alt="Fleet Automation page showing the collector config of one DDOT gateway pod" style="width:100%;" >}}
+  {{< img src="opentelemetry/embedded_collector/fleet_automation2.png" alt="Fleet Automation page showing DDOT gateway pods" style="width:100%;" >}}
+
+2. Select a gateway pod to view detailed build information and the running Collector configuration.
+
+  {{< img src="opentelemetry/embedded_collector/fleet_automation3.png" alt="Fleet Automation page showing the collector config of one DDOT gateway pod" style="width:100%;" >}}
 
 ## Known limitations
 
