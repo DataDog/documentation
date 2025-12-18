@@ -34,19 +34,19 @@ Large unused disks can add cost if only a few workers run most of the time.
 
 To size your workers, follow these steps:
 
-1. Determine the average events per second (EPS) using the following formula:
+1. Calculate the average events per second (EPS) with the following formula:
 
 $$(\text"Average EPS" ≃ {\text"Daily log volume (Terabytes)"} / {\text"Average message size (Kilobytes)"} × 10^9 / {24 × 3600})$$
 
 Example: One TB per day and messages of one KB yields about 11.5k EPS.
 
-2. Determine the sustained peak EPS by using the following formula, where the multiplier N represents the unpredictable nature of logging volume:
+2. Calculate the sustained peak EPS with the following formula, where the multiplier N represents the unpredictable nature of logging volume:
 
 $$(\text"Peak EPS" = N × \text"Average EPS")$$
 
 Example: With N=2 and 11.5k average EPS, peak EPS is about 23k.
 
-3. Determine the maximum required number of vCPUs by using the following formula:
+3. Calculate the maximum required number of vCPUs with the following formula:
 
 $$(\text"Max vCPU" = ⌈{\text"Peak EPS"} / 3000⌉)$$
 
@@ -54,7 +54,7 @@ Example: 23k peak EPS ⇒ ⌈23/3⌉ = 8 vCPU cores.
 
 **Note**: A single vCPU in the Datadog Dataflow pipeline typically processes about 3k EPS (assuming no low rate limits). One `n2-standard-4` worker (4 vCPUs) handles up to about 12k EPS.
 
-4. Determine the maximum number of Dataflow workers by using the following formula:
+4. Calculate the maximum number of Dataflow workers with the following formula:
 
 $$(\text"Max workers" = ⌈{\text"Max vCPU"} / 4⌉)$$
 
@@ -82,7 +82,7 @@ For this example, you would set the parallelism parameter to a value of `8` base
 
 Set the `batchCount` parameter to 10–50 events per request to send batches rather than single events to Datadog.
 
-Batching increases EPS and reduces load on the Datadog logs endpoint. If a maximum buffering delay of two seconds is acceptable, use 10–50 events per request.
+Batching increases EPS and reduces load on the Datadog logs endpoint. If your use case can tolerate a maximum buffering delay of two seconds, use 10–50 events per request.
 
 $$(\text"batchCount" ≥ 10)$$
 
