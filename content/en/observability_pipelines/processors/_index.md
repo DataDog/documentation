@@ -64,7 +64,7 @@ These are the available processors:
 [15]: /observability_pipelines/processors/sample/
 [16]: /observability_pipelines/processors/sensitive_data_scanner/
 [17]: /observability_pipelines/processors/split_array/
-[18]: /observability_pipelines/processors/tags/
+[18]: /observability_pipelines/processors/tag_control/logs/
 [19]: /observability_pipelines/processors/throttle/
 
 {{% /tab %}}

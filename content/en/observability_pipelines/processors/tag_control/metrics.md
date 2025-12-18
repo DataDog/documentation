@@ -1,13 +1,11 @@
 ---
-title: Tag Control
+title: Tag Control Processor
 description: Learn how to use the Tag Control processor for metrics.
 disable_toc: false
-products:
-- name: Metrics
-  icon: metrics
+code_lang: metrics
+type: multi-code-lang
+weight: 2
 ---
-
-{{< product-availability >}}
 
 ## Overview
 
