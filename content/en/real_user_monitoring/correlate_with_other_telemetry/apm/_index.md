@@ -458,7 +458,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 To view traces from the RUM Explorer:
 
-1. Navigate to your [list of sessions][22] and click on a session that has traces available. You can also query for sessions with traces by using`@_dd.trace_id:*`.
+1. Navigate to your [list of sessions][22] and click on a session that has traces available. You can also query for resources with traces by using`@_dd.trace_id:*`.
 
 When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a **View Trace in APM** link.
 

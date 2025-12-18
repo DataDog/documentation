@@ -111,8 +111,7 @@ For example, to exclude sessions from South Korea while retaining all other sess
 
 ## Cross-product retention filters
 
-{{< callout url=
- btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/cross-product-retention-filters/" btn_hidden="false" header="Join the Preview!">}}
 Cross-Product Retention Filters are in Preview. Use this form to submit your request today.
 {{< /callout >}}
 
@@ -128,25 +127,31 @@ When configuring a RUM retention filter, you can enable two cross-product retent
 
 The cross-product retention filters allow you to optimize the correlation between different products to retain richer telemetry.
 
+To **find sessions with indexed APM traces** in the RUM Explorer, query `@session.has_indexed_apm_traces:true`.
+
 ### Example
 
-Consider a RUM retention filter configured as follows:
+Consider a configuration where you set up a unique RUM retention filter configured as follows:
 
-- **RUM retention filter**: 60% - `@type:error` (retention filter retaining 60% of sessions with at least one error)
-- **Cross-product retention filter Session Replay**: 50%
-- **Cross-product retention filter APM traces**: 25%
+{{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters.png" alt="A RUM retention filter targeting errors at 60% retention, with cross-product filters set to 50% for Session Replays and 25% for APM Traces." style="width:60%" >}}
 
-If across the sessions, 30% of them have an available replay and 40% of them have available traces, then the outcome is the following:
+If you have initialized the SDK with `sessionReplaySampleRate:30` and `traceSampleRate:40`, then the outcome is the following:
 
 - 60% of sessions with at least one error are retained
-- 50% × 30% = 15% of these retained sessions have a replay
-- 25% × 40% = 10% of these retained sessions have APM traces
+- 50% x 30% = 15% of these retained sessions have a retained replay
+- 25% x 40% = 10% of these retained sessions have the APM traces retained
 
-### Default 1% retention
+<div class="alert alert-info">If a session matches multiple RUM retention filters, only the cross-product filters from the first matching filter apply. This means filter order matters for both RUM retention and cross-product filters.<br><br>
+
+For more information, see <a href="/real_user_monitoring/rum_without_limits/retention_filters/#how-it-works">How it works</a>.</div>
+
+### 1% flat sampling
 
 For compatible SDKs (see above), Datadog provides a default RUM retention filter and cross-product retention filter on APM traces that retains 1% of the sessions with available traces and their traces, at no additional cost.
 
 This default filter ensures that you always have a baseline of correlated APM data available for your RUM sessions, even before custom cross-product retention filters.
+
+To **find sessions retained by this filter** in the RUM Explorer, query `@session.retention_reason:apm_rum_flat_sampling`.
 
 ## Best practices
 
