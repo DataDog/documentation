@@ -45,7 +45,7 @@ You can perform an action using the Action Interface. Let's look at an example w
 
 1. Go to the [Action Interface][8].  
   {{< img src="/service_management/action_interface/action_interface_landing.png" alt="Action Interface home page" >}}
-2. Enter the prompt, `List ECS clusters`, and press **Enter**.
+2. Enter the prompt, `List ECS clusters`, and press <span class="ui">Enter</span>.
   Bits AI responds a request for the AWS region.
 3. Enter a region.
     Bits AI responds with something like, `Here's a Datadog Action to address your request. Review and click 'Execute Action' to proceed.`
