@@ -98,7 +98,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 
 {{% tab "GCP Vertex AI" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to a Google Cloud Platform account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to a Google Cloud Platform account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect Vertex AI to LLM Observability with your Google Cloud Platform account. LLM Observability uses the `gemini-2.5-flash` model for evaluations.
 
