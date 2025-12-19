@@ -52,17 +52,52 @@ yarn add @datadog/mobile-react-native-code-push
 Replace `DdSdkReactNative.initialize` by `DatadogCodepush.initialize` in your code:
 
 ```js
-import { DdSdkReactNativeConfiguration } from '@datadog/mobile-react-native';
+import { 
+    CoreConfiguration,
+    RumConfiguration,
+    LogsConfiguration,
+    TraceConfiguration,
+    SdkVerbosity
+} from '@datadog/mobile-react-native';
 import { DatadogCodepush } from '@datadog/mobile-react-native-code-push';
 
-const config = new DdSdkReactNativeConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track user interactions (such as a tap on buttons). You can use the 'accessibilityLabel' element property to give the tap action a name, otherwise the element type is reported
-    true, // track XHR resources
-    true // track errors
+const config = new CoreConfiguration('<CLIENT_TOKEN>', '<ENVIRONMENT_NAME>');
+
+// Optional: Configure the Datadog Site to target. Default is 'US1'.
+config.site = 'EU1';
+// Optional: Enable or disable native crash reports
+config.nativeCrashReportEnabled = true;
+// Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
+config.service = "com.example.reactnative"
+// Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
+config.verbosity = SdkVerbosity.WARN;
+
+// 2. Optional: Configure RUM
+const rumConfig = new RumConfiguration(
+    '<APPLICATION_ID>,
+    true, // Track user interactions (such as a tap on buttons).
+    true, // Track XHR resources
+    true // Track errors
 );
+
+// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%).
+rumConfig.sessionSampleRate = 80;
+
+// Optional: Sample tracing integrations for network calls between your app and your backend (in this example, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default is 20%)
+// You need to specify the hosts of your backends to enable tracing with these backends
+rumConfig.resourceTraceSampleRate = 80;
+rumConfig.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
+
+// 3. Optional: Configure Logs
+const logsConfig = new LogsConfiguration()
+
+// 4. Optional: Configure Trace
+const traceConfig = new TraceConfiguration()
+
+// 3. Set the feature configurations
+config.rumConfiguration = rumConfig;
+config.logsConfiguration = logsConfig;
+config.traceConfiguration = traceConfig;
 
 await DatadogCodepush.initialize(config);
 ```
@@ -139,14 +174,9 @@ These steps ensure that the `version` matches the format `{commercialVersion}-co
 You can also do that by specifying a `versionSuffix` in the SDK configuration:
 
 ```js
-const config = new DdSdkReactNativeConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons. You can use 'accessibilityLabel' element property to give tap action the name, otherwise element type will be reported)
-    true, // track XHR Resources
-    true // track Errors
-);
+import { CoreConfiguration } from '@datadog/mobile-react-native';
+
+const config = new CoreConfiguration('<CLIENT_TOKEN>', '<ENVIRONMENT_NAME>');
 
 config.versionSuffix = `codepush.${codepushVersion}`; // will result in "1.0.0-codepush.v2"
 ```

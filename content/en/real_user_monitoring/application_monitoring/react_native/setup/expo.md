@@ -101,32 +101,64 @@ In this Datadog example project, View Tracking is achieved through `@datadog/mob
 Add the following code snippet to your initialization file:
 
 ```js
-import { DdSdkReactNative, DdSdkReactNativeConfiguration, SdkVerbosity } from 'expo-datadog';
+import {
+    SdkVerbosity,
+    DatadogProvider,
+    DatadogProviderConfiguration,
+    RumConfiguration,
+    LogsConfiguration,
+    TraceConfiguration
+} from 'expo-datadog';
 
-const config = new DdSdkReactNativeConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track user interactions such as tapping on a button. You can use the 'accessibilityLabel' element property to give the tap action a name, otherwise the element type is reported.
-    true, // track XHR resources.
-    true // track errors.
-);
+// 1. Configure Datadog SDK
+const config = new DatadogProviderConfiguration('<CLIENT_TOKEN>', '<ENVIRONMENT_NAME>');
+
 // Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", or "US1_FED"). Default is "US1".
-config.site = 'US1';
-// Optional: Enable or disable native crash reports.
+config.site = 'EU1';
+// Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-config.sessionSamplingRate = 80;
-// Optional: Sample tracing integrations for network calls between your app and your backend, for example: 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default is 20%.
-// You need to specify the hosts of your backends to enable tracing with these backends.
-config.resourceTracingSamplingRate = 80;
-config.firstPartyHosts = ['example.com']; // Matches 'example.com' and subdomains like 'api.example.com'.
-// Optional: Let the Datadog SDK print internal logs above or equal to the provided level. Default is undefined, which means no logs.
+// Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
+config.service = "com.example.reactnative"
+// Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
 config.verbosity = SdkVerbosity.WARN;
 
-await DdSdkReactNative.initialize(config);
+// 2. Optional: Configure RUM
+const rumConfig = new RumConfiguration(
+    '<APPLICATION_ID>,
+    true, // Track user interactions (such as a tap on buttons).
+    true, // Track XHR resources
+    true // Track errors
+);
 
-// Once the Datadog SDK is initialized, you need to setup view tracking in order to see data in the RUM dashboard.
+// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%).
+rumConfig.sessionSampleRate = 80;
+
+// Optional: Sample tracing integrations for network calls between your app and your backend (in this example, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default is 20%)
+// You need to specify the hosts of your backends to enable tracing with these backends
+rumConfig.resourceTraceSampleRate = 80;
+rumConfig.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
+
+// 3. Optional: Configure Logs
+const logsConfig = new LogsConfiguration()
+
+// 4. Optional: Configure Trace
+const traceConfig = new TraceConfiguration()
+
+// 3. Set the feature configurations
+config.rumConfiguration = rumConfig;
+config.logsConfiguration = logsConfig;
+config.traceConfiguration = traceConfig;
+
+// Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
+export default function App() {
+    return (
+        <DatadogProvider configuration={config}>
+            <Navigation />
+        </DatadogProvider>
+    );
+}
+
+// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 #### Sample session rates
@@ -255,10 +287,17 @@ if (__DEV__) {
     DdRum.stopResource = emptyAsyncFunction;
     DdRum.addError = emptyAsyncFunction;
     DdRum.addTiming = emptyAsyncFunction;
+    DdRum.getCurrentSessionId = emptyAsyncFunction;
 
     DdSdkReactNative.initialize = emptyAsyncFunction;
-    DdSdkReactNative.setUser = emptyAsyncFunction;
-    DdSdkReactNative.setAttributes = emptyAsyncFunction;
+    DdSdkReactNative.setUserInfo = emptyAsyncFunction;
+    DdSdkReactNative.addUserExtraInfo = emptyAsyncFunction;
+    DdSdkReactNative.clearUserInfo = emptyAsyncFunction;
+    DdSdkReactNative.removeUserInfo = emptyAsyncFunction;
+    DdSdkReactNative.addAttributes = emptyAsyncFunction;
+    DdSdkReactNative.removeAttributes = emptyAsyncFunction;
+    DdSdkReactNative.addAttribute = emptyAsyncFunction;
+    DdSdkReactNative.removeAttribute = emptyAsyncFunction;
     DdSdkReactNative.setTrackingConsent = emptyAsyncFunction;
 }
 ```
