@@ -22,7 +22,7 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 
 | Language   | Package Manager    | Lockfile                                |
 |------------|-------------------|------------------------------------------|
-| C#         | .NET              | `packages.lock.json`                     |
+| C#         | .NET              | `packages.lock.json`, `.csproj` files    |
 | C++        | Conan             | `conan.lock`                             |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
@@ -38,7 +38,7 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 | Ruby       | bundler           | `Gemfile.lock`                           |
 | Rust       | Cargo           | `cargo.lock`                               |
 
-The following sections describe ways to configure SCA for your repositories.
+**Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
 ## Select where to run static SCA scans
 By default, scans are automatically run upon each commit to a lockfile within an enabled repository. Default branch results are updated every hour to detect new vulnerabilities on existing packages.
