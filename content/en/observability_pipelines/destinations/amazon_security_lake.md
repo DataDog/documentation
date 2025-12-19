@@ -34,7 +34,7 @@ Set up the Amazon Security Lake destination and its environment variables when y
 
 ##### AWS authentication
 
-Select an [AWS authentication][5] option.
+1. Select an [AWS authentication][5] option.
 1. Enter the ARN of the IAM role you want to assume.
 1. Optionally, enter the assumed role session name and external ID.
 
