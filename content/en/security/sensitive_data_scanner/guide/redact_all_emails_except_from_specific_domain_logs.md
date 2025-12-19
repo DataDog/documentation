@@ -10,7 +10,7 @@ further_reading:
 private: true
 ---
 
-<div class="alert alert-warning">This guide has been deprecated. See <a href="https://docs.datadoghq.com/security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#suppress-specific-matches-to-ignore-risk-accepted-data">Suppress specific matches to ignore risk-accepted data</a> to redact emails from a specific domain.</div>
+<div class="alert alert-warning">This guide has been deprecated. See <a href="/security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#suppress-specific-matches-to-ignore-risk-accepted-data">Suppress specific matches to ignore risk-accepted data</a> to redact emails from a specific domain.</div>
 
 ## Overview
 
