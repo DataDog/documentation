@@ -329,7 +329,7 @@ What you can do with rehydrated logs:
 - If tags were included in the archive, filter for logs that previously matched scanning rules.
 - Investigate historical events that contain sensitive data.
 
-What you cannot do with rehydrated logs:
+What you **cannot** do with rehydrated logs:
 
 - View in-line highlighted sensitive data matches in the UI: The matches remain obfuscated if mask, redact, partially redact, or hash were chosen as an action on match.
 - Trigger retroactive scans: Sensitive Data Scanner does not re-scan rehydrated logs.
