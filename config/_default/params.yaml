@@ -309,6 +309,7 @@ unsupported_sites:
   iac_security: [gov]
   incident_ai: [gov]
   internal_developer_portal: [gov]
+  linear: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
   mobile_app_testing: [gov]
@@ -336,3 +337,4 @@ unsupported_sites:
   wiz: [gov]
   workflow-automation: [gov]
   workflows: [gov]
+  workload_security_active_protection: [gov]

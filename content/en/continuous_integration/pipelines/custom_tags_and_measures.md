@@ -37,33 +37,7 @@ Install the [`datadog-ci`][1] (>=v1.15.0) CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 ```
 
-Alternatively, you can try and use the beta [standalone binary][2] if you don't want to use `npm`.
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-To install the standalone binary on Linux, run:
-
-```shell
-curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
-```
-{{% /tab %}}
-
-{{% tab "MacOS" %}}
-To install the standalone binary on MacOS, run:
-
-```shell
-curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
-```
-{{% /tab %}}
-
-{{% tab "Windows" %}}
-To install the standalone binary on Windows, run:
-
-```shell
-Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64" -OutFile "datadog-ci.exe"
-```
-{{% /tab %}}
-{{< /tabs >}}
+<div class="alert alert-info">See <a href="https://github.com/DataDog/datadog-ci?tab=readme-ov-file#more-ways-to-install-the-cli">More ways to install the CLI</a> in the datadog-ci repo for alternative installation options.</div>
 
 ## Add tags to pipeline traces
 

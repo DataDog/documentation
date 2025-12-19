@@ -5,6 +5,9 @@ aliases:
 - /real_user_monitoring/product_analytics
 - /real_user_monitoring/guide/rum-for-product-analytics
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
@@ -31,6 +34,8 @@ To start using Product Analytics, enable it for each application where you want 
 3. Click the **Enable** button.
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
+
+If you don't have an application set up in Datadog yet, create one for your platform ([browser][14], [iOS][15], or [Android][16]) or use your [coding assistant][17].
 
 By default, Product Analytics data is retained for 15 months. Learn more about [Datadog's data retention periods][1].
 
@@ -88,7 +93,7 @@ You may want to better understand a specific group of users. This could be for t
 
 {{< img src="/product_analytics/segmentation/userprofiles_pana-ga.png" alt="See individual profiles of users and create a segment from these profiles.">}}
 
-You can see the individual profiles of user, and create a segment, or a specified grouping, from these profiles to fit the behavior you would like to observe. For example, you can create a segment on users who have items in their carts but have not yet checked out to send an email nudging them to make a puchase. 
+You can see the individual profiles of user, and create a segment, or a specified grouping, from these profiles to fit the behavior you would like to observe. For example, you can create a segment on users who have items in their carts but have not yet checked out to send an email nudging them to make a purchase. 
 
 
 ### Visualize the most and least interacted with buttons on a given page
@@ -97,10 +102,10 @@ Suppose you want to make changes to your application interface but want to first
 {{< img src="/product_analytics/pana_session_replay_page.png" alt="Capture and replay your users' browsing experience to inform your product design decisions.">}}
 
 [Session replay][11] 
-: Expands your user experience monitoring by allowing you to capture and visually replay the web browsing or mobile app experience of your users. <br><br>This is beneficial for _error identification_, _reproduction_, and _resolution_, and provides insights into your application’s usage patterns and design pitfalls
+: Expands your user experience monitoring by allowing you to capture and visually replay the web browsing or mobile app experience of your users. <br><br>This is beneficial for _error identification_, _reproduction_, and _resolution_, and provides insights into your application's usage patterns and design pitfalls
 
 [Heatmaps][10]
-:  This is a visualization of your user’s interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps: Click maps, Top elements, Scroll maps. <br><br> Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
+: This is a visualization of your user's interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps: Click maps, Top elements, Scroll maps. <br><br> Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
 
 [Playlist][12]
 : You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][12].
@@ -122,4 +127,7 @@ Suppose you want to make changes to your application interface but want to first
 [11]: /product_analytics/session_replay/
 [12]: /product_analytics/session_replay/playlists
 [13]: /product_analytics/charts/analytics_explorer
-
+[14]: /real_user_monitoring/application_monitoring/browser
+[15]: /real_user_monitoring/application_monitoring/ios
+[16]: /real_user_monitoring/application_monitoring/android
+[17]: /product_analytics/agentic_onboarding
