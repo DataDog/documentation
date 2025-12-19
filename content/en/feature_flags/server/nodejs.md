@@ -185,7 +185,7 @@ switch (theme) {
 
 ### Numeric flags
 
-For number flags, use `getNumberValue()`. This is appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
+For numeric flags, use `getNumberValue()`. This is appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
 
 ```javascript
 OpenFeature.setContext({
