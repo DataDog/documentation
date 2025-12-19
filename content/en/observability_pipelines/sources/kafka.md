@@ -59,6 +59,8 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 {{% tab "Secrets Management" %}}
 
 - Kafka bootstrap servers identifier:
+	- References the bootstrap server that the client uses to connect to the Kafka cluster and discover all the other hosts in the cluster.
+	- In your secrets manager, the host and port must be entered in the format of `host:port`, such as `10.14.22.123:9092`. If there is more than one server, use commas to separate them.
 	- The default identifier is `SOURCE_KAFKA_BOOTSTRAP_SERVERS`.
 - Kafka SASL username identifier:
 	- The default identifier is `SOURCE_KAFKA_SASL_USERNAME`.

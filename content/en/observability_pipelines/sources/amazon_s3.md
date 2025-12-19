@@ -42,6 +42,7 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 {{% tab "Secrets Management" %}}
 
 - Amazon S3 URL identifier:
+	- References the URL of the SQS queue to which the S3 bucket sends the notification events.
 	- The default identifier is `SOURCE_AWS_S3_SQS_URL`.
 - Amazon S3 TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_AWS_S3_KEY_PASS`.

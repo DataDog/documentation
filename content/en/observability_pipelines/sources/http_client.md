@@ -58,6 +58,7 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 {{% tab "Secrets Management" %}}
 
 - HTTP Client endpoint URL identifier:
+	- References the endpoint from which the Observability Pipelines Worker collects log events.
 	- The default identifier is `SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
 - HTTP Client TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_HTTP_CLIENT_KEY_PASS`.

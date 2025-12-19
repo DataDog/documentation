@@ -72,6 +72,7 @@ If you selected **TCP** mode, toggle the switch to **Enable TLS**. The following
 {{% tab "Secrets Management" %}}
 
 - Socket address identifier:
+	- References the address and port where the Observability Pipelines Worker listens for incoming logs.
 	- The default identifier is `SOURCE_SOCKET_ADDRESS`.
 - Socket TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_SOCKET_KEY_PASS`.

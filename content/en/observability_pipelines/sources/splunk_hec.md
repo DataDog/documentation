@@ -40,6 +40,7 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 {{% tab "Secrets Management" %}}
 
 - Splunk HEC address identifier:
+	- References the bind address, such as `0.0.0.0:8088`, on which your Observability Pipelines Worker listens to receive logs originally intended for the Splunk indexer.
 	- The default identifier is `SOURCE_SPLUNK_HEC_ADDRESS`.
 - Splunk HEC TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_SPLUNK_HEC_KEY_PASS`.

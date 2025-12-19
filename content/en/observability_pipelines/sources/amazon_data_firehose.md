@@ -46,6 +46,7 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 {{% tab "Secrets Management" %}}
 
 - Amazon Data Firehose address identifier:
+	- References the socket address on which the Observability Pipelines Worker listens to receive logs.
 	- The default identifier is `SOURCE_AWS_DATA_FIREHOSE_ADDRESS`.
 - Amazon Data Firehose TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_AWS_DATA_FIREHOSE_KEY_PASS`.

@@ -38,6 +38,7 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 {{% tab "Secrets Management" %}}
 
 - Fluent address identifier:
+	- References the address on which the Observability Pipelines Worker listens for incoming log messages.
 	- The default identifier is `SOURCE_FLUENT_ADDRESS`.
 - Fluent TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_FLUENT_KEY_PASS`.

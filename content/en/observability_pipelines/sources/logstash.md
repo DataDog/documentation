@@ -40,6 +40,7 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 {{% tab "Secrets Management" %}}
 
 - Logstash address identifier:
+	- References the address on which the Observability Pipelines Worker listens for incoming log messages.
 	- The default identifier is `SOURCE_LOGSTASH_ADDRESS`.
 - Logstash TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_LOGSTASH_KEY_PASS`.

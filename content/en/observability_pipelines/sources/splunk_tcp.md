@@ -38,6 +38,7 @@ Click the toggle to **Enable TLS**. If you enable TLS, the following certificate
 {{% tab "Secrets Management" %}}
 
 - Splunk TCP address identifier:
+	- References the socket address, such as `0.0.0.0:9997` on which the Observability Pipelines Worker listens to receive logs from the Splunk Forwarder.
 	- The default identifier is `SOURCE_SPLUNK_TCP_ADDRESS`.
 - Splunk TCP TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_SPLUNK_TCP_KEY_PASS`.
