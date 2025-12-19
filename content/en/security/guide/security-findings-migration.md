@@ -16,22 +16,47 @@ further_reading:
 
 ## Overview
 
-The syntax for creating queries to search for Security Findings in Datadog is changing. While this change comes with a set of [new features](#new-features) exposing that new schema, it may also impact your existing workflows.
+To make it easier to search for security findings throughout Datadog, the syntax for search queries is changing:
+- **Standardized naming conventions** for security finding data fields
+- **A new schema** to consistently organize those fields across security products
 
-This change affects all interfaces where you can query security findings data:
-- Explorers, dashboards, notification rules, and automation pipelines
-- Workflow Automation and Sheets
-- API and Terraform resources
+While this change comes with a set of [new features](#new-features) that use the new schema, it may also impact your existing workflows. This page details what is changing, the workflows that Datadog will automatically update, and the changes you need to make to avoid interruptions in your existing workflows.
 
-## Automatic migrations
+{{< learning-center-callout header="" btn_title="View the schema" btn_url="/security/guide/findings-schema/" hide_image="true" >}}
+  View the new security findings schema so you can understand how finding details will be stored.
+{{< /learning-center-callout >}}
 
-Every in-app feature will be automatically migrated, including queries created in Datadog explorers, dashboards, notification rules, and automation pipelines. No further action is needed for automatic migrations.
+### Required action
 
-## Required action
+This change affects all interfaces where you can query security findings data. While some queries will receive automatic updates, others require updates on your part:
+- **No change required** - queries will be updated automatically
+  - Explorers, dashboards, notification rules, and automation pipelines
+- **Changes required** - update your queries by **April 1, 2026**
+  - Workflow Automation and Sheets
+  - API and Terraform resources
+  <div class="alert alert-warning">Datadog will deprecate legacy API and Terraform resources. Update your queries on time so you can avoid workflow interruptions.</div>
 
-API and Terraform resources are not part of automatic migrations. If you are using these resources, you must migrate them to the new version by April 1 to avoid interruptions in your existing workflows.
+## What is changing
 
-## Security findings
+### New features
+
+Starting January 2026, the following features use the new data model:
+- Unified search queries for Cloud Security [Misconfigurations][9], [Identity Risks][10], [Attack Paths][11], [IaC][12], and [API][13] findings
+- A new unified public findings API
+- [Dashboard][2] support for Code Security
+- Graphing security findings in [Datadog Sheets][3]
+- Datadog [Workflow Automation][4] support for all finding types
+- Using SQL to query security findings and join them with other Datadog telemetry using [DDSQL Editor][5]
+
+<!-- With additional future changes:
+
+- Cloud Security Vulnerabilities
+- Code Security findings (SCA, SAST, IAST, Secrets)
+- [Data Access Controls][6]
+- Security findings & tools in the [Datadog MCP Server][7]
+- API & Terraform support for [automation pipelines][8] -->
+
+<!-- ### Security findings
 
 Security findings encompass vulnerabilities, misconfigurations, and security risks identified across your infrastructure and applications.
 
@@ -69,9 +94,7 @@ Security findings encompass vulnerabilities, misconfigurations, and security ris
       </td>
     </tr>
   </tbody>
-</table>
-
-## What is changing
+</table> -->
 
 ### New querying syntax
 
@@ -83,24 +106,22 @@ Following this change, you can use the same query syntax for all security findin
 | **Misconfigurations:** `@dd_computed_attributes.is_publicly_accessible:true`<br>**Host Vulnerabilities:** `is_publicly_accessible:Accessible` | `@risk.is_publicly_accessible:true` |
 | **Library Vulnerabilities:** `library_name:org.apache.logging.log4j`<br>**Host Vulnerabilities:** `package:org.apache.logging.log4j` | `@package.name:org.apache.logging.log4j` |
 
-View the full specification here: {insert link}
-
-### New features
-
-Starting January 2026, the following features are rolled out using the new data model:
-
-- A new unified findings public API
-- [Dashboard](/dashboards) support for Code Security
-- Graphing security findings in [Datadog Sheets](/sheets)
-- Datadog [Workflow Automation](/actions/workflows) support for all finding types
-- Using SQL to query security findings and join them with other Datadog telemetry using [DDSQL Editor](/ddsql_editor)
-
-With more coming soon:
-
-- [Data Access Controls](/account_management/rbac/data_access)
-- Security Findings & tools in the [Datadog MCP Server](/bits_ai/mcp_server)
-- API & Terraform support for [automation pipelines](security/automation_pipelines)
+View the full specification at [Security Findings Schema Reference][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security/guide/findings-schema/
+[2]: /dashboards
+[3]: /sheets
+[4]: /actions/workflows
+[5]: /ddsql_editor
+[6]: /account_management/rbac/data_access
+[7]: /bits_ai/mcp_server
+[8]: /security/automation_pipelines
+[9]: /security/cloud_security_management/misconfigurations/
+[10]: /security/cloud_security_management/identity_risks/
+[11]: /security/security_inbox/?s=attack%20path#types-of-findings-in-security-inbox
+[12]: /security/code_security/iac_security/
+[13]: /security/application_security/api-inventory/#api-findings
