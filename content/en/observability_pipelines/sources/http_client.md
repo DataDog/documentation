@@ -1,7 +1,12 @@
 ---
 title: HTTP Client Source
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' HTTP/S Client source to pull logs from the upstream HTTP/S server. Select and set up this source when you [set up a pipeline][1].
 
@@ -17,15 +22,15 @@ To configure your HTTP/S Client source:
 
 1. Enter the identifier for your HTTP Client endpoint URL.
     - **Note**: Only enter the identifier for the endpoint URL. Do **not** enter the actual endpoint URL.
-    - If left blank, the default is used: `DD_OP_SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
+    - If left blank, the default is used: `SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
 1. Select your authorization strategy. If you selected:
    - **Basic**:
       - Enter the identifier for your HTTP Client username.
-         - If left blank, the default is used: `DD_OP_SOURCE_HTTP_CLIENT_USERNAME`.
+         - If left blank, the default is used: `SOURCE_HTTP_CLIENT_USERNAME`.
       Enter the identifier for your HTTP Client password.
-         - If left blank, the default is used: `DD_OP_SOURCE_HTTP_CLIENT_PASSWORD`.
+         - If left blank, the default is used: `SOURCE_HTTP_CLIENT_PASSWORD`.
    - **Bearer**: Enter the identifier for your bearer token.
-      - If left blank, the default is used: `DD_OP_SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
+      - If left blank, the default is used: `SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
 1. Select the decoder you want to use on the HTTP messages. Logs pulled from the HTTP source must be in this format.
 
 ### Optional settings
@@ -34,7 +39,7 @@ To configure your HTTP/S Client source:
 Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
    - Enter the identifier for your HTTP Client key pass.
          - **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
-         - If left blank, the default is used: `DD_OP_SOURCE_HTTP_CLIENT_KEY_PASS`
+         - If left blank, the default is used: `SOURCE_HTTP_CLIENT_KEY_PASS`
    - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509) format.
    - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509) format.
    - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.

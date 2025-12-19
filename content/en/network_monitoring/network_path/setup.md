@@ -303,7 +303,7 @@ Agent `v7.73+` is required.
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Agent `v7.61+` is required.
+Agent `v7.73+` is required.
 
 1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
@@ -356,7 +356,7 @@ Agent `v7.61+` is required.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.59+` is required.
+Agent `v7.73+` is required.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
 **Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].

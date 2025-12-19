@@ -22,12 +22,13 @@ further_reading:
 
 To use Azure Cloud Cost Management in Datadog, you must configure the Datadog Azure integration and create **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup. 
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup.
 
 To determine your account type, see the [Azure documentation][10]. **Note:** If your account type is listed as "Microsoft Online Services Program", then your account is PAYG.
 
 ## Setup
 
+You can setup using the [API][13], [Terraform][14], or directly in Datadog by following the instructions below.
 
 {{% site-region region="us3" %}}
 **Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an app registration][2].
@@ -260,3 +261,5 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [10]: https://docs.azure.cn/en-us/cost-management-billing/manage/resolve-past-due-balance#check-the-type-of-your-account
 [11]: /help/
 [12]: /cloud_cost_management/tags
+[13]: /api/latest/cloud-cost-management/#create-cloud-cost-management-azure-configs
+[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/azure_uc_config

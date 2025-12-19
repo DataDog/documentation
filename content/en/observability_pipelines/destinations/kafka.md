@@ -1,7 +1,12 @@
 ---
 title: Kafka Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 ## Overview
 

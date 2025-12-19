@@ -1,7 +1,12 @@
 ---
 title: Sumo Logic Hosted Collector
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Sumo Logic Hosted Collector source to receive logs sent to your Sumo Logic Hosted Collector. Select and set up this source when you [set up a pipeline][1].
 
@@ -15,7 +20,7 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 - Enter the identifier for your Sumo Logic address.
     - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
-    - If left blank, the default is used: `DD_OP_SOURCE_SUMO_LOGIC_ADDRESS`.
+    - If left blank, the default is used: `SOURCE_SUMO_LOGIC_ADDRESS`.
 
 ### Optional settings
 

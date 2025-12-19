@@ -1,7 +1,12 @@
 ---
 title: Datadog CloudPrem Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' CloudPrem destination to send logs to Datadog CloudPrem.
 

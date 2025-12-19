@@ -18,7 +18,7 @@ The Microsoft Teams integration for Datadog Incident Management enables you to d
 
 To use Incident Management's Microsoft Teams features, you must first [install the Microsoft Teams integration for Datadog][1] and connect your Microsoft Teams account to your Datadog account.
 
-After installation, go to **[Service Management > Incidents > Settings > Integrations][2]** to configure the Microsoft Teams features for Incident Management.
+After installation, go to **[Incident Response > Incident Management > Settings > Integrations][2]** to configure the Microsoft Teams features for Incident Management.
 
 ## Incident channels
 
@@ -57,7 +57,7 @@ You can configure Incident Management to automatically archive an incident chann
 
 Use an incident updates channel to provide your stakeholders with organization-wide visibility into the status of all incidents directly from Microsoft Teams.
 
-1. In Datadog, navigate to [**Incidents > Settings > Integrations**][2].
+1. In Datadog, navigate to **[Incident Response > Incident Management > Settings > Integrations][2]**.
 1. Select the Microsoft Teams integration and enable **Send all incident updates to a global channel**.
 1. Select the Team and channel where you want the incident updates to be posted.
 
