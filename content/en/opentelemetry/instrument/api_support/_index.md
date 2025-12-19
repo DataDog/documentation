@@ -26,12 +26,14 @@ The telemetry produced by your running code can be processed, analyzed, and moni
 
 {{< img src="/opentelemetry/setup/otel-api-dd-sdk.png" alt="Diagram: OpenTelemetry API with Datadog SDKs sends telemetry data through the OTLP protocol to the Datadog Agent, which forwards to Datadog's platform." style="width:100%;" >}}
 
-**Note:** You can also send your OpenTelemetry API instrumented traces to Datadog using the [OTel Collector][7].
+**Note**: You can also send your OpenTelemetry API instrumented traces to Datadog using the [OTel Collector][7].
 
 By [instrumenting your code with OpenTelemetry APIs][2], your code:
 
 - Remains free of vendor-specific API calls.
 - Does not depend on Datadog SDKs at compile time (only runtime).
+
+**Important**: Do not include the OpenTelemetry SDK in your application's dependencies. The Datadog SDK provides the implementation of the OpenTelemetry API. Including the OpenTelemetry SDK may cause conflicts or unexpected behavior.
 
 To learn more, follow the link for your language:
 
