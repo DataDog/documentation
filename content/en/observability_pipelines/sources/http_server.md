@@ -47,7 +47,7 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 {{% tab "Secrets Management" %}}
 
 - HTTP Server address identifier:
-	- References the socket address, such as `0.0.0.0:9997`, on which Observability Pipelines Worker listens for HTTP client logs.
+	- References the socket address, such as `0.0.0.0:9997`, on which the Observability Pipelines Worker listens for HTTP client logs.
 	- The default identifier is `SOURCE_HTTP_SERVER_ADDRESS`.
 - HTTP Server TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_HTTP_SERVER_KEY_PASS`.
