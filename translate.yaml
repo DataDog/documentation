@@ -9,6 +9,8 @@ sync_dry_run_enabled: false
 
 # These files will be ignored or deleted when syncing with Transifex.
 ignores:
+  - "content/en/security/sensitive_data_scanner/guide/redact_all_emails_except_from_specific_domain_logs.md"
+  - "content/en/security/sensitive_data_scanner/guide/redact_uuids_in_logs.md"
   - "content/en/observability_pipelines/legacy/*.md"
   - "content/en/**/faq/*.md"
   - "content/en/security/default_rules/*.md"
