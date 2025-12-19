@@ -44,11 +44,16 @@ For the following use cases, ensure your fleet of Datadog Agents and OTel Collec
 
 Fleet Automation enables you to centrally manage Datadog Agents across all your hosts directly from the Datadog UI. With remote management, you can view the current state of every Agent, apply configuration changes, and roll out version upgrades without needing direct access to individual systems. This provides a consistent, controlled workflow for keeping your fleet secure, up to date, and aligned with your organization’s standards.
 
-- **Remotely Upgrade and Configure Agents**: For information on supported Agent versions and configuration steps, see [Enable Remote Agent Management][3].
+- **Remotely Upgrade and Configure Agents**: For setup and enablement steps, see [Enable Remote Agent Management][3].
 - **View Agent and OTel Collector configurations**:
   - The Agent and Datadog Distribution of OTel Collector (DDOT) configuration view is enabled by default in Agent versions 7.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
   - The upstream OTel Collector configuration view is enabled by setting the [Datadog Extension][8] in your collector configuration file.
 - **View Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+
+### Fleet Automation API
+Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][9]. 
+
+**Note**: The Fleet Automation API does not support all Datadog Agent configuration capabilities.
 
 <div class="alert alert-info">
 Remote management of Agents in containerized workloads is not supported.
@@ -59,7 +64,7 @@ Remote management of Agents in containerized workloads is not supported.
 
 Use the [**Fleet Automation**][1] page to gain insight into observability gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues. 
 
-For each Agent, you can see:
+For each Datadog Agent, you can see:
 - The Agent version
 - Whether the Agent has any unconfigured or misconfigured integrations
 - The services that the Agent is monitoring
@@ -72,9 +77,9 @@ For each OTel Collector, you can see:
 - The distribution of the Collector
 - The configuration YAML of the Collector
 
-### Examine an Agent or OpenTelemetry Collector
+### Examine a Datadog Agent or OpenTelemetry Collector
 
-Selecting an Agent or OTel Collector gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
+Selecting a Datadog Agent or OTel Collector gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="An Agent's integration information" style="width:100%;" >}}
 
@@ -120,3 +125,4 @@ For information on setting up roles and permissions, see [Access Control][5].
 [6]: /agent/fleet_automation/remote_management/
 [7]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
 [8]: https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/#setup
+[9]: https://docs.datadoghq.com/api/latest/fleet-automation/

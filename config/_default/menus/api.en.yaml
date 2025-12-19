@@ -5112,6 +5112,22 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: APM
+      url: /api/latest/apm/
+      identifier: apm
+      generated: true
+    - name: Get service list
+      url: '#get-service-list'
+      identifier: apm-get-service-list
+      parent: apm
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetServiceList
+        unstable: []
+        order: 1
     - name: APM Retention Filters
       url: /api/latest/apm-retention-filters/
       identifier: apm-retention-filters
@@ -11530,8 +11546,7 @@ menu:
           - v2
         operationids:
           - SyncTeams
-        unstable:
-          - v2
+        unstable: []
         order: 19
     - name: Get team sync configurations
       url: '#get-team-sync-configurations'
@@ -11543,8 +11558,7 @@ menu:
           - v2
         operationids:
           - GetTeamSync
-        unstable:
-          - v2
+        unstable: []
         order: 18
     - name: Create team connections
       url: '#create-team-connections'
@@ -11556,8 +11570,7 @@ menu:
           - v2
         operationids:
           - CreateTeamConnections
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List team connections
       url: '#list-team-connections'
@@ -11569,8 +11582,7 @@ menu:
           - v2
         operationids:
           - ListTeamConnections
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Delete team connections
       url: '#delete-team-connections'
@@ -11582,8 +11594,7 @@ menu:
           - v2
         operationids:
           - DeleteTeamConnections
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Get a team hierarchy link
       url: '#get-a-team-hierarchy-link'

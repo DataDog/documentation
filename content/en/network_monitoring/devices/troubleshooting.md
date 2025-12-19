@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"
   text: "Monitor SNMP with Datadog"
+- link: "/network_monitoring/devices/glossary"
+  tag: "Doc"
+  text: "NDM terms and concepts"
 ---
 
 ## Overview
