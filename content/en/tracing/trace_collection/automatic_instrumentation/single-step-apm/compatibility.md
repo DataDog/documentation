@@ -42,7 +42,6 @@ Select your environment to see compatibility requirements and limitations:
 ### Compatibility
 
 - **Status**: GA
-- **Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
 - **Supported architectures**: x86_64, arm64
 
 ### Requirements
@@ -64,7 +63,7 @@ Select your environment to see compatibility requirements and limitations:
 ### Compatibility
 
 - **Status**: GA
-- **Supported node pools**: Linux nodes only (see [Linux distributions reference](#linux-distributions-reference))
+- **Supported node pools**: Linux nodes only
 - **Supported architectures**: x86_64, arm64
 
 ### Requirements
@@ -274,7 +273,7 @@ SSI automatically disables when it detects:
 
 ## Linux distributions reference
 
-The following Linux distributions and architectures are supported for SSI across all deployment platforms (Linux hosts, Docker, Kubernetes):
+The following Linux distributions and architectures are supported for SSI across Linux hosts:
 
 | OS           | Version        | Architecture  |
 |--------------|----------------|---------------|
