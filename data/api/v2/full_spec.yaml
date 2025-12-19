@@ -178,6 +178,15 @@ components:
       required: true
       schema:
         type: string
+    AttachmentIncludeQueryParameter:
+      description: 'Resource to include in the response. Supported value: `last_modified_by_user`.'
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        example: last_modified_by_user
+        type: string
     AuthNMappingID:
       description: The UUID of the AuthN Mapping.
       in: path
@@ -457,26 +466,6 @@ components:
       schema:
         items:
           $ref: '#/components/schemas/GetIssueIncludeQueryParameterItem'
-        type: array
-    IncidentAttachmentFilterQueryParameter:
-      description: Specifies which types of attachments are included in the response.
-      explode: false
-      in: query
-      name: filter[attachment_type]
-      required: false
-      schema:
-        items:
-          $ref: '#/components/schemas/IncidentAttachmentAttachmentType'
-        type: array
-    IncidentAttachmentIncludeQueryParameter:
-      description: Specifies which types of related objects are included in the response.
-      explode: false
-      in: query
-      name: include
-      required: false
-      schema:
-        items:
-          $ref: '#/components/schemas/IncidentAttachmentRelatedObject'
         type: array
     IncidentIDPathParameter:
       description: The UUID of the incident.
@@ -5344,6 +5333,124 @@ components:
       - findings
       - project
       type: object
+    Attachment:
+      properties:
+        data:
+          $ref: '#/components/schemas/AttachmentData'
+        included:
+          items:
+            $ref: '#/components/schemas/AttachmentIncluded'
+          type: array
+      type: object
+    AttachmentArray:
+      properties:
+        data:
+          example:
+          - attributes:
+              attachment:
+                documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
+                title: Postmortem IR-123
+              attachment_type: postmortem
+              modified: '2025-01-01T01:01:01.000000001Z'
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
+          items:
+            $ref: '#/components/schemas/AttachmentData'
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/AttachmentIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    AttachmentData:
+      example:
+        attributes:
+          attachment:
+            documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
+            title: Postmortem IR-123
+          attachment_type: postmortem
+          modified: '2025-01-01T01:01:01.000000001Z'
+        id: 00000000-abcd-0002-0000-000000000000
+        relationships:
+          last_modified_by_user:
+            data:
+              id: 00000000-0000-0000-cccc-000000000000
+              type: users
+        type: incident_attachments
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AttachmentDataAttributes'
+        id:
+          example: 00000000-abcd-0002-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/AttachmentDataRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      - attributes
+      - relationships
+      - id
+      type: object
+    AttachmentDataAttributes:
+      properties:
+        attachment:
+          $ref: '#/components/schemas/AttachmentDataAttributesAttachment'
+        attachment_type:
+          $ref: '#/components/schemas/AttachmentDataAttributesAttachmentType'
+        modified:
+          format: date-time
+          type: string
+      type: object
+    AttachmentDataAttributesAttachment:
+      properties:
+        documentUrl:
+          type: string
+        title:
+          type: string
+      type: object
+    AttachmentDataAttributesAttachmentType:
+      enum:
+      - postmortem
+      - link
+      type: string
+      x-enum-varnames:
+      - POSTMORTEM
+      - LINK
+    AttachmentDataRelationships:
+      properties:
+        last_modified_by_user:
+          $ref: '#/components/schemas/AttachmentDataRelationshipsLastModifiedByUser'
+      type: object
+    AttachmentDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/AttachmentDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    AttachmentDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/UserType'
+      required:
+      - type
+      - id
+      type: object
+    AttachmentIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/User140420082644000'
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -12871,6 +12978,45 @@ components:
           $ref: '#/components/schemas/DatastoreDataType'
       required:
       - type
+      type: object
+    CreateAttachmentRequest:
+      example:
+        data:
+          attributes:
+            attachment:
+              documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
+              title: Postmortem-IR-123
+            attachment_type: postmortem
+          id: 00000000-0000-0000-0000-000000000000
+          type: incident_attachments
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateAttachmentRequestData'
+      type: object
+    CreateAttachmentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateAttachmentRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      type: object
+    CreateAttachmentRequestDataAttributes:
+      properties:
+        attachment:
+          $ref: '#/components/schemas/CreateAttachmentRequestDataAttributesAttachment'
+        attachment_type:
+          $ref: '#/components/schemas/AttachmentDataAttributesAttachmentType'
+      type: object
+    CreateAttachmentRequestDataAttributesAttachment:
+      properties:
+        documentUrl:
+          type: string
+        title:
+          type: string
       type: object
     CreateCaseRequestArray:
       description: List of requests to create cases for security findings.
@@ -25657,126 +25803,6 @@ components:
           type: string
           x-mimetype: application/xml
       type: object
-    IncidentAttachmentAttachmentType:
-      description: The type of the incident attachment attributes.
-      enum:
-      - link
-      - postmortem
-      example: link
-      type: string
-      x-enum-varnames:
-      - LINK
-      - POSTMORTEM
-    IncidentAttachmentAttributes:
-      description: The attributes object for an attachment.
-      oneOf:
-      - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
-      - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
-    IncidentAttachmentData:
-      description: A single incident attachment.
-      example:
-        attributes:
-          attachment:
-            documentUrl: ''
-            title: Postmortem IR-123
-          attachment_type: postmortem
-        id: 00000000-abcd-0002-0000-000000000000
-        relationships:
-          last_modified_by_user:
-            data:
-              id: 00000000-0000-0000-cccc-000000000000
-              type: users
-        type: incident_attachments
-      properties:
-        attributes:
-          $ref: '#/components/schemas/IncidentAttachmentAttributes'
-        id:
-          description: A unique identifier that represents the incident attachment.
-          example: 00000000-abcd-0001-0000-000000000000
-          type: string
-        relationships:
-          $ref: '#/components/schemas/IncidentAttachmentRelationships'
-        type:
-          $ref: '#/components/schemas/IncidentAttachmentType'
-      required:
-      - type
-      - attributes
-      - id
-      - relationships
-      type: object
-    IncidentAttachmentLinkAttachmentType:
-      default: link
-      description: The type of link attachment attributes.
-      enum:
-      - link
-      example: link
-      type: string
-      x-enum-varnames:
-      - LINK
-    IncidentAttachmentLinkAttributes:
-      description: The attributes object for a link attachment.
-      properties:
-        attachment:
-          $ref: '#/components/schemas/IncidentAttachmentLinkAttributesAttachmentObject'
-        attachment_type:
-          $ref: '#/components/schemas/IncidentAttachmentLinkAttachmentType'
-        modified:
-          description: Timestamp when the incident attachment link was last modified.
-          format: date-time
-          readOnly: true
-          type: string
-      required:
-      - attachment_type
-      - attachment
-      type: object
-    IncidentAttachmentLinkAttributesAttachmentObject:
-      description: The link attachment.
-      properties:
-        documentUrl:
-          description: The URL of this link attachment.
-          example: https://www.example.com/webstore-failure-runbook
-          type: string
-        title:
-          description: The title of this link attachment.
-          example: Runbook for webstore service failures
-          type: string
-      required:
-      - documentUrl
-      - title
-      type: object
-    IncidentAttachmentPostmortemAttachmentType:
-      default: postmortem
-      description: The type of postmortem attachment attributes.
-      enum:
-      - postmortem
-      example: postmortem
-      type: string
-      x-enum-varnames:
-      - POSTMORTEM
-    IncidentAttachmentPostmortemAttributes:
-      description: The attributes object for a postmortem attachment.
-      properties:
-        attachment:
-          $ref: '#/components/schemas/IncidentAttachmentsPostmortemAttributesAttachmentObject'
-        attachment_type:
-          $ref: '#/components/schemas/IncidentAttachmentPostmortemAttachmentType'
-      required:
-      - attachment_type
-      - attachment
-      type: object
-    IncidentAttachmentRelatedObject:
-      description: The object related to an incident attachment.
-      enum:
-      - users
-      type: string
-      x-enum-varnames:
-      - USERS
-    IncidentAttachmentRelationships:
-      description: The incident attachment's relationships.
-      properties:
-        last_modified_by_user:
-          $ref: '#/components/schemas/RelationshipToUser'
-      type: object
     IncidentAttachmentType:
       default: incident_attachments
       description: The incident attachment resource type.
@@ -25786,142 +25812,6 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_ATTACHMENTS
-    IncidentAttachmentUpdateAttributes:
-      description: Incident attachment attributes.
-      oneOf:
-      - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
-      - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
-    IncidentAttachmentUpdateData:
-      description: A single incident attachment.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/IncidentAttachmentUpdateAttributes'
-        id:
-          description: A unique identifier that represents the incident attachment.
-          example: 00000000-abcd-0001-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/IncidentAttachmentType'
-      required:
-      - type
-      type: object
-    IncidentAttachmentUpdateRequest:
-      description: The update request for an incident's attachments.
-      properties:
-        data:
-          description: 'An array of incident attachments. An attachment object without
-            an "id" key indicates that you want to
-
-            create that attachment. An attachment object without an "attributes" key
-            indicates that you want to
-
-            delete that attachment. An attachment object with both the "id" key and
-            a populated "attributes" object
-
-            indicates that you want to update that attachment.'
-          example:
-          - attributes:
-              attachment:
-                documentUrl: https://app.datadoghq.com/notebook/123
-                title: Postmortem IR-123
-              attachment_type: postmortem
-            id: 00000000-abcd-0002-0000-000000000000
-            type: incident_attachments
-          - attributes:
-              attachment:
-                documentUrl: https://www.example.com/webstore-failure-runbook
-                title: Runbook for webstore service failures
-              attachment_type: link
-            type: incident_attachments
-          - id: 00000000-abcd-0003-0000-000000000000
-            type: incident_attachments
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentUpdateData'
-          type: array
-      required:
-      - data
-      type: object
-    IncidentAttachmentUpdateResponse:
-      description: The response object containing the created or updated incident
-        attachments.
-      properties:
-        data:
-          description: 'An array of incident attachments. Only the attachments that
-            were created or updated by the request are
-
-            returned.'
-          example:
-          - attributes:
-              attachment:
-                documentUrl: ''
-                title: Postmortem IR-123
-              attachment_type: postmortem
-            id: 00000000-abcd-0002-0000-000000000000
-            relationships:
-              last_modified_by_user:
-                data:
-                  id: 00000000-0000-0000-cccc-000000000000
-                  type: users
-            type: incident_attachments
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentData'
-          type: array
-        included:
-          description: Included related resources that the user requested.
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentsResponseIncludedItem'
-          type: array
-      required:
-      - data
-      type: object
-    IncidentAttachmentsPostmortemAttributesAttachmentObject:
-      description: The postmortem attachment.
-      properties:
-        documentUrl:
-          description: The URL of this notebook attachment.
-          example: https://app.datadoghq.com/notebook/123
-          type: string
-        title:
-          description: The title of this postmortem attachment.
-          example: Postmortem IR-123
-          type: string
-      required:
-      - documentUrl
-      - title
-      type: object
-    IncidentAttachmentsResponse:
-      description: The response object containing an incident's attachments.
-      properties:
-        data:
-          description: An array of incident attachments.
-          example:
-          - attributes:
-              attachment:
-                documentUrl: ''
-                title: Postmortem IR-123
-              attachment_type: postmortem
-            id: 00000000-abcd-0002-0000-000000000000
-            relationships:
-              last_modified_by_user:
-                data:
-                  id: 00000000-0000-0000-cccc-000000000000
-                  type: users
-            type: incident_attachments
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentData'
-          type: array
-        included:
-          description: Included related resources that the user requested.
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentsResponseIncludedItem'
-          type: array
-      required:
-      - data
-      type: object
-    IncidentAttachmentsResponseIncludedItem:
-      description: An object related to an attachment that is included in the response.
-      oneOf:
-      - $ref: '#/components/schemas/User'
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -27192,7 +27082,7 @@ components:
       description: An object related to an incident that is included in the response.
       oneOf:
       - $ref: '#/components/schemas/IncidentUserData'
-      - $ref: '#/components/schemas/IncidentAttachmentData'
+      - $ref: '#/components/schemas/AttachmentData'
     IncidentResponseMeta:
       description: The metadata object containing pagination metadata.
       properties:
@@ -40436,6 +40326,41 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+      type: object
+    PatchAttachmentRequest:
+      example:
+        data:
+          attributes:
+            attachment:
+              documentUrl: https://app.datadoghq.com/notebook/124/Postmortem-IR-124
+              title: Postmortem-IR-124
+          type: incident_attachments
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchAttachmentRequestData'
+      type: object
+    PatchAttachmentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchAttachmentRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      type: object
+    PatchAttachmentRequestDataAttributes:
+      properties:
+        attachment:
+          $ref: '#/components/schemas/PatchAttachmentRequestDataAttributesAttachment'
+      type: object
+    PatchAttachmentRequestDataAttributesAttachment:
+      properties:
+        documentUrl:
+          type: string
+        title:
+          type: string
       type: object
     PatchIncidentNotificationTemplateRequest:
       description: Update request for a notification template.
@@ -57218,6 +57143,17 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
+    User140420082644000:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/UserType'
+      required:
+      - type
+      type: object
     UserAttributes:
       description: Attributes of user object returned by the API.
       properties:
@@ -57668,6 +57604,15 @@ components:
         meta:
           $ref: '#/components/schemas/TeamsResponseMeta'
       type: object
+    UserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     UserUpdateAttributes:
       description: Attributes of the edited user.
       properties:
@@ -68998,8 +68943,7 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - incident_notification_settings_read
+      - AuthZ: []
       summary: List incident notification rules
       tags:
       - Incidents
@@ -69203,8 +69147,7 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - incident_settings_read
+      - AuthZ: []
       summary: List incident notification templates
       tags:
       - Incidents
@@ -69322,7 +69265,8 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
+        - incident_read
+        - incident_write
       summary: Get incident notification template
       tags:
       - Incidents
@@ -69415,6 +69359,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
+        - incident_settings_read
         - incident_read
       x-unstable: '**Note**: This endpoint is in public beta.
 
@@ -69457,7 +69402,7 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 19
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - incident_settings_write
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -69754,82 +69699,170 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/attachments:
     get:
-      description: Get all attachments for a given incident.
+      description: List incident attachments.
       operationId: ListIncidentAttachments
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
-      - $ref: '#/components/parameters/IncidentAttachmentIncludeQueryParameter'
-      - $ref: '#/components/parameters/IncidentAttachmentFilterQueryParameter'
+      - description: Filter attachments by type. Supported values are `1` (`postmortem`)
+          and `2` (`link`).
+        in: query
+        name: filter[attachment_type]
+        schema:
+          example: '1'
+          type: string
+      - $ref: '#/components/parameters/AttachmentIncludeQueryParameter'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IncidentAttachmentsResponse'
+                $ref: '#/components/schemas/AttachmentArray'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
-        '401':
-          $ref: '#/components/responses/UnauthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List incident attachments
+      tags:
+      - Incidents
+      x-menu-order: 34
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an incident attachment.
+      operationId: CreateIncidentAttachment
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/AttachmentIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAttachmentRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Create incident attachment
+      tags:
+      - Incidents
+      x-menu-order: 35
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_write
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/attachments/{attachment_id}:
+    delete:
+      operationId: DeleteIncidentAttachment
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - description: The ID of the attachment.
+        in: path
+        name: attachment_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000002
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a list of attachments
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Delete incident attachment
       tags:
       - Incidents
-      x-menu-order: 7
+      x-menu-order: 36
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
-        - incident_read
-      x-unstable: '**Note**: This endpoint is in public beta.
+        - incident_write
+      x-unstable: '**Note**: This endpoint is in Preview.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
-      deprecated: true
-      description: The bulk update endpoint for creating, updating, and deleting attachments
-        for a given incident.
-      operationId: UpdateIncidentAttachments
+      operationId: UpdateIncidentAttachment
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
-      - $ref: '#/components/parameters/IncidentAttachmentIncludeQueryParameter'
+      - description: The ID of the attachment.
+        in: path
+        name: attachment_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000002
+      - $ref: '#/components/parameters/AttachmentIncludeQueryParameter'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IncidentAttachmentUpdateRequest'
-        description: Incident Attachment Payload.
+              $ref: '#/components/schemas/PatchAttachmentRequest'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IncidentAttachmentUpdateResponse'
+                $ref: '#/components/schemas/Attachment'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
-        '401':
-          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create, update, and delete incident attachments
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Update incident attachment
       tags:
       - Incidents
-      x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 37
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is deprecated.'
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/impacts:
     get:
       description: Get all impacts for an incident.
@@ -69862,7 +69895,7 @@ paths:
       summary: List an incident's impacts
       tags:
       - Incidents
-      x-menu-order: 6
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
@@ -69906,7 +69939,7 @@ paths:
       tags:
       - Incidents
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:

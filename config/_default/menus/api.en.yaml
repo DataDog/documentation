@@ -8379,7 +8379,7 @@ menu:
         operationids:
           - CreateIncidentImpact
         unstable: []
-        order: 7
+        order: 8
     - name: List an incident's impacts
       url: '#list-an-incidents-impacts'
       identifier: incidents-list-an-incidents-impacts
@@ -8391,23 +8391,49 @@ menu:
         operationids:
           - ListIncidentImpacts
         unstable: []
-        order: 6
-    - name: 'Create, update, and delete incident attachments'
-      url: '#create,-update,-and-delete-incident-attachments'
-      identifier: 'incidents-create,-update,-and-delete-incident-attachments'
+        order: 7
+    - name: Update incident attachment
+      url: '#update-incident-attachment'
+      identifier: incidents-update-incident-attachment
       parent: incidents
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateIncidentAttachments
+          - UpdateIncidentAttachment
         unstable:
           - v2
-        order: 8
-    - name: Get a list of attachments
-      url: '#get-a-list-of-attachments'
-      identifier: incidents-get-a-list-of-attachments
+        order: 37
+    - name: Delete incident attachment
+      url: '#delete-incident-attachment'
+      identifier: incidents-delete-incident-attachment
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentAttachment
+        unstable:
+          - v2
+        order: 36
+    - name: Create incident attachment
+      url: '#create-incident-attachment'
+      identifier: incidents-create-incident-attachment
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentAttachment
+        unstable:
+          - v2
+        order: 35
+    - name: List incident attachments
+      url: '#list-incident-attachments'
+      identifier: incidents-list-incident-attachments
       parent: incidents
       generated: true
       params:
@@ -8417,7 +8443,7 @@ menu:
           - ListIncidentAttachments
         unstable:
           - v2
-        order: 7
+        order: 34
     - name: Update an existing incident
       url: '#update-an-existing-incident'
       identifier: incidents-update-an-existing-incident

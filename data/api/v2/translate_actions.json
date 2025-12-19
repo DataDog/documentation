@@ -1188,14 +1188,22 @@
     "request_schema_description": "Update request for an incident."
   },
   "ListIncidentAttachments": {
-    "description": "Get all attachments for a given incident.",
-    "summary": "Get a list of attachments"
+    "description": "List incident attachments.",
+    "summary": "List incident attachments"
   },
-  "UpdateIncidentAttachments": {
-    "description": "The bulk update endpoint for creating, updating, and deleting attachments for a given incident.",
-    "summary": "Create, update, and delete incident attachments",
-    "request_description": "Incident Attachment Payload.",
-    "request_schema_description": "The update request for an incident's attachments."
+  "CreateIncidentAttachment": {
+    "description": "Create an incident attachment.",
+    "summary": "Create incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentAttachment": {
+    "summary": "Delete incident attachment"
+  },
+  "UpdateIncidentAttachment": {
+    "summary": "Update incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
