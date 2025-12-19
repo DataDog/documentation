@@ -1,5 +1,5 @@
 ---
-title: Datadog Disaster Recovery
+title: Agent Retry and Buffering Logic
 private: true
 further_reading:
 - link: "agent/remote_config/?tab=configurationyamlfile"
@@ -15,15 +15,20 @@ further_reading:
 
 ## Overview 
 
-This brief is a high-level description of the behavior of the Agent when it’s unable to successfully post an HTTP request to Datadog’s intake: retry strategy (e.g. exponential backoff), buffer nature and sizes, drop strategy.
-A failed HTTP request is any HTTP request that doesn’t result in a 2xx HTTP response.
+This guide details the behavior of the Agent when it’s unable to successfully post an HTTP request to Datadog’s intake. It explains the retry strategy, buffer nature and sizes, and the drop strategy. 
+
+<div class="alert alert-info">A failed HTTP request, in this guide, is defined as any HTTP request that doesn’t result in a <code>2xx</code> HTTP response.</div>
+
 
 
 ## Metrics 
+### Metrics retry strategy 
 Failed HTTP requests are retried on timeouts and 4xx/5xx HTTP response status codes unless the status code is one of 400, 403, 413 (code). When an endpoint is down the Agent will retry again using an exponential backoff strategy with randomized jitter. By default the max backoff time is 64 seconds and will reach this time after 6 attempts (calculated here, using a base back off time of 2).
 
 If the HTTP responses is 404 then the Agent will retry the transaction again (see code here). This means that the Agent will typically retry requests to endpoints that do not exist in a DD region or proxy.
 
+
+### Metrics Buffer logic
 Failed payloads are kept compressed in an in-memory buffer, with a default size of 15MB (code, configurable with forwarder_retry_queue_payloads_max_size). 
 
 An opt-in on-disk buffer can be enabled by customers (public docs, 
@@ -44,6 +49,7 @@ Number of points dropped by the Agent.
 
 ## Logs 
 
+### Logs retry strategy 
 Failed HTTP requests (defined as any code above a 400 and not a 400, 401, 403 or 413 here) will be retried indefinitely (with backoff) until the end point comes back. It uses the same exponential backoff strategy with randomized jitter, except the default max backoff time is 120 seconds, using a base back off time of 2 as well.
 
 Due to the fact the Agent guarantees log delivery, when a payload fails it creates back pressure through the Agent. This means the Agent will stop reading from the source of the log. As long as the log source is still present/available when the intake comes back, then the Agent will carry on reading from where it stopped. In K8s this could mean the file is rotated before the intake is back online, so we’d lose the rest of the logs. On other systems, things like logrotate can remove files being tailed before the Agent is able to read and send the data again.
@@ -104,15 +110,16 @@ When dual shipping, the Agent will block on both destinations. The problem with 
 Dual shipping also has a is_reliable mode option for additional endpoints. In this mode (when set to true) the Agent will send to both endpoints and treat both with the same priority. This means that if all your reliable endpoints are unavailable then the Agent will stop sending data till one reliable endpoint is available. Unreliable endpoints only send data if at least one reliable endpoint is available. They also have lower priority than those marked as reliable. More details can be found here. 
 
 
-## APM 
+## APM
+### APM retry strategy  
 Failed HTTP requests are retried with an exponential backoff. A failed HTTP request is defined as any network connectivity problem, status code 408 or 5xx (code here and here). The max backoff time is 10 seconds (we believe this limit was chosen arbitrarily), using a base backoff time of 2. Which status codes are retriable, and the backoff rates are not configurable.
 
 Failed payloads are kept in-memory compressed, we start dropping older payloads if the payloads queue is full.
 
-### For traces 
+#### For traces 
 The queue size is configurable via apm_config.trace_writer.queue_size and defaults to int(max(1, max memory / max payload size)), in most cases this defaults to int(max(1, (500 * 1024 * 1024) / 3200000)) = 163 payloads (code).
 
-### For stats
+#### For stats
 The queue size is configurable via apm_config.stats_writer.queue_size and defaults to int(max(1, max memory / payload size)), in most cases this defaults to int(max(1, (250 * 1024 * 1024) / 1500000)) = 174 payloads (code).
 
 When dual shipping, each target endpoint has its own sender instance and queue.
