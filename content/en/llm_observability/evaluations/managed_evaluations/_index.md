@@ -106,7 +106,7 @@ Connect Vertex AI to LLM Observability with your Google Cloud Platform account. 
 1. On the Google Cloud Vertex AI tile, click **Connect** to add a new GCP account, or click **Configure** next to where your existing accounts are listed to begin the onboarding process.
   - You will see all GCP accounts connected to Datadog in this page. However, you must still go through the onboarding process for an account to use it in LLM Observability.
 1. Follow the onboarding instructions to configure your account.
-  - You will have to add the [**Vertex AI User**][2] role to your account and enable the [**Vertex AI API**][3].
+  - Add the [**Vertex AI User**][2] role to your account and enable the [**Vertex AI API**][3].
 
 {{< img src="llm_observability/configuration/vertex-ai-pint.png" alt="The Vertex AI onboarding workflow. Follow steps to configure your GCP service account with the right Vertex AI permissions for use with LLM Observability." style="width:100%;" >}}
 
