@@ -331,7 +331,7 @@ What you can do with rehydrated logs:
 
 What you **cannot** do with rehydrated logs:
 
-- View in-line highlighted sensitive data matches in the UI: The matches remain obfuscated if mask, redact, partially redact, or hash were chosen as an action on match.
+- View in-line highlighted sensitive data matches in the UI: The matches remain obfuscated even if mask, redact, partially redact, or hash was chosen as an action on match.
 - Trigger retroactive scans: Sensitive Data Scanner does not re-scan rehydrated logs.
 
 ## Disable Sensitive Data Scanner
