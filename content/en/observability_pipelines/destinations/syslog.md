@@ -61,16 +61,15 @@ Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering option
 
 ### Set secrets
 
-The following are the defaults used for secret identifiers and environment variables.
-
-**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+{{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- Syslog endpoint URL identifier:
+- rsyslog or syslog-ng endpoint URL identifier:
+	- References address and port to which Observability Pipelines Worker sends logs. For example, `127.0.0.1:9997`.
 	- The default identifier is `DESTINATION_SYSLOG_ENDPOINT_URL`.
-- Syslog TLS passphrase identifier (when TLS is enabled):
+- rsyslog or syslog-ng TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `DESTINATION_SYSLOG_KEY_PASS`.
 
 {{% /tab %}}

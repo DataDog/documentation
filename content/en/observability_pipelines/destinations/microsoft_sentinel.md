@@ -81,16 +81,16 @@ To set up the Microsoft Sentinel destination in Observability Pipelines:
 
 ### Set secrets
 
-The following are the defaults used for secret identifiers and environment variables.
-
-**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+{{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
 - Microsoft Sentinel client secret identifier:
+    - References the DCE endpoint URL shown as the **Logs Ingestion Endpoint** or **Data Collection Endpoint** on the DCR Overview page. An example URL: `https://<DCE-ID>.ingest.monitor.azure.com`.
 	- The default identifier is `DESTINATION_MICROSOFT_SENTINEL_CLIENT_SECRET`.
 - Microsoft Sentinel Data Collection endpoint identifier:
+    - References the Azure AD application's client secret, such as `550e8400-e29b-41d4-a716-446655440000`.
 	- The default identifier is `DESTINATION_MICROSOFT_SENTINEL_DCE_URI`.
 
 {{% /tab %}}

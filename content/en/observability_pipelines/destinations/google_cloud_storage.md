@@ -52,7 +52,7 @@ Set up the Google Cloud Storage destination and its environment variables when y
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-No default secret identifiers are required for this destination.
+There are no secret identifiers to configure.
 
 {{% /tab %}}
 

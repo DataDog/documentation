@@ -35,14 +35,15 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 ### Set secrets
 
-The following are the defaults used for secret identifiers and environment variables.
-
-**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+{{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
 - Sumo Logic HTTP Collector URL identifier:
+	- References the Sumo Logic HTTP Source endpoint. The Observability Pipelines Worker sends processed logs to this endpoint. For example, `https://<ENDPOINT>.collection.sumologic.com/receiver/v1/http/<UNIQUE_HTTP_COLLECTOR_CODE>`, where:   
+        - `<ENDPOINT>` is your Sumo collection endpoint.
+        - `<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source.
 	- The default identifier is `DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.
 
 {{% /tab %}}

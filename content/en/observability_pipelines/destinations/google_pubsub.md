@@ -115,14 +115,14 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 ### Set secrets
 
-The following are the defaults used for secret identifiers and environment variables.
-
-**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+{{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- Google Pub/Sub endpoint URL identifier (optional):
+- (Optional) Google Pub/Sub endpoint URL identifier:
+	- By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
+	- If your Pub/Sub topic is region-specific, configure the Google Pub/Sub alternative endpoint URL with the regional endpoint. See [About Pub/Sub endpoints][10240] for more information. Enter the configured endpoint URL into your secrets manager.
 	- The default identifier is `DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
 - Google Pub/Sub TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `DESTINATION_GCP_PUBSUB_KEY_PASS`.

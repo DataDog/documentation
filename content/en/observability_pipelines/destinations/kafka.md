@@ -85,18 +85,18 @@ Click **Advanced** if you want to set any of the following fields:
 
 ### Set secrets
 
-The following are the defaults used for secret identifiers and environment variables.
-
-**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
+{{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
 - Kafka bootstrap servers identifier:
+    - References the bootstrap server that the client uses to connect to the Kafka cluster and discover all the other hosts in the cluster.
+	- In your secrets manager, the host and port must be entered in the format of `host:port`, such as `10.14.22.123:9092`. If there is more than one server, use commas to separate them.
 	- The default identifier is `DESTINATION_KAFKA_BOOTSTRAP_SERVERS`.
 - Kafka TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `DESTINATION_KAFKA_KEY_PASS`.
-- If you are using SASL authentication:
+- SASL authentication (when enabled):
 	- Kafka SASL username identifier:
 		- The default identifier is `DESTINATION_KAFKA_SASL_USERNAME`.
 	- Kafka SASL password identifier:
