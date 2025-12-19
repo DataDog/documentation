@@ -1,7 +1,12 @@
 ---
 title: Sumo Logic Hosted Collector Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Logic Hosted Collector.
 

@@ -1,7 +1,12 @@
 ---
 title: Syslog Destinations
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' syslog destinations to send logs to rsyslog or syslog-ng.
 

@@ -196,7 +196,7 @@ Worker version 2.7.0 gives you access to the following:
 
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.11
 [2]: https://github.com/DataDog/helm-charts/tree/main/charts/observability-pipelines-worker#observability-pipelines-worker
-[3]: /observability_pipelines/search_syntax/
+[3]: /observability_pipelines/search_syntax/logs/
 [4]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.10
 [5]: /observability_pipelines/destinations/kafka/
 [6]: /observability_pipelines/processors/custom_processor/#custom-functions
