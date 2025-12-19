@@ -15,10 +15,10 @@ further_reading:
 Regular expressions (regex) are a powerful way to extract structured data from unstructured logs. This guide introduces how regex works, how it is used inside Grok Parsers in Datadog, and best practices for building efficient and reliable parsing rules. This provides additional context to the [Parsing][4] and [Grok Processor][5] documentation.
 
 Key takeaways:
-* Regex engines evaluate left-to-right and rely on backtracking
-* Excessive use of the `data` matcher can create performance issues
-* Prefer explicit, anchored patterns like `[^}]*`
-* Use `%{regex("")}` for custom expressions
+* Regex engines evaluate left-to-right and backtrack, which can impact parsing performance in long logs
+* Excessive use of the `data` matcher can create performance issues, understand when to use it in your Grok Parser
+* Anchor and constrain your patterns explicitly (for example, use `[^}]*` instead of broad wildcards)
+* Implement custom expressions by using `%{regex("")}` in your parsing rules
 * Apply [optimized patterns](#regex-examples) for complex logs (JSON, URLs, and conditional logic)
 
 ## How regex engines evaluate matches
@@ -127,27 +127,25 @@ A more efficient alternative to `data` is:
 
 This matches **everything except** a specific character and stops immediately when that character is encountered, meaning **no backtracking**.
 
-{{% collapse-content title="Example" level="h4" expanded=false %}}
-Given:
+**Given log**:
 
 ```
 Test {some id 1656165ab; more text} the rest of the log
 ```
 
-Inefficient:
+**Inefficient rule**:
 
 ```
 rule Test \{%{data:my-attribute}} the rest of the log
 ```
 
-Efficient:
+**Efficient rule**:
 
 ```
 rule Test \{%{regex("[^}]*"):my-attribute}} the rest of the log
 ```
 
 This pattern stops as soon as it sees `}`, making it faster and more predictable.
-{{% /collapse-content %}}
 
 ## Regex examples
 
