@@ -50,17 +50,17 @@ Starting January 2026, the following features use the new data model:
 - Datadog [Workflow Automation][4] support for all finding types
 - Using SQL to query security findings and join them with other Datadog telemetry using [DDSQL Editor][5]
 
-<!-- With additional future changes:
+With additional future changes:
 
 - Cloud Security Vulnerabilities
 - Code Security findings (SCA, SAST, IAST, Secrets)
 - [Data Access Controls][6]
 - Security findings & tools in the [Datadog MCP Server][7]
-- API & Terraform support for [automation pipelines][8] -->
+- API & Terraform support for [automation pipelines][8]
 
 ### Security findings
 
-Security findings encompass misconfigurations, vulnerabilities, and security risks identified across your infrastructure and applications. This table shows the scope of security findings across Datadog and which findings are supported in the new data model.
+Security findings encompass misconfigurations, vulnerabilities, and security risks identified across your infrastructure and applications. This table shows the scope of security findings across Datadog and which findings are currently supported in the new data model.
 
 <table>
   <thead>
@@ -81,7 +81,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
           <li>Host & container vulnerabilities</li>
         </ul>
       </td>
-      <td>Supported, except for vulnerabilities</td>
+      <td>Supported except for vulnerabilities, which will be supported in the future</td>
     </tr>
     <tr>
       <td><a href="/security/application_security/"><strong>App & API Protection</strong></a> (Preview)</td>
@@ -99,7 +99,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
           <li>Infrastructure as code (IaC)</li>
         </ul>
       </td>
-      <td>Unsupported</td>
+      <td>Will be supported in the future</td>
     </tr>
   </tbody>
 </table>
