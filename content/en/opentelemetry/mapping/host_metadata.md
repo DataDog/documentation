@@ -91,11 +91,11 @@ To collect these conventions with the OpenTelemetry Collector, set up the [recom
 **Note:** You need to add these processors and receivers in the Collector running on the host that you want to monitor. A gateway host does not collect this information from remote hosts.
 
 
-## Canonical Cloud Resource IDs
+## Canonical cloud resource IDs
 
-Canonical Cloud Resource IDs (CCRIDs) are cloud provider-assigned resource IDs that uniquely identify a cloud resource. CCRIDs, once added across different observability types, can be used to easily and consistently link different types of data for a given cloud resource. CCRIDs can be added in the same format across all cloud resource types. Widespread addition and adoption of CCRIDs will unlock a variety of use cases across customers and internal teams.
+Canonical cloud resource IDs (CCRIDs) are cloud provider-assigned resource IDs that uniquely identify a cloud resource. CCRIDs, once added across different observability types, can be used to consistently link different types of data for a given cloud resource. CCRIDs can be added in the same format across all cloud resource types. Widespread addition and adoption of CCRIDs gives access to a variety of use cases across customers and internal teams.
 
-Enable to seamlessly jump between resources and their associated metrics, traces and logs for all resource types, eliminating context switching and giving users an end-to-end view of their resources within the same workflow.
+Enable to seamlessly jump between resources and their associated metrics, traces, and logs for all resource types, eliminating context switching and giving users an end-to-end view of their resources within the same workflow.
 
 To use this feature, set the `datadog.ccrid` resource attribute to value of CCRID in all OTLP payloads.
 
