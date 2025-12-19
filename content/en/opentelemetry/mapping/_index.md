@@ -18,7 +18,6 @@ The following documentation describes how OpenTelemetry and Datadog conventions 
     {{< nextlink href="/opentelemetry/mapping/host_metadata/" >}}Infrastructure Host Mapping{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/mapping/hostname/" >}}Hostname Mapping{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/mapping/service_entry_spans/" >}}Service-entry Spans Mapping{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/mapping/ccrid_mapping/" >}}Canonical Cloud Resources ID Mapping{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
