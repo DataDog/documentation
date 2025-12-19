@@ -2196,6 +2196,11 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
       weight: 403
+    - name: Custom Reports
+      url: internal_developer_portal/eng_reports/custom_reports
+      parent: idp_eng_reports
+      identifier: eng_reports_custom
+      weight: 404
     - name: Developer Homepage
       url: internal_developer_portal/developer_homepage
       parent: internal_developer_portal
