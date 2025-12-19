@@ -62,11 +62,7 @@ To create a new Test Suite:
 
 ## View and manage
 
-After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**. Click on a test suite to display the following:
-
-- A **summary** of test results (success, failures, skipped).
-- **Execution details** such as timing, environment, and test type.
-- **Filters** to refine by location, time frame, or tag.
+After creating your suite, it appears in the **Suites** tab on the [Synthetic Monitoring tests][1] page, or you can access test suites from **Digital Experience > Test Suites**. 
 
 When viewing a test suite, three tabs are available:
 
