@@ -70,7 +70,7 @@ If you want to use App and API Protection without APM tracing functionality, you
 1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
 2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
 
-For more details, see [Standalone App and API Protection][7]
+For more details, see [Standalone App and API Protection][7].
 
 ## Further Reading
 
