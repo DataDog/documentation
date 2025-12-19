@@ -19,7 +19,7 @@ Key takeaways:
 * Excessive use of the `data` matcher can create performance issues
 * Prefer explicit, anchored patterns like `[^}]*`
 * Use `%{regex("")}` for custom expressions
-* Look through [example rules](#regex-examples)
+* Apply [optimized patterns](#regex-examples) for complex logs (JSON, URLs, and conditional logic)
 
 ## How regex engines evaluate matches
 
@@ -29,7 +29,7 @@ A regex engine evaluates both the input string **and** the regex pattern from **
 * **Across the input string**: The engine begins at the first character and attempts to match the entire expression. If it fails, it moves one character forward and tries again—repeating until a match is found or the end of the string is reached.
 * **Across the regex pattern**: Each part of the regex (called a **subexpression**) is evaluated from left to right at each potential starting position in the input.
 
-### **Example: Matching the word `dog`**
+### Example: Matching the word "dog"
 
 To a human, `dog` looks like a single unit. A regex engine, however, treats it as three sequential rules (or subexpressions):
 
@@ -53,13 +53,13 @@ If all subexpressions match, the engine reports a successful match.
  no no no no try here → "dog" matches
 ```
 
-## Backtracking and performance considerations
+## Preventing performance issues caused by backtracking
 
 Regex engines optimize for correctness, not speed. Backtracking occurs when the engine partially matches a pattern, then must "rewind" to reevaluate earlier characters.
 
 Backtracking can become expensive—especially with patterns that allow large, ambiguous matches (like wildcards `.*`). Poorly designed expressions can take seconds or even hours to evaluate, which is why Datadog enforces safety timeouts on parsing rules. For more information, see [ReDOS][1] or [catastrophic backtracking][2].
 
-### **Example**
+### Example
 
 Pattern: `dog`
 String: "adorable dog"
@@ -70,7 +70,7 @@ String: "adorable dog"
 4. `r` does **not** match → the engine backtracks to the first subexpression "d"
 5. Try again starting one character later in the string
 
-```
+```text
  ┌──────── pattern "dog" ────────┐
 [A][d][o][r][a][b][l][e][ ][d][o][g]
  ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
@@ -94,30 +94,30 @@ You can include regex in two places:
 | Outside the matcher syntax `%{}` | Raw regex embedded in the rule |
 | Inside the matcher syntax `%{}` | Using the regex matcher: `%{regex("<pattern>")}` |
 
-<div class="alert alert-danger">A Grok rule must match the <strong>entire log line</strong>. Conceptually, every rule is wrapped with `^ ... $`. This means you must account for everything before and after the content you want to extract.</div>
+<div class="alert alert-danger">A Grok rule must match the <strong>entire log line</strong>. Conceptually, every rule is wrapped with <code>^ ... $</code>. This means you must account for everything before and after the content you want to extract.</div>
 
-### Escaping inside `%{regex("")}`
+### Escaping inside the regex matcher
 
-If you use regex inside the matcher syntax, the expression is evaluated as a string first, so backslashes must be **escaped**:
+If you use regex inside the matcher syntax (`%{regex("")}`), the expression is evaluated as a string first, so backslashes must be **escaped**:
 
 ```
 %{regex("\\d{2}")}   # Matches two digits
 ```
 
-## Understanding the `data` Matcher
+## Understanding the data matcher
 
 The Datadog [data matcher][3] behaves like the regular expression `.*?` which uses lazy matching. `data` (`.*?`) is convenient but can be costly in long logs because:
 * It triggers step-by-step expansion
 * Each expansion may cause backtracking
 
-### When to use the `data` matcher
+### When to use the data matcher
 
 Use this matcher sparingly in Grok Parsers. Whenever possible, replace it with an explicit pattern. Ideally, you should only use the `data` matcher when:
 
 * You need everything until the end of the log (`%{data::json}` or `%{data::keyvalue()}`)
 * You need the entire message captured without a clear endpoint (`%{data:message}`)
 
-### Using "Not Character" patterns instead of the `data` matcher
+### Using "Not Character" patterns instead of the data matcher
 
 A more efficient alternative to `data` is:
 
