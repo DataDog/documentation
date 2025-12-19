@@ -45,7 +45,7 @@ To create a new Test Suite:
 3. Click **Add Tests** to confirm.
 4. _Optionally, remove tests using the Remove Test from Suite icon next to each entry_.
 5. Configure alerting for the suite:
-   - By default, all tests are marked as **Critical** and the alert triggers when any critical test fails. 
+   - By default, all tests are marked as **Critical**, and the alert triggers when any critical test fails. 
 
      **Note**: Suite alerts are separate from individual test alerts. To avoid duplicate notifications, mute alerts on individual tests included in the suite.
    - To exclude specific tests from triggering the suite-level alert, select them and mark them as **Ignored**.
@@ -56,7 +56,7 @@ To create a new Test Suite:
    **Note**: For existing test suites, alerting is enabled with default settings. You can modify the configuration as needed.
 
 6. Configure [monitor settings][2] (notification message, recipients, renotification) the same way you would for a single test.
-7. Click **Save suite** when finished.
+7. Click **Save Suite** when finished.
 
 {{< img src="synthetics/test_suites/test_suite_creation_2.png" alt="Synthetic Monitoring Test Suite creation page" style="width:80%;">}}
 
@@ -72,7 +72,7 @@ When viewing a test suite, three tabs are available:
 
 - **Tests in the Suite**: Lists all tests included in the suite.
 - **Test Runs**: Displays global uptime metrics and related test runs.
-- **Attributes**: Shows suite attributes such as `team`, monitors and who created the test suite.
+- **Attributes**: Shows suite attributes such as `team`, monitors, and who created the test suite.
 
 **Note**: Test runs appear in the suite only from the date the test was added. To view earlier results, check the individual test page. If you rename a test, previous runs remain listed under the original name. A maximum of 300 tests can be added per suite.
 
