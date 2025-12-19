@@ -3,6 +3,8 @@ aliases:
 - /ko/agent/guide/cluster-agent-custom-metrics-server
 - /ko/agent/cluster_agent/external_metrics
 - /ko/containers/cluster_agent/external_metrics
+description: 클러스터 Agent에서 사용자 정의 및 외부 Datadog 메트릭을 사용하도록 Kubernetes Horizontal Pod
+  Autoscaler를 구성합니다.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: 블로그
@@ -303,7 +305,7 @@ spec:
 ```
 
 이 매니페스트에서:
-- HPA는 `NGINX`라는 배포를 자동 확장하도록 구성되어 있습니다.
+- HPA는 `NGINX`라는 배포를 오토스케일링하도록 구성되어 있습니다.
 - 생성되는 복제본의 최대 개수는 `3`이며 최소 개수는 `1`입니다.
 - HPA는 `NGINX-demo` 네임스페이스의 `DatadogMetric` `NGINX-requests`에 의존합니다.
 

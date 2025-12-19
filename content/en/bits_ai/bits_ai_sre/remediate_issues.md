@@ -2,12 +2,8 @@
 title: Remediate issues
 ---
 
-<!-- {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}} -->
-
-{{< callout url="#" btn_hidden="true" >}}
-Suggested code fixes from the Bits AI Dev Agent is in Preview.
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+Suggested code fixes from the Bits AI Dev Agent is in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
 After Bits AI SRE helps you identify a root cause, it can also help you take action as quickly as possible.

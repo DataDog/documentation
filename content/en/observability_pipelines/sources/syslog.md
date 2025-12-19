@@ -1,7 +1,12 @@
 ---
 title: Syslog Source
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' rsyslog or syslog-ng to receive logs sent to rsyslog or syslog-ng. Select and set up this source when you [set up a pipeline][1].
 
