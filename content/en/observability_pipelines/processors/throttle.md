@@ -1,8 +1,15 @@
 ---
 title: Throttle Processor
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
 {{< jqmath-vanilla >}}
+
+{{< product-availability >}}
+
+{{% observability_pipelines/processors/throttle %}}
 
 ## Overview
 
