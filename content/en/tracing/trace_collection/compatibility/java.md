@@ -307,7 +307,7 @@ Use:
 
 ### Setup
 
-To set up Ahead-of-Time Class Loading & Linking, add the Datadog Java tracer during the training run:
+To set up AOT class loading & linking for APM, add the Datadog Java tracer during the training run:
 ```shell
 -javaagent:/path/to/dd-java-agent.jar -XX:AOTCacheOutput=my-app.aot
 ```
