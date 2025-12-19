@@ -291,7 +291,7 @@ targetSystem: "linux"
 fullnameOverride: "my-gw"
 datadog:
   apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
+  appKey: <DATADOG_APP_KEY> 
   otelCollector:
     enabled: true
     # RBAC permissions are required for the k8s resolver in the loadbalancing exporter
@@ -549,7 +549,7 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
                 receivers: [otlp]
                 exporters: [otlp]
     ```
-
+    
 ## View gateway pods on Fleet Automation
 
 The DDOT Collector gateway includes the [Datadog extension][11] by default. This extension exports Collector build information and configurations to Datadog, allowing you to monitor your telemetry pipeline from Infrastructure Monitoring and Fleet Automation.
@@ -570,9 +570,9 @@ To view your gateway pods:
   * **Ignorable Core Agent Connection Logs**: Gateway pods might generate warning logs about failing to connect to a core Datadog Agent (for example, `grpc: addrConn.createTransport failed to connect`). This occurs because the gateway deployment does not include a core agent in the same pod. These logs are expected and can be safely ignored. This is being actively addressed.
 
 ## Further reading
-
+  
 {{< partial name="whats-next/whats-next.html" >}}
-
+  
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
 [3]: https://helm.sh
