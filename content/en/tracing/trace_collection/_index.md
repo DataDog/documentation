@@ -31,29 +31,51 @@ algolia:
 
 To get started with Datadog APM, you need to follow these key steps:
 
-1. Install and configure the Datadog Agent.  
-2. Instrument your application.
+1. Install and configure the Datadog Agent.
+2. Add the Datadog tracing SDK to your application.
+3. Instrument your application to create spans.
 
-<div class="alert alert-info"><strong>Simplify your setup!</strong> Install the Agent and instrument your application in one step with <a href="https://docs.datadoghq.com/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a>.</div>
+<div class="alert alert-info">
+<strong>Simplify your setup!</strong> 
+Use <a href="https://docs.datadoghq.com/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> to complete these steps in one command.
+</div>
 
-Instrumenting your application allows observability data to be sent to the Agent, which then passes data to the Datadog backend to display in the UI.
+Instrumenting your application creates spans that are sent to the Datadog Agent, which forwards trace data to the Datadog backend for visualization and analysis.
 
 {{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="The APM pipeline">}}
 
-
-## Instrumentation types
-
-There are two main approaches to {{< tooltip glossary="instrument" >}} your application:
-
-**Automatic instrumentation** creates {{< tooltip glossary="span" >}}s for your application with minimal manual steps, capturing essential observability data across common libraries and languages with minimal configuration.
-
-**Custom instrumentation** captures observability data from in-house code or complex functions that aren't captured by automatic instrumentation, providing deeper visibility and context into spans when you need fine-grained control.
-
-The following table compares the different instrumentation methods available.
+## Instrumentation steps 
 
 <div class="alert alert-info">
 If you prefer vendor-neutral instrumentation, see the <a href="https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">OpenTelemetry documentation</a> for using OpenTelemetry API support in Datadog libraries.
 </div>
+
+To {{< tooltip glossary="instrument" >}} your application with Datadog APM, you need to:
+
+1. Add the Datadog language SDKs to your application.
+2. Create {{< tooltip glossary="span" >}}s to capture observability data.
+
+Datadog language SDKs provide automatic span instrumentation for supported frameworks and libraries, and they support additional customization when you need more control.
+
+### Adding Datadog language SDKs
+
+Datadog language SDKs can be added to your application in the following ways:
+
+- **Through Single Step Instrumentation (SSI)**: SSI automatically installs and loads Datadog language SDKs at runtime.
+- **Manually**: Application teams can manually install and configure the relevant SDK(s).
+
+### Creating and customizing spans
+
+After Datadog language SDKs are available, spans can be created in several ways:
+
+- **Automatic instrumentation**: Datadog language SDKs automatically create spans to capture essential observability data across common libraries and languages.
+- **Custom instrumentation**: Capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation, providing deeper visibility and context into spans when you need fine-grained control. You can create custom spans in two ways:
+  - **Code-based custom instrumentation**: Use the Datadog tracing APIs to add custom spans to your code.
+  - **Dynamic Instrumentation (UI-based custom instrumentation)**: Add custom spans at runtime through the Datadog UI, without touching code. 
+
+## Summary
+
+The following table compares the available instrumentation options and how they relate to Datadog language SDK installation and span creation.
 
 <table style="width:100%; border-collapse:collapse; border:2px solid #999;">
   <!-- Header group -->
