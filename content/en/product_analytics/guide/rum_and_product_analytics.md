@@ -16,9 +16,9 @@ Product Analytics is a dedicated offering built for product managers, product ow
 
 ## Product Analytics and RUM
 
-Previously, **Pathways** and **Retention Analysis** were part of Datadog Real User Monitoring (RUM). These features are moving to Datadog Product Analytics.
+Previously, **Sankeys/Pathways** and **Retention Analysis** were available in beta/preview within Datadog Real User Monitoring (RUM). These features are moving to Datadog Product Analytics.
 
-This transition will happen on **June 1st 2025**.
+The transition happened on **June 1st 2025**.
 
 
 ## FAQs
@@ -33,11 +33,11 @@ This transition will happen on **June 1st 2025**.
 
 As part of the introduction of Product Analytics, the following changes are being made for both existing and new RUM customers:
 
-- **Product Analytics Summary**, **Retention Analytics**, and **Pathways** are now part of **Product Analytics** and are no longer available within RUM.
+- **Product Analytics Summary**, **Retention Analytics**, and **Pathways** (formerly **Sankeys**) are now part of Product Analytics and are no longer available in beta/preview within RUM.
 
 - **Heatmaps** remain available but have been relocated to the **Session Replay** tab for easier access and contextual relevance.
 
-- The **Funnel** and **Conversion** tabs continue to be available in the **RUM Explorer**. To view conversion details, select the **Funnel** visualization and click on any step to open the **Conversion** panel.
+- The **Funnel** and **Conversion** tabs continue to be available in the **RUM Explorer** as they existed before the split. To view conversion details, select the Funnel visualization and click on any step to open the **Conversion** panel.
 
 These updates ensure a clearer separation of use cases between RUM and Product Analytics, enabling more focused workflows and deeper insights.
 
@@ -47,7 +47,7 @@ Product Analytics uses the same SDKs and configuration as RUM. To enable Product
 
 If RUM is already configured, no additional instrumentation is required for Product Analytics.
 
-### Why can I no longer access Sankeys and Retention Analysis?
+### Why can I no longer access Sankeys (now Pathways) and Retention Analysis?
 - These features were part of a preview and available to RUM customers as a beta, but were not part of the core RUM offering. These features are exclusively available to customers on a Product Analytics contract.
 
 ### Is Session Replay available with Product Analytics?

@@ -388,13 +388,29 @@ Searches CI events with filters and returns details on them.
 - Show me the latest pipeline failure in branch `my-branch`.
 - Propose a fix for the job `integration-test` that fails every time on my branch `my-branch`.
 
+### `aggregate_datadog_ci_pipeline_events`
+*Toolset: **software-delivery***\
+Aggregates CI pipeline events to produce statistics, metrics, and grouped analytics.
+
+- What's the average job duration for the last 7 days?
+- How many failed pipelines have there been in the last 2 weeks?
+- Show me the 95th percentile of pipeline duration grouped by pipeline name.
+
 ### `get_datadog_flaky_tests`
 *Toolset: **software-delivery***\
-Searches Datadog [Test Optimization][25] for flaky tests and returns triage-ready details, including failure-rate stats, flaky state/category, ownership context (`codeowners`, `services`, `module`, `suite`), branch/SHA history, CI pipeline impact, and recent test-run metadata. Supports pagination with `page_cursor` and sorting by fields such as `failure_rate` or `pipelines_failed`.
+Searches Datadog [Test Optimization][25] for flaky tests and returns triage details (failure rate, category, owners, history, CI impact), with pagination and sorting.
 
 - Find active flaky tests for the checkout service owned by `@team-abc`, sorted by failure rate.
 - Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
 - List flaky tests in the `timeout` category with high failure rate (50%+) so I can prioritize fixes.
+
+### `aggregate_datadog_test_events`
+*Toolset: **software-delivery***\
+Aggregates Datadog Test Optimization events to quantify reliability and performance trends with aggregation functions, optional metrics, group-by facets, and configurable test levels.
+
+- Count the number of failed tests over the last week, grouped by branch.
+- Show me the 95th-percentile duration for each test suite to identify the slowest ones.
+- Count all passing and failing tests, grouped by code owners.
 
 ## Context efficiency
 

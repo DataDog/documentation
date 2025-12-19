@@ -83,7 +83,10 @@ Some Observability Pipelines components require setting up environment variables
 ### CrowdStrike NG-SIEM
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
-### Datadog
+### Datadog Logs
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+### Datadog Metrics
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 ### Datadog Archives
