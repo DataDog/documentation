@@ -56,22 +56,40 @@ Starting January 2026, the following features use the new data model:
 - Security findings & tools in the [Datadog MCP Server][7]
 - API & Terraform support for [automation pipelines][8] -->
 
-<!-- ### Security findings
+### Security findings
 
-Security findings encompass vulnerabilities, misconfigurations, and security risks identified across your infrastructure and applications.
+Security findings encompass misconfigurations, vulnerabilities, and security risks identified across your infrastructure and applications. This table shows the scope of security findings across Datadog and which findings are supported in the new data model.
 
 <table>
   <thead>
     <tr>
-      <th><a href="/security/code_security/">Code Security</a></th>
-      <th><a href="/security/cloud_security_management/">Cloud Security</a></th>
-      <th><a href="/security/application_security/">App & API Protection</a> (Preview)</th>
+      <th>Product</th>
+      <th>Findings</th>
+      <th>Support</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td><a href="/security/cloud_security_management/"><strong>Cloud Security</strong></a></td>
       <td>
-        <ul>
+        <ul style="font-size:16px">
+          <li>Misconfigurations (CSPM)</li>
+          <li>Identity risks (CIEM)</li>
+          <li>Attack paths</li>
+          <li>Host & container vulnerabilities</li>
+        </ul>
+      </td>
+      <td>Supported, except for vulnerabilities</td>
+    </tr>
+    <tr>
+      <td><a href="/security/application_security/"><strong>App & API Protection</strong></a> (Preview)</td>
+      <td>API security findings</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td><a href="/security/code_security/"><strong>Code Security</strong></a></td>
+      <td>
+        <ul style="font-size:16px">
           <li>Library vulnerabilities (SCA)</li>
           <li>Static code vulnerabilities (SAST)</li>
           <li>Secrets</li>
@@ -79,22 +97,10 @@ Security findings encompass vulnerabilities, misconfigurations, and security ris
           <li>Infrastructure as code (IaC)</li>
         </ul>
       </td>
-      <td>
-        <ul>
-          <li>Misconfigurations (CSPM)</li>
-          <li>Host & container vulnerabilities</li>
-          <li>Identity risks (CIEM)</li>
-          <li>Attack paths</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>API security findings</li>
-        </ul>
-      </td>
+      <td>Unsupported</td>
     </tr>
   </tbody>
-</table> -->
+</table>
 
 ### New querying syntax
 
