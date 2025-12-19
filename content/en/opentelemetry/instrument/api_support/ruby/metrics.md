@@ -18,7 +18,8 @@ further_reading:
 ## Prerequisites
 
 - **Datadog SDK**: `datadog` gem version 2.23.0 or later.
-- **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
+- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
+- **DogStatsD (Runtime Metrics)**: If you also use Datadog Runtime Metrics, ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
 
 ## Setup
 
@@ -31,7 +32,7 @@ Follow these steps to enable OTel Metrics API support in your Ruby application.
    gem 'opentelemetry-metrics-sdk', '~> 0.8'
    gem 'opentelemetry-exporter-otlp-metrics', '~> 0.4'
    ```
-2.   
+2. Install dependencies:
    ```sh
    bundle install
    ```
