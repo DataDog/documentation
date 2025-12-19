@@ -58,7 +58,7 @@ There are no secret identifiers to configure.
 
 {{% tab "Environment Variables" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -59,7 +59,7 @@ Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering option
 
 {{% tab "Environment Variables" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
 
 {{% /tab %}}
 {{< /tabs >}}
