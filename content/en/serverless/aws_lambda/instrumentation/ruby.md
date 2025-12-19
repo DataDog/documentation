@@ -226,25 +226,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
     The macro is now deployed and ready to use.
 
-3. Configure your Lambda functions
-
-    Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
-
-    ```ruby
-    require 'datadog/lambda'
-
-    Datadog::Lambda.configure_apm do |c|
-    # Enable the instrumentation
-    end
-
-    def handler(event:, context:)
-        Datadog::Lambda.wrap(event, context) do
-            return { statusCode: 200, body: 'Hello World' }
-        end
-    end
-    ```
-
-4. Instrument your Lambda functions
+3. Instrument your Lambda functions
 
     Add the `DatadogServerless` transform **after** the `AWS::Serverless` transform under the `Transform` section in your for SAM `template.yml`.
 
