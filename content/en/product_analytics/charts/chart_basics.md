@@ -1,5 +1,6 @@
 ---
 title: Chart Basics
+private: true
 description: Learn how to save charts and use chart templates in Datadog Product Analytics.
 further_reading:
     - link: '/product_analytics/'
