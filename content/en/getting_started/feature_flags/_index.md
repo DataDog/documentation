@@ -36,9 +36,9 @@ Datadog feature flags offer a powerful, integrated way to manage feature deliver
 
 * **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
 
-## SDK documentation
+## Feature Flags SDKs
 
-Integrate Datadog Feature Flags into your application using one of the following SDKs:
+This guide uses the JavaScript browser SDK as an example. You can integrate Datadog Feature Flags into any application using one of the following SDKs:
 
 ### Client-side SDKs
 
