@@ -242,7 +242,7 @@ The most common errors include the following:
 : The remote server responded with a payload that does not comply with HTTP specifications. This error can happen when remote servers differ in their HTTP support. To prevent issues, run tests with a consistent HTTP version: either HTTP/2 (if available) or HTTP/1.1.
 
 `INCORRECT_ASSERTION`
-: The expected value of the assertion does not match the actual value. For example, in the case of asserting on the HTTP response status code, if you expect the status code to return `200` but it instead returns `400` then the `INCORRECT_ASSERTION` error will be thrown.
+: The expected value of the assertion does not match the actual value. For example, when asserting on an HTTP response status code, if you expect `200` but the response returns `400`, the INCORRECT_ASSERTION error is thrown.
 
 ## Permissions
 
