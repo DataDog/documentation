@@ -91,8 +91,8 @@ Here are all the configuration options related to RUM SDK injection:
 | `dd.rum.track.user.interaction` | `DD_RUM_TRACK_USER_INTERACTION` | `true` / `false` | Optional |
 | `dd.rum.track.resources` | `DD_RUM_TRACK_RESOURCES` | `true` / `false` | Optional |
 | `dd.rum.track.long.tasks` | `DD_RUM_TRACK_LONG_TASKS` | `true` / `false` | Optional |
-| `dd.rum.session.sample.rate` | `DD_RUM_SESSION_SAMPLE_RATE` | percentage, from `0` to `100` | Required if `rum.remote.configuration.id` is missing |
-| `dd.rum.session.replay.sample.rate` | `DD_RUM_SESSION_REPLAY_SAMPLE_RATE` | percentage, from `0` to `100` | Required if `rum.remote.configuration.id` is missing |
+| `dd.rum.session.sample.rate` | `DD_RUM_SESSION_SAMPLE_RATE` | Percentage, from `0` to `100` | Required if `rum.remote.configuration.id` is missing |
+| `dd.rum.session.replay.sample.rate` | `DD_RUM_SESSION_REPLAY_SAMPLE_RATE` | Percentage, from `0` to `100` | Required if `rum.remote.configuration.id` is missing |
 | `dd.rum.remote.configuration.id` | `DD_RUM_REMOTE_CONFIGURATION_ID` | `<string>` | Required if either `rum.session.sample.rate` or `rum.session.replay.sample.rate` is missing |
 
 ## Troubleshooting
