@@ -1,7 +1,12 @@
 ---
 title: New Relic Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' New Relic destination to send logs to New Relic.
 
