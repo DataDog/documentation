@@ -54,7 +54,7 @@ Adjust the slider or enter a specific percentage in the input box for Session Sa
 
 ### NGINX stops responding
 
-If NGINX stops serving requests, particularly after installation, contact [Datadog support][6] with the following information to help us investigate and resolve the issue:
+If NGINX stops serving requests, specifically after installation, contact [Datadog support][6] with the following information to help us investigate and resolve the issue:
 
 - Your NGINX configuration file
 - Any relevant error logs
