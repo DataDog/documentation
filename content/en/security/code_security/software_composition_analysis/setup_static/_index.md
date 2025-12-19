@@ -17,10 +17,10 @@ To get started:
 3. Choose [where to run SCA scans](#select-where-to-run-static-sca-scans) (Datadog-hosted or CI pipelines).
 4. Follow the setup instructions for your source code provider.
 
-### Supported languages and lockfiles
-Datadog SCA scans libraries in the following languages and **requires** a lockfile to report them:
+### Supported languages and dependency manifests
+Datadog SCA scans libraries in the following languages using dependency manifests (such as lockfiles and other supported manifest files) to identify vulnerable dependencies.
 
-| Language   | Package Manager    | Lockfile                                |
+| Language   | Package Manager    | File                                |
 |------------|-------------------|------------------------------------------|
 | C#         | .NET              | `packages.lock.json`, `.csproj` files    |
 | C++        | Conan             | `conan.lock`                             |
