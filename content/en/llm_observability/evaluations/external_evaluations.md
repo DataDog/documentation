@@ -27,6 +27,8 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
   * Unicode is not supported.
 * Evaluation labels must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
 
+Additionally, for categorical evaluations, the value may not be an empty string.
+
 <div class="alert alert-info">
 
 Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
