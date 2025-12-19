@@ -99,7 +99,7 @@ Here are all the configuration options related to RUM SDK injection:
 
 Check the Java web application server logs if you don't see the RUM JavaScript tag injected.
 
-Look for configuration parsing error message `"Unable to configure RUM injection"` in the logs. If present, it will show a detailed message about the cause.
+Look for the configuration parsing error message `"Unable to configure RUM injection"` in the logs. If present, it shows a detailed message about the cause.
 
 Additionally, enabling debug logs using the `dd.trace.debug=true` system property or the `DD_TRACE_DEBUG=true` environment variable dumps the Java client library configuration at startup:
 
