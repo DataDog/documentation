@@ -1,5 +1,3 @@
-#### Filter query syntax
-
 Each processor has a corresponding filter query in their fields. Processors only process logs or metrics that match their filter query. And for all processors except the Filter processor, logs or metrics that do not match the query are sent to the next step of the pipeline. For the Filter processor, logs or metrics that do not match the query are dropped.
 
 The following are logs filter query examples:
