@@ -110,21 +110,37 @@ The panel to the left of the Scroll map provides high-level insights with direct
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-minimap.png" alt="A screenshot of the queries for scroll data insights" style="width:50%;">}}
 
-## Snapshots
+## Screenshots
 
-A snapshot is the state of a Session Replay at a particular point in time. Changing the snapshot shows different results, depending on the snapshot selected. You can use the **Change Snapshot** button to select a particular snapshot in a replay for your heatmap.
+A screenshot is the state of a view at a particular point in time. Changing the screenshot shows different results, depending on the screenshot selected. You can also save screenshots so that everyone in your organization can analyze the same view state. 
 
-To select a background snapshot:
+### Changing screenshots
+From the heatmap view, click the **Change Screenshot** button. Choose from existing screenshots previously saved by teammates, or grab a screenshot from a Session Replay.
 
-1. From the heatmap view, click the **Change Snapshot** button.
+To select a screenshot from a Session Replay:
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-snapshot-button.png" alt="Click the Change Snapshot button to change the background snapshot the heatmap is based on." style="width:100%;">}}
+1. Click **Grab from replay** if the desired heatmap screenshot has not been previously saved.
+
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-screenshot-button-1.png" alt="Click the Grab from replay button to change the screenshot the heatmap background is based on." style="width:100%;">}}
+
 1. Click an action event on the right to select a different snapshot for your heatmap.
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events.png" alt="List of action events for the session replay." style="width:100%;">}}
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events-1.png" alt="List of action events for the session replay." style="width:100%;">}}
 
-1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired snapshot, you can return to the list of replays by clicking **Choose Another Replay**.
-1. Click the **Select Snapshot** button to apply the snapshot at the paused point to the heatmap.
+1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired screenshot, you can return to the list of replays by clicking **Choose Another Replay**.
+1. Click the **Take Screenshot** button to apply the screenshot at the paused point to the heatmap.
+
+### Saving screenshots
+
+You can save the current heatmap state as a screenshot so it becomes the default view for anyone in your organization who opens the heatmap. To save the current screenshot auto-picked from a recent replay, click **Save** on the current screenshot.
+
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-save-screenshot-1.png" alt="Click Save to apply the auto-picked screenshot." style="width:100%;">}}
+
+You can save multiple screenshots for the same view (for example: default view, open navigation menu, open modal) and switch between screenshots saved by teammates.
+
+To remove the currently saved screenshot and revert to an auto-picked one from a recent replay, click **Unpin** on the current screenshot.
+
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-unpin-screenshot-1.png" alt="Click unpin to remove the currently pinned screenshot." style="width:100%;">}}
 
 ## Next steps
 
