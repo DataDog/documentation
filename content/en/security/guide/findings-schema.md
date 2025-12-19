@@ -119,8 +119,8 @@ There are eleven different categories for security findings. Click on a category
         },
         "vulnerabilities": {
           "cve_ids": [
-            "CVE-2024-12345",
-            "CVE-2024-67890"
+            "CVE-2024-50379",
+            "CVE-2024-56337"
           ]
         }
       },
@@ -128,18 +128,18 @@ There are eleven different categories for security findings. Click on a category
         "Vulnerabilities": [
           {
             "cve_ids": [
-              "CVE-2024-12345"
+              "CVE-2024-50379"
             ],
             "cwe_ids": [
               "CWE-502",
-              "CWE-44"
+              "CWE-367"
             ],
             "exploit_available": false,
             "exploit_sources": [
               "NIST",
               "GitHub"
             ],
-            "title": "Example RCE vulnerability",
+            "title": "Apache Tomcat Time-of-check Time-of-use (TOCTOU) Race Condition vulnerability",
             "type": "COMPONENT_WITH_KNOWN_VULNERABILITY",
             "vulnerability_id": "abc123def456789012345678901234ab"
           }
