@@ -88,6 +88,11 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
    
 {{% /collapse-content %}}
 
+
+{{% collapse-content title="Upgrade Agents using the API" level="h4" expanded=false %}}
+Fleet Automation provides an API to trigger Agent upgrades programmatically or on a recurring schedule. Start upgrades for any set of hosts using filter queries, or create schedules that run during defined maintenance windows with a specified Agent version. For full details, see the [Fleet Automation API][19].
+{{% /collapse-content %}}
+
 <br>
 
 ### Upgrade process
@@ -120,8 +125,6 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 - Manage Agent tags
 - Apply consistent configuration across environments
 
-
-### Configuration steps 
 {{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. In Fleet Automation, open the [Configure Agents][16] tab and click **Create Configuration**.
@@ -156,6 +159,9 @@ In the following example, the `logs_enabled` field is changed from `false` to `t
 [18]: https://app.datadoghq.com/fleet
 {{% /collapse-content %}}
 
+{{% collapse-content title="Configure Agents using the API" level="h4" expanded=false %}}
+Fleet Automation provides an API to apply configuration updates to your Agents programmatically. Deploy changes to any group of hosts using filter queries, supplying either full configuration files or targeted patches. Fleet Automation does not support all Agent configuration fields, and settings related to Agent connection or secrets (site, API keys, and other authentication parameters) cannot be managed through the API. Push configuration on demand or integrate it into your existing automation workflows. For full details, see the [Fleet Automation API][19].
+{{% /collapse-content %}}
 
 ### Configuration precedence
 
@@ -213,3 +219,4 @@ If you don't upgrade an earlier Agent version to 7.66 or higher, there is no imp
 [16]: https://app.datadoghq.com/fleet/agent-management
 [17]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#configuration-order-precedence
 [18]: /agent/fleet_automation#view-agent-audit-trail-events
+[19]: /api/latest/fleet-automation/
