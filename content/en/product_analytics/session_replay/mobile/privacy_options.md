@@ -1,23 +1,20 @@
 ---
 title: Mobile Session Replay Privacy Options
 description: Configure privacy options for Mobile Session Replay.
-aliases:
-  - /real_user_monitoring/session_replay/mobile/privacy_options
-  - /product_analytics/session_replay/mobile/privacy_options
 further_reading:
-  - link: /session_replay/mobile
+  - link: /real_user_monitoring/session_replay/mobile
     tag: Documentation
     text: Mobile Session Replay
-  - link: /session_replay/mobile/app_performance
+  - link: /real_user_monitoring/session_replay/mobile/app_performance
     tag: Documentation
     text: How Mobile Session Replay Impacts App Performance
-  - link: /session_replay/mobile/setup_and_configuration
+  - link: /real_user_monitoring/session_replay/mobile/setup_and_configuration
     tag: Documentation
     text: Setup and Configure Mobile Session Replay
-  - link: /session_replay/mobile/troubleshooting
+  - link: /real_user_monitoring/session_replay/mobile/troubleshooting
     tag: Documentation
     text: Troubleshoot Mobile Session Replay
-  - link: /session_replay
+  - link: /real_user_monitoring/session_replay
     tag: Documentation
     text: Session Replay
 ---
@@ -158,7 +155,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2762"
+    data-if="1568"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -190,7 +187,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2763"
+    data-if="1569"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -225,7 +222,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2764"
+    data-if="1570"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -265,7 +262,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2765"
+    data-if="1571"
   >
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end collapsible">
@@ -304,7 +301,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2766"
+    data-if="1572"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -336,7 +333,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2767"
+    data-if="1573"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -371,7 +368,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2768"
+    data-if="1574"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -411,7 +408,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2769"
+    data-if="1575"
   >
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end collapsible">
@@ -450,7 +447,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2770"
+    data-if="1576"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -482,7 +479,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2771"
+    data-if="1577"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -517,7 +514,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2772"
+    data-if="1578"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -557,7 +554,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2773"
+    data-if="1579"
   >
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end collapsible">
@@ -596,7 +593,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2774"
+    data-if="1580"
   >
     <p>
       For performance reasons, large images (those exceeding 1000x1000 total
@@ -630,7 +627,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2775"
+    data-if="1581"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -662,7 +659,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2776"
+    data-if="1582"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -697,7 +694,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2777"
+    data-if="1583"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -737,7 +734,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2778"
+    data-if="1584"
   >
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end collapsible">
@@ -776,7 +773,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="(SDK is iOS) or (SDK is React Native)"
-    data-if="2781"
+    data-if="1587"
   >
     <p>
       Use the <code>maskNonBundledOnly</code> setting to replace non-bundled
@@ -797,7 +794,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2782"
+    data-if="1588"
   >
     <p>
       Select the <code>mask_large_only</code> setting, which replaces images
@@ -812,7 +809,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2783"
+    data-if="1589"
   >
     <a
       href="http://localhost:1313/images/real_user_monitoring/session_replay/mobile/masking-image-mask-large-only.5f4cf48c86d01c0c6216ce20080e7511.png?fit=max&amp;auto=format"
@@ -862,7 +859,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2784"
+    data-if="1590"
   >
     <a
       href="http://localhost:1313/images/real_user_monitoring/session_replay/mobile/masking-image-mask-non-bundled-only.133aa6a05f2a9110bd1b0bca9ba7b1dd.png?fit=max&amp;auto=format"
@@ -915,7 +912,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2785"
+    data-if="1591"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -955,7 +952,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2786"
+    data-if="1592"
   >
     <p>
       Bundled images are those that use <code>AssetImage</code> as their image
@@ -998,7 +995,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2787"
+    data-if="1593"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -1030,7 +1027,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2788"
+    data-if="1594"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -1065,7 +1062,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2789"
+    data-if="1595"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -1115,7 +1112,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2790"
+    data-if="1596"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -1147,7 +1144,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2791"
+    data-if="1597"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -1182,7 +1179,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2792"
+    data-if="1598"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -1222,7 +1219,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2793"
+    data-if="1599"
   >
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end collapsible">
@@ -1261,7 +1258,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2794"
+    data-if="1600"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -1293,7 +1290,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2795"
+    data-if="1601"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -1328,7 +1325,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2796"
+    data-if="1602"
   >
     <div class="code-snippet-wrapper">
       <div
@@ -1372,7 +1369,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2797"
+    data-if="1603"
   >
     <div class="code-snippet-wrapper">
       <div class="code-filename-wrapper d-flex justify-content-end collapsible">
@@ -1432,13 +1429,13 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="(SDK is Android) or (SDK is iOS) or (SDK is Flutter)"
-    data-if="2813"
+    data-if="1619"
   >
     <h3 id="text-and-input-override">Text and input override</h3>
     <div
       class="cdoc__toggleable"
       data-description="SDK is Android"
-      data-if="2798"
+      data-if="1604"
     >
       <p>
         To override text and input privacy in Android classic view, use
@@ -1510,7 +1507,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="SDK is iOS"
-      data-if="2799"
+      data-if="1605"
     >
       <p>
         To override text and input privacy in UIKit views, use
@@ -1592,7 +1589,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="SDK is Flutter"
-      data-if="2800"
+      data-if="1606"
     >
       <p>
         To override text and input privacy in Flutter, use the
@@ -1639,7 +1636,7 @@ further_reading:
     <div
       class="cdoc__toggleable"
       data-description="SDK is Android"
-      data-if="2801"
+      data-if="1607"
     >
       <p>
         To override image privacy in Android classic view, use
@@ -1711,7 +1708,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="SDK is iOS"
-      data-if="2802"
+      data-if="1608"
     >
       <p>
         To override image privacy in UIKit views, use
@@ -1798,7 +1795,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="SDK is Flutter"
-      data-if="2803"
+      data-if="1609"
     >
       <p>
         To override image privacy in Flutter, use the
@@ -1841,7 +1838,7 @@ further_reading:
     <div
       class="cdoc__toggleable"
       data-description="SDK is Android"
-      data-if="2804"
+      data-if="1610"
     >
       <p>
         To override touch privacy in Android classic view, use
@@ -1912,7 +1909,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="SDK is iOS"
-      data-if="2805"
+      data-if="1611"
     >
       <p>
         To override touch privacy in UIKit views, use
@@ -2000,7 +1997,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="SDK is Flutter"
-      data-if="2806"
+      data-if="1612"
     >
       <p>
         To override touch privacy in Flutter, use the
@@ -2063,7 +2060,7 @@ further_reading:
     <div
       class="cdoc__toggleable"
       data-description="SDK is Android"
-      data-if="2807"
+      data-if="1613"
     >
       <p>
         Use <code>setSessionReplayHidden(hide = true)</code> to hide the
@@ -2132,7 +2129,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="SDK is iOS"
-      data-if="2808"
+      data-if="1614"
     >
       <p>
         In UIKit views, use <code>dd.sessionReplayOverrides.hide</code> to hide
@@ -2324,7 +2321,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="SDK is Flutter"
-      data-if="2809"
+      data-if="1615"
     >
       <p>
         To hide a widget tree in Flutter, use the
@@ -2370,7 +2367,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2814"
+    data-if="1620"
   >
     <p>
       Privacy overrides are fully supported in React Native starting from
@@ -2690,7 +2687,7 @@ further_reading:
       Privacy overrides, aside from the <code>hidden</code> and
       <code>touch</code> options, are not supported for WebViews. You can
       primarily manage their privacy using the
-      <a href="/session_replay/browser/privacy_options"
+      <a href="/real_user_monitoring/session_replay/privacy_options"
         >browser SDK privacy settings</a
       >.
     </li>
@@ -2698,7 +2695,7 @@ further_reading:
       When a WebView is marked as <code>hidden</code>, it is replaced by a
       placeholder in the replay. However, the WebView itself continues to
       collect and send data. To avoid this, it is recommended to use
-      <a href="/session_replay/browser/privacy_options"
+      <a href="/real_user_monitoring/session_replay/privacy_options"
         >browser SDK privacy settings</a
       >
       for managing WebView privacy, as they provide more targeted control.
@@ -2813,7 +2810,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2815"
+    data-if="1621"
   >
     <p>Sensitive text can be detected in:</p>
     <ul>
@@ -2824,7 +2821,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2816"
+    data-if="1622"
   >
     <p>Sensitive text can be detected in:</p>
     <ul>
@@ -2838,7 +2835,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2817"
+    data-if="1623"
   >
     <p>Sensitive text can be detected in the following components.</p>
     <table>
@@ -2898,7 +2895,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2818"
+    data-if="1624"
   >
     <ul>
       <li>
@@ -2931,7 +2928,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2819"
+    data-if="1625"
   >
     <ul>
       <li>
@@ -2961,7 +2958,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2820"
+    data-if="1626"
   >
     <ul>
       <li>
@@ -2996,7 +2993,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2821"
+    data-if="1627"
   >
     <ul>
       <li>
@@ -3029,7 +3026,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2822"
+    data-if="1628"
   >
     <ul>
       <li>Texts in non-editable Text View</li>
@@ -3047,7 +3044,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2823"
+    data-if="1629"
   >
     <ul>
       <li>Checkbox and Radio Button titles</li>
@@ -3065,7 +3062,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2824"
+    data-if="1630"
   >
     <ul>
       <li>Checkbox and Radio Button titles (Android)</li>
@@ -3084,7 +3081,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2825"
+    data-if="1631"
   >
     <ul>
       <li>Checkbox and Radio Button titles</li>
@@ -3107,7 +3104,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2826"
+    data-if="1632"
   >
     <ul>
       <li>Placeholders in Text Field</li>
@@ -3117,7 +3114,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2827"
+    data-if="1633"
   >
     <ul>
       <li>Hints in Edit Text</li>
@@ -3127,7 +3124,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2828"
+    data-if="1634"
   >
     <ul>
       <li>Placeholders in Text Field (iOS), Text View (iOS)</li>
@@ -3138,7 +3135,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2829"
+    data-if="1635"
   >
     <ul>
       <li>InputDecoration elements in TextView</li>
@@ -3184,7 +3181,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2830"
+    data-if="1636"
   >
     <p><strong>Shapes</strong></p>
     <ul>
@@ -3201,7 +3198,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="SDK is Android"
-    data-if="2831"
+    data-if="1637"
   >
     <p><strong>Shapes</strong></p>
     <ul>
@@ -3216,7 +3213,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="2832"
+    data-if="1638"
   >
     <p><strong>Shapes</strong></p>
     <table>
@@ -3270,7 +3267,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="2833"
+    data-if="1639"
   >
     <p><strong>Shapes</strong></p>
     <ul>
@@ -3328,21 +3325,21 @@ further_reading:
           <div
             class="cdoc__toggleable"
             data-description="SDK is Android"
-            data-if="2834"
+            data-if="1640"
           >
             Mask Large Only
           </div>
           <div
             class="cdoc__toggleable cdoc__hidden"
             data-description="SDK is iOS"
-            data-if="2835"
+            data-if="1641"
           >
             Mask Non Bundled Only
           </div>
           <div
             class="cdoc__toggleable cdoc__hidden"
             data-description="SDK is React Native"
-            data-if="2836"
+            data-if="1642"
           >
             Mark Large Only (Android) / Mask Non Bundled Only (iOS)
           </div>
@@ -3365,9 +3362,9 @@ further_reading:
       </tr>
     </tbody>
   </table>
-<h2 id="further-reading">Further reading</h2><div class="whatsnext"><p>Additional helpful documentation, links, and articles<!-- -->:</p><ul class="list-group"><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/session_replay/mobile"><span class="w-100 d-flex justify-content-between "><span class="text">Mobile Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/session_replay/mobile/app_performance"><span class="w-100 d-flex justify-content-between "><span class="text">How Mobile Session Replay Impacts App Performance</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/session_replay/mobile/setup_and_configuration"><span class="w-100 d-flex justify-content-between "><span class="text">Setup and Configure Mobile Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/session_replay/mobile/troubleshooting"><span class="w-100 d-flex justify-content-between "><span class="text">Troubleshoot Mobile Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/session_replay"><span class="w-100 d-flex justify-content-between "><span class="text">Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a></ul></div></article>
+<h2 id="further-reading">Further reading</h2><div class="whatsnext"><p>Additional helpful documentation, links, and articles<!-- -->:</p><ul class="list-group"><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay/mobile"><span class="w-100 d-flex justify-content-between "><span class="text">Mobile Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay/mobile/app_performance"><span class="w-100 d-flex justify-content-between "><span class="text">How Mobile Session Replay Impacts App Performance</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay/mobile/setup_and_configuration"><span class="w-100 d-flex justify-content-between "><span class="text">Setup and Configure Mobile Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay/mobile/troubleshooting"><span class="w-100 d-flex justify-content-between "><span class="text">Troubleshoot Mobile Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay"><span class="w-100 d-flex justify-content-between "><span class="text">Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a></ul></div></article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"2762":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2762"},"2763":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2763"},"2764":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2764"},"2765":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2765"},"2766":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2766"},"2767":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2767"},"2768":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2768"},"2769":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2769"},"2770":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2770"},"2771":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2771"},"2772":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2772"},"2773":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2773"},"2774":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2774"},"2775":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2775"},"2776":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2776"},"2777":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2777"},"2778":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2778"},"2781":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2779"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2780"}},"v":false,"r":"2781"},"2782":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2782"},"2783":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2783"},"2784":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2784"},"2785":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2785"},"2786":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2786"},"2787":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2787"},"2788":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2788"},"2789":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2789"},"2790":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2790"},"2791":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2791"},"2792":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2792"},"2793":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2793"},"2794":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2794"},"2795":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2795"},"2796":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2796"},"2797":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2797"},"2798":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2798"},"2799":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2799"},"2800":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2800"},"2801":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2801"},"2802":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2802"},"2803":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2803"},"2804":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2804"},"2805":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2805"},"2806":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2806"},"2807":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2807"},"2808":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2808"},"2809":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2809"},"2813":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2810"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2811"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2812"}},"v":true,"r":"2813"},"2814":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2814"},"2815":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2815"},"2816":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2816"},"2817":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2817"},"2818":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2818"},"2819":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2819"},"2820":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2820"},"2821":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2821"},"2822":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2822"},"2823":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2823"},"2824":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2824"},"2825":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2825"},"2826":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2826"},"2827":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2827"},"2828":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2828"},"2829":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2829"},"2830":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2830"},"2831":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2831"},"2832":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2832"},"2833":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"2833"},"2834":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"2834"},"2835":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"2835"},"2836":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"2836"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"rum_sdk_platform_options_v2","label":"SDK"},"defaultValsByOptionGroupId":{"rum_sdk_platform_options_v2":"android"}}},"defaultValsByTraitId":{"platform":"android"},"optionGroupsById":{"rum_sdk_platform_options_v2":[{"default":true,"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"react_native","label":"React Native"},{"id":"flutter","label":"Flutter"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"1568":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1568"},"1569":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1569"},"1570":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1570"},"1571":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1571"},"1572":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1572"},"1573":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1573"},"1574":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1574"},"1575":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1575"},"1576":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1576"},"1577":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1577"},"1578":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1578"},"1579":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1579"},"1580":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1580"},"1581":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1581"},"1582":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1582"},"1583":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1583"},"1584":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1584"},"1587":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1585"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1586"}},"v":false,"r":"1587"},"1588":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1588"},"1589":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1589"},"1590":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1590"},"1591":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1591"},"1592":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1592"},"1593":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1593"},"1594":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1594"},"1595":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1595"},"1596":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1596"},"1597":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1597"},"1598":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1598"},"1599":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1599"},"1600":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1600"},"1601":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1601"},"1602":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1602"},"1603":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1603"},"1604":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1604"},"1605":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1605"},"1606":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1606"},"1607":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1607"},"1608":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1608"},"1609":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1609"},"1610":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1610"},"1611":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1611"},"1612":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1612"},"1613":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1613"},"1614":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1614"},"1615":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1615"},"1619":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1616"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1617"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1618"}},"v":true,"r":"1619"},"1620":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1620"},"1621":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1621"},"1622":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1622"},"1623":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1623"},"1624":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1624"},"1625":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1625"},"1626":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1626"},"1627":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1627"},"1628":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1628"},"1629":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1629"},"1630":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1630"},"1631":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1631"},"1632":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1632"},"1633":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1633"},"1634":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1634"},"1635":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1635"},"1636":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1636"},"1637":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1637"},"1638":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1638"},"1639":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"1639"},"1640":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"1640"},"1641":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"1641"},"1642":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"1642"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"rum_sdk_platform_options_v2","label":"SDK"},"defaultValsByOptionGroupId":{"rum_sdk_platform_options_v2":"android"}}},"defaultValsByTraitId":{"platform":"android"},"optionGroupsById":{"rum_sdk_platform_options_v2":[{"default":true,"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"react_native","label":"React Native"},{"id":"flutter","label":"Flutter"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all-2.png" style="display:none;" alt="" >}}
 {{< img src="real_user_monitoring/session_replay/mobile/masking-image-mask-all.png" style="display:none;" alt="" >}}
