@@ -41,9 +41,10 @@ import DatadogRUM
 
 URLSessionInstrumentation.enable(with: .init(delegateClass: Apollo.URLSessionClient.self))
 ```
-For additional information on sampling rate, distributed tracing, and adding custom 
-attributes to tracked RUM resources, see [Advanced Configuration > Automatically track 
-network requests][4].
+
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
+
+For more advanced Apollo integration using the Datadog Apollo interceptor, see Datadog's [dedicated library with extensions for Apollo][7] and [Apollo instrumentation][8].
 
 ## SDWebImage
 
@@ -105,3 +106,5 @@ For additional information on sampling rate, distributed tracing, and adding cus
 [4]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#automatically-track-network-requests
 [5]: https://github.com/SDWebImage/SDWebImage
 [6]: https://github.com/OpenAPITools/openapi-generator
+[7]: https://github.com/DataDog/dd-sdk-ios-apollo-interceptor
+[8]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#apollo-instrumentation
