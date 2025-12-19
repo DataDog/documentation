@@ -318,21 +318,21 @@ To redact the attribute:
 
 ## Log rehydration
 
-When you rehydrate logs from an archive, the Sensitive Data Scanner does not re-run detection on those logs. Instead, Datadog restores the logs exactly as they were written to the archive.
+When you rehydrate logs from an archive, the Sensitive Data Scanner does not re-scan those logs. Instead, Datadog restores the logs exactly as they were written to the archive.
 
-If your archive is configured to include [Datadog tags][16] in the Log Archive documentation), and your scanning rules added tags when the logs were initially ingested and processed by Sensitive Data Scanner, you can use those tags to identify which rehydrated logs previously contained sensitive data. This allows you to filter rehydrated logs using queries such as `sensitive_data:<rule_tag_name>`.
+If your archive is configured to include [Datadog tags][16], and your scanning rules added tags when the logs were initially ingested and processed by Sensitive Data Scanner, you can use those tags to identify which rehydrated logs previously contained sensitive data. This allows you to filter rehydrated logs using queries such as `sensitive_data:<rule_tag_name>`.
 
-Sensitive Data Scanner match metadata is not stored in archived logs, so sensitive data matches are not highlighted when those logs are rehydrated. The archive format contains only the original log payload and any preserved tags. It does not include the positional information that Sensitive Data Scanner uses in the Datadog UI to visually highlight detected values.
+The metadata of matched sensitive data is not stored in archived logs, so sensitive data matches are not highlighted when those logs are rehydrated. The archive format contains only the original log payload and any preserved tags. It does not include the positional information that Sensitive Data Scanner uses in the Datadog UI to visually highlight detected values.
 
 What you can do with rehydrated logs:
 
-- If tags were included in the archive, filter for logs that previously matched Sensitive Data Scanner rules.
+- If tags were included in the archive, filter for logs that previously matched scanning rules.
 - Investigate historical events that contain sensitive data.
 
 What you cannot do with rehydrated logs:
 
-- View in-line match highlighting: The matches remain obfuscated if mask, redact, partially redact, or hash were chosen as an action on match.
-- Trigger retroactive detections: Sensitive Data Scanner does not re-scan rehydrated logs.
+- View in-line highlighted sensitive data matches in the UI: The matches remain obfuscated if mask, redact, partially redact, or hash were chosen as an action on match.
+- Trigger retroactive scans: Sensitive Data Scanner does not re-scan rehydrated logs.
 
 ## Disable Sensitive Data Scanner
 
