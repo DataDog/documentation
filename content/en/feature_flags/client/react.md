@@ -2,9 +2,9 @@
 title: React Feature Flags
 description: Set up Datadog Feature Flags for React applications.
 further_reading:
-- link: "/feature_flags/setup/"
+- link: "/feature_flags/client/"
   tag: "Documentation"
-  text: "Feature Flags Setup"
+  text: "Client-Side Feature Flags"
 - link: "https://openfeature.dev/docs/reference/sdks/client/web/react/"
   tag: "OpenFeature"
   text: "OpenFeature React SDK"

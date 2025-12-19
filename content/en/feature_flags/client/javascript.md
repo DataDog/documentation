@@ -2,9 +2,9 @@
 title: JavaScript Feature Flags
 description: Set up Datadog Feature Flags for browser JavaScript applications.
 further_reading:
-- link: "/feature_flags/setup/"
+- link: "/feature_flags/client/"
   tag: "Documentation"
-  text: "Feature Flags Setup"
+  text: "Client-Side Feature Flags"
 - link: "https://openfeature.dev/docs/reference/sdks/client/web/"
   tag: "OpenFeature"
   text: "OpenFeature Web SDK"
