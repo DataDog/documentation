@@ -51,8 +51,6 @@ disable_toc: true
 {{< whatsnext desc="Sensitive Data Scanner Guides:" >}}
    {{< nextlink href="security/sensitive_data_scanner/guide/investigate_sensitive_data_findings" >}}Investigate Sensitive Data Findings{{< /nextlink >}}
    {{< nextlink href="security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules" >}}Best Practices for Creating Custom Rules{{< /nextlink >}}
-   {{< nextlink href="security/sensitive_data_scanner/guide/redact_all_emails_except_from_specific_domain_logs" >}}Redact all emails except ones from a specific domain in your logs{{< /nextlink >}}
   {{< nextlink href="security/sensitive_data_scanner/guide/redact_uuids_in_logs" >}}Redact Universal Unique IDs (UUIDs) in your logs{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
