@@ -141,7 +141,7 @@ If you have initialized the SDK with `sessionReplaySampleRate:30` and `traceSamp
 - 50% x 30% = 15% of these retained sessions have a retained replay
 - 25% x 40% = 10% of these retained sessions have the APM traces retained
 
-<div class="alert alert-info">If a session matches multiple RUM retention filters, only the cross-product filters from the first matching filter apply. This means filter order matters for both RUM retention and cross-product filters.<br><br>
+<div class="alert alert-info">Cross-product retention filters only apply to sessions retained by the corresponding RUM retention filter. This means filters order matters for both RUM retention and cross-product filters.<br><br>
 
 For more information, see <a href="/real_user_monitoring/rum_without_limits/retention_filters/#how-it-works">How it works</a>.</div>
 
