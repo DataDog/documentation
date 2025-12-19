@@ -36,6 +36,8 @@ This change affects all interfaces where you can query security findings data. W
   - API and Terraform resources
   <div class="alert alert-warning">Datadog will deprecate legacy API and Terraform resources. Update your queries on time so you can avoid workflow interruptions.</div>
 
+If you need assistance with your migration, contact [Datadog support][14].
+
 ## What is changing
 
 ### New features
@@ -131,3 +133,4 @@ View the full specification at [Security Findings Schema Reference][1].
 [11]: /security/security_inbox/?s=attack%20path#types-of-findings-in-security-inbox
 [12]: /security/code_security/iac_security/
 [13]: /security/application_security/api-inventory/#api-findings
+[14]: /help
