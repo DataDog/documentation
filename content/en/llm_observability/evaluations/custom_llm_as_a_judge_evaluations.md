@@ -38,7 +38,7 @@ Learn more about the [compatibility requirements][6].
 1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 
 1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
-2. If selecting an **Amazon Bedrock** account, select the region for which the account is available in.
+    1. If selecting an **Amazon Bedrock** account, select the region for which the account is available in.
 
 1. Use the **Model** drop-down menu to select a model to use for your LLM judge.
 
