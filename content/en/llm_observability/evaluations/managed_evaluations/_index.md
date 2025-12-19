@@ -103,7 +103,8 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 Connect Vertex AI to LLM Observability with your Google Cloud Platform account. LLM Observability uses the `gemini-2.5-flash` model for evaluations.
 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
-1. Select **Connect** on the Google Cloud Vertex AI tile if you have no GCP accounts already connected to Datadog. If you have GCP accounts already connected, select **Configure** next to where they are listed.
+1. On the Google Cloud Vertex AI tile, click **Connect** to add a new GCP account, or click **Configure** next to where your existing accounts are listed to begin the onboarding process.
+  - You will see all GCP accounts connected to Datadog in this page. However, you must still go through the onboarding process for an account to use it in LLM Observability.
 1. Follow the onboarding instructions to configure your account.
   - You will have to add the [**Vertex AI User**][2] role to your account and enable the [**Vertex AI API**][3].
 
