@@ -35378,6 +35378,8 @@ components:
       description: The `add_env_vars` processor adds environment variable values to
         log events.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -35433,6 +35435,8 @@ components:
     ObservabilityPipelineAddFieldsProcessor:
       description: The `add_fields` processor adds static key-value fields to logs.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -35749,6 +35753,10 @@ components:
             role session.
           type: string
       type: object
+    ObservabilityPipelineComponentDisplayName:
+      description: The display name for a component.
+      example: my component
+      type: string
     ObservabilityPipelineConfig:
       description: Specifies the pipeline's configuration, including its sources,
         processors, and destinations.
@@ -35839,6 +35847,8 @@ components:
           include: status:error
           type: filter
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor group is enabled.
           example: true
@@ -36002,6 +36012,8 @@ components:
         Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
         advanced filtering capabilities.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36169,6 +36181,8 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36250,6 +36264,8 @@ components:
     ObservabilityPipelineDedupeProcessor:
       description: The `dedupe` processor removes duplicate fields in log events.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36487,6 +36503,8 @@ components:
       description: The `enrichment_table` processor enriches logs using a static CSV
         file or GeoIP database.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36546,6 +36564,8 @@ components:
         on a Datadog search query. Logs that match the `include` query are passed
         through; others are discarded.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36648,6 +36668,8 @@ components:
         Metrics can be counters, gauges, or distributions and optionally grouped by
         log fields.'
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37269,6 +37291,8 @@ components:
       description: The `ocsf_mapper` processor transforms logs into the OCSF schema
         using a predefined mapping configuration.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37400,6 +37424,8 @@ components:
             by Datadog.
           example: true
           type: boolean
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37512,6 +37538,8 @@ components:
         and flattens it into the event. This is useful when logs contain embedded
         JSON as a string.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37565,6 +37593,8 @@ components:
         a specified filter. When the configured daily quota is met, the processor
         can drop or alert.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         drop_events:
           description: If set to `true`, logs that matched the quota filter and sent
             after the quota has been met are dropped; only logs that did not match
@@ -37696,6 +37726,8 @@ components:
       description: The `reduce` processor aggregates and merges logs based on matching
         keys and merge strategies.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37788,6 +37820,8 @@ components:
     ObservabilityPipelineRemoveFieldsProcessor:
       description: The `remove_fields` processor deletes specified fields from logs.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37832,6 +37866,8 @@ components:
     ObservabilityPipelineRenameFieldsProcessor:
       description: The `rename_fields` processor changes field names.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37967,6 +38003,8 @@ components:
       description: The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -38014,6 +38052,8 @@ components:
       description: The `sensitive_data_scanner` processor detects and optionally redacts
         sensitive data in log events.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -39003,6 +39043,8 @@ components:
       description: The `throttle` processor limits the number of events that pass
         through over a given time window.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true

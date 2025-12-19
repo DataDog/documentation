@@ -39,7 +39,7 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 
 ##### Enable TLS
 
-Toggle the switch to enable **TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+Toggle the switch to enable **TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
@@ -128,7 +128,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [3]: https://docs.databricks.com/aws/en/connect/streaming/kafka
 [4]: https://learn.microsoft.com/en-us/azure/event-hubs/azure-event-hubs-apache-kafka-overview
 [5]: https://app.datadoghq.com/observability-pipelines
-[6]: /observability_pipelines/advanced_configurations/
+[6]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [7]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [8]: /observability_pipelines/monitoring/metrics/
 [9]: /observability_pipelines/destinations/#event-batching
