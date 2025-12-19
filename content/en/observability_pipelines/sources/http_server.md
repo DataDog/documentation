@@ -22,7 +22,7 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 To configure your HTTP/S Server source, enter the following:
 
-<div class="alert alert-danger">Only enter the identifiers for the HTTP Server address, and if applicable, the username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the HTTP Server address and, if applicable, the username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 1. Enter the identifier for your HTTP Server address. If you leave it blank, the [default](#set-secrets) is used.
     - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.

@@ -18,7 +18,7 @@ Use Observability Pipelines' Amazon Data Firehose source to receive logs from Am
 
 Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the Amazon Data Firehose address, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the Amazon Data Firehose address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 - Enter the identifier for your Amazon Data Firehose address. If you leave it blank, the [default](#set-secrets) is used.
 

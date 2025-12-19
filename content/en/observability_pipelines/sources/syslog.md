@@ -22,7 +22,7 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 To configure your Syslog source:
 
-<div class="alert alert-danger">Only enter the identifiers for the syslog address, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the syslog address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 1. Enter the identifier for your syslog address. If you leave it blank, the [default](#set-secrets) is used.
 1. In the **Socket Type** dropdown menu, select the communication protocol you want to use: **TCP** or **UDP**.

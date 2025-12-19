@@ -18,7 +18,7 @@ Use Observability Pipelines' Fluentd or Fluent Bit source to receive logs from t
 
 Select and set up this source when you [set up a pipeline][1]. The information below are for the source settings in the pipeline UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the Fluent address, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the Fluent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 1. Enter the identifier for your Fluent address. If you leave it blank, the [default](#set-secrets) is used.
 
