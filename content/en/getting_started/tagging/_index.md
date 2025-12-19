@@ -167,4 +167,4 @@ For more information, see [Using Tags][1].
 [22]: /getting_started/tagging/using_tags/#developers
 [23]: /account_management/billing/usage_attribution/
 [24]: /getting_started/tagging/using_tags/#ci-visibility
-[25]: /containers/kubernetes/log/?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes
+[25]: /containers/troubleshooting/log-collection?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes

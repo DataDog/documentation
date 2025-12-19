@@ -7,10 +7,6 @@ further_reading:
       text: 'GitHub integration'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" header="Join the Preview!">}}
-  GitHub Integration for Teams is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Link your GitHub teams to Datadog Teams to automatically provision Datadog Teams. The following features are supported:

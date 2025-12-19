@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a Jenkins Pipeline
+title: Jenkins Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/jenkins
 further_reading:
@@ -18,7 +18,7 @@ further_reading:
 
 [Jenkins][19] is an automation server with continuous integration and delivery features. With its plugin architecture, Jenkins can be customized to fit any CI/CD need and automates all aspects of project development, testing, and deployment.
 
-Set up tracing in Jenkins to collect data across various stages of your pipeline executions, identify performance bottlenecks, resolve operational challenges, and refine your deployment processes.
+Set up CI Visibility for Jenkins to collect data across various stages of your pipeline executions, identify performance bottlenecks, resolve operational challenges, and refine your deployment processes.
 
 ### Compatibility
 
@@ -43,6 +43,16 @@ The following Jenkins versions are supported:
 
 This integration supports both Agentless and Agent-based installation.
 Installing the Agent is required for infrastructure metrics correlation.
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Jenkins:
+
+| Datadog  | Jenkins  |
+|----------|----------|
+| Pipeline | Pipeline |
+| Stage    | Stage    |
+| Job      | Step     |
 
 ## Install the Datadog Agent
 

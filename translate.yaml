@@ -64,6 +64,8 @@ sources:
   dst: "config/_default/menus/main.{lang}.yaml"
 - src: "config/_default/menus/api.en.yaml"
   dst: "config/_default/menus/api.{lang}.yaml"
+- src: "customization_config/en/**/*.yaml"
+  dst: "customization_config/{lang}/**/*.yaml"
 - src: "content/en/agent/faq/agent_v6_changes.md"
   dst: "content/{lang}/agent/faq/agent_v6_changes.md"
 - src: "content/en/agent/faq/certificate_verify_failed-error.md"

@@ -12,6 +12,12 @@ further_reading:
     text: "Learn more about creating custom rules"
 ---
 
+{{< site-region region="gov" >}}
+
+<div class="alert alert-danger">Cloud Storage scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+
+{{< /site-region >}}
+
 ## Overview
 
 {{< callout url="https://www.datadoghq.com/product-preview/data-security/" header="Join the Preview Program!"  >}}
