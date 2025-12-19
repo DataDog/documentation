@@ -1889,6 +1889,13 @@
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
+  "CreateSyntheticsSuite": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Synthetics: Create a test suite returns \"OK\" response"
+    }
+  ],
   "AddTeamHierarchyLink": [
     {
       "group": "teams",

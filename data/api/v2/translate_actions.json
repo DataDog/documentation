@@ -3147,6 +3147,28 @@
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
   },
+  "CreateSyntheticsSuite": {
+    "summary": "Synthetics: Create a test suite",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteSyntheticsSuites": {
+    "summary": "Synthetics: Bulk delete suites",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "SearchSuites": {
+    "description": "Search for Synthetics suites.",
+    "summary": "Search Synthetics suites"
+  },
+  "GetSyntheticsSuite": {
+    "summary": "Synthetics: Get a suite"
+  },
+  "EditSyntheticsSuite": {
+    "summary": "Synthetics: edit a test suite",
+    "request_description": "New suite details to be saved.",
+    "request_schema_description": ""
+  },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
     "summary": "List tag pipeline rulesets"

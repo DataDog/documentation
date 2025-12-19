@@ -3722,6 +3722,66 @@ menu:
       url: /api/latest/synthetics/
       identifier: synthetics
       generated: true
+    - name: 'Synthetics: edit a test suite'
+      url: '#synthetics-edit-a-test-suite'
+      identifier: synthetics-synthetics-edit-a-test-suite
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EditSyntheticsSuite
+        unstable: []
+        order: 35
+    - name: 'Synthetics: Get a suite'
+      url: '#synthetics-get-a-suite'
+      identifier: synthetics-synthetics-get-a-suite
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsSuite
+        unstable: []
+        order: 25
+    - name: Search Synthetics suites
+      url: '#search-synthetics-suites'
+      identifier: synthetics-search-synthetics-suites
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchSuites
+        unstable: []
+        order: 20
+    - name: 'Synthetics: Bulk delete suites'
+      url: '#synthetics-bulk-delete-suites'
+      identifier: synthetics-synthetics-bulk-delete-suites
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSyntheticsSuites
+        unstable: []
+        order: 40
+    - name: 'Synthetics: Create a test suite'
+      url: '#synthetics-create-a-test-suite'
+      identifier: synthetics-synthetics-create-a-test-suite
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSyntheticsSuite
+        unstable: []
+        order: 30
     - name: Save new value for on-demand concurrency cap
       url: '#save-new-value-for-on-demand-concurrency-cap'
       identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
