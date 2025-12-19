@@ -49,10 +49,15 @@ title: Data Streams Monitoring for Kafka
     <td>{{< dsm-tracer-version lang="nodejs" lib="confluent-kafka-javascript" type="recommended" >}}</td>
     </tr>
     <tr>
-      <td><a href="/python">Python</a></td>
+      <td rowspan="2"><a href="/python">Python</a></td>
       <td><a href="https://pypi.org/project/confluent-kafka/">confluent-kafka</a></td>
       <td>{{< dsm-tracer-version lang="python" lib="confluent-kafka" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="python" lib="confluent-kafka" type="recommended" >}}</td>
+    </tr>
+    <tr>
+      <td><a href="https://pypi.org/project/aiokafka/">aiokafka</a></td>
+      <td>{{< dsm-tracer-version lang="python" lib="aiokafka" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="python" lib="aiokafka" type="recommended" >}}</td>
     </tr>
     <tr>
       <td><a href="/data_streams/dotnet">.NET</a></td>
