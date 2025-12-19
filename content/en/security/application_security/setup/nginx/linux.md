@@ -34,8 +34,8 @@ The Datadog nginx tracing module has experimental support for threat detection a
    [nginx documentation][3].
 2. Update your nginx tracing library module to at least version 1.2.0. Visit
    the [GitHub releases page][2] and select the artifact named according to the
-   pattern `ngx_http_datadog_module-appsec-&lt;amd64/arm64&gt;-&lt;nginx
-   version&gt;.so.tgz`. Note that this artifact includes `appsec` in the name.
+   pattern `ngx_http_datadog_module-appsec-<amd64/arm64>-<nginx
+   version>.so.tgz`. Note that this artifact includes `appsec` in the name.
 3. Enable App and API Protection in the nginx configuration.
    Do the following:
    * Define one or more thread pools with the [`thread_pool`][4] directive.
