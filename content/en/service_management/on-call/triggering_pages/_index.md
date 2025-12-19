@@ -28,20 +28,36 @@ If you send a Page through a monitor alert, and your Team's routing rule uses dy
 
 ### Trigger Pages through emails
 
-You can generate a unique email address that is used to trigger a page directly to the team's on-call responders. When an email is sent to this address, it initiates the paging process using your configured routing and escalation policies. For added clarity and ease of use, some customers choose to embed this paging address within a more human-readable distribution list (for example, [page-network@company.com](mailto:page-network@company.com)), which can make life easier in case the email is destined to be used by humans.
+You can generate a unique email address that is used to trigger a Page directly to the team's on-call responders. When an email is sent to this address, it initiates the paging process using your configured routing and escalation policies. For added clarity and ease of use, some customers choose to embed this paging address within a more human-readable distribution list (for example, [page-network@company.com](mailto:page-network@company.com)), which can make life easier in case the email is destined to be used by humans.
 To page a team through email:
 
  1. Navigate to the on-call team's page and scroll down to "Custom Triggering Sources".
- 1. Click "Generate" under the email trigger section. This generates a unique email address that can be used to trigger a page directly to the team's on-call responders.
+ 2. Click "Generate" under the email trigger section. This generates a unique email address that can be used to trigger a Page directly to the team's on-call responders.
+
+### Trigger Pages through incidents
+
+You can trigger a Page directly from an active incident. This allows you to escalate and bring in responders without leaving the incident workflow. See [Trigger a Page from an incident][5] for detailed instructions.
 
 ### Trigger Pages through calls
 
-You can also trigger a Page through live call routing, which lets users initiate a Page by calling a dedicated phone number. This provides an additional channel for urgent situations. For setup instructions, see [Live Call Routing][3].
-
+You can trigger a Page through live call routing, which lets users initiate a Page by calling a dedicated phone number. This provides an additional channel for urgent situations. For setup instructions, see [Live Call Routing][3].
 
 ### Page manually
 
 You can manually send a Page directly in the Datadog platform, or through a tool like Slack or Microsoft Teams. This lets you alert a Datadog team or an individual directly (even if they aren't On-Call).
+
+### Reroute Pages
+You can reroute an active Page to a different user or team if it is still open. You can only reroute Pages that are Triggered or Acknowledged; you cannot reroute Pages that are Resolved.
+
+To reroute a Page:
+
+1. Open the active Page.
+1. Click **Reassign**.
+1. Choose the user or team you want to send it to.
+1. (Optional) Add a short message explaining the handoff.
+1. Confirm the reroute.
+
+The new recipient is notified immediately, and the Page continues from its current state.
 
 #### Through Datadog
 
@@ -69,3 +85,4 @@ To send Pages to Slack, see [Routing Rules][4].
 [2]: https://app.datadoghq.com/on-call/teams
 [3]: /service_management/on-call/triggering_pages/live_call_routing
 [4]: /service_management/on-call/routing_rules/#send-pages-to-slack-or-microsoft-teams
+[5]: /service_management/incident_management/notification/#trigger-a-page-from-an-incident

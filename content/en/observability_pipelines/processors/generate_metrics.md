@@ -1,7 +1,12 @@
 ---
-title: Generate Metrics Processor
+title: Generate Log-based Metrics Processor
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 {{% observability_pipelines/processors/generate_metrics %}}
 

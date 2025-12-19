@@ -81,10 +81,13 @@ Install Datadog's [GitLab Source Code integration][101] using the [integration t
 {{% /tab %}}
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
-Install Datadog's Azure DevOps Source Code integration using the [integration tile][102] or while onboarding to [Datadog Code Security][101].
+<div class="alert alert-warning">
+Repositories from Azure DevOps instances are supported for Azure DevOps Services (SaaS). Azure DevOps Server (On-Prem) is <strong>not</strong> supported.
+</div>
 
-[101]: https://app.datadoghq.com/security/configuration/code-security/setup?provider=azure-devops&steps=static
-[102]: https://app.datadoghq.com/integrations/azure-devops-source-code/
+Install Datadog's Azure DevOps Source Code integration using the [integration tile][101] or while onboarding other Datadog products to connect to your Azure DevOps repositories.
+
+[101]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
