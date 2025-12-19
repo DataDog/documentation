@@ -117,7 +117,7 @@ Starting in 7.64+ the Agent and Cluster Agent can be configured to collect label
 - `kubernetesResourcesLabelsAsTags`
 - `kubernetesResourcesAnnotationsAsTags`
 
-For consistent reporting between the Agent’s core tagging, Cluster Agent’s KSM reporting, and both of their Orchestrator Explorer reporting. As opposed to the legacy options of Agent `podLabelsAsTags`, `nodeLabelsAsTags`, `namespaceLabelsAsTags` , and any KSM configuration overrides.
+For consistent reporting between the Agent's core tagging, Cluster Agent's KSM reporting, and both of their Orchestrator Explorer reporting. As opposed to the legacy options of Agent `podLabelsAsTags`, `nodeLabelsAsTags`, `namespaceLabelsAsTags` , and any KSM configuration overrides.
 
 These configurations reference the resource type of the object to extract the metadata from. Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource. If a specific resource is in the empty API group (for example `pods` and `nodes`), it can be specified using just the `resourceType` name.
 
@@ -145,7 +145,7 @@ This option is used to extract a given label on your Kubernetes resources and se
 
 {{% tab "Datadog Operator" %}}
 
-To extract a given resource label `<LABEL>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following configuration to your Operator’s `DatadogAgent` configuration in `datadog-agent.yaml`:
+To extract a given resource label `<LABEL>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -272,7 +272,7 @@ This option is used to extract a given annotation on your Kubernetes resources a
 
 {{% tab "Datadog Operator" %}}
 
-To extract a given resource annotation `<ANNOTATION>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following configuration to your Operator’s `DatadogAgent` configuration in `datadog-agent.yaml`:
+To extract a given resource annotation `<ANNOTATION>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
