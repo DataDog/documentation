@@ -8220,36 +8220,6 @@ menu:
       parent: rum
       identifier: rum_session_replay
       weight: 5
-    - name: Mobile
-      url: real_user_monitoring/session_replay/mobile
-      parent: rum_session_replay
-      identifier: rum_session_replay_mobile
-      weight: 501
-    - name: Setup
-      url: real_user_monitoring/session_replay/mobile/setup_and_configuration
-      parent: rum_session_replay_mobile
-      identifier: rum_session_replay_mobile_setup
-      weight: 101
-    - name: Privacy Options
-      url: real_user_monitoring/session_replay/mobile/privacy_options
-      parent: rum_session_replay_mobile
-      identifier: rum_session_replay_mobile_privacy
-      weight: 102
-    - name: Impact on App Performance
-      url: real_user_monitoring/session_replay/mobile/app_performance
-      parent: rum_session_replay_mobile
-      identifier: rum_session_replay_mobile_app_performance
-      weight: 103
-    - name: Troubleshooting
-      url: real_user_monitoring/session_replay/mobile/troubleshooting
-      parent: rum_session_replay_mobile
-      identifier: rum_session_replay_mobile_troubleshooting
-      weight: 104
-    - name: Playlists
-      url: real_user_monitoring/session_replay/playlists
-      parent: rum_session_replay
-      identifier: rum_session_replay_playlists
-      weight: 503
     - name: Heatmaps
       url: real_user_monitoring/session_replay/heatmaps
       parent: rum_session_replay
@@ -8471,36 +8441,6 @@ menu:
       parent: pa_session_replay
       identifier: pa_heatmaps
       weight: 301
-    - name: Playlists
-      url: product_analytics/session_replay/playlists
-      parent: pa_session_replay
-      identifier: pa_playlists
-      weight: 302
-    - name: Mobile
-      url: product_analytics/session_replay/mobile
-      parent: pa_session_replay
-      identifier: pa_session_replay_mobile
-      weight: 302
-    - name: Setup
-      url: product_analytics/session_replay/mobile/setup_and_configuration
-      parent: pa_session_replay_mobile
-      identifier: pa_session_replay_mobile_setup
-      weight: 101
-    - name: Privacy Options
-      url: product_analytics/session_replay/mobile/privacy_options
-      parent: pa_session_replay_mobile
-      identifier: pa_session_replay_mobile_privacy
-      weight: 102
-    - name: Impact on App Performance
-      url: product_analytics/session_replay/mobile/app_performance
-      parent: pa_session_replay_mobile
-      identifier: pa_session_replay_mobile_app_performance
-      weight: 103
-    - name: Troubleshooting
-      url: product_analytics/session_replay/mobile/troubleshooting
-      parent: pa_session_replay_mobile
-      identifier: pa_session_replay_mobile_troubleshooting
-      weight: 104
     - name: Segments
       url: product_analytics/segmentation/
       parent: product_analytics
@@ -8577,6 +8517,26 @@ menu:
       parent: session_replay
       identifier: session_replay_mobile
       weight: 2
+    - name: Setup and Configuration
+      url: /session_replay/mobile/setup_and_configuration
+      parent: session_replay_mobile
+      identifier: session_replay_mobile_setup_and_configuration
+      weight: 101
+    - name: Privacy Options
+      url: /session_replay/mobile/privacy_options
+      parent: session_replay_mobile
+      identifier: session_replay_mobile_privacy_options
+      weight: 102
+    - name: Impact on App Performance
+      url: /session_replay/mobile/app_performance
+      parent: session_replay_mobile
+      identifier: session_replay_mobile_app_performance
+      weight: 103
+    - name: Troubleshooting
+      url: /session_replay/mobile/troubleshooting
+      parent: session_replay_mobile
+      identifier: session_replay_mobile_troubleshooting
+      weight: 104
     - name: Account Management
       url: account_management/
       pre: cog-2

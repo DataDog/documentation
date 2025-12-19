@@ -3,12 +3,12 @@ title: Session Replay Playlists
 description: Learn how to create and use Playlists for organizing Session Replays.
 aliases:
 further_reading:
-    - link: '/real_user_monitoring/session_replay'
+    - link: '/session_replay'
       tag: Documentation
       text: Session Replay
     - link: 'https://www.datadoghq.com/blog/datadog-rum-session-replay-playlists/'
       tag: Blog
-      text: Organize and analyze related session replays with Playlists in Datadog RUM
+      text: Organize and analyze related session replays with Playlists in Datadog
 ---
 
 ## Overview
@@ -84,4 +84,4 @@ By default, Session Replay retention is 30 days. With [extended retention][2], y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/replay/playlists
-[2]: /real_user_monitoring/session_replay/#retention
+[2]: /session_replay/#retention
