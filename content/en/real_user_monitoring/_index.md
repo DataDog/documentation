@@ -6,6 +6,9 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
+- link: https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams
+  tag: Blog
+  text: From performance to impact: Bridging frontend teams through shared context
 - link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog RUM releases! (App login required)"

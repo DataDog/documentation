@@ -24,6 +24,9 @@ further_reading:
     - link: 'tracing/'
       tag: 'Documentation'
       text: 'Advanced Usage'
+    - link: https://www.datadoghq.com/blog/datadog-python-memory-profiling
+      tag: Blog
+      text: Python memory profiling: Common pitfalls and how to avoid them
 ---
 ## Compatibility requirements
 For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
