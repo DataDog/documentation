@@ -96,11 +96,11 @@ To select a screenshot from a Session Replay:
 
 1. Click **Grab from replay** if the desired heatmap screenshot has not been previously saved.
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-screenshot-button.png" alt="Click the Grab from replay button to change the screenshot the heatmap background is based on." style="width:100%;">}}
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-screenshot-button-1.png" alt="Click the Grab from replay button to change the screenshot the heatmap background is based on." style="width:100%;">}}
 
 1. Click an action event on the right to select a different snapshot for your heatmap.
 
-   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events.png" alt="List of action events for the session replay." style="width:100%;">}}
+   {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-list-all-events-1.png" alt="List of action events for the session replay." style="width:100%;">}}
 
 1. If the session [does not contain the action](#the-view-that-i-selected-is-not-showing-the-initial-content) that leads to the desired screenshot, you can return to the list of replays by clicking **Choose Another Replay**.
 1. Click the **Take Screenshot** button to apply the screenshot at the paused point to the heatmap.
@@ -109,13 +109,13 @@ To select a screenshot from a Session Replay:
 
 You can save the current heatmap state as a screenshot so it becomes the default view for anyone in your organization who opens the heatmap. To save the current screenshot auto-picked from a recent replay, click **Save** on the current screenshot.
 
-{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-save-screenshot.png" alt="Click Save to apply the auto-picked screenshot." style="width:100%;">}}
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-save-screenshot-1.png" alt="Click Save to apply the auto-picked screenshot." style="width:100%;">}}
 
 You can save multiple screenshots for the same view (for example: default view, open navigation menu, open modal) and switch between screenshots saved by teammates.
 
 To remove the currently saved screenshot and revert to an auto-picked one from a recent replay, click **Unpin** on the current screenshot.
 
-{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-unpin-screenshot.png" alt="Click unpin to remove the currently pinned screenshot." style="width:100%;">}}
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-unpin-screenshot-1.png" alt="Click unpin to remove the currently pinned screenshot." style="width:100%;">}}
 
 ## Next steps
 
