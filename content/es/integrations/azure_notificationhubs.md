@@ -27,13 +27,13 @@ custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
-git_integration_title: azure_notification_hubs
+git_integration_title: azure_notificationhubs
 integration_id: azure-notificationhubs
 integration_title: Azure Notification Hubs
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
-name: azure_notification_hubs
+name: azure_notificationhubs
 public_title: Azure Notification Hubs
 short_description: Rastrea las métricas principales de Azure Notification Hubs.
 supported_os: []
@@ -68,7 +68,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_notification_hubs" >}}
+{{< get-metrics-from-git "azure_notificationhubs" >}}
 
 
 ### Eventos
