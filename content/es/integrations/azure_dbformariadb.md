@@ -27,32 +27,32 @@ custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
-git_integration_title: azure_db_for_mariadb
+git_integration_title: azure_dbformariadb
 integration_id: azure-dbformariadb
 integration_title: Azure DB para MariaDB
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
-name: azure_db_for_mariadb
+name: azure_dbformariadb
 public_title: Azure DB para MariaDB
 short_description: Rastrea las métricas principales de Azure DB for MariaDB.
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Azure
-  - Categoría::Nube
-  - Categoría::Almacenes de datos
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Category::Azure
+  - Category::Cloud
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Rastrea las métricas principales de Azure DB for MariaDB.
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Azure DB para MariaDB
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Database for MariaDB proporciona una base de datos como servicio MariaDB comunitaria, totalmente gestionada y preparada para empresas.
@@ -71,7 +71,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_db_for_mariadb" >}}
+{{< get-metrics-from-git "azure_dbformariadb" >}}
 
 
 ### Eventos
@@ -84,7 +84,7 @@ La integración Azure Database for MariaDB no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_db_for_mariadb/azure_db_for_mariadb_metadata.csv

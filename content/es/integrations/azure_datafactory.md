@@ -33,20 +33,20 @@ custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
-git_integration_title: azure_data_factory
+git_integration_title: azure_datafactory
 integration_id: azure-datafactory
 integration_title: Azure Data Factory
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
-name: azure_data_factory
+name: azure_datafactory
 public_title: Azure Data Factory
 short_description: Rastrea las métricas clave de Azure Data Factory.
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Azure
+  - Category::Azure
   - Category::Cloud
   - Category::Data Stores
   - Offering::Integration
@@ -58,7 +58,7 @@ tile:
   title: Azure Data Factory
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Data Factory es un servicio de integración de datos en la nube que permite componer los servicios de almacenamiento, movimiento y procesamiento de datos en pipelines de datos automatizados.
@@ -74,7 +74,7 @@ Si aún no lo has hecho, configura la [integración de Microsoft Azure][1]. No s
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_data_factory" >}}
+{{< get-metrics-from-git "azure_datafactory" >}}
 
 
 ### Eventos
@@ -87,7 +87,7 @@ La integración Azure Data Factory no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_factory/azure_data_factory_metadata.csv

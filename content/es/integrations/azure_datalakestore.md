@@ -27,13 +27,13 @@ custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
-git_integration_title: azure_data_lake_store
+git_integration_title: azure_datalakestore
 integration_id: azure-datalakestore
 integration_title: Azure Data Lake Store
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
-name: azure_data_lake_store
+name: azure_datalakestore
 public_title: Azure Data Lake Store
 short_description: Rastrea las métricas clave de Azure Data Lake Store.
 supported_os: []
@@ -68,7 +68,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_data_lake_store" >}}
+{{< get-metrics-from-git "azure_datalakestore" >}}
 
 
 **Nota**: Esta integración solo recopila métricas para Data Lake Storage Gen 1. Data Lake Storage Gen 2 está basado en Azure Blob Storage, por lo que sus métricas se pueden encontrar en Datadog en el espacio de nombres Blob Storage: `azure.storage_storageaccounts_blobservices.*`. Para obtener detalles adicionales, consulta la documentación de [Azure Data Lake Storage Gen 2][3].

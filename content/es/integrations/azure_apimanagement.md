@@ -28,31 +28,31 @@ custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
-git_integration_title: azure_api_management
+git_integration_title: azure_apimanagement
 integration_id: azure-apimanagement
 integration_title: Azure API Management
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
-name: azure_api_management
+name: azure_apimanagement
 public_title: Azure API Management
 short_description: Rastrea las métricas principales de Azure API Management.
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Nube
-  - Categoría::Azure
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Rastrea las métricas principales de Azure API Management.
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Azure API Management
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure API Management es un servicio totalmente gestionado que permite a los clientes publicar, proteger, transformar, mantener y monitorizar las API.
@@ -68,7 +68,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_api_management" >}}
+{{< get-metrics-from-git "azure_apimanagement" >}}
 
 
 ### Eventos
@@ -81,7 +81,7 @@ La integración Azure API Management no incluye ningún check de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_api_management/azure_api_management_metadata.csv
