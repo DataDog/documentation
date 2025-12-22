@@ -108,12 +108,15 @@ To better unify your environment, it is also recommended to configure the `env` 
 You can customize tag behavior for individual checks, overriding the global Agent-level settings:
 
 1. **Disable Autodiscovery tags**
-    
+
     By default, the metrics reported by integrations include tags automatically detected from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags associated with the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`.
 
 1. **Set tag cardinality per integration check**
-    
+
     You can define the level of tag cardinality (low, orchestrator, or high) on a per-check basis using the `check_tag_cardinality` parameter. This overrides the global tag cardinality setting defined in the Agent configuration.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 init_config:
@@ -125,6 +128,50 @@ check_tag_cardinality: low
 
 # Rest of the config here
 ```
+
+{{% /tab %}}
+{{% tab "Kubernetes annotations" %}}
+
+For containerized environments using Kubernetes, you can set these parameters through [Autodiscovery annotations][1]:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-app
+  annotations:
+    ad.datadoghq.com/redis.checks: |
+      {
+        "redisdb": {
+          "init_config": {},
+          "instances": [
+            {
+              "host": "%%host%%",
+              "port": 6379
+            }
+          ]
+        }
+      }
+    ad.datadoghq.com/redis.check_tag_cardinality: "low"
+spec:
+  containers:
+    - name: redis
+      image: redis:latest
+```
+
+The supported annotation format is:
+```
+ad.datadoghq.com/<CONTAINER_NAME>.check_tag_cardinality: "<CARDINALITY_LEVEL>"
+```
+
+Where `<CARDINALITY_LEVEL>` can be `low`, `orchestrator`, or `high`.
+
+[1]: /containers/kubernetes/integrations/?tab=annotations#configuration
+
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">The <code>check_tag_cardinality</code> parameter only affects metrics collected by integration checks. It does not affect metrics sent through DogStatsD. To configure DogStatsD tag cardinality, use the global <code>dogstatsd_tag_cardinality</code> configuration parameter or the <code>DD_DOGSTATSD_TAG_CARDINALITY</code> environment variable.</div>
 
 ### Validation
 
