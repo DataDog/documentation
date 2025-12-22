@@ -75926,6 +75926,228 @@ paths:
       tags:
       - Cloud Network Monitoring
       x-menu-order: 2
+  /api/v2/obs-pipelines/pipelines:
+    get:
+      description: Retrieve a list of pipelines.
+      operationId: ListPipelines
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPipelinesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List pipelines
+      tags:
+      - Observability Pipelines
+      x-menu-order: 0
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+    post:
+      description: Create a new pipeline.
+      operationId: CreatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipelineSpec'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_deploy
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+  /api/v2/obs-pipelines/pipelines/validate:
+    post:
+      description: 'Validates a pipeline configuration without creating or updating
+        any resources.
+
+        Returns a list of validation errors, if any.'
+      operationId: ValidatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipelineSpec'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Validate an observability pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+  /api/v2/obs-pipelines/pipelines/{pipeline_id}:
+    delete:
+      description: Delete a pipeline.
+      operationId: DeletePipeline
+      parameters:
+      - description: The ID of the pipeline to delete.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_delete
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+    get:
+      description: Get a specific pipeline by its ID.
+      operationId: GetPipeline
+      parameters:
+      - description: The ID of the pipeline to retrieve.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a specific pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+    put:
+      description: Update a pipeline.
+      operationId: UpdatePipeline
+      parameters:
+      - description: The ID of the pipeline to update.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipeline'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_deploy
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
   /api/v2/on-call/escalation-policies:
     post:
       description: Create a new On-Call escalation policy
@@ -79190,228 +79412,6 @@ paths:
       - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 9
-  /api/v2/remote_config/products/obs_pipelines/pipelines:
-    get:
-      description: Retrieve a list of pipelines.
-      operationId: ListPipelines
-      parameters:
-      - $ref: '#/components/parameters/PageSize'
-      - $ref: '#/components/parameters/PageNumber'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListPipelinesResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: List pipelines
-      tags:
-      - Observability Pipelines
-      x-menu-order: 0
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-    post:
-      description: Create a new pipeline.
-      operationId: CreatePipeline
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ObservabilityPipelineSpec'
-        required: true
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObservabilityPipeline'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '409':
-          $ref: '#/components/responses/ConflictResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create a new pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 1
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_deploy
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-  /api/v2/remote_config/products/obs_pipelines/pipelines/validate:
-    post:
-      description: 'Validates a pipeline configuration without creating or updating
-        any resources.
-
-        Returns a list of validation errors, if any.'
-      operationId: ValidatePipeline
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ObservabilityPipelineSpec'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Validate an observability pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 5
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-  /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
-    delete:
-      description: Delete a pipeline.
-      operationId: DeletePipeline
-      parameters:
-      - description: The ID of the pipeline to delete.
-        in: path
-        name: pipeline_id
-        required: true
-        schema:
-          type: string
-      responses:
-        '204':
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Not Found
-        '409':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Conflict
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Delete a pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 4
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_delete
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-    get:
-      description: Get a specific pipeline by its ID.
-      operationId: GetPipeline
-      parameters:
-      - description: The ID of the pipeline to retrieve.
-        in: path
-        name: pipeline_id
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObservabilityPipeline'
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a specific pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 2
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-    put:
-      description: Update a pipeline.
-      operationId: UpdatePipeline
-      parameters:
-      - description: The ID of the pipeline to update.
-        in: path
-        name: pipeline_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ObservabilityPipeline'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObservabilityPipeline'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '409':
-          $ref: '#/components/responses/ConflictResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Update a pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 3
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_deploy
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
