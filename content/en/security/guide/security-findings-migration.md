@@ -36,6 +36,8 @@ This change affects all interfaces where you can query security findings data. W
   - API and Terraform resources
   <div class="alert alert-warning">Datadog will deprecate legacy API and Terraform resources. Update your queries on time so you can avoid workflow interruptions.</div>
 
+If you need assistance with your migration, contact [Datadog support][14].
+
 ## What is changing
 
 ### New features
@@ -48,53 +50,69 @@ Starting January 2026, the following features use the new data model:
 - Datadog [Workflow Automation][4] support for all finding types
 - Using SQL to query security findings and join them with other Datadog telemetry using [DDSQL Editor][5]
 
-<!-- With additional future changes:
+With additional future changes:
 
 - Cloud Security Vulnerabilities
 - Code Security findings (SCA, SAST, IAST, Secrets)
 - [Data Access Controls][6]
 - Security findings & tools in the [Datadog MCP Server][7]
-- API & Terraform support for [automation pipelines][8] -->
+- API & Terraform support for [automation pipelines][8]
 
-<!-- ### Security findings
+### Security findings
 
-Security findings encompass vulnerabilities, misconfigurations, and security risks identified across your infrastructure and applications.
+Security findings encompass misconfigurations, vulnerabilities, and security risks identified across your infrastructure and applications. This table shows the scope of security findings across Datadog and which findings are currently supported in the new data model.
 
 <table>
   <thead>
     <tr>
-      <th><a href="/security/code_security/">Code Security</a></th>
-      <th><a href="/security/cloud_security_management/">Cloud Security</a></th>
-      <th><a href="/security/application_security/">App & API Protection</a> (Preview)</th>
+      <th>Product</th>
+      <th>Findings</th>
+      <th>Support</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>
-        <ul>
-          <li>Library vulnerabilities (SCA)</li>
-          <li>Static code vulnerabilities (SAST)</li>
-          <li>Secrets</li>
-          <li>Runtime code vulnerabilities (IAST)</li>
-          <li>Infrastructure as code (IaC)</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>Misconfigurations (CSPM)</li>
-          <li>Host & container vulnerabilities</li>
-          <li>Identity risks (CIEM)</li>
-          <li>Attack paths</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>API security findings</li>
-        </ul>
-      </td>
+      <td rowspan="4"><a href="/security/cloud_security_management/"><strong>Cloud Security</strong></a></td>
+      <td>Misconfigurations (CSPM)</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td>Identity risks (CIEM)</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td>Attack paths</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td>Host & container vulnerabilities</td>
+      <td>Will be supported in the future</td>
+    </tr>
+    <tr>
+      <td><a href="/security/application_security/"><strong>App & API Protection</strong></a> (Preview)</td>
+      <td>API security findings</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td rowspan="5"><a href="/security/code_security/"><strong>Code Security</strong></a></td>
+      <td>Infrastructure as code (IaC)</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td>Library vulnerabilities (SCA)</td>
+      <td rowspan="4">Will be supported in the future</td>
+    </tr>
+    <tr>
+      <td>Static code vulnerabilities (SAST)</td>
+    </tr>
+    <tr>
+      <td>Runtime code vulnerabilities (IAST)</td>
+    </tr>
+    <tr>
+      <td>Secrets</td>
     </tr>
   </tbody>
-</table> -->
+</table>
 
 ### New querying syntax
 
@@ -125,3 +143,4 @@ View the full specification at [Security Findings Schema Reference][1].
 [11]: /security/security_inbox/?s=attack%20path#types-of-findings-in-security-inbox
 [12]: /security/code_security/iac_security/
 [13]: /security/application_security/api-inventory/#api-findings
+[14]: /help
