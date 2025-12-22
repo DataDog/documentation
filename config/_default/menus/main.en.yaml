@@ -4996,11 +4996,6 @@ menu:
       identifier: data_observability
       parent: data_observability_heading
       weight: 60000
-    - name: Data Quality
-      url: data_observability/data_quality
-      identifier: data_quality
-      parent: data_observability
-      weight: 100000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: check-light-wui
@@ -5008,117 +5003,112 @@ menu:
       parent: data_observability_heading
       weight: 70000
     - name: Data Quality
-      url: data_observability/data_quality
+      url: data_observability/quality_monitoring/data_quality
       identifier: data_quality
       parent: quality_monitoring
       weight: 100000
+    - name: Data Warehouses
+      url: data_observability/quality_monitoring/data_warehouses
+      identifier: data_warehouses
+      parent: quality_monitoring
+      weight: 200000
+    - name: Snowflake
+      url: data_observability/quality_monitoring/data_warehouses/snowflake
+      identifier: snowflake
+      parent: data_warehouses
+      weight: 1000000
+    - name: Databricks
+      url: data_observability/quality_monitoring/data_warehouses/databricks
+      identifier: databricks
+      parent: data_warehouses
+      weight: 2000000
+    - name: BigQuery
+      url: data_observability/quality_monitoring/data_warehouses/bigquery
+      identifier: bigquery
+      parent: data_warehouses
+      weight: 3000000
+    - name: Business Intelligence Integrations
+      url: data_observability/quality_monitoring/business_intelligence
+      identifier: business_intelligence_integrations
+      parent: quality_monitoring
+      weight: 200000
+    - name: Tableau
+      url: data_observability/quality_monitoring/integrations/business_intelligence/tableau
+      identifier: business_intelligence_integrations_tableau
+      parent: business_intelligence_integrations
+      weight: 1000000
+    - name: Sigma
+      url: data_observability/quality_monitoring/integrations/business_intelligence/sigma
+      identifier: business_intelligence_integrations_sigma
+      parent: business_intelligence_integrations
+      weight: 2000000
+    - name: Metabase
+      url: data_observability/quality_monitoring/integrations/business_intelligence/metabase
+      identifier: business_intelligence_integrations_metabase
+      parent: business_intelligence_integrations
+      weight: 3000000
+    - name: Power BI
+      url: data_observability/quality_monitoring/integrations/business_intelligence/powerbi
+      identifier: business_intelligence_integrations_powerbi
+      parent: business_intelligence_integrations
+      weight: 4000000
+    - name: OpenLineage
+      url: data_observability/quality_monitoring/openlineage
+      identifier: openlineage_integrations
+      parent: quality_monitoring
+      weight: 400000
+    - name: Datadog Agent for OpenLineage Proxy
+      url: data_observability/quality_monitoring/openlineage/datadog_agent_for_openlineage
+      identifier: openlineage_datadog_agent_for_openlineage
+      parent: openlineage_integrations
+      weight: 1000000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
       identifier: data_jobs
       parent: data_observability_heading
       weight: 80000
+    - name: dbt Cloud
+      url: data_observability/jobs_monitoring/dbtcloud
+      identifier: jobs_monitoring_dbtcloud
+      parent: data_jobs
+      weight: 100000
+    - name: dbt Core
+      url: data_observability/jobs_monitoring/dbtcore
+      identifier: jobs_monitoring_dbtcore
+      parent: data_jobs
+      weight: 2000000
+    - name: Airflow
+      url: data_observability/jobs_monitoring/airflow
+      identifier: jobs_monitoring_airflow
+      parent: data_jobs
+      weight: 3000000
+    - name: Spark on Amazon EMR
+      url: data_observability/jobs_monitoring/emr
+      identifier: jobs_monitoring_emr
+      parent: transformation_integrations
+      weight: 4000000
+    - name: Spark on Google Dataproc
+      url: data_observability/jobs_monitoring/dataproc
+      identifier: jobs_monitoring_dataproc
+      parent: transformation_integrations
+      weight: 5000000
+    - name: Spark on Kubernetes
+      url: data_observability/jobs_monitoring/kubernetes
+      identifier: jobs_monitoring_kubernetes
+      parent: transformation_integrations
+      weight: 6000000
+    - name: Databricks
+      url: data_observability/jobs_monitoring/databricks
+      identifier: jobs_monitoring_databricks
+      parent: transformation_integrations
+      weight: 7000000
     - name: Integrations
       url: data_observability/integrations
       pre: integrations
       identifier: data_integrations
       parent: data_observability_heading
       weight: 90000
-    - name: Warehouse Integrations
-      url: data_observability/integrations/warehouse
-      identifier: warehouse_integrations
-      parent: data_integrations
-      weight: 100000
-    - name: Snowflake
-      url: data_observability/integrations/warehouse/snowflake
-      identifier: snowflake
-      parent: warehouse_integrations
-      weight: 1000000
-    - name: Databricks
-      url: data_observability/integrations/warehouse/databricks
-      identifier: databricks
-      parent: warehouse_integrations
-      weight: 2000000
-    - name: BigQuery
-      url: data_observability/integrations/warehouse/bigquery
-      identifier: bigquery
-      parent: warehouse_integrations
-      weight: 3000000
-    - name: Transformation Integrations
-      url: data_observability/integrations/transformation
-      identifier: transformation_integrations
-      parent: data_integrations
-      weight: 200000
-    - name: dbt Cloud
-      url: data_observability/integrations/transformation/dbtcloud
-      identifier: transformation_integrations_dbtcloud
-      parent: transformation_integrations
-      weight: 1000000
-    - name: dbt Core
-      url: data_observability/integrations/transformation/dbtcore
-      identifier: transformation_integrations_dbtcore
-      parent: transformation_integrations
-      weight: 2000000
-    - name: Airflow
-      url: data_observability/jobs_monitoring/airflow
-      identifier: transformation_integrations_airflow
-      parent: transformation_integrations
-      weight: 3000000
-    - name: Spark on Amazon EMR
-      url: data_observability/jobs_monitoring/emr
-      identifier: transformation_integrations_emr
-      parent: transformation_integrations
-      weight: 4000000
-    - name: Spark on Google Dataproc
-      url: data_observability/jobs_monitoring/dataproc
-      identifier: transformation_integrations_dataproc
-      parent: transformation_integrations
-      weight: 5000000
-    - name: Spark on Kubernetes
-      url: data_observability/jobs_monitoring/kubernetes
-      identifier: transformation_integrations_kubernetes
-      parent: transformation_integrations
-      weight: 6000000
-    - name: Databricks
-      url: data_observability/jobs_monitoring/databricks
-      identifier: transformation_integrations_databricks
-      parent: transformation_integrations
-      weight: 7000000
-    - name: Business Intelligence Integrations
-      url: data_observability/integrations/business_intelligence
-      identifier: business_intelligence_integrations
-      parent: data_integrations
-      weight: 300000
-    - name: Tableau
-      url: data_observability/integrations/business_intelligence/tableau
-      identifier: business_intelligence_integrations_tableau
-      parent: business_intelligence_integrations
-      weight: 1000000
-    - name: Sigma
-      url: data_observability/integrations/business_intelligence/sigma
-      identifier: business_intelligence_integrations_sigma
-      parent: business_intelligence_integrations
-      weight: 2000000
-    - name: Metabase
-      url: data_observability/integrations/business_intelligence/metabase
-      identifier: business_intelligence_integrations_metabase
-      parent: business_intelligence_integrations
-      weight: 3000000
-    - name: Power BI
-      url: data_observability/integrations/business_intelligence/powerbi
-      identifier: business_intelligence_integrations_powerbi
-      parent: business_intelligence_integrations
-      weight: 4000000
-    - name: OpenLineage
-      url: data_observability/integrations/openlineage
-      identifier: openlineage_integrations
-      parent: data_integrations
-      weight: 400000
-    - name: Datadog Agent for OpenLineage Proxy
-      url: data_observability/integrations/openlineage/datadog_agent_for_openlineage
-      identifier: openlineage_datadog_agent_for_openlineage
-      parent: openlineage_integrations
-      weight: 1000000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
