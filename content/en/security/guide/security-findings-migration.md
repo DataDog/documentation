@@ -72,16 +72,21 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
   </thead>
   <tbody>
     <tr>
-      <td><a href="/security/cloud_security_management/"><strong>Cloud Security</strong></a></td>
-      <td>
-        <ul style="font-size:16px">
-          <li>Misconfigurations (CSPM)</li>
-          <li>Identity risks (CIEM)</li>
-          <li>Attack paths</li>
-          <li>Host & container vulnerabilities</li>
-        </ul>
-      </td>
-      <td>Supported except for vulnerabilities, which will be supported in the future</td>
+      <td rowspan="4"><a href="/security/cloud_security_management/"><strong>Cloud Security</strong></a></td>
+      <td>Misconfigurations (CSPM)</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td>Identity risks (CIEM)</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td>Attack paths</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td>Host & container vulnerabilities</td>
+      <td>Will be supported in the future</td>
     </tr>
     <tr>
       <td><a href="/security/application_security/"><strong>App & API Protection</strong></a> (Preview)</td>
@@ -89,17 +94,22 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
       <td>Supported</td>
     </tr>
     <tr>
-      <td><a href="/security/code_security/"><strong>Code Security</strong></a></td>
-      <td>
-        <ul style="font-size:16px">
-          <li>Library vulnerabilities (SCA)</li>
-          <li>Static code vulnerabilities (SAST)</li>
-          <li>Secrets</li>
-          <li>Runtime code vulnerabilities (IAST)</li>
-          <li>Infrastructure as code (IaC)</li>
-        </ul>
-      </td>
-      <td>Will be supported in the future</td>
+      <td rowspan="5"><a href="/security/code_security/"><strong>Code Security</strong></a></td>
+      <td>Infrastructure as code (IaC)</td>
+      <td>Supported</td>
+    </tr>
+    <tr>
+      <td>Library vulnerabilities (SCA)</td>
+      <td rowspan="4">Will be supported in the future</td>
+    </tr>
+    <tr>
+      <td>Static code vulnerabilities (SAST)</td>
+    </tr>
+    <tr>
+      <td>Runtime code vulnerabilities (IAST)</td>
+    </tr>
+    <tr>
+      <td>Secrets</td>
     </tr>
   </tbody>
 </table>
