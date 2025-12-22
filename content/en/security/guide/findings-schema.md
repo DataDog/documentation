@@ -1490,7 +1490,7 @@ Muting information and metadata.
     <tr>
       <td><code>is_muted_by_rule</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.is_muted_by_rule</code><br>True if the finding is muted by an automation rule; false otherwise. If true, the relevant automation rule is referenced in the workflow.automation section.</td>
+      <td><strong>Path:</strong> <code>@workflow.mute.is_muted_by_rule</code><br>True if the finding is muted by an automation rule; false otherwise. If true, the relevant automation rule is referenced in the workflow.automations section.</td>
     </tr>
     <tr>
       <td><code>rule_id</code></td>
