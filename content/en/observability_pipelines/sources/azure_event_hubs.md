@@ -1,7 +1,12 @@
 ---
 title: Send Azure Event Hubs Logs to Observability Pipelines
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 ## Overview
 

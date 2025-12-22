@@ -6,6 +6,10 @@ aliases:
 
 ## Availability
 
+Agentless Scanning is supported on AWS, Azure, and GCP. Oracle Cloud Infrastructure (OCI) is not yet supported.
+
+This feature is available in all commercial Datadog data centers. GovCloud is not supported.
+
 The following table provides a summary of Agentless scanning technologies in relation to their corresponding components for each supported cloud provider:
 
 | Component                                       | AWS                                                                                                                                       | Azure                                                                                                                                                                             | GCP                                                                                                                                                                             |
@@ -45,7 +49,7 @@ The following Linux distributions are supported for hosts and containers scans:
 
 ## Application libraries
 
-The following application languages and libraries are supported for vulnerability scans on containers and Lambda instances:
+The following application languages and libraries are supported for vulnerability scans on container images, Lambda functions, and containers running in hosts:
 
 | Language | Supported Package Manager | Supported Files                                                      |
 |----------|---------------------------|----------------------------------------------------------------------|
