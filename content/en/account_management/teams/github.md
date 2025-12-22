@@ -5,11 +5,10 @@ further_reading:
     - link: '/integrations/github/'
       tag: 'Documentation'
       text: 'GitHub integration'
+    - link: https://www.datadoghq.com/blog/datadog-teams-github-integration
+      tag: Blog
+      text: Keep service ownership up to date with Datadog Teams' GitHub integration
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" header="Join the Preview!">}}
-  GitHub Integration for Teams is in Preview.
-{{< /callout >}}
 
 ## Overview
 

@@ -180,6 +180,7 @@ Review the following examples demonstrating how to select specific services:
 
 This configuration:
 - enables APM for all namespaces except the `jenkins` namespace.
+  - **Note**: use `enabledNamespaces` to disable for all namespaces except those listed.
 - instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
 
 {{< highlight yaml "hl_lines=4-10" >}}

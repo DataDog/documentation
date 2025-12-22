@@ -5,18 +5,6 @@ aliases:
   - /observability_pipelines/setup_opw/
   - /observability_pipelines/advanced_configurations/
 further_reading:
-- link: "/observability_pipelines/log_volume_control/"
-  tag: "Documentation"
-  text: "Log volume control with Observability Pipelines"
-- link: "/observability_pipelines/dual_ship_logs/"
-  tag: "Documentation"
-  text: "Dual ship logs with Observability Pipelines"
-- link: "/observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs"
-  tag: "Documentation"
-  text: "Archive logs with Observability Pipelines"
-- link: "/observability_pipelines/split_logs/"
-  tag: "Documentation"
-  text: "Split logs with Observability Pipelines"
 - link: "/observability_pipelines/sensitive_data_redaction/"
   tag: "Documentation"
   text: "Redact data redaction with Observability Pipelines"

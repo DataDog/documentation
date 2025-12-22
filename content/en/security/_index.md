@@ -78,6 +78,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
     tag: "Blog"
     text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
+  - link: "https://www.datadoghq.com/blog/cloud-security-roundup-2025"
+    tag: "Blog"
+    text: "2025 cloud security roundup: How attackers abused identities, supply chains, and AI"
 cascade:
     algolia:
         rank: 70
