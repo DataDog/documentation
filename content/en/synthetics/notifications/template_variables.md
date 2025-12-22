@@ -208,18 +208,18 @@ These are extracted variables whose value updates a global variable value.
 
 Available only for **successful test results** and **recovery notifications**.
 
-Located at `result.variables.extracted`:
+Located at `{{synthetics.attributes.result.variables.extracted}}`:
 
-`.id`
+`{{synthetics.attributes.result.variables.extracted.id}}`
 : Global variable ID
 
-`.name`
+`{{synthetics.attributes.result.variables.extracted.name}}`
 : Variable name
 
-`.secure`
+`{{synthetics.attributes.result.variables.extracted.secure}}`
 : Whether the variable value is obfuscated
 
-`.val`
+`{{synthetics.attributes.result.variables.extracted.val}}`
 : Variable value (note: uses `.val`, not `.value`)
 
 **Examples:**
@@ -235,7 +235,7 @@ Located at `result.variables.extracted`:
 {{% /tab %}}
 {{% tab "Step extracted variables" %}}
 
-For tests with steps, step data is contained in `.steps`.
+For tests with steps, step data is contained in `{{synthetics.attributes.result.steps}}`.
 
 `.extractedValue.name`
 : Variable name
