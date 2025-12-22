@@ -278,6 +278,8 @@ Use [granular access control][22] to limit who has access to your test based on 
 | Viewer       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
 | Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
 
+Restricting a variable prevents other users from adding it to a test and using it, but they are still able to see the variable name if it was added to a test by an authorized user. 
+
 ## Integration settings
 
 {{< img src="synthetics/settings/integration_settings.png" alt="Integration Settings page" style="width:100%;">}}
