@@ -113,15 +113,15 @@ com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 
 ## Tag extraction
 
-Starting in 7.64+ the Agent and Cluster Agent can be configured to collect labels and annotations from Kubernetes resources and use them as tags from a common configuration. Datadog recommends to use the options below for:
+Starting in version 7.64+, the Agent and Cluster Agent can be configured to collect labels and annotations from Kubernetes resources and use them as tags from a common configuration. Datadog recommends using the following options to ensure consistent reporting across the Agent’s core tagging, the Cluster Agent’s KSM reporting, and both Agents’ Orchestrator Explorer reporting:
 - `kubernetesResourcesLabelsAsTags`
 - `kubernetesResourcesAnnotationsAsTags`
 
-For consistent reporting between the Agent's core tagging, Cluster Agent's KSM reporting, and both of their Orchestrator Explorer reporting. As opposed to the legacy options of Agent `podLabelsAsTags`, `nodeLabelsAsTags`, `namespaceLabelsAsTags` , and any KSM configuration overrides.
+These options should be used instead of the legacy Agent options `podLabelsAsTags`, `nodeLabelsAsTags`, `namespaceLabelsAsTags`, and any KSM configuration overrides.
 
-These configurations reference the resource type of the object to extract the metadata from. Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource. If a specific resource is in the empty API group (for example `pods` and `nodes`), it can be specified using just the `resourceType` name.
+These configurations reference the resource type of the object from which to extract metadata. Each resource type must be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource. Resources in the empty API group (for example, pods and nodes) can be specified using only the `resourceType` name.
 
-For example, run `kubectl api-resources` to get this information:
+For example, run `kubectl api-resources` to retrieve this information:
 
 | Name        | API Version                  | Datadog Resource Configuration  |
 |-------------|------------------------------|---------------------------------|
@@ -131,7 +131,7 @@ For example, run `kubectl api-resources` to get this information:
 | deployments | apps/v1                      | deployments.apps                |
 | roles       | rbac.authorization.k8s.io/v1 | roles.rbac.authorization.k8s.io |
 
-**Note:**
+**Notes:**
 
 - Tags *do not* cascade between the workload and child resources. For example, labels on a Deployment are not automatically applied to logs from its child Pods. To tag Pod data, configure label extraction directly on the Pods.
 - Tags *do* cascade from the namespace to the pods and containers inside of them.
@@ -159,7 +159,7 @@ spec:
         <LABEL>: <TAG_KEY>
 ```
 
-For example for nodes, pods, and deployments:
+For example, to extract resource labels from nodes, pods, and deployments:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -190,7 +190,7 @@ datadog:
       <LABEL>: <TAG_KEY>
 ```
 
-For example for nodes, pods, and deployments:
+For example, to extract resource labels from nodes, pods, and deployments:
 
 ```yaml
 datadog:
@@ -214,7 +214,7 @@ To extract a given resource label `<LABEL>` and transform them as tag keys `<TAG
   value: '{"<RESOURCE>":{"<LABEL>":"<TAG_KEY>"}}'
 ```
 
-For example for nodes, pods, and deployments:
+For example, to extract resource labels from nodes, pods, and deployments:
 
 ```yaml
 - name: DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS
@@ -266,7 +266,7 @@ label-3: legacy-tag-d
 
 ### Kubernetes resources annotations as tags
 
-This option is used to extract a given annotation on your Kubernetes resources and send that up as a Datadog tag.
+This option extracts a specified annotation from your Kubernetes resources and sends it as a Datadog tag.
 
 {{< tabs >}}
 
@@ -286,7 +286,7 @@ spec:
         <ANNOTATION>: <TAG_KEY>
 ```
 
-For example for nodes, pods, and deployments:
+For example, to extract resource annotations from nodes, pods, and deployments:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -317,7 +317,7 @@ datadog:
       <ANNOTATION>: <TAG_KEY>
 ```
 
-For example for nodes, pods, and deployments:
+For example, to extract resource annotations from nodes, pods, and deployments:
 
 ```yaml
 datadog:
@@ -341,7 +341,7 @@ To extract a given resource annotation `<ANNOTATION>` and transform them as tag 
   value: '{"<RESOURCE>":{"<ANNOTATION>":"<TAG_KEY>"}}'
 ```
 
-For example for nodes, pods, and deployments
+For example, to extract resource annotations from nodes, pods, and deployments:
 
 ```yaml
 - name: DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS
