@@ -122,10 +122,12 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 - (Optional) Google Pub/Sub endpoint URL identifier:
 	- By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
-	- If your Pub/Sub topic is region-specific, configure the Google Pub/Sub alternative endpoint URL with the regional endpoint. See [About Pub/Sub endpoints][10240] for more information. Enter the configured endpoint URL into your secrets manager.
+	- If your Pub/Sub topic is region-specific, configure the Google Pub/Sub alternative endpoint URL with the regional endpoint. See [About Pub/Sub endpoints][1] for more information. Enter the configured endpoint URL into your secrets manager.
 	- The default identifier is `DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
 - Google Pub/Sub TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `DESTINATION_GCP_PUBSUB_KEY_PASS`.
+
+[1]: https://docs.cloud.google.com/pubsub/docs/reference/service_apis_overview#pubsub_endpoints
 
 {{% /tab %}}
 
