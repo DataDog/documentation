@@ -337,7 +337,7 @@ Similar to standard API tests, the variables are listed in the `variables.extrac
 
 **General:**
 
-`.startUrl`
+`{{synthetics.attributes.result.startUrl}}`
 : URL from test configuration
 
 **Steps:**
