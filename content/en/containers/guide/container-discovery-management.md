@@ -396,7 +396,13 @@ container.image.reference.matches("nginx")
 To exclude the container using grouped logic (for example, a specific container name in either of two namespaces):
 
 ```yaml
-container.name == "my-app" && (container.pod.namespace == "production" || container.pod.namespace == "staging")
+container.name == "redis" && (container.pod.namespace == "production" || container.pod.namespace == "staging")
+```
+
+To exclude containers based on their pod's owner name (for example, targeting all containers created by a Deployment or CronJob named `my-app`):
+
+```yaml
+container.pod.name.startsWith("my-app")
 ```
 
 ## Pod exclude configuration
