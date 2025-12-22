@@ -78,7 +78,7 @@ By default, a newly-created scanning group is disabled. To enable a scanning gro
 
 ### Add scanning rules
 
-A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regular express (regex) patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regular expression (regex) patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
 
 Whenever possible, use Datadog's out-of-the-box library rules. These rules are predefined rules that detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. Each rule has recommended keywords for the keyword dictionary to refine matching accuracy. You can also [add your own keywords](#add-custom-keywords).
 
