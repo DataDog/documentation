@@ -1,6 +1,7 @@
 ---
 title: Security Findings Schema Reference
 description: "Complete reference for the Security Findings schema, including all attributes, namespaces, and data model for querying vulnerabilities, misconfigurations, and security risks."
+disable_toc: true
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
@@ -1174,7 +1175,13 @@ There are eleven different categories for security findings. Click on a category
 {{% /tab %}}
 {{< /tabs >}}
 
-## Core attributes
+## Schema Reference
+
+The following sections describe all available attributes in the Security Findings schema, organized by namespace.
+
+
+
+{{% collapse-content title="Core Attributes" level="h3" %}}
 
 These attributes are present on all security findings and describe the fundamental nature and status of the finding.
 
@@ -1190,22 +1197,22 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@severity</code><br>Indicates the Datadog-adjusted severity level of the finding. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+      <td><strong>Path:</strong> <code>@severity</code><br>Datadog-adjusted severity level of the finding. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>base_severity</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@base_severity</code><br>Indicates the base severity level of the finding before any adjustments. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+      <td><strong>Path:</strong> <code>@base_severity</code><br>Base severity level of the finding before any adjustments. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>status</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@status</code><br>Indicates the workflow status of the finding. Valid values: <code>open</code>, <code>muted</code>, <code>auto_closed</code>.</td>
+      <td><strong>Path:</strong> <code>@status</code><br>Workflow status of the finding. Valid values: <code>open</code>, <code>muted</code>, <code>auto_closed</code>.</td>
     </tr>
     <tr>
       <td><code>finding_type</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@finding_type</code><br>Defines the category of the finding. Valid values: <code>api_security</code>, <code>attack_path</code>, <code>runtime_code_vulnerability</code>, <code>static_code_vulnerability</code>, <code>host_and_container_vulnerability</code>, <code>iac_misconfiguration</code>, <code>identity_risk</code>, <code>library_vulnerability</code>, <code>misconfiguration</code>, <code>secret</code>, <code>workload_activity</code>.</td>
+      <td><strong>Path:</strong> <code>@finding_type</code><br>Category of the finding. Valid values: <code>api_security</code>, <code>attack_path</code>, <code>runtime_code_vulnerability</code>, <code>static_code_vulnerability</code>, <code>host_and_container_vulnerability</code>, <code>iac_misconfiguration</code>, <code>identity_risk</code>, <code>library_vulnerability</code>, <code>misconfiguration</code>, <code>secret</code>, <code>workload_activity</code>.</td>
     </tr>
     <tr>
       <td><code>finding_id</code></td>
@@ -1220,7 +1227,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>description</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@description</code><br>Provides a human-readable explanation of the finding. May include Markdown formatting.</td>
+      <td><strong>Path:</strong> <code>@description</code><br>Human-readable explanation of the finding. May include Markdown formatting.</td>
     </tr>
     <tr>
       <td><code>resource_id</code></td>
@@ -1235,7 +1242,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>resource_type</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@resource_type</code><br>Specifies the type of the resource.</td>
+      <td><strong>Path:</strong> <code>@resource_type</code><br>Type of the resource.</td>
     </tr>
     <tr>
       <td><code>first_seen_at</code></td>
@@ -1255,7 +1262,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>origin</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@origin</code><br>Lists the detection origins that produced the finding, such as agentless scans, APM, SCA (Software Composition Analysis), or CI (Continuous Integration).</td>
+      <td><strong>Path:</strong> <code>@origin</code><br>Detection origins that produced the finding, such as agentless scans, APM, SCI (Software Composition Analysis), or CI (Continuous Integration).</td>
     </tr>
     <tr>
       <td><code>exposure_time_seconds</code></td>
@@ -1270,14 +1277,16 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>detection_tool</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@detection_tool</code><br>Indicates the tool responsible for detecting the security finding.</td>
+      <td><strong>Path:</strong> <code>@detection_tool</code><br>Information about the tool or engine responsible for detecting the finding.</td>
     </tr>
   </tbody>
 </table>
 
-## Workflow
+{{% /collapse-content %}}
 
-Contains all mutable information related to the management of a finding after it was detected. Includes fields that can be updated manually through the UI or automatically through automation pipelines.
+{{% collapse-content title="Workflow" level="h3" %}}
+
+All mutable information related to the management of a finding after it was detected. Includes fields that can be updated manually through the UI or automatically through pipelines.
 
 <table>
   <thead>
@@ -1291,7 +1300,7 @@ Contains all mutable information related to the management of a finding after it
     <tr>
       <td><code>triage</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.triage</code><br>Contains assignment and status information. Assignment may be synchronized with case or Jira information.</td>
+      <td><strong>Path:</strong> <code>@workflow.triage</code><br>Assignment and status information. Assignment may be synchronized with case or Jira information.</td>
     </tr>
     <tr>
       <td><code>auto_closed_at</code></td>
@@ -1301,27 +1310,29 @@ Contains all mutable information related to the management of a finding after it
     <tr>
       <td><code>due_date</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.due_date</code><br>Contains the due date rule applied to this finding.</td>
+      <td><strong>Path:</strong> <code>@workflow.due_date</code><br>Due date rule applied to the finding.</td>
     </tr>
     <tr>
       <td><code>mute</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.mute</code><br>Contains muting information and metadata.</td>
+      <td><strong>Path:</strong> <code>@workflow.mute</code><br>Muting information and metadata.</td>
     </tr>
     <tr>
       <td><code>automations</code></td>
       <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@workflow.automations</code><br>Contains automation rules applying to the finding.</td>
+      <td><strong>Path:</strong> <code>@workflow.automations</code><br>Information about any automation rules that apply to the finding.</td>
     </tr>
     <tr>
       <td><code>integrations</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations</code><br>Contains integrations like Jira, Case Management, or ServiceNow used to triage and remediate the finding.</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations</code><br>Integrations like Jira, Case Management, or ServiceNow used to triage and remediate the finding.</td>
     </tr>
   </tbody>
 </table>
 
 ### Triage
+
+Assignment and status information. Assignment may be synchronized with case or Jira information.
 
 <table>
   <thead>
@@ -1335,7 +1346,7 @@ Contains all mutable information related to the management of a finding after it
     <tr>
       <td><code>assignee</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee</code><br>Contains the user assigned to this finding.</td>
+      <td><strong>Path:</strong> <code>@workflow.triage.assignee</code><br>User assigned to this finding.</td>
     </tr>
     <tr>
       <td><code>time_to_acknowledge_seconds</code></td>
@@ -1352,6 +1363,8 @@ Contains all mutable information related to the management of a finding after it
 
 #### Assignee
 
+User assigned to this finding.
+
 <table>
   <thead>
     <tr>
@@ -1364,12 +1377,12 @@ Contains all mutable information related to the management of a finding after it
     <tr>
       <td><code>name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.name</code><br>Display name of the assigned user.</td>
+      <td><strong>Path:</strong> <code>@workflow.triage.assignee.name</code><br>Display name of the assignee.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.id</code><br>Unique identifier for the assigned user in UUID format.</td>
+      <td><strong>Path:</strong> <code>@workflow.triage.assignee.id</code><br>Unique identifier in UUID format for the assignee.</td>
     </tr>
     <tr>
       <td><code>updated_at</code></td>
@@ -1379,12 +1392,14 @@ Contains all mutable information related to the management of a finding after it
     <tr>
       <td><code>updated_by</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.updated_by</code><br>Contains the user who last modified the assignee.</td>
+      <td><strong>Path:</strong> <code>@workflow.triage.assignee.updated_by</code><br>User who last modified the assignee.</td>
     </tr>
   </tbody>
 </table>
 
 ##### Updated By
+
+User who last modified the assignee.
 
 <table>
   <thead>
@@ -1410,6 +1425,8 @@ Contains all mutable information related to the management of a finding after it
 
 ### Due Date
 
+Due date rule applied to the finding.
+
 <table>
   <thead>
     <tr>
@@ -1422,7 +1439,7 @@ Contains all mutable information related to the management of a finding after it
     <tr>
       <td><code>due_at</code></td>
       <td>integer</td>
-      <td><strong>Path:</strong> <code>@workflow.due_date.due_at</code><br>Timestamp in milliseconds (UTC) when the finding must be resolved.</td>
+      <td><strong>Path:</strong> <code>@workflow.due_date.due_at</code><br>Timestamp in milliseconds (UTC) for the finding's due date.</td>
     </tr>
     <tr>
       <td><code>is_overdue</code></td>
@@ -1438,6 +1455,8 @@ Contains all mutable information related to the management of a finding after it
 </table>
 
 ### Mute
+
+Muting information and metadata.
 
 <table>
   <thead>
@@ -1471,7 +1490,7 @@ Contains all mutable information related to the management of a finding after it
     <tr>
       <td><code>is_muted_by_rule</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.is_muted_by_rule</code><br>Indicates if the finding is muted by an automation rule. If true, the relevant automation rule is referenced in the workflow.automation section.</td>
+      <td><strong>Path:</strong> <code>@workflow.mute.is_muted_by_rule</code><br>True if the finding is muted by an automation rule; false otherwise. If true, the relevant automation rule is referenced in the workflow.automation section.</td>
     </tr>
     <tr>
       <td><code>rule_id</code></td>
@@ -1498,6 +1517,8 @@ Contains all mutable information related to the management of a finding after it
 
 #### Muted By
 
+User who muted the finding.
+
 <table>
   <thead>
     <tr>
@@ -1522,7 +1543,7 @@ Contains all mutable information related to the management of a finding after it
 
 ### Integrations
 
-Contains integrations like Jira, Case Management, or ServiceNow used to triage and remediate the finding.
+Integrations like Jira, Case Management, or ServiceNow used to triage and remediate the finding.
 
 <table>
   <thead>
@@ -1536,28 +1557,26 @@ Contains integrations like Jira, Case Management, or ServiceNow used to triage a
     <tr>
       <td><code>cases</code></td>
       <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.cases</code><br>Contains an array of cases attached to the finding.</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases</code><br>Array of cases attached to the finding.</td>
     </tr>
     <tr>
       <td><code>jira</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.jira</code><br>List of Jira issue keys attached to this finding in the format <code>PROJECT-NUMBER</code> (for example, <code>PROJ-123</code>).</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.jira</code><br>Jira issue keys attached to this finding in the format <code>PROJECT-NUMBER</code> (for example, <code>PROJ-123</code>).</td>
     </tr>
     <tr>
       <td><code>pull_requests</code></td>
       <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.pull_requests</code><br>List of pull requests used to remediate this finding.</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.pull_requests</code><br>Pull requests used to remediate this finding.</td>
     </tr>
   </tbody>
 </table>
 
-## Risk
+{{% /collapse-content %}}
 
-Risk attributes assess the potential impact and exposure of a finding.
+{{% collapse-content title="Risk" level="h3" %}}
 
-### Risk
-
-Groups risk-related attributes for the finding. Each key must have a matching key in the `risk_details` namespace.
+Risk-related attributes for the finding. Each key must have a matching key in the `risk_details` namespace.
 
 <table>
   <thead>
@@ -1576,7 +1595,7 @@ Groups risk-related attributes for the finding. Each key must have a matching ke
     <tr>
       <td><code>is_function_reachable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_function_reachable</code><br>True if the vulnerable function may be executed; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_function_reachable</code><br>True if the vulnerable function can be executed; false otherwise.</td>
     </tr>
     <tr>
       <td><code>is_exposed_to_attacks</code></td>
@@ -1616,7 +1635,7 @@ Groups risk-related attributes for the finding. Each key must have a matching ke
     <tr>
       <td><code>is_tainted_from_query_string</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_tainted_from_query_string</code><br>True if the problematic string contains elements derived from an HTTP query string; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_tainted_from_query_string</code><br>True if the string is tainted with elements derived from an HTTP query string; false otherwise.</td>
     </tr>
     <tr>
       <td><code>is_tainted_from_database</code></td>
@@ -1631,9 +1650,11 @@ Groups risk-related attributes for the finding. Each key must have a matching ke
   </tbody>
 </table>
 
-### Risk Details
+{{% /collapse-content %}}
 
-Groups contextual risk factors that help assess the potential impact of a finding. These fields describe characteristics like exposure, sensitivity, and signs of active exploitation.
+{{% collapse-content title="Risk Details" level="h3" %}}
+
+Contextual risk factors that help assess the potential impact of a finding. These fields describe characteristics like exposure, sensitivity, and signs of active exploitation.
 
 <table>
   <thead>
@@ -1647,7 +1668,7 @@ Groups contextual risk factors that help assess the potential impact of a findin
     <tr>
       <td><code>has_sensitive_data</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data</code><br>Groups evidence and indicators about whether the affected resource has sensitive data.</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data</code><br>Evidence and indicators about whether the affected resource has sensitive data.</td>
     </tr>
     <tr>
       <td><code>is_function_reachable</code></td>
@@ -1707,9 +1728,9 @@ Groups contextual risk factors that help assess the potential impact of a findin
   </tbody>
 </table>
 
-#### Has Sensitive Data
+### Has Sensitive Data
 
-Groups evidence and indicators about whether the affected resource has sensitive data.
+Evidence and indicators about whether the affected resource has sensitive data.
 
 <table>
   <thead>
@@ -1733,14 +1754,14 @@ Groups evidence and indicators about whether the affected resource has sensitive
     <tr>
       <td><code>evidence</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.evidence</code><br>Contains evidence supporting the presence of sensitive data.</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.evidence</code><br>Evidence supporting the presence of sensitive data.</td>
     </tr>
   </tbody>
 </table>
 
-##### Evidence
+#### Evidence
 
-Contains evidence supporting the presence of sensitive data.
+Evidence supporting the presence of sensitive data.
 
 <table>
   <thead>
@@ -1759,7 +1780,7 @@ Contains evidence supporting the presence of sensitive data.
   </tbody>
 </table>
 
-#### Is Function Reachable
+### Is Function Reachable
 
 Groups evidence and indicators about whether the vulnerable function or module is used in the code.
 
@@ -1790,7 +1811,7 @@ Groups evidence and indicators about whether the vulnerable function or module i
   </tbody>
 </table>
 
-##### Evidence
+#### Evidence
 
 Contains the evidence used to determine whether the function is reachable.
 
@@ -1811,7 +1832,9 @@ Contains the evidence used to determine whether the function is reachable.
   </tbody>
 </table>
 
-###### Locations
+##### Locations
+
+Array of code locations where the function is called.
 
 <table>
   <thead>
@@ -1865,7 +1888,7 @@ Contains the evidence used to determine whether the function is reachable.
   </tbody>
 </table>
 
-#### Is Exposed To Attacks
+### Is Exposed To Attacks
 
 Groups evidence and indicators about whether the service where the finding was detected is exposed to attacks.
 
@@ -1896,7 +1919,7 @@ Groups evidence and indicators about whether the service where the finding was d
   </tbody>
 </table>
 
-##### Evidence
+#### Evidence
 
 Contains evidence for the presence of attacks.
 
@@ -1927,7 +1950,7 @@ Contains evidence for the presence of attacks.
   </tbody>
 </table>
 
-#### Has Privileged Access
+### Has Privileged Access
 
 Groups evidence and indicators about whether the resource has privileged access.
 
@@ -1958,7 +1981,7 @@ Groups evidence and indicators about whether the resource has privileged access.
   </tbody>
 </table>
 
-##### Evidence
+#### Evidence
 
 Contains evidence showing proof of privileged access.
 
@@ -1979,7 +2002,7 @@ Contains evidence showing proof of privileged access.
   </tbody>
 </table>
 
-#### Is Production
+### Is Production
 
 Groups evidence and indicators about whether the resource associated with the finding is running in a production environment.
 
@@ -2010,7 +2033,7 @@ Groups evidence and indicators about whether the resource associated with the fi
   </tbody>
 </table>
 
-#### Is Publicly Accessible
+### Is Publicly Accessible
 
 Groups information about whether the affected resource is accessible from the public internet.
 
@@ -2041,7 +2064,7 @@ Groups information about whether the affected resource is accessible from the pu
   </tbody>
 </table>
 
-##### Evidence
+#### Evidence
 
 Contains evidence showing proof of access from the internet.
 
@@ -2062,7 +2085,7 @@ Contains evidence showing proof of access from the internet.
   </tbody>
 </table>
 
-#### Has Exploit Available
+### Has Exploit Available
 
 Groups information about whether a known exploit exists for this finding advisory.
 
@@ -2093,7 +2116,7 @@ Groups information about whether a known exploit exists for this finding advisor
   </tbody>
 </table>
 
-##### Evidence
+#### Evidence
 
 Contains evidence about exploit availability.
 
@@ -2124,7 +2147,7 @@ Contains evidence about exploit availability.
   </tbody>
 </table>
 
-#### Has High Exploitability Chance
+### Has High Exploitability Chance
 
 Groups evidence and indicators about whether the vulnerability is likely to be exploited based on EPSS (Exploit Prediction Scoring System).
 
@@ -2155,7 +2178,7 @@ Groups evidence and indicators about whether the vulnerability is likely to be e
   </tbody>
 </table>
 
-##### Evidence
+#### Evidence
 
 Contains evidence of the EPSS score.
 
@@ -2186,7 +2209,7 @@ Contains evidence of the EPSS score.
   </tbody>
 </table>
 
-#### Is Tainted From Request Url
+### Is Tainted From Request Url
 
 Groups information about whether the tainted parts originating from the request URL.
 
@@ -2212,7 +2235,7 @@ Groups information about whether the tainted parts originating from the request 
   </tbody>
 </table>
 
-#### Is Tainted From Query String
+### Is Tainted From Query String
 
 Groups information about whether the tainted parts originating from a query string.
 
@@ -2238,7 +2261,7 @@ Groups information about whether the tainted parts originating from a query stri
   </tbody>
 </table>
 
-#### Is Tainted From Database
+### Is Tainted From Database
 
 Groups information about whether tainted parts originate from a database.
 
@@ -2264,7 +2287,7 @@ Groups information about whether tainted parts originate from a database.
   </tbody>
 </table>
 
-#### Is Using Sha1
+### Is Using Sha1
 
 Groups information about whether SHA1 is used in a weak hash.
 
@@ -2290,9 +2313,9 @@ Groups information about whether SHA1 is used in a weak hash.
   </tbody>
 </table>
 
-## Vulnerability information
+{{% /collapse-content %}}
 
-### Rule
+{{% collapse-content title="Rule" level="h3" %}}
 
 Describes how to discover a vulnerability. Vulnerability findings with rules mean the vulnerability was detected in source code or running code. Rules are also used for non-vulnerability findings such as misconfigurations or API security.
 
@@ -2333,7 +2356,9 @@ Describes how to discover a vulnerability. Vulnerability findings with rules mea
   </tbody>
 </table>
 
-### Advisory
+{{% /collapse-content %}}
+
+{{% collapse-content title="Advisory" level="h3" %}}
 
 Ties a vulnerability to a set of specific software versions. Vulnerability findings with advisories mean a vulnerable version of the software was detected (typically through SBOMs).
 
@@ -2384,7 +2409,9 @@ Ties a vulnerability to a set of specific software versions. Vulnerability findi
   </tbody>
 </table>
 
-### Vulnerability
+{{% /collapse-content %}}
+
+{{% collapse-content title="Vulnerability" level="h3" %}}
 
 Contains information specific to vulnerabilities.
 
@@ -2445,7 +2472,9 @@ Contains information specific to vulnerabilities.
   </tbody>
 </table>
 
-#### Stack
+### Stack
+
+Specifies the technological stack where the vulnerability was found.
 
 <table>
   <thead>
@@ -2469,7 +2498,9 @@ Contains information specific to vulnerabilities.
   </tbody>
 </table>
 
-## Remediation
+{{% /collapse-content %}}
+
+{{% collapse-content title="Remediation" level="h3" %}}
 
 Groups information about the finding's remediation.
 
@@ -2542,6 +2573,8 @@ Groups information about the finding's remediation.
 
 ### Codegen
 
+Tracks finding status for the code generation platform.
+
 <table>
   <thead>
     <tr>
@@ -2565,6 +2598,8 @@ Groups information about the finding's remediation.
 </table>
 
 ### Package
+
+Groups remediation package information.
 
 <table>
   <thead>
@@ -2604,6 +2639,8 @@ Groups information about the finding's remediation.
 </table>
 
 ### Root Package
+
+Groups remediation root package information.
 
 <table>
   <thead>
@@ -2665,6 +2702,8 @@ Contains remediation suggesting the latest host image version that may remediate
 
 #### Latest Major
 
+Contains information about the latest Amazon Machine Image (AMI) that may remediate the vulnerability.
+
 <table>
   <thead>
     <tr>
@@ -2698,12 +2737,14 @@ Contains remediation suggesting a newer container image version that may remedia
     <tr>
       <td><code>closest_no_vulnerabilities</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities</code></td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities</code><br>Contains remediation suggesting to upgrade the container image to a newer version that may remediate the vulnerability.</td>
     </tr>
   </tbody>
 </table>
 
 #### Closest No Vulnerabilities
+
+Contains remediation suggesting to upgrade the container image to a newer version that may remediate the vulnerability.
 
 <table>
   <thead>
@@ -2715,19 +2756,24 @@ Contains remediation suggesting a newer container image version that may remedia
   </thead>
   <tbody>
     <tr>
-      <td><code>registry_url</code></td>
+      <td><code>layer_digests</code></td>
+      <td>array (string)</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.layer_digests</code><br>Contains the layer digests of the currently vulnerable container image that needs to be upgraded.</td>
+    </tr>
+    <tr>
+      <td><code>image_url</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.registry_url</code></td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.image_url</code><br>URL of the container image that may remediate the vulnerability.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.name</code></td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.name</code><br>Name of the container image that may remediate the vulnerability.</td>
     </tr>
     <tr>
       <td><code>tag</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.tag</code></td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.tag</code><br>Tag of the container image that may remediate the vulnerability.</td>
     </tr>
   </tbody>
 </table>
@@ -2793,7 +2839,9 @@ Specifies the closest patch available to address the current advisory.
   </tbody>
 </table>
 
-## Compliance
+{{% /collapse-content %}}
+
+{{% collapse-content title="Compliance" level="h3" %}}
 
 Contains information specific to compliance findings, such as compliance rule or evaluation (pass/fail).
 
@@ -2829,11 +2877,9 @@ Contains information specific to compliance findings, such as compliance rule or
   </tbody>
 </table>
 
-## Resource identification
+{{% /collapse-content %}}
 
-These attributes identify and provide context about the affected resource.
-
-### Cloud Resource
+{{% collapse-content title="Cloud Resource" level="h3" %}}
 
 Groups attributes identifying the cloud resource affected by the finding.
 
@@ -2877,6 +2923,11 @@ Groups attributes identifying the cloud resource affected by the finding.
       <td><strong>Path:</strong> <code>@cloud_resource.configuration</code><br>Configuration of the cloud resource, as returned by the cloud provider.</td>
     </tr>
     <tr>
+      <td><code>context</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@cloud_resource.context</code><br>Context for the cloud resource.</td>
+    </tr>
+    <tr>
       <td><code>account</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@cloud_resource.account</code><br>Cloud account that owns the cloud resource (for example, AWS account, Azure subscription, GCP project, OCI tenancy).</td>
@@ -2904,7 +2955,9 @@ Groups attributes identifying the cloud resource affected by the finding.
   </tbody>
 </table>
 
-### Iac Resource
+{{% /collapse-content %}}
+
+{{% collapse-content title="Iac Resource" level="h3" %}}
 
 Groups attributes identifying the Infrastructure as Code (IaC) resource related to the finding.
 
@@ -2920,17 +2973,19 @@ Groups attributes identifying the Infrastructure as Code (IaC) resource related 
     <tr>
       <td><code>provider</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.provider</code><br>Indicates the IaC (Infrastructure as Code) provider where the resource is defined (for example, <code>aws</code>, <code>gcp</code>, <code>azure</code>).</td>
+      <td><strong>Path:</strong> <code>@iac_resource.provider</code><br>Indicates the IaC (Infrastructure as Code) provider where the resource is defined (for example, <code>aws</code>, <code>gcp</code>, <code>azure</code>). Possible values: <code>aws</code>, <code>gcp</code>, <code>azure</code>.</td>
     </tr>
     <tr>
       <td><code>platform</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.platform</code><br>Indicates which IaC (Infrastructure as Code) platform the vulnerability was found on (for example, <code>terraform</code>, <code>kubernetes</code>). Possible values: <code>cicd</code>, <code>terraform</code>, <code>kubernetes</code>.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.platform</code><br>Indicates which IaC (Infrastructure as Code) platform the vulnerability was found on (for example, <code>terraform</code>, <code>kubernetes</code>). Possible values: <code>cicd</code>, <code>terraform</code>, <code>kubernetes</code>, <code>cloudformation</code>.</td>
     </tr>
   </tbody>
 </table>
 
-### K8S
+{{% /collapse-content %}}
+
+{{% collapse-content title="K8S" level="h3" %}}
 
 Contains Kubernetes fields for findings generated against Kubernetes resources.
 
@@ -2951,7 +3006,9 @@ Contains Kubernetes fields for findings generated against Kubernetes resources.
   </tbody>
 </table>
 
-### Host
+{{% /collapse-content %}}
+
+{{% collapse-content title="Host" level="h3" %}}
 
 Contains host information.
 
@@ -2992,7 +3049,9 @@ Contains host information.
   </tbody>
 </table>
 
-#### Os
+### Os
+
+Groups attributes of the operating system running on the host.
 
 <table>
   <thead>
@@ -3016,7 +3075,9 @@ Contains host information.
   </tbody>
 </table>
 
-### Service
+{{% /collapse-content %}}
+
+{{% collapse-content title="Service" level="h3" %}}
 
 <table>
   <thead>
@@ -3045,7 +3106,9 @@ Contains host information.
   </tbody>
 </table>
 
-### Container Image
+{{% /collapse-content %}}
+
+{{% collapse-content title="Container Image" level="h3" %}}
 
 <table>
   <thead>
@@ -3109,11 +3172,9 @@ Contains host information.
   </tbody>
 </table>
 
-## Code context
+{{% /collapse-content %}}
 
-These attributes provide source code context for findings detected in code.
-
-### Git
+{{% collapse-content title="Git" level="h3" %}}
 
 Contains Git metadata linking a finding to source code context. Includes information about the repository, branch, commit, author, and committer.
 
@@ -3179,7 +3240,9 @@ Contains Git metadata linking a finding to source code context. Includes informa
   </tbody>
 </table>
 
-#### Author
+### Author
+
+Contains details about the author of the commit.
 
 <table>
   <thead>
@@ -3208,7 +3271,9 @@ Contains Git metadata linking a finding to source code context. Includes informa
   </tbody>
 </table>
 
-#### Committer
+### Committer
+
+Contains details about the committer.
 
 <table>
   <thead>
@@ -3237,7 +3302,9 @@ Contains Git metadata linking a finding to source code context. Includes informa
   </tbody>
 </table>
 
-### Code Location
+{{% /collapse-content %}}
+
+{{% collapse-content title="Code Location" level="h3" %}}
 
 Groups attributes pinpointing the specific file and line numbers where the finding is located.
 
@@ -3293,7 +3360,9 @@ Groups attributes pinpointing the specific file and line numbers where the findi
   </tbody>
 </table>
 
-### Package
+{{% /collapse-content %}}
+
+{{% collapse-content title="Package" level="h3" %}}
 
 Contains package manager information. A package manager automates the installation, upgrading, configuration, and removal of software packages.
 
@@ -3364,7 +3433,9 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-#### Declaration
+### Declaration
+
+Contains code locations of the package definition.
 
 <table>
   <thead>
@@ -3393,7 +3464,9 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-##### Block
+#### Block
+
+Contains the location of the code that declares the whole dependency declaration.
 
 <table>
   <thead>
@@ -3447,7 +3520,9 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-##### Name
+#### Name
+
+Contains the location of the code that declares the dependency name.
 
 <table>
   <thead>
@@ -3501,7 +3576,9 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-##### Version
+#### Version
+
+Version declared for the root parent.
 
 <table>
   <thead>
@@ -3555,7 +3632,9 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-### Secret
+{{% /collapse-content %}}
+
+{{% collapse-content title="Secret" level="h3" %}}
 
 <table>
   <thead>
@@ -3574,7 +3653,9 @@ Contains package manager information. A package manager automates the installati
   </tbody>
 </table>
 
-### Api Endpoint
+{{% /collapse-content %}}
+
+{{% collapse-content title="Api Endpoint" level="h3" %}}
 
 Contains the HTTP endpoint representation.
 
@@ -3609,6 +3690,8 @@ Contains the HTTP endpoint representation.
     </tr>
   </tbody>
 </table>
+
+{{% /collapse-content %}}
 
 ## Tags
 
