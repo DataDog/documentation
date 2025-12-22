@@ -20,7 +20,7 @@ To make it easier to search for security findings throughout Datadog, the syntax
 - **Standardized naming conventions** for security finding data fields
 - **A new schema** to consistently organize those fields across security products
 
-While this change comes with a set of [new features](#new-features) that use the new schema, it may also impact your existing workflows. This page details what is changing, the workflows that Datadog will automatically update, and the changes you need to make to avoid interruptions in your existing workflows.
+This change comes with a set of [new features](#new-features) that use the new schema, and may also impact your existing workflows. This page details what is changing, the workflows that Datadog automatically updates, and the changes you need to make to avoid interruptions in your existing workflows.
 
 {{< learning-center-callout header="" btn_title="View the schema" btn_url="/security/guide/findings-schema/" hide_image="true" >}}
   View the new security findings schema so you can understand how finding details will be stored.
@@ -29,7 +29,7 @@ While this change comes with a set of [new features](#new-features) that use the
 ### Required action
 
 This change affects all interfaces where you can query security findings data. While some queries will receive automatic updates, others require updates on your part:
-- **No change required** - queries will be updated automatically
+- **No change required** - queries are updated automatically
   - Explorers, dashboards, notification rules, and automation pipelines
 - **Changes required** - update your queries by **April 1, 2026**
   - Workflow Automation and Sheets
@@ -60,7 +60,7 @@ The following additional features will be released later:
 
 ### Security findings
 
-Security findings encompass misconfigurations, vulnerabilities, and security risks identified across your infrastructure and applications. This table shows the scope of security findings across Datadog and which findings will be supported in the new data model.
+Security findings encompass misconfigurations, vulnerabilities, and security risks identified across your infrastructure and applications. This table shows the scope of security findings across Datadog and which findings are supported in the new data model.
 
 <table>
   <thead>
@@ -86,7 +86,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
     </tr>
     <tr>
       <td>Host & container vulnerabilities</td>
-      <td>Will be supported in the future</td>
+      <td>Support coming later</td>
     </tr>
     <tr>
       <td><a href="/security/application_security/"><strong>App & API Protection</strong></a> (Preview)</td>
@@ -100,7 +100,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
     </tr>
     <tr>
       <td>Library vulnerabilities (SCA)</td>
-      <td rowspan="4">Will be supported in the future</td>
+      <td rowspan="4">Support coming later</td>
     </tr>
     <tr>
       <td>Static code vulnerabilities (SAST)</td>
