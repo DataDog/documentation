@@ -179,16 +179,16 @@ These are local variables configured for API tests or defined outside individual
 
 Located at `{{synthetics.attributes.result.variables.config}}`:
 
-`{{synthetics.attributes.result.variables.name}}`
+`{{synthetics.attributes.result.variables.config.name}}`
 : Variable name
 
-`{{synthetics.attributes.result.variables.type}}`
+`{{synthetics.attributes.result.variables.config.type}}`
 : Variable type
 
-`{{synthetics.attributes.result.variables.secure}}`
+`{{synthetics.attributes.result.variables.config.secure}}`
 : Whether the variable value is obfuscated
 
-`{{synthetics.attributes.result.variables.value}}`
+`{{synthetics.attributes.result.variables.config.value}}`
 : Variable value (non-obfuscated only)
 
 **Examples:**
