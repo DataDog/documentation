@@ -2,9 +2,15 @@
 title: Cloud Cost Management
 description: "Use the Cloud Cost Management overlay in Cloudcraft to view resource-level costs and discover savings opportunities directly on your architecture diagrams."
 further_reading:
-- link: "/datadog_cloudcraft/overlays/"
+- link: "/datadog_cloudcraft/overlays/infrastructure/"
   tag: "Documentation"
-  text: "Learn about Cloudcraft overlays"
+  text: "Infrastructure overlay"
+- link: "/datadog_cloudcraft/overlays/observability/"
+  tag: "Documentation"
+  text: "Observability overlay"
+- link: "/datadog_cloudcraft/overlays/security/"
+  tag: "Documentation"
+  text: "Security overlay"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
@@ -56,7 +62,7 @@ Clicking a resource opens a detailed side panel with:
 
 This enables faster, in-context cost optimization without switching views.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_overlay_4.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Recommendations view with savings opportunities highlighted." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_overlay_5.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Recommendations view with savings opportunities highlighted." style="width:100%;" >}}
 
 ## Further reading
 

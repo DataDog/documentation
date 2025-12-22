@@ -2,9 +2,15 @@
 title: Security
 description: "Use the Security overlay in Cloudcraft to identify security exposures, misconfigurations, and vulnerabilities in your architecture."
 further_reading:
-- link: "/datadog_cloudcraft/overlays/"
+- link: "/datadog_cloudcraft/overlays/infrastructure/"
   tag: "Documentation"
-  text: "Learn about Cloudcraft overlays"
+  text: "Infrastructure overlay"
+- link: "/datadog_cloudcraft/overlays/observability/"
+  tag: "Documentation"
+  text: "Observability overlay"
+- link: "/datadog_cloudcraft/overlays/ccm/"
+  tag: "Documentation"
+  text: "Cloud Cost Management overlay"
 - link: "/security/"
   tag: "Documentation"
   text: "Cloud Security"

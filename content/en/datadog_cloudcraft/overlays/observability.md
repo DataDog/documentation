@@ -2,9 +2,15 @@
 title: Observability
 description: "Use the Observability overlay in Cloudcraft to see where the Datadog Agent is installed and which features are enabled per host."
 further_reading:
-- link: "/datadog_cloudcraft/overlays/"
+- link: "/datadog_cloudcraft/overlays/infrastructure/"
   tag: "Documentation"
-  text: "Learn about Cloudcraft overlays"
+  text: "Infrastructure overlay"
+- link: "/datadog_cloudcraft/overlays/security/"
+  tag: "Documentation"
+  text: "Security overlay"
+- link: "/datadog_cloudcraft/overlays/ccm/"
+  tag: "Documentation"
+  text: "Cloud Cost Management overlay"
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
