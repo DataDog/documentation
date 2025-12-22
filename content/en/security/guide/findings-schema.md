@@ -1413,7 +1413,7 @@ User who last modified the assignee.
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.triage.assignee.updated_by.id</code><br>Unique identifier in UUID format of the user who created the pull request.</td>
+      <td><strong>Path:</strong> <code>@workflow.triage.assignee.updated_by.id</code><br>Unique identifier in UUID format of the user who last modified the assignee.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
