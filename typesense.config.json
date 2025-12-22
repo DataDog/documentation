@@ -255,20 +255,22 @@
                 {
                     "name": "docs_alias_view",
                     "search_parameters": {
-                        "query_by": "tags,title,section_header,content",
-                        "query_by_weights": "4,3,2,2",
+                        "query_by": "title,tags,section_header,content",
+                        "query_by_weights": "10,8,4,1",
                         "group_by": "distinct_base_url",
                         "group_limit": 1,
+                        "sort_by": "_text_match:desc,rank:desc,order:asc",
                         "stopwords": "stopwords"
                     }
                 },
                 {
                     "name": "docs_alias_api_view",
                     "search_parameters": {
-                        "sort_by": "rank:asc,_text_match:desc",
-                        "query_by": "tags,content,title,section_header",
+                        "query_by": "title,tags,section_header,content",
+                        "query_by_weights": "10,8,4,1",
                         "group_by": "distinct_base_url",
                         "group_limit": 1,
+                        "sort_by": "rank:asc,_text_match:desc,order:asc",
                         "stopwords": "stopwords"
                     }
                 }
@@ -282,6 +284,7 @@
                     "name": "docs_partners_view",
                     "search_parameters": {
                         "query_by": "title,content",
+                        "query_by_weights": "10,1",
                         "sort_by": "_text_match:desc"
                     }
                 }
