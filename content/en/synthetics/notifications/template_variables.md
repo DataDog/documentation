@@ -52,17 +52,20 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 {{< tabs >}}
 {{% tab "Test Info" %}}
 
-`.test`
-: Info about the test
+`synthetics.attributes.test`
+: The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
 
-`.test.id`
-: Public ID (for example, `abc-def-ghi`)
+`synthetics.attributes.test.name`
+: The name of the test
 
-`.test.type`
+`synthetics.attributes.test.type`
 : Test type (for example, `api`)
 
-`.test.subType`
-: Subtype for API tests (for example, `http`)
+`synthetics.attributes.test.subType`
+: Subtype for API tests (for example, `http`, `dns`, and `multi`)
+
+`synthetics.attributes.test.id`
+: The test ID is the test's public ID (for example, `abc-def-ghi`)
 
 {{% /tab %}}
 {{% tab "Location" %}}
