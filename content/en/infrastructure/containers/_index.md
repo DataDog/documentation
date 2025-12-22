@@ -5,6 +5,9 @@ aliases:
   - /graphing/infrastructure/livecontainers/
   - /infrastructure/livecontainers
 further_reading:
+- link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+  tag: Blog
+  text: Monitor your Kubernetes operators to keep applications running smoothly
 - link: "/infrastructure/livecontainers/configuration"
   tag: "Documentation"
   text: "Configure Containers View"

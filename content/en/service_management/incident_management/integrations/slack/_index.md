@@ -57,7 +57,7 @@ To allow any Slack user in the workspace to declare incidents, enable **Allow Sl
 
 You can configure Incident Management to automatically create a dedicated Slack channel for each incident that meets criteria you define. Your responders can then manage the incident directly in Slack from the incident channel.
 
-To use incident channels, go to [**Incidents** > **Settings** > **Integrations**][3] and enable **Create Slack channels for incidents**.
+To use incident channels, go to **[Incident Response > Incident Management > Settings > Integrations][3]** and enable **Create Slack channels for incidents**.
 
 The **channel name template** you define determines how Datadog names the incident channels it creates. The following variables are available in channel name templates:
 
@@ -116,7 +116,7 @@ Access all configuration options for Slack in Incident Management through the [*
 
 You can configure Incident Management to automatically post updates about incidents to a selected Slack channel. To enable this:
 
-1. In Datadog, navigate to [**Incidents** > **Settings** > **Integrations**][3].
+1. In Datadog, navigate to **[Incident Response > Incident Management > Settings > Integrations][3]**.
 1. In the Slack section, enable **Send all incident updates to a global channel**.
 1. Select the Slack workspace and Slack channel where you want the incident updates to be posted.
 
@@ -151,7 +151,7 @@ You can view the full list of available Slack commands at any time by typing `/d
       <td>List all open (active and stable) incidents.</td>
     </tr>
     <tr>
-      <td rowspan="7">Incident channel commands</td>
+      <td rowspan="9">Incident channel commands</td>
       <td><code>/datadog</code></td>
       <td>Open the incident action tray to perform common actions.</td>
     </tr>
@@ -178,6 +178,14 @@ You can view the full list of available Slack commands at any time by typing `/d
     <tr>
       <td><code>/datadog task list</code></td>
       <td>List existing incident tasks.</td>
+    </tr>
+    <tr>
+      <td><code>/datadog followup</code></td>
+      <td>Create a new follow-up for the incident.</td>
+    </tr>
+    <tr>
+      <td><code>/datadog followup list</code></td>
+      <td>View and manage existing follow-ups for the incident.</td>
     </tr>
   </tbody>
 </table>

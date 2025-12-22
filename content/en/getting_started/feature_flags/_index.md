@@ -2,9 +2,12 @@
 title: Getting Started with Feature Flags
 description: Manage feature delivery with integrated observability, real-time metrics, and OpenFeature-compatible gradual rollouts.
 further_reading:
-- link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
-  tag: 'External Site'
-  text: 'OpenFeature Web SDK documentation'
+- link: '/feature_flags/client/'
+  tag: 'Documentation'
+  text: 'Client-Side SDKs'
+- link: '/feature_flags/server/'
+  tag: 'Documentation'
+  text: 'Server-Side SDKs'
 - link: 'https://www.datadoghq.com/blog/feature-flags/'
   tag: 'Blog'
   text: 'Ship features faster and safer with Datadog Feature Flags'
@@ -32,6 +35,18 @@ Datadog feature flags offer a powerful, integrated way to manage feature deliver
 * **Built for experimentation:** Target specific audiences for A/B tests, roll out features gradually with canary releases, and automatically roll back when regressions are detected.
 
 * **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
+
+## Feature Flags SDKs
+
+This guide uses the JavaScript browser SDK as an example. You can integrate Datadog Feature Flags into any application using one of the following SDKs:
+
+### Client-side SDKs
+
+{{< partial name="feature_flags/feature_flags_client.html" >}}
+
+### Server-side SDKs
+
+{{< partial name="feature_flags/feature_flags_server.html" >}}
 
 ## Configure your environments
 

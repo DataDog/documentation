@@ -22,6 +22,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/'
       tag: 'Blog'
       text: 'Monitor and diagnose network performance issues with SNMP Traps'
+    - link: '/network_monitoring/devices/glossary'
+      tag: 'Doc'
+      text: 'NDM Terms and Concepts'
 algolia:
   tags: ['network device monitoring']
 ---
@@ -38,7 +41,6 @@ Network Device Monitoring (NDM) gives you visibility into your on-premises and v
     {{< nextlink href="network_monitoring/devices/getting_started" >}}<u>Getting Started</u>: Getting started with Network Device Monitoring{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/supported_devices" >}}<u>Supported devices</u>: View supported NDM devices{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/snmp_metrics?tab=snmpv2" >}}<u>SNMP Metrics</u>: Collect SNMP Metrics from your network devices {{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/device_topology_map" >}}<u>Device Topology Map</u>: View your network's physical connections{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/device_profiles/" >}}<u>SNMP Profile Manager</u>: Getting started with device profiles{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/integrations/" >}}<u>Integrations</u>: Supported NDM Integrations{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/config_management/" >}}<u>Configuration Management</u>: Review device configuration changes {{< /nextlink >}}

@@ -3059,11 +3059,24 @@ components:
           description: Metrics query definition.
           example: avg:system.cpu.user{*}
           type: string
+        semantic_mode:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricSemanticMode'
       required:
       - data_source
       - query
       - name
       type: object
+    FormulaAndFunctionMetricSemanticMode:
+      description: Semantic mode for metrics queries. This determines how metrics
+        from different sources are combined or displayed.
+      enum:
+      - combined
+      - native
+      example: combined
+      type: string
+      x-enum-varnames:
+      - COMBINED
+      - NATIVE
     FormulaAndFunctionProcessQueryDataSource:
       description: Data sources that rely on the process backend.
       enum:
@@ -3542,9 +3555,10 @@ components:
             $ref: '#/components/schemas/WidgetCustomLink'
           type: array
         requests:
-          description: 'Array of one request object to display in the widget. The
-            request must contain a `group-by` tag whose value is a country ISO code.
-
+          description: 'Array of request objects to display in the widget. May include
+            an optional request for the region layer and/or an optional request for
+            the points layer. Region layer requests must contain a `group-by` tag
+            whose value is a country ISO code.
 
             See the [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)
 
@@ -3555,7 +3569,7 @@ components:
                 query: <METRIC_1>{<SCOPE_1>}
           items:
             $ref: '#/components/schemas/GeomapWidgetRequest'
-          maxItems: 1
+          maxItems: 2
           minItems: 1
           type: array
         style:
@@ -3613,8 +3627,9 @@ components:
         focus: WORLD
       properties:
         focus:
-          description: The 2-letter ISO code of a country to focus the map on. Or
-            `WORLD`.
+          description: The 2-letter ISO code of a country to focus the map on, or
+            `WORLD` for global view, or a region (`EMEA`, `APAC`, `LATAM`), or a continent
+            (`NORTH_AMERICA`, `SOUTH_AMERICA`, `EUROPE`, `AFRICA`, `ASIA`, `OCEANIA`).
           example: WORLD
           type: string
       required:
@@ -3632,6 +3647,12 @@ components:
             width: full
           items:
             $ref: '#/components/schemas/ListStreamColumn'
+          type: array
+        conditional_formats:
+          description: Threshold (numeric) conditional formatting rules may be used
+            by a regions layer.
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
           type: array
         formulas:
           description: List of formulas that operate on queries.
@@ -3658,6 +3679,23 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         sort:
           $ref: '#/components/schemas/WidgetSortBy'
+        style:
+          $ref: '#/components/schemas/GeomapWidgetRequestStyle'
+        text_formats:
+          description: Text formatting rules may be used by a points layer.
+          items:
+            $ref: '#/components/schemas/TableWidgetTextFormatRule'
+          type: array
+      type: object
+    GeomapWidgetRequestStyle:
+      description: The style to apply to the request for points layer.
+      example:
+        color_by: status
+      properties:
+        color_by:
+          description: The category to color the points by.
+          example: status
+          type: string
       type: object
     GraphSnapshot:
       description: Object representing a graph snapshot.
@@ -4384,6 +4422,7 @@ components:
       - invocations_usage
       - lambda_traced_invocations_usage
       - llm_observability_usage
+      - llm_spans_usage
       - logs_indexed_15day_usage
       - logs_indexed_180day_usage
       - logs_indexed_1day_usage
@@ -4465,6 +4504,7 @@ components:
       - INVOCATIONS_USAGE
       - LAMBDA_TRACED_INVOCATIONS_USAGE
       - LLM_OBSERVABILITY_USAGE
+      - LLM_SPANS_USAGE
       - LOGS_INDEXED_15DAY_USAGE
       - LOGS_INDEXED_180DAY_USAGE
       - LOGS_INDEXED_1DAY_USAGE
@@ -7362,6 +7402,12 @@ components:
     Monitor:
       description: Object describing a monitor.
       properties:
+        assets:
+          description: The list of monitor assets tied to a monitor, which represents
+            key links for users to take action on monitor alerts (for example, runbooks).
+          items:
+            $ref: '#/components/schemas/MonitorAsset'
+          type: array
         created:
           description: Timestamp of the monitor creation.
           format: date-time
@@ -7445,6 +7491,52 @@ components:
       - type
       - query
       type: object
+    MonitorAsset:
+      description: 'Represents key links tied to a monitor to help users take action
+        on alerts.
+
+        This feature is in Preview and only available to users with the feature enabled.'
+      properties:
+        category:
+          $ref: '#/components/schemas/MonitorAssetCategory'
+        name:
+          description: Name for the monitor asset
+          example: Monitor Runbook
+          type: string
+        resource_key:
+          description: Represents the identifier of the internal Datadog resource
+            that this asset represents. IDs in this field should be passed in as strings.
+          example: '12345'
+          type: string
+        resource_type:
+          $ref: '#/components/schemas/MonitorAssetResourceType'
+        url:
+          description: URL link for the asset. For links with an internal resource
+            type set, this should be the relative path to where the Datadog domain
+            is appended internally. For external links, this should be the full URL
+            path.
+          example: /notebooks/12345
+          type: string
+      required:
+      - name
+      - url
+      - category
+      type: object
+    MonitorAssetCategory:
+      description: Indicates the type of asset this entity represents on a monitor.
+      enum:
+      - runbook
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - RUNBOOK
+    MonitorAssetResourceType:
+      description: Type of internal Datadog resource associated with a monitor asset.
+      enum:
+      - notebook
+      type: string
+      x-enum-varnames:
+      - NOTEBOOK
     MonitorDeviceID:
       description: ID of the device the Synthetics monitor is running on. Same as
         `SyntheticsDeviceID`.
@@ -8169,7 +8261,7 @@ components:
           readOnly: true
       type: object
     MonitorSearchResponse:
-      description: The response form a monitor search.
+      description: The response from a monitor search.
       example:
         counts:
           muted:
@@ -8559,6 +8651,13 @@ components:
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
+        assets:
+          description: The list of monitor assets tied to a monitor, which represents
+            key links for users to take action on monitor alerts (for example, runbooks).
+          items:
+            $ref: '#/components/schemas/MonitorAsset'
+          nullable: true
+          type: array
         created:
           description: Timestamp of the monitor creation.
           format: date-time
@@ -8762,6 +8861,8 @@ components:
       - lambda_traced_invocations_percentage
       - llm_observability_usage
       - llm_observability_percentage
+      - llm_spans_usage
+      - llm_spans_percentage
       - mobile_app_testing_percentage
       - mobile_app_testing_usage
       - ndm_netflow_usage
@@ -8919,6 +9020,8 @@ components:
       - LAMBDA_TRACED_INVOCATIONS_PERCENTAGE
       - LLM_OBSERVABILITY_USAGE
       - LLM_OBSERVABILITY_PERCENTAGE
+      - LLM_SPANS_USAGE
+      - LLM_SPANS_PERCENTAGE
       - MOBILE_APP_TESTING_USAGE
       - MOBILE_APP_TESTING_PERCENTAGE
       - NDM_NETFLOW_USAGE
@@ -9337,6 +9440,14 @@ components:
           type: number
         llm_observability_usage:
           description: The LLM Observability usage by tag(s).
+          format: double
+          type: number
+        llm_spans_percentage:
+          description: The percentage of LLM Spans usage by tag(s).
+          format: double
+          type: number
+        llm_spans_usage:
+          description: The LLM Spans usage by tag(s).
           format: double
           type: number
         logs_indexed_15day_percentage:
@@ -21077,6 +21188,11 @@ components:
             for the given date and given organization.
           format: int64
           type: integer
+        cloud_cost_management_oci_host_count_avg:
+          description: Average host count for Cloud Cost Management on OCI for the
+            given date and organization.
+          format: int64
+          type: integer
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
@@ -21309,6 +21425,11 @@ components:
         eph_infra_host_proplus_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proxmox_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         error_tracking_apm_error_events_sum:
@@ -21605,6 +21726,16 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_sum:
+          description: Sum of all Proxmox hosts over all hours in the current date
+            for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_top99p:
+          description: 99th percentile of all Proxmox hosts over all hours in the
+            current date for all organizations.
           format: int64
           type: integer
         published_app_hwm:
@@ -22190,6 +22321,11 @@ components:
             for the given date and given org.
           format: int64
           type: integer
+        cloud_cost_management_oci_host_count_avg:
+          description: Average host count for Cloud Cost Management on OCI for the
+            given date and organization.
+          format: int64
+          type: integer
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
@@ -22428,6 +22564,11 @@ components:
         eph_infra_host_proplus_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proxmox_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current date for the given organization.
           format: int64
           type: integer
         error_tracking_apm_error_events_sum:
@@ -22722,6 +22863,16 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for the given org.
+          format: int64
+          type: integer
+        proxmox_host_sum:
+          description: Sum of all Proxmox hosts over all hours in the current date
+            for the given organization.
+          format: int64
+          type: integer
+        proxmox_host_top99p:
+          description: 99th percentile of all Proxmox hosts over all hours in the
+            current date for the given organization.
           format: int64
           type: integer
         public_id:
@@ -23313,6 +23464,11 @@ components:
             all cloud providers.
           format: int64
           type: integer
+        cloud_cost_management_oci_host_count_avg_sum:
+          description: Sum of the average host counts for Cloud Cost Management on
+            OCI.
+          format: int64
+          type: integer
         cloud_siem_events_agg_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current month for all organizations.
@@ -23552,6 +23708,11 @@ components:
         eph_infra_host_proplus_agg_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_proxmox_agg_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         error_tracking_apm_error_events_agg_sum:
@@ -23869,6 +24030,16 @@ components:
           type: integer
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_agg_sum:
+          description: Sum of all Proxmox hosts over all hours in the current month
+            for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_top99p_sum:
+          description: Sum of the 99th percentile of all Proxmox hosts over all hours
             in the current month for all organizations.
           format: int64
           type: integer
@@ -32267,6 +32438,13 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: If this argument is set to `true`, the returned data includes
+          all assets tied to this monitor.
+        in: query
+        name: with_assets
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -37604,7 +37782,10 @@ paths:
         code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
-        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\nThe
+        following values have been **deprecated**:\n    `estimated_indexed_spans_usage`,
+        `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`,
+        `llm_observability_usage`, `llm_observability_percentage`."
       operationId: GetHourlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -38191,7 +38372,7 @@ paths:
           The following values have been **deprecated**:
 
           `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
-          `estimated_ingested_spans_percentage`.'
+          `estimated_ingested_spans_percentage`, `llm_observability_usage`, `llm_observability_percentage`.'
         in: query
         name: fields
         required: true

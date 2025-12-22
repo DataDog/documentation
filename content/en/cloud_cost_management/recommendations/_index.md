@@ -1,6 +1,8 @@
 ---
 title: Cloud Cost Recommendations
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
+aliases:
+    - /cloud_cost_management/recommendations/savings
 algolia:
   tags:
     - cloud cost recommendations
@@ -43,57 +45,51 @@ multifiltersearch:
     - name: Recommendation Prerequisites
       id: recommendation_prerequisites
   data:
-    - category: Downsize
-      cloud_provider: AWS
-      resource_type: Autoscaling Group
-      recommendation_type: Downsize Autoscaling Group
-      recommendation_description: An autoscaling group with less than 5% CPU and 10% memory usage.
-      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Migrate
       cloud_provider: AWS
-      resource_type: Autoscaling Group
-      recommendation_type: Migrate Legacy Autoscaling Group instances to new types
-      recommendation_description: An autoscaling group that includes legacy instance types.
+      resource_type: Auto Scaling Group
+      recommendation_type: Migrate ASG Legacy Instances
+      recommendation_description: An Auto Scaling group that includes legacy instance types.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: Auto Scaling Group
+      recommendation_type: Reduce Minimum Capacity
+      recommendation_description: An Auto Scaling group with a minimum capacity of instances that can be reduced.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: CloudTrail Trail
+      recommendation_type: Delete unnecessary CloudTrail trails
+      recommendation_description: CloudTrail trails with paid events can be deleted to reduce costs.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: Cloudtrail Trail
-      recommendation_type: Delete unnecessary Cloudtrail Trails
-      recommendation_description: More than the necessary number of Cloudtrails Trails are active on an account.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: CloudWatch Logs
-      recommendation_type: Delete Lambda Cloudwatch Logs and write permissions
-      recommendation_description: Lambda function that can have write CloudWatch Logs permissions removed.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: DynamoDB
+      resource_type: DynamoDB Table
       recommendation_type: Delete DynamoDB Global Secondary Index
       recommendation_description: A DynamoDB table's Global Secondary Index (GSI) has 0 consumed reads.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: DynamoDB
+      resource_type: DynamoDB Table
       recommendation_type: Delete DynamoDB Table
       recommendation_description: A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: DynamoDB
+      resource_type: DynamoDB Table
       recommendation_type: Delete Extra On-Demand Backups
       recommendation_description: A DynamoDB table has charges for more than 2 on-demand backups.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
-      resource_type: DynamoDB
+      resource_type: DynamoDB Table
       recommendation_type: Downsize DynamoDB Capacity
       recommendation_description: A provisioned DynamoDB table using less than 80% of its read and write capacity more than 80% of the time.
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
-      resource_type: DynamoDB
+      resource_type: DynamoDB Table
       recommendation_type: Migrate DynamoDB to Infrequent Access Table Class
       recommendation_description: Migrating to the Infrequent Access (IA) table class offers more potential savings from storage rates compared to the additional costs from capacity rates.
       recommendation_prerequisites: ""
@@ -114,6 +110,12 @@ multifiltersearch:
       resource_type: DynamoDB Table
       recommendation_type: Migrate DynamoDB to Standard Table Class
       recommendation_description: Migrating to the Standard table class offers potential savings from capacity rates compared to the additional costs from storage rates, or it uses the Standard table class' free tier for storage.
+      recommendation_prerequisites: ""
+    - category: Purchase
+      cloud_provider: AWS
+      resource_type: DynamoDB Table
+      recommendation_type: Purchase Reserved Capacity
+      recommendation_description: Purchase reserved capacity for stable provisioned capacity units charged at standard rates.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -172,69 +174,33 @@ multifiltersearch:
     - category: Downsize
       cloud_provider: AWS
       resource_type: EC2 Instance
-      recommendation_type: Downsize EC2 Instance Running Memcached
-      recommendation_description: EC2 instance running memcached with less than 25% user CPU and is not containerized.
-      recommendation_prerequisites: '[Memcache Integration](/integrations/memcached)'
-    - category: Downsize
-      cloud_provider: AWS
-      resource_type: EC2 Instance
-      recommendation_type: Downsize EC2 Instance Running MySQL
-      recommendation_description: EC2 instance running MySQL with less than 25% user CPU and greater than 25% usable memory and is not containerized nor a replica.
-      recommendation_prerequisites: '[MySQL Integration](/integrations/mysql)'
-    - category: Downsize
-      cloud_provider: AWS
-      resource_type: EC2 Instance
-      recommendation_type: Downsize EC2 Instance Running Postgres
-      recommendation_description: EC2 instance running Postgres with less than 25% user CPU and greater than 25% usable memory and is not containerized nor a replica.
-      recommendation_prerequisites: '[Postgres Integration](/integrations/postgres)'
-    - category: Downsize
-      cloud_provider: AWS
-      resource_type: EC2 Instance
-      recommendation_type: Downsize EC2 Instance Running Redis
-      recommendation_description: EC2 instance running Redis with less than 25% user CPU and is not containerized, a leader, a follower, nor a shard.
-      recommendation_prerequisites: '[Redis Integration](/integrations/redis)'
-    - category: Downsize
-      cloud_provider: AWS
-      resource_type: EC2 Instance
-      recommendation_type: Downsize EC2 instance
-      recommendation_description: EC2 instances with less than 50% CPU utilization and less than 50% memory utilization.
+      recommendation_type: Downsize EC2 Instance
+      recommendation_description: EC2 instances with CPU and memory utilization less than the available resources of the next smallest instance in the family. Without the Datadog Agent, this recommendation is generated using CloudWatch metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Migrate
       cloud_provider: AWS
       resource_type: EC2 Instance
-      recommendation_type: Migrate Legacy EC2 instance
-      recommendation_description: EC2 instances that are of a previous generation and can be upgraded to a newer instance type.
+      recommendation_type: Migrate EC2 Instance
+      recommendation_description: EC2 Instances of a previous generation that can be upgraded to a newer instance type.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: AWS
+      resource_type: EC2 Instance
+      recommendation_type: Migrate EC2 Instance to Graviton Type
+      recommendation_description: EC2 Instances that can be migrated to an equivalent Graviton instance type.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: EC2 Instance
+      recommendation_type: Terminate EC2 Instance
+      recommendation_description: EC2 instances with CPU and memory utilization under a customizable threshold. Without the Datadog Agent, this recommendation is generated using CloudWatch metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: AWS
       resource_type: EC2 Instance
-      recommendation_type: Terminate EC2 Instance running MySQL
-      recommendation_description: EC2 instance running MySQL with less than 1 concurrent connection and is not containerized nor a replica.
-      recommendation_prerequisites: '[MySQL Integration](/integrations/mysql)'
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: EC2 Instance
-      recommendation_type: Terminate EC2 instance
-      recommendation_description: EC2 instances with less than 5% CPU utilization and less than 10% memory utilization.
+      recommendation_type: Terminate EC2 Instance with Stuck Node
+      recommendation_description: EC2 instances hosting Kubernetes nodes that are stuck in the pending phase, indicating the node is not functioning properly.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: EC2 Instance
-      recommendation_type: Terminate EC2 instance running Memcached
-      recommendation_description: EC2 instance running Memcached with 0 keyspace hits and is not containerized.
-      recommendation_prerequisites: '[Memcache Integration](/integrations/memcached)'
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: EC2 Instance
-      recommendation_type: Terminate EC2 instance running Postgres
-      recommendation_description: EC2 instance running Postgres with less than 1 concurrent connection and is not containerized nor a replica.
-      recommendation_prerequisites: '[Postgres Integration](/integrations/postgres)'
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: EC2 Instance
-      recommendation_type: Terminate EC2 instance running Redis
-      recommendation_description: EC2 instance running Redis with 0 keyspace hits and is not containerized, a leader, a follower, nor a shard.
-      recommendation_prerequisites: '[Redis Integration](/integrations/redis)'
     - category: Terminate
       cloud_provider: AWS
       resource_type: ECR Repository
@@ -267,12 +233,6 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: Lambda
-      recommendation_type: Downsize Lambda Function Provisioned Concurrency
-      recommendation_description: AWS Lambda function with over-allocated provisioned concurrency.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
       resource_type: Classic Load Balancer
       recommendation_type: Terminate Classic Load Balancer
       recommendation_description: Classic Elastic Load Balancer with no active connections that is not attached to an EC2 instance.
@@ -288,6 +248,18 @@ multifiltersearch:
       resource_type: Network Load Balancer
       recommendation_type: Terminate Network Load Balancer
       recommendation_description: A network load balancer with 0 processed bytes.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: Lambda
+      recommendation_type: Downsize Lambda Provisioned Concurrency
+      recommendation_description: AWS Lambda function with over-allocated provisioned concurrency.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: CloudWatch Logs
+      recommendation_type: Delete Lambda CloudWatch Logs and write permissions
+      recommendation_description: Remove write permissions for Lambda CloudWatch Logs to prevent further unnecessary logging.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -312,6 +284,12 @@ multifiltersearch:
       resource_type: RDS Instance
       recommendation_type: Downsize RDS Instance Provisioned IOPS
       recommendation_description: RDS instances using less than 80% of provisioned IOPS over the past two weeks.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: AWS
+      resource_type: RDS Instance
+      recommendation_type: Migrate RDS Instance to Graviton
+      recommendation_description: RDS Instances that can be migrated to an equivalent Graviton instance type.
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
@@ -537,6 +515,12 @@ multifiltersearch:
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: GCP
+      resource_type: Compute Instance Group
+      recommendation_type: Reduce Minimum Capacity
+      recommendation_description: A Compute Instance Group Autoscaler with a minimum capacity of instances that can be reduced.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: GCP
       resource_type: CloudSQL Instance
       recommendation_type: Downsize CloudSQL Database
       recommendation_description: CloudSQL instances that are over-provisioned and can be downsized.
@@ -565,6 +549,24 @@ multifiltersearch:
       recommendation_type: Transition Cloud Storage Bucket to Autoclass
       recommendation_description: Objects in the storage bucket can be automatically migrated to archival tiers for better rates.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: Kubernetes Cluster
+      recommendation_type: Reduce Cluster Idle
+      recommendation_description: Kubernetes clusters with high CPU or memory cluster idle.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: Kubernetes Cluster
+      recommendation_type: Reduce Cluster Idle
+      recommendation_description: Kubernetes clusters with high CPU or memory cluster idle.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Downsize
+      cloud_provider: GCP
+      resource_type: Kubernetes Cluster
+      recommendation_type: Reduce Cluster Idle
+      recommendation_description: Kubernetes clusters with high CPU or memory cluster idle.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: AWS
       resource_type: Kubernetes Deployment
@@ -638,14 +640,20 @@ For each cloud account that you would like to receive recommendations for:
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
 
 ## Recommendation action-taking
-You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking options:
+You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
 
 - **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the "Active Recommendations" list and clicking "Create Jira issue." Created issues are tagged and link back to the recommendation in Datadog.
 
   To filter recommendations by Jira status, use the following query options:
   - `@jira_issues.issue_key:*` - Show only recommendations with a Jira issue
-  - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue  
+  - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
+
+- **Bits AI Dev Agent code fixes**: Code fixes are available for all S3 recommendations. In these situations, the Bits AI Dev Agent (in Preview) creates production-ready pull requests to implement cloud resource changes and cost optimizations. Join the Preview and [set up the Bits AI Dev Agent][13] to use this feature.
+
+  {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
+  Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+  {{< /callout >}}
 
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations.
@@ -669,5 +677,6 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [8]: https://app.datadoghq.com/integrations/azure
 [9]: /integrations/azure/
 [10]: https://app.datadoghq.com/integrations/gcp
-[11]: /cloud_cost_management/tags/tag_pipelines/
+[11]: /cloud_cost_management/allocation/tag_pipelines/
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized
+[13]: /bits_ai/bits_ai_dev_agent/setup

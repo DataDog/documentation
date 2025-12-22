@@ -1482,6 +1482,8 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
+        ccm_config:
+          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1547,6 +1549,8 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
+        ccm_config:
+          $ref: '#/components/schemas/AWSCCMConfig'
         created_at:
           description: Timestamp of when the account integration was created.
           format: date-time
@@ -1620,6 +1624,8 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
+        ccm_config:
+          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1750,6 +1756,15 @@ components:
           type: string
       required:
       - role_name
+      type: object
+    AWSCCMConfig:
+      description: AWS Cloud Cost Management config.
+      properties:
+        data_export_configs:
+          description: List of data export configurations for Cost and Usage Reports.
+          items:
+            $ref: '#/components/schemas/DataExportConfig'
+          type: array
       type: object
     AWSCredentials:
       description: The definition of `AWSCredentials` object.
@@ -5256,6 +5271,79 @@ components:
           example: _latest
           type: string
       type: object
+    AttachCaseRequest:
+      description: Request for attaching security findings to a case.
+      properties:
+        data:
+          $ref: '#/components/schemas/AttachCaseRequestData'
+      type: object
+    AttachCaseRequestData:
+      description: Data of the case to attach security findings to.
+      properties:
+        id:
+          description: Unique identifier of the case.
+          example: c1234567-89ab-cdef-0123-456789abcdef
+          type: string
+        relationships:
+          $ref: '#/components/schemas/AttachCaseRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/CaseDataType'
+      required:
+      - type
+      - id
+      type: object
+    AttachCaseRequestDataRelationships:
+      description: Relationships of the case to attach security findings to.
+      properties:
+        findings:
+          $ref: '#/components/schemas/Findings'
+          description: Security findings to attach to the case.
+      required:
+      - findings
+      type: object
+    AttachJiraIssueRequest:
+      description: Request for attaching security findings to a Jira issue.
+      properties:
+        data:
+          $ref: '#/components/schemas/AttachJiraIssueRequestData'
+      type: object
+    AttachJiraIssueRequestData:
+      description: Data of the Jira issue to attach security findings to.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AttachJiraIssueRequestDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/AttachJiraIssueRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/JiraIssuesDataType'
+      required:
+      - type
+      type: object
+    AttachJiraIssueRequestDataAttributes:
+      description: Attributes of the Jira issue to attach security findings to.
+      properties:
+        jira_issue_url:
+          description: URL of the Jira issue to attach security findings to.
+          example: https://domain.atlassian.net/browse/PROJ-123
+          type: string
+      required:
+      - jira_issue_url
+      type: object
+    AttachJiraIssueRequestDataRelationships:
+      description: Relationships of the Jira issue to attach security findings to.
+      properties:
+        findings:
+          $ref: '#/components/schemas/Findings'
+          description: Security findings to attach to the Jira issue.
+        project:
+          $ref: '#/components/schemas/CaseManagementProject'
+          description: Case management project with Jira integration configured. It
+            is used to attach security findings to the Jira issue. To configure the
+            integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
+      required:
+      - findings
+      - project
+      type: object
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -6812,6 +6900,72 @@ components:
           type: array
       required:
       - data
+      type: object
+    BatchDeleteRowsRequestArray:
+      description: The request body for deleting multiple rows from a reference table.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BatchDeleteRowsRequestData'
+          maxItems: 200
+          type: array
+      required:
+      - data
+      type: object
+    BatchDeleteRowsRequestData:
+      description: Row resource containing a single row identifier for deletion.
+      properties:
+        id:
+          example: primary_key_value
+          type: string
+        type:
+          $ref: '#/components/schemas/TableRowResourceDataType'
+      required:
+      - type
+      - id
+      type: object
+    BatchUpsertRowsRequestArray:
+      description: The request body for creating or updating multiple rows into a
+        reference table.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BatchUpsertRowsRequestData'
+          maxItems: 200
+          type: array
+      required:
+      - data
+      type: object
+    BatchUpsertRowsRequestData:
+      description: Row resource containing a single row identifier and its column
+        values.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BatchUpsertRowsRequestDataAttributes'
+        id:
+          example: primary_key_value
+          type: string
+        type:
+          $ref: '#/components/schemas/TableRowResourceDataType'
+      required:
+      - type
+      - id
+      type: object
+    BatchUpsertRowsRequestDataAttributes:
+      description: Attributes containing row data values for row creation or update
+        operations.
+      properties:
+        values:
+          additionalProperties:
+            x-required-field: true
+          description: Key-value pairs representing row data, where keys are field
+            names from the schema.
+          example:
+            example_key_value: primary_key_value
+            name: row_name
+          type: object
+      required:
+      - values
       type: object
     BillConfig:
       description: Bill config.
@@ -8920,6 +9074,15 @@ components:
       required:
       - data
       type: object
+    CaseDataType:
+      default: cases
+      description: Cases resource type.
+      enum:
+      - cases
+      example: cases
+      type: string
+      x-enum-varnames:
+      - CASES
     CaseEmpty:
       description: Case empty request data
       properties:
@@ -8936,6 +9099,53 @@ components:
       required:
       - data
       type: object
+    CaseInsightsItems:
+      description: An insight of the case.
+      properties:
+        ref:
+          description: Reference of the insight.
+          example: /security/appsec/vm/library/vulnerability/dfa027f7c037b2f77159adc027fecb56?detection=static
+          type: string
+        resource_id:
+          description: Unique identifier of the resource. For example, the unique
+            identifier of a security finding.
+          example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
+          type: string
+        type:
+          description: Type of the resource. For example, the type of a security finding
+            is "SECURITY_FINDING".
+          example: SECURITY_FINDING
+          type: string
+      type: object
+    CaseManagementProject:
+      description: Case management project.
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseManagementProjectData'
+      required:
+      - data
+      type: object
+    CaseManagementProjectData:
+      properties:
+        id:
+          description: Unique identifier of the case management project.
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/CaseManagementProjectDataType'
+      required:
+      - type
+      - id
+      type: object
+    CaseManagementProjectDataType:
+      default: projects
+      description: Projects resource type.
+      enum:
+      - projects
+      example: projects
+      type: string
+      x-enum-varnames:
+      - PROJECTS
     CaseObjectAttributes:
       additionalProperties:
         items:
@@ -10026,6 +10236,10 @@ components:
           description: Whether the policy is pinned
           example: false
           type: boolean
+        policyType:
+          description: The type of the policy
+          example: policy
+          type: string
         policyVersion:
           description: The version of the policy
           example: '1'
@@ -10204,11 +10418,11 @@ components:
     CloudWorkloadSecurityAgentPolicyVersion:
       description: The versions of the policy
       properties:
-        Date:
+        date:
           description: The date and time the version was created
           nullable: true
           type: string
-        Name:
+        name:
           description: The version of the policy
           example: 1.47.0-rc2
           type: string
@@ -10235,8 +10449,11 @@ components:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet'
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
-      additionalProperties: {}
-      description: An empty object indicating the hash action
+      description: Hash file specified by the field attribute
+      properties:
+        field:
+          description: The field of the hash action
+          type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
       description: The metadata action applied on the scope matching the rule
@@ -10284,9 +10501,14 @@ components:
           format: int64
           type: integer
         value:
-          description: The value of the set action
-          type: string
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActionSetValue'
       type: object
+    CloudWorkloadSecurityAgentRuleActionSetValue:
+      description: The value of the set action
+      oneOf:
+      - type: string
+      - type: integer
+      - type: boolean
     CloudWorkloadSecurityAgentRuleActions:
       description: The array of actions the rule can perform if triggered
       items:
@@ -11226,6 +11448,76 @@ components:
       required:
       - type
       type: object
+    ConfiguredSchedule:
+      description: Full resource representation of a configured schedule target with
+        position (previous, current, or next).
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetAttributes'
+        id:
+          description: Specifies the unique identifier of the configured schedule
+            target.
+          example: 00000000-aba1-0000-0000-000000000000_previous
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetRelationships'
+        type:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetType'
+      required:
+      - type
+      - id
+      - attributes
+      - relationships
+      type: object
+    ConfiguredScheduleTarget:
+      description: Relationship reference to a configured schedule target.
+      properties:
+        id:
+          description: Specifies the unique identifier of the configured schedule
+            target.
+          example: 00000000-aba1-0000-0000-000000000000_previous
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetType'
+      required:
+      - type
+      - id
+      type: object
+    ConfiguredScheduleTargetAttributes:
+      description: Attributes for a configured schedule target, including position.
+      example:
+        position: previous
+      properties:
+        position:
+          $ref: '#/components/schemas/ScheduleTargetPosition'
+      required:
+      - position
+      type: object
+    ConfiguredScheduleTargetRelationships:
+      description: Represents the relationships of a configured schedule target.
+      properties:
+        schedule:
+          $ref: '#/components/schemas/ConfiguredScheduleTargetRelationshipsSchedule'
+      required:
+      - schedule
+      type: object
+    ConfiguredScheduleTargetRelationshipsSchedule:
+      description: Holds the schedule reference for a configured schedule target.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleTarget'
+      required:
+      - data
+      type: object
+    ConfiguredScheduleTargetType:
+      default: schedule_target
+      description: Indicates that the resource is of type `schedule_target`.
+      enum:
+      - schedule_target
+      example: schedule_target
+      type: string
+      x-enum-varnames:
+      - SCHEDULE_TARGET
     ConfluentAccountCreateRequest:
       description: Payload schema when adding a Confluent account.
       properties:
@@ -12580,6 +12872,64 @@ components:
       required:
       - type
       type: object
+    CreateCaseRequestArray:
+      description: List of requests to create cases for security findings.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CreateCaseRequestData'
+          type: array
+      required:
+      - data
+      type: object
+    CreateCaseRequestData:
+      description: Data of the case to create.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateCaseRequestDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/CreateCaseRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/CaseDataType'
+      required:
+      - type
+      type: object
+    CreateCaseRequestDataAttributes:
+      description: Attributes of the case to create.
+      properties:
+        assignee_id:
+          description: Unique identifier of the user assigned to the case.
+          example: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
+          type: string
+        description:
+          description: Description of the case. If not provided, the description will
+            be automatically generated.
+          example: A description of the case.
+          type: string
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+          description: Priority of the case. If not provided, the priority will be
+            automatically set to "NOT_DEFINED".
+          example: P4
+        title:
+          description: Title of the case. If not provided, the title will be automatically
+            generated.
+          example: A title for the case.
+          type: string
+      type: object
+    CreateCaseRequestDataRelationships:
+      description: Relationships of the case to create.
+      properties:
+        findings:
+          $ref: '#/components/schemas/Findings'
+          description: Security findings to create a case for.
+        project:
+          $ref: '#/components/schemas/CaseManagementProject'
+          description: Case management project in which the case will be created.
+      required:
+      - findings
+      - project
+      type: object
     CreateConnectionRequest:
       example:
         data:
@@ -12764,6 +13114,27 @@ components:
       - options
       - type
       type: object
+    CreateEmailNotificationChannelConfig:
+      description: Configuration to create an e-mail notification channel
+      properties:
+        address:
+          description: The e-mail address to be notified
+          example: ''
+          type: string
+        formats:
+          description: Preferred content formats for notifications.
+          example:
+          - html
+          items:
+            $ref: '#/components/schemas/NotificationChannelEmailFormatType'
+          type: array
+        type:
+          $ref: '#/components/schemas/NotificationChannelEmailConfigType'
+      required:
+      - type
+      - address
+      - formats
+      type: object
     CreateIncidentNotificationRuleRequest:
       description: Create request for a notification rule.
       properties:
@@ -12779,6 +13150,100 @@ components:
           $ref: '#/components/schemas/IncidentNotificationTemplateCreateData'
       required:
       - data
+      type: object
+    CreateJiraIssueRequestArray:
+      description: List of requests to create Jira issues for security findings.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CreateJiraIssueRequestData'
+          type: array
+      required:
+      - data
+      type: object
+    CreateJiraIssueRequestData:
+      description: Data of the Jira issue to create.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateJiraIssueRequestDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/CreateJiraIssueRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/JiraIssuesDataType'
+      required:
+      - type
+      type: object
+    CreateJiraIssueRequestDataAttributes:
+      description: Attributes of the Jira issue to create.
+      properties:
+        assignee_id:
+          description: Unique identifier of the user assigned to the Jira issue.
+          example: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
+          type: string
+        description:
+          description: Description of the Jira issue. If not provided, the description
+            will be automatically generated.
+          example: A description of the Jira issue.
+          type: string
+        fields:
+          additionalProperties: {}
+          description: Custom fields of the Jira issue to create. For the list of
+            available fields, see [Jira documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-createmeta-projectidorkey-issuetypes-issuetypeid-get).
+          example:
+            key1: value
+            key2:
+            - value
+            key3:
+              key4: value
+          type: object
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+          description: Priority of the Jira issue. If not provided, the priority will
+            be automatically set to "NOT_DEFINED".
+          example: P4
+        title:
+          description: Title of the Jira issue. If not provided, the title will be
+            automatically generated.
+          example: A title for the Jira issue.
+          type: string
+      type: object
+    CreateJiraIssueRequestDataRelationships:
+      description: Relationships of the Jira issue to create.
+      properties:
+        findings:
+          $ref: '#/components/schemas/Findings'
+          description: Security findings to create a Jira issue for.
+        project:
+          $ref: '#/components/schemas/CaseManagementProject'
+          description: Case management project configured with the Jira integration.
+            It is used to create the Jira issue. To configure the Jira integration,
+            see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
+      required:
+      - findings
+      - project
+      type: object
+    CreateNotificationChannelAttributes:
+      description: Attributes for creating an on-call notification channel.
+      properties:
+        config:
+          $ref: '#/components/schemas/CreateNotificationChannelConfig'
+          description: Notification channel configuration
+      type: object
+    CreateNotificationChannelConfig:
+      description: Defines the configuration for creating an On-Call notification
+        channel
+      oneOf:
+      - $ref: '#/components/schemas/CreatePhoneNotificationChannelConfig'
+      - $ref: '#/components/schemas/CreateEmailNotificationChannelConfig'
+    CreateNotificationChannelData:
+      description: Data for creating an on-call notification channel
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateNotificationChannelAttributes'
+        type:
+          $ref: '#/components/schemas/NotificationChannelType'
+      required:
+      - type
       type: object
     CreateNotificationRuleParameters:
       description: Body of the notification rule create request.
@@ -12940,6 +13405,19 @@ components:
       type: string
       x-enum-varnames:
       - PAGES
+    CreatePhoneNotificationChannelConfig:
+      description: Configuration to create a phone notification channel
+      properties:
+        number:
+          description: The E-164 formatted phone number (e.g. +3371234567)
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelPhoneConfigType'
+      required:
+      - type
+      - number
+      type: object
     CreateRuleRequest:
       description: Scorecard create rule request.
       properties:
@@ -13506,6 +13984,23 @@ components:
       type: string
       x-enum-varnames:
       - UPLOAD
+    CreateUserNotificationChannelRequest:
+      description: A top-level wrapper for creating a notification channel for a user
+      example:
+        data:
+          attributes:
+            config:
+              address: foo@bar.com
+              formats:
+              - html
+              type: email
+          type: notification_channels
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateNotificationChannelData'
+      required:
+      - data
+      type: object
     CreateWorkflowRequest:
       description: A request object for creating a new workflow.
       example:
@@ -15334,6 +15829,15 @@ components:
       type: object
     DORAListDeploymentsRequest:
       description: Request to get a list of deployments.
+      example:
+        data:
+          attributes:
+            from: '2025-01-01T00:00:00Z'
+            limit: 100
+            query: service:(shopist OR api-service) env:production team:backend
+            sort: -started_at
+            to: '2025-01-31T23:59:59Z'
+          type: dora_deployments_list_request
       properties:
         data:
           $ref: '#/components/schemas/DORAListDeploymentsRequestData'
@@ -15342,6 +15846,13 @@ components:
       type: object
     DORAListDeploymentsRequestAttributes:
       description: Attributes to get a list of deployments.
+      example:
+        from: '2025-01-01T00:00:00Z'
+        limit: 500
+        query: service:(shopist OR api-service OR payment-service) env:(production
+          OR staging) team:(backend OR platform)
+        sort: -started_at
+        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
@@ -15366,6 +15877,14 @@ components:
       type: object
     DORAListDeploymentsRequestData:
       description: The JSON:API data.
+      example:
+        attributes:
+          from: '2025-01-15T08:00:00Z'
+          limit: 200
+          query: env:production service:payment-service version:*v2*
+          sort: -finished_at
+          to: '2025-01-15T18:00:00Z'
+        type: dora_deployments_list_request
       properties:
         attributes:
           $ref: '#/components/schemas/DORAListDeploymentsRequestAttributes'
@@ -15383,6 +15902,15 @@ components:
       - DORA_DEPLOYMENTS_LIST_REQUEST
     DORAListFailuresRequest:
       description: Request to get a list of failures.
+      example:
+        data:
+          attributes:
+            from: '2025-01-01T00:00:00Z'
+            limit: 100
+            query: severity:(SEV-1 OR SEV-2) env:production team:backend
+            sort: -started_at
+            to: '2025-01-31T23:59:59Z'
+          type: dora_failures_list_request
       properties:
         data:
           $ref: '#/components/schemas/DORAListFailuresRequestData'
@@ -15391,6 +15919,13 @@ components:
       type: object
     DORAListFailuresRequestAttributes:
       description: Attributes to get a list of failures.
+      example:
+        from: '2025-01-01T00:00:00Z'
+        limit: 500
+        query: severity:(SEV-1 OR SEV-2) env:(production OR staging) service:(shopist
+          OR api-service OR payment-service) team:(backend OR platform OR payments)
+        sort: -started_at
+        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
@@ -15415,6 +15950,14 @@ components:
       type: object
     DORAListFailuresRequestData:
       description: The JSON:API data.
+      example:
+        attributes:
+          from: '2025-01-15T00:00:00Z'
+          limit: 200
+          query: severity:SEV-1 service:(api-service OR payment-service) env:production
+          sort: -finished_at
+          to: '2025-01-15T23:59:59Z'
+        type: dora_failures_list_request
       properties:
         attributes:
           $ref: '#/components/schemas/DORAListFailuresRequestAttributes'
@@ -15432,6 +15975,39 @@ components:
       - DORA_FAILURES_LIST_REQUEST
     DORAListResponse:
       description: Response for the DORA list endpoints.
+      example:
+        data:
+        - attributes:
+            custom_tags:
+            - language:java
+            - department:engineering
+            - region:us-east-1
+            env: production
+            finished_at: 1693491984000000000
+            git:
+              commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+              repository_url: https://github.com/organization/example-repository
+            service: shopist
+            started_at: 1693491974000000000
+            team: backend
+            version: v1.12.07
+          id: 4242fcdd31586083
+          type: dora_deployment
+        - attributes:
+            custom_tags:
+            - language:go
+            - department:platform
+            env: production
+            finished_at: 1693492084000000000
+            git:
+              commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
+              repository_url: https://github.com/organization/api-service
+            service: api-service
+            started_at: 1693492074000000000
+            team: backend
+            version: v2.1.0
+          id: 4242fcdd31586084
+          type: dora_deployment
       properties:
         data:
           description: The list of DORA events.
@@ -15634,6 +16210,30 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataExportConfig:
+      description: AWS Cost and Usage Report data export configuration.
+      properties:
+        bucket_name:
+          description: Name of the S3 bucket where the Cost and Usage Report is stored.
+          example: billing
+          type: string
+        bucket_region:
+          description: AWS region of the S3 bucket.
+          example: us-east-1
+          type: string
+        report_name:
+          description: Name of the Cost and Usage Report.
+          example: cost-and-usage-report
+          type: string
+        report_prefix:
+          description: S3 prefix where the Cost and Usage Report is stored.
+          example: reports
+          type: string
+        report_type:
+          description: Type of the Cost and Usage Report.
+          example: CUR2.0
+          type: string
+      type: object
     DataRelationshipsTeams:
       description: Associates teams with this schedule in a data structure.
       properties:
@@ -16436,6 +17036,12 @@ components:
       required:
       - id
       type: object
+    DeploymentGateRulesResponse:
+      description: Response for a deployment gate rules.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListDeploymentRuleResponseData'
+      type: object
     DeploymentMetadata:
       description: Metadata object containing the publication creation information.
       properties:
@@ -16633,6 +17239,31 @@ components:
       oneOf:
       - $ref: '#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection'
       - $ref: '#/components/schemas/DeploymentRuleOptionsMonitor'
+    DetachCaseRequest:
+      description: Request for detaching security findings from their case.
+      properties:
+        data:
+          $ref: '#/components/schemas/DetachCaseRequestData'
+      type: object
+    DetachCaseRequestData:
+      description: Data for detaching security findings from their case.
+      properties:
+        relationships:
+          $ref: '#/components/schemas/DetachCaseRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/CaseDataType'
+      required:
+      - type
+      type: object
+    DetachCaseRequestDataRelationships:
+      description: Relationships detaching security findings from their case.
+      properties:
+        findings:
+          $ref: '#/components/schemas/Findings'
+          description: Security findings to detach from their case.
+      required:
+      - findings
+      type: object
     DetailedFinding:
       description: A single finding with with message and resource configuration.
       properties:
@@ -18735,6 +19366,8 @@ components:
                 type: users
               - id: 00000000-aba2-0000-0000-000000000000
                 type: schedules
+              - id: 00000000-aba2-0000-0000-000000000000_previous
+                type: schedule_target
               - id: 00000000-aba3-0000-0000-000000000000
                 type: teams
           type: steps
@@ -18742,6 +19375,15 @@ components:
           type: users
         - id: 00000000-aba2-0000-0000-000000000000
           type: schedules
+        - attributes:
+            position: previous
+          id: 00000000-aba2-0000-0000-000000000000_previous
+          relationships:
+            schedule:
+              data:
+                id: 00000000-aba2-0000-0000-000000000000
+                type: schedules
+          type: schedule_target
         - id: 00000000-aba3-0000-0000-000000000000
           type: teams
       properties:
@@ -18769,7 +19411,10 @@ components:
               targets:
               - id: 00000000-aba1-0000-0000-000000000000
                 type: users
-              - id: 00000000-aba2-0000-0000-000000000000
+              - config:
+                  schedule:
+                    position: previous
+                id: 00000000-aba2-0000-0000-000000000000
                 type: schedules
               - id: 00000000-aba3-0000-0000-000000000000
                 type: teams
@@ -18813,6 +19458,7 @@ components:
         name:
           description: Specifies the name for the new escalation policy.
           example: On-Call Escalation Policy
+          minLength: 1
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -18822,12 +19468,16 @@ components:
           description: Specifies how many times the escalation sequence is retried
             if there is no response.
           format: int64
+          maximum: 10
+          minimum: 0
           type: integer
         steps:
           description: A list of escalation steps, each defining assignment, escalation
             timeout, and targets for the new policy.
           items:
             $ref: '#/components/schemas/EscalationPolicyCreateRequestDataAttributesStepsItems'
+          maxItems: 10
+          minItems: 1
           type: array
       required:
       - name
@@ -18844,6 +19494,8 @@ components:
             step.
           example: 3600
           format: int64
+          maximum: 36000
+          minimum: 60
           type: integer
         targets:
           description: Specifies the collection of escalation targets for this step.
@@ -18895,6 +19547,7 @@ components:
         name:
           description: Specifies the name of the escalation policy.
           example: On-Call Escalation Policy
+          minLength: 1
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -18904,6 +19557,8 @@ components:
           description: Specifies how many times the escalation sequence is retried
             if there is no response.
           format: int64
+          maximum: 10
+          minimum: 0
           type: integer
       required:
       - name
@@ -18966,10 +19621,11 @@ components:
       description: Represents included related resources when retrieving an escalation
         policy, such as teams, steps, or targets.
       oneOf:
-      - $ref: '#/components/schemas/TeamReference'
       - $ref: '#/components/schemas/EscalationPolicyStep'
       - $ref: '#/components/schemas/EscalationPolicyUser'
       - $ref: '#/components/schemas/ScheduleData'
+      - $ref: '#/components/schemas/ConfiguredSchedule'
+      - $ref: '#/components/schemas/TeamReference'
     EscalationPolicyStep:
       description: Represents a single step in an escalation policy, including its
         attributes, relationships, and resource type.
@@ -19017,14 +19673,28 @@ components:
       type: object
     EscalationPolicyStepTarget:
       description: Defines a single escalation target within a step for an escalation
-        policy creation request. Contains `id` and `type`.
+        policy creation request. Contains `id`, `type`, and optional `config`.
       properties:
+        config:
+          $ref: '#/components/schemas/EscalationPolicyStepTargetConfig'
         id:
           description: Specifies the unique identifier for this target.
           example: 00000000-aba1-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/EscalationPolicyStepTargetType'
+      type: object
+    EscalationPolicyStepTargetConfig:
+      description: Configuration for an escalation target, such as schedule position.
+      properties:
+        schedule:
+          $ref: '#/components/schemas/EscalationPolicyStepTargetConfigSchedule'
+      type: object
+    EscalationPolicyStepTargetConfigSchedule:
+      description: Schedule-specific configuration for an escalation target.
+      properties:
+        position:
+          $ref: '#/components/schemas/ScheduleTargetPosition'
       type: object
     EscalationPolicyStepTargetType:
       description: Specifies the type of escalation target (example `users`, `schedules`,
@@ -19106,6 +19776,7 @@ components:
         name:
           description: Specifies the name of the escalation policy.
           example: On-Call Escalation Policy
+          minLength: 1
           type: string
         resolve_page_on_policy_end:
           description: Indicates whether the page is automatically resolved when the
@@ -19115,12 +19786,16 @@ components:
           description: Specifies how many times the escalation sequence is retried
             if there is no response.
           format: int64
+          maximum: 10
+          minimum: 0
           type: integer
         steps:
           description: A list of escalation steps, each defining assignment, escalation
             timeout, and targets.
           items:
             $ref: '#/components/schemas/EscalationPolicyUpdateRequestDataAttributesStepsItems'
+          maxItems: 10
+          minItems: 1
           type: array
       required:
       - name
@@ -19138,6 +19813,8 @@ components:
             step.
           example: 3600
           format: int64
+          maximum: 36000
+          minimum: 60
           type: integer
         id:
           description: Specifies the unique identifier of this step.
@@ -19246,12 +19923,13 @@ components:
       x-enum-varnames:
       - USERS
     EscalationTarget:
-      description: Represents an escalation target, which can be a team, user, or
-        schedule.
+      description: Represents an escalation target, which can be a team, user, schedule,
+        or configured schedule target.
       oneOf:
       - $ref: '#/components/schemas/TeamTarget'
       - $ref: '#/components/schemas/UserTarget'
       - $ref: '#/components/schemas/ScheduleTarget'
+      - $ref: '#/components/schemas/ConfiguredScheduleTarget'
     EscalationTargets:
       description: A list of escalation targets for a step
       properties:
@@ -19511,6 +20189,13 @@ components:
           $ref: '#/components/schemas/EventPayloadAttributes'
         category:
           $ref: '#/components/schemas/EventCategory'
+        host:
+          description: Host name to associate with the event. Any tags associated
+            with the host are also applied to this event. Limited to 255 characters.
+          example: hostname
+          maxLength: 255
+          minLength: 1
+          type: string
         integration_id:
           $ref: '#/components/schemas/EventPayloadIntegrationId'
         message:
@@ -20715,6 +21400,153 @@ components:
         vulnerability_type:
           $ref: '#/components/schemas/FindingVulnerabilityType'
       type: object
+    FindingCaseResponse:
+      description: Case response.
+      properties:
+        data:
+          $ref: '#/components/schemas/FindingCaseResponseData'
+      type: object
+    FindingCaseResponseArray:
+      description: List of case responses.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/FindingCaseResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    FindingCaseResponseData:
+      description: Data of the case.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FindingCaseResponseDataAttributes'
+        id:
+          description: Unique identifier of the case.
+          example: c1234567-89ab-cdef-0123-456789abcdef
+          type: string
+        relationships:
+          $ref: '#/components/schemas/FindingCaseResponseDataRelationships'
+        type:
+          $ref: '#/components/schemas/CaseDataType'
+      required:
+      - type
+      type: object
+    FindingCaseResponseDataAttributes:
+      description: Attributes of the case.
+      properties:
+        archived_at:
+          description: Timestamp of when the case was archived.
+          example: '2025-01-01T00:00:00.000Z'
+          format: date-time
+          type: string
+        assigned_to:
+          $ref: '#/components/schemas/RelationshipToUser'
+          description: User assigned to the case.
+        attributes:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        closed_at:
+          description: Timestamp of when the case was closed.
+          example: '2025-01-01T00:00:00.000Z'
+          format: date-time
+          type: string
+        created_at:
+          description: Timestamp of when the case was created.
+          example: '2025-01-01T00:00:00.000Z'
+          format: date-time
+          type: string
+        creation_source:
+          description: Source of the case creation.
+          example: CS_SECURITY_FINDING
+          type: string
+        description:
+          description: Description of the case.
+          example: A description of the case.
+          type: string
+        due_date:
+          description: Due date of the case.
+          example: '2025-01-01'
+          type: string
+        insights:
+          description: Insights of the case.
+          items:
+            $ref: '#/components/schemas/CaseInsightsItems'
+          type: array
+        jira_issue:
+          $ref: '#/components/schemas/FindingJiraIssue'
+          description: Jira issue associated with the case.
+        key:
+          description: Key of the case.
+          example: PROJ-123
+          type: string
+        modified_at:
+          description: Timestamp of when the case was last modified.
+          example: '2025-01-01T00:00:00.000Z'
+          format: date-time
+          type: string
+        priority:
+          description: Priority of the case.
+          example: P4
+          type: string
+        status:
+          description: Status of the case.
+          example: OPEN
+          type: string
+        status_group:
+          description: Status group of the case.
+          example: SG_OPEN
+          type: string
+        status_name:
+          description: Status name of the case.
+          example: Open
+          type: string
+        title:
+          description: Title of the case.
+          example: A title for the case.
+          type: string
+        type:
+          description: Type of the case. For security cases, this is always "SECURITY".
+          example: SECURITY
+          type: string
+      type: object
+    FindingCaseResponseDataRelationships:
+      description: Relationships of the case.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+          description: User who created the case.
+        modified_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+          description: User who last modified the case.
+        project:
+          $ref: '#/components/schemas/CaseManagementProject'
+          description: Project in which the case was created.
+      type: object
+    FindingData:
+      properties:
+        id:
+          description: Unique identifier of the security finding.
+          example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
+          type: string
+        type:
+          $ref: '#/components/schemas/FindingDataType'
+      required:
+      - type
+      - id
+      type: object
+    FindingDataType:
+      default: findings
+      description: Security findings resource type.
+      enum:
+      - findings
+      example: findings
+      type: string
+      x-enum-varnames:
+      - FINDINGS
     FindingDatadogLink:
       description: The Datadog relative link for this finding.
       example: /security/compliance?panels=cpfinding%7Cevent%7CruleId%3Adef-000-u5t%7CresourceId%3Ae8c9ab7c52ebd7bf2fdb4db641082d7d%7CtabId%3Aoverview
@@ -20756,6 +21588,42 @@ components:
       description: The unique ID for this finding.
       example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
       type: string
+    FindingJiraIssue:
+      description: Jira issue associated with the case.
+      properties:
+        error_message:
+          description: Error message if the Jira issue creation failed.
+          example: '{"errorMessages":["An error occured."],"errors":{}}'
+          type: string
+        result:
+          $ref: '#/components/schemas/FindingJiraIssueResult'
+        status:
+          description: Status of the Jira issue creation. Can be "COMPLETED" if the
+            Jira issue was created successfully, or "FAILED" if the Jira issue creation
+            failed.
+          example: COMPLETED
+          type: string
+      type: object
+    FindingJiraIssueResult:
+      description: Result of the Jira issue creation.
+      properties:
+        account_id:
+          description: Account ID of the Jira issue.
+          example: 463a8631-680e-455c-bfd3-3ed04d326eb7
+          type: string
+        issue_id:
+          description: Unique identifier of the Jira issue.
+          example: '2871276'
+          type: string
+        issue_key:
+          description: Key of the Jira issue.
+          example: PROJ-123
+          type: string
+        issue_url:
+          description: URL of the Jira issue.
+          example: https://domain.atlassian.net/browse/PROJ-123
+          type: string
+      type: object
     FindingMute:
       additionalProperties: false
       description: Information about the mute status of this finding.
@@ -20881,6 +21749,14 @@ components:
       - ATTACK_PATH
       - IDENTITY_RISK
       - API_SECURITY
+    Findings:
+      description: A list of security findings.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/FindingData'
+          type: array
+      type: object
     FlakyTest:
       description: A flaky test object.
       properties:
@@ -21249,6 +22125,278 @@ components:
       - PIPELINES_FAILED_DESCENDING
       - PIPELINES_DURATION_LOST_ASCENDING
       - PIPELINES_DURATION_LOST_DESCENDING
+    FleetAgentAttributes:
+      description: Attributes of a Datadog Agent in the list view.
+      properties:
+        agent_version:
+          description: The Datadog Agent version.
+          example: 7.50.0
+          type: string
+        api_key_name:
+          description: The API key name (if available and not redacted).
+          example: Production API Key
+          type: string
+        api_key_uuid:
+          description: The API key UUID.
+          example: a1b2c3d4-e5f6-4321-a123-123456789abc
+          type: string
+        cloud_provider:
+          description: The cloud provider where the agent is running.
+          example: aws
+          type: string
+        cluster_name:
+          description: Kubernetes cluster name (if applicable).
+          type: string
+        datadog_agent_key:
+          description: The unique agent key identifier.
+          example: my-agent-hostname
+          type: string
+        enabled_products:
+          description: Datadog products enabled on the agent.
+          items:
+            type: string
+          type: array
+        envs:
+          description: Environments the agent is reporting from.
+          items:
+            type: string
+          type: array
+        first_seen_at:
+          description: Timestamp when the agent was first seen.
+          format: int64
+          type: integer
+        hostname:
+          description: The hostname of the agent.
+          example: my-hostname
+          type: string
+        ip_addresses:
+          description: IP addresses of the agent.
+          items:
+            type: string
+          type: array
+        is_single_step_instrumentation_enabled:
+          description: Whether single-step instrumentation is enabled.
+          type: boolean
+        last_restart_at:
+          description: Timestamp of the last agent restart.
+          format: int64
+          type: integer
+        os:
+          description: The operating system.
+          example: linux
+          type: string
+        otel_collector_version:
+          description: OpenTelemetry collector version (if applicable).
+          type: string
+        otel_collector_versions:
+          description: List of OpenTelemetry collector versions (if applicable).
+          items:
+            type: string
+          type: array
+        pod_name:
+          description: Kubernetes pod name (if applicable).
+          type: string
+        remote_agent_management:
+          description: Remote agent management status.
+          example: enabled
+          type: string
+        remote_config_status:
+          description: Remote configuration status.
+          example: connected
+          type: string
+        services:
+          description: Services running on the agent.
+          items:
+            type: string
+          type: array
+        tags:
+          description: Tags associated with the agent.
+          items:
+            $ref: '#/components/schemas/FleetAgentAttributesTagsItems'
+          type: array
+        team:
+          description: Team associated with the agent.
+          type: string
+      type: object
+    FleetAgentAttributesTagsItems:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    FleetAgentInfo:
+      description: Represents detailed information about a specific Datadog Agent.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetAgentInfoAttributes'
+        id:
+          description: The unique agent key identifier.
+          example: my-agent-hostname
+          type: string
+        type:
+          $ref: '#/components/schemas/FleetAgentInfoResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FleetAgentInfoAttributes:
+      description: Attributes for agent information.
+      properties:
+        agent_infos:
+          $ref: '#/components/schemas/FleetAgentInfoDetails'
+        configuration_files:
+          $ref: '#/components/schemas/FleetConfigurationLayer'
+        detected_integrations:
+          description: List of detected integrations.
+          items:
+            $ref: '#/components/schemas/FleetDetectedIntegration'
+          type: array
+        integrations:
+          $ref: '#/components/schemas/FleetIntegrationsByStatus'
+      type: object
+    FleetAgentInfoDetails:
+      description: Detailed information about a Datadog Agent.
+      properties:
+        agent_version:
+          description: The Datadog Agent version.
+          example: 7.50.0
+          type: string
+        api_key_name:
+          description: The API key name (if available and not redacted).
+          example: Production API Key
+          type: string
+        api_key_uuid:
+          description: The API key UUID.
+          example: a1b2c3d4-e5f6-4321-a123-123456789abc
+          type: string
+        cloud_provider:
+          description: The cloud provider where the agent is running.
+          example: aws
+          type: string
+        cluster_name:
+          description: Kubernetes cluster name (if applicable).
+          type: string
+        datadog_agent_key:
+          description: The unique agent key identifier.
+          example: my-agent-hostname
+          type: string
+        enabled_products:
+          description: Datadog products enabled on the agent.
+          items:
+            type: string
+          type: array
+        env:
+          description: Environments the agent is reporting from.
+          items:
+            type: string
+          type: array
+        first_seen_at:
+          description: Timestamp when the agent was first seen.
+          format: int64
+          type: integer
+        hostname:
+          description: The hostname of the agent.
+          example: my-hostname
+          type: string
+        hostname_aliases:
+          description: Alternative hostname list for the agent.
+          items:
+            type: string
+          type: array
+        install_method_installer_version:
+          description: The version of the installer used.
+          example: 1.2.3
+          type: string
+        install_method_tool:
+          description: The tool used to install the agent.
+          example: chef
+          type: string
+        ip_addresses:
+          description: IP addresses of the agent.
+          items:
+            type: string
+          type: array
+        is_single_step_instrumentation_enabled:
+          description: Whether single-step instrumentation is enabled.
+          type: boolean
+        last_restart_at:
+          description: Timestamp of the last agent restart.
+          format: int64
+          type: integer
+        os:
+          description: The operating system.
+          example: linux
+          type: string
+        os_version:
+          description: The operating system version.
+          example: Ubuntu 20.04
+          type: string
+        otel_collector_version:
+          description: OpenTelemetry collector version (if applicable).
+          type: string
+        otel_collector_versions:
+          description: List of OpenTelemetry collector versions (if applicable).
+          items:
+            type: string
+          type: array
+        otel_collectors:
+          description: OpenTelemetry collectors associated with the agent (if applicable).
+          items:
+            $ref: '#/components/schemas/FleetOtelCollector'
+          type: array
+        pod_name:
+          description: Kubernetes pod name (if applicable).
+          type: string
+        python_version:
+          description: The Python version used by the agent.
+          example: 3.9.5
+          type: string
+        region:
+          description: Regions where the agent is running.
+          items:
+            type: string
+          type: array
+        remote_agent_management:
+          description: Remote agent management status.
+          example: enabled
+          type: string
+        remote_config_status:
+          description: Remote configuration status.
+          example: connected
+          type: string
+        services:
+          description: Services running on the agent.
+          items:
+            type: string
+          type: array
+        tags:
+          description: Tags associated with the agent.
+          items:
+            type: string
+          type: array
+        team:
+          description: Team associated with the agent.
+          type: string
+      type: object
+    FleetAgentInfoResourceType:
+      default: datadog_agent_key
+      description: The type of Agent info resource.
+      enum:
+      - datadog_agent_key
+      example: datadog_agent_key
+      type: string
+      x-enum-varnames:
+      - DATADOG_AGENT_KEY
+    FleetAgentInfoResponse:
+      description: Response containing detailed information about a specific agent.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetAgentInfo'
+      required:
+      - data
+      type: object
     FleetAgentVersion:
       description: Represents an available Datadog Agent version.
       properties:
@@ -21290,6 +22438,89 @@ components:
           type: array
       required:
       - data
+      type: object
+    FleetAgentsResponse:
+      description: Response containing a paginated list of Datadog Agents.
+      properties:
+        data:
+          $ref: '#/components/schemas/FleetAgentsResponseData'
+        meta:
+          $ref: '#/components/schemas/FleetAgentsResponseMeta'
+      required:
+      - data
+      type: object
+    FleetAgentsResponseData:
+      description: The response data containing status and agents array.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FleetAgentsResponseDataAttributes'
+        id:
+          description: Status identifier.
+          example: done
+          type: string
+        type:
+          description: Resource type.
+          example: status
+          type: string
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FleetAgentsResponseDataAttributes:
+      properties:
+        agents:
+          description: Array of agents matching the query criteria.
+          items:
+            $ref: '#/components/schemas/FleetAgentAttributes'
+          type: array
+      type: object
+    FleetAgentsResponseMeta:
+      description: Metadata for the list of agents response.
+      properties:
+        total_filtered_count:
+          description: Total number of agents matching the filter criteria across
+            all pages.
+          example: 150
+          format: int64
+          type: integer
+      type: object
+    FleetConfigurationFile:
+      description: A configuration file for an integration.
+      properties:
+        file_content:
+          description: The raw content of the configuration file.
+          type: string
+        file_path:
+          description: Path to the configuration file.
+          example: /conf.d/postgres.d/postgres.yaml
+          type: string
+        filename:
+          description: Name of the configuration file.
+          example: postgres.yaml
+          type: string
+      type: object
+    FleetConfigurationLayer:
+      description: Configuration information organized by layers.
+      properties:
+        compiled_configuration:
+          description: The final compiled configuration.
+          type: string
+        env_configuration:
+          description: Configuration from environment variables.
+          type: string
+        file_configuration:
+          description: Configuration from files.
+          type: string
+        parsed_configuration:
+          description: Parsed configuration output.
+          type: string
+        remote_configuration:
+          description: Remote configuration settings.
+          type: string
+        runtime_configuration:
+          description: Runtime configuration.
+          type: string
       type: object
     FleetDeployment:
       description: A deployment that defines automated configuration changes for a
@@ -21613,6 +22844,93 @@ components:
       properties:
         page:
           $ref: '#/components/schemas/FleetDeploymentsPage'
+      type: object
+    FleetDetectedIntegration:
+      description: An integration detected on the agent but not necessarily configured.
+      properties:
+        escaped_name:
+          description: Escaped integration name.
+          example: postgresql
+          type: string
+        prefix:
+          description: Integration prefix identifier.
+          example: postgres
+          type: string
+      type: object
+    FleetIntegrationDetails:
+      description: Detailed information about a single integration.
+      properties:
+        data_type:
+          description: Type of data collected (metrics, logs).
+          example: metrics
+          type: string
+        error_messages:
+          description: Error messages if the integration has issues.
+          items:
+            type: string
+          type: array
+        init_config:
+          description: Initialization configuration (YAML format).
+          type: string
+        instance_config:
+          description: Instance-specific configuration (YAML format).
+          type: string
+        is_custom_check:
+          description: Whether this is a custom integration.
+          type: boolean
+        log_config:
+          description: Log collection configuration (YAML format).
+          type: string
+        name:
+          description: Name of the integration instance.
+          type: string
+        source_index:
+          description: Index in the configuration file.
+          format: int64
+          type: integer
+        source_path:
+          description: Path to the configuration file.
+          type: string
+        type:
+          description: Integration type.
+          example: postgres
+          type: string
+      type: object
+    FleetIntegrationsByStatus:
+      description: Integrations organized by their status.
+      properties:
+        configuration_files:
+          description: Configuration files for integrations.
+          items:
+            $ref: '#/components/schemas/FleetConfigurationFile'
+          type: array
+        datadog_agent_key:
+          description: The unique agent key identifier.
+          type: string
+        error_integrations:
+          description: Integrations with errors.
+          items:
+            $ref: '#/components/schemas/FleetIntegrationDetails'
+          type: array
+        missing_integrations:
+          description: Detected but not configured integrations.
+          items:
+            $ref: '#/components/schemas/FleetDetectedIntegration'
+          type: array
+        warning_integrations:
+          description: Integrations with warnings.
+          items:
+            $ref: '#/components/schemas/FleetIntegrationDetails'
+          type: array
+        working_integrations:
+          description: Integrations that are working correctly.
+          items:
+            $ref: '#/components/schemas/FleetIntegrationDetails'
+          type: array
+      type: object
+    FleetOtelCollector:
+      additionalProperties: {}
+      description: OpenTelemetry collector information.
       type: object
     FleetSchedule:
       description: A schedule that automatically creates deployments based on a recurrence
@@ -23538,6 +24856,30 @@ components:
           $ref: '#/components/schemas/SBOM'
       required:
       - data
+      type: object
+    GetSuppressionVersionHistoryData:
+      description: Data for the suppression version history.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SuppressionVersionHistory'
+        id:
+          description: ID of the suppression.
+          type: string
+        type:
+          $ref: '#/components/schemas/GetSuppressionVersionHistoryDataType'
+      type: object
+    GetSuppressionVersionHistoryDataType:
+      description: Type of data.
+      enum:
+      - suppression_version_history
+      type: string
+      x-enum-varnames:
+      - SUPPRESSIONVERSIONHISTORY
+    GetSuppressionVersionHistoryResponse:
+      description: Response for getting the suppression version history.
+      properties:
+        data:
+          $ref: '#/components/schemas/GetSuppressionVersionHistoryData'
       type: object
     GetTeamMembershipsSort:
       description: Specifies the order of returned team memberships
@@ -28287,6 +29629,15 @@ components:
           description: Jira project key
           type: string
       type: object
+    JiraIssuesDataType:
+      default: jira_issues
+      description: Jira issues resource type.
+      enum:
+      - jira_issues
+      example: jira_issues
+      type: string
+      x-enum-varnames:
+      - JIRA_ISSUES
     JobCreateResponse:
       description: Run a threat hunting job response.
       properties:
@@ -28727,6 +30078,13 @@ components:
     Library:
       description: Vulnerability library.
       properties:
+        additional_names:
+          description: Related library or package names (such as child packages or
+            affected binary paths).
+          items:
+            example: linux-tools-common
+            type: string
+          type: array
         name:
           description: Vulnerability library name.
           example: linux-aws-5.15
@@ -29063,6 +30421,37 @@ components:
       type: string
       x-enum-varnames:
       - LIST_CONNECTIONS_RESPONSE
+    ListDeploymentRuleResponseData:
+      description: Data for a list of deployment rules.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListDeploymentRulesResponseDataAttributes'
+        id:
+          description: Unique identifier of the deployment rule.
+          example: 1111-2222-3333-4444-555566667777
+          type: string
+        type:
+          $ref: '#/components/schemas/ListDeploymentRulesDataType'
+      required:
+      - type
+      - attributes
+      - id
+      type: object
+    ListDeploymentRulesDataType:
+      description: List deployment rule resource type.
+      enum:
+      - list_deployment_rules
+      example: list_deployment_rules
+      type: string
+      x-enum-varnames:
+      - LIST_DEPLOYMENT_RULES
+    ListDeploymentRulesResponseDataAttributes:
+      properties:
+        rules:
+          items:
+            $ref: '#/components/schemas/DeploymentRuleResponseDataAttributes'
+          type: array
+      type: object
     ListDevicesResponse:
       description: List devices response.
       properties:
@@ -29435,6 +30824,14 @@ components:
           $ref: '#/components/schemas/KindResponseData'
         meta:
           $ref: '#/components/schemas/KindResponseMeta'
+      type: object
+    ListNotificationChannelsResponse:
+      description: Response type for listing notification channels for a user
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/NotificationChannelData'
+          type: array
       type: object
     ListPipelinesResponse:
       description: Represents the response payload containing a list of pipelines
@@ -33610,6 +35007,174 @@ components:
       required:
       - notebookTrigger
       type: object
+    NotificationChannel:
+      description: A top-level wrapper for a user notification channel
+      example:
+        data:
+          attributes:
+            config:
+              address: foo@bar.com
+              formats:
+              - html
+              type: email
+          id: 27590dae-47be-4a7d-9abf-8f4e45124020
+          type: notification_channels
+      properties:
+        data:
+          $ref: '#/components/schemas/NotificationChannelData'
+      type: object
+    NotificationChannelAttributes:
+      description: Attributes for an on-call notification channel.
+      properties:
+        active:
+          description: Whether the notification channel is currently active.
+          type: boolean
+        config:
+          $ref: '#/components/schemas/NotificationChannelConfig'
+          description: Notification channel configuration
+      type: object
+    NotificationChannelConfig:
+      description: Defines the configuration for an On-Call notification channel
+      oneOf:
+      - $ref: '#/components/schemas/NotificationChannelPhoneConfig'
+      - $ref: '#/components/schemas/NotificationChannelEmailConfig'
+      - $ref: '#/components/schemas/NotificationChannelPushConfig'
+    NotificationChannelData:
+      description: Data for an on-call notification channel
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NotificationChannelAttributes'
+        id:
+          description: Unique identifier for the channel
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelType'
+      required:
+      - type
+      type: object
+    NotificationChannelEmailConfig:
+      description: Email notification channel configuration
+      properties:
+        address:
+          description: The e-mail address to be notified
+          example: ''
+          type: string
+        formats:
+          description: Preferred content formats for notifications.
+          example:
+          - html
+          items:
+            $ref: '#/components/schemas/NotificationChannelEmailFormatType'
+          type: array
+        type:
+          $ref: '#/components/schemas/NotificationChannelEmailConfigType'
+      required:
+      - type
+      - address
+      - formats
+      type: object
+    NotificationChannelEmailConfigType:
+      default: email
+      description: Indicates that the notification channel is an e-mail address
+      enum:
+      - email
+      example: email
+      type: string
+      x-enum-varnames:
+      - EMAIL
+    NotificationChannelEmailFormatType:
+      default: html
+      description: Specifies the format of the e-mail that is sent for On-Call notifications
+      enum:
+      - html
+      - text
+      example: html
+      type: string
+      x-enum-varnames:
+      - HTML
+      - TEXT
+    NotificationChannelPhoneConfig:
+      description: Phone notification channel configuration
+      properties:
+        formatted_number:
+          description: The formatted international version of Number (e.g. +33 7 1
+            23 45 67).
+          example: ''
+          type: string
+        number:
+          description: The E-164 formatted phone number (e.g. +3371234567)
+          example: ''
+          type: string
+        region:
+          description: The ISO 3166-1 alpha-2 two-letter country code.
+          example: ''
+          type: string
+        sms_subscribed_at:
+          description: If present, the date the user subscribed this number to SMS
+            messages
+          format: date-time
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelPhoneConfigType'
+        verified:
+          description: Indicates whether this phone has been verified by the user
+            in Datadog On-Call
+          example: false
+          type: boolean
+      required:
+      - type
+      - number
+      - formatted_number
+      - region
+      - verified
+      type: object
+    NotificationChannelPhoneConfigType:
+      default: phone
+      description: Indicates that the notification channel is a phone
+      enum:
+      - phone
+      example: phone
+      type: string
+      x-enum-varnames:
+      - PHONE
+    NotificationChannelPushConfig:
+      description: Push notification channel configuration
+      properties:
+        application_name:
+          description: The name of the application used to receive push notifications
+          example: ''
+          type: string
+        device_name:
+          description: The name of the mobile device being used
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelPushConfigType'
+      required:
+      - type
+      - device_name
+      - application_name
+      type: object
+    NotificationChannelPushConfigType:
+      default: push
+      description: Indicates that the notification channel is a mobile device for
+        push notifications
+      enum:
+      - push
+      example: push
+      type: string
+      x-enum-varnames:
+      - PUSH
+    NotificationChannelType:
+      default: notification_channels
+      description: Indicates that the resource is of type 'notification_channels'.
+      enum:
+      - notification_channels
+      example: notification_channels
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_CHANNELS
     NotificationRule:
       description: 'Notification rules allow full control over notifications generated
         by the various Datadog security products.
@@ -33813,6 +35378,12 @@ components:
       description: The `add_env_vars` processor adds environment variable values to
         log events.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this processor in the pipeline.
@@ -33823,14 +35394,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineAddEnvVarsProcessorType'
         variables:
@@ -33842,8 +35405,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - variables
+      - enabled
       type: object
     ObservabilityPipelineAddEnvVarsProcessorType:
       default: add_env_vars
@@ -33872,6 +35435,12 @@ components:
     ObservabilityPipelineAddFieldsProcessor:
       description: The `add_fields` processor adds static key-value fields to logs.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         fields:
           description: A list of static fields (key-value pairs) that is added to
             each log event processed by this component.
@@ -33889,14 +35458,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessorType'
       required:
@@ -33904,7 +35465,7 @@ components:
       - type
       - include
       - fields
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineAddFieldsProcessorType:
       default: add_fields
@@ -34192,6 +35753,10 @@ components:
             role session.
           type: string
       type: object
+    ObservabilityPipelineComponentDisplayName:
+      description: The display name for a component.
+      example: my component
+      type: string
     ObservabilityPipelineConfig:
       description: Specifies the pipeline's configuration, including its sources,
         processors, and destinations.
@@ -34207,15 +35772,25 @@ components:
             $ref: '#/components/schemas/ObservabilityPipelineConfigDestinationItem'
           type: array
         processors:
-          description: A list of processors that transform or enrich log data.
+          description: A list of processor groups that transform or enrich log data.
           example:
-          - id: filter-processor
+          - enabled: true
+            id: my-processor-group
             include: service:my-service
             inputs:
             - datadog-agent-source
-            type: filter
+            processors:
+            - enabled: true
+              id: filter-processor
+              include: status:error
+              type: filter
+            - enabled: true
+              field: message
+              id: json-processor
+              include: '*'
+              type: parse_json
           items:
-            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorItem'
+            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorGroup'
           type: array
         sources:
           description: A list of configured data sources for the pipeline.
@@ -34251,6 +35826,75 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
+    ObservabilityPipelineConfigProcessorGroup:
+      description: A group of processors.
+      example:
+        enabled: true
+        id: my-processor-group
+        include: service:my-service
+        inputs:
+        - datadog-agent-source
+        processors:
+        - enabled: true
+          fields:
+          - name: env
+            value: prod
+          id: add-fields-processor
+          include: '*'
+          type: add_fields
+        - enabled: true
+          id: filter-processor
+          include: status:error
+          type: filter
+      properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor group is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for the processor group.
+          example: grouped-processors
+          type: string
+        include:
+          description: Conditional expression for when this processor group should
+            execute.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of IDs for components whose output is used as the input
+            for this processor group.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        processors:
+          description: Processors applied sequentially within this group. Events flow
+            through each processor in order.
+          example:
+          - enabled: true
+            fields:
+            - name: env
+              value: prod
+            id: add-fields-processor
+            include: '*'
+            type: add_fields
+          - enabled: true
+            id: filter-processor
+            include: status:error
+            type: filter
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorItem'
+          type: array
+      required:
+      - id
+      - include
+      - inputs
+      - processors
+      - enabled
+      type: object
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
@@ -34368,6 +36012,12 @@ components:
         Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
         advanced filtering capabilities.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this processor.
           example: remap-vrl-processor
@@ -34379,14 +36029,6 @@ components:
             processor.
           example: '*'
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         remaps:
           description: Array of VRL remap rules.
           items:
@@ -34400,7 +36042,7 @@ components:
       - type
       - include
       - remaps
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineCustomProcessorRemap:
       description: Defines a single VRL remap rule with its own filtering and transformation
@@ -34431,7 +36073,6 @@ components:
       - include
       - name
       - source
-      - enabled
       - drop_on_error
       type: object
     ObservabilityPipelineCustomProcessorType:
@@ -34540,6 +36181,12 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -34551,14 +36198,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         keys:
           description: A list of tag keys.
           example:
@@ -34579,7 +36218,7 @@ components:
       - mode
       - action
       - keys
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineDatadogTagsProcessorAction:
       description: The action to take on tags with matching keys.
@@ -34625,6 +36264,12 @@ components:
     ObservabilityPipelineDedupeProcessor:
       description: The `dedupe` processor removes duplicate fields in log events.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         fields:
           description: A list of log field paths to check for duplicates.
           example:
@@ -34642,14 +36287,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - parse-json-processor
-          items:
-            type: string
-          type: array
         mode:
           $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessorMode'
         type:
@@ -34658,9 +36295,9 @@ components:
       - id
       - type
       - include
-      - inputs
       - fields
       - mode
+      - enabled
       type: object
     ObservabilityPipelineDedupeProcessorMode:
       description: The deduplication mode to apply to the fields.
@@ -34866,6 +36503,12 @@ components:
       description: The `enrichment_table` processor enriches logs using a static CSV
         file or GeoIP database.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         file:
           $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableFile'
         geoip:
@@ -34879,14 +36522,6 @@ components:
             targets.
           example: source:my-source
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - add-fields-processor
-          items:
-            type: string
-          type: array
         target:
           description: Path where enrichment results should be stored in the log.
           example: enriched.geoip
@@ -34897,8 +36532,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - target
+      - enabled
       type: object
     ObservabilityPipelineEnrichmentTableProcessorType:
       default: enrichment_table
@@ -34929,6 +36564,12 @@ components:
         on a Datadog search query. Logs that match the `include` query are passed
         through; others are discarded.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -34941,21 +36582,13 @@ components:
             components; others are dropped.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineFilterProcessorType'
       required:
       - id
       - type
       - include
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineFilterProcessorType:
       default: filter
@@ -35035,6 +36668,12 @@ components:
         Metrics can be counters, gauges, or distributions and optionally grouped by
         log fields.'
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline.
@@ -35045,14 +36684,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this processor.
-          example:
-          - source-id
-          items:
-            type: string
-          type: array
         metrics:
           description: Configuration for generating individual metrics.
           items:
@@ -35063,9 +36694,7 @@ components:
       required:
       - id
       - type
-      - inputs
-      - include
-      - metrics
+      - enabled
       type: object
     ObservabilityPipelineGenerateMetricsProcessorType:
       default: generate_datadog_metrics
@@ -35662,6 +37291,12 @@ components:
       description: The `ocsf_mapper` processor transforms logs into the OCSF schema
         using a predefined mapping configuration.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline.
@@ -35672,14 +37307,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this processor.
-          example:
-          - filter-processor
-          items:
-            type: string
-          type: array
         mappings:
           description: A list of mapping rules to convert events to the OCSF format.
           items:
@@ -35691,8 +37318,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - mappings
+      - enabled
       type: object
     ObservabilityPipelineOcsfMapperProcessorMapping:
       description: Defines how specific events are transformed to OCSF using a mapping
@@ -35797,6 +37424,12 @@ components:
             by Datadog.
           example: true
           type: boolean
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: A unique identifier for this processor.
           example: parse-grok-processor
@@ -35806,14 +37439,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         rules:
           description: The list of Grok parsing rules. If multiple matching rules
             are provided, they are evaluated in order. The first successful match
@@ -35827,8 +37452,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - rules
+      - enabled
       type: object
     ObservabilityPipelineParseGrokProcessorRule:
       description: 'A Grok parsing rule used in the `parse_grok` processor. Each rule
@@ -35913,6 +37538,12 @@ components:
         and flattens it into the event. This is useful when logs contain embedded
         JSON as a string.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         field:
           description: The name of the log field that contains a JSON string.
           example: message
@@ -35928,14 +37559,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessorType'
       required:
@@ -35943,7 +37566,7 @@ components:
       - type
       - include
       - field
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineParseJSONProcessorType:
       default: parse_json
@@ -35970,11 +37593,17 @@ components:
         a specified filter. When the configured daily quota is met, the processor
         can drop or alert.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         drop_events:
           description: If set to `true`, logs that matched the quota filter and sent
             after the quota has been met are dropped; only logs that did not match
             the filter query continue through the pipeline.
           example: false
+          type: boolean
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
           type: boolean
         id:
           description: The unique identifier for this component. Used to reference
@@ -35991,14 +37620,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         limit:
           $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimit'
         name:
@@ -36028,9 +37649,8 @@ components:
       - type
       - include
       - name
-      - drop_events
       - limit
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineQuotaProcessorLimit:
       description: The maximum amount of data or number of events allowed before the
@@ -36106,6 +37726,12 @@ components:
       description: The `reduce` processor aggregates and merges logs based on matching
         keys and merge strategies.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         group_by:
           description: A list of fields used to group log events for merging.
           example:
@@ -36123,14 +37749,6 @@ components:
             targets.
           example: env:prod
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - parse-json-processor
-          items:
-            type: string
-          type: array
         merge_strategies:
           description: List of merge strategies defining how values from grouped events
             should be combined.
@@ -36143,9 +37761,9 @@ components:
       - id
       - type
       - include
-      - inputs
       - group_by
       - merge_strategies
+      - enabled
       type: object
     ObservabilityPipelineReduceProcessorMergeStrategy:
       description: Defines how a specific field should be merged across grouped events.
@@ -36202,6 +37820,12 @@ components:
     ObservabilityPipelineRemoveFieldsProcessor:
       description: The `remove_fields` processor deletes specified fields from logs.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         fields:
           description: A list of field names to be removed from each log event.
           example:
@@ -36221,13 +37845,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: The `PipelineRemoveFieldsProcessor` `inputs`.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessorType'
       required:
@@ -36235,7 +37852,7 @@ components:
       - type
       - include
       - fields
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineRemoveFieldsProcessorType:
       default: remove_fields
@@ -36249,6 +37866,12 @@ components:
     ObservabilityPipelineRenameFieldsProcessor:
       description: The `rename_fields` processor changes field names.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         fields:
           description: A list of rename rules specifying which fields to rename in
             the event, what to rename them to, and whether to preserve the original
@@ -36267,14 +37890,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessorType'
       required:
@@ -36282,7 +37897,7 @@ components:
       - type
       - include
       - fields
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineRenameFieldsProcessorField:
       description: Defines how to rename a field in log events.
@@ -36388,6 +38003,12 @@ components:
       description: The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -36399,14 +38020,6 @@ components:
             targets.
           example: service:my-service
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         percentage:
           description: The percentage of logs to sample.
           example: 10.0
@@ -36424,7 +38037,7 @@ components:
       - id
       - type
       - include
-      - inputs
+      - enabled
       type: object
     ObservabilityPipelineSampleProcessorType:
       default: sample
@@ -36439,6 +38052,12 @@ components:
       description: The `sensitive_data_scanner` processor detects and optionally redacts
         sensitive data in log events.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (e.g., as input to downstream
@@ -36450,14 +38069,6 @@ components:
             targets.
           example: source:prod
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the `input`
-            for this component.
-          example:
-          - parse-json-processor
-          items:
-            type: string
-          type: array
         rules:
           description: A list of rules for identifying and acting on sensitive data
             patterns.
@@ -36470,8 +38081,8 @@ components:
       - id
       - type
       - include
-      - inputs
       - rules
+      - enabled
       type: object
     ObservabilityPipelineSensitiveDataScannerProcessorAction:
       description: Defines what action to take when sensitive data is matched.
@@ -37432,6 +39043,12 @@ components:
       description: The `throttle` processor limits the number of events that pass
         through over a given time window.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
         group_by:
           description: Optional list of fields used to group events before the threshold
             has been reached.
@@ -37449,14 +39066,6 @@ components:
             targets.
           example: env:prod
           type: string
-        inputs:
-          description: A list of component IDs whose output is used as the input for
-            this processor.
-          example:
-          - datadog-agent-source
-          items:
-            type: string
-          type: array
         threshold:
           description: the number of events allowed in a given time window. Events
             sent after the threshold has been reached, are dropped.
@@ -37474,9 +39083,9 @@ components:
       - id
       - type
       - include
-      - inputs
       - threshold
       - window
+      - enabled
       type: object
     ObservabilityPipelineThrottleProcessorType:
       default: throttle
@@ -41674,6 +43283,7 @@ components:
       type: object
     RelationshipToUserTeamPermissionData:
       description: Related user team permission data
+      nullable: true
       properties:
         id:
           description: The ID of the user team permission
@@ -42111,6 +43721,16 @@ components:
           format: date-time
           readOnly: true
           type: string
+        last_modifier_email:
+          description: Email of the user who last modified this restriction query.
+          example: user@example.com
+          readOnly: true
+          type: string
+        last_modifier_name:
+          description: Name of the user who last modified this restriction query.
+          example: John Doe
+          readOnly: true
+          type: string
         modified_at:
           description: Time of last restriction query modification.
           example: '2020-03-17T21:15:15.000Z'
@@ -42122,6 +43742,18 @@ components:
             the query can be returned.
           example: env:sandbox
           type: string
+        role_count:
+          description: Number of roles associated with this restriction query.
+          example: 3
+          format: int64
+          readOnly: true
+          type: integer
+        user_count:
+          description: Number of users associated with this restriction query.
+          example: 5
+          format: int64
+          readOnly: true
+          type: integer
       type: object
     RestrictionQueryCreateAttributes:
       description: Attributes of the created restriction query.
@@ -42130,6 +43762,8 @@ components:
           description: The restriction query.
           example: env:sandbox
           type: string
+      required:
+      - restriction_query
       type: object
     RestrictionQueryCreateData:
       description: Data related to the creation of a restriction query.
@@ -42154,18 +43788,8 @@ components:
             $ref: '#/components/schemas/RestrictionQueryWithoutRelationships'
           type: array
       type: object
-    RestrictionQueryRelationships:
-      description: Relationships of the restriction query object.
-      properties:
-        roles:
-          $ref: '#/components/schemas/RelationshipToRoles'
-      type: object
     RestrictionQueryResponseIncludedItem:
       description: An object related to a restriction query.
-      discriminator:
-        mapping:
-          roles: '#/components/schemas/RestrictionQueryRole'
-        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/RestrictionQueryRole'
     RestrictionQueryRole:
@@ -42178,11 +43802,11 @@ components:
           example: <ROLE_ID>
           type: string
         type:
-          default: roles
-          description: Role resource type.
-          example: roles
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/RolesType'
+      required:
+      - type
+      - id
+      - attributes
       type: object
     RestrictionQueryRoleAttribute:
       description: Attributes of the role for a restriction query.
@@ -42209,6 +43833,8 @@ components:
           description: The restriction query.
           example: env:sandbox
           type: string
+      required:
+      - restriction_query
       type: object
     RestrictionQueryUpdateData:
       description: Data related to the update of a restriction query.
@@ -42234,7 +43860,7 @@ components:
           example: 79a0e60a-644a-11ea-ad29-43329f7f58b5
           type: string
         relationships:
-          $ref: '#/components/schemas/RestrictionQueryRelationships'
+          $ref: '#/components/schemas/UserRelationships'
         type:
           $ref: '#/components/schemas/LogsRestrictionQueriesType'
       type: object
@@ -43178,38 +44804,13 @@ components:
           description: The `RuleVersionHistory` `data`.
           type: object
       type: object
-    RuleVersionUpdate:
-      description: A change in a rule version.
-      properties:
-        change:
-          description: The new value of the field.
-          example: cloud_provider:aws
-          type: string
-        field:
-          description: The field that was changed.
-          example: Tags
-          type: string
-        type:
-          $ref: '#/components/schemas/RuleVersionUpdateType'
-      type: object
-    RuleVersionUpdateType:
-      description: The type of change.
-      enum:
-      - create
-      - update
-      - delete
-      type: string
-      x-enum-varnames:
-      - CREATE
-      - UPDATE
-      - DELETE
     RuleVersions:
       description: A rule version with a list of updates.
       properties:
         changes:
           description: A list of changes.
           items:
-            $ref: '#/components/schemas/RuleVersionUpdate'
+            $ref: '#/components/schemas/VersionHistoryUpdate'
           type: array
         rule:
           $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
@@ -45350,7 +46951,8 @@ components:
       type: object
     ScheduleTarget:
       description: Represents a schedule target for an escalation policy step, including
-        its ID and resource type.
+        its ID and resource type. This is a shortcut for a configured schedule target
+        with position set to 'current'.
       properties:
         id:
           description: Specifies the unique identifier of the schedule resource.
@@ -45362,6 +46964,19 @@ components:
       - type
       - id
       type: object
+    ScheduleTargetPosition:
+      description: Specifies the position of a schedule target (example `previous`,
+        `current`, or `next`).
+      enum:
+      - previous
+      - current
+      - next
+      example: previous
+      type: string
+      x-enum-varnames:
+      - PREVIOUS
+      - CURRENT
+      - NEXT
     ScheduleTargetType:
       default: schedules
       description: Indicates that the resource is of type `schedules`.
@@ -45981,6 +47596,86 @@ components:
           description: The name of the reference table.
           type: string
       type: object
+    SecurityMonitoringRuleAnomalyDetectionOptions:
+      additionalProperties: {}
+      description: Options on anomaly detection method.
+      properties:
+        bucketDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsBucketDuration'
+        detectionTolerance:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsDetectionTolerance'
+        learningDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsLearningDuration'
+        learningPeriodBaseline:
+          description: An optional override baseline to apply while the rule is in
+            the learning period. Must be greater than or equal to 0.
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SecurityMonitoringRuleAnomalyDetectionOptionsBucketDuration:
+      description: 'Duration in seconds of the time buckets used to aggregate events
+        matched by the rule.
+
+        Must be greater than or equal to 300.'
+      enum:
+      - 300
+      - 600
+      - 900
+      - 1800
+      - 3600
+      - 10800
+      example: 300
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - FIVE_MINUTES
+      - TEN_MINUTES
+      - FIFTEEN_MINUTES
+      - THIRTY_MINUTES
+      - ONE_HOUR
+      - THREE_HOURS
+    SecurityMonitoringRuleAnomalyDetectionOptionsDetectionTolerance:
+      description: 'An optional parameter that sets how permissive anomaly detection
+        is.
+
+        Higher values require higher deviations before triggering a signal.'
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      example: 5
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE
+      - TWO
+      - THREE
+      - FOUR
+      - FIVE
+    SecurityMonitoringRuleAnomalyDetectionOptionsLearningDuration:
+      description: Learning duration in hours. Anomaly detection waits for at least
+        this amount of historical data before it starts evaluating.
+      enum:
+      - 1
+      - 6
+      - 12
+      - 24
+      - 48
+      - 168
+      - 336
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE_HOUR
+      - SIX_HOURS
+      - TWELVE_HOURS
+      - ONE_DAY
+      - TWO_DAYS
+      - ONE_WEEK
+      - TWO_WEEKS
     SecurityMonitoringRuleCase:
       description: Case when signal is generated.
       properties:
@@ -46269,6 +47964,8 @@ components:
       properties:
         forgetAfter:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter'
+        instantaneousBaseline:
+          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline'
         learningDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration'
         learningMethod:
@@ -46294,6 +47991,13 @@ components:
       - TWO_WEEKS
       - THREE_WEEKS
       - FOUR_WEEKS
+    SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline:
+      description: When set to true, Datadog uses previous values that fall within
+        the defined learning window to construct the baseline, enabling the system
+        to establish an accurate baseline more rapidly rather than relying solely
+        on gradual learning over time.
+      example: false
+      type: boolean
     SecurityMonitoringRuleNewValueOptionsLearningDuration:
       default: 0
       description: 'The duration in days during which values are learned, and after
@@ -46337,6 +48041,8 @@ components:
     SecurityMonitoringRuleOptions:
       description: Options.
       properties:
+        anomalyDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptions'
         complianceRuleOptions:
           $ref: '#/components/schemas/CloudConfigurationComplianceRuleOptions'
         decreaseCriticalityBasedOnEnv:
@@ -50012,6 +51718,49 @@ components:
             $ref: '#/components/schemas/ServiceDefinitionData'
           type: array
       type: object
+    ServiceList:
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceListData'
+      type: object
+    ServiceListData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceListDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceListDataType'
+      required:
+      - type
+      type: object
+    ServiceListDataAttributes:
+      properties:
+        metadata:
+          items:
+            $ref: '#/components/schemas/ServiceListDataAttributesMetadataItems'
+          type: array
+        services:
+          items:
+            type: string
+          type: array
+      type: object
+    ServiceListDataAttributesMetadataItems:
+      properties:
+        isTraced:
+          type: boolean
+        isUsm:
+          type: boolean
+      type: object
+    ServiceListDataType:
+      default: services_list
+      description: Services list resource type.
+      enum:
+      - services_list
+      example: services_list
+      type: string
+      x-enum-varnames:
+      - SERVICES_LIST
     ServiceNowBasicAuth:
       description: The definition of the `ServiceNowBasicAuth` object.
       properties:
@@ -51755,6 +53504,32 @@ components:
           format: double
           type: number
       type: object
+    SuppressionVersionHistory:
+      description: Response object containing the version history of a suppression.
+      properties:
+        count:
+          description: The number of suppression versions.
+          format: int32
+          maximum: 2147483647
+          type: integer
+        data:
+          additionalProperties:
+            $ref: '#/components/schemas/SuppressionVersions'
+            description: A suppression version with a list of updates.
+          description: The version history of a suppression.
+          type: object
+      type: object
+    SuppressionVersions:
+      description: A suppression version with a list of updates.
+      properties:
+        changes:
+          description: A list of changes.
+          items:
+            $ref: '#/components/schemas/VersionHistoryUpdate'
+          type: array
+        suppression:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionAttributes'
+      type: object
     TableResultV2:
       description: A reference table resource containing its full configuration and
         state.
@@ -52237,7 +54012,11 @@ components:
           items:
             description: String identifier of the module
             type: string
+          nullable: true
           type: array
+        is_managed:
+          description: Whether the team is managed from an external source
+          type: boolean
         link_count:
           description: The number of links belonging to the team
           format: int32
@@ -52269,6 +54048,7 @@ components:
           items:
             description: String identifier of the module
             type: string
+          nullable: true
           type: array
       required:
       - handle
@@ -52448,6 +54228,211 @@ components:
           $ref: '#/components/schemas/TeamCreate'
       required:
       - data
+      type: object
+    TeamHierarchyLink:
+      description: Team hierarchy link
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamHierarchyLinkAttributes'
+        id:
+          description: The team hierarchy link's identifier
+          example: b8626d7e-cedd-11eb-abf5-da7ad0900001
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamHierarchyLinkRelationships'
+        type:
+          $ref: '#/components/schemas/TeamHierarchyLinkType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    TeamHierarchyLinkAttributes:
+      description: Team hierarchy link attributes
+      properties:
+        created_at:
+          description: Timestamp when the team hierarchy link was created
+          example: ''
+          format: date-time
+          type: string
+        provisioned_by:
+          description: The provisioner of the team hierarchy link
+          example: system
+          type: string
+      required:
+      - provisioned_by
+      - created_at
+      type: object
+    TeamHierarchyLinkCreate:
+      description: Data provided when creating a team hierarchy link
+      properties:
+        relationships:
+          $ref: '#/components/schemas/TeamHierarchyLinkCreateRelationships'
+        type:
+          $ref: '#/components/schemas/TeamHierarchyLinkType'
+      required:
+      - relationships
+      - type
+      type: object
+    TeamHierarchyLinkCreateRelationships:
+      description: The related teams that will be connected by the team hierarchy
+        link
+      properties:
+        parent_team:
+          $ref: '#/components/schemas/TeamHierarchyLinkCreateTeamRelationship'
+        sub_team:
+          $ref: '#/components/schemas/TeamHierarchyLinkCreateTeamRelationship'
+      required:
+      - parent_team
+      - sub_team
+      type: object
+    TeamHierarchyLinkCreateRequest:
+      description: Request to create a team hierarchy link
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamHierarchyLinkCreate'
+      required:
+      - data
+      type: object
+    TeamHierarchyLinkCreateTeam:
+      description: This schema defines the attributes about each team that has to
+        be provided when creating a team hierarchy link
+      properties:
+        id:
+          description: The team's identifier
+          example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamType'
+      required:
+      - id
+      - type
+      type: object
+    TeamHierarchyLinkCreateTeamRelationship:
+      description: Data about each team that will be connected by the team hierarchy
+        link
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamHierarchyLinkCreateTeam'
+      required:
+      - data
+      type: object
+    TeamHierarchyLinkRelationships:
+      description: Team hierarchy link relationships
+      properties:
+        parent_team:
+          $ref: '#/components/schemas/TeamHierarchyLinkTeamRelationship'
+        sub_team:
+          $ref: '#/components/schemas/TeamHierarchyLinkTeamRelationship'
+      required:
+      - parent_team
+      - sub_team
+      type: object
+    TeamHierarchyLinkResponse:
+      description: Team hierarchy link response
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamHierarchyLink'
+        included:
+          description: Included teams
+          items:
+            $ref: '#/components/schemas/TeamHierarchyLinkTeam'
+          type: array
+        links:
+          $ref: '#/components/schemas/TeamsHierarchyLinksResponseLinks'
+      type: object
+    TeamHierarchyLinkTeam:
+      description: Team hierarchy links connect different teams. This represents team
+        objects that are connected by the team hierarchy link.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamHierarchyLinkTeamAttributes'
+        id:
+          description: The team's identifier
+          example: 692e8073-12c4-4c71-8408-5090bd44c9c8
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamType'
+      required:
+      - id
+      - type
+      type: object
+    TeamHierarchyLinkTeamAttributes:
+      description: Team hierarchy links connect different teams. This represents attributes
+        from teams that are connected by the team hierarchy link.
+      properties:
+        avatar:
+          description: The team's avatar
+          nullable: true
+          type: string
+        banner:
+          description: The team's banner
+          format: int64
+          type: integer
+        handle:
+          description: The team's handle
+          example: team-handle
+          type: string
+        is_managed:
+          description: Whether the team is managed
+          type: boolean
+        is_open_membership:
+          description: Whether the team has open membership
+          type: boolean
+        link_count:
+          description: The number of links for the team
+          format: int64
+          type: integer
+        name:
+          description: The team's name
+          example: Team Name
+          type: string
+        summary:
+          description: The team's summary
+          nullable: true
+          type: string
+        user_count:
+          description: The number of users in the team
+          format: int64
+          type: integer
+      required:
+      - handle
+      - name
+      type: object
+    TeamHierarchyLinkTeamRelationship:
+      description: Team hierarchy link team relationship
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamHierarchyLinkTeam'
+      required:
+      - data
+      type: object
+    TeamHierarchyLinkType:
+      default: team_hierarchy_links
+      description: Team hierarchy link type
+      enum:
+      - team_hierarchy_links
+      example: team_hierarchy_links
+      type: string
+      x-enum-varnames:
+      - TEAM_HIERARCHY_LINKS
+    TeamHierarchyLinksResponse:
+      description: Team hierarchy links response
+      properties:
+        data:
+          description: Team hierarchy links response data
+          items:
+            $ref: '#/components/schemas/TeamHierarchyLink'
+          type: array
+        included:
+          description: Included teams
+          items:
+            $ref: '#/components/schemas/TeamHierarchyLinkTeam'
+          type: array
+        links:
+          $ref: '#/components/schemas/TeamsHierarchyLinksResponseLinks'
+        meta:
+          $ref: '#/components/schemas/TeamsHierarchyLinksResponseMeta'
       type: object
     TeamIncluded:
       description: Included resources related to the team
@@ -53328,6 +55313,76 @@ components:
       - LINK_COUNT
       - TEAM_LINKS
       - USER_TEAM_PERMISSIONS
+    TeamsHierarchyLinksResponseLinks:
+      description: When querying team hierarchy links, a set of links for navigation
+        between different pages is included
+      properties:
+        first:
+          description: Link to the first page.
+          nullable: true
+          type: string
+        last:
+          description: Link to the last page.
+          nullable: true
+          type: string
+        next:
+          description: Link to the next page.
+          nullable: true
+          type: string
+        prev:
+          description: Link to the previous page.
+          nullable: true
+          type: string
+        self:
+          description: Link to the current object.
+          type: string
+      type: object
+    TeamsHierarchyLinksResponseMeta:
+      description: Metadata that is included in the response when querying the team
+        hierarchy links
+      properties:
+        page:
+          $ref: '#/components/schemas/TeamsHierarchyLinksResponseMetaPage'
+      type: object
+    TeamsHierarchyLinksResponseMetaPage:
+      description: Metadata related to paging information that is included in the
+        response when querying the team hierarchy links
+      properties:
+        first_number:
+          description: First page number.
+          format: int64
+          type: integer
+        last_number:
+          description: Last page number.
+          format: int64
+          type: integer
+        next_number:
+          description: Next page number.
+          format: int64
+          nullable: true
+          type: integer
+        number:
+          description: Page number.
+          format: int64
+          type: integer
+        prev_number:
+          description: Previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        size:
+          description: Page size.
+          format: int64
+          type: integer
+        total:
+          description: Total number of results.
+          format: int64
+          type: integer
+        type:
+          description: Pagination type.
+          example: number_size
+          type: string
+      type: object
     TeamsResponse:
       description: Response with multiple teams
       properties:
@@ -53427,6 +55482,8 @@ components:
     ThreatHuntingJobOptions:
       description: Job options.
       properties:
+        anomalyDetectionOptions:
+          $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptions'
         detectionMethod:
           $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
         evaluationWindow:
@@ -55805,6 +57862,31 @@ components:
       example: 1
       format: int64
       type: integer
+    VersionHistoryUpdate:
+      description: A change in a rule version.
+      properties:
+        change:
+          description: The new value of the field.
+          example: cloud_provider:aws
+          type: string
+        field:
+          description: The field that was changed.
+          example: Tags
+          type: string
+        type:
+          $ref: '#/components/schemas/VersionHistoryUpdateType'
+      type: object
+    VersionHistoryUpdateType:
+      description: The type of change.
+      enum:
+      - create
+      - update
+      - delete
+      type: string
+      x-enum-varnames:
+      - CREATE
+      - UPDATE
+      - DELETE
     VirusTotalAPIKey:
       description: The definition of the `VirusTotalAPIKey` object.
       properties:
@@ -56002,6 +58084,12 @@ components:
           type: array
         risks:
           $ref: '#/components/schemas/VulnerabilityRisks'
+        running_kernel:
+          description: "True if the vulnerability affects a package in the host\u2019s
+            running kernel, false if it affects a non-running kernel, and omit if
+            it is not kernel-related."
+          example: true
+          type: boolean
         status:
           $ref: '#/components/schemas/VulnerabilityStatus'
         title:
@@ -56062,10 +58150,15 @@ components:
       - RubyGems
       - Go
       - Packagist
-      - Ddeb
+      - Deb
       - Rpm
       - Apk
       - Windows
+      - Generic
+      - MacOs
+      - Oci
+      - BottleRocket
+      - None
       type: string
       x-enum-varnames:
       - PYPI
@@ -56075,10 +58168,15 @@ components:
       - RUBY_GEMS
       - GO
       - PACKAGIST
-      - D_DEB
+      - DEB
       - RPM
       - APK
       - WINDOWS
+      - GENERIC
+      - MAC_OS
+      - OCI
+      - BOTTLE_ROCKET
+      - NONE
     VulnerabilityRelationships:
       description: Related entities object.
       properties:
@@ -56179,12 +58277,14 @@ components:
       - IAST
       - SCA
       - Infra
+      - SAST
       example: SCA
       type: string
       x-enum-varnames:
       - IAST
       - SCA
       - INFRA
+      - SAST
     VulnerabilityType:
       description: The vulnerability type.
       enum:
@@ -56789,7 +58889,7 @@ info:
   version: '1.0'
 openapi: 3.0.0
 paths:
-  /api/unstable/fleet/agents:
+  /api/unstable/fleet/agent_versions:
     get:
       description: 'Retrieve a list of all available Datadog Agent versions.
 
@@ -56826,6 +58926,144 @@ paths:
       tags:
       - Fleet Automation
       x-menu-order: 0
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/agents:
+    get:
+      description: 'Retrieve a paginated list of all Datadog Agents.
+
+        This endpoint returns a paginated list of all Datadog Agents with support
+        for pagination, sorting, and filtering.
+
+        Use the `page_number` and `page_size` query parameters to paginate through
+        results.'
+      operationId: ListFleetAgents
+      parameters:
+      - description: Page number for pagination (must be greater than 0).
+        in: query
+        name: page_number
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+      - description: Number of results per page (must be greater than 0 and less than
+          or equal to 100).
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 10
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: Attribute to sort by.
+        in: query
+        name: sort_attribute
+        required: false
+        schema:
+          type: string
+      - description: Sort order (true for descending, false for ascending).
+        in: query
+        name: sort_descending
+        required: false
+        schema:
+          type: boolean
+      - description: Comma-separated list of tags to filter agents.
+        in: query
+        name: tags
+        required: false
+        schema:
+          type: string
+      - description: Filter string for narrowing down agent results.
+        example: hostname:my-hostname OR env:dev
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetAgentsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List all Datadog Agents
+      tags:
+      - Fleet Automation
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - hosts_read
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/unstable/fleet/agents/{agent_key}:
+    get:
+      description: 'Retrieve detailed information about a specific Datadog Agent.
+
+        This endpoint returns comprehensive information about an agent including:
+
+        - Agent details and metadata
+
+        - Configured integrations organized by status (working, warning, error, missing)
+
+        - Detected integrations
+
+        - Configuration files and layers'
+      operationId: GetFleetAgentInfo
+      parameters:
+      - description: The unique identifier (agent key) for the Datadog Agent.
+        in: path
+        name: agent_key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FleetAgentInfoResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get detailed information about an agent
+      tags:
+      - Fleet Automation
+      x-menu-order: 2
       x-permission:
         operator: AND
         permissions:
@@ -56879,7 +59117,7 @@ paths:
       summary: List all deployments
       tags:
       - Fleet Automation
-      x-menu-order: 0
+      x-menu-order: 3
       x-permission:
         operator: AND
         permissions:
@@ -56926,6 +59164,77 @@ paths:
                             source: kafka
                             type: file
                       filter_query: env:prod
+                    type: deployment
+              comprehensive_configuration:
+                summary: Comprehensive example with multiple configuration file types
+                value:
+                  data:
+                    attributes:
+                      config_operations:
+                      - file_op: merge-patch
+                        file_path: /datadog.yaml
+                        patch:
+                          apm_config:
+                            apm_dd_url: https://trace.agent.datadoghq.com
+                            enabled: true
+                          log_level: info
+                          logs_enabled: true
+                          process_config:
+                            enabled: true
+                      - file_op: merge-patch
+                        file_path: /security-agent.yaml
+                        patch:
+                          runtime_security_config:
+                            enabled: true
+                            fim_enabled: true
+                      - file_op: merge-patch
+                        file_path: /system-probe.yaml
+                        patch:
+                          network_config:
+                            enabled: true
+                          service_monitoring_config:
+                            enabled: true
+                      - file_op: merge-patch
+                        file_path: /application_monitoring.yaml
+                        patch:
+                          enabled: true
+                          server:
+                            host: 0.0.0.0
+                            port: 8126
+                      - file_op: merge-patch
+                        file_path: /conf.d/logs.d/custom-app.yaml
+                        patch:
+                          logs:
+                          - path: /var/log/custom-app/*.log
+                            service: custom-app
+                            source: custom
+                            type: file
+                      - file_op: merge-patch
+                        file_path: /conf.d/docker.d/docker-logs.yaml
+                        patch:
+                          logs:
+                          - service: docker
+                            source: docker
+                            type: docker
+                      - file_op: merge-patch
+                        file_path: /conf.d/snmp.d/network-devices.yaml
+                        patch:
+                          init_config:
+                            loader: core
+                          instances:
+                          - community_string: public
+                            ip_address: 192.168.1.1
+                      - file_op: merge-patch
+                        file_path: /conf.d/postgres.d/conf.yaml
+                        patch:
+                          instances:
+                          - dbname: postgres
+                            host: localhost
+                            port: 5432
+                            username: datadog
+                      - file_op: delete
+                        file_path: /conf.d/deprecated-integration.yaml
+                      filter_query: env:prod AND datacenter:us-east-1
                     type: deployment
               delete_config_file:
                 summary: Delete a configuration file
@@ -56989,7 +59298,7 @@ paths:
       summary: Create a configuration deployment
       tags:
       - Fleet Automation
-      x-menu-order: 1
+      x-menu-order: 4
       x-permission:
         operator: AND
         permissions:
@@ -57071,7 +59380,7 @@ paths:
       summary: Upgrade hosts
       tags:
       - Fleet Automation
-      x-menu-order: 2
+      x-menu-order: 5
       x-permission:
         operator: AND
         permissions:
@@ -57149,7 +59458,7 @@ paths:
       summary: Get a configuration deployment by ID
       tags:
       - Fleet Automation
-      x-menu-order: 3
+      x-menu-order: 6
       x-permission:
         operator: AND
         permissions:
@@ -57204,7 +59513,7 @@ paths:
       summary: Cancel a deployment
       tags:
       - Fleet Automation
-      x-menu-order: 4
+      x-menu-order: 7
       x-permission:
         operator: AND
         permissions:
@@ -57246,7 +59555,7 @@ paths:
       summary: List all schedules
       tags:
       - Fleet Automation
-      x-menu-order: 0
+      x-menu-order: 8
       x-permission:
         operator: AND
         permissions:
@@ -57338,7 +59647,7 @@ paths:
       summary: Create a schedule
       tags:
       - Fleet Automation
-      x-menu-order: 1
+      x-menu-order: 9
       x-permission:
         operator: AND
         permissions:
@@ -57391,7 +59700,7 @@ paths:
       summary: Delete a schedule
       tags:
       - Fleet Automation
-      x-menu-order: 4
+      x-menu-order: 12
       x-permission:
         operator: AND
         permissions:
@@ -57447,7 +59756,7 @@ paths:
       summary: Get a schedule by ID
       tags:
       - Fleet Automation
-      x-menu-order: 2
+      x-menu-order: 10
       x-permission:
         operator: AND
         permissions:
@@ -57544,7 +59853,7 @@ paths:
       summary: Update a schedule
       tags:
       - Fleet Automation
-      x-menu-order: 3
+      x-menu-order: 11
       x-permission:
         operator: AND
         permissions:
@@ -57617,7 +59926,7 @@ paths:
       summary: Trigger a schedule deployment
       tags:
       - Fleet Automation
-      x-menu-order: 5
+      x-menu-order: 13
       x-permission:
         operator: AND
         permissions:
@@ -59787,6 +62096,27 @@ paths:
         permissions:
         - apm_retention_filter_write
         - apm_pipelines_write
+  /api/v2/apm/services:
+    get:
+      operationId: GetServiceList
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
+      summary: Get service list
+      tags:
+      - APM
+      x-menu-order: 1
   /api/v2/app-builder/apps:
     delete:
       description: Delete multiple apps in a single request from a list of app IDs.
@@ -61695,6 +64025,14 @@ paths:
       - $ref: '#/components/parameters/FilterByRelationType'
       - $ref: '#/components/parameters/FilterByExcludeSnapshot'
       - $ref: '#/components/parameters/Include'
+      - description: If true, includes discovered services from APM and USM that do
+          not have entity definitions.
+        in: query
+        name: includeDiscovered
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -61920,6 +64258,13 @@ paths:
       - $ref: '#/components/parameters/FilterRelationByFromRef'
       - $ref: '#/components/parameters/FilterRelationByToRef'
       - $ref: '#/components/parameters/RelationInclude'
+      - description: If true, includes relationships discovered by APM and USM.
+        in: query
+        name: includeDiscovered
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
@@ -64838,6 +67183,51 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/deployment_gates/{gate_id}/rules:
+    get:
+      description: Endpoint to get rules for a deployment gate.
+      operationId: GetDeploymentGateRules
+      parameters:
+      - description: The ID of the deployment gate.
+        in: path
+        name: gate_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentGateRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/HTTPCDGatesBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get rules for a deployment gate
+      tags:
+      - Deployment Gates
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - deployment_gates_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Endpoint to create a deployment rule. A gate for the rule must
         already exist.
@@ -65404,6 +67794,24 @@ paths:
         '200':
           content:
             application/json:
+              example:
+                data:
+                  attributes:
+                    custom_tags:
+                    - language:java
+                    - department:engineering
+                    - region:us-east-1
+                    env: staging
+                    finished_at: 1693491984000000000
+                    git:
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/organization/example-repository
+                    service: shopist
+                    started_at: 1693491974000000000
+                    team: backend
+                    version: v1.12.07
+                  id: 4242fcdd31586083
+                  type: dora_deployment
               schema:
                 $ref: '#/components/schemas/DORAFetchResponse'
           description: OK
@@ -65525,6 +67933,64 @@ paths:
         '200':
           content:
             application/json:
+              example:
+                data:
+                - attributes:
+                    custom_tags:
+                    - language:java
+                    - department:engineering
+                    - region:us-east-1
+                    env: production
+                    finished_at: 1693491984000000000
+                    git:
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/organization/example-repository
+                    name: Web server is down; all requests are failing.
+                    services:
+                    - shopist
+                    severity: SEV-1
+                    started_at: 1693491974000000000
+                    team: backend
+                  id: 4242fcdd31586085
+                  type: dora_failure
+                - attributes:
+                    custom_tags:
+                    - language:go
+                    - department:platform
+                    env: production
+                    finished_at: 1693492084000000000
+                    git:
+                      commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
+                      repository_url: https://github.com/organization/api-service
+                    name: Database connection timeout
+                    services:
+                    - api-service
+                    - payment-service
+                    severity: SEV-1
+                    started_at: 1693492074000000000
+                    team: platform
+                    version: v2.1.0
+                  id: 4242fcdd31586086
+                  type: dora_failure
+                - attributes:
+                    custom_tags:
+                    - language:python
+                    - department:payments
+                    - region:eu-west-1
+                    env: staging
+                    finished_at: 1693492204000000000
+                    git:
+                      commit_sha: 99edc9350f2cc9b250b69abddab733dd55e1a601
+                      repository_url: https://github.com/organization/payment-service
+                    name: Payment gateway API rate limit exceeded
+                    services:
+                    - payment-service
+                    severity: SEV-2
+                    started_at: 1693492174000000000
+                    team: payments
+                    version: v1.8.3
+                  id: 4242fcdd31586087
+                  type: dora_failure
               schema:
                 $ref: '#/components/schemas/DORAListResponse'
           description: OK
@@ -65565,6 +68031,26 @@ paths:
         '200':
           content:
             application/json:
+              example:
+                data:
+                  attributes:
+                    custom_tags:
+                    - language:java
+                    - department:engineering
+                    - region:us-east-1
+                    env: staging
+                    finished_at: 1693491984000000000
+                    git:
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/organization/example-repository
+                    name: Web server is down; all requests are failing.
+                    services:
+                    - shopist
+                    severity: High
+                    started_at: 1693491974000000000
+                    team: backend
+                  id: 4242fcdd31586085
+                  type: dora_failure
               schema:
                 $ref: '#/components/schemas/DORAFetchResponse'
           description: OK
@@ -66239,6 +68725,7 @@ paths:
                           rule:
                             datacenter: devcycle.us1.prod
                       category: change
+                      host: hostname
                       integration_id: custom-events
                       message: payment_processed feature flag has been enabled
                       tags:
@@ -66285,6 +68772,7 @@ paths:
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ap1.datadoghq.com
+            - ap2.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -67379,9 +69867,6 @@ paths:
         operator: OR
         permissions:
         - incident_read
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create an impact for an incident.
       operationId: CreateIncidentImpact
@@ -67426,9 +69911,6 @@ paths:
         operator: OR
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/impacts/{impact_id}:
     delete:
       description: Delete an incident impact.
@@ -67460,9 +69942,6 @@ paths:
         operator: OR
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is in Preview.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/relationships/integrations:
     get:
       description: Get all integration metadata for an incident.
@@ -70969,6 +73448,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get restriction query for a given role
@@ -71007,6 +73492,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all restriction queries for a given user
@@ -71156,6 +73647,56 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Replace a restriction query.
+      operationId: ReplaceRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestrictionQueryUpdatePayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryWithoutRelationshipsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Replace a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-menu-order: 4.5
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_manage
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/logs/config/restriction_queries/{restriction_query_id}/roles:
     delete:
       description: Removes a role from a restriction query.
@@ -71250,7 +73791,11 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
-      description: Adds a role to a restriction query.
+      description: 'Adds a role to a restriction query.
+
+
+        **Note**: This operation automatically grants the `logs_read_data` permission
+        to the role if it doesn''t already have it.'
       operationId: AddRoleToRestrictionQuery
       parameters:
       - $ref: '#/components/parameters/RestrictionQueryID'
@@ -74001,10 +76546,14 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get the schedule on-call user
+      summary: Get scheduled on-call user
       tags:
       - On-Call
       x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
   /api/v2/on-call/teams/{team_id}/on-call:
     get:
       description: Get a team's on-call users at a given time
@@ -74048,6 +76597,10 @@ paths:
       tags:
       - On-Call
       x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
   /api/v2/on-call/teams/{team_id}/routing-rules:
     get:
       description: Get a team's On-Call routing rules
@@ -74131,6 +76684,188 @@ paths:
         operator: AND
         permissions:
         - on_call_write
+  /api/v2/on-call/users/{user_id}/notification-channels:
+    get:
+      description: List the notification channels for a user. The authenticated user
+        must be the target user or have the `on_call_admin` permission
+      operationId: ListUserNotificationChannels
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNotificationChannelsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List On-Call notification channels for a user
+      tags:
+      - On-Call
+      x-menu-order: 15
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
+    post:
+      description: Create a new notification channel for a user. The authenticated
+        user must be the target user or have the `on_call_admin` permission
+      operationId: CreateUserNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserNotificationChannelRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationChannel'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create an On-Call notification channel for a user
+      tags:
+      - On-Call
+      x-menu-order: 16
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_respond
+  /api/v2/on-call/users/{user_id}/notification-channels/{channel_id}:
+    delete:
+      description: Delete a notification channel for a user. The authenticated user
+        must be the target user or have the `on_call_admin` permission
+      operationId: DeleteUserNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The channel ID
+        in: path
+        name: channel_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete an On-Call notification channel for a user
+      tags:
+      - On-Call
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_respond
+    get:
+      description: Get a notification channel for a user. The authenticated user must
+        be the target user or have the `on_call_admin` permission
+      operationId: GetUserNotificationChannel
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The channel ID
+        in: path
+        name: channel_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationChannel'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get an On-Call notification channel for a user
+      tags:
+      - On-Call
+      x-menu-order: 14
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -74662,11 +77397,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ: []
       summary: Mute or unmute a batch of findings
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+        - appsec_vm_write
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -75670,6 +78411,48 @@ paths:
       - Reference Tables
       x-menu-order: 6
   /api/v2/reference-tables/tables/{id}/rows:
+    delete:
+      description: Delete multiple rows from a Reference Table by their primary key
+        values.
+      operationId: DeleteRows
+      parameters:
+      - description: Unique identifier of the reference table to delete rows from
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDeleteRowsRequestArray'
+        required: true
+      responses:
+        '200':
+          description: Rows deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete rows
+      tags:
+      - Reference Tables
+      x-menu-order: 9
     get:
       description: Get reference table rows by their primary key values.
       operationId: GetRowsByID
@@ -75715,6 +78498,49 @@ paths:
       tags:
       - Reference Tables
       x-menu-order: 5
+    post:
+      description: Create or update rows in a Reference Table by their primary key
+        values. If a row with the specified primary key exists, it is updated; otherwise,
+        a new row is created.
+      operationId: UpsertRows
+      parameters:
+      - description: Unique identifier of the reference table to upsert rows into
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchUpsertRowsRequestArray'
+        required: true
+      responses:
+        '200':
+          description: Rows created or updated successfully
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Upsert rows
+      tags:
+      - Reference Tables
+      x-menu-order: 8
   /api/v2/reference-tables/uploads:
     post:
       description: Create a reference table upload for bulk data ingestion
@@ -79017,6 +81843,230 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_cws_agent_rules_read
+  /api/v2/security/findings/cases:
+    delete:
+      description: 'Detach security findings from their case.
+
+        This operation dissociates security findings from their associated cases without
+        deleting the cases themselves. You can detach security findings from multiple
+        different cases in a single request, with a limit of 50 security findings
+        per request. Security findings that are not currently attached to any case
+        will be ignored.'
+      operationId: DetachCase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachCaseRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Detach security findings from their case
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 46
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+        - appsec_vm_write
+    post:
+      description: 'Create cases for security findings.
+
+        You can create up to 50 cases per request and associate up to 50 security
+        findings per case. Security findings that are already attached to another
+        case will be detached from their previous case and attached to the newly created
+        case.'
+      operationId: CreateCases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCaseRequestArray'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindingCaseResponseArray'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create cases for security findings
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 44
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+        - appsec_vm_write
+  /api/v2/security/findings/cases/{case_id}:
+    patch:
+      description: 'Attach security findings to a case.
+
+        You can attach up to 50 security findings per case. Security findings that
+        are already attached to another case will be detached from their previous
+        case and attached to the specified case.'
+      operationId: AttachCase
+      parameters:
+      - description: Unique identifier of the case to attach security findings to
+        in: path
+        name: case_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachCaseRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindingCaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Attach security findings to a case
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 45
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+        - appsec_vm_write
+  /api/v2/security/findings/jira_issues:
+    patch:
+      description: 'Attach security findings to a Jira issue by providing the Jira
+        issue URL.
+
+        You can attach up to 50 security findings per Jira issue. If the Jira issue
+        is not linked to any case, this operation will create a case for the security
+        findings and link the Jira issue to the newly created case. To configure the
+        Jira integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
+        Security findings that are already attached to another Jira issue will be
+        detached from their previous Jira issue and attached to the specified Jira
+        issue.'
+      operationId: AttachJiraIssue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachJiraIssueRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindingCaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Attach security findings to a Jira issue
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 48
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+        - appsec_vm_write
+      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
+
+        Please check the documentation regularly for updates.'
+    post:
+      description: 'Create Jira issues for security findings.
+
+        This operation creates a case in Datadog and a Jira issue linked to that case
+        for bidirectional sync between Datadog and Jira. To configure the Jira integration,
+        see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
+        You can create up to 50 Jira issues per request and associate up to 50 security
+        findings per Jira issue. Security findings that are already attached to another
+        Jira issue will be detached from their previous Jira issue and attached to
+        the newly created Jira issue.'
+      operationId: CreateJiraIssues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJiraIssueRequestArray'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindingCaseResponseArray'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create Jira issues for security findings
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 47
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+        - appsec_vm_write
+      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
+
+        Please check the documentation regularly for updates.'
   /api/v2/security/sboms:
     get:
       description: 'Get a list of assets SBOMs for an organization.
@@ -79140,6 +82190,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - appsec_vm_read
       x-unstable: '**Note**: This endpoint is a private preview.
 
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
@@ -79212,6 +82266,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - appsec_vm_read
       x-unstable: '**Note**: This endpoint is a private preview.
 
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
@@ -79327,6 +82385,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - appsec_vm_read
       x-unstable: '**Note**: This endpoint is a private preview.
 
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
@@ -79760,6 +82822,14 @@ paths:
         required: false
         schema:
           type: string
+      - description: Filter for whether the vulnerability affects a running kernel
+          (for vulnerabilities related to a `Host` asset).
+        example: true
+        in: query
+        name: filter[running_kernel]
+        required: false
+        schema:
+          type: boolean
       - description: Filter by asset name. This field supports the usage of wildcards
           (*).
         example: datadog-agent
@@ -79904,6 +82974,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - appsec_vm_read
       x-unstable: '**Note**: This endpoint is a private preview.
 
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
@@ -80268,6 +83342,10 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - appsec_vm_read
       x-unstable: '**Note**: This endpoint is a private preview.
 
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
@@ -80859,6 +83937,36 @@ paths:
       - AuthZ:
         - security_monitoring_suppressions_write
       summary: Update a suppression rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+  /api/v2/security_monitoring/configuration/suppressions/{suppression_id}/version_history:
+    get:
+      description: Get a suppression's version history.
+      operationId: GetSuppressionVersionHistory
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringSuppressionID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSuppressionVersionHistoryResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_read
+      summary: Get a suppression's version history
       tags:
       - Security Monitoring
       x-menu-order: 0
@@ -83485,8 +86593,8 @@ paths:
       x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/static-analysis/secrets/rules:
     get:
-      description: Returns list of Secrets rules with ID, Pattern, Description, Priority,
-        and SDS ID
+      description: Returns a list of Secrets rules with ID, Pattern, Description,
+        Priority, and SDS ID.
       operationId: GetSecretsRules
       responses:
         '200':
@@ -83502,7 +86610,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - code_analysis_read
-      summary: Returns list of Secrets rules
+      summary: Returns a list of Secrets rules
       tags:
       - Security Monitoring
       x-menu-order: 28
@@ -83870,6 +86978,174 @@ paths:
         permissions:
         - teams_read
         - teams_manage
+  /api/v2/team-hierarchy-links:
+    get:
+      description: List all team hierarchy links that match the provided filters.
+      operationId: ListTeamHierarchyLinks
+      parameters:
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/PageSize'
+      - description: Filter by parent team ID
+        in: query
+        name: filter[parent_team]
+        required: false
+        schema:
+          type: string
+      - description: Filter by sub team ID
+        in: query
+        name: filter[sub_team]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamHierarchyLinksResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team hierarchy links
+      tags:
+      - Teams
+      x-menu-order: 20
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    post:
+      description: Create a new team hierarchy link between a parent team and a sub
+        team.
+      operationId: AddTeamHierarchyLink
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamHierarchyLinkCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamHierarchyLinkResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+        - teams_manage
+      summary: Create a team hierarchy link
+      tags:
+      - Teams
+      x-menu-order: 22
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_read
+        - teams_manage
+  /api/v2/team-hierarchy-links/{link_id}:
+    delete:
+      description: Remove a team hierarchy link by the given link_id.
+      operationId: RemoveTeamHierarchyLink
+      parameters:
+      - description: The team hierarchy link's identifier
+        in: path
+        name: link_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+        - teams_manage
+      summary: Remove a team hierarchy link
+      tags:
+      - Teams
+      x-menu-order: 23
+      x-permission:
+        operator: AND
+        permissions:
+        - teams_read
+        - teams_manage
+    get:
+      description: Get a single team hierarchy link for the given link_id.
+      operationId: GetTeamHierarchyLink
+      parameters:
+      - description: The team hierarchy link's identifier
+        in: path
+        name: link_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamHierarchyLinkResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get a team hierarchy link
+      tags:
+      - Teams
+      x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
   /api/v2/team/connections:
     delete:
       description: Delete multiple team connections.
@@ -83898,16 +87174,12 @@ paths:
         - teams_read
       summary: Delete team connections
       tags:
-      - Team Connections
+      - Teams
       x-menu-order: 3
       x-permission:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Returns all team connections.
       operationId: ListTeamConnections
@@ -83978,7 +87250,7 @@ paths:
         - teams_read
       summary: List team connections
       tags:
-      - Team Connections
+      - Teams
       x-menu-order: 1
       x-pagination:
         limitParam: page[size]
@@ -83988,10 +87260,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create multiple team connections.
       operationId: CreateTeamConnections
@@ -84023,16 +87291,12 @@ paths:
         - teams_read
       summary: Create team connections
       tags:
-      - Team Connections
+      - Teams
       x-menu-order: 2
       x-permission:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/sync:
     get:
       description: 'Get all team synchronization configurations.
@@ -84077,10 +87341,6 @@ paths:
         operator: OR
         permissions:
         - teams_read
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: 'This endpoint attempts to link your existing Datadog teams with
         GitHub teams by matching their names.
@@ -84143,13 +87403,15 @@ paths:
         operator: AND
         permissions:
         - teams_manage
-      x-unstable: '**Note**: This endpoint is in Preview. To request access, fill
-        out this [form](https://www.datadoghq.com/product-preview/github-integration-for-teams/).
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{super_team_id}/member_teams:
     get:
-      description: Get all member teams.
+      deprecated: true
+      description: 'Get all member teams.
+
+
+        **Note**: This API is deprecated. For team hierarchy relationships (parent-child
+
+        teams), use the team hierarchy links API: `GET /api/v2/team-hierarchy-links`.'
       operationId: ListMemberTeams
       parameters:
       - description: None
@@ -84203,14 +87465,20 @@ paths:
         operator: OR
         permissions:
         - teams_read
+      x-sunset: '2026-06-01'
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
+      deprecated: true
       description: 'Add a member team.
 
         Adds the team given by the `id` in the body as a member team of the super
-        team.'
+        team.
+
+
+        **Note**: This API is deprecated. For creating team hierarchy links, use the
+        team hierarchy links API: `POST /api/v2/team-hierarchy-links`.'
       operationId: AddMemberTeam
       parameters:
       - description: None
@@ -84251,12 +87519,18 @@ paths:
         operator: OR
         permissions:
         - teams_read
+      x-sunset: '2026-06-01'
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/team/{super_team_id}/member_teams/{member_team_id}:
     delete:
-      description: Remove a super team's member team identified by `member_team_id`.
+      deprecated: true
+      description: 'Remove a super team''s member team identified by `member_team_id`.
+
+
+        **Note**: This API is deprecated. For deleting team hierarchy links, use the
+        team hierarchy links API: `DELETE /api/v2/team-hierarchy-links/{link_id}`.'
       operationId: RemoveMemberTeam
       parameters:
       - description: None
@@ -84297,6 +87571,7 @@ paths:
         operator: OR
         permissions:
         - teams_read
+      x-sunset: '2026-06-01'
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -84738,7 +88013,13 @@ paths:
         permissions:
         - teams_read
     post:
-      description: Add a user to a team.
+      description: 'Add a user to a team.
+
+
+        **Note**: Each team has a setting that determines who is allowed to modify
+        membership of the team. The `user_access_manage` permission generally grants
+        access to modify membership of any team. To get the full picture, see [Team
+        Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).'
       operationId: CreateTeamMembership
       parameters:
       - description: None
@@ -84792,7 +88073,13 @@ paths:
         - teams_read
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
-      description: Remove a user from a team.
+      description: 'Remove a user from a team.
+
+
+        **Note**: Each team has a setting that determines who is allowed to modify
+        membership of the team. The `user_access_manage` permission generally grants
+        access to modify membership of any team. To get the full picture, see [Team
+        Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).'
       operationId: DeleteTeamMembership
       parameters:
       - description: None
@@ -84834,7 +88121,13 @@ paths:
         permissions:
         - teams_read
     patch:
-      description: Update a user's membership attributes on a team.
+      description: 'Update a user''s membership attributes on a team.
+
+
+        **Note**: Each team has a setting that determines who is allowed to modify
+        membership of the team. The `user_access_manage` permission generally grants
+        access to modify membership of any team. To get the full picture, see [Team
+        Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).'
       operationId: UpdateTeamMembership
       parameters:
       - description: None
@@ -86821,6 +90114,9 @@ servers:
 tags:
 - description: Configure your API endpoints through the Datadog API.
   name: API Management
+- description: Observe, troubleshoot, and improve cloud-scale applications with all
+    telemetry in context
+  name: APM
 - description: Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters)
     for your organization. You need an API and application key with Admin rights to
     interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters)
@@ -87381,9 +90677,6 @@ tags:
     use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
     information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
-- description: View and manage relationships between Datadog teams and teams from
-    external sources, such as GitHub.
-  name: Team Connections
 - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
     for more information.
   name: Teams

@@ -2,6 +2,9 @@
 title: Managed Evaluations
 description: Learn how to configure managed evaluations for your LLM applications.
 further_reading:
+- link: https://www.datadoghq.com/blog/llm-aws-strands
+  tag: Blog
+  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about LLM Observability terms and concepts"
@@ -32,7 +35,7 @@ Configure the LLM provider you would like to use for bring-your-own-key (BYOK) e
 {{< tabs >}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM Observability uses the `GPT-4o mini` model for evaluations.
 
@@ -48,7 +51,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 {{% /tab %}}
 {{% tab "Azure OpenAI" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Azure OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Azure OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your Azure OpenAI account to LLM Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8].
 
@@ -65,7 +68,7 @@ Connect your Azure OpenAI account to LLM Observability with your OpenAI API key.
 {{% /tab %}}
 {{% tab "Anthropic" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Anthropic account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Anthropic account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your Anthropic account to LLM Observability with your Anthropic API key. LLM Observability uses the `Haiku` model for evaluations.
 
@@ -80,7 +83,7 @@ Connect your Anthropic account to LLM Observability with your Anthropic API key.
 {{% /tab %}}
 {{% tab "Amazon Bedrock" %}}
 
-<div class="alert alert-info">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Amazon Bedrock account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Amazon Bedrock account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your Amazon Bedrock account to LLM Observability with your AWS Account. LLM Observability uses the `Haiku` model for evaluations.
 
@@ -89,6 +92,44 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 1. Follow the instructions on the tile.
 
 {{< img src="llm_observability/configuration/amazon-bedrock-tile.png" alt="The Amazon Bedrock configuration tile in LLM Observability. Lists instructions for configuring Amazon Bedrock." style="width:100%;" >}}
+
+[1]: https://app.datadoghq.com/llm/settings/integrations
+{{% /tab %}}
+
+{{% tab "GCP Vertex AI" %}}
+
+<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to a Google Cloud Platform account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+
+Connect Vertex AI to LLM Observability with your Google Cloud Platform account. LLM Observability uses the `gemini-2.5-flash` model for evaluations.
+
+1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
+1. On the Google Cloud Vertex AI tile, click **Connect** to add a new GCP account, or click **Configure** next to where your existing accounts are listed to begin the onboarding process.
+   - You will see all GCP accounts connected to Datadog in this page. However, you must still go through the onboarding process for an account to use it in LLM Observability.
+1. Follow the onboarding instructions to configure your account.
+   - Add the [**Vertex AI User**][2] role to your account and enable the [**Vertex AI API**][3].
+
+{{< img src="llm_observability/configuration/vertex-ai-pint.png" alt="The Vertex AI onboarding workflow. Follow steps to configure your GCP service account with the right Vertex AI permissions for use with LLM Observability." style="width:100%;" >}}
+
+[1]: https://app.datadoghq.com/llm/settings/integrations
+[2]: https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user
+[3]: https://console.cloud.google.com/apis/library/aiplatform.googleapis.com
+{{% /tab %}}
+
+{{% tab "AI Gateway" %}}
+<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you only connect to an AI Gateway that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-info">This feature is in Private Preview. Contact your account team for access.</div>
+
+Connect your AI Gateway to LLM Observability with your base URL, API key, and headers.
+
+1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
+1. Click the **Configure** tab, then click **New** to create a new gateway.
+1. Follow the instructions on the tile.
+   - Provide a name for your gateway.
+   - Select your provider.
+   - Provide your base URL.
+   - Provide your API key and optionally any headers.
+
+{{< img src="llm_observability/configuration/ai-gateway-tile.png" alt="The AI Gateway configuration tile in LLM Observability. Lists instructions for configuring an ai gateway" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
@@ -145,7 +186,7 @@ This check identifies and flags user inputs that deviate from the configured acc
 
 {{< img src="llm_observability/evaluations/topic_relevancy_3.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+| Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|
 | Evaluated on Input | Evaluated using LLM | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the Large Language Model (LLM) application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
 
@@ -166,7 +207,7 @@ This check identifies instances where the LLM makes a claim that disagrees with 
 
 {{< img src="llm_observability/evaluations/hallucination_5.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+| Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|
 | Evaluated on Output | Evaluated using LLM | Hallucination flags any output that disagrees with the context provided to the LLM. |
 
@@ -228,13 +269,13 @@ This check identifies instances where the LLM fails to deliver an appropriate re
 
 {{< img src="llm_observability/evaluations/failure_to_answer_5.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+| Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|
 | Evaluated on Output | Evaluated using LLM | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
 
 ##### Failure to Answer Configuration
 <div class="alert alert-info">Configuring failure to answer evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
-You can configure the Failure to Answer evaluation to use specific categories of failure to answer, listed in the following table. 
+You can configure the Failure to Answer evaluation to use specific categories of failure to answer, listed in the following table.
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
@@ -256,7 +297,7 @@ Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Belarusian, Bengali, Norwegi
 
 {{< img src="llm_observability/evaluations/language_mismatch_4.png" alt="A Language Mismatch evaluation detected by an open source model in LLM Observability" style="width:100%;" >}}
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+| Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|
 | Evaluated on Input and Output | Evaluated using Open Source Model | Language Mismatch flags whether each prompt-response pair demonstrates that the LLM application answered the user's question in the same language that the user used.  |
 
@@ -266,7 +307,7 @@ This check helps understand the overall mood of the conversation, gauge user sat
 
 {{< img src="llm_observability/evaluations/sentiment_5.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+| Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|
 | Evaluated on Input and Output | Evaluated using LLM | Sentiment flags the emotional tone or attitude expressed in the text, categorizing it as positive, negative, or neutral.   |
 
@@ -277,27 +318,27 @@ This check helps understand the overall mood of the conversation, gauge user sat
 This check evaluates each input prompt from the user and the response from the LLM application for toxic content. This check identifies and flags toxic content to ensure that interactions remain respectful and safe.
 
 {{< img src="llm_observability/evaluations/toxicity_4.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
-  
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|
 | Evaluated on Input and Output | Evaluated using LLM | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
 
 ##### Toxicity configuration
 
 <div class="alert alert-info">Configuring toxicity evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
-You can configure toxicity evaluations to use specific categories of toxicity, listed in the following table. 
+You can configure toxicity evaluations to use specific categories of toxicity, listed in the following table.
 
-| Category | Description | 
+| Category | Description |
 |---|---|
-| Discriminatory Content | Content that discriminates against a particular group, including based on race, gender, sexual orientation, culture, etc.  | 
-| Harassment | Content that expresses, incites, or promotes negative or intrusive behavior toward an individual or group. | 
-| Hate | Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste. | 
-| Illicit | Content that asks, gives advice, or instruction on how to commit illicit acts. | 
-| Self Harm | Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders. | 
-| Sexual | Content that describes or alludes to sexual activity.  | 
-| Violence | Content that discusses death, violence, or physical injury. | 
-| Profanity | Content containing profanity. | 
-| User Dissatisfaction | Content containing criticism towards the model. *This category is only available for evaluating input toxicity.* | 
+| Discriminatory Content | Content that discriminates against a particular group, including based on race, gender, sexual orientation, culture, etc.  |
+| Harassment | Content that expresses, incites, or promotes negative or intrusive behavior toward an individual or group. |
+| Hate | Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste. |
+| Illicit | Content that asks, gives advice, or instruction on how to commit illicit acts. |
+| Self Harm | Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders. |
+| Sexual | Content that describes or alludes to sexual activity.  |
+| Violence | Content that discusses death, violence, or physical injury. |
+| Profanity | Content containing profanity. |
+| User Dissatisfaction | Content containing criticism towards the model. *This category is only available for evaluating input toxicity.* |
 
 The toxicity categories in this table are informed by: [Banko et al. (2020)][14], [Inan et al. (2023)][15], [Ghosh et al. (2024)][16], [Zheng et al. (2024)][17].
 
@@ -307,13 +348,13 @@ This check identifies attempts by unauthorized or malicious authors to manipulat
 
 {{< img src="llm_observability/evaluations/prompt_injection_4.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+| Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|
 | Evaluated on Input | Evaluated using LLM | [Prompt Injection][13] flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
 
 ##### Prompt injection configuration
 <div class="alert alert-info">Configuring prompt injection evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
-You can configure the prompt injection evaluation to use specific categories of prompt injection, listed in the following table. 
+You can configure the prompt injection evaluation to use specific categories of prompt injection, listed in the following table.
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
@@ -327,8 +368,8 @@ You can configure the prompt injection evaluation to use specific categories of 
 This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
 
 {{< img src="llm_observability/evaluations/sensitive_data_scanning_4.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in LLM Observability" style="width:100%;" >}}
-  
-| Evaluation Stage | Evaluation Method | Evaluation Definition | 
+
+| Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|
 | Evaluated on Input and Output | Sensitive Data Scanner | Powered by the [Sensitive Data Scanner][4], LLM Observability scans, identifies, and redacts sensitive information within every LLM application's prompt-response pairs. This includes personal information, financial data, health records, or any other data that requires protection due to privacy or security concerns. |
 
