@@ -31,7 +31,7 @@ The rsyslog and syslog-ng destinations match these log fields to the following S
 | log["host"]     | HOSTNAME     | `NIL`                      |
 | log["timestamp"]| TIMESTAMP    | Current UTC time.          |
 
-To set up the syslog destination:
+To set up the syslog destination in the UI:
 
 <div class="alert alert-danger">Only enter the identifiers for the syslog endpoint URL and, if applicable, the key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -67,7 +67,7 @@ Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering option
 {{% tab "Secrets Management" %}}
 
 - rsyslog or syslog-ng endpoint URL identifier:
-	- References address and port to which Observability Pipelines Worker sends logs. For example, `127.0.0.1:9997`.
+	- References the address and port to which Observability Pipelines Worker sends logs. For example, `127.0.0.1:9997`.
 	- The default identifier is `DESTINATION_SYSLOG_ENDPOINT_URL`.
 - rsyslog or syslog-ng TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `DESTINATION_SYSLOG_KEY_PASS`.

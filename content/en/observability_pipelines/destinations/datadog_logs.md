@@ -29,7 +29,7 @@ Set up the Datadog Logs destination and its environment variables when you [set 
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-No secret identifiers are required for the Datadog Logs destination.
+There are no secret identifiers for this destination.
 
 {{% /tab %}}
 

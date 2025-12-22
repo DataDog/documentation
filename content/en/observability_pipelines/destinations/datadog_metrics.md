@@ -34,7 +34,7 @@ Optionally, toggle **Buffering Options** to configure how events are buffered be
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-There are no secret identifiers to configure.
+There are no secret identifiers for this destination.
 
 {{% /tab %}}
 

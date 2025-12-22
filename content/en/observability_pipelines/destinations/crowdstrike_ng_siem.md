@@ -18,7 +18,7 @@ Set up the CrowdStrike NG-SIEM destination and its environment variables when yo
 
 To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike data connector using the HEC/HTTP Event Connector. See [Step 1: Set up the HEC/HTTP event data connector][3] for instructions. When you set up the data connector, you are given a HEC API key and URL, which you use when you configure the Observability Pipelines Worker later on.
 
-<div class="alert alert-danger">Only enter the identifiers for the CrowdStrike NG-SIEM endpoint URL, token, and if applicable, the pass key. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the CrowdStrike NG-SIEM endpoint URL, token, and if applicable, the TLS pass key. Do <b>not</b> enter the actual values.</div>
 
 1. Enter the identifier for your CrowdStrike NG-SIEM endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the identifier for your CrowdStrike NG-SIEM token. If you leave it blank, the [default](#set-secrets) is used.
