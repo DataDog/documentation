@@ -23,6 +23,9 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 Before setting up Agentless Scanning, ensure the following prerequisites are met:
 
 - **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as which cloud resources to scan.
+- **API and Application Keys**:
+  - An API key with Remote Configuration enabled is required for scanners to report scan results to Datadog.
+  - An Application key with either **Integrations Manage** or **Org Management** permissions is required to enable scanning features through the Datadog API.
 - **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are automatically applied as part of the installation process and are strictly limited to the minimum permissions required to perform the necessary scans, following the principle of least privilege.<br><br>
   {{< collapse-content title="AWS scanning permissions" level="h5" >}}
   <p>Scanning permissions:</p>
@@ -120,10 +123,6 @@ For existing users who want to add a new AWS account or enable Agentless Scannin
 1. Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
-##### Exclude resources from scans
-
-{{% csm-agentless-exclude-resources %}}
-
 ##### Update the CloudFormation stack
 
 Datadog recommends updating the CloudFormation stack regularly, so you can get access to new features and bug fixes as they get released. To do so, follow these steps:
@@ -207,10 +206,6 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Exclude resources from scans
-
-{{% csm-agentless-exclude-resources %}}
-
 ##### Update the Terraform modules version
 
 Update the `source` reference for the Agentless Scanner modules to the latest release. You can find the latest version on [GitHub Releases](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/releases).
@@ -269,10 +264,6 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Exclude resources from scans
-
-{{% csm-agentless-exclude-resources %}}
-
 ##### Update the CloudFormation stack
 
 Datadog recommends updating the CloudFormation stack regularly, so you can get access to new features and bug fixes as they get released. To do so, follow these steps:
@@ -313,11 +304,23 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Exclude resources from scans
+{{% /collapse-content %}}
+
+## Configuration
+
+### Verify your setup
+
+After completing the setup, you can verify that Agentless Scanning is working correctly by checking for scan results in Datadog. Results typically appear after the first scan cycle completes.
+
+View scan results in the following locations:
+
+- **For host and container vulnerabilities**: [CSM Vulnerabilities Explorer][15]. To view only vulnerabilities detected by Agentless Scanning, use the filter `origin:"Agentless scanner"` in the search bar.
+- **For Lambda vulnerabilities**: [Code Security (SCA) Explorer][16]
+- **For sensitive data findings**: [Sensitive Data Scanner][17]
+
+### Exclude resources from scans
 
 {{% csm-agentless-exclude-resources %}}
-
-{{% /collapse-content %}}
 
 ## Disable Agentless scanning
 
@@ -396,3 +399,6 @@ If you did not use a dedicated resource group, you must manually delete the scan
 [12]: /security/cloud_security_management/agentless_scanning
 [13]: #azure-resource-manager-setup
 [14]: https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt
+[15]: https://app.datadoghq.com/security/csm/vm
+[16]: https://app.datadoghq.com/security/code-security/sca
+[17]: https://app.datadoghq.com/sensitive-data-scanner/storage

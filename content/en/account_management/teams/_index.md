@@ -1,6 +1,12 @@
 ---
 title: Teams
 description: Organize team assets, filter Datadog experiences, and manage team membership with team handles, notifications, and resource associations.
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/datadog-teams-github-integration
+    tag: Blog
+    text: Keep service ownership up to date with Datadog Teams' GitHub integration
+
 ---
 
 ## Overview
@@ -9,10 +15,6 @@ Datadog Teams allow groups of users to organize their team assets within Datadog
 Use Teams to link resources such as dashboards, services, monitors, and incidents to a group of users. You can also add team-specific links to Slack channels, Jira boards, GitHub repositories, and more.
 
 Team membership is flexible. Users can join teams, be added by other members, or be added by an administrator. Users can belong to multiple teams.
-
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" header="Join the Preview!">}}
-  Github Integration for Teams is in Preview.
-{{< /callout >}}
 
 ## Setup
 

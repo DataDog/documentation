@@ -339,6 +339,9 @@
     "request_description": "The updated definition of the retention filter.",
     "request_schema_description": "The body of the retention filter to be updated."
   },
+  "GetServiceList": {
+    "summary": "Get service list"
+  },
   "DeleteApps": {
     "description": "Delete multiple apps in a single request from a list of app IDs. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Delete Multiple Apps",
@@ -1185,14 +1188,22 @@
     "request_schema_description": "Update request for an incident."
   },
   "ListIncidentAttachments": {
-    "description": "Get all attachments for a given incident.",
-    "summary": "Get a list of attachments"
+    "description": "List incident attachments.",
+    "summary": "List incident attachments"
   },
-  "UpdateIncidentAttachments": {
-    "description": "The bulk update endpoint for creating, updating, and deleting attachments for a given incident.",
-    "summary": "Create, update, and delete incident attachments",
-    "request_description": "Incident Attachment Payload.",
-    "request_schema_description": "The update request for an incident's attachments."
+  "CreateIncidentAttachment": {
+    "description": "Create an incident attachment.",
+    "summary": "Create incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentAttachment": {
+    "summary": "Delete incident attachment"
+  },
+  "UpdateIncidentAttachment": {
+    "summary": "Update incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
@@ -2008,6 +2019,48 @@
     "request_description": "",
     "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
   },
+  "ListUserNotificationChannels": {
+    "description": "List the notification channels for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification channels for a user"
+  },
+  "CreateUserNotificationChannel": {
+    "description": "Create a new notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification channel for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification channel for a user"
+  },
+  "DeleteUserNotificationChannel": {
+    "description": "Delete a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification channel for a user"
+  },
+  "GetUserNotificationChannel": {
+    "description": "Get a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification channel for a user"
+  },
+  "ListUserNotificationRules": {
+    "description": "List the notification rules for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification rules for a user"
+  },
+  "CreateUserNotificationRule": {
+    "description": "Create a new notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification rule for a user"
+  },
+  "DeleteUserNotificationRule": {
+    "description": "Delete a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification rule for a user"
+  },
+  "GetUserNotificationRule": {
+    "description": "Get a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification rule for a user"
+  },
+  "UpdateUserNotificationRule": {
+    "description": "Update a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Update an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -2796,6 +2849,10 @@
     "request_description": "New definition of the suppression rule. Supports partial updates.",
     "request_schema_description": "Request object containing the fields to update on the suppression rule."
   },
+  "GetSuppressionVersionHistory": {
+    "description": "Get a suppression's version history.",
+    "summary": "Get a suppression's version history"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -3109,8 +3166,8 @@
     "request_schema_description": ""
   },
   "GetSecretsRules": {
-    "description": "Returns list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID",
-    "summary": "Returns list of Secrets rules"
+    "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
+    "summary": "Returns a list of Secrets rules"
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
