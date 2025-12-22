@@ -125,4 +125,4 @@ After setup is complete, click **Block New Attackers** on the App & API Protecti
 [4]: https://app.datadoghq.com/security/configuration/asm/setup
 [5]: https://app.datadoghq.com/security/appsec/traces?query=service%3Aaws.waf
 [6]: https://app.datadoghq.com/security/appsec/denylist
-[7]: https://docs.datadoghq.com/integrations/amazon-web-services/#resource-collection
+[7]: /integrations/amazon-web-services/#resource-collection
