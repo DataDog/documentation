@@ -238,7 +238,7 @@
                 {{ $group_id := .Key }}
                 {{ $ruleset_title := index (index $ruleset_params.rulesets .Key) "title"}}
                 <div
-                data-group-id="{{ $group_id }}" 
+                data-group-id="{{ $group_id }}"
                 class="set d-flex flex-column"
                 id="{{ $group_id }}"
                 >
@@ -254,7 +254,7 @@
                             {{ $rule_id := index (split .Params.meta.name "/") 1}}
                             {{ $filter_info := (printf "%s,%s,%s,%s" .Params.meta.cloud_provider .Params.meta.category .Params.meta.severity .Params.meta.platform) }}
                             {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
-                            <div 
+                            <div
                             class="item container justify-content-between border p-1 position-relative"
                             data-info="{{ $rule_info }}"
                             data-name="{{ .Title }}"
@@ -290,8 +290,8 @@
                             {{ $pad.SetInMap "filters" "Providers" (union (index ($pad.Get "filters") "Providers") (slice .Params.meta.cloud_provider)) }}
                             {{ $pad.SetInMap "filters" "Platforms" (union (index ($pad.Get "filters") "Platforms") (slice .Params.meta.platform)) }}
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
-                            {{ $pad.SetInMap "filters" "Severities" (slice "CRITICAL" "HIGH" "MEDIUM" "LOW" "INFO") }}
-                            {{/*  
+                            {{ $pad.SetInMap "filters" "Severities" (slice "CRITICAL" "HIGH" "MEDIUM" "LOW") }}
+                            {{/*
                                 build object of arrays with unique cloud provider for each ruleset header (.set-header )
                                 cloudProvidersByRuleset: {
                                     rulesetID: [<providers>],
@@ -305,7 +305,7 @@
 
                     {{/* RULESET-HEADER - Keep here. scratch pad for cloudProviderByRuleSet needs to build first */}}
                     <button
-                    data-header-id="{{ $group_id }}" 
+                    data-header-id="{{ $group_id }}"
                     class="set-header w-100 border mb-1 d-flex align-items-center justify-content-between"
                     @click="toggleRuleSet($el)"
                     >
@@ -397,7 +397,7 @@
                             <div class="filter-selection-container">
 
                                 {{ $cloud_lookup_name := . }}
-                                {{ $int_logo := partialCached "integrations-logo.html" 
+                                {{ $int_logo := partialCached "integrations-logo.html"
                                     (dict "context" $dot "basename"
                                         (cond (eq
                                         $cloud_lookup_name "CICD") "github"
@@ -405,7 +405,7 @@
                                         )
                                     )
                                     "variant" "avatar"
-                                     $cloud_lookup_name "avatar" 
+                                     $cloud_lookup_name "avatar"
                                 }}
                                 {{/*  store $int_logo and $cloud_lookup_name with filter value if $int_logo is present. e.g. "Javascript,int_logo url,<alias name>" */}}
                                 {{ $value := (printf "%s,%s" $cloud_lookup_name $int_logo)}}
