@@ -62,7 +62,7 @@ In **Agent v7.20+**, use the following environment variables to exclude containe
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-In Datadog Operator, set these environment variables under `spec.override.nodeAgent.env`.
+In the Datadog Operator, set these environment variables under `spec.override.nodeAgent.env`.
 
 ##### Example
 
@@ -85,7 +85,13 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-In your Helm chart, supply a space-separated string to `datadog.containerExclude`, `datadog.containerInclude`, `datadog.containerExcludeLogs`, `datadog.containerIncludeLogs`, `datadog.containerExcludeMetrics`, or `datadog.containerIncludeMetrics`.
+In your Helm chart, supply a space-separated string to one or more of the following:
+- `datadog.containerExclude`
+- `datadog.containerInclude`
+- `datadog.containerExcludeLogs`
+- `datadog.containerIncludeLogs`
+- `datadog.containerExcludeMetrics`
+- `datadog.containerIncludeMetrics`
 
 ##### Example
 
@@ -98,7 +104,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+In environments where you are not using the Datadog Operator or Helm, the following environment variables can be passed to the Agent container at startup.
 
 ##### Example Docker
 
@@ -253,7 +259,7 @@ Set `DD_EXCLUDE_PAUSE_CONTAINER` to `false`.
 
 In **Agent v7.73+**, you can use the `cel_workload_exclude` configuration option to filter containers from Autodiscovery. This feature allows you to define [Common Expression Langauge][3] rules to target containers to be excluded from telemetry collection.
 
-The following attributes representing the container object are available for your filtering rules:
+Use the following attributes to represent the container object in your filtering rules:
 
 | Attribute                   | Description                                                             |
 |-----------------------------|-------------------------------------------------------------------------|
@@ -265,15 +271,15 @@ The following attributes representing the container object are available for you
 
 ### Configuration structure
 
-The `cel_workload_exclude` configuration option is structured as a list of rule sets joined by logical **ORs**. Each rule set defines the `products` to exclude and the corresponding CEL `rules` to match against containers.
+The `cel_workload_exclude` configuration option is structured as a list of rule sets evaluated as logical ORs, where a container is excluded if it matches any rule. Each rule set defines the `products` to exclude and the corresponding CEL `rules` to match against containers.
 
 The `products` field accepts `metrics`, `logs`, and `global` (exclude container from all listed products).
 
 <div class="alert alert-danger">
-If the configuration contains structural errors or CEL syntax issues, the Agent exits with an error to prevent collecting unintended telemetry which could impact billing.
+If the configuration contains structural errors or CEL syntax issues, the Agent exits with an error to prevent collecting unintended telemetry that could impact billing.
 </div>
 
-In the example below, metrics and logs are excluded for any container with `nginx` in its name running in the `staging` namespace. Additionally, logs are excluded for any container running the `redis` image, **or** any container within a pod that has the annotation `low_priority: "true"`. The [agent's configuration file][4] can be directly updated as seen by this example.
+In the example below, metrics and logs are excluded for any container with `nginx` in its name running in the `staging` namespace. Additionally, logs are excluded for any container running the `redis` image, OR any container within a pod that has the annotation `low_priority: "true"`. The [Agent's configuration file][4] can be directly updated as seen by this example.
 
 ```yaml
 # datadog.yaml
@@ -289,7 +295,7 @@ cel_workload_exclude:
       - container.pod.annotations["low_priority"] == "true"
 ```
 
-The CEL-backed workload exclusion can also be configured by providing a **JSON**-formatted environment value to `DD_CEL_WORKLOAD_EXCLUDE`.
+The CEL-backed workload exclusion can also be configured by providing a JSON-formatted environment value to `DD_CEL_WORKLOAD_EXCLUDE`.
 
 {{% collapse-content title="Setting environment variables" level="h4" expanded=false id="setting-environment-variables" %}}
 
