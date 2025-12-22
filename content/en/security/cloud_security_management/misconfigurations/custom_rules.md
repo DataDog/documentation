@@ -50,8 +50,9 @@ To create a rule from scratch:
 6. Exclude benign activity by specifying queries to include or remove certain resources from misconfigurations.
 7. Validate the logic of your rule by selecting resources and clicking **Test Rule**. See which resources passed and failed, along with corresponding resource tags.
 8. Specify a severity (`Critical`, `High`, `Medium`, `Low`, or `Info`) for the rule.
-9. Specify tags to apply to the result misconfigurations. Read [Tagging misconfigurations](#tagging-misconfigurations) for more information.
-10. Click **Save Rule**.
+9. In **Say what's happening**, write a description and instructions for investigating and remediating the Finding.
+10. Specify tags to apply to the result misconfigurations. Read [Tagging misconfigurations](#tagging-misconfigurations) for more information.
+11. Click **Save Rule**.
 
     {{< img src="security/cspm/custom_rules/custom_rules_second_half.png" alt="Custom Rules Steps" width="100%">}}
 
