@@ -70,10 +70,16 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 {{% /tab %}}
 {{% tab "Location" %}}
 
-`.location.id`
+`synthetics.attributes.location`
+: The `location` object contains information about the location of where the test is run like its `name` and `id`
+
+`synthetics.attributes.location.id`
 : Location ID (for example, `aws:eu-central-1`)
 
-`.location.privateLocation`
+`synthetics.attributes.location.name`
+: Name of the location (for example, `Frankfurt (AWS)`)
+
+`synthetics.attributes.location.privateLocation`
 : `true` for Private Locations
 
 {{% /tab %}}
