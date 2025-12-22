@@ -12,9 +12,8 @@ You can start a Bits AI SRE investigation from:
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert, APM latency graph, or APM Watchdog story
   - [**Automatic**](#enable-automatic-investigations): Configure monitors so that whenever they alert, Bits launches an investigation
-- [APM latency graphs on service pages](#apm-latency-graphs-on-service-pages)
-- [APM latency Watchdog stories](#apm-latency-watchdog-stories)
-
+- [APM latency graphs on service pages](#apm-latency-graphs-on-service-pages) (Preview)
+- [APM latency Watchdog stories](#apm-latency-watchdog-stories) (Preview)
 
 ### Manually start an investigation
 
@@ -39,12 +38,8 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 
 #### APM latency
 
-<!-- {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
 Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}} -->
-
-{{< callout url="#" btn_hidden="true" >}}
-Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are in Preview.
 {{< /callout >}}
 
 ##### APM latency graphs on service pages
@@ -73,7 +68,6 @@ In addition to manual investigations, you can configure Bits to run automaticall
 </li></ul></div>
 
 ### Supported monitors
-
 Bits is able to run investigations on the following monitor types:
   - Metric
   - Anomaly
@@ -82,7 +76,11 @@ Bits is able to run investigations on the following monitor types:
   - Outlier
   - Logs
   - APM (`APM Metrics` type only; `Trace Analytics` is not supported)
-  - Synthetics (API tests only)
+  - Synthetics API tests (Preview)
+
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+Bits AI SRE investigations from Synthetic API tests are now in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
 
 ### Best practices: Add investigation context to your monitors {#best-practices}
 Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
@@ -121,6 +119,7 @@ Investigations happen in two phases:
      - Dashboards
      - [Change events][4]
      - Kubernetes events
+   
    Each hypothesis ends in one of three states: validated, invalidated, or inconclusive. When a hypothesis is validated, Bits generates sub-hypotheses and repeats the same investigative process on them.
 
    {{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits AI SRE built and tested" style="width:100%;" >}}

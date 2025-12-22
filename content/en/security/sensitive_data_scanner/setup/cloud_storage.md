@@ -14,7 +14,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-danger">Cloud Storage is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Cloud Storage scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 
 {{< /site-region >}}
 

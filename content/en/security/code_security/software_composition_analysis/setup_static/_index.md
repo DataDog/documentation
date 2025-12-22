@@ -17,12 +17,12 @@ To get started:
 3. Choose [where to run SCA scans](#select-where-to-run-static-sca-scans) (Datadog-hosted or CI pipelines).
 4. Follow the setup instructions for your source code provider.
 
-### Supported languages and lockfiles
-Datadog SCA scans libraries in the following languages and **requires** a lockfile to report them:
+### Supported languages and dependency manifests
+Datadog SCA scans libraries in the following languages using dependency manifests (such as lockfiles and other supported manifest files) to identify vulnerable dependencies.
 
-| Language   | Package Manager    | Lockfile                                |
+| Language   | Package Manager    | File                                |
 |------------|-------------------|------------------------------------------|
-| C#         | .NET              | `packages.lock.json`                     |
+| C#         | .NET              | `packages.lock.json`, `.csproj` files    |
 | C++        | Conan             | `conan.lock`                             |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
@@ -38,7 +38,7 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 | Ruby       | bundler           | `Gemfile.lock`                           |
 | Rust       | Cargo           | `cargo.lock`                               |
 
-The following sections describe ways to configure SCA for your repositories.
+**Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
 ## Select where to run static SCA scans
 By default, scans are automatically run upon each commit to a lockfile within an enabled repository. Default branch results are updated every hour to detect new vulnerabilities on existing packages.

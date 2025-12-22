@@ -54,7 +54,7 @@ Select your CI provider to set up CI Visibility in Datadog:
 
 | <div style="width:200px"><div> | AWS CodePipeline | Azure Pipelines | Buildkite | CircleCI | Codefresh | GitHub Actions | GitLab | Jenkins | TeamCity | Other CI Providers |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| {{< ci-details title="Job failure analysis" >}}Analysis and categorization of job failures using LLM models based on relevant logs. <a href="https://docs.datadoghq.com/continuous_integration/guides/use_ci_jobs_failure_analysis/">More info</a>.{{< /ci-details >}} |  |  |  |  |  | {{< X >}} | {{< X >}} | |  |  |
+| {{< ci-details title="Job failure analysis" >}}Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. <a href="https://docs.datadoghq.com/continuous_integration/guides/use_ci_jobs_failure_analysis/">More info</a>.{{< /ci-details >}} |  | {{< X >}} |  |  |  | {{< X >}} | {{< X >}} | |  |  |
 | {{< ci-details title="Critical path" >}}Identification of CI jobs that are on the critical path of the pipeline. <a href="https://docs.datadoghq.com/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/">More info</a>{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
 ### Duration breakdown
