@@ -105,7 +105,7 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 
 #### Add custom keywords
 
-The [recommended keywords][15] are used by default when library rules are added. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
+The [recommended keywords][15] are used by default when library rules are added. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click the scanning group with the rule you want to edit.
@@ -124,13 +124,13 @@ The [recommended keywords][15] are used by default when library rules are added.
 
 {{% /collapse-content %}}
 {{% collapse-content title="Add a custom rule" level="p" id="add-custom-rule"%}}
-You can create custom scanning rules using regex patterns to scan for sensitive data. See [Best practices for creating customs](#best-practices-for-creating-custom-rules) for more information on using regex patterns.
+You can create custom scanning rules using regex patterns to scan for sensitive data.
 
 1. Select a scanning group if you did not create this rule within a scanning group.
 1. Enter a name for the rule.
 1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
 1. (Optional) Enter a description for the rule.
-1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Regex pattern** field.<br>
+1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Regex pattern** field. Define regex patterns that are as precise as possible because generic patterns result in more false positives.<br>
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -275,6 +275,13 @@ Use suppressions to ignore sensitive data matches you consider operationally saf
 - Suppressed matches are excluded from the Findings page, dashboards, alerts, and other reporting workflows.
 - Suppressions are defined per rule within a scanning group.
 
+#### Scan or exclude specific attributes
+
+To make matches more precise, you can also do one of the following:
+
+- Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like names, you might want to exclude attributes such as `resource_name` and `namespace`.
+- Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for names, you can choose specific attributes such as `first_name` and `last_name`.
+
 ### Edit scanning rules
 
 To edit scanning rules:
@@ -336,25 +343,6 @@ What you **cannot** do with rehydrated logs:
 
 - View in-line highlighted sensitive data matches in the UI: The matches remain obfuscated even if mask, redact, partially redact, or hash was chosen as an action on match.
 - Trigger retroactive scans: Sensitive Data Scanner does not re-scan rehydrated logs.
-
-## Best practices for creating custom rules
-
-A custom rule uses regex patterns to detect sensitive data. This section goes over best practices for creating regex patterns for custom rules.
-
-### Use precise regex patterns
-
-Define regex patterns that are as precise as possible because generic patterns result in more false positives.
-
-### Refine regex pattern matching
-
-Provide a list of keywords to the keyword dictionary to refine regex pattern matching. The dictionary checks for the matching pattern within a defined proximity of those keywords. For example, if you are scanning for passwords, you can add keywords like `password`, `token`, `secret`, and `credential`. You can also specify that these keywords be within a certain number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-
-{{< img src="sensitive_data_scanner/guides/password_keyword.png" alt="A keyword dictionary with password, token, secret, credential" style="width:90%;" >}}
-
-To make matches more precise, you can also do one of the following:
-
-- Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like names, you might want to exclude attributes such as `resource_name` and `namespace`.
-- Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for names, you can choose specific attributes such as `first_name` and `last_name`.
 
 ## Disable Sensitive Data Scanner
 
