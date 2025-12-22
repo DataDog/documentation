@@ -3309,6 +3309,25 @@
     "request_description": "",
     "request_schema_description": "Team membership request"
   },
+  "GetTeamNotificationRules": {
+    "summary": "Get team notification rules"
+  },
+  "CreateTeamNotificationRule": {
+    "summary": "Create team notification rule",
+    "request_description": "",
+    "request_schema_description": "Team notification rule"
+  },
+  "DeleteTeamNotificationRule": {
+    "summary": "Delete team notification rule"
+  },
+  "GetTeamNotificationRule": {
+    "summary": "Get team notification rule"
+  },
+  "UpdateTeamNotificationRule": {
+    "summary": "Update team notification rule",
+    "request_description": "",
+    "request_schema_description": "Team notification rule"
+  },
   "GetTeamPermissionSettings": {
     "description": "Get all permission settings for a given team.",
     "summary": "Get permission settings for a team"
