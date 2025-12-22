@@ -39,7 +39,7 @@ Puedes reenviar tus logs a través de una cuenta de [Azure Container App][4] o [
 [201]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
 {{% /tab %}}
 
-{{% tab "Blob Storage" (Almacenamiento de blobs)%}}
+{{% tab "Blob Storage (Almacenamiento de blobs)" %}}
 
 1. Si aún no has configurado [Azure Blob Storage][100], utiliza uno de los siguientes métodos para empezar:
    - [Portal de Azure][101]
