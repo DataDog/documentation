@@ -169,5 +169,5 @@ See [Connect Session Replay to your third-party tools][6].
 [2]: /real_user_monitoring/guide/sampling-browser-plans/
 [3]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumGlobal.html#startsessionreplayrecording
 [4]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumGlobal.html#stopsessionreplayrecording
-[5]: /real_user_monitoring/session_replay/browser/privacy_options
+[5]: /session_replay/browser/privacy_options
 [6]: /real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools

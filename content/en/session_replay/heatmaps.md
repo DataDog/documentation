@@ -158,7 +158,7 @@ Use the [RUM Analytics explorer][1] to explore and analyze your user data.
 
 Use the [Product Analytics explorer][1] to explore and analyze your user data.
 
-[1]: /product_analytics/analytics_explorer/
+[1]: /product_analytics/charts/analytics_explorer/
 
 {{% /tab %}}
 {{< /tabs >}}

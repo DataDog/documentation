@@ -15,7 +15,7 @@ further_reading:
     - link: '/session_replay/mobile/privacy_options'
       tag: Documentation
       text: Mobile Session Replay Privacy Options
-    - link: '/real_user_monitoring/session_replay'
+    - link: '/session_replay/'
       tag: Documentation
       text: Session Replay
 ---

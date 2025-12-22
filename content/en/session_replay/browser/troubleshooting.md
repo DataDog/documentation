@@ -9,7 +9,7 @@ further_reading:
 - link: 'https://github.com/DataDog/browser-sdk'
   tag: "Source Code"
   text: 'browser-sdk Source code'
-- link: '/real_user_monitoring/session_replay'
+- link: '/session_replay/'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
 - link: '/integrations/content_security_policy_logs'

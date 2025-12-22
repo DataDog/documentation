@@ -6,7 +6,7 @@ aliases:
 - /real_user_monitoring/session_replay/browser/privacy_options
 - /product_analytics/session_replay/browser/privacy_options
 further_reading:
-    - link: '/real_user_monitoring/session_replay'
+    - link: '/session_replay/'
       tag: Documentation
       text: Session Replay
     - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"

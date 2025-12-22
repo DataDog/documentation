@@ -6,7 +6,7 @@ aliases:
 - /real_user_monitoring/session_replay/browser/developer_tools
 - /product_analytics/session_replay/browser/developer_tools
 further_reading:
-    - link: '/real_user_monitoring/session_replay/browser'
+    - link: '/session_replay/browser/'
       tag: Documentation
       text: Browser Session Replay
 ---
