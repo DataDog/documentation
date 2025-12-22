@@ -212,6 +212,13 @@ To monitor Databricks data in Datadog, you must complete the following steps:
     GRANT USE_SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO `<application_id>`;
     GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application_id>`;
     ```
+1. Grant read-only access to the system tables used by Data Observability:
+    ```sql
+    GRANT USE_SCHEMA ON SCHEMA system.query TO `<application_id>`;
+    GRANT SELECT ON TABLE `system`.`query`.`history` TO `<application_id>`
+    GRANT USE_SCHEMA ON SCHEMA system.access TO `<application_id>`;
+    GRANT SELECT ON TABLE `system`.`access`.`column_lineage` TO `<application_id>`
+    ```
 1. Enable the **Data Observability** toggle in the Configuration pane of the Databricks account you connected in Step 1.
 
 [1]: https://docs.datadoghq.com/integrations/databricks/?tab=useaserviceprincipalforoauth#setup
