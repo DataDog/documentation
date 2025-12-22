@@ -125,23 +125,29 @@ Applies to browser and mobile tests.
 {{% /tab %}}
 {{% tab "Result" %}}
 
-`.result.id`
+`{{synthetics.attributes.result}}`
+: The `result` object contains information about the executed test run
+
+`{{synthetics.attributes.result.id}}`
 : Unique result ID
 
-`.result.status`
-: Test execution status
+`{{synthetics.attributes.result.status}}`
+: Test execution status  (for example, `passed` or `failed`)
 
-`.result.duration`
+`{{synthetics.attributes.result.duration}}`
 : Test duration in milliseconds
 
-`.result.testStartedAt`, `.result.testFinishedAt`, `.result.testTriggeredAt`
+`{{synthetics.attributes.result.testStartedAt}}`, `{{synthetics.attributes.result.testFinishedAt}}`, `{{synthetics.attributes.result.testTriggeredAt}}`
 : Epoch timestamps in milliseconds
 
-`.result.failure.message`
-: Description of failure
+`{{synthetics.attributes.result.failure}}`
+: The `failure` object contains information about why the test failed
 
-`.result.failure.code`
-: Error code
+`{{synthetics.attributes.result.failure.message}}`
+: The failure message
+
+`{{synthetics.attributes.result.failure.code}}`
+: The failure code
 
 **Example values:**
 ```json
