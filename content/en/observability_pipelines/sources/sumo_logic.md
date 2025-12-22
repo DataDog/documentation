@@ -33,7 +33,7 @@ In the **Decoding** dropdown menu, select whether your input format is raw **Byt
 {{% tab "Secrets Management" %}}
 
 - Sumo Logic address identifier:
-	- The bind address, such as `0.0.0.0:80.`, that your Observability Pipelines Worker listens on to receive logs originally intended for the Sumo Logic HTTP Source.
+	- References the bind address, such as `0.0.0.0:80.`, that your Observability Pipelines Worker listens on to receive logs originally intended for the Sumo Logic HTTP Source.
 	- The default identifier is `SOURCE_SUMO_LOGIC_ADDRESS`.
 
 {{% /tab %}}

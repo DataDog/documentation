@@ -36,7 +36,7 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-No default secret identifiers are required for this source.
+There are no default secret identifiers for this source.
 
 {{% /tab %}}
 

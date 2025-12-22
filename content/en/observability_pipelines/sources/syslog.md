@@ -43,7 +43,7 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 {{% tab "Secrets Management" %}}
 
 - rsyslog or syslog-ng address identifier:
-	- The Observability Pipelines Worker listens on this bind address, such `0.0.0.0:9997`, to receive logs from the Syslog forwarder.
+	- References the bind address, such `0.0.0.0:9997`, on which the Observability Pipelines Worker listens to receive logs from the Syslog forwarder.
 	- The default identifier is `SOURCE_SYSLOG_ADDRESS`.
 - rsyslog or syslog-ng  TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_SYSLOG_KEY_PASS`.
