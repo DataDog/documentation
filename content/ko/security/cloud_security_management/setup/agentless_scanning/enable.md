@@ -142,7 +142,7 @@ Datadog은 새로운 기능과 버그 수정 사항이 출시될 때 이를 활�
 <div class="alert alert-info">Cloud Security를 처음 설정하는 경우 AWS CloudFormation을 사용하여 Agentless Scanning을 활성화하는 <a href="#quick-start-setup">빠른 시작 워크플로</a>를 따라 진행할 수 있습니다.</div>
 
 {{< tabs >}}
-{{% tab "새 AWS 계정 %}}
+{{% tab "새 AWS 계정" %}}
 
 1. [Cloud Security Setup][1] 페이지에서 **Cloud Integrations > AWS**를 클릭합니다.
 1. AWS 섹션 하단에서 **Add AWS accounts by following these steps**를 클릭합니다. **Add New AWS Account(s)** 대화 상자가 표시됩니다.
