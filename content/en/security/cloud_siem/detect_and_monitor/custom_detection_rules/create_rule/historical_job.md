@@ -238,5 +238,5 @@ Click **Add Root Query** to add additional queries.
 
 {{% security-rule-say-whats-happening %}}
 
-[1]: https://app.datadoghq.com/security/rules/new
+[1]: https://app.datadoghq.com/security/siem/rules/new
 [2]: /security_platform/notifications/#notification-channels

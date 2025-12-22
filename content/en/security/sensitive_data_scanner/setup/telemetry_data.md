@@ -115,6 +115,10 @@ The [recommended keywords][15] are used by default when library rules are added.
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 1. Click **Update**.
 
+#### Add suppressions
+
+{{% sds-suppressions %}}
+
 {{% /collapse-content %}}
 {{% collapse-content title="Add a custom rule" level="p" id="add-custom-rule"%}}
 You can create custom scanning rules using regex patterns to scan for sensitive data.
@@ -123,7 +127,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 1. Enter a name for the rule.
 1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
 1. (Optional) Enter a description for the rule.
-1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.<br>
+1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Regex pattern** field.<br>
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -135,14 +139,16 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. For **Check for keywords near regex pattern**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
+1. For **Check surrounding match context for keywords to reduce noise**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
     - To add keywords, enter a keyword and click the plus icon to add the keyword to the list.
     - To remove keywords, click the **X** next to the keyword you want to remove.
     - You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
       **Note**: You cannot have more than 20 keywords for a rule.
+{{% sds-suppressions %}}
 1. In the **Type or paste event data to test the rule** section, add event data to evaluate your rule and add keywords to refine match conditions.
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
+
 {{% /collapse-content %}}
 
 **Notes**:
@@ -257,6 +263,15 @@ The excluded namespaces are:
 {{% /tab %}}
 {{% /tabs %}}
 
+#### Suppress specific matches to ignore risk-accepted data
+
+Use suppressions to ignore sensitive data matches you consider operationally safe (for example: internal email domains or private IP ranges).
+
+**Notes**:
+- Suppressed matches are not redacted, masked, or hashed.
+- Suppressed matches are excluded from the Findings page, dashboards, alerts, and other reporting workflows.
+- Suppressions are defined per rule within a scanning group.
+
 ### Edit scanning rules
 
 To edit scanning rules:
@@ -301,6 +316,24 @@ To redact the attribute:
 7. Optionally, add tags.
 8. Click **Add Rules**.
 
+## Log rehydration
+
+When you rehydrate logs from an archive, the Sensitive Data Scanner does not re-scan those logs. Instead, Datadog restores the logs exactly as they were written to the archive.
+
+If your archive is configured to include [Datadog tags][16], and your scanning rules added tags when the logs were initially ingested and processed by Sensitive Data Scanner, you can use those tags to identify which rehydrated logs previously contained sensitive data. This allows you to filter rehydrated logs using queries such as `sensitive_data:<rule_tag_name>`.
+
+The metadata of matched sensitive data is not stored in archived logs, so sensitive data matches are not highlighted when those logs are rehydrated. The archive format contains only the original log payload and any preserved tags. It does not include the positional information that Sensitive Data Scanner uses in the Datadog UI to visually highlight detected values.
+
+What you can do with rehydrated logs:
+
+- If tags were included in the archive, filter for logs that previously matched scanning rules.
+- Investigate historical events that contain sensitive data.
+
+What you **cannot** do with rehydrated logs:
+
+- View in-line highlighted sensitive data matches in the UI: The matches remain obfuscated even if mask, redact, partially redact, or hash was chosen as an action on match.
+- Trigger retroactive scans: Sensitive Data Scanner does not re-scan rehydrated logs.
+
 ## Disable Sensitive Data Scanner
 
 To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group so that they are disabled.
@@ -324,3 +357,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [13]: /observability_pipelines/processors/sensitive_data_scanner/
 [14]: /observability_pipelines/configuration/set_up_pipelines/
 [15]: /security/sensitive_data_scanner/scanning_rules/library_rules/
+[16]: /logs/log_configuration/archives/?tab=awss3#datadog-tags

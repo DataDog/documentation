@@ -131,6 +131,10 @@
     "name": "Integración Fastly",
     "description": "Gestiona tus cuentas y servicios de la integración Fastly en Datadog directamente a través de la API Datadog. Para obtener más información, consulta la [página de la integración Fastly](https://docs.datadoghq.com/integrations/fastly/)."
   },
+  "fleet-automation": {
+    "name": "Automatización de flotas",
+    "description": "Gestiona despliegues automatizados en toda tu flota de hosts.\n\nFleet Automation proporciona dos tipos de despliegues:\n\nDespliegues de configuración (`/configure`):\n- Aplica cambios en los archivos de configuración a los hosts de destino.\n- Admite operaciones merge-patch para actualizar campos de configuración específicos\n- Admite operaciones de borrado para eliminar archivos de configuración\n- Útil para actualizar la configuración del Datadog Agent, configuraciones de integración, etc.\n\nDespliegues de actualización de paquetes (`/upgrade`):\n- Actualiza el Datadog Agent a versiones específicas."
+  },
   "gcp-integration": {
     "name": "Integración GCP",
     "description": "Configura tu integración Google Cloud Platform (GCP) en Datadog directamente\na través de la API Datadog. Consulta más información sobre la [integración Google Cloud Platform (GCP) en Datadog](https://docs.datadoghq.com/integrations/google_cloud_platform)."
@@ -233,7 +237,7 @@
   },
   "reference-tables": {
     "name": "Tablas de referencia",
-    "description": "Tablas de referencia de etiquetas generadas automáticamente"
+    "description": "Ve y gestiona las Tablas de Referencia de tu organización."
   },
   "restriction-policies": {
     "name": "Políticas de restricción",
@@ -242,6 +246,10 @@
   "roles": {
     "name": "Roles",
     "description": "La API de roles se utiliza para crear y gestionar roles de Datadog, qué\n[permisos globales](https://docs.datadoghq.com/account_management/rbac/)\nconceden y qué usuarios pertenecen a ellos.\n\nLos permisos relacionados con recursos específicos de una cuenta pueden concederse a roles\nen la aplicación Datadog sin utilizar esta API. Por ejemplo, la concesión\na un rol del acceso de lectura en un índice específico de un log puede hacerse en Datadog desde la\n[página Pipelines](https://app.datadoghq.com/logs/pipelines)."
+  },
+  "rum-audience-management": {
+    "name": "Gestión de la audiencia de RUM",
+    "description": "Etiqueta autogenerada de la Gestión de la audiencia de RUM"
   },
   "rum-metrics": {
     "name": "Métricas de rum",
@@ -295,9 +303,17 @@
     "name": "Google",
     "description": "Gestiona la configuración de [métricas basadas en tramos](https://app.datadoghq.com/apm/traces/generate-metrics) de tu organización. Para obtener más información, consulta [Generar métricas a partir de tramos](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/)."
   },
+  "static-analysis": {
+    "name": "Análisis estático",
+    "description": "API para el análisis estático"
+  },
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics utiliza solicitudes de usuario simuladas y la renderización del navegador para ayudarte a garantizar el tiempo de actividad,\nidentificar problemas regionales y realizar un seguimiento del rendimiento de tu aplicación. Los tests Datadog Synthetics vienen\nen dos formatos diferentes, [tests de API](https://docs.datadoghq.com/synthetics/api_tests/)\ny [tests de navegador](https://docs.datadoghq.com/synthetics/browser_tests). Puedes utilizar la API Datadog para\ngestionar ambos tipos de tests mediante programación.\n\nPara obtener más información sobre Synthetics, consulta la [descripción general de Synthetics](https://docs.datadoghq.com/synthetics/)."
+  },
+  "team-connections": {
+    "name": "Conexiones de equipo",
+    "description": "Visualiza y gestiona las relaciones entre equipos de Datadog y equipos externos, como GitHub."
   },
   "teams": {
     "name": "Equipos",

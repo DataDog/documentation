@@ -25,6 +25,7 @@ After deploying your CloudPrem environment, you need to connect it to your Datad
 
 To search CloudPrem logs in the Datadog UI, contact [Datadog support][1] and provide the **public DNS** of your CloudPrem cluster. This links your cluster to your Datadog account.
 
+
 ## Searching your CloudPrem logs in the Logs Explorer
 
 After your Datadog account is set up, you can search for your CloudPrem cluster in the Logs Explorer by selecting it from the available facets or by entering a query in the search bar.

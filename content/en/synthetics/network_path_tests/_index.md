@@ -9,17 +9,25 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/network-path/"
   tag: "Blog"
   text: "Identify slowdowns across your entire network with Datadog Network Path"
+- link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
+  tag: "Blog"
+  text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
+- link: "/network_monitoring/network_path/glossary/"
+  tag: "Doc"
+  text: "Network Path terms and concepts"
 ---
 
 ## Overview
 
 Network Path Testing in Synthetic Monitoring gives you complete visibility into the routes your synthetic tests follow. You can pinpoint where failures happen, whether in applications, on-premises networks, or with ISPs. This accelerates root cause analysis, enables proactive issue detection, and triggers actionable alerts when tests fail. It also provides uptime data to help you measure and communicate the value of your network reliability investments.
 
-Running Network Path tests from managed locations lets you perform TCP, UDP, and ICMP checks on your application. Visualize the Network Path packets follow when executing queries from different global locations.
+Running Network Path tests from managed locations lets you perform TCP, UDP, and ICMP checks on your application. Visualize the Network Path packets follow when executing queries from different global locations and private environments.
 
 <div class="alert alert-info">For information on billing for Network Path Testing in Synthetic Monitoring, see the <a href="https://www.datadoghq.com/pricing/?product=network-monitoring#products">pricing page</a>.</div>
 
 ## Test creation
+
+**Note**: This page covers running Network Path tests in Synthetic Monitoring, including [Agent-based configuration](#agent-configuration). For scheduled and dynamic tests in Network Monitoring, see the [Network Path Setup][7] documentation. See [understanding Network Path tests](#understanding-network-path-tests) for more information.
 
 1. In Datadog, hover over **Digital Experience** in the left-hand menu and select Tests (under Synthetic Monitoring & Testing).
 2. Click **New Test > Network Path Test**.
@@ -28,7 +36,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Test configuration
 
-1. Choose your **request type** (TCP, UDP, or ICMP) and specify the host or URL to query. Port information is optional.  
+1. Choose your **request type** (TCP, UDP, or ICMP) and specify the host or URL to query. Port information is optional for UDP and ICMP tests.  
 2. Name your test.  
 3. Optional: Configure advanced options:  
    1. **Source service**: The label displayed for the source host in the Network Path visualization.  
@@ -52,15 +60,54 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    | jitter |  | `is`, `<`, `<=`, `>`, `>=` | float |
    | network hops  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
 
-6. Select the **locations** from which to run your test. Network Path tests can run from managed locations to test your endpoints from global locations.
+6. Select the **locations** from which to run your test. You can run Network Path tests from managed locations to test public endpoints, or from a [Datadog Agent](#agent-configuration) to test private environments.
 
-   {{% managed-locations %}}
+   {{% managed-locations-network-path %}}
 
 7. Set the **test frequency** to determine how often Datadog runs your Network Path test. Scheduled tests ensure your most important endpoints remain accessible to your users.
 
 8. [Define alert conditions][4] and [configure the test monitor][5] for your Network Path test.
 
 {{% synthetics-alerting-monitoring-network-path %}}
+
+## Agent configuration
+
+### Prerequisites
+
+Requires [Agent version][7] `7.72` or higher.
+
+### Setup
+
+1. Enable the system-probe traceroute module in **/etc/datadog-agent/system-probe.yaml** by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. Enable the Agent Synthetics Collector in **/etc/datadog-agent/datadog.yaml** by adding the following:
+
+   ```yaml
+   synthetics:
+     collector:
+       enabled: true
+   ```
+
+3. Ensure the API key used for the Datadog Agent has [Remote Configuration][6] enabled. All newly created API keys have Remote Configuration enabled by default.
+
+4. [Restart the Agent][8] for it to appear in the list of available test locations.
+
+   ```shell
+   sudo systemctl restart datadog-agent
+   ```
+
+   {{< img src="synthetics/network_tests/network_path_test_agent.png" alt="Network Path Testing Location and Agents form, showing the Datadog Agent selection dropdown" style="width:80%;" >}}
+   
+   **Note**:
+   Network Path tests cannot be run directly from private locations. However, you can run them from any host or device where the Datadog Agent is installed, including hosts that also act as private locations for Synthetic Monitoring tests.
+
+   To test network conditions inside private environments, install the Datadog Agent on the host or device, and run Network Path tests from that Agent. For full end-to-end visibility, you can group the application tests running from private locations, and
+   Network Path tests running from the Datadog Agent on the _same host_, into a single [test suite][9]. This provides a unified view of your service, feature, and application health across all layers affecting user experience.
 
 ## View test results
 
@@ -75,15 +122,29 @@ The Network Path visualization shows the routes packets take to complete queries
 
   <div class="alert alert-info">Changing the health bar does not affect the global time range at the top of the page.</div>
 
-  {{< img src="synthetics/network_tests/network_path_section.png" alt="Network Path visualization section of a network path test." style="width:100%;">}}
+  {{< img src="synthetics/network_tests/synthetics_network_path_hops.png" alt="Network Path visualization section of a network path test." style="width:100%;">}}
 
-To view details for a specific test run, click on a test run in the table at the bottom of the page. A side panel opens displaying run information, Network Path visualization, and assertion results.
+Click on a test run in the table at the bottom of the page to view details for that specific run. The side panel displays:
+ 
+- Run information
+- Network Path visualization, aggregated across all traceroute queries (based on your tests [advanced options](#test-configuration))
+- Assertion results, aggregated across all end-to-end queries (based on your tests [advanced options](#test-configuration)) <br></br>
 
-  {{< img src="synthetics/network_tests/test_run_side_panel.png" alt="A single test run from a network test, displaying the side panel" style="width:100%;">}}
+  {{< img src="synthetics/network_tests/network_path_synthetics.png" alt="A single test run from a network test, displaying the side panel" style="width:80%;">}}
 
 ## Retention
 
 <div class="alert alert-info">Network Path Testing data is retained for 30 days.</div>
+
+## Understanding Network Path tests
+
+Network Path tests use the same underlying functionality in both [Network Path][7] and Synthetic Monitoring, so tests created in one UI are visible in the other.
+
+**Capabilities**:
+
+- **Unified test creation**: You can create Network Path tests from either the Network Path UI or the Synthetic Monitoring UI. Both entry points use the same underlying functionality.
+- **UI-based test creation**: You can create Network Path tests directly from the Synthetic Monitoring UI with additional assertions on network data such as packet loss, latency, jitter, and number of hops.
+- **Proactive monitoring**: Group browser, API, and Network Path tests in [test suites][9] to monitor how network performance impacts application performance.
 
 ## Further Reading
 
@@ -94,3 +155,7 @@ To view details for a specific test run, click on a test run in the table at the
 [3]: /network_monitoring/network_path/path_view/#health-bar
 [4]: /synthetics/network_path_tests/#define-alert-conditions
 [5]: /synthetics/network_path_tests/#configure-the-test-monitor
+[6]: /remote_configuration/#enable-remote-configuration
+[7]: /network_monitoring/network_path/setup/
+[8]: /agent/configuration/agent-commands/#restart-the-agent
+[9]: /synthetics/test_suites

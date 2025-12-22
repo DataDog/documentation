@@ -2,6 +2,9 @@
 title: Custom LLM-as-a-Judge Evaluations
 description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across LLM Observability.
 further_reading:
+- link: https://www.datadoghq.com/blog/llm-aws-strands
+  tag: Blog
+  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about LLM Observability terms and concepts"
@@ -89,7 +92,9 @@ For OpenAI or Azure OpenAI models, configure [Structured Output](#structured-out
 
 For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keyword-search-output).
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI)" level="h4" expanded="true" id="structured-output" %}}
+For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
+
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, AI Gateway)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
@@ -186,7 +191,7 @@ Select the categories that should map to a passing state. For example, if you ha
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock)" level="h4" expanded="true" id="keyword-search-output" %}}
+{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Select the **Boolean** output type.
    <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
 
@@ -208,7 +213,7 @@ Select the categories that should map to a passing state. For example, if you ha
    This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
 {{% /collapse-content %}}
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_5.png" alt="Configuring the custom evaluation output under Structured Output, including reasoning and assessment criteria." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_5-2.png" alt="Configuring the custom evaluation output under Structured Output, including reasoning and assessment criteria." style="width:100%;" >}}
 
 ### Define the evaluation scope: Filtering and sampling
 
@@ -229,7 +234,7 @@ You can enter sample `{{span_input}}` and `{{span_output}}` values and click **R
 Refine your prompt and schema until outputs are consistent and interpretable.
 
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_2-2.png" alt="Creation flow for a custom LLM-as-a-judge evaluation. On the right, under Test Evaluation, sample span_input and span_output have been provided. An Evaluation Result textbox below displays a sample result." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_2-3.png" alt="Creation flow for a custom LLM-as-a-judge evaluation. On the right, under Test Evaluation, sample span_input and span_output have been provided. An Evaluation Result textbox below displays a sample result." style="width:100%;" >}}
 
 
 ## Viewing and using results
