@@ -16,11 +16,35 @@ Set up the Datadog Logs destination and its environment variables when you [set 
 
 ### Set up the destination
 
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+#### Optional settings
+
+##### Route logs to multiple Datadog organizations
+
+If you want to route to multiple Datadog organizations, click **Route to Multiple Organizations**.
+
+- If you haven't added any organizations yet, enter organization details as described in the [Add a Datadog organization](#add-an-organization) section.
+- If you have already added organizations, you can:
+  - Click on an organization in the table to edit or delete it.
+  - Use the search bar to find a specific organization by name, filter query, or Datadog site, and then select the organization to edit or delete it.
+  - Click **Save** to add the organization.
+
+###### Add an organization
+
+1. Enter a name for the organization.
+	- **Note**: The name does not have to correspond to the actual name of the Datadog organization.
+1. Define a filter query.
+1. Select the Datadog organization's site.
+1. Enter the identifier for the API key for that Datadog organization.
+	- **Note**: Only enter the identifier for the API key. Do **not** enter the actual API key.
+1. Click **Save**.
+
+##### Buffering options
+
+Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
+- If left disabled, the maximum size for buffering is 500 events.
+- If enabled:
+	1. Select the buffer type you want to set (**Memory** or **Disk**).
+	1. Enter the buffer size and select the unit.
 
 ### Set secrets
 
