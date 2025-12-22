@@ -38025,18 +38025,13 @@ components:
           example: 10.0
           format: double
           type: number
-        rate:
-          description: Number of events to sample (1 in N).
-          example: 10
-          format: int64
-          minimum: 1
-          type: integer
         type:
           $ref: '#/components/schemas/ObservabilityPipelineSampleProcessorType'
       required:
       - id
       - type
       - include
+      - percentage
       - enabled
       type: object
     ObservabilityPipelineSampleProcessorType:
