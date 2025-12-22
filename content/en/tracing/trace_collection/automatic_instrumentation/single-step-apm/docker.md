@@ -21,12 +21,13 @@ To enable APM in a Docker Linux container:
 
 1. In Datadog, go to the [Install the Datadog Agent on Docker][15] page.
 1. In the **Customize my agent install command** section, go to **Additional configuration** > **Application Observability**, and turn on **APM Instrumentation**.
-
   
    {{< img src="tracing/trace_collection/docker-apm-instrumentation-toggle.png" alt="The 'Customize your agent install command' section of in-app instructions for installing the Datadog Agent on Docker" style="width:100%;" >}}
 
-1. Copy and run the Agent installation command in your Docker container.
+1. Copy and run the Agent installation command in your Docker container. If the Agent is already running, redeploy the Agent container using the new command.
 1. Restart your applications.
+
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
 ## Set SDK tracer versions
 
@@ -61,7 +62,7 @@ Unified Service Tags (USTs) apply consistent tags across traces, metrics, and lo
 
 ## Enable SDK-dependent products and features
 
-After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as Continuous Profiler, Application Security Monitoring, and trace ingestion controls.
+After SSI loads the Datadog SDK into your applications and enables distributed tracing, you can configure additional products that rely on the SDK. These include capabilities such as [Continuous Profiler][18], [App and API Protection][19], and [trace ingestion controls][20].
 
 To enable products, [set environment variables][3] in your application configuration.
 
@@ -114,6 +115,9 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
 [16]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
 [17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[18]: /profiler/
+[19]: /security/application_security/
+[20]: /tracing/trace_pipeline/ingestion_controls/
 
 
 

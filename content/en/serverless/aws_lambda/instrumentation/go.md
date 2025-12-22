@@ -27,6 +27,15 @@ If your application is deployed as a container image, use the _Container Image_ 
 **Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions. Go tracer v2 is not supported.
 
 {{< tabs >}}
+{{% tab "Datadog UI" %}}
+You can instrument your Go AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+
+For more information, see [Remote instrumentation for AWS Lambda][1].
+
+[1]: /serverless/aws_lambda/remote_instrumentation
+[2]: https://app.datadoghq.com/functions?cloud=aws
+[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+{{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
 The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
@@ -204,7 +213,7 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 ### Install the Datadog Lambda library
 
 ```
-go get github.com/DataDog/datadog-lambda-go
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
 ### Update your Lambda function code
@@ -217,11 +226,11 @@ import (
 	"net/http"
 	"time"
 
-  ddlambda "github.com/DataDog/datadog-lambda-go"
+  ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
   "github.com/aws/aws-lambda-go/events"
   "github.com/aws/aws-lambda-go/lambda"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -233,7 +242,7 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 	// Trace an HTTP request
 	req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
 	client := http.Client{}
-	client = *httptrace.WrapClient(&client)
+	client = httptrace.WrapClient(&client)
 	client.Do(req)
 
 	// Submit a custom metric

@@ -241,6 +241,9 @@ The most common errors include the following:
 `MALFORMED_RESPONSE`
 : The remote server responded with a payload that does not comply with HTTP specifications. This error can happen when remote servers differ in their HTTP support. To prevent issues, run tests with a consistent HTTP version: either HTTP/2 (if available) or HTTP/1.1.
 
+`INCORRECT_ASSERTION`
+: The expected value of the assertion does not match the actual value. For example, when asserting on an HTTP response status code, if you expect `200` but the response returns `400`, the INCORRECT_ASSERTION error is thrown.
+
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][13].

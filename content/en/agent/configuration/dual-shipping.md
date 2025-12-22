@@ -4,6 +4,9 @@ description: "Configure the Datadog Agent to send metrics, logs, and traces to m
 aliases:
 - /agent/guide/dual-shipping
 further_reading:
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
 - link: "/agent/configuration/network/"
   tag: "Guide"
   text: "Network Traffic"
