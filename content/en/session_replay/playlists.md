@@ -2,13 +2,15 @@
 title: Session Replay Playlists
 description: Learn how to create and use Playlists for organizing Session Replays.
 aliases:
+  - /real_user_monitoring/session_replay/playlists
+  - /product_analytics/session_replay/playlists
 further_reading:
-    - link: '/session_replay'
-      tag: Documentation
-      text: Session Replay
-    - link: 'https://www.datadoghq.com/blog/datadog-rum-session-replay-playlists/'
-      tag: Blog
-      text: Organize and analyze related session replays with Playlists in Datadog
+  - link: '/session_replay'
+    tag: Documentation
+    text: Session Replay
+  - link: 'https://www.datadoghq.com/blog/datadog-rum-session-replay-playlists/'
+    tag: Blog
+    text: Organize and analyze related session replays with Playlists in Datadog
 ---
 
 ## Overview
@@ -23,6 +25,8 @@ Playlists are collections of Session Replays you can aggregate in a folder-like 
 
 You can create a playlist directly from the [Playlist page][1] or from an individual Session Replay.
 
+If you spot any notable behaviors after viewing a Session Replay, you can click **Save to Playlist** to build a new playlist or add that particular Session Replay to an existing playlist.
+
 To create it directly from the **Playlist page**:
 
 1. In Datadog, go to [**Digital Experience > Session Replay > Playlists**][1].
@@ -34,14 +38,10 @@ To create it directly from the **Playlist page**:
 To create it from an individual Session Replay:
 
 1. Open the replay you want to save.
-2. Click the **Save to Playlist** button at the top.
-3. Add the recording to an existing playlist, or create a new one like in the video below.
+2. Click the **Share** button at the top, then select **Save to Playlist**.
 
-   {{< img src="real_user_monitoring/session_replay/playlists/playlist-individual-session-replay.mp4" alt="Build a new playlist from the individual recording" video="true" width="90%" >}}
-
-If you spot any notable behaviors after viewing a Session Replay, you can click **Save to Playlist** to build a new playlist or add that particular Session Replay to an existing playlist.
-
-{{< img src="real_user_monitoring/session_replay/playlists/playlists-build-new-playlist.mp4" alt="Build a new playlist" video="true" width="90%" >}}
+      {{< img src="real_user_monitoring/session_replay/playlists/share-playlist.png" alt="Build a new playlist from the individual recording" style="width:90%;">}}
+3. Add the recording to an existing playlist, or create a new one.
 
 ## Use cases
 
