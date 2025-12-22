@@ -108,7 +108,10 @@ See below for the list of identifier formats per-cloud:
 | OCI     | OCID               | `ocid1.bucket.oc1.eu-frankfurt-1.aaaaaaaa5b5d7phlob22x4xin2lopq33ugriqiglek2ecxecrjx2awceb7eq`                                               |
 
 How to form a CCRID:
- * AWS (EC2 Instance): `arn:aws:ec2:{region}:{accountId}:instance/{instanceId}`
+ * [AWS (EC2 Instance)][13]: `arn:aws:ec2:{region}:{accountId}:instance/{instanceId}`, To retrieve the `instanceId`:
+ ```bash
+ ec2metadata --instance-id
+ ```
  * [Azure][11]: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
  * GCP: `//compute.googleapis.com/projects/{projectID}/zones/{zoneName}/instances/{instanceName}"`
  * OCI/Oracle: CCRID can be obtained by [sending a request][12] at: `http://169.254.169.254/opc/v2/instance/id`
@@ -149,3 +152,4 @@ processors:
 [10]: /opentelemetry/schema_semantics/hostname/
 [11]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli
 [12]: https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/gettingmetadata.htm
+[13]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html#policy-syntax
