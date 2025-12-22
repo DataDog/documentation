@@ -102,10 +102,16 @@ To use this feature, set the `datadog.ccrid` resource attribute to value of CCRI
 See below for the list of identifier formats per-cloud:
 | Cloud   | Identifier Type    | Example                                                                                                                                      |
 |---------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| AWS     | ARN                | `arn:aws:sns:us-east-1:123456789012:example-sns-topic-name`                                                                                  |
+| AWS     | ARN                | `arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name`                                                                                  |
 | Azure   | Resource ID        | `/subscriptions/0b62a232-b8db-4380-9da6-640f7272ed6d/resourcegroups/lfotriggertest/providers/microsoft.web/sites/resources-task-19cb7afdcbbc`|
 | GCP     | CAI Resource Name  | `//file.googleapis.com/projects/datadog-sandbox/locations/us-central1/backups/kevin-test-backup`                                             |
 | OCI     | OCID               | `ocid1.bucket.oc1.eu-frankfurt-1.aaaaaaaa5b5d7phlob22x4xin2lopq33ugriqiglek2ecxecrjx2awceb7eq`                                               |
+
+How to form a CCRID:
+ * AWS (EC2 Instance): `arn:aws:ec2:{region}:{accountId}:instance/{instanceId}`
+ * [Azure][11]: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
+ * GCP: `//compute.googleapis.com/projects/{projectID}/zones/{zoneName}/instances/{instanceName}"`
+ * OCI/Oracle: CCRID can be obtained by [sending a request][12] at: `http://169.254.169.254/opc/v2/instance/id`
 
 
 For example, to set AWS CCRID for all resources in metrics, traces, and logs, use the [transform processor][2] with the following configuration:
@@ -115,15 +121,15 @@ processors:
     metric_statements:
       - context: resource
         statements:
-          - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:example-sns-topic-name")
+          - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name")
     trace_statements:
       - context: resource
         statements:
-          - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:example-sns-topic-name")
+          - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name")
     log_statements:
       - context: resource
         statements:
-          - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:example-sns-topic-name")
+          - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name")
 ```
 
 
@@ -141,3 +147,5 @@ processors:
 [8]: https://opentelemetry.io/docs/specs/semconv/resource/os/
 [9]: https://opentelemetry.io/docs/collector/deployment/
 [10]: /opentelemetry/schema_semantics/hostname/
+[11]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli
+[12]: https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/gettingmetadata.htm
