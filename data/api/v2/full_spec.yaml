@@ -35935,6 +35935,7 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineHttpClientSource'
       - $ref: '#/components/schemas/ObservabilityPipelineLogstashSource'
       - $ref: '#/components/schemas/ObservabilityPipelineSocketSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineOpentelemetrySource'
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
       description: The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike
         Next Gen SIEM.
@@ -37414,6 +37415,45 @@ components:
       type: string
       x-enum-varnames:
       - OPENSEARCH
+    ObservabilityPipelineOpentelemetrySource:
+      description: The `opentelemetry` source receives telemetry data using the OpenTelemetry
+        Protocol (OTLP) over gRPC and HTTP.
+      properties:
+        grpc_address_key:
+          description: Environment variable name containing the gRPC server address
+            for receiving OTLP data. Must be a valid environment variable name (alphanumeric
+            characters and underscores only).
+          example: OTEL_GRPC_ADDRESS
+          type: string
+        http_address_key:
+          description: Environment variable name containing the HTTP server address
+            for receiving OTLP data. Must be a valid environment variable name (alphanumeric
+            characters and underscores only).
+          example: OTEL_HTTP_ADDRESS
+          type: string
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: opentelemetry-source
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineOpentelemetrySourceType'
+      required:
+      - id
+      - type
+      type: object
+    ObservabilityPipelineOpentelemetrySourceType:
+      default: opentelemetry
+      description: The source type. The value should always be `opentelemetry`.
+      enum:
+      - opentelemetry
+      example: opentelemetry
+      type: string
+      x-enum-varnames:
+      - OPENTELEMETRY
     ObservabilityPipelineParseGrokProcessor:
       description: The `parse_grok` processor extracts structured fields from unstructured
         log messages using Grok patterns.
