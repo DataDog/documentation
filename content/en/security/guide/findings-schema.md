@@ -1713,7 +1713,7 @@ Contextual risk factors that help assess the potential impact of a finding. Thes
     <tr>
       <td><code>is_tainted_from_query_string</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_query_string</code><br>Groups information about whether the tainted parts originating from a query string.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_query_string</code><br>Groups information about whether the tainted parts originate from a query string.</td>
     </tr>
     <tr>
       <td><code>is_tainted_from_database</code></td>
