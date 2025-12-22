@@ -1531,7 +1531,7 @@ User who muted the finding.
     <tr>
       <td><code>id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.muted_by.id</code><br>Unique identifier in UUID format of the user who created the pull request.</td>
+      <td><strong>Path:</strong> <code>@workflow.mute.muted_by.id</code><br>Unique identifier in UUID format of the user who muted the finding.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
