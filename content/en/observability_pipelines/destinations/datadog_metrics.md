@@ -27,9 +27,23 @@ Optionally, toggle **Buffering Options** to configure how events are buffered be
   - Select the buffer type you want to set (Memory or Disk).
   - Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+There are no secret identifiers for this destination.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

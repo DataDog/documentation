@@ -20,6 +20,9 @@ Set up the SentinelOne destination and its environment variables when you [set u
 
 ### Set up the destination
 
+<div class="alert alert-danger">Only enter the identifier for the token. Do <b>not</b> enter the actual value.</a></div>
+
+1. Enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
 1. Select your SentinelOne logs environment in the dropdown menu.
 1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
 	- If left disabled, the maximum size for buffering is 500 events.
@@ -27,9 +30,24 @@ Set up the SentinelOne destination and its environment variables when you [set u
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- SentinelOne write access token identifier:
+	- The default identifier is `DESTINATION_SENTINEL_ONE_TOKEN`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## View logs in a SentinelOne cluster
 

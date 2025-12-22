@@ -20,7 +20,7 @@ You can also [send Azure Event Hub logs to Observability Pipelines using the Kaf
 
 Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the Kafka servers, username, password, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</a></div>
+<div class="alert alert-danger">Only enter the identifiers for the Kafka servers, username, password, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 1. Enter the identifier for your Kafka servers. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the identifier for your Kafka username. If you leave it blank, the [default](#set-secrets) is used.

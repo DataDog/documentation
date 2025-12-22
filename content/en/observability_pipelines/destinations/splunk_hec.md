@@ -16,9 +16,13 @@ Set up the Splunk HEC destination and its environment variables when you [set up
 
 ### Set up the destination
 
-<div class="alert alert-danger">Observability Pipelines compresses logs with the gzip (level 6) algorithm.</div>
+<div class="alert alert-danger">Observability Pipelines compresses logs with the gzip (level 6) algorithm.<br>Only enter the identifiers for the Splunk HEC token and endpoint. Do <b>not</b> enter the actual values.</div>
 
-The following fields are optional:
+1. Enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+
+#### Optional settings
+
 1. Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 1.  Select whether the timestamp should be auto-extracted. If set to `true`, Splunk extracts the timestamp from the message with the expected format of `yyyy-mm-dd hh:mm:ss`.
 1. Optionally, set the `sourcetype` to override Splunk's default value, which is `httpevent` for HEC data. See [template syntax][3] if you want to route logs to different source types based on specific fields in your logs.
@@ -28,9 +32,29 @@ The following fields are optional:
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
 
-### Set the environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Splunk HEC token identifier:
+	- References the Splunk HEC token for the Splunk indexer.
+	- The default identifier is `DESTINATION_SPLUNK_HEC_TOKEN`.
+- Splunk HEC endpoint URL identifier:
+	- References the Splunk HTTP Event Collector endpoint your Observability Pipelines Worker sends processed logs to. For example, `https://hec.splunkcloud.com:8088`.
+	- **Note**: `/services/collector/event` path is automatically appended to the endpoint.
+	- The default identifier is `DESTINATION_SPLUNK_HEC_ENDPOINT_URL`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/splunk_hec %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### How the destination works
 
