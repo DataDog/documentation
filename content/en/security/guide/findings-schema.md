@@ -2211,7 +2211,7 @@ Contains evidence of the EPSS score.
 
 ### Is Tainted From Request Url
 
-Groups information about whether the tainted parts originating from the request URL.
+Groups information about whether the tainted parts originate from the request URL.
 
 <table>
   <thead>
@@ -2237,7 +2237,7 @@ Groups information about whether the tainted parts originating from the request 
 
 ### Is Tainted From Query String
 
-Groups information about whether the tainted parts originating from a query string.
+Groups information about whether the tainted parts originate from a query string.
 
 <table>
   <thead>
