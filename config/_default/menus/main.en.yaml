@@ -5003,7 +5003,7 @@ menu:
       parent: data_observability_heading
       weight: 70000
     - name: Data Quality
-      url: data_observability/quality_monitoring/data_quality
+      url: data_observability/data_quality
       identifier: data_quality
       parent: quality_monitoring
       weight: 100000
@@ -5031,7 +5031,7 @@ menu:
       url: data_observability/quality_monitoring/business_intelligence
       identifier: business_intelligence_integrations
       parent: quality_monitoring
-      weight: 200000
+      weight: 300000
     - name: Tableau
       url: data_observability/quality_monitoring/integrations/business_intelligence/tableau
       identifier: business_intelligence_integrations_tableau
@@ -5091,24 +5091,18 @@ menu:
     - name: Spark on Google Dataproc
       url: data_observability/jobs_monitoring/dataproc
       identifier: jobs_monitoring_dataproc
-      parent: transformation_integrations
+      parent: data_jobs
       weight: 5000000
     - name: Spark on Kubernetes
       url: data_observability/jobs_monitoring/kubernetes
       identifier: jobs_monitoring_kubernetes
-      parent: transformation_integrations
+      parent: data_jobs
       weight: 6000000
     - name: Databricks
       url: data_observability/jobs_monitoring/databricks
       identifier: jobs_monitoring_databricks
-      parent: transformation_integrations
+      parent: data_jobs
       weight: 7000000
-    - name: Integrations
-      url: data_observability/integrations
-      pre: integrations
-      identifier: data_integrations
-      parent: data_observability_heading
-      weight: 90000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
