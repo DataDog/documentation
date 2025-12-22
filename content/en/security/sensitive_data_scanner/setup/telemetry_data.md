@@ -3,6 +3,8 @@ title: Telemetry Data
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/telemetry_data
+  - /security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+  - /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
 further_reading:
   - link: "/security/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"
@@ -10,9 +12,6 @@ further_reading:
   - link: "/security/sensitive_data_scanner/scanning_rules/custom_rules"
     tag: "Documentation"
     text: "Learn more about creating custom rules"
-  - link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
-    tag: "Documentation"
-    text: "Best practices for creating custom scanning rules"
 ---
 
 ## Overview
@@ -79,9 +78,13 @@ By default, a newly-created scanning group is disabled. To enable a scanning gro
 
 ### Add scanning rules
 
-A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regular express (regex) patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
+
+Whenever possible, use Datadog's out-of-the-box library rules. These rules are predefined rules that detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. Each rule has recommended keywords for the keyword dictionary to refine matching accuracy. You can also [add your own keywords](#add-custom-keywords).
 
 For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
+
+#### Create a scanning rule
 
 To add scanning rules, perform the following steps:
 
@@ -121,7 +124,7 @@ The [recommended keywords][15] are used by default when library rules are added.
 
 {{% /collapse-content %}}
 {{% collapse-content title="Add a custom rule" level="p" id="add-custom-rule"%}}
-You can create custom scanning rules using regex patterns to scan for sensitive data.
+You can create custom scanning rules using regex patterns to scan for sensitive data. See [Best practices for creating customs](#best-practices-for-creating-custom-rules) for more information on using regex patterns.
 
 1. Select a scanning group if you did not create this rule within a scanning group.
 1. Enter a name for the rule.
@@ -333,6 +336,25 @@ What you **cannot** do with rehydrated logs:
 
 - View in-line highlighted sensitive data matches in the UI: The matches remain obfuscated even if mask, redact, partially redact, or hash was chosen as an action on match.
 - Trigger retroactive scans: Sensitive Data Scanner does not re-scan rehydrated logs.
+
+## Best practices for creating custom rules
+
+A custom rule uses regex patterns to detect sensitive data. This section goes over best practices for creating regex patterns for custom rules.
+
+### Use precise regex patterns
+
+Define regex patterns that are as precise as possible because generic patterns result in more false positives.
+
+### Refine regex pattern matching
+
+Provide a list of keywords to the keyword dictionary to refine regex pattern matching. The dictionary checks for the matching pattern within a defined proximity of those keywords. For example, if you are scanning for passwords, you can add keywords like `password`, `token`, `secret`, and `credential`. You can also specify that these keywords be within a certain number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+
+{{< img src="sensitive_data_scanner/guides/password_keyword.png" alt="A keyword dictionary with password, token, secret, credential" style="width:90%;" >}}
+
+To make matches more precise, you can also do one of the following:
+
+- Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like names, you might want to exclude attributes such as `resource_name` and `namespace`.
+- Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for names, you can choose specific attributes such as `first_name` and `last_name`.
 
 ## Disable Sensitive Data Scanner
 
