@@ -232,7 +232,7 @@ AWS CloudFormation 템플릿을 사용하여 CloudFormation 스택을 생성하�
 ##### AWS CloudFormation 설정
 
 {{< tabs >}}
-{{% tab "새 AWS 계정 %}}
+{{% tab "새 AWS 계정" %}}
 
 1. [Cloud Security Setup][1] 페이지에서 **Cloud Integrations** > **AWS**를 클릭합니다.
 1. AWS 섹션 하단에서 **Add AWS accounts by following these steps**를 클릭합니다. **Add New AWS Account(s)** 대화 상자가 표시됩니다.
