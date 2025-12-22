@@ -1708,7 +1708,7 @@ Contextual risk factors that help assess the potential impact of a finding. Thes
     <tr>
       <td><code>is_tainted_from_request_url</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_request_url</code><br>Groups information about whether the tainted parts originating from the request URL.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_request_url</code><br>Groups information about whether the tainted parts originate from the request URL.</td>
     </tr>
     <tr>
       <td><code>is_tainted_from_query_string</code></td>
