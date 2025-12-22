@@ -143,8 +143,9 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
 1. Click on the **Create Evaluation** button on the top right corner.
 1. Select a specific managed evaluation. This will open the evalution editor window.
 1. Select the LLM application(s) you want to configure your evaluation for.
-1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider and choose an account.
-    1. If you select **Amazon Bedrock**, choose the region for which the account is available in. 
+1. Select the LLM provider and corresponding  account.
+    1. If you select an **Amazon Bedrock** account, choose the region for which the account is configured for.
+    1. If you select a **Vertex** account, choose a project and location.
 1. Configure the data to run the evaluation on:
    - Select **Traces** (filtering for the root span of each trace) or **All Spans** (no filtering).
    - (Optional) Specify any or all **tags** you want this evaluation to run on.
