@@ -367,6 +367,53 @@ docker run -e DD_CEL_WORKLOAD_EXCLUDE=<JSON_CEL_RULES> ...
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Validating configuration option" level="h4" expanded=false id="validating-configuration-option" %}}
+
+Use the `agent workloadfilter verify-cel` command to validate your configuration syntax before deployment. It accepts YAML or JSON input via stdin. The following example demonstrates validation catching an undefined field error:
+
+```json
+### cel-config.json
+[
+  {
+    "products": ["metrics"],
+    "rules":
+      {
+        "containers":
+          [
+            'container.undefined_field == "test"',
+            'container.name.startsWith("-agent")',
+          ],
+      },
+  },
+]
+```
+
+```bash
+agent workloadfilter verify-cel < cel-config.json
+
+-> Validating CEL Configuration
+    Loading YAML file...
+✓ YAML loaded successfully (1 bundle(s))
+
+-> Validating configuration structure...
+✓ Configuration structure is valid
+
+-> Compiling CEL rules...
+
+  -> metrics
+    Resource: container (2 rule(s))
+      ✗ Compilation failed: ERROR: <input>:1:10: undefined field 'undefined_field'
+ | container.undefined_field == "test" || container.name.startsWith("-agent")
+ | .........^
+        Rule 1: container.undefined_field == "test"
+        Rule 2: container.name.startsWith("-agent")
+
+✗ Validation failed - some rules have errors
+Error: CEL compilation failed
+```
+
+{{% /collapse-content %}}
+
 #### Example rules
 
 To exclude the container with a specific pod annotation:
