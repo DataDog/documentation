@@ -1,6 +1,6 @@
 ---
 title: Remove Service Overrides
-description: Learn how to remove integration service overrides using the Datadog user interface or environment variables.
+description: Learn how to remove integration service overrides from Datadog.
 disable_toc: false
 further_reading:
 - link: "/tracing/guide/service_overrides"
@@ -11,68 +11,57 @@ further_reading:
   text: "Inferred Services"
 ---
 
-You can remove integration service overrides to clean up your service maps and ensure dependencies are represented by [inferred services][8]. This page covers two approaches:
-
-- **[Datadog user interface (UI)](#remove-overrides-from-the-datadog-ui)**: Remove overrides directly from the Service Override page in Datadog and get visibility into potential impacts, such as affected monitors and dashboards.
-- **[Environment variable](#remove-overrides-with-environment-variables)**: Set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` in your application configuration.
-
-<div class="alert alert-warning">Removing service overrides is a <strong>breaking change</strong>. Metrics, monitors, or dashboard queries based on overridden service names stop matching after removal. Datadog surfaces these potential impacts in the UI. </div>
+This page explains how to remove integration service overrides in Datadog. For conceptual background, see [Service Overrides][10] and [Inferred Services][8].
 
 ## Prerequisites
 
-To remove integration service overrides:
+Before you remove integration service overrides:
 
 1. You must have the `apm_service_renaming_write` permission.
-1. Your tracer version must support override removal. See [Tracer version requirements](#tracer-version-requirements).
+1. Your Datadog SDK version must support override removal. See [SDK version requirements](#sdk-version-requirements).
 
-### Tracer version requirements
+### SDK version requirements
 
-| Language   | Minimum version |
-|------------|-----------------|
-| .NET       | [3.4.0][1]      |
-| Go         | [1.55.0][2]     |
-| Java       | [1.20.0][3]     |
-| Node.js    | [4.16.0][4]     |
-| PHP        | [0.94.1][5]     |
-| Python     | [1.19.0][6]     |
-| Ruby       | [1.15.0][7]     |
+| Language   | Minimum supported version |
+|------------|---------------------------|
+| .NET       | [3.4.0][1]                |
+| Go         | [1.55.0][2]               |
+| Java       | [1.20.0][3]               |
+| Node.js    | [4.16.0][4]               |
+| PHP        | [0.94.1][5]               |
+| Python     | [1.19.0][6]               |
+| Ruby       | [1.15.0][7]               |
 
+## Remove service overrides
 
-## Remove overrides in Datadog
+To remove service overrides in Datadog:
 
-To remove service overrides in the Datadog UI, navigate to [**APM** > **Service Overrides**][9]. Then, do one of the following:
+1. Navigate to **Software Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
 
-1. **Select specific overrides to remove**: Choose individual integration service 
-overrides to remove. A **Migration Progress** bar displays 
-your progress as you remove overrides. This action is reversible. 
-2. **Removal all and future service overrides**: Select **Remove All Overrides** to 
-permanently remove all integration service overrides and prevent future ones that may 
-appear by increasing the usage of APM. Custom service overrides are not affected.
+   {{< img src="tracing/guide/service_overrides/SO_removal_page.png" alt="Service Overrides page showing migration progress and removal options" style="width:100%;" >}}
 
-   <div class="alert alert-danger"><strong>Removing all integration service overrides is permanent and cannot be undone.</strong></div>
+1. For each override you plan to remove, review the related monitors and dashboards.
 
-## Remove overrides with environment variables
+   These assets reference the overridden service name and stop matching after removal. Update them to use the base service name (`service:<DD_SERVICE>`) to preserve functionality.
 
-To remove integration service overrides through configuration, set the following environment variable:
+   {{< img src="tracing/guide/service_overrides/SO_removal_page_sidepanel.png" alt="Service override side panel showing affected monitors and dashboards" style="width:100%;" >}}
 
-```sh
-DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
-```
+1. Remove overrides individually or in bulk:
+   - **Select specific overrides to remove**: Choose individual integration service overrides to remove. A **Migration Progress** bar shows your progress as you remove overrides. This action is reversible.
+   - **Remove all overrides**: Select **Remove All Overrides** to permanently remove all integration service overrides and prevent future ones from appearing as APM usage increases. Custom service overrides are not affected.
 
-This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example, `*-postgres`, `*-http-client`).
+     <div class="alert alert-danger">Removing all integration service overrides is permanent and cannot be undone.</div>
 
-**Note**: This configuration only removes [integration service overrides][10]. Custom service overrides must be removed directly in your code.
+## Examples: Service naming after removal
 
-### Examples
-
-With `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`, all supported tracing libraries tag client spans with the calling service's name (`service:<DD_SERVICE>`) instead of the integration-specific name. [`peer.*` attributes][11] describe the called dependency (for example, database or queue).
+Removing service overrides changes how client spans are tagged and how downstream dependencies are identified. After overrides are removed, client spans use the calling service's name (`service:<DD_SERVICE>`) instead of the integration-specific name. The called dependency is identified using [`peer.*` attributes][11] (for example, database or queue).
 
 **gRPC example:**
 
-| Scenario | Service name | Additional `peer.*` attributes |
-|----------|--------------|--------------------------------|
-| With service overrides | `service:my-service-grpc-client` or `service:grpc-client` | None |
-| Without service overrides | `service:myservice` | `@peer.service:otherservice` |
+| Scenario                  | Service name                                              | Additional `peer.*` attributes |
+|---------------------------|-----------------------------------------------------------|--------------------------------|
+| With service overrides    | `service:my-service-grpc-client` or `service:grpc-client` | None                           |
+| Without service overrides | `service:myservice`                                       | `@peer.service:otherservice`   |
 
 **MySQL example:**
 
@@ -81,28 +70,17 @@ With `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`, all supported tra
 | With service overrides | `service:my-service-mysql` or `service:mysql` | None |
 | Without service overrides | `service:myservice` | `@peer.db.name:user-db`, `@peer.db.system:mysql` |
 
-## Remove overrides progressively
+## Alternative: environment variable
 
-To minimize disruption, remove service overrides one at a time and update dependent assets before proceeding.
+You can also remove integration service overrides by setting an environment variable in your application configuration. This approach is useful if you cannot access the Datadog UI. Your SDK must meet the [minimum version requirements](#sdk-version-requirements).
 
-1. **Identify the override to remove**: Navigate to the **service page** for the override you want to remove.
+Set the following environment variable:
 
-1. **Find the base services**: Hover over the service override pill in the page header to see the underlying base service names. These are the services emitting spans with overrides.
+```sh
+DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
+```
 
-   {{< img src="/tracing/guide/service_overrides/service_overrides_service_page.png" alt="Service page showing service override pill with base services on hover" style="width:70%;">}}
-
-1. **Audit dependent assets**: Review assets that might query the overridden service name:
-   - Monitors, dashboards, and notebooks using [APM trace metrics][12]
-   - [Metrics generated from spans][13]
-   - [Trace analytics monitors][14]
-   - [Retention filters][15]
-   - Sensitive Data Scanner pipelines
-
-1. **Update queries**: Change queries to use the base service name (`service:<DD_SERVICE>`) so they continue matching after removal.
-
-1. **Remove the override**: Use either the [Datadog UI](#remove-overrides-from-the-datadog-ui) or [environment variable](#remove-overrides-with-environment-variables) to remove the override.
-
-1. **Repeat** for each service override you want to remove.
+This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example, `*-postgres`, `*-http-client`). Custom service overrides are not affected and must be removed directly in your code.
 
 ## Further reading
 
@@ -117,9 +95,6 @@ To minimize disruption, remove service overrides one at a time and update depend
 [7]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.15.0
 [8]: /tracing/services/inferred_services
 [9]: https://app.datadoghq.com/apm/settings/service-naming
-[10]: /tracing/guide/service_overrides/#integration-service-overrides
+[10]: /tracing/guide/service_overrides
 [11]: /tracing/services/inferred_services/#peer-tags
-[12]: /tracing/metrics/metrics_namespace/
-[13]: /tracing/trace_pipeline/generate_metrics
-[14]: /monitors/types/apm/?tab=traceanalytics
-[15]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[12]: https://app.datadoghq.com/software/settings/service-remapping
