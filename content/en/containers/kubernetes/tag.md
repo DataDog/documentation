@@ -113,7 +113,7 @@ com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 
 ## Tag extraction
 
-Starting in version 7.64+, the Agent and Cluster Agent can be configured to collect labels and annotations from Kubernetes resources and use them as tags from a common configuration. Datadog recommends using the following options to ensure consistent reporting across the Agent’s core tagging, the Cluster Agent’s KSM reporting, and both Agents’ Orchestrator Explorer reporting:
+Starting in version 7.64+, the Agent and Cluster Agent can be configured to collect labels and annotations from Kubernetes resources and use them as tags from a common configuration. Datadog recommends using the following options to ensure consistent reporting across the Agent's core tagging, the Cluster Agent's KSM reporting, and both Agents' Orchestrator Explorer reporting:
 - `kubernetesResourcesLabelsAsTags`
 - `kubernetesResourcesAnnotationsAsTags`
 
