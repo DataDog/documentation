@@ -52,34 +52,34 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 {{< tabs >}}
 {{% tab "Test Info" %}}
 
-`synthetics.attributes.test`
+`{{synthetics.attributes.test}}`
 : The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
 
-`synthetics.attributes.test.name`
+`{{synthetics.attributes.test.name}}`
 : The name of the test
 
-`synthetics.attributes.test.type`
+`{{synthetics.attributes.test.type}}`
 : Test type (for example, `api`)
 
-`synthetics.attributes.test.subType`
+`{{synthetics.attributes.test.subType}}`
 : Subtype for API tests (for example, `http`, `dns`, and `multi`)
 
-`synthetics.attributes.test.id`
+`{{synthetics.attributes.test.id}}`
 : The test ID is the test's public ID (for example, `abc-def-ghi`)
 
 {{% /tab %}}
 {{% tab "Location" %}}
 
-`synthetics.attributes.location`
-: The `location` object contains information about the location of where the test is run like its `name` and `id`
+`{{synthetics.attributes.location}}`
+: The `location` object contains information about the location of where the test is run from
 
-`synthetics.attributes.location.id`
+`{{synthetics.attributes.location.id}}`
 : Location ID (for example, `aws:eu-central-1`)
 
-`synthetics.attributes.location.name`
+`{{synthetics.attributes.location.name}}`
 : Name of the location (for example, `Frankfurt (AWS)`)
 
-`synthetics.attributes.location.privateLocation`
+`{{synthetics.attributes.location.privateLocation}}`
 : `true` for Private Locations
 
 {{% /tab %}}
@@ -87,22 +87,25 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 
 Applies to browser and mobile tests.
 
-`.device.id`
+`{{synthetics.attributes.device}}`
+: The `device` object contains information about the device on which the test is run on
+
+`{{synthetics.attributes.device.id}}`
 : Device identifier
 
-`.device.name`
+`{{synthetics.attributes.device.name}}`
 : Human-readable device name
 
-`.device.type`
+`{{synthetics.attributes.device.type}}`
 : Device type classification
 
-`.device.resolution.width`, `.device.resolution.height`
+`{{synthetics.attributes.device.width}}`, `{{synthetics.attributes.device.height}}`
 : Screen resolution dimensions
 
-`.device.browser.type`
+`{{synthetics.attributes.device.browser.type}}`
 : Browser type (browser tests only)
 
-`.device.platform.name`, `.device.platform.version`
+`{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
 : Platform information (mobile tests only)
 
 **Example values:**
