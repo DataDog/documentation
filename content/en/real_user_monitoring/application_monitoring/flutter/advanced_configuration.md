@@ -204,7 +204,7 @@ void _backgroundWork(SendPort port) async {
 
 `attachToBackgroundIsolate` must be called **after** Datadog is initialized in your main isolate, otherwise the call will silently fail and tracking will not be available.
 
-If you ware using [Datadog Tracking HTTP Client][10] to automatically track resources, `attachToBackgroundIsolate` will automatically start tracking resources from the calling isolate.  However, using `Client` from the `http` package or `Dio` will require you re-intiialize HTTP tracking for those packages from the background isolate.
+If you are using [Datadog Tracking HTTP Client][10] to automatically track resources, `attachToBackgroundIsolate` will automatically start tracking resources from the calling isolate.  However, using `Client` from the `http` package or `Dio` will require you re-initialize HTTP tracking for those packages from the background isolate.
 
 ## Automatically track resources
 
