@@ -53,7 +53,7 @@ Starting late January 2026, the following features use the new data model:
 
 The following additional features will be released later:
 
-- Unified search queries for Cloud Security Vulnerabilities and Code Security findings (SCA, SAST, IAST, Secrets)
+- Support for Cloud Security Vulnerabilities and Code Security findings (SCA, SAST, IAST, Secrets) in the unified search experience
 - [Data Access Controls][6]
 - Security findings & tools in the [Datadog MCP Server][7]
 - API & Terraform support for [automation pipelines][8]
