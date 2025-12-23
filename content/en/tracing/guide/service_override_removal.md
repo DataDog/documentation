@@ -70,15 +70,15 @@ Removing service overrides changes how client spans are tagged and how downstrea
 | With service overrides | `service:my-service-mysql` or `service:mysql` | None |
 | Without service overrides | `service:myservice` | `@peer.db.name:user-db`, `@peer.db.system:mysql` |
 
-## Alternative: environment variable
+## Configuration-based removal
 
-You can also remove integration service overrides by setting an environment variable in your application configuration. This approach is useful if you cannot access the Datadog UI. Your SDK must meet the [minimum version requirements](#sdk-version-requirements).
+You can also remove integration service overrides by setting an environment variable in your application configuration. This approach is useful if you cannot access the Datadog UI.
 
-Set the following environment variable:
-
-```sh
-DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
-```
+1. Confirm that your SDK meets the [minimum version requirements](#sdk-version-requirements).
+2. Set the following environment variable:
+   ```sh
+   DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
+   ```
 
 This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example, `*-postgres`, `*-http-client`). Custom service overrides are not affected and must be removed directly in your code.
 
