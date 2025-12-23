@@ -489,6 +489,8 @@ secret_backend_config:
 
 {{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
 
+**Note:** Available in Agent version 7.75+
+
 | secret_backend_type value | Service |
 |---------------------------|---------|
 | `k8s.secrets` | [Kubernetes Secrets][5000] |
@@ -584,33 +586,129 @@ db_password: "ENC[secrets-shared/db-creds;password]"
 
 {{% tab "Helm" %}}
 
-[TODO]
+Configure the Datadog Agent to use Kubernetes Secrets with Helm:
+
+```yaml
+# values.yaml
+datadog:
+  apiKey: "placeholder-will-be-overridden"
+
+  env:
+  - name: DD_SECRET_BACKEND_TYPE
+    value: "k8s.secrets"
+  - name: DD_API_KEY
+    value: "ENC[secrets-ns/dd-api-key;api_key]"
+```
+
+**Note:** A placeholder `apiKey` is required for Helm chart validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. See the RBAC setup section above.
+
+<div class="alert alert-info"> Helm does not currently have native <code>secretBackend.type</code> configuration. Use environment variables as shown above. </div>
 
 {{% /tab %}}
 
 {{% tab "Operator" %}}
 
-[TODO]
+Configure the Datadog Agent to use Kubernetes Secrets with the Datadog Operator:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: "placeholder-will-be-overridden"
+
+  override:
+    nodeAgent:
+      env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "k8s.secrets"
+      - name: DD_API_KEY
+        value: "ENC[secrets-ns/dd-api-key;api_key]"
+```
+
+**Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. Auto-RBAC via the Operator's `roles:` field is not currently supported for type-based backends.
+
+<div class="alert alert-info"> The Operator does not currently have native <code>secretBackend.type</code> configuration. Use environment variables in <code>override.nodeAgent.env</code> as shown above. </div>
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ##### Custom path configuration
 If your setup does not follow the default locations for ServiceAccount based authentication, then a `token_path` and `ca_path` can be specified
+
+{{< tabs >}}
+{{% tab "Agent YAML" %}}
 ```yaml
 secret_backend_type: k8s.secrets
 secret_backend_config:
   token_path: /custom/path/to/token
   ca_path: /custom/path/to/ca.crt
 ```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  env:
+  - name: DD_SECRET_BACKEND_TYPE
+    value: "k8s.secrets"
+  - name: DD_SECRET_BACKEND_CONFIG
+    value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+```yaml
+override:
+  nodeAgent:
+    env:
+    - name: DD_SECRET_BACKEND_TYPE
+      value: "k8s.secrets"
+    - name: DD_SECRET_BACKEND_CONFIG
+      value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ##### Custom api server configuration
+
 If your setup does not expose the default KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT environment variables, then a `api_server` url can be supplied to interact with the k8s REST API.
+
+{{< tabs >}}
+{{% tab "Agent YAML" %}}
 ```yaml
 secret_backend_type: k8s.secrets
 secret_backend_config:
   api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
 ```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  env:
+  - name: DD_SECRET_BACKEND_TYPE
+    value: "k8s.secrets"
+  - name: DD_SECRET_BACKEND_CONFIG
+    value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+```yaml
+override:
+  nodeAgent:
+    env:
+    - name: DD_SECRET_BACKEND_TYPE
+      value: "k8s.secrets"
+    - name: DD_SECRET_BACKEND_CONFIG
+      value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 [5000]: https://kubernetes.io/docs/concepts/configuration/secret/
 
