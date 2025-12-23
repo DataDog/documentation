@@ -8,17 +8,25 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use this processor to enrich your logs with information from a reference table, which could be a local file or database.
 
+## Setup
+
 To set up the enrichment table processor:
+
+1. Click **Add enrichment**.
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
-2. Enter the source attribute of the log. The source attribute's value is what you want to find in the reference table.
-3. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
-4. Select the type of reference table you want to use, **File** or **GeoIP**.
-   - For the **File** type:
-        1. Enter the file path.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][1] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+1. In the **Set lookup mapping** section, select the type of reference table you want to use: **Reference Table**, **File** or **GeoIP**.
+    - For **Reference Table**, select the reference table in the dropdown menu.
+    - For **File**:
+        1. Enter the file path.<br>- **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.<br>- See [Advanced Worker Configurations][1] for more information. 
         1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment file example](#enrichment-file-example).
-   - For the **GeoIP** type, enter the GeoIP path.
+    - For **GeoIP**, enter the GeoIP path.
+1. Enter the source attribute of the log. The source attribute's value is what you want to find in the reference table.
+1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
+1. Click **Save**.
 
 ##### Enrichment file example
 
