@@ -13,8 +13,6 @@ further_reading:
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
-<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
-
 ## Overview
 
 RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance. After auto-instrumentation is set up, you can manage configurations from the UI.
