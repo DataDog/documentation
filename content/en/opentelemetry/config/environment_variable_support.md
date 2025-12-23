@@ -54,10 +54,6 @@ These environment variables enable the Datadog SDK to ingest OpenTelemetry Metri
 **Default**: `false`
 
 `DD_LOGS_OTEL_ENABLED`
-: **Description**: Enables the Datadog SDK's native OpenTelemetry Logs API implementation, allowing logs to be collected and exported in OTLP format. <br>
-**Default**: `false`
-
-`DD_LOGS_OTEL_ENABLED`
 : **Description**: Enables the Datadog SDK to collect and export logs in the OTLP format. <br>
 **Notes**: For most languages, this enables support for the OTel Logs API. For .NET, this enables interception of built-in loggers. <br>
 **Default**: `false`
@@ -132,12 +128,10 @@ Trace exporter to be used<br>
     Although the SDK resolves these settings internally for emitted telemetry, the Datadog Agent collects tags from all configured sources without overriding. Configuring service/environment/version using multiple inputs (for example, both <code>DD_ENV</code> and <code>OTEL_RESOURCE_ATTRIBUTES</code>) can result in multiple values appearing in Datadog (for example, <code>env:prod</code> and <code>env:dev</code>).
     To avoid duplicates, configure each concept using only one convention.
   </div>
-  
-  
 
 `OTEL_SDK_DISABLED`
 : **Description**: Disables the Datadog SDK's OpenTelemetry interoperability for all signals. <br>
-**Notes**: **Notes**: When set to `true`, this effectively sets `DD_TRACE_OTEL_ENABLED=false`, `DD_LOGS_OTEL_ENABLED=false`, and `DD_METRICS_OTEL_ENABLED=false`.<br>
+**Notes**: When set to `true`, this effectively sets `DD_TRACE_OTEL_ENABLED=false`, `DD_LOGS_OTEL_ENABLED=false`, and `DD_METRICS_OTEL_ENABLED=false`.<br>
 **Ruby & Go SDKs**: The OpenTelemetry SDK activates automatically upon import and configuration, so this setting is not applicable.
 
 ## OTLP Exporter configuration
