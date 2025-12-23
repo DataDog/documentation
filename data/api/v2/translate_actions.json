@@ -1188,14 +1188,22 @@
     "request_schema_description": "Update request for an incident."
   },
   "ListIncidentAttachments": {
-    "description": "Get all attachments for a given incident.",
-    "summary": "Get a list of attachments"
+    "description": "List incident attachments.",
+    "summary": "List incident attachments"
   },
-  "UpdateIncidentAttachments": {
-    "description": "The bulk update endpoint for creating, updating, and deleting attachments for a given incident.",
-    "summary": "Create, update, and delete incident attachments",
-    "request_description": "Incident Attachment Payload.",
-    "request_schema_description": "The update request for an incident's attachments."
+  "CreateIncidentAttachment": {
+    "description": "Create an incident attachment.",
+    "summary": "Create incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentAttachment": {
+    "summary": "Delete incident attachment"
+  },
+  "UpdateIncidentAttachment": {
+    "summary": "Update incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
@@ -2028,6 +2036,30 @@
   "GetUserNotificationChannel": {
     "description": "Get a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
     "summary": "Get an On-Call notification channel for a user"
+  },
+  "ListUserNotificationRules": {
+    "description": "List the notification rules for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification rules for a user"
+  },
+  "CreateUserNotificationRule": {
+    "description": "Create a new notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification rule for a user"
+  },
+  "DeleteUserNotificationRule": {
+    "description": "Delete a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification rule for a user"
+  },
+  "GetUserNotificationRule": {
+    "description": "Get a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification rule for a user"
+  },
+  "UpdateUserNotificationRule": {
+    "description": "Update a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Update an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
