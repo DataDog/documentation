@@ -51,3 +51,8 @@
 {{- if eq (.Get "layer") "node-example-version" -}}
     Node24-x
 {{- end -}}
+
+<!-- Ruby Versions -->
+{{- if eq (.Get "layer") "ruby-versions" -}}
+    `Ruby3-2`, `Ruby3-3`, `Ruby3-4`
+{{- end -}}
