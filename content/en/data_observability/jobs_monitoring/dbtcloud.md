@@ -2,9 +2,9 @@
 title: dbt Cloud
 description: "Connect dbt Cloud to Datadog for job run metadata and model lineage."
 further_reading:
-  - link: '/data_observability/data_quality'
+  - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Learn about Data Quality monitoring'
+    text: 'Learn about Data Observability'
 ---
 
 ## Overview

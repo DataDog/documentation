@@ -1,6 +1,6 @@
 ---
-title: OpenLineage
-description: "Connect OpenLineage to Datadog to capture lineage from custom systems and orchestrators."
+title: Custom Jobs using OpenLineage
+description: "Monitor jobs from in-house tools, custom pipelines, and orchestrators that don't have native Datadog integrations."
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
@@ -12,14 +12,14 @@ further_reading:
 
 ## Overview
 
-Lineage in Datadog Data Observability is built on [OpenLineage][1], the open source standard for collecting and analyzing data lineage. OpenLineage is especially helpful when you need to:
+Custom jobs use the [OpenLineage][1] standard to send job and lineage events to Datadog. Use custom jobs when you need to:
 
-- Capture lineage from systems Datadog doesn't integrate with natively, such as in-house tools
-- Emit lineage events for jobs or orchestrators where building a native Datadog integration would be difficult
+- Capture lineage from systems Datadog doesn't integrate with natively, such as in-house tools or custom ETL scripts
+- Emit lineage events for jobs or orchestrators where a native Datadog integration isn't available
 
 Replace the hostname in the examples with the relevant [Datadog site][2] for your organization. To find your Datadog site, see [Access the Datadog site][3]. This example uses `datadoghq.com`.
 
-**Note**: If you wish to configure the Datadog Agent to proxy OpenLineage events, see [Set up Datadog Agent for OpenLineage Proxy][4].
+**Note**: To centralize configuration and avoid distributing API keys to every application, you can [set up the Datadog Agent as an OpenLineage proxy][4].
 
 You can send [OpenLineage events][1] to Datadog in three ways:
 - [Direct HTTP with curl](#option-1-direct-http-with-curl)

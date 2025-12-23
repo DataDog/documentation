@@ -5002,11 +5002,6 @@ menu:
       identifier: quality_monitoring
       parent: data_observability_heading
       weight: 70000
-    - name: Data Quality
-      url: data_observability/data_quality
-      identifier: data_quality
-      parent: quality_monitoring
-      weight: 100000
     - name: Data Warehouses
       url: data_observability/quality_monitoring/data_warehouses
       identifier: data_warehouses
@@ -5052,16 +5047,6 @@ menu:
       identifier: business_intelligence_integrations_powerbi
       parent: business_intelligence_integrations
       weight: 4000000
-    - name: OpenLineage
-      url: data_observability/quality_monitoring/openlineage
-      identifier: openlineage_integrations
-      parent: quality_monitoring
-      weight: 400000
-    - name: Datadog Agent for OpenLineage Proxy
-      url: data_observability/quality_monitoring/openlineage/datadog_agent_for_openlineage
-      identifier: openlineage_datadog_agent_for_openlineage
-      parent: openlineage_integrations
-      weight: 1000000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
@@ -5103,6 +5088,16 @@ menu:
       identifier: jobs_monitoring_databricks
       parent: data_jobs
       weight: 7000000
+    - name: Custom Jobs
+      url: data_observability/jobs_monitoring/openlineage
+      identifier: openlineage_integrations
+      parent: data_jobs
+      weight: 8000000
+    - name: Datadog Agent for OpenLineage Proxy
+      url: data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage
+      identifier: openlineage_datadog_agent_for_openlineage
+      parent: openlineage_integrations
+      weight: 10000000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability

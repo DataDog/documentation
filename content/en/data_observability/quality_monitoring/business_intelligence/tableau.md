@@ -2,9 +2,9 @@
 title: Tableau
 description: Connect Tableau to Datadog Data Observability to view end-to-end lineage from warehouse tables to dashboards.
 further_reading:
-  - link: '/data_observability/data_quality'
+  - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Learn about Data Quality monitoring'
+    text: 'Learn about Data Observability'
 ---
 
 ## Overview

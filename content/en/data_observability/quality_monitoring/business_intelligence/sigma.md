@@ -2,9 +2,9 @@
 title: Sigma
 description: Connect Sigma to Datadog Data Observability to view end-to-end lineage from warehouse tables to workbooks.
 further_reading:
-  - link: '/data_observability/data_quality'
+  - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Learn about Data Quality monitoring'
+    text: 'Learn about Data Observability'
 ---
 
 ## Overview

@@ -2,9 +2,9 @@
 title: Set up Datadog Agent for OpenLineage Proxy
 description: Configure the Datadog Agent to proxy OpenLineage events to Datadog Data Observability.
 further_reading:
-  - link: '/data_observability/data_quality'
+  - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Learn about Data Quality monitoring'
+    text: 'Learn about Data Observability'
 ---
 
 ## Overview
