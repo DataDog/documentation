@@ -11,5 +11,5 @@ To configure your HTTP/S Client source:
    - Since requests run concurrently, if a scrape takes longer than the interval given, a new scrape is started, which can consume extra resources. Set the timeout to a value lower than the scrape interval to prevent this from happening.
 5. Enter the timeout for each scrape request.
 
-[10172]: /observability_pipelines/advanced_configurations/
+[10172]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 <!-- 10172 link is used in multiple shortcodes, so if it is changed, make sure to update those shortcodes using find and replace -->

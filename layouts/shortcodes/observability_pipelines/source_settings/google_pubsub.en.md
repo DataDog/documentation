@@ -9,7 +9,7 @@
     - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
     - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
 
-[10172]: /observability_pipelines/advanced_configurations/
+[10172]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 <!-- 10172 link is used in multiple shortcodes, so if it is changed, make sure to update those shortcodes using find and replace -->
 [10021]: https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [10022]: https://cloud.google.com/docs/authentication#auth-flowchart

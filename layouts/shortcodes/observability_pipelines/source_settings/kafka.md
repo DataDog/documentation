@@ -12,4 +12,4 @@
     1. Click **Add Option** to add another librdkafka option.
 
 [10131]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
-[10132]: /observability_pipelines/advanced_configurations/
+[10132]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/

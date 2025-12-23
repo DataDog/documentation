@@ -5,5 +5,5 @@ Optionally, toggle the switch to enable TLS. If you enable TLS, the following ce
 
 **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][10172] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 
-[10172]: /observability_pipelines/advanced_configurations/
+[10172]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 <!-- 10172 link is used in multiple shortcodes, so if it is changed, make sure to update those shortcodes using find and replace -->

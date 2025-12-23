@@ -13,5 +13,5 @@ To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike dat
 		1. Enter the buffer size and select the unit.
 
 [10171]: https://falcon.us-2.crowdstrike.com/documentation/page/bdded008/hec-http-event-connector-guide
-[10172]: /observability_pipelines/advanced_configurations/
+[10172]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 <!-- 10172 link is used in multiple shortcodes, so if it is changed, make sure to update those shortcodes using find and replace -->

@@ -19,5 +19,5 @@
 - Only logs formatted by the OCSF processor are converted to Parquet.
 
 [10081]: /observability_pipelines/processors/remap_ocsf
-[10082]: /observability_pipelines/advanced_configurations/
+[10082]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [10083]: /observability_pipelines/destinations/amazon_security_lake/#aws-authentication

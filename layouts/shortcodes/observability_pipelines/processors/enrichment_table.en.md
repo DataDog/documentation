@@ -37,5 +37,5 @@ merchant_info {
 }
 ```
 
-[10172]: /observability_pipelines/advanced_configurations/
+[10172]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 <!-- 10172 link is used in multiple shortcodes, so if it is changed, make sure to update those shortcodes using find and replace -->
