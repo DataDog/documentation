@@ -74,11 +74,11 @@ You can create a playlist of Session Replays to organize them by any patterns yo
 
 ## Dev tools
 
-Dev tools is a panel in Session Replay that exposes key debugging information during playback. Use it to identify frontend issues, trace requests to the backend, and understand performance bottlenecks—all without reproducing the issue yourself.
+The Dev tools panel in Session Replay exposes key debugging information during playback. Use it to identify frontend issues, trace requests to the backend, and understand performance bottlenecks—all without reproducing the issue yourself.
 
 To access Dev tools, click the **Dev Tools** button in the Session Replay view.
 
-Dev tools includes the following tabs:
+The Dev tools panel includes the following tabs:
 
 | Tab | Description |
 |-----|-------------|
@@ -89,7 +89,7 @@ Dev tools includes the following tabs:
 
 ### Trace issues from frontend to backend
 
-If [APM is integrated with RUM][12], Dev tools connects frontend requests to backend traces automatically. When a trace is associated with a request, an APM icon appears next to it in the Network waterfall. Click the icon to open the trace view and visualize the end-to-end path of the request.
+If [APM is integrated with RUM][12], frontend requests are connected to backend traces automatically in Dev tools. When a trace is associated with a request, an APM icon appears next to it in the Network waterfall. Click the icon to open the trace view and visualize the end-to-end path of the request.
 
 ### Identify CSP violations
 

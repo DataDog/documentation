@@ -1,6 +1,6 @@
 ---
 title: Heatmaps
-description: Heatmaps are a type of visualization allowing you to see where users click on your website.
+description: Heatmaps are a type of visualization showing where users click on your website.
 aliases:
 - /real_user_monitoring/session_replay/heatmaps
 - /real_user_monitoring/heatmaps
@@ -26,7 +26,7 @@ A heatmap (or heat map) is a visualization of your user's interactions overlaid 
 - **Top Elements:** View a ranking of up to the top 10 most interacted-with elements on a given page.
 - **Scroll maps:** View how far users scroll down a page, including where the average fold of a page falls. The average fold is the lowest point on a page that a user can see on their device without scrolling.
 
-Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
+Use heatmaps to review complex data at a glance and gain insights around optimizing your user experience.
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ To get started with heatmaps:
 
 Navigate to [**Digital Experience > Real User Monitoring > Session Replay > Heatmaps**][1]. Select your application and view.
 
-On the [Real User Monitoring landing page][2], select your application from the application selector and view. To the left of the timeframe selector, you can select the type of heatmap you would like to view: Top Elements, Click Map, or Scroll Map.
+On the [Real User Monitoring landing page][2], select your application from the application selector and view. To the left of the timeframe selector, you can select the type of heatmap you would like to view: Top elements, Click map, or Scroll map.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-different-views.png" alt="The heatmaps page has multiple ways to show different views: by application, map type, device type, action name, and granular filters." style="width:100%;">}}
 
@@ -57,11 +57,11 @@ On the [Real User Monitoring landing page][2], select your application from the 
 
 Navigate to [**Digital Experience > Product Analytics > Session Replay > Heatmaps**][1]. Select your application and view.
 
-From this page, you can select the type of heatmap (Top Elements, Click Map, Scroll Map) you would like to see for a particular view.
+From this page, you can select the type of heatmap (Top elements, Click map, Scroll map) you would like to see for a particular view.
 
 {{< img src="product_analytics/heatmaps/pa-heatmaps-page.png" alt="For each view, you can select a different type of heatmap: Top Elements, Click Map, or Scroll Map." style="width:100%;">}}
 
-Click on a view name to have a more detailed look at the related heatmap.
+Click on a view name for a more detailed look at the related heatmap.
 
 {{< img src="product_analytics/heatmaps/pa-heatmaps-annotated.png" alt="The heatmaps page has multiple ways to show different views: by application, map type, device type, action name, and granular filters." style="width:100%;">}}
 
@@ -96,7 +96,7 @@ On the left is a list of all actions that occurred on the page, listed by freque
 - The number of times the user performed the action and where it falls in overall analytics of top actions on a given page.
 - If that action had a frustration signal occurring on it (for example, if a user rage clicked on that button), you can view the associated frustration signals as well.
 
-From this view, you can also click the Start a Funnel button to identify user drop off.
+From this view, you can also click the **Start a Funnel** button to identify user drop off.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-clickmap-actions.png" alt="Shows an example action and the information you can get about that action." style="width:50%;">}}
 
@@ -144,7 +144,7 @@ To remove the currently saved screenshot and revert to an auto-picked one from a
 
 ## Next steps
 
-After analyzing heatmaps, the next step is to understand the user action by exploring related data. Pivot to the Analytics explorer or watch associated [session replays][1] to visually see user actions in the context of their overall session.
+After analyzing heatmaps, the next step is to understand the user action by exploring related data. Navigate to the Analytics explorer or watch associated [session replays][1] to see user actions in the context of their overall session.
 
 {{< tabs >}}
 {{% tab "RUM" %}}
@@ -171,7 +171,7 @@ Heatmaps are based on view names. Depending on how your application is configure
 
 ### The view that I selected is not showing the initial content.
 
-Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm picks a replay that is both recent and best matches the initial state of the page. In some cases, you might not be able to find the correct replay. To switch the snapshot of your heatmap, you can use the **Change Snapshot** button to navigate through the different states of a replay and find the one you are looking for. If the replay you're viewing does not have the snapshot you're looking for, you can use the **Choose Another Replay** button to select another replay of the same view.
+Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm picks a replay that is both recent and best matches the initial state of the page. In some cases, this replay might not be the one you want to use. To switch the snapshot of your heatmap, use the **Change Snapshot** button to navigate through the different states of a replay and find the one you want. If the replay you're viewing does not have the snapshot you're looking for, you can use the **Choose Another Replay** button to select another replay of the same view.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-the-snapshot.mp4" alt="Select a different background by clicking the Change Snapshot button" video=true >}}
 
@@ -183,7 +183,7 @@ The tooltip on the icon says element is not visible. This means that the element
 
 ### After attempting to create a heatmap, I see a "No Replay Data" state appear.
 
-This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
+The "No Replay Data" state means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
 
 ### After attempting to create a heatmap, I see a "Not enough data to generate a heatmap" state appear.
 
