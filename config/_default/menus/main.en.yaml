@@ -5028,17 +5028,17 @@ menu:
       parent: quality_monitoring
       weight: 300000
     - name: Tableau
-      url: data_observability/quality_monitoring/integrations/business_intelligence/tableau
+      url: data_observability/quality_monitoring/business_intelligence/tableau
       identifier: business_intelligence_integrations_tableau
       parent: business_intelligence_integrations
       weight: 1000000
     - name: Sigma
-      url: data_observability/quality_monitoring/integrations/business_intelligence/sigma
+      url: data_observability/quality_monitoring/business_intelligence/sigma
       identifier: business_intelligence_integrations_sigma
       parent: business_intelligence_integrations
       weight: 2000000
     - name: Metabase
-      url: data_observability/quality_monitoring/integrations/business_intelligence/metabase
+      url: data_observability/quality_monitoring/business_intelligence/metabase
       identifier: business_intelligence_integrations_metabase
       parent: business_intelligence_integrations
       weight: 3000000

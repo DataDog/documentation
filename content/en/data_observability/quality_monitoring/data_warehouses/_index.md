@@ -17,9 +17,9 @@ Use these integrations to:
 - **Trace column-level lineage** to map dependencies and pinpoint root causes of data issues
 
 {{< whatsnext desc="Connect to these data warehouses:" >}}
-   {{< nextlink href="data_observability/integrations/warehouse/snowflake" >}}Snowflake{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/warehouse/databricks" >}}Databricks{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/warehouse/bigquery" >}}BigQuery{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/snowflake" >}}Snowflake{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/databricks" >}}Databricks{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

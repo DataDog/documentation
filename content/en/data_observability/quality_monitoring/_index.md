@@ -29,27 +29,27 @@ With Quality Monitoring, you can:
 ## Supported data sources
 
 {{< whatsnext desc="Connect to these data warehouses:" >}}
-   {{< nextlink href="data_observability/integrations/warehouse/snowflake" >}}Snowflake{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/warehouse/databricks" >}}Databricks{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/warehouse/bigquery" >}}BigQuery{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/snowflake" >}}Snowflake{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/databricks" >}}Databricks{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Integrate with these transformation and orchestration tools:" >}}
    {{< nextlink href="data_observability/jobs_monitoring/databricks" >}}Databricks{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/airflow" >}}Airflow{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/transformation/dbtcore" >}}dbt Core{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/dbtcore" >}}dbt Core{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/dbtcloud" >}}dbt Cloud{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/kubernetes" >}}Spark on Kubernetes{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/transformation/dbtcloud" >}}dbt Cloud{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/emr" >}}Spark on Amazon EMR{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/dataproc" >}}Spark on Google Dataproc{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/openlineage" >}}Custom Jobs using OpenLineage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Track downstream impact in these BI tools:" >}}
-   {{< nextlink href="data_observability/integrations/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/business_intelligence/metabase" >}}Metabase{{< /nextlink >}}
-   {{< nextlink href="data_observability/integrations/business_intelligence/powerbi" >}}Power BI{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/integrations/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/integrations/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/integrations/business_intelligence/metabase" >}}Metabase{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/integrations/business_intelligence/powerbi" >}}Power BI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
