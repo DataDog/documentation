@@ -38,7 +38,7 @@ Click **Route to Multiple Organizations** to set up routing to multiple Datadog 
 
 1. Enter a name for the organization.
 	- **Note**: The name does not have to correspond to the actual name of the Datadog organization.
-1. Define a filter query.
+1. Define a filter query. Only logs that match the specified filter query are sent to the organization. See [Observability Pipelines Search Syntax][3] for more information on writing filter queries.
 1. Select the Datadog organization's site.
 1. Enter the identifier for the API key for that Datadog organization.
 	- **Note**: Only enter the identifier for the API key. Do **not** enter the actual API key.
@@ -137,3 +137,4 @@ To send logs from Observability Pipelines to Datadog using Azure Private Link, s
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
+[3]: /observability_pipelines/search_syntax/logs/
