@@ -45,7 +45,13 @@
   <h4>Instructions</h4>
   <p>First <a href="{{ "api/latest/" | absLangURL }}?code-lang={{ $lang.name }}">install the library and its dependencies</a> and then save the example to <code>{{ $lang.example_file }}</code> and run following commands:</p>
   <pre class="chroma">
-    <code class="language-fallback" data-lang="sh"><div class="code-snippet"><span class="n">DD_SITE</span><span class="o">=</span><span class="s1">"</span><span class="s1 js-region-param" data-region-param="dd_site" data-1p-ignore></span><span class="s1">"</span>
+    <code class="language-fallback" data-lang="sh"><div class="code-snippet" data-1p-ignore><span class="n">DD_SITE</span><span class="o">=</span><span class="s1 js-region-param">"{{- range $context.Site.Params.allowedRegions -}}
+          {{- if not (index ($endpoint.regions) .value) -}}
+            <span class="d-none" data-region="{{ .value }}">Not supported in the {{ .name }} region</span>
+          {{- else -}}
+            <span class="d-none" data-region="{{ .value }}">{{ .domain }}</span>
+          {{- end -}}
+      {{- end -}}"</span>
 {{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
 {{- if isset $endpoint.action "security" -}}
   {{- /* Find authentication per operationId */ -}}
@@ -94,7 +100,7 @@
 {{ $count := 0 }}
 {{ $file_extension := "sh" }}
 {{ $lang := index $context.Site.Params.code_languages "sh" }}
-<div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}" >
+<div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}" data-1p-ignore>
     <div class="code-snippet">
       <div class="highlight">
         {{ $fileNonExistCount := 0 }}
@@ -292,7 +298,7 @@
         {{ $file_extension := index (split (path.Ext .) ".") 1 }}
         {{ $lang := index $context.Site.Params.code_languages $file_extension }}
         {{ if ne $file_extension "sh"}}
-          <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
+          <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}" data-1p-ignore>
             <div class="append-copy-btn">
               <div class="card">
                 <div class="card-header p-0">
