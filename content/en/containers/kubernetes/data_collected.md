@@ -79,7 +79,7 @@ For more information, see the documentation for the [Kubernetes controller manag
 
 For more information, see the documentation for the [Kubernetes metrics server][4] integration.
 
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kube-metrics-server" >}}
 
 ### Kubernetes scheduler
 
@@ -135,7 +135,7 @@ For more information, see the documentation for the [Kubernetes controller manag
 
 For more information, see the documentation for the [Kubernetes metrics server][4] integration.
 
-{{< get-service-checks-from-git "kube_metrics_server" >}}
+{{< get-service-checks-from-git "kube-metrics-server" >}}
 
 ### Kubernetes scheduler
 
