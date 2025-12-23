@@ -38,7 +38,7 @@ El check de cert_manager se incluye en el paquete del [Datadog Agent](https://ap
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `cert_manager` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `cert_manager` en la sección Checks.
 
 ## Datos recopilados
 

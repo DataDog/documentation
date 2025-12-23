@@ -363,7 +363,7 @@ Consultez les résultats de scan aux emplacements suivants :
 ## Désinstaller le scanning sans Agent
 
 {{< tabs >}}
-{{% onglet "Terraform" %}}
+{{% tab "Terraform" %}}
 Pour désinstaller le scanning sans Agent, supprimez le module scanner de votre code Terraform. Pour plus d'informations, consultez la documentation du [module Terraform][9].
 
 [9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
