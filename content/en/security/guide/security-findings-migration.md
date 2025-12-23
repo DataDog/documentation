@@ -20,7 +20,7 @@ To make it easier to search for security findings throughout Datadog, the syntax
 - **Standardized naming conventions** for security finding data fields
 - **A new schema** to consistently organize those fields across security products
 
-While this change comes with a set of [new features](#new-features) that use the new schema, it may also impact your existing workflows. This page details what is changing, the workflows that Datadog will automatically update, and the changes you need to make to avoid interruptions in your existing workflows.
+This change comes with a set of [new features](#new-features) that use the new schema, and may also impact your existing workflows. This page details what is changing, the workflows that Datadog automatically updates, and the changes you need to make to avoid interruptions in your existing workflows.
 
 {{< learning-center-callout header="" btn_title="View the schema" btn_url="/security/guide/findings-schema/" hide_image="true" >}}
   View the new security findings schema so you can understand how finding details will be stored.
@@ -29,11 +29,12 @@ While this change comes with a set of [new features](#new-features) that use the
 ### Required action
 
 This change affects all interfaces where you can query security findings data. While some queries will receive automatic updates, others require updates on your part:
-- **No change required** - queries will be updated automatically
+- **No change required** - queries are updated automatically
   - Explorers, dashboards, notification rules, and automation pipelines
 - **Changes required** - update your queries by **April 1, 2026**
   - Workflow Automation and Sheets
-  - API and Terraform resources
+  - API endpoints: [List findings][15] and [Get a finding][16]
+  - Terraform resource: `datadog_security_notification_rule`
   <div class="alert alert-warning">Datadog will deprecate legacy API and Terraform resources. Update your queries on time so you can avoid workflow interruptions.</div>
 
 If you need assistance with your migration, contact [Datadog support][14].
@@ -42,7 +43,7 @@ If you need assistance with your migration, contact [Datadog support][14].
 
 ### New features
 
-Starting January 2026, the following features use the new data model:
+Starting late January 2026, the following features use the new data model:
 - Unified search queries for Cloud Security [Misconfigurations][9], [Identity Risks][10], [Attack Paths][11], [IaC][12], and [API][13] findings
 - A new unified public findings API
 - [Dashboard][2] support for Code Security
@@ -50,23 +51,22 @@ Starting January 2026, the following features use the new data model:
 - Datadog [Workflow Automation][4] support for all finding types
 - Using SQL to query security findings and join them with other Datadog telemetry using [DDSQL Editor][5]
 
-With additional future changes:
+The following additional features will be released later:
 
-- Cloud Security Vulnerabilities
-- Code Security findings (SCA, SAST, IAST, Secrets)
+- Support for Cloud Security Vulnerabilities and Code Security findings (SCA, SAST, IAST, Secrets) in the unified search experience
 - [Data Access Controls][6]
 - Security findings & tools in the [Datadog MCP Server][7]
 - API & Terraform support for [automation pipelines][8]
 
 ### Security findings
 
-Security findings encompass misconfigurations, vulnerabilities, and security risks identified across your infrastructure and applications. This table shows the scope of security findings across Datadog and which findings are currently supported in the new data model.
+Security findings encompass misconfigurations, vulnerabilities, and security risks identified across your infrastructure and applications. This table shows the scope of security findings across Datadog and which findings are supported in the new data model.
 
 <table>
   <thead>
     <tr>
       <th>Product</th>
-      <th>Findings</th>
+      <th>Finding Type</th>
       <th>Support</th>
     </tr>
   </thead>
@@ -86,7 +86,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
     </tr>
     <tr>
       <td>Host & container vulnerabilities</td>
-      <td>Will be supported in the future</td>
+      <td>Support coming later</td>
     </tr>
     <tr>
       <td><a href="/security/application_security/"><strong>App & API Protection</strong></a> (Preview)</td>
@@ -100,7 +100,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
     </tr>
     <tr>
       <td>Library vulnerabilities (SCA)</td>
-      <td rowspan="4">Will be supported in the future</td>
+      <td rowspan="4">Support coming later</td>
     </tr>
     <tr>
       <td>Static code vulnerabilities (SAST)</td>
@@ -144,3 +144,5 @@ View the full specification at [Security Findings Schema Reference][1].
 [12]: /security/code_security/iac_security/
 [13]: /security/application_security/api-inventory/#api-findings
 [14]: /help
+[15]: /api/latest/security-monitoring/#list-findings
+[16]: /api/latest/security-monitoring/#get-a-finding
