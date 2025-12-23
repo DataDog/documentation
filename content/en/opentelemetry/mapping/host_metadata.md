@@ -135,6 +135,18 @@ processors:
           - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name")
 ```
 
+The OpenTelemetry semantic conventions also define the [cloud.resource_id][14] attribute , which can be mapped in the configuration using the [attributes processor][15].
+
+Example: 
+```yaml
+processors:
+  attributes/example:
+    actions:
+      - key: datadog.ccrid
+        from_attribute: cloud.resource_id
+        action: upsert
+```
+
 
 ## Further reading
 
@@ -153,3 +165,5 @@ processors:
 [11]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli
 [12]: https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/gettingmetadata.htm
 [13]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html#policy-syntax
+[14]: https://opentelemetry.io/docs/specs/semconv/registry/attributes/cloud/#cloud-resource-id
+[15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor
