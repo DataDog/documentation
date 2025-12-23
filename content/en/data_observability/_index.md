@@ -13,34 +13,33 @@ further_reading:
     text: 'Datadog Brings Observability to Data teams by Acquiring Metaplane'
 ---
 
-<div class="alert alert-info">Data Observability is in Preview.</div>
-
 Data Observability helps data teams detect, resolve, and prevent issues that affect data quality, performance, and cost. It enables teams to monitor anomalies, troubleshoot faster, and maintain trust in the data powering downstream systems.
 
 {{< img src="data_observability/data-obs-overview-1.png" alt="Lineage graph showing a failed application upstream." style="width:100%;" >}}
 
-Datadog does this by monitoring key signals across your data stack, including metrics, metadata, lineage, and logs. These signals help detect issues early and maintain reliable, high-quality data.
+Data Observability consists of two products:
 
-## Key capabilities
+- **[Quality Monitoring][3]**: Detect anomalies in your tables, including freshness delays, volume changes, and unexpected column-level metric shifts.
+- **[Jobs Monitoring][4]**: Track the performance, reliability, and cost of data processing jobs across platforms like Spark, Databricks, and Airflow.
 
-With Data Observability, you can:
+Both products share end-to-end lineage, letting you trace data dependencies and correlate issues across your stack.
 
-- Detect anomalies in volume, freshness, null rates, and distributions across your tables
-- Analyze lineage to trace data dependencies from source to dashboard
-- Correlate quality issues with job runs, data streams, and infrastructure events
+## Quality Monitoring
 
-## Monitor data quality
+Quality Monitoring tracks metrics and metadata across your tables to detect issues before they impact downstream systems:
 
-Datadog continuously tracks metrics and metadata, including:
+- **Data metrics**: Null count, null percentage, uniqueness, mean, and standard deviation
+- **Metadata**: Schema, row count, and freshness
 
-- Data metrics such as null count, null percentage, uniqueness, mean, and standard deviation
-- Metadata such as schema, row count, and freshness
+Configure static thresholds or use automatic anomaly detection to catch missing updates, unexpected row count changes, and metric outliers.
 
-You can configure static thresholds or rely on automatic anomaly detection to identify unexpected changes, including:
+## Jobs Monitoring
 
-- Missing or delayed updates
-- Unexpected row count changes
-- Outliers in key metrics
+Jobs Monitoring provides visibility into data processing jobs across your accounts and workspaces:
+
+- **Performance**: Track job duration, resource utilization, and identify inefficiencies like high idle CPU
+- **Reliability**: Receive alerts when jobs fail or exceed expected completion times
+- **Troubleshooting**: Analyze execution details, stack traces, and compare runs to identify issues
 
 ## Trace lineage and understand impact
 
@@ -79,3 +78,5 @@ If your organization enforces IP allowlists, add the IPs listed under the `webho
 
 [1]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [2]: https://ip-ranges.datadoghq.com/webhooks.json
+[3]: /data_observability/quality_monitoring/
+[4]: /data_observability/jobs_monitoring/
