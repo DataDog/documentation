@@ -86,7 +86,7 @@
 <span class="n">) | gzip --no-name | tail --bytes=+11 | head --bytes=-8 | </span>
 {{- end -}}
 {{- end -}}
-<span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
+<span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> <span class="kn">"<span class="js-region-param" data-region-param="dd_api"></span>{{ replace $endpoint.pathKey "{" "${" }}</span>
 {{- $count := 0 -}}
 {{- range $qi, $q := $parameters.queryStrings -}}
       {{- if or (eq $q.required true) (eq (index $q "x-docs-curl-required") true) -}}
