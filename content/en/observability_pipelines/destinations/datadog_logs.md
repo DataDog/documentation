@@ -16,17 +16,23 @@ Set up the Datadog Logs destination and its environment variables when you [set 
 
 ### Set up the destination
 
+There are no required setup steps.
+
 #### Optional settings
 
 ##### Route logs to multiple Datadog organizations
 
-If you want to route to multiple Datadog organizations, click **Route to Multiple Organizations**.
+You can route logs to multiple Datadog organizations. After you set up routing to multiple organization, you can view metrics for the destination component or specific organizations. See [View metrics for the component or specific organizations](#view-metrics-for-the-component-or-specific-organizations) for more information.
+
+Click **Route to Multiple Organizations** to set up routing to multiple Datadog organizations.
 
 - If you haven't added any organizations yet, enter organization details as described in the [Add a Datadog organization](#add-an-organization) section.
 - If you have already added organizations, you can:
   - Click on an organization in the table to edit or delete it.
   - Use the search bar to find a specific organization by name, filter query, or Datadog site, and then select the organization to edit or delete it.
   - Click **Save** to add the organization.
+
+**Note**: If you don't set up routing to multiple Datadog organizations, logs are routed to the default Datadog organization, which is the organization that is tied to the API key when you install the Worker.
 
 ###### Add an organization
 
@@ -63,6 +69,28 @@ There are no secret identifiers for this destination.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## View metrics for the component or specific organizations
+
+You can view metrics at both the organization level and the overall component level.
+
+To view metrics for a specific Datadog organization:
+
+1. Navigate to [Observability Pipelines][1].
+1. Select your pipeline.
+1. Click the **Datadog Logs** destination so the organizations show up.
+1. Click the organization you want to see metrics for.
+1. Click **View Health Metrics**.
+
+Alternatively, you can click on **Review Configured Organizations** in the **Datadog Logs** destination, and click the graph icon in the **Metrics** column for the organization you are interested in.
+
+To view metrics for the overall Datadog Logs destination:
+
+1. Navigate to [Observability Pipelines][1].
+1. Select your pipeline.
+1. Click the cog on the **Datadog Logs** destination and select **View details**.
+
+**Note**: The **Data dropped (intentional)** metric shows logs that didn't match any of the organizations' filters.
 
 ## How the destination works
 
