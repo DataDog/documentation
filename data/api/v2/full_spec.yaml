@@ -36264,6 +36264,8 @@ components:
           description: The index to write logs to in Elasticsearch.
           example: logs-index
           type: string
+        data_stream:
+          $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationDataStream'
         id:
           description: The unique identifier for this component.
           example: elasticsearch-destination
@@ -36297,6 +36299,23 @@ components:
       - V6
       - V7
       - V8
+    ObservabilityPipelineElasticsearchDestinationDataStream:
+      description: Configuration options for writing to Elasticsearch Data Streams
+        instead of a fixed index.
+      properties:
+        dataset:
+          description: The data stream dataset for your logs. This groups logs by
+            their source or application.
+          type: string
+        dtype:
+          description: The data stream type for your logs. This determines how logs
+            are categorized within the data stream.
+          type: string
+        namespace:
+          description: The data stream namespace for your logs. This separates logs
+            into different environments or domains.
+          type: string
+      type: object
     ObservabilityPipelineElasticsearchDestinationType:
       default: elasticsearch
       description: The destination type. The value should always be `elasticsearch`.
