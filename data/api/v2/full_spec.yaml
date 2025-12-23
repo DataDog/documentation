@@ -36437,7 +36437,8 @@ components:
       type: object
     ObservabilityPipelineEnrichmentTableProcessor:
       description: The `enrichment_table` processor enriches logs using a static CSV
-        file or GeoIP database.
+        file, GeoIP database, or reference table. Exactly one of `file`, `geoip`,
+        or `reference_table` must be configured.
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -36458,6 +36459,8 @@ components:
             targets.
           example: source:my-source
           type: string
+        reference_table:
+          $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableReferenceTable'
         target:
           description: Path where enrichment results should be stored in the log.
           example: enriched.geoip
@@ -36480,6 +36483,34 @@ components:
       type: string
       x-enum-varnames:
       - ENRICHMENT_TABLE
+    ObservabilityPipelineEnrichmentTableReferenceTable:
+      description: Uses a Datadog reference table to enrich logs.
+      properties:
+        app_key_key:
+          default: PROCESSOR_ENRICHMENT_TABLES_APP_KEY
+          description: Environment variable name containing the application key used
+            for reference table authentication.
+          type: string
+        columns:
+          description: List of column names to include from the reference table. If
+            not provided, all columns are included.
+          items:
+            type: string
+          nullable: true
+          type: array
+        key_field:
+          description: Path to the field in the log event to match against the reference
+            table.
+          example: log.user.id
+          type: string
+        table_id:
+          description: The unique identifier of the reference table.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+      - key_field
+      - table_id
+      type: object
     ObservabilityPipelineFieldValue:
       description: Represents a static key-value pair used in various processors.
       properties:
