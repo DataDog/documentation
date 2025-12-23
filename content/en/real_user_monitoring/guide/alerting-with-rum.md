@@ -1,6 +1,5 @@
 ---
 title: Alerting With RUM Data
-
 description: Guide for creating alerts on RUM events.
 further_reading:
 - link: '/real_user_monitoring/platform/dashboards/'
@@ -16,75 +15,86 @@ further_reading:
 
 ## Overview
 
-Real User Monitoring allows you to create alerts which notify you about atypical behavior in your applications. You can create RUM monitors with complex conditions, predefined thresholds, and multiple queries to calculate averages, ratios, and performance indicator metrics (such as Apdex).
+Real User Monitoring (RUM) lets you create alerts about atypical behavior in your applications. With [RUM without Limits™][1], use metric-based monitors to alert on your full unsampled traffic with 15-month retention. Metric-based monitors support advanced alerting conditions such as anomaly detection.
 
-## Define your search query
+## Create a RUM monitor
 
-To create a RUM monitor, see the [RUM Monitor documentation][1] first. You can add one or many queries to filter through your RUM data in the [RUM Explorer][2]. For each query, you can scope it on an application level or a more granular level like a specific page.
+To create a RUM monitor in Datadog, first, navigate to [Monitors > New Monitor > Real User Monitoring][2].
 
-You can use any facets that RUM collects, including [custom facets and measures][3]. Use the `measure by` field to measure view-related counts such as load time, time spent, and error count.
+Next, choose one of the following methods to create your monitor:
 
-{{< img src="real_user_monitoring/guide/alerting-with-rum/high-rum-views-errors.png" alt="Search query for an alert where a view exceeds more than eight errors" style="width:100%;">}}
+- **[Start with a template][3]**: Datadog provides several pre-built templates for common RUM monitoring scenarios like error rates, performance vitals, or availability checks. Browse the [full template gallery][3] to get started.
+- **Build a custom monitor**: Choose from out-of-the-box metrics or custom metrics, then scope to your application, specific pages, or views.
 
-The example above is a search query for a RUM monitor configured for views on the Shopist iOS application with facets such as `Application ID` and `View Path`. This example monitor alerts when a view has a high amount of errors (for example, more than 8).
+Learn more about [creating RUM Monitors][4].
 
-## Export your query to a monitor
+## Choosing between monitoring metrics and events
 
-You can export search queries from the [RUM Explorer][2] to a monitor to retain all the context for the query.
+Choose what to monitor based on your use case:
 
-{{< img src="real_user_monitoring/guide/alerting-with-rum/export-to-monitor-3.mp4" alt="Export button to the right hand corner of the RUM Explorer" video="true" style="width:100%;" >}}
+- **Full traffic metrics** - Best for monitoring availability, loading times, error rates, and user experience trends. For RUM without Limits™ customers, metric-based monitors provide full unsampled traffic visibility (before retention filters apply), 15-month retention, and advanced capabilities like anomaly detection and forecasts.
+- **Retained events** - Best for detecting critical, low-frequency issues that require full event context. Use event-based monitors when you need to alert on indexed data or specific attributes not available as metrics. Configure retention filters to ensure the relevant data is captured.
 
-The example above is a search query for a RUM monitor configured for images that are larger than 1Mb. Large images may reduce your application's performance. 
 
-Click the **Export** button to export your search query to a pre-configured RUM monitor. For more information, see [Export RUM Events][4].
+  To create an event-based monitor, you can export search queries from the [RUM Explorer][5]. Use any facets that RUM collects, including [custom facets and measures][6], and the `measure by` field for view-related counts like load time and error count.
+
+## Export queries from the RUM homepage
+
+You can export existing queries from the [RUM homepage][12] to create a monitor with all queries and context preserved. For customers on [RUM without Limits™][1], the queries powering those widgets are based on the [out-of-the-box metrics][13]. For customers on the legacy model, they are based on [events][14].
+
+{{< img src="real_user_monitoring/guide/alerting-with-rum/create-monitor-homepage.png" alt="Export button to the right hand corner of the RUM Explorer" style="width:100%;" >}}
+
+Click the **Export > Create Monitor** button to export a widget to a pre-configured RUM monitor. For more information, see [Export RUM Events][7]. Remember that event-based monitors should be used alongside properly configured retention filters.
 
 ## Route your alert
 
-Once you have created an alert, route the alert to an individual or a team channel by writing a message and sending a test notification. For more information, see [Notifications][5].
+After creating an alert, route it to people or channels by writing a message and sending a test notification. For more information, see [Notifications][8].
 
 ## Alerting examples
 
-The following examples highlight use cases for alerting with your RUM data.
+The following examples highlight common use cases for RUM monitors. For RUM without Limits customers, these scenarios can be implemented using metric-based monitors for visibility into your full traffic and advanced alerting capabilities.
 
-### Revenue dips
+### Traffic monitoring with anomaly detection
 
-With RUM's [global context][6], you can enrich your RUM events with business-specific attributes such as the purchase amount for each user.
+Session count monitoring helps teams detect unusual traffic patterns that could indicate issues or opportunities. Unlike threshold-based alerts, anomaly detection automatically learns normal traffic patterns and alerts when behavior deviates significantly.
 
-Assuming that most users of the example application spend between $800 to $1000, this example shows a RUM monitor configured to spot deviations in users' spending patterns week by week. 
+This example shows a RUM monitor using anomaly detection to track session counts over time. The monitor can be scoped to a specific application or service to detect unexpected drops or spikes in user traffic. Anomaly detection is particularly useful for traffic monitoring because it adapts to daily and weekly patterns, reducing false alerts from expected traffic variations.
 
-{{< img src="real_user_monitoring/guide/alerting-with-rum/revenue-dips-example-monitor.png" alt="RUM Monitor for revenue dips" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/alerting-with-rum/traffic-anomaly.png" alt="RUM monitor query showing count of sessions metric summed by application name, with anomaly alert conditions configured to trigger when values deviate from expected patterns" style="width:100%;" >}}
 
-To compare this week's spending to last week's spending, add a function such as `week_before` next to the `roll up every` field. You can also apply the absolute value to calculate the difference in purchasing amount from last week to this week. When the week-over-week difference exceeds $50, the alert sends a notification.
+### Crash-free sessions
 
-{{< img src="real_user_monitoring/guide/alerting-with-rum/revenue-dips-example-alerting-conditions.png" alt="Alerting conditions for a RUM monitor about revenue dips" style="width:100%;" >}}
+The crash-free rate helps teams track how often mobile sessions complete without errors.
 
-### Error rates
+This example uses mobile RUM to evaluate application stability across release versions. The monitor is filtered to a specific application (for example, `Shop.ist iOS`) and grouped by `version` to help identify regressions tied to specific releases. The query combines crash-free sessions and total sessions to calculate the crash-free rate as a percentage.
 
-The ratio of errors to requests allows you to calculate what percentage of requests are resulting in errors.
-
-This example shows a RUM monitor for the error rate of the `/cart` page on a sample Shop.ist application.
-
-{{< img src="real_user_monitoring/guide/alerting-with-rum/error-rate-example-monitor.png" alt="RUM monitor for error rates" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/alerting-with-rum/crash-free-sessions.png" alt="Query view showing two RUM metric queries for crash-free and inactive sessions, filtered on the Shop.ist iOS app and grouped by version, combined into a formula to calculate a crash-free rate." style="width:100%;" >}}
 
 ### Performance vitals
 
-Real User Monitoring measures, calculates, and scores application performance as [Core Web Vitals][7] and [Mobile Vitals][8]. For example, Largest Contentful Paint (LCP) measures loading performance and is benchmarked at 2.5 seconds when the page starts loading.
+Real User Monitoring measures, calculates, and scores application performance as [Core Web Vitals][10] and [Mobile Vitals][11]. For example, Interaction to Next Paint (INP) measures responsiveness by tracking the time from a user interaction to the next paint. A widely used benchmark is 200 milliseconds or less for good responsiveness.
 
-This example shows a RUM monitor for the LCP of the `/cart` page on a sample Shop.ist application.
+This example shows a RUM monitor for the INP metric filtered to a specific application (for example, `Shop.ist`) and grouped by `view name` to track performance across different pages. Grouping by view name helps pinpoint which pages have performance issues.
  
-{{< img src="real_user_monitoring/guide/alerting-with-rum/high-largest-contentful-paint-example-monitor.png" alt="RUM monitor for high Largest Contentful Paint" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/alerting-with-rum/core-web-vital-1.png" alt="RUM monitor query showing Interaction to Next Paint (INP) metric with p75 aggregation grouped by view name, with threshold alert conditions set for warning and alert levels" style="width:100%;" >}}
 
-This example monitor warns when the LCP takes 2 seconds to load and alerts when the LCP takes longer than 2.5 seconds to load.
+This example monitor warns when INP exceeds 200 milliseconds and alerts when INP exceeds 500 milliseconds. With metric-based monitors, you can also use anomaly detection to help identify when performance metrics deviate from normal patterns, or use forecast alerts to predict when thresholds might be breached.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/types/real_user_monitoring/#create-a-rum-monitor
-[2]: https://app.datadoghq.com/rum/explorer
-[3]: /real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-attributes
-[4]: /real_user_monitoring/explorer/export/
-[5]: /monitors/notify/
-[6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
-[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
-[8]: /real_user_monitoring/android/mobile_vitals/
+[1]: /real_user_monitoring/rum_without_limits
+[2]: https://app.datadoghq.com/monitors/create/rum
+[3]: https://app.datadoghq.com/monitors/templates?q=real%20user%20monitoring&origination=installed&p=1
+[4]: /monitors/types/real_user_monitoring/#create-a-rum-monitor
+[5]: https://app.datadoghq.com/rum/explorer
+[6]: /real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-attributes
+[7]: /real_user_monitoring/explorer/export/
+[8]: /monitors/notify/
+[9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[10]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
+[11]: /real_user_monitoring/android/mobile_vitals/
+[12]: https://app.datadoghq.com/rum/performance-monitoring
+[13]: /real_user_monitoring/rum_without_limits/metrics
+[14]: /real_user_monitoring/explorer/events/

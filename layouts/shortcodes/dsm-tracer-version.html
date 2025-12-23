@@ -108,6 +108,15 @@
       2.11.0 or later
     {{- end -}}
   {{- end -}}
+<!-- Kafka (aiokafka) -->
+  {{- if eq (.Get "lib") "aiokafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      4.1.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      4.1.0 or later
+    {{- end -}}
+  {{- end -}}
 <!-- RabbitMQ (kombu) -->
   {{- if eq (.Get "lib") "kombu" -}}
     {{- if eq (.Get "type") "minimal" -}}
