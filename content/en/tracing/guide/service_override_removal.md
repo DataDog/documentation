@@ -11,7 +11,7 @@ further_reading:
   text: "Inferred Services"
 ---
 
-This page explains how to remove integration service overrides in Datadog. For conceptual background, see [Service Overrides][10] and [Inferred Services][8].
+This page explains how to remove integration service overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Service Overrides][10] and [Inferred Services][8].
 
 ## Prerequisites
 
