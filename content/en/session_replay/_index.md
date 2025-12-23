@@ -53,11 +53,11 @@ Extended Retention only applies to Session Replay and does not include associate
 
 You can disable Extended Retention at any time. If the session replay is still within its default 30 days of retention, the replay expires at the end of the initial 30 day window. If you disable Extended Retention on a session replay that is older than 30 days, the replay immediately expires.
 
-{{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Enable extended retention" style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/extended-retention-1.png" alt="Enable extended retention" style="width:100%;" >}}
 
 Refer to the below diagram to understand what data is retained with extended retention.
 
-{{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/replay-extended-retention-1.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
 
 ## Playback history
 
