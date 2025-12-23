@@ -4,6 +4,7 @@ description: Learn about how to capture and visually replay your users' web brow
 aliases:
 - /real_user_monitoring/guide/session-replay-getting-started/
 - /real_user_monitoring/session_replay/
+- /product_analytics/session_replay/
 further_reading:
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
   tag: 'Blog'
