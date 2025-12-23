@@ -4119,11 +4119,7 @@ menu:
       parent: single_step_apm
       identifier: single_step_apm_windows
       weight: 2014
-<<<<<<< HEAD
-    - name: Manually-managed SDKs
-=======
     - name: Manually managed SDKs
->>>>>>> 90228b2b1c3e575fa86d65337d744c8d8b8ae17f
       url: tracing/trace_collection/dd_libraries/
       parent: tracing_trace_collection
       identifier: auto_dd_libraries
