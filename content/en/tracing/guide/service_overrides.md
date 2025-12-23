@@ -78,9 +78,7 @@ In the trace side panel, the client span header represents the call going from t
 
 ## Remove service overrides
 
-With inferred services, integration service overrides are no longer needed and can clutter your service maps. You can remove them using either the Datadog UI or environment variables.
-
-For step-by-step instructions, see [Remove Service Overrides][2].
+With inferred services, integration service overrides are no longer needed and can clutter your service maps. You can remove them directly in Datadog. For step-by-step instructions, see [Remove Service Overrides][2].
 
 ## Glossary
 
