@@ -126,6 +126,8 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 
 See [Update Existing Pipelines][5] if you want to make changes to your pipeline's configuration.
 
+**Note**: If you enable [disk buffering][6] for destinations, you must enable Kubernetes [persistent volumes][7] in the Observability Pipelines helm chart.
+
 #### Self-hosted and self-managed Kubernetes clusters
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
@@ -135,6 +137,8 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [3]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [4]: /observability_pipelines/environment_variables/
 [5]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
+[6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
+[7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
 
 {{% /tab %}}
 {{% tab "Linux" %}}

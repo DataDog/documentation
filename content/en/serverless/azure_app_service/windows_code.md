@@ -114,7 +114,7 @@ To use the Datadog CLI in [Azure Cloud Shell][203], open a cloud shell, set your
 ```shell
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
-npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
 ```
 
 
@@ -225,7 +225,7 @@ resource datadogExtension 'Microsoft.Web/sites/siteextensions@2025-03-01' = {
 
 Deploy your updated template:
 
-```bash
+```shell
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 

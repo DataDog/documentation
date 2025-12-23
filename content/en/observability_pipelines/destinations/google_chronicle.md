@@ -1,7 +1,13 @@
 ---
 title: Google Chronicle Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
+
 Use Observability Pipelines' Google Chronicle destination to send logs to Google Chronicle.
 
 The Observability Pipelines Worker uses standard Google authentication methods. See [Authentication methods at Google][3] for more information about choosing the authentication method for your use case.

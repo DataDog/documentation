@@ -1,7 +1,12 @@
 ---
 title: Sensitive Data Scanner Processor
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 

@@ -232,7 +232,7 @@ To use the Datadog CLI in [Azure Cloud Shell][603], open cloud shell and use `np
 ```shell
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
-npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
 ```
 
 [601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
@@ -461,7 +461,7 @@ Update your existing Web App to include the necessary Datadog App Settings and s
 
 Redeploy your updated template:
 
-```bash
+```shell
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 

@@ -31,6 +31,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/watermark-pod-autoscaler/'
       tag: 'Blog'
       text: 'A guide on scaling out your Kubernetes pods with the Watermark Pod Autoscaler'
+    - link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+      tag: Blog
+      text: Monitor your Kubernetes operators to keep applications running smoothly
 ---
 
 
