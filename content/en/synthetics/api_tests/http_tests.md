@@ -147,6 +147,8 @@ Define variables for your HTTP API tests with JavaScript:
 
 Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
+<div class="alert alert-info">The Assertions header, body, and JavaScript sections are only for defining assertions. They cannot be used to make additional HTTP requests.</div>
+
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | _String_ <br> _[Regex][6]_ |
