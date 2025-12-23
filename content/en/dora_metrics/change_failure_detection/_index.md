@@ -125,7 +125,7 @@ Use static rules for broad remediation indicators like hotfix labels, branch pre
 Datadog provides default rules that are automatically enabled:
 
 - **Revert PRs**: PR titles following revert naming conventions (e.g., "Revert" referencing a prior PR) are treated as rollforwards. The earlier deployment containing the original change is marked as the change failure, using the variable-based linking rules described above.
-- **Hotfix and incident indicators**: PR labels, titles, or branch names containing “hotfix” or “incident” are treated as rollforwards, with the preceding deployment marked as the change failure.
+- **Hotfix indicators**: PR labels, titles, or branch names containing “hotfix” are treated as rollforwards, with the preceding deployment marked as the change failure.
 
 These default rules are fully configurable in the [DORA Settings][1] page. They are intended as opinionated starting points that interpret common signals as likely rollforward activity. Teams are encouraged to adapt the patterns (for example, naming conventions, labels, or version tags) to reflect their own workflows and improve accuracy over time.
 
