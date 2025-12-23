@@ -4434,7 +4434,7 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
-    - name: Remove Service Overrides
+    - name: Service Override Removal
       url: tracing/services/service_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal

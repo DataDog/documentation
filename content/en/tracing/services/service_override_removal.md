@@ -1,5 +1,5 @@
 ---
-title: Remove Service Overrides
+title: Service Override Removal
 description: Learn how to remove integration service overrides from Datadog.
 disable_toc: false
 further_reading:
