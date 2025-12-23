@@ -36,12 +36,12 @@ You can try to either:
 3. Go to the tab labelled **Apps**.
 4. Click the three dots next to the {{< region-param key="microsoft_teams_app_name" >}} app.
 5. Click **Remove**.
-6. Re-add the {{< region-param key="microsoft_teams_app_name" >}} app by following the [setup steps][16].
+6. Re-add the {{< region-param key="microsoft_teams_app_name" >}} app by following the [setup steps][1].
 
 
 ## Bot support for private channels
 
-Private channels are not supported by the bot, due to the private channel limitations in [Microsoft Teams][9]. If you want to send notifications to private channels, see [Microsoft Workflows Webhooks][12].
+Private channels are not supported by the bot, due to the private channel limitations in [Microsoft Teams][2]. If you want to send notifications to private channels, see [Microsoft Workflows Webhooks][3].
 
 ## Adding multiple user mentions in monitor notifications
 
@@ -65,7 +65,7 @@ Lastly, it is possible that the delegated user's token has expired or been revok
 ## App configuration prompts when declaring an incident
 
 If you are seeing a prompt when decalring an incident, verify the following:
-- Your app version is 3.1.23 or higher. See instructions on how to [update your app version][13].
+- Your app version is 3.1.23 or higher. See instructions on how to [update your app version][4].
 - If you're using application permissions, ensure you have granted the `TeamsTab.Create` application permission
 - If you're using delegated permissions, ensure you have granted the `TeamsTab.Create` and `TeamsTab.Read.All` delegated permissions.
 - If you're using delegated permissions, ensure that the service account is a member of the team you're running the `@Datadog incident` command in.
@@ -81,3 +81,7 @@ You can also declare an incident by clicking the `+` sign at the top of a channe
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /integrations/microsoft-teams/?tab=datadogapprecommended#setup
+[2]: https://learn.microsoft.com/microsoftteams/private-channels#private-channel-limitations
+[3]: /integrations/microsoft-teams/?tab=microsoftworkflowswebhooks#what-are-microsoft-workflows-webhooks
+[4]: https://support.microsoft.com/office/update-an-app-in-microsoft-teams-3d53d136-5c5d-4dfa-9602-01e6fdd8015b
