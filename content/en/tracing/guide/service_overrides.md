@@ -3,7 +3,7 @@ title: Service Overrides
 description: Understand service overrides and how to adapt your configuration when using inferred services to improve service dependency representation.
 disable_toc: false
 further_reading:
-- link: "/tracing/guide/service_override_removal"
+- link: "/tracing/services/service_override_removal"
   tag: "Documentation"
   text: "Remove Service Overrides"
 - link: "/tracing/services/inferred_services"
@@ -93,4 +93,4 @@ The default `DD_SERVICE` name.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/services/inferred_services
-[2]: /tracing/guide/service_override_removal
+[2]: /tracing/services/service_override_removal
