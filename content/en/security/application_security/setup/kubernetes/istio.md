@@ -4,6 +4,8 @@ code_lang: istio
 code_lang_weight: 50
 aliases:
   - /security/application_security/threats_detection/istio
+  - /security/application_security/setup/istio
+  - /security/application_security/setup/standalone/istio
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
