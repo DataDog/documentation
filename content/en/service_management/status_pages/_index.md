@@ -136,6 +136,8 @@ Email subscriptions on status pages are **double opt-in**. After entering an ema
 
 For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
 
+{{< img src="/service_management/status_pages/status_pages_subscriptions.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
+
 ## Set a custom domain
 
 To match your branding, you have the option to map your status page to a custom domain like `status.acme.com`.
