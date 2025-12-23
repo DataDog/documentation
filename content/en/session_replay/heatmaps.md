@@ -142,26 +142,19 @@ To remove the currently saved screenshot and revert to an auto-picked one from a
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-unpin-screenshot-1.png" alt="Click unpin to remove the currently pinned screenshot." style="width:100%;">}}
 
+## Data retention
+
+The time periods you can view in a heatmap depend on where you access it:
+
+- **RUM**: Session Replay heatmaps use RUM click data (RUM action events), which has a 30-day retention period.
+- **Product Analytics**: Heatmaps use Product Analytics click data, which has a 15-month retention period.
+
 ## Next steps
 
-After analyzing heatmaps, the next step is to understand the user action by exploring related data. Navigate to the Analytics explorer or watch associated [session replays][1] to see user actions in the context of their overall session.
+After analyzing heatmaps, the next step is to understand the user action by exploring related data. Watch associated [session replays][1] to see user actions in the context of their overall session, or navigate to an Analytics explorer:
 
-{{< tabs >}}
-{{% tab "RUM" %}}
-
-Use the [RUM Analytics explorer][1] to explore and analyze your user data.
-
-[1]: /real_user_monitoring/explorer/
-
-{{% /tab %}}
-{{% tab "Product Analytics" %}}
-
-Use the [Product Analytics explorer][1] to explore and analyze your user data.
-
-[1]: /product_analytics/charts/analytics_explorer/
-
-{{% /tab %}}
-{{< /tabs >}}
+- **RUM**: Use the [RUM Analytics explorer][3] to explore and analyze your user data.
+- **Product Analytics**: Use the [Product Analytics explorer][4] to explore and analyze your user data.
 
 ## Troubleshooting
 
@@ -201,4 +194,5 @@ User information is not collected by default. Heatmaps use the user information 
 
 [1]: /session_replay/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
-
+[3]: /real_user_monitoring/explorer/
+[4]: /product_analytics/charts/analytics_explorer/
