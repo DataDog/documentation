@@ -178,6 +178,15 @@ components:
       required: true
       schema:
         type: string
+    AttachmentIncludeQueryParameter:
+      description: 'Resource to include in the response. Supported value: `last_modified_by_user`.'
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        example: last_modified_by_user
+        type: string
     AuthNMappingID:
       description: The UUID of the AuthN Mapping.
       in: path
@@ -457,26 +466,6 @@ components:
       schema:
         items:
           $ref: '#/components/schemas/GetIssueIncludeQueryParameterItem'
-        type: array
-    IncidentAttachmentFilterQueryParameter:
-      description: Specifies which types of attachments are included in the response.
-      explode: false
-      in: query
-      name: filter[attachment_type]
-      required: false
-      schema:
-        items:
-          $ref: '#/components/schemas/IncidentAttachmentAttachmentType'
-        type: array
-    IncidentAttachmentIncludeQueryParameter:
-      description: Specifies which types of related objects are included in the response.
-      explode: false
-      in: query
-      name: include
-      required: false
-      schema:
-        items:
-          $ref: '#/components/schemas/IncidentAttachmentRelatedObject'
         type: array
     IncidentIDPathParameter:
       description: The UUID of the incident.
@@ -5344,6 +5333,124 @@ components:
       - findings
       - project
       type: object
+    Attachment:
+      properties:
+        data:
+          $ref: '#/components/schemas/AttachmentData'
+        included:
+          items:
+            $ref: '#/components/schemas/AttachmentIncluded'
+          type: array
+      type: object
+    AttachmentArray:
+      properties:
+        data:
+          example:
+          - attributes:
+              attachment:
+                documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
+                title: Postmortem IR-123
+              attachment_type: postmortem
+              modified: '2025-01-01T01:01:01.000000001Z'
+            id: 00000000-abcd-0002-0000-000000000000
+            relationships:
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-cccc-000000000000
+                  type: users
+            type: incident_attachments
+          items:
+            $ref: '#/components/schemas/AttachmentData'
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/AttachmentIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    AttachmentData:
+      example:
+        attributes:
+          attachment:
+            documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
+            title: Postmortem IR-123
+          attachment_type: postmortem
+          modified: '2025-01-01T01:01:01.000000001Z'
+        id: 00000000-abcd-0002-0000-000000000000
+        relationships:
+          last_modified_by_user:
+            data:
+              id: 00000000-0000-0000-cccc-000000000000
+              type: users
+        type: incident_attachments
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AttachmentDataAttributes'
+        id:
+          example: 00000000-abcd-0002-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/AttachmentDataRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      - attributes
+      - relationships
+      - id
+      type: object
+    AttachmentDataAttributes:
+      properties:
+        attachment:
+          $ref: '#/components/schemas/AttachmentDataAttributesAttachment'
+        attachment_type:
+          $ref: '#/components/schemas/AttachmentDataAttributesAttachmentType'
+        modified:
+          format: date-time
+          type: string
+      type: object
+    AttachmentDataAttributesAttachment:
+      properties:
+        documentUrl:
+          type: string
+        title:
+          type: string
+      type: object
+    AttachmentDataAttributesAttachmentType:
+      enum:
+      - postmortem
+      - link
+      type: string
+      x-enum-varnames:
+      - POSTMORTEM
+      - LINK
+    AttachmentDataRelationships:
+      properties:
+        last_modified_by_user:
+          $ref: '#/components/schemas/AttachmentDataRelationshipsLastModifiedByUser'
+      type: object
+    AttachmentDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/AttachmentDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    AttachmentDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/UserType'
+      required:
+      - type
+      - id
+      type: object
+    AttachmentIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/User140420082644000'
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -12872,6 +12979,45 @@ components:
       required:
       - type
       type: object
+    CreateAttachmentRequest:
+      example:
+        data:
+          attributes:
+            attachment:
+              documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
+              title: Postmortem-IR-123
+            attachment_type: postmortem
+          id: 00000000-0000-0000-0000-000000000000
+          type: incident_attachments
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateAttachmentRequestData'
+      type: object
+    CreateAttachmentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateAttachmentRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      type: object
+    CreateAttachmentRequestDataAttributes:
+      properties:
+        attachment:
+          $ref: '#/components/schemas/CreateAttachmentRequestDataAttributesAttachment'
+        attachment_type:
+          $ref: '#/components/schemas/AttachmentDataAttributesAttachmentType'
+      type: object
+    CreateAttachmentRequestDataAttributesAttachment:
+      properties:
+        documentUrl:
+          type: string
+        title:
+          type: string
+      type: object
     CreateCaseRequestArray:
       description: List of requests to create cases for security findings.
       properties:
@@ -13280,6 +13426,40 @@ components:
       - selectors
       - name
       - targets
+      type: object
+    CreateOnCallNotificationRuleRequest:
+      description: A top-level wrapper for creating a notification rule for a user
+      example:
+        data:
+          attributes:
+            category: high_urgency
+            channel_settings:
+              method: sms
+              type: phone
+            delay_minutes: 1
+          relationships:
+            channel:
+              data:
+                id: 1562fab3-a8c2-49e2-8f3a-28dcda2405e2
+                type: notification_channels
+          type: notification_rules
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateOnCallNotificationRuleRequestData'
+      required:
+      - data
+      type: object
+    CreateOnCallNotificationRuleRequestData:
+      description: Data for creating an on-call notification rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OnCallNotificationRuleRequestAttributes'
+        relationships:
+          $ref: '#/components/schemas/OnCallNotificationRuleRelationships'
+        type:
+          $ref: '#/components/schemas/OnCallNotificationRuleType'
+      required:
+      - type
       type: object
     CreateOpenAPIResponse:
       description: Response for `CreateOpenAPI` operation.
@@ -25657,126 +25837,6 @@ components:
           type: string
           x-mimetype: application/xml
       type: object
-    IncidentAttachmentAttachmentType:
-      description: The type of the incident attachment attributes.
-      enum:
-      - link
-      - postmortem
-      example: link
-      type: string
-      x-enum-varnames:
-      - LINK
-      - POSTMORTEM
-    IncidentAttachmentAttributes:
-      description: The attributes object for an attachment.
-      oneOf:
-      - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
-      - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
-    IncidentAttachmentData:
-      description: A single incident attachment.
-      example:
-        attributes:
-          attachment:
-            documentUrl: ''
-            title: Postmortem IR-123
-          attachment_type: postmortem
-        id: 00000000-abcd-0002-0000-000000000000
-        relationships:
-          last_modified_by_user:
-            data:
-              id: 00000000-0000-0000-cccc-000000000000
-              type: users
-        type: incident_attachments
-      properties:
-        attributes:
-          $ref: '#/components/schemas/IncidentAttachmentAttributes'
-        id:
-          description: A unique identifier that represents the incident attachment.
-          example: 00000000-abcd-0001-0000-000000000000
-          type: string
-        relationships:
-          $ref: '#/components/schemas/IncidentAttachmentRelationships'
-        type:
-          $ref: '#/components/schemas/IncidentAttachmentType'
-      required:
-      - type
-      - attributes
-      - id
-      - relationships
-      type: object
-    IncidentAttachmentLinkAttachmentType:
-      default: link
-      description: The type of link attachment attributes.
-      enum:
-      - link
-      example: link
-      type: string
-      x-enum-varnames:
-      - LINK
-    IncidentAttachmentLinkAttributes:
-      description: The attributes object for a link attachment.
-      properties:
-        attachment:
-          $ref: '#/components/schemas/IncidentAttachmentLinkAttributesAttachmentObject'
-        attachment_type:
-          $ref: '#/components/schemas/IncidentAttachmentLinkAttachmentType'
-        modified:
-          description: Timestamp when the incident attachment link was last modified.
-          format: date-time
-          readOnly: true
-          type: string
-      required:
-      - attachment_type
-      - attachment
-      type: object
-    IncidentAttachmentLinkAttributesAttachmentObject:
-      description: The link attachment.
-      properties:
-        documentUrl:
-          description: The URL of this link attachment.
-          example: https://www.example.com/webstore-failure-runbook
-          type: string
-        title:
-          description: The title of this link attachment.
-          example: Runbook for webstore service failures
-          type: string
-      required:
-      - documentUrl
-      - title
-      type: object
-    IncidentAttachmentPostmortemAttachmentType:
-      default: postmortem
-      description: The type of postmortem attachment attributes.
-      enum:
-      - postmortem
-      example: postmortem
-      type: string
-      x-enum-varnames:
-      - POSTMORTEM
-    IncidentAttachmentPostmortemAttributes:
-      description: The attributes object for a postmortem attachment.
-      properties:
-        attachment:
-          $ref: '#/components/schemas/IncidentAttachmentsPostmortemAttributesAttachmentObject'
-        attachment_type:
-          $ref: '#/components/schemas/IncidentAttachmentPostmortemAttachmentType'
-      required:
-      - attachment_type
-      - attachment
-      type: object
-    IncidentAttachmentRelatedObject:
-      description: The object related to an incident attachment.
-      enum:
-      - users
-      type: string
-      x-enum-varnames:
-      - USERS
-    IncidentAttachmentRelationships:
-      description: The incident attachment's relationships.
-      properties:
-        last_modified_by_user:
-          $ref: '#/components/schemas/RelationshipToUser'
-      type: object
     IncidentAttachmentType:
       default: incident_attachments
       description: The incident attachment resource type.
@@ -25786,142 +25846,6 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_ATTACHMENTS
-    IncidentAttachmentUpdateAttributes:
-      description: Incident attachment attributes.
-      oneOf:
-      - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
-      - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
-    IncidentAttachmentUpdateData:
-      description: A single incident attachment.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/IncidentAttachmentUpdateAttributes'
-        id:
-          description: A unique identifier that represents the incident attachment.
-          example: 00000000-abcd-0001-0000-000000000000
-          type: string
-        type:
-          $ref: '#/components/schemas/IncidentAttachmentType'
-      required:
-      - type
-      type: object
-    IncidentAttachmentUpdateRequest:
-      description: The update request for an incident's attachments.
-      properties:
-        data:
-          description: 'An array of incident attachments. An attachment object without
-            an "id" key indicates that you want to
-
-            create that attachment. An attachment object without an "attributes" key
-            indicates that you want to
-
-            delete that attachment. An attachment object with both the "id" key and
-            a populated "attributes" object
-
-            indicates that you want to update that attachment.'
-          example:
-          - attributes:
-              attachment:
-                documentUrl: https://app.datadoghq.com/notebook/123
-                title: Postmortem IR-123
-              attachment_type: postmortem
-            id: 00000000-abcd-0002-0000-000000000000
-            type: incident_attachments
-          - attributes:
-              attachment:
-                documentUrl: https://www.example.com/webstore-failure-runbook
-                title: Runbook for webstore service failures
-              attachment_type: link
-            type: incident_attachments
-          - id: 00000000-abcd-0003-0000-000000000000
-            type: incident_attachments
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentUpdateData'
-          type: array
-      required:
-      - data
-      type: object
-    IncidentAttachmentUpdateResponse:
-      description: The response object containing the created or updated incident
-        attachments.
-      properties:
-        data:
-          description: 'An array of incident attachments. Only the attachments that
-            were created or updated by the request are
-
-            returned.'
-          example:
-          - attributes:
-              attachment:
-                documentUrl: ''
-                title: Postmortem IR-123
-              attachment_type: postmortem
-            id: 00000000-abcd-0002-0000-000000000000
-            relationships:
-              last_modified_by_user:
-                data:
-                  id: 00000000-0000-0000-cccc-000000000000
-                  type: users
-            type: incident_attachments
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentData'
-          type: array
-        included:
-          description: Included related resources that the user requested.
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentsResponseIncludedItem'
-          type: array
-      required:
-      - data
-      type: object
-    IncidentAttachmentsPostmortemAttributesAttachmentObject:
-      description: The postmortem attachment.
-      properties:
-        documentUrl:
-          description: The URL of this notebook attachment.
-          example: https://app.datadoghq.com/notebook/123
-          type: string
-        title:
-          description: The title of this postmortem attachment.
-          example: Postmortem IR-123
-          type: string
-      required:
-      - documentUrl
-      - title
-      type: object
-    IncidentAttachmentsResponse:
-      description: The response object containing an incident's attachments.
-      properties:
-        data:
-          description: An array of incident attachments.
-          example:
-          - attributes:
-              attachment:
-                documentUrl: ''
-                title: Postmortem IR-123
-              attachment_type: postmortem
-            id: 00000000-abcd-0002-0000-000000000000
-            relationships:
-              last_modified_by_user:
-                data:
-                  id: 00000000-0000-0000-cccc-000000000000
-                  type: users
-            type: incident_attachments
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentData'
-          type: array
-        included:
-          description: Included related resources that the user requested.
-          items:
-            $ref: '#/components/schemas/IncidentAttachmentsResponseIncludedItem'
-          type: array
-      required:
-      - data
-      type: object
-    IncidentAttachmentsResponseIncludedItem:
-      description: An object related to an attachment that is included in the response.
-      oneOf:
-      - $ref: '#/components/schemas/User'
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -27192,7 +27116,7 @@ components:
       description: An object related to an incident that is included in the response.
       oneOf:
       - $ref: '#/components/schemas/IncidentUserData'
-      - $ref: '#/components/schemas/IncidentAttachmentData'
+      - $ref: '#/components/schemas/AttachmentData'
     IncidentResponseMeta:
       description: The metadata object containing pagination metadata.
       properties:
@@ -30831,6 +30755,18 @@ components:
         data:
           items:
             $ref: '#/components/schemas/NotificationChannelData'
+          type: array
+      type: object
+    ListOnCallNotificationRulesResponse:
+      description: Response type for listing notification rules for a user
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OnCallNotificationRuleData'
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/OnCallNotificationRulesIncluded'
           type: array
       type: object
     ListPipelinesResponse:
@@ -35378,6 +35314,8 @@ components:
       description: The `add_env_vars` processor adds environment variable values to
         log events.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -35433,6 +35371,8 @@ components:
     ObservabilityPipelineAddFieldsProcessor:
       description: The `add_fields` processor adds static key-value fields to logs.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -35749,6 +35689,10 @@ components:
             role session.
           type: string
       type: object
+    ObservabilityPipelineComponentDisplayName:
+      description: The display name for a component.
+      example: my component
+      type: string
     ObservabilityPipelineConfig:
       description: Specifies the pipeline's configuration, including its sources,
         processors, and destinations.
@@ -35839,6 +35783,8 @@ components:
           include: status:error
           type: filter
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor group is enabled.
           example: true
@@ -36002,6 +35948,8 @@ components:
         Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
         advanced filtering capabilities.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36169,6 +36117,8 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36250,6 +36200,8 @@ components:
     ObservabilityPipelineDedupeProcessor:
       description: The `dedupe` processor removes duplicate fields in log events.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36487,6 +36439,8 @@ components:
       description: The `enrichment_table` processor enriches logs using a static CSV
         file or GeoIP database.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36546,6 +36500,8 @@ components:
         on a Datadog search query. Logs that match the `include` query are passed
         through; others are discarded.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -36648,6 +36604,8 @@ components:
         Metrics can be counters, gauges, or distributions and optionally grouped by
         log fields.'
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37269,6 +37227,8 @@ components:
       description: The `ocsf_mapper` processor transforms logs into the OCSF schema
         using a predefined mapping configuration.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37400,6 +37360,8 @@ components:
             by Datadog.
           example: true
           type: boolean
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37512,6 +37474,8 @@ components:
         and flattens it into the event. This is useful when logs contain embedded
         JSON as a string.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37565,6 +37529,8 @@ components:
         a specified filter. When the configured daily quota is met, the processor
         can drop or alert.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         drop_events:
           description: If set to `true`, logs that matched the quota filter and sent
             after the quota has been met are dropped; only logs that did not match
@@ -37696,6 +37662,8 @@ components:
       description: The `reduce` processor aggregates and merges logs based on matching
         keys and merge strategies.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37788,6 +37756,8 @@ components:
     ObservabilityPipelineRemoveFieldsProcessor:
       description: The `remove_fields` processor deletes specified fields from logs.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37832,6 +37802,8 @@ components:
     ObservabilityPipelineRenameFieldsProcessor:
       description: The `rename_fields` processor changes field names.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -37967,6 +37939,8 @@ components:
       description: The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -38014,6 +37988,8 @@ components:
       description: The `sensitive_data_scanner` processor detects and optionally redacts
         sensitive data in log events.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -39003,6 +38979,8 @@ components:
       description: The `throttle` processor limits the number of events that pass
         through over a given time window.
       properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
           description: Whether this processor is enabled.
           example: true
@@ -39287,6 +39265,130 @@ components:
       required:
       - type
       type: object
+    OnCallNotificationRule:
+      description: A top-level wrapper for a notification rule
+      example:
+        data:
+          attributes:
+            category: high_urgency
+            channel_settings:
+              method: sms
+              type: phone
+            delay_minutes: 1
+          id: 27590dae-47be-4a7d-9abf-8f4e45124020
+          relationships:
+            channel:
+              data:
+                id: 1562fab3-a8c2-49e2-8f3a-28dcda2405e2
+                type: notification_channels
+          type: notification_rules
+      properties:
+        data:
+          $ref: '#/components/schemas/OnCallNotificationRuleData'
+        included:
+          items:
+            $ref: '#/components/schemas/OnCallNotificationRulesIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    OnCallNotificationRuleAttributes:
+      description: Attributes for an on-call notification rule.
+      properties:
+        category:
+          $ref: '#/components/schemas/OnCallNotificationRuleCategory'
+        channel_settings:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelSettings'
+          description: Configuration for the associated channel, if necessary
+          nullable: true
+        delay_minutes:
+          description: The number of minutes that will elapse before this rule is
+            evaluated.  0 indicates immediate evaluation
+          format: int64
+          type: integer
+      type: object
+    OnCallNotificationRuleCategory:
+      default: high_urgency
+      description: Specifies the category a notification rule will apply to
+      enum:
+      - high_urgency
+      - low_urgency
+      type: string
+      x-enum-varnames:
+      - HIGH_URGENCY
+      - LOW_URGENCY
+    OnCallNotificationRuleChannelRelationship:
+      description: Relationship object for creating a notification rule
+      properties:
+        data:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelRelationshipData'
+      required:
+      - data
+      type: object
+    OnCallNotificationRuleChannelRelationshipData:
+      description: Channel relationship data for creating a notification rule
+      properties:
+        id:
+          description: ID of the notification channel
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationChannelType'
+      type: object
+    OnCallNotificationRuleChannelSettings:
+      description: Defines the configuration for a channel associated with a notification
+        rule
+      oneOf:
+      - $ref: '#/components/schemas/OnCallPhoneNotificationRuleSettings'
+    OnCallNotificationRuleData:
+      description: Data for an on-call notification rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OnCallNotificationRuleAttributes'
+        id:
+          description: Unique identifier for the rule
+          type: string
+        relationships:
+          $ref: '#/components/schemas/OnCallNotificationRuleRelationships'
+        type:
+          $ref: '#/components/schemas/OnCallNotificationRuleType'
+      required:
+      - type
+      type: object
+    OnCallNotificationRuleRelationships:
+      description: Relationship object for creating a notification rule
+      properties:
+        channel:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelRelationship'
+      type: object
+    OnCallNotificationRuleRequestAttributes:
+      description: Attributes for creating or modifying an on-call notification rule.
+      properties:
+        category:
+          $ref: '#/components/schemas/OnCallNotificationRuleCategory'
+        channel_settings:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelSettings'
+          description: Configuration for the associated channel, if necessary
+          nullable: true
+        delay_minutes:
+          description: The number of minutes that will elapse before this rule is
+            evaluated.  0 indicates immediate evaluation
+          format: int64
+          type: integer
+      type: object
+    OnCallNotificationRuleType:
+      default: notification_rules
+      description: Indicates that the resource is of type 'notification_rules'.
+      enum:
+      - notification_rules
+      example: notification_rules
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_RULES
+    OnCallNotificationRulesIncluded:
+      description: Represents additional included resources for a on-call notification
+        rules
+      oneOf:
+      - $ref: '#/components/schemas/NotificationChannelData'
     OnCallPageTargetType:
       description: The kind of target, `team_id` | `team_handle` | `user_id`.
       enum:
@@ -39299,6 +39401,29 @@ components:
       - TEAM_ID
       - TEAM_HANDLE
       - USER_ID
+    OnCallPhoneNotificationRuleMethod:
+      description: Specifies the method in which a phone is used in a notification
+        rule
+      enum:
+      - sms
+      - voice
+      example: sms
+      type: string
+      x-enum-varnames:
+      - SMS
+      - VOICE
+    OnCallPhoneNotificationRuleSettings:
+      description: Configuration for using a phone notification channel in a notification
+        rule
+      properties:
+        method:
+          $ref: '#/components/schemas/OnCallPhoneNotificationRuleMethod'
+        type:
+          $ref: '#/components/schemas/NotificationChannelPhoneConfigType'
+      required:
+      - type
+      - method
+      type: object
     OnDemandConcurrencyCap:
       description: On-demand concurrency cap.
       properties:
@@ -40394,6 +40519,41 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+      type: object
+    PatchAttachmentRequest:
+      example:
+        data:
+          attributes:
+            attachment:
+              documentUrl: https://app.datadoghq.com/notebook/124/Postmortem-IR-124
+              title: Postmortem-IR-124
+          type: incident_attachments
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchAttachmentRequestData'
+      type: object
+    PatchAttachmentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchAttachmentRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      type: object
+    PatchAttachmentRequestDataAttributes:
+      properties:
+        attachment:
+          $ref: '#/components/schemas/PatchAttachmentRequestDataAttributesAttachment'
+      type: object
+    PatchAttachmentRequestDataAttributesAttachment:
+      properties:
+        documentUrl:
+          type: string
+        title:
+          type: string
       type: object
     PatchIncidentNotificationTemplateRequest:
       description: Update request for a notification template.
@@ -56538,6 +56698,59 @@ components:
       - name
       - options
       type: object
+    UpdateOnCallNotificationRuleRequest:
+      description: A top-level wrapper for updating a notification rule for a user
+      example:
+        data:
+          attributes:
+            category: high_urgency
+            channel_settings:
+              method: sms
+              type: phone
+            delay_minutes: 1
+          id: 2462ace1-49e2-aab1-xc4f-29cc4ae1105n7
+          relationships:
+            channel:
+              data:
+                id: 1562fab3-a8c2-49e2-8f3a-28dcda2405e2
+                type: notification_channels
+          type: notification_rules
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateOnCallNotificationRuleRequestData'
+      required:
+      - data
+      type: object
+    UpdateOnCallNotificationRuleRequestAttributes:
+      description: Attributes for creating or modifying an on-call notification rule.
+      properties:
+        category:
+          $ref: '#/components/schemas/OnCallNotificationRuleCategory'
+        channel_settings:
+          $ref: '#/components/schemas/OnCallNotificationRuleChannelSettings'
+          description: Configuration for the associated channel, if necessary
+          nullable: true
+        delay_minutes:
+          description: The number of minutes that will elapse before this rule is
+            evaluated.  0 indicates immediate evaluation
+          format: int64
+          type: integer
+      type: object
+    UpdateOnCallNotificationRuleRequestData:
+      description: Data for updating an on-call notification rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateOnCallNotificationRuleRequestAttributes'
+        id:
+          description: Unique identifier for the rule
+          type: string
+        relationships:
+          $ref: '#/components/schemas/OnCallNotificationRuleRelationships'
+        type:
+          $ref: '#/components/schemas/OnCallNotificationRuleType'
+      required:
+      - type
+      type: object
     UpdateOpenAPIResponse:
       description: Response for `UpdateOpenAPI`.
       properties:
@@ -57176,6 +57389,17 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
+    User140420082644000:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/UserType'
+      required:
+      - type
+      type: object
     UserAttributes:
       description: Attributes of user object returned by the API.
       properties:
@@ -57626,6 +57850,15 @@ components:
         meta:
           $ref: '#/components/schemas/TeamsResponseMeta'
       type: object
+    UserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     UserUpdateAttributes:
       description: Attributes of the edited user.
       properties:
@@ -68956,8 +69189,7 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - incident_notification_settings_read
+      - AuthZ: []
       summary: List incident notification rules
       tags:
       - Incidents
@@ -69161,8 +69393,7 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - incident_settings_read
+      - AuthZ: []
       summary: List incident notification templates
       tags:
       - Incidents
@@ -69280,7 +69511,8 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - incident_settings_read
+        - incident_read
+        - incident_write
       summary: Get incident notification template
       tags:
       - Incidents
@@ -69373,6 +69605,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
+        - incident_settings_read
         - incident_read
       x-unstable: '**Note**: This endpoint is in public beta.
 
@@ -69415,7 +69648,7 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 19
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - incident_settings_write
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -69712,82 +69945,170 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/attachments:
     get:
-      description: Get all attachments for a given incident.
+      description: List incident attachments.
       operationId: ListIncidentAttachments
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
-      - $ref: '#/components/parameters/IncidentAttachmentIncludeQueryParameter'
-      - $ref: '#/components/parameters/IncidentAttachmentFilterQueryParameter'
+      - description: Filter attachments by type. Supported values are `1` (`postmortem`)
+          and `2` (`link`).
+        in: query
+        name: filter[attachment_type]
+        schema:
+          example: '1'
+          type: string
+      - $ref: '#/components/parameters/AttachmentIncludeQueryParameter'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IncidentAttachmentsResponse'
+                $ref: '#/components/schemas/AttachmentArray'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
-        '401':
-          $ref: '#/components/responses/UnauthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List incident attachments
+      tags:
+      - Incidents
+      x-menu-order: 34
+      x-permission:
+        operator: OR
+        permissions:
+        - incident_read
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an incident attachment.
+      operationId: CreateIncidentAttachment
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/AttachmentIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAttachmentRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Create incident attachment
+      tags:
+      - Incidents
+      x-menu-order: 35
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_write
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/attachments/{attachment_id}:
+    delete:
+      operationId: DeleteIncidentAttachment
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - description: The ID of the attachment.
+        in: path
+        name: attachment_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000002
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a list of attachments
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Delete incident attachment
       tags:
       - Incidents
-      x-menu-order: 7
+      x-menu-order: 36
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
-        - incident_read
-      x-unstable: '**Note**: This endpoint is in public beta.
+        - incident_write
+      x-unstable: '**Note**: This endpoint is in Preview.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
-      deprecated: true
-      description: The bulk update endpoint for creating, updating, and deleting attachments
-        for a given incident.
-      operationId: UpdateIncidentAttachments
+      operationId: UpdateIncidentAttachment
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
-      - $ref: '#/components/parameters/IncidentAttachmentIncludeQueryParameter'
+      - description: The ID of the attachment.
+        in: path
+        name: attachment_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000002
+      - $ref: '#/components/parameters/AttachmentIncludeQueryParameter'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IncidentAttachmentUpdateRequest'
-        description: Incident Attachment Payload.
+              $ref: '#/components/schemas/PatchAttachmentRequest'
         required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IncidentAttachmentUpdateResponse'
+                $ref: '#/components/schemas/Attachment'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
-        '401':
-          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create, update, and delete incident attachments
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Update incident attachment
       tags:
       - Incidents
-      x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 37
       x-permission:
-        operator: OR
+        operator: AND
         permissions:
         - incident_write
-      x-unstable: '**Note**: This endpoint is deprecated.'
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/impacts:
     get:
       description: Get all impacts for an incident.
@@ -69820,7 +70141,7 @@ paths:
       summary: List an incident's impacts
       tags:
       - Incidents
-      x-menu-order: 6
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
@@ -69864,7 +70185,7 @@ paths:
       tags:
       - Incidents
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
@@ -76822,6 +77143,260 @@ paths:
       x-menu-order: 14
       x-permission:
         operator: AND
+        permissions:
+        - on_call_read
+  /api/v2/on-call/users/{user_id}/notification-rules:
+    get:
+      description: List the notification rules for a user. The authenticated user
+        must be the target user or have the `on_call_admin` permission
+      operationId: ListUserNotificationRules
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `channel`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOnCallNotificationRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List On-Call notification rules for a user
+      tags:
+      - On-Call
+      x-menu-order: 18
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_read
+    post:
+      description: Create a new notification rule for a user. The authenticated user
+        must be the target user or have the `on_call_admin` permission
+      operationId: CreateUserNotificationRule
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOnCallNotificationRuleRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallNotificationRule'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create an On-Call notification rule for a user
+      tags:
+      - On-Call
+      x-menu-order: 17
+      x-permission:
+        operator: AND
+        permissions:
+        - on_call_respond
+  /api/v2/on-call/users/{user_id}/notification-rules/{rule_id}:
+    delete:
+      description: Delete a notification rule for a user. The authenticated user must
+        be the target user or have the `on_call_admin` permission
+      operationId: DeleteUserNotificationRule
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The rule ID
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete an On-Call notification rule for a user
+      tags:
+      - On-Call
+      x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - on_call_respond
+    get:
+      description: Get a notification rule for a user. The authenticated user must
+        be the target user or have the `on_call_admin` permission
+      operationId: GetUserNotificationRule
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The rule ID
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `channel`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallNotificationRule'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get an On-Call notification rule for a user
+      tags:
+      - On-Call
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - on_call_read
+    put:
+      description: Update a notification rule for a user. The authenticated user must
+        be the target user or have the `on_call_admin` permission
+      operationId: UpdateUserNotificationRule
+      parameters:
+      - description: The user ID
+        in: path
+        name: user_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: The rule ID
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `channel`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOnCallNotificationRuleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnCallNotificationRule'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update an On-Call notification rule for a user
+      tags:
+      - On-Call
+      x-menu-order: 21
+      x-permission:
+        operator: OR
         permissions:
         - on_call_read
   /api/v2/org_configs:

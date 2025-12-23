@@ -2196,6 +2196,11 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
       weight: 403
+    - name: Custom Reports
+      url: internal_developer_portal/eng_reports/custom_reports
+      parent: idp_eng_reports
+      identifier: eng_reports_custom
+      weight: 404
     - name: Developer Homepage
       url: internal_developer_portal/developer_homepage
       parent: internal_developer_portal
@@ -4114,7 +4119,11 @@ menu:
       parent: single_step_apm
       identifier: single_step_apm_windows
       weight: 2014
+<<<<<<< HEAD
     - name: Manually-managed SDKs
+=======
+    - name: Manually managed SDKs
+>>>>>>> 90228b2b1c3e575fa86d65337d744c8d8b8ae17f
       url: tracing/trace_collection/dd_libraries/
       parent: tracing_trace_collection
       identifier: auto_dd_libraries
@@ -6812,7 +6821,7 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_content_packs
       weight: 101
-    - name: Threat Intelligence
+    - name: Bring Your Own Threat Intelligence
       url: security/cloud_siem/ingest_and_enrich/threat_intelligence
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
@@ -6907,11 +6916,16 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
       weight: 302
+    - name: IOC Explorer
+      url: security/cloud_siem/triage_and_investigate/ioc_explorer
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_ioc_explorer
+      weight: 303
     - name: Investigator
       url: security/cloud_siem/triage_and_investigate/investigator
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigator
-      weight: 303
+      weight: 304
     - name: Respond and Report
       url: security/cloud_siem/respond_and_report
       parent: cloud_siem

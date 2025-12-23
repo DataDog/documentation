@@ -38,10 +38,11 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | [CIS Kubernetes (EKS) Benchmark**][5]           | v1.7.0, v1.4.0                 | `cis-eks`                           | Cloud and Infrastructure |
 | [CIS Kubernetes Benchmark**][5]                 | v1.9.0                         | `cis-kubernetes`                    | Infrastructure           |
 | [CIS Red Hat Linux 7][24]                       | v3.1.1                         | `cis-rhel7`                         | Infrastructure           |
-| [CIS Red Hat Linux 8][24]                       | v2.0.0                         | `cis-rhel8`                         | Infrastructure           |
-| [CIS Red Hat Linux 9][24]                       | v1.0.0                         | `cis-rhel9`                         | Infrastructure           |
+| [CIS Red Hat Linux 8][24]                       | v3.0.0                         | `cis-rhel8`                         | Infrastructure           |
+| [CIS Red Hat Linux 9][24]                       | v2.0.0                         | `cis-rhel9`                         | Infrastructure           |
 | [CIS Ubuntu 20.04][23]                          | v1.0.0                         | `cis-ubuntu2004`                    | Infrastructure           |
 | [CIS Ubuntu 22.04][23]                          | v2.0.0                         | `cis-ubuntu2204`                    | Infrastructure           |
+| [CIS Ubuntu 24.04][23]                          | v1.0.0                         | `cis-ubuntu2404`                    | Infrastructure           |
 | [Digital Operational Resilience Act (DORA)][35] | C(2024) 1532                   | `dora`                              | Cloud                    |
 | [Essential Cloud Security Controls][33]         | v2                             | `essential-cloud-security-controls` | Cloud                    |
 | [FedRAMP High][36] (Preview)                    | v5                             | `fedramp-high`                      | Cloud                    |
