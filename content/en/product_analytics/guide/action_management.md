@@ -2,9 +2,9 @@
 title: Action Management
 private: true
 further_reading:
-  - link: https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams
-    tag: Blog
-    text: From performance to impact: Bridging frontend teams through shared context
+  - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+    tag: "Blog"
+    text: "From performance to impact: Bridging frontend teams through shared context"
 ---
 
 <div class="alert alert-info">

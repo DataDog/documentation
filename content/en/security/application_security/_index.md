@@ -10,9 +10,9 @@ aliases:
   - /security/application_security/threats
   - /security/application_security/setup/standalone
 further_reading:
-- link: https://www.datadoghq.com/blog/secure-api-with-datadog
-  tag: Blog
-  text: From discovery to defense: Securing APIs with Datadog App and API Protection
+- link: "https://www.datadoghq.com/blog/secure-api-with-datadog"
+  tag: "Blog"
+  text: "From discovery to defense: Securing APIs with Datadog App and API Protection"
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works"

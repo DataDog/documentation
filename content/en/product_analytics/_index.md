@@ -5,9 +5,9 @@ aliases:
 - /real_user_monitoring/product_analytics
 - /real_user_monitoring/guide/rum-for-product-analytics
 further_reading:
-- link: https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams
-  tag: Blog
-  text: From performance to impact: Bridging frontend teams through shared context
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"

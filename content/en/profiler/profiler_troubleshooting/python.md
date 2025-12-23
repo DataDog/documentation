@@ -7,9 +7,9 @@ further_reading:
     - link: '/tracing/troubleshooting'
       tag: 'Documentation'
       text: 'APM Troubleshooting'
-    - link: https://www.datadoghq.com/blog/datadog-python-memory-profiling
-      tag: Blog
-      text: Python memory profiling: Common pitfalls and how to avoid them
+    - link: "https://www.datadoghq.com/blog/datadog-python-memory-profiling"
+      tag: "Blog"
+      text: "Python memory profiling: Common pitfalls and how to avoid them"
 ---
 
 ## Missing profiles in the profile search page
