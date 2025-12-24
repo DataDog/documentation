@@ -12,11 +12,10 @@
 
 Send custom application {{ $signal }} into Datadog using the OpenTelemetry (OTel) {{ $signalCap }} API with the Datadog SDK (`{{ $sdk }}`).
 
-{{ if $alternative }}This is an alternative to using {{ $alternative }} and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.{{ else }}You can write code against the standard OTel interfaces whilst benefiting from all the features of the Datadog SDK.{{ end }}
+{{ if $alternative }}This is an alternative to using {{ $alternative }} and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.{{ else }}You can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.{{ end }}
 
-The Datadog SDK provides a native implementation of the OpenTelemetry API.
+The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
-- **Do** install the standard OpenTelemetry API packages (`io.opentelemetry:opentelemetry-api`) to instrument your code.
-- **Do Not** install the OpenTelemetry SDK packages (`opentelemetry-sdk`). The Datadog SDK acts as the implementation provider; installing both can lead to runtime conflicts and duplicate telemetry.
+<div class="alert alert-info">You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The Datadog SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.</div>
 
 [100]: /developers/dogstatsd/

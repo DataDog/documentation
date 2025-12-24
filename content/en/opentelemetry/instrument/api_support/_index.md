@@ -20,7 +20,7 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-Datadog SDKs provide an implementation of the [OpenTelemetry API][1] for traces, metrics, and logs. This means you can maintain vendor-neutral instrumentation of your services, while still taking advantage of Datadog's native implementation, features, and products. 
+Datadog SDKs provide an implementation of the [OpenTelemetry API][1] for traces, metrics, and logs. This means you can maintain vendor-neutral instrumentation of your services, while still taking advantage of Datadog's native implementation, features, and products.
 
 The telemetry produced by your running code can be processed, analyzed, and monitored alongside Datadog's native telemetry, allowing you to take advantage of Datadog's unified platform and products like [Continuous Profiler][3], [Data Streams Monitoring][4], [App and API Protection][5], and [Live Processes][6].
 
@@ -33,9 +33,9 @@ By [instrumenting your code with OpenTelemetry APIs][2], your code:
 - Remains free of vendor-specific API calls.
 - Does not depend on Datadog SDKs at compile time (only runtime).
 
-**Important**: Do not include the OpenTelemetry SDK in your application's dependencies. The Datadog SDK provides the implementation of the OpenTelemetry API. Including the OpenTelemetry SDK may cause conflicts or unexpected behavior.
+## Get started
 
-To learn more, follow the link for your language:
+Select your language to view setup instructions:
 
 {{< partial name="apm/otel-instrumentation.html" >}}
 

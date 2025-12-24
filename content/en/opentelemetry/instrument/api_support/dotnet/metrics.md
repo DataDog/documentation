@@ -18,7 +18,7 @@ further_reading:
 - **.NET Runtime**: Requires .NET 6+ (or `System.Diagnostics.DiagnosticSource` v6.0.0+). See [Version and instrument support](#net-version-and-instrument-support) for a list of supported instruments by version.
 - **Datadog SDK**: dd-trace-dotnet version 3.30.0 or later.
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
-- **DogStatsD (Runtime Metrics)**: If you also use Datadog Runtime Metrics, ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
+- **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][5], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
 
 ## Setup
 
@@ -137,4 +137,5 @@ Here is the minimum version required for each instrument type:
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
 [4]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics
+[5]: /tracing/metrics/runtime_metrics/
 [200]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent 
