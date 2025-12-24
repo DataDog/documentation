@@ -6,8 +6,8 @@ menu:
     - name: In The App
       identifier: platform_heading
       weight: 2000000
-    - name: Service Management
-      identifier: service_management_heading
+    - name: Incident Response
+      identifier: incident_response_heading
       weight: 3000000
     - name: Actions & Remediations
       identifier: actions_heading
@@ -2618,7 +2618,7 @@ menu:
     - name: Incident Management
       url: service_management/incident_management/
       pre: incidents
-      parent: service_management_heading
+      parent: incident_response_heading
       identifier: incidents
       weight: 20000
     - name: Declare an Incident
@@ -2739,7 +2739,7 @@ menu:
     - name: On-Call
       url: service_management/on-call/
       pre: on-call
-      parent: service_management_heading
+      parent: incident_response_heading
       identifier: oncall
       weight: 30000
     - name: Datadog Clipboard
@@ -2795,13 +2795,13 @@ menu:
     - name: Status Pages
       url: service_management/status_pages/
       pre: status-page-wui
-      parent: service_management_heading
+      parent: incident_response_heading
       identifier: status_pages
       weight: 40000
     - name: Case Management
       url: service_management/case_management/
       pre: case-management
-      parent: service_management_heading
+      parent: incident_response_heading
       identifier: case_management
       weight: 60000
     - name: Projects
