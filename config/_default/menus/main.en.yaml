@@ -2474,6 +2474,147 @@ menu:
       parent: change_tracking
       identifier: change_tracking_feature_flags
       weight: 1
+    - name: Event Management
+      url: events/
+      pre: events
+      identifier: events
+      parent: platform_heading
+      weight: 150000
+    - name: Ingest Events
+      url: events/ingest/
+      identifier: event_ingest
+      parent: events
+      weight: 1
+    - name: Pipelines and Processors
+      url: events/pipelines_and_processors/
+      identifier: overview
+      parent: events
+      weight: 2
+    - name: Aggregation Key Processor
+      url: events/pipelines_and_processors/aggregation_key
+      identifier: aggregation_key_processor
+      parent: overview
+      weight: 201
+    - name: Arithmetic Processor
+      url: events/pipelines_and_processors/arithmetic_processor
+      identifier: arithmetic_processor
+      parent: overview
+      weight: 202
+    - name: Date Remapper
+      url: events/pipelines_and_processors/date_remapper
+      identifier: date_remapper
+      parent: overview
+      weight: 203
+    - name: Category Processor
+      url: events/pipelines_and_processors/category_processor
+      identifier: category_processor
+      parent: overview
+      weight: 204
+    - name: Grok Parser
+      url: events/pipelines_and_processors/grok_parser
+      identifier: grok_parser
+      parent: overview
+      weight: 205
+    - name: Lookup Processor
+      url: events/pipelines_and_processors/lookup_processor
+      identifier: lookup_processor
+      parent: overview
+      weight: 206
+    - name: Remapper
+      url: events/pipelines_and_processors/remapper
+      identifier: remapper
+      parent: overview
+      weight: 207
+    - name: Service Remapper
+      url: events/pipelines_and_processors/service_remapper
+      identifier: service_remapper
+      parent: overview
+      weight: 208
+    - name: Status Remapper
+      url: events/pipelines_and_processors/status_remapper
+      identifier: status_remapper
+      parent: overview
+      weight: 209
+    - name: String Builder Processor
+      url: events/pipelines_and_processors/string_builder_processor
+      identifier: string_builder_processor
+      parent: overview
+      weight: 210
+    - name: Explorer
+      url: events/explorer/
+      identifier: events_explorer
+      parent: events
+      weight: 3
+    - name: Searching
+      url: events/explorer/searching
+      identifier: events_explorer_searching
+      parent: events_explorer
+      weight: 301
+    - name: Navigate the Explorer
+      url: events/explorer/navigate
+      identifier: events_explorer_navigate
+      parent: events_explorer
+      weight: 302
+    - name: Customization
+      url: events/explorer/customization
+      identifier: events_explorer_customization
+      parent: events_explorer
+      weight: 303
+    - name: Facets
+      url: events/explorer/facets
+      identifier: events_explorer_facets
+      parent: events_explorer
+      weight: 304
+    - name: Attributes
+      url: events/explorer/attributes
+      identifier: events_explorer_attributes
+      parent: events_explorer
+      weight: 305
+    - name: Notifications
+      url: events/explorer/notifications
+      identifier: event_explorer_notifications
+      parent: events_explorer
+      weight: 306
+    - name: Analytics
+      url: events/explorer/analytics
+      identifier: event_explorer_analytics
+      parent: events_explorer
+      weight: 307
+    - name: Saved Views
+      url: events/explorer/saved_views
+      identifier: event_explorer_saved_views
+      parent: events_explorer
+      weight: 308
+    - name: Triage Inbox
+      identifier: event_triage_inbox
+      url: events/triage_inbox
+      parent: events
+      weight: 4
+    - name: Correlation
+      url: events/correlation/
+      identifier: event_correlation
+      parent: events
+      weight: 5
+    - name: Configuration
+      url: events/correlation/configuration
+      identifier: event_correlation_configure
+      parent: event_correlation
+      weight: 501
+    - name: Triaging & Notifying
+      url: events/correlation/triage_and_notify
+      identifier: event_correlation_triage_and_notify
+      parent: event_correlation
+      weight: 502
+    - name: Analytics
+      url: events/correlation/analytics
+      identifier: event_correlation_analytics
+      parent: event_correlation
+      weight: 503
+    - name: Guides
+      url: events/guides/
+      identifier: events_guides
+      parent: events
+      weight: 10
     - name: Incident Management
       url: service_management/incident_management/
       pre: incidents
@@ -2657,147 +2798,6 @@ menu:
       parent: service_management_heading
       identifier: status_pages
       weight: 40000
-    - name: Event Management
-      url: service_management/events/
-      pre: events
-      identifier: events
-      parent: service_management_heading
-      weight: 50000
-    - name: Ingest Events
-      url: service_management/events/ingest/
-      identifier: event_ingest
-      parent: events
-      weight: 1
-    - name: Pipelines and Processors
-      url: service_management/events/pipelines_and_processors/
-      identifier: overview
-      parent: events
-      weight: 2
-    - name: Aggregation Key Processor
-      url: service_management/events/pipelines_and_processors/aggregation_key
-      identifier: aggregation_key_processor
-      parent: overview
-      weight: 201
-    - name: Arithmetic Processor
-      url: service_management/events/pipelines_and_processors/arithmetic_processor
-      identifier: arithmetic_processor
-      parent: overview
-      weight: 202
-    - name: Date Remapper
-      url: service_management/events/pipelines_and_processors/date_remapper
-      identifier: date_remapper
-      parent: overview
-      weight: 203
-    - name: Category Processor
-      url: service_management/events/pipelines_and_processors/category_processor
-      identifier: category_processor
-      parent: overview
-      weight: 204
-    - name: Grok Parser
-      url: service_management/events/pipelines_and_processors/grok_parser
-      identifier: grok_parser
-      parent: overview
-      weight: 205
-    - name: Lookup Processor
-      url: service_management/events/pipelines_and_processors/lookup_processor
-      identifier: lookup_processor
-      parent: overview
-      weight: 206
-    - name: Remapper
-      url: service_management/events/pipelines_and_processors/remapper
-      identifier: remapper
-      parent: overview
-      weight: 207
-    - name: Service Remapper
-      url: service_management/events/pipelines_and_processors/service_remapper
-      identifier: service_remapper
-      parent: overview
-      weight: 208
-    - name: Status Remapper
-      url: service_management/events/pipelines_and_processors/status_remapper
-      identifier: status_remapper
-      parent: overview
-      weight: 209
-    - name: String Builder Processor
-      url: service_management/events/pipelines_and_processors/string_builder_processor
-      identifier: string_builder_processor
-      parent: overview
-      weight: 210
-    - name: Explorer
-      url: service_management/events/explorer/
-      identifier: events_explorer
-      parent: events
-      weight: 3
-    - name: Searching
-      url: service_management/events/explorer/searching
-      identifier: events_explorer_searching
-      parent: events_explorer
-      weight: 301
-    - name: Navigate the Explorer
-      url: service_management/events/explorer/navigate
-      identifier: events_explorer_navigate
-      parent: events_explorer
-      weight: 302
-    - name: Customization
-      url: service_management/events/explorer/customization
-      identifier: events_explorer_customization
-      parent: events_explorer
-      weight: 303
-    - name: Facets
-      url: service_management/events/explorer/facets
-      identifier: events_explorer_facets
-      parent: events_explorer
-      weight: 304
-    - name: Attributes
-      url: service_management/events/explorer/attributes
-      identifier: events_explorer_attributes
-      parent: events_explorer
-      weight: 305
-    - name: Notifications
-      url: service_management/events/explorer/notifications
-      identifier: event_explorer_notifications
-      parent: events_explorer
-      weight: 306
-    - name: Analytics
-      url: service_management/events/explorer/analytics
-      identifier: event_explorer_analytics
-      parent: events_explorer
-      weight: 307
-    - name: Saved Views
-      url: service_management/events/explorer/saved_views
-      identifier: event_explorer_saved_views
-      parent: events_explorer
-      weight: 308
-    - name: Triage Inbox
-      identifier: event_triage_inbox
-      url: service_management/events/triage_inbox
-      parent: events
-      weight: 4
-    - name: Correlation
-      url: service_management/events/correlation/
-      identifier: event_correlation
-      parent: events
-      weight: 5
-    - name: Configuration
-      url: service_management/events/correlation/configuration
-      identifier: event_correlation_configure
-      parent: event_correlation
-      weight: 501
-    - name: Triaging & Notifying
-      url: service_management/events/correlation/triage_and_notify
-      identifier: event_correlation_triage_and_notify
-      parent: event_correlation
-      weight: 502
-    - name: Analytics
-      url: service_management/events/correlation/analytics
-      identifier: event_correlation_analytics
-      parent: event_correlation
-      weight: 503
-    - name: Guides
-      url: service_management/events/guides/
-      identifier: events_guides
-      parent: events
-      weight: 10
     - name: Case Management
       url: service_management/case_management/
       pre: case-management
