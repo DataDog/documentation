@@ -3,8 +3,9 @@ title: Error Budget Alerts
 description: "Use Monitors to alert off of the error budget consumption of an SLO"
 aliases:
 - /monitors/service_level_objectives/error_budget/
+- /service_management/service_level_objectives/error_budget/
 further_reading:
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Overview of Service Level Objectives"
 ---
@@ -76,12 +77,12 @@ resource "datadog_monitor" "metric-based-slo" {
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /service_management/service_level_objectives/metric/
-[2]: /service_management/service_level_objectives/monitor/
-[3]: /service_management/service_level_objectives/#key-terminology
+[1]: /service_level_objectives/metric/
+[2]: /service_level_objectives/monitor/
+[3]: /service_level_objectives/#key-terminology
 [4]: https://app.datadoghq.com/slo
 [5]: /monitors/notify/
 [6]: /api/v1/monitors/#create-a-monitor
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
-[8]: /service_management/service_level_objectives/time_slice
+[8]: /service_level_objectives/time_slice
 [9]: /monitors/configuration/#set-alert-aggregation

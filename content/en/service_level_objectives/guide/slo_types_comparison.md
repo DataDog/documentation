@@ -1,17 +1,18 @@
 ---
 title: SLO Type Comparison
-
+aliases:
+- /service_management/service_level_objectives/guide/slo_types_comparison/
 further_reading:
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Overview of Service Level Objectives"
-- link: "/service_management/service_level_objectives/metric/"
+- link: "/service_level_objectives/metric/"
   tag: "Documentation"
   text: "Metric-based SLOs"
-- link: "/service_management/service_level_objectives/monitor/"
+- link: "/service_level_objectives/monitor/"
   tag: "Documentation"
   text: "Monitor-based SLOs"
-- link: "/service_management/service_level_objectives/time_slice/"
+- link: "/service_level_objectives/time_slice/"
   tag: "Documentation"
   text: "Time Slice SLOs"
 - link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
@@ -61,7 +62,7 @@ When creating SLOs, you can choose from the following types:
 [4]: https://docs.datadoghq.com/service_management/service_level_objectives/#slo-widgets
 [5]: https://docs.datadoghq.com/dashboards/guide/slo_data_source/
 [6]: https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data
-[7]: /service_management/service_level_objectives/time_slice/#uptime-calculations
+[7]: /service_level_objectives/time_slice/#uptime-calculations
 [8]: https://docs.datadoghq.com/api/latest/service-level-objectives/
 [9]: https://docs.datadoghq.com/dashboards/widgets/slo/
 [10]: https://docs.datadoghq.com/dashboards/widgets/slo_list/

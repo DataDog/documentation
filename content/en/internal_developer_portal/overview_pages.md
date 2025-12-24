@@ -12,7 +12,7 @@ further_reading:
 - link: "service_management/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
-- link: "service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Service Level Objectives"
 - link: "error_tracking"
@@ -114,7 +114,7 @@ Here are some example customizations you can make with the cloned dashboard:
 [4]: /error_tracking/
 [5]: /watchdog/
 [6]: /monitors/
-[7]: /service_management/service_level_objectives/
+[7]: /service_level_objectives/
 [8]: /account_management/teams/
 [9]: /actions/app_builder/#apps-created-by-datadog
 [10]: /actions/connections

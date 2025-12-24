@@ -1,7 +1,9 @@
 ---
 title: Time Slice SLOs
+aliases:
+- /service_management/service_level_objectives/time_slice/
 further_reading:
-- link: "service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Overview of Service Level Objectives"
 - link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
@@ -18,7 +20,7 @@ further_reading:
 
 Time Slice SLOs allow you to measure reliability using a custom definition of uptime. You define uptime as a condition over a metric timeseries. For example, you can create a latency SLO by defining uptime as whenever p95 latency is less than 1 second.
 
-Time Slice SLOs are a convenient alternative to Monitor-based SLOs. You can create an uptime SLO without going through a monitor, so you don't have to create and maintain both a monitor and an SLO. 
+Time Slice SLOs are a convenient alternative to Monitor-based SLOs. You can create an uptime SLO without going through a monitor, so you don't have to create and maintain both a monitor and an SLO.
 
 ## Create a Time Slice SLO
 

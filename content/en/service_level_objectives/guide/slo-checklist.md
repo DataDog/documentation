@@ -3,6 +3,7 @@ title: SLO Checklist
 
 aliases:
 - /monitors/guide/slo-checklist/
+- /service_management/service_level_objectives/guide/slo-checklist/
 further_reading:
 - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
   tag: 'Blog'
@@ -10,7 +11,7 @@ further_reading:
 - link: 'https://learn.datadoghq.com/courses/intro-to-slo'
   tag: 'Learning Center'
   text: 'Introduction to Service Level Objectives'
-- link: "/service_management/service_level_objectives/guide/slo_types_comparison/"
+- link: "/service_level_objectives/guide/slo_types_comparison/"
   tag: "Documentation"
   text: "Comparison of Datadog SLO Types"
 - link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
@@ -129,5 +130,5 @@ _Example: the latency of all user requests should be less than 250 ms 99% of the
 [4]: /integrations
 [5]: /tracing/trace_pipeline/generate_metrics/
 [6]: /logs/logs_to_metrics/
-[7]: /service_management/service_level_objectives/#searching-and-viewing-slos
-[8]: /service_management/service_level_objectives/guide/slo_types_comparison
+[7]: /service_level_objectives/#searching-and-viewing-slos
+[8]: /service_level_objectives/guide/slo_types_comparison

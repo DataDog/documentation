@@ -1,7 +1,7 @@
 ---
 title: Engineering Report
 further_reading:
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Service Level Objectives"
 - link: "service_management/incident_management/"

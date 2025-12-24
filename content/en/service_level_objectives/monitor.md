@@ -3,6 +3,7 @@ title: Monitor-based SLOs
 description: "Use Monitors to define the Service Level Objective"
 aliases:
 - /monitors/service_level_objectives/monitor/
+- /service_management/service_level_objectives/monitor/
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
@@ -129,7 +130,7 @@ If you pause a Synthetic test, the SLO removes the time period with missing data
 
 [1]: https://app.datadoghq.com/monitors/create
 [2]: https://app.datadoghq.com/slo
-[3]: /service_management/service_level_objectives/metric/
+[3]: /service_level_objectives/metric/
 [4]: /synthetics/api_tests/?tab=httptest#alert-conditions
-[5]: /service_management/service_level_objectives/#slo-status-corrections
+[5]: /service_level_objectives/#slo-status-corrections
 [6]: /monitors/configuration/#no-data

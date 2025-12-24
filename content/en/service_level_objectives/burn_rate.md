@@ -3,6 +3,7 @@ title: Burn Rate Alerts
 description: "Use Monitors to alert off of the burn rate of an SLO"
 aliases:
 - /monitors/service_level_objectives/burn_rate/
+- /service_management/service_level_objectives/burn_rate/
 further_reading:
 - link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
   tag: "Blog"
@@ -169,12 +170,12 @@ resource "datadog_monitor" "metric-based-slo" {
 ```
 
 
-[1]: /service_management/service_level_objectives/metric/
-[2]: /service_management/service_level_objectives/monitor/
+[1]: /service_level_objectives/metric/
+[2]: /service_level_objectives/monitor/
 [3]: https://sre.google/workbook/alerting-on-slos/
 [4]: https://app.datadoghq.com/slo
 [5]: /api/v1/monitors/#create-a-monitor
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
-[7]: /service_management/service_level_objectives/time_slice
+[7]: /service_level_objectives/time_slice
 [8]: /monitors/configuration/#set-alert-aggregation
 

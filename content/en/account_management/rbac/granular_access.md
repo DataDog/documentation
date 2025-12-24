@@ -52,7 +52,7 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [5]: /dashboards/widgets/powerpack/#powerpack-permissions
 [6]: /security/detection_rules/#restrict-edit-permissions
 [7]: /security/suppressions/#restrict-edit-permissions
-[8]: /service_management/service_level_objectives/#permissions
+[8]: /service_level_objectives/#permissions
 [9]: /synthetics/browser_tests/#permissions
 [10]: /service_management/case_management/settings#granular-access-control
 [11]: /getting_started/integrations/#granular-access-control

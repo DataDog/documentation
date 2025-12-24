@@ -4,11 +4,12 @@ description: "Use metrics to define a Service Level Objective"
 aliases:
 - /monitors/service_level_objectives/event/
 - /monitors/service_level_objectives/metric/
+- /service_management/service_level_objectives/metric/
 further_reading:
 - link: "/metrics/"
   tag: "Documentation"
   text: "More information about metrics"
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "SLO overview, configuration, and calculation"
 - link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
@@ -67,9 +68,9 @@ While the SLO remains above the target percentage, the SLO's status will be disp
 [1]: https://docs.datadoghq.com/tracing/generate_metrics/
 [2]: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics
 [3]: https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics/#overview
-[4]: /service_management/service_level_objectives
+[4]: /service_level_objectives
 [5]: https://app.datadoghq.com/slo
 [6]: https://app.datadoghq.com/slo/new/metric
 [7]: /metrics/distributions/#threshold-queries
-[8]: /service_management/service_level_objectives/monitor/
+[8]: /service_level_objectives/monitor/
 [9]: https://docs.datadoghq.com/dashboards/querying/#advanced-graphing

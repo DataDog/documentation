@@ -21,7 +21,7 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Service Management:">}}
-{{< nextlink href="/service_management/service_level_objectives/guide" >}}<i class="icon-slos" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;SLOs{{< /nextlink >}}
+{{< nextlink href="/service_level_objectives/guide" >}}<i class="icon-slos" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;SLOs{{< /nextlink >}}
 {{< nextlink href="/service_management/events/guides" >}}<i class="icon-events" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Events{{< /nextlink >}}
 {{< /whatsnext >}}
 

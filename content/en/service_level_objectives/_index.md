@@ -6,6 +6,8 @@ aliases:
 - /monitors/slos/
 - /monitors/service_level_objectives/
 - /service_management/service_level_objectives/ootb_dashboard
+- /service_management/service_level_objectives/
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
@@ -374,15 +376,15 @@ The SLO statuses are calculated based on the SLO type:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives/guide/slo_types_comparison/
+[1]: /service_level_objectives/guide/slo_types_comparison/
 [2]: https://app.datadoghq.com/slo
-[3]: /service_management/service_level_objectives/metric/
-[4]: /service_management/service_level_objectives/monitor/
-[5]: /service_management/service_level_objectives/time_slice/
+[3]: /service_level_objectives/metric/
+[4]: /service_level_objectives/monitor/
+[5]: /service_level_objectives/time_slice/
 [6]: /monitors/types/metric/?tab=threshold#alert-grouping
-[7]: /service_management/service_level_objectives/metric/#define-queries
-[8]: /service_management/service_level_objectives/monitor/#set-your-slo-targets
-[9]: /service_management/service_level_objectives/metric/#set-your-slo-targets
+[7]: /service_level_objectives/metric/#define-queries
+[8]: /service_level_objectives/monitor/#set-your-slo-targets
+[9]: /service_level_objectives/metric/#set-your-slo-targets
 [10]: /account_management/rbac/
 [11]: /account_management/rbac/permissions/#service-level-objectives/
 [12]: /account_management/rbac/permissions/#monitors
@@ -390,7 +392,7 @@ The SLO statuses are calculated based on the SLO type:
 [14]: /mobile
 [15]: https://apps.apple.com/app/datadog/id1391380318
 [16]: https://play.google.com/store/apps/details?id=com.datadog.app
-[17]: /service_management/service_level_objectives/#saved-views
+[17]: /service_level_objectives/#saved-views
 [18]: /account_management/teams/#associate-resources-with-team-handles
 [19]: /api/latest/events/
 [20]: /dashboards/guide/slo_data_source/

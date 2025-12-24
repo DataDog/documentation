@@ -120,7 +120,7 @@ For more information, see the [Dashboards documentation][16].
 [1]: /universal_service_monitoring
 [2]: /tracing/software_catalog
 [3]: /tracing/services/deployment_tracking/
-[4]: /service_management/service_level_objectives
+[4]: /service_level_objectives
 [5]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
 [6]: /tracing/metrics/metrics_namespace
 [7]: /tracing/guide/ddsketch_trace_metrics/
@@ -133,4 +133,4 @@ For more information, see the [Dashboards documentation][16].
 [14]: /api/latest/service-level-objectives/
 [15]: https://app.datadoghq.com/slo/manage
 [16]: /dashboards
-[17]: /service_management/service_level_objectives/
+[17]: /service_level_objectives/
