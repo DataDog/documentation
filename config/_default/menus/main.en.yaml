@@ -3283,16 +3283,21 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
       weight: 410
+    - name: kubectl Plugin
+      url: containers/kubernetes/kubectl_plugin
+      parent: containers_kubernetes
+      identifier: containers_kubernetes_kubectlplugin
+      weight: 411
     - name: Datadog CSI Driver
       url: containers/kubernetes/csi_driver
       parent: containers_kubernetes
       identifier: csi_driver
-      weight: 411
+      weight: 412
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 412
+      weight: 413
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
@@ -3383,11 +3388,6 @@ menu:
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
       weight: 804
-    - name: kubectl Plugin
-      url: containers/datadog_operator/kubectl_plugin
-      identifier: containers_datadog_operator_kubectlplugin
-      parent: containers_datadog_operator
-      weight: 805
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
