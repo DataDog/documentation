@@ -64,7 +64,7 @@ To address this, organizations can enable **timestamp overrides**, which allow i
 
 Overrides only influence search and analytics. They do not change the history automatically recorded to the incident timeline. They do not apply to the analytic measures `Status Active Duration` or `Status Stable Duration`, which are driven by the cumulative length of status segments on incident timelines.
 
-To enable timestamp overrides, go to [**Service Management** > **Incidents** > **Settings** > **Information**][11].
+To enable timestamp overrides, go to [**Incidents** > **Settings** > **Information**][11].
 
 To create, update, or delete timestamp overrides, users must have the **Incidents Write** permission.
 

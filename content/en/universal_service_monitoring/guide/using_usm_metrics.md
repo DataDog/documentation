@@ -86,7 +86,7 @@ To create an SLO from the Software Catalog:
 
 Optionally, to create an SLO manually using USM metrics:
  
-1. Navigate to [**Service Management > SLOs**][15] and click [**New SLO**][13].
+1. Navigate to [**SLOs**][15] and click [**New SLO**][13].
 2. Select **Metric Based** and create two queries in the **Good events (numerator)** section:
    
    * Query A: Enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field. 

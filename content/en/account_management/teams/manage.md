@@ -85,7 +85,7 @@ In some cases, a team's membership cannot be directly modified within Datadog by
 With subteams, you can nest teams within each other to mimic your company's hierarchy in Datadog, allowing for a more complete and accurate ownership model. Subteams also provide an enhanced filtering experience; select a larger team (like a director-level group) to find all the data connected to any of its subteams.
     {{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Filter Hierarchical Teams" >}}
     
-On the **Subteams** tab, you can add and remove existing teams. For a clear view of a team's place in its hierarchy, go to [**Service Management** > **Teams** > **Map View**][4], then search for the team by name.
+On the **Subteams** tab, you can add and remove existing teams. For a clear view of a team's place in its hierarchy, go to [ **Teams** > **Map View**][4], then search for the team by name.
 To automate subteam management based on your organization’s hierarchical structure, use the [Teams APIs][5].
 
 ## Manage teams through an identity provider

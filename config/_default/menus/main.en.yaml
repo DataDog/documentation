@@ -1436,42 +1436,6 @@ menu:
       identifier: cloudcraft_api_users_info
       parent: cloudcraft_api_users
       weight: 1
-    - name: Watchdog
-      url: watchdog/
-      identifier: watchdog_top_level
-      pre: watchdog
-      parent: platform_heading
-      weight: 60000
-    - name: Alerts
-      url: watchdog/alerts
-      identifier: watchdog_alerts
-      parent: watchdog_top_level
-      weight: 1
-    - name: Impact Analysis
-      url: watchdog/impact_analysis/
-      identifier: watchdog_impact_analysis
-      parent: watchdog_top_level
-      weight: 2
-    - name: RCA
-      url: watchdog/rca/
-      identifier: watchdog_rca
-      parent: watchdog_top_level
-      weight: 3
-    - name: Insights
-      identifier: watchdog_insights
-      url: watchdog/insights
-      parent: watchdog_top_level
-      weight: 4
-    - name: Faulty Deployment Detection
-      url: watchdog/faulty_deployment_detection/
-      identifier: watchdog_faulty_deployment_detection
-      parent: watchdog_top_level
-      weight: 5
-    - name: Faulty Cloud & SaaS API Detection
-      url: watchdog/faulty_cloud_saas_api_detection
-      parent: watchdog_top_level
-      weight: 6
-      identifier: watchdog_faulty_cloud_saas_api_detection
     - name: Bits AI
       url: bits_ai/
       pre: bits-ai
@@ -2121,6 +2085,42 @@ menu:
       parent: metrics_top_level
       identifier: metrics_guide
       weight: 14
+    - name: Watchdog
+      url: watchdog/
+      identifier: watchdog_top_level
+      pre: watchdog
+      parent: platform_heading
+      weight: 90000
+    - name: Alerts
+      url: watchdog/alerts
+      identifier: watchdog_alerts
+      parent: watchdog_top_level
+      weight: 1
+    - name: Impact Analysis
+      url: watchdog/impact_analysis/
+      identifier: watchdog_impact_analysis
+      parent: watchdog_top_level
+      weight: 2
+    - name: RCA
+      url: watchdog/rca/
+      identifier: watchdog_rca
+      parent: watchdog_top_level
+      weight: 3
+    - name: Insights
+      identifier: watchdog_insights
+      url: watchdog/insights
+      parent: watchdog_top_level
+      weight: 4
+    - name: Faulty Deployment Detection
+      url: watchdog/faulty_deployment_detection/
+      identifier: watchdog_faulty_deployment_detection
+      parent: watchdog_top_level
+      weight: 5
+    - name: Faulty Cloud & SaaS API Detection
+      url: watchdog/faulty_cloud_saas_api_detection
+      parent: watchdog_top_level
+      weight: 6
+      identifier: watchdog_faulty_cloud_saas_api_detection
     - name: Internal Developer Portal
       url: internal_developer_portal/
       pre: internal-developer-portal-wui

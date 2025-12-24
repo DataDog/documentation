@@ -16,7 +16,7 @@ By connecting Zoom and Datadog, you can quickly create Zoom meetings to collabor
 
 To install the Datadog for Zoom app:
 
-1. In Datadog, find the Incidents Settings page under **Service Management**.
+1. In Datadog, find the [**Incidents Settings**][3] page.
 2. Go to **Integrations** and enable the **Automatically create a meeting in Zoom for every incident** toggle. This setting replaces the **Add Video Call** button with a **Start Zoom Call** button for one-click Zoom meeting creation from Datadog's incident overview page.
 3. When you click the **Start Zoom Call** button, you are prompted to add the Datadog Zoom App. Be sure to allow it to view and manage information on Zoom's behalf.
 
@@ -48,3 +48,4 @@ Need help? Contact [Datadog support][1].
 
 [1]: /help/
 [2]: https://developers.zoom.us/docs/integrations/oauth-scopes/
+[3]: https://app.datadoghq.com/incidents/settings

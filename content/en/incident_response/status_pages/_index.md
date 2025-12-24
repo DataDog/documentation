@@ -67,7 +67,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
 
 ## Create a status page
 
-1. In Datadog, navigate to [**Service Management > Status Pages**][2].
+1. In Datadog, navigate to [**Status Pages**][2].
 1. Click **Create Status Page** and follow the onboarding flow:
 
    | Field             | Description |

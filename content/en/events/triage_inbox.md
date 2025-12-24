@@ -26,7 +26,7 @@ Case triage and investigation begins in the Triage Inbox, where you can sort, fi
 
 ## Getting Started
 
-1. Navigate to [**Service Management** > **Event Management** > **Triage Inbox**][4].
+1. Navigate to [**Event Management** > **Triage Inbox**][4].
 2. Select a project from the left-hand panel to display out-of-the-box status views such as **Open**, **In Progress**, **Closed**, and **Archived**.
 3. Use the display settings icon to choose between **split view** (for detailed case investigation) or **table view** (for bulk case review and column configuration). Customize your inbox ranking with the **Sort By** dropdown-options include **Priority**, **Created at**, or **Last Updated**. Click **Save** to re-use your customized inbox for future use.
 5. Update the status, priority, and assignment directly on case cards during triage.

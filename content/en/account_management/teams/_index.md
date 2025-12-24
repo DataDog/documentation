@@ -20,7 +20,7 @@ Team membership is flexible. Users can join teams, be added by other members, or
 
 ### Navigation
 
-Access the team directory page from [Organization Settings][1] or by navigating to [**Service Management > Teams**][2]. The [team directory page][1] lists all teams within your organization.
+Access the team directory page from [Organization Settings][1] or by navigating to [**Teams**][2]. The [team directory page][1] lists all teams within your organization.
 
 ### Create team
 
