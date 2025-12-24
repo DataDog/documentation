@@ -287,15 +287,15 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps one or more source attribute(s) or tags to different target attribute or tag. For example, you can remap the `user` attribute to `firstname` to normalize log data in the Log Explorer.
+The remapper processor remaps one or more source attribute(s) or tags to a different target attribute or tag. For example, you can remap the `user` attribute to `firstname` to normalize log data in the Log Explorer.
 
-If the remapper target is an attribute, the processor can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast fails, the original value and type are preserved.
+If the remapper target is an attribute, the processor can also try to cast the value to a new type (`String`, `Integer`, or `Double`). If the cast fails, the original value and type are preserved.
 
-**Note**: The decimal separator for `Double` values need to be `.`.
+**Note**: The decimal separator for `Double` values must be `.`.
 
 ### Naming constraints
 
-Characters `:` and `,`, are not allowed in the target attribute or tag names. Additionally, tag and attribute names must follow the conventions outlined in [Attributes and Aliasing][5].
+Characters `:` and `,` are not allowed in the target attribute or tag names. Additionally, tag and attribute names must follow the conventions outlined in [Attributes and Aliasing][5].
 
 ### Reserved attributes
 
