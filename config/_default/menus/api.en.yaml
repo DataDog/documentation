@@ -11439,6 +11439,66 @@ menu:
           - GetTeamPermissionSettings
         unstable: []
         order: 17
+    - name: Update team notification rule
+      url: '#update-team-notification-rule'
+      identifier: teams-update-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTeamNotificationRule
+        unstable: []
+        order: 30
+    - name: Get team notification rule
+      url: '#get-team-notification-rule'
+      identifier: teams-get-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamNotificationRule
+        unstable: []
+        order: 29
+    - name: Delete team notification rule
+      url: '#delete-team-notification-rule'
+      identifier: teams-delete-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamNotificationRule
+        unstable: []
+        order: 31
+    - name: Create team notification rule
+      url: '#create-team-notification-rule'
+      identifier: teams-create-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamNotificationRule
+        unstable: []
+        order: 28
+    - name: Get team notification rules
+      url: '#get-team-notification-rules'
+      identifier: teams-get-team-notification-rules
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamNotificationRules
+        unstable: []
+        order: 27
     - name: Update a user's membership attributes on a team
       url: '#update-a-users-membership-attributes-on-a-team'
       identifier: teams-update-a-users-membership-attributes-on-a-team
@@ -11657,7 +11717,7 @@ menu:
         operationids:
           - CreateTeamConnections
         unstable: []
-        order: 2
+        order: 25
     - name: List team connections
       url: '#list-team-connections'
       identifier: teams-list-team-connections
@@ -11669,7 +11729,7 @@ menu:
         operationids:
           - ListTeamConnections
         unstable: []
-        order: 1
+        order: 24
     - name: Delete team connections
       url: '#delete-team-connections'
       identifier: teams-delete-team-connections
@@ -11681,7 +11741,7 @@ menu:
         operationids:
           - DeleteTeamConnections
         unstable: []
-        order: 3
+        order: 26
     - name: Get a team hierarchy link
       url: '#get-a-team-hierarchy-link'
       identifier: teams-get-a-team-hierarchy-link
