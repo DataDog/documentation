@@ -4094,171 +4094,251 @@ menu:
       parent: tracing
       identifier: tracing_trace_collection
       weight: 2
-    - name: Automatic Instrumentation
-      url: tracing/trace_collection/automatic_instrumentation/
+    - name: Single Step Instrumentation
+      url: tracing/trace_collection/single-step-apm/
       parent: tracing_trace_collection
-      identifier: automatic_instrumentation
-      weight: 201
-    - name: Using Single Step Instrumentation
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/
-      parent: automatic_instrumentation
       identifier: single_step_apm
-      weight: 2011
-    - name: Single Step APM Instrumentation on Linux
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/linux
+      weight: 201
+    - name: Linux
+      url: tracing/trace_collection/single-step-apm/linux
       parent: single_step_apm
       identifier: single_step_apm_linux
-      weight: 20111
-    - name: Single Step APM Instrumentation on Docker
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/docker
+      weight: 2011
+    - name: Docker
+      url: tracing/trace_collection/single-step-apm/docker
       parent: single_step_apm
       identifier: single_step_apm_docker
-      weight: 20112
-    - name: Single Step APM Instrumentation on Kubernetes
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes
+      weight: 2012
+    - name: Kubernetes
+      url: tracing/trace_collection/single-step-apm/kubernetes
       parent: single_step_apm
       identifier: single_step_apm_kubernetes
-      weight: 20113
-    - name: Using Datadog Tracing Libraries
-      url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
-      parent: automatic_instrumentation
+      weight: 2013
+    - name: Windows IIS
+      url: tracing/trace_collection/single-step-apm/windows
+      parent: single_step_apm
+      identifier: single_step_apm_windows
+      weight: 2014
+    - name: Manually managed SDKs
+      url: tracing/trace_collection/dd_libraries/
+      parent: tracing_trace_collection
       identifier: auto_dd_libraries
-      weight: 2012
-    - name: Custom Instrumentation
+      weight: 202
+    - name: Java
+      url: tracing/trace_collection/dd_libraries/java
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_java
+      weight: 2021
+    - name: Python
+      url: tracing/trace_collection/dd_libraries/python
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_python
+      weight: 2022
+    - name: Ruby
+      url: tracing/trace_collection/dd_libraries/ruby
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_ruby
+      weight: 2023
+    - name: Go
+      url: tracing/trace_collection/dd_libraries/go
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_go
+      weight: 2024
+    - name: Node.js
+      url: tracing/trace_collection/dd_libraries/nodejs
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_nodejs
+      weight: 2025
+    - name: PHP
+      url: tracing/trace_collection/dd_libraries/php
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_php
+      weight: 2026
+    - name: C++
+      url: tracing/trace_collection/dd_libraries/cpp
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_cpp
+      weight: 2027
+    - name: .NET Core
+      url: tracing/trace_collection/dd_libraries/dotnet-core
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_dotnet_core
+      weight: 2028
+    - name: .NET Framework
+      url: tracing/trace_collection/dd_libraries/dotnet-framework
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_dotnet_framework  
+      weight: 2029
+    - name: Android
+      url: tracing/trace_collection/dd_libraries/android
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_android
+      weight: 2030
+    - name: iOS
+      url: tracing/trace_collection/dd_libraries/ios
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_ios
+      weight: 2031
+    - name: Code-based Custom Instrumentation
       url: tracing/trace_collection/custom_instrumentation/
       parent: tracing_trace_collection
       identifier: custom_instrumentation
-      weight: 202
+      weight: 203
     - name: Java
       url: tracing/trace_collection/custom_instrumentation/java/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_java
-      weight: 2021
+      weight: 2031
     - name: Python
       url: tracing/trace_collection/custom_instrumentation/python/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_python
-      weight: 2022
+      weight: 2032
     - name: Ruby
       url: tracing/trace_collection/custom_instrumentation/ruby/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ruby
-      weight: 2023
+      weight: 2033
     - name: Go
       url: tracing/trace_collection/custom_instrumentation/go/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_go
-      weight: 2024
+      weight: 2034
     - name: Node.js
       url: tracing/trace_collection/custom_instrumentation/nodejs/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_nodejs
-      weight: 2025
+      weight: 2035
     - name: PHP
       url: tracing/trace_collection/custom_instrumentation/php/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_php
-      weight: 2026
+      weight: 2036
     - name: C++
       url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_cpp
-      weight: 2027
+      weight: 2037
     - name: .NET
       url: tracing/trace_collection/custom_instrumentation/dotnet/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_dotnet
-      weight: 2028
+      weight: 2038
     - name: Android
       url: tracing/trace_collection/custom_instrumentation/android/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_android
-      weight: 2029
+      weight: 2039
     - name: iOS
       url: tracing/trace_collection/custom_instrumentation/ios/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ios
-      weight: 2030
+      weight: 2040
     - name: Rust
       url: tracing/trace_collection/custom_instrumentation/rust
       parent: custom_instrumentation
       identifier: custom_instrumentation_rust
-      weight: 2031
+      weight: 2041
     - name: Swift
       url: tracing/trace_collection/custom_instrumentation/swift
       parent: custom_instrumentation
       identifier: custom_instrumentation_swift
-      weight: 2032
+      weight: 2042
     - name: Elixir
       url: tracing/trace_collection/custom_instrumentation/elixir
       parent: custom_instrumentation
       identifier: custom_instrumentation_elixir
-      weight: 2033
+      weight: 2043
+    - name: Dynamic Instrumentation
+      url: tracing/trace_collection/dynamic_instrumentation/
+      identifier: dyninst
+      parent: tracing_trace_collection
+      weight: 204
+    - name: Autocomplete and Search
+      url: tracing/trace_collection/dynamic_instrumentation/symdb
+      identifier: dyninst_symdb
+      parent: dyninst
+      weight: 2041
+    - name: Expression Language
+      url: tracing/trace_collection/dynamic_instrumentation/expression-language
+      identifier: dyninst_explang
+      parent: dyninst
+      weight: 2042
+    - name: Sensitive Data Scrubbing
+      url: tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing
+      identifier: dyninst_sensitive_data_scrubbing
+      parent: dyninst
+      weight: 2043
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
       identifier: tracing_compatibility
-      weight: 203
+      weight: 206
     - name: Library Configuration
       url: tracing/trace_collection/library_config/
       parent: tracing_trace_collection
       identifier: tracing_library_config
-      weight: 204
+      weight: 207
     - name: Configuration at Runtime
       url: tracing/trace_collection/runtime_config/
       parent: tracing_trace_collection
       identifier: runtime_config
-      weight: 205
+      weight: 208
     - name: Trace Context Propagation
       url: tracing/trace_collection/trace_context_propagation/
       parent: tracing_trace_collection
       identifier: tracing_context
-      weight: 206
+      weight: 209
     - name: Serverless Application Tracing
       url: serverless/distributed_tracing/
       parent: tracing_trace_collection
       identifier: tracing_serverless
-      weight: 207
+      weight: 210
     - name: Proxy Tracing
       url: tracing/trace_collection/proxy_setup/
       parent: tracing_trace_collection
       identifier: tracing_proxies
-      weight: 208
-    - name: Envoy
-      url: tracing/trace_collection/proxy_setup/envoy
-      parent: tracing_proxies
-      identifier: tracing_proxies_envoy
-      weight: 2081
-    - name: NGINX
-      url: tracing/trace_collection/proxy_setup/nginx
-      parent: tracing_proxies
-      identifier: tracing_proxies_nginx
-      weight: 2082
-    - name: Istio
-      url: tracing/trace_collection/proxy_setup/istio
-      parent: tracing_proxies
-      identifier: tracing_proxies_istio
-      weight: 2083
-    - name: Kong
-      url: tracing/trace_collection/proxy_setup/kong
-      parent: tracing_proxies
-      identifier: tracing_proxies_kong
-      weight: 2084
+      weight: 211
     - name: Apache HTTP Server
       url: tracing/trace_collection/proxy_setup/httpd
       parent: tracing_proxies
       identifier: tracing_proxies_httpd
-      weight: 2085
+      weight: 2111
+    - name: Envoy
+      url: tracing/trace_collection/proxy_setup/envoy
+      parent: tracing_proxies
+      identifier: tracing_proxies_envoy
+      weight: 2112
+    - name: Istio
+      url: tracing/trace_collection/proxy_setup/istio
+      parent: tracing_proxies
+      identifier: tracing_proxies_istio
+      weight: 2113
+    - name: Kong
+      url: tracing/trace_collection/proxy_setup/kong
+      parent: tracing_proxies
+      identifier: tracing_proxies_kong
+      weight: 2114
+    - name: NGINX
+      url: tracing/trace_collection/proxy_setup/nginx
+      parent: tracing_proxies
+      identifier: tracing_proxies_nginx
+      weight: 2115
+    - name: Amazon API Gateway
+      url: tracing/trace_collection/proxy_setup/apigateway
+      parent: tracing_proxies
+      identifier: tracing_proxies_apigateway
+      weight: 2116
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
       identifier: tracing_naming_convention
-      weight: 209
+      weight: 212
     - name: Span Links
       url: tracing/trace_collection/span_links
       parent: tracing_trace_collection
       identifier: tracing_span_links
-      weight: 211
+      weight: 213
     - name: APM Metrics Collection
       url: tracing/metrics/
       parent: tracing
@@ -4454,21 +4534,6 @@ menu:
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 1003
-    - name: Dynamic Instrumentation
-      url: tracing/dynamic_instrumentation/
-      identifier: dyninst
-      parent: tracing
-      weight: 11
-    - name: Enabling
-      url: tracing/dynamic_instrumentation/enabling
-      identifier: dyninst_enable
-      parent: dyninst
-      weight: 1101
-    - name: Expression Language
-      url: tracing/dynamic_instrumentation/expression-language
-      identifier: dyninst_explang
-      parent: dyninst
-      weight: 1102
     - name: Live Debugger
       url: tracing/live_debugger/
       identifier: live_debugger
@@ -6565,11 +6630,6 @@ menu:
       parent: cloudprem_installation
       identifier: cloudprem_azure_aks
       weight: 202
-    # - name: Kubernetes with NGINX
-    #   url: /cloudprem/install/kubernetes_nginx
-    #   parent: cloudprem_installation
-    #   identifier: cloudprem_kubernetes_nginx
-    #   weight: 203
     - name: Log Ingestion
       url: /cloudprem/ingest_logs/
       parent: cloudprem
@@ -6757,7 +6817,7 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_content_packs
       weight: 101
-    - name: Threat Intelligence
+    - name: Bring Your Own Threat Intelligence
       url: security/cloud_siem/ingest_and_enrich/threat_intelligence
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
@@ -6852,11 +6912,16 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
       weight: 302
+    - name: IOC Explorer
+      url: security/cloud_siem/triage_and_investigate/ioc_explorer
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_ioc_explorer
+      weight: 303
     - name: Investigator
       url: security/cloud_siem/triage_and_investigate/investigator
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigator
-      weight: 303
+      weight: 304
     - name: Respond and Report
       url: security/cloud_siem/respond_and_report
       parent: cloud_siem

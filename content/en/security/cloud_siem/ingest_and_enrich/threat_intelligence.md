@@ -1,5 +1,5 @@
 ---
-title: Threat Intelligence
+title: Bring Your Own Threat Intelligence
 disable_toc: false
 aliases:
   - /security/cloud_siem/threat_intelligence
@@ -7,13 +7,14 @@ further_reading:
 - link: "security/cloud_siem/detection_rules"
   tag: "Documentation"
   text: "Create custom detection rules"
+- link: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+  tag: documentation
+  text: IOC Explorer
 ---
 
 ## Overview
 
 Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This article explains how to extend that functionality by enriching logs with your own custom threat intelligence feeds.
-
-## Bring your own threat intelligence
 
 Cloud SIEM supports enriching and searching logs using threat intelligence indicators of compromise (IOCs) stored in Datadog reference tables. [Reference Tables][7] allow you to combine metadata with information already in Datadog.
 
@@ -38,21 +39,21 @@ When Cloud SIEM processes a log, the log's IP and domain attributes are evaluate
 - Cloud SIEM evaluates logs in real time and uses both [Datadog-curated threat intelligence][10] and your own reference tables.
 - Reference tables are the mechanism for storing and joining your custom IoCs with logs and detections.
 
-### Storing indicators of compromise in reference tables
+### Store indicators of compromise in reference tables
 
 Threat intelligence is supported in the CSV format, and requires a table for each Indicator type (for example, IP address or domain) and requires the following columns:
 
 #### CSV structure for IP address
 
-| Field            | Data  | Description                                                                                     | Required | Example                          |
-|-------------------|-------|-------------------------------------------------------------------------------------------------|----------|----------------------------------|
-| ip_address        | text  | The primary key for the reference table in the IPv4 dot notation format.                       | true     | 192.0.2.1                       |
-| additional_data   | json  | Additional data to enrich the logs.                                                            | false    | `{"ref":"hxxp://example.org"}`    |
-| category          | text  | The threat intel [category][8]. This is used by some out-of-the-box detection rules.                | true     | Malware                          |
-| intention         | text  | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                  | true     | malicious                        |
-| source            | text  | The name of the source and the link to its site, such as your team and your team's wiki.       | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
+| Field           | Data | Description                                                                              | Required | Example                                                                   |
+|-----------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
+| ip_address      | text | The primary key for the reference table in the IPv4 dot notation format.                 | true     | 192.0.2.1                                                                 |
+| additional_data | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}`                                            |
+| category        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.     | true     | Malware                                                                   |
+| intention       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | malicious                                                                 |
+| source          | text | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV.</div>
+<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:</div>
 
 ```
 ip_address,additional_data,category,intention,source
@@ -63,15 +64,15 @@ ip_address,additional_data,category,intention,source
 
 #### CSV structure for domain
 
-| Field            | Data  | Description                                                                                     | Required | Example                          |
-|-------------------|-------|-------------------------------------------------------------------------------------------------|----------|----------------------------------|
-| domain            | text  | The primary key for the reference table.                                                        | true     | mal-domain.com                  |
-| additional_data   | json  | Additional data to enrich the trace.                                                           | false    | `{"ref":"hxxp://example.org"}`    |
-| category          | text  | The threat intel [category][8]. This is used by some out-of-the-box detection rules.                | true     | Phishing                         |
-| intention         | text  | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                  | true     | malicious                        |
-| source            | text  | The name of the source and the link to its site, such as your team and your team's wiki.       | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
+| Field           | Data | Description                                                                              | Required | Example                                                                   |
+|-----------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
+| domain          | text | The primary key for the reference table.                                                 | true     | mal-domain.com                                                            |
+| additional_data | json | Additional data to enrich the trace.                                                     | false    | `{"ref":"hxxp://example.org"}`                                            |
+| category        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.     | true     | Phishing                                                                  |
+| intention       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | malicious                                                                 |
+| source          | text | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
-### Uploading and enabling your own threat intelligence
+### Upload and enable your own threat intelligence
 
 Datadog supports creating reference tables either by a manual upload or by periodically retrieving the data from Amazon S3, Azure storage, or Google Cloud storage.
 
@@ -110,15 +111,15 @@ In Datadog Event Management, it may appear that data has been fetched from the c
 - The update replaces the entire table with the new data.
 In case of a duplicated primary key, the rows with the duplicated key are not written, and an error is shown in the reference table detail page.
 
-## Threat intelligence in the user interface
+## View threat intelligence data in Datadog
 
 To enable Cloud SIEM threat intelligence data for reference tables:
 1. Navigate to [Threat Intelligence][3].
-1. For the table you want to see Cloud SIEM threat intelligence data, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
+1. For the table you want to see Cloud SIEM threat intelligence data for, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
 
-After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the table using a specific Indicator of Compromise (IoC) key, such as an IP address or domain. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
+After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the table using a specific Indicator of Compromise (IoC) key, such as an IP address or domain. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response. A threat intelligence reference table can be shared across multiple security products.
 
-A threat intelligence reference table can be shared across multiple security products.
+You can view your threat intelligence data in the [IOC Explorer][11].
 
 ## Further reading
 
@@ -134,3 +135,4 @@ A threat intelligence reference table can be shared across multiple security pro
 [8]: /security/threat_intelligence/#threat-intelligence-categories
 [9]: /security/threat_intelligence/#threat-intelligence-intents
 [10]: /security/threat_intelligence#threat-intelligence-sources
+[11]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
