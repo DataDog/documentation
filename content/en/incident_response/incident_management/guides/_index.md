@@ -5,7 +5,7 @@ aliases:
 private: true
 disable_toc: true
 further_reading:
-- link: "/service_management/incident_management"
+- link: "/incident_response/incident_management"
   tag: "Documentation"
   text: "Learn more about Incident Management"
 - link: "https://app.datadoghq.com/release-notes?category=Service%20Management"

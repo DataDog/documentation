@@ -3,7 +3,7 @@ title: Timeline
 aliases:
 - /service_management/incident_management/investigate/timeline/
 further_reading:
-- link: "/service_management/incident_management/investigate/"
+- link: "/incident_response/incident_management/investigate/"
   tag: "Documentation"
   text: "Investigate incidents"
 ---
@@ -56,6 +56,6 @@ You can also add an image to an existing cell:
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /service_management/incident_management/#integrations
+[1]: /incident_response/incident_management/#integrations
 [2]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
 [3]: https://app.datadoghq.com/organization-settings/public-sharing/settings

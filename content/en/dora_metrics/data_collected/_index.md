@@ -142,5 +142,5 @@ Using commit-level granularity provides a more accurate view of engineering perf
 [12]: /dora_metrics/deployments/#limitations
 [13]: https://www.datadoghq.com/blog/service-catalog-setup/
 [14]: https://app.datadoghq.com/incidents
-[15]: /service_management/incident_management/describe#attributes
+[15]: /incident_response/incident_management/describe#attributes
 [16]: /dora_metrics/

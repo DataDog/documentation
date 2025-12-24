@@ -6,10 +6,10 @@ aliases:
 - /service_management/app_builder/tables/
 - /service_management/app_builder/components/tables
 further_reading:
-- link: "/service_management/app_builder/components/"
+- link: "/actions/app_builder/components/"
   tag: "Documentation"
   text: "Components"
-- link: "/service_management/app_builder/build/"
+- link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
 ---

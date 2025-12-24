@@ -3,7 +3,7 @@ title: Notification Rules
 aliases:
 - /service_management/incident_management/incident_settings/notification_rules/
 further_reading:
-- link: "/service_management/incident_management/incident_settings/templates"
+- link: "/incident_response/incident_management/incident_settings/templates"
   tag: "Documentation"
   text: "Customize message templates"
 ---
@@ -64,7 +64,7 @@ When defining a notification rule's recipients, you can use `@` handles for any 
 [1]: https://app.datadoghq.com/incidents/settings#Rules
 [2]: /monitors/notifications/?tab=is_alert#configure-notifications-and-automations
 [3]: /mobile/
-[4]: /service_management/on-call/
+[4]: /incident_response/on-call/
 [5]: /actions/workflows/
 [6]: /integrations/webhooks/
-[7]: /service_management/on-call/
+[7]: /incident_response/on-call/

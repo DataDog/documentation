@@ -3,13 +3,13 @@ title: Offboarding teams and users from Datadog On-Call
 aliases:
 - /service_management/on-call/guides/offboarding-teams-and-users/
 further_reading:
-- link: "/service_management/on-call/"
+- link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call"
-- link: "/service_management/on-call/teams/"
+- link: "/incident_response/on-call/teams/"
   tag: "Documentation"
   text: "Teams"
-- link: "/service_management/on-call/schedules/"
+- link: "/incident_response/on-call/schedules/"
   tag: "Documentation"
   text: "Schedules"
 ---
@@ -71,8 +71,8 @@ As an admin, you can also manage this yourself by navigating to **On-Call > Sett
 
 **Note**, Notification Preferences make a user pageable and therefore billable. Having only contact methods (for example, push notifications) defined is a non-billable action and won't incur charges.
 
-[1]: /service_management/on-call/
-[2]: /service_management/on-call/teams/
-[3]: /service_management/on-call/schedules/
-[4]: /service_management/on-call/escalation_policies/
+[1]: /incident_response/on-call/
+[2]: /incident_response/on-call/teams/
+[3]: /incident_response/on-call/schedules/
+[4]: /incident_response/on-call/escalation_policies/
 [5]: /account_management/rbac/

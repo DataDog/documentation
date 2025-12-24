@@ -6,10 +6,10 @@ aliases:
 - /service_management/app_builder/custom_charts/
 - /service_management/app_builder/components/custom_charts
 further_reading:
-- link: "/service_management/app_builder/components/"
+- link: "/actions/app_builder/components/"
   tag: "Documentation"
   text: "Components"
-- link: "/service_management/workflows/build/"
+- link: "/incident_response/workflows/build/"
   tag: "Documentation"
   text: "Build Apps"
 ---

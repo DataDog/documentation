@@ -59,6 +59,6 @@ In case management, _views_ group cases based on a configured query. You can set
 
 [1]: https://app.datadoghq.com/event/correlation
 [2]: https://app.datadoghq.com/cases?query=status%3AOPEN%20creation_source%3AEVENT_MANAGEMENT&page=1&page-size=25&sort=created_at
-[3]: /service_management/case_management/settings#set-up-integrations
-[4]: /service_management/case_management/view_and_manage#create-a-view
-[5]: /service_management/case_management/view_and_manage
+[3]: /incident_response/case_management/settings#set-up-integrations
+[4]: /incident_response/case_management/view_and_manage#create-a-view
+[5]: /incident_response/case_management/view_and_manage

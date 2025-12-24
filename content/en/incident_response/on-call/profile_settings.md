@@ -3,7 +3,7 @@ title: Profile Settings
 aliases:
 - /service_management/on-call/profile_settings/
 further_reading:
-- link: '/service_management/on-call/'
+- link: '/incident_response/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---
@@ -70,6 +70,6 @@ Under **Other Notifications**, you can opt to receive a **Shift reminder** befor
 [1]: https://app.datadoghq.com/on-call/profile
 [2]: /service_management/mobile/?tab=ios
 [3]: /mobile
-[4]: /service_management/on-call/guides/configure-mobile-device-for-on-call
-[5]: /service_management/on-call/routing_rules
-[6]: /service_management/on-call/escalation_policies
+[4]: /incident_response/on-call/guides/configure-mobile-device-for-on-call
+[5]: /incident_response/on-call/routing_rules
+[6]: /incident_response/on-call/escalation_policies

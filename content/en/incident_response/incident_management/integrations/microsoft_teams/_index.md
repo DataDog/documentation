@@ -4,7 +4,7 @@ description: Integrate Microsoft Teams with Datadog Incident Management to autom
 aliases:
 - /service_management/incident_management/integrations/microsoft_teams/
 further_reading:
-- link: "/service_management/incident_management/incident_settings/integrations"
+- link: "/incident_response/incident_management/incident_settings/integrations"
   tag: "Documentation"
   text: "Incident Integrations Settings"
 - link: "/integrations/microsoft-teams"
@@ -147,4 +147,4 @@ You can view the full list of available commands at any time by typing `@Datadog
 [1]: /integrations/microsoft-teams/?tab=datadogapprecommended
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
 [3]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
-[4]: /service_management/incident_management/incident_settings/notification_rules
+[4]: /incident_response/incident_management/incident_settings/notification_rules

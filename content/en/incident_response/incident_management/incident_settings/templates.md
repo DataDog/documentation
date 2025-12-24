@@ -3,7 +3,7 @@ title: Templates
 aliases:
 - /service_management/incident_management/incident_settings/templates/
 further_reading:
-- link: "/service_management/incident_management/notification"
+- link: "/incident_response/incident_management/notification"
   tag: "Documentation"
   text: "Learn more about Incident Management Notifications"
 ---
@@ -46,6 +46,6 @@ To create a postmortem template:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/notifications
+[1]: /incident_response/incident_management/notifications
 [2]: /notebooks/
 [3]: /integrations/confluence/

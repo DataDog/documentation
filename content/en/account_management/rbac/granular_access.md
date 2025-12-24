@@ -54,7 +54,7 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [7]: /security/suppressions/#restrict-edit-permissions
 [8]: /service_level_objectives/#permissions
 [9]: /synthetics/browser_tests/#permissions
-[10]: /service_management/case_management/settings#granular-access-control
+[10]: /incident_response/case_management/settings#granular-access-control
 [11]: /getting_started/integrations/#granular-access-control
 [12]: /reference_tables/#permissions
 [13]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-app
@@ -66,6 +66,6 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [19]: /real_user_monitoring
 [20]: /account_management/org_settings/cross_org_visibility/#permissions
 [21]: /sheets/#permissions
-[22]: /service_management/on-call/#granular-access-control
+[22]: /incident_response/on-call/#granular-access-control
 [23]: /observability_pipelines/configuration/access_control/
 [24]: /logs/log_configuration/pipelines/#pipeline-permissions

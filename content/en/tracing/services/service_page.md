@@ -273,7 +273,7 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [3]: /monitors/types/apm/
 [4]: /tracing/error_tracking/
 [5]: /service_level_objectives/
-[6]: /service_management/incident_management/
+[6]: /incident_response/incident_management/
 [7]: /watchdog/
 [8]: /tracing/metrics/metrics_namespace/
 [10]: /dashboards/

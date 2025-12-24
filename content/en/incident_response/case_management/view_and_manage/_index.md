@@ -3,7 +3,7 @@ title: View and Manage Cases
 aliases:
 - /service_management/case_management/view_and_manage/
 further_reading:
-- link: "service_management/case_management/settings"
+- link: "incident_response/case_management/settings"
   tag: "Documentation"
   text: "Case settings"
 ---
@@ -110,9 +110,9 @@ You can export cases directly from a case details page:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: /service_management/case_management/create_notifications_and_third_party_tickets
+[2]: /incident_response/case_management/create_notifications_and_third_party_tickets
 [3]: /notebooks/
-[4]: /service_management/incident_management/#describing-the-incident
-[5]: /service_management/case_management/settings/#jira
+[4]: /incident_response/incident_management/#describing-the-incident
+[5]: /incident_response/case_management/settings/#jira
 [6]: /coscreen/
 [7]: https://docs.datadoghq.com/dashboards/

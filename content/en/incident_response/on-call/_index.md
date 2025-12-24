@@ -85,11 +85,11 @@ To restrict access to an On-Call resource:
 To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call profile settings][2] to receive notifications.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/service_management/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty.{{< /nextlink >}}
-  {{< nextlink href="/service_management/on-call/triggering_pages">}}<u>Trigger a Page</u>: Page a team through monitors, incidents, security signals, etc.; or manually send a Page through Datadog, Slack, Microsoft Teams, or the Datadog API. {{< /nextlink >}}
-  {{< nextlink href="/service_management/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
-  {{< nextlink href="/service_management/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}
-  {{< nextlink href="/service_management/on-call/profile_settings">}}<u>Profile Settings</u>: Configure your contact methods and notification preferences to ensure you receive timely and effective Pages.{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty.{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/triggering_pages">}}<u>Trigger a Page</u>: Page a team through monitors, incidents, security signals, etc.; or manually send a Page through Datadog, Slack, Microsoft Teams, or the Datadog API. {{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/profile_settings">}}<u>Profile Settings</u>: Configure your contact methods and notification preferences to ensure you receive timely and effective Pages.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Billing
@@ -100,8 +100,8 @@ On-Call is a seat-based SKU. To learn more about how On-Call is billed and how t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/on-call/teams
-[2]: /service_management/on-call/profile_settings
+[1]: /incident_response/on-call/teams
+[2]: /incident_response/on-call/profile_settings
 [3]: /account_management/rbac/granular_access/
 [4]: /account_management/rbac/#role-based-access-control
 [5]: https://www.datadoghq.com/pricing/?product=incident-response#products

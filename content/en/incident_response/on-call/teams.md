@@ -3,7 +3,7 @@ title: Onboard a Team
 aliases:
 - /service_management/on-call/teams/
 further_reading:
-- link: '/service_management/on-call/'
+- link: '/incident_response/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---
@@ -50,10 +50,10 @@ Ensure that your On-Call Team members have set up their [Profile Settings][8].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/teams/
-[2]: /service_management/on-call/
+[2]: /incident_response/on-call/
 [3]: https://app.datadoghq.com/organization-settings/teams
 [4]: https://app.datadoghq.com/on-call/
-[5]: /service_management/on-call/escalation_policies
-[6]: /service_management/on-call/schedules
-[7]: /service_management/on-call/pages
-[8]: /service_management/on-call/profile_settings
+[5]: /incident_response/on-call/escalation_policies
+[6]: /incident_response/on-call/schedules
+[7]: /incident_response/on-call/pages
+[8]: /incident_response/on-call/profile_settings

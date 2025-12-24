@@ -105,19 +105,19 @@ You can declare an incident from individual Handoff Notification cards.
 ## What's next
 
 {{< whatsnext desc="Add helpful information to your incident and give context to everyone that is involved in the investigation.">}}
-    {{< nextlink href="/service_management/incident_management/describe" >}}Describe the Incident: Add context and details{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/describe" >}}Describe the Incident: Add context and details{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents
-[2]: /service_management/incident_management/incident_settings#information
+[2]: /incident_response/incident_management/incident_settings#information
 [3]: /security/workload_protection/security_signals/#declare-an-incident
 [4]:/security/workload_protection/security_signals/#declare-an-incident
-[5]: /service_management/case_management/view_and_manage
-[6]: /service_management/incident_management/datadog_clipboard
+[5]: /incident_response/case_management/view_and_manage
+[6]: /incident_response/incident_management/datadog_clipboard
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [8]: https://app.datadoghq.com/synthetics/tests
 [9]: https://app.datadoghq.com/incidents/settings?section=global-settings
-[10]: /service_management/incident_management/incident_settings/property_fields
-[11]: /service_management/incident_management/incident_settings/notification_rules
-[12]: /service_management/on-call/
+[10]: /incident_response/incident_management/incident_settings/property_fields
+[11]: /incident_response/incident_management/incident_settings/notification_rules
+[12]: /incident_response/on-call/
 [13]: https://app.datadoghq.com/on-call/pages

@@ -3,10 +3,10 @@ title: Describe an Incident
 aliases:
 - /service_management/incident_management/describe/
 further_reading:
-- link: "/service_management/incident_management/incident_settings"
+- link: "/incident_response/incident_management/incident_settings"
   tag: "Documentation"
   text: "Customize incidents in Incident Settings"
-- link: "/service_management/incident_management/notification"
+- link: "/incident_response/incident_management/notification"
   tag: "Documentation"
   text: "Configure Incident Notifications"
 ---
@@ -39,5 +39,5 @@ The default statuses are **Active**, **Stable**, and **Resolved**. You can add t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/declare
+[1]: /incident_response/incident_management/declare
 [2]: https://app.datadoghq.com/incidents/settings#Property-Fields

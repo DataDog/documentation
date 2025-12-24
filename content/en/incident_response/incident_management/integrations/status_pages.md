@@ -7,7 +7,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/status-pages
   tag: Blog
   text: Keep stakeholders informed with Datadog Status Pages
-- link: "/service_management/status_pages/"
+- link: "/incident_response/status_pages/"
   tag: "Documentation"
   text: "Learn more about Datadog Status Pages"
 ---

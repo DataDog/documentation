@@ -3,7 +3,7 @@ title: Schedules
 aliases:
 - /service_management/on-call/schedules/
 further_reading:
-- link: '/service_management/on-call/'
+- link: '/incident_response/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---
@@ -121,4 +121,4 @@ When team members leave your organisation, they are not automatically removed fr
 [3]: https://support.google.com/calendar/answer/37100?hl=en&co=GENIE.Platform%3DDesktop
 [4]: https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-com-or-outlook-on-the-web-cff1429c-5af6-41ec-a5b4-74f2c278e98c
 [5]: https://support.apple.com/en-us/102301
-[6]: /service_management/on-call/profile_settings/
+[6]: /incident_response/on-call/profile_settings/

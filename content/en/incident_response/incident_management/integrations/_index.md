@@ -4,7 +4,7 @@ description: "Learn how to connect Datadog Incident Management with third-party 
 aliases:
 - /service_management/incident_management/integrations/
 further_reading:
-- link: "/service_management/incident_management/incident_settings/integrations"
+- link: "/incident_response/incident_management/incident_settings/integrations"
   tag: "Documentation"
   text: "Incident Settings: Integrations"
 ---
@@ -26,16 +26,16 @@ Configure and manage incident-related integrations from the **Incident Settings*
 ## Setup
 
 {{< whatsnext desc="Set up and use the following integrations within the context of Datadog Incident Management:">}}
-    {{< nextlink href="/service_management/incident_management/integrations/slack" >}}Slack{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/integrations/microsoft_teams" >}}Microsoft Teams{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/integrations/servicenow" >}}ServiceNow{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/integrations/status_pages" >}}Status Pages{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/integrations/statuspage" >}}Atlassian Statuspage{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/integrations/slack" >}}Slack{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/integrations/microsoft_teams" >}}Microsoft Teams{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/integrations/servicenow" >}}ServiceNow{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/integrations/status_pages" >}}Status Pages{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/integrations/statuspage" >}}Atlassian Statuspage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/incident_settings/integrations
+[1]: /incident_response/incident_management/incident_settings/integrations

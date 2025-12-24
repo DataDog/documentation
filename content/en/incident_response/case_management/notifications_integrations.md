@@ -4,7 +4,7 @@ aliases:
 - /service_management/case_management/create_notifications_and_third_party_tickets
 - /service_management/case_management/notifications_integrations/
 further_reading:
-- link: "/service_management/case_management/troubleshooting"
+- link: "/incident_response/case_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
 ---
@@ -146,4 +146,4 @@ When enabled, any case that meets your specified query criteria (at any point in
 [1]: https://app.datadoghq.com/cases/settings
 [2]: /integrations/jira/#configure-a-jira-webhook
 [3]: /integrations/servicenow/#itom-and-itsm-setup
-[4]: /service_management/on-call/
+[4]: /incident_response/on-call/

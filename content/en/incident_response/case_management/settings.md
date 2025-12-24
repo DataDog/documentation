@@ -3,10 +3,10 @@ title: Settings
 aliases:
 - /service_management/case_management/settings/
 further_reading:
-- link: "/service_management/case_management/troubleshooting"
+- link: "/incident_response/case_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
-- link: "/service_management/case_management/customization"
+- link: "/incident_response/case_management/customization"
   tag: "Documentation"
   text: "Case Customization"
 ---
@@ -53,5 +53,5 @@ Add custom case types and attributes to projects so that you can tailor your cas
 
 [1]: /account_management/rbac/granular_access
 [2]: https://app.datadoghq.com/cases/settings
-[3]: /service_management/case_management/create_notifications_and_third_party_tickets
-[4]: /service_management/case_management/customization
+[3]: /incident_response/case_management/create_notifications_and_third_party_tickets
+[4]: /incident_response/case_management/customization

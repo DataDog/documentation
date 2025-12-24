@@ -1,7 +1,7 @@
 ---
 title: Routing Rules
 further_reading:
-- link: '/service_management/on-call/'
+- link: '/incident_response/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 aliases:
@@ -65,6 +65,6 @@ Routing rules use [Datadog query syntax][3] and support multiple `if/else` condi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/on-call/teams
+[1]: /incident_response/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
 [3]: /tracing/trace_explorer/query_syntax/

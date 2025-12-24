@@ -3,7 +3,7 @@ title: Case automation rules
 aliases:
 - /service_management/case_management/automation_rules/
 further_reading:
-- link: "/service_management/case_management"
+- link: "/incident_response/case_management"
   tag: "Documentation"
   text: "Learn more about Case management"
 ---

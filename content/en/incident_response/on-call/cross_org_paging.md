@@ -4,7 +4,7 @@ aliases:
 - /service_management/on-call/cross_org_paging/
 private: true
 further_reading:
-- link: '/service_management/on-call/'
+- link: '/incident_response/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---

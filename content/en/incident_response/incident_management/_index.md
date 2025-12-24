@@ -51,7 +51,7 @@ Incident Management requires no installation. Get started by taking a Learning C
 {{< whatsnext desc="Learn more about Incident Management:">}}
     {{< nextlink href="https://learn.datadoghq.com/courses/intro-to-incident-management" >}}Learn about Datadog Incident Management by working through a hands-on examples{{< /nextlink >}}
     {{< nextlink href="https://docs.datadoghq.com/getting_started/incident_management/" >}}Guided walkthrough of an Incident workflow{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/declare" >}}Declare an incident{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/declare" >}}Declare an incident{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## View your incidents
@@ -120,11 +120,11 @@ Incident Management is a seat-based SKU. To learn more about how Incident Manage
 [3]: /mobile
 [4]: https://apps.apple.com/app/datadog/id1391380318
 [5]: https://play.google.com/store/apps/details?id=com.datadog.app
-[6]: /service_management/incident_management/declare
+[6]: /incident_response/incident_management/declare
 [7]: /account_management/teams/
 [8]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [9]: /tracing/#2-instrument-your-application
-[10]: /service_management/incident_management/analytics/
+[10]: /incident_response/incident_management/analytics/
 [11]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [12]: /integrations/pagerduty/
 [13]: /integrations/opsgenie/
@@ -134,16 +134,16 @@ Incident Management is a seat-based SKU. To learn more about how Incident Manage
 [17]: /integrations/webhooks/#sending-sms-through-twilio
 [18]: /integrations/statuspage/
 [19]: /integrations/servicenow/
-[20]: /service_management/incident_management/describe
+[20]: /incident_response/incident_management/describe
 [21]: /coterm
 [22]: /integrations/confluence/
 [23]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [24]: /integrations/zoom-incident-management/
 [25]: /integrations/statuspage/
-[26]: /service_management/status_pages/
-[27]: /service_management/on-call/
+[26]: /incident_response/status_pages/
+[27]: /incident_response/on-call/
 [28]: /notebooks/
 [29]: /actions/workflows/
-[30]: /service_management/incident_management/declare#from-a-monitor
+[30]: /incident_response/incident_management/declare#from-a-monitor
 [31]: https://www.datadoghq.com/pricing/?product=incident-response#products
 [32]: /account_management/billing/incident_response/

@@ -3,7 +3,7 @@ title: Escalation Policies
 aliases:
 - /service_management/on-call/escalation_policies/
 further_reading:
-- link: '/service_management/on-call/'
+- link: '/incident_response/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---
@@ -94,6 +94,6 @@ Common use cases for paging an entire Team are:
 - Maximum number of notify targets (individuals, teams, or schedules) per escalation step: 10
 - Minimum time before escalation to the next step: one minute
 
-[1]: /service_management/on-call/teams
+[1]: /incident_response/on-call/teams
 [2]: https://app.datadoghq.com/on-call/escalation-policies
 [3]: https://app.datadoghq.com/on-call/escalation-policies/create

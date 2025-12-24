@@ -33,11 +33,11 @@ While investigating, populate the case with graphs, logs, and other telemetry da
 
 ## Getting started
 {{< whatsnext desc="Learn more about case management:">}}
-    {{< nextlink href="/service_management/case_management/create_case" >}}Create a case{{< /nextlink >}}
-    {{< nextlink href="/service_management/case_management/projects" >}}Projects{{< /nextlink >}}
-    {{< nextlink href="/service_management/case_management/create_notifications_and_third_party_tickets" >}}Create notifications and third party tickets{{< /nextlink >}}
-    {{< nextlink href="/service_management/case_management/view_and_manage" >}}View and manage cases{{< /nextlink >}}
-    {{< nextlink href="/service_management/case_management/settings" >}}Manage membership and status transitions within projects{{< /nextlink >}}
+    {{< nextlink href="/incident_response/case_management/create_case" >}}Create a case{{< /nextlink >}}
+    {{< nextlink href="/incident_response/case_management/projects" >}}Projects{{< /nextlink >}}
+    {{< nextlink href="/incident_response/case_management/create_notifications_and_third_party_tickets" >}}Create notifications and third party tickets{{< /nextlink >}}
+    {{< nextlink href="/incident_response/case_management/view_and_manage" >}}View and manage cases{{< /nextlink >}}
+    {{< nextlink href="/incident_response/case_management/settings" >}}Manage membership and status transitions within projects{{< /nextlink >}}
 
 {{< /whatsnext >}}
 

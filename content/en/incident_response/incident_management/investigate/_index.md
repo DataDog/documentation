@@ -6,10 +6,10 @@ aliases:
 - /service_management/incident_management/incident_details
 - /service_management/incident_management/investigate/
 further_reading:
-- link: "/service_management/incident_management/declare"
+- link: "/incident_response/incident_management/declare"
   tag: "Documentation"
   text: "Declare an Incident"
-- link: "/service_management/incident_management/describe"
+- link: "/incident_response/incident_management/describe"
   tag: "Documentation"
   text: "Describe an Incident"
 ---
@@ -65,7 +65,7 @@ In addition to housing your property fields, the Overview tab also provides the 
 After declaring an incident, responders can use the Incident Details Page to apply available information so that they can describe and analyze the incident thoroughly. 
 
 {{< whatsnext desc="To learn more about other investigative tools, see the following pages:">}}
-    {{< nextlink href="/service_management/incident_management/investigate/timeline" >}}<strong>Timeline</strong>: Track the sequence of events leading to and during the incident. Use visualizations and time-based data to understand the chronology and impact of events.
+    {{< nextlink href="/incident_response/incident_management/investigate/timeline" >}}<strong>Timeline</strong>: Track the sequence of events leading to and during the incident. Use visualizations and time-based data to understand the chronology and impact of events.
 {{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -73,11 +73,11 @@ After declaring an incident, responders can use the Incident Details Page to app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/describe/#incident-details
-[2]: /service_management/incident_management/#integrations
-[3]: /service_management/incident_management/incident_settings#integrations
-[4]: /service_management/incident_management/incident_settings/templates#postmortems
+[1]: /incident_response/incident_management/describe/#incident-details
+[2]: /incident_response/incident_management/#integrations
+[3]: /incident_response/incident_management/incident_settings#integrations
+[4]: /incident_response/incident_management/incident_settings/templates#postmortems
 [5]: https://app.datadoghq.com/incidents/settings#Postmortems
-[6]: /service_management/incident_management/incident_settings/property_fields
-[7]: /service_management/incident_management/notification/
-[8]: /service_management/incident_management/investigate/timeline
+[6]: /incident_response/incident_management/incident_settings/property_fields
+[7]: /incident_response/incident_management/notification/
+[8]: /incident_response/incident_management/investigate/timeline

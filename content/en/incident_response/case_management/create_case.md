@@ -3,10 +3,10 @@ title: Create a Case
 aliases:
 - /service_management/case_management/create_case/
 further_reading:
-- link: "service_management/case_management/view_and_manage"
+- link: "/incident_response/case_management/view_and_manage"
   tag: "Documentation"
   text: "View and Manage Cases"
-- link: "service_management/case_management/customization"
+- link: "/incident_response/case_management/customization"
   tag: "Documentation"
   text: "Case Customization"
 
@@ -81,4 +81,4 @@ Create a case through the [API endpoint][5].
 [4]: https://app.datadoghq.com/cases/settings
 [5]: /api/latest/case-management/#create-a-case
 [6]: /service_management/workflows/trigger/
-[7]: /service_management/case_management/customization
+[7]: /incident_response/case_management/customization

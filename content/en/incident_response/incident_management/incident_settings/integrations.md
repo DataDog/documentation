@@ -3,7 +3,7 @@ title: Integrations
 aliases:
 - /service_management/incident_management/incident_settings/integrations/
 further_reading:
-- link: "/service_management/incident_management/integrations"
+- link: "/incident_response/incident_management/integrations"
   tag: "Documentation"
   text: "Incident Integrations"
 ---
@@ -43,10 +43,10 @@ In addition to integrating with Slack and Microsoft Teams, Incident Management a
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
 [3]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
-[4]: /service_management/incident_management/integrations/slack/
+[4]: /incident_response/incident_management/integrations/slack/
 [5]: /integrations/microsoft-teams/?tab=datadogapprecommended
 [6]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
-[7]: /service_management/incident_management/incident_settings/notification_rules
+[7]: /incident_response/incident_management/incident_settings/notification_rules
 [8]: /integrations/pagerduty/
 [9]: /integrations/opsgenie/
 [10]: /coscreen
@@ -56,4 +56,4 @@ In addition to integrating with Slack and Microsoft Teams, Incident Management a
 [14]: /integrations/statuspage/
 [15]: /integrations/servicenow/
 [16]: /integrations/zoom_incident_management/
-[17]: /service_management/incident_management/integrations/microsoft_teams
+[17]: /incident_response/incident_management/integrations/microsoft_teams

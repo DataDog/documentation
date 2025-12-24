@@ -3,7 +3,7 @@ title: Incident Notification
 aliases:
 - /service_management/incident_management/notification/
 further_reading:
-- link: "/service_management/incident_management/incident_settings"
+- link: "/incident_response/incident_management/incident_settings"
   tag: "Documentation"
   text: "Customize notifications in Incident Settings"
 - link: "/monitors/notify/variables/?tab=is_alert"
@@ -71,7 +71,7 @@ For more information on how to create a message template, see the [Incident Sett
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/incident_settings/notification_rules
+[1]: /incident_response/incident_management/incident_settings/notification_rules
 [2]: /monitors/notify/variables/?tab=is_alert
-[3]: /service_management/incident_management/incident_settings/templates
-[4]: /service_management/on-call/
+[3]: /incident_response/incident_management/incident_settings/templates
+[4]: /incident_response/on-call/

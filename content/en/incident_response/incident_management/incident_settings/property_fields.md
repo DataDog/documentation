@@ -81,16 +81,16 @@ Single-Select, Multi-Select, Text Array, Number, and Datetime fields are searcha
 
 In Incident Management Analytics, number fields appear as measures that can be graphed and visualized in [Dashboards][7] and [Notebooks][8].
 
-[1]: /service_management/incident_management/investigate#overview-tab
+[1]: /incident_response/incident_management/investigate#overview-tab
 [2]: https://app.datadoghq.com/incidents
-[3]: /service_management/incident_management/analytics
+[3]: /incident_response/incident_management/analytics
 [4]: /tracing/
 [5]: /account_management/teams/
 [6]: /getting_started/tagging/using_tags/?tab=assignment#metrics
 [7]: /dashboards/
 [8]: /notebooks/
-[9]: /service_management/incident_management/incident_settings/notification_rules
-[10]: /service_management/incident_management/investigate/timeline
-[11]: /service_management/incident_management/declare
-[12]: /service_management/incident_management/incident_settings/property_fields#custom-fields-in-search-and-analytics
+[9]: /incident_response/incident_management/incident_settings/notification_rules
+[10]: /incident_response/incident_management/investigate/timeline
+[11]: /incident_response/incident_management/declare
+[12]: /incident_response/incident_management/incident_settings/property_fields#custom-fields-in-search-and-analytics
 [13]: /actions/workflows/

@@ -3,7 +3,7 @@ title: Migrate PagerDuty resources to Datadog On-Call
 aliases:
 - /service_management/on-call/guides/migrate-your-pagerduty-resources-to-on-call/
 further_reading:
-- link: "/service_management/on-call/"
+- link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call Documentation"
 - link: "/integrations/pagerduty/"

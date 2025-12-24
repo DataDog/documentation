@@ -5,13 +5,13 @@ disable_toc: true
 aliases:
     - /service_management/app_builder/components
 further_reading:
-- link: "/service_management/app_builder/tables/"
+- link: "/actions/app_builder/tables/"
   tag: "Documentation"
   text: "Tables"
-- link: "/service_management/app_builder/build/"
+- link: "/actions/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
-- link: "/service_management/app_builder/expressions/"
+- link: "/actions/app_builder/expressions/"
   tag: "Documentation"
   text: "JavaScript Expressions"
 - link: "https://learn.datadoghq.com/courses/app-builder-integration"

@@ -3,13 +3,13 @@ title: Customization
 aliases:
 - /service_management/case_management/customization/
 further_reading:
-- link: "service_management/case_management/"
+- link: "/incident_response/case_management/"
   tag: "Documentation"
   text: "Case Management Overview"
-- link: "service_management/case_management/create_case"
+- link: "/incident_response/case_management/create_case"
   tag: "Documentation"
   text: "Create a case"
-- link: "service_management/case_management/settings"
+- link: "/incident_response/case_management/settings"
   tag: "Documentation"
   text: "Settings"
 ---
@@ -90,5 +90,5 @@ You can add attributes that reflect your team's specific needs, such as escalati
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/case_management/create_case#case-types
+[1]: /incident_response/case_management/create_case#case-types
 [2]: https://app.datadoghq.com/cases/settings?type=shared

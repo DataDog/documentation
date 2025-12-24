@@ -6,13 +6,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/status-pages
   tag: Blog
   text: Keep stakeholders informed with Datadog Status Pages
-- link: "service_management/incident_management/"
+- link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Learn more about Incident Management"
-- link: "service_management/on-call/"
+- link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "Learn more about On-Call Scheduling"
-- link: "service_management/incident_management/integrations/status_pages"
+- link: "/incident_response/incident_management/integrations/status_pages"
   tag: "Documentation"
   text: "Integrate Datadog Status Pages with Incident Management"
 - link: "https://www.datadoghq.com/blog/status-pages/"

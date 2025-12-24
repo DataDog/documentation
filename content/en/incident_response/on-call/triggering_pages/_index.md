@@ -4,7 +4,7 @@ aliases:
 - /service_management/on-call/pages
 - /service_management/on-call/triggering_pages/
 further_reading:
-- link: '/service_management/on-call/'
+- link: '/incident_response/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---
@@ -82,8 +82,8 @@ To send Pages to Slack, see [Routing Rules][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/on-call/teams
+[1]: /incident_response/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
-[3]: /service_management/on-call/triggering_pages/live_call_routing
-[4]: /service_management/on-call/routing_rules/#send-pages-to-slack-or-microsoft-teams
-[5]: /service_management/incident_management/notification/#trigger-a-page-from-an-incident
+[3]: /incident_response/on-call/triggering_pages/live_call_routing
+[4]: /incident_response/on-call/routing_rules/#send-pages-to-slack-or-microsoft-teams
+[5]: /incident_response/incident_management/notification/#trigger-a-page-from-an-incident

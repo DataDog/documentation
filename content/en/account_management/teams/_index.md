@@ -161,7 +161,7 @@ To customize your team, see [Team Management][3].
 [3]: /account_management/teams/manage/
 [4]: /account_management/saml/mapping/#map-saml-attributes-to-teams
 [5]: /dashboards/#dashboard-details
-[6]: /service_management/incident_management/
+[6]: /incident_response/incident_management/
 [7]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [8]: /infrastructure/resource_catalog/
 [9]: /tracing/software_catalog/adding_metadata/#add-metadata-from-the-datadog-ui

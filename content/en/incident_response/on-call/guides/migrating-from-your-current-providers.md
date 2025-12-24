@@ -3,10 +3,10 @@ title: Migrating from your current on-call provider
 aliases:
 - /service_management/on-call/guides/migrating-from-your-current-providers/
 further_reading:
-- link: "/service_management/on-call/"
+- link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call"
-- link: "/service_management/incident_management/"
+- link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
 ---
@@ -72,7 +72,7 @@ Before you start configuring Datadog On-Call, review the concept of [Teams][4]. 
 
 After reviewing the team model and mapping your existing assets, you're ready to configure Datadog On-Call to reflect your desired structure.
 
-<div class="alert alert-info">If you're migrating from PagerDuty, Datadog provides a <a href="/service_management/on-call/guides/migrate-your-pagerduty-resources-to-on-call">dedicated migration tool</a> that can help you selectively import schedules and escalation policies. Use it during setup to reduce manual effort and avoid migrating unused configurations.</div>
+<div class="alert alert-info">If you're migrating from PagerDuty, Datadog provides a <a href="/incident_response/on-call/guides/migrate-your-pagerduty-resources-to-on-call">dedicated migration tool</a> that can help you selectively import schedules and escalation policies. Use it during setup to reduce manual effort and avoid migrating unused configurations.</div>
 
 During setup, be sure to:
 
@@ -148,9 +148,9 @@ With your core migration to Datadog On-Call complete, shift focus to long-term o
 [1]: https://app.datadoghq.com/on-call/
 [2]: /integrations/
 [3]: /monitors/notify/#bulk-editing-monitor--handles
-[4]: /service_management/on-call/teams/
-[6]: /service_management/incident_management
-[7]: /service_management/on-call/schedules/
+[4]: /incident_response/on-call/teams/
+[6]: /incident_response/incident_management
+[7]: /incident_response/on-call/schedules/
 [8]: https://app.datadoghq.com/on-call/analytics
 [9]: https://app.datadoghq.com/release-notes?category=Incident%20Response
 [10]: https://chat.datadoghq.com/

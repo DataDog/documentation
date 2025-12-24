@@ -7,7 +7,7 @@ further_reading:
 - link: "service_management/events/"
   tag: "Documentation"
   text: "Event Management"
-- link: "service_management/case_management/"
+- link: "/incident_response/case_management/"
   tag: "Documentation"
   text: "Case Management"
 algolia:

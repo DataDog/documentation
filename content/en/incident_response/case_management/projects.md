@@ -4,7 +4,7 @@ aliases:
 - /service_management/case_management/projects/
 disable_toc: false
 further_reading:
-- link: "service_management/case_management/create_case"
+- link: "incident_response/case_management/create_case"
   tag: "Documentation"
   text: "Create a case"
 ---
