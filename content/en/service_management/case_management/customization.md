@@ -1,10 +1,6 @@
 ---
 title: Customization
----
-description: Customize Datadog Case Management with custom case types and attributes.
----
-
-
+description: "Customize Datadog Case Management with custom case types, attributes, and statuses"
 further_reading:
 - link: "service_management/case_management/"
   tag: "Documentation"
@@ -108,7 +104,7 @@ Custom statuses help you:
 
 <!-- \[Screenshot here\] -->
 
-* Each status group (`Open`, `In-Progress`, `Closed`) must contain at least one status.
+* Each status group (Open, In-Progress, Closed) must contain at least one status.
 * You can delete an existing status, but you must first migrate any cases currently using that status to another status in the same group.
 * Custom statuses behave exactly the same as Datadog's built-in statuses.
 
