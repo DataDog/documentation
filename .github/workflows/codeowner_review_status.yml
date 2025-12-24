@@ -61,6 +61,8 @@ jobs:
             });
 
             // Track latest review state per user (ignore commented state)
+            const latestReviews = new Map();
+            
             reviews.forEach(review => {
               if (review.state === 'COMMENTED') return; 
               const existing = latestReviews.get(review.user.login);
