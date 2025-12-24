@@ -74,7 +74,7 @@ app.get('/my-endpoint', async (req, res) => {
   await initializationPromise;
 
   const evaluationContext = {
-    userID: req.session?.userID,
+    targetingKey: req.session?.userID,
     companyID: req.session?.companyID
   };
 
@@ -103,7 +103,7 @@ Use `getBooleanValue()` for flags that represent on/off or true/false conditions
 
 ```javascript
 const evaluationContext = {
-  userID: req.session?.userID,
+  targetingKey: req.session?.userID,
   companyID: req.session?.companyID
 };
 
@@ -126,7 +126,7 @@ Use `getStringValue()` for flags that select between multiple variants or config
 
 ```javascript
 const evaluationContext = {
-  userID: req.session?.userID,
+  targetingKey: req.session?.userID,
   companyID: req.session?.companyID
 };
 
@@ -157,7 +157,7 @@ For number flags, use `getNumberValue()`. This is appropriate when a feature dep
 
 ```javascript
 const evalutationContext = {
-  userID: req.session?.userID,
+  targetingKey: req.session?.userID,
   companyID: req.session?.companyID,
 };
 
@@ -180,7 +180,7 @@ For structured JSON data, use `getObjectValue()`. This method returns an `object
 
 ```javascript
 OpenFeature.setContext({
-  userID: req.session?.userID,
+  targetingKey: req.session?.userID,
   companyID: req.session?.companyID
 });
 
