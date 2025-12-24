@@ -23,21 +23,52 @@ This page describes how to instrument your Ruby application with the Datadog Fea
 
 ## Prerequisites
 
-Before setting up the Ruby Feature Flags SDK, ensure you have:
+In addition to the [common server-side prerequisites][2], ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][1] enabled
 - **Datadog Ruby tracer** `datadog` version 2.23.0 or later
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.4.1 or later
-- **Service and environment configured** - Feature flags are targeted by service and environment
 
-## Installing and initializing
+## Installation
 
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install the required gems and configure Remote Configuration with OpenFeature support.
+Install the Datadog tracer and OpenFeature SDK:
 
 ```shell
 gem install ddtrace openfeature-sdk
 ```
 
+## Initialize the SDK
+
+Configure Datadog with feature flagging enabled, then register it as the OpenFeature provider.
+
+You can enable the feature flagging provider using either an environment variable or the Datadog configuration block:
+
+{{< tabs >}}
+{{% tab "Environment Variable" %}}
+```bash
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+```
+
+```ruby
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+# Configure Datadog with Remote Configuration enabled
+Datadog.configure do |config|
+  config.remote.enabled = true
+end
+
+# Configure OpenFeature SDK with Datadog provider
+OpenFeature::SDK.configure do |config|
+  config.set_provider(Datadog::OpenFeature::Provider.new)
+end
+
+# Create OpenFeature client
+client = OpenFeature::SDK.build_client
+```
+{{% /tab %}}
+
+{{% tab "Datadog Configuration" %}}
 ```ruby
 require 'datadog'
 require 'open_feature/sdk'
@@ -57,8 +88,16 @@ end
 # Create OpenFeature client
 client = OpenFeature::SDK.build_client
 ```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Non-blocking initialization
 
 The client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
+
+### Blocking initialization
+
+<div class="alert alert-info">Blocking initialization support is under development. Currently, flag evaluations return default values until the initial configuration is received from Remote Configuration.</div>
 
 ## Set the evaluation context
 
@@ -121,7 +160,7 @@ else
 end
 ```
 
-### Number flags
+### Numeric flags
 
 For numeric flags, use `fetch_integer_value()` or `fetch_float_value()`. Ruby also provides `fetch_number_value()`, which returns the appropriate type based on the default value. These methods are appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
 
@@ -184,7 +223,7 @@ puts "Error Message: #{details.error_message}"
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
-## Evaluation without context
+### Evaluation without context
 
 You can evaluate flags without providing an evaluation context. This is useful for global flags that don't require user-specific targeting:
 
@@ -200,38 +239,9 @@ if maintenance_mode
 end
 ```
 
-## Troubleshooting
-
-### Feature flags always return default values
-
-If feature flags unexpectedly always return default values, check the following:
-
-- Verify Remote Configuration is enabled in your Datadog Agent configuration
-- Ensure the service and environment are configured (either through `DD_SERVICE` and `DD_ENV` environment variables or `config.service` and `config.env` in Ruby)
-- Check that `config.remote.enabled = true` and `config.open_feature.enabled = true` are set in your Ruby application's Datadog configuration
-- Verify the `datadog` gem version includes OpenFeature support (2.23.0 or later)
-
-### Remote Configuration connection issues
-
-Check the Datadog tracer logs for Remote Configuration status:
-
-```ruby
-# Enable startup and debug logging
-Datadog.configure do |config|
-  config.diagnostics.startup_logs.enabled = true
-  config.diagnostics.debug = true
-  config.remote.enabled = true
-  config.open_feature.enabled = true
-end
-```
-
-Look for messages about:
-- Remote Configuration worker starting
-- Feature flags configuration being received
-- OpenFeature component initialization
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config/
+[2]: /feature_flags/server/

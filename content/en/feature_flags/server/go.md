@@ -22,20 +22,14 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 
 ## Prerequisites
 
-Before setting up the Go Feature Flags SDK, ensure you have:
+In addition to the [common server-side prerequisites][2], ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog Go tracer** `dd-trace-go` version 2.4.0 or later
 
-Set the following environment variables:
+Set the following environment variable to enable feature flags:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Required: Service identification
-DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
 ## Installation
@@ -142,15 +136,6 @@ func main() {
     // Your application code here
     // Flag evaluations return defaults until configuration is received
 }
-{{< /code-block >}}
-
-## Create a client
-
-Create an OpenFeature client to evaluate flags. You can create multiple clients with different names for different parts of your application:
-
-{{< code-block lang="go" >}}
-// Create a client for your application
-client := openfeature.NewClient("my-service")
 {{< /code-block >}}
 
 ## Set the evaluation context
@@ -271,8 +256,25 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+### Evaluation without context
+
+You can evaluate flags without providing an evaluation context. This is useful for global flags that don't require user-specific targeting:
+
+{{< code-block lang="go" >}}
+// Global feature flag - no context needed
+maintenanceMode, err := client.BooleanValue(ctx, "maintenance-mode", false, openfeature.EvaluationContext{})
+if err != nil {
+    log.Printf("Error evaluating flag: %v", err)
+}
+
+if maintenanceMode {
+    http.Error(w, "Service temporarily unavailable", http.StatusServiceUnavailable)
+    return
+}
+{{< /code-block >}}
+
 [1]: https://openfeature.dev/
-[2]: /agent/remote_config/
+[2]: /feature_flags/server/
 
 ## Further reading
 

@@ -21,14 +21,46 @@ Feature Flags are in Preview. Complete the form to request access.
 
 This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK.
 
-## Installing and initializing
+## Prerequisites
 
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and enable Remote Configuration with the `flaggingProvider` option as shown below. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
+In addition to the [common server-side prerequisites][2], ensure you have:
+
+- **Datadog Node.js tracer** `dd-trace` version 5.72.0 or later
+- **OpenFeature Server SDK** `@openfeature/server-sdk`
+
+## Installation
+
+Install the Datadog tracer and OpenFeature SDK:
 
 ```shell
 npm install dd-trace @openfeature/server-sdk
 ```
 
+See [Tracing Node.js Applications][1] for detailed APM installation instructions.
+
+## Initialize the SDK
+
+Initialize the Datadog tracer with feature flagging enabled, then register it as the OpenFeature provider.
+
+You can enable the feature flagging provider using either an environment variable or tracer configuration:
+
+{{< tabs >}}
+{{% tab "Environment Variable" %}}
+```bash
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+```
+
+```javascript
+import { OpenFeature } from '@openfeature/server-sdk'
+import tracer from 'dd-trace';
+
+tracer.init();
+
+OpenFeature.setProvider(tracer.openfeature);
+```
+{{% /tab %}}
+
+{{% tab "Tracer Configuration" %}}
 ```javascript
 import { OpenFeature } from '@openfeature/server-sdk'
 import tracer from 'dd-trace';
@@ -43,8 +75,10 @@ tracer.init({
 
 OpenFeature.setProvider(tracer.openfeature);
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
-### Accepting default values before initialization
+### Non-blocking initialization
 
 When you call `setProvider` without waiting, the client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
 
@@ -62,7 +96,7 @@ app.get('/my-endpoint', (req, res) => {
 });
 ```
 
-### Waiting for provider initialization
+### Blocking initialization
 
 Use `setProviderAndWait` to ensure the provider fully initializes before evaluating flags. This guarantees that flag evaluations use actual configuration data rather than defaults, at the cost of delaying requests during initialization.
 
@@ -93,7 +127,7 @@ Define who or what the flag evaluation applies to using an `EvaluationContext`. 
 
 ## Evaluate flags
 
-After creating the `OpenFeature` client as described in the [Installing and initializing](#installing-and-initializing) section, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
+After creating the `OpenFeature` client as described in the [Initialize the SDK](#initialize-the-sdk) section, you can start reading flag values throughout your app. Flag evaluation uses locally cached data, so no network requests occur when evaluating flags.
 
 Each flag is identified by a _key_ (a unique string) and can be evaluated with a _typed getter_ that returns a value of the expected type. If the flag doesn't exist or cannot be evaluated, the SDK returns the provided default value.
 
@@ -149,9 +183,9 @@ switch (theme) {
 }
 ```
 
-### Number flags
+### Numeric flags
 
-For number flags, use `getNumberValue()`. This is appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
+For numeric flags, use `getNumberValue()`. This is appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
 
 ```javascript
 OpenFeature.setContext({
@@ -209,8 +243,23 @@ console.log(details.errorMessage); // A more detailed message of the error that 
 console.log(details.flagMetadata); // Additional information about the evaluation
 ```
 
+### Evaluation without context
+
+You can evaluate flags without providing an evaluation context. This is useful for global flags that don't require user-specific targeting:
+
+```javascript
+// Global feature flag - no context needed
+const maintenanceMode = client.getBooleanValue('maintenance-mode', false);
+
+if (maintenanceMode) {
+  res.status(503).send('Service temporarily unavailable');
+  return;
+}
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
+[2]: /feature_flags/server/

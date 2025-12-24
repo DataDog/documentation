@@ -22,21 +22,15 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 
 ## Prerequisites
 
-Before setting up the Python Feature Flags SDK, ensure you have:
+In addition to the [common server-side prerequisites][2], ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog Python tracer** `ddtrace` version 3.19.0 or later
 - **OpenFeature Python SDK** `openfeature-sdk` version 0.5.0 or later
 
-Set the following environment variables:
+Set the following environment variable to enable feature flags:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Required: Service identification
-export DD_SERVICE=<YOUR_SERVICE_NAME>
-export DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
 ## Installation
@@ -70,6 +64,49 @@ api.set_provider(provider)
 client = api.get_client()
 
 # Your application code here
+{{< /code-block >}}
+
+### Blocking initialization
+
+By default, the provider initializes asynchronously and flag evaluations return default values until the first Remote Configuration payload is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
+
+{{< code-block lang="python" >}}
+import threading
+from openfeature import api
+from openfeature.event import ProviderEvent
+from ddtrace.openfeature import DataDogProvider
+
+# Create an event to wait for readiness
+ready_event = threading.Event()
+
+def on_ready(event_details):
+    ready_event.set()
+
+# Register event handler
+api.add_handler(ProviderEvent.PROVIDER_READY, on_ready)
+
+# Set provider
+provider = DataDogProvider()
+api.set_provider(provider)
+
+# Wait for provider to be ready (with optional timeout)
+if ready_event.wait(timeout=30):
+    print("Provider is ready")
+else:
+    print("Provider initialization timed out")
+
+# Create client and evaluate flags
+client = api.get_client()
+{{< /code-block >}}
+
+<div class="alert alert-info">Waiting for provider initialization requires OpenFeature SDK 0.7.0 or later. Most applications don't need to wait for initialization, as flag evaluations work immediately with default values.</div>
+
+### Cleanup
+
+When your application exits, shut down the OpenFeature API to clean up resources:
+
+{{< code-block lang="python" >}}
+api.shutdown()
 {{< /code-block >}}
 
 ## Set the evaluation context
@@ -178,69 +215,8 @@ if maintenance_mode:
     return "Service temporarily unavailable"
 {{< /code-block >}}
 
-## Waiting for provider initialization
-
-By default, the provider initializes asynchronously and flag evaluations return default values until the first Remote Configuration payload is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
-
-{{< code-block lang="python" >}}
-import threading
-from openfeature import api
-from openfeature.event import ProviderEvent
-from ddtrace.openfeature import DataDogProvider
-
-# Create an event to wait for readiness
-ready_event = threading.Event()
-
-def on_ready(event_details):
-    ready_event.set()
-
-# Register event handler
-api.add_handler(ProviderEvent.PROVIDER_READY, on_ready)
-
-# Set provider
-provider = DataDogProvider()
-api.set_provider(provider)
-
-# Wait for provider to be ready (with optional timeout)
-if ready_event.wait(timeout=30):
-    print("Provider is ready")
-else:
-    print("Provider initialization timed out")
-
-# Create client and evaluate flags
-client = api.get_client()
-{{< /code-block >}}
-
-<div class="alert alert-info">Waiting for provider initialization requires OpenFeature SDK 0.7.0 or later. Most applications don't need to wait for initialization, as flag evaluations work immediately with default values.</div>
-
-## Cleanup
-
-When your application exits, shut down the OpenFeature API to clean up resources:
-
-{{< code-block lang="python" >}}
-api.shutdown()
-{{< /code-block >}}
-
-## Troubleshooting
-
-### Provider not enabled
-
-If you receive warnings about the provider not being enabled, ensure `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your environment:
-
-{{< code-block lang="bash" >}}
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
-
-### Remote Configuration not working
-
-Verify the following to ensure that Remote Configuration is working:
-- Datadog Agent is version 7.55 or later
-- Remote Configuration is enabled on the Agent
-- `DD_SERVICE` and `DD_ENV` environment variables are set
-- The tracer can communicate with the Agent
-
 [1]: https://openfeature.dev/
-[2]: /agent/remote_config/
+[2]: /feature_flags/server/
 
 ## Further reading
 

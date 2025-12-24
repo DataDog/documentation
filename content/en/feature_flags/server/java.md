@@ -14,17 +14,15 @@ further_reading:
 Feature Flags are in Preview. Complete the form to request access.
 {{< /callout >}}
 
-<div class="alert alert-warning">Java Feature Flags support is experimental and requires enabling an experimental flag in the tracer. See the <a href="#configuration">Configuration section</a> for details.</div>
-
 ## Overview
 
 This page describes how to instrument a Java application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
 
 The Java SDK integrates feature flags directly into the Datadog APM tracer and implements the [OpenFeature](https://openfeature.dev/) standard for maximum flexibility and compatibility.
 
-<div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java tracer and Remote Configuration enabled, skip to <a href="#initialize-the-openfeature-provider">Initialize the OpenFeature provider</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
+<div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java tracer and Remote Configuration enabled, skip to <a href="#initialize-the-sdk">Initialize the SDK</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
 
-## Compatibility requirements
+## Prerequisites
 
 The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
@@ -125,47 +123,13 @@ Add the following dependencies to your `pom.xml`:
 
 ## Configuration
 
-If your Datadog Agent already has Remote Configuration enabled for other features (like Dynamic Instrumentation or Application Security), you can skip the Agent configuration and go directly to [Application configuration](#application-configuration).
-
-### Agent configuration
-
-Configure your Datadog Agent to enable Remote Configuration:
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-# Enable Remote Configuration
-remote_configuration:
-  enabled: true
-
-# Set your API key
-api_key: <YOUR_API_KEY>
-{{< /code-block >}}
-
-### Application configuration
-
-If your application already runs with `-javaagent:dd-java-agent.jar` and has Remote Configuration enabled (`DD_REMOTE_CONFIG_ENABLED=true`), you only need to add the experimental feature flag (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`). Skip the tracer download and JVM configuration steps.
-
-Configure your Java application with the required environment variables or system properties:
+In addition to the [common server-side configuration][1], enable the experimental feature flagging provider in your Java application:
 
 {{< tabs >}}
 {{% tab "Environment Variables" %}}
 {{< code-block lang="bash" >}}
-# Required: Enable Remote Configuration in the tracer
-export DD_REMOTE_CONFIG_ENABLED=true
-
 # Required: Enable experimental feature flagging support
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Required: Your Datadog API key
-export DD_API_KEY=<YOUR_API_KEY>
-
-# Required: Service name
-export DD_SERVICE=<YOUR_SERVICE_NAME>
-
-# Required: Environment (e.g., prod, staging, dev)
-export DD_ENV=<YOUR_ENVIRONMENT>
-
-# Optional: Version
-export DD_VERSION=<YOUR_APP_VERSION>
 
 # Start your application with the tracer
 java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
@@ -175,30 +139,18 @@ java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 {{% tab "System Properties" %}}
 {{< code-block lang="bash" >}}
 java -javaagent:path/to/dd-java-agent.jar \
-  -Ddd.remote.config.enabled=true \
   -Ddd.experimental.flagging.provider.enabled=true \
-  -Ddd.api.key=<YOUR_API_KEY> \
-  -Ddd.service=<YOUR_SERVICE_NAME> \
-  -Ddd.env=<YOUR_ENVIRONMENT> \
-  -Ddd.version=<YOUR_APP_VERSION> \
   -jar your-application.jar
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
-The Datadog feature flagging system starts automatically when the tracer is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.
+For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java Tracer to the JVM][2].
 
-<div class="alert alert-danger">Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without the experimental flag, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
+[1]: /feature_flags/server/#application-configuration
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-tracer-to-the-jvm
 
-### Add the Java tracer to the JVM
-
-For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java Tracer to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-tracer-to-the-jvm).
-
-Make sure to include the feature flagging configuration flags:
-- `-Ddd.remote.config.enabled=true`
-- `-Ddd.experimental.flagging.provider.enabled=true`
-
-## Initialize the OpenFeature provider
+## Initialize the SDK
 
 Initialize the Datadog OpenFeature provider in your application startup code. The provider connects to the feature flagging system running in the Datadog tracer.
 
@@ -240,7 +192,7 @@ Use `setProviderAndWait()` to block evaluation until the initial flag configurat
 
 `ProviderNotReadyError` is an OpenFeature SDK exception thrown when the provider times out during initialization. Catching it allows the application to start with default flag values if Remote Configuration is unavailable. If not caught, the exception propagates and may prevent application startup. Handle this based on your availability requirements.
 
-### Asynchronous initialization
+### Non-blocking initialization
 
 For non-blocking initialization, use `setProvider()` and listen for provider events:
 
@@ -351,6 +303,19 @@ if (config.isStructure()) {
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+### Evaluation without context
+
+You can evaluate flags without providing an evaluation context. This is useful for global flags that don't require user-specific targeting:
+
+{{< code-block lang="java" >}}
+// Global feature flag - no context needed
+boolean maintenanceMode = client.getBooleanValue("maintenance-mode", false);
+
+if (maintenanceMode) {
+    return ResponseEntity.status(503).body("Service temporarily unavailable");
+}
+{{< /code-block >}}
 
 ## Error handling
 
