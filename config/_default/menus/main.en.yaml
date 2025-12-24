@@ -1964,6 +1964,42 @@ menu:
       weight: 11
       parent: alerting
       identifier: alerting_guide
+    - name: Service Level Objectives
+      url: service_level_objectives/
+      pre: slos
+      weight: 70000
+      parent: platform_heading
+      identifier: slos
+    - name: Monitor-based SLOs
+      url: service_level_objectives/monitor/
+      parent: slos
+      identifier: slos_monitor
+      weight: 1
+    - name: Metric-based SLOs
+      url: service_level_objectives/metric/
+      parent: slos
+      identifier: slos_metric
+      weight: 2
+    - name: Time Slice SLOs
+      url: service_level_objectives/time_slice/
+      parent: slos
+      identifier: slos_time_slice
+      weight: 3
+    - name: Error Budget Alerts
+      url: service_level_objectives/error_budget/
+      parent: slos
+      identifier: error_budget
+      weight: 4
+    - name: Burn Rate Alerts
+      url: service_level_objectives/burn_rate/
+      parent: slos
+      identifier: burn_rate
+      weight: 5
+    - name: Guides
+      url: service_level_objectives/guide/
+      parent: slos
+      identifier: slos_guides
+      weight: 6
     - name: Metrics
       url: metrics/
       identifier: metrics_top_level
@@ -2438,42 +2474,6 @@ menu:
       parent: change_tracking
       identifier: change_tracking_feature_flags
       weight: 1
-    - name: Service Level Objectives
-      url: service_level_objectives/
-      pre: slos
-      weight: 10000
-      parent: service_management_heading
-      identifier: slos
-    - name: Monitor-based SLOs
-      url: service_level_objectives/monitor/
-      parent: slos
-      identifier: slos_monitor
-      weight: 1
-    - name: Metric-based SLOs
-      url: service_level_objectives/metric/
-      parent: slos
-      identifier: slos_metric
-      weight: 2
-    - name: Time Slice SLOs
-      url: service_level_objectives/time_slice/
-      parent: slos
-      identifier: slos_time_slice
-      weight: 3
-    - name: Error Budget Alerts
-      url: service_level_objectives/error_budget/
-      parent: slos
-      identifier: error_budget
-      weight: 4
-    - name: Burn Rate Alerts
-      url: service_level_objectives/burn_rate/
-      parent: slos
-      identifier: burn_rate
-      weight: 5
-    - name: Guides
-      url: service_level_objectives/guide/
-      parent: slos
-      identifier: slos_guides
-      weight: 6
     - name: Incident Management
       url: service_management/incident_management/
       pre: incidents
