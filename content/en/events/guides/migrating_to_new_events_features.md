@@ -193,10 +193,10 @@ Legacy Event Monitors do not support cardinality rollup.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /service_management/events/explorer
-[2]: /service_management/events/explorer/analytics
-[3]: /service_management/events/usage/#custom-metrics
+[1]: /events/explorer
+[2]: /events/explorer/analytics
+[3]: /events/usage/#custom-metrics
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
-[5]: /service_management/events/guides/new_events_sources/
+[5]: /events/guides/new_events_sources/
 [6]: /help/
 [7]: /api/latest/monitors/#create-a-monitor

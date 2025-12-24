@@ -8,7 +8,7 @@ further_reading:
 - link: "/api/latest/events/"
   tag: "Documentation"
   text: "Datadog Events API"
-- link: "/service_management/events/guides/recommended_event_tags/"
+- link: "/events/guides/recommended_event_tags/"
   tag: "Documentation"
   text: "Best Practices for Tagging Events"
 - link: "https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/"
@@ -40,12 +40,12 @@ More than 100 Datadog integrations support events collection, including [Kuberne
 ## Components
 
 {{< whatsnext desc="Event Management features:">}}
-    {{< nextlink href="/service_management/events/ingest/" >}}<u>Ingest events</u> - Learn how to send events to Datadog{{< /nextlink >}}
-     {{< nextlink href="/service_management/events/triage_inbox" >}}<u>Triage Inbox</u> - Triage, investigate, collaborate, and resolve incidents{{< /nextlink >}}
-     {{< nextlink href="/service_management/events/pipelines_and_processors/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u> - View, search and send notifications from events coming into Datadog{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}
-    {{< nextlink href="/service_management/events/correlation/" >}}<u>Correlation</u> - reduce alert fatigue and the number of tickets/notifications you receive {{< /nextlink >}}
+    {{< nextlink href="/events/ingest/" >}}<u>Ingest events</u> - Learn how to send events to Datadog{{< /nextlink >}}
+     {{< nextlink href="/events/triage_inbox" >}}<u>Triage Inbox</u> - Triage, investigate, collaborate, and resolve incidents{{< /nextlink >}}
+     {{< nextlink href="/events/pipelines_and_processors/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
+    {{< nextlink href="/events/explorer/" >}}<u>Events Explorer</u> - View, search and send notifications from events coming into Datadog{{< /nextlink >}}
+    {{< nextlink href="/events/guides/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}
+    {{< nextlink href="/events/correlation/" >}}<u>Correlation</u> - reduce alert fatigue and the number of tickets/notifications you receive {{< /nextlink >}}
 
 {{< /whatsnext >}}
 

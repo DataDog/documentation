@@ -4,7 +4,7 @@ aliases:
 - /service_management/events/explorer/attributes/
 disable_toc: false
 further_reading:
-- link: "/service_management/events/explorer/facets"
+- link: "/events/explorer/facets"
   tag: "Documentation"
   text: "Learn about Event facets"
 - link: "logs/processing/pipelines"
@@ -40,4 +40,4 @@ To create a facet on a tag that has the same key as a reserved attribute:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/processors/?tab=ui#remapper
-[2]: /service_management/events/explorer/facets
+[2]: /events/explorer/facets

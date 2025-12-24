@@ -3,10 +3,10 @@ title: Event Management Triage Inbox
 aliases:
 - /service_management/events/triage_inbox/
 further_reading:
-- link: "/service_management/events/ingest//"
+- link: "/events/ingest/"
   tag: "doc"
   text: "Send events to Datadog"
-- link: "/service_management/events/correlation/"
+- link: "/events/correlation/"
   tag: "doc"
   text: "Learn more about event correlation"
 - link: "https://www.datadoghq.com/blog/datadog-event-management/"

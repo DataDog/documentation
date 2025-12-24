@@ -129,7 +129,7 @@ Using commit-level granularity provides a more accurate view of engineering perf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/events/explorer/
+[1]: /events/explorer/
 [2]: /api/latest/metrics/#query-timeseries-points
 [3]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights

@@ -402,5 +402,5 @@ The SLO statuses are calculated based on the SLO type:
 [24]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [25]: /api/latest/service-level-objective-corrections/
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
-[27]: /service_management/events/explorer/
+[27]: /events/explorer/
 [28]: /monitors/types/event/

@@ -661,5 +661,5 @@ If your events contain ASCII control characters, they are serialized upon ingest
 
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[3]: /service_management/events/pipelines_and_processors/date_remapper
-[4]: /service_management/events/pipelines_and_processors/grok_parser/?tab=filters&tabs=filters#matcher-and-filter
+[3]: /events/pipelines_and_processors/date_remapper
+[4]: /events/pipelines_and_processors/grok_parser/?tab=filters&tabs=filters#matcher-and-filter

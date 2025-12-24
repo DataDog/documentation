@@ -7,7 +7,7 @@ further_reading:
 - link: "/logs/log_configuration/processors/"
   tag: "Documentation"
   text: "Learn more about processing pipelines"
-- link: "/service_management/events/explorer/"
+- link: "/events/explorer/"
   tag: "Documentation"
   text: "Triage events with the Events Explorer"
 ---
@@ -50,8 +50,8 @@ Send monitor alerts and notifications based on significant event queries. To con
 [3]: https://app.datadoghq.com/event/pipelines
 [4]: /help/
 [5]: https://app.datadoghq.com/event/configuration/generate-metrics
-[6]: /service_management/events/explorer/analytics
-[7]: /service_management/events/explorer/
+[6]: /events/explorer/analytics
+[7]: /events/explorer/
 [8]: /dashboards/widgets/alert_graph/
 [9]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [10]: /dashboards/change_overlays/

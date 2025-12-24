@@ -24,5 +24,5 @@ The aggregation key processor performs the following actions:
 * If there are multiple values in the tag key, all values are sorted alphabetically and concatenated to generate the aggregation key.
 * Based on these values, it generates a hash and adds the generated aggregation key to the event.
 
-[1]: /service_management/events/correlation/
+[1]: /events/correlation/
 [2]: /getting_started/tagging/

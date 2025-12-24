@@ -130,7 +130,7 @@ COTERM_BREAK_GLASS=true kubectl delete foo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /sensitive_data_scanner/
-[2]: /service_management/events/
+[2]: /events/
 [3]: /service_management/case_management/
 [4]: /coterm/rules
 [5]: /service_management/incident_management/

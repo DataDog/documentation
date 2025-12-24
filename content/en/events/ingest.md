@@ -18,9 +18,9 @@ You can also submit your own custom events using the Datadog API, Custom Agent C
 
 {{< whatsnext desc="Send your custom events to Datadog:">}}
     {{< nextlink href="/api/latest/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/email/" >}}Email{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
+    {{< nextlink href="/events/guides/email/" >}}Email{{< /nextlink >}}
+    {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/integrations/guide/events-from-sns-emails/" >}}Amazon SNS Emails{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/#configuration" >}}Amazon EventBridge API Destinations{{< /nextlink >}}
 {{< /whatsnext >}}

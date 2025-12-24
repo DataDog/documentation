@@ -3,7 +3,7 @@ title: Saved Views
 aliases:
 - /service_management/events/explorer/saved_views/
 further_reading:
-- link: "/service_management/events/explorer/"
+- link: "/events/explorer/"
   tag: "Documentation"
   text: "Learn more about the Events Explorer"
 ---
@@ -48,5 +48,5 @@ In the default view entry in the **Views** panel, you can:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/event/explorer
-[2]: /service_management/events/explorer/searching
-[3]: /service_management/events/explorer/searching
+[2]: /events/explorer/searching
+[3]: /events/explorer/searching
