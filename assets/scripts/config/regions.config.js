@@ -607,6 +607,24 @@ export default {
     ap2: '\n        .useSite(DatadogSite.AP2)\n        .trackCrashes(true)',
     gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
+  flutter_web_logs_cdn_path: {
+    us: 'us1/v5/datadog-logs.js',
+    us3: 'us3/v5/datadog-logs.js',
+    us5: 'us5/v5/datadog-logs.js',
+    eu: 'eu1/v5/datadog-logs.js',
+    ap1: 'ap1/v5/datadog-logs.js',
+    ap2: 'ap2/v5/datadog-logs.js',
+    gov: 'datadog-logs-v5.js'
+  },
+  flutter_web_rum_cdn_path: {
+    us: 'us1/v5/datadog-rum-slim.js',
+    us3: 'us3/v5/datadog-rum-slim.js',
+    us5: 'us5/v5/datadog-rum-slim.js',
+    eu: 'eu1/v5/datadog-rum-slim.js',
+    ap1: 'ap1/v5/datadog-rum-slim.js',
+    ap2: 'ap2/v5/datadog-rum-slim.js',
+    gov: 'datadog-rum-slim-v5.js'
+  },
   reactnative_sdk_init: {
     us: '',
     us3: '',
@@ -624,6 +642,15 @@ export default {
     ap1: 'ap1',
     ap2: 'ap2',
     gov: 'us1_fed'
+  },
+  synthetics_intake_endpoint: {
+    us: 'intake.synthetics.datadoghq.com',
+    us3: 'intake.synthetics.us3.datadoghq.com',
+    us5: 'intake.synthetics.us5.datadoghq.com',
+    eu: 'intake.synthetics.datadoghq.eu',
+    ap1: 'intake.synthetics.ap1.datadoghq.com',
+    ap2: 'intake.synthetics.ap2.datadoghq.com',
+    gov: 'intake.synthetics.ddog-gov.com'
   },
   cursor_mcp_install_deeplink: {
     us: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuY29tL2FwaS91bnN0YWJsZS9tY3Atc2VydmVyL21jcD90b29sc2V0cz1vbmJvYXJkaW5nIiwidHlwZSI6Im9hdXRoIn0=',
