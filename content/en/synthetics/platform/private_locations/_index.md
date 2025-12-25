@@ -93,12 +93,6 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer.
 
-{{< site-region region="gov" >}}
-
-<div class="alert alert-warning">FIPS compliance is not supported for Windows private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
-
-{{< /site-region >}}
-
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://www.datadoghq.com/legal/eula/
 
