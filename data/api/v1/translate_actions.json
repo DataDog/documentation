@@ -1012,28 +1012,28 @@
     "request_schema_description": "Details of the global variable to create."
   },
   "ListHostTags": {
-    "description": "Return a mapping of tags to hosts for your whole infrastructure.",
-    "summary": "Get Tags"
+    "description": "Returns a mapping of tags to hosts. For each tag, the response returns a list of host names that contain this tag. There is a restriction of 10k total host names from the org that can be attached to tags and returned.",
+    "summary": "Get All Host Tags"
   },
   "DeleteHostTags": {
-    "description": "This endpoint allows you to remove all user-assigned tags\nfor a single host.",
+    "description": "This endpoint allows you to remove all tags\nfor a single host. If no source is specified, only deletes tags with no source.",
     "summary": "Remove host tags"
   },
   "GetHostTags": {
     "description": "Return the list of tags that apply to a given host.",
-    "summary": "Get host tags"
+    "summary": "Get Host Tags"
   },
   "CreateHostTags": {
-    "description": "This endpoint allows you to add new tags to a host,\noptionally specifying where these tags come from.",
+    "description": "This endpoint allows you to add new tags to a host,\noptionally specifying what source these tags come from.",
     "summary": "Add tags to a host",
     "request_description": "Update host tags request body.",
-    "request_schema_description": "Set of tags to associate with your host."
+    "request_schema_description": "Host name and an array of its tags"
   },
   "UpdateHostTags": {
     "description": "This endpoint allows you to update/replace all tags in\nan integration source with those supplied in the request.",
     "summary": "Update host tags",
     "request_description": "Add tags to host",
-    "request_schema_description": "Set of tags to associate with your host."
+    "request_schema_description": "Host name and an array of its tags"
   },
   "GetUsageAnalyzedLogs": {
     "description": "Get hourly usage for analyzed logs (Security Monitoring).\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
