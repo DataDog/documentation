@@ -3088,6 +3088,26 @@ menu:
       parent: datadog_cloudcraft
       identifier: datadog_cloudcraft_overlays
       weight: 1
+    - name: Infrastructure
+      url: datadog_cloudcraft/overlays/infrastructure/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_infrastructure
+      weight: 101
+    - name: Observability
+      url: datadog_cloudcraft/overlays/observability/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_observability
+      weight: 102
+    - name: Security
+      url: datadog_cloudcraft/overlays/security/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_security
+      weight: 103
+    - name: Cloud Cost Management
+      url: datadog_cloudcraft/overlays/ccm/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_ccm
+      weight: 104
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
