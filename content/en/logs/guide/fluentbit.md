@@ -40,6 +40,7 @@ Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4
 | dd_tags        | _Optional_ - The [tags][10] you want to assign to your logs in Datadog.                                                                                                                                                                                                                                                     |                                                                             |
 | dd_hostname    | _Optional_ - The host that emitted logs should be associated with. If unset, Datadog expects the host to be set as one of [the standard host attributes][12].
 | provider       | _Optional_ - The provider to use. Set this to `ecs` if you want to send logs from your Fargate Tasks to Datadog.                                                                                                                                                                                                            |                                                                             |
+| site           | _Optional_ - The Datadog site to send logs to. For example, use `datadoghq.eu` to send logs to the EU GCP data center, or leave unset for the default US site.                                                                                                                                                                        | `datadoghq.com`                                                             |
 
 #### Configuration file example
 
@@ -55,6 +56,7 @@ Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4
     dd_source         <SOURCE>
     dd_message_key    log
     dd_tags           env:dev,<TAG_KEY>:<TAG_VALUE>
+    site              datadoghq.eu
 ```
 
 ## Troubleshooting
