@@ -43,7 +43,7 @@ Alternative methods are available for specific use cases, such as maintaining a 
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}
     <h3>OTLP Ingest in the Agent</h3>
-    Best for: Users on platforms other than Kubernetes Linux, or those who prefer a minimal configuration without managing Collector pipelines.
+    Best for: Users on platforms other than Kubernetes or bare-metal Linux, or those who prefer a minimal configuration without managing Collector pipelines.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/setup/agentless" >}}
     <h3>Direct OTLP Ingest (Preview)</h3>
