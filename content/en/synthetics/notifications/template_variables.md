@@ -13,39 +13,10 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. Access these variables using the `synthetics.attributes` prefix. For example:
-
-```text
-Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.failed_step.failure.message}}.
-```
-
-**Note**: For information about accessing local (config) variables, see the [Variables](#variables) section.
-
-### Common variable shortcuts
-
-`{{synthetics.failed_step.name}}`
-: The name of the failing step (for example, `Test div #title content`).
-
-`{{synthetics.failed_step.failure.message}}`
-: The error message (for example, `Element's content should match the given regex`).
-
-`{{synthetics.failed_step.url}}`
-: The URL of the failed step (for example, `https://www.datadoghq.com/blog/`).
-
-`{{synthetics.attributes.result.response.statusCode}}`
-: The HTTP status code (for example, `403`).
-
-`{{synthetics.result.step_count}}`
-: Number of steps (for example, `4`).
-
-`{{synthetics.result.duration}}`
-: Duration of the test run (in milliseconds) (for example, `9096`).
-
-`{{tags.env}}`
-: The environment tag value (for example, `prod`).
+Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. 
+These variables are accessed using the `{{synthetics.attributes}}` prefix.
 
 **Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab, then reference the path directly within your monitor configuration.
-
 
 ### Result attributes
 
