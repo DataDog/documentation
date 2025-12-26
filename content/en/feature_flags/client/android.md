@@ -192,6 +192,18 @@ print(details.errorCode)  // The error that occurred during evaluation, if any
 
 Flag details may help you debug evaluation behavior and understand why a user received a given value.
 
+## A/B experimentation
+
+To run A/B experiments and measure the impact of feature variations, enable exposure tracking with `.trackExposures(true)`. When enabled, the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. If you only need local evaluation without telemetry, you can disable it with `.trackExposures(false)`.
+
+{{< code-block lang="kotlin" >}}
+val config = FlagsConfiguration.Builder()
+    .trackExposures(true)
+    .build()
+
+Flags.enable(config)
+{{< /code-block >}}
+
 ## Advanced configuration
 
 The `Flags.enable()` API accepts optional configuration with options listed below.
@@ -204,19 +216,16 @@ val config = FlagsConfiguration.Builder()
 Flags.enable(config)
 {{< /code-block >}}
 
-`trackExposures()`
-: When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable it with: `trackExposures(false)`.
-
 `rumIntegrationEnabled()`
-: When `true` (default), flag evaluations are tracked in RUM, which enables correlating them with user sessions. This enables analytics such as _“Do users in variant B experience more errors?”_. If your app does not use RUM, this flag has no effect and can be safely left at its default value. Use `rumIntegrationEnabled(false)` to disable RUM integration.
+: When `true` (default), flag evaluations are tracked in RUM, which enables correlating them with user sessions. This enables analytics such as _"Do users in variant B experience more errors?"_. If your app does not use RUM, this flag has no effect and can be safely left at its default value. Use `rumIntegrationEnabled(false)` to disable RUM integration.
 
 `gracefulModeEnabled()`
 : Controls how the SDK handles incorrect use of the `FlagsClient` API—for example, creating a client before calling `Flags.enable()`, creating a duplicate client with the same name, or retrieving a client that hasn't been created yet.
 
   The exact behavior of Graceful Mode depends on your build configuration:
 
-  * **Release builds**: The SDK always enforces Graceful Mode: any misuse is only logged internally if `Datadog.setVerbosity()` is configured.  
-  * **Debug builds** with `gracefulModeEnabled = true` (default): The SDK always logs warnings to the console.  
+  * **Release builds**: The SDK always enforces Graceful Mode: any misuse is only logged internally if `Datadog.setVerbosity()` is configured.
+  * **Debug builds** with `gracefulModeEnabled = true` (default): The SDK always logs warnings to the console.
   * **Debug builds** with `gracefulModeEnabled = false`: The SDK raises `IllegalStateException` for incorrect API usage, enforcing a fail-fast approach that helps detect configuration mistakes early.
 
   You can adjust `gracefulModeEnabled()` depending on your development or QA phase.
