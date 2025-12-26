@@ -132,7 +132,7 @@ Applies to browser and mobile tests.
 : Unique result ID
 
 `{{synthetics.attributes.result.status}}`
-: Test execution status  (for example, `passed` or `failed`)
+: Test execution status (for example, `passed` or `failed`)
 
 `{{synthetics.attributes.result.duration}}`
 : Test duration in milliseconds
