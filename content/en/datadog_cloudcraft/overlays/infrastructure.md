@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure overlay provides a broad overview of your cloud environment, grouping resources by Account, Region, and VPC. This is the default view when opening a Cloudcraft diagram.
+The Infrastructure overlay provides a broad overview of your cloud environment by grouping resources into Account, Region, and VPC. This is the default view when opening a Cloudcraft diagram.
 
 {{< img src="datadog_cloudcraft/infra_overlay_4.png" alt="Infrastructure overlay in Cloudcraft." style="width:100%;" >}}
 

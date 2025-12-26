@@ -45,7 +45,7 @@ In the bottom left legend, the **View Datadog coverage by** dropdown allows you 
 |-----------|-----------------------------------------------------------|
 | Green     | Agent and feature are both enabled                        |
 | Gray      | Feature is not enabled                                    |
-| Yellow    | Agent is installed but requires an upgrade               |
+| Yellow    | Agent is installed but needs an upgrade to enable all features               |
 
 ### Tracked features
 

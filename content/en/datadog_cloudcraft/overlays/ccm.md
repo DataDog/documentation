@@ -22,7 +22,7 @@ The Cloud Cost overlay helps you visualize resource-level costs and identify sav
 
 ## Cost view
 
-The Cost view displays resource-level cloud costs for the last 30 days, allowing you to understand spending patterns across your architecture.
+The Cost view shows resource-level cloud costs from the past 30 days, allowing you to understand spending patterns across your architecture.
 
 ### Filter by cost
 
