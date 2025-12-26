@@ -6,8 +6,8 @@ cascade:
         subcategory: 'Cloud Cost Management'
 ---
 
-This section provides Cloud Cost Management guidance specifically for **Managed Service Provider (MSP) partners** who need to enable secure, customer-facing cost visibility using Datadog.
+As a **Managed Service Provider MSP) partner**, you can use Cloud Cost Management to provide your customers with secure, actionable insights into their cloud spending. 
 
 {{< whatsnext desc="To start managing cloud costs with Cloud Cost Management, see the following documentation.">}}
-  {{< nextlink href="/partners/cloud_cost_management/aws">}}<u>AWS</u>: Configure Cloud Cost Management for AWS bill.{{< /nextlink >}}
+  {{< nextlink href="/partners/cloud_cost_management/aws">}}<u>AWS</u>: Set up AWS cost visibility for your customers.{{< /nextlink >}}
 {{< /whatsnext >}}
