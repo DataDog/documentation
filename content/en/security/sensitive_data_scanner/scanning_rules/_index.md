@@ -4,9 +4,6 @@ disable_toc: false
 aliases:
   - /sensitive_data_scanner/scanning_rules
 further_reading:
-- link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
-  tag: "Documentation"
-  text: "Best practices for creating custom scanning rules"
 - link: https://www.datadoghq.com/blog/cloudcraft-security/
   tag: Blog
   text: Visually identify and prioritize security risks using Cloudcraft
