@@ -7,7 +7,6 @@ aliases:
 - /monitors/service_level_objectives/
 - /service_management/service_level_objectives/ootb_dashboard
 - /service_management/service_level_objectives/
-
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"

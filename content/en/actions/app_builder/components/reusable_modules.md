@@ -3,13 +3,13 @@ title: Reusable Modules
 description: Save and reuse groups of components and queries across multiple App Builder applications as modular templates.
 disable_toc: false
 further_reading:
-- link: "/actions/app_builder/components/"
+- link: "/service_management/app_builder/components/"
   tag: "Documentation"
   text: "Components"
-- link: "/actions/app_builder/build/"
+- link: "/service_management/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
-- link: "/actions/app_builder/queries/"
+- link: "/service_management/app_builder/queries/"
   tag: "Documentation"
   text: "Queries"
 ---
