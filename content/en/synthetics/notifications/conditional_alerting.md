@@ -58,7 +58,7 @@ If the failed step's description field matches Checkout, notify the recipient
 ```handlebars
 {{!
 This alert uses the `{{synthetics.failed_step}}` object which is a variable shortcut that points to the relevant step data contained in `{{synthetics.attributes.result.steps}}`.
-If the test triggers an alert for Browser or Mobile tests and if the failed step's description field matches Checkout, notify the recipient.
+If the test triggers an alert for browser or mobile tests, and if the failed step's description field matches Checkout, notify the recipient.
 }}
 {{#is_alert}}
   {{#is_match "synthetics.failed_step.description" "Checkout"}}@notify-slack-payments{{/is_match}}
