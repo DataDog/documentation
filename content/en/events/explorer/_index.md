@@ -3,6 +3,7 @@ title: Events Explorer
 aliases:
 - /events/stream/
 - /service_management/events/correlation/
+- service_management/events/explorer/
 further_reading:
 - link: "/api/latest/events/"
   tag: "Documentation"
