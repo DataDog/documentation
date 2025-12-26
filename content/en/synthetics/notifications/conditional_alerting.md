@@ -41,7 +41,7 @@ If a test triggers an alert for an API test and returns a 500 statuscode, notify
 
 ```handlebars
 {{!
-If a test triggers an alert for Browser or Mobile tests, loop through each step and find the failed step.
+If a test triggers an alert for browser or mobile tests, loop through each step and find the failed step.
 If the failed step's description field matches Checkout, notify the recipient
 }}
 {{#is_alert}}
