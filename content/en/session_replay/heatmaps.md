@@ -151,10 +151,7 @@ The time periods you can view in a heatmap depend on where you access it:
 
 ## Next steps
 
-After analyzing heatmaps, the next step is to understand the user action by exploring related data. Watch associated [session replays][1] to see user actions in the context of their overall session, or navigate to an Analytics explorer:
-
-- **RUM**: Use the [RUM Analytics explorer][3] to explore and analyze your user data.
-- **Product Analytics**: Use the [Product Analytics explorer][4] to explore and analyze your user data.
+After analyzing heatmaps, the next step is to understand the user action by exploring related data. Watch associated [session replays][1] to see user actions in the context of their overall session, or navigate to an Analytics explorer in [RUM][3] or [Product Analytics][4] to analyze your user data.
 
 ## Troubleshooting
 
