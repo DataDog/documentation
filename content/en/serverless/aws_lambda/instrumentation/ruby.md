@@ -29,7 +29,27 @@ If your application is deployed as a container image, use the _Container Image_ 
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your Ruby AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your Ruby AWS Lambda application directly within Datadog.
+
+1. Configure your Lambda functions
+
+    Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+
+    ```ruby
+    require 'datadog/lambda'
+
+    Datadog::Lambda.configure_apm do |c|
+    # Enable the instrumentation
+    end
+
+    def handler(event:, context:)
+        Datadog::Lambda.wrap(event, context) do
+            return { statusCode: 200, body: 'Hello World' }
+        end
+    end
+    ```
+
+2. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
@@ -171,6 +191,70 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{< lambda-install-cdk language="ruby" layer="ruby" layerParamTypescript="rubyLayerVersion" layerParamPython="ruby_layer_version">}}
 {{% /tab %}}
 
+{{% tab "AWS SAM" %}}
+
+The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog on your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+
+1. Configure your Lambda functions
+
+    Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+
+    ```ruby
+    require 'datadog/lambda'
+
+    Datadog::Lambda.configure_apm do |c|
+    # Enable the instrumentation
+    end
+
+    def handler(event:, context:)
+        Datadog::Lambda.wrap(event, context) do
+            return { statusCode: 200, body: 'Hello World' }
+        end
+    end
+    ```
+
+2. Install the Datadog CloudFormation macro
+
+    Run the following command with your [AWS credentials][3] to deploy a CloudFormation stack that installs the macro AWS resource. You only need to install the macro **once** for a given region in your account. Replace `create-stack` with `update-stack` to update the macro to the latest version.
+
+    ```sh
+    aws cloudformation create-stack \
+      --stack-name datadog-serverless-macro \
+      --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
+      --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
+    ```
+
+    The macro is now deployed and ready to use.
+
+3. Instrument your Lambda functions
+
+    Add the `DatadogServerless` transform **after** the `AWS::Serverless` transform under the `Transform` section in your for SAM `template.yml`.
+
+    ```yaml
+    Transform:
+      - AWS::Serverless-2016-10-31
+      - Name: DatadogServerless
+        Parameters:
+          stackName: !Ref "AWS::StackName"
+          rubyLayerVersion: {{< latest-lambda-layer-version layer="ruby" >}}
+          extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
+          site: "<DATADOG_SITE>"
+          apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
+    ```
+
+    To fill in the placeholders:
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+
+    More information and additional parameters can be found in the [macro documentation][1].
+
+
+[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
+[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+
 {{% tab "Container Image" %}}
 
 1. Install the Datadog Lambda Library
@@ -235,6 +319,82 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Terraform" %}}
+
+The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] resource and automatically configures your Lambda function for Datadog Serverless Monitoring by:
+
+- Adding the Datadog Lambda layers
+- Redirecting the Lambda handler
+- Enabling the collection and sending of metrics, traces, and logs to Datadog
+
+1. Configure your Lambda functions
+
+    Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+
+    ```ruby
+    require 'datadog/lambda'
+
+    Datadog::Lambda.configure_apm do |c|
+    # Enable the instrumentation
+    end
+
+    def handler(event:, context:)
+        Datadog::Lambda.wrap(event, context) do
+            return { statusCode: 200, body: 'Hello World' }
+        end
+    end
+    ```
+
+2. Install the Terraform module
+
+    ```tf
+    module "lambda-datadog" {
+      source  = "DataDog/lambda-datadog/aws"
+      version = "4.0.0"
+
+      environment_variables = {
+        "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
+        "DD_ENV" : "<ENVIRONMENT>"
+        "DD_SERVICE" : "<SERVICE_NAME>"
+        "DD_SITE": "<DATADOG_SITE>"
+        "DD_VERSION" : "<VERSION>"
+      }
+
+      datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+      datadog_ruby_layer_version = {{< latest-lambda-layer-version layer="ruby" >}}
+
+      # aws_lambda_function arguments
+    }
+    ```
+
+3. Replace the `aws_lambda_function` resource with the `lambda-datadog` Terraform module then specify the `source` and `version` of the module.
+
+4. Set the `aws_lambda_function` arguments:
+
+   All of the arguments available in the `aws_lambda_function` resource are available in this Terraform module. Arguments defined as blocks in the `aws_lambda_function` resource are redefined as variables with their nested arguments.
+
+   For example, in `aws_lambda_function`, `environment` is defined as a block with a `variables` argument. In the `lambda-datadog` Terraform module, the value for the `environment_variables` is passed to the `environment.variables` argument in `aws_lambda_function`. See [inputs][3] for a complete list of variables in this module.
+
+5. Fill in the environment variable placeholders:
+
+   - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
+   - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
+   - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
+   - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][4] is selected on this page).
+   - Replace `<VERSION>` with the version number of the Lambda function
+
+6. Select the versions of the Datadog Extension Lambda layer and Datadog Ruby Lambda layer to use. Defaults to the latest layer versions.
+
+```
+  datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
+  datadog_ruby_layer_version = {{< latest-lambda-layer-version layer="ruby" >}}
+```
+
+[1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
+[2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
+[3]: https://github.com/DataDog/terraform-aws-lambda-datadog?tab=readme-ov-file#inputs
+[4]: /getting_started/site/
+{{% /tab %}}
 {{% tab "Custom" %}}
 
 <div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>
@@ -263,7 +423,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="ruby" >}}
       ```
 
-      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `RUNTIME` options are `Ruby2-7`, and `Ruby3-2`.
+      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="ruby-versions" >}}.
 
     - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the gems `datadog-lambda` and `datadog` by adding them to your Gemfile as an alternative:
 

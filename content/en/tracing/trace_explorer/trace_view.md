@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
   tag: "Blog"
-  text:" From performance to impact: Bridging frontend teams through shared context"
+  text: "From performance to impact: Bridging frontend teams through shared context"
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
