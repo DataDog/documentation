@@ -16,6 +16,7 @@ description: "Comprehensive reference for monitor API configuration options incl
 
 - **`notify_no_data`** a boolean indicating whether this monitor notifies when data stops reporting. Default: **False**.
 - **`no_data_timeframe`** the number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, 2x the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
+- **`on_missing_data`** a string declaring the behavior for the monitor when data stops reporting. Default: **default**. Other options: **show_no_data**, **show_and_notify_no_data**, **resolve**
 - **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. The minimum allowed value is 0 hours. The maximum allowed value is 24 hours. Default: **null**.
 
 -  **`require_full_window`** a boolean indicating whether this monitor needs a full window of data before it's evaluated. Datadog recommends you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **False**.
