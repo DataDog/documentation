@@ -3,6 +3,9 @@ title: LLM Observability
 aliases:
     - /tracing/llm_observability/
 further_reading:
+- link: https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/
+  tag: Blog
+  text: Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
   text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
