@@ -65,7 +65,7 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 : Subtype for API tests (for example, `http`, `dns`, and `multi`)
 
 `{{synthetics.attributes.test.id}}`
-: The test ID is the test's public ID (for example, `abc-def-ghi`)
+: The test's public ID (for example, `abc-def-ghi`)
 
 {{% /tab %}}
 {{% tab "Location" %}}
