@@ -132,9 +132,11 @@ You can post **updates** over time to keep users informed, and then mark the not
 
 ## Email subscriptions
 
-Email subscriptions on status pages are **double opt-in**: users must confirm their email address before they are added as subscribers. After entering an email to subscribe, a confirmation email is sent, and the subscription is only activated after the user clicks the confirmation link.
+Email subscriptions on status pages are **double opt-in**. After entering an email to subscribe, users receive a confirmation email and must click the confirmation link to activate their subscription. During this process, users can choose to receive notifications for the entire status page or select specific components they want to monitor. Users can manage their preferences and update their subscriptions at any time through the subscription management link included in notification emails.
 
 For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
+
+{{< img src="/service_management/status_pages/status_pages_subscription.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
 ## Set a custom domain
 
