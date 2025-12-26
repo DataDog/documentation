@@ -8602,16 +8602,11 @@ menu:
       parent: session_replay_browser
       identifier: session_replay_browser_privacy_options
       weight: 102
-    - name: Developer Tools
-      url: /session_replay/browser/developer_tools
-      parent: session_replay_browser
-      identifier: session_replay_browser_developer_tools
-      weight: 103
     - name: Troubleshooting
       url: /session_replay/browser/troubleshooting
       parent: session_replay_browser
       identifier: session_replay_browser_troubleshooting
-      weight: 104
+      weight: 103
     - name: Mobile
       url: /session_replay/mobile
       parent: session_replay

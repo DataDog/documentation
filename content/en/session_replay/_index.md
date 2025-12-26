@@ -5,6 +5,9 @@ aliases:
 - /real_user_monitoring/guide/session-replay-getting-started/
 - /real_user_monitoring/session_replay/
 - /product_analytics/session_replay/
+- /real_user_monitoring/session_replay/developer_tools
+- /real_user_monitoring/session_replay/browser/developer_tools
+- /product_analytics/session_replay/browser/developer_tools
 further_reading:
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
   tag: 'Blog'
@@ -73,24 +76,27 @@ To view your own playback history, check out the [My Watch History][10] playlist
 
 You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][7].
 
-## Dev tools
+## Dev Tools
 
-The Dev tools panel in Session Replay exposes key debugging information during playback. Use it to identify frontend issues, trace requests to the backend, and understand performance bottlenecks—all without reproducing the issue yourself.
+Dev Tools is a built-in debugging panel in Session Replay that exposes key information during playback. Use it to identify issues, trace requests, and understand performance bottlenecks—all without reproducing the issue yourself. Dev Tools are available for both [RUM][1] and [Product Analytics][2] sessions.
 
-To access Dev tools, click the **Dev Tools** button in the Session Replay view.
+To access Dev Tools, click the **Dev Tools** button in the Session Replay view.
 
-The Dev tools panel includes the following tabs:
+**Note:** Dev Tools are only available for sessions that have been retained.
+
+### Available tabs
 
 | Tab | Description |
 |-----|-------------|
-| **Console** | Displays browser logs collected during the session. Errors are highlighted in red. Use this to trace the user's journey from an initial API call to any resulting errors. |
-| **Errors** | Shows which errors are linked to larger issues affecting multiple users through [Error Tracking][11]. |
-| **Performance** | Displays a timeline of loaded resources along with Core Web Vitals (largest contentful paint, first contentful paint, cumulative layout shift, DOM content loaded). |
-| **Network** | Shows a waterfall view of network events. Filter by resource type (JavaScript, CSS) or error type to identify long-running requests and bottlenecks. |
+| **Console** | Displays logs collected during the session. Errors are highlighted in red. Filter by severity (Error, Warn, Info, Debug) and click **View in Log Explorer** to search logs in a separate tab. |
+| **Errors** | Shows [RUM errors][13] linked to the session and surfaces which errors are connected to larger issues affecting multiple users through [Error Tracking][11]. |
+| **Performance** | Displays a waterfall of events (actions, errors, resources, long tasks) with timestamps. Filter by action name or resource type and adjust the time range using the sliders. For browser sessions, this also includes Core Web Vitals. |
+| **Network** | Shows a waterfall view of network events. Filter by resource type or error type to identify long-running requests and bottlenecks. |
+| **Attributes** | Displays all attributes related to the session, including [default attributes][14]. |
 
 ### Trace issues from frontend to backend
 
-If [APM is integrated with RUM][12], frontend requests are connected to backend traces automatically in Dev tools. When a trace is associated with a request, an APM icon appears next to it in the Network waterfall. Click the icon to open the trace view and visualize the end-to-end path of the request.
+If [APM is integrated with RUM][12], frontend requests are connected to backend traces automatically in Dev Tools. When a trace is associated with a request, an APM icon appears next to it in the Network waterfall. Click the icon to open the trace view and visualize the end-to-end path of the request.
 
 ### Identify CSP violations
 
@@ -112,3 +118,5 @@ Console logs also surface Content Security Policy (CSP) violations. If a legitim
 [10]: /rum/replay/playlists/my-watch-history
 [11]: /error_tracking/
 [12]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[13]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
+[14]: /real_user_monitoring/application_monitoring/browser/data_collected/#default-attributes
