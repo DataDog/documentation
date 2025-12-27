@@ -7793,21 +7793,26 @@ menu:
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables
       weight: 1001
+    - name: Step Data Variables
+      url: synthetics/notifications/step_data_variables
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_step_data_variables
+      weight: 10001
     - name: Conditional Alerting
       url: synthetics/notifications/conditional_alerting
       parent: synthetics_notifications
       identifier: synthetics_notifications_conditional_alerting
-      weight: 1002
+      weight: 1003
     - name: Advanced Notifications
       url: synthetics/notifications/advanced_notifications
       parent: synthetics_notifications
       identifier: synthetics_notifications_advanced_notifications
-      weight: 1003
+      weight: 1004
     - name: Integrate with Statuspage
       url: synthetics/notifications/statuspage
       parent: synthetics_notifications
       identifier: synthetics_notifications_statuspage
-      weight: 1004
+      weight: 1005
     - name: Troubleshooting
       url: synthetics/troubleshooting/
       parent: synthetics
