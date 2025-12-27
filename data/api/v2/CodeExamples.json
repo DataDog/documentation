@@ -1922,6 +1922,13 @@
       "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
+  "CreateTeamNotificationRule": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create team notification rule returns \"OK\" response"
+    }
+  ],
   "SyncTeams": [
     {
       "group": "teams",
@@ -1948,6 +1955,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update permission setting for team returns \"OK\" response"
+    }
+  ],
+  "UpdateTeamNotificationRule": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update team notification rule returns \"OK\" response"
     }
   ],
   "CreateUser": [

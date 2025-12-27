@@ -54642,6 +54642,143 @@ components:
             $ref: '#/components/schemas/TeamLink'
           type: array
       type: object
+    TeamNotificationRule:
+      description: Team notification rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributes'
+        id:
+          description: The identifier of the team notification rule
+          example: b8626d7e-cedd-11eb-abf5-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamNotificationRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamNotificationRuleAttributes:
+      description: Team notification rule attributes
+      properties:
+        email:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesEmail'
+        ms_teams:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesMsTeams'
+        pagerduty:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesPagerduty'
+        slack:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesSlack'
+      type: object
+    TeamNotificationRuleAttributesEmail:
+      description: Email notification settings for the team
+      properties:
+        enabled:
+          description: Flag indicating email notification
+          type: boolean
+      type: object
+    TeamNotificationRuleAttributesMsTeams:
+      description: MS Teams notification settings for the team
+      properties:
+        connector_name:
+          description: Handle for MS Teams
+          type: string
+      type: object
+    TeamNotificationRuleAttributesPagerduty:
+      description: PagerDuty notification settings for the team
+      properties:
+        service_name:
+          description: Service name for PagerDuty
+          type: string
+      type: object
+    TeamNotificationRuleAttributesSlack:
+      description: Slack notification settings for the team
+      properties:
+        channel:
+          description: Channel for Slack notification
+          type: string
+        workspace:
+          description: Workspace for Slack notification
+          type: string
+      type: object
+    TeamNotificationRuleRequest:
+      description: Request to create or update a team notification rule
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamNotificationRule'
+      required:
+      - data
+      type: object
+    TeamNotificationRuleResponse:
+      description: Team notification rule response
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamNotificationRule'
+      type: object
+    TeamNotificationRuleType:
+      default: team_notification_rules
+      description: Team notification rule type
+      enum:
+      - team_notification_rules
+      example: team_notification_rules
+      type: string
+      x-enum-varnames:
+      - TEAM_NOTIFICATION_RULES
+    TeamNotificationRulesResponse:
+      description: Team notification rules response
+      properties:
+        data:
+          description: Team notification rules response data
+          items:
+            $ref: '#/components/schemas/TeamNotificationRule'
+          type: array
+        meta:
+          $ref: '#/components/schemas/TeamNotificationRulesResponseMeta'
+      type: object
+    TeamNotificationRulesResponseMeta:
+      description: Metadata that is included in the response when querying the team
+        notification rules
+      properties:
+        page:
+          $ref: '#/components/schemas/TeamNotificationRulesResponseMetaPage'
+      type: object
+    TeamNotificationRulesResponseMetaPage:
+      description: Metadata related to paging information that is included in the
+        response when querying the team notification rules
+      properties:
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          type: integer
+        limit:
+          description: Pagination limit.
+          format: int64
+          type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: The offset.
+          format: int64
+          type: integer
+        prev_offset:
+          description: The previous offset.
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Total results.
+          format: int64
+          type: integer
+        type:
+          description: Offset type.
+          type: string
+      type: object
     TeamOnCallResponders:
       description: Root object representing a team's on-call responder configuration.
       example:
@@ -87708,7 +87845,7 @@ paths:
       summary: Delete team connections
       tags:
       - Teams
-      x-menu-order: 3
+      x-menu-order: 26
       x-permission:
         operator: OR
         permissions:
@@ -87784,7 +87921,7 @@ paths:
       summary: List team connections
       tags:
       - Teams
-      x-menu-order: 1
+      x-menu-order: 24
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -87825,7 +87962,7 @@ paths:
       summary: Create team connections
       tags:
       - Teams
-      x-menu-order: 2
+      x-menu-order: 25
       x-permission:
         operator: OR
         permissions:
@@ -88708,6 +88845,235 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+  /api/v2/team/{team_id}/notification-rules:
+    get:
+      operationId: GetTeamNotificationRules
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRulesResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team notification rules
+      tags:
+      - Teams
+      x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    post:
+      operationId: CreateTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamNotificationRuleRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Create team notification rule
+      tags:
+      - Teams
+      x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+  /api/v2/team/{team_id}/notification-rules/{rule_id}:
+    delete:
+      operationId: DeleteTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Delete team notification rule
+      tags:
+      - Teams
+      x-menu-order: 31
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    get:
+      operationId: GetTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team notification rule
+      tags:
+      - Teams
+      x-menu-order: 29
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    put:
+      operationId: UpdateTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamNotificationRuleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Update team notification rule
+      tags:
+      - Teams
+      x-menu-order: 30
       x-permission:
         operator: OR
         permissions:
