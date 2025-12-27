@@ -18,6 +18,7 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [AWS SSM](#id-for-ssm)
 - [Azure KeyVault](#id-for-azure)
 - [HashiCorp Vault](#id-for-hashicorp)
+- [Kubernetes Secrets](#id-for-kubernetes)
 - [File JSON](#id-for-json-yaml)
 - [File YAML](#id-for-json-yaml)
 
@@ -484,7 +485,234 @@ secret_backend_config:
 [3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
 [3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 [3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
+
+{{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
+
+**Note:** Available in Agent version 7.75+
+
+| secret_backend_type value | Service |
+|---------------------------|---------|
+| `k8s.secrets` | [Kubernetes Secrets][5000] |
+
+##### Prerequisites
+
+The Kubernetes secrets backend requires:
+- **ServiceAccount credentials**: By default, uses automatically mounted ServiceAccount tokens (`automountServiceAccountToken: true`). Custom paths can be configured if needed.
+- **RBAC permissions**: The Agent's ServiceAccount must have permissions to read secrets from target namespaces
+- **Network access**: The Agent pod must be able to reach the Kubernetes API server
+
+##### RBAC setup
+
+For each namespace containing secrets, create a `Role` and `RoleBinding` using the following example using the correct namespace name:
+
+```yaml
+# Role: grants permission to read secrets
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: datadog-secret-reader
+  namespace: <target namepace> # Namespace with secrets
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get"]
+---
+# RoleBinding: grants permission to Agent's ServiceAccount
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: datadog-secret-access
+  namespace: <target namespace>  # Namespace with secrets
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: datadog-secret-reader
+subjects:
+- kind: ServiceAccount
+  name: datadog-agent
+  namespace: datadog  # Where Agent runs
+```
+
+##### Configuration example
+
+{{< tabs >}}
+{{% tab "Agent YAML file" %}}
+
+Configure the Datadog Agent to use Kubernetes Secrets with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: k8s.secrets
+
+# Reference secrets using namespace/secret-name;key format
+api_key: "ENC[secrets-prod/dd-api-key;api_key]"
+app_key: "ENC[secrets-prod/dd-api-key;app_key]"
+```
+
+The ENC notation format is `namespace/secret-name;key`:
+- `namespace`: The Kubernetes namespace containing the secret
+- `secret-name`: The name of the Secret resource
+- `key`: The specific key to extract from the Secret's data field
+
+**Example:** Given a Secret in namespace `secrets-ns`:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dd-api-key
+  namespace: secrets-ns
+data:
+  api_key: <base64-encoded-value>
+  app_key: <base64-encoded-value>
+```
+
+You can reference individual keys:
+```yaml
+api_key: "ENC[secrets-ns/dd-api-key;api_key]"
+app_key: "ENC[secrets-ns/dd-api-key;app_key]"
+```
+
+**Multi-namespace support:**
+Each secret reference can specify a different namespace (RBAC must be configured for each):
+
+```yaml
+api_key: "ENC[secrets-ns/dd-keys;api_key]"
+db_password: "ENC[secrets-shared/db-creds;password]"
+```
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+Configure the Datadog Agent to use Kubernetes Secrets with Helm:
+
+```yaml
+# values.yaml
+datadog:
+  apiKey: "placeholder-will-be-overridden"
+
+  env:
+  - name: DD_SECRET_BACKEND_TYPE
+    value: "k8s.secrets"
+  - name: DD_API_KEY
+    value: "ENC[secrets-ns/dd-api-key;api_key]"
+```
+
+**Note:** A placeholder `apiKey` is required for Helm chart validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. See the RBAC setup section above.
+
+<div class="alert alert-info"> Helm does not currently have native <code>secretBackend.type</code> configuration. Use environment variables as shown above. </div>
+
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+
+Configure the Datadog Agent to use Kubernetes Secrets with the Datadog Operator:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: "placeholder-will-be-overridden"
+
+  override:
+    nodeAgent:
+      env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "k8s.secrets"
+      - name: DD_API_KEY
+        value: "ENC[secrets-ns/dd-api-key;api_key]"
+```
+
+**Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. Auto-RBAC via the Operator's `roles:` field is not currently supported for type-based backends.
+
+<div class="alert alert-info"> The Operator does not currently have native <code>secretBackend.type</code> configuration. Use environment variables in <code>override.nodeAgent.env</code> as shown above. </div>
+
+{{% /tab %}}
+{{< /tabs >}}
+
+##### Custom path configuration
+If your setup does not follow the default locations for ServiceAccount based authentication, then a `token_path` and `ca_path` can be specified
+
+{{< tabs >}}
+{{% tab "Agent YAML" %}}
+```yaml
+secret_backend_type: k8s.secrets
+secret_backend_config:
+  token_path: /custom/path/to/token
+  ca_path: /custom/path/to/ca.crt
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  env:
+  - name: DD_SECRET_BACKEND_TYPE
+    value: "k8s.secrets"
+  - name: DD_SECRET_BACKEND_CONFIG
+    value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+```yaml
+override:
+  nodeAgent:
+    env:
+    - name: DD_SECRET_BACKEND_TYPE
+      value: "k8s.secrets"
+    - name: DD_SECRET_BACKEND_CONFIG
+      value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+##### Custom api server configuration
+
+If your setup does not expose the default KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT environment variables, then a `api_server` url can be supplied to interact with the k8s REST API.
+
+{{< tabs >}}
+{{% tab "Agent YAML" %}}
+```yaml
+secret_backend_type: k8s.secrets
+secret_backend_config:
+  api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  env:
+  - name: DD_SECRET_BACKEND_TYPE
+    value: "k8s.secrets"
+  - name: DD_SECRET_BACKEND_CONFIG
+    value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+```yaml
+override:
+  nodeAgent:
+    env:
+    - name: DD_SECRET_BACKEND_TYPE
+      value: "k8s.secrets"
+    - name: DD_SECRET_BACKEND_CONFIG
+      value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+[5000]: https://kubernetes.io/docs/concepts/configuration/secret/
+
+{{% /collapse-content %}}
 
 {{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-json-yaml" %}}
 
