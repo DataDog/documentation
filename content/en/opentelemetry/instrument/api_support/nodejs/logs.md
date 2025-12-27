@@ -1,5 +1,5 @@
 ---
-title: Node.js OpenTelemetry Logs API Support
+title: Node.js OpenTelemetry Logs API Support (Random Change)
 code_lang: logs
 type: multi-code-lang
 code_lang_weight: 2
