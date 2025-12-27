@@ -317,6 +317,34 @@ To install the Agent based on operating system or CI and CD tool, see the [Datad
 
 **Note**: Domain controllers are not supported when installing the Datadog Agent with the Azure extension.
 
+#### Apply a custom configuration with the agentConfiguration parameter
+
+You can use the `agentConfiguration` parameter to apply custom configurations to your Agents. Expand the section corresponding with your operating system below for instructions.
+
+{{% collapse-content title="Windows" level="h5" id="extension-custom-configuration-windows" %}}
+1. After installing the Agent, apply any desired [Agent configurations][300].
+2. Navigate to `%ProgramData%\Datadog`. Remove any extra installation artifacts or files that may be present. Ensure that the folder contains only:
+    -  `datadog.yaml`
+    -  `conf.d` folder containing your integration configurations
+3. Save the sanitized `%ProgramData%\Datadog` folder as a zip file.
+4. Generate a hash of the zipped folder using the PowerShell command `Get-FileHash %ProgramData%\Datadog.zip -Algorithm SHA256`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
+5. Upload the file to blob storage.
+6. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+
+[300]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+{{% /collapse-content %}} 
+
+{{% collapse-content title="Linux" level="h5" id="extension-custom-configuration-linux" %}}
+1. After installing the Agent, apply any desired [Agent configurations][400].
+2. Save the `/etc/datadog-agent` folder as a zip file, using the command `zip -r datadog_config.zip /etc/datadog-agent`.
+3. Generate a hash of the zipped folder using the command `sha256sum datadog_config.zip`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
+4. Upload the file to blob storage.
+5. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+
+[400]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+{{% /collapse-content %}} 
+
+
 [1]: /getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/account/settings/agent/latest
