@@ -36,11 +36,11 @@ Install and set up the following on your machine:
 - [Helm (v3+)][54]
 - [kubectl][5]
 
-{{< callout btn_hidden="true" >}}
-Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
-{{< /callout >}}
+**Network**: {{% otel-network-requirements %}}
 
 ## Install the Datadog Agent with OpenTelemetry Collector
+
+<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Select installation method
 

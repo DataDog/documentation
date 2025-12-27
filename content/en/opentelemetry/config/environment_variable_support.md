@@ -41,6 +41,12 @@ The precedence rules on this page describe how *Datadog SDKs* resolve configurat
   See the relevant <a href="/tracing/trace_collection/library_config/">SDK Configuration page</a> for default values and more information.
 </div>
 
+## Network requirements
+
+{{% otel-network-requirements %}}
+
+**Note**: Even when `DD_METRICS_OTEL_ENABLED=true`, standard Runtime Metrics are still emitted through DogStatsD.
+
 ## Datadog SDK configuration
 These environment variables enable the Datadog SDK to ingest OpenTelemetry Metrics and Logs API data. For guides on how to instrument your application, see the [language-specific instrumentation documentation][14].
 

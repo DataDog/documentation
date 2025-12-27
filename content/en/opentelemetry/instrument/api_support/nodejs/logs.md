@@ -18,7 +18,7 @@ further_reading:
 
 - **Datadog SDK**: `dd-trace-js` version 5.73.0 or later.
 - **OpenTelemetry Logs API**: The `@opentelemetry/api-logs` package is required, in a version from `v0.200.0` up to `v1.0`.
-- **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
+- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
 
 <div class="alert alert-warning">
 The <code>@opentelemetry/api-logs</code> package is still experimental, and version 1.0 has not yet been released. New versions of this package may introduce breaking changes that affect compatibility.

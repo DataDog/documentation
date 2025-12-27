@@ -16,7 +16,7 @@ further_reading:
 ## Prerequisites
 
 - **Datadog SDK**: `dd-trace-py` version 3.18.0 or later.
-- **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
+- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
 
 ## Setup
 
