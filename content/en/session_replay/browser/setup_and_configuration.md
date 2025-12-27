@@ -1,6 +1,9 @@
 ---
 title: Browser Session Replay Setup and Configuration
 description: Capture and visually replay your users' web browsing experience with Session Replay.
+aliases:
+- /real_user_monitoring/session_replay/browser/setup_and_configuration
+- /product_analytics/session_replay/browser/setup_and_configuration
 further_reading:
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
   tag: 'Blog'
@@ -166,5 +169,5 @@ See [Connect Session Replay to your third-party tools][6].
 [2]: /real_user_monitoring/guide/sampling-browser-plans/
 [3]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumGlobal.html#startsessionreplayrecording
 [4]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumGlobal.html#stopsessionreplayrecording
-[5]: /real_user_monitoring/session_replay/browser/privacy_options
+[5]: /session_replay/browser/privacy_options
 [6]: /real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools

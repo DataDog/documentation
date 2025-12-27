@@ -2,10 +2,12 @@
 title: Mobile Session Replay
 description: Setting up Session Replay for mobile devices.
 aliases:
+  - /real_user_monitoring/session_replay/mobile/
+  - /product_analytics/session_replay/mobile/
 further_reading:
-    - link: '/real_user_monitoring/session_replay'
-      tag: Documentation
-      text: Session Replay
+  - link: '/session_replay'
+    tag: Documentation
+    text: Session Replay
 ---
 ## Overview
 
@@ -100,8 +102,8 @@ Learn how to [troubleshoot Mobile Session Replay][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/browser/#how-it-works
-[2]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
-[3]: /real_user_monitoring/session_replay/mobile/privacy_options
-[4]: /real_user_monitoring/session_replay/mobile/app_performance
-[5]: /real_user_monitoring/session_replay/mobile/troubleshooting
+[1]: /session_replay/browser/#how-it-works
+[2]: /session_replay/mobile/setup_and_configuration
+[3]: /session_replay/mobile/privacy_options
+[4]: /session_replay/mobile/app_performance
+[5]: /session_replay/mobile/troubleshooting

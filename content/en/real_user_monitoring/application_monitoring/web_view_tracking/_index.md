@@ -28,7 +28,7 @@ further_reading:
   - link: /real_user_monitoring
     tag: Documentation
     text: Explore Datadog RUM
-  - link: /real_user_monitoring/session_replay/mobile/setup_and_configuration#web-view-instrumentation
+  - link: /session_replay/mobile/setup_and_configuration#web-view-instrumentation
     tag: Documentation
     text: Web View Instrumentation
 ---
@@ -108,7 +108,7 @@ DatadogWebViewTracking.xcframework
 {{% /collapse-content %}}
 
 [1]: /real_user_monitoring/application_monitoring/browser/setup/#npm
-[2]: /real_user_monitoring/ios/
+[2]: /real_user_monitoring/application_monitoring/ios/
 [3]: https://docs.datadoghq.com/logs/log_collection/ios
 
 {{% /tab %}}
@@ -166,7 +166,7 @@ In order for instrumentation to work on the WebView component, it is very import
 ```
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
-[2]: /real_user_monitoring/android/?tab=kotlin#setup
+[2]: /real_user_monitoring/application_monitoring/android/?tab=kotlin#setup
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
 [4]: /logs/log_collection/android/?tab=kotlin#setup
 
@@ -379,7 +379,7 @@ See [RUM & Session Replay Billing][6] for details on how web views in mobile app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/#web-view-instrumentation
+[1]: /session_replay/mobile/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 [3]: /real_user_monitoring/application_monitoring/ios/setup
 [4]: /logs/log_collection/ios
