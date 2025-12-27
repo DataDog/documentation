@@ -282,7 +282,7 @@ You can:
 
 [1]: https://app.datadoghq.com/llm/evaluations
 [2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
-[3]: /service_management/events/explorer/facets/
+[3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility

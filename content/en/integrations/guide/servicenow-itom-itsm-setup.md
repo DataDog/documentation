@@ -399,10 +399,10 @@ Need additional help? Contact [Datadog support][10].
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/cases/settings
-[6]: /service_management/case_management/notifications_integrations/#servicenow
+[6]: /incident_response/case_management/notifications_integrations/#servicenow
 [7]: /account_management/org_settings/service_accounts/#create-or-revoke-application-keys
 [8]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
 [9]: https://app.datadoghq.com/incidents/settings?section=integrations
 [10]: /help/
 [11]: /monitors/configuration/?tab=thresholdalert#multi-alert
-[12]: /service_management/incident_management/integrations/servicenow
+[12]: /incident_response/incident_management/integrations/servicenow

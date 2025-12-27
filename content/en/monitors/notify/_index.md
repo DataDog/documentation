@@ -217,7 +217,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration
-[2]: /service_management/case_management/create_case/#automatic-case-creation
+[2]: /incident_response/case_management/create_case/#automatic-case-creation
 [3]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /monitors/notify/variables/
@@ -228,8 +228,8 @@ Message variables auto-populate with a randomly selected group based on the scop
 [10]: /service_management/workflows/trigger/#add-the-workflow-to-your-monitor
 [11]: /service_management/workflows/build/
 [12]: https://app.datadoghq.com/incidents/settings?section=global-settings
-[13]: /service_management/incident_management/incident_settings/property_fields
-[14]: /service_management/incident_management/notification
+[13]: /incident_response/incident_management/incident_settings/property_fields
+[14]: /incident_response/incident_management/notification
 [15]: /monitors/notify/variables/?tab=is_renotify#examples
 [16]: /monitors/settings/#tag-policies
 [17]: /account_management/teams/

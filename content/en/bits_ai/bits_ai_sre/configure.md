@@ -107,7 +107,7 @@ You can monitor user-initiated actions with [Audit Trail][11]. Events are sent w
 [2]: /monitors/notify
 [3]: https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack
 [4]: https://app.datadoghq.com/bits-ai/settings/integrations
-[5]: /service_management/case_management/projects
+[5]: /incident_response/case_management/projects
 [6]: https://app.datadoghq.com/cases/settings
 [7]: https://app.datadoghq.com/integrations/confluence
 [8]: /account_management/rbac

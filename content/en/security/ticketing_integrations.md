@@ -133,13 +133,13 @@ There are several case management facets under **Triage**, including:
 You can query attributes and create dashboards using these facets.
 
 
-[1]: /service_management/case_management/
+[1]: /incident_response/case_management/
 [2]: /integrations/jira/
-[3]: /service_management/case_management/notifications_integrations/#third-party-tickets
+[3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [4]: https://app.datadoghq.com/security/siem/signals?column=time&order=desc&viz=stream
 [5]: https://app.datadoghq.com/security/appsec/vm/library
 [6]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&viz=stream
 [7]: https://app.datadoghq.com/security/workload-protection/signals?query=%40workflow.rule.type%3A%22Workload%20Security%22
 [8]: /integrations/jira/#configure-a-jira-webhook
-[9]: /service_management/case_management/projects/
+[9]: /incident_response/case_management/projects/
 [10]: /security/ticketing_integrations/#prerequisites

@@ -224,7 +224,7 @@ If you want to see user activities, such as who changed the retention of an inde
 [14]: https://app.datadoghq.com/logs
 [15]: /logs/explorer/search/
 [16]: /logs/indexes/#set-daily-quota
-[17]: /service_management/events/explorer/facets
+[17]: /events/explorer/facets
 [18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
 [20]: /logs/log_configuration/indexes/#exclusion-filters

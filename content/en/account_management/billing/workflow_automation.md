@@ -73,8 +73,8 @@ This means that if your automation originates from one of these services, those 
 [6]: https://www.datadoghq.com/pricing/?product=infrastructure-monitoring#products
 [7]: /api/latest/workflow-automation/
 [8]: /actions/workflows/
-[9]: /service_management/incident_management/
-[10]: /service_management/on-call/
+[9]: /incident_response/incident_management/
+[10]: /incident_response/on-call/
 [11]: /actions/app_builder/
 [12]: /api/latest/workflow-automation/#list-workflow-instances
 [13]: https://www.datadoghq.com/pricing/?product=workflow-automation#products

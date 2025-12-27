@@ -136,6 +136,6 @@ The Reports tab enables you to track the number of investigations run over time 
 [6]: https://app.datadoghq.com/monitors/manage
 [8]: /bits_ai/bits_ai_sre/configure#slack
 [9]: /bits_ai/bits_ai_sre/help_bits_learn/
-[10]: /service_management/on-call/pages/#page-from-notifications
-[14]: /service_management/case_management/notifications_integrations/#third-party-tickets
+[10]: /incident_response/on-call/pages/#page-from-notifications
+[14]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [15]: /account_management/rbac/permissions/#bits-ai

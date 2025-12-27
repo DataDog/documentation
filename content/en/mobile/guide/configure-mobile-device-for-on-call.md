@@ -2,7 +2,7 @@
 title: Set Up Your Mobile Device for Datadog On-Call
 description: "Configure your mobile device for reliable on-call notifications with critical alerts, Do Not Disturb bypass, and telephony contact setup."
 further_reading:
-- link: "https://docs.datadoghq.com/service_management/on-call/"
+- link: "https://docs.datadoghq.com/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call Documentation"
 - link: "https://docs.datadoghq.com/service_management/mobile/"
@@ -213,4 +213,4 @@ For help with troubleshooting, [contact Datadog support][2]. You can also send a
 [2]: /help/
 [3]: https://chat.datadoghq.com/
 [4]: https://datadoghq.slack.com/archives/C0114D5EHNG
-[5]: /service_management/on-call/
+[5]: /incident_response/on-call/
