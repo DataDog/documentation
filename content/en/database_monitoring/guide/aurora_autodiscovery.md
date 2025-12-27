@@ -1,6 +1,7 @@
 ---
 title: Configuring Database Monitoring for Amazon Aurora DB Clusters
-
+aliases:
+- /database_monitoring/aurora_autodiscovery
 ---
 
 This guide assumes you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.

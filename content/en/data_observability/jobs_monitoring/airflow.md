@@ -3,6 +3,8 @@ title: Enable Data Jobs Monitoring for Apache Airflow
 description: "Monitor Apache Airflow DAG workflows with Data Jobs Monitoring using OpenLineage provider across Kubernetes, Amazon MWAA, and other platforms."
 is_beta: true
 private: true
+aliases:
+  - /data_jobs/airflow
 further_reading:
     - link: 'https://www.datadoghq.com/blog/data-jobs-monitoring/'
       tag: 'blog'
@@ -15,7 +17,7 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Data Jobs Monitoring for Apache Airflow is in Preview" >}}
+{{< callout url="#" btn_hidden="true" header="Data Jobs Monitoring for Apache Airflow is in preview" >}}
 To try the preview for Airflow monitoring, follow the setup instructions below.
 {{< /callout >}}
 

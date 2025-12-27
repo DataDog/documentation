@@ -1,6 +1,8 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Amazon EMR
 description: "Configure Data Jobs Monitoring for Apache Spark applications on Amazon EMR clusters using AWS Secrets Manager and bootstrap actions."
+aliases:
+  - /data_jobs/emr
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
