@@ -60,9 +60,9 @@ jobs:
               pull_number: number,
             });
 
-            // Track latest review state per user
-            const latestReviews = new Map();
+            // Track latest review state per user (ignore commented state)
             reviews.forEach(review => {
+              if (review.state === 'COMMENTED') return; 
               const existing = latestReviews.get(review.user.login);
               if (!existing || review.submitted_at > existing.submitted_at) {
                 latestReviews.set(review.user.login, review);
