@@ -98,7 +98,10 @@ If Datadog is failing to automatically create triggers, follow this troubleshoot
 2. Verify the [required permissions][10] have been added to the integration role
 3. If the log source is a Lambda log group, verify if the lambda function has the [extension][11] installed
 4. If the log source is a CloudWatch log group, ensure it does not already have the maximum number of subscribers (2)
-
+1. Verify that the Forwarder ARN appears in the Log Collection tab of the AWS Integration.
+2. Verify that the [required permissions][10] are assigned to the integration role.
+3. If the log source is a Lambda log group, verify that the lambda function has the [extension][11] installed.
+4. If the log source is a CloudWatch log group, verify that it does not already have two subscribers (the maximum allowed).
 ## Check the Lambda function logs
 
 1. From the monitoring tab, click **View logs in Cloudwatch**.
