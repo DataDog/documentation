@@ -60,7 +60,7 @@ The following conditional variables are available:
 
 ### Examples
 
-Conditional variable must have an opening and closing pair with the text and **@-notifications** in-between.
+Conditional variables must have an opening and closing pair with the text and **@-notifications** in-between. Variables based on monitor state (such as `is_alert` or `is_warning`), must have their own message block. Because a monitor can only be in one state at a time, you cannot combine these. However, you can nest conditionals that match on attributes, see the `is_renotify` examples.
 
 {{< tabs >}}
 {{% tab "is_alert" %}}
@@ -109,7 +109,7 @@ Search for a substring in a [tag variable](#attribute-and-tag-variables) with th
 To notify your DB team if a triggering host has the tag `role:db_cassandra` or `role:db_postgres`, use the following:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -118,7 +118,7 @@ To notify your DB team if a triggering host has the tag `role:db_cassandra` or `
 The `is_match` condition also supports matching multiple strings:
 
 ```text
-{{#is_match "role.name" "db" "database"}}
+{{#is_match "host.role.name" "db" "database"}}
   This displays if the host triggering the alert contains `db` or `database`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -127,7 +127,7 @@ The `is_match` condition also supports matching multiple strings:
 To send a different notification if the tag doesn't contain `db`, use the negation of the condition as follows:
 
 ```text
-{{^is_match "role.name" "db"}}
+{{^is_match "host.role.name" "db"}}
   This displays if the role tag doesn't contain `db`.
   @slack-example
 {{/is_match}}
@@ -136,7 +136,7 @@ To send a different notification if the tag doesn't contain `db`, use the negati
 Or use the `{{else}}` parameter in the first example:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{else}}
@@ -144,7 +144,7 @@ Or use the `{{else}}` parameter in the first example:
   @slack-example
 {{/is_match}}
 ```
-**Note**: To check if a `<TAG_VARIABLE>` does not exist or if it's empty, use `is_exact_match`. See `is_exact_match` tab for more details. 
+**Note**: To check if a `<TAG_VARIABLE>` does not exist or if it's empty, use `is_exact_match`. See `is_exact_match` tab for more details.
 
 {{% /tab %}}
 {{% tab "is_exact_match" %}}
@@ -240,9 +240,10 @@ This is the escalation message @dev-team@company.com
 ```
 
 {{% /tab %}}
+
 {{< /tabs >}}
 
-If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, Datadog recommends that you configure a corresponding `recovery` condition to send a recovery notification to the handle.
 
 **Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 
@@ -262,7 +263,7 @@ Attributes
 
 ### Multi alert variables
 
-Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert. 
+Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert.
 
 **Note**: When you use the `group_by` field in aggregation, additional tags and alerts from the monitor may be inherited automatically. This means that any alerts or configurations set on the monitored endpoint could be applied to each group resulting from the aggregation.
 
@@ -381,19 +382,21 @@ For Docs and Links you can also access a specific item with the following syntax
 
 ### Matching attribute/tag variables
 
-To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
+You can include any attribute or tag from a log, trace span, RUM event, CI pipeline, or CI test event that matches the monitor query. The following table shows examples of attributes and variables you can add from different monitor types.
 
-| Monitor type    | Variable syntax                                  |
-|-----------------|--------------------------------------------------|
-| [Log][12]          | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
-| [Trace Analytics][13]  | `{{span.attributes.key}}` or `{{span.tags.key}}` |
-| [Error Tracking][14]   | `{{issue.attributes.key}}`                         |
-| [RUM][15]           | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
-| [Audit Trail][16]      | `{{audit.attributes.key}}` or `{{audit.message}}`    |
-| [CI Pipeline][17]     | `{{cipipeline.attributes.key}}`                  |
-| [CI Test][18]         | `{{citest.attributes.key}}`                      |
-| [Database Monitoring][19] | `{{databasemonitoring.attributes.key}}`      |
-|[Synthetic Monitoring][20] | `{{synthetics.attributes.key}}`      |
+<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click <strong>{{&nbsp;Add Variable</strong> and select from the expanded menu options.</div>
+
+| Monitor type             | Variable syntax                                         |
+|--------------------------|--------------------------------------------------------|
+| [Audit Trail][16]        | `{{audit.attributes.key}}` or `{{audit.message}}`      |
+| [CI Pipeline][17]        | `{{cipipeline.attributes.key}}`                        |
+| [CI Test][18]            | `{{citest.attributes.key}}`                            |
+| [Database Monitoring][19]| `{{databasemonitoring.attributes.key}}`                |
+| [Error Tracking][14]     | `{{issue.attributes.key}}`                             |
+| [Log][12]                | `{{log.attributes.key}}` or `{{log.tags.key}}`         |
+| [RUM][15]                | `{{rum.attributes.key}}` or `{{rum.tags.key}}`         |
+| [Synthetic Monitoring][20]| `{{synthetics.attributes.key}}`                       |
+| [Trace Analytics][13]    | `{{span.attributes.key}}` or `{{span.tags.key}}`       |
 
 {{% collapse-content title="Example syntax usage" level="h4" %}}
 - For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
@@ -552,7 +555,7 @@ To avoid missed notifications when using dynamic handles with these variables, m
 {{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
   // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 

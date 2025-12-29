@@ -24,8 +24,8 @@ further_reading:
    {{< code-block lang="text" disable_copy="false" >}}
 CORECLR_ENABLE_PROFILING=1
 CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-CORECLR_PROFILER_PATH=/workspace/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so
-DD_DOTNET_TRACER_HOME=/workspace/datadog
+CORECLR_PROFILER_PATH=/layers/google.dotnet.publish/publish/bin/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so
+DD_DOTNET_TRACER_HOME=/layers/google.dotnet.publish/publish/bin/datadog
 {{< /code-block >}}
 
    For more information, see [Tracing .NET applications][2].
@@ -36,6 +36,10 @@ DD_DOTNET_TRACER_HOME=/workspace/datadog
 
    {{% tab "Datadog CLI" %}}
    {{% gcr-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
+
+   {{% tab "Terraform" %}}
+   {{% gcr-install-sidecar-terraform function="true" %}}
    {{% /tab %}}
 
    {{% tab "Other" %}}
@@ -76,11 +80,11 @@ logger.LogInformation("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="csharp" function="true" %}}
+{{% serverless-init-env-vars-sidecar language="csharp" function="true" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting sidecar="true" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -90,4 +94,4 @@ logger.LogInformation("Hello World!");
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
 [3]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [4]: /developers/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet#code-examples
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet#code-examples-5

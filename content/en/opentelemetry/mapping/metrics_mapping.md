@@ -29,7 +29,7 @@ To differentiate metrics from the OpenTelemetry Collector's [hostmetrics][12] re
 
 The following table shows the metric mappings for various integrations. Use the search and filter controls to find the mappings for a specific integration.
 
-For more information, see [OpenTelemetetry integrations][11].
+For more information, see [OpenTelemetry integrations][11].
 
 {{< multifilter-search resource="_data/semantic-core/unified_semantic_core.json">}}
 

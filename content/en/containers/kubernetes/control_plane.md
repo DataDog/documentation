@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Control Plane Monitoring
+description: Monitor Kubernetes control plane components including API server, etcd, controller manager, and scheduler
 aliases:
 - /agent/kubernetes/control_plane
 further_reading:
@@ -33,6 +34,7 @@ With Datadog integrations for the [API server][1], [Etcd][2], [Controller Manage
 * [Kubernetes on Amazon EKS](#EKS)
 * [Kubernetes on OpenShift 4](#OpenShift4)
 * [Kubernetes on OpenShift 3](#OpenShift3)
+* [Kubernetes on Talos Linux](#TalosLinux)
 * [Kubernetes on Rancher Kubernetes Engine (v2.5+)](#RKE)
 * [Kubernetes on Rancher Kubernetes Engine (\<v2.5)](#RKEBefore2_5)
 * [Kubernetes on Managed Services (AKS, GKE)](#ManagedServices)
@@ -317,9 +319,85 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
+### Recommended method
+
+<div class="alert alert-info">This feature is in Preview.</div>
+
+Datadog supports monitoring Kubernetes Control Plane components, including the API Server, Controller Manager, and Scheduler.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+#### Prerequisites
+
+1. Datadog Operator >= `v1.18.0`
+1. Datadog Agent >= `v7.69`
+
+#### General setup
+
+Control plane monitoring is enabled by default, but requires introspection to be enabled.
+
+You can enable introspection using the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+introspection:
+  enabled: true
+{{< /code-block >}}
+
+Using the command line:
+```shell
+helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
+```
+
+Since this feature is enabled by default, you can deploy a minimal DatadogAgent spec.
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+#### Prerequisites
+
+1. Helm chart version >= `3.150.0`
+1. Datadog Agent >= `v7.69`
+
+#### General setup
+
+Enable control plane monitoring using the `providers.eks.controlPlaneMonitoring` option:
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+providers:
+  eks:
+    controlPlaneMonitoring: true
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Validation
+Verify that checks are running:
+```shell
+kubectl exec <cluster-agent-pod> -- agent clusterchecks
+```
+
+Look for:
+- `kube_apiserver_metrics`
+- `kube_controller_manager`
+- `kube_scheduler`
+
+You should see control plane metrics in Datadog including:
+- `kube_apiserver.*`
+- `kube_controller_manager.*`
+- `kube_scheduler.*`
+
+### Legacy setup
+
 Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks.
 
-### Prerequisites
+#### Prerequisites
 - An EKS Cluster running on Kubernetes version >= 1.28
 - Deploy the Agent using one of:
   - Helm chart version >= `3.90.1`
@@ -375,16 +453,121 @@ annotations:
 
 ## Kubernetes on OpenShift 4 {#OpenShift4}
 
+<div class="alert alert-info">This feature is in Preview.</div>
+
+Datadog supports monitoring Kubernetes Control Plane components, including the API Server, etcd, Controller Manager, and Scheduler.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+#### Prerequisites
+
+1. Datadog Operator >= `v1.18.0`
+1. Datadog Agent >= `v7.69`
+
+**Note**: `etcd` is not supported on versions 4.0-4.13.
+
+#### General setup
+
+Control plane monitoring is enabled by default, but requires introspection to be enabled.
+
+You can enable introspection using the [datadog-operator Helm chart][12]:
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+introspection:
+  enabled: true
+{{< /code-block >}}
+
+Using the command line:
+```shell
+helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
+```
+
+Or, for **OpenShift users** who installed the operator through OperatorHub/Marketplace (the [recommended method](install-openshift.md)), by patching the operator cluster service version:
+
+```shell
+oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
+  --type='json' \
+  -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "--introspectionEnabled=true"}]'
+```
+
+Since this feature is enabled by default, you can deploy a minimal DatadogAgent spec.
+
+Enable `features.clusterChecks.useClusterChecksRunners` to schedule checks there; otherwise, control plane checks run on the Node Agent.
+
+For OpenShift 4.14 and later, etcd monitoring requires you to copy the etcd certificates. Check the operator logs for the exact command. See the following example (adjust namespace as needed):
+
+```shell
+oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | \
+  sed 's/namespace: openshift-etcd-operator/namespace: datadog/' | \
+  oc apply -f -
+```
+
+[12]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+#### Prerequisites
+
+1. Helm chart version >= `3.150.0`
+1. Datadog Agent >= `v7.69`
+
+**Note**: `etcd` is not supported on versions 4.0-4.13.
+
+#### General setup
+
+Enable control plane monitoring using the `providers.openshift.controlPlaneMonitoring` option:
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+providers:
+  openshift:
+    controlPlaneMonitoring: true
+{{< /code-block >}}
+
+For OpenShift 4.14 and later, etcd monitoring requires you to copy the etcd certificates. To copy them into the same namespace as the Datadog Agent:
+
+```shell
+oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Validation
+Verify that checks are running:
+```shell
+kubectl exec <cluster-agent-pod> -- agent clusterchecks
+```
+
+Look for:
+- `kube_apiserver_metrics`
+- `kube_controller_manager`
+- `kube_scheduler`
+- `etcd`
+
+You should see control plane metrics in Datadog including:
+- `kube_apiserver.*`
+- `kube_controller_manager.*`
+- `kube_scheduler.*`
+- `etcd.*`
+
+### Legacy setup
+
 On OpenShift 4, all control plane components can be monitored using endpoint checks.
 
-### Prerequisites
+#### Prerequisites
 
 1. Enable the Datadog [Cluster Agent][6]
 1. Enable [Cluster checks][7]
 1. Enable [Endpoint checks][8]
 1. Ensure that you are logged in with sufficient permissions to edit services and create secrets.
 
-### API server
+#### API server
 
 The API server runs behind the service `kubernetes` in the `default` namespace. Annotate this service with the `kube_apiserver_metrics` configuration:
 
@@ -402,7 +585,7 @@ The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the s
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ```
-### Etcd
+#### Etcd
 
 {{% collapse-content title="Etcd OpenShift 4.0 - 4.13" level="h4" %}}
 Certificates are needed to communicate with the Etcd service, which can be found in the secret `kube-etcd-client-certs` in the `openshift-monitoring` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
@@ -484,9 +667,9 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Etcd OpenShift 4.14 and higher" level="h4" %}}
+{{% collapse-content title="Etcd OpenShift 4.14 and later" level="h4" %}}
 
-Certificates are needed to communicate with the Etcd service, which can be found in the secret `etcd-metric-client` in the `openshift-etcd-operator` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
+Certificates are needed to communicate with the Etcd service, which can be found in the secret `etcd-metric-client` in the `openshift-etcd-operator` namespace. To give the Datadog Agent access to these certificates, copy them into the same namespace as the Datadog Agent:
 
 ```shell
 oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | sed 's/namespace: openshift-etcd-operator/namespace: <datadog agent namespace>/'  | oc create -f -
@@ -564,7 +747,7 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 {{% /collapse-content %}}
 
 
-### Controller Manager
+#### Controller Manager
 
 The Controller Manager runs behind the service `kube-controller-manager` in the `openshift-kube-controller-manager` namespace. Annotate the service with the check configuration:
 
@@ -581,7 +764,7 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 
 
 
-### Scheduler
+#### Scheduler
 
 The Scheduler runs behind the service `scheduler` in the `openshift-kube-scheduler` namespace. Annotate the service with the check configuration:
 
@@ -727,7 +910,134 @@ oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpo
 
 The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
+## Kubernetes on Talos Linux {#TalosLinux}
 
+Helm is the recommended installation method for Talos Linux. Use Helm by setting the flag `providers.talos.enabled` to `true`.
+
+### API server
+
+The API server integration is automatically configured. The Datadog Agent discovers it automatically.
+
+### Etcd
+
+By providing read access to the etcd certificates located on the host, the Datadog Agent check can communicate with etcd and start collecting etcd metrics.
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+  ignoreAutoConfig:
+  - etcd
+  confd:
+    etcd.yaml: |-
+      # You can configure the Agent to only run this check on the host where etcd is running
+      # by using `ad_identifiers` for a pod that would only be running on a control-plane node.
+      # This is to avoid errors when the Agent is running on worker nodes.
+      # Another approach is to run a minimal pod on the control-plane node and use it for `ad_identifiers`.
+      ad_identifiers:
+        - kube-scheduler
+      instances:
+          # This is the node IP where metrics are exposed because kube-scheduler runs in host network mode.
+          # Otherwise, the IP could be hardcoded to the master node IP (also in the environment variable `DD_KUBERNETES_KUBELET_HOST`).
+        - prometheus_url: https://%%host%%:2379/metrics
+          tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
+          tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
+          tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
+agents:
+  # Tolerations are needed to be scheduled on control-plane nodes running etcd
+  tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+  volumes:
+    # On Talos, etcd certificates are stored in /system/secrets/etcd
+    - hostPath:
+        path: /system/secrets/etcd
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/kubernetes/pki/etcd
+      readOnly: true
+providers:
+  talos:
+    enabled: true
+{{< /code-block >}}
+
+### Controller Manager and Scheduler
+
+#### Secure ports
+
+Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+  ignoreAutoConfig:
+    - etcd
+    - kube_scheduler
+    - kube_controller_manager
+  confd:
+    etcd.yaml: |-
+      ad_identifiers:
+        - kube-scheduler
+      instances:
+        - prometheus_url: https://%%host%%:2379/metrics
+          tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
+          tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
+          tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
+    kube_scheduler.yaml: |-
+      ad_identifiers:
+        - kube-scheduler
+      instances:
+        - prometheus_url: https://%%host%%:10259/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    kube_controller_manager.yaml: |-
+      ad_identifiers:
+        - kube-controller-manager
+      instances:
+        - prometheus_url: https://%%host%%:10257/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+agents:
+  tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+  volumes:
+    - hostPath:
+        path: /system/secrets/etcd
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/kubernetes/pki/etcd
+      readOnly: true
+providers:
+  talos:
+    enabled: true
+{{< /code-block >}}
+
+**Notes:**
+
+- The `ssl_verify` field in the `kube_controller_manager` and `kube_scheduler` configuration needs to be set to `false` when using self-signed certificates.
+- When targeting secure ports, the `bind-address` option in your Controller Manager and Scheduler configuration must be reachable by the Datadog Agent. Apply the patch below to control-plane nodes at cluster generation; or, for running Talos nodes, run `talosctl patch mc -n <control-plane-node1,control-plane-node2> --patch @controlplane-datadog-monitoring-patch.yaml`.
+
+{{< code-block lang="yaml" filename="controlplane-datadog-monitoring-patch.yaml" >}}
+cluster:
+  controllerManager:
+    extraArgs:
+      bind-address: 0.0.0.0
+  scheduler:
+    extraArgs:
+      bind-address: 0.0.0.0
+{{< /code-block >}}
 
 ## Kubernetes on Rancher Kubernetes Engine (v2.5+) {#RKE}
 

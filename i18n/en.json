@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "900"
+    "other": "1,000"
   },
   "beta_sentence": {
     "other": "Beta - For support or to report any issues, contact"
@@ -297,5 +297,17 @@
   },
   "datadog_partner_network": {
     "other": "Datadog Partner Network Documentation"
+  },
+  "alert_note": {
+    "other": "NOTE"
+  },
+  "alert_warning": {
+    "other": "WARNING"
+  },
+  "alert_caution": {
+    "other": "CAUTION"
+  },
+  "alert_tip": {
+    "other": "TIP"
   }
 }

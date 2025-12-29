@@ -5,6 +5,9 @@ algolia:
 aliases:
 - /es/tracing/getting_further/metrics_namespace
 - /es/tracing/guide/metrics_namespace
+description: Guía completa de las métricas de trazas de APM, incluido el espacio de
+  nombres, los tipos (aciertos, errores, latencia, Apdex) y cómo se calculan a partir
+  del tráfico de la aplicación.
 further_reading:
 - link: tracing/trace_collection/
   tag: Documentación
@@ -104,8 +107,8 @@ Las siguientes métricas se mantienen con fines de compatibilidad con versiones 
 
 ### Duración (legacy)
 
-<div class="alert alert-warning">
-<strong>Importante:</strong> Las métricas de duración se mantienen sólo con fines de compatibilidad con versiones anteriores. Para todos los casos de uso de medición de la latencia, Datadog recomienda especialmente utilizar <a href="#latency-distribution">métricas de distribución de la latencia</a>, ya que proporcionan una mayor precisión para los cálculos de percentiles y el análisis general del rendimiento.
+<div class="alert alert-danger">
+<strong>Importante:</strong> Las métricas de duración se mantienen solo por compatibilidad con versiones anteriores. Para todos los casos de uso de medición de latencia, Datadog recomienda encarecidamente utilizar <a href="#latency-distribution">las métricas de distribución de latencia</a> en su lugar, ya que proporcionan una mayor precisión para los cálculos de percentiles y el análisis general del rendimiento.
 </div>
 
 `trace.<SPAN_NAME>.duration`
@@ -118,8 +121,8 @@ Esta métrica no admite agregaciones de percentiles. Para obtener más informaci
 
 ### Duración (legacy)
 
-<div class="alert alert-warning">
-<strong>Importante:</strong> Las métricas de duración se mantienen sólo con fines de compatibilidad con versiones anteriores. Para todos los casos de uso de medición de la latencia, Datadog recomienda especialmente utilizar <a href="#latency-distribution">métricas de distribución de la latencia</a>, ya que proporcionan una mayor precisión para los cálculos de percentiles y el análisis general del rendimiento.
+<div class="alert alert-danger">
+<strong>Importante:</strong> Las métricas de duración se mantienen solo por compatibilidad con versiones anteriores. Para todos los casos de uso de medición de latencia, Datadog recomienda encarecidamente utilizar <a href="#latency-distribution">las métricas de distribución de latencia</a> en su lugar, ya que proporcionan una mayor precisión para los cálculos de percentiles y el análisis general del rendimiento.
 </div>
 
 `trace.<SPAN_NAME>.duration.by_http_status`
@@ -130,7 +133,7 @@ Esta métrica no admite agregaciones de percentiles. Para obtener más informaci
 
 ## Impacto del muestreo en métricas de rastreo
 
-En la mayoría de los casos, las métricas de rastreo se calculan sobre la base de todo el tráfico de la aplicación. Sin embargo, con determinadas configuraciones de muestreo de la ingesta de trazas, las métricas representan sólo un subconjunto de todas las solicitudes.
+En la mayoría de los casos, las métricas de rastreo se calculan sobre la base de todo el tráfico de la aplicación. Sin embargo, con determinadas configuraciones de muestreo de la ingesta de trazas, las métricas representan solo un subconjunto de todas las solicitudes.
 
 ### Muestreo del lado de la aplicación 
 

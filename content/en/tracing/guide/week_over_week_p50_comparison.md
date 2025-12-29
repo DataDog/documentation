@@ -1,5 +1,6 @@
 ---
 title: Compare a Service's latency to the previous week
+description: Learn how to create dashboards and monitors that compare service latency metrics week over week to identify performance trends and issues.
 
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"

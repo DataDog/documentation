@@ -1,5 +1,6 @@
 ---
 title: Docker Log collection
+description: Configure log collection from applications running in Docker containers using the Datadog Agent
 aliases:
     - /logs/docker
     - /logs/languages/docker
@@ -24,6 +25,9 @@ further_reading:
     - link: "/agent/docker/tag/"
       tag: "Documentation"
       text: "Assign tags to all data emitted by a container"
+    - link: "/containers/troubleshooting/log-collection"
+      tag: "Documentation"
+      text: "Container Log Collection Troubleshooting"
 ---
 
 ## Overview
@@ -348,6 +352,10 @@ Since Agent v6.14+, the Agent collects logs for all containers (running or stopp
 
 For Kubernetes environments, see the [Kubernetes short lived container documentation][12].
 
+## Troubleshooting
+
+For troubleshooting steps, see [Container Log Collection Troubleshooting][13].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -364,3 +372,4 @@ For Kubernetes environments, see the [Kubernetes short lived container documenta
 [10]: /logs/guide/docker-logs-collection-troubleshooting-guide/
 [11]: /agent/guide/autodiscovery-management/
 [12]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers
+[13]: /containers/troubleshooting/log-collection/

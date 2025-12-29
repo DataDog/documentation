@@ -194,9 +194,30 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 
 ### Collect custom resources
 
-The [Kubernetes Explorer][3] automatically collects CustomResourceDefinitions (CRDs) by default.
+The [Kubernetes Explorer][3] automatically collects Custom Resource Definitions (CRDs) by default.
 
-Follow these steps to collect the custom resources that these CRDs define:
+#### Automatic custom resource collection compatibility matrix
+
+When the following CRDs are present in your cluster, the Agent automatically collects their Custom Resources (CRs). If a CRD you use is **not** listed here—or your Agent version is older—follow the **manual configuration** steps below.
+
+| CRD group          | CRD kind             | CRD versions | Minimal Agent version |
+| ------------------ | -------------------- | ------------ | --------------------- |
+| datadoghq.com      | datadogslo           | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogdashboard     | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogagentprofile  | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmonitor       | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmetric        | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogpodautoscaler | v1alpha2     | 7.71.0                |
+| datadoghq.com      | datadogagent         | v2alpha1     | 7.71.0                |
+| argoproj.io        | rollout              | v1alpha1     | 7.71.0                |
+| karpenter.sh       | *                    | v1           | 7.71.0                |
+| karpenter.k8s.aws  | *                    | v1           | 7.71.0                |
+| azure.karpenter.sh | *                    | v1beta1      | 7.71.0                |
+
+
+#### Manual Configuration
+
+For the other CRDs, follow these steps to collect the custom resources that these CRDs define:
 
 1. In Datadog, open [Kubernetes Explorer][3]. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
 
@@ -390,6 +411,122 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 
 <div class="alert alert-info">You can select up to 50 fields per resource. You can use the preview to validate your indexing choices.</div>
 
+### Collect custom resource metrics using Kubernetes State Core check
+
+<div class="alert alert-info">This functionality requires Cluster Agent 7.63.0+.</div>
+
+You can use the `kubernetes_state_core` check to collect custom resource metrics when running the Datadog Cluster Agent.
+
+1. Write defintions for your custom resources and the fields to turn into metrics according to the following format:
+
+   ```yaml
+   #=(...)
+   collectCrMetrics:
+     - groupVersionKind:
+         group: "crd.k8s.amazonaws.com"
+         kind: "ENIConfig"
+         version: "v1alpha1"
+       commonLabels:
+         crd_type: "eniconfig"
+       labelsFromPath:
+         crd_name: [metadata, name]
+       metricNamePrefix: "userPrefix"
+       metrics:
+         - name: "eniconfig"
+           help: "ENI Config"
+           each:
+             type: gauge
+             gauge:
+               path: [metadata, generation]
+     - groupVersionKind:
+         group: "vpcresources.k8s.aws"
+         kind: "CNINode"
+         version: "v1alpha1"
+         resource: "cninode-pluralized"
+       commonLabels:
+         crd_type: "cninode"
+       labelsFromPath:
+         crd_name: [metadata, name]
+       metrics:
+         - name: "cninode"
+           help: "CNI Node"
+           each:
+             type: gauge
+             gauge:
+               path: [metadata, generation]
+   ```
+
+ By default, RBAC and API resource names are derived from the kind in groupVersionKind by converting it to lowercase, and adding an "s" suffix (for example, Kind: ENIConfig → eniconfigs). If the Custom Resource Definition (CRD) uses a different plural form, you can override this behavior by specifying the resource field. In the example above, CNINode overrides the default by setting resource: "cninode-pluralized".
+
+   Metric names are produced using the following rules:
+
+   a. No prefix precified: `kubernetes_state_customresource.<metrics.name>`
+
+   b. Prefix precified: `kubernetes_state_customresource.<metricNamePrefix>_<metric.name>`
+
+   For more details, see [Custom Resource State Metrics][5].
+
+2. Update your Helm or Datadog Operator configuration:
+
+   {{< tabs >}}
+   {{% tab "Helm Chart" %}}
+
+   1. Add the following configuration to `datadog-values.yaml`:
+
+      ```yaml
+      datadog:
+        #(...)
+        kubeStateMetricsCore:
+          collectCrMetrics:
+            - <CUSTOM_RESOURCE_METRIC>
+      ```
+
+       Replace `<CUSTOM_RESOURCE_METRIC>` with the definitions you wrote in the first step.
+
+   1. Upgrade your Helm chart:
+
+      ```
+      helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+      ```
+
+   {{% /tab %}}
+   {{% tab "Datadog Operator" %}}
+
+    <div class="alert alert-info">
+      This functionality requires Agent Operator v1.20+.
+    </div>
+
+   1. Install the Datadog Operator with an option that grants the Datadog Agent permission to collect custom resources:
+
+      ```
+      helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
+      ```
+
+   1. Add the following configuration to your `DatadogAgent` manifest, `datadog-agent.yaml`:
+
+      ```yaml
+      apiVersion: datadoghq.com/v2alpha1
+      kind: DatadogAgent
+      metadata:
+        name: datadog
+      spec:
+        #(...)
+        features:
+          kubeStateMetricsCore:
+            collectCrMetrics:
+              - <CUSTOM_RESOURCE_METRIC>
+      ```
+
+      Replace `<CUSTOM_RESOURCE_METRIC>` with the definitions you wrote in the first step.
+
+   1. Apply your new configuration:
+
+      ```
+      kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+      ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
 
 ## Further reading
 
@@ -399,4 +536,4 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 [2]: /infrastructure/containers
 [3]: https://app.datadoghq.com/orchestration/explorer/pod
 [4]: https://app.datadoghq.com/orchestration/explorer/crd
-
+[5]: https://github.com/kubernetes/kube-state-metrics/blob/main/docs/metrics/extend/customresourcestate-metrics.md

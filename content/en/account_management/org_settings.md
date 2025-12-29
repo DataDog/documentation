@@ -1,5 +1,6 @@
 ---
 title: Organization Settings
+description: Manage users, teams, authentication, API keys, roles, and security settings for your Datadog organization from the Organization Settings section.
 further_reading:
     - link: "/account_management/api-app-keys/"
       tag: "Documentation"
@@ -137,16 +138,20 @@ When enabled, users with `Modify Index` permission can choose any of the 3-, 7-,
 Users with the `Org Management` permission can set a maximum session duration for their organization. The duration applies to all new web sessions created after you change it, for all users, regardless of their role in the organization. It doesn't apply to Datadog mobile application sessions.
 
 The session duration can be configured within the following limits:
-{{% site-region region="gov" %}}
 - **Minimum duration:** 1 hour
-- **Maximum duration:** 12 hours
-{{% /site-region %}}
-{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
-- **Minimum duration:** 1 hour
-- **Maximum duration:** 720 hours (30 days)
-{{% /site-region %}}
+- **Maximum duration:** {{< region-param key=org_management_max_session_duration >}}
 
 {{< img src="account_management/org_settings/max_session_duration.png" alt="Max Session Duration Setting" style="width:70%;" >}}
+
+#### Idle time session duration configuration
+
+<div class="alert alert-info">
+  This feature is available in preview.
+</div>
+
+Users with the `Org Management` permission can enable or disable the idle time session timeout for their organization. When enabled, users are automatically signed out after 30 minutes of inactivity. The setting applies to all new web sessions created after you change it, and for all users, regardless of their role in the organization. It doesn’t apply to Datadog mobile application sessions.
+
+{{< img src="account_management/org_settings/idle_session_timeout.png" alt="Idle Session Timeout Setting" style="width:70%;" >}}
 
 ## Further reading
 

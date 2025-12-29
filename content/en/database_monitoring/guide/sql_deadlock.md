@@ -42,10 +42,14 @@ Supported Agent versions
   ON SERVER
   ADD EVENT sqlserver.xml_deadlock_report
   ADD TARGET package0.ring_buffer
+  (
+    SET MAX_MEMORY = 1024
+  )
   WITH (
       MAX_MEMORY = 1024 KB,
       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
       MAX_DISPATCH_LATENCY = 30 SECONDS,
+      MEMORY_PARTITION_MODE = PER_NODE, -- improves performance on multi-core systems (not supported on RDS)
       STARTUP_STATE = ON
   );
   GO
@@ -54,9 +58,11 @@ Supported Agent versions
   GO
 ```
 
+   **Note**: If you're using Amazon RDS for SQL Server, remove the `MEMORY_PARTITION_MODE = PER_NODE` line from the session configuration, as this option is not supported on RDS instances.
+
 2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
 ```yaml
-  deadlocks_collection:
+  collect_deadlocks: # Renamed from deadlocks_collection in Agent version 7.70.
       enabled: true
 ```
 
@@ -71,6 +77,9 @@ Supported Agent versions
   ON database
   ADD EVENT sqlserver.database_xml_deadlock_report
   ADD TARGET package0.ring_buffer
+  (
+    SET MAX_MEMORY = 1024
+  )
   WITH (
       MAX_MEMORY = 1024 KB,
       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
@@ -85,7 +94,7 @@ Supported Agent versions
 
 2. In the Datadog Agent, enable deadlocks in `sqlserver.d/conf.yaml`.
 ```yaml
-  deadlocks_collection:
+  collect_deadlocks: # Renamed from deadlocks_collection in Agent version 7.70.
       enabled: true
 ```
 

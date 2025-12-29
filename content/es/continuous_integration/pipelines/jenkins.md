@@ -140,7 +140,7 @@ unclassified:
       datadogApiConfiguration:
         intake:
           datadogIntakeSite:
-            # Configura tu sitio de Datadog 
+            # Configura tu sitio de Datadog
             site: 'US1'
         apiKey:
           datadogCredentialsApiKey:
@@ -167,7 +167,7 @@ unclassified:
       datadogApiConfiguration:
         intake:
           datadogIntakeSite:
-            # Configura tu sitio de Datadog 
+            # Configura tu sitio de Datadog
             site: 'EU1'
         apiKey:
           datadogCredentialsApiKey:
@@ -194,7 +194,7 @@ unclassified:
       datadogApiConfiguration:
         intake:
           datadogIntakeSite:
-            # Configura tu sitio de Datadog 
+            # Configura tu sitio de Datadog
             site: 'US1_FED'
         apiKey:
           datadogCredentialsApiKey:
@@ -221,7 +221,7 @@ unclassified:
       datadogApiConfiguration:
         intake:
           datadogIntakeSite:
-            # Configura tu sitio de Datadog 
+            # Configura tu sitio de Datadog
             site: 'US3'
         apiKey:
           datadogCredentialsApiKey:
@@ -248,7 +248,7 @@ unclassified:
       datadogApiConfiguration:
         intake:
           datadogIntakeSite:
-            # Configura tu sitio de Datadog 
+            # Configura tu sitio de Datadog
             site: 'US5'
         apiKey:
           datadogCredentialsApiKey:
@@ -275,7 +275,7 @@ unclassified:
       datadogApiConfiguration:
         intake:
           datadogIntakeSite:
-            # Configura tu sitio de Datadog 
+            # Configura tu sitio de Datadog
             site: 'AP1'
         apiKey:
           datadogCredentialsApiKey:
@@ -802,7 +802,7 @@ Para estos pipelines, utiliza la configuración declarativa con el paso `datadog
 Para activar Test Optimization a través de la interfaz de usuario, haz lo siguiente:
 1. En la interfaz web de tu instancia de Jenkins, ve al trabajo o pipeline que deseas instrumentar y elige la opción **Configure** (Configurar).
 2. En la sección de configuración **General**, marca la casilla **Enable Datadog Test Optimization** (Activar Datadog Test Optimization).
-3. Ingresa el nombre del servicio o la biblioteca que se está sometiendo a un test en la entrada **Service Name** (Nombre de servicio). Puedes elegir cualquier valor que tenga sentido para ti.
+3. Ingresa el nombre del servicio o la librería que se está sometiendo a un test en la entrada **Service Name** (Nombre de servicio). Puedes elegir cualquier valor que tenga sentido para ti.
 4. Elige los lenguajes para los que deseas activar la instrumentación de los tests. Algunos de los lenguajes no admiten la configuración a través de la interfaz de usuario. Para configurar Test Optimization con estos lenguajes, sigue las [instrucciones de configuración][18] manuales.
 5. De manera opcional, indica los [parámetros de configuración adicionales][18].
 6. Haz clic en **Save** (Guardar).
@@ -821,7 +821,7 @@ pipeline {
     options {
         datadog(testOptimization: [
             enabled: true,
-            serviceName: "my-service", // el nombre del servicio o la biblioteca que se está sometiendo a un test
+            serviceName: "my-service", // el nombre del servicio o la librería que se está sometiendo a un test
             languages: ["JAVA"], // lenguajes que deben instrumentarse (las opciones disponibles son "Java", "JavaScript", "Python", "DOTNET", "Ruby")
             additionalVariables: ["my-var": "value"]  // parámetros de configuración adicionales del rastreador (opcional)
         ])
@@ -1092,7 +1092,7 @@ datadog(tags: ["team:backend", "release:canary"]){
 }
 {{< /code-block >}}
 
-#### Integrar con los equipos de Datadg 
+#### Integrar con los equipos de Datadg
 Para mostrar y filtrar los equipos asociados a tus pipelines, añade `team:<your-team>` como una etiqueta personalizada. El nombre de etiqueta personalizada debe coincidir exactamente con el nombre de tu equipo en [Equipos de Datadog][15].
 
 ### Personalizar etiquetas globales

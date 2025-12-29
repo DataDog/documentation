@@ -60,7 +60,7 @@ Para obtener una lista de los servicios compatibles, consulta los [requisitos de
 Datadog Runtime Code Analysis (IAST) utiliza las mismas bibliotecas de rastreo que Datadog APM, lo que te permite monitorizar el tráfico de aplicaciones en directo y detectar vulnerabilidades a nivel de código en tiempo real. Sigue el siguiente proceso:
 
 - **Seguimiento de las fuentes de datos:** IAST observa los datos que ingresan a tu aplicación desde fuentes externas, como las URL, los cuerpos o las cabeceras de solicitudes. Estas entradas se etiquetan y supervisan durante todo su ciclo de vida.
-- **Análisis del flujo de datos**: La biblioteca de rastreo de Datadog realiza un seguimiento de cómo se mueven los datos de entrada a través de la aplicación, incluso si se transforman, dividen o combinan. Esto permite a IAST comprender si la entrada original llega a partes sensibles del código y cómo lo hace.
+- **Análisis del flujo de datos**: La librería de rastreo de Datadog realiza un seguimiento de cómo se mueven los datos de entrada a través de la aplicación, incluso si se transforman, dividen o combinan. Esto permite a IAST comprender si la entrada original llega a partes sensibles del código y cómo lo hace.
 - **Identificación de puntos vulnerables**: IAST detecta localizaciones de código en las que las entradas controladas por el usuario se utilizan de forma potencialmente insegura, por ejemplo, en consultas SQL, ejecución de código dinámico o renderización de HTML.
 - **Confirmación de la vulnerabilidad**: Sólo se informa de una vulnerabilidad cuando IAST puede confirmar que una entrada contaminada llega a un punto vulnerable del código. Este enfoque minimiza los falsos positivos y garantiza que los hallazgos sean procesables.
 

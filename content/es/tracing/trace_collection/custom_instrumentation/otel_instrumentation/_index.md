@@ -4,7 +4,7 @@ aliases:
 - /es/opentelemetry/otel_tracing/
 - /es/tracing/guide/add_span_md_and_graph_it/
 description: Envío de tramos (spans) desde la instrumentación personalizada a través
-  de la API de OpenTelemetry a la biblioteca de rastreo de Datadog.
+  de la API de OpenTelemetry a la librería de rastreo de Datadog.
 further_reading:
 - link: /opentelemetry/
   tag: Documentación

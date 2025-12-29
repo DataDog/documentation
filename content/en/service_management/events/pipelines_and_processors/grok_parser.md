@@ -1,8 +1,9 @@
 ---
 title: Grok Parser
-
+description: Create custom grok rules to parse the full message or specific attributes of raw events into structured data
 ---
 
+## Overview
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, it is recommended to use at most 10 parsing rules within a grok processor.
 
@@ -63,7 +64,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 {{< tabs >}}
 {{% tab "Matchers" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])` 
+`date("pattern"[, "timezoneId"[, "localeId"]])`
 : Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates).
 
 `regex("pattern")`
@@ -190,7 +191,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 : Parses a string sequence of tokens and returns it as an array. See the [list to array](#list-to-array) example.
 
 `url`
-: Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. 
+: Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object.
 {{% /tab %}}
 {{< /tabs >}}
 

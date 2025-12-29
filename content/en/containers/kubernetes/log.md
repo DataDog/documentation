@@ -1,8 +1,12 @@
 ---
 title: Kubernetes log collection
+description: Configure log collection from containerized applications running on Kubernetes using the Datadog Agent
 aliases:
   - /agent/kubernetes/log
 further_reading:
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: Blog
+  text: Monitor logs from Amazon EKS on Fargate with Datadog
 - link: "/agent/kubernetes/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
@@ -18,6 +22,9 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
+- link: "/containers/troubleshooting/log-collection"
+  tag: "Documentation"
+  text: "Container Log Collection Troubleshooting"
 ---
 
 This page discusses collecting logs from Kubernetes log files.
@@ -136,7 +143,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Warning for unprivileged installations</strong>
 <br/><br/>
 When running an unprivileged installation, the Agent needs to be able to read log files in <code>/var/log/pods</code>.
@@ -458,68 +465,7 @@ The equivalent volume and volumeMount path need to be set in the Agent container
 
 ## Troubleshooting
 
-#### Short lived containers
-
-By default the Agent looks every 5 seconds for new containers.
-
-For Agent v6.12+, short lived container logs (stopped or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
-
-#### Missing tags on new containers or Pods
-
-When sending logs to Datadog from newly created containers or Pods, the Datadog Agent's internal tagger may not yet have the related container/pod tags. As a result, tags may be missing from these logs.
-
-To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to configure a duration (in seconds) for the Datadog Agent to wait before it begins to send logs from newly created containers and Pods. The default value is `0`.
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-```yaml
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION
-          value: "5"
-```
-{{% /tab %}}
-{{% tab "Helm" %}}
-```yaml
-datadog:
-  env:
-    - name: DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION
-      value: "5"
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Missing host-level tags on new hosts or nodes
-
-Host-level tags are those seen in the infrastructure list for a given host, and are sourced from either a cloud provider or the Datadog Agent. Common host-level tags include `kube_cluster_name`, `region`, `instance-type`, and `autoscaling-group`.
-
-When sending logs to Datadog from a newly created host or node, it can take a few minutes for host-level tags to be [inherited][12]. As a result, host-level tags may be missing from these logs.
-
-To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` to configure a duration (in minutes). For this duration, the Datadog Agent manually attaches the host-level tags that it knows about to each sent log. After this duration, the Agent reverts to relying on tag inheritance at intake.
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-```yaml
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION
-          value: "10m"
-```
-{{% /tab %}}
-{{% tab "Helm" %}}
-```yaml
-datadog:
-  env:
-    - name: DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION
-      value: "10m"
-```
-{{% /tab %}}
-{{< /tabs >}}
+For troubleshooting steps, see [Container Log Collection Troubleshooting][21].
 
 ## Further Reading
 
@@ -545,3 +491,4 @@ datadog:
 [18]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
 [19]: /containers/kubernetes/log/?tab=helm#autodiscovery-annotations
 [20]: /containers/kubernetes/log/?tab=helm#autodiscovery-configuration-files
+[21]: /containers/troubleshooting/log-collection/?tab=datadogoperator

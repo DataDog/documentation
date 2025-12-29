@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Tag Extraction
+description: Configure automatic tag extraction from Kubernetes pod labels and annotations for enhanced monitoring
 aliases:
 - /agent/autodiscovery/tag/
 - /agent/kubernetes/tag
@@ -23,46 +24,47 @@ The list of automatically-assigned tags depends on the Agent's [cardinality conf
 
 <div style="overflow-x: auto;">
 
-  | Tag                           | Cardinality  | Source                                                                                                                       | Requirement                                         |
-  |-------------------------------|--------------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-  | `container_id`                | High         | Pod status                                                                                                                   | N/A                                                 |
-  | `display_container_name`      | High         | Pod status                                                                                                                   | N/A                                                 |
-  | `pod_name`                    | Orchestrator | Pod metadata                                                                                                                 | N/A                                                 |
-  | `oshift_deployment`           | Orchestrator | Pod annotation `openshift.io/deployment.name`                                                                                | OpenShift environment and pod annotation must exist |
-  | `kube_ownerref_name`          | Orchestrator | Pod ownerref                                                                                                                 | Pod must have an owner                              |
-  | `kube_job`                    | Orchestrator | Pod ownerref                                                                                                                 | Pod must be attached to a cronjob                   |
-  | `kube_job`                    | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a job                       |
-  | `kube_replica_set`            | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a replica set               |
-  | `kube_service`                | Low          | Kubernetes service discovery                                                                                                 | Pod is behind a Kubernetes service                  |
-  | `kube_daemon_set`             | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a DaemonSet                 |
-  | `kube_container_name`         | Low          | Pod status                                                                                                                   | N/A                                                 |
-  | `kube_namespace`              | Low          | Pod metadata                                                                                                                 | N/A                                                 |
-  | `kube_app_name`               | Low          | Pod label `app.kubernetes.io/name`                                                                                           | Pod label must exist                                |
-  | `kube_app_instance`           | Low          | Pod label `app.kubernetes.io/instance`                                                                                       | Pod label must exist                                |
-  | `kube_app_version`            | Low          | Pod label `app.kubernetes.io/version`                                                                                        | Pod label must exist                                |
-  | `kube_app_component`          | Low          | Pod label `app.kubernetes.io/component`                                                                                      | Pod label must exist                                |
-  | `kube_app_part_of`            | Low          | Pod label `app.kubernetes.io/part-of`                                                                                        | Pod label must exist                                |
-  | `kube_app_managed_by`         | Low          | Pod label `app.kubernetes.io/managed-by`                                                                                     | Pod label must exist                                |
-  | `env`                         | Low          | Pod label `tags.datadoghq.com/env` or container envvar (`DD_ENV` or `OTEL_RESOURCE_ATTRIBUTES`)                              | [Unified service tagging][2] enabled                |
-  | `version`                     | Low          | Pod label `tags.datadoghq.com/version` or container envvar (`DD_VERSION` or `OTEL_RESOURCE_ATTRIBUTES`)                      | [Unified service tagging][2] enabled                |
+  | Tag                           | Cardinality  | Source                                                                                                                        | Requirement                                         |
+  |-------------------------------|--------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+  | `container_id`                | High         | Pod status                                                                                                                    | N/A                                                 |
+  | `display_container_name`      | High         | Pod status                                                                                                                    | N/A                                                 |
+  | `pod_name`                    | Orchestrator | Pod metadata                                                                                                                  | N/A                                                 |
+  | `oshift_deployment`           | Orchestrator | Pod annotation `openshift.io/deployment.name`                                                                                 | OpenShift environment and pod annotation must exist |
+  | `kube_ownerref_name`          | Orchestrator | Pod ownerref                                                                                                                  | Pod must have an owner                              |
+  | `kube_job`                    | Orchestrator | Pod ownerref                                                                                                                  | Pod must be attached to a cronjob                   |
+  | `kube_job`                    | Low          | Pod ownerref                                                                                                                  | Pod must be attached to a job                       |
+  | `kube_replica_set`            | Low          | Pod ownerref                                                                                                                  | Pod must be attached to a replica set               |
+  | `kube_service`                | Low          | Kubernetes service discovery                                                                                                  | Pod is behind a Kubernetes service                  |
+  | `kube_daemon_set`             | Low          | Pod ownerref                                                                                                                  | Pod must be attached to a DaemonSet                 |
+  | `kube_container_name`         | Low          | Pod status                                                                                                                    | N/A                                                 |
+  | `kube_namespace`              | Low          | Pod metadata                                                                                                                  | N/A                                                 |
+  | `kube_app_name`               | Low          | Pod label `app.kubernetes.io/name`                                                                                            | Pod label must exist                                |
+  | `kube_app_instance`           | Low          | Pod label `app.kubernetes.io/instance`                                                                                        | Pod label must exist                                |
+  | `kube_app_version`            | Low          | Pod label `app.kubernetes.io/version`                                                                                         | Pod label must exist                                |
+  | `kube_app_component`          | Low          | Pod label `app.kubernetes.io/component`                                                                                       | Pod label must exist                                |
+  | `kube_app_part_of`            | Low          | Pod label `app.kubernetes.io/part-of`                                                                                         | Pod label must exist                                |
+  | `kube_app_managed_by`         | Low          | Pod label `app.kubernetes.io/managed-by`                                                                                      | Pod label must exist                                |
+  | `env`                         | Low          | Pod label `tags.datadoghq.com/env` or container envvar (`DD_ENV` or `OTEL_RESOURCE_ATTRIBUTES`)                               | [Unified service tagging][2] enabled                |
+  | `version`                     | Low          | Pod label `tags.datadoghq.com/version` or container envvar (`DD_VERSION` or `OTEL_RESOURCE_ATTRIBUTES`)                       | [Unified service tagging][2] enabled                |
   | `service`                     | Low          | Pod label `tags.datadoghq.com/service` or container envvar (`DD_SERVICE`, `OTEL_RESOURCE_ATTRIBUTES`, or `OTEL_SERVICE_NAME`) | [Unified service tagging][2] enabled                |
-  | `pod_phase`                   | Low          | Pod status                                                                                                                   | N/A                                                 |
-  | `oshift_deployment_config`    | Low          | Pod annotation `openshift.io/deployment-config.name`                                                                         | OpenShift environment and pod annotation must exist |
-  | `kube_ownerref_kind`          | Low          | Pod ownerref                                                                                                                 | Pod must have an owner                              |
-  | `kube_deployment`             | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a deployment                |
-  | `kube_replication_controller` | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a replication controller    |
-  | `kube_stateful_set`           | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a statefulset               |
-  | `persistentvolumeclaim`       | Low          | Pod spec                                                                                                                     | A PVC must be attached to the pod                   |
-  | `kube_cronjob`                | Low          | Pod ownerref                                                                                                                 | Pod must be attached to a cronjob                   |
-  | `image_name`                  | Low          | Pod spec                                                                                                                     | N/A                                                 |
-  | `short_image`                 | Low          | Pod spec                                                                                                                     | N/A                                                 |
-  | `image_tag`                   | Low          | Pod spec                                                                                                                     | N/A                                                 |
-  | `eks_fargate_node`            | Low          | Pod spec                                                                                                                     | EKS Fargate environment                             |
-  | `kube_runtime_class`          | Low          | Pod spec                                                                                                                     | Pod must be attached to a runtime class             |
-  | `gpu_vendor`                  | Low          | Pod spec                                                                                                                     | Container must be attached to a GPU resource        |
+  | `pod_phase`                   | Low          | Pod status                                                                                                                    | N/A                                                 |
+  | `oshift_deployment_config`    | Low          | Pod annotation `openshift.io/deployment-config.name`                                                                          | OpenShift environment and pod annotation must exist |
+  | `kube_ownerref_kind`          | Low          | Pod ownerref                                                                                                                  | Pod must have an owner                              |
+  | `kube_deployment`             | Low          | Pod ownerref                                                                                                                  | Pod must be attached to a deployment                |
+  | `kube_argo_rollout`           | Low          | Pod ownerref                                                                                                                  | Pod must be attached to an argo rollout             |
+  | `kube_replication_controller` | Low          | Pod ownerref                                                                                                                  | Pod must be attached to a replication controller    |
+  | `kube_stateful_set`           | Low          | Pod ownerref                                                                                                                  | Pod must be attached to a statefulset               |
+  | `persistentvolumeclaim`       | Low          | Pod spec                                                                                                                      | A PVC must be attached to the pod                   |
+  | `kube_cronjob`                | Low          | Pod ownerref                                                                                                                  | Pod must be attached to a cronjob                   |
+  | `image_name`                  | Low          | Pod spec                                                                                                                      | N/A                                                 |
+  | `short_image`                 | Low          | Pod spec                                                                                                                      | N/A                                                 |
+  | `image_tag`                   | Low          | Pod spec                                                                                                                      | N/A                                                 |
+  | `eks_fargate_node`            | Low          | Pod spec                                                                                                                      | EKS Fargate environment                             |
+  | `kube_runtime_class`          | Low          | Pod spec                                                                                                                      | Pod must be attached to a runtime class             |
+  | `gpu_vendor`                  | Low          | Pod spec                                                                                                                      | Container must be attached to a GPU resource        |
   | `image_id`                    | Low          | Container image ID                                                                                                            | N/A                                                 |
   | `kube_autoscaler_kind`        | Low          | Kubernetes autoscaler type                                                                                                    | Kubernetes autoscaler must be used                  |
-  | `kube_priority_class`         | Low          | Pod priority class                                                                                                            | Pod must have priority class set                   |
+  | `kube_priority_class`         | Low          | Pod priority class                                                                                                            | Pod must have priority class set                    |
   | `kube_qos`                    | Low          | Pod Quality of Service class                                                                                                  | N/A                                                 |
 
 </div>
@@ -111,25 +113,53 @@ com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 
 ## Tag extraction
 
+Starting in version 7.64+, the Agent and Cluster Agent can be configured to collect labels and annotations from Kubernetes resources and use them as tags from a common configuration. Datadog recommends using the following options to ensure consistent reporting across the Agent's core tagging, the Cluster Agent's KSM reporting, and both Agents' Orchestrator Explorer reporting:
+- `kubernetesResourcesLabelsAsTags`
+- `kubernetesResourcesAnnotationsAsTags`
+
+These options should be used instead of the legacy Agent options `podLabelsAsTags`, `nodeLabelsAsTags`, `namespaceLabelsAsTags`, and any KSM configuration overrides.
+
+These configurations reference the resource type of the object from which to extract metadata. Each resource type must be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource. Resources in the empty API group (for example, pods and nodes) can be specified using only the `resourceType` name.
+
+For example, run `kubectl api-resources` to retrieve this information:
+
+| Name        | API Version                  | Datadog Resource Configuration  |
+|-------------|------------------------------|---------------------------------|
+| pods        | v1                           | pods                            |
+| nodes       | v1                           | nodes                           |
+| namespaces  | v1                           | namespaces                      |
+| deployments | apps/v1                      | deployments.apps                |
+| roles       | rbac.authorization.k8s.io/v1 | roles.rbac.authorization.k8s.io |
+
+**Notes:**
+
+- Tags *do not* cascade between the workload and child resources. For example, labels on a Deployment are not automatically applied to logs from its child Pods. To tag Pod data, configure label extraction directly on the Pods.
+- Tags *do* cascade from the namespace to the pods and containers inside of them.
+- Use Datadog Agent 7.73+ to use wildcards in the tag extraction rules for your KSM Metrics.
+
 ### Kubernetes resources labels as tags
 
-Starting with Agent v7.58+, the Agent can be configured to collect labels for any Kubernetes resource and use them as tags to attach to all metrics, traces, and logs associated with that resource.
-
-This configuration option is more generic and should be preferred over the following options:
-- podLabelsAsTags
-- nodeLabelsAsTags
-- namespaceLabelsAsTags
+This option is used to extract a given label on your Kubernetes resources and send that up as a Datadog tag.
 
 {{< tabs >}}
 
 {{% tab "Datadog Operator" %}}
 
-Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
+To extract a given resource label `<LABEL>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
-If a specific resource is in the empty API group (for example, `pods` and `nodes`), it can be specified using `resourceType`.
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    kubernetesResourcesLabelsAsTags:
+      <RESOURCE>:
+        <LABEL>: <TAG_KEY>
+```
 
-
-To extract a given node label `<NODE_LABEL>`  and transform them as tag keys `<NODE_TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
+For example, to extract resource labels from nodes, pods, and deployments:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -140,57 +170,27 @@ spec:
   global:
     kubernetesResourcesLabelsAsTags:
       nodes:
-        <NODE_LABEL>: <NODE_TAG_KEY>
-```
-
-For example:
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    kubernetesResourcesLabelsAsTags:
-      nodes:
-       kubernetes.io/arch: arch
+        kubernetes.io/arch: arch
       pods:
-        baz: qux
+        role: pod_role
+      deployments.apps:
+        team: kube_team
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics. In this example, the tags' names for pods are prefixed by `<PREFIX>_`:
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    kubernetesResourcesLabelsAsTags:
-      pods:
-        "*": <PREFIX>_%%label%%
-```
 {{% /tab %}}
 
 {{% tab "Helm" %}}
 
-Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
-
-If a specific resource is in the empty API group (for example, `pods` and `nodes`), it can be specified using `resourceType`.
-
-To extract a given node label `<NODE_LABEL>` and transform them as tag keys `<NODE_TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
-
+To extract a given resource label `<LABEL>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
 
 ```yaml
 datadog:
   kubernetesResourcesLabelsAsTags:
-    nodes:
-      <NODE_LABEL>: <NODE_TAG_KEY>
+    <RESOURCE>:
+      <LABEL>: <TAG_KEY>
 ```
 
-For example, you could set up:
+For example, to extract resource labels from nodes, pods, and deployments:
 
 ```yaml
 datadog:
@@ -198,46 +198,43 @@ datadog:
     nodes:
       kubernetes.io/arch: arch
     pods:
-      baz: qux
+      role: pod_role
+    deployments.apps:
+      team: kube_team
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics. In this example, the tags' names for pods are prefixed by `<PREFIX>_`:
-
-```yaml
-datadog:
-  kubernetesResourcesLabelsAsTags:
-    pods:
-      "*": <PREFIX>_%%label%%
-```
 {{% /tab %}}
 
 {{% tab "Manual (DaemonSet)" %}}
 
-Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
+To extract a given resource label `<LABEL>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following environment variable to **both** your Agent and Cluster Agent containers.
 
-If a specific resource is in the empty API group (for example `pods` and `nodes`), it can be specified using `resourceType`.
-
-To extract a given node label `<NODE_LABEL>` and transform them as tag keys `<NODE_TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
-
-```bash
- DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS='{"nodes":{"<NODE_LABEL>": "<NODE_TAG_KEY>"}}'
+```yaml
+- name: DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS
+  value: '{"<RESOURCE>":{"<LABEL>":"<TAG_KEY>"}}'
 ```
 
-For example, you could set up:
+For example, to extract resource labels from nodes, pods, and deployments:
 
-```bash
-DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS='{"nodes":{"kubernetes.io/arch": "arch"},"pods":{"baz":"qux"}}'
+```yaml
+- name: DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS
+  value: '{"deployments.apps":{"team":"kube_team"},"nodes":{"kubernetes.io/arch":"arch"},"pods":{"role":"pod_role"}}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource labels as tags to your metrics. In this example, the tags' names for pods are prefixed by `<PREFIX>_`:
-
-```bash
-DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS='{"pods":{"*": "<PREFIX>_%%label%%"}}'
-```
 {{% /tab %}}
 {{< /tabs >}}
 
+For Agent 7.73.0+, use the following configuration to add all resource labels as tags to your metrics. In this example, the tag names are prefixed with `<PREFIX>_`:
+```yaml
+    #(...)
+    kubernetesResourcesLabelsAsTags:
+      pods:
+        "*": <PREFIX>_%%label%%
+```
+
 **Notes**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
+
+#### Merging with legacy configurations
 
 <div class="alert alert-info">
 
@@ -249,45 +246,47 @@ For example, if you have the following configurations:
 datadog:
   kubernetesResourcesLabelsAsTags:
     pods:
-      foo: bar
-      baz: qux
+      label-1: tag-a
+      label-2: tag-b
 
   podLabelsAsTags:
-    foo: quux
-    bar: quuz
+    label-2: legacy-tag-c
+    label-3: legacy-tag-d
 ```
 
 The following mapping is used to extract tags from pod labels:
 
 ```yaml
-foo: bar
-baz: qux
-bar: quuz
+label-1: tag-a
+label-2: tag-b
+label-3: legacy-tag-d
 ```
 
 </div>
 
-
-
 ### Kubernetes resources annotations as tags
 
-Starting with Agent v7.58+, the Agent can be configured to collect annotations for any Kubernetes resource and use them as tags to attach to all metrics, traces. and logs associated with that resource.
-
-This configuration option is more generic and should be preferred over the following options:
-- podAnnotationsAsTags
-- nodeAnnotationsAsTags
-- namespaceAnnotationsAsTags
+This option extracts a specified annotation from your Kubernetes resources and sends it as a Datadog tag.
 
 {{< tabs >}}
 
 {{% tab "Datadog Operator" %}}
 
-Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
+To extract a given resource annotation `<ANNOTATION>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
-If a specific resource is in the empty API group (for example, `pods` and `nodes`), it can be specified using `resourceType`.
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    kubernetesResourcesAnnotationsAsTags:
+      <RESOURCE>:
+        <ANNOTATION>: <TAG_KEY>
+```
 
-
-To extract a given node annotation `<NODE_ANNOTATION>` and transform them as tag keys `<NODE_TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
+For example, to extract resource annotations from nodes, pods, and deployments:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -298,57 +297,27 @@ spec:
   global:
     kubernetesResourcesAnnotationsAsTags:
       nodes:
-        <NODE_ANNOTATION>: <NODE_TAG_KEY>
-```
-
-For example:
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    kubernetesResourcesAnnotationsAsTags:
-      nodes:
-       kubernetes.io/arch: arch
+        kubernetes.io/arch: arch
       pods:
-        baz: qux
+        role: pod_role
+      deployments.apps:
+        team: kube_team
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource annotations as tags to your metrics. In this example, the tags' names for pods are prefixed by `<PREFIX>_`:
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    kubernetesResourcesAnnotationsAsTags:
-      pods:
-        "*": <PREFIX>_%%annotation%%
-```
 {{% /tab %}}
 
 {{% tab "Helm" %}}
 
-Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
-
-If a specific resource is in the empty API group (for example `pods` and `nodes`), it can be specified using `resourceType`.
-
-To extract a given node annotation `<NODE_ANNOTATION>` and transform them as tag keys `<NODE_TAG_KEY>` within Datadog, add the following configuration to your Helm datadog-values.yaml file:
-
+To extract a given resource annotation `<ANNOTATION>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
 
 ```yaml
 datadog:
   kubernetesResourcesAnnotationsAsTags:
-    nodes:
-      <NODE_ANNOTATION>: <NODE_TAG_KEY>
+    <RESOURCE>:
+      <ANNOTATION>: <TAG_KEY>
 ```
 
-For example:
+For example, to extract resource annotations from nodes, pods, and deployments:
 
 ```yaml
 datadog:
@@ -356,50 +325,46 @@ datadog:
     nodes:
       kubernetes.io/arch: arch
     pods:
-      baz: qux
+      role: pod_role
+    deployments.apps:
+      team: kube_team
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource annotations as tags to your metrics. In this example, the tags' names for pods are prefixed by `<PREFIX>_`:
-
-```yaml
-datadog:
-  kubernetesResourcesAnnotationsAsTags:
-    pods:
-      "*": <PREFIX>_%%annotation%%
-```
 {{% /tab %}}
 
 {{% tab "Manual (DaemonSet)" %}}
 
-Each resource type should be specified in the format `resourceType.apiGroup`, where `resourceType` is the plural name of the resource.
+To extract a given resource annotation `<ANNOTATION>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following environment variable to **both** your Agent and Cluster Agent containers.
 
-If a specific resource is in the empty api group (for example, `pods` and `nodes`), it can be specified using `resourceType`.
-
-To extract a given node annotation `<NODE_ANNOTATION>` and transform them as tag keys `<NODE_TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
-
-```bash
- DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS='{"nodes":{"<NODE_ANNOTATION>": "<NODE_TAG_KEY>"}}'
+```yaml
+- name: DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS
+  value: '{"<RESOURCE>":{"<ANNOTATION>":"<TAG_KEY>"}}'
 ```
 
-For example, you could set up:
+For example, to extract resource annotations from nodes, pods, and deployments:
 
-```bash
-DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS='{"nodes":{"kubernetes.io/arch": "arch"},"pods":{"baz":"qux"}}'
+```yaml
+- name: DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS
+  value: '{"deployments.apps":{"team":"kube_team"},"nodes":{"kubernetes.io/arch":"arch"},"pods":{"role":"pod_role"}}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all resource annotations as tags to your metrics. In this example, the tags' names for pods are prefixed by `<PREFIX>_`:
-
-```bash
-DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS='{"pods":{"*": "<PREFIX>_%%annotation%%"}}'
-```
 {{% /tab %}}
 {{< /tabs >}}
+
+For Agent 7.73.0+, use the following configuration to add all resource annotations as tags to your metrics. In this example, the tag names are prefixed with `<PREFIX>_`:
+
+```yaml
+    #(...)
+    kubernetesResourcesAnnotationsAsTags:
+      pods:
+        "*": <PREFIX>_%%annotation%%
+```
 
 **Notes**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
 <div class="alert alert-info">
 
-This configuration option is merged with other configurations set in <a href="/containers/kubernetes/tag/#pod-annotations-as-tags">podAnnotationsAsTags</a>, <a href="/containers/kubernetes/tag/#namespace-annotations-as-tags">namespaceAnnotationsAsTags</a> and <a href="/containers/kubernetes/tag/#node-annotations-as-tags">nodeAnnotationsAsTags</a>. In case of conflict, <a href="/containers/kubernetes/tag/#kubernetes-resources-annotations-as-tags">`kubernetesResourcesAnnotationsAsTags`</a> take precedence while merging the configurations.
+This configuration option is merged with other configurations set in <a href="/containers/kubernetes/tag/#pod-annotations-as-tags">podAnnotationsAsTags</a>. In case of conflict, <a href="/containers/kubernetes/tag/#kubernetes-resources-annotations-as-tags">`kubernetesResourcesAnnotationsAsTags`</a> take precedence while merging the configurations.
 
 For example, if you have the following configurations:
 
@@ -407,27 +372,27 @@ For example, if you have the following configurations:
 datadog:
   kubernetesResourcesAnnotationsAsTags:
     pods:
-      foo: bar
-      baz: qux
+      annotation-1: tag-a
+      annotation-2: tag-b
 
   podAnnotationsAsTags:
-    foo: quux
-    bar: quuz
+    annotation-2: legacy-tag-c
+    annotation-3: legacy-tag-d
 ```
 
 The following mapping is used to extract tags from pod annotations:
 
 ```yaml
-foo: bar
-baz: qux
-bar: quuz
+annotation-1: tag-a
+annotation-2: tag-b
+annotation-3: legacy-tag-d
 ```
 
 </div>
 
 
-
-### Node labels as tags
+{{% collapse-content title="Legacy Configuration" level="h4" expanded=false id="legacy-configuration" %}}
+#### Node labels as tags
 
 <div class="alert alert-info">
 
@@ -464,7 +429,7 @@ spec:
       kubernetes.io/arch: arch
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tag names are prefixed with `<PREFIX>_`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -474,7 +439,7 @@ metadata:
 spec:
   global:
     nodeLabelsAsTags:
-      "*": <PREFIX>_%%label%%
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics before version 7.73
 ```
 {{% /tab %}}
 
@@ -494,12 +459,13 @@ datadog:
     kubernetes.io/arch: arch
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tag names are prefixed with `<PREFIX>_`:
+
 
 ```yaml
 datadog:
   nodeLabelsAsTags:
-    "*": <PREFIX>_%%label%%
+    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics before version 7.73
 ```
 {{% /tab %}}
 
@@ -516,17 +482,17 @@ For example, you could set up:
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"kubernetes.io/arch":"arch"}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' tag names are prefixed with `<PREFIX>_`:
 
 ```bash
-DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}' # Note: wildcards do not work for KSM metrics before version 7.73
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
 **Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-### Pod labels as tags
+#### Pod labels as tags
 
 <div class="alert alert-info">
 
@@ -563,7 +529,7 @@ spec:
       app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -573,7 +539,7 @@ metadata:
 spec:
   global:
     podLabelsAsTags:
-      "*": <PREFIX>_%%label%%
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics before version 7.73
 ```
 {{% /tab %}}
 
@@ -593,12 +559,12 @@ datadog:
     app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 datadog:
   podLabelsAsTags:
-    "*": <PREFIX>_%%label%%
+    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -615,7 +581,7 @@ For example, you could set up:
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-For Agent v6.8.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
@@ -625,7 +591,7 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 
 **Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-### Pod annotations as tags
+#### Pod annotations as tags
 
 <div class="alert alert-info">
 
@@ -662,7 +628,7 @@ spec:
       app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -672,7 +638,7 @@ metadata:
 spec:
   global:
     podAnnotationsAsTags:
-      "*": <PREFIX>_%%label%%
+      "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -692,12 +658,12 @@ datadog:
     app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod annotation as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod annotation as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 datadog:
   podAnnotationsAsTags:
-    "*": <PREFIX>_%%label%%
+    "*": <PREFIX>_%%annotation%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -714,7 +680,7 @@ For example, you could set up:
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
@@ -724,7 +690,7 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 
 **Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-### Namespace labels as tags
+#### Namespace labels as tags
 
 <div class="alert alert-info">
 
@@ -761,7 +727,7 @@ spec:
       app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -771,7 +737,7 @@ metadata:
 spec:
   global:
     namespaceLabelsAsTags:
-      "*": <PREFIX>_%%label%%
+      "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -791,12 +757,12 @@ datadog:
     app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```yaml
 datadog:
   namespaceLabelsAsTags:
-    "*": <PREFIX>_%%label%%
+    "*": <PREFIX>_%%label%% # Note: wildcards do not work for KSM metrics
 ```
 {{% /tab %}}
 
@@ -813,7 +779,7 @@ For example, you could set up:
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-Use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tag names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics, except those from KSM (`kubernetes_state.*`). In this example, the tags' names are prefixed with `<PREFIX>_`:
 
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
@@ -822,6 +788,7 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 {{< /tabs >}}
 
 **Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
+{{% /collapse-content %}}
 
 ### Container environment variables as tags
 

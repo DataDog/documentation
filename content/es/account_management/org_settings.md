@@ -1,4 +1,6 @@
 ---
+description: Gestiona usuarios, equipos, autenticaciones, claves de API, roles y parámetros
+  de seguridad de tu organización Datadog desde la sección Parámetros de organización.
 further_reading:
 - link: /account_management/api-app-keys/
   tag: Documentación
@@ -9,11 +11,11 @@ further_reading:
 title: Parámetros de organización
 ---
 ## Información general
-Los [administradores][1] pueden acceder a los parámetros de organización haciendo clic en **Organization Settings**, en el menú de la cuenta que aparece en la parte inferior del panel izquierdo de navegación, o seleccionando **Organization Settings** en el menú desplegable de la página Personal Settings (Parámetros personales).
+Los [administradores][1] pueden acceder a los parámetros de organización haciendo clic en **Organization Settings** (Parámetros de organización), en el menú de la cuenta que aparece en la parte inferior del panel izquierdo de navegación, o seleccionando **Organization Settings** en el menú desplegable de la página Personal Settings (Parámetros personales).
 
 {{< img src="account_management/org_settings/nav.png" alt="Ir a los parámetros de tu organización en Datadog" style="width:80%;" >}}
 
-Desde Organization Settings, puedes gestionar usuarios, grupos, la configuración del control de acceso basado en roles (RBAC), claves y tokens. En esta página, se describen todas las secciones y se indica dónde encontrar información sobre tareas específicas de **Organization Settings** en la documentación.
+Desde Parámetros de organización, puedes gestionar usuarios, grupos, la configuración del control de acceso basado en roles (RBAC), claves y tokens. En esta página, se describen todas las secciones y se indica dónde encontrar información sobre tareas específicas de **Parámetros de organización** en la documentación.
 
 ## Identidad y cuentas
 
@@ -137,16 +139,20 @@ Cuando se activa esta función, los usuarios con el permiso `Modify Index` puede
 Los usuarios con el permiso `Org Management` pueden configurar una duración máxima de sesión para tu organización. La duración se aplica a todas las nuevas sesiones web creadas después de cambiarla, para todos los usuarios, independientemente de su rol en la organización. No se aplica a sesiones de aplicaciones móviles de Datadog.
 
 La duración de la sesión puede configurarse dentro de los siguientes límites:
-{{% site-region region="gov" %}}
 - **Duración mínima:** 1 hora
-- **Duración máxima:** 12 horas
-{{% /site-region %}}
-{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
-- **Duración mínima:** 1 hora
-- **Duración máxima:** 720 horas (30 días)
-{{% /site-region %}}
+- **Duración máxima:** {{< region-param key=org_management_max_session_duration >}}
 
 {{< img src="account_management/org_settings/max_session_duration.png" alt="Configuración de una duración máxima de sesión" style="width:70%;" >}}
+
+#### Configuración de la duración de la sesión de tiempo de inactividad
+
+<div class="alert alert-info">
+  Esta función está disponible en versión preliminar.
+</div>
+
+Los usuarios con el permiso `Org Management` pueden activar o desactivar el tiempo de espera de inactividad de sesión de tu organización. Cuando se activa, la sesión de los usuarios se cierra automáticamente después de 30 minutos de inactividad. La configuración se aplica a todas las sesiones web nuevas creadas después de cambiarla y para todos los usuarios, independientemente de sus roles en la organización. No se aplica a las sesiones de aplicaciones móviles de Datadog.
+
+{{< img src="account_management/org_settings/idle_session_timeout.png" alt="Configuración del tiempo de inactividad de la sesión inactiva" style="width:70%;" >}}
 
 ## Referencias adicionales
 

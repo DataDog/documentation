@@ -25,9 +25,9 @@ La configuración remota te permite configurar dinámicamente las [frecuencias d
 - [Configuración remota][3] activada para tu Agent.
 - [Permisos] `APM Remote Configuration Write`[4]. Si no tienes estos permisos, pide a tu administrador de Datadog que actualice tus permisos desde Parámetros de organización.
 
-### Versión de la biblioteca de rastreo
+### Versión de la librería de rastreo
 
-A continuación, se indica la versión mínima de biblioteca de rastreo necesaria para esta función:
+A continuación, se indica la versión mínima de librería de rastreo necesaria para esta función:
 
 Lenguaje  | Versión mínima requerida
 ----------|--------------------------
@@ -49,12 +49,12 @@ Para ver las frecuencias de muestreo configuradas por recurso, ve al [Resumen de
 - La columna `Ingested bytes` muestra los bytes ingeridos de tramos (spans) del servicio y el recurso, mientras que la columna `Downstream bytes` muestra los bytes ingeridos desde tramos en los que la decisión de muestreo se toma a partir de ese servicio y recurso, incluidos los bytes de los servicios de descarga en la cadena de llamadas.
 - La columna `Configuration` muestra desde dónde se está aplicando la frecuencia de muestreo de recursos:
   - `Automatic` si se aplica el [mecanismo de muestreo por defecto basado en el título][8] del Agent.
-  - `Local Configured` si se ha establecido localmente una [regla de muestreo][7] en la biblioteca de rastreo.
+  - `Local Configured` si se ha establecido localmente una [regla de muestreo][7] en la librería de rastreo.
   - `Remote Configured` si se ha configurado una regla de muestreo remota desde la interfaz de usuario de Datadog. Para saber cómo configurar reglas de muestreo desde la página de control de la ingesta, lee la sección sobre [configuración remota de reglas de muestreo](#remotely-configure-sampling-rules-for-the-service).
 
 ## Configurar remotamente reglas de muestreo para el servicio
 
-Para configurar frecuencias de muestreo para el servicio por nombre de recurso: 
+Para configurar frecuencias de muestreo para el servicio por nombre de recurso:
 1. Haz clic en **Manage Ingestion rate** (Gestionar tasa de ingesta). Si la opción de configuración remota está desactivada, asegúrate de que se cumplen todos los [requisitos](#compatibility-requirements) enumerados.
    {{< img src="/tracing/guide/resource_based_sampling/sampling_configuration_modal.png" alt="Modo de configuración" style="width:100%;">}}
 1. Haz clic en **Add new rule** (Añadir nueva regla) para establecer las frecuencias de muestreo de algunos recursos. Las reglas de muestreo utilizan la coincidencia de patrones globales, por lo que puedes utilizar comodines (`*`) para coincidir con varios recursos al mismo tiempo.

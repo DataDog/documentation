@@ -1,5 +1,6 @@
 ---
 title: Scheduled Reports
+description: Send recurring dashboard PDFs to email addresses and Slack channels with customizable schedules and time frames.
 disable_toc: false
 aliases:
     - /dashboards/reporting/

@@ -74,7 +74,7 @@ Copia, importa o exporta un JSON de dashboard utilizando el icono de exportació
 
 ### Eliminar un dashboard
 
-<div class="alert alert-warning">Los dashboards deben ser desprotegidos antes de ser eliminados.</div>
+<div class="alert alert-danger">Los dashboards deben ser desprotegidos antes de ser eliminados.</div>
 
 Utiliza esta opción para eliminar permanentemente tu dashboard. Utiliza la lista preconfigurada **Recently Deleted** (Eliminados recientemente) para restaurar los dashboards eliminados. Los dashboards de la lista **Recently Deleted** se eliminan permanentemente después de 30 días. Para obtener más información, consulta la documentación de [la lista de dashboards][7].
 

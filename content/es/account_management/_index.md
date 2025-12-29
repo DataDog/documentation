@@ -13,9 +13,9 @@ further_reading:
 title: Gestión de cuentas
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La plataforma Datadog for Government sólo admite la autenticación SAML o básica mediante nombre de usuario/correo electrónico y contraseña. Antes de configurar la autenticación SAML, asegúrate de definir al menos una cuenta con nombre de usuario/correo electrónico y contraseña para mantener el acceso durante el proceso de configuración. Datadog recomienda habilitar la autenticación multifactor (MFA) para las cuentas basadas en contraseña.
+<div class="alert alert-danger">La plataforma Datadog for Government solo admite SAML o la autenticación básica mediante nombre de usuario/correo electrónico y contraseña. Antes de configurar la autenticación SAML, asegúrate de que se ha establecido al menos una cuenta con nombre de usuario/email y contraseña para mantener el acceso durante el proceso de configuración. Datadog recomienda habilitar la autenticación multifactor (MFA) para las cuentas basadas en contraseña.
 
-Si necesitas habilitar SAML para una cuenta de prueba, ponte en contacto con el <a href="https://docs.datadoghq.com/getting_started/support/">servicio de asistencia de Datadog</a>.</div>
+Si necesitas habilitar SAML para una cuenta de prueba, ponte en contacto con el el <a href="https://docs.datadoghq.com/getting_started/support/">servicio de asistencia de Datadog</a>.</div>
 
 {{< /site-region >}}
 
@@ -40,7 +40,7 @@ Puedes gestionar tu zona horaria, preferencia de accesibilidad visual y suscripc
 
 En las suscripciones por correo electrónico, tienes acceso a los siguientes informes:
 {{< site-region region="us3,us5,gov,ap1,ap2" >}}
-<div class="alert alert-warning">Los resúmenes de correo electrónico no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Los resúmenes de correo electrónico no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 * Daily Digest (Resumen diario)
@@ -87,6 +87,40 @@ La pestaña [Application Keys][13] (Claves de aplicación) de **Personal Setting
 La pestaña [Apps][14] (Aplicaciones) de **Personal Settings** (Configuración personal) te permite gestionar las aplicaciones que han sido instaladas o creadas por miembros de tu organización. Puedes filtrarlas con una cadena de búsqueda o elegir ver solo las aplicaciones activadas o desactivadas mediante casillas de verificación.
 
 Al pasar el cursor por encima de una aplicación, la opción de activarla o desactivarla aparecerá a la derecha de la lista.
+
+#### Verificación del correo electrónico
+Verifica tu dirección de correo electrónico para mejorar la seguridad de tu cuenta y acceder a funciones de gestión adicionales. Los usuarios verificados tienen un mayor control sobre la seguridad de sus cuentas y pueden ver todas las organizaciones a las que pertenecen.
+
+- Los **usuarios que inician sesión en Google** se verifican automáticamente durante su primer inicio de sesión.
+- Los **usuarios con contraseña** verifican su correo electrónico al establecer su contraseña por primera vez.
+- **Los usuarios SAML** deben verificar manualmente su correo electrónico a través de Datadog.
+
+Una vez que apruebes la verificación, tendrás:
+- La posibilidad de **cerrar sesión en todas las sesiones web activas** en todos los dispositivos, garantizando la seguridad en caso de compromiso de credenciales.
+- La posibilidad de **ver y cambiar entre organizaciones** fuera de tu jerarquía orgánica actual.
+
+Los usuarios no verificados pueden seguir accediendo a Datadog, pero solo pueden ver las organizaciones dentro de su jerarquía y no pueden revocar las sesiones activas.
+
+#### Verificar tu correo electrónico
+
+Para verificar tu correo electrónico:
+1. Ve a tus **Parámetros de perfil**.
+2. Haz clic en **Verify Account** (Verificar cuenta).
+3. Introduce el **código de verificación** enviado a tu correo electrónico registrado.
+4. Haz clic en **Submit** (Enviar) para finalizar el proceso de verificación.
+
+#### Cerrar sesión en todas las sesiones web activas
+
+Para cerrar sesión en todas las sesiones web activas:
+Al cerrar sesión en todas las sesiones web activas, cierras sesión en todas las sesiones actuales en todos los dispositivos, incluido el que estás utilizando.
+
+
+Para cerrar sesión en todas las sesiones activas:
+1. Ve a **Personal Settings** (Configuración personal).
+2. Haz clic en **Log Out of All Web Sessions** (Cerrar sesión en todas las sesiones web).
+3. Confirma la acción.
+
+Después de confirmar, se cierran tus sesiones en todos los dispositivos y debes iniciarlas nuevamente.
 
 ## Aspecto
 

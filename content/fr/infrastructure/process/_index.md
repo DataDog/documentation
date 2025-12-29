@@ -28,7 +28,7 @@ title: Live processes
 ---
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Les Live Processes et la surveillance des live processes sont inclus dans la formule Enterprise. Pour les autres formule, contactez votre représentant commercial ou <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> pour demander l'activation de cette fonctionnalité.
 </div>
 
@@ -159,7 +159,7 @@ Consultez la section sur l'[installation DaemonSet][1] standard et les pages d'i
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
-<div class="alert alert-warning">Vous pouvez consulter vos processus ECS Fargate dans Datadog. Pour visualiser leur relation avec les conteneurs ECS Fargate, utilisez l'Agent Datadog v7.50.0 ou une version ultérieure.</div>
+<div class="alert alert-danger">Vous pouvez consulter vos processus ECS Fargate dans Datadog. Pour visualiser leur relation avec les conteneurs ECS Fargate, utilisez l'Agent Datadog v7.50.0 ou une version ultérieure.</div>
 
 Pour collecter les processus, l'Agent Datadog doit s'exécuter en tant que conteneur au sein de la tâche.
 

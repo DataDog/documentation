@@ -44,6 +44,8 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Using Datadog Lambda Extension v67+](#using-datadog-lambda-extension-v67)
 - [Configure Auto-linking for DynamoDB PutItem](#configure-auto-linking-for-dynamodb-putitem)
 - [Visualize and model AWS services correctly](#visualize-and-model-aws-services-by-resource-name)
+- [Send logs to Observability Pipelines](#send-logs-to-observability-pipelines)
+- [Reload API key secret periodically](#reload-api-key-secret-periodically)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
@@ -786,7 +788,21 @@ Service names reflect the actual AWS resource name rather than only the AWS serv
 
 You may prefer the older service representation model if your dashboards and monitors rely on the legacy naming convention. To restore the previous behavior, set the environment var: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
 
-The updated service modeling configuration is recommended. 
+The updated service modeling configuration is recommended.
+
+## Send logs to Observability Pipelines
+
+{{% observability_pipelines/lambda_extension_source %}}
+
+See [Send Datadog Lambda Extension Forwarder Logs to Observability Pipelines][58] for more information.
+
+## Reload API key secret periodically
+
+If you specify the Datadog API key using `DD_API_KEY_SECRET_ARN`, you can also set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to periodically reload the secret. For example, if you set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, then the secret is reloaded when the API key is needed to send data, and it has been more than 43200 seconds since the last load.
+
+Example use case: For security, every day (86400 seconds), the API key is rotated and the secret is updated to the new key, and the old API key is kept valid for another day as a grace period. In this case, you can set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, so the API key is reloaded during the grace period of the old key.
+
+This is available for version 88+ of the Datadog Lambda Extension.
 
 ## Troubleshoot
 
@@ -854,3 +870,4 @@ If you have trouble configuring your installations, set the environment variable
 [55]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [57]: /tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
+[58]: /observability_pipelines/sources/lambda_extension/

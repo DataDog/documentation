@@ -39,7 +39,7 @@ DogStatsD est disponible sur Docker Hub et GCR :
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
-<div class="alert alert-warning">Docker Hub est soumis à des limites de pull d'images. Si vous n'êtes pas client Docker Hub, Datadog vous recommande de mettre à jour la configuration de votre Agent Datadog et de votre Agent de cluster afin de récupérer les images à partir de GCR ou ECR. Pour connaître la marche à suivre, consultez la section <a href="/agent/guide/changing_container_registry">Modifier votre registre de conteneurs</a>.</div>
+<div class="alert alert-danger">Docker Hub est soumis à des limites de pull d'images. Si vous n'êtes pas client Docker Hub, Datadog vous recommande de mettre à jour la configuration de votre Agent Datadog et de votre Agent de cluster afin de récupérer les images à partir de GCR ou ECR. Pour connaître la marche à suivre, consultez la section <a href="/agent/guide/changing_container_registry">Modifier votre registre de conteneurs</a>.</div>
 
 ## Fonctionnement
 
@@ -106,7 +106,7 @@ Les tags suivants sont ajoutés pour [Docker][3]. Il est important de noter que 
 
 La détection de l'origine dans les environnements non basés sur Kubernetes fait appel à une extension du protocole DogStatsD dans le [Datagramme et interface système][2]. Pour activer cette fonctionnalité dans l'Agent, définissez la variable d'environnement `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` sur `true`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Par défaut, la détection de l'origine est activée dans tous les clients DogStatsD, mais elle n'est pas activée par défaut dans le client Datadog Agent. Pour désactiver la détection d'origine dans un client, consultez la documentation de la bibliothèque DogStatsD que vous utilisez.
 </div>
 
@@ -356,7 +356,7 @@ options = {
 initialize(**options)
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Par défaut, les instances de client DogStatsD Python (y compris l'instance globale <code>statsd</code>) ne peuvent pas être partagées entre des processus, mais sont thread-safe. De ce fait, le processus parent et chaque processus enfant doivent créer leurs propres instances du client, ou la mise en mémoire tampon doit être explicitement désactivée en définissant <code>disable_buffering</code> sur <code>True</code>. Consultez la documentation sur <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> pour en savoir plus.
 </div>
 

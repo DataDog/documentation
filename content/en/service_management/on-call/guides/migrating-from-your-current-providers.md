@@ -146,7 +146,7 @@ With your core migration to Datadog On-Call complete, shift focus to long-term o
 [1]: https://app.datadoghq.com/on-call/
 [2]: /integrations/
 [3]: /monitors/notify/#bulk-editing-monitor--handles
-[4]: /on_call/teams/
+[4]: /service_management/on-call/teams/
 [6]: /service_management/incident_management
 [7]: /service_management/on-call/schedules/
 [8]: https://app.datadoghq.com/on-call/analytics

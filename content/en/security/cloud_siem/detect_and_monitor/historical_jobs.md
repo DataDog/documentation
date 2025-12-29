@@ -9,7 +9,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">This feature is not supported for the US1-FED site.</div>
+<div class="alert alert-danger">This feature is not supported for the US1-FED site.</div>
 {{% /site-region %}}
 
 Historical Jobs allows you to backtest detections by running them against historical logs stored in Datadog Cloud SIEM.
@@ -67,15 +67,15 @@ A calculated field can be used like any log attribute for job analysis, searchin
 
 {{< img src="security/security_monitoring/detection_rules/create-calculated-field.png" alt="The create a calculated fields modal with fields to define the name and formula" style="width:90%;" >}}
 
-See [Calculated Fields Expression Language][5] for the available functions and operators.
+See [Calculated Fields Formulas][5] for the available functions and operators.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/rules
+[1]: https://app.datadoghq.com/security/siem/rules
 [2]: https://app.datadoghq.com/security/configuration/siem/rules/new-job?product=siem
-[3]: https://app.datadoghq.com/security/detections/historical-jobs
+[3]: https://app.datadoghq.com/security/siem/detections/historical-jobs
 [4]: /logs/explorer/calculated_fields/
-[5]: /logs/explorer/calculated_fields/expression_language/
+[5]: /logs/explorer/calculated_fields/formulas/
 [6]: https://app.datadoghq.com/security/configuration/siem/rules/new-job?product=siem#rule-editor-define-queries

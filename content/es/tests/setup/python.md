@@ -38,7 +38,7 @@ Marcos de test compatibles:
 
 ## Configuración del método de informe
 
-Para informar resultados de tests a Datadog, debes configurar la biblioteca Datadog Python:
+Para informar resultados de tests a Datadog, debes configurar la librería Datadog Python:
 
 {{< tabs >}}
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
@@ -169,7 +169,7 @@ Para ver configuraciones adicionales, consulta [Configuración][1].
 
 ### API de test manual
 
-<div class="alert alert-warning"><strong>Nota</strong>: La API de test manual de Test Optimization está en fase <strong>beta</strong> y puede sufrir modificaciones.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: La API de test manual de Test Optimization está en fase <strong>beta</strong> y puede sufrir modificaciones.</div>
 
 A partir de la versión `2.13.0`, el [rastreador Python de Datadog][1] proporciona la API de Test Optimization (`ddtrace.ext.test_visibility`) para enviar resultados de optimización de tests según sea necesario.
 
@@ -387,7 +387,7 @@ La siguiente es una lista de los parámetros de configuración más importantes 
 **Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `DD_SERVICE`
-: Nombre del servicio o de la biblioteca en proceso de test.<br/>
+: Nombre del servicio o de la librería en proceso de test.<br/>
 **Variable de entorno**: `DD_SERVICE`<br/>
 **Por defecto**: `pytest`<br/>
 **Ejemplo**: `my-python-app`

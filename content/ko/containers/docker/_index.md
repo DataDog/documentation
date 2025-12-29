@@ -34,7 +34,7 @@ title: Docker, containerd, Podman용 Docker 에이전트
 
 Datadog Docker Agent는 호스트 [Agent][1]의 컨테이너화된 버전입니다. Docker Agent는 Docker, containerd, Podman 런타임을 지원합니다. 공식 [Docker 이미지][2]는 Docker Hub, GCR, ECR-Public에서 제공됩니다.
 
-<div class="alert alert-warning">Docker Hub에는 이미지 풀링 속도 제한이 있습니다. Docker Hub 고객이 아닌 경우, Datadog에서는 Datadog 에이전트와 클러스터 에이전트 구성을 업데이트하여 GCR이나 ECR에서 풀링하도록 구성할 것을 권고합니다. 예를 들어, <a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참고하세요.
+<div class="alert alert-danger">Docker Hub에는 이미지 풀링 속도 제한이 있습니다. Docker Hub 고객이 아닌 경우, Datadog에서는 Datadog 에이전트와 클러스터 에이전트 구성을 업데이트하여 GCR이나 ECR에서 풀링하도록 구성할 것을 권고합니다. 예를 들어, <a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참고하세요.
 
 이미지는 64비트 x86 및 Arm v8 아키텍처에서 사용할 수 있습니다.
 

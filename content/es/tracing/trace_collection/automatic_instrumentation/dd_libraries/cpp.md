@@ -23,8 +23,8 @@ title: Rastreo de de aplicaciones C++
 type: lenguaje de código múltiple
 ---
 
-<div class="alert alert-warning">
- <strong>Nota:</strong> C++ no proporciona integraciones para la instrumentación automática, pero es utilizado por el rastreo de proxy como <a href="/tracing/setup/envoy/">Envoy</a> y <a href="/tracing/setup/nginx/">Nginx</a>.
+<div class="alert alert-danger">
+  <strong>Nota:</strong> C++ no proporciona integraciones para la instrumentación automática, pero es utilizado por el rastreo de proxies como <a href="/tracing/setup/envoy/">Envoy</a> y <a href="/tracing/setup/nginx/">NGINX</a>.
 </div>
 
 ## Requisitos de compatibilidad

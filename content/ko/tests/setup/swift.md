@@ -113,7 +113,7 @@ GitHub를 사용하는 경우 GitHub 마켓플레이스에서 [Swift 테스트 �
 [1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-warning"><strong>참고</strong>: 이 프레임워크는 테스트용으로만 유용하며 테스트를 실행할 때만 애플리케이션과 연결해야 합니다. 프레임워크를 사용자에게 배포하지 마세요.. </div>
+<div class="alert alert-danger"><strong>참고</strong>: 이 프레임워크는 테스트용으로만 유용하며 테스트를 실행할 때만 애플리케이션과 연결해야 합니다. 프레임워크를 사용자에게 배포하지 마세요.. </div>
 
 ## 테스트 계측하기
 
@@ -125,7 +125,7 @@ GitHub를 사용하는 경우 GitHub 마켓플레이스에서 [Swift 테스트 �
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift 환경" >}}
 
-<div class="alert alert-warning">환경 변수의 변수 확장에 주 대상이 있어야 하며, 선택하지 않으면 변수가 유효하지 않습니다. </div>
+<div class="alert alert-danger">환경 변수의 변수 확장에 주 대상이 있어야 하며, 선택하지 않으면 변수가 유효하지 않습니다. </div>
 
 UITests의 경우 프레임워크에서 자동으로 이러한 값을 애플리케이션에 삽입하기 때문에 테스트 대상에서만 환경 변수를 설정하면 됩니다.
 
@@ -242,7 +242,7 @@ UITests의 경우, 테스트 대상과 UITests에서 실행되는 애플리케�
 
 `DD_DISABLE_CRASH_HANDLER`
 : 충돌 처리 및 보고 사용 중지. (부울)
-<div class="alert alert-warning"><strong>중요</strong>: 충돌 보고를 사용 중지하면 충돌한 테스트가 전혀 보고 되지 않고, 실패로 나타나지 않습니다. 충돌 처리를 사용하지 않아야 할 테스트가 있는 경우, 별도 대상으로 실행해 다른 테스트에서 사용 중지되지 않도록 합니다.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 충돌 보고를 사용 중지하면 충돌한 테스트가 전혀 보고 되지 않고, 실패로 나타나지 않습니다. 충돌 처리를 사용하지 않아야 할 테스트가 있는 경우, 별도 대상으로 실행해 다른 테스트에서 사용 중지되지 않도록 합니다.</div>
 
 ### 네트워크 자동 계측
 

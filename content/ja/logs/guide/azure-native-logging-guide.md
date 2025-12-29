@@ -27,7 +27,7 @@ title: Datadog リソースによる Azure ログの送信
 
 アクティビティログを Datadog に送信するには、**Send subscription activity logs** を選択します。このオプションを有効にしない場合、アクティビティログは Datadog に送信されません。
 
-<div class="alert alert-warning">ログ収集が有効になると、Datadog リソースは自動的に <a href="https://learn.microsoft.com/azure/app-service/">App Services</a> のログ構成を変更します。ログ構成が変更されると、Azure は App Services の<strong>再起動</strong>をトリガーします。</div>
+<div class="alert alert-danger">ログ収集が有効になると、Datadog リソースは自動的に <a href="https://learn.microsoft.com/azure/app-service/">App Services</a> のログ構成を変更します。ログ構成が変更されると、Azure は App Services の<strong>再起動</strong>をトリガーします。</div>
 
 ## Azure リソースログ 
 

@@ -22,7 +22,7 @@ title: セッションリプレイブラウザのプライバシーオプショ�
 
 ## 構成
 
-<div class="alert alert-warning"><code>defaultPrivacyLevel</code> と <code>mask-user-input</code> は、SDK v3.6.0+ で利用できます。</div>
+<div class="alert alert-danger"><code>defaultPrivacyLevel</code> と <code>mask-user-input</code> は、SDK v3.6.0+ で利用できます。</div>
 
 To enable your privacy settings, set `defaultPrivacyLevel` to `mask`, `mask-user-input`, or `allow` in your JavaScript configuration.
 

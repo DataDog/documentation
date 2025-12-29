@@ -33,7 +33,7 @@ To enable paging between orgs or datacenters, you must establish a secure connec
    - `on_call_respond` - Respond to On-Call Pages
    - `user_access_read` - Read user information (automatically included in most roles)
  
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
    Service accounts created with Terraform may be missing the <code>user_access_read</code> permission. This permission is automatically added to roles created through the UI, but it cannot be manually added through the UI and may not be included in Terraform-configured roles. If cross-org paging fails with permission errors, add an additional role to your service account that includes the <code>user_access_read</code> permission.
    </div>
 

@@ -152,7 +152,62 @@ Log4j 2 incluye una estructura JSON.
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-2. Añade las dependencias de diseño JSON a tu `pom.xml`. Por ejemplo:
+2. Añade el archivo de plantilla de diseño JSON (como `MyLayout.json`) en el directorio `src/main/resources` de tu proyecto Java. Por ejemplo:
+    ```json
+    {
+       "timestamp":{
+          "$resolver":"timestamp",
+          "pattern":{
+             "format":"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+             "timeZone":"UTC"
+          }
+       },
+       "status":{
+          "$resolver":"level",
+          "field":"name"
+       },
+       "thread_name":{
+          "$resolver":"thread",
+          "field":"name"
+       },
+       "logger_name":{
+          "$resolver":"logger",
+          "field":"name"
+       },
+       "message":{
+          "$resolver":"message",
+          "stringified":true
+       },
+       "exception_class":{
+          "$resolver":"exception",
+          "field":"className"
+       },
+       "exception_message":{
+          "$resolver":"exception",
+          "field":"message"
+       },
+       "stack_trace":{
+          "$resolver":"exception",
+          "field":"stackTrace",
+          "stackTrace":{
+             "stringified":true
+          }
+       },
+       "host":"${hostName}",
+       "service":"${env:DD_SERVICE}",
+       "version":"${env:DD_VERSION}",
+       "dd.trace_id":{
+          "$resolver":"mdc",
+          "key":"dd.trace_id"
+       },
+       "dd.span_id":{
+          "$resolver":"mdc",
+          "key":"dd.span_id"
+       }
+    }
+    ```
+
+3. Añade las dependencias de diseño JSON a tu `pom.xml`. Por ejemplo:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -237,11 +292,8 @@ writer.field.dd.env        = {context: dd.env}
 ```
 
 [1]: https://tinylog.org/v2/configuration/#json-writer
-{{% /tab %}}{{< /tabs >}}
-
-#### Inserta los ID de trazas en tus logs
-
-Si tienes APM activado para esta aplicación, puedes correlacionar los logs y las trazas activando la inserción de ID de trazas. Consulta [Conectar logs y trazas Java][3] para obtener más información.
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Formato sin procesar
 
@@ -260,7 +312,7 @@ Configura un appender de archivos en `log4j.xml`. Por ejemplo:
     <param name="Append" value="true"/>
 
     <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </layout>
   </appender>
 
@@ -282,7 +334,7 @@ Configura un appender de archivos en `log4j2.xml`. Por ejemplo:
 <Configuration>
   <Appenders>
     <File name="FILE" fileName="logs/app.log">
-      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </File>
   </Appenders>
 
@@ -307,7 +359,7 @@ Configurar un anexador de archivos en `logback.xml`. Por ejemplo:
     <immediateFlush>true</immediateFlush>
 
     <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
     </encoder>
   </appender>
 
@@ -333,13 +385,27 @@ writer.file     = log.txt
 ```
 
 [1]: https://tinylog.org/v2/configuration/#json-writer
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Inserta los ID de trazas en tus logs
 
 Si APM está activada para esta aplicación, puedes correlacionar logs y trazas activando la inserción de ID de trazas. Consulta [Conectar logs y trazas Java][3].
 
-Si _no_ correlacionas logs y trazas, puedes eliminar los marcadores MDC (`%X{dd.trace_id} %X{dd.span_id}`) de los patrones de log incluidos en los ejemplos de configuración de arriba.
+Si _no_ correlacionas logs y trazas, elimina los parámetros MDC (`%X{dd.trace_id} %X{dd.span_id}`) de los patrones de logs incluidos en los ejemplos de configuración anteriores.
+
+Por ejemplo, si utilizas Log4j 2 pero no correlacionas logs y trazas, elimina el siguiente bloque de la plantilla de diseño de logs de ejemplo, `MyLayout.json`:
+
+```json
+"dd.trace_id":{
+   "$resolver":"mdc",
+   "key":"dd.trace_id"
+},
+"dd.span_id":{
+   "$resolver":"mdc",
+   "key":"dd.span_id"
+}
+```
 
 
 ## Configurar el Datadog Agent
@@ -454,7 +520,7 @@ Log4j 2 permite registrar logs en un host remoto, pero no ofrece la posibilidad 
 ### Configurar Logback
 
 {{< site-region region="us3,us5,ap1,ap2,gov" >}}
-  <div class="alert alert-warning">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para obtener una lista de los endpoints de generación de logs, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
+  <div class="alert alert-danger">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para obtener una lista de los endpoints de generación de logs, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
 {{< /site-region >}}
 
 

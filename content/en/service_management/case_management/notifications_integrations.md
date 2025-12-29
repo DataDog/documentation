@@ -95,11 +95,11 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 1. Select a Jira account, a project to create issues in, and the desired issue type (such as story, epic, bug, or task).
 1. You can opt into the automatic creation of a Jira issue for each case created in the project.
 1. For the following attributes—case title, description, assignee, comments, status, and priority—select one of the options below:
-  | Option     | Description    |
-  | ---  | ----------- |
-  |Once to Jira at case creation|The field syncs from Case Management to Jira only at the time the case is created. Subsequent changes are not reflected on either side.|
-  |Two-way sync (bi-directional)|Changes in Case Management are reflected in Jira, and vice versa|
-  |Don't sync|The field does not sync to Jira.|
+  | Option                        | Description                                                                                                                             |
+  |-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+  | Once to Jira at case creation | The field syncs from Case Management to Jira only at the time the case is created. Subsequent changes are not reflected on either side. |
+  | Two-way sync (bi-directional) | Changes in Case Management are reflected in Jira, and vice versa                                                                        |
+  | Don't sync                    | The field does not sync to Jira.                                                                                                        |
 1. For case status and priority, select which values they map to on the Jira side.
 1. Save changes.
 
@@ -110,7 +110,7 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
 - Issue creation is available for Jira Cloud and Data Center. Field syncing is only available for Jira Cloud.
 {{% /collapse-content %}}
 
-{{% collapse-content title="ServiceNow Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="ServiceNow Configuration" level="h4" expanded=false id="servicenow" %}}
 1. Configure the ServiceNow integration by following the [ITOM and ITSM setup instructions][3].
 1. In Case Management project settings, enable ServiceNow for manual ServiceNow incident creation from the project.
 1. Select a ServiceNow instance and assignment group.

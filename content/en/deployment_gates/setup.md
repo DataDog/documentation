@@ -1,10 +1,15 @@
 ---
 title: Set Up Deployment Gates
+description: "Configure gates and rules in Datadog UI, then integrate with deployment pipelines using the datadog-ci CLI, Argo Rollouts, or API calls."
 further_reading:
 - link: "/deployment_gates/explore"
   tag: "Documentation"
   text: "Learn about the Deployment Gates explorer"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Deployment Gates are not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
@@ -127,8 +132,8 @@ The command has the following behavior:
 Note that the `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
 
 **Required environment variables**:
-* `DD_API_KEY`: Your [Datadog API key][2], used to authenticate the requests.
-* `DD_APP_KEY`: Your [Datadog application key][3], used to authenticate the requests.
+* `DD_API_KEY`: Your [API key][2], used to authenticate the requests.
+* `DD_APP_KEY`: Your [Application key][3], used to authenticate the requests.
 * `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be run with beta commands enabled.
 
 For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][4].
@@ -136,7 +141,7 @@ For complete configuration options and detailed usage examples, refer to the [`d
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
-[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/deployment#gate
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#gate
 
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
@@ -234,7 +239,61 @@ spec:
 [4]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
-[7]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/deployment#gate
+[7]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#gate
+
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
+The [`Datadog Deployment Gate GitHub Action`][4] includes all the required logic to evaluate a Deployment Gate during the deployment of a service.
+
+Add a `DataDog/deployment-gate-github-action` step to your existing deployment workflow, for example:
+
+```yaml
+name: Deploy with Datadog Deployment Gate
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Canary
+        run: |
+          echo "Deploying canary release for service:'my-service' in 'production'. Version 1.0.1"
+          # Your deployment commands here
+
+      - name: Evaluate Deployment Gate
+        uses: DataDog/deployment-gate-github-action@v1.0.0
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+        with:
+          service: my-service
+          env: production
+          identifier: default
+
+      - name: Deploy
+        run: |
+          echo "Deployment Gate passed, proceeding with deployment"
+          # Your deployment commands here
+```
+
+If the Deployment Gate being evaluated contains APM Faulty Deployment Detection rules, you must also specify the version (for example, `version: 1.0.1`).
+The action has the following behavior:
+* It sends a request to start the gate evaluation and blocks until the evaluation is complete.
+* It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
+* It has built-in automatic retries for errors.
+* It allows you to customize its behavior in case of unexpected Datadog errors with the `fail-on-error` parameter.
+
+**Required environment variables**:
+* `DD_API_KEY`: Your [API key][2], used to authenticate the requests.
+* `DD_APP_KEY`: Your [Application key][3], used to authenticate the requests.
+
+For complete configuration options and detailed usage examples, see the [`DataDog/deployment-gate-github-action` repository][4].
+
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/application-keys
+[4]: https://github.com/DataDog/deployment-gate-github-action
 
 {{% /tab %}}
 {{% tab "Generic script" %}}

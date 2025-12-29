@@ -1,5 +1,6 @@
 ---
 title: Context Links
+description: Connect dashboard widgets to Datadog pages and third-party applications using customizable context links with variables.
 further_reading:
 - link: '/dashboards/widgets'
   tag: 'Documentation'

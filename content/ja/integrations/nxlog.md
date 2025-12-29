@@ -31,7 +31,7 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 ### TCP 経由のログ収集 
 
 {{< site-region region="us3,us5,ap1,gov" >}}
-  <div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では TCP エンド ポイントはサポートされていません。ログ エンド ポイントの一覧は、<a href="/logs/log_collection/?tab=tcp#additional-configuration-options">ログ収集とインテグレーション</a> を参照してください。</div>
+  <div class="alert alert-danger">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では TCP エンド ポイントはサポートされていません。ログ エンド ポイントの一覧は、<a href="/logs/log_collection/?tab=tcp#additional-configuration-options">ログ収集とインテグレーション</a> を参照してください。</div>
 {{< /site-region >}}
 
 

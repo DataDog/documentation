@@ -92,7 +92,7 @@ There are three points of integration with Datadog, each of which achieves a dif
 - **Datadog Cluster Agent BOSH release** - Deploy one Datadog Cluster Agent job. The job queries the CAPI and BBS API to collect cluster-level and application-level metadata to provide improved tagging capabilities in your applications and containers.
 - **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 These integrations are meant for Cloud Foundry deployment administrators, not end users.
 </div>
 

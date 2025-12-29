@@ -1,9 +1,22 @@
 ---
 title: Getting Started with Feature Flags
+description: Manage feature delivery with integrated observability, real-time metrics, and OpenFeature-compatible gradual rollouts.
 further_reading:
-- link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
-  tag: 'External Site'
-  text: 'OpenFeature Web SDK documentation'
+- link: '/feature_flags/client/'
+  tag: 'Documentation'
+  text: 'Client-Side SDKs'
+- link: '/feature_flags/server/'
+  tag: 'Documentation'
+  text: 'Server-Side SDKs'
+- link: 'https://www.datadoghq.com/blog/feature-flags/'
+  tag: 'Blog'
+  text: 'Ship features faster and safer with Datadog Feature Flags'
+- link: 'https://www.datadoghq.com/blog/experimental-data-datadog/'
+  tag: 'Blog'
+  text: 'How to bridge speed and quality in experiments through unified data'
+- link: 'https://www.datadoghq.com/blog/datadog-feature-flags-cloud-resilience/'
+  tag: 'Blog'
+  text: 'How Datadog Feature Flags is resilient to cloud provider failures'
 site_support_id: getting_started_feature_flags
 ---
 
@@ -23,6 +36,18 @@ Datadog feature flags offer a powerful, integrated way to manage feature deliver
 
 * **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
 
+## Feature Flags SDKs
+
+This guide uses the JavaScript browser SDK as an example. You can integrate Datadog Feature Flags into any application using one of the following SDKs:
+
+### Client-side SDKs
+
+{{< partial name="feature_flags/feature_flags_client.html" >}}
+
+### Server-side SDKs
+
+{{< partial name="feature_flags/feature_flags_server.html" >}}
+
 ## Configure your environments
 
 Your organization likely already has pre-configured environments for Development, Staging, and Production. If you need to configure these or any other environments, navigate to the [**Environments**][3] page to create tag queries for each environment. You can also identify which environment should be considered a Production environment.
@@ -37,7 +62,7 @@ First, install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@ope
 
 
 ```
-yarn add @datadog/openfeature-browser@preview @openfeature/web-sdk @openfeature/core
+yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 ```
 
 Then, add the following to your project to initialize the SDK:
@@ -50,7 +75,7 @@ import { OpenFeature } from '@openfeature/web-sdk';
 const provider = new DatadogProvider({
    clientToken: '<CLIENT_TOKEN>',
    applicationId: '<APPLICATION_ID>',
-   enableExposureLogging: true,
+   enableExposureLogging: true, // Can impact RUM costs if enabled
    site: 'datadoghq.com',
    env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
    service: '<SERVICE_NAME>',
@@ -60,6 +85,8 @@ const provider = new DatadogProvider({
 // Set the provider
 await OpenFeature.setProviderAndWait(provider);
 ```
+
+<div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. You can disable it if you don't need to track feature exposure or guardrail metric status.</div>
 
 More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][4].
 

@@ -7,11 +7,7 @@ further_reading:
   text: Revisar las principales categorías de datos enviados a Datadog
 - link: /data_security/pci_compliance/
   tag: Documentación
-  text: Establecer una organización de Datadog que cumpla el estándar PCI
-- link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
-  tag: Blog
-  text: Datadog presenta los servicios de Log Management y APM compatibles con el
-    PCI
+  text: Cumplimiento del estándar PCI DSS
 title: Seguridad de los datos en Log Management
 ---
 
@@ -19,11 +15,11 @@ title: Seguridad de los datos en Log Management
 
 El producto Log Management es compatible con múltiples [entornos y formatos][1], lo que te permite enviar a Datadog casi cualquier dato. En este artículo se describen las principales garantías de seguridad y los controles de filtrado disponibles al enviar logs a Datadog.
 
-**Nota**: Es posible ver logs en varios productos de Datadog. Todos los logs que se ven en la interfaz de usuario de Datadog, incluidos los que se ven en las páginas de trazas de APM, forman parte del producto Log Management.
+**Notas**:
+- Los logs pueden visualizarse en distintos productos de Datadog. Todos los logs visualizados en la interfaz de usuario de Datadog, incluidos los logs visualizados en las pages (páginas) de traces (trazas) de APM, forman parte del producto de Log Management.
+- Las herramientas y políticas de Datadog cumplen PCI v4.0. Para obtener más información, consulta [Cumplimiento de PCI DSS][10].
 
 ## Seguridad de la información
-
-El Datadog Agent envía logs a Datadog a través de HTTPS o a través de una conexión TCP con cifrado TLS en el puerto 10516, lo que requiere una comunicación saliente (consulta [Transporte de logs del Agent][2]).
 
 Datadog utiliza un cifrado simétrico en reposo (AES-256) para los logs indexados. Los logs indexados se eliminan de la plataforma Datadog una vez que su periodo de conservación expira, según lo que hayas definido.
 
@@ -43,37 +39,10 @@ Sensitive Data Scanner también está disponible como [procesador][8] en [Observ
 
 {{% hipaa-customers %}}
 
-## Cumplimiento del PCI DSS para Log Management
-
-{{< site-region region="us" >}}
-
-<div class="alert alert-warning">
-El cumplimiento del PCI DSS para Log Management sólo está disponible para organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
-</div>
-
-Datadog permite a los clientes enviar logs a organizaciones de Datadog que cumplen el PCI DSS, si así lo solicitan. Para configurar una organización de Datadog que cumpla el PCI, sigue estos pasos:
-
-{{% pci-logs %}}
-
-Consulta [Cumplimiento del PCI DSS][1] para obtener más información. Para activar el cumplimiento del PCI para APM, consulte [Cumplimientol del PCI DSS para APM][1].
-
-[1]: /es/data_security/pci_compliance/
-[2]: /es/data_security/pci_compliance/?tab=apm
-
-{{< /site-region >}}
-
-{{< site-region region="us3,us5,eu,gov,ap1,ap2" >}}
-
-El cumplimiento del PCI DSS para Log Management no está disponible para el sitio {{< region-param key="dd_site_name" >}}.
-
-{{< /site-region >}}
-
 ## Cifrado de endpoints
 
 Todos los endpoints de envío de logs están cifrados. Los siguientes endpoints heredados siguen siendo compatibles:
 
-* `tcp-encrypted-intake.logs.datadoghq.com`
-* `lambda-tcp-encrypted-intake.logs.datadoghq.com`
 * `gcp-encrypted-intake.logs.datadoghq.com`
 * `http-encrypted-intake.logs.datadoghq.com`
 
@@ -90,3 +59,4 @@ Todos los endpoints de envío de logs están cifrados. Los siguientes endpoints 
 [7]: /es/security/sensitive_data_scanner/
 [8]: /es/observability_pipelines/processors/sensitive_data_scanner
 [9]: /es/observability_pipelines/
+[10]: /es/data_security/pci_compliance/

@@ -1,5 +1,6 @@
 ---
 title: HTTP Requests
+description: Make custom HTTP requests to endpoints with configurable authentication, methods, headers, and response handling for workflows and apps.
 disable_toc: false
 further_reading:
 - link: "/actions/connections/"
@@ -188,6 +189,6 @@ To configure a private HTTP request:
 
 [1]: https://docs.datadoghq.com/api/latest/ip-ranges/#list-ip-ranges
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
-[4]: https://datadoghq.slack.com/
+[4]: https://chat.datadoghq.com/
 [5]: /actions/private_actions
 [6]: /actions/private_actions/private_action_credentials/?tab=httpsaction#credential-files

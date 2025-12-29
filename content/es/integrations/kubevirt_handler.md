@@ -69,7 +69,7 @@ tile:
 <!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Esta integración se encuentra en fase beta pública y debe activarse en cargas de trabajo de producción con precaución.
 </div>
 

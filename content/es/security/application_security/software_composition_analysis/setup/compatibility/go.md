@@ -7,7 +7,7 @@ type: lenguaje de código múltiple
 
 ## Funciones de seguridad de las aplicaciones
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la biblioteca Go para la versión de rastreador especificada:
+Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería Go para la versión de rastreador especificada:
 
 | Función de seguridad de las aplicaciones                   | Versión mínima de rastreador Go |
 | -------------------------------- | ----------------------------|
@@ -36,9 +36,9 @@ La versión mínima de rastreador para contar con todas las funciones de segurid
 
 ### Versiones de Go compatibles
 
-La biblioteca de rastreo Go de Datadog es de código abierto. Para obtener más información, consulta el [repositorio de GitHub][2].
+La librería de rastreo Go de Datadog es de código abierto. Para obtener más información, consulta el [repositorio de GitHub][2].
 
-La biblioteca de rastreo Go de Datadog tiene una [política de compatibilidad de versiones][3] definida para las versiones de Go. Las dos últimas versiones de Go son totalmente compatibles, mientras que la tercera versión más reciente se considera en [mantenimiento][4]. Las versiones anteriores pueden funcionar, pero no se proporciona compatibilidad por defecto. Para solicitudes especiales, [ponte en contacto con el servicio de asistencia][5]. 
+La librería de rastreo Go de Datadog tiene una [política de compatibilidad de versiones][3] definida para las versiones de Go. Las dos últimas versiones de Go son totalmente compatibles, mientras que la tercera versión más reciente se considera en [mantenimiento][4]. Las versiones anteriores pueden funcionar, pero no se proporciona compatibilidad por defecto. Para solicitudes especiales, [ponte en contacto con el servicio de asistencia][5].
 
 Debes estar ejecutando el Datadog Agent v5.21.1 o posterior
 
@@ -55,9 +55,9 @@ Los paquetes de Go que se presentan en esta página son relevantes para las func
 
 **Nota**: La [documentación de integraciones Go][6] proporciona una visión detallada de los paquetes compatibles y sus API, junto con ejemplos de uso.
 
-<div class="alert alert-info">Si no encuentras la biblioteca que buscas en la lista, háznoslo saber. Rellena <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviarnos tu información</a>.</div>
+<div class="alert alert-info">Si no encuentras la librería que buscas en la lista, háznoslo saber. Rellena <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviarnos tu información</a>.</div>
 
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
 | Marco de trabajo         | ¿Es compatible Threat Detection? | ¿Es compatible Threat Protection? |
 |-------------------|-----------------------------|------------------------------|
@@ -104,9 +104,9 @@ Los paquetes de Go que se presentan en esta página son relevantes para las func
 
 **Nota**: La [documentación de integraciones Go][19] proporciona una visión detallada de los paquetes compatibles y sus API, junto con ejemplos de uso.
 
-<div class="alert alert-info">Si no encuentras la biblioteca que buscas en la lista, háznoslo saber. Rellena <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviarnos tu información</a>.</div>
+<div class="alert alert-info">Si no encuentras la librería que buscas en la lista, háznoslo saber. Rellena <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviarnos tu información</a>.</div>
 
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
 | Marco de trabajo         | ¿Es compatible Threat Detection? | ¿Es compatible Threat Protection? |
 |-------------------|-----------------------------|------------------------------|

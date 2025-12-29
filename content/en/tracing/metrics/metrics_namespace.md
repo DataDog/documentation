@@ -1,6 +1,10 @@
 ---
 title: Trace Metrics
+description: Comprehensive guide to APM trace metrics including namespace, types (hits, errors, latency, Apdex), and how they're calculated from application traffic.
 further_reading:
+    - link: 'tracing/trace_pipeline/generate_metrics/'
+      tag: 'Documentation'
+      text: 'Create custom metrics from your ingested spans'
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'
       text: 'Learn how to setup APM tracing with your application'
@@ -103,7 +107,7 @@ The following metrics are maintained for backward compatibility. For all latency
 
 ### Duration (Legacy)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Important:</strong> Duration metrics are maintained for backward compatibility only. For all latency measurement use cases, Datadog strongly recommends using <a href="#latency-distribution">Latency Distribution metrics</a> instead, as they provide better accuracy for percentile calculations and overall performance analysis.
 </div>
 
@@ -117,7 +121,7 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 
 ### Duration by (Legacy)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Important:</strong> Duration metrics are maintained for backward compatibility only. For all latency measurement use cases, Datadog strongly recommends using <a href="#latency-distribution">Latency Distribution metrics</a> instead, as they provide better accuracy for percentile calculations and overall performance analysis.
 </div>
 

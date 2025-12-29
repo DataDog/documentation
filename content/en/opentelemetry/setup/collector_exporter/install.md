@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"
   text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
+- link: "/opentelemetry/integrations/datadog_extension/"
+  tag: "Documentation"
+  text: "Enable the Datadog Extension to inspect collector configurations in Fleet Automation"
 ---
 
 ## Overview
@@ -42,6 +45,8 @@ To use the Datadog Exporter and Datadog Connector, configure them in your [OpenT
 1. Set your Datadog API key as the `DD_API_KEY` environment variable.
 
 {{% otel-endpoint-note %}}
+
+<div class="alert alert-warning">AWS EKS Fargate is not a supported environment for the OpenTelemetry Collector at this time. Deploying the Collector on EKS Fargate will result in incorrect infrastructure host billing.</div>
 
 ```yaml
 receivers:
@@ -193,6 +198,8 @@ To get the `service` field correctly populated in your logs, you can specify `se
 
 {{% collapse-content title="Optional: Using Kubernetes" level="h4" %}}
 
+<div class="alert alert-warning">AWS EKS Fargate is not a supported environment for the OpenTelemetry Collector at this time. Deploying the Collector on EKS Fargate will result in incorrect infrastructure host billing.</div>
+
 There are multiple ways to deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure. For the filelog receiver to work, the [Agent/DaemonSet deployment][16] is the recommended deployment method.
 
 In containerized environments, applications write logs to `stdout` or `stderr`. Kubernetes collects the logs and writes them to a standard location. You need to mount the location on the host node into the Collector for the filelog receiver. Below is an [extension example][17] with the mounts required for sending logs.
@@ -269,6 +276,10 @@ Configure each of the following components to suit your needs:
     {{< nextlink href="/opentelemetry/collector_exporter/hostname_tagging/" >}}Hostname and Tags{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/collector_batch_memory/" >}}Batch and Memory Settings{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Validate your collector configurations in Fleet Automation
+
+Inspect and troubleshoot your OpenTelemetry Collector configurations in Fleet Automation by enabling the Datadog Extension. 
 
 ## Further reading
 

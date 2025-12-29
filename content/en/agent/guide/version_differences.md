@@ -1,5 +1,6 @@
 ---
 title: Agent Version differences
+description: Overview of key differences between major Datadog Agent versions, including performance improvements, new functionalities, and upgrade recommendations.
 aliases:
 - /agent/versions
 further_reading:

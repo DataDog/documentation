@@ -52,7 +52,7 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Auto-instrumentation is not supported for JRuby. Follow the <a href="/tests/setup/ruby/?tab=ciproviderwithautoinstrumentationsupport#manually-instrumenting-your-tests">manual instrumentation steps</a> instead.
 </div>
 
@@ -291,7 +291,7 @@ For example:
 DD_ENV=ci bundle exec rake test
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Note:</strong> When using `minitest/autorun`, ensure that `datadog/ci` is required before `minitest/autorun`.
 </div>
 

@@ -38,7 +38,7 @@ Il est important de comprendre ce qui est envoyé dans une assertion avant d'act
 
 Lorsqu'un utilisateur se connecte avec l'attribut du fournisseur d'identité spécifié, le rôle Datadog lui est automatiquement attribué. De même, si l'attribut est retiré, l'accès au rôle est supprimé (sauf si un autre mappage l'ajoute).
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Important :</strong> si un utilisateur ne correspond à <i>aucun</i> mappage, tous les rôles qui lui étaient précédemment attribués lui sont retirés, et il ne peut plus se connecter à l'organisation via SAML. Cela inclut les rôles attribués par provisioning Just-In-Time. Vérifiez attentivement vos définitions de mappage et inspectez vos assertions avant d'activer les mappages afin d'éviter toute situation où des utilisateurs ne pourraient plus se connecter.</div>
 
 Modifiez un mappage en cliquant sur l'icône en forme de crayon (**Edit**), ou supprimez un mappage en cliquant sur l'icône en forme de corbeille (**Delete**). Ces actions affectent uniquement le mappage, et non les attributs du fournisseur d'identité ni les rôles Datadog.

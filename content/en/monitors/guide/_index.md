@@ -1,5 +1,6 @@
 ---
 title: Monitor Guides
+description: "Guides covering monitor best practices, configuration, troubleshooting, and advanced use cases for Datadog monitoring."
 private: true
 disable_toc: true
 cascade:

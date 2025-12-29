@@ -37,7 +37,7 @@ If you have not set up the iOS SDK yet, follow the [in-app setup instructions][2
 
 ### Add crash reporting 
 
-To enable Crash Reporting, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialize snippet.  
+To enable Crash Reporting, make sure to also enable [RUM][3]. Then, add the package according to your dependency manager and update your initialize snippet.  
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
@@ -111,11 +111,11 @@ When enabled, any main thread pause that is longer than the specified `appHangTh
 
 - **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the RUM Error side panel." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang-1.png" alt="A fatal app hang in the RUM Error side panel." style="width:90%;" >}}
 
 - **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the RUM Error side panel." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang-1.png" alt="A non-fatal app hang in the RUM Error side panel." style="width:90%;" >}}
 
 #### Enable app hang monitoring
 
@@ -316,7 +316,7 @@ When enabled, a watchdog termination is reported and attached to the previous RU
 
 - And the device did not reboot (which includes upgrades of the operating system).
 
-{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination.png" alt="A watchdog termination in the RUM Error side panel." style="width:60%;" >}}
+{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination-1.png" alt="A watchdog termination in the RUM Error side panel." style="width:90%;" >}}
 
 #### Enable watchdog terminations reporting
 
@@ -482,7 +482,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [11]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/dsyms/README.md
 [12]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
 [13]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-app-hang-reporting
-[14]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals?tab=ios#telemetry
+[14]: /real_user_monitoring/application_monitoring/mobile_vitals?tab=ios#telemetry
 [15]: https://developer.apple.com/documentation/xcode/analyzing-responsiveness-issues-in-your-shipping-app#View-your-apps-hang-rate
 [16]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
 [17]: /real_user_monitoring/explorer/search/#facets

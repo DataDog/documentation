@@ -43,14 +43,14 @@ When a Page is acknowledged or resolved in Slack, Datadog updates the original n
 
 Routing rules use [Datadog query syntax][3] and support multiple `if/else` conditions. Rules are evaluated from top to bottom, and the final rule must act as a fallback that routes all unmatched alerts to an escalation policy.
 
-<div class="alert alert-warning">Routing rule syntax is case-sensitive. For example, `tags.env:Prod` will not match `tags.env:prod`.</div>
+<div class="alert alert-danger">Routing rule syntax is case-sensitive. For example, `tags.env:Prod` will not match `tags.env:prod`.</div>
 
 **Supported attributes:**
 
 | Attribute      | Description                                                                 | Example                                 |
 |----------------|-----------------------------------------------------------------------------|-----------------------------------------|
 | `tags`         | Tags on the incoming alert                                                  | `tags.env:prod`                         |
-| `groups`       | Monitor group names                                                         | `groups:"service:checkout-service"`     |
+| `groups`       | Monitor group names                                                         | `groups.service:checkout-service`     |
 | `priority`     | Monitor priority (1–5)                                                      | `priority:(1 OR 2)`                     |
 | `alert_status` | Monitor status (`error`, `warn`, `success`)                                 | `alert_status:(error OR warn)`          |
 

@@ -2,6 +2,7 @@
 title: Data Streams Monitoring
 aliases:
 - /data_streams/troubleshooting
+- /data_streams/data_pipeline_lineage
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
@@ -34,7 +35,7 @@ cascade:
 
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
@@ -50,16 +51,16 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 
 Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If you can instrument your client infrastructure, you can use Data Streams Monitoring.
 
-|   | Java | Python | .NET | Node.js | Go |
-| - | ---- | ------ | ---- | ------- | -- |
-| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-| Azure Service Bus | | | {{< X >}} | | |
-| Google Pub/Sub | {{< X >}} | | | {{< X >}} | |
-| IBM MQ | | | {{< X >}} | | |
-| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+|   | Java | Python | .NET | Node.js | Go | Ruby |
+| - | ---- | ------ | ---- | ------- | -- | ---- |
+| Apache Kafka <br/>(self-hosted, Amazon MSK, Confluent Cloud, or any other hosting platform) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
+| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
+| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
+| Azure Service Bus | | | {{< X >}} | | | |
+| Google Pub/Sub | {{< X >}} | | | {{< X >}} | | |
+| IBM MQ | {{< X >}} | | {{< X >}} | | | |
+| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 
 Data Streams Monitoring requires minimum Datadog tracer versions. See each setup page for details.
 

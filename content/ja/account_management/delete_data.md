@@ -26,7 +26,7 @@ Logs 製品のデータは、UI を使用して削除できます。
 
 ### 削除の開始
 
-<div class="alert alert-danger">削除されたデータは復旧できず、削除は元に戻せません。</div>
+<div class="alert alert-warning">削除されたデータは復旧できず、削除は元に戻せません。</div>
 
 <div class="alert alert-info"><strong>Logs の場合</strong>: 削除を特定の Index にスコープすることはできず、削除は Index、Flex Indexes、Online Archives 全体に対して実行されます。
 </div>

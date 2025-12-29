@@ -29,7 +29,7 @@ title: 네트워크 트래픽
 
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 트래픽은 항상 에이전트에서 Datadog로 흐릅니다. Datadog에서 에이전트로 데이터가 흐르는 세션은 없습니다.
 </div>
 
@@ -213,7 +213,7 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 
 ## 포트 열기
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 아웃바운드 트래픽 모두는 TCP나 UDP를 통해 SSL로 전송됩니다.
 <br><br>
 방화벽 규칙이나 이와 유사한 네트워크 제한을 통해 애플리케이션이나 신뢰할 수 있는 네트워크 소스를 통해 에이전트에 액세스하세요. 신뢰할 수 없는 소스로 액세스가 가능할 경우 악성 작업자가 Datadog 계정에 트레이스와 메트릭을 쓰거나 구성과 서비스와 관련된 정보를 훔쳐가는 등 침해 행위를 할 수 있습니다.
@@ -418,7 +418,7 @@ APM 수신기와 DogStatsD 포트는 `datadog.yaml` 파일 내 **Trace Collectio
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-warning">여기에서 DogStatsD 포트나 APM 수신기 포트 값을 변경하면 해당 포트의 APM 추적 라이브러리 설정도 변경해야 합니다. 구성 포트와 관련된 정보는 <a href="/tracing/trace_collection/library_config/">내 언어에 맞는 라이브러리 구성 설명서</a>를 참고하세요.</div>
+<div class="alert alert-danger">여기에서 DogStatsD 포트나 APM 수신기 포트 값을 변경하면 해당 포트의 APM 추적 라이브러리 설정도 변경해야 합니다. 구성 포트와 관련된 정보는 <a href="/tracing/trace_collection/library_config/">내 언어에 맞는 라이브러리 구성 설명서</a>를 참고하세요.</div>
 
 ## 프록시 사용
 

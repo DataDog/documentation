@@ -26,7 +26,7 @@ Synthetic Monitoring におけるパスキーは Virtual Authenticator グロー
 {{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Virtual Authenticator グローバル変数の作成" style="width:70%;" >}}
 
 ## Synthetic ブラウザテストでパスキーを使用する
-<div class="alert alert-warning">Synthetic モニタリングは、Chrome と Edge のブラウザテストでパスキーをサポートしています。</div>
+<div class="alert alert-danger">Synthetic モニタリングは、Chrome と Edge のブラウザテストでパスキーをサポートしています。</div>
 
 ### ブラウザー テストにパスキーを追加する
 

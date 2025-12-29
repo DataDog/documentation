@@ -33,7 +33,7 @@ To get started, you first [instrument your application][3] with OpenTelemetry SD
 
 Read the OpenTelemetry instrumentation documentation to understand how to point your instrumentation to the Agent. The `receiver` section described below follows the [OpenTelemetry Collector OTLP receiver configuration schema][5].
 
-<div class="alert alert-warning"><strong>Note</strong>: The supported setup is an ingesting Agent deployed on every OpenTelemetry-data generating host. You cannot send OpenTelemetry telemetry from collectors or instrumented apps running one host to an Agent on a different host. But, provided the Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
+<div class="alert alert-warning">The supported setup is an ingesting Agent deployed on every OpenTelemetry-data generating host. You cannot send OpenTelemetry telemetry from collectors or instrumented apps running one host to an Agent on a different host. But, provided the Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
 
 ## Enabling OTLP Ingestion on the Datadog Agent
 
@@ -52,6 +52,8 @@ otlp_config:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
+  logs:
+    enabled: false
 ```
 For HTTP, default port 4318:
 
@@ -61,6 +63,8 @@ otlp_config:
     protocols:
       http:
         endpoint: 0.0.0.0:4318
+  logs:
+    enabled: false
 ```
 
 Alternatively, configure the endpoints by providing the port through the environment variables:
@@ -103,7 +107,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
    - Set `DD_LOGS_ENABLED` to true.
    - Set `DD_OTLP_CONFIG_LOGS_ENABLED` to true.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Known Issue</strong>: Starting with Agent version 7.61.0, OTLP ingestion pipelines may fail to start in Docker environments, displaying the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br><br>
 If you are using an affected version, you can use one of these workarounds:<br><br>
 1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.<br>
@@ -182,6 +186,8 @@ These configurations can be applied through either the <code>docker</code> comma
         grpc:
           endpoint: 0.0.0.0:4317
           enabled: true
+    logs:
+      enabled: false
    ```
 
    For HTTP:
@@ -192,6 +198,8 @@ These configurations can be applied through either the <code>docker</code> comma
         http:
           endpoint: 0.0.0.0:4318
           enabled: true
+    logs:
+      enabled: false
    ```
 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
@@ -233,6 +241,8 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
          protocols:
            grpc:
              enabled: true
+       logs:
+         enabled: false
    ```
    For HTTP:
    ```yaml
@@ -242,6 +252,8 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
          protocols:
            http:
              enabled: true
+       logs:
+         enabled: false
    ```
 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).

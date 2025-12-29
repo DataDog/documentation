@@ -16,12 +16,15 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスの参照
 - link: dashboards/functions/algorithms/#anomalies
   tag: ドキュメント
   text: 異常関数
+- link: https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/
+  tag: ブログ
+  text: 異常検知、予測的な相関 - AI 支援型メトリクス モニタリングの活用
 title: 異常検知モニター
 ---
 
@@ -48,8 +51,7 @@ Datadog にレポートが送信されるメトリクスはすべて、モニタ
 
 ### アラートの条件を設定する
 
-直近`15 minutes`、`1 hour` などの値が範囲を `above or below`、`above`、`below` 場合、または `custom` に設定した 15 分〜24 時間の値で、アラートをトリガーします。
-値が少なくとも `15 minutes`、`1 hour` などの範囲内にある場合は回復するか、`custom` に 15 分〜24 時間の値を設定します。
+値が直近の `15 minutes`、`1 hour` などの期間に、境界を `above or below`、`above`、または `below` の条件で外れていた場合にアラートをトリガーします。`custom` を選択すると、15 分から 2 週間の間で期間を設定できます。値が少なくとも `15 minutes`、`1 hour` などの期間、境界内にある場合に復帰します。`custom` を選択すると、15 分から 2 週間の間で期間を設定できます。
 
 異常検知
 : デフォルト (`above or below`) では、メトリクスが灰色の異常検知帯の外にある場合、異常とみなされます。帯の `above` または `below` にある場合のみを異常とみなすよう任意で指定することもできます。
@@ -160,13 +162,11 @@ Robust
 
 ## 通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][10] page.
+**Configure notifications and automations** セクションの詳細な手順については、[通知][10] ページを参照してください。
 
 ## API
 
-Customers on an enterprise plan can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
-
-**Note**: Anomaly detection monitors are only available to customers on an enterprise plan. Customers on a pro plan interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
+Enterprise プランの顧客は、[create-monitor API エンドポイント][11] を使用して、異常検知モニターを作成できます。Datadog は API 用のクエリを作成する際に [monitor の JSON のエクスポート][12] を**強く推奨**します。Datadog の [モニター作成ページ][1] を使用すると、プレビュー グラフとパラメーターの自動調整を利用でき、不適切に構成されたモニターの回避に役立ちます。
 
 異常モニターは、他のモニターと[同じ API][14] を使用して管理されます。これらのフィールドは、異常モニターに固有です。
 
@@ -219,8 +219,8 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 `thresholds` と `threshold_windows` を除いて、リクエスト本文の `options` にあるほとんどのプロパティは、他のクエリアラートと同じです。
 
 `thresholds`
-: 異常検知モニターは、`critical`、`critical_recovery`、`warning`、`warning_recovery` のしきい値をサポートします。しきい値は 0 から 1 までの数値で表され、異常である関連ウィンドウの割合として解釈されます。たとえば、`critical` のしきい値が `0.9` の場合、`trigger_window` （以下で説明）のポイントの少なくとも 90％ に異常があると、クリティカルアラートがトリガーされます。または、`warning_recovery` の値が 0 の場合、`recovery_window` のポイントの 0％ が異常である場合にのみ、モニターが警告状態から回復します。
-: `critical` `threshold` は、`query` で使用される `threshold` と一致する必要があります。
+: 異常検知モニターは `critical`、`critical_recovery`、`warning`、`warning_recovery` のしきい値をサポートします。しきい値は 0 から 1 の数値で表され、関連するウィンドウにおける異常の割合として解釈されます。例えば、`critical` のしきい値が `0.9` の場合、`trigger_window` (後述) 内のポイントの少なくとも 90% が異常なときに、クリティカル アラートがトリガーされます。あるいは、`warning_recovery` の値が 0 の場合、`recovery_window` 内のポイントの 0% が異常であるときにのみ、モニターは warning 状態から復帰します。
+: `critical` の `threshold` は、`query` で使用している `threshold` と一致させてください。
 
 `threshold_windows`
 : 異常検知モニターでは、`options` に `threshold_windows` プロパティがあります。`threshold_windows` には、`trigger_window` と `recovery_window` の 2 つのプロパティの両方を含める必要があります。これらのウィンドウは、`last_10m` や `last_1h` などのタイムフレーム文字列として表現されます。`trigger_window` は、`query` の `alert_window` と一致する必要があります。`trigger_window` は、モニターをトリガーする必要があるかを評価する際に異常について分析する時間範囲です。`recovery_window` は、トリガーされたモニターを回復する必要があるかを評価する際に異常について分析する時間範囲です。
@@ -241,17 +241,17 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 }
 ```
 
-## トラブルシューティング
+## トラブル シューティング
 
 * [異常検知モニターに関する FAQ][15]
 * [異常モニターのタイムゾーンを更新する][16]
 * [Datadog サポートへのお問い合わせ][17]
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/anomaly
+[1]: https://app.datadoghq.com/monitors/create/anomaly
 [2]: /ja/monitors/types/metric/#define-the-metric
 [3]: /ja/dashboards/functions/algorithms/#anomalies
 [4]: /ja/monitors/guide/how-to-update-anomaly-monitor-timezone/
@@ -262,7 +262,7 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 [9]: /ja/monitors/types/metric/#data-window
 [10]: /ja/monitors/notify/
 [11]: /ja/api/v1/monitors/#create-a-monitor
-[12]: /ja/monitors/manage/status/#settings
+[12]: /ja/monitors/status/#settings
 [13]: mailto:billing@datadoghq.com
 [14]: /ja/api/v1/monitors/
 [15]: /ja/monitors/guide/anomaly-monitor/

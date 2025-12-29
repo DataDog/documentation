@@ -35,17 +35,7 @@ To display raw values without HTML escaping (for example, URLs, or HTTP response
 {{{my_var}}}
 ```
 
-<div class="alert alert-info"><strong>Note</strong>: Certain messaging integrations (such as Google) require triple braces <code>&#123;&#123;&#123;</code> around template variables to ensure proper formatting when the message is displayed. For example, you can use <code>&#123;&#123;&#123;synthetics.attributes.result.failure.message&#125;&#125;&#125;</code>.</div>
-
-You can loop over lists (like steps or variables) or access items directly:
-
-```handlebars
-{{list.2.name}}                {{! third item }}
-{{list.-1.status}}            {{! last item }}
-{{list[My Complex Name]url}}  {{! use bracket notation for complex keys }}
-{{list[My Complex Name]failure.code}}
-{{list.abc-def-ghi}}          {{! access via ID (case-insensitive) }}
-```
+<div class="alert alert-info">Certain messaging integrations (such as Google) require triple braces <code>&#123;&#123;&#123;</code> around template variables to ensure proper formatting when the message is displayed. For example, you can use <code>&#123;&#123;&#123;synthetics.attributes.result.failure.message&#125;&#125;&#125;</code>.</div>
 
 ### Human-readable formatting
 
@@ -80,6 +70,9 @@ You can loop over lists (like steps or variables) or access items directly:
 ### Conditional alerting based on step ID
 
 ```handlebars
+{{!
+This alert uses the variable shortcut object `{{synthetics.failed_step}}` to match the step id. If the step id matches, notify the relevant recipient.
+}}
 {{#is_exact_match synthetics.failed_step.id "svn-yrx-3xg"}}
   A backend-related step failed!
   @slack-backend-team
@@ -98,25 +91,52 @@ Use `#each` to loop over dictionaries or lists. You can access:
 - `@key` → the current key (for dictionaries)
 - `@index`, `@first`, `@last` → loop metadata
 
-#### Dictionary example:
+### Use local variables in a notification
 
 ```handlebars
-{{#each users}}
-  # User `{{@key}}`
-  Name: {{name}}
-  Permissions: {{permissions}}
-{{/each}}
-
-Users: {{#each users}}`{{@key}}` ({{name}}){{#unless @last}}, {{/unless}}{{/each}}
+{{!
+The test is configured with three local variables.
+The names of the variables are: APP_NAME, APP_URL, and APP_ENVIRONMENT.
+The value of the variable can be accessed by passing its name in the config field like `{{synthetics.attributes.result.variables.config[<variable-name>].value}}`
+}}
+Application: {{synthetics.attributes.result.variables.config[APP_NAME].value}}
+URL Tested: {{synthetics.attributes.result.variables.config[APP_URL].value}}
+Environment: {{synthetics.attributes.result.variables.config[APP_ENVIRONMENT].value}}
 ```
 
-## Steps loop
+### Loop through the steps of a multistep API test
 
 ```handlebars
+{{! Print out the details of each step }}
 {{#each synthetics.attributes.result.steps}}
-* Step name: {{description}}
-* Step status: {{status}}
-* Step type: {{type}}
+Step name: {{name}}
+Step status: {{status}}
+Step type: {{type}}
+
+  {{! Within each step, print out the details of the extracted variable }}
+  {{#each variables.extracted}}
+    Extracted variable name: {{ name }}
+    Extracted variable value: {{ val }}
+  {{/each}}
+
+{{/each}}
+```
+
+### Loop through the steps of a browser test
+```handlebars
+{{! Print out the details of each step }}
+{{#each synthetics.attributes.result.steps}}
+
+Step name: {{description}}
+Step status: {{status}}
+Step type: {{type}}
+
+  {{! Print out the details of the extracted variable step }}
+  {{#is_match "type" "extractVariable"}}
+    Extracted variable name: {{ extractedValue.name }}
+    Extracted variable value: {{ extractedValue.value }}
+  {{/is_match}}
+
 {{/each}}
 ```
 

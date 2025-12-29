@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Incident Management
+description: Track and communicate issues from declaration through resolution with collaborative workflows, timelines, and postmortems.
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
@@ -35,10 +36,6 @@ further_reading:
       tag: 'Blog'
       text: 'How we manage incidents at Datadog'
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">Incident Management is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
 
 ## Overview
 

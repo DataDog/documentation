@@ -106,7 +106,7 @@ Les étapes ci-dessus vous permettent d'ajouter l'ID d'exécution du pipeline au
 
 L'intégration AWS CodePipeline prend en charge la mise en corrélation des actions **CodeBuild** avec leurs spans de tâches et de pipelines respectives. Pour activer la collecte de logs pour vos actions CodeBuild, consultez le [Guide de transmission de logs AWS][16].
 
-<div class="alert alert-warning"><strong>Remarque</strong> : pour que la mise en corrélation des logs pour les actions CodeBuild fonctionne, les noms par défaut du groupe de logs et du flux de logs CloudWatch doivent être configurés pour le projet CodeBuild.</div>
+<div class="alert alert-danger"><strong>Remarque</strong> : pour que la mise en corrélation des logs pour les actions CodeBuild fonctionne, les noms par défaut du groupe de logs et du flux de logs CloudWatch doivent être configurés pour le projet CodeBuild.</div>
 
 ## Visualiser les données de pipeline dans Datadog
 

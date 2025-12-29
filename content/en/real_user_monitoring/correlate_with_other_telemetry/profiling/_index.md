@@ -1,5 +1,6 @@
 ---
 title: Correlate RUM and Profiling
+description: "Use browser profiling with RUM to understand JavaScript execution and rendering performance issues affecting user experience."
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
@@ -112,10 +113,25 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 
 {{% /collapse-content %}}
 
+## Explore Profiling
+
+### Within the Optimization page
+The **Optimization page** surfaces profiling data in several contexts:
+- In the **Troubleshoot section**, Datadog samples long tasks across multiple views to help you identify your top contributing functions. This overview highlights where your JavaScript execution time is being spent and which functions are most responsible for blocking the main thread.
+{{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_troubleshoot_section.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" >}}
+
+- Within the **Event Waterfall**, any long task that includes profiling data is marked with a yellow profiling icon. Clicking one of these long task events opens a Long Task view panel, which displays detailed profiling data captured during that execution window. You can use this panel to examine and identify blocking functions and understand how script execution contributes to poor responsiveness.
+{{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" >}}
+
+
+### Within the Sessions Explorer 
+You can also find profiling data when reviewing an individual events within the **Sessions Explorer**. This opens the same Long Task view panel with profiling data, allowing you to inspect what code was executing during that task and how it affected the user’s experience.
+{{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
-[2]: /real_user_monitoring/browser/setup/
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API

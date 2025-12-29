@@ -17,9 +17,9 @@ type: multi-code-lang
 
 ## Compatibilidad
 
-La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
+La librería de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
 
-### Intérpretes compatibles de Ruby 
+### Intérpretes compatibles de Ruby
 
 | Tipo  | Documentación              | Versión   | Tipo de soporte técnico              | Compatibilidad con versiones de Gem |
 |-------|----------------------------|-----------|---------------------------|---------------------|
@@ -67,7 +67,7 @@ La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el reposi
 
 ¿Necesitas soporte de linux para una arquitectura de CPU que no aparece en la lista? [Ponte en contacto con nuestro equipo de atención al cliente para solicitudes especiales][49].
 
-### Versiones compatibles de Datadog Agent 
+### Versiones compatibles de Datadog Agent
 
 | Versión de Datadog Agent | Tipo de compatibilidad              | Versión del paquete |
 |-----------------------|---------------------------|-----------------|
@@ -90,7 +90,7 @@ Para consultar una lista de integraciones disponibles y sus opciones de configur
 | Active Record              | `active_record`            | `>= 4.0`                                    | `>= 4.0`                                    | [Enlace][8]        | [Enlace](https://github.com/rails/rails/tree/master/activerecord)              |
 | Active Support             | `active_support`           | `>= 4.0`                                    | `>= 4.0`                                    | [Enlace][9]        | [Enlace](https://github.com/rails/rails/tree/master/activesupport)             |
 | AWS                        | `aws`                      | `>= 2.0`                                    | `>= 2.0`                                    | [Enlace][10]       | [Enlace](https://github.com/AWS/AWS-sdk-Ruby)                                  |
-| Concurrent Ruby            | `concurrent_ruby`          | `>= 0.9`                                    | `>= 0.9`                                    | [Enlace][11]       | [Enlace](https://github.com/Ruby-moneda/actualidad-Ruby)                  |
+| Concurrent Ruby            | `concurrent_ruby`          | `>= 0.9`                                    | `>= 0.9`                                    | [Enlace][11]       | [Enlace](https://github.com/ruby-concurrency/concurrent-ruby)                  |
 | Dalli                      | `dalli`                    | `>= 2.0`                                    | `>= 2.0`                                    | [Enlace][12]       | [Enlace](https://github.com/petergoldstein/dalli)                              |
 | DelayedJob                 | `delayed_job`              | `>= 4.1`                                    | `>= 4.1`                                    | [Enlace][13]       | [Enlace](https://github.com/collectiveidea/delayed_job)                        |
 | Elasticsearch              | `elasticsearch`            | `>= 1.0`                                    | `>= 1.0`                                    | [Enlace][14]       | [Enlace](https://github.com/elastic/elasticsearch-Ruby)                        |
@@ -159,11 +159,11 @@ Como esto se refiere a la reducción de soporte de tiempo de ejecución, implica
   de [Beta](#support-prerelease)/[Última](#support-latest) a [Mantenimiento](#support-maintenance).
 - **Las actualizaciones de versiones de parches** (por ejemplo, de `1.0.0` a `1.0.1`) no modificarán la compatibilidad con ningún tiempo de ejecución.
 
-#### Soporte técnico de versiones de la biblioteca
+#### Soporte técnico de versiones de la librería
 
 Datadog para Ruby proporcionará soporte de GA para la última versión principal y soporte de mantenimiento para la versión principal anterior
-de la biblioteca. Este soporte se proporcionará a través de la última versión secundaria o de parche de la versión principal.
-Por ejemplo, si 1.21.0 es la última versión de la biblioteca con soporte de mantenimiento, las correcciones de errores se proporcionarán a través de una
+de la librería. Este soporte se proporcionará a través de la última versión secundaria o de parche de la versión principal.
+Por ejemplo, si 1.21.0 es la última versión de la librería con soporte de mantenimiento, las correcciones de errores se proporcionarán a través de una
 nueva versión 1.21.0 (o 1.20.1). Estas correcciones no se trasladarán como parches a versiones secundarias anteriores de 1.x.
 
 | Versión principal de Gem | Tipo de compatibilidad                        |

@@ -1,5 +1,6 @@
 ---
 title: Configure Apdex score by service
+description: Learn how to configure Apdex scores for your services to measure user satisfaction based on application response times and performance thresholds.
 aliases:
     - /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
     - /tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm

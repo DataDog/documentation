@@ -18,7 +18,7 @@ further_reading:
   tag: Documentation
   text: Limites de débit
 title: Références sur les API
-type: documentation
+type: api
 ---
 
 {{< h2 >}}Références sur les API{{< /h2 >}}
@@ -35,7 +35,7 @@ Pour essayer l'API [![Run in Postman][3]](https://god.gw.postman.com/run-collect
 
 La section [Utiliser l'API][4] présente le fonctionnement des endpoints.
 
-**Remarques** : 
+**Remarques** :
    - Ajoutez vos clés API et d'application dans l'onglet **Variables** de la collection Datadog API.
    - Les exemples de code cURL supposent l'utilisation de BASH et des coreutils GNU. Sous macOS, vous pouvez installer coreutils avec le [gestionnaire de paquets Homebrew][5] : `brew install coreutils`.
 
