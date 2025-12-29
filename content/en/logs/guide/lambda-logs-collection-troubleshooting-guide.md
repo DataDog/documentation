@@ -111,7 +111,7 @@ If Datadog is failing to automatically create triggers, follow this troubleshoot
 
 4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose; remember to disable it after debugging.
 
-### Are your logs filtered by the lambda function?
+### Logs filtered by the lambda function
 
 The lambda forwarder uses the following [environment variables][12] to filter logs:
 
