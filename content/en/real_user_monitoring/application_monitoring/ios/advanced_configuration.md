@@ -757,7 +757,7 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 
 This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. The setup differs between versions, so please follow the instructions for your Apollo iOS version below.
 
-1. [Set up][14] RUM monitoring with Datadog iOS RUM.
+1. [Set up][2] RUM monitoring with Datadog iOS RUM.
 
 2. Add the following to your application's `Package.swift` file:
 

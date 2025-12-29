@@ -44,7 +44,7 @@ URLSessionInstrumentation.enable(with: .init(delegateClass: Apollo.URLSessionCli
 
 For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
 
-For more advanced Apollo integration using the Datadog Apollo interceptor, see Datadog's [dedicated library with extensions for Apollo][7] and [Apollo instrumentation][8].
+For more advanced Apollo integration using the Datadog Apollo interceptor, see the [Datadog Apollo interceptor package][7] and [Apollo instrumentation][8].
 
 ## SDWebImage
 
