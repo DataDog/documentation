@@ -25,8 +25,6 @@ aliases:
 
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Ruby AWS Lambda application directly within Datadog.
