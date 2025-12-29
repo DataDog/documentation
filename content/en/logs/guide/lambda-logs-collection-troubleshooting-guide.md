@@ -92,7 +92,7 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 
 ### Automatic trigger
 
-If Datadog is failing to automatically create triggers, follow this troubleshooting checklist:
+If Datadog fails to automatically create triggers, follow this troubleshooting checklist:
 
 1. Verify the Forwarder ARN is added in the Log Collection tab of the AWS Integration
 2. Verify the [required permissions][10] have been added to the integration role
