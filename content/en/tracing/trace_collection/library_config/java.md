@@ -65,7 +65,7 @@ See also [DD_APM_TRACING_ENABLED][21].
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
 **Default**: `null`<br>
 Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>`<br>
-**Note**: Don’t rely on `dd.trace.config` as the only mechanism to enable or disable SDK-dependent products (for example, Profiler and Dynamic Instrumentation). Prefer the corresponding system properties or environment variables (or `application_monitoring.yaml` for Single Step Instrumentation). 
+**Note**: Don't rely on `dd.trace.config` as the only mechanism to enable or disable SDK-dependent products (for example, Profiler and Dynamic Instrumentation). Instead, use the corresponding system properties or environment variables (or `application_monitoring.yaml` for Single Step Instrumentation). 
 
 `dd.service.mapping`
 : **Environment Variable**: `DD_SERVICE_MAPPING`<br>
