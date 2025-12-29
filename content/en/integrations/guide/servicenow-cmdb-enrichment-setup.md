@@ -79,8 +79,6 @@ To enable ingestion of device tags:
 1. Select any optional field name remappings.
 1. Click **Save**.
 
-**Note**: In order for tags ingested through the CMDB query, your `conf.yaml` used for polling your network devices must have the parameter `use_device_id_as_hostname` set to `true`.
-
 You can expect to see network device tags populated in Datadog within a few minutes after your queries' scheduled executions. Any ingestion errors are reported through events viewable in your events explorer.
 
 You can monitor the ingestion process in the Datadog [Events Explorer][2] by scoping your search query on `source:servicenow`.
