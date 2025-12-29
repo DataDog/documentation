@@ -2,7 +2,7 @@
 title: Troubleshooting Microsoft Teams
 description: Troubleshooting steps and solutions for issues with the Microsoft Teams integration.
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/microsoft-teams/?tab=datadogapprecommended"
+- link: "/integrations/microsoft-teams/?tab=datadogapprecommended"
   tag: "Documentation"
   text: "Datadog Microsoft Teams Integration"
 - link: "https://app.datadoghq.com/integrations?integrationId=microsoft-teams"
@@ -42,16 +42,6 @@ You can try to either:
 ## Bot support for private channels
 
 Private channels are not supported by the bot, due to the private channel limitations in [Microsoft Teams][2]. If you want to send notifications to private channels, see [Microsoft Workflows Webhooks][3].
-
-## Adding multiple user mentions in monitor notifications
-
-<div class="alert alert-warning">When multiple user mentions are included in a notification and one is invalid, the valid users will still receive notifications, but invalid user mentions may cause the mentions to appear out of order.</div>
-
-To include multiple user mentions in a single notification and ensure all relevant team members are notified, use the following format:
-
-```text
-@teams-handle <at>user1@microsoft.com</at> <at>user2@microsoft.com</at> <at>user3@microsoft.com</at>
-```
 
 ## Troubleshooting Incident features when using delegated permissions
 
