@@ -70,7 +70,7 @@ You can decide to decrease or increase this time out up to 300 seconds if you wa
 
 In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select **Allow this step to fail**. If the step fails after the amount of minutes specified on the timeout option (60 seconds by default), then the test moves on and executes the next step.
 
-{{< img src="synthetics/browser_tests/advanced_options/timeout.png" alt="Timeout" style="width:25%">}}
+{{< img src="synthetics/browser_tests/advanced_options/optional_step.png" alt="Optional step" style="width:25%">}}
 
 ## Exit on success
 
