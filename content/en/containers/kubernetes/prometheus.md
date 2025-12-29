@@ -8,6 +8,9 @@ aliases:
     - /agent/prometheus
     - /agent/kubernetes/prometheus
 further_reading:
+- link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+  tag: Blog
+  text: Monitor your Kubernetes operators to keep applications running smoothly
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"
   text: "Collect your application logs"
