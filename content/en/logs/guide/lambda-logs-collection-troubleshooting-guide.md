@@ -29,7 +29,11 @@ Verify the forwarder's policy by running the following command:
    get-policy command aws lambda get-policy --function-name <FUNCTION_NAME>
    ```
 
-This command returns a resource-based policy that specifies which AWS services and resources (like specific S3 buckets) are allowed to invoke the forwarder function. Crucially, ensure the Action and Resource elements in the policy document exactly match the specifications in the [public documentation][5].
+This command returns a resource-based policy that specifies which AWS services and resources (like specific S3 buckets) are allowed to invoke the forwarder function. 
+
+<div class="alert alert-danger">
+The Action and Resource elements in the policy document **must exactly match** the specifications in the <a href="/logs/guide/forwarder/?tab=cloudformation#permissions">Datadog Forwarder permissions</a>.
+</div>
 
 ## Check the Lambda function monitoring tab
 
