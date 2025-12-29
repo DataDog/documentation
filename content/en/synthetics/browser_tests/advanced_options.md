@@ -70,7 +70,7 @@ You can decide to decrease or increase this time out up to 300 seconds if you wa
 
 In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select **Allow this step to fail**. If the step fails after the amount of minutes specified on the timeout option (60 seconds by default), then the test moves on and executes the next step.
 
-{{< img src="synthetics/browser_tests/advanced_options/timeout.png" alt="Timeout" style="width:25%">}}
+{{< img src="synthetics/browser_tests/advanced_options/optional_step.png" alt="Optional step" style="width:25%">}}
 
 ## Exit on success
 
@@ -109,7 +109,15 @@ Opening your subtest in the main window means that your subtest is the continuat
 
 ### Set failure behavior
 
-Click **Continue with test if this step fails** and **Consider entire test as failed if this step fails** to ensure your browser test continues if the subtest fails, or fails entirely if the subtest fails.
+Click **If this step fails, continue to next step** and **If this step fails, mark test as failed** to ensure your browser test continues if the subtest fails, or fails entirely if the subtest fails.
+
+### Set success behavior
+
+Click **If this step succeeds, stop this test and mark it as passed** to ensure your browser test stops immediately and is marked as passed.
+
+### Set execution behavior
+
+Click **Always run this step** to ensure this step runs even if the previous steps in the browser test have failed.
 
 ### Override variables in subtests
 
