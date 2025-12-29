@@ -27,11 +27,11 @@ You can try to either:
 3. Type `@{{< region-param key="microsoft_teams_app_name" >}} sync`, select the `{{< region-param key="microsoft_teams_app_name" >}}` app, and then choose the `sync` command.
 4. Post the message to the channel and wait for a confirmation in the thread indicating success.
 
-### Remove and readd {{< region-param key="microsoft_teams_app_name" >}} app
+### Remove and re-add {{< region-param key="microsoft_teams_app_name" >}} app
 
 <div class="alert alert-danger">This removes configured connectors for that team. Perform this action only when you are ready to migrate all connectors for that team to Datadog's tenant-based integration.</div>
 
-1. Click the three dots next to the team name in the left sidebar.
+1. Click the three dots next to the Team name in the left sidebar.
 2. Click **Manage Team**.
 3. Go to the tab labelled **Apps**.
 4. Click the three dots next to the {{< region-param key="microsoft_teams_app_name" >}} app.
@@ -46,8 +46,8 @@ Private channels are not supported by the bot, due to the private channel limita
 ## Troubleshooting Incident features when using delegated permissions
 
 First, ensure that the service account user is a member of the team that the feature is being used in.
-- If incident tab is not being created, ensure that you have allowed members to create, update, and remove tabs in channels in that team.
-- If new incident channels are not being created or renamed, ensure that you have allowed members to create and update channels in that team.
+- If an incident **tab** is _not_ being created, ensure that you have allowed members to create, update, and remove **tabs** in channels in that team.
+- If new incident **channels** are _not_ being created or renamed, ensure that you have allowed members to create and update **channels** in that team.
 - If incident channels are not being archived, ensure that you have allowed members to delete and restore channels in that team.
 
 Lastly, it is possible that the delegated user's token has expired or been revoked. If that's the case, re-connect the delegated user.
@@ -64,7 +64,7 @@ You can also declare an incident by clicking the `+` sign at the top of a channe
 
 ## Limitations for US1-FED
 
-- GCC and GCC High tenants are not supported by the app. The Datadog for Government app only supports Datadog US1-FED customers who are trying to connect to their `commercial` Microsoft Teams tenant.
+- Government Community Cloud (GCC) and GCC High tenants are not supported by the app. The Datadog for Government app only supports Datadog US1-FED customers who are trying to connect to their `commercial` Microsoft Teams tenant.
 - Datadog Incident management features are not supported.
 
 ## Further reading
