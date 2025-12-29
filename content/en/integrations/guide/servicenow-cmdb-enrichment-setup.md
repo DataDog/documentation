@@ -66,6 +66,8 @@ Add tags to your network devices in Datadog populated with data from your Servic
 
 With device tagging, you can dynamically enrich network devices monitored by Datadog [Network Device Monitoring][5] with device metadata from your ServiceNow CMDB.
 
+<div class="alert alert-info">You must set <code>use_device_id_as_hostname: true</code> in the Datadog Agent's <code>snmp.d/conf.yaml</code> file to ingest network device tags.</div>
+
 To enable ingestion of device tags:
 
 1. Configure a [Query Builder][1] query in your ServiceNow instance. Make sure it is returning the device IP address. Schedule the query to execute at your desired refresh interval.
@@ -107,7 +109,7 @@ For tagging to work correctly, ensure that the following are true in your system
 - The user who created and executes the Query Builder query matches a username in your Datadog configuration. The user in ServiceNow must have the role `cmdb_query_builder_read`.
 - The number of results returned by your query must be less than or equal to the `glide.cmdb.query.max_results_limit` setting in ServiceNow. By default, the maximum number of results is 10000. To change the setting, go to **Configuration** > **CMDB Properties** > **Query Builder Properties**.
 - All CIs configured in your Query Builder query must have a `1` label. This ensures you have not created any duplicate CIs, which the parser does not support.
-- The configuration for the agent polling the network devices has `use_device_id_as_hostname` set to `true`.
+- The Agent polling the network devices is configured with `use_device_id_as_hostname: true`.
 
 ## Limitations
 
