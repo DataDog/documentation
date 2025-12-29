@@ -27,6 +27,15 @@ If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Dat
 ## Setup
 
 {{< tabs >}}
+{{% tab "Datadog UI" %}}
+You can instrument your Java AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+
+For more information, see [Remote instrumentation for AWS Lambda][1].
+
+[1]: /serverless/aws_lambda/remote_instrumentation
+[2]: https://app.datadoghq.com/functions?cloud=aws
+[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+{{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.

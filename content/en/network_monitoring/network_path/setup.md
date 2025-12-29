@@ -23,11 +23,13 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ## Setup
 
+<div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
+
 ### Scheduled tests
 
 You can monitor specific network paths by defining them in the Agent configuration file located at `/etc/datadog-agent/conf.d/network_path.d/conf.yaml`.
 
-To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization, see [increase the number of workers](#increase-the-number-of-workers).
+To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization in large environments, see [increase the number of workers](#increase-the-number-of-workers).
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -303,7 +305,7 @@ Agent `v7.73+` is required.
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Agent `v7.61+` is required.
+Agent `v7.73+` is required.
 
 1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
@@ -356,7 +358,7 @@ Agent `v7.61+` is required.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.59+` is required.
+Agent `v7.73+` is required.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
 **Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
@@ -500,6 +502,7 @@ If you encounter an error like the following:
 [3]: /help
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+[15]: /synthetics/network_path_tests/
 
 
 

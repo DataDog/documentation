@@ -50,7 +50,7 @@ Routing rules use [Datadog query syntax][3] and support multiple `if/else` condi
 | Attribute      | Description                                                                 | Example                                 |
 |----------------|-----------------------------------------------------------------------------|-----------------------------------------|
 | `tags`         | Tags on the incoming alert                                                  | `tags.env:prod`                         |
-| `groups`       | Monitor group names                                                         | `groups:"service:checkout-service"`     |
+| `groups`       | Monitor group names                                                         | `groups.service:checkout-service`     |
 | `priority`     | Monitor priority (1–5)                                                      | `priority:(1 OR 2)`                     |
 | `alert_status` | Monitor status (`error`, `warn`, `success`)                                 | `alert_status:(error OR warn)`          |
 

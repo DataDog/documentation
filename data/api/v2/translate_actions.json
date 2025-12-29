@@ -339,6 +339,9 @@
     "request_description": "The updated definition of the retention filter.",
     "request_schema_description": "The body of the retention filter to be updated."
   },
+  "GetServiceList": {
+    "summary": "Get service list"
+  },
   "DeleteApps": {
     "description": "Delete multiple apps in a single request from a list of app IDs. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Delete Multiple Apps",
@@ -920,6 +923,10 @@
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
   },
+  "GetDeploymentGateRules": {
+    "description": "Endpoint to get rules for a deployment gate.",
+    "summary": "Get rules for a deployment gate"
+  },
   "CreateDeploymentRule": {
     "description": "Endpoint to create a deployment rule. A gate for the rule must already exist.",
     "summary": "Create deployment rule",
@@ -1181,14 +1188,22 @@
     "request_schema_description": "Update request for an incident."
   },
   "ListIncidentAttachments": {
-    "description": "Get all attachments for a given incident.",
-    "summary": "Get a list of attachments"
+    "description": "List incident attachments.",
+    "summary": "List incident attachments"
   },
-  "UpdateIncidentAttachments": {
-    "description": "The bulk update endpoint for creating, updating, and deleting attachments for a given incident.",
-    "summary": "Create, update, and delete incident attachments",
-    "request_description": "Incident Attachment Payload.",
-    "request_schema_description": "The update request for an incident's attachments."
+  "CreateIncidentAttachment": {
+    "description": "Create an incident attachment.",
+    "summary": "Create incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentAttachment": {
+    "summary": "Delete incident attachment"
+  },
+  "UpdateIncidentAttachment": {
+    "summary": "Update incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
@@ -2004,6 +2019,48 @@
     "request_description": "",
     "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
   },
+  "ListUserNotificationChannels": {
+    "description": "List the notification channels for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification channels for a user"
+  },
+  "CreateUserNotificationChannel": {
+    "description": "Create a new notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification channel for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification channel for a user"
+  },
+  "DeleteUserNotificationChannel": {
+    "description": "Delete a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification channel for a user"
+  },
+  "GetUserNotificationChannel": {
+    "description": "Get a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification channel for a user"
+  },
+  "ListUserNotificationRules": {
+    "description": "List the notification rules for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification rules for a user"
+  },
+  "CreateUserNotificationRule": {
+    "description": "Create a new notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification rule for a user"
+  },
+  "DeleteUserNotificationRule": {
+    "description": "Delete a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification rule for a user"
+  },
+  "GetUserNotificationRule": {
+    "description": "Get a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification rule for a user"
+  },
+  "UpdateUserNotificationRule": {
+    "description": "Update a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Update an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -2607,31 +2664,31 @@
     "summary": "Download the Workload Protection policy (US1-FED)"
   },
   "DetachCase": {
-    "description": "Detach security findings from their case. This operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
+    "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
     "summary": "Detach security findings from their case",
     "request_description": "",
     "request_schema_description": "Request for detaching security findings from their case."
   },
   "CreateCases": {
-    "description": "Create cases for security findings. You can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.",
+    "description": "Create cases for security findings.\nYou can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.",
     "summary": "Create cases for security findings",
     "request_description": "",
     "request_schema_description": "List of requests to create cases for security findings."
   },
   "AttachCase": {
-    "description": "Attach security findings to a case. You can attach up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the specified case.",
+    "description": "Attach security findings to a case.\nYou can attach up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the specified case.",
     "summary": "Attach security findings to a case",
     "request_description": "",
     "request_schema_description": "Request for attaching security findings to a case."
   },
   "AttachJiraIssue": {
-    "description": "Attach security findings to a Jira issue by providing the Jira issue URL. You can attach up to 50 security findings per Jira issue. If the Jira issue is not linked to any case, this operation will create a case for the security findings and link the Jira issue to the newly created case. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the specified Jira issue.",
+    "description": "Attach security findings to a Jira issue by providing the Jira issue URL.\nYou can attach up to 50 security findings per Jira issue. If the Jira issue is not linked to any case, this operation will create a case for the security findings and link the Jira issue to the newly created case. To configure the Jira integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira). Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the specified Jira issue.",
     "summary": "Attach security findings to a Jira issue",
     "request_description": "",
     "request_schema_description": "Request for attaching security findings to a Jira issue."
   },
   "CreateJiraIssues": {
-    "description": "Create Jira issues for security findings. This operation creates a case in Datadog and a Jira issue linked to that case for bidirectional sync between Datadog and Jira. You can create up to 50 Jira issues per request and associate up to 50 security findings per Jira issue. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the newly created Jira issue.",
+    "description": "Create Jira issues for security findings.\nThis operation creates a case in Datadog and a Jira issue linked to that case for bidirectional sync between Datadog and Jira. To configure the Jira integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira). You can create up to 50 Jira issues per request and associate up to 50 security findings per Jira issue. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the newly created Jira issue.",
     "summary": "Create Jira issues for security findings",
     "request_description": "",
     "request_schema_description": "List of requests to create Jira issues for security findings."
@@ -2791,6 +2848,10 @@
     "summary": "Update a suppression rule",
     "request_description": "New definition of the suppression rule. Supports partial updates.",
     "request_schema_description": "Request object containing the fields to update on the suppression rule."
+  },
+  "GetSuppressionVersionHistory": {
+    "description": "Get a suppression's version history.",
+    "summary": "Get a suppression's version history"
   },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
@@ -3105,8 +3166,8 @@
     "request_schema_description": ""
   },
   "GetSecretsRules": {
-    "description": "Returns list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID",
-    "summary": "Returns list of Secrets rules"
+    "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
+    "summary": "Returns a list of Secrets rules"
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
@@ -3279,6 +3340,25 @@
     "summary": "Update a user's membership attributes on a team",
     "request_description": "",
     "request_schema_description": "Team membership request"
+  },
+  "GetTeamNotificationRules": {
+    "summary": "Get team notification rules"
+  },
+  "CreateTeamNotificationRule": {
+    "summary": "Create team notification rule",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a team notification rule"
+  },
+  "DeleteTeamNotificationRule": {
+    "summary": "Delete team notification rule"
+  },
+  "GetTeamNotificationRule": {
+    "summary": "Get team notification rule"
+  },
+  "UpdateTeamNotificationRule": {
+    "summary": "Update team notification rule",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a team notification rule"
   },
   "GetTeamPermissionSettings": {
     "description": "Get all permission settings for a given team.",
