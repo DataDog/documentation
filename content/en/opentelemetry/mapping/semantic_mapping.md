@@ -246,7 +246,7 @@ In the table above, if a span is a "client" kind and contains [`db.system` attri
 By default, Datadog maps only the OpenTelemetry resource attributes listed in the semantic conventions table above to Datadog metric tags.
 
 To attach all resource attributes from your OTLP metric payloads as tags, enable the `metrics::resource_attributes_as_tags` setting:
-When enabled, this setting adds all resource attribute key/value pairs as Datadog tags, in addition to the mapped semantic convention tags shown in the table above.
+When enabled, this setting adds all resource attribute `key:value` pairs as Datadog tags, in addition to the mapped semantic convention tags shown in the table above.
 
 **Note**: Enabling this option may significantly increase tag cardinality. To verify which tags are being added, inspect your metrics in the [Metrics Explorer][12].
 
