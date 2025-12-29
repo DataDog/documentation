@@ -1,4 +1,4 @@
-When using the Datadog SDK with OTel API support, telemetry is transmitted through different protocols depending on the signal source. Ensure the following ports are accessible on your Datadog Agent or Collector:
+When using the Datadog SDK with OpenTelemetry API support, telemetry is routed to different components depending on the signal source. Ensure the following ports are accessible on your Datadog Agent or Collector:
 
 | Signal Source | Protocol | Port | Destination Component |
 |---------------|----------|------|----------------------|
