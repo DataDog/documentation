@@ -24,7 +24,7 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 
 | Framework                                       | Supported Versions             | Framework Tag                       | Rule Type                |
 |-------------------------------------------------|--------------------------------|-------------------------------------|--------------------------|
-| [AICPA SOC 2][7]                                |                                | `soc-2`                             | Cloud                    |
+| [AICPA SOC 2][7]                                | 2017 TSC w/ rev POF - 2022     | `soc-2`                             | Cloud                    |
 | [Australia APRA CPS 234][39]                    | 2019                           | `cps234`                            | TBD                      |
 | [Australia ASD Essential 8][40]                 | 2024                           | `essential8`                        | TBD                      |
 | [AWS Foundational Security Best Practices][13]  | v1.0.0                         | `aws-fsbp`                          | Cloud                    |
@@ -54,8 +54,8 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | [FedRAMP High][36] (Preview)                    | v5                             | `fedramp-high`                      | Cloud                    |
 | [FedRAMP Moderate][36] (Preview)                | v5                             | `fedramp-moderate`                  | Cloud                    |
 | [FedRAMP Low][36] (Preview)                     | v5                             | `fedramp-low`                       | Cloud                    |
-| [GDPR][10]                                      |                                | `gdpr`                              | Cloud                    |
-| [HIPAA][9]                                      |                                | `hipaa`                             | Cloud                    |
+| [GDPR][10]                                      | 2016/679                       | `gdpr`                              | Cloud                    |
+| [HIPAA][9]                                      | 800-66-r2                      | `hipaa`                             | Cloud                    |
 | [ISO/IEC 27001][8]                              | 2022, 2013                     | `iso-27001`                         | Cloud                    |
 | [NIS2 Directive (EU)][14]                       | 2022/2555                      | `nis2`                              | Cloud                    |
 | [NIST 800-171][31]                              | v2                             | `nist-800-171`                      | Cloud                    |
