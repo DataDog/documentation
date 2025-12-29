@@ -22,7 +22,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 ## Check the Lambda function Permissions
 
-Permission issues may also be impacting the ability of the forwarder to access log sources. The lambda function uses a resource based policy (unrelated to the Datadog Integration Role policy) to allow permission to access log sources.
+Permission issues may also be impacting the ability of the forwarder to access log sources. The lambda function uses a resource-based policy (unrelated to the Datadog Integration Role policy) to grant access log sources.
 
 Verify the forwarder's policy by running the following command:
    ```
