@@ -15,8 +15,7 @@ further_reading:
 
 ## Overview
 
-This page describes advanced options for Synthetic browser tests. 
-
+This page describes advanced options for Synthetic Monitoring Browser Tests. 
 
 ## Locate an element
 
@@ -26,7 +25,7 @@ Flakiness is a pain point in end-to-end testing because tests occasionally fail 
 
 To prevent flaky tests, Datadog uses an algorithm that leverages a set of locators to target elements in browser tests. A small change in the UI may modify an element (for example, moving it to another location). The browser test automatically locates the element again based on points of reference that were not affected by the change. 
 
-When the test runs successfully, the browser test recomputes (or "self heals") any broken locators with updated values, ensuring your tests do not break from simple UI updates and that your tests are automatically adapting to your application's UI. 
+When the test runs successfully, the browser test recomputes (or "self heals") any broken locators with updated values, ensuring your tests do not break from minor UI changes and automatically adapt to your application's UI. 
 
 To ensure that your browser test does not validate an unexpected change, use [assertions][5] in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey. 
 
@@ -70,7 +69,7 @@ You can decide to decrease or increase this time out up to 300 seconds if you wa
 
 In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select **If this step fails, continue to next step**. For example, if the step fails after the amount of minutes specified on the timeout option (60 seconds by default), then the test moves on and executes the next step.
 
-{{< img src="synthetics/browser_tests/advanced_options/optional_step.png" alt="Optional step" style="width:25%">}}
+{{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="Optional step" style="width:50%">}}
 
 ## Exit on success
 
@@ -97,7 +96,7 @@ You can prevent a step screenshot from being captured at test execution. This is
 
 The advanced options for [subtests][4] allow you to choose where you want your subtest to be played and set the behavior of your browser test if the subtest fails.
 
-{{< img src="synthetics/browser_tests/advanced_options/subtest_advanced.png" alt="Advanced options for subtests in browser tests" style="width:60%">}}
+{{< img src="synthetics/browser_tests/advanced_options/subtest_advanced_2.png" alt="Advanced options for subtests in browser tests" style="width:60%">}}
 
 ### Set the subtest window
 
